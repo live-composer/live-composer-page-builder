@@ -1,0 +1,140 @@
+.dslca-post-options {
+	padding: 20px 0;
+}
+
+	.dslca-post-option {
+		border-top: 1px dashed #ddd;
+		margin-top: 20px;
+		padding-top: 20px;
+	}
+
+	.dslca-post-option:first-child {
+		margin-top: 0;
+		padding-top: 0;
+		border-top: 0;
+	}
+
+		.dslca-post-option-label {
+			font-weight: bold;
+			font-size: 1.2em;
+			margin-bottom: 15px;
+		}
+
+		.dslca-post-option-description {
+			margin-bottom: 20px;
+		}
+
+		.dslca-post-option-field {
+
+		}
+
+			.dslca-post-option-field-choice {
+				margin-bottom: 10px;
+			}
+
+/**
+ * File Option
+ */
+
+.dslca-post-option-add-file-hook {
+	background: #54C13F;
+	border-radius: 3px;
+	color: #fff;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 11px;
+	line-height: 1;
+	margin-bottom: 20px;
+	padding: 10px 13px;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+.dslca-post-option-images {
+
+}
+
+	.dslca-post-option-image {
+		background: transparent;
+		border: 1px solid #ddd;
+		display: block;
+		float: left;
+		margin: 0 15px 15px 0;
+		padding: 7px;
+		position: relative;
+		border-radius: 3px;
+	}
+
+		.dslca-post-option-image-inner {
+			width: 100px;
+			overflow: hidden;
+		}
+
+			.dslca-post-option-image img {
+				max-width: 100%;
+				border-radius: 3px;
+				display: block;
+				margin: 0;
+				padding: 0;
+			}
+
+			.dslca-post-option-image-remove {
+				background: #E55F5F;
+				border-radius: 50%;
+				color: #fff;
+				cursor: pointer;
+				display: block;
+				font-size: 10px;
+				line-height: 8px;
+				position: absolute;
+				padding: 3px;
+				top: -8px;
+				right: -8px;
+				width: 10px;
+				height: 10px;
+				text-align: center;
+			}
+
+/**
+ * Form Elements
+ */
+
+.dslca-post-options input[type="text"],
+.dslca-post-options textarea {
+	border: 1px solid #ddd;
+	border-radius: 0;
+	padding: 8px 15px;
+	width: 100%;
+}
+
+.dslca-post-options textarea {
+	height: 150px;
+}
+
+.dslca-post-options select {
+	border: 1px solid #ddd;
+	border-radius: 0;
+	padding: 8px 15px;
+	height: auto;
+}
+
+
+
+
+.dslca-clearfix:before,
+.dslca-clearfix:after {
+	content: " ";
+	display: table;
+}
+
+.dslca-clearfix:after {
+	clear: both;
+}
+
+.dslca-clearfix {
+	*zoom: 1;
+}
+
+.dslca-clear {
+	clear: both;
+}
