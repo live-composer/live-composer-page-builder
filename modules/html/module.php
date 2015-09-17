@@ -995,6 +995,28 @@ class DSLC_Html extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'links', 'dslc_string' ),
 			),
+			array(
+				'label' => __( 'Blockquote Link - Color', 'dslc_string' ),
+				'id' => 'css_blockquote_link_color',
+				'std' => '',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-html-module-content blockquote a',
+				'affect_on_change_rule' => 'color',
+				'section' => 'styling',
+				'tab' => __( 'links', 'dslc_string' ),
+			),
+			array(
+				'label' => __( 'Blockquote Link - Hover Color', 'dslc_string' ),
+				'id' => 'css_blockquote_link_color_hover',
+				'std' => '',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-html-module-content blockquote a:hover',
+				'affect_on_change_rule' => 'color',
+				'section' => 'styling',
+				'tab' => __( 'links', 'dslc_string' ),
+			),
 
 			/**
 			 * Lists
