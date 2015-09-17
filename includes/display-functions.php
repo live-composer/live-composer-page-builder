@@ -510,7 +510,6 @@ function dslc_filter_content( $content ) {
 	global $dslc_should_filter;
 	global $wp_the_query;
 	global $dslc_post_types;
-	global $dslc_is_content_filtered;
 
 	// Get ID of the post in which the content filter fired
 	$currID = get_the_ID();
@@ -528,9 +527,6 @@ function dslc_filter_content( $content ) {
 	// 3) Proceed if global var $dslc_should_filter is true
 	// Irrelevant of the other 3 proceed if archives, search or 404 page
 	if ( ( $currID == $realID && in_the_loop() && $dslc_should_filter ) || is_archive() || is_author() || is_search() || is_404() ) {
-
-		// TODO: Remove, no longer used
-		$dslc_is_content_filtered[ $currID ] = true;
 
 		// TODO: Remove and replace all instances with DS_LIVE_COMPOSER_ACTIVE
 		global $dslc_active;
