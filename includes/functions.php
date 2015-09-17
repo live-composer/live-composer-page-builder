@@ -651,11 +651,21 @@ function dslc_save_preset( $preset_name, $preset_code_raw, $module_id ) {
  * @since 1.0
  */
 
-function dslc_is_editor_active() {
+function dslc_is_editor_active( $capability = 'save') {
 
-	if ( DS_LIVE_COMPOSER_ACTIVE && current_user_can( DS_LIVE_COMPOSER_CAPABILITY_SAVE ) )
+	// Check for saving capability 
+	if ( $capability == 'save' ) {
+		$capability_check = DS_LIVE_COMPOSER_CAPABILITY_SAVE;
+	// Check for access capability ( can use editor but can't publish changes )
+	} elseif ( $capability == 'access' ) {
+		$capability_check = DS_LIVE_COMPOSER_CAPABILITY;
+	}
+
+	// Check if editor is activated and current user can use the editor
+	if ( DS_LIVE_COMPOSER_ACTIVE && current_user_can( $capability_check ) ) {
 		return true;
-	else
+	} else {
 		return false;
+	}
 
 }
