@@ -120,7 +120,7 @@ class DSLC_Welcome {
 					<p><?php _e( 'If you\'re a developer who is interested in building custom modules for Live Composer give a check at the developer documentation.<br><a target="_blank" href="http://livecomposerplugin.com/docs/building-a-module-the-basics/">Go To Developer Documentation &rarr;</a>', 'dslc_string' );?></p>					
 
 					<h4><?php _e( 'Support', 'dslc_string' );?></h4>
-					<p><?php _e( 'If you run into any bugs or issues do let us know.<br><strong>There is currently a discount on the premium version of support at $29 instead of $50.</strong><br><a target="_blank" href="http://livecomposerplugin.com/support/">Go To Support &rarr;</a>', 'dslc_string' );?></p>
+					<p><?php _e( 'If you run into any bugs or issues do let us know.<br><a target="_blank" href="http://livecomposerplugin.com/support/">Go To Support &rarr;</a>', 'dslc_string' );?></p>
 
 				</div><!-- .feature-section -->
 
