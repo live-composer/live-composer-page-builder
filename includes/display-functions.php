@@ -495,220 +495,332 @@ function dslc_display_templates() {
 
 
 /**
- * Outputs content with modules
+ * Hooks into the_content filter to add LC elements
  *
  * @since 1.0
  */
-
 function dslc_filter_content( $content ) {
 
-	if ( post_password_required( get_the_ID() ) )
+	// If post pass protected and pass not supplied return original content
+	if ( post_password_required( get_the_ID() ) ) {
 		return $content;
+	}
 
+	// Global variables
 	global $dslc_should_filter;
 	global $wp_the_query;
 	global $dslc_post_types;
 	global $dslc_is_content_filtered;
 
+	// Get ID of the post in which the content filter fired
 	$currID = get_the_ID();
-	if ( isset( $wp_the_query->queried_object_id ) )
-		$realID = $wp_the_query->queried_object_id;
-	else 
-		$realID = 'nope';
 
-	// Should we filter the content?
+	// Get ID of the post from the main query
+	if ( isset( $wp_the_query->queried_object_id ) ) {
+		$realID = $wp_the_query->queried_object_id;
+	} else {
+		$realID = 'nope';
+	}
+
+	// Check if we should we filtering the content
+	// 1) Proceed if ID of the post in which content filter fired is same as the post ID from the main query
+	// 2) Proceed if in a WordPress loop ( https://codex.wordpress.org/Function_Reference/in_the_loop )
+	// 3) Proceed if global var $dslc_should_filter is true
+	// Irrelevant of the other 3 proceed if archives, search or 404 page
 	if ( ( $currID == $realID && in_the_loop() && $dslc_should_filter ) || is_archive() || is_author() || is_search() || is_404() ) {
 
+		// TODO: Remove, no longer used
 		$dslc_is_content_filtered[ $currID ] = true;
 
+		// TODO: Remove and replace all instances with DS_LIVE_COMPOSER_ACTIVE
 		global $dslc_active;
 
-		// Will hold the output
-		$composer_header_append = '';
-		$composer_footer_append = '';
-		$header_code = '';
-		$footer_code = '';
-		$composer_header = '';
-		$composer_footer = '';
-		$composer_prepend = '';
-		$composer_content = '';
-		$composer_append = '';
-		$template_code = false;
+		// Variables that are used throughout the function
+		$composer_header_append = ''; // HTML to output after LC header HTML
+		$composer_footer_append = ''; // HTML to otuput after LC footer HTML
+		$header_code = ''; // LC Code for header
+		$footer_code = ''; // LC Code for footer
+		$composer_header = ''; // HTML for LC header
+		$composer_footer = ''; // HTML for LC footer
+		$composer_prepend = ''; // HTML to output before LC content
+		$composer_content = ''; // HTML for LC content
+		$composer_append = ''; // HTML to ouput after LC content
+		$template_code = false; // LC code if current post powered by template
+		$template_ID = false; // ID of the template that powers current post
 
-		// The composer code
+		// If editor currently active and there is a draft version
 		if ( dslc_is_editor_active() && get_post_meta( get_the_ID(), 'dslc_code_draft', true ) ) {
-			$composer_code = get_post_meta( get_the_ID(), 'dslc_code_draft', true );
-		} else {
-			$composer_code = get_post_meta( get_the_ID(), 'dslc_code', true );
-		}
-		$template_ID = false;
 
-		// Tutorial
+			// Load draft LC code
+			$composer_code = get_post_meta( get_the_ID(), 'dslc_code_draft', true );
+
+		} else {
+
+			// Load regular ( current ) LC code
+			$composer_code = get_post_meta( get_the_ID(), 'dslc_code', true );
+		}	
+
+		// Interactive Tutorials
 		$tut_page = false;
 		$tut_ch_one = dslc_get_option( 'lc_tut_chapter_one', 'dslc_plugin_options_tuts' );
 		$tut_ch_two = dslc_get_option( 'lc_tut_chapter_two', 'dslc_plugin_options_tuts' );
 		$tut_ch_three = dslc_get_option( 'lc_tut_chapter_three', 'dslc_plugin_options_tuts' );
 		$tut_ch_four = dslc_get_option( 'lc_tut_chapter_four', 'dslc_plugin_options_tuts' );
 
+		// If current page set to be tutorial chapter one or four
 		if ( get_the_ID() == $tut_ch_one || get_the_ID() == $tut_ch_four ) {
 			$tut_page = true;
 			$composer_code = '';
+
+		// If current page set to be tutorial chapter two
 		} elseif ( get_the_ID() == $tut_ch_two ) {
 			$tut_page = true;
 			$composer_code = '[dslc_modules_section type="wrapped" columns_spacing="spacing" bg_color="rgb(242, 245, 247)" bg_image_thumb="disabled" bg_image="" bg_image_repeat="repeat" bg_image_position="left top" bg_image_attachment="scroll" bg_image_size="auto" bg_video="" bg_video_overlay_color="#000000" bg_video_overlay_opacity="0" border_color="" border_width="0" border_style="solid" border="top right bottom left" margin_h="0" margin_b="0" padding="85" padding_h="0" custom_class="" custom_id="" ] [dslc_modules_area last="yes" first="no" size="12"] [/dslc_modules_area] [/dslc_modules_section] ';
+
+		// If current page set to be tutorial chapter three
 		} elseif ( get_the_ID() == $tut_ch_three ) {
 			$tut_page = true;
 			$composer_code = '[dslc_modules_section type="wrapped" columns_spacing="spacing" bg_color="rgb(242, 245, 247)" bg_image_thumb="disabled" bg_image="" bg_image_repeat="repeat" bg_image_position="left top" bg_image_attachment="scroll" bg_image_size="auto" bg_video="" bg_video_overlay_color="#000000" bg_video_overlay_opacity="0" border_color="" border_width="0" border_style="solid" border="top right bottom left" margin_h="0" margin_b="0" padding="85" padding_h="0" custom_class="" custom_id="" ] [dslc_modules_area last="yes" first="no" size="12"] [/dslc_modules_area] [/dslc_modules_section] ';
 		}
 
-		// If single, load template
+		// If currently showing a singular post of a post type that supports "post templates"
 		if ( is_singular( $dslc_post_types ) ) {
 
+			// Get template ID set for currently shown post
 			$template_ID = dslc_st_get_template_ID( get_the_ID() );
 
+			// If template ID exists
 			if ( $template_ID ) {
 
-				// Get template code
+				// If editor currently active and there is a draft version
 				if ( dslc_is_editor_active() && get_post_meta( $template_ID, 'dslc_code_draft', true ) ) {
+
+					// Load draft LC code
 					$template_code = get_post_meta( $template_ID, 'dslc_code_draft', true );
+
 				} else {
+
+					// Load regular ( current ) LC code
 					$template_code = get_post_meta( $template_ID, 'dslc_code', true );
+
 				}
 
-				// Add the template code
+				// Add the template code to the holder variable
 				$composer_prepend .= do_shortcode( $template_code );
 
 			}
 
 		}
 
-		// If archive, load template
+		// If currently showing a category archive page
 		if ( is_archive() && ! is_author() && ! is_search() ) {
 
+			// Get ID of the page set to power the category of the current post type
 			$template_ID = dslc_get_option( get_post_type(), 'dslc_plugin_options_archives' );
 
+			// If there is a page that powers it
 			if ( $template_ID ) {
 
-				// Get template code
+				// If editor currently active and there is a draft version
 				if ( dslc_is_editor_active() && get_post_meta( $template_ID, 'dslc_code_draft', true ) ) {
+
+					// Load draft LC code
 					$template_code = get_post_meta( $template_ID, 'dslc_code_draft', true );
+
 				} else {
+
+					// Load regular ( current ) LC code
 					$template_code = get_post_meta( $template_ID, 'dslc_code', true );
+
 				}
 
-				// Add the template code
+				// Add the template code to the holder variable
 				$composer_prepend .= do_shortcode( $template_code );
 
 			}
 
 		}
 
+		// If currently showing an author archive page
 		if ( is_author() ) {
 
+			// Get ID of the page set to power the author archives
 			$template_ID = dslc_get_option( 'author', 'dslc_plugin_options_archives' );
 
+			// If there is a page that powers it
 			if ( $template_ID ) {
 
 				// Get template code
 				$template_code = get_post_meta( $template_ID, 'dslc_code', true );
 
-				// Add the template code
+				// Add the template code to the holder variable
 				$composer_prepend .= do_shortcode( $template_code );
 
 			}
 
 		}
 
+		// If currently showing a search results page
 		if ( is_search() ) {
 
+			// Get ID of the page set to power the search results page
 			$template_ID = dslc_get_option( 'search_results', 'dslc_plugin_options_archives' );
 
+			// If there is a page that powers it
 			if ( $template_ID ) {
 
-				// Get template code
+				// If editor currently active and there is a draft version
 				if ( dslc_is_editor_active() && get_post_meta( $template_ID, 'dslc_code_draft', true ) ) {
+
+					// Load draft LC code
 					$composer_code = get_post_meta( $template_ID, 'dslc_code_draft', true );
+
 				} else {
+
+					// Load regular ( current ) LC code
 					$composer_code = get_post_meta( $template_ID, 'dslc_code', true );
+
 				}
 
 			}
 
 		}
 
+		// If currently showina 404 page
 		if ( is_404() ) {
 
+			// Get ID of the page set to power the 404 page
 			$template_ID = dslc_get_option( '404_page', 'dslc_plugin_options_archives' );
 
+			// If there is a page that powers it
 			if ( $template_ID ) {
 
-				// Get template code
+				// If editor currently active and there is a draft version
 				if ( dslc_is_editor_active() && get_post_meta( $template_ID, 'dslc_code_draft', true ) ) {
+
+					// Load draft LC code
 					$composer_code = get_post_meta( $template_ID, 'dslc_code_draft', true );
+
 				} else {
+
+					// Load regular ( current ) LC code
 					$composer_code = get_post_meta( $template_ID, 'dslc_code', true );
+
 				}
 
 			}
 
 		}
 
+		// If currently showing a singular post of a post type which is not "dslc_hf" ( used for header/footer )
 		if ( ! is_singular( 'dslc_hf' ) ) {
 
-			// Header/Footer
+			// If a template ID ( most of the code above ) is set
 			if ( $template_ID ) {
+
+				// Load header/footer IDs for the template
 				$header_footer = dslc_hf_get_ID( $template_ID );
+
 			} else {
+
+				// Load header/footer IDs for the current post/page
 				$header_footer = dslc_hf_get_ID( get_the_ID() );
+
 			}
 
+			// If editor currently active
 			if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
-				if ( $header_footer['header'] )
+
+				// If there is a header applied
+				if ( $header_footer['header'] ) {
+					// Set the HTML for the edit overlay
 					$composer_header_append = '<div class="dslc-hf-block-overlay"><a target="_blank" href="' . add_query_arg( 'dslc', 'active', get_permalink( $header_footer['header'] ) ) . '" class="dslc-hf-block-overlay-button dslca-link">Edit Header</a></div>';
-				if ( $header_footer['footer'] )
+				} 
+
+				// If there is a footer applied
+				if ( $header_footer['footer'] ) {
+					// Set the HTML for the edit overlay
 					$composer_footer_append = '<div class="dslc-hf-block-overlay"><a target="_blank" href="' . add_query_arg( 'dslc', 'active', get_permalink( $header_footer['footer'] ) ) . '" class="dslc-hf-block-overlay-button dslca-link">Edit Footer</a></div>';
+				}
+
 			}
 
-			// Header
+			// If there is a header applied
 			if ( $header_footer['header'] ) {
+
+				// Get the header LC code
 				$header_code = get_post_meta( $header_footer['header'], 'dslc_code', true );
+
+				// If the "position" option value exists
 				if ( get_post_meta( $header_footer['header'], 'dslc_hf_position', true ) ) {
+
+					// Set the "position" option value to the one from the settings
 					$header_position = get_post_meta( $header_footer['header'], 'dslc_hf_position', true );
+
 				} else {
+
+					// Set the "position" option value to default "relative"
 					$header_position = 'relative';
+
 				}
+
+				// Add the header code to the variable holder
 				$composer_header .= '<div id="dslc-header" class="dslc-header-pos-' . $header_position . '">' . do_shortcode( $header_code ) . $composer_header_append . '</div>';
+
 			}
 
-			// Footer
+			// If there is a footer applied
 			if ( $header_footer['footer'] ) {
+
+				// Get the footer LC code
 				$footer_code = get_post_meta( $header_footer['footer'], 'dslc_code', true );
+
+				// If the "position" option value exists
 				if ( get_post_meta( $header_footer['footer'], 'dslc_hf_position', true ) ) {
+
+					// Set the "position" option value to the one from the settings
 					$footer_position = get_post_meta( $header_footer['footer'], 'dslc_hf_position', true );
+
 				} else {
+
+					// Set the "position" option value to default "relative"
 					$footer_position = 'relative';
+
 				}
+
+				// Add the header code to the variable holder
 				$composer_footer .= '<div id="dslc-footer"  class="dslc-footer-pos-' . $footer_position . '">' . do_shortcode( $footer_code ) . $composer_footer_append . '</div>';
+
 			}
 
 		}
 
-		// Content that shows before the composer content
+		// If editor is currently active clear the composer_prepend var
 		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 			$composer_prepend = '';
 		}
 
-		// Content that shows after the composer content
+		// If editor is currently active generate the LC elements and store them in composer_append var
 		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
+			// Get the editor type from the settings
 			$editor_type = dslc_get_option( 'lc_editor_type', 'dslc_plugin_options_other' );
-			if ( empty( $editor_type ) )
+
+			// If no editor type set in settings 
+			if ( empty( $editor_type ) ) {
+
+				// Default to "both" ( Visual and HTML )
 				$editor_type = 'both';
 
+			}
+
+			// The "Add modules row" and "Import" buttons
 			$composer_append = '<div class="dslca-add-modules-section">
 				<span class="dslca-add-modules-section-hook"><span class="dslca-icon dslc-icon-align-justify"></span>' . __( 'Add Modules Row', 'dslc_string' ) . '</span>
 				<span class="dslca-import-modules-section-hook"><span class="dslca-icon dslc-icon-download-alt"></span>' . __( 'Import', 'dslc_string' ) . '</span>
 			</div>';
+
+			// Start output fetching
 			ob_start();
 
 			?>
@@ -732,47 +844,71 @@ function dslc_filter_content( $content ) {
 				</div>
 			<?php
 			
+			// Stop output fetching
 			$composer_append .= ob_get_contents();
 			ob_end_clean();
+
 		}
 
-		// If composer code not empty
+		// If there is LC code to add to the content output
 		if ( $composer_code || $template_code ) {
-			// Generate the composer output
+
+			// Turn the LC code into HTML code
 			$composer_content = do_shortcode( $composer_code );
+
+		// If there is header or footer LC code to add to the content output
 		} elseif ( $header_code || $footer_code ) {
 			
-			if ( ! DS_LIVE_COMPOSER_ACTIVE )
+			// If editor not active
+			if ( ! DS_LIVE_COMPOSER_ACTIVE ) {
+
+				// Pass the LC header, regular content and LC footer
 				return '<div id="dslc-content" class="dslc-content dslc-clearfix">' . $composer_header . '<div id="dslc-theme-content"><div id="dslc-theme-content-inner">' . $content . '</div></div>' . $composer_footer . '</div>';
+			
+			}
 
 		} else {
 
-			if ( ! DS_LIVE_COMPOSER_ACTIVE )
+			// If editor not active
+			if ( ! DS_LIVE_COMPOSER_ACTIVE ) {
+
+				// Pass back the original wrapped in a div ( in case there's a need to style it )
 				return '<div id="dslc-theme-content"><div id="dslc-theme-content-inner">' . $content . '</div></div>';
+
+			}
 
 		}
 
-		// Post data
-		if ( is_singular() && has_post_thumbnail( get_the_ID() ) )
+		// If singular post shown and has a featured image
+		if ( is_singular() && has_post_thumbnail( get_the_ID() ) ) {
+			// Hidden input holding value of the URL of the featured image of the shown post ( used by rows for BG image )
 			$composer_append .= '<input type="hidden" id="dslca-post-data-thumb" value="' . wp_get_attachment_url( get_post_thumbnail_id( get_the_ID() ) ) . '" />';
+		}
 
-		// Tutorial page
-		if ( $tut_page )
+		// If current page is used for a tutorial
+		if ( $tut_page ) {
+			// Hidden input holding value of the current post ID
 			$composer_append .= '<input type="hidden" id="dslca-tut-page" value="' . get_the_ID() . '" />';
+		}
 
-		// Regular textual content holder ( for search purposes )
+		// Get readable representation of the LC modules output ( textual output )
 		$content_for_search = '';
-		if ( get_post_meta( get_the_ID(), 'dslc_content_for_search', true ) )
+		if ( get_post_meta( get_the_ID(), 'dslc_content_for_search', true ) ) {
 			$content_for_search = get_post_meta( get_the_ID(), 'dslc_content_for_search', true );
+		}
 
-		if ( DS_LIVE_COMPOSER_ACTIVE )
+		// If editor active include a textarea that holds readable representation of the output
+		if ( DS_LIVE_COMPOSER_ACTIVE ) {
 			$composer_append .= '<textarea id="dslca-content-for-search">' . $content_for_search . '</textarea>';
+		}
 
-		// Return the composer output and the regular WYSIWYG output
+		// Pass the filtered content output
 		return '<div id="dslc-content" class="dslc-content dslc-clearfix">' . do_action( 'dslc_output_prepend') . $composer_header . '<div id="dslc-main">' . $composer_prepend . $composer_content . '</div>' . $composer_append . $composer_footer . do_action( 'dslc_output_append') . '</div>';
 
+	// If LC should not filter the content
 	} else {
 
+		// Pass back the original wrapped in a div ( in case there's a need to style it )
 		return '<div id="dslc-theme-content"><div id="dslc-theme-content-inner">' . $content . '</div></div>';
 
 	}
