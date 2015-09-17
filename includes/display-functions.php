@@ -528,9 +528,6 @@ function dslc_filter_content( $content ) {
 	// Irrelevant of the other 3 proceed if archives, search or 404 page
 	if ( ( $currID == $realID && in_the_loop() && $dslc_should_filter ) || is_archive() || is_author() || is_search() || is_404() ) {
 
-		// TODO: Remove and replace all instances with DS_LIVE_COMPOSER_ACTIVE
-		global $dslc_active;
-
 		// Variables that are used throughout the function
 		$composer_header_append = ''; // HTML to output after LC header HTML
 		$composer_footer_append = ''; // HTML to otuput after LC footer HTML
@@ -725,7 +722,7 @@ function dslc_filter_content( $content ) {
 			}
 
 			// If editor currently active
-			if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+			if ( dslc_is_editor_active( 'access' ) ) {
 
 				// If there is a header applied
 				if ( $header_footer['header'] ) {
@@ -792,12 +789,12 @@ function dslc_filter_content( $content ) {
 		}
 
 		// If editor is currently active clear the composer_prepend var
-		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+		if ( dslc_is_editor_active( 'access' ) ) {
 			$composer_prepend = '';
 		}
 
 		// If editor is currently active generate the LC elements and store them in composer_append var
-		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+		if ( dslc_is_editor_active( 'access' ) ) {
 
 			// Get the editor type from the settings
 			$editor_type = dslc_get_option( 'lc_editor_type', 'dslc_plugin_options_other' );
