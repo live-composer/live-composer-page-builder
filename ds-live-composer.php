@@ -4,7 +4,7 @@
 	Plugin URI: http://www.livecomposerplugin.com
 	Description: Primarily a front-end page builder but can also be used to build a whole website ( with our blank theme ) from header to footer.
 	Author: Dany Duchaine and Slobodan Kustrimovic
-	Version: 1.0.1
+	Version: 1.0.2
 	Author URI: http://livecomposerplugin.com
 */
 
@@ -12,7 +12,7 @@
 	 * Constants
 	 */
 
-	define( 'DS_LIVE_COMPOSER_VER', '1.0.1' );
+	define( 'DS_LIVE_COMPOSER_VER', '1.0.2' );
 	define( 'DS_LIVE_COMPOSER_LOAD_MINIFIED', true );
 
 	define( 'DS_LIVE_COMPOSER_BASENAME', plugin_basename( __FILE__ ) );
