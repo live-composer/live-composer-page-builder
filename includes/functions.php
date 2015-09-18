@@ -17,6 +17,7 @@
  * - dslc_is_module_active ( Check if a specific module is active - can be disabled in LC settings )
  * - dslc_save_preset ( Save a preset )
  * - dslc_is_editor_active ( Check if the editor is currently active )
+ * - dslc_get_code ( Gets LC code of a specific post/page )
  */
 
 /**
@@ -667,5 +668,47 @@ function dslc_is_editor_active( $capability = 'save') {
 	} else {
 		return false;
 	}
+
+}
+
+/**
+ * Gets LC code of a specific post/page
+ *
+ * @since 1.0.2
+ *
+ * @param int     $postID ID of the post/page. Default false.
+ * @param bool    $draft If true will check for draft first. Default true. 
+ * @return string The LC code for the post/page. Empty string if no LC code.
+ */
+function dslc_get_code( $postID = false, $draft = true ) {
+
+	// This will be returned at the end
+	$code = '';
+
+	// If post ID not supplied ask WordPress
+	if ( ! $postID ) {
+		$postID = get_the_ID();
+	}
+
+	// If still no ID return false
+	if ( ! $postID ) {
+		return false;
+	}
+
+	// If draft allowed ( func parameter ) and editor currently active and there is a draft version
+	if ( $draft && dslc_is_editor_active() && get_post_meta( $postID, 'dslc_code_draft', true ) ) {
+
+		// Load draft LC code
+		$code = get_post_meta( $postID, 'dslc_code_draft', true );
+
+	} else {
+
+		// Load regular ( current ) LC code
+		$code = get_post_meta( $postID, 'dslc_code', true );
+
+	}
+
+	// Pass it back
+	return $code;
 
 }
