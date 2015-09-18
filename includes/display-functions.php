@@ -541,17 +541,8 @@ function dslc_filter_content( $content ) {
 		$template_code = false; // LC code if current post powered by template
 		$template_ID = false; // ID of the template that powers current post
 
-		// If editor currently active and there is a draft version
-		if ( dslc_is_editor_active() && get_post_meta( get_the_ID(), 'dslc_code_draft', true ) ) {
-
-			// Load draft LC code
-			$composer_code = get_post_meta( get_the_ID(), 'dslc_code_draft', true );
-
-		} else {
-
-			// Load regular ( current ) LC code
-			$composer_code = get_post_meta( get_the_ID(), 'dslc_code', true );
-		}	
+		// Get LC code of the current post
+		$composer_code = dslc_get_code( get_the_ID() );
 
 		// Interactive Tutorials
 		$tut_page = false;
@@ -585,18 +576,8 @@ function dslc_filter_content( $content ) {
 			// If template ID exists
 			if ( $template_ID ) {
 
-				// If editor currently active and there is a draft version
-				if ( dslc_is_editor_active() && get_post_meta( $template_ID, 'dslc_code_draft', true ) ) {
-
-					// Load draft LC code
-					$template_code = get_post_meta( $template_ID, 'dslc_code_draft', true );
-
-				} else {
-
-					// Load regular ( current ) LC code
-					$template_code = get_post_meta( $template_ID, 'dslc_code', true );
-
-				}
+				// Get LC code of the template
+				$template_code = dslc_get_code( $template_ID );
 
 				// Add the template code to the holder variable
 				$composer_prepend .= do_shortcode( $template_code );
@@ -614,18 +595,8 @@ function dslc_filter_content( $content ) {
 			// If there is a page that powers it
 			if ( $template_ID ) {
 
-				// If editor currently active and there is a draft version
-				if ( dslc_is_editor_active() && get_post_meta( $template_ID, 'dslc_code_draft', true ) ) {
-
-					// Load draft LC code
-					$template_code = get_post_meta( $template_ID, 'dslc_code_draft', true );
-
-				} else {
-
-					// Load regular ( current ) LC code
-					$template_code = get_post_meta( $template_ID, 'dslc_code', true );
-
-				}
+				// Get LC code of the page
+				$template_code = dslc_get_code( $template_ID );
 
 				// Add the template code to the holder variable
 				$composer_prepend .= do_shortcode( $template_code );
@@ -643,8 +614,8 @@ function dslc_filter_content( $content ) {
 			// If there is a page that powers it
 			if ( $template_ID ) {
 
-				// Get template code
-				$template_code = get_post_meta( $template_ID, 'dslc_code', true );
+				// Get LC code of the page
+				$template_code = dslc_get_code( $template_ID );
 
 				// Add the template code to the holder variable
 				$composer_prepend .= do_shortcode( $template_code );
@@ -662,18 +633,8 @@ function dslc_filter_content( $content ) {
 			// If there is a page that powers it
 			if ( $template_ID ) {
 
-				// If editor currently active and there is a draft version
-				if ( dslc_is_editor_active() && get_post_meta( $template_ID, 'dslc_code_draft', true ) ) {
-
-					// Load draft LC code
-					$composer_code = get_post_meta( $template_ID, 'dslc_code_draft', true );
-
-				} else {
-
-					// Load regular ( current ) LC code
-					$composer_code = get_post_meta( $template_ID, 'dslc_code', true );
-
-				}
+				// Get LC code of the page
+				$composer_code = dslc_get_code( $template_ID );
 
 			}
 
@@ -688,18 +649,8 @@ function dslc_filter_content( $content ) {
 			// If there is a page that powers it
 			if ( $template_ID ) {
 
-				// If editor currently active and there is a draft version
-				if ( dslc_is_editor_active() && get_post_meta( $template_ID, 'dslc_code_draft', true ) ) {
-
-					// Load draft LC code
-					$composer_code = get_post_meta( $template_ID, 'dslc_code_draft', true );
-
-				} else {
-
-					// Load regular ( current ) LC code
-					$composer_code = get_post_meta( $template_ID, 'dslc_code', true );
-
-				}
+				// Get LC code of the page
+				$composer_code = dslc_get_code( $template_ID );
 
 			}
 
