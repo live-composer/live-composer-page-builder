@@ -9,6 +9,7 @@
  * - dslc_hf_unique_default ( Make sure there's only one default per header and footer )
  * - dslc_hf_options ( Register options for posts/pages to choose which header/footer to use )
  * - dslc_hf_get_ID ( Get the header and footer ID of a specific post/page )
+ * - dslc_hf_get_code ( Get the header or footer LC code of a specific post/page )
  */
 
 /**
@@ -410,3 +411,43 @@ function dslc_hf_get_ID( $post_ID ) {
 
 }
 
+/**
+ * Get the header or footer LC code of a specific post/page
+ *
+ * @since 1.0.2
+ *
+ * @param int     $post_ID ID of the post/page. Default false.
+ * @param string  $h_or_f Accepted values 'header' and 'footer'. Defaults to 'header'
+ * @return string The LC code for the header/footer of the post/page. Empty string if no LC code.
+ */
+function dslc_hf_get_code( $post_ID = false, $h_or_f = 'header' ) {
+
+	// If support for header/footer functionality not set or is set to false, return empty string
+	if ( ! defined( 'DS_LIVE_COMPOSER_HF' ) || ! DS_LIVE_COMPOSER_HF ) return '';
+
+	// This will be returned at the end
+	$code = '';
+
+	// If post ID not supplied ask WordPress
+	if ( ! $post_ID ) {
+		$post_ID = get_the_ID();
+	}
+
+	// If still no ID return empty string
+	if ( ! $post_ID ) {
+		return '';
+	}
+
+	// Get ID of the header/footer powering the post
+	$header_footer = dslc_hf_get_ID( $post_ID );
+
+	// If post has header/footer attached
+	if ( $header_footer[$h_or_f] ) {
+		// Get LC code of the header/footer powering the post
+		$code = get_post_meta( $header_footer[$h_or_f], 'dslc_code', true );
+	}
+
+	// Pass it back
+	return $code;
+
+}
