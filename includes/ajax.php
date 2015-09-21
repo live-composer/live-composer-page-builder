@@ -452,7 +452,7 @@ function dslc_ajax_display_module_options( $atts ) {
 
 					<?php if ( $module_option['type'] == 'text' ) : ?>
 						
-						<input type="text" class="dslca-module-edit-field" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo stripslashes( $curr_value ); ?>" data-starting-val="<?php echo stripslashes( $curr_value ); ?>" <?php echo $affect_on_change_append ?> />
+						<input type="text" class="dslca-module-edit-field" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo esc_attr( stripslashes( $curr_value ) ); ?>" data-starting-val="<?php echo esc_attr( stripslashes( $curr_value ) ); ?>" <?php echo $affect_on_change_append ?> />
 
 					<?php elseif ( $module_option['type'] == 'textarea' ) : ?>
 
