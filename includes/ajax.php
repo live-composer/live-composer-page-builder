@@ -600,7 +600,15 @@ function dslc_ajax_display_module_options( $atts ) {
 
 					<?php else : ?>
 
-						<?php do_action( 'dslc_custom_option_type_' . $module_option['type'], $module_option, $curr_value, $affect_on_change_append ); ?>
+						<?php if ( has_action( 'dslc_custom_option_type_' . $module_option['type'] ) ) : ?>
+
+							<?php do_action( 'dslc_custom_option_type_' . $module_option['type'], $module_option, $curr_value, $affect_on_change_append ); ?>
+
+						<?php else : ?>
+						
+							<input type="text" class="dslca-module-edit-field" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" data-starting-val="<?php echo $curr_value; ?>" <?php echo $affect_on_change_append ?> />
+
+						<?php endif; ?>
 
 					<?php endif; ?>
 
