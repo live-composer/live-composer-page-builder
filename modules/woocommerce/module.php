@@ -2107,6 +2107,16 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 		else
 			$dslc_is_admin = false;		
 
+		// Fix slashes on apostrophes
+		if ( isset( $options['addtocart_text'] ) ) {
+			$options['addtocart_text'] = stripslashes( $options['addtocart_text'] );
+		}
+
+		// Fix slashes on apostrophes
+		if ( isset( $options['details_text'] ) ) {
+			$options['details_text'] = stripslashes( $options['details_text'] );
+		}
+
 		$this->module_start( $options );
 
 		if ( ! isset( $options['price_pos'] ) )

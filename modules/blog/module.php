@@ -2236,6 +2236,11 @@ class DSLC_Blog extends DSLC_Module {
 		else
 			$dslc_is_admin = false;
 
+		// Fix slashes on apostrophes
+		if ( isset( $options['button_text'] ) ) {
+			$options['button_text'] = stripslashes( $options['button_text'] );
+		}
+
 		$this->module_start( $options );
 
 		/* CUSTOM START */
