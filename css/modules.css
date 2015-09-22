@@ -1884,28 +1884,49 @@
 		padding: 0;
 	}
 
+		/* Top level menu li */
 		.dslc-navigation .menu > li {
 			display: inline-block;
 			position: relative;
 			z-index: 99998;
 		}
 
+		/* Top level horizontal menu li */
+		.dslc-navigation.dslc-navigation-orientation-horizontal .menu > li {
+			margin-top: 0 !important
+		}
+
+		/* Top level vertical menu li */
+		.dslc-navigation.dslc-navigation-orientation-vertical .menu > li {
+			display: block;
+			margin-left: 0 !important;
+		}
+
+		/* Top level first menu li */
 		.dslc-navigation .menu > li:first-child {
 			margin-left: 0 !important;
 		}
 
+		/* Top level vertical menu li */
+		.dslc-navigation.dslc-navigation-orientation-vertical .menu > li:first-child {
+			margin-top: 0 !important;
+		}
+
+			/* Top level menu a */
 			.dslc-navigation .menu > li > a {
 				display: inline-block;
 				text-decoration: none;
 				vertical-align: middle;
 			}
 
+		/* Nav arrow ( submenu indicator ) */
 		.dslc-navigation-arrow {
 			display: inline-block;
 			margin-left: 5px;
 			vertical-align: middle;
 		}
 
+	/* Inner level menu ul */
 	.dslc-navigation .menu ul {		
 		border-style: solid;
 		display: none;
@@ -1917,27 +1938,38 @@
 		left: -28px;
 	}
 
+	/* Inner level vertical menu ul */
+	.dslc-navigation-orientation-vertical .menu ul {
+		top: 0;
+		left: 100%;
+	}
+
+	/* Inner level menu inverted */
 	.dslc-navigation .menu ul.dslc-navigation-invert-subnav {
 		left: auto;
 		right: 0;
 	}
 
+		/* Inner level menu li */
 		.dslc-navigation .menu ul li {
 			display: block;
 			white-space: nowrap;
 			margin: 0;
 		}
 
+			/* Inner level menu a */
 			.dslc-navigation .menu ul li a {				
 				display: block;
 				line-height: 1;
 				text-decoration: none;
 			}
 
+			/* Inner level menu last item a */
 			.dslc-navigation .menu ul li:last-child a {
 				border-bottom: 0 !important;
 			}
 
+				/* Inner level nav arrow ( submenu indicator ) */
 				.dslc-navigation .dt-icon.dt-subnav-arrow {
 					display: none;
 					color: #bfbfbf;
@@ -1949,24 +1981,32 @@
 					margin-right: 0;
 				}
 
+				/* Inner level nav arrow current menu item */
 				.dslc-navigation li.current-menu-item .dt-icon.dt-subnav-arrow {
 					color: #878787;
 				}
 
+		/* Second Level menu ul */
 		.dslc-navigation .menu ul ul {
 			left: 100%;
 			margin-left: -10px;
 			top: -1px;
 		}
 
+			/* Second level menu inverted */
 			.dslc-navigation .menu ul ul.dslc-navigation-invert-subnav {
 				left: auto;
 				right: 100%;
 			}
 
+		/* Inner level menu show */
 		.dslc-navigation .menu li:hover > ul {
 			display: block;
 		}
+
+/**
+ * Mobile Navigation
+ */
 
 .dslc-mobile-navigation {
 	position: relative;

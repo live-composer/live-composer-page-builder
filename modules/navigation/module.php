@@ -300,6 +300,23 @@ class DSLC_Navigation extends DSLC_Module {
 				'increment' => 5
 			),
 			array(
+				'label' => __( 'Orientation', 'dslc_string' ),
+				'id' => 'nav_orientation',
+				'std' => 'horizontal',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'Horizontal', 'dslc_string' ),
+						'value' => 'horizontal',
+					),
+					array(
+						'label' => __( 'Vertical', 'dslc_string' ),
+						'value' => 'vertical',
+					),
+				),
+				'section' => 'styling',
+			),
+			array(
 				'label' => __( 'Padding Vertical', 'dslc_string' ),
 				'id' => 'css_main_padding_vertical',
 				'std' => '0',
@@ -614,7 +631,7 @@ class DSLC_Navigation extends DSLC_Module {
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-navigation .menu > li',
-				'affect_on_change_rule' => 'margin-left',
+				'affect_on_change_rule' => 'margin-left,margin-top',
 				'section' => 'styling',
 				'ext' => 'px',
 				'tab' => __( 'item', 'dslc_string' ),
@@ -1368,7 +1385,7 @@ class DSLC_Navigation extends DSLC_Module {
 					}
 				} else {
 					?>
-					<div class="dslc-navigation dslc-navigation-res-t-<?php echo $options['css_res_t']; ?>  dslc-navigation-res-p-<?php echo $options['css_res_p']; ?>">
+					<div class="dslc-navigation dslc-navigation-res-t-<?php echo $options['css_res_t']; ?> dslc-navigation-res-p-<?php echo $options['css_res_p']; ?> dslc-navigation-orientation-<?php echo $options['nav_orientation']; ?>">
 						<div class="dslc-navigation-inner">
 							<?php wp_nav_menu( array( 'theme_location' => $options['location'] ) ); ?>
 						</div>
