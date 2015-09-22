@@ -344,7 +344,7 @@ class DSLC_Tabs extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( ' BG Color', 'dslc_string' ),
+				'label' => __( 'BG Color', 'dslc_string' ),
 				'id' => 'css_content_bg_color',
 				'std' => '#ffffff',
 				'type' => 'color',
@@ -550,7 +550,7 @@ class DSLC_Tabs extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( ' BG Color', 'dslc_string' ),
+				'label' => __( 'BG Color', 'dslc_string' ),
 				'id' => 'css_h1_bg_color',
 				'std' => '',
 				'type' => 'color',
@@ -771,7 +771,7 @@ class DSLC_Tabs extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( ' BG Color', 'dslc_string' ),
+				'label' => __( 'BG Color', 'dslc_string' ),
 				'id' => 'css_h2_bg_color',
 				'std' => '',
 				'type' => 'color',
@@ -992,7 +992,7 @@ class DSLC_Tabs extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( ' BG Color', 'dslc_string' ),
+				'label' => __( 'BG Color', 'dslc_string' ),
 				'id' => 'css_h3_bg_color',
 				'std' => '',
 				'type' => 'color',
@@ -1213,7 +1213,7 @@ class DSLC_Tabs extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( ' BG Color', 'dslc_string' ),
+				'label' => __( 'BG Color', 'dslc_string' ),
 				'id' => 'css_h4_bg_color',
 				'std' => '',
 				'type' => 'color',
@@ -1434,7 +1434,7 @@ class DSLC_Tabs extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( ' BG Color', 'dslc_string' ),
+				'label' => __( 'BG Color', 'dslc_string' ),
 				'id' => 'css_h5_bg_color',
 				'std' => '',
 				'type' => 'color',
@@ -1655,7 +1655,7 @@ class DSLC_Tabs extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( ' BG Color', 'dslc_string' ),
+				'label' => __( 'BG Color', 'dslc_string' ),
 				'id' => 'css_h6_bg_color',
 				'std' => '',
 				'type' => 'color',
@@ -2471,7 +2471,7 @@ class DSLC_Tabs extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( ' BG Color', 'dslc_string' ),
+				'label' => __( 'BG Color', 'dslc_string' ),
 				'id' => 'css_blockquote_bg_color',
 				'std' => '',
 				'type' => 'color',

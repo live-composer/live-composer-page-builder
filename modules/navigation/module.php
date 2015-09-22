@@ -88,7 +88,7 @@ class DSLC_Navigation extends DSLC_Module {
 				'section' => 'styling',
 			),
 			array(
-				'label' => __( ' BG Color', 'dslc_string' ),
+				'label' => __( 'BG Color', 'dslc_string' ),
 				'id' => 'css_main_bg_color',
 				'std' => '',
 				'type' => 'color',
@@ -710,7 +710,7 @@ class DSLC_Navigation extends DSLC_Module {
 				'tab' => __( 'subnav', 'dslc_string' ),
 			),
 			array(
-				'label' => __( ' BG Color', 'dslc_string' ),
+				'label' => __( 'BG Color', 'dslc_string' ),
 				'id' => 'css_subnav_bg_color',
 				'std' => '#fff',
 				'type' => 'color',

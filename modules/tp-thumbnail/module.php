@@ -51,7 +51,7 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				'section' => 'styling',
 			),
 			array(
-				'label' => __( ' BG Color', 'dslc_string' ),
+				'label' => __( 'BG Color', 'dslc_string' ),
 				'id' => 'css_bg_color',
 				'std' => '',
 				'type' => 'color',

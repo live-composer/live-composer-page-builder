@@ -63,7 +63,7 @@ class DSLC_TP_Content extends DSLC_Module {
 				'section' => 'styling',
 			),
 			array(
-				'label' => __( ' BG Color', 'dslc_string' ),
+				'label' => __( 'BG Color', 'dslc_string' ),
 				'id' => 'css_main_bg_color',
 				'std' => '',
 				'type' => 'color',
@@ -412,7 +412,7 @@ class DSLC_TP_Content extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( ' BG Color', 'dslc_string' ),
+				'label' => __( 'BG Color', 'dslc_string' ),
 				'id' => 'css_h1_bg_color',
 				'std' => '',
 				'type' => 'color',
@@ -633,7 +633,7 @@ class DSLC_TP_Content extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( ' BG Color', 'dslc_string' ),
+				'label' => __( 'BG Color', 'dslc_string' ),
 				'id' => 'css_h2_bg_color',
 				'std' => '',
 				'type' => 'color',
@@ -854,7 +854,7 @@ class DSLC_TP_Content extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( ' BG Color', 'dslc_string' ),
+				'label' => __( 'BG Color', 'dslc_string' ),
 				'id' => 'css_h3_bg_color',
 				'std' => '',
 				'type' => 'color',
@@ -1075,7 +1075,7 @@ class DSLC_TP_Content extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( ' BG Color', 'dslc_string' ),
+				'label' => __( 'BG Color', 'dslc_string' ),
 				'id' => 'css_h4_bg_color',
 				'std' => '',
 				'type' => 'color',
@@ -1296,7 +1296,7 @@ class DSLC_TP_Content extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( ' BG Color', 'dslc_string' ),
+				'label' => __( 'BG Color', 'dslc_string' ),
 				'id' => 'css_h5_bg_color',
 				'std' => '',
 				'type' => 'color',
@@ -1517,7 +1517,7 @@ class DSLC_TP_Content extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( ' BG Color', 'dslc_string' ),
+				'label' => __( 'BG Color', 'dslc_string' ),
 				'id' => 'css_h6_bg_color',
 				'std' => '',
 				'type' => 'color',
@@ -2553,7 +2553,7 @@ class DSLC_TP_Content extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( ' BG Color', 'dslc_string' ),
+				'label' => __( 'BG Color', 'dslc_string' ),
 				'id' => 'css_blockquote_bg_color',
 				'std' => '',
 				'type' => 'color',

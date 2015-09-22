@@ -412,7 +412,7 @@ class DSLC_Partners extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( ' BG Color', 'dslc_string' ),
+				'label' => __( 'BG Color', 'dslc_string' ),
 				'id' => 'css_thumbnail_bg_color',
 				'std' => '#ffffff',
 				'type' => 'color',
@@ -603,7 +603,7 @@ class DSLC_Partners extends DSLC_Module {
 				),
 			),
 			array(
-				'label' => __( ' BG Color', 'dslc_string' ),
+				'label' => __( 'BG Color', 'dslc_string' ),
 				'id' => 'css_main_bg_color',
 				'std' => '',
 				'type' => 'color',

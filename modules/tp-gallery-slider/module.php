@@ -119,7 +119,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( ' BG Color', 'dslc_string' ),
+				'label' => __( 'BG Color', 'dslc_string' ),
 				'id' => 'css_bg_color',
 				'std' => '',
 				'type' => 'color',
@@ -252,7 +252,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( ' BG Color', 'dslc_string' ),
+				'label' => __( 'BG Color', 'dslc_string' ),
 				'id' => 'css_slider_bg_color',
 				'std' => '',
 				'type' => 'color',
@@ -368,7 +368,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( ' BG Color', 'dslc_string' ),
+				'label' => __( 'BG Color', 'dslc_string' ),
 				'id' => 'css_slider_item_bg_color',
 				'std' => '',
 				'type' => 'color',

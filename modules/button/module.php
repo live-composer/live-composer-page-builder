@@ -421,7 +421,7 @@ class DSLC_Button extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( ' BG Color', 'dslc_string' ),
+				'label' => __( 'BG Color', 'dslc_string' ),
 				'id' => 'css_wrapper_bg_color',
 				'std' => '',
 				'type' => 'color',

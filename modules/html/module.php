@@ -71,7 +71,7 @@ class DSLC_Html extends DSLC_Module {
 				'section' => 'styling',
 			),
 			array(
-				'label' => __( ' BG Color', 'dslc_string' ),
+				'label' => __( 'BG Color', 'dslc_string' ),
 				'id' => 'css_main_bg_color',
 				'std' => '',
 				'type' => 'color',
@@ -1591,7 +1591,7 @@ class DSLC_Html extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( ' BG Color', 'dslc_string' ),
+				'label' => __( 'BG Color', 'dslc_string' ),
 				'id' => 'css_blockquote_bg_color',
 				'std' => '',
 				'type' => 'color',

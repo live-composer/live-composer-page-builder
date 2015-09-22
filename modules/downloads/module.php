@@ -613,7 +613,7 @@ class DSLC_Downloads extends DSLC_Module {
 				),
 			),
 			array(
-				'label' => __( ' BG Color', 'dslc_string' ),
+				'label' => __( 'BG Color', 'dslc_string' ),
 				'id' => 'css_main_bg_color',
 				'std' => '#ffffff',
 				'type' => 'color',
