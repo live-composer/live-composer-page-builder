@@ -1758,11 +1758,11 @@
 }
 
 	.dslc-accordion-item {
-		margin-top: 20px;
+		
 	}
 
 	.dslc-accordion-item:first-child {
-		margin-top: 0;
+		margin-top: 0 !important;
 	}
 
 		.dslc-accordion-header {

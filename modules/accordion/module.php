@@ -176,6 +176,18 @@ class DSLC_Accordion extends DSLC_Module {
 				'section' => 'styling',
 				'ext' => 'px',
 			),
+			array(
+				'label' => __( 'Spacing', 'dslc_string' ),
+				'id' => 'css_spacing',
+				'std' => '20',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-accordion-item',
+				'affect_on_change_rule' => 'margin-top',
+				'section' => 'styling',
+				'ext' => 'px',
+				'min' => -5
+			),
 
 			/**
 			 * Header
