@@ -598,6 +598,49 @@ function dslc_ajax_display_module_options( $atts ) {
 
 						<input type="hidden" class="dslca-module-edit-field dslca-module-edit-field-text-align" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" <?php echo $affect_on_change_append ?> />
 
+					<?php elseif ( $module_option['type'] == 'box_shadow' ) : ?>
+
+						<?php
+							$box_shadow_hor_val = 0;
+							$box_shadow_ver_val = 0;
+							$box_shadow_blur_val = 0;
+							$box_shadow_spread_val = 0;
+							$box_shadow_color_val = 'transparent';
+							$box_shadow_val = false;
+							if ( $curr_value !== '' ) {
+								$box_shadow_val = explode( ' ', $curr_value );
+							}
+							if ( is_array( $box_shadow_val ) ) {
+								$box_shadow_hor_val = str_replace('px', '', $box_shadow_val[0] );
+								$box_shadow_ver_val = str_replace('px', '', $box_shadow_val[1] );
+								$box_shadow_blur_val = str_replace('px', '', $box_shadow_val[2] );
+								$box_shadow_spread_val = str_replace('px', '', $box_shadow_val[3] );
+								$box_shadow_color_val = str_replace('px', '', $box_shadow_val[4] );
+							}
+						?>
+
+						<div class="dslca-module-edit-option-box-shadow-wrapper">
+
+							<div class="dslca-module-edit-option-box-shadow-single">
+								<span><?php _e( 'Horizontal', 'dslc_string' ); ?></span><input class="dslca-module-edit-option-box-shadow-hor" step="0.1" type="number" value="<?php echo $box_shadow_hor_val; ?>" />
+							</div>
+							<div class="dslca-module-edit-option-box-shadow-single">
+								<span><?php _e( 'Vertical', 'dslc_string' ); ?></span><input class="dslca-module-edit-option-box-shadow-ver" step="0.1" type="number" value="<?php echo $box_shadow_ver_val; ?>" />
+							</div>
+							<div class="dslca-module-edit-option-box-shadow-single">
+								<span><?php _e( 'Blur', 'dslc_string' ); ?></span><input class="dslca-module-edit-option-box-shadow-blur" step="0.1" type="number" value="<?php echo $box_shadow_blur_val; ?>" />
+							</div>
+							<div class="dslca-module-edit-option-box-shadow-single">
+								<span><?php _e( 'Spread', 'dslc_string' ); ?></span><input class="dslca-module-edit-option-box-shadow-spread" step="0.1" type="number" value="<?php echo $box_shadow_spread_val; ?>" />
+							</div>
+							<div class="dslca-module-edit-option-box-shadow-single">
+								<span><?php _e( 'Color', 'dslc_string' ); ?></span><input class="dslca-module-edit-option-box-shadow-color" type="text" value="<?php echo $box_shadow_color_val; ?>" />
+							</div>
+
+							<input type="hidden" class="dslca-module-edit-field dslca-module-edit-field-box-shadow" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" <?php echo $affect_on_change_append ?> />
+
+						</div><!-- .dslca-module-edit-option-box-shadow-wrapper -->
+
 					<?php else : ?>
 
 						<?php if ( has_action( 'dslc_custom_option_type_' . $module_option['type'] ) ) : ?>

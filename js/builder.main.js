@@ -2449,6 +2449,8 @@ var dslcDebug = false;
  * - dslc_module_options_icon ( Actions for icon font option type )
  * - dslc_module_options_text_align ( Actions for text align option type )
  * - dslc_module_options_checkbox ( Actions for checkbox option type )
+ * - dslc_module_options_box_shadow ( Actions for box shadow option type )
+ * - dslc_modules_options_box_shadow_color ( Initiate colorpicker for box shadow)
  * - dslc_module_options_color ( Actions for color option type )
  * - dslc_module_output_default ( Get module output with default settings )
  * - dslc_module_output_altered ( Get module output when settings altered )
@@ -2660,6 +2662,7 @@ var dslcDebug = false;
 
 				// Initiate Colorpicker
 				dslc_module_options_color();
+				dslc_modules_options_box_shadow_color();
 				dslc_module_options_numeric();
 
 				// Set up backup
@@ -3649,6 +3652,98 @@ var dslcDebug = false;
 	}
 
 	/**
+	 * MODULES - Box Shadow Option Type
+	 */
+
+	function dslc_module_options_box_shadow() {
+
+		if ( dslcDebug ) console.log( 'dslc_module_options_box_shadow' );
+
+		/**
+		 * Value Change
+		 */
+
+		jQuery(document).on( 'change', '.dslca-module-edit-option-box-shadow-hor, .dslca-module-edit-option-box-shadow-ver, .dslca-module-edit-option-box-shadow-blur, .dslca-module-edit-option-box-shadow-spread, .dslca-module-edit-option-box-shadow-color', function(){
+
+			var boxShadowWrapper = jQuery(this).closest('.dslca-module-edit-option'),
+			boxShadowInput = boxShadowWrapper.find('.dslca-module-edit-field'),
+			boxShadowHor = boxShadowWrapper.find('.dslca-module-edit-option-box-shadow-hor').val(),
+			boxShadowVer = boxShadowWrapper.find('.dslca-module-edit-option-box-shadow-ver').val(),
+			boxShadowBlur = boxShadowWrapper.find('.dslca-module-edit-option-box-shadow-blur').val(),
+			boxShadowSpread = boxShadowWrapper.find('.dslca-module-edit-option-box-shadow-spread').val(),
+			boxShadowColor = boxShadowWrapper.find('.dslca-module-edit-option-box-shadow-color').val(),
+			boxShadowVal = boxShadowHor + 'px ' + boxShadowVer + 'px ' + boxShadowBlur + 'px ' + boxShadowSpread + 'px ' + boxShadowColor;
+
+			boxShadowInput.val( boxShadowVal ).trigger('change');
+
+		});
+
+	}
+
+	/**
+	 * MODULES - Box Shadow Color Picker
+	 */
+
+	function dslc_modules_options_box_shadow_color() {
+
+		jQuery('.dslca-module-edit-option-box-shadow-color').each( function(){
+
+			var inputField = jQuery(this),
+			currColor = inputField.val(),
+			dslcColorField, dslcColorFieldVal;
+
+			jQuery(this).spectrum({
+				color: currColor,
+				showInput: true,
+				allowEmpty: true,
+				showAlpha: true,
+				clickoutFiresChange: true,
+				cancelText: '',
+				chooseText: '',
+				preferredFormat: 'rgb',
+				move: function( color ) {
+					
+					// The option field
+					dslcColorField = jQuery(this);
+
+					// The new color
+					if ( color == null )
+						dslcColorFieldVal = 'transparent';
+					else
+						dslcColorFieldVal = color.toRgbString().replace(/ /g,'');
+
+					// Change current value of option
+					dslcColorField.val( dslcColorFieldVal ).trigger('change');
+
+				},
+				change: function( color ) {
+
+					// The option field
+					dslcColorField = jQuery(this);
+
+					// The new color
+					if ( color == null )
+						dslcColorFieldVal = 'transparent';
+					else
+						dslcColorFieldVal = color.toRgbString().replace(/ /g,'');
+
+					// Change current value of option
+					dslcColorField.val( dslcColorFieldVal ).trigger('change');
+
+				},
+				show: function( color ) {
+					jQuery('body').addClass('dslca-disable-selection');
+				},
+				hide: function() {
+					jQuery('body').removeClass('dslca-disable-selection');
+				}
+			});
+
+		});
+
+	}
+
+	/**
 	 * MODULES - Color Option Type
 	 */
 
@@ -4090,6 +4185,7 @@ var dslcDebug = false;
 		dslc_module_options_icon();
 		dslc_module_options_text_align();
 		dslc_module_options_checkbox();
+		dslc_module_options_box_shadow();
 
 		/**
 		 * Hook - Submit
