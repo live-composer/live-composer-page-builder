@@ -64,6 +64,17 @@ class DSLC_Tabs extends DSLC_Module {
 			 */
 
 			array(
+				'label' => __( 'Align', 'dslc_string' ),
+				'id' => 'css_nav_align',
+				'std' => 'left',
+				'type' => 'text_align',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-tabs-nav',
+				'affect_on_change_rule' => 'text-align',
+				'section' => 'styling',
+				'tab' => __( 'Navigation', 'dslc_string' ),
+			),
+			array(
 				'label' => __( ' BG Color', 'dslc_string' ),
 				'id' => 'css_nav_bg_color',
 				'std' => '#fbfbfb',

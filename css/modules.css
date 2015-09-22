@@ -976,8 +976,7 @@
 				border-radius: 3px 3px 0 0;
 				bottom: -1px;
 				cursor: pointer;
-				display: block;
-				float: left;
+				display: inline-block;
 				padding: 10px;
 				position: relative;
 				line-height: 1;
@@ -1017,8 +1016,7 @@
 		border-radius: 50%;
 		color: #fff;
 		cursor: pointer;
-		display: block;
-		float: left;
+		display: inline-block;
 		font-size: 11px;
 		margin-left: 10px;
 		height: 20px;
