@@ -366,6 +366,20 @@ function dslc_display_composer() {
 
 				}
 
+			// If authors archives page
+			} elseif ( is_author() ) {
+
+				// Get ID of the page set to power the author archives
+				$template_ID = dslc_get_option( 'author', 'dslc_plugin_options_archives' );
+
+				// If there is a page that powers it
+				if ( $template_ID != 'none' ) {
+
+					// Output the button
+					?><a href="<?php echo add_query_arg( array( 'dslc' => 'active' ), get_permalink( $template_ID ) ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo $activate_button_position; ?>"><?php _e( 'ACTIVATE EDITOR', 'dslc_string' ); ?></a><?php
+
+				}
+
 			}
 
 		endif; 
