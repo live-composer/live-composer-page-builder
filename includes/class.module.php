@@ -1874,10 +1874,10 @@ class DSLC_Module {
 				<div class="dslca-module-manage">
 					<span class="dslca-module-manage-line"></span>
 					<div class="dslca-module-manage-inner">
-						<a href="#" class="dslca-module-edit-hook"><span class="dslc-icon-cog"></span></a>				
-						<a href="#" class="dslca-copy-module-hook"><span class="dslc-icon-copy"></span></a>
-						<a href="#" class="dslca-move-module-hook"><span class="dslc-icon-move"></span></a>
-						<a href="#" class="dslca-change-width-module-hook">
+						<span class="dslca-module-manage-hook dslca-module-edit-hook"><span class="dslc-icon-cog"></span></span>				
+						<span class="dslca-module-manage-hook dslca-copy-module-hook"><span class="dslc-icon-copy"></span></span>
+						<span class="dslca-module-manage-hook dslca-move-module-hook"><span class="dslc-icon-move"></span></span>
+						<span class="dslca-module-manage-hook dslca-change-width-module-hook">
 							<span class="dslc-icon-columns"></span>
 							<div class="dslca-change-width-module-options">
 								<span data-size="1">1/12</span><span data-size="2">2/12</span>
@@ -1887,12 +1887,12 @@ class DSLC_Module {
 								<span data-size="9">9/12</span><span data-size="10">10/12</span>
 								<span data-size="11">11/12</span><span data-size="12">12/12</span>
 							</div>
-						</a>
-						<a href="#" class="dslca-delete-module-hook"><span class="dslc-icon-remove"></span></a>
+						</span>
+						<span class="dslca-module-manage-hook dslca-delete-module-hook"><span class="dslc-icon-remove"></span></span>
 					</div>
 					<?php if ( DS_LIVE_COMPOSER_DEV_MODE ) : ?>
 						<div class="dslca-module-manage-inner dslca-dev-mode">
-							<a href="#" class="dslca-module-get-defaults-hook"><span class="dslc-icon-upload-alt"></span></a>				
+							<span class="dslca-module-manage-hook dslca-module-get-defaults-hook"><span class="dslc-icon-upload-alt"></span></span>				
 						</div>
 					<?php endif; ?>
 				</div>

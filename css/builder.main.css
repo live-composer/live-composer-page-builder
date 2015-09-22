@@ -1641,7 +1641,7 @@ body.rtl .dslca-modules-area-placeholder {
 		border-color: #333;
 	}
 
-	#dslc-content .dslca-module-manage a {
+	#dslc-content .dslca-module-manage .dslca-module-manage-hook {
 		border-radius: 3px;
 		color: #fff;
 		display: inline-block;
@@ -1653,22 +1653,23 @@ body.rtl .dslca-modules-area-placeholder {
 		margin-right: 1px;
 		width: 18px;
 		text-align: center;
+		cursor: pointer;
 	}
 
-	#dslc-content .dslc-modules-area.dslc-1-col .dslca-module-manage a,
-	#dslc-content .dslc-modules-area.dslc-2-col .dslca-module-manage a {
+	#dslc-content .dslc-modules-area.dslc-1-col .dslca-module-manage .dslca-module-manage-hook,
+	#dslc-content .dslc-modules-area.dslc-2-col .dslca-module-manage .dslca-module-manage-hook {
 		margin-right: -2px;
 	}
 
-	#dslc-content .dslca-module-manage a:first-child {
+	#dslc-content .dslca-module-manage .dslca-module-manage-hook:first-child {
 		margin-top: 0;
 	}
 
-	#dslc-content .dslca-module-manage a:last-child {
+	#dslc-content .dslca-module-manage .dslca-module-manage-hook:last-child {
 		margin-right: 0 !important;
 	}
 
-	#dslc-content .dslca-module-manage a:hover {
+	#dslc-content .dslca-module-manage .dslca-module-manage-hook:hover {
 		color: #fff;
 	}
 
