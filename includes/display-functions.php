@@ -313,7 +313,7 @@ function dslc_display_composer() {
 		if ( ! DS_LIVE_COMPOSER_ACTIVE && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) :
 
 			// If a singular page ( posts and pages )
-			if ( is_singular() ) :
+			if ( is_singular() ) {
 
 				// If a page or a template go ahead normally
 				if ( is_page() || get_post_type() == 'dslc_templates' || ! isset( $dslc_var_templates_pt[get_post_type()] ) ) {
@@ -339,7 +339,7 @@ function dslc_display_composer() {
 				}
 
 			// If a 404 page
-			elseif ( is_404() ) :
+			} elseif ( is_404() ) {
 
 				// Get ID of the page set to power the 404 page
 				$template_ID = dslc_get_option( '404_page', 'dslc_plugin_options_archives' );
@@ -352,7 +352,21 @@ function dslc_display_composer() {
 
 				}
 
-			endif;
+			// If a search results page
+			} elseif ( is_search() ) {
+					
+				// Get ID of the page set to power the search results page
+				$template_ID = dslc_get_option( 'search_results', 'dslc_plugin_options_archives' );
+
+				// If there is a page that powers it
+				if ( $template_ID != 'none' ) {
+
+					// Output the button
+					?><a href="<?php echo add_query_arg( array( 'dslc' => 'active' ), get_permalink( $template_ID ) ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo $activate_button_position; ?>"><?php _e( 'ACTIVATE EDITOR', 'dslc_string' ); ?></a><?php
+
+				}
+
+			}
 
 		endif; 
 
