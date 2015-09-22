@@ -1627,7 +1627,7 @@ var dslcDebug = false;
 						dslcAffectOnChangeEl = jQuery( dslcSliderInput.data('css-element'), dslcAffectOnChangeEl );
 					}
 
-					dslcAffectOnChangeRule = dslcSliderInput.data('css-rule');
+					dslcAffectOnChangeRule = dslcSliderInput.data('css-rule').replace(/ /g,'');
 					dslcAffectOnChangeRules = dslcAffectOnChangeRule.split( ',' );
 
 					// Loop through rules (useful when there are multiple rules)
@@ -3824,7 +3824,7 @@ var dslcDebug = false;
 
 					// Live change
 					dslcAffectOnChangeEl = dslcSliderInput.data('affect-on-change-el');
-					dslcAffectOnChangeRule = dslcSliderInput.data('affect-on-change-rule');
+					dslcAffectOnChangeRule = dslcSliderInput.data('affect-on-change-rule').replace(/ /g,'');
 					dslcAffectOnChangeRules = dslcAffectOnChangeRule.split( ',' );
 
 					// Loop through rules (useful when there are multiple rules)
@@ -5712,7 +5712,7 @@ var dslcDebug = false;
 				 * Live Preview
 				 */
 
-				dslcAffectOnChangeRules = dslcAffectOnChangeRule.split( ',' );
+				dslcAffectOnChangeRules = dslcAffectOnChangeRule.replace(/ /g,'').split( ',' );
 
 				// Loop through rules (useful when there are multiple rules)
 				for ( var i = 0; i < dslcAffectOnChangeRules.length; i++ ) {
@@ -5751,7 +5751,7 @@ var dslcDebug = false;
 			 * Live Preview
 			 */
 
-			dslcAffectOnChangeRules = dslcAffectOnChangeRule.split( ',' );
+			dslcAffectOnChangeRules = dslcAffectOnChangeRule.replace(/ /g,'').split( ',' );
 
 			// Loop through rules (useful when there are multiple rules)
 			for ( var i = 0; i < dslcAffectOnChangeRules.length; i++ ) {
