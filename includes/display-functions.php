@@ -306,30 +306,41 @@ function dslc_display_composer() {
 	if ( empty( $activate_button_position ) )
 		$activate_button_position = 'right';
 
-	// Show composer activation button
-	if ( ( ! function_exists( 'is_customize_preview' ) || ! is_customize_preview() ) && is_singular() && !$dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) :
+	// LC and WP Customizer do not work well together, don't proceed if customizer active
+	if ( ( ! function_exists( 'is_customize_preview' ) || ! is_customize_preview() ) ) :
 
-		// If is a page or a template go ahead normally
-		if ( is_page() || get_post_type() == 'dslc_templates' || ! isset( $dslc_var_templates_pt[get_post_type()] ) ) {
-			
-			?><a href="<?php echo add_query_arg( array( 'dslc' => 'active' ), get_permalink() ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo $activate_button_position; ?>"><?php _e( 'ACTIVATE EDITOR', 'dslc_string' ); ?></a><?php
+		// If editor not active and user can access the editor
+		if ( ! DS_LIVE_COMPOSER_ACTIVE && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) :
 
-		// If not a page or a template
-		} else {
+			// If a singular page ( posts and pages )
+			if ( is_singular() ) :
 
-			// Check if it has a template attached to it
-			$template = dslc_st_get_template_ID( get_the_ID() );
-			if ( $template ) { 
+				// If a page or a template go ahead normally
+				if ( is_page() || get_post_type() == 'dslc_templates' || ! isset( $dslc_var_templates_pt[get_post_type()] ) ) {
+					
+					?><a href="<?php echo add_query_arg( array( 'dslc' => 'active' ), get_permalink() ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo $activate_button_position; ?>"><?php _e( 'ACTIVATE EDITOR', 'dslc_string' ); ?></a><?php
 
-				?><a target="_blank" href="<?php echo add_query_arg( array( 'dslc' => 'active' ), get_permalink( $template ) ); ?>" class="dslca-activate-composer-hook"><?php _e( 'EDIT TEMPLATE', 'dslc_string' ); ?></a><?php
+				// If not a page or a template post type
+				} else {
 
-			} else {
+					// Check if it has a template attached to it
+					$template = dslc_st_get_template_ID( get_the_ID() );
 
-				?><a target="_blank" href="<?php echo admin_url( 'post-new.php?post_type=dslc_templates' ); ?>" class="dslca-activate-composer-hook"><?php _e( 'CREATE TEMPLATE', 'dslc_string' ); ?></a><?php
+					if ( $template ) { 
 
-			}
+						?><a target="_blank" href="<?php echo add_query_arg( array( 'dslc' => 'active' ), get_permalink( $template ) ); ?>" class="dslca-activate-composer-hook"><?php _e( 'EDIT TEMPLATE', 'dslc_string' ); ?></a><?php
 
-		}
+					} else {
+
+						?><a target="_blank" href="<?php echo admin_url( 'post-new.php?post_type=dslc_templates' ); ?>" class="dslca-activate-composer-hook"><?php _e( 'CREATE TEMPLATE', 'dslc_string' ); ?></a><?php
+
+					}
+
+				}
+
+			endif;
+
+		endif; 
 
 	endif;
 	
