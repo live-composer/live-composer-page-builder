@@ -75,7 +75,7 @@ class DSLC_Tabs extends DSLC_Module {
 				'tab' => __( 'Navigation', 'dslc_string' ),
 			),
 			array(
-				'label' => __( ' BG Color', 'dslc_string' ),
+				'label' => __( 'BG Color', 'dslc_string' ),
 				'id' => 'css_nav_bg_color',
 				'std' => '#fbfbfb',
 				'type' => 'color',
