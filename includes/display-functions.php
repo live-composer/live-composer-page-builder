@@ -604,6 +604,8 @@ function dslc_filter_content( $content ) {
 	if ( ( $currID == $realID && in_the_loop() && $dslc_should_filter ) || is_archive() || is_author() || is_search() || is_404() ) {
 
 		// Variables that are used throughout the function
+		$composer_wrapper_before = '';
+		$composer_wrapper_after = '';
 		$composer_header_append = ''; // HTML to output after LC header HTML
 		$composer_footer_append = ''; // HTML to otuput after LC footer HTML
 		$composer_header = ''; // HTML for LC header
@@ -613,6 +615,12 @@ function dslc_filter_content( $content ) {
 		$composer_append = ''; // HTML to ouput after LC content
 		$template_code = false; // LC code if current post powered by template
 		$template_ID = false; // ID of the template that powers current post
+
+		// Wrapping all LC elements ( unless header/footer outputed by theme ) 
+		if ( ! defined( 'DS_LIVE_COMPOSER_HF_AUTO' ) || DS_LIVE_COMPOSER_HF_AUTO ) {
+			$composer_wrapper_before = '<div id="dslc-content" class="dslc-content dslc-clearfix">';
+			$composer_wrapper_after = '</div>';
+		}
 
 		// Get LC code of the current post
 		$composer_code = dslc_get_code( get_the_ID() );
@@ -818,7 +826,7 @@ function dslc_filter_content( $content ) {
 			if ( ! DS_LIVE_COMPOSER_ACTIVE ) {
 
 				// Pass the LC header, regular content and LC footer
-				return '<div id="dslc-content" class="dslc-content dslc-clearfix">' . $composer_header . '<div id="dslc-theme-content"><div id="dslc-theme-content-inner">' . $content . '</div></div>' . $composer_footer . '</div>';
+				return $composer_wrapper_before . $composer_header . '<div id="dslc-theme-content"><div id="dslc-theme-content-inner">' . $content . '</div></div>' . $composer_footer . $composer_wrapper_after;
 			
 			}
 
@@ -858,7 +866,7 @@ function dslc_filter_content( $content ) {
 		}
 
 		// Pass the filtered content output
-		return '<div id="dslc-content" class="dslc-content dslc-clearfix">' . do_action( 'dslc_output_prepend') . $composer_header . '<div id="dslc-main">' . $composer_prepend . $composer_content . '</div>' . $composer_append . $composer_footer . do_action( 'dslc_output_append') . '</div>';
+		return $composer_wrapper_before . do_action( 'dslc_output_prepend') . $composer_header . '<div id="dslc-main">' . $composer_prepend . $composer_content . '</div>' . $composer_append . $composer_footer . do_action( 'dslc_output_append') . $composer_wrapper_after;
 
 	// If LC should not filter the content
 	} else {

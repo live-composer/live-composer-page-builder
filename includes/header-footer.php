@@ -466,6 +466,12 @@ function dslc_hf_get_header( $post_ID = false ) {
 
 	// Var defaults
 	$append = '';
+	$wrapper_start = '';
+
+	// Wrap if header handled by theme
+	if ( defined( 'DS_LIVE_COMPOSER_HF_AUTO' ) || ! DS_LIVE_COMPOSER_HF_AUTO ) {
+		$wrapper_start = '<div id="dslc-content" class="dslc-content dslc-clearfix">';
+	}
 
 	// Get header/footer ID associated with the post
 	$header_footer = dslc_hf_get_ID( $post_ID );
@@ -498,12 +504,12 @@ function dslc_hf_get_header( $post_ID = false ) {
 		}
 
 		// Add the header code to the variable holder
-		return '<div id="dslc-header" class="dslc-header-pos-' . $header_position . '">' . do_shortcode( $header_code ) . $append . '</div>';
+		return $wrapper_start . '<div id="dslc-header" class="dslc-header-pos-' . $header_position . '">' . do_shortcode( $header_code ) . $append . '</div>';
 
 	// If no header applied
 	} else {
 
-		return '';
+		return $wrapper_start . '';
 
 	}
 
@@ -521,6 +527,12 @@ function dslc_hf_get_footer( $post_ID = false ) {
 
 	// Var defaults
 	$append = '';
+	$wrapper_end = '';
+
+	// Wrap if header handled by theme
+	if ( defined( 'DS_LIVE_COMPOSER_HF_AUTO' ) || ! DS_LIVE_COMPOSER_HF_AUTO ) {
+		$wrapper_end = '</div>';
+	}
 
 	// Get header/footer ID associated with the post
 	$header_footer = dslc_hf_get_ID( $post_ID );
@@ -553,12 +565,12 @@ function dslc_hf_get_footer( $post_ID = false ) {
 		}
 
 		// Add the header code to the variable holder
-		return '<div id="dslc-footer"  class="dslc-footer-pos-' . $footer_position . '">' . do_shortcode( $footer_code ) . $append . '</div>';
+		return '<div id="dslc-footer"  class="dslc-footer-pos-' . $footer_position . '">' . do_shortcode( $footer_code ) . $append . '</div>' . $wrapper_end;
 
 	// If no header applied
 	} else {
 
-		return '';
+		return '' . $wrapper_end;
 
 	}
 
