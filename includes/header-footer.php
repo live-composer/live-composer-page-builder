@@ -451,3 +451,58 @@ function dslc_hf_get_code( $post_ID = false, $h_or_f = 'header' ) {
 	return $code;
 
 }
+
+/**
+ * Get the header output code
+ *
+ * @since 1.0.2
+ *
+ * @param int     $post_ID ID of the post/page. Default false.
+ * @return string The HTML ouput of the header for a defined post/page
+ */
+function dslc_hf_get_header( $post_ID = false ) {	
+
+	// Var defaults
+	$append = '';
+
+	// Get header/footer ID associated with the post
+	$header_footer = dslc_hf_get_ID( $post_ID );
+
+	// If there is a header applied
+	if ( $header_footer['header'] ) {
+
+		// Get the header LC code
+		$header_code = get_post_meta( $header_footer['header'], 'dslc_code', true );
+
+		// If the "position" option value exists
+		if ( get_post_meta( $header_footer['header'], 'dslc_hf_position', true ) ) {
+
+			// Set the "position" option value to the one from the settings
+			$header_position = get_post_meta( $header_footer['header'], 'dslc_hf_position', true );
+
+		} else {
+
+			// Set the "position" option value to default "relative"
+			$header_position = 'relative';
+
+		}
+
+		// If editor active
+		if ( dslc_is_editor_active( 'access' ) ) {
+
+			// Set the HTML for the edit overlay
+			$append = '<div class="dslc-hf-block-overlay"><a target="_blank" href="' . add_query_arg( 'dslc', 'active', get_permalink( $header_footer['header'] ) ) . '" class="dslc-hf-block-overlay-button dslca-link">Edit Header</a></div>';
+
+		}
+
+		// Add the header code to the variable holder
+		return '<div id="dslc-header" class="dslc-header-pos-' . $header_position . '">' . do_shortcode( $header_code ) . $append . '</div>';
+
+	// If no header applied
+	} else {
+
+		return '';
+
+	}
+
+}
