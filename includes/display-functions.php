@@ -484,15 +484,20 @@ function dslc_display_modules() {
 }
 
 /**
- * Returns array of active templates (false if none)
+ * Returns array of active templates
  *
  * @since 1.0
+ *
+ * @return array Multidimensional array of LC templates. Bool false if none
+ *               One array per each template. Key of array is template ID
+ *               Each template has array parameters title|id|code|section
  */
-
 function dslc_get_templates() {
 
+	// Global var holding templates information
 	global $dslc_var_templates;
 
+	// Return templates ( false if none )
 	if ( empty( $dslc_var_templates ) )
 		return false;
 	else
