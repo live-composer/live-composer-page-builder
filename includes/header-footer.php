@@ -10,6 +10,8 @@
  * - dslc_hf_options ( Register options for posts/pages to choose which header/footer to use )
  * - dslc_hf_get_ID ( Get the header and footer ID of a specific post/page )
  * - dslc_hf_get_code ( Get the header or footer LC code of a specific post/page )
+ * - dslc_hf_get_header ( Get the header output code ) 
+ * - dslc_hf_get_footer ( Get the footer output code ) 
  */
 
 /**
@@ -497,6 +499,61 @@ function dslc_hf_get_header( $post_ID = false ) {
 
 		// Add the header code to the variable holder
 		return '<div id="dslc-header" class="dslc-header-pos-' . $header_position . '">' . do_shortcode( $header_code ) . $append . '</div>';
+
+	// If no header applied
+	} else {
+
+		return '';
+
+	}
+
+}
+
+/**
+ * Get the footer output code
+ *
+ * @since 1.0.2
+ *
+ * @param int     $post_ID ID of the post/page. Default false.
+ * @return string The HTML ouput of the footer for a defined post/page
+ */
+function dslc_hf_get_footer( $post_ID = false ) {	
+
+	// Var defaults
+	$append = '';
+
+	// Get header/footer ID associated with the post
+	$header_footer = dslc_hf_get_ID( $post_ID );
+
+	// If there is a footer applied
+	if ( $header_footer['footer'] ) {
+
+		// Get the footer LC code
+		$footer_code = get_post_meta( $header_footer['footer'], 'dslc_code', true );
+
+		// If the "position" option value exists
+		if ( get_post_meta( $header_footer['footer'], 'dslc_hf_position', true ) ) {
+
+			// Set the "position" option value to the one from the settings
+			$footer_position = get_post_meta( $header_footer['footer'], 'dslc_hf_position', true );
+
+		} else {
+
+			// Set the "position" option value to default "relative"
+			$footer_position = 'relative';
+
+		}
+
+		// If editor active
+		if ( dslc_is_editor_active( 'access' ) ) {
+
+			// Set the HTML for the edit overlay
+			$append = '<div class="dslc-hf-block-overlay"><a target="_blank" href="' . add_query_arg( 'dslc', 'active', get_permalink( $header_footer['footer'] ) ) . '" class="dslc-hf-block-overlay-button dslca-link">Edit Footer</a></div>';
+
+		}
+
+		// Add the header code to the variable holder
+		return '<div id="dslc-footer"  class="dslc-footer-pos-' . $footer_position . '">' . do_shortcode( $footer_code ) . $append . '</div>';
 
 	// If no header applied
 	} else {
