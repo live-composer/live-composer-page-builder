@@ -598,8 +598,6 @@ function dslc_filter_content( $content ) {
 		// Variables that are used throughout the function
 		$composer_header_append = ''; // HTML to output after LC header HTML
 		$composer_footer_append = ''; // HTML to otuput after LC footer HTML
-		$header_code = ''; // LC Code for header
-		$footer_code = ''; // LC Code for footer
 		$composer_header = ''; // HTML for LC header
 		$composer_footer = ''; // HTML for LC footer
 		$composer_prepend = ''; // HTML to output before LC content
@@ -729,78 +727,15 @@ function dslc_filter_content( $content ) {
 			// If a template ID ( most of the code above ) is set
 			if ( $template_ID ) {
 
-				// Load header/footer IDs for the template
-				$header_footer = dslc_hf_get_ID( $template_ID );
+				// Get header and footer output
+				$composer_header = dslc_hf_get_header( $template_ID );
+				$composer_footer = dslc_hf_get_footer( $template_ID );
 
 			} else {
 
-				// Load header/footer IDs for the current post/page
-				$header_footer = dslc_hf_get_ID( get_the_ID() );
-
-			}
-
-			// If editor currently active
-			if ( dslc_is_editor_active( 'access' ) ) {
-
-				// If there is a header applied
-				if ( $header_footer['header'] ) {
-					// Set the HTML for the edit overlay
-					$composer_header_append = '<div class="dslc-hf-block-overlay"><a target="_blank" href="' . add_query_arg( 'dslc', 'active', get_permalink( $header_footer['header'] ) ) . '" class="dslc-hf-block-overlay-button dslca-link">Edit Header</a></div>';
-				} 
-
-				// If there is a footer applied
-				if ( $header_footer['footer'] ) {
-					// Set the HTML for the edit overlay
-					$composer_footer_append = '<div class="dslc-hf-block-overlay"><a target="_blank" href="' . add_query_arg( 'dslc', 'active', get_permalink( $header_footer['footer'] ) ) . '" class="dslc-hf-block-overlay-button dslca-link">Edit Footer</a></div>';
-				}
-
-			}
-
-			// If there is a header applied
-			if ( $header_footer['header'] ) {
-
-				// Get the header LC code
-				$header_code = get_post_meta( $header_footer['header'], 'dslc_code', true );
-
-				// If the "position" option value exists
-				if ( get_post_meta( $header_footer['header'], 'dslc_hf_position', true ) ) {
-
-					// Set the "position" option value to the one from the settings
-					$header_position = get_post_meta( $header_footer['header'], 'dslc_hf_position', true );
-
-				} else {
-
-					// Set the "position" option value to default "relative"
-					$header_position = 'relative';
-
-				}
-
-				// Add the header code to the variable holder
-				$composer_header .= '<div id="dslc-header" class="dslc-header-pos-' . $header_position . '">' . do_shortcode( $header_code ) . $composer_header_append . '</div>';
-
-			}
-
-			// If there is a footer applied
-			if ( $header_footer['footer'] ) {
-
-				// Get the footer LC code
-				$footer_code = get_post_meta( $header_footer['footer'], 'dslc_code', true );
-
-				// If the "position" option value exists
-				if ( get_post_meta( $header_footer['footer'], 'dslc_hf_position', true ) ) {
-
-					// Set the "position" option value to the one from the settings
-					$footer_position = get_post_meta( $header_footer['footer'], 'dslc_hf_position', true );
-
-				} else {
-
-					// Set the "position" option value to default "relative"
-					$footer_position = 'relative';
-
-				}
-
-				// Add the header code to the variable holder
-				$composer_footer .= '<div id="dslc-footer"  class="dslc-footer-pos-' . $footer_position . '">' . do_shortcode( $footer_code ) . $composer_footer_append . '</div>';
+				// Get header and footer output
+				$composer_header = dslc_hf_get_header( get_the_ID() );
+				$composer_footer = dslc_hf_get_footer( get_the_ID() );				
 
 			}
 
@@ -868,7 +803,7 @@ function dslc_filter_content( $content ) {
 			$composer_content = do_shortcode( $composer_code );
 
 		// If there is header or footer LC code to add to the content output
-		} elseif ( $header_code || $footer_code ) {
+		} elseif ( $composer_header || $composer_footer ) {
 			
 			// If editor not active
 			if ( ! DS_LIVE_COMPOSER_ACTIVE ) {
