@@ -473,6 +473,11 @@ function dslc_hf_get_header( $post_ID = false ) {
 		$wrapper_start = '<div id="dslc-content" class="dslc-content dslc-clearfix">';
 	}
 
+	// If the page displayed is header/footer, do not repeat
+	if ( is_singular( 'dslc_hf' ) ) {
+		return $wrapper_start;
+	}
+
 	// Get header/footer ID associated with the post
 	$header_footer = dslc_hf_get_ID( $post_ID );
 
@@ -532,6 +537,11 @@ function dslc_hf_get_footer( $post_ID = false ) {
 	// Wrap if header handled by theme
 	if ( defined( 'DS_LIVE_COMPOSER_HF_AUTO' ) && ! DS_LIVE_COMPOSER_HF_AUTO ) {
 		$wrapper_end = '</div>';
+	}
+
+	// If the page displayed is header/footer, do not repeat
+	if ( is_singular( 'dslc_hf' ) ) {
+		return $wrapper_end;
 	}
 
 	// Get header/footer ID associated with the post
