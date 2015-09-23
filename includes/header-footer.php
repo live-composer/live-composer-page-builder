@@ -308,9 +308,46 @@ function dslc_hf_options() {
  * @since 1.0
  */
 
-function dslc_hf_get_ID( $post_ID ) {
+function dslc_hf_get_ID( $post_ID = false ) {
 
+	// If theme does not define header/footer compatibility return false
 	if ( ! defined( 'DS_LIVE_COMPOSER_HF' ) || ! DS_LIVE_COMPOSER_HF ) return array( 'header' => false, 'footer' => false );
+
+	// If current page is actually header/footer post, return false
+	if ( is_singular( 'dslc_hf' ) ) return array( 'header' => false, 'footer' => false );
+
+	// Global vars
+	global $dslc_post_types;
+
+	// If post ID not supplied, figure it out
+	if ( ! $post_ID ) {
+
+		// If currently showing a singular post of a post type that supports "post templates"
+		if ( is_singular( $dslc_post_types ) ) {
+			$post_ID = dslc_st_get_template_ID( get_the_ID() );
+		
+		// If currently showing a category archive page
+		} elseif ( is_archive() && ! is_author() && ! is_search() ) {
+			$post_ID = dslc_get_option( get_post_type(), 'dslc_plugin_options_archives' );
+
+		// If currently showing an author archive page
+		} elseif ( is_author() ) {
+			$post_ID = dslc_get_option( 'author', 'dslc_plugin_options_archives' );
+
+		// If currently showing a search results page
+		} elseif ( is_search() ) {
+			$post_ID = dslc_get_option( 'search_results', 'dslc_plugin_options_archives' );
+
+		// If currently showina 404 page
+		} elseif ( is_404() ) {
+			$post_ID = dslc_get_option( '404_page', 'dslc_plugin_options_archives' );
+
+		// Otherwise just get the ID
+		} else {
+			$post_ID = get_the_ID();
+		}
+
+	}
 
 	// Get header/footer template
 	$header_tpl = get_post_meta( $post_ID, 'dslc_header', true );
