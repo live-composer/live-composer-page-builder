@@ -730,7 +730,8 @@ function dslc_filter_content( $content ) {
 		}
 
 		// If currently showing a singular post of a post type which is not "dslc_hf" ( used for header/footer )
-		if ( ! is_singular( 'dslc_hf' ) ) {
+		// And the constant DS_LIVE_COMPOSER_HF_AUTO is not defined or is set to false
+		if ( ! is_singular( 'dslc_hf' ) && ( ! defined( 'DS_LIVE_COMPOSER_HF_AUTO' ) || DS_LIVE_COMPOSER_HF_AUTO ) ) {
 
 			// If a template ID ( most of the code above ) is set
 			if ( $template_ID ) {
