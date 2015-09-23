@@ -497,6 +497,9 @@ function dslc_get_templates() {
 	// Global var holding templates information
 	global $dslc_var_templates;
 
+	// Filter to hook into
+	$dslc_var_templates = apply_filters( 'dslc_get_templates', $dslc_var_templates );
+
 	// Return templates ( false if none )
 	if ( empty( $dslc_var_templates ) )
 		return false;
