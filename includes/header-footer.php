@@ -303,11 +303,13 @@ function dslc_hf_options() {
 } add_action( 'init', 'dslc_hf_options' );
 
 /**
- * Get the header and footer ID of a specific post/page
+ * Get the header and footer IDs of a specific post/page
  *
  * @since 1.0
+ *
+ * @param int     $post_ID ID of the post/page. Default false ( Automatically finds ID ).
+ * @return array  The IDs of the header and footer associated with the post/page. False if none.
  */
-
 function dslc_hf_get_ID( $post_ID = false ) {
 
 	// If theme does not define header/footer compatibility return false
