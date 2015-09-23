@@ -469,7 +469,7 @@ function dslc_hf_get_header( $post_ID = false ) {
 	$wrapper_start = '';
 
 	// Wrap if header handled by theme
-	if ( defined( 'DS_LIVE_COMPOSER_HF_AUTO' ) || ! DS_LIVE_COMPOSER_HF_AUTO ) {
+	if ( defined( 'DS_LIVE_COMPOSER_HF_AUTO' ) && ! DS_LIVE_COMPOSER_HF_AUTO ) {
 		$wrapper_start = '<div id="dslc-content" class="dslc-content dslc-clearfix">';
 	}
 
@@ -530,7 +530,7 @@ function dslc_hf_get_footer( $post_ID = false ) {
 	$wrapper_end = '';
 
 	// Wrap if header handled by theme
-	if ( defined( 'DS_LIVE_COMPOSER_HF_AUTO' ) || ! DS_LIVE_COMPOSER_HF_AUTO ) {
+	if ( defined( 'DS_LIVE_COMPOSER_HF_AUTO' ) && ! DS_LIVE_COMPOSER_HF_AUTO ) {
 		$wrapper_end = '</div>';
 	}
 
