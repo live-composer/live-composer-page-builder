@@ -741,20 +741,8 @@ function dslc_filter_content( $content ) {
 		// And the constant DS_LIVE_COMPOSER_HF_AUTO is not defined or is set to false
 		if ( ! is_singular( 'dslc_hf' ) && ( ! defined( 'DS_LIVE_COMPOSER_HF_AUTO' ) || DS_LIVE_COMPOSER_HF_AUTO ) ) {
 
-			// If a template ID ( most of the code above ) is set
-			if ( $template_ID ) {
-
-				// Get header and footer output
-				$composer_header = dslc_hf_get_header( $template_ID );
-				$composer_footer = dslc_hf_get_footer( $template_ID );
-
-			} else {
-
-				// Get header and footer output
-				$composer_header = dslc_hf_get_header( get_the_ID() );
-				$composer_footer = dslc_hf_get_footer( get_the_ID() );				
-
-			}
+			$composer_header = dslc_hf_get_header();
+			$composer_footer = dslc_hf_get_footer();
 
 		}
 
