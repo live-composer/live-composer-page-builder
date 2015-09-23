@@ -1325,91 +1325,16 @@ function dslc_custom_css() {
 		$composer_code .= $footer_code;
 	}
 
+	// Template content
+	if ( $template_ID ) {
+		$composer_code .= get_post_meta( $template_ID, 'dslc_code', true );
+	}
+
+	// Post/Page content
+	$post_id = get_the_ID();
+	$composer_code .= get_post_meta( $post_id, 'dslc_code', true );
+
 	echo '<style type="text/css">';
-
-		// If single, load template
-		if ( is_singular( $dslc_post_types ) ) {
-
-			if ( $template_ID ) {
-				
-				$template_code = get_post_meta( $template_ID, 'dslc_code', true );
-				$composer_code .= $template_code;
-
-			}
-
-		}
-
-		// If archive, load template
-		if ( is_archive() && ! is_author() && ! is_search() ) {
-
-			$template_ID = dslc_get_option( get_post_type(), 'dslc_plugin_options_archives' );
-
-			if ( $template_ID ) {
-
-				// Get template code
-				$template_code = get_post_meta( $template_ID, 'dslc_code', true );
-
-				// Add the template code
-				$composer_code .= $template_code;
-
-			}
-
-		}
-
-		// If archive, load template
-		if ( is_author() ) {
-
-			$template_ID = dslc_get_option( 'author', 'dslc_plugin_options_archives' );
-
-			if ( $template_ID ) {
-
-				// Get template code
-				$template_code = get_post_meta( $template_ID, 'dslc_code', true );
-
-				// Add the template code
-				$composer_code .= $template_code;
-
-			}
-
-		}
-
-		// If search, load template
-		if ( is_search() ) {
-
-			$template_ID = dslc_get_option( 'search_results', 'dslc_plugin_options_archives' );
-
-			if ( $template_ID ) {
-
-				// Get template code
-				$template_code = get_post_meta( $template_ID, 'dslc_code', true );
-
-				// Add the template code
-				$composer_code .= $template_code;
-
-			}
-
-		}
-
-		// If 404, load template
-		if ( is_404() ) {
-
-			$template_ID = dslc_get_option( '404_page', 'dslc_plugin_options_archives' );
-
-			if ( $template_ID ) {
-
-				// Get template code
-				$template_code = get_post_meta( $template_ID, 'dslc_code', true );
-
-				// Add the template code
-				$composer_code .= $template_code;
-
-			}
-
-		}
-		
-		// Get composer code
-		$post_id = get_the_ID();
-		$composer_code .= get_post_meta( $post_id, 'dslc_code', true );
 
 		// If composer not used on this page stop execution
 		if ( $composer_code ) {
