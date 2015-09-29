@@ -2767,6 +2767,8 @@ class DSLC_Blog extends DSLC_Module {
 
 							</div><!-- .dslc-blog-post -->
 
+							<?php do_action( 'dslc_blog_module_after_post', $real_count ); ?>
+
 							<?php
 
 							// Row Separator
