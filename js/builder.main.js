@@ -4619,36 +4619,45 @@ var dslcDebug = false;
 		jQuery('.dslca-save-composer .dslca-icon').removeClass('dslc-icon-ok').addClass('dslc-icon-spin dslc-icon-spinner');
 
 		// Ajax call to save the new content
-		jQuery.post(
-
-			DSLCAjax.ajaxurl,
-			{
+		jQuery.ajax({
+			method: 'POST',
+			url: DSLCAjax.ajaxurl,
+			data: {
 				action : 'dslc-ajax-save-composer',
 				dslc : 'active',
 				dslc_post_id : postID,
 				dslc_code : composerCode,
 				dslc_content_for_search : contentForSearch
 			},
-			function( response ) {
+			timeout: 10000
+		}).done(function( response ) {
 
-				// Replace the loading animation with a check icon
-				jQuery('.dslca-save-composer .dslca-icon').removeClass('dslc-icon-spin dslc-icon-spinner').addClass('dslc-icon-ok')
-
-				// On success hide the publish button 
-				if ( response.status == 'success' ) {
-					jQuery('.dslca-save-composer').fadeOut(250);
-					jQuery('.dslca-save-draft-composer').fadeOut(250);
-				// On fail show an alert message
-				} else {
-					alert( 'Something went wrong, please try to save again.' );
-				}
-				
-				// Remove the class previously added so we know saving is finished
-				jQuery('body').removeClass('dslca-saving-in-progress');
-
+			// On success hide the publish button 
+			if ( response.status == 'success' ) {
+				jQuery('.dslca-save-composer').fadeOut(250);
+				jQuery('.dslca-save-draft-composer').fadeOut(250);
+			// On fail show an alert message
+			} else {
+				alert( 'Something went wrong, please try to save again.' );
 			}
 
-		);
+		}).fail(function( response ) {
+
+			if ( response.statusText == 'timeout' ) {
+				alert( 'The request timed out after 10 seconds. Please try again.' );
+			} else {
+				alert( 'Something went wrong. Please try again.' );
+			}
+
+		}).always(function( reseponse ) {
+
+			// Replace the loading animation with a check icon
+			jQuery('.dslca-save-composer .dslca-icon').removeClass('dslc-icon-spin dslc-icon-spinner').addClass('dslc-icon-ok')
+
+			// Remove the class previously added so we know saving is finished
+			jQuery('body').removeClass('dslca-saving-in-progress');
+
+		});
 
 	}
 
