@@ -3896,10 +3896,19 @@ class DSLC_TP_Content extends DSLC_Module {
 			}
 
 			?><div class="dslc-tp-content"><?php
-				if ( is_singular() && get_post_type( $post_id ) != 'dslc_templates' )
+
+				// Output before content
+				do_action( 'dslc_content_module_before_content', $post_id, $options );
+
+				// Output content
+				if ( is_singular() && get_post_type( $post_id ) != 'dslc_templates' ) {
 					the_content();
-				else
+				} else {
 					echo $content;
+				}
+
+				do_action( 'dslc_content_module_after_content', $post_id, $options );
+
 			?></div><?php
 
 		/* Module output ends here */
