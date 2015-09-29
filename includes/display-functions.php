@@ -1240,7 +1240,7 @@ function dslc_load_template( $filename, $default = '' ) {
 
 function dslc_custom_css() {
 
-	if ( ! is_singular() && ! is_archive() && ! is_author() && ! is_search() && ! is_404() )
+	if ( ! is_singular() && ! is_archive() && ! is_author() && ! is_search() && ! is_404() && ! is_home() )
 		return;
 
 	global $dslc_active;
