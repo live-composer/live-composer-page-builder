@@ -2268,6 +2268,8 @@ class DSLC_Staff extends DSLC_Module {
 
 												</div><!-- .dslc-staff-member-main -->
 
+												<a href="<?php the_permalink(); ?>" class="dslc-post-main-inner-link-cover"></a>
+												
 											</div><!-- .dslc-staff-member-main -->
 
 										<?php endif; ?>

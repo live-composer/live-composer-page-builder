@@ -2565,6 +2565,8 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 
 													</div><!-- .dslc-product-main-inner -->
 
+													<a href="<?php the_permalink(); ?>" class="dslc-post-main-inner-link-cover"></a>
+													
 												</div><!-- .dslc-product-main -->
 
 											<?php endif; ?>

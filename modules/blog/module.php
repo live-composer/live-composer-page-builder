@@ -2681,6 +2681,8 @@ class DSLC_Blog extends DSLC_Module {
 
 													</div><!-- .blog-post-main-inner -->
 
+													<a href="<?php the_permalink(); ?>" class="dslc-post-main-inner-link-cover"></a>
+
 												</div><!-- .blog-post-main -->
 
 											<?php endif; ?>

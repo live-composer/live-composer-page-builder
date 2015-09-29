@@ -2043,3 +2043,21 @@
 .dslc-res-phone .dslc-navigation.dslc-navigation-res-p-enabled {
 	display: none;
 }
+
+/**
+ * All Posts Related Modules
+ */
+
+.dslc-post-main-inner-link-cover {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+body.dslc-res-tablet .dslc-post-main-inner-link-cover,
+body.dslc-res-phone .dslc-post-main-inner-link-cover {
+	display: block;
+}

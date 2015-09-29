@@ -2440,6 +2440,8 @@ class DSLC_Downloads extends DSLC_Module {
 
 												</div><!-- .dslc-download-main-inner -->
 
+												<a href="<?php the_permalink(); ?>" class="dslc-post-main-inner-link-cover"></a>
+												
 											</div><!-- .dslc-download-main -->
 
 										<?php endif; ?>

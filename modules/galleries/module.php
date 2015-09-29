@@ -2550,6 +2550,8 @@ class DSLC_Galleries extends DSLC_Module {
 
 												</div><!-- .dslc-gallery-main-inner -->
 
+												<a href="<?php the_permalink(); ?>" class="dslc-post-main-inner-link-cover"></a>
+												
 											</div><!-- .dslc-gallery-main -->
 
 										<?php endif; ?>

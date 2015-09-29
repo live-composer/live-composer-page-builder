@@ -2551,6 +2551,8 @@ class DSLC_Posts extends DSLC_Module {
 
 													</div><!-- .dslc-cpt-post-main-inner -->
 
+													<a href="<?php the_permalink(); ?>" class="dslc-post-main-inner-link-cover"></a>
+													
 												</div><!-- .dslc-cpt-post-main -->
 
 											<?php endif; ?>

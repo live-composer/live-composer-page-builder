@@ -1724,6 +1724,8 @@ class DSLC_Partners extends DSLC_Module {
 
 												</div><!-- .dslc-partner-main -->
 
+												<a href="<?php the_permalink(); ?>" class="dslc-post-main-inner-link-cover"></a>
+												
 											</div><!-- .dslc-partner-main -->
 
 										<?php endif; ?>
