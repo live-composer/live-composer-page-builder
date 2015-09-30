@@ -525,6 +525,21 @@ body {
 							vertical-align: middle;
 						}
 
+						.dslca-module-edit-option-box-shadow-single input[type="checkbox"] {
+							display: none;
+						}
+
+						.dslca-module-edit-option-box-shadow-single .dslca-module-edit-option-checkbox-hook {
+							margin-right: 0;
+						}
+
+							.dslca-module-edit-option-box-shadow-single .dslca-module-edit-option-checkbox-hook .dslca-icon {
+								margin-left: 10px;
+								margin-right: 0;
+								font-size: 13px;
+								font-weight: normal;
+							}
+
 						.dslca-module-edit-option-box-shadow-single .sp-replacer {
 							display: inline-block !important;
 							width: 100px;

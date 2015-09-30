@@ -606,6 +606,7 @@ function dslc_ajax_display_module_options( $atts ) {
 							$box_shadow_blur_val = 0;
 							$box_shadow_spread_val = 0;
 							$box_shadow_color_val = 'transparent';
+							$box_shadow_inset_val = 'outset';
 							$box_shadow_val = false;
 							if ( $curr_value !== '' ) {
 								$box_shadow_val = explode( ' ', $curr_value );
@@ -616,16 +617,23 @@ function dslc_ajax_display_module_options( $atts ) {
 								$box_shadow_blur_val = str_replace('px', '', $box_shadow_val[2] );
 								$box_shadow_spread_val = str_replace('px', '', $box_shadow_val[3] );
 								$box_shadow_color_val = str_replace('px', '', $box_shadow_val[4] );
+								if ( isset( $box_shadow_val[5] ) ) {
+									$box_shadow_inset_val = $box_shadow_val[5];
+								}
 							}
 						?>
 
 						<div class="dslca-module-edit-option-box-shadow-wrapper">
 
-							<div class="dslca-module-edit-option-box-shadow-single">
-								<span><?php _e( 'Horizontal', 'dslc_string' ); ?></span><input class="dslca-module-edit-option-box-shadow-hor" step="0.1" type="number" value="<?php echo $box_shadow_hor_val; ?>" />
+							<div class="dslca-module-edit-option-box-shadow-single">								
+								<span class="dslca-module-edit-option-checkbox-hook"><?php _e( 'Inner', 'dslc_string' ); ?><span class="dslca-icon <?php if ( $box_shadow_inset_val == 'inset' ) echo 'dslc-icon-check'; else echo 'dslc-icon-check-empty'; ?>"></span></span>
+								<input type="checkbox" class="dslca-module-edit-field-checkbox dslca-module-edit-option-box-shadow-inset" <?php if (  $box_shadow_inset_val == 'inset' ) echo 'checked="checked"'; ?> />
 							</div>
 							<div class="dslca-module-edit-option-box-shadow-single">
-								<span><?php _e( 'Vertical', 'dslc_string' ); ?></span><input class="dslca-module-edit-option-box-shadow-ver" step="0.1" type="number" value="<?php echo $box_shadow_ver_val; ?>" />
+								<span><?php _e( 'Hor', 'dslc_string' ); ?></span><input class="dslca-module-edit-option-box-shadow-hor" step="0.1" type="number" value="<?php echo $box_shadow_hor_val; ?>" />
+							</div>
+							<div class="dslca-module-edit-option-box-shadow-single">
+								<span><?php _e( 'Ver', 'dslc_string' ); ?></span><input class="dslca-module-edit-option-box-shadow-ver" step="0.1" type="number" value="<?php echo $box_shadow_ver_val; ?>" />
 							</div>
 							<div class="dslca-module-edit-option-box-shadow-single">
 								<span><?php _e( 'Blur', 'dslc_string' ); ?></span><input class="dslca-module-edit-option-box-shadow-blur" step="0.1" type="number" value="<?php echo $box_shadow_blur_val; ?>" />

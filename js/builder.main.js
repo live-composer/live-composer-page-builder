@@ -3663,7 +3663,7 @@ var dslcDebug = false;
 		 * Value Change
 		 */
 
-		jQuery(document).on( 'change', '.dslca-module-edit-option-box-shadow-hor, .dslca-module-edit-option-box-shadow-ver, .dslca-module-edit-option-box-shadow-blur, .dslca-module-edit-option-box-shadow-spread, .dslca-module-edit-option-box-shadow-color', function(){
+		jQuery(document).on( 'change', '.dslca-module-edit-option-box-shadow-hor, .dslca-module-edit-option-box-shadow-ver, .dslca-module-edit-option-box-shadow-blur, .dslca-module-edit-option-box-shadow-spread, .dslca-module-edit-option-box-shadow-color, .dslca-module-edit-option-box-shadow-inset', function(){
 
 			var boxShadowWrapper = jQuery(this).closest('.dslca-module-edit-option'),
 			boxShadowInput = boxShadowWrapper.find('.dslca-module-edit-field'),
@@ -3672,7 +3672,11 @@ var dslcDebug = false;
 			boxShadowBlur = boxShadowWrapper.find('.dslca-module-edit-option-box-shadow-blur').val(),
 			boxShadowSpread = boxShadowWrapper.find('.dslca-module-edit-option-box-shadow-spread').val(),
 			boxShadowColor = boxShadowWrapper.find('.dslca-module-edit-option-box-shadow-color').val(),
-			boxShadowVal = boxShadowHor + 'px ' + boxShadowVer + 'px ' + boxShadowBlur + 'px ' + boxShadowSpread + 'px ' + boxShadowColor;
+			boxShadowInset = boxShadowWrapper.find('.dslca-module-edit-option-box-shadow-inset').is(':checked');
+			
+			if ( boxShadowInset ) { boxShadowInset = ' inset'; } else { boxShadowInset = ''; }			
+
+			var boxShadowVal = boxShadowHor + 'px ' + boxShadowVer + 'px ' + boxShadowBlur + 'px ' + boxShadowSpread + 'px ' + boxShadowColor + boxShadowInset;
 
 			boxShadowInput.val( boxShadowVal ).trigger('change');
 
