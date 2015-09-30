@@ -255,6 +255,26 @@ class DSLC_Button extends DSLC_Module {
 				'affect_on_change_rule' => 'display',
 				'section' => 'styling',
 			),
+			array(
+				'label' => __( 'Box Shadow', 'dslc_string' ),
+				'id' => 'css_box_shadow',
+				'std' => '',
+				'type' => 'box_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-button a',
+				'affect_on_change_rule' => 'box-shadow',
+				'section' => 'styling',
+			),
+			array(
+				'label' => __( 'Box Shadow - Hover', 'dslc_string' ),
+				'id' => 'css_box_shadow_hover',
+				'std' => '',
+				'type' => 'box_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-button a:hover',
+				'affect_on_change_rule' => 'box-shadow',
+				'section' => 'styling',
+			),
 
 			/**
 			 * Typography

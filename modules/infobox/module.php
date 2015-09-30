@@ -404,6 +404,16 @@ class DSLC_Info_Box extends DSLC_Module {
 				'section' => 'styling',
 				'ext' => '%'
 			),
+			array(
+				'label' => __( 'Box Shadow', 'dslc_string' ),
+				'id' => 'css_box_shadow',
+				'std' => '',
+				'type' => 'box_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box',
+				'affect_on_change_rule' => 'box-shadow',
+				'section' => 'styling',
+			),
 
 			/**
 			 * Wrapper
@@ -816,6 +826,17 @@ class DSLC_Info_Box extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'Icon', 'dslc_string' ),
 				'ext' => 'px'
+			),
+			array(
+				'label' => __( 'Box Shadow', 'dslc_string' ),
+				'id' => 'css_icon_box_shadow',
+				'std' => '',
+				'type' => 'box_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-image-inner',
+				'affect_on_change_rule' => 'box-shadow',
+				'section' => 'styling',
+				'tab' => __( 'Icon', 'dslc_string' ),
 			),
 
 			/**
@@ -1280,6 +1301,28 @@ class DSLC_Info_Box extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Primary Button', 'dslc_string' ),
 			),
+			array(
+				'label' => __( 'Box Shadow', 'dslc_string' ),
+				'id' => 'css_button_box_shadow',
+				'std' => '',
+				'type' => 'box_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-primary',
+				'affect_on_change_rule' => 'box-shadow',
+				'section' => 'styling',
+				'tab' => __( 'Primary Button', 'dslc_string' ),
+			),
+			array(
+				'label' => __( 'Box Shadow - Hover', 'dslc_string' ),
+				'id' => 'css_button_box_shadow_hover',
+				'std' => '',
+				'type' => 'box_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-primary:hover',
+				'affect_on_change_rule' => 'box-shadow',
+				'section' => 'styling',
+				'tab' => __( 'Primary Button', 'dslc_string' ),
+			),
 
 			/**
 			 * Secondary Button
@@ -1544,6 +1587,28 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'styling',
 				'ext' => 'px',
+				'tab' => __( 'Secondary Button', 'dslc_string' ),
+			),
+			array(
+				'label' => __( 'Box Shadow', 'dslc_string' ),
+				'id' => 'css_button_2_box_shadow',
+				'std' => '',
+				'type' => 'box_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary',
+				'affect_on_change_rule' => 'box-shadow',
+				'section' => 'styling',
+				'tab' => __( 'Secondary Button', 'dslc_string' ),
+			),
+			array(
+				'label' => __( 'Box Shadow - Hover', 'dslc_string' ),
+				'id' => 'css_button_2_box_shadow_hover',
+				'std' => '',
+				'type' => 'box_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary:hover',
+				'affect_on_change_rule' => 'box-shadow',
+				'section' => 'styling',
 				'tab' => __( 'Secondary Button', 'dslc_string' ),
 			),
 
@@ -2264,7 +2329,7 @@ class DSLC_Info_Box extends DSLC_Module {
 					<?php if ( $options['button_pos'] == 'aside' && in_array( 'button', $elements ) ) : ?>
 						<div class="dslc-info-box-button dslc-info-box-button-aside">
 							<?php if ( isset( $options['button_link'] ) && ! empty( $options['button_link'] ) ) : ?>
-								<a href="<?php echo $options['button_link']; ?>" target="<?php echo $options['button_target']; ?>">
+								<a href="<?php echo $options['button_link']; ?>" target="<?php echo $options['button_target']; ?>" class="dslc-primary">
 									<?php if ( isset( $options['button_icon_id'] ) && $options['button_icon_id'] != '' ) : ?>
 										<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 									<?php endif; ?>
@@ -2331,7 +2396,7 @@ class DSLC_Info_Box extends DSLC_Module {
 							<?php if ( $options['button_pos'] == 'bellow' && in_array( 'button', $elements ) ) : ?>
 								<div class="dslc-info-box-button">
 									<?php if ( isset( $options['button_link'] ) && ! empty( $options['button_link'] ) ) : ?>
-										<a href="<?php echo $options['button_link']; ?>" target="<?php echo $options['button_target']; ?>">
+										<a href="<?php echo $options['button_link']; ?>" target="<?php echo $options['button_target']; ?>" class="dslc-primary">
 											<?php if ( isset( $options['button_icon_id'] ) && $options['button_icon_id'] != '' ) : ?>
 												<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 											<?php endif; ?>

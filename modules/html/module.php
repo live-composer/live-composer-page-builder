@@ -198,6 +198,16 @@ class DSLC_Html extends DSLC_Module {
 				'section' => 'styling',
 				'ext' => 'px',
 			),
+			array(
+				'label' => __( 'Box Shadow', 'dslc_string' ),
+				'id' => 'css_main_box_shadow',
+				'std' => '',
+				'type' => 'box_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-html-module-content',
+				'affect_on_change_rule' => 'box-shadow',
+				'section' => 'styling',
+			),
 
 			/**
 			 * Content
