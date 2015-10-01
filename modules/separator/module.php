@@ -251,6 +251,19 @@ class DSLC_Separator extends DSLC_Module {
 				'section' => 'styling',
 			),
 			array(
+				'label' => __( 'Width', 'dslc_string' ) ,
+				'id' => 'width',
+				'std' => '100',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-separator',
+				'affect_on_change_rule' => 'width',
+				'ext' => '%',
+				'min' => 1,
+				'max' => 100,
+				'section' => 'styling',
+			),
+			array(
 				'label' => __( 'Style', 'dslc_string' ) ,
 				'id' => 'style',
 				'std' => 'solid',
@@ -288,6 +301,16 @@ class DSLC_Separator extends DSLC_Module {
 				'max' => 50,
 				'section' => 'styling',
 			),
+			array(
+				'label' => __( 'Align', 'dslc_string' ),
+				'id' => 'separator_align',
+				'std' => 'center',
+				'type' => 'text_align',
+				'refresh_on_change' => true,
+				'affect_on_change_el' => '.dslc-separator',
+				'affect_on_change_rule' => 'text-align',
+				'section' => 'styling',
+      ),
 
 			/**
 			 * Responsive Tablet
@@ -382,7 +405,7 @@ class DSLC_Separator extends DSLC_Module {
 
 			?>
 			<div class="dslc-separator-wrapper">
-				<div class="dslc-separator dslc-separator-style-<?php echo $options['style']; ?>">
+				<div class="dslc-separator dslc-separator-style-<?php echo $options['style']; ?> dslc-separator-align-<?php echo $options['separator_align'];?>">
 					<?php if ( $options['style'] == 'invisible' && $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) : ?>
 						<div class="dslca-separator-empty"><span><?php _e( 'TRANSPARENT SEPARATOR', 'dslc_string' ); ?></span></div>
 					<?php endif; ?>

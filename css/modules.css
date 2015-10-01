@@ -850,6 +850,19 @@
 	.dslc-separator.dslc-separator-style-dotted {
 		border-bottom: 1px dotted #ededed;
 	}
+	.dslc-separator-align-left {
+    display: block;
+    float: left;
+  }
+  .dslc-separator-align-right {
+    display: block;
+    float: right;
+  }
+  .dslc-separator-align-center {
+    display: block;
+    margin: 0 auto;
+    float: none;
+  }
 
 /**
  * STAFF MODULE
