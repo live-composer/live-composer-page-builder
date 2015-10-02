@@ -10,7 +10,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 	function __construct() {
 
 		$this->module_id = 'DSLC_TP_Downloads_Button';
-		$this->module_title = __( 'Download Button', 'dslc_string' );
+		$this->module_title = __( 'Download Button', 'live-composer-page-builder' );
 		$this->module_icon = 'download-alt';
 		$this->module_category = 'single';
 
@@ -21,35 +21,35 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 		$dslc_options = array(
 			
 			array(
-				'label' => __( 'Show On', 'dslc_string' ),
+				'label' => __( 'Show On', 'live-composer-page-builder' ),
 				'id' => 'css_show_on',
 				'std' => 'desktop tablet phone',
 				'type' => 'checkbox',
 				'choices' => array(
 					array(
-						'label' => __( 'Desktop', 'dslc_string' ),
+						'label' => __( 'Desktop', 'live-composer-page-builder' ),
 						'value' => 'desktop'
 					),
 					array(
-						'label' => __( 'Tablet', 'dslc_string' ),
+						'label' => __( 'Tablet', 'live-composer-page-builder' ),
 						'value' => 'tablet'
 					),
 					array(
-						'label' => __( 'Phone', 'dslc_string' ),
+						'label' => __( 'Phone', 'live-composer-page-builder' ),
 						'value' => 'phone'
 					),
 				),
 			),
 			array(
-				'label' => __( 'Text', 'dslc_string' ),
+				'label' => __( 'Text', 'live-composer-page-builder' ),
 				'id' => 'button_text',
-				'std' => __( 'DOWNLOAD', 'dslc_string' ),
+				'std' => __( 'DOWNLOAD', 'live-composer-page-builder' ),
 				'type' => 'text',
 				'section' => 'styling',
-				'tab' => __( 'Button', 'dslc_string' ),
+				'tab' => __( 'Button', 'live-composer-page-builder' ),
 			),
 			array(
-				'label' => __( 'BG Color', 'dslc_string' ),
+				'label' => __( 'BG Color', 'live-composer-page-builder' ),
 				'id' => 'css_button_bg_color',
 				'std' => '#5890e5',
 				'type' => 'color',
@@ -59,7 +59,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'section' => 'styling',
 			),
 			array(
-				'label' => __( 'BG Color - Hover', 'dslc_string' ),
+				'label' => __( 'BG Color - Hover', 'live-composer-page-builder' ),
 				'id' => 'css_button_bg_color_hover',
 				'std' => '#4678c2',
 				'type' => 'color',
@@ -69,7 +69,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'section' => 'styling',
 			),
 			array(
-				'label' => __( 'Border Color', 'dslc_string' ),
+				'label' => __( 'Border Color', 'live-composer-page-builder' ),
 				'id' => 'css_button_border_color',
 				'std' => '',
 				'type' => 'color',
@@ -79,7 +79,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'section' => 'styling',
 			),
 			array(
-				'label' => __( 'Border Color - Hover', 'dslc_string' ),
+				'label' => __( 'Border Color - Hover', 'live-composer-page-builder' ),
 				'id' => 'css_button_border_color_hover',
 				'std' => '',
 				'type' => 'color',
@@ -89,7 +89,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'section' => 'styling',
 			),
 			array(
-				'label' => __( 'Border Width', 'dslc_string' ),
+				'label' => __( 'Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_button_border_width',
 				'std' => '0',
 				'type' => 'slider',
@@ -100,25 +100,25 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'ext' => 'px',
 			),
 			array(
-				'label' => __( 'Borders', 'dslc_string' ),
+				'label' => __( 'Borders', 'live-composer-page-builder' ),
 				'id' => 'css_button_border_trbl',
 				'std' => 'top right bottom left',
 				'type' => 'checkbox',
 				'choices' => array(
 					array(
-						'label' => __( 'Top', 'dslc_string' ),
+						'label' => __( 'Top', 'live-composer-page-builder' ),
 						'value' => 'top'
 					),
 					array(
-						'label' => __( 'Right', 'dslc_string' ),
+						'label' => __( 'Right', 'live-composer-page-builder' ),
 						'value' => 'right'
 					),
 					array(
-						'label' => __( 'Bottom', 'dslc_string' ),
+						'label' => __( 'Bottom', 'live-composer-page-builder' ),
 						'value' => 'bottom'
 					),
 					array(
-						'label' => __( 'Left', 'dslc_string' ),
+						'label' => __( 'Left', 'live-composer-page-builder' ),
 						'value' => 'left'
 					),
 				),
@@ -128,7 +128,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'section' => 'styling',
 			),
 			array(
-				'label' => __( 'Border Radius', 'dslc_string' ),
+				'label' => __( 'Border Radius', 'live-composer-page-builder' ),
 				'id' => 'css_button_border_radius',
 				'std' => '3',
 				'type' => 'slider',
@@ -139,7 +139,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'ext' => 'px'
 			),
 			array(
-				'label' => __( 'Margin Bottom', 'dslc_string' ),
+				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_button_margin_bottom',
 				'std' => '10',
 				'type' => 'slider',
@@ -150,7 +150,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'ext' => 'px'
 			),
 			array(
-				'label' => __( 'Minimum Height', 'dslc_string' ),
+				'label' => __( 'Minimum Height', 'live-composer-page-builder' ),
 				'id' => 'css_min_height',
 				'std' => '0',
 				'type' => 'slider',
@@ -164,7 +164,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'increment' => 5
 			),
 			array(
-				'label' => __( 'Padding Vertical', 'dslc_string' ),
+				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_button_padding_vertical',
 				'std' => '15',
 				'type' => 'slider',
@@ -180,7 +180,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( 'Color', 'dslc_string' ),
+				'label' => __( 'Color', 'live-composer-page-builder' ),
 				'id' => 'css_button_color',
 				'std' => '#ffffff',
 				'type' => 'color',
@@ -188,10 +188,10 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-download-button a',
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
-				'tab' => __( 'typography', 'dslc_string' ),
+				'tab' => __( 'typography', 'live-composer-page-builder' ),
 			),
 			array(
-				'label' => __( 'Color - Hover', 'dslc_string' ),
+				'label' => __( 'Color - Hover', 'live-composer-page-builder' ),
 				'id' => 'css_button_color_hover',
 				'std' => '',
 				'type' => 'color',
@@ -199,10 +199,10 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-download-button a:hover',
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
-				'tab' => __( 'typography', 'dslc_string' ),
+				'tab' => __( 'typography', 'live-composer-page-builder' ),
 			),
 			array(
-				'label' => __( 'Font Size', 'dslc_string' ),
+				'label' => __( 'Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_button_font_size',
 				'std' => '13',
 				'type' => 'slider',
@@ -210,11 +210,11 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-download-button a',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'styling',
-				'tab' => __( 'typography', 'dslc_string' ),
+				'tab' => __( 'typography', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
-				'label' => __( 'Font Weight', 'dslc_string' ),
+				'label' => __( 'Font Weight', 'live-composer-page-builder' ),
 				'id' => 'css_button_font_weight',
 				'std' => '700',
 				'type' => 'slider',
@@ -222,14 +222,14 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-download-button a',
 				'affect_on_change_rule' => 'font-weight',
 				'section' => 'styling',
-				'tab' => __( 'typography', 'dslc_string' ),
+				'tab' => __( 'typography', 'live-composer-page-builder' ),
 				'ext' => '',
 				'min' => 100,
 				'max' => 900,
 				'increment' => 100
 			),
 			array(
-				'label' => __( 'Font Family', 'dslc_string' ),
+				'label' => __( 'Font Family', 'live-composer-page-builder' ),
 				'id' => 'css_button_font_family',
 				'std' => 'Open Sans',
 				'type' => 'font',
@@ -237,7 +237,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-download-button a',
 				'affect_on_change_rule' => 'font-family',
 				'section' => 'styling',
-				'tab' => __( 'typography', 'dslc_string' ),
+				'tab' => __( 'typography', 'live-composer-page-builder' ),
 			),
 			
 			/**
@@ -245,15 +245,15 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( 'Icon', 'dslc_string' ),
+				'label' => __( 'Icon', 'live-composer-page-builder' ),
 				'id' => 'button_icon_id',
 				'std' => 'download-alt',
 				'type' => 'icon',
 				'section' => 'styling',
-				'tab' => __( 'icon', 'dslc_string' ),
+				'tab' => __( 'icon', 'live-composer-page-builder' ),
 			),
 			array(
-				'label' => __( 'Color', 'dslc_string' ),
+				'label' => __( 'Color', 'live-composer-page-builder' ),
 				'id' => 'css_button_icon_color',
 				'std' => '#9fbeeb',
 				'type' => 'color',
@@ -261,10 +261,10 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-download-button a .dslc-icon',
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
-				'tab' => __( 'icon', 'dslc_string' ),
+				'tab' => __( 'icon', 'live-composer-page-builder' ),
 			),
 			array(
-				'label' => __( 'Margin Right', 'dslc_string' ),
+				'label' => __( 'Margin Right', 'live-composer-page-builder' ),
 				'id' => 'css_button_icon_margin',
 				'std' => '10',
 				'type' => 'slider',
@@ -273,7 +273,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'icon', 'dslc_string' ),
+				'tab' => __( 'icon', 'live-composer-page-builder' ),
 			),
 
 			/**
@@ -281,25 +281,25 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( 'Responsive Styling', 'dslc_string' ),
+				'label' => __( 'Responsive Styling', 'live-composer-page-builder' ),
 				'id' => 'css_res_t',
 				'std' => 'disabled',
 				'type' => 'select',
 				'choices' => array(
 					array(
-						'label' => __( 'Disabled', 'dslc_string' ),
+						'label' => __( 'Disabled', 'live-composer-page-builder' ),
 						'value' => 'disabled'
 					),
 					array(
-						'label' => __( 'Enabled', 'dslc_string' ),
+						'label' => __( 'Enabled', 'live-composer-page-builder' ),
 						'value' => 'enabled'
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'dslc_string' ),
+				'tab' => __( 'tablet', 'live-composer-page-builder' ),
 			),
 			array(
-				'label' => __( 'Font Size', 'dslc_string' ),
+				'label' => __( 'Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_button_font_size',
 				'std' => '13',
 				'type' => 'slider',
@@ -307,11 +307,11 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-download-button a',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'dslc_string' ),
+				'tab' => __( 'tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
-				'label' => __( 'Margin Bottom', 'dslc_string' ),
+				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_button_margin_bottom',
 				'std' => '10',
 				'type' => 'slider',
@@ -319,11 +319,11 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-download-button',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'dslc_string' ),
+				'tab' => __( 'tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
-				'label' => __( 'Padding Vertical', 'dslc_string' ),
+				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_button_padding_vertical',
 				'std' => '15',
 				'type' => 'slider',
@@ -331,11 +331,11 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-download-button a',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'dslc_string' ),
+				'tab' => __( 'tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
-				'label' => __( 'Icon - Margin Right', 'dslc_string' ),
+				'label' => __( 'Icon - Margin Right', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_button_icon_margin',
 				'std' => '10',
 				'type' => 'slider',
@@ -343,7 +343,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-download-button a .dslc-icon',
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'dslc_string' ),
+				'tab' => __( 'tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 
@@ -352,25 +352,25 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( 'Responsive Styling', 'dslc_string' ),
+				'label' => __( 'Responsive Styling', 'live-composer-page-builder' ),
 				'id' => 'css_res_p',
 				'std' => 'disabled',
 				'type' => 'select',
 				'choices' => array(
 					array(
-						'label' => __( 'Disabled', 'dslc_string' ),
+						'label' => __( 'Disabled', 'live-composer-page-builder' ),
 						'value' => 'disabled'
 					),
 					array(
-						'label' => __( 'Enabled', 'dslc_string' ),
+						'label' => __( 'Enabled', 'live-composer-page-builder' ),
 						'value' => 'enabled'
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'dslc_string' ),
+				'tab' => __( 'phone', 'live-composer-page-builder' ),
 			),
 			array(
-				'label' => __( 'Font Size', 'dslc_string' ),
+				'label' => __( 'Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_button_font_size',
 				'std' => '13',
 				'type' => 'slider',
@@ -378,11 +378,11 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-download-button a',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'dslc_string' ),
+				'tab' => __( 'phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
-				'label' => __( 'Margin Bottom', 'dslc_string' ),
+				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_button_margin_bottom',
 				'std' => '10',
 				'type' => 'slider',
@@ -390,11 +390,11 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-download-button',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'dslc_string' ),
+				'tab' => __( 'phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
-				'label' => __( 'Padding Vertical', 'dslc_string' ),
+				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_button_padding_vertical',
 				'std' => '15',
 				'type' => 'slider',
@@ -402,11 +402,11 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-download-button a',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'dslc_string' ),
+				'tab' => __( 'phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
-				'label' => __( 'Icon - Margin Right', 'dslc_string' ),
+				'label' => __( 'Icon - Margin Right', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_button_icon_margin',
 				'std' => '10',
 				'type' => 'slider',
@@ -414,7 +414,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-download-button a .dslc-icon',
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'dslc_string' ),
+				'tab' => __( 'phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 

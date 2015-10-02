@@ -12,13 +12,13 @@ function dslc_perf_settings_init() {
 	global $dslc_var_modules;
 
 	$dslc_plugin_options['dslc_plugin_options_performance'] = array(
-		'title' => __( 'Performance', 'dslc_string' ),
+		'title' => __( 'Performance', 'live-composer-page-builder' ),
 		'options' => array(
 			'lc_gfont_subsets' => array(
-				'label' => __( 'Font Subsets', 'dslc_string' ),
+				'label' => __( 'Font Subsets', 'live-composer-page-builder' ),
 				'std' => array( 'latin', 'latin-ext', 'cyrillic', 'cyrillic-ext' ),
 				'type' => 'checkbox',
-				'descr' => __( 'Which font subsets should be loaded.', 'dslc_string' ),
+				'descr' => __( 'Which font subsets should be loaded.', 'live-composer-page-builder' ),
 				'choices' => array(
 					array(
 						'label' => 'Latin',

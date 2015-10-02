@@ -69,7 +69,7 @@ function dslc_ajax_add_modules_section( $atts ) {
 								</div>
 							</div>
 							<div class="dslca-no-content">
-								<span class="dslca-no-content-primary"><span class="dslca-icon dslc-icon-download-alt"></span><span class="dslca-no-content-help-text">' . __( 'Drop modules here', 'dslc_string' ) . '</span></span>
+								<span class="dslca-no-content-primary"><span class="dslca-icon dslc-icon-download-alt"></span><span class="dslca-no-content-help-text">' . __( 'Drop modules here', 'live-composer-page-builder' ) . '</span></span>
 							</div>
 							<div class="dslca-module-loading"><div class="dslca-module-loading-inner"></div></div>
 						</div>
@@ -141,7 +141,7 @@ function dslc_ajax_add_modules_area( $atts ) {
 				</div>
 			</div>
 			<div class="dslca-no-content">
-				<span class="dslca-no-content-primary"><span class="dslca-icon dslc-icon-download-alt"></span><span class="dslca-no-content-help-text">' . __( 'Drop modules here', 'dslc_string' ) . '</span></span>
+				<span class="dslca-no-content-primary"><span class="dslca-icon dslc-icon-download-alt"></span><span class="dslca-no-content-help-text">' . __( 'Drop modules here', 'live-composer-page-builder' ) . '</span></span>
 			</div>
 			<div class="dslca-module-loading"><div class="dslca-module-loading-inner"></div></div>
 		</div>';
@@ -382,13 +382,13 @@ function dslc_ajax_display_module_options( $atts ) {
 
 				if ( $section == 'functionality' ) {
 					$tabs['general_functionality'] = array(
-						'title' => __( 'General', 'dslc_string' ),
+						'title' => __( 'General', 'live-composer-page-builder' ),
 						'id' => 'general_functionality',
 						'section' => 'functionality'
 					);
 				} else {
 					$tabs['general_styling'] = array(
-						'title' => __( 'General', 'dslc_string' ),
+						'title' => __( 'General', 'live-composer-page-builder' ),
 						'id' => 'general_styling',
 						'section' => 'styling'
 					);
@@ -572,8 +572,8 @@ function dslc_ajax_display_module_options( $atts ) {
 
 					<?php elseif ( $module_option['type'] == 'image' ) : ?>
 
-						<span class="dslca-module-edit-field-image-add-hook" <?php if ( $curr_value != '' ) echo 'style="display: none;"'; ?>><span class="dslca-icon dslc-icon-cloud-upload"></span><?php _e( 'Upload Image', 'dslc_string' ); ?></span>
-						<span class="dslca-module-edit-field-image-remove-hook" <?php if ( $curr_value == '' ) echo 'style="display: none;"'; ?>><span class="dslca-icon dslc-icon-remove"></span><?php _e( 'Remove Image', 'dslc_string' ); ?></span>
+						<span class="dslca-module-edit-field-image-add-hook" <?php if ( $curr_value != '' ) echo 'style="display: none;"'; ?>><span class="dslca-icon dslc-icon-cloud-upload"></span><?php _e( 'Upload Image', 'live-composer-page-builder' ); ?></span>
+						<span class="dslca-module-edit-field-image-remove-hook" <?php if ( $curr_value == '' ) echo 'style="display: none;"'; ?>><span class="dslca-icon dslc-icon-remove"></span><?php _e( 'Remove Image', 'live-composer-page-builder' ); ?></span>
 						<input type="hidden" class="dslca-module-edit-field dslca-module-edit-field-image" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" <?php echo $affect_on_change_append ?> />
 
 					<?php elseif ( $module_option['type'] == 'text_align' ) : ?>
@@ -626,23 +626,23 @@ function dslc_ajax_display_module_options( $atts ) {
 						<div class="dslca-module-edit-option-box-shadow-wrapper">
 
 							<div class="dslca-module-edit-option-box-shadow-single">								
-								<span class="dslca-module-edit-option-checkbox-hook"><?php _e( 'Inner', 'dslc_string' ); ?><span class="dslca-icon <?php if ( $box_shadow_inset_val == 'inset' ) echo 'dslc-icon-check'; else echo 'dslc-icon-check-empty'; ?>"></span></span>
+								<span class="dslca-module-edit-option-checkbox-hook"><?php _e( 'Inner', 'live-composer-page-builder' ); ?><span class="dslca-icon <?php if ( $box_shadow_inset_val == 'inset' ) echo 'dslc-icon-check'; else echo 'dslc-icon-check-empty'; ?>"></span></span>
 								<input type="checkbox" class="dslca-module-edit-field-checkbox dslca-module-edit-option-box-shadow-inset" <?php if (  $box_shadow_inset_val == 'inset' ) echo 'checked="checked"'; ?> />
 							</div>
 							<div class="dslca-module-edit-option-box-shadow-single">
-								<span><?php _e( 'Hor', 'dslc_string' ); ?></span><input class="dslca-module-edit-option-box-shadow-hor" step="0.1" type="number" value="<?php echo $box_shadow_hor_val; ?>" />
+								<span><?php _e( 'Hor', 'live-composer-page-builder' ); ?></span><input class="dslca-module-edit-option-box-shadow-hor" step="0.1" type="number" value="<?php echo $box_shadow_hor_val; ?>" />
 							</div>
 							<div class="dslca-module-edit-option-box-shadow-single">
-								<span><?php _e( 'Ver', 'dslc_string' ); ?></span><input class="dslca-module-edit-option-box-shadow-ver" step="0.1" type="number" value="<?php echo $box_shadow_ver_val; ?>" />
+								<span><?php _e( 'Ver', 'live-composer-page-builder' ); ?></span><input class="dslca-module-edit-option-box-shadow-ver" step="0.1" type="number" value="<?php echo $box_shadow_ver_val; ?>" />
 							</div>
 							<div class="dslca-module-edit-option-box-shadow-single">
-								<span><?php _e( 'Blur', 'dslc_string' ); ?></span><input class="dslca-module-edit-option-box-shadow-blur" step="0.1" type="number" value="<?php echo $box_shadow_blur_val; ?>" />
+								<span><?php _e( 'Blur', 'live-composer-page-builder' ); ?></span><input class="dslca-module-edit-option-box-shadow-blur" step="0.1" type="number" value="<?php echo $box_shadow_blur_val; ?>" />
 							</div>
 							<div class="dslca-module-edit-option-box-shadow-single">
-								<span><?php _e( 'Spread', 'dslc_string' ); ?></span><input class="dslca-module-edit-option-box-shadow-spread" step="0.1" type="number" value="<?php echo $box_shadow_spread_val; ?>" />
+								<span><?php _e( 'Spread', 'live-composer-page-builder' ); ?></span><input class="dslca-module-edit-option-box-shadow-spread" step="0.1" type="number" value="<?php echo $box_shadow_spread_val; ?>" />
 							</div>
 							<div class="dslca-module-edit-option-box-shadow-single">
-								<span><?php _e( 'Color', 'dslc_string' ); ?></span><input class="dslca-module-edit-option-box-shadow-color" type="text" value="<?php echo $box_shadow_color_val; ?>" />
+								<span><?php _e( 'Color', 'live-composer-page-builder' ); ?></span><input class="dslca-module-edit-option-box-shadow-color" type="text" value="<?php echo $box_shadow_color_val; ?>" />
 							</div>
 
 							<input type="hidden" class="dslca-module-edit-field dslca-module-edit-field-box-shadow" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" <?php echo $affect_on_change_append ?> />

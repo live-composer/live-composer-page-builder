@@ -28,7 +28,7 @@
 
 function dslc_load_translation() {
 
-	//load_plugin_textdomain( 'dslc_string', false, DS_LIVE_COMPOSER_DIR_NAME . '/lang/' );
+	//load_plugin_textdomain( 'live-composer-page-builder', false, DS_LIVE_COMPOSER_DIR_NAME . '/lang/' );
 
 } add_action( 'init', 'dslc_load_translation' );
 
@@ -255,11 +255,11 @@ function dslc_generate_custom_css( $options_arr, $settings, $restart = false ) {
 				if ( isset( $option_arr['section'] ) && $option_arr['section'] == 'responsive' ) {
 
 					switch ( $option_arr['tab'] ) {
-						case __( 'tablet', 'dslc_string' ):
+						case __( 'tablet', 'live-composer-page-builder' ):
 							if ( isset( $settings['css_res_t'] ) && $settings['css_res_t'] == 'enabled' ) 
 								$affect_el .= 'body.dslc-res-tablet #dslc-content #dslc-module-' . $settings['module_instance_id'] . ' ' . $affect_el_arr;		
 							break;
-						case __( 'phone', 'dslc_string' ):
+						case __( 'phone', 'live-composer-page-builder' ):
 							if ( isset( $settings['css_res_p'] ) && $settings['css_res_p'] == 'enabled' )
 								$affect_el .= 'body.dslc-res-phone #dslc-content #dslc-module-' . $settings['module_instance_id'] . ' ' . $affect_el_arr;		
 							break;

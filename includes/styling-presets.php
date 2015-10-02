@@ -80,13 +80,13 @@ function dslc_plugin_opts_presets() {
 	global $dslc_plugin_options;
 
 	$dslc_plugin_options['dslc_plugin_options_presets'] = array(
-		'title' => __( 'Styling Presets', 'dslc_string' ),
+		'title' => __( 'Styling Presets', 'live-composer-page-builder' ),
 		'options' => array(
 			'lc_styling_presets' => array(
-				'label' => __( 'Styling Presets', 'dslc_string' ),
+				'label' => __( 'Styling Presets', 'live-composer-page-builder' ),
 				'std' => 'both',
 				'type' => 'styling_presets',
-				'descr' => __( 'Here you can delete styling presets.', 'dslc_string' ),
+				'descr' => __( 'Here you can delete styling presets.', 'live-composer-page-builder' ),
 			),
 		)
 	);

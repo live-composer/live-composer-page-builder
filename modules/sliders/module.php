@@ -10,7 +10,7 @@ class DSLC_Sliders extends DSLC_Module {
 	function __construct() {
 
 		$this->module_id = 'DSLC_Sliders';
-		$this->module_title = __( 'Slider (Revolution)', 'dslc_string' );
+		$this->module_title = __( 'Slider (Revolution)', 'live-composer-page-builder' );
 		$this->module_icon = 'picture';
 		$this->module_category = 'elements';
 
@@ -25,7 +25,7 @@ class DSLC_Sliders extends DSLC_Module {
 		$slider_choices = array();
 
 		$slider_choices[] = array(
-			'label' => __( '-- Select --', 'dslc_string' ),
+			'label' => __( '-- Select --', 'live-composer-page-builder' ),
 			'value' => 'not_set',
 		);
 
@@ -42,27 +42,27 @@ class DSLC_Sliders extends DSLC_Module {
 
 		$dslc_options = array(
 			array(
-				'label' => __( 'Show On', 'dslc_string' ),
+				'label' => __( 'Show On', 'live-composer-page-builder' ),
 				'id' => 'css_show_on',
 				'std' => 'desktop tablet phone',
 				'type' => 'checkbox',
 				'choices' => array(
 					array(
-						'label' => __( 'Desktop', 'dslc_string' ),
+						'label' => __( 'Desktop', 'live-composer-page-builder' ),
 						'value' => 'desktop'
 					),
 					array(
-						'label' => __( 'Tablet', 'dslc_string' ),
+						'label' => __( 'Tablet', 'live-composer-page-builder' ),
 						'value' => 'tablet'
 					),
 					array(
-						'label' => __( 'Phone', 'dslc_string' ),
+						'label' => __( 'Phone', 'live-composer-page-builder' ),
 						'value' => 'phone'
 					),
 				),
 			),
 			array(
-				'label' => __( 'Revolution Slider', 'dslc_string' ),
+				'label' => __( 'Revolution Slider', 'live-composer-page-builder' ),
 				'id' => 'slider',
 				'std' => 'not_set',
 				'type' => 'select',
@@ -93,7 +93,7 @@ class DSLC_Sliders extends DSLC_Module {
 			if ( ! isset( $options['slider'] ) || $options['slider'] == 'not_set' ) {
 
 				if ( $dslc_is_admin ) :
-					?><div class="dslc-notification dslc-red"><?php _e( 'Click the cog icon on the right of this box to choose which slider to show.', 'dslc_string' ); ?> <span class="dslca-module-edit-hook dslc-icon dslc-icon-cog"></span></span></div><?php
+					?><div class="dslc-notification dslc-red"><?php _e( 'Click the cog icon on the right of this box to choose which slider to show.', 'live-composer-page-builder' ); ?> <span class="dslca-module-edit-hook dslc-icon dslc-icon-cog"></span></span></div><?php
 				endif;
 
 			} else {
