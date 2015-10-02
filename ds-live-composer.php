@@ -9,6 +9,7 @@
 	License: GPL2
 	License URI: https://www.gnu.org/licenses/gpl-2.0.html
 	Text Domain: live-composer-page-builder
+	Domain Path: /lang
 */
 
 	/**
