@@ -7,7 +7,6 @@
  * - dslc_get_modules ( Returns an array of active modules )
  * - dslc_sort_alphabetically ( Sorts an array alphabetically )
  * - dslc_display_modules ( Displays a list of active modules )
- * - dslc_get_templates ( Returns an array of active templates )
  * - dslc_display_templates ( Displays a list of active templates )
  * - dslc_filter_content ( Filters the_content() to show composer output )
  * - dslc_module_front ( Returns front-end output of a specific module )
@@ -480,31 +479,6 @@ function dslc_display_modules() {
 		echo 'No Modules Found.';
 
 	}
-
-}
-
-/**
- * Returns array of active templates
- *
- * @since 1.0
- *
- * @return array Multidimensional array of LC templates. Bool false if none
- *               One array per each template. Key of array is template ID
- *               Each template has array parameters title|id|code|section
- */
-function dslc_get_templates() {
-
-	// Global var holding templates information
-	global $dslc_var_templates;
-
-	// Filter to hook into
-	$dslc_var_templates = apply_filters( 'dslc_get_templates', $dslc_var_templates );
-
-	// Return templates ( false if none )
-	if ( empty( $dslc_var_templates ) )
-		return false;
-	else
-		return $dslc_var_templates;
 
 }
 

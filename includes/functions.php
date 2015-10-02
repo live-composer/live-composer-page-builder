@@ -18,6 +18,7 @@
  * - dslc_save_preset ( Save a preset )
  * - dslc_is_editor_active ( Check if the editor is currently active )
  * - dslc_get_code ( Gets LC code of a specific post/page )
+ * - dslc_get_templates ( Returns an array of active templates )
  */
 
 /**
@@ -710,5 +711,30 @@ function dslc_get_code( $postID = false, $draft = true ) {
 
 	// Pass it back
 	return $code;
+
+}
+
+/**
+ * Returns array of active templates
+ *
+ * @since 1.0
+ *
+ * @return array Multidimensional array of LC templates. Bool false if none
+ *               One array per each template. Key of array is template ID
+ *               Each template has array parameters title|id|code|section
+ */
+function dslc_get_templates() {
+
+	// Global var holding templates information
+	global $dslc_var_templates;
+
+	// Filter to hook into
+	$dslc_var_templates = apply_filters( 'dslc_get_templates', $dslc_var_templates );
+
+	// Return templates ( false if none )
+	if ( empty( $dslc_var_templates ) )
+		return false;
+	else
+		return $dslc_var_templates;
 
 }
