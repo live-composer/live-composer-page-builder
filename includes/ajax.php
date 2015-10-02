@@ -819,7 +819,7 @@ function dslc_ajax_load_template( $atts ) {
 	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
 		// The array that holds active templates
-		global $dslc_var_templates;
+		$templates = dslc_get_templates();
 
 		// The array we'll pass back to the AJAX call
 		$response = array();
@@ -828,7 +828,7 @@ function dslc_ajax_load_template( $atts ) {
 		$template_id = $_POST['dslc_template_id'];
 
 		// The code of the template to load
-		$template_code = $dslc_var_templates[$template_id]['code'];
+		$template_code = $templates[$template_id]['code'];
 
 		// Apply for new ID
 		$template_code = str_replace( '[dslc_module]', '[dslc_module give_new_id="true"]', $template_code);
