@@ -6,6 +6,8 @@
 	Author: Dany Duchaine and Slobodan Kustrimovic
 	Version: 1.0.3
 	Author URI: http://livecomposerplugin.com
+	License: GPL2
+	License URI: https://www.gnu.org/licenses/gpl-2.0.html
 	Text Domain: live-composer-page-builder
 */
 
