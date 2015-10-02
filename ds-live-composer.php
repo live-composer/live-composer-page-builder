@@ -6,6 +6,7 @@
 	Author: Dany Duchaine and Slobodan Kustrimovic
 	Version: 1.0.3
 	Author URI: http://livecomposerplugin.com
+	Text Domain: live-composer-page-builder
 */
 
 	/**
