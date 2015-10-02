@@ -29,8 +29,6 @@
 	define( 'DSLC_ST_FRAMEWORK_ABS', DS_LIVE_COMPOSER_ABS . '/includes/single-templates-framework' );
 	define( 'DSLC_ROW_SYSTEM_ABS', DS_LIVE_COMPOSER_ABS . '/includes/row-system' );
 
-	load_plugin_textdomain( 'live-composer-page-builder', false, DS_LIVE_COMPOSER_DIR_NAME . '/lang/' );
-
 	$dslc_var_image_option_bckp = array();
 	$dslc_var_row_options = array();
 

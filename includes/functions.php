@@ -23,14 +23,14 @@
 /**
  * Load text domain
  *
- * @since 1.0
+ * @since 1.0.3
  */
 
 function dslc_load_translation() {
 
-	//load_plugin_textdomain( 'live-composer-page-builder', false, DS_LIVE_COMPOSER_DIR_NAME . '/lang/' );
+	load_plugin_textdomain( 'live-composer-page-builder', false, DS_LIVE_COMPOSER_DIR_NAME . '/lang/' );
 
-} add_action( 'init', 'dslc_load_translation' );
+} add_action( 'plugins_loaded', 'dslc_load_translation' );
 
 /**
  * Registers default and custom modules
