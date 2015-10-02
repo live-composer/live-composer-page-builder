@@ -20,6 +20,7 @@
  * - dslc_get_code ( Gets LC code of a specific post/page )
  * - dslc_get_templates ( Returns an array of active templates )
  * - dslc_set_default_templates ( Set default templates )
+ * - dslc_set_user_templates ( Set user templates )
  */
 
 /**
@@ -820,3 +821,23 @@ function dslc_set_default_templates( $templates ) {
 	return $templates;
 
 } add_filter( 'dslc_get_templates', 'dslc_set_default_templates', 1 );
+
+/**
+ * Set user templates
+ *
+ * @since 1.0.3
+ */
+function dslc_set_user_templates( $templates ) {
+
+	// Get user templates
+	$user_templates = maybe_unserialize ( get_option( 'dslc_templates' ) );
+
+	// If there are any, merge them with the templates array
+	if ( ! empty ( $user_templates ) && is_array( $user_templates ) ) {
+		$templates = array_merge ( $templates, $user_templates );
+	}
+
+	// Pass it back
+	return $templates;
+
+} add_filter( 'dslc_get_templates', 'dslc_set_user_templates', 1 );
