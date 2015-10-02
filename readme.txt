@@ -3,7 +3,7 @@ Contributors: LiveComposer
 Tags: page builder, page, modules, front-end, builder, live, composer
 Requires at least: 3.9
 Tested up to: 4.3.1
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv3
 
 Live Composer is a front-end WordPress page builder plugin. But with the free "blank" theme you can build a whole website.
@@ -45,20 +45,13 @@ In most of the cases this is because the homepage is not a real WordPress page, 
 
 == Changelog ==
 
+= 1.0.2 - September 30th 2015 =
+
+[Check out the blog post about 1.0.2 release](http://livecomposerplugin.com/blog/version-1-0-2-released/)
+
 = 1.0.1 - September 15th 2015 =
 
-* Improvement: Social Module - Yelp added
-* Improvement: Option to change the position of the "activate editor" button ( left or right )
-* Improvement: Testimonial Module - Option to change line height of "Author Position" element added
-* Improvement: Loading animation added when adding a row ( while LC fetches a new row and outputs it )
-* Fix: Issue with CSS generation including "url()" as a background-image value and causing a slower page load
-* Fix: Masonry was not being initiated when a row is imported
-* Fix: Tutorial chapter one was broken, getting stuck at changing the padding value
-* Fix: Info Box Module - There was unwanted spacing below the icon
-* Fix: Image options causing vertical scrollbar to show in the options area
-* Fix: Header was going behind the WordPress admin bar ( the vertical bar at the top )
-* Fix: PHP undefined notice error when a module does not utilize presets functionality
-* Fix: Styling issue when a module option is an input field with the type number
+[Check out the blog post about 1.0.1 release](http://livecomposerplugin.com/blog/version-1-0-1-released/)
 
 = 1.0 - September 10th 2015 =
 
