@@ -17,7 +17,7 @@
 	 */
 
 	define( 'DS_LIVE_COMPOSER_VER', '1.0.3' );
-	define( 'DS_LIVE_COMPOSER_LOAD_MINIFIED', false );
+	define( 'DS_LIVE_COMPOSER_LOAD_MINIFIED', true );
 
 	define( 'DS_LIVE_COMPOSER_BASENAME', plugin_basename( __FILE__ ) );
 	define( 'DS_LIVE_COMPOSER_URL', plugin_dir_url( __FILE__ ) );
