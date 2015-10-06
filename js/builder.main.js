@@ -874,16 +874,6 @@ var dslcDebug = false;
 				else 
 					jQuery('.dslca-module-manage', this).removeClass('dslca-horizontal');
 
-				jQuery('.dslca-module-manage-inner', this).stop().animate({
-					top: 0
-				}, 300, function(){
-					jQuery(this).closest('.dslca-module-manage').css({ overflow : 'visible' });
-				});
-
-				jQuery('.dslca-wysiwyg-actions-edit-hook', this).stop().animate({
-					top: 0
-				}, 300);
-
 			}
 
 		}).on( 'mouseleave', '.dslca-drag-not-in-progress .dslc-module-front', function(e){
@@ -892,14 +882,6 @@ var dslcDebug = false;
 
 				jQuery(this).find('.dslca-change-width-module-options').hide();
 				jQuery(this).find('.dslca-module-manage').css({ overflow : 'hidden' });
-
-				jQuery('.dslca-module-manage-inner', this).stop().animate({
-					top: -50
-				}, 300);
-
-				jQuery('.dslca-wysiwyg-actions-edit-hook', this).stop().animate({
-					top: -50
-				}, 300);
 
 			}
 
@@ -920,12 +902,6 @@ var dslcDebug = false;
 				else 
 					jQuery('.dslca-modules-area-manage', this).removeClass('dslca-horizontal');
 
-				jQuery('.dslca-modules-area-manage-inner', this).stop().animate({
-					left: '0%'
-				}, 300, function(){
-					jQuery( '.dslca-modules-area-manage', _this ).css({ overflow : 'visible' });
-				});
-
 			}
 
 		}).on( 'mouseleave', '.dslca-drag-not-in-progress .dslc-modules-area', function(e){
@@ -936,38 +912,9 @@ var dslcDebug = false;
 
 				jQuery('#dslc-header').removeClass('dslca-header-low-z-index');
 
-				jQuery( '.dslca-modules-area-manage', _this ).css({ overflow : 'hidden' });
-				jQuery('.dslca-modules-area-manage-inner', this).stop().animate({
-					left: '100%'
-				}, 300);
-
 			}
 
 		});	
-
-		// Mouse Enter/Leave - Modules Section
-
-		jQuery(document).on( 'mouseenter', '.dslca-drag-not-in-progress .dslc-modules-section', function(e){
-
-			 if ( ! jQuery('body').hasClass('dslca-composer-hidden' ) ) {
-
-				jQuery('.dslca-modules-section-manage-inner', this).stop().animate({
-					opacity : 1
-				}, 300);
-
-			}
-
-		}).on( 'mouseleave', '.dslca-drag-not-in-progress .dslc-modules-section', function(e){
-
-			if ( ! jQuery('body').hasClass('dslca-composer-hidden' ) ) {
-
-				jQuery('.dslca-modules-section-manage-inner', this).stop().animate({
-					opacity : 0
-				}, 300);
-
-			}
-
-		});
 
 	}
 

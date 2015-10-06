@@ -3125,3 +3125,57 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 	margin-right: 15px;
 	margin-top: 15px;
 }
+
+/**
+ * Row and Module Options on Hover
+ */
+/* Row Options */
+.dslca-drag-not-in-progress .dslc-modules-section .dslca-modules-section-manage-inner {
+  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+}
+
+.dslca-drag-not-in-progress .dslc-modules-section:hover .dslca-modules-section-manage-inner {
+  opacity: 1;
+}
+
+.dslca-composer-hidden .dslc-modules-section:hover .dslca-modules-section-manage-inner {
+  opacity: 0;
+}
+
+/* Module Options */
+.dslca-drag-not-in-progress .dslc-module-front .dslca-module-manage {
+  overflow: hidden;
+}
+
+.dslca-drag-not-in-progress .dslc-module-front:hover .dslca-module-manage {
+  overflow: visible;
+}
+
+.dslca-drag-not-in-progress .dslc-module-front .dslca-module-manage-inner, 
+.dslca-drag-not-in-progress .dslc-module-front .dslca-wysiwyg-actions-edit-hook {
+  top: -50;
+  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+}
+
+.dslca-drag-not-in-progress .dslc-module-front:hover .dslca-module-manage-inner, 
+.dslca-drag-not-in-progress .dslc-module-front:hover .dslca-wysiwyg-actions-edit-hook {
+  top: 0;
+}
+
+/* Column Options */
+.dslca-drag-not-in-progress .dslc-modules-area .dslca-modules-area-manage-inner {
+  left: 100%;
+  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+}
+.dslca-drag-not-in-progress .dslc-modules-area .dslca-modules-area-manage {
+  overflow: hidden;
+}
+.dslca-drag-not-in-progress .dslc-modules-area:hover .dslca-modules-area-manage-inner {
+  left: 0;
+}
+.dslca-drag-not-in-progress .dslc-modules-area:hover .dslca-modules-area-manage {
+  overflow: visible;
+}
