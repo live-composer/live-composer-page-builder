@@ -259,6 +259,10 @@ class DSLC_Blog extends DSLC_Module {
 						'label' => __( 'Button', 'live-composer-page-builder' ),
 						'value' => 'button',
 					),
+					array(
+						'label' => __( 'Social', 'dslc_string' ),
+						'value' => 'social',
+					),
 				),
 				'section' => 'styling'
 			),
@@ -1585,6 +1589,261 @@ class DSLC_Blog extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Button', 'live-composer-page-builder' ),
 			),
+			/**
+			 * Social
+			 */
+
+			array(
+				'label' => __( 'Align', 'dslc_string' ),
+				'id' => 'css_social_align',
+				'std' => 'center',
+				'type' => 'text_align',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-posts-social-share',
+				'affect_on_change_rule' => 'text-align',
+				'section' => 'styling',
+				'tab' => __( 'Social', 'dslc_string' ),
+			),
+			array(
+				'label' => __( 'BG Color', 'dslc_string' ),
+				'id' => 'css_social_bg_color',
+				'std' => 'rgb(79, 135, 219)',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-posts-social-share',
+				'affect_on_change_rule' => 'background-color',
+				'section' => 'styling',
+				'tab' => __( 'Social', 'dslc_string' ),
+			),
+			array(
+				'label' => __( 'Border Color', 'dslc_string' ),
+				'id' => 'css_social_border_color',
+				'std' => '',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-posts-social-share',
+				'affect_on_change_rule' => 'border-color',
+				'section' => 'styling',
+				'tab' => __( 'Social', 'dslc_string' ),
+			),
+			array(
+				'label' => __( 'Border Width', 'dslc_string' ),
+				'id' => 'css_social_border_width',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-posts-social-share',
+				'affect_on_change_rule' => 'border-width',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Social', 'dslc_string' ),
+			),
+			array(
+				'label' => __( 'Borders', 'dslc_string' ),
+				'id' => 'css_social_border_trbl',
+				'std' => 'top right bottom left',
+				'type' => 'checkbox',
+				'choices' => array(
+					array(
+						'label' => __( 'Top', 'dslc_string' ),
+						'value' => 'top'
+					),
+					array(
+						'label' => __( 'Right', 'dslc_string' ),
+						'value' => 'right'
+					),
+					array(
+						'label' => __( 'Bottom', 'dslc_string' ),
+						'value' => 'bottom'
+					),
+					array(
+						'label' => __( 'Left', 'dslc_string' ),
+						'value' => 'left'
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-posts-social-share',
+				'affect_on_change_rule' => 'border-style',
+				'section' => 'styling',
+				'tab' => __( 'Social', 'dslc_string' ),
+			),
+			array(
+				'label' => __( 'Border Radius - Top', 'dslc_string' ),
+				'id' => 'css_social_border_radius_top',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-posts-social-share',
+				'affect_on_change_rule' => 'border-top-left-radius,border-top-right-radius',
+				'section' => 'styling',
+				'tab' => __( 'Social', 'dslc_string' ),
+				'ext' => 'px'
+			),
+			array(
+				'label' => __( 'Border Radius - Bottom', 'dslc_string' ),
+				'id' => 'css_social_border_radius_bottom',
+				'std' => '3',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-posts-social-share',
+				'affect_on_change_rule' => 'border-bottom-left-radius,border-bottom-right-radius',
+				'section' => 'styling',
+				'tab' => __( 'Social', 'dslc_string' ),
+				'ext' => 'px'
+			),
+			array(
+				'label' => __( 'Padding Vertical', 'dslc_string' ),
+				'id' => 'css_social_padding_vertical',
+				'std' => '16',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-posts-social-share',
+				'affect_on_change_rule' => 'padding-top,padding-bottom',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Social', 'dslc_string' ),
+			),
+			array(
+				'label' => __( 'Padding Horizontal', 'dslc_string' ),
+				'id' => 'css_social_padding_horizontal',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-posts-social-share',
+				'affect_on_change_rule' => 'padding-left,padding-right',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Social', 'dslc_string' ),
+			),
+			array(
+				'label' => __( 'Icon - Color', 'dslc_string' ),
+				'id' => 'css_social_color',
+				'std' => '#ffffff',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-posts-social-share a .dslc-icon',
+				'affect_on_change_rule' => 'color',
+				'section' => 'styling',
+				'tab' => __( 'Social', 'dslc_string' ),
+			),
+			array(
+				'label' => __( 'Icon - Size', 'dslc_string' ),
+				'id' => 'css_social_font_size',
+				'std' => '14',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-posts-social-share a .dslc-icon',
+				'affect_on_change_rule' => 'font-size',
+				'section' => 'styling',
+				'tab' => __( 'Social', 'dslc_string' ),
+				'ext' => 'px'
+			),
+			array(
+				'label' => __( 'Icon - Margin Right', 'dslc_string' ),
+				'id' => 'css_social_icon_mright',
+				'std' => '8',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-posts-social-share a .dslc-icon',
+				'affect_on_change_rule' => 'margin-right',
+				'section' => 'styling',
+				'tab' => __( 'Social', 'dslc_string' ),
+				'ext' => 'px'
+			),
+			array(
+				'label' => __( 'Count - Border Color', 'dslc_string' ),
+				'id' => 'css_social_count_border_color',
+				'std' => 'rgba(255, 255, 255, 0.38)',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-posts-social-share-count',
+				'affect_on_change_rule' => 'border-color',
+				'section' => 'styling',
+				'tab' => __( 'Social', 'dslc_string' ),
+			),
+			array(
+				'label' => __( 'Count - Border Width', 'dslc_string' ),
+				'id' => 'css_social_count_border_width',
+				'std' => '1',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-posts-social-share-count',
+				'affect_on_change_rule' => 'border-width',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Social', 'dslc_string' ),
+			),
+			array(
+				'label' => __( 'Count - Border Radius', 'dslc_string' ),
+				'id' => 'css_social_count_bradius',
+				'std' => '3',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-posts-social-share-count',
+				'affect_on_change_rule' => 'border-radius',
+				'section' => 'styling',
+				'tab' => __( 'Social', 'dslc_string' ),
+				'ext' => 'px'
+			),
+			array(
+				'label' => __( 'Count - Color', 'dslc_string' ),
+				'id' => 'css_social_count_color',
+				'std' => 'rgba(255, 255, 255, 0.71)',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-posts-social-share a',
+				'affect_on_change_rule' => 'color',
+				'section' => 'styling',
+				'tab' => __( 'Social', 'dslc_string' ),
+			),
+			array(
+				'label' => __( 'Count - Font Size', 'dslc_string' ),
+				'id' => 'css_social_count_font_size',
+				'std' => '13',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-posts-social-share a',
+				'affect_on_change_rule' => 'font-size',
+				'section' => 'styling',
+				'tab' => __( 'Social', 'dslc_string' ),
+				'ext' => 'px'
+			),
+			array(
+				'label' => __( 'Count - Margin Right', 'dslc_string' ),
+				'id' => 'css_social_count_mright',
+				'std' => '12',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-posts-social-share a',
+				'affect_on_change_rule' => 'margin-right',
+				'section' => 'styling',
+				'tab' => __( 'Social', 'dslc_string' ),
+				'ext' => 'px'
+			),
+			array(
+				'label' => __( 'Count - Padding Vertical', 'dslc_string' ),
+				'id' => 'css_social_count_padding_vertical',
+				'std' => '3',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-posts-social-share-count',
+				'affect_on_change_rule' => 'padding-top,padding-bottom',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Social', 'dslc_string' ),
+			),
+			array(
+				'label' => __( 'Count - Padding Horizontal', 'dslc_string' ),
+				'id' => 'css_social_count_padding_horizontal',
+				'std' => '8',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-posts-social-share-count',
+				'affect_on_change_rule' => 'padding-left,padding-right',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Social', 'dslc_string' ),
+			),
 
 			/**
 			 * Responsive Tablet
@@ -2762,6 +3021,24 @@ class DSLC_Blog extends DSLC_Module {
 										<?php endif; ?>
 
 									</div><!-- .blog-post-main -->
+
+									<?php if ( $post_elements == 'all' || in_array( 'social', $post_elements ) ) : ?>
+
+										<?php
+											$share_info = dslc_get_social_count();
+										?>
+
+										<div class="dslc-posts-social-share">
+
+											<?php $post_img = wp_get_attachment_url( get_post_thumbnail_id( get_the_ID() ) ); ?>
+											<?php $share_status = esc_attr( get_the_title( get_the_ID() ) . ' ' . get_permalink( get_the_ID() ) ); ?>
+											<a href="#" target="_blank" onClick="return dslc_social_share(400, 300, 'http://www.facebook.com/share.php?u=<?php echo get_permalink( get_the_ID() ); ?>')"><span class="dslc-icon dslc-icon-facebook"></span><span class="dslc-posts-social-share-count"><?php if ( $share_info ) { echo esc_html( $share_info['fb'] ); } ?></span></a>
+											<a href="#" onClick="return dslc_social_share(400, 300, 'https://twitter.com/home?status=<?php echo $share_status; ?>')" ><span class="dslc-icon dslc-icon-twitter"></span><span class="dslc-posts-social-share-count"><?php if ( $share_info ) { echo esc_html( $share_info['twitter'] ); } ?></span></a>
+											<a href="#" onClick="return dslc_social_share(400, 300, 'https://pinterest.com/pin/create/button/?url=<?php the_permalink(); ?>&amp;media=<?php echo esc_html( $post_img ); ?>&amp;description=<?php echo esc_attr( get_the_excerpt() ); ?>')"><span class="dslc-icon dslc-icon-pinterest"></span><span class="dslc-posts-social-share-count"><?php if ( $share_info ) { echo esc_html( $share_info['pinterest'] ); } ?></span></a>
+
+										</div><!-- .dslc-posts-social-share -->
+
+									<?php endif; ?>
 
 								<?php endif; ?>
 

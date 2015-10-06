@@ -2061,3 +2061,16 @@ body.dslc-res-tablet .dslc-post-main-inner-link-cover,
 body.dslc-res-phone .dslc-post-main-inner-link-cover {
 	display: block;
 }
+
+.dslc-posts-social-share {
+	line-height: 1;
+}
+	
+	.dslc-posts-social-share a:last-child {
+		margin-right: 0 !important;
+	}
+
+	.dslc-posts-social-share-count {
+		display: inline-block;
+		border-style: solid;
+	}
