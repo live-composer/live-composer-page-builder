@@ -5,6 +5,7 @@
  *
  * class DSLC_Aq_Resize ( Thumbnail generation class )
  * dslc_aq_resize ( Instantiate DSLC_Aq_Resize class )
+ * dslc_get_social_count ( Returns amount of social shares a page has ) 
  */
 
 
@@ -198,5 +199,88 @@ if ( ! function_exists('dslc_aq_resize') ) {
 		$aq_resize = DSLC_Aq_Resize::getInstance();
 		return $aq_resize->process( $url, $width, $height, $crop, $single, $upscale );
 	}
+
+}
+
+/**
+ * Returns amount of social shares a page has
+ *
+ * @since 1.0.4
+ *
+ * @param int     $post_ID ID of the post/page. Default false, uses get_the_ID()
+ * @param int     $refresh_in Amount of seconds for cached info to be stored. Default 3600.
+ * @return array  Array containing amount of shares. Keys are fb, twitter and pinterest. 
+ */
+function dslc_get_social_count( $post_ID = false, $refresh_in = 3600 ) {
+
+	// If ID nt supplied use current
+	if ( $post_ID = false ) {
+		$post_ID = get_the_ID();
+	}
+
+	// Transient
+	$transient_id = 'dslc_social_shares_count_' . $post_ID;
+
+	if ( false === ( $share_info = get_transient( $transient_id ) ) ) {
+
+		$the_url = get_permalink( $post_ID );
+
+		// Defaults
+		$share_info = array(
+			'fb' => 0,
+			'twitter' => 0,
+			'pinterest' => 0
+		);
+
+		// Facebook
+		$fb_get = wp_remote_get( 'http://graph.facebook.com/?id=' . $the_url );
+		$fb_count = 0;
+		if ( is_array( $fb_get ) ) {
+			$fb_get_body = json_decode( $fb_get['body'] );
+			if ( isset( $fb_get_body->shares ) ) {
+				$fb_count = $fb_get_body->shares;
+			} else {
+				$fb_count = 0;
+			}
+			$share_info['fb'] = $fb_count;
+		}
+
+		// Twitter									
+		$twitter_get = wp_remote_get( 'http://cdn.api.twitter.com/1/urls/count.json?url=' . $the_url );
+		$twitter_count = 0;
+		if ( is_array( $twitter_get ) ) {
+			$twitter_get_body = json_decode( $twitter_get['body'] );
+			if ( isset( $twitter_get_body->count ) ) {
+				$twitter_count = $twitter_get_body->count;
+			} else {
+				$twitter_count = 0;
+			}
+			$share_info['twitter'] = $twitter_count;
+		}
+
+		// Pinterest 
+		$pinterest_get = wp_remote_get( 'http://api.pinterest.com/v1/urls/count.json?url=' . $the_url );
+		$pinterest_count = 0;
+		if ( is_array( $pinterest_get ) ) {
+			$pinterest_get_body = json_decode( preg_replace('/^receiveCount\((.*)\)$/', "\\1", $pinterest_get['body'] ) );
+			if ( isset( $pinterest_get_body->count ) ) {
+				$pinterest_count = $pinterest_get_body->count;
+			} else {
+				$pinterest_count = 0;
+			}
+			$share_info['pinterest'] = $pinterest_count;
+		}
+
+		// Check if there is data
+		if ( isset( $share_info ) ) {
+			set_transient( $transient_id, $share_info, $refresh_in );											
+		} else {
+			$share_info = false;
+		}
+
+	}
+
+	// Pass the data back
+	return $share_info;
 
 }
