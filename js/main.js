@@ -346,8 +346,10 @@ function dslc_parallax() {
 
 	jQuery('.dslc-init-parallax').each(function(){
 
-		var dslcSpeed = 4;
-		var dslcPos = "0px " + ( -1 * ( window.pageYOffset - jQuery(this).offset().top ) / dslcSpeed ) + "px";
+		var dslcSpeed = 4,
+		bgPosition = jQuery(this).css( 'background-position' ).split( ' ' ),
+		bgPositionHor = bgPosition[0],
+		dslcPos = bgPositionHor + " " + ( -1 * ( window.pageYOffset - jQuery(this).offset().top ) / dslcSpeed ) + "px";
 
 		jQuery(this).css({ backgroundPosition : dslcPos });
 
@@ -356,8 +358,11 @@ function dslc_parallax() {
 	window.onscroll = function() {
 		jQuery('.dslc-init-parallax').each(function(){
 
-			var dslcSpeed = 4;
-			var dslcPos = "0px " + ( -1 * ( window.pageYOffset - jQuery(this).offset().top ) / dslcSpeed ) + "px";
+			var dslcSpeed = 4,
+			bgPosition = jQuery(this).css( 'background-position' ).split( ' ' ),
+			bgPositionHor = bgPosition[0],
+			dslcPos = bgPositionHor + " " + ( -1 * ( window.pageYOffset - jQuery(this).offset().top ) / dslcSpeed ) + "px";
+
 			jQuery(this).css({ backgroundPosition : dslcPos });
 
 		});
