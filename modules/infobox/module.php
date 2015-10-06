@@ -1627,7 +1627,7 @@ class DSLC_Info_Box extends DSLC_Module {
 			array(
 				'label' => __( 'Content', 'live-composer-page-builder' ),
 				'id' => 'content',
-				'std' => 'This is just placeholder text. Click here to edit it.',
+				'std' => 'This is just placeholder text. Hover over the module and click "Edit Content" to change it.',
 				'type' => 'textarea',
 				'visibility' => 'hidden',
 				'section' => 'styling'
