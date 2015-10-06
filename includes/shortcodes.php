@@ -92,3 +92,32 @@ function dslc_sc_user_avatar( $atts, $content ) {
 	}
 
 } add_shortcode( 'dslc_user_avatar', 'dslc_sc_user_avatar' ); 
+
+/**
+ * Category Description
+ *
+ * @since 1.0.4
+ */
+function dslc_sc_category_description( $atts, $content ) {
+
+	extract( shortcode_atts( array(
+		'category_ID' => false,
+	), $atts));
+
+	// If category ID not supplied, get current category
+	if ( ! $category_ID ) {
+		$category_ID = get_query_var('cat');
+	}
+
+	// Get category description
+	$category_description = category_description( $category_ID );
+
+	// Placeholder description 
+	if ( ! is_category() && empty( $category_description ) && dslc_is_editor_active( 'access' ) ) {
+		$category_description = __( 'Category description will be shown here.', 'live-composer-page-builder' );
+	}
+
+	// Return category description
+	return $category_description;
+
+} add_shortcode( 'dslc_category_description', 'dslc_sc_category_description' ); 
