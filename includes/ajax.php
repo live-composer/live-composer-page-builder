@@ -52,9 +52,9 @@ function dslc_ajax_add_modules_section( $atts ) {
 						<div class="dslc-modules-area-inner">
 							<div class="dslca-modules-area-manage">
 								<div class="dslca-modules-area-manage-inner">
-									<span class="dslca-manage-action dslca-copy-modules-area-hook"><span class="dslca-icon dslc-icon-copy"></span></span>
-									<span class="dslca-manage-action dslca-move-modules-area-hook"><span class="dslca-icon dslc-icon-move"></span></span>
-									<span class="dslca-manage-action dslca-change-width-modules-area-hook">
+									<a href="#" title="Duplicate" class="dslca-manage-action dslca-copy-modules-area-hook"><span class="dslca-icon dslc-icon-copy"></span></a>
+									<a href="#" title="Drag and Move" class="dslca-manage-action dslca-move-modules-area-hook"><span class="dslca-icon dslc-icon-move"></span></a>
+									<a href="#" title="Width" class="dslca-manage-action dslca-change-width-modules-area-hook">
 										<span class="dslca-icon dslc-icon-columns"></span>
 										<div class="dslca-change-width-modules-area-options">
 											<span data-size="1">1/12</span><span data-size="2">2/12</span>
@@ -64,8 +64,8 @@ function dslc_ajax_add_modules_section( $atts ) {
 											<span data-size="9">9/12</span><span data-size="10">10/12</span>
 											<span data-size="11">11/12</span><span data-size="12">12/12</span>
 										</div>
-									</span>
-									<span class="dslca-manage-action dslca-delete-modules-area-hook"><span class="dslca-icon dslc-icon-remove"></span></span>
+									</a>
+									<a href="#" title="Delete" class="dslca-manage-action dslca-delete-modules-area-hook"><span class="dslca-icon dslc-icon-remove"></span></a>
 								</div>
 							</div>
 							<div class="dslca-no-content">
@@ -77,11 +77,11 @@ function dslc_ajax_add_modules_section( $atts ) {
 				</div><!-- .dslc-module-section-inner -->
 				<div class="dslca-modules-section-manage">
 					<div class="dslca-modules-section-manage-inner">
-						<span class="dslca-manage-action dslca-edit-modules-section-hook"><span class="dslca-icon dslc-icon-cog"></span></span>
-						<span class="dslca-manage-action dslca-copy-modules-section-hook"><span class="dslca-icon dslc-icon-copy"></span></span>
-						<span class="dslca-manage-action dslca-move-modules-section-hook"><span class="dslca-icon dslc-icon-move"></span></span>
-						<span class="dslca-manage-action dslca-export-modules-section-hook"><span class="dslca-icon dslc-icon-upload-alt"></span></span>
-						<span class="dslca-manage-action dslca-delete-modules-section-hook"><span class="dslca-icon dslc-icon-remove"></span></span>
+						<a href="#" title="Row Options" class="dslca-manage-action dslca-edit-modules-section-hook"><span class="dslca-icon dslc-icon-cog"></span></a>
+						<a href="#" title="Duplicate Row" class="dslca-manage-action dslca-copy-modules-section-hook"><span class="dslca-icon dslc-icon-copy"></span></a>
+						<a href="#" title="Drag and Move Row" class="dslca-manage-action dslca-move-modules-section-hook"><span class="dslca-icon dslc-icon-move"></span></a>
+						<a href="#" title="Export Row" class="dslca-manage-action dslca-export-modules-section-hook"><span class="dslca-icon dslc-icon-upload-alt"></span></a>
+						<a href="#" title="Delete Row" class="dslca-manage-action dslca-delete-modules-section-hook"><span class="dslca-icon dslc-icon-remove"></span></a>
 					</div>
 				</div>
 				<div class="dslca-modules-section-settings">' . dslc_row_get_options_fields() . '</div><!-- .dslca-module-section-settings -->
@@ -124,9 +124,9 @@ function dslc_ajax_add_modules_area( $atts ) {
 		$output = '<div class="dslc-modules-area dslc-col dslc-12-col" data-size="12">
 			<div class="dslca-modules-area-manage">
 				<div class="dslca-modules-area-manage-inner">
-					<span class="dslca-manage-action dslca-copy-modules-area-hook"><span class="dslca-icon dslc-icon-copy"></span></span>
-					<span class="dslca-manage-action dslca-move-modules-area-hook"><span class="dslca-icon dslc-icon-move"></span></span>
-					<span class="dslca-manage-action dslca-change-width-modules-area-hook">
+					<a href="#" title="Duplicate Column" class="dslca-manage-action dslca-copy-modules-area-hook"><span class="dslca-icon dslc-icon-copy"></span></a>
+					<a href="#" title="Drag and Move Column" class="dslca-manage-action dslca-move-modules-area-hook"><span class="dslca-icon dslc-icon-move"></span></a>
+					<a href="#" title="Column Width" class="dslca-manage-action dslca-change-width-modules-area-hook">
 						<span class="dslca-icon dslc-icon-columns"></span>
 						<div class="dslca-change-width-modules-area-options">
 							<span data-size="1">1/12</span><span data-size="2">2/12</span>
@@ -136,8 +136,8 @@ function dslc_ajax_add_modules_area( $atts ) {
 							<span data-size="9">9/12</span><span data-size="10">10/12</span>
 							<span data-size="11">11/12</span><span data-size="12">12/12</span>
 						</div>
-					</span>
-					<span class="dslca-manage-action dslca-delete-modules-area-hook"><span class="dslca-icon dslc-icon-remove"></span></span>
+					</a>
+					<a href="#" title="Delete Column" class="dslca-manage-action dslca-delete-modules-area-hook"><span class="dslca-icon dslc-icon-remove"></span></a>
 				</div>
 			</div>
 			<div class="dslca-no-content">
