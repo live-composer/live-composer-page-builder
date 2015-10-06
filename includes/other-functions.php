@@ -3,22 +3,20 @@
 /**
  * Table of Contents
  *
- * class DSLC_Aq_Resize ( Thumbnail generation class )
- * dslc_aq_resize ( Instantiate DSLC_Aq_Resize class )
+ * class DSLC_Aq_Resize ( Image resizing class )
+ * dslc_aq_resize ( Resize an image using DSLC_Aq_Resize Class )
  * dslc_get_social_count ( Returns amount of social shares a page has ) 
- */
-
-
-/**
- * Thumbnail generation class
- *
- * @since 1.0
  */
 
 if( ! class_exists('DSLC_Aq_Resize') ) {
 
-	class DSLC_Aq_Resize
-	{
+	/**
+	 * Image resizing class
+	 *
+	 * @since 1.0
+	 */
+	class DSLC_Aq_Resize {
+
 		/**
 		 * The singleton instance
 		 */
@@ -183,18 +181,28 @@ if( ! class_exists('DSLC_Aq_Resize') ) {
 
 			return array( 0, 0, (int) $s_x, (int) $s_y, (int) $new_w, (int) $new_h, (int) $crop_w, (int) $crop_h );
 		}
+
 	}
+	
 }
 
 
-/**
- * Instantiate DSLC_Aq_Resize class
- *
- * @since 1.0
- */
-
 if ( ! function_exists('dslc_aq_resize') ) {
 
+	/**
+	 * Resize an image using DSLC_Aq_Resize Class
+	 *
+	 * @since 1.0
+	 *
+	 * @param string $url     The URL of the image
+	 * @param int    $width   The new width of the image
+	 * @param int    $height  The new height of the image
+	 * @param bool   $crop    To crop or not to crop, the question is now
+	 * @param bool   $single  If true only returns the URL, if false returns array
+	 * @param bool   $upscale If image not big enough for new size should it upscale
+	 * @return mixed If $single is true return new image URL, if it is false return array
+	 *               Array contains 0 = URL, 1 = width, 2 = height
+	 */
 	function dslc_aq_resize( $url, $width = null, $height = null, $crop = null, $single = true, $upscale = false ) {
 		$aq_resize = DSLC_Aq_Resize::getInstance();
 		return $aq_resize->process( $url, $width, $height, $crop, $single, $upscale );
