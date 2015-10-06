@@ -17,6 +17,7 @@
  * - dslc_download_count_increment ( Increment download count )
  * - dslc_check_viewport ( Check if element in viewport )
  * - dslc_validate_comment_form
+ * - dslc_social_share
  */
 
 /**
@@ -778,6 +779,24 @@ function dslc_validate_comment_form( commentForm ) {
 	}
 
 	return commentStatus;
+
+}
+
+/**
+ * Social Sharing
+ */
+function dslc_social_share( width, height, url ) {
+
+	var leftPosition, topPosition, u, t;
+	//Allow for borders.
+	leftPosition = (window.screen.width / 2) - ((width / 2) + 10);
+	//Allow for title and status bars.
+	topPosition = (window.screen.height / 2) - ((height / 2) + 50);
+	var windowFeatures = "status=no,height=" + height + ",width=" + width + ",resizable=yes,left=" + leftPosition + ",top=" + topPosition + ",screenX=" + leftPosition + ",screenY=" + topPosition + ",toolbar=no,menubar=no,scrollbars=no,location=no,directories=no";
+	u=location.href;
+	t=document.title;
+	window.open(url,'sharer', windowFeatures);
+	return false;
 
 }
 
