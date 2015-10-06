@@ -11,10 +11,10 @@ function dslc_nav_menus_opts() {
 	global $dslc_plugin_options;
 
 	$dslc_plugin_options['dslc_plugin_options_navigation_m'] = array(
-		'title' => __( 'Navigation Module', 'dslc_string' ),
+		'title' => __( 'Navigation Module', 'live-composer-page-builder' ),
 		'options' => array(
 			'menus' => array (
-				'label' => __( 'Menus', 'dslc_string' ),
+				'label' => __( 'Menus', 'live-composer-page-builder' ),
 				'std' => '',
 				'type' => 'list'
 			),

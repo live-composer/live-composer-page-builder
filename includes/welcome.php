@@ -35,8 +35,8 @@ class DSLC_Welcome {
 
 		// Getting Started Page
 		add_dashboard_page(
-			__( 'Getting started with Live Composer', 'dslc_string' ),
-			__( 'Getting started with Live Composer', 'dslc_string' ),
+			__( 'Getting started with Live Composer', 'live-composer-page-builder' ),
+			__( 'Getting started with Live Composer', 'live-composer-page-builder' ),
 			$this->minimum_capability,
 			'dslc-getting-started',
 			array( $this, 'getting_started_screen' )
@@ -84,7 +84,7 @@ class DSLC_Welcome {
 		?>
 		<h2 class="nav-tab-wrapper">
 			<a class="nav-tab <?php echo $selected == 'dslc-getting-started' ? 'nav-tab-active' : ''; ?>" href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'dslc-getting-started' ), 'index.php' ) ) ); ?>">
-				<?php _e( 'Getting Started', 'dslc_string' ); ?>
+				<?php _e( 'Getting Started', 'live-composer-page-builder' ); ?>
 			</a>
 		</h2>
 		<?php
@@ -100,27 +100,27 @@ class DSLC_Welcome {
 
 		?>
 		<div class="wrap about-wrap">
-			<h1><?php printf( __( 'Welcome to Live Composer %s', 'dslc_string' ), DS_LIVE_COMPOSER_VER ); ?></h1>
+			<h1><?php printf( __( 'Welcome to Live Composer %s', 'live-composer-page-builder' ), DS_LIVE_COMPOSER_VER ); ?></h1>
 
-			<div class="about-text"><?php _e( 'Thank you for using Live Composer! We hope you will enjoy it and build awesome stuff with it.', 'dslc_string' ); ?></div>
+			<div class="about-text"><?php _e( 'Thank you for using Live Composer! We hope you will enjoy it and build awesome stuff with it.', 'live-composer-page-builder' ); ?></div>
 			<div class="dslc-badge"><img src="<?php echo DS_LIVE_COMPOSER_URL . 'images/lc-logo.png'; ?>" / ></div>
 
 			<?php $this->tabs(); ?>
 
 			<div class="changelog">
 
-				<h3><?php _e( 'Documentation &amp; Support', 'dslc_string' );?></h3>
+				<h3><?php _e( 'Documentation &amp; Support', 'live-composer-page-builder' );?></h3>
 
 				<div class="feature-section">
 
-					<h4><?php _e( 'Usage Documentation', 'dslc_string' );?></h4>
-					<p><?php _e( 'The usage documentation is available online. Make sure you check out those interactive tutorials, they\'ll give you a jump start at using Live Composer.<br><a target="_blank" href="http://livecomposerplugin.com/docs/installation">Go To Usage Documentation &rarr;</a>', 'dslc_string' );?></p>
+					<h4><?php _e( 'Usage Documentation', 'live-composer-page-builder' );?></h4>
+					<p><?php _e( 'The usage documentation is available online. Make sure you check out those interactive tutorials, they\'ll give you a jump start at using Live Composer.<br><a target="_blank" href="http://livecomposerplugin.com/docs/installation">Go To Usage Documentation &rarr;</a>', 'live-composer-page-builder' );?></p>
 
-					<h4><?php _e( 'Developer Documentation', 'dslc_string' );?></h4>
-					<p><?php _e( 'If you\'re a developer who is interested in building custom modules for Live Composer give a check at the developer documentation.<br><a target="_blank" href="http://livecomposerplugin.com/docs/building-a-module-the-basics/">Go To Developer Documentation &rarr;</a>', 'dslc_string' );?></p>					
+					<h4><?php _e( 'Developer Documentation', 'live-composer-page-builder' );?></h4>
+					<p><?php _e( 'If you\'re a developer who is interested in building custom modules for Live Composer give a check at the developer documentation.<br><a target="_blank" href="http://livecomposerplugin.com/docs/building-a-module-the-basics/">Go To Developer Documentation &rarr;</a>', 'live-composer-page-builder' );?></p>					
 
-					<h4><?php _e( 'Support', 'dslc_string' );?></h4>
-					<p><?php _e( 'If you run into any bugs or issues do let us know.<br><a target="_blank" href="http://livecomposerplugin.com/support/">Go To Support &rarr;</a>', 'dslc_string' );?></p>
+					<h4><?php _e( 'Support', 'live-composer-page-builder' );?></h4>
+					<p><?php _e( 'If you run into any bugs or issues do let us know.<br><a target="_blank" href="http://livecomposerplugin.com/support/">Go To Support &rarr;</a>', 'live-composer-page-builder' );?></p>
 
 				</div><!-- .feature-section -->
 
@@ -128,15 +128,15 @@ class DSLC_Welcome {
 
 			<div class="changelog">
 
-				<h3><?php _e( 'Themes &amp; Add-Ons', 'dslc_string' );?></h3>
+				<h3><?php _e( 'Themes &amp; Add-Ons', 'live-composer-page-builder' );?></h3>
 
 				<div class="feature-section">
 
-					<h4><?php _e( 'Themes', 'dslc_string' );?></h4>
-					<p><?php _e( 'There are a lot of free and premium themes powered by Live Composer.<br><a target="_blank" href="http://livecomposerplugin.com/themes">Check Out The Themes &rarr;</a>', 'dslc_string' );?></p>
+					<h4><?php _e( 'Themes', 'live-composer-page-builder' );?></h4>
+					<p><?php _e( 'There are a lot of free and premium themes powered by Live Composer.<br><a target="_blank" href="http://livecomposerplugin.com/themes">Check Out The Themes &rarr;</a>', 'live-composer-page-builder' );?></p>
 
-					<h4><?php _e( 'Add-Ons', 'dslc_string' );?></h4>
-					<p><?php _e( 'If you are looking for some extra functionality ( features, modules... ) there are free and premium add-ons.<br><a target="_blank" href="http://livecomposerplugin.com/add-ons">Check Out The Add-Ons &rarr;</a>', 'dslc_string' );?></p>					
+					<h4><?php _e( 'Add-Ons', 'live-composer-page-builder' );?></h4>
+					<p><?php _e( 'If you are looking for some extra functionality ( features, modules... ) there are free and premium add-ons.<br><a target="_blank" href="http://livecomposerplugin.com/add-ons">Check Out The Add-Ons &rarr;</a>', 'live-composer-page-builder' );?></p>					
 
 				</div><!-- .feature-section -->
 

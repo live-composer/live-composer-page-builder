@@ -25,7 +25,7 @@ function dslc_get_cpt_templates() {
 	global $dslc_var_templates_pt;
 	foreach ( $dslc_var_templates_pt as $pt_id => $pt_label ) {
 		$templates_array[$pt_id][] = array(
-			'label' => __( 'Default', 'dslc_string' ),
+			'label' => __( 'Default', 'live-composer-page-builder' ),
 			'value' => 'default'
 		);
 	}
@@ -45,12 +45,12 @@ function dslc_get_cpt_templates() {
 			$mb_id = 'dslc-' . $pt_id . '-tpl-options';
 
 			$dslc_var_post_options[$mb_id] = array(
-				'title' => __( 'LC Template', 'dslc_string' ),
+				'title' => __( 'LC Template', 'live-composer-page-builder' ),
 				'show_on' => $pt_id,
 				'context' => 'side',
 				'options' => array(
 					array(
-						'label' => __( 'Template', 'dslc_string' ),
+						'label' => __( 'Template', 'live-composer-page-builder' ),
 						'std' => '',
 						'id' => 'dslc_post_template',
 						'type' => 'select',

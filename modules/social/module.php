@@ -10,7 +10,7 @@ class DSLC_Social extends DSLC_Module {
 	function __construct() {
 
 		$this->module_id = 'DSLC_Social';
-		$this->module_title = __( 'Social', 'dslc_string' );
+		$this->module_title = __( 'Social', 'live-composer-page-builder' );
 		$this->module_icon = 'twitter';
 		$this->module_category = 'elements';
 
@@ -24,139 +24,139 @@ class DSLC_Social extends DSLC_Module {
 			 * General
 			 */
 			array(
-				'label' => __( 'Show On', 'dslc_string' ),
+				'label' => __( 'Show On', 'live-composer-page-builder' ),
 				'id' => 'css_show_on',
 				'std' => 'desktop tablet phone',
 				'type' => 'checkbox',
 				'choices' => array(
 					array(
-						'label' => __( 'Desktop', 'dslc_string' ),
+						'label' => __( 'Desktop', 'live-composer-page-builder' ),
 						'value' => 'desktop'
 					),
 					array(
-						'label' => __( 'Tablet', 'dslc_string' ),
+						'label' => __( 'Tablet', 'live-composer-page-builder' ),
 						'value' => 'tablet'
 					),
 					array(
-						'label' => __( 'Phone', 'dslc_string' ),
+						'label' => __( 'Phone', 'live-composer-page-builder' ),
 						'value' => 'phone'
 					),
 				),
 			),
 			array(
-				'label' => __( 'Show Labels', 'dslc_string' ),
+				'label' => __( 'Show Labels', 'live-composer-page-builder' ),
 				'id' => 'show_labels',
 				'std' => 'disabled',
 				'type' => 'select',
 				'choices' => array(
 					array(
-						'label' => __( 'Disabled', 'dslc_string' ),
+						'label' => __( 'Disabled', 'live-composer-page-builder' ),
 						'value' => 'disabled'
 					),
 					array(
-						'label' => __( 'Enabled', 'dslc_string' ),
+						'label' => __( 'Enabled', 'live-composer-page-builder' ),
 						'value' => 'enabled'
 					),
 				),
 			),
 			array(
-				'label' => __( 'Twitter', 'dslc_string' ),
+				'label' => __( 'Twitter', 'live-composer-page-builder' ),
 				'id' => 'twitter',
 				'std' => '#',
 				'type' => 'text',
 			),
 			array(
-				'label' => __( 'Facebook', 'dslc_string' ),
+				'label' => __( 'Facebook', 'live-composer-page-builder' ),
 				'id' => 'facebook',
 				'std' => '#',
 				'type' => 'text',
 			),
 			array(
-				'label' => __( 'Youtube', 'dslc_string' ),
+				'label' => __( 'Youtube', 'live-composer-page-builder' ),
 				'id' => 'youtube',
 				'std' => '#',
 				'type' => 'text',
 			),
 			array(
-				'label' => __( 'Vimeo', 'dslc_string' ),
+				'label' => __( 'Vimeo', 'live-composer-page-builder' ),
 				'id' => 'vimeo',
 				'std' => '',
 				'type' => 'text',
 			),
 			array(
-				'label' => __( 'Tumblr', 'dslc_string' ),
+				'label' => __( 'Tumblr', 'live-composer-page-builder' ),
 				'id' => 'tumblr',
 				'std' => '',
 				'type' => 'text',
 			),
 			array(
-				'label' => __( 'Pinterest', 'dslc_string' ),
+				'label' => __( 'Pinterest', 'live-composer-page-builder' ),
 				'id' => 'pinterest',
 				'std' => '',
 				'type' => 'text',
 			),
 			array(
-				'label' => __( 'LinkedIn', 'dslc_string' ),
+				'label' => __( 'LinkedIn', 'live-composer-page-builder' ),
 				'id' => 'linkedin',
 				'std' => '',
 				'type' => 'text',
 			),
 			array(
-				'label' => __( 'Instagram', 'dslc_string' ),
+				'label' => __( 'Instagram', 'live-composer-page-builder' ),
 				'id' => 'instagram',
 				'std' => '',
 				'type' => 'text',
 			),
 			array(
-				'label' => __( 'GitHub', 'dslc_string' ),
+				'label' => __( 'GitHub', 'live-composer-page-builder' ),
 				'id' => 'github',
 				'std' => '',
 				'type' => 'text',
 			),
 			array(
-				'label' => __( 'Google Plus', 'dslc_string' ),
+				'label' => __( 'Google Plus', 'live-composer-page-builder' ),
 				'id' => 'googleplus',
 				'std' => '',
 				'type' => 'text',
 			),
 			array(
-				'label' => __( 'Dribbble', 'dslc_string' ),
+				'label' => __( 'Dribbble', 'live-composer-page-builder' ),
 				'id' => 'dribbble',
 				'std' => '',
 				'type' => 'text',
 			),
 			array(
-				'label' => __( 'Dropbox', 'dslc_string' ),
+				'label' => __( 'Dropbox', 'live-composer-page-builder' ),
 				'id' => 'dropbox',
 				'std' => '',
 				'type' => 'text',
 			),
 			array(
-				'label' => __( 'Flickr', 'dslc_string' ),
+				'label' => __( 'Flickr', 'live-composer-page-builder' ),
 				'id' => 'flickr',
 				'std' => '',
 				'type' => 'text',
 			),
 			array(
-				'label' => __( 'FourSquare', 'dslc_string' ),
+				'label' => __( 'FourSquare', 'live-composer-page-builder' ),
 				'id' => 'foursquare',
 				'std' => '',
 				'type' => 'text',
 			),
 			array(
-				'label' => __( 'Behance', 'dslc_string' ),
+				'label' => __( 'Behance', 'live-composer-page-builder' ),
 				'id' => 'behance',
 				'std' => '',
 				'type' => 'text',
 			),
 			array(
-				'label' => __( 'RSS', 'dslc_string' ),
+				'label' => __( 'RSS', 'live-composer-page-builder' ),
 				'id' => 'rss',
 				'std' => '',
 				'type' => 'text',
 			),
 			array(
-				'label' => __( 'Yelp', 'dslc_string' ),
+				'label' => __( 'Yelp', 'live-composer-page-builder' ),
 				'id' => 'yelp',
 				'std' => '',
 				'type' => 'text',
@@ -167,7 +167,7 @@ class DSLC_Social extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( 'Align', 'dslc_string' ),
+				'label' => __( 'Align', 'live-composer-page-builder' ),
 				'id' => 'css_text_align',
 				'std' => 'left',
 				'type' => 'text_align',
@@ -177,7 +177,7 @@ class DSLC_Social extends DSLC_Module {
 				'section' => 'styling',
 			),
 			array(
-				'label' => __( 'Border Color', 'dslc_string' ),
+				'label' => __( 'Border Color', 'live-composer-page-builder' ),
 				'id' => 'css_border_color',
 				'std' => '#000000',
 				'type' => 'color',
@@ -187,7 +187,7 @@ class DSLC_Social extends DSLC_Module {
 				'section' => 'styling',
 			),
 			array(
-				'label' => __( 'Border Color - Hover', 'dslc_string' ),
+				'label' => __( 'Border Color - Hover', 'live-composer-page-builder' ),
 				'id' => 'css_border_color_hover',
 				'std' => '',
 				'type' => 'color',
@@ -197,7 +197,7 @@ class DSLC_Social extends DSLC_Module {
 				'section' => 'styling',
 			),
 			array(
-				'label' => __( 'Border Width', 'dslc_string' ),
+				'label' => __( 'Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_border_width',
 				'std' => '0',
 				'type' => 'slider',
@@ -208,25 +208,25 @@ class DSLC_Social extends DSLC_Module {
 				'ext' => 'px',
 			),
 			array(
-				'label' => __( 'Borders', 'dslc_string' ),
+				'label' => __( 'Borders', 'live-composer-page-builder' ),
 				'id' => 'css_border_trbl',
 				'std' => 'top right bottom left',
 				'type' => 'checkbox',
 				'choices' => array(
 					array(
-						'label' => __( 'Top', 'dslc_string' ),
+						'label' => __( 'Top', 'live-composer-page-builder' ),
 						'value' => 'top'
 					),
 					array(
-						'label' => __( 'Right', 'dslc_string' ),
+						'label' => __( 'Right', 'live-composer-page-builder' ),
 						'value' => 'right'
 					),
 					array(
-						'label' => __( 'Bottom', 'dslc_string' ),
+						'label' => __( 'Bottom', 'live-composer-page-builder' ),
 						'value' => 'bottom'
 					),
 					array(
-						'label' => __( 'Left', 'dslc_string' ),
+						'label' => __( 'Left', 'live-composer-page-builder' ),
 						'value' => 'left'
 					),
 				),
@@ -236,7 +236,7 @@ class DSLC_Social extends DSLC_Module {
 				'section' => 'styling',
 			),
 			array(
-				'label' => __( 'Border Radius', 'dslc_string' ),
+				'label' => __( 'Border Radius', 'live-composer-page-builder' ),
 				'id' => 'css_border_radius',
 				'std' => '50',
 				'type' => 'slider',
@@ -247,7 +247,7 @@ class DSLC_Social extends DSLC_Module {
 				'ext' => 'px',
 			),
 			array(
-				'label' => __( 'Color', 'dslc_string' ),
+				'label' => __( 'Color', 'live-composer-page-builder' ),
 				'id' => 'css_bg_color',
 				'std' => '#40bde6',
 				'type' => 'color',
@@ -257,7 +257,7 @@ class DSLC_Social extends DSLC_Module {
 				'section' => 'styling',
 			),
 			array(
-				'label' => __( 'Color - Hover', 'dslc_string' ),
+				'label' => __( 'Color - Hover', 'live-composer-page-builder' ),
 				'id' => 'css_bg_color_hover',
 				'std' => '#40bde6',
 				'type' => 'color',
@@ -267,7 +267,7 @@ class DSLC_Social extends DSLC_Module {
 				'section' => 'styling',
 			),
 			array(
-				'label' => __( 'Margin Bottom', 'dslc_string' ),
+				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_margin_bottom',
 				'std' => '0',
 				'type' => 'slider',
@@ -278,7 +278,7 @@ class DSLC_Social extends DSLC_Module {
 				'ext' => 'px',
 			),
 			array(
-				'label' => __( 'Minimum Height', 'dslc_string' ),
+				'label' => __( 'Minimum Height', 'live-composer-page-builder' ),
 				'id' => 'css_min_height',
 				'std' => '0',
 				'type' => 'slider',
@@ -292,7 +292,7 @@ class DSLC_Social extends DSLC_Module {
 				'increment' => 5
 			),
 			array(
-				'label' => __( 'Margin Top', 'dslc_string' ),
+				'label' => __( 'Margin Top', 'live-composer-page-builder' ),
 				'id' => 'css_margin_top',
 				'std' => '0',
 				'type' => 'slider',
@@ -303,7 +303,7 @@ class DSLC_Social extends DSLC_Module {
 				'ext' => 'px',
 			),
 			array(
-				'label' => __( 'Padding Left', 'dslc_string' ),
+				'label' => __( 'Padding Left', 'live-composer-page-builder' ),
 				'id' => 'css_padding_left',
 				'std' => '0',
 				'type' => 'slider',
@@ -314,7 +314,7 @@ class DSLC_Social extends DSLC_Module {
 				'ext' => 'px',
 			),
 			array(
-				'label' => __( 'Padding Right', 'dslc_string' ),
+				'label' => __( 'Padding Right', 'live-composer-page-builder' ),
 				'id' => 'css_padding_right',
 				'std' => '0',
 				'type' => 'slider',
@@ -325,7 +325,7 @@ class DSLC_Social extends DSLC_Module {
 				'ext' => 'px',
 			),
 			array(
-				'label' => __( 'Padding Top', 'dslc_string' ),
+				'label' => __( 'Padding Top', 'live-composer-page-builder' ),
 				'id' => 'css_padding_top',
 				'std' => '0',
 				'type' => 'slider',
@@ -336,7 +336,7 @@ class DSLC_Social extends DSLC_Module {
 				'ext' => 'px',
 			),
 			array(
-				'label' => __( 'Padding Bottom', 'dslc_string' ),
+				'label' => __( 'Padding Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_padding_bottom',
 				'std' => '0',
 				'type' => 'slider',
@@ -347,7 +347,7 @@ class DSLC_Social extends DSLC_Module {
 				'ext' => 'px',
 			),
 			array(
-				'label' => __( 'Size', 'dslc_string' ),
+				'label' => __( 'Size', 'live-composer-page-builder' ),
 				'id' => 'css_size',
 				'std' => '30',
 				'type' => 'slider',
@@ -358,7 +358,7 @@ class DSLC_Social extends DSLC_Module {
 				'ext' => 'px'
 			),
 			array(
-				'label' => __( 'Spacing', 'dslc_string' ),
+				'label' => __( 'Spacing', 'live-composer-page-builder' ),
 				'id' => 'css_spacing',
 				'std' => '10',
 				'type' => 'slider',
@@ -372,7 +372,7 @@ class DSLC_Social extends DSLC_Module {
 			/* Icon */
 
 			array(
-				'label' => __( 'Color', 'dslc_string' ),
+				'label' => __( 'Color', 'live-composer-page-builder' ),
 				'id' => 'css_icon_color',
 				'std' => '#ffffff',
 				'type' => 'color',
@@ -380,10 +380,10 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => ' ul.dslc-social .dslc-icon',
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
-				'tab' => __( 'icon', 'dslc_string' ),
+				'tab' => __( 'icon', 'live-composer-page-builder' ),
 			),
 			array(
-				'label' => __( 'Color - Hover', 'dslc_string' ),
+				'label' => __( 'Color - Hover', 'live-composer-page-builder' ),
 				'id' => 'css_icon_color_hover',
 				'std' => '#ffffff',
 				'type' => 'color',
@@ -391,10 +391,10 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => ' ul.dslc-social a.dslc-social-icon:hover .dslc-icon',
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
-				'tab' => __( 'icon', 'dslc_string' ),
+				'tab' => __( 'icon', 'live-composer-page-builder' ),
 			),
 			array(
-				'label' => __( 'Size', 'dslc_string' ),
+				'label' => __( 'Size', 'live-composer-page-builder' ),
 				'id' => 'css_icon_font_size',
 				'std' => '15',
 				'type' => 'slider',
@@ -402,14 +402,14 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-social a.dslc-social-icon',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'styling',
-				'tab' => __( 'icon', 'dslc_string' ),
+				'tab' => __( 'icon', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 
 			/* Label */
 
 			array(
-				'label' => __( 'Color', 'dslc_string' ),
+				'label' => __( 'Color', 'live-composer-page-builder' ),
 				'id' => 'css_label_color',
 				'std' => '',
 				'type' => 'color',
@@ -417,10 +417,10 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-social-label',
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
-				'tab' => __( 'labels', 'dslc_string' ),
+				'tab' => __( 'labels', 'live-composer-page-builder' ),
 			),
 			array(
-				'label' => __( 'Font Size', 'dslc_string' ),
+				'label' => __( 'Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_label_font_size',
 				'std' => '13',
 				'type' => 'slider',
@@ -428,11 +428,11 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-social-label',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'styling',
-				'tab' => __( 'labels', 'dslc_string' ),
+				'tab' => __( 'labels', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
-				'label' => __( 'Font Weight', 'dslc_string' ),
+				'label' => __( 'Font Weight', 'live-composer-page-builder' ),
 				'id' => 'css_label_font_weight',
 				'std' => '400',
 				'type' => 'slider',
@@ -440,14 +440,14 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-social-label',
 				'affect_on_change_rule' => 'font-weight',
 				'section' => 'styling',
-				'tab' => __( 'labels', 'dslc_string' ),
+				'tab' => __( 'labels', 'live-composer-page-builder' ),
 				'ext' => '',
 				'min' => 100,
 				'max' => 900,
 				'increment' => 100
 			),
 			array(
-				'label' => __( 'Font Family', 'dslc_string' ),
+				'label' => __( 'Font Family', 'live-composer-page-builder' ),
 				'id' => 'css_label_font_family',
 				'std' => 'Open Sans',
 				'type' => 'font',
@@ -455,10 +455,10 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-social-label',
 				'affect_on_change_rule' => 'font-family',
 				'section' => 'styling',
-				'tab' => __( 'labels', 'dslc_string' ),
+				'tab' => __( 'labels', 'live-composer-page-builder' ),
 			),
 			array(
-				'label' => __( 'Font Style', 'dslc_string' ),
+				'label' => __( 'Font Style', 'live-composer-page-builder' ),
 				'id' => 'css_label_font_style',
 				'std' => 'normal',
 				'type' => 'select',
@@ -466,20 +466,20 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-social-label',
 				'affect_on_change_rule' => 'font-style',
 				'section' => 'styling',
-				'tab' => __( 'labels', 'dslc_string' ),
+				'tab' => __( 'labels', 'live-composer-page-builder' ),
 				'choices' => array(
 					array(
-						'label' => __( 'Normal', 'dslc_string' ),
+						'label' => __( 'Normal', 'live-composer-page-builder' ),
 						'value' => 'normal',
 					),
 					array(
-						'label' => __( 'Italic', 'dslc_string' ),
+						'label' => __( 'Italic', 'live-composer-page-builder' ),
 						'value' => 'italic',
 					),
 				)
 			),
 			array(
-				'label' => __( 'Letter Spacing', 'dslc_string' ),
+				'label' => __( 'Letter Spacing', 'live-composer-page-builder' ),
 				'id' => 'css_label_letter_spacing',
 				'std' => '0',
 				'type' => 'slider',
@@ -487,13 +487,13 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-social-label',
 				'affect_on_change_rule' => 'letter-spacing',
 				'section' => 'styling',
-				'tab' => __( 'labels', 'dslc_string' ),
+				'tab' => __( 'labels', 'live-composer-page-builder' ),
 				'ext' => 'px',
 				'min' => -50,
 				'max' => 50
 			),
 			array(
-				'label' => __( 'Line Height', 'dslc_string' ),
+				'label' => __( 'Line Height', 'live-composer-page-builder' ),
 				'id' => 'css_label_line_height',
 				'std' => '30',
 				'type' => 'slider',
@@ -501,11 +501,11 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-social-label',
 				'affect_on_change_rule' => 'line-height',
 				'section' => 'styling',
-				'tab' => __( 'labels', 'dslc_string' ),
+				'tab' => __( 'labels', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
-				'label' => __( 'Margin Left', 'dslc_string' ),
+				'label' => __( 'Margin Left', 'live-composer-page-builder' ),
 				'id' => 'css_label_mleft',
 				'std' => '7',
 				'type' => 'slider',
@@ -513,29 +513,29 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-social-label',
 				'affect_on_change_rule' => 'margin-left',
 				'section' => 'styling',
-				'tab' => __( 'labels', 'dslc_string' ),
+				'tab' => __( 'labels', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
-				'label' => __( 'Text Transform', 'dslc_string' ),
+				'label' => __( 'Text Transform', 'live-composer-page-builder' ),
 				'id' => 'css_label_text_transform',
 				'std' => 'none',
 				'type' => 'select',
 				'choices' => array(
 					array(
-						'label' => __( 'None', 'dslc_string' ),
+						'label' => __( 'None', 'live-composer-page-builder' ),
 						'value' => 'none'
 					),
 					array(
-						'label' => __( 'Capitalize', 'dslc_string' ),
+						'label' => __( 'Capitalize', 'live-composer-page-builder' ),
 						'value' => 'capitalize'
 					),
 					array(
-						'label' => __( 'Uppercase', 'dslc_string' ),
+						'label' => __( 'Uppercase', 'live-composer-page-builder' ),
 						'value' => 'uppercase'
 					),
 					array(
-						'label' => __( 'Lowercase', 'dslc_string' ),
+						'label' => __( 'Lowercase', 'live-composer-page-builder' ),
 						'value' => 'lowercase'
 					),
 				),
@@ -543,7 +543,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-social-label',
 				'affect_on_change_rule' => 'text-transform',
 				'section' => 'styling',
-				'tab' => __( 'labels', 'dslc_string' ),
+				'tab' => __( 'labels', 'live-composer-page-builder' ),
 			),
 
 			/**
@@ -551,25 +551,25 @@ class DSLC_Social extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( 'Responsive Styling', 'dslc_string' ),
+				'label' => __( 'Responsive Styling', 'live-composer-page-builder' ),
 				'id' => 'css_res_t',
 				'std' => 'disabled',
 				'type' => 'select',
 				'choices' => array(
 					array(
-						'label' => __( 'Disabled', 'dslc_string' ),
+						'label' => __( 'Disabled', 'live-composer-page-builder' ),
 						'value' => 'disabled'
 					),
 					array(
-						'label' => __( 'Enabled', 'dslc_string' ),
+						'label' => __( 'Enabled', 'live-composer-page-builder' ),
 						'value' => 'enabled'
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'dslc_string' ),
+				'tab' => __( 'tablet', 'live-composer-page-builder' ),
 			),
 			array(
-				'label' => __( 'Margin Bottom', 'dslc_string' ),
+				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_margin_bottom',
 				'std' => '0',
 				'type' => 'slider',
@@ -577,11 +577,11 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-social',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'dslc_string' ),
+				'tab' => __( 'tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
-				'label' => __( 'Size ( Wrapper )', 'dslc_string' ),
+				'label' => __( 'Size ( Wrapper )', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_size',
 				'std' => '30',
 				'type' => 'slider',
@@ -589,11 +589,11 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-social a.dslc-social-icon',
 				'affect_on_change_rule' => 'width,height',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'dslc_string' ),
+				'tab' => __( 'tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
-				'label' => __( 'Size ( Icon )', 'dslc_string' ),
+				'label' => __( 'Size ( Icon )', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_icon_font_size',
 				'std' => '15',
 				'type' => 'slider',
@@ -601,11 +601,11 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-social a.dslc-social-icon',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'dslc_string' ),
+				'tab' => __( 'tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
-				'label' => __( 'Spacing', 'dslc_string' ),
+				'label' => __( 'Spacing', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_spacing',
 				'std' => '10',
 				'type' => 'slider',
@@ -613,7 +613,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-social li',
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'dslc_string' ),
+				'tab' => __( 'tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 
@@ -622,25 +622,25 @@ class DSLC_Social extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( 'Responsive Styling', 'dslc_string' ),
+				'label' => __( 'Responsive Styling', 'live-composer-page-builder' ),
 				'id' => 'css_res_p',
 				'std' => 'disabled',
 				'type' => 'select',
 				'choices' => array(
 					array(
-						'label' => __( 'Disabled', 'dslc_string' ),
+						'label' => __( 'Disabled', 'live-composer-page-builder' ),
 						'value' => 'disabled'
 					),
 					array(
-						'label' => __( 'Enabled', 'dslc_string' ),
+						'label' => __( 'Enabled', 'live-composer-page-builder' ),
 						'value' => 'enabled'
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'dslc_string' ),
+				'tab' => __( 'phone', 'live-composer-page-builder' ),
 			),
 			array(
-				'label' => __( 'Margin Bottom', 'dslc_string' ),
+				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_margin_bottom',
 				'std' => '0',
 				'type' => 'slider',
@@ -648,11 +648,11 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-social',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'dslc_string' ),
+				'tab' => __( 'phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
-				'label' => __( 'Size ( Wrapper )', 'dslc_string' ),
+				'label' => __( 'Size ( Wrapper )', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_size',
 				'std' => '30',
 				'type' => 'slider',
@@ -660,11 +660,11 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-social a.dslc-social-icon',
 				'affect_on_change_rule' => 'width,height',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'dslc_string' ),
+				'tab' => __( 'phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
-				'label' => __( 'Size ( Icon )', 'dslc_string' ),
+				'label' => __( 'Size ( Icon )', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_icon_font_size',
 				'std' => '15',
 				'type' => 'slider',
@@ -672,11 +672,11 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-social a.dslc-social-icon',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'dslc_string' ),
+				'tab' => __( 'phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
-				'label' => __( 'Spacing', 'dslc_string' ),
+				'label' => __( 'Spacing', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_spacing',
 				'std' => '10',
 				'type' => 'slider',
@@ -684,7 +684,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-social li',
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'dslc_string' ),
+				'tab' => __( 'phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 
@@ -712,7 +712,7 @@ class DSLC_Social extends DSLC_Module {
 						<li>
 							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['twitter']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-twitter"></span></a>
 							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['twitter']; ?>"><span><?php _e( 'Twitter', 'dslc_string' ); ?></span></a>
+								<a class="dslc-social-label" target="_blank" href="<?php echo $options['twitter']; ?>"><span><?php _e( 'Twitter', 'live-composer-page-builder' ); ?></span></a>
 							<?php endif; ?>
 						</li>
 					<?php endif; ?>
@@ -720,7 +720,7 @@ class DSLC_Social extends DSLC_Module {
 						<li>
 							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['facebook']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-facebook"></span></a>
 							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['facebook']; ?>"><span><?php _e( 'Facebook', 'dslc_string' ); ?></span></a>
+								<a class="dslc-social-label" target="_blank" href="<?php echo $options['facebook']; ?>"><span><?php _e( 'Facebook', 'live-composer-page-builder' ); ?></span></a>
 							<?php endif; ?>
 						</li>
 					<?php endif; ?>
@@ -728,7 +728,7 @@ class DSLC_Social extends DSLC_Module {
 						<li>
 							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['youtube']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-youtube-play"></span></a>
 							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['youtube']; ?>"><span><?php _e( 'Youtube', 'dslc_string' ); ?></span></a>
+								<a class="dslc-social-label" target="_blank" href="<?php echo $options['youtube']; ?>"><span><?php _e( 'Youtube', 'live-composer-page-builder' ); ?></span></a>
 							<?php endif; ?>
 						</li>
 					<?php endif; ?>
@@ -736,7 +736,7 @@ class DSLC_Social extends DSLC_Module {
 						<li>
 							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['vimeo']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-vimeo-square"></span></a>
 							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['vimeo']; ?>"><span><?php _e( 'Vimeo', 'dslc_string' ); ?></span></a>
+								<a class="dslc-social-label" target="_blank" href="<?php echo $options['vimeo']; ?>"><span><?php _e( 'Vimeo', 'live-composer-page-builder' ); ?></span></a>
 							<?php endif; ?>
 						</li>
 					<?php endif; ?>
@@ -744,7 +744,7 @@ class DSLC_Social extends DSLC_Module {
 						<li>
 							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['tumblr']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-tumblr"></span></a>
 							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['tumblr']; ?>"><span><?php _e( 'Tumblr', 'dslc_string' ); ?></span></a>
+								<a class="dslc-social-label" target="_blank" href="<?php echo $options['tumblr']; ?>"><span><?php _e( 'Tumblr', 'live-composer-page-builder' ); ?></span></a>
 							<?php endif; ?>
 						</li>
 					<?php endif; ?>
@@ -752,7 +752,7 @@ class DSLC_Social extends DSLC_Module {
 						<li>
 							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['pinterest']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-pinterest"></span></a>
 							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['pinterest']; ?>"><span><?php _e( 'Pinterest', 'dslc_string' ); ?></span></a>
+								<a class="dslc-social-label" target="_blank" href="<?php echo $options['pinterest']; ?>"><span><?php _e( 'Pinterest', 'live-composer-page-builder' ); ?></span></a>
 							<?php endif; ?>
 						</li>
 					<?php endif; ?>
@@ -760,7 +760,7 @@ class DSLC_Social extends DSLC_Module {
 						<li>
 							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['linkedin']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-linkedin"></span></a>
 							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['linkedin']; ?>"><span><?php _e( 'LinkedIn', 'dslc_string' ); ?></span></a>
+								<a class="dslc-social-label" target="_blank" href="<?php echo $options['linkedin']; ?>"><span><?php _e( 'LinkedIn', 'live-composer-page-builder' ); ?></span></a>
 							<?php endif; ?>
 						</li>
 					<?php endif; ?>
@@ -768,7 +768,7 @@ class DSLC_Social extends DSLC_Module {
 						<li>
 							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['instagram']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-instagram"></span></a>
 							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['instagram']; ?>"><span><?php _e( 'Instagram', 'dslc_string' ); ?></span></a>
+								<a class="dslc-social-label" target="_blank" href="<?php echo $options['instagram']; ?>"><span><?php _e( 'Instagram', 'live-composer-page-builder' ); ?></span></a>
 							<?php endif; ?>
 						</li>
 					<?php endif; ?>
@@ -776,7 +776,7 @@ class DSLC_Social extends DSLC_Module {
 						<li>
 							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['github']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-github-alt"></span></a>
 							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['github']; ?>"><span><?php _e( 'Github', 'dslc_string' ); ?></span></a>
+								<a class="dslc-social-label" target="_blank" href="<?php echo $options['github']; ?>"><span><?php _e( 'Github', 'live-composer-page-builder' ); ?></span></a>
 							<?php endif; ?>
 						</li>
 					<?php endif; ?>
@@ -784,7 +784,7 @@ class DSLC_Social extends DSLC_Module {
 						<li>
 							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['googleplus']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-google-plus"></span></a>
 							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['googleplus']; ?>"><span><?php _e( 'Google+', 'dslc_string' ); ?></span></a>
+								<a class="dslc-social-label" target="_blank" href="<?php echo $options['googleplus']; ?>"><span><?php _e( 'Google+', 'live-composer-page-builder' ); ?></span></a>
 							<?php endif; ?>
 						</li>
 					<?php endif; ?>
@@ -792,7 +792,7 @@ class DSLC_Social extends DSLC_Module {
 						<li>
 							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['dribbble']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-dribbble"></span></a>
 							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['dribbble']; ?>"><span><?php _e( 'Dribbble', 'dslc_string' ); ?></span></a>
+								<a class="dslc-social-label" target="_blank" href="<?php echo $options['dribbble']; ?>"><span><?php _e( 'Dribbble', 'live-composer-page-builder' ); ?></span></a>
 							<?php endif; ?>
 						</li>
 					<?php endif; ?>
@@ -800,7 +800,7 @@ class DSLC_Social extends DSLC_Module {
 						<li>
 							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['dropbox']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-dropbox"></span></a>
 							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['dropbox']; ?>"><span><?php _e( 'Dropbox', 'dslc_string' ); ?></span></a>
+								<a class="dslc-social-label" target="_blank" href="<?php echo $options['dropbox']; ?>"><span><?php _e( 'Dropbox', 'live-composer-page-builder' ); ?></span></a>
 							<?php endif; ?>
 						</li>
 					<?php endif; ?>
@@ -808,7 +808,7 @@ class DSLC_Social extends DSLC_Module {
 						<li>
 							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['flickr']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-flickr"></span></a>
 							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['flickr']; ?>"><span><?php _e( 'Flickr', 'dslc_string' ); ?></span></a>
+								<a class="dslc-social-label" target="_blank" href="<?php echo $options['flickr']; ?>"><span><?php _e( 'Flickr', 'live-composer-page-builder' ); ?></span></a>
 							<?php endif; ?>
 						</li>
 					<?php endif; ?>
@@ -816,7 +816,7 @@ class DSLC_Social extends DSLC_Module {
 						<li>
 							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['foursquare']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-foursquare"></span></a>
 							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['foursquare']; ?>"><span><?php _e( 'Foursquare', 'dslc_string' ); ?></span></a>
+								<a class="dslc-social-label" target="_blank" href="<?php echo $options['foursquare']; ?>"><span><?php _e( 'Foursquare', 'live-composer-page-builder' ); ?></span></a>
 							<?php endif; ?>
 						</li>
 					<?php endif; ?>
@@ -824,7 +824,7 @@ class DSLC_Social extends DSLC_Module {
 						<li>
 							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['behance']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-behance"></span></a>
 							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['behance']; ?>"><span><?php _e( 'Behance', 'dslc_string' ); ?></span></a>
+								<a class="dslc-social-label" target="_blank" href="<?php echo $options['behance']; ?>"><span><?php _e( 'Behance', 'live-composer-page-builder' ); ?></span></a>
 							<?php endif; ?>
 						</li>
 					<?php endif; ?>
@@ -832,7 +832,7 @@ class DSLC_Social extends DSLC_Module {
 						<li>
 							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['rss']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-rss"></span></a>
 							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['rss']; ?>"><span><?php _e( 'RSS', 'dslc_string' ); ?></span></a>
+								<a class="dslc-social-label" target="_blank" href="<?php echo $options['rss']; ?>"><span><?php _e( 'RSS', 'live-composer-page-builder' ); ?></span></a>
 							<?php endif; ?>
 						</li>
 					<?php endif; ?>
@@ -840,7 +840,7 @@ class DSLC_Social extends DSLC_Module {
 						<li>
 							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['yelp']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-yelp"></span></a>
 							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['yelp']; ?>"><span><?php _e( 'Yelp', 'dslc_string' ); ?></span></a>
+								<a class="dslc-social-label" target="_blank" href="<?php echo $options['yelp']; ?>"><span><?php _e( 'Yelp', 'live-composer-page-builder' ); ?></span></a>
 							<?php endif; ?>
 						</li>
 					<?php endif; ?>

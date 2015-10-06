@@ -89,7 +89,7 @@ function dslc_tut_options() {
 	$pages = get_pages();
 	$pages_opts = array(
 		array(
-			'label' => __( '- Select -', 'dslc_string' ),
+			'label' => __( '- Select -', 'live-composer-page-builder' ),
 			'value' => 'none'
 		)
 	);
@@ -101,34 +101,34 @@ function dslc_tut_options() {
 	}	
 
 	$dslc_plugin_options['dslc_plugin_options_tuts'] = array(
-		'title' => __( 'Tutorials', 'dslc_string' ),
+		'title' => __( 'Tutorials', 'live-composer-page-builder' ),
 		'options' => array(
 			'lc_tut_chapter_one' => array(
-				'label' => __( 'Chapter One', 'dslc_string' ),
+				'label' => __( 'Chapter One', 'live-composer-page-builder' ),
 				'std' => 'none',
 				'type' => 'select',
-				'descr' => __( 'Choose the page that will be used for chapter one of the tutorial.', 'dslc_string' ),
+				'descr' => __( 'Choose the page that will be used for chapter one of the tutorial.', 'live-composer-page-builder' ),
 				'choices' => $pages_opts
 			),
 			'lc_tut_chapter_two' => array(
-				'label' => __( 'Chapter Two', 'dslc_string' ),
+				'label' => __( 'Chapter Two', 'live-composer-page-builder' ),
 				'std' => 'none',
 				'type' => 'select',
-				'descr' => __( 'Choose the page that will be used for chapter two of the tutorial.', 'dslc_string' ),
+				'descr' => __( 'Choose the page that will be used for chapter two of the tutorial.', 'live-composer-page-builder' ),
 				'choices' => $pages_opts
 			),
 			'lc_tut_chapter_three' => array(
-				'label' => __( 'Chapter Three', 'dslc_string' ),
+				'label' => __( 'Chapter Three', 'live-composer-page-builder' ),
 				'std' => 'none',
 				'type' => 'select',
-				'descr' => __( 'Choose the page that will be used for chapter three of the tutorial.', 'dslc_string' ),
+				'descr' => __( 'Choose the page that will be used for chapter three of the tutorial.', 'live-composer-page-builder' ),
 				'choices' => $pages_opts
 			),
 			'lc_tut_chapter_four' => array(
-				'label' => __( 'Chapter Four', 'dslc_string' ),
+				'label' => __( 'Chapter Four', 'live-composer-page-builder' ),
 				'std' => 'none',
 				'type' => 'select',
-				'descr' => __( 'Choose the page that will be used for chapter four of the tutorial.', 'dslc_string' ),
+				'descr' => __( 'Choose the page that will be used for chapter four of the tutorial.', 'live-composer-page-builder' ),
 				'choices' => $pages_opts
 			),
 		)

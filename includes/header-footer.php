@@ -29,19 +29,19 @@ function dslc_hf_init() {
 	register_post_type( 'dslc_hf', array(
 		'menu_icon' => 'dashicons-image-flip-vertical',
 		'labels' => array(
-			'name' => __( 'Header/Footer', 'dslc_string' ),
-			'singular_name' => __( 'Add Header/Footer', 'dslc_string' ),
-			'add_new' => __( 'Add Header/Footer', 'dslc_string' ),
-			'add_new_item' => __( 'Add Header/Footer', 'dslc_string' ),
-			'edit' => __( 'Edit', 'dslc_string' ),
-			'edit_item' => __( 'Edit Header/Footer', 'dslc_string' ),
-			'new_item' => __( 'New Header/Footer', 'dslc_string' ),
-			'view' => __( 'View Header/Footer', 'dslc_string' ),
-			'view_item' => __( 'View Header/Footer', 'dslc_string' ),
-			'search_items' => __( 'Search Header/Footer', 'dslc_string' ),
-			'not_found' => __( 'No Header/Footer found', 'dslc_string' ),
-			'not_found_in_trash' => __( 'No Header/Footer found in Trash', 'dslc_string' ),
-			'parent' => __( 'Parent Header/Footer', 'dslc_string' ),
+			'name' => __( 'Header/Footer', 'live-composer-page-builder' ),
+			'singular_name' => __( 'Add Header/Footer', 'live-composer-page-builder' ),
+			'add_new' => __( 'Add Header/Footer', 'live-composer-page-builder' ),
+			'add_new_item' => __( 'Add Header/Footer', 'live-composer-page-builder' ),
+			'edit' => __( 'Edit', 'live-composer-page-builder' ),
+			'edit_item' => __( 'Edit Header/Footer', 'live-composer-page-builder' ),
+			'new_item' => __( 'New Header/Footer', 'live-composer-page-builder' ),
+			'view' => __( 'View Header/Footer', 'live-composer-page-builder' ),
+			'view_item' => __( 'View Header/Footer', 'live-composer-page-builder' ),
+			'search_items' => __( 'Search Header/Footer', 'live-composer-page-builder' ),
+			'not_found' => __( 'No Header/Footer found', 'live-composer-page-builder' ),
+			'not_found_in_trash' => __( 'No Header/Footer found in Trash', 'live-composer-page-builder' ),
+			'parent' => __( 'Parent Header/Footer', 'live-composer-page-builder' ),
 		),
 		'public' => true,
 		'supports' => array( 'title', 'custom-fields', 'author', 'thumbnail'  ),
@@ -68,8 +68,8 @@ function dslc_hf_init() {
 		'show_on' => 'dslc_hf',
 		'options' => array(
 			array(
-				'label' => __( 'For', 'dslc_string' ),
-				'descr' => __( 'Choose what is this for, header or footer.', 'dslc_string' ),
+				'label' => __( 'For', 'live-composer-page-builder' ),
+				'descr' => __( 'Choose what is this for, header or footer.', 'live-composer-page-builder' ),
 				'std' => 'header',
 				'id' => 'dslc_hf_for',
 				'type' => 'select',
@@ -85,9 +85,9 @@ function dslc_hf_init() {
 				)
 			),
 			array(
-				'label' => __( 'Type', 'dslc_string' ),
+				'label' => __( 'Type', 'live-composer-page-builder' ),
 				'std' => 'regular',
-				'descr' => __( '<strong>Default</strong> will be used as the default for all the posts and pages. <strong>Regular</strong> is an additional type that you can set to specific posts/pages.', 'dslc_string' ),
+				'descr' => __( '<strong>Default</strong> will be used as the default for all the posts and pages. <strong>Regular</strong> is an additional type that you can set to specific posts/pages.', 'live-composer-page-builder' ),
 				'id' => 'dslc_hf_type',
 				'type' => 'radio',
 				'choices' => array(
@@ -102,9 +102,9 @@ function dslc_hf_init() {
 				)
 			),
 			array(
-				'label' => __( 'Position', 'dslc_string' ),
+				'label' => __( 'Position', 'live-composer-page-builder' ),
 				'std' => 'relative',
-				'descr' => __( '<strong>Relative</strong> is normal positioning. <strong>Fixed</strong> will make the header/footer scroll with the page. <strong>Absolute</strong> will make the regular page content go behind the header/footer.', 'dslc_string' ),
+				'descr' => __( '<strong>Relative</strong> is normal positioning. <strong>Fixed</strong> will make the header/footer scroll with the page. <strong>Absolute</strong> will make the regular page content go behind the header/footer.', 'live-composer-page-builder' ),
 				'id' => 'dslc_hf_position',
 				'type' => 'radio',
 				'choices' => array(
@@ -277,19 +277,19 @@ function dslc_hf_options() {
 		}
 
 		$dslc_var_post_options['dslc-hf-options'] = array(
-			'title' => __( 'Header/Footer', 'dslc_string' ),
+			'title' => __( 'Header/Footer', 'live-composer-page-builder' ),
 			'show_on' => array( 'page', 'dslc_templates' ),
 			'context' => 'side',
 			'options' => array(
 				array(
-					'label' => __( 'Header', 'dslc_string' ),
+					'label' => __( 'Header', 'live-composer-page-builder' ),
 					'std' => '',
 					'id' => 'dslc_header',
 					'type' => 'select',
 					'choices' => $headers_array
 				),
 				array(
-					'label' => __( 'Footer', 'dslc_string' ),
+					'label' => __( 'Footer', 'live-composer-page-builder' ),
 					'std' => '',
 					'id' => 'dslc_footer',
 					'type' => 'select',

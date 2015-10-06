@@ -60,14 +60,14 @@
 
 				<?php elseif ( $row_option['type'] == 'image' ) : ?>
 
-					<span class="dslca-modules-section-edit-field-image-add-hook"><span class="dslca-icon dslc-icon-cloud-upload"></span><?php _e( 'Upload Image', 'dslc_string' ); ?></span>
-					<span class="dslca-modules-section-edit-field-image-remove-hook"><span class="dslca-icon dslc-icon-remove"></span><?php _e( 'Remove Image', 'dslc_string' ); ?></span>
+					<span class="dslca-modules-section-edit-field-image-add-hook"><span class="dslca-icon dslc-icon-cloud-upload"></span><?php _e( 'Upload Image', 'live-composer-page-builder' ); ?></span>
+					<span class="dslca-modules-section-edit-field-image-remove-hook"><span class="dslca-icon dslc-icon-remove"></span><?php _e( 'Remove Image', 'live-composer-page-builder' ); ?></span>
 					<input type="hidden" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-upload" data-id="<?php echo $row_option['id']; ?>" <?php echo $css_element_output . ' ' . $css_rule_output; ?> />
 
 				<?php elseif ( $row_option['type'] == 'video' ) : ?>
 
-					<span class="dslca-modules-section-edit-field-image-add-hook"><span class="dslca-icon dslc-icon-cloud-upload"></span><?php _e( 'Upload Video', 'dslc_string' ); ?></span>
-					<span class="dslca-modules-section-edit-field-image-remove-hook"><span class="dslca-icon dslc-icon-remove"></span><?php _e( 'Remove Video', 'dslc_string' ); ?></span>
+					<span class="dslca-modules-section-edit-field-image-add-hook"><span class="dslca-icon dslc-icon-cloud-upload"></span><?php _e( 'Upload Video', 'live-composer-page-builder' ); ?></span>
+					<span class="dslca-modules-section-edit-field-image-remove-hook"><span class="dslca-icon dslc-icon-remove"></span><?php _e( 'Remove Video', 'live-composer-page-builder' ); ?></span>
 					<input type="hidden" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-upload" data-id="<?php echo $row_option['id']; ?>" <?php echo $css_element_output . ' ' . $css_rule_output; ?> />
 
 				<?php elseif ( $row_option['type'] == 'slider' ) : ?>
@@ -97,19 +97,19 @@
 
 					<div class="dslca-modules-section-edit-option-checkbox-wrapper">
 						<div class="dslca-modules-section-edit-option-checkbox-single">
-							<span class="dslca-modules-section-edit-option-checkbox-hook"><span class="dslca-icon dslc-icon-check-empty"></span><?php _e( 'Top', 'dslc_string' ); ?></span>
+							<span class="dslca-modules-section-edit-option-checkbox-hook"><span class="dslca-icon dslc-icon-check-empty"></span><?php _e( 'Top', 'live-composer-page-builder' ); ?></span>
 							<input type="checkbox" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-checkbox" data-id="border-top" data-css-rule="border-width">
 						</div>
 						<div class="dslca-modules-section-edit-option-checkbox-single">
-							<span class="dslca-modules-section-edit-option-checkbox-hook"><span class="dslca-icon dslc-icon-check-empty"></span><?php _e( 'Right', 'dslc_string' ); ?></span>
+							<span class="dslca-modules-section-edit-option-checkbox-hook"><span class="dslca-icon dslc-icon-check-empty"></span><?php _e( 'Right', 'live-composer-page-builder' ); ?></span>
 							<input type="checkbox" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-checkbox" data-id="border-right" data-css-rule="border-width">
 						</div>
 						<div class="dslca-modules-section-edit-option-checkbox-single">
-							<span class="dslca-modules-section-edit-option-checkbox-hook"><span class="dslca-icon dslc-icon-check-empty"></span><?php _e( 'Bottom', 'dslc_string' ); ?></span>
+							<span class="dslca-modules-section-edit-option-checkbox-hook"><span class="dslca-icon dslc-icon-check-empty"></span><?php _e( 'Bottom', 'live-composer-page-builder' ); ?></span>
 							<input type="checkbox" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-checkbox" data-id="border-bottom" data-css-rule="border-width">
 						</div>
 						<div class="dslca-modules-section-edit-option-checkbox-single">
-							<span class="dslca-modules-section-edit-option-checkbox-hook"><span class="dslca-icon dslc-icon-check-empty"></span><?php _e( 'Left', 'dslc_string' ); ?></span>
+							<span class="dslca-modules-section-edit-option-checkbox-hook"><span class="dslca-icon dslc-icon-check-empty"></span><?php _e( 'Left', 'live-composer-page-builder' ); ?></span>
 							<input type="checkbox" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-checkbox" data-id="border-left" data-css-rule="border-width">
 						</div>
 					</div>

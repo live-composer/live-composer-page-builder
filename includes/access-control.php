@@ -20,73 +20,73 @@ function dslc_access_control_init() {
 
 	$capability_opts = array(
 		array(
-			'label' => __( 'Administrators', 'dslc_string' ),
+			'label' => __( 'Administrators', 'live-composer-page-builder' ),
 			'value' => 'manage_options'
 		),
 		array(
-			'label' => __( 'Editors', 'dslc_string' ),
+			'label' => __( 'Editors', 'live-composer-page-builder' ),
 			'value' => 'publish_pages'
 		),
 		array(
-			'label' => __( 'Authors', 'dslc_string' ),
+			'label' => __( 'Authors', 'live-composer-page-builder' ),
 			'value' => 'publish_posts'
 		),
 		array(
-			'label' => __( 'Contributors', 'dslc_string' ),
+			'label' => __( 'Contributors', 'live-composer-page-builder' ),
 			'value' => 'edit_posts'
 		),
 	);
 
 	$dslc_plugin_options['dslc_plugin_options_access_control'] = array(
-		'title' => __( 'Access Control', 'dslc_string' ),
+		'title' => __( 'Access Control', 'live-composer-page-builder' ),
 		'options' => array(
 			'lc_min_capability_page' => array(
-				'label' => __( 'Front-End Editor', 'dslc_string' ),
+				'label' => __( 'Front-End Editor', 'live-composer-page-builder' ),
 				'std' => 'publish_posts',
 				'type' => 'select',
-				'descr' => __( 'Who can use Live Composer in the front-end? This will also affect who can manage post templates.', 'dslc_string' ),
+				'descr' => __( 'Who can use Live Composer in the front-end? This will also affect who can manage post templates.', 'live-composer-page-builder' ),
 				'choices' => $capability_opts
 			),
 			'lc_min_capability_projects_m' => array(
-				'label' => __( 'Projects Management', 'dslc_string' ),
+				'label' => __( 'Projects Management', 'live-composer-page-builder' ),
 				'std' => 'publish_posts',
 				'type' => 'select',
-				'descr' => __( 'Who can manage projects ( add, edit, trash... )?', 'dslc_string' ),
+				'descr' => __( 'Who can manage projects ( add, edit, trash... )?', 'live-composer-page-builder' ),
 				'choices' => $capability_opts
 			),
 			'lc_min_capability_galleries_m' => array(
-				'label' => __( 'Galleries Management', 'dslc_string' ),
+				'label' => __( 'Galleries Management', 'live-composer-page-builder' ),
 				'std' => 'publish_posts',
 				'type' => 'select',
-				'descr' => __( 'Who can manage galleries ( add, edit, trash... )?', 'dslc_string' ),
+				'descr' => __( 'Who can manage galleries ( add, edit, trash... )?', 'live-composer-page-builder' ),
 				'choices' => $capability_opts
 			),
 			'lc_min_capability_staff_m' => array(
-				'label' => __( 'Staff Management', 'dslc_string' ),
+				'label' => __( 'Staff Management', 'live-composer-page-builder' ),
 				'std' => 'publish_posts',
 				'type' => 'select',
-				'descr' => __( 'Who can manage staff ( add, edit, trash... )?', 'dslc_string' ),
+				'descr' => __( 'Who can manage staff ( add, edit, trash... )?', 'live-composer-page-builder' ),
 				'choices' => $capability_opts
 			),
 			'lc_min_capability_downloads_m' => array(
-				'label' => __( 'Downloads Management', 'dslc_string' ),
+				'label' => __( 'Downloads Management', 'live-composer-page-builder' ),
 				'std' => 'publish_posts',
 				'type' => 'select',
-				'descr' => __( 'Who can manage downloads ( add, edit, trash... )?', 'dslc_string' ),
+				'descr' => __( 'Who can manage downloads ( add, edit, trash... )?', 'live-composer-page-builder' ),
 				'choices' => $capability_opts
 			),
 			'lc_min_capability_testimonials_m' => array(
-				'label' => __( 'Testimonials Management', 'dslc_string' ),
+				'label' => __( 'Testimonials Management', 'live-composer-page-builder' ),
 				'std' => 'publish_posts',
 				'type' => 'select',
-				'descr' => __( 'Who can manage testimonials ( add, edit, trash... )?', 'dslc_string' ),
+				'descr' => __( 'Who can manage testimonials ( add, edit, trash... )?', 'live-composer-page-builder' ),
 				'choices' => $capability_opts
 			),
 			'lc_min_capability_partners_m' => array(
-				'label' => __( 'Partners Management', 'dslc_string' ),
+				'label' => __( 'Partners Management', 'live-composer-page-builder' ),
 				'std' => 'publish_posts',
 				'type' => 'select',
-				'descr' => __( 'Who can manage partners ( add, edit, trash... )?', 'dslc_string' ),
+				'descr' => __( 'Who can manage partners ( add, edit, trash... )?', 'live-composer-page-builder' ),
 				'choices' => $capability_opts
 			),
 		)

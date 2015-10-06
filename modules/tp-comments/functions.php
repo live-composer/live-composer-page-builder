@@ -15,7 +15,7 @@ function dslc_display_comments( $comment, $args, $depth ) {
 		case 'trackback' :
 			?>
 			<li class="dslc-comments-pingback">
-				<p><?php _e( 'Pingback:', 'dslc_string' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __( '(Edit)', 'dslc_string' ), ' ' ); ?></p>
+				<p><?php _e( 'Pingback:', 'live-composer-page-builder' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __( '(Edit)', 'live-composer-page-builder' ), ' ' ); ?></p>
 			<?php
 		break;
 		default :

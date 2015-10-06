@@ -148,15 +148,15 @@ function dslc_plugin_option_display_list( $option_ID, $section_ID ) {
 			<?php foreach ( $sidebars_array as $sidebar ) : ?>
 				<div class="dslca-plugin-opts-list-item">
 					<span class="dslca-plugin-opts-list-title" contenteditable><?php echo $sidebar; ?></span>
-					<a href="#" class="dslca-plugin-opts-list-delete-hook"><?php _e( 'delete', 'dslc_string' ); ?></a>
+					<a href="#" class="dslca-plugin-opts-list-delete-hook"><?php _e( 'delete', 'live-composer-page-builder' ); ?></a>
 				</div>
 			<?php endforeach; ?>
 		</div><!-- .dslca-plugin-opts-list -->
 
-		<a href="#" class="dslca-plugin-opts-list-add-hook"><?php _e( 'Add New', 'dslc_string' ); ?></a>
+		<a href="#" class="dslca-plugin-opts-list-add-hook"><?php _e( 'Add New', 'live-composer-page-builder' ); ?></a>
 
 		<div class="dslca-plugin-opts-list-error">
-			<?php _e( 'Items with duplicated titles found. Titles must be unique.', 'dslc_string' ); ?>
+			<?php _e( 'Items with duplicated titles found. Titles must be unique.', 'live-composer-page-builder' ); ?>
 		</div>
 
 	</div>
@@ -186,7 +186,7 @@ function dslc_plugin_option_display_styling_presets( $option_ID, $section_ID ) {
 			<?php foreach ( $presets as $preset ) : ?>
 				<div class="dslca-plugin-opts-list-item">
 					<span class="dslca-plugin-opts-list-title" contenteditable><?php echo $preset['title']; ?></span>
-					<a href="#" class="dslca-plugin-opts-list-delete-hook"><?php _e( 'delete', 'dslc_string' ); ?></a>
+					<a href="#" class="dslca-plugin-opts-list-delete-hook"><?php _e( 'delete', 'live-composer-page-builder' ); ?></a>
 				</div>
 			<?php endforeach; ?>
 		</div><!-- .dslca-plugin-opts-list -->

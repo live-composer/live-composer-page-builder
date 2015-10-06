@@ -678,7 +678,7 @@ class DSLC_Module {
 				'tab' => 'Heading',
 			),
 			array(
-				'label' => __( 'Title - Letter Spacing', 'dslc_string' ),
+				'label' => __( 'Title - Letter Spacing', 'live-composer-page-builder' ),
 				'id' => 'css_main_heading_letter_spacing',
 				'std' => '0',
 				'type' => 'slider',
@@ -766,7 +766,7 @@ class DSLC_Module {
 				'tab' => 'Heading',
 			),
 			array(
-				'label' => __( 'Link - Letter Spacing', 'dslc_string' ),
+				'label' => __( 'Link - Letter Spacing', 'live-composer-page-builder' ),
 				'id' => 'css_main_heading_link_letter_spacing',
 				'std' => '0',
 				'type' => 'slider',
@@ -1532,7 +1532,7 @@ class DSLC_Module {
 				'tab' => 'Pagination',
 			),
 			array(
-				'label' => __( 'Item - Letter Spacing', 'dslc_string' ),
+				'label' => __( 'Item - Letter Spacing', 'live-composer-page-builder' ),
 				'id' => 'css_pag_item_letter_spacing',
 				'std' => '0',
 				'type' => 'slider',
@@ -2004,7 +2004,7 @@ class DSLC_Module {
 
 		$options = array(
 			array(
-				'label' => __( 'Preset', 'dslc_string' ),
+				'label' => __( 'Preset', 'live-composer-page-builder' ),
 				'id' => 'css_load_preset',
 				'std' => 'none',
 				'type' => 'select',
@@ -2013,14 +2013,14 @@ class DSLC_Module {
 				'choices' => $choices,
 			),
 			array(
-				'label' => __( 'Register New Preset', 'dslc_string' ),
+				'label' => __( 'Register New Preset', 'live-composer-page-builder' ),
 				'id' => 'css_save_preset',
 				'std' => '',
 				'type' => 'text',
 				'section' => 'styling',
 				'tab' => 'presets',
 				'refresh_on_change' => false,
-				'help' => __( 'Type in the name of the preset and hit enter,<br>it will automatically be added to the presets on the left.', 'dslc_string' ),
+				'help' => __( 'Type in the name of the preset and hit enter,<br>it will automatically be added to the presets on the left.', 'live-composer-page-builder' ),
 			),
 		);
 

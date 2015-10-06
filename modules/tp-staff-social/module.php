@@ -10,7 +10,7 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 	function __construct() {
 
 		$this->module_id = 'DSLC_TP_Staff_Social';
-		$this->module_title = __( 'Staff Social', 'dslc_string' );
+		$this->module_title = __( 'Staff Social', 'live-composer-page-builder' );
 		$this->module_icon = 'twitter';
 		$this->module_category = 'single';
 
@@ -25,27 +25,27 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( 'Show On', 'dslc_string' ),
+				'label' => __( 'Show On', 'live-composer-page-builder' ),
 				'id' => 'css_show_on',
 				'std' => 'desktop tablet phone',
 				'type' => 'checkbox',
 				'choices' => array(
 					array(
-						'label' => __( 'Desktop', 'dslc_string' ),
+						'label' => __( 'Desktop', 'live-composer-page-builder' ),
 						'value' => 'desktop'
 					),
 					array(
-						'label' => __( 'Tablet', 'dslc_string' ),
+						'label' => __( 'Tablet', 'live-composer-page-builder' ),
 						'value' => 'tablet'
 					),
 					array(
-						'label' => __( 'Phone', 'dslc_string' ),
+						'label' => __( 'Phone', 'live-composer-page-builder' ),
 						'value' => 'phone'
 					),
 				),
 			),
 			array(
-				'label' => __( 'Border Color', 'dslc_string' ),
+				'label' => __( 'Border Color', 'live-composer-page-builder' ),
 				'id' => 'css_border_color',
 				'std' => '#000000',
 				'type' => 'color',
@@ -55,7 +55,7 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'section' => 'styling',
 			),
 			array(
-				'label' => __( 'Border Color - Hover', 'dslc_string' ),
+				'label' => __( 'Border Color - Hover', 'live-composer-page-builder' ),
 				'id' => 'css_border_color_hover',
 				'std' => '',
 				'type' => 'color',
@@ -65,7 +65,7 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'section' => 'styling',
 			),
 			array(
-				'label' => __( 'Border Width', 'dslc_string' ),
+				'label' => __( 'Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_border_width',
 				'std' => '0',
 				'type' => 'slider',
@@ -76,25 +76,25 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'ext' => 'px',
 			),
 			array(
-				'label' => __( 'Borders', 'dslc_string' ),
+				'label' => __( 'Borders', 'live-composer-page-builder' ),
 				'id' => 'css_border_trbl',
 				'std' => 'top right bottom left',
 				'type' => 'checkbox',
 				'choices' => array(
 					array(
-						'label' => __( 'Top', 'dslc_string' ),
+						'label' => __( 'Top', 'live-composer-page-builder' ),
 						'value' => 'top'
 					),
 					array(
-						'label' => __( 'Right', 'dslc_string' ),
+						'label' => __( 'Right', 'live-composer-page-builder' ),
 						'value' => 'right'
 					),
 					array(
-						'label' => __( 'Bottom', 'dslc_string' ),
+						'label' => __( 'Bottom', 'live-composer-page-builder' ),
 						'value' => 'bottom'
 					),
 					array(
-						'label' => __( 'Left', 'dslc_string' ),
+						'label' => __( 'Left', 'live-composer-page-builder' ),
 						'value' => 'left'
 					),
 				),
@@ -104,7 +104,7 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'section' => 'styling',
 			),
 			array(
-				'label' => __( 'Border Radius', 'dslc_string' ),
+				'label' => __( 'Border Radius', 'live-composer-page-builder' ),
 				'id' => 'css_border_radius',
 				'std' => '50',
 				'type' => 'slider',
@@ -115,7 +115,7 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'ext' => 'px',
 			),
 			array(
-				'label' => __( 'Color', 'dslc_string' ),
+				'label' => __( 'Color', 'live-composer-page-builder' ),
 				'id' => 'css_bg_color',
 				'std' => '#40bde6',
 				'type' => 'color',
@@ -125,7 +125,7 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'section' => 'styling',
 			),
 			array(
-				'label' => __( 'Color - Hover', 'dslc_string' ),
+				'label' => __( 'Color - Hover', 'live-composer-page-builder' ),
 				'id' => 'css_bg_color_hover',
 				'std' => '#40bde6',
 				'type' => 'color',
@@ -135,7 +135,7 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'section' => 'styling',
 			),
 			array(
-				'label' => __( 'Margin Bottom', 'dslc_string' ),
+				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_margin_bottom',
 				'std' => '0',
 				'type' => 'slider',
@@ -146,7 +146,7 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'ext' => 'px',
 			),
 			array(
-				'label' => __( 'Minimum Height', 'dslc_string' ),
+				'label' => __( 'Minimum Height', 'live-composer-page-builder' ),
 				'id' => 'css_min_height',
 				'std' => '0',
 				'type' => 'slider',
@@ -160,7 +160,7 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'increment' => 5
 			),
 			array(
-				'label' => __( 'Size', 'dslc_string' ),
+				'label' => __( 'Size', 'live-composer-page-builder' ),
 				'id' => 'css_size',
 				'std' => '30',
 				'type' => 'slider',
@@ -171,7 +171,7 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'ext' => 'px'
 			),
 			array(
-				'label' => __( 'Spacing', 'dslc_string' ),
+				'label' => __( 'Spacing', 'live-composer-page-builder' ),
 				'id' => 'css_spacing',
 				'std' => '10',
 				'type' => 'slider',
@@ -185,7 +185,7 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 			/* Icon */
 
 			array(
-				'label' => __( 'Color', 'dslc_string' ),
+				'label' => __( 'Color', 'live-composer-page-builder' ),
 				'id' => 'css_icon_color',
 				'std' => '#ffffff',
 				'type' => 'color',
@@ -193,10 +193,10 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'affect_on_change_el' => ' ul.dslc-social .dslc-icon',
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
-				'tab' => __( 'icon', 'dslc_string' ),
+				'tab' => __( 'icon', 'live-composer-page-builder' ),
 			),
 			array(
-				'label' => __( 'Color - Hover', 'dslc_string' ),
+				'label' => __( 'Color - Hover', 'live-composer-page-builder' ),
 				'id' => 'css_icon_color_hover',
 				'std' => '#ffffff',
 				'type' => 'color',
@@ -204,10 +204,10 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'affect_on_change_el' => ' ul.dslc-social a:hover .dslc-icon',
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
-				'tab' => __( 'icon', 'dslc_string' ),
+				'tab' => __( 'icon', 'live-composer-page-builder' ),
 			),
 			array(
-				'label' => __( 'Size', 'dslc_string' ),
+				'label' => __( 'Size', 'live-composer-page-builder' ),
 				'id' => 'css_icon_font_size',
 				'std' => '15',
 				'type' => 'slider',
@@ -215,7 +215,7 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-social a',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'styling',
-				'tab' => __( 'icon', 'dslc_string' ),
+				'tab' => __( 'icon', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 
@@ -224,25 +224,25 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( 'Responsive Styling', 'dslc_string' ),
+				'label' => __( 'Responsive Styling', 'live-composer-page-builder' ),
 				'id' => 'css_res_t',
 				'std' => 'disabled',
 				'type' => 'select',
 				'choices' => array(
 					array(
-						'label' => __( 'Disabled', 'dslc_string' ),
+						'label' => __( 'Disabled', 'live-composer-page-builder' ),
 						'value' => 'disabled'
 					),
 					array(
-						'label' => __( 'Enabled', 'dslc_string' ),
+						'label' => __( 'Enabled', 'live-composer-page-builder' ),
 						'value' => 'enabled'
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'dslc_string' ),
+				'tab' => __( 'tablet', 'live-composer-page-builder' ),
 			),
 			array(
-				'label' => __( 'Margin Bottom', 'dslc_string' ),
+				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_margin_bottom',
 				'std' => '0',
 				'type' => 'slider',
@@ -250,11 +250,11 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-social',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'dslc_string' ),
+				'tab' => __( 'tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
-				'label' => __( 'Size ( Wrapper )', 'dslc_string' ),
+				'label' => __( 'Size ( Wrapper )', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_size',
 				'std' => '30',
 				'type' => 'slider',
@@ -262,11 +262,11 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-social a',
 				'affect_on_change_rule' => 'width,height',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'dslc_string' ),
+				'tab' => __( 'tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
-				'label' => __( 'Size ( Icon )', 'dslc_string' ),
+				'label' => __( 'Size ( Icon )', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_icon_font_size',
 				'std' => '15',
 				'type' => 'slider',
@@ -274,11 +274,11 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-social a',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'dslc_string' ),
+				'tab' => __( 'tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
-				'label' => __( 'Spacing', 'dslc_string' ),
+				'label' => __( 'Spacing', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_spacing',
 				'std' => '10',
 				'type' => 'slider',
@@ -286,7 +286,7 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-social li',
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'dslc_string' ),
+				'tab' => __( 'tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 
@@ -295,25 +295,25 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( 'Responsive Styling', 'dslc_string' ),
+				'label' => __( 'Responsive Styling', 'live-composer-page-builder' ),
 				'id' => 'css_res_p',
 				'std' => 'disabled',
 				'type' => 'select',
 				'choices' => array(
 					array(
-						'label' => __( 'Disabled', 'dslc_string' ),
+						'label' => __( 'Disabled', 'live-composer-page-builder' ),
 						'value' => 'disabled'
 					),
 					array(
-						'label' => __( 'Enabled', 'dslc_string' ),
+						'label' => __( 'Enabled', 'live-composer-page-builder' ),
 						'value' => 'enabled'
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'dslc_string' ),
+				'tab' => __( 'phone', 'live-composer-page-builder' ),
 			),
 			array(
-				'label' => __( 'Margin Bottom', 'dslc_string' ),
+				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_margin_bottom',
 				'std' => '0',
 				'type' => 'slider',
@@ -321,11 +321,11 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-social',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'dslc_string' ),
+				'tab' => __( 'phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
-				'label' => __( 'Size ( Wrapper )', 'dslc_string' ),
+				'label' => __( 'Size ( Wrapper )', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_size',
 				'std' => '30',
 				'type' => 'slider',
@@ -333,11 +333,11 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-social a',
 				'affect_on_change_rule' => 'width,height',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'dslc_string' ),
+				'tab' => __( 'phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
-				'label' => __( 'Size ( Icon )', 'dslc_string' ),
+				'label' => __( 'Size ( Icon )', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_icon_font_size',
 				'std' => '15',
 				'type' => 'slider',
@@ -345,11 +345,11 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-social a',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'dslc_string' ),
+				'tab' => __( 'phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
-				'label' => __( 'Spacing', 'dslc_string' ),
+				'label' => __( 'Spacing', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_spacing',
 				'std' => '10',
 				'type' => 'slider',
@@ -357,7 +357,7 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-social li',
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'dslc_string' ),
+				'tab' => __( 'phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 
