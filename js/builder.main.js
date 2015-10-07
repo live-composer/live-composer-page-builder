@@ -53,9 +53,7 @@ var dslcDebug = false;
 		jQuery('body').addClass('dslca-composer-hidden');
 
 		// Hide ( animation ) the main composer area ( at the bottom )
-		jQuery('.dslca-container').animate({
-			bottom : jQuery('.dslca-container').outerHeight() * -1
-		}, 300);
+		jQuery('.dslca-container').css({ bottom : jQuery('.dslca-container').outerHeight() * -1 });
 
 		// Hide the header  part of the main composer area ( at the bottom )
 		jQuery('.dslca-header').hide();
@@ -78,9 +76,7 @@ var dslcDebug = false;
 		jQuery('body').removeClass('dslca-composer-hidden');
 
 		// Show ( animate ) the main composer area ( at the bottom )
-		jQuery('.dslca-container').animate({
-			bottom : 0
-		}, 300);
+		jQuery('.dslca-container').css({ bottom : 0 });
 
 		// Show the header of the main composer area ( at the bottom )
 		jQuery('.dslca-header').show();
@@ -116,7 +112,7 @@ var dslcDebug = false;
 		newColor = jQuery(section).data('bg');
 			
 		// Hide ( animate ) the container
-		jQuery('.dslca-container').animate({ bottom: -500 }, 200 );	
+		jQuery('.dslca-container').css({ bottom: -500 });	
 
 		// Change the section color
 		jQuery('.dslca-sections').animate({ backgroundColor : newColor }, 200);
@@ -135,7 +131,9 @@ var dslcDebug = false;
 		if ( section != '.dslca-module-edit' ) { dslc_scroller_init(); }
 
 		// Show ( animate ) the container
-		jQuery('.dslca-container').animate({ bottom : 0 }, 300 );
+		setTimeout( function() {
+			jQuery('.dslca-container').css({ bottom : 0 });
+		}, 300 );
 
 		// Remove class from body so we know it's finished
 		jQuery('body').removeClass('dslca-anim-in-progress');
