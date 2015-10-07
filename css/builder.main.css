@@ -2820,6 +2820,13 @@ body.rtl .dslca-modules-area-placeholder {
 	z-index: 99999;
 	text-align: center;
 	opacity: 0;
+	-webkit-transition: opacity 0.2s ease-in-out;
+	-moz-transition: opacity 0.2s ease-in-out;
+	transition: opacity 0.2s ease-in-out;
+}
+
+.dslc-hf-block-overlay:hover {
+	opacity: 1;
 }
 
 	.dslc-hf-block-overlay-button {

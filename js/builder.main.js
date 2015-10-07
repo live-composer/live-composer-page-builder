@@ -5274,16 +5274,6 @@ var dslcDebug = false;
 		});
 
 		/**
-		 * Header/Footer overlay
-		 */
-
-		$(document).on( 'mouseenter', '.dslc-hf-block-overlay', function(){
-			$(this).stop().animate({ opacity : 1 }, 300 );
-		}).on( 'mouseleave', '.dslc-hf-block-overlay', function(){
-			$(this).stop().animate({ opacity : 0 }, 300 );
-		});
-
-		/**
 		 * Hook - Refresh Module 
 		 */
 
