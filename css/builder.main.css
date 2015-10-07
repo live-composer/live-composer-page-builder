@@ -1489,7 +1489,7 @@ body {
 	}
 
 	.dslc-modules-area .dslca-modules-area-manage:hover {
-		/* opacity: 1; */
+		opacity: 1;
 	}
 
 	.dslca-modules-area-manage {
