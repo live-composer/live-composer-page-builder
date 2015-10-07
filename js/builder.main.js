@@ -715,13 +715,13 @@ var dslcDebug = false;
 				scroller.data( 'current', scrollerItemIndex );
 
 				// Animate to the offset
-				scrollerInner.stop().animate({ left : scrollerNewOffset }, 200);
+				scrollerInner.css({ left : scrollerNewOffset });
 
 			// If offset less than 0
 			} else { 
 
 				// Animate to beggining
-				scrollerInner.stop().animate({ left : 0 }, 200);
+				scrollerInner.css({ left : 0 });
 
 			}
 

@@ -1807,6 +1807,9 @@ body.rtl .dslca-modules-area-placeholder {
 		bottom: 0;
 		width: 999999px;
 		text-align: left;
+		-webkit-transition: left 0.3s ease-in-out;
+		-moz-transition: left 0.3s ease-in-out;
+		transition: left 0.3s ease-in-out;
 	}
 
 		.dslca-section-scroller-content {
