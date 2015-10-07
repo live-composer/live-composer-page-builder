@@ -850,14 +850,14 @@ var dslcDebug = false;
 		jQuery(document).on( 'mouseenter', '.dslca-modules-area-manage', function(){
 
 			jQuery(this).closest('.dslc-modules-area').addClass('dslca-options-hovered');
-			jQuery(this).stop().animate({ opacity : 1 }, 200 );
+			jQuery(this).css({ opacity : 1 });
 
 			dslca_draggable_calc_center( jQuery(this).closest('.dslc-modules-area') );
 
 		}).on( 'mouseleave', '.dslca-modules-area-manage', function(){
 
 			jQuery(this).closest('.dslc-modules-area').removeClass('dslca-options-hovered');
-			jQuery(this).stop().animate({ opacity : 0.5 }, 200 );
+			jQuery(this).css({ opacity : 0.5 });
 
 		});
 
