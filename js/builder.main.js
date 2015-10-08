@@ -124,6 +124,26 @@ var dslcDebug = false;
 		// Initiate row scrollbar if editing ar row
 		if ( section == '.dslca-modules-section-edit' ) { dslc_row_edit_scrollbar_init(); }
 
+		// Change "currently editing"
+		if ( section == '.dslca-module-edit' ) { 
+			jQuery('.dslca-currently-editing')
+				.show()
+				.css( 'background-color', newColor )
+					.find('strong')
+					.text( jQuery('.dslca-module-being-edited').attr('title') + ' module' );
+		} else if ( section == '.dslca-modules-section-edit' ) {
+			jQuery('.dslca-currently-editing')
+				.show()
+				.css( 'background-color', '#e5855f' )
+					.find('strong')
+					.text( 'Row' );
+		} else {
+			jQuery('.dslca-currently-editing')
+				.hide()
+					.find('strong')
+					.text('');
+		}
+
 		// Filter module option tabs
 		dslc_module_options_tab_filter();
 
@@ -497,6 +517,42 @@ var dslcDebug = false;
 		$('.dslca-section').eq(0).show();
 		dslc_drag_and_drop();
 		dslc_generate_code();
+
+		/**
+		 * Action - "Currently Editing" scroll on click
+		 */
+
+		$(document).on( 'click', '.dslca-currently-editing', function(){
+
+			var activeElement = false,
+			newOffset = false,
+			outlineColor;
+
+			if ( $('.dslca-module-being-edited').length ) {
+				activeElement = $('.dslca-module-being-edited');
+				outlineColor = '#5890e5';
+			} else if ( $('.dslca-modules-section-being-edited').length ) {
+				activeElement = $('.dslca-modules-section-being-edited');
+				outlineColor = '#eabba9';
+			}
+
+			if ( activeElement ) {
+				newOffset = activeElement.offset().top - 100;
+				if ( newOffset < 0 ) { newOffset = 0; }
+				$( 'html, body' ).animate({ scrollTop: newOffset }, 300, function(){
+					activeElement.animate( { 'outline-color' : outlineColor }, 70, function(){
+						activeElement.animate({ 'outline-color' : 'transparent' }, 70, function(){
+							activeElement.animate( { 'outline-color' : outlineColor }, 70, function(){
+								activeElement.animate({ 'outline-color' : 'transparent' }, 70, function(){
+									activeElement.removeAttr('style');
+								});
+							});
+						});
+					});
+				});
+			}
+
+		});
 
 		/**
 		 * Hook - Hide Composer

@@ -80,6 +80,33 @@ body {
 		left: 0;
 	}
 
+		.dslca-header .dslca-currently-editing {
+			display: block;
+			position: absolute;
+			bottom: 45px;
+			left: 5px;
+			background: #5890e5;
+			color: rgba( 255, 255, 255, 0.5 );
+			padding: 6px 10px;
+			border-radius: 3px;
+			font-weight: bold;
+			font-family: "Open Sans";
+			font-size: 10px;
+			line-height: 1;
+			display: none;
+			white-space: nowrap;
+			text-transform: uppercase;
+			cursor: pointer;
+		}
+
+			.dslca-header .dslca-currently-editing .dslca-icon {
+				margin-right: 5px;
+			}
+
+			.dslca-header .dslca-currently-editing strong {
+				color: #fff;
+			}
+
 		.dslca-header .dslca-go-to-section-hook,
 		.dslca-header .dslca-options-filter-hook,
 		.dslca-header .dslca-row-options-filter-hook {
