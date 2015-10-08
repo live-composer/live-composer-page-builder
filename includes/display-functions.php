@@ -40,6 +40,9 @@ function dslc_display_composer() {
 
 				<div class="dslca-header dslc-clearfix" data-default-section="<?php echo $default_section; ?>">
 					
+					<!-- Currently Editing -->
+					<span class="dslca-currently-editing"><span class="dslca-icon dslc-icon-info"></span>Currently Editing: <strong></strong></span>
+
 					<!-- Tabs -->
 					<span class="dslca-go-to-section-hook dslca-go-to-section-modules dslca-active" data-section=".dslca-modules"><span class="dslca-icon dslc-icon-list"></span></span>
 					<span class="dslca-go-to-section-hook dslca-go-to-section-templates" data-section=".dslca-templates"><span class="dslca-icon dslc-icon-bookmark"></span></span>

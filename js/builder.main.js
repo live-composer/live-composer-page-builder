@@ -53,9 +53,7 @@ var dslcDebug = false;
 		jQuery('body').addClass('dslca-composer-hidden');
 
 		// Hide ( animation ) the main composer area ( at the bottom )
-		jQuery('.dslca-container').animate({
-			bottom : jQuery('.dslca-container').outerHeight() * -1
-		}, 300);
+		jQuery('.dslca-container').css({ bottom : jQuery('.dslca-container').outerHeight() * -1 });
 
 		// Hide the header  part of the main composer area ( at the bottom )
 		jQuery('.dslca-header').hide();
@@ -78,9 +76,7 @@ var dslcDebug = false;
 		jQuery('body').removeClass('dslca-composer-hidden');
 
 		// Show ( animate ) the main composer area ( at the bottom )
-		jQuery('.dslca-container').animate({
-			bottom : 0
-		}, 300);
+		jQuery('.dslca-container').css({ bottom : 0 });
 
 		// Show the header of the main composer area ( at the bottom )
 		jQuery('.dslca-header').show();
@@ -116,7 +112,7 @@ var dslcDebug = false;
 		newColor = jQuery(section).data('bg');
 			
 		// Hide ( animate ) the container
-		jQuery('.dslca-container').animate({ bottom: -500 }, 200 );	
+		jQuery('.dslca-container').css({ bottom: -500 });	
 
 		// Change the section color
 		jQuery('.dslca-sections').animate({ backgroundColor : newColor }, 200);
@@ -128,6 +124,26 @@ var dslcDebug = false;
 		// Initiate row scrollbar if editing ar row
 		if ( section == '.dslca-modules-section-edit' ) { dslc_row_edit_scrollbar_init(); }
 
+		// Change "currently editing"
+		if ( section == '.dslca-module-edit' ) { 
+			jQuery('.dslca-currently-editing')
+				.show()
+				.css( 'background-color', newColor )
+					.find('strong')
+					.text( jQuery('.dslca-module-being-edited').attr('title') + ' module' );
+		} else if ( section == '.dslca-modules-section-edit' ) {
+			jQuery('.dslca-currently-editing')
+				.show()
+				.css( 'background-color', '#e5855f' )
+					.find('strong')
+					.text( 'Row' );
+		} else {
+			jQuery('.dslca-currently-editing')
+				.hide()
+					.find('strong')
+					.text('');
+		}
+
 		// Filter module option tabs
 		dslc_module_options_tab_filter();
 
@@ -135,7 +151,9 @@ var dslcDebug = false;
 		if ( section != '.dslca-module-edit' ) { dslc_scroller_init(); }
 
 		// Show ( animate ) the container
-		jQuery('.dslca-container').animate({ bottom : 0 }, 300 );
+		setTimeout( function() {
+			jQuery('.dslca-container').css({ bottom : 0 });
+		}, 300 );
 
 		// Remove class from body so we know it's finished
 		jQuery('body').removeClass('dslca-anim-in-progress');
@@ -501,6 +519,42 @@ var dslcDebug = false;
 		dslc_generate_code();
 
 		/**
+		 * Action - "Currently Editing" scroll on click
+		 */
+
+		$(document).on( 'click', '.dslca-currently-editing', function(){
+
+			var activeElement = false,
+			newOffset = false,
+			outlineColor;
+
+			if ( $('.dslca-module-being-edited').length ) {
+				activeElement = $('.dslca-module-being-edited');
+				outlineColor = '#5890e5';
+			} else if ( $('.dslca-modules-section-being-edited').length ) {
+				activeElement = $('.dslca-modules-section-being-edited');
+				outlineColor = '#eabba9';
+			}
+
+			if ( activeElement ) {
+				newOffset = activeElement.offset().top - 100;
+				if ( newOffset < 0 ) { newOffset = 0; }
+				$( 'html, body' ).animate({ scrollTop: newOffset }, 300, function(){
+					activeElement.animate( { 'outline-color' : outlineColor }, 70, function(){
+						activeElement.animate({ 'outline-color' : 'transparent' }, 70, function(){
+							activeElement.animate( { 'outline-color' : outlineColor }, 70, function(){
+								activeElement.animate({ 'outline-color' : 'transparent' }, 70, function(){
+									activeElement.removeAttr('style');
+								});
+							});
+						});
+					});
+				});
+			}
+
+		});
+
+		/**
 		 * Hook - Hide Composer
 		 */
 
@@ -717,13 +771,13 @@ var dslcDebug = false;
 				scroller.data( 'current', scrollerItemIndex );
 
 				// Animate to the offset
-				scrollerInner.stop().animate({ left : scrollerNewOffset }, 200);
+				scrollerInner.css({ left : scrollerNewOffset });
 
 			// If offset less than 0
 			} else { 
 
 				// Animate to beggining
-				scrollerInner.stop().animate({ left : 0 }, 200);
+				scrollerInner.css({ left : 0 });
 
 			}
 
@@ -852,14 +906,12 @@ var dslcDebug = false;
 		jQuery(document).on( 'mouseenter', '.dslca-modules-area-manage', function(){
 
 			jQuery(this).closest('.dslc-modules-area').addClass('dslca-options-hovered');
-			jQuery(this).stop().animate({ opacity : 1 }, 200 );
 
 			dslca_draggable_calc_center( jQuery(this).closest('.dslc-modules-area') );
 
 		}).on( 'mouseleave', '.dslca-modules-area-manage', function(){
 
 			jQuery(this).closest('.dslc-modules-area').removeClass('dslca-options-hovered');
-			jQuery(this).stop().animate({ opacity : 0.5 }, 200 );
 
 		});
 
@@ -874,16 +926,6 @@ var dslcDebug = false;
 				else 
 					jQuery('.dslca-module-manage', this).removeClass('dslca-horizontal');
 
-				jQuery('.dslca-module-manage-inner', this).stop().animate({
-					top: 0
-				}, 300, function(){
-					jQuery(this).closest('.dslca-module-manage').css({ overflow : 'visible' });
-				});
-
-				jQuery('.dslca-wysiwyg-actions-edit-hook', this).stop().animate({
-					top: 0
-				}, 300);
-
 			}
 
 		}).on( 'mouseleave', '.dslca-drag-not-in-progress .dslc-module-front', function(e){
@@ -891,17 +933,11 @@ var dslcDebug = false;
 			if ( ! jQuery('body').hasClass('dslca-composer-hidden' ) ) {
 
 				jQuery(this).find('.dslca-change-width-module-options').hide();
-				jQuery(this).find('.dslca-module-manage').css({ overflow : 'hidden' });
-
-				jQuery('.dslca-module-manage-inner', this).stop().animate({
-					top: -50
-				}, 300);
-
-				jQuery('.dslca-wysiwyg-actions-edit-hook', this).stop().animate({
-					top: -50
-				}, 300);
 
 			}
+			
+			// Hide "width change opts" 
+			jQuery(this).find('.dslca-module-manage').removeClass('dslca-module-manage-change-width-active');
 
 		});
 
@@ -920,12 +956,6 @@ var dslcDebug = false;
 				else 
 					jQuery('.dslca-modules-area-manage', this).removeClass('dslca-horizontal');
 
-				jQuery('.dslca-modules-area-manage-inner', this).stop().animate({
-					left: '0%'
-				}, 300, function(){
-					jQuery( '.dslca-modules-area-manage', _this ).css({ overflow : 'visible' });
-				});
-
 			}
 
 		}).on( 'mouseleave', '.dslca-drag-not-in-progress .dslc-modules-area', function(e){
@@ -936,38 +966,9 @@ var dslcDebug = false;
 
 				jQuery('#dslc-header').removeClass('dslca-header-low-z-index');
 
-				jQuery( '.dslca-modules-area-manage', _this ).css({ overflow : 'hidden' });
-				jQuery('.dslca-modules-area-manage-inner', this).stop().animate({
-					left: '100%'
-				}, 300);
-
 			}
 
 		});	
-
-		// Mouse Enter/Leave - Modules Section
-
-		jQuery(document).on( 'mouseenter', '.dslca-drag-not-in-progress .dslc-modules-section', function(e){
-
-			 if ( ! jQuery('body').hasClass('dslca-composer-hidden' ) ) {
-
-				jQuery('.dslca-modules-section-manage-inner', this).stop().animate({
-					opacity : 1
-				}, 300);
-
-			}
-
-		}).on( 'mouseleave', '.dslca-drag-not-in-progress .dslc-modules-section', function(e){
-
-			if ( ! jQuery('body').hasClass('dslca-composer-hidden' ) ) {
-
-				jQuery('.dslca-modules-section-manage-inner', this).stop().animate({
-					opacity : 0
-				}, 300);
-
-			}
-
-		});
 
 	}
 
@@ -5322,16 +5323,6 @@ var dslcDebug = false;
 					dslc_js_confirm( 'disable_lc', '<span class="dslca-prompt-modal-title">' + DSLCString.str_refresh_title + '</span><span class="dslca-prompt-modal-descr">' + DSLCString.str_refresh_descr + '</span>', document.URL );
 				}
 			}
-		});
-
-		/**
-		 * Header/Footer overlay
-		 */
-
-		$(document).on( 'mouseenter', '.dslc-hf-block-overlay', function(){
-			$(this).stop().animate({ opacity : 1 }, 300 );
-		}).on( 'mouseleave', '.dslc-hf-block-overlay', function(){
-			$(this).stop().animate({ opacity : 0 }, 300 );
 		});
 
 		/**
