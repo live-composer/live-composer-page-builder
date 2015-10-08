@@ -576,11 +576,6 @@ body {
 							vertical-align: middle;
 						}
 
-						.dslca-container .dslca-modules-section-edit .sp-replacer,
-						.dslca-container .dslca-modules-section-edit .sp-preview {
-							border-color: #b96849;
-						}
-
 			/**
 			 * Text Align Option Type
 			 */
@@ -676,8 +671,8 @@ body {
 				.dslca-modules-section-edit-option input[type="number"],
 				.dslca-modules-section-edit-option textarea,
 				.dslca-modules-section-edit-option select {
-					background: #cc7654;
-					border: 1px solid #b96849;
+					background: #6c9fed;
+					border: 1px solid #447bce;
 					width: 100%;
 					height: auto;
 				}
@@ -718,9 +713,9 @@ body {
 				}
 
 				.dslca-modules-section-edit-option-checkbox-wrapper {
-					background: #cc7654;
+					background: #3b6fbe;
 					border-radius: 4px;
-					border: 1px solid #b96849;
+					border: 1px solid #3565ad;
 					padding: 0 10px;
 				}
 
@@ -2356,17 +2351,9 @@ body.rtl .dslca-modules-area-placeholder {
 		border-radius: 8px;
 	}
 
-	.dslca-container .dslca-modules-section-edit .jspTrack {
-		background: #e99e80;
-	}
-
 	.dslca-container .jspDrag {
 		background: #4479c8;
 		border-radius: 8px;
-	}
-
-	.dslca-container .dslca-modules-section-edit .jspDrag {
-		background: #cc7654;
 	}
 
 /**
@@ -2387,10 +2374,6 @@ body.rtl .dslca-modules-area-placeholder {
 		margin-top: 20px;
 	}
 
-	.dslca-container .dslca-modules-section-edit-field-slider {
-		background: #e99e80;
-	}
-
 		.dslca-container .dslca-module-edit-field-slider .ui-slider-handle,
 		.dslca-container .dslca-modules-section-edit-field-slider .ui-slider-handle {
 			background: #3b6fbe;
@@ -2401,15 +2384,6 @@ body.rtl .dslca-modules-area-placeholder {
 			width: 15px;
 			height: 15px;
 			margin-left: -7px;
-		}
-
-		.dslca-container .dslca-modules-section-edit-field-slider .ui-slider-handle {
-			background: #cc7654;
-			border-color: #b96849;
-		}
-
-		.dslca-container .dslca-modules-section-edit-field-slider .ui-slider-handle {
-
 		}
 
 		.dslca-container .dslca-module-edit-field-slider-tooltip,
@@ -2854,13 +2828,6 @@ body.rtl .dslca-modules-area-placeholder {
 	line-height: 1;
 	text-transform: uppercase;
 	white-space: nowrap;
-}
-
-.dslca-modules-section-edit-field-image-add-hook,
-.dslca-modules-section-edit-field-image-remove-hook {
-	background: #cc7654;
-	border-color: #b96849;
-	color: rgba( 255, 255, 255, 0.7 );
 }
 	
 	.dslca-modules-section-edit-field-image-add-hook .dslca-icon,

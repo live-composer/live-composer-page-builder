@@ -143,7 +143,7 @@ function dslc_display_composer() {
 
 					<!-- Module Section Edit -->
 
-					<div class="dslca-section dslca-modules-section-edit" data-bg="#e5855f">
+					<div class="dslca-section dslca-modules-section-edit" data-bg="#5890e5">
 
 						<form class="dslca-modules-section-edit-form">
 
