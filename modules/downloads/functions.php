@@ -2,11 +2,18 @@
 
 include DS_LIVE_COMPOSER_ABS . '/modules/downloads/inc/ajax.php';
 
+/**
+ * Register Post Type and Taxonomies
+ *
+ * @since 1.0
+ */
 function dslc_downloads_module_init() {
 
+	// If module not active return
 	if ( ! dslc_is_module_active( 'DSLC_Downloads', true ) )
 		return;
 	
+	// Get capability
 	$capability = dslc_get_option( 'lc_min_capability_downloads_m', 'dslc_plugin_options_access_control' );
 	if ( ! $capability ) $capability = 'publish_posts';
 
@@ -16,10 +23,11 @@ function dslc_downloads_module_init() {
 	if ( $with_front == 'enabled' ) $with_front = true; else $with_front = false;
 
 	/**
-	 * Custom Post Type
+	 * Register Post Type
 	 */
 
-	register_post_type( 'dslc_downloads', array(
+	// Arguments
+	$cpt_args = array(
 		'menu_icon' => 'dashicons-download',
 		'labels' => array(
 			'name' => __( 'Downloads', 'live-composer-page-builder' ),
@@ -50,75 +58,91 @@ function dslc_downloads_module_init() {
 			'delete_post' => $capability,
 			'read_post' => $capability
 		),
-	));
+	);
+
+	// Apply filters
+	$cpt_args = apply_filters( 'dslc_downloads_cpt_args', $cpt_args );
+
+	// Register post type
+	register_post_type( 'dslc_downloads', $cpt_args );
 	
 	/**
-	 * Custom Taxonomies
+	 * Register Taxonomy ( Category )
 	 */
 
-	register_taxonomy(
-		'dslc_downloads_cats', 
-		'dslc_downloads', 
-		array( 
-			'labels' => array(
-				'name' => __( 'Downloads Categories', 'live-composer-page-builder' ),
-				'singular_name' => __( 'Category', 'live-composer-page-builder' ),
-				'search_items'  => __( 'Search Categories', 'live-composer-page-builder' ),
-				'all_items' => __( 'All Categories', 'live-composer-page-builder' ),
-				'parent_item' => __( 'Parent Category', 'live-composer-page-builder' ),
-				'parent_item_colon' => __( 'Parent Category:', 'live-composer-page-builder' ),
-				'edit_item' => __( 'Edit Category', 'live-composer-page-builder' ),
-				'update_item' => __( 'Update Category', 'live-composer-page-builder' ),
-				'add_new_item' => __( 'Add New Category', 'live-composer-page-builder' ),
-				'new_item_name' => __( 'New Category Name', 'live-composer-page-builder' ),
-				'menu_name' => __( 'Categories', 'live-composer-page-builder' ),
-			),
-			'hierarchical' => true, 
-			'public' => true, 
-			'rewrite' => array( 
-				'slug' => dslc_get_option( 'downloads_cats_slug', 'dslc_plugin_options_cpt_slugs' ),
-				'with_front' => $with_front
-			),
-			'capabilities' => array(
-				'manage_terms' => $capability,
-				'edit_terms' => $capability,
-				'delete_terms' => $capability,
-				'assign_terms' => $capability,
-			),
-		)
+	// Arguments
+	$cats_args = array( 
+		'labels' => array(
+			'name' => __( 'Downloads Categories', 'live-composer-page-builder' ),
+			'singular_name' => __( 'Category', 'live-composer-page-builder' ),
+			'search_items'  => __( 'Search Categories', 'live-composer-page-builder' ),
+			'all_items' => __( 'All Categories', 'live-composer-page-builder' ),
+			'parent_item' => __( 'Parent Category', 'live-composer-page-builder' ),
+			'parent_item_colon' => __( 'Parent Category:', 'live-composer-page-builder' ),
+			'edit_item' => __( 'Edit Category', 'live-composer-page-builder' ),
+			'update_item' => __( 'Update Category', 'live-composer-page-builder' ),
+			'add_new_item' => __( 'Add New Category', 'live-composer-page-builder' ),
+			'new_item_name' => __( 'New Category Name', 'live-composer-page-builder' ),
+			'menu_name' => __( 'Categories', 'live-composer-page-builder' ),
+		),
+		'hierarchical' => true, 
+		'public' => true, 
+		'rewrite' => array( 
+			'slug' => dslc_get_option( 'downloads_cats_slug', 'dslc_plugin_options_cpt_slugs' ),
+			'with_front' => $with_front
+		),
+		'capabilities' => array(
+			'manage_terms' => $capability,
+			'edit_terms' => $capability,
+			'delete_terms' => $capability,
+			'assign_terms' => $capability,
+		),
 	);
 
-	register_taxonomy(
-		'dslc_downloads_tags', 
-		'dslc_downloads', 
-		array( 
-			'labels' => array(
-				'name' => __( 'Downloads Tags', 'live-composer-page-builder' ),
-				'singular_name' => __( 'Tag', 'live-composer-page-builder' ),
-				'search_items'  => __( 'Search Tags', 'live-composer-page-builder' ),
-				'all_items' => __( 'All Tags', 'live-composer-page-builder' ),
-				'parent_item' => __( 'Parent Tag', 'live-composer-page-builder' ),
-				'parent_item_colon' => __( 'Parent Tag:', 'live-composer-page-builder' ),
-				'edit_item' => __( 'Edit Tag', 'live-composer-page-builder' ),
-				'update_item' => __( 'Update Tag', 'live-composer-page-builder' ),
-				'add_new_item' => __( 'Add New Tag', 'live-composer-page-builder' ),
-				'new_item_name' => __( 'New Tag Name', 'live-composer-page-builder' ),
-				'menu_name' => __( 'Tags', 'live-composer-page-builder' ),
-			),
-			'hierarchical' => false, 
-			'public' => true, 
-			'rewrite' => array( 
-				'slug' => dslc_get_option( 'downloads_tags_slug', 'dslc_plugin_options_cpt_slugs' ),
-				'with_front' => $with_front
-			),
-			'capabilities' => array(
-				'manage_terms' => $capability,
-				'edit_terms' => $capability,
-				'delete_terms' => $capability,
-				'assign_terms' => $capability,
-			),
-		)
+	// Apply filters
+	$cats_args = apply_filters( 'dslc_downloads_cats_args', $cats_args );
+
+	// Register taxonomy
+	register_taxonomy( 'dslc_downloads_cats', 'dslc_downloads', $cats_args );
+	
+	/**
+	 * Register Taxonomy ( Tags )
+	 */
+
+	// Arguments
+	$tags_args = array( 
+		'labels' => array(
+			'name' => __( 'Downloads Tags', 'live-composer-page-builder' ),
+			'singular_name' => __( 'Tag', 'live-composer-page-builder' ),
+			'search_items'  => __( 'Search Tags', 'live-composer-page-builder' ),
+			'all_items' => __( 'All Tags', 'live-composer-page-builder' ),
+			'parent_item' => __( 'Parent Tag', 'live-composer-page-builder' ),
+			'parent_item_colon' => __( 'Parent Tag:', 'live-composer-page-builder' ),
+			'edit_item' => __( 'Edit Tag', 'live-composer-page-builder' ),
+			'update_item' => __( 'Update Tag', 'live-composer-page-builder' ),
+			'add_new_item' => __( 'Add New Tag', 'live-composer-page-builder' ),
+			'new_item_name' => __( 'New Tag Name', 'live-composer-page-builder' ),
+			'menu_name' => __( 'Tags', 'live-composer-page-builder' ),
+		),
+		'hierarchical' => false, 
+		'public' => true, 
+		'rewrite' => array( 
+			'slug' => dslc_get_option( 'downloads_tags_slug', 'dslc_plugin_options_cpt_slugs' ),
+			'with_front' => $with_front
+		),
+		'capabilities' => array(
+			'manage_terms' => $capability,
+			'edit_terms' => $capability,
+			'delete_terms' => $capability,
+			'assign_terms' => $capability,
+		),
 	);
+
+	// Apply filters
+	$tags_args = apply_filters( 'dslc_downloads_tags_args', $tags_args );
+
+	// Register taxonomy
+	register_taxonomy( 'dslc_downloads_tags', 'dslc_downloads', $tags_args );
 
 	/**
 	 * Post Options
