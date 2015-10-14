@@ -1006,6 +1006,24 @@ class DSLC_Posts extends DSLC_Module {
 			 */
 
 			array(
+				'label' => __( 'Meta Elements', 'live-composer-page-builder' ),
+				'id' => 'meta_elements',
+				'std' => 'author date',
+				'type' => 'checkbox',
+				'choices' => array(
+					array(
+						'label' => __( 'Author', 'live-composer-page-builder' ),
+						'value' => 'author',
+					),
+					array(
+						'label' => __( 'Date', 'live-composer-page-builder' ),
+						'value' => 'date',
+					),
+				),
+				'section' => 'styling',
+				'tab' => __( 'Meta', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Border Color', 'live-composer-page-builder' ),
 				'id' => 'css_meta_border_color',
 				'std' => '#e5e5e5',
@@ -2498,15 +2516,25 @@ class DSLC_Posts extends DSLC_Module {
 
 														<?php if ( $post_elements == 'all' || in_array( 'meta', $post_elements ) ) : ?>
 
+															<?php 
+																// Meta Elements
+																$meta_elements = $options['meta_elements'];
+																$meta_elements = explode( ' ', trim( $meta_elements ) );
+															?>
+
 															<div class="dslc-cpt-post-meta">
 																
-																<div class="dslc-cpt-post-meta-author">
-																	<?php _e( 'By', 'live-composer-page-builder'); ?> <?php the_author_posts_link(); ?>
-																</div><!-- .dslc-cpt-post-meta-author -->
+																<?php if ( in_array( 'author', $meta_elements ) ) : ?>
+																	<div class="dslc-cpt-post-meta-author">
+																		<?php _e( 'By', 'live-composer-page-builder'); ?> <?php the_author_posts_link(); ?>
+																	</div><!-- .dslc-cpt-post-meta-author -->
+																<?php endif; ?>
 
-																<div class="dslc-cpt-post-meta-date">
-																	<?php the_time( get_option( 'date_format' ) ); ?>
-																</div><!-- .dslc-cpt-post-meta-date -->
+																<?php if ( in_array( 'date', $meta_elements ) ) : ?>
+																	<div class="dslc-cpt-post-meta-date">
+																		<?php the_time( get_option( 'date_format' ) ); ?>
+																	</div><!-- .dslc-cpt-post-meta-date -->
+																<?php endif; ?>
 
 															</div><!-- .dslc-cpt-post-meta -->
 
@@ -2577,15 +2605,25 @@ class DSLC_Posts extends DSLC_Module {
 
 										<?php if ( $post_elements == 'all' || in_array( 'meta', $post_elements ) ) : ?>
 
+											<?php 
+												// Meta Elements
+												$meta_elements = $options['meta_elements'];
+												$meta_elements = explode( ' ', trim( $meta_elements ) );
+											?>
+
 											<div class="dslc-cpt-post-meta">
 												
-												<div class="dslc-cpt-post-meta-author">
-													<?php _e( 'By', 'live-composer-page-builder'); ?> <?php the_author_posts_link(); ?>
-												</div><!-- .dslc-cpt-post-meta-author -->
+												<?php if ( in_array( 'author', $meta_elements ) ) : ?>
+													<div class="dslc-cpt-post-meta-author">
+														<?php _e( 'By', 'live-composer-page-builder'); ?> <?php the_author_posts_link(); ?>
+													</div><!-- .dslc-cpt-post-meta-author -->
+												<?php endif; ?>
 
-												<div class="dslc-cpt-post-meta-date">
-													<?php the_time( get_option( 'date_format' ) ); ?>
-												</div><!-- .dslc-cpt-post-meta-date -->
+												<?php if ( in_array( 'date', $meta_elements ) ) : ?>
+													<div class="dslc-cpt-post-meta-date">
+														<?php the_time( get_option( 'date_format' ) ); ?>
+													</div><!-- .dslc-cpt-post-meta-date -->
+												<?php endif; ?>
 
 											</div><!-- .dslc-cpt-post-meta -->
 
