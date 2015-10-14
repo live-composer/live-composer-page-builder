@@ -45,11 +45,18 @@ $dslc_var_post_options['dslc-staff-post-options'] = array(
 	)
 );
 
+/**
+ * Register Post Type and Taxonomies
+ *
+ * @since 1.0
+ */
 function dslc_staff_module_cpt() {
 
+	// If module not active return
 	if ( ! dslc_is_module_active( 'DSLC_Staff', true ) )
 		return;
 
+	// Get capability
 	$capability = dslc_get_option( 'lc_min_capability_staff_m', 'dslc_plugin_options_access_control' );
 	if ( ! $capability ) $capability = 'publish_posts';
 
@@ -58,7 +65,12 @@ function dslc_staff_module_cpt() {
 	if ( empty ( $with_front )  ) $with_front = 'disabled';
 	if ( $with_front == 'enabled' ) $with_front = true; else $with_front = false;
 
-	register_post_type( 'dslc_staff', array(
+	/**
+	 * Register Post Type
+	 */
+
+	// Arguments
+	$cpt_args = array(
 		'menu_icon' => 'dashicons-id',
 		'labels' => array(
 			'name' => __( 'Staff', 'live-composer-page-builder' ),
@@ -89,32 +101,45 @@ function dslc_staff_module_cpt() {
 			'delete_post' => $capability,
 			'read_post' => $capability
 		),
-	));
+	);
+
+	// Apply filters
+	$cpt_args = apply_filters( 'dslc_staff_cpt_args', $cpt_args );
+
+	// Register post type
+	register_post_type( 'dslc_staff', $cpt_args );
 	
-	register_taxonomy(
-		'dslc_staff_cats', 
-		'dslc_staff', 
-		array( 
-			'labels' => array(
-				'name' => __( 'Staff Categories', 'live-composer-page-builder' ),
-				'singular_name' => __( 'Category', 'live-composer-page-builder' ),
-				'search_items'  => __( 'Search Categories', 'live-composer-page-builder' ),
-				'all_items' => __( 'All Categories', 'live-composer-page-builder' ),
-				'parent_item' => __( 'Parent Category', 'live-composer-page-builder' ),
-				'parent_item_colon' => __( 'Parent Category:', 'live-composer-page-builder' ),
-				'edit_item' => __( 'Edit Category', 'live-composer-page-builder' ),
-				'update_item' => __( 'Update Category', 'live-composer-page-builder' ),
-				'add_new_item' => __( 'Add New Category', 'live-composer-page-builder' ),
-				'new_item_name' => __( 'New Category Name', 'live-composer-page-builder' ),
-				'menu_name' => __( 'Categories', 'live-composer-page-builder' ),
-			),
-			'hierarchical' => true, 
-			'public' => true, 
-			'rewrite' => array( 
-				'slug' => dslc_get_option( 'staff_cats_slug', 'dslc_plugin_options_cpt_slugs' ),
-				'with_front' => $with_front
-			)
+	/**
+	 * Register Taxonomy ( Category )
+	 */
+
+	// Arguments
+	$cats_args = array( 
+		'labels' => array(
+			'name' => __( 'Staff Categories', 'live-composer-page-builder' ),
+			'singular_name' => __( 'Category', 'live-composer-page-builder' ),
+			'search_items'  => __( 'Search Categories', 'live-composer-page-builder' ),
+			'all_items' => __( 'All Categories', 'live-composer-page-builder' ),
+			'parent_item' => __( 'Parent Category', 'live-composer-page-builder' ),
+			'parent_item_colon' => __( 'Parent Category:', 'live-composer-page-builder' ),
+			'edit_item' => __( 'Edit Category', 'live-composer-page-builder' ),
+			'update_item' => __( 'Update Category', 'live-composer-page-builder' ),
+			'add_new_item' => __( 'Add New Category', 'live-composer-page-builder' ),
+			'new_item_name' => __( 'New Category Name', 'live-composer-page-builder' ),
+			'menu_name' => __( 'Categories', 'live-composer-page-builder' ),
+		),
+		'hierarchical' => true, 
+		'public' => true, 
+		'rewrite' => array( 
+			'slug' => dslc_get_option( 'staff_cats_slug', 'dslc_plugin_options_cpt_slugs' ),
+			'with_front' => $with_front
 		)
 	);
+
+	// Apply filters
+	$cats_args = apply_filters( 'dslc_staff_cats_args', $cats_args );
+
+	// Register taxonomy
+	register_taxonomy( 'dslc_staff_cats', 'dslc_staff', $cats_args );
 
 } add_action( 'init', 'dslc_staff_module_cpt' );
