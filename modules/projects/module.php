@@ -437,6 +437,17 @@ class DSLC_Projects extends DSLC_Module {
 			 */
 
 			array(
+				'label' => __( 'Align', 'live-composer-page-builder' ),
+				'id' => 'css_thumb_align',
+				'std' => 'left',
+				'type' => 'text_align',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-project-thumb',
+				'affect_on_change_rule' => 'text-align',
+				'section' => 'styling',
+				'tab' => __( 'Thumbnail', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'BG Color', 'live-composer-page-builder' ),
 				'id' => 'css_thumbnail_bg_color',
 				'std' => '',

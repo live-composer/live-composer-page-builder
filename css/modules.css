@@ -14,10 +14,15 @@
 				margin-bottom: 20px;
 				overflow: hidden;
 				position: relative;
+				line-height: 0;
 			}
 
 				#dslc-content .dslc-cpt-post-thumb-inner {
 					border: 0 solid transparent;
+				}
+
+				#dslc-content .dslc-cpt-post-thumb a {
+					display: inline-block;
 				}
 
 				#dslc-content .dslc-cpt-post-thumb img {
@@ -151,10 +156,15 @@
 				margin-bottom: 20px;
 				overflow: hidden;
 				position: relative;
+				line-height: 0;
 			}
 
 				#dslc-content .dslc-blog-post-thumb-inner {
 					border: 0 solid transparent;
+				}
+
+				#dslc-content .dslc-blog-post-thumb a {
+					display: inline-block;
 				}
 
 				#dslc-content .dslc-blog-post-thumb img {
@@ -296,10 +306,15 @@
 
 			#dslc-content .dslc-download-thumb {
 				position: relative;
+				line-height: 0;
 			}
 
 				#dslc-content .dslc-download-thumb-inner {
 					border: 0 solid transparent;
+				}
+
+				#dslc-content .dslc-download-thumb a {
+					display: inline-block;
 				}
 
 				#dslc-content .dslc-download-thumb img {
@@ -416,11 +431,16 @@
 
 			#dslc-content .dslc-gallery-thumb {
 				position: relative;
+				line-height: 0;
 			}
 
 				#dslc-content .dslc-gallery-thumb-inner {
 					border: 0 solid transparent;
 					position: relative;
+				}
+
+				#dslc-content .dslc-gallery-thumb a {
+					display: inline-block;
 				}
 
 				#dslc-content .dslc-gallery-thumb img {
@@ -648,7 +668,12 @@
 			padding: 50px 0;
 			text-align: center;
 			position: relative;
+			line-height: 0;
 		}
+
+			#dslc-content .dslc-partner .dslc-partner-thumb a {
+				display: inline-block;
+			}			
 
 			#dslc-content .dslc-partner .dslc-partner-thumb img {
 				border-radius: 0;
@@ -730,10 +755,15 @@
 		#dslc-content .dslc-projects .dslc-project-thumb {
 			margin-bottom: 24px;
 			position: relative;
+			line-height: 0;
 		}
 
 			#dslc-content .dslc-projects .dslc-project-thumb-inner {
 				border: 0 solid transparent;
+			}
+
+			#dslc-content .dslc-projects .dslc-project-thumb a {
+				display: inline-block;
 			}
 
 			#dslc-content .dslc-projects .dslc-project-thumb img {
@@ -865,10 +895,15 @@
 
 			#dslc-content .dslc-staff-member-thumb {
 				position: relative;
+				line-height: 0;
 			}
 
 				#dslc-content .dslc-staff-member-thumb {
 					border: 0 solid transparent;
+				}
+
+				#dslc-content .dslc-staff-member-thumb a {
+					display: inline-block;
 				}
 
 				#dslc-content .dslc-staff-member-thumb img {
@@ -1207,10 +1242,15 @@
 
 			#dslc-content .dslc-product-thumb {
 				position: relative;
+				line-height: 0;
 			}
 
 				#dslc-content .dslc-product-thumb-inner {
 					bottom: 0 solid transparent;
+				}
+
+				#dslc-content .dslc-product-thumb a {
+					display: inline-block;
 				}
 
 				#dslc-content .dslc-product-thumb img {

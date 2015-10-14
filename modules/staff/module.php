@@ -420,10 +420,17 @@ class DSLC_Staff extends DSLC_Module {
 			 * Thumbnail
 			 */
 
-			/**
-			 * Thumbnail
-			 */
-
+			array(
+				'label' => __( 'Align', 'live-composer-page-builder' ),
+				'id' => 'css_thumb_align',
+				'std' => 'left',
+				'type' => 'text_align',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-staff-member-thumb',
+				'affect_on_change_rule' => 'text-align',
+				'section' => 'styling',
+				'tab' => __( 'Thumbnail', 'live-composer-page-builder' ),
+			),
 			array(
 				'label' => __( 'BG Color', 'live-composer-page-builder' ),
 				'id' => 'css_thumbnail_bg_color',
