@@ -112,7 +112,11 @@ class DSLC_Staff extends DSLC_Module {
 					array(
 						'label' => __( 'Prev/Next', 'live-composer-page-builder' ),
 						'value' => 'prevnext',
-					)
+					),
+					array(
+						'label' => __( 'Load More', 'live-composer-page-builder' ),
+						'value' => 'loadmore',
+					),
 				),
 			),
 			array(
