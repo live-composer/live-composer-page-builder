@@ -649,6 +649,46 @@ function dslc_ajax_display_module_options( $atts ) {
 
 						</div><!-- .dslca-module-edit-option-box-shadow-wrapper -->
 
+					<?php elseif ( $module_option['type'] == 'text_shadow' ) : ?>
+
+						<?php
+							$text_shadow_hor_val = 0;
+							$text_shadow_ver_val = 0;
+							$text_shadow_blur_val = 0;
+							$text_shadow_color_val = 'transparent';
+
+							$text_shadow_val = false;
+							if ( $curr_value !== '' ) {
+								$text_shadow_val = explode( ' ', $curr_value );
+							}
+
+							if ( is_array( $text_shadow_val ) ) {
+								$text_shadow_hor_val = str_replace('px', '', $text_shadow_val[0] );
+								$text_shadow_ver_val = str_replace('px', '', $text_shadow_val[1] );
+								$text_shadow_blur_val = str_replace('px', '', $text_shadow_val[2] );
+								$text_shadow_color_val = str_replace('px', '', $text_shadow_val[4] );
+							}
+						?>
+
+						<div class="dslca-module-edit-option-text-shadow-wrapper">
+
+							<div class="dslca-module-edit-option-text-shadow-single">
+								<span><?php _e( 'Hor', 'live-composer-page-builder' ); ?></span><input class="dslca-module-edit-option-text-shadow-hor" step="0.1" type="number" value="<?php echo $text_shadow_hor_val; ?>" />
+							</div>
+							<div class="dslca-module-edit-option-text-shadow-single">
+								<span><?php _e( 'Ver', 'live-composer-page-builder' ); ?></span><input class="dslca-module-edit-option-text-shadow-ver" step="0.1" type="number" value="<?php echo $text_shadow_ver_val; ?>" />
+							</div>
+							<div class="dslca-module-edit-option-text-shadow-single">
+								<span><?php _e( 'Blur', 'live-composer-page-builder' ); ?></span><input class="dslca-module-edit-option-text-shadow-blur" step="0.1" type="number" value="<?php echo $text_shadow_blur_val; ?>" />
+							</div>
+							<div class="dslca-module-edit-option-text-shadow-single">
+								<span><?php _e( 'Color', 'live-composer-page-builder' ); ?></span><input class="dslca-module-edit-option-text-shadow-color" type="text" value="<?php echo $text_shadow_color_val; ?>" />
+							</div>
+
+							<input type="hidden" class="dslca-module-edit-field dslca-module-edit-field-text-shadow" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" <?php echo $affect_on_change_append ?> />
+
+						</div><!-- .dslca-module-edit-option-text-shadow-wrapper -->
+
 					<?php else : ?>
 
 						<?php if ( has_action( 'dslc_custom_option_type_' . $module_option['type'] ) ) : ?>
