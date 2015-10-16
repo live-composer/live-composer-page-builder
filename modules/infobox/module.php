@@ -144,6 +144,10 @@ class DSLC_Info_Box extends DSLC_Module {
 						'value' => 'icon'
 					),
 					array(
+						'label' => __( 'Image', 'live-composer-page-builder' ),
+						'value' => 'image'
+					),
+					array(
 						'label' => __( 'Title', 'live-composer-page-builder' ),
 						'value' => 'title'
 					),
@@ -414,6 +418,17 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_rule' => 'box-shadow',
 				'section' => 'styling',
 			),
+			array(
+				'label' => __( 'Box Shadow - Hover', 'live-composer-page-builder' ),
+				'id' => 'css_box_shadow_hover',
+				'std' => '',
+				'type' => 'box_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box:hover',
+				'affect_on_change_rule' => 'box-shadow',
+				'section' => 'styling',
+			),
+			
 
 			/**
 			 * Wrapper
@@ -839,6 +854,136 @@ class DSLC_Info_Box extends DSLC_Module {
 				'tab' => __( 'Icon', 'live-composer-page-builder' ),
 			),
 
+      /**
+			 * Image
+			 */
+			 
+			 array(
+				'label' => __( 'Image - File', 'live-composer-page-builder' ),
+				'id' => 'image_alt',
+				'std' => '',
+				'type' => 'image',
+				'section' => 'styling',
+				'tab' => __( 'Image', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Image Link - URL', 'live-composer-page-builder' ),
+				'id' => 'image_alt_link_url',
+				'std' => '',
+				'type' => 'text',
+				'section' => 'styling',
+				'tab' => __( 'Image', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Align', 'live-composer-page-builder' ),
+				'id' => 'css_image_alt_align',
+				'std' => 'center',
+				'type' => 'text_align',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-image-alt-inner',
+				'affect_on_change_rule' => 'text-align',
+				'section' => 'styling',
+				'tab' => __( 'Image', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Border Color', 'live-composer-page-builder' ),
+				'id' => 'css_image_alt_border_color',
+				'std' => '',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-image-alt-inner img',
+				'affect_on_change_rule' => 'border-color',
+				'section' => 'styling',
+				'tab' => __( 'Image', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Border Width', 'live-composer-page-builder' ),
+				'id' => 'css_image_alt_border_width',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-image-alt-inner img',
+				'affect_on_change_rule' => 'border-width',
+				'ext' => 'px',
+				'section' => 'styling',
+				'tab' => __( 'Image', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Borders', 'live-composer-page-builder' ),
+				'id' => 'css_image_alt_border_trbl',
+				'std' => 'top right bottom left',
+				'type' => 'checkbox',
+				'choices' => array(
+					array(
+						'label' => __( 'Top', 'live-composer-page-builder' ),
+						'value' => 'top'
+					),
+					array(
+						'label' => __( 'Right', 'live-composer-page-builder' ),
+						'value' => 'right'
+					),
+					array(
+						'label' => __( 'Bottom', 'live-composer-page-builder' ),
+						'value' => 'bottom'
+					),
+					array(
+						'label' => __( 'Left', 'live-composer-page-builder' ),
+						'value' => 'left'
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-image-alt-inner img',
+				'affect_on_change_rule' => 'border-style',
+				'section' => 'styling',
+				'tab' => __( 'Image', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Border Radius', 'live-composer-page-builder' ),
+				'id' => 'css_image_alt_border_radius',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-image-alt-inner img',
+				'affect_on_change_rule' => 'border-radius',
+				'section' => 'styling',
+				'tab' => __( 'Image', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
+				'id' => 'css_image_alt_margin_bottom',
+				'std' => '25',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-image-alt-inner img',
+				'affect_on_change_rule' => 'margin-bottom',
+				'section' => 'styling',
+				'tab' => __( 'Image', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Box Shadow', 'live-composer-page-builder' ),
+				'id' => 'css_image_alt_box_shadow',
+				'std' => '',
+				'type' => 'box_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-image-alt-inner img',
+				'affect_on_change_rule' => 'box-shadow',
+				'section' => 'styling',
+				'tab' => __( 'Image', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Box Shadow - Hover', 'live-composer-page-builder' ),
+				'id' => 'css_image_alt_box_shadow_hover',
+				'std' => '',
+				'type' => 'box_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box:hover .dslc-info-box-image-alt-inner img',
+				'affect_on_change_rule' => 'box-shadow',
+				'section' => 'styling',
+				'tab' => __( 'Image', 'live-composer-page-builder' ),
+			),
+			 
 			/**
 			 * Title
 			 */
@@ -2319,6 +2464,9 @@ class DSLC_Info_Box extends DSLC_Module {
 			$elements = explode( ' ', trim( $elements ) );
 		else
 			$elements = array();
+		
+		$image_alt          = $options['image_alt'];
+		$image_alt_link_url = $options['image_alt_link_url'];
 
 		?>
 
@@ -2362,6 +2510,18 @@ class DSLC_Info_Box extends DSLC_Module {
 									<?php endif; ?>
 								</div><!-- .dslc-info-box-image-inner -->
 							</div><!-- .dslc-info-box-image -->
+						<?php endif; ?>
+						
+						<?php if ( in_array( 'image', $elements ) && $image_alt ) : ?>
+							<div class="dslc-info-box-image-alt">
+								<div class="dslc-info-box-image-alt-inner">
+									<?php if ( ! $image_alt_link_url) : ?>
+										<img src="<?php echo esc_url($image_alt);?>">
+									<?php else : ?>
+									  <a href="<?php echo esc_url($image_alt_link_url);?>"><img src="<?php echo esc_url($image_alt);?>"></a>
+									<?php endif; ?>
+								</div><!-- .dslc-info-box-image-alt-inner -->
+							</div><!-- .dslc-info-box-image-alt -->
 						<?php endif; ?>
 
 						<div class="dslc-info-box-main">

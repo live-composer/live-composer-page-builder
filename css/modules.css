@@ -578,6 +578,8 @@
 	.dslc-info-box {
 		text-align: center;
 		border: 0px solid transparent;	
+		transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
 	}
 
 		.dslc-info-box-main-wrap {
@@ -619,6 +621,11 @@
 							font-size: 40px;
 							position: absolute;
 						}
+            
+            .dslc-info-box-image-alt-inner img {
+              transition: all 0.2s ease-in-out;
+              -webkit-transition: all 0.2s ease-in-out;
+            }
 
 				.dslc-info-box-title {
 					margin-bottom: 25px;
