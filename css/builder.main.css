@@ -401,6 +401,7 @@ body {
 					margin-bottom: 10px;
 					text-transform: uppercase;
 					white-space: nowrap;
+					position: relative;
 				}
 
 				.dslca-module-edit-field {
@@ -511,6 +512,61 @@ body {
 						font-weight: 600;
 						font-family: "Open Sans";
 					}
+
+			/**
+			 * Icon option type - Switch set
+			 */
+
+			.dslca-module-edit-field-icon-switch-set {
+				display: block;
+				position: absolute;
+				top: 0;
+				right: 0;
+				font-size: 10px;
+				line-height: 13px;
+				cursor: pointer;
+			}
+
+				.dslca-module-edit-field-icon-curr-set {
+					margin-right: 5px;
+				}
+
+				.dslca-module-edit-field-icon-switch-set .dslca-icon {
+					color: rgba( 255, 255, 255, 0.7 );
+				}
+
+			.dslca-module-edit-field-icon-switch-sets {
+				background: #fff;
+				color: #8a8a8a;
+				font-family: "Lato";
+				font-size: 13px;
+				display: none;
+				border-radius: 3px;
+				padding: 20px 25px;
+				border: 1px solid rgba(0,0,0,.12);
+				position: absolute;
+				-moz-box-shadow: 0 2px 2px rgba(0,0,0,.04), 0 0 7px rgba(0,0,0,.12);
+				-webkit-box-shadow: 0 2px 2px rgba(0,0,0,.04), 0 0 7px rgba(0,0,0,.12);
+				box-shadow: 0 2px 2px rgba(0,0,0,.04), 0 0 7px rgba(0,0,0,.12);
+				text-align: center;
+				z-index: 999999;
+			}
+
+				.dslca-module-edit-field-icon-switch-sets span {
+					display: block;
+					padding: 5px 10px;
+					cursor: pointer;
+					border-radius: 3px;
+				}
+
+				.dslca-module-edit-field-icon-switch-sets span:hover {
+					background: rgba( 0, 0, 0, 0.1 );
+				}
+
+				.dslca-module-edit-field-icon-switch-sets span.dslca-active {
+					background: #5890e5;
+					color: #fff;
+				}
 
 			/**
 			 * Box shadow option type

@@ -6,6 +6,7 @@
  * class DSLC_Aq_Resize ( Image resizing class )
  * dslc_aq_resize ( Resize an image using DSLC_Aq_Resize Class )
  * dslc_get_social_count ( Returns amount of social shares a page has ) 
+ * dslc_icons_current_set ( Returns the ID of the currently used set based on icon )
  */
 
 if( ! class_exists('DSLC_Aq_Resize') ) {
@@ -290,5 +291,41 @@ function dslc_get_social_count( $post_ID = false, $refresh_in = 3600 ) {
 
 	// Pass the data back
 	return $share_info;
+
+}
+
+/**
+ * Returns the ID of the currently used set based on icon
+ *
+ * @since 1.0.4
+ *
+ * @param string   $icon The icon name
+ * @return string  Current ID of the icon set
+ */
+function dslc_icons_current_set( $icon = false ) {
+
+	// If no icon set return to the default "fontawesome"
+	// If empty icon return default
+	// If there is no "-" in icon, there is no set, return default
+	if ( $icon == false || strlen( $icon ) == 0 || strpos( $icon, '-' ) === false ) {
+		return 'fontawesome';
+	}	
+
+	// Get array with available icons
+	global $dslc_var_icons;
+
+	// Get the first part of the icon ( representing the set )
+	$icon_parts = explode( '-', $icon );
+	$icon_set = $icon_parts[0];
+
+	
+
+	// If there is an icon set by that name return it
+	if ( isset( $dslc_var_icons[ $icon_set ] ) ) {
+		return $icon_set;
+	// Otherwise return the default
+	} else {
+		return 'fontawesome';
+	}
 
 }

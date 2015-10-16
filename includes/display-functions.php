@@ -295,6 +295,15 @@ function dslc_display_composer() {
 				<div class="dslca-module-edit-field-ttip-inner"></div>
 			</div>
 
+			<div class="dslca-module-edit-field-icon-switch-sets">
+				<?php
+					global $dslc_var_icons;
+					foreach ( $dslc_var_icons as $key => $value ) :
+						?><span data-set="<?php echo $key; ?>"><?php echo $key; ?></span><?php
+					endforeach;
+				?>
+			</div>
+
 			<div class="dslca-invisible-overlay"></div>
 
 		<?php

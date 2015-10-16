@@ -51,6 +51,7 @@
 	$dslc_var_modules = array(); // Will hold modules information
 	$dslc_var_templates = array(); // Will hold templates information
 	$dslc_var_post_options = array(); // Will hold post options information
+	$dslc_var_icons = array(); // Will hold available icons array
 
 	$dslc_css_fonts = '';
 	$dslc_css_style = '';

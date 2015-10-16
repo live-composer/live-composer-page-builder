@@ -20,7 +20,9 @@
 var dslcRegularFontsArray = DSLCFonts.regular;
 var dslcGoogleFontsArray = DSLCFonts.google;
 var dslcAllFontsArray = dslcRegularFontsArray.concat( dslcGoogleFontsArray );
-var dslcFontAwesomeArray = DSLCIcons.fontawesome;
+
+// Set current/default icons set
+var dslcIconsCurrentSet = DSLCIcons.fontawesome;
 
 var dslcDebug = false;
 
@@ -3521,12 +3523,12 @@ var dslcDebug = false;
 
 			var dslcOption = jQuery(this).closest('.dslca-module-edit-option-icon');
 			var dslcField = jQuery( '.dslca-module-edit-field-icon', dslcOption );
-			var dslcCurrIndex = dslcFontAwesomeArray.indexOf( dslcField.val() );
+			var dslcCurrIndex = dslcIconsCurrentSet.indexOf( dslcField.val() );
 			var dslcNewIndex = dslcCurrIndex + 1;
 			
 			jQuery('.dslca-module-edit-field-icon-suggest', dslcOption).text('');
 
-			dslcField.val( dslcFontAwesomeArray[dslcNewIndex] ).trigger('change');
+			dslcField.val( dslcIconsCurrentSet[dslcNewIndex] ).trigger('change');
 
 		});
 
@@ -3538,16 +3540,16 @@ var dslcDebug = false;
 
 			var dslcOption = jQuery(this).closest('.dslca-module-edit-option-icon');
 			var dslcField = jQuery( '.dslca-module-edit-field-icon', dslcOption );
-			var dslcCurrIndex = dslcFontAwesomeArray.indexOf( dslcField.val() );
+			var dslcCurrIndex = dslcIconsCurrentSet.indexOf( dslcField.val() );
 			var dslcNewIndex = dslcCurrIndex - 1;
 
 			jQuery('.dslca-module-edit-field-icon-suggest', dslcOption).text('');
 
 			if ( dslcNewIndex < 0 ) {
-				dslcNewIndex = dslcFontAwesomeArray.length - 1
+				dslcNewIndex = dslcIconsCurrentSet.length - 1
 			}
 			
-			dslcField.val( dslcFontAwesomeArray[dslcNewIndex] ).trigger('change');
+			dslcField.val( dslcIconsCurrentSet[dslcNewIndex] ).trigger('change');
 
 		});
 
@@ -3573,7 +3575,7 @@ var dslcDebug = false;
 				dslcVal = dslcField.val().toLowerCase();
 				dslcField.val( dslcVal );
 
-				dslcIconsArrayGrep = jQuery.grep(dslcFontAwesomeArray, function(value, i) {
+				dslcIconsArrayGrep = jQuery.grep(dslcIconsCurrentSet, function(value, i) {
 					return ( value.indexOf( dslcVal ) == 0 );
 				});
 
@@ -4466,6 +4468,92 @@ var dslcDebug = false;
 			dslc_module_options_cancel_changes();
 			$('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
 			dslc_responsive_classes( true );
+
+		});
+
+		/**
+		 * Hook - Show/Hide Icon Set Switch
+		 */
+
+		jQuery(document).on( 'click', '.dslca-module-edit-field-icon-switch-set', function(){
+
+			var dslcTtip = jQuery('.dslca-module-edit-field-icon-switch-sets');
+			var dslcHook = jQuery(this);
+
+			// Add/Remo active classes
+			jQuery('.dslca-module-edit-field-icon-switch-set.dslca-active').removeClass('dslca-active');
+			dslcHook.addClass('dslca-active');
+
+			if ( dslcTtip.is(':visible') ) {
+
+				jQuery('.dslca-module-edit-field-icon-switch-sets').hide();
+
+			} else {
+
+				// Icon vars
+				var currIconSet = dslcHook.find('.dslca-module-edit-field-icon-curr-set').text();
+
+				jQuery('.dslca-module-edit-field-icon-switch-sets span.dslca-active').removeClass('dslca-active');
+				jQuery('.dslca-module-edit-field-icon-switch-sets span[data-set="' + currIconSet + '"]').addClass('dslca-active');
+
+				// Positioning vars
+				var dslcOffset = dslcHook.offset(),
+				dslcTtipHeight = dslcTtip.outerHeight(),
+				dslcTtipWidth = dslcTtip.outerWidth(),
+				dslcTtipLeft = dslcOffset.left - ( dslcTtipWidth / 2 ) + 6,
+				dslcTtipArrLeft = '50%';
+
+				if ( dslcTtipLeft < 0 ) {
+					dslcTtipArrLeft = ( dslcTtipWidth / 2 ) + dslcTtipLeft + 'px';
+					dslcTtipLeft = 0;
+				}			
+
+				jQuery('.dslca-module-edit-field-icon-switch-sets').show().css({
+					top : dslcOffset.top - dslcTtipHeight - 20,
+					left: dslcTtipLeft
+				});
+
+				jQuery("head").append(jQuery('<style>.dslca-module-edit-field-icon-switch-sets:after, .dslca-module-edit-field-icon-switch-sets:before { left: ' + dslcTtipArrLeft + ' }</style>'));
+
+			}
+
+		});
+
+		/**
+		 * Hook - Switch Icon Set
+		 */
+
+		jQuery(document).on( 'click', '.dslca-module-edit-field-icon-switch-sets span', function(){
+
+			var iconSet = $(this).data('set');
+
+			// Change current icon set
+			dslcIconsCurrentSet = DSLCIcons[iconSet];
+
+			// Change active states
+			$(this).addClass('dslca-active').siblings('.dslca-active').removeClass('dslca-active');
+
+			// Change current text
+			$('.dslca-module-edit-field-icon-switch-set.dslca-active .dslca-module-edit-field-icon-curr-set').text( iconSet );
+
+			// Go to next icon
+			$('.dslca-module-edit-field-icon-switch-set.dslca-active').closest('.dslca-module-edit-option').find('.dslca-module-edit-field-icon-next').trigger('click');
+
+			// Hide sets
+			$('.dslca-module-edit-field-icon-switch-sets').hide();
+
+		});
+
+		/**
+		 * Action - Change current set on mouse enter of icon option
+		 */
+
+		jQuery(document).on( 'mouseenter', '.dslca-module-edit-option-icon', function(){
+
+			var iconSet = $(this).find('.dslca-module-edit-field-icon-curr-set').text();
+
+			// Change current icon set
+			dslcIconsCurrentSet = DSLCIcons[iconSet];
 
 		});
 

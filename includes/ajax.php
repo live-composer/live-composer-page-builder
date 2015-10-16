@@ -444,6 +444,7 @@ function dslc_ajax_display_module_options( $atts ) {
 						<?php echo $module_option['label']; ?>
 						<?php if ( $module_option['type'] == 'icon' ): ?>
 							<span class="dslca-module-edit-field-icon-ttip-hook"><span class="dslca-icon dslc-icon-info"></span></span>
+							<span class="dslca-module-edit-field-icon-switch-set"><span class="dslca-module-edit-field-icon-curr-set"><?php echo dslc_icons_current_set( $curr_value ); ?></span><span class="dslca-icon dslc-icon-cog"></span></span>
 						<?php endif; ?>
 						<?php if ( isset( $module_option['help'] ) ) : ?>
 							<span class="dslca-module-edit-field-ttip-hook"><span class="dslca-icon dslc-icon-info"></span></span>
