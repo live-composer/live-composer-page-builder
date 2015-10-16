@@ -1934,6 +1934,7 @@ class DSLC_Html extends DSLC_Module {
 				'std' => '',
 				'type' => 'text_shadow',
 				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-html-module-content blockquote',
 				'affect_on_change_rule' => 'text-shadow',
 				'section' => 'styling',
 				'tab' => __( 'blockquote', 'live-composer-page-builder' ),
