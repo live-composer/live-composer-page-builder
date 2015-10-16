@@ -274,6 +274,17 @@ class DSLC_TP_Title extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'Typography', 'live-composer-page-builder' ),
 			),
+			array(
+				'label' => __( 'Text Shadow', 'live-composer-page-builder' ),
+				'id' => 'css_text_shadow',
+				'std' => '',
+				'type' => 'text_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => 'h1',
+				'affect_on_change_rule' => 'text-shadow',
+				'section' => 'styling',
+				'tab' => __( 'Typography', 'live-composer-page-builder' ),
+			),
 
 			/**
 			 * Responsive Tablet
