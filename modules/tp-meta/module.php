@@ -359,6 +359,17 @@ class DSLC_TP_Meta extends DSLC_Module {
 				'ext' => 'px'
 			),
 			array(
+				'label' => __( 'Text Shadow', 'live-composer-page-builder' ),
+				'id' => 'css_text_shadow',
+				'std' => '',
+				'type' => 'text_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => 'li',
+				'affect_on_change_rule' => 'text-shadow',
+				'section' => 'styling',
+				'tab' => __( 'typography', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Link - Color', 'live-composer-page-builder' ),
 				'id' => 'link_color',
 				'std' => '',
@@ -380,6 +391,18 @@ class DSLC_TP_Meta extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'typography', 'live-composer-page-builder' ),
 			),
+			array(
+				'label' => __( 'Link - Text Shadow', 'live-composer-page-builder' ),
+				'id' => 'css_link_text_shadow',
+				'std' => '',
+				'type' => 'text_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => 'li a',
+				'affect_on_change_rule' => 'text-shadow',
+				'section' => 'styling',
+				'tab' => __( 'typography', 'live-composer-page-builder' ),
+			),
+			
 
 			/**
 			 * Responsive Tablet
