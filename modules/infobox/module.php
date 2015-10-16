@@ -2465,7 +2465,7 @@ class DSLC_Info_Box extends DSLC_Module {
 		else
 			$elements = array();
 		
-		$image_alt          = $options['image_alt'];
+		$image_alt = $options['image_alt'];
 		$image_alt_link_url = $options['image_alt_link_url'];
 
 		?>
@@ -2518,7 +2518,7 @@ class DSLC_Info_Box extends DSLC_Module {
 									<?php if ( ! $image_alt_link_url) : ?>
 										<img src="<?php echo esc_url($image_alt);?>">
 									<?php else : ?>
-									  <a href="<?php echo esc_url($image_alt_link_url);?>"><img src="<?php echo esc_url($image_alt);?>"></a>
+										<a href="<?php echo esc_url($image_alt_link_url);?>"><img src="<?php echo esc_url($image_alt);?>"></a>
 									<?php endif; ?>
 								</div><!-- .dslc-info-box-image-alt-inner -->
 							</div><!-- .dslc-info-box-image-alt -->

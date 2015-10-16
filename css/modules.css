@@ -578,8 +578,9 @@
 	.dslc-info-box {
 		text-align: center;
 		border: 0px solid transparent;	
+		-webkit-transition: all 0.2s ease-in-out;
+		-moz-transition: all 0.2s ease-in-out;
 		transition: all 0.2s ease-in-out;
-    -webkit-transition: all 0.2s ease-in-out;
 	}
 
 		.dslc-info-box-main-wrap {
@@ -621,11 +622,12 @@
 							font-size: 40px;
 							position: absolute;
 						}
-            
-            .dslc-info-box-image-alt-inner img {
-              transition: all 0.2s ease-in-out;
-              -webkit-transition: all 0.2s ease-in-out;
-            }
+
+			.dslc-info-box-image-alt-inner img {
+				-webkit-transition: all 0.2s ease-in-out;
+				-moz-transition: all 0.2s ease-in-out;
+				transition: all 0.2s ease-in-out;
+			}
 
 				.dslc-info-box-title {
 					margin-bottom: 25px;
