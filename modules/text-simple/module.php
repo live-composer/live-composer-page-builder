@@ -438,6 +438,17 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'Content', 'live-composer-page-builder' ),
 			),
+			array(
+				'label' => __( 'Text Shadow', 'live-composer-page-builder' ),
+				'id' => 'css_main_text_shadow',
+				'std' => '',
+				'type' => 'text_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-text-module-content p',
+				'affect_on_change_rule' => 'text-shadow',
+				'section' => 'styling',
+				'tab' => __( 'Content', 'live-composer-page-builder' ),
+			),
 
 			/**
 			 * Heading 1
@@ -673,6 +684,17 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'h1', 'live-composer-page-builder' ),
 			),
+			array(
+				'label' => __( 'Text Shadow', 'live-composer-page-builder' ),
+				'id' => 'css_h1_text_shadow',
+				'std' => '',
+				'type' => 'text_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-text-module-content h1',
+				'affect_on_change_rule' => 'text-shadow',
+				'section' => 'styling',
+				'tab' => __( 'H1', 'live-composer-page-builder' ),
+			),
 
 			/**
 			 * Heading 2
@@ -905,6 +927,17 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-text-module-content h2',
 				'affect_on_change_rule' => 'text-align',
+				'section' => 'styling',
+				'tab' => __( 'H2', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Text Shadow', 'live-composer-page-builder' ),
+				'id' => 'css_h2_text_shadow',
+				'std' => '',
+				'type' => 'text_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-text-module-content h2',
+				'affect_on_change_rule' => 'text-shadow',
 				'section' => 'styling',
 				'tab' => __( 'H2', 'live-composer-page-builder' ),
 			),
@@ -1143,6 +1176,17 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'h3', 'live-composer-page-builder' ),
 			),
+			array(
+				'label' => __( 'Text Shadow', 'live-composer-page-builder' ),
+				'id' => 'css_h3_text_shadow',
+				'std' => '',
+				'type' => 'text_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-text-module-content h3',
+				'affect_on_change_rule' => 'text-shadow',
+				'section' => 'styling',
+				'tab' => __( 'H3', 'live-composer-page-builder' ),
+			),
 
 			/**
 			 * Heading 4
@@ -1377,6 +1421,17 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'affect_on_change_rule' => 'text-align',
 				'section' => 'styling',
 				'tab' => __( 'h4', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Text Shadow', 'live-composer-page-builder' ),
+				'id' => 'css_h4_text_shadow',
+				'std' => '',
+				'type' => 'text_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-text-module-content h4',
+				'affect_on_change_rule' => 'text-shadow',
+				'section' => 'styling',
+				'tab' => __( 'H4', 'live-composer-page-builder' ),
 			),
 
 			/**
@@ -1613,6 +1668,17 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'h5', 'live-composer-page-builder' ),
 			),
+			array(
+				'label' => __( 'Text Shadow', 'live-composer-page-builder' ),
+				'id' => 'css_h5_text_shadow',
+				'std' => '',
+				'type' => 'text_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-text-module-content h5',
+				'affect_on_change_rule' => 'text-shadow',
+				'section' => 'styling',
+				'tab' => __( 'H5', 'live-composer-page-builder' ),
+			),
 
 			/**
 			 * Heading 6
@@ -1848,6 +1914,17 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'h6', 'live-composer-page-builder' ),
 			),
+			array(
+				'label' => __( 'Text Shadow', 'live-composer-page-builder' ),
+				'id' => 'css_h6_text_shadow',
+				'std' => '',
+				'type' => 'text_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-text-module-content h6',
+				'affect_on_change_rule' => 'text-shadow',
+				'section' => 'styling',
+				'tab' => __( 'H6', 'live-composer-page-builder' ),
+			),
 
 			/**
 			 * Links
@@ -1876,6 +1953,17 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'tab' => __( 'links', 'live-composer-page-builder' ),
 			),
 			array(
+				'label' => __( 'Link - Text Shadow', 'live-composer-page-builder' ),
+				'id' => 'css_link_text_shadow',
+				'std' => '',
+				'type' => 'text_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-text-module-content a',
+				'affect_on_change_rule' => 'text-shadow',
+				'section' => 'styling',
+				'tab' => __( 'links', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Blockquote Link - Color', 'live-composer-page-builder' ),
 				'id' => 'css_blockquote_link_color',
 				'std' => '',
@@ -1894,6 +1982,17 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-text-module-content blockquote a:hover',
 				'affect_on_change_rule' => 'color',
+				'section' => 'styling',
+				'tab' => __( 'links', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Blockquote Link - Text Shadow', 'live-composer-page-builder' ),
+				'id' => 'css_blockquote_link_text_shadow',
+				'std' => '',
+				'type' => 'text_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-text-module-content blockquote a',
+				'affect_on_change_rule' => 'text-shadow',
 				'section' => 'styling',
 				'tab' => __( 'links', 'live-composer-page-builder' ),
 			),
@@ -2288,6 +2387,17 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'lists', 'live-composer-page-builder' ),
 			),
+			array(
+				'label' => __( 'Text Shadow', 'live-composer-page-builder' ),
+				'id' => 'css_li_text_shadow',
+				'std' => '',
+				'type' => 'text_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-text-module-content li',
+				'affect_on_change_rule' => 'text-shadow',
+				'section' => 'styling',
+				'tab' => __( 'lists', 'live-composer-page-builder' ),
+			),
 
 			/**
 			 * Inputs
@@ -2463,6 +2573,17 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'styling',
 				'ext' => 'px',
+				'tab' => __( 'inputs', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Text Shadow', 'live-composer-page-builder' ),
+				'id' => 'css_inputs_text_shadow',
+				'std' => '',
+				'type' => 'text_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => 'input[type=text],input[type=password],input[type=number],input[type=email],textarea,select',
+				'affect_on_change_rule' => 'text-shadow',
+				'section' => 'styling',
 				'tab' => __( 'inputs', 'live-composer-page-builder' ),
 			),
 
@@ -2677,6 +2798,17 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'blockquote', 'live-composer-page-builder' ),
 			),
+			array(
+				'label' => __( 'Text Shadow', 'live-composer-page-builder' ),
+				'id' => 'css_blockquote_text_shadow',
+				'std' => '',
+				'type' => 'text_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-text-module-content blockquote',
+				'affect_on_change_rule' => 'text-shadow',
+				'section' => 'styling',
+				'tab' => __( 'blockquote', 'live-composer-page-builder' ),
+			),
 
 			/**
 			 * Submit Button
@@ -2873,6 +3005,17 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'styling',
 				'ext' => 'px',
+				'tab' => __( 'buttons', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Text Shadow', 'live-composer-page-builder' ),
+				'id' => 'css_button_text_shadow',
+				'std' => '',
+				'type' => 'text_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => 'input[type=submit], button',
+				'affect_on_change_rule' => 'text-shadow',
+				'section' => 'styling',
 				'tab' => __( 'buttons', 'live-composer-page-builder' ),
 			),
 			
