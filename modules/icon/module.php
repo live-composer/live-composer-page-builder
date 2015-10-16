@@ -237,6 +237,17 @@ class DSLC_Icon extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Icon', 'live-composer-page-builder' )
 			),
+			array(
+				'label' => __( 'Icon Shadow', 'live-composer-page-builder' ),
+				'id' => 'css_icon_text_shadow',
+				'std' => '',
+				'type' => 'text_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-icon',
+				'affect_on_change_rule' => 'text-shadow',
+				'section' => 'styling',
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
+			),
 
 			/** 
 			 * Responsive tablet
