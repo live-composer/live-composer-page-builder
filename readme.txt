@@ -3,7 +3,7 @@ Contributors: LiveComposer
 Tags: page builder, page, modules, front-end, builder, live, composer
 Requires at least: 3.9
 Tested up to: 4.3.1
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv3
 
 Live Composer is a front-end WordPress page builder plugin. But with the free "blank" theme you can build a whole website.
@@ -44,6 +44,10 @@ In most of the cases this is because the homepage is not a real WordPress page, 
 7. Post Templates management
 
 == Changelog ==
+
+= 1.0.4 - October 19th 2015 =
+
+[Check out the blog post about 1.0.4 release](http://livecomposerplugin.com/blog/version-1-0-4-released/)
 
 = 1.0.3 - October 2nd 2015 =
 
