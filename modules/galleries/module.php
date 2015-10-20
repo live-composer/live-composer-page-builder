@@ -252,6 +252,58 @@ class DSLC_Galleries extends DSLC_Module {
 				'tab' => __( 'other', 'live-composer-page-builder' ),
 			),
 			
+			// Query Altering
+			array(
+				'label' => __( 'On Author Archive', 'live-composer-page-builder' ),
+				'id' => 'query_alter_author',
+				'std' => 'enabled',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'Show Posts Of That Author', 'live-composer-page-builder' ),
+						'value' => 'enabled'
+					),
+					array(
+						'label' => __( 'Do NOT Alter Query', 'live-composer-page-builder' ),
+						'value' => 'disabled'
+					),
+				),
+				'tab' => __( 'Query Alter', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'On Category/Tag Archive', 'live-composer-page-builder' ),
+				'id' => 'query_alter_cat',
+				'std' => 'enabled',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'Show Posts Of That Category/Tag', 'live-composer-page-builder' ),
+						'value' => 'enabled'
+					),
+					array(
+						'label' => __( 'Do NOT Alter Query', 'live-composer-page-builder' ),
+						'value' => 'disabled'
+					),
+				),
+				'tab' => __( 'Query Alter', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'On Search Results Page', 'live-composer-page-builder' ),
+				'id' => 'query_alter_search',
+				'std' => 'enabled',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'Show Posts Matching Search Term', 'live-composer-page-builder' ),
+						'value' => 'enabled'
+					),
+					array(
+						'label' => __( 'Do NOT Alter Query', 'live-composer-page-builder' ),
+						'value' => 'disabled'
+					),
+				),
+				'tab' => __( 'Query Alter', 'live-composer-page-builder' ),
+			),
 
 			/**
 			 * General
@@ -2187,7 +2239,7 @@ class DSLC_Galleries extends DSLC_Module {
 				$args['post__not_in'] = $exclude;
 			
 			// Author archive page
-			if ( is_author() ) {
+			if ( is_author() && $options['query_alter_author'] == 'enabled' ) {
 				global $authordata;
 				$args['author__in'] = array( $authordata->data->ID );
 			}
@@ -2197,7 +2249,10 @@ class DSLC_Galleries extends DSLC_Module {
 				$args['no_found_rows'] = true;
 			
 			// Do the query
-			if ( is_category() || is_tax() || is_search() ) {
+			if ( ( is_category() || is_tag() || is_tax() ) && $options['query_alter_cat'] == 'enabled' ) {
+				global $wp_query;
+				$dslc_query = $wp_query;
+			} elseif ( is_search() && $options['query_alter_search'] == 'enabled' ) {
 				global $wp_query;
 				$dslc_query = $wp_query;
 			} else {
