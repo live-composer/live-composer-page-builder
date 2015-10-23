@@ -872,6 +872,7 @@ function dslc_ajax_load_template( $atts ) {
 		$template_code = $templates[$template_id]['code'];
 
 		// Apply for new ID
+		$template_code = str_replace( '[dslc_module ', '[dslc_module give_new_id="true" ', $template_code);
 		$template_code = str_replace( '[dslc_module]', '[dslc_module give_new_id="true"]', $template_code);
 
 		// Get the front-end output
@@ -911,6 +912,7 @@ function dslc_ajax_import_template( $atts ) {
 		$template_code = stripslashes( $_POST['dslc_template_code'] );
 
 		// Apply for new ID
+		$template_code = str_replace( '[dslc_module ', '[dslc_module give_new_id="true" ', $template_code);
 		$template_code = str_replace( '[dslc_module]', '[dslc_module give_new_id="true"]', $template_code);
 
 		// Get the front-end output
@@ -1091,6 +1093,7 @@ function dslc_ajax_import_modules_section( $atts ) {
 		$modules_code = stripslashes( $_POST['dslc_modules_section_code'] );
 
 		// Apply for new ID
+		$modules_code = str_replace( '[dslc_module ', '[dslc_module give_new_id="true" ', $modules_code);
 		$modules_code = str_replace( '[dslc_module]', '[dslc_module give_new_id="true"]', $modules_code);
 
 		// Get the front-end output
