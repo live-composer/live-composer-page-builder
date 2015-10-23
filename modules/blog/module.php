@@ -1778,6 +1778,18 @@ class DSLC_Blog extends DSLC_Module {
 				'ext' => 'px'
 			),
 			array(
+				'label' => __( 'Margin Top', 'live-composer-page-builder' ),
+				'id' => 'css_social_margin_top',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-posts-social-share',
+				'affect_on_change_rule' => 'margin-top',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Social', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_social_padding_vertical',
 				'std' => '16',
