@@ -1841,6 +1841,7 @@ var dslcDebug = false;
 			// Reguest new ID
 			jQuery.ajax({
 				type: 'POST',
+				method: 'POST',
 				url: DSLCAjax.ajaxurl,
 				data: { action : 'dslc-ajax-get-new-module-id' },
 				async: false
@@ -2268,6 +2269,7 @@ var dslcDebug = false;
 			// Reguest new ID
 			jQuery.ajax({
 				type: 'POST',
+				method: 'POST',
 				url: DSLCAjax.ajaxurl,
 				data: { action : 'dslc-ajax-get-new-module-id' },
 				async: false
@@ -4810,6 +4812,7 @@ var dslcDebug = false;
 		// Ajax call to save the new content
 		jQuery.ajax({
 			method: 'POST',
+			type: 'POST',
 			url: DSLCAjax.ajaxurl,
 			data: {
 				action : 'dslc-ajax-save-composer',
