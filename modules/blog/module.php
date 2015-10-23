@@ -1675,10 +1675,33 @@ class DSLC_Blog extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Button', 'live-composer-page-builder' ),
 			),
+
 			/**
 			 * Social
 			 */
 
+			array(
+				'label' => __( 'Elements', 'live-composer-page-builder' ),
+				'id' => 'social_elements',
+				'std' => 'facebook twitter pinterest',
+				'type' => 'checkbox',
+				'choices' => array(
+					array(
+						'label' => __( 'Facebook', 'live-composer-page-builder' ),
+						'value' => 'facebook'
+					),
+					array(
+						'label' => __( 'Twitter', 'live-composer-page-builder' ),
+						'value' => 'twitter'
+					),
+					array(
+						'label' => __( 'Pinterest', 'live-composer-page-builder' ),
+						'value' => 'pinterest'
+					),
+				),
+				'section' => 'styling',
+				'tab' => __( 'Social', 'live-composer-page-builder' ),
+			),
 			array(
 				'label' => __( 'Align', 'live-composer-page-builder' ),
 				'id' => 'css_social_align',
@@ -3147,15 +3170,29 @@ class DSLC_Blog extends DSLC_Module {
 
 										<?php
 											$share_info = dslc_get_social_count();
+											$social_elements = $options['social_elements'];
+											if ( ! empty( $social_elements ) )
+												$social_elements = explode( ' ', trim( $social_elements ) );
+											else
+												$social_elements = array();
 										?>
 
 										<div class="dslc-posts-social-share">
 
 											<?php $post_img = wp_get_attachment_url( get_post_thumbnail_id( get_the_ID() ) ); ?>
 											<?php $share_status = esc_attr( get_the_title( get_the_ID() ) . ' ' . get_permalink( get_the_ID() ) ); ?>
-											<a href="#" target="_blank" onClick="return dslc_social_share(400, 300, 'http://www.facebook.com/share.php?u=<?php echo get_permalink( get_the_ID() ); ?>')"><span class="dslc-icon dslc-icon-facebook"></span><span class="dslc-posts-social-share-count"><?php if ( $share_info ) { echo esc_html( $share_info['fb'] ); } ?></span></a>
-											<a href="#" onClick="return dslc_social_share(400, 300, 'https://twitter.com/home?status=<?php echo $share_status; ?>')" ><span class="dslc-icon dslc-icon-twitter"></span><span class="dslc-posts-social-share-count"><?php if ( $share_info ) { echo esc_html( $share_info['twitter'] ); } ?></span></a>
-											<a href="#" onClick="return dslc_social_share(400, 300, 'https://pinterest.com/pin/create/button/?url=<?php the_permalink(); ?>&amp;media=<?php echo esc_html( $post_img ); ?>&amp;description=<?php echo esc_attr( get_the_excerpt() ); ?>')"><span class="dslc-icon dslc-icon-pinterest"></span><span class="dslc-posts-social-share-count"><?php if ( $share_info ) { echo esc_html( $share_info['pinterest'] ); } ?></span></a>
+
+											<?php if ( in_array( 'facebook', $social_elements ) ) : ?>
+												<a href="#" target="_blank" onClick="return dslc_social_share(400, 300, 'http://www.facebook.com/share.php?u=<?php echo get_permalink( get_the_ID() ); ?>')"><span class="dslc-icon dslc-icon-facebook"></span><span class="dslc-posts-social-share-count"><?php if ( $share_info ) { echo esc_html( $share_info['fb'] ); } ?></span></a>
+											<?php endif; ?>
+
+											<?php if ( in_array( 'twitter', $social_elements ) ) : ?>
+												<a href="#" onClick="return dslc_social_share(400, 300, 'https://twitter.com/home?status=<?php echo $share_status; ?>')" ><span class="dslc-icon dslc-icon-twitter"></span><span class="dslc-posts-social-share-count"><?php if ( $share_info ) { echo esc_html( $share_info['twitter'] ); } ?></span></a>
+											<?php endif; ?>
+
+											<?php if ( in_array( 'pinterest', $social_elements ) ) : ?>
+												<a href="#" onClick="return dslc_social_share(400, 300, 'https://pinterest.com/pin/create/button/?url=<?php the_permalink(); ?>&amp;media=<?php echo esc_html( $post_img ); ?>&amp;description=<?php echo esc_attr( get_the_excerpt() ); ?>')"><span class="dslc-icon dslc-icon-pinterest"></span><span class="dslc-posts-social-share-count"><?php if ( $share_info ) { echo esc_html( $share_info['pinterest'] ); } ?></span></a>
+											<?php endif; ?>
 
 										</div><!-- .dslc-posts-social-share -->
 
