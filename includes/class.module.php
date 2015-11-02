@@ -1836,9 +1836,28 @@ class DSLC_Module {
 			$options['css_load_preset'] = '';
 		}
 
+		// Module class array
+		$module_class_arr = array();
+		$module_class_arr[] = 'dslc-module-front';
+		$module_class_arr[] = 'dslc-module-' . $this->module_id;
+		$module_class_arr[] = 'dslc-in-viewport-check';
+		$module_class_arr[] = 'dslc-in-viewport-anim-'. $options['css_anim'];
+		$module_class_arr[] = $class_size_output;
+		$module_class_arr[] = $class_show_on;
+		$module_class_arr[] = $class_handle_like;
+
+		// Module class array apply filters
+		$module_class_arr = apply_filters( 'dslc_module_class', $module_class_arr, $this->module_id, $options );
+
+		// Turn module class array into string
+		$module_class = '';
+		foreach ( $module_class_arr as $module_class_inst ) {
+			$module_class .= $module_class_inst . ' ';
+		}
+
 		?>
 
-		<div id="dslc-module-<?php echo $options['module_instance_id']; ?>" class="dslc-module-front dslc-module-<?php echo $this->module_id; ?> dslc-in-viewport-check dslc-in-viewport-anim-<?php echo $options['css_anim']; ?> <?php echo $class_size_output . ' ' . $class_show_on . ' ' . $class_handle_like; ?>" data-module-id="<?php echo $options['module_instance_id']; ?>" data-dslc-module-id="<?php echo $this->module_id; ?>" data-dslc-module-size="<?php echo $data_attr_size ?>" data-dslc-anim="<?php echo $options['css_anim'] ?>" data-dslc-anim-delay="<?php echo $options['css_anim_delay']; ?>" data-dslc-anim-duration="<?php echo $options['css_anim_duration']; ?>"  data-dslc-anim-easing="<?php echo $options['css_anim_easing']; ?>" data-dslc-preset="<?php echo $options['css_load_preset']; ?>" <?php echo $title_attr; ?>>
+		<div id="dslc-module-<?php echo $options['module_instance_id']; ?>" class="<?php echo $module_class; ?>" data-module-id="<?php echo $options['module_instance_id']; ?>" data-dslc-module-id="<?php echo $this->module_id; ?>" data-dslc-module-size="<?php echo $data_attr_size ?>" data-dslc-anim="<?php echo $options['css_anim'] ?>" data-dslc-anim-delay="<?php echo $options['css_anim_delay']; ?>" data-dslc-anim-duration="<?php echo $options['css_anim_duration']; ?>"  data-dslc-anim-easing="<?php echo $options['css_anim_easing']; ?>" data-dslc-preset="<?php echo $options['css_load_preset']; ?>" <?php echo $title_attr; ?>>
 
 			<?php do_action( 'dslc_module_before' ); ?>
 
