@@ -468,7 +468,7 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-tp-comment-form input[type=text],dslc-tp-comment-form input[type=url],dslc-tp-comment-form input[type=email],.dslc-tp-comment-form textarea',
-				'affect_on_change_el' => 'padding-left,padding-right',
+				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'styling',
 				'ext' => 'px',
 				'tab' => __( 'inputs', 'live-composer-page-builder' ),
