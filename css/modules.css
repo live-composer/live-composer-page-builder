@@ -23,6 +23,7 @@
 
 				#dslc-content .dslc-cpt-post-thumb a {
 					display: inline-block;
+					max-width: 100%;
 				}
 
 				#dslc-content .dslc-cpt-post-thumb img {
@@ -165,6 +166,7 @@
 
 				#dslc-content .dslc-blog-post-thumb a {
 					display: inline-block;
+					max-width: 100%;
 				}
 
 				#dslc-content .dslc-blog-post-thumb img {
@@ -315,6 +317,7 @@
 
 				#dslc-content .dslc-download-thumb a {
 					display: inline-block;
+					max-width: 100%;
 				}
 
 				#dslc-content .dslc-download-thumb img {
@@ -441,6 +444,7 @@
 
 				#dslc-content .dslc-gallery-thumb a {
 					display: inline-block;
+					max-width: 100%;
 				}
 
 				#dslc-content .dslc-gallery-thumb img {
@@ -682,6 +686,7 @@
 
 			#dslc-content .dslc-partner .dslc-partner-thumb a {
 				display: inline-block;
+				max-width: 100%;
 			}			
 
 			#dslc-content .dslc-partner .dslc-partner-thumb img {
@@ -773,6 +778,7 @@
 
 			#dslc-content .dslc-projects .dslc-project-thumb a {
 				display: inline-block;
+				max-width: 100%;
 			}
 
 			#dslc-content .dslc-projects .dslc-project-thumb img {
@@ -913,6 +919,7 @@
 
 				#dslc-content .dslc-staff-member-thumb a {
 					display: inline-block;
+					max-width: 100%;
 				}
 
 				#dslc-content .dslc-staff-member-thumb img {
@@ -1260,6 +1267,7 @@
 
 				#dslc-content .dslc-product-thumb a {
 					display: inline-block;
+					max-width: 100%;
 				}
 
 				#dslc-content .dslc-product-thumb img {
