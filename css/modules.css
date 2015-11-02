@@ -1995,6 +1995,24 @@
 		left: -28px;
 	}
 
+	/* Left position menu */
+	.dslc-navigation.dslc-navigation-sub-position-left .menu ul {
+		left: 0;
+		right: auto;
+	}
+
+	/* Right position menu */
+	.dslc-navigation.dslc-navigation-sub-position-right .menu ul {
+		right: 0;
+		left: auto;
+	}
+
+	/* Center position menu */
+	.dslc-navigation.dslc-navigation-sub-position-center .menu ul {
+		left: auto;
+		right: auto;
+	}
+
 	/* Inner level vertical menu ul */
 	.dslc-navigation-orientation-vertical .menu ul {
 		top: 0;

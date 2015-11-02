@@ -1165,9 +1165,19 @@ jQuery(document).ready(function($){
 
 	$( '.dslc-navigation li' ).mouseenter(function(){
 
-		var subnav = $(this).children('ul')
+		var subnav = $(this).children('ul');
 
 		if ( subnav.length ) {
+
+			if ( $(this).closest('.dslc-navigation').hasClass('dslc-navigation-sub-position-center') ) {
+
+				var parentWidth = $(this).closest('li').width(),
+				subnavWidth = subnav.outerWidth(),
+				offsetToCenter = parseInt( parentWidth ) / 2 - parseInt( subnavWidth ) / 2 + 'px';
+
+				subnav.css({ 'left' : offsetToCenter });
+
+			}
 
 			// Display child menu
 			subnav.css({ 'display' : 'block' });

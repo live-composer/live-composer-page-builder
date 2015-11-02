@@ -699,6 +699,32 @@ class DSLC_Navigation extends DSLC_Module {
 			 */
 
 			array(
+				'label' => __( 'Position', 'live-composer-page-builder' ),
+				'id' => 'css_subnav_position',
+				'std' => 'default',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'Default', 'live-composer-page-builder' ),
+						'value' => 'default',
+					),
+					array(
+						'label' => __( 'Left', 'live-composer-page-builder' ),
+						'value' => 'left',
+					),
+					array(
+						'label' => __( 'Center', 'live-composer-page-builder' ),
+						'value' => 'center',
+					),
+					array(
+						'label' => __( 'Right', 'live-composer-page-builder' ),
+						'value' => 'right',
+					),
+				),
+				'section' => 'styling',
+				'tab' => __( 'subnav', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Align', 'live-composer-page-builder' ),
 				'id' => 'css_subnav_align',
 				'std' => 'left',
@@ -1385,7 +1411,7 @@ class DSLC_Navigation extends DSLC_Module {
 					}
 				} else {
 					?>
-					<div class="dslc-navigation dslc-navigation-res-t-<?php echo $options['css_res_t']; ?> dslc-navigation-res-p-<?php echo $options['css_res_p']; ?> dslc-navigation-orientation-<?php echo $options['nav_orientation']; ?>">
+					<div class="dslc-navigation dslc-navigation-sub-position-<?php echo $options['css_subnav_position']; ?> dslc-navigation-res-t-<?php echo $options['css_res_t']; ?> dslc-navigation-res-p-<?php echo $options['css_res_p']; ?> dslc-navigation-orientation-<?php echo $options['nav_orientation']; ?>">
 						<div class="dslc-navigation-inner">
 							<?php wp_nav_menu( array( 'theme_location' => $options['location'] ) ); ?>
 						</div>
