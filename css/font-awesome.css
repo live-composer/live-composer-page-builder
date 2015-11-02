@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'DSLCFontAwesome';
-  src: url('font/fontawesome-webfont.eot?v=4.3');
-  src: url('font/fontawesome-webfont.eot?#iefix&v=4.3') format('embedded-opentype'), url('font/fontawesome-webfont.woff?v=4.3') format('woff'), url('font/fontawesome-webfont.ttf?v=4.3') format('truetype'), url('font/fontawesome-webfont.svg#fontawesomeregular?v=4.3') format('svg');
+  src: url('font/fontawesome-webfont.eot?v=4.4');
+  src: url('font/fontawesome-webfont.eot?#iefix&v=4.4') format('embedded-opentype'), url('font/fontawesome-webfont.woff?v=4.4') format('woff'), url('font/fontawesome-webfont.ttf?v=4.4') format('truetype'), url('font/fontawesome-webfont.svg#fontawesomeregular?v=4.4') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -1978,4 +1978,216 @@ a .dslc-icon-flip-vertical:before {
 }
 .dslc-icon-whatsapp:before {
   content:"\f232";
+}
+
+/**
+ * 4.4
+ */
+
+.dslc-icon-yc:before,
+.dslc-icon-y-combinator:before {
+  content: "\f23b";
+}
+.dslc-icon-optin-monster:before {
+  content: "\f23c";
+}
+.dslc-icon-opencart:before {
+  content: "\f23d";
+}
+.dslc-icon-expeditedssl:before {
+  content: "\f23e";
+}
+.dslc-icon-battery-4:before,
+.dslc-icon-battery-full:before {
+  content: "\f240";
+}
+.dslc-icon-battery-3:before,
+.dslc-icon-battery-three-quarters:before {
+  content: "\f241";
+}
+.dslc-icon-battery-2:before,
+.dslc-icon-battery-half:before {
+  content: "\f242";
+}
+.dslc-icon-battery-1:before,
+.dslc-icon-battery-quarter:before {
+  content: "\f243";
+}
+.dslc-icon-battery-0:before,
+.dslc-icon-battery-empty:before {
+  content: "\f244";
+}
+.dslc-icon-mouse-pointer:before {
+  content: "\f245";
+}
+.dslc-icon-i-cursor:before {
+  content: "\f246";
+}
+.dslc-icon-object-group:before {
+  content: "\f247";
+}
+.dslc-icon-object-ungroup:before {
+  content: "\f248";
+}
+.dslc-icon-sticky-note:before {
+  content: "\f249";
+}
+.dslc-icon-sticky-note-o:before {
+  content: "\f24a";
+}
+.dslc-icon-cc-jcb:before {
+  content: "\f24b";
+}
+.dslc-icon-cc-diners-club:before {
+  content: "\f24c";
+}
+.dslc-icon-clone:before {
+  content: "\f24d";
+}
+.dslc-icon-balance-scale:before {
+  content: "\f24e";
+}
+.dslc-icon-hourglass-o:before {
+  content: "\f250";
+}
+.dslc-icon-hourglass-1:before,
+.dslc-icon-hourglass-start:before {
+  content: "\f251";
+}
+.dslc-icon-hourglass-2:before,
+.dslc-icon-hourglass-half:before {
+  content: "\f252";
+}
+.dslc-icon-hourglass-3:before,
+.dslc-icon-hourglass-end:before {
+  content: "\f253";
+}
+.dslc-icon-hourglass:before {
+  content: "\f254";
+}
+.dslc-icon-hand-grab-o:before,
+.dslc-icon-hand-rock-o:before {
+  content: "\f255";
+}
+.dslc-icon-hand-stop-o:before,
+.dslc-icon-hand-paper-o:before {
+  content: "\f256";
+}
+.dslc-icon-hand-scissors-o:before {
+  content: "\f257";
+}
+.dslc-icon-hand-lizard-o:before {
+  content: "\f258";
+}
+.dslc-icon-hand-spock-o:before {
+  content: "\f259";
+}
+.dslc-icon-hand-pointer-o:before {
+  content: "\f25a";
+}
+.dslc-icon-hand-peace-o:before {
+  content: "\f25b";
+}
+.dslc-icon-trademark:before {
+  content: "\f25c";
+}
+.dslc-icon-registered:before {
+  content: "\f25d";
+}
+.dslc-icon-creative-commons:before {
+  content: "\f25e";
+}
+.dslc-icon-gg:before {
+  content: "\f260";
+}
+.dslc-icon-gg-circle:before {
+  content: "\f261";
+}
+.dslc-icon-tripadvisor:before {
+  content: "\f262";
+}
+.dslc-icon-odnoklassniki:before {
+  content: "\f263";
+}
+.dslc-icon-odnoklassniki-square:before {
+  content: "\f264";
+}
+.dslc-icon-get-pocket:before {
+  content: "\f265";
+}
+.dslc-icon-wikipedia-w:before {
+  content: "\f266";
+}
+.dslc-icon-safari:before {
+  content: "\f267";
+}
+.dslc-icon-chrome:before {
+  content: "\f268";
+}
+.dslc-icon-firefox:before {
+  content: "\f269";
+}
+.dslc-icon-opera:before {
+  content: "\f26a";
+}
+.dslc-icon-internet-explorer:before {
+  content: "\f26b";
+}
+.dslc-icon-tv:before,
+.dslc-icon-television:before {
+  content: "\f26c";
+}
+.dslc-icon-contao:before {
+  content: "\f26d";
+}
+.dslc-icon-500px:before {
+  content: "\f26e";
+}
+.dslc-icon-amazon:before {
+  content: "\f270";
+}
+.dslc-icon-calendar-plus-o:before {
+  content: "\f271";
+}
+.dslc-icon-calendar-minus-o:before {
+  content: "\f272";
+}
+.dslc-icon-calendar-times-o:before {
+  content: "\f273";
+}
+.dslc-icon-calendar-check-o:before {
+  content: "\f274";
+}
+.dslc-icon-industry:before {
+  content: "\f275";
+}
+.dslc-icon-map-pin:before {
+  content: "\f276";
+}
+.dslc-icon-map-signs:before {
+  content: "\f277";
+}
+.dslc-icon-map-o:before {
+  content: "\f278";
+}
+.dslc-icon-map:before {
+  content: "\f279";
+}
+.dslc-icon-commenting:before {
+  content: "\f27a";
+}
+.dslc-icon-commenting-o:before {
+  content: "\f27b";
+}
+.dslc-icon-houzz:before {
+  content: "\f27c";
+}
+.dslc-icon-vimeo:before {
+  content: "\f27d";
+}
+.dslc-icon-black-tie:before {
+  content: "\f27e";
+}
+.dslc-icon-fonticons:before {
+  content: "\f280";
 }
