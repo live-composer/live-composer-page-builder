@@ -2324,302 +2324,306 @@ class DSLC_Downloads extends DSLC_Module {
 
 				?><div class="<?php echo $container_class; ?>"><?php
 
-					if ( $options['type'] == 'carousel' ) :
+					?><div class="dslc-posts-inner"><?php
 
-						?><div class="dslc-loader"></div><div class="dslc-carousel" data-stop-on-hover="<?php echo $options['carousel_autoplay_hover']; ?>" data-autoplay="<?php echo $options['carousel_autoplay']; ?>" data-columns="<?php echo $carousel_items; ?>" data-pagination="<?php if ( in_array( 'circles', $carousel_elements ) ) echo 'true'; else echo 'false'; ?>" data-slide-speed="<?php echo $options['arrows_slide_speed']; ?>" data-pagination-speed="<?php echo $options['circles_slide_speed']; ?>"><?php
+						if ( $options['type'] == 'carousel' ) :
 
-					endif;
+							?><div class="dslc-loader"></div><div class="dslc-carousel" data-stop-on-hover="<?php echo $options['carousel_autoplay_hover']; ?>" data-autoplay="<?php echo $options['carousel_autoplay']; ?>" data-columns="<?php echo $carousel_items; ?>" data-pagination="<?php if ( in_array( 'circles', $carousel_elements ) ) echo 'true'; else echo 'false'; ?>" data-slide-speed="<?php echo $options['arrows_slide_speed']; ?>" data-pagination-speed="<?php echo $options['circles_slide_speed']; ?>"><?php
 
-					while ( $dslc_query->have_posts() ) : $dslc_query->the_post(); $count += $increment; $real_count++;
+						endif;
 
-						global $product;
+						while ( $dslc_query->have_posts() ) : $dslc_query->the_post(); $count += $increment; $real_count++;
 
-						if ( $count == $max_count ) {
-							$count = 0;
-							$extra_class = ' dslc-last-col';
-						} elseif ( $count == $increment ) {
-							$extra_class = ' dslc-first-col';
-						} else {
-							$extra_class = '';
-						}
+							global $product;
 
-						if ( ! has_post_thumbnail() )
-								$extra_class .= ' dslc-post-no-thumb';
-
-						$download_tags_count = 0;
-						$download_tags = get_the_terms( get_the_ID(), 'dslc_downloads_tags' );
-
-						if ( get_post_meta( get_the_ID(), 'dslc_download_file', true ) )
-							$download_link = wp_get_attachment_url( get_post_meta( get_the_ID(), 'dslc_download_file', true ) );
-						elseif ( get_post_meta( get_the_ID(), 'dslc_download_url', true ) )
-							$download_link = get_post_meta( get_the_ID(), 'dslc_download_url', true );
-						else
-							$download_link = false;
-						
-						$download_count = get_post_meta( get_the_ID(), 'dslc_download_count', true );
-						if ( ! $download_count ) $download_count = 0;
-
-						$post_cats = get_the_terms( get_the_ID(), 'dslc_downloads_cats' );
-						$post_cats_data = '';
-						if ( ! empty( $post_cats ) ) {
-							foreach( $post_cats as $post_cat ) {
-								$post_cats_data .= $post_cat->slug . ' ';
+							if ( $count == $max_count ) {
+								$count = 0;
+								$extra_class = ' dslc-last-col';
+							} elseif ( $count == $increment ) {
+								$extra_class = ' dslc-first-col';
+							} else {
+								$extra_class = '';
 							}
-						}
 
-						/**
-						 * Link or not
-						 */
+							if ( ! has_post_thumbnail() )
+									$extra_class .= ' dslc-post-no-thumb';
 
-						$link_to_single = true;
-						if ( $options['link'] == 'disabled' ) 
-							$link_to_single = false;
+							$download_tags_count = 0;
+							$download_tags = get_the_terms( get_the_ID(), 'dslc_downloads_tags' );
 
-						?>
+							if ( get_post_meta( get_the_ID(), 'dslc_download_file', true ) )
+								$download_link = wp_get_attachment_url( get_post_meta( get_the_ID(), 'dslc_download_file', true ) );
+							elseif ( get_post_meta( get_the_ID(), 'dslc_download_url', true ) )
+								$download_link = get_post_meta( get_the_ID(), 'dslc_download_url', true );
+							else
+								$download_link = false;
+							
+							$download_count = get_post_meta( get_the_ID(), 'dslc_download_count', true );
+							if ( ! $download_count ) $download_count = 0;
 
-						<div class="<?php echo $element_class . $columns_class . $extra_class; ?>" data-cats="<?php echo $post_cats_data; ?>">
+							$post_cats = get_the_terms( get_the_ID(), 'dslc_downloads_cats' );
+							$post_cats_data = '';
+							if ( ! empty( $post_cats ) ) {
+								foreach( $post_cats as $post_cat ) {
+									$post_cats_data .= $post_cat->slug . ' ';
+								}
+							}
 
-							<?php if ( $post_elements == 'all' || in_array( 'thumbnail', $post_elements ) ) : ?>
+							/**
+							 * Link or not
+							 */
 
-								<?php
-									/**
-									 * Manual Resize
-									 */
+							$link_to_single = true;
+							if ( $options['link'] == 'disabled' ) 
+								$link_to_single = false;
 
-									$manual_resize = false;
-									if ( isset( $options['thumb_resize_height'] ) && ! empty( $options['thumb_resize_height'] ) || isset( $options['thumb_resize_width_manual'] ) && ! empty( $options['thumb_resize_width_manual'] ) ) {
+							?>
 
-										$manual_resize = true;
-										$thumb_url = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full' ); 
-										$thumb_url = $thumb_url[0];
+							<div class="<?php echo $element_class . $columns_class . $extra_class; ?>" data-cats="<?php echo $post_cats_data; ?>">
 
-										$thumb_alt = get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true );
-										if ( ! $thumb_alt ) $thumb_alt = '';
+								<?php if ( $post_elements == 'all' || in_array( 'thumbnail', $post_elements ) ) : ?>
 
-										$resize_width = false;
-										$resize_height = false;
+									<?php
+										/**
+										 * Manual Resize
+										 */
 
-										if ( isset( $options['thumb_resize_width_manual'] ) && ! empty( $options['thumb_resize_width_manual'] ) ) {
-											$resize_width = $options['thumb_resize_width_manual'];
+										$manual_resize = false;
+										if ( isset( $options['thumb_resize_height'] ) && ! empty( $options['thumb_resize_height'] ) || isset( $options['thumb_resize_width_manual'] ) && ! empty( $options['thumb_resize_width_manual'] ) ) {
+
+											$manual_resize = true;
+											$thumb_url = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full' ); 
+											$thumb_url = $thumb_url[0];
+
+											$thumb_alt = get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true );
+											if ( ! $thumb_alt ) $thumb_alt = '';
+
+											$resize_width = false;
+											$resize_height = false;
+
+											if ( isset( $options['thumb_resize_width_manual'] ) && ! empty( $options['thumb_resize_width_manual'] ) ) {
+												$resize_width = $options['thumb_resize_width_manual'];
+											}
+
+											if ( isset( $options['thumb_resize_height'] ) && ! empty( $options['thumb_resize_height'] ) ) {
+												$resize_height = $options['thumb_resize_height'];
+											}
+
 										}
+									?>
 
-										if ( isset( $options['thumb_resize_height'] ) && ! empty( $options['thumb_resize_height'] ) ) {
-											$resize_height = $options['thumb_resize_height'];
-										}
+									<?php if ( has_post_thumbnail() ) : ?>
 
-									}
-								?>
+										<div class="dslc-download-thumb dslc-post-thumb dslc-on-hover-anim">
 
-								<?php if ( has_post_thumbnail() ) : ?>
-
-									<div class="dslc-download-thumb dslc-post-thumb dslc-on-hover-anim">
-
-										<div class="dslc-download-thumb-inner dslca-post-thumb">
-											<?php if ( $manual_resize ) : ?>
-												<?php if ( $link_to_single ) : ?>
-													<a href="<?php the_permalink(); ?>"><img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" /></a>
-												<?php else : ?>
-													<img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" />
-												<?php endif; ?>
-											<?php else : ?>
-												<?php if ( $link_to_single ) : ?>
-													<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'full' ); ?></a>
-												<?php else : ?>
-													<?php the_post_thumbnail( 'full' ); ?>
-												<?php endif; ?>
-											<?php endif; ?>
-										</div><!-- .dslc-download-thumb-inner -->
-
-										<?php if ( ( $options['main_location'] == 'inside' || $options['main_location'] == 'inside_visible' ) &&  ( $post_elements == 'all' || in_array( 'title', $post_elements ) || in_array( 'tags', $post_elements ) || in_array( 'excerpt', $post_elements ) || in_array( 'button', $post_elements ) || in_array( 'count', $post_elements ) ) ) : ?>
-
-											<div class="dslc-post-main dslc-download-main <?php if ( $options['main_location'] == 'inside_visible' ) echo 'dslc-download-main-visible'; ?>">
-
-												<div class="dslc-download-main-inner dslc-init-<?php echo $options['main_position']; ?> dslc-on-hover-anim-target dslc-anim-<?php echo $options['css_anim_hover']; ?>" data-dslc-anim="<?php echo $options['css_anim_hover'] ?>" data-dslc-anim-speed="<?php echo $options['css_anim_speed']; ?>">
-
-													<?php if ( $post_elements == 'all' || in_array( 'title', $post_elements ) ) : ?>
-
-														<div class="dslc-download-title">
-															<?php if ( $link_to_single ) : ?>
-																<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-															<?php else : ?>
-																<h2><?php the_title(); ?></h2>
-															<?php endif; ?>
-														</div><!-- .dslc-download-title -->
-
+											<div class="dslc-download-thumb-inner dslca-post-thumb">
+												<?php if ( $manual_resize ) : ?>
+													<?php if ( $link_to_single ) : ?>
+														<a href="<?php the_permalink(); ?>"><img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" /></a>
+													<?php else : ?>
+														<img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" />
 													<?php endif; ?>
+												<?php else : ?>
+													<?php if ( $link_to_single ) : ?>
+														<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'full' ); ?></a>
+													<?php else : ?>
+														<?php the_post_thumbnail( 'full' ); ?>
+													<?php endif; ?>
+												<?php endif; ?>
+											</div><!-- .dslc-download-thumb-inner -->
 
-													<?php if ( $post_elements == 'all' || in_array( 'tags', $post_elements ) ) : ?>
+											<?php if ( ( $options['main_location'] == 'inside' || $options['main_location'] == 'inside_visible' ) &&  ( $post_elements == 'all' || in_array( 'title', $post_elements ) || in_array( 'tags', $post_elements ) || in_array( 'excerpt', $post_elements ) || in_array( 'button', $post_elements ) || in_array( 'count', $post_elements ) ) ) : ?>
 
-														<?php if ( ! empty( $download_tags ) ) : ?>
+												<div class="dslc-post-main dslc-download-main <?php if ( $options['main_location'] == 'inside_visible' ) echo 'dslc-download-main-visible'; ?>">
 
-															<div class="dslc-download-tags">
-																In
-																<?php foreach ( $download_tags as $download_tag ) : $download_tags_count++; ?>
-																	<?php if ( $download_tags_count > 1 ) { echo ', '; } ?>
-																	<a href="<?php echo get_term_link( $download_tag->slug, 'dslc_downloads_tags' ); ?>"><?php echo $download_tag->name; ?></a>
-																<?php endforeach; ?>
-															</div><!-- .dslc-download-tags -->
+													<div class="dslc-download-main-inner dslc-init-<?php echo $options['main_position']; ?> dslc-on-hover-anim-target dslc-anim-<?php echo $options['css_anim_hover']; ?>" data-dslc-anim="<?php echo $options['css_anim_hover'] ?>" data-dslc-anim-speed="<?php echo $options['css_anim_speed']; ?>">
+
+														<?php if ( $post_elements == 'all' || in_array( 'title', $post_elements ) ) : ?>
+
+															<div class="dslc-download-title">
+																<?php if ( $link_to_single ) : ?>
+																	<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+																<?php else : ?>
+																	<h2><?php the_title(); ?></h2>
+																<?php endif; ?>
+															</div><!-- .dslc-download-title -->
 
 														<?php endif; ?>
 
-													<?php endif; ?>
+														<?php if ( $post_elements == 'all' || in_array( 'tags', $post_elements ) ) : ?>
 
-													<?php if ( $post_elements == 'all' || in_array( 'excerpt', $post_elements ) ) : ?>
+															<?php if ( ! empty( $download_tags ) ) : ?>
 
-														<div class="dslc-download-excerpt">
-															<?php if ( $options['excerpt_or_content'] == 'content' ) : ?>
-																<?php the_content(); ?>
-															<?php else : ?>
-																<?php
-																	if ( $options['excerpt_length'] > 0 ) {
-																		if ( has_excerpt() )
-																			echo do_shortcode( wp_trim_words( get_the_excerpt(), $options['excerpt_length'] ) );
-																		else
-																			echo do_shortcode( wp_trim_words( get_the_content(), $options['excerpt_length'] ) );
-																	} else {
-																		if ( has_excerpt() )
-																			echo do_shortcode( get_the_excerpt() );
-																		else
-																			echo do_shortcode( get_the_content() );
-																	}
-																?>
+																<div class="dslc-download-tags">
+																	In
+																	<?php foreach ( $download_tags as $download_tag ) : $download_tags_count++; ?>
+																		<?php if ( $download_tags_count > 1 ) { echo ', '; } ?>
+																		<a href="<?php echo get_term_link( $download_tag->slug, 'dslc_downloads_tags' ); ?>"><?php echo $download_tag->name; ?></a>
+																	<?php endforeach; ?>
+																</div><!-- .dslc-download-tags -->
+
 															<?php endif; ?>
-														</div><!-- .dslc-download-excerpt -->
 
-													<?php endif; ?>
+														<?php endif; ?>
 
-													<?php if ( $post_elements == 'all' || in_array( 'button', $post_elements ) ) : ?>
+														<?php if ( $post_elements == 'all' || in_array( 'excerpt', $post_elements ) ) : ?>
 
-														<div class="dslc-download-download">
-															<a target="_blank" class="dslc-download-count-hook" data-post-id="<?php echo get_the_ID(); ?>" href="<?php echo $download_link; ?>">
-																<?php if ( isset( $options['button_icon_id'] ) && $options['button_icon_id'] != '' ) : ?>
-																	<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
+															<div class="dslc-download-excerpt">
+																<?php if ( $options['excerpt_or_content'] == 'content' ) : ?>
+																	<?php the_content(); ?>
+																<?php else : ?>
+																	<?php
+																		if ( $options['excerpt_length'] > 0 ) {
+																			if ( has_excerpt() )
+																				echo do_shortcode( wp_trim_words( get_the_excerpt(), $options['excerpt_length'] ) );
+																			else
+																				echo do_shortcode( wp_trim_words( get_the_content(), $options['excerpt_length'] ) );
+																		} else {
+																			if ( has_excerpt() )
+																				echo do_shortcode( get_the_excerpt() );
+																			else
+																				echo do_shortcode( get_the_content() );
+																		}
+																	?>
 																<?php endif; ?>
-																<?php echo $options['button_text']; ?>
-															</a>
-														</div><!-- .dslc-download-download -->
+															</div><!-- .dslc-download-excerpt -->
 
-													<?php endif; ?>
+														<?php endif; ?>
 
-													<?php if ( $post_elements == 'all' || in_array( 'count', $post_elements ) ) : ?>
+														<?php if ( $post_elements == 'all' || in_array( 'button', $post_elements ) ) : ?>
 
-														<div class="dslc-download-info">
-															<?php printf( __( 'Downloaded %d times.', 'live-composer-page-builder' ), $download_count ); ?>
-														</div><!-- .dslc-download-info -->
+															<div class="dslc-download-download">
+																<a target="_blank" class="dslc-download-count-hook" data-post-id="<?php echo get_the_ID(); ?>" href="<?php echo $download_link; ?>">
+																	<?php if ( isset( $options['button_icon_id'] ) && $options['button_icon_id'] != '' ) : ?>
+																		<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
+																	<?php endif; ?>
+																	<?php echo $options['button_text']; ?>
+																</a>
+															</div><!-- .dslc-download-download -->
 
-													<?php endif; ?>
+														<?php endif; ?>
 
-												</div><!-- .dslc-download-main-inner -->
+														<?php if ( $post_elements == 'all' || in_array( 'count', $post_elements ) ) : ?>
 
-												<a href="<?php the_permalink(); ?>" class="dslc-post-main-inner-link-cover"></a>
-												
-											</div><!-- .dslc-download-main -->
+															<div class="dslc-download-info">
+																<?php printf( __( 'Downloaded %d times.', 'live-composer-page-builder' ), $download_count ); ?>
+															</div><!-- .dslc-download-info -->
 
-										<?php endif; ?>
+														<?php endif; ?>
 
-									</div><!-- .dslc-download-thumb -->
+													</div><!-- .dslc-download-main-inner -->
+
+													<a href="<?php the_permalink(); ?>" class="dslc-post-main-inner-link-cover"></a>
+													
+												</div><!-- .dslc-download-main -->
+
+											<?php endif; ?>
+
+										</div><!-- .dslc-download-thumb -->
+
+									<?php endif; ?>
 
 								<?php endif; ?>
 
-							<?php endif; ?>
+								<?php if ( $options['main_location'] == 'bellow' &&  ( $post_elements == 'all' || in_array( 'title', $post_elements ) || in_array( 'tags', $post_elements ) || in_array( 'excerpt', $post_elements ) || in_array( 'button', $post_elements ) || in_array( 'count', $post_elements ) ) ) : ?>
 
-							<?php if ( $options['main_location'] == 'bellow' &&  ( $post_elements == 'all' || in_array( 'title', $post_elements ) || in_array( 'tags', $post_elements ) || in_array( 'excerpt', $post_elements ) || in_array( 'button', $post_elements ) || in_array( 'count', $post_elements ) ) ) : ?>
+									<div class="dslc-post-main dslc-download-main">
 
-								<div class="dslc-post-main dslc-download-main">
+										<?php if ( $post_elements == 'all' || in_array( 'title', $post_elements ) ) : ?>
 
-									<?php if ( $post_elements == 'all' || in_array( 'title', $post_elements ) ) : ?>
-
-										<div class="dslc-download-title">
-											<?php if ( $link_to_single ) : ?>
-												<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-											<?php else : ?>
-												<h2><?php the_title(); ?></h2>
-											<?php endif; ?>
-										</div><!-- .dslc-download-title -->
-
-									<?php endif; ?>
-
-									<?php if ( $post_elements == 'all' || in_array( 'tags', $post_elements ) ) : ?>
-
-										<?php if ( ! empty( $download_tags ) ) : ?>
-
-											<div class="dslc-download-tags">
-												In
-												<?php foreach ( $download_tags as $download_tag ) : $download_tags_count++; ?>
-													<?php if ( $download_tags_count > 1 ) { echo ', '; } ?>
-													<a href="<?php echo get_term_link( $download_tag->slug, 'dslc_downloads_tags' ); ?>"><?php echo $download_tag->name; ?></a>
-												<?php endforeach; ?>
-											</div><!-- .dslc-download-tags -->
+											<div class="dslc-download-title">
+												<?php if ( $link_to_single ) : ?>
+													<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+												<?php else : ?>
+													<h2><?php the_title(); ?></h2>
+												<?php endif; ?>
+											</div><!-- .dslc-download-title -->
 
 										<?php endif; ?>
 
-									<?php endif; ?>
+										<?php if ( $post_elements == 'all' || in_array( 'tags', $post_elements ) ) : ?>
 
-									<?php if ( $post_elements == 'all' || in_array( 'excerpt', $post_elements ) ) : ?>
+											<?php if ( ! empty( $download_tags ) ) : ?>
 
-										<div class="dslc-download-excerpt">
-											<?php if ( $options['excerpt_or_content'] == 'content' ) : ?>
-												<?php the_content(); ?>
-											<?php else : ?>
-												<?php
-													if ( $options['excerpt_length'] > 0 ) {
-														if ( has_excerpt() )
-															echo do_shortcode( wp_trim_words( get_the_excerpt(), $options['excerpt_length'] ) );
-														else
-															echo do_shortcode( wp_trim_words( get_the_content(), $options['excerpt_length'] ) );
-													} else {
-														if ( has_excerpt() )
-															echo do_shortcode( get_the_excerpt() );
-														else
-															echo do_shortcode( get_the_content() );
-													}
-												?>
+												<div class="dslc-download-tags">
+													In
+													<?php foreach ( $download_tags as $download_tag ) : $download_tags_count++; ?>
+														<?php if ( $download_tags_count > 1 ) { echo ', '; } ?>
+														<a href="<?php echo get_term_link( $download_tag->slug, 'dslc_downloads_tags' ); ?>"><?php echo $download_tag->name; ?></a>
+													<?php endforeach; ?>
+												</div><!-- .dslc-download-tags -->
+
 											<?php endif; ?>
-										</div><!-- .dslc-download-excerpt -->
 
-									<?php endif; ?>
+										<?php endif; ?>
 
-									<?php if ( ( $post_elements == 'all' || in_array( 'button', $post_elements ) ) && $download_link ) : ?>
+										<?php if ( $post_elements == 'all' || in_array( 'excerpt', $post_elements ) ) : ?>
 
-										<div class="dslc-download-download">
-											<a target="_blank" class="dslc-download-count-hook" data-post-id="<?php echo get_the_ID(); ?>" href="<?php echo $download_link; ?>">
-												<?php if ( isset( $options['button_icon_id'] ) && $options['button_icon_id'] != '' ) : ?>
-													<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
+											<div class="dslc-download-excerpt">
+												<?php if ( $options['excerpt_or_content'] == 'content' ) : ?>
+													<?php the_content(); ?>
+												<?php else : ?>
+													<?php
+														if ( $options['excerpt_length'] > 0 ) {
+															if ( has_excerpt() )
+																echo do_shortcode( wp_trim_words( get_the_excerpt(), $options['excerpt_length'] ) );
+															else
+																echo do_shortcode( wp_trim_words( get_the_content(), $options['excerpt_length'] ) );
+														} else {
+															if ( has_excerpt() )
+																echo do_shortcode( get_the_excerpt() );
+															else
+																echo do_shortcode( get_the_content() );
+														}
+													?>
 												<?php endif; ?>
-												<?php echo $options['button_text']; ?>
-											</a>
-										</div><!-- .dslc-download-download -->
+											</div><!-- .dslc-download-excerpt -->
 
-									<?php endif; ?>
+										<?php endif; ?>
 
-									<?php if ( ( $post_elements == 'all' || in_array( 'count', $post_elements ) ) && $download_link ) : ?>
+										<?php if ( ( $post_elements == 'all' || in_array( 'button', $post_elements ) ) && $download_link ) : ?>
 
-										<div class="dslc-download-info">
-											<?php printf( __( 'Downloaded %d times.', 'live-composer-page-builder' ), $download_count ); ?>
-										</div><!-- .dslc-download-info -->
+											<div class="dslc-download-download">
+												<a target="_blank" class="dslc-download-count-hook" data-post-id="<?php echo get_the_ID(); ?>" href="<?php echo $download_link; ?>">
+													<?php if ( isset( $options['button_icon_id'] ) && $options['button_icon_id'] != '' ) : ?>
+														<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
+													<?php endif; ?>
+													<?php echo $options['button_text']; ?>
+												</a>
+											</div><!-- .dslc-download-download -->
 
-									<?php endif; ?>
+										<?php endif; ?>
 
-								</div><!-- .dslc-download-main -->
+										<?php if ( ( $post_elements == 'all' || in_array( 'count', $post_elements ) ) && $download_link ) : ?>
 
-							<?php endif; ?>
+											<div class="dslc-download-info">
+												<?php printf( __( 'Downloaded %d times.', 'live-composer-page-builder' ), $download_count ); ?>
+											</div><!-- .dslc-download-info -->
 
-						</div><!-- .dslc-download -->
+										<?php endif; ?>
 
-						<?php
+									</div><!-- .dslc-download-main -->
 
-						// Row Separator
-						if ( $options['type'] == 'grid' && $count == 0 && $real_count != $dslc_query->found_posts && $real_count != $options['amount'] && $options['separator_enabled'] == 'enabled' ) {
-							echo '<div class="dslc-post-separator"></div>';
-						}
+								<?php endif; ?>
 
-					endwhile;
+							</div><!-- .dslc-download -->
 
-					if ( $options['type'] == 'carousel' ) :
+							<?php
 
-						?></div><?php
+							// Row Separator
+							if ( $options['type'] == 'grid' && $count == 0 && $real_count != $dslc_query->found_posts && $real_count != $options['amount'] && $options['separator_enabled'] == 'enabled' ) {
+								echo '<div class="dslc-post-separator"></div>';
+							}
 
-					endif;
+						endwhile;
+
+						if ( $options['type'] == 'carousel' ) :
+
+							?></div><?php
+
+						endif;
+
+					?></div><!-- .dslc-posts-inner --><?php
 
 				?></div><?php
 

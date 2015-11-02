@@ -1606,213 +1606,217 @@ class DSLC_Partners extends DSLC_Module {
 
 				?><div class="<?php echo $container_class; ?>"><?php
 
-					if ( $options['type'] == 'carousel' ) :
+					?><div class="dslc-posts-inner"><?php
 
-						?><div class="dslc-loader"></div><div class="dslc-carousel" data-stop-on-hover="<?php echo $options['carousel_autoplay_hover']; ?>" data-autoplay="<?php echo $options['carousel_autoplay']; ?>" data-columns="<?php echo $carousel_items; ?>" data-pagination="<?php if ( in_array( 'circles', $carousel_elements ) ) echo 'true'; else echo 'false'; ?>" data-slide-speed="<?php echo $options['arrows_slide_speed']; ?>" data-pagination-speed="<?php echo $options['circles_slide_speed']; ?>"><?php
+						if ( $options['type'] == 'carousel' ) :
 
-					endif;
+							?><div class="dslc-loader"></div><div class="dslc-carousel" data-stop-on-hover="<?php echo $options['carousel_autoplay_hover']; ?>" data-autoplay="<?php echo $options['carousel_autoplay']; ?>" data-columns="<?php echo $carousel_items; ?>" data-pagination="<?php if ( in_array( 'circles', $carousel_elements ) ) echo 'true'; else echo 'false'; ?>" data-slide-speed="<?php echo $options['arrows_slide_speed']; ?>" data-pagination-speed="<?php echo $options['circles_slide_speed']; ?>"><?php
 
-					while ( $dslc_query->have_posts() ) : $dslc_query->the_post(); $count += $increment; $real_count++;
+						endif;
 
-						if ( $count == $max_count ) {
-							$count = 0;
-							$extra_class = ' dslc-last-col';
-						} elseif ( $count == $increment ) {
-							$extra_class = ' dslc-first-col';
-						} else {
-							$extra_class = '';
-						}
+						while ( $dslc_query->have_posts() ) : $dslc_query->the_post(); $count += $increment; $real_count++;
 
-						if ( ! has_post_thumbnail() )
-								$extra_class .= ' dslc-post-no-thumb';
-
-						$post_cats = get_the_terms( get_the_ID(), 'dslc_partners_cats' );
-						$post_cats_data = '';
-						if ( ! empty( $post_cats ) ) {
-							foreach( $post_cats as $post_cat ) {
-								$post_cats_data .= $post_cat->slug . ' ';
+							if ( $count == $max_count ) {
+								$count = 0;
+								$extra_class = ' dslc-last-col';
+							} elseif ( $count == $increment ) {
+								$extra_class = ' dslc-first-col';
+							} else {
+								$extra_class = '';
 							}
-						}
 
-						/**
-						 * Link or not
-						 */
+							if ( ! has_post_thumbnail() )
+									$extra_class .= ' dslc-post-no-thumb';
 
-						$link_to_single = true;
-						if ( $options['link'] == 'disabled' ) 
-							$link_to_single = false;
+							$post_cats = get_the_terms( get_the_ID(), 'dslc_partners_cats' );
+							$post_cats_data = '';
+							if ( ! empty( $post_cats ) ) {
+								foreach( $post_cats as $post_cat ) {
+									$post_cats_data .= $post_cat->slug . ' ';
+								}
+							}
 
-						?>
+							/**
+							 * Link or not
+							 */
 
-						<div class="<?php echo $element_class . $columns_class . $extra_class; ?>" data-cats="<?php echo $post_cats_data; ?>">
+							$link_to_single = true;
+							if ( $options['link'] == 'disabled' ) 
+								$link_to_single = false;
 
-							<?php if ( $post_elements == 'all' || in_array( 'thumbnail', $post_elements ) ) : ?>
+							?>
 
-								<?php
-									/**
-									 * Manual Resize
-									 */
+							<div class="<?php echo $element_class . $columns_class . $extra_class; ?>" data-cats="<?php echo $post_cats_data; ?>">
 
-									$manual_resize = false;
-									if ( isset( $options['thumb_resize_height'] ) && ! empty( $options['thumb_resize_height'] ) || isset( $options['thumb_resize_width_manual'] ) && ! empty( $options['thumb_resize_width_manual'] ) ) {
+								<?php if ( $post_elements == 'all' || in_array( 'thumbnail', $post_elements ) ) : ?>
 
-										$manual_resize = true;
-										$thumb_url = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full' ); 
-										$thumb_url = $thumb_url[0];
+									<?php
+										/**
+										 * Manual Resize
+										 */
 
-										$thumb_alt = get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true );
-										if ( ! $thumb_alt ) $thumb_alt = '';
+										$manual_resize = false;
+										if ( isset( $options['thumb_resize_height'] ) && ! empty( $options['thumb_resize_height'] ) || isset( $options['thumb_resize_width_manual'] ) && ! empty( $options['thumb_resize_width_manual'] ) ) {
 
-										$resize_width = false;
-										$resize_height = false;
+											$manual_resize = true;
+											$thumb_url = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full' ); 
+											$thumb_url = $thumb_url[0];
 
-										if ( isset( $options['thumb_resize_width_manual'] ) && ! empty( $options['thumb_resize_width_manual'] ) ) {
-											$resize_width = $options['thumb_resize_width_manual'];
+											$thumb_alt = get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true );
+											if ( ! $thumb_alt ) $thumb_alt = '';
+
+											$resize_width = false;
+											$resize_height = false;
+
+											if ( isset( $options['thumb_resize_width_manual'] ) && ! empty( $options['thumb_resize_width_manual'] ) ) {
+												$resize_width = $options['thumb_resize_width_manual'];
+											}
+
+											if ( isset( $options['thumb_resize_height'] ) && ! empty( $options['thumb_resize_height'] ) ) {
+												$resize_height = $options['thumb_resize_height'];
+											}
+
 										}
+									?>
 
-										if ( isset( $options['thumb_resize_height'] ) && ! empty( $options['thumb_resize_height'] ) ) {
-											$resize_height = $options['thumb_resize_height'];
-										}
+									<?php if ( has_post_thumbnail() ) : ?>
 
-									}
-								?>
+										<div class="dslc-post-thumb dslc-partner-thumb dslca-post-thumb dslc-on-hover-anim">
 
-								<?php if ( has_post_thumbnail() ) : ?>
-
-									<div class="dslc-post-thumb dslc-partner-thumb dslca-post-thumb dslc-on-hover-anim">
-
-										<?php if ( $manual_resize ) : ?>
-											<?php if ( $link_to_single ) : ?>
-												<a href="<?php the_permalink(); ?>"><img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" /></a>
+											<?php if ( $manual_resize ) : ?>
+												<?php if ( $link_to_single ) : ?>
+													<a href="<?php the_permalink(); ?>"><img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" /></a>
+												<?php else : ?>
+													<img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" />
+												<?php endif; ?>
 											<?php else : ?>
-												<img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" />
+												<?php if ( $link_to_single ) : ?>
+													<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'full' ); ?></a>
+												<?php else : ?>
+													<?php the_post_thumbnail( 'full' ); ?>
+												<?php endif; ?>
 											<?php endif; ?>
-										<?php else : ?>
-											<?php if ( $link_to_single ) : ?>
-												<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'full' ); ?></a>
-											<?php else : ?>
-												<?php the_post_thumbnail( 'full' ); ?>
-											<?php endif; ?>
-										<?php endif; ?>
 
-										<?php if ( ( $options['main_location'] == 'inside' || $options['main_location'] == 'inside_visible' ) && ( $post_elements == 'all' || in_array( 'title', $post_elements ) || in_array( 'excerpt', $post_elements ) ) ) : ?>
+											<?php if ( ( $options['main_location'] == 'inside' || $options['main_location'] == 'inside_visible' ) && ( $post_elements == 'all' || in_array( 'title', $post_elements ) || in_array( 'excerpt', $post_elements ) ) ) : ?>
 
-											<div class="dslc-post-main dslc-partner-main <?php if ( $options['main_location'] == 'inside_visible' ) echo 'dslc-partner-main-visible'; ?> dslc-on-hover-anim-target dslc-anim-<?php echo $options['css_anim_hover']; ?>" data-dslc-anim="<?php echo $options['css_anim_hover'] ?>" data-dslc-anim-speed="<?php echo $options['css_anim_speed']; ?>">
+												<div class="dslc-post-main dslc-partner-main <?php if ( $options['main_location'] == 'inside_visible' ) echo 'dslc-partner-main-visible'; ?> dslc-on-hover-anim-target dslc-anim-<?php echo $options['css_anim_hover']; ?>" data-dslc-anim="<?php echo $options['css_anim_hover'] ?>" data-dslc-anim-speed="<?php echo $options['css_anim_speed']; ?>">
 
-												<div class="dslc-partner-main-inner dslc-init-<?php echo $options['main_position']; ?>">
+													<div class="dslc-partner-main-inner dslc-init-<?php echo $options['main_position']; ?>">
 
-													<?php if ( $post_elements == 'all' || in_array( 'title', $post_elements ) ) : ?>
+														<?php if ( $post_elements == 'all' || in_array( 'title', $post_elements ) ) : ?>
 
-														<div class="dslc-partner-title">
-															<?php if ( $link_to_single ) : ?>
-																<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-															<?php else : ?>
-																<h2><?php the_title(); ?></h2>
-															<?php endif; ?>
-														</div><!-- .dslc-partner-title -->
+															<div class="dslc-partner-title">
+																<?php if ( $link_to_single ) : ?>
+																	<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+																<?php else : ?>
+																	<h2><?php the_title(); ?></h2>
+																<?php endif; ?>
+															</div><!-- .dslc-partner-title -->
 
-													<?php endif; ?>
+														<?php endif; ?>
 
-													<?php if ( $post_elements == 'all' || in_array( 'excerpt', $post_elements ) ) : ?>
+														<?php if ( $post_elements == 'all' || in_array( 'excerpt', $post_elements ) ) : ?>
 
-														<div class="dslc-partner-excerpt">
-															<?php if ( $options['excerpt_or_content'] == 'content' ) : ?>
-																<?php the_content(); ?>
-															<?php else : ?>
-																<?php
-																	if ( $options['excerpt_length'] > 0 ) {
-																		if ( has_excerpt() )
-																			echo do_shortcode( wp_trim_words( get_the_excerpt(), $options['excerpt_length'] ) );
-																		else
-																			echo do_shortcode( wp_trim_words( get_the_content(), $options['excerpt_length'] ) );
-																	} else {
-																		if ( has_excerpt() )
-																			echo do_shortcode( get_the_excerpt() );
-																		else
-																			echo do_shortcode( get_the_content() );
-																	}
-																?>
-															<?php endif; ?>
-														</div><!-- .dslc-partner-excerpt -->
+															<div class="dslc-partner-excerpt">
+																<?php if ( $options['excerpt_or_content'] == 'content' ) : ?>
+																	<?php the_content(); ?>
+																<?php else : ?>
+																	<?php
+																		if ( $options['excerpt_length'] > 0 ) {
+																			if ( has_excerpt() )
+																				echo do_shortcode( wp_trim_words( get_the_excerpt(), $options['excerpt_length'] ) );
+																			else
+																				echo do_shortcode( wp_trim_words( get_the_content(), $options['excerpt_length'] ) );
+																		} else {
+																			if ( has_excerpt() )
+																				echo do_shortcode( get_the_excerpt() );
+																			else
+																				echo do_shortcode( get_the_content() );
+																		}
+																	?>
+																<?php endif; ?>
+															</div><!-- .dslc-partner-excerpt -->
 
-													<?php endif; ?>
+														<?php endif; ?>
 
+													</div><!-- .dslc-partner-main -->
+
+													<a href="<?php the_permalink(); ?>" class="dslc-post-main-inner-link-cover"></a>
+													
 												</div><!-- .dslc-partner-main -->
 
-												<a href="<?php the_permalink(); ?>" class="dslc-post-main-inner-link-cover"></a>
-												
-											</div><!-- .dslc-partner-main -->
+											<?php endif; ?>
 
-										<?php endif; ?>
+										</div><!-- .dslc-partner-thumb -->
 
-									</div><!-- .dslc-partner-thumb -->
+									<?php endif; ?>
 
 								<?php endif; ?>
 
-							<?php endif; ?>
+								<?php if ( $options['main_location'] == 'bellow' && ( $post_elements == 'all' || in_array( 'title', $post_elements ) || in_array( 'excerpt', $post_elements ) ) ) : ?>
 
-							<?php if ( $options['main_location'] == 'bellow' && ( $post_elements == 'all' || in_array( 'title', $post_elements ) || in_array( 'excerpt', $post_elements ) ) ) : ?>
+									<div class="dslc-post-main dslc-partner-main">
 
-								<div class="dslc-post-main dslc-partner-main">
+										<?php if ( $post_elements == 'all' || in_array( 'title', $post_elements ) ) : ?>
 
-									<?php if ( $post_elements == 'all' || in_array( 'title', $post_elements ) ) : ?>
+											<div class="dslc-partner-title">
+												<?php if ( $link_to_single ) : ?>
+													<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+												<?php else : ?>
+													<h2><?php the_title(); ?></h2>
+												<?php endif; ?>
+											</div><!-- .dslc-partner-title -->
 
-										<div class="dslc-partner-title">
-											<?php if ( $link_to_single ) : ?>
-												<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-											<?php else : ?>
-												<h2><?php the_title(); ?></h2>
-											<?php endif; ?>
-										</div><!-- .dslc-partner-title -->
+										<?php endif; ?>
 
-									<?php endif; ?>
+										<?php if ( $post_elements == 'all' || in_array( 'excerpt', $post_elements ) ) : ?>
 
-									<?php if ( $post_elements == 'all' || in_array( 'excerpt', $post_elements ) ) : ?>
+											<div class="dslc-partner-excerpt">
+												<?php if ( $options['excerpt_or_content'] == 'content' ) : ?>
+													<?php the_content(); ?>
+												<?php else : ?>
+													<?php
+														if ( $options['excerpt_length'] > 0 ) {
+															if ( has_excerpt() )
+																echo do_shortcode( wp_trim_words( get_the_excerpt(), $options['excerpt_length'] ) );
+															else
+																echo do_shortcode( wp_trim_words( get_the_content(), $options['excerpt_length'] ) );
+														} else {
+															if ( has_excerpt() )
+																echo do_shortcode( get_the_excerpt() );
+															else
+																echo do_shortcode( get_the_content() );
+														}
+													?>
+												<?php endif; ?>
+											</div><!-- .dslc-partner-excerpt -->
 
-										<div class="dslc-partner-excerpt">
-											<?php if ( $options['excerpt_or_content'] == 'content' ) : ?>
-												<?php the_content(); ?>
-											<?php else : ?>
-												<?php
-													if ( $options['excerpt_length'] > 0 ) {
-														if ( has_excerpt() )
-															echo do_shortcode( wp_trim_words( get_the_excerpt(), $options['excerpt_length'] ) );
-														else
-															echo do_shortcode( wp_trim_words( get_the_content(), $options['excerpt_length'] ) );
-													} else {
-														if ( has_excerpt() )
-															echo do_shortcode( get_the_excerpt() );
-														else
-															echo do_shortcode( get_the_content() );
-													}
-												?>
-											<?php endif; ?>
-										</div><!-- .dslc-partner-excerpt -->
+										<?php endif; ?>
 
-									<?php endif; ?>
+									</div><!-- .dslc-partner-main -->
 
-								</div><!-- .dslc-partner-main -->
+								<?php endif; ?>
 
-							<?php endif; ?>
+							</div><!-- .dslc-partner -->
 
-						</div><!-- .dslc-partner -->
+							<?php 
 
-						<?php 
+							// Row Separator
+							if ( $options['type'] == 'grid' && $count == 0 && $real_count != $dslc_query->found_posts && $real_count != $options['amount'] && $options['separator_enabled'] == 'enabled' ) {
+								echo '<div class="dslc-post-separator"></div>';
+							}
 
-						// Row Separator
-						if ( $options['type'] == 'grid' && $count == 0 && $real_count != $dslc_query->found_posts && $real_count != $options['amount'] && $options['separator_enabled'] == 'enabled' ) {
-							echo '<div class="dslc-post-separator"></div>';
-						}
+						endwhile;
 
-					endwhile;
+						if ( $options['type'] == 'carousel' ) :
 
-					if ( $options['type'] == 'carousel' ) :
+							?></div><?php
 
-						?></div><?php
+						endif;
 
-					endif;
+						?>
 
-					?>
+					</div><!-- .dslc-posts-inner -->
 
 				</div><!-- .dslc-partners -->
 
