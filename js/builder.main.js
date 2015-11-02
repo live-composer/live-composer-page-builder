@@ -3698,6 +3698,30 @@ var dslcDebug = false;
 
 	function dslc_modules_options_box_shadow_color() {
 
+		/**
+		 * Color Pallete
+		 */
+
+		var dslcColorPallete = [],
+		currStorage,
+		index;
+
+		dslcColorPallete[0] = [];
+		dslcColorPallete[1] = [];
+		dslcColorPallete[2] = [];
+		dslcColorPallete[3] = [];
+
+		if ( localStorage['dslcColorpickerPalleteStorage'] == undefined ) {
+		} else {
+			currStorage = JSON.parse( localStorage['dslcColorpickerPalleteStorage'] );
+			for	( index = 0; index < currStorage.length; index++ ) {
+				var key = Math.floor( index / 3 );
+				if ( key < 4 ) {
+					dslcColorPallete[key].push( currStorage[index] );
+				}
+			}
+		}
+
 		jQuery('.dslca-module-edit-option-box-shadow-color').each( function(){
 
 			var inputField = jQuery(this),
@@ -3713,6 +3737,8 @@ var dslcDebug = false;
 				cancelText: '',
 				chooseText: '',
 				preferredFormat: 'rgb',
+				showPalette: true,
+				palette: dslcColorPallete,
 				move: function( color ) {
 					
 					// The option field
@@ -3741,6 +3767,18 @@ var dslcDebug = false;
 
 					// Change current value of option
 					dslcColorField.val( dslcColorFieldVal ).trigger('change');
+
+					// Update pallete local storage
+					if ( localStorage['dslcColorpickerPalleteStorage'] == undefined ) {
+						var newStorage = [ dslcColorFieldVal ];
+						localStorage['dslcColorpickerPalleteStorage'] = JSON.stringify(newStorage);
+					} else {
+						var newStorage = JSON.parse( localStorage['dslcColorpickerPalleteStorage'] );
+						if ( newStorage.indexOf( dslcColorFieldVal ) == -1 ) {
+							newStorage.unshift( dslcColorFieldVal );
+						}
+						localStorage['dslcColorpickerPalleteStorage'] = JSON.stringify(newStorage);
+					}
 
 				},
 				show: function( color ) {
