@@ -223,7 +223,7 @@
 
 							if ( $row_option['id'] == 'bg_image_thumb' ) {
 								if ( $value == 'enabled' ) {
-									$value = 'url(' . wp_get_attachment_url( get_post_thumbnail_id( get_the_ID() ) ) . ')';
+									$value = 'url(' . apply_filters( 'dslc_row_bg_featured_image', wp_get_attachment_url( get_post_thumbnail_id( get_the_ID() ) ) ) . ')';
 								}
 							} else {
 								$value = 'url(' . wp_get_attachment_url( $value ) . ')';

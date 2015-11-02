@@ -819,7 +819,7 @@ function dslc_filter_content( $content ) {
 		// If singular post shown and has a featured image
 		if ( is_singular() && has_post_thumbnail( get_the_ID() ) ) {
 			// Hidden input holding value of the URL of the featured image of the shown post ( used by rows for BG image )
-			$composer_append .= '<input type="hidden" id="dslca-post-data-thumb" value="' . wp_get_attachment_url( get_post_thumbnail_id( get_the_ID() ) ) . '" />';
+			$composer_append .= '<input type="hidden" id="dslca-post-data-thumb" value="' . apply_filters( 'dslc_row_bg_featured_image', wp_get_attachment_url( get_post_thumbnail_id( get_the_ID() ) ) ) . '" />';
 		}
 
 		// If current page is used for a tutorial
