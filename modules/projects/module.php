@@ -2463,7 +2463,7 @@ class DSLC_Projects extends DSLC_Module {
 
 												</div><!-- .dslc-init-center -->
 
-												<a href="<?php the_permalink(); ?>" class="dslc-post-main-inner-link-cover"></a>
+												<a href="<?php echo $the_project_url; ?>" class="dslc-post-main-inner-link-cover"></a>
 												
 											</div><!-- .dslc-project-main -->
 
