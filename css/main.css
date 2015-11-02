@@ -54,9 +54,6 @@ body.admin-bar #dslc-header.dslc-header-pos-absolute {
 	position: relative;
 }
 
-#dslc-content b { font-weight: bold; }
-#dslc-content i { font-style: italic; }
-
 .dslca-container .dslca-close-composer-hook,
 .dslca-activate-composer-hook,
 .dslca-container .dslca-hide-composer-hook,
