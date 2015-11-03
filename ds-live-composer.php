@@ -4,7 +4,7 @@
 	Plugin URI: http://www.livecomposerplugin.com
 	Description: Primarily a front-end page builder but can also be used to build a whole website ( with our blank theme ) from header to footer.
 	Author: Dany Duchaine and Slobodan Kustrimovic
-	Version: 1.0.5
+	Version: 1.0.6
 	Author URI: http://livecomposerplugin.com
 	License: GPL2
 	License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -16,7 +16,7 @@
 	 * Constants
 	 */
 
-	define( 'DS_LIVE_COMPOSER_VER', '1.0.5' );
+	define( 'DS_LIVE_COMPOSER_VER', '1.0.6' );
 	define( 'DS_LIVE_COMPOSER_LOAD_MINIFIED', true );
 
 	define( 'DS_LIVE_COMPOSER_BASENAME', plugin_basename( __FILE__ ) );
