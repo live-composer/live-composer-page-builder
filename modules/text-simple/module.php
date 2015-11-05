@@ -3144,6 +3144,28 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'buttons', 'live-composer-page-builder' ),
 			),
+			array(
+				'label' => __( 'Box Shadow', 'live-composer-page-builder' ),
+				'id' => 'css_button_box_shadow',
+				'std' => '',
+				'type' => 'box_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => 'input[type=submit], button',
+				'affect_on_change_rule' => 'box-shadow',
+				'section' => 'styling',
+				'tab' => __( 'buttons', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Box Shadow - Hover', 'live-composer-page-builder' ),
+				'id' => 'css_button_box_shadow_hover',
+				'std' => '',
+				'type' => 'box_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => 'input[type=submit]:hover, button:hover',
+				'affect_on_change_rule' => 'box-shadow',
+				'section' => 'styling',
+				'tab' => __( 'buttons', 'live-composer-page-builder' ),
+			),
 			
 			/**
 			 * Responsive Tablet
