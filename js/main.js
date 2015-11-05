@@ -1156,9 +1156,18 @@ jQuery(document).ready(function($){
 		e.preventDefault();
 
 		if ( jQuery(this).closest('.dslc-post').length ) {
+
 			jQuery(this).closest('.dslc-post').find('.dslc-lightbox-gallery a:first-child').trigger('click');
+
+		} else if ( jQuery(this).closest('.dslc-col') ) {
+
+			var imageIndex = jQuery(this).closest('.dslc-col').index();
+			jQuery(this).closest('.dslc-module-front').find('.dslc-lightbox-gallery a:eq(' + imageIndex + ')').trigger('click');
+
 		} else {
+
 			jQuery(this).closest('.dslc-module-front').find('.dslc-lightbox-gallery a:first-child').trigger('click');
+			
 		}
 
 	});
