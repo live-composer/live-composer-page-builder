@@ -530,6 +530,7 @@ body.rtl .dslc-last-col {
 
 .dslc-masonry-item {
 	margin-bottom: 30px;
+	margin-right: 0;
 }
 
 .dslc-masonry-item-animate {
