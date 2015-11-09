@@ -115,7 +115,7 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-thumbnail, .dslc-tp-thumbnail img',
+				'affect_on_change_el' => '.dslc-tp-thumbnail',
 				'affect_on_change_rule' => 'border-top-left-radius,border-top-right-radius',
 				'section' => 'styling',
 				'ext' => 'px'
@@ -126,7 +126,7 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-thumbnail, .dslc-tp-thumbnail img',
+				'affect_on_change_el' => '.dslc-tp-thumbnail',
 				'affect_on_change_rule' => 'border-bottom-left-radius,border-bottom-right-radius',
 				'section' => 'styling',
 				'ext' => 'px'

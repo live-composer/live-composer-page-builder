@@ -1510,6 +1510,7 @@
 
 #dslc-content .dslc-tp-thumbnail {
 	bottom: 0 solid transparent;
+	overflow: hidden;
 }
 
 	#dslc-content .dslc-tp-thumbnail img {
