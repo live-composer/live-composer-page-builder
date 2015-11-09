@@ -19,6 +19,7 @@
 
 				#dslc-content .dslc-cpt-post-thumb-inner {
 					border: 0 solid transparent;
+					overflow: hidden;
 				}
 
 				#dslc-content .dslc-cpt-post-thumb a {
@@ -162,6 +163,7 @@
 
 				#dslc-content .dslc-blog-post-thumb-inner {
 					border: 0 solid transparent;
+					overflow: hidden;
 				}
 
 				#dslc-content .dslc-blog-post-thumb a {
@@ -313,6 +315,7 @@
 
 				#dslc-content .dslc-download-thumb-inner {
 					border: 0 solid transparent;
+					overflow: hidden;
 				}
 
 				#dslc-content .dslc-download-thumb a {
@@ -440,6 +443,7 @@
 				#dslc-content .dslc-gallery-thumb-inner {
 					border: 0 solid transparent;
 					position: relative;
+					overflow: hidden;
 				}
 
 				#dslc-content .dslc-gallery-thumb a {
@@ -774,6 +778,7 @@
 
 			#dslc-content .dslc-projects .dslc-project-thumb-inner {
 				border: 0 solid transparent;
+				overflow: hidden;
 			}
 
 			#dslc-content .dslc-projects .dslc-project-thumb a {
@@ -1263,6 +1268,7 @@
 
 				#dslc-content .dslc-product-thumb-inner {
 					bottom: 0 solid transparent;
+					overflow: hidden;
 				}
 
 				#dslc-content .dslc-product-thumb a {
