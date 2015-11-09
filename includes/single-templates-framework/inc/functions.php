@@ -77,7 +77,7 @@ function dslc_st_init() {
 						'value' => 'theme'
 					),
 					array(
-						'label' => 'Custom Template',
+						'label' => 'Plugin Template',
 						'value' => 'custom'
 					),
 				)
