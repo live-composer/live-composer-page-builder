@@ -340,6 +340,20 @@ class DSLC_Button extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'typography', 'live-composer-page-builder' ),
 			),
+			array(
+				'label' => __( 'Letter Spacing', 'live-composer-page-builder' ),
+				'id' => 'css_button_letter_spacing',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-button a',
+				'affect_on_change_rule' => 'letter-spacing',
+				'section' => 'styling',
+				'tab' => __( 'typography', 'live-composer-page-builder' ),
+				'ext' => 'px',
+				'min' => -50,
+				'max' => 50
+			),
 
 			/**
 			 * Icon
