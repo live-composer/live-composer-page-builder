@@ -1049,6 +1049,20 @@ class DSLC_Info_Box extends DSLC_Module {
 				'tab' => __( 'Title', 'live-composer-page-builder' ),
 			),
 			array(
+				'label' => __( 'Letter Spacing', 'live-composer-page-builder' ),
+				'id' => 'css_title_letter_spacing',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-title h4',
+				'affect_on_change_rule' => 'letter-spacing',
+				'section' => 'styling',
+				'tab' => __( 'Title', 'live-composer-page-builder' ),
+				'ext' => 'px',
+				'min' => -50,
+				'max' => 50
+			),
+			array(
 				'label' => __( 'Line Height', 'live-composer-page-builder' ),
 				'id' => 'css_title_line_height',
 				'std' => '17',
