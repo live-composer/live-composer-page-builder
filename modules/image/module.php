@@ -234,6 +234,8 @@ class DSLC_Image extends DSLC_Module {
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'styling',
 				'ext' => 'px',
+				'min' => -150,
+				'max' => 150
 			),
 			array(
 				'label' => __( 'Minimum Height', 'live-composer-page-builder' ),
