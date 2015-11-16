@@ -1599,6 +1599,45 @@
 		}
 
 /**
+ * Staff Social
+ */
+
+#dslc-content ul.dslc-staff-social {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	font-size: 0;
+	line-height: 1;
+}
+
+	#dslc-content ul.dslc-staff-social li {
+		margin: 0;
+		padding: 0;
+		line-height: 1;
+		display: inline-block;
+		overflow: hidden;
+	}
+
+		#dslc-content ul.dslc-staff-social a {
+			border: 0 solid transparent;
+			display: block;
+			text-decoration: none;
+			text-align: center;
+			position: relative;
+			float: left;
+		}
+
+			#dslc-content ul.dslc-staff-social .dslc-icon {
+				line-height: 1;
+				position: absolute;				
+			}
+
+		#dslc-content ul.dslc-staff-social .dslc-social-label {
+			float: left;
+			display: block;
+		}
+
+/**
  * Notification
  */
 
