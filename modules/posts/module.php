@@ -184,6 +184,23 @@ class DSLC_Posts extends DSLC_Module {
 				'type' => 'text',
 			),
 			array(
+				'label' => __( 'Sticky Posts', 'live-composer-page-builder' ),
+				'id' => 'sticky_posts',
+				'help' => __( 'If enabled sticky posts will be pushed to the top. If disabled sticky posts will follow regular order.', 'live-composer-page-builder' ),
+				'std' => 'enabled',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'Enabled', 'live-composer-page-builder' ),
+						'value' => 'enabled'
+					),
+					array(
+						'label' => __( 'Disabled', 'live-composer-page-builder' ),
+						'value' => 'disabled'
+					)
+				)
+			),
+			array(
 				'label' => __( 'Include (IDs)', 'live-composer-page-builder' ),
 				'id' => 'query_post_in',
 				'std' => '',
@@ -2272,7 +2289,11 @@ class DSLC_Posts extends DSLC_Module {
 			// No paging
 			if ( $options['pagination_type'] == 'disabled' )
 				$args['no_found_rows'] = true;
-			
+				
+			// Sticky Posts
+			if ( $options['sticky_posts'] == 'disabled' )
+				$args['ignore_sticky_posts'] = true;
+
 			// Do the query
 			if ( ( is_category() || is_tag() || is_tax() ) && $options['query_alter_cat'] == 'enabled' ) {
 				global $wp_query;
