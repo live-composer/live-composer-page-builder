@@ -168,6 +168,11 @@ function dslc_load_admin_scripts( $hook ) {
 		wp_enqueue_style( 'dslc-plugin-options-css-admin', DS_LIVE_COMPOSER_URL . 'includes/plugin-options-framework/css/main.css', array(), DS_LIVE_COMPOSER_VER);
 	}
 
+	// Yoast SEO
+	if ( $hook == 'post-new.php' || $hook == 'post.php' && defined( 'WPSEO_VERSION' ) ) {
+		wp_enqueue_script( 'dslc-yoast-seo-admin', DS_LIVE_COMPOSER_URL . 'js/yoast-seo.js', array(), DS_LIVE_COMPOSER_VER, true );
+	}
+
 } add_action( 'admin_enqueue_scripts', 'dslc_load_admin_scripts' );
 
 
