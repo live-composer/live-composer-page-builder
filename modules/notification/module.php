@@ -42,7 +42,7 @@ class DSLC_Notification extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Show Again After ( days )', 'live-composer-page-builder' ),
-				'help' => __( 'Amount of days until the notifications shows again to the user that closed it.<br>If value empty it will not show again.<br>If value 0 it will show on every page load.', 'live-composer-page-builder' ),
+				'help' => __( 'Amount of days until the notifications shows again to the user that closed it.<br>If value empty it will show on every page load.', 'live-composer-page-builder' ),
 				'id' => 'notification_timeout',
 				'std' => '',
 				'type' => 'text',
