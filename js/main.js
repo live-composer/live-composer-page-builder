@@ -135,8 +135,20 @@ function dslc_init_accordion() {
 
 function dslc_init_lightbox() {
 
+	var type;
+
 	jQuery( '.dslc-lightbox-image' ).each(function(){
-		jQuery(this).magnificPopup({ type:'image' });
+
+		// Default type
+		type = 'image';
+
+		// Check if video
+		if ( jQuery(this).attr('href').indexOf('youtube.com') >= 0 || jQuery(this).attr('href').indexOf('vimeo.com') >= 0 ) {
+			type = 'iframe';
+		}
+
+		jQuery(this).magnificPopup({ type: type });
+
 	});
 
 	jQuery( '.dslc-lightbox-gallery' ).each(function(){
