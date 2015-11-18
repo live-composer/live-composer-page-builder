@@ -1648,6 +1648,14 @@
 	border-radius: 3px;
 	color: #fff;
 }
+	
+	.dslc-notification-box-has-timeout {
+		display: none;
+	}
+
+	body.dslca-enabled .dslc-notification-box-has-timeout {
+		display: block;
+	}
 
 	#dslc-content .dslc-notification-box-content {
 

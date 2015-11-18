@@ -40,6 +40,13 @@ class DSLC_Notification extends DSLC_Module {
 					),
 				),
 			),
+			array(
+				'label' => __( 'Show Again After ( days )', 'live-composer-page-builder' ),
+				'help' => __( 'Amount of days until the notifications shows again to the user that closed it.<br>If value empty it will not show again.<br>If value 0 it will show on every page load.', 'live-composer-page-builder' ),
+				'id' => 'notification_timeout',
+				'std' => '',
+				'type' => 'text',
+			),
 
 			/**
 			 * Styling
@@ -685,10 +692,18 @@ class DSLC_Notification extends DSLC_Module {
 		$this->module_start( $options );
 
 		/* Module output starts here */
-			
+
+			// Classes
+			$classes = 'dslc-notification-box ';
+
+			// Timeout after closing
+			if ( is_numeric( $options['notification_timeout'] ) ) {
+				$classes .= 'dslc-notification-box-has-timeout ';
+			}
+
 			?>
 
-			<div class="dslc-notification-box">
+			<div class="<?php echo $classes; ?>" data-notification-timeout="<?php echo $options['notification_timeout']; ?>">
 				<div class="dslc-notification-box-content  dslca-editable-content" data-id="content">
 					<?php
 						$output_content = stripslashes( $options['content'] );
