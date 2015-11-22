@@ -2919,7 +2919,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'std' => 'left',
 				'type' => 'text_align',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => 'blockquote',
+				'affect_on_change_el' => 'blockquote, .dslc-text-module-content blockquote p',
 				'affect_on_change_rule' => 'text-align',
 				'section' => 'styling',
 				'tab' => __( 'blockquote', 'live-composer-page-builder' ),
