@@ -644,10 +644,7 @@ function dslc_filter_content( $content ) {
 			if ( $template_ID ) {
 
 				// Get LC code of the template
-				$template_code = dslc_get_code( $template_ID );
-
-				// Add the template code to the holder variable
-				$composer_prepend .= do_shortcode( $template_code );
+				$composer_code = dslc_get_code( $template_ID );
 
 			}
 
@@ -663,10 +660,7 @@ function dslc_filter_content( $content ) {
 			if ( $template_ID ) {
 
 				// Get LC code of the page
-				$template_code = dslc_get_code( $template_ID );
-
-				// Add the template code to the holder variable
-				$composer_prepend .= do_shortcode( $template_code );
+				$composer_code = dslc_get_code( $template_ID );
 
 			}
 
@@ -682,10 +676,7 @@ function dslc_filter_content( $content ) {
 			if ( $template_ID ) {
 
 				// Get LC code of the page
-				$template_code = dslc_get_code( $template_ID );
-
-				// Add the template code to the holder variable
-				$composer_prepend .= do_shortcode( $template_code );
+				$composer_code = dslc_get_code( $template_ID );
 
 			}
 
