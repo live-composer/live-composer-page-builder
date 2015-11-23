@@ -5429,7 +5429,7 @@ var dslcDebug = false;
 		// Go through each content element
 		jQuery('#dslc-main .dslca-editable-content').each(function(){
 			// Append the content to the variable
-			content += jQuery(this).text().replace(/\s+/g, ' ').trim() + ' ';
+			content += jQuery(this).html().replace(/\s+/g, ' ').trim() + ' ';
 		});
 
 		// Set the value of the content field
