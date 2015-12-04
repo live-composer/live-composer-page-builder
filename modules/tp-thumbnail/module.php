@@ -365,7 +365,7 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 						<a href="<?php $thumb = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'full' ); echo $thumb[0]; ?>" class="dslc-lightbox-image">
 					<?php endif; ?>
 						<?php if ( $manual_resize ) : ?>
-							<img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" />
+							<img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo dslc_get_attachment_alt( get_post_thumbnail_id() ); ?>" />
 						<?php else : ?>
 							<?php the_post_thumbnail( 'full' ); ?>
 						<?php endif; ?>
