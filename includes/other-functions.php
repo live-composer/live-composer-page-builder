@@ -7,6 +7,7 @@
  * dslc_aq_resize ( Resize an image using DSLC_Aq_Resize Class )
  * dslc_get_social_count ( Returns amount of social shares a page has ) 
  * dslc_icons_current_set ( Returns the ID of the currently used set based on icon )
+ * dslc_get_attachment_alt ( Returnt he ALT attribute for an attachment )
  */
 
 if( ! class_exists('DSLC_Aq_Resize') ) {
@@ -349,5 +350,35 @@ function dslc_icons_current_set( $icon = false ) {
 	} else {
 		return 'fontawesome';
 	}
+
+}
+
+/**
+ * Returns the ALT attribute for an attachment
+ *
+ * @since 1.0.7
+ *
+ * @param string   $attachment_ID The ID of the attachment
+ * @return string  The ALT attribute text
+ */
+function dslc_get_attachment_alt( $attachment_ID ) {
+
+	// Get ALT
+	$thumb_alt = trim( strip_tags( get_post_meta( $attachment_ID, '_wp_attachment_image_alt', true) ) );
+
+	// No ALT supplied get attachment info
+	if ( empty( $thumb_alt ) )
+		$attachment = get_post( $attachment_ID );
+
+	// Use caption if no ALT supplied
+	if ( empty( $thumb_alt ) )
+		$thumb_alt = trim(strip_tags( $attachment->post_excerpt ));
+
+	// Use title if no caption supplied either
+	if ( empty( $thumb_alt ) )
+		$thumb_alt = trim(strip_tags( $attachment->post_title ));
+
+	// Return ALT
+	return esc_attr( $thumb_alt );
 
 }
