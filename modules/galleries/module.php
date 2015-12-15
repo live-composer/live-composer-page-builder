@@ -2192,8 +2192,12 @@ class DSLC_Galleries extends DSLC_Module {
 				'posts_per_page' => $options['amount'],
 				'order' => $options['order'],
 				'orderby' => $options['orderby'],
-				'offset' => $query_offset
 			);
+
+			// Add offset
+			if ( $query_offset > 0 ) {
+				$args['offset'] = $query_offset;
+			}
 
 			if ( defined('DOING_AJAX') && DOING_AJAX ) {
 				$args['post_status'] = array( 'publish', 'private' );
