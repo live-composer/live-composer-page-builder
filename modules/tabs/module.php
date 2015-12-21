@@ -64,6 +64,24 @@ class DSLC_Tabs extends DSLC_Module {
 			 */
 
 			array(
+				'label' => __( 'Position', 'live-composer-page-builder' ),
+				'id' => 'css_nav_position',
+				'std' => 'above',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'Above', 'live-composer-page-builder' ),
+						'value' => 'above'
+					),
+					array(
+						'label' => __( 'Aside', 'live-composer-page-builder' ),
+						'value' => 'aside'
+					),
+				),
+				'section' => 'styling',
+				'tab' => __( 'Navigation', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Align', 'live-composer-page-builder' ),
 				'id' => 'css_nav_align',
 				'std' => 'left',
@@ -241,7 +259,7 @@ class DSLC_Tabs extends DSLC_Module {
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-tabs-nav-hook',
-				'affect_on_change_rule' => 'margin-left',
+				'affect_on_change_rule' => 'margin-left,margin-bottom',
 				'section' => 'styling',
 				'ext' => 'px',
 				'tab' => __( 'Navigation', 'live-composer-page-builder' ),
@@ -255,7 +273,7 @@ class DSLC_Tabs extends DSLC_Module {
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-tabs-nav',
-				'affect_on_change_rule' => 'margin-bottom',
+				'affect_on_change_rule' => 'margin-bottom,margin-right',
 				'section' => 'styling',
 				'ext' => 'px',
 				'tab' => __( 'Navigation', 'live-composer-page-builder' ),
@@ -2998,7 +3016,7 @@ class DSLC_Tabs extends DSLC_Module {
 
 		?>
 
-			<div class="dslc-tabs">
+			<div class="dslc-tabs dslc-tabs-nav-pos-<?php echo $options['css_nav_position']; ?>">
 
 				<div class="dslc-tabs-nav dslc-clearfix">
 					
