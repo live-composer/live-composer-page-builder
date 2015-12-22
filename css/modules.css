@@ -1400,10 +1400,6 @@
 						font-family: "Oswald";
 					}	
 
-						#dslc-content .dslc-product-price-secondary del {
-							display: none;
-						}
-
 						#dslc-content .dslc-product-price-secondary ins {
 							text-decoration: none;
 							background: transparent;
