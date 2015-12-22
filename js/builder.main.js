@@ -5950,12 +5950,16 @@ var dslcDebug = false;
 		
 					} else { 
 
-						if ( jQuery( '.dslca-font-loading' ).closest('.dslca-module-edit-field-font-next').length )
-							jQuery('.dslca-font-loading').removeClass('dslca-font-loading').find('.dslca-icon').removeClass('dslc-icon-spin').addClass('dslc-icon-chevron-right');
-						else
-							jQuery('.dslca-font-loading').removeClass('dslca-font-loading').find('.dslca-icon').removeClass('dslc-icon-spin').addClass('dslc-icon-chevron-left');
+						setTimeout( function(){
 
-						jQuery( dslcAffectOnChangeEl ,'.dslca-module-being-edited' ).css( dslcAffectOnChangeRule , dslcAffectOnChangeVal );
+							if ( jQuery( '.dslca-font-loading.dslca-module-edit-field-font-next' ).length )
+								jQuery('.dslca-font-loading').removeClass('dslca-font-loading').find('.dslca-icon').removeClass('dslc-icon-spin').addClass('dslc-icon-chevron-right');
+							else
+								jQuery('.dslca-font-loading').removeClass('dslca-font-loading').find('.dslca-icon').removeClass('dslc-icon-spin').addClass('dslc-icon-chevron-left');
+
+							jQuery( dslcAffectOnChangeEl ,'.dslca-module-being-edited' ).css( dslcAffectOnChangeRule , dslcAffectOnChangeVal );
+
+						}, 100);
 
 					}
 
