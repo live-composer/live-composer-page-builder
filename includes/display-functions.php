@@ -1014,7 +1014,7 @@ function dslc_modules_section_front( $atts, $content = null ) {
 	}
 
 	// No video HTML if builder innactive or no video
-	if ( ! $dslc_active && $atts['bg_video'] == '' && $atts['bg_image'] == '' && $atts['bg_image_thumb'] == 'disabled' ) {
+	if ( ! $dslc_active && $atts['bg_video'] == '' && $atts['bg_image'] == '' && isset( $atts['bg_image_thumb'] ) && $atts['bg_image_thumb'] == 'disabled' ) {
 		$bg_video = '';
 	}
 
