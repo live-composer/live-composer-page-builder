@@ -2973,7 +2973,7 @@ class DSLC_Blog extends DSLC_Module {
 
 							?>
 
-							<div class="<?php echo $element_class . $columns_class . $extra_class; ?>" data-cats="<?php echo $post_cats_data; ?>">
+							<div itemscope itemtype="http://schema.org/Article" class="<?php echo $element_class . $columns_class . $extra_class; ?>" data-cats="<?php echo $post_cats_data; ?>">
 
 								<?php if ( $post_elements == 'all' || in_array( 'thumbnail', $post_elements ) ) : ?>
 
@@ -3012,11 +3012,18 @@ class DSLC_Blog extends DSLC_Module {
 									
 										<div class="dslc-blog-post-thumb dslc-post-thumb dslc-on-hover-anim">
 
-											<div class="dslc-blog-post-thumb-inner dslca-post-thumb">
+											<div itemprop="image" itemscope itemtype="https://schema.org/ImageObject" class="dslc-blog-post-thumb-inner dslca-post-thumb">
 												<?php if ( $manual_resize ) : ?>
 													<a href="<?php the_permalink(); ?>"><img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" /></a>
+													<meta itemprop="url" content="<?php echo $thumb_url; ?>">
+													<meta itemprop="width" content="<?php echo $resize_width; ?>">
+													<meta itemprop="height" content="<?php echo $resize_height; ?>">
 												<?php else : ?>
+													<?php $full_image = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full'); ?>
 													<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'full' ); ?></a>
+													<meta itemprop="url" content="<?php echo $full_image[0]; ?>">
+													<meta itemprop="width" content="<?php echo $full_image[1]; ?>">
+													<meta itemprop="height" content="<?php echo $full_image[2]; ?>">
 												<?php endif; ?>
 											</div><!-- .dslc-blog-post-thumb-inner -->
 
@@ -3118,9 +3125,11 @@ class DSLC_Blog extends DSLC_Module {
 										<?php if ( $post_elements == 'all' || in_array( 'title', $post_elements ) ) : ?>
 
 											<div class="dslc-blog-post-title">
-												<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+												<h2 itemprop="headline"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 											</div><!-- .dslc-blog-post-title -->
 
+										<?php else : ?>
+											<meta itemprop="headline" content="<?php echo get_the_title(); ?>">	
 										<?php endif; ?>	
 
 										<?php if ( $post_elements == 'all' || in_array( 'meta', $post_elements ) ) : ?>
@@ -3138,7 +3147,10 @@ class DSLC_Blog extends DSLC_Module {
 														<span class="dslc-blog-post-meta-avatar">
 															<?php echo get_avatar( get_the_author_meta( 'ID' ), 100 ); ?>
 														</span>
-														<?php _e( 'By', 'live-composer-page-builder'); ?> <?php the_author_posts_link(); ?>
+															<?php _e( 'By', 'live-composer-page-builder'); ?> 
+															<span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">
+																<?php the_author_posts_link(); ?>
+															</span></span>
 													</div><!-- .dslc-blog-post-meta-author -->
 												<?php endif; ?>
 
@@ -3149,12 +3161,15 @@ class DSLC_Blog extends DSLC_Module {
 												<?php endif; ?>
 
 											</div><!-- .dslc-blog-post-meta -->
-
+										<?php else : ?>
+											<span itemprop="author" itemscope itemtype="http://schema.org/Person">
+												<meta itemprop="name" content="<?php echo get_the_author(); ?>">
+											</span>	
 										<?php endif; ?>
 
 										<?php if ( $post_elements == 'all' || in_array( 'excerpt', $post_elements ) ) : ?>
 
-											<div class="dslc-blog-post-excerpt">
+											<div itemprop="articleBody" class="dslc-blog-post-excerpt">
 												<?php if ( $options['excerpt_or_content'] == 'content' ) : ?>
 													<?php the_content(); ?>
 												<?php else : ?>
@@ -3173,7 +3188,8 @@ class DSLC_Blog extends DSLC_Module {
 													?>
 												<?php endif; ?>
 											</div><!-- .dslc-blog-post-excerpt -->
-
+										<?php else : ?>
+											<meta itemprop="articleBody" content="<?php echo do_shortcode( wp_trim_words( get_the_excerpt(), 10 ) ); ?>"/>	
 										<?php endif; ?>
 
 										<?php if ( $post_elements == 'all' || in_array( 'button', $post_elements ) ) : ?>
@@ -3224,6 +3240,27 @@ class DSLC_Blog extends DSLC_Module {
 									<?php endif; ?>
 
 								<?php endif; ?>
+
+								<?php if ( !in_array( 'thumbnail', $post_elements ) ) : ?>
+									<?php $full_image = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full'); ?>
+									<span itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+										<meta itemprop="url" content="<?php echo $full_image[0]; ?>">
+										<meta itemprop="width" content="<?php echo $full_image[1]; ?>">
+										<meta itemprop="height" content="<?php echo $full_image[2]; ?>">
+									</span>	
+								<?php endif; ?>
+
+								<meta itemprop="datePublished" content="<?php echo get_the_date('Y-m-d'); ?>"/>
+								<meta itemprop="dateModified" content="<?php echo get_the_modified_date('Y-m-d') ?>"/>
+
+								<span itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+									<meta itemprop="name" content="<?php echo get_bloginfo('name'); ?>">
+									<span itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+										<meta itemprop="url" content="http://servermoondima.seowptheme.com/wp-content/themes/seowp/design/images/seo-wordpress-theme-logo-horizontal.png">
+									</span>
+								</span>
+
+								<meta itemscope itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" itemid="<?php echo get_permalink(); ?>"/>
 
 							</div><!-- .dslc-blog-post -->
 
