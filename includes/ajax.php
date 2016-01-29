@@ -343,7 +343,7 @@ function dslc_ajax_display_module_options( $atts ) {
 			else
 				$visibility = true;
 
-			if ( $module_option['type'] == 'checkbox' && count( $module_option['choices'] ) < 2 )
+			if ( $module_option['type'] == 'checkbox' && count( $module_option['choices'] ) < 1 )
 				$visibility = false;
 
 			/**

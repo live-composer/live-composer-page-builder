@@ -91,6 +91,19 @@ class DSLC_Button extends DSLC_Module {
 					),
 				)
 			),
+			array(
+				'label' => __( 'Link - nofollow', 'live-composer-page-builder' ),
+				'id' => 'link_nofollow',
+				'std' => '',
+				'type' => 'checkbox',
+				'choices' => array(
+					array(
+						'label' => __( 'Enable', 'live-composer-page-builder' ),
+						'value' => 'enable'
+					),
+				),
+			),
+
 
 			array(
 				'label' => __( 'Align', 'live-composer-page-builder' ),
@@ -900,7 +913,7 @@ class DSLC_Button extends DSLC_Module {
 
 			<div class="dslc-button">
 				<?php if ( $options['button_target'] == 'lightbox' ) : ?>
-					<a href="<?php echo do_shortcode( $options['button_url'] ); ?>" <?php echo $anchor_append; ?> class="dslc-lightbox-image <?php echo esc_attr( $options['button_class'] ); ?>">
+					<a href="<?php echo do_shortcode( $options['button_url'] ); ?>" <?php echo $anchor_append; ?> <?php if ( $options['link_nofollow'] != '' ) echo 'rel="nofollow"';  ?> class="dslc-lightbox-image <?php echo esc_attr( $options['button_class'] ); ?>">
 						<?php if ( $options['button_state'] == 'enabled' && $options['icon_pos'] == 'left' ) : ?>
 							<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 						<?php endif; ?>
@@ -910,7 +923,7 @@ class DSLC_Button extends DSLC_Module {
 						<?php endif; ?>
 					</a>
 				<?php else : ?>
-					<a href="<?php echo do_shortcode( $options['button_url'] ); ?>" target="<?php echo $options['button_target']; ?>" <?php echo $anchor_append; ?> class="<?php echo esc_attr( $options['button_class'] ); ?>">
+					<a href="<?php echo do_shortcode( $options['button_url'] ); ?>" target="<?php echo $options['button_target']; ?>" <?php if ( $options['link_nofollow'] != '' ) echo 'rel="nofollow"';  ?> <?php echo $anchor_append; ?> class="<?php echo esc_attr( $options['button_class'] ); ?>">
 						<?php if ( $options['button_state'] == 'enabled' && $options['icon_pos'] == 'left' ) : ?>
 							<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 						<?php endif; ?>
