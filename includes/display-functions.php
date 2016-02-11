@@ -410,6 +410,26 @@ function dslc_display_composer() {
 		endif; 
 
 	endif;
+
+	?>
+	<div class="dslc-options-templates">
+	<?php
+		$files = glob(DS_LIVE_COMPOSER_ABS . "/includes/options-templates/*.html");
+		foreach($files as $file) {
+			$option_type = array_shift(explode(".", array_pop(explode("/", $file))));
+			?>
+
+			<script type="text/template" id="option-type-<?php echo $option_type?>">
+			<?php
+			if (file_exists($file)) {
+				require_once $file;
+			}?>
+			</script>
+			<?php
+		}
+	?>
+	</div>
+	<?php
 	
 } add_action( 'wp_footer', 'dslc_display_composer' );
 
@@ -1014,7 +1034,7 @@ function dslc_modules_section_front( $atts, $content = null ) {
 	}
 
 	// No video HTML if builder innactive or no video
-	if ( ! $dslc_active && $atts['bg_video'] == '' && $atts['bg_image'] == '' && isset( $atts['bg_image_thumb'] ) && $atts['bg_image_thumb'] == 'disabled' ) {
+	if ( ! $dslc_active && $atts['bg_video'] == '' && $atts['bg_image'] == '' && $atts['bg_image_thumb'] == 'disabled' ) {
 		$bg_video = '';
 	}
 

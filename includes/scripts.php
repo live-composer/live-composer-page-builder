@@ -122,6 +122,7 @@ function dslc_load_scripts() {
 		wp_enqueue_script( 'wp-color-picker' );
 		wp_enqueue_script( 'dslc-load-fonts', '//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js' );
 		wp_enqueue_script( 'dslc-builder-plugins-js', DS_LIVE_COMPOSER_URL . 'js/builder.plugins.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+		wp_enqueue_script( 'smarty-templater', DS_LIVE_COMPOSER_URL . 'js/libs/smart.min.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 
 		if ( DS_LIVE_COMPOSER_LOAD_MINIFIED )
 			wp_enqueue_script( 'dslc-builder-main-js', DS_LIVE_COMPOSER_URL . 'js/builder.main.min.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
