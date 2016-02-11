@@ -1,8 +1,23 @@
 <?php
-
+/**
+ * Basic class for all modules. 
+ * Cannot be instanciated.
+ */
+ 
+ /**
+  * Class DSLC_Module
+  */
 class DSLC_Module {
 
-	function shared_options( $options_id, $atts = false ) {
+	/**
+	 * Common options for all modules
+	 * 	
+	 * @param  int  $options_id
+	 * @param  boolean $atts       
+	 * @return mixed
+	 */
+	function shared_options($options_id, $atts = false) 
+	{
 
 		$animation_options_choices = array(
 			array(
@@ -1730,24 +1745,31 @@ class DSLC_Module {
 		);
 		
 		return $$options_id;
-
 	}
 
 	/**
  	 * Declare module options
  	 */
-	function options() {
-		die('Function "options" must be over-ridden in a sub-class (the module class).');
+	function options()
+	{
+		die('Function "options" must be overrided in a sub-class (the module class).');
 	}
 
 	/**
 	 * The front-end output of the module
 	 */
-	function output( $options ) {
-		die('Function "output" must be over-ridden in a sub-class (the module class).');
+	function output($options)
+	{
+		die('Function "output" must be overrided in a sub-class (the module class).');
 	}
 
-	function module_start( $options ) {
+	/**
+	 * Renders module. Start part
+	 * 
+	 * @param  array $options 
+	 */
+	function module_start($options) 
+	{
 
 		global $dslc_should_filter;
 		$dslc_should_filter = false;
@@ -1921,8 +1943,13 @@ class DSLC_Module {
 		<?php
 	}
 
-	function module_end( $user_options ) {
-
+	/**
+	 * Module rendering. End part.
+	 * 
+	 * @param  array $user_options 
+	 */
+	function module_end($user_options) 
+	{
 		// Get options array
 		$options = $this->options();
 
@@ -1939,6 +1966,9 @@ class DSLC_Module {
 		$user_options_no_defaults = $user_options;
 
 		?>
+		<script>
+			DSLC.Modules.<?=$this->module_id?> = JSON.parse('<?=json_encode($options)?>');
+		</script>
 
 			<?php if ( DS_LIVE_COMPOSER_ACTIVE && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) : ?>
 
@@ -1993,11 +2023,15 @@ class DSLC_Module {
 
 		global $dslc_should_filter;
 		$dslc_should_filter = true;
-
 	}
 
-	function presets_options() {
-
+	/**
+	 * Returns presets options
+	 * 
+	 * @return array
+	 */
+	function presets_options()
+	{
 		$choices = array(
 			array(
 				'label' => 'None',
@@ -2044,7 +2078,14 @@ class DSLC_Module {
 		);
 
 		return $options;
+	}
 
+	static function register()
+	{
+		add_action('dslc_hook_register_modules',
+			dslc_register_module(get_called_class());
+		);
+		
 	}
 
 }
