@@ -118,7 +118,7 @@ body.admin-bar #dslc-header.dslc-header-pos-absolute {
 	}
 
 .dslc-modules-section {
-	border: 0px solid transparent;	
+	border: 0px solid transparent;
 	position: relative;
 }
 
@@ -130,7 +130,7 @@ body.admin-bar #dslc-header.dslc-header-pos-absolute {
 	max-width: 100%;
 	margin: 0 auto;
 }
-	
+
 	.dslc-modules-section.dslc-full .dslc-modules-section-wrapper {
 		width: 100%;
 	}
@@ -248,7 +248,7 @@ body.rtl .dslc-last-col {
 
 	.dslc-carousel-item {
 		width: auto;
-		
+
 	}
 
 	.dslc-carousel-nav {
@@ -277,7 +277,7 @@ body.rtl .dslc-last-col {
 		}
 
 		.dslc-carousel-nav-next {
-			
+
 		}
 
 			.dslc-carousel-nav-prev span,
@@ -340,7 +340,7 @@ body.rtl .dslc-last-col {
 }
 
 /**
- * Loader 
+ * Loader
  */
 
 @keyframes "dslcSpin" {
@@ -643,7 +643,7 @@ body.rtl .dslc-last-col {
 	left: auto !important;
 }
 
-/** 
+/**
  * Post Filters
  */
 
@@ -684,8 +684,8 @@ body.rtl .dslc-last-col {
 	background: transparent;
 	position: absolute;
 	left: 0;
-	right: 0; 
-	bottom: 0; 
+	right: 0;
+	bottom: 0;
 	top: 0;
 	opacity: 0;
 }
@@ -734,11 +734,11 @@ body.rtl .dslc-last-col {
 	.dslc-modules-area[max-width~="850px"] .dslc-res-sm-auto.dslc-post.dslc-2-col {
 		width: 31.91489%;
 		margin-bottom: 15px;
-	}	
+	}
 
 	.dslc-modules-area[max-width~="850px"] .dslc-res-sm-auto.dslc-post.dslc-2-col:nth-child(3n+3) {
 		margin-right: 0;
-	}	
+	}
 */
 
 
@@ -923,7 +923,7 @@ body.dslc-res-phone .dslc-module-front.dslc-col {
 	.dslc-in-viewport-anim-dslcSlideLeft.dslc-in-viewport-check {
 		-webkit-transform: translateX(100px);
 		-moz-transform: translateX(100px);
-		transform: translateX(100px);	
+		transform: translateX(100px);
 	}
 
 	@-webkit-keyframes dslcSlideUpFadeIn {
@@ -1045,7 +1045,7 @@ body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-post-thumb .dslc-o
 .dslc-on-hover-anim:hover .dslc-anim-dslcSlideDownFadeIn {
 	-webkit-transform: translateY(0%);
 	-moz-transform: translateY(0%);
-	transform: translateY(0%);	
+	transform: translateY(0%);
 }
 
 .dslc-anim-dslcSlideUp,
@@ -1059,7 +1059,7 @@ body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-post-thumb .dslc-o
 .dslc-on-hover-anim:hover .dslc-anim-dslcSlideUpFadeIn {
 	-webkit-transform: translateY(0%);
 	-moz-transform: translateY(0%);
-	transform: translateY(0%);	
+	transform: translateY(0%);
 }
 
 .dslc-anim-dslcSlideRight,
@@ -1073,20 +1073,20 @@ body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-post-thumb .dslc-o
 .dslc-on-hover-anim:hover .dslc-anim-dslcSlideRightFadeIn {
 	-webkit-transform: translateX(0);
 	-moz-transform: translateX(0);
-	transform: translateX(0);	
+	transform: translateX(0);
 }
 
 .dslc-anim-dslcSlideLeft,
 .dslc-anim-dslcSlideLeftFadeIn {
 	-webkit-transform: translateX(100%);
 	-moz-transform: translateX(100%);
-	transform: translateX(100%);	
+	transform: translateX(100%);
 }
 
 .dslc-on-hover-anim:hover .dslc-anim-dslcSlideLeft,
 .dslc-on-hover-anim:hover .dslc-anim-dslcSlideLeftFadeIn {
 	-webkit-transform: translateX(0%);
-	-moz-transform: translateX(0%);	
+	-moz-transform: translateX(0%);
 	transform: translateX(0%);
 }
 

@@ -118,9 +118,6 @@
 	height: auto;
 }
 
-
-
-
 .dslca-clearfix:before,
 .dslca-clearfix:after {
 	content: " ";
@@ -137,4 +134,74 @@
 
 .dslca-clear {
 	clear: both;
+}
+
+/**
+ * Style for Page Builder tab and buttons that open Live Composer
+ */
+
+#major-publishing-actions .button-hero {
+	text-align:center;
+	width: 100%;
+	margin-bottom: 14px;
+}
+
+.dslca-post-options .button {
+	text-align:center;
+	width: 50%;
+	margin-top: 14px;
+}
+
+.lc-active #post-status-info, .lc-active #wp-content-editor-container {
+	display: none;
+	opacity: 0;
+}
+
+.lc-active .switch-lc {
+	background: #f5f5f5;
+	border-bottom-color: #f5f5f5;
+}
+
+.lc-active .wp-switch-editor:focus {
+	outline: none;
+	box-shadow: none;
+}
+
+.lc-active .html-active .switch-html {
+	background: #ebebeb;
+	border-bottom-color: #e5e5e5;
+}
+
+.lc-active .wp-switch-editor-lc {
+	background: #f5f5f5;
+	color: #555;
+	border-bottom-color: #f5f5f5;
+}
+
+.lc-active #lc_content_wrap {
+	display: block;
+	background: #f5f5f5;
+	height: 250px;
+	padding-top: 70px;
+	border: 1px solid #e5e5e5;
+	border-top: none;
+	text-align: center;
+}
+
+.lc-active #lc_content_wrap h2 {
+	font-size: 21px;
+	font-weight: normal;
+	line-height: 1.2;
+}
+
+.lc-active #lc_content_wrap .description {
+	font-size: 14px;
+	line-height: 1.5;
+	color: #777;
+	margin: 10px auto 20px;
+	max-width: 400px;
+}
+
+#lc_content_wrap {
+	display: none;
 }

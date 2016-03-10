@@ -93,12 +93,12 @@ function dslc_tut_options() {
 			'value' => 'none'
 		)
 	);
-	foreach( $pages as $page ) {	
+	foreach( $pages as $page ) {
 		$pages_opts[] = array(
 			'label' => $page->post_title,
 			'value' => $page->ID
 		);
-	}	
+	}
 
 	$dslc_plugin_options['dslc_plugin_options_tuts'] = array(
 		'title' => __( 'Tutorials', 'live-composer-page-builder' ),
