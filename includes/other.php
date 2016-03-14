@@ -5,6 +5,7 @@
  *
  * - dslc_plugin_action_links ( Additional links on plugin listings page )
  * - dslc_icons
+ * - dslc_w3tc_admin_notice (Show notice if some of the W3TC settings are problematic)
  */
 
 
@@ -45,3 +46,100 @@ function dslc_icons() {
 	$dslc_var_icons = apply_filters( 'dslc_available_icons', $dslc_var_icons );
 
 } add_action( 'init', 'dslc_icons' );
+
+/**
+ * Show notice if wrong settings in the W3TC plugin
+ *
+ * @since 1.0.7
+ *
+ * Check important settings in the W3TC plugin
+ * to make sure it doesn't break our page builder
+ * with unnecessary page caching or minimization
+ */
+
+function dslc_w3tc_admin_notice() {
+
+	if ( class_exists('W3_Root') ) {
+
+		$w3tc_config = w3_instance('W3_Config');
+
+		$screen = get_current_screen();
+		$current_parent_base = $screen->parent_base;
+
+		$notice_id = 'w3tc_wrong_settings';
+		$display_notice = false;
+		$notice_dismissed = dslc_notice_dismissed($notice_id);
+		$notice_nonce = dslc_generate_notice_nonce($notice_id);
+
+		// Page Cache
+		// Don't cache pages for logged in users
+		$pgcache_reject_logged = $w3tc_config->get_boolean('pgcache.reject.logged');
+
+		//Minify
+		$minify_reject_logged = $w3tc_config->get_boolean('minify.reject.logged');
+
+		//Database cache
+		$dbcache_reject_logged = $w3tc_config->get_boolean('dbcache.reject.logged');
+
+		if ( !$notice_dismissed && ( !$pgcache_reject_logged || !$minify_reject_logged || !$dbcache_reject_logged ) ) {
+			$display_notice = true;
+		}
+
+		if ( $display_notice && $current_parent_base!='dslc_plugin_options' ) {?>
+
+			<div class="notice dslc-notice notice-error is-dismissible" id="<?php echo $notice_id; ?>" data-nonce="<?php echo $notice_nonce; ?>">
+				<p><?php _e( 'There is a problem in W3 Total Cache plugin settings that <strong>can break your page builder</strong>. Luckily, <a href="'. admin_url( 'admin.php?page=dslc_getting_started' ) .'">it\'s easy to fix it</a>.', 'live-composer-page-builder' ); ?></p>
+			</div><?php
+
+		} elseif ( $display_notice && $current_parent_base=='dslc_plugin_options' ) { ?>
+
+				<div class="notice dslc-notice notice-error is-dismissible" id="<?php echo $notice_id; ?>" data-nonce="<?php echo $notice_nonce; ?>">
+					<p><?php _e( 'Wrong <strong>W3 Total Cache plugin</strong> settings can break Live Composer. Please check the next settings:', 'live-composer-page-builder' ); ?></p>
+					<ul style="padding-left: 30px;">
+						<?php if ( !$pgcache_reject_logged ) { ?>
+							<li type="disc"><?php
+								echo ' <a href="' . admin_url( 'admin.php?page=w3tc_pgcache') . '" target="_blank">';
+								_e( 'WP Admin &#8594; Performance &#8594; Page Cache', 'live-composer-page-builder' );
+								echo ' &#8594; ';
+								_e( 'General ', 'live-composer-page-builder' );
+								echo '</a> &#8594;<strong> ';
+								_e( 'Don\'t cache pages for logged in users', 'live-composer-page-builder' );
+								echo '</strong> ';
+								_e( '– should be selected', 'live-composer-page-builder' );
+								?>
+							</li>
+						<?php } ?>
+						<?php if ( !$minify_reject_logged ) { ?>
+							<li type="disc"><?php
+								echo ' <a href="' . admin_url( 'admin.php?page=w3tc_minify') . '" target="_blank">';
+								_e( 'WP Admin &#8594; Performance &#8594; Page Cache', 'live-composer-page-builder' );
+								echo ' &#8594; ';
+								_e( 'Minify ', 'live-composer-page-builder' );
+								echo '</a> &#8594;<strong> ';
+								_e( 'Disable minify for logged in users', 'live-composer-page-builder' );
+								echo '</strong> ';
+								_e( '– should be selected', 'live-composer-page-builder' );
+								?>
+							</li>
+						<?php } ?>
+						<?php if ( !$dbcache_reject_logged ) { ?>
+							<li type="disc"><?php
+								echo ' <a href="' . admin_url( 'admin.php?page=w3tc_dbcache') . '" target="_blank">';
+								_e( 'WP Admin &#8594; Performance &#8594; Page Cache', 'live-composer-page-builder' );
+								echo ' &#8594; ';
+								_e( 'Database Cache ', 'live-composer-page-builder' );
+								echo '</a> &#8594;<strong> ';
+								_e( 'Don\'t cache queries for logged in users', 'live-composer-page-builder' );
+								echo '</strong> ';
+								_e( '– should be selected', 'live-composer-page-builder' );
+								?>
+							</li>
+						<?php } ?>
+					</ul>
+				</div>
+		<?php }
+
+	}
+
+}
+add_action( 'admin_notices', 'dslc_w3tc_admin_notice' );

@@ -204,15 +204,16 @@ function dslc_load_fonts() {
 } add_action( 'wp_enqueue_scripts', 'dslc_load_fonts' );
 
 /**
- * Load inline JS for the admin
+ * Inline JS to shorten the plugin title in WP Admin
  *
+ * @since 1.0.7.2
  */
 
-function dslc_load_admin_inline_js(){ ?>
+function dslc_inline_js_plugin_title(){ ?>
 	<script type="text/javascript">
 		jQuery(document).ready(function($){
 			jQuery('#page-builder-live-composer-drag-and-drop-website-builder-visual-front-end-site-editor .plugin-title strong').text('Live Composer');
 		});
 	</script>
 <?php }
-add_action( 'admin_footer-plugins.php', 'dslc_load_admin_inline_js' );
+add_action( 'admin_footer-plugins.php', 'dslc_inline_js_plugin_title' );

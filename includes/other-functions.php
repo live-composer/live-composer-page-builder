@@ -67,7 +67,7 @@ if( ! class_exists('DSLC_Aq_Resize') ) {
 			$https_prefix = "https://";
 
 			/* if the $url scheme differs from $upload_url scheme, make them match
-			   if the schemes differe, images don't show up. */
+				if the schemes differe, images don't show up. */
 			if(!strncmp($url,$https_prefix,strlen($https_prefix))){ //if url begins with https:// make $upload_url begin with https:// as well
 				$upload_url = str_replace($http_prefix,$https_prefix,$upload_url);
 			}
@@ -382,3 +382,90 @@ function dslc_get_attachment_alt( $attachment_ID ) {
 	return esc_attr( $thumb_alt );
 
 }
+
+/**
+ * Dismissable notices
+ *
+ * @since 1.0.8
+ */
+function dslc_dismiss_notice() {
+	// Verify nonce
+	if ( !wp_verify_nonce( $_REQUEST['nonce'], "dslc_". $_REQUEST['notice_id'] . "_nonce")) {
+		wp_die("No naughty business please");
+	}
+
+	// Check access permissions
+	if ( !current_user_can( 'install_themes' ) ) {
+		wp_die('You do not have rights to do this');
+	}
+
+	if ( $_REQUEST['notice_id'] ) {
+		$stored_notices = get_option('dslc_notices');
+		$stored_notices[get_current_user_id()][$_REQUEST['notice_id'].'_notice_dismissed'] = 1;
+		update_option('dslc_notices', $stored_notices);
+	}
+
+	wp_die();
+}
+add_action("wp_ajax_dslc_dismiss_notice", "dslc_dismiss_notice");
+
+/**
+ * Inline JS to attach click action for disisable notices
+ *
+ * @since 1.0.7.2
+ *
+ * Call Ajax action to dismiss a particular admin notice
+ */
+
+function dslc_adminjs_dismiss_notice(){ ?>
+	<script type="text/javascript">
+		jQuery(document).on( 'click', '.dslc-notice .notice-dismiss', function(event) {
+				var notice_id = event.target.parentNode.id;
+				var nonce = event.target.parentNode.getAttribute("data-nonce");
+
+				jQuery.ajax({
+					url: ajaxurl,
+					data: {
+						action: 'dslc_dismiss_notice',
+						nonce: nonce,
+						notice_id: notice_id,
+					}
+				})
+			})
+	</script>
+<?php }
+add_action( 'admin_footer', 'dslc_adminjs_dismiss_notice' );
+
+/**
+ * Checks if notice dismissed
+ *
+ * @since 1.0.8
+ *
+ * @param string   $notice_id Unique id of the notice
+ * @return boolean  true if notice is being dismissed
+ */
+function dslc_notice_dismissed($notice_id) {
+	$stored_notices = get_option('dslc_notices');
+	$notice_dismissed = 0;
+	$usr_id = get_current_user_id();
+
+	if ( isset($stored_notices[$usr_id][$notice_id .'_notice_dismissed']) && $stored_notices[$usr_id][$notice_id .'_notice_dismissed'] = 1 ) {
+		$notice_dismissed = 1;
+	}
+
+	return $notice_dismissed;
+}
+
+/**
+ * Generate nonce for the notice
+ *
+ * @since 1.0.8
+ *
+ * @param string   $notice_id Unique id of the notice
+ * @return string  nonce
+ */
+function dslc_generate_notice_nonce($notice_id) {
+	$notice_nonce = wp_create_nonce('dslc_' . $notice_id . '_nonce');
+	return $notice_nonce;
+}
+
