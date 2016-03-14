@@ -128,11 +128,23 @@ class DSLC_Info_Box extends DSLC_Module {
 					),
 				)
 			),
-			
+			array(
+				'id' => 'link_nofollow',
+				'std' => '',
+				'type' => 'checkbox',
+				'help' => __( 'Nofollow tells search engines to not follow this specific link', 'live-composer-page-builder' ),
+				'choices' => array(
+					array(
+						'label' => __( 'Nofollow', 'live-composer-page-builder' ),
+						'value' => 'nofollow'
+					),
+				),
+			),
+
 			/**
 			 * General
 			 */
-			
+
 			array(
 				'label' => __( 'Elements', 'live-composer-page-builder' ),
 				'id' => 'elements',
@@ -428,7 +440,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_rule' => 'box-shadow',
 				'section' => 'styling',
 			),
-			
+
 
 			/**
 			 * Wrapper
@@ -857,7 +869,7 @@ class DSLC_Info_Box extends DSLC_Module {
       /**
 			 * Image
 			 */
-			 
+
 			 array(
 				'label' => __( 'Image - File', 'live-composer-page-builder' ),
 				'id' => 'image_alt',
@@ -983,7 +995,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'Image', 'live-composer-page-builder' ),
 			),
-			 
+
 			/**
 			 * Title
 			 */
@@ -1086,7 +1098,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'tab' => __( 'Title', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
-			
+
 
 			/**
 			 * Content
@@ -2478,7 +2490,7 @@ class DSLC_Info_Box extends DSLC_Module {
 			$elements = explode( ' ', trim( $elements ) );
 		else
 			$elements = array();
-		
+
 		$image_alt = $options['image_alt'];
 		$image_alt_link_url = $options['image_alt_link_url'];
 
@@ -2491,7 +2503,7 @@ class DSLC_Info_Box extends DSLC_Module {
 					<?php if ( $options['button_pos'] == 'aside' && in_array( 'button', $elements ) ) : ?>
 						<div class="dslc-info-box-button dslc-info-box-button-aside">
 							<?php if ( isset( $options['button_link'] ) && ! empty( $options['button_link'] ) ) : ?>
-								<a href="<?php echo $options['button_link']; ?>" target="<?php echo $options['button_target']; ?>" class="dslc-primary">
+								<a href="<?php echo $options['button_link']; ?>" target="<?php echo $options['button_target']; ?>" <?php if ( $options['link_nofollow'] ) echo 'rel="nofollow"';  ?> class="dslc-primary">
 									<?php if ( isset( $options['button_icon_id'] ) && $options['button_icon_id'] != '' ) : ?>
 										<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 									<?php endif; ?>
@@ -2499,9 +2511,9 @@ class DSLC_Info_Box extends DSLC_Module {
 										<span class="dslca-editable-content" data-id="button_title" data-type="simple" contenteditable><?php echo $options['button_title']; ?></span>
 									<?php else : echo $options['button_title']; endif; ?>
 								</a>
-							<?php endif; ?>	
+							<?php endif; ?>
 							<?php if ( isset( $options['button_2_link'] ) && ! empty( $options['button_2_link'] ) ) : ?>
-								<a href="<?php echo $options['button_2_link']; ?>" target="<?php echo $options['button_2_target']; ?>" class="dslc-secondary">
+								<a href="<?php echo $options['button_2_link']; ?>" target="<?php echo $options['button_2_target']; ?>" <?php if ( $options['link_nofollow'] ) echo 'rel="nofollow"';  ?> class="dslc-secondary">
 									<?php if ( isset( $options['button_2_icon_id'] ) && $options['button_2_icon_id'] != '' ) : ?>
 										<span class="dslc-icon dslc-icon-<?php echo $options['button_2_icon_id']; ?>"></span>
 									<?php endif; ?>
@@ -2520,19 +2532,19 @@ class DSLC_Info_Box extends DSLC_Module {
 								<div class="dslc-info-box-image-inner">
 									<span class="dslc-icon dslc-icon-<?php echo $options['icon_id']; ?> dslc-init-center"></span>
 									<?php if ( ! empty( $options['icon_link'] ) ) : ?>
-										<a class="dslc-info-box-image-link" href="<?php echo $options['icon_link']; ?>" target="<?php echo $options['icon_link_target']; ?>"></a>
+										<a class="dslc-info-box-image-link" href="<?php echo $options['icon_link']; ?>" <?php if ( $options['link_nofollow'] ) echo 'rel="nofollow"';  ?> target="<?php echo $options['icon_link_target']; ?>"></a>
 									<?php endif; ?>
 								</div><!-- .dslc-info-box-image-inner -->
 							</div><!-- .dslc-info-box-image -->
 						<?php endif; ?>
-						
+
 						<?php if ( in_array( 'image', $elements ) && $image_alt ) : ?>
 							<div class="dslc-info-box-image-alt">
 								<div class="dslc-info-box-image-alt-inner">
 									<?php if ( ! $image_alt_link_url) : ?>
 										<img src="<?php echo esc_url($image_alt);?>">
 									<?php else : ?>
-										<a href="<?php echo esc_url($image_alt_link_url);?>"><img src="<?php echo esc_url($image_alt);?>"></a>
+										<a href="<?php echo esc_url($image_alt_link_url);?>" <?php if ( $options['link_nofollow'] ) echo 'rel="nofollow"';  ?>><img src="<?php echo esc_url($image_alt);?>"></a>
 									<?php endif; ?>
 								</div><!-- .dslc-info-box-image-alt-inner -->
 							</div><!-- .dslc-info-box-image-alt -->
@@ -2546,7 +2558,7 @@ class DSLC_Info_Box extends DSLC_Module {
 										<h4 class="dslca-editable-content" data-id="title" data-type="simple" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?>><?php echo stripslashes( $options['title'] ); ?></h4>
 									<?php else : ?>
 										<?php if ( $options['title_link'] != '' ) : ?>
-											<h4><a href="<?php echo $options['title_link']; ?>" target="<?php echo $options['title_link_target']; ?>"><?php echo stripslashes( $options['title'] ); ?></a></h4>
+											<h4><a href="<?php echo $options['title_link']; ?>" target="<?php echo $options['title_link_target']; ?>" <?php if ( $options['link_nofollow'] ) echo 'rel="nofollow"';  ?>><?php echo stripslashes( $options['title'] ); ?></a></h4>
 										<?php else : ?>
 											<h4><?php echo stripslashes( $options['title'] ); ?></h4>
 										<?php endif; ?>
@@ -2557,7 +2569,7 @@ class DSLC_Info_Box extends DSLC_Module {
 							<?php if ( in_array( 'content', $elements ) ) : ?>
 								<div class="dslc-info-box-content">
 									<?php if ( $dslc_is_admin ) : ?>
-										<div class="dslca-editable-content" data-id="content">								
+										<div class="dslca-editable-content" data-id="content">
 											<?php echo stripslashes( $options['content'] ); ?>
 										</div><!-- .dslca-editable-content -->
 										<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook"><?php _e( 'Edit Content', 'live-composer-page-builder' ); ?></span></div>
@@ -2570,7 +2582,7 @@ class DSLC_Info_Box extends DSLC_Module {
 							<?php if ( $options['button_pos'] == 'bellow' && in_array( 'button', $elements ) ) : ?>
 								<div class="dslc-info-box-button">
 									<?php if ( isset( $options['button_link'] ) && ! empty( $options['button_link'] ) ) : ?>
-										<a href="<?php echo $options['button_link']; ?>" target="<?php echo $options['button_target']; ?>" class="dslc-primary">
+										<a href="<?php echo $options['button_link']; ?>" target="<?php echo $options['button_target']; ?>" <?php if ( $options['link_nofollow'] ) echo 'rel="nofollow"';  ?> class="dslc-primary">
 											<?php if ( isset( $options['button_icon_id'] ) && $options['button_icon_id'] != '' ) : ?>
 												<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 											<?php endif; ?>
@@ -2578,9 +2590,9 @@ class DSLC_Info_Box extends DSLC_Module {
 												<span class="dslca-editable-content" data-id="button_title" data-type="simple" contenteditable><?php echo $options['button_title']; ?></span>
 											<?php else : echo $options['button_title']; endif; ?>
 										</a>
-									<?php endif; ?>	
+									<?php endif; ?>
 									<?php if ( isset( $options['button_2_link'] ) && ! empty( $options['button_2_link'] ) ) : ?>
-										<a href="<?php echo $options['button_2_link']; ?>" target="<?php echo $options['button_2_target']; ?>" class="dslc-secondary">
+										<a href="<?php echo $options['button_2_link']; ?>" target="<?php echo $options['button_2_target']; ?>" <?php if ( $options['link_nofollow'] ) echo 'rel="nofollow"';  ?> class="dslc-secondary">
 											<?php if ( isset( $options['button_2_icon_id'] ) && $options['button_2_icon_id'] != '' ) : ?>
 												<span class="dslc-icon dslc-icon-<?php echo $options['button_2_icon_id']; ?>"></span>
 											<?php endif; ?>
