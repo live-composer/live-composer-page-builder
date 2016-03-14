@@ -5,7 +5,7 @@
  *
  * class DSLC_Aq_Resize ( Image resizing class )
  * dslc_aq_resize ( Resize an image using DSLC_Aq_Resize Class )
- * dslc_get_social_count ( Returns amount of social shares a page has ) 
+ * dslc_get_social_count ( Returns amount of social shares a page has )
  * dslc_icons_current_set ( Returns the ID of the currently used set based on icon )
  * dslc_get_attachment_alt ( Returnt he ALT attribute for an attachment )
  */
@@ -62,19 +62,19 @@ if( ! class_exists('DSLC_Aq_Resize') ) {
 			$upload_info = wp_upload_dir();
 			$upload_dir = $upload_info['basedir'];
 			$upload_url = $upload_info['baseurl'];
-			
+
 			$http_prefix = "http://";
 			$https_prefix = "https://";
-			
-			/* if the $url scheme differs from $upload_url scheme, make them match 
+
+			/* if the $url scheme differs from $upload_url scheme, make them match
 			   if the schemes differe, images don't show up. */
 			if(!strncmp($url,$https_prefix,strlen($https_prefix))){ //if url begins with https:// make $upload_url begin with https:// as well
 				$upload_url = str_replace($http_prefix,$https_prefix,$upload_url);
 			}
 			elseif(!strncmp($url,$http_prefix,strlen($http_prefix))){ //if url begins with http:// make $upload_url begin with http:// as well
-				$upload_url = str_replace($https_prefix,$http_prefix,$upload_url);      
+				$upload_url = str_replace($https_prefix,$http_prefix,$upload_url);
 			}
-			
+
 
 			// Check if $img_url is local.
 			if ( false === strpos( $url, $upload_url ) ) return false;
@@ -185,7 +185,7 @@ if( ! class_exists('DSLC_Aq_Resize') ) {
 		}
 
 	}
-	
+
 }
 
 
@@ -227,7 +227,7 @@ if ( ! function_exists('dslc_aq_resize') ) {
 
 			$aq_resize = DSLC_Aq_Resize::getInstance();
 			return $aq_resize->process( $url, $width, $height, $crop, $single, $upscale );
-			
+
 		}
 
 	}
@@ -241,14 +241,14 @@ if ( ! function_exists('dslc_aq_resize') ) {
  *
  * @param int     $post_ID ID of the post/page. Default false, uses get_the_ID()
  * @param int     $refresh_in Amount of seconds for cached info to be stored. Default 3600.
- * @return array  Array containing amount of shares. Keys are fb, twitter and pinterest. 
+ * @return array  Array containing amount of shares. Keys are fb, twitter and pinterest.
  */
 function dslc_get_social_count( $post_ID = false, $refresh_in = 3600 ) {
 
 	// If ID nt supplied use current
 	if ( $post_ID == false ) {
 		$post_ID = get_the_ID();
-	}	
+	}
 
 	// Transient
 	$transient_id = 'dslc_social_shares_count_' . $post_ID;
@@ -277,7 +277,7 @@ function dslc_get_social_count( $post_ID = false, $refresh_in = 3600 ) {
 			$share_info['fb'] = $fb_count;
 		}
 
-		// Twitter									
+		// Twitter
 		$twitter_get = wp_remote_get( 'http://cdn.api.twitter.com/1/urls/count.json?url=' . $the_url );
 		$twitter_count = 0;
 		if ( is_array( $twitter_get ) ) {
@@ -290,7 +290,7 @@ function dslc_get_social_count( $post_ID = false, $refresh_in = 3600 ) {
 			$share_info['twitter'] = $twitter_count;
 		}
 
-		// Pinterest 
+		// Pinterest
 		$pinterest_get = wp_remote_get( 'http://api.pinterest.com/v1/urls/count.json?url=' . $the_url );
 		$pinterest_count = 0;
 		if ( is_array( $pinterest_get ) ) {
@@ -305,7 +305,7 @@ function dslc_get_social_count( $post_ID = false, $refresh_in = 3600 ) {
 
 		// Check if there is data
 		if ( isset( $share_info ) ) {
-			set_transient( $transient_id, $share_info, $refresh_in );											
+			set_transient( $transient_id, $share_info, $refresh_in );
 		} else {
 			$share_info = false;
 		}
@@ -332,7 +332,7 @@ function dslc_icons_current_set( $icon = false ) {
 	// If there is no "-" in icon, there is no set, return default
 	if ( $icon == false || strlen( $icon ) == 0 || strpos( $icon, '-' ) === false ) {
 		return 'fontawesome';
-	}	
+	}
 
 	// Get array with available icons
 	global $dslc_var_icons;
@@ -341,7 +341,7 @@ function dslc_icons_current_set( $icon = false ) {
 	$icon_parts = explode( '-', $icon );
 	$icon_set = $icon_parts[0];
 
-	
+
 
 	// If there is an icon set by that name return it
 	if ( isset( $dslc_var_icons[ $icon_set ] ) ) {

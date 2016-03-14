@@ -63,7 +63,7 @@
 	$dslc_plugin_options['dslc_plugin_options_cpt_slugs'] = array(
 
 		'title' => __( 'Slugs', 'live-composer-page-builder' ),
-		'options' => array( 
+		'options' => array(
 
 			'with_front' => array(
 				'label' => __( 'With Front', 'live-composer-page-builder' ),
@@ -152,7 +152,7 @@
 				'std' => 'dslc_testimonials_cats',
 				'type' => 'text'
 			),
-			
+
 
 		)
 

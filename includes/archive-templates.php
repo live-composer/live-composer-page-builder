@@ -10,7 +10,7 @@
 
 
 /**
- * Load custom template 
+ * Load custom template
  *
  * @since 1.0
  */
@@ -35,7 +35,7 @@ add_filter( 'category_template', 'dslc_archive_template_redirect' );
  * @since 1.0
  */
 
-function dslc_author_archive_template_redirect( $archive_template ) {	
+function dslc_author_archive_template_redirect( $archive_template ) {
 
 	$template = dslc_get_option( 'author', 'dslc_plugin_options_archives' );
 	if ( ! $template || $template == 'none' ) return $archive_template;
@@ -51,7 +51,7 @@ function dslc_author_archive_template_redirect( $archive_template ) {
  * @since 1.0
  */
 
-function dslc_search_template_redirect( $search_template ) {	
+function dslc_search_template_redirect( $search_template ) {
 
 	$template = dslc_get_option( 'search_results', 'dslc_plugin_options_archives' );
 	if ( ! $template || $template == 'none' ) return $search_template;
@@ -97,7 +97,7 @@ function dslc_archive_template_init() {
 		'label' => __( 'Default', 'live-composer-page-builder' ),
 		'value' => 'none'
 	);
-	$pages = get_pages();	
+	$pages = get_pages();
 	foreach ( $pages as $page ) {
 		$pages_opts[] = array(
 			'label' => $page->post_title,
@@ -150,7 +150,7 @@ function dslc_archive_template_init() {
 
 /**
  * Fixes 404 on pagination caused when regular WP query has no more post
- * 
+ *
  * @since 1.0
  */
 

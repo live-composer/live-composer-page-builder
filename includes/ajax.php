@@ -93,7 +93,7 @@ function dslc_ajax_add_modules_section( $atts ) {
 		$response['output'] = $output;
 
 		// Encode response
-		$response_json = json_encode( $response );	
+		$response_json = json_encode( $response );
 
 		// Send the response
 		header( "Content-Type: application/json" );
@@ -150,7 +150,7 @@ function dslc_ajax_add_modules_area( $atts ) {
 		$response['output'] = $output;
 
 		// Encode response
-		$response_json = json_encode( $response );	
+		$response_json = json_encode( $response );
 
 		// Send the response
 		header( "Content-Type: application/json" );
@@ -195,7 +195,7 @@ function dslc_ajax_add_module( $atts ) {
 
 		// If it is not a new module ( already has ID )
 		if ( isset( $_POST['dslc_module_instance_id'] ) ) {
-			
+
 			$module_instance_id = $_POST['dslc_module_instance_id'];
 
 		// If it is a new module ( no ID )
@@ -203,7 +203,7 @@ function dslc_ajax_add_module( $atts ) {
 
 			// Get current count
 			$module_id_count = get_option( 'dslc_module_id_count' );
-			
+
 			// If not the first one
 			if ( $module_id_count ) {
 
@@ -215,7 +215,7 @@ function dslc_ajax_add_module( $atts ) {
 
 			// If it is the first one
 			} else {
-					
+
 				// Set 1 as the ID
 				$module_instance_id = 1;
 
@@ -280,7 +280,7 @@ function dslc_ajax_add_module( $atts ) {
 		$response['output'] = $output;
 
 		// Encode response
-		$response_json = json_encode( $response );	
+		$response_json = json_encode( $response );
 
 		// Send the response
 		header( "Content-Type: application/json" );
@@ -332,7 +332,7 @@ function dslc_ajax_display_module_options( $atts ) {
 			$curr_value = $module_option['std'];
 
 			if ( isset( $_POST[ $module_option['id'] ] ) )
-				$curr_value = $_POST[ $module_option['id'] ]; 
+				$curr_value = $_POST[ $module_option['id'] ];
 
 			/**
 			 * Visibility
@@ -424,7 +424,7 @@ function dslc_ajax_display_module_options( $atts ) {
 			}
 
 			$ext = ' ';
-			if ( isset( $module_option['ext'] ) ) 
+			if ( isset( $module_option['ext'] ) )
 				$ext = $module_option['ext'];
 
 			$affect_on_change_append = '';
@@ -432,7 +432,7 @@ function dslc_ajax_display_module_options( $atts ) {
 				$affect_on_change_append = 'data-affect-on-change-el="' . $module_option['affect_on_change_el'] . '" data-affect-on-change-rule="' . $module_option['affect_on_change_rule'] . '"';
 
 
-			?>	
+			?>
 
 				<div class="dslca-module-edit-option dslca-module-edit-option-<?php echo $module_option['type']; ?> dslca-module-edit-option-<?php echo $module_option['id']; ?> <?php if ( ! $visibility ) echo 'dslca-module-edit-option-hidden'; ?>" data-id="<?php echo $module_option['id']; ?>" data-refresh-on-change="<?php echo $refresh_on_change; ?>" data-section="<?php echo $section; ?>" data-tab="<?php echo $tab_ID; ?>">
 
@@ -452,7 +452,7 @@ function dslc_ajax_display_module_options( $atts ) {
 					</span>
 
 					<?php if ( $module_option['type'] == 'text' ) : ?>
-						
+
 						<input type="text" class="dslca-module-edit-field" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo esc_attr( stripslashes( $curr_value ) ); ?>" data-starting-val="<?php echo esc_attr( stripslashes( $curr_value ) ); ?>" <?php echo $affect_on_change_append ?> />
 
 					<?php elseif ( $module_option['type'] == 'textarea' ) : ?>
@@ -469,8 +469,8 @@ function dslc_ajax_display_module_options( $atts ) {
 
 					<?php elseif ( $module_option['type'] == 'checkbox' ) : ?>
 
-						<?php 
-								
+						<?php
+
 							// Current Value Array
 							if ( empty( $curr_value ) )
 								$curr_value = array();
@@ -517,7 +517,7 @@ function dslc_ajax_display_module_options( $atts ) {
 					<?php elseif ( $module_option['type'] == 'slider' ) : ?>
 
 						<?php
-							
+
 							$slider_min = 0;
 							$slider_max = 100;
 							$slider_increment = 1;
@@ -554,7 +554,7 @@ function dslc_ajax_display_module_options( $atts ) {
 						<?php endif; ?>
 
 					<?php elseif ( $module_option['type'] == 'font' ) : ?>
-						
+
 						<div class="dslca-module-edit-field-font-wrapper">
 							<input type="text" class="dslca-module-edit-field dslca-module-edit-field-font" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" <?php echo $affect_on_change_append ?> />
 							<span class="dslca-module-edit-field-font-suggest"></span>
@@ -563,7 +563,7 @@ function dslc_ajax_display_module_options( $atts ) {
 						<span class="dslca-module-edit-field-font-next"><span class="dslca-icon dslc-icon-chevron-right"></span></span>
 
 					<?php elseif ( $module_option['type'] == 'icon' ) : ?>
-						
+
 						<div class="dslca-module-edit-field-icon-wrapper">
 							<input type="text" class="dslca-module-edit-field dslca-module-edit-field-icon" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" <?php echo $affect_on_change_append ?> />
 							<span class="dslca-module-edit-field-icon-suggest"></span>
@@ -626,7 +626,7 @@ function dslc_ajax_display_module_options( $atts ) {
 
 						<div class="dslca-module-edit-option-box-shadow-wrapper">
 
-							<div class="dslca-module-edit-option-box-shadow-single">								
+							<div class="dslca-module-edit-option-box-shadow-single">
 								<span class="dslca-module-edit-option-checkbox-hook"><?php _e( 'Inner', 'live-composer-page-builder' ); ?><span class="dslca-icon <?php if ( $box_shadow_inset_val == 'inset' ) echo 'dslc-icon-check'; else echo 'dslc-icon-check-empty'; ?>"></span></span>
 								<input type="checkbox" class="dslca-module-edit-field-checkbox dslca-module-edit-option-box-shadow-inset" <?php if (  $box_shadow_inset_val == 'inset' ) echo 'checked="checked"'; ?> />
 							</div>
@@ -697,7 +697,7 @@ function dslc_ajax_display_module_options( $atts ) {
 							<?php do_action( 'dslc_custom_option_type_' . $module_option['type'], $module_option, $curr_value, $affect_on_change_append ); ?>
 
 						<?php else : ?>
-						
+
 							<input type="text" class="dslca-module-edit-field" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" data-starting-val="<?php echo $curr_value; ?>" <?php echo $affect_on_change_append ?> />
 
 						<?php endif; ?>
@@ -719,7 +719,7 @@ function dslc_ajax_display_module_options( $atts ) {
 		// Output End
 		$output_end = '</div>';
 
-		// Output Tabs		
+		// Output Tabs
 		$output_tabs = '';
 		foreach ( $tabs as $tab ) {
 			$output_tabs .= '<span class="dslca-module-edit-options-tab-hook" data-section="' . $tab['section'] . '" data-id="'. $tab['id'] .'">' . $tab['title'] . '</span>';
@@ -732,7 +732,7 @@ function dslc_ajax_display_module_options( $atts ) {
 		$response['output'] .= $output_end;
 
 		// Encode response
-		$response_json = json_encode( $response );	
+		$response_json = json_encode( $response );
 
 		// Send the response
 		header( "Content-Type: application/json" );
@@ -879,7 +879,7 @@ function dslc_ajax_load_template( $atts ) {
 		$response['output'] = do_shortcode ( $template_code );
 
 		// Encode response
-		$response_json = json_encode( $response );	
+		$response_json = json_encode( $response );
 
 		// Send the response
 		header( "Content-Type: application/json" );
@@ -919,7 +919,7 @@ function dslc_ajax_import_template( $atts ) {
 		$response['output'] = do_shortcode ( $template_code );
 
 		// Encode response
-		$response_json = json_encode( $response );	
+		$response_json = json_encode( $response );
 
 		// Send the response
 		header( "Content-Type: application/json" );
@@ -963,7 +963,7 @@ function dslc_ajax_save_template( $atts ) {
 			$templates = array();
 		else
 			$templates = maybe_unserialize( $templates );
-		
+
 		// Append new template to templates array
 		$templates[$template_id] = array(
 			'title' => $template_title,
@@ -979,7 +979,7 @@ function dslc_ajax_save_template( $atts ) {
 		$response['output'] = $templates;
 
 		// Encode response
-		$response_json = json_encode( $response );	
+		$response_json = json_encode( $response );
 
 		// AJAX phone home
 		header( "Content-Type: application/json" );
@@ -1011,7 +1011,7 @@ function dslc_ajax_delete_template( $atts ) {
 
 		// Get all templates
 		$templates = maybe_unserialize( get_option( 'dslc_templates' ) );
-		
+
 		// Remove the template
 		unset( $templates[$template_id] );
 
@@ -1022,7 +1022,7 @@ function dslc_ajax_delete_template( $atts ) {
 		$response['output'] = $templates;
 
 		// Encode response
-		$response_json = json_encode( $response );	
+		$response_json = json_encode( $response );
 
 		// AJAX phone home
 		header( "Content-Type: application/json" );
@@ -1062,7 +1062,7 @@ function dslc_ajax_get_new_module_id() {
 		$response['output'] = $module_instance_id;
 
 		// Encode response
-		$response_json = json_encode( $response );	
+		$response_json = json_encode( $response );
 
 		// AJAX phone home
 		header( "Content-Type: application/json" );
@@ -1072,7 +1072,7 @@ function dslc_ajax_get_new_module_id() {
 		exit;
 
 	}
-			
+
 } add_action( 'wp_ajax_dslc-ajax-get-new-module-id', 'dslc_ajax_get_new_module_id' );
 
 /**
@@ -1100,7 +1100,7 @@ function dslc_ajax_import_modules_section( $atts ) {
 		$response['output'] = do_shortcode ( $modules_code );
 
 		// Encode response
-		$response_json = json_encode( $response );	
+		$response_json = json_encode( $response );
 
 		// Send the response
 		header( "Content-Type: application/json" );
@@ -1142,11 +1142,11 @@ function dslc_ajax_dm_module_defaults_code( $atts ) {
 
 			// Instanciate the module class
 			$module_instance = new $module_id();
-			
+
 			// Module output
 			$settings = $module_instance->options();
 
-			$code .= "if ( " . '$id' ." == '" . $module_id . "' ) { 
+			$code .= "if ( " . '$id' ." == '" . $module_id . "' ) {
 	". '$new_defaults = array(' . "
 ";
 
@@ -1161,7 +1161,7 @@ function dslc_ajax_dm_module_defaults_code( $atts ) {
 					}
 
 				}
-				
+
 			}
 
 			$code .= '	);
@@ -1173,7 +1173,7 @@ function dslc_ajax_dm_module_defaults_code( $atts ) {
 		$response['output'] = $code;
 
 		// Encode response
-		$response_json = json_encode( $response );	
+		$response_json = json_encode( $response );
 
 		// Send the response
 		header( "Content-Type: application/json" );
@@ -1213,7 +1213,7 @@ function dslc_ajax_save_preset() {
 			$response['status'] = 'error';
 
 		// Encode response
-		$response_json = json_encode( $response );	
+		$response_json = json_encode( $response );
 
 		// Send the response
 		header( "Content-Type: application/json" );

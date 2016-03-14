@@ -13,7 +13,7 @@ function dslc_st_template_switch() {
 	// If the post is not supporting templates or it's not a template itself, stop execution
 	if ( is_singular( $dslc_post_types ) || is_singular( 'dslc_templates' ) ) { } else {
 		return;
-	}	
+	}
 
 	// If the currently shown page is the template CPT
 	if ( $post->post_type == 'dslc_templates' ) {
@@ -26,21 +26,21 @@ function dslc_st_template_switch() {
 
 			// The template filename
 			$templatefilename = 'dslc-single.php';
-			
+
 			// If the template file is in the theme
 			if ( file_exists( TEMPLATEPATH . '/' . $templatefilename ) ) {
-				
+
 				$return_template = TEMPLATEPATH . '/' . $templatefilename;
-			
+
 			// If not in the theme use the default one from the plugin
 			} else {
-				
+
 				$return_template = DS_LIVE_COMPOSER_ABS . '/templates/dslc-single.php';
 			}
-			
+
 			// Redirect
 			include( $return_template );
-			
+
 			// Bye bye
         	exit();
 
@@ -56,7 +56,7 @@ function dslc_st_template_switch() {
 
 		// If the post has specific template, set it in variable
 		if ( $template_ID ) {
-			
+
 			$template_base = get_post_meta( $template_ID, 'dslc_template_base', true );
 
 		// If the post does not have a specific template, just use regular base from theme
@@ -68,21 +68,21 @@ function dslc_st_template_switch() {
 
 			// The template filename
 			$templatefilename = 'dslc-single.php';
-			
+
 			// If the template file is in the theme
 			if ( file_exists( TEMPLATEPATH . '/' . $templatefilename ) ) {
-				
+
 				$return_template = TEMPLATEPATH . '/' . $templatefilename;
-			
+
 			// If not in the theme use the default one from the plugin
 			} else {
-				
+
 				$return_template = DS_LIVE_COMPOSER_ABS . '/templates/dslc-single.php';
 			}
-			
+
 			// Redirect
 			include( $return_template );
-			
+
 			// Bye bye
         	exit();
 
@@ -102,10 +102,10 @@ function dslc_templates_col_title($defaults) {
 }
 
 function dslc_templates_col_content($column_name, $post_ID) {
-	
+
 	if ( $column_name == 'dslc_templates_col_cpt' ) {
 		echo get_post_meta( $post_ID, 'dslc_template_for', true );
-	}	
+	}
 
 	if ( $column_name == 'dslc_templates_col_default' ) {
 		if ( get_post_meta( $post_ID, 'dslc_template_type', true ) == 'default' )

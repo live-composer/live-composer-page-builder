@@ -101,12 +101,12 @@ class DSLC_Module {
 						'value' => 'ease-out'
 					),
 					array(
-						'label' => 'Ease In Out', 
+						'label' => 'Ease In Out',
 						'value' => 'ease-in-out'
 					),
 				)
 			),
-			
+
 		);
 
 		$animation_options_posts = array(
@@ -171,7 +171,7 @@ class DSLC_Module {
 			),
 
 		);
-	
+
 		if ( isset( $atts['hover_opts'] ) && ! $atts['hover_opts'] ) {
 			$animation_options = $animation_options_general;
 		} else {
@@ -612,7 +612,7 @@ class DSLC_Module {
 		 */
 
 		$heading_options = array(
-			
+
 			array(
 				'label' => 'Main Heading Title',
 				'id' => 'main_heading_title',
@@ -704,7 +704,7 @@ class DSLC_Module {
 				'ext' => 'px'
 			),
 
-			
+
 			array(
 				'label' => 'Link - Color',
 				'id' => 'css_main_heading_link_color',
@@ -835,7 +835,7 @@ class DSLC_Module {
 					),
 				)
 			),
-			
+
 			array(
 				'label' => 'Margin Bottom',
 				'id' => 'css_heading_margin_bottom',
@@ -1581,14 +1581,14 @@ class DSLC_Module {
 				'ext' => 'px',
 				'tab' => 'Pagination'
 			),
-			
+
 		);
 
 		/**
 		 * Responsive
 		 */
 		$res_posts_options = array(
-			
+
 			/**
 			 * Smaller Monitor
 			 */
@@ -1728,7 +1728,7 @@ class DSLC_Module {
 			),
 
 		);
-		
+
 		return $$options_id;
 
 	}
@@ -1790,7 +1790,7 @@ class DSLC_Module {
 		if ( isset( $options['css_show_on'] ) ) {
 
 			$show_on = explode( ' ', trim( $options['css_show_on'] ) );
-			
+
 			if ( ! in_array( 'desktop', $show_on ) )
 				$class_show_on .= 'dslc-hide-on-desktop ';
 
@@ -1828,7 +1828,7 @@ class DSLC_Module {
 			$title_attr = 'title="' . strtoupper( esc_attr( $this->module_title ) ) .'"';
 		}
 
-		/** 
+		/**
 		 * Option Preset
 		 */
 
@@ -1869,7 +1869,7 @@ class DSLC_Module {
 
 					if ( isset( $options['css_custom'] ) && $options['css_custom'] == 'disabled' ) {
 
-						
+
 
 					} else {
 
@@ -1882,18 +1882,18 @@ class DSLC_Module {
 									$googlefonts_output .= '@import url("//fonts.googleapis.com/css?family=' . $googlefont . ':100,200,300,400,500,600,700,800,900&subset=latin,latin-ext"); ';
 								}
 							}
-						}	
+						}
 						echo $googlefonts_output;
 						echo $dslc_css_style;
 
 					}
 
 				?></style>
-			
+
 				<div class="dslca-module-manage">
 					<span class="dslca-module-manage-line"></span>
 					<div class="dslca-module-manage-inner">
-						<span class="dslca-module-manage-hook dslca-module-edit-hook"><span class="dslc-icon-cog"></span></span>				
+						<span class="dslca-module-manage-hook dslca-module-edit-hook"><span class="dslc-icon-cog"></span></span>
 						<span class="dslca-module-manage-hook dslca-copy-module-hook"><span class="dslc-icon-copy"></span></span>
 						<span class="dslca-module-manage-hook dslca-move-module-hook"><span class="dslc-icon-move"></span></span>
 						<span class="dslca-module-manage-hook dslca-change-width-module-hook">
@@ -1911,7 +1911,7 @@ class DSLC_Module {
 					</div>
 					<?php if ( DS_LIVE_COMPOSER_DEV_MODE ) : ?>
 						<div class="dslca-module-manage-inner dslca-dev-mode">
-							<span class="dslca-module-manage-hook dslca-module-get-defaults-hook"><span class="dslc-icon-upload-alt"></span></span>				
+							<span class="dslca-module-manage-hook dslca-module-get-defaults-hook"><span class="dslc-icon-upload-alt"></span></span>
 						</div>
 					<?php endif; ?>
 				</div>
@@ -1947,9 +1947,9 @@ class DSLC_Module {
 					<?php foreach ( $options as $key => $option ) : ?>
 
 						<?php
-							
+
 							// Option ID
-							$option_id = $option['id'];	
+							$option_id = $option['id'];
 							$options_ids[] = $option['id'];
 
 							// If value already set use it, if not use default
@@ -1963,7 +1963,7 @@ class DSLC_Module {
 							}
 
 						?>
-							
+
 						<textarea class="dslca-module-option-front" data-id="<?php echo $option_id; ?>"><?php echo stripslashes ( $option_value ); ?></textarea>
 
 					<?php endforeach; ?>

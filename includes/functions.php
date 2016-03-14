@@ -75,7 +75,7 @@ function dslc_register_modules() {
 	dslc_register_module( 'DSLC_Tabs' );
 	dslc_register_module( 'DSLC_Progress_Bars' );
 	dslc_register_module( 'DSLC_Sliders' );
-	dslc_register_module( 'DSLC_Info_Box' );	
+	dslc_register_module( 'DSLC_Info_Box' );
 	dslc_register_module( 'DSLC_Widgets' );
 	dslc_register_module( 'DSLC_Icon' );
 	dslc_register_module( 'DSLC_Navigation' );
@@ -151,14 +151,14 @@ function dslc_unregister_module( $module_id ) {
 function dslc_module_settings( $options, $custom = false ) {
 
 	// Array to hold the settings
-	$settings = array();		
+	$settings = array();
 
 	// Go through all options
 	foreach( $options as $option ) {
 
 		// If value set use it
 		if ( isset( $_POST[ $option['id'] ] ) ) {
-			$settings[ $option['id'] ] = $_POST[ $option['id'] ]; 
+			$settings[ $option['id'] ] = $_POST[ $option['id'] ];
 		// If value not set use default
 		} else {
 			$settings[ $option['id'] ] = $option['std'];
@@ -259,12 +259,12 @@ function dslc_generate_custom_css( $options_arr, $settings, $restart = false ) {
 
 					switch ( $option_arr['tab'] ) {
 						case __( 'tablet', 'live-composer-page-builder' ):
-							if ( isset( $settings['css_res_t'] ) && $settings['css_res_t'] == 'enabled' ) 
-								$affect_el .= 'body.dslc-res-tablet #dslc-content #dslc-module-' . $settings['module_instance_id'] . ' ' . $affect_el_arr;		
+							if ( isset( $settings['css_res_t'] ) && $settings['css_res_t'] == 'enabled' )
+								$affect_el .= 'body.dslc-res-tablet #dslc-content #dslc-module-' . $settings['module_instance_id'] . ' ' . $affect_el_arr;
 							break;
 						case __( 'phone', 'live-composer-page-builder' ):
 							if ( isset( $settings['css_res_p'] ) && $settings['css_res_p'] == 'enabled' )
-								$affect_el .= 'body.dslc-res-phone #dslc-content #dslc-module-' . $settings['module_instance_id'] . ' ' . $affect_el_arr;		
+								$affect_el .= 'body.dslc-res-phone #dslc-content #dslc-module-' . $settings['module_instance_id'] . ' ' . $affect_el_arr;
 							break;
 					}
 
@@ -279,7 +279,7 @@ function dslc_generate_custom_css( $options_arr, $settings, $restart = false ) {
 
 				$checkbox_val = '';
 				$checkbox_arr = explode( ' ', trim( $settings[$option_arr['id']] ) );
-				
+
 				if ( in_array( 'top', $checkbox_arr ) )
 					$checkbox_val .= 'solid ';
 				else
@@ -301,7 +301,7 @@ function dslc_generate_custom_css( $options_arr, $settings, $restart = false ) {
 					$checkbox_val .= 'none ';
 
 				$settings[$option_arr['id']] = $checkbox_val;
-				
+
 			}
 
 			// Colors (transparent if empy )
@@ -320,7 +320,7 @@ function dslc_generate_custom_css( $options_arr, $settings, $restart = false ) {
 		// If option type is font
 		if ( $option_arr['type'] == 'font' ) {
 
-			if ( ! in_array( $settings[$option_arr['id']], $dslc_googlefonts_array ) && ! in_array( $settings[$option_arr['id']], $regular_fonts ) ) 
+			if ( ! in_array( $settings[$option_arr['id']], $dslc_googlefonts_array ) && ! in_array( $settings[$option_arr['id']], $regular_fonts ) )
 				$dslc_googlefonts_array[] = $settings[$option_arr['id']];
 
 		}
@@ -331,7 +331,7 @@ function dslc_generate_custom_css( $options_arr, $settings, $restart = false ) {
 
 		foreach ( $organized_array as $el => $rules ) {
 
-			$css_output .= $el . ' { '; 
+			$css_output .= $el . ' { ';
 
 				foreach ( $rules as $rule => $value ) {
 
@@ -377,7 +377,7 @@ function dslc_get_new_module_id() {
 		return $module_instance_id;
 
 	}
-			
+
 }
 
 /**
@@ -387,7 +387,7 @@ function dslc_get_new_module_id() {
  */
 
 function dslc_register_templates() {
-	
+
 	do_action( 'dslc_hook_register_templates' );
 	do_action( 'dslc_hook_unregister_templates' );
 
@@ -430,7 +430,7 @@ function dslc_unregister_template( $template_ID ) {
 	// Global variable that holds templates information
 	global $dslc_var_templates;
 
-	// If the template exists 
+	// If the template exists
 	if ( isset( $dslc_var_templates[$template_ID] ) ) {
 
 		// Remove the template from the templates array
@@ -488,10 +488,10 @@ function dslc_body_class( $classes ) {
 	if ( isset( $_GET['dslc'] ) && $_GET['dslc'] == 'active' )
 		$has_lc_content = true;
 
-	
+
 	// Still nothing, let's check if there's real LC content on the page
 	if ( ! $has_lc_content ) {
-		
+
 		// Get the dslc_code custom field
 		$dslc_code = get_post_meta( get_the_ID(), 'dslc_code', true );
 
@@ -547,7 +547,7 @@ function dslc_body_class( $classes ) {
 function dslc_set_defaults( $new_defaults, $options ) {
 
 	// If no new defaults, pass it back and stop
-	if ( ! $new_defaults ) 
+	if ( ! $new_defaults )
 		return $options;
 
 	// Generate an array of options IDs to alter
@@ -564,7 +564,7 @@ function dslc_set_defaults( $new_defaults, $options ) {
 		}
 
 	}
-	
+
 	// Pass back the options array
 	return $options;
 
@@ -577,7 +577,7 @@ function dslc_set_defaults( $new_defaults, $options ) {
 function dslc_is_module_active( $module_ID, $check_registered = false ) {
 
 	global $dslc_var_modules;
-	
+
 	if ( dslc_get_option( $module_ID, 'dslc_plugin_options_features' ) == 'disabled' )
 		return false;
 	elseif ( $check_registered == true && ! isset( $dslc_var_modules[$module_ID]  ) )
@@ -607,18 +607,18 @@ function dslc_save_preset( $preset_name, $preset_code_raw, $module_id ) {
 	foreach( $module_options as $module_option ) {
 
 		// allowed to have a preset
-		if ( ! isset( $module_option['include_in_preset'] ) || $module_option['include_in_preset'] == true ) { 
+		if ( ! isset( $module_option['include_in_preset'] ) || $module_option['include_in_preset'] == true ) {
 
 			// modules section not set or module section not functionality
 			if ( ( isset( $module_option['section'] ) && $module_option['section'] !== 'functionality' ) && ( ! isset( $module_option['visibility'] ) || $module_option['visibility'] !== 'hidden' ) ) {
-				
+
 				if ( isset ( $preset_code_raw[$module_option['id']] ) ) {
 					$preset_code[$module_option['id']] = $preset_code_raw[$module_option['id']];
 				}
 			}
 
 		}
-		
+
 	}
 
 	// Clean up ( step 3 - final )
@@ -657,7 +657,7 @@ function dslc_save_preset( $preset_name, $preset_code_raw, $module_id ) {
 
 function dslc_is_editor_active( $capability = 'save') {
 
-	// Check for saving capability 
+	// Check for saving capability
 	if ( $capability == 'save' ) {
 		$capability_check = DS_LIVE_COMPOSER_CAPABILITY_SAVE;
 	// Check for access capability ( can use editor but can't publish changes )
@@ -680,7 +680,7 @@ function dslc_is_editor_active( $capability = 'save') {
  * @since 1.0.2
  *
  * @param int     $postID ID of the post/page. Default false.
- * @param bool    $draft If true will check for draft first. Default true. 
+ * @param bool    $draft If true will check for draft first. Default true.
  * @return string The LC code for the post/page. Empty string if no LC code.
  */
 function dslc_get_code( $postID = false, $draft = true ) {
@@ -781,7 +781,7 @@ function dslc_set_default_templates( $templates ) {
 		'id' => 'dslc-projects-ex-2',
 		'code' => '[dslc_modules_section type="full" columns_spacing="spacing" border_color="" border_width="0" border_style="solid" border="top bottom" bg_color="#f4f9fc" bg_image_thumb="disabled" bg_image="" bg_video="" bg_video_overlay_color="#000000" bg_video_overlay_opacity="0" bg_image_repeat="no-repeat" bg_image_attachment="scroll" bg_image_position="center center" bg_image_size="auto" padding="61" padding_h="3" margin_h="0" margin_b="0" custom_class="" custom_id="" ] [dslc_modules_area last="no" first="yes" size="3"] [dslc_module]YToxOTp7czo0OiJzaXplIjtzOjI6IjEyIjtzOjc6InNpZGViYXIiO3M6MTY6ImRzbGNfc2lkZWJhcl9vbmUiO3M6NzoiY29sdW1ucyI7czoyOiIxMiI7czozMDoiY3NzX3dpZGdldHNfcGFkZGluZ19ob3Jpem9udGFsIjtzOjE6IjMiO3M6MTk6ImNzc193aWRnZXRfYmdfY29sb3IiO3M6NzoiI2ZmZmZmZiI7czoyMzoiY3NzX3dpZGdldF9ib3JkZXJfY29sb3IiO3M6NzoiI2Q5ZDlkOSI7czoyMzoiY3NzX3dpZGdldF9ib3JkZXJfd2lkdGgiO3M6MToiMSI7czoyODoiY3NzX3dpZGdldF9ib3JkZXJfcmFkaXVzX3RvcCI7czoxOiIzIjtzOjMxOiJjc3Nfd2lkZ2V0X2JvcmRlcl9yYWRpdXNfYm90dG9tIjtzOjE6IjMiO3M6Mjc6ImNzc193aWRnZXRfcGFkZGluZ192ZXJ0aWNhbCI7czoyOiIzMyI7czoyOToiY3NzX3dpZGdldF9wYWRkaW5nX2hvcml6b250YWwiO3M6MjoiMzQiO3M6MjQ6ImNzc193aWRnZXRfbWFyZ2luX2JvdHRvbSI7czoyOiIzMiI7czoyMToiY3NzX3RpdGxlX2xpbmVfaGVpZ2h0IjtzOjI6IjE2IjtzOjE2OiJjc3NfdGl0bGVfbWFyZ2luIjtzOjI6IjE0IjtzOjE3OiJjc3NfdGl0bGVfcGFkZGluZyI7czoyOiIxOCI7czoxNDoiY3NzX2xpbmtfY29sb3IiO3M6NzoiIzE2YThmNyI7czoyMDoiY3NzX2xpbmtfY29sb3JfaG92ZXIiO3M6NzoiIzE2ODljNyI7czoxODoibW9kdWxlX2luc3RhbmNlX2lkIjtpOjQ3O3M6OToibW9kdWxlX2lkIjtzOjEyOiJEU0xDX1dpZGdldHMiO30=[/dslc_module] [/dslc_modules_area] [dslc_modules_area last="yes" first="no" size="9"] [dslc_module]YTo0ODp7czo0OiJzaXplIjtzOjI6IjEyIjtzOjY6ImFtb3VudCI7czoxOiI2IjtzOjE1OiJwYWdpbmF0aW9uX3R5cGUiO3M6ODoibnVtYmVyZWQiO3M6NzoiY29sdW1ucyI7czoxOiI0IjtzOjU6Im9yZGVyIjtzOjM6IkFTQyI7czoxMzoicG9zdF9lbGVtZW50cyI7czoyNDoidGh1bWJuYWlsIHRpdGxlIGV4Y2VycHQgIjtzOjE0OiJjc3Nfc2VwX2hlaWdodCI7czoyOiIxMyI7czoxMzoiY3NzX3NlcF9zdHlsZSI7czo0OiJub25lIjtzOjIyOiJjc3NfdGh1bWJuYWlsX2JnX2NvbG9yIjtzOjc6IiMwMGJkOGUiO3M6MzE6ImNzc190aHVtYm5haWxfYm9yZGVyX3JhZGl1c190b3AiO3M6MToiMCI7czoxODoidGh1bWJfcmVzaXplX3dpZHRoIjtzOjM6IjQwMCI7czoxNzoiY3NzX21haW5fYmdfY29sb3IiO3M6NzoiIzE2YThmNyI7czoyMToiY3NzX21haW5fYm9yZGVyX2NvbG9yIjtzOjc6IiMwMGEyZmYiO3M6MjE6ImNzc19tYWluX2JvcmRlcl93aWR0aCI7czoxOiIwIjtzOjI5OiJjc3NfbWFpbl9ib3JkZXJfcmFkaXVzX2JvdHRvbSI7czoxOiIwIjtzOjI1OiJjc3NfbWFpbl9wYWRkaW5nX3ZlcnRpY2FsIjtzOjI6IjI0IjtzOjI3OiJjc3NfbWFpbl9wYWRkaW5nX2hvcml6b250YWwiO3M6MjoiMzQiO3M6MTk6ImNzc19tYWluX3RleHRfYWxpZ24iO3M6NDoibGVmdCI7czoxNToiY3NzX3RpdGxlX2NvbG9yIjtzOjc6IiNmZmZmZmYiO3M6MTk6ImNzc190aXRsZV9mb250X3NpemUiO3M6MjoiMTgiO3M6MjE6ImNzc190aXRsZV9mb250X3dlaWdodCI7czozOiIzMDAiO3M6MjE6ImNzc190aXRsZV9saW5lX2hlaWdodCI7czoyOiIzNSI7czoyMzoiY3NzX3RpdGxlX21hcmdpbl9ib3R0b20iO3M6MToiOSI7czoxNDoiY3NzX2NhdHNfY29sb3IiO3M6NzoiI2QyZTlmNSI7czoxODoiY3NzX2NhdHNfZm9udF9zaXplIjtzOjI6IjExIjtzOjIyOiJjc3NfY2F0c19tYXJnaW4tYm90dG9tIjtzOjI6IjE5IjtzOjI0OiJjc3NfZXhjZXJwdF9ib3JkZXJfY29sb3IiO3M6NzoiIzQ0YjNlYiI7czoxNzoiY3NzX2V4Y2VycHRfY29sb3IiO3M6NzoiI2UzZjZmZiI7czoyMzoiY3NzX2V4Y2VycHRfZm9udF93ZWlnaHQiO3M6MzoiNjAwIjtzOjIzOiJjc3NfZXhjZXJwdF9mb250X2ZhbWlseSI7czoxMjoiUG9udGFubyBTYW5zIjtzOjIzOiJjc3NfZXhjZXJwdF9saW5lX2hlaWdodCI7czoyOiIyNCI7czoxNDoiZXhjZXJwdF9tYXJnaW4iO3M6MToiMiI7czoxNDoiZXhjZXJwdF9sZW5ndGgiO3M6MjoiMTEiO3M6MTk6ImNzc19leGNlcnB0X3BhZGRpbmciO3M6MjoiMTMiO3M6MTk6ImNzc19idXR0b25fYmdfY29sb3IiO3M6NzoiIzdhN2E3YSI7czoxODoibWFpbl9oZWFkaW5nX3RpdGxlIjtzOjE1OiJMYXRlc3QgUHJvamVjdHMiO3M6MjY6ImNzc19tYWluX2hlYWRpbmdfZm9udF9zaXplIjtzOjI6IjE2IjtzOjI4OiJjc3NfbWFpbl9oZWFkaW5nX2ZvbnRfd2VpZ2h0IjtzOjM6IjYwMCI7czoyODoiY3NzX21haW5faGVhZGluZ19mb250X2ZhbWlseSI7czo0OiJMYXRvIjtzOjI3OiJjc3NfbWFpbl9oZWFkaW5nX2xpbmtfY29sb3IiO3M6NzoiIzE2YThmNyI7czozMzoiY3NzX21haW5faGVhZGluZ19saW5rX2NvbG9yX2hvdmVyIjtzOjc6IiMxMjg2YzQiO3M6MzM6ImNzc19tYWluX2hlYWRpbmdfbGlua19mb250X3dlaWdodCI7czozOiI3MDAiO3M6Mjg6ImNzc19wYWdfaXRlbV9iZ19jb2xvcl9hY3RpdmUiO3M6NzoiIzE2YThmNyI7czoyNToiY3NzX3BhZ19pdGVtX2JvcmRlcl9jb2xvciI7czo3OiIjZDZkNmQ2IjtzOjMyOiJjc3NfcGFnX2l0ZW1fYm9yZGVyX2NvbG9yX2FjdGl2ZSI7czo3OiIjMTZhOGY3IjtzOjE4OiJjc3NfcGFnX2l0ZW1fY29sb3IiO3M6NzoiIzhmOGY4ZiI7czoxODoibW9kdWxlX2luc3RhbmNlX2lkIjtpOjQ4O3M6OToibW9kdWxlX2lkIjtzOjEzOiJEU0xDX1Byb2plY3RzIjt9[/dslc_module] [/dslc_modules_area] [/dslc_modules_section] ',
 		'section' => 'original'
-	);		
+	);
 
 	$templates['dslc-partners-ex-1'] = array(
 		'title' => __( 'Partners Variation 1', 'live-composer-page-builder' ),
@@ -803,7 +803,7 @@ function dslc_set_default_templates( $templates ) {
 		'code' => '[dslc_modules_section show_on="desktop tablet phone" type="wrapped" columns_spacing="spacing" bg_color="#78373c" bg_image_thumb="disabled" bg_image="" bg_image_repeat="no-repeat" bg_image_position="center center" bg_image_attachment="scroll" bg_image_size="auto" bg_video="" bg_video_overlay_color="#4d4d4d" bg_video_overlay_opacity="0.77" border_color="" border_width="0" border_style="solid" border="bottom " margin_h="0" margin_b="0" padding="69" padding_h="9" custom_class="" custom_id="" ] [dslc_modules_area last="no" first="yes" size="5"] [dslc_module last="yes"]YTo1NTp7czo2OiJhbW91bnQiO3M6MToiMSI7czo3OiJjb2x1bW5zIjtzOjI6IjEyIjtzOjEwOiJjYXRlZ29yaWVzIjtzOjg6Imhvb2RpZXMgIjtzOjEzOiJwb3N0X2VsZW1lbnRzIjtzOjUyOiJ0aHVtYm5haWwgdGl0bGUgc2VwYXJhdG9yIHByaWNlXzIgYWRkdG9jYXJ0IGRldGFpbHMgIjtzOjIwOiJjc3Nfc2VwX2JvcmRlcl9jb2xvciI7czo3OiIjYTQ5NmFiIjtzOjE0OiJjc3Nfc2VwX2hlaWdodCI7czoyOiIxMCI7czoxMzoiY3NzX3NlcF9zdHlsZSI7czo0OiJub25lIjtzOjIyOiJjc3NfdGh1bWJuYWlsX2JnX2NvbG9yIjtzOjc6IiMxYzFiMWEiO3M6MjI6ImNzc190aHVtYl9ib3JkZXJfY29sb3IiO3M6NzoiIzJlMjgyZSI7czozMToiY3NzX3RodW1ibmFpbF9ib3JkZXJfcmFkaXVzX3RvcCI7czoxOiIwIjtzOjMwOiJjc3NfdGh1bWJuYWlsX3BhZGRpbmdfdmVydGljYWwiO3M6MjoiMTUiO3M6MzI6ImNzc190aHVtYm5haWxfcGFkZGluZ19ob3Jpem9udGFsIjtzOjI6IjE1IjtzOjE4OiJ0aHVtYl9yZXNpemVfd2lkdGgiO3M6MzoiNDQ3IjtzOjE4OiJjc3NfcHJpY2VfYmdfY29sb3IiO3M6NzoiIzk5MmYzOCI7czoyMjoiY3NzX3ByaWNlX2JvcmRlcl9jb2xvciI7czo3OiIjYTg2NTY1IjtzOjIzOiJjc3NfcHJpY2VfYm9yZGVyX3JhZGl1cyI7czoxOiI1IjtzOjE5OiJjc3NfcHJpY2VfZm9udF9zaXplIjtzOjI6IjQyIjtzOjIxOiJjc3NfcHJpY2VfZm9udF93ZWlnaHQiO3M6MzoiOTAwIjtzOjIxOiJjc3NfcHJpY2VfZm9udF9mYW1pbHkiO3M6MTI6IlBhdHJpY2sgSGFuZCI7czoxNjoiY3NzX3ByaWNlX21hcmdpbiI7czoxOiI5IjtzOjE3OiJjc3NfcHJpY2VfcGFkZGluZyI7czoyOiIyMyI7czoxNzoiY3NzX21haW5fYmdfY29sb3IiO3M6NzoiIzFjMWIxYSI7czoyMToiY3NzX21haW5fYm9yZGVyX3dpZHRoIjtzOjE6IjAiO3M6Mjk6ImNzc19tYWluX2JvcmRlcl9yYWRpdXNfYm90dG9tIjtzOjE6IjAiO3M6MTk6ImNzc19tYWluX21pbl9oZWlnaHQiO3M6MjoiODAiO3M6MjU6ImNzc19tYWluX3BhZGRpbmdfdmVydGljYWwiO3M6MjoiMTciO3M6Mjc6ImNzc19tYWluX3BhZGRpbmdfaG9yaXpvbnRhbCI7czoyOiIyOSI7czoxNToiY3NzX3RpdGxlX2NvbG9yIjtzOjc6IiNjN2M3YzciO3M6MTk6ImNzc190aXRsZV9mb250X3NpemUiO3M6MjoiMTYiO3M6MjE6ImNzc190aXRsZV9mb250X2ZhbWlseSI7czo5OiJPcGVuIFNhbnMiO3M6MjM6ImNzc190aXRsZV9tYXJnaW5fYm90dG9tIjtzOjI6IjIwIjtzOjI0OiJjc3NfZXhjZXJwdF9ib3JkZXJfY29sb3IiO3M6NzoiIzQ3NDE0NyI7czoxNzoiY3NzX2V4Y2VycHRfY29sb3IiO3M6NzoiIzljOTM5YyI7czoxNDoiZXhjZXJwdF9tYXJnaW4iO3M6MjoiMTkiO3M6MTQ6ImV4Y2VycHRfbGVuZ3RoIjtzOjI6IjE5IjtzOjE5OiJjc3NfZXhjZXJwdF9wYWRkaW5nIjtzOjI6IjEzIjtzOjE3OiJjc3NfcHJpY2VfMl9jb2xvciI7czo3OiIjOWM5MzljIjtzOjMwOiJjc3NfcHJpY2VfMl9ub25fZGlzY291bnRfY29sb3IiO3M6NzoiIzU5NTE1OSI7czoxNToiY3NzX3ByaWNlXzJfcG9zIjtzOjQ6ImxlZnQiO3M6MTM6ImNzc19zZXBfY29sb3IiO3M6NzoiIzQ3NDE0NyI7czoyMToiY3NzX3NlcF9tYXJnaW5fYm90dG9tIjtzOjI6IjE4IjtzOjE5OiJjc3NfYWRkdG9jYXJ0X2NvbG9yIjtzOjc6IiNlZDczNGUiO3M6MjM6ImNzc19hZGR0b2NhcnRfZm9udF9zaXplIjtzOjI6IjE0IjtzOjE3OiJjc3NfZGV0YWlsc19jb2xvciI7czo3OiIjZWQ3MzRlIjtzOjIxOiJjc3NfZGV0YWlsc19mb250X3NpemUiO3M6MjoiMTQiO3M6MjM6ImNzc19kZXRhaWxzX2ZvbnRfd2VpZ2h0IjtzOjM6IjcwMCI7czoxNDoicmVzX3NtX2NvbHVtbnMiO3M6NDoiYXV0byI7czoxMjoicmVzX3NtX3RodW1iIjtzOjU6ImJsb2NrIjtzOjE0OiJyZXNfdHBfY29sdW1ucyI7czo0OiJhdXRvIjtzOjEzOiJyZXNfcF9jb2x1bW5zIjtzOjQ6ImF1dG8iO3M6MTg6Im1vZHVsZV9pbnN0YW5jZV9pZCI7aToyMDI1ODtzOjc6InBvc3RfaWQiO3M6MzoiNDUxIjtzOjk6Im1vZHVsZV9pZCI7czoyNToiRFNMQ19Xb29Db21tZXJjZV9Qcm9kdWN0cyI7czoxNjoiZHNsY19tX3NpemVfbGFzdCI7czoyOiJubyI7czoxMToiZHNsY19tX3NpemUiO3M6MjoiMTIiO30=[/dslc_module] [/dslc_modules_area] [dslc_modules_area last="no" first="no" size="1"] [/dslc_modules_area] [dslc_modules_area last="yes" first="no" size="6"] [dslc_module last="yes"]YTo3OntzOjY6ImhlaWdodCI7czoyOiI0MSI7czo1OiJzdHlsZSI7czo5OiJpbnZpc2libGUiO3M6MTg6Im1vZHVsZV9pbnN0YW5jZV9pZCI7aToyMDI1OTtzOjc6InBvc3RfaWQiO3M6MzoiNDUxIjtzOjk6Im1vZHVsZV9pZCI7czoxNDoiRFNMQ19TZXBhcmF0b3IiO3M6MTY6ImRzbGNfbV9zaXplX2xhc3QiO3M6Mjoibm8iO3M6MTE6ImRzbGNfbV9zaXplIjtzOjI6IjEyIjt9[/dslc_module] [dslc_module last="yes"]YToxMTp7czo3OiJjb250ZW50IjtzOjI4OiJTZWN0aW9uIGZvciBwcm9kdWN0IHNob3djYXNlIjtzOjE3OiJjc3NfbWFyZ2luX2JvdHRvbSI7czoyOiIzNiI7czoxNDoiY3NzX21haW5fY29sb3IiO3M6NzoiI2ZmZmZmZiI7czoxODoiY3NzX21haW5fZm9udF9zaXplIjtzOjI6IjM5IjtzOjIwOiJjc3NfbWFpbl9mb250X3dlaWdodCI7czozOiIzMDAiO3M6MjA6ImNzc19tYWluX2ZvbnRfZmFtaWx5IjtzOjc6IlJhbGV3YXkiO3M6MTg6Im1vZHVsZV9pbnN0YW5jZV9pZCI7aToyMDI2MDtzOjc6InBvc3RfaWQiO3M6MzoiNDUxIjtzOjk6Im1vZHVsZV9pZCI7czoxNjoiRFNMQ19UZXh0X1NpbXBsZSI7czoxNjoiZHNsY19tX3NpemVfbGFzdCI7czoyOiJubyI7czoxMToiZHNsY19tX3NpemUiO3M6MjoiMTIiO30=[/dslc_module] [dslc_module last="yes"]YToxMTp7czo3OiJjb250ZW50IjtzOjEwNzQ6IlV0IGVuaW0gYWQgbWluaW0gdmVuaWFtLCBxdWlzIG5vc3RydWQgZXhlcmNpdGF0aW9uIHVsbGFtY28gbGFib3JpcyBuaXNpIHV0IGFsaXF1aXAgZXggZWEgY29tbW9kbyBjb25zZXF1YXQuJm5ic3A7PGRpdj48YnI+PC9kaXY+PGRpdj48c3BhbiBzdHlsZT1cImZvbnQtZmFtaWx5OiBNdWxpOyBmb250LXNpemU6IDE2cHg7IGZvbnQtc3R5bGU6IG5vcm1hbDsgZm9udC12YXJpYW50OiBub3JtYWw7IGxpbmUtaGVpZ2h0OiAyN3B4O1wiPkR1aXMgYXV0ZSBpcnVyZSBkb2xvciBpbiByZXByZWhlbmRlcml0IGluIHZvbHVwdGF0ZSB2ZWxpdCBlc3NlIGNpbGx1bSBkb2xvcmUgZXUgZnVnaWF0IG51bGxhIHBhcmlhdHVyLiBFeGNlcHRldXIgc2ludCBvY2NhZWNhdCBjdXBpZGF0YXQgbm9uIHByb2lkZW50LCBzdW50IGluIGN1bHBhIHF1aSBvZmZpY2lhIGRlc2VydW50IG1vbGxpdCBhbmltIGlkIGVzdCBsYWJvcnVtLjwvc3Bhbj48YnI+PC9kaXY+PGRpdj48c3BhbiBzdHlsZT1cImZvbnQtZmFtaWx5OiBNdWxpOyBmb250LXNpemU6IDE2cHg7IGZvbnQtc3R5bGU6IG5vcm1hbDsgZm9udC12YXJpYW50OiBub3JtYWw7IGxpbmUtaGVpZ2h0OiAyN3B4O1wiPjxicj48L3NwYW4+PC9kaXY+PGRpdj48c3BhbiBzdHlsZT1cImZvbnQtZmFtaWx5OiBNdWxpOyBmb250LXNpemU6IDE2cHg7IGZvbnQtc3R5bGU6IG5vcm1hbDsgZm9udC12YXJpYW50OiBub3JtYWw7IGxpbmUtaGVpZ2h0OiAyN3B4O1wiPkF1dGUgaXJ1cmUgZG9sb3IgaW4gcmVwcmVoZW5kZXJpdCBpbiB2b2x1cHRhdGUgdmVsaXQgZXNzZSBjaWxsdW0gZG9sb3JlIGV1IGZ1Z2lhdCBudWxsYSBwYXJpYXR1ci4gRXhjZXB0ZXVyIHNpbnQgb2NjYWVjYXQgY3VwaWRhdGF0IG5vbiBwcm9pZGVudCwgc3VudCBpbiBjdWxwYSBxdWkgb2ZmaWNpYSBkZXNlcnVudCBtb2xsaXQgYW5pbSBpZCBlc3QgbGFib3J1bS48L3NwYW4+PHNwYW4gc3R5bGU9XCJmb250LWZhbWlseTogTXVsaTsgZm9udC1zaXplOiAxNnB4OyBmb250LXN0eWxlOiBub3JtYWw7IGZvbnQtdmFyaWFudDogbm9ybWFsOyBsaW5lLWhlaWdodDogMjdweDtcIj48YnI+PC9zcGFuPjwvZGl2PiI7czoxNzoiY3NzX21hcmdpbl9ib3R0b20iO3M6MjoiNDEiO3M6MTQ6ImNzc19tYWluX2NvbG9yIjtzOjc6IiNjN2M3YzciO3M6MTg6ImNzc19tYWluX2ZvbnRfc2l6ZSI7czoyOiIxNiI7czoyMDoiY3NzX21haW5fZm9udF9mYW1pbHkiO3M6NDoiTXVsaSI7czoyMDoiY3NzX21haW5fbGluZV9oZWlnaHQiO3M6MjoiMjciO3M6MTg6Im1vZHVsZV9pbnN0YW5jZV9pZCI7aToyMDI2MTtzOjc6InBvc3RfaWQiO3M6MzoiNDUxIjtzOjk6Im1vZHVsZV9pZCI7czoxNjoiRFNMQ19UZXh0X1NpbXBsZSI7czoxNjoiZHNsY19tX3NpemVfbGFzdCI7czoyOiJubyI7czoxMToiZHNsY19tX3NpemUiO3M6MjoiMTIiO30=[/dslc_module] [dslc_module last="yes"]YToxNDp7czoxMToiYnV0dG9uX3RleHQiO3M6MTI6Ik1PUkUgREVUQUlMUyI7czoxMjoiY3NzX2JnX2NvbG9yIjtzOjc6IiNlZDczNGUiO3M6MTg6ImNzc19iZ19jb2xvcl9ob3ZlciI7czo3OiIjZjI3NTUzIjtzOjIwOiJjc3NfcGFkZGluZ192ZXJ0aWNhbCI7czoyOiIxOCI7czoyMjoiY3NzX3BhZGRpbmdfaG9yaXpvbnRhbCI7czoyOiIzNSI7czoyMDoiY3NzX2J1dHRvbl9mb250X3NpemUiO3M6MjoiMTYiO3M6MTQ6ImJ1dHRvbl9pY29uX2lkIjtzOjk6ImZpbGUtdGV4dCI7czoxNDoiY3NzX2ljb25fY29sb3IiO3M6NzoiI2ZmYjM5ZSI7czoxNToiY3NzX2ljb25fbWFyZ2luIjtzOjI6IjEwIjtzOjE4OiJtb2R1bGVfaW5zdGFuY2VfaWQiO2k6MjAyNjI7czo3OiJwb3N0X2lkIjtzOjM6IjQ1MSI7czo5OiJtb2R1bGVfaWQiO3M6MTE6IkRTTENfQnV0dG9uIjtzOjE2OiJkc2xjX21fc2l6ZV9sYXN0IjtzOjI6Im5vIjtzOjExOiJkc2xjX21fc2l6ZSI7czoyOiIxMiI7fQ==[/dslc_module] [/dslc_modules_area] [/dslc_modules_section] ',
 		'section' => 'original'
 	);
-	
+
 	$templates['dslc-staff-ex-1'] = array(
 		'title' => __( 'Staff Variation 1', 'live-composer-page-builder' ),
 		'id' => 'dslc-staff-ex-1',

@@ -10,8 +10,8 @@
  * - dslc_hf_options ( Register options for posts/pages to choose which header/footer to use )
  * - dslc_hf_get_ID ( Get the header and footer ID of a specific post/page )
  * - dslc_hf_get_code ( Get the header or footer LC code of a specific post/page )
- * - dslc_hf_get_header ( Get the header output code ) 
- * - dslc_hf_get_footer ( Get the footer output code ) 
+ * - dslc_hf_get_header ( Get the header output code )
+ * - dslc_hf_get_footer ( Get the footer output code )
  */
 
 /**
@@ -57,7 +57,7 @@ function dslc_hf_init() {
 			'read_post' => $capability
 		),
 	));
-	
+
 	/**
 	 * Options
 	 */
@@ -154,10 +154,10 @@ function dslc_hf_col_title($defaults) {
 function dslc_hf_col_content($column_name, $post_ID) {
 
 	if ( ! defined( 'DS_LIVE_COMPOSER_HF' ) || ! DS_LIVE_COMPOSER_HF ) return;
-	
+
 	if ( $column_name == 'dslc_hf_col_cpt' ) {
 		echo get_post_meta( $post_ID, 'dslc_hf_for', true );
-	}	
+	}
 
 	if ( $column_name == 'dslc_hf_col_default' ) {
 		if ( get_post_meta( $post_ID, 'dslc_hf_type', true ) == 'default' )
@@ -260,7 +260,7 @@ function dslc_hf_options() {
 	$templates = get_posts( $args );
 
 	if ( $templates ) {
-		
+
 		foreach ( $templates as $template ) {
 			$template_for = get_post_meta( $template->ID, 'dslc_hf_for' , true );
 			if ( $template_for == 'header' ) {
@@ -327,7 +327,7 @@ function dslc_hf_get_ID( $post_ID = false ) {
 		// If currently showing a singular post of a post type that supports "post templates"
 		if ( is_singular( $dslc_post_types ) ) {
 			$post_ID = dslc_st_get_template_ID( get_the_ID() );
-		
+
 		// If currently showing a category archive page
 		} elseif ( is_archive() && ! is_author() && ! is_search() ) {
 			$post_ID = dslc_get_option( get_post_type(), 'dslc_plugin_options_archives' );
@@ -390,7 +390,7 @@ function dslc_hf_get_ID( $post_ID = false ) {
 		$tpls = get_posts( $args );
 
 		// If default template found set the ID if not make it false
-		if ( $tpls ) 
+		if ( $tpls )
 			$header_tpl_ID = $tpls[0]->ID;
 		else
 			$header_tpl_ID = false;
@@ -431,7 +431,7 @@ function dslc_hf_get_ID( $post_ID = false ) {
 		$tpls = get_posts( $args );
 
 		// If default template found set the ID if not make it false
-		if ( $tpls ) 
+		if ( $tpls )
 			$footer_tpl_ID = $tpls[0]->ID;
 		else
 			$footer_tpl_ID = false;
@@ -445,7 +445,7 @@ function dslc_hf_get_ID( $post_ID = false ) {
 
 		$footer_tpl_ID = false;
 
-	}	
+	}
 
 	// Return the template ID
 	return array( 'header' => $header_tpl_ID, 'footer' => $footer_tpl_ID );
@@ -501,7 +501,7 @@ function dslc_hf_get_code( $post_ID = false, $h_or_f = 'header' ) {
  * @param int     $post_ID ID of the post/page. Default false.
  * @return string The HTML ouput of the header for a defined post/page
  */
-function dslc_hf_get_header( $post_ID = false ) {	
+function dslc_hf_get_header( $post_ID = false ) {
 
 	// Var defaults
 	$append = '';
@@ -567,7 +567,7 @@ function dslc_hf_get_header( $post_ID = false ) {
  * @param int     $post_ID ID of the post/page. Default false.
  * @return string The HTML ouput of the footer for a defined post/page
  */
-function dslc_hf_get_footer( $post_ID = false ) {	
+function dslc_hf_get_footer( $post_ID = false ) {
 
 	// Var defaults
 	$append = '';
