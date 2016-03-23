@@ -775,7 +775,8 @@ function dslc_ajax_save_composer( $atts ) {
 			$response['status'] = 'failed';
 
 		// Add/update the post/page with the content for search
-		if ( update_post_meta( $post_id, 'dslc_content_for_search', $content_for_search ) )
+		// wp_kses_post – Sanitize content for allowed HTML tags for post content.
+		if ( update_post_meta( $post_id, 'dslc_content_for_search', wp_kses_post($content_for_search) ) )
 			$response['status'] = 'success';
 
 		// Delete draft code

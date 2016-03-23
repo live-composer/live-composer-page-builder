@@ -614,7 +614,7 @@ class DSLC_Image extends DSLC_Module {
 
 			?>
 
-			<div class="dslc-image">
+			<div class="dslc-image"<?php if ( $dslc_is_admin ) echo ' data-exportable-content'; ?>>
 
 				<?php if ( empty( $options['image'] ) && empty( $options['image_url'] ) ) : ?>
 

@@ -2836,13 +2836,18 @@ class DSLC_Html extends DSLC_Module {
 
 	function output( $options ) {
 
-		global $dslc_active;		
+		global $dslc_active;
+
+		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
+			$dslc_is_admin = true;
+		else
+			$dslc_is_admin = false;
 
 		$this->module_start( $options );
 
 		/* Module output starts here */
 			
-			?><div class="dslc-html-module-content"><?php 
+			?><div class="dslc-html-module-content"<?php if ( $dslc_is_admin ) echo ' data-exportable-content'; ?>><?php 
 
 				$output_content = stripslashes( $options['content'] );
 				$output_content = do_shortcode( $output_content );

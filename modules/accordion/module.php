@@ -1045,7 +1045,7 @@ class DSLC_Accordion extends DSLC_Module {
 							<div class="dslc-accordion-item">
 
 								<div class="dslc-accordion-header dslc-accordion-hook">
-									<span class="dslc-accordion-title" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?>><?php echo stripslashes( $accordion_nav[$count] ); ?></span>
+									<span class="dslc-accordion-title" <?php if ( $dslc_is_admin ) echo 'contenteditable data-exportable-content="h3"'; ?>><?php echo stripslashes( $accordion_nav[$count] ); ?></span>
 									<?php if ( $dslc_is_admin ) : ?>
 										<div class="dslca-accordion-action-hooks">
 											<span class="dslca-move-up-accordion-hook"><span class="dslca-icon dslc-icon-arrow-up"></span></span>
@@ -1056,7 +1056,7 @@ class DSLC_Accordion extends DSLC_Module {
 								</div>
 
 								<div class="dslc-accordion-content">
-									<div class="dslca-editable-content">
+									<div class="dslca-editable-content"<?php if ( $dslc_is_admin ) echo ' data-exportable-content'; ?>>
 										<?php 
 											$accordion_content_output = stripslashes( $accordion_content ); 
 											$accordion_content_output = str_replace( '<lctextarea', '<textarea', $accordion_content_output );

@@ -916,7 +916,11 @@ class DSLC_Button extends DSLC_Module {
 						<?php if ( $options['button_state'] == 'enabled' && $options['icon_pos'] == 'left' ) : ?>
 							<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 						<?php endif; ?>
-						<span class="dslca-editable-content" data-id="button_text"  data-type="simple" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?>><?php echo stripslashes( $options['button_text'] ); ?></span>
+						<?php if ( $dslc_is_admin ) : ?>
+							<span class="dslca-editable-content" data-id="button_text"  data-type="simple" contenteditable><?php echo stripslashes( $options['button_text'] ); ?></span>
+						<?php else: ?>
+							<?php echo stripslashes( $options['button_text'] ); ?>
+						<?php endif; ?>
 						<?php if ( $options['button_state'] == 'enabled' && $options['icon_pos'] == 'right' ) : ?>
 							<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 						<?php endif; ?>
@@ -926,7 +930,11 @@ class DSLC_Button extends DSLC_Module {
 						<?php if ( $options['button_state'] == 'enabled' && $options['icon_pos'] == 'left' ) : ?>
 							<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 						<?php endif; ?>
-						<span class="dslca-editable-content" data-id="button_text"  data-type="simple" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?>><?php echo stripslashes( $options['button_text'] ); ?></span>
+						<?php if ( $dslc_is_admin ) : ?>
+							<span class="dslca-editable-content" data-id="button_text"  data-type="simple" contenteditable><?php echo stripslashes( $options['button_text'] ); ?></span>
+						<?php else: ?>
+							<?php echo stripslashes( $options['button_text'] ); ?>
+						<?php endif; ?>
 						<?php if ( $options['button_state'] == 'enabled' && $options['icon_pos'] == 'right' ) : ?>
 							<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 						<?php endif; ?>
@@ -934,6 +942,15 @@ class DSLC_Button extends DSLC_Module {
 				<?php endif; ?>
 			</div><!-- .dslc-button -->
 
+
+			<?php if ( $dslc_is_admin ) :
+			/* we output this button code for clean html export only */ ?>
+				<div style="display: none;"<?php if ( $dslc_is_admin ) echo ' data-exportable-content'; ?>>
+					<a href="<?php echo do_shortcode( $options['button_url'] ); ?>" target="<?php echo $options['button_target']; ?>" <?php if ( $options['link_nofollow'] ) echo 'rel="nofollow"';  ?>>
+							<?php echo stripslashes( $options['button_text'] ); ?>
+					</a>
+				</div><!-- .dslc-button -->
+			<?php endif; ?>
 			<?php
 
 		/* Module output ends here */

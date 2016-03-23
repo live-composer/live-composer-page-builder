@@ -2498,7 +2498,7 @@ class DSLC_Info_Box extends DSLC_Module {
 
 			<div class="dslc-info-box dslc-info-box-icon-pos-<?php echo $options['icon_position']; ?>">
 
-				<div class="dslc-info-box-wrapper">
+				<div class="dslc-info-box-wrapper"<?php if ( $dslc_is_admin ) echo ' data-exportable-content="div"'; ?>>
 
 					<?php if ( $options['button_pos'] == 'aside' && in_array( 'button', $elements ) ) : ?>
 						<div class="dslc-info-box-button dslc-info-box-button-aside">

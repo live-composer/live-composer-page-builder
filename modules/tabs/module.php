@@ -3058,8 +3058,8 @@ class DSLC_Tabs extends DSLC_Module {
 						<?php foreach( $tabs_content as $tab_content ) : ?>
 
 							<div class="dslc-tabs-tab-content">
-								<h4 class="dslc-tabs-nav-hook"><?php echo $tabs_nav[$count]; ?></h4>
-								<div class="dslca-editable-content">
+								<h4 class="dslc-tabs-nav-hook"<?php if ( $dslc_is_admin ) echo ' data-exportable-content="h3"'; ?>><?php echo $tabs_nav[$count]; ?></h4>
+								<div class="dslca-editable-content"<?php if ( $dslc_is_admin ) echo ' data-exportable-content'; ?>>
 									<?php 
 										$tab_content_output = stripslashes( $tab_content ); 
 										$tab_content_output = str_replace( '<lctextarea', '<textarea', $tab_content_output );

@@ -4266,6 +4266,11 @@ class DSLC_Text_Simple extends DSLC_Module {
 
 		global $dslc_active;		
 
+		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
+			$dslc_is_admin = true;
+		else
+			$dslc_is_admin = false;
+
 		$this->module_start( $options );
 
 		/* Module output starts here */
@@ -4273,7 +4278,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 			?><div class="dslc-text-module-content"><?php 
 
 				if ( $dslc_active ) {
-					?><div class="dslca-editable-content" data-id="content"><?php
+					?><div class="dslca-editable-content" data-id="content"<?php if ( $dslc_is_admin ) echo ' data-exportable-content'; ?>><?php
 				}
 				
 					$output_content = stripslashes( $options['content'] );
