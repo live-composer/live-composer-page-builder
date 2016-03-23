@@ -15,7 +15,7 @@
 
 
 /**
- * Display the composer
+ * Display the composer panels in active editing mode
  *
  * @since 1.0
  */

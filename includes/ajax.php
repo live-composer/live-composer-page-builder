@@ -559,8 +559,8 @@ function dslc_ajax_display_module_options( $atts ) {
 							<input type="text" class="dslca-module-edit-field dslca-module-edit-field-font" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" <?php echo $affect_on_change_append ?> />
 							<span class="dslca-module-edit-field-font-suggest"></span>
 						</div>
-						<span class="dslca-module-edit-field-font-prev"><span class="dslca-icon dslc-icon-chevron-left"></span></span>
-						<span class="dslca-module-edit-field-font-next"><span class="dslca-icon dslc-icon-chevron-right"></span></span>
+						<span class="dslca-options-iconbutton dslca-module-edit-field-font-prev"><span class="dslca-icon dslc-icon-chevron-left"></span></span>
+						<span class="dslca-options-iconbutton dslca-module-edit-field-font-next"><span class="dslca-icon dslc-icon-chevron-right"></span></span>
 
 					<?php elseif ( $module_option['type'] == 'icon' ) : ?>
 
@@ -568,8 +568,7 @@ function dslc_ajax_display_module_options( $atts ) {
 							<input type="text" class="dslca-module-edit-field dslca-module-edit-field-icon" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" <?php echo $affect_on_change_append ?> />
 							<span class="dslca-module-edit-field-icon-suggest"></span>
 						</div>
-						<span class="dslca-module-edit-field-icon-prev"><span class="dslca-icon dslc-icon-chevron-left"></span></span>
-						<span class="dslca-module-edit-field-icon-next"><span class="dslca-icon dslc-icon-chevron-right"></span></span>
+						<span class="dslca-options-iconbutton dslca-open-modal-hook" data-modal=".dslc-list-icons-fontawesome"><span class="dslca-icon dslc-icon-th"></span></span>
 
 					<?php elseif ( $module_option['type'] == 'image' ) : ?>
 

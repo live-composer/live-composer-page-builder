@@ -45,7 +45,49 @@ function dslc_icons() {
 	// Allow devs to alter available icons
 	$dslc_var_icons = apply_filters( 'dslc_available_icons', $dslc_var_icons );
 
+	// Dear developers, make sure to have icon set name written without spaces
+
 } add_action( 'init', 'dslc_icons' );
+
+
+
+/**
+ * Output the modal with icons when LC is in active editing mode
+ *
+ * @since 1.8
+ */
+
+function dslc_icons_modal() {
+
+	// Make no sense to continue if used not logged in
+	if ( is_user_logged_in() ) {
+
+		global $dslc_active,
+				 $dslc_var_icons; // array with icon sets
+
+		if ( $dslc_active && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+			// output list of icons
+			foreach ($dslc_var_icons as $key => $value) {
+
+				echo '<div class="dslca-modal-icons dslca-modal dslc-list-icons-'. $key .'" style="display:none;">';
+					echo '<ul class="dslc-icons-grid">';
+
+					foreach ( $dslc_var_icons[$key] as $k => $v ) {
+						$icon_name = $v;
+						echo '<li class="icon-item">';
+							echo '<span class="icon-item_icon dslc-icon-'. $icon_name .'"></span>';
+							echo '<span class="icon-item_name">'. $icon_name .'</span>';
+						echo '</li>';
+					}
+
+					echo '</ul>';
+				echo '</div>';
+			}
+		}
+	}
+}
+add_action( 'wp_footer', 'dslc_icons_modal' );
+
 
 /**
  * Show notice if wrong settings in the W3TC plugin

@@ -988,7 +988,7 @@ var dslcDebug = false;
 /*********************************
  *
  * 4) = UI - MODAL =
- * Note: Used only for the templates save/export/import at the moment.
+ * Note: Used for the templates save/export/import and icons
  *
  * - dslc_show_modal ( Show Modal )
  * - dslc_hide_modal ( Hide Modal )
@@ -997,6 +997,9 @@ var dslcDebug = false;
 
  	/**
  	 * MODAL - Show
+ 	 *
+ 	 * @param {Object} hook - Button that was clicked to open modal
+ 	 * @param {string} modal - CSS address of the modal, like '.modal-icons'
  	 */
 
  	function dslc_show_modal( hook, modal ) {
@@ -1016,8 +1019,10 @@ var dslcDebug = false;
 
 		// Show Modal
 		modal.css({ left : offset }).show();
+		modal.addClass('dslca-modal-open');
 
 		// Animate Modal
+		/*
 		modal.css({
 			'-webkit-animation-name' : 'dslcBounceIn',
 			'-moz-animation-name' : 'dslcBounceIn',
@@ -1025,10 +1030,11 @@ var dslcDebug = false;
 			'animation-duration' : '0.6s',
 			'-webkit-animation-duration' : '0.6s'
 		}).fadeIn(600);
+		*/
 
 	}
 
-	/** 
+	/**
 	 * MODAL - Hide
 	 */
 
@@ -1040,6 +1046,9 @@ var dslcDebug = false;
 		var modal = jQuery(modal);
 
 		// Hide ( with animation )
+		modal.hide();
+		modal.removeClass('dslca-modal-open');
+		/*
 		modal.css({
 			'-webkit-animation-name' : 'dslcBounceOut',
 			'-moz-animation-name' : 'dslcBounceOut',
@@ -1047,8 +1056,20 @@ var dslcDebug = false;
 			'animation-duration' : '0.6s',
 			'-webkit-animation-duration' : '0.6s'
 		}).fadeOut(600);
+		*/
 
 	}
+
+	// Hide if clicked outside of modal
+	jQuery(document).mouseup(function (e) {
+	    var container = jQuery(".dslca-modal-open");
+
+	    if (!container.is(e.target) // if the target of the click isn't the container...
+	      && container.has(e.target).length === 0) // ... nor a descendant of the container
+	    {
+	      container.hide();
+	    }
+	});
 
 	/**
 	 * MODAL - Document Ready
@@ -2452,6 +2473,7 @@ var dslcDebug = false;
  * - dslc_module_options_tooltip ( Helper tooltips for options )
  * - dslc_module_options_font ( Actions for font option type )
  * - dslc_module_options_icon ( Actions for icon font option type )
+ * - dslc_module_options_icon_returnid (Fill icon option type with selected icon ID/name)
  * - dslc_module_options_text_align ( Actions for text align option type )
  * - dslc_module_options_checkbox ( Actions for checkbox option type )
  * - dslc_module_options_box_shadow ( Actions for box shadow option type )
@@ -3511,49 +3533,36 @@ var dslcDebug = false;
 
 	}
 
+	/*
+	 * Change icon code based on direction (next/previous)
+	 */
+
+	function dslc_list_icon( object, direction ) {
+
+		var dslcOption = jQuery(object).closest('.dslca-module-edit-option-icon');
+		var dslcField = jQuery( '.dslca-module-edit-field-icon', dslcOption );
+		var dslcCurrIndex = dslcIconsCurrentSet.indexOf( dslcField.val() );
+
+		if ( direction == 'previous' ) {
+			var dslcNewIndex = dslcCurrIndex - 1;
+		} else {
+			var dslcNewIndex = dslcCurrIndex + 1;
+		}
+
+		jQuery('.dslca-module-edit-field-icon-suggest', dslcOption).text('');
+
+		if ( dslcNewIndex < 0 ) {
+			dslcNewIndex = dslcIconsCurrentSet.length - 1
+		}
+
+		dslcField.val( dslcIconsCurrentSet[dslcNewIndex] ).trigger('change');
+	}
+
 	/**
 	 * MODULES - Icon option type
 	 */
 
 	function dslc_module_options_icon() {
-
-		// Next Icon	
-
-		jQuery(document).on( 'click', '.dslca-module-edit-field-icon-next',  function(e){
-
-			e.preventDefault();
-
-			var dslcOption = jQuery(this).closest('.dslca-module-edit-option-icon');
-			var dslcField = jQuery( '.dslca-module-edit-field-icon', dslcOption );
-			var dslcCurrIndex = dslcIconsCurrentSet.indexOf( dslcField.val() );
-			var dslcNewIndex = dslcCurrIndex + 1;
-			
-			jQuery('.dslca-module-edit-field-icon-suggest', dslcOption).text('');
-
-			dslcField.val( dslcIconsCurrentSet[dslcNewIndex] ).trigger('change');
-
-		});
-
-		// Previous Icon
-
-		jQuery(document).on( 'click', '.dslca-module-edit-field-icon-prev',  function(e){
-
-			e.preventDefault();
-
-			var dslcOption = jQuery(this).closest('.dslca-module-edit-option-icon');
-			var dslcField = jQuery( '.dslca-module-edit-field-icon', dslcOption );
-			var dslcCurrIndex = dslcIconsCurrentSet.indexOf( dslcField.val() );
-			var dslcNewIndex = dslcCurrIndex - 1;
-
-			jQuery('.dslca-module-edit-field-icon-suggest', dslcOption).text('');
-
-			if ( dslcNewIndex < 0 ) {
-				dslcNewIndex = dslcIconsCurrentSet.length - 1
-			}
-			
-			dslcField.val( dslcIconsCurrentSet[dslcNewIndex] ).trigger('change');
-
-		});
 
 		// Key Up ( arrow up, arrow down, else )
 
@@ -3564,12 +3573,14 @@ var dslcDebug = false;
 			dslcField = jQuery(this);
 			dslcOption = dslcField.closest('.dslca-module-edit-option');
 
+			// Key pressed: arrow up
 			if ( e.which == 38 ) {
-				jQuery('.dslca-module-edit-field-icon-prev', dslcOption).click();
+				dslc_list_icon(dslcField,'previous');
 			}
 
+			// Key pressed: arrow down
 			if ( e.which == 40 ) {
-				jQuery('.dslca-module-edit-field-icon-next', dslcOption).click();
+				dslc_list_icon(dslcField,'next');
 			}
 
 			if ( e.which != 13 && e.which != 38 && e.which != 40 ) {
@@ -3608,6 +3619,23 @@ var dslcDebug = false;
 
 			}
 
+		});
+
+	}
+
+	function dslc_module_options_icon_returnid() {
+
+		jQuery(document).on('click', '.dslca-open-modal-hook[data-modal^=".dslc-list-icons"]', function(el) {
+			jQuery(this).closest('.dslca-module-edit-option-icon').find('input').addClass('icon-modal-active');
+		});
+
+		jQuery(document).on('click', '.dslca-modal-icons .icon-item', function(el) {
+			// Get selected item code
+			var selectedIconCode = jQuery(this).find('.icon-item_name').text();
+			jQuery('input.icon-modal-active').val(selectedIconCode).change();
+
+			// Close modal window
+			dslc_hide_modal( '', jQuery('.dslca-modal:visible') );
 		});
 
 	}
@@ -4325,6 +4353,7 @@ var dslcDebug = false;
 		dslc_module_options_tooltip();
 		dslc_module_options_font();
 		dslc_module_options_icon();
+		dslc_module_options_icon_returnid()
 		dslc_module_options_text_align();
 		dslc_module_options_checkbox();
 		dslc_module_options_box_shadow();
@@ -4570,6 +4599,10 @@ var dslcDebug = false;
 			// Change current icon set
 			dslcIconsCurrentSet = DSLCIcons[iconSet];
 
+			// Update 'icons grid' button data-modal attribute with selected set
+			$('.dslca-open-modal-hook[data-modal^=".dslc-list-icons"]').data('modal', '.dslc-list-icons-' + iconSet );
+
+
 			// Change active states
 			$(this).addClass('dslca-active').siblings('.dslca-active').removeClass('dslca-active');
 
@@ -4594,6 +4627,9 @@ var dslcDebug = false;
 
 			// Change current icon set
 			dslcIconsCurrentSet = DSLCIcons[iconSet];
+
+			// Update 'icons grid' button data-modal attribute with selected set
+			$('.dslca-open-modal-hook[data-modal^=".dslc-list-icons"]').data('modal', '.dslc-list-icons-' + iconSet );
 
 		});
 
