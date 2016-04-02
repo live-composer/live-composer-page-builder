@@ -833,8 +833,46 @@ body.dslc-res-phone .dslc-module-front.dslc-col {
  }
 
  /**
-  * Animations
+  * Animations moved outside of media queries
+  * IE10 and IE11 do not support CSS animations inside media queries.
+  * ( http://caniuse.com/#search=animation )
   */
+
+@keyframes dslcFadeIn {
+	to { opacity: 1; }
+}
+
+@keyframes dslcSlideUp {
+	to { transform: translateY(0); }
+}
+
+@keyframes dslcSlideDown {
+	to { transform: translateY(0); }
+}
+
+@keyframes dslcSlideRight {
+	to { transform: translateX(0); }
+}
+
+@keyframes dslcSlideLeft {
+	to { transform: translateX(0); }
+}
+
+@keyframes dslcSlideUpFadeIn {
+	to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes dslcSlideDownFadeIn {
+	to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes dslcSlideRightFadeIn {
+	to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes dslcSlideLeftFadeIn {
+	to { transform: translateX(0); opacity: 1; }
+}
 
 @media only screen and ( min-width: 768px ) {
 
@@ -843,10 +881,6 @@ body.dslc-res-phone .dslc-module-front.dslc-col {
 	}
 
 	@-moz-keyframes dslcFadeIn {
-		to { opacity: 1; }
-	}
-
-	@keyframes dslcFadeIn {
 		to { opacity: 1; }
 	}
 
@@ -860,10 +894,6 @@ body.dslc-res-phone .dslc-module-front.dslc-col {
 
 	@-moz-keyframes dslcSlideUp {
 		to { -moz-transform: translateY(0); }
-	}
-
-	@keyframes dslcSlideUp {
-		to { transform: translateY(0); }
 	}
 
 	.dslc-in-viewport-anim-dslcSlideUp.dslc-in-viewport-check {
@@ -880,10 +910,6 @@ body.dslc-res-phone .dslc-module-front.dslc-col {
 		to { -moz-transform: translateY(0); }
 	}
 
-	@keyframes dslcSlideDown {
-		to { transform: translateY(0); }
-	}
-
 	.dslc-in-viewport-anim-dslcSlideDown.dslc-in-viewport-check {
 		-webkit-transform: translateY(-100px);
 		-moz-transform: translateY(-100px);
@@ -896,10 +922,6 @@ body.dslc-res-phone .dslc-module-front.dslc-col {
 
 	@-moz-keyframes dslcSlideRight {
 		to { -moz-transform: translateX(0); }
-	}
-
-	@keyframes dslcSlideRight {
-		to { transform: translateX(0); }
 	}
 
 	.dslc-in-viewport-anim-dslcSlideRight.dslc-in-viewport-check {
@@ -916,10 +938,6 @@ body.dslc-res-phone .dslc-module-front.dslc-col {
 		to { -moz-transform: translateX(0); }
 	}
 
-	@keyframes dslcSlideLeft {
-		to { transform: translateX(0); }
-	}
-
 	.dslc-in-viewport-anim-dslcSlideLeft.dslc-in-viewport-check {
 		-webkit-transform: translateX(100px);
 		-moz-transform: translateX(100px);
@@ -932,10 +950,6 @@ body.dslc-res-phone .dslc-module-front.dslc-col {
 
 	@-moz-keyframes dslcSlideUpFadeIn {
 		to { -moz-transform: translateY(0); opacity: 1; }
-	}
-
-	@keyframes dslcSlideUpFadeIn {
-		to { transform: translateY(0); opacity: 1; }
 	}
 
 	.dslc-in-viewport-anim-dslcSlideUpFadeIn.dslc-in-viewport-check {
@@ -953,10 +967,6 @@ body.dslc-res-phone .dslc-module-front.dslc-col {
 		to { -moz-transform: translateY(0); opacity: 1; }
 	}
 
-	@keyframes dslcSlideDownFadeIn {
-		to { transform: translateY(0); opacity: 1; }
-	}
-
 	.dslc-in-viewport-anim-dslcSlideDownFadeIn.dslc-in-viewport-check {
 		-webkit-transform: translateY(-100px);
 		-moz-transform: translateY(-100px);
@@ -972,10 +982,6 @@ body.dslc-res-phone .dslc-module-front.dslc-col {
 		to { -moz-transform: translateX(0); opacity: 1; }
 	}
 
-	@keyframes dslcSlideRightFadeIn {
-		to { transform: translateX(0); opacity: 1; }
-	}
-
 	.dslc-in-viewport-anim-dslcSlideRightFadeIn.dslc-in-viewport-check {
 		-webkit-transform: translateX(-100px);
 		-moz-transform: translateX(-100px);
@@ -989,10 +995,6 @@ body.dslc-res-phone .dslc-module-front.dslc-col {
 
 	@-moz-keyframes dslcSlideLeftFadeIn {
 		to { -moz-transform: translateX(0); opacity: 1; }
-	}
-
-	@keyframes dslcSlideLeftFadeIn {
-		to { transform: translateX(0); opacity: 1; }
 	}
 
 	.dslc-in-viewport-anim-dslcSlideLeftFadeIn.dslc-in-viewport-check {
