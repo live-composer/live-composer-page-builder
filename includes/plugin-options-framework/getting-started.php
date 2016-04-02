@@ -20,11 +20,11 @@
 				<input type="hidden" name="v" value="2" />
 				<div class="_form-content">
 					<div>
-						<input type="text" name="email" id="dslc_activecampaign_email" placeholder="Email" value="<?php echo $dslc_getting_started['email']; ?>" required/>
+						<input type="text" name="email" id="dslc_activecampaign_email" placeholder="Email" value="<?php if ( $dslc_getting_started['email'] != '' ) { echo esc_attr( $dslc_getting_started['email'] ); } else { esc_attr( form_option( 'admin_email' ) ); } ?>" required/>
 					</div>
 					<br/>
 					<div>
-						<input type="text" name="firstname" id="dslc_activecampaign_name" placeholder="First Name" required value="<?php echo $dslc_getting_started['name']; ?>" />
+						<input type="text" name="firstname" id="dslc_activecampaign_name" placeholder="First Name" required value="<?php echo esc_attr( $dslc_getting_started['name'] ); ?>" />
 					</div>
 					<br/>
 					<br/>
