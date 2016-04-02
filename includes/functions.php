@@ -260,16 +260,19 @@ function dslc_generate_custom_css( $options_arr, $settings, $restart = false ) {
 					switch ( $option_arr['tab'] ) {
 						case __( 'tablet', 'live-composer-page-builder' ):
 							if ( isset( $settings['css_res_t'] ) && $settings['css_res_t'] == 'enabled' )
-								$affect_el .= 'body.dslc-res-tablet #dslc-content #dslc-module-' . $settings['module_instance_id'] . ' ' . $affect_el_arr;
+								// removed #dslc-content from the line for better css optimization
+								$affect_el .= 'body.dslc-res-tablet #dslc-module-' . $settings['module_instance_id'] . ' ' . $affect_el_arr;
 							break;
 						case __( 'phone', 'live-composer-page-builder' ):
 							if ( isset( $settings['css_res_p'] ) && $settings['css_res_p'] == 'enabled' )
-								$affect_el .= 'body.dslc-res-phone #dslc-content #dslc-module-' . $settings['module_instance_id'] . ' ' . $affect_el_arr;
+								// removed #dslc-content from the line for better css optimization
+								$affect_el .= 'body.dslc-res-phone #dslc-module-' . $settings['module_instance_id'] . ' ' . $affect_el_arr;
 							break;
 					}
 
 				} else {
-					$affect_el .= '#dslc-content #dslc-module-' . $settings['module_instance_id'] . ' ' . $affect_el_arr;
+					// removed #dslc-content from the line for better css optimization
+					$affect_el .= '#dslc-module-' . $settings['module_instance_id'] . ' ' . $affect_el_arr;
 				}
 
 			}
@@ -330,21 +333,78 @@ function dslc_generate_custom_css( $options_arr, $settings, $restart = false ) {
 	if ( count( $organized_array ) > 0 ) {
 
 		foreach ( $organized_array as $el => $rules ) {
+			$do_css_output = false;
+			$css_output_el = ''; // var for temporary output of current el
 
-			$css_output .= $el . ' { ';
+			$do_css_output_border = false;
+			$css_output_el_border = ''; // process border CSS properties separately
 
-				foreach ( $rules as $rule => $value ) {
+			$do_css_output_background = false;
+			$css_output_el_background = ''; // process background CSS properties separately
 
-					if ( trim( $value ) != '' && trim( $value ) != 'url(" ")' ) {
+			// remove double spaces form css element address
+			$el = preg_replace('/ {2,}/', ' ', $el);
 
-						$css_output .= $rule . ' : ' . $value . $important_append . '; ';
+			// Do not output empty CSS blocks
+			if ( count($rules) && strlen($el) > 2  ) {
+				$css_output_el .=  $el . '{';
+
+					foreach ( $rules as $rule => $value ) {
+						$css_output_rule = '';
+						$rule = trim($rule);
+						$value = trim($value);
+
+						// Basic CSS rule name validation
+						if ( $value != '' && $value != 'url(" ")' && !preg_match("/([\[\];<>]+)/", $value) && preg_match("/([-a-z@]{3,60})/", $rule) ) {
+
+							// Output all the border properties only if border-width has been set
+							if ( $rule == 'border-width' && $value != '' && $value != '0px' && $value != '0') {
+								$do_css_output_border = true;
+							}
+							// Make no sense to output this property
+							if ( $rule == 'border-style' && $value == 'none none none none') {
+								$do_css_output_border = false;
+							}
+							// Shorten border-style properties
+							if ( $rule == 'border-style' && $value == 'solid solid solid solid') {
+								$value = 'solid';
+							}
+							// Output all the background properties only if background-image is set
+							if ( $rule == 'background-image') {
+								$do_css_output_background = true;
+							}
+
+							$css_output_rule .= $rule . ':' . $value . $important_append . ';';
+
+							if ( stristr($rule, 'border') ) {
+								$css_output_el_border .= $css_output_rule;
+							} elseif ( stristr($rule, 'background-') && $rule != 'background-color' ) {
+								$css_output_el_background .= $css_output_rule;
+							} else {
+								$css_output_el .= $css_output_rule;
+							}
+
+							$do_css_output = true;
+						}
 
 					}
 
-				}
+					if ( $do_css_output_border ) {
+						$css_output_el .= $css_output_el_border;
+					}
 
-			$css_output .= ' } ';
+					if ( $do_css_output_background ) {
+						$css_output_el .= $css_output_el_background;
+					}
 
+					$css_output_el = trim($css_output_el);
+
+				$css_output_el .= '} ';
+			}
+
+			if ( $do_css_output ) {
+				$css_output .= $css_output_el;
+			}
 		}
 
 	}
