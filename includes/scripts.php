@@ -149,17 +149,16 @@ function dslc_load_scripts() {
  */
 
 function dslc_load_admin_scripts( $hook ) {
-
 	if ( ( $hook == 'post-new.php' || $hook == 'post.php' ) && DS_LIVE_COMPOSER_LOAD_MINIFIED  && !SCRIPT_DEBUG ) {
 		wp_enqueue_script( 'dslc-post-options-js-admin', DS_LIVE_COMPOSER_URL . 'includes/post-options-framework/js/main.min.js', array('jquery', 'jquery-ui-core', 'jquery-ui-datepicker'), DS_LIVE_COMPOSER_VER );
-		if ( get_post_type( get_the_ID() ) == 'page' ) {
+		if ( get_post_type( get_the_ID() ) == 'page' && $hook == 'post.php' ) {
 			wp_localize_script('dslc-post-options-js-admin', 'tabData', array( 'tabTitle' => __('Page Builder', 'live-composer-page-builder') ));
 		}
 		wp_enqueue_style( 'jquery-ui-datepicker', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/smoothness/jquery-ui.css' );
 		wp_enqueue_style( 'dslc-post-options-css-admin', DS_LIVE_COMPOSER_URL . 'includes/post-options-framework/css/main.min.css', array(), DS_LIVE_COMPOSER_VER);
 	} elseif ( ( $hook == 'post-new.php' || $hook == 'post.php' ) && SCRIPT_DEBUG  ) {
 		wp_enqueue_script( 'dslc-post-options-js-admin', DS_LIVE_COMPOSER_URL . 'includes/post-options-framework/js/main.js', array('jquery', 'jquery-ui-core', 'jquery-ui-datepicker'), DS_LIVE_COMPOSER_VER );
-		if ( get_post_type( get_the_ID() ) == 'page' ) {
+		if ( get_post_type( get_the_ID() ) == 'page' && $hook == 'post.php' ) {
 			wp_localize_script('dslc-post-options-js-admin', 'tabData', array( 'tabTitle' => __('Page Builder', 'live-composer-page-builder') ));
 		}
 		wp_enqueue_style( 'jquery-ui-datepicker', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/smoothness/jquery-ui.css' );

@@ -132,7 +132,8 @@ jQuery(document).ready(function(){
 		);
 	}
 
-	if ( jQuery('#postcustom input[value="dslc_code"]').val() == 'dslc_code' ) {
+	// Overlay WP editor with LC Page Builder tab if there is LC content AND there is no content in standard editor
+	if ( jQuery('#postcustom input[value="dslc_code"]').val() == 'dslc_code' && jQuery('.wp-editor-area').text().length == 0 ) {
 		jQuery('#wp-content-wrap').removeClass('html-active tmce-active');
 		jQuery('#postdivrich').addClass('lc-active');
 	}
