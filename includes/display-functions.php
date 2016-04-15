@@ -1450,7 +1450,12 @@ function dslc_module_gen_css( $atts, $settings_raw ) {
 		}
 
 		// Generate custom CSS
-		if ( ( $module_id == 'DSLC_TP_Content' || $module_id == 'DSLC_Html' ) && ! isset( $settings['css_custom'] ) )
+		/*
+		* Changed from the next line in ver.1.0.8
+		* if ( ( $module_id == 'DSLC_TP_Content' || $module_id == 'DSLC_Html' ) && ! isset( $settings['css_custom'] ) )
+		* Line above was breaking styling for DSLC_TP_Content modules when used in template
+		*/
+		if ( $module_id == 'DSLC_Html' && ! isset( $settings['css_custom'] ) )
 			$css_output = '';
 		elseif ( isset( $settings['css_custom'] ) && $settings['css_custom'] == 'disabled' )
 			$css_output = '';
