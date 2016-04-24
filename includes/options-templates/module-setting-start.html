@@ -1,0 +1,17 @@
+<div class="dslca-module-edit-option-ver-2 dslca-module-edit-option dslca-module-edit-option-<%= type %> dslca-module-edit-option-label_link <% if(obj.visibility && obj.visibility == 'hidden'){%> dslca-module-edit-option-hidden <%}else{%> dslca-module-edit-option-visible <%}%>" data-id="<%= id %>" data-refresh-on-change="active" data-section="<%= section %>" data-tab="<%= tab %>">
+
+	<% if (obj.help && help != ''){%>
+		<div class="dslca-module-edit-field-ttip-content"><%= help %></div>
+	<%}%>
+
+	<span class="dslca-module-edit-label">
+		<%= obj.label %>
+		<% if (type && type == 'icon'){%>
+			<span class="dslca-module-edit-field-icon-ttip-hook"><span class="dslca-icon dslc-icon-info"></span></span>
+			<span class="dslca-module-edit-field-icon-switch-set"><span class="dslca-module-edit-field-icon-curr-set"></span><span class="dslca-icon dslc-icon-cog"></span></span>
+		<%}%>
+
+		<% if (obj.help && help != ''){%>
+			<span class="dslca-module-edit-field-ttip-hook"><span class="dslca-icon dslc-icon-info"></span></span>
+		<%}%>
+	</span>

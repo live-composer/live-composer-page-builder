@@ -25,10 +25,12 @@ class DSLC_Galleries extends DSLC_Module {
 		$cats_choices = array();
 
 		foreach ( $cats as $cat ) {
-			$cats_choices[] = array(
-				'label' => $cat->name,
-				'value' => $cat->slug
-			);
+			if(!is_array($cat)){
+				$cats_choices[] = array(
+					'label' => $cat->name,
+					'value' => $cat->slug
+				);
+			}			
 		}
 
 		$dslc_options = array(

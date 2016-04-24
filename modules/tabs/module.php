@@ -64,6 +64,24 @@ class DSLC_Tabs extends DSLC_Module {
 			 */
 
 			array(
+				'label' => __( 'Position', 'live-composer-page-builder' ),
+				'id' => 'css_nav_position',
+				'std' => 'above',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'Above', 'live-composer-page-builder' ),
+						'value' => 'above'
+					),
+					array(
+						'label' => __( 'Aside', 'live-composer-page-builder' ),
+						'value' => 'aside'
+					),
+				),
+				'section' => 'styling',
+				'tab' => __( 'Navigation', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Align', 'live-composer-page-builder' ),
 				'id' => 'css_nav_align',
 				'std' => 'left',
@@ -241,7 +259,7 @@ class DSLC_Tabs extends DSLC_Module {
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-tabs-nav-hook',
-				'affect_on_change_rule' => 'margin-left',
+				'affect_on_change_rule' => 'margin-left,margin-bottom',
 				'section' => 'styling',
 				'ext' => 'px',
 				'tab' => __( 'Navigation', 'live-composer-page-builder' ),
@@ -255,7 +273,7 @@ class DSLC_Tabs extends DSLC_Module {
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-tabs-nav',
-				'affect_on_change_rule' => 'margin-bottom',
+				'affect_on_change_rule' => 'margin-bottom,margin-right',
 				'section' => 'styling',
 				'ext' => 'px',
 				'tab' => __( 'Navigation', 'live-composer-page-builder' ),
@@ -2998,7 +3016,7 @@ class DSLC_Tabs extends DSLC_Module {
 
 		?>
 
-			<div class="dslc-tabs">
+			<div class="dslc-tabs dslc-tabs-nav-pos-<?php echo $options['css_nav_position']; ?>">
 
 				<div class="dslc-tabs-nav dslc-clearfix">
 					
@@ -3040,8 +3058,8 @@ class DSLC_Tabs extends DSLC_Module {
 						<?php foreach( $tabs_content as $tab_content ) : ?>
 
 							<div class="dslc-tabs-tab-content">
-								<h4 class="dslc-tabs-nav-hook"><?php echo $tabs_nav[$count]; ?></h4>
-								<div class="dslca-editable-content">
+								<h4 class="dslc-tabs-nav-hook"<?php if ( $dslc_is_admin ) echo ' data-exportable-content="h3"'; ?>><?php echo $tabs_nav[$count]; ?></h4>
+								<div class="dslca-editable-content"<?php if ( $dslc_is_admin ) echo ' data-exportable-content'; ?>>
 									<?php 
 										$tab_content_output = stripslashes( $tab_content ); 
 										$tab_content_output = str_replace( '<lctextarea', '<textarea', $tab_content_output );

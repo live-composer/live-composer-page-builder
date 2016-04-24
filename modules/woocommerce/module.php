@@ -23,10 +23,12 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 
 		if ( $cats ) {
 			foreach ( $cats as $cat ) {
+				if(!is_array($cat)){
 				$cats_choices[] = array(
 					'label' => $cat->name,
 					'value' => $cat->slug
 				);
+			}
 			}
 		}
 

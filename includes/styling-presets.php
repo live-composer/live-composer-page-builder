@@ -28,7 +28,7 @@ function dslc_presets_load( $settings ) {
 
 			// Go through all presets
 			foreach ( $presets as $preset ) {
-					
+
 				// Find the correct preset
 				if ( $preset['id'] == $preset_id )
 					$preset_data = $preset;

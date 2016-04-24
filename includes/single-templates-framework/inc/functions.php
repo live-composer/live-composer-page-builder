@@ -42,7 +42,7 @@ function dslc_st_init() {
 	));
 
 	global $dslc_var_post_options;
-	
+
 	// Generate the choices
 	global $dslc_var_templates_pt;
 	$pt_choices = array();
@@ -145,7 +145,7 @@ function dslc_st_get_template_ID( $post_ID ) {
 		$tpls = get_posts( $args );
 
 		// If default template found set the ID if not make it false
-		if ( $tpls ) 
+		if ( $tpls )
 			$template_ID = $tpls[0]->ID;
 		else
 			$template_ID = false;

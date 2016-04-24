@@ -1,0 +1,18 @@
+<div class="dslca-module-edit-option-text-shadow-wrapper">
+
+	<div class="dslca-module-edit-option-text-shadow-single">
+		<span><?php _e( 'Hor', 'live-composer-page-builder' ) ?></span><input class="dslca-module-edit-option-text-shadow-hor" step="0.1" type="number" value="<%= obj.value && value[0] ? value[0].replace('px','') : 0 %>" />
+	</div>
+	<div class="dslca-module-edit-option-text-shadow-single">
+		<span><?php _e( 'Ver', 'live-composer-page-builder' ) ?></span><input class="dslca-module-edit-option-text-shadow-ver" step="0.1" type="number" value="<%= obj.value && value[1] ? value[1].replace('px','') : 0 %>" />
+	</div>
+	<div class="dslca-module-edit-option-text-shadow-single">
+		<span><?php _e( 'Blur', 'live-composer-page-builder' ) ?></span><input class="dslca-module-edit-option-text-shadow-blur" step="0.1" type="number" value="<%= obj.value && value[2] ? value[2].replace('px','') : 0 %>" />
+	</div>
+	<div class="dslca-module-edit-option-text-shadow-single">
+		<span><?php _e( 'Color', 'live-composer-page-builder' ) ?></span><input class="dslca-module-edit-option-text-shadow-color" type="text" value="<%= obj.value && value[3] ? value[3].replace('px','') : 'rgba(255,255,255,0)' %>" />
+	</div>
+
+	<input type="hidden" class="dslca-module-edit-field dslca-module-edit-field-text-shadow" name="<%= id %>" data-id="<%= id %>" <%= obj.affect_on_change_append %> />
+
+</div><!-- .dslca-module-edit-option-text-shadow-wrapper -->

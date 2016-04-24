@@ -1,0 +1,25 @@
+<div class="dslca-module-edit-option-box-shadow-wrapper">
+
+	<div class="dslca-module-edit-option-box-shadow-single">
+		<span class="dslca-module-edit-option-checkbox-hook"><?php  _e( 'Inner', 'live-composer-page-builder' ) ?><span class="dslca-icon <% if(obj.value && value[5] && value[5] == 'inset'){%> dslc-icon-check <%}else{%> dslc-icon-check-empty <%}%>"></span></span>
+		<input type="checkbox" class="dslca-module-edit-field-checkbox dslca-module-edit-option-box-shadow-inset" <% if(obj.value && value[5] && value[5] == 'inset'){%> checked="checked" <%}%> />
+	</div>
+	<div class="dslca-module-edit-option-box-shadow-single">
+		<span><?php _e( 'Hor', 'live-composer-page-builder' ) ?></span><input class="dslca-module-edit-option-box-shadow-hor" step="0.1" type="number" value="<%= obj.value && value[0] ? value[0].replace('px','') : 0 %>" />
+	</div>
+	<div class="dslca-module-edit-option-box-shadow-single">
+		<span><?php _e( 'Ver', 'live-composer-page-builder' ) ?></span><input class="dslca-module-edit-option-box-shadow-ver" step="0.1" type="number" value="<%= obj.value && value[1] ? value[1].replace('px','') : 0 %>" />
+	</div>
+	<div class="dslca-module-edit-option-box-shadow-single">
+		<span><?php _e( 'Blur', 'live-composer-page-builder' ) ?></span><input class="dslca-module-edit-option-box-shadow-blur" step="0.1" type="number" value="<%= obj.value && value[2] ? value[2].replace('px','') : 0 %>" />
+	</div>
+	<div class="dslca-module-edit-option-box-shadow-single">
+		<span><?php _e( 'Spread', 'live-composer-page-builder') ?></span><input class="dslca-module-edit-option-box-shadow-spread" step="0.1" type="number" value="<%= obj.value && value[3] ? value[3].replace('px','') : 0 %>" />
+	</div>
+	<div class="dslca-module-edit-option-box-shadow-single">
+		<span><?php _e( 'Color', 'live-composer-page-builder' ) ?></span><input class="dslca-module-edit-option-box-shadow-color" type="text" value="<%= obj.value && obj.value[4] ? value[4] : 'rgba(0,0,0,0)' %>" />
+	</div>
+
+	<input type="hidden" class="dslca-module-edit-field dslca-module-edit-field-box-shadow" name="<%= id %>" data-id="<%= id %>" value="<%= obj.value || std %>" <%= obj.affect_on_change_append %> />
+
+</div><!-- .dslca-module-edit-option-box-shadow-wrapper -->

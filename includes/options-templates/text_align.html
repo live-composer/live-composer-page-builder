@@ -1,0 +1,19 @@
+<div class="dslca-module-edit-option-text-align-wrapper">
+<div class="dslca-module-edit-option-text-align-single dslca-module-edit-option-text-align-hook <% if(obj.value && value == 'inherit'){%>'dslca-active' <%}%>" data-val="inherit">
+	<span class="dslca-icon dslc-icon-remove"></span>
+</div>
+<div class="dslca-module-edit-option-text-align-single dslca-module-edit-option-text-align-hook <% if(obj.value && value == 'left'){%> dslca-active <%}%>" data-val="left">
+	<span class="dslca-icon dslc-icon-align-left"></span>
+</div>
+<div class="dslca-module-edit-option-text-align-single dslca-module-edit-option-text-align-hook <% if(obj.value && value == 'center'){%> dslca-active <%}%>" data-val="center">
+	<span class="dslca-icon dslc-icon-align-center"></span>
+</div>
+<div class="dslca-module-edit-option-text-align-single dslca-module-edit-option-text-align-hook <% if(obj.value && value == 'right'){%> dslca-active <%}%>" data-val="right">
+	<span class="dslca-icon dslc-icon-align-right"></span>
+</div>
+<div class="dslca-module-edit-option-text-align-single dslca-module-edit-option-text-align-hook <% if(obj.value && value == 'justify'){%> dslca-active <%}%>" data-val="justify">
+	<span class="dslca-icon dslc-icon-align-justify"></span>
+</div>
+</div>
+
+<input type="hidden" class="dslca-module-edit-field dslca-module-edit-field-text-align" name="<%= id %>" data-id="<%= id %>" value="<%= obj.value || std %>" <%= obj.affect_on_change_append %> />

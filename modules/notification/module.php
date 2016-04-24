@@ -689,6 +689,11 @@ class DSLC_Notification extends DSLC_Module {
 
 		global $dslc_active;
 
+		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
+			$dslc_is_admin = true;
+		else
+			$dslc_is_admin = false;
+
 		$this->module_start( $options );
 
 		/* Module output starts here */
@@ -704,7 +709,7 @@ class DSLC_Notification extends DSLC_Module {
 			?>
 
 			<div class="<?php echo $classes; ?>" data-notification-timeout="<?php echo $options['notification_timeout']; ?>">
-				<div class="dslc-notification-box-content  dslca-editable-content" data-id="content">
+				<div class="dslc-notification-box-content  dslca-editable-content" data-id="content"<?php if ( $dslc_is_admin ) echo ' data-exportable-content'; ?>>
 					<?php
 						$output_content = stripslashes( $options['content'] );
 						$output_content = do_shortcode( $output_content );

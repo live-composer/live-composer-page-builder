@@ -6,13 +6,13 @@
  * - dslc_row_register_options ( Register options )
  */
 
-	
+
 	/**
 	 * Register Options
 	 *
 	 * @since 1.0
 	 */
-	
+
 	function dslc_row_register_options() {
 
 		global $dslc_var_row_options;
@@ -235,7 +235,7 @@
 			'affect_on_change_el' => '.dslc-bg-video-overlay',
 			'affect_on_change_rule' => 'background-color',
 		);
-	
+
 		$dslc_var_row_options['bg_video_overlay_opacity'] = array(
 			'id' => 'bg_video_overlay_opacity',
 			'std' => '0',

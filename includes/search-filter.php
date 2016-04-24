@@ -25,7 +25,7 @@ if ( ! function_exists( 'dslc_search_filter_join' ) ) {
 			$join .= "JOIN $wpdb->postmeta ON $wpdb->posts.ID = $wpdb->postmeta.post_id ";
 		}
 
-		return $join;		
+		return $join;
 
 	}
 
@@ -53,7 +53,7 @@ if( ! function_exists( 'dslc_search_filter_request' ) ) {
 			// Get the usual WP checks like post status
 			$end_pos_where = 5 + $last_occurence_position;
 			$request_append = substr( $where, $end_pos_where );
-			
+
 			// Get the search term(s)
 			$user_request = esc_sql( trim( $wp_query->query_vars['s'] ) );
 
@@ -66,12 +66,12 @@ if( ! function_exists( 'dslc_search_filter_request' ) ) {
 			// Append the post value(s) in the request
 			foreach ( $user_request_arr as $value ) {
 				$where .= "AND " . $wpdb->postmeta . ".meta_value LIKE '%" . $value . "%' ";
-			} 
+			}
 
 			// End with the usual WP checks like post status
 			$where .= $request_append . ") ";
 
-		}		
+		}
 
 		// Pass it back to WP
 		return $where;

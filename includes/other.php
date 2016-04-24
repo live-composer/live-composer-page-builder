@@ -5,11 +5,12 @@
  *
  * - dslc_plugin_action_links ( Additional links on plugin listings page )
  * - dslc_icons
+ * - dslc_w3tc_admin_notice (Show notice if some of the W3TC settings are problematic)
  */
 
 
 /**
- * Additional links on plugin listings page 
+ * Additional links on plugin listings page
  *
  * @since 1.0
  */
@@ -18,11 +19,11 @@ function dslc_plugin_action_links( $links ) {
 
 	// Themes link
 	$themes_link = '<a href="http://livecomposerplugin.com/themes" target="_blank">Themes</a>';
-	array_unshift( $links, $themes_link );	
+	array_unshift( $links, $themes_link );
 
 	// Addons link
 	$addons_link = '<a href="http://livecomposerplugin.com/add-ons" target="_blank">Add-Ons</a>';
-	array_unshift( $links, $addons_link );	
+	array_unshift( $links, $addons_link );
 
 	// Support link
 	$support_link = '<a href="http://livecomposerplugin.com/support" target="_blank">Support</a>';
@@ -44,4 +45,189 @@ function dslc_icons() {
 	// Allow devs to alter available icons
 	$dslc_var_icons = apply_filters( 'dslc_available_icons', $dslc_var_icons );
 
+	// Dear developers, make sure to have icon set name written without spaces
+
 } add_action( 'init', 'dslc_icons' );
+
+
+
+/**
+ * Output the modal with icons when LC is in active editing mode
+ *
+ * @since 1.8
+ */
+
+function dslc_icons_modal() {
+
+	// Make no sense to continue if used not logged in
+	if ( is_user_logged_in() ) {
+
+		global $dslc_active,
+				 $dslc_var_icons; // array with icon sets
+
+		if ( $dslc_active && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+			// output list of icons
+			foreach ($dslc_var_icons as $key => $value) {
+
+				echo '<div class="dslca-modal-icons dslca-modal dslc-list-icons-'. $key .'" style="display:none;">';
+					echo '<ul class="dslc-icons-grid">';
+
+					foreach ( $dslc_var_icons[$key] as $k => $v ) {
+						$icon_name = $v;
+						echo '<li class="icon-item">';
+							echo '<span class="icon-item_icon dslc-icon-'. $icon_name .'"></span>';
+							echo '<span class="icon-item_name">'. $icon_name .'</span>';
+						echo '</li>';
+					}
+
+					echo '</ul>';
+				echo '</div>';
+			}
+		}
+	}
+}
+add_action( 'wp_footer', 'dslc_icons_modal' );
+
+
+/**
+ * Show notice if wrong settings detected in the W3TC plugin
+ *
+ * @since 1.0.7
+ *
+ * Check important settings in the W3TC plugin
+ * to make sure it doesn't break our page builder
+ * with unnecessary page caching or minimization
+ */
+
+function dslc_w3tc_admin_notice() {
+
+	if ( class_exists('W3_Root') ) {
+
+		$w3tc_config = w3_instance('W3_Config');
+
+		$screen = get_current_screen();
+		$current_parent_base = $screen->parent_base;
+
+		$notice_id = 'w3tc_wrong_settings';
+		$display_notice = false;
+		$notice_dismissed = dslc_notice_dismissed($notice_id);
+		$notice_nonce = dslc_generate_notice_nonce($notice_id);
+
+		// Page Cache
+		// Don't cache pages for logged in users
+		$pgcache_reject_logged = $w3tc_config->get_boolean('pgcache.reject.logged');
+
+		//Minify
+		$minify_reject_logged = $w3tc_config->get_boolean('minify.reject.logged');
+
+		//Database cache
+		$dbcache_reject_logged = $w3tc_config->get_boolean('dbcache.reject.logged');
+
+		if ( !$notice_dismissed && ( !$pgcache_reject_logged || !$minify_reject_logged || !$dbcache_reject_logged ) ) {
+			$display_notice = true;
+		}
+
+		if ( $display_notice && $current_parent_base!='dslc_plugin_options' ) {?>
+
+			<div class="notice dslc-notice notice-error is-dismissible" id="<?php echo $notice_id; ?>" data-nonce="<?php echo $notice_nonce; ?>">
+				<p><?php _e( 'There is a problem in W3 Total Cache plugin settings that <strong>can break your page builder</strong>. Luckily, <a href="'. admin_url( 'admin.php?page=dslc_getting_started' ) .'">it\'s easy to fix it</a>.', 'live-composer-page-builder' ); ?></p>
+			</div><?php
+
+		} elseif ( $display_notice && $current_parent_base=='dslc_plugin_options' ) { ?>
+
+				<div class="notice dslc-notice notice-error is-dismissible" id="<?php echo $notice_id; ?>" data-nonce="<?php echo $notice_nonce; ?>">
+					<p><?php _e( 'Wrong <strong>W3 Total Cache plugin</strong> settings can break Live Composer. Please check the next settings:', 'live-composer-page-builder' ); ?></p>
+					<ul style="padding-left: 30px;">
+						<?php if ( !$pgcache_reject_logged ) { ?>
+							<li type="disc"><?php
+								echo ' <a href="' . admin_url( 'admin.php?page=w3tc_pgcache') . '" target="_blank">';
+								_e( 'WP Admin &#8594; Performance &#8594; Page Cache', 'live-composer-page-builder' );
+								echo ' &#8594; ';
+								_e( 'General ', 'live-composer-page-builder' );
+								echo '</a> &#8594;<strong> ';
+								_e( 'Don\'t cache pages for logged in users', 'live-composer-page-builder' );
+								echo '</strong> ';
+								_e( '– should be selected', 'live-composer-page-builder' );
+								?>
+							</li>
+						<?php } ?>
+						<?php if ( !$minify_reject_logged ) { ?>
+							<li type="disc"><?php
+								echo ' <a href="' . admin_url( 'admin.php?page=w3tc_minify') . '" target="_blank">';
+								_e( 'WP Admin &#8594; Performance &#8594; Page Cache', 'live-composer-page-builder' );
+								echo ' &#8594; ';
+								_e( 'Minify ', 'live-composer-page-builder' );
+								echo '</a> &#8594;<strong> ';
+								_e( 'Disable minify for logged in users', 'live-composer-page-builder' );
+								echo '</strong> ';
+								_e( '– should be selected', 'live-composer-page-builder' );
+								?>
+							</li>
+						<?php } ?>
+						<?php if ( !$dbcache_reject_logged ) { ?>
+							<li type="disc"><?php
+								echo ' <a href="' . admin_url( 'admin.php?page=w3tc_dbcache') . '" target="_blank">';
+								_e( 'WP Admin &#8594; Performance &#8594; Page Cache', 'live-composer-page-builder' );
+								echo ' &#8594; ';
+								_e( 'Database Cache ', 'live-composer-page-builder' );
+								echo '</a> &#8594;<strong> ';
+								_e( 'Don\'t cache queries for logged in users', 'live-composer-page-builder' );
+								echo '</strong> ';
+								_e( '– should be selected', 'live-composer-page-builder' );
+								?>
+							</li>
+						<?php } ?>
+					</ul>
+				</div>
+		<?php }
+
+	}
+
+}
+add_action( 'admin_notices', 'dslc_w3tc_admin_notice' );
+
+/**
+ * Show notice if wrong settings detected in WP Admin > General
+ *
+ * @since 1.0.8
+ *
+ * Check settings in WP Admin > General. 
+ * It's recommended to have WordPress Address and Site Address pointing
+ * at the same URL.  Otherwise we can have an issue when WordPress
+ * set authentication cookies for WordPress Address only. 
+ * In this case users can't edit website via front end
+ * as they not logged in as admin there.
+ */
+
+function dslc_check_wpsettings_admin_notice() {
+		$wp_url = get_option( 'siteurl' );
+		$wp_site_url = get_option( 'home' );
+		$check_url = strcmp( $wp_url, $wp_site_url );
+
+		$screen = get_current_screen();
+		$current_parent_base = $screen->parent_base;
+
+		$notice_id = 'wrong_wpsettings_settings';
+		$display_notice = false;
+		$notice_dismissed = dslc_notice_dismissed($notice_id);
+		$notice_nonce = dslc_generate_notice_nonce($notice_id);
+
+
+		if ( !$notice_dismissed && $check_url ) {
+			$display_notice = true;
+		}
+
+		if ( $display_notice && $current_parent_base!='dslc_plugin_options' ) {?>
+
+			<div class="notice dslc-notice notice-error is-dismissible" id="<?php echo $notice_id; ?>" data-nonce="<?php echo $notice_nonce; ?>">
+				<p><?php _e( '<strong>Live Composer:</strong> probably there is a problem with your website settings. <a href="'. admin_url( 'admin.php?page=dslc_getting_started' ) .'">Click here to find out more.</a>', 'live-composer-page-builder' ); ?></p>
+			</div><?php
+
+		} elseif ( $display_notice && $current_parent_base=='dslc_plugin_options' ) { ?>
+
+				<div class="notice dslc-notice notice-error is-dismissible" id="<?php echo $notice_id; ?>" data-nonce="<?php echo $notice_nonce; ?>">
+					<p><?php _e( 'Wrong settings found in <strong><a href="' . admin_url( 'options-general.php') . '" target="_blank">WP Admin &#8594; Settings</a></strong>: <strong>Wordpress Address</strong> and <strong>Site Address</strong> should be the same to make front-editing possible with Live Composer.', 'live-composer-page-builder' ); ?></p>
+				</div>
+		<?php }
+}
+add_action( 'admin_notices', 'dslc_check_wpsettings_admin_notice' );

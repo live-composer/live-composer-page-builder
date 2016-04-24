@@ -1,22 +1,36 @@
 <?php
 /**
- * Basic class for all modules. 
+ * Basic class for all modules.
  * Cannot be instanciated.
  */
- 
+
  /**
   * Class DSLC_Module
+  *   $module_id
+  *   $module_title
+  *   $module_icon
+  *   $module_category
+  *   $module_handle
+  *   $module_like
   */
-class DSLC_Module {
+class DSLC_Module{
+
+	var $optionsArray;
+	var $cache_reset_events = array( 'any' );
+	var $module_id;
+	var $module_title;
+	var $module_icon;
+	var $module_category;
+	var $handle_like;
 
 	/**
 	 * Common options for all modules
-	 * 	
+	 *
 	 * @param  int  $options_id
-	 * @param  boolean $atts       
+	 * @param  boolean $atts
 	 * @return mixed
 	 */
-	function shared_options($options_id, $atts = false) 
+	function shared_options($options_id, $atts = false)
 	{
 
 		$animation_options_choices = array(
@@ -62,7 +76,7 @@ class DSLC_Module {
 			),
 		);
 
-		$animation_options_choices = apply_filters( 'dslc_animation_options', $animation_options_choices );
+		$animation_options_choices = apply_filters('dslc_animation_options', $animation_options_choices);
 
 		$animation_options_general = array(
 
@@ -76,7 +90,7 @@ class DSLC_Module {
 				'choices' => $animation_options_choices
 			),
 			array(
-				'label' => 'On Load Animation - Delay ( ms )',
+				'label' => 'On Load Animation - Delay (ms)',
 				'id' => 'css_anim_delay',
 				'std' => '0',
 				'type' => 'text',
@@ -84,7 +98,7 @@ class DSLC_Module {
 				'tab' => 'animation'
 			),
 			array(
-				'label' => 'On Load Anim - Duration ( ms )',
+				'label' => 'On Load Anim - Duration (ms)',
 				'id' => 'css_anim_duration',
 				'std' => '650',
 				'type' => 'text',
@@ -116,12 +130,12 @@ class DSLC_Module {
 						'value' => 'ease-out'
 					),
 					array(
-						'label' => 'Ease In Out', 
+						'label' => 'Ease In Out',
 						'value' => 'ease-in-out'
 					),
 				)
 			),
-			
+
 		);
 
 		$animation_options_posts = array(
@@ -177,7 +191,7 @@ class DSLC_Module {
 				)
 			),
 			array(
-				'label' => 'On Hover Animation - Speed ( ms )',
+				'label' => 'On Hover Animation - Speed (ms)',
 				'id' => 'css_anim_speed',
 				'std' => '650',
 				'type' => 'text',
@@ -186,11 +200,12 @@ class DSLC_Module {
 			),
 
 		);
-	
+
 		if ( isset( $atts['hover_opts'] ) && ! $atts['hover_opts'] ) {
+
 			$animation_options = $animation_options_general;
-		} else {
-			$animation_options = array_merge( $animation_options_general, $animation_options_posts );
+		} else{
+			$animation_options = array_merge($animation_options_general, $animation_options_posts);
 		}
 
 		$col_choices = array(
@@ -627,7 +642,7 @@ class DSLC_Module {
 		 */
 
 		$heading_options = array(
-			
+
 			array(
 				'label' => 'Main Heading Title',
 				'id' => 'main_heading_title',
@@ -693,7 +708,7 @@ class DSLC_Module {
 				'tab' => 'Heading',
 			),
 			array(
-				'label' => __( 'Title - Letter Spacing', 'live-composer-page-builder' ),
+				'label' => __('Title - Letter Spacing', 'live-composer-page-builder'),
 				'id' => 'css_main_heading_letter_spacing',
 				'std' => '0',
 				'type' => 'slider',
@@ -719,7 +734,7 @@ class DSLC_Module {
 				'ext' => 'px'
 			),
 
-			
+
 			array(
 				'label' => 'Link - Color',
 				'id' => 'css_main_heading_link_color',
@@ -781,7 +796,7 @@ class DSLC_Module {
 				'tab' => 'Heading',
 			),
 			array(
-				'label' => __( 'Link - Letter Spacing', 'live-composer-page-builder' ),
+				'label' => __('Link - Letter Spacing', 'live-composer-page-builder'),
 				'id' => 'css_main_heading_link_letter_spacing',
 				'std' => '0',
 				'type' => 'slider',
@@ -850,7 +865,7 @@ class DSLC_Module {
 					),
 				)
 			),
-			
+
 			array(
 				'label' => 'Margin Bottom',
 				'id' => 'css_heading_margin_bottom',
@@ -1233,7 +1248,7 @@ class DSLC_Module {
 		$carousel_options = array(
 
 			array(
-				'label' => 'Autoplay ( ms )',
+				'label' => 'Autoplay (ms)',
 				'help' => 'The amount of miliseconds between each automatic slide.',
 				'id' => 'carousel_autoplay',
 				'std' => '0',
@@ -1547,7 +1562,7 @@ class DSLC_Module {
 				'tab' => 'Pagination',
 			),
 			array(
-				'label' => __( 'Item - Letter Spacing', 'live-composer-page-builder' ),
+				'label' => __('Item - Letter Spacing', 'live-composer-page-builder'),
 				'id' => 'css_pag_item_letter_spacing',
 				'std' => '0',
 				'type' => 'slider',
@@ -1596,14 +1611,14 @@ class DSLC_Module {
 				'ext' => 'px',
 				'tab' => 'Pagination'
 			),
-			
+
 		);
 
 		/**
 		 * Responsive
 		 */
 		$res_posts_options = array(
-			
+
 			/**
 			 * Smaller Monitor
 			 */
@@ -1740,11 +1755,32 @@ class DSLC_Module {
 				),
 				'tab' => 'phone',
 				'section' => 'responsive'
-			),
-
+			)
 		);
-		
+
 		return $$options_id;
+	}
+
+	/**
+	 * Returns ALL the user options. Used 2 insert common options to ALL modules
+	 * @return array
+	 */
+	function allOptions()
+	{
+		$opts = $this->options();
+
+		$commonOpts = array(
+			array(
+				'label' => 'Module size',
+				'help' => '',
+				'id' => 'dslc_m_size',
+				'std' => '12',
+				'type' => 'text',
+				'visibility' => 'hidden'
+			)
+		);
+
+		return array_merge( $commonOpts, $opts );
 	}
 
 	/**
@@ -1752,39 +1788,52 @@ class DSLC_Module {
  	 */
 	function options()
 	{
-		die('Function "options" must be overrided in a sub-class (the module class).');
+		die( 'Function "options" must be overrided in a sub-class (the module class).' );
 	}
 
 	/**
 	 * The front-end output of the module
 	 */
-	function output($options)
+	function output( $options )
 	{
-		die('Function "output" must be overrided in a sub-class (the module class).');
+		die( 'Function "output" must be overrided in a sub-class (the module class).' );
 	}
 
 	/**
 	 * Renders module. Start part
-	 * 
-	 * @param  array $options 
+	 *
+	 * @param  array $options
 	 */
-	function module_start($options) 
+	function module_start( $options )
 	{
-
 		global $dslc_should_filter;
 		$dslc_should_filter = false;
 
-		if ( ! isset( $options['css_anim'] ) )
-			$options['css_anim'] = 'none';
+		if(isset($options['propValues'])){
 
-		if ( ! isset( $options['css_anim_delay'] ) )
-			$options['css_anim_delay'] = '0';
+			$options = array_merge($options['propValues'], $options);
+			unset($options['propValues']);
+		}
 
-		if ( ! isset( $options['css_anim_duration'] ) )
-			$options['css_anim_duration'] = '650';
+		if(!isset($options['css_anim'])){
 
-		if ( ! isset( $options['css_anim_easing'] ) )
-			$options['css_anim_easing'] = 'default';
+			@$options['css_anim'] = 'none';
+		}
+
+		if(!isset($options['css_anim_delay'])){
+
+			@$options['css_anim_delay'] = '0';
+		}
+
+		if(!isset($options['css_anim_duration'])){
+
+			@$options['css_anim_duration'] = '650';
+		}
+
+		if(!isset($options['css_anim_easing'])){
+
+			@$options['css_anim_easing'] = '';
+		}
 
 		$options['module_id'] = $this->module_id;
 
@@ -1795,43 +1844,60 @@ class DSLC_Module {
 		$class_size_output = '';
 		$data_attr_size = '12';
 
-		if ( isset( $options['dslc_m_size'] ) ) {
+		if ( isset($options['dslc_m_size'] ) ) {
+
 			$class_size_output .= ' dslc-col dslc-' . $options['dslc_m_size'] . '-col';
 			$data_attr_size = $options['dslc_m_size'];
 		}
 
 		if ( isset( $options['dslc_m_size_last'] ) && $options['dslc_m_size_last'] == 'yes' ) {
+
 			$class_size_output .= ' dslc-last-col';
 		}
 
+		if ( isset ( $options['dslc_m_size_fisrt'] ) && $options['dslc_m_size_first'] == 'yes' ) {
+
+			$class_size_output .= ' dslc-first-col';
+		}
+
 		/**
-		 * Show on ( desktop, tablet, phone )
+		 * Show on (desktop, tablet, phone)
 		 */
 
-		$class_show_on = '';
-		if ( isset( $options['css_show_on'] ) ) {
+		$selfOptions = $this->options();
 
-			$show_on = explode( ' ', trim( $options['css_show_on'] ) );
-			
-			if ( ! in_array( 'desktop', $show_on ) )
-				$class_show_on .= 'dslc-hide-on-desktop ';
+		$css_show_on_std = @$selfOptions['css_show_on']['std'];
+		$class_show_on = ( isset( $options['css_show_on'] ) && $options['css_show_on'] != '' ) ? trim( $options['css_show_on'] ) : $css_show_on_std;
+		$show_on = explode( ' ', $class_show_on );
 
-			if ( ! in_array( 'tablet', $show_on ) )
-				$class_show_on .= 'dslc-hide-on-tablet ';
+		if ( ! empty( $show_on ) && $class_show_on != '' ) {
 
-			if ( ! in_array( 'phone', $show_on ) )
-				$class_show_on .= 'dslc-hide-on-phone ';
+			if ( ! in_array( 'desktop', $show_on ) ){
 
+				$class_show_on .= ' dslc-hide-on-desktop ';
+			}
+
+			if ( ! in_array( 'tablet', $show_on ) ) {
+
+				$class_show_on .= ' dslc-hide-on-tablet ';
+			}
+
+			if ( ! in_array( 'phone', $show_on ) ) {
+
+				$class_show_on .= ' dslc-hide-on-phone ';
+			}
 		}
 
 		/**
 		 * Handle like
 		 */
+		if ( isset( $this->handle_like ) ) {
 
-		if ( isset( $this->handle_like ) )
 			$class_handle_like = 'dslc-module-handle-like-' . $this->handle_like;
-		else
+		}else{
+
 			$class_handle_like = 'dslc-module-handle-like-regular';
+		}
 
 		/**
 		 * Globals
@@ -1847,14 +1913,16 @@ class DSLC_Module {
 
 		$title_attr = '';
 		if ( dslc_is_editor_active() ) {
+
 			$title_attr = 'title="' . strtoupper( esc_attr( $this->module_title ) ) .'"';
 		}
 
-		/** 
+		/**
 		 * Option Preset
 		 */
 
-		if ( ! isset( $options['css_load_preset'] ) ) {
+		if ( ! isset($options['css_load_preset'] ) ) {
+
 			$options['css_load_preset'] = '';
 		}
 
@@ -1872,14 +1940,17 @@ class DSLC_Module {
 		$module_class_arr = apply_filters( 'dslc_module_class', $module_class_arr, $this->module_id, $options );
 
 		// Turn module class array into string
-		$module_class = '';
-		foreach ( $module_class_arr as $module_class_inst ) {
-			$module_class .= $module_class_inst . ' ';
-		}
+		$module_class = implode( " ", $module_class_arr );
 
 		?>
 
-		<div id="dslc-module-<?php echo $options['module_instance_id']; ?>" class="<?php echo $module_class; ?>" data-module-id="<?php echo $options['module_instance_id']; ?>" data-dslc-module-id="<?php echo $this->module_id; ?>" data-dslc-module-size="<?php echo $data_attr_size ?>" data-dslc-anim="<?php echo $options['css_anim'] ?>" data-dslc-anim-delay="<?php echo $options['css_anim_delay']; ?>" data-dslc-anim-duration="<?php echo $options['css_anim_duration']; ?>"  data-dslc-anim-easing="<?php echo $options['css_anim_easing']; ?>" data-dslc-preset="<?php echo $options['css_load_preset']; ?>" <?php echo $title_attr; ?>>
+		<div id="dslc-module-<?php echo $options['module_instance_id']; ?>" 
+			class="<?php echo $module_class; ?>" data-module-id="<?php echo $options['module_instance_id']; ?>" 
+			data-dslc-module-id="<?php echo $this->module_id; ?>" data-dslc-module-size="<?php echo $data_attr_size ?>" 
+			data-dslc-anim="<?php echo $options['css_anim'] ?>" data-dslc-anim-delay="<?php echo $options['css_anim_delay']; ?>"
+			 data-dslc-anim-duration="<?php echo $options['css_anim_duration']; ?>"
+			   data-dslc-anim-easing="<?php echo $options['css_anim_easing']; ?>"
+			    data-dslc-preset="<?php echo $options['css_load_preset']; ?>" <?php echo $title_attr; ?>>
 
 			<?php do_action( 'dslc_module_before' ); ?>
 
@@ -1891,31 +1962,29 @@ class DSLC_Module {
 
 					if ( isset( $options['css_custom'] ) && $options['css_custom'] == 'disabled' ) {
 
-						
-
-					} else {
-
 						dslc_generate_custom_css( $options_arr, $options, true );
 						$googlefonts_output = '';
-						foreach ( $dslc_googlefonts_array as $googlefont) {
+
+						foreach ( $dslc_googlefonts_array as $googlefont ) {
 							if ( in_array( $googlefont, $dslc_all_googlefonts_array ) ) {
 								$googlefont = str_replace( ' ', '+', $googlefont );
 								if ( $googlefont != '' ) {
+
 									$googlefonts_output .= '@import url("//fonts.googleapis.com/css?family=' . $googlefont . ':100,200,300,400,500,600,700,800,900&subset=latin,latin-ext"); ';
 								}
 							}
-						}	
+						}
+
 						echo $googlefonts_output;
 						echo $dslc_css_style;
-
 					}
 
 				?></style>
-			
+
 				<div class="dslca-module-manage">
 					<span class="dslca-module-manage-line"></span>
 					<div class="dslca-module-manage-inner">
-						<span class="dslca-module-manage-hook dslca-module-edit-hook"><span class="dslc-icon-cog"></span></span>				
+						<span class="dslca-module-manage-hook dslca-module-edit-hook"><span class="dslc-icon-cog"></span></span>
 						<span class="dslca-module-manage-hook dslca-copy-module-hook"><span class="dslc-icon-copy"></span></span>
 						<span class="dslca-module-manage-hook dslca-move-module-hook"><span class="dslc-icon-move"></span></span>
 						<span class="dslca-module-manage-hook dslca-change-width-module-hook">
@@ -1933,7 +2002,7 @@ class DSLC_Module {
 					</div>
 					<?php if ( DS_LIVE_COMPOSER_DEV_MODE ) : ?>
 						<div class="dslca-module-manage-inner dslca-dev-mode">
-							<span class="dslca-module-manage-hook dslca-module-get-defaults-hook"><span class="dslc-icon-upload-alt"></span></span>				
+							<span class="dslca-module-manage-hook dslca-module-get-defaults-hook"><span class="dslc-icon-upload-alt"></span></span>
 						</div>
 					<?php endif; ?>
 				</div>
@@ -1945,17 +2014,17 @@ class DSLC_Module {
 
 	/**
 	 * Module rendering. End part.
-	 * 
-	 * @param  array $user_options 
+	 *
+	 * @param  array $user_options
 	 */
-	function module_end($user_options) 
+	function module_end( $user_options )
 	{
 		// Get options array
 		$options = $this->options();
-
 		// Bring back IDs for image options
 		global $dslc_var_image_option_bckp;
 		foreach ( $dslc_var_image_option_bckp as $key => $value ) {
+
 			$user_options[$key] = $value;
 		}
 
@@ -1965,21 +2034,16 @@ class DSLC_Module {
 		$option_ids = array();
 		$user_options_no_defaults = $user_options;
 
-		?>
-		<script>
-			DSLC.Modules.<?=$this->module_id?> = JSON.parse('<?=json_encode($options)?>');
-		</script>
-
-			<?php if ( DS_LIVE_COMPOSER_ACTIVE && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) : ?>
+		 if ( DS_LIVE_COMPOSER_ACTIVE && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) : ?>
 
 				<div class="dslca-module-options-front">
 
 					<?php foreach ( $options as $key => $option ) : ?>
 
 						<?php
-							
+
 							// Option ID
-							$option_id = $option['id'];	
+							$option_id = $option['id'];
 							$options_ids[] = $option['id'];
 
 							// If value already set use it, if not use default
@@ -1993,7 +2057,7 @@ class DSLC_Module {
 							}
 
 						?>
-							
+
 						<textarea class="dslca-module-option-front" data-id="<?php echo $option_id; ?>"><?php echo stripslashes ( $option_value ); ?></textarea>
 
 					<?php endforeach; ?>
@@ -2010,7 +2074,7 @@ class DSLC_Module {
 
 				</div><!-- dslca-module-options-front -->
 
-				<textarea class="dslca-module-code"><?php echo base64_encode( serialize($user_options_no_defaults ) ); ?></textarea>
+				<textarea class="dslca-module-code"><?php echo base64_encode( serialize( $user_options_no_defaults ) ); ?></textarea>
 
 				<span class="dslc-sortable-helper-icon dslc-icon-<?php echo $this->module_icon; ?>" data-title="<?php echo $this->module_title; ?>" data-icon="<?php echo $this->module_icon; ?>"></span>
 
@@ -2026,12 +2090,66 @@ class DSLC_Module {
 	}
 
 	/**
+	 * Renders module on front with Smarty Engine
+	 *
+	 * @param string view template
+	 * @return string rendered module view
+	 */
+	function renderModule( $viewFileDir, $options )
+	{
+		/// Caching engine
+
+		$cacheReset = @get_option( 'dslc_module_cache' )[$this->module_id]; /// Get current module cache reset time
+
+		if ( @$this->dynamic_module == true ) {
+
+			$static = @base64_decode( $options['staticHTML'] );
+
+			if ( ! isset( $options['cacheLastReset'] ) || $options['cacheLastReset'] != $cacheReset ) { /// If time saved in module not equal to control value - GENERATE IT!!!
+
+				/// Replace saved funcs aliases with real HTML
+				foreach ( $options['dynamicHTML'] as $name => $dynReplaceFunc ) {
+
+					$funcName = str_replace( "}}", "", $name );
+					$funcName = str_replace( "{{", "", $funcName );
+
+					if ( method_exists( $this, $funcName ) ) {
+
+						$static = str_replace( $name, $this->$funcName(), $static );
+					}
+				}
+			}else{
+
+				/// Everything was done before, how about using cache?
+				/// If front saved smth fill static placeholders
+				if ( isset( $options['dynamicHTML'] ) && is_array( $options['dynamicHTML'] ) && count( $options['dynamicHTML'] ) > 0 ) {
+
+					foreach ( $options['dynamicHTML'] as $name => $dynReplaceFunc ) {
+
+						$static = str_replace( $name, base64_decode( $dynReplaceFunc ), $static );
+					}
+				}
+			}
+
+			return $static;
+		}else{
+
+			return base64_decode( @$options['staticHTML'] );
+		}
+	}
+
+	/**
 	 * Returns presets options
-	 * 
+	 *
 	 * @return array
 	 */
 	function presets_options()
 	{
+		if(isset($this->module_ver) && $this->module_ver == 2){
+
+			return array();
+		}
+
 		$choices = array(
 			array(
 				'label' => 'None',
@@ -2045,7 +2163,7 @@ class DSLC_Module {
 			$presets = array();
 		} else {
 			$presets = maybe_unserialize( $presets );
-			foreach( $presets as $preset ) {
+			foreach ( $presets as $preset ) {
 				if ( $preset['module'] == $this->module_id ) {
 					$choices[] = array(
 						'label' => $preset['title'],
@@ -2057,7 +2175,7 @@ class DSLC_Module {
 
 		$options = array(
 			array(
-				'label' => __( 'Preset', 'live-composer-page-builder' ),
+				'label' => __('Preset', 'live-composer-page-builder'),
 				'id' => 'css_load_preset',
 				'std' => 'none',
 				'type' => 'select',
@@ -2080,12 +2198,97 @@ class DSLC_Module {
 		return $options;
 	}
 
-	static function register()
+	/**
+	 * Resets cache control date
+	 */
+	private function resetModuleCache()
 	{
-		add_action('dslc_hook_register_modules',
-			dslc_register_module(get_called_class());
+		/// Get Cache Events options object
+		$cacheEvents = get_option( 'dslc_module_cache' );
+
+		/// If it wasn't filled before
+		if ( ! is_array( $cacheEvents ) ) {
+
+			$cacheEvents = [];
+		}
+
+		$cacheEvents[$this->module_id] = date( 'U' ); /// Set control timestamp for current module
+
+		update_option( 'dslc_module_cache', $cacheEvents );
+	}
+
+	/**
+	 * Register current module
+	 */
+	public function register()
+	{
+		$class_info = new ReflectionClass( get_called_class() ); /// Class instance without class creation. That's it :)
+		$dirname = dirname( $class_info->getFileName() ); /// Class file directory
+
+		add_action( 'dslc_hook_register_modules',
+			function() use ( $dirname ){ /// Closure feature
+				dslc_register_module( get_called_class(), $dirname );
+			}
 		);
-		
+
+		/// Subscribe for data updates to clean cache if some event fires
+		if ( isset( $this->cache_reset_events ) && is_array( $this->cache_reset_events ) ) {
+
+			$self = $this;
+
+			/// NOT comments
+			foreach ( $this->cache_reset_events as $event )
+			{
+				if ( $event == 'comments' ) continue;
+
+				foreach ( ['post_updated', 'post_save', 'trash_post'] as $actionType )
+				{
+					add_action( $actionType, function( $postID, $postAfter ) use ( $event, $self ) {
+
+						if ( $postAfter->post_type == $event || $event == 'any' ) {
+
+							$self->resetModuleCache();
+						}
+					}, 99, 3 );
+				}
+			}
+
+			/// Comment events
+			if ( in_array( "comments", $this->cache_reset_events ) || in_array( "any", $this->cache_reset_events ) )
+			{
+				foreach ( ['comment_post', 'edit_comment', 'delete_comment'] as $actionType )
+				{
+					add_action( $actionType, function() use ( $self ) {
+
+						$self->resetModuleCache();
+					}, 99, 3 );
+				}
+			}
+		}
+
+		/// Fire custom method for module register
+		if ( method_exists( get_called_class(), 'afterRegister' ) ) {
+
+			$this->afterRegister();
+		}
+	}
+
+	/**
+	 * Renders code for Editor Mode purposes
+	 *
+	 * @return string code inits module in editor mode
+	 */
+	public function renderEditModeModule( $options )
+	{
+		ob_start();
+		?><div class="module-init-block module-init-code-<?php echo $options['module_instance_id']?>">
+			<?php echo base64_encode( json_encode( $options ) ); ?>
+		</div><?php
+
+		$output = ob_get_contents();
+		ob_end_clean();
+
+		return $output;
 	}
 
 }

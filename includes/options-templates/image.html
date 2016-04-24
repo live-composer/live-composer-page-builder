@@ -1,0 +1,16 @@
+<span class="dslca-module-edit-field-image-add-hook" <% if(!(!value || value == '')){%> style="display: none;" <%}%>>
+	<span class="dslca-icon dslc-icon-cloud-upload"></span>
+	<?php _e( 'Upload image', 'live-composer-page-builder' ) ?>
+	</span>
+<span class="dslca-module-edit-field-image-remove-hook" <% if(!(value && value != '')){%> style="display: none;"<%}%>>
+	<span class="dslca-icon dslc-icon-remove"></span>
+	<?php _e( 'Remove Image', 'live-composer-page-builder' ) ?>
+</span>
+
+<span class="dslca-image-filename">
+	<% if(obj.value && value != '' && value.filename){%>
+		<%= value.filename.length <= 13 ? value.filename : value.filename.slice(0, 13) + "..." %>
+		<img src="<%= value.url %>" alt="" onerror="DSLC.optionFieldUtils.image.fixCrashedUrl.apply(this)">
+	<%}%>
+</span>
+<input type="hidden" class="dslca-module-edit-field dslca-module-edit-field-image" name="<%= id %>" data-id="<%= id %>"  <%= obj.affect_on_change_append %> />

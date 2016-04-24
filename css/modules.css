@@ -3,7 +3,7 @@
  */
 
  	#dslc-content .dslc-cpt-post {
-		
+
 	}
 
 		#dslc-content .dslc-cpt-post-main {
@@ -54,7 +54,7 @@
 				}
 
 				#dslc-content .dslc-cpt-post-thumb:hover .dslc-cpt-post-main {
-					
+
 				}
 
 				body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-cpt-post-thumb .dslc-cpt-post-main {
@@ -138,7 +138,7 @@
 			overflow: hidden;
 		}
 
-/** 
+/**
  * BLOG MODULE
  */
 
@@ -147,7 +147,7 @@
  	}
 
 	#dslc-content .dslc-blog-post {
-		
+
 	}
 
 		#dslc-content .dslc-blog-post-main {
@@ -186,7 +186,7 @@
 					top: 0;
 					left: 0;
 					bottom: 0;
-					right: 0;				
+					right: 0;
 				}
 
 				#dslc-content .dslc-blog-post-thumb .dslc-blog-post-main.dslc-blog-post-main-visible {
@@ -198,7 +198,7 @@
 				}
 
 				#dslc-content .dslc-blog-post-thumb:hover .dslc-blog-post-main {
-					
+
 				}
 
 				body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-blog-post-thumb .dslc-blog-post-main {
@@ -281,7 +281,7 @@
 	 * Horizontal Orientation
 	 */
 
-	#dslc-content .dslc-posts-orientation-horizontal {				  
+	#dslc-content .dslc-posts-orientation-horizontal {
 
 	}
 
@@ -305,7 +305,7 @@
 	}
 
 		#dslc-content .dslc-download {
-			
+
 		}
 
 			#dslc-content .dslc-download-thumb {
@@ -350,7 +350,7 @@
 				}
 
 				#dslc-content .dslc-download-thumb:hover .dslc-download-main {
-					
+
 				}
 
 				body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-download-thumb .dslc-download-main {
@@ -432,7 +432,7 @@
 	}
 
 		#dslc-content .dslc-gallery {
-			
+
 		}
 
 			#dslc-content .dslc-gallery-thumb {
@@ -522,7 +522,7 @@
 				}
 
 				#dslc-content .dslc-gallery-thumb:hover .dslc-gallery-main {
-			
+
 				}
 
 				body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-gallery-thumb .dslc-gallery-main {
@@ -540,7 +540,7 @@
 
 					#dslc-content .dslc-gallery-title h2 {
 						font-family: "Brawler";
-						font-size: 11px;		
+						font-size: 11px;
 						line-height: 1;
 						margin: 0;
 						padding: 0;
@@ -583,25 +583,25 @@
  * INFOBOX MODULE
  */
 
-	.dslc-info-box {
+	#dslc-content .dslc-info-box {
 		text-align: center;
-		border: 0px solid transparent;	
+		border: 0px solid transparent;
 		-webkit-transition: all 0.2s ease-in-out;
 		-moz-transition: all 0.2s ease-in-out;
 		transition: all 0.2s ease-in-out;
 	}
 
-		.dslc-info-box-main-wrap {
-			
+		#dslc-content .dslc-info-box-main-wrap {
+
 		}
 
-			.dslc-info-box-image {
+			#dslc-content .dslc-info-box-image {
 				margin-bottom: 25px;
 				position: relative;
 				font-size: 0;
 			}
 
-			.dslc-info-box-image-link {
+			#dslc-content .dslc-info-box-image-link {
 				position: absolute;
 				top: 0;
 				left: 0;
@@ -609,39 +609,46 @@
 				bottom: 0;
 			}
 
-			.dslc-info-box-icon-pos-aside .dslc-info-box-main {
+			#dslc-content .dslc-info-box-icon-pos-aside .dslc-info-box-main {
 				overflow: hidden;
 			}
 
-				.dslc-info-box-icon-pos-aside .dslc-info-box-image {
+				#dslc-content .dslc-info-box-icon-pos-aside .dslc-info-box-image {
 					float: left;
 					margin-right: 20px;
 				}
 
-					.dslc-info-box-image-inner {
+					#dslc-content .dslc-info-box-image-inner {
 						display: inline-block;
 						position: relative;
 						border: 0px solid transparent;
 					}
 
-						.dslc-info-box-image-inner .dslc-icon {
+						#dslc-content .dslc-info-box-image-inner span.dslc-icon {
+						    top: 50%;
+						    left: 50%;
+						    visibility: visible;
+						    transform: translate(-50%, -50%);
+						}
+
+						#dslc-content .dslc-info-box-image-inner .dslc-icon {
 							color: #fff;
 							line-height: 1;
 							font-size: 40px;
 							position: absolute;
 						}
 
-			.dslc-info-box-image-alt-inner img {
+			#dslc-content .dslc-info-box-image-alt-inner img {
 				-webkit-transition: all 0.2s ease-in-out;
 				-moz-transition: all 0.2s ease-in-out;
 				transition: all 0.2s ease-in-out;
 			}
 
-				.dslc-info-box-title {
+				#dslc-content .dslc-info-box-title {
 					margin-bottom: 25px;
 				}
 
-					.dslc-info-box-title h4 {
+					#dslc-content .dslc-info-box-title h4 {
 						font-size: 17px;
 						line-height: 1;
 						margin: 0;
@@ -649,26 +656,26 @@
 						font-weight: 400;
 					}
 
-						.dslc-info-box-title h4 a {
+						#dslc-content .dslc-info-box-title h4 a {
 							color: inherit;
 							text-decoration: none;
 						}
 
-				.dslc-info-box-content {
+				#dslc-content .dslc-info-box-content {
 					margin-bottom: 25px;
 				}
 
-				.dslc-info-box-button {
+				#dslc-content .dslc-info-box-button {
 					font-size: 0;
 				}
 
-				.dslc-info-box-button a {
+				#dslc-content .dslc-info-box-button a {
 					display: inline-block;
 					line-height: 1;
 					text-decoration: none;
 				}
 
-		.dslc-info-box-button-aside {
+		#dslc-content .dslc-info-box-button-aside {
 			float: right;
 		}
 
@@ -677,7 +684,7 @@
  */
 
 	 #dslc-content .dslc-partner {
-		
+
 	}
 
 		#dslc-content .dslc-partner .dslc-partner-thumb {
@@ -691,7 +698,7 @@
 			#dslc-content .dslc-partner .dslc-partner-thumb a {
 				display: inline-block;
 				max-width: 100%;
-			}			
+			}
 
 			#dslc-content .dslc-partner .dslc-partner-thumb img {
 				border-radius: 0;
@@ -730,7 +737,7 @@
 			}
 
 		#dslc-content .dslc-partner .dslc-partner-main {
-			border: 0px solid transparent;	
+			border: 0px solid transparent;
 		}
 
 			#dslc-content .dslc-partner .dslc-partner-title {
@@ -767,7 +774,7 @@
  */
 
 	#dslc-content .dslc-project {
-		
+
 	}
 
 		#dslc-content .dslc-projects .dslc-project-thumb {
@@ -813,7 +820,7 @@
 			}
 
 			#dslc-content .dslc-projects .dslc-project-thumb:hover .dslc-project-main {
-	
+
 			}
 
 			body.dslca-enabled #dslc-content .dslc-projects .dslc-post:first-child .dslc-project-thumb .dslc-project-main {
@@ -821,7 +828,7 @@
 			}
 
 		#dslc-content .dslc-projects .dslc-project-main {
-			border: 0px solid transparent;	
+			border: 0px solid transparent;
 		}
 
 			#dslc-content .dslc-projects .dslc-project-title {
@@ -855,7 +862,7 @@
 				margin-bottom: 22px;
 				font-size: 13px;
 				line-height: 22px;
-				border-top: 0px solid #000;	
+				border-top: 0px solid #000;
 			}
 
 			#dslc-content .dslc-project-read-more {
@@ -886,7 +893,7 @@
 	}
 
 	.dslc-module-DSLC_Separator {
-		
+
 	}
 
 	.dslc-separator.dslc-separator-style-solid {
@@ -894,7 +901,7 @@
 	}
 
 	.dslc-separator.dslc-separator-style-dashed {
-		border-bottom: 1px dashed #ededed;	
+		border-bottom: 1px dashed #ededed;
 	}
 
 	.dslc-separator.dslc-separator-style-dotted {
@@ -906,7 +913,7 @@
  */
 
 	#dslc-content .dslc-staff {
-		
+
 	}
 
 		#dslc-content .dslc-staff-member {
@@ -954,7 +961,7 @@
 				}
 
 				#dslc-content .dslc-staff-member-thumb:hover .dslc-staff-member-main {
-			
+
 				}
 
 				body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-staff-member-thumb .dslc-staff-member-main {
@@ -1010,7 +1017,7 @@
 				}
 
 				#dslc-content .dslc-staff-member-excerpt {
-					
+
 				}
 
 /**
@@ -1023,6 +1030,15 @@
 
 		#dslc-content .dslc-tabs-nav {
 
+		}
+
+		#dslc-content .dslc-tabs-nav-pos-aside .dslc-tabs-nav {
+			float: left;
+			margin-bottom: 0 !important;
+		}
+
+		#dslc-content .dslc-tabs-nav-pos-above .dslc-tabs-nav {
+			margin-right: 0 !important;
 		}
 
 			#dslc-content .dslc-tabs-nav-hook {
@@ -1039,19 +1055,32 @@
 				margin-left: -1px;
 			}
 
+			#dslc-content .dslc-tabs-nav-pos-aside .dslc-tabs-nav-hook {
+				display: block;
+				margin-left: 0 !important;
+			}
+
+			#dslc-content .dslc-tabs-nav-pos-above .dslc-tabs-nav-hook {
+				margin-bottom: 0 !important;
+			}
+
 			#dslc-content .dslc-tabs-nav-hook:first-child {
 				margin-left: 0 !important;
 			}
 
 			#dslc-content .dslc-tabs-nav-hook.dslc-active {
 				background: #fff;
-				
+
 			}
 
 		#dslc-content .dslc-tabs-content {
 			background: #fff;
 			border: 1px solid #e8e8e8;
 			border-radius: 0 3px 3px 3px;
+		}
+
+		#dslc-content .dslc-tabs-nav-pos-aside .dslc-tabs-content {
+			overflow: hidden;
 		}
 
 			#dslc-content .dslc-tabs-tab-content {
@@ -1129,7 +1158,7 @@
 	}
 
 		#dslc-content .dslc-testimonial {
-			
+
 		}
 
 			#dslc-content .dslc-testimonial-main {
@@ -1258,7 +1287,7 @@
 	}
 
 		#dslc-content .dslc-product {
-			
+
 		}
 
 			#dslc-content .dslc-product-thumb {
@@ -1351,7 +1380,7 @@
 				}
 
 				#dslc-content .dslc-products .dslc-product-thumb:hover .dslc-product-main {
-		
+
 				}
 
 				body.dslca-enabled #dslc-content .dslc-products .dslc-post:first-child .dslc-product-thumb .dslc-product-main {
@@ -1376,11 +1405,7 @@
 						font-size: 20px;
 						line-height: 1;
 						font-family: "Oswald";
-					}	
-
-						#dslc-content .dslc-product-price-secondary del {
-							display: none;
-						}
+					}
 
 						#dslc-content .dslc-product-price-secondary ins {
 							text-decoration: none;
@@ -1549,7 +1574,7 @@
 		}
 
 	#dslc-content .dslc-tp-gallery-slider-arrows {
-		
+
 	}
 
 /**
@@ -1593,6 +1618,13 @@
 				position: absolute;
 			}
 
+			#dslc-content .dslc-social-icon span.dslc-icon {
+			    top: 50%;
+			    left: 50%;
+			    visibility: visible;
+			    transform: translate(-50%, -50%);
+			}
+
 		#dslc-content ul.dslc-social .dslc-social-label {
 			float: left;
 			display: block;
@@ -1629,7 +1661,7 @@
 
 			#dslc-content ul.dslc-staff-social .dslc-icon {
 				line-height: 1;
-				position: absolute;				
+				position: absolute;
 			}
 
 		#dslc-content ul.dslc-staff-social .dslc-social-label {
@@ -1648,7 +1680,7 @@
 	border-radius: 3px;
 	color: #fff;
 }
-	
+
 	.dslc-notification-box-has-timeout {
 		display: none;
 	}
@@ -1691,7 +1723,7 @@
 	overflow: hidden;
 }
 
-	#dslc-content .dslc-button a {		
+	#dslc-content .dslc-button a {
 		display: inline-block;
 		text-decoration: none;
 		line-height: 1;
@@ -1784,7 +1816,7 @@
 .dslc-tp-comment-form {
 	border: 0 solid transparent;
 }
-	
+
 	.dslc-tp-comment-form input[type="text"] {
 		line-height: 1;
 	}
@@ -1815,12 +1847,29 @@
  * Image Module
  */
 
-.dslc-image {
-
+.dslc-image > a {
+    display: inline-block;
+    overflow: hidden;
+	width: 100%;
+    position: relative;
+}
+.dslc-image .dslc-notification.dslc-red{
+	text-align: center;
 }
 
+	.dslc-image .image-design-wrapper {
+		overflow: hidden;
+		display: inline-block;
+    	position: relative;
+	}
+	.dslc-image .image-design-wrapper img.image_resize {
+	    position: absolute;
+	    transform: translateY(-50%);
+	    top: 50%;
+	    left: 0;
+	}
 	.dslc-image img {
-		max-width: 100%;
+		max-width: none;
 		display: inline-block;
 		vertical-align: middle;
 	}
@@ -1829,34 +1878,34 @@
  * Progress Bar
  */
 
-.dslc-progress-bar {
+#dslc-content .dslc-progress-bar {
 	border: 0 solid transparent;
 }
 
-	.dslc-progress-bar-label {
+	#dslc-content .dslc-progress-bar-label {
 		margin: 0;
 		padding: 0;
 		line-height: 1;
 	}
 
-	.dslc-progress-bar-loader {
+	#dslc-content .dslc-progress-bar-loader {
 		background: #666;
 		display: block;
 		height: 18px;
 	}
 
-		.dslc-progress-bar-loader-inner {
+		#dslc-content .dslc-progress-bar-loader-inner {
 			display: block;
 			float: left;
 			overflow: hidden;
 			white-space: nowrap;
 		}
 
-		.dslc-progress-bar-animated .dslc-progress-bar-loader-inner {
+		#dslc-content .dslc-progress-bar-animated .dslc-progress-bar-loader-inner {
 			opacity: 0;
 		}
 
-		.dslca-enabled .dslc-progress-bar-animated .dslc-progress-bar-loader-inner {
+		#dslc-content .dslca-enabled .dslc-progress-bar-animated .dslc-progress-bar-loader-inner {
 			opacity: 1;
 		}
 
@@ -1869,7 +1918,7 @@
 }
 
 	.dslc-accordion-item {
-		
+
 	}
 
 	.dslc-accordion-item:first-child {
@@ -1934,7 +1983,7 @@
 			top: 5px;
 			right: 6px;
 		}
-			
+
 	.dslca-accordion-action-hooks {
 		position: absolute;
 		right: 14px;
@@ -1958,10 +2007,10 @@
 			font-size: 12px;
 			margin-left: 10px;
 			line-height: 1;
-			vertical-align: top;	
+			vertical-align: top;
 		}
 
-/** 
+/**
  * Icon
  */
 
@@ -1971,7 +2020,7 @@
 }
 
 	.dslc-icon-module .dslc-icon {
-		
+
 	}
 
 /**
@@ -2038,7 +2087,7 @@
 		}
 
 	/* Inner level menu ul */
-	.dslc-navigation .menu ul {		
+	.dslc-navigation .menu ul {
 		border-style: solid;
 		display: none;
 		list-style-type: none;
@@ -2087,7 +2136,7 @@
 		}
 
 			/* Inner level menu a */
-			.dslc-navigation .menu ul li a {				
+			.dslc-navigation .menu ul li a {
 				display: block;
 				line-height: 1;
 				text-decoration: none;
@@ -2194,7 +2243,7 @@ body.dslc-res-phone .dslc-post-main-inner-link-cover {
 .dslc-posts-social-share {
 	line-height: 1;
 }
-	
+
 	.dslc-posts-social-share a:last-child {
 		margin-right: 0 !important;
 	}

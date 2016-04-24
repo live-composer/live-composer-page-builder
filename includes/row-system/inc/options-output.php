@@ -43,11 +43,11 @@
 				<span class="dslca-modules-section-edit-label"><?php echo $row_option['label']; ?></span>
 
 				<?php if ( $row_option['type'] == 'text' ) : ?>
-					
+
 					<input type="text" class="dslca-modules-section-edit-field" data-id="<?php echo $row_option['id']; ?>" <?php echo $css_element_output . ' ' . $css_rule_output; ?> />
 
 				<?php elseif ( $row_option['type'] == 'select' ) : ?>
-					
+
 					<select type="text" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-select" data-id="<?php echo $row_option['id']; ?>" <?php echo $css_element_output . ' ' . $css_rule_output; ?> >
 						<?php foreach ( $row_option['choices'] as $choice ) : ?>
 							<option value="<?php echo $choice['value']; ?>"><?php echo $choice['label']; ?></option>
@@ -147,7 +147,7 @@
 		// Go through each option and append HTML
 		if ( $atts ) {
 			foreach ( $dslc_var_row_options as $row_option ) {
-				if ( isset( $atts[$row_option['id']] ) ) 
+				if ( isset( $atts[$row_option['id']] ) )
 					$output .= '<input type="text" data-id="' . $row_option['id'] . '" value="'. $atts[$row_option['id']] .'" data-def="'. $atts[$row_option['id']] .'">';
 				else
 					$output .= '<input type="text" data-id="' . $row_option['id'] . '" value="'. $row_option['std'] .'" data-def="'. $row_option['std'] .'">';
@@ -173,8 +173,8 @@
 
 		// Loop through all options
 		foreach ( $dslc_var_row_options as $row_option ) {
-			
-			// If there's an el then it's not for the section div			
+
+			// If there's an el then it's not for the section div
 			if ( ! isset( $row_option['affect_on_change_el'] ) ) {
 
 				// The CSS rules
@@ -239,7 +239,7 @@
 
 				}
 
-			} 
+			}
 
 		}
 
@@ -263,8 +263,8 @@
 
 		// Loop through all options
 		foreach ( $dslc_var_row_options as $row_option ) {
-			
-			// If there's an el then it's not for the section div			
+
+			// If there's an el then it's not for the section div
 			if ( ! isset( $row_option['affect_on_change_el'] ) ) {
 
 				// The CSS rules
@@ -325,7 +325,7 @@
 
 				}
 
-			} 
+			}
 
 		}
 

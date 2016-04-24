@@ -7,6 +7,10 @@
  * - dslc_add_post_options ( Adds metaboxes )
  * - dslc_display_post_options ( Displays options )
  * - dslc_save_post_options ( Saves options to post )
+ * - dslc_page_add_row_action ( Adds action in row )
+ * - dslc_post_add_row_action ( Adds action in row )
+ * - dslc_add_button_permalink ( Adds button in permalink )
+ * - dslc_post_submitbox_add_button ( Adds button in submitbox )
  */
 
 function dslc_get_cpt_templates() {
@@ -31,7 +35,7 @@ function dslc_get_cpt_templates() {
 	}
 
 	if ( $templates ) {
-		
+
 		foreach ( $templates as $template ) {
 			$template_for = get_post_meta( $template->ID, 'dslc_template_for' , true );
 			$templates_array[$template_for][] = array(
@@ -88,14 +92,14 @@ function dslc_setup_post_options() {
  */
 function dslc_add_post_options() {
 
-	global $dslc_var_post_options; 
+	global $dslc_var_post_options;
 
 	// If there are post options
 	if ( ! empty( $dslc_var_post_options ) ) {
 
 		// Loop through all post options
 		foreach ( $dslc_var_post_options as $dslc_post_option_key => $dslc_post_option) {
-			
+
 			if ( ! isset( $dslc_post_option['context'] ) )
 				$dslc_post_option['context'] = 'normal';
 
@@ -196,6 +200,16 @@ function dslc_display_post_options( $object, $metabox ) {
 							<?php endforeach; ?>
 						</select>
 
+						<?php
+							global $current_screen;
+
+							$template = dslc_st_get_template_ID( get_the_ID() );
+
+							if ( $current_screen->action != 'add' && $object->post_type != 'dslc_templates' ) {
+								echo '<a class="button" href="'. get_home_url() . '/?page_id=' . $template  .'&dslc=active">'. __( 'Edit Template', 'live-composer-page-builder' ) .'</a>';
+							}
+						?>
+
 					<?php elseif ( $post_option['type'] == 'checkbox' ) : ?>
 
 						<?php $curr_value_array = maybe_unserialize( $curr_value_no_esc ); if ( ! is_array( $curr_value_array ) ) $curr_value_array = array(); ?>
@@ -221,13 +235,13 @@ function dslc_display_post_options( $object, $metabox ) {
 						<?php if ( $curr_value ) : ?>
 
 							<div class="dslca-post-options-images dslca-clearfix">
-								
+
 								<div class="dslca-post-option-image">
-										
+
 									<div class="dslca-post-option-image-inner">
 
 										<?php if ( wp_attachment_is_image( $curr_value ) ) : ?>
-											
+
 											<?php $image = wp_get_attachment_image_src( $curr_value, 'full' ); ?>
 											<img src="<?php echo $image[0]; ?>" />
 
@@ -240,7 +254,7 @@ function dslc_display_post_options( $object, $metabox ) {
 									</div><!-- .dslca-post-option-image-inner -->
 
 									<span class="dslca-post-option-image-remove">x</span>
-									
+
 								</div><!-- .dslca-post-option-image -->
 
 							</div><!-- .dslca-post-options-images -->
@@ -256,10 +270,10 @@ function dslc_display_post_options( $object, $metabox ) {
 
 						<?php if ( $curr_value ) : ?>
 							<div class="dslca-post-options-images dslca-clearfix">
-								<?php 
+								<?php
 									$images = explode( ' ', trim( $curr_value ) );
 									foreach ($images as $image_ID) {
-										$image = wp_get_attachment_image_src( $image_ID, 'full' ); 
+										$image = wp_get_attachment_image_src( $image_ID, 'full' );
 										?>
 										<div class="dslca-post-option-image" data-id="<?php echo $image_ID; ?>">
 											<div class="dslca-post-option-image-inner">
@@ -315,12 +329,12 @@ function dslc_save_post_options( $post_id, $post ) {
 			$post_options = $dslc_var_post_options[$post_options_ID];
 
 			foreach ( $post_options['options'] as $post_option ) {
-				
+
 				// Get option info
 				$meta_key = $post_option['id'];
 				$new_option_value = ( isset( $_POST[ $post_option['id'] ] ) ? $_POST[ $post_option['id'] ] : '' );
 				$curr_option_value = get_post_meta( $post_id, $meta_key, true );
-				
+
 				if ( is_array( $new_option_value ) ) {
 					$new_option_value = serialize( $new_option_value );
 				}
@@ -340,4 +354,97 @@ function dslc_save_post_options( $post_id, $post ) {
 
 	}
 
+}
+
+/**
+ * Adds action in row
+ */
+
+function dslc_page_add_row_action( $actions, $page_object ) {
+
+	$page_status = $page_object->post_status;
+	$id = $page_object->ID;
+
+	if ( $page_status != 'trash' ) {
+		$actions = array('edit-in-live-composer' => '<a href="'. get_home_url() . '/?page_id=' . $id . '&dslc=active">'. __( 'Edit in Live Composer', 'live-composer-page-builder' ) .'</a>') + $actions;
+	}
+
+	return $actions;
+}
+add_filter('page_row_actions', 'dslc_page_add_row_action', 10, 2);
+
+function dslc_post_add_row_action( $actions, $post ) {
+
+	global $dslc_var_templates_pt;
+
+	$post_status = $post->post_status;
+	$post_type = $post->post_type;
+
+	if ( $post_status != 'trash' && $post_type == 'page' ) {
+		$actions = array('edit-in-live-composer' => '<a href="'. get_home_url() . '/?page_id=' . $post->ID . '&dslc=active">'. __( 'Edit in Live Composer', 'live-composer-page-builder' ) .'</a>') + $actions;
+		/*
+		if ( array_key_exists( $post_type, $dslc_var_templates_pt ) ) {
+			$template_id = dslc_st_get_template_ID( $post->ID );
+			$actions = array('edit-in-live-composer' => '<a href="'. get_home_url() . '/?page_id=' . $template_id . '&dslc=active">'. __( 'Edit Template', 'live-composer-page-builder' ) .'</a>') + $actions;
+		} else {
+			$actions = array('edit-in-live-composer' => '<a href="'. get_home_url() . '/?page_id=' . $post->ID . '&dslc=active">'. __( 'Edit in Live Composer', 'live-composer-page-builder' ) .'</a>') + $actions;
+		}
+		*/
+	}
+
+    return $actions;
+}
+add_filter('post_row_actions','dslc_post_add_row_action', 10, 2);
+
+/**
+ * Adds button in permalink
+ */
+
+function dslc_add_button_permalink( $return, $id, $new_title, $new_slug ) {
+
+	global $dslc_var_templates_pt;
+
+	$current_post_type = get_post_type( $id );
+
+	if ( !array_key_exists( $current_post_type, $dslc_var_templates_pt ) ) {
+		$return .= '<a class="button button-small" href="'. get_home_url() . '/?page_id=' . $id . '&dslc=active">'. __( 'Open in Live Composer', 'live-composer-page-builder' ) .'</a>';
+	}
+
+	return $return;
+
+}
+add_filter( 'get_sample_permalink_html', 'dslc_add_button_permalink', 10, 4 );
+
+/**
+ * Adds button in submitbox
+ */
+
+function dslc_post_submitbox_add_button() {
+
+	global $post, $current_screen, $dslc_var_templates_pt;
+
+	$current_post_type = $post->post_type;
+
+	if ( $current_screen->action != 'add' && !array_key_exists( $current_post_type, $dslc_var_templates_pt ) ) {
+		echo '<a class="button button-hero" href="'. get_home_url() . '/?page_id=' . get_the_ID() . '&dslc=active">'. __( 'Open in Live Composer', 'live-composer-page-builder' ) .'</a>';
+	}
+
+}
+add_action( 'post_submitbox_start', 'dslc_post_submitbox_add_button' );
+
+/**
+ * Creates a tab for pages and different post types
+ */
+
+add_filter('the_editor', 'dslc_tab_content');
+function dslc_tab_content( $content ) {
+	if ( get_post_type( get_the_ID() ) == 'page' && is_admin() ) {
+?>
+	<div id="lc_content_wrap">
+			<h2> <?php _e( 'Edit this page in Live Composer', 'live-composer-page-builder' ); ?></h2>
+			<div class="description"><?php _e( 'Page builder stores content in a compressed way <br>(better for speed, security and user experience)', 'live-composer-page-builder' ); ?></div>
+			<p><a class="button button-primary button-hero" href="<?php echo get_home_url() . '/?page_id=' . get_the_ID() . '&dslc=active'; ?>"><?php echo __( 'Open in Live Composer', 'live-composer-page-builder' ); ?></a></p>
+	</div>
+<?php }
+	return $content;
 }

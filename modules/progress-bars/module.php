@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Progress Bars module class
+ */
+
+/**
+ * Class DSLC_Progress_Bars
+ *
+ * @inherited
+ */
+
 class DSLC_Progress_Bars extends DSLC_Module {
 
 	var $module_id;
@@ -9,14 +19,18 @@ class DSLC_Progress_Bars extends DSLC_Module {
 
 	function __construct() {
 
-		$this->module_id = 'DSLC_Progress_Bars';
+		$this->module_ver = 2;
+		$this->module_id = __CLASS__;
 		$this->module_title = __( 'Progress Bar', 'live-composer-page-builder' );
 		$this->module_icon = 'tasks';
 		$this->module_category = 'elements';
 
 	}
 
-	function options() {	
+	/**
+	 * @inherited
+	 */
+	function options() {
 
 		$dslc_options = array(
 
@@ -780,7 +794,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 			),
 
 		);
-	
+
 		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array( 'hover_opts' => false ) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
@@ -790,52 +804,10 @@ class DSLC_Progress_Bars extends DSLC_Module {
 
 	function output( $options ) {
 
-		global $dslc_active;
-
-		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
-			$dslc_is_admin = true;
-		else
-			$dslc_is_admin = false;
-
 		$this->module_start( $options );
 
-		/* Module output starts here */
-
-			$wrapper_class = '';
-
-			if ( $options['animation'] == 'enabled' )
-				$wrapper_class .= 'dslc-progress-bar-animated ';
-			
-			?>
-
-				<div class="dslc-progress-bar <?php echo $wrapper_class; ?>">
-
-					<?php if ( $options['label_position'] == 'above' ) : ?>
-
-						<?php if ( $dslc_is_admin ) : ?>
-							<h4 class="dslc-progress-bar-label dslca-editable-content" data-id="label" data-type="simple" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?>><?php echo $options['label']; ?></h4>
-						<?php else : ?>
-							<h4 class="dslc-progress-bar-label"><?php echo $options['label']; ?></h4>
-						<?php endif; ?>
-
-					<?php endif; ?>
-
-					<span class="dslc-progress-bar-loader">
-						<span class="dslc-progress-bar-loader-inner dslc-in-viewport" data-amount="<?php echo $options['amount']; ?>" data-speed="<?php echo $options['animation_speed']; ?>">
-							<?php if ( $options['label_position'] == 'inside' ) : ?>
-								<?php if ( $dslc_is_admin ) : ?>
-									<h4 class="dslc-progress-bar-label dslca-editable-content" data-id="label" data-type="simple" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?>><?php echo $options['label']; ?></h4>
-								<?php else : ?>
-									<h4 class="dslc-progress-bar-label"><?php echo $options['label']; ?></h4>
-								<?php endif; ?>
-							<?php endif; ?>
-						</span>
-					</span><!-- .dslc-progress-bar-loader -->
-
-				</div><!-- .dslc-progress-bar -->
-
-			<?php
-
+		/* Module output stars here */
+		echo $this->renderModule( __DIR__, $options );
 		/* Module output ends here */
 
 		$this->module_end( $options );
@@ -843,3 +815,6 @@ class DSLC_Progress_Bars extends DSLC_Module {
 	}
 
 }
+
+/// Register module
+( new DSLC_Progress_Bars )->register();

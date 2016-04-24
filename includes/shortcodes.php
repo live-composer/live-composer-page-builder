@@ -110,7 +110,7 @@ function dslc_sc_icon( $atts, $content ) {
 	// Return Icon HTML
 	return '<span class="dslc-icon dslc-icon-' . $id . ' dslc-icon-sc"></span>';
 
-} add_shortcode( 'dslc_icon', 'dslc_sc_icon' ); 
+} add_shortcode( 'dslc_icon', 'dslc_sc_icon' );
 
 /**
  * User Avatar Shortcode
@@ -140,7 +140,7 @@ function dslc_sc_user_avatar( $atts, $content ) {
 		return '<a href="' . $url . '" target="' . $target. '"><span class="dslc-sc-user-avatar">' . get_avatar( get_current_user_id(), $size ) . '</span></a>';
 	}
 
-} add_shortcode( 'dslc_user_avatar', 'dslc_sc_user_avatar' ); 
+} add_shortcode( 'dslc_user_avatar', 'dslc_sc_user_avatar' );
 
 /**
  * Category Description Shortcode
@@ -167,7 +167,7 @@ function dslc_sc_category_description( $atts, $content ) {
 	// Get category description
 	$category_description = category_description( $category_ID );
 
-	// Placeholder description 
+	// Placeholder description
 	if ( ! is_category() && empty( $category_description ) && dslc_is_editor_active( 'access' ) ) {
 		$category_description = __( 'Category description will be shown here.', 'live-composer-page-builder' );
 	}
@@ -175,4 +175,4 @@ function dslc_sc_category_description( $atts, $content ) {
 	// Return category description
 	return $category_description;
 
-} add_shortcode( 'dslc_category_description', 'dslc_sc_category_description' ); 
+} add_shortcode( 'dslc_category_description', 'dslc_sc_category_description' );

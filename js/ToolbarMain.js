@@ -2,26 +2,20 @@
  * Toolbar main file
  */
 
-'use strict'
-
-var DSLC = {
-	Modules: {},
-	ActiveModules: {},
-	Renderer: ''
-};
+'use strict';
 
 
-DSLC.Renderer = function()
-{
-	this.renderOption = function(curr_value, params)
-	{
-		var tplText = document.getElementById("option-template-" + params.type).innerHTML;
-		var tpl = new jSmart( tplText );
-		var res = tpl.fetch( data );
+// DSLC.Renderer = function()
+// {
+// 	this.renderOption = function(curr_value, params)
+// 	{
+// 		var tplText = document.getElementById("option-template-" + params.type).innerHTML;
+// 		var tpl = new jSmart( tplText );
+// 		var res = tpl.fetch( data );
 
-		/* or fetch straigth from JavaScript string */
-		var res = document.getElementById('test_tpl').innerHTML.fetch(data);
+// 		/* or fetch straigth from JavaScript string */
+// 		var res = document.getElementById('test_tpl').innerHTML.fetch(data);
 
-		document.write( res );
-	}
-}
+// 		document.write( res );
+// 	}
+// }

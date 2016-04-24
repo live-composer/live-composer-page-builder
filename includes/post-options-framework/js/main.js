@@ -33,7 +33,7 @@ jQuery(document).ready(function(){
 
 		jQuery('.dslca-post-option-field-files .dslca-post-options-images').sortable({
 			update: function (e, ui) {
-				dslc_po_generate_images_code( jQuery(this).closest('.dslca-post-option') );	
+				dslc_po_generate_images_code( jQuery(this).closest('.dslca-post-option') );
 			}
 		});
 		jQuery('.dslca-post-options-images').disableSelection();
@@ -67,25 +67,25 @@ jQuery(document).ready(function(){
 
 		// When an image is selected, run a callback.
 		file_frame.on( 'select', function() {
-			
+
 			if ( multiple ) {
-				
+
 				attachments = file_frame.state().get('selection').toJSON();
 				attachmentVal = '';
-				
+
 				for (var i = 0; i < attachments.length; i++) {
-					
-					attachment = attachments[i];					
+
+					attachment = attachments[i];
 					attachmentVal += attachment.id + ' ';
 					option.find('.dslca-post-options-images').append('<div class="dslca-post-option-image" data-id="' + attachment.id + '"><div class="dslca-post-option-image-inner"><img src="' + attachment.url + '" /><span class="dslca-post-option-image-remove">x</span></div></div>');
-					
+
 				}
 
 				field.val( field.val() + attachmentVal );
 
 			} else {
 				attachment = file_frame.state().get('selection').first().toJSON();
-					
+
 				if ( attachment.type == 'image' ) {
 
 					if ( image.length ) {
@@ -116,4 +116,36 @@ jQuery(document).ready(function(){
 
 	});
 
-});
+	/**
+	 * Add new tab called Page Builder
+	 * next to Visual and Text in WP Edtior
+	 */
+
+	if ( typeof tabData !== 'undefined' ) {
+		var $bar = jQuery('<div></div>');
+		$bar.addClass('quicktags-toolbar-lc');
+		$wrap = jQuery('#lc_content_wrap');
+		$wrap.prepend($bar);
+
+		jQuery('#wp-content-editor-tools #content-html').after(
+		  '<button type="button" id="content-lc" class="wp-switch-editor switch-lc">' + tabData.tabTitle + '</button>'
+		);
+	}
+
+	// Overlay WP editor with LC Page Builder tab if there is LC content AND there is no content in standard editor
+	if ( jQuery('#postcustom input[value="dslc_code"]').val() == 'dslc_code' && jQuery('.wp-editor-area').text().length == 0 ) {
+		jQuery('#wp-content-wrap').removeClass('html-active tmce-active');
+		jQuery('#postdivrich').addClass('lc-active');
+	}
+
+	jQuery(document).on('click', '#content-lc', function(e) {
+	  e.preventDefault();
+	  jQuery('.wp-editor-expand').addClass('lc-active');
+	});
+
+	jQuery(document).on('click', '#content-tmce, #content-html', function(e) {
+	  e.preventDefault();
+	  jQuery('.wp-editor-expand').removeClass('lc-active');
+	});
+
+}); // jQuery(document).ready

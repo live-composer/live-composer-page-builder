@@ -60,6 +60,7 @@ class DSLC_Posts extends DSLC_Module {
 				'type' => 'select',
 				'choices' => $post_types_choices
 			),
+
 			array(
 				'label' => __( 'Type', 'live-composer-page-builder' ),
 				'id' => 'type',
@@ -213,57 +214,23 @@ class DSLC_Posts extends DSLC_Module {
 				'type' => 'text',
 			),
 
-			// Query Altering
+			// Archive Listinging
 			array(
-				'label' => __( 'On Author Archive', 'live-composer-page-builder' ),
-				'id' => 'query_alter_author',
+				'label' => __( 'Archive/Search Listing', 'live-composer-page-builder' ),
+				'id' => 'query_alter',
 				'std' => 'enabled',
 				'type' => 'select',
 				'choices' => array(
 					array(
-						'label' => __( 'Show Posts Of That Author', 'live-composer-page-builder' ),
+						'label' => __( 'Apply Page Query', 'live-composer-page-builder' ),
 						'value' => 'enabled'
 					),
 					array(
-						'label' => __( 'Do NOT Alter Query', 'live-composer-page-builder' ),
+						'label' => __( 'Ignore Page Query', 'live-composer-page-builder' ),
 						'value' => 'disabled'
 					),
 				),
-				'tab' => __( 'Query Alter', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'On Category/Tag Archive', 'live-composer-page-builder' ),
-				'id' => 'query_alter_cat',
-				'std' => 'enabled',
-				'type' => 'select',
-				'choices' => array(
-					array(
-						'label' => __( 'Show Posts Of That Category/Tag', 'live-composer-page-builder' ),
-						'value' => 'enabled'
-					),
-					array(
-						'label' => __( 'Do NOT Alter Query', 'live-composer-page-builder' ),
-						'value' => 'disabled'
-					),
-				),
-				'tab' => __( 'Query Alter', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'On Search Results Page', 'live-composer-page-builder' ),
-				'id' => 'query_alter_search',
-				'std' => 'enabled',
-				'type' => 'select',
-				'choices' => array(
-					array(
-						'label' => __( 'Show Posts Matching Search Term', 'live-composer-page-builder' ),
-						'value' => 'enabled'
-					),
-					array(
-						'label' => __( 'Do NOT Alter Query', 'live-composer-page-builder' ),
-						'value' => 'disabled'
-					),
-				),
-				'tab' => __( 'Query Alter', 'live-composer-page-builder' ),
+				'help' => __( 'Apply Page Query – show posts according to the selected tag, category, author or search query.<br /> Ignore Page Query – ignore the page query and list posts as on any other page.', 'live-composer-page-builder' ),
 			),
 
 			/* Styling */
@@ -2283,9 +2250,9 @@ class DSLC_Posts extends DSLC_Module {
 			// Exclude query parameter
 			if ( ! empty( $exclude ) )
 				$args['post__not_in'] = $exclude;
-			
+
 			// Author archive page
-			if ( is_author() && $options['query_alter_author'] == 'enabled' ) {
+			if ( is_author() && $options['query_alter'] == 'enabled' ) {
 				global $authordata;
 				$args['author__in'] = array( $authordata->data->ID );
 			}
@@ -2299,10 +2266,7 @@ class DSLC_Posts extends DSLC_Module {
 				$args['ignore_sticky_posts'] = true;
 
 			// Do the query
-			if ( ( is_category() || is_tag() || is_tax() ) && $options['query_alter_cat'] == 'enabled' ) {
-				global $wp_query;
-				$dslc_query = $wp_query;
-			} elseif ( is_search() && $options['query_alter_search'] == 'enabled' ) {
+			if ( ( is_category() || is_tag() || is_tax() || is_search() || is_date() ) && $options['query_alter'] == 'enabled' ) {
 				global $wp_query;
 				$dslc_query = $wp_query;
 			} else {

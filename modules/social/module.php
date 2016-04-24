@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Social module class
+ */
+
+/**
+ * Class DSLC_Social
+ *
+ * @inherited
+ */
+
 class DSLC_Social extends DSLC_Module {
 
 	var $module_id;
@@ -9,13 +19,17 @@ class DSLC_Social extends DSLC_Module {
 
 	function __construct() {
 
-		$this->module_id = 'DSLC_Social';
+		$this->module_ver = 2;
+		$this->module_id = __CLASS__;
 		$this->module_title = __( 'Social', 'live-composer-page-builder' );
 		$this->module_icon = 'twitter';
 		$this->module_category = 'elements';
 
 	}
 
+	/**
+	 * @inherited
+	 */
 	function options() {	
 
 		$dslc_options = array(
@@ -283,7 +297,7 @@ class DSLC_Social extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.ul.dslc-social',
+				'affect_on_change_el' => 'ul.dslc-social',
 				'affect_on_change_rule' => 'min-height',
 				'section' => 'styling',
 				'ext' => 'px',
@@ -697,163 +711,24 @@ class DSLC_Social extends DSLC_Module {
 
 	}
 
-	function output( $options ) {		
+	
+	/**
+	 * @inherited
+	 */
+	function output( $options )
+	{
+		global $dslc_active;
 
 		$this->module_start( $options );
 
-		/* Module output starts here */
-			
-			?>
-
-			<div class="dslc-social-wrap">
-
-				<ul class="dslc-social">
-					<?php if ( isset( $options['twitter'] ) && $options['twitter'] != '' ) : ?>
-						<li>
-							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['twitter']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-twitter"></span></a>
-							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['twitter']; ?>"><span><?php _e( 'Twitter', 'live-composer-page-builder' ); ?></span></a>
-							<?php endif; ?>
-						</li>
-					<?php endif; ?>
-					<?php if ( isset( $options['facebook'] ) && $options['facebook'] != '' ) : ?>
-						<li>
-							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['facebook']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-facebook"></span></a>
-							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['facebook']; ?>"><span><?php _e( 'Facebook', 'live-composer-page-builder' ); ?></span></a>
-							<?php endif; ?>
-						</li>
-					<?php endif; ?>
-					<?php if ( isset( $options['youtube'] ) && $options['youtube'] != '' ) : ?>
-						<li>
-							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['youtube']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-youtube-play"></span></a>
-							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['youtube']; ?>"><span><?php _e( 'Youtube', 'live-composer-page-builder' ); ?></span></a>
-							<?php endif; ?>
-						</li>
-					<?php endif; ?>
-					<?php if ( isset( $options['vimeo'] ) && $options['vimeo'] != '' ) : ?>
-						<li>
-							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['vimeo']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-vimeo-square"></span></a>
-							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['vimeo']; ?>"><span><?php _e( 'Vimeo', 'live-composer-page-builder' ); ?></span></a>
-							<?php endif; ?>
-						</li>
-					<?php endif; ?>
-					<?php if ( isset( $options['tumblr'] ) && $options['tumblr'] != '' ) : ?>
-						<li>
-							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['tumblr']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-tumblr"></span></a>
-							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['tumblr']; ?>"><span><?php _e( 'Tumblr', 'live-composer-page-builder' ); ?></span></a>
-							<?php endif; ?>
-						</li>
-					<?php endif; ?>
-					<?php if ( isset( $options['pinterest'] ) && $options['pinterest'] != '' ) : ?>
-						<li>
-							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['pinterest']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-pinterest"></span></a>
-							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['pinterest']; ?>"><span><?php _e( 'Pinterest', 'live-composer-page-builder' ); ?></span></a>
-							<?php endif; ?>
-						</li>
-					<?php endif; ?>
-					<?php if ( isset( $options['linkedin'] ) && $options['linkedin'] != '' ) : ?>
-						<li>
-							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['linkedin']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-linkedin"></span></a>
-							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['linkedin']; ?>"><span><?php _e( 'LinkedIn', 'live-composer-page-builder' ); ?></span></a>
-							<?php endif; ?>
-						</li>
-					<?php endif; ?>
-					<?php if ( isset( $options['instagram'] ) && $options['instagram'] != '' ) : ?>
-						<li>
-							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['instagram']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-instagram"></span></a>
-							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['instagram']; ?>"><span><?php _e( 'Instagram', 'live-composer-page-builder' ); ?></span></a>
-							<?php endif; ?>
-						</li>
-					<?php endif; ?>
-					<?php if ( isset( $options['github'] ) && $options['github'] != '' ) : ?>
-						<li>
-							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['github']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-github-alt"></span></a>
-							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['github']; ?>"><span><?php _e( 'Github', 'live-composer-page-builder' ); ?></span></a>
-							<?php endif; ?>
-						</li>
-					<?php endif; ?>
-					<?php if ( isset( $options['googleplus'] ) && $options['googleplus'] != '' ) : ?>
-						<li>
-							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['googleplus']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-google-plus"></span></a>
-							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['googleplus']; ?>"><span><?php _e( 'Google+', 'live-composer-page-builder' ); ?></span></a>
-							<?php endif; ?>
-						</li>
-					<?php endif; ?>
-					<?php if ( isset( $options['dribbble'] ) && $options['dribbble'] != '' ) : ?>
-						<li>
-							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['dribbble']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-dribbble"></span></a>
-							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['dribbble']; ?>"><span><?php _e( 'Dribbble', 'live-composer-page-builder' ); ?></span></a>
-							<?php endif; ?>
-						</li>
-					<?php endif; ?>
-					<?php if ( isset( $options['dropbox'] ) && $options['dropbox'] != '' ) : ?>
-						<li>
-							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['dropbox']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-dropbox"></span></a>
-							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['dropbox']; ?>"><span><?php _e( 'Dropbox', 'live-composer-page-builder' ); ?></span></a>
-							<?php endif; ?>
-						</li>
-					<?php endif; ?>
-					<?php if ( isset( $options['flickr'] ) && $options['flickr'] != '' ) : ?>
-						<li>
-							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['flickr']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-flickr"></span></a>
-							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['flickr']; ?>"><span><?php _e( 'Flickr', 'live-composer-page-builder' ); ?></span></a>
-							<?php endif; ?>
-						</li>
-					<?php endif; ?>
-					<?php if ( isset( $options['foursquare'] ) && $options['foursquare'] != '' ) : ?>
-						<li>
-							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['foursquare']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-foursquare"></span></a>
-							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['foursquare']; ?>"><span><?php _e( 'Foursquare', 'live-composer-page-builder' ); ?></span></a>
-							<?php endif; ?>
-						</li>
-					<?php endif; ?>
-					<?php if ( isset( $options['behance'] ) && $options['behance'] != '' ) : ?>
-						<li>
-							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['behance']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-behance"></span></a>
-							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['behance']; ?>"><span><?php _e( 'Behance', 'live-composer-page-builder' ); ?></span></a>
-							<?php endif; ?>
-						</li>
-					<?php endif; ?>
-					<?php if ( isset( $options['rss'] ) && $options['rss'] != '' ) : ?>
-						<li>
-							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['rss']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-rss"></span></a>
-							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['rss']; ?>"><span><?php _e( 'RSS', 'live-composer-page-builder' ); ?></span></a>
-							<?php endif; ?>
-						</li>
-					<?php endif; ?>
-					<?php if ( isset( $options['yelp'] ) && $options['yelp'] != '' ) : ?>
-						<li>
-							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['yelp']; ?>"><span class="dslc-icon dslc-init-center dslc-icon-yelp"></span></a>
-							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['yelp']; ?>"><span><?php _e( 'Yelp', 'live-composer-page-builder' ); ?></span></a>
-							<?php endif; ?>
-						</li>
-					<?php endif; ?>
-				</ul>
-
-			</div><!-- .dslc-social-wrap -->
-
-			<?php
-
+		/* Module output stars here */
+		echo $this->renderModule( __DIR__, $options );
 		/* Module output ends here */
 
 		$this->module_end( $options );
-
 	}
 
 }
+
+/// Register module
+( new DSLC_Social )->register();
