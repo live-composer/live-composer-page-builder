@@ -295,6 +295,136 @@ function dslc_ajax_add_module( $atts ) {
 
 
 /**
+ * Updates module
+ *
+ * @since 1.5
+ */
+
+function dslc_ajax_update_module( $atts ) {
+
+	// Allowed to do this?
+	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+
+		// The array we'll pass back to the AJAX call
+		$response = array();
+
+		// The ID of the module to add
+		$module_id = $_POST['dslc_module_id'];
+		$post_id = $_POST['dslc_post_id'];
+		if ( isset( $_POST['dslc_preload_preset'] ) && $_POST['dslc_preload_preset'] == 'enabled' )
+			$preload_preset = 'enabled';
+		else
+			$preload_preset = 'disabled';
+
+		// If post ID is not numberic stop execution
+		if ( ! is_numeric( $post_id ) )
+			return;
+
+		/**
+		 * The instance ID for this specific module
+		 */
+
+		// If it is not a new module ( already has ID )
+		if ( isset( $_POST['dslc_module_instance_id'] ) ) {
+
+			$module_instance_id = $_POST['dslc_module_instance_id'];
+
+		// If it is a new module ( no ID )
+		} else {
+
+			// Get current count
+			$module_id_count = get_option( 'dslc_module_id_count' );
+
+			// If not the first one
+			if ( $module_id_count ) {
+
+				// Increment by one
+				$module_instance_id = $module_id_count + 1;
+
+				// Update the count
+				update_option( 'dslc_module_id_count', $module_instance_id );
+
+			// If it is the first one
+			} else {
+
+				// Set 1 as the ID
+				$module_instance_id = 1;
+
+				// Update the count
+				update_option( 'dslc_module_id_count', $module_instance_id );
+
+			}
+
+		}
+
+		// If module instance ID not numeric stop execution
+		if ( ! is_numeric( $module_instance_id ) )
+			return;
+
+		// Instanciate the module class
+		$module_instance = new $module_id();
+
+		// Generate settings
+		$all_opts = $module_instance->options();
+		$module_settings = dslc_module_settings( $all_opts );
+
+		// Append ID to settings
+		$module_settings['module_instance_id'] = $module_instance_id;
+
+		// Append post ID to settings
+		$module_settings['post_id'] = $post_id;
+
+		// Start output fetching
+		ob_start();
+
+		// Load preset if there was no preset before
+		if ( $preload_preset == 'enabled' )
+			$module_settings = apply_filters( 'dslc_filter_settings', $module_settings );
+
+		// Transform image ID to URL
+		global $dslc_var_image_option_bckp;
+		$dslc_var_image_option_bckp = array();
+		foreach ( $all_opts as $all_opt ) {
+			if ( $all_opt['type'] == 'image' ) {
+				if ( isset( $module_settings[$all_opt['id']] ) && ! empty( $module_settings[$all_opt['id']] ) && is_numeric( $module_settings[$all_opt['id']] ) ) {
+					$dslc_var_image_option_bckp[$all_opt['id']] = $module_settings[$all_opt['id']];
+					$image_info = wp_get_attachment_image_src( $module_settings[$all_opt['id']], 'full' );
+					$module_settings[$all_opt['id']] = $image_info[0];
+				}
+			}
+		}
+
+		// Module size
+		if ( isset( $_POST['dslc_m_size'] ) )
+			$module_settings['dslc_m_size'] = $_POST['dslc_m_size'];
+		else
+			$module_settings['dslc_m_size'] = '12';
+
+		// Output
+		$module_instance->output( $module_settings );
+
+		// Get the output and stop fetching
+		$output = ob_get_contents();
+		ob_end_clean();
+
+		// Set the output
+		$response['output'] = $output;
+
+		// Encode response
+		$response_json = json_encode( $response );
+
+		// Send the response
+		header( "Content-Type: application/json" );
+		echo $response_json;
+
+		// Good night
+		exit;
+
+	}
+
+} add_action( 'wp_ajax_dslc-ajax-update-module', 'dslc_ajax_update_module' );
+
+/**
  * Display module options
  *
  * @since 1.0
@@ -768,16 +898,25 @@ function dslc_ajax_save_composer( $atts ) {
 		// The ID of the post/page
 		$post_id = $_POST['dslc_post_id'];
 
+		delete_post_meta( $post_id, 'dslc_code');
+
+
 		// Add/update the post/page with the composer code
-		if ( update_post_meta( $post_id, 'dslc_code', $composer_code ) )
+		if ( add_post_meta( $post_id, 'dslc_code', $composer_code ) ){
+
 			$response['status'] = 'success';
-		else
+		}else{
+
+			$response['composer_update_post_meta'] = 'false';
 			$response['status'] = 'failed';
+		}
 
 		// Add/update the post/page with the content for search
 		// wp_kses_post – Sanitize content for allowed HTML tags for post content.
 		if ( update_post_meta( $post_id, 'dslc_content_for_search', wp_kses_post($content_for_search) ) )
+
 			$response['status'] = 'success';
+		}
 
 		// Delete draft code
 		delete_post_meta( $post_id, 'dslc_code_draft' );
@@ -798,9 +937,8 @@ function dslc_ajax_save_composer( $atts ) {
 		// Au revoir
 		exit;
 
-	}
-
-} add_action( 'wp_ajax_dslc-ajax-save-composer', 'dslc_ajax_save_composer' );
+}
+add_action( 'wp_ajax_dslc-ajax-save-composer', 'dslc_ajax_save_composer' );
 
 /**
  * Save composer code
@@ -827,6 +965,7 @@ function dslc_ajax_save_draft_composer( $atts ) {
 			$response['status'] = 'success';
 		else
 			$response['status'] = 'failed';
+			$response['composer_draft_update_post_meta'] = 'false';
 
 		// Encode response
 		$response_json = json_encode( $response );
@@ -905,13 +1044,16 @@ function dslc_ajax_import_template( $atts ) {
 	// Allowed to do this?
 	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
+
 		// The array we'll pass back to the AJAX call
 		$response = array();
 
 		// The code of the template
-		$template_code = stripslashes( $_POST['dslc_template_code'] );
+		$template_code = $_POST['dslc_template_code'];
 
-		// Apply for new ID
+		delete_post_meta( $_POST['postId'], 'dslc_code' );
+		add_post_meta( $_POST['postId'], 'dslc_code', $template_code);
+		/*// Apply for new ID
 		$template_code = str_replace( '[dslc_module ', '[dslc_module give_new_id="true" ', $template_code);
 		$template_code = str_replace( '[dslc_module]', '[dslc_module give_new_id="true"]', $template_code);
 
@@ -921,13 +1063,12 @@ function dslc_ajax_import_template( $atts ) {
 		// Encode response
 		$response_json = json_encode( $response );
 
-		// Send the response
+		// Send the response*/
 		header( "Content-Type: application/json" );
-		echo $response_json;
+		echo json_encode(['result' => 'success']);
 
 		// Bye bye
 		exit;
-
 	}
 
 } add_action( 'wp_ajax_dslc-ajax-import-template', 'dslc_ajax_import_template' );
@@ -1147,8 +1288,10 @@ function dslc_ajax_dm_module_defaults_code( $atts ) {
 			$settings = $module_instance->options();
 
 			$code .= "if ( " . '$id' ." == '" . $module_id . "' ) {
-	". '$new_defaults = array(' . "
-";
+
+				". '$new_defaults = array(' . "
+			";
+
 
 			// Fix settings when a new option added after a module is used
 			foreach( $settings as $key => $setting ) {
@@ -1156,16 +1299,14 @@ function dslc_ajax_dm_module_defaults_code( $atts ) {
 				if ( isset( $settings_new[ $setting['id'] ] ) ) {
 
 					if ( $settings_new[ $setting['id'] ] != $settings[$key]['std'] ) {
-						$code .= "		'" . $setting['id'] . "' => '" . $settings_new[ $setting['id'] ] . "',
-";
+						$code .= "		'" . $setting['id'] . "' => '" . $settings_new[ $setting['id'] ] . "',";
 					}
 
 				}
 
 			}
 
-			$code .= '	);
-}';
+			$code .= '	);}';
 
 		}
 

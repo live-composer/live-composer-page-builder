@@ -1,3 +1,10 @@
+/**
+ * Common styles
+ */
+.center-text{
+	text-align: center;
+}
+
 #dslc-content blockquote p:last-child { margin-bottom: 0 !important; }
 
 #dslc-header {
@@ -144,9 +151,10 @@ body.admin-bar #dslc-header.dslc-header-pos-absolute {
  */
 
 .dslc-col {
-	display: block;
-	float: left;
-	margin-right: 2.12766%;
+    min-height: 50px;
+    display: block;
+    float: left;
+    margin-right: 2.12766%;
 }
 
 body.rtl .dslc-col {
@@ -1122,8 +1130,16 @@ body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-post-thumb .dslc-o
 .dslca-enabled.dslc-res-smaller-monitor .dslc-hide-on-desktop {
 	display: block !important;
 }
-
+.module-init-block,
 .dslca-composer-hidden.dslc-res-big .dslc-hide-on-desktop,
 .dslca-composer-hidden.dslc-res-smaller-monitor .dslc-hide-on-desktop {
 	display: none !important;
+}
+
+.dslca-enabled.dslc-res-tablet .dslc-hide-on-tablet,
+.dslca-enabled.dslc-res-big .dslc-hide-on-desktop,
+.dslca-enabled.dslc-res-smaller-monitor .dslc-hide-on-desktop,
+.dslca-enabled.dslc-res-phone .dslc-hide-on-phone{
+    display: block!important;
+    opacity: 0.3;
 }

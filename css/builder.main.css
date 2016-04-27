@@ -350,10 +350,25 @@ body {
 			min-height: 58px;
 		}
 
+			.dslca-module-edit-options-inner div[data-section="responsive"]:first-of-type {
+
+				visibility:  visible;
+			}
+			.dslca-module-edit-options-inner div[data-section="responsive"] {
+			    visibility: hidden;
+			}
+
+			.dslca-module-edit-option-visible.dslca-module-edit-option-visible:last-of-type {
+				margin-right: 0px;
+			}
+
+			.dslca-module-edit-option-icon {
+			    width: 237px;
+			}
+
 			.dslca-module-edit-option {
 				display: block;
 				float: left;
-				margin-bottom: 30px;
 				margin-right: 35px;
 				margin-top: 20px;
 				width: 235px;
@@ -462,7 +477,12 @@ body {
 			}
 
 				.dslca-module-edit-option-checkbox input[type="checkbox"] {
-					display: none;
+				    display: none;
+				}
+
+				.dslca-module-edit-option-ver-2.dslca-module-edit-option-checkbox input[type="checkbox"] {
+				    display: inline-block;
+				    vertical-align: middle;
 				}
 
 				.dslca-module-edit-option-checkbox-wrapper {
@@ -476,6 +496,13 @@ body {
 						margin: 6px;
 						display: inline-block;
 					}
+
+						.checkbox-label{
+							cursor: pointer;
+						    font-size: 13px;
+						    font-weight: 600;
+						    font-family: "Open Sans";
+						}
 
 						.dslca-module-edit-option-checkbox-hook {
 							cursor: pointer;
@@ -493,7 +520,8 @@ body {
 			}
 
 				.dslca-module-edit-option-radio input[type="radio"] {
-					vertical-align: bottom;
+				    vertical-align: middle;
+				    display: inline-block;
 				}
 
 				.dslca-module-edit-option-radio-wrapper {
@@ -577,6 +605,8 @@ body {
 				.dslca-module-edit-option-box-shadow-wrapper {
 					background: #3b6fbe;
 					border-radius: 4px;
+					width: 705px;
+    				overflow: hidden;
 					border: 1px solid #3565ad;
 					padding: 5px 10px;
 					font-size: 0;
@@ -614,7 +644,9 @@ body {
 						}
 
 						.dslca-module-edit-option-box-shadow-single .dslca-module-edit-option-checkbox-hook {
-							margin-right: 0;
+						    margin-right: 0;
+						    width: 48px;
+						    display: inline-block;
 						}
 
 							.dslca-module-edit-option-box-shadow-single .dslca-module-edit-option-checkbox-hook .dslca-icon {
@@ -740,6 +772,9 @@ body {
 			.dslca-module-edit-options-tab-hook.dslca-active {
 				color: #fff;
 			}
+			span.dslca-module-edit-options-tab-hook.hide-hook {
+			    display: none!important;
+			}
 
 	/**
 	 * Modules Section Edit
@@ -754,6 +789,10 @@ body {
 			padding: 20px 15px;
 			overflow-x: hidden;
 		}
+
+			.dslca-modules-section-edit-option:last-of-type {
+				margin-right: 0px;
+			}
 
 			.dslca-modules-section-edit-option {
 				display: block;
@@ -812,7 +851,8 @@ body {
 			}
 
 				.dslca-modules-section-edit-option-checkbox input[type="checkbox"] {
-					display: none;
+				    vertical-align: sub;
+				    margin-right: 7px;
 				}
 
 				.dslca-modules-section-edit-option-checkbox-wrapper {
@@ -836,6 +876,7 @@ body {
 
 							.dslca-modules-section-edit-option-checkbox-hook .dslca-icon {
 								margin-right: 10px;
+								display: none;
 							}
 
 	.dslca-modules-section-settings {
@@ -1125,7 +1166,12 @@ body {
 	display: none;
 }
 
+.dslc-modules-area-empty:hover {
+	opacity: 1;
+}
+
 .dslc-modules-area-empty {
+	opacity: 0.5;
 	margin-top: 15px;
 	margin-bottom: 15px;
 }
@@ -1140,7 +1186,8 @@ body {
 }
 
 .dslc-modules-area:hover .dslc-module-front:hover {
-	outline-color: #5890e5;
+    outline-color: #5890e5;
+    z-index: 1;
 }
 
 .dslc-modules-area.dslca-options-hovered .dslc-module-front {
@@ -1402,7 +1449,7 @@ body {
 		margin-left: auto;
 		margin-right: auto;
 		max-width: 100%;
-		margin-bottom: 30px;
+		margin: 30px auto 120px;
 		overflow: hidden;
 	}
 
@@ -1476,16 +1523,16 @@ body {
 	/* Manage */
 
 	.dslca-modules-section-manage {
-		bottom: 0;
-		left: 0;
-		right: 0;
-		visibility: hidden;
-		margin-bottom: -16px;
-		padding-right: 0;
-		position: absolute;
-		z-index: 99998;
-		width: 100%;
-		text-align: center;
+	    bottom: 0;
+	    left: 0;
+	    right: 0;
+	    visibility: hidden;
+	    margin-bottom: -15px;
+	    padding-right: 0;
+	    position: absolute;
+	    z-index: 1;
+	    width: 100%;
+	    text-align: center;
 	}
 
 	.dslca-modules-section-manage:hover {
@@ -1497,31 +1544,31 @@ body {
 	}
 
 		.dslca-modules-section-manage-inner {
-			background: #e5855f;
-			border: 1px solid #da7a50;
-			border-radius: 3px;
-			display: inline-block;
-			padding: 3px;
-			position: relative;
-			z-index: 99999;
-			overflow: hidden;
-			vertical-align: middle;
-			opacity: 0;
+		    background: #EE6D38;
+		    border-radius: 3px;
+		    box-shadow: 0px 1px 1px 1px #AA512C;
+		    display: inline-block;
+		    position: relative;
+		    z-index: 99999;
+		    overflow: hidden;
+		    vertical-align: middle;
+		    opacity: 0;
 		}
 
-			.dslca-modules-section-manage .dslca-manage-action {
-				border-radius: 3px;
-				color: #fff;
-				display: inline-block;
-				height: 18px;
-				text-decoration: none;
-				font-size: 15px;
-				line-height: 15px;
-				width: 18px;
-				margin-right: 1px;
-				text-align: center;
-				vertical-align: middle;
-			}
+		.dslca-modules-section-manage .dslca-manage-action {
+		    color: #fff;
+		    float: left;
+		    text-decoration: none;
+		    font-size: 15px;
+			width: 32px;
+		    padding: 6px 10px;
+		    text-align: center;
+		    vertical-align: middle;
+		}
+
+		.dslca-modules-section-manage .dslca-manage-action:hover {
+		    background: #A23D13;
+		}
 
 				.dslca-modules-section-manage .dslca-icon {
 					font-size: 12px;
@@ -1608,27 +1655,25 @@ body {
 	.dslca-modules-area-manage {
 		visibility: hidden;
 		opacity: 0.5;
-		-webkit-transition: opacity 0.2s ease-in-out;
+		/*-webkit-transition: opacity 0.2s ease-in-out;
 		-moz-transition: opacity 0.2s ease-in-out;
-		transition: opacity 0.2s ease-in-out;
+		transition: opacity 0.2s ease-in-out;*/
 	}
 
 	.dslc-modules-area:hover .dslca-modules-area-manage {
 		visibility: visible;
-		opacity: 0.5;
-	}
-
-	.dslc-modules-area .dslca-modules-area-manage:hover {
 		opacity: 1;
 	}
+/*
+	.dslc-modules-area .dslca-modules-area-manage:hover {
+		opacity: 1;
+	}*/
 
 	.dslca-modules-area-manage {
 		bottom: 0;
 		position: absolute;
-		left: auto;
-		right: 100%;
+		left: -32px;
 		top: 0;
-		margin-right: -2px;
 		text-align: center;
 		z-index: 99999;
 	}
@@ -1643,17 +1688,16 @@ body {
 		margin-right: 0;
 	}
 
-		.dslca-modules-area-manage-inner {
-			background: #5890e5;
-			border: 1px solid #4f86d9;
-			border-radius: 3px 0 0 3px;
-			border-right-width: 0;
-			display: inline-block;
-			margin-top: 30px;
-			padding: 4px;
-			position: relative;
-			z-index: 99999;
-		}
+	.dslca-modules-area-manage-inner {
+	    background: #4f86d9;
+	    border-radius: 3px 0 0 3px;
+	    box-shadow: 0px 2px 1px 0px #344764;
+	    border-right-width: 0;
+	    display: inline-block;
+	    margin-top: 0;
+	    position: relative;
+	    z-index: 99999;
+	}
 
 		.windows.mozilla .dslca-modules-area-manage-inner {
 			margin-right: 2px;
@@ -1661,33 +1705,33 @@ body {
 
 		.dslca-horizontal .dslca-modules-area-manage-inner {
 			margin-top: -47px;
-			border-radius: 3px;
+			border-radius: 0px;
 		}
 
 		.dslc-modules-section.dslc-full .dslca-modules-area-manage-inner {
 			border-radius: 0 3px 3px 0;
 		}
 
-		#dslc-content .dslca-modules-area-manage .dslca-manage-action  {
+		#dslc-content .dslca-modules-area-manage .dslca-manage-action {
 			border-radius: 3px;
 			color: #fff;
 			display: block;
-			height: 18px;
+			padding: 7px 10px;
 			text-decoration: none;
 			font-size: 12px;
-			line-height: 18px;
-			margin-top: 4px;
-			width: 18px;
 			text-align: center;
 		}
 
 		#dslc-content .dslca-modules-area-manage .dslca-manage-action:first-child {
 			margin-left: 0;
 			margin-top: 0;
+			border-top-left-radius: 3px!important;
 		}
 
 		#dslc-content .dslca-modules-area-manage .dslca-manage-action:hover {
-			color: #fff;
+		    color: #FFF;
+		    background: #345688;
+		    border-radius: 0px;
 		}
 
 		#dslc-content .dslca-modules-area-manage .dslca-change-width-modules-area-hook {
@@ -1780,13 +1824,16 @@ body {
 	 * Modules Area Manage - Empty
 	 */
 
-	.dslc-modules-area-empty .dslca-modules-area-manage {
-		top: 12px;
-		bottom: auto;
-	}
+		.dslc-modules-area-empty .dslca-modules-area-manage {
+		    top: 0px;
+		    display: block;
+		    bottom: auto;
+		}
 
-		.dslc-modules-area-empty .dslca-modules-area-manage-inner {
-			margin-top: 0;
+	 	.dslc-modules-area-empty .dslca-modules-area-manage-inner {
+		    margin-top: 0;
+		    border-radius: 3px;
+		    box-shadow: 0px 2px 1px 0px #344764;
 		}
 
 
@@ -1808,14 +1855,19 @@ body.rtl .dslca-modules-area-placeholder {
  */
 
 .dslca-module-manage {
-	display: block;
+	display: none;
 	position: absolute;
 	left: 50%;
-	margin-left: -47px;
+	transform: translateX(-50%);
 	top: -2px;
+	width: 190px;
 	text-align: center;
 	z-index: 99999;
 	overflow: hidden;
+}
+
+.dslc-module-front:hover .dslca-module-manage {
+    display: block;
 }
 
 .dslca-module-manage.dslca-module-manage-change-width-active {
@@ -1823,14 +1875,14 @@ body.rtl .dslca-modules-area-placeholder {
 }
 
 	.dslca-module-manage-inner {
-		background: #5890e5;
-		border: 1px solid #4f86d9;
-		border-top: 0;
-		border-radius: 0 0 3px 3px;
-		display: inline-block;
-		padding: 3px;
-		position: relative;
-		top: -50px;
+    background: #5890e5;
+    border-radius: 0 0 3px 3px;
+    display: inline-block;
+    position: relative;
+    box-shadow: 0px 1px 1px 0px #344764;
+    top: -50px;
+    height: 30px;
+    text-align: left;
 	}
 
 	.dslca-module-manage-inner.dslca-dev-mode {
@@ -1839,18 +1891,16 @@ body.rtl .dslca-modules-area-placeholder {
 	}
 
 	#dslc-content .dslca-module-manage .dslca-module-manage-hook {
-		border-radius: 3px;
-		color: #fff;
-		display: inline-block;
-		height: 18px;
-		text-decoration: none;
-		font-size: 12px;
-		line-height: 18px;
-		margin-top: 0;
-		margin-right: 1px;
-		width: 18px;
-		text-align: center;
-		cursor: pointer;
+    color: #fff;
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 18px;
+    margin-top: 0;
+    padding: 6px 10px;
+    text-align: center;
+    cursor: pointer;
+    display: block;
+    float: left;
 	}
 
 	#dslc-content .dslc-modules-area.dslc-1-col .dslca-module-manage .dslca-module-manage-hook,
@@ -1868,6 +1918,7 @@ body.rtl .dslca-modules-area-placeholder {
 
 	#dslc-content .dslca-module-manage .dslca-module-manage-hook:hover {
 		color: #fff;
+		background: rgba(0, 0, 0, 0.41);
 	}
 
 /* Vertical manage for smaller modules ( height ) */
@@ -2411,20 +2462,20 @@ body.rtl .dslca-modules-area-placeholder {
 	-webkit-animation-name: dslcBounceIn;
 	-moz-animation-name: dslcBounceIn;
 	animation-name: dslcBounceIn;
-	animation-duration:0.6s;
-	-webkit-animation-duration:0.6s;
+	animation-duration:0.2s;
+	-webkit-animation-duration:0.2s;
 
 }
 
 .dslca-anim-opacity-drop {
-	/*
+
 	opacity: 0.7;
 	-webkit-animation-name: dslcOpacityDrop;
 	-moz-animation-name: dslcOpacityDrop;
 	animation-name: dslcOpacityDrop;
-	animation-duration:0.6s;
-	-webkit-animation-duration:0.6s;
-	*/
+	animation-duration:0.2s;
+	-webkit-animation-duration:0.2s;
+
 }
 
 .dslc-editable-content:focus,
@@ -2744,6 +2795,13 @@ body.rtl .dslca-modules-area-placeholder {
 }
 
 /**
+ *Dynamic data hook
+ */
+.dslca-load-dynamic-data-hook{
+	cursor: pointer;
+}
+
+/**
  * Loading Modal
  */
 
@@ -2908,7 +2966,29 @@ body.rtl .dslca-modules-area-placeholder {
 /**
  * Image Upload Field
  */
+span.dslc-module-image-add-image-inner-hook:hover {
 
+    background: #DD3E3E;
+}
+span.dslc-module-image-add-image-inner-hook {
+    padding: 18px;
+    transition: all 0.3s;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 0px;
+    border-radius: 40px;
+}
+span.dslca-image-filename img{
+	display: none;
+}
+span.dslca-image-filename {
+    display: block;
+    font-size: 13px;
+    margin-top: 6px;
+    width: 100%;
+    overflow: hidden;
+}
 .dslca-modules-section-edit-option-upload,
 .dslca-module-edit-option-image {
 	width: auto;
@@ -3274,9 +3354,9 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
  */
 
 .dslca-drag-not-in-progress .dslc-modules-section .dslca-modules-section-manage-inner {
-	-webkit-transition: all 0.2s ease-in-out;
+	/*-webkit-transition: all 0.2s ease-in-out;
 	-moz-transition:  all 0.2s ease-in-out;
-	transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;*/
 }
 
 .dslca-drag-not-in-progress .dslc-modules-section:hover .dslca-modules-section-manage-inner {
@@ -3293,6 +3373,7 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 
 .dslca-drag-not-in-progress .dslc-module-front .dslca-module-manage {
 	overflow: hidden;
+    border-radius: 4px;
 }
 
 /* Visible overflow if module width opts shown */
@@ -3300,23 +3381,14 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 	overflow: visible;
 }
 
+/*
 .dslca-drag-not-in-progress .dslc-module-front .dslca-module-manage-inner,
 .dslca-drag-not-in-progress .dslc-module-front .dslca-wysiwyg-actions-edit-hook {
-	top: 0;
-	opacity: 0;
-	-webkit-transition: opacity 0.1s ease-in-out;
-	-moz-transition: opacity 0.1s ease-in-out;
-	transition: opacity 0.1s ease-in-out;
-
-/*	top: -50;*/
-/*	-webkit-transition: transform 0.2s ease-in-out;
-	-moz-transition: transform 0.2s ease-in-out;
-	transition: transform 0.2s ease-in-out;
-
-	-ms-transform: translate(0,-50px);
-	-webkit-transform: translate(0,-50px);
-	transform: translate(0,-50px);*/
-}
+	top: -50;
+	-webkit-transition: top 0.2s ease-in-out;
+	-moz-transition: top 0.2s ease-in-out;
+	transition: top 0.2s ease-in-out;
+}*/
 
 .dslca-drag-not-in-progress .dslc-module-front:hover .dslca-module-manage-inner,
 .dslca-drag-not-in-progress .dslc-module-front:hover .dslca-wysiwyg-actions-edit-hook {
@@ -3334,13 +3406,17 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 
 .dslca-drag-not-in-progress .dslc-modules-area .dslca-modules-area-manage-inner {
 	opacity: 0;
-/*	-webkit-transition: opacity 0.2s ease-in-out;
+	/*-webkit-transition: opacity 0.2s ease-in-out;
 	-moz-transition: opacity 0.2s ease-in-out;
 	transition: opacity 0.2s ease-in-out;*/
 }
 
 .dslca-drag-not-in-progress .dslc-modules-area:hover .dslca-modules-area-manage-inner {
 	opacity: 1;
+}
+
+#dslc-content .dslca-modules-area-manage .dslca-manage-action {
+	line-height: 15px;
 }
 
 /**
@@ -3362,7 +3438,6 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 .dslca-modal.dslca-modal-icons:after {
 	display: none;
 }*/
-
 
 	.dslca-modal-icons .modal-content {
 		height: 100%;
@@ -3418,5 +3493,26 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 		font-family: "Open Sans";
 		font-size: 12px;
 		line-height: 1.25;
-		padding: 5px 8px 12px;
+		padding: 5px 8px
+		 12px;
 	}
+/**
+ * Module code blocks
+ */
+.dslc-module-info-block{
+	display: none;
+}
+
+/**
+ * Row edition
+ */
+.dslca-modules-section-being-edited .dslca-modules-section-manage{
+	display: none;
+}
+
+/**
+ * Image module
+ */
+.dslc-image img.front-image {
+	display: none;
+}

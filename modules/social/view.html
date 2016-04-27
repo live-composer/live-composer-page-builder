@@ -1,0 +1,140 @@
+<div class="dslc-social-wrap">
+	<ul class="dslc-social">
+		<% if(twitter.value != '') {%>
+			<li>
+				<a class="dslc-social-icon" target="_blank" href="<%= twitter.std || twitter.value %>"><span class="dslc-icon dslc-icon-twitter"></span></a>
+				<% if ( show_labels.value == 'enabled' ) {%>
+					<a class="dslc-social-label" target="_blank" href="<%= twitter.std || twitter.value %>"><span><?php _e( 'Twitter', 'live-composer-page-builder' ); ?></span></a>
+				<%}%>
+			</li>
+		<%}%>
+		<% if(facebook.value != '') {%>
+			<li>
+				<a class="dslc-social-icon" target="_blank" href="<%= facebook.std || facebook.value %>"><span class="dslc-icon dslc-icon-facebook"></span></a>
+				<% if ( show_labels.value == 'enabled' ) {%>
+					<a class="dslc-social-label" target="_blank" href="<%= facebook.std || facebook.value %>"><span><?php _e( 'Facebook', 'live-composer-page-builder' ); ?></span></a>
+				<%}%>
+			</li>
+		<%}%>
+		<% if(youtube.value !=  '') {%>
+			<li>
+				<a class="dslc-social-icon" target="_blank" href="<%= youtube.std || youtube.value %>"><span class="dslc-icon dslc-icon-youtube-play"></span></a>
+				<% if ( show_labels.value == 'enabled' ) {%>
+					<a class="dslc-social-label" target="_blank" href="<%= youtube.std || youtube.value %>"><span><?php _e( 'Youtube', 'live-composer-page-builder' ); ?></span></a>
+				<%}%>
+			</li>
+		<%}%>
+		<% if(vimeo.value != undefined && vimeo.value != '') {%>
+			<li>
+				<a class="dslc-social-icon" target="_blank" href="<%= vimeo.value %>"><span class="dslc-icon dslc-icon-vimeo-square"></span></a>
+				<% if ( show_labels.value == 'enabled' ) {%>
+					<a class="dslc-social-label" target="_blank" href="<%= vimeo.value %>"><span><?php _e( 'Vimeo', 'live-composer-page-builder' ); ?></span></a>
+				<%}%>
+			</li>
+		<%}%>
+		<% if(tumblr.value != undefined && tumblr.value != '') {%>
+			<li>
+				<a class="dslc-social-icon" target="_blank" href="<%= tumblr.value %>"><span class="dslc-icon dslc-icon-tumblr"></span></a>
+				<% if ( show_labels.value == 'enabled' ) {%>
+					<a class="dslc-social-label" target="_blank" href="<%= tumblr.value %>"><span><?php _e( 'Tumblr', 'live-composer-page-builder' ); ?></span></a>
+				<%}%>
+			</li>
+		<%}%>
+		<% if(pinterest.value != undefined && pinterest.value != '') {%>
+			<li>
+				<a class="dslc-social-icon" target="_blank" href="<%= pinterest.value %>"><span class="dslc-icon dslc-icon-pinterest"></span></a>
+				<% if ( show_labels.value == 'enabled' ) {%>
+					<a class="dslc-social-label" target="_blank" href="<%= pinterest.value %>"><span><?php _e( 'Pinterest', 'live-composer-page-builder' ); ?></span></a>
+				<%}%>
+			</li>
+		<%}%>
+		<% if(linkedin.value != undefined && linkedin.value != '') {%>
+			<li>
+				<a class="dslc-social-icon" target="_blank" href="<%= linkedin.value %>"><span class="dslc-icon dslc-icon-linkedin"></span></a>
+				<% if ( show_labels.value == 'enabled' ) {%>
+					<a class="dslc-social-label" target="_blank" href="<%= linkedin.value %>"><span><?php _e( 'LinkedIn', 'live-composer-page-builder' ); ?></span></a>
+				<%}%>
+			</li>
+		<%}%>
+		<% if(instagram.value != undefined && instagram.value != '') {%>
+			<li>
+				<a class="dslc-social-icon" target="_blank" href="<%= instagram.value %>"><span class="dslc-icon dslc-icon-instagram"></span></a>
+				<% if ( show_labels.value == 'enabled' ) {%>
+					<a class="dslc-social-label" target="_blank" href="<%= instagram.value %>"><span><?php _e( 'Instagram', 'live-composer-page-builder' ); ?></span></a>
+				<%}%>
+			</li>
+		<%}%>
+		<% if(github.value != undefined && github.value != '') {%>
+			<li>
+				<a class="dslc-social-icon" target="_blank" href="<%= github.value %>"><span class="dslc-icon dslc-icon-github-alt"></span></a>
+				<% if ( show_labels.value == 'enabled' ) {%>
+					<a class="dslc-social-label" target="_blank" href="<%= github.value %>"><span><?php _e( 'Github', 'live-composer-page-builder' ); ?></span></a>
+				<%}%>
+			</li>
+		<%}%>
+		<% if(googleplus.value != undefined && googleplus.value != '') {%>
+			<li>
+				<a class="dslc-social-icon" target="_blank" href="<%= googleplus.value %>"><span class="dslc-icon dslc-icon-google-plus"></span></a>
+				<% if ( show_labels.value == 'enabled' ) {%>
+					<a class="dslc-social-label" target="_blank" href="<%= googleplus.value %>"><span><?php _e( 'Google+', 'live-composer-page-builder' ); ?></span></a>
+				<%}%>
+			</li>
+		<%}%>
+		<% if(dribbble.value != undefined && dribbble.value != '') {%>
+			<li>
+				<a class="dslc-social-icon" target="_blank" href="<%= dribbble.value %>"><span class="dslc-icon dslc-icon-dribbble"></span></a>
+				<% if ( show_labels.value == 'enabled' ) {%>
+					<a class="dslc-social-label" target="_blank" href="<%= dribbble.value %>"><span><?php _e( 'Dribbble', 'live-composer-page-builder' ); ?></span></a>
+				<%}%>
+			</li>
+		<%}%>
+		<% if(dropbox.value != undefined && dropbox.value != '') {%>
+			<li>
+				<a class="dslc-social-icon" target="_blank" href="<%= dropbox.value %>"><span class="dslc-icon dslc-icon-dropbox"></span></a>
+				<% if ( show_labels.value == 'enabled' ) {%>
+					<a class="dslc-social-label" target="_blank" href="<%= dropbox.value %>"><span><?php _e( 'Dropbox', 'live-composer-page-builder' ); ?></span></a>
+				<%}%>
+			</li>
+		<%}%>
+		<% if(flickr.value != undefined && flickr.value != '') {%>
+			<li>
+				<a class="dslc-social-icon" target="_blank" href="<%= flickr.value %>"><span class="dslc-icon dslc-icon-flickr"></span></a>
+				<% if ( show_labels.value == 'enabled' ) {%>
+					<a class="dslc-social-label" target="_blank" href="<%= flickr.value %>"><span><?php _e( 'Flickr', 'live-composer-page-builder' ); ?></span></a>
+				<%}%>
+			</li>
+		<%}%>
+		<% if(foursquare.value != undefined && foursquare.value != '') {%>
+			<li>
+				<a class="dslc-social-icon" target="_blank" href="<%= foursquare.value %>"><span class="dslc-icon dslc-icon-foursquare"></span></a>
+				<% if ( show_labels.value == 'enabled' ) {%>
+					<a class="dslc-social-label" target="_blank" href="<%= foursquare.value %>"><span><?php _e( 'Foursquare', 'live-composer-page-builder' ); ?></span></a>
+				<%}%>
+			</li>
+		<%}%>
+		<% if(behance.value != undefined && behance.value != '') {%>
+			<li>
+				<a class="dslc-social-icon" target="_blank" href="<%= behance.value %>"><span class="dslc-icon dslc-icon-behance"></span></a>
+				<% if ( show_labels.value == 'enabled' ) {%>
+					<a class="dslc-social-label" target="_blank" href="<%= behance.value %>"><span><?php _e( 'Behance', 'live-composer-page-builder' ); ?></span></a>
+				<%}%>
+			</li>
+		<%}%>
+		<% if(rss.value != undefined && rss.value != '') {%>
+			<li>
+				<a class="dslc-social-icon" target="_blank" href="<%= rss.value %>"><span class="dslc-icon dslc-icon-rss"></span></a>
+				<% if ( show_labels.value == 'enabled' ) {%>
+					<a class="dslc-social-label" target="_blank" href="<%= rss.value %>"><span><?php _e( 'RSS', 'live-composer-page-builder' ); ?></span></a>
+				<%}%>
+			</li>
+		<%}%>
+		<% if(yelp.value != undefined && yelp.value != '') {%>
+			<li>
+				<a class="dslc-social-icon" target="_blank" href="<%= yelp.value %>"><span class="dslc-icon dslc-icon-yelp"></span></a>
+				<% if ( show_labels.value == 'enabled' ) {%>
+					<a class="dslc-social-label" target="_blank" href="<%= yelp.value %>"><span><?php _e( 'Yelp', 'live-composer-page-builder' ); ?></span></a>
+				<%}%>
+			</li>
+		<%}%>
+	</ul>	
+</div>

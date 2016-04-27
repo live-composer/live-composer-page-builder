@@ -16,29 +16,33 @@ class DSLC_Sliders extends DSLC_Module {
 
 	}
 
-	function options() {	
+	function options() {
 
 		// Get Rev Sliders
 		global $wpdb;
-		$table_name = $wpdb->prefix . 'revslider_sliders';
-		$sliders = $wpdb->get_results( "SELECT id, title, alias FROM $table_name" );
 		$slider_choices = array();
-
 		$slider_choices[] = array(
 			'label' => __( '-- Select --', 'live-composer-page-builder' ),
 			'value' => 'not_set',
 		);
 
-		if ( ! empty( $sliders ) ) {
+		$table_name = $wpdb->prefix . 'revslider_sliders';
+		if($wpdb->get_var("SHOW TABLES LIKE '$table_name'" == $table_name)){
 
-			foreach ( $sliders as $slider ) {
-				$slider_choices[] = array(
-					'label' => $slider->title,
-					'value' => $slider->alias
-				);
+			$sliders = $wpdb->get_results( "SELECT id, title, alias FROM $table_name" );
+
+			if ( ! empty( $sliders ) ) {
+
+				foreach ( $sliders as $slider ) {
+					$slider_choices[] = array(
+						'label' => $slider->title,
+						'value' => $slider->alias
+					);
+				}
+
 			}
-
 		}
+
 
 		$dslc_options = array(
 			array(
@@ -84,7 +88,7 @@ class DSLC_Sliders extends DSLC_Module {
 		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
 			$dslc_is_admin = true;
 		else
-			$dslc_is_admin = false;		
+			$dslc_is_admin = false;
 
 		$this->module_start( $options );
 

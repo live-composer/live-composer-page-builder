@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Notification module class
+ */
+
+/**
+ * Class DSLC_Notification
+ *
+ * @inherited
+ */
+
 class DSLC_Notification extends DSLC_Module {
 
 	var $module_id;
@@ -9,13 +19,17 @@ class DSLC_Notification extends DSLC_Module {
 
 	function __construct() {
 
-		$this->module_id = 'DSLC_Notification';
+		$this->module_ver = 2;
+		$this->module_id = __CLASS__;
 		$this->module_title = __( 'Notification', 'live-composer-page-builder' );
 		$this->module_icon = 'info';
 		$this->module_category = 'elements';
 
 	}
 
+	/**
+	 * @inherited
+	 */
 	function options() {	
 
 		$dslc_options = array(
@@ -439,7 +453,7 @@ class DSLC_Notification extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Icon - Color - Hover', 'live-composer-page-builder' ),
-				'id' => 'css_close_icon_color',
+				'id' => 'css_close_icon_color_hover',
 				'std' => '#f65757',
 				'type' => 'color',
 				'refresh_on_change' => false,
@@ -544,7 +558,7 @@ class DSLC_Notification extends DSLC_Module {
 				'ext' => 'px'
 			),
 			array(
-				'label' => __( 'Icon - Size ( Wrapper )', 'live-composer-page-builder' ),
+				'label' => __( 'Icon - Size ( Icon )', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_close_icon_size',
 				'std' => '12',
 				'type' => 'slider',
@@ -556,7 +570,7 @@ class DSLC_Notification extends DSLC_Module {
 				'ext' => 'px',
 			),
 			array(
-				'label' => __( 'Icom - Size ( Icon )', 'live-composer-page-builder' ),
+				'label' => __( 'Icom - Size ( Wrapper)', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_close_size',
 				'std' => '15',
 				'type' => 'slider',
@@ -651,7 +665,7 @@ class DSLC_Notification extends DSLC_Module {
 				'ext' => 'px'
 			),
 			array(
-				'label' => __( 'Icon - Size ( Wrapper )', 'live-composer-page-builder' ),
+				'label' => __( 'Icon - Size ( Icon )', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_close_icon_size',
 				'std' => '12',
 				'type' => 'slider',
@@ -663,7 +677,7 @@ class DSLC_Notification extends DSLC_Module {
 				'ext' => 'px',
 			),
 			array(
-				'label' => __( 'Icom - Size ( Icon )', 'live-composer-page-builder' ),
+				'label' => __( 'Icom - Size ( Wrapper )', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_close_size',
 				'std' => '15',
 				'type' => 'slider',
@@ -687,43 +701,10 @@ class DSLC_Notification extends DSLC_Module {
 
 	function output( $options ) {		
 
-		global $dslc_active;
-
-		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
-			$dslc_is_admin = true;
-		else
-			$dslc_is_admin = false;
-
 		$this->module_start( $options );
 
-		/* Module output starts here */
-
-			// Classes
-			$classes = 'dslc-notification-box ';
-
-			// Timeout after closing
-			if ( is_numeric( $options['notification_timeout'] ) ) {
-				$classes .= 'dslc-notification-box-has-timeout ';
-			}
-
-			?>
-
-			<div class="<?php echo $classes; ?>" data-notification-timeout="<?php echo $options['notification_timeout']; ?>">
-				<div class="dslc-notification-box-content  dslca-editable-content" data-id="content"<?php if ( $dslc_is_admin ) echo ' data-exportable-content'; ?>>
-					<?php
-						$output_content = stripslashes( $options['content'] );
-						$output_content = do_shortcode( $output_content );
-						echo $output_content;
-					?>
-				</div>
-				<?php if ( $dslc_active ) : ?>
-					<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook"><?php _e( 'Edit Content', 'live-composer-page-builder' ); ?></span></div>
-				<?php endif; ?>
-				<span class="dslc-notification-box-close"><span class="dslc-icon dslc-icon-remove dslc-init-center"></span></span>
-			</div><!-- .dslc-notification-box -->
-
-			<?php
-
+		/* Module output stars here */
+		echo $this->renderModule( __DIR__, $options );
 		/* Module output ends here */
 
 		$this->module_end( $options );
@@ -731,3 +712,6 @@ class DSLC_Notification extends DSLC_Module {
 	}
 
 }
+
+/// Register module
+( new DSLC_Notification )->register();
