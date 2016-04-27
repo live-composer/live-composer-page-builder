@@ -1,0 +1,11 @@
+<select class="dslca-module-edit-field" name="<%= id %>" data-id="<%= id %>" 
+	<% if(obj.affect_on_change_rule && obj.affect_on_change_el && obj.affect_on_change_el != '' && obj.affect_on_change_rule != ''){%>
+			data-affect-on-change-el="<%= obj.affect_on_change_el %>" data-affect-on-change-rule="<%= obj.affect_on_change_rule %>"
+	<%}%>>
+
+	<% _.each(choices, function(select_option){%>
+		<option value="<%= select_option.value %>" <% if (value == select_option.value){%> selected="selected"<%}%>>
+			<%= select_option.label %>
+		</option>
+	<%})%>
+</select>

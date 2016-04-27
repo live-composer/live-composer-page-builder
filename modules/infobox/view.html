@@ -1,0 +1,116 @@
+<div class="dslc-info-box dslc-info-box-icon-pos-<%= icon_position.value || icon_position.std %>">
+				<div class="dslc-info-box-wrapper">
+
+					<% if(button_pos.value == 'aside' && elements.show_elements.button == true){%>
+						<div class="dslc-info-box-button dslc-info-box-button-aside">
+							<% if(button_link.value != ''){%>
+								<a href="<%= button_link.value || button_link.std %>" target="<%= button_target.value || button_target.std %>" class="dslc-primary" <% if(link_nofollow.value == 'nofollow'){%> rel="nofollow" <%}%> >
+									<% if(button_icon_id && button_icon_id.value != ''){%>
+										<span class="dslc-icon dslc-icon-<%= button_icon_id.value || button_icon_id.std %>"></span>
+									<%}%>
+
+									<span class="dslca-editable-content" data-id="button_title" data-type="simple" contenteditable>
+										<%= button_title.value || button_title.std %>
+									</span>
+								</a>
+							<%}%>
+
+							<% if(button_2_link.value != ''){%>
+								<a href="<%= button_2_link.value || button_2_link.std %>" target="<%= button_2_target.value || button_2_target.std %>" class="dslc-secondary" <% if(link_nofollow.value == 'nofollow'){%> rel="nofollow" <%}%> >
+									<% if(button_2_icon_id && button_2_icon_id.value != ''){%>
+										<span class="dslc-icon dslc-icon-<%= button_2_icon_id.value || button_2_icon_id.std %>"></span>
+									<%}%>
+
+									<span class="dslca-editable-content" data-id="button_2_title" data-type="simple" contenteditable>
+										<%= button_2_title.value || button_2_title.std %>
+									</span>
+								</a>
+							<%}%>
+						</div><!-- .dslc-info-box-button -->
+					<%}%>
+
+					<div class="dslc-info-box-main-wrap dslc-clearfix">
+
+						<% if(elements.show_elements.icon && elements.show_elements.icon == true){%>
+							<div class="dslc-info-box-image">
+								<div class="dslc-info-box-image-inner">
+									<span class="dslc-icon dslc-icon-<%= icon_id.value || icon_id.std %>"></span>
+									<% if(icon_link.value && icon_link.value != ''){%>
+										<a <% if(link_nofollow.value == 'nofollow'){%> rel="nofollow" <%}%> class="dslc-info-box-image-link" href="<%= icon_link.value %>" target="<%= icon_link_target.value || icon_link_target.std %>"></a>
+									<%}%>
+								</div><!-- .dslc-info-box-image-inner -->
+							</div><!-- .dslc-info-box-image -->
+						<%}%>
+
+						<% if(elements.show_elements.image == true && typeof image_alt.value == 'object'){%>
+							<div class="dslc-info-box-image-alt">
+								<div class="dslc-info-box-image-alt-inner">
+									<% if(!image_alt_link_url.value){%>
+										<img src="<%= image_alt.value.url %>">
+									<%}else{%>
+										<a <% if(link_nofollow.value == 'nofollow'){%> rel="nofollow" <%}%> href="<%= image_alt_link_url.value || image_alt_link_url.std %>">
+											<img src="<%= image_alt.value.url %>">
+										</a>
+									<%}%>
+								</div><!-- .dslc-info-box-image-alt-inner -->
+							</div><!-- .dslc-info-box-image-alt -->
+						<%}%>
+
+						<div class="dslc-info-box-main">
+
+							<% if(elements.show_elements.title == true){%>
+								<div class="dslc-info-box-title">
+									<% if(title_link.value != ''){%>
+										<h4><a href="<%= title_link.value || title_link.std %>" target="<%= title_link_target.value || title_link_target.std %>" class="dslca-editable-content" data-id="title" data-type="simple" contenteditable <% if(link_nofollow.value == 'nofollow'){%> rel="nofollow" <%}%> >
+											<%= title.value || title.std %></a>
+										</h4>
+									<%}else{%>
+										<h4 class="dslca-editable-content" data-id="title" data-type="simple" contenteditable><%= title.value || title.std %></h4>
+									<%}%>
+								</div><!-- .dslc-info-box-title -->
+							<%}%>
+
+							<% if(elements.show_elements.content && elements.show_elements.content == true){%>
+								<div class="dslc-info-box-content">
+									<div class="dslca-editable-content" data-id="content" contenteditable>
+										<%= content.value || content.std %>
+									</div>
+
+									<div class="lc-editor-element"><!-- .dslca-editable-content -->
+										<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook"><?php _e( 'Edit content', 'live-composer-page-builder' ) ?></span></div>
+									</div>
+								</div><!-- .dslc-info-box-content -->
+							<%}%>
+
+							<% if(button_pos.value != 'aside' && elements.show_elements.button == true){%>
+								<div class="dslc-info-box-button">
+									<% if(button_link.value != ''){%>
+
+											<a href="<%= button_link.value || button_link.std %>" target="<%= button_target.value || button_target.std %>" class="dslc-primary" <% if(link_nofollow.value == 'nofollow'){%> rel="nofollow" <%}%> >
+											<% if(button_icon_id && button_icon_id.value != ''){%>
+												<span class="dslc-icon dslc-icon-<%= button_icon_id.value || button_icon_id.std %>"></span>
+											<%}%>
+
+											<span class="dslca-editable-content" data-id="button_title" data-type="simple" contenteditable>
+												<%= button_title.value || button_title.std %>
+											</span>
+										</a>
+									<%}%>
+
+									<% if(button_2_link.value != ''){%>
+										<a href="<%= button_2_link.value || button_2_link.std %>" target="<%= button_2_target.value || button_2_target.std %>" <% if(link_nofollow.value == 'nofollow'){%> rel="nofollow" <%}%> class="dslc-secondary">
+											<% if(button_2_icon_id && button_2_icon_id.value != ''){%>
+												<span class="dslc-icon dslc-icon-<%= button_2_icon_id.value || button_2_icon_id.std %>"></span>
+											<%}%>
+
+											<span class="dslca-editable-content" data-id="button_2_title" data-type="simple" contenteditable>
+												<%= button_2_title.value || button_2_title.std %>
+											</span>
+										</a>
+									<%}%>
+								</div><!-- .dslc-info-box-button -->
+							<%}%>
+						</div><!-- .dslc-info-box-main -->
+					</div><!-- .dslc-info-box-main-wrap -->
+				</div><!-- .dslc-info-box-wrapper -->
+			</div><!-- .dslc-info-box -->

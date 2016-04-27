@@ -1,0 +1,8 @@
+<div class="dslca-module-edit-option-radio-wrapper">
+	<% choices.forEach(function(checkbox_option){%>
+
+		<div class="dslca-module-edit-option-radio-single">
+			<input type="radio" id="<%= id %><%= checkbox_option.value %>" class="dslca-module-edit-field" data-id="<%= id %>" name="<%= id %>" value="<%= checkbox_option.value %>" <% if(obj.value == checkbox_option.value){%> checked <%}%> /> <label for="<%= id %><%= checkbox_option.value %>"><%= checkbox_option.label %></labe><br>
+		</div><!-- .dslca-module-edit-option-radio-single -->
+	<%});%>
+</div><!-- .dslca-module-edit-option-radio-wrapper -->

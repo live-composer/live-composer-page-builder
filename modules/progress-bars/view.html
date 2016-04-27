@@ -1,0 +1,12 @@
+<div class="dslc-progress-bar <%= animation.value == 'enabled' ? 'dslc-progress-bar-animated' : '' %>">
+	<% if(label_position.value != 'inside') {%>
+		<h4 class="dslc-progress-bar-label dslca-editable-content" data-id="label" data-type="simple" contenteditable><%= label.value != '' && label.value != undefined ? label.value : label.std %></h4>
+	<%}%>	
+	<span class="dslc-progress-bar-loader">
+		<span class="dslc-progress-bar-loader-inner dslc-in-viewport" data-amount="<%= amount.value || amount.std %>" data-speed="<%= animation_speed.value || animation_speed.std %>">
+			<% if(label_position.value == 'inside') {%>
+				<h4 class="dslc-progress-bar-label dslca-editable-content" data-id="label" data-type="simple" contenteditable><%= label.value != '' && label.value != undefined ? label.value : label.std %></h4>
+			<%}%>
+		</span>	
+	</span><!-- .dslc-progress-bar-loader -->	
+</div><!-- .dslc-progress-bar -->
