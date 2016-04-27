@@ -19,7 +19,7 @@
 				options.lightbox_final_url = options.lightbox_image.value.url;
 			}else{
 
-				if(options.button_url.value != ''){
+				if(options.button_url.value != '' && options.button_url.value != undefined){
 
 					options.lightbox_final_url = options.button_url.value;
 				}
