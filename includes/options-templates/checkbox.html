@@ -1,0 +1,10 @@
+<div class="dslca-module-edit-option-checkbox-wrapper">
+	<% Object.keys(choices).forEach(function(checkbox_option){%>
+
+		<div class="dslca-module-edit-option-checkbox-single">
+			<input type="checkbox" class="dslca-module-edit-field dslca-module-edit-field-checkbox" id="<%= id %><%= choices[checkbox_option].value %>" data-id="<%= id %>" name="<%= id %>" value="<%= choices[checkbox_option].value %>" <% if(choices[checkbox_option].checked == true){%> checked="checked" <%}%> <%= obj.affect_on_change_append %> />
+				<label class="checkbox-label" for="<%= id %><%= choices[checkbox_option].value %>"><%= choices[checkbox_option].label %></label>
+		</div><!-- .dslca-module-edit-option-checkbox-single -->
+
+	<%});%>
+</div><!-- .dslca-module-edit-option-checkbox-wrapper -->

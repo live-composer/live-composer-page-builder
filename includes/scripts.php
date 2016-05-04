@@ -123,7 +123,20 @@ function dslc_load_scripts() {
 		wp_enqueue_script( 'dslc-load-fonts', '//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js' );
 		wp_enqueue_script( 'dslc-builder-plugins-js', DS_LIVE_COMPOSER_URL . 'js/builder.plugins.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 
-		if ( DS_LIVE_COMPOSER_LOAD_MINIFIED && !SCRIPT_DEBUG )
+		/* Ver 2.0 */
+		wp_enqueue_script( 'extend-js', DS_LIVE_COMPOSER_URL . 'js/libs/Class.js', array( 'jquery', 'underscore' ), DS_LIVE_COMPOSER_VER );
+		wp_enqueue_script( 'smarty-templater', DS_LIVE_COMPOSER_URL . 'js/libs/smart.min.js', array( 'jquery', 'extend-js' ), DS_LIVE_COMPOSER_VER );
+		wp_enqueue_script( 'util-js', DS_LIVE_COMPOSER_URL . 'js/Util.js', array( 'jquery', 'extend-js' ), DS_LIVE_COMPOSER_VER );
+		wp_enqueue_script( 'mediator-js', DS_LIVE_COMPOSER_URL . 'js/Mediator.js', array( 'jquery', 'extend-js' ), DS_LIVE_COMPOSER_VER );
+		wp_enqueue_script( 'basicmodule-js', DS_LIVE_COMPOSER_URL . 'js/BasicModule.js', array( 'jquery', 'extend-js' ), DS_LIVE_COMPOSER_VER );
+		wp_enqueue_script( 'basicmodule-extender-js', DS_LIVE_COMPOSER_URL . 'js/BasicModuleUtils.js', array( 'jquery', 'extend-js' ), DS_LIVE_COMPOSER_VER );
+		wp_enqueue_script( 'base64', DS_LIVE_COMPOSER_URL . 'js/libs/base64.js', array(), DS_LIVE_COMPOSER_VER );
+		wp_enqueue_script( 'modernizr', DS_LIVE_COMPOSER_URL . 'js/libs/modernizr-custom.js', array(), DS_LIVE_COMPOSER_VER );
+		wp_enqueue_script( 'toolbarmain-js', DS_LIVE_COMPOSER_URL . 'js/ToolbarMain.js', array( 'jquery', 'extend-js' ), DS_LIVE_COMPOSER_VER );
+		wp_enqueue_script( 'options-field-extender', DS_LIVE_COMPOSER_URL . 'js/optionFieldUtils.js', array( 'jquery', 'extend-js' ), DS_LIVE_COMPOSER_VER );
+		wp_enqueue_script( 'modal-window', DS_LIVE_COMPOSER_URL . 'js/ModalWindow.js', array( 'jquery', 'extend-js' ), DS_LIVE_COMPOSER_VER );
+
+		if ( DS_LIVE_COMPOSER_LOAD_MINIFIED )
 			wp_enqueue_script( 'dslc-builder-main-js', DS_LIVE_COMPOSER_URL . 'js/builder.main.min.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 		else
 			wp_enqueue_script( 'dslc-builder-main-js', DS_LIVE_COMPOSER_URL . 'js/builder.main.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
@@ -148,7 +161,8 @@ function dslc_load_scripts() {
  * @since 1.0
  */
 
-function dslc_load_admin_scripts( $hook ) {
+function dslc_load_admin_scripts( $hook ) 
+{
 	if ( ( $hook == 'post-new.php' || $hook == 'post.php' ) && DS_LIVE_COMPOSER_LOAD_MINIFIED  && !SCRIPT_DEBUG ) {
 		wp_enqueue_script( 'dslc-post-options-js-admin', DS_LIVE_COMPOSER_URL . 'includes/post-options-framework/js/main.min.js', array('jquery', 'jquery-ui-core', 'jquery-ui-datepicker'), DS_LIVE_COMPOSER_VER );
 		if ( get_post_type( get_the_ID() ) == 'page' && $hook == 'post.php' ) {

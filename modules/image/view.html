@@ -1,0 +1,37 @@
+<div class="dslc-image">
+	<% if((!image.value || !image.value.url) && !image_url.value){%>
+
+		<br>
+		<br>
+		<div class="lc-editor-element dslc-notification dslc-red">
+			<span class="dslc-module-image-add-image-inner-hook">
+				<?php _e( 'Upload image', 'live-composer-page-builder' ) ?>
+			</span>
+		</div>
+
+	<%}else{%>
+
+		<% if(link_type.value && link_type.value != 'none'){%>
+			<a class="<%= obj.anchor_class %>" href="<%= obj.anchor_href %>" target="<%= obj.anchor_target %>">
+		<%}%>
+			<% if(typeof image.value == 'object' && image.value.url != ''){%>
+
+				<img src="<%= image.value.url %>" alt="<%= image_alt.value || image_alt.std %>" title="<%= image_title.value || image_title.std %>" />
+			 <%}else{%>
+
+			 	<img src="<%= image_url.value %>" alt="<%= image_alt.value || image_alt.std %>" title="<%= image_title.value || image_title.std %>" />
+			 <%}%>
+
+		<% if(link_type.value && link_type.value != 'none'){%>
+			</a>
+		<%}%>
+
+		<% if(custom_text_state.value != 'disabled'){ %>
+			<div class="dslc-image-caption">
+				<div class="dslca-editable-content" data-id="custom_text" data-type="simple" contenteditable>
+					<%= custom_text.value || custom_text.std %>
+				</div>
+			</div>
+		<%}%>
+	<%}%>
+</div><!-- .dslc-image -->

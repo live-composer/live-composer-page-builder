@@ -9,7 +9,7 @@ class DSLC_TP_Content extends DSLC_Module {
 
 	function __construct() {
 
-		$this->module_id = 'DSLC_TP_Content';
+		$this->module_id = __CLASS__;
 		$this->module_title = __( 'The Content', 'live-composer-page-builder' );
 		$this->module_icon = 'font';
 		$this->module_category = 'single';

@@ -468,4 +468,3 @@ function dslc_generate_notice_nonce($notice_id) {
 	$notice_nonce = wp_create_nonce('dslc_' . $notice_id . '_nonce');
 	return $notice_nonce;
 }
-

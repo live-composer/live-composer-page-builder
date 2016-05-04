@@ -1,0 +1,14 @@
+<% if(obj.numeric_option_type == 'slider'){%>
+
+	<div class="dslca-module-edit-field-slider"></div>
+	<span class="dslca-module-edit-field-slider-tooltip"><%= obj.value || std %></span>
+	<input type="hidden" class="dslca-module-edit-field" name="<%= id %>" data-id="<%= id %>" value="<%= !isNaN(parseInt(obj.value)) ? obj.value : std %>" data-affect-on-change-el="<%= obj.affect_on_change_el %>" data-affect-on-change-rule="<%= affect_on_change_rule %>" data-min="<%= slider_min %>" data-max="<%= slider_max %>" data-ext="<%= ext %>" data-increment="<%= slider_increment %>" />
+
+<%}else{%>
+
+	<div class="dslca-module-edit-field-numeric-wrap">
+		<input type="text" class="dslca-module-edit-field dslca-module-edit-field-numeric" name="<%= id %>" data-id="<%= id %>" value="<%= !isNaN(parseInt(obj.value)) ? obj.value : std %>" data-starting-val="<%= !isNaN(parseInt(obj.value)) ? obj.value : std %>" data-ext="<%= ext %>" <%= obj.affect_on_change_append %> />
+		<span class="dslca-module-edit-field-numeric-ext"><%= ext %></span>
+	</div>
+
+<%}%>

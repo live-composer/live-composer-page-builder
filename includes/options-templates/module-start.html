@@ -1,0 +1,25 @@
+<div id="dslc-module-<%= module_instance_id %>" class="<%= obj.module_class_arr %>" data-module-id="<%= module_instance_id %>" data-dslc-module-id="<%= id %>" data-dslc-module-size="<%= dslc_m_size %>" data-dslc-anim="none" data-dslc-anim-delay="0" data-dslc-anim-duration="650" data-dslc-anim-easing="ease" data-dslc-preset="none" title="<%= title %>" style="animation: forwards 0.65s ease none;">
+<div class="dslca-module-manage">
+	<span class="dslca-module-manage-line"></span>
+	<div class="dslca-module-manage-inner">
+		<span class="dslca-module-manage-hook dslca-module-edit-hook"><span class="dslc-icon-cog"></span></span>
+		<span class="dslca-module-manage-hook dslca-copy-module-hook"><span class="dslc-icon-copy"></span></span>
+		<span class="dslca-module-manage-hook dslca-move-module-hook"><span class="dslc-icon-move"></span></span>
+		<span class="dslca-module-manage-hook dslca-change-width-module-hook">
+			<span class="dslc-icon-columns"></span>
+			<div class="dslca-change-width-module-options">
+				<span data-size="1">1/12</span><span data-size="2">2/12</span>
+				<span data-size="3">3/12</span><span data-size="4">4/12</span>
+				<span data-size="5">5/12</span><span data-size="6">6/12</span>
+				<span data-size="7">7/12</span><span data-size="8">8/12</span>
+				<span data-size="9">9/12</span><span data-size="10">10/12</span>
+				<span data-size="11">11/12</span><span data-size="12">12/12</span>
+			</div>
+		</span>
+
+		<% if(obj.dynamic_module && obj.dynamic_module == true){%>
+			<span class="dslca-module-manage-hook dslca-load-dynamic-data-hook"><span class="dslc-icon-refresh"></span></span>
+		<%}%>
+		<span class="dslca-module-manage-hook dslca-delete-module-hook"><span class="dslc-icon-remove"></span></span>
+	</div>
+</div>

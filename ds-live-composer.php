@@ -1,23 +1,23 @@
 <?php
-/*
-	Plugin Name: Page Builder: Live Composer - drag and drop website builder (visual front end site editor)
-	Plugin URI: http://www.livecomposerplugin.com
-	Description: Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
-	Author: Live Composer Team
-	Version: 1.0.7.2
-	Author URI: http://livecomposerplugin.com
-	License: GPL2
-	License URI: https://www.gnu.org/licenses/gpl-2.0.html
-	Text Domain: live-composer-page-builder
-	Domain Path: /lang
-*/
+	/*
+		Plugin Name: Page Builder: Live Composer - drag and drop website builder (visual front end site editor)
+		Plugin URI: http://www.livecomposerplugin.com
+		Description: Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
+		Author: Live Composer Team
+		Version: 2.0
+		Author URI: http://livecomposerplugin.com
+		License: GPL2
+		License URI: https://www.gnu.org/licenses/gpl-2.0.html
+		Text Domain: live-composer-page-builder
+		Domain Path: /lang
+	*/
 
 	/**
 	 * Constants
 	 */
 
-	define( 'DS_LIVE_COMPOSER_VER', '1.0.7.2' );
-	define( 'DS_LIVE_COMPOSER_LOAD_MINIFIED', true );
+	define( 'DS_LIVE_COMPOSER_VER', '2.0' );
+	define( 'DS_LIVE_COMPOSER_LOAD_MINIFIED', false );
 
 	define( 'DS_LIVE_COMPOSER_SHORTNAME', __('Live Composer', 'live-composer-page-builder') );
 	define( 'DS_LIVE_COMPOSER_BASENAME', plugin_basename( __FILE__ ) );
@@ -29,14 +29,15 @@
 	define( 'DSLC_PO_FRAMEWORK_ABS', DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework' );
 	define( 'DSLC_ST_FRAMEWORK_ABS', DS_LIVE_COMPOSER_ABS . '/includes/single-templates-framework' );
 	define( 'DSLC_ROW_SYSTEM_ABS', DS_LIVE_COMPOSER_ABS . '/includes/row-system' );
+	include DS_LIVE_COMPOSER_ABS . '/includes/registry.class.php';
 
 	$dslc_var_image_option_bckp = array();
 	$dslc_var_row_options = array();
 
+
 	/**
 	 * Is live composer currently active?
 	 */
-
 	if ( isset( $_REQUEST['dslc'] ) && $_REQUEST['dslc'] === 'active' ) {
 		$dslc_active = true;
 		define( 'DS_LIVE_COMPOSER_ACTIVE', true );
@@ -44,6 +45,10 @@
 		$dslc_active = false;
 		define( 'DS_LIVE_COMPOSER_ACTIVE', false );
 	}
+
+	/// Use registry instead of global vars
+	$LC_Registry->set( 'dslc_active', $dslc_active);
+
 
 	/**
 	 * Global Variables
@@ -64,6 +69,7 @@
 	 * Include all the files
 	 */
 
+	include DS_LIVE_COMPOSER_ABS . '/includes/callback.class.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/other-functions.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/functions.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/display-functions.php';
@@ -77,11 +83,14 @@
 	include DS_LIVE_COMPOSER_ABS . '/includes/access-control.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/performance.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/archive-templates.php';
+	include DS_LIVE_COMPOSER_ABS . '/includes/tutorials/tutorial.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/styling-presets.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/header-footer.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/search-filter.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/post-templates.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/other.php';
+	include DS_LIVE_COMPOSER_ABS . '/includes/module.class.php';
+	include DS_LIVE_COMPOSER_ABS . '/includes/main.class.php';
 
 	/**
 	 * Tutorials disabled by default
@@ -92,13 +101,7 @@
 	 * @since 1.0.7
 	 */
 
-	add_action( 'after_setup_theme', 'dslc_tutorials_load');
-	function dslc_tutorials_load() {
-		$dslc_tutorials = false;
-		if ( apply_filters( 'dslc_tutorials', $dslc_tutorials ) ) {
-			include DS_LIVE_COMPOSER_ABS . '/includes/tutorials/tutorial.php';
-		}
-	}
+	add_action( 'after_setup_theme', array( 'DSLC_Main', 'dslc_tutorials_load' ) );
 
 	$cap_page = dslc_get_option( 'lc_min_capability_page', 'dslc_plugin_options_access_control' );
 	if ( ! $cap_page ) $cap_page = 'publish_posts';
@@ -106,69 +109,18 @@
 	define( 'DS_LIVE_COMPOSER_CAPABILITY_SAVE', $cap_page );
 
 	/**
-	 * Include Modules
+	 * Include Modules & Legacy Modules for migration puproses
 	 */
+	load_modules(DS_LIVE_COMPOSER_ABS . "/modules", "module.php");
+	load_modules(DS_LIVE_COMPOSER_ABS . "/includes/legacy-modules", "module.php");
 
-	include DS_LIVE_COMPOSER_ABS . '/includes/class.module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/posts/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/blog/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/projects/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/galleries/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/infobox/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/staff/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/woocommerce/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/separator/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/downloads/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/testimonials/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/text-simple/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/html/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tabs/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/sliders/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/partners/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/widgets/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/social/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/notification/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/button/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/image/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/progress-bars/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/accordion/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-title/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-content/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-excerpt/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-meta/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-downloads-button/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-thumbnail/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-gallery-slider/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-project-slider/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-comments/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-comments-form/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-staff-social/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/icon/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/navigation/module.php';
+	/**
+	 * Deny dslc EM if not authorized
+	 */
+	add_action('wp_loaded', array( 'DSLC_Main', 'wp_loaded' ) );
 
 	/**
 	 * Activation Hook
 	 */
-
-	function dslc_on_activation() {
-
-		set_transient( '_dslc_activation_redirect_1', true, 60 );
-
-	} register_activation_hook( __FILE__, 'dslc_on_activation' );
-
-	add_action( 'admin_init', 'welcome' );
-	function welcome() {
-
-		// Bail if no activation redirect
-		if ( ! get_transient( '_dslc_activation_redirect_1' ) )
-			return;
-
-		// Delete the redirect transient
-		delete_transient( '_dslc_activation_redirect_1' );
-
-		// Bail if activating from network, or bulk
-		if ( is_network_admin() || isset( $_GET['activate-multi'] ) )
-			return;
-
-		wp_safe_redirect( admin_url( 'admin.php?page=dslc_getting_started' ) ); exit;
-	}
+	register_activation_hook( __FILE__, array( 'DSLC_Main', 'dslc_on_activation') );
+	add_action( 'admin_init', array( 'DSLC_Main', 'welcome' ) );
