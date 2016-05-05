@@ -1218,7 +1218,11 @@ function dslc_load_template( $filename, $default = '' ) {
 
 function dslc_custom_css() {
 
-	if ( ! is_singular() && ! is_archive() && ! is_author() && ! is_search() && ! is_404() && ! is_home() )
+	// Allow theme developers to output CSS for non-standard custom post types
+	$dslc_custom_css_ignore_check = false;
+	$dslc_custom_css_ignore_check = apply_filters( 'dslc_generate_custom_css', $dslc_custom_css_ignore_check );
+
+	if ( ! is_singular() && ! is_archive() && ! is_author() && ! is_search() && ! is_404() && ! is_home() && ! $dslc_custom_css_ignore_check )
 		return;
 
 	global $dslc_active;
@@ -1359,7 +1363,7 @@ function dslc_custom_css() {
 		echo dslc_row_get_initial_style();
 
 		// Echo CSS style
-		if ( ! $dslc_active && $composer_code )
+		if ( ! $dslc_active && $composer_code || ! $dslc_active && $dslc_custom_css_ignore_check )
 			echo $dslc_css_style;
 
 	echo '</style>';
