@@ -16,13 +16,15 @@ class DSLC_Separator extends DSLC_Module{
 	/**
 	 * @inherited
 	 */
-	function __construct()
+	function __construct( $settings = [], $atts = [] )
 	{
 		$this->module_ver = 2;
 		$this->module_id = __CLASS__;
 		$this->module_title = __( 'Separator', 'live-composer-page-builder' );
 		$this->module_icon = 'minus';
 		$this->module_category = 'elements';
+
+		parent::__construct( $settings, $atts );
 	}
 
 	/**
@@ -381,25 +383,21 @@ class DSLC_Separator extends DSLC_Module{
 		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array( 'hover_opts' => false ) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
-		$options['user_logged_in'] = is_user_logged_in();
-		$options['current_user_can'] = current_user_can( DS_LIVE_COMPOSER_CAPABILITY );
-
 		return apply_filters( 'dslc_module_options', $dslc_options, $this->module_id );
-
 	}
 
 	/**
 	 * @inherited
 	 */
-	function output( $options )
+	function output( $options = [] )
 	{
-		$this->module_start( $options );
+		$this->module_start();
 
 		/* Module output stars here */
-		echo $this->renderModule( __DIR__, $options );
+		echo $this->renderModule();
 		/* Module output ends here */
 
-		$this->module_end( $options );
+		$this->module_end();
 	}
 
 }

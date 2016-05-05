@@ -17,23 +17,27 @@ class DSLC_Notification extends DSLC_Module {
 	var $module_icon;
 	var $module_category;
 
-	function __construct() {
-
+	/**
+	 * @inherited
+	 */
+	function __construct( $settings = [], $atts = [] )
+	{
 		$this->module_ver = 2;
 		$this->module_id = __CLASS__;
 		$this->module_title = __( 'Notification', 'live-composer-page-builder' );
 		$this->module_icon = 'info';
 		$this->module_category = 'elements';
 
+		parent::__construct( $settings, $atts );
 	}
 
 	/**
 	 * @inherited
 	 */
-	function options() {	
-
+	function options()
+	{
 		$dslc_options = array(
-	
+
 			array(
 				'label' => __( 'Show On', 'live-composer-page-builder' ),
 				'id' => 'css_show_on',
@@ -699,16 +703,18 @@ class DSLC_Notification extends DSLC_Module {
 
 	}
 
-	function output( $options ) {		
-
-		$this->module_start( $options );
+	/**
+	 * @inherited
+	 */
+	function output( $options = [] )
+	{
+		$this->module_start();
 
 		/* Module output stars here */
-		echo $this->renderModule( __DIR__, $options );
+		echo $this->renderModule();
 		/* Module output ends here */
 
-		$this->module_end( $options );
-
+		$this->module_end();
 	}
 
 }

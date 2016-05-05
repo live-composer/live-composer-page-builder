@@ -10,7 +10,7 @@ class DSLC_Accordion extends DSLC_Module {
 
 	function __construct() {
 
-		$this->module_id = 'DSLC_Accordion';
+		$this->module_id = __CLASS__;
 		$this->module_title = __( 'Accordion', 'live-composer-page-builder' );
 		$this->module_icon = 'reorder';
 		$this->module_category = 'elements';
@@ -18,7 +18,7 @@ class DSLC_Accordion extends DSLC_Module {
 
 	}
 
-	function options() {	
+	function options() {
 
 		$dslc_options = array(
 
@@ -1019,7 +1019,7 @@ class DSLC_Accordion extends DSLC_Module {
 		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
 			$dslc_is_admin = true;
 		else
-			$dslc_is_admin = false;		
+			$dslc_is_admin = false;
 
 		$this->module_start( $options );
 

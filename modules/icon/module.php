@@ -13,13 +13,15 @@ class DSLC_Icon extends DSLC_Module {
 	/**
 	 * @inherited
 	 */
-	function __construct()
+	function __construct( $settings = [], $atts = [] )
 	{
 		$this->module_ver = 2;
 		$this->module_id = __CLASS__;
 		$this->module_title = __( 'Icon', 'live-composer-page-builder' );
 		$this->module_icon = 'info';
 		$this->module_category = 'elements';
+
+		parent::__construct( $settings, $atts );
 	}
 
 	/**
@@ -388,17 +390,17 @@ class DSLC_Icon extends DSLC_Module {
 	/**
 	 * @inherited
 	 */
-	function output( $options )
+	function output( $options = [] )
 	{
 		global $dslc_active;
 
-		$this->module_start( $options );
+		$this->module_start();
 
 		/* Module output stars here */
-		echo $this->renderModule( __DIR__, $options );
+		echo $this->renderModule();
 		/* Module output ends here */
 
-		$this->module_end( $options );
+		$this->module_end();
 	}
 
 }

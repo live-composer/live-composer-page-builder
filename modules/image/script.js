@@ -6,25 +6,25 @@
 
 ;(function(){
 
-	jQuery(document).on('DSLC_extend_modules', function(){
+	jQuery( document ).on( 'DSLC_extend_modules', function(){
 
 		/**
 		 * Instant image addition
 		 */
-		jQuery(document).on('click', '.dslc-module-image-add-image-inner-hook', function()
+		jQuery( document ).on( 'click', '.dslc-module-image-add-image-inner-hook', function()
 		{
 			var addImageButton = this;
-			var fieldParent = jQuery(".dslca-module-edit-field.dslca-module-edit-field-image[data-id='image']").closest('.dslca-module-edit-option');
-			var hook = fieldParent.find('.dslca-module-edit-field-image-add-hook');
+			var fieldParent = jQuery( ".dslca-module-edit-field.dslca-module-edit-field-image[data-id='image']" ).closest( '.dslca-module-edit-option' );
+			var hook = fieldParent.find( '.dslca-module-edit-field-image-add-hook' );
 
-			if(hook.hasClass('dslca-module-edit-field-image-add-hook')){
+			if ( hook.hasClass( 'dslca-module-edit-field-image-add-hook' ) ) {
 
-				var field = hook.siblings('.dslca-module-edit-field-image');
-				var removeHook = hook.siblings('.dslca-module-edit-field-image-remove-hook');
-			}else{
+				var field = hook.siblings( '.dslca-module-edit-field-image' );
+				var removeHook = hook.siblings( '.dslca-module-edit-field-image-remove-hook' );
+			} else {
 
-				var field = hook.siblings('.dslca-modules-section-edit-field-upload');
-				var removeHook = hook.siblings('.dslca-modules-section-edit-field-image-remove-hook');
+				var field = hook.siblings( '.dslca-modules-section-edit-field-upload' );
+				var removeHook = hook.siblings( '.dslca-modules-section-edit-field-image-remove-hook' );
 			}
 
 			// Create the media frame.
@@ -37,22 +37,22 @@
 			});
 
 			// When an image is selected, run a callback.
-			file_frame.on('select', function(){
+			file_frame.on( 'select', function(){
 
-				var attachment = file_frame.state().get('selection').first().toJSON();
-				var module = jQuery(addImageButton).closest(".dslc-module-front").data('module-instance');
+				var attachment = file_frame.state().get( 'selection' ).first().toJSON();
+				var module = jQuery( addImageButton ).closest( ".dslc-module-front" ).data( 'module-instance' );
 
-				module.setOption("image",
+				module.setOption( "image",
 				    {
 						url: attachment.url,
 						id: attachment.id
 					}
 				);
 
-				var filename = attachment.filename.length <= 13 ? attachment.filename : attachment.filename.slice(0,13) + "...";
-				fieldParent.find('.dslca-image-filename').html(filename);
+				var filename = attachment.filename.length <= 13 ? attachment.filename : attachment.filename.slice( 0, 13 ) + "...";
+				fieldParent.find( '.dslca-image-filename' ).html( filename );
 
-				if(hook && removeHook){
+				if ( hook && removeHook ) {
 
 					hook.hide();
 					removeHook.show();
@@ -69,33 +69,37 @@
 			file_frame.open();
 		});
 
-		DSLC.ModulesManager.AvailModules.DSLC_Image.prototype.filterBeforeOptionSet = function(optionId, optionValue)
+		DSLC.ModulesManager.AvailModules.DSLC_Image.prototype.filterBeforeOptionSet = function( optionId, optionValue )
 		{
-			if(optionId == 'resize_width' || optionId == 'resize_height') return false;
+			if ( optionId == 'resize_width' || optionId == 'resize_height' ) return false;
 
 			return {optionValue: optionValue};
 		}
 
-		DSLC.ModulesManager.AvailModules.DSLC_Image.prototype.changeOptionsBeforeRender = function(options)
+		DSLC.ModulesManager.AvailModules.DSLC_Image.prototype.changeOptionsBeforeRender = function( options )
 		{
 			var anchor_class = '';
 			var anchor_target = '_self';
 			var anchor_href = '#';
 
-			if(options.link_type.value == 'url_new'){
+			if ( options.link_type.value == 'url_new' ) {
 
 				anchor_target = '_blank';
 			}
 
-			if(options.link_url.value && options.link_url.value != ''){
+			if(options.link_url.value && options.link_url.value != '' ) {
 
 				anchor_href = options.link_url.value;
 			}
 
-			if(options.link_type.value == 'lightbox' && options.link_lb_image.value && options.link_lb_image.value != ''){
+			if ( options.link_type.value == 'lightbox' ) {
 
 				anchor_class += 'dslc-lightbox-image ';
-				anchor_href = options.link_lb_image.value.url;
+
+				if( options.link_lb_image.value && options.link_lb_image.value != '' ) {
+
+					anchor_href = options.link_lb_image.value.url;
+				}
 			}
 
 			options.anchor_href = anchor_href;

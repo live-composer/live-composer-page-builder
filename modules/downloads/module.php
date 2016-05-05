@@ -34,7 +34,7 @@ class DSLC_Downloads extends DSLC_Module {
 		}
 
 		$dslc_options = array(
-			
+
 			array(
 				'label' => __( 'Show On', 'live-composer-page-builder' ),
 				'id' => 'css_show_on',
@@ -2038,7 +2038,7 @@ class DSLC_Downloads extends DSLC_Module {
 
 	}
 
-	function output( $options ) {
+	function output( $options = [] ) {
 
 		global $dslc_active;
 

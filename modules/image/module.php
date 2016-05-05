@@ -16,13 +16,15 @@ class DSLC_Image extends DSLC_Module{
 	/**
 	 * @inherited
 	 */
-	function __construct()
+	function __construct( $settings = [], $atts = [] )
 	{
 		$this->module_ver = 2;
 		$this->module_id = __CLASS__;
 		$this->module_title = __( 'Image', 'live-composer-page-builder' );
 		$this->module_icon = 'picture';
 		$this->module_category = 'elements';
+
+		parent::__construct( $settings, $atts );
 	}
 
 	/**
@@ -646,16 +648,16 @@ class DSLC_Image extends DSLC_Module{
 	/**
 	 * @inherited
 	 */
-	function output( $options )
+	function output( $options = [] )
 	{
-		$tempOpt = $options;
-		$tempOpt = array_merge( $tempOpt, $options['propValues'] );
+		$tempOpt = $this->settings;
+		$tempOpt = array_merge( $tempOpt, $this->settings['propValues'] );
 		unset( $tempOpt['propValues'] );
 
 		$this->module_start( $tempOpt );
 
 		/* Module output starts here */
-		echo $this->renderModule( __DIR__, $options );
+		echo $this->renderModule();
 		/* Module output ends here */
 
 		$this->module_end( $tempOpt );

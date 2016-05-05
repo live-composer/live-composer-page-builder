@@ -412,7 +412,7 @@
 
 						var value = rules[rule];
 
-						if(value.trim() != '' && value.trim() != 'url(" ")'){
+						if( rule != '' && value.trim() != '' && value.trim() != 'url(" ")'){
 
 							css_output += rule + ' : ' + value + important_append + '; ';
 						}

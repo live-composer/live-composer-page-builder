@@ -51,9 +51,10 @@ function dslc_register_modules()
 	dslc_register_module( 'DSLC_TP_Project_Slider' );
 	dslc_register_module( 'DSLC_TP_Comments' );
 	dslc_register_module( 'DSLC_TP_Comments_Form' );
-	dslc_register_module( 'DSLC_TP_Staff_Social' );
-	dslc_register_module( 'DSLC_Html' );
-	dslc_register_module( 'DSLC_Posts' );
+	dslc_register_module( 'DSLC_TP_Staff_Social' );*/
+/*	dslc_register_module( 'DSLC_Html' );
+	dslc_register_module( 'DSLC_Accordion' );
+	/*dslc_register_module( 'DSLC_Posts' );
 	dslc_register_module( 'DSLC_Blog' );
 	dslc_register_module( 'DSLC_Projects' );
 	dslc_register_module( 'DSLC_Galleries' );

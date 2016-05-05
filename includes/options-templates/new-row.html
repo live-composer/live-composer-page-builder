@@ -1,0 +1,58 @@
+<?php
+// Allows devs to add classes
+		$filter_classes = array();
+		$filter_classes = apply_filters( 'dslc_row_class', $filter_classes );
+		$extra_classes = '';
+		if ( count( $filter_classes ) > 0 ) {
+			foreach ( $filter_classes as $filter_class ) {
+				$extra_classes .= $filter_class . ' ';
+			}
+		}
+
+		// The output
+		$output = '<div class="dslc-modules-section dslc-modules-section-empty ' . $extra_classes . '" style="' . dslc_row_get_style() . '">
+			<div class="dslc-bg-video"><div class="dslc-bg-video-inner"></div><div class="dslc-bg-video-overlay"></div></div>
+			<div class="dslc-modules-section-wrapper">
+				<div class="dslc-modules-section-inner dslc-clearfix">
+					<div class="dslc-modules-area dslc-col dslc-12-col" data-size="12">
+						<div class="dslc-modules-area-inner">
+							<div class="dslca-modules-area-manage">
+								<div class="dslca-modules-area-manage-inner">
+									<span class="dslca-manage-action dslca-copy-modules-area-hook"><span class="dslca-icon dslc-icon-copy"></span></span>
+									<span class="dslca-manage-action dslca-move-modules-area-hook"><span class="dslca-icon dslc-icon-move"></span></span>
+									<span class="dslca-manage-action dslca-change-width-modules-area-hook">
+										<span class="dslca-icon dslc-icon-columns"></span>
+										<div class="dslca-change-width-modules-area-options">
+											<span data-size="1">1/12</span><span data-size="2">2/12</span>
+											<span data-size="3">3/12</span><span data-size="4">4/12</span>
+											<span data-size="5">5/12</span><span data-size="6">6/12</span>
+											<span data-size="7">7/12</span><span data-size="8">8/12</span>
+											<span data-size="9">9/12</span><span data-size="10">10/12</span>
+											<span data-size="11">11/12</span><span data-size="12">12/12</span>
+										</div>
+									</span>
+									<span class="dslca-manage-action dslca-delete-modules-area-hook"><span class="dslca-icon dslc-icon-remove"></span></span>
+								</div>
+							</div>
+							<div class="dslca-no-content">
+								<span class="dslca-no-content-primary"><span class="dslca-icon dslc-icon-download-alt"></span><span class="dslca-no-content-help-text">' . __( 'Drop modules here', 'live-composer-page-builder' ) . '</span></span>
+							</div>
+							<div class="dslca-module-loading"><div class="dslca-module-loading-inner"></div></div>
+						</div>
+					</div>
+				</div><!-- .dslc-module-section-inner -->
+				<div class="dslca-modules-section-manage">
+					<div class="dslca-modules-section-manage-inner">
+						<span class="dslca-manage-action dslca-edit-modules-section-hook"><span class="dslca-icon dslc-icon-cog"></span></span>
+						<span class="dslca-manage-action dslca-copy-modules-section-hook"><span class="dslca-icon dslc-icon-copy"></span></span>
+						<span class="dslca-manage-action dslca-move-modules-section-hook"><span class="dslca-icon dslc-icon-move"></span></span>
+						<span class="dslca-manage-action dslca-export-modules-section-hook"><span class="dslca-icon dslc-icon-upload-alt"></span></span>
+						<span class="dslca-manage-action dslca-delete-modules-section-hook"><span class="dslca-icon dslc-icon-remove"></span></span>
+					</div>
+				</div>
+				<div class="dslca-modules-section-settings">' . dslc_row_get_options_fields() . '</div><!-- .dslca-module-section-settings -->
+				<div class="dslca-module-loading dslca-modules-area-loading"><div class="dslca-module-loading-inner"></div></div>
+			</div><!-- .dslc-module-section-wrapper -->
+		</div>';
+
+echo $output;

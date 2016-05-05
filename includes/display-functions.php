@@ -523,6 +523,14 @@ function dslc_display_composer() {
 			</script>
 		</div>
 		<?php
+		$cache = DSLC_Main::getCurPageHTMLCache();
+
+		if ( $cache != '' ) {
+		?>
+		<div class="dslc-cached-version">
+		<?php echo $cache; ?>
+		</div>
+		<?php }
 	}
 
 } add_action('wp_footer', 'dslc_display_composer');
@@ -654,19 +662,13 @@ function dslc_display_templates()
 						<?php endif; ?>
 					</div><!-- .dslc-template -->
 					<?php
-
 				}
-
 			}
-
 		} else {
 
 			echo 'No Templates Found';
-
 		}
-
 	}
-
 }
 
 
@@ -758,13 +760,6 @@ function dslc_filter_content( $content )
 
 			// Get template ID set for currently shown post
 			$template_ID = dslc_st_get_template_ID( get_the_ID() );
-
-			// If template ID exists
-			if ( $template_ID ) {
-
-				// Get LC code of the template
-				$composer_code = dslc_get_code( $template_ID );
-			}
 		}
 
 		// If currently showing a category archive page
@@ -772,13 +767,6 @@ function dslc_filter_content( $content )
 
 			// Get ID of the page set to power the category of the current post type
 			$template_ID = dslc_get_option( get_post_type(), 'dslc_plugin_options_archives' );
-
-			// If there is a page that powers it
-			if ( $template_ID ) {
-
-				// Get LC code of the page
-				$composer_code = dslc_get_code( $template_ID );
-			}
 		}
 
 		// If currently showing an author archive page
@@ -786,13 +774,6 @@ function dslc_filter_content( $content )
 
 			// Get ID of the page set to power the author archives
 			$template_ID = dslc_get_option( 'author', 'dslc_plugin_options_archives' );
-
-			// If there is a page that powers it
-			if ( $template_ID ) {
-
-				// Get LC code of the page
-				$composer_code = dslc_get_code( $template_ID );
-			}
 		}
 
 		// If currently showing a search results page
@@ -800,13 +781,6 @@ function dslc_filter_content( $content )
 
 			// Get ID of the page set to power the search results page
 			$template_ID = dslc_get_option('search_results', 'dslc_plugin_options_archives');
-
-			// If there is a page that powers it
-			if ( $template_ID ) {
-
-				// Get LC code of the page
-				$composer_code = dslc_get_code( $template_ID );
-			}
 		}
 
 		// If currently showina 404 page
@@ -814,13 +788,13 @@ function dslc_filter_content( $content )
 
 			// Get ID of the page set to power the 404 page
 			$template_ID = dslc_get_option( '404_page', 'dslc_plugin_options_archives' );
+		}
 
-			// If there is a page that powers it
-			if ( $template_ID ) {
+		// If template ID exists
+		if ( $template_ID ) {
 
-				// Get LC code of the page
-				$composer_code = dslc_get_code( $template_ID );
-			}
+			// Get LC code of the template
+			$composer_code = dslc_get_code( $template_ID );
 		}
 
 		// If currently showing a singular post of a post type which is not "dslc_hf" (used for header/footer)
@@ -857,7 +831,6 @@ function dslc_filter_content( $content )
 
 			// Start output fetching
 			ob_start();
-
 			?>
 				<div class="dslca-wp-editor">
 					<div class="dslca-wp-editor-inner">
@@ -884,38 +857,39 @@ function dslc_filter_content( $content )
 			ob_end_clean();
 		}
 
+		$cache = DSLC_Main::getCurPageHTMLCache();
+
 		// If there is LC code to add to the content output
 		if ( $composer_code || $template_code ) {
 
-			// Turn the LC code into HTML code
-			$composer_content = do_shortcode( $composer_code );
+				// Turn the LC code into HTML code
+				$composer_content = do_shortcode( $composer_code );
 
 		// If there is header or footer LC code to add to the content output
 		} elseif ( $composer_header || $composer_footer ) {
 
 			// If editor not active
-			if(!DS_LIVE_COMPOSER_ACTIVE) {
+			if( ! DS_LIVE_COMPOSER_ACTIVE ) {
 
 				// Pass the LC header, regular content and LC footer
-				return $composer_wrapper_before . $composer_header . '<div id="dslc-theme-content"><div id="dslc-theme-content-inner">' . $content . '</div></div>' . $composer_footer . $composer_wrapper_after;
-
+				return $composer_wrapper_before . $composer_header . '<div id="dslc-theme-content"><div id="dslc-theme-content-inner">' . $content .
+				'</div></div>' . $composer_footer . $composer_wrapper_after;
 			}
-
 		} else {
 
 			// If editor not active
-			if(!DS_LIVE_COMPOSER_ACTIVE) {
+			if( ! DS_LIVE_COMPOSER_ACTIVE ) {
 
 				// Pass back the original wrapped in a div (in case there's a need to style it)
 				return '<div id="dslc-theme-content"><div id="dslc-theme-content-inner">' . $content . '</div></div>';
 			}
-
 		}
 
 		// If singular post shown and has a featured image
-		if(is_singular() && has_post_thumbnail(get_the_ID())) {
+		if( is_singular() && has_post_thumbnail( get_the_ID() ) ) {
 			// Hidden input holding value of the URL of the featured image of the shown post (used by rows for BG image)
-			$composer_append .= '<input type="hidden" id="dslca-post-data-thumb" value="' . apply_filters('dslc_row_bg_featured_image', wp_get_attachment_url(get_post_thumbnail_id(get_the_ID()))) . '" />';
+			$composer_append .= '<input type="hidden" id="dslca-post-data-thumb" value="' .
+			apply_filters( 'dslc_row_bg_featured_image', wp_get_attachment_url( get_post_thumbnail_id( get_the_ID() ) ) ) . '" />';
 		}
 
 		// If current page is used for a tutorial
@@ -937,19 +911,22 @@ function dslc_filter_content( $content )
 			$composer_append .= '<textarea id="dslca-content-for-search">' . $content_for_search . '</textarea>';
 		}
 
+		if ( ! DS_LIVE_COMPOSER_ACTIVE && $cache != '' ) {
+
+			$composer_content = do_shortcode( $cache );
+		}
+
 		// Pass the filtered content output
 		return $composer_wrapper_before . do_action( 'dslc_output_prepend' ) .
 		$composer_header . '<div id="dslc-main">' . $composer_prepend . $composer_content . '</div>' .
-		 $composer_append . $composer_footer . do_action( 'dslc_output_append' ) . $composer_wrapper_after;
+		$composer_append . $composer_footer . do_action( 'dslc_output_append' ) . $composer_wrapper_after;
 
 	// If LC should not filter the content
 	} else {
 
 		// Pass back the original wrapped in a div (in case there's a need to style it)
 		return '<div id="dslc-theme-content"><div id="dslc-theme-content-inner">' . $content . '</div></div>';
-
 	}
-
 } add_filter( 'the_content', 'dslc_filter_content', 101 );
 
 
@@ -961,20 +938,10 @@ function dslc_filter_content( $content )
 
 function dslc_module_front( $atts, $settings_raw = null )
 {
-
-	$phpSerializedSettings = true;
-	$settings = maybe_unserialize( base64_decode( $settings_raw ) );
-	$legSettings = $settings;
+	global $LC_Registry;
 
 
-	/** LC Ferrum 1.5 start */
-	if ( ! is_array( $settings ) ) {
-
-		$settings = json_decode( base64_decode( $settings_raw ), true );
-		$phpSerializedSettings = false;
-	}
-	/** LC Ferrum 1.5 end */
-
+	$settings = json_decode( base64_decode( $settings_raw ), true );
 
 	if ( is_array( $settings ) ) {
 
@@ -989,109 +956,21 @@ function dslc_module_front( $atts, $settings_raw = null )
 		if ( ! class_exists( $module_id ) )
 			return;
 
-		$class_info = new $module_id;
+		$module_instance = new $module_id( $settings, $atts );
 
 
-		/** LC Ferrum 1.5 start */
-		if ( isset( $class_info->module_ver ) && $class_info->module_ver > 1 ) {
+		if ( DS_LIVE_COMPOSER_ACTIVE  && ! $LC_Registry->get( 'removeAdminElementsFromEditor' ) ) {
 
-			$tempSettings = array();
+			return $module_instance->renderEditModeModule();
+		}else{
 
-			if( $phpSerializedSettings ) {
-
-				$tempSettings['version'] = 2;
-				$tempSettings['module_id'] = $settings['module_id'];
-				$tempSettings['module_instance_id'] = $settings['module_instance_id'];
-				$tempSettings['post_id'] = $settings['post_id'];
-
-				unset( $settings['version'] );
-				unset( $settings['module_instance_id'] );
-				unset( $settings['module_id'] );
-				unset( $settings['post_id'] );
-
-				$tempSettings['propValues'] = $settings;
-
-				$settings = $tempSettings;
-				unset( $tempSettings );
-			}
-
-			if ( isset( $atts['last'] ) && $atts['last'] == 'yes' ) {
-				$settings['dslc_m_size_last'] = 'yes';
-			} else {
-				$settings['dslc_m_size_last'] = 'no';
-			}
-
-
-			$cacheReset = @get_option( 'dslc_module_cache' )[$settings['module_id']] || 0;
-
-			if ( intval( $cacheReset ) == 0 ) {
-
-				$cacheReset = date( 'U' );
-				$cacheObj = get_option( 'dslc_module_cache' );
-				$cacheObj[$settings['module_id']] = $cacheReset;
-
-				update_option( 'dslc_module_cache', $cacheObj );
-			}
-
-
-			if ( ! isset( $settings['cacheLastReset'] ) || $settings['cacheLastReset'] != $cacheReset ) {
-
-				$renderSettings = $settings;
-				$renderSettings['cacheLastReset'] = $cacheReset;
-
-				$currPageCode = get_post_meta( get_the_ID(), 'dslc_code' )[0];
-				$newPageCode = str_replace( $settings_raw, base64_encode( json_encode( $renderSettings) ), $currPageCode );
-				update_post_meta( get_the_ID(), 'dslc_code', $newPageCode, $currPageCode );
-			}
-
-			$module_instance = new $module_id();
-
-			/// Set image from atts
-			if ( is_array ( $atts ) ) {
-
-				$modOptions = $module_instance->options();
-				$modOptsSort = [];
-
-				foreach( $modOptions as $mod ) {
-
-					$modOptsSort[$mod['id']] = $mod;
-				}
-
-				foreach ( $atts as $key => $attr ) {
-
-					if ( @$modOptsSort[$key]['type'] == 'image' && @is_array( $settings['propValues'][$key] ) ) {
-
-						$settings['propValues'][$key]['url'] = $attr;
-					}
-				}
-			}
-
-
-			/// Temporary hack for DSLC_Image
-			if ( $module_id == 'DSLC_Image' && isset( $settings['propValues']['image'] ) && ! is_array( $settings['propValues']['image'] ) && intval( $settings['propValues']['image'] > 0 ) ) {
-
-				$imgUrl = wp_get_attachment_image_src( $settings['propValues']['image'], 'full' );
-				$width = @intval( $settings['propValues']['resize_width'] ) > 0 ? $settings['propValues']['resize_width'] : null;
-				$height = @intval( $settings['propValues']['resize_height'] ) > 0 ? $settings['propValues']['resize_height'] : null;
-
-				$settings['propValues']['image'] = ['id' => $settings['propValues']['image'], 'url' => dslc_aq_resize( $imgUrl[0], $width, $height, true )];
-			}
-
-
-			if ( DS_LIVE_COMPOSER_ACTIVE ) {
-
-				return $module_instance->renderEditModeModule( $settings );
-			}else{
-
-				ob_start();
-				$module_instance->output( $settings );
-				// End output fetching
-				$output = ob_get_contents();
-				ob_end_clean();
-				return $output;
-			}
+			ob_start();
+			$module_instance->output( [] );
+			// End output fetching
+			$output = ob_get_contents();
+			ob_end_clean();
+			return $output;
 		}
-		/** LC Ferrum 1.5 end */
 
 	}else{
 
@@ -1106,8 +985,8 @@ function dslc_module_front( $atts, $settings_raw = null )
  * @since 1.0
  */
 
-function dslc_modules_section_front( $atts, $content = null ) {
-
+function dslc_modules_section_front( $atts, $content = null )
+{
 	global $dslc_active;
 	$section_style = dslc_row_get_style( $atts );
 	$section_class = '';
@@ -1195,7 +1074,7 @@ function dslc_modules_section_front( $atts, $content = null ) {
 	}
 
 	// No video HTML if builder innactive or no video
-	if ( ! $dslc_active && $atts['bg_video'] == '' && $atts['bg_image'] == '' && isset( $atts['bg_image_thumb'] ) && $atts['bg_image_thumb'] == 'disabled' ) {
+	if ( ! $dslc_active && @$atts['bg_video'] == '' && @$atts['bg_image'] == '' && isset( $atts['bg_image_thumb'] ) && @$atts['bg_image_thumb'] == 'disabled' ) {
 		$bg_video = '';
 	}
 
@@ -1260,6 +1139,8 @@ function dslc_modules_section_front( $atts, $content = null ) {
 	if($section_id)
 		$section_id_output = 'id="' . $section_id . '"';
 
+	global $LC_Registry;
+
 	$output = '
 		<div ' . $section_id_output . ' class="dslc-modules-section ' . $a_container_class . $parallax_class . $section_class . $extra_classes .'" style="' . dslc_row_get_style($atts) . '">
 
@@ -1269,7 +1150,7 @@ function dslc_modules_section_front( $atts, $content = null ) {
 					. $a_prepend. do_shortcode( $content ) . $a_append
 					. '</div>';
 
-		if($dslc_active && is_user_logged_in() && current_user_can(DS_LIVE_COMPOSER_CAPABILITY)) {
+		if ( $LC_Registry->get( 'showAdminElementsInEditorHTML' ) && $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
 			// Management
 			$output .= '
@@ -1302,9 +1183,10 @@ function dslc_modules_section_front( $atts, $content = null ) {
  * @since 1.0
  */
 
-function dslc_modules_area_front($atts, $content = null) {
+function dslc_modules_area_front( $atts, $content = null ) {
 
 	global $dslc_active;
+	global $LC_Registry;
 
 	$pos_class = '';
 	$module_area_size = $atts['size'];
@@ -1317,7 +1199,7 @@ function dslc_modules_area_front($atts, $content = null) {
 
 	$output = '<div class="dslc-modules-area dslc-col dslc-' . $atts['size'] . '-col '. $pos_class .'" data-size="' . $atts['size'] . '">';
 
-		if($dslc_active && is_user_logged_in() && current_user_can(DS_LIVE_COMPOSER_CAPABILITY)) {
+		if ( $LC_Registry->get( 'showAdminElementsInEditorHTML' ) && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
 			// Management
 			$output .= '<div class="dslca-modules-area-manage">
@@ -1352,7 +1234,7 @@ function dslc_modules_area_front($atts, $content = null) {
 
 		// Modules output
 		if ( empty( $content ) || $content == ' ' )
-			$output .= '&nbsp;';
+			$output .= '';
 		else
 			$output .= do_shortcode($content);
 

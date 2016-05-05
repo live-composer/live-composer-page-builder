@@ -16,28 +16,70 @@ class DSLC_TP_Title extends DSLC_Module {
 	/**
 	 * @inherited
 	 */
-	function __construct()
+	function __construct( $settings = [], $atts = [] )
 	{
-		$this->cache_reset_events = array(
-			'post',
-			'page'
-		);
-
 		$this->module_ver = 2;
 		$this->dynamic_module = true;
 		$this->module_id = __CLASS__;
 		$this->module_title = __( 'Title', 'live-composer-page-builder' );
 		$this->module_icon = 'font';
 		$this->module_category = 'single';
+
+		parent::__construct( $settings, $atts );
+	}
+
+	/**
+	 * @inherited
+	 */
+	static function afterRegister()
+	{
+		add_shortcode('dslc_tp_title', [ __CLASS__, 'post_title' ] );
 	}
 
 	/**
 	 * Function returns current title
 	 * @return  string current post title
 	 */
-	static function post_title( $PARAMS = array() )
+	static function post_title( $atts = [] )
 	{
-		return get_the_title( @$PARAMS['additional']['postId'] );
+		if ( is_singular() ) {
+			$post_id = get_the_ID();
+		}
+
+		if ( is_category() ) {
+
+			$title = single_cat_title( '', false );
+		} elseif ( is_tag() ) {
+
+			$title = single_tag_title( '', false );
+		} elseif ( is_author() ) {
+
+			$title = get_the_author();
+		} elseif ( is_year() ) {
+
+			$title = get_the_date( 'Y' );
+		} elseif ( is_month() ) {
+
+			$title = get_the_date( 'F Y' );
+		} elseif ( is_day() ) {
+
+			$title = get_the_date( 'F j, Y' );
+		} elseif ( is_post_type_archive() ) {
+
+			$title = post_type_archive_title( '', false );
+		} elseif ( is_tax() ) {
+
+			$tax = get_taxonomy( get_queried_object()->taxonomy );
+			$title = $tax->labels->singular_name . ' ' . single_term_title( '', false );
+		} elseif ( is_search() ) {
+
+			$title = get_the_title( $post_id ) . ' ' . get_search_query();
+		} else {
+
+			$title = get_the_title( $post_id );
+		}
+
+		return $title;
 	}
 
 	/**
@@ -491,53 +533,17 @@ class DSLC_TP_Title extends DSLC_Module {
 	/**
 	 * @inherited
 	 */
-	function output( $options ) {
-
-		global $dslc_active;
-
-		$post_id = $options['post_id'];
-
-		if ( is_singular() ) {
-			$post_id = get_the_ID();
-		}
-
-		$tempOpt = $options;
-		$tempOpt = array_merge( $tempOpt, $options['propValues'] );
-		unset( $tempOpt['propValues'] );
-
-		$this->module_start( $tempOpt );
+	function output( $options )
+	{
+		$this->module_start();
 
 		// /* Module output starts here */
 
-		// 	if ( is_category() ) {
-		// 		$title = single_cat_title( '', false );
-		// 	} elseif ( is_tag() ) {
-		// 		$title = single_tag_title( '', false );
-		// 	} elseif ( is_author() ) {
-		// 		$title = get_the_author();
-		// 	} elseif ( is_year() ) {
-		// 		$title = get_the_date( 'Y' );
-		// 	} elseif ( is_month() ) {
-		// 		$title = get_the_date( 'F Y' );
-		// 	} elseif ( is_day() ) {
-		// 		$title = get_the_date( 'F j, Y' );
-		// 	} elseif ( is_post_type_archive() ) {
-		// 		$title = post_type_archive_title( '', false );
-		// 	} elseif ( is_tax() ) {
-		// 		$tax = get_taxonomy( get_queried_object()->taxonomy );
-		// 		$title = $tax->labels->singular_name . ' ' . single_term_title( '', false );
-		// 	} elseif ( is_search() ) {
-		// 		$title = get_the_title( $post_id ) . ' ' . get_search_query();
-		// 	} else {
-		// 		$title = get_the_title( $post_id );
-		// 	}
-
-		echo $this->renderModule( __DIR__, $options );
+		echo $this->renderModule();
 
 		/* Module output ends here */
 
-		$this->module_end( $options );
-
+		$this->module_end();
 	}
 
 }

@@ -1,5 +1,11 @@
 <?php
+/**
+ * HTML module class
+ */
 
+/**
+ * Class DSLC_Html
+ */
 class DSLC_Html extends DSLC_Module {
 
 	var $module_id;
@@ -7,19 +13,27 @@ class DSLC_Html extends DSLC_Module {
 	var $module_icon;
 	var $module_category;
 
-	function __construct() {
-
-		$this->module_id = 'DSLC_Html';
+	/**
+	 * @inherited
+	 */
+	function __construct( $settings = [], $atts = [] )
+	{
+		$this->module_id = __CLASS__;
 		$this->module_title = __( 'HTML', 'live-composer-page-builder' );
 		$this->module_icon = 'code';
 		$this->module_category = 'general';
 
+		parent::__construct( $settings, $atts );
 	}
 
-	function options() {	
-
+	/**
+	 * @inhertied
+	 * @return [type] [description]
+	 */
+	function options()
+	{
 		$dslc_options = array(
-			
+
 			array(
 				'label' => __( 'Show On', 'live-composer-page-builder' ),
 				'id' => 'css_show_on',
@@ -40,7 +54,7 @@ class DSLC_Html extends DSLC_Module {
 					),
 				),
 			),
-			
+
 			array(
 				'label' => __( 'HTML/Shortcode', 'live-composer-page-builder' ),
 				'id' => 'content',
@@ -2065,7 +2079,7 @@ class DSLC_Html extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'blockquote', 'live-composer-page-builder' ),
 			),
-			
+
 			/**
 			 * Submit Button
 			 */
@@ -2300,7 +2314,7 @@ class DSLC_Html extends DSLC_Module {
 			/**
 			 * Responsive Tablet
 			 */
-			
+
 			array(
 				'label' => __( 'Responsive Styling', 'live-composer-page-builder' ),
 				'id' => 'css_res_t',
@@ -2565,7 +2579,7 @@ class DSLC_Html extends DSLC_Module {
 			/**
 			 * Responsive Phone
 			 */
-			
+
 			array(
 				'label' => __( 'Responsive Styling', 'live-composer-page-builder' ),
 				'id' => 'css_res_p',
@@ -2823,43 +2837,29 @@ class DSLC_Html extends DSLC_Module {
 				'section' => 'responsive',
 				'tab' => __( 'phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
-			),
-
+			)
 		);
-	
+
 		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array( 'hover_opts' => false ) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		return apply_filters( 'dslc_module_options', $dslc_options, $this->module_id );
-
 	}
 
-	function output( $options ) {
-
-		global $dslc_active;		
-
-		$this->module_start( $options );
+	/**
+	 * @inherited
+	 */
+	function output( $options = [] )
+	{
+		$this->module_start();
 
 		/* Module output starts here */
-			
-			?><div class="dslc-html-module-content"><?php 
 
-				$output_content = stripslashes( $options['content'] );
-				$output_content = do_shortcode( $output_content );
-				echo $output_content;
-
-			?></div><?php
-
-			if ( empty( $output_content ) ) :
-
-				?><div class="dslc-notification dslc-red">Looks like there is no content.</div><?php
-
-			endif;
+		echo $this->renderModule();
 
 		/* Module output ends here */
 
-		$this->module_end( $options );
-
+		$this->module_end();
 	}
 
 }

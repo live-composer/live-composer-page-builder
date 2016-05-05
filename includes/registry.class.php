@@ -31,7 +31,7 @@ class LC_Registry {
      */
     function get($name)
     {
-        return $this->_objects[$name];
+        return isset($this->_objects[$name]) ? $this->_objects[$name] : null;
     }
 
 }

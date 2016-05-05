@@ -9,7 +9,7 @@ class DSLC_Blog extends DSLC_Module {
 
 	function __construct() {
 
-		$this->module_id = 'DSLC_Blog';
+		$this->module_id = __CLASS__;
 		$this->module_title = __( 'Blog', 'live-composer-page-builder' );
 		$this->module_icon = 'pencil';
 		$this->module_category = 'posts';

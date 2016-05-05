@@ -432,7 +432,7 @@ body {
 				}
 
 				.dslca-module-edit-field-icon-wrapper {
-					width: 200px;
+					width: 82%;
 				}
 
 					.dslca-module-edit-field-font,
@@ -441,16 +441,17 @@ body {
 					}
 
 						.dslca-options-iconbutton {
-							background: #3b6fbe none repeat scroll 0 0;
-							border: 1px solid #3565ad;
-							border-radius: 3px;
-							cursor: pointer;
-							display: inline-block;
-							height: 32px;
-							position: relative;
-							text-align: center;
-							vertical-align: middle;
-							width: 30px;
+							    background: #3b6fbe none repeat scroll 0 0;
+							    border: 1px solid #3565ad;
+							    border-radius: 3px;
+							    cursor: pointer;
+							    display: inline-block;
+							    height: 32px;
+							    float: right;
+							    position: relative;
+							    text-align: center;
+							    vertical-align: middle;
+							    width: 15%;
 						}
 
 							.dslca-options-iconbutton .dslca-icon {
@@ -1645,6 +1646,10 @@ body {
 
 .dslc-modules-area {
 	position: relative;
+}
+
+#dslc-content .dslc-modules-area-empty:only-of-type .dslca-delete-modules-area-hook{
+	display: none;
 }
 
 .dslca-modules-area-drag-in-progress .dslc-modules-area {
@@ -3514,5 +3519,12 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
  * Image module
  */
 .dslc-image img.front-image {
+	display: none;
+}
+
+/**
+ * Cached front version
+ */
+.dslc-cached-version{
 	display: none;
 }

@@ -16,13 +16,15 @@ class DSLC_Info_Box extends DSLC_Module{
 	/**
 	 * @inherited
 	 */
-	function __construct()
+	function __construct( $settings = [], $atts = [] )
 	{
 		$this->module_ver = 2;
 		$this->module_id = __CLASS__;
 		$this->module_title = __( 'Info Box', 'live-composer-page-builder' );
 		$this->module_icon = 'info';
 		$this->module_category = 'elements';
+
+		parent::__construct( $settings, $atts );
 	}
 
 	/**
@@ -2513,14 +2515,13 @@ class DSLC_Info_Box extends DSLC_Module{
 	/**
 	 * @inherited
 	 */
-	function output( $options ){
+	function output( $options = [] ){
 
 		global $dslc_active;
 
-		$tempOpt = $options;
-		$tempOpt = array_merge( $tempOpt, $options['propValues'] );
+		$tempOpt = $this->settings;
+		$tempOpt = array_merge( $tempOpt, $this->settings['propValues'] );
 		unset( $tempOpt['propValues'] );
-
 
 		$this->module_start( $tempOpt );
 
@@ -2528,7 +2529,7 @@ class DSLC_Info_Box extends DSLC_Module{
 
 		$options['dslc_active'] = $dslc_active;
 
-		echo $this->renderModule( __DIR__, $options );
+		echo $this->renderModule();
 		/* Module output ends here */
 
 		$this->module_end( $tempOpt );

@@ -16,12 +16,56 @@
 class DSLC_Module{
 
 	var $optionsArray;
-	var $cache_reset_events = array( 'any' );
+	//var $cache_reset_events = array( 'any' );
 	var $module_id;
 	var $module_title;
 	var $module_icon;
 	var $module_category;
 	var $handle_like;
+
+	/**
+	 * Construction
+	 */
+	function __construct( $settings = [], $atts = [] )
+	{
+		if ( isset( $atts['last'] ) && $atts['last'] == 'yes' ) {
+			$settings['dslc_m_size_last'] = 'yes';
+		} else {
+			$settings['dslc_m_size_last'] = 'no';
+		}
+
+		/// Set image from atts
+		if ( is_array ( $atts ) ) {
+
+			$modOptions = $this->options();
+			$modOptsSort = [];
+
+			foreach( $modOptions as $mod ) {
+
+				$modOptsSort[$mod['id']] = $mod;
+			}
+
+			foreach ( $atts as $key => $attr ) {
+
+				if ( @$modOptsSort[$key]['type'] == 'image' && @is_array( $settings['propValues'][$key] ) ) {
+
+					$settings['propValues'][$key]['url'] = $attr;
+				}
+			}
+		}
+
+		/// Temporary hack for DSLC_Image
+		if ( $this->module_id == 'DSLC_Image' && isset( $settings['propValues']['image'] ) && ! is_array( $settings['propValues']['image'] ) && intval( $settings['propValues']['image'] > 0 ) ) {
+
+			$imgUrl = wp_get_attachment_image_src( $settings['propValues']['image'], 'full' );
+			$width = @intval( $settings['propValues']['resize_width'] ) > 0 ? $settings['propValues']['resize_width'] : null;
+			$height = @intval( $settings['propValues']['resize_height'] ) > 0 ? $settings['propValues']['resize_height'] : null;
+
+			$settings['propValues']['image'] = ['id' => $settings['propValues']['image'], 'url' => dslc_aq_resize( $imgUrl[0], $width, $height, true )];
+		}
+
+		$this->settings = $settings;
+	}
 
 	/**
 	 * Common options for all modules
@@ -32,7 +76,6 @@ class DSLC_Module{
 	 */
 	function shared_options($options_id, $atts = false)
 	{
-
 		$animation_options_choices = array(
 			array(
 				'label' => 'None',
@@ -1804,8 +1847,11 @@ class DSLC_Module{
 	 *
 	 * @param  array $options
 	 */
-	function module_start( $options )
+	function module_start()
 	{
+		$options = $this->settings;
+
+		global $LC_Registry;
 		global $dslc_should_filter;
 		$dslc_should_filter = false;
 
@@ -1954,7 +2000,7 @@ class DSLC_Module{
 
 			<?php do_action( 'dslc_module_before' ); ?>
 
-			<?php if ( DS_LIVE_COMPOSER_ACTIVE && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) : ?>
+			<?php if ( $LC_Registry->get( 'showAdminElementsInEditorHTML') && DS_LIVE_COMPOSER_ACTIVE && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) : ?>
 
 				<style><?php
 
@@ -2000,7 +2046,7 @@ class DSLC_Module{
 						</span>
 						<span class="dslca-module-manage-hook dslca-delete-module-hook"><span class="dslc-icon-remove"></span></span>
 					</div>
-					<?php if ( DS_LIVE_COMPOSER_DEV_MODE ) : ?>
+					<?php if ( $LC_Registry->get( 'showAdminElementsInEditorHTML') && DS_LIVE_COMPOSER_DEV_MODE ) : ?>
 						<div class="dslca-module-manage-inner dslca-dev-mode">
 							<span class="dslca-module-manage-hook dslca-module-get-defaults-hook"><span class="dslc-icon-upload-alt"></span></span>
 						</div>
@@ -2017,8 +2063,9 @@ class DSLC_Module{
 	 *
 	 * @param  array $user_options
 	 */
-	function module_end( $user_options )
+	function module_end()
 	{
+		$user_options = $this->settings;
 		// Get options array
 		$options = $this->options();
 		// Bring back IDs for image options
@@ -2034,7 +2081,7 @@ class DSLC_Module{
 		$option_ids = array();
 		$user_options_no_defaults = $user_options;
 
-		 if ( DS_LIVE_COMPOSER_ACTIVE && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) : ?>
+		 if ( $this->module_ver != 2 && DS_LIVE_COMPOSER_ACTIVE && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) : ?>
 
 				<div class="dslca-module-options-front">
 
@@ -2090,52 +2137,13 @@ class DSLC_Module{
 	}
 
 	/**
-	 * Renders module on front with Smarty Engine
+	 * Renders module on front
 	 *
-	 * @param string view template
 	 * @return string rendered module view
 	 */
-	function renderModule( $viewFileDir, $options )
+	function renderModule()
 	{
-		/// Caching engine
-
-		$cacheReset = @get_option( 'dslc_module_cache' )[$this->module_id]; /// Get current module cache reset time
-
-		if ( @$this->dynamic_module == true ) {
-
-			$static = @base64_decode( $options['staticHTML'] );
-
-			if ( ! isset( $options['cacheLastReset'] ) || $options['cacheLastReset'] != $cacheReset ) { /// If time saved in module not equal to control value - GENERATE IT!!!
-
-				/// Replace saved funcs aliases with real HTML
-				foreach ( $options['dynamicHTML'] as $name => $dynReplaceFunc ) {
-
-					$funcName = str_replace( "}}", "", $name );
-					$funcName = str_replace( "{{", "", $funcName );
-
-					if ( method_exists( $this, $funcName ) ) {
-
-						$static = str_replace( $name, $this->$funcName(), $static );
-					}
-				}
-			}else{
-
-				/// Everything was done before, how about using cache?
-				/// If front saved smth fill static placeholders
-				if ( isset( $options['dynamicHTML'] ) && is_array( $options['dynamicHTML'] ) && count( $options['dynamicHTML'] ) > 0 ) {
-
-					foreach ( $options['dynamicHTML'] as $name => $dynReplaceFunc ) {
-
-						$static = str_replace( $name, base64_decode( $dynReplaceFunc ), $static );
-					}
-				}
-			}
-
-			return $static;
-		}else{
-
-			return base64_decode( @$options['staticHTML'] );
-		}
+		return base64_decode( @$this->settings['staticHTML'] );
 	}
 
 	/**
@@ -2199,25 +2207,6 @@ class DSLC_Module{
 	}
 
 	/**
-	 * Resets cache control date
-	 */
-	private function resetModuleCache()
-	{
-		/// Get Cache Events options object
-		$cacheEvents = get_option( 'dslc_module_cache' );
-
-		/// If it wasn't filled before
-		if ( ! is_array( $cacheEvents ) ) {
-
-			$cacheEvents = [];
-		}
-
-		$cacheEvents[$this->module_id] = date( 'U' ); /// Set control timestamp for current module
-
-		update_option( 'dslc_module_cache', $cacheEvents );
-	}
-
-	/**
 	 * Register current module
 	 */
 	public function register()
@@ -2231,41 +2220,6 @@ class DSLC_Module{
 			}
 		);
 
-		/// Subscribe for data updates to clean cache if some event fires
-		if ( isset( $this->cache_reset_events ) && is_array( $this->cache_reset_events ) ) {
-
-			$self = $this;
-
-			/// NOT comments
-			foreach ( $this->cache_reset_events as $event )
-			{
-				if ( $event == 'comments' ) continue;
-
-				foreach ( ['post_updated', 'post_save', 'trash_post'] as $actionType )
-				{
-					add_action( $actionType, function( $postID, $postAfter ) use ( $event, $self ) {
-
-						if ( $postAfter->post_type == $event || $event == 'any' ) {
-
-							$self->resetModuleCache();
-						}
-					}, 99, 3 );
-				}
-			}
-
-			/// Comment events
-			if ( in_array( "comments", $this->cache_reset_events ) || in_array( "any", $this->cache_reset_events ) )
-			{
-				foreach ( ['comment_post', 'edit_comment', 'delete_comment'] as $actionType )
-				{
-					add_action( $actionType, function() use ( $self ) {
-
-						$self->resetModuleCache();
-					}, 99, 3 );
-				}
-			}
-		}
-
 		/// Fire custom method for module register
 		if ( method_exists( get_called_class(), 'afterRegister' ) ) {
 
@@ -2278,11 +2232,11 @@ class DSLC_Module{
 	 *
 	 * @return string code inits module in editor mode
 	 */
-	public function renderEditModeModule( $options )
+	public function renderEditModeModule()
 	{
 		ob_start();
-		?><div class="module-init-block module-init-code-<?php echo $options['module_instance_id']?>">
-			<?php echo base64_encode( json_encode( $options ) ); ?>
+		?><div class="module-init-block module-init-code-<?php echo $this->settings['module_instance_id']?>">
+			<?php echo base64_encode( json_encode( $this->settings ) ); ?>
 		</div><?php
 
 		$output = ob_get_contents();

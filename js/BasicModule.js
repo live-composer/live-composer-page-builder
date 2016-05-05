@@ -21,12 +21,10 @@
 		this.settings = _.extend({}, this.moduleInfo);
 		self.settings.module_instance_id = values.module_instance_id || 0;
 		this.settings.postId = DSLC && DSLC.currPostId > 0 ? DSLC.currPostId : 0;
-		this.settings.cacheLastReset = values.cacheLastReset;
 		this.values = {};
 		this.elem = {}; /// Future container of module
 		this.settingsTabs = {};
 		this.files = values.files || {};
-		this.dynamicHTML = values.dynamicHTML || {};
 
 		/// Move options to its own prop
 		if(this.settings.options){
@@ -137,79 +135,21 @@
 			console.info(this.settings.id + " template wasn't loaded");
 		}
 
-		var tpl = _.template(moduleBody || "");
-		var bodyHTML = tpl(renderOpts);
-
-		/// To prevent copypaste let's create local function
-		var appendBodyHTML = function()
-		{
-			self.moduleBody.children().remove();
-			self.moduleBody.html('');
-			self.moduleBody.append(bodyHTML);
-		};
-
+		var tpl = _.template( moduleBody || "" );
+		var bodyHTML = tpl( renderOpts );
 		var styles = "<style>" + self.generateCSS() + "</style>";
-		var fillDyn = function(fillObj)
+		var staticHTML = self.clearProductionHTML( bodyHTML );
+
+		/// Format purposes
+		var format = jQuery( staticHTML );
+		format.find("[formattedtext]").each(function()
 		{
-			Object.keys(fillObj).forEach(function(item){
-				bodyHTML = bodyHTML.replace(item, Util.b64_to_utf8(fillObj[item]));
-			});
-		}
+			this.innerHTML = "{dslc_format}" + this.innerHTML + "{/dslc_format}";
+		});
 
-		self.staticHTML = Util.utf8_to_b64( self.clearProductionHTML(bodyHTML) + styles );
+		self.staticHTML = Util.utf8_to_b64( format[0].outerHTML + styles );
 
-		var matches = bodyHTML.match(/{{*.+}}/g); /// Dynamic parts
-
-		/// If dynamic parts loading requested
-		if(params.getDynamicParts){
-
-			self.moduleBody.children().remove();
-			var reloadDynamicWait = jQuery('<div class="dslc-notification center-text dslc-yellow">')
-			.append('Waiting for server...');
-
-			self.moduleBody.append(jQuery("<div>").append(reloadDynamicWait));
-
-			/// Using deferred jQuery object - Deferred.done().fail()
-			jQuery.post(
-			    DSLCAjax.ajaxurl,
-				{
-					action: 'dslc-callback-request',
-					dslc: 'active',
-					method: 'getDynamicParts',
-					params: {
-						moduleId: this.moduleInfo.id,
-						additional: {
-							postId: self.settings.postId
-						},
-						functions: matches
-					}
-				},
-				'json')
-			.done(function(response)
-			{
-				self.dynamicHTML = _.extend({}, response);
-
-				fillDyn(response); /// Fill dynamic parts with loaded content
-				appendBodyHTML();
-				self.saveEdits() /// Save dynamic parts to module's dslc_code
-					.moduleBody.append(styles); /// Add some styles
-				dslc_generate_code();
-				dslc_show_publish_button();
-
-				if(dslcDebug){
-
-					console.log("Edits saved");
-				}
-
-			}).fail(function(){ fillDyn(self.dynamicHTML || {}); appendBodyHTML(); });
-
-			return false;
-
-		}else{
-
-			fillDyn(self.dynamicHTML || {});
-			return bodyHTML;
-		}
+		return bodyHTML;
 	}
 
 	/**
@@ -265,15 +205,6 @@
 		var moduleEnd = this.getModuleEnd(); /// End HTMl
 
 		this.moduleBody = jQuery("<div>").append(this.getModuleBody()); /// Load module body
-
-		if(this.settings.dynamic_module == true && Object.keys(this.dynamicHTML).length == 0){
-
-			var reloadDynamic = jQuery('<div class="dslc-notification center-text dslc-yellow">')
-			.append(this.settings.title + ' module needs to get the latest content from WordPress  <span class="dslca-load-dynamic-data-hook dslc-icon-refresh"></span>');
-
-			this.moduleBody = jQuery("<div>").append(reloadDynamic);
-		}
-
 		this.elem = jQuery(moduleStart + moduleEnd).append(this.moduleBody);
 		this.afterRender();
 		this.moduleBody.append("<style>" + this.generateCSS() + "</style>");

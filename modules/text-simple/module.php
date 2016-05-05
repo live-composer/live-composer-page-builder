@@ -21,13 +21,15 @@ class DSLC_Text_Simple extends DSLC_Module{
 	/**
 	 * @inherit
 	 */
-	function __construct()
+	function __construct( $settings = [], $atts = [] )
 	{
 		$this->module_ver = 2;
 		$this->module_id = __CLASS__;
 		$this->module_title = __( 'Text', 'live-composer-page-builder' );
 		$this->module_icon = 'pencil';
 		$this->module_category = 'general';
+
+		parent::__construct( $settings, $atts );
 	}
 
 	/**
@@ -4283,27 +4285,17 @@ class DSLC_Text_Simple extends DSLC_Module{
 	/**
 	 * @inherited
 	 */
-	function output( $options ){
-
-		global $dslc_active;
-
-		$this->module_start( $options );
+	function output( $options )
+	{
+		$this->module_start();
 
 		/* Module output starts here */
-		$output_content = stripslashes( @$options['content'] );
-		$output_content = str_replace( '<lctextarea', '<textarea', $output_content );
-		$output_content = str_replace( '</lctextarea', '</textarea', $output_content );
-		$output_content = do_shortcode( $output_content );
 
-		$renderOptions = $options;
+		echo $this->renderModule();
 
-		$renderOptions['content'] = $output_content;
-		$renderOptions['dslc_active'] = $dslc_active;
-
-		echo $this->renderModule( __DIR__, $renderOptions );
 		/* Module output ends here */
 
-		$this->module_end( $options );
+		$this->module_end();
 	}
 
 }

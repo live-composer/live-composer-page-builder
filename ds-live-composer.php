@@ -48,6 +48,7 @@
 
 	/// Use registry instead of global vars
 	$LC_Registry->set( 'dslc_active', $dslc_active);
+	$LC_Registry->set( 'removeAdminElementsFromEditor', false );
 
 
 	/**
@@ -109,10 +110,9 @@
 	define( 'DS_LIVE_COMPOSER_CAPABILITY_SAVE', $cap_page );
 
 	/**
-	 * Include Modules & Legacy Modules for migration puproses
+	 * Include Modules
 	 */
 	load_modules(DS_LIVE_COMPOSER_ABS . "/modules", "module.php");
-	load_modules(DS_LIVE_COMPOSER_ABS . "/includes/legacy-modules", "module.php");
 
 	/**
 	 * Deny dslc EM if not authorized

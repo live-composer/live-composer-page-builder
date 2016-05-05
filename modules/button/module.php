@@ -18,13 +18,15 @@ class DSLC_Button extends DSLC_Module{
 	/**
 	 * @inherited
 	 */
-	function __construct()
+	function __construct( $settings = [], $atts = [] )
 	{
 		$this->module_ver = 2;
 		$this->module_id = __CLASS__;
 		$this->module_title = __( 'Button', 'live-composer-page-builder' );
 		$this->module_icon = 'link';
 		$this->module_category = 'elements';
+
+		parent::__construct( $settings, $atts );
 	}
 
 	/**
@@ -929,19 +931,18 @@ class DSLC_Button extends DSLC_Module{
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'wp_enqueue_scripts') );
 	}
 
-
 	/**
 	 * @inherited
 	 */
 	function output( $options )
 	{
-		$this->module_start( $options );
+		$this->module_start();
 
 		/* Module output starts here */
-		echo $this->renderModule( __DIR__, $options );
+		echo $this->renderModule();
 		/* Module output ends here */
 
-		$this->module_end( $options );
+		$this->module_end();
 	}
 
 }
