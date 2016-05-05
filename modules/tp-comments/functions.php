@@ -8,9 +8,9 @@
 function dslc_display_comments( $comment, $args, $depth ) {
 
 	$GLOBALS['comment'] = $comment;
-	
+
 	switch ( $comment->comment_type ) :
-		
+
 		case 'pingback' :
 		case 'trackback' :
 			?>
@@ -20,13 +20,13 @@ function dslc_display_comments( $comment, $args, $depth ) {
 		break;
 		default :
 
-			if ( $comment->comment_approved == '1' ) : 
+			if ( $comment->comment_approved == '1' ) :
 
 				?>
 
 				<li <?php comment_class( 'dslc-comment' ); ?> id="dslc-comment-<?php comment_ID(); ?>">
 
-					<div class="dslc-comment-inner">
+					<div id="comment-<?php comment_ID(); ?>" class="dslc-comment-inner">
 
 						<div class="dslc-comment-info dslc-clearfix">
 
@@ -42,7 +42,7 @@ function dslc_display_comments( $comment, $args, $depth ) {
 						</div><!-- .comment-info -->
 
 						<div class="dslc-comment-main">
-							
+
 							<?php comment_text(); ?>
 
 						</div><!-- .comment-main -->
