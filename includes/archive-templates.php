@@ -97,7 +97,12 @@ function dslc_archive_template_init() {
 		'label' => __( 'Default', 'live-composer-page-builder' ),
 		'value' => 'none'
 	);
+
 	$pages = get_pages();
+	// Add 'dslc_archive_template_cpt' filter to give the theme developers
+	// an option to show their own custom posts types in the templates dropdown
+	$pages = apply_filters( 'dslc_archive_template_cpt', $pages );
+
 	foreach ( $pages as $page ) {
 		$pages_opts[] = array(
 			'label' => $page->post_title,
