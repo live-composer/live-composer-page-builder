@@ -1337,6 +1337,13 @@ function dslc_custom_css() {
 				$gfonts_output_prepend = '@import url("//fonts.googleapis.com/css?family=';
 				$gfonts_output_append = '&subset=' . $gfonts_output_subsets . '"); ';
 				$gfonts_ouput_inner = '';
+
+				$gfonts_do_output = true;
+
+				if( count($dslc_googlefonts_array) == 1 && $dslc_googlefonts_array[0] == ''  ) {
+					$gfonts_do_output = false;
+				}
+
 				foreach ( $dslc_googlefonts_array as $gfont) {
 					if ( in_array( $gfont, $dslc_all_googlefonts_array ) ) {
 						$gfont = str_replace( ' ', '+', $gfont );
@@ -1349,8 +1356,12 @@ function dslc_custom_css() {
 						}
 					}
 				}
-				$gfonts_output = $gfonts_output_prepend . $gfonts_ouput_inner . $gfonts_output_append;
-				if ( $gfonts_ouput_inner != '' ) echo $gfonts_output;
+
+				// Do not output empty Google font calls (when font set to an empty string)
+				if ( $gfonts_do_output ) {
+					$gfonts_output = $gfonts_output_prepend . $gfonts_ouput_inner . $gfonts_output_append;
+					if ( $gfonts_ouput_inner != '' ) echo $gfonts_output;
+				}
 
 			}
 
