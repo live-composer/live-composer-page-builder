@@ -17,6 +17,13 @@
 
 function dslc_tut_load_scripts() {
 
+	// Load minimized scripts and css resources
+	$min_suffix = '';
+
+	if ( SCRIPT_DEBUG ) {
+		$min_suffix = '.min';
+	}
+
 	$tut_ch_one = dslc_get_option( 'lc_tut_chapter_one', 'dslc_plugin_options_tuts' );
 	$tut_ch_two = dslc_get_option( 'lc_tut_chapter_two', 'dslc_plugin_options_tuts' );
 	$tut_ch_three = dslc_get_option( 'lc_tut_chapter_three', 'dslc_plugin_options_tuts' );
@@ -25,15 +32,8 @@ function dslc_tut_load_scripts() {
 	$tut_ids = array( $tut_ch_one, $tut_ch_two, $tut_ch_three, $tut_ch_four );
 
 	if ( is_singular() && isset( $_GET['dslc'] ) && $_GET['dslc'] == 'active' && in_array( get_the_ID(), $tut_ids) ) {
-
-		if ( DS_LIVE_COMPOSER_LOAD_MINIFIED ) {
-			wp_enqueue_style( 'dslc-tut-css', DS_LIVE_COMPOSER_URL . 'includes/tutorials/tutorial.min.css', array(), DS_LIVE_COMPOSER_VER);
-			wp_enqueue_script( 'dslc-tut-js', DS_LIVE_COMPOSER_URL . 'includes/tutorials/tutorial.min.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
-		} else {
-			wp_enqueue_style( 'dslc-tut-css', DS_LIVE_COMPOSER_URL . 'includes/tutorials/tutorial.css', array(), DS_LIVE_COMPOSER_VER);
-			wp_enqueue_script( 'dslc-tut-js', DS_LIVE_COMPOSER_URL . 'includes/tutorials/tutorial.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
-		}
-
+		wp_enqueue_style( 'dslc-tut-css', DS_LIVE_COMPOSER_URL . 'includes/tutorials/tutorial' . $min_suffix . '.css', array(), DS_LIVE_COMPOSER_VER);
+		wp_enqueue_script( 'dslc-tut-js', DS_LIVE_COMPOSER_URL . 'includes/tutorials/tutorial' . $min_suffix . '.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 	}
 
 } add_action( 'wp_enqueue_scripts', 'dslc_tut_load_scripts' );
