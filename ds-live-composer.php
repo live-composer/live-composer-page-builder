@@ -156,8 +156,13 @@
 
 	} register_activation_hook( __FILE__, 'dslc_on_activation' );
 
-	add_action( 'admin_init', 'welcome' );
-	function welcome() {
+	add_action( 'admin_init', 'dslc_welcome' );
+	function dslc_welcome() {
+
+		// Make Welcome screen optional for the theme developers
+		$show_welcome_screen = true;
+   	if ( apply_filters( 'dslc_show_welcome_screen', $show_welcome_screen ) )
+   		return;
 
 		// Bail if no activation redirect
 		if ( ! get_transient( '_dslc_activation_redirect_1' ) )
