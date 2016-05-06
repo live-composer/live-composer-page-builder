@@ -40,55 +40,69 @@ function dslc_access_control_init() {
 	$dslc_plugin_options['dslc_plugin_options_access_control'] = array(
 		'title' => __( 'Access Control', 'live-composer-page-builder' ),
 		'options' => array(
+
 			'lc_min_capability_page' => array(
+				'name' => 'dslc_plugin_options_access_control[lc_min_capability_page]',
 				'label' => __( 'Front-End Editor', 'live-composer-page-builder' ),
 				'std' => 'publish_posts',
 				'type' => 'select',
 				'descr' => __( 'Who can use Live Composer in the front-end? This will also affect who can manage post templates.', 'live-composer-page-builder' ),
 				'choices' => $capability_opts
 			),
+
 			'lc_min_capability_projects_m' => array(
+				'name' => 'dslc_plugin_options_access_control[lc_min_capability_projects_m]',
 				'label' => __( 'Projects Management', 'live-composer-page-builder' ),
 				'std' => 'publish_posts',
 				'type' => 'select',
 				'descr' => __( 'Who can manage projects ( add, edit, trash... )?', 'live-composer-page-builder' ),
 				'choices' => $capability_opts
 			),
+
 			'lc_min_capability_galleries_m' => array(
+				'name' => 'dslc_plugin_options_access_control[lc_min_capability_galleries_m]',
 				'label' => __( 'Galleries Management', 'live-composer-page-builder' ),
 				'std' => 'publish_posts',
 				'type' => 'select',
 				'descr' => __( 'Who can manage galleries ( add, edit, trash... )?', 'live-composer-page-builder' ),
 				'choices' => $capability_opts
 			),
+
 			'lc_min_capability_staff_m' => array(
+				'name' => 'dslc_plugin_options_access_control[lc_min_capability_staff_m]',
 				'label' => __( 'Staff Management', 'live-composer-page-builder' ),
 				'std' => 'publish_posts',
 				'type' => 'select',
 				'descr' => __( 'Who can manage staff ( add, edit, trash... )?', 'live-composer-page-builder' ),
 				'choices' => $capability_opts
 			),
+
 			'lc_min_capability_downloads_m' => array(
+				'name' => 'dslc_plugin_options_access_control[lc_min_capability_downloads_m]',
 				'label' => __( 'Downloads Management', 'live-composer-page-builder' ),
 				'std' => 'publish_posts',
 				'type' => 'select',
 				'descr' => __( 'Who can manage downloads ( add, edit, trash... )?', 'live-composer-page-builder' ),
 				'choices' => $capability_opts
 			),
+
 			'lc_min_capability_testimonials_m' => array(
+				'name' => 'dslc_plugin_options_access_control[lc_min_capability_testimonials_m]',
 				'label' => __( 'Testimonials Management', 'live-composer-page-builder' ),
 				'std' => 'publish_posts',
 				'type' => 'select',
 				'descr' => __( 'Who can manage testimonials ( add, edit, trash... )?', 'live-composer-page-builder' ),
 				'choices' => $capability_opts
 			),
+
 			'lc_min_capability_partners_m' => array(
+				'name' => 'dslc_plugin_options_access_control[lc_min_capability_partners_m]',
 				'label' => __( 'Partners Management', 'live-composer-page-builder' ),
 				'std' => 'publish_posts',
 				'type' => 'select',
 				'descr' => __( 'Who can manage partners ( add, edit, trash... )?', 'live-composer-page-builder' ),
 				'choices' => $capability_opts
-			),
+			)
 		)
 	);
 

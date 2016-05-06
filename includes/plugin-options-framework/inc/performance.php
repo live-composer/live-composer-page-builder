@@ -14,7 +14,9 @@ function dslc_perf_settings_init() {
 	$dslc_plugin_options['dslc_plugin_options_performance'] = array(
 		'title' => __( 'Performance', 'live-composer-page-builder' ),
 		'options' => array(
+
 			'lc_gfont_subsets' => array(
+				'name' => 'dslc_plugin_options_performance[lc_gfont_subsets]',
 				'label' => __( 'Font Subsets', 'live-composer-page-builder' ),
 				'std' => array( 'latin', 'latin-ext', 'cyrillic', 'cyrillic-ext' ),
 				'type' => 'checkbox',
@@ -47,9 +49,9 @@ function dslc_perf_settings_init() {
 					array(
 						'label' => 'Vietnamese',
 						'value' => 'vietnamese',
-					),
+					)
 				)
-			),
+			)
 		)
 	);
 

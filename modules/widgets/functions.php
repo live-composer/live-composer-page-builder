@@ -21,9 +21,6 @@ function dslc_sidebars() {
 				'before_title' => apply_filters( 'dslc_sidebar_before_title', '<h3 class="dslc-widget-title"><span class="dslc-widget-title-inner">' ),
 				'after_title' => apply_filters( 'dslc_sidebar_after_title', '</span></h3>' ),
 			) );
-
 		}
-
 	}
-
 }

@@ -170,10 +170,17 @@ function dslc_plugin_options_init() {
 
 		foreach ( $section['options'] as $option_ID => $option ) {
 
+			$option['id'] = $option_ID;
+			$option['section_id'] = $section_ID;
+
 			add_settings_field(
 				$option_ID,
 				$option['label'],
-				create_function( null, 'dslc_plugin_option_display_' . $option['type'] . '( "' . $option_ID . '", "' . $section_ID . '" );' ),
+				function() use ($option) {
+
+					$func = 'dslc_plugin_option_display_' . $option['type'];
+					$func($option);
+				},
 				$section_ID,
 				$section_ID
 			);
