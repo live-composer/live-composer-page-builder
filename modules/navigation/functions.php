@@ -13,11 +13,13 @@ function dslc_nav_menus_opts() {
 	$dslc_plugin_options['dslc_plugin_options_navigation_m'] = array(
 		'title' => __( 'Navigation Module', 'live-composer-page-builder' ),
 		'options' => array(
+
 			'menus' => array (
+				'name' => 'dslc_plugin_options_navigation_m[menus]',
 				'label' => __( 'Menus', 'live-composer-page-builder' ),
 				'std' => '',
 				'type' => 'list'
-			),
+			)
 		)
 	);
 

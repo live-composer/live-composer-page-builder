@@ -73,8 +73,6 @@
 	include DS_LIVE_COMPOSER_ABS . '/includes/post-options-framework/post-options-framework.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/plugin-options-framework.php';
 	include DSLC_ST_FRAMEWORK_ABS . '/single-templates-framework.php';
-	include DS_LIVE_COMPOSER_ABS . '/includes/access-control.php';
-	include DS_LIVE_COMPOSER_ABS . '/includes/performance.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/archive-templates.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/styling-presets.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/header-footer.php';

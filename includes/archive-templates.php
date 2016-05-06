@@ -113,16 +113,17 @@ function dslc_archive_template_init() {
 	foreach ( $dslc_post_types as $post_type ) {
 
 		$opts[$post_type] = array(
+			'name' => 'dslc_plugin_options_archives[' . $post_type . ']',
 			'label' => $post_type . ' archives',
 			'descr' => __( 'Choose which page should serve as template.', 'live-composer-page-builder' ),
 			'std' => 'none',
 			'type' => 'select',
 			'choices' => $pages_opts
 		);
-
 	}
 
 	$opts['author'] = array(
+		'name' => 'dslc_plugin_options_archives[author]',
 		'label' => 'Author archives',
 		'descr' => __( 'Choose which page should serve as template.', 'live-composer-page-builder' ),
 		'std' => 'none',
@@ -131,6 +132,7 @@ function dslc_archive_template_init() {
 	);
 
 	$opts['search_results'] = array(
+		'name' => 'dslc_plugin_options_archives[search_results]',
 		'label' => 'Search Results',
 		'descr' => __( 'Choose which page should serve as template.', 'live-composer-page-builder' ),
 		'std' => 'none',
@@ -139,6 +141,7 @@ function dslc_archive_template_init() {
 	);
 
 	$opts['404_page'] = array(
+		'name' => 'dslc_plugin_options_archives[404_page]',
 		'label' => '404 Page',
 		'descr' => __( 'Choose which page should serve as template.', 'live-composer-page-builder' ),
 		'std' => 'none',
