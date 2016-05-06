@@ -95,7 +95,7 @@ jQuery(document).ready(function(){
 			data: {
 				email: email,
 				name: name,
-				security: dlscajax,
+				security: dslc-ajax,
 				action: 'dslc_activecampaign'
 			},
 			url: ajaxurl

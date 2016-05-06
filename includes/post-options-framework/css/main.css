@@ -150,6 +150,7 @@
 	text-align:center;
 	width: 50%;
 	margin-top: 14px;
+	display: block;
 }
 
 .lc-active #post-status-info, .lc-active #wp-content-editor-container {

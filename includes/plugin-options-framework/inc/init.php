@@ -10,8 +10,8 @@ function dslc_plugin_options_setup() {
 	do_action( 'dslc_hook_register_options' );
 
 	add_menu_page(
-		__('Live Composer', 'dslc_string' ),
-		__('Live Composer', 'dslc_string' ),
+		__('Live Composer', 'live-composer-page-builder' ),
+		__('Live Composer', 'live-composer-page-builder' ),
 		'manage_options',
 		'dslc_plugin_options',
 		'dslc_plugin_options_display'
@@ -19,8 +19,8 @@ function dslc_plugin_options_setup() {
 
 		add_submenu_page(
 			'dslc_plugin_options',
-			__('Getting Started', 'dslc_string' ),
-			__('Getting Started', 'dslc_string' ),
+			__('Getting Started', 'live-composer-page-builder' ),
+			__('Getting Started', 'live-composer-page-builder' ),
 			'manage_options',
 			'dslc_getting_started',
 			create_function( null, 'dslc_plugin_options_display( "dslc_getting_started" );' )
@@ -74,7 +74,14 @@ function dslc_plugin_options_display( $tab = '' ) {
 	<div class="wrap">
 
 		<div id="icon-themes" class="icon32"></div>
-		<h2>Live Composer</h2>
+		<h2 id="dslc-main-title">Live Composer <span class="dslc-ver"><?php echo DS_LIVE_COMPOSER_VER; ?></span></h2>
+
+		<form autocomplete="off" class="docs-search-form" id="dslc-headersearch" method="GET" action="//livecomposer.help/search"  target="_blank">
+			<input type="hidden" value="" name="collectionId">
+			<input type="text" value="" placeholder="Search the knowledge base" class="search-query" title="search-query" name="query">
+			<button type="submit" class="hssearch button button-hero"><span class="dashicons dashicons-search"></span> Search</button>
+		</form>
+
 		<?php settings_errors(); ?>
 
 		<h2 class="nav-tab-wrapper">
@@ -199,8 +206,8 @@ add_action( 'wp_ajax_dslc_activecampaign', 'dslc_ajax_check_activecampaign' );
 function dslc_ajax_check_activecampaign(){
 
     // Check Nonce
-    if ( !wp_verify_nonce( $_POST['security']['nonce'], 'dlscajax' ) ) {
-        wp_die('NO');
+    if ( !wp_verify_nonce( $_POST['security']['nonce'], 'dslc-optionspanel-ajax' ) ) {
+        wp_die('You do not have rights!');
     }
 
     // Access permissions

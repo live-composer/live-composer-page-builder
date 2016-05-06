@@ -163,7 +163,7 @@ function dslc_load_admin_scripts( $hook ) {
 
 	// Load minimized scripts and css resources
 	$min_suffix = '';
-	if ( SCRIPT_DEBUG ) {
+	if ( !SCRIPT_DEBUG ) {
 		$min_suffix = '.min';
 	}
 
@@ -179,7 +179,7 @@ function dslc_load_admin_scripts( $hook ) {
 	if ( $current_screen == 'dslc-options' ) {
 		wp_enqueue_script( 'dslc-plugin-options-js-admin', DS_LIVE_COMPOSER_URL . 'includes/plugin-options-framework/js/main' . $min_suffix . '.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 		wp_enqueue_style( 'dslc-plugin-options-css-admin', DS_LIVE_COMPOSER_URL . 'includes/plugin-options-framework/css/main' . $min_suffix . '.css', array(), DS_LIVE_COMPOSER_VER);
-		wp_localize_script( 'dslc-plugin-options-js-admin', 'dlscajax', array( 'nonce' => wp_create_nonce( 'dlscajax' ) ) );
+		wp_localize_script( 'dslc-plugin-options-js-admin', 'dslc-ajax', array( 'nonce' => wp_create_nonce( 'dslc-optionspanel-ajax' ) ) );
 	}
 
 	// Yoast SEO
