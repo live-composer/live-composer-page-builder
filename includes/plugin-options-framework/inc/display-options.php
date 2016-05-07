@@ -4,7 +4,7 @@ function dslc_plugin_option_display_text( $option ) {
 
 	global $dslc_plugin_options;
 
-	$section_ID = $option['section_id'];
+	$section_ID = $option['section'];
 	$option_ID = $option['id'];
 
 	$options = get_option( $section_ID );
@@ -66,7 +66,7 @@ function dslc_plugin_option_display_select( $option ) {
 
 	global $dslc_plugin_options;
 
-	$section_ID = $option['section_id'];
+	$section_ID = $option['section'];
 	$option_ID = $option['id'];
 
 	$options = get_option( $section_ID );
@@ -78,8 +78,6 @@ function dslc_plugin_option_display_select( $option ) {
 
 		$value = $dslc_plugin_options[$section_ID]['options'][$option_ID]['std'];
 	}
-
-	$option = $dslc_plugin_options[$section_ID]['options'][$option_ID];
 
 	?>
 	<select id='<?php echo $option_ID; ?>' name='<?php echo $option['name']; ?>'>
@@ -106,7 +104,7 @@ function dslc_plugin_option_display_checkbox( $option )
 {
 	global $dslc_plugin_options;
 
-	$section_ID = $option['section_id'];
+	$section_ID = $option['section'];
 	$option_ID = $option['id'];
 
 	$options = get_option( $section_ID );
@@ -118,8 +116,6 @@ function dslc_plugin_option_display_checkbox( $option )
 
 		$value = $dslc_plugin_options[$section_ID]['options'][$option_ID]['std'];
 	}
-
-	$option = $dslc_plugin_options[$section_ID]['options'][$option_ID];
 
 	foreach ( $option['choices'] as $choice ) :
 		?>
@@ -143,7 +139,7 @@ function dslc_plugin_option_display_radio( $option )
 {
 	global $dslc_plugin_options;
 
-	$section_ID = $option['section_id'];
+	$section_ID = $option['section'];
 	$option_ID = $option['id'];
 
 	$options = get_option( $section_ID );
@@ -155,8 +151,6 @@ function dslc_plugin_option_display_radio( $option )
 
 		$value = $dslc_plugin_options[$section_ID]['options'][$option_ID]['std'];
 	}
-
-	$option = $dslc_plugin_options[$section_ID]['options'][$option_ID];
 
 	foreach ( $option['choices'] as $choice ) :
 		?>
@@ -181,7 +175,7 @@ function dslc_plugin_option_display_list( $option )
 {
 	global $dslc_plugin_options;
 
-	$section_ID = $option['section_id'];
+	$section_ID = $option['section'];
 	$option_ID = $option['id'];
 
 	$options = get_option( $section_ID );
@@ -193,8 +187,6 @@ function dslc_plugin_option_display_list( $option )
 
 		$value = $dslc_plugin_options[$section_ID]['options'][$option_ID]['std'];
 	}
-
-	$option = $dslc_plugin_options[$section_ID]['options'][$option_ID];
 
 	?>
 
@@ -249,7 +241,7 @@ function dslc_plugin_option_display_styling_presets( $option )
 {
 	global $dslc_plugin_options;
 
-	$section_ID = $option['section_id'];
+	$section_ID = $option['section'];
 	$option_ID = $option['id'];
 
 	$presets = maybe_unserialize( get_option( 'dslc_presets' ) );

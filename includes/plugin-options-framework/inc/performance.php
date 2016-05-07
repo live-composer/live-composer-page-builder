@@ -16,7 +16,8 @@ function dslc_perf_settings_init() {
 		'options' => array(
 
 			'lc_gfont_subsets' => array(
-				'name' => 'dslc_plugin_options_performance[lc_gfont_subsets]',
+
+				'section' => 'dslc_plugin_options_performance',
 				'label' => __( 'Font Subsets', 'live-composer-page-builder' ),
 				'std' => array( 'latin', 'latin-ext', 'cyrillic', 'cyrillic-ext' ),
 				'type' => 'checkbox',

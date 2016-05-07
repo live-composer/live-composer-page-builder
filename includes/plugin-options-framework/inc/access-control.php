@@ -42,7 +42,8 @@ function dslc_access_control_init() {
 		'options' => array(
 
 			'lc_min_capability_page' => array(
-				'name' => 'dslc_plugin_options_access_control[lc_min_capability_page]',
+
+				'section' => 'dslc_plugin_options_access_control',
 				'label' => __( 'Front-End Editor', 'live-composer-page-builder' ),
 				'std' => 'publish_posts',
 				'type' => 'select',
@@ -51,7 +52,8 @@ function dslc_access_control_init() {
 			),
 
 			'lc_min_capability_projects_m' => array(
-				'name' => 'dslc_plugin_options_access_control[lc_min_capability_projects_m]',
+
+				'section' => 'dslc_plugin_options_access_control',
 				'label' => __( 'Projects Management', 'live-composer-page-builder' ),
 				'std' => 'publish_posts',
 				'type' => 'select',
@@ -60,7 +62,8 @@ function dslc_access_control_init() {
 			),
 
 			'lc_min_capability_galleries_m' => array(
-				'name' => 'dslc_plugin_options_access_control[lc_min_capability_galleries_m]',
+
+				'section' => 'dslc_plugin_options_access_control',
 				'label' => __( 'Galleries Management', 'live-composer-page-builder' ),
 				'std' => 'publish_posts',
 				'type' => 'select',
@@ -69,7 +72,8 @@ function dslc_access_control_init() {
 			),
 
 			'lc_min_capability_staff_m' => array(
-				'name' => 'dslc_plugin_options_access_control[lc_min_capability_staff_m]',
+
+				'section' => 'dslc_plugin_options_access_control',
 				'label' => __( 'Staff Management', 'live-composer-page-builder' ),
 				'std' => 'publish_posts',
 				'type' => 'select',
@@ -78,7 +82,8 @@ function dslc_access_control_init() {
 			),
 
 			'lc_min_capability_downloads_m' => array(
-				'name' => 'dslc_plugin_options_access_control[lc_min_capability_downloads_m]',
+
+				'section' => 'dslc_plugin_options_access_control',
 				'label' => __( 'Downloads Management', 'live-composer-page-builder' ),
 				'std' => 'publish_posts',
 				'type' => 'select',
@@ -87,7 +92,8 @@ function dslc_access_control_init() {
 			),
 
 			'lc_min_capability_testimonials_m' => array(
-				'name' => 'dslc_plugin_options_access_control[lc_min_capability_testimonials_m]',
+
+				'section' => 'dslc_plugin_options_access_control',
 				'label' => __( 'Testimonials Management', 'live-composer-page-builder' ),
 				'std' => 'publish_posts',
 				'type' => 'select',
@@ -96,7 +102,8 @@ function dslc_access_control_init() {
 			),
 
 			'lc_min_capability_partners_m' => array(
-				'name' => 'dslc_plugin_options_access_control[lc_min_capability_partners_m]',
+
+				'section' => 'dslc_plugin_options_access_control',
 				'label' => __( 'Partners Management', 'live-composer-page-builder' ),
 				'std' => 'publish_posts',
 				'type' => 'select',

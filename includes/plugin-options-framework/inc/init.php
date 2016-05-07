@@ -171,7 +171,13 @@ function dslc_plugin_options_init() {
 		foreach ( $section['options'] as $option_ID => $option ) {
 
 			$option['id'] = $option_ID;
-			$option['section_id'] = $section_ID;
+
+			if ( ! isset( $option['section'] ) ){
+
+				$option['section'] = $section_ID;
+			}
+
+			$option['name'] = $option['section'] . '[' . $option['id'] . ']';
 
 			add_settings_field(
 				$option_ID,
