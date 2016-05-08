@@ -91,8 +91,6 @@ function dslc_plugin_options_display( $tab = '' ) {
 					<?php echo settings_fields( 'dslc_plugin_options' ); ?>
 				<?php
 
-				echo dslc_get_option( 'menus', 'dslc_plugin_options_navigation_m' );;
-
 				 foreach($dslc_plugin_options as $section_ID => $section){?>
 					<div class="tab" <?php echo $anchor == $section_ID ? 'style="display: block"' : ''?> id="tab-for-<?php echo $section_ID?>">
 
