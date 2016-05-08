@@ -25,91 +25,9 @@
 		this.elem = {}; /// Future container of module
 		this.settingsTabs = {};
 		this.files = values.files || {};
+		this.cacheLoaded = false;
 
-		/// Move options to its own prop
-		if(this.settings.options){
-
-			this.moduleOptions = {};
-
-			this.settings.options.forEach(function(item_clone){
-
-				var item = _.extend({}, item_clone);
-				var section = '';
-				var tabId = '';
-
-				/// Fix option structure
-				if(item.type == 'checkbox'){
-
-					var temp = {};
-
-					for(var i = 0, max = item.choices.length; i < max; i++){
-
-						var tempChoice = item.choices[i];
-
-						temp[tempChoice.value] = tempChoice;
-					}
-
-					item.choices = temp;
-				}
-
-				self.moduleOptions[item.id] = _.extend({}, item);
-
-				if(propValues[item.id] != undefined){
-					self.values[item.id] = self.moduleOptions[item.id].value = propValues[item.id];
-				}
-
-				/// Sections and tabs.
-				/// Need to calculate it now to increase settings tabs render speed
-				if(item.section && item.section != ''){
-					section = item.section;
-				}else{
-					section = 'functionality';
-				}
-
-				if(!item.tab || item.tab == ''){
-
-					if(section == 'functionality'){
-
-						if(!self.settingsTabs[section + '__general_functionality']){
-
-							self.settingsTabs[section + '__general_functionality'] = {
-								title: 'General'
-							};
-						}
-					}else{
-
-						if(!self.settingsTabs[section + '__general_styling']){
-
-							self.settingsTabs[section + '__general_styling'] = {
-								title: 'General'
-							};
-						}
-					}
-
-					item.section = section;
-					tabId = 'general_' + section;
-					item.tab = tabId;
-
-				}else{
-
-					tabId = item.tab.toLowerCase().replace(" ", "_");
-
-					if(!self.settingsTabs[section + "__" + tabId]){
-
-						self.settingsTabs[section + "__" + tabId] = {
-							title: item.tab
-						};
-					}
-				}
-
-				if(!Array.isArray(self.settingsTabs[section + "__" + tabId].elements)){
-
-					self.settingsTabs[section + "__" + tabId].elements = [];
-				}
-
-				self.settingsTabs[section + "__" + tabId].elements.push(item.id);
-			});
-		}
+		this.processSettingsTabs( propValues );
 	};
 
 	/**
@@ -149,7 +67,7 @@
 
 		self.staticHTML = Util.utf8_to_b64( format[0].outerHTML + styles );
 
-		return bodyHTML;
+		return bodyHTML + styles;
 	}
 
 	/**
@@ -163,13 +81,6 @@
 		var tempWrap = jQuery(this.getModuleStart() + this.getModuleEnd());
 		tempWrap.children().remove();
 
-		if(bodyHTML != false){ // If requested dynamic parts
-
-			this.moduleBody.children().remove();
-			this.moduleBody.html('');
-			this.moduleBody.append(bodyHTML);
-		}
-
 		this.elem.before(tempWrap);
 		tempWrap.append(this.elem.children());
 
@@ -178,13 +89,11 @@
 			tempWrap.addClass('dslca-module-being-edited');
 		}
 
+		this.moduleBody.children().remove();
+		this.moduleBody.append( bodyHTML );
 		this.elem.remove();
 		this.elem = tempWrap;
-		tempWrap.data('module-instance', this);
-
-
-		this.moduleBody.append("<style>" + this.generateCSS() + "</style>"); /// Add some styles
-		this.recalcCentered(); /// Some magic done :)
+		this.afterModuleRendered();
 
 		if(dslcDebug){
 
@@ -205,19 +114,12 @@
 		var moduleEnd = this.getModuleEnd(); /// End HTMl
 
 		this.moduleBody = jQuery("<div>").append(this.getModuleBody()); /// Load module body
+
 		this.elem = jQuery(moduleStart + moduleEnd).append(this.moduleBody);
-		this.afterRender();
-		this.moduleBody.append("<style>" + this.generateCSS() + "</style>");
-		this.elem.data("module-instance", this);
+		this.afterModuleRendered();
 		this.saveEdits();
 
-		this.recalcCentered();
-		this.elem.find("[contenteditable]").each(function()
-		{
-			new MediumEditor(this);
-		});
-
-		return this.elem; /// Return jQUery object
+		return this.elem; /// Return jQuery object
 	}
 
 	/**
@@ -243,7 +145,7 @@
 	 */
 	BasicModule.prototype.getModuleStart = function()
 	{
-		var allProperties = this.getAllProperties();
+		var allProperties = this.getAllProperties(); /// Get processed properties with default valueы
 
 		var moduleStart = this.optionsTemplates['module-start'];
 

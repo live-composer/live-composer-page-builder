@@ -146,9 +146,10 @@ var commonVars = DSLC.commonVars; /// Just alias
 			jQuery( this ).after( moduleElem );
 			jQuery( this ).remove();
 
-			if( jQuery(".dslc-cached-version").find( "#dslc-module-" + newModule.settings.module_instance_id ).length > 0 )
+			if( newModule.elem[0].innerText.match(/\[.*?\]/) && jQuery(".dslc-cached-version").find( "#dslc-module-" + newModule.settings.module_instance_id ).length > 0 )
 			{
 				newModule.moduleBody.html( jQuery(".dslc-cached-version").find( "#dslc-module-" + newModule.settings.module_instance_id ).children() );
+				newModule.cacheLoaded = true;
 			}
 		});
 	}

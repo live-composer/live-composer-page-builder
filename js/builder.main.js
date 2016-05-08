@@ -89,7 +89,7 @@ var dslcDebug = false;
 		if(dslcDebug) console.log('dslc_show_publish_button');
 
 		jQuery('.dslca-save-composer').show().addClass('dslca-init-animation').css('visibility', 'visible');
-		jQuery('.dslca-save-draft-composer').show().addClass('dslca-init-animation');
+		jQuery('.dslca-save-draft-composer').show().addClass('dslca-init-animation').css('opacity', 1).css('visibility', 'visible');
 	}
 
 	/**
@@ -5104,6 +5104,7 @@ var dslcDebug = false;
  * - dslc_save_composer (Save the Page Changes)
  * - dslc_save_draft_composer (Save the changes as draft, not publish)
  * - dslc_generate_code (Generates Page's LC data)
+ * - dslc_show_shortcode_preview
  * - dslc_generate_section_code (Generate LC data for a specific row/section)
  *
  ***********************************/
@@ -5168,13 +5169,12 @@ var dslcDebug = false;
 			jQuery('body').removeClass('dslca-saving-in-progress');
 
 		});
-
 	}
 
 	/**
 	 * Preview shortcodes changes
 	 */
-	function dslc_show_short_preview()
+	function dslc_show_shortcode_preview()
 	{
 		if(dslcDebug) console.log('dslc_show_short_preview');
 
@@ -5200,6 +5200,7 @@ var dslcDebug = false;
 					if ( module.elem[0].innerText.match(/\[.*?\]/) ) {
 
 						module.moduleBody.html( domEl.find( "#dslc-module-" + module.settings.module_instance_id ).html() );
+						module.cacheLoaded = true;
 					}
 				});
 
@@ -5590,7 +5591,7 @@ var dslcDebug = false;
 			// If some saving action not already in progress
 			if(!$('body').hasClass('dslca-module-saving-in-progress') && !$('body').hasClass('dslca-saving-in-progress')){
 				// Call the function to save
-				dslc_show_short_preview();
+				dslc_show_shortcode_preview();
 			}
 
 		});
@@ -6120,6 +6121,14 @@ var dslcDebug = false;
 			if($(this).closest(".dslc-module-front").data('module-instance') != null && $(this).closest(".dslc-module-front").data('module-instance').settings.version == 2){
 
 				var module = $(this).closest(".dslc-module-front").data('module-instance');
+
+				[].forEach.call(this.querySelectorAll("p"), function( p )
+				{
+					if ( p.innerHTML == '<br>' )
+					{
+						p.innerHTML = '&nbsp;';
+					}
+				});
 
 				module
 					.setOption( $(this).data('id'), this.innerHTML )

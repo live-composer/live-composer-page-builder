@@ -9,6 +9,102 @@
 	jQuery(document).on('DSLC_basic_module_extend', function(){
 
 		/**
+		 * Process settings tabs
+		 *
+		 * @param object
+		 * @return null
+		 */
+		DSLC.BasicModule.prototype.processSettingsTabs = function( propValues )
+		{
+			var self = this;
+
+			/// Move options to its own prop
+			if(this.settings.options){
+
+				this.moduleOptions = {};
+
+				this.settings.options.forEach(function(item_clone){
+
+					var item = _.extend({}, item_clone);
+					var section = '';
+					var tabId = '';
+
+					/// Fix option structure
+					if(item.type == 'checkbox'){
+
+						var temp = {};
+
+						for(var i = 0, max = item.choices.length; i < max; i++){
+
+							var tempChoice = item.choices[i];
+
+							temp[tempChoice.value] = tempChoice;
+						}
+
+						item.choices = temp;
+					}
+
+					self.moduleOptions[item.id] = _.extend({}, item);
+
+					if(propValues[item.id] != undefined){
+						self.values[item.id] = self.moduleOptions[item.id].value = propValues[item.id];
+					}
+
+					/// Sections and tabs.
+					/// Need to calculate it now to increase settings tabs render speed
+					if(item.section && item.section != ''){
+						section = item.section;
+					}else{
+						section = 'functionality';
+					}
+
+					if(!item.tab || item.tab == ''){
+
+						if(section == 'functionality'){
+
+							if(!self.settingsTabs[section + '__general_functionality']){
+
+								self.settingsTabs[section + '__general_functionality'] = {
+									title: 'General'
+								};
+							}
+						}else{
+
+							if(!self.settingsTabs[section + '__general_styling']){
+
+								self.settingsTabs[section + '__general_styling'] = {
+									title: 'General'
+								};
+							}
+						}
+
+						item.section = section;
+						tabId = 'general_' + section;
+						item.tab = tabId;
+
+					}else{
+
+						tabId = item.tab.toLowerCase().replace(" ", "_");
+
+						if(!self.settingsTabs[section + "__" + tabId]){
+
+							self.settingsTabs[section + "__" + tabId] = {
+								title: item.tab
+							};
+						}
+					}
+
+					if(!Array.isArray(self.settingsTabs[section + "__" + tabId].elements)){
+
+						self.settingsTabs[section + "__" + tabId].elements = [];
+					}
+
+					self.settingsTabs[section + "__" + tabId].elements.push(item.id);
+				});
+			}
+		}
+
+		/**
 		 * Clears inset HTML from admin-typed content
 		 * @return {string}
 		 */
@@ -182,9 +278,37 @@
 		}
 
 		/**
+		 * Functions should be always fored after module rendered
+		 */
+		DSLC.BasicModule.prototype.afterModuleRendered = function()
+		{
+			var self = this;
+
+			this.elem.data('module-instance', this);
+			this.recalcCentered(); /// Some magic done :)
+
+			this.elem.find("[contenteditable]").each(function()
+			{
+				var editor = new MediumEditor(this);
+			});
+
+			/// Cache preview system
+			this.elem.click( function()
+			{
+				if( self.cacheLoaded )
+				{
+					self.reloadModuleBody();
+					self.cacheLoaded = false;
+				}
+			});
+
+			this.afterRenderHook();
+		}
+
+		/**
 		 * Dummy afterRender function. Users can describe it in custom way.
 		 */
-		DSLC.BasicModule.prototype.afterRender = function(){}
+		DSLC.BasicModule.prototype.afterRenderHook = function(){}
 
 		/**
 		 * Change options before render
