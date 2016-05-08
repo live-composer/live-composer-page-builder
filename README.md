@@ -6,7 +6,9 @@ http://livecomposerplugin.com
 
 [![Download the latest verison](https://img.shields.io/badge/Latest%20Version-Download-%234CC597.svg)](http://downloads.wordpress.org/plugin/live-composer-page-builder.latest-stable.zip) [![GitHub license](https://img.shields.io/badge/license-GPLv2-blue.svg)](https://raw.githubusercontent.com/livecomposer/Live-Composer/master/LICENSE) ![WordPress Tested](https://img.shields.io/badge/wordpress-plugin-green.svg)
 
-**Lead Developers:** [Slobodan Kustrimovic](https://github.com/WPCanyon)
+**Lead Developer:** [Lumberman Designs Team](https://github.com/lumbermandesigns)
+**Original Plugin Idea and Development:** [Slobodan Kustrimovic](https://github.com/WPCanyon)
+**Contributors:** [Joel Milne](https://github.com/goldhat)
 **Version:** 1.0.7
 
 ## Description
