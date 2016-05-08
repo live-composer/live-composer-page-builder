@@ -1,5 +1,11 @@
 <?php
+/**
+ * Accordion module class
+ */
 
+/**
+ * Class DSCL_Accordion
+ */
 class DSLC_Accordion extends DSLC_Module {
 
 	var $module_id;
@@ -8,17 +14,40 @@ class DSLC_Accordion extends DSLC_Module {
 	var $module_category;
 	var $handle_like;
 
-	function __construct() {
-
+	/**
+	 * @inherited
+	 */
+	function __construct( $settings = [], $atts = [] )
+	{
+		$this->module_ver = 2;
 		$this->module_id = __CLASS__;
 		$this->module_title = __( 'Accordion', 'live-composer-page-builder' );
 		$this->module_icon = 'reorder';
 		$this->module_category = 'elements';
 		$this->handle_like = 'accordion';
 
+		parent::__construct( $settings, $atts );
 	}
 
-	function options() {
+	/**
+	 * @inherited
+	 */
+	function afterRegister()
+	{
+		add_action( 'wp_enqueue_scripts', function(){
+
+			$path = explode( '/', __DIR__ );
+			$path = array_pop( $path );
+
+			wp_enqueue_script( 'js-accordion-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/script.js', array( 'jquery' ) );
+		});
+	}
+
+	/**
+	 * @inherited
+	 */
+	function options()
+	{
 
 		$dslc_options = array(
 
@@ -1012,114 +1041,23 @@ class DSLC_Accordion extends DSLC_Module {
 
 	}
 
-	function output( $options ) {
+	/**
+	 * @inherited
+	 */
+	function output( $options = [] )
+	{
+		$this->module_start();
 
-		global $dslc_active;
+		/* Module output stars here */
 
-		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
-			$dslc_is_admin = true;
-		else
-			$dslc_is_admin = false;
+		echo $this->renderModule();
 
-		$this->module_start( $options );
+		/* Module output ends here */
 
-		/* Module output stars here */ 
-
-			$accordion_nav = explode( '(dslc_sep)', trim( $options['accordion_nav'] ) );
-
-			if ( empty( $options['accordion_content'] ) )
-				$accordion_contents = false;
-			else
-				$accordion_contents = explode( '(dslc_sep)', trim( $options['accordion_content'] ) );
-
-			$count = 0;
-
-		?>
-
-				<div class="dslc-accordion" data-open="<?php echo $options['open_by_default']; ?>">
-
-					<?php if ( is_array( $accordion_contents ) && count( $accordion_contents ) > 0 ) : ?>
-
-						<?php foreach ( $accordion_contents as $accordion_content ) : ?>
-
-							<div class="dslc-accordion-item">
-
-								<div class="dslc-accordion-header dslc-accordion-hook">
-									<span class="dslc-accordion-title" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?>><?php echo stripslashes( $accordion_nav[$count] ); ?></span>
-									<?php if ( $dslc_is_admin ) : ?>
-										<div class="dslca-accordion-action-hooks">
-											<span class="dslca-move-up-accordion-hook"><span class="dslca-icon dslc-icon-arrow-up"></span></span>
-											<span class="dslca-move-down-accordion-hook"><span class="dslca-icon dslc-icon-arrow-down"></span></span>
-											<span class="dslca-delete-accordion-hook"><span class="dslca-icon dslc-icon-remove"></span></span>
-										</div>
-									<?php endif; ?>
-								</div>
-
-								<div class="dslc-accordion-content">
-									<div class="dslca-editable-content">
-										<?php 
-											$accordion_content_output = stripslashes( $accordion_content ); 
-											$accordion_content_output = str_replace( '<lctextarea', '<textarea', $accordion_content_output );
-											$accordion_content_output = str_replace( '</lctextarea', '</textarea', $accordion_content_output );
-											echo do_shortcode( $accordion_content_output );
-										?>
-									</div>
-									<?php if ( $dslc_is_admin ) : ?>
-										<textarea class="dslca-accordion-plain-content"><?php echo trim( $accordion_content_output ); ?></textarea>
-										<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook"><?php _e( 'Edit Content', 'live-composer-page-builder' ); ?></span></div>
-									<?php endif; ?>
-								</div><!-- .dslc-accordion-content -->
-
-							</div><!-- .dslc-accordion-item -->
-
-						<?php $count++; endforeach; ?>
-
-					<?php else : ?>
-
-						<div class="dslc-accordion-item">
-
-							<div class="dslc-accordion-header dslc-accordion-hook">
-								<span class="dslc-accordion-title" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?>><?php _e( 'CLICK TO EDIT', 'live-composer-page-builder' ); ?></span>
-								<?php if ( $dslc_is_admin ) : ?>
-									<div class="dslca-accordion-action-hooks">
-										<span class="dslca-move-up-accordion-hook"><span class="dslca-icon dslc-icon-arrow-up"></span></span>
-										<span class="dslca-move-down-accordion-hook"><span class="dslca-icon dslc-icon-arrow-down"></span></span>
-										<span class="dslca-delete-accordion-hook"><span class="dslca-icon dslc-icon-remove"></span></span>
-									</div>
-								<?php endif; ?>
-							</div>
-
-							<div class="dslc-accordion-content">
-								<div class="dslca-editable-content">
-									Placeholder content. Lorem ipsum dolor sit amet, consectetur
-									tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-									quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-									consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-									cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-									proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-								</div>
-								<?php if ( $dslc_is_admin ) : ?>
-									<textarea class="dslca-accordion-plain-content">Placeholder content. Lorem ipsum dolor sit amet, consectetur tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea>
-									<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook"><?php _e( 'Edit Content', 'live-composer-page-builder' ); ?></span></div>
-								<?php endif; ?>
-							</div><!-- .dslc-accordion-content -->
-
-						</div><!-- .dslc-accordion-item -->
-
-					<?php endif; ?>
-
-					<?php if ( $dslc_is_admin ) : ?>
-						<div class="dslca-add-accordion">
-							<span class="dslca-add-accordion-hook"><span class="dslca-icon dslc-icon-plus"></span></span>
-						</div>
-					<?php endif; ?>
-
-				</div><!-- .dslc-accordion -->
-
-		<?php /* Module output ends here */
-
-		$this->module_end( $options );
-
+		$this->module_end();
 	}
 
 }
+
+/// Register module
+( new DSLC_Accordion )->register();
