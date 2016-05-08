@@ -25,4 +25,4 @@
 		foreach ( $dslc_var_templates_pt as $key => $value )
 			$dslc_post_types[] = $key;
 
-	} add_action( 'init', 'dslc_post_templates_init', 11 );
+	} add_action( 'init', 'dslc_post_templates_init', 1 );
