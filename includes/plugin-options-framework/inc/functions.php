@@ -31,14 +31,25 @@
 
 		global $dslc_plugin_options;
 
-		$options = get_option( $section_ID );
+		$value = null;
+		$options = get_option( 'dslc_plugin_options' );
 
-		if ( isset( $options[ $option_ID ] ) )
+		if ( isset( $options[ $option_ID ] ) ) {
+
 			$value = $options[$option_ID];
-		elseif ( isset ( $dslc_plugin_options[$section_ID]['options'][$option_ID] ) )
-			$value = $dslc_plugin_options[$section_ID]['options'][$option_ID]['std'];
-		else
-			$value = '';
+		}
+
+		if( $value == null ) {
+
+			$options = get_option( $section_ID );
+
+			if ( isset( $options[ $option_ID ] ) )
+				$value = $options[$option_ID];
+			elseif ( isset ( $dslc_plugin_options[$section_ID]['options'][$option_ID] ) )
+				$value = $dslc_plugin_options[$section_ID]['options'][$option_ID]['std'];
+			else
+				$value = '';
+		}
 
 		return $value;
 
