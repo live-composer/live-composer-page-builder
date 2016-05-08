@@ -51,9 +51,7 @@ function dslc_plugin_options_setup() {
 					$section_ID,
 					create_function( null, 'dslc_plugin_options_display( "' . $section_ID . '" );' )
 				);
-
 			}
-
 		}
 
 } add_action( 'admin_menu', 'dslc_plugin_options_setup' );
@@ -66,70 +64,65 @@ function dslc_plugin_options_display( $tab = '' ) {
 
 	global $dslc_plugin_options;
 
-	if ( $tab == '' ) {
-		$tab = 'dslc_plugin_options';
-	}
-
 	?>
+	<style>
+		#jstabs .tab{display: none}
+	</style>
 	<div class="wrap">
 
 		<div id="icon-themes" class="icon32"></div>
 		<h2>Live Composer</h2>
+<<<<<<< HEAD
 		<?php settings_errors(); ?>
+=======
+		<?php settings_errors();
+		$anchor = @$_GET['anchor'] != '' ? @$_GET['anchor'] : 'dslc_getting_started' ;?>
+>>>>>>> 88c6120... LC 1.0.8: js based settings panel switch
 
 		<h2 class="nav-tab-wrapper">
-			<a href="?page=dslc_getting_started" class="nav-tab <?php echo $tab == 'dslc_getting_started' ? 'nav-tab-active' : ''; ?>">Getting Started</a>
+			<a href="#" data-nav-to="dslc_getting_started" class="nav-tab <?php echo $anchor == 'dslc_getting_started' ? 'nav-tab-active' : ''; ?>">Getting Started</a>
 			<?php foreach ( $dslc_plugin_options as $section_ID => $section ) : ?>
-				<a href="?page=<?php echo $section_ID; ?>" class="nav-tab <?php echo $tab == $section_ID ? 'nav-tab-active' : ''; ?>"><?php echo $section['title']; ?></a>
+				<a href="#"  data-nav-to="<?php echo $section_ID; ?>" class="nav-tab <?php echo $anchor == $section_ID ? 'nav-tab-active' : ''; ?>"><?php echo $section['title']; ?></a>
 			<?php endforeach; ?>
 		</h2>
 
-		<?php if ( $tab == 'dslc_getting_started' ) { ?>
-			<?php
-
-			include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/getting-started.php';
-
-			?>
-		<?php } else { ?>
-
-			<form method="post" action="options.php">
-
-				<?php if ( $tab == 'dslc_plugin_options_cpt_slugs' ) : ?>
-
-					<div class="dslca-plugin-opts-notification">
-						<?php _e( '<strong>Important:</strong> After changing slugs you need to visit the <strong>Settings &rarr; Permalinks</strong> page. Otherwise you will get 404 errors.', 'live-composer-page-builder' ); ?>
+			<div id="jstabs">
+					<div class="tab" <?php echo $anchor == 'dslc_getting_started' ? "style='display:block'" : '' ?>  id="tab-for-dslc_getting_started">
+						<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/getting-started.php'; ?>
 					</div>
-
-				<?php elseif ( $tab == 'dslc_plugin_options_widgets_m' ) : ?>
-
-					<div class="dslca-plugin-opts-notification">
-						<?php _e( 'Sidebars created here will be available in <strong>WP Admin > Appearance > Widgets</strong> and in the <strong>Widgets</strong> module.', 'live-composer-page-builder' ); ?>
-					</div>
-
-				<?php elseif ( $tab == 'dslc_plugin_options_navigation_m' ) : ?>
-
-					<div class="dslca-plugin-opts-notification">
-						<?php _e( 'Menus locations created here will be available in <strong>WP Admin > Appearance > Menus</strong> and in the <strong>Navigation</strong> module.', 'live-composer-page-builder' ); ?>
-					</div>
-
-				<?php endif; ?>
-
+					<form method="post" action="options.php">
+					<?php echo settings_fields( 'dslc_plugin_options' ); ?>
 				<?php
-					settings_fields( $tab );
 
-					if ( $tab == '' )
-						do_settings_sections( 'dslc_plugin_options' );
-					else
-						do_settings_sections( $tab );
+				 foreach($dslc_plugin_options as $section_ID => $section){?>
+					<div class="tab" <?php echo $anchor == $section_ID ? 'style="display: block"' : ''?> id="tab-for-<?php echo $section_ID?>">
 
-					submit_button();
-				?>
-
-			</form>
-
-		<?php } ?>
-
+							<?php do_settings_sections( $section_ID ); ?>
+							<?php submit_button();?>
+					</div>
+				<?php }?>
+				</form>
+			</div>
 	</div><!-- /.wrap -->
+	<script>
+		jQuery(document).ready(function($)
+		{
+			jQuery(".nav-tab-wrapper > a").on('click', function()
+			{
+				if ($(this).data('nav-to') != null ) {
+
+					$("#jstabs .tab").hide();
+					$("#tab-for-" + $(this).data('nav-to')).show();
+				}
+
+				var refer = $("#jstabs").find("input[name='_wp_http_referer']");
+
+				refer.val( '/wp-admin/admin.php?page=dslc_getting_started&anchor=' + $(this).data('nav-to') + '&settings-updated=true' );
+
+				return false;
+			});
+		});
+	</script>
 	<?php
 
 }
@@ -177,7 +170,37 @@ function dslc_plugin_options_init() {
 				$option['section'] = $section_ID;
 			}
 
+<<<<<<< HEAD
 			$option['name'] = $option['section'] . '[' . $option['id'] . ']';
+=======
+			$option['name'] = 'dslc_plugin_options[' . $option['id'] . ']';
+
+			$value = '';
+			$options = get_option( 'dslc_plugin_options' );
+
+			if ( isset( $options[ $option_ID ] ) ) {
+
+				$value = $options[$option_ID];
+			}
+
+			/// Prev version struct
+			if ( $value == '' ) {
+
+				$options = get_option( $section_ID );
+
+				if ( isset( $options[ $option_ID ] ) ) {
+
+					$value = $options[$option_ID];
+				}
+
+				if ( $value == '' ) {
+
+					$value = $option['std'];
+				}
+			}
+
+			$option['value'] = $value;
+>>>>>>> 88c6120... LC 1.0.8: js based settings panel switch
 
 			add_settings_field(
 				$option_ID,
@@ -190,7 +213,6 @@ function dslc_plugin_options_init() {
 				$section_ID,
 				$section_ID
 			);
-
 		}
 
 	}
