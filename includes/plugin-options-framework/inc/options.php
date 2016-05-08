@@ -8,19 +8,11 @@
 		'title' => __( 'General Options', 'live-composer-page-builder' ),
 		'options' => array(
 
-<<<<<<< HEAD
-			'lc_max_width' => array(
-
-				'label' => __( 'Max Width', 'live-composer-page-builder' ),
-				'std' => '',
-				'section' => 'dslc_plugin_options',
-=======
 		    'lc_max_width' => array(
 
 			    'section' => 'dslc_plugin_options',
 				'label' => __( 'Max Width', 'live-composer-page-builder' ),
 				'std' => '',
->>>>>>> 88c6120... LC 1.0.8: js based settings panel switch
 				'type' => 'text',
 				'descr' => __( 'The width of the modules section when row is set to wrapped. If not set the $content_width variable from theme will be used.', 'live-composer-page-builder' ),
 			),

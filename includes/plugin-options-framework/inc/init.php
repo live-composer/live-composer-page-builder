@@ -72,12 +72,9 @@ function dslc_plugin_options_display( $tab = '' ) {
 
 		<div id="icon-themes" class="icon32"></div>
 		<h2>Live Composer</h2>
-<<<<<<< HEAD
-		<?php settings_errors(); ?>
-=======
+
 		<?php settings_errors();
 		$anchor = @$_GET['anchor'] != '' ? @$_GET['anchor'] : 'dslc_getting_started' ;?>
->>>>>>> 88c6120... LC 1.0.8: js based settings panel switch
 
 		<h2 class="nav-tab-wrapper">
 			<a href="#" data-nav-to="dslc_getting_started" class="nav-tab <?php echo $anchor == 'dslc_getting_started' ? 'nav-tab-active' : ''; ?>">Getting Started</a>
@@ -170,9 +167,6 @@ function dslc_plugin_options_init() {
 				$option['section'] = $section_ID;
 			}
 
-<<<<<<< HEAD
-			$option['name'] = $option['section'] . '[' . $option['id'] . ']';
-=======
 			$option['name'] = 'dslc_plugin_options[' . $option['id'] . ']';
 
 			$value = '';
@@ -200,7 +194,6 @@ function dslc_plugin_options_init() {
 			}
 
 			$option['value'] = $value;
->>>>>>> 88c6120... LC 1.0.8: js based settings panel switch
 
 			add_settings_field(
 				$option_ID,
