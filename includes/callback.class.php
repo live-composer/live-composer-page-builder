@@ -78,26 +78,51 @@ class DSLC_Callback{
 	}
 
 	/**
-	 * Return rendered dynamic parts of module functions
-	 *
-	 * @param  array $PARAMS
+	 * Generates shortcode preview
 	 */
-	static function getDynamicPartsClbk($PARAMS)
+	static function getShortcodePreviewClbk( $PARAMS )
 	{
-		if(is_array($PARAMS['functions'])){
+		if ( ! empty( $PARAMS['code'] ) )
+		{
+			ob_start();
+			do_action( 'wp_enqueue_scripts' );
+			ob_end_clean();
 
-			foreach($PARAMS['functions'] as $functionName){
+			global $wp_scripts;
+			global $wp_styles;
 
-				$functionNameClear = str_replace("{{", "", $functionName);
-				$functionNameClear = str_replace("}}", "", $functionNameClear);
-
-				if(method_exists($PARAMS['moduleId'], $functionNameClear)){
-
-					self::$CLBK[$functionName] = base64_encode($PARAMS['moduleId']::$functionNameClear($PARAMS));
-				}
+			if ( isset( $wp_scripts ) ) {
+				$wp_scripts->queue = array();
 			}
-		}
+			if ( isset( $wp_styles ) ) {
+				$wp_styles->queue = array();
+			}
 
+			remove_action( 'wp_print_styles', 'print_emoji_styles' );
+
+			ob_start();
+			$content = dslc_preformat_cache( do_shortcode( stripslashes( $PARAMS['code'] ) ) );
+			self::$CLBK['content'] = do_shortcode( $content );
+			ob_get_clean();
+
+
+			$scripts_styles	= '';
+
+			// Start the output buffer.
+			ob_start();
+
+			// Print scripts and styles.
+			if ( isset( $wp_scripts ) ) {
+				$wp_scripts->done[] = 'jquery';
+				wp_print_scripts( $wp_scripts->queue );
+			}
+			if ( isset( $wp_styles ) ) {
+				wp_print_styles( $wp_styles->queue );
+			}
+
+			// Return the scripts and styles markup.
+			self::$CLBK['assets'] = ob_get_clean();
+		}
 	}
 }
 

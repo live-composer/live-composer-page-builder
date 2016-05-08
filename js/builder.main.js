@@ -89,7 +89,7 @@ var dslcDebug = false;
 		if(dslcDebug) console.log('dslc_show_publish_button');
 
 		jQuery('.dslca-save-composer').show().addClass('dslca-init-animation').css('visibility', 'visible');
-		jQuery('.dslca-save-draft-composer').show().addClass('dslca-init-animation').css('visibility', 'visible');
+		jQuery('.dslca-save-draft-composer').show().addClass('dslca-init-animation');
 	}
 
 	/**
@@ -5172,6 +5172,45 @@ var dslcDebug = false;
 	}
 
 	/**
+	 * Preview shortcodes changes
+	 */
+	function dslc_show_short_preview()
+	{
+		if(dslcDebug) console.log('dslc_show_short_preview');
+
+		var composerCode = jQuery('#dslca-code').val();
+
+		jQuery.post(
+			DSLCAjax.ajaxurl,
+			{
+				action : 'dslc-callback-request',
+				method: 'getShortcodePreview',
+				params: {
+					code: composerCode,
+				}
+			},
+			function(response){
+
+				// Insert html first
+				var domEl = jQuery( response.content );
+				Object.keys(DSLC.ModulesManager.ActiveModules).forEach(function( key )
+				{
+					var module = DSLC.ModulesManager.ActiveModules[key];
+
+					if ( module.elem[0].innerText.match(/\[.*?\]/) ) {
+
+						module.moduleBody.html( domEl.find( "#dslc-module-" + module.settings.module_instance_id ).html() );
+					}
+				});
+
+				// Then insert assets
+				jQuery(".dslc-added-assets").empty().html( response.assets );
+			}
+
+		);
+	}
+
+	/**
  	 * CODE GENERATION - Save Draft
  	 */
 
@@ -5551,7 +5590,7 @@ var dslcDebug = false;
 			// If some saving action not already in progress
 			if(!$('body').hasClass('dslca-module-saving-in-progress') && !$('body').hasClass('dslca-saving-in-progress')){
 				// Call the function to save
-				dslc_save_draft_composer();
+				dslc_show_short_preview();
 			}
 
 		});
@@ -6399,8 +6438,6 @@ var dslcDebug = false;
 
 					var content = $('#dslcawpeditor').val();
 				}
-
-				content = Util.wpautop(content);
 
 				$('.dslca-wp-editor').hide();
 				$('.dslca-wysiwyg-active').html(content);

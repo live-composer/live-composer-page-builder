@@ -91,8 +91,8 @@ function dslc_display_composer() {
 					</div><!-- .dslca-save-composer -->
 
 					<div class="dslca-save-draft-composer dslca-save-draft-composer-hook">
-						<span class="dslca-save-draft-composer-helptext"><?php _e( 'SAVE AS DRAFT', 'live-composer-page-builder' ); ?></span>
-						<span class="dslca-save-draft-composer-icon"><span class="dslca-icon dslc-icon-save"></span></span>
+						<span class="dslca-save-draft-composer-helptext"><?php _e( 'PREVIEW SHORTCODES', 'live-composer-page-builder' ); ?></span>
+						<span class="dslca-save-draft-composer-icon"><span class="dslca-icon dslc-icon-eye-open"></span></span>
 					</div><!-- .dslca-save-draft-composer -->
 
 					<!-- Hide/Show -->
@@ -514,6 +514,7 @@ function dslc_display_composer() {
 <?php
 		global $dslc_googlefonts_array;
 		?>
+		<div class="dslc-added-assets"></div>
 		<div class="dslc-common-options">
 
 			<script>
@@ -528,7 +529,7 @@ function dslc_display_composer() {
 		if ( $cache != '' ) {
 		?>
 		<div class="dslc-cached-version">
-		<?php echo $cache; ?>
+		<?php echo do_shortcode( $cache ); ?>
 		</div>
 		<?php }
 	}
@@ -1188,10 +1189,11 @@ function dslc_modules_area_front( $atts, $content = null ) {
 	global $dslc_active;
 	global $LC_Registry;
 
-	$pos_class = '';
-	$module_area_size = $atts['size'];
 
-	if($atts['last'] == 'yes')
+	$pos_class = '';
+	$module_area_size = @$atts['size'];
+
+	if(@$atts['last'] == 'yes')
 		$pos_class = 'dslc-last-col';
 
 	if(isset($atts['first']) && $atts['first'] == 'yes')

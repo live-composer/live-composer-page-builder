@@ -19,6 +19,7 @@ class DSLC_Html extends DSLC_Module {
 	function __construct( $settings = [], $atts = [] )
 	{
 		$this->module_id = __CLASS__;
+		$this->module_ver = 2;
 		$this->module_title = __( 'HTML', 'live-composer-page-builder' );
 		$this->module_icon = 'code';
 		$this->module_category = 'general';
@@ -28,7 +29,6 @@ class DSLC_Html extends DSLC_Module {
 
 	/**
 	 * @inhertied
-	 * @return [type] [description]
 	 */
 	function options()
 	{
@@ -2863,3 +2863,6 @@ class DSLC_Html extends DSLC_Module {
 	}
 
 }
+
+/// Regsiter module
+( new DSLC_Html )->register();

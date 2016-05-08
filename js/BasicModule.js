@@ -212,6 +212,10 @@
 		this.saveEdits();
 
 		this.recalcCentered();
+		this.elem.find("[contenteditable]").each(function()
+		{
+			new MediumEditor(this);
+		});
 
 		return this.elem; /// Return jQUery object
 	}
