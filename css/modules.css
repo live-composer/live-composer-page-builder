@@ -679,6 +679,10 @@
 			float: right;
 		}
 
+.dslc-info-box .dslc-info-box-image-alt a img {
+    display: inline-block;
+}
+
 /**
  * PARTNERS MODULE
  */
@@ -1869,9 +1873,12 @@
 	    left: 0;
 	}
 	.dslc-image img {
-		max-width: none;
+		max-width: 100%;
 		display: inline-block;
 		vertical-align: middle;
+	}
+	#dslc-content .dslc-image a img {
+		display: inline-block;
 	}
 
 /**

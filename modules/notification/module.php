@@ -274,7 +274,7 @@ class DSLC_Notification extends DSLC_Module {
 			array(
 				'label' => __( 'Font Family', 'live-composer-page-builder' ),
 				'id' => 'css_font_family',
-				'std' => 'Droid Serif',
+				'std' => 'Open Sans',
 				'type' => 'font',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-notification-box, .dslc-notification-box p',
