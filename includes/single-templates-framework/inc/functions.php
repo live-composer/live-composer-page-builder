@@ -27,7 +27,7 @@ function dslc_st_init() {
 			'parent' => __( 'Parent Template', 'live-composer-page-builder' ),
 		),
 		'public' => true,
-		'supports' => array( 'title', 'custom-fields', 'thumbnail' ),
+		'supports' => array('title', 'custom-fields', 'thumbnail'),
 		'capabilities' => array(
 			'publish_posts' => $capability,
 			'edit_posts' => $capability,
@@ -39,7 +39,7 @@ function dslc_st_init() {
 			'delete_post' => $capability,
 			'read_post' => $capability
 		),
-	));
+	) );
 
 	global $dslc_var_post_options;
 
@@ -129,12 +129,12 @@ function dslc_st_get_template_ID( $post_ID ) {
 			'post_status' => 'publish',
 			'posts_per_page' => 1,
 			'meta_query' => array(
-				array (
+				array(
 					'key' => 'dslc_template_for',
 					'value' => get_post_type( $post_ID ),
 					'compare' => '=',
 				),
-				array (
+				array(
 					'key' => 'dslc_template_type',
 					'value' => 'default',
 					'compare' => '=',

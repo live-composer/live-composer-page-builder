@@ -29,11 +29,11 @@ function dslc_tut_load_scripts() {
 	$tut_ch_three = dslc_get_option( 'lc_tut_chapter_three', 'dslc_plugin_options_tuts' );
 	$tut_ch_four = dslc_get_option( 'lc_tut_chapter_four', 'dslc_plugin_options_tuts' );
 
-	$tut_ids = array( $tut_ch_one, $tut_ch_two, $tut_ch_three, $tut_ch_four );
+	$tut_ids = array($tut_ch_one, $tut_ch_two, $tut_ch_three, $tut_ch_four);
 
-	if ( is_singular() && isset( $_GET['dslc'] ) && $_GET['dslc'] == 'active' && in_array( get_the_ID(), $tut_ids) ) {
-		wp_enqueue_style( 'dslc-tut-css', DS_LIVE_COMPOSER_URL . 'includes/tutorials/tutorial' . $min_suffix . '.css', array(), DS_LIVE_COMPOSER_VER);
-		wp_enqueue_script( 'dslc-tut-js', DS_LIVE_COMPOSER_URL . 'includes/tutorials/tutorial' . $min_suffix . '.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+	if ( is_singular() && isset( $_GET['dslc'] ) && $_GET['dslc'] == 'active' && in_array( get_the_ID(), $tut_ids ) ) {
+		wp_enqueue_style( 'dslc-tut-css', DS_LIVE_COMPOSER_URL . 'includes/tutorials/tutorial' . $min_suffix . '.css', array(), DS_LIVE_COMPOSER_VER );
+		wp_enqueue_script( 'dslc-tut-js', DS_LIVE_COMPOSER_URL . 'includes/tutorials/tutorial' . $min_suffix . '.js', array('jquery'), DS_LIVE_COMPOSER_VER );
 	}
 
 } add_action( 'wp_enqueue_scripts', 'dslc_tut_load_scripts' );
@@ -52,13 +52,13 @@ function dslc_tut_modal() {
 	$tut_ch_three = dslc_get_option( 'lc_tut_chapter_three', 'dslc_plugin_options_tuts' );
 	$tut_ch_four = dslc_get_option( 'lc_tut_chapter_four', 'dslc_plugin_options_tuts' );
 
-	$tut_ids = array( $tut_ch_one, $tut_ch_two, $tut_ch_three, $tut_ch_four );
+	$tut_ids = array($tut_ch_one, $tut_ch_two, $tut_ch_three, $tut_ch_four);
 
-	if ( is_singular() && isset( $_GET['dslc'] ) && $_GET['dslc'] == 'active' && in_array( get_the_ID(), $tut_ids) ) {
+	if ( is_singular() && isset( $_GET['dslc'] ) && $_GET['dslc'] == 'active' && in_array( get_the_ID(), $tut_ids ) ) {
 
-		$tut_ch_two_link = add_query_arg( array( 'dslc' => 'active' ), get_permalink( $tut_ch_two ) );
-		$tut_ch_three_link = add_query_arg( array( 'dslc' => 'active' ), get_permalink( $tut_ch_three ) );
-		$tut_ch_four_link = add_query_arg( array( 'dslc' => 'active' ), get_permalink( $tut_ch_four ) );
+		$tut_ch_two_link = add_query_arg( array('dslc' => 'active'), get_permalink( $tut_ch_two ) );
+		$tut_ch_three_link = add_query_arg( array('dslc' => 'active'), get_permalink( $tut_ch_three ) );
+		$tut_ch_four_link = add_query_arg( array('dslc' => 'active'), get_permalink( $tut_ch_four ) );
 
 		?>
 			<input type="hidden" name="dslc_tut_settings" id="dslc_tut_settings" data-post-id="<?php echo get_the_ID(); ?>" />
@@ -93,7 +93,7 @@ function dslc_tut_options() {
 			'value' => 'none'
 		)
 	);
-	foreach( $pages as $page ) {
+	foreach ( $pages as $page ) {
 		$pages_opts[] = array(
 			'label' => $page->post_title,
 			'value' => $page->ID

@@ -25,8 +25,8 @@ function dslc_plugin_options_setup() {
 	$icon_svg = dslc_get_menu_svg();
 
 	add_menu_page(
-		__('Live Composer', 'live-composer-page-builder' ),
-		__('Live Composer', 'live-composer-page-builder' ),
+		__( 'Live Composer', 'live-composer-page-builder' ),
+		__( 'Live Composer', 'live-composer-page-builder' ),
 		'manage_options',
 		'dslc_plugin_options',
 		'dslc_plugin_options_display',
@@ -43,7 +43,7 @@ function dslc_plugin_options_setup() {
 		// 	create_function( null, 'dslc_plugin_options_display( "dslc_getting_started" );' )
 		// );
 
-		remove_submenu_page('dslc_plugin_options','dslc_plugin_options'); // delete duplicate
+		remove_submenu_page( 'dslc_plugin_options', 'dslc_plugin_options' ); // delete duplicate
 } add_action( 'admin_menu', 'dslc_plugin_options_setup' );
 
 /**
@@ -173,7 +173,7 @@ function dslc_plugin_options_init() {
 
 			$option['id'] = $option_ID;
 
-			if ( ! isset( $option['section'] ) ){
+			if ( ! isset( $option['section'] ) ) {
 
 				$option['section'] = $section_ID;
 			}
@@ -183,7 +183,7 @@ function dslc_plugin_options_init() {
 			$value = '';
 			$options = get_option( 'dslc_plugin_options' );
 
-			if ( isset( $options[ $option_ID ] ) ) {
+			if ( isset( $options[$option_ID] ) ) {
 
 				$value = $options[$option_ID];
 			}
@@ -193,7 +193,7 @@ function dslc_plugin_options_init() {
 
 				$options = get_option( $section_ID );
 
-				if ( isset( $options[ $option_ID ] ) ) {
+				if ( isset( $options[$option_ID] ) ) {
 
 					$value = $options[$option_ID];
 				}
@@ -209,10 +209,10 @@ function dslc_plugin_options_init() {
 			add_settings_field(
 				$option_ID,
 				$option['label'],
-				function() use ($option) {
+				function() use ( $option ) {
 
 					$func = 'dslc_plugin_option_display_' . $option['type'];
-					$func($option);
+					$func( $option );
 				},
 				$section_ID,
 				$section_ID
@@ -235,16 +235,16 @@ function dslc_plugin_options_display_options( $section ) {
  */
 
 add_action( 'wp_ajax_dslc_activecampaign', 'dslc_ajax_check_activecampaign' );
-function dslc_ajax_check_activecampaign(){
+function dslc_ajax_check_activecampaign() {
 
     // Check Nonce
-    if ( !wp_verify_nonce( $_POST['security']['nonce'], 'dslc-optionspanel-ajax' ) ) {
-        wp_die('You do not have rights!');
+    if ( ! wp_verify_nonce( $_POST['security']['nonce'], 'dslc-optionspanel-ajax' ) ) {
+        wp_die( 'You do not have rights!' );
     }
 
     // Access permissions
-    if ( !current_user_can( 'install_plugins' ) ) {
-        wp_die('You do not have rights!');
+    if ( ! current_user_can( 'install_plugins' ) ) {
+        wp_die( 'You do not have rights!' );
     }
 
     $email = sanitize_email( $_POST["email"] );

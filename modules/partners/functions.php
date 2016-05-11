@@ -17,7 +17,7 @@ function dslc_partners_module_cpt() {
 
 	// With Front
 	$with_front = dslc_get_option( 'with_front', 'dslc_plugin_options_cpt_slugs' );
-	if ( empty ( $with_front )  ) $with_front = 'disabled';
+	if ( empty ( $with_front ) ) $with_front = 'disabled';
 	if ( $with_front == 'enabled' ) $with_front = true; else $with_front = false;
 
 	/**
@@ -43,8 +43,8 @@ function dslc_partners_module_cpt() {
 			'parent' => __( 'Parent Partner', 'live-composer-page-builder' ),
 		),
 		'public' => true,
-		'rewrite' => array( 'slug' => dslc_get_option( 'partners_slug', 'dslc_plugin_options_cpt_slugs' ), 'with_front' => $with_front ),
-		'supports' => array( 'title', 'custom-fields', 'excerpt', 'editor', 'author', 'thumbnail', 'comments'  ),
+		'rewrite' => array('slug' => dslc_get_option( 'partners_slug', 'dslc_plugin_options_cpt_slugs' ), 'with_front' => $with_front),
+		'supports' => array('title', 'custom-fields', 'excerpt', 'editor', 'author', 'thumbnail', 'comments'),
 		'capabilities' => array(
 			'publish_posts' => $capability,
 			'edit_posts' => $capability,

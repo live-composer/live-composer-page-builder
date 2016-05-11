@@ -102,18 +102,18 @@ function dslc_register_module( $module_id ) {
 	$module_instance = new $module_id();
 
 	// Icon
-	if ( ! isset( $module_instance->module_icon) )
+	if ( ! isset( $module_instance->module_icon ) )
 		$module_instance->module_icon = '';
 
 	// Category/Origin
-	if ( ! isset( $module_instance->module_category) )
+	if ( ! isset( $module_instance->module_category ) )
 		$module_instance->module_category = 'other';
 
 	// If the array ID not taken
 	if ( ! isset( $dslc_var_modules[$module_id] ) ) {
 
 		// Append new module to the global array
-		$dslc_var_modules[ $module_id ] = array(
+		$dslc_var_modules[$module_id] = array(
 			'id' => $module_id,
 			'title' => $module_instance->module_title,
 			'icon' => $module_instance->module_icon,
@@ -136,7 +136,7 @@ function dslc_unregister_module( $module_id ) {
 	global $dslc_var_modules;
 
 	// Remove module from array
-	unset( $dslc_var_modules[ $module_id ] );
+	unset( $dslc_var_modules[$module_id] );
 
 }
 
@@ -154,14 +154,14 @@ function dslc_module_settings( $options, $custom = false ) {
 	$settings = array();
 
 	// Go through all options
-	foreach( $options as $option ) {
+	foreach ( $options as $option ) {
 
 		// If value set use it
-		if ( isset( $_POST[ $option['id'] ] ) ) {
-			$settings[ $option['id'] ] = $_POST[ $option['id'] ];
+		if ( isset( $_POST[$option['id']] ) ) {
+			$settings[$option['id']] = $_POST[$option['id']];
 		// If value not set use default
 		} else {
-			$settings[ $option['id'] ] = $option['std'];
+			$settings[$option['id']] = $option['std'];
 		}
 
 	}
@@ -181,7 +181,7 @@ function dslc_generate_custom_css( $options_arr, $settings, $restart = false ) {
 	$css_output = '';
 	global $dslc_googlefonts_array;
 	$googlefonts_output = '';
-	$regular_fonts = array( "Georgia", "Times", "Arial", "Lucida Sans Unicode", "Tahoma", "Trebuchet MS", "Verdana", "Helvetica" );
+	$regular_fonts = array("Georgia", "Times", "Arial", "Lucida Sans Unicode", "Tahoma", "Trebuchet MS", "Verdana", "Helvetica");
 	$organized_array = array();
 
 	global $dslc_css_fonts;
@@ -249,7 +249,7 @@ function dslc_generate_custom_css( $options_arr, $settings, $restart = false ) {
 			$affect_el = '';
 			$affect_els_arr = explode( ',', $option_arr['affect_on_change_el'] );
 			$count = 0;
-			foreach ( $affect_els_arr as $affect_el_arr) {
+			foreach ( $affect_els_arr as $affect_el_arr ) {
 				$count++;
 				if ( $count > 1 ) {
 					$affect_el .= ',';
@@ -343,42 +343,42 @@ function dslc_generate_custom_css( $options_arr, $settings, $restart = false ) {
 			$css_output_el_background = ''; // process background CSS properties separately
 
 			// remove double spaces form css element address
-			$el = preg_replace('/ {2,}/', ' ', $el);
+			$el = preg_replace( '/ {2,}/', ' ', $el );
 
 			// Do not output empty CSS blocks
-			if ( count($rules) && strlen($el) > 2  ) {
-				$css_output_el .=  $el . '{';
+			if ( count( $rules ) && strlen( $el ) > 2 ) {
+				$css_output_el .= $el . '{';
 
 					foreach ( $rules as $rule => $value ) {
 						$css_output_rule = '';
-						$rule = trim($rule);
-						$value = trim($value);
+						$rule = trim( $rule );
+						$value = trim( $value );
 
 						// Basic CSS rule name validation
-						if ( $value != '' && $value != 'url(" ")' && !preg_match("/([\[\];<>]+)/", $value) && preg_match("/([-a-z@]{3,60})/", $rule) ) {
+						if ( $value != '' && $value != 'url(" ")' && ! preg_match( "/([\[\];<>]+)/", $value ) && preg_match( "/([-a-z@]{3,60})/", $rule ) ) {
 
 							// Output all the border properties only if border-width has been set
-							if ( $rule == 'border-width' && $value != '' && $value != '0px' && $value != '0') {
+							if ( $rule == 'border-width' && $value != '' && $value != '0px' && $value != '0' ) {
 								$do_css_output_border = true;
 							}
 							// Make no sense to output this property
-							if ( $rule == 'border-style' && $value == 'none none none none') {
+							if ( $rule == 'border-style' && $value == 'none none none none' ) {
 								$do_css_output_border = false;
 							}
 							// Shorten border-style properties
-							if ( $rule == 'border-style' && $value == 'solid solid solid solid') {
+							if ( $rule == 'border-style' && $value == 'solid solid solid solid' ) {
 								$value = 'solid';
 							}
 							// Output all the background properties only if background-image is set
-							if ( $rule == 'background-image') {
+							if ( $rule == 'background-image' ) {
 								$do_css_output_background = true;
 							}
 
 							$css_output_rule .= $rule . ':' . $value . $important_append . ';';
 
-							if ( stristr($rule, 'border') ) {
+							if ( stristr( $rule, 'border' ) ) {
 								$css_output_el_border .= $css_output_rule;
-							} elseif ( stristr($rule, 'background-') && $rule != 'background-color' ) {
+							} elseif ( stristr( $rule, 'background-' ) && $rule != 'background-color' ) {
 								$css_output_el_background .= $css_output_rule;
 							} else {
 								$css_output_el .= $css_output_rule;
@@ -397,7 +397,7 @@ function dslc_generate_custom_css( $options_arr, $settings, $restart = false ) {
 						$css_output_el .= $css_output_el_background;
 					}
 
-					$css_output_el = trim($css_output_el);
+					$css_output_el = trim( $css_output_el );
 
 				$css_output_el .= '} ';
 			}
@@ -640,7 +640,7 @@ function dslc_is_module_active( $module_ID, $check_registered = false ) {
 
 	if ( dslc_get_option( $module_ID, 'dslc_plugin_options_features' ) == 'disabled' )
 		return false;
-	elseif ( $check_registered == true && ! isset( $dslc_var_modules[$module_ID]  ) )
+	elseif ( $check_registered == true && ! isset( $dslc_var_modules[$module_ID] ) )
 		return false;
 	else
 		return true;
@@ -655,7 +655,7 @@ function dslc_is_module_active( $module_ID, $check_registered = false ) {
 
 function dslc_save_preset( $preset_name, $preset_code_raw, $module_id ) {
 
-	$preset_id = strtolower( str_replace( ' ', '-', $preset_name) );
+	$preset_id = strtolower( str_replace( ' ', '-', $preset_name ) );
 
 	// Clean up ( step 1 - get data )
 	$preset_code_raw = maybe_unserialize( base64_decode( $preset_code_raw ) );
@@ -664,7 +664,7 @@ function dslc_save_preset( $preset_name, $preset_code_raw, $module_id ) {
 	$module_options = $module->options();
 
 	// Clean up ( step 2 - generate correct preset code )
-	foreach( $module_options as $module_option ) {
+	foreach ( $module_options as $module_option ) {
 
 		// allowed to have a preset
 		if ( ! isset( $module_option['include_in_preset'] ) || $module_option['include_in_preset'] == true ) {
@@ -715,7 +715,7 @@ function dslc_save_preset( $preset_name, $preset_code_raw, $module_id ) {
  * @since 1.0
  */
 
-function dslc_is_editor_active( $capability = 'save') {
+function dslc_is_editor_active( $capability = 'save' ) {
 
 	// Check for saving capability
 	if ( $capability == 'save' ) {
@@ -890,11 +890,11 @@ function dslc_set_default_templates( $templates ) {
 function dslc_set_user_templates( $templates ) {
 
 	// Get user templates
-	$user_templates = maybe_unserialize ( get_option( 'dslc_templates' ) );
+	$user_templates = maybe_unserialize( get_option( 'dslc_templates' ) );
 
 	// If there are any, merge them with the templates array
 	if ( ! empty ( $user_templates ) && is_array( $user_templates ) ) {
-		$templates = array_merge ( $templates, $user_templates );
+		$templates = array_merge( $templates, $user_templates );
 	}
 
 	// Pass it back

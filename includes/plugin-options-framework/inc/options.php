@@ -60,7 +60,7 @@
 	$dslc_plugin_options['dslc_plugin_options_widgets_m'] = array(
 		'title' => __( 'Widgets Module', 'live-composer-page-builder' ),
 		'options' => array(
-			'sidebars' => array (
+			'sidebars' => array(
 
 				'section' => 'dslc_plugin_options_widgets_m',
 				'label' => __( 'Sidebars', 'live-composer-page-builder' ),
@@ -212,7 +212,7 @@ function dslc_feature_control_settings() {
 
 	foreach ( $dslc_var_modules as $module ) {
 
-		$module_opts_array[ $module['id'] ] = array(
+		$module_opts_array[$module['id']] = array(
 
 			'section' => 'dslc_plugin_options_features',
 			'label' => '"' . $module['title'] . '" <small>module</small>',
@@ -245,7 +245,7 @@ function dslc_feature_control_unregister() {
 	$features = dslc_get_options( 'dslc_plugin_options_features' );
 
 	foreach ( $dslc_var_modules as $module ) {
-		if ( isset( $features[ $module['id'] ] ) && $features[ $module['id'] ] == 'disabled' ) {
+		if ( isset( $features[$module['id']] ) && $features[$module['id']] == 'disabled' ) {
 			dslc_unregister_module( $module['id'] );
 		}
 	}

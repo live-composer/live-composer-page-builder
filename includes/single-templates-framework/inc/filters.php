@@ -92,7 +92,7 @@ function dslc_st_template_switch() {
 
 } add_action( 'template_redirect', 'dslc_st_template_switch' );
 
-function dslc_templates_col_title($defaults) {
+function dslc_templates_col_title( $defaults ) {
 
 	unset( $defaults['date'] );
 	$defaults['dslc_templates_col_cpt'] = 'Post Type';
@@ -101,7 +101,7 @@ function dslc_templates_col_title($defaults) {
 
 }
 
-function dslc_templates_col_content($column_name, $post_ID) {
+function dslc_templates_col_content( $column_name, $post_ID ) {
 
 	if ( $column_name == 'dslc_templates_col_cpt' ) {
 		echo get_post_meta( $post_ID, 'dslc_template_for', true );
@@ -114,8 +114,8 @@ function dslc_templates_col_content($column_name, $post_ID) {
 
 }
 
-add_filter( 'manage_dslc_templates_posts_columns', 'dslc_templates_col_title', 5);
-add_action( 'manage_dslc_templates_posts_custom_column', 'dslc_templates_col_content', 10, 2);
+add_filter( 'manage_dslc_templates_posts_columns', 'dslc_templates_col_title', 5 );
+add_action( 'manage_dslc_templates_posts_custom_column', 'dslc_templates_col_content', 10, 2 );
 
 /**
  * Makes sure there is only one default template per post type
@@ -143,12 +143,12 @@ function dslc_tp_unique_default( $post_id ) {
 		'post_status' => 'any',
 		'posts_per_page' => -1,
 		'meta_query' => array(
-			array (
+			array(
 				'key' => 'dslc_template_for',
 				'value' => $_POST['dslc_template_for'],
 				'compare' => '=',
 			),
-			array (
+			array(
 				'key' => 'dslc_template_type',
 				'value' => 'default',
 				'compare' => '=',
@@ -160,7 +160,7 @@ function dslc_tp_unique_default( $post_id ) {
 	// Set those old defaults to regular tempaltes
 	if ( $templates ) {
 		foreach ( $templates as $template ) {
-			update_post_meta( $template->ID, 'dslc_template_type' , 'regular' );
+			update_post_meta( $template->ID, 'dslc_template_type', 'regular' );
 		}
 	}
 

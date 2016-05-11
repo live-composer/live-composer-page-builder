@@ -9,7 +9,7 @@ function dslc_sidebars() {
 
 		$sidebars_array = explode( ',', substr( $sidebars, 0, -1 ) );
 
-		foreach( $sidebars_array as $sidebar ) {
+		foreach ( $sidebars_array as $sidebar ) {
 
 			$sidebar_ID = 'dslc_' . strtolower( str_replace( ' ', '_', $sidebar ) );
 

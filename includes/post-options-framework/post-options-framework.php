@@ -37,7 +37,7 @@ function dslc_get_cpt_templates() {
 	if ( $templates ) {
 
 		foreach ( $templates as $template ) {
-			$template_for = get_post_meta( $template->ID, 'dslc_template_for' , true );
+			$template_for = get_post_meta( $template->ID, 'dslc_template_for', true );
 			$templates_array[$template_for][] = array(
 				'label' => $template->post_title,
 				'value' => $template->ID
@@ -98,7 +98,7 @@ function dslc_add_post_options() {
 	if ( ! empty( $dslc_var_post_options ) ) {
 
 		// Loop through all post options
-		foreach ( $dslc_var_post_options as $dslc_post_option_key => $dslc_post_option) {
+		foreach ( $dslc_var_post_options as $dslc_post_option_key => $dslc_post_option ) {
 
 			if ( ! isset( $dslc_post_option['context'] ) )
 				$dslc_post_option['context'] = 'normal';
@@ -204,7 +204,7 @@ function dslc_display_post_options( $object, $metabox ) {
 							global $current_screen;
 
 							if ( $current_screen->action != 'add' && $object->post_type != 'dslc_templates' && $object->post_type != 'dslc_hf' && $post_option['id'] != 'dslc_header' && $post_option['id'] != 'dslc_footer' ) {
-								echo '<a class="button" href="'. admin_url( 'edit.php?post_type=dslc_templates') .'">'. __( 'Edit Templates', 'live-composer-page-builder' ) .'</a>';
+								echo '<a class="button" href="' . admin_url( 'edit.php?post_type=dslc_templates' ) . '">' . __( 'Edit Templates', 'live-composer-page-builder' ) . '</a>';
 							}
 						?>
 
@@ -270,7 +270,7 @@ function dslc_display_post_options( $object, $metabox ) {
 							<div class="dslca-post-options-images dslca-clearfix">
 								<?php
 									$images = explode( ' ', trim( $curr_value ) );
-									foreach ($images as $image_ID) {
+									foreach ( $images as $image_ID ) {
 										$image = wp_get_attachment_image_src( $image_ID, 'full' );
 										?>
 										<div class="dslca-post-option-image" data-id="<?php echo $image_ID; ?>">
@@ -330,7 +330,7 @@ function dslc_save_post_options( $post_id, $post ) {
 
 				// Get option info
 				$meta_key = $post_option['id'];
-				$new_option_value = ( isset( $_POST[ $post_option['id'] ] ) ? $_POST[ $post_option['id'] ] : '' );
+				$new_option_value = ( isset( $_POST[$post_option['id']] ) ? $_POST[$post_option['id']] : '' );
 				$curr_option_value = get_post_meta( $post_id, $meta_key, true );
 
 				if ( is_array( $new_option_value ) ) {
@@ -364,12 +364,12 @@ function dslc_page_add_row_action( $actions, $page_object ) {
 	$id = $page_object->ID;
 
 	if ( $page_status != 'trash' ) {
-		$actions = array('edit-in-live-composer' => '<a href="'. get_home_url() . '/?page_id=' . $id . '&dslc=active">'. __( 'Edit in Live Composer', 'live-composer-page-builder' ) .'</a>') + $actions;
+		$actions = array('edit-in-live-composer' => '<a href="' . get_home_url() . '/?page_id=' . $id . '&dslc=active">' . __( 'Edit in Live Composer', 'live-composer-page-builder' ) . '</a>') + $actions;
 	}
 
 	return $actions;
 }
-add_filter('page_row_actions', 'dslc_page_add_row_action', 10, 2);
+add_filter( 'page_row_actions', 'dslc_page_add_row_action', 10, 2 );
 
 function dslc_post_add_row_action( $actions, $post ) {
 
@@ -379,7 +379,7 @@ function dslc_post_add_row_action( $actions, $post ) {
 	$post_type = $post->post_type;
 
 	if ( $post_status != 'trash' && ( $post_type == 'page' || $post_type == 'dslc_hf' ) ) {
-		$actions = array('edit-in-live-composer' => '<a href="'. get_home_url() . '/?page_id=' . $post->ID . '&dslc=active">'. __( 'Edit in Live Composer', 'live-composer-page-builder' ) .'</a>') + $actions;
+		$actions = array('edit-in-live-composer' => '<a href="' . get_home_url() . '/?page_id=' . $post->ID . '&dslc=active">' . __( 'Edit in Live Composer', 'live-composer-page-builder' ) . '</a>') + $actions;
 		/*
 		if ( array_key_exists( $post_type, $dslc_var_templates_pt ) ) {
 			$template_id = dslc_st_get_template_ID( $post->ID );
@@ -392,7 +392,7 @@ function dslc_post_add_row_action( $actions, $post ) {
 
     return $actions;
 }
-add_filter('post_row_actions','dslc_post_add_row_action', 10, 2);
+add_filter( 'post_row_actions', 'dslc_post_add_row_action', 10, 2 );
 
 /**
  * Adds button in permalink
@@ -404,8 +404,8 @@ function dslc_add_button_permalink( $return, $id, $new_title, $new_slug ) {
 
 	$current_post_type = get_post_type( $id );
 
-	if ( !array_key_exists( $current_post_type, $dslc_var_templates_pt ) && $current_post_type != 'dslc_testimonials' ) {
-		$return .= '<a class="button button-small" target="_blank" href="'. get_home_url() . '/?page_id=' . $id . '&dslc=active">'. __( 'Open in Live Composer', 'live-composer-page-builder' ) .'</a>';
+	if ( ! array_key_exists( $current_post_type, $dslc_var_templates_pt ) && $current_post_type != 'dslc_testimonials' ) {
+		$return .= '<a class="button button-small" target="_blank" href="' . get_home_url() . '/?page_id=' . $id . '&dslc=active">' . __( 'Open in Live Composer', 'live-composer-page-builder' ) . '</a>';
 	}
 
 	return $return;
@@ -423,8 +423,8 @@ function dslc_post_submitbox_add_button() {
 
 	$current_post_type = $post->post_type;
 
-	if ( $current_screen->action != 'add' && !array_key_exists( $current_post_type, $dslc_var_templates_pt )  && $current_post_type != 'dslc_testimonials' ) {
-		echo '<a class="button button-hero" target="_blank" href="'. get_home_url() . '/?page_id=' . get_the_ID() . '&dslc=active">'. __( 'Open in Live Composer', 'live-composer-page-builder' ) .'</a>';
+	if ( $current_screen->action != 'add' && ! array_key_exists( $current_post_type, $dslc_var_templates_pt ) && $current_post_type != 'dslc_testimonials' ) {
+		echo '<a class="button button-hero" target="_blank" href="' . get_home_url() . '/?page_id=' . get_the_ID() . '&dslc=active">' . __( 'Open in Live Composer', 'live-composer-page-builder' ) . '</a>';
 	}
 
 }
@@ -434,7 +434,7 @@ add_action( 'post_submitbox_start', 'dslc_post_submitbox_add_button' );
  * Creates a tab for pages and different post types
  */
 
-add_filter('the_editor', 'dslc_tab_content');
+add_filter( 'the_editor', 'dslc_tab_content' );
 function dslc_tab_content( $content ) {
 	if ( get_post_type( get_the_ID() ) == 'page' && is_admin() ) {
 ?>

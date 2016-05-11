@@ -524,7 +524,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 
 		);
 
-		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array( 'hover_opts' => false ) ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array('hover_opts' => false) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		return apply_filters( 'dslc_module_options', $dslc_options, $this->module_id );
@@ -559,13 +559,13 @@ class DSLC_TP_Meta extends DSLC_Module {
 		if ( comments_open( $post_id ) ) {
 			
 			if ( $num_comments == 0 )
-				$comments = __('No Comments');
+				$comments = __( 'No Comments' );
 			elseif ( $num_comments > 1 )
-				$comments = $num_comments . __(' Comments');
+				$comments = $num_comments . __( ' Comments' );
 			else
-				$comments = __('1 Comment');
+				$comments = __( '1 Comment' );
 
-			$comments_output = '<a href="#dslc-comments">'. $comments.'</a>';
+			$comments_output = '<a href="#dslc-comments">' . $comments . '</a>';
 
 		}
 
@@ -585,7 +585,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 					<ul class="dslc-clearfix">
 						
 						<?php if ( in_array( 'date', $tp_elements ) ) : ?>
-							<li><?php echo get_the_time( get_option('date_format'), $post_id ); ?></li>
+							<li><?php echo get_the_time( get_option( 'date_format' ), $post_id ); ?></li>
 						<?php endif; ?>
 
 						<?php if ( in_array( 'author', $tp_elements ) ) : ?>
@@ -612,7 +612,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 
 						<?php if ( in_array( 'category', $tp_elements ) ) : ?>
 							<?php if ( $show_fake ) : ?>
-								<li><a href="#"><?php _e( 'Category One', 'live-composer-page-builder' ) ; ?></a>, <a href="#"><?php _e( 'Category Two', 'live-composer-page-builder' ) ; ?></a></li>
+								<li><a href="#"><?php _e( 'Category One', 'live-composer-page-builder' ); ?></a>, <a href="#"><?php _e( 'Category Two', 'live-composer-page-builder' ); ?></a></li>
 							<?php else : ?>
 								<?php
 									foreach ( $post_type_taxonomies as $taxonomy ) {
@@ -639,7 +639,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 
 						<?php if ( in_array( 'tags', $tp_elements ) ) : ?>
 							<?php if ( $show_fake ) : ?>
-								<li><a href="#"><?php _e( 'One', 'live-composer-page-builder' ) ; ?></a>, <a href="#"><?php _e( 'Two', 'live-composer-page-builder' ) ; ?></a>, <a href="#"><?php _e( 'Three', 'live-composer-page-builder' ) ; ?></a></li>
+								<li><a href="#"><?php _e( 'One', 'live-composer-page-builder' ); ?></a>, <a href="#"><?php _e( 'Two', 'live-composer-page-builder' ); ?></a>, <a href="#"><?php _e( 'Three', 'live-composer-page-builder' ); ?></a></li>
 							<?php else : ?>
 								<?php
 									foreach ( $post_type_taxonomies as $taxonomy ) {
@@ -666,7 +666,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 
 						<?php if ( in_array( 'comments', $tp_elements ) && ( $comments_output != '' || $show_fake ) ) : ?>
 							<?php if ( $show_fake ) : ?>
-								<li><?php _e( '10 Comments', 'live-composer-page-builder' ) ; ?></li>
+								<li><?php _e( '10 Comments', 'live-composer-page-builder' ); ?></li>
 							<?php else : ?>
 								<li><?php echo $comments_output; ?></li>
 							<?php endif; ?>

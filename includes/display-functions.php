@@ -329,7 +329,7 @@ function dslc_display_composer() {
 				// If a page or a template go ahead normally
 				if ( is_page() || get_post_type() == 'dslc_templates' || ! isset( $dslc_var_templates_pt[get_post_type()] ) ) {
 
-					?><a href="<?php echo add_query_arg( array( 'dslc' => 'active' ), get_permalink() ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo $activate_button_position; ?>"><?php _e( 'ACTIVATE EDITOR', 'live-composer-page-builder' ); ?></a><?php
+					?><a href="<?php echo add_query_arg( array('dslc' => 'active'), get_permalink() ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo $activate_button_position; ?>"><?php _e( 'ACTIVATE EDITOR', 'live-composer-page-builder' ); ?></a><?php
 
 				// If not a page or a template post type
 				} else {
@@ -339,7 +339,7 @@ function dslc_display_composer() {
 
 					if ( $template ) {
 
-						?><a target="_blank" href="<?php echo add_query_arg( array( 'dslc' => 'active' ), get_permalink( $template ) ); ?>" class="dslca-activate-composer-hook"><?php _e( 'EDIT TEMPLATE', 'live-composer-page-builder' ); ?></a><?php
+						?><a target="_blank" href="<?php echo add_query_arg( array('dslc' => 'active'), get_permalink( $template ) ); ?>" class="dslca-activate-composer-hook"><?php _e( 'EDIT TEMPLATE', 'live-composer-page-builder' ); ?></a><?php
 
 					} else {
 
@@ -359,7 +359,7 @@ function dslc_display_composer() {
 				if ( $template_ID != 'none' ) {
 
 					// Output the button
-					?><a href="<?php echo add_query_arg( array( 'dslc' => 'active' ), get_permalink( $template_ID ) ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo $activate_button_position; ?>"><?php _e( 'ACTIVATE EDITOR', 'live-composer-page-builder' ); ?></a><?php
+					?><a href="<?php echo add_query_arg( array('dslc' => 'active'), get_permalink( $template_ID ) ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo $activate_button_position; ?>"><?php _e( 'ACTIVATE EDITOR', 'live-composer-page-builder' ); ?></a><?php
 
 				}
 
@@ -373,7 +373,7 @@ function dslc_display_composer() {
 				if ( $template_ID != 'none' ) {
 
 					// Output the button
-					?><a href="<?php echo add_query_arg( array( 'dslc' => 'active' ), get_permalink( $template_ID ) ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo $activate_button_position; ?>"><?php _e( 'ACTIVATE EDITOR', 'live-composer-page-builder' ); ?></a><?php
+					?><a href="<?php echo add_query_arg( array('dslc' => 'active'), get_permalink( $template_ID ) ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo $activate_button_position; ?>"><?php _e( 'ACTIVATE EDITOR', 'live-composer-page-builder' ); ?></a><?php
 
 				}
 
@@ -387,7 +387,7 @@ function dslc_display_composer() {
 				if ( $template_ID != 'none' ) {
 
 					// Output the button
-					?><a href="<?php echo add_query_arg( array( 'dslc' => 'active' ), get_permalink( $template_ID ) ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo $activate_button_position; ?>"><?php _e( 'ACTIVATE EDITOR', 'live-composer-page-builder' ); ?></a><?php
+					?><a href="<?php echo add_query_arg( array('dslc' => 'active'), get_permalink( $template_ID ) ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo $activate_button_position; ?>"><?php _e( 'ACTIVATE EDITOR', 'live-composer-page-builder' ); ?></a><?php
 
 				}
 
@@ -401,7 +401,7 @@ function dslc_display_composer() {
 				if ( $template_ID != 'none' ) {
 
 					// Output the button
-					?><a href="<?php echo add_query_arg( array( 'dslc' => 'active' ), get_permalink( $template_ID ) ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo $activate_button_position; ?>"><?php _e( 'ACTIVATE EDITOR', 'live-composer-page-builder' ); ?></a><?php
+					?><a href="<?php echo add_query_arg( array('dslc' => 'active'), get_permalink( $template_ID ) ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo $activate_button_position; ?>"><?php _e( 'ACTIVATE EDITOR', 'live-composer-page-builder' ); ?></a><?php
 
 				}
 
@@ -758,7 +758,7 @@ function dslc_filter_content( $content ) {
 						<?php
 
 							if ( $editor_type == 'visual' )
-								wp_editor( '', 'dslcawpeditor', array( 'quicktags' => false ) );
+								wp_editor( '', 'dslcawpeditor', array('quicktags' => false) );
 							else
 								wp_editor( '', 'dslcawpeditor' );
 						?>
@@ -832,7 +832,7 @@ function dslc_filter_content( $content ) {
 		}
 
 		// Pass the filtered content output
-		return $composer_wrapper_before . do_action( 'dslc_output_prepend') . $composer_header . '<div id="dslc-main">' . $composer_prepend . $composer_content . '</div>' . $composer_append . $composer_footer . do_action( 'dslc_output_append') . $composer_wrapper_after;
+		return $composer_wrapper_before . do_action( 'dslc_output_prepend' ) . $composer_header . '<div id="dslc-main">' . $composer_prepend . $composer_content . '</div>' . $composer_append . $composer_footer . do_action( 'dslc_output_append' ) . $composer_wrapper_after;
 
 	// If LC should not filter the content
 	} else {
@@ -889,10 +889,10 @@ function dslc_module_front( $atts, $settings_raw = null ) {
 		global $dslc_var_image_option_bckp;
 		$dslc_var_image_option_bckp = array();
 		$all_opts = $module_instance->options();
-		foreach( $all_opts as $all_opt ) {
+		foreach ( $all_opts as $all_opt ) {
 
 			// Fix settings when a new option added after a module is used
-			if ( ! isset( $settings[ $all_opt['id'] ] ) ) {
+			if ( ! isset( $settings[$all_opt['id']] ) ) {
 
 				if ( isset( $all_opt['std'] ) && $all_opt['std'] !== '' ) {
 					$settings[$all_opt['id']] = $all_opt['std'];
@@ -908,7 +908,7 @@ function dslc_module_front( $atts, $settings_raw = null ) {
 		$settings = apply_filters( 'dslc_filter_settings', $settings );
 
 		// Transform image ID to URL
-		foreach( $all_opts as $all_opt ) {
+		foreach ( $all_opts as $all_opt ) {
 			if ( $all_opt['type'] == 'image' ) {
 				if ( isset( $settings[$all_opt['id']] ) && ! empty( $settings[$all_opt['id']] ) && is_numeric( $settings[$all_opt['id']] ) ) {
 					$dslc_var_image_option_bckp[$all_opt['id']] = $settings[$all_opt['id']];
@@ -987,7 +987,7 @@ function dslc_modules_section_front( $atts, $content = null ) {
 	 */
 
 	// Overlay
-	$bg_video = '<div class="dslc-bg-video dslc-force-show"><div class="dslc-bg-video-inner"></div><div class="dslc-bg-video-overlay" style="'. $overlay_style .'"></div></div>';
+	$bg_video = '<div class="dslc-bg-video dslc-force-show"><div class="dslc-bg-video-inner"></div><div class="dslc-bg-video-overlay" style="' . $overlay_style . '"></div></div>';
 
 	// BG Video
 	if ( isset( $atts['bg_video'] ) && $atts['bg_video'] !== '' && $atts['bg_video'] !== 'disabled' ) {
@@ -1009,7 +1009,7 @@ function dslc_modules_section_front( $atts, $content = null ) {
 					<source type="video/webm" src="' . $atts['bg_video'] . '.webm" />
 				</video>
 			</div>
-			<div class="dslc-bg-video-overlay" style="'. $overlay_style .'"></div>
+			<div class="dslc-bg-video-overlay" style="'. $overlay_style . '"></div>
 		</div>';
 
 	}
@@ -1039,7 +1039,7 @@ function dslc_modules_section_front( $atts, $content = null ) {
 
 	// Custom Class
 	if ( $atts['custom_class'] != '' )
-		$section_class .=  $atts['custom_class'] . ' ';
+		$section_class .= $atts['custom_class'] . ' ';
 
 	// Show on Class
 	if ( $atts['show_on'] != '' ) {
@@ -1073,7 +1073,7 @@ function dslc_modules_section_front( $atts, $content = null ) {
 	// Custom ID
 	$section_id = false;
 	if ( $atts['custom_id'] != '' )
-		$section_id =  $atts['custom_id'];
+		$section_id = $atts['custom_id'];
 
 	// Custom ID - Output
 	$section_id_output = '';
@@ -1081,13 +1081,13 @@ function dslc_modules_section_front( $atts, $content = null ) {
 		$section_id_output = 'id="' . $section_id . '"';
 
 	$output = '
-		<div ' . $section_id_output . ' class="dslc-modules-section ' . $a_container_class . $parallax_class . $section_class . $extra_classes .'" style="' . dslc_row_get_style( $atts ) . '">
+		<div ' . $section_id_output . ' class="dslc-modules-section ' . $a_container_class . $parallax_class . $section_class . $extra_classes . '" style="' . dslc_row_get_style( $atts ) . '">
 
-				'.$bg_video.'
+				'.$bg_video . '
 
 				<div class="dslc-modules-section-wrapper dslc-clearfix">'
 
-					. $a_prepend. do_shortcode( $content ) . $a_append
+					. $a_prepend . do_shortcode( $content ) . $a_append
 
 					. '</div>';
 
@@ -1104,7 +1104,7 @@ function dslc_modules_section_front( $atts, $content = null ) {
 						<span class="dslca-manage-action dslca-delete-modules-section-hook"><span class="dslca-icon dslc-icon-remove"></span></span>
 					</div>
 				</div>
-				<div class="dslca-modules-section-settings">' . dslc_row_get_options_fields( $atts ) . '</div>' ;
+				<div class="dslca-modules-section-settings">' . dslc_row_get_options_fields( $atts ) . '</div>';
 
 			// Loading
 			$output .= '<div class="dslca-module-loading dslca-modules-area-loading"><div class="dslca-module-loading-inner"></div></div>';
@@ -1137,7 +1137,7 @@ function dslc_modules_area_front( $atts, $content = null ) {
 	if ( isset( $atts['first'] ) && $atts['first'] == 'yes' )
 		$pos_class = 'dslc-first-col';
 
-	$output = '<div class="dslc-modules-area dslc-col dslc-' . $atts['size'] . '-col '. $pos_class .'" data-size="' . $atts['size'] . '">';
+	$output = '<div class="dslc-modules-area dslc-col dslc-' . $atts['size'] . '-col ' . $pos_class . '" data-size="' . $atts['size'] . '">';
 
 		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
@@ -1198,7 +1198,7 @@ function dslc_load_template( $filename, $default = '' ) {
 	if ( $filename ) {
 
 		// Look for template in the theme
-		$template = locate_template( array ( $filename ) );
+		$template = locate_template( array($filename) );
 
 		// If not found in theme load default
 		if ( ! $template )
@@ -1323,7 +1323,7 @@ function dslc_custom_css() {
 
 			$gfonts_output_subsets = '';
 			$gfonts_subsets_arr = dslc_get_option( 'lc_gfont_subsets', 'dslc_plugin_options_performance' );
-			if ( ! $gfonts_subsets_arr ) $gfonts_subsets_arr = array( 'latin', 'latin-ext', 'cyrillic', 'cyrillic-ext' );
+			if ( ! $gfonts_subsets_arr ) $gfonts_subsets_arr = array('latin', 'latin-ext', 'cyrillic', 'cyrillic-ext');
 			foreach ( $gfonts_subsets_arr as $gfonts_subset ) {
 				if ( $gfonts_output_subsets == '' ) {
 					$gfonts_output_subsets .= $gfonts_subset;
@@ -1340,11 +1340,11 @@ function dslc_custom_css() {
 
 				$gfonts_do_output = true;
 
-				if( count($dslc_googlefonts_array) == 1 && $dslc_googlefonts_array[0] == ''  ) {
+				if ( count( $dslc_googlefonts_array ) == 1 && $dslc_googlefonts_array[0] == '' ) {
 					$gfonts_do_output = false;
 				}
 
-				foreach ( $dslc_googlefonts_array as $gfont) {
+				foreach ( $dslc_googlefonts_array as $gfont ) {
 					if ( in_array( $gfont, $dslc_all_googlefonts_array ) ) {
 						$gfont = str_replace( ' ', '+', $gfont );
 						if ( $gfont != '' ) {
@@ -1487,26 +1487,26 @@ function dslc_module_gen_css( $atts, $settings_raw ) {
 
 function dslc_post_pagination( $atts ) {
 
-	if( is_front_page() ) { $paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1; } else { $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1; }
+	if ( is_front_page() ) { $paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1; } else { $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1; }
 
 	if ( ! isset( $atts['force_number'] ) ) $force_number = false; else $force_number = $atts['force_number'];
 	if ( ! isset( $atts['pages'] ) ) $pages = false; else $pages = $atts['pages'];
 	if ( ! isset( $atts['type'] ) ) $type = 'numbered'; else $type = $atts['type'];
 	$range = 2;
 
-	$showitems = ($range * 2)+1;
+	$showitems = ( $range * 2 ) + 1;
 
 	if ( empty ( $paged ) ) { $paged = 1; }
 
 	if ( $pages == '' ) {
 		global $wp_query;
 		$pages = $wp_query->max_num_pages;
-		if( ! $pages ) {
+		if ( ! $pages ) {
 			$pages = 1;
 		}
 	}
 
-	if( 1 != $pages ) {
+	if ( 1 != $pages ) {
 
 		?>
 		<div class="dslc-pagination dslc-pagination-type-<?php echo $type; ?>">
@@ -1515,28 +1515,28 @@ function dslc_post_pagination( $atts ) {
 
 					if ( $type == 'numbered' ) {
 
-						if($paged > 2 && $paged > $range+1 && $showitems < $pages) { echo "<li class='dslc-inactive'><a href='".get_pagenum_link(1)."'>&laquo;</a></li>"; }
-						if($paged > 1 && $showitems < $pages) { echo "<li class='dslc-inactive'><a href='".get_pagenum_link($paged - 1)."' >&lsaquo;</a></li>"; }
+						if ( $paged > 2 && $paged > $range + 1 && $showitems < $pages ) { echo "<li class='dslc-inactive'><a href='" . get_pagenum_link( 1 ) . "'>&laquo;</a></li>"; }
+						if ( $paged > 1 && $showitems < $pages ) { echo "<li class='dslc-inactive'><a href='" . get_pagenum_link( $paged - 1 ) . "' >&lsaquo;</a></li>"; }
 
-						for ($i=1; $i <= $pages; $i++){
-							if (1 != $pages &&(!($i >= $paged+$range+1 || $i <= $paged-$range-1) || $pages <= $showitems)){
-								echo ($paged == $i)? "<li class='dslc-active'><a href='".get_pagenum_link($i)."'>".$i."</a></li>":"<li class='dslc-inactive'><a class='inactive' href='".get_pagenum_link($i)."'>".$i."</a></li>";
+						for ( $i = 1; $i <= $pages; $i++ ) {
+							if ( 1 != $pages && ( ! ( $i >= $paged + $range + 1 || $i <= $paged - $range - 1 ) || $pages <= $showitems ) ) {
+								echo ( $paged == $i ) ? "<li class='dslc-active'><a href='" . get_pagenum_link( $i ) . "'>" . $i . "</a></li>" : "<li class='dslc-inactive'><a class='inactive' href='" . get_pagenum_link( $i ) . "'>" . $i . "</a></li>";
 							}
 						}
 
-						if ($paged < $pages && $showitems < $pages) { echo "<li class='dslc-inactive'><a href='".get_pagenum_link($paged + 1)."'>&rsaquo;</a></li>"; }
-						if ($paged < $pages-1 &&  $paged+$range-1 < $pages && $showitems < $pages) { echo "<li class='dslc-inactive'><a href='".get_pagenum_link($pages)."'>&raquo;</a></li>"; }
+						if ( $paged < $pages && $showitems < $pages ) { echo "<li class='dslc-inactive'><a href='" . get_pagenum_link( $paged + 1 ) . "'>&rsaquo;</a></li>"; }
+						if ( $paged < $pages - 1 && $paged + $range - 1 < $pages && $showitems < $pages ) { echo "<li class='dslc-inactive'><a href='" . get_pagenum_link( $pages ) . "'>&raquo;</a></li>"; }
 
 					} elseif ( $type == 'prevnext' ) {
 
-						if($paged > 1 ) { echo "<li class='dslc-inactive dslc-fl'><a href='".get_pagenum_link($paged - 1)."' >" . __( 'Newer', 'live-composer-page-builder' ) . "</a></li>"; }
-						if ($paged < $pages ) { echo "<li class='dslc-inactive dslc-fr'><a href='".get_pagenum_link($paged + 1)."'>" . __( 'Older', 'live-composer-page-builder' ) . "</a></li>"; }
+						if ( $paged > 1 ) { echo "<li class='dslc-inactive dslc-fl'><a href='" . get_pagenum_link( $paged - 1 ) . "' >" . __( 'Newer', 'live-composer-page-builder' ) . "</a></li>"; }
+						if ( $paged < $pages ) { echo "<li class='dslc-inactive dslc-fr'><a href='" . get_pagenum_link( $paged + 1 ) . "'>" . __( 'Older', 'live-composer-page-builder' ) . "</a></li>"; }
 
 					}
 
 					if ( $type == 'loadmore' ) {
-						if ($paged < $pages ) {
-							echo "<li class='dslc-pagination-load-more dslc-active'><a href='".get_pagenum_link($paged + 1)."'><span class='dslc-icon dslc-icon-refresh'></span>" . __( 'LOAD MORE ITEMS', 'live-composer-page-builder' ) . "</a></li>";
+						if ( $paged < $pages ) {
+							echo "<li class='dslc-pagination-load-more dslc-active'><a href='" . get_pagenum_link( $paged + 1 ) . "'><span class='dslc-icon dslc-icon-refresh'></span>" . __( 'LOAD MORE ITEMS', 'live-composer-page-builder' ) . "</a></li>";
 						} else {
 							echo "<li class='dslc-pagination-load-more dslc-inactive'><a href='#'><span class='dslc-icon dslc-icon-refresh'></span>" . __( 'LOAD MORE ITEMS', 'live-composer-page-builder' ) . "</a></li>";
 						}

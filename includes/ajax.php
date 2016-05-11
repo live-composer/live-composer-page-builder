@@ -331,8 +331,8 @@ function dslc_ajax_display_module_options( $atts ) {
 
 			$curr_value = $module_option['std'];
 
-			if ( isset( $_POST[ $module_option['id'] ] ) )
-				$curr_value = $_POST[ $module_option['id'] ];
+			if ( isset( $_POST[$module_option['id']] ) )
+				$curr_value = $_POST[$module_option['id']];
 
 			/**
 			 * Visibility
@@ -462,7 +462,7 @@ function dslc_ajax_display_module_options( $atts ) {
 					<?php elseif ( $module_option['type'] == 'select' ) : ?>
 
 						<select class="dslca-module-edit-field" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" <?php echo $affect_on_change_append ?> >
-							<?php foreach( $module_option['choices'] as $select_option ) : ?>
+							<?php foreach ( $module_option['choices'] as $select_option ) : ?>
 								<option value="<?php echo $select_option['value']; ?>" <?php if ( $curr_value == $select_option['value'] ) echo 'selected="selected"'; ?>><?php echo $select_option['label']; ?></option>
 							<?php endforeach; ?>
 						</select>
@@ -478,7 +478,7 @@ function dslc_ajax_display_module_options( $atts ) {
 								$curr_value = explode( ' ', trim( $curr_value ) );
 
 							// Determined brakepoints
-							$chck_amount = count ( $module_option['choices'] );
+							$chck_amount = count( $module_option['choices'] );
 							$chck_breakpoint = ceil( $chck_amount / 1 );
 							$chck_count = 0;
 
@@ -612,11 +612,11 @@ function dslc_ajax_display_module_options( $atts ) {
 								$box_shadow_val = explode( ' ', $curr_value );
 							}
 							if ( is_array( $box_shadow_val ) ) {
-								$box_shadow_hor_val = str_replace('px', '', $box_shadow_val[0] );
-								$box_shadow_ver_val = str_replace('px', '', $box_shadow_val[1] );
-								$box_shadow_blur_val = str_replace('px', '', $box_shadow_val[2] );
-								$box_shadow_spread_val = str_replace('px', '', $box_shadow_val[3] );
-								$box_shadow_color_val = str_replace('px', '', $box_shadow_val[4] );
+								$box_shadow_hor_val = str_replace( 'px', '', $box_shadow_val[0] );
+								$box_shadow_ver_val = str_replace( 'px', '', $box_shadow_val[1] );
+								$box_shadow_blur_val = str_replace( 'px', '', $box_shadow_val[2] );
+								$box_shadow_spread_val = str_replace( 'px', '', $box_shadow_val[3] );
+								$box_shadow_color_val = str_replace( 'px', '', $box_shadow_val[4] );
 								if ( isset( $box_shadow_val[5] ) ) {
 									$box_shadow_inset_val = $box_shadow_val[5];
 								}
@@ -627,7 +627,7 @@ function dslc_ajax_display_module_options( $atts ) {
 
 							<div class="dslca-module-edit-option-box-shadow-single">
 								<span class="dslca-module-edit-option-checkbox-hook"><?php _e( 'Inner', 'live-composer-page-builder' ); ?><span class="dslca-icon <?php if ( $box_shadow_inset_val == 'inset' ) echo 'dslc-icon-check'; else echo 'dslc-icon-check-empty'; ?>"></span></span>
-								<input type="checkbox" class="dslca-module-edit-field-checkbox dslca-module-edit-option-box-shadow-inset" <?php if (  $box_shadow_inset_val == 'inset' ) echo 'checked="checked"'; ?> />
+								<input type="checkbox" class="dslca-module-edit-field-checkbox dslca-module-edit-option-box-shadow-inset" <?php if ( $box_shadow_inset_val == 'inset' ) echo 'checked="checked"'; ?> />
 							</div>
 							<div class="dslca-module-edit-option-box-shadow-single">
 								<span><?php _e( 'Hor', 'live-composer-page-builder' ); ?></span><input class="dslca-module-edit-option-box-shadow-hor" step="0.1" type="number" value="<?php echo $box_shadow_hor_val; ?>" />
@@ -663,10 +663,10 @@ function dslc_ajax_display_module_options( $atts ) {
 							}
 
 							if ( is_array( $text_shadow_val ) ) {
-								$text_shadow_hor_val = str_replace('px', '', $text_shadow_val[0] );
-								$text_shadow_ver_val = str_replace('px', '', $text_shadow_val[1] );
-								$text_shadow_blur_val = str_replace('px', '', $text_shadow_val[2] );
-								$text_shadow_color_val = str_replace('px', '', $text_shadow_val[4] );
+								$text_shadow_hor_val = str_replace( 'px', '', $text_shadow_val[0] );
+								$text_shadow_ver_val = str_replace( 'px', '', $text_shadow_val[1] );
+								$text_shadow_blur_val = str_replace( 'px', '', $text_shadow_val[2] );
+								$text_shadow_color_val = str_replace( 'px', '', $text_shadow_val[4] );
 							}
 						?>
 
@@ -721,7 +721,7 @@ function dslc_ajax_display_module_options( $atts ) {
 		// Output Tabs
 		$output_tabs = '';
 		foreach ( $tabs as $tab ) {
-			$output_tabs .= '<span class="dslca-module-edit-options-tab-hook" data-section="' . $tab['section'] . '" data-id="'. $tab['id'] .'">' . $tab['title'] . '</span>';
+			$output_tabs .= '<span class="dslca-module-edit-options-tab-hook" data-section="' . $tab['section'] . '" data-id="' . $tab['id'] . '">' . $tab['title'] . '</span>';
 		}
 
 		// Combine output
@@ -776,7 +776,7 @@ function dslc_ajax_save_composer( $atts ) {
 
 		// Add/update the post/page with the content for search
 		// wp_kses_post – Sanitize content for allowed HTML tags for post content.
-		if ( update_post_meta( $post_id, 'dslc_content_for_search', wp_kses_post($content_for_search) ) )
+		if ( update_post_meta( $post_id, 'dslc_content_for_search', wp_kses_post( $content_for_search ) ) )
 			$response['status'] = 'success';
 
 		// Delete draft code
@@ -872,11 +872,11 @@ function dslc_ajax_load_template( $atts ) {
 		$template_code = $templates[$template_id]['code'];
 
 		// Apply for new ID
-		$template_code = str_replace( '[dslc_module ', '[dslc_module give_new_id="true" ', $template_code);
-		$template_code = str_replace( '[dslc_module]', '[dslc_module give_new_id="true"]', $template_code);
+		$template_code = str_replace( '[dslc_module ', '[dslc_module give_new_id="true" ', $template_code );
+		$template_code = str_replace( '[dslc_module]', '[dslc_module give_new_id="true"]', $template_code );
 
 		// Get the front-end output
-		$response['output'] = do_shortcode ( $template_code );
+		$response['output'] = do_shortcode( $template_code );
 
 		// Encode response
 		$response_json = json_encode( $response );
@@ -912,11 +912,11 @@ function dslc_ajax_import_template( $atts ) {
 		$template_code = stripslashes( $_POST['dslc_template_code'] );
 
 		// Apply for new ID
-		$template_code = str_replace( '[dslc_module ', '[dslc_module give_new_id="true" ', $template_code);
-		$template_code = str_replace( '[dslc_module]', '[dslc_module give_new_id="true"]', $template_code);
+		$template_code = str_replace( '[dslc_module ', '[dslc_module give_new_id="true" ', $template_code );
+		$template_code = str_replace( '[dslc_module]', '[dslc_module give_new_id="true"]', $template_code );
 
 		// Get the front-end output
-		$response['output'] = do_shortcode ( $template_code );
+		$response['output'] = do_shortcode( $template_code );
 
 		// Encode response
 		$response_json = json_encode( $response );
@@ -952,7 +952,7 @@ function dslc_ajax_save_template( $atts ) {
 
 		// Get new template data
 		$template_title = stripslashes( $_POST['dslc_template_title'] );
-		$template_id = strtolower( str_replace( ' ', '-', $template_title) );
+		$template_id = strtolower( str_replace( ' ', '-', $template_title ) );
 		$template_code = stripslashes( $_POST['dslc_template_code'] );
 
 		// Get current templates
@@ -1093,11 +1093,11 @@ function dslc_ajax_import_modules_section( $atts ) {
 		$modules_code = stripslashes( $_POST['dslc_modules_section_code'] );
 
 		// Apply for new ID
-		$modules_code = str_replace( '[dslc_module ', '[dslc_module give_new_id="true" ', $modules_code);
-		$modules_code = str_replace( '[dslc_module]', '[dslc_module give_new_id="true"]', $modules_code);
+		$modules_code = str_replace( '[dslc_module ', '[dslc_module give_new_id="true" ', $modules_code );
+		$modules_code = str_replace( '[dslc_module]', '[dslc_module give_new_id="true"]', $modules_code );
 
 		// Get the front-end output
-		$response['output'] = do_shortcode ( $modules_code );
+		$response['output'] = do_shortcode( $modules_code );
 
 		// Encode response
 		$response_json = json_encode( $response );
@@ -1146,17 +1146,17 @@ function dslc_ajax_dm_module_defaults_code( $atts ) {
 			// Module output
 			$settings = $module_instance->options();
 
-			$code .= "if ( " . '$id' ." == '" . $module_id . "' ) {
+			$code .= "if ( " . '$id' . " == '" . $module_id . "' ) {
 	". '$new_defaults = array(' . "
 ";
 
 			// Fix settings when a new option added after a module is used
-			foreach( $settings as $key => $setting ) {
+			foreach ( $settings as $key => $setting ) {
 
-				if ( isset( $settings_new[ $setting['id'] ] ) ) {
+				if ( isset( $settings_new[$setting['id']] ) ) {
 
-					if ( $settings_new[ $setting['id'] ] != $settings[$key]['std'] ) {
-						$code .= "		'" . $setting['id'] . "' => '" . $settings_new[ $setting['id'] ] . "',
+					if ( $settings_new[$setting['id']] != $settings[$key]['std'] ) {
+						$code .= "		'" . $setting['id'] . "' => '" . $settings_new[$setting['id']] . "',
 ";
 					}
 

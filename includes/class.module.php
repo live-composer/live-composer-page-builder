@@ -1737,14 +1737,14 @@ class DSLC_Module {
  	 * Declare module options
  	 */
 	function options() {
-		die('Function "options" must be over-ridden in a sub-class (the module class).');
+		die( 'Function "options" must be over-ridden in a sub-class (the module class).' );
 	}
 
 	/**
 	 * The front-end output of the module
 	 */
 	function output( $options ) {
-		die('Function "output" must be over-ridden in a sub-class (the module class).');
+		die( 'Function "output" must be over-ridden in a sub-class (the module class).' );
 	}
 
 	function module_start( $options ) {
@@ -1825,7 +1825,7 @@ class DSLC_Module {
 
 		$title_attr = '';
 		if ( dslc_is_editor_active() ) {
-			$title_attr = 'title="' . strtoupper( esc_attr( $this->module_title ) ) .'"';
+			$title_attr = 'title="' . strtoupper( esc_attr( $this->module_title ) ) . '"';
 		}
 
 		/**
@@ -1841,7 +1841,7 @@ class DSLC_Module {
 		$module_class_arr[] = 'dslc-module-front';
 		$module_class_arr[] = 'dslc-module-' . $this->module_id;
 		$module_class_arr[] = 'dslc-in-viewport-check';
-		$module_class_arr[] = 'dslc-in-viewport-anim-'. $options['css_anim'];
+		$module_class_arr[] = 'dslc-in-viewport-anim-' . $options['css_anim'];
 		$module_class_arr[] = $class_size_output;
 		$module_class_arr[] = $class_show_on;
 		$module_class_arr[] = $class_handle_like;
@@ -1875,7 +1875,7 @@ class DSLC_Module {
 
 						dslc_generate_custom_css( $options_arr, $options, true );
 						$googlefonts_output = '';
-						foreach ( $dslc_googlefonts_array as $googlefont) {
+						foreach ( $dslc_googlefonts_array as $googlefont ) {
 							if ( in_array( $googlefont, $dslc_all_googlefonts_array ) ) {
 								$googlefont = str_replace( ' ', '+', $googlefont );
 								if ( $googlefont != '' ) {
@@ -1953,18 +1953,18 @@ class DSLC_Module {
 							$options_ids[] = $option['id'];
 
 							// If value already set use it, if not use default
-							if ( isset( $user_options[ $option_id ] ) )
-								$option_value = $user_options[ $option_id ];
+							if ( isset( $user_options[$option_id] ) )
+								$option_value = $user_options[$option_id];
 							else
 								$option_value = $option['std'];
 
-							if ( isset( $user_options[ $option_id ] ) && $user_options[ $option_id ] == $option['std'] ) {
-								unset( $user_options_no_defaults[ $option_id ] );
+							if ( isset( $user_options[$option_id] ) && $user_options[$option_id] == $option['std'] ) {
+								unset( $user_options_no_defaults[$option_id] );
 							}
 
 						?>
 
-						<textarea class="dslca-module-option-front" data-id="<?php echo $option_id; ?>"><?php echo stripslashes ( $option_value ); ?></textarea>
+						<textarea class="dslca-module-option-front" data-id="<?php echo $option_id; ?>"><?php echo stripslashes( $option_value ); ?></textarea>
 
 					<?php endforeach; ?>
 
@@ -1980,7 +1980,7 @@ class DSLC_Module {
 
 				</div><!-- dslca-module-options-front -->
 
-				<textarea class="dslca-module-code"><?php echo base64_encode( serialize($user_options_no_defaults ) ); ?></textarea>
+				<textarea class="dslca-module-code"><?php echo base64_encode( serialize( $user_options_no_defaults ) ); ?></textarea>
 
 				<span class="dslc-sortable-helper-icon dslc-icon-<?php echo $this->module_icon; ?>" data-title="<?php echo $this->module_title; ?>" data-icon="<?php echo $this->module_icon; ?>"></span>
 
@@ -2011,7 +2011,7 @@ class DSLC_Module {
 			$presets = array();
 		} else {
 			$presets = maybe_unserialize( $presets );
-			foreach( $presets as $preset ) {
+			foreach ( $presets as $preset ) {
 				if ( $preset['module'] == $this->module_id ) {
 					$choices[] = array(
 						'label' => $preset['title'],

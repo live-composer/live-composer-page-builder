@@ -44,7 +44,7 @@ function dslc_hf_init() {
 			'parent' => __( 'Parent Header/Footer', 'live-composer-page-builder' ),
 		),
 		'public' => true,
-		'supports' => array( 'title', 'custom-fields', 'author', 'thumbnail'  ),
+		'supports' => array('title', 'custom-fields', 'author', 'thumbnail'),
 		'capabilities' => array(
 			'publish_posts' => $capability,
 			'edit_posts' => $capability,
@@ -56,7 +56,7 @@ function dslc_hf_init() {
 			'delete_post' => $capability,
 			'read_post' => $capability
 		),
-	));
+	) );
 
 	/**
 	 * Options
@@ -133,7 +133,7 @@ function dslc_hf_init() {
  * @since 1.0
  */
 
-function dslc_hf_col_title($defaults) {
+function dslc_hf_col_title( $defaults ) {
 
 	if ( ! defined( 'DS_LIVE_COMPOSER_HF' ) || ! DS_LIVE_COMPOSER_HF ) return;
 
@@ -143,7 +143,7 @@ function dslc_hf_col_title($defaults) {
 	$defaults['dslc_hf_col_default'] = 'Type';
 	return $defaults;
 
-} add_filter( 'manage_dslc_hf_posts_columns', 'dslc_hf_col_title', 5);
+} add_filter( 'manage_dslc_hf_posts_columns', 'dslc_hf_col_title', 5 );
 
 /**
  * Listing - Column Content
@@ -151,7 +151,7 @@ function dslc_hf_col_title($defaults) {
  * @since 1.0
  */
 
-function dslc_hf_col_content($column_name, $post_ID) {
+function dslc_hf_col_content( $column_name, $post_ID ) {
 
 	if ( ! defined( 'DS_LIVE_COMPOSER_HF' ) || ! DS_LIVE_COMPOSER_HF ) return;
 
@@ -164,7 +164,7 @@ function dslc_hf_col_content($column_name, $post_ID) {
 			echo '<strong>Default</strong>';
 	}
 
-} add_action( 'manage_dslc_hf_posts_custom_column', 'dslc_hf_col_content', 10, 2);
+} add_action( 'manage_dslc_hf_posts_custom_column', 'dslc_hf_col_content', 10, 2 );
 
 /**
  * Make sure there's only one default per header and footer
@@ -194,12 +194,12 @@ function dslc_hf_unique_default( $post_id ) {
 		'post_status' => 'any',
 		'posts_per_page' => -1,
 		'meta_query' => array(
-			array (
+			array(
 				'key' => 'dslc_hf_for',
 				'value' => $_POST['dslc_hf_for'],
 				'compare' => '=',
 			),
-			array (
+			array(
 				'key' => 'dslc_hf_type',
 				'value' => 'default',
 				'compare' => '=',
@@ -211,7 +211,7 @@ function dslc_hf_unique_default( $post_id ) {
 	// Set those old defaults to regular tempaltes
 	if ( $templates ) {
 		foreach ( $templates as $template ) {
-			update_post_meta( $template->ID, 'dslc_hf_type' , 'regular' );
+			update_post_meta( $template->ID, 'dslc_hf_type', 'regular' );
 		}
 	}
 
@@ -262,7 +262,7 @@ function dslc_hf_options() {
 	if ( $templates ) {
 
 		foreach ( $templates as $template ) {
-			$template_for = get_post_meta( $template->ID, 'dslc_hf_for' , true );
+			$template_for = get_post_meta( $template->ID, 'dslc_hf_for', true );
 			if ( $template_for == 'header' ) {
 				$headers_array[] = array(
 					'label' => $template->post_title,
@@ -278,7 +278,7 @@ function dslc_hf_options() {
 
 		$dslc_var_post_options['dslc-hf-options'] = array(
 			'title' => __( 'Header/Footer', 'live-composer-page-builder' ),
-			'show_on' => array( 'page', 'dslc_templates' ),
+			'show_on' => array('page', 'dslc_templates'),
 			'context' => 'side',
 			'options' => array(
 				array(
@@ -313,10 +313,10 @@ function dslc_hf_options() {
 function dslc_hf_get_ID( $post_ID = false ) {
 
 	// If theme does not define header/footer compatibility return false
-	if ( ! defined( 'DS_LIVE_COMPOSER_HF' ) || ! DS_LIVE_COMPOSER_HF ) return array( 'header' => false, 'footer' => false );
+	if ( ! defined( 'DS_LIVE_COMPOSER_HF' ) || ! DS_LIVE_COMPOSER_HF ) return array('header' => false, 'footer' => false);
 
 	// If current page is actually header/footer post, return false
-	if ( is_singular( 'dslc_hf' ) ) return array( 'header' => false, 'footer' => false );
+	if ( is_singular( 'dslc_hf' ) ) return array('header' => false, 'footer' => false);
 
 	// Global vars
 	global $dslc_post_types;
@@ -374,12 +374,12 @@ function dslc_hf_get_ID( $post_ID = false ) {
 			'post_status' => 'publish',
 			'posts_per_page' => 1,
 			'meta_query' => array(
-				array (
+				array(
 					'key' => 'dslc_hf_for',
 					'value' => 'header',
 					'compare' => '=',
 				),
-				array (
+				array(
 					'key' => 'dslc_hf_type',
 					'value' => 'default',
 					'compare' => '=',
@@ -415,12 +415,12 @@ function dslc_hf_get_ID( $post_ID = false ) {
 			'post_status' => 'publish',
 			'posts_per_page' => 1,
 			'meta_query' => array(
-				array (
+				array(
 					'key' => 'dslc_hf_for',
 					'value' => 'footer',
 					'compare' => '=',
 				),
-				array (
+				array(
 					'key' => 'dslc_hf_type',
 					'value' => 'default',
 					'compare' => '=',
@@ -448,7 +448,7 @@ function dslc_hf_get_ID( $post_ID = false ) {
 	}
 
 	// Return the template ID
-	return array( 'header' => $header_tpl_ID, 'footer' => $footer_tpl_ID );
+	return array('header' => $header_tpl_ID, 'footer' => $footer_tpl_ID);
 
 }
 

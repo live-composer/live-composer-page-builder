@@ -19,7 +19,7 @@ class DSLC_Posts extends DSLC_Module {
 	function options() {
 
 		// Get registered post types
-		$post_types = get_post_types( array( 'public' => true ), 'objects' );
+		$post_types = get_post_types( array('public' => true), 'objects' );
 		$post_types_choices = array();
 
 		// Generate usable array of post types
@@ -132,7 +132,7 @@ class DSLC_Posts extends DSLC_Module {
 				'id' => 'columns',
 				'std' => '3',
 				'type' => 'select',
-				'choices' => $this->shared_options('posts_per_row_choices'),
+				'choices' => $this->shared_options( 'posts_per_row_choices' ),
 			),
 			array(
 				'label' => __( 'Order By', 'live-composer-page-builder' ),
@@ -2156,13 +2156,13 @@ class DSLC_Posts extends DSLC_Module {
 
 		);
 
-		$dslc_options = array_merge( $dslc_options, $this->shared_options('carousel_options') );
-		$dslc_options = array_merge( $dslc_options, $this->shared_options('heading_options') );
-		$dslc_options = array_merge( $dslc_options, $this->shared_options('filters_options') );
-		$dslc_options = array_merge( $dslc_options, $this->shared_options('carousel_arrows_options') );
-		$dslc_options = array_merge( $dslc_options, $this->shared_options('carousel_circles_options') );
-		$dslc_options = array_merge( $dslc_options, $this->shared_options('pagination_options') );
-		$dslc_options = array_merge( $dslc_options, $this->shared_options('animation_options') );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'carousel_options' ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'heading_options' ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'filters_options' ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'carousel_arrows_options' ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'carousel_circles_options' ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'pagination_options' ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options' ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		return apply_filters( 'dslc_module_options', $dslc_options, $this->module_id );
@@ -2199,7 +2199,7 @@ class DSLC_Posts extends DSLC_Module {
 		 */
 
 			// Fix for pagination
-			if( is_front_page() ) { $paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1; } else { $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1; }
+			if ( is_front_page() ) { $paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1; } else { $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1; }
 
 			// Fix for pagination from other modules affecting this one when pag disabled
 			if ( $options['pagination_type'] == 'disabled' ) $paged = 1;
@@ -2222,13 +2222,13 @@ class DSLC_Posts extends DSLC_Module {
 				$args['offset'] = $query_offset;
 			}
 
-			if ( defined('DOING_AJAX') && DOING_AJAX ) {
-				$args['post_status'] = array( 'publish', 'private' );
+			if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+				$args['post_status'] = array('publish', 'private');
 			}
 
 			// Category args
 			if ( isset( $options['categories'] ) && $options['categories'] != '' ) {
-				$cats_array = explode( ' ', $options['categories']);
+				$cats_array = explode( ' ', $options['categories'] );
 				$args['category__in'] = $cats_array;
 			}
 
@@ -2259,7 +2259,7 @@ class DSLC_Posts extends DSLC_Module {
 			// Author archive page
 			if ( is_author() && $options['query_alter'] == 'enabled' ) {
 				global $authordata;
-				$args['author__in'] = array( $authordata->data->ID );
+				$args['author__in'] = array($authordata->data->ID);
 			}
 
 			// No paging
@@ -2319,7 +2319,7 @@ class DSLC_Posts extends DSLC_Module {
 		 */
 
 			// Posts container
-			$container_class = 'dslc-posts dslc-cpt-posts dslc-clearfix dslc-cpt-posts-type-' . $options['type'] .' dslc-posts-orientation-' . $options['orientation'] . ' ';
+			$container_class = 'dslc-posts dslc-cpt-posts dslc-clearfix dslc-cpt-posts-type-' . $options['type'] . ' dslc-posts-orientation-' . $options['orientation'] . ' ';
 			if ( $options['type'] == 'masonry' )
 				$container_class .= 'dslc-init-masonry ';
 			elseif ( $options['type'] == 'grid' )
@@ -2435,7 +2435,7 @@ class DSLC_Posts extends DSLC_Module {
 
 										$post_cats = get_the_terms( get_the_ID(), $taxonomy_name );
 										if ( ! empty( $post_cats ) ) {
-											foreach( $post_cats as $post_cat ) {
+											foreach ( $post_cats as $post_cat ) {
 												$cats_array[$post_cat->slug] = $post_cat->name;
 											}
 										}
@@ -2512,7 +2512,7 @@ class DSLC_Posts extends DSLC_Module {
 							if ( isset( $taxonomy_name ) ) {
 								$post_cats = get_the_terms( get_the_ID(), $taxonomy_name );
 								if ( ! empty( $post_cats ) ) {
-									foreach( $post_cats as $post_cat ) {
+									foreach ( $post_cats as $post_cat ) {
 										$post_cats_data .= $post_cat->slug . ' ';
 									}
 								}
@@ -2591,7 +2591,7 @@ class DSLC_Posts extends DSLC_Module {
 
 																<?php if ( in_array( 'author', $meta_elements ) ) : ?>
 																	<div class="dslc-cpt-post-meta-author">
-																		<?php _e( 'By', 'live-composer-page-builder'); ?> <?php the_author_posts_link(); ?>
+																		<?php _e( 'By', 'live-composer-page-builder' ); ?> <?php the_author_posts_link(); ?>
 																	</div><!-- .dslc-cpt-post-meta-author -->
 																<?php endif; ?>
 
@@ -2680,7 +2680,7 @@ class DSLC_Posts extends DSLC_Module {
 
 												<?php if ( in_array( 'author', $meta_elements ) ) : ?>
 													<div class="dslc-cpt-post-meta-author">
-														<?php _e( 'By', 'live-composer-page-builder'); ?> <?php the_author_posts_link(); ?>
+														<?php _e( 'By', 'live-composer-page-builder' ); ?> <?php the_author_posts_link(); ?>
 													</div><!-- .dslc-cpt-post-meta-author -->
 												<?php endif; ?>
 
@@ -2770,9 +2770,9 @@ class DSLC_Posts extends DSLC_Module {
 			if ( isset( $options['pagination_type'] ) && $options['pagination_type'] != 'disabled' ) {
 				$num_pages = $dslc_query->max_num_pages;
 				if ( $options['offset'] > 0 ) {
-					$num_pages = ceil ( ( $dslc_query->found_posts - $options['offset'] ) / $options['amount'] );
+					$num_pages = ceil( ( $dslc_query->found_posts - $options['offset'] ) / $options['amount'] );
 				}
-				dslc_post_pagination( array( 'pages' => $num_pages, 'type' => $options['pagination_type'] ) );
+				dslc_post_pagination( array('pages' => $num_pages, 'type' => $options['pagination_type']) );
 			}
 
 

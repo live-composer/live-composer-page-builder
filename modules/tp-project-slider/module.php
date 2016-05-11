@@ -843,7 +843,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 
 		);
 
-		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array( 'hover_opts' => false ) ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array('hover_opts' => false) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		return apply_filters( 'dslc_module_options', $dslc_options, $this->module_id );
@@ -894,7 +894,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 
 									if ( $show_placeholder ) {
 
-										for ( $i=0; $i < 15; $i++ ) { 
+										for ( $i = 0; $i < 15; $i++ ) { 
 											?><div class="dslc-slider-item"><img src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/placeholders/big-placeholder.png" /></div><?php			
 										}
 
