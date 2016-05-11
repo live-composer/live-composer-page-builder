@@ -2337,17 +2337,19 @@ class DSLC_Posts extends DSLC_Module {
 
 			// Posts container
 			$container_class = 'dslc-posts dslc-cpt-posts dslc-clearfix dslc-cpt-posts-type-' . $options['type'] . ' dslc-posts-orientation-' . $options['orientation'] . ' ';
-			if ( $options['type'] == 'masonry' )
-				$container_class .= 'dslc-init-masonry ';
-			elseif ( $options['type'] == 'grid' )
-				$container_class .= 'dslc-init-grid ';
+			if ( $options['type'] == 'masonry' ) {
+							$container_class .= 'dslc-init-masonry ';
+			} elseif ( $options['type'] == 'grid' ) {
+							$container_class .= 'dslc-init-grid ';
+			}
 
 			// Post
 			$element_class = 'dslc-post dslc-cpt-post ';
-			if ( $options['type'] == 'masonry' )
-				$element_class .= 'dslc-masonry-item ';
-			elseif ( $options['type'] == 'carousel' )
-				$element_class .= 'dslc-carousel-item ';
+			if ( $options['type'] == 'masonry' ) {
+							$element_class .= 'dslc-masonry-item ';
+			} elseif ( $options['type'] == 'carousel' ) {
+							$element_class .= 'dslc-carousel-item ';
+			}
 
 		/**
 		 * What is shown
@@ -2655,10 +2657,10 @@ class DSLC_Posts extends DSLC_Module {
 	: ?>
 																	<?php
 																		if ( $options['excerpt_length'] > 0 ) {
-																			if ( has_excerpt() )
-																				echo do_shortcode( wp_trim_words( get_the_excerpt(), $options['excerpt_length'] ) );
-}
-																			else {
+																			if ( has_excerpt() ) {
+																																							echo do_shortcode( wp_trim_words( get_the_excerpt(), $options['excerpt_length'] ) );
+																			}
+																			} else {
 																																							echo do_shortcode( wp_trim_words( get_the_content(), $options['excerpt_length'] ) );
 																			}
 																		} else {
@@ -2748,10 +2750,10 @@ class DSLC_Posts extends DSLC_Module {
 	: ?>
 													<?php
 														if ( $options['excerpt_length'] > 0 ) {
-															if ( has_excerpt() )
-																echo do_shortcode( wp_trim_words( get_the_excerpt(), $options['excerpt_length'] ) );
-}
-															else {
+															if ( has_excerpt() ) {
+																															echo do_shortcode( wp_trim_words( get_the_excerpt(), $options['excerpt_length'] ) );
+															}
+															} else {
 																															echo do_shortcode( wp_trim_words( get_the_content(), $options['excerpt_length'] ) );
 															}
 														} else {

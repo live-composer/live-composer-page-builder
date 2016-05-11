@@ -1527,8 +1527,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 	: ?>
 
 						<?php if ( defined( 'DISQUS_VERSION' ) ) : comments_template();
-}
-else {
+} else {
 	: ?>
 
 							<?php $comments = get_comments( array('post_id' => $post_id) );

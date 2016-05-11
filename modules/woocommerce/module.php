@@ -2622,10 +2622,10 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 	: ?>
 																		<?php
 																			if ( $options['excerpt_length'] > 0 ) {
-																				if ( has_excerpt() )
-																					echo do_shortcode( wp_trim_words( get_the_excerpt(), $options['excerpt_length'] ) );
-}
-																				else {
+																				if ( has_excerpt() ) {
+																																									echo do_shortcode( wp_trim_words( get_the_excerpt(), $options['excerpt_length'] ) );
+																				}
+																				} else {
 																																									echo do_shortcode( wp_trim_words( get_the_content(), $options['excerpt_length'] ) );
 																				}
 																			} else {
@@ -2697,10 +2697,10 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 	: ?>
 														<?php
 															if ( $options['excerpt_length'] > 0 ) {
-																if ( has_excerpt() )
-																	echo do_shortcode( wp_trim_words( get_the_excerpt(), $options['excerpt_length'] ) );
-}
-																else {
+																if ( has_excerpt() ) {
+																																	echo do_shortcode( wp_trim_words( get_the_excerpt(), $options['excerpt_length'] ) );
+																}
+																} else {
 																																	echo do_shortcode( wp_trim_words( get_the_content(), $options['excerpt_length'] ) );
 																}
 															} else {

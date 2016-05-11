@@ -2005,17 +2005,25 @@ class DSLC_Projects extends DSLC_Module {
 
 		/* Module output stars here */
 
-			if ( ! isset( $options['excerpt_length'] ) ) $options['excerpt_length'] = 20;
-			if ( ! isset( $options['type'] ) ) $options['type'] = 'grid';
+			if ( ! isset( $options['excerpt_length'] ) ) {
+				$options['excerpt_length'] = 20;
+			}
+			if ( ! isset( $options['type'] ) ) {
+				$options['type'] = 'grid';
+			}
 
 			if ( is_front_page() ) { $paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1; } else { $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1; }
 
 			// Fix for pagination from other modules affecting this one when pag disabled
-			if ( $options['pagination_type'] == 'disabled' ) $paged = 1;
+			if ( $options['pagination_type'] == 'disabled' ) {
+				$paged = 1;
+			}
 
 			// Fix for offset braking pagination
 			$query_offset = $options['offset'];
-			if ( $query_offset > 0 && $paged > 1 ) $query_offset = ( $paged - 1 ) * $options['amount'] + $options['offset'];
+			if ( $query_offset > 0 && $paged > 1 ) {
+				$query_offset = ( $paged - 1 ) * $options['amount'] + $options['offset'];
+			}
 
 			$args = array(
 				'paged' => $paged,
@@ -2445,10 +2453,10 @@ class DSLC_Projects extends DSLC_Module {
 	: ?>
 																	<?php
 																		if ( $options['excerpt_length'] > 0 ) {
-																			if ( has_excerpt() )
-																				echo do_shortcode( wp_trim_words( get_the_excerpt(), $options['excerpt_length'] ) );
-}
-																			else {
+																			if ( has_excerpt() ) {
+																																							echo do_shortcode( wp_trim_words( get_the_excerpt(), $options['excerpt_length'] ) );
+																			}
+																			} else {
 																																							echo do_shortcode( wp_trim_words( get_the_content(), $options['excerpt_length'] ) );
 																			}
 																		} else {
@@ -2528,10 +2536,10 @@ class DSLC_Projects extends DSLC_Module {
 	: ?>
 													<?php
 														if ( $options['excerpt_length'] > 0 ) {
-															if ( has_excerpt() )
-																echo do_shortcode( wp_trim_words( get_the_excerpt(), $options['excerpt_length'] ) );
-}
-															else {
+															if ( has_excerpt() ) {
+																															echo do_shortcode( wp_trim_words( get_the_excerpt(), $options['excerpt_length'] ) );
+															}
+															} else {
 																															echo do_shortcode( wp_trim_words( get_the_content(), $options['excerpt_length'] ) );
 															}
 														} else {

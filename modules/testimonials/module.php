@@ -1666,26 +1666,35 @@ class DSLC_Testimonials extends DSLC_Module {
 
 		global $dslc_active;
 
-		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
-			$dslc_is_admin = true;
-		else
-			$dslc_is_admin = false;		
+		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+					$dslc_is_admin = true;
+		} else {
+					$dslc_is_admin = false;
+		}
 
 		$this->module_start( $options );
 
 		/* Module output stars here */
 
-			if ( ! isset( $options['excerpt_length'] ) ) $options['excerpt_length'] = 20;
-			if ( ! isset( $options['type'] ) ) $options['type'] = 'grid';
+			if ( ! isset( $options['excerpt_length'] ) ) {
+				$options['excerpt_length'] = 20;
+			}
+			if ( ! isset( $options['type'] ) ) {
+				$options['type'] = 'grid';
+			}
 
 			if ( is_front_page() ) { $paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1; } else { $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1; }
 
 			// Fix for pagination from other modules affecting this one when pag disabled
-			if ( $options['pagination_type'] == 'disabled' ) $paged = 1;
+			if ( $options['pagination_type'] == 'disabled' ) {
+				$paged = 1;
+			}
 
 			// Fix for offset braking pagination
 			$query_offset = $options['offset'];
-			if ( $query_offset > 0 && $paged > 1 ) $query_offset = ( $paged - 1 ) * $options['amount'] + $options['offset'];
+			if ( $query_offset > 0 && $paged > 1 ) {
+				$query_offset = ( $paged - 1 ) * $options['amount'] + $options['offset'];
+			}
 
 			$args = array(
 				'paged' => $paged, 
