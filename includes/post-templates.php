@@ -22,7 +22,8 @@
 		$dslc_var_templates_pt = apply_filters( 'dslc_post_templates_post_types', $dslc_var_templates_pt );
 
 		$dslc_post_types = array();
-		foreach ( $dslc_var_templates_pt as $key => $value )
-			$dslc_post_types[] = $key;
+		foreach ( $dslc_var_templates_pt as $key => $value ) {
+					$dslc_post_types[] = $key;
+		}
 
 	} add_action( 'init', 'dslc_post_templates_init', 1 );

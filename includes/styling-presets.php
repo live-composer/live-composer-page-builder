@@ -30,8 +30,9 @@ function dslc_presets_load( $settings ) {
 			foreach ( $presets as $preset ) {
 
 				// Find the correct preset
-				if ( $preset['id'] == $preset_id )
-					$preset_data = $preset;
+				if ( $preset['id'] == $preset_id ) {
+									$preset_data = $preset;
+				}
 
 			}
 

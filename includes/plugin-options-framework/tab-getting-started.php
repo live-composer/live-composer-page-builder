@@ -21,8 +21,9 @@
 					<?php
 						$current_user = wp_get_current_user();
 
-						if ( ! ( $current_user instanceof WP_User ) )
-							return;
+						if ( ! ( $current_user instanceof WP_User ) ) {
+													return;
+						}
 
 						$current_user_email = $current_user->user_email;
 						$current_user_name = $current_user->user_firstname;

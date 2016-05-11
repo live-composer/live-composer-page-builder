@@ -894,10 +894,11 @@ class DSLC_Button extends DSLC_Module {
 
 		global $dslc_active;
 
-		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
-			$dslc_is_admin = true;
-		else
-			$dslc_is_admin = false;
+		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+					$dslc_is_admin = true;
+		} else {
+					$dslc_is_admin = false;
+		}
 
 		$this->module_start( $options );
 
@@ -905,35 +906,51 @@ class DSLC_Button extends DSLC_Module {
 
 			$anchor_append = '';
 
-			if ( isset( $options['button_onclick'] ) && $options['button_onclick'] !== '' )
-				$anchor_append = ' onClick="' . stripslashes( $options['button_onclick'] ) . '"';
+			if ( isset( $options['button_onclick'] ) && $options['button_onclick'] !== '' ) {
+							$anchor_append = ' onClick="' . stripslashes( $options['button_onclick'] ) . '"';
+			}
 
 			?>
 
 			<div class="dslc-button">
 				<?php if ( $options['button_target'] == 'lightbox' ) : ?>
-					<a href="<?php echo do_shortcode( $options['button_url'] ); ?>" <?php echo $anchor_append; if ( $options['link_nofollow'] ) echo 'rel="nofollow"'; ?> class="dslc-lightbox-image <?php echo esc_attr( $options['button_class'] ); ?>">
+					<a href="<?php echo do_shortcode( $options['button_url'] ); ?>" <?php echo $anchor_append; if ( $options['link_nofollow'] ) {
+	echo 'rel="nofollow"';
+}
+?> class="dslc-lightbox-image <?php echo esc_attr( $options['button_class'] ); ?>">
 						<?php if ( $options['button_state'] == 'enabled' && $options['icon_pos'] == 'left' ) : ?>
 							<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 						<?php endif; ?>
 						<?php if ( $dslc_is_admin ) : ?>
 							<span class="dslca-editable-content" data-id="button_text"  data-type="simple" contenteditable><?php echo stripslashes( $options['button_text'] ); ?></span>
-						<?php else: ?>
-							<?php echo stripslashes( $options['button_text'] ); ?>
+						<?php else {
+	: ?>
+							<?php echo stripslashes( $options['button_text'] );
+}
+?>
 						<?php endif; ?>
 						<?php if ( $options['button_state'] == 'enabled' && $options['icon_pos'] == 'right' ) : ?>
 							<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 						<?php endif; ?>
 					</a>
-				<?php else : ?>
-					<a href="<?php echo do_shortcode( $options['button_url'] ); ?>" target="<?php echo $options['button_target']; ?>" <?php echo $anchor_append; if ( $options['link_nofollow'] ) echo 'rel="nofollow"'; ?> class="<?php echo esc_attr( $options['button_class'] ); ?>">
+				<?php else {
+	: ?>
+					<a href="<?php echo do_shortcode( $options['button_url'] );
+}
+?>" target="<?php echo $options['button_target']; ?>" <?php echo $anchor_append; if ( $options['link_nofollow'] ) {
+	echo 'rel="nofollow"';
+}
+?> class="<?php echo esc_attr( $options['button_class'] ); ?>">
 						<?php if ( $options['button_state'] == 'enabled' && $options['icon_pos'] == 'left' ) : ?>
 							<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 						<?php endif; ?>
 						<?php if ( $dslc_is_admin ) : ?>
 							<span class="dslca-editable-content" data-id="button_text"  data-type="simple" contenteditable><?php echo stripslashes( $options['button_text'] ); ?></span>
-						<?php else: ?>
-							<?php echo stripslashes( $options['button_text'] ); ?>
+						<?php else {
+	: ?>
+							<?php echo stripslashes( $options['button_text'] );
+}
+?>
 						<?php endif; ?>
 						<?php if ( $options['button_state'] == 'enabled' && $options['icon_pos'] == 'right' ) : ?>
 							<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
@@ -945,8 +962,14 @@ class DSLC_Button extends DSLC_Module {
 
 			<?php if ( $dslc_is_admin ) :
 			/* we output this button code for clean html export only */ ?>
-				<div style="display: none;"<?php if ( $dslc_is_admin ) echo ' data-exportable-content'; ?>>
-					<a href="<?php echo do_shortcode( $options['button_url'] ); ?>" target="<?php echo $options['button_target']; ?>" <?php if ( $options['link_nofollow'] ) echo 'rel="nofollow"'; ?>>
+				<div style="display: none;"<?php if ( $dslc_is_admin ) {
+	echo ' data-exportable-content';
+}
+?>>
+					<a href="<?php echo do_shortcode( $options['button_url'] ); ?>" target="<?php echo $options['button_target']; ?>" <?php if ( $options['link_nofollow'] ) {
+	echo 'rel="nofollow"';
+}
+?>>
 							<?php echo stripslashes( $options['button_text'] ); ?>
 					</a>
 				</div><!-- .dslc-button -->

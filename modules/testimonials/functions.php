@@ -23,17 +23,26 @@ $dslc_var_post_options['dslc-testimonials-post-options'] = array(
 function dslc_testimonials_module_cpt() {
 
 	// If module not active return
-	if ( ! dslc_is_module_active( 'DSLC_Testimonials', true ) )
-		return;
+	if ( ! dslc_is_module_active( 'DSLC_Testimonials', true ) ) {
+			return;
+	}
 
 	// Get capability
 	$capability = dslc_get_option( 'lc_min_capability_testimonials_m', 'dslc_plugin_options_access_control' );
-	if ( ! $capability ) $capability = 'publish_posts';
+	if ( ! $capability ) {
+		$capability = 'publish_posts';
+	}
 
 	// With Front
 	$with_front = dslc_get_option( 'with_front', 'dslc_plugin_options_cpt_slugs' );
-	if ( empty ( $with_front ) ) $with_front = 'disabled';
-	if ( $with_front == 'enabled' ) $with_front = true; else $with_front = false;
+	if ( empty ( $with_front ) ) {
+		$with_front = 'disabled';
+	}
+	if ( $with_front == 'enabled' ) {
+		$with_front = true;
+	} else {
+		$with_front = false;
+	}
 
 	/**
 	 * Register Post Type

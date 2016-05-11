@@ -98,7 +98,9 @@
 	}
 
 	$cap_page = dslc_get_option( 'lc_min_capability_page', 'dslc_plugin_options_access_control' );
-	if ( ! $cap_page ) $cap_page = 'publish_posts';
+	if ( ! $cap_page ) {
+		$cap_page = 'publish_posts';
+	}
 	define( 'DS_LIVE_COMPOSER_CAPABILITY', $cap_page );
 	define( 'DS_LIVE_COMPOSER_CAPABILITY_SAVE', $cap_page );
 
@@ -158,19 +160,22 @@
 
 		// Make Welcome screen optional for the theme developers
 		$show_welcome_screen = true;
-   	if ( apply_filters( 'dslc_show_welcome_screen', $show_welcome_screen ) )
-   		return;
+   	if ( apply_filters( 'dslc_show_welcome_screen', $show_welcome_screen ) ) {
+   	   		return;
+   	}
 
 		// Bail if no activation redirect
-		if ( ! get_transient( '_dslc_activation_redirect_1' ) )
-			return;
+		if ( ! get_transient( '_dslc_activation_redirect_1' ) ) {
+					return;
+		}
 
 		// Delete the redirect transient
 		delete_transient( '_dslc_activation_redirect_1' );
 
 		// Bail if activating from network, or bulk
-		if ( is_network_admin() || isset( $_GET['activate-multi'] ) )
-			return;
+		if ( is_network_admin() || isset( $_GET['activate-multi'] ) ) {
+					return;
+		}
 
 		wp_safe_redirect( admin_url( 'admin.php?page=dslc_getting_started' ) ); exit;
 	}

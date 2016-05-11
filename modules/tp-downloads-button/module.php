@@ -431,10 +431,11 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 
 		global $dslc_active;
 
-		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
-			$dslc_is_admin = true;
-		else
-			$dslc_is_admin = false;
+		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+					$dslc_is_admin = true;
+		} else {
+					$dslc_is_admin = false;
+		}
 
 		$this->module_start( $options );
 
@@ -446,12 +447,13 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 			if ( get_post_type( $post_id ) == 'dslc_templates' ) {
 				$show_fake = true;
 			} else {
-				if ( get_post_meta( $post_id, 'dslc_download_file', true ) )
-					$download_link = wp_get_attachment_url( get_post_meta( $post_id, 'dslc_download_file', true ) );
-				elseif ( get_post_meta( $post_id, 'dslc_download_url', true ) )
-					$download_link = get_post_meta( $post_id, 'dslc_download_url', true );
-				else
-					$download_link = false;
+				if ( get_post_meta( $post_id, 'dslc_download_file', true ) ) {
+									$download_link = wp_get_attachment_url( get_post_meta( $post_id, 'dslc_download_file', true ) );
+				} elseif ( get_post_meta( $post_id, 'dslc_download_url', true ) ) {
+									$download_link = get_post_meta( $post_id, 'dslc_download_url', true );
+				} else {
+									$download_link = false;
+				}
 			}
 		}
 
@@ -462,16 +464,25 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				<div class="dslc-tp-download-button">
 					<?php if ( $show_fake ) : ?>
 					<a href="#">
-					<?php else : ?>
-					<a target="_blank" class="dslc-download-count-hook" data-post-id="<?php echo $post_id; ?>" href="<?php echo $download_link; ?>">
+					<?php else {
+	: ?>
+					<a target="_blank" class="dslc-download-count-hook" data-post-id="<?php echo $post_id;
+}
+?>" href="<?php echo $download_link; ?>">
 					<?php endif; ?>
 						<?php if ( isset( $options['button_icon_id'] ) && $options['button_icon_id'] != '' ) : ?>
 							<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 						<?php endif; ?>
 						<?php if ( $dslc_is_admin ) : ?>
-							<span class="dslca-editable-content" data-id="button_text" data-type="simple" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?>><?php echo $options['button_text']; ?></span>
-						<?php else : ?>
-							<span><?php echo $options['button_text']; ?></span>
+							<span class="dslca-editable-content" data-id="button_text" data-type="simple" <?php if ( $dslc_is_admin ) {
+	echo 'contenteditable';
+}
+?>><?php echo $options['button_text']; ?></span>
+						<?php else {
+	: ?>
+							<span><?php echo $options['button_text'];
+}
+?></span>
 						<?php endif; ?>
 					</a>
 				</div><!-- .dslc-download-button -->

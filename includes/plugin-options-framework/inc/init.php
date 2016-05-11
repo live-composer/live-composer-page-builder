@@ -237,27 +237,27 @@ function dslc_plugin_options_display_options( $section ) {
 add_action( 'wp_ajax_dslc_activecampaign', 'dslc_ajax_check_activecampaign' );
 function dslc_ajax_check_activecampaign() {
 
-    // Check Nonce
-    if ( ! wp_verify_nonce( $_POST['security']['nonce'], 'dslc-optionspanel-ajax' ) ) {
-        wp_die( 'You do not have rights!' );
-    }
+	// Check Nonce
+	if ( ! wp_verify_nonce( $_POST['security']['nonce'], 'dslc-optionspanel-ajax' ) ) {
+		wp_die( 'You do not have rights!' );
+	}
 
-    // Access permissions
-    if ( ! current_user_can( 'install_plugins' ) ) {
-        wp_die( 'You do not have rights!' );
-    }
+	// Access permissions
+	if ( ! current_user_can( 'install_plugins' ) ) {
+		wp_die( 'You do not have rights!' );
+	}
 
-    $email = sanitize_email( $_POST["email"] );
-    $name = sanitize_text_field( $_POST["name"] );
+	$email = sanitize_email( $_POST["email"] );
+	$name = sanitize_text_field( $_POST["name"] );
 
-    $dslc_getting_started = array(
-    	'email' => $email,
-    	'name' => $name,
-    	'subscribed' => '1'
-    );
+	$dslc_getting_started = array(
+		'email' => $email,
+		'name' => $name,
+		'subscribed' => '1'
+	);
 
-    add_option( 'dslc_user', $dslc_getting_started );
+	add_option( 'dslc_user', $dslc_getting_started );
 
-    wp_die();
+	wp_die();
 
 }

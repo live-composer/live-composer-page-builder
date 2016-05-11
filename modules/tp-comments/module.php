@@ -1432,7 +1432,8 @@ class DSLC_TP_Comments extends DSLC_Module {
 
 							<p><strong>DISQUS</strong> is active and will be shown in this position.</strong></p>
 
-						<?php else : ?>
+						<?php else {
+	: ?>
 
 							<ol class="comments clean-list">
 									
@@ -1518,13 +1519,21 @@ class DSLC_TP_Comments extends DSLC_Module {
 								</li><!-- #comment-## -->
 							</ol><!-- .commentlist -->
 
-						<?php endif; ?>
+						<?php endif;
+}
+?>
 
-					<?php else : ?>
+					<?php else {
+	: ?>
 
-						<?php if ( defined( 'DISQUS_VERSION' ) ) : comments_template(); else : ?>
+						<?php if ( defined( 'DISQUS_VERSION' ) ) : comments_template();
+}
+else {
+	: ?>
 
-							<?php $comments = get_comments( array('post_id' => $post_id) ); ?>
+							<?php $comments = get_comments( array('post_id' => $post_id) );
+}
+?>
 
 							<?php if ( get_comment_pages_count( $comments ) > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through ?>
 								

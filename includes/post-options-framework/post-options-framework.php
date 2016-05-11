@@ -100,8 +100,9 @@ function dslc_add_post_options() {
 		// Loop through all post options
 		foreach ( $dslc_var_post_options as $dslc_post_option_key => $dslc_post_option ) {
 
-			if ( ! isset( $dslc_post_option['context'] ) )
-				$dslc_post_option['context'] = 'normal';
+			if ( ! isset( $dslc_post_option['context'] ) ) {
+							$dslc_post_option['context'] = 'normal';
+			}
 
 			// If post options shown on multiple post types
 			if ( is_array( $dslc_post_option['show_on'] ) ) {
@@ -196,7 +197,10 @@ function dslc_display_post_options( $object, $metabox ) {
 
 						<select type="text" name="<?php echo $post_option['id']; ?>" id="<?php echo $post_option['id']; ?>">
 							<?php foreach ( $post_option['choices'] as $choice ) : ?>
-								<option value="<?php echo $choice['value']; ?>" <?php if ( $curr_value == $choice['value'] ) echo 'selected="selected"'; ?>><?php echo $choice['label']; ?></option>
+								<option value="<?php echo $choice['value']; ?>" <?php if ( $curr_value == $choice['value'] ) {
+	echo 'selected="selected"';
+}
+?>><?php echo $choice['label']; ?></option>
 							<?php endforeach; ?>
 						</select>
 
@@ -210,11 +214,17 @@ function dslc_display_post_options( $object, $metabox ) {
 
 					<?php elseif ( $post_option['type'] == 'checkbox' ) : ?>
 
-						<?php $curr_value_array = maybe_unserialize( $curr_value_no_esc ); if ( ! is_array( $curr_value_array ) ) $curr_value_array = array(); ?>
+						<?php $curr_value_array = maybe_unserialize( $curr_value_no_esc ); if ( ! is_array( $curr_value_array ) ) {
+	$curr_value_array = array();
+}
+?>
 
 						<?php foreach ( $post_option['choices'] as $key => $choice ) : ?>
 							<div class="dslca-post-option-field-choice">
-								<input type="checkbox" name="<?php echo $post_option['id']; ?>[]" id="<?php echo $post_option['id']; ?>" value="<?php echo $choice['value']; ?>" <?php if ( in_array( $choice['value'], $curr_value_array ) ) echo 'checked="checked"'; ?> /> <?php echo $choice['label']; ?><br>
+								<input type="checkbox" name="<?php echo $post_option['id']; ?>[]" id="<?php echo $post_option['id']; ?>" value="<?php echo $choice['value']; ?>" <?php if ( in_array( $choice['value'], $curr_value_array ) ) {
+	echo 'checked="checked"';
+}
+?> /> <?php echo $choice['label']; ?><br>
 							</div><!-- .dslca-post-option-field-choice -->
 						<?php endforeach; ?>
 
@@ -222,7 +232,10 @@ function dslc_display_post_options( $object, $metabox ) {
 
 						<?php foreach ( $post_option['choices'] as $key => $choice ) : ?>
 							<div class="dslca-post-option-field-choice">
-								<input type="radio" name="<?php echo $post_option['id']; ?>" id="<?php echo $post_option['id']; ?>" value="<?php echo $choice['value']; ?>" <?php if ( $choice['value'] == $curr_value ) echo 'checked="checked"'; ?> /> <?php echo $choice['label']; ?><br>
+								<input type="radio" name="<?php echo $post_option['id']; ?>" id="<?php echo $post_option['id']; ?>" value="<?php echo $choice['value']; ?>" <?php if ( $choice['value'] == $curr_value ) {
+	echo 'checked="checked"';
+}
+?> /> <?php echo $choice['label']; ?><br>
 							</div><!-- .dslca-post-option-field-choice -->
 						<?php endforeach; ?>
 
@@ -243,9 +256,12 @@ function dslc_display_post_options( $object, $metabox ) {
 											<?php $image = wp_get_attachment_image_src( $curr_value, 'full' ); ?>
 											<img src="<?php echo $image[0]; ?>" />
 
-										<?php else : ?>
+										<?php else {
+	: ?>
 
-											<strong><?php echo basename( get_attached_file( $curr_value ) ); ?></strong>
+											<strong><?php echo basename( get_attached_file( $curr_value ) );
+}
+?></strong>
 
 										<?php endif; ?>
 
@@ -256,9 +272,12 @@ function dslc_display_post_options( $object, $metabox ) {
 								</div><!-- .dslca-post-option-image -->
 
 							</div><!-- .dslca-post-options-images -->
-						<?php else: ?>
+						<?php else {
+	: ?>
 							<div class="dslca-post-options-images dslca-clearfix"></div>
-						<?php endif; ?>
+						<?php endif;
+}
+?>
 
 						<input type="hidden" class="dslca-post-options-field-file" name="<?php echo $post_option['id']; ?>" id="<?php echo $post_option['id']; ?>" value="<?php echo $curr_value; ?>" />
 
@@ -283,9 +302,12 @@ function dslc_display_post_options( $object, $metabox ) {
 									}
 								?>
 							</div><!-- .dslca-post-options-images -->
-						<?php else : ?>
+						<?php else {
+	: ?>
 							<div class="dslca-post-options-images dslca-clearfix"></div>
-						<?php endif; ?>
+						<?php endif;
+}
+?>
 
 						<input type="hidden" class="dslca-post-options-field-file" name="<?php echo $post_option['id']; ?>" id="<?php echo $post_option['id']; ?>" value="<?php echo $curr_value; ?>" />
 
@@ -390,7 +412,7 @@ function dslc_post_add_row_action( $actions, $post ) {
 		*/
 	}
 
-    return $actions;
+	return $actions;
 }
 add_filter( 'post_row_actions', 'dslc_post_add_row_action', 10, 2 );
 

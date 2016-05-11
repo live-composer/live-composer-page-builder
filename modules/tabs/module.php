@@ -3002,10 +3002,11 @@ class DSLC_Tabs extends DSLC_Module {
 
 		global $dslc_active;
 
-		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
-			$dslc_is_admin = true;
-		else
-			$dslc_is_admin = false;		
+		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+					$dslc_is_admin = true;
+		} else {
+					$dslc_is_admin = false;
+		}
 
 		$this->module_start( $options );
 
@@ -3024,16 +3025,22 @@ class DSLC_Tabs extends DSLC_Module {
 
 						<?php foreach ( $tabs_nav as $tab_nav ) : ?>
 							<span class="dslc-tabs-nav-hook">
-								<span class="dslc-tabs-nav-hook-title" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?>><?php echo stripslashes( $tab_nav ); ?></span>
+								<span class="dslc-tabs-nav-hook-title" <?php if ( $dslc_is_admin ) {
+	echo 'contenteditable';
+}
+?>><?php echo stripslashes( $tab_nav ); ?></span>
 								<?php if ( $dslc_is_admin ) : ?>
 									<span class="dslca-delete-tab-hook"><span class="dslca-icon dslc-icon-remove"></span></span>
 								<?php endif; ?>
 							</span>
 						<?php endforeach; ?>
 
-					<?php else : ?>
+					<?php else {
+	: ?>
 						<span class="dslc-tabs-nav-hook">
-							<span class="dslc-tabs-nav-hook-title" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?>><?php _e( 'Click to edit', 'live-composer-page-builder' ); ?></span>
+							<span class="dslc-tabs-nav-hook-title" <?php if ( $dslc_is_admin ) echo 'contenteditable';
+}
+?>><?php _e( 'Click to edit', 'live-composer-page-builder' ); ?></span>
 							<?php if ( $dslc_is_admin ) : ?>
 								<span class="dslca-delete-tab-hook"><span class="dslca-icon dslc-icon-remove"></span></span>
 							<?php endif; ?>
@@ -3058,8 +3065,14 @@ class DSLC_Tabs extends DSLC_Module {
 						<?php foreach ( $tabs_content as $tab_content ) : ?>
 
 							<div class="dslc-tabs-tab-content">
-								<h4 class="dslc-tabs-nav-hook"<?php if ( $dslc_is_admin ) echo ' data-exportable-content="h3"'; ?>><?php echo $tabs_nav[$count]; ?></h4>
-								<div class="dslca-editable-content"<?php if ( $dslc_is_admin ) echo ' data-exportable-content'; ?>>
+								<h4 class="dslc-tabs-nav-hook"<?php if ( $dslc_is_admin ) {
+	echo ' data-exportable-content="h3"';
+}
+?>><?php echo $tabs_nav[$count]; ?></h4>
+								<div class="dslca-editable-content"<?php if ( $dslc_is_admin ) {
+	echo ' data-exportable-content';
+}
+?>>
 									<?php 
 										$tab_content_output = stripslashes( $tab_content ); 
 										$tab_content_output = str_replace( '<lctextarea', '<textarea', $tab_content_output );
@@ -3075,12 +3088,15 @@ class DSLC_Tabs extends DSLC_Module {
 
 						<?php $count++; endforeach; ?>
 
-					<?php else : ?>
+					<?php else {
+	: ?>
 
 						<div class="dslc-tabs-tab-content">
 							<h4 class="dslc-tabs-nav-hook">CLICK TO EDIT</h4>
 							<div class="dslca-editable-content">
-								<?php _e( 'This is just placeholder text.', 'live-composer-page-builder' ); ?>
+								<?php _e( 'This is just placeholder text.', 'live-composer-page-builder' );
+}
+?>
 							</div>
 							<?php if ( $dslc_is_admin ) : ?>
 								<textarea class="dslca-tab-plain-content"><?php _e( 'This is just placeholder text.', 'live-composer-page-builder' ); ?></textarea>

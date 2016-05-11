@@ -20,7 +20,9 @@ function dslc_archive_template_redirect( $archive_template ) {
 	global $post;
 
 	$template = dslc_get_option( $post->post_type, 'dslc_plugin_options_archives' );
-	if ( ! $template || $template == 'none' ) return $archive_template;
+	if ( ! $template || $template == 'none' ) {
+		return $archive_template;
+	}
 
 	$archive_template = DS_LIVE_COMPOSER_ABS . '/templates/dslc-archive.php';
 	return $archive_template;
@@ -38,7 +40,9 @@ add_filter( 'category_template', 'dslc_archive_template_redirect' );
 function dslc_author_archive_template_redirect( $archive_template ) {
 
 	$template = dslc_get_option( 'author', 'dslc_plugin_options_archives' );
-	if ( ! $template || $template == 'none' ) return $archive_template;
+	if ( ! $template || $template == 'none' ) {
+		return $archive_template;
+	}
 
 	$archive_template = DS_LIVE_COMPOSER_ABS . '/templates/dslc-archive.php';
 	return $archive_template;
@@ -54,7 +58,9 @@ function dslc_author_archive_template_redirect( $archive_template ) {
 function dslc_search_template_redirect( $search_template ) {
 
 	$template = dslc_get_option( 'search_results', 'dslc_plugin_options_archives' );
-	if ( ! $template || $template == 'none' ) return $search_template;
+	if ( ! $template || $template == 'none' ) {
+		return $search_template;
+	}
 
 	$search_template = DS_LIVE_COMPOSER_ABS . '/templates/dslc-archive.php';
 	return $search_template;
@@ -70,7 +76,9 @@ function dslc_search_template_redirect( $search_template ) {
 function dslc_404_template_redirect( $not_found_template ) {
 
 	$template = dslc_get_option( '404_page', 'dslc_plugin_options_archives' );
-	if ( ! $template || $template == 'none' ) return $not_found_template;
+	if ( ! $template || $template == 'none' ) {
+		return $not_found_template;
+	}
 
 	$not_found_template = DS_LIVE_COMPOSER_ABS . '/templates/dslc-404.php';
 	return $not_found_template;
