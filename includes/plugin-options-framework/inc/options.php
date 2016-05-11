@@ -7,15 +7,19 @@
 	$dslc_plugin_options['dslc_plugin_options'] = array(
 		'title' => __( 'General Options', 'live-composer-page-builder' ),
 		'options' => array(
-			'lc_max_width' => array(
+
+		   'lc_max_width' => array(
+
+			   'section' => 'dslc_plugin_options',
 				'label' => __( 'Max Width', 'live-composer-page-builder' ),
 				'std' => '',
-				'name' => 'dslc_plugin_options[lc_max_width]',
 				'type' => 'text',
 				'descr' => __( 'The width of the modules section when row is set to wrapped. If not set the $content_width variable from theme will be used.', 'live-composer-page-builder' ),
 			),
+
 			'lc_force_important_css' => array(
-				'name' => 'dslc_plugin_options[lc_force_important_css]',
+
+				'section' => 'dslc_plugin_options',
 				'label' => __( 'Force !important CSS', 'live-composer-page-builder' ),
 				'std' => 'disabled',
 				'type' => 'select',
@@ -31,9 +35,10 @@
 					)
 				)
 			),
+
 			'lc_css_position' => array(
 
-				'name' => 'dslc_plugin_options[lc_css_position]',
+				'section' => 'dslc_plugin_options',
 				'label' => __( 'Dynamic CSS Location', 'live-composer-page-builder' ),
 				'std' => 'head',
 				'type' => 'select',
@@ -57,7 +62,7 @@
 		'options' => array(
 			'sidebars' => array (
 
-				'name' => 'dslc_plugin_options_widgets_m[sidebars]',
+				'section' => 'dslc_plugin_options_widgets_m',
 				'label' => __( 'Sidebars', 'live-composer-page-builder' ),
 				'std' => '',
 				'type' => 'list'
@@ -72,7 +77,7 @@
 
 			'with_front' => array(
 
-				'name' => 'dslc_plugin_options_cpt_slugs[with_front]',
+				'section' => 'dslc_plugin_options_cpt_slugs',
 				'label' => __( 'With Front', 'live-composer-page-builder' ),
 				'descr' => __( 'Prepend the permalink structure with the front base. ( example: if your permalink structure is /blog/, then your links will be: disabled -> /project-view/, enabled -> /blog/project-view/ ).', 'live-composer-page-builder' ),
 				'std' => 'enabled',
@@ -91,90 +96,102 @@
 
 			'projects_slug' => array(
 
-				'name' => 'dslc_plugin_options_cpt_slugs[projects_slug]',
+				'section' => 'dslc_plugin_options_cpt_slugs',
 				'label' => __( '<strong>Project</strong> Slug', 'live-composer-page-builder' ),
 				'std' => 'project-view',
 				'type' => 'text'
 			),
 
 			'projects_cats_slug' => array(
-				'name' => 'dslc_plugin_options_cpt_slugs[projects_cats_slug]',
+
+				'section' => 'dslc_plugin_options_cpt_slugs',
 				'label' => __( '<strong>Projects</strong> Category Slug', 'live-composer-page-builder' ),
 				'std' => 'dslc_projects_cats',
 				'type' => 'text'
 			),
 
 			'galleries_slug' => array(
-				'name' => 'dslc_plugin_options_cpt_slugs[galleries_slug]',
+
+				'section' => 'dslc_plugin_options_cpt_slugs',
 				'label' => __( '<strong>Gallery</strong> Slug', 'live-composer-page-builder' ),
 				'std' => 'gallery-view',
 				'type' => 'text'
 			),
 
 			'galleries_cats_slug' => array(
-				'name' => 'dslc_plugin_options_cpt_slugs[galleries_cats_slug]',
+
+				'section' => 'dslc_plugin_options_cpt_slugs',
 				'label' => __( '<strong>Galleries</strong> Category Slug', 'live-composer-page-builder' ),
 				'std' => 'dslc_galleries_cats',
 				'type' => 'text'
 			),
 
 			'downloads_slug' => array(
-				'name' => 'dslc_plugin_options_cpt_slugs[downloads_slug]',
+
+				'section' => 'dslc_plugin_options_cpt_slugs',
 				'label' => __( '<strong>Download</strong> Slug', 'live-composer-page-builder' ),
 				'std' => 'download-view',
 				'type' => 'text'
 			),
 
 			'downloads_cats_slug' => array(
-				'name' => 'dslc_plugin_options_cpt_slugs[downloads_cats_slug]',
+
+				'section' => 'dslc_plugin_options_cpt_slugs',
 				'label' => __( '<strong>Downloads</strong> Categories Slug', 'live-composer-page-builder' ),
 				'std' => 'dslc_downloads_cat',
 				'type' => 'text'
 			),
 
 			'downloads_tags_slug' => array(
-				'name' => 'dslc_plugin_options_cpt_slugs[downloads_tags_slug]',
+
+				'section' => 'dslc_plugin_options_cpt_slugs',
 				'label' => __( '<strong>Downloads</strong> Tags Slug', 'live-composer-page-builder' ),
 				'std' => 'dslc_downloads_tag',
 				'type' => 'text'
 			),
 
 			'staff_slug' => array(
-				'name' => 'dslc_plugin_options_cpt_slugs[staff_slug]',
+
+				'section' => 'dslc_plugin_options_cpt_slugs',
 				'label' => __( '<strong>Staff</strong> Slug', 'live-composer-page-builder' ),
 				'std' => 'staff-view',
 				'type' => 'text'
 			),
 
 			'staff_cats_slug' => array(
-				'name' => 'dslc_plugin_options_cpt_slugs[staff_cats_slug]',
+
+				'section' => 'dslc_plugin_options_cpt_slugs',
 				'label' => __( '<strong>Staff</strong> Categories Slug', 'live-composer-page-builder' ),
 				'std' => 'dslc_staff_cats',
 				'type' => 'text'
 			),
 
 			'partners_slug' => array(
-				'name' => 'dslc_plugin_options_cpt_slugs[partners_slug]',
+
+				'section' => 'dslc_plugin_options_cpt_slugs',
 				'label' => __( '<strong>Partner</strong> Slug', 'live-composer-page-builder' ),
 				'std' => 'partner-view',
 				'type' => 'text'
 			),
 
 			'partners_cats_slug' => array(
-				'name' => 'dslc_plugin_options_cpt_slugs[partners_cats_slug]',
+
+				'section' => 'dslc_plugin_options_cpt_slugs',
 				'label' => __( '<strong>Partners</strong> Categories Slug', 'live-composer-page-builder' ),
 				'std' => 'dslc_partners_cats',
 				'type' => 'text'
 			),
 
 			'testimonials_slug' => array(
-				'name' => 'dslc_plugin_options_cpt_slugs[testimonials_slug]',
+
+				'section' => 'dslc_plugin_options_cpt_slugs',
 				'label' => __( '<strong>Testimonials</strong> Slug', 'live-composer-page-builder' ),
 				'std' => 'testimonial-view',
 				'type' => 'text'
 			),
 			'testimonials_cats_slug' => array(
-				'name' => 'dslc_plugin_options_cpt_slugs[testimonials_cats_slug]',
+
+				'section' => 'dslc_plugin_options_cpt_slugs',
 				'label' => __( '<strong>Testimonials</strong> Categories Slug', 'live-composer-page-builder' ),
 				'std' => 'dslc_testimonials_cats',
 				'type' => 'text'
@@ -196,7 +213,8 @@ function dslc_feature_control_settings() {
 	foreach ( $dslc_var_modules as $module ) {
 
 		$module_opts_array[ $module['id'] ] = array(
-			'name' => 'dslc_plugin_options_features[' . $module['id'] . ']',
+
+			'section' => 'dslc_plugin_options_features',
 			'label' => '"' . $module['title'] . '" <small>module</small>',
 			'std' => 'enabled',
 			'type' => 'select',
@@ -248,8 +266,10 @@ function dslc_plugin_opts_other() {
 	$dslc_plugin_options['dslc_plugin_options_other'] = array(
 		'title' => __( 'Other', 'live-composer-page-builder' ),
 		'options' => array(
+
 			'lc_editor_type' => array(
-				'name' => 'dslc_plugin_options_other[lc_editor_type]',
+
+				'section' => 'dslc_plugin_options_other',
 				'label' => __( 'Text Editor Type', 'live-composer-page-builder' ),
 				'std' => 'both',
 				'type' => 'select',
@@ -267,7 +287,8 @@ function dslc_plugin_opts_other() {
 			),
 
 			'lc_default_opts_section' => array(
-				'name' => 'dslc_plugin_options_other[lc_default_opts_section]',
+
+				'section' => 'dslc_plugin_options_other',
 				'label' => __( 'Default Options Section', 'live-composer-page-builder' ),
 				'std' => 'functionality',
 				'type' => 'select',
@@ -285,7 +306,8 @@ function dslc_plugin_opts_other() {
 			),
 
 			'lc_numeric_opt_type' => array(
-				'name' => 'dslc_plugin_options_other[lc_numeric_opt_type]',
+
+				'section' => 'dslc_plugin_options_other',
 				'label' => __( 'Numeric Option Type', 'live-composer-page-builder' ),
 				'std' => 'slider',
 				'type' => 'select',
@@ -303,7 +325,8 @@ function dslc_plugin_opts_other() {
 			),
 
 			'lc_module_listing_order' => array(
-				'name' => 'dslc_plugin_options_other[lc_module_listing_order]',
+
+				'section' => 'dslc_plugin_options_other',
 				'label' => __( 'Modules Listing Order', 'live-composer-page-builder' ),
 				'std' => 'original',
 				'type' => 'select',
@@ -321,7 +344,8 @@ function dslc_plugin_opts_other() {
 			),
 
 			'lc_module_activate_button_pos' => array(
-				'name' => 'dslc_plugin_options_other[lc_module_activate_button_pos]',
+
+				'section' => 'dslc_plugin_options_other',
 				'label' => __( '"Activate Editor" Position', 'live-composer-page-builder' ),
 				'std' => 'right',
 				'type' => 'select',

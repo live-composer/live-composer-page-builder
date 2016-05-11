@@ -4,25 +4,16 @@ function dslc_plugin_option_display_text( $option ) {
 
 	global $dslc_plugin_options;
 
-	$section_ID = $option['section_id'];
+	$section_ID = $option['section'];
 	$option_ID = $option['id'];
-
-	$options = get_option( $section_ID );
-
-	if ( isset( $options[ $option_ID ] ) ) {
-
-		$value = $options[$option_ID];
-	} else {
-
-		$value = $dslc_plugin_options[$section_ID]['options'][$option_ID]['std'];
-	}
+	$value = $option['value'];
 
 	?>
 	<input class="regular-text" id='<?php echo $option_ID; ?>' name='<?php echo $option['name']; ?>' type='text' value='<?php echo esc_attr( $value ); ?>' />
-	<?php if ( isset( $dslc_plugin_options[$section_ID]['options'][$option_ID]['descr'] ) ) : ?>
+	<?php if ( isset( $option['descr'] ) ) : ?>
 
 		<p class="description">
-			<?php echo $dslc_plugin_options[$section_ID]['options'][$option_ID]['descr']; ?>
+			<?php echo $option['descr']; ?>
 		</p>
 	<?php
 
@@ -35,16 +26,7 @@ function dslc_plugin_option_display_textarea( $option )
 
 	$section_ID = $option['section_id'];
 	$option_ID = $option['id'];
-
-	$options = get_option( $section_ID );
-
-	if ( isset( $options[ $option_ID ] ) ) {
-
-		$value = $options[$option_ID];
-	} else{
-
-		$value = $dslc_plugin_options[$section_ID]['options'][$option_ID]['std'];
-	}
+	$value = $option['value'];
 
 	// echo the field
 	?><textarea class="large-text" id='<?php echo $option_ID; ?>' name='<?php echo $option['name']; ?>' rows="5" cols="50">
@@ -52,10 +34,10 @@ function dslc_plugin_option_display_textarea( $option )
 	</textarea>
 
 	<?php
-	if ( isset( $dslc_plugin_options[$section_ID]['options'][$option_ID]['descr'] ) ) :	?>
+	if ( isset( $option['descr'] ) ) :	?>
 
 		<p class="description">
-			<?php echo $dslc_plugin_options[$section_ID]['options'][$option_ID]['descr']; ?>
+			<?php echo $option['descr']; ?>
 		</p>
 	<?php
 
@@ -66,26 +48,16 @@ function dslc_plugin_option_display_select( $option ) {
 
 	global $dslc_plugin_options;
 
-	$section_ID = $option['section_id'];
+	$section_ID = $option['section'];
 	$option_ID = $option['id'];
-
-	$options = get_option( $section_ID );
-
-	if ( isset( $options[ $option_ID ] ) ) {
-
-		$value = $options[$option_ID];
-	} else{
-
-		$value = $dslc_plugin_options[$section_ID]['options'][$option_ID]['std'];
-	}
-
-	$option = $dslc_plugin_options[$section_ID]['options'][$option_ID];
+	$value = $option['value'];
 
 	?>
 	<select id='<?php echo $option_ID; ?>' name='<?php echo $option['name']; ?>'>
 
 		<?php foreach ( $option['choices'] as $choice ) : ?>
-
+			<?php echo $choice['value']; ?>
+			<?php echo $value; ?>
 			<option value="<?php echo $choice['value']; ?>" <?php if ( $choice['value'] == $value ) echo 'selected="selected"'; ?> >
 				<?php echo $choice['label'];?>
 			</option>
@@ -94,11 +66,14 @@ function dslc_plugin_option_display_select( $option ) {
 
 	</select>
 
-	<?php if ( isset( $dslc_plugin_options[$section_ID]['options'][$option_ID]['descr'] ) ) : ?>
+	<?php
+	if ( isset( $option['descr'] ) ) :	?>
+
 		<p class="description">
-			<?php echo $dslc_plugin_options[$section_ID]['options'][$option_ID]['descr']; ?>
+			<?php echo $option['descr']; ?>
 		</p>
 	<?php
+
 	endif;
 }
 
@@ -106,57 +81,39 @@ function dslc_plugin_option_display_checkbox( $option )
 {
 	global $dslc_plugin_options;
 
-	$section_ID = $option['section_id'];
+	$section_ID = $option['section'];
 	$option_ID = $option['id'];
+	$value = $option['value'];
 
-	$options = get_option( $section_ID );
-
-	if ( isset( $options[ $option_ID ] ) ) {
-
-		$value = $options[$option_ID];
-	} else {
-
-		$value = $dslc_plugin_options[$section_ID]['options'][$option_ID]['std'];
-	}
-
-	$option = $dslc_plugin_options[$section_ID]['options'][$option_ID];
-
+	$cnt = 0;
 	foreach ( $option['choices'] as $choice ) :
+		$cnt++;
 		?>
-		<input type="checkbox" name="<?php echo $option['name']; ?>[]" id="<?php echo $option_ID; ?>" value="<?php echo $choice['value']; ?>" <?php if ( in_array( $choice['value'], $value ) ) echo 'checked="checked"'; ?>>
-		<label for="<?php echo $option_ID; ?>">
+		<input type="checkbox" name="<?php echo $option['name']; ?>[]" id="<?php echo $option_ID . $cnt; ?>" value="<?php echo $choice['value']; ?>" <?php if ( in_array( $choice['value'], $value ) ) echo 'checked="checked"'; ?>>
+		<label for="<?php echo $option_ID . $cnt; ?>">
 			<?php echo $choice['label']; ?>
 		</label>
 		<br>
 		<?php
 	endforeach;
-	if ( isset( $dslc_plugin_options[$section_ID]['options'][$option_ID]['descr'] ) ) : ?>
+
+	if ( isset( $option['descr'] ) ) :	?>
 
 		<p class="description">
-			<?php echo $dslc_plugin_options[$section_ID]['options'][$option_ID]['descr']; ?>
+			<?php echo $option['descr']; ?>
 		</p>
+	<?php
 
-	<?php endif;
+	endif;
 }
 
 function dslc_plugin_option_display_radio( $option )
 {
 	global $dslc_plugin_options;
 
-	$section_ID = $option['section_id'];
+	$section_ID = $option['section'];
 	$option_ID = $option['id'];
-
-	$options = get_option( $section_ID );
-
-	if ( isset( $options[ $option_ID ] ) ) {
-
-		$value = $options[$option_ID];
-	} else {
-
-		$value = $dslc_plugin_options[$section_ID]['options'][$option_ID]['std'];
-	}
-
-	$option = $dslc_plugin_options[$section_ID]['options'][$option_ID];
+	$value = $option['value'];
 
 	foreach ( $option['choices'] as $choice ) :
 		?>
@@ -168,34 +125,24 @@ function dslc_plugin_option_display_radio( $option )
 		<?php
 	endforeach;
 
-	if ( isset( $dslc_plugin_options[$section_ID]['options'][$option_ID]['descr'] ) ) : ?>
+
+	if ( isset( $option['descr'] ) ) :	?>
 
 		<p class="description">
-			<?php echo $dslc_plugin_options[$section_ID]['options'][$option_ID]['descr']; ?>
+			<?php echo $option['descr']; ?>
 		</p>
+	<?php
 
-	<?php endif;
+	endif;
 }
 
 function dslc_plugin_option_display_list( $option )
 {
 	global $dslc_plugin_options;
 
-	$section_ID = $option['section_id'];
+	$section_ID = $option['section'];
 	$option_ID = $option['id'];
-
-	$options = get_option( $section_ID );
-
-	if ( isset( $options[ $option_ID ] ) ) {
-
-		$value = $options[$option_ID];
-	} else {
-
-		$value = $dslc_plugin_options[$section_ID]['options'][$option_ID]['std'];
-	}
-
-	$option = $dslc_plugin_options[$section_ID]['options'][$option_ID];
-
+	$value = $option['value'];
 	?>
 
 	<div class="dslca-plugin-opts-list-wrap">
@@ -235,12 +182,13 @@ function dslc_plugin_option_display_list( $option )
 	</div>
 
 	<?php
-	if ( isset( $dslc_plugin_options[$section_ID]['options'][$option_ID]['descr'] ) ) :
-		?>
+	if ( isset( $option['descr'] ) ) :	?>
+
 		<p class="description">
-			<?php echo $dslc_plugin_options[$section_ID]['options'][$option_ID]['descr']; ?>
+			<?php echo $option['descr']; ?>
 		</p>
 	<?php
+
 	endif;
 
 }
@@ -249,7 +197,7 @@ function dslc_plugin_option_display_styling_presets( $option )
 {
 	global $dslc_plugin_options;
 
-	$section_ID = $option['section_id'];
+	$section_ID = $option['section'];
 	$option_ID = $option['id'];
 
 	$presets = maybe_unserialize( get_option( 'dslc_presets' ) );
@@ -278,11 +226,12 @@ function dslc_plugin_option_display_styling_presets( $option )
 	</div>
 
 	<?php
-	if ( isset( $dslc_plugin_options[$section_ID]['options'][$option_ID]['descr'] ) ) :
-		?>
+	if ( isset( $option['descr'] ) ) :	?>
+
 		<p class="description">
-			<?php echo $dslc_plugin_options[$section_ID]['options'][$option_ID]['descr']; ?>
+			<?php echo $option['descr']; ?>
 		</p>
 	<?php
+
 	endif;
 }

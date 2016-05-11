@@ -18,6 +18,11 @@
     margin-top: 30px;
 }
 
+.dslc-tab-heading {
+    margin-bottom: 30px !important;
+    margin-top: 20px !important;
+}
+
 .dslc-subsection-title a {
 	text-decoration: none;
 }
@@ -1796,3 +1801,118 @@ body.full-overlay-active {
 	 padding: 0 16px!important;
  }
 
+
+.dslc-settigns-tabs .nav-tab .tag {
+  background: #d54e21 none repeat scroll 0 0;
+  border-radius: 4px;
+  color: #fff;
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  line-height: 1;
+  margin-left: 5px;
+  padding: 4px 6px;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+
+.dslc-scroll-back {
+margin-left: -90px;
+    margin-top: 44px;
+    position: absolute;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.dslc-scroll-back .dashicons {
+    font-size: 17px;
+}
+
+
+/**
+ * ----------------------------------------------------------------------
+ * Sub Tabs
+ */
+
+ .nav-subtabs{
+ /*   float: left;
+    width: 20%;
+     max-width: 180px;
+     padding: 40px 40px 0 0;*/
+ }
+
+ #dslc-settings-column {
+  clear: both;
+  display: inline;
+  float: left;
+  margin-left: -300px;
+  padding-top: 0;
+  width: 281px;
+}
+
+ .dslc-settings-form {
+ /*   float: left;
+    width: 70%;
+    max-width: 640px;
+    padding-left: 4%;
+    padding-top: 20px;
+    border-left: solid 1px #E3E3E3;*/
+ }
+
+ .dslc-settings-form .dslc-panel {
+    padding: 40px;
+    margin-top: 10px;
+    max-width: 640px;
+ }
+
+ .dslc-settings-form .dslc-panel h2 {
+    margin-bottom: 30px;
+}
+
+ .dslc-submenu-section {
+  border-bottom: 1px solid #ddd;
+  margin: 0;
+}
+
+.dslc-submenu-section:hover {
+    background: #f5f5f5;
+    color: #23282d;
+}
+
+.dslc-submenu-section a {
+    -moz-user-select: none;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    margin: 0;
+    padding: 12px 15px 15px;
+    position: relative;
+
+    font-size: 14px;
+    line-height: 21px;
+    font-weight: bold;
+
+    color:#23282D!important;
+    text-decoration: none;
+    display: block;
+/*padding: 10px 10px 11px 14px;*/
+
+}
+
+.dslc-submenu-section .dashicons {
+    margin-bottom: -1px;
+    margin-right: 6px;
+    margin-top: 1px;
+    opacity: 0.4;
+}
+
+#dslc-setings-liquid {
+    float: left;
+    margin-top: 3px;
+    min-width: 100%;
+}
+
+#dslc-settings-frame {
+    margin-left: 300px;
+margin-top: 23px;
+}
