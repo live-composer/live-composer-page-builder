@@ -6,36 +6,46 @@
 		global $dslc_var_row_options;
 
 		// If empty return
-		if ( empty( $dslc_var_row_options ) ) return;
+		if ( empty( $dslc_var_row_options ) ) {
+			return;
+		}
 
 		foreach ( $dslc_var_row_options as $row_option ) {
 
 			$css_rule_output = '';
-			if ( isset( $row_option['affect_on_change_rule'] ) )
-				$css_rule_output = 'data-css-rule="' . $row_option['affect_on_change_rule'] . '"';
+			if ( isset( $row_option['affect_on_change_rule'] ) ) {
+							$css_rule_output = 'data-css-rule="' . $row_option['affect_on_change_rule'] . '"';
+			}
 
 			$css_element_output = '';
-			if ( isset( $row_option['affect_on_change_el'] ) )
-				$css_element_output = 'data-css-element="' . $row_option['affect_on_change_el'] . '"';
+			if ( isset( $row_option['affect_on_change_el'] ) ) {
+							$css_element_output = 'data-css-element="' . $row_option['affect_on_change_el'] . '"';
+			}
 
 			$extra_class = '';
-			if ( $row_option['type'] == 'image' || $row_option['type'] == 'video' )
-				$extra_class = 'dslca-modules-section-edit-option-upload';
-			if ( $row_option['type'] == 'border_checkbox' || $row_option['type'] == 'checkbox' )
-				$extra_class = 'dslca-modules-section-edit-option-checkbox';
+			if ( $row_option['type'] == 'image' || $row_option['type'] == 'video' ) {
+							$extra_class = 'dslca-modules-section-edit-option-upload';
+			}
+			if ( $row_option['type'] == 'border_checkbox' || $row_option['type'] == 'checkbox' ) {
+							$extra_class = 'dslca-modules-section-edit-option-checkbox';
+			}
 
 
-			if ( ! isset( $row_option['ext'] ) )
-				$row_option['ext'] = '';
+			if ( ! isset( $row_option['ext'] ) ) {
+							$row_option['ext'] = '';
+			}
 
-			if ( ! isset( $row_option['min'] ) )
-				$row_option['min'] = 0;
+			if ( ! isset( $row_option['min'] ) ) {
+							$row_option['min'] = 0;
+			}
 
-			if ( ! isset( $row_option['max'] ) )
-				$row_option['max'] = 100;
+			if ( ! isset( $row_option['max'] ) ) {
+							$row_option['max'] = 100;
+			}
 
-			if ( ! isset( $row_option['increment'] ) )
-				$row_option['increment'] = 1;
+			if ( ! isset( $row_option['increment'] ) ) {
+							$row_option['increment'] = 1;
+			}
 
 			?>
 			<div class="dslca-modules-section-edit-option <?php echo $extra_class; ?>" data-id="<?php echo $row_option['id']; ?>">
@@ -74,8 +84,9 @@
 
 					<?php
 						$numeric_option_type = dslc_get_option( 'lc_numeric_opt_type', 'dslc_plugin_options_other' );
-						if ( empty( $numeric_option_type ) )
-							$numeric_option_type = 'slider';
+						if ( empty( $numeric_option_type ) ) {
+													$numeric_option_type = 'slider';
+						}
 					?>
 
 					<?php if ( $numeric_option_type == 'slider' ) : ?>
@@ -84,10 +95,13 @@
 						<span class="dslca-modules-section-edit-field-slider-tooltip"></span>
 						<input type="hidden" class="dslca-modules-section-edit-field" data-id="<?php echo $row_option['id']; ?>" <?php echo $css_element_output . ' ' . $css_rule_output; ?> />
 
-					<?php else : ?>
+					<?php else {
+	: ?>
 
 						<div class="dslca-modules-section-edit-field-numeric-wrap">
-							<input type="text" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-numeric" data-id="<?php echo $row_option['id']; ?>" data-ext="<?php echo $row_option['ext']; ?>" <?php echo $css_element_output . ' ' . $css_rule_output; ?> />
+							<input type="text" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-numeric" data-id="<?php echo $row_option['id'];
+}
+?>" data-ext="<?php echo $row_option['ext']; ?>" <?php echo $css_element_output . ' ' . $css_rule_output; ?> />
 							<span class="dslca-modules-section-edit-field-numeric-ext"><?php echo $row_option['ext']; ?></span>
 						</div>
 
@@ -142,19 +156,24 @@
 		global $dslc_var_row_options;
 
 		// If empty return
-		if ( empty( $dslc_var_row_options ) ) return;
+		if ( empty( $dslc_var_row_options ) ) {
+			return;
+		}
 
 		// Go through each option and append HTML
 		if ( $atts ) {
 			foreach ( $dslc_var_row_options as $row_option ) {
-				if ( isset( $atts[$row_option['id']] ) )
-					$output .= '<input type="text" data-id="' . $row_option['id'] . '" value="' . $atts[$row_option['id']] . '" data-def="' . $atts[$row_option['id']] . '">';
-				else
-					$output .= '<input type="text" data-id="' . $row_option['id'] . '" value="' . $row_option['std'] . '" data-def="' . $row_option['std'] . '">';
+				if ( isset( $atts[$row_option['id']] ) ) {
+									$output .= '<input type="text" data-id="' . $row_option['id'] . '" value="' . $atts[$row_option['id']] . '" data-def="' . $atts[$row_option['id']] . '">';
+				} else {
+									$output .= '<input type="text" data-id="' . $row_option['id'] . '" value="' . $row_option['std'] . '" data-def="' . $row_option['std'] . '">';
+				}
 			}
 		} else {
 			foreach ( $dslc_var_row_options as $row_option ) {
-				if ( ! isset( $row_option['std'] ) ) $row_option['std'] = '';
+				if ( ! isset( $row_option['std'] ) ) {
+					$row_option['std'] = '';
+				}
 				$output .= '<input type="text" data-id="' . $row_option['id'] . '" value="' . $row_option['std'] . '">';
 			}
 		}
@@ -169,7 +188,9 @@
 		$style = '';
 
 		// If empty return
-		if ( empty( $dslc_var_row_options ) ) return;
+		if ( empty( $dslc_var_row_options ) ) {
+			return;
+		}
 
 		// Loop through all options
 		foreach ( $dslc_var_row_options as $row_option ) {
@@ -179,8 +200,9 @@
 
 				// The CSS rules
 				$rules = false;
-				if ( isset( $row_option['affect_on_change_rule'] ) )
-					$rules = explode( ',', $row_option['affect_on_change_rule'] );
+				if ( isset( $row_option['affect_on_change_rule'] ) ) {
+									$rules = explode( ',', $row_option['affect_on_change_rule'] );
+				}
 
 				// The CSS value
 				$value = false;
@@ -193,25 +215,30 @@
 				$orig_value = $value;
 
 				// The CSS value extension
-				if ( isset( $row_option['ext'] ) )
-					$value = $value . $row_option['ext'];
+				if ( isset( $row_option['ext'] ) ) {
+									$value = $value . $row_option['ext'];
+				}
 
 				// Border
 				if ( $row_option['id'] == 'border' ) {
 
 					$checkbox_arr = explode( ' ', trim( $value ) );
 
-					if ( ! in_array( 'top', $checkbox_arr ) )
-						$style .= 'border-top-style: hidden; ';
+					if ( ! in_array( 'top', $checkbox_arr ) ) {
+											$style .= 'border-top-style: hidden; ';
+					}
 
-					if ( ! in_array( 'right', $checkbox_arr ) )
-						$style .= 'border-right-style: hidden; ';
+					if ( ! in_array( 'right', $checkbox_arr ) ) {
+											$style .= 'border-right-style: hidden; ';
+					}
 
-					if ( ! in_array( 'bottom', $checkbox_arr ) )
-						$style .= 'border-bottom-style: hidden; ';
+					if ( ! in_array( 'bottom', $checkbox_arr ) ) {
+											$style .= 'border-bottom-style: hidden; ';
+					}
 
-					if ( ! in_array( 'left', $checkbox_arr ) )
-						$style .= 'border-left-style: hidden; ';
+					if ( ! in_array( 'left', $checkbox_arr ) ) {
+											$style .= 'border-left-style: hidden; ';
+					}
 
 				}
 
@@ -259,7 +286,9 @@
 		$style = '';
 
 		// If empty return
-		if ( empty( $dslc_var_row_options ) ) return;
+		if ( empty( $dslc_var_row_options ) ) {
+			return;
+		}
 
 		// Loop through all options
 		foreach ( $dslc_var_row_options as $row_option ) {
@@ -269,8 +298,9 @@
 
 				// The CSS rules
 				$rules = false;
-				if ( isset( $row_option['affect_on_change_rule'] ) )
-					$rules = explode( ',', $row_option['affect_on_change_rule'] );
+				if ( isset( $row_option['affect_on_change_rule'] ) ) {
+									$rules = explode( ',', $row_option['affect_on_change_rule'] );
+				}
 
 				// The CSS value
 				$value = false;
@@ -281,25 +311,30 @@
 				$orig_value = $value;
 
 				// The CSS value extension
-				if ( isset( $row_option['ext'] ) )
-					$value = $value . $row_option['ext'];
+				if ( isset( $row_option['ext'] ) ) {
+									$value = $value . $row_option['ext'];
+				}
 
 				// Border
 				if ( $row_option['id'] == 'border' ) {
 
 					$checkbox_arr = explode( ' ', trim( $value ) );
 
-					if ( ! in_array( 'top', $checkbox_arr ) )
-						$style .= 'border-top-style: hidden; ';
+					if ( ! in_array( 'top', $checkbox_arr ) ) {
+											$style .= 'border-top-style: hidden; ';
+					}
 
-					if ( ! in_array( 'right', $checkbox_arr ) )
-						$style .= 'border-right-style: hidden; ';
+					if ( ! in_array( 'right', $checkbox_arr ) ) {
+											$style .= 'border-right-style: hidden; ';
+					}
 
-					if ( ! in_array( 'bottom', $checkbox_arr ) )
-						$style .= 'border-bottom-style: hidden; ';
+					if ( ! in_array( 'bottom', $checkbox_arr ) ) {
+											$style .= 'border-bottom-style: hidden; ';
+					}
 
-					if ( ! in_array( 'left', $checkbox_arr ) )
-						$style .= 'border-left-style: hidden; ';
+					if ( ! in_array( 'left', $checkbox_arr ) ) {
+											$style .= 'border-left-style: hidden; ';
+					}
 
 				}
 

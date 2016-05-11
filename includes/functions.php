@@ -91,6 +91,7 @@ function dslc_register_modules() {
  * Register module
  *
  * @since 1.0
+ * @param string $module_id
  */
 
 function dslc_register_module( $module_id ) {
@@ -102,12 +103,14 @@ function dslc_register_module( $module_id ) {
 	$module_instance = new $module_id();
 
 	// Icon
-	if ( ! isset( $module_instance->module_icon ) )
-		$module_instance->module_icon = '';
+	if ( ! isset( $module_instance->module_icon ) ) {
+			$module_instance->module_icon = '';
+	}
 
 	// Category/Origin
-	if ( ! isset( $module_instance->module_category ) )
-		$module_instance->module_category = 'other';
+	if ( ! isset( $module_instance->module_category ) ) {
+			$module_instance->module_category = 'other';
+	}
 
 	// If the array ID not taken
 	if ( ! isset( $dslc_var_modules[$module_id] ) ) {
@@ -189,8 +192,9 @@ function dslc_generate_custom_css( $options_arr, $settings, $restart = false ) {
 
 	$important_append = '';
 	$force_important = dslc_get_option( 'lc_force_important_css', 'dslc_plugin_options' );
-	if ( $force_important == 'enabled' )
-		$important_append = ' !important';
+	if ( $force_important == 'enabled' ) {
+			$important_append = ' !important';
+	}
 
 	if ( isset( $_GET['dslc'] ) && $_GET['dslc'] == 'active' ) {
 		$important_append = '';
@@ -207,34 +211,40 @@ function dslc_generate_custom_css( $options_arr, $settings, $restart = false ) {
 	foreach ( $options_arr as $option_arr ) {
 
 		// Fix for "alter_defaults" and responsive tablet state
-		if ( $option_arr['id'] == 'css_res_t' && $option_arr['std'] == 'enabled' && ! isset( $settings['css_res_t'] ) )
-			$settings['css_res_t'] = 'enabled';
+		if ( $option_arr['id'] == 'css_res_t' && $option_arr['std'] == 'enabled' && ! isset( $settings['css_res_t'] ) ) {
+					$settings['css_res_t'] = 'enabled';
+		}
 
 		// Fix for "alter_defaults" and responsive phone state
-		if ( $option_arr['id'] == 'css_res_p' && $option_arr['std'] == 'enabled' && ! isset( $settings['css_res_p'] ) )
-			$settings['css_res_p'] = 'enabled';
+		if ( $option_arr['id'] == 'css_res_p' && $option_arr['std'] == 'enabled' && ! isset( $settings['css_res_p'] ) ) {
+					$settings['css_res_p'] = 'enabled';
+		}
 
 		// If option type is done with CSS and option is set
 		if ( isset( $option_arr['affect_on_change_el'] ) && isset( $option_arr['affect_on_change_rule'] ) ) {
 
 			// Default
-			if ( ! isset( $settings[$option_arr['id']] ) )
-				$settings[$option_arr['id']] = $option_arr['std'];
+			if ( ! isset( $settings[$option_arr['id']] ) ) {
+							$settings[$option_arr['id']] = $option_arr['std'];
+			}
 
 			// Extension (px, %, em...)
 			$ext = ' ';
-			if ( isset( $option_arr['ext'] ) )
-				$ext = $option_arr['ext'];
+			if ( isset( $option_arr['ext'] ) ) {
+							$ext = $option_arr['ext'];
+			}
 
 			// Prepend
 			$prepend = '';
-			if ( isset( $option_arr['prepend'] ) )
-				$prepend = $option_arr['prepend'];
+			if ( isset( $option_arr['prepend'] ) ) {
+							$prepend = $option_arr['prepend'];
+			}
 
 			// Append
 			$append = '';
-			if ( isset( $option_arr['append'] ) )
-				$append = $option_arr['append'];
+			if ( isset( $option_arr['append'] ) ) {
+							$append = $option_arr['append'];
+			}
 
 			if ( $option_arr['type'] == 'image' ) {
 				$prepend = 'url("';
@@ -259,14 +269,16 @@ function dslc_generate_custom_css( $options_arr, $settings, $restart = false ) {
 
 					switch ( $option_arr['tab'] ) {
 						case __( 'tablet', 'live-composer-page-builder' ):
-							if ( isset( $settings['css_res_t'] ) && $settings['css_res_t'] == 'enabled' )
-								// removed #dslc-content from the line for better css optimization
+							if ( isset( $settings['css_res_t'] ) && $settings['css_res_t'] == 'enabled' ) {
+															// removed #dslc-content from the line for better css optimization
 								$affect_el .= 'body.dslc-res-tablet #dslc-module-' . $settings['module_instance_id'] . ' ' . $affect_el_arr;
+							}
 							break;
 						case __( 'phone', 'live-composer-page-builder' ):
-							if ( isset( $settings['css_res_p'] ) && $settings['css_res_p'] == 'enabled' )
-								// removed #dslc-content from the line for better css optimization
+							if ( isset( $settings['css_res_p'] ) && $settings['css_res_p'] == 'enabled' ) {
+															// removed #dslc-content from the line for better css optimization
 								$affect_el .= 'body.dslc-res-phone #dslc-module-' . $settings['module_instance_id'] . ' ' . $affect_el_arr;
+							}
 							break;
 					}
 
@@ -283,25 +295,29 @@ function dslc_generate_custom_css( $options_arr, $settings, $restart = false ) {
 				$checkbox_val = '';
 				$checkbox_arr = explode( ' ', trim( $settings[$option_arr['id']] ) );
 
-				if ( in_array( 'top', $checkbox_arr ) )
-					$checkbox_val .= 'solid ';
-				else
-					$checkbox_val .= 'none ';
+				if ( in_array( 'top', $checkbox_arr ) ) {
+									$checkbox_val .= 'solid ';
+				} else {
+									$checkbox_val .= 'none ';
+				}
 
-				if ( in_array( 'right', $checkbox_arr ) )
-					$checkbox_val .= 'solid ';
-				else
-					$checkbox_val .= 'none ';
+				if ( in_array( 'right', $checkbox_arr ) ) {
+									$checkbox_val .= 'solid ';
+				} else {
+									$checkbox_val .= 'none ';
+				}
 
-				if ( in_array( 'bottom', $checkbox_arr ) )
-					$checkbox_val .= 'solid ';
-				else
-					$checkbox_val .= 'none ';
+				if ( in_array( 'bottom', $checkbox_arr ) ) {
+									$checkbox_val .= 'solid ';
+				} else {
+									$checkbox_val .= 'none ';
+				}
 
-				if ( in_array( 'left', $checkbox_arr ) )
-					$checkbox_val .= 'solid ';
-				else
-					$checkbox_val .= 'none ';
+				if ( in_array( 'left', $checkbox_arr ) ) {
+									$checkbox_val .= 'solid ';
+				} else {
+									$checkbox_val .= 'none ';
+				}
 
 				$settings[$option_arr['id']] = $checkbox_val;
 
@@ -323,8 +339,9 @@ function dslc_generate_custom_css( $options_arr, $settings, $restart = false ) {
 		// If option type is font
 		if ( $option_arr['type'] == 'font' ) {
 
-			if ( ! in_array( $settings[$option_arr['id']], $dslc_googlefonts_array ) && ! in_array( $settings[$option_arr['id']], $regular_fonts ) )
-				$dslc_googlefonts_array[] = $settings[$option_arr['id']];
+			if ( ! in_array( $settings[$option_arr['id']], $dslc_googlefonts_array ) && ! in_array( $settings[$option_arr['id']], $regular_fonts ) ) {
+							$dslc_googlefonts_array[] = $settings[$option_arr['id']];
+			}
 
 		}
 
@@ -538,15 +555,18 @@ function dslc_body_class( $classes ) {
 		}
 	}
 
-	if ( is_singular() )
-		$proceed = true;
+	if ( is_singular() ) {
+			$proceed = true;
+	}
 
-	if ( $proceed == false )
-		return $classes;
+	if ( $proceed == false ) {
+			return $classes;
+	}
 
 	// If page in LC mode, force the class
-	if ( isset( $_GET['dslc'] ) && $_GET['dslc'] == 'active' )
-		$has_lc_content = true;
+	if ( isset( $_GET['dslc'] ) && $_GET['dslc'] == 'active' ) {
+			$has_lc_content = true;
+	}
 
 
 	// Still nothing, let's check if there's real LC content on the page
@@ -556,8 +576,9 @@ function dslc_body_class( $classes ) {
 		$dslc_code = get_post_meta( get_the_ID(), 'dslc_code', true );
 
 		// If there is LC content, allow the class
-		if ( $dslc_code )
-			$has_lc_content = true;
+		if ( $dslc_code ) {
+					$has_lc_content = true;
+		}
 
 	}
 
@@ -568,8 +589,9 @@ function dslc_body_class( $classes ) {
 		$template_ID = dslc_st_get_template_ID( get_the_ID() );
 
 		// If tempalte exists, allow the class
-		if ( $template_ID )
-			$has_lc_content = true;
+		if ( $template_ID ) {
+					$has_lc_content = true;
+		}
 
 	}
 
@@ -580,18 +602,22 @@ function dslc_body_class( $classes ) {
 	}
 
 	// If has LC content append class
-	if ( $has_lc_content || $has_lc_header_footer )
-		$classes[] = 'dslc-page';
+	if ( $has_lc_content || $has_lc_header_footer ) {
+			$classes[] = 'dslc-page';
+	}
 
-	if ( $has_lc_content )
-		$classes[] = 'dslc-page-has-content';
+	if ( $has_lc_content ) {
+			$classes[] = 'dslc-page-has-content';
+	}
 
-	if ( $has_lc_header_footer )
-		$classes[] = 'dslc-page-has-hf';
+	if ( $has_lc_header_footer ) {
+			$classes[] = 'dslc-page-has-hf';
+	}
 
 	// If responsive disabled append class
-	if ( defined( 'DS_LIVE_COMPOSER_RESPONSIVE' ) && ! DS_LIVE_COMPOSER_RESPONSIVE )
-		$classes[] = 'dslc-res-disabled';
+	if ( defined( 'DS_LIVE_COMPOSER_RESPONSIVE' ) && ! DS_LIVE_COMPOSER_RESPONSIVE ) {
+			$classes[] = 'dslc-res-disabled';
+	}
 
 	// Return the modified array
 	return $classes;
@@ -607,8 +633,9 @@ function dslc_body_class( $classes ) {
 function dslc_set_defaults( $new_defaults, $options ) {
 
 	// If no new defaults, pass it back and stop
-	if ( ! $new_defaults )
-		return $options;
+	if ( ! $new_defaults ) {
+			return $options;
+	}
 
 	// Generate an array of options IDs to alter
 	$def_ids = array();
@@ -638,12 +665,13 @@ function dslc_is_module_active( $module_ID, $check_registered = false ) {
 
 	global $dslc_var_modules;
 
-	if ( dslc_get_option( $module_ID, 'dslc_plugin_options_features' ) == 'disabled' )
-		return false;
-	elseif ( $check_registered == true && ! isset( $dslc_var_modules[$module_ID] ) )
-		return false;
-	else
-		return true;
+	if ( dslc_get_option( $module_ID, 'dslc_plugin_options_features' ) == 'disabled' ) {
+			return false;
+	} elseif ( $check_registered == true && ! isset( $dslc_var_modules[$module_ID] ) ) {
+			return false;
+	} else {
+			return true;
+	}
 
 }
 
@@ -651,6 +679,9 @@ function dslc_is_module_active( $module_ID, $check_registered = false ) {
  * Save Preset
  *
  * @since 1.0
+ * @param string $preset_name
+ * @param string $preset_code_raw
+ * @param string $module_id
  */
 
 function dslc_save_preset( $preset_name, $preset_code_raw, $module_id ) {
@@ -688,10 +719,11 @@ function dslc_save_preset( $preset_name, $preset_code_raw, $module_id ) {
 	$presets = get_option( 'dslc_presets' );
 
 	// No presets = make empty array OR presets found = unserialize
-	if ( $presets === false )
-		$presets = array();
-	else
-		$presets = maybe_unserialize( $presets );
+	if ( $presets === false ) {
+			$presets = array();
+	} else {
+			$presets = maybe_unserialize( $presets );
+	}
 
 	// Append new preset to presets array
 	$presets[$preset_id] = array(
@@ -702,10 +734,11 @@ function dslc_save_preset( $preset_name, $preset_code_raw, $module_id ) {
 	);
 
 	// Save new presets array to db and set the status
-	if ( update_option( 'dslc_presets', maybe_serialize( $presets ) ) )
-		return true;
-	else
-		return false;
+	if ( update_option( 'dslc_presets', maybe_serialize( $presets ) ) ) {
+			return true;
+	} else {
+			return false;
+	}
 
 }
 
@@ -794,10 +827,11 @@ function dslc_get_templates() {
 	$dslc_var_templates = apply_filters( 'dslc_get_templates', $dslc_var_templates );
 
 	// Return templates ( false if none )
-	if ( empty( $dslc_var_templates ) )
-		return false;
-	else
-		return $dslc_var_templates;
+	if ( empty( $dslc_var_templates ) ) {
+			return false;
+	} else {
+			return $dslc_var_templates;
+	}
 
 }
 

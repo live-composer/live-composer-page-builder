@@ -52,20 +52,24 @@ function dslc_sc_get_custom_field( $atts, $content ) {
 	), $atts ) );
 
 	// If no custom field ID return error message
-	if ( ! $id )
-		return 'Custom field ID not supplied ( "id" parameter ).';
+	if ( ! $id ) {
+			return 'Custom field ID not supplied ( "id" parameter ).';
+	}
 
 	// If no post ID but in the loop, get current ID
-	if ( ! $post_id && in_the_loop() )
-		$post_id = get_the_ID();
+	if ( ! $post_id && in_the_loop() ) {
+			$post_id = get_the_ID();
+	}
 
 	// If no post ID use $_POST ( this is mostly for the editor usage )
-	if ( ! $post_id )
-		$post_id = $_POST['dslc_post_id'];
+	if ( ! $post_id ) {
+			$post_id = $_POST['dslc_post_id'];
+	}
 
 	// If the post has the custom field return the value
-	if ( get_post_meta( $post_id, $id, true ) )
-		return do_shortcode( get_post_meta( $post_id, $id, true ) );
+	if ( get_post_meta( $post_id, $id, true ) ) {
+			return do_shortcode( get_post_meta( $post_id, $id, true ) );
+	}
 
 } add_shortcode( 'dslc_custom_field', 'dslc_sc_get_custom_field' );
 
@@ -104,8 +108,9 @@ function dslc_sc_icon( $atts, $content ) {
 	), $atts ) );
 
 	// If no ID return empty
-	if ( ! $id )
-		return '';
+	if ( ! $id ) {
+			return '';
+	}
 
 	// Return Icon HTML
 	return '<span class="dslc-icon dslc-icon-' . $id . ' dslc-icon-sc"></span>';

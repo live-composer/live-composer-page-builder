@@ -1,7 +1,8 @@
 <?php
 
-if ( dslc_is_module_active( 'DSLC_Navigation' ) )
+if ( dslc_is_module_active( 'DSLC_Navigation' ) ) {
 	include DS_LIVE_COMPOSER_ABS . '/modules/navigation/functions.php';
+}
 
 class DSLC_Navigation extends DSLC_Module {
 
@@ -1393,10 +1394,11 @@ class DSLC_Navigation extends DSLC_Module {
 
 			global $dslc_active;
 
-			if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
-				$dslc_is_admin = true;
-			else
-				$dslc_is_admin = false;
+			if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+							$dslc_is_admin = true;
+			} else {
+							$dslc_is_admin = false;
+			}
 
 			?>
 

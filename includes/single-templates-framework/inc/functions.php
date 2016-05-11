@@ -7,7 +7,9 @@
 function dslc_st_init() {
 
 	$capability = dslc_get_option( 'lc_min_capability_page', 'dslc_plugin_options_access_control' );
-	if ( ! $capability ) $capability = 'publish_posts';
+	if ( ! $capability ) {
+		$capability = 'publish_posts';
+	}
 
 	register_post_type( 'dslc_templates', array(
 		'menu_icon' => 'dashicons-admin-page',
@@ -145,10 +147,11 @@ function dslc_st_get_template_ID( $post_ID ) {
 		$tpls = get_posts( $args );
 
 		// If default template found set the ID if not make it false
-		if ( $tpls )
-			$template_ID = $tpls[0]->ID;
-		else
-			$template_ID = false;
+		if ( $tpls ) {
+					$template_ID = $tpls[0]->ID;
+		} else {
+					$template_ID = false;
+		}
 
 	// Specific template supplied, return the ID
 	} elseif ( $template ) {

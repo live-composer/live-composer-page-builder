@@ -906,7 +906,9 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 											$gallery_image_src = $gallery_image_src[0];
 										
 											$thumb_alt = get_post_meta( $gallery_image, '_wp_attachment_image_alt', true );
-											if ( ! $thumb_alt ) $thumb_alt = '';
+											if ( ! $thumb_alt ) {
+												$thumb_alt = '';
+											}
 
 											?><div class="dslc-slider-item"><img class="<?php echo $img_class; ?>" src="<?php echo $gallery_image_src; ?>" alt="<?php echo $thumb_alt; ?>" /></div><?php
 
@@ -929,7 +931,9 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 											$gallery_image_src = $gallery_image_src[0];
 
 											$gallery_image_title = get_post_meta( $gallery_image, '_wp_attachment_image_alt', true );
-											if ( ! $gallery_image_title ) $gallery_image_title = '';
+											if ( ! $gallery_image_title ) {
+												$gallery_image_title = '';
+											}
 										?>
 
 										<a href="<?php echo $gallery_image_src; ?>" title="<?php echo esc_attr( $gallery_image_title ); ?>"></a>

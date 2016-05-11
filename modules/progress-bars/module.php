@@ -792,10 +792,11 @@ class DSLC_Progress_Bars extends DSLC_Module {
 
 		global $dslc_active;
 
-		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
-			$dslc_is_admin = true;
-		else
-			$dslc_is_admin = false;
+		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+					$dslc_is_admin = true;
+		} else {
+					$dslc_is_admin = false;
+		}
 
 		$this->module_start( $options );
 
@@ -803,8 +804,9 @@ class DSLC_Progress_Bars extends DSLC_Module {
 
 			$wrapper_class = '';
 
-			if ( $options['animation'] == 'enabled' )
-				$wrapper_class .= 'dslc-progress-bar-animated ';
+			if ( $options['animation'] == 'enabled' ) {
+							$wrapper_class .= 'dslc-progress-bar-animated ';
+			}
 			
 			?>
 
@@ -813,9 +815,15 @@ class DSLC_Progress_Bars extends DSLC_Module {
 					<?php if ( $options['label_position'] == 'above' ) : ?>
 
 						<?php if ( $dslc_is_admin ) : ?>
-							<h4 class="dslc-progress-bar-label dslca-editable-content" data-id="label" data-type="simple" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?>><?php echo $options['label']; ?></h4>
-						<?php else : ?>
-							<h4 class="dslc-progress-bar-label"><?php echo $options['label']; ?></h4>
+							<h4 class="dslc-progress-bar-label dslca-editable-content" data-id="label" data-type="simple" <?php if ( $dslc_is_admin ) {
+	echo 'contenteditable';
+}
+?>><?php echo $options['label']; ?></h4>
+						<?php else {
+	: ?>
+							<h4 class="dslc-progress-bar-label"><?php echo $options['label'];
+}
+?></h4>
 						<?php endif; ?>
 
 					<?php endif; ?>
@@ -824,9 +832,15 @@ class DSLC_Progress_Bars extends DSLC_Module {
 						<span class="dslc-progress-bar-loader-inner dslc-in-viewport" data-amount="<?php echo $options['amount']; ?>" data-speed="<?php echo $options['animation_speed']; ?>">
 							<?php if ( $options['label_position'] == 'inside' ) : ?>
 								<?php if ( $dslc_is_admin ) : ?>
-									<h4 class="dslc-progress-bar-label dslca-editable-content" data-id="label" data-type="simple" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?>><?php echo $options['label']; ?></h4>
-								<?php else : ?>
-									<h4 class="dslc-progress-bar-label"><?php echo $options['label']; ?></h4>
+									<h4 class="dslc-progress-bar-label dslca-editable-content" data-id="label" data-type="simple" <?php if ( $dslc_is_admin ) {
+	echo 'contenteditable';
+}
+?>><?php echo $options['label']; ?></h4>
+								<?php else {
+	: ?>
+									<h4 class="dslc-progress-bar-label"><?php echo $options['label'];
+}
+?></h4>
 								<?php endif; ?>
 							<?php endif; ?>
 						</span>

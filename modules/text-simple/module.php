@@ -4255,7 +4255,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 
 		);
 
-		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array( 'hover_opts' => false ) ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array('hover_opts' => false) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		return apply_filters( 'dslc_module_options', $dslc_options, $this->module_id );
@@ -4266,10 +4266,11 @@ class DSLC_Text_Simple extends DSLC_Module {
 
 		global $dslc_active;		
 
-		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
-			$dslc_is_admin = true;
-		else
-			$dslc_is_admin = false;
+		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+					$dslc_is_admin = true;
+		} else {
+					$dslc_is_admin = false;
+		}
 
 		$this->module_start( $options );
 
@@ -4278,7 +4279,10 @@ class DSLC_Text_Simple extends DSLC_Module {
 			?><div class="dslc-text-module-content"><?php 
 
 				if ( $dslc_active ) {
-					?><div class="dslca-editable-content" data-id="content"<?php if ( $dslc_is_admin ) echo ' data-exportable-content'; ?>><?php
+					?><div class="dslca-editable-content" data-id="content"<?php if ( $dslc_is_admin ) {
+						echo ' data-exportable-content';
+					}
+					?>><?php
 				}
 				
 					$output_content = stripslashes( $options['content'] );

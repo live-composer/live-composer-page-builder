@@ -7,8 +7,9 @@ function dslc_st_template_switch() {
 	global $dslc_post_types;
 
 	// If there's no post, stop execution
-	if ( ! isset( $post ) )
-		return;
+	if ( ! isset( $post ) ) {
+			return;
+	}
 
 	// If the post is not supporting templates or it's not a template itself, stop execution
 	if ( is_singular( $dslc_post_types ) || is_singular( 'dslc_templates' ) ) { } else {
@@ -42,7 +43,7 @@ function dslc_st_template_switch() {
 			include( $return_template );
 
 			// Bye bye
-        	exit();
+			exit();
 
 		}
 
@@ -84,7 +85,7 @@ function dslc_st_template_switch() {
 			include( $return_template );
 
 			// Bye bye
-        	exit();
+			exit();
 
 		}
 
@@ -108,8 +109,9 @@ function dslc_templates_col_content( $column_name, $post_ID ) {
 	}
 
 	if ( $column_name == 'dslc_templates_col_default' ) {
-		if ( get_post_meta( $post_ID, 'dslc_template_type', true ) == 'default' )
-			echo '<strong>Default Template</strong>';
+		if ( get_post_meta( $post_ID, 'dslc_template_type', true ) == 'default' ) {
+					echo '<strong>Default Template</strong>';
+		}
 	}
 
 }
@@ -126,16 +128,24 @@ add_action( 'manage_dslc_templates_posts_custom_column', 'dslc_templates_col_con
 function dslc_tp_unique_default( $post_id ) {
 
 	// If no post type ( not really a save action ) stop execution
-	if ( ! isset( $_POST['post_type'] ) ) return;
+	if ( ! isset( $_POST['post_type'] ) ) {
+		return;
+	}
 
 	// If not a template stop execution
-	if ( $_POST['post_type'] !== 'dslc_templates' ) return;
+	if ( $_POST['post_type'] !== 'dslc_templates' ) {
+		return;
+	}
 
 	// If template type not supplied stop execution
-	if ( ! isset( $_REQUEST['dslc_template_type'] ) ) return;
+	if ( ! isset( $_REQUEST['dslc_template_type'] ) ) {
+		return;
+	}
 
 	// If template not default stop execution
-	if ( $_REQUEST['dslc_template_type'] !== 'default' ) return;
+	if ( $_REQUEST['dslc_template_type'] !== 'default' ) {
+		return;
+	}
 
 	// Get templates ( if any ) in same CPT that are default
 	$args = array(

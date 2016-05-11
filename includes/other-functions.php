@@ -51,12 +51,16 @@ if ( ! class_exists( 'DSLC_Aq_Resize' ) ) {
 		public function process( $url, $width = null, $height = null, $crop = null, $single = true, $upscale = true ) {
 
 			// Validate inputs.
-			if ( ! $url || ( ! $width && ! $height ) ) return false;
+			if ( ! $url || ( ! $width && ! $height ) ) {
+				return false;
+			}
 
 			$upscale = true;
 
 			// Caipt'n, ready to hook.
-			if ( true === $upscale ) add_filter( 'image_resize_dimensions', array($this, 'aq_upscale'), 10, 6 );
+			if ( true === $upscale ) {
+				add_filter( 'image_resize_dimensions', array($this, 'aq_upscale'), 10, 6 );
+			}
 
 			// Define upload path & dir.
 			$upload_info = wp_upload_dir();
@@ -70,21 +74,24 @@ if ( ! class_exists( 'DSLC_Aq_Resize' ) ) {
 				if the schemes differe, images don't show up. */
 			if ( ! strncmp( $url, $https_prefix, strlen( $https_prefix ) ) ) { //if url begins with https:// make $upload_url begin with https:// as well
 				$upload_url = str_replace( $http_prefix, $https_prefix, $upload_url );
-			}
-			elseif ( ! strncmp( $url, $http_prefix, strlen( $http_prefix ) ) ) { //if url begins with http:// make $upload_url begin with http:// as well
+			} elseif ( ! strncmp( $url, $http_prefix, strlen( $http_prefix ) ) ) { //if url begins with http:// make $upload_url begin with http:// as well
 				$upload_url = str_replace( $https_prefix, $http_prefix, $upload_url );
 			}
 
 
 			// Check if $img_url is local.
-			if ( false === strpos( $url, $upload_url ) ) return false;
+			if ( false === strpos( $url, $upload_url ) ) {
+				return false;
+			}
 
 			// Define path of image.
 			$rel_path = str_replace( $upload_url, '', $url );
 			$img_path = $upload_dir . $rel_path;
 
 			// Check if img path exists, and is an image indeed.
-			if ( ! file_exists( $img_path ) or ! getimagesize( $img_path ) ) return false;
+			if ( ! file_exists( $img_path ) or ! getimagesize( $img_path ) ) {
+				return false;
+			}
 
 			// Get image info.
 			$info = pathinfo( $img_path );
@@ -120,8 +127,9 @@ if ( ! class_exists( 'DSLC_Aq_Resize' ) ) {
 
 					$editor = wp_get_image_editor( $img_path );
 
-					if ( is_wp_error( $editor ) || is_wp_error( $editor->resize( $width, $height, $crop ) ) )
-						return $url;
+					if ( is_wp_error( $editor ) || is_wp_error( $editor->resize( $width, $height, $crop ) ) ) {
+											return $url;
+					}
 
 					$resized_file = $editor->save();
 
@@ -136,7 +144,9 @@ if ( ! class_exists( 'DSLC_Aq_Resize' ) ) {
 			}
 
 			// Okay, leave the ship.
-			if ( true === $upscale ) remove_filter( 'image_resize_dimensions', array($this, 'aq_upscale') );
+			if ( true === $upscale ) {
+				remove_filter( 'image_resize_dimensions', array($this, 'aq_upscale') );
+			}
 
 			// Return the output.
 			if ( $single ) {
@@ -158,7 +168,10 @@ if ( ! class_exists( 'DSLC_Aq_Resize' ) ) {
 		 * Callback to overwrite WP computing of thumbnail measures
 		 */
 		function aq_upscale( $default, $orig_w, $orig_h, $dest_w, $dest_h, $crop ) {
-			if ( ! $crop ) return null; // Let the wordpress default function handle this.
+			if ( ! $crop ) {
+				return null;
+			}
+			// Let the wordpress default function handle this.
 
 			// Here is the point we allow to use larger image size than the original one.
 			$aspect_ratio = $orig_w / $orig_h;
@@ -367,16 +380,19 @@ function dslc_get_attachment_alt( $attachment_ID ) {
 	$thumb_alt = trim( strip_tags( get_post_meta( $attachment_ID, '_wp_attachment_image_alt', true ) ) );
 
 	// No ALT supplied get attachment info
-	if ( empty( $thumb_alt ) )
-		$attachment = get_post( $attachment_ID );
+	if ( empty( $thumb_alt ) ) {
+			$attachment = get_post( $attachment_ID );
+	}
 
 	// Use caption if no ALT supplied
-	if ( empty( $thumb_alt ) )
-		$thumb_alt = trim( strip_tags( $attachment->post_excerpt ) );
+	if ( empty( $thumb_alt ) ) {
+			$thumb_alt = trim( strip_tags( $attachment->post_excerpt ) );
+	}
 
 	// Use title if no caption supplied either
-	if ( empty( $thumb_alt ) )
-		$thumb_alt = trim( strip_tags( $attachment->post_title ) );
+	if ( empty( $thumb_alt ) ) {
+			$thumb_alt = trim( strip_tags( $attachment->post_title ) );
+	}
 
 	// Return ALT
 	return esc_attr( $thumb_alt );

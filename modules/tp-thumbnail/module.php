@@ -352,22 +352,34 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 					?><div class="dslc-tp-thumbnail"><?php
 						if ( $manual_resize ) : ?>
 							<img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" />
-						<?php else : ?>
-							<?php echo get_the_post_thumbnail( $post_id, 'full' ); ?>
+						<?php else {
+	: ?>
+							<?php echo get_the_post_thumbnail( $post_id, 'full' );
+}
+?>
 						<?php endif;
 					?></div><?php
-				else : 
-					?><div class="dslc-tp-thumbnail dslc-tp-thumbnail-fake"><img src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/placeholders/tpl-thumb-placeholder.png" /></div><?php
+				else {
+					: 
+					?><div class="dslc-tp-thumbnail dslc-tp-thumbnail-fake"><img src="<?php echo DS_LIVE_COMPOSER_URL;
+				}
+				?>/images/placeholders/tpl-thumb-placeholder.png" /></div><?php
 				endif;
-			else : 
+			else {
+				: 
 				?><div class="dslc-tp-thumbnail">
 					<?php if ( isset( $options['lightbox_state'] ) && $options['lightbox_state'] == 'enabled' ) : ?>
-						<a href="<?php $thumb = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'full' ); echo $thumb[0]; ?>" class="dslc-lightbox-image">
+						<a href="<?php $thumb = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'full' );
+			}
+			echo $thumb[0]; ?>" class="dslc-lightbox-image">
 					<?php endif; ?>
 						<?php if ( $manual_resize ) : ?>
 							<img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo dslc_get_attachment_alt( get_post_thumbnail_id() ); ?>" />
-						<?php else : ?>
-							<?php the_post_thumbnail( 'full' ); ?>
+						<?php else {
+	: ?>
+							<?php the_post_thumbnail( 'full' );
+}
+?>
 						<?php endif; ?>
 					<?php if ( isset( $options['lightbox_state'] ) && $options['lightbox_state'] == 'enabled' ) : ?>
 						</a>

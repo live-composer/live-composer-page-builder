@@ -1072,23 +1072,29 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 		$txt_email = __( 'Email', 'live-composer-page-builder' );
 		$txt_url = __( 'Website', 'live-composer-page-builder' );
 
-		if ( isset( $options['txt_submit_comment'] ) && $options['txt_submit_comment'] != '' )
-			$txt_submit_comment = $options['txt_submit_comment'];
+		if ( isset( $options['txt_submit_comment'] ) && $options['txt_submit_comment'] != '' ) {
+					$txt_submit_comment = $options['txt_submit_comment'];
+		}
 
-		if ( isset( $options['txt_leave_comment'] ) && $options['txt_leave_comment'] != '' )
-			$txt_leave_comment = $options['txt_leave_comment'];
+		if ( isset( $options['txt_leave_comment'] ) && $options['txt_leave_comment'] != '' ) {
+					$txt_leave_comment = $options['txt_leave_comment'];
+		}
 
-		if ( isset( $options['txt_comment'] ) && $options['txt_comment'] != '' )
-			$txt_comment = $options['txt_comment'];
+		if ( isset( $options['txt_comment'] ) && $options['txt_comment'] != '' ) {
+					$txt_comment = $options['txt_comment'];
+		}
 
-		if ( isset( $options['txt_name'] ) && $options['txt_name'] != '' )
-			$txt_name = $options['txt_name'];
+		if ( isset( $options['txt_name'] ) && $options['txt_name'] != '' ) {
+					$txt_name = $options['txt_name'];
+		}
 
-		if ( isset( $options['txt_email'] ) && $options['txt_email'] != '' )
-			$txt_email = $options['txt_email'];
+		if ( isset( $options['txt_email'] ) && $options['txt_email'] != '' ) {
+					$txt_email = $options['txt_email'];
+		}
 
-		if ( isset( $options['txt_url'] ) && $options['txt_url'] != '' )
-			$txt_url = $options['txt_url'];
+		if ( isset( $options['txt_url'] ) && $options['txt_url'] != '' ) {
+					$txt_url = $options['txt_url'];
+		}
 
 		/* Module output starts here */
 			
@@ -1113,9 +1119,11 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 							</form>
 						</div><!-- #respond -->
 
-					<?php else : 
+					<?php else {
+	: 
 
 						global $commenter;
+}
 						comment_form( array(
 							'label_submit' => $txt_submit_comment,
 							'cancel_reply_link' => 'cancel',

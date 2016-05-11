@@ -19,7 +19,7 @@ function dslc_perf_settings_init() {
 
 				'section' => 'dslc_plugin_options_performance',
 				'label' => __( 'Font Subsets', 'live-composer-page-builder' ),
-				'std' => array( 'latin', 'latin-ext', 'cyrillic', 'cyrillic-ext' ),
+				'std' => array('latin', 'latin-ext', 'cyrillic', 'cyrillic-ext'),
 				'type' => 'checkbox',
 				'descr' => __( 'Which font subsets should be loaded.', 'live-composer-page-builder' ),
 				'choices' => array(

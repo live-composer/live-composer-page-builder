@@ -180,14 +180,16 @@ function dslc_ajax_add_module( $atts ) {
 		// The ID of the module to add
 		$module_id = $_POST['dslc_module_id'];
 		$post_id = $_POST['dslc_post_id'];
-		if ( isset( $_POST['dslc_preload_preset'] ) && $_POST['dslc_preload_preset'] == 'enabled' )
-			$preload_preset = 'enabled';
-		else
-			$preload_preset = 'disabled';
+		if ( isset( $_POST['dslc_preload_preset'] ) && $_POST['dslc_preload_preset'] == 'enabled' ) {
+					$preload_preset = 'enabled';
+		} else {
+					$preload_preset = 'disabled';
+		}
 
 		// If post ID is not numberic stop execution
-		if ( ! is_numeric( $post_id ) )
-			return;
+		if ( ! is_numeric( $post_id ) ) {
+					return;
+		}
 
 		/**
 		 * The instance ID for this specific module
@@ -227,8 +229,9 @@ function dslc_ajax_add_module( $atts ) {
 		}
 
 		// If module instance ID not numeric stop execution
-		if ( ! is_numeric( $module_instance_id ) )
-			return;
+		if ( ! is_numeric( $module_instance_id ) ) {
+					return;
+		}
 
 		// Instanciate the module class
 		$module_instance = new $module_id();
@@ -247,8 +250,9 @@ function dslc_ajax_add_module( $atts ) {
 		ob_start();
 
 		// Load preset if there was no preset before
-		if ( $preload_preset == 'enabled' )
-			$module_settings = apply_filters( 'dslc_filter_settings', $module_settings );
+		if ( $preload_preset == 'enabled' ) {
+					$module_settings = apply_filters( 'dslc_filter_settings', $module_settings );
+		}
 
 		// Transform image ID to URL
 		global $dslc_var_image_option_bckp;
@@ -264,10 +268,11 @@ function dslc_ajax_add_module( $atts ) {
 		}
 
 		// Module size
-		if ( isset( $_POST['dslc_m_size'] ) )
-			$module_settings['dslc_m_size'] = $_POST['dslc_m_size'];
-		else
-			$module_settings['dslc_m_size'] = '12';
+		if ( isset( $_POST['dslc_m_size'] ) ) {
+					$module_settings['dslc_m_size'] = $_POST['dslc_m_size'];
+		} else {
+					$module_settings['dslc_m_size'] = '12';
+		}
 
 		// Output
 		$module_instance->output( $module_settings );
@@ -331,20 +336,23 @@ function dslc_ajax_display_module_options( $atts ) {
 
 			$curr_value = $module_option['std'];
 
-			if ( isset( $_POST[$module_option['id']] ) )
-				$curr_value = $_POST[$module_option['id']];
+			if ( isset( $_POST[$module_option['id']] ) ) {
+							$curr_value = $_POST[$module_option['id']];
+			}
 
 			/**
 			 * Visibility
 			 */
 
-			if ( isset( $module_option['visibility'] ) )
-				$visibility = false;
-			else
-				$visibility = true;
+			if ( isset( $module_option['visibility'] ) ) {
+							$visibility = false;
+			} else {
+							$visibility = true;
+			}
 
-			if ( $module_option['type'] == 'checkbox' && count( $module_option['choices'] ) < 1 )
-				$visibility = false;
+			if ( $module_option['type'] == 'checkbox' && count( $module_option['choices'] ) < 1 ) {
+							$visibility = false;
+			}
 
 			/**
 			 * Refresh on change
@@ -352,27 +360,30 @@ function dslc_ajax_display_module_options( $atts ) {
 
 			if ( isset( $module_option['refresh_on_change'] ) ) {
 
-				if ( $module_option['refresh_on_change'] )
-					$refresh_on_change = 'active';
-				else
-					$refresh_on_change = 'inactive';
+				if ( $module_option['refresh_on_change'] ) {
+									$refresh_on_change = 'active';
+				} else {
+									$refresh_on_change = 'inactive';
+				}
 
 			} else {
 				$refresh_on_change = 'active';
 			}
 
 			// Force refresh on change for images ( due to the URL -> ID change )
-			if ( $module_option['type'] == 'image' )
-				$refresh_on_change = 'active';
+			if ( $module_option['type'] == 'image' ) {
+							$refresh_on_change = 'active';
+			}
 
 			/**
 			 * Section (functionality and styling)
 			 */
 
-			if ( isset( $module_option['section'] ) )
-				$section = $module_option['section'];
-			else
-				$section = 'functionality';
+			if ( isset( $module_option['section'] ) ) {
+							$section = $module_option['section'];
+			} else {
+							$section = 'functionality';
+			}
 
 			/**
 			 * Tab
@@ -424,17 +435,22 @@ function dslc_ajax_display_module_options( $atts ) {
 			}
 
 			$ext = ' ';
-			if ( isset( $module_option['ext'] ) )
-				$ext = $module_option['ext'];
+			if ( isset( $module_option['ext'] ) ) {
+							$ext = $module_option['ext'];
+			}
 
 			$affect_on_change_append = '';
-			if ( isset( $module_option['affect_on_change_el'] ) && isset( $module_option['affect_on_change_rule'] ) )
-				$affect_on_change_append = 'data-affect-on-change-el="' . $module_option['affect_on_change_el'] . '" data-affect-on-change-rule="' . $module_option['affect_on_change_rule'] . '"';
+			if ( isset( $module_option['affect_on_change_el'] ) && isset( $module_option['affect_on_change_rule'] ) ) {
+							$affect_on_change_append = 'data-affect-on-change-el="' . $module_option['affect_on_change_el'] . '" data-affect-on-change-rule="' . $module_option['affect_on_change_rule'] . '"';
+			}
 
 
 			?>
 
-				<div class="dslca-module-edit-option dslca-module-edit-option-<?php echo $module_option['type']; ?> dslca-module-edit-option-<?php echo $module_option['id']; ?> <?php if ( ! $visibility ) echo 'dslca-module-edit-option-hidden'; ?>" data-id="<?php echo $module_option['id']; ?>" data-refresh-on-change="<?php echo $refresh_on_change; ?>" data-section="<?php echo $section; ?>" data-tab="<?php echo $tab_ID; ?>">
+				<div class="dslca-module-edit-option dslca-module-edit-option-<?php echo $module_option['type']; ?> dslca-module-edit-option-<?php echo $module_option['id']; ?> <?php if ( ! $visibility ) {
+	echo 'dslca-module-edit-option-hidden';
+}
+?>" data-id="<?php echo $module_option['id']; ?>" data-refresh-on-change="<?php echo $refresh_on_change; ?>" data-section="<?php echo $section; ?>" data-tab="<?php echo $tab_ID; ?>">
 
 					<?php if ( isset( $module_option['help'] ) ) : ?>
 						<div class="dslca-module-edit-field-ttip-content"><?php echo $module_option['help']; ?></div>
@@ -463,7 +479,10 @@ function dslc_ajax_display_module_options( $atts ) {
 
 						<select class="dslca-module-edit-field" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" <?php echo $affect_on_change_append ?> >
 							<?php foreach ( $module_option['choices'] as $select_option ) : ?>
-								<option value="<?php echo $select_option['value']; ?>" <?php if ( $curr_value == $select_option['value'] ) echo 'selected="selected"'; ?>><?php echo $select_option['label']; ?></option>
+								<option value="<?php echo $select_option['value']; ?>" <?php if ( $curr_value == $select_option['value'] ) {
+	echo 'selected="selected"';
+}
+?>><?php echo $select_option['label']; ?></option>
 							<?php endforeach; ?>
 						</select>
 
@@ -472,10 +491,11 @@ function dslc_ajax_display_module_options( $atts ) {
 						<?php
 
 							// Current Value Array
-							if ( empty( $curr_value ) )
-								$curr_value = array();
-							else
-								$curr_value = explode( ' ', trim( $curr_value ) );
+							if ( empty( $curr_value ) ) {
+															$curr_value = array();
+							} else {
+															$curr_value = explode( ' ', trim( $curr_value ) );
+							}
 
 							// Determined brakepoints
 							$chck_amount = count( $module_option['choices'] );
@@ -487,8 +507,16 @@ function dslc_ajax_display_module_options( $atts ) {
 						<div class="dslca-module-edit-option-checkbox-wrapper">
 							<?php foreach ( $module_option['choices'] as  $checkbox_option ) : $chck_count++; ?>
 								<div class="dslca-module-edit-option-checkbox-single">
-									<span class="dslca-module-edit-option-checkbox-hook"><span class="dslca-icon <?php if ( in_array( $checkbox_option['value'], $curr_value ) ) echo 'dslc-icon-check'; else echo 'dslc-icon-check-empty'; ?>"></span><?php echo $checkbox_option['label']; ?></span>
-									<input type="checkbox" class="dslca-module-edit-field dslca-module-edit-field-checkbox" data-id="<?php echo $module_option['id']; ?>" name="<?php echo $module_option['id']; ?>" value="<?php echo $checkbox_option['value']; ?>" <?php if ( in_array( $checkbox_option['value'], $curr_value ) ) echo 'checked="checked"'; ?> <?php echo $affect_on_change_append ?> />
+									<span class="dslca-module-edit-option-checkbox-hook"><span class="dslca-icon <?php if ( in_array( $checkbox_option['value'], $curr_value ) ) {
+	echo 'dslc-icon-check';
+} else {
+	echo 'dslc-icon-check-empty';
+}
+?>"></span><?php echo $checkbox_option['label']; ?></span>
+									<input type="checkbox" class="dslca-module-edit-field dslca-module-edit-field-checkbox" data-id="<?php echo $module_option['id']; ?>" name="<?php echo $module_option['id']; ?>" value="<?php echo $checkbox_option['value']; ?>" <?php if ( in_array( $checkbox_option['value'], $curr_value ) ) {
+	echo 'checked="checked"';
+}
+?> <?php echo $affect_on_change_append ?> />
 								</div><!-- .dslca-module-edit-option-checkbox-single -->
 								<?php if ( $chck_count == $chck_breakpoint ) { echo '<br>'; $chck_count = 0; } ?>
 							<?php endforeach; ?>
@@ -508,8 +536,9 @@ function dslc_ajax_display_module_options( $atts ) {
 
 						<?php
 							$default_value = false;
-							if ( isset( $module_option['std'] ) )
-								$default_value = $module_option['std'];
+							if ( isset( $module_option['std'] ) ) {
+															$default_value = $module_option['std'];
+							}
 						?>
 
 						<input type="text" class="dslca-module-edit-field dslca-module-edit-field-colorpicker" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" data-affect-on-change-el="<?php echo $module_option['affect_on_change_el']; ?>" data-affect-on-change-rule="<?php echo $module_option['affect_on_change_rule']; ?>" <?php if ( $default_value ) : ?> data-default="<?php echo $default_value; ?>" <?php endif; ?> />
@@ -522,18 +551,22 @@ function dslc_ajax_display_module_options( $atts ) {
 							$slider_max = 100;
 							$slider_increment = 1;
 
-							if ( isset( $module_option['min'] ) )
-								$slider_min = $module_option['min'];
+							if ( isset( $module_option['min'] ) ) {
+															$slider_min = $module_option['min'];
+							}
 
-							if ( isset( $module_option['max'] ) )
-								$slider_max = $module_option['max'];
+							if ( isset( $module_option['max'] ) ) {
+															$slider_max = $module_option['max'];
+							}
 
-							if ( isset( $module_option['increment'] ) )
-								$slider_increment = $module_option['increment'];
+							if ( isset( $module_option['increment'] ) ) {
+															$slider_increment = $module_option['increment'];
+							}
 
 							$numeric_option_type = dslc_get_option( 'lc_numeric_opt_type', 'dslc_plugin_options_other' );
-							if ( empty( $numeric_option_type ) )
-								$numeric_option_type = 'slider';
+							if ( empty( $numeric_option_type ) ) {
+															$numeric_option_type = 'slider';
+							}
 
 						?>
 
@@ -543,10 +576,13 @@ function dslc_ajax_display_module_options( $atts ) {
 							<span class="dslca-module-edit-field-slider-tooltip"><?php echo $curr_value; ?></span>
 							<input type="hidden" class="dslca-module-edit-field" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" data-affect-on-change-el="<?php echo $module_option['affect_on_change_el']; ?>" data-affect-on-change-rule="<?php echo $module_option['affect_on_change_rule']; ?>" data-min="<?php echo $slider_min; ?>" data-max="<?php echo $slider_max; ?>" data-ext="<?php echo $ext; ?>" data-increment="<?php echo $slider_increment; ?>" />
 
-						<?php else : ?>
+						<?php else {
+	: ?>
 
 							<div class="dslca-module-edit-field-numeric-wrap">
-								<input type="text" class="dslca-module-edit-field dslca-module-edit-field-numeric" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" data-starting-val="<?php echo $curr_value; ?>" data-ext="<?php echo $ext; ?>" <?php echo $affect_on_change_append ?> />
+								<input type="text" class="dslca-module-edit-field dslca-module-edit-field-numeric" name="<?php echo $module_option['id'];
+}
+?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" data-starting-val="<?php echo $curr_value; ?>" data-ext="<?php echo $ext; ?>" <?php echo $affect_on_change_append ?> />
 								<span class="dslca-module-edit-field-numeric-ext"><?php echo $module_option['ext']; ?></span>
 							</div>
 
@@ -572,26 +608,47 @@ function dslc_ajax_display_module_options( $atts ) {
 
 					<?php elseif ( $module_option['type'] == 'image' ) : ?>
 
-						<span class="dslca-module-edit-field-image-add-hook" <?php if ( $curr_value != '' ) echo 'style="display: none;"'; ?>><span class="dslca-icon dslc-icon-cloud-upload"></span><?php _e( 'Upload Image', 'live-composer-page-builder' ); ?></span>
-						<span class="dslca-module-edit-field-image-remove-hook" <?php if ( $curr_value == '' ) echo 'style="display: none;"'; ?>><span class="dslca-icon dslc-icon-remove"></span><?php _e( 'Remove Image', 'live-composer-page-builder' ); ?></span>
+						<span class="dslca-module-edit-field-image-add-hook" <?php if ( $curr_value != '' ) {
+	echo 'style="display: none;"';
+}
+?>><span class="dslca-icon dslc-icon-cloud-upload"></span><?php _e( 'Upload Image', 'live-composer-page-builder' ); ?></span>
+						<span class="dslca-module-edit-field-image-remove-hook" <?php if ( $curr_value == '' ) {
+	echo 'style="display: none;"';
+}
+?>><span class="dslca-icon dslc-icon-remove"></span><?php _e( 'Remove Image', 'live-composer-page-builder' ); ?></span>
 						<input type="hidden" class="dslca-module-edit-field dslca-module-edit-field-image" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" <?php echo $affect_on_change_append ?> />
 
 					<?php elseif ( $module_option['type'] == 'text_align' ) : ?>
 
 						<div class="dslca-module-edit-option-text-align-wrapper">
-							<div class="dslca-module-edit-option-text-align-single dslca-module-edit-option-text-align-hook <?php if ( $curr_value == 'inherit' ) echo 'dslca-active'; ?>" data-val="inherit">
+							<div class="dslca-module-edit-option-text-align-single dslca-module-edit-option-text-align-hook <?php if ( $curr_value == 'inherit' ) {
+	echo 'dslca-active';
+}
+?>" data-val="inherit">
 								<span class="dslca-icon dslc-icon-remove"></span>
 							</div>
-							<div class="dslca-module-edit-option-text-align-single dslca-module-edit-option-text-align-hook <?php if ( $curr_value == 'left' ) echo 'dslca-active'; ?>" data-val="left">
+							<div class="dslca-module-edit-option-text-align-single dslca-module-edit-option-text-align-hook <?php if ( $curr_value == 'left' ) {
+	echo 'dslca-active';
+}
+?>" data-val="left">
 								<span class="dslca-icon dslc-icon-align-left"></span>
 							</div>
-							<div class="dslca-module-edit-option-text-align-single dslca-module-edit-option-text-align-hook <?php if ( $curr_value == 'center' ) echo 'dslca-active'; ?>" data-val="center">
+							<div class="dslca-module-edit-option-text-align-single dslca-module-edit-option-text-align-hook <?php if ( $curr_value == 'center' ) {
+	echo 'dslca-active';
+}
+?>" data-val="center">
 								<span class="dslca-icon dslc-icon-align-center"></span>
 							</div>
-							<div class="dslca-module-edit-option-text-align-single dslca-module-edit-option-text-align-hook <?php if ( $curr_value == 'right' ) echo 'dslca-active'; ?>" data-val="right">
+							<div class="dslca-module-edit-option-text-align-single dslca-module-edit-option-text-align-hook <?php if ( $curr_value == 'right' ) {
+	echo 'dslca-active';
+}
+?>" data-val="right">
 								<span class="dslca-icon dslc-icon-align-right"></span>
 							</div>
-							<div class="dslca-module-edit-option-text-align-single dslca-module-edit-option-text-align-hook <?php if ( $curr_value == 'justify' ) echo 'dslca-active'; ?>" data-val="justify">
+							<div class="dslca-module-edit-option-text-align-single dslca-module-edit-option-text-align-hook <?php if ( $curr_value == 'justify' ) {
+	echo 'dslca-active';
+}
+?>" data-val="justify">
 								<span class="dslca-icon dslc-icon-align-justify"></span>
 							</div>
 						</div>
@@ -626,8 +683,16 @@ function dslc_ajax_display_module_options( $atts ) {
 						<div class="dslca-module-edit-option-box-shadow-wrapper">
 
 							<div class="dslca-module-edit-option-box-shadow-single">
-								<span class="dslca-module-edit-option-checkbox-hook"><?php _e( 'Inner', 'live-composer-page-builder' ); ?><span class="dslca-icon <?php if ( $box_shadow_inset_val == 'inset' ) echo 'dslc-icon-check'; else echo 'dslc-icon-check-empty'; ?>"></span></span>
-								<input type="checkbox" class="dslca-module-edit-field-checkbox dslca-module-edit-option-box-shadow-inset" <?php if ( $box_shadow_inset_val == 'inset' ) echo 'checked="checked"'; ?> />
+								<span class="dslca-module-edit-option-checkbox-hook"><?php _e( 'Inner', 'live-composer-page-builder' ); ?><span class="dslca-icon <?php if ( $box_shadow_inset_val == 'inset' ) {
+	echo 'dslc-icon-check';
+} else {
+	echo 'dslc-icon-check-empty';
+}
+?>"></span></span>
+								<input type="checkbox" class="dslca-module-edit-field-checkbox dslca-module-edit-option-box-shadow-inset" <?php if ( $box_shadow_inset_val == 'inset' ) {
+	echo 'checked="checked"';
+}
+?> />
 							</div>
 							<div class="dslca-module-edit-option-box-shadow-single">
 								<span><?php _e( 'Hor', 'live-composer-page-builder' ); ?></span><input class="dslca-module-edit-option-box-shadow-hor" step="0.1" type="number" value="<?php echo $box_shadow_hor_val; ?>" />
@@ -689,15 +754,21 @@ function dslc_ajax_display_module_options( $atts ) {
 
 						</div><!-- .dslca-module-edit-option-text-shadow-wrapper -->
 
-					<?php else : ?>
+					<?php else {
+	: ?>
 
 						<?php if ( has_action( 'dslc_custom_option_type_' . $module_option['type'] ) ) : ?>
 
-							<?php do_action( 'dslc_custom_option_type_' . $module_option['type'], $module_option, $curr_value, $affect_on_change_append ); ?>
+							<?php do_action( 'dslc_custom_option_type_' . $module_option['type'], $module_option, $curr_value, $affect_on_change_append );
+}
+?>
 
-						<?php else : ?>
+						<?php else {
+	: ?>
 
-							<input type="text" class="dslca-module-edit-field" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" data-starting-val="<?php echo $curr_value; ?>" <?php echo $affect_on_change_append ?> />
+							<input type="text" class="dslca-module-edit-field" name="<?php echo $module_option['id'];
+}
+?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" data-starting-val="<?php echo $curr_value; ?>" <?php echo $affect_on_change_append ?> />
 
 						<?php endif; ?>
 
@@ -769,15 +840,17 @@ function dslc_ajax_save_composer( $atts ) {
 		$post_id = $_POST['dslc_post_id'];
 
 		// Add/update the post/page with the composer code
-		if ( update_post_meta( $post_id, 'dslc_code', $composer_code ) )
-			$response['status'] = 'success';
-		else
-			$response['status'] = 'failed';
+		if ( update_post_meta( $post_id, 'dslc_code', $composer_code ) ) {
+					$response['status'] = 'success';
+		} else {
+					$response['status'] = 'failed';
+		}
 
 		// Add/update the post/page with the content for search
 		// wp_kses_post – Sanitize content for allowed HTML tags for post content.
-		if ( update_post_meta( $post_id, 'dslc_content_for_search', wp_kses_post( $content_for_search ) ) )
-			$response['status'] = 'success';
+		if ( update_post_meta( $post_id, 'dslc_content_for_search', wp_kses_post( $content_for_search ) ) ) {
+					$response['status'] = 'success';
+		}
 
 		// Delete draft code
 		delete_post_meta( $post_id, 'dslc_code_draft' );
@@ -823,10 +896,11 @@ function dslc_ajax_save_draft_composer( $atts ) {
 		$post_id = $_POST['dslc_post_id'];
 
 		// Add/update the post/page with the composer code
-		if ( update_post_meta( $post_id, 'dslc_code_draft', $composer_code ) )
-			$response['status'] = 'success';
-		else
-			$response['status'] = 'failed';
+		if ( update_post_meta( $post_id, 'dslc_code_draft', $composer_code ) ) {
+					$response['status'] = 'success';
+		} else {
+					$response['status'] = 'failed';
+		}
 
 		// Encode response
 		$response_json = json_encode( $response );
@@ -959,10 +1033,11 @@ function dslc_ajax_save_template( $atts ) {
 		$templates = get_option( 'dslc_templates' );
 
 		// No templates = make empty array OR templates found = unserialize
-		if ( $templates === false )
-			$templates = array();
-		else
-			$templates = maybe_unserialize( $templates );
+		if ( $templates === false ) {
+					$templates = array();
+		} else {
+					$templates = maybe_unserialize( $templates );
+		}
 
 		// Append new template to templates array
 		$templates[$template_id] = array(
@@ -1207,10 +1282,11 @@ function dslc_ajax_save_preset() {
 		$module_id = stripslashes( $_POST['dslc_module_id'] );
 
 		// Save
-		if ( dslc_save_preset( $preset_name, $preset_code_raw, $module_id ) )
-			$response['status'] = 'success';
-		else
-			$response['status'] = 'error';
+		if ( dslc_save_preset( $preset_name, $preset_code_raw, $module_id ) ) {
+					$response['status'] = 'success';
+		} else {
+					$response['status'] = 'error';
+		}
 
 		// Encode response
 		$response_json = json_encode( $response );
