@@ -12,7 +12,7 @@ checks:
 
 tools:
   sensiolabs_security_checker: true
-  external_code_coverage: true
+  # external_code_coverage: true
   php_code_sniffer:
       config:
           # https://scrutinizer-ci.com/docs/tools/php/code-sniffer/standards
