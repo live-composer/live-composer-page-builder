@@ -26,7 +26,7 @@ function dslc_sc_notification( $atts, $content ) {
 	// Attributes
 	extract( shortcode_atts( array(
 		'color' => 'default',
-	), $atts));
+	), $atts ) );
 
 	// Return notifaction HTML
 	return '<div class="dslc-notification dslc-' . $color . '">' . $content . '<span class="dslc-notification-close"><span class="dslc-icon dslc-icon-remove-sign"></span></span></div>';
@@ -49,7 +49,7 @@ function dslc_sc_get_custom_field( $atts, $content ) {
 	extract( shortcode_atts( array(
 		'id' => false,
 		'post_id' => false,
-	), $atts));
+	), $atts ) );
 
 	// If no custom field ID return error message
 	if ( ! $id )
@@ -101,7 +101,7 @@ function dslc_sc_icon( $atts, $content ) {
 	// Attributes
 	extract( shortcode_atts( array(
 		'id' => false,
-	), $atts));
+	), $atts ) );
 
 	// If no ID return empty
 	if ( ! $id )
@@ -130,14 +130,14 @@ function dslc_sc_user_avatar( $atts, $content ) {
 		'size' => 100,
 		'url' => false,
 		'target' => '_self'
-	), $atts));
+	), $atts ) );
 
 	// If URL not supplied return avatar HTML without link
 	if ( ! $url ) {
 		return '<span class="dslc-sc-user-avatar">' . get_avatar( get_current_user_id(), $size ) . '</span>';
 	// If URL supplied wrap the avatar HTML in a link
 	} else {
-		return '<a href="' . $url . '" target="' . $target. '"><span class="dslc-sc-user-avatar">' . get_avatar( get_current_user_id(), $size ) . '</span></a>';
+		return '<a href="' . $url . '" target="' . $target . '"><span class="dslc-sc-user-avatar">' . get_avatar( get_current_user_id(), $size ) . '</span></a>';
 	}
 
 } add_shortcode( 'dslc_user_avatar', 'dslc_sc_user_avatar' );
@@ -157,11 +157,11 @@ function dslc_sc_category_description( $atts, $content ) {
 	// Attributes
 	extract( shortcode_atts( array(
 		'category_ID' => false,
-	), $atts));
+	), $atts ) );
 
 	// If category ID not supplied, get current category
 	if ( ! $category_ID ) {
-		$category_ID = get_query_var('cat');
+		$category_ID = get_query_var( 'cat' );
 	}
 
 	// Get category description

@@ -32,7 +32,7 @@ function dslc_testimonials_module_cpt() {
 
 	// With Front
 	$with_front = dslc_get_option( 'with_front', 'dslc_plugin_options_cpt_slugs' );
-	if ( empty ( $with_front )  ) $with_front = 'disabled';
+	if ( empty ( $with_front ) ) $with_front = 'disabled';
 	if ( $with_front == 'enabled' ) $with_front = true; else $with_front = false;
 
 	/**
@@ -58,8 +58,8 @@ function dslc_testimonials_module_cpt() {
 			'parent' => __( 'Parent Testimonial', 'live-composer-page-builder' ),
 		),
 		'public' => true,
-		'rewrite' => array( 'slug' => dslc_get_option( 'testimonials_slug', 'dslc_plugin_options_cpt_slugs' ), 'with_front' => $with_front ),
-		'supports' => array( 'title', 'custom-fields', 'excerpt', 'editor', 'author', 'thumbnail' ),
+		'rewrite' => array('slug' => dslc_get_option( 'testimonials_slug', 'dslc_plugin_options_cpt_slugs' ), 'with_front' => $with_front),
+		'supports' => array('title', 'custom-fields', 'excerpt', 'editor', 'author', 'thumbnail'),
 		'capabilities' => array(
 			'publish_posts' => $capability,
 			'edit_posts' => $capability,

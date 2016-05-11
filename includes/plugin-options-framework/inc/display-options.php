@@ -59,7 +59,7 @@ function dslc_plugin_option_display_select( $option ) {
 			<?php echo $choice['value']; ?>
 			<?php echo $value; ?>
 			<option value="<?php echo $choice['value']; ?>" <?php if ( $choice['value'] == $value ) echo 'selected="selected"'; ?> >
-				<?php echo $choice['label'];?>
+				<?php echo $choice['label']; ?>
 			</option>
 
 		<?php endforeach; ?>

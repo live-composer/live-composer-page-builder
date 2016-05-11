@@ -41,7 +41,7 @@ class DSLC_Separator extends DSLC_Module {
 				),
 			),
 			array(
-				'label' => __( 'BG Color', 'live-composer-page-builder' ) ,
+				'label' => __( 'BG Color', 'live-composer-page-builder' ),
 				'id' => 'css_bg_color',
 				'std' => '',
 				'type' => 'color',
@@ -228,7 +228,7 @@ class DSLC_Separator extends DSLC_Module {
 				'ext' => 'px',
 			),
 			array(
-				'label' => __( 'Color', 'live-composer-page-builder' ) ,
+				'label' => __( 'Color', 'live-composer-page-builder' ),
 				'id' => 'css_border_color',
 				'std' => '#ededed',
 				'type' => 'color',
@@ -238,7 +238,7 @@ class DSLC_Separator extends DSLC_Module {
 				'section' => 'styling',
 			),
 			array(
-				'label' => __( 'Height', 'live-composer-page-builder' ) ,
+				'label' => __( 'Height', 'live-composer-page-builder' ),
 				'id' => 'height',
 				'std' => '25',
 				'type' => 'slider',
@@ -251,32 +251,32 @@ class DSLC_Separator extends DSLC_Module {
 				'section' => 'styling',
 			),
 			array(
-				'label' => __( 'Style', 'live-composer-page-builder' ) ,
+				'label' => __( 'Style', 'live-composer-page-builder' ),
 				'id' => 'style',
 				'std' => 'solid',
 				'type' => 'select',
 				'choices' => array(
 					array(
-						'label' => __( 'Invisible', 'live-composer-page-builder' ) ,
+						'label' => __( 'Invisible', 'live-composer-page-builder' ),
 						'value' => 'invisible'
 					),
 					array(
-						'label' => __( 'Solid', 'live-composer-page-builder' ) ,
+						'label' => __( 'Solid', 'live-composer-page-builder' ),
 						'value' => 'solid'
 					),
 					array(
-						'label' => __( 'Dashed', 'live-composer-page-builder' ) ,
+						'label' => __( 'Dashed', 'live-composer-page-builder' ),
 						'value' => 'dashed'
 					),
 					array(
-						'label' => __( 'Dotted', 'live-composer-page-builder' ) ,
+						'label' => __( 'Dotted', 'live-composer-page-builder' ),
 						'value' => 'dotted'
 					),
 				),
 				'section' => 'styling',
 			),
 			array(
-				'label' => __( 'Thickness', 'live-composer-page-builder' ) ,
+				'label' => __( 'Thickness', 'live-composer-page-builder' ),
 				'id' => 'thickness',
 				'std' => '1',
 				'type' => 'slider',
@@ -294,17 +294,17 @@ class DSLC_Separator extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( 'Responsive Styling', 'live-composer-page-builder' ) ,
+				'label' => __( 'Responsive Styling', 'live-composer-page-builder' ),
 				'id' => 'css_res_t',
 				'std' => 'disabled',
 				'type' => 'select',
 				'choices' => array(
 					array(
-						'label' => __( 'Disabled', 'live-composer-page-builder' ) ,
+						'label' => __( 'Disabled', 'live-composer-page-builder' ),
 						'value' => 'disabled'
 					),
 					array(
-						'label' => __( 'Enabled', 'live-composer-page-builder' ) ,
+						'label' => __( 'Enabled', 'live-composer-page-builder' ),
 						'value' => 'enabled'
 					),
 				),
@@ -312,7 +312,7 @@ class DSLC_Separator extends DSLC_Module {
 				'tab' => __( 'tablet', 'live-composer-page-builder' ),
 			),
 			array(
-				'label' => __( 'Height', 'live-composer-page-builder' ) ,
+				'label' => __( 'Height', 'live-composer-page-builder' ),
 				'id' => 'res_t_height',
 				'std' => '25',
 				'type' => 'slider',
@@ -331,17 +331,17 @@ class DSLC_Separator extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( 'Responsive Styling', 'live-composer-page-builder' ) ,
+				'label' => __( 'Responsive Styling', 'live-composer-page-builder' ),
 				'id' => 'css_res_p',
 				'std' => 'disabled',
 				'type' => 'select',
 				'choices' => array(
 					array(
-						'label' => __( 'Disabled', 'live-composer-page-builder' ) ,
+						'label' => __( 'Disabled', 'live-composer-page-builder' ),
 						'value' => 'disabled'
 					),
 					array(
-						'label' => __( 'Enabled', 'live-composer-page-builder' ) ,
+						'label' => __( 'Enabled', 'live-composer-page-builder' ),
 						'value' => 'enabled'
 					),
 				),
@@ -349,7 +349,7 @@ class DSLC_Separator extends DSLC_Module {
 				'tab' => __( 'phone', 'live-composer-page-builder' ),
 			),
 			array(
-				'label' => __( 'Height', 'live-composer-page-builder' ) ,
+				'label' => __( 'Height', 'live-composer-page-builder' ),
 				'id' => 'res_p_height',
 				'std' => '25',
 				'type' => 'slider',
@@ -365,7 +365,7 @@ class DSLC_Separator extends DSLC_Module {
 
 		);
 
-		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array( 'hover_opts' => false ) ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array('hover_opts' => false) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		return apply_filters( 'dslc_module_options', $dslc_options, $this->module_id );

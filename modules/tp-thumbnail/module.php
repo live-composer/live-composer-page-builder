@@ -306,7 +306,7 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 
 		);
 
-		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array( 'hover_opts' => false ) ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array('hover_opts' => false) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		return apply_filters( 'dslc_module_options', $dslc_options, $this->module_id );
@@ -347,7 +347,7 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 
 			}
 
-			if ( get_post_type( $post_id ) == 'dslc_templates' || ( defined('DOING_AJAX') && DOING_AJAX ) ) :
+			if ( get_post_type( $post_id ) == 'dslc_templates' || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) :
 				if ( has_post_thumbnail( $post_id ) ) :
 					?><div class="dslc-tp-thumbnail"><?php
 						if ( $manual_resize ) : ?>

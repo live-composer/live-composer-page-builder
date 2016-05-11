@@ -168,7 +168,7 @@ class DSLC_Downloads extends DSLC_Module {
 				'id' => 'columns',
 				'std' => '3',
 				'type' => 'select',
-				'choices' => $this->shared_options('posts_per_row_choices'),
+				'choices' => $this->shared_options( 'posts_per_row_choices' ),
 			),
 			array(
 				'label' => __( 'Order By', 'live-composer-page-builder' ),
@@ -1989,13 +1989,13 @@ class DSLC_Downloads extends DSLC_Module {
 
 		);
 
-		$dslc_options = array_merge( $dslc_options, $this->shared_options('carousel_options') );
-		$dslc_options = array_merge( $dslc_options, $this->shared_options('heading_options') );
-		$dslc_options = array_merge( $dslc_options, $this->shared_options('filters_options') );
-		$dslc_options = array_merge( $dslc_options, $this->shared_options('carousel_arrows_options') );
-		$dslc_options = array_merge( $dslc_options, $this->shared_options('carousel_circles_options') );
-		$dslc_options = array_merge( $dslc_options, $this->shared_options('pagination_options') );
-		$dslc_options = array_merge( $dslc_options, $this->shared_options('animation_options') );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'carousel_options' ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'heading_options' ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'filters_options' ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'carousel_arrows_options' ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'carousel_circles_options' ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'pagination_options' ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options' ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		return apply_filters( 'dslc_module_options', $dslc_options, $this->module_id );
@@ -2027,7 +2027,7 @@ class DSLC_Downloads extends DSLC_Module {
 
 			if ( ! isset( $options['excerpt_length'] ) ) $options['excerpt_length'] = 20;
 
-			if( is_front_page() ) { $paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1; } else { $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1; }
+			if ( is_front_page() ) { $paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1; } else { $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1; }
 
 			// Fix for pagination from other modules affecting this one when pag disabled
 			if ( $options['pagination_type'] == 'disabled' ) $paged = 1;
@@ -2049,13 +2049,13 @@ class DSLC_Downloads extends DSLC_Module {
 				$args['offset'] = $query_offset;
 			}
 
-			if ( defined('DOING_AJAX') && DOING_AJAX ) {
-				$args['post_status'] = array( 'publish', 'private' );
+			if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+				$args['post_status'] = array('publish', 'private');
 			}
 
 			if ( isset( $options['categories'] ) && $options['categories'] != '' ) {
 
-				$cats_array = explode( ' ', trim( $options['categories'] ));
+				$cats_array = explode( ' ', trim( $options['categories'] ) );
 
 				$args['tax_query'] = array(
 					array(
@@ -2095,7 +2095,7 @@ class DSLC_Downloads extends DSLC_Module {
 			// Author archive page
 			if ( is_author() && $options['query_alter'] == 'enabled' ) {
 				global $authordata;
-				$args['author__in'] = array( $authordata->data->ID );
+				$args['author__in'] = array($authordata->data->ID);
 			}
 
 			// Do the query
@@ -2245,7 +2245,7 @@ class DSLC_Downloads extends DSLC_Module {
 
 										$post_cats = get_the_terms( get_the_ID(), 'dslc_downloads_cats' );
 										if ( ! empty( $post_cats ) ) {
-											foreach( $post_cats as $post_cat ) {
+											foreach ( $post_cats as $post_cat ) {
 												$cats_array[$post_cat->slug] = $post_cat->name;
 											}
 										}
@@ -2336,7 +2336,7 @@ class DSLC_Downloads extends DSLC_Module {
 							$post_cats = get_the_terms( get_the_ID(), 'dslc_downloads_cats' );
 							$post_cats_data = '';
 							if ( ! empty( $post_cats ) ) {
-								foreach( $post_cats as $post_cat ) {
+								foreach ( $post_cats as $post_cat ) {
 									$post_cats_data .= $post_cat->slug . ' ';
 								}
 							}
@@ -2404,7 +2404,7 @@ class DSLC_Downloads extends DSLC_Module {
 												<?php endif; ?>
 											</div><!-- .dslc-download-thumb-inner -->
 
-											<?php if ( ( $options['main_location'] == 'inside' || $options['main_location'] == 'inside_visible' ) &&  ( $post_elements == 'all' || in_array( 'title', $post_elements ) || in_array( 'tags', $post_elements ) || in_array( 'excerpt', $post_elements ) || in_array( 'button', $post_elements ) || in_array( 'count', $post_elements ) ) ) : ?>
+											<?php if ( ( $options['main_location'] == 'inside' || $options['main_location'] == 'inside_visible' ) && ( $post_elements == 'all' || in_array( 'title', $post_elements ) || in_array( 'tags', $post_elements ) || in_array( 'excerpt', $post_elements ) || in_array( 'button', $post_elements ) || in_array( 'count', $post_elements ) ) ) : ?>
 
 												<div class="dslc-post-main dslc-download-main <?php if ( $options['main_location'] == 'inside_visible' ) echo 'dslc-download-main-visible'; ?>">
 
@@ -2497,7 +2497,7 @@ class DSLC_Downloads extends DSLC_Module {
 
 								<?php endif; ?>
 
-								<?php if ( $options['main_location'] == 'bellow' &&  ( $post_elements == 'all' || in_array( 'title', $post_elements ) || in_array( 'tags', $post_elements ) || in_array( 'excerpt', $post_elements ) || in_array( 'button', $post_elements ) || in_array( 'count', $post_elements ) ) ) : ?>
+								<?php if ( $options['main_location'] == 'bellow' && ( $post_elements == 'all' || in_array( 'title', $post_elements ) || in_array( 'tags', $post_elements ) || in_array( 'excerpt', $post_elements ) || in_array( 'button', $post_elements ) || in_array( 'count', $post_elements ) ) ) : ?>
 
 									<div class="dslc-post-main dslc-download-main">
 
@@ -2614,9 +2614,9 @@ class DSLC_Downloads extends DSLC_Module {
 			if ( isset( $options['pagination_type'] ) && $options['pagination_type'] != 'disabled' ) {
 				$num_pages = $dslc_query->max_num_pages;
 				if ( $options['offset'] > 0 ) {
-					$num_pages = ceil ( ( $dslc_query->found_posts - $options['offset'] ) / $options['amount'] );
+					$num_pages = ceil( ( $dslc_query->found_posts - $options['offset'] ) / $options['amount'] );
 				}
-				dslc_post_pagination( array( 'pages' => $num_pages, 'type' => $options['pagination_type'] ) );
+				dslc_post_pagination( array('pages' => $num_pages, 'type' => $options['pagination_type']) );
 			}
 
 			wp_reset_postdata();

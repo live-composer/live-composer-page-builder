@@ -1413,12 +1413,12 @@ class DSLC_Navigation extends DSLC_Module {
 					?>
 					<div class="dslc-navigation dslc-navigation-sub-position-<?php echo $options['css_subnav_position']; ?> dslc-navigation-res-t-<?php echo $options['css_res_t']; ?> dslc-navigation-res-p-<?php echo $options['css_res_p']; ?> dslc-navigation-orientation-<?php echo $options['nav_orientation']; ?>">
 						<div class="dslc-navigation-inner">
-							<?php wp_nav_menu( array( 'theme_location' => $options['location'] ) ); ?>
+							<?php wp_nav_menu( array('theme_location' => $options['location']) ); ?>
 						</div>
 					</div>
 					<div class="dslc-mobile-navigation dslc-navigation-res-t-<?php echo $options['css_res_t']; ?>  dslc-navigation-res-p-<?php echo $options['css_res_p']; ?>">
 						<?php
-							if( has_nav_menu( $options['location'] ) ) {
+							if ( has_nav_menu( $options['location'] ) ) {
 
 								$mobile_nav_output = '';
 								$mobile_nav_output .= '<select>';
@@ -1428,16 +1428,16 @@ class DSLC_Navigation extends DSLC_Module {
 
 									$locations = get_nav_menu_locations();
 									$menu = wp_get_nav_menu_object( $locations[$options['location']] );
-									$menu_items = wp_get_nav_menu_items($menu->term_id);
+									$menu_items = wp_get_nav_menu_items( $menu->term_id );
 										
 									foreach ( $menu_items as $key => $menu_item ) {
 										$title = $menu_item->title;
 										$url = $menu_item->url;
 										$nav_selected = '';
-										if($menu_item->post_parent !== 0){
-											$mobile_nav_output .= '<option value="'.$url.'" '.$nav_selected.'> - '.$title.'</option>';
-										}else{
-											$mobile_nav_output .= '<option value="'.$url.'" '.$nav_selected.'>'.$title.'</option>';
+										if ( $menu_item->post_parent !== 0 ) {
+											$mobile_nav_output .= '<option value="' . $url . '" ' . $nav_selected . '> - ' . $title . '</option>';
+										} else {
+											$mobile_nav_output .= '<option value="' . $url . '" ' . $nav_selected . '>' . $title . '</option>';
 										}
 									}
 

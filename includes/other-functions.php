@@ -10,7 +10,7 @@
  * dslc_get_attachment_alt ( Returnt he ALT attribute for an attachment )
  */
 
-if( ! class_exists('DSLC_Aq_Resize') ) {
+if ( ! class_exists( 'DSLC_Aq_Resize' ) ) {
 
 	/**
 	 * Image resizing class
@@ -38,7 +38,7 @@ if( ! class_exists('DSLC_Aq_Resize') ) {
 		 * For your custom default usage you may want to initialize an Aq_Resize object by yourself and then have own defaults
 		 */
 		static public function getInstance() {
-			if(self::$instance == null) {
+			if ( self::$instance == null ) {
 				self::$instance = new self;
 			}
 
@@ -68,11 +68,11 @@ if( ! class_exists('DSLC_Aq_Resize') ) {
 
 			/* if the $url scheme differs from $upload_url scheme, make them match
 				if the schemes differe, images don't show up. */
-			if(!strncmp($url,$https_prefix,strlen($https_prefix))){ //if url begins with https:// make $upload_url begin with https:// as well
-				$upload_url = str_replace($http_prefix,$https_prefix,$upload_url);
+			if ( ! strncmp( $url, $https_prefix, strlen( $https_prefix ) ) ) { //if url begins with https:// make $upload_url begin with https:// as well
+				$upload_url = str_replace( $http_prefix, $https_prefix, $upload_url );
 			}
-			elseif(!strncmp($url,$http_prefix,strlen($http_prefix))){ //if url begins with http:// make $upload_url begin with http:// as well
-				$upload_url = str_replace($https_prefix,$http_prefix,$upload_url);
+			elseif ( ! strncmp( $url, $http_prefix, strlen( $http_prefix ) ) ) { //if url begins with http:// make $upload_url begin with http:// as well
+				$upload_url = str_replace( $https_prefix, $http_prefix, $upload_url );
 			}
 
 
@@ -136,7 +136,7 @@ if( ! class_exists('DSLC_Aq_Resize') ) {
 			}
 
 			// Okay, leave the ship.
-			if ( true === $upscale ) remove_filter( 'image_resize_dimensions', array( $this, 'aq_upscale' ) );
+			if ( true === $upscale ) remove_filter( 'image_resize_dimensions', array($this, 'aq_upscale') );
 
 			// Return the output.
 			if ( $single ) {
@@ -144,7 +144,7 @@ if( ! class_exists('DSLC_Aq_Resize') ) {
 				$image = $img_url;
 			} else {
 				// array return.
-				$image = array (
+				$image = array(
 					0 => $img_url,
 					1 => $dst_w,
 					2 => $dst_h
@@ -181,7 +181,7 @@ if( ! class_exists('DSLC_Aq_Resize') ) {
 			$s_x = floor( ( $orig_w - $crop_w ) / 2 );
 			$s_y = floor( ( $orig_h - $crop_h ) / 2 );
 
-			return array( 0, 0, (int) $s_x, (int) $s_y, (int) $new_w, (int) $new_h, (int) $crop_w, (int) $crop_h );
+			return array(0, 0, (int) $s_x, (int) $s_y, (int) $new_w, (int) $new_h, (int) $crop_w, (int) $crop_h);
 		}
 
 	}
@@ -189,7 +189,7 @@ if( ! class_exists('DSLC_Aq_Resize') ) {
 }
 
 
-if ( ! function_exists('dslc_aq_resize') ) {
+if ( ! function_exists( 'dslc_aq_resize' ) ) {
 
 	/**
 	 * Resize an image using DSLC_Aq_Resize Class
@@ -207,7 +207,7 @@ if ( ! function_exists('dslc_aq_resize') ) {
 	 */
 	function dslc_aq_resize( $url, $width = null, $height = null, $crop = null, $single = true, $upscale = false ) {
 
-		 if( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'photon' ) ) {
+		 if ( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'photon' ) ) {
 
 			$args = array(
 				'resize' => "$width,$height"
@@ -215,7 +215,7 @@ if ( ! function_exists('dslc_aq_resize') ) {
 			if ( $single == true ) {
 				return jetpack_photon_url( $url, $args );
 			} else {
-				$image = array (
+				$image = array(
 					0 => $img_url,
 					1 => $width,
 					2 => $height
@@ -294,7 +294,7 @@ function dslc_get_social_count( $post_ID = false, $refresh_in = 3600 ) {
 		$pinterest_get = wp_remote_get( 'http://api.pinterest.com/v1/urls/count.json?url=' . $the_url );
 		$pinterest_count = 0;
 		if ( is_array( $pinterest_get ) ) {
-			$pinterest_get_body = json_decode( preg_replace('/^receiveCount\((.*)\)$/', "\\1", $pinterest_get['body'] ) );
+			$pinterest_get_body = json_decode( preg_replace( '/^receiveCount\((.*)\)$/', "\\1", $pinterest_get['body'] ) );
 			if ( isset( $pinterest_get_body->count ) ) {
 				$pinterest_count = $pinterest_get_body->count;
 			} else {
@@ -344,7 +344,7 @@ function dslc_icons_current_set( $icon = false ) {
 
 
 	// If there is an icon set by that name return it
-	if ( isset( $dslc_var_icons[ $icon_set ] ) ) {
+	if ( isset( $dslc_var_icons[$icon_set] ) ) {
 		return $icon_set;
 	// Otherwise return the default
 	} else {
@@ -364,7 +364,7 @@ function dslc_icons_current_set( $icon = false ) {
 function dslc_get_attachment_alt( $attachment_ID ) {
 
 	// Get ALT
-	$thumb_alt = trim( strip_tags( get_post_meta( $attachment_ID, '_wp_attachment_image_alt', true) ) );
+	$thumb_alt = trim( strip_tags( get_post_meta( $attachment_ID, '_wp_attachment_image_alt', true ) ) );
 
 	// No ALT supplied get attachment info
 	if ( empty( $thumb_alt ) )
@@ -372,11 +372,11 @@ function dslc_get_attachment_alt( $attachment_ID ) {
 
 	// Use caption if no ALT supplied
 	if ( empty( $thumb_alt ) )
-		$thumb_alt = trim(strip_tags( $attachment->post_excerpt ));
+		$thumb_alt = trim( strip_tags( $attachment->post_excerpt ) );
 
 	// Use title if no caption supplied either
 	if ( empty( $thumb_alt ) )
-		$thumb_alt = trim(strip_tags( $attachment->post_title ));
+		$thumb_alt = trim( strip_tags( $attachment->post_title ) );
 
 	// Return ALT
 	return esc_attr( $thumb_alt );
@@ -390,24 +390,24 @@ function dslc_get_attachment_alt( $attachment_ID ) {
  */
 function dslc_dismiss_notice() {
 	// Verify nonce
-	if ( !wp_verify_nonce( $_REQUEST['nonce'], "dslc_". $_REQUEST['notice_id'] . "_nonce")) {
-		wp_die("No naughty business please");
+	if ( ! wp_verify_nonce( $_REQUEST['nonce'], "dslc_" . $_REQUEST['notice_id'] . "_nonce" ) ) {
+		wp_die( "No naughty business please" );
 	}
 
 	// Check access permissions
-	if ( !current_user_can( 'install_themes' ) ) {
-		wp_die('You do not have rights to do this');
+	if ( ! current_user_can( 'install_themes' ) ) {
+		wp_die( 'You do not have rights to do this' );
 	}
 
 	if ( $_REQUEST['notice_id'] ) {
-		$stored_notices = get_option('dslc_notices');
-		$stored_notices[get_current_user_id()][$_REQUEST['notice_id'].'_notice_dismissed'] = 1;
-		update_option('dslc_notices', $stored_notices);
+		$stored_notices = get_option( 'dslc_notices' );
+		$stored_notices[get_current_user_id()][$_REQUEST['notice_id'] . '_notice_dismissed'] = 1;
+		update_option( 'dslc_notices', $stored_notices );
 	}
 
 	wp_die();
 }
-add_action("wp_ajax_dslc_dismiss_notice", "dslc_dismiss_notice");
+add_action( "wp_ajax_dslc_dismiss_notice", "dslc_dismiss_notice" );
 
 /**
  * Inline JS to attach click action for disisable notices
@@ -417,7 +417,7 @@ add_action("wp_ajax_dslc_dismiss_notice", "dslc_dismiss_notice");
  * Call Ajax action to dismiss a particular admin notice
  */
 
-function dslc_adminjs_dismiss_notice(){ ?>
+function dslc_adminjs_dismiss_notice() { ?>
 	<script type="text/javascript">
 		jQuery(document).on( 'click', '.dslc-notice .notice-dismiss', function(event) {
 				var notice_id = event.target.parentNode.id;
@@ -444,12 +444,12 @@ add_action( 'admin_footer', 'dslc_adminjs_dismiss_notice' );
  * @param string   $notice_id Unique id of the notice
  * @return boolean  true if notice is being dismissed
  */
-function dslc_notice_dismissed($notice_id) {
-	$stored_notices = get_option('dslc_notices');
+function dslc_notice_dismissed( $notice_id ) {
+	$stored_notices = get_option( 'dslc_notices' );
 	$notice_dismissed = 0;
 	$usr_id = get_current_user_id();
 
-	if ( isset($stored_notices[$usr_id][$notice_id .'_notice_dismissed']) && $stored_notices[$usr_id][$notice_id .'_notice_dismissed'] = 1 ) {
+	if ( isset( $stored_notices[$usr_id][$notice_id . '_notice_dismissed'] ) && $stored_notices[$usr_id][$notice_id . '_notice_dismissed'] = 1 ) {
 		$notice_dismissed = 1;
 	}
 
@@ -464,8 +464,8 @@ function dslc_notice_dismissed($notice_id) {
  * @param string   $notice_id Unique id of the notice
  * @return string  nonce
  */
-function dslc_generate_notice_nonce($notice_id) {
-	$notice_nonce = wp_create_nonce('dslc_' . $notice_id . '_nonce');
+function dslc_generate_notice_nonce( $notice_id ) {
+	$notice_nonce = wp_create_nonce( 'dslc_' . $notice_id . '_nonce' );
 	return $notice_nonce;
 }
 

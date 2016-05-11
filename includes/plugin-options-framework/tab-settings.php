@@ -57,55 +57,55 @@
 			<a name="general"></a>
 			<div class="dslc-panel">
 					<?php do_settings_sections( 'dslc_plugin_options' ); ?>
-					<?php submit_button();?>
+					<?php submit_button(); ?>
 			</div>
 			<a name="performance"></a>
 			<a href="#dslc-top" class="dslc-scroll-back"><span class="dashicons dashicons-arrow-up-alt"></span> Top</a>
 			<div class="dslc-panel">
 					<?php do_settings_sections( 'dslc_plugin_options_performance' ); ?>
-					<?php submit_button();?>
+					<?php submit_button(); ?>
 			</div>
 			<a name="other"></a>
 			<a href="#dslc-top" class="dslc-scroll-back"><span class="dashicons dashicons-arrow-up-alt"></span> Top</a>
 			<div class="dslc-panel">
 					<?php do_settings_sections( 'dslc_plugin_options_other' ); ?>
-					<?php submit_button();?>
+					<?php submit_button(); ?>
 			</div>
 			<a name="navigation"></a>
 			<a href="#dslc-top" class="dslc-scroll-back"><span class="dashicons dashicons-arrow-up-alt"></span> Top</a>
 			<div class="dslc-panel">
 					<?php do_settings_sections( 'dslc_plugin_options_navigation_m' ); ?>
-					<?php submit_button();?>
+					<?php submit_button(); ?>
 			</div>
 			<a name="widgets"></a>
 			<a href="#dslc-top" class="dslc-scroll-back"><span class="dashicons dashicons-arrow-up-alt"></span> Top</a>
 			<div class="dslc-panel">
 					<?php do_settings_sections( 'dslc_plugin_options_widgets_m' ); ?>
-					<?php submit_button();?>
+					<?php submit_button(); ?>
 			</div>
 			<a name="access-control"></a>
 			<a href="#dslc-top" class="dslc-scroll-back"><span class="dashicons dashicons-arrow-up-alt"></span> Top</a>
 			<div class="dslc-panel">
 					<?php do_settings_sections( 'dslc_plugin_options_access_control' ); ?>
-					<?php submit_button();?>
+					<?php submit_button(); ?>
 			</div>
 			<a name="features-control"></a>
 			<a href="#dslc-top" class="dslc-scroll-back"><span class="dashicons dashicons-arrow-up-alt"></span> Top</a>
 			<div class="dslc-panel">
 					<?php do_settings_sections( 'dslc_plugin_options_features' ); ?>
-					<?php submit_button();?>
+					<?php submit_button(); ?>
 			</div>
 			<a name="archives"></a>
 			<a href="#dslc-top" class="dslc-scroll-back"><span class="dashicons dashicons-arrow-up-alt"></span> Top</a>
 			<div class="dslc-panel">
 					<?php do_settings_sections( 'dslc_plugin_options_archives' ); ?>
-					<?php submit_button();?>
+					<?php submit_button(); ?>
 			</div>
 			<a name="cpt-slugs"></a>
 			<a href="#dslc-top" class="dslc-scroll-back"><span class="dashicons dashicons-arrow-up-alt"></span> Top</a>
 			<div class="dslc-panel">
 					<?php do_settings_sections( 'dslc_plugin_options_cpt_slugs' ); ?>
-					<?php submit_button();?>
+					<?php submit_button(); ?>
 			</div>
 			<!-- </div> -->
 

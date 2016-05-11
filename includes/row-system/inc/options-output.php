@@ -148,14 +148,14 @@
 		if ( $atts ) {
 			foreach ( $dslc_var_row_options as $row_option ) {
 				if ( isset( $atts[$row_option['id']] ) )
-					$output .= '<input type="text" data-id="' . $row_option['id'] . '" value="'. $atts[$row_option['id']] .'" data-def="'. $atts[$row_option['id']] .'">';
+					$output .= '<input type="text" data-id="' . $row_option['id'] . '" value="' . $atts[$row_option['id']] . '" data-def="' . $atts[$row_option['id']] . '">';
 				else
-					$output .= '<input type="text" data-id="' . $row_option['id'] . '" value="'. $row_option['std'] .'" data-def="'. $row_option['std'] .'">';
+					$output .= '<input type="text" data-id="' . $row_option['id'] . '" value="' . $row_option['std'] . '" data-def="' . $row_option['std'] . '">';
 			}
 		} else {
 			foreach ( $dslc_var_row_options as $row_option ) {
 				if ( ! isset( $row_option['std'] ) ) $row_option['std'] = '';
-				$output .= '<input type="text" data-id="' . $row_option['id'] . '" value="'. $row_option['std'] .'">';
+				$output .= '<input type="text" data-id="' . $row_option['id'] . '" value="' . $row_option['std'] . '">';
 			}
 		}
 

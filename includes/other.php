@@ -39,7 +39,7 @@ function dslc_icons() {
 	global $dslc_var_icons;
 
 	$dslc_var_icons = array(
-		'fontawesome' => array(  "500px", "adjust", "adn", "align-center", "align-justify", "align-left", "align-right", "amazon", "ambulance", "anchor", "android", "angellist", "angle-down", "angle-left", "angle-right", "angle-up", "apple", "archive", "area-chart", "arrow-circle-left", "arrow-circle-right", "arrow-down", "arrow-left", "arrow-right", "arrow-up", "asterisk", "at", "automobile", "backward", "balance-scale", "ban-circle", "bank", "bar-chart", "barcode", "battery-0", "battery-1", "battery-2", "battery-3", "battery-4", "battery-empty", "battery-full", "battery-half", "battery-quarter", "battery-three-quarters", "beaker", "bed", "beer", "behance", "behance-square", "bell", "bell-alt", "bell-slash", "bell-slash-o", "bicycle", "binoculars", "birthday-cake", "bitbucket", "bitbucket-sign", "bitcoin", "black-tie", "bold", "bolt", "bomb", "book", "bookmark", "bookmark-empty", "briefcase", "btc", "bug", "building", "building", "bullhorn", "bullseye", "bus", "buysellads", "cab", "calculator", "calendar", "calendar-check-o", "calendar-empty", "calendar-minus-o", "calendar-plus-o", "calendar-times-o", "camera", "camera-retro", "car", "caret-down", "caret-left", "caret-right", "caret-square-left", "caret-up", "cart-arrow-down", "cart-plus", "cc", "cc-amex", "cc-diners-club", "cc-discover", "cc-jcb", "cc-mastercard", "cc-paypal", "cc-stripe", "cc-visa", "certificate", "check", "check-empty", "check-minus", "check-sign", "chevron-down", "chevron-left", "chevron-right", "chevron-sign-down", "chevron-sign-left", "chevron-sign-right", "chevron-sign-up", "chevron-up", "child", "chrome", "circle", "circle-arrow-down", "circle-arrow-left", "circle-arrow-right", "circle-arrow-up", "circle-blank", "circle-o-notch", "circle-thin", "clone", "cloud", "cloud-download", "cloud-upload", "cny", "code", "code-fork", "codepen", "coffee", "cog", "cogs", "collapse", "collapse-alt", "collapse-top", "columns", "comment", "comment-alt", "commenting", "commenting-o", "comments", "comments-alt", "compass", "connectdevelop", "contao", "copy", "copyright", "creative-commons", "credit-card", "crop", "css3", "cube", "cubes", "cut", "dashboard", "dashcube", "database", "delicious", "desktop", "deviantart", "diamond", "digg", "dollar", "dot-circle", "double-angle-down", "double-angle-left", "double-angle-right", "double-angle-up", "download", "download-alt", "dribbble", "dropbox", "drupal", "edit", "edit-sign", "eject", "ellipsis-horizontal", "ellipsis-vertical", "empire", "envelope", "envelope-alt", "envelope-square", "eraser", "eur", "euro", "exchange", "exclamation", "exclamation-sign", "expand", "expand-alt", "expeditedssl", "external-link", "external-link-sign", "eye-close", "eye-open", "eyedropper", "facebook", "facebook-official", "facebook-sign", "facetime-video", "fast-backward", "fast-forward", "fax", "female", "fighter-jet", "file", "file-alt", "file-archive-o", "file-audio-o", "file-code-o", "file-excel-o", "file-image-o", "file-movie-o", "file-pdf-o", "file-photo-o", "file-picture-o", "file-powerpoint-o", "file-sound-o", "file-text", "file-text-alt", "file-video-o", "file-word-o", "file-zip-o", "film", "filter", "fire", "fire-extinguisher", "firefox", "flag", "flag-alt", "flag-checkered", "flickr", "folder-close", "folder-close-alt", "folder-open", "folder-open-alt", "font", "fonticons", "food", "forumbee", "forward", "foursquare", "frown", "fullscreen", "futbol-o", "gamepad", "gbp", "ge", "gear", "gears", "get-pocket", "gg", "gg-circle", "gift", "git", "git-square", "github", "github-alt", "github-sign", "gittip", "glass", "globe", "google", "google-plus", "google-plus-sign", "google-wallet", "graduation-cap", "group", "h-sign", "hacker-news", "hand-down", "hand-grab-o", "hand-left", "hand-lizard-o", "hand-paper-o", "hand-peace-o", "hand-pointer-o", "hand-right", "hand-rock-o", "hand-scissors-o", "hand-spock-o", "hand-stop-o", "hand-up", "hdd", "header", "headphones", "heart", "heart-empty", "heartbeat", "history", "home", "hospital", "hotel (alias)", "hourglass", "hourglass-1", "hourglass-2", "hourglass-3", "hourglass-end", "hourglass-half", "hourglass-o", "hourglass-start", "houzz", "html5", "i-cursor", "ils", "inbox", "indent-left", "indent-right", "industry", "info", "info-sign", "inr", "instagram", "institution", "internet-explorer", "ioxhost", "italic", "joomla", "jpy", "jsfiddle", "key", "keyboard", "krw", "language", "laptop", "lastfm", "lastfm-square", "leaf", "leanpub", "legal", "lemon", "level-down", "level-up", "life-bouy", "life-ring", "life-saver", "lightbulb", "line-chart", "link", "linkedin", "linkedin-sign", "linux", "list", "list-alt", "list-ol", "list-ul", "location-arrow", "lock", "long-arrow-down", "long-arrow-left", "long-arrow-right", "long-arrow-up", "magic", "magnet", "mail-forward", "mail-reply", "mail-reply-all", "male", "map", "map-marker", "map-o", "map-pin", "map-signs", "mars", "mars-double", "mars-stroke", "mars-stroke-h", "mars-stroke-v", "maxcdn", "meanpath", "medium", "medkit", "meh", "mercury", "microphone", "microphone-off", "minus", "minus-sign", "minus-sign-alt", "mobile-phone", "money", "moon", "mortar-board", "motorcycle", "mouse-pointer", "move", "music", "neuter", "newspaper-o", "object-group", "object-ungroup", "odnoklassniki", "odnoklassniki-square", "off", "ok", "ok-circle", "ok-sign", "opencart", "openid", "opera", "optin-monster", "pagelines", "paint-brush", "paper-clip", "paper-plane", "paper-plane-o", "paperclip", "paragraph", "paste", "pause", "paw", "paypal", "pencil", "phone", "phone-sign", "picture", "pie-chart", "pied-piper", "pied-piper-alt", "pied-piper-square", "pinterest", "pinterest-p", "pinterest-sign", "plane", "play", "play-circle", "play-sign", "plug", "plus", "plus-sign", "plus-sign-alt", "power-off", "print", "pushpin", "puzzle-piece", "qq", "qrcode", "question", "question-sign", "quote-left", "quote-right", "ra", "random", "rebel", "recycle", "reddit", "reddit-square", "refresh", "registered", "remove", "remove-circle", "remove-sign", "renminbi", "renren", "reorder", "repeat", "reply", "reply-all", "resize-full", "resize-horizontal", "resize-small", "resize-vertical", "retweet", "road", "rocket", "rotate-left", "rotate-right", "rouble", "rss", "rss-sign", "rupee", "safari", "save", "screenshot", "search", "sellsy", "send", "send-o", "server", "share", "share-alt", "share-alt", "share-alt-square", "share-sign", "shield", "ship", "shirtsinbulk", "shopping-cart", "sign-blank", "signal", "signin", "signout", "simplybuilt", "sitemap", "skyatlas", "skype", "slack", "sliders", "slideshare", "smile", "sort", "sort-by-alphabet", "sort-by-alphabet-alt", "sort-by-attributes", "sort-by-attributes-alt", "sort-by-order", "sort-by-order-alt", "sort-down", "sort-up", "soundcloud", "space-shuttle", "spinner", "spoon", "spotify", "stack-exchange", "stackexchange", "star", "star-empty", "star-half", "star-half-empty", "star-half-full", "steam", "steam-square", "step-backward", "step-forward", "stethoscope", "sticky-note", "sticky-note-o", "stop", "street-view", "strikethrough", "stumbleupon", "stumbleupon-circle", "subscript", "subway", "suitcase", "sun", "superscript", "support", "table", "tablet", "tag", "tags", "tasks", "taxi", "television", "tencent-weibo", "terminal", "text-height", "text-width", "th", "th-large", "th-list", "thumbs-down", "thumbs-down-alt", "thumbs-up", "thumbs-up-alt", "ticket", "time", "tint", "toggle-off", "toggle-on", "trademark", "train", "transgender", "transgender-alt", "trash", "trash", "tree", "trello", "tripadvisor", "trophy", "truck", "tty", "tumblr", "tumblr-sign", "turkish-lira", "tv", "twitch", "twitter", "twitter-sign", "umbrella", "unchecked", "underline", "undo", "university", "unlink", "unlock", "unlock-alt", "upload", "upload-alt", "usd", "user", "user-md", "user-plus", "user-secret", "user-times", "venus", "venus-double", "venus-mars", "viacoin", "vimeo", "vimeo-square", "vine", "vk", "volume-down", "volume-off", "volume-up", "warning-sign", "wechat", "weibo", "weixin", "whatsapp", "wheelchair", "wifi", "wikipedia-w", "windows", "won", "wordpress", "wrench", "xing", "xing-sign", "y-combinator", "yahoo","yc", "yelp", "yen", "youtube", "youtube-play", "youtube-sign", "zoom-in", "zoom-out" ),
+		'fontawesome' => array("500px", "adjust", "adn", "align-center", "align-justify", "align-left", "align-right", "amazon", "ambulance", "anchor", "android", "angellist", "angle-down", "angle-left", "angle-right", "angle-up", "apple", "archive", "area-chart", "arrow-circle-left", "arrow-circle-right", "arrow-down", "arrow-left", "arrow-right", "arrow-up", "asterisk", "at", "automobile", "backward", "balance-scale", "ban-circle", "bank", "bar-chart", "barcode", "battery-0", "battery-1", "battery-2", "battery-3", "battery-4", "battery-empty", "battery-full", "battery-half", "battery-quarter", "battery-three-quarters", "beaker", "bed", "beer", "behance", "behance-square", "bell", "bell-alt", "bell-slash", "bell-slash-o", "bicycle", "binoculars", "birthday-cake", "bitbucket", "bitbucket-sign", "bitcoin", "black-tie", "bold", "bolt", "bomb", "book", "bookmark", "bookmark-empty", "briefcase", "btc", "bug", "building", "building", "bullhorn", "bullseye", "bus", "buysellads", "cab", "calculator", "calendar", "calendar-check-o", "calendar-empty", "calendar-minus-o", "calendar-plus-o", "calendar-times-o", "camera", "camera-retro", "car", "caret-down", "caret-left", "caret-right", "caret-square-left", "caret-up", "cart-arrow-down", "cart-plus", "cc", "cc-amex", "cc-diners-club", "cc-discover", "cc-jcb", "cc-mastercard", "cc-paypal", "cc-stripe", "cc-visa", "certificate", "check", "check-empty", "check-minus", "check-sign", "chevron-down", "chevron-left", "chevron-right", "chevron-sign-down", "chevron-sign-left", "chevron-sign-right", "chevron-sign-up", "chevron-up", "child", "chrome", "circle", "circle-arrow-down", "circle-arrow-left", "circle-arrow-right", "circle-arrow-up", "circle-blank", "circle-o-notch", "circle-thin", "clone", "cloud", "cloud-download", "cloud-upload", "cny", "code", "code-fork", "codepen", "coffee", "cog", "cogs", "collapse", "collapse-alt", "collapse-top", "columns", "comment", "comment-alt", "commenting", "commenting-o", "comments", "comments-alt", "compass", "connectdevelop", "contao", "copy", "copyright", "creative-commons", "credit-card", "crop", "css3", "cube", "cubes", "cut", "dashboard", "dashcube", "database", "delicious", "desktop", "deviantart", "diamond", "digg", "dollar", "dot-circle", "double-angle-down", "double-angle-left", "double-angle-right", "double-angle-up", "download", "download-alt", "dribbble", "dropbox", "drupal", "edit", "edit-sign", "eject", "ellipsis-horizontal", "ellipsis-vertical", "empire", "envelope", "envelope-alt", "envelope-square", "eraser", "eur", "euro", "exchange", "exclamation", "exclamation-sign", "expand", "expand-alt", "expeditedssl", "external-link", "external-link-sign", "eye-close", "eye-open", "eyedropper", "facebook", "facebook-official", "facebook-sign", "facetime-video", "fast-backward", "fast-forward", "fax", "female", "fighter-jet", "file", "file-alt", "file-archive-o", "file-audio-o", "file-code-o", "file-excel-o", "file-image-o", "file-movie-o", "file-pdf-o", "file-photo-o", "file-picture-o", "file-powerpoint-o", "file-sound-o", "file-text", "file-text-alt", "file-video-o", "file-word-o", "file-zip-o", "film", "filter", "fire", "fire-extinguisher", "firefox", "flag", "flag-alt", "flag-checkered", "flickr", "folder-close", "folder-close-alt", "folder-open", "folder-open-alt", "font", "fonticons", "food", "forumbee", "forward", "foursquare", "frown", "fullscreen", "futbol-o", "gamepad", "gbp", "ge", "gear", "gears", "get-pocket", "gg", "gg-circle", "gift", "git", "git-square", "github", "github-alt", "github-sign", "gittip", "glass", "globe", "google", "google-plus", "google-plus-sign", "google-wallet", "graduation-cap", "group", "h-sign", "hacker-news", "hand-down", "hand-grab-o", "hand-left", "hand-lizard-o", "hand-paper-o", "hand-peace-o", "hand-pointer-o", "hand-right", "hand-rock-o", "hand-scissors-o", "hand-spock-o", "hand-stop-o", "hand-up", "hdd", "header", "headphones", "heart", "heart-empty", "heartbeat", "history", "home", "hospital", "hotel (alias)", "hourglass", "hourglass-1", "hourglass-2", "hourglass-3", "hourglass-end", "hourglass-half", "hourglass-o", "hourglass-start", "houzz", "html5", "i-cursor", "ils", "inbox", "indent-left", "indent-right", "industry", "info", "info-sign", "inr", "instagram", "institution", "internet-explorer", "ioxhost", "italic", "joomla", "jpy", "jsfiddle", "key", "keyboard", "krw", "language", "laptop", "lastfm", "lastfm-square", "leaf", "leanpub", "legal", "lemon", "level-down", "level-up", "life-bouy", "life-ring", "life-saver", "lightbulb", "line-chart", "link", "linkedin", "linkedin-sign", "linux", "list", "list-alt", "list-ol", "list-ul", "location-arrow", "lock", "long-arrow-down", "long-arrow-left", "long-arrow-right", "long-arrow-up", "magic", "magnet", "mail-forward", "mail-reply", "mail-reply-all", "male", "map", "map-marker", "map-o", "map-pin", "map-signs", "mars", "mars-double", "mars-stroke", "mars-stroke-h", "mars-stroke-v", "maxcdn", "meanpath", "medium", "medkit", "meh", "mercury", "microphone", "microphone-off", "minus", "minus-sign", "minus-sign-alt", "mobile-phone", "money", "moon", "mortar-board", "motorcycle", "mouse-pointer", "move", "music", "neuter", "newspaper-o", "object-group", "object-ungroup", "odnoklassniki", "odnoklassniki-square", "off", "ok", "ok-circle", "ok-sign", "opencart", "openid", "opera", "optin-monster", "pagelines", "paint-brush", "paper-clip", "paper-plane", "paper-plane-o", "paperclip", "paragraph", "paste", "pause", "paw", "paypal", "pencil", "phone", "phone-sign", "picture", "pie-chart", "pied-piper", "pied-piper-alt", "pied-piper-square", "pinterest", "pinterest-p", "pinterest-sign", "plane", "play", "play-circle", "play-sign", "plug", "plus", "plus-sign", "plus-sign-alt", "power-off", "print", "pushpin", "puzzle-piece", "qq", "qrcode", "question", "question-sign", "quote-left", "quote-right", "ra", "random", "rebel", "recycle", "reddit", "reddit-square", "refresh", "registered", "remove", "remove-circle", "remove-sign", "renminbi", "renren", "reorder", "repeat", "reply", "reply-all", "resize-full", "resize-horizontal", "resize-small", "resize-vertical", "retweet", "road", "rocket", "rotate-left", "rotate-right", "rouble", "rss", "rss-sign", "rupee", "safari", "save", "screenshot", "search", "sellsy", "send", "send-o", "server", "share", "share-alt", "share-alt", "share-alt-square", "share-sign", "shield", "ship", "shirtsinbulk", "shopping-cart", "sign-blank", "signal", "signin", "signout", "simplybuilt", "sitemap", "skyatlas", "skype", "slack", "sliders", "slideshare", "smile", "sort", "sort-by-alphabet", "sort-by-alphabet-alt", "sort-by-attributes", "sort-by-attributes-alt", "sort-by-order", "sort-by-order-alt", "sort-down", "sort-up", "soundcloud", "space-shuttle", "spinner", "spoon", "spotify", "stack-exchange", "stackexchange", "star", "star-empty", "star-half", "star-half-empty", "star-half-full", "steam", "steam-square", "step-backward", "step-forward", "stethoscope", "sticky-note", "sticky-note-o", "stop", "street-view", "strikethrough", "stumbleupon", "stumbleupon-circle", "subscript", "subway", "suitcase", "sun", "superscript", "support", "table", "tablet", "tag", "tags", "tasks", "taxi", "television", "tencent-weibo", "terminal", "text-height", "text-width", "th", "th-large", "th-list", "thumbs-down", "thumbs-down-alt", "thumbs-up", "thumbs-up-alt", "ticket", "time", "tint", "toggle-off", "toggle-on", "trademark", "train", "transgender", "transgender-alt", "trash", "trash", "tree", "trello", "tripadvisor", "trophy", "truck", "tty", "tumblr", "tumblr-sign", "turkish-lira", "tv", "twitch", "twitter", "twitter-sign", "umbrella", "unchecked", "underline", "undo", "university", "unlink", "unlock", "unlock-alt", "upload", "upload-alt", "usd", "user", "user-md", "user-plus", "user-secret", "user-times", "venus", "venus-double", "venus-mars", "viacoin", "vimeo", "vimeo-square", "vine", "vk", "volume-down", "volume-off", "volume-up", "warning-sign", "wechat", "weibo", "weixin", "whatsapp", "wheelchair", "wifi", "wikipedia-w", "windows", "won", "wordpress", "wrench", "xing", "xing-sign", "y-combinator", "yahoo", "yc", "yelp", "yen", "youtube", "youtube-play", "youtube-sign", "zoom-in", "zoom-out"),
 	);
 
 	// Allow devs to alter available icons
@@ -67,16 +67,16 @@ function dslc_icons_modal() {
 
 		if ( $dslc_active && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 			// output list of icons
-			foreach ($dslc_var_icons as $key => $value) {
+			foreach ( $dslc_var_icons as $key => $value ) {
 
-				echo '<div class="dslca-modal-icons dslca-modal dslc-list-icons-'. $key .'" style="display:none;">';
+				echo '<div class="dslca-modal-icons dslca-modal dslc-list-icons-' . $key . '" style="display:none;">';
 					echo '<ul class="dslc-icons-grid">';
 
 					foreach ( $dslc_var_icons[$key] as $k => $v ) {
 						$icon_name = $v;
 						echo '<li class="icon-item">';
-							echo '<span class="icon-item_icon dslc-icon-'. $icon_name .'"></span>';
-							echo '<span class="icon-item_name">'. $icon_name .'</span>';
+							echo '<span class="icon-item_icon dslc-icon-' . $icon_name . '"></span>';
+							echo '<span class="icon-item_name">' . $icon_name . '</span>';
 						echo '</li>';
 					}
 
@@ -101,46 +101,46 @@ add_action( 'wp_footer', 'dslc_icons_modal' );
 
 function dslc_w3tc_admin_notice() {
 
-	if ( class_exists('W3_Root') ) {
+	if ( class_exists( 'W3_Root' ) ) {
 
-		$w3tc_config = w3_instance('W3_Config');
+		$w3tc_config = w3_instance( 'W3_Config' );
 
 		$screen = get_current_screen();
 		$current_parent_base = $screen->parent_base;
 
 		$notice_id = 'w3tc_wrong_settings';
 		$display_notice = false;
-		$notice_dismissed = dslc_notice_dismissed($notice_id);
-		$notice_nonce = dslc_generate_notice_nonce($notice_id);
+		$notice_dismissed = dslc_notice_dismissed( $notice_id );
+		$notice_nonce = dslc_generate_notice_nonce( $notice_id );
 
 		// Page Cache
 		// Don't cache pages for logged in users
-		$pgcache_reject_logged = $w3tc_config->get_boolean('pgcache.reject.logged');
+		$pgcache_reject_logged = $w3tc_config->get_boolean( 'pgcache.reject.logged' );
 
 		//Minify
-		$minify_reject_logged = $w3tc_config->get_boolean('minify.reject.logged');
+		$minify_reject_logged = $w3tc_config->get_boolean( 'minify.reject.logged' );
 
 		//Database cache
-		$dbcache_reject_logged = $w3tc_config->get_boolean('dbcache.reject.logged');
+		$dbcache_reject_logged = $w3tc_config->get_boolean( 'dbcache.reject.logged' );
 
-		if ( !$notice_dismissed && ( !$pgcache_reject_logged || !$minify_reject_logged || !$dbcache_reject_logged ) ) {
+		if ( ! $notice_dismissed && ( ! $pgcache_reject_logged || ! $minify_reject_logged || ! $dbcache_reject_logged ) ) {
 			$display_notice = true;
 		}
 
-		if ( $display_notice && $current_parent_base!='dslc_plugin_options' ) {?>
+		if ( $display_notice && $current_parent_base != 'dslc_plugin_options' ) {?>
 
 			<div class="notice dslc-notice notice-error is-dismissible" id="<?php echo $notice_id; ?>" data-nonce="<?php echo $notice_nonce; ?>">
-				<p><?php _e( 'There is a problem in W3 Total Cache plugin settings that <strong>can break your page builder</strong>. Luckily, <a href="'. admin_url( 'admin.php?page=dslc_getting_started' ) .'">it\'s easy to fix it</a>.', 'live-composer-page-builder' ); ?></p>
+				<p><?php _e( 'There is a problem in W3 Total Cache plugin settings that <strong>can break your page builder</strong>. Luckily, <a href="' . admin_url( 'admin.php?page=dslc_getting_started' ) . '">it\'s easy to fix it</a>.', 'live-composer-page-builder' ); ?></p>
 			</div><?php
 
-		} elseif ( $display_notice && $current_parent_base=='dslc_plugin_options' ) { ?>
+		} elseif ( $display_notice && $current_parent_base == 'dslc_plugin_options' ) { ?>
 
 				<div class="notice dslc-notice notice-error is-dismissible" id="<?php echo $notice_id; ?>" data-nonce="<?php echo $notice_nonce; ?>">
 					<p><?php _e( 'Wrong <strong>W3 Total Cache plugin</strong> settings can break Live Composer. Please check the next settings:', 'live-composer-page-builder' ); ?></p>
 					<ul style="padding-left: 30px;">
-						<?php if ( !$pgcache_reject_logged ) { ?>
+						<?php if ( ! $pgcache_reject_logged ) { ?>
 							<li type="disc"><?php
-								echo ' <a href="' . admin_url( 'admin.php?page=w3tc_pgcache') . '" target="_blank">';
+								echo ' <a href="' . admin_url( 'admin.php?page=w3tc_pgcache' ) . '" target="_blank">';
 								_e( 'WP Admin &#8594; Performance &#8594; Page Cache', 'live-composer-page-builder' );
 								echo ' &#8594; ';
 								_e( 'General ', 'live-composer-page-builder' );
@@ -151,9 +151,9 @@ function dslc_w3tc_admin_notice() {
 								?>
 							</li>
 						<?php } ?>
-						<?php if ( !$minify_reject_logged ) { ?>
+						<?php if ( ! $minify_reject_logged ) { ?>
 							<li type="disc"><?php
-								echo ' <a href="' . admin_url( 'admin.php?page=w3tc_minify') . '" target="_blank">';
+								echo ' <a href="' . admin_url( 'admin.php?page=w3tc_minify' ) . '" target="_blank">';
 								_e( 'WP Admin &#8594; Performance &#8594; Page Cache', 'live-composer-page-builder' );
 								echo ' &#8594; ';
 								_e( 'Minify ', 'live-composer-page-builder' );
@@ -164,9 +164,9 @@ function dslc_w3tc_admin_notice() {
 								?>
 							</li>
 						<?php } ?>
-						<?php if ( !$dbcache_reject_logged ) { ?>
+						<?php if ( ! $dbcache_reject_logged ) { ?>
 							<li type="disc"><?php
-								echo ' <a href="' . admin_url( 'admin.php?page=w3tc_dbcache') . '" target="_blank">';
+								echo ' <a href="' . admin_url( 'admin.php?page=w3tc_dbcache' ) . '" target="_blank">';
 								_e( 'WP Admin &#8594; Performance &#8594; Page Cache', 'live-composer-page-builder' );
 								echo ' &#8594; ';
 								_e( 'Database Cache ', 'live-composer-page-builder' );
@@ -209,24 +209,24 @@ function dslc_check_wpsettings_admin_notice() {
 
 		$notice_id = 'wrong_wpsettings_settings';
 		$display_notice = false;
-		$notice_dismissed = dslc_notice_dismissed($notice_id);
-		$notice_nonce = dslc_generate_notice_nonce($notice_id);
+		$notice_dismissed = dslc_notice_dismissed( $notice_id );
+		$notice_nonce = dslc_generate_notice_nonce( $notice_id );
 
 
-		if ( !$notice_dismissed && $check_url ) {
+		if ( ! $notice_dismissed && $check_url ) {
 			$display_notice = true;
 		}
 
-		if ( $display_notice && $current_parent_base!='dslc_plugin_options' ) {?>
+		if ( $display_notice && $current_parent_base != 'dslc_plugin_options' ) {?>
 
 			<div class="notice dslc-notice notice-error is-dismissible" id="<?php echo $notice_id; ?>" data-nonce="<?php echo $notice_nonce; ?>">
-				<p><?php _e( '<strong>Live Composer:</strong> probably there is a problem with your website settings. <a href="'. admin_url( 'admin.php?page=dslc_getting_started' ) .'">Click here to find out more.</a>', 'live-composer-page-builder' ); ?></p>
+				<p><?php _e( '<strong>Live Composer:</strong> probably there is a problem with your website settings. <a href="' . admin_url( 'admin.php?page=dslc_getting_started' ) . '">Click here to find out more.</a>', 'live-composer-page-builder' ); ?></p>
 			</div><?php
 
-		} elseif ( $display_notice && $current_parent_base=='dslc_plugin_options' ) { ?>
+		} elseif ( $display_notice && $current_parent_base == 'dslc_plugin_options' ) { ?>
 
 				<div class="notice dslc-notice notice-error is-dismissible" id="<?php echo $notice_id; ?>" data-nonce="<?php echo $notice_nonce; ?>">
-					<p><?php _e( 'Wrong settings found in <strong><a href="' . admin_url( 'options-general.php') . '" target="_blank">WP Admin &#8594; Settings</a></strong>: <strong>Wordpress Address</strong> and <strong>Site Address</strong> should be the same to make front-editing possible with Live Composer.', 'live-composer-page-builder' ); ?></p>
+					<p><?php _e( 'Wrong settings found in <strong><a href="' . admin_url( 'options-general.php' ) . '" target="_blank">WP Admin &#8594; Settings</a></strong>: <strong>Wordpress Address</strong> and <strong>Site Address</strong> should be the same to make front-editing possible with Live Composer.', 'live-composer-page-builder' ); ?></p>
 				</div>
 		<?php }
 }

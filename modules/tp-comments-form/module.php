@@ -1044,7 +1044,7 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 
 		);
 
-		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array( 'hover_opts' => false ) ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array('hover_opts' => false) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		return apply_filters( 'dslc_module_options', $dslc_options, $this->module_id );
@@ -1122,16 +1122,16 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 							'comment_notes_before' => '',
 							'comment_notes_after' => '',
 							'title_reply' => $txt_leave_comment,
-							'title_reply_to' => __( 'Reply to %s.', 'live-composer-page-builder'),
+							'title_reply_to' => __( 'Reply to %s.', 'live-composer-page-builder' ),
 							'comment_field' => '<div class="comment-form-comment"><textarea id="comment" name="comment" placeholder="' . __( 'Comment', 'live-composer-page-builder' ) . '" aria-required="true"></textarea></div>',
 							'fields' => apply_filters( 'comment_form_default_fields', array(
 								'author' => '<div class="comment-form-name"><input id="author" name="author" type=text value="' . esc_attr( $commenter['comment_author'] ) . '" size="30" placeholder="' . $txt_name . ' *" aria-required="true" /></div>',
-								'email' => '<div class="comment-form-email"><input id="email" name="email" type=text value="' . esc_attr(  $commenter['comment_author_email'] ) . '" size="30" placeholder="' . $txt_email . ' *" aria-required="true" /></div>',
+								'email' => '<div class="comment-form-email"><input id="email" name="email" type=text value="' . esc_attr( $commenter['comment_author_email'] ) . '" size="30" placeholder="' . $txt_email . ' *" aria-required="true" /></div>',
 								'url' => '<div class="comment-form-website"><input id="url" name="url" type=text value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30" placeholder="' . $txt_url . '" /></div>' 
-							)),
-						), $post_id); 
+							) ),
+						), $post_id ); 
 					
-					endif;  ?>
+					endif; ?>
 
 				</div><!-- dslc-tp-comment-form -->
 

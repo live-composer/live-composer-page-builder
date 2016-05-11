@@ -14,7 +14,7 @@ function dslc_nav_menus_opts() {
 		'title' => __( 'Navigation Module', 'live-composer-page-builder' ),
 		'options' => array(
 
-			'menus' => array (
+			'menus' => array(
 				'name' => 'dslc_plugin_options_navigation_m[menus]',
 				'label' => __( 'Menus', 'live-composer-page-builder' ),
 				'std' => '',
@@ -40,11 +40,11 @@ function dslc_nav_menus() {
 
 		$menus_array = explode( ',', substr( $menus, 0, -1 ) );
 
-		foreach( $menus_array as $menu ) {
+		foreach ( $menus_array as $menu ) {
 
 			$menu_ID = 'dslc_' . strtolower( str_replace( ' ', '_', $menu ) );
 
-			register_nav_menu( $menu_ID, $menu	);
+			register_nav_menu( $menu_ID, $menu );
 
 		}
 

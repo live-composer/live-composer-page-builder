@@ -1399,7 +1399,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 
 		);
 
-		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array( 'hover_opts' => false ) ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array('hover_opts' => false) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		return apply_filters( 'dslc_module_options', $dslc_options, $this->module_id );
@@ -1524,7 +1524,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 
 						<?php if ( defined( 'DISQUS_VERSION' ) ) : comments_template(); else : ?>
 
-							<?php $comments = get_comments( array( 'post_id' => $post_id ) ); ?>
+							<?php $comments = get_comments( array('post_id' => $post_id) ); ?>
 
 							<?php if ( get_comment_pages_count( $comments ) > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through ?>
 								
@@ -1533,7 +1533,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 							<?php endif; ?>
 
 							<ol class="comments clean-list">
-								<?php wp_list_comments( array( 'callback' => 'dslc_display_comments' ), $comments ); ?>
+								<?php wp_list_comments( array('callback' => 'dslc_display_comments'), $comments ); ?>
 							</ol><!-- .commentlist -->
 
 							<?php if ( get_comment_pages_count( $comments ) > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through ?>
