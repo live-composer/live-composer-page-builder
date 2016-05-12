@@ -47,8 +47,11 @@
 					self.moduleOptions[item.id] = _.extend({}, item);
 
 					if(propValues[item.id] != undefined){
+
 						self.values[item.id] = self.moduleOptions[item.id].value = propValues[item.id];
 					}
+
+					if(item.type == 'jsobj') return false;
 
 					/// Sections and tabs.
 					/// Need to calculate it now to increase settings tabs render speed
@@ -115,10 +118,13 @@
 			HTML.find(".dslca-editable-content").each(function()
 			{
 				jQuery(this)
-				.removeAttr('contenteditable')
 				.removeClass('dslca-editable-content')
 				.removeAttr('data-id')
 				.removeAttr('data-type')
+			});
+			HTML.find("[contenteditable]").each(function()
+			{
+				jQuery(this).removeAttr('contenteditable');
 			});
 
 			return HTML[0].outerHTML;
@@ -306,7 +312,7 @@
 		}
 
 		/**
-		 * Dummy afterRender function. Users can describe it in custom way.
+		 * Dummy afterRenderHook function. Users can describe it in custom way. Fires every time, when module renders.
 		 */
 		DSLC.BasicModule.prototype.afterRenderHook = function(){}
 

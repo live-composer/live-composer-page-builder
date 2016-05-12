@@ -1,14 +1,12 @@
 <div class="dslc-accordion" data-open="<%= open_by_default.value || open_by_default.std %>">
 
-<% if(Array.isArray(accordion_contents) && accordion_contents.length > 0 ){%>
-
-	<% accordion_contents.forEach(function(accordion_content, index){%>
+	<% accordion_slides.value.forEach(function(slide, index){%>
 
 		<div class="dslc-accordion-item">
 
 			<div class="dslc-accordion-header dslc-accordion-hook">
 				<span class="dslc-accordion-title" contenteditable data-exportable-content="h3">
-					<%= accordion_nav[index] %>
+					<%= slide.title %>
 				</span>
 
 				<div class="dslca-accordion-action-hooks lc-editor-element">
@@ -18,62 +16,24 @@
 				</div>
 			</div>
 
-			<div class="dslc-accordion-content">
-				<div class="dslca-editable-content" data-exportable-content>
-					<%= accordion_content %>
-				</div>
+			<div class="dslc-accordion-content-wrapper" style="<%= open_by_default.value > -1 && open_by_default.value -1 == index ? 'display: block' : 'display: none' %>">
+				<div class="dslc-accordion-content">
+					<div class="dslca-editable-content" data-exportable-content>
+						<%= slide.content %>
+					</div>
 
-				<textarea class="dslca-accordion-plain-content lc-editor-element">
-					<%= accordion_content.trim() %>>
-				</textarea>
-				<div class="dslca-wysiwyg-actions-edit lc-editor-element">
-					<span class="dslca-wysiwyg-actions-edit-hook">
-						<?php _e( 'Edit Content', 'live-composer-page-builder' ); ?>
-					</span>
-				</div>
+					<div class="dslca-wysiwyg-actions-edit lc-editor-element">
+						<span class="dslca-wysiwyg-actions-edit-hook">
+							<?php _e( 'Edit Content', 'live-composer-page-builder' ); ?>
+						</span>
+					</div>
 
-			</div><!-- .dslc-accordion-content -->
+				</div><!-- .dslc-accordion-content -->
+			</div><!-- .dslc-accordion-content-wrapper -->
 
 		</div><!-- .dslc-accordion-item -->
 
 	<%});%>
-
-<%}else{%>
-
-	<div class="dslc-accordion-item">
-
-		<div class="dslc-accordion-header dslc-accordion-hook">
-			<span class="dslc-accordion-title" contenteditable>
-				<?php _e( 'CLICK TO EDIT', 'live-composer-page-builder' ) ?>
-			</span>
-
-			<div class="dslca-accordion-action-hooks lc-editor-element">
-				<span class="dslca-move-up-accordion-hook"><span class="dslca-icon dslc-icon-arrow-up"></span></span>
-				<span class="dslca-move-down-accordion-hook"><span class="dslca-icon dslc-icon-arrow-down"></span></span>
-				<span class="dslca-delete-accordion-hook"><span class="dslca-icon dslc-icon-remove"></span></span>
-			</div>
-		</div>
-
-		<div class="dslc-accordion-content">
-			<div class="dslca-editable-content">
-				Placeholder content. Lorem ipsum dolor sit amet, consectetur
-				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-			</div>
-
-			<textarea class="dslca-accordion-plain-content lc-editor-element">Placeholder content. Lorem ipsum dolor sit amet, consectetur tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea>
-
-			<div class="dslca-wysiwyg-actions-edit lc-editor-element">
-				<span class="dslca-wysiwyg-actions-edit-hook"><?php _e( 'Edit Content', 'live-composer-page-builder' ) ?></span>
-			</div>
-		</div><!-- .dslc-accordion-content -->
-
-	</div><!-- .dslc-accordion-item -->
-
-<%}%>
 
 	<div class="dslca-add-accordion lc-editor-element">
 		<span class="dslca-add-accordion-hook"><span class="dslca-icon dslc-icon-plus"></span></span>

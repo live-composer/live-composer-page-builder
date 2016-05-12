@@ -1953,8 +1953,13 @@
 				bottom: 0;
 			}
 
-		.dslc-accordion-content {
+		.dslc-accordion-item:only-of-type .dslca-delete-accordion-hook{
+			display: none;
+		}
+
+		.dslc-accordion-content-wrapper {
 			position: relative;
+			display: none;
 			border: 0 solid transparent;
 		}
 

@@ -2,7 +2,6 @@
  * Table of Contents
  *
  * - dslc_responsive_classes
- * - dslc_init_accordion
  * - dslc_init_lightbox
  * - dslc_carousel (Initializes carousels)
  * - dslc_bg_video (Initiate row BG video)
@@ -109,32 +108,6 @@ function dslc_responsive_classes(force){
 
 }
 
-/**
- * Init Accordion
- */
-
-function dslc_init_accordion(){
-
-	jQuery('.dslc-accordion').each(function(){
-
-		var dslcAccordion = jQuery(this),
-		dslcActiveIndex = dslcAccordion.data('open') - 1,
-		dslcActive = jQuery('.dslc-accordion-item:eq(' + dslcActiveIndex + ')', dslcAccordion),
-		dslcInactive = dslcActive.siblings('.dslc-accordion-item'),
-		dslcAll = jQuery('.dslc-accordion-item', dslcAccordion);
-
-		if(dslcActiveIndex >= 0){
-			dslcActive.addClass('dslc-active');
-			dslcInactive.addClass('dslc-inactive');
-			jQuery('.dslc-accordion-content', dslcInactive).hide();
-		}else{
-			dslcAll.addClass('dslc-inactive');
-			jQuery('.dslc-accordion-content', dslcAll).hide();
-		}
-
-	});
-
-}
 
 /**
  * Init Lightbox
@@ -1101,114 +1074,6 @@ jQuery(document).ready(function($){
 
 	dslc_init_lightbox();
 
-	/**
-	 * Accordion
-	 */
-
-	dslc_init_accordion();
-
-	$(document).on('click', '.dslc-accordion-hook', function(){
-
-		var dslcActive = $(this).closest('.dslc-accordion-item'),
-		dslcInactive = dslcActive.siblings('.dslc-accordion-item');
-
-		if(dslcActive.hasClass('dslc-active'))
-			dslcInactive = dslcActive;
-		else
-			dslcActive.removeClass('dslc-inactive').addClass('dslc-active');
-
-		dslcInactive.removeClass('dslc-active').addClass('dslc-inactive');
-
-		$('.dslc-accordion-content', dslcActive).slideDown(300);
-		$('.dslc-accordion-content', dslcInactive).slideUp(300);
-
-	});
-
-	jQuery(document).on('click', '.dslca-add-accordion-hook', function(){
-
-		var dslcAccordion = jQuery(this).closest('.dslc-accordion'),
-		dslcAccordionLast = jQuery('.dslc-accordion-item:last', dslcAccordion),
-		dslcAccordionNew = dslcAccordionLast.clone().insertAfter(dslcAccordionLast);
-
-		jQuery('.dslc-accordion-title', dslcAccordionNew).html('CLICK TO EDIT');
-		jQuery('.dslc-accordion-content', dslcAccordionNew).html('<div class="dslca-editable-content">Placeholder content, click to edit. Lorem ipsum dolor sit amet, consectetur tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div><textarea class="dslca-accordion-plain-content"></textarea><div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook">Edit Content</span></div>');
-		jQuery('.dslc-accordion-hook', dslcAccordionNew).click();
-
-		dslc_accordion_generate_code(dslcAccordion);
-
-		if(!jQuery(this).closest('.dslc-module-front').hasClass('dslca-module-being-edited')){
-			jQuery(this).closest('.dslc-module-front').find('.dslca-module-edit-hook').trigger('click');
-		}
-
-	});
-
-	jQuery(document).on('click', '.dslca-delete-accordion-hook', function(e){
-
-		var dslcAccordion = jQuery(this).closest('.dslc-accordion'),
-		dslcAccordionItem = jQuery(this).closest('.dslc-accordion-item');
-
-		if(!jQuery(this).closest('.dslc-module-front').hasClass('dslca-module-being-edited')){
-			jQuery(this).closest('.dslc-module-front').find('.dslca-module-edit-hook').trigger('click');
-		}
-
-		if(jQuery('.dslc-accordion-item', dslcAccordion).length > 1){
-
-			dslcAccordionItem.remove();
-
-			if(!jQuery('.dslc-accordion-item.dslc-active', dslcAccordion).length){
-				jQuery('.dslc-accordion-hook:first', dslcAccordion).trigger('click');
-			}
-
-			dslc_accordion_generate_code(dslcAccordion);
-
-		}else{
-
-			alert('You can not delete the last remaining accordion item.');
-
-		}
-
-		e.stopPropagation()
-
-	});
-
-	jQuery(document).on('click', '.dslca-move-up-accordion-hook, .dslca-move-down-accordion-hook', function(e){
-
-		var dslcAccordion = jQuery(this).closest('.dslc-accordion'),
-		dslcAccordionItem = jQuery(this).closest('.dslc-accordion-item'),
-		dslcAccordionItemNext = dslcAccordionItem.next('.dslc-accordion-item'),
-		dslcAccordionItemPrev = dslcAccordionItem.prev('.dslc-accordion-item');
-
-		if(!jQuery(this).closest('.dslc-module-front').hasClass('dslca-module-being-edited')){
-			jQuery(this).closest('.dslc-module-front').find('.dslca-module-edit-hook').trigger('click');
-		}
-
-		if(jQuery(this).hasClass('dslca-move-down-accordion-hook')){
-
-			dslcAccordionItem.insertAfter(dslcAccordionItemNext);
-			dslc_accordion_generate_code(dslcAccordion);
-
-		}else{
-
-			dslcAccordionItem.insertBefore(dslcAccordionItemPrev);
-			dslc_accordion_generate_code(dslcAccordion);
-
-		}
-
-		e.stopPropagation()
-
-	});
-
-	jQuery(document).on('blur paste keyup', '.dslc-accordion-title[contenteditable], .dslc-accordion-content[contenteditable]', function(){
-
-		dslc_accordion_generate_code(jQuery(this).closest('.dslc-accordion'));
-
-	}).on('focus', '.dslc-accordion-title[contenteditable], .dslc-accordion-content[contenteditable]', function(){
-
-		if(!jQuery(this).closest('.dslc-module-front').hasClass('dslca-module-being-edited')){
-			jQuery(this).closest('.dslc-module-front').find('.dslca-module-edit-hook').trigger('click');
-		}
-
-	});
 
 	$(document).on('click', '.dslc-trigger-lightbox-gallery', function(e){
 

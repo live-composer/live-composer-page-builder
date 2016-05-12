@@ -71,22 +71,6 @@ class DSLC_Accordion extends DSLC_Module {
 					),
 				),
 			),
-			array(
-				'label' => __( '(hidden) Accordion Content', 'live-composer-page-builder' ),
-				'id' => 'accordion_content',
-				'std' => '',
-				'type' => 'textarea',
-				'visibility' => 'hidden',
-				'section' => 'styling',
-			),
-			array(
-				'label' => __( '(hidden) Accordion Nav', 'live-composer-page-builder' ),
-				'id' => 'accordion_nav',
-				'std' => '',
-				'type' => 'textarea',
-				'visibility' => 'hidden',
-				'section' => 'styling',
-			),
 
 			array(
 				'label' => __( 'Open by default', 'live-composer-page-builder' ),
@@ -1032,6 +1016,15 @@ class DSLC_Accordion extends DSLC_Module {
 				'ext' => 'px',
 			),
 
+			array(
+				'label' => __( 'Accordion slides', 'live-composer-page-builder' ),
+				'id' => 'accordion_slides',
+				'std' => [[
+					'title' => 'New slide',
+					'content' => 'Add here some contents by clicking on it.'
+				]],
+				'type' => 'jsobj'
+			)
 		);
 
 		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array( 'hover_opts' => false ) ) );

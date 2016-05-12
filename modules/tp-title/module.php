@@ -19,7 +19,6 @@ class DSLC_TP_Title extends DSLC_Module {
 	function __construct( $settings = [], $atts = [] )
 	{
 		$this->module_ver = 2;
-		$this->dynamic_module = true;
 		$this->module_id = __CLASS__;
 		$this->module_title = __( 'Title', 'live-composer-page-builder' );
 		$this->module_icon = 'font';
