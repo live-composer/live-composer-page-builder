@@ -108,7 +108,6 @@ var commonVars = DSLC.commonVars; /// Just alias
 		// Generate
 		dslc_carousel();
 		dslc_tabs();
-		dslc_init_accordion();
 		dslc_init_square();
 		dslc_center();
 		dslc_generate_code();

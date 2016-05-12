@@ -133,6 +133,7 @@ function dslc_load_scripts() {
 		wp_enqueue_script( 'base64', DS_LIVE_COMPOSER_URL . 'js/libs/base64.js', array(), DS_LIVE_COMPOSER_VER );
 		wp_enqueue_script( 'modernizr', DS_LIVE_COMPOSER_URL . 'js/libs/modernizr-custom.js', array(), DS_LIVE_COMPOSER_VER );
 		wp_enqueue_script( 'toolbarmain-js', DS_LIVE_COMPOSER_URL . 'js/ToolbarMain.js', array( 'jquery', 'extend-js' ), DS_LIVE_COMPOSER_VER );
+		wp_enqueue_script( 'deep-extend-underscore', DS_LIVE_COMPOSER_URL . 'js/libs/deepExtend.js', array( 'jquery', 'extend-js' ), DS_LIVE_COMPOSER_VER );
 		wp_enqueue_script( 'options-field-extender', DS_LIVE_COMPOSER_URL . 'js/optionFieldUtils.js', array( 'jquery', 'extend-js' ), DS_LIVE_COMPOSER_VER );
 		wp_enqueue_script( 'modal-window', DS_LIVE_COMPOSER_URL . 'js/ModalWindow.js', array( 'jquery', 'extend-js' ), DS_LIVE_COMPOSER_VER );
 

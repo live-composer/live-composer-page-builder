@@ -312,6 +312,49 @@
 		}
 
 		/**
+		 * Sets editable content
+		 *
+		 * @param {jQuery obj} editableField if need to, you can calculate value in reloaded method
+		 */
+		DSLC.BasicModule.prototype.setWYSIWIGValue = function( editableField )
+		{
+			var optionId = editableField.data('id');
+			var content = editableField.html();
+
+			module
+				.setOption(optId, content)
+				.reloadModuleBody()
+				.saveEdits();
+			return this;
+		}
+
+		/**
+		 * Sets editable content
+		 *
+		 * @param {DOM obj} editableField if need to, you can calculate value in reloaded method
+		 */
+		DSLC.BasicModule.prototype.setContentEditableValue = function( editableField )
+		{
+			[].forEach.call(editableField.querySelectorAll("p"), function( p )
+			{
+				if ( p.innerHTML == '<br>' )
+				{
+					p.innerHTML = '&nbsp;';
+				}
+			});
+
+			var optionId = jQuery(editableField).data('id');
+			var content = editableField.innerHTML;
+
+			this.setOption(optionId, content)
+				.getModuleBody();
+
+			this.saveEdits();
+
+			return this;
+		}
+
+		/**
 		 * Dummy afterRenderHook function. Users can describe it in custom way. Fires every time, when module renders.
 		 */
 		DSLC.BasicModule.prototype.afterRenderHook = function(){}
@@ -729,7 +772,17 @@
 
 			if(this.values[optionId] != undefined){
 
-				return this.values[optionId];
+				if( Array.isArray( this.values[optionId] ) ){
+
+					return _.deepExtend( [], this.values[optionId] );
+
+				}else if( typeof this.values[optionId] == 'object' ){
+
+					return _.deepExtend( {}, this.values[optionId] );
+				}else{
+
+					return this.values[optionId];
+				}
 			}else{
 
 				return this.moduleOptions[optionId].std || false;
@@ -744,6 +797,16 @@
 		 */
 		DSLC.BasicModule.prototype.setOption = function(optionId, optionValue)
 		{
+			/// Incapsulation for optionValue
+			if( Array.isArray( optionValue ) ){
+
+				optionValue = _.deepExtend( [], optionValue );
+
+			}else if( typeof optionValue == 'object' ){
+
+				optionValue = _.deepExtend( {}, optionValue );
+			}
+
 			var self = this;
 			function fireEvent()
 			{

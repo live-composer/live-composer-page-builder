@@ -8,10 +8,11 @@
 
 	jQuery(document).on('DSLC_extend_modules', function(){
 
+		var Accordion = DSLC.ModulesManager.AvailModules.DSLC_Accordion;
 		// No conflict
 		var $ = jQuery.noConflict();
 
-		DSLC.ModulesManager.AvailModules.DSLC_Accordion.prototype.changeOptionsBeforeRender = function(options)
+		Accordion.prototype.changeOptionsBeforeRender = function(options)
 		{
 			if(options.accordion_slides.value == undefined || ( Array.isArray(options.accordion_slides.value) && options.accordion_slides.value.length == 0 ) ){
 
@@ -26,7 +27,7 @@
 		/**
 		 * Add accordion item
 		 */
-		DSLC.ModulesManager.AvailModules.DSLC_Accordion.prototype.addSlide = function()
+		Accordion.prototype.addSlide = function()
 		{
 			var slides = this.getOption( 'accordion_slides' );
 
@@ -45,7 +46,7 @@
 		/**
 		 * Remove accordion item
 		 */
-		DSLC.ModulesManager.AvailModules.DSLC_Accordion.prototype.removeSlide = function( index )
+		Accordion.prototype.removeSlide = function( index )
 		{
 			var slides = this.getOption( 'accordion_slides' );
 
@@ -58,10 +59,58 @@
 				.saveEdits();
 		}
 
+		/**
+		 * @inherited
+		 */
+		Accordion.prototype.setWYSIWIGValue = function( editableField )
+		{
+			var index = editableField.closest('.dslc-accordion-item').index();
+			var content = editableField.html();
+			var slides = this.getOption('accordion_slides');
+
+			slides[index].content = content;
+			this.setOption( 'accordion_slides', slides )
+				.getModuleBody();
+
+			this.saveEdits();
+
+			dslc_generate_code();
+		}
+
+		/**
+		 * @inherited
+		 */
+		Accordion.prototype.setContentEditableValue = function( editableField )
+		{
+			var index = $(editableField).closest('.dslc-accordion-item').index();
+
+			[].forEach.call(editableField.querySelectorAll("p"), function( p )
+			{
+				if ( p.innerHTML == '<br>' )
+				{
+					p.innerHTML = '&nbsp;';
+				}
+			});
+
+			var content = editableField.innerHTML;
+			var slides = this.getOption('accordion_slides');
+
+			slides[index].title = content;
+			this.setOption( 'accordion_slides', slides )
+				.getModuleBody();
+
+			this.saveEdits();
+			dslc_generate_code();
+
+			return this;
+		}
+
+
 		jQuery(document).on('click', '.dslca-add-accordion-hook', function(e)
 		{
 			var module = $(this).closest('.dslc-module-front').data('module-instance');
 			module.addSlide();
+			dslc_generate_code();
 
 			e.stopPropagation();
 			e.preventDefault();
@@ -70,7 +119,8 @@
 		jQuery(document).on('click', '.dslca-delete-accordion-hook', function(e)
 		{
 			var module = $(this).closest('.dslc-module-front').data('module-instance');
-			module.removeSlide(  $('.dslc-accordion-item').index() );
+			module.removeSlide(  $(this).closest('.dslc-accordion-item').index() );
+			dslc_generate_code();
 
 			e.stopPropagation();
 			e.preventDefault();
@@ -78,10 +128,26 @@
 
 		jQuery(document).on('click', '.dslca-move-up-accordion-hook, .dslca-move-down-accordion-hook', function(e)
 		{
+			function moveArr(arr, old_index, new_index)
+			{
+			    if (new_index >= arr.length) {
+			        var k = new_index - arr.length;
+			        while ((k--) + 1) {
+			            arr.push(undefined);
+			        }
+			    }
+			    arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+    			return arr; // for testing purposes
+			};
+
 			var dslcAccordion = jQuery(this).closest('.dslc-accordion'),
 			dslcAccordionItem = jQuery(this).closest('.dslc-accordion-item'),
 			dslcAccordionItemNext = dslcAccordionItem.next('.dslc-accordion-item'),
-			dslcAccordionItemPrev = dslcAccordionItem.prev('.dslc-accordion-item');
+			dslcAccordionItemPrev = dslcAccordionItem.prev('.dslc-accordion-item'),
+
+			currItemIndex = jQuery(this).closest('.dslc-accordion-item').index(),
+			nextItemIndex = dslcAccordionItem.next('.dslc-accordion-item').index(),
+			prevItemIndex = dslcAccordionItem.prev('.dslc-accordion-item').index();
 
 			if(!jQuery(this).closest('.dslc-module-front').hasClass('dslca-module-being-edited')){
 				jQuery(this).closest('.dslc-module-front').find('.dslca-module-edit-hook').trigger('click');
@@ -95,25 +161,23 @@
 				dslcAccordionItem.insertBefore(dslcAccordionItemPrev);
 			}
 
-			e.stopPropagation()
+			/// Visual edits end, data change starts
+			var module = $(this).closest(".dslc-module-front").data('module-instance');
+			var slides = module.getOption('accordion_slides');
 
-		});
+			if(jQuery(this).hasClass('dslca-move-down-accordion-hook')){
 
-		jQuery(document).on('blur paste keyup', '.dslc-accordion-title[contenteditable], .dslc-accordion-content[contenteditable]', function()
-		{
+				moveArr(slides, currItemIndex, nextItemIndex);
+			}else{
 
-			dslc_accordion_generate_code(jQuery(this).closest('.dslc-accordion'));
-
-		}).on('focus', '.dslc-accordion-title[contenteditable], .dslc-accordion-content[contenteditable]', function()
-		{
-
-			if(!jQuery(this).closest('.dslc-module-front').hasClass('dslca-module-being-edited')){
-				jQuery(this).closest('.dslc-module-front').find('.dslca-module-edit-hook').trigger('click');
+				moveArr(slides, currItemIndex, prevItemIndex);
 			}
-		});
 
-		$(document).on('click', '.dslca-wysiwyg-actions-edit-hook', function()
-		{
+			module.setOption('accordion_slides', slides)
+				.getModuleBody();
+
+			module.saveEdits();
+			dslc_generate_code();
 
 			e.stopPropagation();
 			e.preventDefault();
@@ -129,6 +193,8 @@
 
 			otherSlides.find('.dslc-accordion-content-wrapper').slideUp();
 			currSlide.find('.dslc-accordion-content-wrapper').slideDown();
+
+			return true;
 		});
 	});
 }());
