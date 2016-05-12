@@ -17,7 +17,7 @@ class DSLC_Social extends DSLC_Module {
 	var $module_icon;
 	var $module_category;
 
-	function __construct() {
+	function __construct( $settings = [], $atts = [] ) {
 
 		$this->module_ver = 2;
 		$this->module_id = __CLASS__;
@@ -25,15 +25,17 @@ class DSLC_Social extends DSLC_Module {
 		$this->module_icon = 'twitter';
 		$this->module_category = 'elements';
 
+		parent::__construct( $settings, $atts );
+
 	}
 
 	/**
 	 * @inherited
 	 */
-	function options() {	
+	function options() {
 
 		$dslc_options = array(
-			
+
 			/**
 			 * General
 			 */
@@ -711,21 +713,19 @@ class DSLC_Social extends DSLC_Module {
 
 	}
 
-	
+
 	/**
 	 * @inherited
 	 */
-	function output( $options )
+	function output( $options = [] )
 	{
-		global $dslc_active;
-
-		$this->module_start( $options );
+		$this->module_start();
 
 		/* Module output stars here */
 		echo $this->renderModule( __DIR__, $options );
 		/* Module output ends here */
 
-		$this->module_end( $options );
+		$this->module_end();
 	}
 
 }
