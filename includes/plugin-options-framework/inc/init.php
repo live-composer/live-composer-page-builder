@@ -205,15 +205,12 @@ function dslc_plugin_options_init() {
 			}
 
 			$option['value'] = $value;
+			$function = 'dslc_plugin_option_display_' . $option['type'] . '( "' . base64_encode( serialize( $option ) ) . '" );';
 
 			add_settings_field(
 				$option_ID,
 				$option['label'],
-				function() use ( $option ) {
-
-					$func = 'dslc_plugin_option_display_' . $option['type'];
-					$func( $option );
-				},
+				create_function( '$a', $function ),
 				$section_ID,
 				$section_ID
 			);
