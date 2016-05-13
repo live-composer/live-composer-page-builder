@@ -20,8 +20,7 @@ function dslc_plugin_option_display_text( $option ) {
 	endif;
 }
 
-function dslc_plugin_option_display_textarea( $option )
-{
+function dslc_plugin_option_display_textarea( $option ) {
 	global $dslc_plugin_options;
 
 	$section_ID = $option['section_id'];
@@ -77,8 +76,7 @@ function dslc_plugin_option_display_select( $option ) {
 	endif;
 }
 
-function dslc_plugin_option_display_checkbox( $option )
-{
+function dslc_plugin_option_display_checkbox( $option ) {
 	global $dslc_plugin_options;
 
 	$section_ID = $option['section'];
@@ -107,8 +105,7 @@ function dslc_plugin_option_display_checkbox( $option )
 	endif;
 }
 
-function dslc_plugin_option_display_radio( $option )
-{
+function dslc_plugin_option_display_radio( $option ) {
 	global $dslc_plugin_options;
 
 	$section_ID = $option['section'];
@@ -136,8 +133,7 @@ function dslc_plugin_option_display_radio( $option )
 	endif;
 }
 
-function dslc_plugin_option_display_list( $option )
-{
+function dslc_plugin_option_display_list( $option ) {
 	global $dslc_plugin_options;
 
 	$section_ID = $option['section'];
@@ -193,8 +189,7 @@ function dslc_plugin_option_display_list( $option )
 
 }
 
-function dslc_plugin_option_display_styling_presets( $option )
-{
+function dslc_plugin_option_display_styling_presets( $option ) {
 	global $dslc_plugin_options;
 
 	$section_ID = $option['section'];

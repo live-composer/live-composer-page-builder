@@ -7,7 +7,7 @@
  */
 
 function dslc_nav_menus_opts() {
-	
+
 	global $dslc_plugin_options;
 
 	$dslc_plugin_options['dslc_plugin_options_navigation_m'] = array(
