@@ -43,7 +43,7 @@ function dslc_plugin_options_setup() {
 		// 	create_function( null, 'dslc_plugin_options_display( "dslc_getting_started" );' )
 		// );
 
-		remove_submenu_page( 'dslc_plugin_options', 'dslc_plugin_options' ); // delete duplicate
+		// remove_submenu_page( 'dslc_plugin_options', 'dslc_plugin_options' ); // delete duplicate
 } add_action( 'admin_menu', 'dslc_plugin_options_setup' );
 
 /**
@@ -78,19 +78,19 @@ function dslc_plugin_options_display( $tab = '' ) {
 		<h2 class="nav-tab-wrapper dslc-settigns-tabs" id="dslc-tabs">
 			<a href="#" data-nav-to="dslc_getting_started" class="nav-tab <?php echo $anchor == 'dslc_getting_started' ? 'nav-tab-active' : ''; ?>"><?php _e( 'Getting Started', 'live-composer-page-builder' ) ?></a>
 			<a href="#" data-nav-to="tab-settings" class="nav-tab <?php echo $anchor == 'dslc_settings' ? 'nav-tab-active' : ''; ?>"><?php _e( 'Settings', 'live-composer-page-builder' ) ?></a>
-			<a href="#" data-nav-to="tab-extensions" class="nav-tab <?php echo $anchor == 'dslc_settings' ? 'nav-tab-active' : ''; ?>"><?php _e( 'Extensions <span class="tag">Free</span>', 'live-composer-page-builder' ) ?></a>
-			<a href="#" data-nav-to="tab-themes" class="nav-tab <?php echo $anchor == 'dslc_settings' ? 'nav-tab-active' : ''; ?>"><?php _e( 'Themes <span class="tag">Free</span>', 'live-composer-page-builder' ) ?></a>
-			<a href="#" data-nav-to="tab-docs" class="nav-tab <?php echo $anchor == 'dslc_settings' ? 'nav-tab-active' : ''; ?>"><?php _e( 'Docs &amp; Support', 'live-composer-page-builder' ) ?></a>
+			<a href="#" data-nav-to="tab-extensions" class="nav-tab <?php echo $anchor == 'dslc_extensions' ? 'nav-tab-active' : ''; ?>"><?php _e( 'Extensions <span class="tag">Free</span>', 'live-composer-page-builder' ) ?></a>
+			<a href="#" data-nav-to="tab-themes" class="nav-tab <?php echo $anchor == 'dslc_themes' ? 'nav-tab-active' : ''; ?>"><?php _e( 'Themes <span class="tag">Free</span>', 'live-composer-page-builder' ) ?></a>
+			<a href="#" data-nav-to="tab-docs" class="nav-tab <?php echo $anchor == 'dslc_docs' ? 'nav-tab-active' : ''; ?>"><?php _e( 'Docs &amp; Support', 'live-composer-page-builder' ) ?></a>
 		</h2>
 
 
 		<div id="jstabs">
 				<!-- Getting Started Tab -->
-				<div class="tab" <?php echo $anchor == 'dslc_getting_started' ? "style='display:block'" : '' ?>  id="tab-for-dslc_getting_started">
+				<div class="tab" <?php if ( $anchor != 'dslc_settings') echo 'style="display:block"'; ; ?> id="tab-for-dslc_getting_started">
 					<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-getting-started.php'; ?>
 				</div>
 				<!-- Settings tab -->
-				<div class="tab"  id="tab-for-tab-settings">
+				<div class="tab" <?php if ( $anchor == 'dslc_settings') echo 'style="display:block"'; ; ?>  id="tab-for-tab-settings">
 					<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-settings.php'; ?>
 				</div>
 				<!-- Themes tab -->
@@ -110,10 +110,8 @@ function dslc_plugin_options_display( $tab = '' ) {
 		</div>
 	</div><!-- /.wrap -->
 	<script>
-		jQuery(document).ready(function($)
-		{
-			jQuery(".nav-tab-wrapper > a").on('click', function()
-			{
+		jQuery(document).ready(function($) {
+			jQuery(".nav-tab-wrapper > a").on('click', function() {
 				if ($(this).data('nav-to') != null ) {
 
 					$("#jstabs .tab").hide();
@@ -124,7 +122,7 @@ function dslc_plugin_options_display( $tab = '' ) {
 
 				var refer = $("#jstabs").find("input[name='_wp_http_referer']");
 
-				refer.val( '/wp-admin/admin.php?page=dslc_getting_started&anchor=' + $(this).data('nav-to') + '&settings-updated=true' );
+				refer.val( '<?php echo admin_url( 'admin.php?page=dslc_plugin_options&anchor=dslc_settings&settings-updated=true' ); ?>' );
 
 				return false;
 				}
@@ -144,7 +142,7 @@ function dslc_plugin_options_init() {
 	global $dslc_plugin_options;
 
 	/**
-	 * Add Sections
+	 * Add Sections and Fields on the settings page
 	 */
 
 	foreach ( $dslc_plugin_options as $section_ID => $section ) {
@@ -161,15 +159,8 @@ function dslc_plugin_options_init() {
 			$section_ID
 		);
 
-	}
-
-	/**
-	 * Add Fields
-	 */
-
-	foreach ( $dslc_plugin_options as $section_ID => $section ) {
-
 		foreach ( $section['options'] as $option_ID => $option ) {
+
 
 			$option['id'] = $option_ID;
 
@@ -207,15 +198,12 @@ function dslc_plugin_options_init() {
 			$option['value'] = $value;
 
 			add_settings_field(
-				$option_ID,
-				$option['label'],
-				function() use ( $option ) {
-
-					$func = 'dslc_plugin_option_display_' . $option['type'];
-					$func( $option );
-				},
-				$section_ID,
-				$section_ID
+				$option_ID, // id
+				$option['label'], //title
+				'dslc_option_display_funcitons_router', //callback
+				$section_ID, //page
+				$section_ID, //section
+				$option //args
 			);
 		}
 
@@ -224,10 +212,33 @@ function dslc_plugin_options_init() {
 
 } add_action( 'admin_init', 'dslc_plugin_options_init' );
 
+
+function dslc_option_display_funcitons_router( $option ) {
+	if ( $option['type'] == 'text' ) {
+		dslc_plugin_option_display_text ($option);
+	} elseif ( $option['type'] == 'textarea' ) {
+		dslc_plugin_option_display_textarea ($option);
+	} elseif ( $option['type'] == 'select' ) {
+		dslc_plugin_option_display_select ($option);
+	} elseif ( $option['type'] == 'checkbox' ) {
+		dslc_plugin_option_display_checkbox ($option);
+	} elseif ( $option['type'] == 'list' ) {
+		dslc_plugin_option_display_list ($option);
+	} elseif ( $option['type'] == 'radio' ) {
+		dslc_plugin_option_display_radio ($option);
+	} elseif ( $option['type'] == 'styling_presets' ) {
+		dslc_plugin_option_display_styling_presets ($option);
+	}
+}
+
 function dslc_plugin_options_display_options( $section ) {
-
-
-
+  /*
+	* Function is required for add_settings_section
+	* even if we don't print any data insite of it.
+	* In our case all the settings fields rendered
+	* by callback from add_settings_field.
+	*
+	*/
 }
 
 /*

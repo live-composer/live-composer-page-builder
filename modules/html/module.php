@@ -16,10 +16,10 @@ class DSLC_Html extends DSLC_Module {
 
 	}
 
-	function options() {	
+	function options() {
 
 		$dslc_options = array(
-			
+
 			array(
 				'label' => __( 'Show On', 'live-composer-page-builder' ),
 				'id' => 'css_show_on',
@@ -40,13 +40,27 @@ class DSLC_Html extends DSLC_Module {
 					),
 				),
 			),
-			
+
 			array(
 				'label' => __( 'HTML/Shortcode', 'live-composer-page-builder' ),
 				'id' => 'content',
 				'std' => '<p>Just some placeholder content. Edit the module to change it.</p>',
 				'type' => 'textarea',
 				'section' => 'functionality'
+			),
+
+			array(
+				'label' => __( 'Error-Proof Mode', 'live-composer-page-builder' ),
+				'id' => 'error_proof_mode',
+				'std' => '',
+				'type' => 'checkbox',
+				'choices' => array(
+					array(
+						'label' => __( 'Enabled', 'live-composer-page-builder' ),
+						'value' => 'active'
+					)
+				),
+				'help' => __( 'Some JavaScript code and shortcodes can break the page editing.<br> Use <b>Error-Proof Mode</b> to make it work.', 'live-composer-page-builder' ),
 			),
 
 			/**
@@ -2065,7 +2079,7 @@ class DSLC_Html extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'blockquote', 'live-composer-page-builder' ),
 			),
-			
+
 			/**
 			 * Submit Button
 			 */
@@ -2300,7 +2314,7 @@ class DSLC_Html extends DSLC_Module {
 			/**
 			 * Responsive Tablet
 			 */
-			
+
 			array(
 				'label' => __( 'Responsive Styling', 'live-composer-page-builder' ),
 				'id' => 'css_res_t',
@@ -2565,7 +2579,7 @@ class DSLC_Html extends DSLC_Module {
 			/**
 			 * Responsive Phone
 			 */
-			
+
 			array(
 				'label' => __( 'Responsive Styling', 'live-composer-page-builder' ),
 				'id' => 'css_res_p',
@@ -2826,7 +2840,7 @@ class DSLC_Html extends DSLC_Module {
 			),
 
 		);
-	
+
 		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array('hover_opts' => false) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
@@ -2843,14 +2857,37 @@ class DSLC_Html extends DSLC_Module {
 		else
 			$dslc_is_admin = false;
 
+		// Check if Error-Proof mode activated in module options
+		$error_proof_mode = false;
+		if ( isset( $options['error_proof_mode'] ) && $options['error_proof_mode'] != ''  ) {
+			$error_proof_mode = true;
+		}
+
+		// Check if module rendered via ajax call
+		$ajax_module_render = true;
+		if ( isset( $options['module_render_nonajax'] ) ) {
+			$ajax_module_render = false;
+		}
+
+		// Decide if we should render the module or wait for the page refresh
+		$render_code = true;
+		if ( $dslc_is_admin && $error_proof_mode && $ajax_module_render ) {
+			$render_code = false;
+		}
+
 		$this->module_start( $options );
 
 		/* Module output starts here */
-			
-			?><div class="dslc-html-module-content"<?php if ( $dslc_is_admin ) echo ' data-exportable-content'; ?>><?php 
 
-				$output_content = stripslashes( $options['content'] );
-				$output_content = do_shortcode( $output_content );
+			?><div class="dslc-html-module-content"<?php if ( $dslc_is_admin ) echo ' data-exportable-content'; ?>><?php
+
+				if ( $render_code ) {
+					$output_content = stripslashes( $options['content'] );
+					$output_content = do_shortcode( $output_content );
+				} else {
+					$output_content = '<div class="dslc-notification dslc-green">' . __('Save and refresh the page to display the module safely.', 'live-composer-page-builder') . '</div>';
+				}
+
 				echo $output_content;
 
 			?></div><?php

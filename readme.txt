@@ -2,8 +2,8 @@
 Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page
 Requires at least: 3.9
-Tested up to: 4.4.2
-Stable tag: 1.0.7.2
+Tested up to: 4.5.2
+Stable tag: 1.0.8
 License: GPLv3
 
 Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
@@ -72,7 +72,7 @@ We provide free one-to-one support by email. Please, send your question using [t
 
 = How to I activate the page builder on a page? =
 
-When you visit a page you'll see a green "activate editor" button in the bottom right corner, click that and the page will reload in LC mode.
+When you visit a page you'll see a green "activate editor" button in the bottom right corner, click that and the page will reload in LC mode ( LCPB ).
 
 = Why is the "activate editor" button missing from the homepage =
 
@@ -83,6 +83,30 @@ In most of the cases this is because the homepage is not a real WordPress page, 
 1. Editor activated on a page
 
 == Changelog ==
+
+= 1.0.8 - May 11th 2016 =
+
+* Page Builder - Module Options: Added 'Nofollow' option for the BUTTON and INFOBOX modules.
+* Page Builder - Module Options: New icon selection modal
+* Page Builder - Module Options: Removed confusing "Query Alter" tab. Created a simpler "Archive/Search Listing" control instead.
+* Page Builder - WordPress Admin: Show notice when W3 Total Cache plugin configs are wrong (can break Live Compose functionality)
+* Page Builder - WordPress Admin: Removed "Edit Template" button from header/footer editing screen and meta boxes.
+* Page Builder - WordPress Admin: Redesigned and improved plugin settings panel
+* Page Builder - WordPress Admin: Show notice if wrong settings detected in WP Admin > General
+* Page Builder - WordPress Admin: Overlay WP editor with LC Page Builder tab ONLY if there is LC content detected AND there is no content in the standard editor
+* Page Builder - Code: CSS generation optimization. After this change, we get ~30% shorter CSS code.
+* Page Builder - Code: Better content export into the dslc_content_for_search custom field. Now content fully recreate plain HTML output of the LC page. From now modules need to set attribute data-exportable-content for the peace that has searchable/exportable content inside.
+* Page Builder - Code: Improved code styling according to WordPress standards
+* Page Builder - Code: Removed DS_LIVE_COMPOSER_LOAD_MINIFIED constant. Developers, please use standard WP constant SCRIPT_DEBUG that can be declared in the wp-config file.
+* Page Builder - Code: Do not output empty Google font calls (when font set to an empty string in the editor)
+* Page Builder - Code: Added possibility for theme developers to output CSS for non-standard custom post types
+* Page Builder - Code: Make Welcome screen on activation optional for the theme developers. Use dslc_show_welcome_screen filter to disable it.
+* Page Builder - Code: Add 'dslc_archive_template_cpt' filter to give the theme developers an option to show their own custom posts types in the templates dropdown.
+* Page Builder - Code: Fix a broken reply to comment JS functionality due to the absence of a proper comment id in the html output.
+* Page Builder - Code: Fixed infinite loop in categories/tags feed output
+* Page Builder - Code: Fix broken styling for DSLC_TP_Content modules in templates
+* Page Builder - Code: Animations moved outside of media queries to it work in IE10 and IE11
+* Page Builder - Code: Fix a bug with posts listing on is_date() archive pages
 
 = 1.0.7 - March 5th 2016 =
 
@@ -121,6 +145,8 @@ add_filter( 'dslc_tutorials', '__return_true' );
 = Join Our New [Facebook Group] (https://www.facebook.com/groups/livecomposer/) =
 
 It's a great experience for us to support you via our new one-to-one support channel. We learn a lot on how you use visual composer for your business. To share your experience with our drag and drop plugin and learn about other users creations we created a new Facebook Group for Live Composer.  Please, join us and other site creators to share your latest project or get a quick advice on website building. For those of you who want to get notifications about important plugin updates, we have [Facebook Page] (https://www.facebook.com/livecomposer) and [Twitter profile] (https://twitter.com/LiveComposerWP)
+
+= 1.0.6.1 - December 15th 2015 =
 
 [Check out the blog post about 1.0.7 release](http://livecomposerplugin.com/lc-version-1-0-7)
 
@@ -319,7 +345,7 @@ This is also useful if you're working on a page but got to stop for some reason.
 * Issue with CSS generation when page/post not using default header/footer
 * All posts related modules - Non-published ( draft ) posts shown while in visual editor mode
 
-
+LCVV
 
 = 1.2.3 (July 7th, 2015) - released on CodeCanyon before moving to WordPress.org =
 

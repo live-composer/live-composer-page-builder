@@ -882,6 +882,11 @@ function dslc_module_front( $atts, $settings_raw = null ) {
 		// Instanciate the module class
 		$module_instance = new $module_id();
 
+		// Append marker indicating that the module
+		// was displayed during the regular page rendering
+		// not as ajax repsonse on creation/editing
+		$settings['module_render_nonajax'] = true;
+
 		// Start output fetching
 		ob_start();
 
