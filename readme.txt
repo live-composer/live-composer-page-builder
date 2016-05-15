@@ -12,11 +12,19 @@ Front-end page builder for WordPress with drag and drop editing. Build PRO respo
 
 = Create Stunning Websites Visually =
 
-[Live Composer](http://livecomposerplugin.com/) is the most innovative website builder for WordPress. Create stunning custom page designs in real-time right on your page. Drag & drop front-end editing is a perfectly intuitive way to create and customize great looking websites.
+[Live Composer](https://livecomposerplugin.com/) is the most innovative website builder for WordPress. Create stunning custom page designs in real-time right on your page. Drag & drop front-end editing is a perfectly intuitive way to create and customize great looking websites.
 
 Do it yourself with easy content editing in real-time. Save your money on expensive coding and customization services. No tech skills needed. A Live Composer is a great tool for web designers, digital marketing specialists, WordPress theme developers and freelance consultants. Create an exceptional landing page, portfolio or fully featured pro website for your client.
 
 Unlike other page builders, Live Composer is 100% free and open source. We provide full functionality out of the box without asking to buy a premium version. There is no premium version to up-sell, no hidden ads or annoying notices trying to sell something.
+
+= As Featured On… =
+
+* [TORQUE](http://torquemag.io/) – The WordPress News Core. Dedicated to informing new and advanced WordPress users about the industry
+
+* [WPExplorer.com](http://www.wpexplorer.com/) – number one source for all things WordPress related.
+
+* [ATHEMES](http://athemes.com/blog/) – WordPress reviews, collections and performance tips
 
 = Over 30,000 Site Owners Chose Live Composer =
 
@@ -28,11 +36,11 @@ Site design customization or page layout changes shouldn't be difficult or expen
 
 = Create Custom Page Layouts in Minutes =
 
-Live Composer is a simple but very powerful [WordPress site builder](http://livecomposerplugin.com/). Customize every little detail on your website or build stunning custom pages from scratch.
+Live Composer is a simple but very powerful [WordPress site builder](https://livecomposerplugin.com/). Customize every little detail on your website or build stunning custom pages from scratch.
 
 = Well Integrated With WordPress =
 
-Our page builder works with works with any standard compliant WordPress theme. It’s fully compatible with other plugins like Yoast WP SEO or contact form builders. We also have a [marketplace with free and premium themes](http://livecomposerplugin.com/themes/) created especially for Live Composer.
+Our page builder works with works with any standard compliant WordPress theme. It’s fully compatible with other plugins like Yoast WP SEO or contact form builders. We also have a [marketplace with free and premium themes](https://livecomposerplugin.com/themes/) created especially for Live Composer.
 
 = No Code Left Behind When the Plugin Deactivated =
 
@@ -40,7 +48,7 @@ Unlike other page builders, Live Composer doesn't leave behind horrible amount o
 
 = 100% Free and Open Source =
 
-Previously a premium plugin, Live Composer page builder is now free fully functional plugin. Actively developed by [professional web developers](http://livecomposerplugin.com/) it has a bright future for years to come.
+Previously a premium plugin, Live Composer page builder is now free fully functional plugin. Actively developed by [professional web developers](https://livecomposerplugin.com/) it has a bright future for years to come.
 
 = No Coding Skills Required =
 
@@ -48,7 +56,7 @@ Anyone can build pro website with Live Composer page builder. No coding or techn
 
 = Free Support =
 
-Our page builder comes with a [free one-to-one email support](http://livecomposerplugin.com/support/support-request/). If you faced any issues, found a bug or need an advice please [contact our support team using this form](http://livecomposerplugin.com/support/support-request/).
+Our page builder comes with a [free one-to-one email support](https://livecomposerplugin.com/support/support-request/). If you faced any issues, found a bug or need an advice please [contact our support team using this form](https://livecomposerplugin.com/support/support-request/).
 
 = Export/Import Sections, Layouts or while Pages =
 
@@ -62,13 +70,13 @@ It's easy to create responsive websites in our page builder. You can customize r
 == Installation ==
 
 1. Install and Activate as you would any other plugin
-2. Try the [interactive tutorial](http://livecomposerplugin.com/playground/tutorial-chapter-one/?dslc=active) to get familiar with how it works
+2. Try the [interactive tutorial](https://livecomposerplugin.com/playground/tutorial-chapter-one/?dslc=active) to get familiar with how it works
 
 == Frequently Asked Questions ==
 
 = How to I get support? =
 
-We provide free one-to-one support by email. Please, send your question using [this contact form](http://livecomposerplugin.com/support/support-request/)
+We provide free one-to-one support by email. Please, send your question using [this contact form](https://livecomposerplugin.com/support/support-request/)
 
 = How to I activate the page builder on a page? =
 
@@ -180,13 +188,13 @@ It's a great experience for us to support you via our new one-to-one support cha
 
 = 1.0.6.1 - December 15th 2015 =
 
-[Check out the blog post about 1.0.7 release](http://livecomposerplugin.com/lc-version-1-0-7)
+[Check out the blog post about 1.0.7 release](https://livecomposerplugin.com/lc-version-1-0-7)
 
 = 1.0.6.1 - December 15th 2015 =
 
 This is a small update that fixes the issue with pagination not working in WordPress 4.4.
 
-[Check out the blog post about 1.0.6.1 release](http://livecomposerplugin.com/blog/version-1-0-6-1-released/)
+[Check out the blog post about 1.0.6.1 release](https://livecomposerplugin.com/blog/version-1-0-6-1-released/)
 
 = 1.0.6 - November 24th 2015 =
 
@@ -229,13 +237,13 @@ But it was not compatible with our layout builder since the image resizing funct
 * Issue with border radius on thumbnail in all posts related site builder modules
 * Issue with content of a post type being displayed on the archives of the post type
 
-[Check out the blog post about 1.0.6 release](http://livecomposerplugin.com/blog/version-1-0-6-released/)
+[Check out the blog post about 1.0.6 release](https://livecomposerplugin.com/blog/version-1-0-6-released/)
 
 = 1.0.5 - November 2nd 2015 =
 
 This is a small update that fixes the issue with pagination not working in WordPress 4.4.
 
-[Check out the blog post about 1.0.5 release](http://livecomposerplugin.com/blog/version-1-0-5-released/)
+[Check out the blog post about 1.0.5 release](https://livecomposerplugin.com/blog/version-1-0-5-released/)
 
 = 1.0.4 - October 19th 2015 =
 
@@ -295,7 +303,7 @@ Here's the list of filters: dslc_projects_cpt_args, dslc_projects_cats_args, dsl
 
 For the list of arguments you can check the source code or check the register_post_type() and register_taxonomy().
 
-[Check out the blog post about 1.0.4 release](http://livecomposerplugin.com/blog/version-1-0-4-released/)
+[Check out the blog post about 1.0.4 release](https://livecomposerplugin.com/blog/version-1-0-4-released/)
 
 = 1.0.3 - October 2nd 2015 =
 
@@ -305,15 +313,15 @@ The text domain for visual composer used to be ds_string but for the language pa
 
 If you have your own translation of our frontend page editor the file name is something like dslc_string-sr_RS which will no longer work, change it to live-composer-page-builder-sr_RS ( the sr_RS part depends on the language code ).
 
-[Check out the blog post about 1.0.3 release](http://livecomposerplugin.com/blog/version-1-0-3-released/)
+[Check out the blog post about 1.0.3 release](https://livecomposerplugin.com/blog/version-1-0-3-released/)
 
 = 1.0.2 - September 30th 2015 =
 
-[Check out the blog post about 1.0.2 release](http://livecomposerplugin.com/blog/version-1-0-2-released/)
+[Check out the blog post about 1.0.2 release](https://livecomposerplugin.com/blog/version-1-0-2-released/)
 
 = 1.0.1 - September 15th 2015 =
 
-[Check out the blog post about 1.0.1 release](http://livecomposerplugin.com/blog/version-1-0-1-released/)
+[Check out the blog post about 1.0.1 release](https://livecomposerplugin.com/blog/version-1-0-1-released/)
 
 = 1.0 - September 10th 2015 =
 
@@ -364,7 +372,7 @@ This is also useful if you're working on a page but got to stop for some reason.
 * Information added for "Widget Module" and "Navigation Module" in Live Composer front-end editor settings panel
 * Show error when duplicated items for "Widgets Module" and "Navigation Module" settings entered in Live Composer layout builder settings panel
 * Meta module - Option to hide/show avatar
-* New Shortcode - Icon shortcode added. [dslc_icon id="ICON_ID"] ( IDs can be found at http://livecomposerplugin.com/icons-listing/ )
+* New Shortcode - Icon shortcode added. [dslc_icon id="ICON_ID"] ( IDs can be found at https://livecomposerplugin.com/icons-listing/ )
 * All posts related modules - Setting "Excerpt Length" to 0 now shows whole excerpt and does not strip HTML
 * Icon Module - Margin bottom option added
 
