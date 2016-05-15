@@ -3,7 +3,7 @@ Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page
 Requires at least: 3.9
 Tested up to: 4.5.2
-Stable tag: 1.0.8
+Stable tag: 1.0.8.1
 License: GPLv3
 
 Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
@@ -124,29 +124,36 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 
 == Changelog ==
 
+= 1.0.8.1 - May 14th 2016 =
+
+* Module Options: HTML/SHORTCODE module now has an Error-Proof mode. Use it when the complex shortcode or JS code break the Live Composer page editing functionality.
+* Code Improvements: Removed anonimous php functions to bring back support for php 5.3 and below.
+* Code Improvements: Updated page builder translation strigns.
+* Bug Fixed: Border-radius not working when border-width set to 0.
+
 = 1.0.8 - May 11th 2016 =
 
-* Page Builder - Module Options: Added 'Nofollow' option for the BUTTON and INFOBOX modules.
-* Page Builder - Module Options: New icon selection modal
-* Page Builder - Module Options: Removed confusing "Query Alter" tab. Created a simpler "Archive/Search Listing" control instead.
-* Page Builder - WordPress Admin: Show notice when W3 Total Cache plugin configs are wrong (can break Live Compose functionality)
-* Page Builder - WordPress Admin: Removed "Edit Template" button from header/footer editing screen and meta boxes.
-* Page Builder - WordPress Admin: Redesigned and improved plugin settings panel
-* Page Builder - WordPress Admin: Show notice if wrong settings detected in WP Admin > General
-* Page Builder - WordPress Admin: Overlay WP editor with LC Page Builder tab ONLY if there is LC content detected AND there is no content in the standard editor
-* Page Builder - Code: CSS generation optimization. After this change, we get ~30% shorter CSS code.
-* Page Builder - Code: Better content export into the dslc_content_for_search custom field. Now content fully recreate plain HTML output of the LC page. From now modules need to set attribute data-exportable-content for the peace that has searchable/exportable content inside.
-* Page Builder - Code: Improved code styling according to WordPress standards
-* Page Builder - Code: Removed DS_LIVE_COMPOSER_LOAD_MINIFIED constant. Developers, please use standard WP constant SCRIPT_DEBUG that can be declared in the wp-config file.
-* Page Builder - Code: Do not output empty Google font calls (when font set to an empty string in the editor)
-* Page Builder - Code: Added possibility for theme developers to output CSS for non-standard custom post types
-* Page Builder - Code: Make Welcome screen on activation optional for the theme developers. Use dslc_show_welcome_screen filter to disable it.
-* Page Builder - Code: Add 'dslc_archive_template_cpt' filter to give the theme developers an option to show their own custom posts types in the templates dropdown.
-* Page Builder - Code: Fix a broken reply to comment JS functionality due to the absence of a proper comment id in the html output.
-* Page Builder - Code: Fixed infinite loop in categories/tags feed output
-* Page Builder - Code: Fix broken styling for DSLC_TP_Content modules in templates
-* Page Builder - Code: Animations moved outside of media queries to it work in IE10 and IE11
-* Page Builder - Code: Fix a bug with posts listing on is_date() archive pages
+* Module Options: Added 'Nofollow' option for the BUTTON and INFOBOX modules.
+* Module Options: New icon selection modal
+* Module Options: Removed confusing "Query Alter" tab. Created a simpler "Archive/Search Listing" control instead.
+* WordPress Admin: Show notice when W3 Total Cache plugin configs are wrong (can break Live Compose functionality)
+* WordPress Admin: Removed "Edit Template" button from header/footer editing screen and meta boxes.
+* WordPress Admin: Redesigned and improved plugin settings panel
+* WordPress Admin: Show notice if wrong settings detected in WP Admin > General
+* WordPress Admin: Overlay WP editor with LC Page Builder tab ONLY if there is LC content detected AND there is no content in the standard editor
+* Code: CSS generation optimization. After this change, we get ~30% shorter CSS code.
+* Code: Better content export into the dslc_content_for_search custom field. Now content fully recreate plain HTML output of the LC page. From now modules need to set attribute data-exportable-content for the peace that has searchable/exportable content inside.
+* Code: Improved code styling according to WordPress standards
+* Code: Removed DS_LIVE_COMPOSER_LOAD_MINIFIED constant. Developers, please use standard WP constant SCRIPT_DEBUG that can be declared in the wp-config file.
+* Code: Do not output empty Google font calls (when font set to an empty string in the editor)
+* Code: Added possibility for theme developers to output CSS for non-standard custom post types
+* Code: Make Welcome screen on activation optional for the theme developers. Use dslc_show_welcome_screen filter to disable it.
+* Code: Add 'dslc_archive_template_cpt' filter to give the theme developers an option to show their own custom posts types in the templates dropdown.
+* Code: Fix a broken reply to comment JS functionality due to the absence of a proper comment id in the html output.
+* Code: Fixed infinite loop in categories/tags feed output
+* Code: Fix broken styling for DSLC_TP_Content modules in templates
+* Code: Animations moved outside of media queries to it work in IE10 and IE11
+* Code: Fix a bug with posts listing on is_date() archive pages
 
 = 1.0.7 - March 5th 2016 =
 
