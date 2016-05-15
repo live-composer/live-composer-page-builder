@@ -376,7 +376,7 @@ function dslc_generate_custom_css( $options_arr, $settings, $restart = false ) {
 
 							$css_output_rule .= $rule . ':' . $value . $important_append . ';';
 
-							if ( stristr( $rule, 'border' ) ) {
+							if ( stristr( $rule, 'border' ) && ! stristr( $rule, '-radius' ) ) {
 								$css_output_el_border .= $css_output_rule;
 							} elseif ( stristr( $rule, 'background-' ) && $rule != 'background-color' ) {
 								$css_output_el_background .= $css_output_rule;
