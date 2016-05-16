@@ -8,6 +8,7 @@
 
 	jQuery(document).on('DSLC_basic_module_extend', function(){
 
+		var $ = jQuery;
 		/**
 		 * Process settings tabs
 		 *
@@ -111,8 +112,9 @@
 		 * Clears inset HTML from admin-typed content
 		 * @return {string}
 		 */
-		DSLC.BasicModule.prototype.clearProductionHTML = function(HTML)
+		DSLC.BasicModule.prototype.prepareStaticHTML = function( HTML )
 		{
+			var self = this;
 			var HTML = jQuery(HTML);
 			HTML.find(".lc-editor-element").remove();
 			HTML.find(".dslca-editable-content").each(function()
@@ -122,9 +124,42 @@
 				.removeAttr('data-id')
 				.removeAttr('data-type')
 			});
+
 			HTML.find("[contenteditable]").each(function()
 			{
 				jQuery(this).removeAttr('contenteditable');
+			});
+
+			HTML.find("[formattedtext]").each(function()
+			{
+				this.innerHTML = "{dslc_format}" + this.innerHTML + "{/dslc_format}";
+			});
+
+			var repeatsPull = {};
+
+			HTML.find("[data-repeatable]").each(function()
+			{
+				repeatsPull[($(this).data('repeatable'))] = 'true';
+			});
+
+			Object.keys(repeatsPull).forEach(function(elem)
+			{
+				HTML.find("[data-repeatable='" + elem + "']").not(":first").remove();
+				// Enclose with shortcode brackets repeatable content
+				HTML.find("[data-repeatable='" + elem + "']").each(function()
+				{
+					$(this).before("[dslc-repeatable module_id='" + self.settings.id +
+						 "' method='" + $(this).data('repeatable') + "']")
+						.after("[/dslc-repeatable]")
+						.removeAttr('data-repeatable');
+				});
+			});
+
+			//
+			HTML.find("[data-repeatable-prop]").each(function()
+			{
+				$(this).html("[dslc-repeatable-prop prop='" + $(this).data('repeatable-prop') + "']")
+					.removeAttr('data-repeatable-prop');
 			});
 
 			return HTML[0].outerHTML;

@@ -56,16 +56,8 @@
 		var tpl = _.template( moduleBody || "" );
 		var bodyHTML = tpl( renderOpts );
 		var styles = "<style>" + self.generateCSS() + "</style>";
-		var staticHTML = self.clearProductionHTML( bodyHTML );
 
-		/// Format purposes
-		var format = jQuery( staticHTML );
-		format.find("[formattedtext]").each(function()
-		{
-			this.innerHTML = "{dslc_format}" + this.innerHTML + "{/dslc_format}";
-		});
-
-		self.staticHTML = Util.utf8_to_b64( format[0].outerHTML + styles );
+		self.staticHTML = Util.utf8_to_b64( self.prepareStaticHTML( bodyHTML ) + styles );
 
 		return bodyHTML + styles;
 	}

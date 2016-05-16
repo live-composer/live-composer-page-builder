@@ -20,6 +20,59 @@ class DSLC_Main {
 			wp_redirect("Location: //" . $_SERVER['REDIRECT_URL'], 301);
 			die();
 		}
+
+		add_shortcode('dslc-repeatable', [ __CLASS__, 'dslc_repeatable'] );
+		add_shortcode('dslc-repeatable-prop', [ __CLASS__, 'dslc_repeatable_prop'] );
+	}
+
+	/**
+	 * Repeater for underscore templates
+	 * @return [] some data pull
+	 */
+	static function dslc_repeatable( $attrs, $content ) {
+
+		pre($attrs);
+		if ( ! isset( $attrs['module_id'] ) || ! class_exists( $attrs['module_id'] ) ||
+		    ! isset( $attrs['method'] ) || ! method_exists( $attrs['module_id'], $attrs['method'] )
+		) return 'repeat sort failed';
+
+		global $LC_Registry;
+
+		if ( ! class_exists( $attrs['module_id'] ) ) return ' no such class render repeatable';
+
+		$repeatArray = $attrs['module_id']::$attrs['method']();
+
+		if ( $repeatArray instanceof WP_Query ) {
+
+			$temp = array();
+
+			while( $repeatArray->have_posts() ) {
+
+				$repeatArray->the_post();
+				global $post;
+
+				$temp[] = $post;
+			}
+
+			$repeatArray = $temp;
+		}
+
+		foreach( $repeatArray as $repeatElement ) {
+
+			$LC_Registry->set( 'repeater', $repeatElement );
+			do_shortcode( $content );
+		}
+	}
+
+	static function dslc_repeatable_prop( $atts, $content ) {
+
+		global $LC_Registry;
+
+		$repeater = $LC_Registry->get('repeater');
+
+		if ( ! is_array( $repeater ) ) return 'not array repeat_prop';
+
+		return isset( $repeater[$content] ) ? $repeater[$content] : 'no value';
 	}
 
 	/**

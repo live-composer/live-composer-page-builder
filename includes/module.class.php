@@ -74,8 +74,8 @@ class DSLC_Module{
 	 * @param  boolean $atts
 	 * @return mixed
 	 */
-	function shared_options($options_id, $atts = false)
-	{
+	function shared_options($options_id, $atts = false)	{
+
 		$animation_options_choices = array(
 			array(
 				'label' => 'None',
@@ -1808,8 +1808,8 @@ class DSLC_Module{
 	 * Returns ALL the user options. Used 2 insert common options to ALL modules
 	 * @return array
 	 */
-	function allOptions()
-	{
+	function allOptions() {
+
 		$opts = $this->options();
 
 		$commonOpts = array(
