@@ -770,35 +770,27 @@
 		{
 			if(!this.moduleOptions[optionId]) return false;
 
+			var val = undefined;
+
 			if(this.values[optionId] != undefined){
 
-				if( Array.isArray( this.values[optionId] ) ){
-
-					return _.deepExtend( [], this.values[optionId] );
-
-				}else if( typeof this.values[optionId] == 'object' ){
-
-					return _.deepExtend( {}, this.values[optionId] );
-				}else{
-
-					return this.values[optionId];
-				}
+				val = this.values[optionId];
 			}else{
 
-				var val = this.moduleOptions[optionId].std;
-
-				if( Array.isArray( val ) ){
-
-					return _.deepExtend( [], val );
-
-				}else if( typeof val == 'object' ){
-
-					return _.deepExtend( {}, val );
-				}else{
-
-					return val || false;
-				}
+				val = this.moduleOptions[optionId].std;
 			}
+
+			if( Array.isArray( val ) ){
+
+				return _.deepExtend( [], val );
+
+			}else if( typeof val == 'object' ){
+
+				return _.deepExtend( {}, val );
+			}else{
+
+				return val || false;
+				}
 		}
 
 		/**
