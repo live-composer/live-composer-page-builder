@@ -785,7 +785,19 @@
 				}
 			}else{
 
-				return this.moduleOptions[optionId].std || false;
+				var val = this.moduleOptions[optionId].std;
+
+				if( Array.isArray( val ) ){
+
+					return _.deepExtend( [], val );
+
+				}else if( typeof val == 'object' ){
+
+					return _.deepExtend( {}, val );
+				}else{
+
+					return val || false;
+				}
 			}
 		}
 
