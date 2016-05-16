@@ -50,7 +50,7 @@ class DSLC_Accordion_Test extends DSLC_Module {
 			$path = explode( '/', __DIR__ );
 			$path = array_pop( $path );
 
-			wp_enqueue_script( 'js-accordion-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/script.js', array( 'jquery' ) );
+			wp_enqueue_script( 'js-accordion1-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/script.js', array( 'jquery' ) );
 		});
 	}
 
