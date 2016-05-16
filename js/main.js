@@ -607,7 +607,7 @@ function dslc_accordion_generate_code(dslcAccordion){
  * Initiate Tabs
  */
 
-function dslc_tabs(){
+/*function dslc_tabs(){
 
 	var dslcTabs, dslcTabsNav, dslcTabsContent, dslcTabContent;
 
@@ -623,7 +623,7 @@ function dslc_tabs(){
 
 	});
 
-}
+}*/
 
 /**
  * Increment download count
@@ -802,7 +802,7 @@ jQuery(document).ready(function($){
 	dslc_el_anim_hover();
 	dslc_browser_classes();
 	dslc_bg_video();
-	dslc_tabs();
+	//dslc_tabs();
 	dslc_init_square();
 	dslc_center();
 
@@ -866,7 +866,7 @@ jQuery(document).ready(function($){
 	 * Tabs
 	 */
 
-	jQuery(document).on('click', '.dslca-add-new-tab-hook', function(){
+/*	jQuery(document).on('click', '.dslca-add-new-tab-hook', function(){
 
 		var dslcTabs = jQuery(this).closest('.dslc-tabs'),
 		dslcTabsNavLast = jQuery('.dslc-tabs-nav .dslc-tabs-nav-hook:last', dslcTabs),
@@ -961,7 +961,7 @@ jQuery(document).ready(function($){
 			jQuery(this).closest('.dslc-module-front').find('.dslca-module-edit-hook').trigger('click');
 		}
 
-	});
+	});*/
 
 
 	// Close Notification

@@ -1,5 +1,11 @@
 <?php
+/**
+ * Tabs module class
+ */
 
+/**
+ * Class DSLC_Tabs
+ */
 class DSLC_Tabs extends DSLC_Module {
 
 	var $module_id;
@@ -8,17 +14,39 @@ class DSLC_Tabs extends DSLC_Module {
 	var $module_category;
 	var $handle_like;
 
-	function __construct() {
+	/**
+	 * @inherited
+	 */
+	function __construct( $settings = [], $atts = [] ) {
 
-		$this->module_id = 'DSLC_Tabs';
+		$this->module_ver = 2;
+		$this->module_id = __CLASS__;
 		$this->module_title = __( 'Tabs', 'live-composer-page-builder' );
 		$this->module_icon = 'list';
 		$this->module_category = 'elements';
 		$this->handle_like = 'tabs';
 
+		parent::__construct( $settings, $atts );
 	}
 
-	function options() {	
+	/**
+	 * @inherited
+	 */
+	function afterRegister()
+	{
+		add_action( 'wp_enqueue_scripts', function(){
+
+			$path = explode( '/', __DIR__ );
+			$path = array_pop( $path );
+
+			wp_enqueue_script( 'js-tab-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/script.js', array( 'jquery' ) );
+		});
+	}
+
+	/**
+	 * @inherited
+	 */
+	function options() {
 
 		$dslc_options = array(
 
@@ -43,20 +71,132 @@ class DSLC_Tabs extends DSLC_Module {
 				),
 			),
 			array(
-				'label' => __( '(hidden) Tabs Content', 'live-composer-page-builder' ),
-				'id' => 'tabs_content',
-				'std' => __( 'This is just placeholder text.', 'live-composer-page-builder' ),
-				'type' => 'textarea',
-				'visibility' => 'hidden',
+				'label' => __( 'Tab slides', 'live-composer-page-builder' ),
+				'id' => 'tab_slides',
+				'std' => [[
+					'title' => 'New tab',
+					'content' => 'Add here some contents by clicking on it.'
+				]],
+				'type' => 'jsobj'
+			),
+
+			/**
+			 * Tabs Content
+			 */
+
+			array(
+				'label' => __( 'BG Color', 'live-composer-page-builder' ),
+				'id' => 'css_content_bg_color',
+				'std' => '#ffffff',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-tabs-content',
+				'affect_on_change_rule' => 'background-color',
 				'section' => 'styling',
 			),
 			array(
-				'label' => __( '(hidden) Tabs Nav', 'live-composer-page-builder' ),
-				'id' => 'tabs_nav',
-				'std' => __( 'Click to edit', 'live-composer-page-builder' ),
-				'type' => 'textarea',
-				'visibility' => 'hidden',
+				'label' => __( 'Border Color', 'live-composer-page-builder' ),
+				'id' => 'css_content_border_color',
+				'std' => '#e8e8e8',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-tabs-content',
+				'affect_on_change_rule' => 'border-color',
 				'section' => 'styling',
+			),
+			array(
+				'label' => __( 'Border Width', 'live-composer-page-builder' ),
+				'id' => 'css_content_border_width',
+				'std' => '1',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-tabs-content',
+				'affect_on_change_rule' => 'border-width',
+				'section' => 'styling',
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Borders', 'live-composer-page-builder' ),
+				'id' => 'css_content_border_trbl',
+				'std' => 'top right bottom left',
+				'type' => 'checkbox',
+				'choices' => array(
+					array(
+						'label' => __( 'Top', 'live-composer-page-builder' ),
+						'value' => 'top'
+					),
+					array(
+						'label' => __( 'Right', 'live-composer-page-builder' ),
+						'value' => 'right'
+					),
+					array(
+						'label' => __( 'Bottom', 'live-composer-page-builder' ),
+						'value' => 'bottom'
+					),
+					array(
+						'label' => __( 'Left', 'live-composer-page-builder' ),
+						'value' => 'left'
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-tabs-content',
+				'affect_on_change_rule' => 'border-style',
+				'section' => 'styling',
+			),
+			array(
+				'label' => __( 'Border Radius - Top', 'live-composer-page-builder' ),
+				'id' => 'css_content_border_radius_top',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-tabs-content',
+				'affect_on_change_rule' => 'border-top-left-radius,border-top-right-radius',
+				'section' => 'styling',
+				'ext' => 'px'
+			),
+			array(
+				'label' => __( 'Border Radius - Bottom', 'live-composer-page-builder' ),
+				'id' => 'css_content_border_radius_bottom',
+				'std' => '3',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-tabs-content',
+				'affect_on_change_rule' => 'border-bottom-left-radius,border-bottom-right-radius',
+				'section' => 'styling',
+				'ext' => 'px'
+			),
+			array(
+				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
+				'id' => 'css_margin_bottom',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-tabs-content',
+				'affect_on_change_rule' => 'margin-bottom',
+				'section' => 'styling',
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
+				'id' => 'css_content_padding_vertical',
+				'std' => '35',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-tabs-tab-content',
+				'affect_on_change_rule' => 'padding-top,padding-bottom',
+				'section' => 'styling',
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Padding Horizontal', 'live-composer-page-builder' ),
+				'id' => 'css_content_padding_horizontal',
+				'std' => '35',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-tabs-tab-content',
+				'affect_on_change_rule' => 'padding-left,padding-right',
+				'section' => 'styling',
+				'ext' => 'px',
 			),
 
 			/**
@@ -278,7 +418,7 @@ class DSLC_Tabs extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Navigation', 'live-composer-page-builder' ),
 			),
-			
+
 			/**
 			 * Tabs Nav - Active
 			 */
@@ -355,125 +495,6 @@ class DSLC_Tabs extends DSLC_Module {
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
 				'tab' => __( 'Navigation Active', 'live-composer-page-builder' ),
-			),
-
-			/**
-			 * Tabs Content
-			 */
-
-			array(
-				'label' => __( 'BG Color', 'live-composer-page-builder' ),
-				'id' => 'css_content_bg_color',
-				'std' => '#ffffff',
-				'type' => 'color',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tabs-content',
-				'affect_on_change_rule' => 'background-color',
-				'section' => 'styling',
-			),
-			array(
-				'label' => __( 'Border Color', 'live-composer-page-builder' ),
-				'id' => 'css_content_border_color',
-				'std' => '#e8e8e8',
-				'type' => 'color',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tabs-content',
-				'affect_on_change_rule' => 'border-color',
-				'section' => 'styling',
-			),
-			array(
-				'label' => __( 'Border Width', 'live-composer-page-builder' ),
-				'id' => 'css_content_border_width',
-				'std' => '1',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tabs-content',
-				'affect_on_change_rule' => 'border-width',
-				'section' => 'styling',
-				'ext' => 'px',
-			),
-			array(
-				'label' => __( 'Borders', 'live-composer-page-builder' ),
-				'id' => 'css_content_border_trbl',
-				'std' => 'top right bottom left',
-				'type' => 'checkbox',
-				'choices' => array(
-					array(
-						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
-					),
-					array(
-						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
-					),
-					array(
-						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
-					),
-					array(
-						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
-					),
-				),
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tabs-content',
-				'affect_on_change_rule' => 'border-style',
-				'section' => 'styling',
-			),
-			array(
-				'label' => __( 'Border Radius - Top', 'live-composer-page-builder' ),
-				'id' => 'css_content_border_radius_top',
-				'std' => '0',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tabs-content',
-				'affect_on_change_rule' => 'border-top-left-radius,border-top-right-radius',
-				'section' => 'styling',
-				'ext' => 'px'
-			),
-			array(
-				'label' => __( 'Border Radius - Bottom', 'live-composer-page-builder' ),
-				'id' => 'css_content_border_radius_bottom',
-				'std' => '3',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tabs-content',
-				'affect_on_change_rule' => 'border-bottom-left-radius,border-bottom-right-radius',
-				'section' => 'styling',
-				'ext' => 'px'
-			),
-			array(
-				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
-				'id' => 'css_margin_bottom',
-				'std' => '0',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tabs-content',
-				'affect_on_change_rule' => 'margin-bottom',
-				'section' => 'styling',
-				'ext' => 'px',
-			),
-			array(
-				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
-				'id' => 'css_content_padding_vertical',
-				'std' => '35',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tabs-tab-content',
-				'affect_on_change_rule' => 'padding-top,padding-bottom',
-				'section' => 'styling',
-				'ext' => 'px',
-			),
-			array(
-				'label' => __( 'Padding Horizontal', 'live-composer-page-builder' ),
-				'id' => 'css_content_padding_horizontal',
-				'std' => '35',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tabs-tab-content',
-				'affect_on_change_rule' => 'padding-left,padding-right',
-				'section' => 'styling',
-				'ext' => 'px',
 			),
 
 			/* Content */
@@ -2988,7 +3009,6 @@ class DSLC_Tabs extends DSLC_Module {
 				'ext' => 'px',
 			),
 
-
 		);
 
 		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array( 'hover_opts' => false ) ) );
@@ -2998,106 +3018,20 @@ class DSLC_Tabs extends DSLC_Module {
 
 	}
 
-	function output( $options ) {
+	/**
+	 * @inherited
+	 */
+	function output( $options = [] )
+	{
+		$this->module_start();
 
-		global $dslc_active;
+		/* Module output stars here */
+		echo $this->renderModule();
+		/* Module output ends here */
 
-		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
-			$dslc_is_admin = true;
-		else
-			$dslc_is_admin = false;		
-
-		$this->module_start( $options );
-
-		/* Module output stars here */ 
-
-			$tabs_nav = explode( '(dslc_sep)', trim( $options['tabs_nav'] ) );
-			$tabs_content = explode( '(dslc_sep)', trim( $options['tabs_content'] ) );
-
-		?>
-
-			<div class="dslc-tabs dslc-tabs-nav-pos-<?php echo $options['css_nav_position']; ?>">
-
-				<div class="dslc-tabs-nav dslc-clearfix">
-					
-					<?php if ( is_array( $tabs_nav ) ) : ?>
-
-						<?php foreach ( $tabs_nav as $tab_nav ) : ?>
-							<span class="dslc-tabs-nav-hook">
-								<span class="dslc-tabs-nav-hook-title" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?>><?php echo stripslashes( $tab_nav ); ?></span>
-								<?php if ( $dslc_is_admin ) : ?>
-									<span class="dslca-delete-tab-hook"><span class="dslca-icon dslc-icon-remove"></span></span>
-								<?php endif; ?>
-							</span>
-						<?php endforeach; ?>
-
-					<?php else : ?>
-						<span class="dslc-tabs-nav-hook">
-							<span class="dslc-tabs-nav-hook-title" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?>><?php _e( 'Click to edit', 'live-composer-page-builder' ); ?></span>
-							<?php if ( $dslc_is_admin ) : ?>
-								<span class="dslca-delete-tab-hook"><span class="dslca-icon dslc-icon-remove"></span></span>
-							<?php endif; ?>
-						</span>
-
-					<?php endif; ?>
-
-					<?php if ( $dslc_is_admin ) : ?>
-
-						<span class="dslca-add-new-tab-hook">
-							<span class="dslca-icon dslc-icon-plus"></span>
-						</span>
-
-					<?php endif; ?>
-
-				</div><!-- .dslc-tabs-nav -->
-
-				<div class="dslc-tabs-content">
-
-					<?php if ( is_array( $tabs_content ) ) : $count = 0; ?>
-
-						<?php foreach( $tabs_content as $tab_content ) : ?>
-
-							<div class="dslc-tabs-tab-content">
-								<h4 class="dslc-tabs-nav-hook"<?php if ( $dslc_is_admin ) echo ' data-exportable-content="h3"'; ?>><?php echo $tabs_nav[$count]; ?></h4>
-								<div class="dslca-editable-content"<?php if ( $dslc_is_admin ) echo ' data-exportable-content'; ?>>
-									<?php 
-										$tab_content_output = stripslashes( $tab_content ); 
-										$tab_content_output = str_replace( '<lctextarea', '<textarea', $tab_content_output );
-										$tab_content_output = str_replace( '</lctextarea', '</textarea', $tab_content_output );
-										echo do_shortcode( $tab_content_output );
-									?>
-								</div>
-								<?php if ( $dslc_is_admin ) : ?>
-									<textarea class="dslca-tab-plain-content"><?php echo $tab_content_output; ?></textarea>
-									<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook"><?php _e( 'Edit Content', 'live-composer-page-builder' ); ?></span></div>
-								<?php endif; ?>
-							</div><!-- .dslc-tabs-tab-content -->
-
-						<?php $count++; endforeach; ?>
-
-					<?php else : ?>
-
-						<div class="dslc-tabs-tab-content">
-							<h4 class="dslc-tabs-nav-hook">CLICK TO EDIT</h4>
-							<div class="dslca-editable-content">
-								<?php _e( 'This is just placeholder text.', 'live-composer-page-builder' ); ?>
-							</div>
-							<?php if ( $dslc_is_admin ) : ?>
-								<textarea class="dslca-tab-plain-content"><?php _e( 'This is just placeholder text.', 'live-composer-page-builder' ); ?></textarea>
-								<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook"><?php _e( 'Edit Content', 'live-composer-page-builder' ); ?></span></div>
-							<?php endif; ?>
-						</div><!-- .dslc-tabs-tab-content -->
-
-					<?php endif; ?>
-
-				</div><!-- .dslc-tabs-content -->
-
-			</div><!-- .dslc-tabs -->
-
-		<?php /* Module output ends here */
-
-		$this->module_end( $options );
-
+		$this->module_end();
 	}
 
 }
+/// Register module
+( new DSLC_Tabs )->register();
