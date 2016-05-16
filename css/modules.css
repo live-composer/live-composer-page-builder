@@ -1097,6 +1097,11 @@
 				display: block;
 			}
 
+	.dslc-tabs-nav-hook .dslc-tabs-nav-hook-title {
+	    display: inline-block;
+	    min-height: auto;
+	}
+
 
 	/* Admin */
 
@@ -1111,16 +1116,17 @@
 		height: 20px;
 		text-align: center;
 		line-height: 22px;
-		margin-top: 8px;
+		/*margin-top: 8px;*/
 		width: 20px;
 		position: relative;
+		top: 4px;
 	}
 
 		.dslca-add-new-tab-hook .dslca-icon {
 			position: absolute;
-			line-height: 1;
+			/*line-height: 1;
 			top: 5px;
-			right: 6px;
+			right: 6px;*/
 		}
 
 	.dslca-delete-tab-hook {

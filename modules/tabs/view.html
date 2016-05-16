@@ -1,0 +1,40 @@
+<div class="dslc-tabs dslc-tabs-nav-pos-<%= css_nav_position.value || css_nav_position.std %>">
+
+	<div class="dslc-tabs-nav dslc-clearfix">
+
+		<% tab_slides.value.forEach(function(slide, index){%>
+			<span class="dslc-tabs-nav-hook <%= index == 0 ? 'dslc-active' : ''  %>">
+				<span class="dslc-tabs-nav-hook-title dslca-editable-content" contenteditable><%= slide.title %></span>
+				<span class="dslca-delete-tab-hook lc-editor-element"><span class="dslca-icon dslc-icon-remove"></span></span>
+			</span>
+		<%});%>
+
+		<span class="dslca-add-new-tab-hook lc-editor-element ">
+			<span class="dslc-center-elem dslca-icon dslc-icon-plus"></span>
+		</span>
+
+	</div><!-- .dslc-tabs-nav -->
+
+	<div class="dslc-tabs-content">
+
+		<% tab_slides.value.forEach(function(slide, index){%>
+
+			<div class="dslc-tabs-tab-content <%= index == 0 ? 'dslc-active' : ''  %>">
+				<h4 class="dslc-tabs-nav-hook" data-exportable-content="h3"><%= slide.title %></h4>
+
+				<div class="dslca-editable-content" data-exportable-content>
+					<%= slide.content %>
+				</div>
+
+				<div class="dslca-wysiwyg-actions-edit lc-editor-element">
+					<span class="dslca-wysiwyg-actions-edit-hook">
+						<?php _e( 'Edit Content', 'live-composer-page-builder' ); ?>
+					</span>
+				</div>
+			</div>
+
+		<%});%>
+
+	</div><!-- .dslc-tabs-content -->
+
+</div><!-- .dslc-tabs -->
