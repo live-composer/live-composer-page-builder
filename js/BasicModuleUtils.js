@@ -165,7 +165,7 @@
 			});
 
 			//
-			HTML.find("[data-array-field]").each(function()
+			HTML.find("[data-array-field], [data-module-method], [data-wppost-field]").each(function()
 			{
 				var arField = $(this).data('array-field') ? ' array-field="' + $(this).data('array-field') + '"' : '';
 				var modMethod = $(this).data('module-method') ? ' module-method="' + $(this).data('module-method') + '"' : '';

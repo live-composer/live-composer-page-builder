@@ -92,7 +92,7 @@ class DSLC_Main {
 		global $LC_Registry;
 		$repeater = $LC_Registry->get('repeater');
 
-		if ( $atts['array-field'] != '' ) {
+		if ( ! empty( $atts['array-field'] ) ) {
 
 			if ( is_array( $repeater ) && isset( $repeater[$atts['prop']] ) ) {
 
@@ -101,7 +101,7 @@ class DSLC_Main {
 		}
 
 
-		if ( $atts['wppost-field'] != '' ) {
+		if ( ! empty( $atts['wppost-field'] ) ) {
 
 			if ( $repeater instanceof WP_Post && isset( $repeater->$atts['prop'] ) ) {
 
@@ -110,7 +110,7 @@ class DSLC_Main {
 		}
 
 
-		if ( $atts['module-method'] != '' ) {
+		if ( ! empty( $atts['module-method'] ) ) {
 
 			$method = explode( "::", $atts['module-method'] );
 
