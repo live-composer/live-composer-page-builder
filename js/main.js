@@ -334,7 +334,6 @@ function dslc_bg_video(){
 			mediaElement.play();
 		}
 	});
-
 }
 
 /**

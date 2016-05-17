@@ -137,29 +137,44 @@
 
 			var repeatsPull = {};
 
-			HTML.find("[data-repeatable]").each(function()
+			HTML.find("[data-array], [data-wpquery]").each(function()
 			{
-				repeatsPull[($(this).data('repeatable'))] = 'true';
+				if($(this).data('array') != null){
+
+					repeatsPull['[data-array="' + $(this).data('array') + '"]'] = 'true';
+				}else{
+					repeatsPull['[data-wpquery="' + $(this).data('wpquery') + '"]'] = 'true';
+				}
 			});
 
 			Object.keys(repeatsPull).forEach(function(elem)
 			{
-				HTML.find("[data-repeatable='" + elem + "']").not(":first").remove();
+				HTML.find(elem).not(":first").remove();
 				// Enclose with shortcode brackets repeatable content
-				HTML.find("[data-repeatable='" + elem + "']").each(function()
+				HTML.find(elem).each(function()
 				{
+					var array = $(this).data('array') ? ' array="' + $(this).data('array') + '"' : '';
+					var wpquery = $(this).data('wpquery') ? ' wpquery="' + $(this).data('wpquery') + '"' : '';
+
 					$(this).before("[dslc-repeatable module_id='" + self.settings.id +
-						 "' method='" + $(this).data('repeatable') + "']")
+						 "'" + array + " " + wpquery + "]")
 						.after("[/dslc-repeatable]")
-						.removeAttr('data-repeatable');
+						.removeAttr('data-wpquery')
+						.removeAttr('data-array');
 				});
 			});
 
 			//
-			HTML.find("[data-repeatable-prop]").each(function()
+			HTML.find("[data-array-field]").each(function()
 			{
-				$(this).html("[dslc-repeatable-prop prop='" + $(this).data('repeatable-prop') + "']")
-					.removeAttr('data-repeatable-prop');
+				var arField = $(this).data('array-field') ? ' array-field="' + $(this).data('array-field') + '"' : '';
+				var modMethod = $(this).data('module-method') ? ' module-method="' + $(this).data('module-method') + '"' : '';
+				var wpField = $(this).data('wppost-field') ? ' wppost-field="' + $(this).data('wppost-field') + '"' : '';
+
+				$(this).html("[dslc-repeatable-prop " + arField + " " + modMethod + " " + wpField + "]")
+					.removeAttr('data-array-field')
+					.removeAttr('data-module-method')
+					.removeAttr('data-wppost-field');
 			});
 
 			return HTML[0].outerHTML;
