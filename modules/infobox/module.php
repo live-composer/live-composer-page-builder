@@ -2497,10 +2497,17 @@ class DSLC_Info_Box extends DSLC_Module{
 
 	static function wp_enqueue_scripts()
 	{
-		$path = explode( '/', __DIR__ );
-		$path = array_pop( $path );
+		global $LC_Registry;
 
-		wp_enqueue_script( 'js-infobox-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/script.js', array( 'jquery' ) );
+		if ( $LC_Registry->get( 'dslc_active' ) == true ) {
+
+			add_action( 'wp_enqueue_scripts', function(){
+
+				$path = explode( '/', __DIR__ );
+				$path = array_pop( $path );
+				wp_enqueue_script( 'js-infobox-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/script.js', array( 'jquery' ) );
+			});
+		}
 	}
 
 	/**

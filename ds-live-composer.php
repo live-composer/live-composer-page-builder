@@ -19,11 +19,11 @@
 	define( 'DS_LIVE_COMPOSER_VER', '2.0' );
 	define( 'DS_LIVE_COMPOSER_LOAD_MINIFIED', false );
 
-	define( 'DS_LIVE_COMPOSER_SHORTNAME', __('Live Composer', 'live-composer-page-builder') );
+	define( 'DS_LIVE_COMPOSER_SHORTNAME', __( 'Live Composer', 'live-composer-page-builder' ) );
 	define( 'DS_LIVE_COMPOSER_BASENAME', plugin_basename( __FILE__ ) );
 	define( 'DS_LIVE_COMPOSER_URL', plugin_dir_url( __FILE__ ) );
 	define( 'DS_LIVE_COMPOSER_DIR_NAME', dirname( plugin_basename( __FILE__ ) ) );
-	define( 'DS_LIVE_COMPOSER_ABS', dirname(__FILE__) );
+	define( 'DS_LIVE_COMPOSER_ABS', dirname( __FILE__ ) );
 	define( 'DS_LIVE_COMPOSER_DEV_MODE', false );
 
 	define( 'DSLC_PO_FRAMEWORK_ABS', DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework' );
@@ -39,15 +39,17 @@
 	 * Is live composer currently active?
 	 */
 	if ( isset( $_REQUEST['dslc'] ) && $_REQUEST['dslc'] === 'active' ) {
+
 		$dslc_active = true;
 		define( 'DS_LIVE_COMPOSER_ACTIVE', true );
 	} else {
+
 		$dslc_active = false;
 		define( 'DS_LIVE_COMPOSER_ACTIVE', false );
 	}
 
 	/// Use registry instead of global vars
-	$LC_Registry->set( 'dslc_active', $dslc_active);
+	$LC_Registry->set( 'dslc_active', $dslc_active );
 	$LC_Registry->set( 'removeAdminElementsFromEditor', false );
 
 
@@ -112,7 +114,7 @@
 	/**
 	 * Include Modules
 	 */
-	load_modules(DS_LIVE_COMPOSER_ABS . "/modules", "module.php");
+	load_modules( DS_LIVE_COMPOSER_ABS . "/modules", "module.php" );
 
 	/**
 	 * Deny dslc EM if not authorized

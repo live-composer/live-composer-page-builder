@@ -36,10 +36,16 @@ class DSLC_Tabs extends DSLC_Module {
 	{
 		add_action( 'wp_enqueue_scripts', function(){
 
+			global $LC_Registry;
 			$path = explode( '/', __DIR__ );
 			$path = array_pop( $path );
 
-			wp_enqueue_script( 'js-tab-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/script.js', array( 'jquery' ) );
+			if ( $LC_Registry->get( 'dslc_active') == true ) {
+
+				wp_enqueue_script( 'js-tab-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/editor-script.js', array( 'jquery' ) );
+			}
+
+			wp_enqueue_script( 'js-tab-production', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/script.js', array( 'jquery' ) );
 		});
 	}
 

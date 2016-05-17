@@ -916,11 +916,18 @@ class DSLC_Button extends DSLC_Module{
 	 */
 	static function wp_enqueue_scripts()
 	{
-		$path = explode( '/', __DIR__ );
-		$path = array_pop( $path );
-		wp_enqueue_script( 'js-button-extender',
-		                  DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/script.js',
-		                  array( 'jquery' ) );
+		global $LC_Registry;
+
+		if ( $LC_Registry->get( 'dslc_active' ) == true ) {
+
+			add_action( 'wp_enqueue_scripts', function(){
+
+				$path = explode( '/', __DIR__ );
+				$path = array_pop( $path );
+
+				wp_enqueue_script( 'js-button-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/script.js', array( 'jquery' ) );
+			});
+		}
 	}
 
 	/**

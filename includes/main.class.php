@@ -68,6 +68,12 @@ class DSLC_Main {
 		return $out;
 	}
 
+	/**
+	 * Returns concrete prop from repeater object
+	 *
+	 * @param  array $atts
+	 * @return string
+	 */
 	static function dslc_repeatable_prop( $atts ) {
 
 		global $LC_Registry;
