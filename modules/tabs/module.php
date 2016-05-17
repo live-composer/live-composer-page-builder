@@ -37,6 +37,7 @@ class DSLC_Tabs extends DSLC_Module {
 		add_action( 'wp_enqueue_scripts', function(){
 
 			global $LC_Registry;
+
 			$path = explode( '/', __DIR__ );
 			$path = array_pop( $path );
 

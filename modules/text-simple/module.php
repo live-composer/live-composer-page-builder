@@ -2549,7 +2549,7 @@ class DSLC_Text_Simple extends DSLC_Module{
 				'tab' => __( 'inputs', 'live-composer-page-builder' ),
 			 ),
 			array(
-				'label' => __( 'Line Height', 'live-composer-page-builder' ),
+				'label' => __( 'Textarea Line Height', 'live-composer-page-builder' ),
 				'id' => 'css_inputs_line_height',
 				'std' => '23',
 				'type' => 'slider',

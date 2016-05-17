@@ -920,13 +920,10 @@ class DSLC_Button extends DSLC_Module{
 
 		if ( $LC_Registry->get( 'dslc_active' ) == true ) {
 
-			add_action( 'wp_enqueue_scripts', function(){
+			$path = explode( '/', __DIR__ );
+			$path = array_pop( $path );
 
-				$path = explode( '/', __DIR__ );
-				$path = array_pop( $path );
-
-				wp_enqueue_script( 'js-button-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/script.js', array( 'jquery' ) );
-			});
+			wp_enqueue_script( 'js-button-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/script.js', array( 'jquery' ) );
 		}
 	}
 

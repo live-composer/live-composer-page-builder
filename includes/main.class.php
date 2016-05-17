@@ -37,8 +37,6 @@ class DSLC_Main {
 
 		global $LC_Registry;
 
-		if ( ! class_exists( $attrs['module_id'] ) ) return '';
-
 		$repeatArray = $attrs['module_id']::$attrs['method']();
 
 
@@ -76,10 +74,9 @@ class DSLC_Main {
 	 */
 	static function dslc_repeatable_prop( $atts ) {
 
-		global $LC_Registry;
-
 		if ( ! isset( $atts['prop'] ) ) return '';
 
+		global $LC_Registry;
 
 		$repeater = $LC_Registry->get('repeater');
 
