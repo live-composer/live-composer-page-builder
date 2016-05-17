@@ -14,16 +14,12 @@
 
 		Accordion.prototype.changeOptionsBeforeRender = function(options)
 		{
-			if(options.accordion_slides.value == undefined || ( Array.isArray(options.accordion_slides.value) && options.accordion_slides.value.length == 0 ) ){
-
-				options.accordion_slides.value = options.accordion_slides.std;
-			}
-
+			options.accordion_slides.value = [];
 			options.open_by_default.value = options.open_by_default.value > 0 ? options.open_by_default.value : options.open_by_default.std;
 
 			for(var i = 0; i < options.open_by_default.value; i++) {
 
-				options.accordion_slides.value.push(options.accordion_slides.std[0]);
+				options.accordion_slides.value.push( _.deepExtend( {}, options.accordion_slides.std[0] ) );
 			}
 
 			return options;

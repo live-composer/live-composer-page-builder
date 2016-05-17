@@ -1,17 +1,17 @@
 <div class="dslc-accordion" data-open="<%= open_by_default.value || open_by_default.std %>">
 
 	<% accordion_slides.value.forEach(function(slide, index){%>
-		<div class="dslc-accordion-item" data-repeatable="method_in_accordion_php">
+		<div class="dslc-accordion-item" data-repeatable="method_in_accordion_php_wp_query">
 
 			<div class="dslc-accordion-header dslc-accordion-hook">
-				<span class="dslc-accordion-title" data-repeatable-prop="title" data-exportable-content="h3">
+				<span class="dslc-accordion-title" data-repeatable-prop="post_title" data-exportable-content="h3">
 					Some title
 				</span>
 			</div>
 
 			<div class="dslc-accordion-content-wrapper" style="<%= open_by_default.value > -1 && open_by_default.value -1 == index ? 'display: block' : 'display: none' %>">
 				<div class="dslc-accordion-content">
-					<div data-repeatable-prop="content" data-exportable-content>
+					<div data-repeatable-prop="post_content" data-exportable-content>
 						Some content placeholder
 					</div>
 

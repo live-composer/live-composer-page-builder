@@ -31,16 +31,16 @@ class DSLC_Main {
 	 */
 	static function dslc_repeatable( $attrs, $content ) {
 
-		pre($attrs);
 		if ( ! isset( $attrs['module_id'] ) || ! class_exists( $attrs['module_id'] ) ||
 		    ! isset( $attrs['method'] ) || ! method_exists( $attrs['module_id'], $attrs['method'] )
-		) return 'repeat sort failed';
+		) return '';
 
 		global $LC_Registry;
 
-		if ( ! class_exists( $attrs['module_id'] ) ) return ' no such class render repeatable';
+		if ( ! class_exists( $attrs['module_id'] ) ) return '';
 
 		$repeatArray = $attrs['module_id']::$attrs['method']();
+
 
 		if ( $repeatArray instanceof WP_Query ) {
 
@@ -57,22 +57,35 @@ class DSLC_Main {
 			$repeatArray = $temp;
 		}
 
+		$out = '';
+
 		foreach( $repeatArray as $repeatElement ) {
 
 			$LC_Registry->set( 'repeater', $repeatElement );
-			do_shortcode( $content );
+			$out .= do_shortcode( $content );
 		}
+
+		return $out;
 	}
 
-	static function dslc_repeatable_prop( $atts, $content ) {
+	static function dslc_repeatable_prop( $atts ) {
 
 		global $LC_Registry;
 
+		if ( ! isset( $atts['prop'] ) ) return '';
+
+
 		$repeater = $LC_Registry->get('repeater');
 
-		if ( ! is_array( $repeater ) ) return 'not array repeat_prop';
+		if ( is_array( $repeater ) && isset( $repeater[$atts['prop']] ) ) {
 
-		return isset( $repeater[$content] ) ? $repeater[$content] : 'no value';
+			return do_shortcode( $repeater[$atts['prop']] );
+		}
+
+		if ( $repeater instanceof WP_Post && isset( $repeater->$atts['prop'] ) ) {
+
+			return do_shortcode( $repeater->$atts['prop'] );
+		}
 	}
 
 	/**

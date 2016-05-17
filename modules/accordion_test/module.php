@@ -41,6 +41,14 @@ class DSLC_Accordion_Test extends DSLC_Module {
 	}
 
 	/**
+	 * Returns some array
+	 */
+	static function method_in_accordion_php_wp_query() {
+
+		return new WP_Query( array('post_type' => 'post') );
+	}
+
+	/**
 	 * @inherited
 	 */
 	function afterRegister()
