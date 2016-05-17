@@ -35,12 +35,14 @@ class DSLC_Main {
 
 		global $LC_Registry;
 
+
 		if ( ! empty( $attrs['array'] ) && method_exists( $attrs['module_id'], $attrs['array']) ) {
 
 			$repeatArray = $attrs['module_id']::$attrs['array'];
 
 			if ( ! is_array( $repeatArray ) ) return 'Method has to return an array!';
 		}
+
 
 		if ( ! empty( $attrs['wpquery'] ) && method_exists( $attrs['module_id'], $attrs['wpquery']) ) {
 
@@ -98,6 +100,7 @@ class DSLC_Main {
 			}
 		}
 
+
 		if ( $atts['wppost-field'] != '' ) {
 
 			if ( $repeater instanceof WP_Post && isset( $repeater->$atts['prop'] ) ) {
@@ -106,13 +109,14 @@ class DSLC_Main {
 			}
 		}
 
+
 		if ( $atts['module-method'] != '' ) {
 
 			$method = explode( "::", $atts['module-method'] );
 
 			if ( count( $method ) > 1 && method_exists( $method[0], $method[1] ) ) {
 
-				return $method[0]::$method[1];
+				return $method[0]::$method[1]();
 			}
 		}
 	}
