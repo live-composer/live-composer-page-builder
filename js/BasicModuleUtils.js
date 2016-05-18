@@ -156,7 +156,7 @@
 					var array = $(this).data('array') ? ' array="' + $(this).data('array') + '"' : '';
 					var wpquery = $(this).data('wpquery') ? ' wpquery="' + $(this).data('wpquery') + '"' : '';
 
-					$(this).before("[dslc-repeatable module_id='" + self.settings.id +
+					$(this).before("[dslc-repeatable module_instance_id='" + self.settings.module_instance_id +
 						 "'" + array + " " + wpquery + "]")
 						.after("[/dslc-repeatable]")
 						.removeAttr('data-wpquery')

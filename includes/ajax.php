@@ -50,9 +50,6 @@ function dslc_ajax_save_composer( $atts )
 
 			add_post_meta( $post_id, 'dslc_cache', base64_encode( $dslc_cache ) );
 			$response['status'] = 'success';
-
-			delete_post_meta ( $post_id, 'dslc_raw_settings' );
-			add_post_meta ( $post_id, 'dslc_raw_settings', base64_encode( json_encode( $_POST['dslc_raw_settings'] ) ) );
 		}else{
 
 			$response['composer_update_post_meta'] = 'false';

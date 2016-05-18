@@ -1,5 +1,12 @@
 <?php
+/**
+ * Posts module class
+ */
 
+
+/**
+ * DSLC_Posts class
+ */
 class DSLC_Posts extends DSLC_Module {
 
 	var $module_id;
@@ -7,21 +14,29 @@ class DSLC_Posts extends DSLC_Module {
 	var $module_icon;
 	var $module_category;
 
-	function __construct() {
+	/**
+	 * @inherited
+	 */
+	function __construct( $settings = [], $atts = [] ) {
 
-		$this->module_id = 'DSLC_Posts';
+		$this->module_id = __CLASS__;
+		$this->module_ver = 2;
 		$this->module_title = __( 'Posts', 'live-composer-page-builder' );
 		$this->module_icon = 'pencil';
 		$this->module_category = 'posts';
 
+		parent::__construct( $settings, $atts );
 	}
 
+	/**
+	 * @inherited
+	 */
 	function options() {
 
 		// Get registered post types
 		$post_types = get_post_types( array( 'public' => true ), 'objects' );
 		$post_types_choices = array();
-		
+
 		// Generate usable array of post types
 		foreach ( $post_types as $post_type_id => $post_type ) {
 			$post_types_choices[] = array(
@@ -550,7 +565,7 @@ class DSLC_Posts extends DSLC_Module {
 				'affect_on_change_rule' => 'background-color',
 				'section' => 'styling',
 				'tab' => __( 'Thumbnail', 'live-composer-page-builder' ),
-			),	
+			),
 			array(
 				'label' => __( 'Border Color', 'live-composer-page-builder' ),
 				'id' => 'css_thumb_border_color',
@@ -602,7 +617,7 @@ class DSLC_Posts extends DSLC_Module {
 				'affect_on_change_rule' => 'border-style',
 				'section' => 'styling',
 				'tab' => __( 'Thumbnail', 'live-composer-page-builder' ),
-			),		
+			),
 			array(
 				'label' => __( 'Border Radius - Top', 'live-composer-page-builder' ),
 				'id' => 'css_thumb_border_radius_top',
@@ -1235,7 +1250,7 @@ class DSLC_Posts extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'Meta', 'live-composer-page-builder' ),
 			),
-			
+
 			/**
 			 * Excerpt
 			 */
@@ -2155,7 +2170,7 @@ class DSLC_Posts extends DSLC_Module {
 			),
 
 		);
-	
+
 		$dslc_options = array_merge( $dslc_options, $this->shared_options('carousel_options') );
 		$dslc_options = array_merge( $dslc_options, $this->shared_options('heading_options') );
 		$dslc_options = array_merge( $dslc_options, $this->shared_options('filters_options') );
@@ -2169,9 +2184,14 @@ class DSLC_Posts extends DSLC_Module {
 
 	}
 
-	function output( $options ) {
+	/**
+	 * Posts fetcher
+	 */
+	function getPosts() {
 
 		global $dslc_active;
+
+		$options = $this->settings;
 
 		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
 			$dslc_is_admin = true;
@@ -2182,7 +2202,7 @@ class DSLC_Posts extends DSLC_Module {
 		if ( isset( $options['button_text'] ) ) {
 			$options['button_text'] = stripslashes( $options['button_text'] );
 		}
-		
+
 		$this->module_start( $options );
 
 		/* CUSTOM START */
@@ -2205,7 +2225,7 @@ class DSLC_Posts extends DSLC_Module {
 
 			// General args
 			$args = array(
-				'paged' => $paged, 
+				'paged' => $paged,
 				'post_type' => $options['post_type'],
 				'posts_per_page' => $options['amount'],
 				'order' => $options['order'],
@@ -2242,7 +2262,7 @@ class DSLC_Posts extends DSLC_Module {
 			// Include posts ( option )
 			if ( $options['query_post_in'] )
 				$include = array_merge( $include, explode( ' ', $options['query_post_in'] ) );
-			
+
 			// Include query parameter
 			if ( ! empty( $include ) )
 				$args['post__in'] = $include;
@@ -2256,11 +2276,11 @@ class DSLC_Posts extends DSLC_Module {
 				global $authordata;
 				$args['author__in'] = array( $authordata->data->ID );
 			}
-			
+
 			// No paging
 			if ( $options['pagination_type'] == 'disabled' )
 				$args['no_found_rows'] = true;
-				
+
 			// Sticky Posts
 			if ( $options['sticky_posts'] == 'disabled' )
 				$args['ignore_sticky_posts'] = true;
@@ -2286,14 +2306,14 @@ class DSLC_Posts extends DSLC_Module {
 		/**
 		 * Elements to show
 		 */
-			
+
 			// Main Elements
 			$elements = $options['elements'];
 			if ( ! empty( $elements ) )
 				$elements = explode( ' ', trim( $elements ) );
 			else
 				$elements = array();
-			
+
 
 			// Post Elements
 			$post_elements = $options['post_elements'];
@@ -2338,7 +2358,7 @@ class DSLC_Posts extends DSLC_Module {
 			$show_view_all_link = false;
 
 			if ( in_array( 'main_heading', $elements ) )
-				$show_heading = true;		
+				$show_heading = true;
 
 			if ( ( $elements == 'all' || in_array( 'filters', $elements ) ) && $options['type'] !== 'carousel' )
 				$show_filters = true;
@@ -2352,7 +2372,7 @@ class DSLC_Posts extends DSLC_Module {
 		/**
 		 * Carousel Items
 		 */
-		
+
 			switch ( $options['columns'] ) {
 				case 12 :
 					$carousel_items = 1;
@@ -2373,6 +2393,14 @@ class DSLC_Posts extends DSLC_Module {
 					$carousel_items = 6;
 					break;
 			}
+	}
+
+	/**
+	 * @inherited
+	 */
+	function output( $options ) {
+
+
 
 		/**
 		 * Heading ( output )
@@ -2381,7 +2409,7 @@ class DSLC_Posts extends DSLC_Module {
 			if ( $show_header ) :
 				?>
 					<div class="dslc-module-heading">
-						
+
 						<!-- Heading -->
 
 						<?php if ( $show_heading ) : ?>
@@ -2411,9 +2439,9 @@ class DSLC_Posts extends DSLC_Module {
 
 								if ( $dslc_query->have_posts() ) {
 
-									while ( $dslc_query->have_posts() ) { 
+									while ( $dslc_query->have_posts() ) {
 
-										$dslc_query->the_post(); 
+										$dslc_query->the_post();
 
 										$cats_count++;
 
@@ -2528,12 +2556,12 @@ class DSLC_Posts extends DSLC_Module {
 										if ( isset( $options['thumb_resize_height'] ) && ! empty( $options['thumb_resize_height'] ) || isset( $options['thumb_resize_width_manual'] ) && ! empty( $options['thumb_resize_width_manual'] ) ) {
 
 											$manual_resize = true;
-											$thumb_url = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full' ); 
+											$thumb_url = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full' );
 											$thumb_url = $thumb_url[0];
 
 											$thumb_alt = get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true );
 											if ( ! $thumb_alt ) $thumb_alt = '';
-											
+
 											$resize_width = false;
 											$resize_height = false;
 
@@ -2563,7 +2591,7 @@ class DSLC_Posts extends DSLC_Module {
 											<?php if ( ( $options['main_location'] == 'inside' || $options['main_location'] == 'inside_visible' ) && ( $post_elements == 'all' || in_array( 'title', $post_elements ) || in_array( 'meta', $post_elements ) || in_array( 'excerpt', $post_elements ) || in_array( 'button', $post_elements ) ) ) : ?>
 
 												<div class="dslc-post-main dslc-cpt-post-main <?php if ( $options['main_location'] == 'inside_visible' ) echo 'dslc-cpt-post-main-visible'; ?> dslc-on-hover-anim-target dslc-anim-<?php echo $options['css_anim_hover']; ?>" data-dslc-anim="<?php echo $options['css_anim_hover'] ?>" data-dslc-anim-speed="<?php echo $options['css_anim_speed']; ?>">
-													
+
 													<div class="dslc-cpt-post-main-inner dslc-init-<?php echo $options['main_position']; ?>">
 
 														<?php if ( $post_elements == 'all' || in_array( 'title', $post_elements ) ) : ?>
@@ -2572,18 +2600,18 @@ class DSLC_Posts extends DSLC_Module {
 																<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 															</div><!-- .dslc-cpt-post-title -->
 
-														<?php endif; ?>	
+														<?php endif; ?>
 
 														<?php if ( $post_elements == 'all' || in_array( 'meta', $post_elements ) ) : ?>
 
-															<?php 
+															<?php
 																// Meta Elements
 																$meta_elements = $options['meta_elements'];
 																$meta_elements = explode( ' ', trim( $meta_elements ) );
 															?>
 
 															<div class="dslc-cpt-post-meta">
-																
+
 																<?php if ( in_array( 'author', $meta_elements ) ) : ?>
 																	<div class="dslc-cpt-post-meta-author">
 																		<?php _e( 'By', 'live-composer-page-builder'); ?> <?php the_author_posts_link(); ?>
@@ -2640,7 +2668,7 @@ class DSLC_Posts extends DSLC_Module {
 													</div><!-- .dslc-cpt-post-main-inner -->
 
 													<a href="<?php the_permalink(); ?>" class="dslc-post-main-inner-link-cover"></a>
-													
+
 												</div><!-- .dslc-cpt-post-main -->
 
 											<?php endif; ?>
@@ -2661,18 +2689,18 @@ class DSLC_Posts extends DSLC_Module {
 												<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 											</div><!-- .dslc-cpt-post-title -->
 
-										<?php endif; ?>	
+										<?php endif; ?>
 
 										<?php if ( $post_elements == 'all' || in_array( 'meta', $post_elements ) ) : ?>
 
-											<?php 
+											<?php
 												// Meta Elements
 												$meta_elements = $options['meta_elements'];
 												$meta_elements = explode( ' ', trim( $meta_elements ) );
 											?>
 
 											<div class="dslc-cpt-post-meta">
-												
+
 												<?php if ( in_array( 'author', $meta_elements ) ) : ?>
 													<div class="dslc-cpt-post-meta-author">
 														<?php _e( 'By', 'live-composer-page-builder'); ?> <?php the_author_posts_link(); ?>
@@ -2761,16 +2789,16 @@ class DSLC_Posts extends DSLC_Module {
 		/**
 		 * Pagination
 		 */
-			
+
 			if ( isset( $options['pagination_type'] ) && $options['pagination_type'] != 'disabled' ) {
 				$num_pages = $dslc_query->max_num_pages;
 				if ( $options['offset'] > 0 ) {
 					$num_pages = ceil ( ( $dslc_query->found_posts - $options['offset'] ) / $options['amount'] );
 				}
-				dslc_post_pagination( array( 'pages' => $num_pages, 'type' => $options['pagination_type'] ) ); 
+				dslc_post_pagination( array( 'pages' => $num_pages, 'type' => $options['pagination_type'] ) );
 			}
 
-		
+
 		wp_reset_postdata();
 
 		$this->module_end( $options );
@@ -2778,3 +2806,6 @@ class DSLC_Posts extends DSLC_Module {
 	}
 
 }
+
+/// Register module
+( new DSLC_Posts )->register();

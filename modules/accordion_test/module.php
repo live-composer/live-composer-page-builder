@@ -30,20 +30,28 @@ class DSLC_Accordion_Test extends DSLC_Module {
 	}
 
 	/**
+	 * fff
+	 */
+	function post_title()
+	{
+		return 'dfgdfgdfg';
+	}
+
+	/**
 	 * Returns some array
 	 */
-	static function method_in_accordion_php() {
+	function dfgdfgdfg() {
 
 		return [
-			['title' => 'ololoo', 'content' => 'ttrrrr'],
-			['title' => '8888888', 'content' => '44444']
+			['post_title' => 'ololoo', 'post_content' => 'ttrrrr'],
+			['post_title' => '8888888', 'post_content' => '44444']
 		];
 	}
 
 	/**
 	 * Returns some array
 	 */
-	static function method_in_accordion_php_wp_query() {
+	function method_in_accordion_php_wp_query() {
 
 		return new WP_Query( array('post_type' => 'post') );
 	}

@@ -31,24 +31,52 @@ class DSLC_Main {
 	 */
 	static function dslc_repeatable( $attrs, $content ) {
 
-		if ( ! isset( $attrs['module_id'] ) || ! class_exists( $attrs['module_id'] ) ) return '';
+		if ( ! isset( $attrs['module_instance_id'] ) ) {
+
+			pre($attrs);
+			trigger_error("Module instance id not exists ", E_USER_WARNING );
+			return '';
+		}
 
 		global $LC_Registry;
 
+		$activeModules = $LC_Registry->get( 'activeModules' );
 
-		if ( ! empty( $attrs['array'] ) && method_exists( $attrs['module_id'], $attrs['array']) ) {
+		if ( ! isset( $activeModules['a' . $attrs['module_instance_id']] ) ) {
 
-			$repeatArray = $attrs['module_id']::$attrs['array'];
+			pre( $activeModules );
+			pre( $attrs['module_instance_id'] );
 
-			if ( ! is_array( $repeatArray ) ) return 'Method has to return an array!';
+			trigger_error( "No active module under given instnance id.", E_USER_WARNING );
+			return '';
+		}
+
+		$currModule = $activeModules['a' . $attrs['module_instance_id']];
+
+
+		if ( ! empty( $attrs['array'] ) && method_exists( $currModule, $attrs['array']) ) {
+
+			$repeatArray = $currModule->$attrs['array']();
+
+			if ( ! is_array( $repeatArray ) ) {
+
+				pre( $repeatArray );
+				trigger_error( "Method has to return an array!", E_USER_WARNING );
+				return '';
+			}
 		}
 
 
-		if ( ! empty( $attrs['wpquery'] ) && method_exists( $attrs['module_id'], $attrs['wpquery']) ) {
+		if ( ! empty( $attrs['wpquery'] ) && method_exists( $currModule, $attrs['wpquery']) ) {
 
-			$repeatArray = $attrs['module_id']::$attrs['array'];
+			$repeatArray = $currModule->$attrs['wpquery']();
 
-			if ( ! $repeatArray instanceof WP_Query ) return 'Method has to return WP_Query!';
+			if ( ! $repeatArray instanceof WP_Query ) {
+
+				pre( $repeatArray );
+				trigger_error( $repeatArray, E_USER_WARNING );
+				return 'Method has to return WP_Query!';
+			}
 
 			$temp = array();
 
@@ -70,10 +98,12 @@ class DSLC_Main {
 			foreach( $repeatArray as $repeatElement ) {
 
 				$LC_Registry->set( 'repeater', $repeatElement );
+				$LC_Registry->set( 'repeaterCurrClass', $currModule );
 				$out .= do_shortcode( $content );
 			}
 
 			$LC_Registry->set( 'repeater', null );
+			$LC_Registry->set( 'repeaterCurrClass', null );
 		}
 
 		return $out;
@@ -87,36 +117,30 @@ class DSLC_Main {
 	 */
 	static function dslc_repeatable_prop( $atts ) {
 
-		if ( ! isset( $atts['prop'] ) ) return '';
-
 		global $LC_Registry;
 		$repeater = $LC_Registry->get('repeater');
+		$currModule = $LC_Registry->get( 'repeaterCurrClass' );
+
+		if ( ! empty( $atts['module-method'] ) && method_exists( $currModule, $atts['module-method'] ) ) {
+
+			return $currModule->$atts['module-method']();
+		}
+
 
 		if ( ! empty( $atts['array-field'] ) ) {
 
-			if ( is_array( $repeater ) && isset( $repeater[$atts['prop']] ) ) {
+			if ( is_array( $repeater ) && isset( $repeater[$atts['array-field']] ) ) {
 
-				return do_shortcode( $repeater[$atts['prop']] );
+				return do_shortcode( $repeater[$atts['array-field']] );
 			}
 		}
 
 
 		if ( ! empty( $atts['wppost-field'] ) ) {
 
-			if ( $repeater instanceof WP_Post && isset( $repeater->$atts['prop'] ) ) {
+			if ( $repeater instanceof WP_Post && isset( $repeater->$atts['wppost-field'] ) ) {
 
-				return do_shortcode( $repeater->$atts['prop'] );
-			}
-		}
-
-
-		if ( ! empty( $atts['module-method'] ) ) {
-
-			$method = explode( "::", $atts['module-method'] );
-
-			if ( count( $method ) > 1 && method_exists( $method[0], $method[1] ) ) {
-
-				return $method[0]::$method[1]();
+				return do_shortcode( $repeater->$atts['wppost-field'] );
 			}
 		}
 	}
