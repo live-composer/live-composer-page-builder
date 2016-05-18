@@ -675,15 +675,15 @@
 /**
  * PARTNERS MODULE
  */
-
+/*
 	 #dslc-content .dslc-partner {
 
 	}
-
+*/
 		#dslc-content .dslc-partner .dslc-partner-thumb {
-			border: 1px solid #ebebeb;
-			padding: 50px 0;
-			text-align: center;
+			/*border: 1px solid #ebebeb;*/
+			/*padding: 50px 0;*/
+			/*text-align: center;*/
 			position: relative;
 			line-height: 0;
 		}
@@ -729,36 +729,37 @@
 				opacity: 1;
 			}
 
+/*
 		#dslc-content .dslc-partner .dslc-partner-main {
 			border: 0px solid transparent;
 		}
-
-			#dslc-content .dslc-partner .dslc-partner-title {
+*/
+			#dslc-content .dslc-partner-title {
 				margin-bottom: 10px;
 			}
 
-				#dslc-content .dslc-partner .dslc-partner-title h2 {
-					color: #222;
-					font-family: "Oswald";
-					font-weight: bold;
-					font-size: 14px;
-					line-height: 1;
+				#dslc-content .dslc-partner-title h2 {
+					/*color: #222;*/
+					/*font-family: "Oswald";*/
+					/*font-weight: bold;*/
+					/*font-size: 14px;*/
+					/*line-height: 1;*/
 					margin: 0;
 					padding: 0;
 				}
 
-					#dslc-content .dslc-partner .dslc-partner-title h2 a {
+					#dslc-content .dslc-partner-title h2 a {
 						display: block;
 						color: inherit;
 						text-decoration: none;
 					}
 
 		#dslc-content .dslc-partner .dslc-partner-excerpt {
-			color: #444;
-			font-family: "Open Sans";
-			font-weight: 400;
-			font-size: 12px;
-			line-height: 22px;
+			/*color: #444;*/
+			/*font-family: "Open Sans";*/
+			/*font-weight: 400;*/
+			/*font-size: 12px;*/
+			/*line-height: 22px;*/
 		}
 
 
