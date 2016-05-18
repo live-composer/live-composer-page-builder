@@ -2185,6 +2185,24 @@ class DSLC_Posts extends DSLC_Module {
 	}
 
 	/**
+	 * @inherited
+	 */
+	function afterRegister() {
+
+		global $LC_Registry;
+
+		if ( $LC_Registry->get( 'dslc_active' ) == true ) {
+
+			add_action( 'wp_enqueue_scripts', function(){
+
+					$path = explode( '/', __DIR__ );
+					$path = array_pop( $path );
+					wp_enqueue_script( 'js-posts-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/editor-script.js', array( 'jquery' ) );
+			});
+		}
+	}
+
+	/**
 	 * Posts fetcher
 	 */
 	function getPosts() {
@@ -2291,107 +2309,6 @@ class DSLC_Posts extends DSLC_Module {
 				$dslc_query = $wp_query;
 			} else {
 				$dslc_query = new WP_Query( $args );
-			}
-
-		/**
-		 * Unnamed
-		 */
-
-			$columns_class = 'dslc-col dslc-' . $options['columns'] . '-col ';
-			$count = 0;
-			$real_count = 0;
-			$increment = $options['columns'];
-			$max_count = 12;
-
-		/**
-		 * Elements to show
-		 */
-
-			// Main Elements
-			$elements = $options['elements'];
-			if ( ! empty( $elements ) )
-				$elements = explode( ' ', trim( $elements ) );
-			else
-				$elements = array();
-
-
-			// Post Elements
-			$post_elements = $options['post_elements'];
-			if ( ! empty( $post_elements ) )
-				$post_elements = explode( ' ', trim( $post_elements ) );
-			else
-				$post_elements = 'all';
-
-			// Carousel Elements
-			$carousel_elements = $options['carousel_elements'];
-			if ( ! empty( $carousel_elements ) )
-				$carousel_elements = explode( ' ', trim( $carousel_elements ) );
-			else
-				$carousel_elements = array();
-
-		/**
-		 * Classes generation
-		 */
-
-			// Posts container
-			$container_class = 'dslc-posts dslc-cpt-posts dslc-clearfix dslc-cpt-posts-type-' . $options['type'] .' dslc-posts-orientation-' . $options['orientation'] . ' ';
-			if ( $options['type'] == 'masonry' )
-				$container_class .= 'dslc-init-masonry ';
-			elseif ( $options['type'] == 'grid' )
-				$container_class .= 'dslc-init-grid ';
-
-			// Post
-			$element_class = 'dslc-post dslc-cpt-post ';
-			if ( $options['type'] == 'masonry' )
-				$element_class .= 'dslc-masonry-item ';
-			elseif ( $options['type'] == 'carousel' )
-				$element_class .= 'dslc-carousel-item ';
-
-		/**
-		 * What is shown
-		 */
-
-			$show_header = false;
-			$show_heading = false;
-			$show_filters = false;
-			$show_carousel_arrows = false;
-			$show_view_all_link = false;
-
-			if ( in_array( 'main_heading', $elements ) )
-				$show_heading = true;
-
-			if ( ( $elements == 'all' || in_array( 'filters', $elements ) ) && $options['type'] !== 'carousel' )
-				$show_filters = true;
-
-			if ( $options['type'] == 'carousel' && in_array( 'arrows', $carousel_elements ) )
-				$show_carousel_arrows = true;
-
-			if ( $show_heading || $show_filters || $show_carousel_arrows )
-				$show_header = true;
-
-		/**
-		 * Carousel Items
-		 */
-
-			switch ( $options['columns'] ) {
-				case 12 :
-					$carousel_items = 1;
-					break;
-				case 6 :
-					$carousel_items = 2;
-					break;
-				case 4 :
-					$carousel_items = 3;
-					break;
-				case 3 :
-					$carousel_items = 4;
-					break;
-				case 2 :
-					$carousel_items = 6;
-					break;
-				default:
-					$carousel_items = 6;
-					break;
 			}
 	}
 

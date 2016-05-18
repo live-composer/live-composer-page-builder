@@ -58,99 +58,82 @@
 
 				<% if( post_elements.value == 'all' || post_elements.value.thumbnail ){%>
 
-						<div class="dslc-post-thumb dslc-cpt-post-thumb dslc-on-hover-anim">
+					<div class="dslc-post-thumb dslc-cpt-post-thumb dslc-on-hover-anim">
 
-							<div class="dslc-cpt-post-thumb-inner dslca-post-thumb">
-								<% if(manual_resize){%>
-									<a href="[dslc-repeatable-prop module-method='permalink" data-module-method="aq_resize_1">
-										<img src="dummy image" alt="Image alt" />
-									</a>
-								<%}else{%>
-									<a href="[dslc-repeatable-prop module-method='permalink" data-module-method="post_thumb_1">
-										<img src="dummy"/>
-									</a>
-								<%}%>
-							</div><!-- .dslc-cpt-post-thumb-inner -->
-
-							<% if(main_location.value == 'inside' || main_location.value == 'inside_visible'  && (post_elements.value == 'all' || post_elements.value.title == true || post_elements.value.meta == true || post_elements.value.excerpt == true || post_elements.value.button)){%>
-
-								<div class="dslc-post-main dslc-cpt-post-main <%= main_location.value == 'inside_visible' ? 'dslc-cpt-post-main-visible' : '' %> dslc-on-hover-anim-target dslc-anim-<%= css_anim_hover.value %>" data-dslc-anim="<%= css_anim_hover.value %>" data-dslc-anim-speed="<%= css_anim_speed.value %>">
-
-									<div class="dslc-cpt-post-main-inner dslc-init-<%= main_position.value %>">
-
-										<% if(post_elements.value == 'all' || post_elements.value.title == true){%>
-
-											<div class="dslc-cpt-post-title">
-												<h2><a href="[dslc-repeatable-prop module-method='permalink']" data-wppost-field="post_title">Post title</a></h2>
-											</div><!-- .dslc-cpt-post-title -->
-
-										<%}%>
-
-										<% if(post_elements.value == 'all' || post_elements.value.meta == true){%>
-
-											<div class="dslc-cpt-post-meta">
-
-												<% if(meta_elements.value.author == true){%>
-													<div class="dslc-cpt-post-meta-author" data-module-method="author_posts_link">
-														Author's link
-													</div><!-- .dslc-cpt-post-meta-author -->
-												<%}%>
-
-												<% if(meta_elements.value.date == true){%>
-													<div class="dslc-cpt-post-meta-date" data-module-method="post_date">
-														05/10/2016
-													</div><!-- .dslc-cpt-post-meta-date -->
-												<%}%>
-
-											</div><!-- .dslc-cpt-post-meta -->
-
-										<%}%>
-
-										<% if(post_elements.value == 'all' || post_elements.value.excerpt == true){%>
-
-											<div class="dslc-cpt-post-excerpt">
-												<% if ( excerpt_or_content == 'content' ) : %>
-													<% the_content(); %>
-												<% else : %>
-													<%
-														if ( excerpt_length > 0 ) {
-															if ( has_excerpt() )
-																echo do_shortcode( wp_trim_words( get_the_excerpt(), excerpt_length ) );
-															else
-																echo do_shortcode( wp_trim_words( get_the_content(), excerpt_length ) );
-														} else {
-															if ( has_excerpt() )
-																echo do_shortcode( get_the_excerpt() );
-															else
-																echo do_shortcode( get_the_content() );
-														}
-													%>
-												<%}%>
-											</div><!-- .dslc-cpt-post-excerpt -->
-
-										<%}%>
-
-										<% if(post_elements.value == 'all' || post_elements.value.button == true){%>
-
-											<div class="dslc-cpt-post-read-more">
-												<a href="[dslc-repeatable-prop module-method='permalink']">
-													<% if(obj.button_icon_id && obj.button_icon_id.value != '' ){%>
-														<span class="dslc-icon dslc-icon-<%= button_icon_id.value %>"></span>
-													<%}%>
-													<%= button_text.value %>
-												</a>
-											</div><!-- .dslc-cpt-post-read-more -->
-										<%}%>
-									</div><!-- .dslc-cpt-post-main-inner -->
-									<a href="[dslc-repeatable-prop module-method='permalink']" class="dslc-post-main-inner-link-cover"></a>
-								</div><!-- .dslc-cpt-post-main -->
+						<div class="dslc-cpt-post-thumb-inner dslca-post-thumb">
+							<% if(manual_resize){%>
+								<a href="[dslc-repeatable-prop module-method='permalink']" data-module-method="aq_resize_1">
+									<img src="dummy image" alt="Image alt" />
+								</a>
+							<%}else{%>
+								<a href="[dslc-repeatable-prop module-method='permalink']" data-module-method="post_thumb_1">
+									<img src="dummy"/>
+								</a>
 							<%}%>
-						</div><!-- .dslc-cpt-post-thumb -->
-					<%}%>
+						</div><!-- .dslc-cpt-post-thumb-inner -->
+
+						<% if(main_location.value == 'inside' || main_location.value == 'inside_visible'  && (post_elements.value == 'all' || post_elements.value.title == true || post_elements.value.meta == true || post_elements.value.excerpt == true || post_elements.value.button)){%>
+
+							<div class="dslc-post-main dslc-cpt-post-main <%= main_location.value == 'inside_visible' ? 'dslc-cpt-post-main-visible' : '' %> dslc-on-hover-anim-target dslc-anim-<%= css_anim_hover.value %>" data-dslc-anim="<%= css_anim_hover.value %>" data-dslc-anim-speed="<%= css_anim_speed.value %>">
+
+								<div class="dslc-cpt-post-main-inner dslc-init-<%= main_position.value %>">
+
+									<% if(post_elements.value == 'all' || post_elements.value.title == true){%>
+
+										<div class="dslc-cpt-post-title">
+											<h2><a href="[dslc-repeatable-prop module-method='permalink']" data-wppost-field="post_title">Post title</a></h2>
+										</div><!-- .dslc-cpt-post-title -->
+
+									<%}%>
+
+									<% if(post_elements.value == 'all' || post_elements.value.meta == true){%>
+
+										<div class="dslc-cpt-post-meta">
+
+											<% if(meta_elements.value.author == true){%>
+												<div class="dslc-cpt-post-meta-author" data-module-method="author_posts_link">
+													Author's link
+												</div><!-- .dslc-cpt-post-meta-author -->
+											<%}%>
+
+											<% if(meta_elements.value.date == true){%>
+												<div class="dslc-cpt-post-meta-date" data-module-method="post_date">
+													05/10/2016
+												</div><!-- .dslc-cpt-post-meta-date -->
+											<%}%>
+
+										</div><!-- .dslc-cpt-post-meta -->
+
+									<%}%>
+
+									<% if(post_elements.value == 'all' || post_elements.value.excerpt == true){%>
+
+										<div class="dslc-cpt-post-excerpt" <%= cpt_post_excerpt %>>
+											Lorem ipsum dorem sit amet
+										</div><!-- .dslc-cpt-post-excerpt -->
+
+									<%}%>
+
+									<% if(post_elements.value == 'all' || post_elements.value.button == true){%>
+
+										<div class="dslc-cpt-post-read-more">
+											<a href="[dslc-repeatable-prop module-method='permalink']">
+												<% if(obj.button_icon_id && obj.button_icon_id.value != '' ){%>
+													<span class="dslc-icon dslc-icon-<%= button_icon_id.value %>"></span>
+												<%}%>
+												<%= button_text.value %>
+											</a>
+										</div><!-- .dslc-cpt-post-read-more -->
+									<%}%>
+								</div><!-- .dslc-cpt-post-main-inner -->
+								<a href="[dslc-repeatable-prop module-method='permalink']" class="dslc-post-main-inner-link-cover"></a>
+							</div><!-- .dslc-cpt-post-main -->
+						<%}%>
+					</div><!-- .dslc-cpt-post-thumb -->
 				<%}%>
 
 
-				<% if(main_location.value == 'bellow' && (post_elements.value == 'all' || post_elements.value.title == true) || post_elements.value.meta == true  || post_elements.value.excerpt == true ) || post_elements.value.button == true){%>
+				<% if(main_location.value == 'bellow' && (post_elements.value == 'all' || post_elements.value.title == true) || post_elements.value.meta == true  || post_elements.value.excerpt == true || post_elements.value.button == true){%>
 
 					<div class="dslc-post-main dslc-cpt-post-main">
 
@@ -208,8 +191,6 @@
 			<%}%>
 		</div><!--.dslc-posts-inner -->
 	</div><!-- .dslc-cpt-posts -->
-
-<%}%>
 
 <% if(pagination_type.value != 'disabled'){%>
 	[dslc-posts-module-navigation]
