@@ -904,23 +904,22 @@
 /**
  * STAFF MODULE
  */
-
-	#dslc-content .dslc-staff {
-
-	}
-
+/*
+– already in module defaults
 		#dslc-content .dslc-staff-member {
 			text-align: center;
 		}
+*/
 
 			#dslc-content .dslc-staff-member-thumb {
 				position: relative;
 				line-height: 0;
 			}
-
+/*
 				#dslc-content .dslc-staff-member-thumb {
 					border: 0 solid transparent;
 				}
+*/
 
 				#dslc-content .dslc-staff-member-thumb a {
 					display: inline-block;
@@ -928,7 +927,7 @@
 				}
 
 				#dslc-content .dslc-staff-member-thumb img {
-					border-radius: 0;
+					/*border-radius: 0;*/
 					-moz-box-shadow: none;
 					-webkit-box-shadow:none;
 					box-shadow: none;
@@ -953,13 +952,12 @@
 					position: relative;
 				}
 
-				#dslc-content .dslc-staff-member-thumb:hover .dslc-staff-member-main {
-
-				}
 
 				body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-staff-member-thumb .dslc-staff-member-main {
 					opacity: 1;
 				}
+/*
+– all properties are already in the module defaults
 
 			#dslc-content .dslc-staff-member-social {
 				background: #40bde6;
@@ -969,12 +967,15 @@
 				margin-bottom: 25px;
 			}
 
+*/
 				#dslc-content .dslc-staff-member-social a {
-					color: #fff;
+					/*color: #fff;
+					font-size: 13px; – already in the module defaults */
 					margin: 0 6px;
-					font-size: 13px;
 					text-decoration: none;
 				}
+/*
+– already in the module defaults
 
 			#dslc-content .dslc-staff-member-main {
 				border: 0px solid transparent;
@@ -983,23 +984,29 @@
 				#dslc-content .dslc-staff-member-title {
 					margin-bottom: 23px;
 				}
+*/
+
 
 					#dslc-content .dslc-staff-member-title h2 {
+/*
 						color: #323232;
 						font-size: 15px;
 						font-family: "Open Sans";
 						font-weight: 600;
 						line-height: 1;
+*/
 						margin: 0;
 						padding: 0;
 					}
+
 
 						#dslc-content .dslc-staff-member-title h2 a {
 							display: block;
 							text-decoration: none;
 							color: inherit;
 						}
-
+/*
+– already in the module defaults
 				#dslc-content .dslc-staff-member-position {
 					border: 1px solid #e5e5e5;
 					font-size: 12px;
@@ -1012,7 +1019,7 @@
 				#dslc-content .dslc-staff-member-excerpt {
 
 				}
-
+*/
 /**
  * TABS MODULE
  */

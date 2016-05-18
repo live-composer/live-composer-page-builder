@@ -1025,7 +1025,7 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Font Family', 'live-composer-page-builder' ),
 				'id' => 'css_title_font_family',
-				'std' => 'Lato',
+				'std' => '',
 				'type' => 'font',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-staff-member-title h2',
@@ -1109,7 +1109,7 @@ class DSLC_Staff extends DSLC_Module {
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-staff-member-position',
-				'affect_on_change_rule' => 'border-top-width,border-bottom-width',
+				'affect_on_change_rule' => 'border-width',
 				'section' => 'styling',
 				'ext' => 'px',
 				'tab' => __( 'Position', 'live-composer-page-builder' ),
@@ -1184,7 +1184,7 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Font Family', 'live-composer-page-builder' ),
 				'id' => 'css_position_font_family',
-				'std' => 'Bitter',
+				'std' => '',
 				'type' => 'font',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-staff-member-position',
@@ -1301,7 +1301,7 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Font Family', 'live-composer-page-builder' ),
 				'id' => 'css_excerpt_font_family',
-				'std' => 'Lato',
+				'std' => '',
 				'type' => 'font',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-staff-member-excerpt',
