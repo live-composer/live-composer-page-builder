@@ -5132,6 +5132,15 @@ var dslcDebug = false;
 		// Replace the check in publish button with a loading animation
 		jQuery('.dslca-save-composer .dslca-icon').removeClass('dslc-icon-ok').addClass('dslc-icon-spin dslc-icon-spinner');
 
+		var dslc_module_settings = {};
+
+		Object.keys(DSLC.ModulesManager.ActiveModules).forEach(function(key)
+		{
+			var module = DSLC.ModulesManager.ActiveModules[key];
+
+			dslc_module_settings[key] = DSLC.ModulesManager.ActiveModules[key].getEncodedSettings();
+		});
+
 		// Ajax call to save the new content
 		jQuery.ajax({
 			method: 'POST',
@@ -5142,7 +5151,8 @@ var dslcDebug = false;
 				dslc : 'active',
 				dslc_post_id : postID,
 				dslc_code : composerCode,
-				dslc_content_for_search : contentForSearch
+				dslc_content_for_search : contentForSearch,
+				dslc_raw_settings : dslc_module_settings
 			},
 			timeout: 10000
 		}).done(function(response){

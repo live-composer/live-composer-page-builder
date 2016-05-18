@@ -371,7 +371,7 @@
 			var optionId = editableField.data('id');
 			var content = editableField.html();
 
-			module
+			this
 				.setOption(optId, content)
 				.reloadModuleBody()
 				.saveEdits();
