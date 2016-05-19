@@ -19,7 +19,7 @@ class DSLC_Navigation extends DSLC_Module {
 
 	}
 
-	function options() {	
+	function options() {
 
 		$locs = get_registered_nav_menus();
 
@@ -28,7 +28,7 @@ class DSLC_Navigation extends DSLC_Module {
 			'label' => __( 'Choose Navigation', 'live-composer-page-builder' ),
 			'value' => 'not_set',
 		);
-			
+
 		if ( ! empty( $locs ) ) {
 			foreach ( $locs as $loc_ID => $loc_label ) {
 				$loc_choices[] = array(
@@ -39,7 +39,7 @@ class DSLC_Navigation extends DSLC_Module {
 		}
 
 		$dslc_options = array(
-			
+
 			/**
 			 * Functionality
 			 */
@@ -340,7 +340,7 @@ class DSLC_Navigation extends DSLC_Module {
 			),
 
 			/**
-			 * Styling - Item 
+			 * Styling - Item
 			 */
 
 			array(
@@ -931,7 +931,7 @@ class DSLC_Navigation extends DSLC_Module {
 				'section' => 'styling',
 				'ext' => 'px',
 				'tab' => __( 'subnav', 'live-composer-page-builder' ),
-			),			
+			),
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_subnav_padding_vertical',
@@ -958,7 +958,7 @@ class DSLC_Navigation extends DSLC_Module {
 			),
 
 			/**
-			 * Styling - Item 
+			 * Styling - Item
 			 */
 
 			array(
@@ -1419,17 +1419,85 @@ class DSLC_Navigation extends DSLC_Module {
 					<div class="dslc-mobile-navigation dslc-navigation-res-t-<?php echo $options['css_res_t']; ?>  dslc-navigation-res-p-<?php echo $options['css_res_p']; ?>">
 						<?php
 							if ( has_nav_menu( $options['location'] ) ) {
-
 								$mobile_nav_output = '';
-								$mobile_nav_output .= '<select>';
-								$mobile_nav_output .= '<option>' . __( '- Select -', 'live-composer-page-builder' ) . '</option>';
-								
+								$mobile_nav_output .= '<div class="dslc-mobile-cover">';
+
+
 								if ( has_nav_menu( $options['location'] ) ) {
 
 									$locations = get_nav_menu_locations();
 									$menu = wp_get_nav_menu_object( $locations[$options['location']] );
 									$menu_items = wp_get_nav_menu_items( $menu->term_id );
-										
+
+									$mobile_nav_output  = '<nav>' ."\n";
+									  $mobile_nav_output .= '<ul class="main-nav">' ."\n";
+
+									  $count = 0;
+									  $submenu = false;
+									  $last = false;
+
+									  foreach( $menu_items as $menu_item ) {
+
+											$link = $menu_item->url;
+											$title = $menu_item->title;
+
+											if ( !$menu_item->menu_item_parent ) {
+												 $parent_id = $menu_item->ID;
+
+												 $mobile_nav_output .= '<li class="item">' ."\n";
+												 $mobile_nav_output .= '<a href="'.$link.'" class="title">'.$title.'</a>' ."\n";
+											}
+
+											if ( isset($menu_items[ $count + 1 ]) && $menu_items[ $count + 1 ]->menu_item_parent != $parent_id ) {
+												$last = true;
+											}
+
+											if ( $parent_id == $menu_item->menu_item_parent ) {
+
+												 if ( !$submenu ) {
+													  $submenu = true;
+													  $mobile_nav_output .= '<ul class="sub-menu">' ."\n";
+												 }
+
+												 $mobile_nav_output .= '<li class="item">' ."\n";
+												 $mobile_nav_output .= '<a href="'.$link.'" class="title">'.$title.'</a>' ."\n";
+												 $mobile_nav_output .= '</li>' ."\n";
+
+
+												 if ( $last && $submenu ){
+													 $mobile_nav_output .= '</ul>' ."\n";
+													  $submenu = false;
+												 }
+
+											}
+
+											if ( $last ) {
+												 $mobile_nav_output .= '</li>' ."\n";
+												 $submenu = false;
+											}
+
+											$count++;
+									  }
+
+									  $mobile_nav_output .= '</ul>' ."\n";
+									  $mobile_nav_output .= '</nav>' ."\n";
+
+
+
+								}
+
+								$mobile_nav_output .= '</div>';
+/*
+								$mobile_nav_output = '';
+								$mobile_nav_output .= '<select>';
+								$mobile_nav_output .= '<option>' . __( '- Select -', 'live-composer-page-builder' ) . '</option>';
+
+								if ( has_nav_menu( $options['location'] ) ) {
+
+									$locations = get_nav_menu_locations();
+									$menu = wp_get_nav_menu_object( $locations[$options['location']] );
+									$menu_items = wp_get_nav_menu_items( $menu->term_id );
+
 									foreach ( $menu_items as $key => $menu_item ) {
 										$title = $menu_item->title;
 										$url = $menu_item->url;
@@ -1444,6 +1512,7 @@ class DSLC_Navigation extends DSLC_Module {
 								}
 
 								$mobile_nav_output .= '</select>';
+*/
 								echo $mobile_nav_output;
 							}
 						?>
