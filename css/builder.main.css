@@ -74,7 +74,8 @@ body {
 
 	.dslca-header {
 		position: absolute;
-		/* z-index: 999999; */
+		z-index: 100;
+		/* keep LC styling panel Confirm/Cancel buttons on the top */
 		min-height: 38px;
 		bottom: 100%;
 		left: 0;
