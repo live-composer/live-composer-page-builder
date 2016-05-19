@@ -336,8 +336,8 @@ function dslc_generate_custom_css( $options_arr, $settings, $restart = false ) {
 			$do_css_output = false;
 			$css_output_el = ''; // var for temporary output of current el
 
-			$do_css_output_border = false;
-			$css_output_el_border = ''; // process border CSS properties separately
+			// $do_css_output_border = false;
+			// $css_output_el_border = ''; // process border CSS properties separately
 
 			$do_css_output_background = false;
 			$css_output_el_background = ''; // process background CSS properties separately
@@ -357,18 +357,7 @@ function dslc_generate_custom_css( $options_arr, $settings, $restart = false ) {
 						// Basic CSS rule name validation
 						if ( $value != '' && $value != 'url(" ")' && ! preg_match( "/([\[\];<>]+)/", $value ) && preg_match( "/([-a-z@]{3,60})/", $rule ) ) {
 
-							// Output all the border properties only if border-width has been set
-							if ( $rule == 'border-width' && $value != '' && $value != '0px' && $value != '0' ) {
-								$do_css_output_border = true;
-							}
-							// Make no sense to output this property
-							if ( $rule == 'border-style' && $value == 'none none none none' ) {
-								$do_css_output_border = false;
-							}
-							// Shorten border-style properties
-							if ( $rule == 'border-style' && $value == 'solid solid solid solid' ) {
-								$value = 'solid';
-							}
+
 							// Output all the background properties only if background-image is set
 							if ( $rule == 'background-image' ) {
 								$do_css_output_background = true;
@@ -376,9 +365,7 @@ function dslc_generate_custom_css( $options_arr, $settings, $restart = false ) {
 
 							$css_output_rule .= $rule . ':' . $value . $important_append . ';';
 
-							if ( stristr( $rule, 'border' ) ) {
-								$css_output_el_border .= $css_output_rule;
-							} elseif ( stristr( $rule, 'background-' ) && $rule != 'background-color' ) {
+							if ( stristr( $rule, 'background-' ) && $rule != 'background-color' ) {
 								$css_output_el_background .= $css_output_rule;
 							} else {
 								$css_output_el .= $css_output_rule;
@@ -388,10 +375,11 @@ function dslc_generate_custom_css( $options_arr, $settings, $restart = false ) {
 						}
 
 					}
-
+					/*
 					if ( $do_css_output_border ) {
 						$css_output_el .= $css_output_el_border;
 					}
+					*/
 
 					if ( $do_css_output_background ) {
 						$css_output_el .= $css_output_el_background;

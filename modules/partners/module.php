@@ -542,7 +542,7 @@ class DSLC_Partners extends DSLC_Module {
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_thumbnail_padding_vertical',
-				'std' => '36',
+				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-partner-thumb',
@@ -869,7 +869,7 @@ class DSLC_Partners extends DSLC_Module {
 			array(
 				'label' => __( 'Font Family', 'live-composer-page-builder' ),
 				'id' => 'css_title_font_family',
-				'std' => 'Lato',
+				'std' => '',
 				'type' => 'font',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-partner-title h2,.dslc-partner-title h2 a',
@@ -994,7 +994,7 @@ class DSLC_Partners extends DSLC_Module {
 			array(
 				'label' => __( 'Font Family', 'live-composer-page-builder' ),
 				'id' => 'css_excerpt_font_family',
-				'std' => 'Lato',
+				'std' => '',
 				'type' => 'font',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-partner-excerpt',
@@ -1074,7 +1074,7 @@ class DSLC_Partners extends DSLC_Module {
 			array(
 				'label' => __( 'Thumbnail - Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_thumbnail_padding_vertical',
-				'std' => '36',
+				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-partner-thumb',
@@ -1219,7 +1219,7 @@ class DSLC_Partners extends DSLC_Module {
 			array(
 				'label' => __( 'Thumbnail - Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_thumbnail_padding_vertical',
-				'std' => '36',
+				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-partner-thumb',

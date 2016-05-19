@@ -34,11 +34,13 @@
 		$value = null;
 		$options = get_option( 'dslc_plugin_options' );
 
+		// New way to get options since 1.0.8 (no section required)
 		if ( isset( $options[$option_ID] ) ) {
 
 			$value = $options[$option_ID];
 		}
 
+		// Old way to get options (section + option id)
 		if ( $value == null ) {
 
 			$options = get_option( $section_ID );

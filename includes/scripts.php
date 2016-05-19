@@ -157,7 +157,7 @@ function dslc_load_admin_scripts( $hook ) {
 		$current_screen = 'post-editing';
 	}
 
-	if ( strpos( $hook, 'dslc_plugin_options' ) !== false || strpos( $hook, 'dslc_getting_started' ) !== false ) {
+	if ( strpos( $hook, 'dslc_plugin_options' ) !== false || get_admin_page_parent() == 'dslc_plugin_options' || strpos( $hook, 'dslc_getting_started' ) !== false ) {
 		$current_screen = 'dslc-options';
 	}
 
@@ -218,7 +218,7 @@ function dslc_load_fonts() {
 function dslc_inline_js_plugin_title() { ?>
 	<script type="text/javascript">
 		jQuery(document).ready(function($){
-			jQuery('#page-builder-live-composer-drag-and-drop-website-builder-visual-front-end-site-editor .plugin-title strong').text('Live Composer');
+			jQuery('.plugins [data-slug="live-composer-page-builder"] .plugin-title strong').text('Live Composer');
 		});
 	</script>
 <?php }

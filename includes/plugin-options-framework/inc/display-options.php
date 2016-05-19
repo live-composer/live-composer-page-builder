@@ -2,7 +2,6 @@
 
 function dslc_plugin_option_display_text( $option ) {
 
-	$option = unserialize( base64_decode( $option ) );
 	global $dslc_plugin_options;
 
 	$section_ID = $option['section'];
@@ -23,7 +22,6 @@ function dslc_plugin_option_display_text( $option ) {
 
 function dslc_plugin_option_display_textarea( $option ) {
 
-	$option = unserialize( base64_decode( $option ) );
 	global $dslc_plugin_options;
 
 	$section_ID = $option['section_id'];
@@ -48,7 +46,6 @@ function dslc_plugin_option_display_textarea( $option ) {
 
 function dslc_plugin_option_display_select( $option ) {
 
-	$option = unserialize( base64_decode( $option ) );
 	global $dslc_plugin_options;
 
 	$section_ID = $option['section'];
@@ -82,7 +79,6 @@ function dslc_plugin_option_display_select( $option ) {
 
 function dslc_plugin_option_display_checkbox( $option ) {
 
-	$option = unserialize( base64_decode( $option ) );
 	global $dslc_plugin_options;
 
 	$section_ID = $option['section'];
@@ -113,7 +109,6 @@ function dslc_plugin_option_display_checkbox( $option ) {
 
 function dslc_plugin_option_display_radio( $option ) {
 
-	$option = unserialize( base64_decode( $option ) );
 	global $dslc_plugin_options;
 
 	$section_ID = $option['section'];
@@ -143,7 +138,6 @@ function dslc_plugin_option_display_radio( $option ) {
 
 function dslc_plugin_option_display_list( $option ) {
 
-	$option = unserialize( base64_decode( $option ) );
 	global $dslc_plugin_options;
 
 	$section_ID = $option['section'];
@@ -201,7 +195,6 @@ function dslc_plugin_option_display_list( $option ) {
 
 function dslc_plugin_option_display_styling_presets( $option ) {
 
-	$option = unserialize( base64_decode( $option ) );
 	global $dslc_plugin_options;
 
 	$section_ID = $option['section'];

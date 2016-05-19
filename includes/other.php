@@ -18,15 +18,15 @@
 function dslc_plugin_action_links( $links ) {
 
 	// Themes link
-	$themes_link = '<a href="http://livecomposerplugin.com/themes" target="_blank">Themes</a>';
+	$themes_link = '<a href="https://livecomposerplugin.com/themes/?utm_source=wp-admin&utm_medium=plugins-list&utm_campaign=themes_link" target="_blank">Themes</a>';
 	array_unshift( $links, $themes_link );
 
 	// Addons link
-	$addons_link = '<a href="http://livecomposerplugin.com/add-ons" target="_blank">Add-Ons</a>';
+	$addons_link = '<a href="https://livecomposerplugin.com/add-ons/?utm_source=wp-admin&utm_medium=plugins-list&utm_campaign=addons_link" target="_blank">Add-Ons</a>';
 	array_unshift( $links, $addons_link );
 
 	// Support link
-	$support_link = '<a href="http://livecomposerplugin.com/support" target="_blank">Support</a>';
+	$support_link = '<a href="https://livecomposerplugin.com/support/?utm_source=wp-admin&utm_medium=plugins-list&utm_campaign=support_link" target="_blank">Support</a>';
 	array_unshift( $links, $support_link );
 
 	// Pass it back

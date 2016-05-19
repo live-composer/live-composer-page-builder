@@ -3033,7 +3033,16 @@ class DSLC_Blog extends DSLC_Module {
 
 															<div class="dslc-blog-post-excerpt">
 																<?php if ( $options['excerpt_or_content'] == 'content' ) : ?>
-																	<?php the_content(); ?>
+																<?php
+																	// Disable LC content filering in this case
+																	// to prevent infitie loop on custon archive listing
+																	global $dslc_should_filter;
+																	$dslc_should_filter = false;
+
+																		the_content();
+
+																	$dslc_should_filter = true;
+																?>
 																<?php else : ?>
 																	<?php
 																		if ( $options['excerpt_length'] > 0 ) {
@@ -3125,7 +3134,16 @@ class DSLC_Blog extends DSLC_Module {
 
 											<div class="dslc-blog-post-excerpt">
 												<?php if ( $options['excerpt_or_content'] == 'content' ) : ?>
-													<?php the_content(); ?>
+													<?php
+														// Disable LC content filering in this case
+														// to prevent infitie loop on custon archive listing
+														global $dslc_should_filter;
+														$dslc_should_filter = false;
+
+															the_content();
+
+														$dslc_should_filter = true;
+													?>
 												<?php else : ?>
 													<?php
 														if ( $options['excerpt_length'] > 0 ) {

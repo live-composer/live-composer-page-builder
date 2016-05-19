@@ -3,7 +3,7 @@
  */
 
  	#dslc-content .dslc-cpt-post {
-		
+
 	}
 
 		#dslc-content .dslc-cpt-post-main {
@@ -54,7 +54,7 @@
 				}
 
 				#dslc-content .dslc-cpt-post-thumb:hover .dslc-cpt-post-main {
-					
+
 				}
 
 				body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-cpt-post-thumb .dslc-cpt-post-main {
@@ -138,7 +138,7 @@
 			overflow: hidden;
 		}
 
-/** 
+/**
  * BLOG MODULE
  */
 
@@ -147,7 +147,7 @@
  	}
 
 	#dslc-content .dslc-blog-post {
-		
+
 	}
 
 		#dslc-content .dslc-blog-post-main {
@@ -186,7 +186,7 @@
 					top: 0;
 					left: 0;
 					bottom: 0;
-					right: 0;				
+					right: 0;
 				}
 
 				#dslc-content .dslc-blog-post-thumb .dslc-blog-post-main.dslc-blog-post-main-visible {
@@ -198,7 +198,7 @@
 				}
 
 				#dslc-content .dslc-blog-post-thumb:hover .dslc-blog-post-main {
-					
+
 				}
 
 				body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-blog-post-thumb .dslc-blog-post-main {
@@ -281,7 +281,7 @@
 	 * Horizontal Orientation
 	 */
 
-	#dslc-content .dslc-posts-orientation-horizontal {				  
+	#dslc-content .dslc-posts-orientation-horizontal {
 
 	}
 
@@ -305,7 +305,7 @@
 	}
 
 		#dslc-content .dslc-download {
-			
+
 		}
 
 			#dslc-content .dslc-download-thumb {
@@ -350,7 +350,7 @@
 				}
 
 				#dslc-content .dslc-download-thumb:hover .dslc-download-main {
-					
+
 				}
 
 				body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-download-thumb .dslc-download-main {
@@ -432,7 +432,7 @@
 	}
 
 		#dslc-content .dslc-gallery {
-			
+
 		}
 
 			#dslc-content .dslc-gallery-thumb {
@@ -522,7 +522,7 @@
 				}
 
 				#dslc-content .dslc-gallery-thumb:hover .dslc-gallery-main {
-			
+
 				}
 
 				body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-gallery-thumb .dslc-gallery-main {
@@ -540,7 +540,7 @@
 
 					#dslc-content .dslc-gallery-title h2 {
 						font-family: "Brawler";
-						font-size: 11px;		
+						font-size: 11px;
 						line-height: 1;
 						margin: 0;
 						padding: 0;
@@ -583,25 +583,25 @@
  * INFOBOX MODULE
  */
 
-	.dslc-info-box {
+	#dslc-content .dslc-info-box {
 		text-align: center;
-		border: 0px solid transparent;	
+		border: 0px solid transparent;
 		-webkit-transition: all 0.2s ease-in-out;
 		-moz-transition: all 0.2s ease-in-out;
 		transition: all 0.2s ease-in-out;
 	}
 
 		.dslc-info-box-main-wrap {
-			
+
 		}
 
-			.dslc-info-box-image {
+			#dslc-content .dslc-info-box-image {
 				margin-bottom: 25px;
 				position: relative;
 				font-size: 0;
 			}
 
-			.dslc-info-box-image-link {
+			#dslc-content .dslc-info-box-image-link {
 				position: absolute;
 				top: 0;
 				left: 0;
@@ -609,39 +609,39 @@
 				bottom: 0;
 			}
 
-			.dslc-info-box-icon-pos-aside .dslc-info-box-main {
+			#dslc-content .dslc-info-box-icon-pos-aside .dslc-info-box-main {
 				overflow: hidden;
 			}
 
-				.dslc-info-box-icon-pos-aside .dslc-info-box-image {
+				#dslc-content .dslc-info-box-icon-pos-aside .dslc-info-box-image {
 					float: left;
 					margin-right: 20px;
 				}
 
-					.dslc-info-box-image-inner {
+					#dslc-content .dslc-info-box-image-inner {
 						display: inline-block;
 						position: relative;
 						border: 0px solid transparent;
 					}
 
-						.dslc-info-box-image-inner .dslc-icon {
+						#dslc-content .dslc-info-box-image-inner .dslc-icon {
 							color: #fff;
 							line-height: 1;
 							font-size: 40px;
 							position: absolute;
 						}
 
-			.dslc-info-box-image-alt-inner img {
+			#dslc-content .dslc-info-box-image-alt-inner img {
 				-webkit-transition: all 0.2s ease-in-out;
 				-moz-transition: all 0.2s ease-in-out;
 				transition: all 0.2s ease-in-out;
 			}
 
-				.dslc-info-box-title {
+				#dslc-content .dslc-info-box-title {
 					margin-bottom: 25px;
 				}
 
-					.dslc-info-box-title h4 {
+					#dslc-content .dslc-info-box-title h4 {
 						font-size: 17px;
 						line-height: 1;
 						margin: 0;
@@ -649,41 +649,41 @@
 						font-weight: 400;
 					}
 
-						.dslc-info-box-title h4 a {
+						#dslc-content .dslc-info-box-title h4 a {
 							color: inherit;
 							text-decoration: none;
 						}
 
-				.dslc-info-box-content {
+				#dslc-content .dslc-info-box-content {
 					margin-bottom: 25px;
 				}
 
-				.dslc-info-box-button {
+				#dslc-content .dslc-info-box-button {
 					font-size: 0;
 				}
 
-				.dslc-info-box-button a {
+				#dslc-content .dslc-info-box-button a {
 					display: inline-block;
 					line-height: 1;
 					text-decoration: none;
 				}
 
-		.dslc-info-box-button-aside {
+		#dslc-content .dslc-info-box-button-aside {
 			float: right;
 		}
 
 /**
  * PARTNERS MODULE
  */
-
+/*
 	 #dslc-content .dslc-partner {
-		
-	}
 
+	}
+*/
 		#dslc-content .dslc-partner .dslc-partner-thumb {
-			border: 1px solid #ebebeb;
-			padding: 50px 0;
-			text-align: center;
+			/*border: 1px solid #ebebeb;*/
+			/*padding: 50px 0;*/
+			/*text-align: center;*/
 			position: relative;
 			line-height: 0;
 		}
@@ -691,7 +691,7 @@
 			#dslc-content .dslc-partner .dslc-partner-thumb a {
 				display: inline-block;
 				max-width: 100%;
-			}			
+			}
 
 			#dslc-content .dslc-partner .dslc-partner-thumb img {
 				border-radius: 0;
@@ -729,36 +729,37 @@
 				opacity: 1;
 			}
 
+/*
 		#dslc-content .dslc-partner .dslc-partner-main {
-			border: 0px solid transparent;	
+			border: 0px solid transparent;
 		}
-
-			#dslc-content .dslc-partner .dslc-partner-title {
+*/
+			#dslc-content .dslc-partner-title {
 				margin-bottom: 10px;
 			}
 
-				#dslc-content .dslc-partner .dslc-partner-title h2 {
-					color: #222;
-					font-family: "Oswald";
-					font-weight: bold;
-					font-size: 14px;
-					line-height: 1;
+				#dslc-content .dslc-partner-title h2 {
+					/*color: #222;*/
+					/*font-family: "Oswald";*/
+					/*font-weight: bold;*/
+					/*font-size: 14px;*/
+					/*line-height: 1;*/
 					margin: 0;
 					padding: 0;
 				}
 
-					#dslc-content .dslc-partner .dslc-partner-title h2 a {
+					#dslc-content .dslc-partner-title h2 a {
 						display: block;
 						color: inherit;
 						text-decoration: none;
 					}
 
 		#dslc-content .dslc-partner .dslc-partner-excerpt {
-			color: #444;
-			font-family: "Open Sans";
-			font-weight: 400;
-			font-size: 12px;
-			line-height: 22px;
+			/*color: #444;*/
+			/*font-family: "Open Sans";*/
+			/*font-weight: 400;*/
+			/*font-size: 12px;*/
+			/*line-height: 22px;*/
 		}
 
 
@@ -767,26 +768,26 @@
  */
 
 	#dslc-content .dslc-project {
-		
+
 	}
 
-		#dslc-content .dslc-projects .dslc-project-thumb {
+		#dslc-content .dslc-project-thumb {
 			margin-bottom: 24px;
 			position: relative;
 			line-height: 0;
 		}
 
-			#dslc-content .dslc-projects .dslc-project-thumb-inner {
+			#dslc-content .dslc-project-thumb-inner {
 				border: 0 solid transparent;
 				overflow: hidden;
 			}
 
-			#dslc-content .dslc-projects .dslc-project-thumb a {
+			#dslc-content .dslc-project-thumb a {
 				display: inline-block;
 				max-width: 100%;
 			}
 
-			#dslc-content .dslc-projects .dslc-project-thumb img {
+			#dslc-content .dslc-project-thumb img {
 				border-radius: 0;
 				-moz-box-shadow: none;
 				-webkit-box-shadow:none;
@@ -796,7 +797,7 @@
 				height: auto;
 			}
 
-			#dslc-content .dslc-projects .dslc-project-thumb .dslc-project-main {
+			#dslc-content .dslc-project-thumb .dslc-project-main {
 				position: absolute;
 				top: 0;
 				left: 0;
@@ -804,33 +805,33 @@
 				right: 0;
 			}
 
-			#dslc-content .dslc-projects .dslc-project-thumb .dslc-project-main.dslc-project-main-visible {
+			#dslc-content .dslc-project-thumb .dslc-project-main.dslc-project-main-visible {
 				opacity: 1 !important;
 			}
 
-			#dslc-content .dslc-projects .dslc-project-thumb .dslc-project-main .dslc-init-center {
+			#dslc-content .dslc-project-thumb .dslc-project-main .dslc-init-center {
 				position: relative;
 			}
 
-			#dslc-content .dslc-projects .dslc-project-thumb:hover .dslc-project-main {
-	
+			#dslc-content .dslc-project-thumb:hover .dslc-project-main {
+
 			}
 
 			body.dslca-enabled #dslc-content .dslc-projects .dslc-post:first-child .dslc-project-thumb .dslc-project-main {
 				opacity: 1;
 			}
 
-		#dslc-content .dslc-projects .dslc-project-main {
-			border: 0px solid transparent;	
+		#dslc-content .dslc-project-main {
+			border: 0px solid transparent;
 		}
 
-			#dslc-content .dslc-projects .dslc-project-title {
+			#dslc-content .dslc-project-title {
 				margin-bottom: 10px;
 			}
 
-				#dslc-content .dslc-projects .dslc-project-title h2 {
-					color: #000;
-					font-family: "Open Sans";
+				#dslc-content .dslc-project-title h2 {
+					/*color: #000;*/
+					/*font-family: "Open Sans";*/
 					font-weight: bold;
 					font-size: 12px;
 					line-height: 1;
@@ -838,13 +839,13 @@
 					padding: 0;
 				}
 
-					#dslc-content .dslc-projects .dslc-project-title h2 a {
+					#dslc-content .dslc-project-title h2 a {
 						display: block;
 						color: inherit;
 						text-decoration: none;
 					}
 
-			#dslc-content .dslc-projects .dslc-project-cats {
+			#dslc-content .dslc-project-cats {
 				font-family: "Droid Serif";
 				font-size: 10px;
 				font-style: italic;
@@ -855,7 +856,7 @@
 				margin-bottom: 22px;
 				font-size: 13px;
 				line-height: 22px;
-				border-top: 0px solid #000;	
+				border-top: 0px solid #000;
 			}
 
 			#dslc-content .dslc-project-read-more {
@@ -886,7 +887,7 @@
 	}
 
 	.dslc-module-DSLC_Separator {
-		
+
 	}
 
 	.dslc-separator.dslc-separator-style-solid {
@@ -894,7 +895,7 @@
 	}
 
 	.dslc-separator.dslc-separator-style-dashed {
-		border-bottom: 1px dashed #ededed;	
+		border-bottom: 1px dashed #ededed;
 	}
 
 	.dslc-separator.dslc-separator-style-dotted {
@@ -904,23 +905,22 @@
 /**
  * STAFF MODULE
  */
-
-	#dslc-content .dslc-staff {
-		
-	}
-
+/*
+– already in module defaults
 		#dslc-content .dslc-staff-member {
 			text-align: center;
 		}
+*/
 
 			#dslc-content .dslc-staff-member-thumb {
 				position: relative;
 				line-height: 0;
 			}
-
+/*
 				#dslc-content .dslc-staff-member-thumb {
 					border: 0 solid transparent;
 				}
+*/
 
 				#dslc-content .dslc-staff-member-thumb a {
 					display: inline-block;
@@ -928,7 +928,7 @@
 				}
 
 				#dslc-content .dslc-staff-member-thumb img {
-					border-radius: 0;
+					/*border-radius: 0;*/
 					-moz-box-shadow: none;
 					-webkit-box-shadow:none;
 					box-shadow: none;
@@ -953,13 +953,12 @@
 					position: relative;
 				}
 
-				#dslc-content .dslc-staff-member-thumb:hover .dslc-staff-member-main {
-			
-				}
 
 				body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-staff-member-thumb .dslc-staff-member-main {
 					opacity: 1;
 				}
+/*
+– all properties are already in the module defaults
 
 			#dslc-content .dslc-staff-member-social {
 				background: #40bde6;
@@ -969,12 +968,15 @@
 				margin-bottom: 25px;
 			}
 
+*/
 				#dslc-content .dslc-staff-member-social a {
-					color: #fff;
+					/*color: #fff;
+					font-size: 13px; – already in the module defaults */
 					margin: 0 6px;
-					font-size: 13px;
 					text-decoration: none;
 				}
+/*
+– already in the module defaults
 
 			#dslc-content .dslc-staff-member-main {
 				border: 0px solid transparent;
@@ -983,23 +985,29 @@
 				#dslc-content .dslc-staff-member-title {
 					margin-bottom: 23px;
 				}
+*/
+
 
 					#dslc-content .dslc-staff-member-title h2 {
+/*
 						color: #323232;
 						font-size: 15px;
 						font-family: "Open Sans";
 						font-weight: 600;
 						line-height: 1;
+*/
 						margin: 0;
 						padding: 0;
 					}
+
 
 						#dslc-content .dslc-staff-member-title h2 a {
 							display: block;
 							text-decoration: none;
 							color: inherit;
 						}
-
+/*
+– already in the module defaults
 				#dslc-content .dslc-staff-member-position {
 					border: 1px solid #e5e5e5;
 					font-size: 12px;
@@ -1010,9 +1018,9 @@
 				}
 
 				#dslc-content .dslc-staff-member-excerpt {
-					
-				}
 
+				}
+*/
 /**
  * TABS MODULE
  */
@@ -1063,7 +1071,7 @@
 
 			#dslc-content .dslc-tabs-nav-hook.dslc-active {
 				background: #fff;
-				
+
 			}
 
 		#dslc-content .dslc-tabs-content {
@@ -1151,7 +1159,7 @@
 	}
 
 		#dslc-content .dslc-testimonial {
-			
+
 		}
 
 			#dslc-content .dslc-testimonial-main {
@@ -1280,7 +1288,7 @@
 	}
 
 		#dslc-content .dslc-product {
-			
+
 		}
 
 			#dslc-content .dslc-product-thumb {
@@ -1373,7 +1381,7 @@
 				}
 
 				#dslc-content .dslc-products .dslc-product-thumb:hover .dslc-product-main {
-		
+
 				}
 
 				body.dslca-enabled #dslc-content .dslc-products .dslc-post:first-child .dslc-product-thumb .dslc-product-main {
@@ -1398,7 +1406,7 @@
 						font-size: 20px;
 						line-height: 1;
 						font-family: "Oswald";
-					}	
+					}
 
 						#dslc-content .dslc-product-price-secondary ins {
 							text-decoration: none;
@@ -1567,7 +1575,7 @@
 		}
 
 	#dslc-content .dslc-tp-gallery-slider-arrows {
-		
+
 	}
 
 /**
@@ -1647,7 +1655,7 @@
 
 			#dslc-content ul.dslc-staff-social .dslc-icon {
 				line-height: 1;
-				position: absolute;				
+				position: absolute;
 			}
 
 		#dslc-content ul.dslc-staff-social .dslc-social-label {
@@ -1666,7 +1674,7 @@
 	border-radius: 3px;
 	color: #fff;
 }
-	
+
 	.dslc-notification-box-has-timeout {
 		display: none;
 	}
@@ -1709,7 +1717,7 @@
 	overflow: hidden;
 }
 
-	#dslc-content .dslc-button a {		
+	#dslc-content .dslc-button a {
 		display: inline-block;
 		text-decoration: none;
 		line-height: 1;
@@ -1802,7 +1810,7 @@
 .dslc-tp-comment-form {
 	border: 0 solid transparent;
 }
-	
+
 	.dslc-tp-comment-form input[type="text"] {
 		line-height: 1;
 	}
@@ -1887,7 +1895,7 @@
 }
 
 	.dslc-accordion-item {
-		
+
 	}
 
 	.dslc-accordion-item:first-child {
@@ -1952,7 +1960,7 @@
 			top: 5px;
 			right: 6px;
 		}
-			
+
 	.dslca-accordion-action-hooks {
 		position: absolute;
 		right: 14px;
@@ -1976,10 +1984,10 @@
 			font-size: 12px;
 			margin-left: 10px;
 			line-height: 1;
-			vertical-align: top;	
+			vertical-align: top;
 		}
 
-/** 
+/**
  * Icon
  */
 
@@ -1989,7 +1997,7 @@
 }
 
 	.dslc-icon-module .dslc-icon {
-		
+
 	}
 
 /**
@@ -2056,7 +2064,7 @@
 		}
 
 	/* Inner level menu ul */
-	.dslc-navigation .menu ul {		
+	.dslc-navigation .menu ul {
 		border-style: solid;
 		display: none;
 		list-style-type: none;
@@ -2105,7 +2113,7 @@
 		}
 
 			/* Inner level menu a */
-			.dslc-navigation .menu ul li a {				
+			.dslc-navigation .menu ul li a {
 				display: block;
 				line-height: 1;
 				text-decoration: none;
@@ -2212,7 +2220,7 @@ body.dslc-res-phone .dslc-post-main-inner-link-cover {
 .dslc-posts-social-share {
 	line-height: 1;
 }
-	
+
 	.dslc-posts-social-share a:last-child {
 		margin-right: 0 !important;
 	}

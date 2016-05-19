@@ -1,11 +1,11 @@
 <?php
 /*
 	Plugin Name: Page Builder: Live Composer - drag and drop website builder (visual front end site editor)
-	Plugin URI: http://www.livecomposerplugin.com
+	Plugin URI: https://www.livecomposerplugin.com
 	Description: Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
 	Author: Live Composer Team
-	Version: 1.0.8
-	Author URI: http://livecomposerplugin.com
+	Version: 1.0.8.1
+	Author URI: https://livecomposerplugin.com
 	License: GPL2
 	License URI: https://www.gnu.org/licenses/gpl-2.0.html
 	Text Domain: live-composer-page-builder
@@ -16,7 +16,7 @@
 	 * Constants
 	 */
 
-	define( 'DS_LIVE_COMPOSER_VER', '1.0.8' );
+	define( 'DS_LIVE_COMPOSER_VER', '1.0.8.1' );
 
 	define( 'DS_LIVE_COMPOSER_SHORTNAME', __( 'Live Composer', 'live-composer-page-builder' ) );
 	define( 'DS_LIVE_COMPOSER_BASENAME', plugin_basename( __FILE__ ) );

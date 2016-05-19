@@ -12,7 +12,7 @@ http://livecomposerplugin.com
 
 **Contributors:** [Joel Milne](https://github.com/goldhat)
 
-**Version:** 1.0.7
+**Version:** 1.0.8.1
 
 ## Description
 

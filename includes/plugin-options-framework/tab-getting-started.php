@@ -1,5 +1,55 @@
 <div class="wrap lc-wrap">
 
+<?php
+		/**
+		 * We need help form translators to make Live Composer
+		 * accesible on major World languages
+		 */
+
+		$dslc_user_locale = get_locale();
+
+		if ( stristr($dslc_user_locale, 'fr_') ) : //17% ?>
+			<div class="dslc-settigns-notice red">
+			<span class="dashicons dashicons-translation"></span> <strong class="dslc-settigns-notice-heading">Parle français?</strong>
+			Aidez notre équipe. <a href="https://translate.wordpress.org/projects/wp-plugins/live-composer-page-builder/stable/fr/default?filters[status]=untranslated&sort[by]=priority&sort[how]=desc" target="_blank">Traduire quelques lignes de texte</a> en français pour nous.
+			</div>
+<?php elseif ( stristr($dslc_user_locale, 'es_') ) : //7% ?>
+			<div class="dslc-settigns-notice red">
+			<span class="dashicons dashicons-translation"></span> <strong class="dslc-settigns-notice-heading">¿Habla español?</strong>
+			Ayudar a nuestro equipo. <a href="https://translate.wordpress.org/projects/wp-plugins/live-composer-page-builder/stable/es/default?filters[status]=untranslated&sort[by]=priority&sort[how]=desc" target="_blank">Traducir unas pocas líneas de texto</a> en español para nosotros.
+			</div>
+<?php elseif ( stristr($dslc_user_locale, 'pt_PT') ) : //8% ?>
+			<div class="dslc-settigns-notice red">
+			<span class="dashicons dashicons-translation"></span> <strong class="dslc-settigns-notice-heading">¿Hablar portugués?</strong>
+			Ayudar a nuestro equipo. <a href="https://translate.wordpress.org/projects/wp-plugins/live-composer-page-builder/stable/pt/default?filters[status]=untranslated&sort[by]=priority&sort[how]=desc" target="_blank">Traducir unas pocas líneas de texto</a> al portugués para nosotros.
+			</div>
+<?php elseif ( stristr($dslc_user_locale, 'pt_BR') ) : //7% ?>
+			<div class="dslc-settigns-notice red">
+			<span class="dashicons dashicons-translation"></span> <strong class="dslc-settigns-notice-heading">¿Hablar portugués?</strong>
+			Ayudar a nuestro equipo. <a href="https://translate.wordpress.org/projects/wp-plugins/live-composer-page-builder/stable/pt-br/default?filters[status]=untranslated&sort[by]=priority&sort[how]=desc" target="_blank">Traducir unas pocas líneas de texto</a> al portugués para nosotros.
+			</div>
+<?php elseif ( stristr($dslc_user_locale, 'it_') ) : //7% ?>
+			<div class="dslc-settigns-notice red">
+			<span class="dashicons dashicons-translation"></span> <strong class="dslc-settigns-notice-heading">Parla italiano?</strong>
+			Aiuta la nostra squadra. <a href="https://translate.wordpress.org/projects/wp-plugins/live-composer-page-builder/stable/it/default?filters[status]=untranslated&sort[by]=priority&sort[how]=desc" target="_blank">Tradurre un paio di righe di testo</a> in italiano per noi.
+			</div>
+<?php elseif ( stristr($dslc_user_locale, 'pl_') ) : //3% ?>
+			<div class="dslc-settigns-notice red">
+			<span class="dashicons dashicons-translation"></span> <strong class="dslc-settigns-notice-heading">Mów po polsku?</strong>
+			Pomoc nasz zespół. <a href="https://translate.wordpress.org/projects/wp-plugins/live-composer-page-builder/stable/pl/default?filters[status]=untranslated&sort[by]=priority&sort[how]=desc" target="_blank">Przekłada się kilka linijek tekstu</a> na język polski dla nas.
+			</div>
+<?php elseif ( stristr($dslc_user_locale, 'de_') ) : //7% ?>
+			<div class="dslc-settigns-notice red">
+			<span class="dashicons dashicons-translation"></span> <strong class="dslc-settigns-notice-heading">Sprechen Sie Deutsch?</strong>
+			Hilfe unseres Teams. <a href="https://translate.wordpress.org/projects/wp-plugins/live-composer-page-builder/stable/de/formal?filters[status]=untranslated&sort[by]=priority&sort[how]=desc" target="_blank">Übersetzen ein paar Zeilen Text</a> in Deutsch für uns.
+			</div>
+<?php elseif ( stristr($dslc_user_locale, 'ru_') ) : //7% ?>
+			<div class="dslc-settigns-notice red">
+			<span class="dashicons dashicons-translation"></span> <strong class="dslc-settigns-notice-heading">Говоришь по-русски?</strong>
+			Помоги нам перевести плагин. <a href="https://translate.wordpress.org/projects/wp-plugins/live-composer-page-builder/stable/ru/default?filters[status]=untranslated&sort[by]=priority&sort[how]=desc" target="_blank">Переведи пару строчек</a> на русский.
+			</div>
+<?php endif;?>
+
 <div class="dslc-panel" id="keep-it-secure">
 	<div class="dslc-panel-content">
 		<h2><?php _e( 'Keep Your Website Secure', 'live-composer-page-builder' ); ?></h2>
