@@ -363,10 +363,13 @@ function dslc_generate_custom_css( $options_arr, $settings, $restart = false ) {
 								$do_css_output_background = true;
 							}
 
+
 							$css_output_rule .= $rule . ':' . $value . $important_append . ';';
 
 							if ( stristr( $rule, 'background-' ) && $rule != 'background-color' ) {
 								$css_output_el_background .= $css_output_rule;
+							} elseif ( $rule == 'max-width' &&  ( $value == '0px' || $value == '0' || $value == '1400px' ) ) { // min-width = 0 is empty
+								$css_output_el .= '';
 							} else {
 								$css_output_el .= $css_output_rule;
 							}
