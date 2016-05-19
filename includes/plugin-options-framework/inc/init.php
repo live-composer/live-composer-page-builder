@@ -34,17 +34,103 @@ function dslc_plugin_options_setup() {
 		'99.99'
 	);
 
-		// add_submenu_page(
-		// 	'dslc_plugin_options',
-		// 	__('Geeting Started', 'live-composer-page-builder' ),
-		// 	__('Geeting Started', 'live-composer-page-builder' ),
-		// 	'manage_options',
-		// 	'dslc_getting_started',
-		// 	create_function( null, 'dslc_plugin_options_display( "dslc_getting_started" );' )
-		// );
+	/// Custom options extension
+	global $DSLC_Options_Extender;
+	$DSLC_Options_Extender->constructPanels();
 
-		// remove_submenu_page( 'dslc_plugin_options', 'dslc_plugin_options' ); // delete duplicate
+	// add_submenu_page(
+	// 	'dslc_plugin_options',
+	// 	__('Geeting Started', 'live-composer-page-builder' ),
+	// 	__('Geeting Started', 'live-composer-page-builder' ),
+	// 	'manage_options',
+	// 	'dslc_getting_started',
+	// 	create_function( null, 'dslc_plugin_options_display( "dslc_getting_started" );' )
+	// );
+
+
+	// remove_submenu_page( 'dslc_plugin_options', 'dslc_plugin_options' ); // delete duplicate
+
 } add_action( 'admin_menu', 'dslc_plugin_options_setup' );
+
+
+
+add_action( 'dslc_extend_admin_panel_options', function()
+{
+	global $DSLC_Options_Extender;
+
+	$array = [
+		'title' => 'New menu page',
+		'extensionId' => 'cool_stuff',
+		'sections' => [
+
+			[
+				'id' => 'perfromance',
+				'title' => 'Perfomance',
+				'options' => [
+					[
+						'id' => 'lc_max_width',
+						'section' => 'cool_stuff',
+						'label' => __( 'Max Width', 'live-composer-page-builder' ),
+						'std' => '',
+						'type' => 'text',
+						'descr' => __( 'The width of the modules section when row is set to wrapped. If not set the $content_width variable from theme will be used.', 'live-composer-page-builder' ),
+					]
+				]
+			],
+			[
+				'id' => 'perfromance1',
+				'title' => '1Perfomance1',
+				'options' => [
+					[
+						'id' => 'lc_force_important_css',
+						'label' => __( 'Force !important CSS', 'live-composer-page-builder' ),
+						'std' => 'disabled',
+						'type' => 'select',
+						'descr' => __( 'In case the CSS from the theme is influencing CSS for the modules, enabling this will in most cases fix that.', 'live-composer-page-builder' ),
+						'choices' => [
+							[
+								'label' => __( 'Enabled', 'live-composer-page-builder' ),
+								'value' => 'enabled'
+							],
+							[
+								'label' => __( 'Disabled', 'live-composer-page-builder' ),
+								'value' => 'disabled'
+							]
+						]
+					]
+				]
+			],
+			[
+				'id' => '22perfromance1',
+				'title' => '21Perfomance1',
+				'options' => [
+					[
+						'id' => 'lc_css_position',
+						'section' => 'cool_stuff',
+						'label' => __( 'Dynamic CSS Location', 'live-composer-page-builder' ),
+						'std' => 'head',
+						'type' => 'select',
+						'descr' => __( 'Choose where the dynamic CSS is located, at the end of &lt;head&gt; or at the end of the &lt;body&gt;.', 'live-composer-page-builder' ),
+						'choices' => [
+							[
+								'label' => __( 'End of &lt;head&gt;', 'live-composer-page-builder' ),
+								'value' => 'head'
+							],
+							[
+								'label' => __( 'End of &lt;body&gt;', 'live-composer-page-builder' ),
+								'value' => 'body'
+							]
+						]
+					]
+				]
+			]
+		]
+	];
+
+	$DSLC_Options_Extender->addSettingsPanel( $array );
+});
+
+
 
 /**
  * Display option pages
@@ -196,7 +282,6 @@ function dslc_plugin_options_init() {
 			}
 
 			$option['value'] = $value;
-			$function = 'dslc_plugin_option_display_' . $option['type'] . '( "' . base64_encode( serialize( $option ) ) . '" );';
 
 			add_settings_field(
 
@@ -208,7 +293,6 @@ function dslc_plugin_options_init() {
 				$option //args
 			);
 		}
-
 	}
 
 
