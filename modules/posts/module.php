@@ -2200,6 +2200,8 @@ class DSLC_Posts extends DSLC_Module {
 					wp_enqueue_script( 'js-posts-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/editor-script.js', array( 'jquery' ) );
 			});
 		}
+
+		add_shortcode( 'dslc-posts-module-navigation', [__CLASS__, 'dslc_posts_module_nav'] );
 	}
 
 	/**
@@ -2310,6 +2312,84 @@ class DSLC_Posts extends DSLC_Module {
 			} else {
 				$dslc_query = new WP_Query( $args );
 			}
+	}
+
+	function aq_resize1() {
+
+
+	}
+
+	/**
+	 * Returns permalink. Repeater function.
+	 */
+	function permalink() {
+
+		global $LC_Registry;
+		$repeater = $LC_Registry->get( 'repeater' );
+
+		return get_post_permalink( $repeater->post_id );
+	}
+
+	/**
+	 * Returns author's post link. Repeater function.
+	 */
+	function authors_posts_link() {
+
+		return get_the_author_posts_link();
+	}
+
+	/**
+	 * Returns post date. Repeater function.
+	 */
+	function post_date() {
+
+		return the_time( get_option( 'date_format' ) );
+	}
+
+	/**
+	 * Returns post separator. Repeater function.
+	 */
+	function post_separator() {
+
+		global $LC_Registry;
+		$repeater = $LC_Registry->get( 'repeater' );
+		$currObj = $LC_Registry->get( 'repeaterCurClass' );
+
+		if( $currObj->settings['type'] == 'grid' && $currObj->settings['separator_enabled'] == 'true' ) {
+
+			return ?><div class="dslc-post-separator"></div><?php
+		}
+
+	}
+
+	/**
+	 * Returns post thumbnail. Repeater function.
+	 */
+	function post_thumb1() {
+
+
+	}
+
+	function dslc_posts_module_nav( $atts ) {
+
+		global $LC_Registry;
+
+		$activeModules = $LC_Registry->get( 'activeModules' );
+
+		if ( ! isset( $activeModules[$atts['module-id']] ) ) return;
+
+		$module = $activeModules[$atts['module-id']];
+
+		if ( isset( $module->settings['pagination_type'] ) && $module->settings['pagination_type'] != 'disabled' ) {
+
+			$num_pages = $dslc_query->max_num_pages;
+
+			if ( $options['offset'] > 0 ) {
+				$num_pages = ceil ( ( $dslc_query->found_posts - $options['offset'] ) / $options['amount'] );
+			}
+
+			dslc_post_pagination( array( 'pages' => $num_pages, 'type' => $module->settings['pagination_type'] ) );
+		}
 	}
 
 	/**

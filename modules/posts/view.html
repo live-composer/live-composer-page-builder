@@ -54,6 +54,7 @@
 				<div class="dslc-carousel" data-stop-on-hover="<%= carousel_autoplay_hover.value %>" data-autoplay="<%= carousel_autoplay.value %>" data-columns="<%= carousel_items.value %>" data-pagination="<%= carousel_elements.value.circles == true ? 'true' : 'false' %>" data-slide-speed="<%= arrows_slide_speed.value %>" data-pagination-speed="<%= circles_slide_speed.value %>">
 			<%}%>
 
+			<% posts.forEach(function(){%>
 			<div class="<%= element_class + columns_class + extra_class %>" data-cats="<%= post_cats_data.value %>">
 
 				<% if( post_elements.value == 'all' || post_elements.value.thumbnail ){%>
@@ -61,6 +62,7 @@
 					<div class="dslc-post-thumb dslc-cpt-post-thumb dslc-on-hover-anim">
 
 						<div class="dslc-cpt-post-thumb-inner dslca-post-thumb">
+
 							<% if(manual_resize){%>
 								<a href="[dslc-repeatable-prop module-method='permalink']" data-module-method="aq_resize_1">
 									<img src="dummy image" alt="Image alt" />
@@ -70,9 +72,10 @@
 									<img src="dummy"/>
 								</a>
 							<%}%>
+
 						</div><!-- .dslc-cpt-post-thumb-inner -->
 
-						<% if(main_location.value == 'inside' || main_location.value == 'inside_visible'  && (post_elements.value == 'all' || post_elements.value.title == true || post_elements.value.meta == true || post_elements.value.excerpt == true || post_elements.value.button)){%>
+						<% if(main_location.value == 'inside' || main_location.value == 'inside_visible'  && (post_elements.value == 'all' || post_elements.value.indexOf('title') > -1 || post_elements.value.indexOf('meta') > -1 || post_elements.value.indexOf('excerpt') > -1 || post_elements.value.indexOf('button'))){%>
 
 							<div class="dslc-post-main dslc-cpt-post-main <%= main_location.value == 'inside_visible' ? 'dslc-cpt-post-main-visible' : '' %> dslc-on-hover-anim-target dslc-anim-<%= css_anim_hover.value %>" data-dslc-anim="<%= css_anim_hover.value %>" data-dslc-anim-speed="<%= css_anim_speed.value %>">
 
@@ -183,6 +186,7 @@
 					</div><!-- .dslc-cpt-post-main -->
 				<%}%>
 			</div><!-- .dslc-cpt-post -->
+			<%});%>
 
 				[dslc-repeatable-prop module-method="post_separator"]
 
@@ -193,5 +197,5 @@
 	</div><!-- .dslc-cpt-posts -->
 
 <% if(pagination_type.value != 'disabled'){%>
-	[dslc-posts-module-navigation]
+	[dslc-posts-module-navigation module-id="<%= modue_instance_id %>"]
 <%}%>

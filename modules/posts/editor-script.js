@@ -12,6 +12,7 @@
 
 		Posts.prototype.changeOptionsBeforeRender = function(options)
 		{
+			options.module_instance_id = this.settings.module_instance_id;
 			/**
 			 * Unnamed
 			 */
@@ -27,18 +28,24 @@
 			 */
 
 				// Post Elements
-				post_elements = options['post_elements'];
-				if ( ! empty( post_elements ) )
-					post_elements = explode( ' ', trim( post_elements ) );
-				else
-					post_elements = 'all';
+				var post_elements = options.post_elements.value;
+				if ( post_elements ) {
+
+					options.post_elements.value = options.post_elements.value.trim().split();
+				} else {
+
+					options.post_elements.value = 'all';
+				}
 
 				// Carousel Elements
-				carousel_elements = options['carousel_elements'];
-				if ( ! empty( carousel_elements ) )
-					carousel_elements = explode( ' ', trim( carousel_elements ) );
-				else
-					carousel_elements = array();
+				var carousel_elements = options.carousel_elements.value;
+				if ( carousel_elements && ! Array.isArray(carousel_elements) ) {
+
+					options.carousel_elements.value = options.carousel_elements.value.trim().split(' ');
+				} else {
+
+					options.carousel_elements.value = [];
+				}
 			/**
 			 * Classes generation
 			 */
@@ -65,6 +72,10 @@
 
 				options.element_class += 'dslc-carousel-item ';
 			}
+
+			options.extra_class = '';
+			options.post_cats_data = {value: ''};
+			options.manual_resize = false;
 
 			/**
 			 * What is shown
@@ -119,6 +130,14 @@
 				default:
 					options.carousel_items = 6;
 					break;
+			}
+
+			var amount = options.amount.value ? options.amount.value : options.amount.std;
+			options.posts = [];
+
+			for(var i = 0; i < amount; i++){
+
+				options.posts.push(true);
 			}
 
 			return options;
