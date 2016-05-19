@@ -1,4 +1,6 @@
 <div class="wrap">
+	<?php echo dslc_get_c_option( 'lc_max_width1', 'cool_stuff' ); ?>
+
 	<h2 id="dslc-main-title"><?php echo $extension['title'] ?></h2>
 	<div class="wp-clearfix" id="dslc-settings-frame">
 

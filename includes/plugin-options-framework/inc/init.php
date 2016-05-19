@@ -36,7 +36,7 @@ function dslc_plugin_options_setup() {
 
 	/// Custom options extension
 	global $DSLC_Options_Extender;
-	$DSLC_Options_Extender->constructPanels();
+	$DSLC_Options_Extender->construct_panels();
 
 	// add_submenu_page(
 	// 	'dslc_plugin_options',
@@ -63,7 +63,7 @@ function dslc_extend_admin_panel_options()
 
 	$array = [
 		'title' => 'New menu page',
-		'extensionId' => 'cool_stuff',
+		'extension_id' => 'cool_stuff',
 		'sections' => [
 
 			[
@@ -71,10 +71,10 @@ function dslc_extend_admin_panel_options()
 				'title' => 'Perfomance',
 				'options' => [
 					[
-						'id' => 'lc_max_width',
+						'id' => 'lc_max_width1',
 						'section' => 'cool_stuff',
 						'label' => __( 'Max Width', 'live-composer-page-builder' ),
-						'std' => '',
+						'std' => 'olololo_standart_lc',
 						'type' => 'text',
 						'descr' => __( 'The width of the modules section when row is set to wrapped. If not set the $content_width variable from theme will be used.', 'live-composer-page-builder' ),
 					]
@@ -130,7 +130,7 @@ function dslc_extend_admin_panel_options()
 		]
 	];
 
-	$DSLC_Options_Extender->addSettingsPanel( $array );
+	$DSLC_Options_Extender->add_settings_panel( $array );
 };
 
 
