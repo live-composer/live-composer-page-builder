@@ -3,6 +3,9 @@
  * Extending admin interface with custom options
  */
 
+/// Bad code style!
+$dslc_extension; /// Used in template
+
 /**
  * DSLC_Extend_Options class
  */
@@ -70,13 +73,16 @@ class DSLC_Options_Extender {
 	 */
 	private function addSubmenuPage( $extension ) {
 
+		global $dslc_extension;
+		$dslc_extension = $extension;
+
 		add_submenu_page(
 			'dslc_plugin_options',
 			__( $extension['title'], 'live-composer-page-builder' ),
 			__( $extension['title'], 'live-composer-page-builder' ),
 			'manage_options',
 			'dslc_options_' . $extension['extensionId'],
-			function() use ( $extension ) {	$this->renderOptionsPage( $extension );	}
+			array( $this, 'renderOptionsPage' )
 		);
 	}
 
@@ -84,7 +90,10 @@ class DSLC_Options_Extender {
 	 * Render options page
 	 * @param  array $extension
 	 */
-	private function renderOptionsPage( $extension ) {
+	function renderOptionsPage() {
+
+		global $dslc_extension;
+		$extension = $dslc_extension;
 
 		/// Include template
 		include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/options-extension-template.php';
@@ -100,7 +109,7 @@ class DSLC_Options_Extender {
 			'dslc_' . $section['extensionId'] . '_' . $section['id'], /// id
 			$section['title'], /// title
 			'dslc_plugin_options_display_options', /// callback
-			'dslc_options_' . $section['extensionId'] /// where to show
+			'dslc_' . $section['extensionId'] . '_' . $section['id'] /// where to show
 		);
 
 		if( ! is_array( $section['options'] ) ) continue;
@@ -138,7 +147,7 @@ class DSLC_Options_Extender {
 			$option['id'], // id
 			$option['label'], //title
 			'dslc_option_display_funcitons_router', //callback
-			'dslc_options_' . $option['extensionId'], //page
+			$option['section'], //page
 			$option['section'], //section
 			$option //args
 		);
@@ -148,3 +157,16 @@ class DSLC_Options_Extender {
 
 // Create class object
 $DSLC_Options_Extender = new DSLC_Options_Extender;
+
+function dslc_get_c_option( $optId, $extId ) {
+
+	$value = get_option( 'dslc_custom_options_' . $extId );
+
+	if ( isset( $value[$optId] ) ) {
+
+		return $value[$optId];
+	}else{
+
+		return '';
+	}
+}

@@ -53,8 +53,11 @@ function dslc_plugin_options_setup() {
 } add_action( 'admin_menu', 'dslc_plugin_options_setup' );
 
 
-
-add_action( 'dslc_extend_admin_panel_options', function()
+/**
+ * TO REMOVE AFTER CHECK
+ */
+add_action( 'dslc_extend_admin_panel_options', 'dslc_extend_admin_panel_options' );
+function dslc_extend_admin_panel_options()
 {
 	global $DSLC_Options_Extender;
 
@@ -128,7 +131,12 @@ add_action( 'dslc_extend_admin_panel_options', function()
 	];
 
 	$DSLC_Options_Extender->addSettingsPanel( $array );
-});
+};
+
+
+/**
+ * TO REMOVE AFTER CHECK
+ */
 
 
 
