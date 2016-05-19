@@ -63,7 +63,7 @@ function dslc_extend_admin_panel_options()
 
 	$array = [
 		'title' => 'New menu page',
-		'extensionId' => 'cool_stuff',
+		'extension_id' => 'cool_stuff',
 		'sections' => [
 
 			[
