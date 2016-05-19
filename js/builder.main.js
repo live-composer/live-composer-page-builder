@@ -4904,15 +4904,15 @@ var dslcDebug = false;
 				jQuery('.dslca-save-draft-composer').fadeOut(250);
 			// On fail show an alert message
 			} else {
-				alert( 'Something went wrong, please try to save again. Eror Code: ' + response.status );
+				alert( 'Something went wrong, please try to save again. Are you sure to make any changes? Error Code: ' + response.status);
 			}
 
 		}).fail(function( response ) {
 
 			if ( response.statusText == 'timeout' ) {
-				alert( 'The request timed out after 10 seconds. Please try again.' );
+				alert( 'The request timed out after 10 seconds. Server do not respond in time. Please try again.' );
 			} else {
-				alert( 'Something went wrong. Please try again. Eror Code: ' + response.statusText  );
+				alert( 'Something went wrong. Please try again. Error Code: ' + response.statusText  );
 			}
 
 		}).always(function( reseponse ) {
