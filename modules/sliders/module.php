@@ -1,5 +1,11 @@
 <?php
+/**
+ * Sliders module class
+ */
 
+/**
+ * Class DSLC_Sliders
+ */
 class DSLC_Sliders extends DSLC_Module {
 
 	var $module_id;
@@ -7,15 +13,23 @@ class DSLC_Sliders extends DSLC_Module {
 	var $module_icon;
 	var $module_category;
 
-	function __construct() {
+	/**
+	 * @inherited
+	 */
+	function __construct( $settings = [], $atts = [] ) {
 
-		$this->module_id = 'DSLC_Sliders';
+		$this->module_ver = 2;
+		$this->module_id = __CLASS__;
 		$this->module_title = __( 'Slider (Revolution)', 'live-composer-page-builder' );
 		$this->module_icon = 'picture';
 		$this->module_category = 'elements';
 
+		parent::__construct( $settings, $atts );
 	}
 
+	/**
+	 * @inherited
+	 */
 	function options() {
 
 		// Get Rev Sliders
@@ -27,22 +41,22 @@ class DSLC_Sliders extends DSLC_Module {
 		);
 
 		$table_name = $wpdb->prefix . 'revslider_sliders';
-		if($wpdb->get_var("SHOW TABLES LIKE '$table_name'" == $table_name)){
 
-			$sliders = $wpdb->get_results( "SELECT id, title, alias FROM $table_name" );
-
+		if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") == $table_name){
+			$sliders = $wpdb->get_results( "SELECT id, title, alias, type FROM $table_name" );
 			if ( ! empty( $sliders ) ) {
 
 				foreach ( $sliders as $slider ) {
-					$slider_choices[] = array(
-						'label' => $slider->title,
-						'value' => $slider->alias
-					);
+					if( $slider->type == ''){
+						$slider_choices[] = array(
+							'label' => $slider->title,
+							'value' => $slider->alias
+						);
+					}
 				}
 
 			}
 		}
-
 
 		$dslc_options = array(
 			array(
@@ -81,35 +95,22 @@ class DSLC_Sliders extends DSLC_Module {
 
 	}
 
-	function output( $options ) {
+	/**
+	 * @inherited
+	 */
+	function output( $options = [] ) {
 
-		global $dslc_active;
-
-		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
-			$dslc_is_admin = true;
-		else
-			$dslc_is_admin = false;
-
-		$this->module_start( $options );
+		$this->module_start();
 
 		/* Module output stars here */
-
-			if ( ! isset( $options['slider'] ) || $options['slider'] == 'not_set' ) {
-
-				if ( $dslc_is_admin ) :
-					?><div class="dslc-notification dslc-red"><?php _e( 'Click the cog icon on the right of this box to choose which slider to show.', 'live-composer-page-builder' ); ?> <span class="dslca-module-edit-hook dslc-icon dslc-icon-cog"></span></span></div><?php
-				endif;
-
-			} else {
-
-				echo do_shortcode( '[rev_slider '. $options['slider'] .']' );
-
-			}
-
+		echo $this->renderModule();
 		/* Module output ends here */
 
-		$this->module_end( $options );
+		$this->module_end();
 
 	}
 
 }
+
+/// Register module
+( new DSLC_Sliders )->register();

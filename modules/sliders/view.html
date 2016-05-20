@@ -1,0 +1,8 @@
+<% if((slider.value || slider.std) == 'not_set') {%>
+	<div class="dslc-notification dslc-red">
+		<?php _e( 'Click the cog icon on the right of this box to choose which slider to show.', 'live-composer-page-builder' ); ?>
+		<span class="dslca-module-edit-hook dslc-icon dslc-icon-cog"></span>
+	</div>
+<%}else{%>
+	<div>[rev_slider <%= slider.value %>]</div>
+<%}%>
