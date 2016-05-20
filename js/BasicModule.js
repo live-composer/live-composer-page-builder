@@ -82,6 +82,8 @@
 		}
 
 		this.moduleBody.children().remove();
+		this.moduleBody.html('');
+
 		this.moduleBody.append( bodyHTML );
 		this.elem.remove();
 		this.elem = tempWrap;

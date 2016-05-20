@@ -12,133 +12,109 @@
 
 		Posts.prototype.changeOptionsBeforeRender = function(options)
 		{
-			options.module_instance_id = this.settings.module_instance_id;
+			var opt = options;
 			/**
-			 * Unnamed
-			 */
+			* Common
+			*/
 
-				options.columns_class = 'dslc-col dslc-' + options.columns.value + '-col ';
-				options.count = 0;
-				options.real_count = 0;
-				options.increment = options.columns.value;
-				options.max_count = 12;
+			opt.module_instance_id = this.settings.module_instance_id;
+			opt.columns.value = opt.columns.value ? opt.columns.value : opt.columns.std;
+			opt.columns_class = 'dslc-col dslc-' + opt.columns.value + '-col ';
+			opt.count = 0;
+			opt.real_count = 0;
+			opt.increment = options.columns.value;
+			opt.max_count = 12;
 
 			/**
-			 * Elements to show
-			 */
+			* Header
+			*/
+			opt.show_filters = false;
+			opt.show_carousel_arrows = false;
+			opt.show_view_all_link = false;
 
-				// Post Elements
-				var post_elements = options.post_elements.value;
-				if ( post_elements ) {
+			opt.elements.value = opt.elements.value ? opt.elements.value : opt.elements.std;
+			opt.carousel_elements.value = opt.carousel_elements.value ?
+												opt.carousel_elements.value :
+			 									opt.carousel_elements.std;
 
-					options.post_elements.value = options.post_elements.value.trim().split();
-				} else {
+			if(opt.elements.value.indexOf('filters') > -1 && opt.type.value !== 'carousel'){
 
-					options.post_elements.value = 'all';
+				opt.show_filters = true;
+			}
+
+			if(opt.type.value == 'carousel' && 	opt.carousel_elements.value.indexOf('arrows') > -1){
+
+				opt.show_carousel_arrows = true;
+			}
+
+			/**
+			* Posts
+			*/
+			opt.post_elements.value = opt.post_elements.value ? opt.post_elements.value : opt.post_elements.std;
+
+			/**
+			* Dummy content
+			*/
+			opt.cats_array = [
+				{
+					cat_slug: 'troufle',
+					cat_name: 'Troufle'
+				},
+				{
+					cat_slug: 'icecream',
+					cat_name: 'Icecream'
+				},
+				{
+					cat_slug: 'cool_trees',
+					cat_name: 'Cool trees'
 				}
+			];
 
-				// Carousel Elements
-				var carousel_elements = options.carousel_elements.value;
-				if ( carousel_elements && ! Array.isArray(carousel_elements) ) {
+			opt.posts = [];
 
-					options.carousel_elements.value = options.carousel_elements.value.trim().split(' ');
-				} else {
+			var amount = opt.amount.value ? opt.amount.value : opt.amount.std;
 
-					options.carousel_elements.value = [];
-				}
+			for(var i = 0; i < amount; i++){
+
+				opt.posts.push({});
+			}
+
 			/**
 			 * Classes generation
 			 */
 
 			// Posts container
-			options.container_class = 'dslc-posts dslc-cpt-posts dslc-clearfix dslc-cpt-posts-type-' +
-				options.type.value + ' dslc-posts-orientation-' + options.orientation.value + ' ';
+			opt.container_class = 'dslc-posts dslc-cpt-posts dslc-clearfix dslc-cpt-posts-type-' +
+				opt.type.value + ' dslc-posts-orientation-' + opt.orientation.value + ' ';
 
-			if(options.type.value == 'masonry'){
+			if(opt.type.value == 'masonry'){
 
-				options.container_class += 'dslc-init-masonry ';
-			}else if(options.type.value == 'grid'){
+				opt.container_class += 'dslc-init-masonry ';
+			}else if(opt.type.value == 'grid'){
 
-				options.container_class += 'dslc-init-grid ';
+				opt.container_class += 'dslc-init-grid ';
 			}
 
 			// Post
-			options.element_class = 'dslc-post dslc-cpt-post ';
+			opt.element_class = 'dslc-post dslc-cpt-post ';
 
-			if(options.type.value == 'masonry'){
+			if(opt.type.value == 'masonry'){
 
-				options.element_class += 'dslc-masonry-item ';
-			}else if(options.type.value == 'carousel'){
+				opt.element_class += 'dslc-masonry-item ';
+			}else if(opt.type.value == 'carousel'){
 
-				options.element_class += 'dslc-carousel-item ';
+				opt.element_class += 'dslc-carousel-item ';
 			}
 
-			options.extra_class = '';
-			options.post_cats_data = {value: ''};
-			options.manual_resize = false;
-
-			/**
-			 * What is shown
-			 */
-
-			options.show_header = false;
-			options.show_heading = false;
-			options.show_filters = false;
-			options.show_carousel_arrows = false;
-			options.show_view_all_link = false;
-
-			if(options.elements.main_heading){
-
-				options.show_heading = true;
-			}
-
-			if(( options.elements == 'all' || options.elements.filters ) && options.type.value !== 'carousel' ){
-
-				options.show_filters = true;
-			}
-
-			if(options.type.value == 'carousel' && options.carousel_elements.arrows){
-
-				options.show_carousel_arrows = true;
-			}
-
-			if(options.show_heading || options.show_filters || options.show_carousel_arrows){
-
-				options.show_header = true;
-			}
+			opt.extra_class = '';
+			opt.post_cats_data = {value: ''};
+			opt.manual_resize = false;
 
 			/**
 			 * Carousel Items
 			 */
 
-			switch(options.columns.value){
-				case 12 :
-					options.carousel_items = 1;
-					break;
-				case 6 :
-					options.carousel_items = 2;
-					break;
-				case 4 :
-					options.carousel_items = 3;
-					break;
-				case 3 :
-					options.carousel_items = 4;
-					break;
-				case 2 :
-					options.carousel_items = 6;
-					break;
-				default:
-					options.carousel_items = 6;
-					break;
-			}
-
-			var amount = options.amount.value ? options.amount.value : options.amount.std;
-			options.posts = [];
-
-			for(var i = 0; i < amount; i++){
-
-				options.posts.push(true);
-			}
+			opt.carousel_items = opt.columns.value ? 12 / opt.columns.value : 6;
 
 			return options;
 		}
