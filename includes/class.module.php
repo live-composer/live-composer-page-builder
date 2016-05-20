@@ -407,7 +407,7 @@ class DSLC_Module {
 			array(
 				'label' => 'Font Family',
 				'id' => 'css_filter_font_family',
-				'std' => 'Open Sans',
+				'std' => '',
 				'type' => 'font',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-post-filter',
@@ -669,7 +669,7 @@ class DSLC_Module {
 			array(
 				'label' => 'Title - Font Family',
 				'id' => 'css_main_heading_font_family',
-				'std' => 'Oswald',
+				'std' => '',
 				'type' => 'font',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-module-heading h2',
@@ -757,7 +757,7 @@ class DSLC_Module {
 			array(
 				'label' => 'Link - Font Family',
 				'id' => 'css_main_heading_link_font_family',
-				'std' => 'Open Sans',
+				'std' => '',
 				'type' => 'font',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-module-heading-view-all a',
@@ -1523,7 +1523,7 @@ class DSLC_Module {
 			array(
 				'label' => 'Item - Font Family',
 				'id' => 'css_pag_item_font_family',
-				'std' => 'Open Sans',
+				'std' => '',
 				'type' => 'font',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-pagination li a',

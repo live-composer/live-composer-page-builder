@@ -911,7 +911,7 @@ class DSLC_Projects extends DSLC_Module {
 			array(
 				'label' => __( 'Font Family', 'live-composer-page-builder' ),
 				'id' => 'css_title_font_family',
-				'std' => 'Open Sans',
+				'std' => '',
 				'type' => 'font',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-project-title h2,.dslc-project-title h2 a',
@@ -1018,7 +1018,7 @@ class DSLC_Projects extends DSLC_Module {
 			array(
 				'label' => __( 'Font Family', 'live-composer-page-builder' ),
 				'id' => 'css_cats_font_family',
-				'std' => 'Droid Serif',
+				'std' => '',
 				'type' => 'font',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-project-cats',
@@ -1183,7 +1183,7 @@ class DSLC_Projects extends DSLC_Module {
 			array(
 				'label' => __( 'Font Family', 'live-composer-page-builder' ),
 				'id' => 'css_excerpt_font_family',
-				'std' => 'Open Sans',
+				'std' => '',
 				'type' => 'font',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-project-excerpt',
@@ -1367,7 +1367,7 @@ class DSLC_Projects extends DSLC_Module {
 			array(
 				'label' => __( 'Font Family', 'live-composer-page-builder' ),
 				'id' => 'css_button_font_family',
-				'std' => 'Open Sans',
+				'std' => '',
 				'type' => 'font',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-project-read-more a',

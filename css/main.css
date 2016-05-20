@@ -65,7 +65,7 @@ body.admin-bar #dslc-header.dslc-header-pos-absolute {
 	cursor: pointer;
 	display: block;
 	font-size: 11px;
-	font-family: "Open Sans";
+	font-family: '';
 	font-weight: 900;
 	line-height: 1;
 	padding: 11px 12px;
@@ -461,7 +461,7 @@ body.rtl .dslc-last-col {
 	position: relative;
 	font-size: 14px;
 	line-height: 25px;
-	font-family: "Open Sans";
+	font-family: '';
 }
 
 	.dslc-notification .dslc-icon {
@@ -502,7 +502,7 @@ body.rtl .dslc-last-col {
 		float: left;
 		font-size: 17px;
 		font-weight: 400;
-		font-family: "Oswald";
+		font-family: '';
 		line-height: 1;
 		margin: 0;
 		padding: 0;
@@ -522,7 +522,7 @@ body.rtl .dslc-last-col {
 			display: block;
 			padding-left: 15px;
 			border-left: 1px dotted #4f4f4f;
-			font-family: "Open Sans";
+			font-family: '';
 			font-weight: 600;
 			line-height: 1;
 			text-decoration: none;
@@ -661,7 +661,7 @@ body.rtl .dslc-last-col {
 		display: inline-block;
 		font-size: 11px;
 		font-weight: bold;
-		font-family: "Open Sans";
+		font-family: '';
 		line-height: 1;
 		padding: 12px;
 		margin-right: 10px;
