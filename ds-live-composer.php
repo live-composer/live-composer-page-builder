@@ -4,7 +4,7 @@
  * Plugin URI: https://www.livecomposerplugin.com
  * Description: Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
  * Author: Live Composer Team
- * Version: 1.0.8.1
+ * Version: 1.0.8.2
  * Author URI: https://livecomposerplugin.com
  * License: GPL2
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -35,7 +35,7 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) ):
 	 * Constants
 	 */
 
-	define( 'DS_LIVE_COMPOSER_VER', '1.0.8.1' );
+	define( 'DS_LIVE_COMPOSER_VER', '1.0.8.2' );
 
 	define( 'DS_LIVE_COMPOSER_SHORTNAME', __( 'Live Composer', 'live-composer-page-builder' ) );
 	define( 'DS_LIVE_COMPOSER_BASENAME', plugin_basename( __FILE__ ) );
@@ -211,7 +211,7 @@ function lc_welcome( $plugin ) {
 			return;
 
 		// Bail if activating from network, or bulk
-		if ( is_network_admin() || isset( $_GET['activate-multi'] ) )
+		if ( is_network_admin() || isset( $_GET['activate-multi'] ) || isset( $_GET['tgmpa-activate'] ) )
 			return;
 
 		wp_safe_redirect( admin_url( 'admin.php?page=dslc_plugin_options#dslc-top' ) );

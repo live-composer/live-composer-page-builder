@@ -124,6 +124,16 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 
 == Changelog ==
 
+= 1.0.8.2 - May 21st 2016 =
+
+* Module Options: New Max-Width setting in the IMAGE module added.
+* Code Improvements: New Live Composer automatically deacitvate Live and Previous generation of the plugin.
+* Code Improvements: When save process fails, errors are more informative now.
+* Code Improvements: Removed all the custom fonts from Module defaults.
+* Bug Fixed: Fixed problems when styling options do not apply after.
+* Bug Fixed: Fixed infinite loop when full content displayed on posts archive listing.
+
+
 = 1.0.8.1 - May 14th 2016 =
 
 * Module Options: HTML/SHORTCODE module now has an Error-Proof mode. Use it when the complex shortcode or JS code break the Live Composer page editing functionality.
