@@ -89,7 +89,7 @@
 			}
 
 				#dslc-content .dslc-cpt-post-title h2 {
-					font-family: '';
+					/*font-family: '';*/
 					font-weight: 600;
 					font-size: 15px;
 					line-height: 26px;
@@ -246,7 +246,7 @@
 			}
 
 				#dslc-content .dslc-blog-post-title h2 {
-					font-family: '';
+					/*font-family: '';*/
 					font-weight: 600;
 					font-size: 15px;
 					line-height: 26px;
@@ -491,7 +491,7 @@
 							color: #fff;
 							display: block;
 							font-size: 25px;
-							font-family: '';
+							/*font-family: '';*/
 							font-weight: 200;
 							line-height: 1;
 							margin-bottom: 8px;
@@ -501,7 +501,7 @@
 							color: #7d7d7d;
 							display: block;
 							font-size: 11px;
-							font-family: '';
+							/*font-family: '';*/
 							line-height: 1;
 						}
 
@@ -539,7 +539,7 @@
 				}
 
 					#dslc-content .dslc-gallery-title h2 {
-						font-family: '';
+						/*font-family: '';*/
 						font-size: 11px;
 						line-height: 1;
 						margin: 0;
@@ -846,7 +846,7 @@
 					}
 
 			#dslc-content .dslc-project-cats {
-				font-family: '';
+				/*font-family: '';*/
 				font-size: 10px;
 				font-style: italic;
 				line-height: 1;
@@ -1324,7 +1324,7 @@
 					display: block;
 					font-weight: 400;
 					font-size: 25px;
-					font-family: '';
+					/*font-family: '';*/
 					left: 35%;
 					line-height: 1;
 					position: absolute;
@@ -1405,7 +1405,7 @@
 						float: left;
 						font-size: 20px;
 						line-height: 1;
-						font-family: '';
+						/*font-family: '';*/
 					}
 
 						#dslc-content .dslc-product-price-secondary ins {
@@ -1416,7 +1416,7 @@
 					#dslc-content .dslc-product-title h2 {
 						clear: none;
 						font-size: 11px;
-						font-family: '';
+						/*font-family: '';*/
 						line-height: 1;
 						vertical-align: middle;
 						margin: 0;
@@ -1913,7 +1913,7 @@ body.dslc-res-phone .dslc-comment .children {
 			border: 0 solid transparent;
 			display: block;
 			font-size: 11px;
-			font-family: '';
+			/*font-family: '';*/
 			font-weight: bold;
 			font-size: 11px;
 			line-height: 1;
