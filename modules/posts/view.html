@@ -61,8 +61,11 @@
 				<div class="dslc-carousel" data-stop-on-hover="<%= carousel_autoplay_hover.value %>" data-autoplay="<%= carousel_autoplay.value %>" data-columns="<%= carousel_items.value %>" data-pagination="<%= carousel_elements.value.circles == true ? 'true' : 'false' %>" data-slide-speed="<%= arrows_slide_speed.value %>" data-pagination-speed="<%= circles_slide_speed.value %>">
 			<%}%>
 
-			<% posts.forEach(function(){%>
-				<div class="<%= element_class + columns_class + extra_class %>" data-cats="<%= post_cats_data.value %>">
+			<% posts.forEach(function(elem, index){
+
+				var last_col = type.value == 'grid' && index > 0 && (index + 1) % posts_per_row.value == 0 && separator_enabled.value != 'disabled' ? 'dslc-last-col' : '';
+				%>
+				<div class="<%= element_class + columns_class + extra_class %> <%= last_col %>" data-cats="<%= post_cats_data.value %>">
 
 					<% if(post_elements.value.indexOf('thumbnail') > -1){%>
 
@@ -72,11 +75,11 @@
 
 								<% if(manual_resize){%>
 									<a href="[dslc-repeatable-prop module-method='permalink']" data-module-method="aq_resize_1">
-										<img src="http://dummyimage.com/300x200/000/fff" alt="Image alt" />
+										<img width="100%" height=200 src="http://dummyimage.com/300x200/000/fff" alt="Image alt" />
 									</a>
 								<%}else{%>
 									<a href="[dslc-repeatable-prop module-method='permalink']" data-module-method="post_thumb_1">
-										<img src="http://dummyimage.com/300x200/000/fff"/>
+										<img width="100%" height=200 src="http://dummyimage.com/300x200/000/fff"/>
 									</a>
 								<%}%>
 
@@ -195,7 +198,7 @@
 										<% if(button_icon_id.value != '' ){%>
 											<span class="dslc-icon dslc-icon-<%= button_icon_id.value %>"></span>
 										<%}%>
-										<%= button_text.value %>
+										<%= button_text.value || button_text.std %>
 									</a>
 								</div><!-- .dslc-cpt-post-read-more -->
 							<%}%>
@@ -203,7 +206,9 @@
 					<%}%>
 				</div><!-- .dslc-cpt-post -->
 
-					<div>[dslc-repeatable-prop module-method="post_separator"]</div>
+				<% if(last_col != ''){%>
+					<div class="dslc-post-separator"></div>
+				<%}%>
 
 				<% if(type.value == 'carousel'){%>
 					</div>

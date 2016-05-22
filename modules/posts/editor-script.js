@@ -18,12 +18,18 @@
 			*/
 
 			opt.module_instance_id = this.settings.module_instance_id;
-			opt.columns.value = opt.columns.value ? opt.columns.value : opt.columns.std;
-			opt.columns_class = 'dslc-col dslc-' + opt.columns.value + '-col ';
+			opt.posts_per_row.value = opt.posts_per_row.value ? opt.posts_per_row.value : opt.posts_per_row.std;
+			opt.columns_class = 'dslc-col dslc-' + opt.posts_per_row.value + '-col ';
 			opt.count = 0;
 			opt.real_count = 0;
-			opt.increment = options.columns.value;
+			opt.separator_enabled.value = opt.separator_enabled.value ? opt.separator_enabled.value : opt.separator_enabled.std;
 			opt.max_count = 12;
+			opt.type.value = opt.type.value ? opt.type.value : opt.type.std;
+
+			opt.main_location.value = opt.main_location.value ? opt.main_location.value : opt.main_location.std;
+
+			opt.meta_elements.value = opt.meta_elements.value ? opt.meta_elements.value : opt.meta_elements.std;
+			opt.elements.value = opt.elements.value ? opt.elements.value : opt.elements.std;
 
 			/**
 			* Header
@@ -32,7 +38,6 @@
 			opt.show_carousel_arrows = false;
 			opt.show_view_all_link = false;
 
-			opt.elements.value = opt.elements.value ? opt.elements.value : opt.elements.std;
 			opt.carousel_elements.value = opt.carousel_elements.value ?
 												opt.carousel_elements.value :
 			 									opt.carousel_elements.std;
@@ -114,7 +119,7 @@
 			 * Carousel Items
 			 */
 
-			opt.carousel_items = opt.columns.value ? 12 / opt.columns.value : 6;
+			opt.carousel_items = opt.posts_per_row.value ? 12 / opt.posts_per_row.value : 6;
 
 			return options;
 		}

@@ -144,10 +144,31 @@ class DSLC_Posts extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Posts Per Row', 'live-composer-page-builder' ),
-				'id' => 'columns',
+				'id' => 'posts_per_row',
 				'std' => '3',
 				'type' => 'select',
-				'choices' => $this->shared_options('posts_per_row_choices'),
+				'choices' => array(
+					array(
+						'label' => '1',
+						'value' => '1',
+					),
+					array(
+						'label' => '2',
+						'value' => '2',
+					),
+					array(
+						'label' => '3',
+						'value' => '3',
+					),
+					array(
+						'label' => '4',
+						'value' => '4',
+					),
+					array(
+						'label' => '6',
+						'value' => '6',
+					),
+				)
 			),
 			array(
 				'label' => __( 'Order By', 'live-composer-page-builder' ),

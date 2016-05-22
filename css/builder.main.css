@@ -3529,3 +3529,13 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 .dslc-cached-version{
 	display: none;
 }
+
+
+/** Editor only styles */
+#dslc-content .dslc-cpt-post-thumb a {
+    display: block!important;
+}
+
+#dslc-content .dslc-cpt-post-thumb img {
+	height: 200px;
+}
