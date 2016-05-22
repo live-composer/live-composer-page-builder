@@ -4,7 +4,7 @@
  * Plugin URI: https://www.livecomposerplugin.com
  * Description: Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
  * Author: Live Composer Team
- * Version: 1.0.8.2
+ * Version: 1.0.8.4
  * Author URI: https://livecomposerplugin.com
  * License: GPL2
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -23,6 +23,10 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Live Composer. If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Idea, initial development and inspiration by
+ * Slobodan Kustrimovic https://github.com/BobaWebDev
+ *
  */
 
 // Exit if accessed directly.
@@ -35,7 +39,7 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) ):
 	 * Constants
 	 */
 
-	define( 'DS_LIVE_COMPOSER_VER', '1.0.8.2' );
+	define( 'DS_LIVE_COMPOSER_VER', '1.0.8.3' );
 
 	define( 'DS_LIVE_COMPOSER_SHORTNAME', __( 'Live Composer', 'live-composer-page-builder' ) );
 	define( 'DS_LIVE_COMPOSER_BASENAME', plugin_basename( __FILE__ ) );

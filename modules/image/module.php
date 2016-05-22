@@ -245,7 +245,7 @@ class DSLC_Image extends DSLC_Module {
 				'section' => 'styling',
 				'ext' => 'px',
 				'min' => -150,
-				'max' => 150
+				'max' => 150,
 			),
 			array(
 				'label' => __( 'Max Width', 'live-composer-page-builder' ),
