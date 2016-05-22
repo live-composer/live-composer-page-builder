@@ -19,7 +19,7 @@
 
 			opt.module_instance_id = this.settings.module_instance_id;
 			opt.posts_per_row.value = opt.posts_per_row.value ? opt.posts_per_row.value : opt.posts_per_row.std;
-			opt.columns_class = 'dslc-col dslc-' + opt.posts_per_row.value + '-col ';
+			opt.columns_class = 'dslc-col dslc-' + 12 / opt.posts_per_row.value + '-col ';
 			opt.count = 0;
 			opt.real_count = 0;
 			opt.separator_enabled.value = opt.separator_enabled.value ? opt.separator_enabled.value : opt.separator_enabled.std;

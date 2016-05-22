@@ -53,7 +53,6 @@ class DSLC_Main {
 
 		$currModule = $activeModules['a' . $attrs['module_instance_id']];
 
-
 		if ( ! empty( $attrs['array'] ) && method_exists( $currModule, $attrs['array']) ) {
 
 			$repeatArray = $currModule->$attrs['array']();
@@ -66,6 +65,8 @@ class DSLC_Main {
 			}
 		}
 
+		/// Output start
+		$out = '';
 
 		if ( ! empty( $attrs['wpquery'] ) && method_exists( $currModule, $attrs['wpquery']) ) {
 
@@ -80,33 +81,67 @@ class DSLC_Main {
 
 			$temp = array();
 
+			$cnt = 0;
 			while( $repeatArray->have_posts() ) {
 
 				$repeatArray->the_post();
 				global $post;
 
-				$temp[] = $post;
-			}
+				$repeater = [
+					'elem' => $post,
+					'curr_class' => $currModule,
+					'index' => $cnt
+				];
 
-			$repeatArray = $temp;
-		}
+				$LC_Registry->set( 'repeater', $repeater );
+				$content = DSLC_Main::do_custom_shortcode( $content );
 
-		$out = '';
-
-		if ( is_array( $repeatArray ) ) {
-
-			foreach( $repeatArray as $repeatElement ) {
-
-				$LC_Registry->set( 'repeater', $repeatElement );
-				$LC_Registry->set( 'repeaterCurrClass', $currModule );
 				$out .= do_shortcode( $content );
+				$cnt++;
 			}
 
 			$LC_Registry->set( 'repeater', null );
 			$LC_Registry->set( 'repeaterCurrClass', null );
+
+			return $out;
+		}
+
+		/// if repeater wasn't a WP_Query
+		if ( is_array( $repeatArray ) ) {
+
+			$cnt = 0;
+			foreach( $repeatArray as $repeatElement ) {
+
+				$repeater = [
+					'elem' => $repeatElement,
+					'curr_class' => $currModule,
+					'index' => $cnt
+				];
+
+				$LC_Registry->set( 'repeater', $repeater );
+				$content = DSLC_Main::do_custom_shortcode( $content );
+
+				$out .= do_shortcode( $content );
+				$cnt++;
+			}
+
+			$LC_Registry->set( 'repeater', null );
 		}
 
 		return $out;
+	}
+
+	/**
+	 * Workaround beyond the WP safety issues
+	 *
+	 * @param  string $content
+	 * @return srting
+	 */
+	static function do_custom_shortcode( $content ) {
+
+		$content = preg_replace("/{{(.*?)}}/", '[$1]', $content);
+
+		return $content;
 	}
 
 	/**
@@ -118,12 +153,15 @@ class DSLC_Main {
 	static function dslc_repeatable_prop( $atts ) {
 
 		global $LC_Registry;
-		$repeater = $LC_Registry->get('repeater');
-		$currModule = $LC_Registry->get( 'repeaterCurrClass' );
+		$raw_repeater = $LC_Registry->get('repeater');
+		$repeater = $raw_repeater['elem'];
+		$currModule = $raw_repeater['curr_class'];
 
-		if ( ! empty( $atts['module-method'] ) && method_exists( $currModule, $atts['module-method'] ) ) {
+		$mod_method = @$atts['module-method'];
 
-			return $currModule->$atts['module-method']();
+		if ( ! empty( $mod_method ) && method_exists( $currModule, $mod_method ) ) {
+
+			return $currModule->$mod_method();
 		}
 
 
@@ -138,9 +176,11 @@ class DSLC_Main {
 
 		if ( ! empty( $atts['wppost-field'] ) ) {
 
-			if ( $repeater instanceof WP_Post && isset( $repeater->$atts['wppost-field'] ) ) {
+			$field = $atts['wppost-field'];
 
-				return do_shortcode( $repeater->$atts['wppost-field'] );
+			if ( $repeater instanceof WP_Post && isset( $repeater->$field ) ) {
+
+				return do_shortcode( $repeater->$field );
 			}
 		}
 	}

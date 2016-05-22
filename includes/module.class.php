@@ -2143,7 +2143,12 @@ class DSLC_Module{
 	 */
 	function renderModule()
 	{
-		return base64_decode( @$this->settings['staticHTML'] );
+		if ( ! isset( $this->settings['staticHTML'] ) ) {
+
+			return new WP_Error( 'No staticHTML in ' . $this->module_id, __( "No staticHTML found in " . $this->module_id . " while rendering cache." ) );
+		}
+
+		return base64_decode( $this->settings['staticHTML'] );
 	}
 
 	/**
@@ -2232,7 +2237,7 @@ class DSLC_Module{
 	 *
 	 * @return string code inits module in editor mode
 	 */
-	public function renderEditModeModule()
+	function renderEditModeModule()
 	{
 		ob_start();
 		?><div class="module-init-block module-init-code-<?php echo $this->settings['module_instance_id']?>">
@@ -2243,6 +2248,30 @@ class DSLC_Module{
 		ob_end_clean();
 
 		return $output;
+	}
+
+	/**
+	 * Returns properties values - or std values.
+	 *
+	 * @return array
+	 */
+	function getPropsValues() {
+
+		if( ! isset( $this->settings ) || ! isset( $this->settings['propValues'] ) ) {
+
+			return [];
+		}
+
+		$userOptions = $this->settings['propValues'];
+		$basicOptions = $this->options();
+		$out = [];
+
+		foreach( $basicOptions as $option ) {
+
+			$out[$option['id']] = isset( $userOptions[$option['id']] ) ? $userOptions[$option['id']] : $option['std'];
+		}
+
+		return $out;
 	}
 
 }

@@ -177,7 +177,9 @@
 					.removeAttr('data-wppost-field');
 			});
 
-			return HTML[0].outerHTML;
+			var out = $("<div>").append(HTML);
+
+			return out[0].outerHTML;
 		}
 		/**
 		 * Recalculate icons and another centered stuff

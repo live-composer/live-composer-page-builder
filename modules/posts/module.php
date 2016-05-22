@@ -2232,19 +2232,12 @@ class DSLC_Posts extends DSLC_Module {
 
 		global $dslc_active;
 
-		$options = $this->settings;
-
-		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
-			$dslc_is_admin = true;
-		else
-			$dslc_is_admin = false;
+		$options = $this->getPropsValues();
 
 		// Fix slashes on apostrophes
 		if ( isset( $options['button_text'] ) ) {
 			$options['button_text'] = stripslashes( $options['button_text'] );
 		}
-
-		$this->module_start( $options );
 
 		/* CUSTOM START */
 
@@ -2254,85 +2247,114 @@ class DSLC_Posts extends DSLC_Module {
 		 * Query
 		 */
 
-			// Fix for pagination
-			if( is_front_page() ) { $paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1; } else { $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1; }
+		// Fix for pagination
+		if( is_front_page() ) {
 
-			// Fix for pagination from other modules affecting this one when pag disabled
-			if ( $options['pagination_type'] == 'disabled' ) $paged = 1;
+			$paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1;
+		} else {
 
-			// Fix for offset braking pagination
-			$query_offset = $options['offset'];
-			if ( $query_offset > 0 && $paged > 1 ) $query_offset = ( $paged - 1 ) * $options['amount'] + $options['offset'];
+			$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+		}
 
-			// General args
-			$args = array(
-				'paged' => $paged,
-				'post_type' => $options['post_type'],
-				'posts_per_page' => $options['amount'],
-				'order' => $options['order'],
-				'orderby' => $options['orderby'],
-			);
+		// Fix for pagination from other modules affecting this one when pag disabled
+		if ( ! isset( $options['pagination_type'] ) || $options['pagination_type'] == 'disabled' ) {
 
-			// Add offset
-			if ( $query_offset > 0 ) {
-				$args['offset'] = $query_offset;
-			}
+			$paged = 1;
+		}
 
-			if ( defined('DOING_AJAX') && DOING_AJAX ) {
-				$args['post_status'] = array( 'publish', 'private' );
-			}
+		// Fix for offset braking pagination
+		$query_offset = $options['offset'];
 
-			// Category args
-			if ( isset( $options['categories'] ) && $options['categories'] != '' ) {
-				$cats_array = explode( ' ', $options['categories']);
-				$args['category__in'] = $cats_array;
-			}
+		if ( $query_offset > 0 && $paged > 1 ) {
 
-			// Exlcude and Include arrays
-			$exclude = array();
-			$include = array();
+			$query_offset = ( $paged - 1 ) * $options['amount'] + $options['offset'];
+		}
 
-			// Exclude current post
-			if ( is_singular( get_post_type() ) )
-				$exclude[] = get_the_ID();
+		// General args
+		$args = array(
+			'paged' => $paged,
+			'post_type' => $options['post_type'],
+			'posts_per_page' => $options['amount'],
+			'order' => $options['order'],
+			'orderby' => $options['orderby'],
+		);
 
-			// Exclude posts ( option )
-			if ( $options['query_post_not_in'] )
-				$exclude = array_merge( $exclude, explode( ' ', $options['query_post_not_in'] ) );
+		// Add offset
+		if ( $query_offset > 0 ) {
+			$args['offset'] = $query_offset;
+		}
 
-			// Include posts ( option )
-			if ( $options['query_post_in'] )
-				$include = array_merge( $include, explode( ' ', $options['query_post_in'] ) );
+		if ( defined('DOING_AJAX') && DOING_AJAX ) {
+			$args['post_status'] = array( 'publish', 'private' );
+		}
 
-			// Include query parameter
-			if ( ! empty( $include ) )
-				$args['post__in'] = $include;
+		// Category args
+		if ( isset( $options['categories'] ) && $options['categories'] != '' ) {
+			$cats_array = explode( ' ', $options['categories']);
+			$args['category__in'] = $cats_array;
+		}
 
-			// Exclude query parameter
-			if ( ! empty( $exclude ) )
-				$args['post__not_in'] = $exclude;
+		// Exlcude and Include arrays
+		$exclude = array();
+		$include = array();
 
-			// Author archive page
-			if ( is_author() && $options['query_alter'] == 'enabled' ) {
-				global $authordata;
-				$args['author__in'] = array( $authordata->data->ID );
-			}
+		// Exclude current post
+		if ( is_singular( get_post_type() ) ) {
 
-			// No paging
-			if ( $options['pagination_type'] == 'disabled' )
-				$args['no_found_rows'] = true;
+			$exclude[] = get_the_ID();
+		}
 
-			// Sticky Posts
-			if ( $options['sticky_posts'] == 'disabled' )
-				$args['ignore_sticky_posts'] = true;
+		// Exclude posts ( option )
+		if ( $options['query_post_not_in'] ) {
 
-			// Do the query
-			if ( ( is_category() || is_tag() || is_tax() || is_search() || is_date() ) && $options['query_alter'] == 'enabled' ) {
-				global $wp_query;
-				$dslc_query = $wp_query;
-			} else {
-				$dslc_query = new WP_Query( $args );
-			}
+			$exclude = array_merge( $exclude, explode( ' ', $options['query_post_not_in'] ) );
+		}
+
+		// Include posts ( option )
+ 		if ( $options['query_post_in'] ) {
+
+			$include = array_merge( $include, explode( ' ', $options['query_post_in'] ) );
+ 		}
+
+		// Include query parameter
+		if ( ! empty( $include ) ) {
+
+			$args['post__in'] = $include;
+		}
+
+		// Exclude query parameter
+		if ( ! empty( $exclude ) ) {
+
+			$args['post__not_in'] = $exclude;
+		}
+
+		// Author archive page
+		if ( is_author() && $options['query_alter'] == 'enabled' ) {
+			global $authordata;
+			$args['author__in'] = array( $authordata->data->ID );
+		}
+
+		// No paging
+		if ( $options['pagination_type'] == 'disabled' ) {
+
+			$args['no_found_rows'] = true;
+		}
+
+		// Sticky Posts
+		if ( $options['sticky_posts'] == 'disabled' ) {
+
+			$args['ignore_sticky_posts'] = true;
+		}
+
+		// Do the query
+		if ( ( is_category() || is_tag() || is_tax() || is_search() || is_date() ) && $options['query_alter'] == 'enabled' ) {
+			global $wp_query;
+			$dslc_query = $wp_query;
+		} else {
+			$dslc_query = new WP_Query( $args );
+		}
+
+		return $dslc_query;
 	}
 
 	function aq_resize1() {
@@ -2345,18 +2367,46 @@ class DSLC_Posts extends DSLC_Module {
 	 */
 	function permalink() {
 
-		global $LC_Registry;
-		$repeater = $LC_Registry->get( 'repeater' );
+		global $post;
 
-		return get_post_permalink( $repeater->post_id );
+		return get_post_permalink( $post->ID );
+	}
+
+	function excerpt() {
+
+		$options = $this->getPropsValues();
+
+		ob_start();
+		if ( $options['excerpt_or_content'] == 'content' ) {
+
+			the_content();
+		} else {
+
+			if ( $options['excerpt_length'] > 0 ) {
+				if ( has_excerpt() )
+					echo do_shortcode( wp_trim_words( get_the_excerpt(), $options['excerpt_length'] ) );
+				else
+					echo do_shortcode( wp_trim_words( get_the_content(), $options['excerpt_length'] ) );
+			} else {
+				if ( has_excerpt() )
+					echo do_shortcode( get_the_excerpt() );
+				else
+					echo do_shortcode( get_the_content() );
+			}
+		}
+
+		return ob_get_clean();
 	}
 
 	/**
 	 * Returns author's post link. Repeater function.
 	 */
-	function authors_posts_link() {
+	function author_posts_link() {
 
-		return get_the_author_posts_link();
+		ob_start();
+		echo get_the_author_posts_link();
+
+		return ob_get_clean();
 	}
 
 	/**
@@ -2364,7 +2414,10 @@ class DSLC_Posts extends DSLC_Module {
 	 */
 	function post_date() {
 
-		return the_time( get_option( 'date_format' ) );
+		ob_start();
+		the_time( get_option( 'date_format' ) );
+
+		return ob_get_clean();
 	}
 
 	/**
@@ -2372,11 +2425,8 @@ class DSLC_Posts extends DSLC_Module {
 	 */
 	function post_separator() {
 
-		global $LC_Registry;
-		$repeater = $LC_Registry->get( 'repeater' );
-		$currObj = $LC_Registry->get( 'repeaterCurClass' );
 
-		if( $currObj->settings['type'] == 'grid' && $currObj->settings['separator_enabled'] == 'true' ) {
+		if( $this->settings['type'] == 'grid' && $this->settings['separator_enabled'] == 'true' ) {
 
 			return ?><div class="dslc-post-separator"></div><?php
 		}
@@ -2391,7 +2441,7 @@ class DSLC_Posts extends DSLC_Module {
 
 	}
 
-	function dslc_posts_module_nav( $atts ) {
+	static function dslc_posts_module_nav( $atts ) {
 
 		global $LC_Registry;
 
@@ -2400,8 +2450,11 @@ class DSLC_Posts extends DSLC_Module {
 		if ( ! isset( $activeModules[$atts['module-id']] ) ) return;
 
 		$module = $activeModules[$atts['module-id']];
+		$options = $module->getPropsValues();
 
-		if ( isset( $module->settings['pagination_type'] ) && $module->settings['pagination_type'] != 'disabled' ) {
+		ob_start();
+
+		if ( isset( $options['pagination_type'] ) && $options['pagination_type'] != 'disabled' ) {
 
 			$num_pages = $dslc_query->max_num_pages;
 
@@ -2409,8 +2462,10 @@ class DSLC_Posts extends DSLC_Module {
 				$num_pages = ceil ( ( $dslc_query->found_posts - $options['offset'] ) / $options['amount'] );
 			}
 
-			dslc_post_pagination( array( 'pages' => $num_pages, 'type' => $module->settings['pagination_type'] ) );
+			dslc_post_pagination( array( 'pages' => $num_pages, 'type' => $options['pagination_type'] ) );
 		}
+
+		return ob_get_clean();
 	}
 
 	/**
@@ -2419,7 +2474,7 @@ class DSLC_Posts extends DSLC_Module {
 	function output( $options = [] ) {
 
 		$this->module_start();
-		$this->renderModule();
+		echo $this->renderModule();
 		$this->module_end();
 	}
 

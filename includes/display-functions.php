@@ -972,11 +972,16 @@ function dslc_module_front( $atts, $settings_raw = null )
 
 		if ( DS_LIVE_COMPOSER_ACTIVE  && ! $LC_Registry->get( 'removeAdminElementsFromEditor' ) ) {
 
+			/// Returns in Editor mode
+
 			return $module_instance->renderEditModeModule();
 		} else {
 
+			/// If generating precache
+
 			ob_start();
 			$module_instance->output( [] );
+
 			// End output fetching
 			$output = ob_get_contents();
 			ob_end_clean();
