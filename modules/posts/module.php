@@ -2228,7 +2228,7 @@ class DSLC_Posts extends DSLC_Module {
 	/**
 	 * Posts fetcher
 	 */
-	function getPosts() {
+	function get_posts() {
 
 		global $dslc_active;
 
