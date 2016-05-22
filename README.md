@@ -30,7 +30,7 @@ Make sure you try the [interactive tutorial](http://livecomposerplugin.com/playg
 
 ## Frequently Asked Questions
 
-#### How to I activate the page builder on a page?
+#### How can I activate the page builder on a page?
 When you visit a page you'll see a green "activate editor" button in the bottom right corner, click that and the page will reload in LC mode.
 
 #### Why is the "activate editor" button missing from the homepage
