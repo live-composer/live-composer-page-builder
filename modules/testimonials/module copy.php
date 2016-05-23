@@ -1,14 +1,8 @@
 <?php
-/**
- * Testimonials module class
- */
 
 if ( dslc_is_module_active( 'DSLC_Testimonials' ) )
 	include DS_LIVE_COMPOSER_ABS . '/modules/testimonials/functions.php';
 
-/**
- * Class DSLC_Testimonials
- */
 class DSLC_Testimonials extends DSLC_Module {
 
 	var $module_id;
@@ -16,23 +10,15 @@ class DSLC_Testimonials extends DSLC_Module {
 	var $module_icon;
 	var $module_category;
 
-	/**
-	 * @inherited
-	 */
-	function __construct( $settings = [], $atts = [] ) {
+	function __construct() {
 
-		$this->module_ver = 2;
-		$this->module_id = __CLASS__;
+		$this->module_id = 'DSLC_Testimonials';
 		$this->module_title = __( 'Testimonials', 'live-composer-page-builder' );
 		$this->module_icon = 'quote-right';
 		$this->module_category = 'posts';
 
-		parent::__construct( $settings, $atts );
 	}
 
-	/**
-	 * @inherited
-	 */
 	function options() {
 
 		$cats = get_terms( 'dslc_testimonials_cats' );
@@ -217,7 +203,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'type' => 'text',
 			),
 
-			/**
+			/** 
 			 * General
 			 */
 
@@ -875,7 +861,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => 'background-color',
 				'section' => 'styling',
 				'tab' => __( 'avatar', 'live-composer-page-builder' ),
-			),
+			),	
 			array(
 				'label' => __( 'Border Color', 'live-composer-page-builder' ),
 				'id' => 'css_avatar_border_color',
@@ -927,7 +913,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => 'border-style',
 				'section' => 'styling',
 				'tab' => __( 'avatar', 'live-composer-page-builder' ),
-			),
+			),		
 			array(
 				'label' => __( 'Border Radius', 'live-composer-page-builder' ),
 				'id' => 'css_avatar_border_radius_top',
@@ -1123,7 +1109,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'increment' => '0.05',
 				'max' => 3
 			),
-
+			
 			/**
 			 * Responsive Tablet
 			 */
@@ -1663,7 +1649,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			),
 
 		);
-
+	
 		$dslc_options = array_merge( $dslc_options, $this->shared_options('carousel_options') );
 		$dslc_options = array_merge( $dslc_options, $this->shared_options('heading_options') );
 		$dslc_options = array_merge( $dslc_options, $this->shared_options('filters_options') );
@@ -1677,19 +1663,428 @@ class DSLC_Testimonials extends DSLC_Module {
 
 	}
 
-	function output( $options = [] ) {
+	function output( $options ) {
 
-		$this->module_start();
+		global $dslc_active;
+
+		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
+			$dslc_is_admin = true;
+		else
+			$dslc_is_admin = false;		
+
+		$this->module_start( $options );
 
 		/* Module output stars here */
-		echo $this->renderModule();
+
+			if ( ! isset( $options['excerpt_length'] ) ) $options['excerpt_length'] = 20;
+			if ( ! isset( $options['type'] ) ) $options['type'] = 'grid';
+
+			if( is_front_page() ) { $paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1; } else { $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1; }
+
+			// Fix for pagination from other modules affecting this one when pag disabled
+			if ( $options['pagination_type'] == 'disabled' ) $paged = 1;
+
+			// Fix for offset braking pagination
+			$query_offset = $options['offset'];
+			if ( $query_offset > 0 && $paged > 1 ) $query_offset = ( $paged - 1 ) * $options['amount'] + $options['offset'];
+
+			$args = array(
+				'paged' => $paged, 
+				'post_type' => 'dslc_testimonials',
+				'posts_per_page' => $options['amount'],
+				'order' => $options['order'],
+				'orderby' => $options['orderby'],
+			);
+
+			// Add offset
+			if ( $query_offset > 0 ) {
+				$args['offset'] = $query_offset;
+			}
+
+			if ( defined('DOING_AJAX') && DOING_AJAX ) {
+				$args['post_status'] = array( 'publish', 'private' );
+			}
+
+			if ( isset( $options['categories'] ) && $options['categories'] != '' ) {
+				
+				$cats_array = explode( ' ', trim( $options['categories'] ));
+
+				$args['tax_query'] = array(
+					array(
+						'taxonomy' => 'dslc_testimonials_cats',
+						'field' => 'slug',
+						'terms' => $cats_array,
+						'operator' => $options['categories_operator']
+					)
+				);
+				
+			}
+
+			// Exlcude and Include arrays
+			$exclude = array();
+			$include = array();
+
+			// Exclude current post
+			if ( is_singular( get_post_type() ) )
+				$exclude[] = get_the_ID();
+
+			// Exclude posts ( option )
+			if ( $options['query_post_not_in'] )
+				$exclude = array_merge( $exclude, explode( ' ', $options['query_post_not_in'] ) );
+
+			// Include posts ( option )
+			if ( $options['query_post_in'] )
+				$include = array_merge( $include, explode( ' ', $options['query_post_in'] ) );
+			
+			// Include query parameter
+			if ( ! empty( $include ) )
+				$args['post__in'] = $include;
+
+			// Exclude query parameter
+			if ( ! empty( $exclude ) )
+				$args['post__not_in'] = $exclude;
+		
+			// No paging
+			if ( $options['pagination_type'] == 'disabled' )
+				$args['no_found_rows'] = true;
+
+			$dslc_query = new WP_Query( $args );
+
+			$wrapper_class = '';
+			$columns_class = 'dslc-col dslc-' . $options['columns'] . '-col ';
+			$count = 0;
+			$real_count = 0;
+			$increment = $options['columns'];
+			$max_count = 12;
+
+		/**
+		 * Elements to show
+		 */
+			
+			// Main Elements
+			$elements = $options['elements'];
+			if ( ! empty( $elements ) )
+				$elements = explode( ' ', trim( $elements ) );
+			else
+				$elements = array();
+			
+
+			// Post Elements
+			$post_elements = $options['post_elements'];
+			if ( ! empty( $post_elements ) )
+				$post_elements = explode( ' ', trim( $post_elements ) );
+			else
+				$post_elements = 'all';
+
+			// Carousel Elements
+			$carousel_elements = $options['carousel_elements'];
+			if ( ! empty( $carousel_elements ) )
+				$carousel_elements = explode( ' ', trim( $carousel_elements ) );
+			else
+				$carousel_elements = array();
+
+			/* Container Class */
+
+			$container_class = 'dslc-posts dslc-testimonials dslc-clearfix ';
+
+			if ( $options['type'] == 'masonry' )
+				$container_class .= 'dslc-init-masonry ';
+			elseif ( $options['type'] == 'grid' )
+				$container_class .= 'dslc-init-grid ';
+
+			/* Element Class */
+
+			$element_class = 'dslc-post dslc-testimonial ';
+
+			if ( $options['type'] == 'masonry' )
+				$element_class .= 'dslc-masonry-item ';
+			elseif ( $options['type'] == 'carousel' )
+				$element_class .= 'dslc-carousel-item ';
+
+			// Responsive
+			//$element_class .= 'dslc-res-sm-' . $options['res_sm_columns'] . ' ';
+			//$element_class .= 'dslc-res-tp-' . $options['res_tp_columns'] . ' ';
+
+		/**
+		 * What is shown
+		 */
+
+			$show_header = false;
+			$show_heading = false;
+			$show_filters = false;
+			$show_carousel_arrows = false;
+			$show_view_all_link = false;
+
+			if ( in_array( 'main_heading', $elements ) )
+				$show_heading = true;		
+
+			if ( ( $elements == 'all' || in_array( 'filters', $elements ) ) && $options['type'] !== 'carousel' )
+				$show_filters = true;
+
+			if ( $options['type'] == 'carousel' && in_array( 'arrows', $carousel_elements ) )
+				$show_carousel_arrows = true;
+
+			if ( $show_heading || $show_filters || $show_carousel_arrows )
+				$show_header = true;
+
+		/**
+		 * Carousel Items
+		 */
+		
+			switch ( $options['columns'] ) {
+				case 12 :
+					$carousel_items = 1;
+					break;
+				case 6 :
+					$carousel_items = 2;
+					break;
+				case 4 :
+					$carousel_items = 3;
+					break;
+				case 3 :
+					$carousel_items = 4;
+					break;
+				case 2 :
+					$carousel_items = 6;
+					break;
+				default:
+					$carousel_items = 6;
+					break;
+			}
+
+		/**
+		 * Heading ( output )
+		 */
+
+			if ( $show_header ) :
+				?>
+					<div class="dslc-module-heading">
+						
+						<!-- Heading -->
+
+						<?php if ( $show_heading ) : ?>
+
+							<h2 class="dslca-editable-content" data-id="main_heading_title" data-type="simple" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?> ><?php echo stripslashes( $options['main_heading_title'] ); ?></h2>
+
+							<!-- View all -->
+
+							<?php if ( isset( $options['view_all_link'] ) && $options['view_all_link'] !== '' ) : ?>
+
+								<span class="dslc-module-heading-view-all"><a href="<?php echo $options['view_all_link']; ?>" class="dslca-editable-content" data-id="main_heading_link_title" data-type="simple" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?> ><?php echo $options['main_heading_link_title']; ?></a></span>
+
+							<?php endif; ?>
+
+						<?php endif; ?>
+
+						<!-- Filters -->
+
+						<?php
+
+							if ( $show_filters ) {
+
+								$cats_array = array();
+
+								if ( $dslc_query->have_posts() ) {
+
+									while ( $dslc_query->have_posts() ) {
+
+										$dslc_query->the_post(); 
+
+										$post_cats = get_the_terms( get_the_ID(), 'dslc_testimonials_cats' );
+										if ( ! empty( $post_cats ) ) {
+											foreach( $post_cats as $post_cat ) {
+												$cats_array[$post_cat->slug] = $post_cat->name;
+											}
+										}
+
+									}
+
+								}
+
+								?>
+
+									<div class="dslc-post-filters">
+
+										<span class="dslc-post-filter dslc-active" data-id=" "><?php _ex( 'All', 'Post Filter', 'live-composer-page-builder' ); ?></span>
+
+										<?php foreach ( $cats_array as $cat_slug => $cat_name ) : ?>
+											<span class="dslc-post-filter dslc-inactive" data-id="<?php echo $cat_slug; ?>"><?php echo $cat_name; ?></span>
+										<?php endforeach; ?>
+
+									</div><!-- .dslc-post-filters -->
+
+								<?php
+
+							}
+
+						?>
+
+						<!-- Carousel -->
+
+						<?php if ( $show_carousel_arrows ) : ?>
+							<span class="dslc-carousel-nav fr">
+								<span class="dslc-carousel-nav-inner">
+									<a href="#" class="dslc-carousel-nav-prev"><span class="dslc-icon-chevron-left dslc-init-center"></span></a>
+									<a href="#" class="dslc-carousel-nav-next"><span class="dslc-icon-chevron-right dslc-init-center"></span></a>
+								</span>
+							</span><!-- .carousel-nav -->
+						<?php endif; ?>
+
+					</div><!-- .dslc-module-heading -->
+				<?php
+
+			endif;
+
+		/**
+		 * Posts ( output )
+		 */
+
+			if ( $dslc_query->have_posts() ) :
+
+				?><div class="<?php echo $container_class; ?>"><?php
+
+					?><div class="dslc-posts-inner"><?php
+
+						if ( $options['type'] == 'carousel' ) :
+
+							?><div class="dslc-loader"></div><div class="dslc-carousel" data-stop-on-hover="<?php echo $options['carousel_autoplay_hover']; ?>" data-autoplay="<?php echo $options['carousel_autoplay']; ?>" data-columns="<?php echo $carousel_items; ?>" data-pagination="<?php if ( in_array( 'circles', $carousel_elements ) ) echo 'true'; else echo 'false'; ?>" data-slide-speed="<?php echo $options['arrows_slide_speed']; ?>" data-pagination-speed="<?php echo $options['circles_slide_speed']; ?>"><?php
+
+						endif;
+
+						while ( $dslc_query->have_posts() ) : $dslc_query->the_post(); $count += $increment; $real_count++;
+
+							if ( $count == $max_count ) {
+								$count = 0;
+								$extra_class = ' dslc-last-col';
+							} elseif ( $count == $increment ) {
+								$extra_class = ' dslc-first-col';
+							} else {
+								$extra_class = '';
+							}
+
+							$post_cats_count = 0;
+							$post_cats = get_the_terms( get_the_ID(), 'dslc_testimonials_cats' );
+
+							$post_cats_data = '';
+							if ( ! empty( $post_cats ) ) {
+								foreach( $post_cats as $post_cat ) {
+									$post_cats_data .= $post_cat->slug . ' ';
+								}
+							}
+
+							?>
+
+							<?php ob_start(); ?>
+
+								<div class="dslc-testimonial-author dslc-testimonial-author-pos-<?php echo str_replace( ' ', '-', $options['author_pos'] ); ?> dslc-clearfix">
+
+									<?php if ( $post_elements == 'all' || in_array( 'avatar', $post_elements ) ) : ?>
+
+										<div class="dslc-testimonial-author-avatar">
+											<?php the_post_thumbnail( 'full' ); ?>
+										</div><!-- .dslc-testimonial-author-avatar -->
+
+									<?php endif; ?>
+
+									<div class="dslc-testimonial-author-main">
+
+										<?php if ( $post_elements == 'all' || in_array( 'name', $post_elements ) ) : ?>
+
+											<div class="dslc-testimonial-author-name">
+												<?php the_title(); ?>
+											</div><!-- .dslc-testimonial-author-name -->
+
+										<?php endif; ?>
+
+										<?php if ( $post_elements == 'all' || in_array( 'position', $post_elements ) ) : ?>
+
+											<div class="dslc-testimonial-author-position">
+												<?php echo get_post_meta( get_the_ID(), 'dslc_testimonial_author_pos', true ); ?>
+											</div><!-- .dslc-testimoniala-author-position -->
+
+										<?php endif; ?>
+
+									</div><!-- .dslc-testimonial-author-main -->
+
+								</div><!-- .dslc-testimonial-author -->
+
+							<?php $author_output = ob_get_contents(); ob_end_clean(); ?>
+
+							<div class="<?php echo $element_class . $columns_class . $extra_class; ?>" data-cats="<?php echo $post_cats_data; ?>">
+
+								<div class="dslc-testimonial-inner">	
+
+									<?php if ( $options['author_pos'] == 'outside top' || $options['author_pos'] == 'outside left' || $options['author_pos'] == 'outside right' ) echo $author_output; ?>
+
+									<div class="dslc-testimonial-main">
+
+										<?php if ( $options['author_pos'] == 'inside top' ) echo $author_output; ?>
+
+										<?php if ( $post_elements == 'all' || in_array( 'quote', $post_elements ) ) : ?>
+
+											<div class="dslc-testimonial-quote">
+												<?php echo do_shortcode( get_the_content() ); ?>
+											</div><!-- .dslc-testimonial-quote -->
+
+										<?php endif; ?>
+
+										<?php if ( $options['author_pos'] == 'inside bottom' ) echo $author_output; ?>
+
+									</div><!-- .dslc-testimonial-main -->
+
+									<?php if ( $options['author_pos'] == 'outside bottom' ) echo $author_output; ?>
+
+								</div><!-- .dslc-testimonial-inner -->
+
+							</div><!-- .dslc-testimonial -->
+
+							<?php 
+
+							// Row Separator
+							if ( $options['type'] == 'grid' && $count == 0 && $real_count != $dslc_query->found_posts && $real_count != $options['amount'] ) {
+								echo '<div class="dslc-post-separator"></div>';
+							}
+
+						endwhile;
+
+						if ( $options['type'] == 'carousel' ) :
+
+							?></div><?php
+
+						endif;
+
+						?>
+
+					</div><!-- .dslc-posts-inner -->
+
+				</div><!-- .dslc-testimonials -->
+
+			<?php else :
+
+				if ( $dslc_is_admin ) :
+					?><div class="dslc-notification dslc-red"><?php _e( 'You do not have any testimonials at the moment. Go to <strong>WP Admin &rarr; Testimonials</strong> to add some.', 'live-composer-page-builder' ); ?> <span class="dslca-refresh-module-hook dslc-icon dslc-icon-refresh"></span></span></div><?php
+				endif;
+
+			endif;
+
+			/**
+			 * Pagination
+			 */
+			
+			if ( isset( $options['pagination_type'] ) && $options['pagination_type'] != 'disabled' ) {
+				$num_pages = $dslc_query->max_num_pages;
+				if ( $options['offset'] > 0 ) {
+					$num_pages = ceil ( ( $dslc_query->found_posts - $options['offset'] ) / $options['amount'] );
+				}
+				dslc_post_pagination( array( 'pages' => $num_pages, 'type' => $options['pagination_type'] ) ); 
+			}
+
+			wp_reset_postdata();
+
 		/* Module output ends here */
 
-		$this->module_end();
+		$this->module_end( $options );
 
 	}
 
 }
-
-/// Register module
-( new DSLC_Testimonials )->register();
