@@ -65,7 +65,7 @@
 
 				var last_col = type.value == 'grid' && index > 0 && (index + 1) % posts_per_row.value == 0 && separator_enabled.value != 'disabled' ? 'dslc-last-col' : '';
 				%>
-				<div class="<%= element_class + columns_class + extra_class %> <%= last_col %>" data-repeatable="get_posts" data-cats="<%= post_cats_data.value %>">
+				<div class="<%= element_class + columns_class + extra_class %> <%= last_col %> {{dslc-module-sc module-method='last_col_class'}}" data-repeatable="get_posts" data-cats="<%= post_cats_data.value %>">
 
 					<% if(post_elements.value.indexOf('thumbnail') > -1){%>
 

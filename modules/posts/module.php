@@ -2363,13 +2363,19 @@ class DSLC_Posts extends DSLC_Module {
 
 			$LC_Registry->set( 'curr_class', $this );
 
+			$cnt = 0;
 			while ( $dslc_query->have_posts() ) {
 
 				$dslc_query->the_post();
+				$LC_Registry->set( 'dslc-posts-elem-index', $cnt );
 
 				$out .= DSLC_Main::dslc_do_shortcode( $content );
+				$cnt++;
 			}
 
+			unset( $cnt );
+
+			$LC_Registry->set( 'dslc-posts-elem-index', null );
 			$LC_Registry->set( 'curr_class', null );
 		}
 
@@ -2383,6 +2389,23 @@ class DSLC_Posts extends DSLC_Module {
 	function aq_resize1() {
 
 
+	}
+
+	/**
+	 * Returns last col class
+	 * @return string
+	 */
+	function last_col_class() {
+
+		global $LC_Registry;
+
+		$opts = $this->getPropsValues();
+		$index = $LC_Registry->get( 'dslc-posts-elem-index' );
+
+		if ( $opts['type'] == 'grid' && $index > 0 && ($index + 1) % $opts['posts_per_row'] == 0 && $opts['separator_enabled'] != 'disabled' ) {
+
+			return 'last-col';
+		}
 	}
 
 	/**
