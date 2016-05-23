@@ -2226,9 +2226,10 @@ class DSLC_Posts extends DSLC_Module {
 	}
 
 	/**
-	 * Posts fetcher
+	 * Posts fetcher & renderer. Template repeater.
+	 * @return  string
 	 */
-	function get_posts() {
+	function get_posts( $atts, $content ) {
 
 		global $dslc_active;
 
@@ -2354,9 +2355,31 @@ class DSLC_Posts extends DSLC_Module {
 			$dslc_query = new WP_Query( $args );
 		}
 
-		return $dslc_query;
+		global $LC_Registry;
+		$out = '';
+		$LC_Registry->set( 'dslc-posts-query', $dslc_query );
+
+		if ( $dslc_query->have_posts() ) {
+
+			$LC_Registry->set( 'curr_class', $this );
+
+			while ( $dslc_query->have_posts() ) {
+
+				$dslc_query->the_post();
+
+				$out .= DSLC_Main::dslc_do_shortcode( $content );
+			}
+
+			$LC_Registry->set( 'curr_class', null );
+		}
+
+		return $out;
 	}
 
+	/**
+	 * Returns thumbnail HTML. Repeater function.
+	 * @return string
+	 */
 	function aq_resize1() {
 
 
@@ -2364,6 +2387,7 @@ class DSLC_Posts extends DSLC_Module {
 
 	/**
 	 * Returns permalink. Repeater function.
+	 * @return  string
 	 */
 	function permalink() {
 
@@ -2372,6 +2396,10 @@ class DSLC_Posts extends DSLC_Module {
 		return get_post_permalink( $post->ID );
 	}
 
+	/**
+	 * Returns excerpt or content. Repeater function.
+	 * @return string
+	 */
 	function excerpt() {
 
 		$options = $this->getPropsValues();
@@ -2400,6 +2428,7 @@ class DSLC_Posts extends DSLC_Module {
 
 	/**
 	 * Returns author's post link. Repeater function.
+	 * @return string
 	 */
 	function author_posts_link() {
 
@@ -2411,6 +2440,7 @@ class DSLC_Posts extends DSLC_Module {
 
 	/**
 	 * Returns post date. Repeater function.
+	 * @return  string
 	 */
 	function post_date() {
 
@@ -2421,7 +2451,20 @@ class DSLC_Posts extends DSLC_Module {
 	}
 
 	/**
+	 * Returns post title.Repeater function.
+	 * @return string
+	 */
+	function post_title() {
+
+		ob_start();
+		the_title();
+
+		return ob_get_clean();
+	}
+
+	/**
 	 * Returns post separator. Repeater function.
+	 * @return string
 	 */
 	function post_separator() {
 
@@ -2435,22 +2478,24 @@ class DSLC_Posts extends DSLC_Module {
 
 	/**
 	 * Returns post thumbnail. Repeater function.
+	 * @return  string
 	 */
 	function post_thumb1() {
 
 
 	}
 
-	static function dslc_posts_module_nav( $atts ) {
+	/**
+	 * Returns navigation HTML. Template shortcode function
+	 * @param  array $atts
+	 * @return string
+	 */
+	function pagination_nav( $atts ) {
 
 		global $LC_Registry;
 
-		$activeModules = $LC_Registry->get( 'activeModules' );
-
-		if ( ! isset( $activeModules[$atts['module-id']] ) ) return;
-
-		$module = $activeModules[$atts['module-id']];
-		$options = $module->getPropsValues();
+		$options = $this->getPropsValues();
+		$dslc_query = $LC_Registry->get( 'dslc-posts-query' );
 
 		ob_start();
 

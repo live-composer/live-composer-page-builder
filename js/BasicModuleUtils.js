@@ -115,7 +115,7 @@
 		DSLC.BasicModule.prototype.prepareStaticHTML = function( HTML )
 		{
 			var self = this;
-			var HTML = jQuery(HTML);
+			var HTML = $("<div>").append(jQuery(HTML));
 			HTML.find(".lc-editor-element").remove();
 			HTML.find(".dslca-editable-content").each(function()
 			{
@@ -137,13 +137,11 @@
 
 			var repeatsPull = {};
 
-			HTML.find("[data-array], [data-wpquery]").each(function()
+			HTML.find("[data-repeatable]").each(function()
 			{
-				if($(this).data('array') != null){
+				if($(this).data('repeatable') != null){
 
-					repeatsPull['[data-array="' + $(this).data('array') + '"]'] = 'true';
-				}else{
-					repeatsPull['[data-wpquery="' + $(this).data('wpquery') + '"]'] = 'true';
+					repeatsPull['[data-repeatable="' + $(this).data('repeatable') + '"]'] = 'true';
 				}
 			});
 
@@ -153,33 +151,25 @@
 				// Enclose with shortcode brackets repeatable content
 				HTML.find(elem).each(function()
 				{
-					var array = $(this).data('array') ? ' array="' + $(this).data('array') + '"' : '';
-					var wpquery = $(this).data('wpquery') ? ' wpquery="' + $(this).data('wpquery') + '"' : '';
+					var repeatable = $(this).data('repeatable') ? ' repeatable="' + $(this).data('repeatable') + '"' : '';
 
-					$(this).before("[dslc-repeatable module_instance_id='" + self.settings.module_instance_id +
-						 "'" + array + " " + wpquery + "]")
+					$(this).before("[dslc-repeatable module-instance-id='" + self.settings.module_instance_id +
+						 "'" + repeatable + "]")
 						.after("[/dslc-repeatable]")
-						.removeAttr('data-wpquery')
-						.removeAttr('data-array');
+						.removeAttr('data-repeatable');
 				});
 			});
 
 			//
-			HTML.find("[data-array-field], [data-module-method], [data-wppost-field]").each(function()
+			HTML.find("[data-module-method]").each(function()
 			{
-				var arField = $(this).data('array-field') ? ' array-field="' + $(this).data('array-field') + '"' : '';
 				var modMethod = $(this).data('module-method') ? ' module-method="' + $(this).data('module-method') + '"' : '';
-				var wpField = $(this).data('wppost-field') ? ' wppost-field="' + $(this).data('wppost-field') + '"' : '';
 
-				$(this).html("[dslc-repeatable-prop " + arField + " " + modMethod + " " + wpField + "]")
-					.removeAttr('data-array-field')
-					.removeAttr('data-module-method')
-					.removeAttr('data-wppost-field');
+				$(this).html("[dslc-module-sc " + modMethod + "]")
+					.removeAttr('data-module-method');
 			});
 
-			var out = $("<div>").append(HTML);
-
-			return out[0].outerHTML;
+			return HTML[0].outerHTML;
 		}
 		/**
 		 * Recalculate icons and another centered stuff

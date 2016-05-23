@@ -3539,3 +3539,7 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 #dslc-content .dslc-cpt-post-thumb img {
 	height: 200px;
 }
+
+[data-dslc-raw-sc]{
+	display: none;
+}
