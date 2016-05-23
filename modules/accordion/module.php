@@ -89,7 +89,7 @@ class DSLC_Accordion extends DSLC_Module {
 			/**
 			 * General
 			 */
-			
+
 			array(
 				'label' => __( 'BG Color', 'live-composer-page-builder' ),
 				'id' => 'css_bg_color',
