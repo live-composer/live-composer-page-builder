@@ -444,6 +444,50 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 	/**
 	 * @inherited
 	 */
+	function afterRegister() {
+
+		add_action( 'wp_enqueue_scripts', function(){
+
+			global $LC_Registry;
+
+			if ( $LC_Registry->get( 'dslc_active' ) == true ) {
+
+				$path = explode( '/', __DIR__ );
+				$path = array_pop( $path );
+				wp_enqueue_script( 'js-downloads-button-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/editor-script.js', array( 'jquery' ) );
+			}
+		});
+
+	}
+
+	/**
+	 * Returns post ID.
+	 * @return  string
+	 */
+	function get_id () {
+		return get_the_ID();
+	}
+
+	/**
+	 * Returns download link.
+	 * @return  string
+	 */
+	function get_download_link () {
+		$post_id = get_the_ID();
+
+		if ( get_post_meta( $post_id, 'dslc_download_file', true ) )
+			$download_link = wp_get_attachment_url( get_post_meta( $post_id, 'dslc_download_file', true ) );
+		elseif ( get_post_meta( $post_id, 'dslc_download_url', true ) )
+			$download_link = get_post_meta( $post_id, 'dslc_download_url', true );
+		else
+			$download_link = false;
+
+		return $download_link;
+	}
+
+	/**
+	 * @inherited
+	 */
 	function output( $options = [] ) {
 
 		$this->module_start();
