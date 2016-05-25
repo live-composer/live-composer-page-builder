@@ -2214,22 +2214,99 @@ class DSLC_Posts extends DSLC_Module {
 
 			global $LC_Registry;
 
+			$path = explode( '/', __DIR__ );
+			$path = array_pop( $path );
+
 			if ( $LC_Registry->get( 'dslc_active' ) == true ) {
 
-				$path = explode( '/', __DIR__ );
-				$path = array_pop( $path );
-				wp_enqueue_script( 'js-posts-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/editor-script.js', array( 'jquery' ) );
+				wp_enqueue_script( 'js-posts-editor-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/editor-script.js', array( 'jquery' ) );
 			}
+
+			wp_enqueue_script( 'js-posts-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/script.js', array( 'jquery' ) );
 		});
 
 		add_shortcode( 'dslc-posts-module-navigation', [__CLASS__, 'dslc_posts_module_nav'] );
 	}
 
+	function post_filter() {
+
+		global $LC_Registry;
+
+		$dslc_query = $this->get_posts();
+		$LC_Registry->set( 'dslc-posts-query', $dslc_query );
+
+		$taxonomy_name = '';
+
+		$cats_array = array();
+
+		$cats_count = 0;
+
+		if ( $dslc_query->have_posts() ) {
+
+			while ( $dslc_query->have_posts() ) { 
+
+				$dslc_query->the_post(); 
+
+				$cats_count++;
+
+				if ( $cats_count == 1 ) {
+
+					$post_type_taxonomies = get_object_taxonomies( get_post_type(), 'objects' );
+					foreach ( $post_type_taxonomies as $taxonomy ) {
+						if ( $taxonomy->hierarchical == true ) {
+							$taxonomy_name = $taxonomy->name;
+
+							$LC_Registry->set( 'dslc-posts-taxonomy', $taxonomy_name );
+						}
+					}
+				}
+
+				$post_cats = get_the_terms( get_the_ID(), $taxonomy_name );
+				if ( ! empty( $post_cats ) ) {
+					foreach( $post_cats as $post_cat ) {
+						$cats_array[$post_cat->slug] = $post_cat->name;
+					}
+				}
+			}
+		}
+
+		ob_start();
+
+		foreach ( $cats_array as $cat_slug => $cat_name ) {?>
+			<span class="dslc-post-filter dslc-inactive" data-id="<?php echo $cat_slug; ?>"><?php echo $cat_name; ?></span>
+		<?php }
+
+		return ob_get_clean();
+	}
+
 	/**
-	 * Posts fetcher & renderer. Template repeater.
-	 * @return  string
+	 * Return categories data to each post. Template function.
+	 * @return string
 	 */
-	function get_posts( $atts, $content ) {
+	function post_categories() {
+
+		global $LC_Registry;
+
+		$taxonomy_name = $LC_Registry->get( 'dslc-posts-taxonomy' );
+		$post_cats_data = '';
+
+		if ( isset( $taxonomy_name ) ) {
+			$post_cats = get_the_terms( get_the_ID(), $taxonomy_name );
+			if ( ! empty( $post_cats ) ) {
+				foreach( $post_cats as $post_cat ) {
+					$post_cats_data .= 'in-cat-' . $post_cat->slug . ' ';
+				}
+			}
+		}
+
+		return $post_cats_data . ' in-cat-all';
+	}
+
+	/**
+	 * Posts fetcher.
+	 * @return WP_Query
+	 */
+	function get_posts() {
 
 		global $dslc_active;
 
@@ -2355,21 +2432,49 @@ class DSLC_Posts extends DSLC_Module {
 			$dslc_query = new WP_Query( $args );
 		}
 
+		return $dslc_query;
+	}
+
+
+	/**
+	 * Posts render. Template function.
+	 *
+	 * @param  array $atts
+	 * @param  array $content
+	 *
+	 * @return string
+	 */
+	function render_posts( $atts, $content ) {
+
 		global $LC_Registry;
+
 		$out = '';
-		$LC_Registry->set( 'dslc-posts-query', $dslc_query );
+		$dslc_query = $LC_Registry->get( 'dslc-posts-query' );
+
+		if ( $dslc_query == null ) {
+
+			$dslc_query = $this->get_posts();
+		}
 
 		if ( $dslc_query->have_posts() ) {
 
 			$LC_Registry->set( 'curr_class', $this );
 
+			$options = $this->getPropsValues();
 			$cnt = 0;
+
 			while ( $dslc_query->have_posts() ) {
 
 				$dslc_query->the_post();
 				$LC_Registry->set( 'dslc-posts-elem-index', $cnt );
 
 				$out .= DSLC_Main::dslc_do_shortcode( $content );
+
+				if ( $options['type'] == 'grid' && $cnt > 0 && ($cnt + 1) % $options['posts_per_row'] == 0 && $options['separator_enabled'] != 'disabled' ) {
+
+					$out .= '<div class="dslc-post-separator"></div>';
+				}
+
 				$cnt++;
 			}
 
@@ -2404,7 +2509,7 @@ class DSLC_Posts extends DSLC_Module {
 
 		if ( $opts['type'] == 'grid' && $index > 0 && ($index + 1) % $opts['posts_per_row'] == 0 && $opts['separator_enabled'] != 'disabled' ) {
 
-			return 'last-col';
+			return 'dslc-last-col';
 		}
 	}
 

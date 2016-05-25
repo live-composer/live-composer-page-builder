@@ -111,7 +111,7 @@
 				opt.element_class += 'dslc-carousel-item ';
 			}
 
-			opt.extra_class = '';
+			opt.extra_class = 'in-cat-all';
 			opt.post_cats_data = {value: ''};
 			opt.manual_resize = false;
 

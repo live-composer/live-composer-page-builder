@@ -150,6 +150,9 @@ var commonVars = DSLC.commonVars; /// Just alias
 				newModule.moduleBody.html( jQuery(".dslc-cached-version").find( "#dslc-module-" + newModule.settings.module_instance_id ).children() );
 				newModule.cacheLoaded = true;
 			}
+
+			jQuery(".dslc-cached-version").children().remove();
+			jQuery(".dslc-cached-version").empty();
 		});
 	}
 

@@ -24,12 +24,12 @@
 			<!-- Filters -->
 			<div class="dslc-post-filters">
 
-				<span class="dslc-post-filter dslc-active" data-id=" ">
+				<span class="dslc-post-filter dslc-active" data-id="all">
 					<?php _ex( 'All', 'Post Filter', 'live-composer-page-builder' ); ?>
 				</span>
 
 				<% cats_array.forEach(function(elem, index){%>
-					<span class="dslc-post-filter dslc-inactive" data-id="<%= elem.cat_slug %>">
+					<span class="dslc-post-filter dslc-inactive" data-repeatable="post_filter" data-id="<%= elem.cat_slug %>">
 						<%= elem.cat_name %>
 					</span>
 				<%})%>
@@ -65,7 +65,7 @@
 
 				var last_col = type.value == 'grid' && index > 0 && (index + 1) % posts_per_row.value == 0 && separator_enabled.value != 'disabled' ? 'dslc-last-col' : '';
 				%>
-				<div class="<%= element_class + columns_class + extra_class %> <%= last_col %> {{dslc-module-sc module-method='last_col_class'}}" data-repeatable="get_posts" data-cats="<%= post_cats_data.value %>">
+				<div class="<%= element_class + columns_class + extra_class %> <%= last_col %> {{dslc-module-sc module-method='last_col_class'}} {{dslc-module-sc module-method='post_categories'}}" data-repeatable="render_posts">
 
 					<% if(post_elements.value.indexOf('thumbnail') > -1){%>
 
@@ -210,11 +210,10 @@
 				<% if(last_col != ''){%>
 					<div class="dslc-post-separator lc-editor-element"></div>
 				<%}%>
-
-				<% if(type.value == 'carousel'){%>
-					</div>
-				<%}%>
 			<%});%>
+			<% if(type.value == 'carousel'){%>
+				</div>
+			<%}%>
 		</div><!--.dslc-posts-inner -->
 	</div><!-- .dslc-cpt-posts -->
 
