@@ -4204,9 +4204,14 @@ class DSLC_TP_Content extends DSLC_Module {
 		do_action( 'dslc_content_module_before_content', $post_id, $options );
 
 		// Output content
-		$content_post = get_post( $post_id );
-		$content = $content_post->post_content;
-		echo $content;
+		if ( have_posts() ) {
+
+			while( have_posts() ) {
+
+				the_post();
+				the_content();
+			}
+		}
 
 		// Output after content
 		do_action( 'dslc_content_module_after_content', $post_id, $options );

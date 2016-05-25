@@ -2,6 +2,8 @@
  * Posts production scripts
  */
 
+'use strict'
+
 ;(function(){
 
 	/**
