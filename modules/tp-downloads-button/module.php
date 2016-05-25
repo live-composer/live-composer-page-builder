@@ -30,6 +30,27 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 	/**
 	 * @inherited
 	 */
+	function afterRegister()
+	{
+		add_action( 'wp_enqueue_scripts', function(){
+
+			global $LC_Registry;
+
+			$path = explode( '/', __DIR__ );
+			$path = array_pop( $path );
+
+			if ( $LC_Registry->get( 'dslc_active' ) == true ) {
+
+				wp_enqueue_script( 'js-downloads-button-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/editor-script.js', array( 'jquery' ) );
+			}
+
+			wp_enqueue_script( 'js-downloads-button-production', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/script.js', array( 'jquery' ) );
+		});
+	}
+
+	/**
+	 * @inherited
+	 */
 	function options() {
 
 		$dslc_options = array(
@@ -442,30 +463,16 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 	}
 
 	/**
-	 * @inherited
-	 */
-	function afterRegister() {
-
-		add_action( 'wp_enqueue_scripts', function(){
-
-			global $LC_Registry;
-
-			if ( $LC_Registry->get( 'dslc_active' ) == true ) {
-
-				$path = explode( '/', __DIR__ );
-				$path = array_pop( $path );
-				wp_enqueue_script( 'js-downloads-button-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/editor-script.js', array( 'jquery' ) );
-			}
-		});
-
-	}
-
-	/**
 	 * Returns post ID.
 	 * @return  string
 	 */
 	function get_id () {
 		return get_the_ID();
+	}
+
+	function render_download_button( $atts, $content ) {
+
+		return DSLC_Main::dslc_do_shortcode( $content );
 	}
 
 	/**
