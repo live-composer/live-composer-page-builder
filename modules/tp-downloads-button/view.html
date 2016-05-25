@@ -1,3 +1,9 @@
-<div class="dslc-notification dslc-red">
-	<?php _e( 'Module in the development', 'live-composer-page-builder' ) ?>
-</div>
+<div data-repeatable='render_download_button' class="dslc-tp-download-button">
+	<a target="_blank" class="dslc-download-count-hook" href="[dslc-module-sc module-instance-id='<%= module_instance_id %>' module-method='get_download_link']">
+		<% if( (button_icon_id.value != '') || (button_icon_id.std != '') ) {%>
+			<span class="dslc-icon dslc-icon-<%= button_icon_id.value || button_icon_id.std %>"></span>
+		<%}%>
+		<span class="dslca-editable-content" data-id="button_text" data-type="simple" contenteditable><%= button_text.value || button_text.std %></span>
+		<span style="display: none;" class="download-button-data-post-id">[dslc-module-sc module-instance-id='<%= module_instance_id %>' module-method='get_id']</span>
+	</a>
+</div><!-- .dslc-download-button -->

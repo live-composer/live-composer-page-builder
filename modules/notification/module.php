@@ -1,15 +1,11 @@
 <?php
-
 /**
  * Notification module class
  */
 
 /**
  * Class DSLC_Notification
- *
- * @inherited
  */
-
 class DSLC_Notification extends DSLC_Module {
 
 	var $module_id;
@@ -29,6 +25,20 @@ class DSLC_Notification extends DSLC_Module {
 		$this->module_category = 'elements';
 
 		parent::__construct( $settings, $atts );
+	}
+
+	/**
+	 * @inherited
+	 */
+	function afterRegister()
+	{
+		add_action( 'wp_enqueue_scripts', function(){
+
+			$path = explode( '/', __DIR__ );
+			$path = array_pop( $path );
+
+			wp_enqueue_script( 'js-notification-production', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/script.js', array( 'jquery' ) );
+		});
 	}
 
 	/**
@@ -415,7 +425,7 @@ class DSLC_Notification extends DSLC_Module {
 				'tab' => __( 'close', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
-			
+
 			array(
 				'label' => __( 'Margin Right', 'live-composer-page-builder' ),
 				'id' => 'css_close_right',
@@ -428,7 +438,7 @@ class DSLC_Notification extends DSLC_Module {
 				'tab' => __( 'close', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
-			
+
 			array(
 				'label' => __( 'Size', 'live-composer-page-builder' ),
 				'id' => 'css_close_size',

@@ -1,5 +1,11 @@
 <?php
+/**
+ * Excerpt module class
+ */
 
+/**
+ * Class DSLC_TP_Excerpt
+ */
 class DSLC_TP_Excerpt extends DSLC_Module {
 
 	var $module_id;
@@ -7,19 +13,27 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 	var $module_icon;
 	var $module_category;
 
-	function __construct() {
+	/**
+	 * @inherited
+	 */
+	function __construct( $settings = [], $atts = [] ) {
 
-		$this->module_id = 'DSLC_TP_Excerpt';
+		$this->module_ver = 2;
+		$this->module_id = __CLASS__;
 		$this->module_title = __( 'The Excerpt', 'live-composer-page-builder' );
 		$this->module_icon = 'font';
 		$this->module_category = 'single';
 
+		parent::__construct( $settings, $atts );
 	}
-	
-	function options() {	
+
+	/**
+	 * @inherited
+	 */
+	function options() {
 
 		$dslc_options = array(
-			
+
 			array(
 				'label' => __( 'Show On', 'live-composer-page-builder' ),
 				'id' => 'css_show_on',
@@ -424,7 +438,7 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 			),
 
 		);
-	
+
 		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array( 'hover_opts' => false ) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
@@ -432,21 +446,30 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 
 	}
 
-	function output( $options ) {
+	/**
+	 * @inherited
+	 */
+	function afterRegister() {
 
-		global $dslc_active;
+		add_action( 'wp_enqueue_scripts', function(){
 
-		$post_id = $options['post_id'];
+			global $LC_Registry;
 
-		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
-			$dslc_is_admin = true;
-		else
-			$dslc_is_admin = false;
+			if ( $LC_Registry->get( 'dslc_active' ) == true ) {
 
-		if ( $dslc_is_admin )
-			$the_excerpt = __( 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'live-composer-page-builder' );
-		else
-			$the_excerpt = false;
+				$path = explode( '/', __DIR__ );
+				$path = array_pop( $path );
+				wp_enqueue_script( 'js-tp-excerpt-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/editor-script.js', array( 'jquery' ) );
+			}
+		});
+
+	}
+
+	/**
+	 * Returns excerpt.
+	 * @return  string
+	 */
+	function get_excerpt () {
 
 		if ( is_singular() && get_post_type() !== 'dslc_templates' && has_excerpt() ) {
 			$post_id = get_the_ID();
@@ -454,18 +477,25 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 			$the_excerpt = apply_filters( 'get_the_excerpt', $post->post_excerpt );
 		}
 
-		$this->module_start( $options );
+		return $the_excerpt;
+	}
 
-		/* Module output starts here */
-			
-			if ( $the_excerpt ) :
-				?><div class="dslc-tp-excerpt"><?php echo $the_excerpt; ?></div><?php
-			endif;
+	/**
+	 * @inherited
+	 */
+	function output( $options = [] ) {
 
+		$this->module_start();
+
+		/* Module output stars here */
+		echo $this->renderModule();
 		/* Module output ends here */
 
-		$this->module_end( $options );
+		$this->module_end();
 
 	}
 
 }
+
+/// Register module
+( new DSLC_TP_Excerpt )->register();

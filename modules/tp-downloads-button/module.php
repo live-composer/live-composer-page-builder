@@ -30,6 +30,27 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 	/**
 	 * @inherited
 	 */
+	function afterRegister()
+	{
+		add_action( 'wp_enqueue_scripts', function(){
+
+			global $LC_Registry;
+
+			$path = explode( '/', __DIR__ );
+			$path = array_pop( $path );
+
+			if ( $LC_Registry->get( 'dslc_active' ) == true ) {
+
+				wp_enqueue_script( 'js-downloads-button-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/editor-script.js', array( 'jquery' ) );
+			}
+
+			wp_enqueue_script( 'js-downloads-button-production', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/script.js', array( 'jquery' ) );
+		});
+	}
+
+	/**
+	 * @inherited
+	 */
 	function options() {
 
 		$dslc_options = array(
@@ -439,6 +460,36 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 
 		return apply_filters( 'dslc_module_options', $dslc_options, $this->module_id );
 
+	}
+
+	/**
+	 * Returns post ID.
+	 * @return  string
+	 */
+	function get_id () {
+		return get_the_ID();
+	}
+
+	function render_download_button( $atts, $content ) {
+
+		return DSLC_Main::dslc_do_shortcode( $content );
+	}
+
+	/**
+	 * Returns download link.
+	 * @return  string
+	 */
+	function get_download_link () {
+		$post_id = get_the_ID();
+
+		if ( get_post_meta( $post_id, 'dslc_download_file', true ) )
+			$download_link = wp_get_attachment_url( get_post_meta( $post_id, 'dslc_download_file', true ) );
+		elseif ( get_post_meta( $post_id, 'dslc_download_url', true ) )
+			$download_link = get_post_meta( $post_id, 'dslc_download_url', true );
+		else
+			$download_link = false;
+
+		return $download_link;
 	}
 
 	/**
