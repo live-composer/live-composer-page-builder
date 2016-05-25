@@ -1,5 +1,11 @@
 <?php
+/**
+ * Staff Social module class
+ */
 
+/**
+ * Class DSLC_TP_Staff_Social
+ */
 class DSLC_TP_Staff_Social extends DSLC_Module {
 
 	var $module_id;
@@ -7,19 +13,27 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 	var $module_icon;
 	var $module_category;
 
-	function __construct() {
+	/**
+	 * @inherited
+	 */
+	function __construct( $settings = [], $atts = [] ) {
 
-		$this->module_id = 'DSLC_TP_Staff_Social';
+		$this->module_ver = 2;
+		$this->module_id = __CLASS__;
 		$this->module_title = __( 'Staff Social', 'live-composer-page-builder' );
 		$this->module_icon = 'twitter';
 		$this->module_category = 'single';
 
+		parent::__construct( $settings, $atts );
 	}
 
-	function options() {	
+	/**
+	 * @inherited
+	 */
+	function options() {
 
 		$dslc_options = array(
-				
+
 			/**
 			 * Styling
 			 */
@@ -370,64 +384,69 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 
 	}
 
-	function output( $options ) {
+	/**
+	 * @inherited
+	 */
+	function afterRegister() {
 
-		global $dslc_active;
+		add_action( 'wp_enqueue_scripts', function(){
 
-		$post_id = $options['post_id'];
-		$show_fake = true;
+			global $LC_Registry;
 
-		if ( is_singular() ) {
-			$post_id = get_the_ID();
-			$show_fake = false;
-		}
+			if ( $LC_Registry->get( 'dslc_active' ) == true ) {
 
-		if ( get_post_type( $post_id ) == 'dslc_templates' ) {
-			$show_fake = true;
-		}
+				$path = explode( '/', __DIR__ );
+				$path = array_pop( $path );
+				wp_enqueue_script( 'js-tp-staff-social-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/editor-script.js', array( 'jquery' ) );
+			}
+		});
 
-		$this->module_start( $options );
+	}
 
-		/* Module output starts here */
+	function get_social() {
 
-			?>
+		$staff_id = get_the_ID();
 
-			<div class="dslc-tp-staff-social">
-				<ul class="dslc-staff-social">
-					<?php if ( $show_fake ) : ?>
-						<li><a target="_blank" href="#"><span class="dslc-icon dslc-init-center dslc-icon-twitter"></span></a></li>
-						<li><a target="_blank" href="#"><span class="dslc-icon dslc-init-center dslc-icon-facebook"></span></a></li>
-						<li><a target="_blank" href="#"><span class="dslc-icon dslc-init-center dslc-icon-google-plus"></span></a></li>
-						<li><a target="_blank" href="#"><span class="dslc-icon dslc-init-center dslc-icon-linkedin"></span></a></li>
-					<?php else : ?>
-						<?php
-							$social_twitter = get_post_meta( get_the_ID(), 'dslc_staff_social_twitter', true );
-							$social_facebook = get_post_meta( get_the_ID(), 'dslc_staff_social_facebook', true );
-							$social_googleplus = get_post_meta( get_the_ID(), 'dslc_staff_social_googleplus', true );
-							$social_linkedin = get_post_meta( get_the_ID(), 'dslc_staff_social_linkedin', true );
-						?>
-						<?php if ( $social_twitter ) : ?>
-							<li><a target="_blank" href="<?php echo $social_twitter; ?>"><span class="dslc-icon dslc-init-center dslc-icon-twitter"></span></a></li>
-						<?php endif; ?>
-						<?php if ( $social_facebook ) : ?>
-							<li><a target="_blank" href="<?php echo $social_facebook; ?>"><span class="dslc-icon dslc-init-center dslc-icon-facebook"></span></a></li>
-						<?php endif; ?>
-						<?php if ( $social_googleplus ) : ?>
-							<li><a target="_blank" href="<?php echo $social_googleplus; ?>"><span class="dslc-icon dslc-init-center dslc-icon-google-plus"></span></a></li>
-						<?php endif; ?>
-						<?php if ( $social_linkedin ) : ?>
-							<li><a target="_blank" href="<?php echo $social_linkedin; ?>"><span class="dslc-icon dslc-init-center dslc-icon-linkedin"></span></a></li>
-						<?php endif; ?>
-					<?php endif; ?>
-				</ul><!-- .dslc-staff-social -->
-			</div><!-- .dslc-tp-staff-social -->
+		ob_start();
 
-			<?php
-		
+		$social_twitter = get_post_meta( $staff_id, 'dslc_staff_social_twitter', true );
+		$social_facebook = get_post_meta( $staff_id, 'dslc_staff_social_facebook', true );
+		$social_googleplus = get_post_meta( $staff_id, 'dslc_staff_social_googleplus', true );
+		$social_linkedin = get_post_meta( $staff_id, 'dslc_staff_social_linkedin', true );
+
+		if ( $social_twitter ) { ?>
+			<li><a target="_blank" href="<?php echo $social_twitter; ?>"><span class="dslc-icon dslc-init-center dslc-icon-twitter"></span></a></li>
+		<?php }
+		if ( $social_facebook ) { ?>
+			<li><a target="_blank" href="<?php echo $social_facebook; ?>"><span class="dslc-icon dslc-init-center dslc-icon-facebook"></span></a></li>
+		<?php }
+		if ( $social_googleplus ) { ?>
+			<li><a target="_blank" href="<?php echo $social_googleplus; ?>"><span class="dslc-icon dslc-init-center dslc-icon-google-plus"></span></a></li>
+		<?php }
+		if ( $social_linkedin ) { ?>
+			<li><a target="_blank" href="<?php echo $social_linkedin; ?>"><span class="dslc-icon dslc-init-center dslc-icon-linkedin"></span></a></li>
+		<?php }
+
+		return ob_get_clean();
+
+	}
+
+	/**
+	 * @inherited
+	 */
+	function output( $options = [] ) {
+
+		$this->module_start();
+
+		/* Module output stars here */
+		echo $this->renderModule();
 		/* Module output ends here */
 
-		$this->module_end( $options );
+		$this->module_end();
 
 	}
 
 }
+
+/// Register module
+( new DSLC_TP_Staff_Social )->register();
