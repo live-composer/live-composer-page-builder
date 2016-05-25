@@ -2454,6 +2454,7 @@ class DSLC_Posts extends DSLC_Module {
 		if ( $dslc_query == null ) {
 
 			$dslc_query = $this->get_posts();
+			$LC_Registry->set( 'dslc-posts-query', $dslc_query );
 		}
 
 		if ( $dslc_query->have_posts() ) {
@@ -2485,15 +2486,6 @@ class DSLC_Posts extends DSLC_Module {
 		}
 
 		return $out;
-	}
-
-	/**
-	 * Returns thumbnail HTML. Repeater function.
-	 * @return string
-	 */
-	function aq_resize1() {
-
-
 	}
 
 	/**
@@ -2608,9 +2600,41 @@ class DSLC_Posts extends DSLC_Module {
 	 * Returns post thumbnail. Repeater function.
 	 * @return  string
 	 */
-	function post_thumb1() {
+	function post_thumb() {
 
+		$manual_resize = false;
+		$options = $this->getPropsValues();
 
+		if ( isset( $options['thumb_resize_height'] ) && ! empty( $options['thumb_resize_height'] ) || isset( $options['thumb_resize_width_manual'] ) && ! empty( $options['thumb_resize_width_manual'] ) ) {
+
+			$manual_resize = true;
+			$thumb_url = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full' );
+			$thumb_url = $thumb_url[0];
+
+			$thumb_alt = get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true );
+			if ( ! $thumb_alt ) $thumb_alt = '';
+
+			$resize_width = false;
+			$resize_height = false;
+
+			if ( isset( $options['thumb_resize_width_manual'] ) && ! empty( $options['thumb_resize_width_manual'] ) ) {
+				$resize_width = $options['thumb_resize_width_manual'];
+			}
+
+			if ( isset( $options['thumb_resize_height'] ) && ! empty( $options['thumb_resize_height'] ) ) {
+				$resize_height = $options['thumb_resize_height'];
+			}
+		}
+
+		ob_start();
+
+		if ( $manual_resize ) {?>
+			<img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" />
+		<?php } else { ?>
+			<?php the_post_thumbnail( 'full' ); ?>
+		<?php }
+
+		return ob_get_clean();
 	}
 
 	/**
@@ -2632,7 +2656,7 @@ class DSLC_Posts extends DSLC_Module {
 			$num_pages = $dslc_query->max_num_pages;
 
 			if ( $options['offset'] > 0 ) {
-				$num_pages = ceil ( ( $dslc_query->found_posts - $options['offset'] ) / $options['amount'] );
+				$num_pages = ceil ( ( $dslc_query->found_posts - $options['offset '] ) / $options['amount'] );
 			}
 
 			dslc_post_pagination( array( 'pages' => $num_pages, 'type' => $options['pagination_type'] ) );
@@ -2647,7 +2671,11 @@ class DSLC_Posts extends DSLC_Module {
 	function output( $options = [] ) {
 
 		$this->module_start();
+
+		/* Module output stars here */
 		echo $this->renderModule();
+		/* Module output ends here */
+
 		$this->module_end();
 	}
 

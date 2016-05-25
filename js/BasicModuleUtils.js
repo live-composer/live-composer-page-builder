@@ -163,7 +163,7 @@
 			//
 			HTML.find("[data-module-method]").each(function()
 			{
-				var modMethod = $(this).data('module-method') ? ' module-method="' + $(this).data('module-method') + '"' : '';
+				var modMethod = $(this).data('module-method') ? ' module-instance-id="' + self.settings.module_instance_id + '" module-method="' + $(this).data('module-method') + '"' : '';
 
 				$(this).html("[dslc-module-sc " + modMethod + "]")
 					.removeAttr('data-module-method');

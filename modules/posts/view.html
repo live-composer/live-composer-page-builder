@@ -73,15 +73,9 @@
 
 							<div class="dslc-cpt-post-thumb-inner dslca-post-thumb">
 
-								<% if(manual_resize){%>
-									<a href="{{dslc-module-sc module-method='permalink'}}" data-module-method="aq_resize_1">
-										<img width="100%" height=200 src="http://dummyimage.com/300x200/000/fff" alt="Image alt" />
-									</a>
-								<%}else{%>
-									<a href="{{dslc-module-sc module-method='permalink'}}" data-module-method="post_thumb_1">
+									<a href="{{dslc-module-sc module-method='permalink'}}" data-module-method="post_thumb">
 										<img width="100%" height=200 src="http://dummyimage.com/300x200/000/fff"/>
 									</a>
-								<%}%>
 
 							</div><!-- .dslc-cpt-post-thumb-inner -->
 
@@ -217,12 +211,33 @@
 		</div><!--.dslc-posts-inner -->
 	</div><!-- .dslc-cpt-posts -->
 
-<% if(pagination_type.value != 'disabled'){%>
+<% if(pagination_type.value && pagination_type.value != 'disabled'){%>
 	<div data-dslc-raw-sc>[dslc-module-sc module-instance-id="<%= module_instance_id %>" module-method="pagination_nav"]</div>
-	<div class="dslc-pagination dslc-pagination-type-numbered lc-editor-element">
-		<ul class="dslc-clearfix">
-			<li class="dslc-active"><a href="#">1</a></li>
-			<li class="dslc-inactive"><a class="inactive" href="#">2</a></li>
-		</ul>
-	</div>
+
+	<% if(pagination_type.value == 'numbered'){%>
+		<div class="dslc-pagination dslc-pagination-type-numbered lc-editor-element">
+			<ul class="dslc-clearfix">
+				<li class="dslc-active"><a href="#">1</a></li>
+				<li class="dslc-inactive"><a class="inactive" href="#">2</a></li>
+			</ul>
+		</div>
+	<%}%>
+
+	<% if(pagination_type.value == 'prevnext'){%>
+		<div class="dslc-pagination dslc-pagination-type-prevnext">
+			<ul class="dslc-clearfix">
+				<li class="dslc-active dslc-fr"><a href="http://livecomp/version2page/page/2/">Older</a></li>
+				<li class="dslc-inactive dslc-fl"><a href="http://livecomp/version2page/" class="__web-inspector-hide-shortcut__">Newer</a></li>
+			</ul>
+		</div>
+	<%}%>
+
+	<% if(pagination_type.value == 'prevnext'){%>
+		<div class="dslc-pagination dslc-pagination-type-prevnext">
+			<ul class="dslc-clearfix">
+				<li class="dslc-active dslc-fr"><a href="http://livecomp/version2page/page/2/">Older</a></li>
+				<li class="dslc-inactive dslc-fl"><a href="http://livecomp/version2page/" class="__web-inspector-hide-shortcut__">Newer</a></li>
+			</ul>
+		</div>
+	<%}%>
 <%}%>

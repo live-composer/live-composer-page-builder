@@ -4216,8 +4216,6 @@ class DSLC_TP_Content extends DSLC_Module {
 			}
 		}
 
-		wp_reset_query();
-
 		// Output after content
 		do_action( 'dslc_content_module_after_content', $post_id, $options );
 
