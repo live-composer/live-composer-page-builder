@@ -2219,8 +2219,14 @@ class DSLC_Module{
 		$class_info = new ReflectionClass( get_called_class() ); /// Class instance without class creation. That's it :)
 		$dirname = dirname( $class_info->getFileName() ); /// Class file directory
 
+		global $dslc_var_modules;
+		$features = dslc_get_options( 'dslc_plugin_options_features' );
+
+		if ( isset( $features[ $class_info->name ] ) && $features[ $class_info->name ] == 'disabled' ) return;
+
 		add_action( 'dslc_hook_register_modules',
 			function() use ( $dirname ){ /// Closure feature
+
 				dslc_register_module( get_called_class(), $dirname );
 			}
 		);

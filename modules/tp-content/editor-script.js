@@ -1,5 +1,5 @@
 /**
- * Downloads Button js extender
+ * Content js extender
  */
 
 'use strict'

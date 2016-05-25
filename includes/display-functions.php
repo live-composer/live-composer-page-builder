@@ -462,6 +462,7 @@ function dslc_display_composer() {
 	</div>
 	<div class="dslc-modules-templates">
 	<?php
+
 		foreach ( $dslc_var_modules as $availModule ) {
 
 			$module_front_info = array(

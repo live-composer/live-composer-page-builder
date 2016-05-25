@@ -41,34 +41,6 @@ add_action( 'plugins_loaded', 'dslc_load_translation' );
 
 function dslc_register_modules()
 {
-	// Register default modules
-/*	dslc_register_module( 'DSLC_TP_Thumbnail' );
-	dslc_register_module( 'DSLC_TP_Content' );
-	dslc_register_module( 'DSLC_TP_Excerpt' );
-	dslc_register_module( 'DSLC_TP_Meta' );
-	dslc_register_module( 'DSLC_TP_Downloads_Button' );
-	dslc_register_module( 'DSLC_TP_Gallery_Slider' );
-	dslc_register_module( 'DSLC_TP_Project_Slider' );
-	dslc_register_module( 'DSLC_TP_Comments' );
-	dslc_register_module( 'DSLC_TP_Comments_Form' );
-	dslc_register_module( 'DSLC_TP_Staff_Social' );*/
-/*	dslc_register_module( 'DSLC_Html' );
-	dslc_register_module( 'DSLC_Accordion' );
-	/*dslc_register_module( 'DSLC_Posts' );
-	dslc_register_module( 'DSLC_Blog' );
-	dslc_register_module( 'DSLC_Projects' );
-	dslc_register_module( 'DSLC_Galleries' );
-	dslc_register_module( 'DSLC_Downloads' );
-	dslc_register_module( 'DSLC_Testimonials' );
-	dslc_register_module( 'DSLC_Staff' );
-	dslc_register_module( 'DSLC_Partners' );
-	dslc_register_module( 'DSLC_WooCommerce_Products' );
-	dslc_register_module( 'DSLC_Notification' );
-	dslc_register_module( 'DSLC_Tabs' );
-	dslc_register_module( 'DSLC_Sliders' );
-	dslc_register_module( 'DSLC_Widgets' );
-	dslc_register_module( 'DSLC_Navigation' );*/
-
 	// Hook to register custom modules
 
 	do_action( 'dslc_hook_register_modules' );
@@ -95,6 +67,7 @@ function dslc_register_module( $module_id, $template_path = '' )
 
 	// Category/Origin
 	if ( ! isset( $module_instance->module_category ) ) $module_instance->module_category = 'other';
+
 
 	// If the array ID not taken
 	if ( ! isset( $dslc_var_modules[$module_id] ) ) {
