@@ -2492,17 +2492,25 @@ class DSLC_Posts extends DSLC_Module {
 	 * Returns last col class
 	 * @return string
 	 */
-	function last_col_class() {
+	function extra_col_class() {
 
 		global $LC_Registry;
 
 		$opts = $this->getPropsValues();
 		$index = $LC_Registry->get( 'dslc-posts-elem-index' );
+		$extra_class = '';
 
 		if ( $opts['type'] == 'grid' && $index > 0 && ($index + 1) % $opts['posts_per_row'] == 0 && $opts['separator_enabled'] != 'disabled' ) {
 
-			return 'dslc-last-col';
+			$extra_class = 'dslc-last-col ';
 		}
+
+		if ( ! has_post_thumbnail() ) {
+
+			$extra_class .= 'dslc-post-no-thumb';
+		}
+
+		return $extra_class;
 	}
 
 	/**
@@ -2602,6 +2610,8 @@ class DSLC_Posts extends DSLC_Module {
 	 */
 	function post_thumb() {
 
+		if ( ! has_post_thumbnail() ) return '';
+
 		$manual_resize = false;
 		$options = $this->getPropsValues();
 
@@ -2627,12 +2637,17 @@ class DSLC_Posts extends DSLC_Module {
 		}
 
 		ob_start();
-
-		if ( $manual_resize ) {?>
-			<img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" />
-		<?php } else { ?>
-			<?php the_post_thumbnail( 'full' ); ?>
-		<?php }
+		?>
+		<div class="dslc-cpt-post-thumb-inner dslca-post-thumb">
+			<a href="<?php the_permalink() ?>">
+				<?php if ( $manual_resize ) {?>
+					<img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" />
+				<?php } else { ?>
+					<?php the_post_thumbnail( 'full' ); ?>
+				<?php } ?>
+			</a>
+		</div><!-- .dslc-cpt-post-thumb-inner -->
+		<?php
 
 		return ob_get_clean();
 	}

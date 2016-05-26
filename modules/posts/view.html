@@ -65,19 +65,21 @@
 
 				var last_col = type.value == 'grid' && index > 0 && (index + 1) % posts_per_row.value == 0 && separator_enabled.value != 'disabled' ? 'dslc-last-col' : '';
 				%>
-				<div class="<%= element_class + columns_class + extra_class %> <%= last_col %> {{dslc-module-sc module-method='last_col_class'}} {{dslc-module-sc module-method='post_categories'}}" data-repeatable="render_posts">
+				<div class="<%= element_class + columns_class + extra_class %> <%= last_col %> {{dslc-module-sc module-method='extra_col_class'}} {{dslc-module-sc module-method='post_categories'}}" data-repeatable="render_posts">
 
 					<% if(post_elements.value.indexOf('thumbnail') > -1){%>
 
 						<div class="dslc-post-thumb dslc-cpt-post-thumb dslc-on-hover-anim">
 
-							<div class="dslc-cpt-post-thumb-inner dslca-post-thumb">
+							<div data-module-method="post_thumb">
+								<div class="dslc-cpt-post-thumb-inner dslca-post-thumb">
 
-									<a href="{{dslc-module-sc module-method='permalink'}}" data-module-method="post_thumb">
-										<img width="100%" height=200 src="http://dummyimage.com/300x200/000/fff"/>
-									</a>
+										<a href="{{dslc-module-sc module-method='permalink'}}">
+											<img width="100%" height=200 src="http://dummyimage.com/300x200/000/fff"/>
+										</a>
 
-							</div><!-- .dslc-cpt-post-thumb-inner -->
+								</div><!-- .dslc-cpt-post-thumb-inner -->
+							</div>
 
 							<% if((main_location.value == 'inside' || main_location.value == 'inside_visible')  &&
 									(
@@ -108,7 +110,7 @@
 
 												<% if(meta_elements.value.indexOf('author') > -1){%>
 													<div class="dslc-cpt-post-meta-author" data-module-method="author_posts_link">
-														Author's link
+														<a href="#" title="Posts by author" rel="author">Author</a>
 													</div><!-- .dslc-cpt-post-meta-author -->
 												<%}%>
 
@@ -166,7 +168,7 @@
 
 									<% if(meta_elements.value.indexOf('author') > -1){%>
 										<div class="dslc-cpt-post-meta-author" data-module-method="author_posts_link">
-											 Author's link
+											 <a href="#" title="Posts by author" rel="author">Author</a>
 										</div><!-- .dslc-cpt-post-meta-author -->
 									<%}%>
 
