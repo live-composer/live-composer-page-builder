@@ -1,0 +1,10 @@
+<div class="dslc-widgets dslc-clearfix dslc-widgets-<%= columns.value || columns.std %>-col">
+	<div class="dslc-widgets-wrap dslc-clearfix">
+		<% if( (sidebar.value || sidebar.std) !== 'not_set' ) {%>
+			<div data-dslc-raw-sc>[dslc-module-sc module-instance-id='<%= module_instance_id %>' module-method='get_widgets']</div>
+			<div class="dslc-notification dslc-red lc-editor-element"><?php _e( 'Click the preview shortcodes and and see your widget.', 'live-composer-page-builder' ); ?></div>
+		<%} else {%>
+			<div class="dslc-notification dslc-red"><?php _e( 'Click the cog icon on the right of this box to choose which sidebar to show.', 'live-composer-page-builder' ); ?> <span class="dslca-module-edit-hook dslc-icon dslc-icon-cog"></span></div>
+		<%}%>
+	</div>
+</div>

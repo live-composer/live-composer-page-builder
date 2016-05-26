@@ -407,8 +407,6 @@ var dslcDebug = false;
 
 							// Generete
 							dslc_carousel();
-							dslc_tabs();
-							dslc_init_accordion();
 							dslc_init_square();
 							dslc_center();
 							dslc_generate_code();
@@ -4203,8 +4201,6 @@ var dslcDebug = false;
 					dslc_masonry(jQuery('.dslca-module-being-edited'));
 					dslc_center();
 				});
-				dslc_tabs();
-				dslc_init_accordion();
 				dslc_init_square();
 				dslc_center();
 
@@ -4281,8 +4277,6 @@ var dslcDebug = false;
 					dslc_masonry(jQuery('.dslca-module-being-edited'));
 					dslc_center();
 				});
-				dslc_tabs();
-				dslc_init_accordion();
 				dslc_init_square();
 				dslc_center();
 

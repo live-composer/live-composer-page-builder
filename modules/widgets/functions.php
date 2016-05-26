@@ -11,7 +11,7 @@ function dslc_sidebars() {
 
 		foreach( $sidebars_array as $sidebar ) {
 
-			$sidebar_ID = 'dslc_' . strtolower( str_replace( ' ', '_', $sidebar ) );
+			$sidebar_ID = 'dslc_' . strtolower( trim( preg_replace( "/[^0-9a-z]+/i", "_", $sidebar ) ) );
 
 			register_sidebar( array(
 				'name' => $sidebar,

@@ -1,8 +1,14 @@
 <?php
+/**
+ * Widgets module class
+ */
 
 if ( dslc_is_module_active( 'DSLC_Widgets' ) )
 	include DS_LIVE_COMPOSER_ABS . '/modules/widgets/functions.php';
 
+/**
+ * Class DSLC_Widgets
+ */
 class DSLC_Widgets extends DSLC_Module {
 
 	var $module_id;
@@ -10,16 +16,24 @@ class DSLC_Widgets extends DSLC_Module {
 	var $module_icon;
 	var $module_category;
 
-	function __construct() {
+	/**
+	 * @inherited
+	 */
+	function __construct( $settings = [], $atts = [] ) {
 
-		$this->module_id = 'DSLC_Widgets';
+		$this->module_ver = 2;
+		$this->module_id = __CLASS__;
 		$this->module_title = __( 'Widgets', 'live-composer-page-builder' );
 		$this->module_icon = 'pencil';
 		$this->module_category = 'elements';
 
+		parent::__construct( $settings, $atts );
 	}
 
-	function options() {	
+	/**
+	 * @inherited
+	 */
+	function options() {
 
 		$sidebars = dslc_get_option( 'sidebars', 'dslc_plugin_options_widgets_m' );
 
@@ -34,7 +48,7 @@ class DSLC_Widgets extends DSLC_Module {
 			$sidebars_array = explode( ',', substr( $sidebars, 0, -1 ) );
 
 			foreach ( $sidebars_array as $sidebar ) {
-				
+
 				$sidebar_ID = 'dslc_' . strtolower( str_replace( ' ', '_', $sidebar ) );
 
 				$sidebars_choices[] = array(
@@ -83,7 +97,7 @@ class DSLC_Widgets extends DSLC_Module {
 				'type' => 'select',
 				'choices' => $this->shared_options('posts_per_row_choices'),
 			),
-			
+
 			/**
 			 * Styling
 			 */
@@ -1005,8 +1019,8 @@ class DSLC_Widgets extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'content lists', 'live-composer-page-builder' ),
 			),
-			
-			
+
+
 
 			/**
 			 * Responsive Tablet
@@ -1328,51 +1342,51 @@ class DSLC_Widgets extends DSLC_Module {
 
 	}
 
-	function output( $options ) {
+	/**
+	 * @inherited
+	 */
+	function afterRegister()
+	{
+		add_action( 'wp_enqueue_scripts', function(){
 
-		global $dslc_active;
+			global $LC_Registry;
 
-		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
-			$dslc_is_admin = true;
-		else
-			$dslc_is_admin = false;
+			$path = explode( '/', __DIR__ );
+			$path = array_pop( $path );
 
-		$this->module_start( $options );
+			if ( $LC_Registry->get( 'dslc_active') == true ) {
 
-		/* Module output starts here */
-			
-			?>
-			<div class="dslc-widgets dslc-clearfix dslc-widgets-<?php echo $options['columns']; ?>-col">
-				<div class="dslc-widgets-wrap dslc-clearfix">
-					<?php
+				wp_enqueue_script( 'js-widgets-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/editor-script.js', array( 'jquery' ) );
+			}
+		});
+	}
 
-					if ( isset( $options['sidebar'] ) && $options['sidebar'] !== 'not_set' ) {
+	function get_widgets() {
 
-						if ( ! dynamic_sidebar( $options['sidebar'] ) ) :
+		$options = $this->getPropsValues();
 
-							if ( $dslc_is_admin ) :
-								?><div class="dslc-notification dslc-red"><?php _e( 'The sidebar you have chosen is empty. Click the refresh icon on the right when you add a widget.', 'live-composer-page-builder' ); ?> <span class="dslca-refresh-module-hook dslc-icon dslc-icon-refresh"></span></span></div><?php
-							endif;
+		ob_start();
 
-						endif;
+		dynamic_sidebar( $options['sidebar'] );
 
-					} else {
+		return ob_get_clean();
+	}
 
-						if ( $dslc_is_admin ) :
-							?><div class="dslc-notification dslc-red"><?php _e( 'Click the cog icon on the right of this box to choose which sidebar to show.', 'live-composer-page-builder' ); ?> <span class="dslca-module-edit-hook dslc-icon dslc-icon-cog"></span></span></div><?php
-						endif;
+	/**
+	 * @inherited
+	 */
+	function output( $options = [] ) {
 
-					}
+		$this->module_start();
 
-				?>
-				</div>
-			</div>
-			<?php
-
+		/* Module output stars here */
+		echo $this->renderModule();
 		/* Module output ends here */
 
-		$this->module_end( $options );
-
+		$this->module_end();
 	}
 
 }
+
+/// Register module
+( new DSLC_Widgets )->register();
