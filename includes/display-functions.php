@@ -535,6 +535,8 @@ function dslc_display_composer() {
 		<?php }
 	}
 
+	remove_action( 'the_content', 'dslc_display_composer' );
+
 } add_action('wp_footer', 'dslc_display_composer');
 
 /**

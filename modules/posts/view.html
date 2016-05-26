@@ -214,30 +214,25 @@
 <% if(pagination_type.value && pagination_type.value != 'disabled'){%>
 	<div data-dslc-raw-sc>[dslc-module-sc module-instance-id="<%= module_instance_id %>" module-method="pagination_nav"]</div>
 
-	<% if(pagination_type.value == 'numbered'){%>
-		<div class="dslc-pagination dslc-pagination-type-numbered lc-editor-element">
-			<ul class="dslc-clearfix">
+	<div class="dslc-pagination dslc-pagination-type-<%= pagination_type.value %> lc-editor-element">
+		<ul class="dslc-clearfix">
+			<% if(pagination_type.value == 'numbered'){%>
 				<li class="dslc-active"><a href="#">1</a></li>
 				<li class="dslc-inactive"><a class="inactive" href="#">2</a></li>
-			</ul>
-		</div>
-	<%}%>
+			<%}%>
 
-	<% if(pagination_type.value == 'prevnext'){%>
-		<div class="dslc-pagination dslc-pagination-type-prevnext">
-			<ul class="dslc-clearfix">
-				<li class="dslc-active dslc-fr"><a href="http://livecomp/version2page/page/2/">Older</a></li>
-				<li class="dslc-inactive dslc-fl"><a href="http://livecomp/version2page/" class="__web-inspector-hide-shortcut__">Newer</a></li>
-			</ul>
-		</div>
-	<%}%>
+			<% if(pagination_type.value == 'prevnext'){%>
+				<li class="dslc-active dslc-fr"><a href="#">Older</a></li>
+				<li class="dslc-inactive dslc-fl"><a href="#" class="">Newer</a></li>
+			<%}%>
 
-	<% if(pagination_type.value == 'prevnext'){%>
-		<div class="dslc-pagination dslc-pagination-type-prevnext">
-			<ul class="dslc-clearfix">
-				<li class="dslc-active dslc-fr"><a href="http://livecomp/version2page/page/2/">Older</a></li>
-				<li class="dslc-inactive dslc-fl"><a href="http://livecomp/version2page/" class="__web-inspector-hide-shortcut__">Newer</a></li>
-			</ul>
-		</div>
-	<%}%>
+			<% if(pagination_type.value == 'loadmore'){%>
+				<li class="dslc-pagination-load-more dslc-active">
+					<a href="#">
+						<span class="dslc-icon dslc-icon-refresh"></span>LOAD MORE ITEMS
+					</a>
+				</li>
+			<%}%>
+		</ul>
+	</div>
 <%}%>
