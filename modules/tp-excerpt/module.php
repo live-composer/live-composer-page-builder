@@ -447,25 +447,6 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 	}
 
 	/**
-	 * @inherited
-	 */
-	function afterRegister() {
-
-		add_action( 'wp_enqueue_scripts', function(){
-
-			global $LC_Registry;
-
-			if ( $LC_Registry->get( 'dslc_active' ) == true ) {
-
-				$path = explode( '/', __DIR__ );
-				$path = array_pop( $path );
-				wp_enqueue_script( 'js-tp-excerpt-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/editor-script.js', array( 'jquery' ) );
-			}
-		});
-
-	}
-
-	/**
 	 * Returns excerpt.
 	 * @return  string
 	 */

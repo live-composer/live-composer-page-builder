@@ -384,25 +384,6 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 
 	}
 
-	/**
-	 * @inherited
-	 */
-	function afterRegister() {
-
-		add_action( 'wp_enqueue_scripts', function(){
-
-			global $LC_Registry;
-
-			if ( $LC_Registry->get( 'dslc_active' ) == true ) {
-
-				$path = explode( '/', __DIR__ );
-				$path = array_pop( $path );
-				wp_enqueue_script( 'js-tp-staff-social-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/editor-script.js', array( 'jquery' ) );
-			}
-		});
-
-	}
-
 	function get_social() {
 
 		$staff_id = get_the_ID();

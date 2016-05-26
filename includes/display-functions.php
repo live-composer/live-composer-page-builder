@@ -535,8 +535,6 @@ function dslc_display_composer() {
 		<?php }
 	}
 
-	remove_action( 'the_content', 'dslc_display_composer' );
-
 } add_action('wp_footer', 'dslc_display_composer');
 
 /**
@@ -683,6 +681,8 @@ function dslc_display_templates()
  */
 function dslc_filter_content( $content )
 {
+	remove_filter( 'the_content', 'dslc_filter_content', 101 );
+
 	// If post pass protected and pass not supplied return original content
 	if ( post_password_required( get_the_ID() ) ) {
 		return $content;

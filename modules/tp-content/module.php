@@ -4167,25 +4167,6 @@ class DSLC_TP_Content extends DSLC_Module {
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		return apply_filters( 'dslc_module_options', $dslc_options, $this->module_id );
-
-	}
-
-	/**
-	 * @inherited
-	 */
-	function afterRegister() {
-
-		add_action( 'wp_enqueue_scripts', function(){
-
-			global $LC_Registry;
-
-			if ( $LC_Registry->get( 'dslc_active' ) == true ) {
-
-				$path = explode( '/', __DIR__ );
-				$path = array_pop( $path );
-				wp_enqueue_script( 'js-tp-content-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/editor-script.js', array( 'jquery' ) );
-			}
-		});
 	}
 
 	/**
@@ -4204,7 +4185,7 @@ class DSLC_TP_Content extends DSLC_Module {
 
 		global $post;
 
-		$new_query = new WP_Query( ['post_page' => $post->ID] );
+		$new_query = new WP_Query( ['p' => $post->ID, 'post_type' => 'any'] );
 
 		// Output content
 		if ( $new_query->have_posts() ) {
