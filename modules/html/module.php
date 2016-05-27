@@ -28,15 +28,15 @@ class DSLC_Html extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Desktop', 'live-composer-page-builder' ),
-						'value' => 'desktop'
+						'value' => 'desktop',
 					),
 					array(
 						'label' => __( 'Tablet', 'live-composer-page-builder' ),
-						'value' => 'tablet'
+						'value' => 'tablet',
 					),
 					array(
 						'label' => __( 'Phone', 'live-composer-page-builder' ),
-						'value' => 'phone'
+						'value' => 'phone',
 					),
 				),
 			),
@@ -46,7 +46,7 @@ class DSLC_Html extends DSLC_Module {
 				'id' => 'content',
 				'std' => '<p>Just some placeholder content. Edit the module to change it.</p>',
 				'type' => 'textarea',
-				'section' => 'functionality'
+				'section' => 'functionality',
 			),
 
 			array(
@@ -2892,7 +2892,7 @@ class DSLC_Html extends DSLC_Module {
 
 			?></div><?php
 
-			if ( empty( $output_content ) ) :
+			if ( empty( $output_content ) && $dslc_is_admin ) :
 
 				?><div class="dslc-notification dslc-red">Looks like there is no content.</div><?php
 

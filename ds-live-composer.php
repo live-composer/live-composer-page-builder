@@ -39,7 +39,7 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) ):
 	 * Constants
 	 */
 
-	define( 'DS_LIVE_COMPOSER_VER', '1.0.8.3' );
+	define( 'DS_LIVE_COMPOSER_VER', '1.0.8.4' );
 
 	define( 'DS_LIVE_COMPOSER_SHORTNAME', __( 'Live Composer', 'live-composer-page-builder' ) );
 	define( 'DS_LIVE_COMPOSER_BASENAME', plugin_basename( __FILE__ ) );

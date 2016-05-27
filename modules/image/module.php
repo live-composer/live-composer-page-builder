@@ -139,7 +139,6 @@ class DSLC_Image extends DSLC_Module {
 				'type' => 'text',
 			),
 
-
 			/**
 			 * Styling
 			 */
@@ -313,7 +312,7 @@ class DSLC_Image extends DSLC_Module {
 					),
 				),
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-image img',
+				'affect_on_change_el' => '.dslc-image, .dslc-image a, .dslc-image img',
 				'affect_on_change_rule' => 'width',
 				'section' => 'styling',
 			),
