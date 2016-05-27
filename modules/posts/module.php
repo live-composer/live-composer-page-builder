@@ -2469,9 +2469,16 @@ class DSLC_Posts extends DSLC_Module {
 				$dslc_query->the_post();
 				$LC_Registry->set( 'dslc-posts-elem-index', $cnt );
 
+
 				$out .= DSLC_Main::dslc_do_shortcode( $content );
 
-				if ( $options['type'] == 'grid' && $cnt > 0 && ($cnt + 1) % $options['posts_per_row'] == 0 && $options['separator_enabled'] != 'disabled' ) {
+				if ( 	$options['type'] == 'grid' &&
+				 		$cnt > 0 &&
+				 		($cnt + 1) % $options['posts_per_row'] == 0 &&
+				 		$options['separator_enabled'] != 'disabled' &&
+				 		($cnt + 1) < $dslc_query->found_posts &&
+				 		($cnt + 1) < $dslc_query->query_vars['posts_per_page']
+				 	) {
 
 					$out .= '<div class="dslc-post-separator"></div>';
 				}
@@ -2588,20 +2595,6 @@ class DSLC_Posts extends DSLC_Module {
 		the_title();
 
 		return ob_get_clean();
-	}
-
-	/**
-	 * Returns post separator. Repeater function.
-	 * @return string
-	 */
-	function post_separator() {
-
-
-		if( $this->settings['type'] == 'grid' && $this->settings['separator_enabled'] == 'true' ) {
-
-			return ?><div class="dslc-post-separator"></div><?php
-		}
-
 	}
 
 	/**
