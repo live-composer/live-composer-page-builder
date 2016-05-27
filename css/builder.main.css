@@ -726,6 +726,7 @@ body {
 		.dslca-module-edit-options-tabs {
 			border-bottom: 1px solid #75a2e6;
 			padding-bottom: 17px;
+			/*padding-right: 100px;*/
 		}
 
 			.dslca-module-edit-options-tab-hook {
@@ -739,6 +740,34 @@ body {
 
 			.dslca-module-edit-options-tab-hook:hover,
 			.dslca-module-edit-options-tab-hook.dslca-active {
+				color: #fff;
+			}
+
+			.dslca-module-edit-options-tab-hook[data-id="animation_styling"],
+			.dslca-module-edit-options-tab-hook[data-id="presets_styling"] {
+				float: right;
+			}
+
+			.dslca-clear-styling-button {
+			  border: 1px solid rgba(255, 255, 255, 0.4);
+			  border-radius: 4px;
+			  display: inline-block !important;
+			  float: right;
+			  font-weight: bold;
+			  padding: 4px 6px;
+			  position: absolute;
+			  right: 0;
+			  top: 15px;
+
+			  color: #a0c0f0;
+			  cursor: pointer;
+			  font-size: 11px;
+			  font-weight: 900;
+			  margin-right: 18px;
+			  text-transform: uppercase;
+			}
+
+			.dslca-clear-styling-button:hover {
 				color: #fff;
 			}
 
@@ -1151,7 +1180,15 @@ body {
 
 
 .dslc-control-toggle {
-	position: absolute; right: 0px;
+	cursor: pointer;
+	font-size: 15px;
+	opacity: 0.5;
+	position: absolute;
+	right: 0;
+}
+
+.dslc-control-toggle:hover {
+	opacity: 1;
 }
 
 .dslca-option-off {
@@ -2076,7 +2113,7 @@ body.rtl .dslca-modules-area-placeholder {
 		height: 82%;
 	}
 
-	.dslc-module-front.dslca-module-wysiwyg-active {
+	#dslc-content .dslc-module-front.dslca-module-wysiwyg-active {
 		opacity: 0;
 		min-height: 200px;
 	}
@@ -2123,14 +2160,14 @@ body.rtl .dslca-modules-area-placeholder {
 			text-transform: uppercase;
 		}
 
-		.dslca-wysiwyg-actions-edit {
+		#dslc-content .dslca-wysiwyg-actions-edit {
 			position: absolute;
 			top: 0;
 			right: 0;
 			overflow: hidden;
 		}
 
-			.dslca-wysiwyg-actions-edit-hook {
+			#dslc-content .dslca-wysiwyg-actions-edit-hook {
 				background: #5890e5;
 				color: #fff;
 				cursor: pointer;
@@ -2143,6 +2180,7 @@ body.rtl .dslca-modules-area-placeholder {
 				top: -50px;
 				padding: 7px 10px;
 				border-radius: 0 0 0 3px;
+				letter-spacing: 0;
 			}
 
 	body.dslca-enabled .ui-widget-overlay,

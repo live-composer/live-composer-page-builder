@@ -431,14 +431,36 @@ function dslc_ajax_display_module_options( $atts ) {
 			if ( isset( $module_option['affect_on_change_el'] ) && isset( $module_option['affect_on_change_rule'] ) )
 				$affect_on_change_append = 'data-affect-on-change-el="' . $module_option['affect_on_change_el'] . '" data-affect-on-change-rule="' . $module_option['affect_on_change_rule'] . '"';
 
-			$control_state = '';
-			if ( '' === $curr_value  ) {
-				$control_state = 'dslca-option-off';
+			/**
+			 * List of options that need not toggle
+			 * – Enable/Disable Custom CSS
+			 * – Show On
+			 * – Presets controls
+			 * – Animation controls
+			 */
+			$controls_without_toggle = array(
+				'css_custom',
+				'css_show_on',
+				'css_save_preset',
+				'css_load_preset',
+				'css_anim',
+				'css_anim_delay',
+				'css_anim_duration',
+				'css_anim_easing',
+				'content',
+			);
+
+			$control_with_toggle = '';
+			/**
+			 * Display styling control toggle [On/Off]
+			 */
+			if ( ! in_array( $module_option['id'], $controls_without_toggle, true ) ) {
+				$control_with_toggle = 'dslca-option-with-toggle';
 			}
 
 			?>
 
-				<div class="dslca-module-edit-option dslca-module-edit-option-<?php echo $module_option['type']; ?> dslca-module-edit-option-<?php echo $module_option['id']; ?> <?php if ( ! $visibility ) echo 'dslca-module-edit-option-hidden'; ?> <?php echo $control_state; ?>" data-id="<?php echo $module_option['id']; ?>" data-refresh-on-change="<?php echo $refresh_on_change; ?>" data-section="<?php echo $section; ?>" data-tab="<?php echo $tab_ID; ?>">
+				<div class="dslca-module-edit-option dslca-module-edit-option-<?php echo $module_option['type']; ?> dslca-module-edit-option-<?php echo $module_option['id']; ?> <?php if ( ! $visibility ) echo 'dslca-module-edit-option-hidden'; ?> <?php echo $control_with_toggle; ?>" data-id="<?php echo $module_option['id']; ?>" data-refresh-on-change="<?php echo $refresh_on_change; ?>" data-section="<?php echo $section; ?>" data-tab="<?php echo $tab_ID; ?>">
 
 					<?php if ( isset( $module_option['help'] ) ) : ?>
 						<div class="dslca-module-edit-field-ttip-content"><?php echo $module_option['help']; ?></div>
@@ -446,7 +468,14 @@ function dslc_ajax_display_module_options( $atts ) {
 
 					<span class="dslca-module-edit-label">
 						<?php if ( isset ( $module_option['label'] ) ) { echo $module_option['label']; } ?>
-						<?php echo'<span class="dslc-control-toggle dslc-icon dslc-icon-"></span>'; ?>
+						<?php
+							/**
+							 * Display styling control toggle [On/Off]
+							 */
+							if ( ! in_array( $module_option['id'], $controls_without_toggle, true ) ) {
+								echo'<span class="dslc-control-toggle dslc-icon dslc-icon-"></span>';
+							}
+						?>
 						<?php if ( $module_option['type'] == 'icon' ): ?>
 							<span class="dslca-module-edit-field-icon-ttip-hook"><span class="dslca-icon dslc-icon-info"></span></span>
 							<span class="dslca-module-edit-field-icon-switch-set"><span class="dslca-module-edit-field-icon-curr-set"><?php echo dslc_icons_current_set( $curr_value ); ?></span><span class="dslca-icon dslc-icon-cog"></span></span>
@@ -1125,7 +1154,6 @@ function dslc_ajax_import_modules_section( $atts ) {
  */
 
 function dslc_ajax_dm_module_defaults_code( $atts ) {
-
 	// Allowed to do this?
 	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 

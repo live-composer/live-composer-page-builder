@@ -134,6 +134,13 @@ function dslc_display_composer() {
 							<?php do_action( 'dslc_options_prepend' ); ?>
 							<div class="dslca-module-edit-options dslc-clearfix">
 								<div class="dslca-module-edit-options-tabs"></div>
+								<?php
+								/*
+								<!-- Add clear styling button -->
+								<span class="dslca-clear-styling-button">Clear Styling</span>
+								*/
+								?>
+
 								<div class="dslca-module-edit-options-inner"></div>
 							</div>
 							<?php do_action( 'dslc_options_append' ); ?>

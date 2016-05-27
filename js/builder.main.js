@@ -2,17 +2,119 @@
  * Table Of Contents
  *
  * 1) = UI - GENERAL =
+ *
+ * - dslc_hide_composer ( Hides the composer elements )
+ * - dslc_show_composer ( Shows the composer elements )
+ * - dslc_show_publish_button ( Shows the publish button )
+ * - dslc_show_section ( Show a specific section )
+ * - dslc_generate_filters ( Generate origin filters )
+ * - dslc_filter_origin ( Origin filtering for templates/modules listing )
+ * - dslc_drag_and_drop ( Initiate drag and drop functionality )
+ *
+ *
  * 2) = UI - SCROLLER =
+ *
+ * - dslc_scroller_init ( Initiate )
+ * - dslc_scroller_go_to ( Scroll To Specific Item )
+ * - dslc_scroller_prev ( Scroll Back )
+ * - dslc_scroller_next ( Scroll Forward )
+ *
+ *
  * 3) = UI - ANIMATIONS =
+ *
+ * - dslc_ui_animations ( Animations for the UI )
+ *
+ *
  * 4) = UI - MODAL =
+ * Note: Used for the templates save/export/import and icons
+ *
+ * - dslc_show_modal ( Show Modal )
+ * - dslc_hide_modal ( Hide Modal )
+ *
+ *
  * 5) = UI - PROMPT MODAL =
+ *
+ * - dslc_js_confirm
+ * - dslc_js_confirm_close
+ *
+ *
  * 6) = ROWS/SECTIONS =
+ *
+ * - dslc_row_add ( Add New )
+ * - dslc_row_delete ( Delete )
+ * - dslc_row_edit ( Edit )
+ * - dslc_row_edit_colorpicker_init ( Edit - Initiate Colorpicker )
+ * - dslc_row_edit_slider_init ( Edit - Initiate Slider )
+ * - dslc_row_edit_scrollbar_init ( Edit - Initiate Scrollbar )
+ * - dslc_row_edit_cancel ( Edit - Cancel Changes )
+ * - dslc_row_edit_confirm ( Edit - Confirm Changes )
+ * - dslc_row_copy ( Copy )
+ * - dslc_row_import ( Import )
+ *
+ *
  * 7) = AREAS ( MODULE AREAS ) =
+ *
+ * - dslc_modules_area_add ( Adds a new modules area )
+ * - dslc_modules_area_delete ( Deletes modules area )
+ * - dslc_modules_area_width_set ( Sets specific width to the modules area )
+ * - dslc_copy_modules_area ( Copies modules area )
+ *
+ *
  * 8) = MODULES =
+ *
+ * - dslc_module_delete ( Deletes a module )
+ * - dslc_module_copy ( Copies a module )
+ * - dslc_module_width_set ( Sets a width to module )
+ * - dslc_module_options_show ( Show module options )
+ * - dslc_module_options_scrollbar ( Scrollbar for options )
+ * - dslc_module_options_section_filter ( Filter options section )
+ * - dslc_module_options_tab_filter ( Filter options tab )
+ * - dslc_module_options_hideshow_tabs ( Hide show tabs based on option choices )
+ * - dslc_module_options_confirm_changes ( Confirm changes )
+ * - dslc_module_options_cancel_changes ( Cancel changes )
+ * - dslc_module_options_tooltip ( Helper tooltips for options )
+ * - dslc_module_options_font ( Actions for font option type )
+ * - dslc_module_options_icon ( Actions for icon font option type )
+ * - dslc_module_options_icon_returnid (Fill icon option type with selected icon ID/name)
+ * - dslc_module_options_text_align ( Actions for text align option type )
+ * - dslc_module_options_checkbox ( Actions for checkbox option type )
+ * - dslc_module_options_box_shadow ( Actions for box shadow option type )
+ * - dslc_modules_options_box_shadow_color ( Initiate colorpicker for box shadow)
+ * - dslc_module_options_text_shadow ( Actions for text shadow option type )
+ * - dslc_modules_options_text_shadow_color ( Initiate colorpicker for text shadow)
+ * - dslc_module_options_color ( Actions for color option type )
+ * - dslc_module_output_default ( Get module output with default settings )
+ * - dslc_module_output_altered ( Get module output when settings altered )
+ *
+ *
  * 9) = TEMPLATES =
+ *
+ * - dslc_load_template ( Load Template )
+ * - dslc_import_template ( Import Template )
+ * - dslc_save_template ( Save TEmplate )
+ * - dslc_delete_template ( Delete Template )
+ *
+ *
  * 10) = CODE GENERATION =
+ *
+ * - dslc_save_composer ( Save the Page Changes )
+ * - dslc_save_draft_composer ( Save the changes as draft, not publish )
+ * - dslc_generate_code ( Generates Page's LC data )
+ * - dslc_generate_section_code ( Generate LC data for a specific row/section )
+ *
+ *
  * 11) = MODULE PRESETS =
+ *
+ * - dslc_update_preset ( Update Styling Preset )
+ *
+ *
  * 12) = OTHER =
+ *
+ * - dslc_dm_get_defaults ( Get Alter Module Defaults Code )
+ * - dslca_gen_content_for_search ( Generate Readable Content For Search )
+ * - dslca_draggable_calc_center ( Recalculate drag and drop centering )
+ * - dslc_editable_content_gen_code ( Generate code of editable content )
+ *
  */
 
 "use strict";

@@ -1326,8 +1326,7 @@ function dslc_get_control_value ( control_id ) {
 */
 
 	value = control_storage.val();
-	console.info( 'value: ' );
-	console.info( value );
+
 	return value;
 }
 
@@ -1336,52 +1335,68 @@ function dslc_toogle_control ( control_id ) {
 
 	if ( control_id === undefined) control_id = false;
 
-	var dslcControl             = jQuery('.dslca-module-edit-option-' + control_id );
-	var dslcControlStorage      = dslcControl.find('.dslca-module-edit-field');
-	var dslcAffectOnChangeEl    = dslcControlStorage.data('affect-on-change-el');
-	var dslcAffectOnChangeRule  = dslcControlStorage.data('affect-on-change-rule').replace(/ /g,'');
-	var dslcAffectOnChangeRules = dslcAffectOnChangeRule.split( ',' );
+	var control        = jQuery('.dslca-module-edit-option-' + control_id );
+	var control_storage = control.find('.dslca-module-edit-field');
 
 	// Get the element we are editing
-	var dslcModule = jQuery('.dslca-module-being-edited');
+	var module = jQuery('.dslca-module-being-edited');
 
 	// Get the element id
-	var dslcModuleID = dslcModule[0].id;
+	var module_id = module[0].id;
 
-	var dslcControlValue;
-	var dslcControlDataExt = dslcControlStorage.data('ext');
+	var affect_on_change_el    = control_storage.data('affect-on-change-el');
+	var affect_on_change_elmts = affect_on_change_el.split( ',' );
 
-	dslcControl.toggleClass('dslca-option-off');
+	affect_on_change_el = '';
 
-	if ( dslcControl.hasClass('dslca-option-off') ) {
-		// Disable
+	// Loop through elements (useful when there are multiple elements)
+	for ( var i = 0; i < affect_on_change_elmts.length; i++ ) {
 
-		dslcControlValue = dslc_get_control_value(control_id);
-		// Temporary backup the current value as data attribute
-		dslcControlStorage.data( 'val-bckp', dslcControlValue );
-		// dslcControlValue = dslc_combine_value_and_extension( dslcControlValue, dslcControlDataExt);
-
-		// Loop through rules (useful when there are multiple rules)
-		for ( var i = 0; i < dslcAffectOnChangeRules.length; i++ ) {
-			// remove css rule in element inline style
-			jQuery( dslcAffectOnChangeEl ,'.dslca-module-being-edited' ).css( dslcAffectOnChangeRules[i] , '' );
-			// remove css rule in css block
-			disable_css_rule ( '#' + dslcModuleID + ' ' + dslcAffectOnChangeEl, dslcAffectOnChangeRules[i], dslcModuleID);
+		if ( i > 0 ) {
+			affect_on_change_el += ', ';
 		}
 
-		dslcControlStorage.val('').trigger('change');
+		affect_on_change_el += '#' + module_id + ' ' + affect_on_change_elmts[i];
+	}
+
+	var affect_on_change_rule  = control_storage.data('affect-on-change-rule').replace(/ /g,'');
+	var affect_on_change_rules = affect_on_change_rule.split( ',' );
+
+	var control_value;
+	var control_data_ext = control_storage.data('ext');
+
+	control.toggleClass('dslca-option-off');
+
+	if ( control.hasClass('dslca-option-off')) {
+		// Disable
+
+		control_value = dslc_get_control_value(control_id);
+		// Temporary backup the current value as data attribute
+		control_storage.data( 'val-bckp', control_value );
+		// control_value = dslc_combine_value_and_extension( control_value, control_data_ext);
+
+		// Loop through rules (useful when there are multiple rules)
+		for ( var i = 0; i < affect_on_change_rules.length; i++ ) {
+			// remove css rule in element inline style
+			jQuery( affect_on_change_el ,'.dslca-module-being-edited' ).css( affect_on_change_rules[i] , '' );
+			// remove css rule in css block
+			disable_css_rule ( affect_on_change_el, affect_on_change_rules[i], module_id);
+			// PROBLEM do not work with multiply rules ex.: .dslc-text-module-content,.dslc-text-module-content p
+		}
+
+		control_storage.val('').trigger('change');
 
 	} else {
 		// Enable
 
 		// Restore value of the data backup attribute
-		dslcControlStorage.val( dslcControlStorage.data('val-bckp') ).trigger('change');
-		dslcControlValue = dslc_get_control_value(control_id);
-		dslcControlValue = dslc_combine_value_and_extension( dslcControlValue, dslcControlDataExt);
+		control_storage.val( control_storage.data('val-bckp') ).trigger('change');
+		control_value = dslc_get_control_value(control_id);
+		control_value = dslc_combine_value_and_extension( control_value, control_data_ext);
 
 		// Loop through rules (useful when there are multiple rules)
-		for ( var i = 0; i < dslcAffectOnChangeRules.length; i++ ) {
-			jQuery( dslcAffectOnChangeEl ,'.dslca-module-being-edited' ).css( dslcAffectOnChangeRules[i] , dslcControlValue );
+		for ( var i = 0; i < affect_on_change_rules.length; i++ ) {
+			jQuery( affect_on_change_el ,'.dslca-module-being-edited' ).css( affect_on_change_rules[i] , control_value );
 		}
 	}
 }
@@ -1415,13 +1430,31 @@ jQuery(document).ready(function($){
 
 	});
 
+/* Reset all styling – not ready
+
+	$(document).on( 'click', '.dslca-clear-styling-button', function(e){
+		e.preventDefault();
+		console.info( 'clicked to clear styling' );
+
+
+		$('.dslca-option-with-toggle').each(function(e){
+			// var control_id = $(this).find('.dslca-module-edit-field').data('id');
+			console.info( $(this).find('.dslca-module-edit-field').data('id') );
+			$(this).find('.dslca-module-edit-field').val('').trigger('change');
+			console.info( $(this).find('.dslca-module-edit-field').val() );
+		});
+
+		dslc_module_output_altered(); // call module regeneration
+
+	});
+*/
 });
 
 
 // Very Slow do not use for live editing
 // Only use when you need to disable some of the CSS properties.
 
-function disable_css_rule(selector,element, moduleID) {
+function disable_css_rule(selector, element, moduleID) {
 	var cssRules;
 
 
