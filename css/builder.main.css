@@ -1149,6 +1149,23 @@ body {
 	border-color: transparent;
 }
 
+
+.dslc-control-toggle {
+	position: absolute; right: 0px;
+}
+
+.dslca-option-off {
+	opacity: .5;
+}
+
+.dslc-control-toggle:before {
+   content: "\f205";
+}
+
+.dslca-option-off .dslc-control-toggle:before {
+   content: "\f204";
+}
+
 	.windows.mozilla .dslc-module-front {
 		outline: 0;
 	}

@@ -431,10 +431,14 @@ function dslc_ajax_display_module_options( $atts ) {
 			if ( isset( $module_option['affect_on_change_el'] ) && isset( $module_option['affect_on_change_rule'] ) )
 				$affect_on_change_append = 'data-affect-on-change-el="' . $module_option['affect_on_change_el'] . '" data-affect-on-change-rule="' . $module_option['affect_on_change_rule'] . '"';
 
+			$control_state = '';
+			if ( '' === $curr_value  ) {
+				$control_state = 'dslca-option-off';
+			}
 
 			?>
 
-				<div class="dslca-module-edit-option dslca-module-edit-option-<?php echo $module_option['type']; ?> dslca-module-edit-option-<?php echo $module_option['id']; ?> <?php if ( ! $visibility ) echo 'dslca-module-edit-option-hidden'; ?>" data-id="<?php echo $module_option['id']; ?>" data-refresh-on-change="<?php echo $refresh_on_change; ?>" data-section="<?php echo $section; ?>" data-tab="<?php echo $tab_ID; ?>">
+				<div class="dslca-module-edit-option dslca-module-edit-option-<?php echo $module_option['type']; ?> dslca-module-edit-option-<?php echo $module_option['id']; ?> <?php if ( ! $visibility ) echo 'dslca-module-edit-option-hidden'; ?> <?php echo $control_state; ?>" data-id="<?php echo $module_option['id']; ?>" data-refresh-on-change="<?php echo $refresh_on_change; ?>" data-section="<?php echo $section; ?>" data-tab="<?php echo $tab_ID; ?>">
 
 					<?php if ( isset( $module_option['help'] ) ) : ?>
 						<div class="dslca-module-edit-field-ttip-content"><?php echo $module_option['help']; ?></div>
@@ -442,6 +446,7 @@ function dslc_ajax_display_module_options( $atts ) {
 
 					<span class="dslca-module-edit-label">
 						<?php if ( isset ( $module_option['label'] ) ) { echo $module_option['label']; } ?>
+						<?php echo'<span class="dslc-control-toggle dslc-icon dslc-icon-"></span>'; ?>
 						<?php if ( $module_option['type'] == 'icon' ): ?>
 							<span class="dslca-module-edit-field-icon-ttip-hook"><span class="dslca-icon dslc-icon-info"></span></span>
 							<span class="dslca-module-edit-field-icon-switch-set"><span class="dslca-module-edit-field-icon-curr-set"><?php echo dslc_icons_current_set( $curr_value ); ?></span><span class="dslca-icon dslc-icon-cog"></span></span>
@@ -537,7 +542,7 @@ function dslc_ajax_display_module_options( $atts ) {
 
 						?>
 
-						<?php if ( $numeric_option_type == 'slider' ) : ?>
+						<?php if ( 'slider' === $numeric_option_type  ) : ?>
 
 							<div class="dslca-module-edit-field-slider"></div>
 							<span class="dslca-module-edit-field-slider-tooltip"><?php echo $curr_value; ?></span>
@@ -546,7 +551,7 @@ function dslc_ajax_display_module_options( $atts ) {
 						<?php else : ?>
 
 							<div class="dslca-module-edit-field-numeric-wrap">
-								<input type="text" class="dslca-module-edit-field dslca-module-edit-field-numeric" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" data-starting-val="<?php echo $curr_value; ?>" data-ext="<?php echo $ext; ?>" <?php echo $affect_on_change_append ?> />
+								<input type="text" class="dslca-module-edit-field dslca-module-edit-field-numeric" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" data-starting-val="<?php echo $curr_value; ?>" data-ext="<?php echo $ext; ?>" <?php echo $affect_on_change_append; ?> />
 								<span class="dslca-module-edit-field-numeric-ext"><?php echo $module_option['ext']; ?></span>
 							</div>
 

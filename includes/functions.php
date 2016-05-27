@@ -281,27 +281,39 @@ function dslc_generate_custom_css( $options_arr, $settings, $restart = false ) {
 			if ( $option_arr['type'] == 'checkbox' && $option_arr['refresh_on_change'] == false ) {
 
 				$checkbox_val = '';
-				$checkbox_arr = explode( ' ', trim( $settings[$option_arr['id']] ) );
 
-				if ( in_array( 'top', $checkbox_arr ) )
-					$checkbox_val .= 'solid ';
-				else
-					$checkbox_val .= 'none ';
+				if ( '' == $settings[$option_arr['id']] ) {
 
-				if ( in_array( 'right', $checkbox_arr ) )
-					$checkbox_val .= 'solid ';
-				else
-					$checkbox_val .= 'none ';
+					$checkbox_val = '';
 
-				if ( in_array( 'bottom', $checkbox_arr ) )
-					$checkbox_val .= 'solid ';
-				else
-					$checkbox_val .= 'none ';
+				} else {
 
-				if ( in_array( 'left', $checkbox_arr ) )
-					$checkbox_val .= 'solid ';
-				else
-					$checkbox_val .= 'none ';
+					$checkbox_arr = explode( ' ', trim( $settings[$option_arr['id']] ) );
+
+					if ( in_array( 'top', $checkbox_arr ) )
+						$checkbox_val .= 'solid ';
+					else
+						$checkbox_val .= 'none ';
+
+					if ( in_array( 'right', $checkbox_arr ) )
+						$checkbox_val .= 'solid ';
+					else
+						$checkbox_val .= 'none ';
+
+					if ( in_array( 'bottom', $checkbox_arr ) )
+						$checkbox_val .= 'solid ';
+					else
+						$checkbox_val .= 'none ';
+
+					if ( in_array( 'left', $checkbox_arr ) )
+						$checkbox_val .= 'solid ';
+					else
+						$checkbox_val .= 'none ';
+
+					if ( 'none none none none ' == $checkbox_val ) {
+						$checkbox_val = 'none';
+					}
+				}
 
 				$settings[$option_arr['id']] = $checkbox_val;
 
@@ -310,12 +322,15 @@ function dslc_generate_custom_css( $options_arr, $settings, $restart = false ) {
 			// Colors (transparent if empy )
 			if ( $settings[$option_arr['id']] == '' && ( $option_arr['affect_on_change_rule'] == 'background' || $option_arr['affect_on_change_rule'] == 'background-color' ) ) {
 
-				$settings[$option_arr['id']] = 'transparent';
+				// $settings[$option_arr['id']] = 'transparent';
+				$settings[$option_arr['id']] = '';
 
 			}
 
 			foreach ( $affect_rules_arr as $affect_rule ) {
-				$organized_array[$affect_el][$affect_rule] = $prepend . $settings[$option_arr['id']] . $ext . $append;
+				if ( '' != $settings[$option_arr['id']] ) {
+					$organized_array[$affect_el][$affect_rule] = $prepend . $settings[$option_arr['id']] . $ext . $append;
+				}
 			}
 
 		}

@@ -1863,7 +1863,7 @@ class DSLC_Module {
 
 			<?php if ( DS_LIVE_COMPOSER_ACTIVE && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) : ?>
 
-				<style><?php
+				<style type="text/css" id="css-for-dslc-module-<?php echo $options['module_instance_id']; ?>"><?php
 
 					$options_arr = $this->options();
 

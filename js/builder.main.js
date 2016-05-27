@@ -1543,10 +1543,13 @@ var dslcDebug = false;
 					dslcField = jQuery(this);
 					dslcFieldID = dslcField.data('id');
 
-					if ( color == null )
-						dslcVal = 'transparent';
-					else
+					if ( color == null ) {
+						dslcVal = '';
+						// dslcVal = 'transparent';
+					}
+					else {
 						dslcVal = color.toRgbString();
+					}
 
 					dslcRule = dslcField.data('css-rule');
 					dslcEl = jQuery('.dslca-modules-section-being-edited');
@@ -1568,10 +1571,12 @@ var dslcDebug = false;
 					dslcField = jQuery(this);
 					dslcFieldID = dslcField.data('id');
 
-					if ( color == null )
-						dslcVal = 'transparent';
-					else
+					if ( color == null ) {
+						dslcVal = '';
+						// dslcVal = 'transparent';
+					} else {
 						dslcVal = color.toRgbString();
+					}
 
 					// Update pallete local storage
 					if ( localStorage['dslcColorpickerPalleteStorage'] == undefined ) {
@@ -3773,10 +3778,12 @@ var dslcDebug = false;
 					dslcColorField = jQuery(this);
 
 					// The new color
-					if ( color == null )
-						dslcColorFieldVal = 'transparent';
-					else
+					if ( color == null ) {
+						dslcColorFieldVal = '';
+						// dslcColorFieldVal = 'transparent';
+					} else {
 						dslcColorFieldVal = color.toRgbString().replace(/ /g,'');
+					}
 
 					// Change current value of option
 					dslcColorField.val( dslcColorFieldVal ).trigger('change');
@@ -3788,10 +3795,12 @@ var dslcDebug = false;
 					dslcColorField = jQuery(this);
 
 					// The new color
-					if ( color == null )
-						dslcColorFieldVal = 'transparent';
-					else
+					if ( color == null ) {
+						dslcColorFieldVal = '';
+						// dslcColorFieldVal = 'transparent';
+					} else {
 						dslcColorFieldVal = color.toRgbString().replace(/ /g,'');
+					}
 
 					// Change current value of option
 					dslcColorField.val( dslcColorFieldVal ).trigger('change');
@@ -3877,10 +3886,12 @@ var dslcDebug = false;
 					dslcColorField = jQuery(this);
 
 					// The new color
-					if ( color == null )
-						dslcColorFieldVal = 'transparent';
-					else
+					if ( color == null ) {
+						dslcColorFieldVal = '';
+						// dslcColorFieldVal = 'transparent';
+					} else {
 						dslcColorFieldVal = color.toRgbString().replace(/ /g,'');
+					}
 
 					// Change current value of option
 					dslcColorField.val( dslcColorFieldVal ).trigger('change');
@@ -3892,10 +3903,12 @@ var dslcDebug = false;
 					dslcColorField = jQuery(this);
 
 					// The new color
-					if ( color == null )
-						dslcColorFieldVal = 'transparent';
-					else
+					if ( color == null ) {
+						dslcColorFieldVal = '';
+						// dslcColorFieldVal = 'transparent';
+					} else {
 						dslcColorFieldVal = color.toRgbString().replace(/ /g,'');
+					}
 
 					// Change current value of option
 					dslcColorField.val( dslcColorFieldVal ).trigger('change');
@@ -3974,10 +3987,12 @@ var dslcDebug = false;
 					dslcColorField = jQuery(this);
 
 					// The new color
-					if ( color == null )
-						dslcColorFieldVal = 'transparent';
-					else
+					if ( color == null ) {
+						dslcColorFieldVal = '';
+						// dslcColorFieldVal = 'transparent';
+					} else {
 						dslcColorFieldVal = color.toRgbString();
+					}
 
 					// Change current value of option
 					dslcColorField.val( dslcColorFieldVal );
@@ -4002,10 +4017,12 @@ var dslcDebug = false;
 					dslcColorField = jQuery(this);
 
 					// The new color
-					if ( color == null )
-						dslcColorFieldVal = 'transparent';
-					else
+					if ( color == null ) {
+						dslcColorFieldVal = '';
+						// dslcColorFieldVal = 'transparent';
+					} else {
 						dslcColorFieldVal = color.toRgbString();
+					}
 
 					// Change current value of option
 					dslcColorField.val( dslcColorFieldVal );
@@ -4092,13 +4109,23 @@ var dslcDebug = false;
 					dslcAffectOnChangeRule = dslcSliderInput.data('affect-on-change-rule').replace(/ /g,'');
 					dslcAffectOnChangeRules = dslcAffectOnChangeRule.split( ',' );
 
+					// Get the element we are editing
+					dslcModule = jQuery('.dslca-module-being-edited');
+
+					// Get the element id
+					var dslcModuleID = dslcModule[0].id;
+
+//vova
 					// Loop through rules (useful when there are multiple rules)
 					for ( var i = 0; i < dslcAffectOnChangeRules.length; i++ ) {
+						// disable / enable rules this way (slow)
+						// changecss ( '#' + dslcModuleID + ' ' + dslcAffectOnChangeEl, dslcAffectOnChangeRules[i], dslcSliderVal, dslcModuleID);
+						// update rules this way (fast)
 						jQuery( dslcAffectOnChangeEl ,'.dslca-module-being-edited' ).css( dslcAffectOnChangeRules[i] , dslcSliderVal );
 					}
 
 					// Update option
-					dslcModule = jQuery('.dslca-module-being-edited');
+					// dslcModule = jQuery('.dslca-module-being-edited');
 					dslcOptionID = dslcSliderInput.data('id');
 					jQuery('.dslca-module-option-front[data-id="' + dslcOptionID + '"]', dslcModule).val( ui.value );
 
@@ -5959,7 +5986,7 @@ var dslcDebug = false;
 					jQuery('body').removeClass('dslca-new-preset-added');
 				});
 
-			} else {
+			} else { // Do not refresh on change
 
 				/**
 				 * Live Preview
@@ -6045,7 +6072,7 @@ var dslcDebug = false;
 						dslcAffectOnChangeVal = 'url("' + dslcAffectOnChangeVal + '")';
 					}
 
-					if ( dslcAffectOnChangeVal.length < 1 && ( dslcAffectOnChangeRule == 'background-color' || dslcAffectOnChangeRule == 'background' ) ) {
+					if ( ( null !== dslcAffectOnChangeVal && dslcAffectOnChangeVal.length < 1 ) && ( dslcAffectOnChangeRule == 'background-color' || dslcAffectOnChangeRule == 'background' ) ) {
 						dslcAffectOnChangeVal = 'transparent';
 					}
 
