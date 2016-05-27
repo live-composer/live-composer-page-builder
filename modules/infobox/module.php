@@ -2544,7 +2544,9 @@ class DSLC_Info_Box extends DSLC_Module {
 									<?php if ( ! $image_alt_link_url ) : ?>
 										<img src="<?php echo esc_url( $image_alt ); ?>">
 									<?php else : ?>
-										<a href="<?php echo esc_url( $image_alt_link_url ); ?>" <?php if ( $options['link_nofollow'] ) echo 'rel="nofollow"'; ?>><img src="<?php echo esc_url( $image_alt ); ?>"></a>
+										<a href="<?php echo esc_url( $image_alt_link_url ); ?>" <?php if ( $options['link_nofollow'] ) echo 'rel="nofollow"'; ?>>
+											<img src="<?php echo esc_url( $image_alt ); ?>">
+										</a>
 									<?php endif; ?>
 								</div><!-- .dslc-info-box-image-alt-inner -->
 							</div><!-- .dslc-info-box-image-alt -->
@@ -2555,10 +2557,16 @@ class DSLC_Info_Box extends DSLC_Module {
 							<?php if ( in_array( 'title', $elements ) ) : ?>
 								<div class="dslc-info-box-title">
 									<?php if ( $dslc_is_admin ) : ?>
-										<h4 class="dslca-editable-content" data-id="title" data-type="simple" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?>><?php echo stripslashes( $options['title'] ); ?></h4>
+										<h4 class="dslca-editable-content" data-id="title" data-type="simple" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?>>
+											<?php echo stripslashes( $options['title'] ); ?>
+										</h4>
 									<?php else : ?>
 										<?php if ( $options['title_link'] != '' ) : ?>
-											<h4><a href="<?php echo $options['title_link']; ?>" target="<?php echo $options['title_link_target']; ?>" <?php if ( $options['link_nofollow'] ) echo 'rel="nofollow"'; ?>><?php echo stripslashes( $options['title'] ); ?></a></h4>
+											<h4>
+												<a href="<?php echo $options['title_link']; ?>" target="<?php echo $options['title_link_target']; ?>" <?php if ( $options['link_nofollow'] ) echo 'rel="nofollow"'; ?>>
+													<?php echo stripslashes( $options['title'] ); ?>
+												</a>
+											</h4>
 										<?php else : ?>
 											<h4><?php echo stripslashes( $options['title'] ); ?></h4>
 										<?php endif; ?>
@@ -2569,10 +2577,14 @@ class DSLC_Info_Box extends DSLC_Module {
 							<?php if ( in_array( 'content', $elements ) ) : ?>
 								<div class="dslc-info-box-content">
 									<?php if ( $dslc_is_admin ) : ?>
-										<div class="dslca-editable-content" data-id="content">
+										<div class="dslca-editable-content" data-type='simple' contenteditable data-id="content">
 											<?php echo stripslashes( $options['content'] ); ?>
 										</div><!-- .dslca-editable-content -->
-										<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook"><?php _e( 'Edit Content', 'live-composer-page-builder' ); ?></span></div>
+										<div class="dslca-wysiwyg-actions-edit">
+											<span class="dslca-wysiwyg-actions-edit-hook">
+												<?php _e( 'Edit Content', 'live-composer-page-builder' ); ?>
+											</span>
+										</div>
 									<?php else : ?>
 										<?php echo do_shortcode( stripslashes( $options['content'] ) ); ?>
 									<?php endif; ?>
@@ -2587,7 +2599,9 @@ class DSLC_Info_Box extends DSLC_Module {
 												<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 											<?php endif; ?>
 											<?php if ( $dslc_is_admin ) : ?>
-												<span class="dslca-editable-content" data-id="button_title" data-type="simple" contenteditable><?php echo $options['button_title']; ?></span>
+												<span class="dslca-editable-content" data-id="button_title" data-type="simple" contenteditable>
+													<?php echo $options['button_title']; ?>
+												</span>
 											<?php else : echo $options['button_title']; endif; ?>
 										</a>
 									<?php endif; ?>
@@ -2597,7 +2611,9 @@ class DSLC_Info_Box extends DSLC_Module {
 												<span class="dslc-icon dslc-icon-<?php echo $options['button_2_icon_id']; ?>"></span>
 											<?php endif; ?>
 											<?php if ( $dslc_is_admin ) : ?>
-												<span class="dslca-editable-content" data-id="button_2_title" data-type="simple" contenteditable><?php echo $options['button_2_title']; ?></span>
+												<span class="dslca-editable-content" data-id="button_2_title" data-type="simple" contenteditable>
+													<?php echo $options['button_2_title']; ?>
+												</span>
 											<?php else : echo $options['button_2_title']; endif; ?>
 										</a>
 									<?php endif; ?>
