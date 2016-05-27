@@ -1,5 +1,11 @@
 <?php
+/**
+ * Gallery Slider module class
+ */
 
+/**
+ * Class DSLC_TP_Gallery_Slider
+ */
 class DSLC_TP_Gallery_Slider extends DSLC_Module {
 
 	var $module_id;
@@ -7,19 +13,27 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 	var $module_icon;
 	var $module_category;
 
-	function __construct() {
+	/**
+	 * @inherited
+	 */
+	function __construct( $settings = [], $atts = [] ) {
 
-		$this->module_id = 'DSLC_TP_Gallery_Slider';
+		$this->module_ver = 2;
+		$this->module_id = __CLASS__;
 		$this->module_title = __( 'Gallery Slider', 'live-composer-page-builder' );
 		$this->module_icon = 'picture';
 		$this->module_category = 'single';
 
+		parent::__construct( $settings, $atts );
 	}
-	
-	function options() {	
+
+	/**
+	 * @inherited
+	 */
+	function options() {
 
 		$dslc_options = array(
-			
+
 			array(
 				'label' => __( 'Show On', 'live-composer-page-builder' ),
 				'id' => 'css_show_on',
@@ -850,108 +864,60 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 
 	}
 
-	function output( $options ) {
+	/**
+	 * @inherited
+	 */
+	function afterRegister()
+	{
+		add_action( 'wp_enqueue_scripts', function(){
 
-		global $dslc_active;
-				
-		$show_placeholder = true;
-		$show_real = false;
+			global $LC_Registry;
 
-		if ( is_singular() && get_post_type() !== 'dslc_templates' ) {
+			$path = explode( '/', __DIR__ );
+			$path = array_pop( $path );
 
-			$gallery_images = get_post_meta( get_the_ID(), 'dslc_gallery_images', true );
-			if ( $gallery_images ) {
-				$show_real = true;
-				$gallery_images = explode( ' ', trim( $gallery_images ) );
+			if ( $LC_Registry->get( 'dslc_active' ) == true ) {
+
+				wp_enqueue_script( 'js-gallery-slider-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/editor-script.js', array( 'jquery' ) );
 			}
 
-			$show_placeholder = false;
+			//wp_enqueue_script( 'js-gallery-slider-production', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/script.js', array( 'jquery' ) );
+		});
+	}
+
+	/**
+	 * Returns Slider HTML.
+	 */
+	function get_sliders() {
+
+		ob_start();
+
+		if ( get_post_type() == 'dslc_gallery' ) {
+
+			$options = $this->getPropsValues();
+
+			
 
 		}
 
-		$this->module_start( $options );
+		return ob_get_clean();
+	}
 
-		/* Module output starts here */
+	/**
+	 * @inherited
+	 */
+	function output( $options = [] ) {
 
-			if ( $show_placeholder || $show_real ) {
+		$this->module_start();
 
-				$img_class = '';
-				if ( $options['lightbox_state'] == 'enabled' ) {
-					$img_class = 'dslc-trigger-lightbox-gallery';
-				}
-			
-				?>
-
-					<div class="dslc-tp-gallery-slider">
-
-						<div class="dslc-tp-gallery-slider-main">
-
-							<div class="dslc-loader"></div>
-
-							<div class="dslc-slider"  data-animation="<?php echo $options['animation']; ?>" data-animation-speed="<?php echo $options['animation_speed']; ?>" data-autoplay="<?php echo $options['autoplay']; ?>" data-flexible-height="<?php echo $options['flexible_height']; ?>">
-
-								<?php 
-
-									if ( $show_placeholder ) {
-
-										for ( $i=0; $i < 15; $i++ ) { 
-											?><div class="dslc-slider-item"><img src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/placeholders/big-placeholder.png" /></div><?php			
-										}
-
-									} else {
-
-										foreach ( $gallery_images as $gallery_image ) {
-
-											$gallery_image_src = wp_get_attachment_image_src( $gallery_image, 'full' );
-											$gallery_image_src = $gallery_image_src[0];
-										
-											$thumb_alt = get_post_meta( $gallery_image, '_wp_attachment_image_alt', true );
-											if ( ! $thumb_alt ) $thumb_alt = '';
-
-											?><div class="dslc-slider-item"><img class="<?php echo $img_class; ?>" src="<?php echo $gallery_image_src; ?>" alt="<?php echo $thumb_alt; ?>" /></div><?php
-
-										}
-
-									}
-
-								?>
-
-							</div><!-- .dslc-slider -->
-
-							<?php if ( ! $show_placeholder && $options['lightbox_state'] == 'enabled' ) : ?>
-
-								<div class="dslc-lightbox-gallery">
-									
-									<?php foreach ( $gallery_images as $gallery_image ) : ?>
-
-										<?php
-											$gallery_image_src = wp_get_attachment_image_src( $gallery_image, 'full' );
-											$gallery_image_src = $gallery_image_src[0];
-
-											$gallery_image_title = get_post_meta( $gallery_image, '_wp_attachment_image_alt', true );
-											if ( ! $gallery_image_title ) $gallery_image_title = '';
-										?>
-
-										<a href="<?php echo $gallery_image_src; ?>" title="<?php echo esc_attr( $gallery_image_title ); ?>"></a>
-
-									<?php endforeach; ?>
-
-								</div><!-- .dslc-gallery-lightbox -->
-
-							<?php endif; ?>
-
-						</div><!-- .dslc-tp-gallery-slider-main -->
-
-					</div><!-- .dslc-tp-gallery-slider -->
-
-				<?php
-
-			}
-
+		/* Module output stars here */
+		echo $this->renderModule();
 		/* Module output ends here */
 
-		$this->module_end( $options );
-
+		$this->module_end();
 	}
 
 }
+
+/// Register module
+( new DSLC_TP_Gallery_Slider )->register();

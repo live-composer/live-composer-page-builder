@@ -1,11 +1,5 @@
 <?php
-/**
- * Project Slider module class
- */
 
-/**
- * Class DSLC_TP_Project_Slider
- */
 class DSLC_TP_Project_Slider extends DSLC_Module {
 
 	var $module_id;
@@ -13,23 +7,15 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 	var $module_icon;
 	var $module_category;
 
-	/**
-	 * @inherited
-	 */
-	function __construct( $settings = [], $atts = [] ) {
+	function __construct() {
 
-		$this->module_ver = 2;
-		$this->module_id = __CLASS__;
+		$this->module_id = 'DSLC_TP_Project_Slider';
 		$this->module_title = __( 'Project Images Slider', 'live-composer-page-builder' );
 		$this->module_icon = 'picture';
 		$this->module_category = 'single';
 
-		parent::__construct( $settings, $atts );
 	}
 
-	/**
-	 * @inherited
-	 */
 	function options() {
 
 		$dslc_options = array(
@@ -864,108 +850,105 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 
 	}
 
-	/**
-	 * @inherited
-	 */
-	function afterRegister()
-	{
-		add_action( 'wp_enqueue_scripts', function(){
+	function output( $options ) {
 
-			global $LC_Registry;
+		global $dslc_active;
 
-			$path = explode( '/', __DIR__ );
-			$path = array_pop( $path );
+		$show_placeholder = true;
+		$show_real = false;
 
-			if ( $LC_Registry->get( 'dslc_active' ) == true ) {
-
-				wp_enqueue_script( 'js-project-slider-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/editor-script.js', array( 'jquery' ) );
-			}
-
-			//wp_enqueue_script( 'js-project-slider-production', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/script.js', array( 'jquery' ) );
-		});
-	}
-
-	/**
-	 * Returns Slider HTML.
-	 */
-	function get_sliders() {
-
-		ob_start();
-
-		if ( get_post_type() == 'dslc_projects' ) {
-
-			$options = $this->getPropsValues();
-
-			$img_class = '';
-			if ( $options['lightbox_state'] == 'enabled' ) {
-				$img_class = 'dslc-trigger-lightbox-gallery';
-			}
+		if ( is_singular() && get_post_type() !== 'dslc_templates' ) {
 
 			$project_images = get_post_meta( get_the_ID(), 'dslc_project_images', true );
 			if ( $project_images ) {
+				$show_real = true;
 				$project_images = explode( ' ', trim( $project_images ) );
 			}
 
-			foreach ( $project_images as $project_image ) {
-
-				$project_image_src = wp_get_attachment_image_src( $project_image, 'full' );
-				$project_image_src = $project_image_src[0];
-
-				$thumb_alt = get_post_meta( $project_image, '_wp_attachment_image_alt', true );
-				if ( ! $thumb_alt ) $thumb_alt = '';
-
-				?><div class="dslc-slider-item"><img class="<?php echo $img_class; ?>" src="<?php echo $project_image_src; ?>" alt="<?php echo $thumb_alt; ?>" /></div><?php
-
-			}
+			$show_placeholder = false;
 
 		}
 
-		return ob_get_clean();
-	}
+		$this->module_start( $options );
 
-	/**
-	 * Returns Gallery lightbox.
-	 */
-	function get_gallery_lightbox() {
+		/* Module output starts here */
 
-		ob_start();
+			if ( $show_placeholder || $show_real ) {
 
-		if ( get_post_type() == 'dslc_projects' ) {
+				$img_class = '';
+				if ( $options['lightbox_state'] == 'enabled' ) {
+					$img_class = 'dslc-trigger-lightbox-gallery';
+				}
 
-			$project_images = get_post_meta( get_the_ID(), 'dslc_project_images', true );
-			if ( $project_images ) {
-				$project_images = explode( ' ', trim( $project_images ) );
+				?>
+
+					<div class="dslc-tp-project-slider">
+
+						<div class="dslc-tp-project-slider-main">
+
+							<div class="dslc-loader"></div>
+
+							<div class="dslc-slider"  data-animation="<?php echo $options['animation']; ?>" data-animation-speed="<?php echo $options['animation_speed']; ?>" data-autoplay="<?php echo $options['autoplay']; ?>" data-flexible-height="<?php echo $options['flexible_height']; ?>">
+
+								<?php
+
+									if ( $show_placeholder ) {
+
+										for ( $i=0; $i < 15; $i++ ) {
+											?><div class="dslc-slider-item"><img src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/placeholders/big-placeholder.png" /></div><?php
+										}
+
+									} else {
+
+										foreach ( $project_images as $project_image ) {
+
+											$project_image_src = wp_get_attachment_image_src( $project_image, 'full' );
+											$project_image_src = $project_image_src[0];
+
+											$thumb_alt = get_post_meta( $project_image, '_wp_attachment_image_alt', true );
+											if ( ! $thumb_alt ) $thumb_alt = '';
+
+											?><div class="dslc-slider-item"><img class="<?php echo $img_class; ?>" src="<?php echo $project_image_src; ?>" alt="<?php echo $thumb_alt; ?>" /></div><?php
+
+										}
+
+									}
+
+								?>
+
+							</div><!-- .dslc-slider -->
+
+							<?php if ( ! $show_placeholder && $options['lightbox_state'] == 'enabled' ) : ?>
+
+								<div class="dslc-lightbox-gallery">
+
+									<?php foreach ( $project_images as $project_image ) : ?>
+
+										<?php
+											$project_image_src = wp_get_attachment_image_src( $project_image, 'full' );
+											$project_image_src = $project_image_src[0];
+										?>
+
+										<a href="<?php echo $project_image_src; ?>"></a>
+
+									<?php endforeach; ?>
+
+								</div><!-- .dslc-gallery-lightbox -->
+
+							<?php endif; ?>
+
+						</div><!-- .slider -->
+
+					</div><!-- .dslc-tp-project-slider -->
+
+				<?php
+
 			}
 
-			foreach ( $project_images as $project_image ) {
-
-				$project_image_src = wp_get_attachment_image_src( $project_image, 'full' );
-				$project_image_src = $project_image_src[0];
-
-				?><a href="<?php echo $project_image_src; ?>"></a><?php
-
-			}
-
-		}
-
-		return ob_get_clean();
-	}
-
-	/**
-	 * @inherited
-	 */
-	function output( $options = [] ) {
-
-		$this->module_start();
-
-		/* Module output stars here */
-		echo $this->renderModule();
 		/* Module output ends here */
 
-		$this->module_end();
+		$this->module_end( $options );
+
 	}
 
 }
-
-/// Register module
-( new DSLC_TP_Project_Slider )->register();

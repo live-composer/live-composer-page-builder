@@ -1,35 +1,21 @@
 <?php
-/**
- * Project Slider module class
- */
 
-/**
- * Class DSLC_TP_Project_Slider
- */
-class DSLC_TP_Project_Slider extends DSLC_Module {
+class DSLC_TP_Gallery_Slider extends DSLC_Module {
 
 	var $module_id;
 	var $module_title;
 	var $module_icon;
 	var $module_category;
 
-	/**
-	 * @inherited
-	 */
-	function __construct( $settings = [], $atts = [] ) {
+	function __construct() {
 
-		$this->module_ver = 2;
-		$this->module_id = __CLASS__;
-		$this->module_title = __( 'Project Images Slider', 'live-composer-page-builder' );
+		$this->module_id = 'DSLC_TP_Gallery_Slider';
+		$this->module_title = __( 'Gallery Slider', 'live-composer-page-builder' );
 		$this->module_icon = 'picture';
 		$this->module_category = 'single';
 
-		parent::__construct( $settings, $atts );
 	}
 
-	/**
-	 * @inherited
-	 */
 	function options() {
 
 		$dslc_options = array(
@@ -138,7 +124,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '',
 				'type' => 'color',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider',
 				'affect_on_change_rule' => 'background-color',
 				'section' => 'styling',
 			),
@@ -148,7 +134,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '',
 				'type' => 'color',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider',
 				'affect_on_change_rule' => 'border-color',
 				'section' => 'styling',
 			),
@@ -158,7 +144,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider',
 				'affect_on_change_rule' => 'border-width',
 				'section' => 'styling',
 				'ext' => 'px',
@@ -187,7 +173,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 					),
 				),
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider',
 				'affect_on_change_rule' => 'border-style',
 				'section' => 'styling',
 			),
@@ -197,7 +183,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider',
 				'affect_on_change_rule' => 'border-top-left-radius,border-top-right-radius',
 				'section' => 'styling',
 				'ext' => 'px'
@@ -208,7 +194,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider',
 				'affect_on_change_rule' => 'border-bottom-left-radius,border-bottom-right-radius',
 				'section' => 'styling',
 				'ext' => 'px'
@@ -219,7 +205,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'styling',
 				'ext' => 'px',
@@ -230,7 +216,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider',
 				'affect_on_change_rule' => 'min-height',
 				'section' => 'styling',
 				'ext' => 'px',
@@ -244,7 +230,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'styling',
 				'ext' => 'px',
@@ -255,7 +241,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'styling',
 				'ext' => 'px',
@@ -271,7 +257,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '',
 				'type' => 'color',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider-main',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider-main',
 				'affect_on_change_rule' => 'background-color',
 				'section' => 'styling',
 				'tab' => __( 'slider', 'live-composer-page-builder' ),
@@ -282,7 +268,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '',
 				'type' => 'color',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider-main',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider-main',
 				'affect_on_change_rule' => 'border-color',
 				'section' => 'styling',
 				'tab' => __( 'slider', 'live-composer-page-builder' ),
@@ -293,7 +279,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider-main',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider-main',
 				'affect_on_change_rule' => 'border-width',
 				'section' => 'styling',
 				'ext' => 'px',
@@ -323,7 +309,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 					),
 				),
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider-main',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider-main',
 				'affect_on_change_rule' => 'border-style',
 				'section' => 'styling',
 				'tab' => __( 'slider', 'live-composer-page-builder' ),
@@ -334,7 +320,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider-main',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider-main',
 				'affect_on_change_rule' => 'border-top-left-radius,border-top-right-radius',
 				'section' => 'styling',
 				'ext' => 'px',
@@ -346,7 +332,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider-main',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider-main',
 				'affect_on_change_rule' => 'border-bottom-left-radius,border-bottom-right-radius',
 				'section' => 'styling',
 				'ext' => 'px',
@@ -358,7 +344,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider-main',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider-main',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'styling',
 				'ext' => 'px',
@@ -370,7 +356,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider-main',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider-main',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'styling',
 				'ext' => 'px',
@@ -387,7 +373,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '',
 				'type' => 'color',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider-main .dslc-slider-item',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider-main .dslc-slider-item',
 				'affect_on_change_rule' => 'background-color',
 				'section' => 'styling',
 				'tab' => __( 'slider - item', 'live-composer-page-builder' ),
@@ -398,7 +384,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '',
 				'type' => 'color',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider-main .dslc-slider-item',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider-main .dslc-slider-item',
 				'affect_on_change_rule' => 'border-color',
 				'section' => 'styling',
 				'tab' => __( 'slider - item', 'live-composer-page-builder' ),
@@ -409,7 +395,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider-main .dslc-slider-item',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider-main .dslc-slider-item',
 				'affect_on_change_rule' => 'border-width',
 				'section' => 'styling',
 				'ext' => 'px',
@@ -439,7 +425,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 					),
 				),
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider-main .dslc-slider-item',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider-main .dslc-slider-item',
 				'affect_on_change_rule' => 'border-style',
 				'section' => 'styling',
 				'tab' => __( 'slider - item', 'live-composer-page-builder' ),
@@ -450,7 +436,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '5',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider-main .dslc-slider-item,.dslc-tp-project-slider-main .dslc-slider-item img',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider-main .dslc-slider-item,.dslc-tp-gallery-slider-main .dslc-slider-item img',
 				'affect_on_change_rule' => 'border-top-left-radius,border-top-right-radius',
 				'section' => 'styling',
 				'ext' => 'px',
@@ -462,7 +448,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider-main .dslc-slider-item,.dslc-tp-project-slider-main .dslc-slider-item img',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider-main .dslc-slider-item,.dslc-tp-gallery-slider-main .dslc-slider-item img',
 				'affect_on_change_rule' => 'border-bottom-left-radius,border-bottom-right-radius',
 				'section' => 'styling',
 				'ext' => 'px',
@@ -474,7 +460,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider-main .dslc-slider-item',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider-main .dslc-slider-item',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'styling',
 				'ext' => 'px',
@@ -486,7 +472,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider-main .dslc-slider-item',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider-main .dslc-slider-item',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'styling',
 				'ext' => 'px',
@@ -596,7 +582,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
 				'tab' => __( 'tablet', 'live-composer-page-builder' ),
@@ -608,7 +594,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
 				'tab' => __( 'tablet', 'live-composer-page-builder' ),
@@ -620,7 +606,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
 				'tab' => __( 'tablet', 'live-composer-page-builder' ),
@@ -632,7 +618,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider-main',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider-main',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
@@ -644,7 +630,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider-main',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider-main',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
 				'ext' => 'px',
@@ -656,7 +642,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider-main .dslc-slider-item',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider-main .dslc-slider-item',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
@@ -668,7 +654,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider-main .dslc-slider-item',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider-main .dslc-slider-item',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
 				'ext' => 'px',
@@ -739,7 +725,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
 				'tab' => __( 'phone', 'live-composer-page-builder' ),
@@ -751,7 +737,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
 				'tab' => __( 'phone', 'live-composer-page-builder' ),
@@ -763,7 +749,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
 				'tab' => __( 'phone', 'live-composer-page-builder' ),
@@ -775,7 +761,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider-main',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider-main',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
@@ -787,7 +773,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider-main',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider-main',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
 				'ext' => 'px',
@@ -799,7 +785,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider-main .dslc-slider-item',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider-main .dslc-slider-item',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
@@ -811,7 +797,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-project-slider-main .dslc-slider-item',
+				'affect_on_change_el' => '.dslc-tp-gallery-slider-main .dslc-slider-item',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
 				'ext' => 'px',
@@ -864,108 +850,108 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 
 	}
 
-	/**
-	 * @inherited
-	 */
-	function afterRegister()
-	{
-		add_action( 'wp_enqueue_scripts', function(){
+	function output( $options ) {
 
-			global $LC_Registry;
+		global $dslc_active;
 
-			$path = explode( '/', __DIR__ );
-			$path = array_pop( $path );
+		$show_placeholder = true;
+		$show_real = false;
 
-			if ( $LC_Registry->get( 'dslc_active' ) == true ) {
+		if ( is_singular() && get_post_type() !== 'dslc_templates' ) {
 
-				wp_enqueue_script( 'js-project-slider-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/editor-script.js', array( 'jquery' ) );
+			$gallery_images = get_post_meta( get_the_ID(), 'dslc_gallery_images', true );
+			if ( $gallery_images ) {
+				$show_real = true;
+				$gallery_images = explode( ' ', trim( $gallery_images ) );
 			}
 
-			//wp_enqueue_script( 'js-project-slider-production', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/script.js', array( 'jquery' ) );
-		});
-	}
-
-	/**
-	 * Returns Slider HTML.
-	 */
-	function get_sliders() {
-
-		ob_start();
-
-		if ( get_post_type() == 'dslc_projects' ) {
-
-			$options = $this->getPropsValues();
-
-			$img_class = '';
-			if ( $options['lightbox_state'] == 'enabled' ) {
-				$img_class = 'dslc-trigger-lightbox-gallery';
-			}
-
-			$project_images = get_post_meta( get_the_ID(), 'dslc_project_images', true );
-			if ( $project_images ) {
-				$project_images = explode( ' ', trim( $project_images ) );
-			}
-
-			foreach ( $project_images as $project_image ) {
-
-				$project_image_src = wp_get_attachment_image_src( $project_image, 'full' );
-				$project_image_src = $project_image_src[0];
-
-				$thumb_alt = get_post_meta( $project_image, '_wp_attachment_image_alt', true );
-				if ( ! $thumb_alt ) $thumb_alt = '';
-
-				?><div class="dslc-slider-item"><img class="<?php echo $img_class; ?>" src="<?php echo $project_image_src; ?>" alt="<?php echo $thumb_alt; ?>" /></div><?php
-
-			}
+			$show_placeholder = false;
 
 		}
 
-		return ob_get_clean();
-	}
+		$this->module_start( $options );
 
-	/**
-	 * Returns Gallery lightbox.
-	 */
-	function get_gallery_lightbox() {
+		/* Module output starts here */
 
-		ob_start();
+			if ( $show_placeholder || $show_real ) {
 
-		if ( get_post_type() == 'dslc_projects' ) {
+				$img_class = '';
+				if ( $options['lightbox_state'] == 'enabled' ) {
+					$img_class = 'dslc-trigger-lightbox-gallery';
+				}
 
-			$project_images = get_post_meta( get_the_ID(), 'dslc_project_images', true );
-			if ( $project_images ) {
-				$project_images = explode( ' ', trim( $project_images ) );
+				?>
+
+					<div class="dslc-tp-gallery-slider">
+
+						<div class="dslc-tp-gallery-slider-main">
+
+							<div class="dslc-loader"></div>
+
+							<div class="dslc-slider"  data-animation="<?php echo $options['animation']; ?>" data-animation-speed="<?php echo $options['animation_speed']; ?>" data-autoplay="<?php echo $options['autoplay']; ?>" data-flexible-height="<?php echo $options['flexible_height']; ?>">
+
+								<?php
+
+									if ( $show_placeholder ) {
+
+										for ( $i=0; $i < 15; $i++ ) {
+											?><div class="dslc-slider-item"><img src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/placeholders/big-placeholder.png" /></div><?php
+										}
+
+									} else {
+
+										foreach ( $gallery_images as $gallery_image ) {
+
+											$gallery_image_src = wp_get_attachment_image_src( $gallery_image, 'full' );
+											$gallery_image_src = $gallery_image_src[0];
+
+											$thumb_alt = get_post_meta( $gallery_image, '_wp_attachment_image_alt', true );
+											if ( ! $thumb_alt ) $thumb_alt = '';
+
+											?><div class="dslc-slider-item"><img class="<?php echo $img_class; ?>" src="<?php echo $gallery_image_src; ?>" alt="<?php echo $thumb_alt; ?>" /></div><?php
+
+										}
+
+									}
+
+								?>
+
+							</div><!-- .dslc-slider -->
+
+							<?php if ( ! $show_placeholder && $options['lightbox_state'] == 'enabled' ) : ?>
+
+								<div class="dslc-lightbox-gallery">
+
+									<?php foreach ( $gallery_images as $gallery_image ) : ?>
+
+										<?php
+											$gallery_image_src = wp_get_attachment_image_src( $gallery_image, 'full' );
+											$gallery_image_src = $gallery_image_src[0];
+
+											$gallery_image_title = get_post_meta( $gallery_image, '_wp_attachment_image_alt', true );
+											if ( ! $gallery_image_title ) $gallery_image_title = '';
+										?>
+
+										<a href="<?php echo $gallery_image_src; ?>" title="<?php echo esc_attr( $gallery_image_title ); ?>"></a>
+
+									<?php endforeach; ?>
+
+								</div><!-- .dslc-gallery-lightbox -->
+
+							<?php endif; ?>
+
+						</div><!-- .dslc-tp-gallery-slider-main -->
+
+					</div><!-- .dslc-tp-gallery-slider -->
+
+				<?php
+
 			}
 
-			foreach ( $project_images as $project_image ) {
-
-				$project_image_src = wp_get_attachment_image_src( $project_image, 'full' );
-				$project_image_src = $project_image_src[0];
-
-				?><a href="<?php echo $project_image_src; ?>"></a><?php
-
-			}
-
-		}
-
-		return ob_get_clean();
-	}
-
-	/**
-	 * @inherited
-	 */
-	function output( $options = [] ) {
-
-		$this->module_start();
-
-		/* Module output stars here */
-		echo $this->renderModule();
 		/* Module output ends here */
 
-		$this->module_end();
+		$this->module_end( $options );
+
 	}
 
 }
-
-/// Register module
-( new DSLC_TP_Project_Slider )->register();
