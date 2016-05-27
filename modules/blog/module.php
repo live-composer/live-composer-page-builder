@@ -1,5 +1,11 @@
 <?php
+/**
+ * Blog module class
+ */
 
+/**
+ * DSLC_Blog class
+ */
 class DSLC_Blog extends DSLC_Module {
 
 	var $module_id;
@@ -7,15 +13,23 @@ class DSLC_Blog extends DSLC_Module {
 	var $module_icon;
 	var $module_category;
 
-	function __construct() {
+	/**
+	 * @inherited
+	 */
+	function __construct( $settings = [], $atts = [] ) {
 
 		$this->module_id = __CLASS__;
+		$this->module_ver = 2;
 		$this->module_title = __( 'Blog', 'live-composer-page-builder' );
 		$this->module_icon = 'pencil';
 		$this->module_category = 'posts';
 
+		parent::__construct( $settings, $atts );
 	}
 
+	/**
+	 * @inherited
+	 */
 	function options() {
 
 		// Get categories
@@ -608,7 +622,7 @@ class DSLC_Blog extends DSLC_Module {
 				'affect_on_change_rule' => 'background-color',
 				'section' => 'styling',
 				'tab' => __( 'Thumbnail', 'live-composer-page-builder' ),
-			),	
+			),
 			array(
 				'label' => __( 'Border Color', 'live-composer-page-builder' ),
 				'id' => 'css_thumb_border_color',
@@ -660,7 +674,7 @@ class DSLC_Blog extends DSLC_Module {
 				'affect_on_change_rule' => 'border-style',
 				'section' => 'styling',
 				'tab' => __( 'Thumbnail', 'live-composer-page-builder' ),
-			),		
+			),
 			array(
 				'label' => __( 'Border Radius - Top', 'live-composer-page-builder' ),
 				'id' => 'css_thumb_border_radius_top',
@@ -1341,7 +1355,7 @@ class DSLC_Blog extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Meta', 'live-composer-page-builder' ),
 			),
-			
+
 			/**
 			 * Excerpt
 			 */
@@ -2610,7 +2624,7 @@ class DSLC_Blog extends DSLC_Module {
 			),
 
 		);
-	
+
 		$dslc_options = array_merge( $dslc_options, $this->shared_options('carousel_options') );
 		$dslc_options = array_merge( $dslc_options, $this->shared_options('heading_options') );
 		$dslc_options = array_merge( $dslc_options, $this->shared_options('filters_options') );
@@ -2624,158 +2638,257 @@ class DSLC_Blog extends DSLC_Module {
 
 	}
 
-	function output( $options ) {
+	/**
+	 * @inherited
+	 */
+	function afterRegister() {
+
+		add_action( 'wp_enqueue_scripts', function(){
+
+			global $LC_Registry;
+
+			$path = explode( '/', __DIR__ );
+			$path = array_pop( $path );
+
+			if ( $LC_Registry->get( 'dslc_active' ) == true ) {
+
+				wp_enqueue_script( 'js-blog-editor-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/editor-script.js', array( 'jquery' ) );
+			}
+
+			wp_enqueue_script( 'js-blog-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/script.js', array( 'jquery' ) );
+		});
+	}
+
+	/**
+	 * Blog post fetcher
+	 * @return WP_Query
+	 */
+	function get_blog_posts() {
 
 		global $dslc_active;
 
-		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
-			$dslc_is_admin = true;
-		else
-			$dslc_is_admin = false;
+		$options = $this->getPropsValues();
 
 		// Fix slashes on apostrophes
 		if ( isset( $options['button_text'] ) ) {
+
 			$options['button_text'] = stripslashes( $options['button_text'] );
 		}
 
-		$this->module_start( $options );
-
 		/* CUSTOM START */
 
-		if ( ! isset( $options['excerpt_length'] ) ) $options['excerpt_length'] = 20;
+		if ( ! isset( $options['excerpt_length'] ) ) {
+
+			$options['excerpt_length'] = 20;
+		}
 
 		/**
 		 * Query
 		 */
 
-			// Fix for pagination
-			if( is_front_page() ) { $paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1; } else { $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1; }
+		// Fix for pagination
+		if( is_front_page() ) {
 
-			// Fix for pagination from other modules affecting this one when pag disabled
-			if ( $options['pagination_type'] == 'disabled' ) $paged = 1;
+			$paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1;
+		} else {
 
-			// Fix for offset braking pagination
-			$query_offset = $options['offset'];
-			if ( $query_offset > 0 && $paged > 1 ) $query_offset = ( $paged - 1 ) * $options['amount'] + $options['offset'];
+			$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+		}
 
-			// General args
-			$args = array(
-				'paged' => $paged, 
-				'post_type' => 'post',
-				'posts_per_page' => $options['amount'],
-				'order' => $options['order'],
-				'orderby' => $options['orderby'],
+		// Fix for pagination from other modules affecting this one when pag disabled
+		if ( $options['pagination_type'] == 'disabled' ) {
+
+			$paged = 1;
+		}
+
+		// Fix for offset braking pagination
+		$query_offset = $options['offset'];
+
+		if ( $query_offset > 0 && $paged > 1 ) {
+
+			$query_offset = ( $paged - 1 ) * $options['amount'] + $options['offset'];
+		}
+
+		// General args
+		$args = array(
+			'paged' => $paged,
+			'post_type' => 'post',
+			'posts_per_page' => $options['amount'],
+			'order' => $options['order'],
+			'orderby' => $options['orderby'],
+		);
+
+		// Add offset
+		if ( $query_offset > 0 ) {
+
+			$args['offset'] = $query_offset;
+		}
+
+		if ( defined('DOING_AJAX') && DOING_AJAX ) {
+
+			$args['post_status'] = array( 'publish', 'private' );
+		}
+
+		// Category args
+		if ( isset( $options['categories'] ) && $options['categories'] != '' ) {
+
+			$cats_array = explode( ' ', trim( $options['categories'] ));
+
+			$args['tax_query'] = array(
+				array(
+					'taxonomy' => 'category',
+					'field' => 'term_id',
+					'terms' => $cats_array,
+					'operator' => $options['categories_operator']
+				)
 			);
+		}
 
-			// Add offset
-			if ( $query_offset > 0 ) {
-				$args['offset'] = $query_offset;
+		// Exlcude and Include arrays
+		$exclude = array();
+		$include = array();
+
+		// Exclude current post
+		if ( is_singular( get_post_type() ) ) {
+
+			$exclude[] = get_the_ID();
+		}
+
+		// Exclude posts ( option )
+		if ( $options['query_post_not_in'] ) {
+
+			$exclude = array_merge( $exclude, explode( ' ', $options['query_post_not_in'] ) );
+		}
+
+		// Include posts ( option )
+		if ( $options['query_post_in'] ) {
+
+			$include = array_merge( $include, explode( ' ', $options['query_post_in'] ) );
+		}
+
+		// Include query parameter
+		if ( ! empty( $include ) ) {
+
+			$args['post__in'] = $include;
+		}
+
+		// Exclude query parameter
+		if ( ! empty( $exclude ) ) {
+
+			$args['post__not_in'] = $exclude;
+		}
+
+		// Author archive page
+		if ( is_author() && $options['query_alter_author'] == 'enabled' ) {
+
+			global $authordata;
+			$args['author__in'] = array( $authordata->data->ID );
+		}
+
+		// No paging
+		if ( $options['pagination_type'] == 'disabled' ) {
+
+			$args['no_found_rows'] = true;
+		}
+
+		// Sticky Posts
+		if ( $options['sticky_posts'] == 'disabled' ) {
+
+			$args['ignore_sticky_posts'] = true;
+		}
+
+		// Do the query
+		if ( ( is_category() || is_tag() || is_tax() ) && $options['query_alter_cat'] == 'enabled' ) {
+
+			global $wp_query;
+			$dslc_query = $wp_query;
+		} elseif ( is_search() && $options['query_alter_search'] == 'enabled' ) {
+
+			global $wp_query;
+			$dslc_query = $wp_query;
+		} else {
+
+			$dslc_query = new WP_Query( $args );
+		}
+	}
+
+	/**
+	 * Render blog posts
+	 *
+	 * @param  array $atts
+	 * @param  array $content
+	 *
+	 * @return string
+	 */
+	function render_blog_posts( $atts, $content ) {
+
+		global $LC_Registry;
+
+		$out = '';
+		$dslc_query = $LC_Registry->get( 'dslc-blog-posts-query' );
+
+		if ( $dslc_query == null ) {
+
+			$dslc_query = $this->get_posts();
+			$LC_Registry->set( 'dslc-blog-posts-query', $dslc_query );
+		}
+
+		if ( $dslc_query->have_posts() ) {
+
+			$LC_Registry->set( 'curr_class', $this );
+
+			$options = $this->getPropsValues();
+			$cnt = 0;
+
+			while ( $dslc_query->have_posts() ) {
+
+				$dslc_query->the_post();
+				$LC_Registry->set( 'dslc-posts-elem-index', $cnt );
+
+
+				$out .= DSLC_Main::dslc_do_shortcode( $content );
+
+				if ( 	$options['type'] == 'grid' &&
+				 		$cnt > 0 &&
+				 		($cnt + 1) % $options['posts_per_row'] == 0 &&
+				 		$options['separator_enabled'] != 'disabled' &&
+				 		($cnt + 1) < $dslc_query->found_posts &&
+				 		($cnt + 1) < $dslc_query->query_vars['posts_per_page']
+				 	) {
+
+					$out .= '<div class="dslc-post-separator"></div>';
+				}
+
+				$cnt++;
 			}
 
-			if ( defined('DOING_AJAX') && DOING_AJAX ) {
-				$args['post_status'] = array( 'publish', 'private' );
-			}
+			unset( $cnt );
 
-			// Category args
-			if ( isset( $options['categories'] ) && $options['categories'] != '' ) {
+			$LC_Registry->set( 'dslc-blog-posts-elem-index', null );
+			$LC_Registry->set( 'curr_class', null );
+		}
 
-				$cats_array = explode( ' ', trim( $options['categories'] ));
+		return $out;
+	}
 
-				$args['tax_query'] = array(
-					array(
-						'taxonomy' => 'category',
-						'field' => 'term_id',
-						'terms' => $cats_array,
-						'operator' => $options['categories_operator']
-					)
-				);
+	/**
+	 * @inherited
+	 */
+	function output( $options = [] ) {
 
-			}
-
-			// Exlcude and Include arrays
-			$exclude = array();
-			$include = array();
-
-			// Exclude current post
-			if ( is_singular( get_post_type() ) )
-				$exclude[] = get_the_ID();
-
-			// Exclude posts ( option )
-			if ( $options['query_post_not_in'] )
-				$exclude = array_merge( $exclude, explode( ' ', $options['query_post_not_in'] ) );
-
-			// Include posts ( option )
-			if ( $options['query_post_in'] )
-				$include = array_merge( $include, explode( ' ', $options['query_post_in'] ) );
-			
-			// Include query parameter
-			if ( ! empty( $include ) )
-				$args['post__in'] = $include;
-
-			// Exclude query parameter
-			if ( ! empty( $exclude ) )
-				$args['post__not_in'] = $exclude;
-
-			// Author archive page
-			if ( is_author() && $options['query_alter_author'] == 'enabled' ) {
-				global $authordata;
-				$args['author__in'] = array( $authordata->data->ID );
-			}
-
-			// No paging
-			if ( $options['pagination_type'] == 'disabled' )
-				$args['no_found_rows'] = true;
-
-			// Sticky Posts
-			if ( $options['sticky_posts'] == 'disabled' )
-				$args['ignore_sticky_posts'] = true;
-			
-			// Do the query
-			if ( ( is_category() || is_tag() || is_tax() ) && $options['query_alter_cat'] == 'enabled' ) {
-				global $wp_query;
-				$dslc_query = $wp_query;
-			} elseif ( is_search() && $options['query_alter_search'] == 'enabled' ) {
-				global $wp_query;
-				$dslc_query = $wp_query;
-			} else {
-				$dslc_query = new WP_Query( $args );
-			}
+		$this->module_start( $options );
 
 		/**
 		 * Unnamed
 		 */
 
-			$columns_class = 'dslc-col dslc-' . $options['columns'] . '-col ';
-			$count = 0;
-			$real_count = 0;
-			$increment = $options['columns'];
-			$max_count = 12;
+		$columns_class = 'dslc-col dslc-' . $options['columns'] . '-col ';
+		$count = 0;
+		$real_count = 0;
+		$increment = $options['columns'];
+		$max_count = 12;
 
-		/**
-		 * Elements to show
-		 */
-			
-			// Main Elements
-			$elements = $options['elements'];
-			if ( ! empty( $elements ) )
-				$elements = explode( ' ', trim( $elements ) );
-			else
-				$elements = array();
-			
-
-			// Post Elements
-			$post_elements = $options['post_elements'];
-			if ( ! empty( $post_elements ) )
-				$post_elements = explode( ' ', trim( $post_elements ) );
-			else
-				$post_elements = 'all';
-
-			// Carousel Elements
-			$carousel_elements = $options['carousel_elements'];
-			if ( ! empty( $carousel_elements ) )
-				$carousel_elements = explode( ' ', trim( $carousel_elements ) );
-			else
-				$carousel_elements = array();
+		
 
 		/**
 		 * Classes generation
@@ -2806,7 +2919,7 @@ class DSLC_Blog extends DSLC_Module {
 			$show_view_all_link = false;
 
 			if ( in_array( 'main_heading', $elements ) )
-				$show_heading = true;		
+				$show_heading = true;
 
 			if ( ( $elements == 'all' || in_array( 'filters', $elements ) ) && $options['type'] !== 'carousel' )
 				$show_filters = true;
@@ -2820,7 +2933,7 @@ class DSLC_Blog extends DSLC_Module {
 		/**
 		 * Carousel Items
 		 */
-		
+
 			switch ( $options['columns'] ) {
 				case 12 :
 					$carousel_items = 1;
@@ -2849,7 +2962,7 @@ class DSLC_Blog extends DSLC_Module {
 			if ( $show_header ) :
 				?>
 					<div class="dslc-module-heading">
-						
+
 						<!-- Heading -->
 
 						<?php if ( $show_heading ) : ?>
@@ -2878,7 +2991,7 @@ class DSLC_Blog extends DSLC_Module {
 
 									while ( $dslc_query->have_posts() ) {
 
-										$dslc_query->the_post(); 
+										$dslc_query->the_post();
 
 										$post_cats = get_the_category( get_the_ID() );
 										if ( ! empty( $post_cats ) ) {
@@ -2927,7 +3040,7 @@ class DSLC_Blog extends DSLC_Module {
 
 		/**
 		 * Posts ( output )
-		 */			
+		 */
 
 			if ( $dslc_query->have_posts() ) {
 
@@ -2978,7 +3091,7 @@ class DSLC_Blog extends DSLC_Module {
 								<?php if ( $post_elements == 'all' || in_array( 'thumbnail', $post_elements ) ) : ?>
 
 									<?php
-										
+
 										/**
 										 * Manual Resize
 										 */
@@ -2987,7 +3100,7 @@ class DSLC_Blog extends DSLC_Module {
 										if ( isset( $options['thumb_resize_height'] ) && ! empty( $options['thumb_resize_height'] ) || isset( $options['thumb_resize_width_manual'] ) && ! empty( $options['thumb_resize_width_manual'] ) ) {
 
 											$manual_resize = true;
-											$thumb_url = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full' ); 
+											$thumb_url = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full' );
 											$thumb_url = $thumb_url[0];
 
 											$thumb_alt = get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true );
@@ -3009,7 +3122,7 @@ class DSLC_Blog extends DSLC_Module {
 									?>
 
 									<?php if ( has_post_thumbnail() ) : ?>
-									
+
 										<div class="dslc-blog-post-thumb dslc-post-thumb dslc-on-hover-anim">
 
 											<div class="dslc-blog-post-thumb-inner dslca-post-thumb">
@@ -3032,18 +3145,18 @@ class DSLC_Blog extends DSLC_Module {
 																<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 															</div><!-- .dslc-blog-post-title -->
 
-														<?php endif; ?>	
+														<?php endif; ?>
 
 														<?php if ( $post_elements == 'all' || in_array( 'meta', $post_elements ) ) : ?>
 
-															<?php 
+															<?php
 																// Meta Elements
 																$meta_elements = $options['meta_elements'];
 																$meta_elements = explode( ' ', trim( $meta_elements ) );
 															?>
 
 															<div class="dslc-blog-post-meta">
-																
+
 																<?php if ( in_array( 'author', $meta_elements ) ) : ?>
 																	<div class="dslc-blog-post-meta-author">
 																		<?php _e( 'By', 'live-composer-page-builder'); ?> <?php the_author_posts_link(); ?>
@@ -3121,18 +3234,18 @@ class DSLC_Blog extends DSLC_Module {
 												<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 											</div><!-- .dslc-blog-post-title -->
 
-										<?php endif; ?>	
+										<?php endif; ?>
 
 										<?php if ( $post_elements == 'all' || in_array( 'meta', $post_elements ) ) : ?>
 
-											<?php 
+											<?php
 												// Meta Elements
 												$meta_elements = $options['meta_elements'];
 												$meta_elements = explode( ' ', trim( $meta_elements ) );
 											?>
 
 											<div class="dslc-blog-post-meta">
-												
+
 												<?php if ( in_array( 'author', $meta_elements ) ) : ?>
 													<div class="dslc-blog-post-meta-author">
 														<span class="dslc-blog-post-meta-avatar">
@@ -3258,16 +3371,16 @@ class DSLC_Blog extends DSLC_Module {
 		/**
 		 * Pagination
 		 */
-			
+
 			if ( isset( $options['pagination_type'] ) && $options['pagination_type'] != 'disabled' ) {
 				$num_pages = $dslc_query->max_num_pages;
 				if ( $options['offset'] > 0 ) {
 					$num_pages = ceil ( ( $dslc_query->found_posts - $options['offset'] ) / $options['amount'] );
 				}
-				dslc_post_pagination( array( 'pages' => $num_pages, 'type' => $options['pagination_type'] ) ); 
+				dslc_post_pagination( array( 'pages' => $num_pages, 'type' => $options['pagination_type'] ) );
 			}
 
-		
+
 		wp_reset_postdata();
 
 		$this->module_end( $options );
