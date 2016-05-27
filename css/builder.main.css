@@ -3532,12 +3532,12 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 
 
 /** Editor only styles */
-#dslc-content .dslc-cpt-post-thumb a {
+#dslc-content .dslc-cpt-post-thumb a, #dslc-content .dslc-blog-post-thumb a {
     display: block!important;
 }
 
-#dslc-content .dslc-cpt-post-thumb img {
-	height: 200px;
+#dslc-content .dslc-cpt-post-thumb img, #dslc-content .dslc-blog-post-thumb img {
+	max-height: 200px;
 }
 
 [data-dslc-raw-sc]{

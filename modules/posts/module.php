@@ -2412,6 +2412,7 @@ class DSLC_Posts extends DSLC_Module {
 
 		// Author archive page
 		if ( is_author() && $options['query_alter'] == 'enabled' ) {
+
 			global $authordata;
 			$args['author__in'] = array( $authordata->data->ID );
 		}

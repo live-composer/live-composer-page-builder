@@ -89,7 +89,7 @@
 			 */
 
 			// Posts container
-			opt.container_class = 'dslc-posts dslc-cpt-posts dslc-clearfix dslc-cpt-posts-type-' +
+			opt.container_class = 'dslc-posts dslc-blog-posts dslc-clearfix dslc-blog-posts-type-' +
 				opt.type.value + ' dslc-posts-orientation-' + opt.orientation.value + ' ';
 
 			if(opt.type.value == 'masonry'){
@@ -101,7 +101,7 @@
 			}
 
 			// Post
-			opt.element_class = 'dslc-post dslc-cpt-post ';
+			opt.element_class = 'dslc-post dslc-blog-post ';
 
 			if(opt.type.value == 'masonry'){
 

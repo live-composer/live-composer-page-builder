@@ -65,16 +65,16 @@
 
 				var last_col = type.value == 'grid' && index > 0 && (index + 1) % posts_per_row.value == 0 && separator_enabled.value != 'disabled' ? 'dslc-last-col' : '';
 				%>
-				<div class="<%= element_class + columns_class + extra_class %> <%= last_col %> {{dslc-module-sc module-method='extra_col_class'}} {{dslc-module-sc module-method='post_categories'}}" data-repeatable="render_posts">
+				<div class="<%= element_class + columns_class + extra_class %> <%= last_col %> {{dslc-module-sc module-method='extra_col_class'}} {{dslc-module-sc module-method='blog_post_categories'}}" data-repeatable="render_blog_posts">
 
 					<% if(post_elements.value.indexOf('thumbnail') > -1){%>
 
 						<div class="dslc-blog-post-thumb dslc-post-thumb dslc-on-hover-anim">
 
-							<div data-module-method="post_thumb">
-								<div class="dslc-cpt-post-thumb-inner dslca-post-thumb">
+							<div data-module-method="blog_post_thumb">
+								<div class="dslc-blog-post-thumb-inner dslca-post-thumb">
 
-										<a href="{{dslc-module-sc module-method='permalink'}}">
+										<a href="{{dslc-module-sc module-method='blog_post_permalink'}}">
 											<img width="100%" height=200 src="http://dummyimage.com/300x200/000/fff"/>
 										</a>
 
@@ -90,15 +90,15 @@
 									)
 								){%>
 
-								<div class="dslc-post-main dslc-cpt-post-main <%= main_location.value == 'inside_visible' ? 'dslc-cpt-post-main-visible' : '' %> dslc-on-hover-anim-target dslc-anim-<%= css_anim_hover.value %>" data-dslc-anim="<%= css_anim_hover.value %>" data-dslc-anim-speed="<%= css_anim_speed.value %>">
+								<div class="dslc-post-main dslc-blog-post-main <%= main_location.value == 'inside_visible' ? 'dslc-cpt-post-main-visible' : '' %> dslc-on-hover-anim-target dslc-anim-<%= css_anim_hover.value %>" data-dslc-anim="<%= css_anim_hover.value %>" data-dslc-anim-speed="<%= css_anim_speed.value %>">
 
-									<div class="dslc-cpt-post-main-inner dslc-init-<%= main_position.value %>">
+									<div class="dslc-blog-post-main-inner dslc-init-<%= main_position.value %>">
 
 										<% if(post_elements.value.indexOf('title') > -1){%>
 
-											<div class="dslc-cpt-post-title">
+											<div class="dslc-blog-post-title">
 												<h2>
-													<a href="{{dslc-module-sc module-method='permalink'}}" data-module-method="post_title">Post title</a>
+													<a href="{{dslc-module-sc module-method='blog_post_permalink'}}" data-module-method="blog_post_title">Post title</a>
 												</h2>
 											</div><!-- .dslc-cpt-post-title -->
 
@@ -106,16 +106,16 @@
 
 										<% if(post_elements.value.indexOf('meta') > -1){%>
 
-											<div class="dslc-cpt-post-meta">
+											<div class="dslc-blog-post-meta">
 
 												<% if(meta_elements.value.indexOf('author') > -1){%>
-													<div class="dslc-cpt-post-meta-author" data-module-method="author_posts_link">
+													<div class="dslc-blog-post-meta-author" data-module-method="blog_author_posts_link">
 														<a href="#" title="Posts by author" rel="author">Author</a>
 													</div><!-- .dslc-cpt-post-meta-author -->
 												<%}%>
 
 												<% if(meta_elements.value.indexOf('date') > -1){%>
-													<div class="dslc-cpt-post-meta-date" data-module-method="post_date">
+													<div class="dslc-blog-post-meta-date" data-module-method="blog_post_date">
 														05/10/2016
 													</div><!-- .dslc-cpt-post-meta-date -->
 												<%}%>
@@ -125,7 +125,7 @@
 
 										<% if(post_elements.value.indexOf('excerpt') > -1){%>
 
-											<div class="dslc-cpt-post-excerpt" data-module-method="excerpt">
+											<div class="dslc-blog-post-excerpt" data-module-method="blog_post_excerpt">
 												Lorem ipsum dorem sit amet
 											</div><!-- .dslc-cpt-post-excerpt -->
 
@@ -133,8 +133,8 @@
 
 										<% if(post_elements.value.indexOf('button') > -1){%>
 
-											<div class="dslc-cpt-post-read-more">
-												<a href="{{dslc-module-sc module-method='permalink'}}">
+											<div class="dslc-blog-post-read-more">
+												<a href="{{dslc-module-sc module-method='blog_post_permalink'}}">
 
 													<% if(obj.button_icon_id && obj.button_icon_id.value != '' ){%>
 														<span class="dslc-icon dslc-icon-<%= button_icon_id.value %>"></span>
@@ -145,7 +145,7 @@
 											</div><!-- .dslc-cpt-post-read-more -->
 										<%}%>
 									</div><!-- .dslc-cpt-post-main-inner -->
-									<a href="{{dslc-module-sc module-method='permalink'}}" class="dslc-post-main-inner-link-cover"></a>
+									<a href="{{dslc-module-sc module-method='blog_post_permalink'}}" class="dslc-post-main-inner-link-cover"></a>
 								</div><!-- .dslc-cpt-post-main -->
 							<%}%>
 						</div><!-- .dslc-cpt-post-thumb -->
@@ -153,27 +153,27 @@
 
 					<% if(main_location.value == 'bellow' && (post_elements.value.indexOf('title') > -1 || post_elements.value.indexOf('meta') > -1 || post_elements.value.indexOf('excerpt') > -1 || post_elements.value.indexOf('button') > -1)){%>
 
-						<div class="dslc-post-main dslc-cpt-post-main">
+						<div class="dslc-post-main dslc-blog-post-main">
 
 							<% if(post_elements.value.indexOf('title') > -1){%>
 
-								<div class="dslc-cpt-post-title">
-									<h2 class="lc-editor-elem"><a href="{{dslc-module-sc module-method='permalink'}}" data-module-method="post_title">Title</a></h2>
+								<div class="dslc-blog-post-title">
+									<h2 class="lc-editor-elem"><a href="{{dslc-module-sc module-method='blog_post_permalink'}}" data-module-method="blog_post_title">Title</a></h2>
 								</div><!-- .dslc-cpt-post-title -->
 							<%}%>
 
 							<% if(post_elements.value.indexOf('meta') > -1){%>
 
-								<div class="dslc-cpt-post-meta">
+								<div class="dslc-blog-post-meta">
 
 									<% if(meta_elements.value.indexOf('author') > -1){%>
-										<div class="dslc-cpt-post-meta-author" data-module-method="author_posts_link">
+										<div class="dslc-blog-post-meta-author" data-module-method="blog_author_posts_link">
 											 <a href="#" title="Posts by author" rel="author">Author</a>
 										</div><!-- .dslc-cpt-post-meta-author -->
 									<%}%>
 
 									<% if(meta_elements.value.indexOf('date') > -1){%>
-										<div class="dslc-cpt-post-meta-date" data-module-method="post_date">
+										<div class="dslc-blog-post-meta-date" data-module-method="blog_post_date">
 											12/06/2016
 										</div><!-- .dslc-cpt-post-meta-date -->
 									<%}%>
@@ -182,25 +182,59 @@
 
 							<% if(post_elements.value.indexOf('excerpt') > -1){%>
 
-								<div class="dslc-cpt-post-excerpt" data-module-method="excerpt">
+								<div class="dslc-blog-post-excerpt" data-module-method="blog_post_excerpt">
 									Lorem ipsum dorem sit amet
 								</div><!-- .dslc-cpt-post-excerpt -->
 							<%}%>
 
 							<% if(post_elements.value.indexOf('button') > -1){%>
 
-								<div class="dslc-cpt-post-read-more">
-									<a href="{{dslc-module-sc module-method='permalink'}}">
+								<div class="dslc-blog-post-read-more">
+									<a href="{{dslc-module-sc module-method='blog_post_permalink'}}">
 										<% if(button_icon_id.value != '' ){%>
 											<span class="dslc-icon dslc-icon-<%= button_icon_id.value %>"></span>
 										<%}%>
 										<%= button_text.value || button_text.std %>
 									</a>
-								</div><!-- .dslc-cpt-post-read-more -->
+								</div><!-- .dslc-blog-post-read-more -->
 							<%}%>
-						</div><!-- .dslc-cpt-post-main -->
+						</div><!-- .blog-post-main -->
+
+						<% if(post_elements.value.indexOf( 'social' ) > -1 ){%>
+
+							<?php $share_info = dslc_get_social_count(); ?>
+
+							<div class="dslc-posts-social-share">
+
+
+								<% if(social_elements.value.indexOf('facebook') > -1 ){%>
+									<div class="dslc-inline-block" data-module-method="share_info_fb"></div>
+									<a href="#" class="lc-editor-element" target="_blank">
+										<span class="dslc-icon dslc-icon-facebook"></span>
+										<span class="dslc-posts-social-share-count">43</span>
+									</a>
+								<%}%>
+
+								<% if(social_elements.value.indexOf( 'twitter' ) ){%>
+									<div class="dslc-inline-block" data-module-method="share_info_tw"></div>
+									<a href="#" class="lc-editor-element">
+										<span class="dslc-icon dslc-icon-twitter"></span>
+										<span class="dslc-posts-social-share-count">20</span>
+									</a>
+								<%}%>
+
+								<% if(social_elements.value.indexOf( 'pinterest' ) ){%>
+									<div class="dslc-inline-block" data-module-method="share_info_pt"></div>
+									<a href="#" class="lc-editor-element">
+										<span class="dslc-icon dslc-icon-pinterest"></span>
+										<span class="dslc-posts-social-share-count">13</span>
+									</a>
+								<%}%>
+
+							</div><!-- .dslc-posts-social-share -->
+						<%}%>
 					<%}%>
-					<!-- .dslc-cpt-post -->
+					<!-- .dslc-blog-post -->
 				</div>
 
 				<% if(last_col != ''){%>
@@ -214,8 +248,7 @@
 	</div><!-- .dslc-cpt-posts -->
 
 <% if(pagination_type.value && pagination_type.value != 'disabled'){%>
-	<div data-dslc-raw-sc>[dslc-module-sc module-instance-id="<%= module_instance_id %>" module-method="pagination_nav"]</div>
-
+	<div data-module-method="blog_pagination_nav"></div>
 	<div class="dslc-pagination dslc-pagination-type-<%= pagination_type.value %> lc-editor-element">
 		<ul class="dslc-clearfix">
 			<% if(pagination_type.value == 'numbered'){%>
