@@ -881,7 +881,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				wp_enqueue_script( 'js-project-slider-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/editor-script.js', array( 'jquery' ) );
 			}
 
-			//wp_enqueue_script( 'js-project-slider-production', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/script.js', array( 'jquery' ) );
+			wp_enqueue_script( 'js-project-slider-production', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/script.js', array( 'jquery' ) );
 		});
 	}
 
@@ -915,9 +915,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				if ( ! $thumb_alt ) $thumb_alt = '';
 
 				?><div class="dslc-slider-item"><img class="<?php echo $img_class; ?>" src="<?php echo $project_image_src; ?>" alt="<?php echo $thumb_alt; ?>" /></div><?php
-
 			}
-
 		}
 
 		return ob_get_clean();
@@ -943,9 +941,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				$project_image_src = $project_image_src[0];
 
 				?><a href="<?php echo $project_image_src; ?>"></a><?php
-
 			}
-
 		}
 
 		return ob_get_clean();

@@ -113,6 +113,8 @@ var commonVars = DSLC.commonVars; /// Just alias
 		dslc_generate_code();
 		dslc_show_publish_button();
 
+		newModule.afterModuleRendered();
+
 		return newModule;
 	}
 

@@ -17,6 +17,7 @@
 
 function dslc_load_scripts() {
 
+	global $LC_Registry;
 	global $dslc_active;
 
 	$translation_array = array(
@@ -81,6 +82,7 @@ function dslc_load_scripts() {
 
 	wp_enqueue_script( 'dslc-plugins-js', DS_LIVE_COMPOSER_URL . 'js/plugins.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 	wp_enqueue_script( 'wp-mediaelement' );
+	wp_enqueue_script( 'dslc-common-production-js', DS_LIVE_COMPOSER_URL . 'js/Production.js', ['jquery'], DS_LIVE_COMPOSER_VER );
 
 	if ( DS_LIVE_COMPOSER_LOAD_MINIFIED && !SCRIPT_DEBUG )
 		wp_enqueue_script( 'dslc-main-js', DS_LIVE_COMPOSER_URL . 'js/main.min.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
@@ -155,7 +157,6 @@ function dslc_load_scripts() {
 		wp_localize_script( 'dslc-builder-main-js', 'DSLCString', $translation_array );
 		wp_localize_script( 'dslc-builder-main-js', 'DSLCFonts', $fonts_array );
 		wp_localize_script( 'dslc-builder-main-js', 'DSLCIcons', $dslc_var_icons );
-
 	}
 
 } add_action( 'wp_enqueue_scripts', 'dslc_load_scripts' );

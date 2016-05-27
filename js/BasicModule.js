@@ -110,7 +110,6 @@
 		this.moduleBody = jQuery("<div>").append(this.getModuleBody()); /// Load module body
 
 		this.elem = jQuery(moduleStart + moduleEnd).append(this.moduleBody);
-		this.afterModuleRendered();
 		this.saveEdits();
 
 		return this.elem; /// Return jQuery object

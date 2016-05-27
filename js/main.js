@@ -146,7 +146,7 @@ function dslc_init_lightbox(){
 function dslc_carousel(){
 
 	// Loop through each carousel
-	jQuery('.dslc-carousel, .dslc-slider').each(function(){
+	jQuery('.dslc-carousel').each(function(){
 
 		// Variables
 		var carousel, container, defSettings, usrSettings, settings;

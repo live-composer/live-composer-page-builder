@@ -21,7 +21,7 @@
 
 		Project_Slider.prototype.afterRenderHook = function()
 		{
-			dslc_carousel();
+			DSLCProd.Modules.projectSlider.initCarousel();
 		}
 	});
 }());
