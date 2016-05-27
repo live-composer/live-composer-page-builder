@@ -2850,7 +2850,7 @@ class DSLC_Blog extends DSLC_Module {
 
 		if ( $dslc_query == null ) {
 
-			$dslc_query = $this->get_posts();
+			$dslc_query = $this->get_blog_posts();
 			$LC_Registry->set( 'dslc-blog-posts-query', $dslc_query );
 		}
 

@@ -30,6 +30,7 @@
 
 			opt.meta_elements.value = opt.meta_elements.value ? opt.meta_elements.value : opt.meta_elements.std;
 			opt.elements.value = opt.elements.value ? opt.elements.value : opt.elements.std;
+			opt.social_elements.value = opt.social_elements.value ? opt.social_elements.value : opt.social_elements.std;
 
 			/**
 			* Header

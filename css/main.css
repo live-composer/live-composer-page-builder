@@ -1142,3 +1142,10 @@ body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-post-thumb .dslc-o
     display: block!important;
     opacity: 0.3;
 }
+
+/**
+ * Common styles
+ */
+.dslc-inline-block{
+	display: inline-block;
+}
