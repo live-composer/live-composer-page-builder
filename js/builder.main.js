@@ -408,6 +408,7 @@ var dslcDebug = false;
 							dslc_generate_code();
 							dslc_show_publish_button();
 
+							DSLC.Editor.dslc_init_medium_editor();
 						});
 
 					});
@@ -4233,6 +4234,7 @@ var dslcDebug = false;
 				dslc_init_accordion();
 				dslc_init_square();
 				dslc_center();
+				DSLC.Editor.dslc_init_medium_editor();
 
 				if ( callback ) {
 					callback( response );
@@ -4522,7 +4524,10 @@ var dslcDebug = false;
 
 		$(document).on( 'click', '.dslca-module-edit-save', function(){
 
-			dslc_module_options_confirm_changes();
+			dslc_module_options_confirm_changes(function(){
+
+				DSLC.Editor.dslc_init_medium_editor();
+			});
 			$('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
 			dslc_responsive_classes( true );
 
@@ -5820,6 +5825,9 @@ var dslcDebug = false;
 		});
 
 		// Editable Content
+
+		/// init Medium inline editor
+		DSLC.Editor.dslc_init_medium_editor();
 
 		jQuery(document).on('blur', '.dslca-editable-content', function() {
 
