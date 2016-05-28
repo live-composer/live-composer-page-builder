@@ -2224,8 +2224,6 @@ class DSLC_Posts extends DSLC_Module {
 
 			wp_enqueue_script( 'js-posts-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/script.js', array( 'jquery' ) );
 		});
-
-		add_shortcode( 'dslc-posts-module-navigation', [__CLASS__, 'dslc_posts_module_nav'] );
 	}
 
 	/**
@@ -2247,9 +2245,9 @@ class DSLC_Posts extends DSLC_Module {
 
 		if ( $dslc_query->have_posts() ) {
 
-			while ( $dslc_query->have_posts() ) { 
+			while ( $dslc_query->have_posts() ) {
 
-				$dslc_query->the_post(); 
+				$dslc_query->the_post();
 
 				$cats_count++;
 

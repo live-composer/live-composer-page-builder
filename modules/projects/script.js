@@ -1,5 +1,5 @@
 /**
- * Posts production scripts
+ * Projects production scripts
  */
 
 'use strict'
@@ -10,7 +10,7 @@
 	 * Filter
 	 */
 
-	jQuery(document).on('click', '.dslc-post-filter.dslc-posts-module', function($){
+	jQuery(document).on('click', '.dslc-post-filter.dslc-projects-module', function($){
 
 		$ = jQuery;
 		// Get info

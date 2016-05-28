@@ -2686,8 +2686,6 @@ class DSLC_Blog extends DSLC_Module {
 	 */
 	function get_blog_posts() {
 
-		global $dslc_active;
-
 		$options = $this->getPropsValues();
 
 		// Fix slashes on apostrophes
@@ -2751,7 +2749,7 @@ class DSLC_Blog extends DSLC_Module {
 		}
 
 		// Category args
-		if ( isset( $options['categories'] ) && $options['categories'] != '' ) {
+		if ( isset( $options['categories'] ) && trim($options['categories']) != '' ) {
 
 			$cats_array = explode( ' ', trim( $options['categories'] ));
 
@@ -2831,6 +2829,8 @@ class DSLC_Blog extends DSLC_Module {
 
 			$dslc_query = new WP_Query( $args );
 		}
+
+		return $dslc_query;
 	}
 
 	/**
@@ -2905,7 +2905,7 @@ class DSLC_Blog extends DSLC_Module {
 		global $LC_Registry;
 
 		$opts = $this->getPropsValues();
-		$index = $LC_Registry->get( 'dslc-posts-elem-index' );
+		$index = $LC_Registry->get( 'dslc-blog-posts-elem-index' );
 		$extra_class = '';
 
 		if ( $opts['type'] == 'grid' && $index > 0 && ($index + 1) % $opts['posts_per_row'] == 0 && $opts['separator_enabled'] != 'disabled' ) {
@@ -2996,6 +2996,8 @@ class DSLC_Blog extends DSLC_Module {
 	function share_info_fb() {
 
 		ob_start();
+		global $LC_Registry;
+
 		$share_info = $LC_Registry->get( 'dslc-blog-share-info' );
 		?>
 		<a href="#" class="lc-editor-element" target="_blank" onClick="return dslc_social_share(400, 300, 'http://www.facebook.com/share.php?u=<?php echo get_permalink( get_the_ID() ); ?>')">
@@ -3004,7 +3006,7 @@ class DSLC_Blog extends DSLC_Module {
 				<?php if ( $share_info ) { echo esc_html( $share_info['fb'] ); } ?>
 			</span>
 		</a>
-		<?
+		<?php
 
 		return ob_get_clean();
 	}
@@ -3016,6 +3018,8 @@ class DSLC_Blog extends DSLC_Module {
 	function share_info_pt() {
 
 		ob_start();
+		global $LC_Registry;
+
 		$share_info = $LC_Registry->get( 'dslc-blog-share-info' );
 		$post_img = wp_get_attachment_url( get_post_thumbnail_id( get_the_ID() ) );
 		?>
@@ -3024,7 +3028,7 @@ class DSLC_Blog extends DSLC_Module {
 			<span class="dslc-posts-social-share-count">
 				<?php if ( $share_info ) { echo esc_html( $share_info['pinterest'] ); } ?>
 			</span>
-		</a><?
+		</a><?php
 
 		return ob_get_clean();
 	}
@@ -3036,6 +3040,8 @@ class DSLC_Blog extends DSLC_Module {
 	function share_info_tw() {
 
 		ob_start();
+		global $LC_Registry;
+
 		$share_info = $LC_Registry->get( 'dslc-blog-share-info' );
 		$share_status = esc_attr( get_the_title( get_the_ID() ) . ' ' . get_permalink( get_the_ID() ) );
 		?>
@@ -3044,7 +3050,7 @@ class DSLC_Blog extends DSLC_Module {
 			<span class="dslc-posts-social-share-count">
 				<?php if ( $share_info ) { echo esc_html( $share_info['twitter'] ); } ?>
 			</span>
-		</a><?
+		</a><?php
 
 		return ob_get_clean();
 	}
@@ -3119,7 +3125,7 @@ class DSLC_Blog extends DSLC_Module {
 		global $LC_Registry;
 
 		$options = $this->getPropsValues();
-		$dslc_query = $LC_Registry->get( 'dslc-posts-query' );
+		$dslc_query = $LC_Registry->get( 'dslc-blog-posts-query' );
 
 		ob_start();
 
@@ -3145,7 +3151,7 @@ class DSLC_Blog extends DSLC_Module {
 		$this->module_start();
 
 		/* Output starts here */
-		$this->renderModule();
+		echo $this->renderModule();
 		/* Output ends here */
 
 		$this->module_end();
