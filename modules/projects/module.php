@@ -89,7 +89,7 @@ class DSLC_Projects extends DSLC_Module {
 			$args['post_status'] = array( 'publish', 'private' );
 		}
 
-		if ( isset( $options['categories'] ) && $options['categories'] != '' ) {
+		if ( isset( $options['categories'] ) && trim($options['categories']) != '' ) {
 
 			$cats_array = explode( ' ', trim( $options['categories'] ) );
 
@@ -207,7 +207,7 @@ class DSLC_Projects extends DSLC_Module {
 
 		if ( $dslc_query == null ) {
 
-			$dslc_query = $this->get_posts();
+			$dslc_query = $this->get_projects();
 			$LC_Registry->set( 'dslc-projects-query', $dslc_query );
 		}
 
@@ -370,19 +370,14 @@ class DSLC_Projects extends DSLC_Module {
 
 		ob_start();
 
+		$out = [];
+
 		foreach ( $project_cats as $project_cat ) {
 
-			$project_cats_count++;
-
-			if ( $project_cats_count > 1 ) {
-
-				echo ', ';
-			}
-
-			echo $project_cat->name;
+			$out[] = $project_cat->name;
 		}
 
-		return ob_get_clean();
+		return implode( ', ', $out );
 	}
 
 	/**
@@ -2593,7 +2588,7 @@ class DSLC_Projects extends DSLC_Module {
 			}
 		}
 
-		return $post_cats_data . ' in-cat-all';
+		return $project_cats_data . ' in-cat-all';
 	}
 
 }

@@ -67,7 +67,7 @@
 
 					<% if(post_elements.value.indexOf('thumbnail') > -1){%>
 
-						<div class="dslc-post-thumb dslc-project-thumb dslc-on-hover-anim">
+						<div class="dslc-post-thumb dslc-project-thumb dslc-on-hover-anim" data-module-method="post_thumb">
 
 							<div class="dslc-project-thumb-inner dslca-post-thumb">
 
@@ -152,7 +152,7 @@
 
 							<% if(post_elements.value.indexOf('categories') > -1){%>
 
-								<div class="dslc-project-cats" module-method="project_cats_list" >
+								<div class="dslc-project-cats" data-module-method="project_cats_list" >
 										SEO, MMM, E-commerce, logistics
 								</div><!-- .dslc-project-cats -->
 							<%}%>
