@@ -22,14 +22,14 @@
 
 		<% if(show_filters == true){%>
 			<!-- Filters -->
-			<div class="dslc-post-filters dslc-posts-module">
+			<div class="dslc-post-filters dslc-galleries-module">
 
-				<span class="dslc-post-filter dslc-active" data-id="all">
-					<?php _ex( 'All', 'Post Filter', 'live-composer-page-builder' ); ?>
+				<span class="dslc-galleries-filter dslc-active" data-id="all">
+					<?php _ex( 'All', 'Galleries Filter', 'live-composer-page-builder' ); ?>
 				</span>
 
 				<% cats_array.forEach(function(elem, index){%>
-					<span class="dslc-post-filter dslc-inactive" data-repeatable="post_filter" data-id="<%= elem.cat_slug %>">
+					<span class="dslc-galleries-filter dslc-inactive" data-repeatable="galleries_filter" data-id="<%= elem.cat_slug %>">
 						<%= elem.cat_name %>
 					</span>
 				<%})%>
@@ -65,14 +65,14 @@
 
 				var last_col = type.value == 'grid' && index > 0 && (index + 1) % posts_per_row.value == 0 && separator_enabled.value != 'disabled' ? 'dslc-last-col' : '';
 				%>
-				<div class="<%= element_class + columns_class + extra_class %> <%= last_col %> {{dslc-module-sc module-method='extra_col_class'}} {{dslc-module-sc module-method='post_categories'}}" data-repeatable="render_posts">
+				<div class="<%= element_class + columns_class + extra_class %> <%= last_col %> {{dslc-module-sc module-method='extra_col_class'}} {{dslc-module-sc module-method='post_categories'}}" data-repeatable="render_galleries">
 
 					<% if(post_elements.value.indexOf('thumbnail') > -1){%>
 
-						<div class="dslc-post-thumb dslc-cpt-post-thumb dslc-on-hover-anim">
+						<div class="dslc-post-thumb dslc-gallery-thumb dslc-on-hover-anim">
 
 							<div data-module-method="post_thumb">
-								<div class="dslc-cpt-post-thumb-inner dslca-post-thumb">
+								<div class="dslc-gallery-thumb-inner dslca-post-thumb">
 
 										<a href="{{dslc-module-sc module-method='permalink'}}">
 											<img width="100%" height=200 src="http://dummyimage.com/300x200/000/fff"/>
@@ -133,7 +133,7 @@
 
 										<% if(post_elements.value.indexOf('button') > -1){%>
 
-											<div class="dslc-cpt-post-read-more">
+											<div class="dslc-galleries-read-more">
 												<a href="{{dslc-module-sc module-method='permalink'}}">
 
 													<% if(obj.button_icon_id && obj.button_icon_id.value != '' ){%>

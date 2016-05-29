@@ -39,6 +39,8 @@
 		{
 			var data = e.message.details;
 
+			if(data.module.settings.id != 'DSLC_Info_Box') return false;
+
 			if(data.optionId == 'elements'){
 
 				var allElems = 'icon title content button image';

@@ -2200,7 +2200,7 @@ class DSLC_Galleries extends DSLC_Module {
 		global $LC_Registry;
 
 		$dslc_query = $this->get_posts();
-		$LC_Registry->set( 'dslc-posts-query', $dslc_query );
+		$LC_Registry->set( 'dslc-galleries-query', $dslc_query );
 
 		$taxonomy_name = '';
 
@@ -2216,19 +2216,7 @@ class DSLC_Galleries extends DSLC_Module {
 
 				$cats_count++;
 
-				if ( $cats_count == 1 ) {
-
-					$post_type_taxonomies = get_object_taxonomies( get_post_type(), 'objects' );
-					foreach ( $post_type_taxonomies as $taxonomy ) {
-						if ( $taxonomy->hierarchical == true ) {
-							$taxonomy_name = $taxonomy->name;
-
-							$LC_Registry->set( 'dslc-posts-taxonomy', $taxonomy_name );
-						}
-					}
-				}
-
-				$post_cats = get_the_terms( get_the_ID(), $taxonomy_name );
+				$post_cats = get_the_terms( get_the_ID(), 'dslc_galleries_cats' );
 				if ( ! empty( $post_cats ) ) {
 					foreach( $post_cats as $post_cat ) {
 						$cats_array[$post_cat->slug] = $post_cat->name;
@@ -2240,7 +2228,7 @@ class DSLC_Galleries extends DSLC_Module {
 		ob_start();
 
 		foreach ( $cats_array as $cat_slug => $cat_name ) {?>
-			<span class="dslc-post-filter dslc-inactive" data-id="<?php echo $cat_slug; ?>"><?php echo $cat_name; ?></span>
+			<span class="dslc-post-filter dslc-galleries-module dslc-inactive" data-id="<?php echo $cat_slug; ?>"><?php echo $cat_name; ?></span>
 		<?php }
 
 		return ob_get_clean();
@@ -2252,15 +2240,16 @@ class DSLC_Galleries extends DSLC_Module {
 	 */
 	function gallery_categories() {
 
-		global $LC_Registry;
-
-		$taxonomy_name = $LC_Registry->get( 'dslc-posts-taxonomy' );
 		$post_cats_data = '';
 
 		if ( isset( $taxonomy_name ) ) {
-			$post_cats = get_the_terms( get_the_ID(), $taxonomy_name );
+
+			$post_cats = get_the_terms( get_the_ID(), 'dslc_galleries_cats' );
+
 			if ( ! empty( $post_cats ) ) {
+
 				foreach( $post_cats as $post_cat ) {
+
 					$post_cats_data .= 'in-cat-' . $post_cat->slug . ' ';
 				}
 			}
@@ -2275,8 +2264,6 @@ class DSLC_Galleries extends DSLC_Module {
 	 */
 	function get_galleries() {
 
-		global $dslc_active;
-
 		$options = $this->getPropsValues();
 
 		// Fix slashes on apostrophes
@@ -2284,41 +2271,25 @@ class DSLC_Galleries extends DSLC_Module {
 			$options['button_text'] = stripslashes( $options['button_text'] );
 		}
 
-		/* CUSTOM START */
+		if ( ! isset( $options['count_pos'] ) )
+			$options['count_pos'] = 'center';
+
+		/* Module output stars here */
 
 		if ( ! isset( $options['excerpt_length'] ) ) $options['excerpt_length'] = 20;
 
-		/**
-		 * Query
-		 */
-
-		// Fix for pagination
-		if( is_front_page() ) {
-
-			$paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1;
-		} else {
-
-			$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
-		}
+		if( is_front_page() ) { $paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1; } else { $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1; }
 
 		// Fix for pagination from other modules affecting this one when pag disabled
-		if ( ! isset( $options['pagination_type'] ) || $options['pagination_type'] == 'disabled' ) {
-
-			$paged = 1;
-		}
+		if ( $options['pagination_type'] == 'disabled' ) $paged = 1;
 
 		// Fix for offset braking pagination
 		$query_offset = $options['offset'];
+		if ( $query_offset > 0 && $paged > 1 ) $query_offset = ( $paged - 1 ) * $options['amount'] + $options['offset'];
 
-		if ( $query_offset > 0 && $paged > 1 ) {
-
-			$query_offset = ( $paged - 1 ) * $options['amount'] + $options['offset'];
-		}
-
-		// General args
 		$args = array(
 			'paged' => $paged,
-			'post_type' => $options['post_type'],
+			'post_type' => 'dslc_galleries',
 			'posts_per_page' => $options['amount'],
 			'order' => $options['order'],
 			'orderby' => $options['orderby'],
@@ -2333,10 +2304,19 @@ class DSLC_Galleries extends DSLC_Module {
 			$args['post_status'] = array( 'publish', 'private' );
 		}
 
-		// Category args
 		if ( isset( $options['categories'] ) && $options['categories'] != '' ) {
-			$cats_array = explode( ' ', $options['categories']);
-			$args['category__in'] = $cats_array;
+
+			$cats_array = explode( ' ', trim( $options['categories'] ));
+
+			$args['tax_query'] = array(
+				array(
+					'taxonomy' => 'dslc_galleries_cats',
+					'field' => 'slug',
+					'terms' => $cats_array,
+					'operator' => $options['categories_operator']
+				)
+			);
+
 		}
 
 		// Exlcude and Include arrays
@@ -2344,61 +2324,43 @@ class DSLC_Galleries extends DSLC_Module {
 		$include = array();
 
 		// Exclude current post
-		if ( is_singular( get_post_type() ) ) {
-
+		if ( is_singular( get_post_type() ) )
 			$exclude[] = get_the_ID();
-		}
 
 		// Exclude posts ( option )
-		if ( $options['query_post_not_in'] ) {
-
+		if ( $options['query_post_not_in'] )
 			$exclude = array_merge( $exclude, explode( ' ', $options['query_post_not_in'] ) );
-		}
 
 		// Include posts ( option )
- 		if ( $options['query_post_in'] ) {
-
+		if ( $options['query_post_in'] )
 			$include = array_merge( $include, explode( ' ', $options['query_post_in'] ) );
- 		}
 
 		// Include query parameter
-		if ( ! empty( $include ) ) {
-
+		if ( ! empty( $include ) )
 			$args['post__in'] = $include;
-		}
 
 		// Exclude query parameter
-		if ( ! empty( $exclude ) ) {
-
+		if ( ! empty( $exclude ) )
 			$args['post__not_in'] = $exclude;
-		}
 
 		// Author archive page
-		if ( is_author() && $options['query_alter'] == 'enabled' ) {
-
+		if ( is_author() && $options['query_alter_author'] == 'enabled' ) {
 			global $authordata;
 			$args['author__in'] = array( $authordata->data->ID );
 		}
 
 		// No paging
-		if ( $options['pagination_type'] == 'disabled' ) {
-
+		if ( $options['pagination_type'] == 'disabled' )
 			$args['no_found_rows'] = true;
-		}
-
-		// Sticky Posts
-		if ( $options['sticky_posts'] == 'disabled' ) {
-
-			$args['ignore_sticky_posts'] = true;
-		}
 
 		// Do the query
-		if ( ( is_category() || is_tag() || is_tax() || is_search() || is_date() ) && $options['query_alter'] == 'enabled' ) {
-
+		if ( ( is_category() || is_tag() || is_tax() ) && $options['query_alter_cat'] == 'enabled' ) {
+			global $wp_query;
+			$dslc_query = $wp_query;
+		} elseif ( is_search() && $options['query_alter_search'] == 'enabled' ) {
 			global $wp_query;
 			$dslc_query = $wp_query;
 		} else {
-
 			$dslc_query = new WP_Query( $args );
 		}
 
@@ -2466,6 +2428,26 @@ class DSLC_Galleries extends DSLC_Module {
 	}
 
 	/**
+	 * Returns images count of current gallery
+	 * @return string
+	 */
+	function get_images_count() {
+
+		$gallery_images = get_post_meta( get_the_ID(), 'dslc_gallery_images', true );
+		$gallery_images_count = 0;
+
+		if ( $gallery_images ) {
+
+			$gallery_images = explode( ' ', trim( $gallery_images ) );
+		}
+
+		if ( is_array( $gallery_images ) ) {
+
+			$gallery_images_count = count( $gallery_images );
+		}
+	}
+
+	/**
 	 * Returns last col class
 	 * @return string
 	 */
@@ -2496,9 +2478,14 @@ class DSLC_Galleries extends DSLC_Module {
 	 */
 	function permalink() {
 
-		global $post;
+		$the_permalink = get_permalink();
 
-		return get_post_permalink( $post->ID );
+		if ( get_post_meta( get_the_ID(), 'dslc_custom_url', true ) ) {
+
+			$the_permalink = get_post_meta( get_the_ID(), 'dslc_custom_url', true );
+		}
+
+		return $the_permalink;
 	}
 
 	/**
@@ -2604,7 +2591,7 @@ class DSLC_Galleries extends DSLC_Module {
 		<div class="dslc-cpt-post-thumb-inner dslca-post-thumb">
 			<a href="<?php the_permalink() ?>">
 				<?php if ( $manual_resize ) {?>
-					<img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" />
+					<a href="<?php echo $the_permalink; ?>" class="<?php echo $thumb_anchor_class; ?>"><img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" /></a>
 				<?php } else { ?>
 					<?php the_post_thumbnail( 'full' ); ?>
 				<?php } ?>
