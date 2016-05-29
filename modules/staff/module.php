@@ -137,7 +137,7 @@ class DSLC_Staff extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Items Per Row', 'live-composer-page-builder' ),
-				'id' => 'columns',
+				'id' => 'posts_per_row',
 				'std' => '3',
 				'type' => 'select',
 				'choices' => $this->shared_options('posts_per_row_choices'),
@@ -1881,10 +1881,10 @@ class DSLC_Staff extends DSLC_Module {
 
 			if ( $LC_Registry->get( 'dslc_active' ) == true ) {
 
-				wp_enqueue_script( 'js-posts-editor-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/editor-script.js', array( 'jquery' ) );
+				wp_enqueue_script( 'js-staff-editor-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/editor-script.js', array( 'jquery' ) );
 			}
 
-			wp_enqueue_script( 'js-posts-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/script.js', array( 'jquery' ) );
+			wp_enqueue_script( 'js-staff-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/script.js', array( 'jquery' ) );
 		});
 	}
 
@@ -1892,12 +1892,12 @@ class DSLC_Staff extends DSLC_Module {
 	 * Returns filter HTML string
 	 * @return string
 	 */
-	function post_filter() {
+	function staff_filter() {
 
 		global $LC_Registry;
 
-		$dslc_query = $this->get_posts();
-		$LC_Registry->set( 'dslc-posts-query', $dslc_query );
+		$dslc_query = $this->get_staff();
+		$LC_Registry->set( 'dslc-staff-query', $dslc_query );
 
 		$taxonomy_name = '';
 
@@ -1913,21 +1913,12 @@ class DSLC_Staff extends DSLC_Module {
 
 				$cats_count++;
 
-				if ( $cats_count == 1 ) {
+				$post_cats = get_the_terms( get_the_ID(), 'dslc_staff_cats' );
 
-					$post_type_taxonomies = get_object_taxonomies( get_post_type(), 'objects' );
-					foreach ( $post_type_taxonomies as $taxonomy ) {
-						if ( $taxonomy->hierarchical == true ) {
-							$taxonomy_name = $taxonomy->name;
-
-							$LC_Registry->set( 'dslc-posts-taxonomy', $taxonomy_name );
-						}
-					}
-				}
-
-				$post_cats = get_the_terms( get_the_ID(), $taxonomy_name );
 				if ( ! empty( $post_cats ) ) {
+
 					foreach( $post_cats as $post_cat ) {
+
 						$cats_array[$post_cat->slug] = $post_cat->name;
 					}
 				}
@@ -1937,7 +1928,7 @@ class DSLC_Staff extends DSLC_Module {
 		ob_start();
 
 		foreach ( $cats_array as $cat_slug => $cat_name ) {?>
-			<span class="dslc-post-filter dslc-inactive" data-id="<?php echo $cat_slug; ?>"><?php echo $cat_name; ?></span>
+			<span class="dslc-post-filter dslc-staff-module dslc-inactive" data-id="<?php echo $cat_slug; ?>"><?php echo $cat_name; ?></span>
 		<?php }
 
 		return ob_get_clean();
@@ -1949,18 +1940,19 @@ class DSLC_Staff extends DSLC_Module {
 	 */
 	function staff_categories() {
 
-		$post_cats_data = '';
-		$post_cats = get_the_terms( get_the_ID(), $taxonomy_name );
+		$project_cats = get_the_terms( get_the_ID(), 'dslc_staff_cats' );
 
-		if ( ! empty( $post_cats ) ) {
+		$project_cats_data = '';
 
-			foreach( $post_cats as $post_cat ) {
+		if ( ! empty( $project_cats ) ) {
 
-				$post_cats_data .= 'in-cat-' . $post_cat->slug . ' ';
+			foreach( $project_cats as $project_cat ) {
+
+				$project_cats_data .= $project_cat->slug . ' ';
 			}
 		}
 
-		return $post_cats_data . ' in-cat-all';
+		return $project_cats_data . ' in-cat-all';
 	}
 
 	/**
@@ -1971,46 +1963,20 @@ class DSLC_Staff extends DSLC_Module {
 
 		$options = $this->getPropsValues();
 
-		// Fix slashes on apostrophes
-		if ( isset( $options['button_text'] ) ) {
-			$options['button_text'] = stripslashes( $options['button_text'] );
-		}
-
-		/* CUSTOM START */
-
 		if ( ! isset( $options['excerpt_length'] ) ) $options['excerpt_length'] = 20;
 
-		/**
-		 * Query
-		 */
-
-		// Fix for pagination
-		if( is_front_page() ) {
-
-			$paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1;
-		} else {
-
-			$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
-		}
+		if( is_front_page() ) { $paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1; } else { $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1; }
 
 		// Fix for pagination from other modules affecting this one when pag disabled
-		if ( ! isset( $options['pagination_type'] ) || $options['pagination_type'] == 'disabled' ) {
-
-			$paged = 1;
-		}
+		if ( $options['pagination_type'] == 'disabled' ) $paged = 1;
 
 		// Fix for offset braking pagination
 		$query_offset = $options['offset'];
+		if ( $query_offset > 0 && $paged > 1 ) $query_offset = ( $paged - 1 ) * $options['amount'] + $options['offset'];
 
-		if ( $query_offset > 0 && $paged > 1 ) {
-
-			$query_offset = ( $paged - 1 ) * $options['amount'] + $options['offset'];
-		}
-
-		// General args
 		$args = array(
 			'paged' => $paged,
-			'post_type' => $options['post_type'],
+			'post_type' => 'dslc_staff',
 			'posts_per_page' => $options['amount'],
 			'order' => $options['order'],
 			'orderby' => $options['orderby'],
@@ -2025,10 +1991,19 @@ class DSLC_Staff extends DSLC_Module {
 			$args['post_status'] = array( 'publish', 'private' );
 		}
 
-		// Category args
 		if ( isset( $options['categories'] ) && $options['categories'] != '' ) {
-			$cats_array = explode( ' ', $options['categories']);
-			$args['category__in'] = $cats_array;
+
+			$cats_array = explode( ' ', trim( $options['categories'] ));
+
+			$args['tax_query'] = array(
+				array(
+					'taxonomy' => 'dslc_staff_cats',
+					'field' => 'slug',
+					'terms' => $cats_array,
+					'operator' => $options['categories_operator']
+				)
+			);
+
 		}
 
 		// Exlcude and Include arrays
@@ -2036,61 +2011,34 @@ class DSLC_Staff extends DSLC_Module {
 		$include = array();
 
 		// Exclude current post
-		if ( is_singular( get_post_type() ) ) {
-
+		if ( is_singular( get_post_type() ) )
 			$exclude[] = get_the_ID();
-		}
 
 		// Exclude posts ( option )
-		if ( $options['query_post_not_in'] ) {
-
+		if ( $options['query_post_not_in'] )
 			$exclude = array_merge( $exclude, explode( ' ', $options['query_post_not_in'] ) );
-		}
 
 		// Include posts ( option )
- 		if ( $options['query_post_in'] ) {
-
+		if ( $options['query_post_in'] )
 			$include = array_merge( $include, explode( ' ', $options['query_post_in'] ) );
- 		}
 
 		// Include query parameter
-		if ( ! empty( $include ) ) {
-
+		if ( ! empty( $include ) )
 			$args['post__in'] = $include;
-		}
 
 		// Exclude query parameter
-		if ( ! empty( $exclude ) ) {
-
+		if ( ! empty( $exclude ) )
 			$args['post__not_in'] = $exclude;
-		}
-
-		// Author archive page
-		if ( is_author() && $options['query_alter'] == 'enabled' ) {
-
-			global $authordata;
-			$args['author__in'] = array( $authordata->data->ID );
-		}
 
 		// No paging
-		if ( $options['pagination_type'] == 'disabled' ) {
-
+		if ( $options['pagination_type'] == 'disabled' )
 			$args['no_found_rows'] = true;
-		}
-
-		// Sticky Posts
-		if ( $options['sticky_posts'] == 'disabled' ) {
-
-			$args['ignore_sticky_posts'] = true;
-		}
 
 		// Do the query
-		if ( ( is_category() || is_tag() || is_tax() || is_search() || is_date() ) && $options['query_alter'] == 'enabled' ) {
-
+		if ( is_category() || is_tax() || is_search() ) {
 			global $wp_query;
 			$dslc_query = $wp_query;
 		} else {
-
 			$dslc_query = new WP_Query( $args );
 		}
 
@@ -2115,7 +2063,7 @@ class DSLC_Staff extends DSLC_Module {
 
 		if ( $dslc_query == null ) {
 
-			$dslc_query = $this->get_posts();
+			$dslc_query = $this->get_staff();
 			$LC_Registry->set( 'dslc-staff-query', $dslc_query );
 		}
 
@@ -2131,6 +2079,15 @@ class DSLC_Staff extends DSLC_Module {
 				$dslc_query->the_post();
 				$LC_Registry->set( 'dslc-staff-elem-index', $cnt );
 
+				$staff_member_info = [];
+				$staff_member_info['twitter'] = get_post_meta( get_the_ID(), 'dslc_staff_social_twitter', true );
+				$staff_member_info['facebook'] = get_post_meta( get_the_ID(), 'dslc_staff_social_facebook', true );
+				$staff_member_info['googleplus'] = get_post_meta( get_the_ID(), 'dslc_staff_social_googleplus', true );
+				$staff_member_info['linkedin'] = get_post_meta( get_the_ID(), 'dslc_staff_social_linkedin', true );
+				$staff_member_info['email'] = get_post_meta( get_the_ID(), 'dslc_staff_social_email', true );
+				$staff_member_info['position'] = get_post_meta( get_the_ID(), 'dslc_staff_position', true );
+
+				$LC_Registry->set( 'dslc-staff-member-info', $staff_member_info );
 
 				$out .= DSLC_Main::dslc_do_shortcode( $content );
 
@@ -2152,9 +2109,75 @@ class DSLC_Staff extends DSLC_Module {
 
 			$LC_Registry->set( 'dslc-staff-elem-index', null );
 			$LC_Registry->set( 'curr_class', null );
+			$LC_Registry->set( 'dslc-staff-member-social', null );
 		}
 
 		return $out;
+	}
+
+
+	/**
+	 * Return current member position. Template function
+	 * @return string
+	 */
+	function position() {
+
+		global $LC_Registry;
+		$staff_member_info = $LC_Registry->get( 'dslc-staff-member-info' );
+
+		return $staff_member_info['position'];
+	}
+
+	/**
+	 * Returns staff social info.
+	 * @return string
+	 */
+	function member_social() {
+
+		global $LC_Registry;
+		ob_start();
+
+		$options = $this->getPropsValues();
+		$member_social = $LC_Registry->get( 'dslc-staff-member-info' );
+
+		if ( isset( $member_social['twitter'] ) || isset( $member_social['facebook'] ) || isset( $member_social['googleplus'] ) || isset( $member_social['linkedin'] ) || isset( $member_social['email'] ) ){?>
+
+			<div class="dslc-staff-member-social">
+
+				<?php if ( isset( $member_social['twitter'] ) ) : ?>
+					<a target="<?php echo $options['social_link_target']; ?>" href="<?php echo $member_social['twitter']; ?>">
+						<span class="dslc-icon dslc-icon-twitter"></span>
+					</a>
+				<?php endif; ?>
+
+				<?php if ( isset( $member_social['facebook'] ) ) : ?>
+					<a target="<?php echo $options['social_link_target']; ?>" href="<?php echo $member_social['facebook']; ?>">
+						<span class="dslc-icon dslc-icon-facebook"></span>
+					</a>
+				<?php endif; ?>
+
+				<?php if ( isset( $member_social['googleplus'] ) ) : ?>
+					<a target="<?php echo $options['social_link_target']; ?>" href="<?php echo $member_social['googleplus']; ?>">
+						<span class="dslc-icon dslc-icon-google-plus"></span>
+					</a>
+				<?php endif; ?>
+
+				<?php if ( isset( $member_social['linkedin'] ) ) : ?>
+					<a target="<?php echo $options['social_link_target']; ?>" href="<?php echo $member_social['linkedin']; ?>">
+						<span class="dslc-icon dslc-icon-linkedin"></span>
+					</a>
+				<?php endif; ?>
+
+				<?php if ( isset( $member_social['email'] ) ) : ?>
+					<a target="<?php echo $options['social_link_target']; ?>" href="<?php echo $member_social['email']; ?>">
+						<span class="dslc-icon dslc-icon-envelope"></span>
+					</a>
+				<?php endif; ?>
+
+			</div><!-- .dslc-staff-member-social -->
+		<?php };
+
+		return ob_get_clean();
 	}
 
 	/**
@@ -2292,17 +2315,22 @@ class DSLC_Staff extends DSLC_Module {
 		}
 
 		ob_start();
+
+		if ( $options['link'] != 'disabled' ) {
 		?>
-		<div class="dslc-cpt-post-thumb-inner dslca-post-thumb">
-			<a href="<?php the_permalink() ?>">
-				<?php if ( $manual_resize ) {?>
-					<img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" />
-				<?php } else { ?>
-					<?php the_post_thumbnail( 'full' ); ?>
-				<?php } ?>
+				<a href="<?php the_permalink() ?>">
+		<?php }
+
+			 if ( $manual_resize ) {?>
+				<img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" />
+			<?php } else { ?>
+				<?php the_post_thumbnail( 'full' ); ?>
+			<?php }
+
+		if ( $options['link'] != 'disabled' ) {
+		?>
 			</a>
-		</div><!-- .dslc-cpt-post-thumb-inner -->
-		<?php
+		<?php }
 
 		return ob_get_clean();
 	}

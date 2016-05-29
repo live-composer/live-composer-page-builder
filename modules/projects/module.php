@@ -89,7 +89,7 @@ class DSLC_Projects extends DSLC_Module {
 			$args['post_status'] = array( 'publish', 'private' );
 		}
 
-		if ( isset( $options['categories'] ) && trim($options['categories']) != '' ) {
+		if ( isset( $options['categories'] ) && trim( $options['categories'] ) != '' ) {
 
 			$cats_array = explode( ' ', trim( $options['categories'] ) );
 
