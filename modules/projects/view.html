@@ -67,72 +67,57 @@
 
 					<% if(post_elements.value.indexOf('thumbnail') > -1){%>
 
-						<div class="dslc-post-thumb dslc-cpt-post-thumb dslc-on-hover-anim">
+						<div class="dslc-post-thumb dslc-project-thumb dslc-on-hover-anim">
 
-							<div data-module-method="post_thumb">
-								<div class="dslc-cpt-post-thumb-inner dslca-post-thumb">
+							<div class="dslc-project-thumb-inner dslca-post-thumb">
 
-										<a href="{{dslc-module-sc module-method='permalink'}}">
-											<img width="100%" height=200 src="http://dummyimage.com/300x200/000/fff"/>
-										</a>
-
-								</div><!-- .dslc-cpt-post-thumb-inner -->
-							</div>
+									<a href="#">
+										<img width="100%" height=200 src="http://dummyimage.com/300x200/000/fff"/>
+									</a>
+							</div><!-- .dslc-project-thumb-inner -->
 
 							<% if((main_location.value == 'inside' || main_location.value == 'inside_visible')  &&
 									(
 									 	post_elements.value.indexOf('title') > -1 ||
-									  	post_elements.value.indexOf('meta') > -1 ||
+									  	post_elements.value.indexOf('categories') > -1 ||
 									  	post_elements.value.indexOf('excerpt') > -1 ||
 									  	post_elements.value.indexOf('button') > -1
 									)
 								){%>
 
-								<div class="dslc-post-main dslc-cpt-post-main <%= main_location.value == 'inside_visible' ? 'dslc-cpt-post-main-visible' : '' %> dslc-on-hover-anim-target dslc-anim-<%= css_anim_hover.value %>" data-dslc-anim="<%= css_anim_hover.value %>" data-dslc-anim-speed="<%= css_anim_speed.value %>">
+								<div class="dslc-project-main <%= main_location.value == 'inside_visible' ? 'dslc-project-main-visible' : '' %> dslc-on-hover-anim-target dslc-anim-<%= css_anim_hover.value %>" data-dslc-anim="<%= css_anim_hover.value %>" data-dslc-anim-speed="<%= css_anim_speed.value %>">
 
-									<div class="dslc-cpt-post-main-inner dslc-init-<%= main_position.value %>">
+									<div class="dslc-project-main-inner dslc-init-<%= main_position.value %>">
 
 										<% if(post_elements.value.indexOf('title') > -1){%>
 
-											<div class="dslc-cpt-post-title">
+											<div class="dslc-project-title">
 												<h2>
-													<a href="{{dslc-module-sc module-method='permalink'}}" data-module-method="post_title">Post title</a>
+													<a href="{{dslc-module-sc module-method='project_url'}}" data-module-method="post_title">Post title</a>
 												</h2>
-											</div><!-- .dslc-cpt-post-title -->
+											</div><!-- .dslc-project-title -->
 
 										<%}%>
 
-										<% if(post_elements.value.indexOf('meta') > -1){%>
+										<% if(post_elements.value.indexOf('categories') > -1){%>
 
-											<div class="dslc-cpt-post-meta">
-
-												<% if(meta_elements.value.indexOf('author') > -1){%>
-													<div class="dslc-cpt-post-meta-author" data-module-method="author_posts_link">
-														<a href="#" title="Posts by author" rel="author">Author</a>
-													</div><!-- .dslc-cpt-post-meta-author -->
-												<%}%>
-
-												<% if(meta_elements.value.indexOf('date') > -1){%>
-													<div class="dslc-cpt-post-meta-date" data-module-method="post_date">
-														05/10/2016
-													</div><!-- .dslc-cpt-post-meta-date -->
-												<%}%>
-
-											</div><!-- .dslc-cpt-post-meta -->
+											<div class="dslc-project-cats" module-method="project_cats_list" >
+													SEO, MMM, E-commerce, logistics
+											</div><!-- .dslc-project-cats -->
 										<%}%>
 
 										<% if(post_elements.value.indexOf('excerpt') > -1){%>
 
-											<div class="dslc-cpt-post-excerpt" data-module-method="excerpt">
+											<div class="dslc-project-excerpt" data-module-method="excerpt">
 												Lorem ipsum dorem sit amet
-											</div><!-- .dslc-cpt-post-excerpt -->
+											</div><!-- .dslc-project-excerpt -->
 
 										<%}%>
 
 										<% if(post_elements.value.indexOf('button') > -1){%>
 
-											<div class="dslc-cpt-post-read-more">
-												<a href="{{dslc-module-sc module-method='permalink'}}">
+											<div class="dslc-project-read-more">
+												<a href="{{dslc-module-sc module-method='project_url'}}" target="{{dslc-module-sc module-method='project_link_target'}}">
 
 													<% if(obj.button_icon_id && obj.button_icon_id.value != '' ){%>
 														<span class="dslc-icon dslc-icon-<%= button_icon_id.value %>"></span>
@@ -140,68 +125,61 @@
 
 													<%= button_text.value || button_text.std %>
 												</a>
-											</div><!-- .dslc-cpt-post-read-more -->
+											</div><!-- .dslc-project-read-more -->
 										<%}%>
 
-									</div><!-- .dslc-cpt-post-main-inner -->
-									<a href="{{dslc-module-sc module-method='permalink'}}" class="dslc-post-main-inner-link-cover"></a>
-								</div><!-- .dslc-cpt-post-main -->
+									</div><!-- .dslc-init-center -->
+
+									<a href="{{dslc-module-sc module-method='project_url'}}" target="{{dslc-module-sc module-method='project_link_target'}}" class="dslc-post-main-inner-link-cover"></a>
+
+								</div><!-- .dslc-project-main -->
 							<%}%>
-						</div><!-- .dslc-cpt-post-thumb -->
+						</div><!-- .dslc-project-thumb -->
 					<%}%>
 
-					<% if(main_location.value == 'bellow' && (post_elements.value.indexOf('title') > -1 || post_elements.value.indexOf('meta') > -1 || post_elements.value.indexOf('excerpt') > -1 || post_elements.value.indexOf('button') > -1)){%>
+					<% if(main_location.value == 'bellow' && (post_elements.value.indexOf('title') > -1 || post_elements.value.indexOf('categories') > -1 || post_elements.value.indexOf('excerpt') > -1 || post_elements.value.indexOf('button') > -1)){%>
 
-						<div class="dslc-post-main dslc-cpt-post-main">
+						<div class="dslc-post-main dslc-project-main">
 
 							<% if(post_elements.value.indexOf('title') > -1){%>
 
-								<div class="dslc-cpt-post-title">
-									<h2 class="lc-editor-elem">
-										<a href="{{dslc-module-sc module-method='permalink'}}" data-module-method="post_title">Title</a>
+								<div class="dslc-project-title">
+									<h2>
+										<a href="{{dslc-module-sc module-method='project_url'}}" target="{{dslc-module-sc module-method='project_link_target'}}" data-module-method="post_title">Title</a>
 									</h2>
-								</div><!-- .dslc-cpt-post-title -->
+								</div><!-- .dslc-project-title -->
 							<%}%>
 
-							<% if(post_elements.value.indexOf('meta') > -1){%>
+							<% if(post_elements.value.indexOf('categories') > -1){%>
 
-								<div class="dslc-cpt-post-meta">
-
-									<% if(meta_elements.value.indexOf('author') > -1){%>
-										<div class="dslc-cpt-post-meta-author" data-module-method="author_posts_link">
-											 <a href="#" title="Posts by author" rel="author">Author</a>
-										</div><!-- .dslc-cpt-post-meta-author -->
-									<%}%>
-
-									<% if(meta_elements.value.indexOf('date') > -1){%>
-										<div class="dslc-cpt-post-meta-date" data-module-method="post_date">
-											12/06/2016
-										</div><!-- .dslc-cpt-post-meta-date -->
-									<%}%>
-								</div><!-- .dslc-cpt-post-meta -->
+								<div class="dslc-project-cats" module-method="project_cats_list" >
+										SEO, MMM, E-commerce, logistics
+								</div><!-- .dslc-project-cats -->
 							<%}%>
 
 							<% if(post_elements.value.indexOf('excerpt') > -1){%>
 
-								<div class="dslc-cpt-post-excerpt" data-module-method="excerpt">
+								<div class="dslc-project-excerpt" data-module-method="excerpt">
 									Lorem ipsum dorem sit amet
-								</div><!-- .dslc-cpt-post-excerpt -->
+								</div><!-- .dslc-project-excerpt -->
 							<%}%>
 
 							<% if(post_elements.value.indexOf('button') > -1){%>
 
-								<div class="dslc-cpt-post-read-more">
-									<a href="{{dslc-module-sc module-method='permalink'}}">
-										<% if(button_icon_id.value != '' ){%>
+								<div class="dslc-project-read-more">
+									<a href="{{dslc-module-sc module-method='project_url'}}" target="{{dslc-module-sc module-method='project_link_target'}}">
+
+										<% if(obj.button_icon_id && obj.button_icon_id.value != '' ){%>
 											<span class="dslc-icon dslc-icon-<%= button_icon_id.value %>"></span>
 										<%}%>
+
 										<%= button_text.value || button_text.std %>
 									</a>
-								</div><!-- .dslc-cpt-post-read-more -->
+								</div><!-- .dslc-project-read-more -->
 							<%}%>
-						</div><!-- .dslc-cpt-post-main -->
+						</div><!-- .dslc-project-main -->
 					<%}%>
-					<!-- .dslc-cpt-post -->
+					<!-- .dslc-project -->
 				</div>
 
 				<% if(last_col != ''){%>
@@ -213,7 +191,7 @@
 				</div>
 			<%}%>
 		</div><!--.dslc-posts-inner -->
-	</div><!-- .dslc-cpt-posts -->
+	</div><!-- .dslc-projects -->
 
 <% if(pagination_type.value && pagination_type.value != 'disabled'){%>
 	<div data-module-method="pagination_nav"></div>

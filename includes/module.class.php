@@ -12,16 +12,17 @@
   *   $module_category
   *   $module_handle
   *   $module_like
+  *   $__propValues
   */
 class DSLC_Module{
 
 	var $optionsArray;
-	//var $cache_reset_events = array( 'any' );
 	var $module_id;
 	var $module_title;
 	var $module_icon;
 	var $module_category;
 	var $handle_like;
+	var $__propValues; /// Contains all the props values with applied std
 
 	/**
 	 * Construction
@@ -305,24 +306,24 @@ class DSLC_Module{
 		$posts_per_row_choices = array(
 			array(
 				'label' => '1',
-				'value' => '12',
+				'value' => '1',
 			),
 			array(
 				'label' => '2',
-				'value' => '6',
+				'value' => '2',
 			),
 			array(
 				'label' => '3',
-				'value' => '4',
-			),
-			array(
-				'label' => '4',
 				'value' => '3',
 			),
 			array(
-				'label' => '6',
-				'value' => '2',
+				'label' => '4',
+				'value' => '4',
 			),
+			array(
+				'label' => '6',
+				'value' => '6',
+			)
 		);
 
 		/**
@@ -2259,13 +2260,21 @@ class DSLC_Module{
 	/**
 	 * Returns properties values - or std values.
 	 *
+	 * @param bool $force_update_options_values  defines if need to get not cached option values
+	 *
 	 * @return array
 	 */
-	function getPropsValues() {
+	function getPropsValues( $force_update_options_values = false ) {
 
-		if( ! isset( $this->settings ) || ! isset( $this->settings['propValues'] ) ) {
+		if ( ! isset( $this->settings ) || ! isset( $this->settings['propValues'] ) ) {
 
 			return [];
+		}
+
+		/// Cache prop options in module for next method call
+		if ( is_array( $this->__propValues ) && ! $force_update_options_values ) {
+
+			return $this->__propValues;
 		}
 
 		$userOptions = $this->settings['propValues'];
@@ -2276,6 +2285,8 @@ class DSLC_Module{
 
 			$out[$option['id']] = isset( $userOptions[$option['id']] ) ? $userOptions[$option['id']] : $option['std'];
 		}
+
+		$this->__propValues = $out;
 
 		return $out;
 	}

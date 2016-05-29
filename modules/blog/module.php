@@ -117,28 +117,7 @@ class DSLC_Blog extends DSLC_Module {
 				'id' => 'posts_per_row',
 				'std' => '3',
 				'type' => 'select',
-				'choices' => array(
-					array(
-						'label' => '1',
-						'value' => '1',
-					),
-					array(
-						'label' => '2',
-						'value' => '2',
-					),
-					array(
-						'label' => '3',
-						'value' => '3',
-					),
-					array(
-						'label' => '4',
-						'value' => '4',
-					),
-					array(
-						'label' => '6',
-						'value' => '6',
-					),
-				)
+				'choices' => $this->shared_options('posts_per_row_choices')
 			),
 			array(
 				'label' => __( 'Categories', 'live-composer-page-builder' ),

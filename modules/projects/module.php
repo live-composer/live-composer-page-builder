@@ -243,7 +243,9 @@ class DSLC_Projects extends DSLC_Module {
 			unset( $cnt );
 
 			$LC_Registry->set( 'dslc-projects-elem-index', null );
+			$LC_Registry->set( 'dslc-project-cats', null );
 			$LC_Registry->set( 'curr_class', null );
+			$LC_Registry->set( 'project_url', null );
 		}
 
 		return $out;
@@ -352,6 +354,38 @@ class DSLC_Projects extends DSLC_Module {
 	}
 
 	/**
+	 * Return project categories list
+	 * @return string
+	 */
+	function project_cats_list() {
+
+		global $LC_Registry;
+
+		$project_cats = $LC_Registry->get( 'dslc-project-cats' );
+
+		if ( ! is_array( $project_cats ) ) {
+
+			$project_cats = get_the_terms( get_the_ID(), 'dslc_projects_cats' );
+		}
+
+		ob_start();
+
+		foreach ( $project_cats as $project_cat ) {
+
+			$project_cats_count++;
+
+			if ( $project_cats_count > 1 ) {
+
+				echo ', ';
+			}
+
+			echo $project_cat->name;
+		}
+
+		return ob_get_clean();
+	}
+
+	/**
 	 * Returns post thumbnail. Repeater function.
 	 * @return  string
 	 */
@@ -385,15 +419,13 @@ class DSLC_Projects extends DSLC_Module {
 
 		ob_start();
 		?>
-		<div class="dslc-cpt-post-thumb-inner dslca-post-thumb">
-			<a href="<?php the_permalink() ?>">
-				<?php if ( $manual_resize ) {?>
-					<img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" />
-				<?php } else { ?>
-					<?php the_post_thumbnail( 'full' ); ?>
-				<?php } ?>
-			</a>
-		</div><!-- .dslc-cpt-post-thumb-inner -->
+		<a href="<?php echo $this->project_url() ?>" target="<?php echo $options['link_target'] ?>">
+			<?php if ( $manual_resize ) {?>
+				<img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" />
+			<?php } else { ?>
+				<?php the_post_thumbnail( 'full' ); ?>
+			<?php } ?>
+		</a>
 		<?php
 
 		return ob_get_clean();
@@ -461,6 +493,8 @@ class DSLC_Projects extends DSLC_Module {
 				}
 			}
 		}
+
+		$LC_Registry->set( 'dslc-project-cats', $cats_array );
 
 		ob_start();
 
@@ -614,7 +648,7 @@ class DSLC_Projects extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Posts Per Row', 'live-composer-page-builder' ),
-				'id' => 'columns',
+				'id' => 'posts_per_row',
 				'std' => '3',
 				'type' => 'select',
 				'choices' => $this->shared_options('posts_per_row_choices'),
@@ -2485,6 +2519,59 @@ class DSLC_Projects extends DSLC_Module {
 		/* Module output ends here */
 
 		$this->module_end();
+	}
+
+	/**
+	 * Returns project url
+	 * @return string
+	 */
+	function project_url() {
+
+		global $LC_Registry;
+
+		$the_project_url = $LC_Registry->get( 'project_url' );
+
+		if (  $the_project_url ) {
+
+			return $the_project_url;
+		}
+
+		$options = $this->getPropsValues();
+		$the_project_url = get_permalink();
+
+		if ( $options['link'] == 'custom' ) {
+			if ( get_post_meta( get_the_ID(), 'dslc_project_url', true ) )
+				$the_project_url = get_post_meta( get_the_ID(), 'dslc_project_url', true );
+			else
+				$the_project_url = '#';
+		}
+
+		$LC_Registry->set( 'project_url', $the_project_url ); /// Cache value
+
+		return $the_project_url;
+	}
+
+	/**
+	 * Returns project target
+	 * @return string
+	 */
+	function project_link_target() {
+
+		global $LC_Registry;
+
+		$the_project_target = $LC_Registry->get( 'project_target' );
+
+		if (  $the_project_target ) {
+
+			return $the_project_target;
+		}
+
+		$options = $this->getPropsValues();
+		$the_project_target = $options['link_target'];
+
+		$LC_Registry->set( 'project_target', $the_project_target ); /// Cache value
+
+		return $the_project_target;
 	}
 
 	/**
