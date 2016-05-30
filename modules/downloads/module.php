@@ -181,7 +181,7 @@ class DSLC_Downloads extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Items Per Row', 'live-composer-page-builder' ),
-				'id' => 'columns',
+				'id' => 'posts_per_row',
 				'std' => '3',
 				'type' => 'select',
 				'choices' => $this->shared_options('posts_per_row_choices'),
@@ -2081,7 +2081,7 @@ class DSLC_Downloads extends DSLC_Module {
 
 		global $LC_Registry;
 
-		$dslc_query = $this->get_posts();
+		$dslc_query = $this->get_downloads();
 		$LC_Registry->set( 'dslc-downloads-query', $dslc_query );
 
 		$taxonomy_name = '';
@@ -2095,24 +2095,12 @@ class DSLC_Downloads extends DSLC_Module {
 			while ( $dslc_query->have_posts() ) {
 
 				$dslc_query->the_post();
+				$post_cats = get_the_terms( get_the_ID(), 'dslc_downloads_cats' );
 
-				$cats_count++;
-
-				if ( $cats_count == 1 ) {
-
-					$post_type_taxonomies = get_object_taxonomies( get_post_type(), 'objects' );
-					foreach ( $post_type_taxonomies as $taxonomy ) {
-						if ( $taxonomy->hierarchical == true ) {
-							$taxonomy_name = $taxonomy->name;
-
-							$LC_Registry->set( 'dslc-downloads-taxonomy', $taxonomy_name );
-						}
-					}
-				}
-
-				$post_cats = get_the_terms( get_the_ID(), $taxonomy_name );
 				if ( ! empty( $post_cats ) ) {
+
 					foreach( $post_cats as $post_cat ) {
+
 						$cats_array[$post_cat->slug] = $post_cat->name;
 					}
 				}
@@ -2122,7 +2110,7 @@ class DSLC_Downloads extends DSLC_Module {
 		ob_start();
 
 		foreach ( $cats_array as $cat_slug => $cat_name ) {?>
-			<span class="dslc-post-filter dslc-inactive" data-id="<?php echo $cat_slug; ?>"><?php echo $cat_name; ?></span>
+			<span class="dslc-post-filter dslc-downloads-module dslc-inactive" data-id="<?php echo $cat_slug; ?>"><?php echo $cat_name; ?></span>
 		<?php }
 
 		return ob_get_clean();
@@ -2170,119 +2158,87 @@ class DSLC_Downloads extends DSLC_Module {
 
 		if ( ! isset( $options['excerpt_length'] ) ) $options['excerpt_length'] = 20;
 
-		/**
-		 * Query
-		 */
+			if( is_front_page() ) { $paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1; } else { $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1; }
 
-		// Fix for pagination
-		if( is_front_page() ) {
+			// Fix for pagination from other modules affecting this one when pag disabled
+			if ( $options['pagination_type'] == 'disabled' ) $paged = 1;
 
-			$paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1;
-		} else {
+			// Fix for offset braking pagination
+			$query_offset = $options['offset'];
+			if ( $query_offset > 0 && $paged > 1 ) $query_offset = ( $paged - 1 ) * $options['amount'] + $options['offset'];
 
-			$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
-		}
+			$args = array(
+				'paged' => $paged,
+				'post_type' => 'dslc_downloads',
+				'posts_per_page' => $options['amount'],
+				'order' => $options['order'],
+				'orderby' => $options['orderby'],
+			);
 
-		// Fix for pagination from other modules affecting this one when pag disabled
-		if ( ! isset( $options['pagination_type'] ) || $options['pagination_type'] == 'disabled' ) {
+			// Add offset
+			if ( $query_offset > 0 ) {
+				$args['offset'] = $query_offset;
+			}
 
-			$paged = 1;
-		}
+			if ( defined('DOING_AJAX') && DOING_AJAX ) {
+				$args['post_status'] = array( 'publish', 'private' );
+			}
 
-		// Fix for offset braking pagination
-		$query_offset = $options['offset'];
+			if ( isset( $options['categories'] ) && $options['categories'] != '' ) {
 
-		if ( $query_offset > 0 && $paged > 1 ) {
+				$cats_array = explode( ' ', trim( $options['categories'] ));
 
-			$query_offset = ( $paged - 1 ) * $options['amount'] + $options['offset'];
-		}
+				$args['tax_query'] = array(
+					array(
+						'taxonomy' => 'dslc_downloads_cats',
+						'field' => 'slug',
+						'terms' => $cats_array,
+						'operator' => $options['categories_operator']
+					)
+				);
 
-		// General args
-		$args = array(
-			'paged' => $paged,
-			'post_type' => $options['post_type'],
-			'posts_per_page' => $options['amount'],
-			'order' => $options['order'],
-			'orderby' => $options['orderby'],
-		);
+			}
 
-		// Add offset
-		if ( $query_offset > 0 ) {
-			$args['offset'] = $query_offset;
-		}
+			// Exlcude and Include arrays
+			$exclude = array();
+			$include = array();
 
-		if ( defined('DOING_AJAX') && DOING_AJAX ) {
-			$args['post_status'] = array( 'publish', 'private' );
-		}
+			// Exclude current post
+			if ( is_singular( get_post_type() ) )
+				$exclude[] = get_the_ID();
 
-		// Category args
-		if ( isset( $options['categories'] ) && $options['categories'] != '' ) {
-			$cats_array = explode( ' ', $options['categories']);
-			$args['category__in'] = $cats_array;
-		}
+			// Exclude posts ( option )
+			if ( $options['query_post_not_in'] )
+				$exclude = array_merge( $exclude, explode( ' ', $options['query_post_not_in'] ) );
 
-		// Exlcude and Include arrays
-		$exclude = array();
-		$include = array();
+			// Include posts ( option )
+			if ( $options['query_post_in'] )
+				$include = array_merge( $include, explode( ' ', $options['query_post_in'] ) );
 
-		// Exclude current post
-		if ( is_singular( get_post_type() ) ) {
+			// Include query parameter
+			if ( ! empty( $include ) )
+				$args['post__in'] = $include;
 
-			$exclude[] = get_the_ID();
-		}
+			// Exclude query parameter
+			if ( ! empty( $exclude ) )
+				$args['post__not_in'] = $exclude;
 
-		// Exclude posts ( option )
-		if ( $options['query_post_not_in'] ) {
+			// Author archive page
+			if ( is_author() && $options['query_alter_author'] == 'enabled' ) {
+				global $authordata;
+				$args['author__in'] = array( $authordata->data->ID );
+			}
 
-			$exclude = array_merge( $exclude, explode( ' ', $options['query_post_not_in'] ) );
-		}
-
-		// Include posts ( option )
- 		if ( $options['query_post_in'] ) {
-
-			$include = array_merge( $include, explode( ' ', $options['query_post_in'] ) );
- 		}
-
-		// Include query parameter
-		if ( ! empty( $include ) ) {
-
-			$args['post__in'] = $include;
-		}
-
-		// Exclude query parameter
-		if ( ! empty( $exclude ) ) {
-
-			$args['post__not_in'] = $exclude;
-		}
-
-		// Author archive page
-		if ( is_author() && $options['query_alter'] == 'enabled' ) {
-
-			global $authordata;
-			$args['author__in'] = array( $authordata->data->ID );
-		}
-
-		// No paging
-		if ( $options['pagination_type'] == 'disabled' ) {
-
-			$args['no_found_rows'] = true;
-		}
-
-		// Sticky Posts
-		if ( $options['sticky_posts'] == 'disabled' ) {
-
-			$args['ignore_sticky_posts'] = true;
-		}
-
-		// Do the query
-		if ( ( is_category() || is_tag() || is_tax() || is_search() || is_date() ) && $options['query_alter'] == 'enabled' ) {
-
-			global $wp_query;
-			$dslc_query = $wp_query;
-		} else {
-
-			$dslc_query = new WP_Query( $args );
-		}
+			// Do the query
+			if ( ( is_category() || is_tag() || is_tax() ) && $options['query_alter_cat'] == 'enabled' ) {
+				global $wp_query;
+				$dslc_query = $wp_query;
+			} elseif ( is_search() && $options['query_alter_search'] == 'enabled' ) {
+				global $wp_query;
+				$dslc_query = $wp_query;
+			} else {
+				$dslc_query = new WP_Query( $args );
+			}
 
 		return $dslc_query;
 	}
@@ -2321,6 +2277,13 @@ class DSLC_Downloads extends DSLC_Module {
 				$dslc_query->the_post();
 				$LC_Registry->set( 'dslc-downloads-elem-index', $cnt );
 
+				$link_to_single = true;
+				if ( $options['link'] == 'disabled' ) {
+
+					$link_to_single = false;
+				}
+
+				$LC_Registry->set( 'dslc-download-link-to-single', $link_to_single );
 
 				$out .= DSLC_Main::dslc_do_shortcode( $content );
 
@@ -2336,6 +2299,7 @@ class DSLC_Downloads extends DSLC_Module {
 				}
 
 				$cnt++;
+				$LC_Registry->set( 'dslc-download-link-to-single', null );
 			}
 
 			unset( $cnt );
@@ -2345,6 +2309,77 @@ class DSLC_Downloads extends DSLC_Module {
 		}
 
 		return $out;
+	}
+
+	function download_tags() {
+
+		ob_start();
+		$download_tags_count = 0;
+		$download_tags = get_the_terms( get_the_ID(), 'dslc_downloads_tags' );
+
+		if ( ! empty( $download_tags ) ) : ?>
+
+				<div class="dslc-download-tags">
+					In
+					<?php foreach ( $download_tags as $download_tag ) : $download_tags_count++; ?>
+						<?php if ( $download_tags_count > 1 ) { echo ', '; } ?>
+						<a href="<?php echo get_term_link( $download_tag->slug, 'dslc_downloads_tags' ); ?>"><?php echo $download_tag->name; ?></a>
+					<?php endforeach; ?>
+				</div><!-- .dslc-download-tags -->
+
+		<?php endif;
+
+		return ob_get_clean();
+	}
+
+	/**
+	 * Return download button HTML.
+	 * @return string
+	 */
+	function download_button() {
+
+		ob_start();
+		$options = $this->getPropsValues();
+		if ( get_post_meta( get_the_ID(), 'dslc_download_file', true ) ) {
+
+			$download_link = wp_get_attachment_url( get_post_meta( get_the_ID(), 'dslc_download_file', true ) );
+		} elseif ( get_post_meta( get_the_ID(), 'dslc_download_url', true ) ) {
+
+			$download_link = get_post_meta( get_the_ID(), 'dslc_download_url', true );
+		} else {
+
+			$download_link = false;
+		}
+
+
+		?>
+		<a target="_blank" class="dslc-download-count-hook" data-post-id="<?php echo get_the_ID(); ?>" href="<?php echo $download_link; ?>">
+			<?php if ( isset( $options['button_icon_id'] ) && $options['button_icon_id'] != '' ) : ?>
+				<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
+			<?php endif; ?>
+			<?php echo $options['button_text']; ?>
+		</a>
+		<?php
+
+		return ob_get_clean();
+	}
+
+	/**
+	 * Returns download info
+	 * @return string
+	 */
+	function download_info() {
+
+		$download_count = get_post_meta( get_the_ID(), 'dslc_download_count', true );
+
+		if ( ! $download_count ) {
+
+			$download_count = 0;
+		}
+
+		ob_start();
+		printf( __( 'Downloaded %d times.', 'live-composer-page-builder' ), $download_count );
+		return ob_get_clean();
 	}
 
 	/**
@@ -2443,8 +2478,17 @@ class DSLC_Downloads extends DSLC_Module {
 	 */
 	function post_title() {
 
+		global $LC_Registry;
+		$link_to_single = $LC_Registry->get( 'dslc-download-link-to-single' );
+
 		ob_start();
-		the_title();
+		?>
+		<?php if ( $link_to_single ) : ?>
+			<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+		<?php else : ?>
+			<h2><?php the_title(); ?></h2>
+		<?php endif; ?>
+		<?php
 
 		return ob_get_clean();
 	}

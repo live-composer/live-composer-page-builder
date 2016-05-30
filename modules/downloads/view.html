@@ -22,14 +22,14 @@
 
 		<% if(show_filters == true){%>
 			<!-- Filters -->
-			<div class="dslc-post-filters dslc-posts-module">
+			<div class="dslc-post-filters">
 
-				<span class="dslc-post-filter dslc-active" data-id="all">
+				<span class="dslc-post-filter dslc-downloads-module dslc-active" data-id="all">
 					<?php _ex( 'All', 'Post Filter', 'live-composer-page-builder' ); ?>
 				</span>
 
 				<% cats_array.forEach(function(elem, index){%>
-					<span class="dslc-post-filter dslc-inactive" data-repeatable="post_filter" data-id="<%= elem.cat_slug %>">
+					<span class="dslc-post-filter dslc-downloads-module dslc-inactive" data-repeatable="post_filter" data-id="<%= elem.cat_slug %>">
 						<%= elem.cat_name %>
 					</span>
 				<%})%>
@@ -65,76 +65,73 @@
 
 				var last_col = type.value == 'grid' && index > 0 && (index + 1) % posts_per_row.value == 0 && separator_enabled.value != 'disabled' ? 'dslc-last-col' : '';
 				%>
-				<div class="<%= element_class + columns_class + extra_class %> <%= last_col %> {{dslc-module-sc module-method='extra_col_class'}} {{dslc-module-sc module-method='post_categories'}}" data-repeatable="render_posts">
+				<div class="<%= element_class + columns_class + extra_class %> <%= last_col %> {{dslc-module-sc module-method='extra_col_class'}} {{dslc-module-sc module-method='post_categories'}}" data-repeatable="render_downloads">
 
 					<% if(post_elements.value.indexOf('thumbnail') > -1){%>
 
-						<div class="dslc-post-thumb dslc-cpt-post-thumb dslc-on-hover-anim">
+						<div class="dslc-download-thumb dslc-post-thumb dslc-on-hover-anim">
 
 							<div data-module-method="post_thumb">
-								<div class="dslc-cpt-post-thumb-inner dslca-post-thumb">
+								<div class="dslc-download-thumb-inner dslca-post-thumb">
 
 										<a href="{{dslc-module-sc module-method='permalink'}}">
 											<img width="100%" height=200 src="http://dummyimage.com/300x200/000/fff"/>
 										</a>
 
-								</div><!-- .dslc-cpt-post-thumb-inner -->
+								</div><!-- .dslc-download-thumb-inner -->
 							</div>
 
 							<% if((main_location.value == 'inside' || main_location.value == 'inside_visible')  &&
 									(
 									 	post_elements.value.indexOf('title') > -1 ||
-									  	post_elements.value.indexOf('meta') > -1 ||
+									  	post_elements.value.indexOf('tags') > -1 ||
 									  	post_elements.value.indexOf('excerpt') > -1 ||
+									  	post_elements.value.indexOf('count') > -1 ||
 									  	post_elements.value.indexOf('button') > -1
 									)
 								){%>
 
-								<div class="dslc-post-main dslc-cpt-post-main <%= main_location.value == 'inside_visible' ? 'dslc-cpt-post-main-visible' : '' %> dslc-on-hover-anim-target dslc-anim-<%= css_anim_hover.value %>" data-dslc-anim="<%= css_anim_hover.value %>" data-dslc-anim-speed="<%= css_anim_speed.value %>">
+								<div class="dslc-post-main dslc-download-main <%= main_location.value == 'inside_visible' ? 'dslc-download-main-visible' : '' %>">
 
-									<div class="dslc-cpt-post-main-inner dslc-init-<%= main_position.value %>">
+									<div class="dslc-download-main-inner dslc-init-<%= main_position.value %> dslc-on-hover-anim-target dslc-anim-<%= css_anim_hover.value %>" data-dslc-anim="<%= css_anim_hover.value %>" data-dslc-anim-speed="<%= css_anim_speed.value %>">
 
 										<% if(post_elements.value.indexOf('title') > -1){%>
 
-											<div class="dslc-cpt-post-title">
+											<div class="dslc-download-title" data-module-method="post_title">
 												<h2>
-													<a href="{{dslc-module-sc module-method='permalink'}}" data-module-method="post_title">Post title</a>
+													<a href="#">Post title</a>
 												</h2>
-											</div><!-- .dslc-cpt-post-title -->
+											</div><!-- .dslc-download-title -->
 
 										<%}%>
 
-										<% if(post_elements.value.indexOf('meta') > -1){%>
+										<% if(post_elements.value.indexOf('tags') > -1){%>
 
-											<div class="dslc-cpt-post-meta">
-
-												<% if(meta_elements.value.indexOf('author') > -1){%>
-													<div class="dslc-cpt-post-meta-author" data-module-method="author_posts_link">
-														<a href="#" title="Posts by author" rel="author">Author</a>
-													</div><!-- .dslc-cpt-post-meta-author -->
-												<%}%>
-
-												<% if(meta_elements.value.indexOf('date') > -1){%>
-													<div class="dslc-cpt-post-meta-date" data-module-method="post_date">
-														05/10/2016
-													</div><!-- .dslc-cpt-post-meta-date -->
-												<%}%>
-
-											</div><!-- .dslc-cpt-post-meta -->
+											<div data-module-method="download_tags">
+												<div class="dslc-download-tags">
+													In
+													<% download_tags.forEach(function(elem, index){%>
+														<% if(index > 0 ){%>, <%}%>
+														<a href="#">
+															<%= elem.name %>
+														</a>
+													<%});%>
+												</div><!-- .dslc-download-tags -->
+											</div>
 										<%}%>
 
 										<% if(post_elements.value.indexOf('excerpt') > -1){%>
 
-											<div class="dslc-cpt-post-excerpt" data-module-method="excerpt">
+											<div class="dslc-download-excerpt" data-module-method="excerpt">
 												Lorem ipsum dorem sit amet
-											</div><!-- .dslc-cpt-post-excerpt -->
+											</div><!-- .dslc-download-excerpt -->
 
 										<%}%>
 
 										<% if(post_elements.value.indexOf('button') > -1){%>
 
-											<div class="dslc-cpt-post-read-more">
-												<a href="{{dslc-module-sc module-method='permalink'}}">
+											<div class="dslc-download-download" data-module-method="download_button">
+												<a href="#">
 
 													<% if(obj.button_icon_id && obj.button_icon_id.value != '' ){%>
 														<span class="dslc-icon dslc-icon-<%= button_icon_id.value %>"></span>
@@ -142,65 +139,91 @@
 
 													<%= button_text.value || button_text.std %>
 												</a>
-											</div><!-- .dslc-cpt-post-read-more -->
+											</div><!-- .dslc-download-read-more -->
 										<%}%>
-									</div><!-- .dslc-cpt-post-main-inner -->
+
+										<% if(post_elements.value.indexOf('count') > -1){%>
+
+											<div class="dslc-download-info" data-module-method="download_info">
+												Downloaded 5 times.
+											</div><!-- .dslc-download-info -->
+
+										<%}%>
+									</div><!-- .dslc-download-main-inner -->
 									<a href="{{dslc-module-sc module-method='permalink'}}" class="dslc-post-main-inner-link-cover"></a>
-								</div><!-- .dslc-cpt-post-main -->
+								</div><!-- .dslc-download-main -->
 							<%}%>
-						</div><!-- .dslc-cpt-post-thumb -->
+						</div><!-- .dslc-download-thumb -->
 					<%}%>
 
-					<% if(main_location.value == 'bellow' && (post_elements.value.indexOf('title') > -1 || post_elements.value.indexOf('meta') > -1 || post_elements.value.indexOf('excerpt') > -1 || post_elements.value.indexOf('button') > -1)){%>
+					<% if(main_location.value == 'bellow' && (
+							post_elements.value.indexOf('title') > -1 ||
+							post_elements.value.indexOf('count') > -1 ||
+							post_elements.value.indexOf('tags') > -1 ||
+							post_elements.value.indexOf('excerpt') > -1 ||
+							post_elements.value.indexOf('button') > -1
+							)
+						){%>
 
-						<div class="dslc-post-main dslc-cpt-post-main">
+						<div class="dslc-post-main dslc-download-main">
 
 							<% if(post_elements.value.indexOf('title') > -1){%>
 
-								<div class="dslc-cpt-post-title">
-									<h2 class="lc-editor-elem"><a href="{{dslc-module-sc module-method='permalink'}}" data-module-method="post_title">Title</a></h2>
-								</div><!-- .dslc-cpt-post-title -->
-							<%}%>
+											<div class="dslc-download-title" data-module-method="post_title">
+												<h2>
+													<a href="#">Post title</a>
+												</h2>
+											</div><!-- .dslc-download-title -->
 
-							<% if(post_elements.value.indexOf('meta') > -1){%>
-
-								<div class="dslc-cpt-post-meta">
-
-									<% if(meta_elements.value.indexOf('author') > -1){%>
-										<div class="dslc-cpt-post-meta-author" data-module-method="author_posts_link">
-											 <a href="#" title="Posts by author" rel="author">Author</a>
-										</div><!-- .dslc-cpt-post-meta-author -->
-									<%}%>
-
-									<% if(meta_elements.value.indexOf('date') > -1){%>
-										<div class="dslc-cpt-post-meta-date" data-module-method="post_date">
-											12/06/2016
-										</div><!-- .dslc-cpt-post-meta-date -->
-									<%}%>
-								</div><!-- .dslc-cpt-post-meta -->
-							<%}%>
-
-							<% if(post_elements.value.indexOf('excerpt') > -1){%>
-
-								<div class="dslc-cpt-post-excerpt" data-module-method="excerpt">
-									Lorem ipsum dorem sit amet
-								</div><!-- .dslc-cpt-post-excerpt -->
-							<%}%>
-
-							<% if(post_elements.value.indexOf('button') > -1){%>
-
-								<div class="dslc-cpt-post-read-more">
-									<a href="{{dslc-module-sc module-method='permalink'}}">
-										<% if(button_icon_id.value != '' ){%>
-											<span class="dslc-icon dslc-icon-<%= button_icon_id.value %>"></span>
 										<%}%>
-										<%= button_text.value || button_text.std %>
-									</a>
-								</div><!-- .dslc-cpt-post-read-more -->
-							<%}%>
-						</div><!-- .dslc-cpt-post-main -->
+
+										<% if(post_elements.value.indexOf('tags') > -1){%>
+
+											<div data-module-method="download_tags">
+												<div class="dslc-download-tags">
+													In
+													<% download_tags.forEach(function(elem, index){%>
+														<% if(index > 0 ){%>, <%}%>
+														<a href="#">
+															<%= elem.name %>
+														</a>
+													<%});%>
+												</div><!-- .dslc-download-tags -->
+											</div>
+										<%}%>
+
+										<% if(post_elements.value.indexOf('excerpt') > -1){%>
+
+											<div class="dslc-download-excerpt" data-module-method="excerpt">
+												Lorem ipsum dorem sit amet
+											</div><!-- .dslc-download-excerpt -->
+
+										<%}%>
+
+										<% if(post_elements.value.indexOf('button') > -1){%>
+
+											<div class="dslc-download-download" data-module-method="download_button">
+												<a href="#">
+
+													<% if(obj.button_icon_id && obj.button_icon_id.value != '' ){%>
+														<span class="dslc-icon dslc-icon-<%= button_icon_id.value %>"></span>
+													<%}%>
+
+													<%= button_text.value || button_text.std %>
+												</a>
+											</div><!-- .dslc-download-read-more -->
+										<%}%>
+
+										<% if(post_elements.value.indexOf('count') > -1){%>
+
+											<div class="dslc-download-info" data-module-method="download_info">
+												Downloaded 5 times.
+											</div><!-- .dslc-download-info -->
+
+										<%}%>
+						</div><!-- .dslc-download-main -->
 					<%}%>
-					<!-- .dslc-cpt-post -->
+					<!-- .dslc-download -->
 				</div>
 
 				<% if(last_col != ''){%>
@@ -211,7 +234,7 @@
 				</div>
 			<%}%>
 		</div><!--.dslc-posts-inner -->
-	</div><!-- .dslc-cpt-posts -->
+	</div><!-- .dslc-downloads -->
 
 <% if(pagination_type.value && pagination_type.value != 'disabled'){%>
 	<div data-module-method="pagination_nav"></div>
