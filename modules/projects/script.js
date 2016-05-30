@@ -42,8 +42,6 @@
 			dslcFilterPosts.addClass('dslc-masonry-item dslc-masonry-item-animate').css({ visibility : 'visible' }).show();
 
 			dslc_masonry(dslcWrapper, true);
-
 		}
-
 	});
 }());
