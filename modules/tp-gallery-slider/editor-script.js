@@ -18,5 +18,10 @@
 
 			return options;
 		}
+
+		Gallery_Slider.prototype.afterRenderHook = function()
+		{
+			DSLCProd.Modules.gallerySlider.initCarousel();
+		}
 	});
 }());

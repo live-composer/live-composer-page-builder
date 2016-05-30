@@ -2537,7 +2537,6 @@ class DSLC_Downloads extends DSLC_Module {
 		/* Module output ends here */
 
 		$this->module_end();
-
 	}
 
 }

@@ -1,9 +1,10 @@
 <div class="dslc-tp-project-slider">
-
 	<div class="dslc-tp-project-slider-main">
 		<div class="dslc-slider project-slider" data-module-method="get_sliders"  data-animation="<%= animation.value || animation.std %>" data-animation-speed="<%= animation_speed.value || animation_speed.std %>" data-autoplay="<%= autoplay.value || autoplay.std %>" data-flexible-height="<%= flexible_height.value || flexible_height.std %>">
-			<% for ( $i=0; $i < 15; $i++ ) { %>
-				<div class="dslc-slider-item"><img src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/placeholders/big-placeholder.png" /></div>
+			<% for ( $i=0; $i < 5; $i++ ) { %>
+				<div class="dslc-slider-item"><img src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/placeholders/sliders/placeholder-1.jpg" /></div>
+				<div class="dslc-slider-item"><img src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/placeholders/sliders/placeholder-2.jpg" /></div>
+				<div class="dslc-slider-item"><img src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/placeholders/sliders/placeholder-3.jpg" /></div>
 			<%}%>
 		</div><!-- .dslc-slider -->
 
@@ -12,7 +13,5 @@
 				[dslc-module-sc module-instance-id='<%= module_instance_id %>' module-method='get_gallery_lightbox']
 			</div><!-- .dslc-gallery-lightbox -->
 		<%}%>
-
 	</div><!-- .slider -->
-
 </div><!-- .dslc-tp-project-slider -->

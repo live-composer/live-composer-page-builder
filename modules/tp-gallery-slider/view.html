@@ -1,9 +1,11 @@
 <div class="dslc-tp-gallery-slider">
-
-	<div data-dslc-raw-sc class="dslc-tp-gallery-slider-main">
-		<div class="dslc-loader"></div>
-		<div class="dslc-slider"  data-animation="<%= animation.value || animation.std %>" data-animation-speed="<%= animation_speed.value || animation_speed.std %>" data-autoplay="<%= autoplay.value || autoplay.std %>" data-flexible-height="<%= flexible_height.value || flexible_height.std %>">
-			[dslc-module-sc module-instance-id='<%= module_instance_id %>' module-method='get_sliders']
+	<div class="dslc-tp-gallery-slider-main">
+		<div class="dslc-slider gallery-slider" data-module-method="get_sliders" data-animation="<%= animation.value || animation.std %>" data-animation-speed="<%= animation_speed.value || animation_speed.std %>" data-autoplay="<%= autoplay.value || autoplay.std %>" data-flexible-height="<%= flexible_height.value || flexible_height.std %>">
+			<% for ( $i=0; $i < 5; $i++ ) { %>
+				<div class="dslc-slider-item"><img src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/placeholders/sliders/placeholder-1.jpg" /></div>
+				<div class="dslc-slider-item"><img src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/placeholders/sliders/placeholder-2.jpg" /></div>
+				<div class="dslc-slider-item"><img src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/placeholders/sliders/placeholder-3.jpg" /></div>
+			<%}%>
 		</div><!-- .dslc-slider -->
 
 		<% if( ( lightbox_state.value || lightbox_state.std ) == 'enabled' ) {%>
@@ -11,15 +13,5 @@
 				[dslc-module-sc module-instance-id='<%= module_instance_id %>' module-method='get_gallery_lightbox']
 			</div><!-- .dslc-gallery-lightbox -->
 		<%}%>
-
-	</div><!-- .dslc-tp-gallery-slider-main -->
-
-	<div class="dslc-tp-gallery-slider-main lc-editor-element">
-		<div class="dslc-loader"></div>
-		<div class="dslc-slider"  data-animation="<%= animation.value || animation.std %>" data-animation-speed="<%= animation_speed.value || animation_speed.std %>" data-autoplay="<%= autoplay.value || autoplay.std %>" data-flexible-height="<%= flexible_height.value || flexible_height.std %>">
-			<% for ( $i=0; $i < 15; $i++ ) { %>
-				<div class="dslc-slider-item"><img src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/placeholders/big-placeholder.png" /></div>
-			<%}%>
-		</div><!-- .dslc-slider -->
 	</div><!-- .dslc-tp-gallery-slider-main -->
 </div><!-- .dslc-tp-gallery-slider -->
