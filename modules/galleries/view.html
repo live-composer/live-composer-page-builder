@@ -24,12 +24,12 @@
 			<!-- Filters -->
 			<div class="dslc-post-filters dslc-galleries-module">
 
-				<span class="dslc-galleries-filter dslc-active" data-id="all">
+				<span class="dslc-galleries-module dslc-active" data-id="all">
 					<?php _ex( 'All', 'Galleries Filter', 'live-composer-page-builder' ); ?>
 				</span>
 
 				<% cats_array.forEach(function(elem, index){%>
-					<span class="dslc-galleries-filter dslc-inactive" data-repeatable="galleries_filter" data-id="<%= elem.cat_slug %>">
+					<span class="dslc-galleries-module dslc-inactive" data-repeatable="galleries_filter" data-id="<%= elem.cat_slug %>">
 						<%= elem.cat_name %>
 					</span>
 				<%})%>
@@ -78,62 +78,53 @@
 											<img width="100%" height=200 src="http://dummyimage.com/300x200/000/fff"/>
 										</a>
 
-								</div><!-- .dslc-cpt-post-thumb-inner -->
+										<a href="#" class="dslc-gallery-images-count dslc-init-square dslc-init-center">
+											<span class="dslc-gallery-images-count-bg"></span>
+											<span class="dslc-gallery-images-count-main">
+												<span class="dslc-gallery-images-count-num">4</span>
+												<span class="dslc-gallery-images-count-txt">Some text</span>
+											</span>
+										</a><!-- .dslc-gallery-images-count -->
+
+								</div><!-- .dslc-gallery-thumb-inner -->
 							</div>
 
 							<% if((main_location.value == 'inside' || main_location.value == 'inside_visible')  &&
 									(
 									 	post_elements.value.indexOf('title') > -1 ||
-									  	post_elements.value.indexOf('meta') > -1 ||
 									  	post_elements.value.indexOf('excerpt') > -1 ||
-									  	post_elements.value.indexOf('button') > -1
+									  	post_elements.value.indexOf('separator') > -1
 									)
 								){%>
 
-								<div class="dslc-post-main dslc-cpt-post-main <%= main_location.value == 'inside_visible' ? 'dslc-cpt-post-main-visible' : '' %> dslc-on-hover-anim-target dslc-anim-<%= css_anim_hover.value %>" data-dslc-anim="<%= css_anim_hover.value %>" data-dslc-anim-speed="<%= css_anim_speed.value %>">
+								<div class="dslc-post-main dslc-gallery-main <%= main_location.value == 'inside_visible' ? 'dslc-gallery-main-visible' : '' %> dslc-on-hover-anim-target dslc-anim-<%= css_anim_hover.value %>" data-dslc-anim="<%= css_anim_hover.value %>" data-dslc-anim-speed="<%= css_anim_speed.value %>">
 
-									<div class="dslc-cpt-post-main-inner dslc-init-<%= main_position.value %>">
+									<div class="dslc-gallery-main-inner dslc-init-<%= main_position.value %>">
 
 										<% if(post_elements.value.indexOf('title') > -1){%>
 
-											<div class="dslc-cpt-post-title">
+											<div class="dslc-gallery-title">
 												<h2>
-													<a href="{{dslc-module-sc module-method='permalink'}}" data-module-method="post_title">Post title</a>
+													<a href="{{dslc-module-sc module-method='permalink'}}" class="{{dslc-module-sc module-method='title_anchor_class'}}" data-module-method="post_title">Post title</a>
 												</h2>
-											</div><!-- .dslc-cpt-post-title -->
-
+											</div><!-- .dslc-gallery-title -->
 										<%}%>
 
-										<% if(post_elements.value.indexOf('meta') > -1){%>
+										<% if(post_elements.value.indexOf('separator') > -1){%>
 
-											<div class="dslc-cpt-post-meta">
-
-												<% if(meta_elements.value.indexOf('author') > -1){%>
-													<div class="dslc-cpt-post-meta-author" data-module-method="author_posts_link">
-														<a href="#" title="Posts by author" rel="author">Author</a>
-													</div><!-- .dslc-cpt-post-meta-author -->
-												<%}%>
-
-												<% if(meta_elements.value.indexOf('date') > -1){%>
-													<div class="dslc-cpt-post-meta-date" data-module-method="post_date">
-														05/10/2016
-													</div><!-- .dslc-cpt-post-meta-date -->
-												<%}%>
-
-											</div><!-- .dslc-cpt-post-meta -->
+											<span class="dslc-gallery-sep"></span>
 										<%}%>
 
 										<% if(post_elements.value.indexOf('excerpt') > -1){%>
 
-											<div class="dslc-cpt-post-excerpt" data-module-method="excerpt">
+											<div class="dslc-gallery-excerpt" data-module-method="excerpt">
 												Lorem ipsum dorem sit amet
-											</div><!-- .dslc-cpt-post-excerpt -->
-
+											</div><!-- .dslc-gallery-excerpt -->
 										<%}%>
 
 										<% if(post_elements.value.indexOf('button') > -1){%>
 
-											<div class="dslc-galleries-read-more">
+											<div class="dslc-gallery-read-more">
 												<a href="{{dslc-module-sc module-method='permalink'}}">
 
 													<% if(obj.button_icon_id && obj.button_icon_id.value != '' ){%>
@@ -142,65 +133,60 @@
 
 													<%= button_text.value || button_text.std %>
 												</a>
-											</div><!-- .dslc-cpt-post-read-more -->
+											</div><!-- .dslc-gallery-read-more -->
 										<%}%>
-									</div><!-- .dslc-cpt-post-main-inner -->
+
+									</div><!-- .dslc-gallery-main-inner -->
 									<a href="{{dslc-module-sc module-method='permalink'}}" class="dslc-post-main-inner-link-cover"></a>
-								</div><!-- .dslc-cpt-post-main -->
+								</div><!-- .dslc-gallery-main -->
 							<%}%>
-						</div><!-- .dslc-cpt-post-thumb -->
+						</div><!-- .dslc-gallery-thumb -->
 					<%}%>
 
 					<% if(main_location.value == 'bellow' && (post_elements.value.indexOf('title') > -1 || post_elements.value.indexOf('meta') > -1 || post_elements.value.indexOf('excerpt') > -1 || post_elements.value.indexOf('button') > -1)){%>
 
-						<div class="dslc-post-main dslc-cpt-post-main">
+						<div class="dslc-post-main dslc-gallery-main">
 
 							<% if(post_elements.value.indexOf('title') > -1){%>
 
-								<div class="dslc-cpt-post-title">
-									<h2 class="lc-editor-elem"><a href="{{dslc-module-sc module-method='permalink'}}" data-module-method="post_title">Title</a></h2>
-								</div><!-- .dslc-cpt-post-title -->
+								<div class="dslc-gallery-title">
+									<h2>
+										<a href="{{dslc-module-sc module-method='permalink'}}" class="{{dslc-module-sc module-method='title_anchor_class'}}" data-module-method="post_title">Post title</a>
+									</h2>
+								</div><!-- .dslc-gallery-title -->
 							<%}%>
 
-							<% if(post_elements.value.indexOf('meta') > -1){%>
+							<% if(post_elements.value.indexOf('separator') > -1){%>
 
-								<div class="dslc-cpt-post-meta">
-
-									<% if(meta_elements.value.indexOf('author') > -1){%>
-										<div class="dslc-cpt-post-meta-author" data-module-method="author_posts_link">
-											 <a href="#" title="Posts by author" rel="author">Author</a>
-										</div><!-- .dslc-cpt-post-meta-author -->
-									<%}%>
-
-									<% if(meta_elements.value.indexOf('date') > -1){%>
-										<div class="dslc-cpt-post-meta-date" data-module-method="post_date">
-											12/06/2016
-										</div><!-- .dslc-cpt-post-meta-date -->
-									<%}%>
-								</div><!-- .dslc-cpt-post-meta -->
+								<span class="dslc-gallery-sep"></span>
 							<%}%>
 
 							<% if(post_elements.value.indexOf('excerpt') > -1){%>
 
-								<div class="dslc-cpt-post-excerpt" data-module-method="excerpt">
+								<div class="dslc-gallery-excerpt" data-module-method="excerpt">
 									Lorem ipsum dorem sit amet
-								</div><!-- .dslc-cpt-post-excerpt -->
+								</div><!-- .dslc-gallery-excerpt -->
 							<%}%>
 
 							<% if(post_elements.value.indexOf('button') > -1){%>
 
-								<div class="dslc-cpt-post-read-more">
+								<div class="dslc-gallery-read-more">
 									<a href="{{dslc-module-sc module-method='permalink'}}">
-										<% if(button_icon_id.value != '' ){%>
+
+										<% if(obj.button_icon_id && obj.button_icon_id.value != '' ){%>
 											<span class="dslc-icon dslc-icon-<%= button_icon_id.value %>"></span>
 										<%}%>
+
 										<%= button_text.value || button_text.std %>
 									</a>
-								</div><!-- .dslc-cpt-post-read-more -->
+								</div><!-- .dslc-gallery-read-more -->
 							<%}%>
-						</div><!-- .dslc-cpt-post-main -->
+
+						</div><!-- .dslc-gallery-main -->
 					<%}%>
-					<!-- .dslc-cpt-post -->
+
+					<div data-module-method="gallery_lightbox"></div>
+					<!-- .dslc-gallery -->
 				</div>
 
 				<% if(last_col != ''){%>
@@ -211,7 +197,7 @@
 				</div>
 			<%}%>
 		</div><!--.dslc-posts-inner -->
-	</div><!-- .dslc-cpt-posts -->
+	</div><!-- .dslc-gallerys -->
 
 <% if(pagination_type.value && pagination_type.value != 'disabled'){%>
 	<div data-module-method="pagination_nav"></div>

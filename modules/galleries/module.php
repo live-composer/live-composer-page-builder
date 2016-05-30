@@ -137,7 +137,7 @@ class DSLC_Galleries extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Posts Per Row', 'live-composer-page-builder' ),
-				'id' => 'columns',
+				'id' => 'posts_per_row',
 				'std' => '3',
 				'type' => 'select',
 				'choices' => $this->shared_options('posts_per_row_choices'),
@@ -2199,7 +2199,7 @@ class DSLC_Galleries extends DSLC_Module {
 
 		global $LC_Registry;
 
-		$dslc_query = $this->get_posts();
+		$dslc_query = $this->get_galleries();
 		$LC_Registry->set( 'dslc-galleries-query', $dslc_query );
 
 		$taxonomy_name = '';
@@ -2385,7 +2385,7 @@ class DSLC_Galleries extends DSLC_Module {
 
 		if ( $dslc_query == null ) {
 
-			$dslc_query = $this->get_posts();
+			$dslc_query = $this->get_galleries();
 			$LC_Registry->set( 'dslc-galleries-query', $dslc_query );
 		}
 
@@ -2413,9 +2413,13 @@ class DSLC_Galleries extends DSLC_Module {
 				 	) {
 
 					$out .= '<div class="dslc-post-separator"></div>';
+
 				}
 
 				$cnt++;
+
+				$LC_Registry->set( 'dslc-gallery-permalink', null );
+				$LC_Registry->set( 'dslc-gallery-images', null );
 			}
 
 			unset( $cnt );
@@ -2425,26 +2429,6 @@ class DSLC_Galleries extends DSLC_Module {
 		}
 
 		return $out;
-	}
-
-	/**
-	 * Returns images count of current gallery
-	 * @return string
-	 */
-	function get_images_count() {
-
-		$gallery_images = get_post_meta( get_the_ID(), 'dslc_gallery_images', true );
-		$gallery_images_count = 0;
-
-		if ( $gallery_images ) {
-
-			$gallery_images = explode( ' ', trim( $gallery_images ) );
-		}
-
-		if ( is_array( $gallery_images ) ) {
-
-			$gallery_images_count = count( $gallery_images );
-		}
 	}
 
 	/**
@@ -2478,12 +2462,22 @@ class DSLC_Galleries extends DSLC_Module {
 	 */
 	function permalink() {
 
+		global $LC_Registry;
+		$the_permalink = $LC_Registry->get( 'dslc-gallery-permalink' );
+
+		if( $the_permalink ) {
+
+			return $the_permalink;
+		}
+
 		$the_permalink = get_permalink();
 
 		if ( get_post_meta( get_the_ID(), 'dslc_custom_url', true ) ) {
 
 			$the_permalink = get_post_meta( get_the_ID(), 'dslc_custom_url', true );
 		}
+
+		$LC_Registry->set( 'dslc-gallery-permalink', $the_permalink );
 
 		return $the_permalink;
 	}
@@ -2562,41 +2556,131 @@ class DSLC_Galleries extends DSLC_Module {
 
 		if ( ! has_post_thumbnail() ) return '';
 
-		$manual_resize = false;
+		global $LC_Registry;
 		$options = $this->getPropsValues();
+		$the_permalink = $LC_Registry->get( 'dslc-gallery-permalink' );
 
-		if ( isset( $options['thumb_resize_height'] ) && ! empty( $options['thumb_resize_height'] ) || isset( $options['thumb_resize_width_manual'] ) && ! empty( $options['thumb_resize_width_manual'] ) ) {
+		$thumb_anchor_class = '';
+		$title_anchor_class = '';
 
-			$manual_resize = true;
-			$thumb_url = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full' );
-			$thumb_url = $thumb_url[0];
+		if ( $options['title_link_behaviour'] == 'lightbox' ) {
+			$title_anchor_class = 'dslc-trigger-lightbox-gallery';
+		}
 
-			$thumb_alt = get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true );
-			if ( ! $thumb_alt ) $thumb_alt = '';
-
-			$resize_width = false;
-			$resize_height = false;
-
-			if ( isset( $options['thumb_resize_width_manual'] ) && ! empty( $options['thumb_resize_width_manual'] ) ) {
-				$resize_width = $options['thumb_resize_width_manual'];
-			}
-
-			if ( isset( $options['thumb_resize_height'] ) && ! empty( $options['thumb_resize_height'] ) ) {
-				$resize_height = $options['thumb_resize_height'];
-			}
+		if ( $options['thumb_link_behaviour'] == 'lightbox' ) {
+			$thumb_anchor_class = 'dslc-trigger-lightbox-gallery';
 		}
 
 		ob_start();
 		?>
-		<div class="dslc-cpt-post-thumb-inner dslca-post-thumb">
-			<a href="<?php the_permalink() ?>">
-				<?php if ( $manual_resize ) {?>
-					<a href="<?php echo $the_permalink; ?>" class="<?php echo $thumb_anchor_class; ?>"><img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" /></a>
-				<?php } else { ?>
+		<div class="dslc-gallery-thumb-inner dslca-post-thumb">
+			<?php
+				/**
+				 * Manual Resize
+				 */
+
+				$manual_resize = false;
+				if ( isset( $options['thumb_resize_height'] ) && ! empty( $options['thumb_resize_height'] ) ||
+				    isset( $options['thumb_resize_width_manual'] ) && ! empty( $options['thumb_resize_width_manual'] ) ) {
+
+					$manual_resize = true;
+					$thumb_url = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full' );
+					$thumb_url = $thumb_url[0];
+
+					$thumb_alt = get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true );
+					if ( ! $thumb_alt ) $thumb_alt = '';
+
+					$resize_width = false;
+					$resize_height = false;
+
+					if ( isset( $options['thumb_resize_width_manual'] ) && ! empty( $options['thumb_resize_width_manual'] ) ) {
+						$resize_width = $options['thumb_resize_width_manual'];
+					}
+
+					if ( isset( $options['thumb_resize_height'] ) && ! empty( $options['thumb_resize_height'] ) ) {
+						$resize_height = $options['thumb_resize_height'];
+					}
+
+				}
+			?>
+
+			<?php if ( $manual_resize ) : ?>
+				<a href="<?php echo $the_permalink; ?>" class="<?php echo $thumb_anchor_class; ?>">
+					<img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" />
+				</a>
+			<?php else : ?>
+				<a href="<?php echo $the_permalink; ?>" class="<?php echo $thumb_anchor_class; ?>">
 					<?php the_post_thumbnail( 'full' ); ?>
-				<?php } ?>
-			</a>
-		</div><!-- .dslc-cpt-post-thumb-inner -->
+				</a>
+			<?php endif; ?>
+
+			<?php if ( strpos( $options['post_elements'], 'count' ) > -1 ){
+
+				$gallery_images = get_post_meta( get_the_ID(), 'dslc_gallery_images', true );
+				$gallery_images_count = 0;
+
+				if ( $gallery_images )
+					$gallery_images = explode( ' ', trim( $gallery_images ) );
+
+				if ( is_array( $gallery_images ) ) {
+					$gallery_images_count = count( $gallery_images );
+				}
+
+				global $LC_Registry;
+				$LC_Registry->set( 'dslc-gallery-images', $gallery_images );
+
+				?>
+				<a href="<?php echo $the_permalink; ?>" class="<?php echo $thumb_anchor_class; ?> dslc-gallery-images-count dslc-init-square dslc-init-<?php echo $options['count_pos']; ?>">
+					<span class="dslc-gallery-images-count-bg"></span>
+					<span class="dslc-gallery-images-count-main">
+						<span class="dslc-gallery-images-count-num"><?php echo $gallery_images_count; ?></span>
+						<span class="dslc-gallery-images-count-txt"><?php echo $options['count_text']; ?></span>
+					</span>
+				</a><!-- .dslc-gallery-images-count -->
+			<?php } ?>
+
+		</div><!-- .dslc-gallery-thumb-inner --><?php
+
+		return ob_get_clean();
+	}
+
+	/**
+	 * Displays gallery lightbox area
+	 * @return string
+	 */
+	function gallery_lightbox() {
+
+		global $LC_Registry;
+		$gallery_images = $LC_Registry->get( 'dslc-gallery-images' );
+		$gallery_images_count = 0;
+
+		if ( is_array( $gallery_images ) ) {
+			$gallery_images_count = count( $gallery_images );
+		}
+
+		ob_start();
+		?>
+		<?php if ( $gallery_images_count > 0 ) : ?>
+
+		<div class="dslc-lightbox-gallery">
+
+			<?php foreach ( $gallery_images as $gallery_image ) : ?>
+
+				<?php
+					$gallery_image_src = wp_get_attachment_image_src( $gallery_image, 'full' );
+					$gallery_image_src = $gallery_image_src[0];
+
+					$gallery_image_title = get_post_meta( $gallery_image, '_wp_attachment_image_alt', true );
+					if ( ! $gallery_image_title ) $gallery_image_title = '';
+				?>
+
+				<a href="<?php echo $gallery_image_src; ?>" title="<?php echo esc_attr( $gallery_image_title ); ?>"></a>
+
+			<?php endforeach; ?>
+
+		</div><!-- .dslc-gallery-lightbox -->
+
+	<?php endif; ?>
 		<?php
 
 		return ob_get_clean();
