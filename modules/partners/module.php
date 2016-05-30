@@ -153,7 +153,7 @@ class DSLC_Partners extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Posts Per Row', 'live-composer-page-builder' ),
-				'id' => 'columns',
+				'id' => 'posts_per_row',
 				'std' => '3',
 				'type' => 'select',
 				'choices' => $this->shared_options('posts_per_row_choices'),
@@ -1387,24 +1387,12 @@ class DSLC_Partners extends DSLC_Module {
 			while ( $dslc_query->have_posts() ) {
 
 				$dslc_query->the_post();
+				$post_cats = get_the_terms( get_the_ID(), 'dslc_partners_cats' );
 
-				$cats_count++;
-
-				if ( $cats_count == 1 ) {
-
-					$post_type_taxonomies = get_object_taxonomies( get_post_type(), 'objects' );
-					foreach ( $post_type_taxonomies as $taxonomy ) {
-						if ( $taxonomy->hierarchical == true ) {
-							$taxonomy_name = $taxonomy->name;
-
-							$LC_Registry->set( 'dslc-posts-taxonomy', $taxonomy_name );
-						}
-					}
-				}
-
-				$post_cats = get_the_terms( get_the_ID(), $taxonomy_name );
 				if ( ! empty( $post_cats ) ) {
+
 					foreach( $post_cats as $post_cat ) {
+
 						$cats_array[$post_cat->slug] = $post_cat->name;
 					}
 				}
@@ -1414,7 +1402,7 @@ class DSLC_Partners extends DSLC_Module {
 		ob_start();
 
 		foreach ( $cats_array as $cat_slug => $cat_name ) {?>
-			<span class="dslc-post-filter dslc-inactive" data-id="<?php echo $cat_slug; ?>"><?php echo $cat_name; ?></span>
+			<span class="dslc-post-filter dslc-partners-module dslc-inactive" data-id="<?php echo $cat_slug; ?>"><?php echo $cat_name; ?></span>
 		<?php }
 
 		return ob_get_clean();
@@ -1426,17 +1414,14 @@ class DSLC_Partners extends DSLC_Module {
 	 */
 	function partners_categories() {
 
-		global $LC_Registry;
-
-		$taxonomy_name = $LC_Registry->get( 'dslc-partners-taxonomy' );
 		$post_cats_data = '';
+		$post_cats = get_the_terms( get_the_ID(), 'dslc_partners_cats' );
 
-		if ( isset( $taxonomy_name ) ) {
-			$post_cats = get_the_terms( get_the_ID(), $taxonomy_name );
-			if ( ! empty( $post_cats ) ) {
-				foreach( $post_cats as $post_cat ) {
-					$post_cats_data .= 'in-cat-' . $post_cat->slug . ' ';
-				}
+		if ( ! empty( $post_cats ) ) {
+
+			foreach( $post_cats as $post_cat ) {
+
+				$post_cats_data .= 'in-cat-' . $post_cat->slug . ' ';
 			}
 		}
 
@@ -1455,126 +1440,91 @@ class DSLC_Partners extends DSLC_Module {
 
 		// Fix slashes on apostrophes
 		if ( isset( $options['button_text'] ) ) {
+
 			$options['button_text'] = stripslashes( $options['button_text'] );
 		}
 
 		/* CUSTOM START */
 
 		if ( ! isset( $options['excerpt_length'] ) ) $options['excerpt_length'] = 20;
+			if ( ! isset( $options['type'] ) ) $options['type'] = 'grid';
 
-		/**
-		 * Query
-		 */
+			if( is_front_page() ) { $paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1; } else { $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1; }
 
-		// Fix for pagination
-		if( is_front_page() ) {
+			// Fix for pagination from other modules affecting this one when pag disabled
+			if ( $options['pagination_type'] == 'disabled' ) $paged = 1;
 
-			$paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1;
-		} else {
+			// Fix for offset braking pagination
+			$query_offset = $options['offset'];
+			if ( $query_offset > 0 && $paged > 1 ) $query_offset = ( $paged - 1 ) * $options['amount'] + $options['offset'];
 
-			$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
-		}
+			$args = array(
+				'paged' => $paged,
+				'post_type' => 'dslc_partners',
+				'posts_per_page' => $options['amount'],
+				'order' => $options['order'],
+				'orderby' => $options['orderby'],
+			);
 
-		// Fix for pagination from other modules affecting this one when pag disabled
-		if ( ! isset( $options['pagination_type'] ) || $options['pagination_type'] == 'disabled' ) {
+			// Add offset
+			if ( $query_offset > 0 ) {
+				$args['offset'] = $query_offset;
+			}
 
-			$paged = 1;
-		}
+			if ( defined('DOING_AJAX') && DOING_AJAX ) {
+				$args['post_status'] = array( 'publish', 'private' );
+			}
 
-		// Fix for offset braking pagination
-		$query_offset = $options['offset'];
+			if ( isset( $options['categories'] ) && $options['categories'] != '' ) {
 
-		if ( $query_offset > 0 && $paged > 1 ) {
+				$cats_array = explode( ' ', trim( $options['categories'] ));
 
-			$query_offset = ( $paged - 1 ) * $options['amount'] + $options['offset'];
-		}
+				$args['tax_query'] = array(
+					array(
+						'taxonomy' => 'dslc_partners_cats',
+						'field' => 'slug',
+						'terms' => $cats_array,
+						'operator' => $options['categories_operator']
+					)
+				);
 
-		// General args
-		$args = array(
-			'paged' => $paged,
-			'post_type' => $options['post_type'],
-			'posts_per_page' => $options['amount'],
-			'order' => $options['order'],
-			'orderby' => $options['orderby'],
-		);
+			}
 
-		// Add offset
-		if ( $query_offset > 0 ) {
-			$args['offset'] = $query_offset;
-		}
+			// Exlcude and Include arrays
+			$exclude = array();
+			$include = array();
 
-		if ( defined('DOING_AJAX') && DOING_AJAX ) {
-			$args['post_status'] = array( 'publish', 'private' );
-		}
+			// Exclude current post
+			if ( is_singular( get_post_type() ) )
+				$exclude[] = get_the_ID();
 
-		// Category args
-		if ( isset( $options['categories'] ) && $options['categories'] != '' ) {
-			$cats_array = explode( ' ', $options['categories']);
-			$args['category__in'] = $cats_array;
-		}
+			// Exclude posts ( option )
+			if ( $options['query_post_not_in'] )
+				$exclude = array_merge( $exclude, explode( ' ', $options['query_post_not_in'] ) );
 
-		// Exlcude and Include arrays
-		$exclude = array();
-		$include = array();
+			// Include posts ( option )
+			if ( $options['query_post_in'] )
+				$include = array_merge( $include, explode( ' ', $options['query_post_in'] ) );
 
-		// Exclude current post
-		if ( is_singular( get_post_type() ) ) {
+			// Include query parameter
+			if ( ! empty( $include ) )
+				$args['post__in'] = $include;
 
-			$exclude[] = get_the_ID();
-		}
+			// Exclude query parameter
+			if ( ! empty( $exclude ) )
+				$args['post__not_in'] = $exclude;
 
-		// Exclude posts ( option )
-		if ( $options['query_post_not_in'] ) {
+			// No paging
+			if ( $options['pagination_type'] == 'disabled' )
+				$args['no_found_rows'] = true;
 
-			$exclude = array_merge( $exclude, explode( ' ', $options['query_post_not_in'] ) );
-		}
-
-		// Include posts ( option )
- 		if ( $options['query_post_in'] ) {
-
-			$include = array_merge( $include, explode( ' ', $options['query_post_in'] ) );
- 		}
-
-		// Include query parameter
-		if ( ! empty( $include ) ) {
-
-			$args['post__in'] = $include;
-		}
-
-		// Exclude query parameter
-		if ( ! empty( $exclude ) ) {
-
-			$args['post__not_in'] = $exclude;
-		}
-
-		// Author archive page
-		if ( is_author() && $options['query_alter'] == 'enabled' ) {
-
-			global $authordata;
-			$args['author__in'] = array( $authordata->data->ID );
-		}
-
-		// No paging
-		if ( $options['pagination_type'] == 'disabled' ) {
-
-			$args['no_found_rows'] = true;
-		}
-
-		// Sticky Posts
-		if ( $options['sticky_posts'] == 'disabled' ) {
-
-			$args['ignore_sticky_posts'] = true;
-		}
-
-		// Do the query
-		if ( ( is_category() || is_tag() || is_tax() || is_search() || is_date() ) && $options['query_alter'] == 'enabled' ) {
-
-			global $wp_query;
-			$dslc_query = $wp_query;
-		} else {
-
-			$dslc_query = new WP_Query( $args );
-		}
+			// Do the query
+			if ( is_category() || is_tax() || is_search() ) {
+				global $wp_query;
+				$dslc_query = $wp_query;
+			} else {
+				$dslc_query = new WP_Query( $args );
+			}
 
 		return $dslc_query;
 	}
@@ -1607,6 +1557,14 @@ class DSLC_Partners extends DSLC_Module {
 
 			$options = $this->getPropsValues();
 			$cnt = 0;
+			$link_to_single = true;
+
+			if ( $options['link'] == 'disabled' ) {
+
+				$link_to_single = false;
+			}
+
+			$LC_Registry->set( 'dslc-partners-link-to-single', $link_to_single );
 
 			while ( $dslc_query->have_posts() ) {
 
@@ -1634,6 +1592,7 @@ class DSLC_Partners extends DSLC_Module {
 
 			$LC_Registry->set( 'dslc-partners-elem-index', null );
 			$LC_Registry->set( 'curr_class', null );
+			$LC_Registry->set( 'dslc-partners-link-to-single', null );
 		}
 
 		return $out;
@@ -1705,29 +1664,6 @@ class DSLC_Partners extends DSLC_Module {
 		return ob_get_clean();
 	}
 
-	/**
-	 * Returns author's post link. Repeater function.
-	 * @return string
-	 */
-	function author_posts_link() {
-
-		ob_start();
-		echo get_the_author_posts_link();
-
-		return ob_get_clean();
-	}
-
-	/**
-	 * Returns post date. Repeater function.
-	 * @return  string
-	 */
-	function post_date() {
-
-		ob_start();
-		the_time( get_option( 'date_format' ) );
-
-		return ob_get_clean();
-	}
 
 	/**
 	 * Returns post title.Repeater function.
@@ -1736,7 +1672,17 @@ class DSLC_Partners extends DSLC_Module {
 	function post_title() {
 
 		ob_start();
-		the_title();
+		global $LC_Registry;
+
+		$link_to_single = $LC_Registry->get( 'dslc-partners-link-to-single' );
+
+		if ( $link_to_single ) : ?>
+
+			<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+		<?php else : ?>
+
+			<h2><?php the_title(); ?></h2>
+		<?php endif;
 
 		return ob_get_clean();
 	}
@@ -1749,6 +1695,9 @@ class DSLC_Partners extends DSLC_Module {
 
 		if ( ! has_post_thumbnail() ) return '';
 
+		global $LC_Registry;
+
+		$link_to_single = $LC_Registry->get( 'dslc-partners-link-to-single' );
 		$manual_resize = false;
 		$options = $this->getPropsValues();
 
@@ -1774,17 +1723,20 @@ class DSLC_Partners extends DSLC_Module {
 		}
 
 		ob_start();
-		?>
-		<div class="dslc-cpt-post-thumb-inner dslca-post-thumb">
-			<a href="<?php the_permalink() ?>">
-				<?php if ( $manual_resize ) {?>
-					<img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" />
-				<?php } else { ?>
-					<?php the_post_thumbnail( 'full' ); ?>
-				<?php } ?>
-			</a>
-		</div><!-- .dslc-cpt-post-thumb-inner -->
-		<?php
+
+		if ( $manual_resize ) : ?>
+			<?php if ( $link_to_single ) : ?>
+				<a href="<?php the_permalink(); ?>"><img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" /></a>
+			<?php else : ?>
+				<img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" />
+			<?php endif; ?>
+		<?php else : ?>
+			<?php if ( $link_to_single ) : ?>
+				<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'full' ); ?></a>
+			<?php else : ?>
+				<?php the_post_thumbnail( 'full' ); ?>
+			<?php endif; ?>
+		<?php endif;
 
 		return ob_get_clean();
 	}

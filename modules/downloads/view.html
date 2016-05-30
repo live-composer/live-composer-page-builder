@@ -169,58 +169,58 @@
 
 							<% if(post_elements.value.indexOf('title') > -1){%>
 
-											<div class="dslc-download-title" data-module-method="post_title">
-												<h2>
-													<a href="#">Post title</a>
-												</h2>
-											</div><!-- .dslc-download-title -->
+								<div class="dslc-download-title" data-module-method="post_title">
+									<h2>
+										<a href="#">Post title</a>
+									</h2>
+								</div><!-- .dslc-download-title -->
 
+							<%}%>
+
+							<% if(post_elements.value.indexOf('tags') > -1){%>
+
+								<div data-module-method="download_tags">
+									<div class="dslc-download-tags">
+										In
+										<% download_tags.forEach(function(elem, index){%>
+											<% if(index > 0 ){%>, <%}%>
+											<a href="#">
+												<%= elem.name %>
+											</a>
+										<%});%>
+									</div><!-- .dslc-download-tags -->
+								</div>
+							<%}%>
+
+							<% if(post_elements.value.indexOf('excerpt') > -1){%>
+
+								<div class="dslc-download-excerpt" data-module-method="excerpt">
+									Lorem ipsum dorem sit amet
+								</div><!-- .dslc-download-excerpt -->
+
+							<%}%>
+
+							<% if(post_elements.value.indexOf('button') > -1){%>
+
+								<div class="dslc-download-download" data-module-method="download_button">
+									<a href="#">
+
+										<% if(obj.button_icon_id && obj.button_icon_id.value != '' ){%>
+											<span class="dslc-icon dslc-icon-<%= button_icon_id.value %>"></span>
 										<%}%>
 
-										<% if(post_elements.value.indexOf('tags') > -1){%>
+										<%= button_text.value || button_text.std %>
+									</a>
+								</div><!-- .dslc-download-read-more -->
+							<%}%>
 
-											<div data-module-method="download_tags">
-												<div class="dslc-download-tags">
-													In
-													<% download_tags.forEach(function(elem, index){%>
-														<% if(index > 0 ){%>, <%}%>
-														<a href="#">
-															<%= elem.name %>
-														</a>
-													<%});%>
-												</div><!-- .dslc-download-tags -->
-											</div>
-										<%}%>
+							<% if(post_elements.value.indexOf('count') > -1){%>
 
-										<% if(post_elements.value.indexOf('excerpt') > -1){%>
+								<div class="dslc-download-info" data-module-method="download_info">
+									Downloaded 5 times.
+								</div><!-- .dslc-download-info -->
 
-											<div class="dslc-download-excerpt" data-module-method="excerpt">
-												Lorem ipsum dorem sit amet
-											</div><!-- .dslc-download-excerpt -->
-
-										<%}%>
-
-										<% if(post_elements.value.indexOf('button') > -1){%>
-
-											<div class="dslc-download-download" data-module-method="download_button">
-												<a href="#">
-
-													<% if(obj.button_icon_id && obj.button_icon_id.value != '' ){%>
-														<span class="dslc-icon dslc-icon-<%= button_icon_id.value %>"></span>
-													<%}%>
-
-													<%= button_text.value || button_text.std %>
-												</a>
-											</div><!-- .dslc-download-read-more -->
-										<%}%>
-
-										<% if(post_elements.value.indexOf('count') > -1){%>
-
-											<div class="dslc-download-info" data-module-method="download_info">
-												Downloaded 5 times.
-											</div><!-- .dslc-download-info -->
-
-										<%}%>
+							<%}%>
 						</div><!-- .dslc-download-main -->
 					<%}%>
 					<!-- .dslc-download -->

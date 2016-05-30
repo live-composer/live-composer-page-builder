@@ -27,8 +27,6 @@
 			opt.type.value = opt.type.value ? opt.type.value : opt.type.std;
 
 			opt.main_location.value = opt.main_location.value ? opt.main_location.value : opt.main_location.std;
-
-			opt.meta_elements.value = opt.meta_elements.value ? opt.meta_elements.value : opt.meta_elements.std;
 			opt.elements.value = opt.elements.value ? opt.elements.value : opt.elements.std;
 
 			/**
@@ -89,8 +87,7 @@
 			 */
 
 			// Posts container
-			opt.container_class = 'dslc-posts dslc-cpt-posts dslc-clearfix dslc-cpt-posts-type-' +
-				opt.type.value + ' dslc-posts-orientation-' + opt.orientation.value + ' ';
+			opt.container_class = 'dslc-posts dslc-partners dslc-clearfix dslc-posts-orientation-' + opt.orientation.value + ' ';
 
 			if(opt.type.value == 'masonry'){
 
@@ -101,7 +98,7 @@
 			}
 
 			// Post
-			opt.element_class = 'dslc-post dslc-cpt-post ';
+			opt.element_class = 'dslc-post dslc-partner ';
 
 			if(opt.type.value == 'masonry'){
 
