@@ -29,7 +29,7 @@
 				</span>
 
 				<% cats_array.forEach(function(elem, index){%>
-					<span class="dslc-post-filter dslc-downloads-module dslc-inactive" data-repeatable="post_filter" data-id="<%= elem.cat_slug %>">
+					<span class="dslc-post-filter dslc-downloads-module dslc-inactive" data-repeatable="downloads_filter" data-id="<%= elem.cat_slug %>">
 						<%= elem.cat_name %>
 					</span>
 				<%})%>
@@ -65,7 +65,7 @@
 
 				var last_col = type.value == 'grid' && index > 0 && (index + 1) % posts_per_row.value == 0 && separator_enabled.value != 'disabled' ? 'dslc-last-col' : '';
 				%>
-				<div class="<%= element_class + columns_class + extra_class %> <%= last_col %> {{dslc-module-sc module-method='extra_col_class'}} {{dslc-module-sc module-method='post_categories'}}" data-repeatable="render_downloads">
+				<div class="<%= element_class + columns_class + extra_class %> <%= last_col %> {{dslc-module-sc module-method='extra_col_class'}} {{dslc-module-sc module-method='downloads_categories'}}" data-repeatable="render_downloads">
 
 					<% if(post_elements.value.indexOf('thumbnail') > -1){%>
 
@@ -74,7 +74,7 @@
 							<div data-module-method="post_thumb">
 								<div class="dslc-download-thumb-inner dslca-post-thumb">
 
-										<a href="{{dslc-module-sc module-method='permalink'}}">
+										<a href="#">
 											<img width="100%" height=200 src="http://dummyimage.com/300x200/000/fff"/>
 										</a>
 

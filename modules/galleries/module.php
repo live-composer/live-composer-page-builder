@@ -2206,17 +2206,13 @@ class DSLC_Galleries extends DSLC_Module {
 
 		$cats_array = array();
 
-		$cats_count = 0;
-
 		if ( $dslc_query->have_posts() ) {
 
 			while ( $dslc_query->have_posts() ) {
 
 				$dslc_query->the_post();
-
-				$cats_count++;
-
 				$post_cats = get_the_terms( get_the_ID(), 'dslc_galleries_cats' );
+
 				if ( ! empty( $post_cats ) ) {
 					foreach( $post_cats as $post_cat ) {
 						$cats_array[$post_cat->slug] = $post_cat->name;
@@ -2513,30 +2509,6 @@ class DSLC_Galleries extends DSLC_Module {
 	}
 
 	/**
-	 * Returns author's post link. Repeater function.
-	 * @return string
-	 */
-	function author_posts_link() {
-
-		ob_start();
-		echo get_the_author_posts_link();
-
-		return ob_get_clean();
-	}
-
-	/**
-	 * Returns post date. Repeater function.
-	 * @return  string
-	 */
-	function post_date() {
-
-		ob_start();
-		the_time( get_option( 'date_format' ) );
-
-		return ob_get_clean();
-	}
-
-	/**
 	 * Returns post title.Repeater function.
 	 * @return string
 	 */
@@ -2659,8 +2631,7 @@ class DSLC_Galleries extends DSLC_Module {
 		}
 
 		ob_start();
-		?>
-		<?php if ( $gallery_images_count > 0 ) : ?>
+		if ( $gallery_images_count > 0 ) : ?>
 
 		<div class="dslc-lightbox-gallery">
 
@@ -2680,8 +2651,7 @@ class DSLC_Galleries extends DSLC_Module {
 
 		</div><!-- .dslc-gallery-lightbox -->
 
-	<?php endif; ?>
-		<?php
+		<?php endif;
 
 		return ob_get_clean();
 	}

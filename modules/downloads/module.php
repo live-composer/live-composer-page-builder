@@ -2122,17 +2122,14 @@ class DSLC_Downloads extends DSLC_Module {
 	 */
 	function downloads_categories() {
 
-		global $LC_Registry;
-
-		$taxonomy_name = $LC_Registry->get( 'dslc-downloads-taxonomy' );
 		$post_cats_data = '';
+		$post_cats = get_the_terms( get_the_ID(), 'dslc_downloads_cats' );
 
-		if ( isset( $taxonomy_name ) ) {
-			$post_cats = get_the_terms( get_the_ID(), $taxonomy_name );
-			if ( ! empty( $post_cats ) ) {
-				foreach( $post_cats as $post_cat ) {
-					$post_cats_data .= 'in-cat-' . $post_cat->slug . ' ';
-				}
+		if ( ! empty( $post_cats ) ) {
+
+			foreach( $post_cats as $post_cat ) {
+
+				$post_cats_data .= 'in-cat-' . $post_cat->slug . ' ';
 			}
 		}
 
@@ -2242,7 +2239,6 @@ class DSLC_Downloads extends DSLC_Module {
 
 		return $dslc_query;
 	}
-
 
 	/**
 	 * Posts render. Template function.
@@ -2444,30 +2440,6 @@ class DSLC_Downloads extends DSLC_Module {
 					echo do_shortcode( get_the_content() );
 			}
 		}
-
-		return ob_get_clean();
-	}
-
-	/**
-	 * Returns author's post link. Repeater function.
-	 * @return string
-	 */
-	function author_posts_link() {
-
-		ob_start();
-		echo get_the_author_posts_link();
-
-		return ob_get_clean();
-	}
-
-	/**
-	 * Returns post date. Repeater function.
-	 * @return  string
-	 */
-	function post_date() {
-
-		ob_start();
-		the_time( get_option( 'date_format' ) );
 
 		return ob_get_clean();
 	}
