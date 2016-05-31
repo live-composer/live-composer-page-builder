@@ -44,6 +44,70 @@ class DSLC_Panel_Style_Opts {
 		);
 	}
 
+	static function max_width( $args ) {
+
+		$ext = strpos( $args['value'], "%" ) > -1 ? "%" : 'px';
+
+		return array(
+
+			array(
+				'label' => __(  $args['label'] . 'Max width', 'live-composer-page-builder' ),
+				'id' => 'css_max_width_' . $args['id'],
+				'std' => intval( $args['value'] ),
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => $args['selector'],
+				'affect_on_change_rule' => $args['rule'],
+				'section' => 'styling',
+				'ext' => $ext,
+				'tab' =>  __( $args['tab'], 'live-composer-page-builder' )
+			),
+		);
+	}
+
+	static function line_height( $args ) {
+
+		$ext = strpos( $args['value'], "%" ) > -1 ? "%" : 'px';
+
+		return array(
+
+			array(
+				'label' => __(  $args['label'] . 'Line height', 'live-composer-page-builder' ),
+				'id' => 'css_line_height_' . $args['id'],
+				'std' => intval( $args['value'] ),
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => $args['selector'],
+				'affect_on_change_rule' => $args['rule'],
+				'section' => 'styling',
+				'ext' => $ext,
+				'tab' =>  __( $args['tab'], 'live-composer-page-builder' )
+			),
+		);
+	}
+
+
+	static function max_height( $args ) {
+
+		$ext = strpos( $args['value'], "%" ) > -1 ? "%" : 'px';
+
+		return array(
+
+			array(
+				'label' => __(  $args['label'] . 'Max height', 'live-composer-page-builder' ),
+				'id' => 'css_max_height_' . $args['id'],
+				'std' => intval( $args['value'] ),
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => $args['selector'],
+				'affect_on_change_rule' => $args['rule'],
+				'section' => 'styling',
+				'ext' => $ext,
+				'tab' =>  __( $args['tab'], 'live-composer-page-builder' )
+			),
+		);
+	}
+
 
 	static function height( $args ) {
 
@@ -130,7 +194,7 @@ class DSLC_Panel_Style_Opts {
 				'label' => __( $args['label'] . 'Letter spacing', 'live-composer-page-builder' ),
 				'id' => 'css_letter_s_' . $args['id'],
 				'std' => intval( $args['value'] ),
-				'type' => 'font',
+				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => $args['selector'],
 				'affect_on_change_rule' => $args['rule'],
