@@ -2238,6 +2238,8 @@ class DSLC_Projects extends DSLC_Module {
 				}
 
 				$cnt++;
+
+				$LC_Registry->set( 'project_url', null );
 			}
 
 			unset( $cnt );
@@ -2245,7 +2247,6 @@ class DSLC_Projects extends DSLC_Module {
 			$LC_Registry->set( 'dslc-projects-elem-index', null );
 			$LC_Registry->set( 'dslc-project-cats', null );
 			$LC_Registry->set( 'curr_class', null );
-			$LC_Registry->set( 'project_url', null );
 		}
 
 		return $out;

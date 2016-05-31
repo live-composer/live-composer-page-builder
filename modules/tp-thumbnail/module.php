@@ -1,5 +1,11 @@
 <?php
+/**
+ * Thumbnail module class
+ */
 
+/**
+ * Class DSLC_TP_Thumbnail
+ */
 class DSLC_TP_Thumbnail extends DSLC_Module {
 
 	var $module_id;
@@ -7,16 +13,24 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 	var $module_icon;
 	var $module_category;
 
-	function __construct() {
+	/**
+	 * @inherited
+	 */
+	function __construct( $settings = [], $atts = [] ) {
 
-		$this->module_id = 'DSLC_TP_Thumbnail';
+		$this->module_ver = 2;
+		$this->module_id = __CLASS__;
 		$this->module_title = __( 'Thumbnail', 'live-composer-page-builder' );
 		$this->module_icon = 'picture';
 		$this->module_category = 'single';
 
+		parent::__construct( $settings, $atts );
 	}
 
-	function options() {	
+	/**
+	 * @inherited
+	 */
+	function options() {
 
 		$dslc_options = array(
 
@@ -313,72 +327,78 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 
 	}
 
-	function output( $options ) {
+	/**
+	 * Returns post thumbnail.
+	 * @return  string
+	 */
+	function get_thumbnail() {
 
-		global $dslc_active;
+		if ( ! has_post_thumbnail() ) return '';
 
-		$post_id = $options['post_id'];
+		$manual_resize = false;
+		$options = $this->getPropsValues();
+		$post_id = get_the_ID();
 
-		$this->module_start( $options );
+		$manual_resize = false;
+		if ( ! empty( $options['resize_width'] ) || ! empty( $options['resize_height'] ) ) {
 
-		if ( is_singular() ) {
-			$post_id = get_the_ID();
-		}
+			$manual_resize = true;
+			$thumb_url = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
+			$thumb_url = $thumb_url[0];
 
-		/* Module output starts here */
-				
-			$manual_resize = false;
-			if ( ! empty( $options['resize_width'] ) || ! empty( $options['resize_height'] ) ) {
+			$resize_width = false;
+			$resize_height = false;
 
-				$manual_resize = true;
-				$thumb_url = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' ); 
-				$thumb_url = $thumb_url[0];
-
-				$resize_width = false;
-				$resize_height = false;
-
-				if ( isset( $options['resize_width'] ) && ! empty( $options['resize_width'] ) ) {
-					$resize_width = $options['resize_width'];
-				}
-
-				if ( isset( $options['resize_height'] ) && ! empty( $options['resize_height'] ) ) {
-					$resize_height = $options['resize_height'];
-				}
-
+			if ( isset( $options['resize_width'] ) && ! empty( $options['resize_width'] ) ) {
+				$resize_width = $options['resize_width'];
 			}
 
-			if ( get_post_type( $post_id ) == 'dslc_templates' || ( defined('DOING_AJAX') && DOING_AJAX ) ) :
-				if ( has_post_thumbnail( $post_id ) ) :
-					?><div class="dslc-tp-thumbnail"><?php
-						if ( $manual_resize ) : ?>
-							<img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" />
-						<?php else : ?>
-							<?php echo get_the_post_thumbnail( $post_id, 'full' ); ?>
-						<?php endif;
-					?></div><?php
-				else : 
-					?><div class="dslc-tp-thumbnail dslc-tp-thumbnail-fake"><img src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/placeholders/tpl-thumb-placeholder.png" /></div><?php
-				endif;
-			else : 
-				?><div class="dslc-tp-thumbnail">
-					<?php if ( isset( $options['lightbox_state'] ) && $options['lightbox_state'] == 'enabled' ) : ?>
-						<a href="<?php $thumb = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'full' ); echo $thumb[0]; ?>" class="dslc-lightbox-image">
-					<?php endif; ?>
-						<?php if ( $manual_resize ) : ?>
-							<img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo dslc_get_attachment_alt( get_post_thumbnail_id() ); ?>" />
-						<?php else : ?>
-							<?php the_post_thumbnail( 'full' ); ?>
-						<?php endif; ?>
-					<?php if ( isset( $options['lightbox_state'] ) && $options['lightbox_state'] == 'enabled' ) : ?>
-						</a>
-					<?php endif; ?>
-				</div><?php
-			endif;
+			if ( isset( $options['resize_height'] ) && ! empty( $options['resize_height'] ) ) {
+				$resize_height = $options['resize_height'];
+			}
 
+		}
+
+		ob_start();
+
+		if ( get_post_type( $post_id ) == 'dslc_templates' || ( defined('DOING_AJAX') && DOING_AJAX ) ) {
+			if ( $manual_resize ) { ?>
+				<img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" />
+			<?php } else {
+				echo get_the_post_thumbnail( $post_id, 'full' );
+			}
+		} else {
+			if ( isset( $options['lightbox_state'] ) && $options['lightbox_state'] == 'enabled' ) { ?>
+				<a href="<?php $thumb = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'full' ); echo $thumb[0]; ?>" class="dslc-lightbox-image">
+			<?php }
+				if ( $manual_resize ) { ?>
+					<img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo dslc_get_attachment_alt( get_post_thumbnail_id() ); ?>" />
+				<?php } else {
+					the_post_thumbnail( 'full' );
+				}
+			if ( isset( $options['lightbox_state'] ) && $options['lightbox_state'] == 'enabled' ) { ?>
+				</a>
+			<?php }
+		}
+
+		return ob_get_clean();
+	}
+
+	/**
+	 * @inherited
+	 */
+	function output( $options = [] ) {
+
+		$this->module_start();
+
+		/* Module output stars here */
+		echo $this->renderModule();
 		/* Module output ends here */
 
-		$this->module_end( $options );
-
+		$this->module_end();
 	}
 
 }
+
+/// Register module
+( new DSLC_TP_Thumbnail )->register();
