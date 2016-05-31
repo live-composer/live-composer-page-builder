@@ -80,6 +80,7 @@
 	include DS_LIVE_COMPOSER_ABS . '/includes/post-templates.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/other.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/options.extension.class.php';
+	include DS_LIVE_COMPOSER_ABS . '/includes/libs/cssparser.php';
 
 	/**
 	 * Tutorials disabled by default

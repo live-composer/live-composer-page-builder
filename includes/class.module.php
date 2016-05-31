@@ -1736,14 +1736,14 @@ class DSLC_Module {
 		    isset( $atts['tab'] )
 		) {
 
-			$id = preg_replace('/[\W]/', "", strtolower( $atts['selector'] ) );
+			$id = preg_replace('/[\W]/', "_", strtolower( $atts['selector'] ) );
 
 			$default_typo = array(
 
 				array(
 					'label' => 'Text align',
-					'id' => 'css_filter_position' . $id,
-					'std' => 'left',
+					'id' => 'css_filter_position_' . $id,
+					'std' => '',
 					'type' => 'text_align',
 					'refresh_on_change' => false,
 					'affect_on_change_el' => $atts['selector'],
@@ -1753,8 +1753,8 @@ class DSLC_Module {
 				),
 				array(
 					'label' => __( 'Color', 'live-composer-page-builder' ),
-					'id' => 'css_color' . $id,
-					'std' => '#ffffff',
+					'id' => 'css_color_' . $id,
+					'std' => '',
 					'type' => 'color',
 					'refresh_on_change' => false,
 					'affect_on_change_el' => $atts['selector'],
@@ -1764,8 +1764,8 @@ class DSLC_Module {
 				),
 				array(
 					'label' => __( 'Color - Hover', 'live-composer-page-builder' ),
-					'id' => 'css_color_hover' . $id,
-					'std' => '#ffffff',
+					'id' => 'css_color_hover_' . $id,
+					'std' => '',
 					'type' => 'color',
 					'refresh_on_change' => false,
 					'affect_on_change_el' => $atts['selector'] . ":hover",
@@ -1775,8 +1775,8 @@ class DSLC_Module {
 				),
 				array(
 					'label' => __( 'Font Size', 'live-composer-page-builder' ),
-					'id' => 'css_font_size' . $id,
-					'std' => '11',
+					'id' => 'css_font_size_' . $id,
+					'std' => '',
 					'type' => 'slider',
 					'refresh_on_change' => false,
 					'affect_on_change_el' => $atts['selector'],
@@ -1787,8 +1787,8 @@ class DSLC_Module {
 				),
 				array(
 					'label' => __( 'Font Weight', 'live-composer-page-builder' ),
-					'id' => 'css_font_weight' . $id,
-					'std' => '800',
+					'id' => 'css_font_weight_' . $id,
+					'std' => '',
 					'type' => 'slider',
 					'refresh_on_change' => false,
 					'affect_on_change_el' => $atts['selector'],
@@ -1802,8 +1802,8 @@ class DSLC_Module {
 				),
 				array(
 					'label' => __( 'Font Family', 'live-composer-page-builder' ),
-					'id' => 'css_font_family' . $id,
-					'std' => 'Lato',
+					'id' => 'css_font_family_' . $id,
+					'std' => '',
 					'type' => 'font',
 					'refresh_on_change' => false,
 					'affect_on_change_el' => $atts['selector'],
@@ -1813,8 +1813,8 @@ class DSLC_Module {
 				),
 				array(
 					'label' => __( 'Letter Spacing', 'live-composer-page-builder' ),
-					'id' => 'css_letter_spacing' . $id,
-					'std' => '10',
+					'id' => 'css_letter_spacing_' . $id,
+					'std' => '',
 					'type' => 'slider',
 					'refresh_on_change' => false,
 					'affect_on_change_el' => $atts['selector'],
@@ -1827,8 +1827,8 @@ class DSLC_Module {
 				),
 				array(
 					'label' => __( 'Line height', 'live-composer-page-builder' ),
-					'id' => 'css_line_height' . $id,
-					'std' => '0',
+					'id' => 'css_line_height_' . $id,
+					'std' => '',
 					'type' => 'slider',
 					'refresh_on_change' => false,
 					'affect_on_change_el' => $atts['selector'],
@@ -1841,7 +1841,7 @@ class DSLC_Module {
 				),
 				array(
 					'label' => __( 'Text Shadow', 'live-composer-page-builder' ),
-					'id' => 'css_text_shadow' . $id,
+					'id' => 'css_text_shadow_' . $id,
 					'std' => '',
 					'type' => 'text_shadow',
 					'refresh_on_change' => false,
@@ -1852,7 +1852,7 @@ class DSLC_Module {
 				),
 				array(
 					'label' => __( 'Text Shadow Hover', 'live-composer-page-builder' ),
-					'id' => 'css_text_shadow' . $id . '_hover',
+					'id' => 'css_text_shadow_' . $id . '_hover',
 					'std' => '',
 					'type' => 'text_shadow',
 					'refresh_on_change' => false,
@@ -1865,6 +1865,19 @@ class DSLC_Module {
 		}
 
 		return $$options_id;
+	}
+
+	/**
+	 * Css parser to option array
+	 * @return array
+	 */
+	function process_css( $css_string, $tab_name ) {
+
+		$css = new CSSParser();
+
+		$css->parseCSS( $css_string );
+		$out = '';
+		pre($css->GetCSSArray(0));
 	}
 
 	/**
