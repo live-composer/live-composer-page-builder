@@ -1871,13 +1871,41 @@ class DSLC_Module {
 	 * Css parser to option array
 	 * @return array
 	 */
-	function process_css( $css_string, $tab_name ) {
+	function process_css( $css_string ) {
 
 		$css = new CSSParser();
 
 		$css->parseCSS( $css_string );
-		$out = '';
-		pre($css->GetCSSArray(0));
+		$out = array();
+
+		foreach( $css->GetCSSArray(0) as $selector => $rules) {
+
+			$id = preg_replace('/[\W]/', "_", strtolower( $selector ) );
+
+			if( ! isset( $rules['tab'] ) ) continue;
+
+			$tab = $rules['tab'];
+
+			$label = isset( $rules['label'] ) ?  $rules['label'] . ' - ' : '';
+
+			foreach( $rules as $rule => $value ) {
+
+				$out = array_merge(
+				    $out, DSLC_Panel_Style_Opts::get_option(
+					    array(
+				        	'selector' => $selector,
+				        	'tab' => $tab,
+				        	'rule' => $rule,
+				        	'value' => $value,
+				        	'id' => $id,
+				        	'label' => $label
+						)
+					)
+				);
+			}
+		}
+
+		return $out;
 	}
 
 	/**

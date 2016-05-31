@@ -81,6 +81,7 @@
 	include DS_LIVE_COMPOSER_ABS . '/includes/other.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/options.extension.class.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/libs/cssparser.php';
+	include DS_LIVE_COMPOSER_ABS . '/includes/libs/panel.options.class.php';
 
 	/**
 	 * Tutorials disabled by default
