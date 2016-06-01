@@ -1,5 +1,11 @@
 <?php
+/**
+ * Comments Form module class
+ */
 
+/**
+ * Class DSLC_TP_Comments_Form
+ */
 class DSLC_TP_Comments_Form extends DSLC_Module {
 
 	var $module_id;
@@ -7,16 +13,24 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 	var $module_icon;
 	var $module_category;
 
-	function __construct() {
+	/**
+	 * @inherited
+	 */
+	function __construct( $settings = [], $atts = [] ) {
 
-		$this->module_id = 'DSLC_TP_Comments_Form';
+		$this->module_ver = 2;
+		$this->module_id = __CLASS__;
 		$this->module_title = __( 'Comment Form', 'live-composer-page-builder' );
 		$this->module_icon = 'comment';
 		$this->module_category = 'elements';
 
+		parent::__construct( $settings, $atts );
 	}
 
-	function options() {	
+	/**
+	 * @inherited
+	 */
+	function options() {
 
 		$dslc_options = array(
 
@@ -43,44 +57,44 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 			array(
 				'label' => __( '"Leave a Comment" Text', 'live-composer-page-builder' ),
 				'id' => 'txt_leave_comment',
-				'std' => '',
+				'std' => 'Leave a Comment',
 				'type' => 'text',
 			),
 			array(
 				'label' => __( '"Name" Placeholder Text', 'live-composer-page-builder' ),
 				'id' => 'txt_name',
-				'std' => '',
+				'std' => 'Name',
 				'type' => 'text',
 			),
 			array(
 				'label' => __( '"Email" Placeholder Text', 'live-composer-page-builder' ),
 				'id' => 'txt_email',
-				'std' => '',
+				'std' => 'Email',
 				'type' => 'text',
 			),
 			array(
 				'label' => __( '"Website" Placeholder Text', 'live-composer-page-builder' ),
 				'id' => 'txt_url',
-				'std' => '',
+				'std' => 'Website',
 				'type' => 'text',
 			),
 			array(
 				'label' => __( '"Comment" Placeholder Text', 'live-composer-page-builder' ),
 				'id' => 'txt_comment',
-				'std' => '',
+				'std' => 'Comment',
 				'type' => 'text',
 			),
 			array(
 				'label' => __( '"Submit Comment" Button Text', 'live-composer-page-builder' ),
 				'id' => 'txt_submit_comment',
-				'std' => '',
+				'std' => 'SUBMIT YOUR COMMENT',
 				'type' => 'text',
 			),
-			
+
 			/**
 			 * General
 			 */
-			
+
 			array(
 				'label' => __( 'BG Color', 'live-composer-page-builder' ),
 				'id' => 'css_bg_color',
@@ -297,7 +311,7 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				'ext' => 'px'
 			),
 
-			/** 
+			/**
 			 * Inputs
 			 */
 
@@ -854,7 +868,7 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 			/**
 			 * Responsive Phone
 			 */
-			
+
 			array(
 				'label' => __( 'Responsive Styling', 'live-composer-page-builder' ),
 				'id' => 'css_res_p',
@@ -1051,19 +1065,14 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 
 	}
 
-	function output( $options ) {
+	/**
+	 * Returns comments.
+	 * @return string
+	 */
+	function comments_form() {
 
-		global $dslc_active;
-
-		$post_id = $options['post_id'];
-		$show_fake = true;
-
-		if ( is_singular() && get_post_type() !== 'dslc_templates' ) {
-			$post_id = get_the_ID();
-			$show_fake = false;
-		}
-
-		$this->module_start( $options );
+		$post_id = get_the_ID();
+		$options = $this->getPropsValues();
 
 		$txt_submit_comment = __( 'SUBMIT YOUR COMMENT', 'live-composer-page-builder' );
 		$txt_leave_comment = __( 'Leave a Comment', 'live-composer-page-builder' );
@@ -1090,57 +1099,42 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 		if ( isset( $options['txt_url'] ) && $options['txt_url'] != '' )
 			$txt_url = $options['txt_url'];
 
-		/* Module output starts here */
-			
-			?>
+		ob_start();
 
-				<div class="dslc-tp-comment-form">
+		global $commenter;
+		comment_form( array(
+			'label_submit' => $txt_submit_comment,
+			'cancel_reply_link' => 'cancel',
+			'comment_notes_before' => '',
+			'comment_notes_after' => '',
+			'title_reply' => $txt_leave_comment,
+			'title_reply_to' => __( 'Reply to %s.', 'live-composer-page-builder'),
+			'comment_field' => '<div class="comment-form-comment"><textarea id="comment" name="comment" placeholder="' . $txt_comment . '" aria-required="true"></textarea></div>',
+			'fields' => apply_filters( 'comment_form_default_fields', array(
+				'author' => '<div class="comment-form-name"><input id="author" name="author" type=text value="' . esc_attr( $commenter['comment_author'] ) . '" size="30" placeholder="' . $txt_name . ' *" aria-required="true" /></div>',
+				'email' => '<div class="comment-form-email"><input id="email" name="email" type=text value="' . esc_attr(  $commenter['comment_author_email'] ) . '" size="30" placeholder="' . $txt_email . ' *" aria-required="true" /></div>',
+				'url' => '<div class="comment-form-website"><input id="url" name="url" type=text value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30" placeholder="' . $txt_url . '" /></div>'
+			)),
+		), $post_id);
 
-					<?php if ( $show_fake ) : ?>
+		return ob_get_clean();
+	}
 
-						<div id="respond" class="comment-respond">
-							<h3 id="reply-title" class="comment-reply-title"><?php echo $txt_leave_comment; ?></h3>
-							<form action="http://localhost/livecomposer/wp-comments-post.php" method="post" id="commentform" class="comment-form" onsubmit="return(false)">
-								<div class="comment-form-name"><input id="author" name="author" type=text value="" size="30" placeholder="<?php echo $txt_name; ?> *" aria-required="true"></div>
-								<div class="comment-form-email"><input id="email" name="email" type=text value="" size="30" placeholder="<?php echo $txt_email; ?> *" aria-required="true"></div>
-								<div class="comment-form-website"><input id="url" name="url" type=text value="" size="30" placeholder="<?php echo $txt_url; ?>"></div>
-								<div class="comment-form-comment"><textarea id="comment" name="comment" placeholder="<?php echo $txt_comment; ?>" aria-required="true"></textarea></div>
-								<p class="form-submit">
-									<input name="submit" type="submit" id="submit" value="<?php echo $txt_submit_comment ?>">
-									<input type="hidden" name="comment_post_ID" value="14" id="comment_post_ID">
-									<input type="hidden" name="comment_parent" id="comment_parent" value="0">
-								</p>
-							</form>
-						</div><!-- #respond -->
+	/**
+	 * @inherited
+	 */
+	function output( $options = [] )
+	{
+		$this->module_start();
 
-					<?php else : 
-
-						global $commenter;
-						comment_form( array(
-							'label_submit' => $txt_submit_comment,
-							'cancel_reply_link' => 'cancel',
-							'comment_notes_before' => '',
-							'comment_notes_after' => '',
-							'title_reply' => $txt_leave_comment,
-							'title_reply_to' => __( 'Reply to %s.', 'live-composer-page-builder'),
-							'comment_field' => '<div class="comment-form-comment"><textarea id="comment" name="comment" placeholder="' . __( 'Comment', 'live-composer-page-builder' ) . '" aria-required="true"></textarea></div>',
-							'fields' => apply_filters( 'comment_form_default_fields', array(
-								'author' => '<div class="comment-form-name"><input id="author" name="author" type=text value="' . esc_attr( $commenter['comment_author'] ) . '" size="30" placeholder="' . $txt_name . ' *" aria-required="true" /></div>',
-								'email' => '<div class="comment-form-email"><input id="email" name="email" type=text value="' . esc_attr(  $commenter['comment_author_email'] ) . '" size="30" placeholder="' . $txt_email . ' *" aria-required="true" /></div>',
-								'url' => '<div class="comment-form-website"><input id="url" name="url" type=text value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30" placeholder="' . $txt_url . '" /></div>' 
-							)),
-						), $post_id); 
-					
-					endif;  ?>
-
-				</div><!-- dslc-tp-comment-form -->
-
-			<?php
-
+		/* Module output stars here */
+		echo $this->renderModule();
 		/* Module output ends here */
 
-		$this->module_end( $options );
-
+		$this->module_end();
 	}
 
 }
+
+/// Register module
+( new DSLC_TP_Comments_Form )->register();

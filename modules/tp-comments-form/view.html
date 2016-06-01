@@ -1,0 +1,16 @@
+<div class="dslc-tp-comment-form" data-module-method="comments_form">
+	<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title"><%= txt_leave_comment.value || txt_leave_comment.std %></h3>
+		<form action="#" method="post" id="commentform" class="comment-form" >
+			<div class="comment-form-name"><input id="author" name="author" type="text" value="" size="30" placeholder="<%= txt_name.value || txt_name.std %> *" aria-required="true"></div>
+			<div class="comment-form-email"><input id="email" name="email" type="text" value="" size="30" placeholder="<%= txt_email.value || txt_email.std %> *" aria-required="true"></div>
+			<div class="comment-form-website"><input id="url" name="url" type="text" value="" size="30" placeholder="<%= txt_url.value || txt_url.std %>"></div>
+			<div class="comment-form-comment"><textarea id="comment" name="comment" placeholder="<%= txt_comment.value || txt_comment.std %>" aria-required="true"></textarea></div>
+			<p class="form-submit">
+				<input name="submit" type="submit" id="submit" value="<%= txt_submit_comment.value || txt_submit_comment.std %>">
+				<input type="hidden" name="comment_post_ID" value="14" id="comment_post_ID">
+				<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+			</p>
+		</form>
+	</div><!-- #respond -->
+</div><!-- dslc-tp-comment-form -->

@@ -1,7 +1,11 @@
 <?php
+/**
+ * Comments module class
+ */
 
-include DS_LIVE_COMPOSER_ABS . '/modules/tp-comments/functions.php';
-
+/**
+ * Class DSLC_TP_Comments
+ */
 class DSLC_TP_Comments extends DSLC_Module {
 
 	var $module_id;
@@ -9,19 +13,27 @@ class DSLC_TP_Comments extends DSLC_Module {
 	var $module_icon;
 	var $module_category;
 
-	function __construct() {
+	/**
+	 * @inherited
+	 */
+	function __construct( $settings = [], $atts = [] ) {
 
-		$this->module_id = 'DSLC_TP_Comments';
+		$this->module_ver = 2;
+		$this->module_id = __CLASS__;
 		$this->module_title = __( 'Comments', 'live-composer-page-builder' );
 		$this->module_icon = 'comments';
 		$this->module_category = 'elements';
 
+		parent::__construct( $settings, $atts );
 	}
-	
-	function options() {	
+
+	/**
+	 * @inherited
+	 */
+	function options() {
 
 		$dslc_options = array(
-		
+
 			array(
 				'label' => __( 'Show On', 'live-composer-page-builder' ),
 				'id' => 'css_show_on',
@@ -1406,158 +1418,103 @@ class DSLC_TP_Comments extends DSLC_Module {
 
 	}
 
-	function output( $options ) {
+	/**
+	 * @inherited
+	 */
+	static function dslc_display_comments( $comment, $args, $depth ) {
 
-		global $dslc_active;
+		$GLOBALS['comment'] = $comment;
 
-		$post_id = $options['post_id'];
-		$show_fake = true;
+		switch ( $comment->comment_type ) :
 
-		if ( is_singular() && get_post_type() !== 'dslc_templates' ) {
-			$post_id = get_the_ID();
-			$show_fake = false;
-		}
+			case 'pingback' :
+			case 'trackback' :
+				?>
+				<li class="dslc-comments-pingback">
+					<p><?php _e( 'Pingback:', 'live-composer-page-builder' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __( '(Edit)', 'live-composer-page-builder' ), ' ' ); ?></p>
+				<?php
+			break;
+			default :
 
-		$this->module_start( $options );
+				if ( $comment->comment_approved == '1' ) :
 
-		/* Module output starts here */
-			
-			?>
+					?>
 
-				<div class="dslc-tp-comments" id="comments">
+					<li <?php comment_class( 'dslc-comment' ); ?> id="dslc-comment-<?php comment_ID(); ?>">
 
-					<?php if ( $show_fake ) : ?>
+						<div class="dslc-comment-inner">
 
-						<?php if ( defined( 'DISQUS_VERSION' ) ) : ?> 
+							<div class="dslc-comment-info dslc-clearfix">
 
-							<p><strong>DISQUS</strong> is active and will be shown in this position.</strong></p>
+								<ul class="dslc-comment-meta dslc-clearfix">
+									<li class="dslc-comment-meta-author"><span class="dslc-comment-author-avatar"><?php echo get_avatar( $comment, 33 ); ?></span><?php echo get_comment_author_link(); ?></li>
+									<li class="dslc-comment-meta-date"><?php echo get_comment_date(); ?></li>
+								</ul>
 
-						<?php else : ?>
+								<span class="dslc-comment-reply">
+									<?php comment_reply_link( array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
+								</span>
 
-							<ol class="comments clean-list">
-									
-								<li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1 dslc-comment">
+							</div><!-- .comment-info -->
 
-									<div class="dslc-comment-inner">
+							<div class="dslc-comment-main">
 
-										<div class="dslc-comment-info dslc-clearfix">
+								<?php comment_text(); ?>
 
-											<ul class="dslc-comment-meta dslc-clearfix">
-												<li class="dslc-comment-meta-author"><span class="dslc-comment-author-avatar"><img height="33" width="33" class="avatar avatar-33 photo" src="http://0.gravatar.com/avatar/8fa8ea3566dc0b5bcff5d6d8e93f0c9e?s=33&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D33&amp;r=G" alt=""></span>admin</li>
-												<li class="dslc-comment-meta-date">January 1, 2014</li>
-											</ul>
+							</div><!-- .comment-main -->
 
-											<span class="dslc-comment-reply">
-												<a href="#" class="comment-reply-link">Reply</a>
-											</span>
+						</div><!-- .comment-inner -->
 
-										</div><!-- .comment-info -->
+					<?php
 
-										<div class="dslc-comment-main">
-											
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
+					endif;
 
-										</div><!-- .comment-main -->
-
-									</div><!-- .comment-inner -->
-
-								</li><!-- #comment-## -->
-
-								<li id="dslc-comment-42" class="comment byuser comment-author-admin bypostauthor even thread-even depth-1 dslc-comment">
-
-									<div class="dslc-comment-inner">
-
-										<div class="dslc-comment-info dslc-clearfix">
-
-											<ul class="dslc-comment-meta dslc-clearfix">
-												<li class="dslc-comment-meta-author"><span class="dslc-comment-author-avatar"><img height="33" width="33" class="avatar avatar-33 photo" src="http://0.gravatar.com/avatar/8fa8ea3566dc0b5bcff5d6d8e93f0c9e?s=33&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D33&amp;r=G" alt=""></span>admin</li>
-												<li class="dslc-comment-meta-date">January 1, 2014</li>
-											</ul>
-
-											<span class="dslc-comment-reply">
-												<a onclick="return addComment.moveForm(&quot;comment-42&quot;, &quot;42&quot;, &quot;respond&quot;, &quot;14&quot;)" href="/livecomposer/?p=14&amp;replytocom=42#respond" class="comment-reply-link">Reply</a>						</span>
-
-										</div><!-- .comment-info -->
-
-										<div class="dslc-comment-main">
-											
-												<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
-
-										</div><!-- .comment-main -->
-
-									</div><!-- .comment-inner -->
-
-									<ul class="children">
-
-										<li id="dslc-comment-43" class="comment byuser comment-author-admin bypostauthor odd alt depth-2 dslc-comment">
-
-											<div class="dslc-comment-inner">
-
-												<div class="dslc-comment-info dslc-clearfix">
-
-													<ul class="dslc-comment-meta dslc-clearfix">
-														<li class="dslc-comment-meta-author"><span class="dslc-comment-author-avatar"><img height="33" width="33" class="avatar avatar-33 photo" src="http://0.gravatar.com/avatar/8fa8ea3566dc0b5bcff5d6d8e93f0c9e?s=33&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D33&amp;r=G" alt=""></span>admin</li>
-														<li class="dslc-comment-meta-date">January 1, 2014</li>
-													</ul>
-
-													<span class="dslc-comment-reply">
-														<a onclick="return addComment.moveForm(&quot;comment-43&quot;, &quot;43&quot;, &quot;respond&quot;, &quot;14&quot;)" href="/livecomposer/?p=14&amp;replytocom=43#respond" class="comment-reply-link">Reply</a>						</span>
-
-												</div><!-- .comment-info -->
-
-												<div class="dslc-comment-main">
-													
-													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-
-												</div><!-- .comment-main -->
-
-											</div><!-- .comment-inner -->
-
-										</li><!-- #comment-## -->
-									</ul><!-- .children -->
-								</li><!-- #comment-## -->
-							</ol><!-- .commentlist -->
-
-						<?php endif; ?>
-
-					<?php else : ?>
-
-						<?php if ( defined( 'DISQUS_VERSION' ) ) : comments_template(); else : ?>
-
-							<?php $comments = get_comments( array( 'post_id' => $post_id ) ); ?>
-
-							<?php if ( get_comment_pages_count( $comments ) > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through ?>
-								
-								<!-- Comments Navigation -->
-
-							<?php endif; ?>
-
-							<ol class="comments clean-list">
-								<?php wp_list_comments( array( 'callback' => 'dslc_display_comments' ), $comments ); ?>
-							</ol><!-- .commentlist -->
-
-							<?php if ( get_comment_pages_count( $comments ) > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through ?>
-								
-								<!-- Comments Navigation -->
-
-							<?php endif; ?>
-
-						<?php endif; ?>
-
-						<?php if ( ! comments_open() && '0' != get_comments_number() && post_type_supports( get_post_type(), 'comments' ) && ! defined( 'DISQUS_VERSION' ) ) : ?>
-								<p class="nocomments"><?php _e( 'Comments are closed.', 'live-composer-page-builder' ); ?></p>
-						<?php endif; ?>
-							
-					<?php endif; ?>
-
-				</div><!-- dslc-tp-comments -->
-
-			<?php
-
-		/* Module output ends here */
-
-		$this->module_end( $options );
+				break;
+		endswitch;
 
 	}
 
+	/**
+	 * Returns comments.
+	 * @return string
+	 */
+	function get_comments() {
+
+		$post_id = get_the_ID();
+		$comments = get_comments( array( 'post_id' => $post_id ) );
+
+		ob_start();
+
+		if ( defined( 'DISQUS_VERSION' ) ) {
+			comments_template();
+		} else { ?>
+			<ol class="comments clean-list">
+				<?php wp_list_comments( array( 'callback' => 'DSLC_TP_Comments::dslc_display_comments' ), $comments ); ?>
+			</ol><!-- .commentlist -->
+		<?php }
+
+		if ( !comments_open() && '0' != get_comments_number() && post_type_supports( get_post_type(), 'comments' ) && !defined( 'DISQUS_VERSION' ) ) { ?>
+			<p class="nocomments"><?php _e( 'Comments are closed.', 'live-composer-page-builder' ); ?></p>
+		<?php }
+
+		return ob_get_clean();
+	}
+
+	/**
+	 * @inherited
+	 */
+	function output( $options = [] )
+	{
+		$this->module_start();
+
+		/* Module output stars here */
+		echo $this->renderModule();
+		/* Module output ends here */
+
+		$this->module_end();
+	}
+
 }
+
+/// Register module
+( new DSLC_TP_Comments )->register();
