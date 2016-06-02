@@ -1,3 +1,178 @@
-<div class="dslc-notification dslc-red">
-	<?php _e( 'Module in the development', 'live-composer-page-builder' ) ?>
-</div>
+<% if(elements.value.indexOf('main_heading') > -1 || show_filters || show_carousel_arrows){%>
+	<div class="dslc-module-heading">
+
+		<!-- Heading -->
+
+		<% if(elements.value.indexOf('main_heading') > -1){%>
+			<h2 class="dslca-editable-content" data-id="main_heading_title" data-type="simple" contenteditable>
+				<%= main_heading_title.value || main_heading_title.std %>
+			</h2>
+			<!-- View all -->
+
+			<% if(obj.view_all_link && view_all_link.value !== ''){%>
+
+				<span class="dslc-module-heading-view-all">
+					<a href="<%= view_all_link.value %>" class="dslca-editable-content" data-id="main_heading_link_title" data-type="simple" contenteditable >
+						<%= main_heading_link_title.value || main_heading_link_title.std %>
+					</a>
+				</span>
+			<%}%>
+		<%}%>
+
+
+		<% if(show_filters == true){%>
+			<!-- Filters -->
+			<div class="dslc-post-filters dslc-posts-module">
+
+				<span class="dslc-post-filter dslca-testim-module dslca-testimonials-module dslc-active" data-id="all">
+					<?php _ex( 'All', 'Testimonials filter', 'live-composer-page-builder' ); ?>
+				</span>
+
+				<% cats_array.forEach(function(elem, index){%>
+					<span class="dslc-post-filter dslca-testimonials-module dslc-inactive" data-repeatable="testim_filter" data-id="<%= elem.cat_slug %>">
+						<%= elem.cat_name %>
+					</span>
+				<%})%>
+
+			</div><!-- .dslc-post-filters -->
+		<%}%>
+
+		<!-- Carousel -->
+
+		<% if(show_carousel_arrows){%>
+			<span class="dslc-carousel-nav fr">
+				<span class="dslc-carousel-nav-inner">
+					<a href="#" class="dslc-carousel-nav-prev"><span class="dslc-icon-chevron-left dslc-init-center"></span></a>
+					<a href="#" class="dslc-carousel-nav-next"><span class="dslc-icon-chevron-right dslc-init-center"></span></a>
+				</span>
+			</span><!-- .carousel-nav -->
+		<%}%>
+
+	</div><!-- .dslc-module-heading -->
+
+<%}%>
+
+<div class="<%= container_class %>">
+		<div class="dslc-posts-inner">
+
+			<% if ( obj.type.value == 'carousel' ){%>
+
+				<div class="dslc-loader"></div>
+				<div class="dslc-carousel" data-stop-on-hover="<%= carousel_autoplay_hover.value %>" data-autoplay="<%= carousel_autoplay.value %>" data-columns="<%= carousel_items.value %>" data-pagination="<%= carousel_elements.value.circles == true ? 'true' : 'false' %>" data-slide-speed="<%= arrows_slide_speed.value %>" data-pagination-speed="<%= circles_slide_speed.value %>">
+			<%}%>
+
+			<% posts.forEach(function(elem, index){
+
+				var last_col = type.value == 'grid' && index > 0 && (index + 1) % posts_per_row.value == 0 ? 'dslc-last-col' : '';
+				%>
+
+			<% obj.author_output = function(){%>
+				<div class="dslc-testimonial-author dslc-testimonial-author-pos-<%= author_pos.value.replace(' ', '-') %> dslc-clearfix">
+
+					<% if(post_elements.value.indexOf('avatar') > -1){%>
+
+						<div class="dslc-testimonial-author-avatar" data-module-method="post_thumb">
+							<img width="100%" height=200 src="/wp-content/uploads/2014/08/avatar-8.png"/>
+						</div><!-- .dslc-testimonial-author-avatar -->
+
+					<%}%>
+
+					<div class="dslc-testimonial-author-main">
+
+						<% if(post_elements.value.indexOf('name') > -1){%>
+
+							<div class="dslc-testimonial-author-name" data-module-method="post_title">
+								Author name
+							</div><!-- .dslc-testimonial-author-name -->
+
+						<%}%>
+
+						<% if(post_elements.value.indexOf('position')> -1){%>
+
+							<div class="dslc-testimonial-author-position" data-module-method="post_meta">
+								IT department
+							</div><!-- .dslc-testimoniala-author-position -->
+
+						<%}%>
+
+					</div><!-- .dslc-testimonial-author-main -->
+
+				</div><!-- .dslc-testimonial-author -->
+			<%}%>
+				<div class="<%= element_class + columns_class + extra_class %> <%= last_col %> {{dslc-module-sc module-method='extra_col_class'}} {{dslc-module-sc module-method='testim_categories'}}" data-repeatable="render_testim">
+
+					<div class="dslc-testimonial-inner">
+
+						<% if(
+							author_pos.value == 'outside top' ||
+							author_pos.value == 'outside left' ||
+							author_pos.value == 'outside right'
+						){
+							obj.author_output();
+						}; %>
+
+						<div class="dslc-testimonial-main">
+
+							<% if(author_pos.value == 'inside top'){
+
+								obj.author_output();
+							};%>
+
+							<% if(post_elements.value.indexOf('quote') > -1){%>
+
+								<div class="dslc-testimonial-quote" data-module-method="the_content">
+									“My company’s Google rankings and overall site traffic improved dramatically after just a few months of working with this agency. The service we’ve received from their team has consistently been above and beyond our expectations.”
+								</div><!-- .dslc-testimonial-quote -->
+							<%}%>
+
+							<% if(author_pos.value == 'inside bottom'){
+								obj.author_output();
+							}%>
+
+						</div><!-- .dslc-testimonial-main -->
+
+						<% if(author_pos.value == 'outside bottom'){
+
+							obj.author_output();
+						}%>
+
+					</div><!-- .dslc-testimonial-inner -->
+
+				</div><!-- .dslc-testimonial -->
+
+				<% if(last_col != ''){%>
+					<div class="dslc-post-separator lc-editor-element"></div>
+				<%}%>
+			<%});%>
+			<% if(type.value == 'carousel'){%>
+				</div>
+			<%}%>
+		</div><!--.dslc-posts-inner -->
+
+	</div><!-- .dslc-testimonials -->
+
+<% if(pagination_type.value && pagination_type.value != 'disabled'){%>
+	<div data-module-method="pagination_nav"></div>
+
+	<div class="dslc-pagination dslc-pagination-type-<%= pagination_type.value %> lc-editor-element">
+		<ul class="dslc-clearfix">
+			<% if(pagination_type.value == 'numbered'){%>
+				<li class="dslc-active"><a href="#">1</a></li>
+				<li class="dslc-inactive"><a class="inactive" href="#">2</a></li>
+			<%}%>
+
+			<% if(pagination_type.value == 'prevnext'){%>
+				<li class="dslc-active dslc-fr"><a href="#">Older</a></li>
+				<li class="dslc-inactive dslc-fl"><a href="#" class="">Newer</a></li>
+			<%}%>
+
+			<% if(pagination_type.value == 'loadmore'){%>
+				<li class="dslc-pagination-load-more dslc-active">
+					<a href="#">
+						<span class="dslc-icon dslc-icon-refresh"></span>LOAD MORE ITEMS
+					</a>
+				</li>
+			<%}%>
+		</ul>
+	</div>
+<%}%>

@@ -121,7 +121,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Posts Per Row', 'live-composer-page-builder' ),
-				'id' => 'columns',
+				'id' => 'posts_per_row',
 				'std' => '3',
 				'type' => 'select',
 				'choices' => $this->shared_options('posts_per_row_choices'),
@@ -1677,6 +1677,337 @@ class DSLC_Testimonials extends DSLC_Module {
 
 	}
 
+	/**
+	 * @inherited
+	 */
+	function afterRegister() {
+
+		add_action( 'wp_enqueue_scripts', function(){
+
+			global $LC_Registry;
+
+			$path = explode( '/', __DIR__ );
+			$path = array_pop( $path );
+
+			if ( $LC_Registry->get( 'dslc_active' ) == true ) {
+
+				wp_enqueue_script( 'js-testim-editor-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/editor-script.js', array( 'jquery' ) );
+			}
+
+			wp_enqueue_script( 'js-testim-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/script.js', array( 'jquery' ) );
+		});
+	}
+
+	/**
+	 * Returns filter HTML string
+	 * @return string
+	 */
+	function testim_filter() {
+
+		global $LC_Registry;
+
+		$dslc_query = $this->get_testim();
+		$LC_Registry->set( 'dslc-testim-query', $dslc_query );
+
+		$taxonomy_name = '';
+
+		$cats_array = array();
+
+		$cats_count = 0;
+
+		if ( $dslc_query->have_posts() ) {
+
+			while ( $dslc_query->have_posts() ) {
+
+				$dslc_query->the_post();
+
+				$post_cats = get_the_terms( get_the_ID(), 'dslc_testimonials_cats' );
+				if ( ! empty( $post_cats ) ) {
+					foreach( $post_cats as $post_cat ) {
+						$cats_array[$post_cat->slug] = $post_cat->name;
+					}
+				}
+			}
+		}
+
+		ob_start();
+
+		foreach ( $cats_array as $cat_slug => $cat_name ) {?>
+			<span class="dslc-post-filter dslca-testim-module dslc-inactive" data-id="<?php echo $cat_slug; ?>"><?php echo $cat_name; ?></span>
+		<?php }
+
+		return ob_get_clean();
+	}
+
+	/**
+	 * Return categories data to each post. Template function.
+	 * @return string
+	 */
+	function testim_categories() {
+
+		$post_cats_data = '';
+
+		$post_cats = get_the_terms( get_the_ID(), $taxonomy_name );
+
+		if ( ! empty( $post_cats ) ) {
+			foreach( $post_cats as $post_cat ) {
+				$post_cats_data .= 'in-cat-' . $post_cat->slug . ' ';
+			}
+		}
+
+		return $post_cats_data . ' in-cat-all';
+	}
+
+	/**
+	 * Posts fetcher.
+	 * @return WP_Query
+	 */
+	function get_testim() {
+
+		global $dslc_active;
+
+		$options = $this->getPropsValues();
+
+		// Fix slashes on apostrophes
+		if ( ! isset( $options['excerpt_length'] ) ) $options['excerpt_length'] = 20;
+		if ( ! isset( $options['type'] ) ) $options['type'] = 'grid';
+
+		if( is_front_page() ) { $paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1; } else { $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1; }
+
+		// Fix for pagination from other modules affecting this one when pag disabled
+		if ( $options['pagination_type'] == 'disabled' ) $paged = 1;
+
+		// Fix for offset braking pagination
+		$query_offset = $options['offset'];
+		if ( $query_offset > 0 && $paged > 1 ) $query_offset = ( $paged - 1 ) * $options['amount'] + $options['offset'];
+
+		$args = array(
+			'paged' => $paged,
+			'post_type' => 'dslc_testimonials',
+			'posts_per_page' => $options['amount'],
+			'order' => $options['order'],
+			'orderby' => $options['orderby'],
+		);
+
+		// Add offset
+		if ( $query_offset > 0 ) {
+			$args['offset'] = $query_offset;
+		}
+
+		if ( defined('DOING_AJAX') && DOING_AJAX ) {
+			$args['post_status'] = array( 'publish', 'private' );
+		}
+
+		if ( isset( $options['categories'] ) && $options['categories'] != '' ) {
+
+			$cats_array = explode( ' ', trim( $options['categories'] ));
+
+			$args['tax_query'] = array(
+				array(
+					'taxonomy' => 'dslc_testimonials_cats',
+					'field' => 'slug',
+					'terms' => $cats_array,
+					'operator' => $options['categories_operator']
+				)
+			);
+
+		}
+
+		// Exlcude and Include arrays
+		$exclude = array();
+		$include = array();
+
+		// Exclude current post
+		if ( is_singular( get_post_type() ) )
+			$exclude[] = get_the_ID();
+
+		// Exclude posts ( option )
+		if ( $options['query_post_not_in'] )
+			$exclude = array_merge( $exclude, explode( ' ', $options['query_post_not_in'] ) );
+
+		// Include posts ( option )
+		if ( $options['query_post_in'] )
+			$include = array_merge( $include, explode( ' ', $options['query_post_in'] ) );
+
+		// Include query parameter
+		if ( ! empty( $include ) )
+			$args['post__in'] = $include;
+
+		// Exclude query parameter
+		if ( ! empty( $exclude ) )
+			$args['post__not_in'] = $exclude;
+
+		// No paging
+		if ( $options['pagination_type'] == 'disabled' )
+			$args['no_found_rows'] = true;
+
+		$dslc_query = new WP_Query( $args );
+
+		return $dslc_query;
+	}
+
+
+	/**
+	 * Testimonials render. Template function.
+	 *
+	 * @param  array $atts
+	 * @param  array $content
+	 *
+	 * @return string
+	 */
+	function render_testim( $atts, $content ) {
+
+		global $LC_Registry;
+
+		$out = '';
+		$dslc_query = $LC_Registry->get( 'dslc-testim-query' );
+
+		if ( $dslc_query == null ) {
+
+			$dslc_query = $this->get_posts();
+			$LC_Registry->set( 'dslc-testim-query', $dslc_query );
+		}
+
+		if ( $dslc_query->have_posts() ) {
+
+			$LC_Registry->set( 'curr_class', $this );
+
+			$options = $this->getPropsValues();
+			$cnt = 0;
+
+			while ( $dslc_query->have_posts() ) {
+
+				$dslc_query->the_post();
+				$LC_Registry->set( 'dslc-testim-elem-index', $cnt );
+
+
+				$out .= DSLC_Main::dslc_do_shortcode( $content );
+
+				if ( 	$options['type'] == 'grid' &&
+				 		$cnt > 0 &&
+				 		($cnt + 1) % $options['posts_per_row'] == 0 &&
+				 		$options['separator_enabled'] != 'disabled' &&
+				 		($cnt + 1) < $dslc_query->found_posts &&
+				 		($cnt + 1) < $dslc_query->query_vars['posts_per_page']
+				 	) {
+
+					$out .= '<div class="dslc-post-separator"></div>';
+				}
+
+				$cnt++;
+			}
+
+			unset( $cnt );
+
+			$LC_Registry->set( 'dslc-testim-elem-index', null );
+			$LC_Registry->set( 'curr_class', null );
+		}
+
+		return $out;
+	}
+
+	/**
+	 * Returns last col class
+	 * @return string
+	 */
+	function extra_col_class() {
+
+		global $LC_Registry;
+
+		$opts = $this->getPropsValues();
+		$index = $LC_Registry->get( 'dslc-testim-elem-index' );
+		$extra_class = '';
+
+		if ( $opts['type'] == 'grid' && $index > 0 && ($index + 1) % $opts['posts_per_row'] == 0 && $opts['separator_enabled'] != 'disabled' ) {
+
+			$extra_class = 'dslc-last-col ';
+		}
+
+		if ( ! has_post_thumbnail() ) {
+
+			$extra_class .= 'dslc-post-no-thumb';
+		}
+
+		return $extra_class;
+	}
+
+	/**
+	 * Returns post title.Repeater function.
+	 * @return string
+	 */
+	function post_title() {
+
+		ob_start();
+		the_title();
+
+		return ob_get_clean();
+	}
+
+	/**
+	 * Returns post thumbnail. Repeater function.
+	 * @return  string
+	 */
+	function post_thumb() {
+
+		ob_start();
+		the_post_thumbnail( 'full' );
+
+		return ob_get_clean();
+	}
+
+	/**
+	 * Returns thumbnail content. Repeater function.
+	 * @return  string
+	 */
+	function the_content() {
+
+		ob_start();
+		echo do_shortcode( get_the_content() );
+		return ob_get_clean();
+	}
+
+	/**
+	 * Returns authors position. Template function.
+	 * @return string
+	 */
+	function post_meta() {
+
+		ob_start();
+		echo get_post_meta( get_the_ID(), 'dslc_testimonial_author_pos', true );
+		return ob_get_clean();
+	}
+
+	/**
+	 * Returns navigation HTML. Template shortcode function
+	 * @param  array $atts
+	 * @return string
+	 */
+	function pagination_nav( $atts ) {
+
+		global $LC_Registry;
+
+		$options = $this->getPropsValues();
+		$dslc_query = $LC_Registry->get( 'dslc-testim-query' );
+
+		ob_start();
+
+		if ( isset( $options['pagination_type'] ) && $options['pagination_type'] != 'disabled' ) {
+
+			$num_pages = $dslc_query->max_num_pages;
+
+			if ( $options['offset'] > 0 ) {
+				$num_pages = ceil ( ( $dslc_query->found_posts - $options['offset '] ) / $options['amount'] );
+			}
+
+			dslc_post_pagination( array( 'pages' => $num_pages, 'type' => $options['pagination_type'] ) );
+		}
+
+		return ob_get_clean();
+	}
+
+	/**
+	 * @inherited
+	 */
 	function output( $options = [] ) {
 
 		$this->module_start();
@@ -1686,7 +2017,6 @@ class DSLC_Testimonials extends DSLC_Module {
 		/* Module output ends here */
 
 		$this->module_end();
-
 	}
 
 }

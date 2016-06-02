@@ -1,5 +1,5 @@
 /**
- * Posts js extender
+ * Testimonials js extender
  */
 
 'use strict'
@@ -8,9 +8,9 @@
 
 	jQuery(document).on('DSLC_extend_modules', function(){
 
-		var Posts = DSLC.ModulesManager.AvailModules.DSLC_Posts;
+		var Testmnls = DSLC.ModulesManager.AvailModules.DSLC_Testimonials;
 
-		Posts.prototype.changeOptionsBeforeRender = function(options)
+		Testmnls.prototype.changeOptionsBeforeRender = function(options)
 		{
 			var opt = options;
 			/**
@@ -22,12 +22,10 @@
 			opt.columns_class = 'dslc-col dslc-' + 12 / opt.posts_per_row.value + '-col ';
 			opt.count = 0;
 			opt.real_count = 0;
-			opt.separator_enabled.value = opt.separator_enabled.value ? opt.separator_enabled.value : opt.separator_enabled.std;
 			opt.max_count = 12;
 			opt.type.value = opt.type.value ? opt.type.value : opt.type.std;
-
-			opt.main_location.value = opt.main_location.value ? opt.main_location.value : opt.main_location.std;
 			opt.elements.value = opt.elements.value ? opt.elements.value : opt.elements.std;
+			opt.author_pos.value = opt.author_pos.value ? opt.author_pos.value : opt.author_pos.std;
 
 			/**
 			* Header
@@ -87,8 +85,7 @@
 			 */
 
 			// Posts container
-			opt.container_class = 'dslc-posts dslc-cpt-posts dslc-clearfix dslc-cpt-posts-type-' +
-				opt.type.value + ' dslc-posts-orientation-' + opt.orientation.value + ' ';
+			opt.container_class = 'dslc-posts dslc-testimonials dslc-clearfix ';
 
 			if(opt.type.value == 'masonry'){
 
@@ -99,7 +96,7 @@
 			}
 
 			// Post
-			opt.element_class = 'dslc-post dslc-cpt-post ';
+			opt.element_class = 'dslc-post dslc-testimonial ';
 
 			if(opt.type.value == 'masonry'){
 
