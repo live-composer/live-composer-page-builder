@@ -358,6 +358,46 @@ class DSLC_Panel_Style_Opts {
 		);
 	}
 
+	static function vertical_padding( $args ) {
+
+		$ext = strpos( @$args['value'], "%" ) > -1 ? "%" : 'px';
+
+		return array(
+			array(
+				'label' => __( $args['label'] . 'Vertical padding', 'live-composer-page-builder' ),
+				'id' => 'css_padding_vert_' . $args['id'],
+				'std' => isset ( $args['value'] ) ? intval( $args['value'] ) : 0,
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => $args['selector'],
+				'affect_on_change_rule' => 'padding-top,padding-bottom',
+				'section' => 'styling',
+				'ext' => $ext,
+				'tab' =>  __( $args['tab'], 'live-composer-page-builder' )
+			)
+		);
+	}
+
+	static function horizontal_padding( $args ) {
+
+		$ext = strpos( @$args['value'], "%" ) > -1 ? "%" : 'px';
+
+		return array(
+			array(
+				'label' => __( $args['label'] . 'Horizontal padding', 'live-composer-page-builder' ),
+				'id' => 'css_padding_hor_' . $args['id'],
+				'std' => isset ( $args['value'] ) ? intval( $args['value'] ) : 0,
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => $args['selector'],
+				'affect_on_change_rule' => 'padding-left,padding-right',
+				'section' => 'styling',
+				'ext' => $ext,
+				'tab' =>  __( $args['tab'], 'live-composer-page-builder' )
+			)
+		);
+	}
+
 	static function padding_bottom( $args ) {
 
 		$ext = strpos( @$args['value'], "%" ) > -1 ? "%" : 'px';
@@ -405,86 +445,101 @@ class DSLC_Panel_Style_Opts {
 
 		if( count( $parts ) == 1 ) {
 
-			$parts = array(
-				$parts[0],
-				$parts[0],
-				$parts[0],
-				$parts[0]
+			return array(
+				array(
+					'label' => __( $args['label'] . 'Padding', 'live-composer-page-builder' ),
+					'id' => 'css_padding_' . $args['id'],
+					'std' => isset ( $args['value'] ) ? intval( $args['value'] ) : 0,
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => $args['selector'],
+					'affect_on_change_rule' => 'padding',
+					'section' => 'styling',
+					'ext' => $ext,
+					'tab' =>  __( $args['tab'], 'live-composer-page-builder' )
+				)
 			);
 		}
+
+		$pad_args = array(
+			'selector' => $args['selector'],
+        	'tab' => $args['tab'],
+        	'rule' => $args['rule'],
+        	'id' => $args['id'],
+        	'label' => $args['label']
+		);
 
 		if( count( $parts ) == 2 ) {
 
 			$parts = array(
-				$parts[0],
-				$parts[1],
-				$parts[0],
-				$parts[1]
-			);
+				self::vertical_padding( array_merge( $pad_args, array( 'value' => $parts[0] ) ) ),
+		        self::horizontal_padding( array_merge( $pad_args, array( 'value' => $parts[1] ) ) )
+		    );
+
+		    return array( $parts[0][0], $parts[1][0] );
 		}
 
 		if( count( $parts ) == 3 ) {
 
 			$parts = array(
-				$parts[0],
-				$parts[1],
-				$parts[2],
-				$parts[1]
+				self::padding_top( array_merge( $pad_args, array( 'value' => $parts[0] ) ) ),
+			    self::horizontal_padding( array_merge( $pad_args, array( 'value' => $parts[1] ) ) ),
+				self::padding_bottom( array_merge( $pad_args, array( 'value' => $parts[2] ) ) )
 			);
+
+			return array( $parts[0][0],	$parts[1][0], $parts[2][0] );
 		}
 
 		if( count( $parts ) == 4 ) {
 
 			$parts = array(
-				$parts[0],
-				$parts[1],
-				$parts[2],
-				$parts[3]
+				self::padding_top( array_merge( $pad_args, array( 'value' => $parts[0] ) ) ),
+			    self::padding_right( array_merge( $pad_args, array( 'value' => $parts[1] ) ) ),
+				self::padding_bottom( array_merge( $pad_args, array( 'value' => $parts[2] ) ) ),
+		        self::padding_left( array_merge( $pad_args, array( 'value' => $parts[3] ) ) )
 			);
+
+			return array( $parts[0][0], $parts[1][0], $parts[2][0], $parts[3][0] );
 		}
+	}
 
-		$parts[0] = self::padding_top( array(
-			'selector' => $args['selector'],
-        	'tab' => $args['tab'],
-        	'rule' => $args['rule'],
-        	'value' => $parts[0],
-        	'id' => $args['id'],
-        	'label' => $args['label']
-        ));
+	static function vertical_margin( $args ) {
 
-		$parts[1] = self::padding_right( array(
-			'selector' => $args['selector'],
-        	'tab' => $args['tab'],
-        	'rule' => $args['rule'],
-        	'value' => @$parts[1],
-        	'id' => $args['id'],
-        	'label' => $args['label']
-        ));
-
-		$parts[2] = self::padding_bottom( array(
-			'selector' => $args['selector'],
-        	'tab' => $args['tab'],
-        	'rule' => $args['rule'],
-        	'value' => @$parts[2],
-        	'id' => $args['id'],
-        	'label' => $args['label']
-        ));
-
-		$parts[3] = self::padding_left( array(
-			'selector' => $args['selector'],
-        	'tab' => $args['tab'],
-        	'rule' => $args['rule'],
-        	'value' => @$parts[3],
-        	'id' => $args['id'],
-        	'label' => $args['label']
-        ));
+		$ext = strpos( @$args['value'], "%" ) > -1 ? "%" : 'px';
 
 		return array(
+			array(
+				'label' => __( $args['label'] . 'Vertical margin', 'live-composer-page-builder' ),
+				'id' => 'css_margin_vert_' . $args['id'],
+				'std' => isset ( $args['value'] ) ? intval( $args['value'] ) : 0,
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => $args['selector'],
+				'affect_on_change_rule' => 'margin-top,margin-bottom',
+				'section' => 'styling',
+				'ext' => $ext,
+				'tab' =>  __( $args['tab'], 'live-composer-page-builder' )
+			)
+		);
+	}
 
-			$parts[0][0],
-			$parts[1][0],
-			$parts[2][0],
-			$parts[3][0]
+	static function horizontal_margin( $args ) {
+
+		$ext = strpos( @$args['value'], "%" ) > -1 ? "%" : 'px';
+
+		return array(
+			array(
+				'label' => __( $args['label'] . 'Horizontal margin', 'live-composer-page-builder' ),
+				'id' => 'css_margin_hor_' . $args['id'],
+				'std' => isset ( $args['value'] ) ? intval( $args['value'] ) : 0,
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => $args['selector'],
+				'affect_on_change_rule' => 'margin-left,margin-right',
+				'section' => 'styling',
+				'ext' => $ext,
+				'tab' =>  __( $args['tab'], 'live-composer-page-builder' )
+			)
 		);
 	}
 
@@ -574,49 +629,64 @@ class DSLC_Panel_Style_Opts {
 
 		$parts = explode( " ", trim( $args['value'] ) );
 
-		$parts[0] = self::margin_top( array(
+		if( count( $parts ) == 1 ) {
+
+			return array(
+				array(
+					'label' => __( $args['label'] . 'Margin', 'live-composer-page-builder' ),
+					'id' => 'css_margin_' . $args['id'],
+					'std' => isset ( $args['value'] ) ? intval( $args['value'] ) : 0,
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => $args['selector'],
+					'affect_on_change_rule' => 'margin',
+					'section' => 'styling',
+					'ext' => $ext,
+					'tab' =>  __( $args['tab'], 'live-composer-page-builder' )
+				)
+			);
+		}
+
+		$mrg_args = array(
 			'selector' => $args['selector'],
         	'tab' => $args['tab'],
         	'rule' => $args['rule'],
-        	'value' => $parts[0],
         	'id' => $args['id'],
         	'label' => $args['label']
-        ));
-
-		$parts[1] = self::margin_right( array(
-			'selector' => $args['selector'],
-        	'tab' => $args['tab'],
-        	'rule' => $args['rule'],
-        	'value' => @$parts[1],
-        	'id' => $args['id'],
-        	'label' => $args['label']
-        ));
-
-		$parts[2] = self::margin_bottom( array(
-			'selector' => $args['selector'],
-        	'tab' => $args['tab'],
-        	'rule' => $args['rule'],
-        	'value' => @$parts[2],
-        	'id' => $args['id'],
-        	'label' => $args['label']
-        ));
-
-		$parts[3] = self::margin_left( array(
-			'selector' => $args['selector'],
-        	'tab' => $args['tab'],
-        	'rule' => $args['rule'],
-        	'value' => @$parts[3],
-        	'id' => $args['id'],
-        	'label' => $args['label']
-        ));
-
-		return array(
-
-			$parts[0][0],
-			$parts[1][0],
-			$parts[2][0],
-			$parts[3][0]
 		);
+
+		if( count( $parts ) == 2 ) {
+
+			$parts = array(
+				self::vertical_margin( array_merge( $mrg_args, array( 'value' => $parts[0] ) ) ),
+		        self::horizontal_margin( array_merge( $mrg_args, array( 'value' => $parts[1] ) ) )
+		    );
+
+		    return array( $parts[0][0],	$parts[1][0] );
+		}
+
+		if( count( $parts ) == 3 ) {
+
+			$parts = array(
+				self::margin_top( array_merge( $mrg_args, array( 'value' => $parts[0] ) ) ),
+			    self::horizontal_margin( array_merge( $mrg_args, array( 'value' => $parts[1] ) ) ),
+				self::margin_bottom( array_merge( $mrg_args, array( 'value' => $parts[2] ) ) )
+			);
+
+			return array( $parts[0][0], $parts[1][0], $parts[2][0] );
+		}
+
+		if( count( $parts ) == 4 ) {
+
+			$parts = array(
+				self::margin_top( array_merge( $mrg_args, array( 'value' => $parts[0] ) ) ),
+			    self::margin_right( array_merge( $mrg_args, array( 'value' => $parts[1] ) ) ),
+				self::margin_bottom( array_merge( $mrg_args, array( 'value' => $parts[2] ) ) ),
+		        self::margin_left( array_merge( $mrg_args, array( 'value' => $parts[3] ) ) )
+			);
+
+			return array( $parts[0][0], $parts[1][0], $parts[2][0],	$parts[3][0] );
+		}
 	}
 
 	static function border( $args ) {
@@ -842,8 +912,235 @@ class DSLC_Panel_Style_Opts {
 				'affect_on_change_el' => $args['selector'],
 				'affect_on_change_rule' => 'text-shadow',
 				'section' => 'styling',
-				'tab' => __( $args['tab'], 'live-composer-page-builder' ),
+				'tab' => __( $args['tab'], 'live-composer-page-builder' )
 			)
 		);
 	}
+
+	static function background_attachment( $args ) {
+
+		return array(
+
+	         array(
+				'label' => __( $args['label'] . 'Bg image attachment', 'live-composer-page-builder' ),
+				'id' => 'css_bg_img_attch' . $args['id'],
+				'std' => $args['value'],
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'Scroll', 'live-composer-page-builder' ),
+						'value' => 'scroll',
+					),
+					array(
+						'label' => __( 'Fixed', 'live-composer-page-builder' ),
+						'value' => 'fixed',
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => $args['selector'],
+				'affect_on_change_rule' => 'background-attachment',
+				'section' => 'styling',
+				'tab' => __( $args['tab'], 'live-composer-page-builder' )
+			)
+		);
+	}
+
+	static function background_repeat( $args ) {
+
+		return array(
+
+	        array(
+				'label' => __( $args['label'] . 'BG image repeat', 'live-composer-page-builder' ),
+				'id' => 'css_bg_img_repeat' . $args['id'],
+				'std' => $args['value'],
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'Repeat', 'live-composer-page-builder' ),
+						'value' => 'repeat',
+					),
+					array(
+						'label' => __( 'Repeat Horizontal', 'live-composer-page-builder' ),
+						'value' => 'repeat-x',
+					),
+					array(
+						'label' => __( 'Repeat Vertical', 'live-composer-page-builder' ),
+						'value' => 'repeat-y',
+					),
+					array(
+						'label' => __( 'Do NOT Repeat', 'live-composer-page-builder' ),
+						'value' => 'no-repeat',
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => $args['selector'],
+				'affect_on_change_rule' => 'background-repeat',
+				'section' => 'styling',
+				'tab' => __( $args['tab'], 'live-composer-page-builder' )
+			)
+		);
+	}
+
+
+	static function background_color( $args ) {
+
+		return array(
+
+			array(
+				'label' => __( $args['label'] . 'BG color', 'live-composer-page-builder' ),
+				'id' => 'css_bg_color' . $args['id'],
+				'std' => $args['value'],
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => $args['selector'],
+				'affect_on_change_rule' => 'background-color',
+				'section' => 'styling',
+				'tab' => __( $args['tab'], 'live-composer-page-builder' )
+			),
+		);
+	}
+
+
+	static function background_position( $args ) {
+
+		return array(
+
+			array(
+				'label' => __( $args['label'] .'BG image position', 'live-composer-page-builder' ),
+				'id' => 'css_bg_img_pos' . $args['id'],
+				'std' => $args['value'],
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'Top Left', 'live-composer-page-builder' ),
+						'value' => 'left top',
+					),
+					array(
+						'label' => __( 'Top Right', 'live-composer-page-builder' ),
+						'value' => 'right top',
+					),
+					array(
+						'label' => __( 'Top Center', 'live-composer-page-builder' ),
+						'value' => 'Center Top',
+					),
+					array(
+						'label' => __( 'Center Left', 'live-composer-page-builder' ),
+						'value' => 'left center',
+					),
+					array(
+						'label' => __( 'Center Right', 'live-composer-page-builder' ),
+						'value' => 'right center',
+					),
+					array(
+						'label' => __( 'Center', 'live-composer-page-builder' ),
+						'value' => 'center center',
+					),
+					array(
+						'label' => __( 'Bottom Left', 'live-composer-page-builder' ),
+						'value' => 'left bottom',
+					),
+					array(
+						'label' => __( 'Bottom Right', 'live-composer-page-builder' ),
+						'value' => 'right bottom',
+					),
+					array(
+						'label' => __( 'Bottom Center', 'live-composer-page-builder' ),
+						'value' => 'center bottom',
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => $args['selector'],
+				'affect_on_change_rule' => 'background-position',
+				'section' => 'styling',
+				'tab' => __( $args['tab'], 'live-composer-page-builder' )
+			)
+		);
+	}
+
+
+	static function background_image( $args ) {
+
+		return array(
+			array(
+				'label' => __( $args['label'] . 'BG Image', 'live-composer-page-builder' ),
+				'id' => 'css_bg_img' . $args['id'],
+				'std' => $args['value'],
+				'type' => 'image',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => $args['selector'],
+				'affect_on_change_rule' => 'background-image',
+				'section' => 'styling',
+				'tab' => __( $args['tab'], 'live-composer-page-builder' )
+			),
+		);
+	}
+
+
+	static function background( $args ) {
+
+		$out = array();
+		$mrg_args = array(
+			'selector' => $args['selector'],
+        	'tab' => $args['tab'],
+        	'rule' => $args['rule'],
+        	'id' => $args['id'],
+        	'label' => $args['label']
+		);
+
+		/// Background color
+		preg_match( '/\b(#[.{6}|.{3}])\b/', $args['value'], $matches );
+
+		if( count( $matches ) > 0 ) {
+
+			$out[] = array_shift(
+			   	self::background_color(
+			   	   	array_merge(
+	   	   	            $mrg_args,
+	   	   	            array( 'value' => $matches[1] )
+	   	   	        )));
+		}
+
+		/// Background image
+		preg_match( '/\b(url\(.*\))\b/', $args['value'], $matches );
+
+		if( count( $matches ) > 0 ) {
+
+			$out[] = array_shift(
+			   	self::background_image(
+			   	   	array_merge(
+	   	   	            $mrg_args,
+	   	   	            array( 'value' => $matches[1] )
+	   	   	        )));
+		}
+
+		/// Background attachment
+		preg_match( '/\bfixed|scroll\b/', $args['value'], $matches );
+
+		if( count( $matches ) > 0 ) {
+
+			pre($matches);
+			$out[] = array_shift(
+			   	self::background_attachment(
+			   	   	array_merge(
+	   	   	            $mrg_args,
+	   	   	            array( 'value' => $matches[1] )
+	   	   	        )));
+		}
+
+
+		/// Background position
+		preg_match( '/\b(left|right|center|top|bottom)\b/i', $args['value'], $matches );
+
+		if( count( $matches ) > 0 ) {
+
+			$out[] = array_shift(
+			   	self::background_position(
+			   	   	array_merge(
+	   	   	            $mrg_args,
+	   	   	            array( 'value' => $matches[1] )
+	   	   	        )));
+		}
+	}
+
+
 }
