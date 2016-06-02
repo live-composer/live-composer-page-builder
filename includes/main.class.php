@@ -5,8 +5,12 @@
 
 /**
  * DSLC_Main class
+ *
+ * engine_ver - engine version. Global engine version.
  */
 class DSLC_Main {
+
+	const engine_ver = 2;
 
 	/**
 	 * Wp loaded hook
