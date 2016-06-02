@@ -6,7 +6,6 @@
 
  /**
   * Class DSLC_Module
-  *   $engine_ver
   *   $module_id
   *   $module_title
   *   $module_icon
@@ -17,7 +16,6 @@
   */
 class DSLC_Module{
 
-	const engine_ver = 2;
 	var $optionsArray;
 	var $module_id;
 	var $module_title;
