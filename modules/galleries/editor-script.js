@@ -118,5 +118,10 @@
 
 			return options;
 		}
+
+		Galleries.prototype.afterRenderHook = function()
+		{
+			DSLCProd.Modules.galleriesSlider.initCarousel();
+		}
 	});
 }());

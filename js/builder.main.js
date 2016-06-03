@@ -406,7 +406,6 @@ var dslcDebug = false;
 							jQuery('.dslca-save-draft-composer-hook').css({'visibility': 'visible'});
 
 							// Generete
-							dslc_carousel();
 							dslc_init_square();
 							dslc_center();
 							dslc_generate_code();
@@ -4195,7 +4194,6 @@ var dslcDebug = false;
 				dslc_generate_code();
 				dslc_show_publish_button();
 
-				dslc_carousel();
 				dslc_masonry(jQuery('.dslca-module-being-edited'));
 				jQuery('.dslca-module-being-edited img').load(function(){
 					dslc_masonry(jQuery('.dslca-module-being-edited'));
@@ -4271,7 +4269,6 @@ var dslcDebug = false;
 				dslc_generate_code();
 				dslc_show_publish_button();
 
-				dslc_carousel();
 				dslc_masonry(jQuery('.dslca-module-being-edited'));
 				jQuery('.dslca-module-being-edited img').load(function(){
 					dslc_masonry(jQuery('.dslca-module-being-edited'));
@@ -4926,7 +4923,6 @@ var dslcDebug = false;
 				jQuery('#dslc-main').html(response.output);
 
 				// Call other functions
-				dslc_carousel();
 				dslc_drag_and_drop();
 				dslc_show_publish_button();
 				dslc_generate_code();

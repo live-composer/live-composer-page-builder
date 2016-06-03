@@ -124,5 +124,10 @@
 
 			return options;
 		}
+
+		Blog.prototype.afterRenderHook = function()
+		{
+			DSLCProd.Modules.blogSlider.initCarousel();
+		}
 	});
 }());

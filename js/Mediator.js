@@ -106,8 +106,6 @@ var commonVars = DSLC.commonVars; /// Just alias
 		jQuery( '.dslca-save-draft-composer-hook' ).css( {'visibility' : 'visible'} );
 
 		// Generate
-		dslc_carousel();
-		//dslc_tabs();
 		dslc_init_square();
 		dslc_center();
 		dslc_generate_code();

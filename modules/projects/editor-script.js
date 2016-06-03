@@ -122,5 +122,10 @@
 
 			return options;
 		}
+
+		Projects.prototype.afterRenderHook = function()
+		{
+			DSLCProd.Modules.projectsSlider.initCarousel();
+		}
 	});
 }());
