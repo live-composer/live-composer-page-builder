@@ -26,6 +26,7 @@
 			opt.max_count = 12;
 			opt.type.value = opt.type.value ? opt.type.value : opt.type.std;
 
+			opt.meta_elements.value = opt.meta_elements.value ? opt.meta_elements.value : opt.meta_elements.std;
 			opt.main_location.value = opt.main_location.value ? opt.main_location.value : opt.main_location.std;
 			opt.elements.value = opt.elements.value ? opt.elements.value : opt.elements.std;
 

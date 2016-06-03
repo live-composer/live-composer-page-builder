@@ -1,5 +1,11 @@
 <?php
+/**
+ * Meta template module class
+ */
 
+/**
+ * DSLC_TP_Meta class
+ */
 class DSLC_TP_Meta extends DSLC_Module {
 
 	var $module_id;
@@ -7,19 +13,46 @@ class DSLC_TP_Meta extends DSLC_Module {
 	var $module_icon;
 	var $module_category;
 
-	function __construct() {
+	/**
+	 * @inherited
+	 */
+	function __construct( $settings = [], $atts = [] ) {
 
-		$this->module_id = 'DSLC_TP_Meta';
+		$this->module_ver = 2;
+		$this->module_id = __CLASS__;
 		$this->module_title = 'Meta';
 		$this->module_icon = 'info';
 		$this->module_category = 'single';
 
+		parent::__construct( $settings, $atts );
 	}
 
-	function options() {	
+	/**
+	 * @inherited
+	 */
+	function afterRegister() {
+
+		add_action( 'wp_enqueue_scripts', function(){
+
+			global $LC_Registry;
+
+			$path = explode( '/', __DIR__ );
+			$path = array_pop( $path );
+
+			if ( $LC_Registry->get( 'dslc_active' ) == true ) {
+
+				wp_enqueue_script( 'js-meta-editor-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/editor-script.js', array( 'jquery' ) );
+			}
+		});
+	}
+
+	/**
+	 * @inherited
+	 */
+	function options() {
 
 		$dslc_options = array(
-			
+
 			array(
 				'label' => __( 'Show On', 'live-composer-page-builder' ),
 				'id' => 'css_show_on',
@@ -402,7 +435,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'typography', 'live-composer-page-builder' ),
 			),
-			
+
 
 			/**
 			 * Responsive Tablet
@@ -531,33 +564,65 @@ class DSLC_TP_Meta extends DSLC_Module {
 
 	}
 
-	function output( $options ) {
+	/**
+	 * Retutns date. Template function.
+	 * @return string
+	 */
+	function post_date() {
 
-		global $dslc_active;
+		global $CL_Registry;
 
-		$post_id = $options['post_id'];
-		$show_fake = true;
+		ob_start();
+		echo get_the_time( get_option('date_format'), $LC_Registry->get('post_id') );
+		return ob_get_clean();
+	}
+
+	/**
+	 * Returns content
+	 * @param  array $atts
+	 * @param  array $content
+	 * @return string
+	 */
+	function render_meta( $atts, $content ) {
+
+
+		global $LC_Registry;
+		$options = $this->getPropsValues();
+		$post_id = @$options['post_id'];
 
 		if ( is_singular() ) {
 			$post_id = get_the_ID();
-			$show_fake = false;
 		}
 
 		if ( get_post_type( $post_id ) == 'dslc_templates' ) {
-			$show_fake = true;
+			return '';
 		}
 
-		$this->module_start( $options );
-
-		/* Module output starts here */
-
 		$the_post = get_post( $post_id );
+		$post_type_taxonomies = get_object_taxonomies( get_post_type(), 'objects' );
 
+		$LC_Registry->set( 'post_id', $post_id );
+		$LC_Registry->set( 'the_post', $the_post );
+		$LC_Registry->set( 'taxes', $post_type_taxonomies );
+
+		return DSLC_Main::dslc_do_shortcode( $content );
+	}
+
+	/**
+	 * Returns comments html. Template function.
+	 * @return string
+	 */
+	function comments() {
+
+		global $LC_Registry;
+
+		ob_start();
+		$post_id = $LC_Registry->get( 'post_id' );
 		$num_comments = get_comments_number( $post_id );
 		$comments_output = '';
 
 		if ( comments_open( $post_id ) ) {
-			
+
 			if ( $num_comments == 0 )
 				$comments = __('No Comments');
 			elseif ( $num_comments > 1 )
@@ -566,121 +631,139 @@ class DSLC_TP_Meta extends DSLC_Module {
 				$comments = __('1 Comment');
 
 			$comments_output = '<a href="#dslc-comments">'. $comments.'</a>';
+		}?>
+		<li><?php echo $comments_output; ?></li>
+		<?php
 
+		return ob_get_clean();
+	}
+
+	/**
+	 * Returns tags list. Template function.
+	 * @return string
+	 */
+	function tags() {
+
+		ob_start();
+		global $LC_Registry;
+		$post_type_taxonomies = $LC_Registry->get('taxes');
+
+		foreach ( $post_type_taxonomies as $taxonomy ) {
+
+			if ( $taxonomy->hierarchical == false ) {
+
+				$cats = get_the_terms( get_the_ID(), $taxonomy->name );
+				$tags_count = 0;
+
+				if ( $cats ) {
+
+						foreach ( $cats as $cat ) {
+
+							$tags_count++;
+
+							if ( $tags_count > 1 ) {
+
+								echo ', ';
+							}
+
+							echo '<a href="' . get_term_link( $cat, $taxonomy->name ) . '">' . $cat->name . '</a>';
+						}
+				}
+			}
 		}
+
+		return ob_get_clean();
+	}
+
+	/**
+	 * Returns categories list. Template function.
+	 * @return string
+	 */
+	function categories() {
+
+		ob_start();
+
+		global $LC_Registry;
+		$post_type_taxonomies = $LC_Registry->get('taxes');
+
+		foreach ( $post_type_taxonomies as $taxonomy ) {
+
+			if ( $taxonomy->hierarchical == true ) {
+
+				$cats = get_the_terms( get_the_ID(), $taxonomy->name );
+				$cats_count = 0;
+
+				if ( $cats ) {
+
+					echo '<li>';
+						foreach ( $cats as $cat ) {
+
+							$cats_count++;
+
+							if ( $cats_count > 1 ) {
+
+								echo ', ';
+							}
+
+							echo '<a href="' . get_term_link( $cat, $taxonomy->name ) . '">' . $cat->name . '</a>';
+						}
+					echo '</li>';
+				}
+			}
+		}
+
+		return ob_get_clean();
+	}
+
+	/**
+	 * Returns author html. Template function.
+	 * @return string
+	 */
+	function author() {
+
+		$options = $this->getPropsValues();
+		$tp_elements = $options['tp_elements'];
 
 		$tp_elements = $options['tp_elements'];
-		if ( ! empty( $tp_elements ) )
-			$tp_elements = explode( ' ', trim( $tp_elements ) );
-		else
-			$tp_elements = 'all';
 
-		if ( ! $show_fake ) {
-			$post_type_taxonomies = get_object_taxonomies( get_post_type(), 'objects' );
+		if ( ! empty( $tp_elements ) ) {
+
+			$tp_elements = explode( ' ', trim( $tp_elements ) );
+		} else {
+
+			$tp_elements = 'all';
 		}
 
-			?>
+		ob_start();
+		if ( in_array( 'avatar', $tp_elements ) ) : ?>
+			<span class="dslc-tp-meta-avatar">
+				<?php echo get_avatar( get_the_author_meta( 'ID' ), 100 ); ?>
+			</span>
+		<?php endif; ?>
 
-				<div class="dslc-tp-meta dslc-tp-meta-<?php echo $options['format']; ?>">
-					<ul class="dslc-clearfix">
-						
-						<?php if ( in_array( 'date', $tp_elements ) ) : ?>
-							<li><?php echo get_the_time( get_option('date_format'), $post_id ); ?></li>
-						<?php endif; ?>
+		<a href="<?php echo get_author_posts_url( $the_post->post_author ); ?>">
+			<?php the_author_meta( 'display_name' ); ?>
+		</a>
+		<?php
 
-						<?php if ( in_array( 'author', $tp_elements ) ) : ?>
-							<?php if ( $show_fake ) : ?>
-								<li>
-									<?php if ( in_array( 'avatar', $tp_elements ) ) : ?>
-										<span class="dslc-tp-meta-avatar">
-											<img src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/placeholders/small-placeholder.png" />
-										</span>
-									<?php endif; ?>
-									<a href="#"><?php _e( 'John Doe', 'live-composer-page-builder' ); ?></a>
-								</li>
-							<?php else : ?>
-								<li>
-									<?php if ( in_array( 'avatar', $tp_elements ) ) : ?>
-										<span class="dslc-tp-meta-avatar">
-											<?php echo get_avatar( get_the_author_meta( 'ID' ), 100 ); ?>
-										</span>
-									<?php endif; ?>
-									<a href="<?php echo get_author_posts_url( $the_post->post_author ); ?>"><?php the_author_meta( 'display_name' ); ?></a>
-								</li>
-							<?php endif; ?>
-						<?php endif; ?>
+		return ob_get_clean();
+	}
 
-						<?php if ( in_array( 'category', $tp_elements ) ) : ?>
-							<?php if ( $show_fake ) : ?>
-								<li><a href="#"><?php _e( 'Category One', 'live-composer-page-builder' ) ; ?></a>, <a href="#"><?php _e( 'Category Two', 'live-composer-page-builder' ) ; ?></a></li>
-							<?php else : ?>
-								<?php
-									foreach ( $post_type_taxonomies as $taxonomy ) {
-										if ( $taxonomy->hierarchical == true ) {
-											
-											$cats = get_the_terms( get_the_ID(), $taxonomy->name );
-											$cats_count = 0;
-											if ( $cats ) {
-												echo '<li>';
-													foreach ( $cats as $cat ) {
-														$cats_count++;
-														if ( $cats_count > 1 ) {
-															echo ', ';
-														}
-														echo '<a href="' . get_term_link( $cat, $taxonomy->name ) . '">' . $cat->name . '</a>';
-													}
-												echo '</li>';
-											}
-										}
-									}
-								?>
-							<?php endif; ?>
-						<?php endif; ?>
+	/**
+	 * @inherited
+	 */
+	function output( $options = [] ) {
 
-						<?php if ( in_array( 'tags', $tp_elements ) ) : ?>
-							<?php if ( $show_fake ) : ?>
-								<li><a href="#"><?php _e( 'One', 'live-composer-page-builder' ) ; ?></a>, <a href="#"><?php _e( 'Two', 'live-composer-page-builder' ) ; ?></a>, <a href="#"><?php _e( 'Three', 'live-composer-page-builder' ) ; ?></a></li>
-							<?php else : ?>
-								<?php
-									foreach ( $post_type_taxonomies as $taxonomy ) {
-										if ( $taxonomy->hierarchical == false ) {
-											
-											$cats = get_the_terms( get_the_ID(), $taxonomy->name );
-											$tags_count = 0;
-											if ( $cats ) {
-												echo '<li>';
-													foreach ( $cats as $cat ) {
-														$tags_count++;
-														if ( $tags_count > 1 ) {
-															echo ', ';
-														}
-														echo '<a href="' . get_term_link( $cat, $taxonomy->name ) . '">' . $cat->name . '</a>';
-													}
-												echo '</li>';
-											}
-										}
-									}
-								?>
-							<?php endif; ?>
-						<?php endif; ?>
+		$this->module_start();
 
-						<?php if ( in_array( 'comments', $tp_elements ) && ( $comments_output != '' || $show_fake ) ) : ?>
-							<?php if ( $show_fake ) : ?>
-								<li><?php _e( '10 Comments', 'live-composer-page-builder' ) ; ?></li>
-							<?php else : ?>
-								<li><?php echo $comments_output; ?></li>
-							<?php endif; ?>
-						<?php endif; ?>
+		/* Module content start */
+		echo $this->renderModule();
+		/* Module content end */
 
-					</ul>
-				</div>
-
-			<?php
-
-		/* Module output ends here */
-
-		$this->module_end( $options );
-
+		$this->module_end();
 	}
 
 }
+
+///
+( new DSLC_TP_Meta )->register();

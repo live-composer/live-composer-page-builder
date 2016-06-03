@@ -1,0 +1,46 @@
+<div class="dslc-tp-meta dslc-tp-meta-<%= format.value || format.std %>" data-repeatable="render_meta">
+	<ul class="dslc-clearfix">
+
+		<% if(tp_elements.value.indexOf('date') > -1){%>
+
+			<li data-module-method="post_date">
+				06/03/2016
+			</li>
+		<%}%>
+
+		<% if(tp_elements.value.indexOf('author') > -1){%>
+
+			<li data-module-method="author">
+				<% if(tp_elements.value.indexOf('avatar')){%>
+					<span class="dslc-tp-meta-avatar">
+						<img src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/placeholders/small-placeholder.png" />
+					</span>
+				<%}%>
+				<a href="#"><?php _e( 'John Doe', 'live-composer-page-builder' ); ?></a>
+			</li>
+		<%}%>
+
+		<% if(tp_elements.value.indexOf('category') > -1){%>
+
+			<li data-module-method="categories">
+				<a href="#"><?php _e( 'Category One', 'live-composer-page-builder' ) ; ?></a>,
+				<a href="#"><?php _e( 'Category Two', 'live-composer-page-builder' ) ; ?></a>
+			</li>
+		<%}%>
+
+		<% if(tp_elements.value.indexOf('tags') > -1){%>
+			<div data-module-method="tags"></div>
+			<li data-module-method="tags">
+				<a href="#"><?php _e( 'One', 'live-composer-page-builder' ) ; ?></a>,
+				<a href="#"><?php _e( 'Two', 'live-composer-page-builder' ) ; ?></a>, <a href="#"><?php _e( 'Three', 'live-composer-page-builder' ) ; ?></a>
+			</li>
+		<%}%>
+
+		<% if(tp_elements.value.indexOf('comments') > -1){%>
+
+			<li data-repeatable="comments">
+				<?php _e( '10 Comments', 'live-composer-page-builder' ) ; ?>
+			</li>
+		<%}%>
+	</ul>
+</div>
