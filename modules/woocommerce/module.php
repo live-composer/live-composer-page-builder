@@ -2264,6 +2264,7 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 	 */
 	function sec_price() {
 
+		global $product;
 		ob_start();
 		echo $product->get_price_html();
 		return ob_get_clean();
@@ -2422,6 +2423,8 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 	 */
 	function post_price() {
 
+		$options = $this->getPropsValues();
+		global $product;
 		ob_start();
 		?>
 		<a href="<?php echo do_shortcode( '[add_to_cart_url id="' . get_the_ID() . '"]' ); ?>" class="dslc-product-price dslc-init-square dslc-init-<?php echo $options['price_pos']; ?>">
@@ -2452,7 +2455,7 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 
 		if ( $dslc_query == null ) {
 
-			$dslc_query = $this->get_posts();
+			$dslc_query = $this->get_wooc();
 			$LC_Registry->set( 'dslc-wooc-query', $dslc_query );
 		}
 
@@ -2536,6 +2539,7 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 	 */
 	function add_to_cart() {
 
+		$options = $this->getPropsValues();
 		ob_start();?>
 		<a href="<?php echo do_shortcode( '[add_to_cart_url id="' . get_the_ID() . '"]' ); ?>" class="dslc-product-add-to-cart">
 			<span class="dslc-icon dslc-icon-shopping-cart"></span>

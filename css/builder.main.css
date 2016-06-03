@@ -3532,7 +3532,7 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 
 
 /** Editor only styles */
-#dslc-content .dslc-partner-thumb a, #dslc-content .dslc-download-thumb a, #dslc-content .dslc-gallery-thumb a, #dslc-content .dslc-cpt-post-thumb a, #dslc-content .dslc-blog-post-thumb a, #dslc-content .dslc-project-thumb a, #dslc-content .dslc-staff-member-thumb a {
+#dslc-content .dslc-product-thumb a, #dslc-content .dslc-partner-thumb a, #dslc-content .dslc-download-thumb a, #dslc-content .dslc-gallery-thumb a, #dslc-content .dslc-cpt-post-thumb a, #dslc-content .dslc-blog-post-thumb a, #dslc-content .dslc-project-thumb a, #dslc-content .dslc-staff-member-thumb a {
     display: block!important;
 }
 
@@ -3540,7 +3540,7 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 	width: 100%;
 }
 
-#dslc-content .dslc-partner-thumb img, #dslc-content .dslc-download-thumb img, #dslc-content .dslc-gallery-thumb img, #dslc-content .dslc-cpt-post-thumb img, #dslc-content .dslc-blog-post-thumb img, #dslc-content .dslc-project-thumb img, #dslc-content .dslc-staff-member-thumb img {
+#dslc-content .dslc-product-thumb img, #dslc-content .dslc-partner-thumb img, #dslc-content .dslc-download-thumb img, #dslc-content .dslc-gallery-thumb img, #dslc-content .dslc-cpt-post-thumb img, #dslc-content .dslc-blog-post-thumb img, #dslc-content .dslc-project-thumb img, #dslc-content .dslc-staff-member-thumb img {
 	max-height: 200px;
 }
 
