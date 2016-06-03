@@ -160,13 +160,30 @@
 				});
 			});
 
-			//
+			/// Inner shortcode
 			HTML.find("[data-module-method]").each(function()
 			{
-				var modMethod = $(this).data('module-method') ? ' module-instance-id="' + self.settings.module_instance_id + '" module-method="' + $(this).data('module-method') + '"' : '';
+				var modMethod = $(this).data('module-method') ? ' module-instance-id="' +
+					self.settings.module_instance_id +
+					'" module-method="' +
+					$(this).data('module-method') + '"' : '';
 
 				$(this).html("[dslc-module-sc " + modMethod + "]")
 					.removeAttr('data-module-method');
+			});
+
+			/// Outer shortcode
+			HTML.find("[data-module-method-outer]").each(function()
+			{
+				var modMethod = $(this).data('module-method-outer') ? ' module-instance-id="' +
+					self.settings.module_instance_id +
+					'" module-method="' +
+					$(this).data('module-method-outer') + '"' : '';
+
+				$(this).before("[dslc-module-sc module-instance-id='" + self.settings.module_instance_id +
+						 "'" + modMethod + "]")
+						.after("[/dslc-module-sc]")
+						.removeAttr('data-module-method-outer');
 			});
 
 			return HTML[0].outerHTML;

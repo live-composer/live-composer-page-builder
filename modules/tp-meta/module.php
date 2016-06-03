@@ -570,10 +570,12 @@ class DSLC_TP_Meta extends DSLC_Module {
 	 */
 	function post_date() {
 
-		global $CL_Registry;
+		global $LC_Registry;
 
 		ob_start();
+		echo "<li>";
 		echo get_the_time( get_option('date_format'), $LC_Registry->get('post_id') );
+		echo "</li>";
 		return ob_get_clean();
 	}
 
@@ -595,7 +597,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 		}
 
 		if ( get_post_type( $post_id ) == 'dslc_templates' ) {
-			return '';
+			return ' ';
 		}
 
 		$the_post = get_post( $post_id );
@@ -657,6 +659,8 @@ class DSLC_TP_Meta extends DSLC_Module {
 
 				if ( $cats ) {
 
+					echo '<li>';
+
 						foreach ( $cats as $cat ) {
 
 							$tags_count++;
@@ -668,6 +672,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 
 							echo '<a href="' . get_term_link( $cat, $taxonomy->name ) . '">' . $cat->name . '</a>';
 						}
+					echo '</li>';
 				}
 			}
 		}
@@ -721,6 +726,9 @@ class DSLC_TP_Meta extends DSLC_Module {
 	 */
 	function author() {
 
+		global $LC_Registry;
+
+		$the_post = $LC_Registry->get( 'the_post' );
 		$options = $this->getPropsValues();
 		$tp_elements = $options['tp_elements'];
 
@@ -735,9 +743,11 @@ class DSLC_TP_Meta extends DSLC_Module {
 		}
 
 		ob_start();
+		echo '<li>';
+
 		if ( in_array( 'avatar', $tp_elements ) ) : ?>
 			<span class="dslc-tp-meta-avatar">
-				<?php echo get_avatar( get_the_author_meta( 'ID' ), 100 ); ?>
+				<?php echo get_avatar( get_the_author_meta( 'ID' ), 30 ); ?>
 			</span>
 		<?php endif; ?>
 
@@ -745,6 +755,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 			<?php the_author_meta( 'display_name' ); ?>
 		</a>
 		<?php
+		echo '</li>';
 
 		return ob_get_clean();
 	}
