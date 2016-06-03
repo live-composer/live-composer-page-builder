@@ -19,6 +19,7 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 	function __construct( $settings = [], $atts = [] ) {
 
 		$this->module_id = __CLASS__;
+		$this->module_ver = 2;
 		$this->module_title = __( 'Products ( Woo )', 'live-composer-page-builder' );
 		$this->module_icon = 'dollar';
 		$this->module_category = 'posts';
@@ -135,7 +136,7 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Items Per Row', 'live-composer-page-builder' ),
-				'id' => 'columns',
+				'id' => 'posts_per_row',
 				'std' => '3',
 				'type' => 'select',
 				'choices' => $this->shared_options('posts_per_row_choices'),
@@ -2220,11 +2221,11 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 	 * Returns filter HTML string
 	 * @return string
 	 */
-	function post_filter() {
+	function wooc_filter() {
 
 		global $LC_Registry;
 
-		$dslc_query = $this->get_posts();
+		$dslc_query = $this->get_wooc();
 		$LC_Registry->set( 'dslc-wooc-query', $dslc_query );
 
 		$taxonomy_name = '';
@@ -2239,21 +2240,8 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 
 				$dslc_query->the_post();
 
-				$cats_count++;
 
-				if ( $cats_count == 1 ) {
-
-					$post_type_taxonomies = get_object_taxonomies( get_post_type(), 'objects' );
-					foreach ( $post_type_taxonomies as $taxonomy ) {
-						if ( $taxonomy->hierarchical == true ) {
-							$taxonomy_name = $taxonomy->name;
-
-							$LC_Registry->set( 'dslc-wooc-taxonomy', $taxonomy_name );
-						}
-					}
-				}
-
-				$post_cats = get_the_terms( get_the_ID(), $taxonomy_name );
+				$post_cats = get_the_terms( get_the_ID(), 'product_cat' );
 				if ( ! empty( $post_cats ) ) {
 					foreach( $post_cats as $post_cat ) {
 						$cats_array[$post_cat->slug] = $post_cat->name;
@@ -2268,6 +2256,16 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 			<span class="dslc-post-filter dslca-wooc-module dslc-inactive" data-id="<?php echo $cat_slug; ?>"><?php echo $cat_name; ?></span>
 		<?php }
 
+		return ob_get_clean();
+	}
+
+	/**
+	 * Returns secondary price. Template function.
+	 */
+	function sec_price() {
+
+		ob_start();
+		echo $product->get_price_html();
 		return ob_get_clean();
 	}
 
@@ -2297,127 +2295,123 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 	 */
 	function get_wooc() {
 
-		if ( class_exists( 'Woocommerce' ) ) :
+		global $dslc_active;
 
-			global $dslc_active;
+		$options = $this->getPropsValues();
 
-			$options = $this->getPropsValues();
+		if ( ! isset( $options['price_pos'] ) ) {
 
-			if ( ! isset( $options['price_pos'] ) ) {
+			$options['price_pos'] = 'center';
+		}
 
-				$options['price_pos'] = 'center';
-			}
+		/* Module output stars here */
 
-			/* Module output stars here */
+		if ( $options['orderby'] == 'price' ) {
+			$options['orderby'] = 'meta_value_num';
+			$orderby = 'price';
+		}
 
-			if ( $options['orderby'] == 'price' ) {
-				$options['orderby'] = 'meta_value_num';
-				$orderby = 'price';
-			}
+		if( is_front_page() ) { $paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1; } else { $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1; }
 
-			if( is_front_page() ) { $paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1; } else { $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1; }
+		// Fix for pagination from other modules affecting this one when pag disabled
+		if ( $options['pagination_type'] == 'disabled' ) $paged = 1;
 
-			// Fix for pagination from other modules affecting this one when pag disabled
-			if ( $options['pagination_type'] == 'disabled' ) $paged = 1;
+		// Fix for offset braking pagination
+		$query_offset = $options['offset'];
+		if ( $query_offset > 0 && $paged > 1 ) $query_offset = ( $paged - 1 ) * $options['amount'] + $options['offset'];
 
-			// Fix for offset braking pagination
-			$query_offset = $options['offset'];
-			if ( $query_offset > 0 && $paged > 1 ) $query_offset = ( $paged - 1 ) * $options['amount'] + $options['offset'];
+		$args = array(
+			'paged' => $paged,
+			'post_type' => 'product',
+			'posts_per_page' => $options['amount'],
+			'order' => $options['order'],
+			'orderby' => $options['orderby'],
+		);
 
-			$args = array(
-				'paged' => $paged,
-				'post_type' => 'product',
-				'posts_per_page' => $options['amount'],
-				'order' => $options['order'],
-				'orderby' => $options['orderby'],
+		// Add offset
+		if ( $query_offset > 0 ) {
+			$args['offset'] = $query_offset;
+		}
+
+		if ( defined('DOING_AJAX') && DOING_AJAX ) {
+			$args['post_status'] = array( 'publish', 'private' );
+		}
+
+		if ( isset( $options['categories'] ) && $options['categories'] != '' ) {
+
+			$cats_array = explode( ' ', trim( $options['categories'] ));
+
+			$args['tax_query'] = array(
+				array(
+					'taxonomy' => 'product_cat',
+					'field' => 'slug',
+					'terms' => $cats_array,
+					'operator' => $options['categories_operator']
+				)
 			);
 
-			// Add offset
-			if ( $query_offset > 0 ) {
-				$args['offset'] = $query_offset;
-			}
+		}
 
-			if ( defined('DOING_AJAX') && DOING_AJAX ) {
-				$args['post_status'] = array( 'publish', 'private' );
-			}
+		if ( isset( $orderby ) && $orderby == 'price' ) {
 
-			if ( isset( $options['categories'] ) && $options['categories'] != '' ) {
+			$args['meta_key'] = '_price';
+		}
 
-				$cats_array = explode( ' ', trim( $options['categories'] ));
+		// Exlcude and Include arrays
+		$exclude = array();
+		$include = array();
 
-				$args['tax_query'] = array(
-					array(
-						'taxonomy' => 'product_cat',
-						'field' => 'slug',
-						'terms' => $cats_array,
-						'operator' => $options['categories_operator']
-					)
-				);
+		// Exclude current post
+		if ( is_singular( get_post_type() ) )
+			$exclude[] = get_the_ID();
 
-			}
+		// Exclude posts ( option )
+		if ( $options['query_post_not_in'] )
+			$exclude = array_merge( $exclude, explode( ' ', $options['query_post_not_in'] ) );
 
-			if ( isset( $orderby ) && $orderby == 'price' ) {
+		// Include posts ( option )
+		if ( $options['query_post_in'] )
+			$include = array_merge( $include, explode( ' ', $options['query_post_in'] ) );
 
-				$args['meta_key'] = '_price';
-			}
+		// Include query parameter
+		if ( ! empty( $include ) )
+			$args['post__in'] = $include;
 
-			// Exlcude and Include arrays
-			$exclude = array();
-			$include = array();
+		// Exclude query parameter
+		if ( ! empty( $exclude ) )
+			$args['post__not_in'] = $exclude;
 
-			// Exclude current post
-			if ( is_singular( get_post_type() ) )
-				$exclude[] = get_the_ID();
+		// Author archive page
+		if ( is_author() && $options['query_alter_author'] == 'enabled' ) {
+			global $authordata;
+			$args['author__in'] = array( $authordata->data->ID );
+		}
 
-			// Exclude posts ( option )
-			if ( $options['query_post_not_in'] )
-				$exclude = array_merge( $exclude, explode( ' ', $options['query_post_not_in'] ) );
+		// No paging
+		if ( $options['pagination_type'] == 'disabled' )
+			$args['no_found_rows'] = true;
 
-			// Include posts ( option )
-			if ( $options['query_post_in'] )
-				$include = array_merge( $include, explode( ' ', $options['query_post_in'] ) );
+		// Out of stock ( show/hide )
+		if ( $options['outofstock'] == 'disabled' ) {
+			$args['meta_query'] = array(
+				array(
+					'key'     => '_stock_status',
+					'value'   => 'outofstock',
+					'compare' => '!=',
+				),
+			);
+		}
 
-			// Include query parameter
-			if ( ! empty( $include ) )
-				$args['post__in'] = $include;
-
-			// Exclude query parameter
-			if ( ! empty( $exclude ) )
-				$args['post__not_in'] = $exclude;
-
-			// Author archive page
-			if ( is_author() && $options['query_alter_author'] == 'enabled' ) {
-				global $authordata;
-				$args['author__in'] = array( $authordata->data->ID );
-			}
-
-			// No paging
-			if ( $options['pagination_type'] == 'disabled' )
-				$args['no_found_rows'] = true;
-
-			// Out of stock ( show/hide )
-			if ( $options['outofstock'] == 'disabled' ) {
-				$args['meta_query'] = array(
-					array(
-						'key'     => '_stock_status',
-						'value'   => 'outofstock',
-						'compare' => '!=',
-					),
-				);
-			}
-
-			// Do the query
-			if ( ( is_category() || is_tag() || is_tax() ) && $options['query_alter_cat'] == 'enabled' ) {
-				global $wp_query;
-				$dslc_query = $wp_query;
-			} elseif ( is_search() && $options['query_alter_search'] == 'enabled' ) {
-				global $wp_query;
-				$dslc_query = $wp_query;
-			} else {
-				$dslc_query = new WP_Query( $args );
-			}
-
-		endif;
+		// Do the query
+		if ( ( is_category() || is_tag() || is_tax() ) && $options['query_alter_cat'] == 'enabled' ) {
+			global $wp_query;
+			$dslc_query = $wp_query;
+		} elseif ( is_search() && $options['query_alter_search'] == 'enabled' ) {
+			global $wp_query;
+			$dslc_query = $wp_query;
+		} else {
+			$dslc_query = new WP_Query( $args );
+		}
 
 		return $dslc_query;
 	}
@@ -2537,6 +2531,21 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 	}
 
 	/**
+	 * Returns add to cart button. Template function.
+	 * @return string
+	 */
+	function add_to_cart() {
+
+		ob_start();?>
+		<a href="<?php echo do_shortcode( '[add_to_cart_url id="' . get_the_ID() . '"]' ); ?>" class="dslc-product-add-to-cart">
+			<span class="dslc-icon dslc-icon-shopping-cart"></span>
+			<?php echo $options['addtocart_text']; ?>
+		</a><?php
+
+		return ob_get_clean();
+	}
+
+	/**
 	 * Returns excerpt or content. Repeater function.
 	 * @return string
 	 */
@@ -2562,30 +2571,6 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 					echo do_shortcode( get_the_content() );
 			}
 		}
-
-		return ob_get_clean();
-	}
-
-	/**
-	 * Returns author's post link. Repeater function.
-	 * @return string
-	 */
-	function author_posts_link() {
-
-		ob_start();
-		echo get_the_author_posts_link();
-
-		return ob_get_clean();
-	}
-
-	/**
-	 * Returns post date. Repeater function.
-	 * @return  string
-	 */
-	function post_date() {
-
-		ob_start();
-		the_time( get_option( 'date_format' ) );
 
 		return ob_get_clean();
 	}
@@ -2660,7 +2645,7 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 		global $LC_Registry;
 
 		$options = $this->getPropsValues();
-		$dslc_query = $LC_Registry->get( 'dslc-posts-query' );
+		$dslc_query = $LC_Registry->get( 'dslc-wooc-query' );
 
 		ob_start();
 
@@ -2679,3 +2664,6 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 	}
 
 }
+
+/// Register module
+( new DSLC_WooCommerce_Products )->register();

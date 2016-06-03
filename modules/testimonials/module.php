@@ -1747,10 +1747,12 @@ class DSLC_Testimonials extends DSLC_Module {
 
 		$post_cats_data = '';
 
-		$post_cats = get_the_terms( get_the_ID(), $taxonomy_name );
+		$post_cats = get_the_terms( get_the_ID(), 'dslc_testimonials_cats' );
 
 		if ( ! empty( $post_cats ) ) {
+
 			foreach( $post_cats as $post_cat ) {
+
 				$post_cats_data .= 'in-cat-' . $post_cat->slug . ' ';
 			}
 		}
@@ -1864,7 +1866,7 @@ class DSLC_Testimonials extends DSLC_Module {
 
 		if ( $dslc_query == null ) {
 
-			$dslc_query = $this->get_posts();
+			$dslc_query = $this->get_testim();
 			$LC_Registry->set( 'dslc-testim-query', $dslc_query );
 		}
 
@@ -1886,7 +1888,6 @@ class DSLC_Testimonials extends DSLC_Module {
 				if ( 	$options['type'] == 'grid' &&
 				 		$cnt > 0 &&
 				 		($cnt + 1) % $options['posts_per_row'] == 0 &&
-				 		$options['separator_enabled'] != 'disabled' &&
 				 		($cnt + 1) < $dslc_query->found_posts &&
 				 		($cnt + 1) < $dslc_query->query_vars['posts_per_page']
 				 	) {
@@ -1918,7 +1919,7 @@ class DSLC_Testimonials extends DSLC_Module {
 		$index = $LC_Registry->get( 'dslc-testim-elem-index' );
 		$extra_class = '';
 
-		if ( $opts['type'] == 'grid' && $index > 0 && ($index + 1) % $opts['posts_per_row'] == 0 && $opts['separator_enabled'] != 'disabled' ) {
+		if ( $opts['type'] == 'grid' && $index > 0 && ($index + 1) % $opts['posts_per_row'] == 0) {
 
 			$extra_class = 'dslc-last-col ';
 		}

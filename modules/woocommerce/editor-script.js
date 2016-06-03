@@ -87,7 +87,7 @@
 			 */
 
 			// Posts container
-			opt.container_class = 'dslc-posts dslc-products dslc-clearfix dslc-products-type-' + type.value + ' dslc-posts-orientation-' + orientation.value + ' ';
+			opt.container_class = 'dslc-posts dslc-products dslc-clearfix dslc-products-type-' + opt.type.value + ' dslc-posts-orientation-' + opt.orientation.value + ' ';
 
 			if(opt.type.value == 'masonry'){
 
