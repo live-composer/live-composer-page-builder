@@ -1074,7 +1074,7 @@ function dslc_modules_section_front( $atts, $content = null ) {
 
 	// Allows devs to add classes
 	$filter_classes = array();
-	$filter_classes = apply_filters( 'dslc_row_class', $filter_classes );
+	$filter_classes = apply_filters( 'dslc_row_class', $filter_classes, $atts );
 	$extra_classes = '';
 	if ( count( $filter_classes ) > 0 ) {
 		foreach ( $filter_classes as $filter_class ) {
