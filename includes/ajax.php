@@ -666,7 +666,7 @@ function dslc_ajax_display_module_options( $atts ) {
 								$text_shadow_hor_val = str_replace( 'px', '', $text_shadow_val[0] );
 								$text_shadow_ver_val = str_replace( 'px', '', $text_shadow_val[1] );
 								$text_shadow_blur_val = str_replace( 'px', '', $text_shadow_val[2] );
-								$text_shadow_color_val = str_replace( 'px', '', $text_shadow_val[4] );
+								$text_shadow_color_val = str_replace( 'px', '', $text_shadow_val[3] );
 							}
 						?>
 

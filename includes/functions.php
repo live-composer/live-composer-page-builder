@@ -892,3 +892,14 @@ function dslc_set_user_templates( $templates ) {
 	return $templates;
 
 } add_filter( 'dslc_get_templates', 'dslc_set_user_templates', 1 );
+
+/**
+ * Show formatted variable
+ * @param  mixed $str
+ */
+function pre( $str )
+{
+	echo "<pre>";
+	print_r( $str );
+	echo "</pre>";
+}

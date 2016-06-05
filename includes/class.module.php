@@ -1729,8 +1729,183 @@ class DSLC_Module {
 
 		);
 
-		return $$options_id;
+		$default_typo = array();
 
+		if ( is_array( $atts ) &&
+		    isset( $atts['selector'] ) &&
+		    isset( $atts['tab'] )
+		) {
+
+			$id = preg_replace('/[\W]/', "_", strtolower( $atts['selector'] ) );
+
+			$default_typo = array(
+
+				array(
+					'label' => 'Text align',
+					'id' => 'css_filter_position_' . $id,
+					'std' => '',
+					'type' => 'text_align',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => $atts['selector'],
+					'affect_on_change_rule' => 'text-align',
+					'section' => 'styling',
+					'tab' => $atts['tab'],
+				),
+				array(
+					'label' => __( 'Color', 'live-composer-page-builder' ),
+					'id' => 'css_color_' . $id,
+					'std' => '',
+					'type' => 'color',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => $atts['selector'],
+					'affect_on_change_rule' => 'color',
+					'section' => 'styling',
+					'tab' => __( $atts['tab'], 'live-composer-page-builder' ),
+				),
+				array(
+					'label' => __( 'Color - Hover', 'live-composer-page-builder' ),
+					'id' => 'css_color_hover_' . $id,
+					'std' => '',
+					'type' => 'color',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => $atts['selector'] . ":hover",
+					'affect_on_change_rule' => 'color',
+					'section' => 'styling',
+					'tab' => __( $atts['tab'], 'live-composer-page-builder' ),
+				),
+				array(
+					'label' => __( 'Font Size', 'live-composer-page-builder' ),
+					'id' => 'css_font_size_' . $id,
+					'std' => '',
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => $atts['selector'],
+					'affect_on_change_rule' => 'font-size',
+					'section' => 'styling',
+					'tab' => __( $atts['tab'], 'live-composer-page-builder' ),
+					'ext' => 'px'
+				),
+				array(
+					'label' => __( 'Font Weight', 'live-composer-page-builder' ),
+					'id' => 'css_font_weight_' . $id,
+					'std' => '',
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => $atts['selector'],
+					'affect_on_change_rule' => 'font-weight',
+					'section' => 'styling',
+					'tab' => __( $atts['tab'], 'live-composer-page-builder' ),
+					'ext' => '',
+					'min' => 100,
+					'max' => 900,
+					'increment' => 100
+				),
+				array(
+					'label' => __( 'Font Family', 'live-composer-page-builder' ),
+					'id' => 'css_font_family_' . $id,
+					'std' => '',
+					'type' => 'font',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => $atts['selector'],
+					'affect_on_change_rule' => 'font-family',
+					'section' => 'styling',
+					'tab' => __( $atts['tab'], 'live-composer-page-builder' ),
+				),
+				array(
+					'label' => __( 'Letter Spacing', 'live-composer-page-builder' ),
+					'id' => 'css_letter_spacing_' . $id,
+					'std' => '',
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => $atts['selector'],
+					'affect_on_change_rule' => 'letter-spacing',
+					'section' => 'styling',
+					'tab' => __( $atts['tab'], 'live-composer-page-builder' ),
+					'ext' => 'px',
+					'min' => 0,
+					'max' => 100
+				),
+				array(
+					'label' => __( 'Line height', 'live-composer-page-builder' ),
+					'id' => 'css_line_height_' . $id,
+					'std' => '',
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => $atts['selector'],
+					'affect_on_change_rule' => 'line-height',
+					'section' => 'styling',
+					'tab' => __( $atts['tab'], 'live-composer-page-builder' ),
+					'ext' => 'px',
+					'min' => 0,
+					'max' => 150
+				),
+				array(
+					'label' => __( 'Text Shadow', 'live-composer-page-builder' ),
+					'id' => 'css_text_shadow_' . $id,
+					'std' => '',
+					'type' => 'text_shadow',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => $atts['selector'],
+					'affect_on_change_rule' => 'text-shadow',
+					'section' => 'styling',
+					'tab' => __( $atts['tab'], 'live-composer-page-builder' ),
+				),
+				array(
+					'label' => __( 'Text Shadow Hover', 'live-composer-page-builder' ),
+					'id' => 'css_text_shadow_' . $id . '_hover',
+					'std' => '',
+					'type' => 'text_shadow',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => $atts['selector'] . ":hover",
+					'affect_on_change_rule' => 'text-shadow',
+					'section' => 'styling',
+					'tab' => __( $atts['tab'], 'live-composer-page-builder' ),
+				),
+			);
+		}
+
+		return $$options_id;
+	}
+
+	/**
+	 * Css parser to option array
+	 * @return array
+	 */
+	function process_css( $css_string ) {
+
+		$css = new CSSParser();
+
+		$css->parseCSS( $css_string );
+		$out = array();
+
+		foreach( $css->GetCSSArray(0) as $selector => $rules) {
+
+			$id = preg_replace('/[\W]/', "_", strtolower( $selector ) );
+
+			if( ! isset( $rules['tab'] ) ) continue;
+
+			$tab = $rules['tab'];
+
+			$label = isset( $rules['label'] ) ?  $rules['label'] . ' - ' : '';
+
+			foreach( $rules as $rule => $value ) {
+
+				$out = array_merge(
+				    $out, DSLC_Panel_Style_Opts::get_option(
+					    array(
+				        	'selector' => $selector,
+				        	'tab' => $tab,
+				        	'rule' => $rule,
+				        	'value' => $value,
+				        	'id' => $id,
+				        	'label' => $label
+						)
+					)
+				);
+			}
+		}
+
+		return $out;
 	}
 
 	/**
