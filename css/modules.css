@@ -1872,6 +1872,9 @@
 		display: inline-block;
     	position: relative;
 	}
+	.dslc-info-box .dslc-info-box-image-alt a img {
+	    display: inline-block;
+	}
 	.dslc-image .image-design-wrapper img.image_resize {
 	    position: absolute;
 	    transform: translateY(-50%);
