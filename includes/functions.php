@@ -76,7 +76,6 @@ function dslc_register_module( $module_id, $template_path = '' )
 
 		$dslc_var_modules[$module_id] = array(
 			'id' => $module_id,
-			'options' => $module_instance->allOptions(),
 			'title' => $module_instance->module_title,
 			'icon' => $module_instance->module_icon,
 			'version' => !empty( $module_instance->module_ver ) ? $module_instance->module_ver : 1,
