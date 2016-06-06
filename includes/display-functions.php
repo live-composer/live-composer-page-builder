@@ -917,8 +917,11 @@ function dslc_module_front( $atts, $settings_raw = null ) {
 
 		// Transform image ID to URL
 		foreach ( $all_opts as $all_opt ) {
+
 			if ( $all_opt['type'] == 'image' ) {
+
 				if ( isset( $settings[$all_opt['id']] ) && ! empty( $settings[$all_opt['id']] ) && is_numeric( $settings[$all_opt['id']] ) ) {
+
 					$dslc_var_image_option_bckp[$all_opt['id']] = $settings[$all_opt['id']];
 					$image_info = wp_get_attachment_image_src( $settings[$all_opt['id']], 'full' );
 					$settings[$all_opt['id']] = $image_info[0];

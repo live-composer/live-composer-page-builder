@@ -259,8 +259,6 @@ class DSLC_Panel_Style_Opts {
 
 	static function text_transform( $args ) {
 
-		$ext = strpos( $args['value'], "em" ) > -1 ? "em" : 'px';
-
 		return array(
 
 			array(
@@ -291,7 +289,6 @@ class DSLC_Panel_Style_Opts {
 				'affect_on_change_el' => $args['selector'],
 				'affect_on_change_rule' => 'text-transform',
 				'section' => 'styling',
-				'ext' => $ext,
 				'tab' =>  __( $args['tab'], 'live-composer-page-builder' )
 			),
 		);
@@ -689,10 +686,69 @@ class DSLC_Panel_Style_Opts {
 		}
 	}
 
+	static function border_style( $args ) {
+
+		return array(
+			array(
+				'label' => __( $args['label'] . 'Borders', 'live-composer-page-builder' ),
+				'id' => 'css_filter_border_' . $args['id'],
+				'std' => $args['value'],
+				'type' => 'checkbox',
+				'choices' => array(
+					array(
+						'label' => 'Top',
+						'value' => 'top'
+					),
+					array(
+						'label' => 'Right',
+						'value' => 'right'
+					),
+					array(
+						'label' => 'Bottom',
+						'value' => 'bottom'
+					),
+					array(
+						'label' => 'Left',
+						'value' => 'left'
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => $args['selector'],
+				'affect_on_change_rule' => 'border-style',
+				'section' => 'styling',
+				'tab' =>  __( $args['tab'], 'live-composer-page-builder' )
+			)
+		);
+	}
+
 	static function border( $args ) {
 
 		$values = explode( " ", trim( $args['value'] ) );
 		$ext = strpos( @$args['value'], "%" ) > -1 ? "%" : 'px';
+
+		if( trim( $values[1] ) != 'solid' ) {
+
+			$style = explode( ".", trim( $values[1] ) );
+			$style_out = '';
+
+			for($i = 0; $i < 4; $i++) {
+
+				if( $style[$i] != 'none' ){
+
+					switch ($i) {
+						case 0: $style_out .= 'top'; break;
+						case 1: $style_out .= ' right'; break;
+						case 2: $style_out .= ' bottom'; break;
+						case 3: $style_out .= ' left'; break;
+					}
+				}
+			}
+		} else {
+
+			$style_out = 'top right bottom left';
+		}
+
+
 
 		return array(
             array(
@@ -721,7 +777,7 @@ class DSLC_Panel_Style_Opts {
 			array(
 				'label' => __( $args['label'] . 'Borders', 'live-composer-page-builder' ),
 				'id' => 'css_filter_border' . $args['id'],
-				'std' => 'top right bottom left',
+				'std' => $style_out,
 				'type' => 'checkbox',
 				'choices' => array(
 					array(
@@ -1075,6 +1131,52 @@ class DSLC_Panel_Style_Opts {
 		);
 	}
 
+	/*static function background_size( $args ) {
+
+		if ( explode( trim ( $args['value'] ), " " ) > 0 ) {
+
+			$value = explode( " ", trim ( $args['value'] ) );
+
+			return array(
+				array(
+					'label' => __( $args['label'] . 'BG Size Vertical', 'live-composer-page-builder' ),
+					'id' => 'css_bg_size_y' . $args['id'],
+					'std' => $value[1],
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => $args['selector'],
+					'affect_on_change_rule' => 'background-size-y',
+					'section' => 'styling',
+					'tab' => __( $args['tab'], 'live-composer-page-builder' )
+				),
+				array(
+					'label' => __( $args['label'] . 'BG Size Horizontal', 'live-composer-page-builder' ),
+					'id' => 'css_bg_size_x' . $args['id'],
+					'std' => $value[0],
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => $args['selector'],
+					'affect_on_change_rule' => 'background-siz-x',
+					'section' => 'styling',
+					'tab' => __( $args['tab'], 'live-composer-page-builder' )
+				)
+			);
+		}
+
+		return array(
+			array(
+				'label' => __( $args['label'] . 'BG Image', 'live-composer-page-builder' ),
+				'id' => 'css_bg_size' . $args['id'],
+				'std' => $args['value'],
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => $args['selector'],
+				'affect_on_change_rule' => 'background-size',
+				'section' => 'styling',
+				'tab' => __( $args['tab'], 'live-composer-page-builder' )
+			)
+		);
+	}*/
 
 	static function background( $args ) {
 
@@ -1088,58 +1190,82 @@ class DSLC_Panel_Style_Opts {
 		);
 
 		/// Background color
-		preg_match( '/\b(#[.{6}|.{3}])\b/', $args['value'], $matches );
+		preg_match( '/\s?#[\S]{6}|#[\S]{3}\s?/', $args['value'], $matches );
 
 		if( count( $matches ) > 0 ) {
 
-			$out[] = array_shift(
-			   	self::background_color(
-			   	   	array_merge(
-	   	   	            $mrg_args,
-	   	   	            array( 'value' => $matches[1] )
-	   	   	        )));
+			$array = self::background_color(
+		   	   	array_merge(
+   	   	            $mrg_args,
+   	   	            array( 'value' => trim( $matches[0] ) )
+   	   	        )
+	   	   	);
+
+			$out[] = array_shift( $array );
 		}
 
 		/// Background image
-		preg_match( '/\b(url\(.*\))\b/', $args['value'], $matches );
+		preg_match( '/\s?url\((.*)\)\s?/', $args['value'], $matches );
 
 		if( count( $matches ) > 0 ) {
 
-			$out[] = array_shift(
-			   	self::background_image(
-			   	   	array_merge(
-	   	   	            $mrg_args,
-	   	   	            array( 'value' => $matches[1] )
-	   	   	        )));
+			$array = self::background_image(
+		   	   	array_merge(
+	   	            $mrg_args,
+	   	            array( 'value' => $matches[1] )
+	   	        )
+   	        );
+
+			$out[] = array_shift( $array );
 		}
 
 		/// Background attachment
-		preg_match( '/\bfixed|scroll\b/', $args['value'], $matches );
+		preg_match( '/\s?fixed|scroll\s?/', $args['value'], $matches );
 
 		if( count( $matches ) > 0 ) {
 
-			pre($matches);
-			$out[] = array_shift(
-			   	self::background_attachment(
-			   	   	array_merge(
-	   	   	            $mrg_args,
-	   	   	            array( 'value' => $matches[1] )
-	   	   	        )));
+			$array = self::background_attachment(
+		   	   	array_merge(
+   	   	            $mrg_args,
+   	   	            array( 'value' => $matches[0] )
+   	   	        )
+   	   	    );
+
+			$out[] = array_shift( $array );
 		}
 
 
 		/// Background position
-		preg_match( '/\b(left|right|center|top|bottom)\b/i', $args['value'], $matches );
+		preg_match_all( '/\s?(left|right|center|top|bottom)\s?/i', $args['value'], $matches );
 
 		if( count( $matches ) > 0 ) {
 
-			$out[] = array_shift(
-			   	self::background_position(
-			   	   	array_merge(
-	   	   	            $mrg_args,
-	   	   	            array( 'value' => $matches[1] )
-	   	   	        )));
+			$array = self::background_position(
+		   	   	array_merge(
+   	   	            $mrg_args,
+   	   	            array( 'value' => implode( ' ', $matches[1] ) )
+   	   	        )
+   	   	    );
+
+			$out[] = array_shift( $array );
 		}
+
+		/// Background repeat
+		preg_match( '/\s?(no-repeat|repeat|repeat-x|repeat-y)\s?/i', $args['value'], $matches );
+
+		if( count( $matches ) > 0 ) {
+
+			$array = self::background_repeat(
+		   	   	array_merge(
+   	   	            $mrg_args,
+   	   	            array( 'value' => $matches[1] )
+   	   	        )
+   	   	    );
+
+			$out[] = array_shift( $array );
+		}
+
+		return $out;
 	}
 
 
