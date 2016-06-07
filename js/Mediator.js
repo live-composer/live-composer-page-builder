@@ -78,14 +78,6 @@ var commonVars = DSLC.commonVars; /// Just alias
 		var moduleElem = newModule.renderModule();
 		var dslcJustAdded = modulesArea.append( moduleElem );
 
-		// moduleElem.css({
-		// 	'-webkit-animation-name' : 'dslcBounceIn',
-		// 	'-moz-animation-name' : 'dslcBounceIn',
-		// 	'animation-name' : 'dslcBounceIn',
-		// 	'animation-duration' : '0.6s',
-		// 	'-webkit-animation-duration' : '0.6s'
-		//});
-
 		/// This operations taking a lot of time, so let it be async from main process
 		setTimeout( function()
 		{
@@ -180,6 +172,9 @@ var commonVars = DSLC.commonVars; /// Just alias
 
 		dslc_generate_code();
 		dslc_show_publish_button();
+
+		/// ! Very important to add this method after module added to DOM !
+		newModule.afterModuleRendered();
 	}
 
 	window.DSLC.Mediator = Mediator;

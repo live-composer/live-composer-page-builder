@@ -3899,10 +3899,11 @@ var dslcDebug = false;
 	 * MODULES - Color Option Type
 	 */
 
-	function dslc_module_options_color(){
+	function dslc_module_options_color(params){
 
 		if(dslcDebug) console.log('dslc_module_options_color');
 
+		var params = params || {};
 		var dslcColorField,
 		dslcAffectOnChangeEl,
 		dslcAffectOnChangeRule,
@@ -3911,12 +3912,16 @@ var dslcDebug = false;
 		dslcOptionID,
 		dslcCurrColor;
 
+		var curOptContClass = params.containerClass || '';
 
 
-		jQuery('.dslca-module-edit-field-colorpicker').each(function(){
+		jQuery(curOptContClass + ' .dslca-module-edit-field-colorpicker').each(function(){
 
+			if(this.className.indexOf('colorpicker_initiated') > -1) return false;
 
+			if(dslcDebug) console.log('colorpicker init');
 			dslcCurrColor = jQuery(this).val();
+			jQuery(this).addClass('colorpicker_initiated');
 
 			jQuery(this).spectrum({
 				color: dslcCurrColor,
@@ -4022,11 +4027,21 @@ var dslcDebug = false;
 	 * MODULES - Numeric Option Type
 	 */
 
-	function dslc_module_options_numeric(){
+	function dslc_module_options_numeric(params){
+
+		params = params || {};
+
+		/// Optimize slider render. Just in current options container.
+		var containerClass = params.containerClass ? params.containerClass : '';
 
 		if(dslcDebug) console.log('dslc_module_options_numeric');
 
-		jQuery('.dslca-module-edit-field-slider').each(function(){
+		jQuery(containerClass + ' .dslca-module-edit-field-slider').each(function(){
+
+			/// Prevent slider reinit
+			if(this.className.indexOf('ui-slider') > -1) return false;
+
+			if(dslcDebug) console.log('slider init');
 
 			var dslcSlider, dslcSliderField, dslcSliderInput, dslcSliderVal, dslcAffectOnChangeRule, dslcAffectOnChangeEl,
 			dslcSliderTooltip, dslcSliderTooltipOffset, dslcSliderTooltipPos, dslcModule, dslcOptionID, dslcSliderExt,
@@ -4553,7 +4568,8 @@ var dslcDebug = false;
 			var self = this;
 			$(".dslca-module-edit-options-tab-hook").removeClass('dslca-active');
 			this.classList.add('dslca-active');
-			var curOptContainer = $(".tab-filter-options-container-" + this.getAttribute('data-section') + "__" + this.getAttribute('data-id'));
+			var curOptContClass = ".tab-filter-options-container-" + this.getAttribute('data-section') + "__" + this.getAttribute('data-id');
+			var curOptContainer = $(curOptContClass);
 			var module = DSLC.F.currEditedMod();
 
 			curOptContainer.show().siblings().hide();
@@ -4624,8 +4640,11 @@ var dslcDebug = false;
 					jQuery('.dslca-module-edit-option[data-id="css_res_p"], .dslca-module-edit-option[data-id="css_res_t"]').css('visibility', 'visible');
 				}
 
-				jQuery(".sp-container").remove();
-				jQuery(".dslca-module-edit-field-colorpicker, .dslca-module-edit-option-box-shadow-color, .dslca-module-edit-option-text-shadow-color").each(function(){
+				//jQuery(".sp-container").remove();
+				/*jQuery(".dslca-module-edit-field-colorpicker, .dslca-module-edit-option-box-shadow-color, .dslca-module-edit-option-text-shadow-color").each(function(){
+					jQuery(this).spectrum('destroy');
+				});*/
+				jQuery(".dslca-module-edit-option-box-shadow-color, .dslca-module-edit-option-text-shadow-color").each(function(){
 					jQuery(this).spectrum('destroy');
 				});
 
@@ -4638,10 +4657,14 @@ var dslcDebug = false;
 					jQuery(this).find(".dslca-module-edit-field-icon-curr-set").html(defIconSet);
 				});
 
-				dslc_module_options_color();
+				dslc_module_options_color({
+					containerClass: curOptContClass
+				});
 				dslc_modules_options_box_shadow_color();
 				dslc_modules_options_text_shadow_color();
-				dslc_module_options_numeric();
+				dslc_module_options_numeric({
+					containerClass: curOptContClass
+				});
 			}, 0);
 
 			if(dslcDebug){
@@ -4782,7 +4805,7 @@ var dslcDebug = false;
 			dslc_show_publish_button();
 
 			/// Restore saved state of module
-			curModule.values = _.extend({}, DSLC.commonVars.currModuleValuesBackup);
+			curModule.values = _.deepExtend({}, DSLC.commonVars.currModuleValuesBackup);
 
 			delete DSLC.commonVars.currModuleValuesBackup;
 

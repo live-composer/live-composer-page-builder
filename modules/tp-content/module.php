@@ -62,7 +62,7 @@ class DSLC_TP_Content extends DSLC_Module {
 			array(
 				'label' => __( 'Enable/Disable Custom CSS', 'live-composer-page-builder' ),
 				'id' => 'css_custom',
-				'std' => 'disabled',
+				'std' => 'enabled',
 				'type' => 'select',
 				'choices' => array(
 					array(
