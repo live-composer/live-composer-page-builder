@@ -1940,19 +1940,18 @@ class DSLC_Staff extends DSLC_Module {
 	 */
 	function staff_categories() {
 
-		$project_cats = get_the_terms( get_the_ID(), 'dslc_staff_cats' );
+		$staff_cats_data = '';
+		$staff_cats = get_the_terms( get_the_ID(), 'dslc_staff_cats' );
 
-		$project_cats_data = '';
+		if ( ! empty( $staff_cats ) ) {
 
-		if ( ! empty( $project_cats ) ) {
+			foreach( $staff_cats as $staff_cat ) {
 
-			foreach( $project_cats as $project_cat ) {
-
-				$project_cats_data .= $project_cat->slug . ' ';
+				$staff_cats_data .= 'in-cat-' . $staff_cat->slug . ' ';
 			}
 		}
 
-		return $project_cats_data . ' in-cat-all';
+		return $staff_cats_data . ' in-cat-all';
 	}
 
 	/**

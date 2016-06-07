@@ -2122,18 +2122,18 @@ class DSLC_Downloads extends DSLC_Module {
 	 */
 	function downloads_categories() {
 
-		$post_cats_data = '';
-		$post_cats = get_the_terms( get_the_ID(), 'dslc_downloads_cats' );
+		$downloads_cats_data = '';
+		$downloads_cats = get_the_terms( get_the_ID(), 'dslc_downloads_cats' );
 
-		if ( ! empty( $post_cats ) ) {
+		if ( ! empty( $downloads_cats ) ) {
 
-			foreach( $post_cats as $post_cat ) {
+			foreach( $downloads_cats as $downloads_cat ) {
 
-				$post_cats_data .= 'in-cat-' . $post_cat->slug . ' ';
+				$downloads_cats_data .= 'in-cat-' . $downloads_cat->slug . ' ';
 			}
 		}
 
-		return $post_cats_data . ' in-cat-all';
+		return $downloads_cats_data . ' in-cat-all';
 	}
 
 	/**

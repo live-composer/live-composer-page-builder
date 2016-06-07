@@ -42,14 +42,14 @@ return __p;}%>
 
 		<% if(post_elements.value.indexOf('addtocart') > -1 ){%>
 			<div class="dslc-display-inline" data-module-method="add_to_cart">
-				<a href="/wp-admin/admin-ajax.php?add-to-cart=2092" class="dslc-product-add-to-cart"><span class="dslc-icon dslc-icon-shopping-cart"></span>Add to cart</a>
+				<a href="/wp-admin/admin-ajax.php?add-to-cart=2092" class="dslc-product-add-to-cart"><span class="dslc-icon dslc-icon-shopping-cart"></span><%= addtocart_text.value || addtocart_text.std %></a>
 			</div>
 		<%}%>
 
 		<% if(post_elements.value.indexOf('details')){%>
 			<div class="dslc-display-inline">
 				<a href="{{dslc-module-sc module-method='permalink'}}" class="dslc-product-details">
-					<span class="dslc-icon dslc-icon-file-text"></span>Details
+					<span class="dslc-icon dslc-icon-file-text"></span><%= details_text.value || details_text.std %>
 				</a>
 			</div>
 		<%}%>
@@ -81,14 +81,14 @@ if(elements.value.indexOf('main_heading') > -1 || show_filters || show_carousel_
 
 		<% if(show_filters == true){%>
 			<!-- Filters -->
-			<div class="dslc-post-filters dslc-posts-module">
+			<div class="dslc-post-filters dslca-wooc-module">
 
 				<span class="dslc-post-filter dslca-wooc-module dslc-active" data-id="all">
 					<?php _ex( 'All', 'Products filter', 'live-composer-page-builder' ); ?>
 				</span>
 
 				<% cats_array.forEach(function(elem, index){%>
-					<span class="dslc-post-filter dslca-wooc-module dslc-inactive" data-repeatable="post_filter" data-id="<%= elem.cat_slug %>">
+					<span class="dslc-post-filter dslca-wooc-module dslc-inactive" data-repeatable="wooc_filter" data-id="<%= elem.cat_slug %>">
 						<%= elem.cat_name %>
 					</span>
 				<%})%>
@@ -117,14 +117,14 @@ if(elements.value.indexOf('main_heading') > -1 || show_filters || show_carousel_
 			<% if ( obj.type.value == 'carousel' ){%>
 
 				<div class="dslc-loader"></div>
-				<div class="dslc-carousel" data-stop-on-hover="<%= carousel_autoplay_hover.value %>" data-autoplay="<%= carousel_autoplay.value %>" data-columns="<%= carousel_items.value %>" data-pagination="<%= carousel_elements.value.circles == true ? 'true' : 'false' %>" data-slide-speed="<%= arrows_slide_speed.value %>" data-pagination-speed="<%= circles_slide_speed.value %>">
+				<div class="dslc-carousel gallery-slider" data-stop-on-hover="<%= carousel_autoplay_hover.value || carousel_autoplay_hover.std %>" data-autoplay="<%= carousel_autoplay.value || carousel_autoplay.std %>" data-columns="<%= posts_per_row.value || posts_per_row.std %>" data-pagination="<%= (carousel_elements.value.indexOf('circles') > - 1) == true ? 'true' : 'false' %>" data-slide-speed="<%= arrows_slide_speed.value || arrows_slide_speed.std %>" data-pagination-speed="<%= circles_slide_speed.value || circles_slide_speed.std %>">
 			<%}%>
 
 			<% posts.forEach(function(elem, index){
 
 				var last_col = type.value == 'grid' && index > 0 && (index + 1) % posts_per_row.value == 0 && separator_enabled.value != 'disabled' ? 'dslc-last-col' : '';
 				%>
-				<div class="<%= element_class + columns_class + extra_class %> <%= last_col %> {{dslc-module-sc module-method='extra_col_class'}} {{dslc-module-sc module-method='post_categories'}}" data-repeatable="render_wooc">
+				<div class="<%= element_class + columns_class + extra_class %> <%= last_col %> {{dslc-module-sc module-method='extra_col_class'}} {{dslc-module-sc module-method='wooc_categories'}}" data-repeatable="render_wooc">
 
 					<% if(post_elements.value.indexOf('thumbnail') > -1){%>
 

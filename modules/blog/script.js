@@ -10,7 +10,7 @@
 	 * Filter
 	 */
 
-	jQuery(document).on('click', '.dslc-post-filter', function($){
+	jQuery(document).on('click', '.dslc-post-filter.dslc-blog-module', function($){
 
 		$ = jQuery;
 		// Get info

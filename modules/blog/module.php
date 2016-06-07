@@ -2660,6 +2660,69 @@ class DSLC_Blog extends DSLC_Module {
 	}
 
 	/**
+	 * Returns filter HTML string
+	 * @return string
+	 */
+	function blog_post_filter() {
+
+		global $LC_Registry;
+
+		$dslc_query = $this->get_blog_posts();
+		$LC_Registry->set( 'dslc-posts-query', $dslc_query );
+
+		$taxonomy_name = '';
+
+		$cats_array = array();
+
+		$cats_count = 0;
+
+		if ( $dslc_query->have_posts() ) {
+
+			while ( $dslc_query->have_posts() ) {
+
+				$dslc_query->the_post();
+				$post_cats = get_categories();
+
+				if ( ! empty( $post_cats ) ) {
+
+					foreach( $post_cats as $post_cat ) {
+
+						$cats_array[$post_cat->slug] = $post_cat->name;
+					}
+				}
+			}
+		}
+
+		ob_start();
+
+		foreach ( $cats_array as $cat_slug => $cat_name ) {?>
+			<span class="dslc-post-filter dslc-blog-module dslc-inactive" data-id="<?php echo $cat_slug; ?>"><?php echo $cat_name; ?></span>
+		<?php }
+
+		return ob_get_clean();
+	}
+
+	/**
+	 * Return categories data to each post. Template function.
+	 * @return string
+	 */
+	function blog_post_categories() {
+
+		$blog_post_cats_data = '';
+		$blog_post_cats = get_the_category( get_the_ID() );
+
+		if ( ! empty( $blog_post_cats ) ) {
+
+			foreach( $blog_post_cats as $blog_post_cat ) {
+
+				$blog_post_cats_data .= 'in-cat-' . $blog_post_cat->slug . ' ';
+			}
+		}
+
+		return $blog_post_cats_data . ' in-cat-all';
+	}
+
+	/**
 	 * Blog post fetcher
 	 * @return WP_Query
 	 */

@@ -22,14 +22,14 @@
 
 		<% if(show_filters == true){%>
 			<!-- Filters -->
-			<div class="dslc-post-filters">
+			<div class="dslc-post-filters dslc-blog-module">
 
-				<span class="dslc-post-filter dslc-active" data-id="all">
+				<span class="dslc-post-filter dslc-blog-module dslc-active" data-id="all">
 					<?php _ex( 'All', 'Post Filter', 'live-composer-page-builder' ); ?>
 				</span>
 
 				<% cats_array.forEach(function(elem, index){%>
-					<span class="dslc-post-filter dslc-inactive" data-repeatable="post_filter" data-id="<%= elem.cat_slug %>">
+					<span class="dslc-post-filter dslc-blog-module dslc-inactive" data-repeatable="blog_post_filter" data-id="<%= elem.cat_slug %>">
 						<%= elem.cat_name %>
 					</span>
 				<%})%>

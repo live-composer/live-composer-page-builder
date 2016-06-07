@@ -1414,18 +1414,18 @@ class DSLC_Partners extends DSLC_Module {
 	 */
 	function partners_categories() {
 
-		$post_cats_data = '';
-		$post_cats = get_the_terms( get_the_ID(), 'dslc_partners_cats' );
+		$partners_cats_data = '';
+		$partners_cats = get_the_terms( get_the_ID(), 'dslc_partners_cats' );
 
-		if ( ! empty( $post_cats ) ) {
+		if ( ! empty( $partners_cats ) ) {
 
-			foreach( $post_cats as $post_cat ) {
+			foreach( $partners_cats as $partners_cat ) {
 
-				$post_cats_data .= 'in-cat-' . $post_cat->slug . ' ';
+				$partners_cats_data .= 'in-cat-' . $partners_cat->slug . ' ';
 			}
 		}
 
-		return $post_cats_data . ' in-cat-all';
+		return $partners_cats_data . ' in-cat-all';
 	}
 
 	/**

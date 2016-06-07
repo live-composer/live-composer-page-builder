@@ -120,5 +120,10 @@
 
 			return options;
 		}
+
+		Woocomm.prototype.afterRenderHook = function()
+		{
+			DSLCProd.Modules.woocommerceSlider.initCarousel();
+		}
 	});
 }());

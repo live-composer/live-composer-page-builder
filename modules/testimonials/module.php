@@ -1733,7 +1733,7 @@ class DSLC_Testimonials extends DSLC_Module {
 		ob_start();
 
 		foreach ( $cats_array as $cat_slug => $cat_name ) {?>
-			<span class="dslc-post-filter dslca-testim-module dslc-inactive" data-id="<?php echo $cat_slug; ?>"><?php echo $cat_name; ?></span>
+			<span class="dslc-post-filter dslc-testim-module dslc-inactive" data-id="<?php echo $cat_slug; ?>"><?php echo $cat_name; ?></span>
 		<?php }
 
 		return ob_get_clean();
@@ -1745,19 +1745,19 @@ class DSLC_Testimonials extends DSLC_Module {
 	 */
 	function testim_categories() {
 
-		$post_cats_data = '';
+		$testim_cats_data = '';
 
-		$post_cats = get_the_terms( get_the_ID(), 'dslc_testimonials_cats' );
+		$testim_cats = get_the_terms( get_the_ID(), 'dslc_testimonials_cats' );
 
-		if ( ! empty( $post_cats ) ) {
+		if ( ! empty( $testim_cats ) ) {
 
-			foreach( $post_cats as $post_cat ) {
+			foreach( $testim_cats as $testim_cat ) {
 
-				$post_cats_data .= 'in-cat-' . $post_cat->slug . ' ';
+				$testim_cats_data .= 'in-cat-' . $testim_cat->slug . ' ';
 			}
 		}
 
-		return $post_cats_data . ' in-cat-all';
+		return $testim_cats_data . ' in-cat-all';
 	}
 
 	/**

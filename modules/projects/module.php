@@ -2325,14 +2325,7 @@ class DSLC_Projects extends DSLC_Module {
 	 */
 	function project_cats_list() {
 
-		global $LC_Registry;
-
-		$project_cats = $LC_Registry->get( 'dslc-project-cats' );
-
-		if ( ! is_array( $project_cats ) ) {
-
-			$project_cats = get_the_terms( get_the_ID(), 'dslc_projects_cats' );
-		}
+		$project_cats = get_the_terms( get_the_ID(), 'dslc_projects_cats' );
 
 		ob_start();
 
@@ -2455,12 +2448,10 @@ class DSLC_Projects extends DSLC_Module {
 			}
 		}
 
-		$LC_Registry->set( 'dslc-project-cats', $cats_array );
-
 		ob_start();
 
 		foreach ( $cats_array as $cat_slug => $cat_name ) {?>
-			<span class="dslc-post-filter dslc-inactive" data-id="<?php echo $cat_slug; ?>"><?php echo $cat_name; ?></span>
+			<span class="dslc-post-filter dslc-projects-module dslc-inactive" data-id="<?php echo $cat_slug; ?>"><?php echo $cat_name; ?></span>
 		<?php }
 
 		return ob_get_clean();
@@ -2525,16 +2516,14 @@ class DSLC_Projects extends DSLC_Module {
 	 */
 	function project_categories() {
 
-		$project_cats_count = 0;
-		$project_cats = get_the_terms( get_the_ID(), 'dslc_projects_cats' );
-
 		$project_cats_data = '';
+		$project_cats = get_the_terms( get_the_ID(), 'dslc_projects_cats' );
 
 		if ( ! empty( $project_cats ) ) {
 
 			foreach( $project_cats as $project_cat ) {
 
-				$project_cats_data .= $project_cat->slug . ' ';
+				$project_cats_data .= 'in-cat-' . $project_cat->slug . ' ';
 			}
 		}
 

@@ -24,12 +24,12 @@
 			<!-- Filters -->
 			<div class="dslc-post-filters dslc-galleries-module">
 
-				<span class="dslc-galleries-module dslc-active" data-id="all">
+				<span class="dslc-post-filter dslc-galleries-module dslc-active" data-id="all">
 					<?php _ex( 'All', 'Galleries Filter', 'live-composer-page-builder' ); ?>
 				</span>
 
 				<% cats_array.forEach(function(elem, index){%>
-					<span class="dslc-galleries-module dslc-inactive" data-repeatable="gallery_filter" data-id="<%= elem.cat_slug %>">
+					<span class="dslc-post-filter dslc-galleries-module dslc-inactive" data-repeatable="gallery_filter" data-id="<%= elem.cat_slug %>">
 						<%= elem.cat_name %>
 					</span>
 				<%})%>

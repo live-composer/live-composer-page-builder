@@ -22,14 +22,14 @@
 
 		<% if(show_filters == true){%>
 			<!-- Filters -->
-			<div class="dslc-post-filters">
+			<div class="dslc-post-filters dslc-partners-module">
 
 				<span class="dslc-post-filter dslc-partners-module dslc-active" data-id="all">
 					<?php _ex( 'All', 'Post Filter', 'live-composer-page-builder' ); ?>
 				</span>
 
 				<% cats_array.forEach(function(elem, index){%>
-					<span class="dslc-post-filter dslc-partners-module dslc-inactive" data-repeatable="post_filter" data-id="<%= elem.cat_slug %>">
+					<span class="dslc-post-filter dslc-partners-module dslc-inactive" data-repeatable="partners_filter" data-id="<%= elem.cat_slug %>">
 						<%= elem.cat_name %>
 					</span>
 				<%})%>
@@ -65,7 +65,7 @@
 
 				var last_col = type.value == 'grid' && index > 0 && (index + 1) % posts_per_row.value == 0 && separator_enabled.value != 'disabled' ? 'dslc-last-col' : '';
 				%>
-				<div class="<%= element_class + columns_class + extra_class %> <%= last_col %> {{dslc-module-sc module-method='extra_col_class'}} {{dslc-module-sc module-method='post_categories'}}" data-repeatable="render_partners">
+				<div class="<%= element_class + columns_class + extra_class %> <%= last_col %> {{dslc-module-sc module-method='extra_col_class'}} {{dslc-module-sc module-method='partners_categories'}}" data-repeatable="render_partners">
 
 					<% if(post_elements.value.indexOf('thumbnail') > -1){%>
 

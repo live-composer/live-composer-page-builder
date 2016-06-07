@@ -2236,22 +2236,18 @@ class DSLC_Galleries extends DSLC_Module {
 	 */
 	function gallery_categories() {
 
-		$post_cats_data = '';
+		$gallery_cats_data = '';
+		$gallery_cats = get_the_terms( get_the_ID(), 'dslc_galleries_cats' );
 
-		if ( isset( $taxonomy_name ) ) {
+		if ( ! empty( $gallery_cats ) ) {
 
-			$post_cats = get_the_terms( get_the_ID(), 'dslc_galleries_cats' );
+			foreach( $gallery_cats as $gallery_cat ) {
 
-			if ( ! empty( $post_cats ) ) {
-
-				foreach( $post_cats as $post_cat ) {
-
-					$post_cats_data .= 'in-cat-' . $post_cat->slug . ' ';
-				}
+				$gallery_cats_data .= 'in-cat-' . $gallery_cat->slug . ' ';
 			}
 		}
 
-		return $post_cats_data . ' in-cat-all';
+		return $gallery_cats_data . ' in-cat-all';
 	}
 
 	/**
