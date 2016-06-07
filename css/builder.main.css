@@ -1502,12 +1502,12 @@ body {
 	/* Main */
 
 	.dslc-modules-section {
-		outline: 2px dashed transparent;
+		box-shadow: 0 0 0px 2px rgba(0, 0, 0, 0);
 		position: relative;
 	}
 
 	.dslc-modules-section:hover {
-		outline-color: #eabba9;
+		box-shadow: 0 0 0px 2px rgba(255, 179, 7, 0.41);
 	}
 
 	.windows.mozilla .dslc-modules-section {

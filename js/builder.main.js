@@ -1735,7 +1735,7 @@ var dslcDebug = false;
 
 				var moduleElem = newModule.renderModule();
 
-				DSLC.ModulesManager.ActiveModules.push(newModule);
+				DSLC.ModulesManager.ActiveModules[newId] = newModule;
 				jQuery(this).after(moduleElem);
 				jQuery(this).remove();
 			}else{
