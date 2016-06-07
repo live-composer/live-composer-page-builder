@@ -1706,16 +1706,8 @@ var dslcDebug = false;
 		});
 
 		// Remove animations and temporary hide modules
-		dslcModulesSectionCloned.find('.dslc-module-front')/*.css({
-			'-webkit-animation-name': 'none',
-			'-moz-animation-name': 'none',
-			'animation-name': 'none',
-			'animation-duration': '0',
-			'-webkit-animation-duration': '0',
-			opacity: 0
-
-		// Go through each module
-		})*/.each(function(){
+		dslcModulesSectionCloned.find('.dslc-module-front')
+		.each(function(){
 
 			var moduleInstanceId = jQuery(this).data('module-id');
 			var ver2module = jQuery("#dslc-module-" + moduleInstanceId).data('module-instance');
@@ -2128,70 +2120,29 @@ var dslcDebug = false;
 		// Apply correct data size and get rid of animations
 		dslcModulesAreaCloned.data('size', area.data('size'))
 		.find('.dslc-module-front')
-		/*.css({
-			'-webkit-animation-name' : 'none',
-			'-moz-animation-name' : 'none',
-			'animation-name' : 'none',
-			'animation-duration' : '0',
-			'-webkit-animation-duration' : '0',
-			opacity : 0
-
-		// Go through each module in the area
-		})*/.each(function(){
+		.each(function(){
 
 			var moduleInstanceId = jQuery(this).data('module-id');
 			var ver2module = jQuery("#dslc-module-" + moduleInstanceId).data('module-instance');
 
-			if(ver2module != null){
-
-				var moduleSettings = JSON.parse(
+			var moduleSettings = JSON.parse(
 				    Util.b64_to_utf8(
 						ver2module.getEncodedSettings()
 					));
 
-				var newModule = new DSLC.ModulesManager.AvailModules[moduleSettings.module_id](moduleSettings);
+			var newModule = new DSLC.ModulesManager.AvailModules[moduleSettings.module_id](moduleSettings);
 
-				/// Generate new module id
-				var newId = new Date().getTime();
-				newModule.settings.module_instance_id = newId;
+			/// Generate new module id
+			var newId = new Date().getTime();
+			newModule.settings.module_instance_id = newId;
 
-				var moduleElem = newModule.renderModule();
+			var moduleElem = newModule.renderModule();
 
-				DSLC.ModulesManager.ActiveModules.push(newModule);
-				jQuery(this).after(moduleElem);
-				jQuery(this).remove();
-			}else{
+			DSLC.ModulesManager.ActiveModules[newId] = newModule;
+			jQuery(this).after(moduleElem);
+			jQuery(this).remove();
 
-				var dslcModule = jQuery(this);
-
-				// Reguest new ID
-				jQuery.ajax({
-					type: 'POST',
-					method: 'POST',
-					url: DSLCAjax.ajaxurl,
-					data:{ action : 'dslc-ajax-get-new-module-id' },
-					async: false
-				}).done(function(response){
-
-					// Remove being edited class
-					jQuery('.dslca-module-being-edited').removeClass('dslca-module-being-edited');
-
-					// Store the new ID
-					dslcModuleID = response.output;
-
-					// Apply the new ID and add being edited class
-					dslcModule.data('module-id', dslcModuleID).attr('id', 'dslc-module-' + dslcModuleID).addClass('dslca-module-being-edited');
-
-					// Reload the module
-					dslc_module_output_altered(function(){
-
-						// Remove being edited class and show the module
-						jQuery('.dslca-module-being-edited').removeClass('dslca-module-being-edited').animate({
-							opacity : 1
-						}, 300);
-					});
-				});
-			}
+			newModule.afterModuleRendered();
 		});
 
 		// Call other functions
