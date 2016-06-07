@@ -1719,56 +1719,24 @@ var dslcDebug = false;
 
 			var moduleInstanceId = jQuery(this).data('module-id');
 			var ver2module = jQuery("#dslc-module-" + moduleInstanceId).data('module-instance');
+			var moduleSettings = JSON.parse(
+			    Util.b64_to_utf8(
+					ver2module.getEncodedSettings()
+				));
 
-			if(ver2module != null){
+			var newModule = new DSLC.ModulesManager.AvailModules[moduleSettings.module_id](moduleSettings);
 
-				var moduleSettings = JSON.parse(
-				    Util.b64_to_utf8(
-						ver2module.getEncodedSettings()
-					));
+			/// Generate new module id
+			var newId = new Date().getTime();
+			newModule.settings.module_instance_id = newId;
 
-				var newModule = new DSLC.ModulesManager.AvailModules[moduleSettings.module_id](moduleSettings);
+			var moduleElem = newModule.renderModule();
 
-				/// Generate new module id
-				var newId = new Date().getTime();
-				newModule.settings.module_instance_id = newId;
+			DSLC.ModulesManager.ActiveModules[newId] = newModule;
+			jQuery(this).after(moduleElem);
+			jQuery(this).remove();
 
-				var moduleElem = newModule.renderModule();
-
-				DSLC.ModulesManager.ActiveModules[newId] = newModule;
-				jQuery(this).after(moduleElem);
-				jQuery(this).remove();
-			}else{
-
-			// Current module
-			dslcModule = jQuery(this);
-
-			// Reguest new ID
-			jQuery.ajax({
-				type: 'POST',
-				method: 'POST',
-				url: DSLCAjax.ajaxurl,
-				data:{action: 'dslc-ajax-get-new-module-id'},
-				async: false
-			}).done(function(response){
-
-				// Remove "being-edited" class
-				jQuery('.dslca-module-being-edited').removeClass('dslca-module-being-edited');
-
-				// Get new ID
-				dslcModuleID = response.output;
-
-				// Apply new ID and append "being-edited" class
-				dslcModule.data('module-id', dslcModuleID).attr('id', 'dslc-module-' + dslcModuleID).addClass('dslca-module-being-edited');
-
-				// Reload the module, remove "being-edited" class and show module
-				dslc_module_output_altered(function(){
-					jQuery('.dslca-module-being-edited').removeClass('dslca-module-being-edited').animate({
-						opacity: 1
-					}, 300);
-				});
-			});
-		}
+			newModule.afterModuleRendered();
 		});
 
 		// Call additional functions

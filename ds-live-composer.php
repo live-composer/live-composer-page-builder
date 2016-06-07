@@ -52,7 +52,6 @@
 	$LC_Registry->set( 'dslc_active', $dslc_active );
 	$LC_Registry->set( 'removeAdminElementsFromEditor', false );
 
-
 	/**
 	 * Global Variables
 	 */

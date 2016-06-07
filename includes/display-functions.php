@@ -977,7 +977,6 @@ function dslc_module_front( $atts, $settings_raw = null )
 		if ( DS_LIVE_COMPOSER_ACTIVE  && ! $LC_Registry->get( 'removeAdminElementsFromEditor' ) ) {
 
 			/// Returns in Editor mode
-
 			return $module_instance->renderEditModeModule();
 		} else {
 
@@ -1170,7 +1169,7 @@ function dslc_modules_section_front( $atts, $content = null )
 					. $a_prepend. do_shortcode( $content ) . $a_append
 					. '</div>';
 
-		if ( $LC_Registry->get( 'showAdminElementsInEditorHTML' ) && $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+		if ( ! $LC_Registry->get( 'removeAdminElementsFromEditor' ) && $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
 			// Management
 			$output .= '
@@ -1220,7 +1219,7 @@ function dslc_modules_area_front( $atts, $content = null ) {
 
 	$output = '<div class="dslc-modules-area dslc-col dslc-' . $atts['size'] . '-col '. $pos_class .'" data-size="' . $atts['size'] . '">';
 
-		if ( $LC_Registry->get( 'showAdminElementsInEditorHTML' ) && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+		if ( ! $LC_Registry->get( 'removeAdminElementsFromEditor' ) && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
 			// Management
 			$output .= '<div class="dslca-modules-area-manage">

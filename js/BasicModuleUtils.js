@@ -128,6 +128,7 @@
 			HTML.find("[contenteditable]").each(function()
 			{
 				jQuery(this).removeAttr('contenteditable');
+				jQuery(this).removeAttr('inline-editor');
 			});
 
 			HTML.find("[formattedtext]").each(function()
@@ -352,7 +353,7 @@
 			this.elem.data('module-instance', this);
 			this.recalcCentered(); /// Some magic done :)
 
-			this.elem.find("[contenteditable]").each(function()
+			this.elem.find("[inline-editor][contenteditable]").each(function()
 			{
 				var editor = new MediumEditor(this);
 			});

@@ -2001,7 +2001,8 @@ class DSLC_Module{
 
 			<?php do_action( 'dslc_module_before' ); ?>
 
-			<?php if ( $LC_Registry->get( 'showAdminElementsInEditorHTML') && DS_LIVE_COMPOSER_ACTIVE && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) : ?>
+			<?php if ( ! $LC_Registry->get( 'removeAdminElementsFromEditor') && DS_LIVE_COMPOSER_ACTIVE &&
+			is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY )) : ?>
 
 				<style><?php
 
@@ -2047,7 +2048,7 @@ class DSLC_Module{
 						</span>
 						<span class="dslca-module-manage-hook dslca-delete-module-hook"><span class="dslc-icon-remove"></span></span>
 					</div>
-					<?php if ( $LC_Registry->get( 'showAdminElementsInEditorHTML') && DS_LIVE_COMPOSER_DEV_MODE ) : ?>
+					<?php if ( DS_LIVE_COMPOSER_DEV_MODE ) : ?>
 						<div class="dslca-module-manage-inner dslca-dev-mode">
 							<span class="dslca-module-manage-hook dslca-module-get-defaults-hook"><span class="dslc-icon-upload-alt"></span></span>
 						</div>
