@@ -1218,11 +1218,13 @@ body {
 }
 
 .dslc-modules-area.dslca-options-hovered {
-	outline: 2px dashed #5890e5;
+	box-shadow: 0 0 1px 2px #5890e5;
+	outline: none!important;
 }
 
 .dslc-modules-area-empty.dslca-options-hovered {
-	outline: none !important;
+	box-shadow: 0 0 1px 2px #5890e5;
+	outline: none!important;
 }
 
 	.windows.mozilla .dslc-modules-area.dslca-options-hovered {

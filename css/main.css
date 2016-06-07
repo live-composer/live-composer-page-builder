@@ -1149,3 +1149,8 @@ body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-post-thumb .dslc-o
 .dslc-inline-block{
 	display: inline-block;
 }
+
+.dslc-modules-area [class^="dslc-icon-"],
+.dslc-modules-area [class*=" dslc-icon-"] {
+	line-height: 1;
+}
