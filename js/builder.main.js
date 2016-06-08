@@ -347,7 +347,19 @@ var dslcDebug = false;
 				/** LC Ferrum start **/
 				if(DSLC.ModulesManager.ModulesInfo[moduleID] && DSLC.ModulesManager.ModulesInfo[moduleID].version == 2){
 
-					DSLC.ModulesManager.CreateModule(moduleID, modulesArea);
+					try{
+
+						DSLC.ModulesManager.CreateModule(moduleID, modulesArea);
+					}catch(e){
+
+						DSLC.ModalWindow({
+							title: DSLCString.str_add_module_create_error_title,
+							content: DSLCString.str_add_module_render_error,
+						});
+
+						console.error(e);
+					}
+
 					return false;
 				}
 				/** LC Ferrum end **/
@@ -2285,7 +2297,6 @@ var dslcDebug = false;
  * - dslc_module_delete ( Deletes a module )
  * - dslc_module_copy ( Copies a module )
  * - dslc_module_width_set ( Sets a width to module )
- * - dslc_module_options_show ( Show module options )
  * - dslc_module_options_scrollbar ( Scrollbar for options )
  * - dslc_module_options_section_filter ( Filter options section )
  * - dslc_module_options_tab_filter ( Filter options tab )
@@ -2434,115 +2445,6 @@ var dslcDebug = false;
 			jQuery('.dslca-module-being-edited').removeClass('dslca-module-being-edited');
 		});
 		}
-
-	}
-
-	/**
-	 * MODULES - Show module options
-	 */
-
-	function dslc_module_options_show(moduleID){
-
-		if(dslcDebug) console.log('dslc_module_options_show');
-
-		// Vars
-		var dslcModule = jQuery('.dslca-module-being-edited'),
-		dslcModuleOptions = jQuery('.dslca-module-options-front textarea', dslcModule),
-		dslcDefaultSection = jQuery('.dslca-header').data('default-section');
-
-		// Settings array
-		var dslcSettings ={};
-		dslcSettings['action'] = 'dslc-ajax-display-module-options';
-		dslcSettings['dslc'] = 'active';
-		dslcSettings['dslc_module_id'] = moduleID;
-		dslcSettings['dslc_post_id'] = jQuery('.dslca-container').data('data-post-id');
-
-		// Go through each option
-		dslcModuleOptions.each(function(){
-
-			// Vars
-			var dslcOption = jQuery(this),
-			dslcOptionID = dslcOption.data('id'),
-			dslcOptionValue = dslcOption.val();
-
-			// Add option ID and value to the settings array
-			dslcSettings[dslcOptionID] = dslcOptionValue;
-
-		});
-
-		// Hide the save/cancel actions for text editor and show notification
-		jQuery('.dslca-wp-editor-actions').hide();
-		jQuery('.dslca-wp-editor-notification').show();
-
-		// AJAX call to get options HTML
-		jQuery.post(
-			DSLCAjax.ajaxurl,
-			dslcSettings,
-			function(response){
-
-				// Hide the publish button
-				jQuery('.dslca-save-composer-hook').css({'visibility':'hidden'});
-				jQuery('.dslca-save-draft-composer-hook').css({'visibility':'hidden'});
-
-				// Show edit section
-				dslc_show_section('.dslca-module-edit');
-
-				jQuery(".dslca-module-edit-field-colorpicker, .dslca-module-edit-option-box-shadow-color, .dslca-module-edit-option-text-shadow-color").each(function(){
-					jQuery(this).spectrum('destroy');
-				});
-
-				jQuery(".sp-container").remove();
-
-				// Add the options
-				if(!jQuery('body').hasClass('rtl')){
-					jQuery('.dslca-module-edit-options-inner .jspPane').children().remove();
-					jQuery('.dslca-module-edit-options-inner .jspPane').html(response.output);
-				}else{
-					jQuery('.dslca-module-edit-options-inner').children().remove();
-					jQuery('.dslca-module-edit-options-inner').html(response.output);
-				}
-
-				jQuery('.dslca-module-edit-options-tabs').children().remove();
-				jQuery('.dslca-module-edit-options-tabs').html(response.output_tabs);
-
-				// Show the filter hooks
-				jQuery('.dslca-header .dslca-options-filter-hook').show();
-
-				// Trigger click on first filter hook
-				if(jQuery('.dslca-module-edit-option[data-section="' + dslcDefaultSection + '"]').length){
-					jQuery('.dslca-header .dslca-options-filter-hook[data-section="' + dslcDefaultSection + '"]').show();
-					jQuery('.dslca-header .dslca-options-filter-hook[data-section="' + dslcDefaultSection + '"]').trigger('click');
-				}else{
-					jQuery('.dslca-header .dslca-options-filter-hook:first').hide();
-					jQuery('.dslca-header .dslca-options-filter-hook:first').next('.dslca-options-filter-hook').trigger('click');
-				}
-
-				// Show the save/cancel actions
-				jQuery('.dslca-module-edit-actions').show();
-
-				// Show the save/cancel actions for text editor and hide notification
-				jQuery('.dslca-wp-editor-notification').hide();
-				jQuery('.dslca-wp-editor-actions').show();
-
-				// Hide the section hooks
-				jQuery('.dslca-header .dslca-go-to-section-hook').hide();
-
-				// Hide the row save/cancel actions
-				jQuery('.dslca-row-edit-actions').hide();
-
-				// Initiate Colorpicker
-				dslc_module_options_color();
-				dslc_modules_options_box_shadow_color();
-				dslc_modules_options_text_shadow_color();
-				dslc_module_options_numeric();
-
-				// Set up backup
-				var moduleBackup = jQuery('.dslca-module-options-front', '.dslca-module-being-edited').children().clone();
-				jQuery('.dslca-module-options-front-backup').html('').append(moduleBackup);
-
-			}
-
-		);
 
 	}
 
@@ -4229,7 +4131,6 @@ var dslcDebug = false;
 
 	function dslc_delete_module(module){ dslc_module_delete(module); }
 	function dslc_copy_module(module){ dslc_module_copy(module); }
-	function dslc_display_module_options(moduleID){ dslc_module_options_show(moduleID); }
 	function dslc_filter_module_options(sectionID){ dslc_module_options_section_filter(sectionID); }
 	function dslc_show_module_options_tab(tab){ dslc_module_options_tab_filter(tab); }
 	function dslc_confirm_changes(callback){ dslc_module_options_confirm_changes(callback); }
@@ -4487,7 +4388,8 @@ var dslcDebug = false;
 			var self = this;
 			$(".dslca-module-edit-options-tab-hook").removeClass('dslca-active');
 			this.classList.add('dslca-active');
-			var curOptContClass = ".tab-filter-options-container-" + this.getAttribute('data-section') + "__" + this.getAttribute('data-id');
+			var uniquePart = this.getAttribute('data-section') + "__" + this.getAttribute('data-id').replace(/[ -]/gi, '_');
+			var curOptContClass = ".tab-filter-options-container-" + uniquePart;
 			var curOptContainer = $(curOptContClass);
 			var module = DSLC.F.currEditedMod();
 
@@ -4495,7 +4397,7 @@ var dslcDebug = false;
 
 			if(curOptContainer.html() == ""){
 
-				curOptContainer.html(module.renderSettingsTab(this.getAttribute('data-section') + "__" + this.getAttribute('data-id')));
+				curOptContainer.html(module.renderSettingsTab(uniquePart));
 			}
 
 			var scrollerWidth = 0;
@@ -4558,14 +4460,6 @@ var dslcDebug = false;
 
 					jQuery('.dslca-module-edit-option[data-id="css_res_p"], .dslca-module-edit-option[data-id="css_res_t"]').css('visibility', 'visible');
 				}
-
-				//jQuery(".sp-container").remove();
-				/*jQuery(".dslca-module-edit-field-colorpicker, .dslca-module-edit-option-box-shadow-color, .dslca-module-edit-option-text-shadow-color").each(function(){
-					jQuery(this).spectrum('destroy');
-				});*/
-				jQuery(".dslca-module-edit-option-box-shadow-color, .dslca-module-edit-option-text-shadow-color").each(function(){
-					jQuery(this).spectrum('destroy');
-				});
 
 				/**
 				 * Set default icon set for icon option field
@@ -4672,6 +4566,11 @@ var dslcDebug = false;
 			jQuery('.dslca-module-being-edited').removeClass('dslca-module-being-edited');
 			jQuery('body').removeClass('dslca-module-saving-in-progress');
 
+			jQuery(".sp-container").remove();
+			jQuery(".dslca-module-edit-field-colorpicker, .dslca-module-edit-option-box-shadow-color, .dslca-module-edit-option-text-shadow-color").each(function(){
+				jQuery(this).spectrum('destroy');
+			});
+
 			// Clean up options container
 			if(!jQuery('body').hasClass('rtl')){
 
@@ -4708,6 +4607,11 @@ var dslcDebug = false;
 			jQuery('.dslca-header .dslca-go-to-section-hook').show();
 
 			var curModule = DSLC.F.currEditedMod();
+
+			jQuery(".sp-container").remove();
+			jQuery(".dslca-module-edit-field-colorpicker, .dslca-module-edit-option-box-shadow-color, .dslca-module-edit-option-text-shadow-color").each(function(){
+				jQuery(this).spectrum('destroy');
+			});
 
 			// Clean up options container
 			if(!jQuery('body').hasClass('rtl')){

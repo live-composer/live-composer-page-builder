@@ -45,7 +45,9 @@ function dslc_load_scripts() {
 		'str_refresh_title' => __( 'You are about to refresh the page', 'live-composer-page-builder' ),
 		'str_refresh_descr' => __( 'If you have unsaved changed they will be lost.<br>If the "Publish Changes" button is shown in bottom right corner click it to save.', 'live-composer-page-builder' ),
 		'str_res_tablet' => __( 'tablet', 'live-composer-page-builder' ),
-		'str_res_phone' => __( 'phone', 'live-composer-page-builder' )
+		'str_res_phone' => __( 'phone', 'live-composer-page-builder' ),
+		'str_add_module_render_error' => __( 'Error while rendering the module. Please, contact the developers for help.', 'live-composer-page-builder' ),
+		'str_add_module_create_error_title' => __( 'Module creation error', 'live-composer-page-builder' ),
 	);
 
 	// Array of fonts available to be used in LC editor
@@ -132,6 +134,7 @@ function dslc_load_scripts() {
 		wp_enqueue_script( 'basicmodule-js', DS_LIVE_COMPOSER_URL . 'js/BasicModule.js', array( 'jquery', 'extend-js' ), DS_LIVE_COMPOSER_VER );
 		wp_enqueue_script( 'basicmodule-extender-js', DS_LIVE_COMPOSER_URL . 'js/BasicModuleUtils.js', array( 'jquery', 'extend-js' ), DS_LIVE_COMPOSER_VER );
 		wp_enqueue_script( 'base64', DS_LIVE_COMPOSER_URL . 'js/libs/base64.js', array(), DS_LIVE_COMPOSER_VER );
+		wp_enqueue_script( 'modernizr', DS_LIVE_COMPOSER_URL . 'js/libs/modernizr-custom.js', array(), DS_LIVE_COMPOSER_VER );
 		wp_enqueue_script( 'deep-extend-underscore', DS_LIVE_COMPOSER_URL . 'js/libs/deepExtend.js', array( 'jquery', 'extend-js' ), DS_LIVE_COMPOSER_VER );
 		wp_enqueue_script( 'options-field-extender', DS_LIVE_COMPOSER_URL . 'js/optionFieldUtils.js', array( 'jquery', 'extend-js' ), DS_LIVE_COMPOSER_VER );
 		wp_enqueue_script( 'modal-window', DS_LIVE_COMPOSER_URL . 'js/ModalWindow.js', array( 'jquery', 'extend-js' ), DS_LIVE_COMPOSER_VER );

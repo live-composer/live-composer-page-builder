@@ -5,7 +5,7 @@
 		<div class="dslc-accordion-item">
 
 			<div class="dslc-accordion-header dslc-accordion-hook">
-				<span class="dslc-accordion-title dslca-editable-content" contenteditable data-exportable-content="h3">
+				<span class="dslc-accordion-title dslca-editable-content" contenteditable data-id="accordion-title">
 					<%= slide.title %>
 				</span>
 
@@ -18,7 +18,7 @@
 
 			<div class="dslc-accordion-content-wrapper" style="<%= open_by_default.value > -1 && open_by_default.value -1 == index ? 'display: block' : 'display: none' %>">
 				<div class="dslc-accordion-content">
-					<div class="dslca-editable-content" data-exportable-content>
+					<div class="dslca-editable-content" contenteditable inline-editor data-id="accordion-content">
 						<%= slide.content %>
 					</div>
 

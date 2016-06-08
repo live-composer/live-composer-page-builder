@@ -268,6 +268,7 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 						'value' => 'disabled'
 					),
 				),
+				'section' => 'functionality',
 				'tab' => __( 'Query Alter', 'live-composer-page-builder' ),
 			),
 			array(
@@ -833,6 +834,7 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 				'tab' => __( 'Price', 'live-composer-page-builder' ),
 				'min' => 0,
 				'max' => 1,
+				'ext' => '',
 				'increment' => 0.01
 			),
 			array(

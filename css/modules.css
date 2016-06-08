@@ -467,8 +467,6 @@
 					border: 0px solid transparent;
 					border-radius: 50%;
 					position: absolute;
-					top: 40%;
-					left: 35%;
 					text-align: center;
 					text-decoration: none;
 				}
@@ -1638,6 +1636,7 @@
 		#dslc-content ul.dslc-social .dslc-social-label {
 			float: left;
 			display: block;
+			text-decoration: none;
 		}
 
 /**

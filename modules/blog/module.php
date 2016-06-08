@@ -243,6 +243,7 @@ class DSLC_Blog extends DSLC_Module {
 						'value' => 'disabled'
 					),
 				),
+				'section' => 'functionality',
 				'tab' => __( 'Query Alter', 'live-composer-page-builder' ),
 			),
 			array(
@@ -2902,6 +2903,7 @@ class DSLC_Blog extends DSLC_Module {
 
 			$options = $this->getPropsValues();
 			$cnt = 0;
+
 
 			while ( $dslc_query->have_posts() ) {
 

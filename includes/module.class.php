@@ -1297,6 +1297,7 @@ class DSLC_Module{
 				'id' => 'carousel_autoplay',
 				'std' => '0',
 				'type' => 'text',
+				'section' => 'functionality',
 				'tab' => 'carousel',
 			),
 			array(
@@ -1314,6 +1315,7 @@ class DSLC_Module{
 						'value' => 'false',
 					),
 				),
+				'section' => 'functionality',
 				'tab' => 'carousel',
 			),
 

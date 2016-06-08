@@ -72,7 +72,7 @@ class DSLC_Galleries extends DSLC_Module {
 			array(
 				'label' => __( 'Type', 'live-composer-page-builder' ),
 				'id' => 'type',
-				'std' => 'masonry',
+				'std' => 'grid',
 				'type' => 'select',
 				'choices' => array(
 					array(
@@ -248,6 +248,7 @@ class DSLC_Galleries extends DSLC_Module {
 						'value' => 'lightbox'
 					)
 				),
+				'section' => 'functionality',
 				'tab' => __( 'other', 'live-composer-page-builder' ),
 			),
 			array(
@@ -284,6 +285,7 @@ class DSLC_Galleries extends DSLC_Module {
 						'value' => 'disabled'
 					),
 				),
+				'section' => 'functionality',
 				'tab' => __( 'Query Alter', 'live-composer-page-builder' ),
 			),
 			array(
@@ -792,6 +794,7 @@ class DSLC_Galleries extends DSLC_Module {
 				'tab' => __( 'Count', 'live-composer-page-builder' ),
 				'min' => 0,
 				'max' => 1,
+				'ext' => '',
 				'increment' => 0.01
 			),
 			array(

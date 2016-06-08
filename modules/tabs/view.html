@@ -4,7 +4,7 @@
 
 		<% tab_slides.value.forEach(function(slide, index){%>
 			<span class="dslc-tabs-nav-hook <%= index == 0 ? 'dslc-active' : ''  %>">
-				<span class="dslc-tabs-nav-hook-title dslca-editable-content" contenteditable><%= slide.title %></span>
+				<span class="dslc-tabs-nav-hook-title dslca-editable-content" data-id="tab-title" contenteditable><%= slide.title %></span>
 				<span class="dslca-delete-tab-hook lc-editor-element"><span class="dslca-icon dslc-icon-remove"></span></span>
 			</span>
 		<%});%>
@@ -22,7 +22,7 @@
 			<div class="dslc-tabs-tab-content <%= index == 0 ? 'dslc-active' : ''  %>">
 				<h4 class="dslc-tabs-nav-hook" data-exportable-content="h3"><%= slide.title %></h4>
 
-				<div class="dslca-editable-content" data-exportable-content>
+				<div class="dslca-editable-content" data-exportable-content data-id="tab-content" contenteditable inline-editor>
 					<%= slide.content %>
 				</div>
 

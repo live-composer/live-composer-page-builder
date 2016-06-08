@@ -95,7 +95,13 @@
 			var content = editableField.innerHTML;
 			var slides = this.getOption('accordion_slides');
 
-			slides[index].title = content;
+			if($(editableField).data('id') == 'accordion-title'){
+
+				slides[index].title = content;
+			}else{
+				slides[index].content = content;
+			}
+
 			this.setOption( 'accordion_slides', slides )
 				.getModuleBody();
 

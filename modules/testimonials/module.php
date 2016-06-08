@@ -1121,7 +1121,8 @@ class DSLC_Testimonials extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'position', 'live-composer-page-builder' ),
 				'increment' => '0.05',
-				'max' => 3
+				'max' => 3,
+				'ext' => ''
 			),
 
 			/**

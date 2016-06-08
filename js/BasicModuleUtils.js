@@ -88,7 +88,7 @@
 
 					}else{
 
-						tabId = item.tab.toLowerCase().replace(" ", "_");
+						tabId = item.tab.toLowerCase().replace(/[ -]/gi, '_');
 
 						if(!self.settingsTabs[section + "__" + tabId]){
 
@@ -125,7 +125,7 @@
 				.removeAttr('data-type')
 			});
 
-			HTML.find("[contenteditable]").each(function()
+			HTML.find("[inline-editor],[contenteditable]").each(function()
 			{
 				jQuery(this).removeAttr('contenteditable');
 				jQuery(this).removeAttr('inline-editor');
@@ -682,7 +682,7 @@
 
 				/// Sections and tabs
 				if(item.section && item.section != ''){
-					section = item.section;
+					section = item.section.replace(/[ -]/gi, '_');
 				}else{
 					section = 'functionality';
 				}
@@ -705,11 +705,11 @@
 
 					item.section = section;
 					tabId = 'general_' + section;
-					item.tab = tabId;
+					item.tab = tabId.replace(/[ -]/gi, '_');
 
 				}else{
 
-					tabId = item.tab.toLowerCase().replace(" ", "_");
+					tabId = item.tab.toLowerCase().replace(/[ -]/gi, "_");
 
 					if(!tabs[tabId]){
 						tabs[tabId] = {

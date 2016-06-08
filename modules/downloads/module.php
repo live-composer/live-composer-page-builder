@@ -282,6 +282,7 @@ class DSLC_Downloads extends DSLC_Module {
 						'value' => 'disabled'
 					),
 				),
+				'section' => 'functionality',
 				'tab' => __( 'Query Alter', 'live-composer-page-builder' ),
 			),
 			array(

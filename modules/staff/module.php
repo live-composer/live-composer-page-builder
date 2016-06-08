@@ -247,6 +247,7 @@ class DSLC_Staff extends DSLC_Module {
 						'value' => '_blank'
 					)
 				),
+				'section' => 'functionality',
 				'tab' => __( 'Other', 'live-composer-page-builder' ),
 			),
 

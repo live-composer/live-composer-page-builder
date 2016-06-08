@@ -12,7 +12,7 @@
 			<% if(obj.view_all_link && view_all_link.value !== ''){%>
 
 				<span class="dslc-module-heading-view-all">
-					<a href="<%= view_all_link.value %>" class="dslca-editable-content" data-id="main_heading_link_title" data-type="simple" contenteditable >
+					<a href="<%= view_all_link.value %>" class="dslca-editable-content" data-id="main_heading_link_title" data-type="simple" contenteditable>
 						<%= main_heading_link_title.value || main_heading_link_title.std %>
 					</a>
 				</span>
@@ -164,8 +164,8 @@
 			<%}%>
 
 			<% if(pagination_type.value == 'prevnext'){%>
+				<li class="dslc-inactive dslc-fl"><a href="#">Newer</a></li>
 				<li class="dslc-active dslc-fr"><a href="#">Older</a></li>
-				<li class="dslc-inactive dslc-fl"><a href="#" class="">Newer</a></li>
 			<%}%>
 
 			<% if(pagination_type.value == 'loadmore'){%>

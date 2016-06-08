@@ -80,8 +80,6 @@
 		 */
 		Tab.prototype.setContentEditableValue = function( editableField )
 		{
-			var index = $(editableField).closest('.dslc-tabs-nav-hook').index();
-
 			[].forEach.call(editableField.querySelectorAll("p"), function( p )
 			{
 				if ( p.innerHTML == '<br>' )
@@ -93,7 +91,16 @@
 			var content = editableField.innerHTML;
 			var slides = this.getOption('tab_slides');
 
-			slides[index].title = content;
+			if($(editableField).data('id') == 'tab-title'){
+
+				var index = $(editableField).closest('.dslc-tabs-nav-hook').index();
+				slides[index].title = content;
+			}else{
+
+				var index = $(editableField).closest('.dslc-tabs-tab-content').index();
+				slides[index].content = content;
+			}
+
 			this.setOption( 'tab_slides', slides )
 				.getModuleBody();
 

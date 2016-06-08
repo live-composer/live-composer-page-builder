@@ -1,31 +1,28 @@
+<% obj.button = function(){%>
+	<% if(button_state.value != 'disabled' && icon_pos.value != 'right'){%>
+		<span class="dslc-icon dslc-icon-<%= button_icon_id.value || button_icon_id.std %>"></span>
+	<%}%>
+
+	<span class="dslca-editable-content" data-id="button_text" data-type="simple" contenteditable>
+		<%= button_text.value || button_text.std %>
+	</span>
+
+	<% if(button_state.value != 'disabled' && icon_pos.value == 'right'){%>
+		<span class="dslc-icon dslc-icon-<%= button_icon_id.value || button_icon_id.std %>"></span>
+	<%}%>
+<%}; %>
 <div class="dslc-button">
 	<% if(button_target.value == 'lightbox'){%>
 		<a href="<%= lightbox_final_url %>" url_type="<%= lightbox_url_type %>" <% if(button_onclick.value != ''){%> onclick="<%= button_onclick.value %>" <%}%> <% if(link_nofollow.value == 'nofollow'){%> rel="nofollow" <%}%> class="dslc-lightbox-image <%= button_class.value || button_class.std %>">
-			<% if(button_state.value != 'disabled' && icon_pos.value != 'right'){%>
-				<span class="dslc-icon dslc-icon-<%= button_icon_id.value || button_icon_id.std %>"></span>
-			<%}%>
 
-			<span class="dslca-editable-content" data-id="button_text" data-type="simple" contenteditable>
-				<%= button_text.value || button_text.std %>
-			</span>
+			<% obj.button(); %>
 
-			<% if(button_state.value != 'disabled' && icon_pos.value == 'right'){%>
-				<span class="dslc-icon dslc-icon-<%= button_icon_id.value || button_icon_id.std %>"></span>
-			<%}%>
 		</a>
 	<%}else{%>
 		<a href="<%= button_url.value || button_url.std %>" <% if(button_onclick.value != ''){%> onclick="<%= button_onclick.value %>" <%}%> target="<%= button_target.value == 'lightbox' ? '_self' : (button_target.value || button_target.std) %>"  class="<%= button_class.value || button_class.std %>" <% if(link_nofollow.value == 'nofollow'){%> rel="nofollow" <%}%> >
-			<% if(button_state.value != 'disabled' && icon_pos.value != 'right'){%>
-				<span class="dslc-icon dslc-icon-<%= button_icon_id.value || button_icon_id.std %>"></span>
-			<%}%>
 
-			<span class="dslca-editable-content" data-id="button_text"  data-type="simple" contenteditable >
-				<%= button_text.value || button_text.std %>
-			</span>
+			<% obj.button(); %>
 
-			<% if(button_state.value != 'disabled' && icon_pos.value == 'right'){%>
-				<span class="dslc-icon dslc-icon-<%= button_icon_id.value || button_icon_id.std %>"></span>
-			<%}%>
 		</a>
 	<%}%>
 </div><!-- .dslc-button -->

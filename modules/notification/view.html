@@ -1,5 +1,5 @@
 <div class="dslc-notification-box <%= !isNaN(parseFloat(notification_timeout.value)) && isFinite(notification_timeout.value) ? 'dslc-notification-box-has-timeout' : '' %>" data-notification-timeout="<%= notification_timeout.value != '' ? notification_timeout.value : '' %>">
-	<div class="dslc-notification-box-content  dslca-editable-content" data-id="content" contenteditable><%= content.value || content.std %></div>
+	<div class="dslc-notification-box-content  dslca-editable-content" data-id="content" contenteditable inline-editor><%= content.value || content.std %></div>
 	<div class="lc-editor-element"><!-- .dslca-editable-content -->
 		<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook"><?php _e( 'Edit Content', 'live-composer-page-builder' ); ?></span></div>
 	</div>
