@@ -100,50 +100,6 @@ class DSLC_Info_Box extends DSLC_Module{
 				 )
 			 ),
 			array(
-				'label' => __( 'Primary Button Link', 'live-composer-page-builder' ),
-				'id' => 'button_link',
-				'std' => '#',
-				'type' => 'text'
-			 ),
-			array(
-				'label' => __( 'Primary Button - Open in', 'live-composer-page-builder' ),
-				'id' => 'button_target',
-				'std' => '_self',
-				'type' => 'select',
-				'choices' => array(
-					array(
-						'label' => __( 'Same Tab', 'live-composer-page-builder' ),
-						'value' => '_self',
-					 ),
-					array(
-						'label' => __( 'New Tab', 'live-composer-page-builder' ),
-						'value' => '_blank',
-					 ),
-				 )
-			 ),
-			array(
-				'label' => __( 'Secondary Button Link', 'live-composer-page-builder' ),
-				'id' => 'button_2_link',
-				'std' => '#',
-				'type' => 'text'
-			 ),
-			array(
-				'label' => __( 'Secondary Button - Open in', 'live-composer-page-builder' ),
-				'id' => 'button_2_target',
-				'std' => '_self',
-				'type' => 'select',
-				'choices' => array(
-					array(
-						'label' => __( 'Same Tab', 'live-composer-page-builder' ),
-						'value' => '_self',
-					 ),
-					array(
-						'label' => __( 'New Tab', 'live-composer-page-builder' ),
-						'value' => '_blank',
-					 ),
-				 )
-			 ),
-			array(
 				'id' => 'link_nofollow',
 				'std' => '',
 				'type' => 'checkbox',
@@ -163,7 +119,7 @@ class DSLC_Info_Box extends DSLC_Module{
 			array(
 				'label' => __( 'Elements', 'live-composer-page-builder' ),
 				'id' => 'elements',
-				'std' => 'icon title content button',
+				'std' => 'icon title content primary_button secondary_button',
 				'type' => 'checkbox',
 				'choices' => array(
 					array(
@@ -183,8 +139,12 @@ class DSLC_Info_Box extends DSLC_Module{
 						'value' => 'content'
 					 ),
 					array(
-						'label' => __( 'Button', 'live-composer-page-builder' ),
-						'value' => 'button'
+						'label' => __( 'Primary Button', 'live-composer-page-builder' ),
+						'value' => 'primary_button'
+					 ),
+					array(
+						'label' => __( 'Secondary Button', 'live-composer-page-builder' ),
+						'value' => 'secondary_button'
 					 ),
 				 ),
 				'section' => 'styling'
@@ -881,7 +841,7 @@ class DSLC_Info_Box extends DSLC_Module{
 				'tab' => __( 'Icon', 'live-composer-page-builder' ),
 			 ),
 
-      /**
+      		/**
 			 * Image
 			 */
 
@@ -1218,6 +1178,33 @@ class DSLC_Info_Box extends DSLC_Module{
 			/**
 			 * Button
 			 */
+
+			array(
+				'label' => __( 'Button Link', 'live-composer-page-builder' ),
+				'id' => 'button_link',
+				'std' => '#',
+				'type' => 'text',
+				'section' => 'styling',
+				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
+			 ),
+			array(
+				'label' => __( 'Button - Open in', 'live-composer-page-builder' ),
+				'id' => 'button_target',
+				'std' => '_self',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'Same Tab', 'live-composer-page-builder' ),
+						'value' => '_self',
+					 ),
+					array(
+						'label' => __( 'New Tab', 'live-composer-page-builder' ),
+						'value' => '_blank',
+					 ),
+				 ),
+				'section' => 'styling',
+				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
+			 ),
 			array(
 				'label' => __( 'Position', 'live-composer-page-builder' ),
 				'id' => 'button_pos',
@@ -1525,6 +1512,32 @@ class DSLC_Info_Box extends DSLC_Module{
 			 * Secondary Button
 			 */
 
+			array(
+				'label' => __( 'Button Link', 'live-composer-page-builder' ),
+				'id' => 'button_2_link',
+				'std' => '#',
+				'type' => 'text',
+				'section' => 'styling',
+				'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
+			 ),
+			array(
+				'label' => __( 'Button - Open in', 'live-composer-page-builder' ),
+				'id' => 'button_2_target',
+				'std' => '_self',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'Same Tab', 'live-composer-page-builder' ),
+						'value' => '_self',
+					 ),
+					array(
+						'label' => __( 'New Tab', 'live-composer-page-builder' ),
+						'value' => '_blank',
+					 ),
+				 ),
+				'section' => 'styling',
+				'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
+			 ),
 			array(
 				'label' => __( 'BG Color', 'live-composer-page-builder' ),
 				'id' => 'css_button_2_bg_color',

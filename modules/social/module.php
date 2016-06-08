@@ -319,6 +319,17 @@ class DSLC_Social extends DSLC_Module {
 				'ext' => 'px',
 			),
 			array(
+				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
+				'id' => 'css_margin_bottom',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => 'ul.dslc-social li',
+				'affect_on_change_rule' => 'margin-top',
+				'section' => 'styling',
+				'ext' => 'px',
+			),
+			array(
 				'label' => __( 'Padding Left', 'live-composer-page-builder' ),
 				'id' => 'css_padding_left',
 				'std' => '0',

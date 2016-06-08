@@ -448,11 +448,14 @@ body {
 							    cursor: pointer;
 							    display: inline-block;
 							    height: 32px;
-							    float: right;
 							    position: relative;
 							    text-align: center;
 							    vertical-align: middle;
-							    width: 15%;
+							    width: 14%;
+						}
+
+						.dslca-options-iconbutton.dslca-open-modal-hook {
+						    margin-left: 4px;
 						}
 
 							.dslca-options-iconbutton .dslca-icon {

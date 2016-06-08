@@ -43,20 +43,14 @@
 
 			if(data.optionId == 'elements'){
 
-				var allElems = 'icon title content button image';
+				var allElems = 'icon title content primary_button secondary_button image';
 				var currValue = data.module.getOption('elements');
 
 				allElems.split(' ').forEach(function(item){
 
-					if(item == 'button'){
+					var elem = jQuery(".dslca-module-edit-options-tab-hook[data-id='" + item + "']");
 
-						var elem = jQuery(".dslca-module-edit-options-tab-hook[data-id='secondary_button'], .dslca-module-edit-options-tab-hook[data-id='primary_button']");
-					}else{
-
-						var elem = jQuery(".dslca-module-edit-options-tab-hook[data-id='" + item + "']");
-					}
-
-					if(currValue.indexOf(item) > -1){
+					if((currValue != false) && (currValue.indexOf(item) > -1)){
 
 						elem.removeClass('hide-hook');
 					}else{
@@ -73,20 +67,14 @@
 
 			if(data.module.settings.id != 'DSLC_Info_Box') return false;
 
-			var allElems = 'icon title content button image';
+			var allElems = 'icon title content primary_button secondary_button image';
 			var elementsOn = data.module.getOption('elements');
 
 			allElems.split(' ').forEach(function(item){
 
-				if(item == 'button'){
+				var elem = jQuery(".dslca-module-edit-options-tab-hook[data-id='" + item + "']");
 
-					var elem = jQuery(".dslca-module-edit-options-tab-hook[data-id='secondary_button'], .dslca-module-edit-options-tab-hook[data-id='primary_button']");
-				}else{
-
-					var elem = jQuery(".dslca-module-edit-options-tab-hook[data-id='" + item + "']");
-				}
-
-				if(elementsOn.indexOf(item) > -1){
+				if((elementsOn != false) && (elementsOn.indexOf(item) > -1)){
 
 					elem.removeClass('hide-hook');
 				}else{

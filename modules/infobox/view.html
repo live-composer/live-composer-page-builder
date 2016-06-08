@@ -1,31 +1,38 @@
+<% obj.first_button = function(){%>
+	<a href="<%= button_link.value || button_link.std %>" target="<%= button_target.value || button_target.std %>" class="dslc-primary" <% if(link_nofollow.value == 'nofollow'){%> rel="nofollow" <%}%> >
+		<% if(button_icon_id && button_icon_id.value != ''){%>
+			<span class="dslc-icon dslc-icon-<%= button_icon_id.value || button_icon_id.std %>"></span>
+		<%}%>
+
+		<span class="dslca-editable-content" data-id="button_title" data-type="simple" contenteditable>
+			<%= button_title.value || button_title.std %>
+		</span>
+	</a>
+<%}%>
+<%obj.second_button = function(){%>
+	<a href="<%= button_2_link.value || button_2_link.std %>" target="<%= button_2_target.value || button_2_target.std %>" <% if(link_nofollow.value == 'nofollow'){%> rel="nofollow" <%}%> class="dslc-secondary">
+		<% if(button_2_icon_id && button_2_icon_id.value != ''){%>
+			<span class="dslc-icon dslc-icon-<%= button_2_icon_id.value || button_2_icon_id.std %>"></span>
+		<%}%>
+
+		<span class="dslca-editable-content" data-id="button_2_title" data-type="simple" contenteditable>
+			<%= button_2_title.value || button_2_title.std %>
+		</span>
+	</a>
+<%}%>
+
 <div class="dslc-info-box dslc-info-box-icon-pos-<%= icon_position.value || icon_position.std %>">
 				<div class="dslc-info-box-wrapper">
 
-					<% if(button_pos.value == 'aside' && elements.show_elements.button == true){%>
+					<% if(button_pos.value == 'aside'){%>
 						<div class="dslc-info-box-button dslc-info-box-button-aside">
-							<% if(button_link.value != ''){%>
-								<a href="<%= button_link.value || button_link.std %>" target="<%= button_target.value || button_target.std %>" class="dslc-primary" <% if(link_nofollow.value == 'nofollow'){%> rel="nofollow" <%}%> >
-									<% if(button_icon_id && button_icon_id.value != ''){%>
-										<span class="dslc-icon dslc-icon-<%= button_icon_id.value || button_icon_id.std %>"></span>
-									<%}%>
+							<% if(elements.show_elements.primary_button == true) {
+								obj.first_button()
+							}%>
 
-									<span class="dslca-editable-content" data-id="button_title" data-type="simple" contenteditable>
-										<%= button_title.value || button_title.std %>
-									</span>
-								</a>
-							<%}%>
-
-							<% if(button_2_link.value != ''){%>
-								<a href="<%= button_2_link.value || button_2_link.std %>" target="<%= button_2_target.value || button_2_target.std %>" class="dslc-secondary" <% if(link_nofollow.value == 'nofollow'){%> rel="nofollow" <%}%> >
-									<% if(button_2_icon_id && button_2_icon_id.value != ''){%>
-										<span class="dslc-icon dslc-icon-<%= button_2_icon_id.value || button_2_icon_id.std %>"></span>
-									<%}%>
-
-									<span class="dslca-editable-content" data-id="button_2_title" data-type="simple" contenteditable>
-										<%= button_2_title.value || button_2_title.std %>
-									</span>
-								</a>
-							<%}%>
+							<% if(elements.show_elements.secondary_button == true) {
+								obj.second_button()
+							}%>
 						</div><!-- .dslc-info-box-button -->
 					<%}%>
 
@@ -80,32 +87,15 @@
 								</div><!-- .dslc-info-box-content -->
 							<%}%>
 
-							<% if(button_pos.value != 'aside' && elements.show_elements.button == true){%>
+							<% if(button_pos.value != 'aside'){%>
 								<div class="dslc-info-box-button">
-									<% if(button_link.value != ''){%>
+									<% if(elements.show_elements.primary_button == true) {
+										obj.first_button()
+									}%>
 
-											<a href="<%= button_link.value || button_link.std %>" target="<%= button_target.value || button_target.std %>" class="dslc-primary" <% if(link_nofollow.value == 'nofollow'){%> rel="nofollow" <%}%> >
-											<% if(button_icon_id && button_icon_id.value != ''){%>
-												<span class="dslc-icon dslc-icon-<%= button_icon_id.value || button_icon_id.std %>"></span>
-											<%}%>
-
-											<span class="dslca-editable-content" data-id="button_title" data-type="simple" contenteditable>
-												<%= button_title.value || button_title.std %>
-											</span>
-										</a>
-									<%}%>
-
-									<% if(button_2_link.value != ''){%>
-										<a href="<%= button_2_link.value || button_2_link.std %>" target="<%= button_2_target.value || button_2_target.std %>" <% if(link_nofollow.value == 'nofollow'){%> rel="nofollow" <%}%> class="dslc-secondary">
-											<% if(button_2_icon_id && button_2_icon_id.value != ''){%>
-												<span class="dslc-icon dslc-icon-<%= button_2_icon_id.value || button_2_icon_id.std %>"></span>
-											<%}%>
-
-											<span class="dslca-editable-content" data-id="button_2_title" data-type="simple" contenteditable>
-												<%= button_2_title.value || button_2_title.std %>
-											</span>
-										</a>
-									<%}%>
+									<% if(elements.show_elements.secondary_button == true) {
+										obj.second_button()
+									}%>
 								</div><!-- .dslc-info-box-button -->
 							<%}%>
 						</div><!-- .dslc-info-box-main -->
