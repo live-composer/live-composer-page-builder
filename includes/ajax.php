@@ -20,7 +20,7 @@
  */
 
 /**
- * Add a new module section
+ * Add/display a new module section
  *
  * @since 1.0
  */
@@ -108,9 +108,12 @@ function dslc_ajax_add_modules_section( $atts ) {
 
 /**
  * Add a new modules area
+ * TODO: Delete this function. This all code in JS now.
  *
  * @since 1.0
  */
+
+// DEPRECATED!
 
 function dslc_ajax_add_modules_area( $atts ) {
 

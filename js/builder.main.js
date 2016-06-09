@@ -2238,56 +2238,22 @@ var dslcDebug = false;
 		// Add class to body so we know it's in progress
 		jQuery('body').addClass('dslca-anim-in-progress');
 
-		// AJAX call to add new area
-		jQuery.post(
+		var output = '<div class="dslc-modules-area dslc-col dslc-12-col" data-size="12"> <div class="dslca-modules-area-manage"> <div class="dslca-modules-area-manage-inner"> <span class="dslca-manage-action dslca-copy-modules-area-hook"><span class="dslca-icon dslc-icon-copy"></span></span> <span class="dslca-manage-action dslca-move-modules-area-hook"><span class="dslca-icon dslc-icon-move"></span></span> <span class="dslca-manage-action dslca-change-width-modules-area-hook"> <span class="dslca-icon dslc-icon-columns"></span> <div class="dslca-change-width-modules-area-options"> <span data-size="1">1/12</span><span data-size="2">2/12</span> <span data-size="3">3/12</span><span data-size="4">4/12</span> <span data-size="5">5/12</span><span data-size="6">6/12</span> <span data-size="7">7/12</span><span data-size="8">8/12</span> <span data-size="9">9/12</span><span data-size="10">10/12</span> <span data-size="11">11/12</span><span data-size="12">12/12</span> </div> </span> <span class="dslca-manage-action dslca-delete-modules-area-hook"><span class="dslca-icon dslc-icon-remove"></span></span> </div> </div> <div class="dslca-no-content"> <span class="dslca-no-content-primary"><span class="dslca-icon dslc-icon-download-alt"></span><span class="dslca-no-content-help-text">Drop modules here</span></span> </div> <div class="dslca-module-loading"><div class="dslca-module-loading-inner"></div></div> </div>';
 
-			DSLCAjax.ajaxurl,
-			{
-				action : 'dslc-ajax-add-modules-area',
-				dslc : 'active'
-			},
-			function( response ) {
+		// Append new area and animate
+		jQuery( output ).appendTo( row ).css({ height : 0 }).animate({
+			height : 99
+		}, 300, function(){
+			jQuery(this).css({ height : 'auto' })
+		}).addClass('dslca-init-animation');
 
-				// Loading Animation
-				jQuery('.dslca-modules-area-loading .dslca-module-loading-inner', row.closest('.dslc-modules-section') ).stop().animate({
-					width : '100%'
-				}, 200, 'linear', function(){
-					row.css({ paddingBottom : 0 });
-					jQuery(this).closest('.dslca-modules-area-loading').hide();
-				});
+		// Call other functions
+		dslc_drag_and_drop();
+		dslc_generate_code();
+		dslc_show_publish_button();
 
-				// Handle adding after animation done
-				setTimeout( function(){
-
-					// Append new area and animate
-					jQuery( response.output ).appendTo( row ).css({ height : 0 }).animate({
-						height : 99
-					}, 300, function(){
-						jQuery(this).css({ height : 'auto' })
-					}).addClass('dslca-init-animation');
-
-					// Call other functions
-					dslc_drag_and_drop();
-					dslc_generate_code();
-					dslc_show_publish_button();
-
-					// Remove class from body so we know it's done
-					jQuery('body').removeClass('dslca-anim-in-progress');
-
-				}, 250 );
-
-			}
-
-		);
-
-		// Animate loading
-		var randomLoadingTime = Math.floor(Math.random() * (100 - 50 + 1) + 50) * 100;
-		row.animate({ paddingBottom : 50 }, 150);
-		jQuery('.dslca-modules-area-loading', row.closest('.dslc-modules-section') ).show();
-		jQuery('.dslca-modules-area-loading .dslca-module-loading-inner', row.closest('.dslc-modules-section') ).css({ width : 0 }).animate({
-			width : '100%'
-		}, randomLoadingTime, 'linear' );
-
+		// Remove class from body so we know it's done
+		jQuery('body').removeClass('dslca-anim-in-progress');
 	}
 
 	/**
