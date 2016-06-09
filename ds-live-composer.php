@@ -80,8 +80,6 @@
 	include DS_LIVE_COMPOSER_ABS . '/includes/post-templates.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/other.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/options.extension.class.php';
-	include DS_LIVE_COMPOSER_ABS . '/includes/libs/cssparser.php';
-	include DS_LIVE_COMPOSER_ABS . '/includes/libs/panel.options.class.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/main.class.php';
 
 	$cap_page = dslc_get_option( 'lc_min_capability_page', 'dslc_plugin_options_access_control' );
