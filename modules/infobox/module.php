@@ -128,23 +128,11 @@ class DSLC_Info_Box extends DSLC_Module {
 					),
 				)
 			),
-			array(
-				'id' => 'link_nofollow',
-				'std' => '',
-				'type' => 'checkbox',
-				'help' => __( 'Nofollow tells search engines to not follow this specific link', 'live-composer-page-builder' ),
-				'choices' => array(
-					array(
-						'label' => __( 'Nofollow', 'live-composer-page-builder' ),
-						'value' => 'nofollow'
-					),
-				),
-			),
-
+			
 			/**
 			 * General
 			 */
-
+			
 			array(
 				'label' => __( 'Elements', 'live-composer-page-builder' ),
 				'id' => 'elements',
@@ -173,6 +161,16 @@ class DSLC_Info_Box extends DSLC_Module {
 					),
 				),
 				'section' => 'styling'
+			),
+			array(
+				'label' => __( 'Align', 'live-composer-page-builder' ),
+				'id' => 'text_align',
+				'std' => 'center',
+				'type' => 'text_align',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box',
+				'affect_on_change_rule' => 'text-align',
+				'section' => 'styling',
 			),
 			array(
 				'label' => __( 'BG Color', 'live-composer-page-builder' ),
@@ -290,7 +288,147 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_rule' => 'background-position',
 				'section' => 'styling',
 			),
-
+			array(
+				'label' => __( 'Border Color', 'live-composer-page-builder' ),
+				'id' => 'css_border_color',
+				'std' => '#000000',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box',
+				'affect_on_change_rule' => 'border-color',
+				'section' => 'styling',
+			),
+			array(
+				'label' => __( 'Border Width', 'live-composer-page-builder' ),
+				'id' => 'css_border_width',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box',
+				'affect_on_change_rule' => 'border-width',
+				'section' => 'styling',
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Borders', 'live-composer-page-builder' ),
+				'id' => 'css_border_trbl',
+				'std' => 'top right bottom left',
+				'type' => 'checkbox',
+				'choices' => array(
+					array(
+						'label' => __( 'Top', 'live-composer-page-builder' ),
+						'value' => 'top'
+					),
+					array(
+						'label' => __( 'Right', 'live-composer-page-builder' ),
+						'value' => 'right'
+					),
+					array(
+						'label' => __( 'Bottom', 'live-composer-page-builder' ),
+						'value' => 'bottom'
+					),
+					array(
+						'label' => __( 'Left', 'live-composer-page-builder' ),
+						'value' => 'left'
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box',
+				'affect_on_change_rule' => 'border-style',
+				'section' => 'styling',
+			),
+			array(
+				'label' => __( 'Border Radius', 'live-composer-page-builder' ),
+				'id' => 'css_border_radius',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box',
+				'affect_on_change_rule' => 'border-radius',
+				'section' => 'styling',
+				'ext' => 'px'
+			),
+			array(
+				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
+				'id' => 'css_margin_bottom',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box',
+				'affect_on_change_rule' => 'margin-bottom',
+				'section' => 'styling',
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Minimum Height', 'live-composer-page-builder' ),
+				'id' => 'css_min_height',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box',
+				'affect_on_change_rule' => 'min-height',
+				'section' => 'styling',
+				'ext' => 'px',
+				'min' => 0,
+				'max' => 1000,
+				'increment' => 5
+			),
+			array(
+				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
+				'id' => 'css_padding_vertical',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box',
+				'affect_on_change_rule' => 'padding-top,padding-bottom',
+				'section' => 'styling',
+				'max' => 500,
+				'increment' => 1,
+				'ext' => 'px'
+			),
+			array(
+				'label' => __( 'Padding Horizontal', 'live-composer-page-builder' ),
+				'id' => 'css_padding_horizontal',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box',
+				'affect_on_change_rule' => 'padding-left,padding-right',
+				'section' => 'styling',
+				'ext' => 'px'
+			),
+			array(
+				'label' => __( 'Width', 'live-composer-page-builder' ),
+				'id' => 'css_content_width',
+				'std' => '100',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-main-wrap',
+				'affect_on_change_rule' => 'max-width',
+				'section' => 'styling',
+				'ext' => '%'
+			),
+			array(
+				'label' => __( 'Box Shadow', 'live-composer-page-builder' ),
+				'id' => 'css_box_shadow',
+				'std' => '',
+				'type' => 'box_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box',
+				'affect_on_change_rule' => 'box-shadow',
+				'section' => 'styling',
+			),
+			array(
+				'label' => __( 'Box Shadow - Hover', 'live-composer-page-builder' ),
+				'id' => 'css_box_shadow_hover',
+				'std' => '',
+				'type' => 'box_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box:hover',
+				'affect_on_change_rule' => 'box-shadow',
+				'section' => 'styling',
+			),
+			
 
 			/**
 			 * Wrapper
@@ -417,12 +555,112 @@ class DSLC_Info_Box extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'wrapper', 'live-composer-page-builder' )
 			),
+			array(
+				'label' => __( 'Border Color', 'live-composer-page-builder' ),
+				'id' => 'css_wrapper_border_color',
+				'std' => '',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-wrapper',
+				'affect_on_change_rule' => 'border-color',
+				'section' => 'styling',
+				'tab' => __( 'wrapper', 'live-composer-page-builder' )
+			),
+			array(
+				'label' => __( 'Border Width', 'live-composer-page-builder' ),
+				'id' => 'css_wrapper_border_width',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-wrapper',
+				'affect_on_change_rule' => 'border-width',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'wrapper', 'live-composer-page-builder' )
+			),
+			array(
+				'label' => __( 'Borders', 'live-composer-page-builder' ),
+				'id' => 'css_wrapper_border_trbl',
+				'std' => 'top right bottom left',
+				'type' => 'checkbox',
+				'choices' => array(
+					array(
+						'label' => __( 'Top', 'live-composer-page-builder' ),
+						'value' => 'top'
+					),
+					array(
+						'label' => __( 'Right', 'live-composer-page-builder' ),
+						'value' => 'right'
+					),
+					array(
+						'label' => __( 'Bottom', 'live-composer-page-builder' ),
+						'value' => 'bottom'
+					),
+					array(
+						'label' => __( 'Left', 'live-composer-page-builder' ),
+						'value' => 'left'
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-wrapper',
+				'affect_on_change_rule' => 'border-style',
+				'section' => 'styling',
+				'tab' => __( 'wrapper', 'live-composer-page-builder' )
+			),
+			array(
+				'label' => __( 'Border Radius', 'live-composer-page-builder' ),
+				'id' => 'css_wrapper_border_radius',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-wrapper',
+				'affect_on_change_rule' => 'border-radius',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'wrapper', 'live-composer-page-builder' )
+			),
+			array(
+				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
+				'id' => 'css_wrapper_padding_vertical',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-wrapper',
+				'affect_on_change_rule' => 'padding-top,padding-bottom',
+				'section' => 'styling',
+				'max' => 500,
+				'increment' => 1,
+				'ext' => 'px',
+				'tab' => __( 'wrapper', 'live-composer-page-builder' )
+			),
+			array(
+				'label' => __( 'Padding Horizontal', 'live-composer-page-builder' ),
+				'id' => 'css_wrapper_padding_horizontal',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-wrapper',
+				'affect_on_change_rule' => 'padding-left,padding-right',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'wrapper', 'live-composer-page-builder' )
+			),
 
 			/**
 			 * Icon
 			 */
 
-			
+			array(
+				'label' => __( 'Align', 'live-composer-page-builder' ),
+				'id' => 'css_icon_text_align',
+				'std' => 'inherit',
+				'type' => 'text_align',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-image',
+				'affect_on_change_rule' => 'text-align',
+				'section' => 'styling',
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
+			),
 			array(
 				'label' => __( 'BG Color', 'live-composer-page-builder' ),
 				'id' => 'css_icon_bg_color',
@@ -435,6 +673,81 @@ class DSLC_Info_Box extends DSLC_Module {
 				'tab' => __( 'Icon', 'live-composer-page-builder' ),
 			),
 			array(
+				'label' => __( 'Border Color', 'live-composer-page-builder' ),
+				'id' => 'css_icon_border_color',
+				'std' => '',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-image-inner',
+				'affect_on_change_rule' => 'border-color',
+				'section' => 'styling',
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Border Width', 'live-composer-page-builder' ),
+				'id' => 'css_icon_border_width',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-image-inner',
+				'affect_on_change_rule' => 'border-width',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Borders', 'live-composer-page-builder' ),
+				'id' => 'css_icon_border_trbl',
+				'std' => 'top right bottom left',
+				'type' => 'checkbox',
+				'choices' => array(
+					array(
+						'label' => __( 'Top', 'live-composer-page-builder' ),
+						'value' => 'top'
+					),
+					array(
+						'label' => __( 'Right', 'live-composer-page-builder' ),
+						'value' => 'right'
+					),
+					array(
+						'label' => __( 'Bottom', 'live-composer-page-builder' ),
+						'value' => 'bottom'
+					),
+					array(
+						'label' => __( 'Left', 'live-composer-page-builder' ),
+						'value' => 'left'
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-image-inner',
+				'affect_on_change_rule' => 'border-style',
+				'section' => 'styling',
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Border Radius', 'live-composer-page-builder' ),
+				'id' => 'css_icon_border_radius',
+				'std' => '100',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-image-inner',
+				'affect_on_change_rule' => 'border-radius',
+				'section' => 'styling',
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Color', 'live-composer-page-builder' ),
+				'id' => 'css_icon_color',
+				'std' => '#ffffff',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-image-inner .dslc-icon',
+				'affect_on_change_rule' => 'color',
+				'section' => 'styling',
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Icon', 'live-composer-page-builder' ),
 				'id' => 'icon_id',
 				'std' => 'comments',
@@ -442,6 +755,48 @@ class DSLC_Info_Box extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'Icon', 'live-composer-page-builder' ),
 				'include_in_preset' => false
+			),
+			array(
+				'label' => __( 'Margin Top', 'live-composer-page-builder' ),
+				'id' => 'css_icon_margin_top',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-image',
+				'affect_on_change_rule' => 'margin-top',
+				'section' => 'styling',
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
+				'ext' => 'px',
+				'min' => -100,
+				'max' => 50
+			),
+			array(
+				'label' => __( 'Margin Right', 'live-composer-page-builder' ),
+				'id' => 'css_icon_margin_right',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-image',
+				'affect_on_change_rule' => 'margin-right',
+				'section' => 'styling',
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
+				'ext' => 'px',
+				'min' => 0,
+				'max' => 100
+			),
+			array(
+				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
+				'id' => 'css_icon_margin_bottom',
+				'std' => '25',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-image',
+				'affect_on_change_rule' => 'margin-bottom',
+				'section' => 'styling',
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
+				'ext' => 'px',
+				'min' => 0,
+				'max' => 100
 			),
 			array(
 				'label' => __( 'Position', 'live-composer-page-builder' ),
@@ -461,11 +816,48 @@ class DSLC_Info_Box extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'Icon', 'live-composer-page-builder' ),
 			),
+			array(
+				'label' => __( 'Size ( Wrapper )', 'live-composer-page-builder' ),
+				'id' => 'css_icon_wrapper_width',
+				'std' => '84',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-image-inner',
+				'affect_on_change_rule' => 'width,height',
+				'section' => 'styling',
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
+				'ext' => 'px',
+				'min' => 0,
+				'max' => 300
+			),
+			array(
+				'label' => __( 'Size ( Icon )', 'live-composer-page-builder' ),
+				'id' => 'css_icon_width',
+				'std' => '31',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-image-inner .dslc-icon',
+				'affect_on_change_rule' => 'font-size',
+				'section' => 'styling',
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
+				'ext' => 'px'
+			),
+			array(
+				'label' => __( 'Box Shadow', 'live-composer-page-builder' ),
+				'id' => 'css_icon_box_shadow',
+				'std' => '',
+				'type' => 'box_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-image-inner',
+				'affect_on_change_rule' => 'box-shadow',
+				'section' => 'styling',
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
+			),
 
       /**
 			 * Image
 			 */
-
+			 
 			 array(
 				'label' => __( 'Image - File', 'live-composer-page-builder' ),
 				'id' => 'image_alt',
@@ -483,6 +875,81 @@ class DSLC_Info_Box extends DSLC_Module {
 				'tab' => __( 'Image', 'live-composer-page-builder' ),
 			),
 			array(
+				'label' => __( 'Align', 'live-composer-page-builder' ),
+				'id' => 'css_image_alt_align',
+				'std' => 'center',
+				'type' => 'text_align',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-image-alt-inner',
+				'affect_on_change_rule' => 'text-align',
+				'section' => 'styling',
+				'tab' => __( 'Image', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Border Color', 'live-composer-page-builder' ),
+				'id' => 'css_image_alt_border_color',
+				'std' => '',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-image-alt-inner img',
+				'affect_on_change_rule' => 'border-color',
+				'section' => 'styling',
+				'tab' => __( 'Image', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Border Width', 'live-composer-page-builder' ),
+				'id' => 'css_image_alt_border_width',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-image-alt-inner img',
+				'affect_on_change_rule' => 'border-width',
+				'ext' => 'px',
+				'section' => 'styling',
+				'tab' => __( 'Image', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Borders', 'live-composer-page-builder' ),
+				'id' => 'css_image_alt_border_trbl',
+				'std' => 'top right bottom left',
+				'type' => 'checkbox',
+				'choices' => array(
+					array(
+						'label' => __( 'Top', 'live-composer-page-builder' ),
+						'value' => 'top'
+					),
+					array(
+						'label' => __( 'Right', 'live-composer-page-builder' ),
+						'value' => 'right'
+					),
+					array(
+						'label' => __( 'Bottom', 'live-composer-page-builder' ),
+						'value' => 'bottom'
+					),
+					array(
+						'label' => __( 'Left', 'live-composer-page-builder' ),
+						'value' => 'left'
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-image-alt-inner img',
+				'affect_on_change_rule' => 'border-style',
+				'section' => 'styling',
+				'tab' => __( 'Image', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Border Radius', 'live-composer-page-builder' ),
+				'id' => 'css_image_alt_border_radius',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-image-alt-inner img',
+				'affect_on_change_rule' => 'border-radius',
+				'section' => 'styling',
+				'tab' => __( 'Image', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_image_alt_margin_bottom',
 				'std' => '25',
@@ -494,7 +961,221 @@ class DSLC_Info_Box extends DSLC_Module {
 				'tab' => __( 'Image', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
+			array(
+				'label' => __( 'Box Shadow', 'live-composer-page-builder' ),
+				'id' => 'css_image_alt_box_shadow',
+				'std' => '',
+				'type' => 'box_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-image-alt-inner img',
+				'affect_on_change_rule' => 'box-shadow',
+				'section' => 'styling',
+				'tab' => __( 'Image', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Box Shadow - Hover', 'live-composer-page-builder' ),
+				'id' => 'css_image_alt_box_shadow_hover',
+				'std' => '',
+				'type' => 'box_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box:hover .dslc-info-box-image-alt-inner img',
+				'affect_on_change_rule' => 'box-shadow',
+				'section' => 'styling',
+				'tab' => __( 'Image', 'live-composer-page-builder' ),
+			),
+			 
+			/**
+			 * Title
+			 */
 
+			array(
+				'label' => __( 'Align', 'live-composer-page-builder' ),
+				'id' => 'css_title_text_align',
+				'std' => 'inherit',
+				'type' => 'text_align',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-title',
+				'affect_on_change_rule' => 'text-align',
+				'section' => 'styling',
+				'tab' => __( 'Title', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Color', 'live-composer-page-builder' ),
+				'id' => 'css_title_color',
+				'std' => '#3d3d3d',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-title h4',
+				'affect_on_change_rule' => 'color',
+				'section' => 'styling',
+				'tab' => __( 'Title', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Font Size', 'live-composer-page-builder' ),
+				'id' => 'css_title_font_size',
+				'std' => '17',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-title h4',
+				'affect_on_change_rule' => 'font-size',
+				'section' => 'styling',
+				'tab' => __( 'Title', 'live-composer-page-builder' ),
+				'ext' => 'px'
+			),
+			array(
+				'label' => __( 'Font Weight', 'live-composer-page-builder' ),
+				'id' => 'css_title_font_weight',
+				'std' => '800',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-title h4',
+				'affect_on_change_rule' => 'font-weight',
+				'section' => 'styling',
+				'tab' => __( 'Title', 'live-composer-page-builder' ),
+				'ext' => '',
+				'min' => 100,
+				'max' => 900,
+				'increment' => 100
+			),
+			array(
+				'label' => __( 'Font Family', 'live-composer-page-builder' ),
+				'id' => 'css_title_font_family',
+				'std' => 'Lato',
+				'type' => 'font',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-title h4',
+				'affect_on_change_rule' => 'font-family',
+				'section' => 'styling',
+				'tab' => __( 'Title', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Letter Spacing', 'live-composer-page-builder' ),
+				'id' => 'css_title_letter_spacing',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-title h4',
+				'affect_on_change_rule' => 'letter-spacing',
+				'section' => 'styling',
+				'tab' => __( 'Title', 'live-composer-page-builder' ),
+				'ext' => 'px',
+				'min' => -50,
+				'max' => 50
+			),
+			array(
+				'label' => __( 'Line Height', 'live-composer-page-builder' ),
+				'id' => 'css_title_line_height',
+				'std' => '17',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-title h4',
+				'affect_on_change_rule' => 'line-height',
+				'section' => 'styling',
+				'tab' => __( 'Title', 'live-composer-page-builder' ),
+				'ext' => 'px'
+			),
+			array(
+				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
+				'id' => 'css_title_margin',
+				'std' => '21',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-title',
+				'affect_on_change_rule' => 'margin-bottom',
+				'section' => 'styling',
+				'tab' => __( 'Title', 'live-composer-page-builder' ),
+				'ext' => 'px'
+			),
+			
+
+			/**
+			 * Content
+			 */
+
+			array(
+				'label' => __( 'Align', 'live-composer-page-builder' ),
+				'id' => 'css_content_text_align',
+				'std' => 'inherit',
+				'type' => 'text_align',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-content',
+				'affect_on_change_rule' => 'text-align',
+				'section' => 'styling',
+				'tab' => __( 'Content', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Color', 'live-composer-page-builder' ),
+				'id' => 'css_content_color',
+				'std' => '',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-content, .dslc-info-box-content p',
+				'affect_on_change_rule' => 'color',
+				'section' => 'styling',
+				'tab' => __( 'Content', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Font Size', 'live-composer-page-builder' ),
+				'id' => 'css_content_font_size',
+				'std' => '14',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-content, .dslc-info-box-content p',
+				'affect_on_change_rule' => 'font-size',
+				'section' => 'styling',
+				'tab' => __( 'Content', 'live-composer-page-builder' ),
+				'ext' => 'px'
+			),
+			array(
+				'label' => __( 'Font Weight', 'live-composer-page-builder' ),
+				'id' => 'css_content_font_weight',
+				'std' => '400',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-content, .dslc-info-box-content p',
+				'affect_on_change_rule' => 'font-weight',
+				'section' => 'styling',
+				'tab' => __( 'Content', 'live-composer-page-builder' ),
+				'ext' => '',
+				'min' => 100,
+				'max' => 900,
+				'increment' => 100
+			),
+			array(
+				'label' => __( 'Font Family', 'live-composer-page-builder' ),
+				'id' => 'css_content_font_family',
+				'std' => 'Lato',
+				'type' => 'font',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-content, .dslc-info-box-content p',
+				'affect_on_change_rule' => 'font-family',
+				'section' => 'styling',
+				'tab' => __( 'Content', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Line Height', 'live-composer-page-builder' ),
+				'id' => 'css_content_line_height',
+				'std' => '23',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-content, .dslc-info-box-content p',
+				'affect_on_change_rule' => 'line-height',
+				'section' => 'styling',
+				'tab' => __( 'Content', 'live-composer-page-builder' ),
+				'ext' => 'px'
+			),
+			array(
+				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
+				'id' => 'css_content_margin',
+				'std' => '28',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-content, .dslc-info-box-content p',
+				'affect_on_change_rule' => 'margin-bottom',
+				'section' => 'styling',
+				'tab' => __( 'Content', 'live-composer-page-builder' ),
+				'ext' => 'px'
+			),
 
 			/**
 			 * Button
@@ -523,6 +1204,179 @@ class DSLC_Info_Box extends DSLC_Module {
 				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
 			),
 			array(
+				'label' => __( 'Border Width', 'live-composer-page-builder' ),
+				'id' => 'css_button_border_width',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a',
+				'affect_on_change_rule' => 'border-width',
+				'section' => 'styling',
+				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
+				'ext' => 'px'
+			),
+			array(
+				'label' => __( 'Borders', 'live-composer-page-builder' ),
+				'id' => 'css_button_border_trbl',
+				'std' => 'top right bottom left',
+				'type' => 'checkbox',
+				'choices' => array(
+					array(
+						'label' => __( 'Top', 'live-composer-page-builder' ),
+						'value' => 'top'
+					),
+					array(
+						'label' => __( 'Right', 'live-composer-page-builder' ),
+						'value' => 'right'
+					),
+					array(
+						'label' => __( 'Bottom', 'live-composer-page-builder' ),
+						'value' => 'bottom'
+					),
+					array(
+						'label' => __( 'Left', 'live-composer-page-builder' ),
+						'value' => 'left'
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a',
+				'affect_on_change_rule' => 'border-style',
+				'section' => 'styling',
+				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Border Color', 'live-composer-page-builder' ),
+				'id' => 'css_button_border_color',
+				'std' => '#d8d8d8',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a',
+				'affect_on_change_rule' => 'border-color',
+				'section' => 'styling',
+				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Border Color - Hover', 'live-composer-page-builder' ),
+				'id' => 'css_button_border_color_hover',
+				'std' => '',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a:hover',
+				'affect_on_change_rule' => 'border-color',
+				'section' => 'styling',
+				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Border Radius', 'live-composer-page-builder' ),
+				'id' => 'css_button_border_radius',
+				'std' => '3',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a',
+				'affect_on_change_rule' => 'border-radius',
+				'section' => 'styling',
+				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
+				'ext' => 'px'
+			),
+			array(
+				'label' => __( 'Color', 'live-composer-page-builder' ),
+				'id' => 'css_button_color',
+				'std' => '#ffffff',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a',
+				'affect_on_change_rule' => 'color',
+				'section' => 'styling',
+				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
+			),
+				array(
+				'label' => __( 'Color - Hover', 'live-composer-page-builder' ),
+				'id' => 'css_button_color_hover',
+				'std' => '#ffffff',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a:hover',
+				'affect_on_change_rule' => 'color',
+				'section' => 'styling',
+				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Font Size', 'live-composer-page-builder' ),
+				'id' => 'css_button_font_size',
+				'std' => '11',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a',
+				'affect_on_change_rule' => 'font-size',
+				'section' => 'styling',
+				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
+				'ext' => 'px'
+			),
+			array(
+				'label' => __( 'Font Weight', 'live-composer-page-builder' ),
+				'id' => 'css_button_font_weight',
+				'std' => '800',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a',
+				'affect_on_change_rule' => 'font-weight',
+				'section' => 'styling',
+				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
+				'ext' => '',
+				'min' => 100,
+				'max' => 900,
+				'increment' => 100
+			),
+			array(
+				'label' => __( 'Font Family', 'live-composer-page-builder' ),
+				'id' => 'css_button_font_family',
+				'std' => 'Open Sans',
+				'type' => 'font',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a',
+				'affect_on_change_rule' => 'font-family',
+				'section' => 'styling',
+				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Letter Spacing', 'live-composer-page-builder' ),
+				'id' => 'css_button_letter_spacing',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a',
+				'affect_on_change_rule' => 'letter-spacing',
+				'section' => 'styling',
+				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
+				'ext' => 'px',
+				'min' => -50,
+				'max' => 50
+			),
+			array(
+				'label' => __( 'Margin Top', 'live-composer-page-builder' ),
+				'id' => 'css_button_margin_top',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button',
+				'affect_on_change_rule' => 'margin-top',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Margin Right', 'live-composer-page-builder' ),
+				'id' => 'css_button_margin_right',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button',
+				'affect_on_change_rule' => 'margin-right',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Position', 'live-composer-page-builder' ),
 				'id' => 'button_pos',
 				'std' => 'bellow',
@@ -541,10 +1395,90 @@ class DSLC_Info_Box extends DSLC_Module {
 				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
 			),
 			array(
+				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
+				'id' => 'css_button_padding_vertical',
+				'std' => '13',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a',
+				'affect_on_change_rule' => 'padding-top,padding-bottom',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Padding Horizontal', 'live-composer-page-builder' ),
+				'id' => 'css_button_padding_horizontal',
+				'std' => '16',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a',
+				'affect_on_change_rule' => 'padding-left,padding-right',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Icon', 'live-composer-page-builder' ),
 				'id' => 'button_icon_id',
 				'std' => 'cog',
 				'type' => 'icon',
+				'section' => 'styling',
+				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Icon - Color', 'live-composer-page-builder' ),
+				'id' => 'css_button_icon_color',
+				'std' => '#b0c8eb',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a .dslc-icon',
+				'affect_on_change_rule' => 'color',
+				'section' => 'styling',
+				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Icon - Color Hover', 'live-composer-page-builder' ),
+				'id' => 'css_button_icon_color_hover',
+				'std' => '',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a:hover .dslc-icon',
+				'affect_on_change_rule' => 'color',
+				'section' => 'styling',
+				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Icon - Margin Right', 'live-composer-page-builder' ),
+				'id' => 'css_button_icon_margin',
+				'std' => '5',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a .dslc-icon',
+				'affect_on_change_rule' => 'margin-right',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Box Shadow', 'live-composer-page-builder' ),
+				'id' => 'css_button_box_shadow',
+				'std' => '',
+				'type' => 'box_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-primary',
+				'affect_on_change_rule' => 'box-shadow',
+				'section' => 'styling',
+				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Box Shadow - Hover', 'live-composer-page-builder' ),
+				'id' => 'css_button_box_shadow_hover',
+				'std' => '',
+				'type' => 'box_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-primary:hover',
+				'affect_on_change_rule' => 'box-shadow',
 				'section' => 'styling',
 				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
 			),
@@ -576,10 +1510,263 @@ class DSLC_Info_Box extends DSLC_Module {
 				'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
 			),
 			array(
+				'label' => __( 'Border Width', 'live-composer-page-builder' ),
+				'id' => 'css_button_2_border_width',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary',
+				'affect_on_change_rule' => 'border-width',
+				'section' => 'styling',
+				'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
+				'ext' => 'px'
+			),
+			array(
+				'label' => __( 'Borders', 'live-composer-page-builder' ),
+				'id' => 'css_button_2_border_trbl',
+				'std' => 'top right bottom left',
+				'type' => 'checkbox',
+				'choices' => array(
+					array(
+						'label' => __( 'Top', 'live-composer-page-builder' ),
+						'value' => 'top'
+					),
+					array(
+						'label' => __( 'Right', 'live-composer-page-builder' ),
+						'value' => 'right'
+					),
+					array(
+						'label' => __( 'Bottom', 'live-composer-page-builder' ),
+						'value' => 'bottom'
+					),
+					array(
+						'label' => __( 'Left', 'live-composer-page-builder' ),
+						'value' => 'left'
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary',
+				'affect_on_change_rule' => 'border-style',
+				'section' => 'styling',
+				'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Border Color', 'live-composer-page-builder' ),
+				'id' => 'css_button_2_border_color',
+				'std' => '#d8d8d8',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary',
+				'affect_on_change_rule' => 'border-color',
+				'section' => 'styling',
+				'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Border Color - Hover', 'live-composer-page-builder' ),
+				'id' => 'css_button_2_border_color_hover',
+				'std' => '',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary:hover',
+				'affect_on_change_rule' => 'border-color',
+				'section' => 'styling',
+				'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Border Radius', 'live-composer-page-builder' ),
+				'id' => 'css_button_2_border_radius',
+				'std' => '3',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary',
+				'affect_on_change_rule' => 'border-radius',
+				'section' => 'styling',
+				'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
+				'ext' => 'px'
+			),
+			array(
+				'label' => __( 'Color', 'live-composer-page-builder' ),
+				'id' => 'css_button_2_color',
+				'std' => '#ffffff',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary',
+				'affect_on_change_rule' => 'color',
+				'section' => 'styling',
+				'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
+			),
+				array(
+				'label' => __( 'Color - Hover', 'live-composer-page-builder' ),
+				'id' => 'css_button_2_color_hover',
+				'std' => '#ffffff',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary:hover',
+				'affect_on_change_rule' => 'color',
+				'section' => 'styling',
+				'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Font Size', 'live-composer-page-builder' ),
+				'id' => 'css_button_2_font_size',
+				'std' => '11',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary',
+				'affect_on_change_rule' => 'font-size',
+				'section' => 'styling',
+				'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
+				'ext' => 'px'
+			),
+			array(
+				'label' => __( 'Font Weight', 'live-composer-page-builder' ),
+				'id' => 'css_button_2_font_weight',
+				'std' => '800',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary',
+				'affect_on_change_rule' => 'font-weight',
+				'section' => 'styling',
+				'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
+				'ext' => '',
+				'min' => 100,
+				'max' => 900,
+				'increment' => 100
+			),
+			array(
+				'label' => __( 'Font Family', 'live-composer-page-builder' ),
+				'id' => 'css_button_2_font_family',
+				'std' => 'Open Sans',
+				'type' => 'font',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary',
+				'affect_on_change_rule' => 'font-family',
+				'section' => 'styling',
+				'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Letter Spacing', 'live-composer-page-builder' ),
+				'id' => 'css_button_2_letter_spacing',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary',
+				'affect_on_change_rule' => 'letter-spacing',
+				'section' => 'styling',
+				'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
+				'ext' => 'px',
+				'min' => -50,
+				'max' => 50
+			),
+			array(
+				'label' => __( 'Margin Left', 'live-composer-page-builder' ),
+				'id' => 'css_button_2_mleft',
+				'std' => '5',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary',
+				'affect_on_change_rule' => 'margin-left',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Margin Top', 'live-composer-page-builder' ),
+				'id' => 'css_button_2_mtop',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary',
+				'affect_on_change_rule' => 'margin-top',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
+				'id' => 'css_button_2_padding_vertical',
+				'std' => '13',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary',
+				'affect_on_change_rule' => 'padding-top,padding-bottom',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Padding Horizontal', 'live-composer-page-builder' ),
+				'id' => 'css_button_2_padding_horizontal',
+				'std' => '16',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary',
+				'affect_on_change_rule' => 'padding-left,padding-right',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Icon', 'live-composer-page-builder' ),
 				'id' => 'button_2_icon_id',
 				'std' => 'cog',
 				'type' => 'icon',
+				'section' => 'styling',
+				'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Icon - Color', 'live-composer-page-builder' ),
+				'id' => 'css_button_2_icon_color',
+				'std' => '#b0c8eb',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary .dslc-icon',
+				'affect_on_change_rule' => 'color',
+				'section' => 'styling',
+				'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Icon - Color Hover', 'live-composer-page-builder' ),
+				'id' => 'css_button_2_icon_color_hover',
+				'std' => '',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary:hover .dslc-icon',
+				'affect_on_change_rule' => 'color',
+				'section' => 'styling',
+				'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Icon - Margin Right', 'live-composer-page-builder' ),
+				'id' => 'css_button_2_icon_margin',
+				'std' => '5',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary .dslc-icon',
+				'affect_on_change_rule' => 'margin-right',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Box Shadow', 'live-composer-page-builder' ),
+				'id' => 'css_button_2_box_shadow',
+				'std' => '',
+				'type' => 'box_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary',
+				'affect_on_change_rule' => 'box-shadow',
+				'section' => 'styling',
+				'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Box Shadow - Hover', 'live-composer-page-builder' ),
+				'id' => 'css_button_2_box_shadow_hover',
+				'std' => '',
+				'type' => 'box_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary:hover',
+				'affect_on_change_rule' => 'box-shadow',
 				'section' => 'styling',
 				'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
 			),
@@ -1265,11 +2452,8 @@ class DSLC_Info_Box extends DSLC_Module {
 
 		);
 
-		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array('hover_opts' => false) ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array( 'hover_opts' => false ) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
-
-		$css = file_get_contents( __DIR__ . '/process-styles.css' );
-		$dslc_options = array_merge( $dslc_options, $this->process_css( $css ) );
 
 		return apply_filters( 'dslc_module_options', $dslc_options, $this->module_id );
 
@@ -1294,7 +2478,7 @@ class DSLC_Info_Box extends DSLC_Module {
 			$elements = explode( ' ', trim( $elements ) );
 		else
 			$elements = array();
-
+		
 		$image_alt = $options['image_alt'];
 		$image_alt_link_url = $options['image_alt_link_url'];
 
@@ -1302,12 +2486,12 @@ class DSLC_Info_Box extends DSLC_Module {
 
 			<div class="dslc-info-box dslc-info-box-icon-pos-<?php echo $options['icon_position']; ?>">
 
-				<div class="dslc-info-box-wrapper"<?php if ( $dslc_is_admin ) echo ' data-exportable-content="div"'; ?>>
+				<div class="dslc-info-box-wrapper">
 
 					<?php if ( $options['button_pos'] == 'aside' && in_array( 'button', $elements ) ) : ?>
 						<div class="dslc-info-box-button dslc-info-box-button-aside">
 							<?php if ( isset( $options['button_link'] ) && ! empty( $options['button_link'] ) ) : ?>
-								<a href="<?php echo $options['button_link']; ?>" target="<?php echo $options['button_target']; ?>" <?php if ( $options['link_nofollow'] ) echo 'rel="nofollow"'; ?> class="dslc-primary">
+								<a href="<?php echo $options['button_link']; ?>" target="<?php echo $options['button_target']; ?>" class="dslc-primary">
 									<?php if ( isset( $options['button_icon_id'] ) && $options['button_icon_id'] != '' ) : ?>
 										<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 									<?php endif; ?>
@@ -1315,9 +2499,9 @@ class DSLC_Info_Box extends DSLC_Module {
 										<span class="dslca-editable-content" data-id="button_title" data-type="simple" contenteditable><?php echo $options['button_title']; ?></span>
 									<?php else : echo $options['button_title']; endif; ?>
 								</a>
-							<?php endif; ?>
+							<?php endif; ?>	
 							<?php if ( isset( $options['button_2_link'] ) && ! empty( $options['button_2_link'] ) ) : ?>
-								<a href="<?php echo $options['button_2_link']; ?>" target="<?php echo $options['button_2_target']; ?>" <?php if ( $options['link_nofollow'] ) echo 'rel="nofollow"'; ?> class="dslc-secondary">
+								<a href="<?php echo $options['button_2_link']; ?>" target="<?php echo $options['button_2_target']; ?>" class="dslc-secondary">
 									<?php if ( isset( $options['button_2_icon_id'] ) && $options['button_2_icon_id'] != '' ) : ?>
 										<span class="dslc-icon dslc-icon-<?php echo $options['button_2_icon_id']; ?>"></span>
 									<?php endif; ?>
@@ -1336,21 +2520,19 @@ class DSLC_Info_Box extends DSLC_Module {
 								<div class="dslc-info-box-image-inner">
 									<span class="dslc-icon dslc-icon-<?php echo $options['icon_id']; ?> dslc-init-center"></span>
 									<?php if ( ! empty( $options['icon_link'] ) ) : ?>
-										<a class="dslc-info-box-image-link" href="<?php echo $options['icon_link']; ?>" <?php if ( $options['link_nofollow'] ) echo 'rel="nofollow"'; ?> target="<?php echo $options['icon_link_target']; ?>"></a>
+										<a class="dslc-info-box-image-link" href="<?php echo $options['icon_link']; ?>" target="<?php echo $options['icon_link_target']; ?>"></a>
 									<?php endif; ?>
 								</div><!-- .dslc-info-box-image-inner -->
 							</div><!-- .dslc-info-box-image -->
 						<?php endif; ?>
-
+						
 						<?php if ( in_array( 'image', $elements ) && $image_alt ) : ?>
 							<div class="dslc-info-box-image-alt">
 								<div class="dslc-info-box-image-alt-inner">
-									<?php if ( ! $image_alt_link_url ) : ?>
-										<img src="<?php echo esc_url( $image_alt ); ?>">
+									<?php if ( ! $image_alt_link_url) : ?>
+										<img src="<?php echo esc_url($image_alt);?>">
 									<?php else : ?>
-										<a href="<?php echo esc_url( $image_alt_link_url ); ?>" <?php if ( $options['link_nofollow'] ) echo 'rel="nofollow"'; ?>>
-											<img src="<?php echo esc_url( $image_alt ); ?>">
-										</a>
+										<a href="<?php echo esc_url($image_alt_link_url);?>"><img src="<?php echo esc_url($image_alt);?>"></a>
 									<?php endif; ?>
 								</div><!-- .dslc-info-box-image-alt-inner -->
 							</div><!-- .dslc-info-box-image-alt -->
@@ -1361,16 +2543,10 @@ class DSLC_Info_Box extends DSLC_Module {
 							<?php if ( in_array( 'title', $elements ) ) : ?>
 								<div class="dslc-info-box-title">
 									<?php if ( $dslc_is_admin ) : ?>
-										<h4 class="dslca-editable-content" data-id="title" data-type="simple" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?>>
-											<?php echo stripslashes( $options['title'] ); ?>
-										</h4>
+										<h4 class="dslca-editable-content" data-id="title" data-type="simple" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?>><?php echo stripslashes( $options['title'] ); ?></h4>
 									<?php else : ?>
 										<?php if ( $options['title_link'] != '' ) : ?>
-											<h4>
-												<a href="<?php echo $options['title_link']; ?>" target="<?php echo $options['title_link_target']; ?>" <?php if ( $options['link_nofollow'] ) echo 'rel="nofollow"'; ?>>
-													<?php echo stripslashes( $options['title'] ); ?>
-												</a>
-											</h4>
+											<h4><a href="<?php echo $options['title_link']; ?>" target="<?php echo $options['title_link_target']; ?>"><?php echo stripslashes( $options['title'] ); ?></a></h4>
 										<?php else : ?>
 											<h4><?php echo stripslashes( $options['title'] ); ?></h4>
 										<?php endif; ?>
@@ -1381,14 +2557,10 @@ class DSLC_Info_Box extends DSLC_Module {
 							<?php if ( in_array( 'content', $elements ) ) : ?>
 								<div class="dslc-info-box-content">
 									<?php if ( $dslc_is_admin ) : ?>
-										<div class="dslca-editable-content" data-type='simple' contenteditable data-id="content">
+										<div class="dslca-editable-content" data-id="content">								
 											<?php echo stripslashes( $options['content'] ); ?>
 										</div><!-- .dslca-editable-content -->
-										<div class="dslca-wysiwyg-actions-edit">
-											<span class="dslca-wysiwyg-actions-edit-hook">
-												<?php _e( 'Edit Content', 'live-composer-page-builder' ); ?>
-											</span>
-										</div>
+										<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook"><?php _e( 'Edit Content', 'live-composer-page-builder' ); ?></span></div>
 									<?php else : ?>
 										<?php echo do_shortcode( stripslashes( $options['content'] ) ); ?>
 									<?php endif; ?>
@@ -1398,26 +2570,22 @@ class DSLC_Info_Box extends DSLC_Module {
 							<?php if ( $options['button_pos'] == 'bellow' && in_array( 'button', $elements ) ) : ?>
 								<div class="dslc-info-box-button">
 									<?php if ( isset( $options['button_link'] ) && ! empty( $options['button_link'] ) ) : ?>
-										<a href="<?php echo $options['button_link']; ?>" target="<?php echo $options['button_target']; ?>" <?php if ( $options['link_nofollow'] ) echo 'rel="nofollow"'; ?> class="dslc-primary">
+										<a href="<?php echo $options['button_link']; ?>" target="<?php echo $options['button_target']; ?>" class="dslc-primary">
 											<?php if ( isset( $options['button_icon_id'] ) && $options['button_icon_id'] != '' ) : ?>
 												<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 											<?php endif; ?>
 											<?php if ( $dslc_is_admin ) : ?>
-												<span class="dslca-editable-content" data-id="button_title" data-type="simple" contenteditable>
-													<?php echo $options['button_title']; ?>
-												</span>
+												<span class="dslca-editable-content" data-id="button_title" data-type="simple" contenteditable><?php echo $options['button_title']; ?></span>
 											<?php else : echo $options['button_title']; endif; ?>
 										</a>
-									<?php endif; ?>
+									<?php endif; ?>	
 									<?php if ( isset( $options['button_2_link'] ) && ! empty( $options['button_2_link'] ) ) : ?>
-										<a href="<?php echo $options['button_2_link']; ?>" target="<?php echo $options['button_2_target']; ?>" <?php if ( $options['link_nofollow'] ) echo 'rel="nofollow"'; ?> class="dslc-secondary">
+										<a href="<?php echo $options['button_2_link']; ?>" target="<?php echo $options['button_2_target']; ?>" class="dslc-secondary">
 											<?php if ( isset( $options['button_2_icon_id'] ) && $options['button_2_icon_id'] != '' ) : ?>
 												<span class="dslc-icon dslc-icon-<?php echo $options['button_2_icon_id']; ?>"></span>
 											<?php endif; ?>
 											<?php if ( $dslc_is_admin ) : ?>
-												<span class="dslca-editable-content" data-id="button_2_title" data-type="simple" contenteditable>
-													<?php echo $options['button_2_title']; ?>
-												</span>
+												<span class="dslca-editable-content" data-id="button_2_title" data-type="simple" contenteditable><?php echo $options['button_2_title']; ?></span>
 											<?php else : echo $options['button_2_title']; endif; ?>
 										</a>
 									<?php endif; ?>

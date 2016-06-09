@@ -1,6 +1,4 @@
 <div class="wrap">
-	<?php echo dslc_get_c_option( 'lc_max_width1', 'cool_stuff' ); ?>
-
 	<h2 id="dslc-main-title"><?php echo $extension['title'] ?></h2>
 	<div class="wp-clearfix" id="dslc-settings-frame">
 
@@ -22,7 +20,7 @@
 		<div id="dslc-setings-liquid">
 
 			<form method="post" action="options.php" class="dslc-settings-form">
-			<?php echo settings_fields( 'dslc_custom_options_' . $extension['extensionId'] ); ?>
+			<?php echo settings_fields( 'dslc_custom_options_' . $extension['extension_id'] ); ?>
 
 				<?php $cnt = 0; foreach( $extension['sections'] as $section ) {  $cnt++;?>
 
@@ -33,7 +31,7 @@
 					<?php }?>
 
 					<div class="dslc-panel">
-							<?php do_settings_sections( 'dslc_' . $extension['extensionId'] . '_' . $section['id'] ); ?>
+							<?php do_settings_sections( 'dslc_' . $extension['extension_id'] . '_' . $section['id'] ); ?>
 							<?php submit_button(); ?>
 					</div>
 				<?php } ?>

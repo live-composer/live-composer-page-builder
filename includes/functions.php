@@ -903,3 +903,23 @@ function pre( $str )
 	print_r( $str );
 	echo "</pre>";
 }
+
+/**
+ * Loads modules in WP-style
+ *
+ * @param  string $dir_path
+ * @param  string $init_filename - by default init php file is named like dir,
+ *                                 but it can be overrided
+ */
+function load_modules( $dir_path, $init_filename = '' )
+{
+	$directories = glob( $dir_path . '/*', GLOB_ONLYDIR );
+	foreach( $directories as $dir ) {
+		$plugin_file_name = explode( '/', $dir );
+		$init_filename = ( $init_filename != '' ) ? $init_filename : array_pop( $plugin_file_name ) . '.php';
+		$widgetpath = $dir . '/' . $init_filename;
+		if ( file_exists( $widgetpath ) ) {
+			require_once $widgetpath;
+		}
+	}
+}

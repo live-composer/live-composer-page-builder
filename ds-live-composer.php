@@ -80,25 +80,7 @@
 	include DS_LIVE_COMPOSER_ABS . '/includes/post-templates.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/other.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/options.extension.class.php';
-	include DS_LIVE_COMPOSER_ABS . '/includes/libs/cssparser.php';
-	include DS_LIVE_COMPOSER_ABS . '/includes/libs/panel.options.class.php';
-
-	/**
-	 * Tutorials disabled by default
-	 *
-	 * Use the next call to activate tutorilas form your theme
-	 * add_filter( 'dslc_tutorials', '__return_true' );
-	 *
-	 * @since 1.0.7
-	 */
-
-	add_action( 'after_setup_theme', 'dslc_tutorials_load' );
-	function dslc_tutorials_load() {
-		$dslc_tutorials = false;
-		if ( apply_filters( 'dslc_tutorials', $dslc_tutorials ) ) {
-			include DS_LIVE_COMPOSER_ABS . '/includes/tutorials/tutorial.php';
-		}
-	}
+	include DS_LIVE_COMPOSER_ABS . '/includes/main.class.php';
 
 	$cap_page = dslc_get_option( 'lc_min_capability_page', 'dslc_plugin_options_access_control' );
 	if ( ! $cap_page ) $cap_page = 'publish_posts';
@@ -110,70 +92,6 @@
 	 */
 
 	include DS_LIVE_COMPOSER_ABS . '/includes/class.module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/posts/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/blog/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/projects/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/galleries/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/infobox/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/staff/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/woocommerce/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/separator/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/downloads/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/testimonials/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/text-simple/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/html/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tabs/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/sliders/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/partners/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/widgets/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/social/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/notification/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/button/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/image/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/progress-bars/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/accordion/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-title/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-content/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-excerpt/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-meta/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-downloads-button/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-thumbnail/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-gallery-slider/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-project-slider/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-comments/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-comments-form/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-staff-social/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/icon/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/navigation/module.php';
+	load_modules( DS_LIVE_COMPOSER_ABS . "/modules", "module.php" );
 
-	/**
-	 * Activation Hook
-	 */
-
-	function dslc_on_activation() {
-
-		set_transient( '_dslc_activation_redirect_1', true, 60 );
-
-	} register_activation_hook( __FILE__, 'dslc_on_activation' );
-
-	add_action( 'admin_init', 'dslc_welcome' );
-	function dslc_welcome() {
-
-		// Make Welcome screen optional for the theme developers
-		$show_welcome_screen = true;
-   	if ( apply_filters( 'dslc_show_welcome_screen', $show_welcome_screen ) )
-   		return;
-
-		// Bail if no activation redirect
-		if ( ! get_transient( '_dslc_activation_redirect_1' ) )
-			return;
-
-		// Delete the redirect transient
-		delete_transient( '_dslc_activation_redirect_1' );
-
-		// Bail if activating from network, or bulk
-		if ( is_network_admin() || isset( $_GET['activate-multi'] ) )
-			return;
-
-		wp_safe_redirect( admin_url( 'admin.php?page=dslc_getting_started' ) ); exit;
-	}
+	register_activation_hook( __FILE__, 'dslc_on_activation' );

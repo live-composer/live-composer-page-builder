@@ -1890,18 +1890,18 @@ class DSLC_Module {
 
 			foreach( $rules as $rule => $value ) {
 
-				$out = array_merge(
-				    $out, DSLC_Panel_Style_Opts::get_option(
-					    array(
-				        	'selector' => $selector,
-				        	'tab' => $tab,
-				        	'rule' => $rule,
-				        	'value' => $value,
-				        	'id' => $id,
-				        	'label' => $label
-						)
+				$merge_ar = DSLC_Panel_Style_Opts::get_option(
+				    array(
+			        	'selector' => $selector,
+			        	'tab' => $tab,
+			        	'rule' => $rule,
+			        	'value' => $value,
+			        	'id' => $id,
+			        	'label' => $label
 					)
 				);
+
+				$out = array_merge( $out, $merge_ar );
 			}
 		}
 
@@ -2136,11 +2136,9 @@ class DSLC_Module {
 							if ( isset( $user_options[$option_id] ) && $user_options[$option_id] == $option['std'] ) {
 								unset( $user_options_no_defaults[$option_id] );
 							}
-
 						?>
 
 						<textarea class="dslca-module-option-front" data-id="<?php echo $option_id; ?>"><?php echo stripslashes( $option_value ); ?></textarea>
-
 					<?php endforeach; ?>
 
 					<?php foreach ( $user_options as $user_option_id => $user_option_val ) : ?>
