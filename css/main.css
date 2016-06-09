@@ -614,10 +614,6 @@ body.rtl .dslc-last-col {
 		display: none;
 	}
 
-.dslc-init-center {
-	visibility: hidden;
-}
-
 .dslc-init-topleft {
 	position: absolute !important;
 	top: 0 !important;

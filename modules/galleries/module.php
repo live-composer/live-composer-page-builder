@@ -792,6 +792,7 @@ class DSLC_Galleries extends DSLC_Module {
 				'affect_on_change_rule' => 'opacity',
 				'section' => 'styling',
 				'tab' => __( 'Count', 'live-composer-page-builder' ),
+				'ext' => '',
 				'min' => 0,
 				'max' => 1,
 				'ext' => '',
