@@ -12,7 +12,7 @@ class DSLC_Info_Box extends DSLC_Module {
 		$this->module_id = 'DSLC_Info_Box';
 		$this->module_title = __( 'Info Box', 'live-composer-page-builder' );
 		$this->module_icon = 'mouse-pointer';//'info';
-		$this->module_category = 'elements';
+		$this->module_category = 'General';
 
 	}
 
@@ -1840,7 +1840,7 @@ class DSLC_Info_Box extends DSLC_Module {
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
@@ -1851,7 +1851,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -1863,7 +1863,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'max' => 500,
 				'increment' => 1,
 				'ext' => 'px'
@@ -1877,7 +1877,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -1889,7 +1889,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-wrapper',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'max' => 500,
 				'increment' => 1,
 				'ext' => 'px'
@@ -1903,7 +1903,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-wrapper',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -1915,7 +1915,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-main-wrap',
 				'affect_on_change_rule' => 'max-width',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => '%'
 			),
 			array(
@@ -1927,7 +1927,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-image',
 				'affect_on_change_rule' => 'margin-top',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 				'min' => -100,
 				'max' => 50
@@ -1941,7 +1941,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-image',
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 				'min' => 0,
 				'max' => 100
@@ -1955,7 +1955,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-image-inner',
 				'affect_on_change_rule' => 'width,height',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 				'min' => 0,
 				'max' => 300
@@ -1969,7 +1969,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-image-inner .dslc-icon',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -1981,7 +1981,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-title h4',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -1993,7 +1993,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-title h4',
 				'affect_on_change_rule' => 'line-height',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -2005,7 +2005,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-title',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -2017,7 +2017,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-content, .dslc-info-box-content p',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -2029,7 +2029,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-content, .dslc-info-box-content p',
 				'affect_on_change_rule' => 'line-height',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -2041,7 +2041,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-content',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -2053,7 +2053,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-button a',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -2065,7 +2065,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-button',
 				'affect_on_change_rule' => 'margin-top',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -2077,7 +2077,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-button',
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -2089,7 +2089,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-button a',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -2101,7 +2101,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-button a',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -2113,7 +2113,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-button a .dslc-icon',
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -2126,7 +2126,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_rule' => 'margin-left',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( '2nd Button Margin Top', 'live-composer-page-builder' ),
@@ -2138,7 +2138,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_rule' => 'margin-top',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 
 			/**
@@ -2161,7 +2161,7 @@ class DSLC_Info_Box extends DSLC_Module {
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
@@ -2172,7 +2172,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -2184,7 +2184,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'max' => 500,
 				'increment' => 1,
 				'ext' => 'px'
@@ -2198,7 +2198,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -2210,7 +2210,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-wrapper',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'max' => 500,
 				'increment' => 1,
 				'ext' => 'px'
@@ -2224,7 +2224,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-wrapper',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -2236,7 +2236,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-main-wrap',
 				'affect_on_change_rule' => 'max-width',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => '%'
 			),
 			array(
@@ -2248,7 +2248,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-image',
 				'affect_on_change_rule' => 'margin-top',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 				'min' => -100,
 				'max' => 50
@@ -2262,7 +2262,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-image',
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 				'min' => 0,
 				'max' => 100
@@ -2276,7 +2276,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-image-inner',
 				'affect_on_change_rule' => 'width,height',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 				'min' => 0,
 				'max' => 300
@@ -2290,7 +2290,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-image-inner .dslc-icon',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -2302,7 +2302,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-title h4',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -2314,7 +2314,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-title h4',
 				'affect_on_change_rule' => 'line-height',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -2326,7 +2326,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-title',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -2338,7 +2338,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-content, .dslc-info-box-content p',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -2350,7 +2350,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-content, .dslc-info-box-content p',
 				'affect_on_change_rule' => 'line-height',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -2362,7 +2362,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-content',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -2374,7 +2374,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-button a',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -2386,7 +2386,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-button',
 				'affect_on_change_rule' => 'margin-top',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -2398,7 +2398,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-button',
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -2410,7 +2410,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-button a',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -2422,7 +2422,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-button a',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -2434,7 +2434,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-button a .dslc-icon',
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -2447,7 +2447,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_rule' => 'margin-left',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( '2nd Button Margin Top', 'live-composer-page-builder' ),
@@ -2459,7 +2459,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_rule' => 'margin-top',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 
 		);

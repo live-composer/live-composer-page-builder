@@ -12,14 +12,14 @@ class DSLC_TP_Meta extends DSLC_Module {
 		$this->module_id = 'DSLC_TP_Meta';
 		$this->module_title = 'Meta';
 		$this->module_icon = 'info';
-		$this->module_category = 'single';
+		$this->module_category = 'For Templates';
 
 	}
 
-	function options() {	
+	function options() {
 
 		$dslc_options = array(
-			
+
 			array(
 				'label' => __( 'Show On', 'live-composer-page-builder' ),
 				'id' => 'css_show_on',
@@ -402,7 +402,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'typography', 'live-composer-page-builder' ),
 			),
-			
+
 
 			/**
 			 * Responsive Tablet
@@ -424,7 +424,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
@@ -435,7 +435,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-meta',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -447,7 +447,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-meta',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -459,7 +459,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 				'affect_on_change_el' => 'li, li a',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 
@@ -483,7 +483,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
@@ -494,7 +494,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-meta',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -506,7 +506,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-meta',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -518,7 +518,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 				'affect_on_change_el' => 'li, li a',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 
@@ -557,7 +557,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 		$comments_output = '';
 
 		if ( comments_open( $post_id ) ) {
-			
+
 			if ( $num_comments == 0 )
 				$comments = __( 'No Comments' );
 			elseif ( $num_comments > 1 )
@@ -583,7 +583,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 
 				<div class="dslc-tp-meta dslc-tp-meta-<?php echo $options['format']; ?>">
 					<ul class="dslc-clearfix">
-						
+
 						<?php if ( in_array( 'date', $tp_elements ) ) : ?>
 							<li><?php echo get_the_time( get_option( 'date_format' ), $post_id ); ?></li>
 						<?php endif; ?>
@@ -617,7 +617,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 								<?php
 									foreach ( $post_type_taxonomies as $taxonomy ) {
 										if ( $taxonomy->hierarchical == true ) {
-											
+
 											$cats = get_the_terms( get_the_ID(), $taxonomy->name );
 											$cats_count = 0;
 											if ( $cats ) {
@@ -644,7 +644,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 								<?php
 									foreach ( $post_type_taxonomies as $taxonomy ) {
 										if ( $taxonomy->hierarchical == false ) {
-											
+
 											$cats = get_the_terms( get_the_ID(), $taxonomy->name );
 											$tags_count = 0;
 											if ( $cats ) {

@@ -232,9 +232,8 @@ var dslcDebug = false;
 		if ( section == '.dslca-module-edit' ) {
 			jQuery('.dslca-currently-editing')
 				.show()
-				.css( 'background-color', newColor )
 					.find('strong')
-					.text( jQuery('.dslca-module-being-edited').attr('title') + ' module' );
+					.text( jQuery('.dslca-module-being-edited').attr('title') + ' element' );
 		} else if ( section == '.dslca-modules-section-edit' ) {
 			jQuery('.dslca-currently-editing')
 				.show()
@@ -273,7 +272,7 @@ var dslcDebug = false;
 		if ( dslcDebug ) console.log( 'dslc_generate_filters' );
 
 		// Vars
-		var el, filters = [], filtersHTML = '<span data-origin="">ALL</span>', els = jQuery('.dslca-section:visible .dslca-origin');
+		var el, filters = [], filtersHTML = '<span data-origin="">All Elements</span>', els = jQuery('.dslca-section:visible .dslca-origin');
 
 		// Go through each and generate the filters
 		els.each(function(){
@@ -323,7 +322,7 @@ var dslcDebug = false;
 			appendTo: "body",
 			helper: "clone",
 			cursor: 'default',
-			cursorAt: { top: 50, left: 30 },
+			// cursorAt: { top: 50, left: 30 },
 			containment: 'body',
 			start: function(e, ui){
 				jQuery('body').removeClass('dslca-new-module-drag-not-in-progress').addClass('dslca-new-module-drag-in-progress');
@@ -371,6 +370,8 @@ var dslcDebug = false;
 			items: ".dslc-modules-area",
 			handle: '.dslca-move-modules-area-hook:not(".dslca-action-disabled")',
 			placeholder: 'dslca-modules-area-placeholder',
+			// helper: 'clone',
+			cursor: 'grabbing',
 			cursorAt: { top: 0, left: 0 },
 			tolerance : 'intersect',
 			scroll: true,
@@ -697,10 +698,17 @@ var dslcDebug = false;
 
 			e.preventDefault();
 
+			// Do nothing if clicked on active tab
+			if ( $(this).hasClass('dslca-active') ) {
+				return;
+			}
+
 			var sectionTitle = $(this).data('section');
 			dslc_show_section( sectionTitle );
 
-			$(this).addClass('dslca-active').siblings('.dslca-go-to-section-hook').removeClass('dslca-active');
+			if ( $(this).hasClass('dslca-go-to-section-modules') || $(this).hasClass('dslca-go-to-section-templates')  ) {
+				$(this).addClass('dslca-active').siblings('.dslca-go-to-section-hook').removeClass('dslca-active');
+			}
 
 		});
 
@@ -754,9 +762,9 @@ var dslcDebug = false;
 			var section = $(this).closest('.dslca-section');
 
 			if ( section.hasClass('dslca-templates-load') ) {
-				$('.dslca-section-title-filter-curr', section).text( $(this).text() + ' TEMPLATES' );
+				$('.dslca-section-title-filter-curr', section).text( $(this).text() + ' Templates' );
 			} else {
-				$('.dslca-section-title-filter-curr', section).text( $(this).text() + ' MODULES' );
+				$('.dslca-section-title-filter-curr', section).text( $(this).text());
 			}
 
 			$('.dslca-section-scroller-inner').css({ left : 0 });
@@ -901,7 +909,7 @@ var dslcDebug = false;
 		var scrollerCurr = scroller.data('current');
 
 		// Two places before current
-		var scrollerNew = scroller.find('.dslca-scroller-item:eq(' + scrollerCurr +  ')').prevAll('.dslca-scroller-item:visible').eq(1).index();
+		var scrollerNew = scroller.find('.dslca-scroller-item:eq(' + scrollerCurr +  ')').prevAll('.dslca-scroller-item:visible').eq(3).index();
 
 		// One place before current
 		var scrollerNewAlt = scroller.find('.dslca-scroller-item:eq(' + scrollerCurr +  ')').prevAll('.dslca-scroller-item:visible').eq(0).index();
@@ -928,7 +936,7 @@ var dslcDebug = false;
 		var scrollerCurr = scroller.data('current');
 
 		// Two places after current
-		var scrollerNew = scroller.find('.dslca-scroller-item:eq(' + scrollerCurr +  ')').nextAll('.dslca-scroller-item:visible').eq(1).index();
+		var scrollerNew = scroller.find('.dslca-scroller-item:eq(' + scrollerCurr +  ')').nextAll('.dslca-scroller-item:visible').eq(3).index();
 
 		// One place after current
 		var scrollerNewAlt = scroller.find('.dslca-scroller-item:eq(' + scrollerCurr +  ')').nextAll('.dslca-scroller-item:visible').eq(0).index();
@@ -1313,15 +1321,31 @@ var dslcDebug = false;
 
 				window.location = dslcTarget;
 
-			} else if ( dslcAction == 'delete_module' ) {
+			} else if ( 'delete_module' === dslcAction ) {
 
 				var module = dslcTarget.closest('.dslc-module-front');
 				dslc_delete_module( module );
 
-			} else if ( dslcAction == 'delete_modules_area' ) {
+			} else if ( 'delete_modules_area' === dslcAction ) {
 
 				var modulesArea = dslcTarget.closest('.dslc-modules-area');
-				dslc_modules_area_delete( modulesArea );
+				var parentSectionContainer = modulesArea.closest('.dslc-modules-section-inner');
+
+					if ( 2 > parentSectionContainer.find('.dslc-modules-area').length ) {
+						// Trying to delete the only module in section > delete section as well
+
+						// Don't delete latest module area in the latest section on the page
+						if (2 <= modulesArea.closest('.dslc-content').find('.dslc-modules-section').length ) {
+							dslc_row_delete( dslcTarget.closest('.dslc-modules-section') );
+						} else {
+							dslc_modules_area_delete( modulesArea );
+						}
+
+					} else {
+						dslc_modules_area_delete( modulesArea );
+
+					}
+
 
 			} else if ( dslcAction == 'delete_modules_section' ) {
 
@@ -1851,6 +1875,7 @@ var dslcDebug = false;
 
 		callback = typeof callback !== 'undefined' ? callback : false;
 
+		// Recover original data from data-def attribute for each control
 		jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input').each(function(){
 
 			jQuery(this).val( jQuery(this).data('def') );
@@ -2272,8 +2297,9 @@ var dslcDebug = false;
 		area.addClass('dslca-modules-area-being-deleted');
 
 		// If it's the last area in the row add a new one after deletion
-		if ( modulesSection.find('.dslc-modules-area').length < 2 )
+		if ( modulesSection.find('.dslc-modules-area').length < 2 ) {
 			dslcAddNew = true;
+		}
 
 		// If a module in the area is being edited
 		if ( area.find('.dslca-module-being-edited').length ) {
@@ -4524,12 +4550,12 @@ var dslcDebug = false;
 		 * Hook - Module Edit ( Display Options )
 		 */
 
-		$(document).on( 'click', '.dslca-module-edit-hook', function(e){
+		$(document).on( 'click', '.dslca-module-edit-hook, .dslc-module-front > div:not(.dslca-module-manage)', function(e){
 
 			e.preventDefault();
 
-			// If composer not hidden
-			if ( ! $('body').hasClass( 'dslca-composer-hidden' ) ) {
+			// If composer not hidden & not clicked on editable element
+			if ( ! $('body').hasClass( 'dslca-composer-hidden' ) && ! $(e.target).hasClass( 'dslca-editable-content' ) ) {
 
 				// If another module being edited and has changes
 				if ( $('.dslca-module-being-edited.dslca-module-change-made').length ) {
@@ -5750,7 +5776,8 @@ var dslcDebug = false;
 			// If image/upload field alter the value ( use from data )
 			if ( dslcField.hasClass('dslca-modules-section-edit-field-upload') ) {
 				if ( dslcVal && dslcVal.length )
-					dslcVal = dslcField.data('dslca-img-url');
+					// dslcVal = dslcField.data('dslca-img-url');
+					dslcVal = $('.dslca-modules-section-settings input[data-id="dslca-img-url"]', dslcEl ).val();
 			}
 
 			if ( dslcRule == 'background-image' ) {
@@ -5824,8 +5851,6 @@ var dslcDebug = false;
 
 				/* Show On */
 				if ( dslcField.data('id') == 'show_on' ) {
-
-					console.log( checkboxesVal );
 
 					if ( checkboxesVal.indexOf( 'desktop' ) !== -1 ) {
 						$('.dslca-modules-section-being-edited').removeClass('dslc-hide-on-desktop');

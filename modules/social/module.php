@@ -12,14 +12,14 @@ class DSLC_Social extends DSLC_Module {
 		$this->module_id = 'DSLC_Social';
 		$this->module_title = __( 'Social', 'live-composer-page-builder' );
 		$this->module_icon = 'twitter';
-		$this->module_category = 'elements';
+		$this->module_category = 'General';
 
 	}
 
-	function options() {	
+	function options() {
 
 		$dslc_options = array(
-			
+
 			/**
 			 * General
 			 */
@@ -566,7 +566,7 @@ class DSLC_Social extends DSLC_Module {
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
@@ -577,7 +577,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-social',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -589,7 +589,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-social a.dslc-social-icon',
 				'affect_on_change_rule' => 'width,height',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -601,7 +601,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-social a.dslc-social-icon',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -613,7 +613,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-social li',
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 
@@ -637,7 +637,7 @@ class DSLC_Social extends DSLC_Module {
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
@@ -648,7 +648,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-social',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -660,7 +660,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-social a.dslc-social-icon',
 				'affect_on_change_rule' => 'width,height',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -672,7 +672,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-social a.dslc-social-icon',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -684,7 +684,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-social li',
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 
@@ -697,12 +697,12 @@ class DSLC_Social extends DSLC_Module {
 
 	}
 
-	function output( $options ) {		
+	function output( $options ) {
 
 		$this->module_start( $options );
 
 		/* Module output starts here */
-			
+
 			?>
 
 			<div class="dslc-social-wrap">

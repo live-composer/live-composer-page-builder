@@ -12,14 +12,14 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 		$this->module_id = 'DSLC_TP_Downloads_Button';
 		$this->module_title = __( 'Download Button', 'live-composer-page-builder' );
 		$this->module_icon = 'download-alt';
-		$this->module_category = 'single';
+		$this->module_category = 'For Templates';
 
 	}
-	
-	function options() {	
+
+	function options() {
 
 		$dslc_options = array(
-			
+
 			array(
 				'label' => __( 'Show On', 'live-composer-page-builder' ),
 				'id' => 'css_show_on',
@@ -176,7 +176,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 			),
 
 			/**
-			 * Typography	
+			 * Typography
 			 */
 
 			array(
@@ -239,7 +239,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'typography', 'live-composer-page-builder' ),
 			),
-			
+
 			/**
 			 * Icon
 			 */
@@ -296,7 +296,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Font Size', 'live-composer-page-builder' ),
@@ -307,7 +307,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-download-button a',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -319,7 +319,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-download-button',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -331,7 +331,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-download-button a',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -343,7 +343,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-download-button a .dslc-icon',
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 
@@ -367,7 +367,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Font Size', 'live-composer-page-builder' ),
@@ -378,7 +378,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-download-button a',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -390,7 +390,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-download-button',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -402,7 +402,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-download-button a',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -414,7 +414,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-download-button a .dslc-icon',
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 
@@ -456,7 +456,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 		}
 
 		/* Module output starts here */
-			
+
 			?>
 
 				<div class="dslc-tp-download-button">

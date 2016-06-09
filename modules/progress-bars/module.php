@@ -12,11 +12,11 @@ class DSLC_Progress_Bars extends DSLC_Module {
 		$this->module_id = 'DSLC_Progress_Bars';
 		$this->module_title = __( 'Progress Bar', 'live-composer-page-builder' );
 		$this->module_icon = 'tasks';
-		$this->module_category = 'elements';
+		$this->module_category = 'General';
 
 	}
 
-	function options() {	
+	function options() {
 
 		$dslc_options = array(
 
@@ -489,7 +489,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
@@ -500,7 +500,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-progress-bar',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -512,7 +512,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-progress-bar',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -524,7 +524,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-progress-bar',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -536,7 +536,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'affect_on_change_el' => 'h4.dslc-progress-bar-label',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -548,7 +548,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'affect_on_change_el' => 'h4.dslc-progress-bar-label',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -560,7 +560,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'affect_on_change_el' => 'h4.dslc-progress-bar-label',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -572,7 +572,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'affect_on_change_el' => 'h4.dslc-progress-bar-label',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -584,7 +584,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-progress-bar-loader',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -596,7 +596,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-progress-bar-loader',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -608,7 +608,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-progress-bar-loader',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -620,7 +620,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-progress-bar-loader, .dslc-progress-bar-loader-inner',
 				'affect_on_change_rule' => 'height',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 
@@ -644,7 +644,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
@@ -655,7 +655,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-progress-bar',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -667,7 +667,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-progress-bar',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -679,7 +679,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-progress-bar',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -691,7 +691,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'affect_on_change_el' => 'h4.dslc-progress-bar-label',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -703,7 +703,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'affect_on_change_el' => 'h4.dslc-progress-bar-label',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -715,7 +715,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'affect_on_change_el' => 'h4.dslc-progress-bar-label',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -727,7 +727,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'affect_on_change_el' => 'h4.dslc-progress-bar-label',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -739,7 +739,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-progress-bar-loader',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -751,7 +751,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-progress-bar-loader',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -763,7 +763,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-progress-bar-loader',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -775,12 +775,12 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-progress-bar-loader, .dslc-progress-bar-loader-inner',
 				'affect_on_change_rule' => 'height',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 
 		);
-	
+
 		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array('hover_opts' => false) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
@@ -805,7 +805,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 
 			if ( $options['animation'] == 'enabled' )
 				$wrapper_class .= 'dslc-progress-bar-animated ';
-			
+
 			?>
 
 				<div class="dslc-progress-bar <?php echo $wrapper_class; ?>">

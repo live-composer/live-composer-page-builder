@@ -13,12 +13,12 @@ class DSLC_Tabs extends DSLC_Module {
 		$this->module_id = 'DSLC_Tabs';
 		$this->module_title = __( 'Tabs', 'live-composer-page-builder' );
 		$this->module_icon = 'list';
-		$this->module_category = 'elements';
+		$this->module_category = 'General';
 		$this->handle_like = 'tabs';
 
 	}
 
-	function options() {	
+	function options() {
 
 		$dslc_options = array(
 
@@ -278,7 +278,7 @@ class DSLC_Tabs extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Navigation', 'live-composer-page-builder' ),
 			),
-			
+
 			/**
 			 * Tabs Nav - Active
 			 */
@@ -2718,7 +2718,7 @@ class DSLC_Tabs extends DSLC_Module {
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Font Size', 'live-composer-page-builder' ),
@@ -2729,7 +2729,7 @@ class DSLC_Tabs extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tabs-content',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -2741,7 +2741,7 @@ class DSLC_Tabs extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tabs-content',
 				'affect_on_change_rule' => 'line-height',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -2753,7 +2753,7 @@ class DSLC_Tabs extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tabs-content',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -2765,7 +2765,7 @@ class DSLC_Tabs extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tabs-tab-content',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -2777,7 +2777,7 @@ class DSLC_Tabs extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tabs-tab-content',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -2789,7 +2789,7 @@ class DSLC_Tabs extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tabs-nav-hook',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -2801,7 +2801,7 @@ class DSLC_Tabs extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tabs-nav-hook',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -2813,7 +2813,7 @@ class DSLC_Tabs extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tabs-nav-hook',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -2825,7 +2825,7 @@ class DSLC_Tabs extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tabs-nav-hook',
 				'affect_on_change_rule' => 'margin-left',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 				'min' => -10,
 				'max' => 100
@@ -2839,7 +2839,7 @@ class DSLC_Tabs extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tabs-nav',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 
@@ -2863,7 +2863,7 @@ class DSLC_Tabs extends DSLC_Module {
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Font Size', 'live-composer-page-builder' ),
@@ -2874,7 +2874,7 @@ class DSLC_Tabs extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tabs-content',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -2886,7 +2886,7 @@ class DSLC_Tabs extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tabs-content',
 				'affect_on_change_rule' => 'line-height',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -2898,7 +2898,7 @@ class DSLC_Tabs extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tabs-content',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -2910,7 +2910,7 @@ class DSLC_Tabs extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tabs-tab-content',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -2922,7 +2922,7 @@ class DSLC_Tabs extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tabs-tab-content',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -2934,7 +2934,7 @@ class DSLC_Tabs extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tabs-nav-hook',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -2946,7 +2946,7 @@ class DSLC_Tabs extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tabs-nav-hook',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -2958,7 +2958,7 @@ class DSLC_Tabs extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tabs-nav-hook',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -2970,7 +2970,7 @@ class DSLC_Tabs extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tabs-nav-hook',
 				'affect_on_change_rule' => 'margin-left',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 				'min' => -10,
 				'max' => 100
@@ -2984,7 +2984,7 @@ class DSLC_Tabs extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tabs-nav',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 
@@ -3005,11 +3005,11 @@ class DSLC_Tabs extends DSLC_Module {
 		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
 			$dslc_is_admin = true;
 		else
-			$dslc_is_admin = false;		
+			$dslc_is_admin = false;
 
 		$this->module_start( $options );
 
-		/* Module output stars here */ 
+		/* Module output stars here */
 
 			$tabs_nav = explode( '(dslc_sep)', trim( $options['tabs_nav'] ) );
 			$tabs_content = explode( '(dslc_sep)', trim( $options['tabs_content'] ) );
@@ -3019,7 +3019,7 @@ class DSLC_Tabs extends DSLC_Module {
 			<div class="dslc-tabs dslc-tabs-nav-pos-<?php echo $options['css_nav_position']; ?>">
 
 				<div class="dslc-tabs-nav dslc-clearfix">
-					
+
 					<?php if ( is_array( $tabs_nav ) ) : ?>
 
 						<?php foreach ( $tabs_nav as $tab_nav ) : ?>
@@ -3060,8 +3060,8 @@ class DSLC_Tabs extends DSLC_Module {
 							<div class="dslc-tabs-tab-content">
 								<h4 class="dslc-tabs-nav-hook"<?php if ( $dslc_is_admin ) echo ' data-exportable-content="h3"'; ?>><?php echo $tabs_nav[$count]; ?></h4>
 								<div class="dslca-editable-content"<?php if ( $dslc_is_admin ) echo ' data-exportable-content'; ?>>
-									<?php 
-										$tab_content_output = stripslashes( $tab_content ); 
+									<?php
+										$tab_content_output = stripslashes( $tab_content );
 										$tab_content_output = str_replace( '<lctextarea', '<textarea', $tab_content_output );
 										$tab_content_output = str_replace( '</lctextarea', '</textarea', $tab_content_output );
 										echo do_shortcode( $tab_content_output );

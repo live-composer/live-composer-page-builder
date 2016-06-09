@@ -1334,6 +1334,7 @@ function dslc_get_control_value ( control_id ) {
 function dslc_toogle_control ( control_id ) {
 
 	if ( control_id === undefined) control_id = false;
+	if ( !control_id ) return;
 
 	var control        = jQuery('.dslca-module-edit-option-' + control_id );
 	var control_storage = control.find('.dslca-module-edit-field');
@@ -1344,7 +1345,18 @@ function dslc_toogle_control ( control_id ) {
 	// Get the element id
 	var module_id = module[0].id;
 
+	var responsive_prefix = '';
+
+	if ( 'tablet_responsive' === control.data('tab') ) {
+		responsive_prefix = 'body.dslc-res-tablet ';
+	} else if ( 'phone_responsive' === control.data('tab') ) {
+		responsive_prefix = 'body.dslc-res-phone ';
+	}
+
 	var affect_on_change_el    = control_storage.data('affect-on-change-el');
+
+	if ( affect_on_change_el === undefined) return;
+
 	var affect_on_change_elmts = affect_on_change_el.split( ',' );
 
 	affect_on_change_el = '';
@@ -1356,7 +1368,7 @@ function dslc_toogle_control ( control_id ) {
 			affect_on_change_el += ', ';
 		}
 
-		affect_on_change_el += '#' + module_id + ' ' + affect_on_change_elmts[i];
+		affect_on_change_el += responsive_prefix + '#' + module_id + ' ' + affect_on_change_elmts[i];
 	}
 
 	var affect_on_change_rule  = control_storage.data('affect-on-change-rule').replace(/ /g,'');

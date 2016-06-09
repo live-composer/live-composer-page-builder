@@ -12,11 +12,11 @@ class DSLC_Separator extends DSLC_Module {
 		$this->module_id = 'DSLC_Separator';
 		$this->module_title = __( 'Separator', 'live-composer-page-builder' );
 		$this->module_icon = 'minus';
-		$this->module_category = 'elements';
+		$this->module_category = 'General';
 
 	}
 
-	function options() {		
+	function options() {
 
 		$dslc_options = array(
 
@@ -309,7 +309,7 @@ class DSLC_Separator extends DSLC_Module {
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Height', 'live-composer-page-builder' ),
@@ -323,7 +323,7 @@ class DSLC_Separator extends DSLC_Module {
 				'min' => 1,
 				'max' => 300,
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 
 			/**
@@ -346,7 +346,7 @@ class DSLC_Separator extends DSLC_Module {
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Height', 'live-composer-page-builder' ),
@@ -360,7 +360,7 @@ class DSLC_Separator extends DSLC_Module {
 				'min' => 1,
 				'max' => 300,
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 
 		);

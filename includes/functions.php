@@ -262,12 +262,12 @@ function dslc_generate_custom_css( $options_arr, $settings, $restart = false ) {
 				if ( isset( $option_arr['section'] ) && $option_arr['section'] == 'responsive' ) {
 
 					switch ( $option_arr['tab'] ) {
-						case __( 'tablet', 'live-composer-page-builder' ):
+						case __( 'Tablet', 'live-composer-page-builder' ):
 							if ( isset( $settings['css_res_t'] ) && $settings['css_res_t'] == 'enabled' )
 								// removed #dslc-content from the line for better css optimization
 								$affect_el .= 'body.dslc-res-tablet #dslc-module-' . $settings['module_instance_id'] . ' ' . $affect_el_arr;
 							break;
-						case __( 'phone', 'live-composer-page-builder' ):
+						case __( 'Phone', 'live-composer-page-builder' ):
 							if ( isset( $settings['css_res_p'] ) && $settings['css_res_p'] == 'enabled' )
 								// removed #dslc-content from the line for better css optimization
 								$affect_el .= 'body.dslc-res-phone #dslc-module-' . $settings['module_instance_id'] . ' ' . $affect_el_arr;

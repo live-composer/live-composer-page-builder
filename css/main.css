@@ -65,7 +65,7 @@ body.admin-bar #dslc-header.dslc-header-pos-absolute {
 	cursor: pointer;
 	display: block;
 	font-size: 11px;
-	font-family: 'Open Sans';
+	font-family: 'Roboto', sans-serif;
 	font-weight: 900;
 	line-height: 1;
 	padding: 11px 12px;
@@ -74,6 +74,10 @@ body.admin-bar #dslc-header.dslc-header-pos-absolute {
 	white-space: nowrap;
 	float: left;
 	margin-left: 5px;
+}
+
+.dslca-container .dslca-close-composer-hook:hover {
+	background: #f27562;
 }
 
 .dslca-container .dslca-hide-composer-hook {
@@ -792,7 +796,7 @@ body.rtl .dslc-last-col {
 body.dslc-res-phone .dslc-col {
 	width: 100%;
 	margin: 0;
-	margin-bottom: 30px;
+	/*margin-bottom: 30px;*/
 	min-width: 0px;
 }
 

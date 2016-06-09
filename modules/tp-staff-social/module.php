@@ -12,14 +12,14 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 		$this->module_id = 'DSLC_TP_Staff_Social';
 		$this->module_title = __( 'Staff Social', 'live-composer-page-builder' );
 		$this->module_icon = 'twitter';
-		$this->module_category = 'single';
+		$this->module_category = 'For Templates';
 
 	}
 
-	function options() {	
+	function options() {
 
 		$dslc_options = array(
-				
+
 			/**
 			 * Styling
 			 */
@@ -239,7 +239,7 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
@@ -250,7 +250,7 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-staff-social',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -262,7 +262,7 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-staff-social a',
 				'affect_on_change_rule' => 'width,height',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -274,7 +274,7 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-staff-social a',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -286,7 +286,7 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-staff-social li',
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 
@@ -310,7 +310,7 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
@@ -321,7 +321,7 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-staff-social',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -333,7 +333,7 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-staff-social a',
 				'affect_on_change_rule' => 'width,height',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -345,7 +345,7 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-staff-social a',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -357,7 +357,7 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-staff-social li',
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 
@@ -423,7 +423,7 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 			</div><!-- .dslc-tp-staff-social -->
 
 			<?php
-		
+
 		/* Module output ends here */
 
 		$this->module_end( $options );

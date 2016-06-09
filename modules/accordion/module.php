@@ -13,12 +13,12 @@ class DSLC_Accordion extends DSLC_Module {
 		$this->module_id = 'DSLC_Accordion';
 		$this->module_title = __( 'Accordion', 'live-composer-page-builder' );
 		$this->module_icon = 'reorder';
-		$this->module_category = 'elements';
+		$this->module_category = 'General';
 		$this->handle_like = 'accordion';
 
 	}
 
-	function options() {	
+	function options() {
 
 		$dslc_options = array(
 
@@ -69,7 +69,7 @@ class DSLC_Accordion extends DSLC_Module {
 			/**
 			 * General
 			 */
-			
+
 			array(
 				'label' => __( 'BG Color', 'live-composer-page-builder' ),
 				'id' => 'css_bg_color',
@@ -641,7 +641,7 @@ class DSLC_Accordion extends DSLC_Module {
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
@@ -652,7 +652,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -664,7 +664,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -676,7 +676,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -688,7 +688,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-header',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -700,7 +700,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-header',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -712,7 +712,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-header',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -724,7 +724,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-title',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -736,7 +736,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-title',
 				'affect_on_change_rule' => 'line-height',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -748,7 +748,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-title',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -760,7 +760,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-title',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -772,7 +772,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-content',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -784,7 +784,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-content',
 				'affect_on_change_rule' => 'line-height',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -796,7 +796,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-content',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -808,7 +808,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-content',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 
@@ -832,7 +832,7 @@ class DSLC_Accordion extends DSLC_Module {
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
@@ -843,7 +843,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -855,7 +855,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -867,7 +867,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -879,7 +879,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-header',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -891,7 +891,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-header',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -903,7 +903,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-header',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -915,7 +915,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-title',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -927,7 +927,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-title',
 				'affect_on_change_rule' => 'line-height',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -939,7 +939,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-title',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -951,7 +951,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-title',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -963,7 +963,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-content',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -975,7 +975,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-content',
 				'affect_on_change_rule' => 'line-height',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -987,7 +987,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-content',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -999,7 +999,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-content',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 
@@ -1019,11 +1019,11 @@ class DSLC_Accordion extends DSLC_Module {
 		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
 			$dslc_is_admin = true;
 		else
-			$dslc_is_admin = false;		
+			$dslc_is_admin = false;
 
 		$this->module_start( $options );
 
-		/* Module output stars here */ 
+		/* Module output stars here */
 
 			$accordion_nav = explode( '(dslc_sep)', trim( $options['accordion_nav'] ) );
 
@@ -1057,8 +1057,8 @@ class DSLC_Accordion extends DSLC_Module {
 
 								<div class="dslc-accordion-content">
 									<div class="dslca-editable-content"<?php if ( $dslc_is_admin ) echo ' data-exportable-content'; ?>>
-										<?php 
-											$accordion_content_output = stripslashes( $accordion_content ); 
+										<?php
+											$accordion_content_output = stripslashes( $accordion_content );
 											$accordion_content_output = str_replace( '<lctextarea', '<textarea', $accordion_content_output );
 											$accordion_content_output = str_replace( '</lctextarea', '</textarea', $accordion_content_output );
 											echo do_shortcode( $accordion_content_output );

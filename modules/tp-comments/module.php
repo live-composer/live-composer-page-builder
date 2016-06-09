@@ -14,14 +14,14 @@ class DSLC_TP_Comments extends DSLC_Module {
 		$this->module_id = 'DSLC_TP_Comments';
 		$this->module_title = __( 'Comments', 'live-composer-page-builder' );
 		$this->module_icon = 'comments';
-		$this->module_category = 'elements';
+		$this->module_category = 'For Templates';
 
 	}
-	
-	function options() {	
+
+	function options() {
 
 		$dslc_options = array(
-		
+
 			array(
 				'label' => __( 'Show On', 'live-composer-page-builder' ),
 				'id' => 'css_show_on',
@@ -890,7 +890,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
@@ -902,7 +902,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
@@ -914,7 +914,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Padding Horizontal', 'live-composer-page-builder' ),
@@ -926,7 +926,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Comment - Margin Bottom', 'live-composer-page-builder' ),
@@ -938,7 +938,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Comment - Padding Vertical', 'live-composer-page-builder' ),
@@ -950,7 +950,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Comment - Padding Horizontal', 'live-composer-page-builder' ),
@@ -962,7 +962,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'C. Inner - Margin Bottom', 'live-composer-page-builder' ),
@@ -974,7 +974,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'C. Inner - Padding Top', 'live-composer-page-builder' ),
@@ -986,7 +986,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-top',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'C. Inner - Padding Bottom', 'live-composer-page-builder' ),
@@ -998,7 +998,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'C. Inner - Padding Horizontal', 'live-composer-page-builder' ),
@@ -1010,7 +1010,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Info - Margin Bottom', 'live-composer-page-builder' ),
@@ -1022,7 +1022,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Info - Padding Vertical', 'live-composer-page-builder' ),
@@ -1034,7 +1034,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Info - Padding Horizontal', 'live-composer-page-builder' ),
@@ -1046,7 +1046,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Info Author- Font Size', 'live-composer-page-builder' ),
@@ -1057,7 +1057,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-comment-meta-author',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -1069,7 +1069,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-comment-meta-date',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -1081,7 +1081,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-comment-reply a',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -1093,7 +1093,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-comment-main',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -1105,7 +1105,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-comment-main',
 				'affect_on_change_rule' => 'line-height',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -1118,7 +1118,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Main - Padding Horizontal', 'live-composer-page-builder' ),
@@ -1130,7 +1130,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 
 			/**
@@ -1153,7 +1153,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
@@ -1165,7 +1165,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
@@ -1177,7 +1177,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Padding Horizontal', 'live-composer-page-builder' ),
@@ -1189,7 +1189,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Comment - Margin Bottom', 'live-composer-page-builder' ),
@@ -1201,7 +1201,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Comment - Padding Vertical', 'live-composer-page-builder' ),
@@ -1213,7 +1213,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Comment - Padding Horizontal', 'live-composer-page-builder' ),
@@ -1225,7 +1225,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'C. Inner - Margin Bottom', 'live-composer-page-builder' ),
@@ -1237,7 +1237,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'C. Inner - Padding Top', 'live-composer-page-builder' ),
@@ -1249,7 +1249,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-top',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'C. Inner - Padding Bottom', 'live-composer-page-builder' ),
@@ -1261,7 +1261,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'C. Inner - Padding Horizontal', 'live-composer-page-builder' ),
@@ -1273,7 +1273,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Info - Margin Bottom', 'live-composer-page-builder' ),
@@ -1285,7 +1285,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Info - Padding Vertical', 'live-composer-page-builder' ),
@@ -1297,7 +1297,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Info - Padding Horizontal', 'live-composer-page-builder' ),
@@ -1309,7 +1309,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Info Author- Font Size', 'live-composer-page-builder' ),
@@ -1320,7 +1320,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-comment-meta-author',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -1332,7 +1332,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-comment-meta-date',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -1344,7 +1344,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-comment-reply a',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -1356,7 +1356,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-comment-main',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -1368,7 +1368,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-comment-main',
 				'affect_on_change_rule' => 'line-height',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -1381,7 +1381,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Main - Padding Horizontal', 'live-composer-page-builder' ),
@@ -1393,7 +1393,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 
 
@@ -1421,21 +1421,21 @@ class DSLC_TP_Comments extends DSLC_Module {
 		$this->module_start( $options );
 
 		/* Module output starts here */
-			
+
 			?>
 
 				<div class="dslc-tp-comments" id="comments">
 
 					<?php if ( $show_fake ) : ?>
 
-						<?php if ( defined( 'DISQUS_VERSION' ) ) : ?> 
+						<?php if ( defined( 'DISQUS_VERSION' ) ) : ?>
 
 							<p><strong>DISQUS</strong> is active and will be shown in this position.</strong></p>
 
 						<?php else : ?>
 
 							<ol class="comments clean-list">
-									
+
 								<li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1 dslc-comment">
 
 									<div class="dslc-comment-inner">
@@ -1454,7 +1454,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 										</div><!-- .comment-info -->
 
 										<div class="dslc-comment-main">
-											
+
 											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
 
 										</div><!-- .comment-main -->
@@ -1480,7 +1480,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 										</div><!-- .comment-info -->
 
 										<div class="dslc-comment-main">
-											
+
 												<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
 
 										</div><!-- .comment-main -->
@@ -1506,7 +1506,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 												</div><!-- .comment-info -->
 
 												<div class="dslc-comment-main">
-													
+
 													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 
 												</div><!-- .comment-main -->
@@ -1527,7 +1527,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 							<?php $comments = get_comments( array('post_id' => $post_id) ); ?>
 
 							<?php if ( get_comment_pages_count( $comments ) > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through ?>
-								
+
 								<!-- Comments Navigation -->
 
 							<?php endif; ?>
@@ -1537,7 +1537,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 							</ol><!-- .commentlist -->
 
 							<?php if ( get_comment_pages_count( $comments ) > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through ?>
-								
+
 								<!-- Comments Navigation -->
 
 							<?php endif; ?>
@@ -1547,7 +1547,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 						<?php if ( ! comments_open() && '0' != get_comments_number() && post_type_supports( get_post_type(), 'comments' ) && ! defined( 'DISQUS_VERSION' ) ) : ?>
 								<p class="nocomments"><?php _e( 'Comments are closed.', 'live-composer-page-builder' ); ?></p>
 						<?php endif; ?>
-							
+
 					<?php endif; ?>
 
 				</div><!-- dslc-tp-comments -->

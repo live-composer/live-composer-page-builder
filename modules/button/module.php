@@ -12,7 +12,7 @@ class DSLC_Button extends DSLC_Module {
 		$this->module_id = 'DSLC_Button';
 		$this->module_title = __( 'Button', 'live-composer-page-builder' );
 		$this->module_icon = 'link';
-		$this->module_category = 'elements';
+		$this->module_category = 'General';
 
 	}
 
@@ -712,7 +712,7 @@ class DSLC_Button extends DSLC_Module {
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
@@ -723,7 +723,7 @@ class DSLC_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-button',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -735,7 +735,7 @@ class DSLC_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-button a',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -747,7 +747,7 @@ class DSLC_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-button a',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -759,7 +759,7 @@ class DSLC_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-button a',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -771,7 +771,7 @@ class DSLC_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-button a .dslc-icon',
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -783,7 +783,7 @@ class DSLC_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-button',
 				'affect_on_change_rule' => 'text-align',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 
 			/**
@@ -806,7 +806,7 @@ class DSLC_Button extends DSLC_Module {
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
@@ -817,7 +817,7 @@ class DSLC_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-button',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -829,7 +829,7 @@ class DSLC_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-button a',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -841,7 +841,7 @@ class DSLC_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-button a',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -853,7 +853,7 @@ class DSLC_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-button a',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -865,7 +865,7 @@ class DSLC_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-button a .dslc-icon',
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -877,7 +877,7 @@ class DSLC_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-button',
 				'affect_on_change_rule' => 'text-align',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 
 

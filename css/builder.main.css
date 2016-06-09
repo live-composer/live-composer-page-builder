@@ -29,8 +29,8 @@ body {
 	border: 0;
 	color: #fff;
 	padding: 6px 10px;
-	font-family: "Open Sans";
-	font-size: 13px;
+	font-family: "Roboto", sans-serif;
+	font-size: 12px;
 	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
 	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
 	box-sizing: border-box;         /* Opera/IE 8+ */
@@ -56,7 +56,7 @@ body {
 }
 
 .dslca-container {
-	font-family: "Open Sans";
+	font-family: "Roboto Condensed", sans-serif;
 	bottom: 0;
 	color: #fff;
 	left: 0;
@@ -86,16 +86,17 @@ body {
 			position: absolute;
 			bottom: 45px;
 			left: 5px;
-			background: #5890e5;
+			background-color: rgba(71, 70, 70, 0.49);
 			color: rgba( 255, 255, 255, 0.5 );
 			padding: 6px 10px;
 			border-radius: 3px;
-			font-weight: bold;
-			font-family: "Open Sans";
+			font-weight: 400;
+			font-family: "Roboto Condensed", sans-serif;
 			font-size: 10px;
 			line-height: 1;
 			display: none;
 			white-space: nowrap;
+			letter-spacing: 0.4px;
 			text-transform: uppercase;
 			cursor: pointer;
 		}
@@ -118,9 +119,9 @@ body {
 			cursor: pointer;
 			display: block;
 			float: left;
-			font-size: 11px;
-			font-family: "Open Sans";
-			font-weight: 900;
+			font-size: 13px;
+			font-family: "Roboto", sans-serif;
+			font-weight: 400;
 			line-height: 1;
 			padding: 13px 15px;
 			position: relative;
@@ -168,15 +169,17 @@ body {
 		}
 
 			.dslca-module-edit-save,
-			.dslca-row-edit-save {
+			.dslca-row-edit-save,
+			.dslca-module-edit-cancel,
+			.dslca-row-edit-cancel {
 				background: #78ca4f;
 				border-radius: 3px;
 				color: #fff;
 				cursor: pointer;
 				display: inline-block;
-				font-size: 11px;
-				font-family: "Open Sans";
-				font-weight: 900;
+				font-size: 13px;
+				font-family: "Roboto", sans-serif;
+				font-weight: 400;
 				line-height: 1;
 				padding: 11px 12px;
 			}
@@ -184,16 +187,16 @@ body {
 			.dslca-module-edit-cancel,
 			.dslca-row-edit-cancel {
 				background: #e55f5f;
-				border-radius: 3px;
-				color: #fff;
-				cursor: pointer;
-				display: inline-block;
-				font-size: 11px;
-				font-family: "Open Sans";
-				font-weight: 900;
-				line-height: 1;
-				margin-left: 4px;
-				padding: 11px 12px;
+			}
+
+			.dslca-module-edit-save:hover,
+			.dslca-row-edit-save:hover {
+				background: #91dc1e;
+			}
+
+			.dslca-module-edit-cancel:hover,
+			.dslca-row-edit-cancel:hover {
+				background: #f27562;
 			}
 
 	/**
@@ -213,7 +216,8 @@ body {
 	 */
 
 	.dslca-sections {
-		background: #5890e5;
+		/*background: #5890e5;*/
+		background: #4A7AC3;
 	}
 
 		.dslca-section {
@@ -234,11 +238,11 @@ body {
 				float: left;
 				background: #3b6fbe;
 				color: #fff;
-				font-family: "Oswald";
-				font-size: 15px;
+				font-family: "Roboto Condensed", sans-serif;
+				font-size: 17px;
 				line-height: 1;
-				padding: 20px 25px;
-				text-transform: uppercase;
+				padding: 28px 25px;
+				/* text-transform: uppercase; */
 			}
 
 			.dslca-templates .dslca-section-title,
@@ -263,25 +267,28 @@ body {
 					}
 
 					.dslca-section-title-filter-options {
-						background: rgb(202, 86, 79);
+						background: #5890E5;
 						border-radius: 3px 3px 0 0;
 						bottom: 35px;
 						display: none;
-						left: 0;
-						padding: 10px;
+						min-width: 100px;
+						left: -10px;
+						/*padding: 10px;*/
 						position: absolute;
-						right: 0;
+						/*right: 0;*/
 						z-index: 999999;
+						box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.21);
 					}
 
 						.dslca-section-title-filter-options span {
-							background: rgba( 0, 0, 0, 0.1 );
-							border-radius: 3px;
+							/* background: rgba( 0, 0, 0, 0.1 ); */
+							/* border-radius: 3px; */
 							display: block;
 							cursor: pointer;
-							margin: 5px 0;
-							padding: 5px;
-							font-size: 12px;
+							margin: 1px 0 0;
+							padding: 10px 13px;
+							border-top: 1px solid rgba(0, 0, 0, 0.09);
+							font-size: 13px;
 						}
 
 	/**
@@ -301,35 +308,72 @@ body {
 	}
 
 		.dslca-module {
-			border-right: 1px solid #75a2e6;
+			/*border-right: 1px solid #75a2e6;*/
 			color: #fff;
-			cursor: move;
+			cursor: grab;
 			display: block;
 			float: left;
-			font-family: "Oswald";
+			/*font-family: "Roboto Condensed", sans-serif;*/
+			font-family: 'Roboto Condensed', sans-serif;
 			font-size: 15px;
+			font-weight: 400;
 			line-height: 1;
-			padding: 21px 24px;
-			text-transform: uppercase;
+			padding: 2px 12px 9px 12px;
+			/* text-transform: uppercase; */
+			background: #5890e5;
+			margin: 4px 2px;
+			box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15), -1px 1px 0px 0 rgba(255, 255, 255, 0.05) inset;
+			border-radius: 2px;
+			text-align: center;
+			min-width: 48px;
+
+			transition: transform 0.05s linear 0.01s;
+		}
+
+		.dslca-module[data-id="DSLC_Separator"],
+		.dslca-module[data-id="DSLC_Notification"],
+		.dslca-module[data-id="DSLC_Sliders"],
+		.dslca-module[data-id="DSLC_Staff"]{
+			margin-right: 14px;
+		}
+
+		.dslca-module[data-id="DSLC_M_A"] {
+			margin-left: 5px;
+			background: #29508C;
+			box-shadow: none;
+		}
+
+		.dslca-module:hover {
+		  background: #6b9ff1;
+		  box-shadow: -2px 4px 3px 0 rgba(0, 0, 0, 0.19), -1px 1px 0 0 rgba(255, 255, 255, 0.05) inset;
+		  transform: translate(1px, -2px);
 		}
 
 		.dslca-module.ui-draggable-dragging {
-			background: #5890e5;
+			background: #6b9ff1;
 			border: 0;
 			z-index: 9999999 !important;
 			border-radius: 3px;
+
+			cursor: grabbing;
+
+			box-shadow: -6px 8px 3px 0 rgba(0, 0, 0, 0.075),
+			0 1px 3px 0 rgba(0, 0, 0, 0.25),
+			-1px 1px 0px 0 rgba(255, 255, 255, 0.05) inset;
 		}
 
 		.dslca-module.ui-draggable-dragging .dslca-module-title {
-			display: none;
+			/*display: none;*/
 		}
 
 			.dslca-module .dslca-icon {
-				color: rgba( 255, 255, 255, 0.5);
-				margin-right: 11px;
+				color: #AECEF9;
 				vertical-align: top;
-				font-size: 12px;
-				line-height: 14px;
+				font-size: 20px;
+				display: block;
+				line-height: 41px;
+				text-align: center;
+				text-shadow: 0px 1px rgba(0, 0, 0, 0.05);
 			}
 
 			.dslca-module.ui-draggable-dragging .dslca-icon {
@@ -396,12 +440,12 @@ body {
 				.dslca-module-edit-label {
 					color: #fff;
 					display: block;
-					font-family: "Open Sans";
-					font-weight: bold;
-					font-size: 12px;
+					font-family: "Roboto", sans-serif;
+					font-weight: 400;
+					font-size: 14px;
 					line-height: 1;
 					margin-bottom: 10px;
-					text-transform: uppercase;
+					/* text-transform: uppercase; */
 					white-space: nowrap;
 					position: relative;
 				}
@@ -481,8 +525,8 @@ body {
 						.dslca-module-edit-option-checkbox-hook {
 							cursor: pointer;
 							font-size: 13px;
-							font-weight: 600;
-							font-family: "Open Sans";
+							font-weight: 400;
+							font-family: "Roboto Condensed", sans-serif;
 						}
 
 							.dslca-module-edit-option-checkbox-hook .dslca-icon {
@@ -508,8 +552,8 @@ body {
 						margin: 6px;
 						display: inline-block;
 						font-size: 12px;
-						font-weight: 600;
-						font-family: "Open Sans";
+						font-weight: 400;
+						font-family: "Roboto Condensed", sans-serif;
 					}
 
 			/**
@@ -537,7 +581,7 @@ body {
 			.dslca-module-edit-field-icon-switch-sets {
 				background: #fff;
 				color: #8a8a8a;
-				font-family: "Lato";
+				font-family: "Roboto", sans-serif;
 				font-size: 13px;
 				display: none;
 				border-radius: 3px;
@@ -597,7 +641,7 @@ body {
 					}
 
 						.dslca-module-edit-option-box-shadow-single span {
-							text-transform: uppercase;
+							/* text-transform: uppercase; */
 							font-size: 10px;
 							font-weight: bold;
 							margin-right: 10px;
@@ -661,7 +705,7 @@ body {
 					}
 
 						.dslca-module-edit-option-text-shadow-single span {
-							text-transform: uppercase;
+							/* text-transform: uppercase; */
 							font-size: 10px;
 							font-weight: bold;
 							margin-right: 10px;
@@ -732,10 +776,11 @@ body {
 			.dslca-module-edit-options-tab-hook {
 				color: #a0c0f0;
 				cursor: pointer;
-				font-size: 11px;
-				font-weight: 900;
+				font-family: "Roboto", sans-serif;
+				font-size: 14px;
+				font-weight: 400;
 				margin-right: 18px;
-				text-transform: uppercase;
+				/* text-transform: uppercase; */
 			}
 
 			.dslca-module-edit-options-tab-hook:hover,
@@ -764,7 +809,7 @@ body {
 			  font-size: 11px;
 			  font-weight: 900;
 			  margin-right: 18px;
-			  text-transform: uppercase;
+			  /* text-transform: uppercase; */
 			}
 
 			.dslca-clear-styling-button:hover {
@@ -825,12 +870,12 @@ body {
 				.dslca-modules-section-edit-label {
 					color: #fff;
 					display: block;
-					font-family: "Open Sans";
+					font-family: "Roboto Condensed", sans-serif;
 					font-weight: bold;
 					font-size: 12px;
 					line-height: 1;
 					margin-bottom: 10px;
-					text-transform: uppercase;
+					/* text-transform: uppercase; */
 				}
 
 				.dslca-modules-section-edit-field {
@@ -860,8 +905,8 @@ body {
 						.dslca-modules-section-edit-option-checkbox-hook {
 							cursor: pointer;
 							font-size: 12px;
-							font-weight: 600;
-							font-family: "Open Sans";
+							font-weight: 400;
+							font-family: "Roboto Condensed", sans-serif;
 						}
 
 							.dslca-modules-section-edit-option-checkbox-hook .dslca-icon {
@@ -888,11 +933,11 @@ body {
 			cursor: pointer;
 			display: block;
 			float: left;
-			font-family: "Oswald";
+			font-family: "Roboto Condensed", sans-serif;
 			font-size: 15px;
 			line-height: 1;
-			padding: 20px 25px 21px 25px;
-			text-transform: uppercase;
+			padding: 29px 29px 27px 29px;
+			/* text-transform: uppercase; */
 		}
 
 			.dslca-templates .dslca-go-to-section-hook .dslca-icon,
@@ -917,12 +962,12 @@ body {
 			cursor: pointer;
 			display: block;
 			float: left;
-			font-family: "Oswald";
+			font-family: "Roboto Condensed", sans-serif;
 			font-size: 15px;
 			line-height: 1;
 			padding: 20px 25px;
 			position: relative;
-			text-transform: uppercase;
+			/* text-transform: uppercase; */
 		}
 
 		.dslca-template-origin-user {
@@ -1032,7 +1077,7 @@ body {
 	color: #fff;
 	cursor: pointer;
 	display: inline-block;
-	font-family: "Open Sans";
+	font-family: "Roboto Condensed", sans-serif;
 	font-size: 14px;
 	font-weight: bold;
 	line-height: 34px;
@@ -1047,7 +1092,7 @@ body {
 	color: #fff;
 	cursor: pointer;
 	display: inline-block;
-	font-family: "Open Sans";
+	font-family: "Roboto Condensed", sans-serif;
 	font-size: 14px;
 	font-weight: bold;
 	line-height: 34px;
@@ -1061,7 +1106,7 @@ body {
 	color: #fff;
 	cursor: pointer;
 	display: inline-block;
-	font-family: "Open Sans";
+	font-family: "Roboto Condensed", sans-serif;
 	font-size: 14px;
 	font-weight: bold;
 	line-height: 34px;
@@ -1143,10 +1188,10 @@ body {
 			background: #5890e5;
 			border-radius: 3px 3px 0 0;
 			color: #fff;
-			font-family: "Open Sans";
+			font-family: "Roboto Condensed", sans-serif;
 			font-style: 12px;
 			font-weight: bold;
-			text-transform: uppercase;
+			/* text-transform: uppercase; */
 			display: inline-block;
 			padding: 5px 10px;
 		}
@@ -1196,11 +1241,11 @@ body {
 }
 
 .dslc-control-toggle:before {
-   content: "\f205";
+	content: "\f205";
 }
 
 .dslca-option-off .dslc-control-toggle:before {
-   content: "\f204";
+	content: "\f204";
 }
 
 	.windows.mozilla .dslc-module-front {
@@ -1304,7 +1349,7 @@ body {
 	border-radius: 3px 6px 6px 3px;
 	cursor: pointer;
 	font-size: 11px;
-	font-family: "Open Sans";
+	font-family: "Roboto Condensed", sans-serif;
 	font-weight: 900;
 	float: left;
 	line-height: 1;
@@ -1312,7 +1357,7 @@ body {
 	display: none;
 	padding: 11px 12px;
 	padding-right: 43px;
-	text-transform: uppercase;
+	/* text-transform: uppercase; */
 	text-decoration: none;
 	position: relative;
 }
@@ -1353,7 +1398,7 @@ body {
 	border-radius: 3px 6px 6px 3px;
 	cursor: pointer;
 	font-size: 11px;
-	font-family: "Open Sans";
+	font-family: "Roboto Condensed", sans-serif;
 	font-weight: 900;
 	float: left;
 	line-height: 1;
@@ -1361,7 +1406,7 @@ body {
 	display: none;
 	padding: 11px 12px;
 	padding-right: 43px;
-	text-transform: uppercase;
+	/* text-transform: uppercase; */
 	text-decoration: none;
 	position: relative;
 	margin-left: 5px;
@@ -1414,10 +1459,10 @@ body {
 		display: inline-block;
 		background: rgba( 255, 255, 255, 0.75 );
 		font-size: 15px;
-		font-family: "Oswald";
+		font-family: "Roboto Condensed", sans-serif;
 		line-height: 1;
 		margin: 0;
-		text-transform: uppercase;
+		/* text-transform: uppercase; */
 		padding: 13px;
 		border-radius: 3px;
 	}
@@ -1469,11 +1514,11 @@ body {
 			cursor: pointer;
 			display: block;
 			font-size: 15px;
-			font-family: "Oswald";
+			font-family: "Roboto Condensed", sans-serif;
 			float: left;
 			line-height: 1;
 			padding: 14px 0;
-			text-transform: uppercase;
+			/* text-transform: uppercase; */
 			text-decoration: none;
 			width: 80%;
 		}
@@ -1491,11 +1536,11 @@ body {
 			cursor: pointer;
 			display: block;
 			font-size: 15px;
-			font-family: "Oswald";
+			font-family: "Roboto Condensed", sans-serif;
 			float: right;
 			line-height: 1;
 			padding: 14px 0;
-			text-transform: uppercase;
+			/* text-transform: uppercase; */
 			text-decoration: none;
 			width: 18%;
 		}
@@ -1606,10 +1651,10 @@ body {
 				background: #5890e5;
 				border-radius: 3px 3px 0 0;
 				color: #fff;
-				font-family: "Open Sans";
+				font-family: "Roboto Condensed", sans-serif;
 				font-style: 12px;
 				font-weight: bold;
-				text-transform: uppercase;
+				/* text-transform: uppercase; */
 				display: inline-block;
 				padding: 5px 10px;
 			}
@@ -1630,12 +1675,12 @@ body {
 		cursor: pointer;
 		display: inline-block;
 		font-size: 11px;
-		font-family: "Open Sans";
+		font-family: "Roboto Condensed", sans-serif;
 		font-weight: bold;
 		line-height: 1;
 		margin-right: 7px;
 		padding: 7px 10px;
-		text-transform: uppercase;
+		/* text-transform: uppercase; */
 		text-decoration: none;
 		vertical-align: middle;
 	}
@@ -1764,7 +1809,7 @@ body {
 				top: -10px;
 				left: 22px;
 				z-index: 99999;
-				width: 115px;
+				width: 100px;
 			}
 
 			.dslca-change-width-module-options {
@@ -1816,14 +1861,23 @@ body {
 					background: #4785db;
 					border-radius: 3px;
 					display: inline-block;
-					font-family: "Open Sans";
+					font-family: "Roboto Condensed", sans-serif;
 					font-size: 13px;
-					font-weight: bold;
+					font-weight: 400;
 					line-height: 24px;
 					max-width: 44px;
 					margin: 1px;
 					text-align: center;
 					width: 44px;
+				}
+
+				.dslca-change-width-module-options span:first-child {
+					width: auto;
+					display: inline-block;
+					max-width: none;
+					background: none;
+					font-size: 15px;
+					color: #313131;
 				}
 
 				.dslca-change-width-modules-area-options span.dslca-active-width,
@@ -1983,7 +2037,7 @@ body.rtl .dslca-modules-area-placeholder {
 
 .dslca-section-scroller {
 	position: relative;
-	height: 57px;
+	height: 74px;
 	margin-right: 70px;
 	overflow: hidden;
 }
@@ -2005,12 +2059,12 @@ body.rtl .dslca-modules-area-placeholder {
 		}
 
 .dslca-section-scroller-fade {
-	background: -moz-linear-gradient(left,  rgba(88,144,229,0) 0%, rgba(88,144,229,1) 100%);
-	background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(88,144,229,0)), color-stop(100%,rgba(88,144,229,1)));
-	background: -webkit-linear-gradient(left,  rgba(88,144,229,0) 0%,rgba(88,144,229,1) 100%);
-	background: -o-linear-gradient(left,  rgba(88,144,229,0) 0%,rgba(88,144,229,1) 100%);
-	background: -ms-linear-gradient(left,  rgba(88,144,229,0) 0%,rgba(88,144,229,1) 100%);
-	background: linear-gradient(to right,  rgba(88,144,229,0) 0%,rgba(88,144,229,1) 100%);
+	background: -moz-linear-gradient(left,  rgba(88,144,229,0) 0%, rgba(70, 116, 185,1) 100%);
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(88,144,229,0)), color-stop(100%,rgba(70, 116, 185,1)));
+	background: -webkit-linear-gradient(left,  rgba(88,144,229,0) 0%,rgba(70, 116, 185,1) 100%);
+	background: -o-linear-gradient(left,  rgba(88,144,229,0) 0%,rgba(70, 116, 185,1) 100%);
+	background: -ms-linear-gradient(left,  rgba(88,144,229,0) 0%,rgba(70, 116, 185,1) 100%);
+	background: linear-gradient(to right,  rgba(88,144,229,0) 0%,rgba(70, 116, 185,1) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00004799', endColorstr='#5890e5',GradientType=1 );
 	position: absolute;
 	right: 70px;
@@ -2020,7 +2074,6 @@ body.rtl .dslca-modules-area-placeholder {
 }
 
 .dslca-section-scroller-nav {
-	background: rgba( 0, 0, 0, 0.2 );
 	position: absolute;
 	right: 0;
 	top: 0;
@@ -2029,36 +2082,43 @@ body.rtl .dslca-modules-area-placeholder {
 	width: 70px;
 }
 
-	.dslca-section-scroller-prev {
+	.dslca-section-scroller-nav > a {
 		cursor: pointer;
-		display: block;
-		float: left;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		/*float: left;*/
 		width: 35px;
 		position: absolute;
 		left: 0;
 		top: 0;
 		bottom: 0;
 		text-decoration: none;
+		outline: none!important;
+		background: rgba(0, 0, 0, 0.2);
 	}
 
-	.dslca-section-scroller-next {
-		cursor: pointer;
-		display: block;
-		float: left;
-		width: 35px;
-		position: absolute;
-		right: 0;
-		top: 0;
-		bottom: 0;
-		text-decoration: none;
+	.dslca-section-scroller-nav > a:hover {
+		background: rgba(0, 0, 0, 0.15);
 	}
+
+	.dslca-section-scroller-nav > a:active {
+		background: rgba(0, 0, 0, 0.25);
+	}
+
+	.dslca-section-scroller-nav .dslca-section-scroller-next {
+		left: auto;
+		right: 0;
+	}
+
 
 		.dslca-section-scroller-prev .dslca-icon,
 		.dslca-section-scroller-next .dslca-icon {
 			color: #fff;
-			display: block;
-			text-align: center;
-			margin-top: 20px;
+			/*display: block;*/
+			/*text-align: center;*/
+			/*margin-top: 20px;*/
 		}
 
 /**
@@ -2141,7 +2201,7 @@ body.rtl .dslca-modules-area-placeholder {
 			padding: 13px 10px;
 			position: relative;
 			text-align: center;
-			text-transform: uppercase;
+			/* text-transform: uppercase; */
 		}
 
 		#dslca-wysiwyg-actions-cancel-hook {
@@ -2157,7 +2217,7 @@ body.rtl .dslca-modules-area-placeholder {
 			padding: 13px 10px;
 			position: relative;
 			text-align: center;
-			text-transform: uppercase;
+			/* text-transform: uppercase; */
 		}
 
 		#dslc-content .dslca-wysiwyg-actions-edit {
@@ -2173,7 +2233,7 @@ body.rtl .dslca-modules-area-placeholder {
 				cursor: pointer;
 				display: block;
 				font-size: 12px;
-				font-family: "Open Sans";
+				font-family: "Roboto Condensed", sans-serif;
 				line-height: 1;
 				font-weight: bold;
 				position: relative;
@@ -2694,7 +2754,7 @@ body.rtl .dslca-modules-area-placeholder {
 				font-weight: bold;
 				line-height: 1;
 				padding: 13px 15px;
-				text-transform: uppercase;
+				/* text-transform: uppercase; */
 				text-decoration: none;
 				position: relative;
 			}
@@ -2757,7 +2817,7 @@ body.rtl .dslca-modules-area-placeholder {
 			cursor: pointer;
 			display: inline-block;
 			font-size: 11px;
-			font-family: "Open Sans";
+			font-family: "Roboto Condensed", sans-serif;
 			font-weight: 900;
 			line-height: 1;
 			padding: 11px 12px;
@@ -2770,7 +2830,7 @@ body.rtl .dslca-modules-area-placeholder {
 			cursor: pointer;
 			display: inline-block;
 			font-size: 11px;
-			font-family: "Open Sans";
+			font-family: "Roboto Condensed", sans-serif;
 			font-weight: 900;
 			line-height: 1;
 			margin-left: 4px;
@@ -2827,7 +2887,7 @@ body.rtl .dslca-modules-area-placeholder {
 			color: #707070;
 			font-size: 14px;
 			font-family: "Open Sans", sans-serif;
-			font-weight: 600;
+			font-weight: 400;
 			line-height: 1.5;
 			padding: 35px 25px;
 			text-align: center;
@@ -2853,7 +2913,7 @@ body.rtl .dslca-modules-area-placeholder {
 				font-weight: bold;
 				line-height: 1;
 				padding: 13px 15px;
-				text-transform: uppercase;
+				/* text-transform: uppercase; */
 			}
 
 			.dslca-loading-modal-confirm-hook {
@@ -2980,12 +3040,12 @@ body.rtl .dslca-modules-area-placeholder {
 	color: #a0c0f0;
 	cursor: pointer;
 	display: inline-block;
-	font-size: 10px;
-	font-family: "Open Sans";
-	font-weight: bold;
-	padding: 10px;
+	font-size: 12px;
+	font-family: "Roboto", sans-serif;
+	font-weight: 400;
+	padding: 7px 10px;
 	line-height: 1;
-	text-transform: uppercase;
+	/* text-transform: uppercase; */
 	white-space: nowrap;
 }
 
@@ -3033,10 +3093,10 @@ body.rtl .dslca-modules-area-placeholder {
 		display: inline-block;
 		color: #fff;
 		font-size: 20px;
-		font-family: "Open Sans";
+		font-family: "Roboto Condensed", sans-serif;
 		text-decoration: none;
 		font-weight: bold;
-		text-transform: uppercase;
+		/* text-transform: uppercase; */
 	}
 
 /**
@@ -3356,8 +3416,8 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 	overflow: visible;
 }
 
-.dslca-drag-not-in-progress .dslc-module-front .dslca-module-manage-inner,
-.dslca-drag-not-in-progress .dslc-module-front .dslca-wysiwyg-actions-edit-hook {
+.dslca-drag-not-in-progress #dslc-content .dslc-module-front .dslca-module-manage-inner,
+.dslca-drag-not-in-progress #dslc-content .dslc-module-front .dslca-wysiwyg-actions-edit-hook {
 	top: 0;
 	opacity: 0;
 	-webkit-transition: opacity 0.1s ease-in-out;
@@ -3374,8 +3434,8 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 	transform: translate(0,-50px);*/
 }
 
-.dslca-drag-not-in-progress .dslc-module-front:hover .dslca-module-manage-inner,
-.dslca-drag-not-in-progress .dslc-module-front:hover .dslca-wysiwyg-actions-edit-hook {
+.dslca-drag-not-in-progress #dslc-content .dslc-module-front:hover .dslca-module-manage-inner,
+.dslca-drag-not-in-progress #dslc-content .dslc-module-front:hover .dslca-wysiwyg-actions-edit-hook {
 	top: 0;
 	opacity: 1;
 
@@ -3471,7 +3531,7 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 	.dslca-modal-icons .icon-item_name {
 		opacity: .35;
 		display: inline-block;
-		font-family: "Open Sans";
+		font-family: "Roboto Condensed", sans-serif;
 		font-size: 12px;
 		line-height: 1.25;
 		padding: 5px 8px 12px;

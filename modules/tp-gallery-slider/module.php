@@ -12,14 +12,14 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 		$this->module_id = 'DSLC_TP_Gallery_Slider';
 		$this->module_title = __( 'Gallery Slider', 'live-composer-page-builder' );
 		$this->module_icon = 'picture';
-		$this->module_category = 'single';
+		$this->module_category = 'For Templates';
 
 	}
-	
-	function options() {	
+
+	function options() {
 
 		$dslc_options = array(
-			
+
 			array(
 				'label' => __( 'Show On', 'live-composer-page-builder' ),
 				'id' => 'css_show_on',
@@ -574,7 +574,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
@@ -585,7 +585,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-gallery-slider',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -597,7 +597,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-gallery-slider',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -609,7 +609,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-gallery-slider',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -622,7 +622,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Slider - Padding Horizontal', 'live-composer-page-builder' ),
@@ -634,7 +634,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Slider Item - Padding Vertical', 'live-composer-page-builder' ),
@@ -646,7 +646,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Slider Item - Padding Horizontal', 'live-composer-page-builder' ),
@@ -658,7 +658,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Nav - Margin Vertical', 'live-composer-page-builder' ),
@@ -669,7 +669,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_el' => '.owl-controls',
 				'affect_on_change_rule' => 'margin',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -681,7 +681,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_el' => '.owl-pagination .owl-page span',
 				'affect_on_change_rule' => 'width,height',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -693,7 +693,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_el' => '.owl-pagination .owl-page',
 				'affect_on_change_rule' => 'margin-left,margin-right',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 
@@ -717,7 +717,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
@@ -728,7 +728,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-gallery-slider',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -740,7 +740,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-gallery-slider',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -752,7 +752,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-gallery-slider',
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -765,7 +765,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Slider - Padding Horizontal', 'live-composer-page-builder' ),
@@ -777,7 +777,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Slider Item - Padding Vertical', 'live-composer-page-builder' ),
@@ -789,7 +789,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Slider Item - Padding Horizontal', 'live-composer-page-builder' ),
@@ -801,7 +801,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Nav - Margin Vertical', 'live-composer-page-builder' ),
@@ -812,7 +812,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_el' => '.owl-controls',
 				'affect_on_change_rule' => 'margin',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -824,7 +824,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_el' => '.owl-pagination .owl-page span',
 				'affect_on_change_rule' => 'width,height',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -836,7 +836,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_el' => '.owl-pagination .owl-page',
 				'affect_on_change_rule' => 'margin-left,margin-right',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 
@@ -853,7 +853,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 	function output( $options ) {
 
 		global $dslc_active;
-				
+
 		$show_placeholder = true;
 		$show_real = false;
 
@@ -879,7 +879,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				if ( $options['lightbox_state'] == 'enabled' ) {
 					$img_class = 'dslc-trigger-lightbox-gallery';
 				}
-			
+
 				?>
 
 					<div class="dslc-tp-gallery-slider">
@@ -890,12 +890,12 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 
 							<div class="dslc-slider"  data-animation="<?php echo $options['animation']; ?>" data-animation-speed="<?php echo $options['animation_speed']; ?>" data-autoplay="<?php echo $options['autoplay']; ?>" data-flexible-height="<?php echo $options['flexible_height']; ?>">
 
-								<?php 
+								<?php
 
 									if ( $show_placeholder ) {
 
-										for ( $i = 0; $i < 15; $i++ ) { 
-											?><div class="dslc-slider-item"><img src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/placeholders/big-placeholder.png" /></div><?php			
+										for ( $i = 0; $i < 15; $i++ ) {
+											?><div class="dslc-slider-item"><img src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/placeholders/big-placeholder.png" /></div><?php
 										}
 
 									} else {
@@ -904,7 +904,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 
 											$gallery_image_src = wp_get_attachment_image_src( $gallery_image, 'full' );
 											$gallery_image_src = $gallery_image_src[0];
-										
+
 											$thumb_alt = get_post_meta( $gallery_image, '_wp_attachment_image_alt', true );
 											if ( ! $thumb_alt ) $thumb_alt = '';
 
@@ -921,7 +921,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 							<?php if ( ! $show_placeholder && $options['lightbox_state'] == 'enabled' ) : ?>
 
 								<div class="dslc-lightbox-gallery">
-									
+
 									<?php foreach ( $gallery_images as $gallery_image ) : ?>
 
 										<?php

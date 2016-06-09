@@ -451,14 +451,30 @@ function dslc_ajax_display_module_options( $atts ) {
 				'css_anim_duration',
 				'css_anim_easing',
 				'content',
+				'css_res_t',
+				'css_res_p',
+				'image',
+				'elements',
+				'post_elements',
+				'carousel_elements',
 			);
 
 			$control_with_toggle = '';
+
+			$sections_with_toggle = array(
+				'styling',
+				'responsive',
+			);
+
 			/**
 			 * Display styling control toggle [On/Off]
 			 */
-			if ( ! in_array( $module_option['id'], $controls_without_toggle, true ) ) {
+			if ( ! in_array( $module_option['id'], $controls_without_toggle, true ) && in_array( $module_option['section'], $sections_with_toggle, true ) ) {
 				$control_with_toggle = 'dslca-option-with-toggle';
+
+				if ( '' === stripslashes( $curr_value ) ) {
+					$control_with_toggle .= ' dslca-option-off';
+				}
 			}
 
 			?>
@@ -475,7 +491,7 @@ function dslc_ajax_display_module_options( $atts ) {
 							/**
 							 * Display styling control toggle [On/Off]
 							 */
-							if ( ! in_array( $module_option['id'], $controls_without_toggle, true ) ) {
+							if ( ! in_array( $module_option['id'], $controls_without_toggle, true ) && in_array( $module_option['section'], $sections_with_toggle, true ) ) {
 								echo'<span class="dslc-control-toggle dslc-icon dslc-icon-"></span>';
 							}
 						?>

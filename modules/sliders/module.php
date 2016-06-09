@@ -12,11 +12,11 @@ class DSLC_Sliders extends DSLC_Module {
 		$this->module_id = 'DSLC_Sliders';
 		$this->module_title = __( 'Slider (Revolution)', 'live-composer-page-builder' );
 		$this->module_icon = 'picture';
-		$this->module_category = 'elements';
+		$this->module_category = 'General';
 
 	}
 
-	function options() {	
+	function options() {
 
 		// Get Rev Sliders
 		global $wpdb;
@@ -84,7 +84,7 @@ class DSLC_Sliders extends DSLC_Module {
 		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
 			$dslc_is_admin = true;
 		else
-			$dslc_is_admin = false;		
+			$dslc_is_admin = false;
 
 		$this->module_start( $options );
 

@@ -147,10 +147,15 @@
 		// Go through each option and append HTML
 		if ( $atts ) {
 			foreach ( $dslc_var_row_options as $row_option ) {
-				if ( isset( $atts[$row_option['id']] ) )
+				if ( isset( $atts[$row_option['id']] ) ) {
 					$output .= '<input type="text" data-id="' . $row_option['id'] . '" value="' . $atts[$row_option['id']] . '" data-def="' . $atts[$row_option['id']] . '">';
-				else
+				} else {
 					$output .= '<input type="text" data-id="' . $row_option['id'] . '" value="' . $row_option['std'] . '" data-def="' . $row_option['std'] . '">';
+				}
+
+				if ( isset( $atts[$row_option['id']] ) && 'bg_image' === $row_option['id'] ) {
+					$output .= '<input type="text" data-id="dslca-img-url" value="' . wp_get_attachment_url( $atts[$row_option['id']] ) . '" data-def="' . wp_get_attachment_url( $atts[$row_option['id']] ) . '">';
+				}
 			}
 		} else {
 			foreach ( $dslc_var_row_options as $row_option ) {

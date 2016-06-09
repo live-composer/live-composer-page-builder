@@ -43,8 +43,8 @@ function dslc_load_scripts() {
 		'str_row_curr_edit_descr' => __( 'You need to either <strong>confirm</strong> or <strong>cancel</strong> those changes before continuing.', 'live-composer-page-builder' ),
 		'str_refresh_title' => __( 'You are about to refresh the page', 'live-composer-page-builder' ),
 		'str_refresh_descr' => __( 'If you have unsaved changed they will be lost.<br>If the "Publish Changes" button is shown in bottom right corner click it to save.', 'live-composer-page-builder' ),
-		'str_res_tablet' => __( 'tablet', 'live-composer-page-builder' ),
-		'str_res_phone' => __( 'phone', 'live-composer-page-builder' )
+		'str_res_tablet' => __( 'Tablet', 'live-composer-page-builder' ),
+		'str_res_phone' => __( 'Phone', 'live-composer-page-builder' )
 	);
 
 	// Array of fonts available to be used in LC editor
@@ -200,10 +200,11 @@ function dslc_load_fonts() {
 
 	if ( isset( $_GET['dslc'] ) && $_GET['dslc'] == 'active' ) {
 
-		wp_enqueue_style( 'dslc-gf-oswald', "//fonts.googleapis.com/css?family=Oswald:400,300,700&subset=latin,latin-ext" );
-		wp_enqueue_style( 'dslc-gf-opensans', "//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" );
+		// wp_enqueue_style( 'dslc-gf-oswald', "//fonts.googleapis.com/css?family=Oswald:400,300,700&subset=latin,latin-ext" );
+		// wp_enqueue_style( 'dslc-gf-opensans', "//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" );
 		wp_enqueue_style( 'dslc-gf-roboto', "//fonts.googleapis.com/css?family=Roboto:400,700" );
-		wp_enqueue_style( 'dslc-gf-lato', "//fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic" );
+		wp_enqueue_style( 'dslc-gf-roboto-condesed', "//fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700" );
+		// wp_enqueue_style( 'dslc-gf-lato', "//fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic" );
 
 	}
 

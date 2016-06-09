@@ -15,11 +15,11 @@ class DSLC_Navigation extends DSLC_Module {
 		$this->module_id = 'DSLC_Navigation';
 		$this->module_title = __( 'Navigation', 'live-composer-page-builder' );
 		$this->module_icon = 'map-signs';
-		$this->module_category = 'elements';
+		$this->module_category = 'General';
 
 	}
 
-	function options() {	
+	function options() {
 
 		$locs = get_registered_nav_menus();
 
@@ -28,7 +28,7 @@ class DSLC_Navigation extends DSLC_Module {
 			'label' => __( 'Choose Navigation', 'live-composer-page-builder' ),
 			'value' => 'not_set',
 		);
-			
+
 		if ( ! empty( $locs ) ) {
 			foreach ( $locs as $loc_ID => $loc_label ) {
 				$loc_choices[] = array(
@@ -39,7 +39,7 @@ class DSLC_Navigation extends DSLC_Module {
 		}
 
 		$dslc_options = array(
-			
+
 			/**
 			 * Functionality
 			 */
@@ -340,7 +340,7 @@ class DSLC_Navigation extends DSLC_Module {
 			),
 
 			/**
-			 * Styling - Item 
+			 * Styling - Item
 			 */
 
 			array(
@@ -931,7 +931,7 @@ class DSLC_Navigation extends DSLC_Module {
 				'section' => 'styling',
 				'ext' => 'px',
 				'tab' => __( 'subnav', 'live-composer-page-builder' ),
-			),			
+			),
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_subnav_padding_vertical',
@@ -958,7 +958,7 @@ class DSLC_Navigation extends DSLC_Module {
 			),
 
 			/**
-			 * Styling - Item 
+			 * Styling - Item
 			 */
 
 			array(
@@ -1263,7 +1263,7 @@ class DSLC_Navigation extends DSLC_Module {
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Align', 'live-composer-page-builder' ),
@@ -1274,7 +1274,7 @@ class DSLC_Navigation extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-mobile-navigation',
 				'affect_on_change_rule' => 'text-align',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Color', 'live-composer-page-builder' ),
@@ -1285,7 +1285,7 @@ class DSLC_Navigation extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-mobile-navigation-hook',
 				'affect_on_change_rule' => 'color',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Margin Top', 'live-composer-page-builder' ),
@@ -1296,7 +1296,7 @@ class DSLC_Navigation extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-mobile-navigation',
 				'affect_on_change_rule' => 'margin-top',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -1308,7 +1308,7 @@ class DSLC_Navigation extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-mobile-navigation-hook',
 				'affect_on_change_rule' => 'font-size, line-height',
 				'section' => 'responsive',
-				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 
@@ -1328,7 +1328,7 @@ class DSLC_Navigation extends DSLC_Module {
 					),
 				),
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Align', 'live-composer-page-builder' ),
@@ -1339,7 +1339,7 @@ class DSLC_Navigation extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-mobile-navigation',
 				'affect_on_change_rule' => 'text-align',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Color', 'live-composer-page-builder' ),
@@ -1350,7 +1350,7 @@ class DSLC_Navigation extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-mobile-navigation-hook',
 				'affect_on_change_rule' => 'color',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Margin Top', 'live-composer-page-builder' ),
@@ -1361,7 +1361,7 @@ class DSLC_Navigation extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-mobile-navigation',
 				'affect_on_change_rule' => 'margin-top',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
@@ -1373,7 +1373,7 @@ class DSLC_Navigation extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-mobile-navigation-hook',
 				'affect_on_change_rule' => 'font-size, line-height',
 				'section' => 'responsive',
-				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 
@@ -1423,13 +1423,13 @@ class DSLC_Navigation extends DSLC_Module {
 								$mobile_nav_output = '';
 								$mobile_nav_output .= '<select>';
 								$mobile_nav_output .= '<option>' . __( '- Select -', 'live-composer-page-builder' ) . '</option>';
-								
+
 								if ( has_nav_menu( $options['location'] ) ) {
 
 									$locations = get_nav_menu_locations();
 									$menu = wp_get_nav_menu_object( $locations[$options['location']] );
 									$menu_items = wp_get_nav_menu_items( $menu->term_id );
-										
+
 									foreach ( $menu_items as $key => $menu_item ) {
 										$title = $menu_item->title;
 										$url = $menu_item->url;
