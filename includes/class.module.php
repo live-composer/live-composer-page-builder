@@ -1868,47 +1868,6 @@ class DSLC_Module {
 	}
 
 	/**
-	 * Css parser to option array
-	 * @return array
-	 */
-	function process_css( $css_string ) {
-
-		$css = new CSSParser();
-
-		$css->parseCSS( $css_string );
-		$out = array();
-
-		foreach( $css->GetCSSArray(0) as $selector => $rules) {
-
-			$id = preg_replace('/[\W]/', "_", strtolower( $selector ) );
-
-			if( ! isset( $rules['tab'] ) ) continue;
-
-			$tab = $rules['tab'];
-
-			$label = isset( $rules['label'] ) ?  $rules['label'] . ' - ' : '';
-
-			foreach( $rules as $rule => $value ) {
-
-				$merge_ar = DSLC_Panel_Style_Opts::get_option(
-				    array(
-			        	'selector' => $selector,
-			        	'tab' => $tab,
-			        	'rule' => $rule,
-			        	'value' => $value,
-			        	'id' => $id,
-			        	'label' => $label
-					)
-				);
-
-				$out = array_merge( $out, $merge_ar );
-			}
-		}
-
-		return $out;
-	}
-
-	/**
  	 * Declare module options
  	 */
 	function options() {
