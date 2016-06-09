@@ -2045,7 +2045,6 @@
 	z-index: 99998;
 	position: relative;
 	text-align: right;
-	font-size: 0;
 }
 
 	.dslc-navigation-inner {
@@ -2114,14 +2113,14 @@
 
 	/* Left position menu */
 	.dslc-navigation.dslc-navigation-sub-position-left .menu ul {
-		left: 0;
-		right: auto;
+		left: auto;
+		right: 0;
 	}
 
 	/* Right position menu */
 	.dslc-navigation.dslc-navigation-sub-position-right .menu ul {
-		right: 0;
-		left: auto;
+		right: auto;
+		left: 0;
 	}
 
 	/* Center position menu */
@@ -2154,11 +2153,6 @@
 				display: block;
 				line-height: 1;
 				text-decoration: none;
-			}
-
-			/* Inner level menu last item a */
-			.dslc-navigation .menu ul li:last-child a {
-				border-bottom: 0 !important;
 			}
 
 				/* Inner level nav arrow ( submenu indicator ) */

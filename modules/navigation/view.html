@@ -1,0 +1,40 @@
+<% if( (location.value || location.std) == 'not_set' ) {%>
+	<div class="dslc-notification dslc-red"><?php _e( 'Edit the module and choose which location to show.', 'live-composer-page-builder' ); ?></div>
+<%} else {%>
+	<div class="dslc-navigation dslc-navigation-sub-position-<%= css_subnav_position.value || css_subnav_position.std %> dslc-navigation-res-t-<%= css_res_t.value || css_res_t.std %> dslc-navigation-res-p-<%= css_res_p.value || css_res_p.std %> dslc-navigation-orientation-<%= nav_orientation.value || nav_orientation.std %>">
+		<div class="dslc-navigation-inner" data-module-method="get_navigation">
+			<ul class="menu">
+				<li class="current-menu-item">
+					<a href="#">Page 1</a>
+					<span class="dslc-navigation-arrow dslc-icon dslc-icon-chevron-down"></span>
+					<ul class="sub-menu">
+						<li class="current-menu-item"><a href="#">Link 1</a></li>
+						<li><a href="#">Link 2</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">Page 2</a>
+					<span class="dslc-navigation-arrow dslc-icon dslc-icon-chevron-down"></span>
+					<ul class="sub-menu">
+						<li><a href="#">Link 1</a></li>
+						<li><a href="#">Link 2</a></li>
+						<li><a href="#">Link 3</a></li>
+					</ul>
+				</li>
+				<li><a href="#">Page 3</a></li>
+				<li><a href="#">Page 4</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="dslc-mobile-navigation dslc-navigation-res-t-<%= css_res_t.value || css_res_t.std %>  dslc-navigation-res-p-<%= css_res_p.value || css_res_p.std %>" data-module-method="get_mobile_navigation">
+		<select>
+			<option>- Select -</option>
+			<option value="#">Home</option>
+			<option value="#">Test 1</option>
+			<option value="#">Test 2</option>
+			<option value="#">Test 3</option>
+			<option value="#">Test 4</option>
+		</select>
+		<div class="dslc-mobile-navigation-hook"><span class="dslc-icon dslc-icon-reorder"></span></div>
+	</div><!-- .dslc-mobile-navigation -->
+<%}%>

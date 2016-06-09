@@ -1,8 +1,14 @@
 <?php
+/**
+ * Navigation module class
+ */
 
 if ( dslc_is_module_active( 'DSLC_Navigation' ) )
 	include DS_LIVE_COMPOSER_ABS . '/modules/navigation/functions.php';
 
+/**
+ * Class DSLC_Navigation
+ */
 class DSLC_Navigation extends DSLC_Module {
 
 	var $module_id;
@@ -10,16 +16,24 @@ class DSLC_Navigation extends DSLC_Module {
 	var $module_icon;
 	var $module_category;
 
-	function __construct() {
+	/**
+	 * @inherited
+	 */
+	function __construct( $settings = [], $atts = [] ) {
 
-		$this->module_id = 'DSLC_Navigation';
+		$this->module_ver = 2;
+		$this->module_id = __CLASS__;
 		$this->module_title = __( 'Navigation', 'live-composer-page-builder' );
 		$this->module_icon = 'link';
 		$this->module_category = 'elements';
 
+		parent::__construct( $settings, $atts );
 	}
 
-	function options() {	
+	/**
+	 * @inherited
+	 */
+	function options() {
 
 		$locs = get_registered_nav_menus();
 
@@ -28,7 +42,7 @@ class DSLC_Navigation extends DSLC_Module {
 			'label' => __( 'Choose Navigation', 'live-composer-page-builder' ),
 			'value' => 'not_set',
 		);
-			
+
 		if ( ! empty( $locs ) ) {
 			foreach ( $locs as $loc_ID => $loc_label ) {
 				$loc_choices[] = array(
@@ -39,7 +53,7 @@ class DSLC_Navigation extends DSLC_Module {
 		}
 
 		$dslc_options = array(
-			
+
 			/**
 			 * Functionality
 			 */
@@ -340,7 +354,7 @@ class DSLC_Navigation extends DSLC_Module {
 			),
 
 			/**
-			 * Styling - Item 
+			 * Styling - Item
 			 */
 
 			array(
@@ -537,7 +551,7 @@ class DSLC_Navigation extends DSLC_Module {
 			array(
 				'label' => __( 'Font Family', 'live-composer-page-builder' ),
 				'id' => 'css_item_font_family',
-				'std' => 'Montserrat',
+				'std' => 'Open Sans',
 				'type' => 'font',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-navigation .menu > li > a',
@@ -721,17 +735,6 @@ class DSLC_Navigation extends DSLC_Module {
 						'value' => 'right',
 					),
 				),
-				'section' => 'styling',
-				'tab' => __( 'subnav', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'Align', 'live-composer-page-builder' ),
-				'id' => 'css_subnav_align',
-				'std' => 'left',
-				'type' => 'text_align',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-navigation .menu ul',
-				'affect_on_change_rule' => 'text-align',
 				'section' => 'styling',
 				'tab' => __( 'subnav', 'live-composer-page-builder' ),
 			),
@@ -931,7 +934,7 @@ class DSLC_Navigation extends DSLC_Module {
 				'section' => 'styling',
 				'ext' => 'px',
 				'tab' => __( 'subnav', 'live-composer-page-builder' ),
-			),			
+			),
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_subnav_padding_vertical',
@@ -958,7 +961,7 @@ class DSLC_Navigation extends DSLC_Module {
 			),
 
 			/**
-			 * Styling - Item 
+			 * Styling - Item
 			 */
 
 			array(
@@ -1155,7 +1158,7 @@ class DSLC_Navigation extends DSLC_Module {
 			array(
 				'label' => __( 'Font Family', 'live-composer-page-builder' ),
 				'id' => 'css_subnav_item_font_family',
-				'std' => 'Montserrat',
+				'std' => 'Open Sans',
 				'type' => 'font',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-navigation .menu ul li a',
@@ -1385,77 +1388,98 @@ class DSLC_Navigation extends DSLC_Module {
 
 	}
 
-	function output( $options ) {
+	/**
+	 * @inherited
+	 */
+	function afterRegister() {
 
-		$this->module_start( $options );
+		add_action( 'wp_enqueue_scripts', function(){
 
-		/* Module output starts here */
+			//global $LC_Registry;
 
-			global $dslc_active;
+			$path = explode( '/', __DIR__ );
+			$path = array_pop( $path );
 
-			if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
-				$dslc_is_admin = true;
-			else
-				$dslc_is_admin = false;
+			// if ( $LC_Registry->get( 'dslc_active' ) == true ) {
 
-			?>
+			// 	wp_enqueue_script( 'js-staff-editor-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/editor-script.js', array( 'jquery' ) );
+			// }
 
-			<?php
-				if ( $options['location'] == 'not_set' ) {
-					if ( $dslc_is_admin ) {
-						?><div class="dslc-notification dslc-red"><?php _e( 'Edit the module and choose which location to show.', 'live-composer-page-builder' ); ?> <span class="dslca-refresh-module-hook dslc-icon dslc-icon-refresh"></span></span></div><?php
+			wp_enqueue_script( 'js-navigation-extender', DS_LIVE_COMPOSER_URL . '/modules/' . $path . '/script.js', array( 'jquery' ) );
+		});
+	}
+
+	/**
+	 * Navigation
+	 */
+	function get_navigation() {
+
+		$options = $this->getPropsValues();
+
+		ob_start();
+
+		wp_nav_menu( array( 'theme_location' => $options['location'] ) );
+
+		return ob_get_clean();
+	}
+
+	/**
+	 * Mobile Navigation
+	 */
+	function get_mobile_navigation() {
+
+		$options = $this->getPropsValues();
+
+		if( has_nav_menu( $options['location'] ) ) {
+
+			$mobile_nav_output = '';
+			$mobile_nav_output .= '<select>';
+			$mobile_nav_output .= '<option>' . __( '- Select -', 'live-composer-page-builder' ) . '</option>';
+
+			if ( has_nav_menu( $options['location'] ) ) {
+
+				$locations = get_nav_menu_locations();
+				$menu = wp_get_nav_menu_object( $locations[$options['location']] );
+				$menu_items = wp_get_nav_menu_items($menu->term_id);
+
+				foreach ( $menu_items as $key => $menu_item ) {
+					$title = $menu_item->title;
+					$url = $menu_item->url;
+					$nav_selected = '';
+					if($menu_item->post_parent !== 0){
+						$mobile_nav_output .= '<option value="'.$url.'" '.$nav_selected.'> - '.$title.'</option>';
+					}else{
+						$mobile_nav_output .= '<option value="'.$url.'" '.$nav_selected.'>'.$title.'</option>';
 					}
-				} elseif ( ! has_nav_menu( $options['location'] ) ) {
-					if ( $dslc_is_admin ) {
-						?><div class="dslc-notification dslc-red"><?php _e( 'The chosen location does not have a menu assigned.', 'live-composer-page-builder' ); ?> <span class="dslca-refresh-module-hook dslc-icon dslc-icon-refresh"></span></span></div><?php
-					}
-				} else {
-					?>
-					<div class="dslc-navigation dslc-navigation-sub-position-<?php echo $options['css_subnav_position']; ?> dslc-navigation-res-t-<?php echo $options['css_res_t']; ?> dslc-navigation-res-p-<?php echo $options['css_res_p']; ?> dslc-navigation-orientation-<?php echo $options['nav_orientation']; ?>">
-						<div class="dslc-navigation-inner">
-							<?php wp_nav_menu( array( 'theme_location' => $options['location'] ) ); ?>
-						</div>
-					</div>
-					<div class="dslc-mobile-navigation dslc-navigation-res-t-<?php echo $options['css_res_t']; ?>  dslc-navigation-res-p-<?php echo $options['css_res_p']; ?>">
-						<?php
-							if( has_nav_menu( $options['location'] ) ) {
-
-								$mobile_nav_output = '';
-								$mobile_nav_output .= '<select>';
-								$mobile_nav_output .= '<option>' . __( '- Select -', 'live-composer-page-builder' ) . '</option>';
-								
-								if ( has_nav_menu( $options['location'] ) ) {
-
-									$locations = get_nav_menu_locations();
-									$menu = wp_get_nav_menu_object( $locations[$options['location']] );
-									$menu_items = wp_get_nav_menu_items($menu->term_id);
-										
-									foreach ( $menu_items as $key => $menu_item ) {
-										$title = $menu_item->title;
-										$url = $menu_item->url;
-										$nav_selected = '';
-										if($menu_item->post_parent !== 0){
-											$mobile_nav_output .= '<option value="'.$url.'" '.$nav_selected.'> - '.$title.'</option>';
-										}else{
-											$mobile_nav_output .= '<option value="'.$url.'" '.$nav_selected.'>'.$title.'</option>';
-										}
-									}
-
-								}
-
-								$mobile_nav_output .= '</select>';
-								echo $mobile_nav_output;
-							}
-						?>
-						<div class="dslc-mobile-navigation-hook"><span class="dslc-icon dslc-icon-reorder"></span></div>
-					</div><!-- .dslc-mobile-navigation -->
-					<?php
 				}
 
+			}
+
+			$mobile_nav_output .= '</select>';
+		}
+
+		ob_start();
+
+		echo $mobile_nav_output;?>
+		<div class="dslc-mobile-navigation-hook"><span class="dslc-icon dslc-icon-reorder"></span></div>
+		<?php return ob_get_clean();
+	}
+
+	/**
+	 * @inherited
+	 */
+	function output( $options = [] )
+	{
+		$this->module_start();
+
+		/* Module output stars here */
+		echo $this->renderModule();
 		/* Module output ends here */
 
-		$this->module_end( $options );
-
+		$this->module_end();
 	}
 
 }
+
+/// Register module
+( new DSLC_Navigation )->register();
