@@ -104,6 +104,10 @@ body.admin-bar #dslc-header.dslc-header-pos-absolute {
 	bottom: 5px;
 }
 
+.dslca-activate-composer-hook:hover {
+	background: #40D71F;
+}
+
 .dslca-activate-composer-hook.dslca-position-left {
 	right: auto;
 	left: 5px;

@@ -272,14 +272,15 @@ var dslcDebug = false;
 		if ( dslcDebug ) console.log( 'dslc_generate_filters' );
 
 		// Vars
-		var el, filters = [], filtersHTML = '<span data-origin="">All Elements</span>', els = jQuery('.dslca-section:visible .dslca-origin');
+		var el, filters = [], filtersHTML = '<span data-origin="">Show All</span>', els = jQuery('.dslca-section:visible .dslca-origin');
 
 		// Go through each and generate the filters
 		els.each(function(){
 			el = jQuery(this);
+
 			if ( jQuery.inArray( el.data('origin'), filters ) == -1 ) {
 				filters.push( el.data('origin') );
-				filtersHTML += '<span data-origin="' + el.data('origin') + '">' + el.data('origin').replace( '_', ' ' ) + '</span>';
+				filtersHTML += '<span data-origin="' + el.data('origin') + '">' + el.data('origin') + '</span>';
 			}
 		});
 
@@ -762,7 +763,7 @@ var dslcDebug = false;
 			var section = $(this).closest('.dslca-section');
 
 			if ( section.hasClass('dslca-templates-load') ) {
-				$('.dslca-section-title-filter-curr', section).text( $(this).text() + ' Templates' );
+				$('.dslca-section-title-filter-curr', section).text( $(this).text());
 			} else {
 				$('.dslca-section-title-filter-curr', section).text( $(this).text());
 			}

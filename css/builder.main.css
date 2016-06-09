@@ -181,7 +181,8 @@ body {
 				font-family: "Roboto", sans-serif;
 				font-weight: 400;
 				line-height: 1;
-				padding: 11px 12px;
+				padding: 10px 12px;
+				margin-right: 6px;
 			}
 
 			.dslca-module-edit-cancel,
@@ -229,7 +230,7 @@ body {
 				display: block;
 				float: left;
 				width: 32px;
-				line-height: 55px;
+				line-height: 74px;
 				text-align: center;
 			}
 
@@ -965,9 +966,13 @@ body {
 			font-family: "Roboto Condensed", sans-serif;
 			font-size: 15px;
 			line-height: 1;
-			padding: 20px 25px;
+			padding: 25px;
 			position: relative;
 			/* text-transform: uppercase; */
+		}
+
+		.dslca-template-title {
+		    line-height: 26px;
 		}
 
 		.dslca-template-origin-user {
@@ -977,13 +982,10 @@ body {
 			.dslca-template .dslca-delete-template-hook {
 				background: rgba( 0, 0, 0, 0.2 );
 				border-radius: 3px;
-				bottom: 15px;
-				padding: 3px 0;
-				position: absolute;
-				top: 15px;
-				right: 10px;
-				width: 25px;
-				text-align: center;
+				display: inline-block;
+				margin-left: 7px;
+				padding: 5px 7px;
+
 			}
 
 				.dslca-template .dslca-delete-template-hook .dslca-icon {
@@ -1344,22 +1346,23 @@ body {
  * Save Composer (confirm changes)
  */
 
-.dslca-save-composer {
+.dslca-save-composer,
+.dslca-save-draft-composer {
 	background: #313131;
 	border-radius: 3px 6px 6px 3px;
 	cursor: pointer;
-	font-size: 11px;
-	font-family: "Roboto Condensed", sans-serif;
-	font-weight: 900;
+	font-size: 13px;
+	font-weight: 400;
+	font-family: "Roboto",sans-serif;
 	float: left;
 	line-height: 1;
 	opacity: 0;
 	display: none;
-	padding: 11px 12px;
+	padding: 10px 12px;
 	padding-right: 43px;
-	/* text-transform: uppercase; */
 	text-decoration: none;
 	position: relative;
+	margin-right: 6px;
 }
 
 	.dslca-save-composer-helptext {
@@ -1367,7 +1370,8 @@ body {
 		white-space: nowrap;
 	}
 
-	.dslca-save-composer .dslca-save-composer-icon {
+	.dslca-save-composer .dslca-save-composer-icon,
+	.dslca-save-draft-composer .dslca-save-draft-composer-icon {
 		background: #78ca4f;
 		bottom: 0;
 		border-radius: 0 3px 3px 0;
@@ -1377,7 +1381,7 @@ body {
 		display: block;
 		position: absolute;
 		right: 0;
-		top: -1px;
+		top: 0;
 		text-align: center;
 		width: 30px;
 	}
@@ -1393,43 +1397,10 @@ body {
  * Save Draft (confirm changes)
  */
 
-.dslca-save-draft-composer {
-	background: #313131;
-	border-radius: 3px 6px 6px 3px;
-	cursor: pointer;
-	font-size: 11px;
-	font-family: "Roboto Condensed", sans-serif;
-	font-weight: 900;
-	float: left;
-	line-height: 1;
-	opacity: 0;
-	display: none;
-	padding: 11px 12px;
-	padding-right: 43px;
-	/* text-transform: uppercase; */
-	text-decoration: none;
-	position: relative;
-	margin-left: 5px;
-}
 
 	.dslca-save-draft-composer-helptext {
 		color: #adadad;
 		white-space: nowrap;
-	}
-
-	.dslca-save-draft-composer .dslca-save-draft-composer-icon {
-		background: #78ca4f;
-		bottom: 0;
-		border-radius: 0 3px 3px 0;
-		border-top: 1px solid #b8e3a2;
-		cursor: pointer;
-		color: #fff;
-		display: block;
-		position: absolute;
-		right: 0;
-		top: -1px;
-		text-align: center;
-		width: 30px;
 	}
 
 		.dslca-save-draft-composer .dslca-save-draft-composer-icon .dslca-icon {
