@@ -10,8 +10,8 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 	function __construct() {
 
 		$this->module_id = 'DSLC_WooCommerce_Products';
-		$this->module_title = __( 'Products ( Woo )', 'live-composer-page-builder' );
-		$this->module_icon = 'dollar';
+		$this->module_title = __( 'Woo Products', 'live-composer-page-builder' );
+		$this->module_icon = 'shopping-cart';
 		$this->module_category = 'posts';
 
 	}

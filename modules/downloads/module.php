@@ -14,7 +14,7 @@ class DSLC_Downloads extends DSLC_Module {
 
 		$this->module_id = 'DSLC_Downloads';
 		$this->module_title = __( 'Downloads', 'live-composer-page-builder' );
-		$this->module_icon = 'download';
+		$this->module_icon = 'cloud-download';
 		$this->module_category = 'posts';
 
 	}

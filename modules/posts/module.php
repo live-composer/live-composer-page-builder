@@ -11,7 +11,7 @@ class DSLC_Posts extends DSLC_Module {
 
 		$this->module_id = 'DSLC_Posts';
 		$this->module_title = __( 'Posts', 'live-composer-page-builder' );
-		$this->module_icon = 'pencil';
+		$this->module_icon = 'th-large';
 		$this->module_category = 'posts';
 
 	}

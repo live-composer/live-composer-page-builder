@@ -14,7 +14,7 @@ class DSLC_Navigation extends DSLC_Module {
 
 		$this->module_id = 'DSLC_Navigation';
 		$this->module_title = __( 'Navigation', 'live-composer-page-builder' );
-		$this->module_icon = 'link';
+		$this->module_icon = 'map-signs';
 		$this->module_category = 'elements';
 
 	}

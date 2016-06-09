@@ -11,7 +11,7 @@ class DSLC_Info_Box extends DSLC_Module {
 
 		$this->module_id = 'DSLC_Info_Box';
 		$this->module_title = __( 'Info Box', 'live-composer-page-builder' );
-		$this->module_icon = 'info';
+		$this->module_icon = 'mouse-pointer';//'info';
 		$this->module_category = 'elements';
 
 	}

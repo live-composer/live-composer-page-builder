@@ -14,7 +14,7 @@ class DSLC_Galleries extends DSLC_Module {
 
 		$this->module_id = 'DSLC_Galleries';
 		$this->module_title = __( 'Galleries', 'live-composer-page-builder' );
-		$this->module_icon = 'picture';
+		$this->module_icon = 'camera-retro';
 		$this->module_category = 'posts';
 
 	}

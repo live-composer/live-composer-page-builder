@@ -11,7 +11,7 @@ class DSLC_Icon extends DSLC_Module {
 
 		$this->module_id = 'DSLC_Icon';
 		$this->module_title = __( 'Icon', 'live-composer-page-builder' );
-		$this->module_icon = 'info';
+		$this->module_icon = 'heart';
 		$this->module_category = 'elements';
 
 	}
@@ -43,7 +43,7 @@ class DSLC_Icon extends DSLC_Module {
 			array(
 				'label' => __( 'Icon', 'live-composer-page-builder' ),
 				'id' => 'icon_id',
-				'std' => 'adjust',
+				'std' => 'heart',
 				'type' => 'icon',
 			),
 			

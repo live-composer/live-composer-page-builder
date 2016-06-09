@@ -11,7 +11,7 @@ class DSLC_TP_Content extends DSLC_Module {
 
 		$this->module_id = 'DSLC_TP_Content';
 		$this->module_title = __( 'The Content', 'live-composer-page-builder' );
-		$this->module_icon = 'font';
+		$this->module_icon = 'newspaper-o';
 		$this->module_category = 'single';
 
 	}

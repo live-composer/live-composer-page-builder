@@ -11,12 +11,12 @@ class DSLC_Text_Simple extends DSLC_Module {
 
 		$this->module_id = 'DSLC_Text_Simple';
 		$this->module_title = __( 'Text', 'live-composer-page-builder' );
-		$this->module_icon = 'pencil';
+		$this->module_icon = 'align-left';
 		$this->module_category = 'general';
 
 	}
 
-	function options() {	
+	function options() {
 
 		$dslc_options = array(
 
@@ -3166,11 +3166,11 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'buttons', 'live-composer-page-builder' ),
 			),
-			
+
 			/**
 			 * Responsive Tablet
 			 */
-			
+
 			array(
 				'label' => __( 'Responsive Styling', 'live-composer-page-builder' ),
 				'id' => 'css_res_t',
@@ -3713,7 +3713,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 			/**
 			 * Responsive Phone
 			 */
-			
+
 			array(
 				'label' => __( 'Responsive Styling', 'live-composer-page-builder' ),
 				'id' => 'css_res_p',
@@ -4264,7 +4264,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 
 	function output( $options ) {
 
-		global $dslc_active;		
+		global $dslc_active;
 
 		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
 			$dslc_is_admin = true;
@@ -4274,13 +4274,13 @@ class DSLC_Text_Simple extends DSLC_Module {
 		$this->module_start( $options );
 
 		/* Module output starts here */
-			
-			?><div class="dslc-text-module-content"><?php 
+
+			?><div class="dslc-text-module-content"><?php
 
 				if ( $dslc_active ) {
 					?><div class="dslca-editable-content" data-id="content"<?php if ( $dslc_is_admin ) echo ' data-exportable-content'; ?>><?php
 				}
-				
+
 					$output_content = stripslashes( $options['content'] );
 					$output_content = str_replace( '<lctextarea', '<textarea', $output_content );
 					$output_content = str_replace( '</lctextarea', '</textarea', $output_content );

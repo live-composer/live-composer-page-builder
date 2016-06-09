@@ -41,6 +41,44 @@ class DSLC_Separator extends DSLC_Module {
 				),
 			),
 			array(
+				'label' => __( 'Height', 'live-composer-page-builder' ),
+				'id' => 'height',
+				'std' => '25',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-separator',
+				'affect_on_change_rule' => 'margin-bottom,padding-bottom',
+				'ext' => 'px',
+				'min' => 1,
+				'max' => 300,
+				'section' => 'styling',
+			),
+			array(
+				'label' => __( 'Style', 'live-composer-page-builder' ),
+				'id' => 'style',
+				'std' => 'invisible',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'Invisible', 'live-composer-page-builder' ),
+						'value' => 'invisible'
+					),
+					array(
+						'label' => __( 'Solid', 'live-composer-page-builder' ),
+						'value' => 'solid'
+					),
+					array(
+						'label' => __( 'Dashed', 'live-composer-page-builder' ),
+						'value' => 'dashed'
+					),
+					array(
+						'label' => __( 'Dotted', 'live-composer-page-builder' ),
+						'value' => 'dotted'
+					),
+				),
+				'section' => 'styling',
+			),
+			array(
 				'label' => __( 'BG Color', 'live-composer-page-builder' ),
 				'id' => 'css_bg_color',
 				'std' => '',
@@ -235,44 +273,6 @@ class DSLC_Separator extends DSLC_Module {
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-separator',
 				'affect_on_change_rule' => 'border-color',
-				'section' => 'styling',
-			),
-			array(
-				'label' => __( 'Height', 'live-composer-page-builder' ),
-				'id' => 'height',
-				'std' => '25',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-separator',
-				'affect_on_change_rule' => 'margin-bottom,padding-bottom',
-				'ext' => 'px',
-				'min' => 1,
-				'max' => 300,
-				'section' => 'styling',
-			),
-			array(
-				'label' => __( 'Style', 'live-composer-page-builder' ),
-				'id' => 'style',
-				'std' => 'solid',
-				'type' => 'select',
-				'choices' => array(
-					array(
-						'label' => __( 'Invisible', 'live-composer-page-builder' ),
-						'value' => 'invisible'
-					),
-					array(
-						'label' => __( 'Solid', 'live-composer-page-builder' ),
-						'value' => 'solid'
-					),
-					array(
-						'label' => __( 'Dashed', 'live-composer-page-builder' ),
-						'value' => 'dashed'
-					),
-					array(
-						'label' => __( 'Dotted', 'live-composer-page-builder' ),
-						'value' => 'dotted'
-					),
-				),
 				'section' => 'styling',
 			),
 			array(

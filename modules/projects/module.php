@@ -14,7 +14,7 @@ class DSLC_Projects extends DSLC_Module {
 
 		$this->module_id = 'DSLC_Projects';
 		$this->module_title = __( 'Projects', 'live-composer-page-builder' );
-		$this->module_icon = 'th';
+		$this->module_icon = 'briefcase';
 		$this->module_category = 'posts';
 
 	}

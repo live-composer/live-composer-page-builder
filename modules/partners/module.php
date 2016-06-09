@@ -14,7 +14,7 @@ class DSLC_Partners extends DSLC_Module {
 
 		$this->module_id = 'DSLC_Partners';
 		$this->module_title = __( 'Partners', 'live-composer-page-builder' );
-		$this->module_icon = 'th';
+		$this->module_icon = 'user-secret';
 		$this->module_category = 'posts';
 
 	}
