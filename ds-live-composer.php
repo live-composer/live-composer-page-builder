@@ -60,7 +60,7 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) ):
 	 * Is live composer currently active?
 	 */
 
-	if ( isset( $_REQUEST['dslc'] ) && $_REQUEST['dslc'] === 'active' ) {
+	if ( isset( $_REQUEST['dslc'] ) && 'active' === $_REQUEST['dslc'] ) {
 		$dslc_active = true;
 		define( 'DS_LIVE_COMPOSER_ACTIVE', true );
 	} else {

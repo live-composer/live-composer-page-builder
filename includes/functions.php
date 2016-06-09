@@ -44,6 +44,33 @@ function dslc_load_translation() {
 function dslc_register_modules() {
 
 	// Register default modules
+	dslc_register_module( 'DSLC_Html' );
+	dslc_register_module( 'DSLC_Text_Simple' );
+	dslc_register_module( 'DSLC_Image' );
+	dslc_register_module( 'DSLC_Button' );
+	dslc_register_module( 'DSLC_Icon' );
+	dslc_register_module( 'DSLC_Info_Box' );
+	dslc_register_module( 'DSLC_Social' );
+	dslc_register_module( 'DSLC_Separator' );
+	dslc_register_module( 'DSLC_Tabs' );
+	dslc_register_module( 'DSLC_Accordion' );
+	dslc_register_module( 'DSLC_Progress_Bars' );
+	dslc_register_module( 'DSLC_Notification' );
+
+	dslc_register_module( 'DSLC_Blog' );
+	dslc_register_module( 'DSLC_Posts' );
+	dslc_register_module( 'DSLC_Projects' );
+	dslc_register_module( 'DSLC_WooCommerce_Products' );
+	dslc_register_module( 'DSLC_Testimonials' );
+	dslc_register_module( 'DSLC_Partners' );
+	dslc_register_module( 'DSLC_Galleries' );
+	dslc_register_module( 'DSLC_Downloads' );
+	dslc_register_module( 'DSLC_Staff' );
+
+	dslc_register_module( 'DSLC_Widgets' );
+	dslc_register_module( 'DSLC_Navigation' );
+	dslc_register_module( 'DSLC_Sliders' );
+
 	dslc_register_module( 'DSLC_TP_Thumbnail' );
 	dslc_register_module( 'DSLC_TP_Title' );
 	dslc_register_module( 'DSLC_TP_Content' );
@@ -55,30 +82,7 @@ function dslc_register_modules() {
 	dslc_register_module( 'DSLC_TP_Comments' );
 	dslc_register_module( 'DSLC_TP_Comments_Form' );
 	dslc_register_module( 'DSLC_TP_Staff_Social' );
-	dslc_register_module( 'DSLC_Accordion' );
-	dslc_register_module( 'DSLC_Separator' );
-	dslc_register_module( 'DSLC_Text_Simple' );
-	dslc_register_module( 'DSLC_Html' );
-	dslc_register_module( 'DSLC_Posts' );
-	dslc_register_module( 'DSLC_Blog' );
-	dslc_register_module( 'DSLC_Projects' );
-	dslc_register_module( 'DSLC_Galleries' );
-	dslc_register_module( 'DSLC_Downloads' );
-	dslc_register_module( 'DSLC_Testimonials' );
-	dslc_register_module( 'DSLC_Staff' );
-	dslc_register_module( 'DSLC_Partners' );
-	dslc_register_module( 'DSLC_WooCommerce_Products' );
-	dslc_register_module( 'DSLC_Social' );
-	dslc_register_module( 'DSLC_Notification' );
-	dslc_register_module( 'DSLC_Button' );
-	dslc_register_module( 'DSLC_Image' );
-	dslc_register_module( 'DSLC_Tabs' );
-	dslc_register_module( 'DSLC_Progress_Bars' );
-	dslc_register_module( 'DSLC_Sliders' );
-	dslc_register_module( 'DSLC_Info_Box' );
-	dslc_register_module( 'DSLC_Widgets' );
-	dslc_register_module( 'DSLC_Icon' );
-	dslc_register_module( 'DSLC_Navigation' );
+
 
 	// Hook to register custom modules
 	do_action( 'dslc_hook_register_modules' );
