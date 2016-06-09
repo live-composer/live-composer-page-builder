@@ -11,6 +11,8 @@
  * - dslc_filter_content ( Filters the_content() to show composer output )
  * - dslc_module_front ( Returns front-end output of a specific module )
  * - dslc_custom_css ( Generates Custom CSS for the show page )
+ * – dslc_modules_section_front ( HTML output for the sections )
+ * – dslc_module_front ( HTML output for the modules/elements )
  */
 
 
@@ -99,11 +101,11 @@ function dslc_display_composer() {
 				<div class="dslca-sections">
 
 					<!-- Modules Listing -->
-					<div class="dslca-section dslca-modules" data-bg="#5890e5">
+					<div class="dslca-section dslca-modules" data-bg="#4A7AC3">
 
 						<div class="dslca-section-title">
 							<div class="dslca-section-title-filter">
-								<span class="dslca-section-title-filter-curr"><?php _e( 'ALL MODULES', 'live-composer-page-builder' ); ?></span>
+								<span class="dslca-section-title-filter-curr"><?php _e( 'Elements', 'live-composer-page-builder' ); ?></span>
 								<span class="dslca-icon dslc-icon-angle-up"></span>
 								<div class="dslca-section-title-filter-options"></div>
 							</div><!-- .dslca-section-title-filter -->
@@ -472,7 +474,7 @@ function dslc_display_modules() {
 		?>
 
 		<div class="dslca-module dslca-scroller-item dslca-origin" data-origin="general" data-id="DSLC_M_A">
-			<span class="dslca-icon dslc-icon-th-large"></span><span class="dslca-module-title"><?php _e( 'MODULES AREA', 'live-composer-page-builder' ); ?></span>
+			<span class="dslca-icon dslc-icon-th-large"></span><span class="dslca-module-title"><?php _e( 'Column', 'live-composer-page-builder' ); ?></span>
 		</div><!-- .dslc-module -->
 
 		<?php
@@ -853,7 +855,7 @@ function dslc_filter_content( $content ) {
 
 
 /**
- * Output front end module content
+ * HTML output for the modules/elements
  *
  * @since 1.0
  */
@@ -949,7 +951,7 @@ function dslc_module_front( $atts, $settings_raw = null ) {
 } add_shortcode( 'dslc_module', 'dslc_module_front' );
 
 /**
- * Output front end modules area content
+ * HTML output for the sections.
  *
  * @since 1.0
  */
@@ -1049,32 +1051,29 @@ function dslc_modules_section_front( $atts, $content = null ) {
 	if ( $atts['columns_spacing'] == 'nospacing' )
 		$section_class .= 'dslc-no-columns-spacing ';
 
-	// Custom Class
+	// Custom Class.
 	if ( $atts['custom_class'] != '' )
 		$section_class .= $atts['custom_class'] . ' ';
 
-	// Show on Class
-	if ( $atts['show_on'] != '' ) {
+	// Show on Class.
+	// if ( '' !== $atts['show_on']  ) {
+	$show_on = explode( ' ', trim( $atts['show_on'] ) );
 
-		$show_on = explode( ' ', trim( $atts['show_on'] ) );
-
-		if ( ! in_array( 'desktop', $show_on ) ) {
-			$section_class .= 'dslc-hide-on-desktop ';
-		}
-
-		if ( ! in_array( 'tablet', $show_on ) ) {
-			$section_class .= 'dslc-hide-on-tablet ';
-		}
-
-		if ( ! in_array( 'phone', $show_on ) ) {
-			$section_class .= 'dslc-hide-on-phone ';
-		}
-
+	if ( ! in_array( 'desktop', $show_on, true ) ) {
+		$section_class .= 'dslc-hide-on-desktop ';
 	}
 
-	// Allows devs to add classes
+	if ( ! in_array( 'tablet', $show_on, true ) ) {
+		$section_class .= 'dslc-hide-on-tablet ';
+	}
+
+	if ( ! in_array( 'phone', $show_on, true ) ) {
+		$section_class .= 'dslc-hide-on-phone ';
+	}
+	// }
+	// Allow other developers to add classes.
 	$filter_classes = array();
-	$filter_classes = apply_filters( 'dslc_row_class', $filter_classes );
+	$filter_classes = apply_filters( 'dslc_row_class', $filter_classes, $atts );
 	$extra_classes = '';
 	if ( count( $filter_classes ) > 0 ) {
 		foreach ( $filter_classes as $filter_class ) {
@@ -1082,7 +1081,7 @@ function dslc_modules_section_front( $atts, $content = null ) {
 		}
 	}
 
-	// Custom ID
+	// Custom ID.
 	$section_id = false;
 	if ( $atts['custom_id'] != '' )
 		$section_id = $atts['custom_id'];

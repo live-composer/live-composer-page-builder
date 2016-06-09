@@ -350,5 +350,7 @@
 
 		// Hook to register custom modules or alter current
 		do_action( 'dslc_hook_row_options' );
+		// Filter to filter the registered row controls
+		$dslc_var_row_options= apply_filters( 'dslc_filter_row_options', $dslc_var_row_options );
 
 	} add_action( 'init', 'dslc_row_register_options' );

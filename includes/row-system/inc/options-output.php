@@ -163,6 +163,11 @@
 
 	}
 
+	/**
+	 * Generate CSS styles for the ROW
+	 * @param  array $atts set of section attributes
+	 * @return string      CSS styles for the ROW
+	 */
 	function dslc_row_get_style( $atts = false ) {
 
 		global $dslc_var_row_options;

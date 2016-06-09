@@ -1899,6 +1899,7 @@ class DSLC_Module {
 						<span class="dslca-module-manage-hook dslca-change-width-module-hook">
 							<span class="dslc-icon-columns"></span>
 							<div class="dslca-change-width-module-options">
+								<span>Module Width</span>
 								<span data-size="1">1/12</span><span data-size="2">2/12</span>
 								<span data-size="3">3/12</span><span data-size="4">4/12</span>
 								<span data-size="5">5/12</span><span data-size="6">6/12</span>
