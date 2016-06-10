@@ -193,7 +193,7 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'affect_on_change_el' => ' ul.dslc-staff-social .dslc-icon',
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
-				'tab' => __( 'icon', 'live-composer-page-builder' ),
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Color - Hover', 'live-composer-page-builder' ),
@@ -204,7 +204,7 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'affect_on_change_el' => ' ul.dslc-staff-social a:hover .dslc-icon',
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
-				'tab' => __( 'icon', 'live-composer-page-builder' ),
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Size', 'live-composer-page-builder' ),
@@ -215,7 +215,7 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-staff-social a',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'styling',
-				'tab' => __( 'icon', 'live-composer-page-builder' ),
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 

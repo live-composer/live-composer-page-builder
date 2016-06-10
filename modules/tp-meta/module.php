@@ -295,7 +295,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 				'affect_on_change_el' => 'li',
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
-				'tab' => __( 'typography', 'live-composer-page-builder' ),
+				'tab' => __( 'Typography', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Color - Hover', 'live-composer-page-builder' ),
@@ -306,7 +306,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 				'affect_on_change_el' => 'li:hover',
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
-				'tab' => __( 'typography', 'live-composer-page-builder' ),
+				'tab' => __( 'Typography', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Font Size', 'live-composer-page-builder' ),
@@ -317,7 +317,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 				'affect_on_change_el' => 'li, li a',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'styling',
-				'tab' => __( 'typography', 'live-composer-page-builder' ),
+				'tab' => __( 'Typography', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -329,7 +329,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 				'affect_on_change_el' => 'li, li a',
 				'affect_on_change_rule' => 'font-weight',
 				'section' => 'styling',
-				'tab' => __( 'typography', 'live-composer-page-builder' ),
+				'tab' => __( 'Typography', 'live-composer-page-builder' ),
 				'ext' => '',
 				'min' => 100,
 				'max' => 900,
@@ -344,7 +344,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 				'affect_on_change_el' => 'li, li a',
 				'affect_on_change_rule' => 'font-family',
 				'section' => 'styling',
-				'tab' => __( 'typography', 'live-composer-page-builder' ),
+				'tab' => __( 'Typography', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Line Height', 'live-composer-page-builder' ),
@@ -355,7 +355,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 				'affect_on_change_el' => 'li, li a',
 				'affect_on_change_rule' => 'line-height',
 				'section' => 'styling',
-				'tab' => __( 'typography', 'live-composer-page-builder' ),
+				'tab' => __( 'Typography', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -367,7 +367,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 				'affect_on_change_el' => 'li',
 				'affect_on_change_rule' => 'text-shadow',
 				'section' => 'styling',
-				'tab' => __( 'typography', 'live-composer-page-builder' ),
+				'tab' => __( 'Typography', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Link - Color', 'live-composer-page-builder' ),
@@ -378,7 +378,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 				'affect_on_change_el' => 'li a',
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
-				'tab' => __( 'typography', 'live-composer-page-builder' ),
+				'tab' => __( 'Typography', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Link - Color - Hover', 'live-composer-page-builder' ),
@@ -389,7 +389,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 				'affect_on_change_el' => 'li a:hover',
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
-				'tab' => __( 'typography', 'live-composer-page-builder' ),
+				'tab' => __( 'Typography', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Link - Text Shadow', 'live-composer-page-builder' ),
@@ -400,7 +400,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 				'affect_on_change_el' => 'li a',
 				'affect_on_change_rule' => 'text-shadow',
 				'section' => 'styling',
-				'tab' => __( 'typography', 'live-composer-page-builder' ),
+				'tab' => __( 'Typography', 'live-composer-page-builder' ),
 			),
 
 

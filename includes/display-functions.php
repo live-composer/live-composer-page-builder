@@ -135,7 +135,7 @@ function dslc_display_composer() {
 						<form class="dslca-module-edit-form">
 							<?php do_action( 'dslc_options_prepend' ); ?>
 							<div class="dslca-module-edit-options dslc-clearfix">
-								<div class="dslca-module-edit-options-tabs"></div>
+								<div class="dslca-module-edit-options-tabs dslc-clearfix"></div>
 								<?php
 								/*
 								<!-- Add clear styling button -->
@@ -576,6 +576,10 @@ function dslc_display_templates() {
  */
 function dslc_filter_content( $content ) {
 
+	// Remove filter the_content. Need to fire it once on the page start.
+	// TODO: find a true purpose of this as it breaks the page editing.
+	// remove_filter( 'the_content', 'dslc_filter_content', 101 );
+
 	// If post pass protected and pass not supplied return original content
 	if ( post_password_required( get_the_ID() ) ) {
 		return $content;
@@ -780,7 +784,7 @@ function dslc_filter_content( $content ) {
 							<?php _e( 'Module settings are being loaded. Save/Cancel actions will appear shortly.', 'live-composer-page-builder' ); ?>
 						</div><!-- .dslca-wp-editor-notification -->
 						<div class="dslca-wp-editor-actions">
-							<span class="dslca-wp-editor-save-hook"><?php _e( 'CONFIRM', 'live-composer-page-builder' ); ?></span>
+							<span class="dslca-wp-editor-save-hook"><?php _e( 'Confirm', 'live-composer-page-builder' ); ?></span>
 							<span class="dslca-wp-editor-cancel-hook"><?php _e( 'Cancel', 'live-composer-page-builder' ); ?></span>
 						</div>
 					</div>
@@ -928,8 +932,11 @@ function dslc_module_front( $atts, $settings_raw = null ) {
 
 		// Transform image ID to URL
 		foreach ( $all_opts as $all_opt ) {
+
 			if ( $all_opt['type'] == 'image' ) {
+
 				if ( isset( $settings[$all_opt['id']] ) && ! empty( $settings[$all_opt['id']] ) && is_numeric( $settings[$all_opt['id']] ) ) {
+
 					$dslc_var_image_option_bckp[$all_opt['id']] = $settings[$all_opt['id']];
 					$image_info = wp_get_attachment_image_src( $settings[$all_opt['id']], 'full' );
 					$settings[$all_opt['id']] = $image_info[0];

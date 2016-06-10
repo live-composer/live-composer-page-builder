@@ -202,7 +202,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-header',
 				'affect_on_change_rule' => 'background-color',
 				'section' => 'styling',
-				'tab' => __( 'header', 'live-composer-page-builder' )
+				'tab' => __( 'Header', 'live-composer-page-builder' )
 			),
 			array(
 				'label' => __( 'Border Color', 'live-composer-page-builder' ),
@@ -213,7 +213,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-header',
 				'affect_on_change_rule' => 'border-color',
 				'section' => 'styling',
-				'tab' => __( 'header', 'live-composer-page-builder' )
+				'tab' => __( 'Header', 'live-composer-page-builder' )
 			),
 			array(
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
@@ -225,7 +225,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_rule' => 'border-width',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'header', 'live-composer-page-builder' )
+				'tab' => __( 'Header', 'live-composer-page-builder' )
 			),
 			array(
 				'label' => __( 'Borders', 'live-composer-page-builder' ),
@@ -254,7 +254,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-header',
 				'affect_on_change_rule' => 'border-style',
 				'section' => 'styling',
-				'tab' => __( 'header', 'live-composer-page-builder' )
+				'tab' => __( 'Header', 'live-composer-page-builder' )
 			),
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
@@ -266,7 +266,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'header', 'live-composer-page-builder' )
+				'tab' => __( 'Header', 'live-composer-page-builder' )
 			),
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
@@ -278,7 +278,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'header', 'live-composer-page-builder' )
+				'tab' => __( 'Header', 'live-composer-page-builder' )
 			),
 			array(
 				'label' => __( 'Padding Horizontal', 'live-composer-page-builder' ),
@@ -290,7 +290,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'header', 'live-composer-page-builder' )
+				'tab' => __( 'Header', 'live-composer-page-builder' )
 			),
 
 			/**
@@ -306,7 +306,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-title',
 				'affect_on_change_rule' => 'background-color',
 				'section' => 'styling',
-				'tab' => __( 'title', 'live-composer-page-builder' )
+				'tab' => __( 'Title', 'live-composer-page-builder' )
 			),
 			array(
 				'label' => __( 'Border Color', 'live-composer-page-builder' ),
@@ -317,7 +317,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-title',
 				'affect_on_change_rule' => 'border-color',
 				'section' => 'styling',
-				'tab' => __( 'title', 'live-composer-page-builder' )
+				'tab' => __( 'Title', 'live-composer-page-builder' )
 			),
 			array(
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
@@ -329,7 +329,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_rule' => 'border-width',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'title', 'live-composer-page-builder' )
+				'tab' => __( 'Title', 'live-composer-page-builder' )
 			),
 			array(
 				'label' => __( 'Borders', 'live-composer-page-builder' ),
@@ -358,7 +358,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-title',
 				'affect_on_change_rule' => 'border-style',
 				'section' => 'styling',
-				'tab' => __( 'title', 'live-composer-page-builder' )
+				'tab' => __( 'Title', 'live-composer-page-builder' )
 			),
 			array(
 				'label' => __( 'Color', 'live-composer-page-builder' ),
@@ -369,7 +369,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-title',
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
-				'tab' => __( 'title', 'live-composer-page-builder' )
+				'tab' => __( 'Title', 'live-composer-page-builder' )
 			),
 			array(
 				'label' => __( 'Font Size', 'live-composer-page-builder' ),
@@ -380,7 +380,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-title',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'styling',
-				'tab' => __( 'title', 'live-composer-page-builder' ),
+				'tab' => __( 'Title', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -392,7 +392,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-title',
 				'affect_on_change_rule' => 'font-weight',
 				'section' => 'styling',
-				'tab' => __( 'title', 'live-composer-page-builder' ),
+				'tab' => __( 'Title', 'live-composer-page-builder' ),
 				'ext' => '',
 				'min' => 100,
 				'max' => 900,
@@ -407,7 +407,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-title',
 				'affect_on_change_rule' => 'font-family',
 				'section' => 'styling',
-				'tab' => __( 'title', 'live-composer-page-builder' ),
+				'tab' => __( 'Title', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Line Height', 'live-composer-page-builder' ),
@@ -418,7 +418,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-title',
 				'affect_on_change_rule' => 'line-height',
 				'section' => 'styling',
-				'tab' => __( 'title', 'live-composer-page-builder' ),
+				'tab' => __( 'Title', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -431,7 +431,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'title', 'live-composer-page-builder' )
+				'tab' => __( 'Title', 'live-composer-page-builder' )
 			),
 			array(
 				'label' => __( 'Padding Horizontal', 'live-composer-page-builder' ),
@@ -443,7 +443,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'title', 'live-composer-page-builder' )
+				'tab' => __( 'Title', 'live-composer-page-builder' )
 			),
 			array(
 				'label' => __( 'Text Align', 'live-composer-page-builder' ),
@@ -454,7 +454,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-title',
 				'affect_on_change_rule' => 'text-align',
 				'section' => 'styling',
-				'tab' => __( 'title', 'live-composer-page-builder' ),
+				'tab' => __( 'Title', 'live-composer-page-builder' ),
 			),
 
 			/**
@@ -470,7 +470,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-content',
 				'affect_on_change_rule' => 'background-color',
 				'section' => 'styling',
-				'tab' => __( 'content', 'live-composer-page-builder' )
+				'tab' => __( 'Content', 'live-composer-page-builder' )
 			),
 			array(
 				'label' => __( 'Border Color', 'live-composer-page-builder' ),
@@ -481,7 +481,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-content',
 				'affect_on_change_rule' => 'border-color',
 				'section' => 'styling',
-				'tab' => __( 'content', 'live-composer-page-builder' )
+				'tab' => __( 'Content', 'live-composer-page-builder' )
 			),
 			array(
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
@@ -493,7 +493,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_rule' => 'border-width',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'content', 'live-composer-page-builder' )
+				'tab' => __( 'Content', 'live-composer-page-builder' )
 			),
 			array(
 				'label' => __( 'Borders', 'live-composer-page-builder' ),
@@ -522,7 +522,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-content',
 				'affect_on_change_rule' => 'border-style',
 				'section' => 'styling',
-				'tab' => __( 'content', 'live-composer-page-builder' )
+				'tab' => __( 'Content', 'live-composer-page-builder' )
 			),
 			array(
 				'label' => __( 'Color', 'live-composer-page-builder' ),
@@ -533,7 +533,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-content',
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
-				'tab' => __( 'content', 'live-composer-page-builder' )
+				'tab' => __( 'Content', 'live-composer-page-builder' )
 			),
 			array(
 				'label' => __( 'Font Size', 'live-composer-page-builder' ),
@@ -544,7 +544,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-content',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'styling',
-				'tab' => __( 'content', 'live-composer-page-builder' ),
+				'tab' => __( 'Content', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -556,7 +556,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-content',
 				'affect_on_change_rule' => 'font-weight',
 				'section' => 'styling',
-				'tab' => __( 'content', 'live-composer-page-builder' ),
+				'tab' => __( 'Content', 'live-composer-page-builder' ),
 				'ext' => '',
 				'min' => 100,
 				'max' => 900,
@@ -571,7 +571,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-content',
 				'affect_on_change_rule' => 'font-family',
 				'section' => 'styling',
-				'tab' => __( 'content', 'live-composer-page-builder' ),
+				'tab' => __( 'Content', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Line Height', 'live-composer-page-builder' ),
@@ -582,7 +582,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-content',
 				'affect_on_change_rule' => 'line-height',
 				'section' => 'styling',
-				'tab' => __( 'content', 'live-composer-page-builder' ),
+				'tab' => __( 'Content', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -595,7 +595,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'content', 'live-composer-page-builder' )
+				'tab' => __( 'Content', 'live-composer-page-builder' )
 			),
 			array(
 				'label' => __( 'Padding Horizontal', 'live-composer-page-builder' ),
@@ -607,7 +607,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'content', 'live-composer-page-builder' )
+				'tab' => __( 'Content', 'live-composer-page-builder' )
 			),
 			array(
 				'label' => __( 'Text Align', 'live-composer-page-builder' ),
@@ -618,7 +618,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-accordion-content',
 				'affect_on_change_rule' => 'text-align',
 				'section' => 'styling',
-				'tab' => __( 'content', 'live-composer-page-builder' ),
+				'tab' => __( 'Content', 'live-composer-page-builder' ),
 			),
 
 			/**

@@ -76,6 +76,11 @@ body.admin-bar #dslc-header.dslc-header-pos-absolute {
 	margin-left: 5px;
 }
 
+/* Use Open Sans here as Roboto is not available at this point */
+.dslca-activate-composer-hook {
+	font-family: 'Open Sans', sans-serif;
+}
+
 .dslca-container .dslca-close-composer-hook:hover {
 	background: #f27562;
 }

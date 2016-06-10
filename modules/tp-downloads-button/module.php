@@ -188,7 +188,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-download-button a',
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
-				'tab' => __( 'typography', 'live-composer-page-builder' ),
+				'tab' => __( 'Typography', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Color - Hover', 'live-composer-page-builder' ),
@@ -199,7 +199,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-download-button a:hover',
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
-				'tab' => __( 'typography', 'live-composer-page-builder' ),
+				'tab' => __( 'Typography', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Font Size', 'live-composer-page-builder' ),
@@ -210,7 +210,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-download-button a',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'styling',
-				'tab' => __( 'typography', 'live-composer-page-builder' ),
+				'tab' => __( 'Typography', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -222,7 +222,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-download-button a',
 				'affect_on_change_rule' => 'font-weight',
 				'section' => 'styling',
-				'tab' => __( 'typography', 'live-composer-page-builder' ),
+				'tab' => __( 'Typography', 'live-composer-page-builder' ),
 				'ext' => '',
 				'min' => 100,
 				'max' => 900,
@@ -237,7 +237,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-download-button a',
 				'affect_on_change_rule' => 'font-family',
 				'section' => 'styling',
-				'tab' => __( 'typography', 'live-composer-page-builder' ),
+				'tab' => __( 'Typography', 'live-composer-page-builder' ),
 			),
 
 			/**
@@ -250,7 +250,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'std' => 'download-alt',
 				'type' => 'icon',
 				'section' => 'styling',
-				'tab' => __( 'icon', 'live-composer-page-builder' ),
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Color', 'live-composer-page-builder' ),
@@ -261,7 +261,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-download-button a .dslc-icon',
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
-				'tab' => __( 'icon', 'live-composer-page-builder' ),
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Margin Right', 'live-composer-page-builder' ),
@@ -273,7 +273,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'icon', 'live-composer-page-builder' ),
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
 			),
 
 			/**

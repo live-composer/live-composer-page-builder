@@ -126,7 +126,7 @@ var dslcAllFontsArray = dslcRegularFontsArray.concat( dslcGoogleFontsArray );
 // Set current/default icons set
 var dslcIconsCurrentSet = DSLCIcons.fontawesome;
 
-var dslcDebug = false;
+var dslcDebug = true;
 
 /*********************************
  *
@@ -512,6 +512,7 @@ var dslcDebug = false;
 							dslc_generate_code();
 							dslc_show_publish_button();
 
+							DSLC.Editor.dslc_init_medium_editor();
 						});
 
 					});
@@ -4355,6 +4356,7 @@ var dslcDebug = false;
 				dslc_init_accordion();
 				dslc_init_square();
 				dslc_center();
+				DSLC.Editor.dslc_init_medium_editor();
 
 				if ( callback ) {
 					callback( response );
@@ -4548,7 +4550,7 @@ var dslcDebug = false;
 		});
 
 		/**
-		 * Hook - Module Edit ( Display Options )
+		 * Hook - Edit Module On Click ( Display Options Panel )
 		 */
 
 		$(document).on( 'click', '.dslca-module-edit-hook, .dslc-module-front > div:not(.dslca-module-manage)', function(e){
@@ -4557,6 +4559,8 @@ var dslcDebug = false;
 
 			// If composer not hidden & not clicked on editable element
 			if ( ! $('body').hasClass( 'dslca-composer-hidden' ) && ! $(e.target).hasClass( 'dslca-editable-content' ) ) {
+
+				console.log('dslca-module-edit-hook')
 
 				// If another module being edited and has changes
 				if ( $('.dslca-module-being-edited.dslca-module-change-made').length ) {
@@ -4644,7 +4648,10 @@ var dslcDebug = false;
 
 		$(document).on( 'click', '.dslca-module-edit-save', function(){
 
-			dslc_module_options_confirm_changes();
+			dslc_module_options_confirm_changes(function(){
+
+				DSLC.Editor.dslc_init_medium_editor();
+			});
 			$('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
 			dslc_responsive_classes( true );
 
@@ -5581,8 +5588,12 @@ var dslcDebug = false;
 
 		// Vars
 		var holder = document.getElementById('dslca-content-for-search');
-		var prevContent = holder.value,
-		content = '';
+
+		if (null === holder) {
+			return;
+		}
+		var prevContent = holder.value;
+		var content = '';
 
 		// Go through each content element
 
@@ -5941,6 +5952,9 @@ var dslcDebug = false;
 		});
 
 		// Editable Content
+
+		/// init Medium inline editor
+		DSLC.Editor.dslc_init_medium_editor();
 
 		jQuery(document).on('blur', '.dslca-editable-content', function() {
 
@@ -6441,3 +6455,20 @@ var dslcDebug = false;
 		});
 
 	});
+
+
+
+/* Editor scripts */
+DSLC.Editor = new (function() {
+	var $ = jQuery;
+
+	this.dslc_init_medium_editor = function(){
+		jQuery(".dslca-editable-content[contenteditable]").each(function(){
+
+			if($(this).data('medium-editor-element') == null){
+
+				var medium = new MediumEditor(this);
+			}
+		});
+	}
+})();

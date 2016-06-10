@@ -961,7 +961,6 @@ jQuery(document).ready(function($){
 					opacity : 1
 				}, 250);
 			}
-
 		}
 
 	});
@@ -1501,11 +1500,7 @@ function disable_css_rule(selector, element, moduleID) {
 
 }
 
-jQuery(document).ready(function($){
-	// var mysheet = $('#css-for-dslc-module-24')[0].sheet;
-	// console.info( mysheet );
-	// disable_css_rule( '#dslc-module-24 .dslc-text-module-content h1', 'font-size', '10px');
-
-	// jQuery('#css-for-')
-
-});
+// Global Plugin Object
+var DSLC = {
+	Production: {}
+};

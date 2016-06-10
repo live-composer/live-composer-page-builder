@@ -599,7 +599,7 @@ class DSLC_Projects extends DSLC_Module {
 				'std' => '',
 				'type' => 'text',
 				'section' => 'styling',
-				'tab' => __( 'thumbnail', 'live-composer-page-builder' ),
+				'tab' => __( 'Thumbnail', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Resize - Width', 'live-composer-page-builder' ),
@@ -607,7 +607,7 @@ class DSLC_Projects extends DSLC_Module {
 				'std' => '',
 				'type' => 'text',
 				'section' => 'styling',
-				'tab' => __( 'thumbnail', 'live-composer-page-builder' ),
+				'tab' => __( 'Thumbnail', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Resize - Width', 'live-composer-page-builder' ),
@@ -615,7 +615,7 @@ class DSLC_Projects extends DSLC_Module {
 				'std' => '',
 				'type' => 'text',
 				'section' => 'styling',
-				'tab' => __( 'thumbnail', 'live-composer-page-builder' ),
+				'tab' => __( 'Thumbnail', 'live-composer-page-builder' ),
 				'visibility' => 'hidden'
 			),
 			array(
@@ -1103,7 +1103,7 @@ class DSLC_Projects extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-project-excerpt',
 				'affect_on_change_rule' => 'border-top-color',
 				'section' => 'styling',
-				'tab' => __( 'excerpt', 'live-composer-page-builder' ),
+				'tab' => __( 'Excerpt', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Border Top Width', 'live-composer-page-builder' ),
@@ -1115,7 +1115,7 @@ class DSLC_Projects extends DSLC_Module {
 				'affect_on_change_rule' => 'border-top-width',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'excerpt', 'live-composer-page-builder' ),
+				'tab' => __( 'Excerpt', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Border Top Style', 'live-composer-page-builder' ),
@@ -1140,7 +1140,7 @@ class DSLC_Projects extends DSLC_Module {
 						'value' => 'dotted',
 					),
 				),
-				'tab' => __( 'excerpt', 'live-composer-page-builder' ),
+				'tab' => __( 'Excerpt', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Color', 'live-composer-page-builder' ),
@@ -1213,7 +1213,7 @@ class DSLC_Projects extends DSLC_Module {
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'excerpt', 'live-composer-page-builder' ),
+				'tab' => __( 'Excerpt', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Max Length ( amount of words )', 'live-composer-page-builder' ),
@@ -1233,7 +1233,7 @@ class DSLC_Projects extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-top',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'excerpt', 'live-composer-page-builder' ),
+				'tab' => __( 'Excerpt', 'live-composer-page-builder' ),
 			),
 
 			/**
