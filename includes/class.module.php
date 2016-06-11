@@ -1925,13 +1925,13 @@ class DSLC_Module {
 
 			$show_on = explode( ' ', trim( $options['css_show_on'] ) );
 
-			if ( ! in_array( 'Desktop', $show_on ) )
+			if ( ! in_array( 'desktop', $show_on ) )
 				$class_show_on .= 'dslc-hide-on-desktop ';
 
-			if ( ! in_array( 'Tablet', $show_on ) )
+			if ( ! in_array( 'tablet', $show_on ) )
 				$class_show_on .= 'dslc-hide-on-tablet ';
 
-			if ( ! in_array( 'Phone', $show_on ) )
+			if ( ! in_array( 'phone', $show_on ) )
 				$class_show_on .= 'dslc-hide-on-phone ';
 
 		}

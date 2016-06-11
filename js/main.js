@@ -44,7 +44,7 @@ function dslc_responsive_classes( force ) {
 			body.addClass( 'dslc-res-big' );
 
 	}
-
+/*
 	if ( ! body.hasClass('dslca-enabled') ) {
 
 		if ( windowWidth >= 768 && windowWidth < 1024 ) {
@@ -96,6 +96,7 @@ function dslc_responsive_classes( force ) {
 		});
 
 	}
+	*/
 
 	dslc_masonry();
 	dslc_center();

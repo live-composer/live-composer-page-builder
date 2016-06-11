@@ -2907,20 +2907,24 @@ var dslcDebug = true;
 			 * If responsive tab, change the width of the dslc-content div
 			 */
 
+			 jQuery('html').removeClass('dslc-responsive-preview');
+
 			// Tablet
-			if ( dslcTabID == DSLCString.str_res_tablet + '_responsive' ) {
+			if ( dslcTabID == DSLCString.str_res_tablet.toLowerCase() + '_responsive' ) {
 				jQuery('body').removeClass('dslc-res-big dslc-res-smaller-monitor dslc-res-phone dslc-res-tablet');
 				jQuery('body').addClass('dslc-res-tablet');
+				jQuery('html').addClass('dslc-responsive-preview');
 			}
 
 			// Phone
-			if ( dslcTabID == DSLCString.str_res_phone + '_responsive' ) {
+			if ( dslcTabID == DSLCString.str_res_phone.toLowerCase() + '_responsive' ) {
 				jQuery('body').removeClass('dslc-res-big dslc-res-smaller-monitor dslc-res-phone dslc-res-tablet');
 				jQuery('body').addClass('dslc-res-phone');
+				jQuery('html').addClass('dslc-responsive-preview');
 			}
 
 			// If responsive reload module
-			if ( dslcTabID == DSLCString.str_res_tablet + '_responsive' || dslcTabID == DSLCString.str_res_phone + '_responsive' ) {
+			if ( dslcTabID == DSLCString.str_res_tablet.toLowerCase() + '_responsive' || dslcTabID == DSLCString.str_res_phone.toLowerCase() + '_responsive' ) {
 
 				// Show the loader
 				jQuery('.dslca-container-loader').show();
@@ -5661,7 +5665,6 @@ var dslcDebug = true;
 	 */
 
 	jQuery(document).ready(function($){
-
 		/**
 	 	 * Action - Show code for altering module's defaults
 	 	 */

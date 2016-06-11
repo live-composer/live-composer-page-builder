@@ -3505,3 +3505,60 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 		line-height: 1.25;
 		padding: 5px 8px 12px;
 	}
+
+
+/**
+ * ----------------------------------------------------------------------
+ * Responsive preview
+ */
+
+html.dslc-responsive-preview {
+   background: #61666A;
+}
+/*
+body.dslc-res-tablet.dslca-enabled::before {
+  background: black;
+  border-radius: 20px 20px 0 0;
+  content: "";
+  display: block;
+  height: 60px;
+  margin-left: -10px;
+  margin-top: -60px;
+  position: absolute;
+  width: 1044px;
+}
+
+body.dslc-res-tablet.dslca-enabled::after {
+  background: black;
+  border-radius: 0 0 20px 20px;
+  content: "";
+  display: block;
+  height: 60px;
+  margin-bottom: -60px;
+  margin-left: -10px;
+  position: absolute;
+  width: 1044px;
+}
+*/
+
+body.dslc-res-tablet.dslca-enabled,
+body.dslc-res-phone.dslca-enabled {
+	border: 15px solid black;
+	border-right-width: 60px;
+	border-left-width: 60px;
+	border-radius: 30px;
+	margin: 60px auto;
+	max-height: 768px;
+	max-width: 1023px;
+	overflow: scroll;
+	box-shadow: 8px -8px 50px 0 rgba(24, 28, 33, 0.77);
+}
+
+body.dslc-res-phone.dslca-enabled {
+	border: 15px solid black;
+	border-top-width: 60px;
+	border-bottom-width: 100px;
+	max-height: 1023px;
+	max-width: 767px;
+
+}
