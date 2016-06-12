@@ -296,7 +296,7 @@ function dslc_display_composer() {
 			</div><!-- .dslca-prompt-modal -->
 
 			<div class="dslca-module-edit-field-icon-ttip">
-				<?php _e('Icons used in this plugin are from "Font Awesome".<br><a href="http://livecomposerplugin.com/icons-listing/" class="dslca-link" target="_blank">View full list of icons.</a>', 'live-composer-page-builder'); ?>
+				<?php _e('Icons used in this plugin are from "Font Awesome".<br><a href="http://livecomposerplugin.com/icons-listing/" class="dslca-link" target="_blank">View full list of icons.</a>', 'live-composer-page-builder' ); ?>
 				<span class="dslca-module-edit-field-ttip-close"><span class="dslc-icon dslc-icon-remove"></span></span>
 			</div>
 
@@ -523,6 +523,7 @@ function dslc_display_composer() {
 			DSLC.currPostId = <?php echo get_the_ID();?>;
 			DSLC.commonOptions.lc_numeric_opt_type__dslc_plugin_options_other = JSON.parse(Util.b64_to_utf8('<?php echo base64_encode(json_encode(dslc_get_option('lc_numeric_opt_type', 'dslc_plugin_options_other')))?>'));
 			DSLC.commonOptions.dslc_googlefonts_array = JSON.parse(Util.b64_to_utf8('<?php echo base64_encode(json_encode($dslc_googlefonts_array))?>'));
+			DSLC.commonOptions.wp_ajax_nonce = '<?php echo wp_create_nonce( 'wp_dslc_ajax_nonce' );?>';
 			</script>
 		</div>
 		<?php

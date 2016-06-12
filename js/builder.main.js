@@ -1753,30 +1753,40 @@ var dslcDebug = false;
 	 * Row - Import
 	 */
 
-	function dslc_row_import(rowCode){
+	function dslc_row_import( rowCode ) {
 
-		if(dslcDebug) console.log('dslc_row_import');
+		if ( dslcDebug ) console.log( 'dslc_row_import' );
 
-		// Hide the title on the button and show loading animation
-		jQuery('.dslca-modal-templates-import .dslca-modal-title').css({ opacity : 0 });
-		jQuery('.dslca-modal-templates-import .dslca-loading').show();
-
-		// Ajax call to load template's HTML
+		// AJAX Call
 		jQuery.post(
 
 			DSLCAjax.ajaxurl,
 			{
-				action : 'dslc-ajax-import-template',
+				action : 'dslc-ajax-import-modules-section',
 				dslc : 'active',
-				dslc_template_code : jQuery('#dslca-code').val() + rowCode,
-				postId: jQuery(".dslca-container").data('post-id')
+				dslc_modules_section_code : rowCode,
+				_wp_nonce: DSLC.commonOptions.wp_ajax_nonce,
 			},
-			function(response){
+			function( response ) {
 
-				window.location.reload();
-				return false;
+				// Close the import popup/modal
+				dslc_js_confirm_close();
+
+				// Add the new section
+				jQuery('#dslc-main').append( response.output );
+
+				// Call other functions
+				dslc_bg_video();
+				dslc_carousel();
+				dslc_masonry( jQuery('#dslc-main').find('.dslc-modules-section:last-child') );
+				dslc_drag_and_drop();
+				dslc_show_publish_button();
+				dslc_generate_code();
+
 			}
+
 		);
+
 	}
 
 	/**
@@ -4760,7 +4770,8 @@ var dslcDebug = false;
 			{
 				action : 'dslc-ajax-load-template',
 				dslc : 'active',
-				dslc_template_id : template
+				dslc_template_id : template,
+				_wp_nonce: DSLC.commonOptions.wp_ajax_nonce,
 			},
 			function(response){
 
@@ -4799,7 +4810,8 @@ var dslcDebug = false;
 				action : 'dslc-ajax-import-template',
 				dslc : 'active',
 				dslc_template_code : jQuery('#dslca-import-code').val(),
-				postId: jQuery(".dslca-container").data('post-id')
+				postId: jQuery(".dslca-container").data('post-id'),
+				_wp_nonce: DSLC.commonOptions.wp_ajax_nonce
 			},
 			function(response){
 
@@ -4825,7 +4837,8 @@ var dslcDebug = false;
 				action : 'dslc-ajax-save-template',
 				dslc : 'active',
 				dslc_template_code : jQuery('#dslca-code').val(),
-				dslc_template_title : jQuery('#dslca-save-template-title').val()
+				dslc_template_title : jQuery('#dslca-save-template-title').val(),
+				_wp_nonce: DLSC.commonOptions.wp_ajax_nonce,
 			},
 			function(response){
 
@@ -4850,7 +4863,8 @@ var dslcDebug = false;
 			{
 				action : 'dslc-ajax-delete-template',
 				dslc : 'active',
-				dslc_template_id : template
+				dslc_template_id : template,
+				_wp_nonce: DLSC.commonOptions.wp_ajax_nonce,
 			},
 			function(response){
 
@@ -4978,7 +4992,8 @@ var dslcDebug = false;
 				dslc : 'active',
 				dslc_post_id : postID,
 				dslc_code : composerCode,
-				dslc_content_for_search : contentForSearch
+				dslc_content_for_search : contentForSearch,
+				_wp_nonce: DSLC.commonOptions.wp_ajax_nonce,
 			},
 			timeout: 10000
 		}).done(function(response){
@@ -5023,18 +5038,16 @@ var dslcDebug = false;
 		jQuery.post(
 			DSLCAjax.ajaxurl,
 			{
-				action : 'dslc-callback-request',
-				method: 'getShortcodePreview',
-				params: {
-					code: composerCode,
-				}
+				action : 'dslc-preview-shortcode',
+				code: composerCode,
+				_wp_nonce: DSLC.commonOptions.wp_ajax_nonce,
 			},
-			function(response){
+			function(response) {
 
 				// Insert html first
 				var domEl = jQuery( response.content );
-				Object.keys(DSLC.ModulesManager.ActiveModules).forEach(function( key )
-				{
+				Object.keys(DSLC.ModulesManager.ActiveModules).forEach(function( key ) {
+
 					var module = DSLC.ModulesManager.ActiveModules[key];
 
 					if ( module.elem[0].innerText.match(/\[.*?\]/) ) {
@@ -5055,7 +5068,7 @@ var dslcDebug = false;
  	 * CODE GENERATION - Save Draft
  	 */
 
- 	function dslc_save_draft_composer(){
+ 	function dslc_save_draft_composer() {
 
 		if(dslcDebug) console.log('dslc_save_draft_composer');
 
@@ -5078,6 +5091,7 @@ var dslcDebug = false;
 				dslc : 'active',
 				dslc_post_id : postID,
 				dslc_code : composerCode,
+				_wp_nonce: DSLC.commonOptions.wp_ajax_nonce,
 			},
 			function(response){
 
@@ -5473,7 +5487,8 @@ var dslcDebug = false;
 					action : 'dslc-ajax-save-preset',
 					dslc_preset_name : presetName,
 					dslc_preset_code : presetCode,
-					dslc_module_id : moduleID
+					dslc_module_id : moduleID,
+					_wp_nonce: DSLC.commonOptions.wp_ajax_nonce,
 				},
 				function(response){
 
@@ -5537,43 +5552,12 @@ var dslcDebug = false;
  *
  * 12) = OTHER =
  *
- * - dslc_dm_get_defaults (Get Alter Module Defaults Code)
  * - dslca_gen_content_for_search (Generate Readable Content For Search)
  * - dslca_draggable_calc_center (Recalculate drag and drop centering)
  * - dslc_editable_content_gen_code (Generate code of editable content)
  *
  ***********************************/
 
- 	/**
- 	 * Other - Get Alter Module Defaults Code
- 	 */
-
- 	function dslc_dm_get_defaults(module){
-
-		if(dslcDebug) console.log('dslc_dm_get_defaults');
-
-		// The module code value
-		var optionsCode = module.find('.dslca-module-code').val();
-
-		// Ajax call to get the plain PHP code
-		jQuery.post(
-
-			DSLCAjax.ajaxurl,
-			{
-				action : 'dslc-ajax-dm-module-defaults',
-				dslc : 'active',
-				dslc_modules_options : optionsCode
-			},
-			function(response){
-
-				// Apply the plain PHP code to the textarea
-				jQuery('.dslca-prompt-modal textarea').val(response.output);
-
-			}
-
-		);
-
-	}
 
 	/**
 	* Other - Generate Readable Content For Search

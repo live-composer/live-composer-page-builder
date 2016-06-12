@@ -76,7 +76,6 @@
 	include DS_LIVE_COMPOSER_ABS . '/includes/functions.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/display-functions.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/row-system/init.php';
-	include DS_LIVE_COMPOSER_ABS . '/includes/ajax.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/shortcodes.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/scripts.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/post-options-framework/post-options-framework.php';

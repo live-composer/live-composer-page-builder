@@ -2,6 +2,7 @@
 /**
  * Table of Contents
  *
+ * - dslc_preformat_cache ( Preformat text in cache)
  * - dslc_load_translation ( Load the text domain )
  * - dslc_register_modules ( Register default module and calls action used to register custom modules )
  * - dslc_register_module ( Register a module )
@@ -21,6 +22,42 @@
  * - dslc_set_default_templates ( Set default templates )
  * - dslc_set_user_templates ( Set user templates )
  */
+
+
+/**
+ * Preformat text in cache
+ *
+ * @param string $text
+ */
+function dslc_preformat_cache( $text ) {
+
+	$concat_glue = '|' . mt_rand( 0, 999999 ) . '|';
+
+	/* Preformat pieces */
+	preg_match_all( "'{dslc_format}(.*?){\/dslc_format}'si", $text, $preformat_pieces );
+
+	$formatted_text = '';
+	$cnt = 0;
+	foreach ( $preformat_pieces[1] as $piece ) {
+
+		$formatted_text .= '<div class="dslc-format-delimiter"></div>' . $piece;
+		$cnt++;
+	}
+
+	$formatted_text = wptexturize( $formatted_text );
+	$formatted_text = convert_smilies( $formatted_text );
+	$formatted_text = wpautop( $formatted_text );
+	$formatted_text = shortcode_unautop( $formatted_text );
+
+	$unglued_pieces = explode( '<div class="dslc-format-delimiter"></div>', $formatted_text );
+	array_shift( $unglued_pieces );
+
+	$text = str_replace( $preformat_pieces[1], $unglued_pieces, $text );
+	$text = preg_replace( [ '/{dslc_format}/', '/{\/dslc_format}/', '/formattedtext=\"\"/', '/class=\"\"/' ], '', $text );
+
+	return $text;
+}
+
 /**
  * Load text domain
  *
