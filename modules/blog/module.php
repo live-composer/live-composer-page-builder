@@ -3057,6 +3057,7 @@ class DSLC_Blog extends DSLC_Module {
 
 	/**
 	 * Returns pinterest social for each post
+	 *
 	 * @return string
 	 */
 	function share_info_pt() {
@@ -3079,6 +3080,7 @@ class DSLC_Blog extends DSLC_Module {
 
 	/**
 	 * Returns twitter social for each post
+	 *
 	 * @return string
 	 */
 	function share_info_tw() {
@@ -3101,6 +3103,7 @@ class DSLC_Blog extends DSLC_Module {
 
 	/**
 	 * Returns post title.Repeater function.
+	 *
 	 * @return string
 	 */
 	function blog_post_title() {
@@ -3113,6 +3116,7 @@ class DSLC_Blog extends DSLC_Module {
 
 	/**
 	 * Returns post thumbnail. Repeater function.
+	 *
 	 * @return  string
 	 */
 	function blog_post_thumb() {
@@ -3161,6 +3165,7 @@ class DSLC_Blog extends DSLC_Module {
 
 	/**
 	 * Returns navigation HTML. Template shortcode function
+	 *
 	 * @param  array $atts
 	 * @return string
 	 */
@@ -3200,7 +3205,6 @@ class DSLC_Blog extends DSLC_Module {
 
 		$this->module_end();
 	}
-
 }
 
 /// Register module

@@ -3155,7 +3155,7 @@ var dslcDebug = false;
 
 		// Show Tooltip (Icon Options)
 
-		jQuery(document).on('click', '.dslca-module-edit-field-icon-ttip-hook', function(){
+		jQuery(document).on('mouseover', '.dslca-module-edit-field-icon-ttip-hook', function(){
 
 			var dslcTtip = jQuery('.dslca-module-edit-field-icon-ttip');
 			var dslcHook = jQuery(this);
