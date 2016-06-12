@@ -16,8 +16,8 @@ class DSLC_Info_Box extends DSLC_Module{
 	/**
 	 * @inherited
 	 */
-	function __construct( $settings = [], $atts = [] )
-	{
+	function __construct( $settings = [], $atts = [] ) {
+
 		$this->module_ver = 2;
 		$this->module_id = __CLASS__;
 		$this->module_title = __( 'Info Box', 'live-composer-page-builder' );
@@ -30,8 +30,7 @@ class DSLC_Info_Box extends DSLC_Module{
 	/**
 	 * @inherited
 	 */
-	function options()
-	{
+	function options() {
 
 		$dslc_options = array(
 
@@ -2508,8 +2507,8 @@ class DSLC_Info_Box extends DSLC_Module{
 		return apply_filters( 'dslc_module_options', $dslc_options, $this->module_id );
 	}
 
-	static function wp_enqueue_scripts()
-	{
+	static function wp_enqueue_scripts() {
+
 		global $LC_Registry;
 
 		if ( $LC_Registry->get( 'dslc_active' ) == true ) {

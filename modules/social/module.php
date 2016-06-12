@@ -47,15 +47,15 @@ class DSLC_Social extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Desktop', 'live-composer-page-builder' ),
-						'value' => 'desktop'
+						'value' => 'desktop',
 					),
 					array(
 						'label' => __( 'Tablet', 'live-composer-page-builder' ),
-						'value' => 'tablet'
+						'value' => 'tablet',
 					),
 					array(
 						'label' => __( 'Phone', 'live-composer-page-builder' ),
-						'value' => 'phone'
+						'value' => 'phone',
 					),
 				),
 			),
@@ -67,11 +67,11 @@ class DSLC_Social extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 				),
 			),
@@ -231,19 +231,19 @@ class DSLC_Social extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -305,7 +305,7 @@ class DSLC_Social extends DSLC_Module {
 				'ext' => 'px',
 				'min' => 0,
 				'max' => 1000,
-				'increment' => 5
+				'increment' => 5,
 			),
 			array(
 				'label' => __( 'Margin Top', 'live-composer-page-builder' ),
@@ -325,7 +325,7 @@ class DSLC_Social extends DSLC_Module {
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => 'ul.dslc-social li',
-				'affect_on_change_rule' => 'margin-top',
+				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'styling',
 				'ext' => 'px',
 			),
@@ -382,7 +382,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-social a.dslc-social-icon',
 				'affect_on_change_rule' => 'width,height',
 				'section' => 'styling',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Spacing', 'live-composer-page-builder' ),
@@ -393,7 +393,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-social li',
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'styling',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 
 			/* Icon */
@@ -430,7 +430,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'styling',
 				'tab' => __( 'icon', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 
 			/* Label */
@@ -456,7 +456,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'styling',
 				'tab' => __( 'labels', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Font Weight', 'live-composer-page-builder' ),
@@ -471,7 +471,7 @@ class DSLC_Social extends DSLC_Module {
 				'ext' => '',
 				'min' => 100,
 				'max' => 900,
-				'increment' => 100
+				'increment' => 100,
 			),
 			array(
 				'label' => __( 'Font Family', 'live-composer-page-builder' ),
@@ -503,7 +503,7 @@ class DSLC_Social extends DSLC_Module {
 						'label' => __( 'Italic', 'live-composer-page-builder' ),
 						'value' => 'italic',
 					),
-				)
+				),
 			),
 			array(
 				'label' => __( 'Letter Spacing', 'live-composer-page-builder' ),
@@ -517,7 +517,7 @@ class DSLC_Social extends DSLC_Module {
 				'tab' => __( 'labels', 'live-composer-page-builder' ),
 				'ext' => 'px',
 				'min' => -50,
-				'max' => 50
+				'max' => 50,
 			),
 			array(
 				'label' => __( 'Line Height', 'live-composer-page-builder' ),
@@ -529,7 +529,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_rule' => 'line-height',
 				'section' => 'styling',
 				'tab' => __( 'labels', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Margin Left', 'live-composer-page-builder' ),
@@ -541,7 +541,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_rule' => 'margin-left',
 				'section' => 'styling',
 				'tab' => __( 'labels', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Text Transform', 'live-composer-page-builder' ),
@@ -551,19 +551,19 @@ class DSLC_Social extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'None', 'live-composer-page-builder' ),
-						'value' => 'none'
+						'value' => 'none',
 					),
 					array(
 						'label' => __( 'Capitalize', 'live-composer-page-builder' ),
-						'value' => 'capitalize'
+						'value' => 'capitalize',
 					),
 					array(
 						'label' => __( 'Uppercase', 'live-composer-page-builder' ),
-						'value' => 'uppercase'
+						'value' => 'uppercase',
 					),
 					array(
 						'label' => __( 'Lowercase', 'live-composer-page-builder' ),
-						'value' => 'lowercase'
+						'value' => 'lowercase',
 					),
 				),
 				'refresh_on_change' => false,
@@ -585,11 +585,11 @@ class DSLC_Social extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 				),
 				'section' => 'responsive',
@@ -617,7 +617,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_rule' => 'width,height',
 				'section' => 'responsive',
 				'tab' => __( 'tablet', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Size ( Icon )', 'live-composer-page-builder' ),
@@ -629,7 +629,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
 				'tab' => __( 'tablet', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Spacing', 'live-composer-page-builder' ),
@@ -641,7 +641,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'responsive',
 				'tab' => __( 'tablet', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 
 			/**
@@ -656,11 +656,11 @@ class DSLC_Social extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 				),
 				'section' => 'responsive',
@@ -688,7 +688,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_rule' => 'width,height',
 				'section' => 'responsive',
 				'tab' => __( 'phone', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Size ( Icon )', 'live-composer-page-builder' ),
@@ -700,7 +700,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
 				'tab' => __( 'phone', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Spacing', 'live-composer-page-builder' ),
@@ -712,7 +712,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'responsive',
 				'tab' => __( 'phone', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 
 		);
@@ -728,8 +728,8 @@ class DSLC_Social extends DSLC_Module {
 	/**
 	 * @inherited
 	 */
-	function output( $options = [] )
-	{
+	function output( $options = [] ) {
+
 		$this->module_start();
 
 		/* Module output stars here */

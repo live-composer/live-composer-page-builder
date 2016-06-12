@@ -2961,6 +2961,7 @@ body.rtl .dslca-modules-area-placeholder {
 	}
 
 	.dslca-module-edit-field-ttip-close {
+		display: none;
 		cursor: pointer;
 		position: absolute;
 		background: #e55f5f;

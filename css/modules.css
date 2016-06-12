@@ -1332,10 +1332,8 @@
 					font-weight: 400;
 					font-size: 25px;
 					font-family: "Oswald";
-					left: 35%;
 					line-height: 1;
 					position: absolute;
-					top: 40%;
 					text-decoration: none;
 					text-align: center;
 				}
@@ -2266,7 +2264,7 @@ body.dslc-res-phone .dslc-post-main-inner-link-cover {
 
 
 /** Common styles */
-.dslc-center-elem{
+.dslc-center-elem, .dslc-carousel-nav-inner .dslc-center-elem{
 	top: 50%;
     left: 50%;
     visibility: visible;
