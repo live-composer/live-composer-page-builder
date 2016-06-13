@@ -457,7 +457,7 @@ class DSLC_Callback {
 	static function init() {
 
 		add_action( 'wp_ajax_dslc-ajax-save-preset', [ __CLASS__, 'save_preset' ] );
-		add_action( 'wp_ajax_dslc-ajax-import-modules-section', [ __CLASS__, 'import_modules_section' ] ); !!!
+		add_action( 'wp_ajax_dslc-ajax-import-modules-section', [ __CLASS__, 'import_modules_section' ] );
 		add_action( 'wp_ajax_dslc-ajax-delete-template', [ __CLASS__, 'delete_template' ] );
 		add_action( 'wp_ajax_dslc-ajax-save-template', [ __CLASS__, 'save_template' ] );
 		add_action( 'wp_ajax_dslc-ajax-import-template', [ __CLASS__, 'import_template' ] );
