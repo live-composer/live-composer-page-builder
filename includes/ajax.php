@@ -466,6 +466,8 @@ function dslc_ajax_display_module_options( $atts ) {
 				'responsive',
 			);
 
+			$module_option['section'] = isset( $module_option['section'] ) ? $module_option['section'] : 'functionality';
+
 			/**
 			 * Display styling control toggle [On/Off]
 			 */
