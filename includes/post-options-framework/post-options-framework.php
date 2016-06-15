@@ -211,12 +211,11 @@ function dslc_display_post_options( $object, $metabox ) {
 					<?php elseif ( $post_option['type'] == 'checkbox' ) : ?>
 
 						<?php $curr_value_array = maybe_unserialize( $curr_value_no_esc ); if ( ! is_array( $curr_value_array ) ) $curr_value_array = array(); ?>
-
-						<?php foreach ( $post_option['choices'] as $key => $choice ) : ?>
-							<div class="dslca-post-option-field-choice">
-								<input type="checkbox" name="<?php echo $post_option['id']; ?>[]" id="<?php echo $post_option['id']; ?>" value="<?php echo $choice['value']; ?>" <?php if ( in_array( $choice['value'], $curr_value_array ) ) echo 'checked="checked"'; ?> /> <?php echo $choice['label']; ?><br>
-							</div><!-- .dslca-post-option-field-choice -->
-						<?php endforeach; ?>
+							<?php $cnt = 0; foreach ( $post_option['choices'] as $key => $choice ) : ?>
+									<div class="dslca-post-option-field-choice">
+										<input type="checkbox" name="<?php echo $post_option['id']; ?>[]" id="<?php echo $post_option['id'] . $key; ?>" value="<?php echo $choice['value']; ?>" <?php if ( in_array( $choice['value'], $curr_value_array ) ) echo 'checked="checked"'; ?> /> <label for="<?php echo $post_option['id'] . $key; ?>"><?php echo $choice['label']; ?></label><br>
+									</div><!-- .dslca-post-option-field-choice -->
+							<?php endforeach; ?>
 
 					<?php elseif ( $post_option['type'] == 'radio' ) : ?>
 
