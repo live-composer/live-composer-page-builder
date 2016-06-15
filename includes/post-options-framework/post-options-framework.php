@@ -168,16 +168,20 @@ function dslc_display_post_options( $object, $metabox ) {
 				$curr_value = esc_attr( $curr_value_no_esc );
 			?>
 
-			<div class="dslca-post-option">
+			<div class="dslca-post-option" id="post-option-<?php echo esc_attr( $post_option['id'] ); ?>" >
 
-				<div class="dslca-post-option-label">
-					<span><?php echo $post_option['label']; ?></span>
-				</div><!-- .dslca-post-option-label -->
+				<?php if ( isset( $post_option['label'] ) && '' !== $post_option['label'] ) : ?>
 
-				<?php if ( isset( $post_option['descr'] ) ) : ?>
+					<div class="dslca-post-option-label">
+						<span><?php echo esc_html( $post_option['label'] ); ?></span>
+					</div><!-- .dslca-post-option-label -->
+
+				<?php endif; ?>
+
+				<?php if ( isset( $post_option['descr'] ) && '' !== $post_option['descr'] ) : ?>
 
 					<div class="dslca-post-option-description">
-						<?php echo $post_option['descr']; ?>
+						<?php echo esc_html( $post_option['descr'] ); ?>
 					</div><!-- .dslca-post-option-description -->
 
 				<?php endif; ?>
