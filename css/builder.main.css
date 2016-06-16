@@ -224,6 +224,7 @@ body {
 	.dslca-sections {
 		/*background: #5890e5;*/
 		background: #4A7AC3;
+		box-sizing: border-box;
 	}
 
 		.dslca-section {
@@ -314,24 +315,23 @@ body {
 	}
 
 		.dslca-module {
-			/*border-right: 1px solid #75a2e6;*/
 			color: #fff;
 			cursor: grab;
+			cursor: -webkit-grab;
+
 			display: block;
 			float: left;
-			/*font-family: 'Open Sans', sans-serif;*/
 			font-family: 'Roboto Condensed', sans-serif;
 			font-size: 15px;
 			font-weight: 400;
 			line-height: 1;
 			padding: 2px 12px 9px 12px;
-			/* text-transform: uppercase; */
 			background: #5890e5;
 			margin: 4px 2px;
 			box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15), -1px 1px 0px 0 rgba(255, 255, 255, 0.05) inset;
 			border-radius: 2px;
 			text-align: center;
-			min-width: 48px;
+			min-width: 70px;
 
 			transition: transform 0.05s linear 0.01s;
 		}
@@ -362,6 +362,7 @@ body {
 			border-radius: 3px;
 
 			cursor: grabbing;
+			cursor: -webkit-grabbing;
 
 			box-shadow: -6px 8px 3px 0 rgba(0, 0, 0, 0.075),
 			0 1px 3px 0 rgba(0, 0, 0, 0.25),

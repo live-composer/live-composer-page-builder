@@ -31,13 +31,13 @@ function dslc_row_display_options() {
 
 		if ( isset( $row_option['affect_on_change_rule'] ) ) {
 
-			$css_rule_output = 'data-css-rule="' . $row_option['affect_on_change_rule'] . '"';
+			$css_rule_output = $row_option['affect_on_change_rule'];
 		}
 
 		$css_element_output = '';
 		if ( isset( $row_option['affect_on_change_el'] ) ) {
 
-			$css_element_output = 'data-css-element="' . $row_option['affect_on_change_el'] . '"';
+			$css_element_output = $row_option['affect_on_change_el'];
 		}
 
 		$extra_class = '';
@@ -78,11 +78,11 @@ function dslc_row_display_options() {
 
 			<?php if ( 'text' === $row_option['type'] ) : ?>
 
-				<input type="text" class="dslca-modules-section-edit-field" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" <?php echo esc_attr( $css_element_output . ' ' . $css_rule_output ); ?> />
+				<input type="text" class="dslca-modules-section-edit-field" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" />
 
 			<?php elseif ( 'select' === $row_option['type'] ) : ?>
 
-				<select type="text" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-select" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" <?php echo esc_attr( $css_element_output . ' ' . $css_rule_output ); ?> >
+				<select type="text" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-select" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" >
 					<?php foreach ( $row_option['choices'] as $choice ) : ?>
 						<option value="<?php echo esc_attr( $choice['value'] ); ?>"><?php echo esc_attr( $choice['label'] ); ?></option>
 					<?php endforeach; ?>
@@ -90,19 +90,19 @@ function dslc_row_display_options() {
 
 			<?php elseif ( 'color' === $row_option['type'] ) : ?>
 
-				<input type="text" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-colorpicker" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" <?php echo esc_attr( $css_element_output . ' ' . $css_rule_output ); ?> />
+				<input type="text" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-colorpicker" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" />
 
 			<?php elseif ( 'image' === $row_option['type'] ) : ?>
 
 				<span class="dslca-modules-section-edit-field-image-add-hook"><span class="dslca-icon dslc-icon-cloud-upload"></span><?php esc_html_e( 'Upload Image', 'live-composer-page-builder' ); ?></span>
 				<span class="dslca-modules-section-edit-field-image-remove-hook"><span class="dslca-icon dslc-icon-remove"></span><?php esc_html_e( 'Remove Image', 'live-composer-page-builder' ); ?></span>
-				<input type="hidden" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-upload" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" <?php echo esc_attr( $css_element_output . ' ' . $css_rule_output ); ?> />
+				<input type="hidden" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-upload" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" />
 
 			<?php elseif ( 'video' === $row_option['type'] ) : ?>
 
 				<span class="dslca-modules-section-edit-field-image-add-hook"><span class="dslca-icon dslc-icon-cloud-upload"></span><?php esc_html_e( 'Upload Video', 'live-composer-page-builder' ); ?></span>
 				<span class="dslca-modules-section-edit-field-image-remove-hook"><span class="dslca-icon dslc-icon-remove"></span><?php esc_html_e( 'Remove Video', 'live-composer-page-builder' ); ?></span>
-				<input type="hidden" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-upload" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" <?php echo esc_attr( $css_element_output . ' ' . $css_rule_output ); ?> />
+				<input type="hidden" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-upload" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" />
 
 			<?php elseif ( 'slider' === $row_option['type'] ) : ?>
 
@@ -117,12 +117,12 @@ function dslc_row_display_options() {
 
 					<div class="dslca-modules-section-edit-field-slider" data-ext="<?php echo esc_attr( $row_option['ext'] ); ?>" data-min="<?php echo esc_attr( $row_option['min'] ); ?>" data-max="<?php echo esc_attr( $row_option['max'] ); ?>" data-incr="<?php echo esc_attr( $row_option['increment'] ); ?>"></div>
 					<span class="dslca-modules-section-edit-field-slider-tooltip"></span>
-					<input type="hidden" class="dslca-modules-section-edit-field" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" <?php echo esc_attr( $css_element_output . ' ' . $css_rule_output ); ?> />
+					<input type="hidden" class="dslca-modules-section-edit-field" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" />
 
 				<?php else : ?>
 
 					<div class="dslca-modules-section-edit-field-numeric-wrap">
-						<input type="text" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-numeric" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" data-ext="<?php echo esc_attr( $row_option['ext'] ); ?>" <?php echo esc_attr( $css_element_output . ' ' . $css_rule_output ); ?> />
+						<input type="text" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-numeric" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" data-ext="<?php echo esc_attr( $row_option['ext'] ); ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" />
 						<span class="dslca-modules-section-edit-field-numeric-ext"><?php echo esc_attr( $row_option['ext'] ); ?></span>
 					</div>
 

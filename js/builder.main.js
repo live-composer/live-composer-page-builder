@@ -1886,7 +1886,6 @@ var dslcDebug = true;
 			jQuery('.dslca-modules-section-edit-field[data-id="' + jQuery(this).data('id') + '"]').val( jQuery(this).data('def') ).trigger('change');
 
 		});
-
 		dslc_show_section('.dslca-modules');
 
 		// Hide the save/cancel actions
@@ -6366,7 +6365,7 @@ var dslcDebug = true;
 
 			}
 
-			field.val('').trigger('change');
+			field.val('').trigger('change'); // .dslca-modules-section-edit-field
 			hook.hide();
 			addHook.show();
 
