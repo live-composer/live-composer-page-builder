@@ -187,12 +187,13 @@ function dslc_row_get_options_fields( $atts = false ) {
 	}
 
 	// Go through each option and append HTML.
-	if ( $atts ) {
+	if ( $atts ) { // If there is data to fill?
 
 		foreach ( $dslc_var_row_options as $row_option ) {
 
 			// Don't move this line! 'dslca-img-url' should go before 'bg_image'.
 			if ( isset( $atts[ $row_option['id'] ] ) && 'bg_image' === $row_option['id'] ) {
+
 				$output .= '<input type="text" data-id="dslca-img-url" value="' . wp_get_attachment_url( $atts[ $row_option['id'] ] ) . '" data-def="' . wp_get_attachment_url( $atts[ $row_option['id'] ] ) . '">';
 			}
 
@@ -204,7 +205,7 @@ function dslc_row_get_options_fields( $atts = false ) {
 				$output .= '<input type="text" data-id="' . $row_option['id'] . '" value="' . $row_option['std'] . '" data-def="' . $row_option['std'] . '">';
 			}
 		}
-	} else {
+	} else { // If it's a new ROW?
 
 		foreach ( $dslc_var_row_options as $row_option ) {
 
@@ -212,6 +213,13 @@ function dslc_row_get_options_fields( $atts = false ) {
 
 				$row_option['std'] = '';
 			}
+
+			// Don't move this line! 'dslca-img-url' should go before 'bg_image'.
+			if ( isset( $row_option['id'] ) && 'bg_image' === $row_option['id'] ) {
+
+				$output .= '<input type="text" data-id="dslca-img-url" value="' . wp_get_attachment_url( $row_option['std'] ) . '" data-def="' . wp_get_attachment_url( $row_option['std'] ) . '">';
+			}
+
 			$output .= '<input type="text" data-id="' . $row_option['id'] . '" value="' . $row_option['std'] . '">';
 		}
 	}
