@@ -508,7 +508,6 @@ function dslc_display_modules() {
  *
  * @since 1.0
  */
-
 function dslc_display_templates() {
 
 	// Get all the templates. Original data.
@@ -517,27 +516,17 @@ function dslc_display_templates() {
 	// Modified array to store templates by section.
 	$templates_arr = array();
 
-	ob_start();
-			echo '$templates:';
-			print_r($templates);
-			echo '------------';
-			$var_dump_result = ob_get_clean();
-	error_log( $var_dump_result );
-
-
-	// If there are active templates
+	// If there are active templates?
 	if ( $templates ) {
 
-		// Go through all templates, populate array
+		// Go through all templates, populate array.
 		foreach ( $templates as $template ) {
-
 
 			$section_title = $template['section'];
 			$template['section'] = strtolower( str_replace( ' ', '_', $template['section'] ) );
 
-			$templates_arr[$template['section']][$template['id']] = $template;
-			$templates_arr[$template['section']][$template['id']]['section_title'] = $section_title;
-
+			$templates_arr[ $template['section'] ][ $template['id'] ] = $template;
+			$templates_arr[ $template['section'] ][ $template['id'] ]['section_title'] = $section_title;
 		}
 
 		// If there are templates?
@@ -547,8 +536,8 @@ function dslc_display_templates() {
 			foreach ( $templates_arr as $template_section_id => $template_section_tpls ) {
 
 				// Go through each template in a section.
-				foreach ( $template_section_tpls as $template ) {
-					?>
+				foreach ( $template_section_tpls as $template ) { ?>
+
 					<div class="dslca-template dslca-scroller-item dslca-origin dslca-template-origin-<?php echo esc_attr( $template_section_id ); ?>" data-origin="<?php echo esc_attr( $template['section_title'] ); ?>" data-id="<?php echo esc_attr( $template['id'] ); ?>">
 						<span class="dslca-template-title"><?php echo esc_html( $template['title'] ); ?></span>
 						<?php if ( 'user' === $template_section_id ) : ?>

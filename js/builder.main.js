@@ -1881,6 +1881,8 @@ var dslcDebug = true;
 		jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input').each(function(){
 
 			jQuery(this).val( jQuery(this).data('def') );
+
+			// Fire change for every ROW control, so it redraw linked CSS properties
 			jQuery('.dslca-modules-section-edit-field[data-id="' + jQuery(this).data('id') + '"]').val( jQuery(this).data('def') ).trigger('change');
 
 		});
@@ -5782,7 +5784,7 @@ var dslcDebug = true;
 			dslcValReal = dslcVal;
 			dslcRule = dslcField.data('css-rule');
 
-			dslcEl = $('.dslca-modules-section-being-edited');
+			dslcEl = $('.dslca-modules-section-being-edited'); // Currently editing element
 			dslcTargetEl = dslcEl;
 			dslcSetting = $('.dslca-modules-section-settings input[data-id="' + dslcFieldID + '"]', dslcEl );
 
@@ -5790,14 +5792,17 @@ var dslcDebug = true;
 
 			// If image/upload field alter the value ( use from data )
 			if ( dslcField.hasClass('dslca-modules-section-edit-field-upload') ) {
-				if ( dslcVal && dslcVal.length )
+
+				if ( dslcVal && dslcVal.length ) {
+
 					// dslcVal = dslcField.data('dslca-img-url');
 					dslcVal = $('.dslca-modules-section-settings input[data-id="dslca-img-url"]', dslcEl ).val();
+				}
 			}
 
 			if ( dslcRule == 'background-image' ) {
-				 dslcVal = 'url("' + dslcVal + '")';
-				 dslc_bg_video();
+				dslcVal = 'url("' + dslcVal + '")';
+				dslc_bg_video();
 			}
 
 			if ( dslcFieldID == 'bg_image_attachment' ) {
@@ -6322,7 +6327,19 @@ var dslcDebug = true;
 			file_frame.on( 'select', function() {
 
 				var attachment = file_frame.state().get('selection').first().toJSON();
-				field.val( attachment.id ).data( 'dslca-img-url', attachment.url ).trigger('change');
+				/*
+				Save image ID as value of the image input.
+				 */
+				// field.val( attachment.id ).data( 'dslca-img-url', attachment.url ).trigger('change'); - previous version
+				field.val( attachment.id );
+
+				/*
+				Save image URL as data attribute of input in dslca-modules-section-settings set
+				We need URL in 'dslca-img-url' for live preview
+				 */
+				jQuery('.dslca-modules-section-being-edited').find('.dslca-modules-section-settings input[data-id="dslca-img-url"]').val( attachment.url );
+				field.trigger('change'); // trigger change only after 'dslca-img-url' is set
+
 				hook.hide();
 				removeHook.show();
 
