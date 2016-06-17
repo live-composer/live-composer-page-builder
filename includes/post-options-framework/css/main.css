@@ -32,6 +32,16 @@
 				margin-bottom: 10px;
 			}
 
+			.dslca-post-option-field-choice > input {
+			    margin: 2px 0 0;
+			    position: absolute;
+			}
+
+			.dslca-post-option-field-choice > label {
+			    display: block;
+			    margin-left: 26px;
+			}
+
 /**
  * File Option
  */
