@@ -337,22 +337,42 @@ function dslc_save_post_options( $post_id, $post ) {
 				// Get option info.
 				$meta_key = $post_option['id'];
 				$new_option_value = ( isset( $_POST[ $post_option['id'] ] ) ? $_POST[ $post_option['id'] ] : '' );
+
+				/*if($meta_key == 'dslc_popup_display_url') {
+
+					pre($new_option_value);
+					die();
+				}*/
+
 				$curr_option_value = get_post_meta( $post_id, $meta_key, true );
 
 				if ( is_array( $new_option_value ) ) {
+
 					$new_option_value = serialize( $new_option_value );
 				}
 
 				// Save, Update, Delete option.
 				if ( isset( $new_option_value ) && '' == $curr_option_value ) {
 
-					add_post_meta( $post_id, $meta_key, $new_option_value, true );
+					pre('add');
+					pre($new_option_value);
+					pre($meta_key);
+					pre($post_id);
+					add_post_meta( $post_id, $meta_key, $new_option_value );
 				} elseif ( isset( $new_option_value ) && $new_option_value != $curr_option_value ) {
 
+					pre('update');
 					update_post_meta( $post_id, $meta_key, $new_option_value );
 				} elseif ( '' == $new_option_value && isset( $curr_option_value ) ) {
 
+					pre('remove');
 					delete_post_meta( $post_id, $meta_key, $curr_option_value );
+				}
+
+				if($meta_key == 'dslc_popup_display_url') {
+
+					pre(get_post_meta($post_id, $meta_key, true));
+					die();
 				}
 			}
 		}
