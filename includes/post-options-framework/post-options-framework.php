@@ -152,7 +152,7 @@ function dslc_display_post_options( $object, $metabox ) {
 	global $dslc_var_post_options;
 
 	$post_options_id = $metabox['id'];
-	$post_options = $dslc_var_post_options[$post_options_id]['options'];
+	$post_options = $dslc_var_post_options[ $post_options_id ]['options'];
 
 	?>
 
@@ -161,11 +161,14 @@ function dslc_display_post_options( $object, $metabox ) {
 		<?php foreach ( $post_options as $post_option ) : ?>
 
 			<?php
-				$curr_value_no_esc = get_post_meta( $object->ID, $post_option['id'], true );
-				if ( ! $curr_value_no_esc ) {
-					$curr_value_no_esc = $post_option['std'];
-				}
-				$curr_value = esc_attr( $curr_value_no_esc );
+			$curr_value_no_esc = get_post_meta( $object->ID, $post_option['id'], true );
+
+			if ( ! isset( $curr_value_no_esc ) || '' === $curr_value_no_esc ) {
+
+				$curr_value_no_esc = $post_option['std'];
+			}
+
+			$curr_value = esc_attr( $curr_value_no_esc );
 			?>
 
 			<div class="dslca-post-option" id="post-option-<?php echo esc_attr( $post_option['id'] ); ?>" >
@@ -323,36 +326,36 @@ function dslc_save_post_options( $post_id, $post ) {
 
 	if ( isset( $_POST['dslc_post_options'] ) ) {
 
-		$post_options_IDs = $_POST['dslc_post_options'];
+		$post_options_ids = $_POST['dslc_post_options'];
 
-		foreach ( $post_options_IDs as $post_options_ID ) {
+		foreach ( $post_options_ids as $post_options_id ) {
 
-			$post_options = $dslc_var_post_options[$post_options_ID];
+			$post_options = $dslc_var_post_options[ $post_options_id ];
 
 			foreach ( $post_options['options'] as $post_option ) {
 
-				// Get option info
+				// Get option info.
 				$meta_key = $post_option['id'];
-				$new_option_value = ( isset( $_POST[$post_option['id']] ) ? $_POST[$post_option['id']] : '' );
+				$new_option_value = ( isset( $_POST[ $post_option['id'] ] ) ? $_POST[ $post_option['id'] ] : '' );
 				$curr_option_value = get_post_meta( $post_id, $meta_key, true );
 
 				if ( is_array( $new_option_value ) ) {
 					$new_option_value = serialize( $new_option_value );
 				}
 
-				// Save, Update, Delete option
-				if ( $new_option_value && '' == $curr_option_value ) {
+				// Save, Update, Delete option.
+				if ( isset( $new_option_value ) && '' == $curr_option_value ) {
+
 					add_post_meta( $post_id, $meta_key, $new_option_value, true );
-				} elseif ( $new_option_value && $new_option_value != $curr_option_value ) {
+				} elseif ( isset( $new_option_value ) && $new_option_value != $curr_option_value ) {
+
 					update_post_meta( $post_id, $meta_key, $new_option_value );
-				} elseif ( '' == $new_option_value && $curr_option_value ) {
+				} elseif ( '' == $new_option_value && isset( $curr_option_value ) ) {
+
 					delete_post_meta( $post_id, $meta_key, $curr_option_value );
 				}
-
 			}
-
 		}
-
 	}
 
 }
@@ -360,7 +363,6 @@ function dslc_save_post_options( $post_id, $post ) {
 /**
  * Adds action in row
  */
-
 function dslc_page_add_row_action( $actions, $page_object ) {
 
 	$page_status = $page_object->post_status;
