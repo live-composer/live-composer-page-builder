@@ -4561,9 +4561,10 @@ var dslcDebug = true;
 		$(document).on( 'click', '.dslca-module-edit-hook, .dslc-module-front > div:not(.dslca-module-manage)', function(e){
 
 			e.preventDefault();
+			var curr_module_edited = $(this).closest('.dslc-module-front').hasClass('dslca-module-being-edited');
 
 			// If composer not hidden & not clicked on editable element
-			if ( ! $('body').hasClass( 'dslca-composer-hidden' ) && ! $(e.target).hasClass( 'dslca-editable-content' ) ) {
+			if ( ! curr_module_edited && ! $('body').hasClass( 'dslca-composer-hidden' ) && ! $(e.target).hasClass( 'dslca-editable-content' ) ) {
 
 				console.log('dslca-module-edit-hook')
 
@@ -6470,9 +6471,7 @@ var dslcDebug = true;
 
 			$('.dslca-wp-editor').hide();
 			$('.dslca-wysiwyg-active').removeClass('dslca-wysiwyg-active');
-
 		});
-
 	});
 
 
@@ -6482,7 +6481,7 @@ DSLC.Editor = new (function() {
 	var $ = jQuery;
 
 	this.dslc_init_medium_editor = function(){
-		jQuery(".dslca-editable-content[contenteditable]").each(function(){
+		jQuery(".dslca-editable-content.medium-editor[contenteditable]").each(function(){
 
 			if($(this).data('medium-editor-element') == null){
 
