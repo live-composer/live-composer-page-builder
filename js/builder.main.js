@@ -141,9 +141,9 @@ var dslcDebug = true;
  * - dslc_drag_and_drop ( Initiate drag and drop functionality )
  ***********************************/
 
- 	/**
- 	 * UI - GENERAL - Hide Composer
- 	 */
+	/**
+	 * UI - GENERAL - Hide Composer
+	 */
 
 	function dslc_hide_composer() {
 
@@ -789,11 +789,11 @@ var dslcDebug = true;
  *
  ***********************************/
 
- 	/**
- 	 * SCROLLER - Initiate
- 	 */
+	/**
+	 * SCROLLER - Initiate
+	 */
 
- 	function dslc_scroller_init() {
+	function dslc_scroller_init() {
 
 		if ( dslcDebug ) console.log( 'dslc_scroller_init' );
 
@@ -1063,7 +1063,7 @@ var dslcDebug = true;
 
 			 if ( ! jQuery('body').hasClass('dslca-composer-hidden' ) ) {
 
-			 	jQuery('#dslc-header').addClass('dslca-header-low-z-index');
+				jQuery('#dslc-header').addClass('dslca-header-low-z-index');
 
 				if ( jQuery(this).height() < 130 )
 					jQuery('.dslca-modules-area-manage', this).addClass('dslca-horizontal');
@@ -1107,14 +1107,14 @@ var dslcDebug = true;
  *
  ***********************************/
 
- 	/**
- 	 * MODAL - Show
- 	 *
- 	 * @param {Object} hook - Button that was clicked to open modal
- 	 * @param {string} modal - CSS address of the modal, like '.modal-icons'
- 	 */
+	/**
+	 * MODAL - Show
+	 *
+	 * @param {Object} hook - Button that was clicked to open modal
+	 * @param {string} modal - CSS address of the modal, like '.modal-icons'
+	 */
 
- 	function dslc_show_modal( hook, modal ) {
+	function dslc_show_modal( hook, modal ) {
 
 		if ( dslcDebug ) console.log( 'dslc_show_modal' );
 
@@ -1174,13 +1174,13 @@ var dslcDebug = true;
 
 	// Hide if clicked outside of modal
 	jQuery(document).mouseup(function (e) {
-	    var container = jQuery(".dslca-modal-open");
+		 var container = jQuery(".dslca-modal-open");
 
-	    if (!container.is(e.target) // if the target of the click isn't the container...
-	      && container.has(e.target).length === 0) // ... nor a descendant of the container
-	    {
-	      container.hide();
-	    }
+		 if (!container.is(e.target) // if the target of the click isn't the container...
+			&& container.has(e.target).length === 0) // ... nor a descendant of the container
+		 {
+			container.hide();
+		 }
 	});
 
 	/**
@@ -1227,7 +1227,7 @@ var dslcDebug = true;
  *
  ***********************************/
 
- 	function dslc_js_confirm( dslcID, dslcContent, dslcTarget ) {
+	function dslc_js_confirm( dslcID, dslcContent, dslcTarget ) {
 
 		if ( dslcDebug ) console.log( 'dslc_js_confirm' );
 
@@ -1412,9 +1412,9 @@ var dslcDebug = true;
  *
  ***********************************/
 
- 	/**
- 	 * Row - Add New
- 	 */
+	/**
+	 * Row - Add New
+	 */
 
 	function dslc_row_add( callback ) {
 
@@ -1881,10 +1881,11 @@ var dslcDebug = true;
 		jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input').each(function(){
 
 			jQuery(this).val( jQuery(this).data('def') );
+
+			// Fire change for every ROW control, so it redraw linked CSS properties
 			jQuery('.dslca-modules-section-edit-field[data-id="' + jQuery(this).data('id') + '"]').val( jQuery(this).data('def') ).trigger('change');
 
 		});
-
 		dslc_show_section('.dslca-modules');
 
 		// Hide the save/cancel actions
@@ -2254,11 +2255,11 @@ var dslcDebug = true;
  *
  ***********************************/
 
- 	/**
- 	 * AREAS - Add New
- 	 */
+	/**
+	 * AREAS - Add New
+	 */
 
- 	function dslc_modules_area_add( row ) {
+	function dslc_modules_area_add( row ) {
 
 		if ( dslcDebug ) console.log( 'dslc_add_modules_area' );
 
@@ -2587,11 +2588,11 @@ var dslcDebug = true;
 
  ***********************************/
 
- 	/**
- 	 * MODULES - Delete a Module
- 	 */
+	/**
+	 * MODULES - Delete a Module
+	 */
 
- 	function dslc_module_delete( module ) {
+	function dslc_module_delete( module ) {
 
 		if ( dslcDebug ) console.log( 'dslc_delete_module' );
 
@@ -4780,11 +4781,11 @@ var dslcDebug = true;
  *
  ***********************************/
 
- 	/**
- 	 * TEMPLATES - Load
- 	 */
+	/**
+	 * TEMPLATES - Load
+	 */
 
- 	function dslc_template_load( template ) {
+	function dslc_template_load( template ) {
 
 		if ( dslcDebug ) console.log( 'dslc_load_template' );
 
@@ -4997,11 +4998,11 @@ var dslcDebug = true;
  *
  ***********************************/
 
- 	/**
- 	 * CODE GENERATION - Save Page Changes
- 	 */
+	/**
+	 * CODE GENERATION - Save Page Changes
+	 */
 
- 	function dslc_save_composer() {
+	function dslc_save_composer() {
 
 		if ( dslcDebug ) console.log( 'dslc_save_composer' );
 
@@ -5061,10 +5062,10 @@ var dslcDebug = true;
 	}
 
 	/**
- 	 * CODE GENERATION - Save Draft
- 	 */
+	 * CODE GENERATION - Save Draft
+	 */
 
- 	function dslc_save_draft_composer() {
+	function dslc_save_draft_composer() {
 
 		if ( dslcDebug ) console.log( 'dslc_save_draft_composer' );
 
@@ -5455,9 +5456,9 @@ var dslcDebug = true;
  *
  ***********************************/
 
- 	/**
- 	 * Module Presets - Update
- 	 */
+	/**
+	 * Module Presets - Update
+	 */
 
 	function dslc_update_preset() {
 
@@ -5551,11 +5552,11 @@ var dslcDebug = true;
  *
  ***********************************/
 
- 	/**
- 	 * Other - Get Alter Module Defaults Code
- 	 */
+	/**
+	 * Other - Get Alter Module Defaults Code
+	 */
 
- 	function dslc_dm_get_defaults( module ) {
+	function dslc_dm_get_defaults( module ) {
 
 		if ( dslcDebug ) console.log( 'dslc_dm_get_defaults' );
 
@@ -5666,12 +5667,12 @@ var dslcDebug = true;
 
 	jQuery(document).ready(function($){
 		/**
-	 	 * Action - Show code for altering module's defaults
-	 	 */
+		 * Action - Show code for altering module's defaults
+		 */
 
-	 	$(document).on( 'click', '.dslca-module-get-defaults-hook', function(){
+		$(document).on( 'click', '.dslca-module-get-defaults-hook', function(){
 
-	 		// Vars
+			// Vars
 			var module = jQuery(this).closest('.dslc-module-front');
 			var code = dslc_dm_get_defaults( module );
 
@@ -5770,7 +5771,7 @@ var dslcDebug = true;
 
 	 jQuery(document).ready(function($) {
 
-	 	// Option changes
+		// Option changes
 
 		$(document).on( 'change', '.dslca-modules-section-edit-field', function() {
 
@@ -5782,7 +5783,7 @@ var dslcDebug = true;
 			dslcValReal = dslcVal;
 			dslcRule = dslcField.data('css-rule');
 
-			dslcEl = $('.dslca-modules-section-being-edited');
+			dslcEl = $('.dslca-modules-section-being-edited'); // Currently editing element
 			dslcTargetEl = dslcEl;
 			dslcSetting = $('.dslca-modules-section-settings input[data-id="' + dslcFieldID + '"]', dslcEl );
 
@@ -5790,14 +5791,17 @@ var dslcDebug = true;
 
 			// If image/upload field alter the value ( use from data )
 			if ( dslcField.hasClass('dslca-modules-section-edit-field-upload') ) {
-				if ( dslcVal && dslcVal.length )
+
+				if ( dslcVal && dslcVal.length ) {
+
 					// dslcVal = dslcField.data('dslca-img-url');
 					dslcVal = $('.dslca-modules-section-settings input[data-id="dslca-img-url"]', dslcEl ).val();
+				}
 			}
 
 			if ( dslcRule == 'background-image' ) {
-				 dslcVal = 'url("' + dslcVal + '")';
-				 dslc_bg_video();
+				dslcVal = 'url("' + dslcVal + '")';
+				dslc_bg_video();
 			}
 
 			if ( dslcFieldID == 'bg_image_attachment' ) {
@@ -6322,7 +6326,19 @@ var dslcDebug = true;
 			file_frame.on( 'select', function() {
 
 				var attachment = file_frame.state().get('selection').first().toJSON();
-				field.val( attachment.id ).data( 'dslca-img-url', attachment.url ).trigger('change');
+				/*
+				Save image ID as value of the image input.
+				 */
+				// field.val( attachment.id ).data( 'dslca-img-url', attachment.url ).trigger('change'); - previous version
+				field.val( attachment.id );
+
+				/*
+				Save image URL as data attribute of input in dslca-modules-section-settings set
+				We need URL in 'dslca-img-url' for live preview
+				 */
+				jQuery('.dslca-modules-section-being-edited').find('.dslca-modules-section-settings input[data-id="dslca-img-url"]').val( attachment.url );
+				field.trigger('change'); // trigger change only after 'dslca-img-url' is set
+
 				hook.hide();
 				removeHook.show();
 
@@ -6349,7 +6365,7 @@ var dslcDebug = true;
 
 			}
 
-			field.val('').trigger('change');
+			field.val('').trigger('change'); // .dslca-modules-section-edit-field
 			hook.hide();
 			addHook.show();
 
@@ -6470,8 +6486,25 @@ DSLC.Editor = new (function() {
 
 			if($(this).data('medium-editor-element') == null){
 
-				var medium = new MediumEditor(this);
+				var medium = new MediumEditor(this, {
+					// buttonLabels: 'fontawesome',
+					imageDragging: false,
+					toolbar: {
+						buttons: ['bold', 'italic', 'unorderedlist', 'orderedlist',  'h2', 'h3', 'removeFormat'],
+						diffLeft: 25,
+						diffTop: 10,
+					},
+				});
 			}
+
 		});
 	}
+
+	MediumEditor.extensions.button.prototype.defaults.bold.contentDefault = '<span class="dashicons dashicons-editor-bold"></span>';
+	MediumEditor.extensions.button.prototype.defaults.italic.contentDefault = '<span class="dashicons dashicons-editor-italic"></span>';
+	MediumEditor.extensions.button.prototype.defaults.quote.contentDefault = '<span class="dashicons dashicons-editor-quote"></span>';
+	MediumEditor.extensions.button.prototype.defaults.orderedlist.contentDefault = '<span class="dashicons dashicons-editor-ol"></span>';
+	MediumEditor.extensions.button.prototype.defaults.unorderedlist.contentDefault = '<span class="dashicons dashicons-editor-ul"></span>';
+	MediumEditor.extensions.button.prototype.defaults.removeFormat.contentDefault = '<span class="dashicons dashicons-editor-removeformatting"></span>';
+
 })();

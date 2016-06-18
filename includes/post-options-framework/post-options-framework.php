@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Table of Contents
  *
@@ -11,8 +10,15 @@
  * - dslc_post_add_row_action ( Adds action in row )
  * - dslc_add_button_permalink ( Adds button in permalink )
  * - dslc_post_submitbox_add_button ( Adds button in submitbox )
+ *
+ * @package LiveComposer
  */
 
+/**
+ * Get array of custom post types that use LC templating system
+ *
+ * @return void
+ */
 function dslc_get_cpt_templates() {
 
 	$templates_array = array();
@@ -22,15 +28,15 @@ function dslc_get_cpt_templates() {
 		'post_type' => 'dslc_templates',
 		'post_status' => 'publish',
 		'posts_per_page' => -1,
-		'order' => 'DESC'
+		'order' => 'DESC',
 	);
 	$templates = get_posts( $args );
 
 	global $dslc_var_templates_pt;
 	foreach ( $dslc_var_templates_pt as $pt_id => $pt_label ) {
-		$templates_array[$pt_id][] = array(
+		$templates_array[ $pt_id ][] = array(
 			'label' => __( 'Default', 'live-composer-page-builder' ),
-			'value' => 'default'
+			'value' => 'default',
 		);
 	}
 
@@ -38,9 +44,9 @@ function dslc_get_cpt_templates() {
 
 		foreach ( $templates as $template ) {
 			$template_for = get_post_meta( $template->ID, 'dslc_template_for', true );
-			$templates_array[$template_for][] = array(
+			$templates_array[ $template_for ][] = array(
 				'label' => $template->post_title,
-				'value' => $template->ID
+				'value' => $template->ID,
 			);
 		}
 
@@ -58,15 +64,12 @@ function dslc_get_cpt_templates() {
 						'std' => '',
 						'id' => 'dslc_post_template',
 						'type' => 'select',
-						'choices' => $templates_array[$pt_id]
+						'choices' => $templates_array[$pt_id],
 					),
 				)
 			);
-
 		}
-
 	}
-
 }
 
 add_action( 'init', 'dslc_get_cpt_templates' );
@@ -184,7 +187,15 @@ function dslc_display_post_options( $object, $metabox ) {
 				<?php if ( isset( $post_option['descr'] ) && '' !== $post_option['descr'] ) : ?>
 
 					<div class="dslca-post-option-description">
-						<?php echo esc_html( $post_option['descr'] ); ?>
+						<?php
+						$allowed_html = array(
+							'a' => array(),
+							'br' => array(),
+							'em' => array(),
+							'strong' => array(),
+						);
+						echo wp_kses( $post_option['descr'], $allowed_html );
+						?>
 					</div><!-- .dslca-post-option-description -->
 
 				<?php endif; ?>
@@ -208,21 +219,32 @@ function dslc_display_post_options( $object, $metabox ) {
 						</select>
 
 						<?php
-							global $current_screen;
 
-							if ( $current_screen->action != 'add' && $object->post_type != 'dslc_templates' && $object->post_type != 'dslc_hf' && $post_option['id'] != 'dslc_header' && $post_option['id'] != 'dslc_footer' ) {
-								echo '<a class="button" href="' . admin_url( 'edit.php?post_type=dslc_templates' ) . '">' . __( 'Edit Templates', 'live-composer-page-builder' ) . '</a>';
-							}
+						global $current_screen;
+
+						if ( 'add' !== $current_screen->action && 'dslc_templates' !== $object->post_type && 'dslc_hf' !== $object->post_type && 'dslc_header' !== $post_option['id'] && 'dslc_footer' !== $post_option['id'] ) {
+							echo '<a class="button" href="' . admin_url( 'edit.php?post_type=dslc_templates' ) . '">' . __( 'Edit Templates', 'live-composer-page-builder' ) . '</a>';
+						}
+
 						?>
 
-					<?php elseif ( $post_option['type'] == 'checkbox' ) : ?>
+					<?php elseif ( 'checkbox' === $post_option['type'] ) : ?>
 
-						<?php $curr_value_array = maybe_unserialize( $curr_value_no_esc ); if ( ! is_array( $curr_value_array ) ) $curr_value_array = array(); ?>
-							<?php $cnt = 0; foreach ( $post_option['choices'] as $key => $choice ) : ?>
-									<div class="dslca-post-option-field-choice">
-										<input type="checkbox" name="<?php echo $post_option['id']; ?>[]" id="<?php echo $post_option['id'] . $key; ?>" value="<?php echo $choice['value']; ?>" <?php if ( in_array( $choice['value'], $curr_value_array ) ) echo 'checked="checked"'; ?> /> <label for="<?php echo $post_option['id'] . $key; ?>"><?php echo $choice['label']; ?></label><br>
-									</div><!-- .dslca-post-option-field-choice -->
-							<?php endforeach; ?>
+						<?php
+						$curr_value_array = maybe_unserialize( $curr_value_no_esc );
+						if ( ! is_array( $curr_value_array ) ) {
+							$curr_value_array = array();
+						}
+
+						if ( '' !== $curr_value && empty( $curr_value_array ) ) {
+							$curr_value_array = explode( ' ', $curr_value );
+						}
+						?>
+						<?php foreach ( $post_option['choices'] as $key => $choice ) : ?>
+								<div class="dslca-post-option-field-choice">
+									<input type="checkbox" name="<?php echo $post_option['id']; ?>[]" id="<?php echo $post_option['id'] . $key; ?>" value="<?php echo $choice['value']; ?>" <?php if ( in_array( $choice['value'], $curr_value_array ) ) echo 'checked="checked"'; ?> /> <label for="<?php echo $post_option['id'] . $key; ?>"><?php echo $choice['label']; ?></label>
+								</div><!-- .dslca-post-option-field-choice -->
+						<?php endforeach; ?>
 
 					<?php elseif ( $post_option['type'] == 'radio' ) : ?>
 
@@ -347,7 +369,7 @@ function dslc_save_post_options( $post_id, $post ) {
 				if ( isset( $new_option_value ) ) {
 
 					update_post_meta( $post_id, $meta_key, $new_option_value );
-				} elseif ( '' == $new_option_value && isset( $curr_option_value ) ) {
+				} elseif ( '' === $new_option_value && isset( $curr_option_value ) ) {
 
 					delete_post_meta( $post_id, $meta_key, $curr_option_value );
 				}

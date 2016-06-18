@@ -177,16 +177,19 @@ function dslc_ajax_add_module( $atts ) {
 	// Allowed to do this?
 	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
-		// The array we'll pass back to the AJAX call
+		// The array we'll pass back to the AJAX call.
 		$response = array();
 
-		// The ID of the module to add
+		// The ID of the module to add.
 		$module_id = $_POST['dslc_module_id'];
 		$post_id = $_POST['dslc_post_id'];
-		if ( isset( $_POST['dslc_preload_preset'] ) && $_POST['dslc_preload_preset'] == 'enabled' )
+		if ( isset( $_POST['dslc_preload_preset'] ) && $_POST['dslc_preload_preset'] == 'enabled' ) {
+
 			$preload_preset = 'enabled';
-		else
+		} else {
+
 			$preload_preset = 'disabled';
+		}
 
 		// If post ID is not numberic stop execution
 		if ( ! is_numeric( $post_id ) )
@@ -233,7 +236,7 @@ function dslc_ajax_add_module( $atts ) {
 		if ( ! is_numeric( $module_instance_id ) )
 			return;
 
-		// Instanciate the module class
+		// Instanciate the module class.
 		$module_instance = new $module_id();
 
 		// Generate settings
