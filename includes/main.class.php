@@ -59,6 +59,8 @@ class DSLC_Main {
 	 */
 	static function dslc_on_activation()
 	{
+		DSLC_Upgrade::init();
+
 		set_transient('_dslc_activation_redirect_1', true, 60);
 	}
 

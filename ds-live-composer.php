@@ -106,6 +106,7 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) ):
 	include DS_LIVE_COMPOSER_ABS . '/includes/other.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/options.extension.class.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/main.class.php';
+	include DS_LIVE_COMPOSER_ABS . '/includes/upgrades.class.php';
 
 	$cap_page = dslc_get_option( 'lc_min_capability_page', 'dslc_plugin_options_access_control' );
 	if ( ! $cap_page ) $cap_page = 'publish_posts';
@@ -231,4 +232,4 @@ function lc_welcome( $plugin ) {
 add_action( 'activated_plugin', 'lc_welcome' );
 
 dslc_load_modules( DS_LIVE_COMPOSER_ABS . '/modules', 'module.php' );
-register_activation_hook( __FILE__, 'dslc_on_activation' );
+register_activation_hook( __FILE__, array( 'DSLC_Main', 'dslc_on_activation' ) );
