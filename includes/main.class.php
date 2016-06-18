@@ -57,8 +57,8 @@ class DSLC_Main {
 	/**
 	 * On activation hook
 	 */
-	static function dslc_on_activation()
-	{
+	static function dslc_on_activation() {
+
 		DSLC_Upgrade::init();
 
 		set_transient('_dslc_activation_redirect_1', true, 60);
