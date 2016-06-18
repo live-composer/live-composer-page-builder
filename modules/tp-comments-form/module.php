@@ -310,7 +310,7 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-comment-form input[type=text],dslc-tp-comment-form input[type=url],dslc-tp-comment-form input[type=email],.dslc-tp-comment-form textarea',
 				'affect_on_change_rule' => 'background-color',
 				'section' => 'styling',
-				'tab' => __( 'inputs', 'live-composer-page-builder' ),
+				'tab' => __( 'Inputs', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Border Color', 'live-composer-page-builder' ),
@@ -321,7 +321,7 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-comment-form input[type=text],dslc-tp-comment-form input[type=url],dslc-tp-comment-form input[type=email],.dslc-tp-comment-form textarea',
 				'affect_on_change_rule' => 'border-color',
 				'section' => 'styling',
-				'tab' => __( 'inputs', 'live-composer-page-builder' ),
+				'tab' => __( 'Inputs', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
@@ -333,7 +333,7 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				'affect_on_change_rule' => 'border-width',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'inputs', 'live-composer-page-builder' ),
+				'tab' => __( 'Inputs', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Borders', 'live-composer-page-builder' ),
@@ -362,7 +362,7 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-comment-form input[type=text],dslc-tp-comment-form input[type=url],dslc-tp-comment-form input[type=email],.dslc-tp-comment-form textarea',
 				'affect_on_change_rule' => 'border-style',
 				'section' => 'styling',
-				'tab' => __( 'inputs', 'live-composer-page-builder' ),
+				'tab' => __( 'Inputs', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Border Radius', 'live-composer-page-builder' ),
@@ -374,7 +374,7 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				'affect_on_change_rule' => 'border-radius',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'inputs', 'live-composer-page-builder' ),
+				'tab' => __( 'Inputs', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Color', 'live-composer-page-builder' ),
@@ -385,7 +385,7 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-comment-form input[type=text],dslc-tp-comment-form input[type=url],dslc-tp-comment-form input[type=email],.dslc-tp-comment-form textarea',
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
-				'tab' => __( 'inputs', 'live-composer-page-builder' ),
+				'tab' => __( 'Inputs', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Font Size', 'live-composer-page-builder' ),
@@ -396,7 +396,7 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-comment-form input[type=text],dslc-tp-comment-form input[type=url],dslc-tp-comment-form input[type=email],.dslc-tp-comment-form textarea',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'styling',
-				'tab' => __( 'inputs', 'live-composer-page-builder' ),
+				'tab' => __( 'Inputs', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -408,7 +408,7 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-comment-form input[type=text],dslc-tp-comment-form input[type=url],dslc-tp-comment-form input[type=email],.dslc-tp-comment-form textarea',
 				'affect_on_change_rule' => 'font-weight',
 				'section' => 'styling',
-				'tab' => __( 'inputs', 'live-composer-page-builder' ),
+				'tab' => __( 'Inputs', 'live-composer-page-builder' ),
 				'ext' => '',
 				'min' => 100,
 				'max' => 900,
@@ -423,7 +423,7 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-comment-form input[type=text],dslc-tp-comment-form input[type=url],dslc-tp-comment-form input[type=email],.dslc-tp-comment-form textarea',
 				'affect_on_change_rule' => 'font-family',
 				'section' => 'styling',
-				'tab' => __( 'inputs', 'live-composer-page-builder' ),
+				'tab' => __( 'Inputs', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Line Height', 'live-composer-page-builder' ),
@@ -434,7 +434,7 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-comment-form textarea',
 				'affect_on_change_rule' => 'line-height',
 				'section' => 'styling',
-				'tab' => __( 'inputs', 'live-composer-page-builder' ),
+				'tab' => __( 'Inputs', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -447,7 +447,7 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'inputs', 'live-composer-page-builder' ),
+				'tab' => __( 'Inputs', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
@@ -459,7 +459,7 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'inputs', 'live-composer-page-builder' ),
+				'tab' => __( 'Inputs', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Padding Horizontal', 'live-composer-page-builder' ),
@@ -471,7 +471,7 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'inputs', 'live-composer-page-builder' ),
+				'tab' => __( 'Inputs', 'live-composer-page-builder' ),
 			),
 
 			/**

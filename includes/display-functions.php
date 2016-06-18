@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Table of Contents
  *
@@ -21,15 +20,14 @@
  *
  * @since 1.0
  */
-
 function dslc_display_composer() {
 
 	global $dslc_active;
 
-	// Reset the query ( because some devs leave their queries non-reseted )
+	// Reset the query ( because some devs leave their queries non-reseted ).
 	wp_reset_query();
 
-	// Show the composer to users who are allowed to view it
+	// Show the composer to users who are allowed to view it.
 	if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) :
 
 		$default_section = dslc_get_option( 'lc_default_opts_section', 'dslc_plugin_options_other' );
@@ -135,7 +133,7 @@ function dslc_display_composer() {
 						<form class="dslca-module-edit-form">
 							<?php do_action( 'dslc_options_prepend' ); ?>
 							<div class="dslca-module-edit-options dslc-clearfix">
-								<div class="dslca-module-edit-options-tabs"></div>
+								<div class="dslca-module-edit-options-tabs dslc-clearfix"></div>
 								<?php
 								/*
 								<!-- Add clear styling button -->
@@ -349,11 +347,11 @@ function dslc_display_composer() {
 
 					if ( $template ) {
 
-						?><a target="_blank" href="<?php echo add_query_arg( array('dslc' => 'active'), get_permalink( $template ) ); ?>" class="dslca-activate-composer-hook"><?php _e( 'EDIT TEMPLATE', 'live-composer-page-builder' ); ?></a><?php
+						?><a target="_blank" href="<?php echo add_query_arg( array('dslc' => 'active'), get_permalink( $template ) ); ?>" class="dslca-activate-composer-hook"><?php _e( 'Edit Template', 'live-composer-page-builder' ); ?></a><?php
 
 					} else {
 
-						?><a target="_blank" href="<?php echo admin_url( 'post-new.php?post_type=dslc_templates' ); ?>" class="dslca-activate-composer-hook"><?php _e( 'CREATE TEMPLATE', 'live-composer-page-builder' ); ?></a><?php
+						?><a target="_blank" href="<?php echo admin_url( 'post-new.php?post_type=dslc_templates' ); ?>" class="dslca-activate-composer-hook"><?php _e( 'Create Template', 'live-composer-page-builder' ); ?></a><?php
 
 					}
 
@@ -508,7 +506,6 @@ function dslc_display_modules() {
  *
  * @since 1.0
  */
-
 function dslc_display_templates() {
 
 	// Get all the templates. Original data.
@@ -517,27 +514,17 @@ function dslc_display_templates() {
 	// Modified array to store templates by section.
 	$templates_arr = array();
 
-	ob_start();
-			echo '$templates:';
-			print_r($templates);
-			echo '------------';
-			$var_dump_result = ob_get_clean();
-	error_log( $var_dump_result );
-
-
-	// If there are active templates
+	// If there are active templates?
 	if ( $templates ) {
 
-		// Go through all templates, populate array
+		// Go through all templates, populate array.
 		foreach ( $templates as $template ) {
-
 
 			$section_title = $template['section'];
 			$template['section'] = strtolower( str_replace( ' ', '_', $template['section'] ) );
 
-			$templates_arr[$template['section']][$template['id']] = $template;
-			$templates_arr[$template['section']][$template['id']]['section_title'] = $section_title;
-
+			$templates_arr[ $template['section'] ][ $template['id'] ] = $template;
+			$templates_arr[ $template['section'] ][ $template['id'] ]['section_title'] = $section_title;
 		}
 
 		// If there are templates?
@@ -547,8 +534,8 @@ function dslc_display_templates() {
 			foreach ( $templates_arr as $template_section_id => $template_section_tpls ) {
 
 				// Go through each template in a section.
-				foreach ( $template_section_tpls as $template ) {
-					?>
+				foreach ( $template_section_tpls as $template ) { ?>
+
 					<div class="dslca-template dslca-scroller-item dslca-origin dslca-template-origin-<?php echo esc_attr( $template_section_id ); ?>" data-origin="<?php echo esc_attr( $template['section_title'] ); ?>" data-id="<?php echo esc_attr( $template['id'] ); ?>">
 						<span class="dslca-template-title"><?php echo esc_html( $template['title'] ); ?></span>
 						<?php if ( 'user' === $template_section_id ) : ?>
@@ -575,6 +562,10 @@ function dslc_display_templates() {
  * @since 1.0
  */
 function dslc_filter_content( $content ) {
+
+	// Remove filter the_content. Need to fire it once on the page start.
+	// TODO: find a true purpose of this as it breaks the page editing.
+	// remove_filter( 'the_content', 'dslc_filter_content', 101 );
 
 	// If post pass protected and pass not supplied return original content
 	if ( post_password_required( get_the_ID() ) ) {
@@ -780,7 +771,7 @@ function dslc_filter_content( $content ) {
 							<?php _e( 'Module settings are being loaded. Save/Cancel actions will appear shortly.', 'live-composer-page-builder' ); ?>
 						</div><!-- .dslca-wp-editor-notification -->
 						<div class="dslca-wp-editor-actions">
-							<span class="dslca-wp-editor-save-hook"><?php _e( 'CONFIRM', 'live-composer-page-builder' ); ?></span>
+							<span class="dslca-wp-editor-save-hook"><?php _e( 'Confirm', 'live-composer-page-builder' ); ?></span>
 							<span class="dslca-wp-editor-cancel-hook"><?php _e( 'Cancel', 'live-composer-page-builder' ); ?></span>
 						</div>
 					</div>
@@ -928,8 +919,11 @@ function dslc_module_front( $atts, $settings_raw = null ) {
 
 		// Transform image ID to URL
 		foreach ( $all_opts as $all_opt ) {
+
 			if ( $all_opt['type'] == 'image' ) {
+
 				if ( isset( $settings[$all_opt['id']] ) && ! empty( $settings[$all_opt['id']] ) && is_numeric( $settings[$all_opt['id']] ) ) {
+
 					$dslc_var_image_option_bckp[$all_opt['id']] = $settings[$all_opt['id']];
 					$image_info = wp_get_attachment_image_src( $settings[$all_opt['id']], 'full' );
 					$settings[$all_opt['id']] = $image_info[0];
@@ -1231,15 +1225,19 @@ function dslc_load_template( $filename, $default = '' ) {
  *
  * @since 1.0
  */
+function dslc_custom_css( $dslc_code = '' ) {
 
-function dslc_custom_css() {
-
-	// Allow theme developers to output CSS for non-standard custom post types
+	// Allow theme developers to output CSS for non-standard custom post types.
 	$dslc_custom_css_ignore_check = false;
 	$dslc_custom_css_ignore_check = apply_filters( 'dslc_generate_custom_css', $dslc_custom_css_ignore_check );
 
-	if ( ! is_singular() && ! is_archive() && ! is_author() && ! is_search() && ! is_404() && ! is_home() && ! $dslc_custom_css_ignore_check )
+	if ( $dslc_code ) {
+		$dslc_custom_css_ignore_check = true;
+	}
+
+	if ( ! is_singular() && ! is_archive() && ! is_author() && ! is_search() && ! is_404() && ! is_home() && ! $dslc_custom_css_ignore_check ) {
 		return;
+	}
 
 	global $dslc_active;
 	global $dslc_css_style;
@@ -1254,147 +1252,156 @@ function dslc_custom_css() {
 	$lc_width = dslc_get_option( 'lc_max_width', 'dslc_plugin_options' );
 
 	if ( empty( $lc_width ) ) {
+
 		$lc_width = $content_width . 'px';
 	} else {
 
-		if ( strpos( $lc_width, 'px' ) === false && strpos( $lc_width, '%' ) === false )
-			$lc_width = $lc_width . 'px';
+		if ( false === strpos( $lc_width, 'px' ) && false === strpos( $lc_width, '%' ) ) {
 
+			$lc_width = $lc_width . 'px';
+		}
 	}
 
-	// Filter $lc_width ( for devs )
+	// Filter $lc_width ( for devs ).
 	$lc_width = apply_filters( 'dslc_content_width', $lc_width );
 
-	$template_id = false;
+	if ( ! $dslc_code ) {
 
-	// If single, load template
-	if ( is_singular( $dslc_post_types ) ) {
-		$template_id = dslc_st_get_template_ID( get_the_ID() );
+		$template_id = false;
+
+		// If single, load template?
+		if ( is_singular( $dslc_post_types ) ) {
+			$template_id = dslc_st_get_template_ID( get_the_ID() );
+		}
+
+		// If archive, load template?
+		if ( is_archive() && ! is_author() && ! is_search() ) {
+			$template_id = dslc_get_option( get_post_type(), 'dslc_plugin_options_archives' );
+		}
+
+		if ( is_author() ) {
+			$template_id = dslc_get_option( 'author', 'dslc_plugin_options_archives' );
+		}
+
+		if ( is_search() ) {
+			$template_id = dslc_get_option( 'search_results', 'dslc_plugin_options_archives' );
+		}
+
+		if ( is_404() ) {
+			$template_id = dslc_get_option( '404_page', 'dslc_plugin_options_archives' );
+		}
+
+		// Header/Footer.
+		if ( $template_id ) {
+			$header_footer = dslc_hf_get_ID( $template_id );
+		} else if ( is_singular( $dslc_post_types ) ) {
+			$template_id = dslc_st_get_template_ID( get_the_ID() );
+			$header_footer = dslc_hf_get_ID( $template_id );
+		} else {
+			$header_footer = dslc_hf_get_ID( get_the_ID() );
+		}
+
+		// Header.
+		if ( $header_footer['header'] ) {
+			$header_code = get_post_meta( $header_footer['header'], 'dslc_code', true );
+			$composer_code .= $header_code;
+		}
+
+		// Footer.
+		if ( $header_footer['footer'] ) {
+			$footer_code = get_post_meta( $header_footer['footer'], 'dslc_code', true );
+			$composer_code .= $footer_code;
+		}
+
+		// Template content.
+		if ( $template_id ) {
+			$composer_code .= get_post_meta( $template_id, 'dslc_code', true );
+		}
+
+		// Post/Page content.
+		$post_id = get_the_ID();
+		$composer_code .= get_post_meta( $post_id, 'dslc_code', true );
+
+	} else { // ! $dslc_code.
+
+		error_log( $composer_code );
+		$composer_code = $dslc_code;
+		error_log( $composer_code );
 	}
-
-	// If archive, load template
-	if ( is_archive() && ! is_author() && ! is_search() ) {
-		$template_id = dslc_get_option( get_post_type(), 'dslc_plugin_options_archives' );
-	}
-
-	if ( is_author() ) {
-		$template_id = dslc_get_option( 'author', 'dslc_plugin_options_archives' );
-	}
-
-	if ( is_search() ) {
-		$template_id = dslc_get_option( 'search_results', 'dslc_plugin_options_archives' );
-	}
-
-	if ( is_404() ) {
-		$template_id = dslc_get_option( '404_page', 'dslc_plugin_options_archives' );
-	}
-
-	// Header/Footer
-	if ( $template_id ) {
-		$header_footer = dslc_hf_get_ID( $template_id );
-	} else if ( is_singular( $dslc_post_types ) ) {
-		$template_id = dslc_st_get_template_ID( get_the_ID() );
-		$header_footer = dslc_hf_get_ID( $template_id );
-	} else {
-		$header_footer = dslc_hf_get_ID( get_the_ID() );
-	}
-
-	// Header
-	if ( $header_footer['header'] ) {
-		$header_code = get_post_meta( $header_footer['header'], 'dslc_code', true );
-		$composer_code .= $header_code;
-	}
-
-	// Footer
-	if ( $header_footer['footer'] ) {
-		$footer_code = get_post_meta( $header_footer['footer'], 'dslc_code', true );
-		$composer_code .= $footer_code;
-	}
-
-	// Template content
-	if ( $template_id ) {
-		$composer_code .= get_post_meta( $template_id, 'dslc_code', true );
-	}
-
-	// Post/Page content
-	$post_id = get_the_ID();
-	$composer_code .= get_post_meta( $post_id, 'dslc_code', true );
 
 	echo '<style type="text/css">';
 
-		// If composer not used on this page stop execution
-		if ( $composer_code ) {
+	// If composer not used on this page stop execution?
+	if ( $composer_code ) {
 
-			// Replace shortcode names
-			$composer_code = str_replace( 'dslc_modules_section', 'dslc_modules_section_gen_css', $composer_code );
-			$composer_code = str_replace( 'dslc_modules_area', 'dslc_modules_area_gen_css', $composer_code );
-			$composer_code = str_replace( '[dslc_module]', '[dslc_module_gen_css]', $composer_code );
-			$composer_code = str_replace( '[dslc_module ', '[dslc_module_gen_css ', $composer_code );
-			$composer_code = str_replace( '[/dslc_module]', '[/dslc_module_gen_css]', $composer_code );
+		// Replace shortcode names.
+		$composer_code = str_replace( 'dslc_modules_section', 'dslc_modules_section_gen_css', $composer_code );
+		$composer_code = str_replace( 'dslc_modules_area', 'dslc_modules_area_gen_css', $composer_code );
+		$composer_code = str_replace( '[dslc_module]', '[dslc_module_gen_css]', $composer_code );
+		$composer_code = str_replace( '[dslc_module ', '[dslc_module_gen_css ', $composer_code );
+		$composer_code = str_replace( '[/dslc_module]', '[/dslc_module_gen_css]', $composer_code );
 
-			// Do CSS shortcode
-			do_shortcode( $composer_code );
+		// Do CSS shortcode.
+		do_shortcode( $composer_code );
 
-			// Google Fonts Import
+		// Google Fonts Import.
 
-			$gfonts_output_subsets = '';
-			$gfonts_subsets_arr = dslc_get_option( 'lc_gfont_subsets', 'dslc_plugin_options_performance' );
-			if ( ! $gfonts_subsets_arr ) $gfonts_subsets_arr = array('latin', 'latin-ext', 'cyrillic', 'cyrillic-ext');
-			foreach ( $gfonts_subsets_arr as $gfonts_subset ) {
-				if ( $gfonts_output_subsets == '' ) {
-					$gfonts_output_subsets .= $gfonts_subset;
-				} else {
-					$gfonts_output_subsets .= ',' . $gfonts_subset;
-				}
+		$gfonts_output_subsets = '';
+		$gfonts_subsets_arr = dslc_get_option( 'lc_gfont_subsets', 'dslc_plugin_options_performance' );
+		if ( ! $gfonts_subsets_arr ) $gfonts_subsets_arr = array('latin', 'latin-ext', 'cyrillic', 'cyrillic-ext');
+		foreach ( $gfonts_subsets_arr as $gfonts_subset ) {
+			if ( $gfonts_output_subsets == '' ) {
+				$gfonts_output_subsets .= $gfonts_subset;
+			} else {
+				$gfonts_output_subsets .= ',' . $gfonts_subset;
+			}
+		}
+
+		if ( ! defined( 'DS_LIVE_COMPOSER_GFONTS' ) || DS_LIVE_COMPOSER_GFONTS ) {
+
+			$gfonts_output_prepend = '@import url("//fonts.googleapis.com/css?family=';
+			$gfonts_output_append = '&subset=' . $gfonts_output_subsets . '"); ';
+			$gfonts_ouput_inner = '';
+
+			$gfonts_do_output = true;
+
+			if ( count( $dslc_googlefonts_array ) == 1 && $dslc_googlefonts_array[0] == '' ) {
+				$gfonts_do_output = false;
 			}
 
-			if ( ! defined( 'DS_LIVE_COMPOSER_GFONTS' ) || DS_LIVE_COMPOSER_GFONTS ) {
-
-				$gfonts_output_prepend = '@import url("//fonts.googleapis.com/css?family=';
-				$gfonts_output_append = '&subset=' . $gfonts_output_subsets . '"); ';
-				$gfonts_ouput_inner = '';
-
-				$gfonts_do_output = true;
-
-				if ( count( $dslc_googlefonts_array ) == 1 && $dslc_googlefonts_array[0] == '' ) {
-					$gfonts_do_output = false;
-				}
-
-				foreach ( $dslc_googlefonts_array as $gfont ) {
-					if ( in_array( $gfont, $dslc_all_googlefonts_array ) ) {
-						$gfont = str_replace( ' ', '+', $gfont );
-						if ( $gfont != '' ) {
-							if ( $gfonts_ouput_inner == '' ) {
-								$gfonts_ouput_inner .= $gfont . ':100,200,300,400,500,600,700,800,900';
-							} else {
-								$gfonts_ouput_inner .= '|' . $gfont . ':100,200,300,400,500,600,700,800,900';
-							}
+			foreach ( $dslc_googlefonts_array as $gfont ) {
+				if ( in_array( $gfont, $dslc_all_googlefonts_array ) ) {
+					$gfont = str_replace( ' ', '+', $gfont );
+					if ( $gfont != '' ) {
+						if ( $gfonts_ouput_inner == '' ) {
+							$gfonts_ouput_inner .= $gfont . ':100,200,300,400,500,600,700,800,900';
+						} else {
+							$gfonts_ouput_inner .= '|' . $gfont . ':100,200,300,400,500,600,700,800,900';
 						}
 					}
 				}
-
-				// Do not output empty Google font calls (when font set to an empty string)
-				if ( $gfonts_do_output ) {
-					$gfonts_output = $gfonts_output_prepend . $gfonts_ouput_inner . $gfonts_output_append;
-					if ( $gfonts_ouput_inner != '' ) echo $gfonts_output;
-				}
-
 			}
 
+			// Do not output empty Google font calls (when font set to an empty string)
+			if ( $gfonts_do_output ) {
+				$gfonts_output = $gfonts_output_prepend . $gfonts_ouput_inner . $gfonts_output_append;
+				if ( $gfonts_ouput_inner != '' ) echo $gfonts_output;
+			}
 		}
+	}
 
-		// Wrapper width
-		echo '.dslc-modules-section-wrapper, .dslca-add-modules-section { width : ' . $lc_width . '; } ';
+	// Wrapper width.
+	echo '.dslc-modules-section-wrapper, .dslca-add-modules-section { width : ' . $lc_width . '; } ';
 
-		// Initial ( default ) row CSS
-		echo dslc_row_get_initial_style();
+	// Initial ( default ) row CSS.
+	echo dslc_row_get_initial_style();
 
-		// Echo CSS style
-		if ( ! $dslc_active && $composer_code || ! $dslc_active && $dslc_custom_css_ignore_check )
-			echo $dslc_css_style;
+	// Echo CSS style.
+	if ( ! $dslc_active && $composer_code || ! $dslc_active && $dslc_custom_css_ignore_check ) {
+		echo $dslc_css_style;
+	}
 
 	echo '</style>';
-
 
 }
 

@@ -1,4 +1,9 @@
 <?php
+/**
+ * Initialization functions for the settings panel
+ *
+ * @package LiveComposer
+ */
 
 /**
  * Returns a base64 URL for the svg for use in the menu
@@ -14,12 +19,10 @@ function dslc_get_menu_svg() {
 /**
  * Register all the option pages
  */
-
 function dslc_plugin_options_setup() {
 
 	global $dslc_plugin_options;
 	do_action( 'dslc_hook_register_options' );
-
 
 	// Base 64 encoded SVG image.
 	$icon_svg = dslc_get_menu_svg();
@@ -34,22 +37,18 @@ function dslc_plugin_options_setup() {
 		'99.99'
 	);
 
-		// add_submenu_page(
-		// 	'dslc_plugin_options',
-		// 	__('Geeting Started', 'live-composer-page-builder' ),
-		// 	__('Geeting Started', 'live-composer-page-builder' ),
-		// 	'manage_options',
-		// 	'dslc_getting_started',
-		// 	create_function( null, 'dslc_plugin_options_display( "dslc_getting_started" );' )
-		// );
+	// Custom options extension.
+	global $dslc_options_extender;
+	$dslc_options_extender->construct_panels();
 
-		// remove_submenu_page( 'dslc_plugin_options', 'dslc_plugin_options' ); // delete duplicate
 } add_action( 'admin_menu', 'dslc_plugin_options_setup' );
+
 
 /**
  * Display option pages
+ *
+ * @param string $tab Tab to display.
  */
-
 function dslc_plugin_options_display( $tab = '' ) {
 
 	global $dslc_plugin_options;
@@ -59,7 +58,7 @@ function dslc_plugin_options_display( $tab = '' ) {
 		#jstabs .tab{display: none}
 	</style>
 	<div class="wrap">
-		<h2 id="dslc-main-title">Live Composer <span class="dslc-ver"><?php echo DS_LIVE_COMPOSER_VER; ?></span></h2>
+		<h2 id="dslc-main-title">Live Composer <span class="dslc-ver"><?php echo esc_html( DS_LIVE_COMPOSER_VER ); ?></span></h2>
 
 		<form autocomplete="off" class="docs-search-form" id="dslc-headersearch" method="GET" action="//livecomposer.help/search"  target="_blank">
 			<input type="hidden" value="" name="collectionId">
@@ -72,15 +71,15 @@ function dslc_plugin_options_display( $tab = '' ) {
 		settings_errors();
 
 		$anchor = sanitize_text_field( @$_GET['anchor'] );
-		$anchor = $anchor != '' ? $anchor : 'dslc_getting_started';
+		$anchor = '' !== $anchor ? $anchor : 'dslc_getting_started';
 		?>
 		<a name="dslc-top"></a>
 		<h2 class="nav-tab-wrapper dslc-settigns-tabs" id="dslc-tabs">
-			<a href="#" data-nav-to="dslc_getting_started" class="nav-tab <?php echo $anchor == 'dslc_getting_started' ? 'nav-tab-active' : ''; ?>"><?php _e( 'Getting Started', 'live-composer-page-builder' ) ?></a>
-			<a href="#" data-nav-to="tab-settings" class="nav-tab <?php echo $anchor == 'dslc_settings' ? 'nav-tab-active' : ''; ?>"><?php _e( 'Settings', 'live-composer-page-builder' ) ?></a>
-			<a href="#" data-nav-to="tab-extensions" class="nav-tab <?php echo $anchor == 'dslc_extensions' ? 'nav-tab-active' : ''; ?>"><?php _e( 'Extensions <span class="tag">Free</span>', 'live-composer-page-builder' ) ?></a>
-			<a href="#" data-nav-to="tab-themes" class="nav-tab <?php echo $anchor == 'dslc_themes' ? 'nav-tab-active' : ''; ?>"><?php _e( 'Themes <span class="tag">Free</span>', 'live-composer-page-builder' ) ?></a>
-			<a href="#" data-nav-to="tab-docs" class="nav-tab <?php echo $anchor == 'dslc_docs' ? 'nav-tab-active' : ''; ?>"><?php _e( 'Docs &amp; Support', 'live-composer-page-builder' ) ?></a>
+			<a href="#" data-nav-to="dslc_getting_started" class="nav-tab <?php echo 'dslc_getting_started' === $anchor ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Getting Started', 'live-composer-page-builder' ) ?></a>
+			<a href="#" data-nav-to="tab-settings" class="nav-tab <?php echo 'dslc_settings' === $anchor ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Settings', 'live-composer-page-builder' ) ?></a>
+			<a href="#" data-nav-to="tab-extensions" class="nav-tab <?php echo 'dslc_extensions' === $anchor ? 'nav-tab-active' : ''; ?>"><?php  echo esc_html__( 'Extensions', 'live-composer-page-builder' ) . ' <span class="tag">' . esc_html__( 'Free', 'live-composer-page-builder' ) . '</span>'; ?></a>
+			<a href="#" data-nav-to="tab-themes" class="nav-tab <?php echo 'dslc_themes' === $anchor ? 'nav-tab-active' : ''; ?>"><?php  echo esc_html__( 'Themes', 'live-composer-page-builder' ) . ' <span class="tag">' . esc_html__( 'Free', 'live-composer-page-builder' ) . '</span>'; ?></a>
+			<a href="#" data-nav-to="tab-docs" class="nav-tab <?php echo 'dslc_docs' === $anchor ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Docs &amp; Support', 'live-composer-page-builder' ) ?></a>
 		</h2>
 
 
@@ -119,12 +118,10 @@ function dslc_plugin_options_display( $tab = '' ) {
 					$("#tab-for-" + $(this).data('nav-to')).show();
 					$(this).addClass('nav-tab-active')
 
+					var refer = $("#jstabs").find("input[name='_wp_http_referer']");
+					refer.val( '<?php echo admin_url( 'admin.php?page=dslc_plugin_options&anchor=dslc_settings&settings-updated=true' ); ?>' );
 
-				var refer = $("#jstabs").find("input[name='_wp_http_referer']");
-
-				refer.val( '<?php echo admin_url( 'admin.php?page=dslc_plugin_options&anchor=dslc_settings&settings-updated=true' ); ?>' );
-
-				return false;
+					return false;
 				}
 			});
 		});
@@ -136,7 +133,6 @@ function dslc_plugin_options_display( $tab = '' ) {
 /**
  * Register options
  */
-
 function dslc_plugin_options_init() {
 
 	global $dslc_plugin_options;
@@ -145,28 +141,27 @@ function dslc_plugin_options_init() {
 	 * Add Sections and Fields on the settings page
 	 */
 
-	foreach ( $dslc_plugin_options as $section_ID => $section ) {
+	foreach ( $dslc_plugin_options as $section_id => $section ) {
 
 		add_settings_section(
-			$section_ID,
+			$section_id,
 			$section['title'],
 			'dslc_plugin_options_display_options',
-			$section_ID
+			$section_id
 		);
 
 		register_setting(
-			$section_ID,
-			$section_ID
+			$section_id,
+			$section_id
 		);
 
-		foreach ( $section['options'] as $option_ID => $option ) {
+		foreach ( $section['options'] as $option_id => $option ) {
 
-
-			$option['id'] = $option_ID;
+			$option['id'] = $option_id;
 
 			if ( ! isset( $option['section'] ) ) {
 
-				$option['section'] = $section_ID;
+				$option['section'] = $section_id;
 			}
 
 			$option['name'] = 'dslc_plugin_options[' . $option['id'] . ']';
@@ -174,22 +169,21 @@ function dslc_plugin_options_init() {
 			$value = '';
 			$options = get_option( 'dslc_plugin_options' );
 
-			if ( isset( $options[$option_ID] ) ) {
-
-				$value = $options[$option_ID];
+			if ( isset( $options[ $option_id ] ) ) {
+				$value = $options[ $option_id ];
 			}
 
-			/// Prev version struct
-			if ( $value == '' ) {
+			// Previous version structure.
+			if ( '' === $value ) {
 
-				$options = get_option( $section_ID );
+				$options = get_option( $section_id );
 
-				if ( isset( $options[$option_ID] ) ) {
+				if ( isset( $options[ $option_id ] ) ) {
 
-					$value = $options[$option_ID];
+					$value = $options[ $option_id ];
 				}
 
-				if ( $value == '' ) {
+				if ( '' === $value ) {
 
 					$value = $option['std'];
 				}
@@ -198,77 +192,84 @@ function dslc_plugin_options_init() {
 			$option['value'] = $value;
 
 			add_settings_field(
-				$option_ID, // id
-				$option['label'], //title
-				'dslc_option_display_funcitons_router', //callback
-				$section_ID, //page
-				$section_ID, //section
-				$option //args
+
+				$option_id, // Id.
+				$option['label'], // Title.
+				'dslc_option_display_funcitons_router', // Callback.
+				$section_id, // Page.
+				$section_id, // Section.
+				$option // Args.
 			);
 		}
-
 	}
-
 
 } add_action( 'admin_init', 'dslc_plugin_options_init' );
 
-
+/**
+ * Function router to not use anonymous functions
+ *
+ * @param  array $option Option data.
+ * @return void
+ */
 function dslc_option_display_funcitons_router( $option ) {
-	if ( $option['type'] == 'text' ) {
-		dslc_plugin_option_display_text ($option);
-	} elseif ( $option['type'] == 'textarea' ) {
-		dslc_plugin_option_display_textarea ($option);
-	} elseif ( $option['type'] == 'select' ) {
-		dslc_plugin_option_display_select ($option);
-	} elseif ( $option['type'] == 'checkbox' ) {
-		dslc_plugin_option_display_checkbox ($option);
-	} elseif ( $option['type'] == 'list' ) {
-		dslc_plugin_option_display_list ($option);
-	} elseif ( $option['type'] == 'radio' ) {
-		dslc_plugin_option_display_radio ($option);
-	} elseif ( $option['type'] == 'styling_presets' ) {
-		dslc_plugin_option_display_styling_presets ($option);
+	if ( 'text' === $option['type'] ) {
+		dslc_plugin_option_display_text( $option );
+	} elseif ( 'textarea' === $option['type'] ) {
+		dslc_plugin_option_display_textarea( $option );
+	} elseif ( 'select' === $option['type'] ) {
+		dslc_plugin_option_display_select( $option );
+	} elseif ( 'checkbox' === $option['type'] ) {
+		dslc_plugin_option_display_checkbox( $option );
+	} elseif ( 'list' === $option['type'] ) {
+		dslc_plugin_option_display_list( $option );
+	} elseif ( 'radio' === $option['type'] ) {
+		dslc_plugin_option_display_radio( $option );
+	} elseif ( 'styling_presets' === $option['type'] ) {
+		dslc_plugin_option_display_styling_presets( $option );
 	}
 }
 
+/**
+ * Required Function
+ *
+ * This function is required for add_settings_section
+ * even if we don't print any data inside of it.
+ * In our case all the settings fields rendered
+ * by callback from add_settings_field.
+ *
+ * @param section $section Docs section.
+ */
 function dslc_plugin_options_display_options( $section ) {
-  /*
-	* Function is required for add_settings_section
-	* even if we don't print any data insite of it.
-	* In our case all the settings fields rendered
-	* by callback from add_settings_field.
-	*
-	*/
+
 }
 
-/*
+/**
  * Active Campaign
  */
-
-add_action( 'wp_ajax_dslc_activecampaign', 'dslc_ajax_check_activecampaign' );
 function dslc_ajax_check_activecampaign() {
 
-    // Check Nonce
-    if ( ! wp_verify_nonce( $_POST['security']['nonce'], 'dslc-optionspanel-ajax' ) ) {
-        wp_die( 'You do not have rights!' );
-    }
+	// Check Nonce.
+	if ( ! wp_verify_nonce( $_POST['security']['nonce'], 'dslc-optionspanel-ajax' ) ) {
+		wp_die( 'You do not have rights!' );
+	}
 
-    // Access permissions
-    if ( ! current_user_can( 'install_plugins' ) ) {
-        wp_die( 'You do not have rights!' );
-    }
+	// Check access permissions.
+	if ( ! current_user_can( 'install_plugins' ) ) {
+		wp_die( 'You do not have rights!' );
+	}
 
-    $email = sanitize_email( $_POST["email"] );
-    $name = sanitize_text_field( $_POST["name"] );
+	$email = sanitize_email( $_POST['email'] );
+	$name = sanitize_text_field( $_POST['name'] );
 
-    $dslc_getting_started = array(
-    	'email' => $email,
-    	'name' => $name,
-    	'subscribed' => '1'
-    );
+	$dslc_getting_started = array(
+	'email' => $email,
+	'name' => $name,
+	'subscribed' => '1',
+	);
 
-    add_option( 'dslc_user', $dslc_getting_started );
+	add_option( 'dslc_user', $dslc_getting_started );
 
-    wp_die();
+	wp_die();
 
 }
+add_action( 'wp_ajax_dslc_activecampaign', 'dslc_ajax_check_activecampaign' );

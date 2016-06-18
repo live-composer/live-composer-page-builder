@@ -232,7 +232,7 @@ class DSLC_Galleries extends DSLC_Module {
 						'value' => 'lightbox'
 					)
 				),
-				'tab' => __( 'other', 'live-composer-page-builder' ),
+				'tab' => __( 'Other', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Title - Link Behaviour', 'live-composer-page-builder' ),
@@ -249,7 +249,7 @@ class DSLC_Galleries extends DSLC_Module {
 						'value' => 'lightbox'
 					)
 				),
-				'tab' => __( 'other', 'live-composer-page-builder' ),
+				'tab' => __( 'Other', 'live-composer-page-builder' ),
 			),
 
 			// Archive Listinging
@@ -605,7 +605,7 @@ class DSLC_Galleries extends DSLC_Module {
 				'std' => '',
 				'type' => 'text',
 				'section' => 'styling',
-				'tab' => __( 'thumbnail', 'live-composer-page-builder' ),
+				'tab' => __( 'Thumbnail', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Resize - Width', 'live-composer-page-builder' ),
@@ -613,7 +613,7 @@ class DSLC_Galleries extends DSLC_Module {
 				'std' => '',
 				'type' => 'text',
 				'section' => 'styling',
-				'tab' => __( 'thumbnail', 'live-composer-page-builder' ),
+				'tab' => __( 'Thumbnail', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Resize - Width', 'live-composer-page-builder' ),
@@ -621,7 +621,7 @@ class DSLC_Galleries extends DSLC_Module {
 				'std' => '',
 				'type' => 'text',
 				'section' => 'styling',
-				'tab' => __( 'thumbnail', 'live-composer-page-builder' ),
+				'tab' => __( 'Thumbnail', 'live-composer-page-builder' ),
 				'visibility' => 'hidden'
 			),
 			array(

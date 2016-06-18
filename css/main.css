@@ -76,6 +76,11 @@ body.admin-bar #dslc-header.dslc-header-pos-absolute {
 	margin-left: 5px;
 }
 
+/* Use Open Sans here as Roboto is not available at this point */
+.dslca-activate-composer-hook {
+	font-family: 'Open Sans', sans-serif;
+}
+
 .dslca-container .dslca-close-composer-hook:hover {
 	background: #f27562;
 }
@@ -817,14 +822,14 @@ body.dslc-res-phone .dslc-module-front.dslc-col {
 
 }
 
- @media only screen and ( max-width: 767px ) {
+@media only screen and ( max-width: 767px ) {
 
 	.dslc-modules-section.dslc-init-parallax {
 		background-attachment: scroll !important;
 		background-position: 0 0 !important;
 	}
 
- }
+}
 
 /**
  * Responsive PREVIEW ( when a tab for responsive options is selected )
@@ -1110,7 +1115,12 @@ body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-post-thumb .dslc-o
 }
 
 /**
- * Show On / Hide On
+ * ----------------------------------------------------------------------
+ * Responsive classes and properties
+ */
+
+/**
+ * Show On / Hide On – Old code (js based)
  */
 
 .dslc-res-big .dslc-hide-on-desktop,
@@ -1134,4 +1144,40 @@ body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-post-thumb .dslc-o
 .dslca-composer-hidden.dslc-res-big .dslc-hide-on-desktop,
 .dslca-composer-hidden.dslc-res-smaller-monitor .dslc-hide-on-desktop {
 	display: none !important;
+}
+
+/**
+ * Show On / Hide On – New code (media queries)
+ */
+
+@media only screen and (min-width : 1025px) {
+
+	.dslc-hide-on-desktop {
+		display: none !important;
+	}
+
+	.dslca-enabled .dslc-hide-on-desktop {
+		display: block !important;
+	}
+
+	.dslca-composer-hidden .dslc-hide-on-desktop {
+		display: none !important;
+	}
+}
+
+
+@media only screen and (min-width : 768px) and (max-width : 1024px)  {
+
+	.dslc-hide-on-tablet {
+		display: none !important;
+	}
+
+}
+
+@media only screen and ( max-width: 767px ) {
+
+	.dslc-hide-on-phone {
+		display: none !important;
+	}
+
 }

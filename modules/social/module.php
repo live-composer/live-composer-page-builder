@@ -380,7 +380,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => ' ul.dslc-social .dslc-icon',
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
-				'tab' => __( 'icon', 'live-composer-page-builder' ),
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Color - Hover', 'live-composer-page-builder' ),
@@ -391,7 +391,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => ' ul.dslc-social a.dslc-social-icon:hover .dslc-icon',
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
-				'tab' => __( 'icon', 'live-composer-page-builder' ),
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Size', 'live-composer-page-builder' ),
@@ -402,7 +402,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => 'ul.dslc-social a.dslc-social-icon',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'styling',
-				'tab' => __( 'icon', 'live-composer-page-builder' ),
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 
@@ -417,7 +417,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-social-label',
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
-				'tab' => __( 'labels', 'live-composer-page-builder' ),
+				'tab' => __( 'Labels', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Font Size', 'live-composer-page-builder' ),
@@ -428,7 +428,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-social-label',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'styling',
-				'tab' => __( 'labels', 'live-composer-page-builder' ),
+				'tab' => __( 'Labels', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -440,7 +440,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-social-label',
 				'affect_on_change_rule' => 'font-weight',
 				'section' => 'styling',
-				'tab' => __( 'labels', 'live-composer-page-builder' ),
+				'tab' => __( 'Labels', 'live-composer-page-builder' ),
 				'ext' => '',
 				'min' => 100,
 				'max' => 900,
@@ -455,7 +455,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-social-label',
 				'affect_on_change_rule' => 'font-family',
 				'section' => 'styling',
-				'tab' => __( 'labels', 'live-composer-page-builder' ),
+				'tab' => __( 'Labels', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Font Style', 'live-composer-page-builder' ),
@@ -466,7 +466,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-social-label',
 				'affect_on_change_rule' => 'font-style',
 				'section' => 'styling',
-				'tab' => __( 'labels', 'live-composer-page-builder' ),
+				'tab' => __( 'Labels', 'live-composer-page-builder' ),
 				'choices' => array(
 					array(
 						'label' => __( 'Normal', 'live-composer-page-builder' ),
@@ -487,7 +487,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-social-label',
 				'affect_on_change_rule' => 'letter-spacing',
 				'section' => 'styling',
-				'tab' => __( 'labels', 'live-composer-page-builder' ),
+				'tab' => __( 'Labels', 'live-composer-page-builder' ),
 				'ext' => 'px',
 				'min' => -50,
 				'max' => 50
@@ -501,7 +501,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-social-label',
 				'affect_on_change_rule' => 'line-height',
 				'section' => 'styling',
-				'tab' => __( 'labels', 'live-composer-page-builder' ),
+				'tab' => __( 'Labels', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -513,7 +513,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-social-label',
 				'affect_on_change_rule' => 'margin-left',
 				'section' => 'styling',
-				'tab' => __( 'labels', 'live-composer-page-builder' ),
+				'tab' => __( 'Labels', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
 			array(
@@ -543,7 +543,7 @@ class DSLC_Social extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-social-label',
 				'affect_on_change_rule' => 'text-transform',
 				'section' => 'styling',
-				'tab' => __( 'labels', 'live-composer-page-builder' ),
+				'tab' => __( 'Labels', 'live-composer-page-builder' ),
 			),
 
 			/**

@@ -260,7 +260,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-gallery-slider-main',
 				'affect_on_change_rule' => 'background-color',
 				'section' => 'styling',
-				'tab' => __( 'slider', 'live-composer-page-builder' ),
+				'tab' => __( 'Slider', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Border Color', 'live-composer-page-builder' ),
@@ -271,7 +271,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-gallery-slider-main',
 				'affect_on_change_rule' => 'border-color',
 				'section' => 'styling',
-				'tab' => __( 'slider', 'live-composer-page-builder' ),
+				'tab' => __( 'Slider', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
@@ -283,7 +283,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_rule' => 'border-width',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'slider', 'live-composer-page-builder' ),
+				'tab' => __( 'Slider', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Borders', 'live-composer-page-builder' ),
@@ -312,7 +312,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-gallery-slider-main',
 				'affect_on_change_rule' => 'border-style',
 				'section' => 'styling',
-				'tab' => __( 'slider', 'live-composer-page-builder' ),
+				'tab' => __( 'Slider', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Border Radius - Top', 'live-composer-page-builder' ),
@@ -324,7 +324,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_rule' => 'border-top-left-radius,border-top-right-radius',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'slider', 'live-composer-page-builder' ),
+				'tab' => __( 'Slider', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Border Radius - Bottom', 'live-composer-page-builder' ),
@@ -336,7 +336,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_rule' => 'border-bottom-left-radius,border-bottom-right-radius',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'slider', 'live-composer-page-builder' ),
+				'tab' => __( 'Slider', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
@@ -348,7 +348,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'slider', 'live-composer-page-builder' ),
+				'tab' => __( 'Slider', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Padding Horizontal', 'live-composer-page-builder' ),
@@ -360,7 +360,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'slider', 'live-composer-page-builder' ),
+				'tab' => __( 'Slider', 'live-composer-page-builder' ),
 			),
 
 			/**
@@ -376,7 +376,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-gallery-slider-main .dslc-slider-item',
 				'affect_on_change_rule' => 'background-color',
 				'section' => 'styling',
-				'tab' => __( 'slider - item', 'live-composer-page-builder' ),
+				'tab' => __( 'Slider - item', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Border Color', 'live-composer-page-builder' ),
@@ -387,7 +387,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-gallery-slider-main .dslc-slider-item',
 				'affect_on_change_rule' => 'border-color',
 				'section' => 'styling',
-				'tab' => __( 'slider - item', 'live-composer-page-builder' ),
+				'tab' => __( 'Slider - item', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
@@ -399,7 +399,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_rule' => 'border-width',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'slider - item', 'live-composer-page-builder' ),
+				'tab' => __( 'Slider - item', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Borders', 'live-composer-page-builder' ),
@@ -428,7 +428,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-tp-gallery-slider-main .dslc-slider-item',
 				'affect_on_change_rule' => 'border-style',
 				'section' => 'styling',
-				'tab' => __( 'slider - item', 'live-composer-page-builder' ),
+				'tab' => __( 'Slider - item', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Border Radius - Top', 'live-composer-page-builder' ),
@@ -440,7 +440,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_rule' => 'border-top-left-radius,border-top-right-radius',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'slider - item', 'live-composer-page-builder' ),
+				'tab' => __( 'Slider - item', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Border Radius - Bottom', 'live-composer-page-builder' ),
@@ -452,7 +452,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_rule' => 'border-bottom-left-radius,border-bottom-right-radius',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'slider - item', 'live-composer-page-builder' ),
+				'tab' => __( 'Slider - item', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
@@ -464,7 +464,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'slider - item', 'live-composer-page-builder' ),
+				'tab' => __( 'Slider - item', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Padding Horizontal', 'live-composer-page-builder' ),
@@ -476,7 +476,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'slider - item', 'live-composer-page-builder' ),
+				'tab' => __( 'Slider - item', 'live-composer-page-builder' ),
 			),
 
 			/**
