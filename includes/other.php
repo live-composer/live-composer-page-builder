@@ -231,3 +231,9 @@ function dslc_check_wpsettings_admin_notice() {
 		<?php }
 }
 add_action( 'admin_notices', 'dslc_check_wpsettings_admin_notice' );
+
+function dslc_module_options_func( $module_options ) {
+
+	return array_merge( $module_options, DSLC_Module::common_options() );
+}
+add_filter( 'dslc_module_options', 'dslc_module_options_func', 1 );

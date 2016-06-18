@@ -899,6 +899,7 @@ function dslc_module_front( $atts, $settings_raw = null ) {
 		global $dslc_var_image_option_bckp;
 		$dslc_var_image_option_bckp = array();
 		$all_opts = $module_instance->options();
+
 		foreach ( $all_opts as $all_opt ) {
 
 			// Fix settings when a new option added after a module is used
