@@ -20,6 +20,11 @@
  * - dslc_social_share
  */
 
+// Global Plugin Object
+var DSLC = {
+	Production: {}
+};
+
 /**
  * Responsive Classes
  */
@@ -1500,8 +1505,3 @@ function disable_css_rule(selector, element, moduleID) {
 	}
 
 }
-
-// Global Plugin Object
-var DSLC = {
-	Production: {}
-};
