@@ -344,10 +344,7 @@ function dslc_save_post_options( $post_id, $post ) {
 				}
 
 				// Save, Update, Delete option.
-				if ( isset( $new_option_value ) && '' == $curr_option_value ) {
-
-					add_post_meta( $post_id, $meta_key, $new_option_value, true );
-				} elseif ( isset( $new_option_value ) && $new_option_value != $curr_option_value ) {
+				if ( isset( $new_option_value ) ) {
 
 					update_post_meta( $post_id, $meta_key, $new_option_value );
 				} elseif ( '' == $new_option_value && isset( $curr_option_value ) ) {
