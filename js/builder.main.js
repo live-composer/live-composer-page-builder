@@ -126,7 +126,7 @@ var dslcAllFontsArray = dslcRegularFontsArray.concat( dslcGoogleFontsArray );
 // Set current/default icons set
 var dslcIconsCurrentSet = DSLCIcons.fontawesome;
 
-var dslcDebug = true;
+var dslcDebug = false;
 
 /*********************************
  *
@@ -2751,6 +2751,8 @@ var dslcDebug = true;
 			dslcSettings,
 			function( response ) {
 
+				DSLC.Editor.clearUtils();
+
 				// Hide the publish button
 				jQuery('.dslca-save-composer-hook').css({ 'visibility' : 'hidden' });
 				jQuery('.dslca-save-draft-composer-hook').css({ 'visibility' : 'hidden' });
@@ -2796,6 +2798,7 @@ var dslcDebug = true;
 				dslc_modules_options_box_shadow_color();
 				dslc_modules_options_text_shadow_color();
 				dslc_module_options_numeric();
+				DSLC.Editor.dslc_init_medium_editor();
 
 				// Set up backup
 				var moduleBackup = jQuery('.dslca-module-options-front', '.dslca-module-being-edited').children().clone();
@@ -3416,8 +3419,6 @@ var dslcDebug = true;
 		// Show the publish button
 		jQuery('.dslca-save-composer-hook').css({ 'visibility' : 'visible' });
 		jQuery('.dslca-save-draft-composer-hook').css({ 'visibility' : 'visible' });
-
-
 	}
 
 	/**
@@ -3927,6 +3928,9 @@ var dslcDebug = true;
 				}
 			});
 
+			// Save this element to destroy on panel closed.
+			DSLC.Editor.colorpickers.push( jQuery(this) );
+
 		});
 
 	}
@@ -4162,6 +4166,9 @@ var dslcDebug = true;
 				}
 			});
 
+			// Save this element to destroy on panel closed.
+			DSLC.Editor.colorpickers.push( jQuery(this) );
+
 		});
 
 		// Revert to default
@@ -4346,6 +4353,8 @@ var dslcDebug = true;
 			DSLCAjax.ajaxurl, dslcSettings,
 			function( response ) {
 
+				DSLC.Editor.clearUtils();
+
 				dslcModule.after(response.output).next().addClass('dslca-module-being-edited');
 				dslcModule.remove();
 				dslc_generate_code();
@@ -4361,7 +4370,6 @@ var dslcDebug = true;
 				dslc_init_accordion();
 				dslc_init_square();
 				dslc_center();
-				DSLC.Editor.dslc_init_medium_editor();
 
 				if ( callback ) {
 					callback( response );
@@ -4561,11 +4569,12 @@ var dslcDebug = true;
 		$(document).on( 'click', '.dslca-module-edit-hook, .dslc-module-front > div:not(.dslca-module-manage)', function(e){
 
 			e.preventDefault();
+			var curr_module_edited = $(this).closest('.dslc-module-front').hasClass('dslca-module-being-edited');
 
 			// If composer not hidden & not clicked on editable element
-			if ( ! $('body').hasClass( 'dslca-composer-hidden' ) && ! $(e.target).hasClass( 'dslca-editable-content' ) ) {
+			if ( ! curr_module_edited && ! $('body').hasClass( 'dslca-composer-hidden' ) && ! $(e.target).hasClass( 'dslca-editable-content' ) ) {
 
-				console.log('dslca-module-edit-hook')
+				if(dslcDebug) console.log('dslca-module-edit-hook');
 
 				// If another module being edited and has changes
 				if ( $('.dslca-module-being-edited.dslca-module-change-made').length ) {
@@ -4653,10 +4662,11 @@ var dslcDebug = true;
 
 		$(document).on( 'click', '.dslca-module-edit-save', function(){
 
-			dslc_module_options_confirm_changes(function(){
+			dslc_module_options_cancel_changes(function(){
 
 				DSLC.Editor.dslc_init_medium_editor();
 			});
+
 			$('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
 			dslc_responsive_classes( true );
 
@@ -4668,7 +4678,11 @@ var dslcDebug = true;
 
 		$(document).on( 'click', '.dslca-module-edit-cancel', function(){
 
-			dslc_module_options_cancel_changes();
+			dslc_module_options_cancel_changes(function(){
+
+				DSLC.Editor.dslc_init_medium_editor();
+			});
+
 			$('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
 			dslc_responsive_classes( true );
 
@@ -6470,9 +6484,7 @@ var dslcDebug = true;
 
 			$('.dslca-wp-editor').hide();
 			$('.dslca-wysiwyg-active').removeClass('dslca-wysiwyg-active');
-
 		});
-
 	});
 
 
@@ -6480,9 +6492,14 @@ var dslcDebug = true;
 /* Editor scripts */
 DSLC.Editor = new (function() {
 	var $ = jQuery;
+	var self = this;
+
+	this.colorpickers = [];
+	this.mediumEditors = [];
 
 	this.dslc_init_medium_editor = function(){
-		jQuery(".dslca-editable-content[contenteditable]").each(function(){
+
+		jQuery(".dslca-editable-content.medium-editor[contenteditable]").each(function(){
 
 			if($(this).data('medium-editor-element') == null){
 
@@ -6495,6 +6512,8 @@ DSLC.Editor = new (function() {
 						diffTop: 10,
 					},
 				});
+
+				self.mediumEditors.push( medium );
 			}
 
 		});
@@ -6507,4 +6526,28 @@ DSLC.Editor = new (function() {
 	MediumEditor.extensions.button.prototype.defaults.unorderedlist.contentDefault = '<span class="dashicons dashicons-editor-ul"></span>';
 	MediumEditor.extensions.button.prototype.defaults.removeFormat.contentDefault = '<span class="dashicons dashicons-editor-removeformatting"></span>';
 
+	this.clearUtils = function() {
+
+		if( Array.isArray(self.colorpickers ) ) {
+
+			self.colorpickers.forEach(function(item){
+
+				item.spectrum('destroy');
+			});
+
+			self.colorpickers = [];
+		}
+
+		if( Array.isArray( self.mediumEditors ) ) {
+
+			self.mediumEditors.forEach(function(item){
+
+				item.destroy();
+			});
+
+			self.mediumEditors = [];
+		}
+
+		jQuery('.sp-container').remove();
+	}
 })();

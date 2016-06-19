@@ -2570,7 +2570,7 @@ class DSLC_Info_Box extends DSLC_Module {
 							<?php if ( in_array( 'content', $elements ) ) : ?>
 								<div class="dslc-info-box-content">
 									<?php if ( $dslc_is_admin ) : ?>
-										<div class="dslca-editable-content" data-id="content">
+										<div class="dslca-editable-content medium-editor" data-id="content" contenteditable>
 											<?php echo stripslashes( $options['content'] ); ?>
 										</div><!-- .dslca-editable-content -->
 										<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook"><?php _e( 'Edit Content', 'live-composer-page-builder' ); ?></span></div>
