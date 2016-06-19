@@ -6215,8 +6215,10 @@ var dslcDebug = false;
 						dslcAffectOnChangeVal = 'transparent';
 					}
 
-					jQuery( dslcAffectOnChangeEl ,'.dslca-module-being-edited' ).css( dslcAffectOnChangeRule , dslcAffectOnChangeVal + dslcExt );
+					dslcAffectOnChangeRule.split(',').forEach(function(rule){
 
+						jQuery( dslcAffectOnChangeEl ,'.dslca-module-being-edited' ).css( rule , dslcAffectOnChangeVal + dslcExt );
+					});
 				}
 
 				/**
