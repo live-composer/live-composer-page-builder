@@ -4187,9 +4187,63 @@ var dslcDebug = false;
 
 	function dslc_module_options_numeric() {
 
+		var $ = jQuery;
+
 		if ( dslcDebug ) console.log( 'dslc_module_options_numeric' );
 
-		jQuery('.dslca-module-edit-field-slider').each(function(){
+		jQuery('.dslca-module-edit-field-slider-input').each(function(){
+
+			var handle = false;
+			var temp = 0;
+			var sliderInput = this;
+			var max = parseInt($(this).data('max')) > 0 ? parseInt($(this).data('max')) : 500;
+			var min = parseInt($(this).data('min')) > -5000 ? parseInt($(this).data('min')) : 0;
+
+			$(sliderInput).mousedown(function(e){
+
+				handle = parseFloat(e.pageY);
+				temp = parseInt(sliderInput.value && sliderInput.value != '' ? sliderInput.value : 0);
+			});
+
+			$(sliderInput).keydown(function(e){
+
+				if( ! e.key.match(/\d/) && e.keyCode != 8 ) {
+
+					return false;
+				}
+			});
+
+			$(sliderInput).change(function(e){
+
+				if( this.value > max ) {
+
+					this.value = max;
+				}
+
+				if( this.className.indexOf('css_') == 0 && this.value < 0 ) {
+
+					this.value = 0;
+				} else if( this.value < min ) {
+
+					this.value = min;
+				}
+			});
+
+			$(document).mouseup(function(){
+
+				handle = false;
+			});
+
+			$(document).mousemove(function(e){
+
+				if( handle !== false ) {
+
+					sliderInput.value = Math.floor( temp + handle - parseFloat(e.pageY) );
+					$(sliderInput).trigger('change');
+				}
+			});
+
+			return false;
 
 			var dslcSlider, dslcSliderField, dslcSliderInput, dslcSliderVal, dslcAffectOnChangeRule, dslcAffectOnChangeEl,
 			dslcSliderTooltip, dslcSliderTooltipOffset, dslcSliderTooltipPos, dslcModule, dslcOptionID, dslcSliderExt,
