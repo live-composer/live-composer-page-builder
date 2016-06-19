@@ -8,35 +8,33 @@ final class DSLC_Upgrade{
 
 		$curr_version = get_option( 'dslc_version' );
 
-		if( ! $curr_version ) {
+		if ( ! is_array( $curr_version ) ) {
 
-			$curr_version = 1;
+			$curr_version = [];
 		}
 
-		$versions = array(
+		if ( ! in_array( '1', $curr_version ) ) {
 
-			'1',
-			'1.3.4',
-			'1.4',
-			'1.5',
-			'1.8.0.4',
-		);
-
-		foreach ( $versions  as $version ) {
-
-			if ( version_compare( $curr_version, $version, '<' ) ) {
-
-				$method_name = 'update_' . str_replace( '.', '_', $version );
-
-				if ( method_exists( __CLASS__, $method_name ) ) {
-
-					self::$method_name();
-				}
-			}
+			self::update_1();
+			$curr_version[] = 1;
 		}
+
+		if ( ! in_array( '1.3', $curr_version ) ) {
+
+			self::update_1_3();
+			$curr_version[] = '1.3';
+		}
+
+		if ( ! in_array( '1.8', $curr_version ) ) {
+
+			self::update_1_8_0_4();
+			$curr_version[] = '1.8.0.4';
+		}
+
+		$curr_version = sort( $curr_version );
 
 		// Updated ro current version.
-		update_option( 'dslc_version', DS_LIVE_COMPOSER_VER );
+		update_option( 'dslc_version', $curr_version );
 	}
 
 	public static function update_1() {

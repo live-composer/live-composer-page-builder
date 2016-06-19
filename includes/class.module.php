@@ -1865,7 +1865,15 @@ class DSLC_Module {
 		$module_class_arr[] = $class_size_output;
 		$module_class_arr[] = $class_show_on;
 		$module_class_arr[] = $class_handle_like;
-		$module_class_arr[] = $options['custom_class'];
+
+		// Process all class definitions.
+		$custom_class = preg_replace( '/,/', ' ', $options['custom_class'] );
+		$custom_class = preg_replace( '/\b\.\b/', ' ', $custom_class );
+		$custom_class = preg_replace( '/\./', '', $custom_class );
+		$custom_class = preg_replace( '/\s{2,}/', ' ', $custom_class );
+		$custom_class = trim( $custom_class );
+
+		$module_class_arr[] = $custom_class;
 
 		// Module class array apply filters
 		$module_class_arr = apply_filters( 'dslc_module_class', $module_class_arr, $this->module_id, $options );

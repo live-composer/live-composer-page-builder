@@ -3563,3 +3563,7 @@ body.dslc-res-phone.dslca-enabled {
 	max-width: 767px;
 
 }
+
+.dslca-module-edit-option-slider input {
+    cursor: n-resize;
+}
