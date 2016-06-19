@@ -566,11 +566,20 @@ function dslc_ajax_display_module_options( $atts ) {
 
 						<?php
 							$default_value = false;
-							if ( isset( $module_option['std'] ) )
+							if ( isset( $module_option['std'] ) ) {
+
 								$default_value = $module_option['std'];
+							}
+
+							$style = '';
+
+							if ( '' != $curr_value ) {
+
+								$style = ' style="background: ' . $curr_value . '"';
+							}
 						?>
 
-						<input type="text" class="dslca-module-edit-field dslca-module-edit-field-colorpicker" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" data-affect-on-change-el="<?php echo $module_option['affect_on_change_el']; ?>" data-affect-on-change-rule="<?php echo $module_option['affect_on_change_rule']; ?>" <?php if ( $default_value ) : ?> data-default="<?php echo $default_value; ?>" <?php endif; ?> />
+						<input type="text" class="dslca-module-edit-field dslca-module-edit-field-colorpicker" <?php echo $style;?> name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" data-affect-on-change-el="<?php echo $module_option['affect_on_change_el']; ?>" data-affect-on-change-rule="<?php echo $module_option['affect_on_change_rule']; ?>" <?php if ( $default_value ) : ?> data-default="<?php echo $default_value; ?>" <?php endif; ?> />
 
 					<?php elseif ( $module_option['type'] == 'slider' ) : ?>
 

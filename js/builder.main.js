@@ -2751,8 +2751,6 @@ var dslcDebug = false;
 			dslcSettings,
 			function( response ) {
 
-				DSLC.Editor.clearUtils();
-
 				// Hide the publish button
 				jQuery('.dslca-save-composer-hook').css({ 'visibility' : 'hidden' });
 				jQuery('.dslca-save-draft-composer-hook').css({ 'visibility' : 'hidden' });
@@ -2794,7 +2792,6 @@ var dslcDebug = false;
 				jQuery('.dslca-row-edit-actions').hide();
 
 				// Initiate Colorpicker
-				dslc_module_options_color();
 				dslc_modules_options_box_shadow_color();
 				dslc_modules_options_text_shadow_color();
 				dslc_module_options_numeric();
@@ -4035,7 +4032,7 @@ var dslcDebug = false;
 	 * MODULES - Color Option Type
 	 */
 
-	function dslc_module_options_color() {
+	function dslc_module_options_color( field ) {
 
 		if ( dslcDebug ) console.log( 'dslc_module_options_color' );
 
@@ -4071,7 +4068,9 @@ var dslcDebug = false;
 			}
 		}
 
-		jQuery('.dslca-module-edit-field-colorpicker').each( function(){
+		var query = field || '.dslca-module-edit-field-colorpicker';
+
+		jQuery(query).each( function(){
 
 			dslcCurrColor = jQuery(this).val();
 
@@ -4223,7 +4222,6 @@ var dslcDebug = false;
 					// Get the element id
 					var dslcModuleID = dslcModule[0].id;
 
-//vova
 					// Loop through rules (useful when there are multiple rules)
 					for ( var i = 0; i < dslcAffectOnChangeRules.length; i++ ) {
 						// disable / enable rules this way (slow)
@@ -4496,6 +4494,11 @@ var dslcDebug = false;
 		dslc_module_options_box_shadow();
 		dslc_module_options_text_shadow();
 
+		$(document).on('hover', '.dslca-module-edit-field-colorpicker', function() {
+
+			dslc_module_options_color( this );
+		});
+
 		/**
 		 * Hook - Submit
 		 */
@@ -4662,9 +4665,9 @@ var dslcDebug = false;
 
 		$(document).on( 'click', '.dslca-module-edit-save', function(){
 
-			dslc_module_options_cancel_changes(function(){
+			dslc_module_options_confirm_changes(function(){
 
-				DSLC.Editor.dslc_init_medium_editor();
+				DSLC.Editor.clearUtils();
 			});
 
 			$('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
@@ -4680,7 +4683,7 @@ var dslcDebug = false;
 
 			dslc_module_options_cancel_changes(function(){
 
-				DSLC.Editor.dslc_init_medium_editor();
+				DSLC.Editor.clearUtils();
 			});
 
 			$('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
@@ -5974,9 +5977,6 @@ var dslcDebug = false;
 
 		// Editable Content
 
-		/// init Medium inline editor
-		DSLC.Editor.dslc_init_medium_editor();
-
 		jQuery(document).on('blur', '.dslca-editable-content', function() {
 
 			if ( ! jQuery('body').hasClass( 'dslca-composer-hidden' ) && jQuery(this).data('type') == 'simple' ) {
@@ -6499,9 +6499,13 @@ DSLC.Editor = new (function() {
 
 	this.dslc_init_medium_editor = function(){
 
-		jQuery(".dslca-editable-content.medium-editor[contenteditable]").each(function(){
+		console.trace('medium init');
+
+		jQuery(".dslca-editable-content.medium-editor").each(function(){
 
 			if($(this).data('medium-editor-element') == null){
+
+				$(this).attr('contenteditable', 'true');
 
 				var medium = new MediumEditor(this, {
 					// buttonLabels: 'fontawesome',
