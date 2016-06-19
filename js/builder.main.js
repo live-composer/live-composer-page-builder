@@ -2794,7 +2794,6 @@ var dslcDebug = false;
 				// Initiate Colorpicker
 				dslc_modules_options_box_shadow_color();
 				dslc_modules_options_text_shadow_color();
-				dslc_module_options_numeric();
 				DSLC.Editor.dslc_init_medium_editor();
 
 				// Set up backup
@@ -4185,27 +4184,49 @@ var dslcDebug = false;
 	 * MODULES - Numeric Option Type
 	 */
 
-	function dslc_module_options_numeric() {
+	function dslc_module_options_numeric( field ) {
 
 		var $ = jQuery;
 
 		if ( dslcDebug ) console.log( 'dslc_module_options_numeric' );
 
-		jQuery('.dslca-module-edit-field-slider-input').each(function(){
+		var query = field || '.dslca-module-edit-field-slider-input';
+
+		jQuery(query).each(function(){
+
+			if( this.classList.contains('slider-initiated') ) return;
 
 			var handle = false;
 			var temp = 0;
 			var sliderInput = this;
 			var max = parseInt($(this).data('max')) > 0 ? parseInt($(this).data('max')) : 500;
 			var min = parseInt($(this).data('min')) > -5000 ? parseInt($(this).data('min')) : 0;
+			var inc = parseInt($(this).data('increment')) > 0 ? parseInt($(this).data('increment')) : 1;
+			var dslcSlider, dslcSliderField, dslcSliderInput, dslcSliderVal, dslcAffectOnChangeRule, dslcAffectOnChangeEl,
+			dslcSliderTooltip, dslcSliderTooltipOffset, dslcSliderTooltipPos, dslcModule, dslcOptionID, dslcSliderExt,
+			dslcAffectOnChangeRules;
+
+			sliderInput.classList.add("slider-initiated");
 
 			$(sliderInput).mousedown(function(e){
 
-				handle = parseFloat(e.pageY);
+				handle = parseFloat(e.pageX);
 				temp = parseInt(sliderInput.value && sliderInput.value != '' ? sliderInput.value : 0);
 			});
 
 			$(sliderInput).keydown(function(e){
+
+				if( e.keyCode == 38 ) {
+
+					this.value = ( parseInt(this.value) || 0 ) + inc;
+					$(this).trigger('change');
+				}
+
+				if( e.keyCode == 40 ) {
+
+					this.value = ( parseInt(this.value) + 0 ) - inc;
+					$(this).trigger('change');
+				}
 
 				if( ! e.key.match(/\d/) && e.keyCode != 8 ) {
 
@@ -4213,6 +4234,7 @@ var dslcDebug = false;
 				}
 			});
 
+			$(sliderInput).unbind('change');
 			$(sliderInput).change(function(e){
 
 				if( this.value > max ) {
@@ -4220,13 +4242,15 @@ var dslcDebug = false;
 					this.value = max;
 				}
 
-				if( this.className.indexOf('css_') == 0 && this.value < 0 ) {
-
-					this.value = 0;
-				} else if( this.value < min ) {
+				if( this.value < min ) {
 
 					this.value = min;
 				}
+
+				dslcModule = jQuery('.dslca-module-being-edited');
+
+				// Add changed class
+				dslcModule.addClass('dslca-module-change-made');
 			});
 
 			$(document).mouseup(function(){
@@ -4238,90 +4262,16 @@ var dslcDebug = false;
 
 				if( handle !== false ) {
 
-					sliderInput.value = Math.floor( temp + handle - parseFloat(e.pageY) );
+					var fut_val = Math.floor( temp - handle + parseFloat(e.pageX) );
+
+					if( fut_val % inc != 0 ) return false;
+
+					sliderInput.value = fut_val;
 					$(sliderInput).trigger('change');
 				}
 			});
 
 			return false;
-
-			var dslcSlider, dslcSliderField, dslcSliderInput, dslcSliderVal, dslcAffectOnChangeRule, dslcAffectOnChangeEl,
-			dslcSliderTooltip, dslcSliderTooltipOffset, dslcSliderTooltipPos, dslcModule, dslcOptionID, dslcSliderExt,
-			dslcAffectOnChangeRules;
-
-			dslcSlider = jQuery(this);
-			dslcSliderInput = dslcSlider.siblings('.dslca-module-edit-field');
-
-			dslcSliderTooltip = dslcSlider.closest('.dslca-module-edit-option-slider').find('.dslca-module-edit-field-slider-tooltip');
-
-			dslcSlider.slider({
-				min : dslcSliderInput.data('min'),
-				max : dslcSliderInput.data('max'),
-				step: dslcSliderInput.data('increment'),
-				value: dslcSliderInput.val(),
-				slide: function(event, ui) {
-
-					dslcSliderExt = dslcSliderInput.data('ext');
-					dslcSliderVal = ui.value + dslcSliderExt;
-					dslcSliderInput.val( dslcSliderVal );
-
-					// Live change
-					dslcAffectOnChangeEl = dslcSliderInput.data('affect-on-change-el');
-					dslcAffectOnChangeRule = dslcSliderInput.data('affect-on-change-rule').replace(/ /g,'');
-					dslcAffectOnChangeRules = dslcAffectOnChangeRule.split( ',' );
-
-					// Get the element we are editing
-					dslcModule = jQuery('.dslca-module-being-edited');
-
-					// Get the element id
-					var dslcModuleID = dslcModule[0].id;
-
-					// Loop through rules (useful when there are multiple rules)
-					for ( var i = 0; i < dslcAffectOnChangeRules.length; i++ ) {
-						// disable / enable rules this way (slow)
-						// changecss ( '#' + dslcModuleID + ' ' + dslcAffectOnChangeEl, dslcAffectOnChangeRules[i], dslcSliderVal, dslcModuleID);
-						// update rules this way (fast)
-						jQuery( dslcAffectOnChangeEl ,'.dslca-module-being-edited' ).css( dslcAffectOnChangeRules[i] , dslcSliderVal );
-					}
-
-					// Update option
-					// dslcModule = jQuery('.dslca-module-being-edited');
-					dslcOptionID = dslcSliderInput.data('id');
-					jQuery('.dslca-module-option-front[data-id="' + dslcOptionID + '"]', dslcModule).val( ui.value );
-
-					// Add changed class
-					dslcModule.addClass('dslca-module-change-made');
-
-					// Tooltip
-					dslcSliderTooltip.text( dslcSliderVal );
-					var dslcSliderHandle = dslcSlider.find('.ui-slider-handle');
-					dslcSliderTooltipOffset = dslcSliderHandle[0].style.left;
-					dslcSliderTooltip.css({ left : dslcSliderTooltipOffset });
-
-					dslc_masonry( dslcModule );
-					dslc_init_square();
-					dslc_center();
-					dslc_init_square( dslcModule );
-
-				},
-				stop: function( event, ui ) {
-
-					dslcSliderTooltip.hide();
-
-				},
-				start: function( event, ui ) {
-
-					dslcSliderTooltip.show();
-
-					// Tooltip
-					dslcSliderTooltip.text( dslcSliderVal );
-					dslcSliderTooltipOffset = ui.handle.style.left;
-					dslcSliderTooltip.css({ left : dslcSliderTooltipOffset });
-
-				}
-
-			});
-
 		});
 
 	}
@@ -4551,6 +4501,11 @@ var dslcDebug = false;
 		$(document).on('hover', '.dslca-module-edit-field-colorpicker', function() {
 
 			dslc_module_options_color( this );
+		});
+
+		$(document).on('hover', '.dslca-module-edit-field-slider-input', function() {
+
+			dslc_module_options_numeric( this );
 		});
 
 		/**
@@ -6239,8 +6194,9 @@ var dslcDebug = false;
 
 				}
 
-				if ( ! dslcOption.hasClass('dslca-module-edit-field-font') ) {
+				if ( ! dslcOption.hasClass('dslca-module-edit-field-font')  ) {
 
+					var dslcExt = dslcOption.data('ext') || '';
 					var dslcAffectOnChangeEl = dslcOption.data('affect-on-change-el');
 					var dslcAffectOnChangeRule = dslcOption.data('affect-on-change-rule');
 					var dslcAffectOnChangeVal = dslcOption.val();
@@ -6259,7 +6215,7 @@ var dslcDebug = false;
 						dslcAffectOnChangeVal = 'transparent';
 					}
 
-					jQuery( dslcAffectOnChangeEl ,'.dslca-module-being-edited' ).css( dslcAffectOnChangeRule , dslcAffectOnChangeVal );
+					jQuery( dslcAffectOnChangeEl ,'.dslca-module-being-edited' ).css( dslcAffectOnChangeRule , dslcAffectOnChangeVal + dslcExt );
 
 				}
 
