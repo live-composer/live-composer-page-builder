@@ -13,6 +13,8 @@ final class DSLC_Upgrade{
 			$curr_version = [];
 		}
 
+		/** Migration usage example
+
 		if ( ! in_array( '1', $curr_version ) ) {
 
 			self::update_1();
@@ -23,13 +25,7 @@ final class DSLC_Upgrade{
 
 			self::update_1_3();
 			$curr_version[] = '1.3';
-		}
-
-		if ( ! in_array( '1.8', $curr_version ) ) {
-
-			self::update_1_8_0_4();
-			$curr_version[] = '1.8.0.4';
-		}
+		}*/
 
 		if ( ! in_array( DS_LIVE_COMPOSER_VER, $curr_version ) ) {
 
@@ -42,34 +38,22 @@ final class DSLC_Upgrade{
 		update_option( 'dslc_version', $curr_version );
 	}
 
+	/**
+	 * 1 version migration example
+
 	public static function update_1() {
 
 		// Some code on version 1.
-		update_option( 'dslc_version', 1 );
+		// Update_option( 'dslc_version', 1 );
 	}
 
 
-	public static function update_1_3_4() {
 
-		// Some code on version 1.3.4.
-		update_option( 'dslc_version','1.3.4' );
-	}
+	 * 1.3 version migration example
 
-	public static function update_1_4() {
+	public static function update_1_3() {
 
-		// Some code on version 1.4.
-		update_option( 'dslc_version', '1.4' );
-	}
-
-	public static function update_1_5() {
-
-		// Some code on version 1.5.
-		update_option( 'dslc_version', '1.5' );
-	}
-
-	public static function update_1_8_0_4() {
-
-		// Some code on version 1.8.0.4.
-		update_option( 'dslc_version', '1.8.0.4' );
-	}
+		// Some code on version 1.3.
+		// Update_option( 'dslc_version','1.3' );
+	}*/
 }
