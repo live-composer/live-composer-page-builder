@@ -31,6 +31,11 @@ final class DSLC_Upgrade{
 			$curr_version[] = '1.8.0.4';
 		}
 
+		if ( ! in_array( DS_LIVE_COMPOSER_VER, $curr_version ) ) {
+
+			$curr_version[] = DS_LIVE_COMPOSER_VER;
+		}
+
 		$curr_version = sort( $curr_version );
 
 		// Updated ro current version.
