@@ -4216,6 +4216,21 @@ var dslcDebug = false;
 
 			$(sliderInput).keydown(function(e){
 
+				if( e.shiftKey ) {
+
+					if( e.keyCode == 38 ) {
+
+						this.value = ( parseInt(this.value) || 0 ) + 9;
+						$(this).trigger('change');
+					}
+
+					if( e.keyCode == 40 ) {
+
+						this.value = ( parseInt(this.value) + 0 ) - 9;
+						$(this).trigger('change');
+					}
+				}
+
 				if( e.keyCode == 38 ) {
 
 					this.value = ( parseInt(this.value) || 0 ) + inc;
