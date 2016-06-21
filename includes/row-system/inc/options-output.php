@@ -88,7 +88,23 @@ function dslc_row_display_options() {
 					<?php endforeach; ?>
 				</select>
 
-			<?php elseif ( 'color' === $row_option['type'] ) : ?>
+			<?php elseif ( 'color' === $row_option['type'] ) : 
+
+				$style = '';
+
+				if ( '' != $curr_value ) {
+
+					$text_color_value = $curr_value;
+
+					if ( ! strpos( $curr_value, '#' ) ) {
+
+						$text_color_value = RGBToHex( $text_color_value );
+					}
+
+					$color = getContrastYIQ( $text_color_value );
+
+					$style = ' style="background: ' . $curr_value . '; color: ' . $color . '"';
+				}?>
 
 				<input type="text" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-colorpicker" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" />
 

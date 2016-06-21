@@ -1613,7 +1613,7 @@ var dslcDebug = false;
 	 * Row - Edit - Initiate Colorpicker
 	 */
 
-	function dslc_row_edit_colorpicker_init() {
+	function dslc_row_edit_colorpicker_init( field ) {
 
 		if ( dslcDebug ) console.log( 'dslc_row_edit_colorpicker_init' );
 
@@ -1650,8 +1650,9 @@ var dslcDebug = false;
 				}
 			}
 		}
+		var query = field || '.dslca-modules-section-edit-field-colorpicker';
 
-		jQuery('.dslca-modules-section-edit-field-colorpicker').each( function(){
+		jQuery(query).each( function(){
 
 			dslcCurrColor = jQuery(this).val();
 
@@ -1729,6 +1730,7 @@ var dslcDebug = false;
 
 			});
 
+			DSLC.Editor.colorpickers.push( jQuery( this ) );
 		});
 
 	}
@@ -4199,9 +4201,9 @@ var dslcDebug = false;
 			var handle = false;
 			var temp = 0;
 			var sliderInput = this;
-			var max = parseInt($(this).data('max')) > 0 ? parseInt($(this).data('max')) : 500;
-			var min = parseInt($(this).data('min')) > -5000 ? parseInt($(this).data('min')) : 0;
-			var inc = parseInt($(this).data('increment')) > 0 ? parseInt($(this).data('increment')) : 1;
+			var max = 2000;
+			var min = -2000;
+			var inc = 1;
 			var dslcSlider, dslcSliderField, dslcSliderInput, dslcSliderVal, dslcAffectOnChangeRule, dslcAffectOnChangeEl,
 			dslcSliderTooltip, dslcSliderTooltipOffset, dslcSliderTooltipPos, dslcModule, dslcOptionID, dslcSliderExt,
 			dslcAffectOnChangeRules;
@@ -4215,6 +4217,21 @@ var dslcDebug = false;
 			});
 
 			$(sliderInput).keydown(function(e){
+
+				if( e.shiftKey ) {
+
+					if( e.keyCode == 38 ) {
+
+						this.value = ( parseInt(this.value) || 0 ) + 9;
+						$(this).trigger('change');
+					}
+
+					if( e.keyCode == 40 ) {
+
+						this.value = ( parseInt(this.value) + 0 ) - 9;
+						$(this).trigger('change');
+					}
+				}
 
 				if( e.keyCode == 38 ) {
 
@@ -4498,9 +4515,16 @@ var dslcDebug = false;
 		dslc_module_options_box_shadow();
 		dslc_module_options_text_shadow();
 
-		$(document).on('hover', '.dslca-module-edit-field-colorpicker', function() {
+		$(document).on('click', '.dslca-module-edit-field-colorpicker', function() {
 
 			dslc_module_options_color( this );
+			$( this ).next().click();
+		});
+
+		$(document).on('click', '.dslca-modules-section-edit-field-colorpicker', function() {
+
+			dslc_row_edit_colorpicker_init( this );
+			$( this ).next().click();
 		});
 
 		$(document).on('hover', '.dslca-module-edit-field-slider-input', function() {
