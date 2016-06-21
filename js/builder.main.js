@@ -1613,8 +1613,8 @@ var dslcDebug = false;
 	 * Row - Edit - Initiate Colorpicker
 	 */
 
-	function dslc_row_edit_colorpicker_init() {
-
+	function dslc_row_edit_colorpicker_init( field ) {
+dslcDebug = true;
 		if ( dslcDebug ) console.log( 'dslc_row_edit_colorpicker_init' );
 
 		var dslcField,
@@ -1650,8 +1650,9 @@ var dslcDebug = false;
 				}
 			}
 		}
+		var query = field || '.dslca-modules-section-edit-field-colorpicker';
 
-		jQuery('.dslca-modules-section-edit-field-colorpicker').each( function(){
+		jQuery(query).each( function(){
 
 			dslcCurrColor = jQuery(this).val();
 
@@ -1729,6 +1730,7 @@ var dslcDebug = false;
 
 			});
 
+			DSLC.Editor.colorpickers.push( jQuery( this ) );
 		});
 
 	}
@@ -4513,9 +4515,16 @@ var dslcDebug = false;
 		dslc_module_options_box_shadow();
 		dslc_module_options_text_shadow();
 
-		$(document).on('hover', '.dslca-module-edit-field-colorpicker', function() {
+		$(document).on('click', '.dslca-module-edit-field-colorpicker', function() {
 
 			dslc_module_options_color( this );
+			$( this ).next().click();
+		});
+
+		$(document).on('click', '.dslca-modules-section-edit-field-colorpicker', function() {
+
+			dslc_row_edit_colorpicker_init( this );
+			$( this ).next().click();
 		});
 
 		$(document).on('hover', '.dslca-module-edit-field-slider-input', function() {

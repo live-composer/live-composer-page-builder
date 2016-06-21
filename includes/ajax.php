@@ -575,7 +575,16 @@ function dslc_ajax_display_module_options( $atts ) {
 
 							if ( '' != $curr_value ) {
 
-								$style = ' style="background: ' . $curr_value . '"';
+								$text_color_value = $curr_value;
+
+								if ( ! strpos( $curr_value, '#' ) ) {
+
+									$text_color_value = RGBToHex( $text_color_value );
+								}
+
+								$color = getContrastYIQ( $text_color_value );
+
+								$style = ' style="background: ' . $curr_value . '; color: ' . $color . '"';
 							}
 						?>
 
