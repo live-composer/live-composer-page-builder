@@ -615,7 +615,7 @@ function dslc_ajax_display_module_options( $atts ) {
 
 						<?php if ( 'slider' === $numeric_option_type  ) : ?>
 
-							<input type="text" class="dslca-module-edit-field dslca-module-edit-field-slider-input" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" data-affect-on-change-el="<?php echo $module_option['affect_on_change_el']; ?>" data-affect-on-change-rule="<?php echo $module_option['affect_on_change_rule']; ?>" data-min="<?php echo $slider_min; ?>" data-max="<?php echo $slider_max; ?>" data-ext="<?php echo $ext; ?>" data-increment="<?php echo $slider_increment; ?>" />
+							<input type="number" class="dslca-module-edit-field dslca-module-edit-field-slider-input" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" data-affect-on-change-el="<?php echo $module_option['affect_on_change_el']; ?>" data-affect-on-change-rule="<?php echo $module_option['affect_on_change_rule']; ?>" data-min="<?php echo $slider_min; ?>" data-max="<?php echo $slider_max; ?>" data-ext="<?php echo $ext; ?>" data-increment="<?php echo $slider_increment; ?>" />
 						<?php else : ?>
 
 							<div class="dslca-module-edit-field-numeric-wrap">

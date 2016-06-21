@@ -1614,7 +1614,7 @@ var dslcDebug = false;
 	 */
 
 	function dslc_row_edit_colorpicker_init( field ) {
-dslcDebug = true;
+
 		if ( dslcDebug ) console.log( 'dslc_row_edit_colorpicker_init' );
 
 		var dslcField,
@@ -4201,9 +4201,9 @@ dslcDebug = true;
 			var handle = false;
 			var temp = 0;
 			var sliderInput = this;
-			var max = parseInt($(this).data('max')) > 0 ? parseInt($(this).data('max')) : 500;
-			var min = parseInt($(this).data('min')) > -5000 ? parseInt($(this).data('min')) : 0;
-			var inc = parseInt($(this).data('increment')) > 0 ? parseInt($(this).data('increment')) : 1;
+			var max = 2000;
+			var min = -2000;
+			var inc = 1;
 			var dslcSlider, dslcSliderField, dslcSliderInput, dslcSliderVal, dslcAffectOnChangeRule, dslcAffectOnChangeEl,
 			dslcSliderTooltip, dslcSliderTooltipOffset, dslcSliderTooltipPos, dslcModule, dslcOptionID, dslcSliderExt,
 			dslcAffectOnChangeRules;
