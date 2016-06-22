@@ -131,9 +131,7 @@ function dslc_row_display_options() {
 
 				<?php if ( 'slider' === $numeric_option_type ) : ?>
 
-					<div class="dslca-modules-section-edit-field-slider" data-ext="<?php echo esc_attr( $row_option['ext'] ); ?>" data-min="<?php echo esc_attr( $row_option['min'] ); ?>" data-max="<?php echo esc_attr( $row_option['max'] ); ?>" data-incr="<?php echo esc_attr( $row_option['increment'] ); ?>"></div>
-					<span class="dslca-modules-section-edit-field-slider-tooltip"></span>
-					<input type="hidden" class="dslca-modules-section-edit-field" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" />
+					<input type="number" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-slider-numeric" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" value="<?php echo $curr_value; ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" data-min="<?php echo $slider_min; ?>" data-max="<?php echo $slider_max; ?>" data-ext="<?php echo $ext; ?>" data-incr="<?php echo esc_attr( $row_option['increment'] ); ?>" data-ext="<?php echo esc_attr( $row_option['ext'] ); ?>"/>
 
 				<?php else : ?>
 

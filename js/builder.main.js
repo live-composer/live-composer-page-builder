@@ -1571,8 +1571,14 @@ var dslcDebug = false;
 				jQuery(this).val( jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="' + jQuery(this).data('id') + '"]').val() );
 
 				if ( jQuery( this ).hasClass( 'dslca-modules-section-edit-field-colorpicker' ) ) {
+
 					var _this = jQuery( this );
-					jQuery( this ).closest( '.dslca-modules-section-edit-option' ).find( '.sp-preview-inner' ).removeClass('sp-clear-display').css({ 'background-color' : _this.val() });
+					jQuery( this ).closest( '.dslca-modules-section-edit-option' )
+							.find( '.sp-preview-inner' )
+							.removeClass('sp-clear-display')
+							.css({ 'background-color' : _this.val() });
+
+					jQuery( this ).css({ 'background-color' : _this.val() });
 				}
 
 			}
@@ -2094,8 +2100,8 @@ var dslcDebug = false;
 		 * Initialize
 		 */
 
-		dslc_row_edit_colorpicker_init();
-		dslc_row_edit_slider_init();
+		/*dslc_row_edit_colorpicker_init();
+		dslc_row_edit_slider_init();*/
 
 		/**
 		 * Action - Automatically Add a Row if Empty
@@ -4183,6 +4189,117 @@ var dslcDebug = false;
 	}
 
 	/**
+	 * SECTION - Numeric Option Type
+	 */
+
+	function dslc_section_options_numeric( field ) {
+
+		var $ = jQuery;
+
+		if ( dslcDebug ) console.log( 'dslc_section_options_numeric' );
+
+		var query = field || '.dslca-modules-section-edit-field-slider-numeric';
+
+		jQuery(query).each(function(){
+
+			if( this.classList.contains('slider-initiated') ) return;
+
+			var handle = false;
+			var temp = 0;
+			var sliderInput = this;
+			var max = 2000;
+			var min = -2000;
+			var inc = 1;
+			var dslcSlider, dslcSliderField, dslcSliderInput, dslcSliderVal, dslcAffectOnChangeRule, dslcAffectOnChangeEl,
+			dslcSliderTooltip, dslcSliderTooltipOffset, dslcSliderTooltipPos, dslcModule, dslcOptionID, dslcSliderExt,
+			dslcAffectOnChangeRules;
+
+			sliderInput.classList.add("slider-initiated");
+
+			$(sliderInput).mousedown(function(e){
+
+				handle = parseFloat(e.pageX);
+				temp = parseInt(sliderInput.value && sliderInput.value != '' ? sliderInput.value : 0);
+			});
+
+			$(sliderInput).keydown(function(e){
+
+				if( e.shiftKey ) {
+
+					if( e.keyCode == 38 ) {
+
+						this.value = ( parseInt(this.value) || 0 ) + 9;
+						$(this).trigger('change');
+					}
+
+					if( e.keyCode == 40 ) {
+
+						this.value = ( parseInt(this.value) + 0 ) - 9;
+						$(this).trigger('change');
+					}
+				}
+
+				if( e.keyCode == 38 ) {
+
+					this.value = ( parseInt(this.value) || 0 ) + inc;
+					$(this).trigger('change');
+				}
+
+				if( e.keyCode == 40 ) {
+
+					this.value = ( parseInt(this.value) + 0 ) - inc;
+					$(this).trigger('change');
+				}
+
+				if( ! e.key.match(/\d/) && e.keyCode != 8 && e.keyCode != 39 && e.keyCode != 37 && e.keyCode != 46 ) {
+
+					return false;
+				}
+			});
+
+			$(sliderInput).unbind('change');
+			$(sliderInput).change(function(e){
+
+				if( this.value > max ) {
+
+					this.value = max;
+				}
+
+				if( this.value < min ) {
+
+					this.value = min;
+				}
+
+				dslcModule = jQuery('.dslca-modules-section-being-edited');
+
+				// Add changed class
+				dslcModule.addClass('dslca-modules-section-change-made');
+			});
+
+			$(document).mouseup(function(){
+
+				handle = false;
+			});
+
+			$(document).mousemove(function(e){
+
+				if( handle !== false ) {
+
+					var fut_val = Math.floor( temp - handle + parseFloat(e.pageX) );
+
+					if( fut_val % inc != 0 ) return false;
+
+					sliderInput.value = fut_val;
+					$(sliderInput).trigger('change');
+				}
+			});
+
+			return false;
+		});
+
+	}
+
+	/**
 	 * MODULES - Numeric Option Type
 	 */
 
@@ -4245,7 +4362,7 @@ var dslcDebug = false;
 					$(this).trigger('change');
 				}
 
-				if( ! e.key.match(/\d/) && e.keyCode != 8 ) {
+				if( ! e.key.match(/\d/) && e.keyCode != 8 && e.keyCode != 39 && e.keyCode != 37 && e.keyCode != 46 ) {
 
 					return false;
 				}
@@ -4532,6 +4649,11 @@ var dslcDebug = false;
 			dslc_module_options_numeric( this );
 		});
 
+		$(document).on('hover', '.dslca-modules-section-edit-field', function() {
+
+			dslc_section_options_numeric( this );
+		});
+
 		/**
 		 * Hook - Submit
 		 */
@@ -4605,10 +4727,10 @@ var dslcDebug = false;
 		$(document).on( 'click', '.dslca-module-edit-hook, .dslc-module-front > div:not(.dslca-module-manage)', function(e){
 
 			e.preventDefault();
-			var curr_module_edited = $(this).closest('.dslc-module-front').hasClass('dslca-module-being-edited');
+			var curr_module_edited = $('.dslca-module-being-edited').length;
 
 			// If composer not hidden & not clicked on editable element
-			if ( ! curr_module_edited && ! $('body').hasClass( 'dslca-composer-hidden' ) && ! $(e.target).hasClass( 'dslca-editable-content' ) ) {
+			if ( curr_module_edited == 0 && ! $('body').hasClass( 'dslca-composer-hidden' ) && ! $(e.target).hasClass( 'dslca-editable-content' ) ) {
 
 				if(dslcDebug) console.log('dslca-module-edit-hook');
 
@@ -6534,8 +6656,6 @@ DSLC.Editor = new (function() {
 	this.mediumEditors = [];
 
 	this.dslc_init_medium_editor = function(){
-
-		console.trace('medium init');
 
 		jQuery(".dslca-editable-content.medium-editor").each(function(){
 
