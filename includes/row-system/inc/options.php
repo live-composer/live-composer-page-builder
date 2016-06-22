@@ -72,6 +72,12 @@
 			)
 		);
 
+		$dslc_var_row_options['custom_class'] = array(
+			'id' => 'custom_class',
+			'label' => __( 'Custom Class', 'live-composer-page-builder' ),
+			'type' => 'text',
+		);
+
 		$dslc_var_row_options['bg_color'] = array(
 			'id' => 'bg_color',
 			'label' => __( 'BG Color', 'live-composer-page-builder' ),
@@ -336,21 +342,17 @@
 			'increment' => 0.5,
 		);
 
-		$dslc_var_row_options['custom_class'] = array(
-			'id' => 'custom_class',
-			'label' => __( 'Custom Class', 'live-composer-page-builder' ),
-			'type' => 'text',
-		);
-
 		$dslc_var_row_options['custom_id'] = array(
 			'id' => 'custom_id',
 			'label' => __( 'Custom ID', 'live-composer-page-builder' ),
 			'type' => 'text',
 		);
 
-		// Hook to register custom modules or alter current
+		// Hook to register custom modules or alter current.
 		do_action( 'dslc_hook_row_options' );
-		// Filter to filter the registered row controls
-		$dslc_var_row_options= apply_filters( 'dslc_filter_row_options', $dslc_var_row_options );
 
-	} add_action( 'init', 'dslc_row_register_options' );
+		// Filter to filter the registered row controls.
+		$dslc_var_row_options = apply_filters( 'dslc_filter_row_options', $dslc_var_row_options );
+
+	} 
+	add_action( 'init', 'dslc_row_register_options' );

@@ -1052,8 +1052,17 @@ function dslc_modules_section_front( $atts, $content = null ) {
 		$section_class .= 'dslc-no-columns-spacing ';
 
 	// Custom Class.
-	if ( $atts['custom_class'] != '' )
-		$section_class .= $atts['custom_class'] . ' ';
+	if ( $atts['custom_class'] != '' ) {
+
+		// Process all class definitions.
+  		$custom_class = preg_replace( '/,/', ' ', $atts['custom_class'] );
+  		$custom_class = preg_replace( '/\b\.\b/', ' ', $custom_class );
+  		$custom_class = preg_replace( '/\./', '', $custom_class );
+  		$custom_class = preg_replace( '/\s{2,}/', ' ', $custom_class );
+  		$custom_class = trim( $custom_class );
+
+		$section_class .= $custom_class . ' ';
+	}
 
 	// Show on Class.
 	// if ( '' !== $atts['show_on']  ) {
