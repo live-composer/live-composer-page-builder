@@ -21,14 +21,13 @@ function dslc_plugin_option_display_text( $option ) {
 
 	?>
 	<input class="regular-text" id='<?php echo esc_attr( $option_id ); ?>' name='<?php echo esc_attr( $option['name'] ); ?>' type='text' value='<?php echo esc_attr( $value ); ?>' />
-	<?php if ( isset( $option['descr'] ) ) : ?>
+	<?php
+	if ( isset( $option['descr'] ) ) { ?>
 
 		<p class="description">
 			<?php echo esc_html( $option['descr'] ); ?>
 		</p>
-	<?php
-
-	endif;
+	<?php }
 }
 
 /**
@@ -51,14 +50,12 @@ function dslc_plugin_option_display_textarea( $option ) {
 	</textarea>
 
 	<?php
-	if ( isset( $option['descr'] ) ) :	?>
+	if ( isset( $option['descr'] ) ) { ?>
 
 		<p class="description">
 			<?php echo esc_html( $option['descr'] ); ?>
 		</p>
-	<?php
-
-	endif;
+	<?php }
 }
 
 /**
@@ -79,8 +76,7 @@ function dslc_plugin_option_display_select( $option ) {
 	<select id='<?php echo esc_attr( $option_id ); ?>' name='<?php echo esc_attr( $option['name'] ); ?>'>
 
 		<?php foreach ( $option['choices'] as $choice ) : ?>
-			<?php echo esc_attr( $choice['value'] ); ?>
-			<?php echo esc_attr( $value ); ?>
+
 			<option value="<?php echo esc_attr( $choice['value'] ); ?>" <?php if ( $choice['value'] === $value ) echo 'selected="selected"'; ?> >
 				<?php echo esc_attr( $choice['label'] ); ?>
 			</option>
@@ -90,14 +86,12 @@ function dslc_plugin_option_display_select( $option ) {
 	</select>
 
 	<?php
-	if ( isset( $option['descr'] ) ) :	?>
+	if ( isset( $option['descr'] ) ) { ?>
 
 		<p class="description">
 			<?php echo esc_html( $option['descr'] ); ?>
 		</p>
-	<?php
-
-	endif;
+	<?php }
 }
 
 /**
@@ -126,14 +120,12 @@ function dslc_plugin_option_display_checkbox( $option ) {
 		<?php
 	endforeach;
 
-	if ( isset( $option['descr'] ) ) :	?>
+	if ( isset( $option['descr'] ) ) { ?>
 
 		<p class="description">
 			<?php echo esc_html( $option['descr'] ); ?>
 		</p>
-	<?php
-
-	endif;
+	<?php }
 }
 
 /**
@@ -160,14 +152,12 @@ function dslc_plugin_option_display_radio( $option ) {
 		<?php
 	endforeach;
 
-	if ( isset( $option['descr'] ) ) :	?>
+	if ( isset( $option['descr'] ) ) { ?>
 
 		<p class="description">
 			<?php echo esc_html( $option['descr'] ); ?>
 		</p>
-	<?php
-
-	endif;
+	<?php }
 }
 
 /**
@@ -222,15 +212,12 @@ function dslc_plugin_option_display_list( $option ) {
 	</div>
 
 	<?php
-	if ( isset( $option['descr'] ) ) :	?>
+	if ( isset( $option['descr'] ) ) { ?>
 
 		<p class="description">
 			<?php echo esc_html( $option['descr'] ); ?>
 		</p>
-	<?php
-
-	endif;
-
+	<?php }
 }
 
 /**
@@ -274,12 +261,10 @@ function dslc_plugin_option_display_styling_presets( $option ) {
 	</div>
 
 	<?php
-	if ( isset( $option['descr'] ) ) :	?>
+	if ( isset( $option['descr'] ) ) { ?>
 
 		<p class="description">
 			<?php echo esc_html( $option['descr'] ); ?>
 		</p>
-	<?php
-
-	endif;
+	<?php }
 }

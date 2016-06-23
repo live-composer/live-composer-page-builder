@@ -45,13 +45,18 @@ function dslc_st_init() {
 
 	// Generate the choices
 	global $dslc_var_templates_pt;
+
 	$pt_choices = array();
+
 	foreach ( $dslc_var_templates_pt as $pt_id => $pt_label ) {
+
 		$pt_choices[] = array(
 			'label' => $pt_label,
 			'value' => $pt_id
 		);
 	}
+
+	$pt_choices = apply_filters( 'dslc_pt_choices', $pt_choices );
 
 	$dslc_var_post_options['dslc-templates-opts'] = array(
 		'title' => 'Template Options',
