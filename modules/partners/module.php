@@ -41,16 +41,21 @@ class DSLC_Partners extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Desktop', 'live-composer-page-builder' ),
-						'value' => 'desktop'
+						'value' => 'desktop',
 					),
 					array(
 						'label' => __( 'Tablet', 'live-composer-page-builder' ),
-						'value' => 'tablet'
+						'value' => 'tablet',
 					),
 					array(
 						'label' => __( 'Phone', 'live-composer-page-builder' ),
-						'value' => 'phone'
+						'value' => 'phone',
 					),
+				),
+				'show_hide_dependency' => array(
+
+					'desktop' => 'link, type, columns',
+					'tablet' => 'columns, orientation',
 				),
 			),
 			array(

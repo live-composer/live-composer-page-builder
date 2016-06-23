@@ -482,9 +482,17 @@ function dslc_ajax_display_module_options( $atts ) {
 				}
 			}
 
+			$dep = '';
+
+			// Show/hide dependency
+			if ( isset( $module_option['show_hide_dependency'] ) ) {
+
+				$dep = ' data-dep="' . json_encode( $module_option['show_hide_dependency'] ) . '"';
+			}
+
 			?>
 
-				<div class="dslca-module-edit-option dslca-module-edit-option-<?php echo $module_option['type']; ?> dslca-module-edit-option-<?php echo $module_option['id']; ?> <?php if ( ! $visibility ) echo 'dslca-module-edit-option-hidden'; ?> <?php echo $control_with_toggle; ?>" data-id="<?php echo $module_option['id']; ?>" data-refresh-on-change="<?php echo $refresh_on_change; ?>" data-section="<?php echo $section; ?>" data-tab="<?php echo $tab_ID; ?>">
+				<div class="dslca-module-edit-option dslca-module-edit-option-<?php echo $module_option['type']; ?> dslca-module-edit-option-<?php echo $module_option['id']; ?> <?php if ( ! $visibility ) echo 'dslca-module-edit-option-hidden'; ?> <?php echo $control_with_toggle; ?>" data-id="<?php echo $module_option['id']; ?>" <?php echo $dep?> data-refresh-on-change="<?php echo $refresh_on_change; ?>" data-section="<?php echo $section; ?>" data-tab="<?php echo $tab_ID; ?>">
 
 					<?php if ( isset( $module_option['help'] ) ) : ?>
 						<div class="dslca-module-edit-field-ttip-content"><?php echo $module_option['help']; ?></div>

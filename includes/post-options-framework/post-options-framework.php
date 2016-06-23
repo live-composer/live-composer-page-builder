@@ -33,7 +33,9 @@ function dslc_get_cpt_templates() {
 	$templates = get_posts( $args );
 
 	global $dslc_var_templates_pt;
+
 	foreach ( $dslc_var_templates_pt as $pt_id => $pt_label ) {
+
 		$templates_array[ $pt_id ][] = array(
 			'label' => __( 'Default', 'live-composer-page-builder' ),
 			'value' => 'default',

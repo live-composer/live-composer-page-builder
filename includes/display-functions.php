@@ -643,6 +643,7 @@ function dslc_filter_content( $content ) {
 		// If currently showing a singular post of a post type that supports "post templates"
 		if ( is_singular( $dslc_post_types ) ) {
 
+
 			// Get template ID set for currently shown post
 			$template_id = dslc_st_get_template_ID( get_the_ID() );
 
