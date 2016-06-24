@@ -490,7 +490,7 @@ function dslc_ajax_display_module_options( $atts ) {
 			// Show/hide dependency
 			if ( isset( $module_option['show_hide_dependency'] ) ) {
 
-				$dep = ' data-dep="' . json_encode( $module_option['show_hide_dependency'] ) . '"';
+				$dep = ' data-dep="' . base64_encode( json_encode( $module_option['show_hide_dependency'] ) ) . '"';
 			}
 
 			?>

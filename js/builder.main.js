@@ -6651,6 +6651,7 @@ var dslcDebug = false;
 
 /* Editor scripts */
 DSLC.Editor = new (function() {
+
 	var $ = jQuery;
 	var self = this;
 
@@ -6711,5 +6712,61 @@ DSLC.Editor = new (function() {
 		}
 
 		jQuery('.sp-container').remove();
+	}
+
+	/** Options dependencies */
+	this.depsHandlers = [];
+
+	this.loadOptionsDeps = function() {
+
+		$(".dslca-module-edit-option").each(function(){
+
+			var elem = this;
+
+			if( $(this).data('dep') != '' ) {
+
+				try{
+
+					var dep = JSON.parse( Util.b64_to_utf( $(this).data('dep') ) );
+				}catch(e){
+
+					return false;
+				}
+
+
+				var handler = function(){
+
+					Object.keys(dep).forEach(function(opt_val){
+
+						dep[this.value].split(',').forEach(function(item){
+
+							var opt_wrap = $("#" + item).closest('.dslca-module-edit-option');
+
+							if ( elem.value == opt_val ) {
+
+								opt_wrap.show();
+							} else {
+
+								opt_wrap.hide();
+							}
+
+							dslc_scroller_init();
+						});
+					});
+				}
+
+				$(document).on('change', '*[data-id="' + $(this).data('id') + '"]', handler);
+				this.depsHandlers.push( handler );
+			}
+		});
+
+	}
+
+	this.unloadOptionsDeps = function() {
+
+		this.depsHandlers.forEach(function(handler){
+
+			$(document).unbind( 'change', handler );
+		});
 	}
 })();
