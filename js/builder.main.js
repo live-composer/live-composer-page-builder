@@ -2730,11 +2730,13 @@ var dslcDebug = false;
 		dslcDefaultSection = jQuery('.dslca-header').data('default-section');
 
 		// Settings array
+		var url_vars = decodeURIComponent(window.location.search.slice(1)).split('&').reduce(function _reduce ( a, b) { b = b.split('='); a[b[0]] = b[1]; return a; }, {});
 		var dslcSettings = {};
 		dslcSettings['action'] = 'dslc-ajax-display-module-options';
 		dslcSettings['dslc'] = 'active';
 		dslcSettings['dslc_module_id'] = moduleID;
 		dslcSettings['dslc_post_id'] = jQuery('.dslca-container').data('data-post-id');
+		dslcSettings['dslc_url_vars'] = JSON.stringify(url_vars);
 
 		// Go through each option
 		dslcModuleOptions.each(function(){

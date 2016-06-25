@@ -275,6 +275,9 @@ function dslc_ajax_add_module( $atts ) {
 		else
 			$module_settings['dslc_m_size'] = '12';
 
+		//Append parametr from url to settings
+		$module_settings['url_vars'] = $_POST['dslc_url_vars'];
+
 		// Output
 		$module_instance->output( $module_settings );
 
