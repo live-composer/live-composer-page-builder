@@ -347,7 +347,7 @@ function dslc_display_composer() {
 
 					if ( $template ) {
 
-						?><a target="_blank" href="<?php echo add_query_arg( array('dslc' => 'active'), get_permalink( $template ) ); ?>" class="dslca-activate-composer-hook"><?php _e( 'Edit Template', 'live-composer-page-builder' ); ?></a><?php
+						?><a target="_blank" href="<?php echo add_query_arg( array( 'dslc' => 'active', 'id' => get_the_ID() ), get_permalink( $template ) ); ?>" class="dslca-activate-composer-hook"><?php _e( 'Edit Template', 'live-composer-page-builder' ); ?></a><?php
 
 					} else {
 
@@ -642,6 +642,7 @@ function dslc_filter_content( $content ) {
 
 		// If currently showing a singular post of a post type that supports "post templates"
 		if ( is_singular( $dslc_post_types ) ) {
+
 
 			// Get template ID set for currently shown post
 			$template_id = dslc_st_get_template_ID( get_the_ID() );

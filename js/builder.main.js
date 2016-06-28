@@ -2730,11 +2730,13 @@ var dslcDebug = false;
 		dslcDefaultSection = jQuery('.dslca-header').data('default-section');
 
 		// Settings array
+		var url_vars = decodeURIComponent(window.location.search.slice(1)).split('&').reduce(function _reduce ( a, b) { b = b.split('='); a[b[0]] = b[1]; return a; }, {});
 		var dslcSettings = {};
 		dslcSettings['action'] = 'dslc-ajax-display-module-options';
 		dslcSettings['dslc'] = 'active';
 		dslcSettings['dslc_module_id'] = moduleID;
 		dslcSettings['dslc_post_id'] = jQuery('.dslca-container').data('data-post-id');
+		dslcSettings['dslc_url_vars'] = JSON.stringify(url_vars);
 
 		// Go through each option
 		dslcModuleOptions.each(function(){
@@ -4481,6 +4483,9 @@ var dslcDebug = false;
 
 		});
 
+		var url_vars = decodeURIComponent(window.location.search.slice(1)).split('&').reduce(function _reduce ( a, b) { b = b.split('='); a[b[0]] = b[1]; return a; }, {});
+		dslcSettings['dslc_url_vars'] = JSON.stringify(url_vars);
+
 		/**
 		 * Call AJAX for preview
 		 */
@@ -4495,6 +4500,8 @@ var dslcDebug = false;
 				dslcModule.remove();
 				dslc_generate_code();
 				dslc_show_publish_button();
+
+				dslcSettings;
 
 				dslc_carousel();
 				dslc_masonry( jQuery('.dslca-module-being-edited') );
@@ -6649,6 +6656,7 @@ var dslcDebug = false;
 
 /* Editor scripts */
 DSLC.Editor = new (function() {
+
 	var $ = jQuery;
 	var self = this;
 
@@ -6709,5 +6717,61 @@ DSLC.Editor = new (function() {
 		}
 
 		jQuery('.sp-container').remove();
+	}
+
+	/** Options dependencies */
+	this.depsHandlers = [];
+
+	this.loadOptionsDeps = function() {
+
+		$(".dslca-module-edit-option").each(function(){
+
+			var elem = this;
+
+			if( $(this).data('dep') != '' ) {
+
+				try{
+
+					var dep = JSON.parse( Util.b64_to_utf( $(this).data('dep') ) );
+				}catch(e){
+
+					return false;
+				}
+
+
+				var handler = function(){
+
+					Object.keys(dep).forEach(function(opt_val){
+
+						dep[this.value].split(',').forEach(function(item){
+
+							var opt_wrap = $("#" + item).closest('.dslca-module-edit-option');
+
+							if ( elem.value == opt_val ) {
+
+								opt_wrap.show();
+							} else {
+
+								opt_wrap.hide();
+							}
+
+							dslc_scroller_init();
+						});
+					});
+				}
+
+				$(document).on('change', '*[data-id="' + $(this).data('id') + '"]', handler);
+				this.depsHandlers.push( handler );
+			}
+		});
+
+	}
+
+	this.unloadOptionsDeps = function() {
+
+		this.depsHandlers.forEach(function(handler){
+
+			$(document).unbind( 'change', handler );
+		});
 	}
 })();
