@@ -4483,6 +4483,9 @@ var dslcDebug = false;
 
 		});
 
+		var url_vars = decodeURIComponent(window.location.search.slice(1)).split('&').reduce(function _reduce ( a, b) { b = b.split('='); a[b[0]] = b[1]; return a; }, {});
+		dslcSettings['dslc_url_vars'] = JSON.stringify(url_vars);
+
 		/**
 		 * Call AJAX for preview
 		 */
@@ -4497,6 +4500,8 @@ var dslcDebug = false;
 				dslcModule.remove();
 				dslc_generate_code();
 				dslc_show_publish_button();
+
+				dslcSettings;
 
 				dslc_carousel();
 				dslc_masonry( jQuery('.dslca-module-being-edited') );
