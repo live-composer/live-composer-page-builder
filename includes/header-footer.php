@@ -228,34 +228,40 @@ function dslc_hf_unique_default( $post_id ) {
 
 function dslc_hf_options() {
 
-	if ( ! defined( 'DS_LIVE_COMPOSER_HF' ) || ! DS_LIVE_COMPOSER_HF ) return;
+	$dslc_admin_interface_on = apply_filters( 'dslc_admin_interface_on', true );
+
+	if ( ! defined( 'DS_LIVE_COMPOSER_HF' ) || ! DS_LIVE_COMPOSER_HF || true !== $dslc_admin_interface_on ) {
+
+		return;
+	}
 
 	$headers_array = array();
 	$headers_array[] = array(
 		'label' => 'Default',
-		'value' => 'default'
+		'value' => 'default',
 	);
 	$headers_array[] = array(
 		'label' => 'Disabled',
-		'value' => '_disabled_'
+		'value' => '_disabled_',
 	);
 	$footers_array = array();
 	$footers_array[] = array(
 		'label' => 'Default',
-		'value' => 'default'
+		'value' => 'default',
 	);
 	$footers_array[] = array(
 		'label' => 'Disabled',
-		'value' => '_disabled_'
+		'value' => '_disabled_',
 	);
+
 	global $dslc_var_post_options;
 
-	// Get header/footer
+	// Get header/footer.
 	$args = array(
 		'post_type' => 'dslc_hf',
 		'post_status' => 'publish',
 		'posts_per_page' => -1,
-		'order' => 'DESC'
+		'order' => 'DESC',
 	);
 	$templates = get_posts( $args );
 
