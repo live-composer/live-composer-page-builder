@@ -24,6 +24,13 @@ function dslc_display_composer() {
 
 	global $dslc_active;
 
+	$dslc_admin_interface_on = apply_filters( 'dslc_admin_interface_on', true );
+
+	if ( true !== $dslc_admin_interface_on ) {
+
+		return;
+	}
+
 	// Reset the query ( because some devs leave their queries non-reseted ).
 	wp_reset_query();
 

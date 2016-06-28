@@ -52,11 +52,11 @@ function dslc_st_init() {
 
 		$pt_choices[] = array(
 			'label' => $pt_label,
-			'value' => $pt_id
+			'value' => $pt_id,
 		);
 	}
 
-	$pt_choices = apply_filters( 'dslc_pt_choices', $pt_choices );
+//	$pt_choices = apply_filters( 'dslc_pt_choices', $pt_choices );
 
 	$dslc_var_post_options['dslc-templates-opts'] = array(
 		'title' => 'Template Options',
@@ -107,7 +107,7 @@ function dslc_st_init() {
 		)
 	);
 
-} add_action( 'init', 'dslc_st_init' );
+} add_action( 'init', 'dslc_st_init', 90 );
 
 /**
  * Get the template ID of a specific post

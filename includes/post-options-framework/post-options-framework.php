@@ -386,10 +386,13 @@ function dslc_save_post_options( $post_id, $post ) {
  */
 function dslc_page_add_row_action( $actions, $page_object ) {
 
+	$screen = get_current_screen();
+	$dslc_admin_interface_on = apply_filters( 'dslc_admin_interface_on', $screen->post_type );
 	$page_status = $page_object->post_status;
 	$id = $page_object->ID;
 
-	if ( $page_status != 'trash' ) {
+	if ( true === $dslc_admin_interface_on && $page_status != 'trash' ) {
+
 		$actions = array('edit-in-live-composer' => '<a href="' . get_home_url() . '/?page_id=' . $id . '&dslc=active">' . __( 'Edit in Live Composer', 'live-composer-page-builder' ) . '</a>') + $actions;
 	}
 
@@ -403,8 +406,10 @@ function dslc_post_add_row_action( $actions, $post ) {
 
 	$post_status = $post->post_status;
 	$post_type = $post->post_type;
+	$dslc_admin_interface_on = apply_filters( 'dslc_admin_interface_on', $post_type );
 
-	if ( $post_status != 'trash' && ( $post_type == 'page' || $post_type == 'dslc_hf' ) ) {
+	if ( true === $dslc_admin_interface_on && $post_status != 'trash' ) {
+
 		$actions = array('edit-in-live-composer' => '<a href="' . get_home_url() . '/?page_id=' . $post->ID . '&dslc=active">' . __( 'Edit in Live Composer', 'live-composer-page-builder' ) . '</a>') + $actions;
 		/*
 		if ( array_key_exists( $post_type, $dslc_var_templates_pt ) ) {
@@ -422,34 +427,35 @@ add_filter( 'post_row_actions', 'dslc_post_add_row_action', 10, 2 );
 
 /**
  * Adds button in permalink
+ *
+ * @return  string
  */
-
 function dslc_add_button_permalink( $return, $id, $new_title, $new_slug ) {
 
 	global $dslc_var_templates_pt;
-
 	$current_post_type = get_post_type( $id );
+	$dslc_admin_interface_on = apply_filters( 'dslc_admin_interface_on', $current_post_type );
 
-	if ( ! array_key_exists( $current_post_type, $dslc_var_templates_pt ) && $current_post_type != 'dslc_testimonials' ) {
+
+	if ( true === $dslc_admin_interface_on && ! array_key_exists( $current_post_type, $dslc_var_templates_pt ) && $current_post_type != 'dslc_testimonials' ) {
 		$return .= '<a class="button button-small" target="_blank" href="' . get_home_url() . '/?page_id=' . $id . '&dslc=active">' . __( 'Open in Live Composer', 'live-composer-page-builder' ) . '</a>';
 	}
 
 	return $return;
-
 }
 add_filter( 'get_sample_permalink_html', 'dslc_add_button_permalink', 10, 4 );
 
 /**
  * Adds button in submitbox
  */
-
 function dslc_post_submitbox_add_button() {
 
 	global $post, $current_screen, $dslc_var_templates_pt;
-
 	$current_post_type = $post->post_type;
+	$dslc_admin_interface_on = apply_filters( 'dslc_admin_interface_on', $current_post_type );
 
-	if ( $current_screen->action != 'add' && ! array_key_exists( $current_post_type, $dslc_var_templates_pt ) && $current_post_type != 'dslc_testimonials' ) {
+
+	if ( true === $dslc_admin_interface_on && $current_screen->action != 'add' && ! array_key_exists( $current_post_type, $dslc_var_templates_pt ) && $current_post_type != 'dslc_testimonials' ) {
 		echo '<a class="button button-hero" target="_blank" href="' . get_home_url() . '/?page_id=' . get_the_ID() . '&dslc=active">' . __( 'Open in Live Composer', 'live-composer-page-builder' ) . '</a>';
 	}
 
@@ -459,16 +465,17 @@ add_action( 'post_submitbox_start', 'dslc_post_submitbox_add_button' );
 /**
  * Creates a tab for pages and different post types
  */
-
-add_filter( 'the_editor', 'dslc_tab_content' );
 function dslc_tab_content( $content ) {
+
 	if ( get_post_type( get_the_ID() ) == 'page' && is_admin() ) {
-?>
-	<div id="lc_content_wrap">
-			<h2> <?php _e( 'Edit this page in Live Composer', 'live-composer-page-builder' ); ?></h2>
-			<div class="description"><?php _e( 'Page builder stores content in a compressed way <br>(better for speed, security and user experience)', 'live-composer-page-builder' ); ?></div>
-			<p><a class="button button-primary button-hero" target="_blank" href="<?php echo get_home_url() . '/?page_id=' . get_the_ID() . '&dslc=active'; ?>"><?php echo __( 'Open in Live Composer', 'live-composer-page-builder' ); ?></a></p>
-	</div>
-<?php }
+		?>
+		<div id="lc_content_wrap">
+				<h2> <?php _e( 'Edit this page in Live Composer', 'live-composer-page-builder' ); ?></h2>
+				<div class="description"><?php _e( 'Page builder stores content in a compressed way <br>(better for speed, security and user experience)', 'live-composer-page-builder' ); ?></div>
+				<p><a class="button button-primary button-hero" target="_blank" href="<?php echo get_home_url() . '/?page_id=' . get_the_ID() . '&dslc=active'; ?>"><?php echo __( 'Open in Live Composer', 'live-composer-page-builder' ); ?></a></p>
+		</div>
+	<?php }
+
 	return $content;
 }
+add_filter( 'the_editor', 'dslc_tab_content' );
