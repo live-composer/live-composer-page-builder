@@ -30,6 +30,7 @@ function dslc_get_cpt_templates() {
 		'posts_per_page' => -1,
 		'order' => 'DESC',
 	);
+
 	$templates = get_posts( $args );
 
 	global $dslc_var_templates_pt;
@@ -66,22 +67,21 @@ function dslc_get_cpt_templates() {
 						'std' => '',
 						'id' => 'dslc_post_template',
 						'type' => 'select',
-						'choices' => $templates_array[$pt_id],
+						'choices' => $templates_array[ $pt_id ],
 					),
-				)
+				),
 			);
 		}
 	}
 }
 
-add_action( 'init', 'dslc_get_cpt_templates' );
+add_action( 'init', 'dslc_get_cpt_templates', 50 );
 
 /**
  * Setup post options
  *
  * @since 1.0
  */
-
 function dslc_setup_post_options() {
 
 	/* Add meta boxes on the 'add_meta_boxes' hook. */
@@ -90,7 +90,9 @@ function dslc_setup_post_options() {
 	/* Save post meta on the 'save_post' hook. */
 	add_action( 'save_post', 'dslc_save_post_options', 10, 2 );
 
-} add_action( 'load-post-new.php', 'dslc_setup_post_options' ); add_action( 'load-post.php', 'dslc_setup_post_options' );
+}
+add_action( 'load-post-new.php', 'dslc_setup_post_options' );
+add_action( 'load-post.php', 'dslc_setup_post_options' );
 
 /**
  * Add post options (add metaboxes)
@@ -99,22 +101,24 @@ function dslc_add_post_options() {
 
 	global $dslc_var_post_options;
 
-	// If there are post options
+	// If there are post options.
 	if ( ! empty( $dslc_var_post_options ) ) {
 
-		// Loop through all post options
+		// Loop through all post options.
 		foreach ( $dslc_var_post_options as $dslc_post_option_key => $dslc_post_option ) {
 
-			if ( ! isset( $dslc_post_option['context'] ) )
-				$dslc_post_option['context'] = 'normal';
+			if ( ! isset( $dslc_post_option['context'] ) ) {
 
-			// If post options shown on multiple post types
+				$dslc_post_option['context'] = 'normal';
+			}
+
+			// If post options shown on multiple post types.
 			if ( is_array( $dslc_post_option['show_on'] ) ) {
 
-				// Loop through all post types
+				// Loop through all post types.
 				foreach ( $dslc_post_option['show_on'] as $dslc_post_option_show_on ) {
 
-					// Add meta box for post type
+					// Add meta box for post type.
 					add_meta_box(
 						$dslc_post_option_key,
 						$dslc_post_option['title'],
@@ -123,13 +127,11 @@ function dslc_add_post_options() {
 						$dslc_post_option['context'],
 						'high'
 					);
-
 				}
-
-			// If post options shown on single post type
+			// If post options shown on single post type.
 			} else {
 
-				// Add meta box to post type
+				// Add meta box to post type.
 				add_meta_box(
 					$dslc_post_option_key,
 					$dslc_post_option['title'],
@@ -138,13 +140,9 @@ function dslc_add_post_options() {
 					$dslc_post_option['context'],
 					'high'
 				);
-
 			}
-
 		}
-
 	}
-
 }
 
 /**

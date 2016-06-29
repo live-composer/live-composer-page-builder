@@ -38,8 +38,11 @@ function dslc_display_composer() {
 	if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) :
 
 		$default_section = dslc_get_option( 'lc_default_opts_section', 'dslc_plugin_options_other' );
-		if ( empty( $default_section ) )
+
+		if ( empty( $default_section ) ) {
+
 			$default_section = 'functionality';
+		}
 
 		?>
 
