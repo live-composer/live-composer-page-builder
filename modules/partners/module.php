@@ -52,6 +52,11 @@ class DSLC_Partners extends DSLC_Module {
 						'value' => 'phone',
 					),
 				),
+				'show_hide_dependency' => array(
+
+					'phone' => 'link',
+					'desktop' => 'amount, orientation',
+				),
 			),
 			array(
 				'label' => __( 'Link', 'live-composer-page-builder' ),
@@ -87,11 +92,6 @@ class DSLC_Partners extends DSLC_Module {
 						'label' => __( 'Carousel', 'live-composer-page-builder' ),
 						'value' => 'carousel',
 					),
-				),
-				'show_hide_dependency' => array(
-
-					'grid' => 'link, columns',
-					'masonry' => 'columns, orientation',
 				),
 			),
 			array(

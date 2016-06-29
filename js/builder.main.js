@@ -6747,14 +6747,34 @@ DSLC.Editor = new (function() {
 				var handler = function(){
 
 					var optElem = this;
+					var localDep = {};
 
-					Object.keys(dep).forEach(function(opt_val){
+					if ( ( optElem.type == 'radio' || optElem.type == 'checkbox' ) && dep[ optElem.value ] == undefined ) {
 
-						dep[ opt_val ].split(',').forEach(function(item){
+						return false;
+					}
+
+					if ( optElem.type == 'checkbox' && dep[ optElem.value ] != undefined ) {
+
+						localDep[ optElem.value ] = dep[ optElem.value ];
+					} else {
+
+						localDep = dep;
+					}
+
+					Object.keys(localDep).forEach(function(opt_val){
+
+						localDep[ opt_val ].split(',').forEach(function(item){
 
 							var opt_wrap = $(".dslca-module-edit-option-" + item.trim()).closest('.dslca-module-edit-option');
+							var checkedCheckbox = true;
 
-							if ( optElem.value == opt_val ) {
+							if ( optElem.type == 'radio' || optElem.type == 'checkbox' ) {
+
+								checkedCheckbox = $(optElem).is(":checked");
+							}
+
+							if ( optElem.value == opt_val && checkedCheckbox ) {
 
 								opt_wrap.show();
 							} else {
