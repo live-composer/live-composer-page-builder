@@ -512,7 +512,7 @@ var dslcDebug = false;
 							dslc_generate_code();
 							dslc_show_publish_button();
 
-							DSLC.Editor.dslc_init_medium_editor();
+							DSLC.Editor.initMediumEditor();
 						});
 
 					});
@@ -2804,7 +2804,8 @@ var dslcDebug = false;
 				// Initiate Colorpicker
 				dslc_modules_options_box_shadow_color();
 				dslc_modules_options_text_shadow_color();
-				DSLC.Editor.dslc_init_medium_editor();
+				DSLC.Editor.initMediumEditor();
+				DSLC.Editor.loadOptionsDeps();
 
 				// Set up backup
 				var moduleBackup = jQuery('.dslca-module-options-front', '.dslca-module-being-edited').children().clone();
@@ -4830,6 +4831,7 @@ var dslcDebug = false;
 			dslc_module_options_confirm_changes(function(){
 
 				DSLC.Editor.clearUtils();
+				DSLC.Editor.unloadOptionsDeps();
 			});
 
 			$('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
@@ -4846,6 +4848,7 @@ var dslcDebug = false;
 			dslc_module_options_cancel_changes(function(){
 
 				DSLC.Editor.clearUtils();
+				DSLC.Editor.unloadOptionsDeps();
 			});
 
 			$('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
@@ -6663,7 +6666,7 @@ DSLC.Editor = new (function() {
 	this.colorpickers = [];
 	this.mediumEditors = [];
 
-	this.dslc_init_medium_editor = function(){
+	this.initMediumEditor = function(){
 
 		jQuery(".dslca-editable-content.medium-editor").each(function(){
 
@@ -6724,30 +6727,54 @@ DSLC.Editor = new (function() {
 
 	this.loadOptionsDeps = function() {
 
+		var self = this;
+
 		$(".dslca-module-edit-option").each(function(){
 
 			var elem = this;
+			var parsed = true;
 
-			if( $(this).data('dep') != '' ) {
+			try{
 
-				try{
+				var dep = JSON.parse( Util.b64_to_utf8( $(this).data('dep') ) );
+			}catch(e){
 
-					var dep = JSON.parse( Util.b64_to_utf( $(this).data('dep') ) );
-				}catch(e){
+				parsed = false;
+			}
 
-					return false;
-				}
-
+			if( parsed ) {
 
 				var handler = function(){
 
-					Object.keys(dep).forEach(function(opt_val){
+					var optElem = this;
+					var localDep = {};
 
-						dep[this.value].split(',').forEach(function(item){
+					if ( ( optElem.type == 'radio' || optElem.type == 'checkbox' ) && dep[ optElem.value ] == undefined ) {
 
-							var opt_wrap = $("#" + item).closest('.dslca-module-edit-option');
+						return false;
+					}
 
-							if ( elem.value == opt_val ) {
+					if ( optElem.type == 'checkbox' && dep[ optElem.value ] != undefined ) {
+
+						localDep[ optElem.value ] = dep[ optElem.value ];
+					} else {
+
+						localDep = dep;
+					}
+
+					Object.keys(localDep).forEach(function(opt_val){
+
+						localDep[ opt_val ].split(',').forEach(function(item){
+
+							var opt_wrap = $(".dslca-module-edit-option-" + item.trim()).closest('.dslca-module-edit-option');
+							var checkedCheckbox = true;
+
+							if ( optElem.type == 'radio' || optElem.type == 'checkbox' ) {
+
+								checkedCheckbox = $(optElem).is(":checked");
+							}
+
+							if ( optElem.value == opt_val && checkedCheckbox ) {
 
 								opt_wrap.show();
 							} else {
@@ -6760,11 +6787,12 @@ DSLC.Editor = new (function() {
 					});
 				}
 
-				$(document).on('change', '*[data-id="' + $(this).data('id') + '"]', handler);
-				this.depsHandlers.push( handler );
+				$(document).on('change dslc-init-deps', '.dslca-module-edit-option *[data-id="' + $(this).data('id') + '"]', handler);
+				self.depsHandlers.push( handler );
 			}
 		});
 
+		$(".dslca-module-edit-option input, .dslca-module-edit-option select").trigger('dslc-init-deps');
 	}
 
 	this.unloadOptionsDeps = function() {
@@ -6772,6 +6800,9 @@ DSLC.Editor = new (function() {
 		this.depsHandlers.forEach(function(handler){
 
 			$(document).unbind( 'change', handler );
+			$(document).unbind( 'dslc-init-deps', handler );
 		});
+
+		this.depsHandlers = [];
 	}
 })();
