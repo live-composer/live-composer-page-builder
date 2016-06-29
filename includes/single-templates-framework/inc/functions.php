@@ -3,7 +3,6 @@
 /**
  * "st" in function names stands for "single template", that's what the functions are related to
  */
-
 function dslc_st_init() {
 
 	$capability = dslc_get_option( 'lc_min_capability_page', 'dslc_plugin_options_access_control' );
