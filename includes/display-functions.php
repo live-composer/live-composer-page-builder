@@ -24,7 +24,7 @@ function dslc_display_composer() {
 
 	global $dslc_active;
 
-	$dslc_admin_interface_on = apply_filters( 'dslc_admin_interface_on', true );
+	$dslc_admin_interface_on = apply_filters( 'dslc_admin_interface_on_frontend', true );
 
 	if ( true !== $dslc_admin_interface_on ) {
 
