@@ -408,11 +408,10 @@ function dslc_post_add_row_action( $actions, $post ) {
 
 	if ( true === $dslc_admin_interface_on && $post_status != 'trash' ) {
 
-		//$actions = array('edit-in-live-composer' => '<a href="' . get_home_url() . '/?page_id=' . $post->ID . '&dslc=active">' . __( 'Edit in Live Composer', 'live-composer-page-builder' ) . '</a>') + $actions;
 		if ( array_key_exists( $post_type, $dslc_var_templates_pt ) ) {
 
 			$template_id = dslc_st_get_template_ID( $post->ID );
-			$actions = array('edit-in-live-composer' => '<a href="'. get_home_url() . '/?page_id=' . $template_id . '&dslc=active">'. __( 'Edit Template', 'live-composer-page-builder' ) .'</a>') + $actions;
+			$actions = array('edit-in-live-composer' => '<a href="'. get_home_url() . '/?page_id=' . $template_id . '&dslc=active&id=' . $post->ID . '">'. __( 'Edit Template', 'live-composer-page-builder' ) .'</a>') + $actions;
 		} else {
 
 			$actions = array('edit-in-live-composer' => '<a href="'. get_home_url() . '/?page_id=' . $post->ID . '&dslc=active">'. __( 'Edit in Live Composer', 'live-composer-page-builder' ) .'</a>') + $actions;
