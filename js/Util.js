@@ -96,5 +96,17 @@ var Util = {
         }
 
         return false;
+    },
+
+    /**
+     * Get Page Params
+     *
+     * @return {array}
+     */
+    get_page_params: function()
+    {
+    	return decodeURIComponent(window.location.search.slice(1)).split('&').reduce(function _reduce ( a, b) { b = b.split('='); a[b[0]] = b[1]; return a; }, {});
     }
+
+
 };
