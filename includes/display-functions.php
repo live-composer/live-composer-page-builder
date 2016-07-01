@@ -24,6 +24,13 @@ function dslc_display_composer() {
 
 	global $dslc_active;
 
+	$dslc_admin_interface_on = apply_filters( 'dslc_admin_interface_on_frontend', true );
+
+	if ( true !== $dslc_admin_interface_on ) {
+
+		return;
+	}
+
 	// Reset the query ( because some devs leave their queries non-reseted ).
 	wp_reset_query();
 
@@ -31,8 +38,11 @@ function dslc_display_composer() {
 	if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) :
 
 		$default_section = dslc_get_option( 'lc_default_opts_section', 'dslc_plugin_options_other' );
-		if ( empty( $default_section ) )
+
+		if ( empty( $default_section ) ) {
+
 			$default_section = 'functionality';
+		}
 
 		?>
 
@@ -347,7 +357,7 @@ function dslc_display_composer() {
 
 					if ( $template ) {
 
-						?><a target="_blank" href="<?php echo add_query_arg( array( 'dslc' => 'active', 'id' => get_the_ID() ), get_permalink( $template ) ); ?>" class="dslca-activate-composer-hook"><?php _e( 'Edit Template', 'live-composer-page-builder' ); ?></a><?php
+						?><a target="_blank" href="<?php echo add_query_arg( array( 'dslc' => 'active', 'preview_id' => get_the_ID() ), get_permalink( $template ) ); ?>" class="dslca-activate-composer-hook"><?php _e( 'Edit Template', 'live-composer-page-builder' ); ?></a><?php
 
 					} else {
 
@@ -1219,7 +1229,7 @@ function dslc_load_template( $filename, $default = '' ) {
 	if ( $filename ) {
 
 		// Look for template in the theme
-		$template = locate_template( array($filename) );
+		$template = locate_template( array( $filename ) );
 
 		// If not found in theme load default
 		if ( ! $template )
@@ -1243,10 +1253,19 @@ function dslc_custom_css( $dslc_code = '' ) {
 	$dslc_custom_css_ignore_check = apply_filters( 'dslc_generate_custom_css', $dslc_custom_css_ignore_check );
 
 	if ( $dslc_code ) {
+
 		$dslc_custom_css_ignore_check = true;
 	}
 
-	if ( ! is_singular() && ! is_archive() && ! is_author() && ! is_search() && ! is_404() && ! is_home() && ! $dslc_custom_css_ignore_check ) {
+	if ( ! is_singular() &&
+		 ! is_archive() &&
+		 ! is_author() &&
+		 ! is_search() &&
+		 ! is_404() &&
+		 ! is_home() &&
+		 ! $dslc_custom_css_ignore_check
+	) {
+
 		return;
 	}
 

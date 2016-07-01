@@ -469,3 +469,14 @@ function dslc_generate_notice_nonce( $notice_id ) {
 	return $notice_nonce;
 }
 
+/**
+ * Filter returns admin interface turned on value
+ *
+ * @return bool
+ */
+function dslc_admin_int_on() {
+
+	return true;
+}
+
+add_filter( 'dslc_admin_interface_on', 'dslc_admin_int_on', 1 );
