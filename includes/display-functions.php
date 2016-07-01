@@ -1229,7 +1229,7 @@ function dslc_load_template( $filename, $default = '' ) {
 	if ( $filename ) {
 
 		// Look for template in the theme
-		$template = locate_template( array($filename) );
+		$template = locate_template( array( $filename ) );
 
 		// If not found in theme load default
 		if ( ! $template )
@@ -1253,10 +1253,19 @@ function dslc_custom_css( $dslc_code = '' ) {
 	$dslc_custom_css_ignore_check = apply_filters( 'dslc_generate_custom_css', $dslc_custom_css_ignore_check );
 
 	if ( $dslc_code ) {
+
 		$dslc_custom_css_ignore_check = true;
 	}
 
-	if ( ! is_singular() && ! is_archive() && ! is_author() && ! is_search() && ! is_404() && ! is_home() && ! $dslc_custom_css_ignore_check ) {
+	if ( ! is_singular() &&
+		 ! is_archive() &&
+		 ! is_author() &&
+		 ! is_search() &&
+		 ! is_404() &&
+		 ! is_home() &&
+		 ! $dslc_custom_css_ignore_check
+	) {
+
 		return;
 	}
 
