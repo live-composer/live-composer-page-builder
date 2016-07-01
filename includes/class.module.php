@@ -2027,7 +2027,9 @@ class DSLC_Module {
 
 			<?php do_action( 'dslc_module_before' ); ?>
 
-			<?php if ( DS_LIVE_COMPOSER_ACTIVE && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) : ?>
+			<?php
+				// If Live Composer in editing mode: output <style> block for the current module.
+				if ( DS_LIVE_COMPOSER_ACTIVE && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) : ?>
 
 				<style type="text/css" id="css-for-dslc-module-<?php echo $options['module_instance_id']; ?>"><?php
 
@@ -2036,9 +2038,7 @@ class DSLC_Module {
 					if ( isset( $options['css_custom'] ) && $options['css_custom'] == 'disabled' ) {
 
 
-
 					} else {
-
 						dslc_generate_custom_css( $options_arr, $options, true );
 						$googlefonts_output = '';
 						foreach ( $dslc_googlefonts_array as $googlefont ) {
@@ -2059,13 +2059,13 @@ class DSLC_Module {
 				<div class="dslca-module-manage">
 					<span class="dslca-module-manage-line"></span>
 					<div class="dslca-module-manage-inner">
-						<span class="dslca-module-manage-hook dslca-module-edit-hook"><span class="dslc-icon-cog"></span></span>
-						<span class="dslca-module-manage-hook dslca-copy-module-hook"><span class="dslc-icon-copy"></span></span>
-						<span class="dslca-module-manage-hook dslca-move-module-hook"><span class="dslc-icon-move"></span></span>
-						<span class="dslca-module-manage-hook dslca-change-width-module-hook">
+						<span class="dslca-module-manage-hook dslca-module-edit-hook" title="<?php esc_attr_e( 'Edit options' , 'live-composer-page-builder' ); ?>"><span class="dslc-icon-cog"></span></span>
+						<span class="dslca-module-manage-hook dslca-copy-module-hook" title="<?php esc_attr_e( 'Duplicate' , 'live-composer-page-builder' ); ?>"><span class="dslc-icon-copy"></span></span>
+						<span class="dslca-module-manage-hook dslca-move-module-hook" title="<?php esc_attr_e( 'Drag to move' , 'live-composer-page-builder' ); ?>"><span class="dslc-icon-move"></span></span>
+						<span class="dslca-module-manage-hook dslca-change-width-module-hook" title="<?php esc_attr_e( 'Change width' , 'live-composer-page-builder' ); ?>">
 							<span class="dslc-icon-columns"></span>
 							<div class="dslca-change-width-module-options">
-								<span>Module Width</span>
+								<span><?php esc_attr_e( 'Element Width', 'live-composer-page-builder' ); ?></span>
 								<span data-size="1">1/12</span><span data-size="2">2/12</span>
 								<span data-size="3">3/12</span><span data-size="4">4/12</span>
 								<span data-size="5">5/12</span><span data-size="6">6/12</span>
@@ -2074,7 +2074,7 @@ class DSLC_Module {
 								<span data-size="11">11/12</span><span data-size="12">12/12</span>
 							</div>
 						</span>
-						<span class="dslca-module-manage-hook dslca-delete-module-hook"><span class="dslc-icon-remove"></span></span>
+						<span class="dslca-module-manage-hook dslca-delete-module-hook" title="<?php esc_attr_e( 'Delete' , 'live-composer-page-builder' ); ?>"><span class="dslc-icon-remove"></span></span>
 					</div>
 					<?php if ( DS_LIVE_COMPOSER_DEV_MODE ) : ?>
 						<div class="dslca-module-manage-inner dslca-dev-mode">
@@ -2107,7 +2107,9 @@ class DSLC_Module {
 
 		?>
 
-			<?php if ( DS_LIVE_COMPOSER_ACTIVE && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) : ?>
+			<?php 
+			// If Live Composer is in editing mode: output some additional (hidden) elements.
+			if ( DS_LIVE_COMPOSER_ACTIVE && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) : ?>
 
 				<div class="dslca-module-options-front">
 

@@ -92,7 +92,7 @@ function dslc_row_display_options() {
 
 				$style = '';
 
-				if ( '' != $curr_value ) {
+				if ( isset( $curr_value ) && '' !== $curr_value ) {
 
 					$text_color_value = $curr_value;
 
@@ -101,7 +101,7 @@ function dslc_row_display_options() {
 						$text_color_value = RGBToHex( $text_color_value );
 					}
 
-					$color = getContrastYIQ( $text_color_value );
+					$color = get_contrast_bw( $text_color_value );
 
 					$style = ' style="background: ' . $curr_value . '; color: ' . $color . '"';
 				}?>

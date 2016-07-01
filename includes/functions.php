@@ -158,12 +158,84 @@ function dslc_module_settings( $options, $custom = false ) {
 	// Go through all options.
 	foreach ( $options as $option ) {
 
-		// If value set use it?
 		if ( isset( $_POST[ $option['id'] ] ) ) {
-			$settings[ $option['id'] ] = $_POST[ $option['id'] ];
 
-		// If value not set use default?
+			/**
+			 * Extension developers can decide for themselves
+			 * what escaping function to use for a particular option id.
+			 *
+			 * See switch block below for available options.
+			 */
+
+			$default_settings_escape_function = 'esc_attr';
+			$custom_settings_escape_function = $default_settings_escape_function;
+			$custom_settings_escape_function = apply_filters( 'dslc_module_settings_cleaning_function', $default_settings_escape_function, $option['id'] );
+
+			// If value set use it?
+			if ( 'content' === $option['id'] ) {
+
+				$settings[ $option['id'] ] = wp_kses_post( $_POST[ $option['id'] ] );
+			} elseif ( $custom_settings_escape_function !== $default_settings_escape_function ) {
+
+				switch ( $custom_settings_escape_function ) {
+					case 'wp_kses_post':
+						$settings[ $option['id'] ] = wp_kses_post( $_POST[ $option['id'] ] );
+						break;
+
+					case 'sanitize_email':
+						$settings[ $option['id'] ] = sanitize_email( $_POST[ $option['id'] ] );
+						break;
+
+					case 'sanitize_file_name':
+						$settings[ $option['id'] ] = sanitize_file_name( $_POST[ $option['id'] ] );
+						break;
+
+					case 'sanitize_html_class':
+						$settings[ $option['id'] ] = sanitize_html_class( $_POST[ $option['id'] ] );
+						break;
+
+					case 'sanitize_key':
+						$settings[ $option['id'] ] = sanitize_key( $_POST[ $option['id'] ] );
+						break;
+
+					case 'sanitize_meta':
+						$settings[ $option['id'] ] = sanitize_meta( $_POST[ $option['id'] ] );
+						break;
+
+					case 'sanitize_text_field':
+						$settings[ $option['id'] ] = sanitize_text_field( $_POST[ $option['id'] ] );
+						break;
+
+					case 'sanitize_title':
+						$settings[ $option['id'] ] = sanitize_title( $_POST[ $option['id'] ] );
+						break;
+
+					case 'esc_html':
+						$settings[ $option['id'] ] = esc_html( $_POST[ $option['id'] ] );
+						break;
+
+					case 'esc_url':
+						$settings[ $option['id'] ] = esc_url( $_POST[ $option['id'] ] );
+						break;
+
+					case 'esc_js':
+						$settings[ $option['id'] ] = esc_js( $_POST[ $option['id'] ] );
+						break;
+
+					case 'esc_textarea':
+						$settings[ $option['id'] ] = esc_textarea( $_POST[ $option['id'] ] );
+						break;
+
+					default:
+						$settings[ $option['id'] ] = esc_attr( $_POST[ $option['id'] ] );
+						break;
+				}
+			} else {
+
+				$settings[ $option['id'] ] = esc_attr( $_POST[ $option['id'] ] );
+			}
 		} else {
+			// If value not set use default?
 			$settings[ $option['id'] ] = $option['std'];
 		}
 	}

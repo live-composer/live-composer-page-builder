@@ -1335,9 +1335,7 @@ function dslc_custom_css( $dslc_code = '' ) {
 
 	} else { // ! $dslc_code.
 
-		error_log( $composer_code );
 		$composer_code = $dslc_code;
-		error_log( $composer_code );
 	}
 
 	echo '<style type="text/css">';

@@ -92,7 +92,7 @@ class DSLC_Image extends DSLC_Module {
 				'type' => 'text',
 			),
 			array(
-				'label' => __( 'Link - Lightbox Image', 'live-composer-page-builder' ),
+				'label' => __( 'Lightbox Image', 'live-composer-page-builder' ),
 				'id' => 'link_lb_image',
 				'std' => '',
 				'type' => 'image',

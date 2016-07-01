@@ -325,7 +325,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'std' => '',
 				'type' => 'color',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-text-module-content,.dslc-text-module-content p',
+				'affect_on_change_el' => '.dslc-text-module-content, .dslc-text-module-content .dslca-editable-content, .dslc-text-module-content p',
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
 				'tab' => __( 'Content', 'live-composer-page-builder' ),
@@ -336,7 +336,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'std' => '13',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-text-module-content,.dslc-text-module-content p',
+				'affect_on_change_el' => '.dslc-text-module-content, .dslc-text-module-content .dslca-editable-content, .dslc-text-module-content p',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'styling',
 				'tab' => __( 'Content', 'live-composer-page-builder' ),
@@ -386,7 +386,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 					),
 				),
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-text-module-content,.dslc-text-module-content p',
+				'affect_on_change_el' => '.dslc-text-module-content, .dslc-text-module-content .dslca-editable-content, .dslc-text-module-content p',
 				'affect_on_change_rule' => 'font-weight',
 				'section' => 'styling',
 				'tab' => __( 'Content', 'live-composer-page-builder' ),
@@ -398,7 +398,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'std' => 'Open Sans',
 				'type' => 'font',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-text-module-content,.dslc-text-module-content p',
+				'affect_on_change_el' => '.dslc-text-module-content, .dslc-text-module-content .dslca-editable-content, .dslc-text-module-content p',
 				'affect_on_change_rule' => 'font-family',
 				'section' => 'styling',
 				'tab' => __( 'Content', 'live-composer-page-builder' ),
@@ -409,7 +409,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'std' => 'normal',
 				'type' => 'select',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-text-module-content,.dslc-text-module-content p',
+				'affect_on_change_el' => '.dslc-text-module-content, .dslc-text-module-content .dslca-editable-content, .dslc-text-module-content p',
 				'affect_on_change_rule' => 'font-style',
 				'section' => 'styling',
 				'tab' => __( 'Content', 'live-composer-page-builder' ),
@@ -430,7 +430,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-text-module-content,.dslc-text-module-content p',
+				'affect_on_change_el' => '.dslc-text-module-content, .dslc-text-module-content .dslca-editable-content, .dslc-text-module-content p',
 				'affect_on_change_rule' => 'letter-spacing',
 				'section' => 'styling',
 				'tab' => __( 'Content', 'live-composer-page-builder' ),
@@ -444,7 +444,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'std' => '22',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-text-module-content,.dslc-text-module-content p',
+				'affect_on_change_el' => '.dslc-text-module-content, .dslc-text-module-content .dslca-editable-content, .dslc-text-module-content p',
 				'affect_on_change_rule' => 'line-height',
 				'section' => 'styling',
 				'tab' => __( 'Content', 'live-composer-page-builder' ),
@@ -468,7 +468,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'std' => 'left',
 				'type' => 'text_align',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-text-module-content,.dslc-text-module-content p',
+				'affect_on_change_el' => '.dslc-text-module-content, .dslc-text-module-content .dslca-editable-content, .dslc-text-module-content p',
 				'affect_on_change_rule' => 'text-align',
 				'section' => 'styling',
 				'tab' => __( 'Content', 'live-composer-page-builder' ),
@@ -3616,7 +3616,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'std' => '13',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-text-module-content,.dslc-text-module-content p',
+				'affect_on_change_el' => '.dslc-text-module-content, .dslc-text-module-content .dslca-editable-content, .dslc-text-module-content p',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
@@ -3628,7 +3628,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'std' => '22',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-text-module-content,.dslc-text-module-content p',
+				'affect_on_change_el' => '.dslc-text-module-content, .dslc-text-module-content .dslca-editable-content, .dslc-text-module-content p',
 				'affect_on_change_rule' => 'line-height',
 				'section' => 'responsive',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
@@ -3640,7 +3640,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'std' => 'left',
 				'type' => 'text_align',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-text-module-content,.dslc-text-module-content p',
+				'affect_on_change_el' => '.dslc-text-module-content, .dslc-text-module-content .dslca-editable-content, .dslc-text-module-content p',
 				'affect_on_change_rule' => 'text-align',
 				'section' => 'responsive',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
@@ -4159,7 +4159,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'std' => '13',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-text-module-content,.dslc-text-module-content p',
+				'affect_on_change_el' => '.dslc-text-module-content, .dslc-text-module-content .dslca-editable-content, .dslc-text-module-content p',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
@@ -4171,7 +4171,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'std' => '22',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-text-module-content,.dslc-text-module-content p',
+				'affect_on_change_el' => '.dslc-text-module-content, .dslc-text-module-content .dslca-editable-content, .dslc-text-module-content p',
 				'affect_on_change_rule' => 'line-height',
 				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
@@ -4183,7 +4183,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'std' => 'left',
 				'type' => 'text_align',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-text-module-content,.dslc-text-module-content p',
+				'affect_on_change_el' => '.dslc-text-module-content, .dslc-text-module-content .dslca-editable-content, .dslc-text-module-content p',
 				'affect_on_change_rule' => 'text-align',
 				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
@@ -4651,10 +4651,13 @@ class DSLC_Text_Simple extends DSLC_Module {
 
 		global $dslc_active;
 
-		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
+		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+
 			$dslc_is_admin = true;
-		else
+		} else {
+
 			$dslc_is_admin = false;
+		}
 
 		$this->module_start( $options );
 
@@ -4684,5 +4687,4 @@ class DSLC_Text_Simple extends DSLC_Module {
 		$this->module_end( $options );
 
 	}
-
 }

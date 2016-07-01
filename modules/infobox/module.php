@@ -316,6 +316,8 @@ class DSLC_Info_Box extends DSLC_Module {
 				'id' => 'css_border_width',
 				'std' => '0',
 				'type' => 'slider',
+				'min' => 0,
+				'max' => 10,
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-info-box',
 				'affect_on_change_rule' => 'border-width',
@@ -384,7 +386,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'ext' => 'px',
 				'min' => 0,
 				'max' => 1000,
-				'increment' => 5
+				'increment' => 5,
 			),
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),

@@ -125,9 +125,9 @@ function dslc_load_scripts() {
 		wp_enqueue_script( 'dslc-builder-plugins-js', DS_LIVE_COMPOSER_URL . 'js/builder.plugins.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 
 		if ( ! SCRIPT_DEBUG ) {
-			wp_enqueue_script( 'dslc-builder-main-js', DS_LIVE_COMPOSER_URL . 'js/builder.main.min.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_script( 'dslc-builder-main-js', DS_LIVE_COMPOSER_URL . 'js/builder.main.min.js', array( 'jquery', 'dslc-main-js' ), DS_LIVE_COMPOSER_VER );
 		} else {
-			wp_enqueue_script( 'dslc-builder-main-js', DS_LIVE_COMPOSER_URL . 'js/builder.main.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_script( 'dslc-builder-main-js', DS_LIVE_COMPOSER_URL . 'js/builder.main.js', array( 'jquery', 'dslc-main-js' ), DS_LIVE_COMPOSER_VER );
 		}
 
 		if ( is_ssl() ) {
@@ -205,10 +205,10 @@ function dslc_load_fonts() {
 
 	if ( isset( $_GET['dslc'] ) && $_GET['dslc'] == 'active' ) {
 
-		wp_enqueue_style( 'dslc-gf-opensans', "//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600" );
+		wp_enqueue_style( 'dslc-gf-opensans', "//fonts.googleapis.com/css?family=Open+Sans:400,600" );
+		wp_enqueue_style( 'dslc-gf-roboto-condesed', "//fonts.googleapis.com/css?family=Roboto+Condensed:400,900" );
 		// wp_enqueue_style( 'dslc-gf-oswald', "//fonts.googleapis.com/css?family=Oswald:400,300,700&subset=latin,latin-ext" );
 		// wp_enqueue_style( 'dslc-gf-roboto', "//fonts.googleapis.com/css?family=Roboto:400,700" );
-		// wp_enqueue_style( 'dslc-gf-roboto-condesed', "//fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700" );
 		// wp_enqueue_style( 'dslc-gf-lato', "//fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic" );
 
 	}

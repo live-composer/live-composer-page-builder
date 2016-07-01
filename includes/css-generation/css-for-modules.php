@@ -13,42 +13,45 @@
  * Generate module CSS (for all devices)
  *
  * @since 1.0
+ * @param array   $module_structure Array with the structure of the all module settings. Same as $dslc_options in the module.php. Do not contain any data.
+ * @param array   $module_settings  Array with all data/settings for the current module.
+ * @param boolean $restart          Generating code for the single module (on module settings change).
  */
-function dslc_generate_custom_css( $module_data, $settings, $restart = false ) {
+function dslc_generate_custom_css( $module_structure, $module_settings, $restart = false ) {
 
 	global $dslc_css_style;
 	$css_output = '';
 
 	/* Extract responsive settings into separate arrays. */
 
-	$module_data_resp_desktop = array();
-	$module_data_resp_tablet = array();
-	$module_data_resp_phone = array();
+	$module_structure_resp_desktop = array();
+	$module_structure_resp_tablet = array();
+	$module_structure_resp_phone = array();
 
-	foreach ( $module_data as $single_option ) {
+	foreach ( $module_structure as $single_option ) {
 
 		if ( isset( $single_option['section'] ) && 'responsive' === $single_option['section'] ) {
 			if ( isset( $single_option['tab'] ) && 'Phone' === $single_option['tab'] ) {
-				$module_data_resp_phone[] = $single_option;
+				$module_structure_resp_phone[] = $single_option;
 			} elseif ( 'Tablet' === $single_option['tab'] ) {
-				$module_data_resp_tablet[] = $single_option;
+				$module_structure_resp_tablet[] = $single_option;
 			}
 		} else {
-			$module_data_resp_desktop[] = $single_option;
+			$module_structure_resp_desktop[] = $single_option;
 		}
 	}
 
-	$module_data = array(); // Reset array.
+	$module_structure = array(); // Reset array.
 
-	$module_data['desktop'] = $module_data_resp_desktop;
-	$module_data['tablet'] = $module_data_resp_tablet;
-	$module_data['phone'] = $module_data_resp_phone;
+	$module_structure['desktop'] = $module_structure_resp_desktop;
+	$module_structure['tablet'] = $module_structure_resp_tablet;
+	$module_structure['phone'] = $module_structure_resp_phone;
 
 	/* Go through each device group */
 
-	foreach ( $module_data as $device => $module_data_resp ) {
+	foreach ( $module_structure as $device => $module_structure_resp ) {
 
-		$device_css = dslc_generate_module_css( $module_data_resp, $settings );
+		$device_css = dslc_generate_module_css( $module_structure_resp, $module_settings, $restart );
 
 		if ( '' !== $device_css ) {
 
@@ -77,7 +80,7 @@ function dslc_generate_custom_css( $module_data, $settings, $restart = false ) {
  *
  * @since 1.0
  */
-function dslc_generate_module_css( $module_data, $settings, $restart = false ) {
+function dslc_generate_module_css( $module_structure, $module_settings, $restart = false ) {
 
 	$css_output = '';
 	global $dslc_googlefonts_array;
@@ -105,24 +108,24 @@ function dslc_generate_module_css( $module_data, $settings, $restart = false ) {
 	}
 
 	// Go through array of options.
-	foreach ( $module_data as $option_arr ) {
+	foreach ( $module_structure as $option_arr ) {
 
 		// Fix for "alter_defaults" and responsive tablet state.
-		if ( 'css_res_t' === $option_arr['id'] && 'enabled' === $option_arr['std'] && ! isset( $settings['css_res_t'] ) ) {
-			$settings['css_res_t'] = 'enabled';
+		if ( 'css_res_t' === $option_arr['id'] && 'enabled' === $option_arr['std'] && ! isset( $module_settings['css_res_t'] ) ) {
+			$module_settings['css_res_t'] = 'enabled';
 		}
 
 		// Fix for "alter_defaults" and responsive phone state.
-		if ( 'css_res_p' === $option_arr['id'] && 'enabled' === $option_arr['std'] && ! isset( $settings['css_res_p'] ) ) {
-			$settings['css_res_p'] = 'enabled';
+		if ( 'css_res_p' === $option_arr['id'] && 'enabled' === $option_arr['std'] && ! isset( $module_settings['css_res_p'] ) ) {
+			$module_settings['css_res_p'] = 'enabled';
 		}
 
 		// If option type is done with CSS and option is set.
 		if ( isset( $option_arr['affect_on_change_el'] ) && isset( $option_arr['affect_on_change_rule'] ) ) {
 
 			// Default.
-			if ( ! isset( $settings[ $option_arr['id'] ] ) ) {
-				$settings[ $option_arr['id'] ] = $option_arr['std'];
+			if ( ! isset( $module_settings[ $option_arr['id'] ] ) ) {
+				$module_settings[ $option_arr['id'] ] = $option_arr['std'];
 			}
 
 			// Extension (px, %, em...).
@@ -163,7 +166,18 @@ function dslc_generate_module_css( $module_data, $settings, $restart = false ) {
 				}
 
 				// Removed #dslc-content from the line for better CSS optimization.
-				$affect_el .= '#dslc-module-' . $settings['module_instance_id'] . ' ' . $affect_el_arr;
+				$affect_el .= '#dslc-module-' . $module_settings['module_instance_id'] . ' ' . $affect_el_arr;
+
+				/**
+				 * If $restart = true >> we are redrawing the module code in LC editing mode.
+				 * It means we try to override module CSS that is already available in the page code.
+				 * To override it, we add .dslca-enabled for each CSS rule.
+				 */
+				/*
+				if ( $restart ) {
+					$affect_el = '.dslca-enabled ' . $affect_el;
+				}
+				*/
 			}
 
 			// Checkbox ( CSS ).
@@ -171,13 +185,13 @@ function dslc_generate_module_css( $module_data, $settings, $restart = false ) {
 
 				$checkbox_val = '';
 
-				if ( '' === $settings[ $option_arr['id'] ] ) {
+				if ( '' === $module_settings[ $option_arr['id'] ] ) {
 
 					$checkbox_val = '';
 
 				} else {
 
-					$checkbox_arr = explode( ' ', trim( $settings[ $option_arr['id'] ] ) );
+					$checkbox_arr = explode( ' ', trim( $module_settings[ $option_arr['id'] ] ) );
 
 					if ( in_array( 'top', $checkbox_arr, true ) ) {
 						$checkbox_val .= 'solid ';
@@ -208,20 +222,20 @@ function dslc_generate_module_css( $module_data, $settings, $restart = false ) {
 					}
 				}
 
-				$settings[ $option_arr['id'] ] = $checkbox_val;
+				$module_settings[ $option_arr['id'] ] = $checkbox_val;
 
 			}
 
 			// Colors (transparent if empty ).
-			if ( '' === $settings[ $option_arr['id'] ] && ( 'background' === $option_arr['affect_on_change_rule'] || 'background-color' === $option_arr['affect_on_change_rule'] ) ) {
+			if ( '' === $module_settings[ $option_arr['id'] ] && ( 'background' === $option_arr['affect_on_change_rule'] || 'background-color' === $option_arr['affect_on_change_rule'] ) ) {
 
-				// $settings[$option_arr['id']] = 'transparent';
-				$settings[ $option_arr['id'] ] = '';
+				// $module_settings[$option_arr['id']] = 'transparent';
+				$module_settings[ $option_arr['id'] ] = '';
 			}
 
 			foreach ( $affect_rules_arr as $affect_rule ) {
-				if ( '' !== $settings[ $option_arr['id'] ] ) {
-					$organized_array[ $affect_el ][ $affect_rule ] = $prepend . $settings[ $option_arr['id'] ] . $ext . $append;
+				if ( '' !== $module_settings[ $option_arr['id'] ] ) {
+					$organized_array[ $affect_el ][ $affect_rule ] = $prepend . $module_settings[ $option_arr['id'] ] . $ext . $append;
 				}
 			}
 		}
@@ -229,8 +243,8 @@ function dslc_generate_module_css( $module_data, $settings, $restart = false ) {
 		// If option type is font?
 		if ( 'font' === $option_arr['type'] ) {
 
-			if ( ! in_array( $settings[ $option_arr['id'] ], $dslc_googlefonts_array, true ) && ! in_array( $settings[ $option_arr['id'] ], $regular_fonts, true ) ) {
-				$dslc_googlefonts_array[] = $settings[ $option_arr['id'] ];
+			if ( ! in_array( $module_settings[ $option_arr['id'] ], $dslc_googlefonts_array, true ) && ! in_array( $module_settings[ $option_arr['id'] ], $regular_fonts, true ) ) {
+				$dslc_googlefonts_array[] = $module_settings[ $option_arr['id'] ];
 			}
 		}
 	}
@@ -298,4 +312,3 @@ function dslc_generate_module_css( $module_data, $settings, $restart = false ) {
 
 	return $css_output;
 }
-
