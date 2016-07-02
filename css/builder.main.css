@@ -440,12 +440,14 @@ body {
 			min-height: 120px;
 		}
 
+		.dslca-modules-section-edit-options,
 		.dslca-module-edit-options {
 			padding: 16px 15px 5px 15px;
 			overflow-x: auto;
 			min-height: 58px;
 		}
 
+			.dslca-modules-section-edit-option,
 			.dslca-module-edit-option {
 				display: table-cell;
 				/*float: left;*/
@@ -494,7 +496,8 @@ body {
 					width: 500px;
 				}
 
-				.dslca-module-edit-label {
+				.dslca-module-edit-label,
+				.dslca-modules-section-edit-label {
 					color: #fff;
 					display: block;
 					font-family: 'Open Sans', sans-serif;
@@ -590,7 +593,7 @@ body {
 				}
 
 					.dslca-module-edit-option-checkbox-single {
-						padding: 8px 6px;
+						padding: 6px 8px;
 						display: table-cell;
 					}
 
@@ -875,21 +878,6 @@ body {
 		position: relative;
 	}
 
-		.dslca-modules-section-edit-options {
-			padding: 20px 15px;
-			overflow-x: hidden;
-		}
-
-			.dslca-modules-section-edit-option {
-				display: table-cell;
-				/*float: left;*/
-				/*margin-bottom: 30px;*/
-				padding-right: 35px;
-				padding-top: 20px;
-				min-width: 235px;
-				position: relative;
-			}
-
 			.dslca-modules-section-edit-option-hidden {
 				display: none !important;
 			}
@@ -917,17 +905,6 @@ body {
 					width: 500px;
 				}
 
-				.dslca-modules-section-edit-label {
-					color: #fff;
-					display: block;
-					font-family: 'Open Sans', sans-serif;
-					font-weight: bold;
-					font-size: 12px;
-					line-height: 1;
-					margin-bottom: 10px;
-					/* text-transform: uppercase; */
-				}
-
 				.dslca-modules-section-edit-field {
 
 				}
@@ -949,7 +926,9 @@ body {
 
 					.dslca-modules-section-edit-option-checkbox-single {
 						margin: 6px;
-						display: inline-block;
+						display: table-cell;
+						white-space: nowrap;
+						padding: 8px;
 					}
 
 						.dslca-modules-section-edit-option-checkbox-hook {
@@ -2766,14 +2745,16 @@ body.rtl .dslca-modules-area-placeholder {
 }
 
 	.dslca-separator-empty span {
-		display: inline-block;
-		padding: 0 10px;
 		background: #fff;
-		margin-top: -10px;
-		position: relative;
-		top: -11px;
-		font-size: 11px;
+		border-radius: 3px;
+		color: #a0a0a0;
+		display: inline-block;
+		font-family: "Open Sans",sans-serif;
+		font-size: 10px;
 		line-height: 1;
+		padding: 3px 6px;
+		position: relative;
+		top: -7px;
 	}
 
 /**
@@ -2800,7 +2781,7 @@ body.rtl .dslca-modules-area-placeholder {
 		width: 400px;
 		margin: 0 auto;
 		margin-top: -123px;
-		padding: 40px;
+		padding: 30px 20px;
 		-moz-box-shadow: 0 2px 2px rgba(0,0,0,.04), 0 0 7px rgba(0,0,0,.12); /* drop shadow and outer glow */
 		-webkit-box-shadow: 0 2px 2px rgba(0,0,0,.04), 0 0 7px rgba(0,0,0,.12); /* drop shadow and outer glow */
 		box-shadow: 0 2px 2px rgba(0,0,0,.04), 0 0 7px rgba(0,0,0,.12); /* drop shadow and outer glow */
@@ -2828,6 +2809,13 @@ body.rtl .dslca-modules-area-placeholder {
 				font-weight: normal;
 				line-height: 22px;
 				margin-bottom: 22px;
+			}
+
+			.dslca-prompt-modal-descr textarea {
+				width: 100%;
+				min-height: 80px;
+				padding: 5px;
+				font-size: 11px;
 			}
 
 		.dslca-prompt-modal-actions {
@@ -3440,14 +3428,16 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
  }
 
 
+.dslca-modules-section-edit-options-wrapper,
 .dslca-module-edit-options-wrapper {
 	display: table-cell;
 	padding: 0 0 20px;
 }
 
- .dslca-module-edit-options-inner {
-	overflow-x: scroll;
- }
+	.dslca-modules-section-edit-options-inner,
+	.dslca-module-edit-options-inner {
+		overflow-x: scroll;
+	}
 
 /**
 * Styling Presets Feature
@@ -3670,6 +3660,7 @@ body.dslc-res-phone.dslca-enabled {
 
 }
 
+.dslca-modules-section-edit-field-colorpicker,
 .dslca-module-edit-field-colorpicker {
 	display: block!important;
 	cursor: pointer;
@@ -3688,6 +3679,7 @@ body .sp-palette .sp-thumb-el {
   width: 25px;
 }
 
+.dslca-modules-section-edit-option > .sp-replacer,
 .dslca-module-edit-option > .sp-replacer {
   position: absolute;
   top: 53px;

@@ -257,13 +257,19 @@ function dslc_get_contrast_bw( $hexcolor ) {
 
 function dslc_rgbtohex( $rgb ) {
 
-	preg_match_all( '/\d+/', $rgb, $matches );
+	if ( isset($rgb) && 6 === strlen($rgb) ) {
 
-	// String padding bug found and the solution put forth by Pete Williams (http://snipplr.com/users/PeteW).
-	$hex = '#';
-	$hex .= str_pad( dechex( $matches[0][0] ), 2, '0', STR_PAD_LEFT );
-	$hex .= str_pad( dechex( $matches[0][1] ), 2, '0', STR_PAD_LEFT );
-	$hex .= str_pad( dechex( $matches[0][2] ), 2, '0', STR_PAD_LEFT );
 
-	return $hex;
+		preg_match_all( '/\d+/', $rgb, $matches );
+
+		// String padding bug found and the solution put forth by Pete Williams (http://snipplr.com/users/PeteW).
+		$hex = '#';
+		$hex .= str_pad( dechex( $matches[0][0] ), 2, '0', STR_PAD_LEFT );
+		$hex .= str_pad( dechex( $matches[0][1] ), 2, '0', STR_PAD_LEFT );
+		$hex .= str_pad( dechex( $matches[0][2] ), 2, '0', STR_PAD_LEFT );
+
+		return $hex;
+	} else {
+		return;
+	}
 }

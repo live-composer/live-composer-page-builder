@@ -40,7 +40,7 @@
 
 		$dslc_var_row_options['type'] = array(
 			'id' => 'type',
-			'std' => 'wrapped',
+			'std' => 'wrapper',
 			'label' => __( 'Type', 'live-composer-page-builder' ),
 			'type' => 'select',
 			'choices' => array(
@@ -52,7 +52,7 @@
 					'label' => 'Full',
 					'value' => 'full',
 				),
-			)
+			),
 		);
 
 		$dslc_var_row_options['columns_spacing'] = array(
@@ -70,12 +70,6 @@
 					'value' => 'nospacing',
 				),
 			)
-		);
-
-		$dslc_var_row_options['custom_class'] = array(
-			'id' => 'custom_class',
-			'label' => __( 'Custom Class', 'live-composer-page-builder' ),
-			'type' => 'text',
 		);
 
 		$dslc_var_row_options['bg_color'] = array(
@@ -342,6 +336,12 @@
 			'increment' => 0.5,
 		);
 
+		$dslc_var_row_options['custom_class'] = array(
+			'id' => 'custom_class',
+			'label' => __( 'Custom Class', 'live-composer-page-builder' ),
+			'type' => 'text',
+		);
+
 		$dslc_var_row_options['custom_id'] = array(
 			'id' => 'custom_id',
 			'label' => __( 'Custom ID', 'live-composer-page-builder' ),
@@ -353,6 +353,6 @@
 
 		// Filter to filter the registered row controls.
 		$dslc_var_row_options = apply_filters( 'dslc_filter_row_options', $dslc_var_row_options );
+	}
 
-	} 
 	add_action( 'init', 'dslc_row_register_options' );
