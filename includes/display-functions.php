@@ -303,7 +303,7 @@ function dslc_display_composer() {
 			</div><!-- .dslca-prompt-modal -->
 
 			<div class="dslca-module-edit-field-icon-ttip">
-				<?php _e( 'Icons used in this plugin are from "Font Awesome".<br><a href="http://livecomposerplugin.com/icons-listing/" class="dslca-link" target="_blank">View full list of icons.</a>', 'live-composer-page-builder' ); ?>
+				<?php echo __( 'Icons used by default are from "Font Awesome" set.', 'live-composer-page-builder' ) . '<br>' . '<a href="https://livecomposerplugin.com/downloads/linecons-icons-add-on/?utm_source=lc-ui&utm_medium=module-options&utm_campaign=more_icons" class="dslca-link" target="_blank">You can add more icons.</a>'; ?>
 				<span class="dslca-module-edit-field-ttip-close"><span class="dslc-icon dslc-icon-remove"></span></span>
 			</div>
 
@@ -481,7 +481,7 @@ function dslc_display_modules() {
 		?>
 
 		<div class="dslca-module dslca-scroller-item dslca-origin" data-origin="General" data-id="DSLC_M_A">
-			<span class="dslca-icon dslc-icon-th-large"></span><span class="dslca-module-title"><?php esc_html_e( 'Column', 'live-composer-page-builder' ); ?></span>
+			<span class="dslca-icon dslc-icon-th-large"></span><span class="dslca-module-title"><?php esc_html_e( 'Container', 'live-composer-page-builder' ); ?></span>
 		</div><!-- .dslc-module -->
 
 		<?php
@@ -652,7 +652,6 @@ function dslc_filter_content( $content ) {
 
 		// If currently showing a singular post of a post type that supports "post templates"
 		if ( is_singular( $dslc_post_types ) ) {
-
 
 			// Get template ID set for currently shown post
 			$template_id = dslc_st_get_template_ID( get_the_ID() );
@@ -1128,11 +1127,11 @@ function dslc_modules_section_front( $atts, $content = null ) {
 			$output .= '
 				<div class="dslca-modules-section-manage">
 					<div class="dslca-modules-section-manage-inner">
-						<span class="dslca-manage-action dslca-edit-modules-section-hook"><span class="dslca-icon dslc-icon-cog"></span></span>
-						<span class="dslca-manage-action dslca-copy-modules-section-hook"><span class="dslca-icon dslc-icon-copy"></span></span>
-						<span class="dslca-manage-action dslca-move-modules-section-hook"><span class="dslca-icon dslc-icon-move"></span></span>
-						<span class="dslca-manage-action dslca-export-modules-section-hook"><span class="dslca-icon dslc-icon-upload-alt"></span></span>
-						<span class="dslca-manage-action dslca-delete-modules-section-hook"><span class="dslca-icon dslc-icon-remove"></span></span>
+						<span class="dslca-manage-action dslca-edit-modules-section-hook" title="Edit options" ><span class="dslca-icon dslc-icon-cog"></span></span>
+						<span class="dslca-manage-action dslca-copy-modules-section-hook" title="Duplicate" ><span class="dslca-icon dslc-icon-copy"></span></span>
+						<span class="dslca-manage-action dslca-move-modules-section-hook" title="Drag to move" ><span class="dslca-icon dslc-icon-move"></span></span>
+						<span class="dslca-manage-action dslca-export-modules-section-hook" title="Export section code" ><span class="dslca-icon dslc-icon-upload-alt"></span></span>
+						<span class="dslca-manage-action dslca-delete-modules-section-hook" title="Delete" ><span class="dslca-icon dslc-icon-remove"></span></span>
 					</div>
 				</div>
 				<div class="dslca-modules-section-settings">' . dslc_row_get_options_fields( $atts ) . '</div>';
@@ -1176,12 +1175,13 @@ function dslc_modules_area_front( $atts, $content = null ) {
 			$output .= '<div class="dslca-modules-area-manage">
 				<span class="dslca-modules-area-manage-line"></span>
 				<div class="dslca-modules-area-manage-inner">
-					<span class="dslca-manage-action dslca-copy-modules-area-hook"><span class="dslca-icon dslc-icon-copy"></span></span>
-					<span class="dslca-manage-action dslca-move-modules-area-hook"><span class="dslca-icon dslc-icon-move"></span></span>
-					<span class="dslca-manage-action dslca-change-width-modules-area-hook">
+					<span class="dslca-manage-action dslca-copy-modules-area-hook" title="Duplicate" ><span class="dslca-icon dslc-icon-copy"></span></span>
+					<span class="dslca-manage-action dslca-move-modules-area-hook" title="Drag to move" ><span class="dslca-icon dslc-icon-move"></span></span>
+					<span class="dslca-manage-action dslca-change-width-modules-area-hook" title="Change width" >
 						<span class="dslca-icon dslc-icon-columns"></span>
-						<div class="dslca-change-width-modules-area-options">
-							<span data-size="1">1/12</span><span data-size="2">2/12</span>
+						<div class="dslca-change-width-modules-area-options">';
+			$output .= '<span>' . __( 'Container Width', 'live-composer-page-builder' ) . '</span>';
+			$output .= '<span data-size="1">1/12</span><span data-size="2">2/12</span>
 							<span data-size="3">3/12</span><span data-size="4">4/12</span>
 							<span data-size="5">5/12</span><span data-size="6">6/12</span>
 							<span data-size="7">7/12</span><span data-size="8">8/12</span>
@@ -1189,14 +1189,10 @@ function dslc_modules_area_front( $atts, $content = null ) {
 							<span data-size="11">11/12</span><span data-size="12">12/12</span>
 						</div>
 					</span>
-					<span class="dslca-manage-action dslca-delete-modules-area-hook"><span class="dslca-icon dslc-icon-remove"></span></span>
+					<span class="dslca-manage-action dslca-delete-modules-area-hook" title="Delete" ><span class="dslca-icon dslc-icon-remove"></span></span>
 				</div>
 			</div>';
 
-			// No content info
-			$output .= '<div class="dslca-no-content">
-				<span class="dslca-no-content-primary"><span class="dslca-icon dslc-icon-download-alt"></span><span class="dslca-no-content-help-text">' . __( 'Drop modules here', 'live-composer-page-builder' ) . '</span></span>
-			</div>';
 
 			// Loading
 			$output .= '<div class="dslca-module-loading"><div class="dslca-module-loading-inner"></div></div>';

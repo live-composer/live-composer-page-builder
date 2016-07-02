@@ -244,7 +244,7 @@ add_filter( 'dslc_module_options', 'dslc_module_options_func', 1 );
  * @param  string $hexcolor Color to analyze.
  * @return string 'black' or 'white' depending on contrast.
  */
-function get_contrast_bw( $hexcolor ) {
+function dslc_get_contrast_bw( $hexcolor ) {
 
 	$r = hexdec( substr( $hexcolor, 0, 2 ) );
 	$g = hexdec( substr( $hexcolor, 2, 4 ) );
@@ -255,7 +255,7 @@ function get_contrast_bw( $hexcolor ) {
 	return ( $yiq >= 128 ) ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)';
 }
 
-function RGBToHex( $rgb ) {
+function dslc_rgbtohex( $rgb ) {
 
 	preg_match_all( '/\d+/', $rgb, $matches );
 

@@ -35,9 +35,9 @@ class DSLC_Module_Area extends DSLC_Container{
 				$output .= '<div class="dslca-modules-area-manage">
 					<span class="dslca-modules-area-manage-line"></span>
 					<div class="dslca-modules-area-manage-inner">
-						<span class="dslca-manage-action dslca-copy-modules-area-hook"><span class="dslca-icon dslc-icon-copy"></span></span>
-						<span class="dslca-manage-action dslca-move-modules-area-hook"><span class="dslca-icon dslc-icon-move"></span></span>
-						<span class="dslca-manage-action dslca-change-width-modules-area-hook">
+						<span class="dslca-manage-action dslca-copy-modules-area-hook" title="Duplicate" ><span class="dslca-icon dslc-icon-copy"></span></span>
+						<span class="dslca-manage-action dslca-move-modules-area-hook" title="Drag to move" ><span class="dslca-icon dslc-icon-move"></span></span>
+						<span class="dslca-manage-action dslca-change-width-modules-area-hook" title="Change width" >
 							<span class="dslca-icon dslc-icon-columns"></span>
 							<div class="dslca-change-width-modules-area-options">
 								<span data-size="1">1/12</span><span data-size="2">2/12</span>
@@ -48,13 +48,8 @@ class DSLC_Module_Area extends DSLC_Container{
 								<span data-size="11">11/12</span><span data-size="12">12/12</span>
 							</div>
 						</span>
-						<span class="dslca-manage-action dslca-delete-modules-area-hook"><span class="dslca-icon dslc-icon-remove"></span></span>
+						<span class="dslca-manage-action dslca-delete-modules-area-hook" title="Delete" ><span class="dslca-icon dslc-icon-remove"></span></span>
 					</div>
-				</div>';
-
-				// No content info
-				$output .= '<div class="dslca-no-content">
-					<span class="dslca-no-content-primary"><span class="dslca-icon dslc-icon-download-alt"></span><span class="dslca-no-content-help-text">' . __( 'Drop modules here', 'live-composer-page-builder' ) . '</span></span>
 				</div>';
 
 				// Loading

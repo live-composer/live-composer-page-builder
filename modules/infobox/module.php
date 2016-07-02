@@ -2715,7 +2715,7 @@ class DSLC_Info_Box extends DSLC_Module {
 										<div class="dslca-editable-content medium-editor" data-id="content" contenteditable>
 											<?php echo stripslashes( $options['content'] ); ?>
 										</div><!-- .dslca-editable-content -->
-										<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook"><?php _e( 'Edit Content', 'live-composer-page-builder' ); ?></span></div>
+										<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook"><?php _e( 'Open in WP Editor', 'live-composer-page-builder' ); ?></span></div>
 									<?php else : ?>
 										<?php echo do_shortcode( stripslashes( $options['content'] ) ); ?>
 									<?php endif; ?>

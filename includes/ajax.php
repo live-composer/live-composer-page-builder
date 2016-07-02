@@ -52,9 +52,9 @@ function dslc_ajax_add_modules_section( $atts ) {
 						<div class="dslc-modules-area-inner">
 							<div class="dslca-modules-area-manage">
 								<div class="dslca-modules-area-manage-inner">
-									<span class="dslca-manage-action dslca-copy-modules-area-hook"><span class="dslca-icon dslc-icon-copy"></span></span>
-									<span class="dslca-manage-action dslca-move-modules-area-hook"><span class="dslca-icon dslc-icon-move"></span></span>
-									<span class="dslca-manage-action dslca-change-width-modules-area-hook">
+									<span class="dslca-manage-action dslca-copy-modules-area-hook" title="Duplicate" ><span class="dslca-icon dslc-icon-copy"></span></span>
+									<span class="dslca-manage-action dslca-move-modules-area-hook" title="Drag to move" ><span class="dslca-icon dslc-icon-move"></span></span>
+									<span class="dslca-manage-action dslca-change-width-modules-area-hook" title="Change width" >
 										<span class="dslca-icon dslc-icon-columns"></span>
 										<div class="dslca-change-width-modules-area-options">
 											<span data-size="1">1/12</span><span data-size="2">2/12</span>
@@ -65,23 +65,21 @@ function dslc_ajax_add_modules_section( $atts ) {
 											<span data-size="11">11/12</span><span data-size="12">12/12</span>
 										</div>
 									</span>
-									<span class="dslca-manage-action dslca-delete-modules-area-hook"><span class="dslca-icon dslc-icon-remove"></span></span>
+									<span class="dslca-manage-action dslca-delete-modules-area-hook" title="Delete" ><span class="dslca-icon dslc-icon-remove"></span></span>
 								</div>
 							</div>
-							<div class="dslca-no-content">
-								<span class="dslca-no-content-primary"><span class="dslca-icon dslc-icon-download-alt"></span><span class="dslca-no-content-help-text">' . __( 'Drop modules here', 'live-composer-page-builder' ) . '</span></span>
-							</div>
+							
 							<div class="dslca-module-loading"><div class="dslca-module-loading-inner"></div></div>
 						</div>
 					</div>
 				</div><!-- .dslc-module-section-inner -->
 				<div class="dslca-modules-section-manage">
 					<div class="dslca-modules-section-manage-inner">
-						<span class="dslca-manage-action dslca-edit-modules-section-hook"><span class="dslca-icon dslc-icon-cog"></span></span>
-						<span class="dslca-manage-action dslca-copy-modules-section-hook"><span class="dslca-icon dslc-icon-copy"></span></span>
-						<span class="dslca-manage-action dslca-move-modules-section-hook"><span class="dslca-icon dslc-icon-move"></span></span>
-						<span class="dslca-manage-action dslca-export-modules-section-hook"><span class="dslca-icon dslc-icon-upload-alt"></span></span>
-						<span class="dslca-manage-action dslca-delete-modules-section-hook"><span class="dslca-icon dslc-icon-remove"></span></span>
+						<span class="dslca-manage-action dslca-edit-modules-section-hook" title="Edit options" ><span class="dslca-icon dslc-icon-cog"></span></span>
+						<span class="dslca-manage-action dslca-copy-modules-section-hook" title="Duplicate" ><span class="dslca-icon dslc-icon-copy"></span></span>
+						<span class="dslca-manage-action dslca-move-modules-section-hook" title="Drag to move" ><span class="dslca-icon dslc-icon-move"></span></span>
+						<span class="dslca-manage-action dslca-export-modules-section-hook" title="Export section code" ><span class="dslca-icon dslc-icon-upload-alt"></span></span>
+						<span class="dslca-manage-action dslca-delete-modules-section-hook" title="Delete" ><span class="dslca-icon dslc-icon-remove"></span></span>
 					</div>
 				</div>
 				<div class="dslca-modules-section-settings">' . dslc_row_get_options_fields() . '</div><!-- .dslca-module-section-settings -->
@@ -127,9 +125,9 @@ function dslc_ajax_add_modules_area( $atts ) {
 		$output = '<div class="dslc-modules-area dslc-col dslc-12-col" data-size="12">
 			<div class="dslca-modules-area-manage">
 				<div class="dslca-modules-area-manage-inner">
-					<span class="dslca-manage-action dslca-copy-modules-area-hook"><span class="dslca-icon dslc-icon-copy"></span></span>
-					<span class="dslca-manage-action dslca-move-modules-area-hook"><span class="dslca-icon dslc-icon-move"></span></span>
-					<span class="dslca-manage-action dslca-change-width-modules-area-hook">
+					<span class="dslca-manage-action dslca-copy-modules-area-hook" title="Duplicate" ><span class="dslca-icon dslc-icon-copy"></span></span>
+					<span class="dslca-manage-action dslca-move-modules-area-hook" title="Drag to move" ><span class="dslca-icon dslc-icon-move"></span></span>
+					<span class="dslca-manage-action dslca-change-width-modules-area-hook" title="Change width" >
 						<span class="dslca-icon dslc-icon-columns"></span>
 						<div class="dslca-change-width-modules-area-options">
 							<span data-size="1">1/12</span><span data-size="2">2/12</span>
@@ -140,12 +138,10 @@ function dslc_ajax_add_modules_area( $atts ) {
 							<span data-size="11">11/12</span><span data-size="12">12/12</span>
 						</div>
 					</span>
-					<span class="dslca-manage-action dslca-delete-modules-area-hook"><span class="dslca-icon dslc-icon-remove"></span></span>
+					<span class="dslca-manage-action dslca-delete-modules-area-hook" title="Delete" ><span class="dslca-icon dslc-icon-remove"></span></span>
 				</div>
 			</div>
-			<div class="dslca-no-content">
-				<span class="dslca-no-content-primary"><span class="dslca-icon dslc-icon-download-alt"></span><span class="dslca-no-content-help-text">' . __( 'Drop modules here', 'live-composer-page-builder' ) . '</span></span>
-			</div>
+
 			<div class="dslca-module-loading"><div class="dslca-module-loading-inner"></div></div>
 		</div>';
 
@@ -171,7 +167,6 @@ function dslc_ajax_add_modules_area( $atts ) {
  *
  * @since 1.0
  */
-
 function dslc_ajax_add_module( $atts ) {
 
 	// Allowed to do this?
@@ -191,77 +186,96 @@ function dslc_ajax_add_module( $atts ) {
 			$preload_preset = 'disabled';
 		}
 
-		// If post ID is not numberic stop execution
-		if ( ! is_numeric( $post_id ) )
+		// If post ID is not numberic stop execution?
+		if ( ! is_numeric( $post_id ) ) {
 			return;
+		}
 
 		/**
 		 * The instance ID for this specific module
 		 */
 
-		// If it is not a new module ( already has ID )
+		// If it is not a new module ( already has ID )?
 		if ( isset( $_POST['dslc_module_instance_id'] ) ) {
 
 			$module_instance_id = $_POST['dslc_module_instance_id'];
 
-		// If it is a new module ( no ID )
+		// If it is a new module ( no ID )?
 		} else {
 
-			// Get current count
+			// Get current count.
 			$module_id_count = get_option( 'dslc_module_id_count' );
 
-			// If not the first one
+			// If not the first one?
 			if ( $module_id_count ) {
 
-				// Increment by one
+				// Increment by one.
 				$module_instance_id = $module_id_count + 1;
 
-				// Update the count
+				// Update the count.
 				update_option( 'dslc_module_id_count', $module_instance_id );
 
-			// If it is the first one
+			// If it is the first one?
 			} else {
 
-				// Set 1 as the ID
+				// Set 1 as the ID.
 				$module_instance_id = 1;
 
-				// Update the count
+				// Update the count.
 				update_option( 'dslc_module_id_count', $module_instance_id );
 
 			}
-
 		}
 
-		// If module instance ID not numeric stop execution
-		if ( ! is_numeric( $module_instance_id ) )
+		// If module instance ID not numeric stop execution?
+		if ( ! is_numeric( $module_instance_id ) ) {
 			return;
+		}
 
 		// Instanciate the module class.
 		$module_instance = new $module_id();
 
-		// Generate settings
+		// Generate settings.
+		// Array $all_opts - has a structure of the module setting (not actual data).
 		$all_opts = $module_instance->options();
+
+		/**
+		 * Array $module_settings - has all the module settings (actual data).
+		 * Ex.: [css_bg_color] => rgb(184, 61, 61).
+		 *
+		 * Function dslc_module_settings form the module settings array
+		 * based on default settings + current settings.
+		 *
+		 * Function dslc_module_settings get current module settings
+		 * form $_POST[ $option['id'] ].
+		 */
 		$module_settings = dslc_module_settings( $all_opts );
 
-		// Append ID to settings
+		// Append ID to settings.
 		$module_settings['module_instance_id'] = $module_instance_id;
 
-		// Append post ID to settings
+		// Append post ID to settings.
 		$module_settings['post_id'] = $post_id;
 
-		// Start output fetching
+		// Start output fetching.
 		ob_start();
 
-		// Load preset if there was no preset before
-		if ( $preload_preset == 'enabled' )
-			$module_settings = apply_filters( 'dslc_filter_settings', $module_settings );
+		// Load preset if there was no preset before.
+		if ( $preload_preset == 'enabled' ) {
 
-		// Transform image ID to URL
+			$module_settings = apply_filters( 'dslc_filter_settings', $module_settings );
+		}
+
+		// Transform image ID to URL.
 		global $dslc_var_image_option_bckp;
 		$dslc_var_image_option_bckp = array();
+
 		foreach ( $all_opts as $all_opt ) {
+
 			if ( $all_opt['type'] == 'image' ) {
+
 				if ( isset( $module_settings[$all_opt['id']] ) && ! empty( $module_settings[$all_opt['id']] ) && is_numeric( $module_settings[$all_opt['id']] ) ) {
+
 					$dslc_var_image_option_bckp[$all_opt['id']] = $module_settings[$all_opt['id']];
 					$image_info = wp_get_attachment_image_src( $module_settings[$all_opt['id']], 'full' );
 					$module_settings[$all_opt['id']] = $image_info[0];
@@ -269,30 +283,33 @@ function dslc_ajax_add_module( $atts ) {
 			}
 		}
 
-		// Module size
-		if ( isset( $_POST['dslc_m_size'] ) )
-			$module_settings['dslc_m_size'] = $_POST['dslc_m_size'];
-		else
-			$module_settings['dslc_m_size'] = '12';
+		// Module size.
+		if ( isset( $_POST['dslc_m_size'] ) ) {
 
-		// Output
+			$module_settings['dslc_m_size'] = $_POST['dslc_m_size'];
+		} else {
+
+			$module_settings['dslc_m_size'] = '12';
+		}
+
+		// Output.
 		$module_instance->output( $module_settings );
 
-		// Get the output and stop fetching
+		// Get the output and stop fetching.
 		$output = ob_get_contents();
 		ob_end_clean();
 
-		// Set the output
+		// Set the output.
 		$response['output'] = $output;
 
-		// Encode response
+		// Encode response.
 		$response_json = json_encode( $response );
 
-		// Send the response
+		// Send the response.
 		header( "Content-Type: application/json" );
 		echo $response_json;
 
-		// Good night
+		// Good night.
 		exit;
 
 	}
@@ -510,7 +527,6 @@ function dslc_ajax_display_module_options( $atts ) {
 						?>
 						<?php if ( $module_option['type'] == 'icon' ): ?>
 							<span class="dslca-module-edit-field-icon-ttip-hook"><span class="dslca-icon dslc-icon-info"></span></span>
-							<span class="dslca-module-edit-field-icon-switch-set"><span class="dslca-module-edit-field-icon-curr-set"><?php echo dslc_icons_current_set( $curr_value ); ?></span><span class="dslca-icon dslc-icon-cog"></span></span>
 						<?php endif; ?>
 						<?php if ( isset( $module_option['help'] ) ) : ?>
 							<span class="dslca-module-edit-field-ttip-hook"><span class="dslca-icon dslc-icon-info"></span></span>
@@ -545,7 +561,7 @@ function dslc_ajax_display_module_options( $atts ) {
 
 							// Determined brakepoints
 							$chck_amount = count( $module_option['choices'] );
-							$chck_breakpoint = ceil( $chck_amount / 1 );
+							// $chck_breakpoint = ceil( $chck_amount / 1 );
 							$chck_count = 0;
 
 						?>
@@ -556,7 +572,7 @@ function dslc_ajax_display_module_options( $atts ) {
 									<span class="dslca-module-edit-option-checkbox-hook"><span class="dslca-icon <?php if ( in_array( $checkbox_option['value'], $curr_value ) ) echo 'dslc-icon-check'; else echo 'dslc-icon-check-empty'; ?>"></span><?php echo $checkbox_option['label']; ?></span>
 									<input type="checkbox" class="dslca-module-edit-field dslca-module-edit-field-checkbox" data-id="<?php echo $module_option['id']; ?>" name="<?php echo $module_option['id']; ?>" value="<?php echo $checkbox_option['value']; ?>" <?php if ( in_array( $checkbox_option['value'], $curr_value ) ) echo 'checked="checked"'; ?> <?php echo $affect_on_change_append ?> />
 								</div><!-- .dslca-module-edit-option-checkbox-single -->
-								<?php if ( $chck_count == $chck_breakpoint ) { echo '<br>'; $chck_count = 0; } ?>
+								<?php /* if ( $chck_count == $chck_breakpoint ) { echo '<br>'; $chck_count = 0; } */?>
 							<?php endforeach; ?>
 						</div><!-- .dslca-module-edit-option-checkbox-wrapper -->
 
@@ -587,10 +603,10 @@ function dslc_ajax_display_module_options( $atts ) {
 
 								if ( ! strpos( $curr_value, '#' ) ) {
 
-									$text_color_value = RGBToHex( $text_color_value );
+									$text_color_value =dslc_rgbtohex( $text_color_value );
 								}
 
-								$color = getContrastYIQ( $text_color_value );
+								$color = dslc_get_contrast_bw( $text_color_value );
 
 								$style = ' style="background: ' . $curr_value . '; color: ' . $color . '"';
 							}
@@ -624,6 +640,7 @@ function dslc_ajax_display_module_options( $atts ) {
 						<?php if ( 'slider' === $numeric_option_type  ) : ?>
 
 							<input type="number" class="dslca-module-edit-field dslca-module-edit-field-slider-input" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" data-affect-on-change-el="<?php echo $module_option['affect_on_change_el']; ?>" data-affect-on-change-rule="<?php echo $module_option['affect_on_change_rule']; ?>" data-min="<?php echo $slider_min; ?>" data-max="<?php echo $slider_max; ?>" data-ext="<?php echo $ext; ?>" data-increment="<?php echo $slider_increment; ?>" />
+							<span class="dslca-module-edit-field-numeric-ext"><?php echo $module_option['ext']; ?></span>
 						<?php else : ?>
 
 							<div class="dslca-module-edit-field-numeric-wrap">
@@ -650,6 +667,8 @@ function dslc_ajax_display_module_options( $atts ) {
 							<span class="dslca-module-edit-field-icon-suggest"></span>
 						</div>
 						<span class="dslca-options-iconbutton dslca-open-modal-hook" data-modal=".dslc-list-icons-fontawesome"><span class="dslca-icon dslc-icon-th"></span></span>
+						<span class="dslca-module-edit-field-icon-switch-set"><span class="dslca-icon dslc-icon-cog"></span> <span class="dslca-module-edit-field-icon-curr-set"><?php echo dslc_icons_current_set( $curr_value ); ?></span></span>
+
 
 					<?php elseif ( $module_option['type'] == 'image' ) : ?>
 

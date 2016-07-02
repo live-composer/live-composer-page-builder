@@ -752,7 +752,7 @@ class DSLC_Notification extends DSLC_Module {
 					?>
 				</div>
 				<?php if ( $dslc_active ) : ?>
-					<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook"><?php _e( 'Edit Content', 'live-composer-page-builder' ); ?></span></div>
+					<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook"><?php _e( 'Open in WP Editor', 'live-composer-page-builder' ); ?></span></div>
 				<?php endif; ?>
 				<span class="dslc-notification-box-close"><span class="dslc-icon dslc-icon-remove dslc-init-center"></span></span>
 			</div><!-- .dslc-notification-box -->
