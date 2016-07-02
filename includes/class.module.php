@@ -305,6 +305,10 @@ class DSLC_Module {
 			array(
 				'label' => 'Border Width',
 				'id' => 'css_filter_border_width',
+				'min' => 0,
+				'max' => 10,
+				'increment' => 1,
+				
 				'std' => '1',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -346,11 +350,17 @@ class DSLC_Module {
 			array(
 				'label' => 'Border Radius',
 				'id' => 'css_filter_border_radius',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '3',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-post-filter',
 				'affect_on_change_rule' => 'border-radius',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'section' => 'styling',
 				'tab' => 'Filters',
 				'ext' => 'px'
@@ -380,6 +390,9 @@ class DSLC_Module {
 			array(
 				'label' => 'Font Size',
 				'id' => 'css_filter_font_size',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '11',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -453,6 +466,9 @@ class DSLC_Module {
 			array(
 				'label' => 'Padding Vertical',
 				'id' => 'css_filter_padding_vertical',
+				'min' => 0,
+				'max' => 600,
+				'increment' => 1,
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -465,6 +481,9 @@ class DSLC_Module {
 			array(
 				'label' => 'Padding Horizontal',
 				'id' => 'css_filter_padding_horizontal',
+				'min' => 0,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -500,6 +519,9 @@ class DSLC_Module {
 			array(
 				'label' => 'Margin Bottom',
 				'id' => 'css_filter_margin_bottom',
+				'min' => -1000,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '20',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -517,6 +539,9 @@ class DSLC_Module {
 			array(
 				'label' => 'Filters - Font Size',
 				'id' => 'css_res_t_filter_font_size',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '11',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -529,6 +554,9 @@ class DSLC_Module {
 			array(
 				'label' => 'Filters - Padding Vertical',
 				'id' => 'css_res_t_filter_padding_vertical',
+				'min' => 0,
+				'max' => 600,
+				'increment' => 1,
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -541,6 +569,9 @@ class DSLC_Module {
 			array(
 				'label' => 'Filters - Padding Horizontal',
 				'id' => 'css_res_t_filter_padding_horizontal',
+				'min' => 0,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -565,6 +596,9 @@ class DSLC_Module {
 			array(
 				'label' => 'Filters - Margin Bottom',
 				'id' => 'css_res_t_filter_margin_bottom',
+				'min' => -1000,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '20',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -582,6 +616,9 @@ class DSLC_Module {
 					array(
 				'label' => 'Filters - Font Size',
 				'id' => 'css_res_p_filter_font_size',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '11',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -594,6 +631,9 @@ class DSLC_Module {
 			array(
 				'label' => 'Filters - Padding Vertical',
 				'id' => 'css_res_p_filter_padding_vertical',
+				'min' => 0,
+				'max' => 600,
+				'increment' => 1,
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -606,6 +646,9 @@ class DSLC_Module {
 			array(
 				'label' => 'Filters - Padding Horizontal',
 				'id' => 'css_res_p_filter_padding_horizontal',
+				'min' => 0,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -630,6 +673,9 @@ class DSLC_Module {
 			array(
 				'label' => 'Filters - Margin Bottom',
 				'id' => 'css_res_p_filter_margin_bottom',
+				'min' => -1000,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '20',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -677,6 +723,9 @@ class DSLC_Module {
 			array(
 				'label' => 'Title - Font Size',
 				'id' => 'css_main_heading_font_size',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '17',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -750,6 +799,9 @@ class DSLC_Module {
 			array(
 				'label' => __( 'Title - Letter Spacing', 'live-composer-page-builder' ),
 				'id' => 'css_main_heading_letter_spacing',
+				'min' => 0,
+				'max' => 30,
+				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -764,6 +816,9 @@ class DSLC_Module {
 			array(
 				'label' => 'Title - Line Height',
 				'id' => 'css_main_heading_line_height',
+				'min' => 0,
+				'max' => 120,
+				'increment' => 1,
 				'std' => '37',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -800,6 +855,9 @@ class DSLC_Module {
 			array(
 				'label' => 'Link - Font Size',
 				'id' => 'css_main_heading_link_font_size',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '11',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -873,6 +931,9 @@ class DSLC_Module {
 			array(
 				'label' => __( 'Link - Letter Spacing', 'live-composer-page-builder' ),
 				'id' => 'css_main_heading_link_letter_spacing',
+				'min' => 0,
+				'max' => 30,
+				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -944,6 +1005,9 @@ class DSLC_Module {
 			array(
 				'label' => 'Margin Bottom',
 				'id' => 'css_heading_margin_bottom',
+				'min' => -1000,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '20',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -961,6 +1025,9 @@ class DSLC_Module {
 			array(
 				'label' => 'Heading - Font Size',
 				'id' => 'css_res_t_main_heading_font_size',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '17',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -973,6 +1040,9 @@ class DSLC_Module {
 			array(
 				'label' => 'Heading - Line Height',
 				'id' => 'css_res_t_main_heading_line_height',
+				'min' => 0,
+				'max' => 120,
+				'increment' => 1,
 				'std' => '37',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -985,6 +1055,9 @@ class DSLC_Module {
 			array(
 				'label' => 'Heading Link - Font Size',
 				'id' => 'css_res_t_main_heading_link_font_size',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '11',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1009,6 +1082,9 @@ class DSLC_Module {
 			array(
 				'label' => 'Heading - Margin Bottom',
 				'id' => 'css_res_t_heading_margin_bottom',
+				'min' => -1000,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '20',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1026,6 +1102,9 @@ class DSLC_Module {
 			array(
 				'label' => 'Heading - Font Size',
 				'id' => 'css_res_p_main_heading_font_size',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '17',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1038,6 +1117,9 @@ class DSLC_Module {
 			array(
 				'label' => 'Heading - Line Height',
 				'id' => 'css_res_p_main_heading_line_height',
+				'min' => 0,
+				'max' => 120,
+				'increment' => 1,
 				'std' => '37',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1050,6 +1132,9 @@ class DSLC_Module {
 			array(
 				'label' => 'Heading Link - Font Size',
 				'id' => 'css_res_p_main_heading_link_font_size',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '11',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1074,6 +1159,9 @@ class DSLC_Module {
 			array(
 				'label' => 'Heading - Margin Bottom',
 				'id' => 'css_res_p_heading_margin_bottom',
+				'min' => -1000,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '20',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1147,6 +1235,10 @@ class DSLC_Module {
 			array(
 				'label' => 'Border Width',
 				'id' => 'css_arrows_border_width',
+				'min' => 0,
+				'max' => 10,
+				'increment' => 1,
+				
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1159,11 +1251,17 @@ class DSLC_Module {
 			array(
 				'label' => 'Border Radius',
 				'id' => 'css_arrows_border_radius',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '3',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-carousel-nav-prev,.dslc-carousel-nav-next',
 				'affect_on_change_rule' => 'border-radius',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'section' => 'styling',
 				'tab' => 'Carousel Arrows',
 				'ext' => 'px'
@@ -1193,6 +1291,9 @@ class DSLC_Module {
 			array(
 				'label' => 'Margin Top',
 				'id' => 'css_arrows_margin_top',
+				'min' => -1000,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '6',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1229,6 +1330,9 @@ class DSLC_Module {
 			array(
 				'label' => 'Margin Bottom',
 				'id' => 'css_arrows_margin_bottom',
+				'min' => -1000,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '20',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1280,6 +1384,9 @@ class DSLC_Module {
 			array(
 				'label' => 'Margin Top',
 				'id' => 'css_circles_margin_top',
+				'min' => -1000,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '20',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1392,6 +1499,10 @@ class DSLC_Module {
 			array(
 				'label' => 'Container - Border Width',
 				'id' => 'css_pag_border_width',
+				'min' => 0,
+				'max' => 10,
+				'increment' => 1,
+				
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1433,11 +1544,17 @@ class DSLC_Module {
 			array(
 				'label' => 'Container - Border Radius',
 				'id' => 'css_pag_border_radius',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-pagination',
 				'affect_on_change_rule' => 'border-radius',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'section' => 'styling',
 				'tab' => 'Pagination',
 				'ext' => 'px'
@@ -1445,6 +1562,9 @@ class DSLC_Module {
 			array(
 				'label' => 'Container - Padding Vertical',
 				'id' => 'css_pag_padding_vertical',
+				'min' => 0,
+				'max' => 600,
+				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1457,6 +1577,9 @@ class DSLC_Module {
 			array(
 				'label' => 'Container - Padding Horizontal',
 				'id' => 'css_pag_padding_horizontal',
+				'min' => 0,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1514,6 +1637,10 @@ class DSLC_Module {
 			array(
 				'label' => 'Item - Border Width',
 				'id' => 'css_pag_item_border_width',
+				'min' => 0,
+				'max' => 10,
+				'increment' => 1,
+				
 				'std' => '1',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1567,11 +1694,17 @@ class DSLC_Module {
 			array(
 				'label' => 'Item - Border Radius',
 				'id' => 'css_pag_item_border_radius',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '3',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-pagination li a',
 				'affect_on_change_rule' => 'border-radius',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'section' => 'styling',
 				'tab' => 'Pagination',
 				'ext' => 'px'
@@ -1601,6 +1734,9 @@ class DSLC_Module {
 			array(
 				'label' => 'Item - Font Size',
 				'id' => 'css_pag_item_font_size',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '11',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1674,6 +1810,9 @@ class DSLC_Module {
 			array(
 				'label' => __( 'Item - Letter Spacing', 'live-composer-page-builder' ),
 				'id' => 'css_pag_item_letter_spacing',
+				'min' => 0,
+				'max' => 30,
+				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1688,6 +1827,9 @@ class DSLC_Module {
 			array(
 				'label' => 'Item - Padding Vertical',
 				'id' => 'css_pag_item_padding_vertical',
+				'min' => 0,
+				'max' => 600,
+				'increment' => 1,
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1700,6 +1842,9 @@ class DSLC_Module {
 			array(
 				'label' => 'Item - Padding Horizontal',
 				'id' => 'css_pag_item_padding_horizontal',
+				'min' => 0,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,

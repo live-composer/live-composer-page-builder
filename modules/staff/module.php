@@ -306,6 +306,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_margin_bottom',
+				'min' => -1000,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -460,6 +463,10 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_thumb_border_width',
+				'min' => 0,
+				'max' => 10,
+				'increment' => 1,
+				
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -501,11 +508,17 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Border Radius - Top', 'live-composer-page-builder' ),
 				'id' => 'css_thumbnail_border_radius_top',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '4',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-staff-member-thumb-inner, .dslc-staff-member-thumb img',
 				'affect_on_change_rule' => 'border-top-left-radius,border-top-right-radius',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'section' => 'styling',
 				'tab' => __( 'Thumbnail', 'live-composer-page-builder' ),
 				'ext' => 'px'
@@ -513,11 +526,17 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Border Radius - Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_thumbnail_border_radius_bottom',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-staff-member-thumb-inner, .dslc-staff-member-thumb img',
 				'affect_on_change_rule' => 'border-bottom-left-radius,border-bottom-right-radius',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'section' => 'styling',
 				'tab' => __( 'Thumbnail', 'live-composer-page-builder' ),
 				'ext' => 'px'
@@ -525,6 +544,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_thumbnail_margin_bottom',
+				'min' => -1000,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -537,6 +559,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_thumbnail_padding_vertical',
+				'min' => 0,
+				'max' => 600,
+				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -549,6 +574,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Padding Horizontal', 'live-composer-page-builder' ),
 				'id' => 'css_thumbnail_padding_horizontal',
+				'min' => 0,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -624,6 +652,10 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_social_border_width',
+				'min' => 0,
+				'max' => 10,
+				'increment' => 1,
+				
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -665,11 +697,17 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Border Radius - Top', 'live-composer-page-builder' ),
 				'id' => 'css_social_border_radius_top',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-staff-member-social',
 				'affect_on_change_rule' => 'border-top-left-radius,border-top-right-radius',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'section' => 'styling',
 				'tab' => __( 'Social', 'live-composer-page-builder' ),
 				'ext' => 'px'
@@ -677,11 +715,17 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Border Radius - Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_social_border_radius_bottom',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-staff-member-social',
 				'affect_on_change_rule' => 'border-bottom-left-radius,border-bottom-right-radius',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'section' => 'styling',
 				'tab' => __( 'Social', 'live-composer-page-builder' ),
 				'ext' => 'px'
@@ -689,6 +733,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_social_margin_bottom',
+				'min' => -1000,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -701,6 +748,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_social_padding_vertical',
+				'min' => 0,
+				'max' => 600,
+				'increment' => 1,
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -713,6 +763,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Padding Horizontal', 'live-composer-page-builder' ),
 				'id' => 'css_social_padding_horizontal',
+				'min' => 0,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -736,6 +789,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Icon - Size', 'live-composer-page-builder' ),
 				'id' => 'css_social_font_size',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '13',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -797,6 +853,10 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_main_border_width',
+				'min' => 0,
+				'max' => 10,
+				'increment' => 1,
+				
 				'std' => '1',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -838,11 +898,17 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Border Radius - Top', 'live-composer-page-builder' ),
 				'id' => 'css_main_border_radius_top',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-staff-member-main',
 				'affect_on_change_rule' => 'border-top-left-radius,border-top-right-radius',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'section' => 'styling',
 				'tab' => __( 'Main', 'live-composer-page-builder' ),
 				'ext' => 'px'
@@ -850,11 +916,17 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Border Radius - Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_main_border_radius_bottom',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '4',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-staff-member-main',
 				'affect_on_change_rule' => 'border-bottom-left-radius,border-bottom-right-radius',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'section' => 'styling',
 				'tab' => __( 'Main', 'live-composer-page-builder' ),
 				'ext' => 'px'
@@ -876,6 +948,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_main_padding_vertical',
+				'min' => 0,
+				'max' => 600,
+				'increment' => 1,
 				'std' => '31',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -888,6 +963,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Padding Horizontal', 'live-composer-page-builder' ),
 				'id' => 'css_main_padding_horizontal',
+				'min' => 0,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '36',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -946,6 +1024,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Margin', 'live-composer-page-builder' ),
 				'id' => 'css_main_inner_margin',
+				'min' => -1000,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -998,6 +1079,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_title_font_size',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '14',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1071,6 +1155,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Line Height', 'live-composer-page-builder' ),
 				'id' => 'css_title_line_height',
+				'min' => 0,
+				'max' => 120,
+				'increment' => 1,
 				'std' => '14',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1083,6 +1170,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_title_margin_bottom',
+				'min' => -1000,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '23',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1140,6 +1230,10 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_position_border_width',
+				'min' => 0,
+				'max' => 10,
+				'increment' => 1,
+				
 				'std' => '1',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1192,6 +1286,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_position_font_size',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1286,6 +1383,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_position_margin_bottom',
+				'min' => -1000,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '20',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1298,6 +1398,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_position_padding_vertical',
+				'min' => 0,
+				'max' => 600,
+				'increment' => 1,
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1344,6 +1447,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_excerpt_font_size',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '13',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1417,6 +1523,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Line Height', 'live-composer-page-builder' ),
 				'id' => 'css_excerpt_line_height',
+				'min' => 0,
+				'max' => 120,
+				'increment' => 1,
 				'std' => '23',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1460,6 +1569,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_margin_bottom',
+				'min' => -1000,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1486,6 +1598,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Thumbnail - Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_thumbnail_margin_bottom',
+				'min' => -1000,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1498,6 +1613,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Thumbnail - Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_thumbnail_padding_vertical',
+				'min' => 0,
+				'max' => 600,
+				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1510,6 +1628,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Thumbnail - Padding Horizontal', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_thumbnail_padding_horizontal',
+				'min' => 0,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1522,6 +1643,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Social - Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_social_margin_bottom',
+				'min' => -1000,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1534,6 +1658,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Social - Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_social_padding_vertical',
+				'min' => 0,
+				'max' => 600,
+				'increment' => 1,
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1546,6 +1673,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Social - Padding Horizontal', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_social_padding_horizontal',
+				'min' => 0,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1558,6 +1688,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Social Icon - Size', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_social_font_size',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '13',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1570,6 +1703,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Main - Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_main_padding_vertical',
+				'min' => 0,
+				'max' => 600,
+				'increment' => 1,
 				'std' => '31',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1582,6 +1718,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Main - Padding Horizontal', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_main_padding_horizontal',
+				'min' => 0,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '36',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1594,6 +1733,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Title - Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_title_font_size',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '14',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1606,6 +1748,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Title - Line Height', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_title_line_height',
+				'min' => 0,
+				'max' => 120,
+				'increment' => 1,
 				'std' => '14',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1618,6 +1763,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Title - Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_title_margin_bottom',
+				'min' => -1000,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '23',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1630,6 +1778,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Position - Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_position_font_size',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1642,6 +1793,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Position - Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_position_margin_bottom',
+				'min' => -1000,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '20',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1654,6 +1808,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Position - Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_position_padding_vertical',
+				'min' => 0,
+				'max' => 600,
+				'increment' => 1,
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1666,6 +1823,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Excerpt - Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_excerpt_font_size',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '13',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1678,6 +1838,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Excerpt - Line Height', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_excerpt_line_height',
+				'min' => 0,
+				'max' => 120,
+				'increment' => 1,
 				'std' => '23',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1713,6 +1876,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_margin_bottom',
+				'min' => -1000,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1739,6 +1905,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Thumbnail - Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_thumbnail_margin_bottom',
+				'min' => -1000,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1751,6 +1920,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Thumbnail - Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_thumbnail_padding_vertical',
+				'min' => 0,
+				'max' => 600,
+				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1763,6 +1935,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Thumbnail - Padding Horizontal', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_thumbnail_padding_horizontal',
+				'min' => 0,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1775,6 +1950,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Social - Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_social_margin_bottom',
+				'min' => -1000,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1787,6 +1965,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Social - Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_social_padding_vertical',
+				'min' => 0,
+				'max' => 600,
+				'increment' => 1,
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1799,6 +1980,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Social - Padding Horizontal', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_social_padding_horizontal',
+				'min' => 0,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1811,6 +1995,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Social Icon - Size', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_social_font_size',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '13',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1823,6 +2010,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Main - Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_main_padding_vertical',
+				'min' => 0,
+				'max' => 600,
+				'increment' => 1,
 				'std' => '31',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1835,6 +2025,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Main - Padding Horizontal', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_main_padding_horizontal',
+				'min' => 0,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '36',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1847,6 +2040,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Title - Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_title_font_size',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '14',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1859,6 +2055,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Title - Line Height', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_title_line_height',
+				'min' => 0,
+				'max' => 120,
+				'increment' => 1,
 				'std' => '14',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1871,6 +2070,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Title - Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_title_margin_bottom',
+				'min' => -1000,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '23',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1883,6 +2085,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Position - Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_position_font_size',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1895,6 +2100,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Position - Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_position_margin_bottom',
+				'min' => -1000,
+				'max' => 1000,
+				'increment' => 1,
 				'std' => '20',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1907,6 +2115,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Position - Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_position_padding_vertical',
+				'min' => 0,
+				'max' => 600,
+				'increment' => 1,
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1919,6 +2130,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Excerpt - Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_excerpt_font_size',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
 				'std' => '13',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1931,6 +2145,9 @@ class DSLC_Staff extends DSLC_Module {
 			array(
 				'label' => __( 'Excerpt - Line Height', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_excerpt_line_height',
+				'min' => 0,
+				'max' => 120,
+				'increment' => 1,
 				'std' => '23',
 				'type' => 'slider',
 				'refresh_on_change' => false,
