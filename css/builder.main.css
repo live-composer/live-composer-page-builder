@@ -1232,8 +1232,8 @@ body {
 */
 
 .dslc-modules-area.dslc-modules-area-empty {
-	margin-top: 15px;
-	margin-bottom: 15px;
+	/*margin-top: 15px;*/
+	margin-bottom: 25px;
 	min-height: 120px;
 
 	/*outline: 2px dashed #5890E5;*/
@@ -2093,6 +2093,7 @@ body.rtl .dslca-modules-area-placeholder {
 
 		.dslca-section-scroller-content {
 			display: inline-block;
+			padding-right: 80px;
 		}
 
 .dslca-section-scroller-fade {
@@ -2105,7 +2106,7 @@ body.rtl .dslca-modules-area-placeholder {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00004799', endColorstr='#5890e5',GradientType=1 );
 	position: absolute;
 	right: 70px;
-	width: 50px;
+	width: 30px;
 	bottom: 0;
 	top: 0;
 }
