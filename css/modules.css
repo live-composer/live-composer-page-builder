@@ -621,7 +621,11 @@
 				}
 
 					#dslc-content .dslc-info-box-image-inner {
-						display: inline-block;
+						/*display: inline-block;*/
+						display: inline-flex;
+						justify-content: center;
+						align-items: center;
+
 						position: relative;
 						border: 0px solid transparent;
 					}
@@ -630,7 +634,7 @@
 							color: #fff;
 							line-height: 1;
 							font-size: 40px;
-							position: absolute;
+							/*position: absolute;*/
 						}
 
 			#dslc-content .dslc-info-box-image-alt-inner img {
@@ -1605,22 +1609,26 @@
 
 		#dslc-content ul.dslc-social a.dslc-social-icon {
 			border: 0 solid transparent;
-			display: block;
+			/*display: block;*/
 			background: #40bde6;
 			text-decoration: none;
 			color: #fff;
 			width: 30px;
 			height: 30px;
 			border-radius: 15px;
-			text-align: center;
+			/*text-align: center;*/
 			font-size: 15px;
 			position: relative;
 			float: left;
+
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
 		}
 
 			#dslc-content ul.dslc-social .dslc-icon {
 				line-height: 1;
-				position: absolute;
+				/*position: absolute;*/
 			}
 
 		#dslc-content ul.dslc-social .dslc-social-label {
@@ -1650,16 +1658,19 @@
 
 		#dslc-content ul.dslc-staff-social a {
 			border: 0 solid transparent;
-			display: block;
+			/*display: block;*/
 			text-decoration: none;
-			text-align: center;
+			/*text-align: center;*/
 			position: relative;
 			float: left;
+
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
 		}
 
 			#dslc-content ul.dslc-staff-social .dslc-icon {
 				line-height: 1;
-				position: absolute;
 			}
 
 		#dslc-content ul.dslc-staff-social .dslc-social-label {

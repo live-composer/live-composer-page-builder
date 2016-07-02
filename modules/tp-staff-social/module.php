@@ -395,10 +395,10 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 			<div class="dslc-tp-staff-social">
 				<ul class="dslc-staff-social">
 					<?php if ( $show_fake ) : ?>
-						<li><a target="_blank" href="#"><span class="dslc-icon dslc-init-center dslc-icon-twitter"></span></a></li>
-						<li><a target="_blank" href="#"><span class="dslc-icon dslc-init-center dslc-icon-facebook"></span></a></li>
-						<li><a target="_blank" href="#"><span class="dslc-icon dslc-init-center dslc-icon-google-plus"></span></a></li>
-						<li><a target="_blank" href="#"><span class="dslc-icon dslc-init-center dslc-icon-linkedin"></span></a></li>
+						<li><a target="_blank" href="#"><span class="dslc-icon dslc-icon-twitter"></span></a></li>
+						<li><a target="_blank" href="#"><span class="dslc-icon dslc-icon-facebook"></span></a></li>
+						<li><a target="_blank" href="#"><span class="dslc-icon dslc-icon-google-plus"></span></a></li>
+						<li><a target="_blank" href="#"><span class="dslc-icon dslc-icon-linkedin"></span></a></li>
 					<?php else : ?>
 						<?php
 							$social_twitter = get_post_meta( get_the_ID(), 'dslc_staff_social_twitter', true );
@@ -407,16 +407,16 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 							$social_linkedin = get_post_meta( get_the_ID(), 'dslc_staff_social_linkedin', true );
 						?>
 						<?php if ( $social_twitter ) : ?>
-							<li><a target="_blank" href="<?php echo $social_twitter; ?>"><span class="dslc-icon dslc-init-center dslc-icon-twitter"></span></a></li>
+							<li><a target="_blank" href="<?php echo $social_twitter; ?>"><span class="dslc-icon dslc-icon-twitter"></span></a></li>
 						<?php endif; ?>
 						<?php if ( $social_facebook ) : ?>
-							<li><a target="_blank" href="<?php echo $social_facebook; ?>"><span class="dslc-icon dslc-init-center dslc-icon-facebook"></span></a></li>
+							<li><a target="_blank" href="<?php echo $social_facebook; ?>"><span class="dslc-icon dslc-icon-facebook"></span></a></li>
 						<?php endif; ?>
 						<?php if ( $social_googleplus ) : ?>
-							<li><a target="_blank" href="<?php echo $social_googleplus; ?>"><span class="dslc-icon dslc-init-center dslc-icon-google-plus"></span></a></li>
+							<li><a target="_blank" href="<?php echo $social_googleplus; ?>"><span class="dslc-icon dslc-icon-google-plus"></span></a></li>
 						<?php endif; ?>
 						<?php if ( $social_linkedin ) : ?>
-							<li><a target="_blank" href="<?php echo $social_linkedin; ?>"><span class="dslc-icon dslc-init-center dslc-icon-linkedin"></span></a></li>
+							<li><a target="_blank" href="<?php echo $social_linkedin; ?>"><span class="dslc-icon dslc-icon-linkedin"></span></a></li>
 						<?php endif; ?>
 					<?php endif; ?>
 				</ul><!-- .dslc-staff-social -->
