@@ -1667,6 +1667,21 @@ var dslcDebug = false;
 		// Set current values
 		jQuery('.dslca-modules-section-edit-field').each(function(){
 
+
+			/**
+			 * Temporary migration from 'wrapped' value to 'wrapper' in ROW type selector
+			 * TODO: delete this block in a few versions as problem do not exists on new installs
+			 *
+			 * @since ver 1.1
+			 */
+			if ( 'type' === jQuery(this).data('id') ) {
+
+				if ( '' === jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="type"]').val() ||
+					  'wrapped' === jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="type"]').val() ) {
+					jQuery('select[data-id="type"]').val('wrapper').change();
+				}
+			}
+
 			if ( jQuery(this).data('id') == 'border-top' ) {
 
 				if ( jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="border"]').val().indexOf('top') >= 0 ) {

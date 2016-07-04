@@ -35,7 +35,7 @@
 					'label' => 'Phone',
 					'value' => 'phone',
 				),
-			)
+			),
 		);
 
 		$dslc_var_row_options['type'] = array(
@@ -257,15 +257,14 @@
 
 		$dslc_var_row_options['border_width'] = array(
 			'id' => 'border_width',
-				'min' => 0,
-				'max' => 10,
-				'increment' => 1,
-				
+			'min' => 0,
+			'max' => 10,
+			'increment' => 1,
 			'std' => '0',
 			'label' => __( 'Border Width', 'live-composer-page-builder' ),
 			'type' => 'slider',
 			'affect_on_change_rule' => 'border-width',
-			'ext' => 'px'
+			'ext' => 'px',
 		);
 
 		$dslc_var_row_options['border_style'] = array(

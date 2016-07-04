@@ -161,25 +161,17 @@ function dslc_display_composer() {
 					<!-- Module Section Edit -->
 
 					<div class="dslca-section dslca-modules-section-edit" data-bg="#5890e5">
-
 						<form class="dslca-modules-section-edit-form">
-
 							<div class="dslca-modules-section-edit-options dslc-clearfix">
-
 								<div class="dslca-modules-section-edit-options-inner">
-
 									<div class="dslca-modules-section-edit-options-wrapper dslc-clearfix">
 
 										<?php dslc_row_display_options(); ?>
 
 									</div><!-- .dslca-modules-section-edit-options-wrapper -->
-
 								</div><!-- .dslca-modules-section-edit-options-inner -->
-
 							</div><!-- .dslca-modules-section-edit-options -->
-
 						</form><!-- .dslca-modules-section-edit-form -->
-
 					</div><!-- .dslca-module-section-edit -->
 
 					<!-- Module Templates -->
@@ -965,7 +957,6 @@ function dslc_module_front( $atts, $settings_raw = null ) {
  *
  * @since 1.0
  */
-
 function dslc_modules_section_front( $atts, $content = null ) {
 
 	global $dslc_active;
