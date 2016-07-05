@@ -24,6 +24,12 @@ function dslc_display_composer() {
 
 	global $dslc_active;
 
+	$screen = get_current_screen();
+
+	if ( $screen->id != 'toplevel_page_livecomposer_editor' ) {
+		return;
+	}
+
 	$dslc_admin_interface_on = apply_filters( 'dslc_admin_interface_on_frontend', true );
 
 	if ( true !== $dslc_admin_interface_on ) {
@@ -34,8 +40,10 @@ function dslc_display_composer() {
 	// Reset the query ( because some devs leave their queries non-reseted ).
 	wp_reset_query();
 
+
 	// Show the composer to users who are allowed to view it.
-	if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) :
+	// $dslc_active &&
+	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) :
 
 		$default_section = dslc_get_option( 'lc_default_opts_section', 'dslc_plugin_options_other' );
 
@@ -418,7 +426,7 @@ function dslc_display_composer() {
 
 	endif;
 
-} add_action( 'wp_footer', 'dslc_display_composer' );
+} add_action( 'admin_footer', 'dslc_display_composer' );
 
 /**
  * Returns array of active modules (false if none)

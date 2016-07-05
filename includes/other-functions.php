@@ -9,7 +9,6 @@
  * dslc_icons_current_set ( Returns the ID of the currently used set based on icon )
  * dslc_get_attachment_alt ( Returnt he ALT attribute for an attachment )
  */
-
 if ( ! class_exists( 'DSLC_Aq_Resize' ) ) {
 
 	/**
@@ -480,3 +479,87 @@ function dslc_admin_int_on() {
 }
 
 add_filter( 'dslc_admin_interface_on', 'dslc_admin_int_on', 1 );
+
+
+/**
+ * ----------------------------------------------------------------------
+ * 
+ */
+
+
+/**
+ * Register all the option pages
+ */
+function dslc_editing_iframe_page() {
+
+	global $dslc_plugin_options;
+
+	// Base 64 encoded SVG image.
+	$icon_svg = dslc_get_menu_svg();
+
+	add_menu_page(
+		__( 'Live Composer Editing', 'live-composer-page-builder' ),
+		__( 'Live Composer Editing', 'live-composer-page-builder' ),
+		'manage_options', // Capability.
+		'livecomposer_editor', // Menu slug.
+		'livecomposer_editor_display', // Callable $function.
+		$icon_svg, // Icon_url.
+		'99.99' // Int $position.
+	);
+
+	remove_menu_page( 'livecomposer_editor', 'livecomposer_editor' );
+
+	// Custom options extension.
+	// global $dslc_options_extender;
+	// $dslc_options_extender->construct_panels();
+
+} add_action( 'admin_menu', 'dslc_editing_iframe_page' );
+
+function livecomposer_editor_display() {
+
+	$screen = get_current_screen();
+
+	if ( $screen->id != 'toplevel_page_livecomposer_editor' ) {
+		return;
+	}
+
+	if(!defined('ABSPATH')) {
+		header('HTTP/1.0 403 Forbidden');
+		exit;
+	}
+
+	$id = isset( $_GET['id'] ) ? $_GET['id'] : 0;
+	$link = get_permalink( $id );
+
+	$link = 'https://lc-gh.dev/drag-and-drop/?dslc=active';
+
+?>
+<style>
+	#wpcontent, #wpbody, #wpbody-content, #page-builder-frame {
+	   height: 100%;
+	   top: 0;
+	   left: 0;
+	   position: fixed;
+	   width: 100%;
+	   margin: 0;
+	   padding: 0;
+	}
+</style>
+<iframe id="page-builder-frame" src="<?php echo esc_url( $link ); ?>"></iframe>
+	<?php
+}
+
+
+function livecomposer_editor_footer_display() {
+	$screen = get_current_screen();
+
+	if ( $screen->id != 'toplevel_page_livecomposer_editor' ) {
+		return;
+	}
+	
+	?>
+	<script type="text/javascript">jQuery('#wpadminbar,#wpfooter,#adminmenuwrap,#adminmenuback,#adminmenumain,#screen-meta').remove();</script>
+	<?php
+}
+
+add_action( 'admin_footer', 'livecomposer_editor_footer_display' );

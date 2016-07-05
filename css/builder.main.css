@@ -3639,6 +3639,9 @@ body.dslc-res-tablet.dslca-enabled::after {
 }
 */
 
+/*
+Disabled responsive preview styling as it doesn't work well with media queries
+
 body.dslc-res-tablet.dslca-enabled,
 body.dslc-res-phone.dslca-enabled {
 	border: 15px solid black;
@@ -3660,6 +3663,7 @@ body.dslc-res-phone.dslca-enabled {
 	max-width: 767px;
 
 }
+*/
 
 .dslca-modules-section-edit-field-colorpicker,
 .dslca-module-edit-field-colorpicker {
