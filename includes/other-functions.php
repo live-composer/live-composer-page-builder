@@ -523,15 +523,12 @@ function livecomposer_editor_display() {
 		return;
 	}
 
-	if(!defined('ABSPATH')) {
+/*
+	if( ! defined( 'ABSPATH' ) ) {
 		header('HTTP/1.0 403 Forbidden');
 		exit;
 	}
-
-	$id = isset( $_GET['id'] ) ? $_GET['id'] : 0;
-	$link = get_permalink( $id );
-
-	$link = 'https://lc-gh.dev/drag-and-drop/?dslc=active';
+*/
 
 ?>
 <style>
@@ -545,7 +542,7 @@ function livecomposer_editor_display() {
 	   padding: 0;
 	}
 </style>
-<iframe id="page-builder-frame" src="<?php echo esc_url( $link ); ?>"></iframe>
+<iframe id="page-builder-frame" src="<?php echo esc_url( 'https://lc-gh.dev/drag-and-drop/?dslc=active' ); ?>"></iframe>
 	<?php
 }
 
@@ -556,7 +553,7 @@ function livecomposer_editor_footer_display() {
 	if ( $screen->id != 'toplevel_page_livecomposer_editor' ) {
 		return;
 	}
-	
+
 	?>
 	<script type="text/javascript">jQuery('#wpadminbar,#wpfooter,#adminmenuwrap,#adminmenuback,#adminmenumain,#screen-meta').remove();</script>
 	<?php
