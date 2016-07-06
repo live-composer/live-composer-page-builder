@@ -189,7 +189,7 @@ function dslc_ajax_add_module( $atts ) {
 			$preload_preset = 'disabled';
 		}
 
-		// If post ID is not numberic stop execution?
+		// If post ID is not numeric stop execution?
 		if ( ! is_numeric( $post_id ) ) {
 			return;
 		}

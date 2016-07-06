@@ -443,7 +443,7 @@ var dslcDebug = true;
 		});
 
 		// Modules Area – Drag & Drop – Receive Elements Inside
-
+/*
 		//After frame loaded
     	jQuery("#page-builder-frame").load(function() {
 
@@ -552,10 +552,10 @@ var dslcDebug = true;
 				}
 			});
 
-
-
-
 		}); // jQuery("#page-builder-frame").load
+*/
+
+
 /**
  * ----------------------------------------------------------------------
  * 
@@ -585,12 +585,13 @@ var dslcDebug = true;
 
 		//After frame loaded
 
-
+		// List of modules
 	    	var modules_list = jQuery('.dslca-modules .dslca-section-scroller-content'); // Groups that can hold modules
 	    	// jQuery(modules_list).each(function (i,e) {
 
     		var modules_list_sortable = Sortable.create( modules_list[0] , {
-    			group: 'module-areas',
+    			sort: false, // do not allow sorting inside the list of modules
+    			group: { name: 'module-areas', pull: 'clone', put: false },
     			animation: 150,
     			handle: '.dslca-module',
     			draggable: '.dslca-module',
@@ -602,8 +603,16 @@ var dslcDebug = true;
 
 
     			setData: function (dataTransfer, dragEl) {
+    			//dragEl – contains html of the draggable element like:
+    			//<div class="dslca-module dslca-scroller-item dslca-origin dslca-origin-General" data-id="DSLC_Button" data-origin="General" draggable="false" style="">
+
     				  // dataTransfer.setData('Text', dragEl.textContent);
     				  dataTransfer.setData('text/html', dragEl.innerHTML);
+
+    				  // console.info( 'dragEl:' );
+    				  // console.info( dragEl );
+    				  // console.info( 'dataTransfer:' );
+    				  // console.info( dataTransfer );
     			},
 
     			// dragging started
@@ -620,14 +629,128 @@ var dslcDebug = true;
     			onEnd: function (/**Event*/evt) {
     				  evt.oldIndex;  // element's old index within parent
     				  evt.newIndex;  // element's new index within parent
-    				   evt.preventDefault();
-    				   evt.stopPropagation(); return false;
+
+    				  var itemEl = evt.item;  // dragged HTMLElement
+    				   // evt.preventDefault();
+    				   // evt.stopPropagation(); 
+    				   //return false;
+
+    				   // Vars
+    				   modulesArea = jQuery(itemEl.parentNode); //jQuery(this);
+    				   moduleID = itemEl.dataset.id; // get value of data-id attr.
+
+
 
     				  dslc_generate_code();
-    				  console.info( 'odules_list_sortable - onEnd' );
+    		// 		  console.info( 'odules_list_sortable - onEnd' );
+    		// 		  console.info( 'evt:' );
+						// console.info( evt );
+    		// 		  console.info( evt.end.item );
+    		// 		  console.info( evt.item.attributes.data-id );
+    		// 		  console.info( evt.item.attributes );
+    		// 		  console.info( evt.item );
     				  // jQuery('.dslca-anim-opacity-drop').removeClass('dslca-anim-opacity-drop');
     				  // ui.item.trigger('mouseleave');
 
+/**
+ * ----------------------------------------------------------------------
+ */
+						if ( moduleID == 'DSLC_M_A' || jQuery('body').hasClass('dslca-module-drop-in-progress') || modulesArea.closest('#dslc-header').length || modulesArea.closest('#dslc-footer').length ) {
+
+							// nothing
+
+						} else {
+
+							jQuery('body').addClass('dslca-anim-in-progress dslca-module-drop-in-progress');
+
+							// Add padding to modules area
+							if ( modulesArea.hasClass('dslc-modules-area-not-empty') )
+								modulesArea.animate({ paddingBottom : 50 }, 150);
+
+							// Load Output
+							dslc_module_output_default( moduleID, function( response ){
+
+								// Append Content
+								moduleOutput = response.output;
+
+								// Finish loading and show
+								jQuery('.dslca-module-loading-inner', modulesArea).stop().animate({ width : '100%' }, 300, 'linear', function(){
+
+									// Remove extra padding from area
+									modulesArea.css({ paddingBottom : 0 });
+
+									// Hide loader
+									jQuery('.dslca-module-loading', modulesArea ).hide();
+
+									// Add output
+									// TODO: optimize jQuery in the string below
+									var dslcJustAdded = jQuery(moduleOutput).insertAfter( jQuery('.dslca-module', modulesArea) ) ; /*.appendTo(modulesArea);*/
+									jQuery('.dslca-module', modulesArea).remove();
+
+									dslcJustAdded.css({
+										'-webkit-animation-name' : 'dslcBounceIn',
+										'-moz-animation-name' : 'dslcBounceIn',
+										'animation-name' : 'dslcBounceIn',
+										'animation-duration' : '0.6s',
+										'-webkit-animation-duration' : '0.6s'
+									});
+
+									setTimeout( function(){
+										dslc_init_square();
+										dslc_center();
+										dslc_masonry( dslcJustAdded );
+										jQuery('body').removeClass('dslca-anim-in-progress dslca-module-drop-in-progress');
+									}, 700 );
+
+									// "Show" no content text
+									jQuery('.dslca-no-content-primary', modulesArea ).css({ opacity : 1 });
+
+									// "Show" modules area management
+									jQuery('.dslca-modules-area-manage', modulesArea).css ({ visibility : 'visible' });
+
+									// Show publish
+									jQuery('.dslca-save-composer-hook').css({ 'visibility' : 'visible' });
+									jQuery('.dslca-save-draft-composer-hook').css({ 'visibility' : 'visible' });
+
+									// Generete
+									dslc_carousel();
+									dslc_tabs();
+									dslc_init_accordion();
+									dslc_init_square();
+									dslc_center();
+									dslc_generate_code();
+									dslc_show_publish_button();
+
+									DSLC.Editor.initMediumEditor();
+								});
+
+							});
+
+
+							// Loading animation
+
+							// Show loader
+							jQuery('.dslca-module-loading', modulesArea).show();
+
+							// Hide no content text
+							jQuery('.dslca-no-content-primary', modulesArea).css({ opacity : 0 });
+
+							// Hide modules area management
+							jQuery('.dslca-modules-area-manage', modulesArea).css ({ visibility : 'hidden' });
+
+							// Animate loading
+							var randomLoadingTime = Math.floor(Math.random() * (100 - 50 + 1) + 50) * 100;
+							jQuery('.dslca-module-loading-inner', modulesArea).css({ width : 0 }).animate({
+								width : '100%'
+							}, randomLoadingTime, 'linear' );
+
+						}
+
+
+/**
+ * ----------------------------------------------------------------------
+ * 
+ */
     				jQuery('body').removeClass('dslca-new-module-drag-in-progress').addClass('dslca-new-module-drag-not-in-progress');
     				jQuery('#dslc-header').removeClass('dslca-header-low-z-index');
     			},
@@ -637,7 +760,7 @@ var dslcDebug = true;
     				  var itemEl = evt.item;  // dragged HTMLElement
     				  evt.from;  // previous list
     				  // + indexes from onEnd
-    				   evt.preventDefault();
+    				   // evt.preventDefault();
     				   console.info( 'odules_list_sortable - onAdd' );
     			},
 
@@ -646,7 +769,7 @@ var dslcDebug = true;
     				  var itemEl = evt.item;  // dragged HTMLElement
     				  // + indexes from onEnd
     					dslc_show_publish_button();
-    					 evt.preventDefault();
+    					 // evt.preventDefault();
 
     					 console.info( 'odules_list_sortable - onUpdate' );
     			},
@@ -655,7 +778,7 @@ var dslcDebug = true;
     			onSort: function (/**Event*/evt) {
     				  // same properties as onUpdate
     				   evt.preventDefault();
-    				   evt.stopPropagation(); return false;
+    				   // evt.stopPropagation(); return false;
     				   console.info( 'odules_list_sortable - onSort' );
     			},
 
