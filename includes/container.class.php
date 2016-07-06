@@ -7,7 +7,7 @@
 /**
  * Container abstract class
  */
-abstract class DSLC_Container{
+abstract class DSLC_Container {
 
 	var $id;
 	var $options;

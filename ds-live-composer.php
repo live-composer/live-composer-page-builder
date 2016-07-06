@@ -30,7 +30,9 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 // Do not allow different versions of Live Composer to run at the same time
 if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) ):
@@ -109,7 +111,9 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) ):
 	include DS_LIVE_COMPOSER_ABS . '/includes/main.class.php';
 
 	$cap_page = dslc_get_option( 'lc_min_capability_page', 'dslc_plugin_options_access_control' );
-	if ( ! $cap_page ) $cap_page = 'publish_posts';
+	if ( ! $cap_page ) {
+		$cap_page = 'publish_posts';
+	}
 	define( 'DS_LIVE_COMPOSER_CAPABILITY', $cap_page );
 	define( 'DS_LIVE_COMPOSER_CAPABILITY_SAVE', $cap_page );
 
@@ -182,7 +186,7 @@ endif; // ! defined( 'DS_LIVE_COMPOSER_VER' )
  */
 function dslc_disable_old_plugin() {
 
-	if ( stristr( __FILE__ , 'live-composer-page-builder/') ) {
+	if ( stristr( __FILE__, 'live-composer-page-builder/' ) ) {
 
 		/**
 		 * Deactivate the old version of Live Composer.
@@ -232,4 +236,4 @@ function lc_welcome( $plugin ) {
 add_action( 'activated_plugin', 'lc_welcome' );
 
 dslc_load_modules( DS_LIVE_COMPOSER_ABS . '/modules', 'module.php' );
-register_activation_hook( __FILE__, array( 'DSLC_Main', 'dslc_on_activation' ) );
+register_activation_hook( __FILE__, array('DSLC_Main', 'dslc_on_activation') );

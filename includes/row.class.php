@@ -6,7 +6,7 @@
 /**
  * DSLC_Row
  */
-class DSLC_Row extends DSLC_Container{
+class DSLC_Row extends DSLC_Container {
 
 	/**
 	 * Renders row content
@@ -22,37 +22,45 @@ class DSLC_Row extends DSLC_Container{
 		$overlay_style = '';
 
 		// Columns spacing
-		if ( ! isset( $atts['columns_spacing'] ) )
-			$atts['columns_spacing'] = 'spacing';
+		if ( ! isset( $atts['columns_spacing'] ) ) {
+					$atts['columns_spacing'] = 'spacing';
+		}
 
 		// Custom Class
-		if ( ! isset( $atts['custom_class'] ) )
-			$atts['custom_class'] = '';
+		if ( ! isset( $atts['custom_class'] ) ) {
+					$atts['custom_class'] = '';
+		}
 
 		// Show On
-		if ( ! isset( $atts['show_on'] ) )
-			$atts['show_on'] = 'desktop tablet phone';
+		if ( ! isset( $atts['show_on'] ) ) {
+					$atts['show_on'] = 'desktop tablet phone';
+		}
 
 		// Custom ID
-		if ( ! isset( $atts['custom_id'] ) )
-			$atts['custom_id'] = '';
+		if ( ! isset( $atts['custom_id'] ) ) {
+					$atts['custom_id'] = '';
+		}
 
 		// Full/Wrapped
-		if ( isset( $atts['type'] ) && ! empty( $atts['type'] ) && $atts['type'] == 'full' )
-			$section_class .= 'dslc-full ';
+		if ( isset( $atts['type'] ) && ! empty( $atts['type'] ) && $atts['type'] == 'full' ) {
+					$section_class .= 'dslc-full ';
+		}
 
 		// Parallax
 		$parallax_class = '';
-		if ( isset( $atts['bg_image_attachment'] ) && ! empty( $atts['bg_image_attachment'] ) && $atts['bg_image_attachment'] == 'parallax' )
-			$parallax_class = ' dslc-init-parallax ';
+		if ( isset( $atts['bg_image_attachment'] ) && ! empty( $atts['bg_image_attachment'] ) && $atts['bg_image_attachment'] == 'parallax' ) {
+					$parallax_class = ' dslc-init-parallax ';
+		}
 
 		// Overlay Color
-		if ( isset( $atts['bg_video_overlay_color'] ) && ! empty( $atts['bg_video_overlay_color'] ) )
-			$overlay_style .= 'background-color:' . $atts['bg_video_overlay_color'] . '; ';
+		if ( isset( $atts['bg_video_overlay_color'] ) && ! empty( $atts['bg_video_overlay_color'] ) ) {
+					$overlay_style .= 'background-color:' . $atts['bg_video_overlay_color'] . '; ';
+		}
 
 		// Overlay Opacity
-		if ( isset( $atts['bg_video_overlay_opacity'] ) && ! empty( $atts['bg_video_overlay_opacity'] ) )
-			$overlay_style .= 'opacity:' . $atts['bg_video_overlay_opacity'] . '; ';
+		if ( isset( $atts['bg_video_overlay_opacity'] ) && ! empty( $atts['bg_video_overlay_opacity'] ) ) {
+					$overlay_style .= 'opacity:' . $atts['bg_video_overlay_opacity'] . '; ';
+		}
 
 		/**
 		 * BG Video
@@ -65,8 +73,9 @@ class DSLC_Row extends DSLC_Container{
 		if ( isset( $atts['bg_video'] ) && $atts['bg_video'] !== '' && $atts['bg_video'] !== 'disabled' ) {
 
 			// If it's numeric ( in the media library )
-			if ( is_numeric( $atts['bg_video'] ) )
-				$atts['bg_video'] = wp_get_attachment_url( $atts['bg_video'] );
+			if ( is_numeric( $atts['bg_video'] ) ) {
+							$atts['bg_video'] = wp_get_attachment_url( $atts['bg_video'] );
+			}
 
 			// Remove the file type extension
 			$atts['bg_video'] = str_replace( '.mp4', '', $atts['bg_video'] );
@@ -106,8 +115,9 @@ class DSLC_Row extends DSLC_Container{
 		}
 
 		// Columns spacing
-		if ( $atts['columns_spacing'] == 'nospacing' )
-			$section_class .= 'dslc-no-columns-spacing ';
+		if ( $atts['columns_spacing'] == 'nospacing' ) {
+					$section_class .= 'dslc-no-columns-spacing ';
+		}
 
 		// Custom Class.
 		if ( $atts['custom_class'] != '' ) {
@@ -150,13 +160,15 @@ class DSLC_Row extends DSLC_Container{
 
 		// Custom ID.
 		$section_id = false;
-		if ( $atts['custom_id'] != '' )
-			$section_id = $atts['custom_id'];
+		if ( $atts['custom_id'] != '' ) {
+					$section_id = $atts['custom_id'];
+		}
 
 		// Custom ID - Output
 		$section_id_output = '';
-		if ( $section_id )
-			$section_id_output = 'id="' . $section_id . '"';
+		if ( $section_id ) {
+					$section_id_output = 'id="' . $section_id . '"';
+		}
 
 		$output = '
 			<div ' . $section_id_output . ' class="dslc-modules-section ' . $a_container_class . $parallax_class . $section_class . $extra_classes . '" style="' . dslc_row_get_style( $atts ) . '">
