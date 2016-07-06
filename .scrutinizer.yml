@@ -22,7 +22,6 @@ coding_style:
                 negation: true
             within:
                 brackets: true
-                array_initializer: true
                 grouping: true
                 function_call: true
                 function_declaration: true
