@@ -10,6 +10,29 @@ checks:
     coding_standard:
         name: WordPress
 
+filter: {  }
+coding_style:
+    php:
+        indentation:
+            general:
+                use_tabs: true
+        spaces:
+            around_operators:
+                concatenation: true
+                negation: true
+            within:
+                brackets: true
+                array_initializer: true
+                grouping: true
+                function_call: true
+                function_declaration: true
+                if: true
+                for: true
+                while: true
+                switch: true
+                catch: true
+                type_cast: true
+
 tools:
   sensiolabs_security_checker: true
   # external_code_coverage: true
@@ -17,3 +40,5 @@ tools:
       config:
           # https://scrutinizer-ci.com/docs/tools/php/code-sniffer/standards
           standard: "WordPress"
+
+
