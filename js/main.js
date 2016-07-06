@@ -1482,10 +1482,13 @@ function disable_css_rule(selector, element, moduleID) {
 	   stylesheet = stylesheet.sheet;
 
 		if (stylesheet['rules']) {
+
 			cssRules = 'rules';
 		} else if (stylesheet['cssRules']) {
+
 			cssRules = 'cssRules';
 		} else {
+
 			//no rules found... browser unknown
 		}
 

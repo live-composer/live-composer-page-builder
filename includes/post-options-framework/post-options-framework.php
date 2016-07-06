@@ -391,7 +391,9 @@ function dslc_page_add_row_action( $actions, $page_object ) {
 
 	if ( true === $dslc_admin_interface_on && $page_status != 'trash' ) {
 
-		$actions = array('edit-in-live-composer' => '<a href="' . get_home_url() . '/?page_id=' . $id . '&dslc=active">' . __( 'Edit in Live Composer', 'live-composer-page-builder' ) . '</a>') + $actions;
+		$url = DSLC_Display::get_editor_link( get_home_url() . '/?page_id=' . $id . '&dslc=active' );
+
+		$actions = array('edit-in-live-composer' => '<a href="' . $url . '">' . __( 'Edit in Live Composer', 'live-composer-page-builder' ) . '</a>') + $actions;
 	}
 
 	return $actions;
@@ -411,10 +413,14 @@ function dslc_post_add_row_action( $actions, $post ) {
 		if ( array_key_exists( $post_type, $dslc_var_templates_pt ) ) {
 
 			$template_id = dslc_st_get_template_ID( $post->ID );
-			$actions = array('edit-in-live-composer' => '<a href="'. get_home_url() . '/?page_id=' . $template_id . '&dslc=active&preview_id=' . $post->ID . '">'. __( 'Edit Template', 'live-composer-page-builder' ) .'</a>') + $actions;
+			$url = DSLC_Display::get_editor_link( get_home_url() . '/?page_id=' . $template_id . '&dslc=active&preview_id=' . $post->ID );
+
+			$actions = array('edit-in-live-composer' => '<a href="'. $url . '">'. __( 'Edit Template', 'live-composer-page-builder' ) .'</a>') + $actions;
 		} else {
 
-			$actions = array('edit-in-live-composer' => '<a href="'. get_home_url() . '/?page_id=' . $post->ID . '&dslc=active">'. __( 'Edit in Live Composer', 'live-composer-page-builder' ) .'</a>') + $actions;
+			$url = DSLC_Display::get_editor_link( get_home_url() . '/?page_id=' . $post->ID . '&dslc=active' );
+
+			$actions = array('edit-in-live-composer' => '<a href="'. $url . '">'. __( 'Edit in Live Composer', 'live-composer-page-builder' ) .'</a>') + $actions;
 		}
 	}
 
@@ -434,8 +440,13 @@ function dslc_add_button_permalink( $return, $id, $new_title, $new_slug ) {
 	$current_post_type = get_post_type( $id );
 	$dslc_admin_interface_on = apply_filters( 'dslc_admin_interface_on_slug_box', true );
 
-	if ( true === $dslc_admin_interface_on && ! array_key_exists( $current_post_type, $dslc_var_templates_pt ) && $current_post_type != 'dslc_testimonials' ) {
-		$return .= '<a class="button button-small" target="_blank" href="' . get_home_url() . '/?page_id=' . $id . '&dslc=active">' . __( 'Open in Live Composer', 'live-composer-page-builder' ) . '</a>';
+	if ( true === $dslc_admin_interface_on &&
+		 ! array_key_exists( $current_post_type, $dslc_var_templates_pt ) &&
+		 $current_post_type != 'dslc_testimonials' ) {
+
+		$url = DSLC_Display::get_editor_link( get_home_url() . '/?page_id=' . $id . '&dslc=active' );
+
+		$return .= '<a class="button button-small" target="_blank" href="' . $url . '">' . __( 'Open in Live Composer', 'live-composer-page-builder' ) . '</a>';
 	}
 
 	return $return;
@@ -453,7 +464,10 @@ function dslc_post_submitbox_add_button() {
 
 
 	if ( true === $dslc_admin_interface_on && $current_screen->action != 'add' && ! array_key_exists( $current_post_type, $dslc_var_templates_pt ) && $current_post_type != 'dslc_testimonials' ) {
-		echo '<a class="button button-hero" target="_blank" href="' . get_home_url() . '/?page_id=' . get_the_ID() . '&dslc=active">' . __( 'Open in Live Composer', 'live-composer-page-builder' ) . '</a>';
+
+		$url = DSLC_Display::get_editor_link( get_home_url() . '/?page_id=' . get_the_ID() . '&dslc=active' );
+
+		echo '<a class="button button-hero" target="_blank" href="' . $url . '">' . __( 'Open in Live Composer', 'live-composer-page-builder' ) . '</a>';
 	}
 
 }
@@ -465,11 +479,13 @@ add_action( 'post_submitbox_start', 'dslc_post_submitbox_add_button' );
 function dslc_tab_content( $content ) {
 
 	if ( get_post_type( get_the_ID() ) == 'page' && is_admin() ) {
+
+		$url = DSLC_Display::get_editor_link( get_home_url() . '/?page_id=' . get_the_ID() . '&dslc=active' );
 		?>
 		<div id="lc_content_wrap">
 				<h2> <?php _e( 'Edit this page in Live Composer', 'live-composer-page-builder' ); ?></h2>
 				<div class="description"><?php _e( 'Page builder stores content in a compressed way <br>(better for speed, security and user experience)', 'live-composer-page-builder' ); ?></div>
-				<p><a class="button button-primary button-hero" target="_blank" href="<?php echo get_home_url() . '/?page_id=' . get_the_ID() . '&dslc=active'; ?>"><?php echo __( 'Open in Live Composer', 'live-composer-page-builder' ); ?></a></p>
+				<p><a class="button button-primary button-hero" target="_blank" href="<?php echo $url; ?>"><?php echo __( 'Open in Live Composer', 'live-composer-page-builder' ); ?></a></p>
 		</div>
 	<?php }
 

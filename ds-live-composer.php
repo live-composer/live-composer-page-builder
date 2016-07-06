@@ -91,6 +91,7 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) ):
 	include DS_LIVE_COMPOSER_ABS . '/includes/css-generation/css-for-modules.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/functions.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/display-functions.php';
+	include DS_LIVE_COMPOSER_ABS . '/includes/display.class.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/row-system/init.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/ajax.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/shortcodes.php';
