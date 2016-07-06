@@ -2,7 +2,7 @@
 /**
  * Upgrade class
  */
-final class DSLC_Upgrade{
+final class DSLC_Upgrade {
 
 	public static function init() {
 
@@ -46,9 +46,6 @@ final class DSLC_Upgrade{
 		// Some code on version 1.
 		// Update_option( 'dslc_version', 1 );
 	}
-
-
-
 	 * 1.3 version migration example
 
 	public static function update_1_3() {

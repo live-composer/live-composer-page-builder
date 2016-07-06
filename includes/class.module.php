@@ -2057,17 +2057,21 @@ class DSLC_Module {
 		global $dslc_should_filter;
 		$dslc_should_filter = false;
 
-		if ( ! isset( $options['css_anim'] ) )
-			$options['css_anim'] = 'none';
+		if ( ! isset( $options['css_anim'] ) ) {
+					$options['css_anim'] = 'none';
+		}
 
-		if ( ! isset( $options['css_anim_delay'] ) )
-			$options['css_anim_delay'] = '0';
+		if ( ! isset( $options['css_anim_delay'] ) ) {
+					$options['css_anim_delay'] = '0';
+		}
 
-		if ( ! isset( $options['css_anim_duration'] ) )
-			$options['css_anim_duration'] = '650';
+		if ( ! isset( $options['css_anim_duration'] ) ) {
+					$options['css_anim_duration'] = '650';
+		}
 
-		if ( ! isset( $options['css_anim_easing'] ) )
-			$options['css_anim_easing'] = 'default';
+		if ( ! isset( $options['css_anim_easing'] ) ) {
+					$options['css_anim_easing'] = 'default';
+		}
 
 		$options['module_id'] = $this->module_id;
 
@@ -2096,14 +2100,17 @@ class DSLC_Module {
 
 			$show_on = explode( ' ', trim( $options['css_show_on'] ) );
 
-			if ( ! in_array( 'desktop', $show_on ) )
-				$class_show_on .= 'dslc-hide-on-desktop ';
+			if ( ! in_array( 'desktop', $show_on ) ) {
+							$class_show_on .= 'dslc-hide-on-desktop ';
+			}
 
-			if ( ! in_array( 'tablet', $show_on ) )
-				$class_show_on .= 'dslc-hide-on-tablet ';
+			if ( ! in_array( 'tablet', $show_on ) ) {
+							$class_show_on .= 'dslc-hide-on-tablet ';
+			}
 
-			if ( ! in_array( 'phone', $show_on ) )
-				$class_show_on .= 'dslc-hide-on-phone ';
+			if ( ! in_array( 'phone', $show_on ) ) {
+							$class_show_on .= 'dslc-hide-on-phone ';
+			}
 
 		}
 
@@ -2111,10 +2118,11 @@ class DSLC_Module {
 		 * Handle like
 		 */
 
-		if ( isset( $this->handle_like ) )
-			$class_handle_like = 'dslc-module-handle-like-' . $this->handle_like;
-		else
-			$class_handle_like = 'dslc-module-handle-like-regular';
+		if ( isset( $this->handle_like ) ) {
+					$class_handle_like = 'dslc-module-handle-like-' . $this->handle_like;
+		} else {
+					$class_handle_like = 'dslc-module-handle-like-regular';
+		}
 
 		/**
 		 * Globals
@@ -2204,10 +2212,10 @@ class DSLC_Module {
 				<div class="dslca-module-manage">
 					<span class="dslca-module-manage-line"></span>
 					<div class="dslca-module-manage-inner">
-						<span class="dslca-manage-action dslca-module-manage-hook dslca-module-edit-hook" title="<?php esc_attr_e( 'Edit options' , 'live-composer-page-builder' ); ?>"><span class="dslca-icon dslc-icon-cog"></span></span>
-						<span class="dslca-manage-action dslca-module-manage-hook dslca-copy-module-hook" title="<?php esc_attr_e( 'Duplicate' , 'live-composer-page-builder' ); ?>"><span class="dslca-icon dslc-icon-copy"></span></span>
-						<span class="dslca-manage-action dslca-module-manage-hook dslca-move-module-hook" title="<?php esc_attr_e( 'Drag to move' , 'live-composer-page-builder' ); ?>"><span class="dslca-icon dslc-icon-move"></span></span>
-						<span class="dslca-manage-action dslca-module-manage-hook dslca-change-width-module-hook" title="<?php esc_attr_e( 'Change width' , 'live-composer-page-builder' ); ?>">
+						<span class="dslca-manage-action dslca-module-manage-hook dslca-module-edit-hook" title="<?php esc_attr_e( 'Edit options', 'live-composer-page-builder' ); ?>"><span class="dslca-icon dslc-icon-cog"></span></span>
+						<span class="dslca-manage-action dslca-module-manage-hook dslca-copy-module-hook" title="<?php esc_attr_e( 'Duplicate', 'live-composer-page-builder' ); ?>"><span class="dslca-icon dslc-icon-copy"></span></span>
+						<span class="dslca-manage-action dslca-module-manage-hook dslca-move-module-hook" title="<?php esc_attr_e( 'Drag to move', 'live-composer-page-builder' ); ?>"><span class="dslca-icon dslc-icon-move"></span></span>
+						<span class="dslca-manage-action dslca-module-manage-hook dslca-change-width-module-hook" title="<?php esc_attr_e( 'Change width', 'live-composer-page-builder' ); ?>">
 							<span class="dslca-icon dslc-icon-columns"></span>
 							<div class="dslca-change-width-module-options">
 								<span><?php esc_attr_e( 'Element Width', 'live-composer-page-builder' ); ?></span>
@@ -2219,7 +2227,7 @@ class DSLC_Module {
 								<span data-size="11">11/12</span><span data-size="12">12/12</span>
 							</div>
 						</span>
-						<span class="dslca-manage-action dslca-module-manage-hook dslca-delete-module-hook" title="<?php esc_attr_e( 'Delete' , 'live-composer-page-builder' ); ?>"><span class="dslca-icon dslc-icon-remove"></span></span>
+						<span class="dslca-manage-action dslca-module-manage-hook dslca-delete-module-hook" title="<?php esc_attr_e( 'Delete', 'live-composer-page-builder' ); ?>"><span class="dslca-icon dslc-icon-remove"></span></span>
 					</div>
 					<?php if ( DS_LIVE_COMPOSER_DEV_MODE ) : ?>
 						<div class="dslca-manage-action dslca-module-manage-inner dslca-dev-mode">
@@ -2246,7 +2254,9 @@ class DSLC_Module {
 
 		// Other vars
 		$user_options['module_id'] = $this->module_id;
-		if ( ! isset( $user_options['dslc_m_size'] ) ) $user_options['dslc_m_size'] = '12';
+		if ( ! isset( $user_options['dslc_m_size'] ) ) {
+			$user_options['dslc_m_size'] = '12';
+		}
 		$option_ids = array();
 		$user_options_no_defaults = $user_options;
 
@@ -2267,10 +2277,11 @@ class DSLC_Module {
 							$options_ids[] = $option['id'];
 
 							// If value already set use it, if not use default
-							if ( isset( $user_options[$option_id] ) )
-								$option_value = $user_options[$option_id];
-							else
-								$option_value = $option['std'];
+							if ( isset( $user_options[$option_id] ) ) {
+															$option_value = $user_options[$option_id];
+							} else {
+															$option_value = $option['std'];
+							}
 
 							if ( isset( $user_options[$option_id] ) && $user_options[$option_id] == $option['std'] ) {
 								unset( $user_options_no_defaults[$option_id] );

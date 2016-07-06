@@ -6,7 +6,7 @@
 /**
  * DSLC_Module_Area class
  */
-class DSLC_Module_Area extends DSLC_Container{
+class DSLC_Module_Area extends DSLC_Container {
 
 	/**
 	 * Renders module area contents
@@ -21,11 +21,13 @@ class DSLC_Module_Area extends DSLC_Container{
 		$pos_class = '';
 		$module_area_size = $atts['size'];
 
-		if ( $atts['last'] == 'yes' )
-			$pos_class = 'dslc-last-col';
+		if ( $atts['last'] == 'yes' ) {
+					$pos_class = 'dslc-last-col';
+		}
 
-		if ( isset( $atts['first'] ) && $atts['first'] == 'yes' )
-			$pos_class = 'dslc-first-col';
+		if ( isset( $atts['first'] ) && $atts['first'] == 'yes' ) {
+					$pos_class = 'dslc-first-col';
+		}
 
 		$output = '<div class="dslc-modules-area dslc-col dslc-' . $atts['size'] . '-col ' . $pos_class . '" data-size="' . $atts['size'] . '">';
 
@@ -59,10 +61,11 @@ class DSLC_Module_Area extends DSLC_Container{
 			}
 
 			// Modules output
-			if ( empty( self::$content ) || self::$content == ' ' )
-				$output .= '&nbsp;';
-			else
-				$output .= do_shortcode( self::$content );
+			if ( empty( self::$content ) || self::$content == ' ' ) {
+							$output .= '&nbsp;';
+			} else {
+							$output .= do_shortcode( self::$content );
+			}
 
 		$output .= '</div>';
 

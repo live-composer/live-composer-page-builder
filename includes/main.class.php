@@ -25,24 +25,24 @@ class DSLC_Main {
 			die();
 		}
 
-		add_shortcode('dslc-repeatable', [ __CLASS__, 'dslc_repeatable'] );
-		add_shortcode('dslc-module-sc', [ __CLASS__, 'dslc_module_sc'] );
+		add_shortcode( 'dslc-repeatable', [__CLASS__, 'dslc_repeatable'] );
+		add_shortcode( 'dslc-module-sc', [__CLASS__, 'dslc_module_sc'] );
 	}
 
 	static function init() {
 
-		add_action( 'admin_init', array( __CLASS__, 'dslc_welcome' ) );
+		add_action( 'admin_init', array(__CLASS__, 'dslc_welcome') );
 		add_action( 'after_setup_theme', 'dslc_tutorials_load' );
 	}
 
 /**
-	 * Tutorials disabled by default
-	 *
-	 * Use the next call to activate tutorilas form your theme
-	 * add_filter( 'dslc_tutorials', '__return_true' );
-	 *
-	 * @since 1.0.7
-	 */
+ * Tutorials disabled by default
+ *
+ * Use the next call to activate tutorilas form your theme
+ * add_filter( 'dslc_tutorials', '__return_true' );
+ *
+ * @since 1.0.7
+ */
 
 	function dslc_tutorials_load() {
 
