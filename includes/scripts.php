@@ -124,7 +124,7 @@ function dslc_load_scripts() {
 		wp_enqueue_script( 'dslc-load-fonts', '//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js' );
 		wp_enqueue_script( 'dslc-builder-plugins-js', DS_LIVE_COMPOSER_URL . 'js/builder.plugins.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 
-		if ( ! SCRIPT_DEBUG ) {
+		/*if ( ! SCRIPT_DEBUG ) {
 			wp_enqueue_script( 'dslc-builder-main-js', DS_LIVE_COMPOSER_URL . 'js/builder.main.min.js', array( 'jquery', 'dslc-main-js' ), DS_LIVE_COMPOSER_VER );
 		} else {
 			wp_enqueue_script( 'dslc-builder-main-js', DS_LIVE_COMPOSER_URL . 'js/builder.main.js', array( 'jquery', 'dslc-main-js' ), DS_LIVE_COMPOSER_VER );
@@ -139,13 +139,13 @@ function dslc_load_scripts() {
 		wp_localize_script( 'dslc-builder-main-js', 'DSLCString', $translation_array );
 		wp_localize_script( 'dslc-builder-main-js', 'DSLCFonts', $fonts_array );
 		wp_localize_script( 'dslc-builder-main-js', 'DSLCIcons', $dslc_var_icons );
-
+*/
 		/* Medium text editor */
 		// wp_enqueue_script( 'medium-editor-js', '//cdn.jsdelivr.net/medium-editor/latest/js/medium-editor.min.js', DS_LIVE_COMPOSER_VER );
 		// wp_enqueue_style( 'medium-editor-style', '//cdn.jsdelivr.net/medium-editor/latest/css/medium-editor.min.css', DS_LIVE_COMPOSER_VER );
 
 		wp_enqueue_script( 'class-sortable-area-js', DS_LIVE_COMPOSER_URL . 'js/classes/ModuleSortArea.js', array(), DS_LIVE_COMPOSER_VER );
-		wp_enqueue_script( 'util-js', DS_LIVE_COMPOSER_URL . 'js/Util.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+		wp_enqueue_script( 'util-js', DS_LIVE_COMPOSER_URL . 'js/DSLC_Util.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 		wp_enqueue_script( 'base64', DS_LIVE_COMPOSER_URL . 'js/libs/base64.js', array(), DS_LIVE_COMPOSER_VER );
 		wp_enqueue_script( 'modernizr', DS_LIVE_COMPOSER_URL . 'js/libs/modernizr-custom.js', array(), DS_LIVE_COMPOSER_VER );
 
@@ -155,6 +155,13 @@ function dslc_load_scripts() {
 
 
 function dslc_load_editing_scripts() {
+
+	$screen = get_current_screen();
+
+	if ( 'toplevel_page_livecomposer_editor' !== $screen->id ) {
+
+		return;
+	}
 
 	global $dslc_active;
 
@@ -223,14 +230,18 @@ function dslc_load_editing_scripts() {
 	wp_enqueue_script( 'wp-mediaelement' );
 
 	if ( ! SCRIPT_DEBUG ) {
+
 		wp_enqueue_script( 'dslc-main-js', DS_LIVE_COMPOSER_URL . 'js/main.min.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 	} else {
+
 		wp_enqueue_script( 'dslc-main-js', DS_LIVE_COMPOSER_URL . 'js/main.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 	}
 
 	if ( is_ssl() ) {
+
 		wp_localize_script( 'dslc-main-js', 'DSLCAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php', 'https' ) ) );
 	} else {
+
 		wp_localize_script( 'dslc-main-js', 'DSLCAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php', 'http' ) ) );
 	}
 
@@ -265,14 +276,18 @@ function dslc_load_editing_scripts() {
 		wp_enqueue_script( 'dslc-builder-plugins-js', DS_LIVE_COMPOSER_URL . 'js/builder.plugins.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 
 		if ( ! SCRIPT_DEBUG ) {
+
 			wp_enqueue_script( 'dslc-builder-main-js', DS_LIVE_COMPOSER_URL . 'js/builder.main.min.js', array( 'jquery', 'dslc-main-js' ), DS_LIVE_COMPOSER_VER );
 		} else {
+
 			wp_enqueue_script( 'dslc-builder-main-js', DS_LIVE_COMPOSER_URL . 'js/builder.main.js', array( 'jquery', 'dslc-main-js' ), DS_LIVE_COMPOSER_VER );
 		}
 
 		if ( is_ssl() ) {
+
 			wp_localize_script( 'dslc-builder-main-js', 'DSLCAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php', 'https' ) ) );
 		} else {
+
 			wp_localize_script( 'dslc-builder-main-js', 'DSLCAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php', 'http' ) ) );
 		}
 
@@ -285,7 +300,7 @@ function dslc_load_editing_scripts() {
 		// wp_enqueue_style( 'medium-editor-style', '//cdn.jsdelivr.net/medium-editor/latest/css/medium-editor.min.css', DS_LIVE_COMPOSER_VER );
 
 		wp_enqueue_script( 'class-sortable-area-js', DS_LIVE_COMPOSER_URL . 'js/classes/ModuleSortArea.js', array(), DS_LIVE_COMPOSER_VER );
-		wp_enqueue_script( 'util-js', DS_LIVE_COMPOSER_URL . 'js/Util.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+		wp_enqueue_script( 'util-js', DS_LIVE_COMPOSER_URL . 'js/DSLC_Util.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 		wp_enqueue_script( 'base64', DS_LIVE_COMPOSER_URL . 'js/libs/base64.js', array(), DS_LIVE_COMPOSER_VER );
 		wp_enqueue_script( 'modernizr', DS_LIVE_COMPOSER_URL . 'js/libs/modernizr-custom.js', array(), DS_LIVE_COMPOSER_VER );
 	}

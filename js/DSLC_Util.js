@@ -4,7 +4,7 @@
 
 'use strict';
 
-var Util = {
+var DSLC_Util = {
 	addslashes: function(str)
 	{
 	    str = str.replace(/\\/g, '\\\\');

@@ -1,12 +1,12 @@
 <?php
 /**
- * LC display class
+ * LC editor interface class
  */
 
 /**
- * DSLC_Display class
+ * DSLC_EditorInterface class
  */
-class DSLC_Display{
+class DSLC_EditorInterface{
 
 	/**
 	 * Init all hooks
@@ -21,9 +21,14 @@ class DSLC_Display{
 	 *
 	 * @return string
 	 */
-	static function get_editor_link( $addition ) {
+	static function get_editor_link( $page_id, $preview_id = '' ) {
 
-		return admin_url( 'admin.php?page=livecomposer_editor&frame=' . base64_encode( $addition ) );
+		if ( '' !== $preview_id ) {
+
+			$preview_id = '&preview_id=' . $preview_id;
+		}
+
+		return admin_url( 'admin.php?page=livecomposer_editor&page_id=' . $page_id . $preview_id);
 	}
 
 	/**
@@ -62,7 +67,7 @@ class DSLC_Display{
 					// If a page or a template go ahead normally.
 					if ( is_page() || get_post_type() === 'dslc_templates' || ! isset( $dslc_var_templates_pt[ get_post_type() ] ) ) {
 
-						?><a href="<?php echo self::get_editor_link( add_query_arg( array('dslc' => 'active'), get_permalink() ) ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo $activate_button_position; ?>"><?php _e( 'Activate Live Composer', 'live-composer-page-builder' ); ?></a><?php
+						?><a href="<?php echo self::get_editor_link( get_the_ID() ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo $activate_button_position; ?>"><?php _e( 'Activate Live Composer', 'live-composer-page-builder' ); ?></a><?php
 
 					// If not a page or a template post type.
 					} else {
@@ -72,7 +77,7 @@ class DSLC_Display{
 
 						if ( $template ) {
 
-							?><a target="_blank" href="<?php echo self::get_editor_link( add_query_arg( array( 'dslc' => 'active', 'preview_id' => get_the_ID() ), get_permalink( $template ) ) ); ?>" class="dslca-activate-composer-hook"><?php _e( 'Edit Template', 'live-composer-page-builder' ); ?></a><?php
+							?><a target="_blank" href="<?php echo self::get_editor_link( $template, get_the_ID() ); ?>" class="dslca-activate-composer-hook"><?php _e( 'Edit Template', 'live-composer-page-builder' ); ?></a><?php
 
 						} else {
 
@@ -92,7 +97,7 @@ class DSLC_Display{
 					if ( $template_id != 'none' ) {
 
 						// Output the button
-						?><a href="<?php echo self::get_editor_link( add_query_arg( array('dslc' => 'active'), get_permalink( $template_id ) ) ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo $activate_button_position; ?>"><?php _e( 'Activate Live Composer', 'live-composer-page-builder' ); ?></a><?php
+						?><a href="<?php echo self::get_editor_link( $template_id ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo $activate_button_position; ?>"><?php _e( 'Activate Live Composer', 'live-composer-page-builder' ); ?></a><?php
 
 					}
 
@@ -106,7 +111,7 @@ class DSLC_Display{
 					if ( $template_id != 'none' ) {
 
 						// Output the button.
-						?><a href="<?php echo esc_attr( self::get_editor_link( add_query_arg( array('dslc' => 'active'), get_permalink( $template_id ) ) ) ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo $activate_button_position; ?>"><?php _e( 'Activate Live Composer', 'live-composer-page-builder' ); ?></a><?php
+						?><a href="<?php echo esc_attr( self::get_editor_link( $template_id, get_the_ID() ) ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo $activate_button_position; ?>"><?php _e( 'Activate Live Composer', 'live-composer-page-builder' ); ?></a><?php
 
 					}
 
@@ -120,7 +125,7 @@ class DSLC_Display{
 					if ( 'none' !== $template_id ) {
 
 						// Output the button.
-						?><a href="<?php echo esc_attr( self::get_editor_link( add_query_arg( array('dslc' => 'active'), get_permalink( $template_id ) ) ) ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo $activate_button_position; ?>"><?php _e( 'Activate Live Composer', 'live-composer-page-builder' ); ?></a><?php
+						?><a href="<?php echo esc_attr( self::get_editor_link( $template_id, get_the_ID() ) ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo $activate_button_position; ?>"><?php _e( 'Activate Live Composer', 'live-composer-page-builder' ); ?></a><?php
 
 					}
 				// If other archives ( not author )?
@@ -132,7 +137,7 @@ class DSLC_Display{
 					if ( 'none' !== $template_id ) {
 
 						// Output the button.
-						?><a href="<?php echo esc_attr( self::get_editor_link( add_query_arg( array( 'dslc' => 'active' ), get_permalink( $template_id ) ) ) ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo esc_attr( $activate_button_position ); ?>"><?php esc_html_e( 'Activate Live Composer', 'live-composer-page-builder' ); ?></a><?php
+						?><a href="<?php echo esc_attr( self::get_editor_link( $template_id, get_the_ID() ) ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo esc_attr( $activate_button_position ); ?>"><?php esc_html_e( 'Activate Live Composer', 'live-composer-page-builder' ); ?></a><?php
 
 					}
 				}
@@ -140,7 +145,12 @@ class DSLC_Display{
 			endif;
 
 		endif;
+
+		if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) :
+
+			?><div class="dslca-container dslca-state-off" data-post-id="<?php the_ID(); ?>"></div><?php
+		endif;
 	}
 }
 
-DSLC_Display::init();
+DSLC_EditorInterface::init();

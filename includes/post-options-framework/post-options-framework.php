@@ -4,7 +4,7 @@
  *
  * - dslc_setup_post_options ( Sets up the post options )
  * - dslc_add_post_options ( Adds metaboxes )
- * - dslc_display_post_options ( Displays options )
+ * - DSLC_EditorInterface_post_options ( Displays options )
  * - dslc_save_post_options ( Saves options to post )
  * - dslc_page_add_row_action ( Adds action in row )
  * - dslc_post_add_row_action ( Adds action in row )
@@ -122,7 +122,7 @@ function dslc_add_post_options() {
 					add_meta_box(
 						$dslc_post_option_key,
 						$dslc_post_option['title'],
-						'dslc_display_post_options',
+						'DSLC_EditorInterface_post_options',
 						$dslc_post_option_show_on,
 						$dslc_post_option['context'],
 						'high'
@@ -135,7 +135,7 @@ function dslc_add_post_options() {
 				add_meta_box(
 					$dslc_post_option_key,
 					$dslc_post_option['title'],
-					'dslc_display_post_options',
+					'DSLC_EditorInterface_post_options',
 					$dslc_post_option['show_on'],
 					$dslc_post_option['context'],
 					'high'
@@ -150,7 +150,7 @@ function dslc_add_post_options() {
  *
  * @since 1.0
  */
-function dslc_display_post_options( $object, $metabox ) {
+function DSLC_EditorInterface_post_options( $object, $metabox ) {
 
 	global $dslc_var_post_options;
 
@@ -391,7 +391,7 @@ function dslc_page_add_row_action( $actions, $page_object ) {
 
 	if ( true === $dslc_admin_interface_on && $page_status != 'trash' ) {
 
-		$url = DSLC_Display::get_editor_link( get_home_url() . '/?page_id=' . $id . '&dslc=active' );
+		$url = DSLC_EditorInterface::get_editor_link( $id );
 
 		$actions = array('edit-in-live-composer' => '<a href="' . $url . '">' . __( 'Edit in Live Composer', 'live-composer-page-builder' ) . '</a>') + $actions;
 	}
@@ -413,12 +413,12 @@ function dslc_post_add_row_action( $actions, $post ) {
 		if ( array_key_exists( $post_type, $dslc_var_templates_pt ) ) {
 
 			$template_id = dslc_st_get_template_ID( $post->ID );
-			$url = DSLC_Display::get_editor_link( get_home_url() . '/?page_id=' . $template_id . '&dslc=active&preview_id=' . $post->ID );
+			$url = DSLC_EditorInterface::get_editor_link( $template_id, $post->ID );
 
 			$actions = array('edit-in-live-composer' => '<a href="'. $url . '">'. __( 'Edit Template', 'live-composer-page-builder' ) .'</a>') + $actions;
 		} else {
 
-			$url = DSLC_Display::get_editor_link( get_home_url() . '/?page_id=' . $post->ID . '&dslc=active' );
+			$url = DSLC_EditorInterface::get_editor_link( $post->ID );
 
 			$actions = array('edit-in-live-composer' => '<a href="'. $url . '">'. __( 'Edit in Live Composer', 'live-composer-page-builder' ) .'</a>') + $actions;
 		}
@@ -444,7 +444,7 @@ function dslc_add_button_permalink( $return, $id, $new_title, $new_slug ) {
 		 ! array_key_exists( $current_post_type, $dslc_var_templates_pt ) &&
 		 $current_post_type != 'dslc_testimonials' ) {
 
-		$url = DSLC_Display::get_editor_link( get_home_url() . '/?page_id=' . $id . '&dslc=active' );
+		$url = DSLC_EditorInterface::get_editor_link( $id );
 
 		$return .= '<a class="button button-small" target="_blank" href="' . $url . '">' . __( 'Open in Live Composer', 'live-composer-page-builder' ) . '</a>';
 	}
@@ -465,7 +465,7 @@ function dslc_post_submitbox_add_button() {
 
 	if ( true === $dslc_admin_interface_on && $current_screen->action != 'add' && ! array_key_exists( $current_post_type, $dslc_var_templates_pt ) && $current_post_type != 'dslc_testimonials' ) {
 
-		$url = DSLC_Display::get_editor_link( get_home_url() . '/?page_id=' . get_the_ID() . '&dslc=active' );
+		$url = DSLC_EditorInterface::get_editor_link( get_the_ID() );
 
 		echo '<a class="button button-hero" target="_blank" href="' . $url . '">' . __( 'Open in Live Composer', 'live-composer-page-builder' ) . '</a>';
 	}
@@ -480,7 +480,7 @@ function dslc_tab_content( $content ) {
 
 	if ( get_post_type( get_the_ID() ) == 'page' && is_admin() ) {
 
-		$url = DSLC_Display::get_editor_link( get_home_url() . '/?page_id=' . get_the_ID() . '&dslc=active' );
+		$url = DSLC_EditorInterface::get_editor_link( get_the_ID() );
 		?>
 		<div id="lc_content_wrap">
 				<h2> <?php _e( 'Edit this page in Live Composer', 'live-composer-page-builder' ); ?></h2>

@@ -1,7 +1,7 @@
 /**
- * ModuleSortArea class
+ * DSLC_ModuleArea class
  */
-var ModuleSortArea = function(elem) {
+var DSLC_ModuleArea = function(elem) {
 
 	this.elem = elem;
 	this.sortable = Sortable.create(elem, {
