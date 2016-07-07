@@ -126,7 +126,7 @@ var dslcAllFontsArray = dslcRegularFontsArray.concat( dslcGoogleFontsArray );
 // Set current/default icons set
 var dslcIconsCurrentSet = DSLCIcons.fontawesome;
 
-var dslcDebug = true;
+var dslcDebug = false;
 
 /*********************************
  *
@@ -819,14 +819,25 @@ var dslcDebug = true;
  		//After frame loaded
     	jQuery("#page-builder-frame").on('load', function(){
 
-    		var pagebuilder_iframe = jQuery(this).contents();
-			var el = jQuery('.dslc-modules-area', pagebuilder_iframe[0]); // Groups that can hold modules
+    		var self = this;
+    		DSLC.Editor.frame = jQuery(this).contents();
+			/**
+			 * Action - Automatically Add a Row if Empty
+			 */
 
-			jQuery(el).each(function (i,e) {
+			if ( ! jQuery( '#dslc-main .dslc-modules-section' ).length && ! jQuery( '#dslca-tut-page' ).length ) {
 
-				new ModuleSortArea(e);
-			});
+				dslc_row_add().then(function(){
 
+					var pagebuilder_iframe = jQuery(self).contents();
+					var el = jQuery('.dslc-modules-area', pagebuilder_iframe[0]); // Groups that can hold modules
+
+					jQuery(el).each(function (i,e) {
+
+						new DSLC_ModuleArea(e);
+					});
+				});
+			}
 		}); //jQuery("#page-builder-frame").load(function() {
 
 /*
@@ -1738,6 +1749,8 @@ var dslcDebug = true;
 
 		callback = typeof callback !== 'undefined' ? callback : false;
 
+		var defer = jQuery.Deferred();
+
 		// AJAX Request
 		jQuery.post(
 
@@ -1751,20 +1764,22 @@ var dslcDebug = true;
 				var newRow = jQuery(response.output);
 
 				// Append new row
-				newRow.appendTo('#dslc-main');
-				new ModuleSortArea(newRow.find('.dslc-modules-area').eq(0)[0]);
+				newRow.appendTo(DSLC.Editor.frame.find("#dslc-main"));
 
 				// Call other functions
 				dslc_drag_and_drop();
 				dslc_generate_code();
 				dslc_show_publish_button();
 
+				new DSLC_ModuleArea(newRow.find('.dslc-modules-area').eq(0)[0]);
+
 				if ( callback ) { callback(); }
 
+				defer.resolve();
 			}
-
 		);
 
+		return defer;
 	}
 
 	/**
@@ -2437,13 +2452,6 @@ var dslcDebug = true;
 		/*dslc_row_edit_colorpicker_init();
 		dslc_row_edit_slider_init();*/
 
-		/**
-		 * Action - Automatically Add a Row if Empty
-		 */
-
-		if ( ! $( '#dslc-main .dslc-modules-section' ).length && ! $( '#dslca-tut-page' ).length ) {
-			dslc_row_add();
-		}
 
 		/**
 		 * Hook - Add Row
@@ -3069,7 +3077,7 @@ var dslcDebug = true;
 		dslcSettings['dslc'] = 'active';
 		dslcSettings['dslc_module_id'] = moduleID;
 		dslcSettings['dslc_post_id'] = jQuery('.dslca-container').data('data-post-id');
-		dslcSettings.dslc_url_vars = Util.get_page_params();
+		dslcSettings.dslc_url_vars = DSLC_Util.get_page_params();
 
 		// Go through each option
 		dslcModuleOptions.each(function(){
@@ -4941,7 +4949,7 @@ var dslcDebug = true;
 				dslc : 'active',
 				dslc_module_id : dslcModuleID,
 				dslc_post_id : jQuery('.dslca-container').data('post-id'),
-				dslc_url_vars: Util.get_page_params()
+				dslc_url_vars: DSLC_Util.get_page_params()
 			},
 			function( response ) {
 
@@ -4997,7 +5005,7 @@ var dslcDebug = true;
 
 		});
 
-		dslcSettings.dslc_url_vars = Util.get_page_params();
+		dslcSettings.dslc_url_vars = DSLC_Util.get_page_params();
 
 		/**
 		 * Call AJAX for preview
@@ -7257,7 +7265,7 @@ DSLC.Editor = new (function() {
 
 			try{
 
-				var dep = JSON.parse( Util.b64_to_utf8( $(this).data('dep') ) );
+				var dep = JSON.parse( DSLC_Util.b64_to_utf8( $(this).data('dep') ) );
 			}catch(e){
 
 				parsed = false;

@@ -531,7 +531,12 @@ function livecomposer_editor_display() {
 	}
 */
 
-$frame_url = esc_url( base64_decode( $_GET['frame'] ) );
+$frame_url = get_permalink( $_GET['page_id'] ) . '?dslc=active';
+
+if ( isset( $_GET['preview_id'] ) ) {
+
+	$frame_url .= '&preview_id=' . $_GET['preview_id'];
+}
 
 ?>
 <style>

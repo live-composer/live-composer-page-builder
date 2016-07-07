@@ -48,7 +48,7 @@ function dslc_display_composer() {
 
 		?>
 
-			<div class="dslca-container dslca-state-off" data-post-id="<?php the_ID(); ?>">
+			<div class="dslca-container dslca-state-off" data-post-id="<?php echo $_GET['page_id']; ?>">
 
 				<div class="dslca-header dslc-clearfix" data-default-section="<?php echo $default_section; ?>">
 
