@@ -126,7 +126,7 @@ var dslcAllFontsArray = dslcRegularFontsArray.concat( dslcGoogleFontsArray );
 // Set current/default icons set
 var dslcIconsCurrentSet = DSLCIcons.fontawesome;
 
-var dslcDebug = false;
+var dslcDebug = true;
 
 /*********************************
  *
@@ -660,7 +660,8 @@ var dslcDebug = false;
  */
 						if ( moduleID == 'DSLC_M_A' || jQuery('body').hasClass('dslca-module-drop-in-progress') || modulesArea.closest('#dslc-header').length || modulesArea.closest('#dslc-footer').length ) {
 
-							// nothing
+							// Do nothing if we try to add Modules Area.
+							// (we can't place modules areas one into another)
 
 						} else {
 
@@ -816,6 +817,8 @@ var dslcDebug = false;
  * 
  */
 
+ 		// Modules/Elements – Drag & Drop – Make modules draggable/sortable
+
  		//After frame loaded
     	jQuery("#page-builder-frame").on('load', function(){
 
@@ -832,6 +835,7 @@ var dslcDebug = false;
 					var pagebuilder_iframe = jQuery(self).contents();
 					var el = jQuery('.dslc-modules-area', pagebuilder_iframe[0]); // Groups that can hold modules
 
+					// Activate Drag & Drop for each '.dslc-modules-area'.
 					jQuery(el).each(function (i,e) {
 
 						new DSLC_ModuleArea(e);
@@ -937,12 +941,11 @@ var dslcDebug = false;
 			jQuery('body', pagebuilder_iframe).addClass('dslca-enabled dslca-drag-not-in-progress');
 
 
-			// Prevent drag and drop in editable content areas
-			jQuery('[contenteditable]', pagebuilder_iframe).bind('drop dragover', function (e) {
-    		     e.preventDefault();
-    		});
-
-
+			// Prevent drag and drop of the modules
+			// into the inner content areas of the other modules
+			jQuery('.dslc-module-front', pagebuilder_iframe).bind('drop dragover dragend', function (e) {
+				e.preventDefault();
+			});
 		});
 
 		jQuery('body').addClass('dslca-enabled dslca-drag-not-in-progress');
