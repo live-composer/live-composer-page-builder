@@ -3,7 +3,28 @@
  */
 var DSLC_ModuleArea = function(elem) {
 
+	var self = this;
 	this.elem = elem;
+
+	/** Set observer to change elems class */
+	this.observer = new mqMutationObserver(elem, function(){
+
+		var classList = self.elem.classList;
+
+		if(elem.querySelectorAll('.dslc-module-front').length == 0) {
+
+			classList.add('dslc-modules-area-empty');
+			classList.add('dslc-last-col');
+			classList.remove('dslc-modules-area-not-empty');
+		} else {
+
+			classList.remove('dslc-last-col');
+			classList.remove('dslc-modules-area-empty');
+			classList.add('dslc-modules-area-not-empty');
+		}
+	}, {childList: true});
+
+	/** Set area sortable */
 	this.sortable = Sortable.create(elem, {
 	group: 'module-areas',
 	animation: 150,
@@ -17,32 +38,16 @@ var DSLC_ModuleArea = function(elem) {
 
 	setData: function (dataTransfer, dragEl) {
 
-	  // dataTransfer.setData('Text', dragEl.textContent);
 	  dataTransfer.setData('text/html', dragEl.innerHTML);
 	},
 
 	// dragging started
-	onStart: function (/**Event*/evt) {
+	onStart: function (evt) {
 		evt.oldIndex;  // element index within parent
-
-		/*
-		ui.placeholder.html('<span class="dslca-placeholder-help-text"><span class="dslca-placeholder-help-text-inner">' + ui.item.find('.dslc-sortable-helper-icon').data('title') + '</span></span>');
-
-		if ( ! jQuery(ui.item).hasClass('dslc-12-col') ) {
-			ui.placeholder.width(ui.item.width() - 10)
-		} else {
-			ui.placeholder.width(ui.item.width()).css({ margin : 0 });
-		}
-		*/
 
 		jQuery('body').removeClass('dslca-drag-not-in-progress').addClass('dslca-drag-in-progress');
 
-		// console.info( jQuery('.dslc-module-front', evt.from.innerHTML) );
 		if ( jQuery('.dslc-module-front', evt.from).length < 2 ) {
-
-			console.info( 'empty now' );
-
-			jQuery(evt.from).removeClass('dslc-modules-area-not-empty').addClass('dslc-modules-area-empty');
 
 			jQuery('.dslca-no-content:not(:visible)', evt.from).show().css({
 				'-webkit-animation-name' : 'dslcBounceIn',
@@ -55,11 +60,10 @@ var DSLC_ModuleArea = function(elem) {
 
 			});
 		}
-		// jQuery( '.dslc-modules-area' ).sortable( "refreshPositions" );
 	},
 	// dragging ended
-	onEnd: function (/**Event*/evt) {
-		// console.info( evt );
+
+	onEnd: function (evt) {
 		evt.oldIndex;  // element's old index within parent
 		evt.newIndex;  // element's new index within parent
 
@@ -68,12 +72,10 @@ var DSLC_ModuleArea = function(elem) {
 
 		dslc_generate_code();
 		jQuery('body').removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
-		// jQuery('.dslca-anim-opacity-drop').removeClass('dslca-anim-opacity-drop');
-		// ui.item.trigger('mouseleave');
 	},
 
 	// Element is dropped into the list from another list
-	onAdd: function (/**Event*/evt) {
+	onAdd: function (evt) {
 		var itemEl = evt.item;  // dragged HTMLElement
 		evt.from;  // previous list
 		// + indexes from onEnd
@@ -83,7 +85,7 @@ var DSLC_ModuleArea = function(elem) {
 	},
 
 	// Changed sorting within list
-	onUpdate: function (/**Event*/evt) {
+	onUpdate: function (evt) {
 		var itemEl = evt.item;  // dragged HTMLElement
 		// + indexes from onEnd
 		// evt.preventDefault();
@@ -94,7 +96,7 @@ var DSLC_ModuleArea = function(elem) {
 	},
 
 	// Called by any change to the list (add / update / remove)
-	onSort: function (/**Event*/evt) {
+	onSort: function (evt) {
 		// same properties as onUpdate
 		// evt.preventDefault();
 		// evt.stopPropagation(); return false;
@@ -102,28 +104,24 @@ var DSLC_ModuleArea = function(elem) {
 	},
 
 	// Element is removed from the list into another list
-	onRemove: function (/**Event*/evt) {
+	onRemove: function (evt) {
 	  // same properties as onUpdate
 	},
 
 	// Attempt to drag a filtered element
-	onFilter: function (/**Event*/evt) {
+	onFilter: function (evt) {
 		var itemEl = evt.item;  // HTMLElement receiving the `mousedown|tapstart` event.
 	},
 
 	// Event when you move an item in the list or between lists
-	onMove: function (/**Event*/evt) {
+	onMove: function (evt) {
 		// Example: http://jsbin.com/tuyafe/1/edit?js,output
 		evt.dragged; // dragged HTMLElement
 		evt.draggedRect; // TextRectangle {left, top, right и bottom}
 		evt.related; // HTMLElement on which have guided
 		evt.relatedRect; // TextRectangle
 		// return false; — for cancel
-		console.info( 'sortable - onMove' );
 
-
-		// console.info( jQuery('.dslc-modules-area-empty .dslc-module-front') );
-		// console.info( jQuery('.dslc-modules-area-empty .dslc-module-front').length );
 		// Add here the function to update underlying class
 		if ( jQuery('.dslc-modules-area-empty').find('.dslc-module-front').length > 0 ) {
 
@@ -139,7 +137,6 @@ var DSLC_ModuleArea = function(elem) {
 			}).animate({ padding : '35px 0' }, 300, function(){
 
 			});
-
 		}
 	}
 });
