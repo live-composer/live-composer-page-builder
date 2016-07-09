@@ -4732,7 +4732,7 @@ var dslcDebug = false;
 
 		callback = typeof callback !== 'undefined' ? callback : false;
 
-		var dslcModule = jQuery('.dslca-module-being-edited'),
+		var dslcModule = jQuery('.dslca-module-being-edited', DSLC.Editor.frame),
 		dslcModuleID = dslcModule.data('dslc-module-id'),
 		dslcModuleOptions = jQuery( '.dslca-module-options-front textarea', dslcModule ),
 		dslcModuleInstanceID = dslcModule.data('module-id');
@@ -5815,7 +5815,7 @@ var dslcDebug = false;
 		if ( dslcDebug ) console.log( 'dslc_update_preset' );
 
 		// Vars
-		var module = jQuery('.dslca-module-being-edited'),
+		var module = jQuery('.dslca-module-being-edited', DSLC.Editor.frame),
 		presetName = module.find('.dslca-module-option-front[data-id="css_load_preset"]').val(),
 		presetCode = module.find('.dslca-module-code').val(),
 		moduleID = module.data('dslc-module-id');
