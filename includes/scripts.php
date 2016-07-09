@@ -144,7 +144,6 @@ function dslc_load_scripts() {
 		// wp_enqueue_script( 'medium-editor-js', '//cdn.jsdelivr.net/medium-editor/latest/js/medium-editor.min.js', DS_LIVE_COMPOSER_VER );
 		// wp_enqueue_style( 'medium-editor-style', '//cdn.jsdelivr.net/medium-editor/latest/css/medium-editor.min.css', DS_LIVE_COMPOSER_VER );
 
-		wp_enqueue_script( 'class-sortable-area-js', DS_LIVE_COMPOSER_URL . 'js/classes/ModuleSortArea.js', array(), DS_LIVE_COMPOSER_VER );
 		wp_enqueue_script( 'mq-mutation-observer-js', DS_LIVE_COMPOSER_URL . 'js/libs/mq-mutation-observer.js', array(), DS_LIVE_COMPOSER_VER );
 		wp_enqueue_script( 'util-js', DS_LIVE_COMPOSER_URL . 'js/DSLC_Util.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 		wp_enqueue_script( 'base64', DS_LIVE_COMPOSER_URL . 'js/libs/base64.js', array(), DS_LIVE_COMPOSER_VER );
@@ -282,7 +281,10 @@ function dslc_load_editing_scripts() {
 		} else {
 
 			wp_enqueue_script( 'dslc-builder-main-js', DS_LIVE_COMPOSER_URL . 'js/builder.main.js', array( 'jquery', 'dslc-main-js' ), DS_LIVE_COMPOSER_VER );
-			wp_enqueue_script( 'dslc-editor-frame-js', DS_LIVE_COMPOSER_URL . 'js/editor.frame.js', array( 'jquery', 'dslc-main-js' ), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_script( 'class-sortable-area-js', DS_LIVE_COMPOSER_URL . 'js/classes/ModuleArea.js', array(), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_script( 'class-module-section-js', DS_LIVE_COMPOSER_URL . 'js/classes/Section.js', array(), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_script( 'class-module-js', DS_LIVE_COMPOSER_URL . 'js/classes/Module.js', array(), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_script( 'class-modal-window-js', DS_LIVE_COMPOSER_URL . 'js/classes/ModalWindow.js', array(), DS_LIVE_COMPOSER_VER );
 		}
 
 		if ( is_ssl() ) {
@@ -302,7 +304,6 @@ function dslc_load_editing_scripts() {
 		// wp_enqueue_style( 'medium-editor-style', '//cdn.jsdelivr.net/medium-editor/latest/css/medium-editor.min.css', DS_LIVE_COMPOSER_VER );
 
 		wp_enqueue_script( 'mq-mutation-observer-js', DS_LIVE_COMPOSER_URL . 'js/libs/mq-mutation-observer.js', array(), DS_LIVE_COMPOSER_VER );
-		wp_enqueue_script( 'class-sortable-area-js', DS_LIVE_COMPOSER_URL . 'js/classes/ModuleSortArea.js', array(), DS_LIVE_COMPOSER_VER );
 		wp_enqueue_script( 'util-js', DS_LIVE_COMPOSER_URL . 'js/DSLC_Util.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 		wp_enqueue_script( 'base64', DS_LIVE_COMPOSER_URL . 'js/libs/base64.js', array(), DS_LIVE_COMPOSER_VER );
 		wp_enqueue_script( 'modernizr', DS_LIVE_COMPOSER_URL . 'js/libs/modernizr-custom.js', array(), DS_LIVE_COMPOSER_VER );
