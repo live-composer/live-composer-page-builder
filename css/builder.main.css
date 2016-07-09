@@ -2159,6 +2159,98 @@ body.rtl .dslca-modules-area-placeholder {
 			/*margin-top: 20px;*/
 		}
 
+/** Modal Window class */
+
+
+.dslca-prompt-modal {
+	background: rgba( 255, 255, 255, 0.80 );
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 99999999;
+	height: 100%;
+}
+
+	.dslca-prompt-modal-content {
+		background: #fff;
+		border-radius: 3px;
+		top: 50%;
+		position: relative;
+		width: 400px;
+		margin: 0 auto;
+		margin-top: -123px;
+		padding: 40px;
+		-moz-box-shadow: 0 2px 2px rgba(0,0,0,.04), 0 0 7px rgba(0,0,0,.12); /* drop shadow and outer glow */
+		-webkit-box-shadow: 0 2px 2px rgba(0,0,0,.04), 0 0 7px rgba(0,0,0,.12); /* drop shadow and outer glow */
+		box-shadow: 0 2px 2px rgba(0,0,0,.04), 0 0 7px rgba(0,0,0,.12); /* drop shadow and outer glow */
+	}
+
+		.dslca-prompt-modal-msg {
+			text-align: center;
+		}
+
+			.dslca-prompt-modal-title {
+				color: #424242;
+				display: block;
+				font-family: "Lato";
+				font-size: 16px;
+				font-weight: bold;
+				line-height: 1;
+				margin-bottom: 22px;
+			}
+
+			.dslca-prompt-modal-descr {
+				color: #8a8a8a;
+				display: block;
+				font-family: "Lato";
+				font-size: 13px;
+				font-weight: normal;
+				line-height: 22px;
+				margin-bottom: 22px;
+			}
+
+		.dslca-prompt-modal-actions {
+			text-align: center;
+		}
+
+			.dslca-prompt-modal-cancel-hook,
+			.dslca-prompt-modal-confirm-hook {
+				background: #e55f5f;
+				border-radius: 3px;
+				cursor: pointer;
+				color: #fff;
+				display: inline-block;
+				font-size: 13px;
+				font-family: "Open Sans", sans-serif;
+				font-weight: bold;
+				line-height: 1;
+				padding: 13px 15px;
+				text-transform: uppercase;
+				text-decoration: none;
+				position: relative;
+			}
+
+			.dslca-prompt-modal-confirm-hook:hover {
+				color: #fff;
+			}
+
+			.dslca-prompt-modal-confirm-hook {
+				background: #4cc12d;
+				margin-right: 7px;
+			}
+
+			.dslca-prompt-modal-cancel-hook {
+
+			}
+
+			.dslca-prompt-modal-actions .dslc-icon {
+				color: rgba( 255, 255, 255, 0.5 );
+				margin-right: 6px;
+			}
+
 /**
  * Front
  */

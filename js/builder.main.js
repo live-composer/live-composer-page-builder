@@ -126,7 +126,7 @@ var dslcAllFontsArray = dslcRegularFontsArray.concat( dslcGoogleFontsArray );
 // Set current/default icons set
 var dslcIconsCurrentSet = DSLCIcons.fontawesome;
 
-var dslcDebug = true;
+var dslcDebug = false;
 
 /*********************************
  *
@@ -228,17 +228,20 @@ var dslcDebug = true;
 
 		// Change "currently editing"
 		if ( section == '.dslca-module-edit' ) {
+
 			jQuery('.dslca-currently-editing')
 				.show()
 					.find('strong')
-					.text( jQuery('.dslca-module-being-edited').attr('title') + ' element' );
+					.text( jQuery('.dslca-module-being-edited', DSLC.Editor.frame).attr('title') + ' element' );
 		} else if ( section == '.dslca-modules-section-edit' ) {
+
 			jQuery('.dslca-currently-editing')
 				.show()
 				.css( 'background-color', '#e5855f' )
 					.find('strong')
 					.text( 'Row' );
 		} else {
+
 			jQuery('.dslca-currently-editing')
 				.hide()
 					.find('strong')
@@ -663,19 +666,22 @@ var dslcDebug = true;
 		// On iframe loaded
 		jQuery("#page-builder-frame").on('load', function(){
 
+			var self = this;
+			DSLC.Editor.frame = jQuery(this).contents();
+
 			var pagebuilder_iframe = jQuery(this).contents();
 
 			// Disable WP admin bar in editing mode
 			jQuery('#wpadminbar', pagebuilder_iframe).remove();
-
 			jQuery('body', pagebuilder_iframe).addClass('dslca-enabled dslca-drag-not-in-progress');
-
 
 			// Prevent drag and drop of the modules
 			// into the inner content areas of the other modules
 			jQuery('.dslc-module-front', pagebuilder_iframe).bind('drop dragover dragend', function (e) {
 				e.preventDefault();
 			});
+
+			jQuery(document).trigger('editorFrameLoaded');
 		});
 
 		jQuery('body').addClass('dslca-enabled dslca-drag-not-in-progress');
@@ -696,9 +702,11 @@ var dslcDebug = true;
 			outlineColor;
 
 			if ( jQuery('.dslca-module-being-edited').length ) {
+
 				activeElement = $('.dslca-module-being-edited');
 				outlineColor = '#5890e5';
 			} else if ( jQuery('.dslca-modules-section-being-edited').length ) {
+
 				activeElement = $('.dslca-modules-section-being-edited');
 				outlineColor = '#eabba9';
 			}
@@ -728,7 +736,6 @@ var dslcDebug = true;
 		jQuery(document).on( 'click', '.dslca-hide-composer-hook', function(){
 
 			dslc_hide_composer()
-
 		});
 
 		/**
@@ -738,7 +745,6 @@ var dslcDebug = true;
 		$(document).on( 'click', '.dslca-show-composer-hook', function(){
 
 			dslc_show_composer();
-
 		});
 
 		/**
@@ -749,7 +755,6 @@ var dslcDebug = true;
 
 			e.preventDefault();
 			dslc_show_section( '.dslca-modules' );
-
 		});
 
 		/**
@@ -762,6 +767,7 @@ var dslcDebug = true;
 
 			// Do nothing if clicked on active tab
 			if ( $(this).hasClass('dslca-active') ) {
+
 				return;
 			}
 
@@ -769,9 +775,9 @@ var dslcDebug = true;
 			dslc_show_section( sectionTitle );
 
 			if ( $(this).hasClass('dslca-go-to-section-modules') || $(this).hasClass('dslca-go-to-section-templates')  ) {
+
 				$(this).addClass('dslca-active').siblings('.dslca-go-to-section-hook').removeClass('dslca-active');
 			}
-
 		});
 
 		/**
@@ -781,11 +787,12 @@ var dslcDebug = true;
 		$(document).on( 'click', '.dslca-close-composer-hook', function(e){
 
 			e.preventDefault();
+
 			if ( ! $('body').hasClass('dslca-saving-in-progress') ) {
+
 				dslc_js_confirm( 'disable_lc', '<span class="dslca-prompt-modal-title">' +
 					DSLCString.str_exit_title + '</span><span class="dslca-prompt-modal-descr">' + DSLCString.str_exit_descr + '</span>', $(this).attr('href') );
 			}
-
 		});
 
 		/**
@@ -807,10 +814,10 @@ var dslcDebug = true;
 			e.stopPropagation();
 
 			if ( $('.dslca-section-title-filter', this).length ) {
+
 				dslc_generate_filters();
 				$('.dslca-section-title-filter-options').slideToggle(300);
 			}
-
 		});
 
 		/**
@@ -825,17 +832,17 @@ var dslcDebug = true;
 			var section = $(this).closest('.dslca-section');
 
 			if ( section.hasClass('dslca-templates-load') ) {
+
 				$('.dslca-section-title-filter-curr', section).text( $(this).text());
 			} else {
+
 				$('.dslca-section-title-filter-curr', section).text( $(this).text());
 			}
 
 			$('.dslca-section-scroller-inner').css({ left : 0 });
 
 			dslc_filter_origin( origin, section );
-
 		});
-
 	});
 
 
@@ -1311,7 +1318,6 @@ var dslcDebug = true;
 		jQuery('.dslca-prompt-modal-content').css({ top : '55%' }).animate({
 			top : '50%'
 		}, 400);
-
 	}
 
 	function dslc_js_confirm_close() {
@@ -1351,13 +1357,12 @@ var dslcDebug = true;
 
 			if ( dslcAction == 'edit_in_progress' ) {
 
+				/// MOVED
 				dslc_module_options_cancel_changes( function(){
 					dslcTarget.trigger('click');
 				});
 
 			} else if ( dslcAction == 'delete_module' ) {
-
-
 
 			}
 
@@ -1376,6 +1381,7 @@ var dslcDebug = true;
 
 			if (  dslcAction == 'edit_in_progress' ) {
 
+				/// MOVED
 				dslc_module_options_confirm_changes( function(){
 					dslcTarget.trigger('click');
 				});
@@ -1386,6 +1392,7 @@ var dslcDebug = true;
 
 			} else if ( 'delete_module' === dslcAction ) {
 
+				/// MOVED
 				var module = dslcTarget.closest('.dslc-module-front');
 				dslc_delete_module( module );
 
@@ -1409,27 +1416,26 @@ var dslcDebug = true;
 
 					}
 
-
 			} else if ( dslcAction == 'delete_modules_section' ) {
 
+				/// MOVED
 				dslc_row_delete( dslcTarget.closest('.dslc-modules-section') );
 
 			} else if ( dslcAction == 'export_modules_section' ) {
 
 			} else if ( dslcAction == 'import_modules_section' ) {
 
+				/// MOVED
 				dslc_row_import( $('.dslca-prompt-modal textarea').val() );
 				$('.dslca-prompt-modal-confirm-hook span').css({ opacity : 0 });
 				$('.dslca-prompt-modal-confirm-hook .dslca-loading').show();
 				closeAtEnd = false;
-
 			}
 
 			if ( closeAtEnd )
 				dslc_js_confirm_close();
 
 			jQuery('.dslca-prompt-modal').data( 'id', '' );
-
 		});
 
 		/**
@@ -1509,6 +1515,8 @@ var dslcDebug = true;
 
 				if ( callback ) { callback(); }
 
+				newRow.find('.dslc-modules-area').addClass('dslc-modules-area-empty dslc-last-col');
+
 				defer.resolve(newRow[0]);
 			}
 		);
@@ -1561,8 +1569,8 @@ var dslcDebug = true;
 		var dslcModulesSectionOpts, dslcVal;
 
 		// Set editing class
-		jQuery('.dslca-module-being-edited').removeClass('dslca-module-being-edited');
-		jQuery('.dslca-modules-section-being-edited').removeClass('dslca-modules-section-being-edited').removeClass('dslca-modules-section-change-made');
+		jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
+		jQuery('.dslca-modules-section-being-edited', DSLC.Editor.frame).removeClass('dslca-modules-section-being-edited').removeClass('dslca-modules-section-change-made');
 		row.addClass('dslca-modules-section-being-edited');
 
 		// Hide the section hooks
@@ -1582,7 +1590,7 @@ var dslcDebug = true;
 		jQuery('.dslca-row-edit-actions').show();
 
 		// Set current values
-		jQuery('.dslca-modules-section-edit-field').each(function(){
+		jQuery('.dslca-modules-section-edit-field' , DSLC.Editor.frame).each(function(){
 
 
 			/**
@@ -2188,63 +2196,6 @@ var dslcDebug = true;
 
 
 		/**
-		 * Hook - Add Row
-		 */
-
-		$(document).on( 'click', '.dslca-add-modules-section-hook', function(){
-
-			var button = $(this);
-
-			if ( ! $(this).hasClass('dslca-action-disabled') ) {
-
-				// Add a loading animation
-				button.find('.dslca-icon').removeClass('dslc-icon-align-justify').addClass('dslc-icon-spinner dslc-icon-spin');
-
-				// Add a row
-				dslc_row_add( function(){
-					button.find('.dslca-icon').removeClass('dslc-icon-spinner dslc-icon-spin').addClass('dslc-icon-align-justify');
-				});
-
-			}
-
-		});
-
-		/**
-		 * Hook - Edit Row
-		 */
-
-		$(document).on( 'click', '.dslca-edit-modules-section-hook', function(){
-
-			// If not disabled ( disabling used for tutorial )
-			if ( ! $(this).hasClass('dslca-action-disabled') ) {
-
-				// If a module is being edited
-				if ( jQuery('.dslca-module-being-edited.dslca-module-change-made').length ) {
-
-					// Ask to confirm or cancel
-					dslc_js_confirm( 'edit_in_progress', '<span class="dslca-prompt-modal-title">' + DSLCString.str_module_curr_edit_title +
-						'</span><span class="dslca-prompt-modal-descr">' + DSLCString.str_module_curr_edit_descr + '</span>', jQuery(this) );
-
-				// If another section is being edited
-				} else if ( jQuery('.dslca-modules-section-being-edited.dslca-modules-section-change-made').length ) {
-
-					// Ask to confirm or cancel
-					dslc_js_confirm( 'edit_in_progress', '<span class="dslca-prompt-modal-title">' + DSLCString.str_row_curr_edit_title +
-						'</span><span class="dslca-prompt-modal-descr">' + DSLCString.str_row_curr_edit_descr + '</span>', jQuery(this) );
-
-				// All good to proceed
-				} else {
-
-					// Trigger the function to edit
-					dslc_row_edit( $(this).closest('.dslc-modules-section') );
-
-				}
-
-			}
-
-		});
-
-		/**
 		 * Hook - Confirm Row Changes
 		 */
 
@@ -2253,7 +2204,6 @@ var dslcDebug = true;
 			dslc_row_edit_confirm();
 			$('.dslca-row-options-filter-hook.dslca-active').removeClass('dslca-active');
 			dslc_responsive_classes( true );
-
 		});
 
 		/**
@@ -2265,73 +2215,7 @@ var dslcDebug = true;
 			dslc_row_edit_cancel();
 			$('.dslca-row-options-filter-hook.dslca-active').removeClass('dslca-active');
 			dslc_responsive_classes( true );
-
 		});
-
-		/**
-		 * Hook - Copy Row
-		 */
-
-		$(document).on( 'click', '.dslca-copy-modules-section-hook', function() {
-
-			if ( ! $(this).hasClass('dslca-action-disabled') ) {
-				dslc_row_copy( $(this).closest('.dslc-modules-section') );
-			}
-
-		});
-
-		/**
-		 * Hook - Import Row
-		 */
-
-		$(document).on( 'click', '.dslca-import-modules-section-hook', function(e) {
-
-			e.preventDefault();
-
-			if ( ! $(this).hasClass('dslca-action-disabled') ) {
-				$('.dslca-prompt-modal-confirm-hook').html('<span class="dslc-icon dslc-icon-ok"></span><span>' + DSLCString.str_import +
-					'</span><div class="dslca-loading followingBallsGWrap"><div class="followingBallsG_1 followingBallsG"></div>'+
-					'<div class="followingBallsG_2 followingBallsG"></div><div class="followingBallsG_3 followingBallsG"></div><div class="followingBallsG_4 followingBallsG"></div></div>');
-				dslc_js_confirm( 'import_modules_section', '<span class="dslca-prompt-modal-title">' + DSLCString.str_import_row_title +
-					'</span><span class="dslca-prompt-modal-descr">' + DSLCString.str_import_row_descr + ' <br><br><textarea></textarea></span>', $(this) );
-			}
-
-		});
-
-
-		/**
-		 * Hook - Delete Row
-		 */
-
-		$(document).on( 'click', '.dslca-delete-modules-section-hook', function(e){
-
-			e.preventDefault();
-
-			if ( ! $(this).hasClass('dslca-action-disabled') ) {
-				dslc_js_confirm( 'delete_modules_section', '<span class="dslca-prompt-modal-title">' + DSLCString.str_del_row_title +
-					'</span><span class="dslca-prompt-modal-descr">' + DSLCString.str_del_row_descr + '</span>', $(this) );
-			}
-
-		});
-
-		/**
-		 * Hook - Export Row
-		 */
-
-		$(document).on( 'click', '.dslca-export-modules-section-hook', function(e) {
-
-			e.preventDefault();
-
-			if ( ! $(this).hasClass('dslca-action-disabled') ) {
-				$('.dslca-prompt-modal-cancel-hook').hide();
-				$('.dslca-prompt-modal-confirm-hook').html('<span class="dslc-icon dslc-icon-ok"></span>' + DSLCString.str_ok);
-				dslc_js_confirm( 'export_modules_section', '<span class="dslca-prompt-modal-title">' + DSLCString.str_export_row_title +
-					'</span><span class="dslca-prompt-modal-descr">' + DSLCString.str_export_row_descr + ' <br><br><textarea></textarea></span>', $(this) );
-				$('.dslca-prompt-modal textarea').val( dslc_generate_section_code( $(this).closest('.dslc-modules-section') ) );
-			}
-
-		});
-
 	});
 
 
@@ -2580,7 +2464,6 @@ var dslcDebug = true;
 			e.preventDefault();
 
 			dslc_modules_area_add( jQuery(this).closest('.dslc-modules-section').find('.dslc-modules-section-inner') );
-
 		});
 
 		/**
@@ -2595,13 +2478,11 @@ var dslcDebug = true;
 				dslc_js_confirm( 'delete_modules_area', '<span class="dslca-prompt-modal-title">' + DSLCString.str_del_area_title +
 					'</span><span class="dslca-prompt-modal-descr">' + DSLCString.str_del_area_descr + '</span>', $(this) );
 			}
-
 		});
 
 		/**
 		 * Hook - Copy Area
 		 */
-
 		$(document).on( 'click', '.dslca-copy-modules-area-hook', function(e){
 
 			e.preventDefault();
@@ -2616,7 +2497,6 @@ var dslcDebug = true;
 		/**
 		 * Hook - Set Width
 		 */
-
 		$(document).on( 'click', '.dslca-change-width-modules-area-options span', function(){
 
 			if ( ! $(this).hasClass('dslca-action-disabled') ) {
@@ -2651,14 +2531,9 @@ var dslcDebug = true;
 
 					// Show
 					$('.dslca-change-width-modules-area-options', this).show();
-
 				}
-
 			}
-
 		});
-
-
 	});
 
 
@@ -2729,9 +2604,7 @@ var dslcDebug = true;
 
 			// Animations ( height to 0 for a slide effect )
 			module.css({ marginBottom : 0 }).animate({ height: 0 }, 400, 'easeOutQuart');
-
 		});
-
 	}
 
 	/**
@@ -2755,7 +2628,7 @@ var dslcDebug = true;
 			function( response ) {
 
 				// Remove being edited class if some module is being edited
-				jQuery('.dslca-module-being-edited').removeClass('dslca-module-being-edited');
+				jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
 
 				// Store the new ID
 				dslcModuleID = response.output;
@@ -2774,7 +2647,7 @@ var dslcDebug = true;
 				dslc_module_output_altered( function(){
 
 					// Fade in the module
-					jQuery('.dslca-module-being-edited').css({ opacity : 0 }).removeClass('dslca-module-being-edited').animate({ opacity : 1 }, 300);
+					jQuery('.dslca-module-being-edited', DSLC.Editor.frame).css({ opacity : 0 }).removeClass('dslca-module-being-edited').animate({ opacity : 1 }, 300);
 
 				});
 
@@ -2807,9 +2680,9 @@ var dslcDebug = true;
 
 		// Preview Change
 		dslc_module_output_altered( function(){
-			jQuery('.dslca-module-being-edited').removeClass('dslca-module-being-edited');
-		});
 
+			jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
+		});
 	}
 
 	/**
@@ -2821,7 +2694,7 @@ var dslcDebug = true;
 		if ( dslcDebug ) console.log( 'dslc_module_options_show' );
 
 		// Vars
-		var dslcModule = jQuery('.dslca-module-being-edited'),
+		var dslcModule = jQuery('.dslca-module-being-edited', DSLC.Editor.frame),
 		dslcModuleOptions = jQuery( '.dslca-module-options-front textarea', dslcModule ),
 		dslcDefaultSection = jQuery('.dslca-header').data('default-section');
 
@@ -2903,8 +2776,8 @@ var dslcDebug = true;
 				DSLC.Editor.loadOptionsDeps();
 
 				// Set up backup
-				var moduleBackup = jQuery('.dslca-module-options-front', '.dslca-module-being-edited').children().clone();
-				jQuery('.dslca-module-options-front-backup').html('').append(moduleBackup);
+				var moduleBackup = jQuery('.dslca-module-options-front', dslcModule).children().clone();
+				jQuery('.dslca-module-options-front-backup', dslcModule).html('').append(moduleBackup);
 
 			}
 
@@ -3472,7 +3345,6 @@ var dslcDebug = true;
 		// Show the publish button
 		jQuery('.dslca-save-composer-hook').css({ 'visibility' : 'visible' });
 		jQuery('.dslca-save-draft-composer-hook').css({ 'visibility' : 'visible' });
-
 	}
 
 	/**
@@ -4402,7 +4274,7 @@ var dslcDebug = true;
 					this.value = min;
 				}
 
-				dslcModule = jQuery('.dslca-modules-section-being-edited');
+				dslcModule = jQuery('.dslca-modules-section-being-edited', DSLC.Editor.frame);
 
 				// Add changed class
 				dslcModule.addClass('dslca-modules-section-change-made');
@@ -4535,7 +4407,7 @@ var dslcDebug = true;
 					this.value = min;
 				}
 
-				dslcModule = jQuery('.dslca-module-being-edited');
+				dslcModule = jQuery('.dslca-module-being-edited', DSLC.Editor.frame);
 
 				// Add changed class
 				dslcModule.addClass('dslca-module-change-made');
@@ -4782,9 +4654,9 @@ var dslcDebug = true;
 				dslc_generate_code();
 				dslc_show_publish_button();
 				dslc_carousel();
-				dslc_masonry( jQuery('.dslca-module-being-edited') );
-				jQuery( '.dslca-module-being-edited img' ).load( function(){
-					dslc_masonry( jQuery('.dslca-module-being-edited') );
+				dslc_masonry( jQuery('.dslca-module-being-edited', DSLC.Editor.frame) );
+				jQuery( '.dslca-module-being-edited img' , DSLC.Editor.frame).load( function(){
+					dslc_masonry( jQuery('.dslca-module-being-edited', DSLC.Editor.frame) );
 					dslc_center();
 				});
 				dslc_tabs();
@@ -4860,9 +4732,9 @@ var dslcDebug = true;
 				dslc_show_publish_button();
 
 				dslc_carousel();
-				dslc_masonry( jQuery('.dslca-module-being-edited') );
-				jQuery( '.dslca-module-being-edited img' ).load( function(){
-					dslc_masonry( jQuery('.dslca-module-being-edited') );
+				dslc_masonry( jQuery('.dslca-module-being-edited', DSLC.Editor.frame) );
+				jQuery( '.dslca-module-being-edited img' , DSLC.Editor.frame).load( function(){
+					dslc_masonry( jQuery('.dslca-module-being-edited', DSLC.Editor.frame) );
 					dslc_center();
 				});
 				dslc_tabs();
@@ -4874,7 +4746,7 @@ var dslcDebug = true;
 					callback( response );
 				}
 
-				jQuery('.dslca-module-being-edited').removeClass('dslca-module-being-edited');
+				jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
 
 			}
 
@@ -5006,7 +4878,6 @@ var dslcDebug = true;
 
 			$('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
 			dslc_responsive_classes( true );
-
 		});
 
 		/**
@@ -5488,7 +5359,7 @@ var dslcDebug = true;
 		 * Go through module areas (empty or not empty)
 		 */
 
-		jQuery('#dslc-main .dslc-modules-area').each(function(){
+		jQuery('#dslc-main .dslc-modules-area', DSLC.Editor.frame).each(function(){
 
 			if ( jQuery('.dslc-module-front', this).length ) {
 			//	jQuery(this).removeClass('dslc-modules-area-empty').addClass('dslc-modules-area-not-empty');
@@ -5511,7 +5382,7 @@ var dslcDebug = true;
 		 * Go through module sections (empty or not empty)
 		 */
 
-		jQuery('#dslc-main .dslc-modules-section').each(function(){
+		jQuery('#dslc-main .dslc-modules-section', DSLC.Editor.frame).each(function(){
 
 			if ( jQuery('.dslc-modules-area', this).length ) {
 				jQuery(this).removeClass('dslc-modules-section-empty').addClass('dslc-modules-section-not-empty');
@@ -5522,14 +5393,14 @@ var dslcDebug = true;
 		});
 
 		// Remove last and first classes
-		jQuery('#dslc-main .dslc-modules-area.dslc-last-col, .dslc-modules-area.dslc-first-col').removeClass('dslc-last-col dslc-first-col');
-		jQuery('#dslc-main .dslc-module-front.dslc-last-col, .dslc-module-front.dslc-first-col').removeClass('dslc-last-col dslc-first-col');
+		jQuery('#dslc-main .dslc-modules-area.dslc-last-col, .dslc-modules-area.dslc-first-col', DSLC.Editor.frame).removeClass('dslc-last-col dslc-first-col');
+		jQuery('#dslc-main .dslc-module-front.dslc-last-col, .dslc-module-front.dslc-first-col', DSLC.Editor.frame).removeClass('dslc-last-col dslc-first-col');
 
 		/**
 		 * Go through each row
 		 */
 
-		jQuery('#dslc-main .dslc-modules-section').each(function(){
+		jQuery('#dslc-main .dslc-modules-section', DSLC.Editor.frame).each(function(){
 
 			// Vars
 			currPerRowA = 0;
@@ -5671,7 +5542,6 @@ var dslcDebug = true;
 
 		// Generate content for search
 		dslca_gen_content_for_search();
-
 	}
 
 	/**
@@ -5885,7 +5755,7 @@ var dslcDebug = true;
 		 */
 
 		$(document).on( 'change', '.dslca-module-edit-field[name="css_load_preset"]', function(e){
-			$('.dslca-module-being-edited').addClass('dslca-preload-preset');
+			$('.dslca-module-being-edited', DSLC.Editor.frame).addClass('dslca-preload-preset');
 		});
 
 	});
@@ -6114,7 +5984,8 @@ var dslcDebug = true;
 			});
 			$(this).closest('.dslc-module-front').addClass('dslca-module-being-edited');
 			dslc_module_output_altered( function() {
-				$('.dslca-module-being-edited').removeClass('dslca-module-being-edited');
+
+				$('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
 			});
 
 		});
@@ -6144,7 +6015,7 @@ var dslcDebug = true;
 			dslcValReal = dslcVal;
 			dslcRule = dslcField.data('css-rule');
 
-			dslcEl = $('.dslca-modules-section-being-edited'); // Currently editing element
+			dslcEl = $('.dslca-modules-section-being-edited', DSLC.Editor.frame); // Currently editing element
 			dslcTargetEl = dslcEl;
 			dslcSetting = $('.dslca-modules-section-settings input[data-id="' + dslcFieldID + '"]', dslcEl );
 
@@ -6233,21 +6104,21 @@ var dslcDebug = true;
 				if ( dslcField.data('id') == 'show_on' ) {
 
 					if ( checkboxesVal.indexOf( 'desktop' ) !== -1 ) {
-						$('.dslca-modules-section-being-edited').removeClass('dslc-hide-on-desktop');
+						$('.dslca-modules-section-being-edited', DSLC.Editor.frame).removeClass('dslc-hide-on-desktop');
 					} else {
-						$('.dslca-modules-section-being-edited').addClass('dslc-hide-on-desktop');
+						$('.dslca-modules-section-being-edited', DSLC.Editor.frame).addClass('dslc-hide-on-desktop');
 					}
 
 					if ( checkboxesVal.indexOf( 'tablet' ) !== -1 ) {
-						$('.dslca-modules-section-being-edited').removeClass('dslc-hide-on-tablet');
+						$('.dslca-modules-section-being-edited', DSLC.Editor.frame).removeClass('dslc-hide-on-tablet');
 					} else {
-						$('.dslca-modules-section-being-edited').addClass('dslc-hide-on-tablet');
+						$('.dslca-modules-section-being-edited', DSLC.Editor.frame).addClass('dslc-hide-on-tablet');
 					}
 
 					if ( checkboxesVal.indexOf( 'phone' ) !== -1 ) {
-						$('.dslca-modules-section-being-edited').removeClass('dslc-hide-on-phone');
+						$('.dslca-modules-section-being-edited', DSLC.Editor.frame).removeClass('dslc-hide-on-phone');
 					} else {
-						$('.dslca-modules-section-being-edited').addClass('dslc-hide-on-phone');
+						$('.dslca-modules-section-being-edited', DSLC.Editor.frame).addClass('dslc-hide-on-phone');
 					}
 
 				}
@@ -6319,60 +6190,6 @@ var dslcDebug = true;
 
 		});
 
-		// Editable Content
-
-		jQuery(document).on('blur', '.dslca-editable-content', function() {
-
-			if ( ! jQuery('body').hasClass( 'dslca-composer-hidden' ) && jQuery(this).data('type') == 'simple' ) {
-
-				dslc_editable_content_gen_code( jQuery(this) );
-
-			}
-
-		}).on( 'paste', '.dslca-editable-content', function(){
-
-			if ( ! jQuery('body').hasClass( 'dslca-composer-hidden' )  && jQuery(this).data('type') == 'simple' ) {
-
-				var dslcRealInput = jQuery(this);
-
-				setTimeout(function(){
-
-					if ( dslcRealInput.data('type') == 'simple' ) {
-						dslcRealInput.html( dslcRealInput.text() );
-					}
-
-					dslc_editable_content_gen_code( jQuery(this) );
-
-				}, 1);
-
-			}
-
-		}).on('focus', '.dslca-editable-content', function() {
-
-			if (  jQuery(this).data('type') == 'simple' ) {
-
-				if ( ! jQuery('body').hasClass( 'dslca-composer-hidden' ) ) {
-
-					if ( ! jQuery(this).closest('.dslc-module-front').hasClass('dslca-module-being-edited') ) {
-						jQuery(this).closest('.dslc-module-front').find('.dslca-module-edit-hook').trigger('click');
-					}
-
-				} else {
-
-					$(this).trigger('blur');
-
-				}
-
-			}
-
-		}).on('keyup', '.dslca-editable-content', function(){
-
-			if ( jQuery(this).data('type') == 'simple' ) {
-				jQuery(this).closest('.dslc-module-front').addClass('dslca-module-change-made');
-			}
-
-		});
-
 
 		$(document).on( 'blur', '.dslc-editable-area', function(e){
 
@@ -6398,7 +6215,7 @@ var dslcDebug = true;
 				dslcOption = $(this),
 				dslcOptionID = dslcOption.data('id'),
 				dslcOptionWrap = dslcOption.closest('.dslca-module-edit-option'),
-				dslcModule = $('.dslca-module-being-edited'),
+				dslcModule = $('.dslca-module-being-edited', DSLC.Editor.frame),
 				dslcModuleID = dslcModule.data('dslc-module-id'),
 				dslcModuleOptions = jQuery( '.dslca-module-options-front textarea', dslcModule );
 
@@ -6449,7 +6266,8 @@ var dslcDebug = true;
 				jQuery('.dslca-container-loader').show();
 
 				dslc_module_output_altered( function(){
-					jQuery('.dslca-module-being-edited').addClass('dslca-module-change-made');
+
+					jQuery('.dslca-module-being-edited', DSLC.Editor.frame).addClass('dslca-module-change-made');
 					if ( dslcOptionID == 'css_load_preset' && ! jQuery('body').hasClass('dslca-new-preset-added') ) {
 						dslc_module_options_show( dslcModuleID );
 						jQuery('.dslca-container-loader').hide();
@@ -6474,8 +6292,10 @@ var dslcDebug = true;
 					var dslcAffectOnChangeRule = dslcOption.data('affect-on-change-rule');
 					var dslcAffectOnChangeVal = dslcOption.val();
 					var dslcAffectOnChangeValOrig = dslcAffectOnChangeVal;
+					var module = $(".dslca-module-being-edited", DSLC.Editor.frame);
 
 					if ( dslcOption.val().length && dslcGoogleFontsArray.indexOf( dslcOption.val() ) !== -1  ) {
+
 
 						WebFont.load({
 								google: {
@@ -6486,7 +6306,7 @@ var dslcDebug = true;
 										jQuery('.dslca-font-loading').removeClass('dslca-font-loading').find('.dslca-icon').removeClass('dslc-icon-spin').addClass('dslc-icon-chevron-right');
 									else
 										jQuery('.dslca-font-loading').removeClass('dslca-font-loading').find('.dslca-icon').removeClass('dslc-icon-spin').addClass('dslc-icon-chevron-left');
-									jQuery( dslcAffectOnChangeEl ,'.dslca-module-being-edited' ).css( dslcAffectOnChangeRule , dslcAffectOnChangeVal );
+									jQuery( dslcAffectOnChangeEl, module).css( dslcAffectOnChangeRule , dslcAffectOnChangeVal );
 								},
 								inactive : function ( familyName, fvd ) {
 									if ( jQuery( '.dslca-font-loading' ).closest('.dslca-module-edit-field-font-next').length )
@@ -6506,7 +6326,7 @@ var dslcDebug = true;
 							else
 								jQuery('.dslca-font-loading').removeClass('dslca-font-loading').find('.dslca-icon').removeClass('dslc-icon-spin').addClass('dslc-icon-chevron-left');
 
-							jQuery( dslcAffectOnChangeEl ,'.dslca-module-being-edited' ).css( dslcAffectOnChangeRule , dslcAffectOnChangeVal );
+							jQuery( dslcAffectOnChangeEl, module ).css( dslcAffectOnChangeRule , dslcAffectOnChangeVal );
 
 						}, 100);
 
@@ -6550,12 +6370,11 @@ var dslcDebug = true;
 						dslcAffectOnChangeVal = 'transparent';
 					}
 
-
-					console.info( dslcAffectOnChangeEl );
-					console.info( dslcAffectOnChangeRule );
 					dslcAffectOnChangeRule.split(',').forEach(function(rule){
 
-						jQuery( dslcAffectOnChangeEl ,'.dslca-module-being-edited' ).css( rule , dslcAffectOnChangeVal + dslcExt );
+						var module = $(".dslca-module-being-edited", DSLC.Editor.frame);
+
+						jQuery( dslcAffectOnChangeEl, module ).css( rule , dslcAffectOnChangeVal + dslcExt );
 					});
 				}
 
@@ -6578,7 +6397,7 @@ var dslcDebug = true;
 				dslcOption = $(this),
 				dslcOptionID = dslcOption.data('id'),
 				dslcOptionWrap = dslcOption.closest('.dslca-module-edit-option'),
-				dslcModule = $('.dslca-module-being-edited'),
+				dslcModule = $('.dslca-module-being-edited', DSLC.Editor.frame),
 				dslcModuleID = dslcModule.data('dslc-module-id'),
 				dslcModuleOptions = jQuery( '.dslca-module-options-front textarea', dslcModule ),
 				dslcAffectOnChangeEl = dslcOption.data('affect-on-change-el'),
@@ -6600,7 +6419,9 @@ var dslcDebug = true;
 
 				// Loop through rules (useful when there are multiple rules)
 				for ( var i = 0; i < dslcAffectOnChangeRules.length; i++ ) {
-					jQuery( dslcAffectOnChangeEl ,'.dslca-module-being-edited' ).css( dslcAffectOnChangeRules[i] , dslcAffectOnChangeVal );
+
+					var module = $(".dslca-module-being-edited", DSLC.Editor.frame);
+					jQuery( dslcAffectOnChangeEl, module ).css( dslcAffectOnChangeRules[i] , dslcAffectOnChangeVal );
 				}
 
 				/**
@@ -6622,7 +6443,7 @@ var dslcDebug = true;
 				dslcOption = $(this),
 				dslcOptionID = dslcOption.data('id'),
 				dslcOptionWrap = dslcOption.closest('.dslca-modules-section-edit-option'),
-				dslcModulesSection = $('.dslca-modules-section-being-edited'),
+				dslcModulesSection = $('.dslca-modules-section-being-edited', DSLC.editor.frame),
 				dslcAffectOnChangeRule = dslcOption.data('css-rule'),
 				dslcAffectOnChangeValOrig = dslcOption.val(),
 				dslcAffectOnChangeVal = dslcAffectOnChangeValOrig + dslcOption.data('ext'),
@@ -6700,7 +6521,7 @@ var dslcDebug = true;
 				Save image URL as data attribute of input in dslca-modules-section-settings set
 				We need URL in 'dslca-img-url' for live preview
 				 */
-				jQuery('.dslca-modules-section-being-edited').find('.dslca-modules-section-settings input[data-id="dslca-img-url"]').val( attachment.url );
+				jQuery('.dslca-modules-section-being-edited', DSLC.Editor.frame).find('.dslca-modules-section-settings input[data-id="dslca-img-url"]').val( attachment.url );
 				field.trigger('change'); // trigger change only after 'dslca-img-url' is set
 
 				hook.hide();
@@ -6735,58 +6556,7 @@ var dslcDebug = true;
 
 		});
 
-		/**
-		 * Show WYSIWYG
-		 */
 
-		$(document).on( 'click', '.dslca-wysiwyg-actions-edit-hook', function(){
-
-			var editable = $(this).parent().siblings('.dslca-editable-content');
-			var module = editable.closest('.dslc-module-front');
-
-			if ( module.hasClass('dslc-module-handle-like-accordion') ) {
-
-				dslc_accordion_generate_code( module.find('.dslc-accordion') );
-				var full_content = module.find( '.dslca-module-option-front[data-id="accordion_content"]' ).val();
-				var full_content_arr = full_content.split('(dslc_sep)');
-				var key_value = editable.closest('.dslc-accordion-item').index();
-				var content = full_content_arr[key_value].trim().replace(/<lctextarea/g, '<textarea').replace(/<\/lctextarea/g, '</textarea');
-
-			} else if ( module.hasClass('dslc-module-handle-like-tabs') ) {
-
-				dslc_tabs_generate_code( module.find('.dslc-tabs') );
-				var full_content = module.find( '.dslca-module-option-front[data-id="tabs_content"]' ).val();
-				var full_content_arr = full_content.split('(dslc_sep)');
-				var key_value = editable.closest('.dslc-tabs-tab-content').index();
-				var content = full_content_arr[key_value].trim().replace(/<lctextarea/g, '<textarea').replace(/<\/lctextarea/g, '</textarea');
-
-			} else {
-
-				var content = module.find( '.dslca-module-option-front[data-id="' + editable.data('id') + '"]' ).val().replace(/<lctextarea/g, '<textarea').replace(/<\/lctextarea/g, '</textarea');
-
-			}
-
-			if( typeof tinymce != "undefined" ) {
-
-				var editor = tinymce.get( 'dslcawpeditor' );
-				if ( $('#wp-dslcawpeditor-wrap').hasClass('tmce-active') ) {
-					editor.setContent( content, {format : 'html'} );
-				} else {
-					jQuery('textarea#dslcawpeditor').val( content );
-				}
-
-				if ( ! module.hasClass('dslca-module-being-edited') ) {
-					module.find('.dslca-module-edit-hook').trigger('click');
-				}
-
-				$('.dslca-wp-editor').show();
-				editable.addClass('dslca-wysiwyg-active');
-
-				$('#dslcawpeditor_ifr, #dslcawpeditor').css({ height : $('.dslca-wp-editor').height() - 350 });
-
-			}
-
-		});
 
 		/**
 		 * Confirm WYSIWYG
@@ -6799,9 +6569,11 @@ var dslcDebug = true;
 			if( typeof tinymce != "undefined" ) {
 
 				if ( $('#wp-dslcawpeditor-wrap').hasClass('tmce-active') ) {
+
 					var editor = tinymce.get( 'dslcawpeditor' );
 					var content = editor.getContent();
 				} else {
+
 					var content = $('#dslcawpeditor').val();
 				}
 
@@ -6809,21 +6581,20 @@ var dslcDebug = true;
 				$('.dslca-wysiwyg-active').html( content );
 
 				if ( module.hasClass('dslc-module-handle-like-accordion') ) {
+
 					$('.dslca-wysiwyg-active').siblings('.dslca-accordion-plain-content').val( content );
 					var dslcAccordion = module.find('.dslc-accordion');
 					dslc_accordion_generate_code( dslcAccordion );
 				} else if ( module.hasClass('dslc-module-handle-like-tabs') ) {
+
 					$('.dslca-wysiwyg-active').siblings('.dslca-tab-plain-content').val( content );
 					var dslcTabs = module.find('.dslc-tabs');
 					dslc_tabs_generate_code( dslcTabs );
 				}
 
-
 				dslc_editable_content_gen_code( $('.dslca-wysiwyg-active') );
 				$('.dslca-wysiwyg-active').removeClass('dslca-wysiwyg-active');
-
 			}
-
 		});
 
 		/**
@@ -6841,6 +6612,7 @@ var dslcDebug = true;
 
 /* Editor scripts */
 DSLC.Editor = new (function() {
+
 	var $ = jQuery;
 	var self = this;
 
@@ -6849,7 +6621,7 @@ DSLC.Editor = new (function() {
 
 	this.initMediumEditor = function(){
 
-		jQuery(".dslca-editable-content.medium-editor").each(function(){
+		jQuery(".dslca-editable-content.medium-editor", DSLC.Editor.frame).each(function(){
 
 			if($(this).data('medium-editor-element') == null){
 
@@ -6867,7 +6639,6 @@ DSLC.Editor = new (function() {
 
 				self.mediumEditors.push( medium );
 			}
-
 		});
 	}
 

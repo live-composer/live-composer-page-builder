@@ -135,7 +135,7 @@ class DSLC_Options_Extender {
 			'dslc_' . $section['extension_id'] . '_' . $section['id'] // where to show
 		);
 
-		if( ! is_array( $section['options'] ) ) continue;
+		if( ! is_array( $section['options'] ) ) return;
 
 		foreach ( $section['options'] as $option ) {
 
