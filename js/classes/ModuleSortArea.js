@@ -62,6 +62,7 @@ var DSLC_ModuleArea = function(elem) {
 		}
 	},
 	// dragging ended
+
 	onEnd: function (evt) {
 		evt.oldIndex;  // element's old index within parent
 		evt.newIndex;  // element's new index within parent
@@ -78,8 +79,8 @@ var DSLC_ModuleArea = function(elem) {
 		var itemEl = evt.item;  // dragged HTMLElement
 		evt.from;  // previous list
 		// + indexes from onEnd
-		evt.preventDefault();
-		evt.stopPropagation(); return false;
+		// evt.preventDefault();
+		// evt.stopPropagation(); return false;
 		console.info( 'sortable - onAdd' );
 	},
 
@@ -87,8 +88,8 @@ var DSLC_ModuleArea = function(elem) {
 	onUpdate: function (evt) {
 		var itemEl = evt.item;  // dragged HTMLElement
 		// + indexes from onEnd
-		evt.preventDefault();
-		evt.stopPropagation(); return false;
+		// evt.preventDefault();
+		// evt.stopPropagation(); return false;
 
 		dslc_show_publish_button();
 		console.info( 'sortable - onUpdate' );
@@ -97,8 +98,8 @@ var DSLC_ModuleArea = function(elem) {
 	// Called by any change to the list (add / update / remove)
 	onSort: function (evt) {
 		// same properties as onUpdate
-		evt.preventDefault();
-		evt.stopPropagation(); return false;
+		// evt.preventDefault();
+		// evt.stopPropagation(); return false;
 		console.info( 'sortable - onSort' );
 	},
 

@@ -126,7 +126,7 @@ var dslcAllFontsArray = dslcRegularFontsArray.concat( dslcGoogleFontsArray );
 // Set current/default icons set
 var dslcIconsCurrentSet = DSLCIcons.fontawesome;
 
-var dslcDebug = false;
+var dslcDebug = true;
 
 /*********************************
  *
@@ -671,12 +671,11 @@ var dslcDebug = false;
 			jQuery('body', pagebuilder_iframe).addClass('dslca-enabled dslca-drag-not-in-progress');
 
 
-			// Prevent drag and drop in editable content areas
-			jQuery('[contenteditable]', pagebuilder_iframe).bind('drop dragover', function (e) {
-    		     e.preventDefault();
-    		});
-
-
+			// Prevent drag and drop of the modules
+			// into the inner content areas of the other modules
+			jQuery('.dslc-module-front', pagebuilder_iframe).bind('drop dragover dragend', function (e) {
+				e.preventDefault();
+			});
 		});
 
 		jQuery('body').addClass('dslca-enabled dslca-drag-not-in-progress');
