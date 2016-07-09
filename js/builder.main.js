@@ -3422,9 +3422,9 @@ var dslcDebug = true;
 		callback = typeof callback !== 'undefined' ? callback : false;
 
 		// If slider module
-		if ( jQuery('.dslca-module-being-edited').hasClass('dslc-module-DSLC_Sliders') ) {
+		if ( jQuery('.dslca-module-being-edited', DSLC.Editor.frame).hasClass('dslc-module-DSLC_Sliders') ) {
 
-			jQuery('.dslca-module-being-edited').removeClass('dslca-module-being-edited');
+			jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
 
 		// If not slider module
 		} else {
@@ -3439,7 +3439,7 @@ var dslcDebug = true;
 				dslc_update_preset();
 
 				// Remove classes so we know saving finished
-				jQuery('.dslca-module-being-edited').removeClass('dslca-module-being-edited');
+				jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
 				jQuery('body').removeClass('dslca-module-saving-in-progress');
 
 				// Clean up options container
@@ -3487,7 +3487,7 @@ var dslcDebug = true;
 		callback = typeof callback !== 'undefined' ? callback : false;
 
 		// Vars
-		var editedModule = jQuery('.dslca-module-being-edited'),
+		var editedModule = jQuery('.dslca-module-being-edited', DSLC.Editor.frame),
 		originalOptions = jQuery('.dslca-module-options-front-backup').children().clone();
 
 		// Add backup option values
@@ -3496,7 +3496,7 @@ var dslcDebug = true;
 		// Reload module
 		dslc_module_output_altered( function(){
 
-			jQuery('.dslca-module-being-edited').removeClass('dslca-module-being-edited');
+			editedModule.removeClass('dslca-module-being-edited');
 
 			// Clean up options container
 			if ( ! jQuery('body').hasClass('rtl') ) {

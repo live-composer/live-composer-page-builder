@@ -1349,7 +1349,7 @@ function dslc_toogle_control ( control_id ) {
 	var control_storage = control.find('.dslca-module-edit-field');
 
 	// Get the element we are editing
-	var module = jQuery('.dslca-module-being-edited');
+	var module = jQuery('.dslca-module-being-edited', DSLC.Editor.frame);
 
 	// Get the element id
 	var module_id = module[0].id;
