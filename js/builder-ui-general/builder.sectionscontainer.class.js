@@ -1,25 +1,16 @@
 /**
- * Modules row class
+ * Sections container class
  */
 
-'use strict';
-/**
- * Builder row class
- */
+DSLC.Editor.CSectionsContainer = function(elem) {
 
-DSLC.Editor.CRow = function(elem) {
-
-	this.elem = elem;
-
-	var sortableContainer = jQuery(elem).find('.dslc-modules-section-wrapper .dslc-modules-section-inner').eq(0)[0];
-
-	this.sortable = Sortable.create(sortableContainer, {
-		group: 'modules-areas',
+	this.sortable = Sortable.create(elem, {
+		group: 'sections',
 		animation: 150,
-		handle: '.dslca-move-modules-area-hook',
-		draggable: '.dslc-modules-area',
+		handle: '.dslca-move-modules-section-hook',
+		draggable: '.dslc-modules-section',
 		// ghostClass: 'dslca-module-placeholder',
-		chosenClass: 'dslca-module-area-dragging',
+		chosenClass: 'dslca-section-dragging',
 		scroll: true, // or HTMLElement
 		scrollSensitivity: 150, // px, how near the mouse must be to an edge to start scrolling.
 		scrollSpeed: 15, // px
@@ -56,7 +47,7 @@ DSLC.Editor.CRow = function(elem) {
 			evt.newIndex;  // element's new index within parent
 
 			evt.preventDefault();
-			//console.info( 'sortable - onEnd' );
+			console.info( 'sortable - onEnd' );
 
 			dslc_generate_code();
 			jQuery('body').removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
@@ -69,7 +60,7 @@ DSLC.Editor.CRow = function(elem) {
 			// + indexes from onEnd
 			// evt.preventDefault();
 			// evt.stopPropagation(); return false;
-			//console.info( 'sortable - onAdd' );
+			console.info( 'sortable - onAdd' );
 		},
 
 		// Changed sorting within list
@@ -80,7 +71,7 @@ DSLC.Editor.CRow = function(elem) {
 			// evt.stopPropagation(); return false;
 
 			dslc_show_publish_button();
-			//console.info( 'sortable - onUpdate' );
+			console.info( 'sortable - onUpdate' );
 		},
 
 		// Called by any change to the list (add / update / remove)
@@ -88,7 +79,7 @@ DSLC.Editor.CRow = function(elem) {
 			// same properties as onUpdate
 			// evt.preventDefault();
 			// evt.stopPropagation(); return false;
-			//console.info( 'sortable - onSort' );
+			console.info( 'sortable - onSort' );
 		},
 
 		// Element is removed from the list into another list

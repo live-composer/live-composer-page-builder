@@ -188,7 +188,7 @@
 		var modulesSection, modulesArea, moduleID, moduleOutput;
 
 		// Modules Sections / Rows – Drag & Drop – Make sections draggable/sortable
-		jQuery( '.dslc-content' ).sortable({
+		/*jQuery( '.dslc-content' ).sortable({
 			items: ".dslc-modules-section",
 			handle: '.dslca-move-modules-section-hook:not(".dslca-action-disabled")',
 			placeholder: 'dslca-modules-section-placeholder',
@@ -216,10 +216,10 @@
 				jQuery('.dslc-modules-section').css({ overflow : 'visible', 'max-height' : 'none' });
 			}
 		});
-
+*/
 		// Modules Sections / Rows – Drag & Drop – Receive Elements Inside
 
-		jQuery( '.dslc-modules-section' ).droppable({
+		/*jQuery( '.dslc-modules-section' ).droppable({
 			drop: function( event, ui ) {
 				var modulesSection = jQuery(this).find('.dslc-modules-section-inner');
 				var moduleID = ui.draggable.data( 'id' );
@@ -227,7 +227,7 @@
 					dslc_modules_area_add( modulesSection );
 				}
 			}
-		});
+		});*/
 
 		// Modules Area – Drag & Drop – Receive Elements Inside
 
@@ -244,7 +244,7 @@
 
     		var modules_list_sortable = Sortable.create( modules_list[0] , {
     			sort: false, // do not allow sorting inside the list of modules
-    			group: { name: 'module-areas', pull: 'clone', put: false },
+    			group: { name: 'modules', pull: 'clone', put: false },
     			animation: 150,
     			handle: '.dslca-module',
     			draggable: '.dslca-module',
@@ -273,7 +273,7 @@
     					evt.oldIndex;  // element index within parent
 
     					// jQuery( '.dslc-modules-area' ).sortable( "refreshPositions" );
-    				console.info( 'onStart' );
+    				//console.info( 'onStart' );
     				jQuery('body').removeClass('dslca-new-module-drag-not-in-progress').addClass('dslca-new-module-drag-in-progress');
     				jQuery('#dslc-header').addClass('dslca-header-low-z-index');
     			},
@@ -291,7 +291,6 @@
 					// Vars
 					modulesArea = jQuery(itemEl.parentNode); //jQuery(this);
 					moduleID = itemEl.dataset.id; // get value of data-id attr.
-
 
 
 					dslc_generate_code();
@@ -394,7 +393,7 @@
     				  evt.from;  // previous list
     				  // + indexes from onEnd
     				   // evt.preventDefault();
-    				   console.info( 'odules_list_sortable - onAdd' );
+    				   //console.info( 'Modules_list_sortable - onAdd' );
     			},
 
     			// Changed sorting within list
@@ -404,7 +403,7 @@
     					dslc_show_publish_button();
     					 // evt.preventDefault();
 
-    					 console.info( 'odules_list_sortable - onUpdate' );
+    					//console.info( 'Modules_list_sortable - onUpdate' );
     			},
 
     			// Called by any change to the list (add / update / remove)
@@ -412,7 +411,7 @@
     				  // same properties as onUpdate
     				   evt.preventDefault();
     				   // evt.stopPropagation(); return false;
-    				   console.info( 'odules_list_sortable - onSort' );
+    				   //console.info( 'Modules_list_sortable - onSort' );
     			},
 
     			// Element is removed from the list into another list
@@ -434,7 +433,7 @@
     				evt.related; // HTMLElement on which have guided
     				evt.relatedRect; // TextRectangle
     				// return false; — for cancel
-    				console.info( 'odules_list_sortable - onMove' );
+    				//console.info( 'odules_list_sortable - onMove' );
     			}
 			});
 	}
@@ -469,6 +468,9 @@
 			jQuery('.dslc-module-front', pagebuilder_iframe).bind('drop dragover dragend', function (e) {
 				e.preventDefault();
 			});
+
+			var mainDraggable = DSLC.Editor.frame.find("#dslc-main").eq(0)[0];
+			new DSLC.Editor.CSectionsContainer( mainDraggable );
 
 			jQuery(document).trigger('editorFrameLoaded');
 		});

@@ -4,9 +4,10 @@
 
 'use strict';
 
-var DSLC_ModuleArea = function(elem) {
+DSLC.Editor.CModuleArea = function(elem) {
 
 	var self = this;
+	this.section = elem.closest('.dslc-modules-section');
 	this.elem = elem;
 
 	/** Set observer to change elems class */
@@ -31,7 +32,7 @@ var DSLC_ModuleArea = function(elem) {
 	 * Make MODULES inside the Modules Area draggable/sortable
 	 */
 	this.sortable = Sortable.create(elem, {
-		group: 'module-areas',
+		group: 'modules',
 		animation: 150,
 		handle: '.dslca-move-module-hook',
 		draggable: '.dslc-module-front',
@@ -69,11 +70,12 @@ var DSLC_ModuleArea = function(elem) {
 		// dragging ended
 
 		onEnd: function (evt) {
+
 			evt.oldIndex;  // element's old index within parent
 			evt.newIndex;  // element's new index within parent
 
 			evt.preventDefault();
-			console.info( 'sortable - onEnd' );
+			//console.info( 'sortable - onEnd' );
 
 			dslc_generate_code();
 			jQuery('body').removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
@@ -81,12 +83,20 @@ var DSLC_ModuleArea = function(elem) {
 
 		// Element is dropped into the list from another list
 		onAdd: function (evt) {
+
 			var itemEl = evt.item;  // dragged HTMLElement
 			evt.from;  // previous list
+
+			if ( jQuery(itemEl).data('id') == 'DSLC_M_A' ) {
+
+				dslc_modules_area_add( jQuery(self.section).find('.dslc-modules-section-wrapper .dslc-modules-section-inner') );
+				itemEl.remove();
+			}
+
 			// + indexes from onEnd
 			// evt.preventDefault();
 			// evt.stopPropagation(); return false;
-			console.info( 'sortable - onAdd' );
+			//console.info( 'sortable - onAdd' );
 		},
 
 		// Changed sorting within list
@@ -97,7 +107,7 @@ var DSLC_ModuleArea = function(elem) {
 			// evt.stopPropagation(); return false;
 
 			dslc_show_publish_button();
-			console.info( 'sortable - onUpdate' );
+			//console.info( 'sortable - onUpdate' );
 		},
 
 		// Called by any change to the list (add / update / remove)
@@ -105,7 +115,7 @@ var DSLC_ModuleArea = function(elem) {
 			// same properties as onUpdate
 			// evt.preventDefault();
 			// evt.stopPropagation(); return false;
-			console.info( 'sortable - onSort' );
+			//console.info( 'sortable - onSort' );
 		},
 
 		// Element is removed from the list into another list
@@ -151,7 +161,7 @@ var DSLC_ModuleArea = function(elem) {
 	 *
 	 * Make columns draggable/sortable
 	 */
-	jQuery( '.dslc-modules-section-inner', DSLC.Editor.frame ).sortable({
+	/*jQuery( '.dslc-modules-section-inner', DSLC.Editor.frame ).sortable({
 		connectWith: '.dslc-modules-section-inner',
 		items: ".dslc-modules-area",
 		handle: '.dslca-move-modules-area-hook:not(".dslca-action-disabled")',
@@ -211,5 +221,5 @@ var DSLC_ModuleArea = function(elem) {
 		change: function( e, ui ) {
 
 		}
-	});
+	});*/
 }

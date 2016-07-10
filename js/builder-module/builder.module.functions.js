@@ -36,22 +36,6 @@
 	var $ = jQuery;
 
 	/**
-	 * Action - Automatically Add a Row if Empty
-	 */
-	if ( ! jQuery( '#dslc-main .dslc-modules-section', DSLC.Editor.frame).length && ! jQuery( '#dslca-tut-page', DSLC.Editor.frame).length ) {
-
-		dslc_row_add().then(function(row){
-
-			var el = jQuery('.dslc-modules-area', DSLC.Editor.frame); // Groups that can hold modules
-
-			jQuery(el).each(function (i,e) {
-
-				new DSLC_ModuleArea(e);
-			});
-		});
-	}
-
-	/**
 	 * Hook - Copy Module
 	 */
 	DSLC.Editor.frame.on( 'click', '.dslca-copy-module-hook', function(e){
@@ -74,7 +58,7 @@
 
 		if ( ! $(this).hasClass('dslca-action-disabled') ) {
 
-			DSLC.Editor.ModalWindow({
+			DSLC.Editor.CModalWindow({
 				title: DSLCString.str_del_module_title,
 				content: DSLCString.str_del_module_descr,
 				confirm: function() {
@@ -110,7 +94,7 @@
 			// If another module being edited and has changes
 			if ( $('.dslca-module-being-edited.dslca-module-change-made').length ) {
 
-				DSLC.Editor.ModalWindow({
+				DSLC.Editor.CModalWindow({
 					title: DSLCString.str_module_curr_edit_title,
 					content: DSLCString.str_module_curr_edit_descr,
 					confirm: function() {
@@ -135,7 +119,7 @@
 			// If a section is being edited and has changes
 			} else if ( $('.dslca-modules-section-being-edited.dslca-modules-section-change-made').length ) {
 
-				DSLC.Editor.ModalWindow({
+				DSLC.Editor.CModalWindow({
 					title: DSLCString.str_row_curr_edit_title,
 					content: DSLCString.str_row_curr_edit_descr,
 					confirm: function() {

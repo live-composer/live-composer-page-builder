@@ -16,10 +16,34 @@
 /**
  * Module Area Actions (Duplicate, Change Width, Delete, ...)
  *
- * Attach these actions once the editing iFrame loaded. 
+ * Attach these actions once the editing iFrame loaded.
  */
 
 ;jQuery(document).on('editorFrameLoaded', function(){
+
+	function init_sortables() {
+
+		var el = jQuery('.dslc-modules-area', DSLC.Editor.frame); // Groups that can hold modules
+
+		jQuery(el).each(function (i,e) {
+
+			new DSLC.Editor.CModuleArea(e);
+		});
+	}
+
+	/**
+	 * Action - Automatically Add a Row if Empty
+	 */
+	if ( ! jQuery( '#dslc-main .dslc-modules-section', DSLC.Editor.frame).length && ! jQuery( '#dslca-tut-page', DSLC.Editor.frame).length ) {
+
+		dslc_row_add().then(function(row){
+
+			init_sortables();
+		});
+	} else {
+
+		init_sortables();
+	}
 
 	/**
 	 * Hook - Copy Module Area
@@ -152,7 +176,8 @@ function dslc_modules_area_add( row ) {
 	var emptyModuleAreas = jQuery('.dslc-modules-area-empty', DSLC.Editor.frame);
 
 	jQuery(emptyModuleAreas).each(function (i,e) {
-		new DSLC_ModuleArea(e);
+
+		new DSLC.Editor.CModuleArea(e);
 	});
 
 	// Call other functions
