@@ -202,15 +202,15 @@ jQuery(document).ready(function($){
 });
 
 /* Editor scripts */
-DSLC.Editor = new (function() {
+(function() {
 
 	var $ = jQuery;
-	var self = this;
+	var self = DSLC.Editor;
 
-	this.colorpickers = [];
-	this.mediumEditors = [];
+	DSLC.Editor.colorpickers = [];
+	DSLC.Editor.mediumEditors = [];
 
-	this.initMediumEditor = function(){
+	DSLC.Editor.initMediumEditor = function(){
 
 		jQuery(".dslca-editable-content.medium-editor", DSLC.Editor.frame).each(function(){
 
@@ -240,7 +240,7 @@ DSLC.Editor = new (function() {
 	MediumEditor.extensions.button.prototype.defaults.unorderedlist.contentDefault = '<span class="dashicons dashicons-editor-ul"></span>';
 	MediumEditor.extensions.button.prototype.defaults.removeFormat.contentDefault = '<span class="dashicons dashicons-editor-removeformatting"></span>';
 
-	this.clearUtils = function() {
+	DSLC.Editor.clearUtils = function() {
 
 		if( Array.isArray(self.colorpickers ) ) {
 
@@ -266,9 +266,9 @@ DSLC.Editor = new (function() {
 	}
 
 	/** Options dependencies */
-	this.depsHandlers = [];
+	DSLC.Editor.depsHandlers = [];
 
-	this.loadOptionsDeps = function() {
+	DSLC.Editor.loadOptionsDeps = function() {
 
 		var self = this;
 
@@ -338,7 +338,7 @@ DSLC.Editor = new (function() {
 		$(".dslca-module-edit-option input, .dslca-module-edit-option select").trigger('dslc-init-deps');
 	}
 
-	this.unloadOptionsDeps = function() {
+	DSLC.Editor.unloadOptionsDeps = function() {
 
 		this.depsHandlers.forEach(function(handler){
 
@@ -348,7 +348,7 @@ DSLC.Editor = new (function() {
 
 		this.depsHandlers = [];
 	}
-})();
+}());
 
 
 /**

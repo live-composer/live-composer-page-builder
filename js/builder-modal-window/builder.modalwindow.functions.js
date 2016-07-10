@@ -1,7 +1,7 @@
 
 /*********************************
  *
- * 4) = UI - MODAL =
+ * = UI - MODAL =
  * Note: Used for the templates save/export/import and icons
  *
  * - dslc_show_modal ( Show Modal )

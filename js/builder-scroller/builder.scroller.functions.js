@@ -1,7 +1,7 @@
 
 /*********************************
  *
- * 2) = UI - SCROLLER =
+ * = UI - SCROLLER =
  *
  * - dslc_scroller_init ( Initiate )
  * - dslc_scroller_go_to ( Scroll To Specific Item )

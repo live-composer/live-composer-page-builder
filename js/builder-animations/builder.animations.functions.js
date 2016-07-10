@@ -1,7 +1,7 @@
 
 /*********************************
  *
- * 3) = UI - ANIMATIONS =
+ * = UI - ANIMATIONS =
  *
  * - dslc_ui_animations ( Animations for the UI )
  *

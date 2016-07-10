@@ -1,7 +1,7 @@
 
 /*********************************
  *
- * = 10) = CODE GENERATION =
+ * = CODE GENERATION =
  *
  * - dslc_save_composer ( Save the Page Changes )
  * - dslc_save_draft_composer ( Save the changes as draft, not publish )
