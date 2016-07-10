@@ -125,7 +125,7 @@ function dslc_modules_area_add( row ) {
 	// Add class to body so we know it's in progress
 	// jQuery('body', DSLC.Editor.frame).addClass('dslca-anim-in-progress');
 
-	var output = '<div class="dslc-modules-area dslc-col dslc-12-col dslc-modules-area-empty" data-size="12">'+
+	var output = '<div class="dslc-modules-area dslc-col dslc-12-col dslc-modules-area-empty " data-size="12">'+
 	'<div class="dslca-modules-area-manage"> <div class="dslca-modules-area-manage-inner">'+
 	'<span class="dslca-manage-action dslca-copy-modules-area-hook" title="Duplicate" ><span class="dslca-icon dslc-icon-copy">'+
 	'</span></span> <span class="dslca-manage-action dslca-move-modules-area-hook" title="Drag to move" >'+
@@ -144,8 +144,16 @@ function dslc_modules_area_add( row ) {
 	jQuery( output ).appendTo( row ).css({ height : 0 }).animate({
 		height : 99
 	}, 300, function(){
-		jQuery(this).css({ height : 'auto' })
+		jQuery(this).css({ height : 'auto' });
 	}).addClass('dslca-init-animation');
+
+
+	// Re-initialize all the empty areas on the page
+	var emptyModuleAreas = jQuery('.dslc-modules-area-empty', DSLC.Editor.frame);
+
+	jQuery(emptyModuleAreas).each(function (i,e) {
+		new DSLC_ModuleArea(e);
+	});
 
 	// Call other functions
 	dslc_drag_and_drop();
