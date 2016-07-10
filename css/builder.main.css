@@ -1780,7 +1780,7 @@ body {
 		top: 0;
 		margin-right: 0px;
 		text-align: center;
-		z-index: 99999;
+		z-index: 999999;
 	}
 
 	.dslca-modules-area-manage.dslca-horizontal {

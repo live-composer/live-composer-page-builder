@@ -2,6 +2,8 @@
  *  Basic Module class
  */
 
+'use strict';
+
 ;jQuery(document).on('editorFrameLoaded', function(){
 
 	var $ = jQuery;

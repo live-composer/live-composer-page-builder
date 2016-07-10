@@ -18,8 +18,7 @@
      * @params.confirm_title {string} - modal window confirm title
      * @params.ok_title {string} - modal window OK title
      */
-    DSLC.Editor.ModalWindow = function(params)
-    {
+    DSLC.Editor.ModalWindow = function(params) {
         if(typeof params != 'object') return false;
 
         // Show Modal Window
@@ -28,13 +27,13 @@
          '<span class="dslca-prompt-modal-title">' + params.title + '</span>' +
           '<span class="dslca-prompt-modal-descr">' + params.content + '</span></div>';
 
-        if(params.confirm || params.cancel){
+        if (params.confirm || params.cancel) {
 
             var modalWindowActions = '<div class="dslca-prompt-modal-actions">' +
             '<a href="#" class="dslca-prompt-modal-confirm-hook"><span class="dslc-icon dslc-icon-ok">' +
             '</span>' + (params.confirm_title ? params.confirm_title : 'Confirm') + '</a><span class="dslca-prompt-modal-cancel-hook"><span class="dslc-icon dslc-icon-remove">' +
             '</span>' + (params.cancel_title ? params.cancel_title : 'Cancel') +'</span></div>';
-        }else {
+        } else {
 
             var modalWindowActions = '<div class="dslca-prompt-modal-actions">' +
             '<a href="#" class="dslca-prompt-modal-confirm-hook"><span class="dslc-icon dslc-icon-ok">' +
@@ -44,8 +43,8 @@
         modalWindowWrap += modalWindowActions + '</div>';
         modalWindowWrap = jQuery(modalWindowWrap);
 
-        if(typeof params.confirm != 'function') params.confirm = function(){};
-        if(typeof params.cancel != 'function') params.cancel = function(){};
+        if (typeof params.confirm != 'function') params.confirm = function(){};
+        if (typeof params.cancel != 'function') params.cancel = function(){};
 
         // Confirm handler (function)
 

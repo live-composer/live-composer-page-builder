@@ -281,7 +281,10 @@ function dslc_load_editing_scripts() {
 		} else {
 
 			wp_enqueue_script( 'dslc-builder-main-js', DS_LIVE_COMPOSER_URL . 'js/builder.main.js', array( 'jquery', 'dslc-main-js' ), DS_LIVE_COMPOSER_VER );
-			wp_enqueue_script( 'class-sortable-area-js', DS_LIVE_COMPOSER_URL . 'js/classes/ModuleArea.js', array(), DS_LIVE_COMPOSER_VER );
+
+			wp_enqueue_script( 'dslc-builder-modulearea-class-js', DS_LIVE_COMPOSER_URL . 'js/builder-module-area/builder.modulearea.class.js', array( 'dslc-builder-main-js' ), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_script( 'dslc-builder-modulearea-functions-js', DS_LIVE_COMPOSER_URL . 'js/builder-module-area/builder.modulearea.functions.js', array( 'dslc-builder-main-js' ), DS_LIVE_COMPOSER_VER );
+
 			wp_enqueue_script( 'class-module-section-js', DS_LIVE_COMPOSER_URL . 'js/classes/Section.js', array(), DS_LIVE_COMPOSER_VER );
 			wp_enqueue_script( 'class-module-js', DS_LIVE_COMPOSER_URL . 'js/classes/Module.js', array(), DS_LIVE_COMPOSER_VER );
 			wp_enqueue_script( 'class-modal-window-js', DS_LIVE_COMPOSER_URL . 'js/classes/ModalWindow.js', array(), DS_LIVE_COMPOSER_VER );
