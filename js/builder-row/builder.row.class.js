@@ -1,5 +1,5 @@
 /**
- * Modules section class
+ * Modules row class
  */
 
 'use strict';
