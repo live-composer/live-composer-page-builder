@@ -183,7 +183,7 @@
 	 */
 	DSLC.Editor.frame.on( 'click', '.dslca-wysiwyg-actions-edit-hook', function(){
 
-		var editable = $(this).parent().siblings('.dslca-editable-content');
+		var editable = jQuery(this).parent().siblings('.dslca-editable-content');
 		var module = editable.closest('.dslc-module-front');
 
 		if ( module.hasClass('dslc-module-handle-like-accordion') ) {
@@ -206,11 +206,11 @@
 			var content = module.find( '.dslca-module-option-front[data-id="' + editable.data('id') + '"]' ).val().replace(/<lctextarea/g, '<textarea').replace(/<\/lctextarea/g, '</textarea');
 		}
 
-		if( typeof tinymce != "undefined" ) {
+		if ( typeof tinymce != "undefined" ) {
 
 			var editor = tinymce.get( 'dslcawpeditor' );
 
-			if ( $('#wp-dslcawpeditor-wrap').hasClass('tmce-active') ) {
+			if ( jQuery('#wp-dslcawpeditor-wrap').hasClass('tmce-active') ) {
 
 				editor.setContent( content, {format : 'html'} );
 			} else {
@@ -223,10 +223,10 @@
 				module.find('.dslca-module-edit-hook').trigger('click');
 			}
 
-			$('.dslca-wp-editor').show();
+			jQuery('.dslca-wp-editor').show();
 			editable.addClass('dslca-wysiwyg-active');
 
-			$('#dslcawpeditor_ifr, #dslcawpeditor').css({ height : $('.dslca-wp-editor').height() - 350 });
+			jQuery('#dslcawpeditor_ifr, #dslcawpeditor').css({ height : jQuery('.dslca-wp-editor').height() - 300 });
 		}
 	});
 
@@ -263,7 +263,7 @@
 				}
 			} else {
 
-				$(this).trigger('blur');
+				jQuery(this).trigger('blur');
 			}
 		}
 	}).on('keyup', '.dslca-editable-content', function(){

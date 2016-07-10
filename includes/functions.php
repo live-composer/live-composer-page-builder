@@ -548,11 +548,23 @@ function dslc_is_editor_active( $capability = 'save' ) {
 		$capability_check = DS_LIVE_COMPOSER_CAPABILITY;
 	}
 
-	// Check if editor is activated and current user can use the editor.
-	if ( DS_LIVE_COMPOSER_ACTIVE && current_user_can( $capability_check ) ) {
-		return true;
+	if ( is_admin() ) {
+
+		$wpadmin_screen = get_current_screen();
+
+		if ( 'toplevel_page_livecomposer_editor' === $wpadmin_screen->id && current_user_can( $capability_check ) ) {
+			return true;
+		} else {
+			return false;
+		}
 	} else {
-		return false;
+
+		// Check if editor is activated and current user can use the editor.
+		if ( DS_LIVE_COMPOSER_ACTIVE && current_user_can( $capability_check ) ) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

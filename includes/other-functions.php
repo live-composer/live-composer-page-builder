@@ -519,39 +519,44 @@ function livecomposer_editor_display() {
 
 	$screen = get_current_screen();
 
+	// Proceed only if current page is Live Composer editing page in WP Admin.
 	if ( 'toplevel_page_livecomposer_editor' !== $screen->id ) {
-
 		return;
 	}
 
-/*
-	if( ! defined( 'ABSPATH' ) ) {
-		header('HTTP/1.0 403 Forbidden');
-		exit;
+	/*
+		if( ! defined( 'ABSPATH' ) ) {
+			header('HTTP/1.0 403 Forbidden');
+			exit;
+		}
+	*/
+
+	$frame_url = get_permalink( $_GET['page_id'] ) . '?dslc=active';
+
+	if ( isset( $_GET['preview_id'] ) ) {
+
+		$frame_url .= '&preview_id=' . $_GET['preview_id'];
 	}
-*/
 
-$frame_url = get_permalink( $_GET['page_id'] ) . '?dslc=active';
-
-if ( isset( $_GET['preview_id'] ) ) {
-
-	$frame_url .= '&preview_id=' . $_GET['preview_id'];
-}
+	// Include all the code needed on the editing page.
+	do_action( 'dslc_hook_pagebuilder_iframe_before' );
 
 ?>
-<style>
-	#wpcontent, #wpbody, #wpbody-content, #page-builder-frame {
-	   height: 100%;
-	   top: 0;
-	   left: 0;
-	   position: fixed;
-	   width: 100%;
-	   margin: 0;
-	   padding: 0;
-	}
-</style>
-<iframe id="page-builder-frame" src="<?php echo $frame_url ?>"></iframe>
+	<style>
+		#wpcontent, #wpbody, #wpbody-content, #page-builder-frame {
+		   height: 100%;
+		   top: 0;
+		   left: 0;
+		   position: fixed;
+		   width: 100%;
+		   margin: 0;
+		   padding: 0;
+		}
+	</style>
+	<iframe id="page-builder-frame" src="<?php echo $frame_url ?>"></iframe>
 	<?php
+	// Include all the code needed on the editing page.
+	do_action( 'dslc_hook_pagebuilder_iframe_after' );
 }
 
 

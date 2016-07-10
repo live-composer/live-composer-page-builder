@@ -642,50 +642,11 @@ function dslc_filter_content( $content ) {
 		// If editor is currently active generate the LC elements and store them in composer_append var
 		if ( dslc_is_editor_active( 'access' ) ) {
 
-			// Get the editor type from the settings
-			$editor_type = dslc_get_option( 'lc_editor_type', 'dslc_plugin_options_other' );
-
-			// If no editor type set in settings
-			if ( empty( $editor_type ) ) {
-
-				// Default to "both" ( Visual and HTML )
-				$editor_type = 'both';
-
-			}
-
 			// The "Add modules row" and "Import" buttons
 			$composer_append = '<div class="dslca-add-modules-section">
 				<span class="dslca-add-modules-section-hook"><span class="dslca-icon dslc-icon-align-justify"></span>' . __( 'Add Modules Row', 'live-composer-page-builder' ) . '</span>
 				<span class="dslca-import-modules-section-hook"><span class="dslca-icon dslc-icon-download-alt"></span>' . __( 'Import', 'live-composer-page-builder' ) . '</span>
 			</div>';
-
-			// Start output fetching
-			ob_start();
-
-			?>
-				<div class="dslca-wp-editor">
-					<div class="dslca-wp-editor-inner">
-						<?php
-
-							if ( $editor_type == 'visual' )
-								wp_editor( '', 'dslcawpeditor', array('quicktags' => false) );
-							else
-								wp_editor( '', 'dslcawpeditor' );
-						?>
-						<div class="dslca-wp-editor-notification">
-							<?php _e( 'Module settings are being loaded. Save/Cancel actions will appear shortly.', 'live-composer-page-builder' ); ?>
-						</div><!-- .dslca-wp-editor-notification -->
-						<div class="dslca-wp-editor-actions">
-							<span class="dslca-wp-editor-save-hook"><?php _e( 'Confirm', 'live-composer-page-builder' ); ?></span>
-							<span class="dslca-wp-editor-cancel-hook"><?php _e( 'Cancel', 'live-composer-page-builder' ); ?></span>
-						</div>
-					</div>
-				</div>
-			<?php
-
-			// Stop output fetching
-			$composer_append .= ob_get_contents();
-			ob_end_clean();
 
 		}
 
@@ -753,6 +714,50 @@ function dslc_filter_content( $content ) {
 	}
 
 } add_filter( 'the_content', 'dslc_filter_content', 101 );
+
+/**
+ * Output hidden TinyMCE editor popup.
+ *
+ * @return void
+ */
+function dslc_editor_code() {
+	// If editor is currently active generate the LC elements and store them in composer_append var.
+	if ( dslc_is_editor_active( 'access' ) ) {
+
+		// Get the editor type from the settings.
+		$editor_type = dslc_get_option( 'lc_editor_type', 'dslc_plugin_options_other' );
+
+		// If no editor type set in settings.
+		if ( empty( $editor_type ) ) {
+
+			// Default to "both" ( Visual and HTML ).
+			$editor_type = 'both';
+
+		}
+
+		?>
+			<div class="dslca-wp-editor">
+				<div class="dslca-wp-editor-inner">
+					<?php
+					if ( 'visual' === $editor_type ) {
+						wp_editor( '', 'dslcawpeditor', array( 'quicktags' => false ) );
+					} else {
+						wp_editor( '', 'dslcawpeditor' );
+					}
+					?>
+					<div class="dslca-wp-editor-notification">
+						<?php _e( 'Module settings are being loaded. Save/Cancel actions will appear shortly.', 'live-composer-page-builder' ); ?>
+					</div><!-- .dslca-wp-editor-notification -->
+					<div class="dslca-wp-editor-actions">
+						<span class="dslca-wp-editor-save-hook"><?php _e( 'Confirm', 'live-composer-page-builder' ); ?></span>
+						<span class="dslca-wp-editor-cancel-hook"><?php _e( 'Cancel', 'live-composer-page-builder' ); ?></span>
+					</div>
+				</div>
+			</div>
+		<?php
+	}
+
+} add_action( 'admin_footer', 'dslc_editor_code' );
 
 
 /**

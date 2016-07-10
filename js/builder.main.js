@@ -6138,41 +6138,41 @@ var dslcDebug = true;
 
 
 		/**
-		 * Confirm WYSIWYG
+		 * Confirm changes in standard WP Editor (TinyMCE) WYSIWYG
 		 */
 
 		$(document).on( 'click', '.dslca-wp-editor-save-hook', function(){
 
-			var module = $('.dslca-wysiwyg-active').closest('.dslc-module-front');
+			var module = jQuery('.dslca-wysiwyg-active', DSLC.Editor.frame ).closest('.dslc-module-front');
 
 			if( typeof tinymce != "undefined" ) {
 
-				if ( $('#wp-dslcawpeditor-wrap').hasClass('tmce-active') ) {
+				if ( jQuery('#wp-dslcawpeditor-wrap').hasClass('tmce-active') ) {
 
 					var editor = tinymce.get( 'dslcawpeditor' );
 					var content = editor.getContent();
 				} else {
 
-					var content = $('#dslcawpeditor').val();
+					var content = jQuery('#dslcawpeditor').val();
 				}
 
-				$('.dslca-wp-editor').hide();
-				$('.dslca-wysiwyg-active').html( content );
+				jQuery('.dslca-wp-editor').hide();
+				jQuery('.dslca-wysiwyg-active', DSLC.Editor.frame ).html( content );
 
 				if ( module.hasClass('dslc-module-handle-like-accordion') ) {
 
-					$('.dslca-wysiwyg-active').siblings('.dslca-accordion-plain-content').val( content );
+					jQuery('.dslca-wysiwyg-active', DSLC.Editor.frame ).siblings('.dslca-accordion-plain-content').val( content );
 					var dslcAccordion = module.find('.dslc-accordion');
 					dslc_accordion_generate_code( dslcAccordion );
 				} else if ( module.hasClass('dslc-module-handle-like-tabs') ) {
 
-					$('.dslca-wysiwyg-active').siblings('.dslca-tab-plain-content').val( content );
+					jQuery('.dslca-wysiwyg-active', DSLC.Editor.frame ).siblings('.dslca-tab-plain-content').val( content );
 					var dslcTabs = module.find('.dslc-tabs');
 					dslc_tabs_generate_code( dslcTabs );
 				}
 
-				dslc_editable_content_gen_code( $('.dslca-wysiwyg-active') );
-				$('.dslca-wysiwyg-active').removeClass('dslca-wysiwyg-active');
+				dslc_editable_content_gen_code( jQuery('.dslca-wysiwyg-active', DSLC.Editor.frame ) );
+				jQuery('.dslca-wysiwyg-active', DSLC.Editor.frame ).removeClass('dslca-wysiwyg-active');
 			}
 		});
 
@@ -6183,7 +6183,7 @@ var dslcDebug = true;
 		$(document).on( 'click', '.dslca-wp-editor-cancel-hook', function(){
 
 			$('.dslca-wp-editor').hide();
-			$('.dslca-wysiwyg-active').removeClass('dslca-wysiwyg-active');
+			$('.dslca-wysiwyg-active', DSLC.Editor.frame ).removeClass('dslca-wysiwyg-active');
 		});
 	});
 
