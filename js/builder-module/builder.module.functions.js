@@ -156,7 +156,7 @@
 				dslcModuleCurrCode = dslcModule.find('.dslca-module-code').val();
 
 				// If a module is bening edited remove the "being edited" class from it
-				$('.dslca-module-being-edited').removeClass('dslca-module-being-edited');
+				$('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
 
 				// Add the "being edited" class to current module
 				dslcModule.addClass('dslca-module-being-edited');

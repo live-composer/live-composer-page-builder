@@ -507,7 +507,7 @@ function dslc_editing_iframe_page() {
 		'99' // Int $position.
 	);
 
-	//remove_menu_page( 'livecomposer_editor', 'livecomposer_editor' );
+	remove_menu_page( 'livecomposer_editor', 'livecomposer_editor' );
 
 	// Custom options extension.
 	// global $dslc_options_extender;
