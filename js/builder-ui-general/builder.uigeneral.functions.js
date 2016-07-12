@@ -270,9 +270,9 @@
 
     			// dragging started
     			onStart: function (/**Event*/evt) {
-    					evt.oldIndex;  // element index within parent
+    				evt.oldIndex;  // element index within parent
 
-    					// jQuery( '.dslc-modules-area' ).sortable( "refreshPositions" );
+    				// jQuery( '.dslc-modules-area' ).sortable( "refreshPositions" );
     				//console.info( 'onStart' );
     				jQuery('body').removeClass('dslca-new-module-drag-not-in-progress').addClass('dslca-new-module-drag-in-progress');
     				jQuery('#dslc-header').addClass('dslca-header-low-z-index');
@@ -292,8 +292,8 @@
 					modulesArea = jQuery(itemEl.parentNode); //jQuery(this);
 					moduleID = itemEl.dataset.id; // get value of data-id attr.
 
-
 					dslc_generate_code();
+
 					if ( moduleID == 'DSLC_M_A' || jQuery('body').hasClass('dslca-module-drop-in-progress') || 
 						modulesArea.closest('#dslc-header').length || modulesArea.closest('#dslc-footer').length ) {
 
@@ -367,8 +367,12 @@
 
 						// Loading animation
 
-						// Show loader
-						jQuery('.dslca-module-loading', modulesArea).show();
+						// Show loader – Not used anymore.
+						// jQuery('.dslca-module-loading', modulesArea).show();
+
+						// Change module icon to the spinning loader.
+						jQuery(itemEl).find('.dslca-icon').attr('class', '').attr('class', 'dslca-icon dslc-icon-refresh dslc-icon-spin');
+
 
 						// Hide no content text
 						jQuery('.dslca-no-content-primary', modulesArea).css({ opacity : 0 });
@@ -457,17 +461,12 @@
 			var self = this;
 			DSLC.Editor.frame = jQuery(this).contents();
 
-			var pagebuilder_iframe = jQuery(this).contents();
-
 			// Disable WP admin bar in editing mode
-			jQuery('#wpadminbar', pagebuilder_iframe).remove();
-			jQuery('body', pagebuilder_iframe).addClass('dslca-enabled dslca-drag-not-in-progress');
+			jQuery('#wpadminbar', DSLC.Editor.frame).remove();
+			jQuery('body', DSLC.Editor.frame).addClass('dslca-enabled dslca-drag-not-in-progress');
 
-			// Prevent drag and drop of the modules
-			// into the inner content areas of the other modules
-			jQuery('.dslc-module-front', pagebuilder_iframe).bind('drop dragover dragend', function (e) {
-				e.preventDefault();
-			});
+
+			dslc_fix_contenteditable();
 
 			var mainDraggable = DSLC.Editor.frame.find("#dslc-main").eq(0)[0];
 			new DSLC.Editor.CSectionsContainer( mainDraggable );
@@ -635,3 +634,23 @@
 			dslc_filter_origin( origin, section );
 		});
 	});
+
+
+/**
+ * Prevent drag and drop of the modules
+ * into the inner content areas of the other modules
+ */
+function dslc_fix_contenteditable() {
+
+	console.info( 'dslc_fix_contenteditable' );
+
+	jQuery('.dslca-module, .dslc-module-front, .dslc-modules-area, .dslc-modules-section', DSLC.Editor.frame).bind('dragstart', function (e) {
+		console.info( 'dragstart' );
+		jQuery('[contenteditable]', DSLC.Editor.frame).attr('contenteditable', false);
+	});
+
+	jQuery('.dslca-module, .dslc-module-front, .dslc-modules-area, .dslc-modules-section', DSLC.Editor.frame).bind('dragend', function (e) {
+		console.info( 'dragend' );
+		jQuery('[contenteditable]', DSLC.Editor.frame).attr('contenteditable', true);
+	});
+}

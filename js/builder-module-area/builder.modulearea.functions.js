@@ -295,6 +295,8 @@ function dslc_modules_area_copy( area ) {
 	// Copy the area and append to the row
 	var dslcModulesAreaCloned = area.clone().appendTo(modulesSection);
 
+	new DSLC.Editor.CModuleArea(dslcModulesAreaCloned[0]);
+
 	// Trigger mouseleave ( so the actions that show on hover go away )
 	dslcModulesAreaCloned.find('.dslca-modules-area-manage').trigger('mouseleave');
 

@@ -18,11 +18,9 @@ DSLC.Editor.CModuleArea = function(elem) {
 		if (elem.querySelectorAll('.dslc-module-front').length == 0) {
 
 			classList.add('dslc-modules-area-empty');
-			classList.add('dslc-last-col');
 			classList.remove('dslc-modules-area-not-empty');
 		} else {
 
-			classList.remove('dslc-last-col');
 			classList.remove('dslc-modules-area-empty');
 			classList.add('dslc-modules-area-not-empty');
 		}
@@ -75,7 +73,6 @@ DSLC.Editor.CModuleArea = function(elem) {
 			evt.newIndex;  // element's new index within parent
 
 			evt.preventDefault();
-			//console.info( 'sortable - onEnd' );
 
 			dslc_generate_code();
 			jQuery('body').removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
