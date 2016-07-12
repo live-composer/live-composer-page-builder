@@ -262,7 +262,6 @@ function dslc_display_composer() {
 				<!-- Module Template Export -->
 
 				<textarea id="dslca-code"></textarea>
-				<div class="dslca-module-options-front-backup"></div>
 
 				<div class="dslca-container-loader">
 					<div class="dslca-container-loader-inner followingBallsGWrap">

@@ -192,6 +192,7 @@ final class DSLC_Scripts{
 		/**
 		 * JavaScript
 		 */
+		wp_enqueue_script( 'dslc-plugins-js', DS_LIVE_COMPOSER_URL . 'js/libs/plugins.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 		wp_enqueue_script( 'wp-mediaelement' );
 
 		if ( ! SCRIPT_DEBUG ) {
@@ -240,7 +241,6 @@ final class DSLC_Scripts{
 			wp_enqueue_script( 'dslc-load-fonts', '//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js' );
 			wp_enqueue_script( 'dslc-builder-plugins-js', DS_LIVE_COMPOSER_URL . 'js/libs/builder.plugins.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 
-			wp_enqueue_script( 'medium-editor-js', '//cdn.jsdelivr.net/medium-editor/latest/js/medium-editor.min.js', [], DS_LIVE_COMPOSER_VER );
 			wp_enqueue_script( 'mq-mutation-observer-js', DS_LIVE_COMPOSER_URL . 'js/libs/mq-mutation-observer.js', array(), DS_LIVE_COMPOSER_VER );
 			wp_enqueue_script( 'util-js', DS_LIVE_COMPOSER_URL . 'js/common/util.class.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 			wp_enqueue_script( 'base64', DS_LIVE_COMPOSER_URL . 'js/libs/base64.js', array(), DS_LIVE_COMPOSER_VER );
@@ -267,9 +267,6 @@ final class DSLC_Scripts{
 			wp_localize_script( 'dslc-builder-main-js', 'DSLCString', $translation_array );
 			wp_localize_script( 'dslc-builder-main-js', 'DSLCFonts', self::$fonts_array );
 			wp_localize_script( 'dslc-builder-main-js', 'DSLCIcons', $dslc_var_icons );
-
-			/* Medium text editor */
-			wp_enqueue_style( 'medium-editor-style', '//cdn.jsdelivr.net/medium-editor/latest/css/medium-editor.min.css', DS_LIVE_COMPOSER_VER );
 		}
 	}
 
