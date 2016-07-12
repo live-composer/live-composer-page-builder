@@ -65,7 +65,9 @@ jQuery(document).ready(function($){
 		$('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
 		$(this).addClass('dslca-active');
 
-		dslc_module_options_section_filter( jQuery(this).data('section') );
+		var currentSection = jQuery(this).data('section');
+
+		dslc_module_options_section_filter( currentSection );
 
 		// If previous was responsive reload module
 		if ( dslcPrev == 'responsive' ) {
@@ -82,7 +84,25 @@ jQuery(document).ready(function($){
 				// Hide the loader
 				jQuery('.dslca-container-loader').hide();
 			});
+
+
+			/**
+			 * Destroy resizable preview functionality
+			 * when leaving Responsive view.
+			 */
+			jQuery('#page-builder-preview-area').resizable('destroy').css('width','inherit');
+
 		}
+
+		/**
+		 * Make the preview area resizable
+		 * when entering Responsive view.
+		 */
+		if ( currentSection == 'responsive' ) {
+
+			jQuery('#page-builder-preview-area').resizable();
+		}
+
 	});
 
 	/**

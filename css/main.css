@@ -831,20 +831,6 @@ body.dslc-res-phone .dslc-module-front.dslc-col {
 
 }
 
-/**
- * Responsive PREVIEW ( when a tab for responsive options is selected )
- */
-
- body.dslca-enabled.dslc-res-tablet #dslc-content {
- 	max-width: 768px;
- 	margin: 0 auto;
- }
-
- body.dslca-enabled.dslc-res-phone #dslc-content {
- 	max-width: 480px;
- 	margin: 0 auto;
- }
-
  /**
   * Animations moved outside of media queries
   * IE10 and IE11 do not support CSS animations inside media queries.

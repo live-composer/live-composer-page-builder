@@ -1000,7 +1000,7 @@ body {
 		}
 
 		.dslca-template-title {
-		    line-height: 26px;
+			 line-height: 26px;
 		}
 
 		.dslca-template-origin-user {
@@ -1203,7 +1203,7 @@ body {
 	position: relative;
 	background: #5890e5;
 	height: 40px; /* 2px */
- 	float: left;
+	float: left;
 }
 
 	.dslca-placeholder-help-text {
@@ -1248,18 +1248,18 @@ body {
 }
 
 .dslc-modules-area-empty:after {
-    content: "Drop modules here";
-    display: inline-block;
-    line-height: 120px;
-    opacity: 1;
-    color: #BEBDBD;
+	 content: "Drop modules here";
+	 display: inline-block;
+	 line-height: 120px;
+	 opacity: 1;
+	 color: #BEBDBD;
 
-    left: 0;
-    right: 0;
-    position: absolute;
+	 left: 0;
+	 right: 0;
+	 position: absolute;
 
-    font-size: 15px;
-    font-family: 'Open Sans', sans-serif;
+	 font-size: 15px;
+	 font-family: 'Open Sans', sans-serif;
 }
 
 .dslc-module-front {
@@ -2788,7 +2788,7 @@ body.rtl .dslca-modules-area-placeholder {
 		}
 
 		.dslca-module-edit-option-slider input {
-		    cursor: ew-resize;
+			 cursor: ew-resize;
 		}
 
 		.dslca-module-edit-option-slider:hover:after {
@@ -3704,11 +3704,66 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 /**
  * ----------------------------------------------------------------------
  * Responsive preview
+ *
+ * Responsive PREVIEW ( when a tab for responsive options is selected )
  */
 
-html.dslc-responsive-preview {
-   background: #61666A;
-}
+	body.dslca-enabled.dslc-res-tablet #page-builder-preview-area,
+	body.dslca-enabled.dslc-res-phone #page-builder-preview-area {
+		display: block;
+		margin: 0 auto;
+		position: relative;
+
+		border: 14px solid black;
+		border-top-width: 60px;
+		/*border-bottom-width: 14px;*/
+		border-radius: 16px;
+
+		top: 40px;
+
+		/*max-height: calc(100% - 320px);*/
+	}
+
+	body.dslca-enabled.dslc-res-phone #page-builder-preview-area {
+		width: 480px;
+		max-width: 767px;
+	}
+
+	body.dslca-enabled.dslc-res-tablet #page-builder-preview-area {
+		width: 768px;
+		min-width: 768px;
+		max-width : 1024px;
+	}
+
+	body.dslca-enabled.dslc-res-phone #page-builder-frame,
+	body.dslca-enabled.dslc-res-tablet #page-builder-frame {
+		display: block;
+		position: relative;
+	}
+
+	html.dslc-responsive-preview {
+		background: #61666A;
+	}
+
+	#page-builder-preview-area.ui-resizable-resizing .ui-resizable-e {
+	   width: 100%;
+	}
+
+	#page-builder-preview-area .ui-resizable-e {
+	    cursor: e-resize;
+	    height: 100%;
+	    right: -14px;
+	   width: 14px;
+	   top: 0;
+	}
+
+	#page-builder-preview-area .ui-resizable-handle {
+	    display: block;
+	    font-size: 0.1px;
+	    position: absolute;
+	}
+
+
 /*
 body.dslc-res-tablet.dslca-enabled::before {
   background: black;
