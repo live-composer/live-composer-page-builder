@@ -313,56 +313,52 @@
 							// Append Content
 							moduleOutput = response.output;
 
-							// Finish loading and show
-							jQuery('.dslca-module-loading-inner', modulesArea).stop().animate({ width : '100%' }, 300, 'linear', function(){
+							// Remove extra padding from area
+							modulesArea.css({ paddingBottom : 0 });
 
-								// Remove extra padding from area
-								modulesArea.css({ paddingBottom : 0 });
+							// Hide loader
+							jQuery('.dslca-module-loading', modulesArea ).hide();
 
-								// Hide loader
-								jQuery('.dslca-module-loading', modulesArea ).hide();
+							// Add output
+							// TODO: optimize jQuery in the string below
+							var dslcJustAdded = jQuery(moduleOutput).insertAfter( jQuery('.dslca-module', modulesArea) ) ; /*.appendTo(modulesArea);*/
+							jQuery('.dslca-module', modulesArea).remove();
 
-								// Add output
-								// TODO: optimize jQuery in the string below
-								var dslcJustAdded = jQuery(moduleOutput).insertAfter( jQuery('.dslca-module', modulesArea) ) ; /*.appendTo(modulesArea);*/
-								jQuery('.dslca-module', modulesArea).remove();
+							dslcJustAdded.css({
+								'-webkit-animation-name' : 'dslcBounceIn',
+								'-moz-animation-name' : 'dslcBounceIn',
+								'animation-name' : 'dslcBounceIn',
+								'animation-duration' : '0.6s',
+								'-webkit-animation-duration' : '0.6s'
+							});
 
-								dslcJustAdded.css({
-									'-webkit-animation-name' : 'dslcBounceIn',
-									'-moz-animation-name' : 'dslcBounceIn',
-									'animation-name' : 'dslcBounceIn',
-									'animation-duration' : '0.6s',
-									'-webkit-animation-duration' : '0.6s'
-								});
-
-								setTimeout( function(){
-									dslc_init_square();
-									dslc_center();
-									dslc_masonry( dslcJustAdded );
-									jQuery('body').removeClass('dslca-anim-in-progress dslca-module-drop-in-progress');
-								}, 700 );
-
-								// "Show" no content text
-								jQuery('.dslca-no-content-primary', modulesArea ).css({ opacity : 1 });
-
-								// "Show" modules area management
-								jQuery('.dslca-modules-area-manage', modulesArea).css ({ visibility : 'visible' });
-
-								// Show publish
-								jQuery('.dslca-save-composer-hook').css({ 'visibility' : 'visible' });
-								jQuery('.dslca-save-draft-composer-hook').css({ 'visibility' : 'visible' });
-
-								// Generete
-								dslc_carousel();
-								dslc_tabs();
-								dslc_init_accordion();
+							setTimeout( function(){
 								dslc_init_square();
 								dslc_center();
-								dslc_generate_code();
-								dslc_show_publish_button();
+								dslc_masonry( dslcJustAdded );
+								jQuery('body').removeClass('dslca-anim-in-progress dslca-module-drop-in-progress');
+							}, 700 );
 
-								DSLC.Editor.initMediumEditor();
-							});
+							// "Show" no content text
+							jQuery('.dslca-no-content-primary', modulesArea ).css({ opacity : 1 });
+
+							// "Show" modules area management
+							jQuery('.dslca-modules-area-manage', modulesArea).css ({ visibility : 'visible' });
+
+							// Show publish
+							jQuery('.dslca-save-composer-hook').css({ 'visibility' : 'visible' });
+							jQuery('.dslca-save-draft-composer-hook').css({ 'visibility' : 'visible' });
+
+							// Generete
+							dslc_carousel();
+							dslc_tabs();
+							dslc_init_accordion();
+							dslc_init_square();
+							dslc_center();
+							dslc_generate_code();
+							dslc_show_publish_button();
+
+							DSLC.Editor.initMediumEditor();
 						});
 
 						// Loading animation
@@ -464,7 +460,6 @@
 			// Disable WP admin bar in editing mode
 			jQuery('#wpadminbar', DSLC.Editor.frame).remove();
 			jQuery('body', DSLC.Editor.frame).addClass('dslca-enabled dslca-drag-not-in-progress');
-
 
 			dslc_fix_contenteditable();
 
@@ -642,15 +637,19 @@
  */
 function dslc_fix_contenteditable() {
 
-	console.info( 'dslc_fix_contenteditable' );
+	dslcDebug == true && console.info( 'dslc_fix_contenteditable' );
 
-	jQuery('.dslca-module, .dslc-module-front, .dslc-modules-area, .dslc-modules-section', DSLC.Editor.frame).bind('dragstart', function (e) {
-		console.info( 'dragstart' );
+	DSLC.Editor.frame.on('dragstart', '.dslca-module, .dslc-module-front, .dslc-modules-area, .dslc-modules-section', function (e) {
+
+		dslcDebug == true && console.info( 'dragstart' );
+
 		jQuery('[contenteditable]', DSLC.Editor.frame).attr('contenteditable', false);
 	});
 
-	jQuery('.dslca-module, .dslc-module-front, .dslc-modules-area, .dslc-modules-section', DSLC.Editor.frame).bind('dragend', function (e) {
-		console.info( 'dragend' );
+	DSLC.Editor.frame.on('dragend', '.dslca-module, .dslc-module-front, .dslc-modules-area, .dslc-modules-section', function (e) {
+
+		dslcDebug == true && console.info( 'dragend' );
+
 		jQuery('[contenteditable]', DSLC.Editor.frame).attr('contenteditable', true);
 	});
 }

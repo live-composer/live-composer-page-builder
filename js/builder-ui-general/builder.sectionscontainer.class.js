@@ -11,6 +11,7 @@ DSLC.Editor.CSectionsContainer = function(elem) {
 		draggable: '.dslc-modules-section',
 		// ghostClass: 'dslca-module-placeholder',
 		chosenClass: 'dslca-section-dragging',
+		sort: true,
 		scroll: true, // or HTMLElement
 		scrollSensitivity: 150, // px, how near the mouse must be to an edge to start scrolling.
 		scrollSpeed: 15, // px
@@ -117,6 +118,8 @@ DSLC.Editor.CSectionsContainer = function(elem) {
 
 				});
 			}*/
+
+			console.log('sortable sections container - onMove');
 		}
 	});
 }

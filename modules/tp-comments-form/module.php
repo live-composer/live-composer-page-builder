@@ -1316,7 +1316,8 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 		$post_id = $options['post_id'];
 		$show_fake = true;
 
-		if ( is_singular() && get_post_type() !== 'dslc_templates' ) {
+		if ( is_singular() && get_post_type() !== 'dslc_templates' && !$dslc_active ) {
+
 			$post_id = get_the_ID();
 			$show_fake = false;
 		}
