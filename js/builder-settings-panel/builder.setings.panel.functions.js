@@ -88,7 +88,7 @@ jQuery(document).ready(function($){
 	/**
 	 * Hook - Confirm Changes
 	 */
-	$(document).on( 'click', '.dslca-module-edit-save', function(){
+	jQuery(document).on( 'click', '.dslca-module-edit-save', function(){
 
 		dslc_module_options_confirm_changes(function(){
 
@@ -96,14 +96,14 @@ jQuery(document).ready(function($){
 			DSLC.Editor.unloadOptionsDeps();
 		});
 
-		$('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
+		jQuery('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
 		dslc_responsive_classes( true );
 	});
 
 	/**
 	 * Hook - Cancel Changes
 	 */
-	$(document).on( 'click', '.dslca-module-edit-cancel', function(){
+	jQuery(document).on( 'click', '.dslca-module-edit-cancel', function(){
 
 		dslc_module_options_cancel_changes(function(){
 
@@ -111,7 +111,7 @@ jQuery(document).ready(function($){
 			DSLC.Editor.unloadOptionsDeps();
 		});
 
-		$('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
+		jQuery('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
 		dslc_responsive_classes( true );
 	});
 
@@ -883,6 +883,8 @@ function dslc_module_options_confirm_changes( callback ) {
 			}
 			jQuery('.dslca-module-edit-options-tabs').html('');
 
+			dslc_fix_contenteditable();
+
 			// Callback if there's one
 			if ( callback ) { callback(); }
 		});
@@ -934,6 +936,8 @@ function dslc_module_options_cancel_changes( callback ) {
 			jQuery('.dslca-module-edit-options-inner').html('');
 		}
 		jQuery('.dslca-module-edit-options-tabs').html('');
+
+		dslc_fix_contenteditable();
 
 		if ( callback ) { callback(); }
 	});

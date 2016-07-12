@@ -1254,6 +1254,10 @@ body {
     opacity: 1;
     color: #BEBDBD;
 
+    left: 0;
+    right: 0;
+    position: absolute;
+
     font-size: 15px;
     font-family: 'Open Sans', sans-serif;
 }

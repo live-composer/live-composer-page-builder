@@ -69,8 +69,6 @@ function dslc_ajax_add_modules_section( $atts ) {
 									<span class="dslca-manage-action dslca-delete-modules-area-hook" title="Delete" ><span class="dslca-icon dslc-icon-remove"></span></span>
 								</div>
 							</div>
-							
-							<div class="dslca-module-loading"><div class="dslca-module-loading-inner"></div></div>
 						</div>
 					</div>
 				</div><!-- .dslc-module-section-inner -->
