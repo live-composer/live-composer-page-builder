@@ -864,26 +864,27 @@ function dslc_module_options_confirm_changes( callback ) {
 
 		// Add class so we know saving is in progress
 		jQuery('body').addClass('dslca-module-saving-in-progress');
+		var editedModule = jQuery('.dslca-module-being-edited', DSLC.Editor.frame);
 
 		// Reload module with new settings
 		dslc_module_output_altered( function(){
 
 			// Update preset
 			dslc_update_preset();
+			editedModule.removeClass('dslca-module-being-edited');
 
 			// Remove classes so we know saving finished
-			jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
 			jQuery('body').removeClass('dslca-module-saving-in-progress');
-
 			// Clean up options container
 			if ( ! jQuery('body').hasClass('rtl') ) {
+
 				jQuery('.dslca-module-edit-options-inner').html('');
 			} else {
+
 				jQuery('.dslca-module-edit-options-inner').html('');
 			}
-			jQuery('.dslca-module-edit-options-tabs').html('');
 
-			dslc_fix_contenteditable();
+			jQuery('.dslca-module-edit-options-tabs').html('');
 
 			// Callback if there's one
 			if ( callback ) { callback(); }
@@ -918,27 +919,26 @@ function dslc_module_options_cancel_changes( callback ) {
 	callback = typeof callback !== 'undefined' ? callback : false;
 
 	// Vars
-	var editedModule = jQuery('.dslca-module-being-edited', DSLC.Editor.frame),
-	originalOptions = jQuery('.dslca-module-options-front-backup').children().clone();
+	var editedModule = jQuery('.dslca-module-being-edited', DSLC.Editor.frame);
 
 	// Add backup option values
-	jQuery('.dslca-module-options-front', editedModule).html('').append(originalOptions);
+	jQuery('.dslca-module-options-front', editedModule).html('').append(DSLC.Editor.moduleBackup);
+	DSLC.Editor.moduleBackup = false;
 
 	// Reload module
 	dslc_module_output_altered( function(){
 
 		jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
-
-		// Clean up options container
+			// Clean up options container
 		if ( ! jQuery('body').hasClass('rtl') ) {
+
 			jQuery('.dslca-module-edit-options-inner').html('');
 		} else {
+
 			jQuery('.dslca-module-edit-options-inner').html('');
 		}
+
 		jQuery('.dslca-module-edit-options-tabs').html('');
-
-		dslc_fix_contenteditable();
-
 		if ( callback ) { callback(); }
 	});
 
@@ -1257,16 +1257,21 @@ function dslc_module_options_icon() {
 function dslc_module_options_icon_returnid() {
 
 	jQuery(document).on('click', '.dslca-open-modal-hook[data-modal^=".dslc-list-icons"]', function(el) {
+
 		jQuery(this).closest('.dslca-module-edit-option-icon').find('input').addClass('icon-modal-active');
 	});
 
-	jQuery(document).on('click', '.dslca-modal-icons .icon-item', function(el) {
-		// Get selected item code
-		var selectedIconCode = jQuery(this).find('.icon-item_name').text();
-		jQuery('input.icon-modal-active').val(selectedIconCode).change();
+	jQuery(document).on('editorFrameLoaded', function(){
 
-		// Close modal window
-		dslc_hide_modal( '', jQuery('.dslca-modal:visible') );
+		DSLC.Editor.frame.on('click', '.dslca-modal-icons .icon-item', function(el) {
+
+			// Get selected item code
+			var selectedIconCode = jQuery(this).find('.icon-item_name').text();
+			jQuery('input.icon-modal-active').val(selectedIconCode).change();
+
+			// Close modal window
+			dslc_hide_modal( '', jQuery('.dslca-modal:visible', DSLC.Editor.frame) );
+		});
 	});
 }
 

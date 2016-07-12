@@ -24,7 +24,7 @@
 		dslc_hide_modal( '', jQuery('.dslca-modal:visible') );
 
 		// Vars
-		var modal = jQuery(modal);
+		var modal = jQuery(modal, DSLC.Editor.frame);
 
 		// Vars ( Calc Offset )
 		var position = jQuery(hook).position(),
@@ -57,7 +57,7 @@
 		if ( dslcDebug ) console.log( 'dslc_hide_modal' );
 
 		// Vars
-		var modal = jQuery(modal);
+		var modal = jQuery(modal, DSLC.Editor.frame);
 
 		// Hide ( with animation )
 		modal.hide();

@@ -492,7 +492,7 @@ function dslc_module_options_show( moduleID ) {
 
 			// Set up backup
 			var moduleBackup = jQuery('.dslca-module-options-front', dslcModule).children().clone();
-			jQuery('.dslca-module-options-front-backup', dslcModule).html('').append(moduleBackup);
+			DSLC.Editor.moduleBackup = moduleBackup;
 		}
 	);
 }
@@ -517,11 +517,8 @@ function dslc_module_output_default( dslcModuleID, callback ) {
 		function( response ) {
 
 			callback(response);
-
 		}
-
 	);
-
 }
 
 /**
