@@ -1355,7 +1355,7 @@ function dslc_toogle_control ( control_id ) {
 		for ( var i = 0; i < affect_on_change_rules.length; i++ ) {
 
 			// remove css rule in element inline style
-			jQuery( affect_on_change_el ).css( affect_on_change_rules[i] , '' );
+			jQuery( affect_on_change_el, DSLC.Editor.frame ).css( affect_on_change_rules[i] , '' );
 			// remove css rule in css block
 			disable_css_rule ( affect_on_change_el, affect_on_change_rules[i], module_id);
 			// PROBLEM do not work with multiply rules ex.: .dslc-text-module-content,.dslc-text-module-content p
@@ -1373,7 +1373,7 @@ function dslc_toogle_control ( control_id ) {
 		// Loop through rules (useful when there are multiple rules)
 		for ( var i = 0; i < affect_on_change_rules.length; i++ ) {
 
-			jQuery( affect_on_change_el ).css( affect_on_change_rules[i] , control_value );
+			jQuery( affect_on_change_el, DSLC.Editor.frame ).css( affect_on_change_rules[i] , control_value );
 		}
 	}
 }
@@ -1381,7 +1381,7 @@ function dslc_toogle_control ( control_id ) {
 jQuery(document).ready(function($){
 
 	// Option Control Toggle
-	$(document).on( 'click', '.dslca-module-edit-option .dslc-control-toggle', function(e){
+	jQuery(document).on( 'click', '.dslca-module-edit-option .dslc-control-toggle', function(e){
 
 		e.preventDefault();
 		var control_id = $(e.target).closest('.dslca-module-edit-option').find('.dslca-module-edit-field').data('id');
@@ -1390,7 +1390,7 @@ jQuery(document).ready(function($){
 
 
 	// Disable Toggle If the Control Focused
-	$(document).on( 'mousedown', '.dslca-module-edit-option', function(e){
+	jQuery(document).on( 'mousedown', '.dslca-module-edit-option', function(e){
 
 		var toggle = $('.dslc-control-toggle');
 		if ( ! toggle.is(e.target) // if the target of the click isn't the container...
@@ -1425,16 +1425,16 @@ jQuery(document).ready(function($){
 */
 });
 
-
 // Very Slow do not use for live editing
 // Only use when you need to disable some of the CSS properties.
 
-function disable_css_rule(selector, element, moduleID) {
+function disable_css_rule(selectorCSS, ruleCSS, moduleID) {
 
 	var cssRules;
-
 	var target_stylsheet_ID = 'css-for-' + moduleID;
-	var stylesheet = document.getElementById(target_stylsheet_ID);
+	var stylesheet = document.getElementById('page-builder-frame').contentWindow.document.getElementById(target_stylsheet_ID);
+
+	selectorCSS = selectorCSS.replace( /\s\s+/g, ' ' );
 
 	if (stylesheet) {
 
@@ -1454,14 +1454,16 @@ function disable_css_rule(selector, element, moduleID) {
 		// Go through each CSS rule (ex.: .content h1 {...})
 		for (var R = 0; R < stylesheet[cssRules].length; R++) {
 
-			// Is current CSS rule equal to the selector we are looking for?
+			// console.info( stylesheet[cssRules][R].selectorCSSText );
+
+			// Is current CSS rule equal to the selectorCSS we are looking for?
 			// (ex.: '.content h1' == '.content h1' )
-			if (stylesheet[cssRules][R].selectorText == selector) {
+			if (stylesheet[cssRules][R].selectorCSSText == selectorCSS) {
 
 				// Get CSS property we are looking for... (ex.: font-size : ...; )
-				if(stylesheet[cssRules][R].style[element]){
+				if(stylesheet[cssRules][R].style[ruleCSS]){
 
-						stylesheet[cssRules][R].style[element] = '';
+						stylesheet[cssRules][R].style[ruleCSS] = '';
 					break;
 				}
 			}

@@ -522,7 +522,7 @@ function dslc_ajax_display_module_options( $atts ) {
 							/**
 							 * Display styling control toggle [On/Off]
 							 */
-							if ( ! in_array( $module_option['id'], $controls_without_toggle, true ) && in_array( $module_option['section'], $sections_with_toggle, true ) ) {
+							if ( ! in_array( $module_option['id'], $controls_without_toggle, true ) && in_array( $module_option['section'], $sections_with_toggle, true ) && ! stristr($module_option['id'], 'css_res_') ) {
 								echo'<span class="dslc-control-toggle dslc-icon dslc-icon-"></span>';
 							}
 						?>
