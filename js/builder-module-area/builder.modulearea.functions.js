@@ -255,8 +255,6 @@ function dslc_modules_area_delete( area ) {
 		// Call other functions
 		dslc_generate_code();
 		dslc_show_publish_button();
-
-
 	}, 900 );
 
 	// Animation
@@ -277,7 +275,6 @@ function dslc_modules_area_delete( area ) {
 		dslc_generate_code();
 		dslc_show_publish_button();
 	});
-
 }
 
 /**

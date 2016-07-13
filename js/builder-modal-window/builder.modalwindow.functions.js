@@ -26,13 +26,12 @@
 		// Vars
 		var modal = jQuery(modal, DSLC.Editor.frame);
 
-		// Vars ( Calc Offset )
-		var position = jQuery(hook).position(),
-		diff = modal.outerWidth() / 2 - hook.outerWidth() / 2,
-		offset = position.left - diff;
+		// Calc popup height
+		var containerHeight = jQuery('.dslca-container').height();
+		var finalHeight = jQuery(DSLC.Editor.frame).height() - containerHeight - 20;
 
 		// Show Modal
-		modal.css({ left : offset }).show();
+		modal.show().height(finalHeight);
 		modal.addClass('dslca-modal-open');
 
 		// Animate Modal
@@ -45,7 +44,6 @@
 			'-webkit-animation-duration' : '0.6s'
 		}).fadeIn(600);
 		*/
-
 	}
 
 	/**
