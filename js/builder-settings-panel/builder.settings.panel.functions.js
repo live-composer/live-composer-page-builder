@@ -1855,8 +1855,7 @@ function dslc_module_options_numeric( field ) {
 					}
 
 					prev_pos = x;
-					
-					console.info( jQuery(sliderInput) );
+
 					jQuery(sliderInput).trigger('change');
 				}
 			}

@@ -82,7 +82,6 @@ function dslc_ajax_add_modules_section( $atts ) {
 					</div>
 				</div>
 				<div class="dslca-modules-section-settings">' . dslc_row_get_options_fields() . '</div><!-- .dslca-module-section-settings -->
-				<div class="dslca-module-loading dslca-modules-area-loading"><div class="dslca-module-loading-inner"></div></div>
 			</div><!-- .dslc-module-section-wrapper -->
 		</div>';
 
@@ -142,8 +141,6 @@ function dslc_ajax_add_modules_area( $atts ) {
 					<span class="dslca-manage-action dslca-delete-modules-area-hook" title="Delete" ><span class="dslca-icon dslc-icon-remove"></span></span>
 				</div>
 			</div>
-
-			<div class="dslca-module-loading"><div class="dslca-module-loading-inner"></div></div>
 		</div>';
 
 		// Set the output

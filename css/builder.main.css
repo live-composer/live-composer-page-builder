@@ -331,14 +331,17 @@ body {
 }
 
 
+		.dslca-enabled .dslc-modules-area {
+			text-align: center;
+		}
 
 		.dslca-module {
 			color: #fff;
 			cursor: grab;
 			cursor: -webkit-grab;
 
-			display: block;
-			float: left;
+			display: inline-block;
+			/*float: left;*/
 			font-family: 'Roboto Condensed', sans-serif;
 			font-size: 15px;
 			font-weight: 400;
@@ -1321,6 +1324,10 @@ body {
 }
 
 .dslc-modules-area-empty.dslc-modules-area.dslca-options-hovered {
+	box-shadow: 0 0 0 2px #D3D3D3;
+}
+
+.dslc-modules-area.dslca-options-hovered {
 	box-shadow: 0 0 0 2px #D3D3D3;
 }
 
