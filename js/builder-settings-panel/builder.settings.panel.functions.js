@@ -887,14 +887,13 @@ function dslc_module_options_confirm_changes( callback ) {
 
 		// Add class so we know saving is in progress
 		jQuery('body').addClass('dslca-module-saving-in-progress');
-		var editedModule = jQuery('.dslca-module-being-edited', DSLC.Editor.frame);
 
 		// Reload module with new settings
 		dslc_module_output_altered( function(){
 
 			// Update preset
 			dslc_update_preset();
-			editedModule.removeClass('dslca-module-being-edited');
+			jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
 
 			// Remove classes so we know saving finished
 			jQuery('body').removeClass('dslca-module-saving-in-progress');
@@ -1856,7 +1855,7 @@ function dslc_module_options_numeric( field ) {
 					}
 
 					prev_pos = x;
-					
+
 					console.info( jQuery(sliderInput) );
 					jQuery(sliderInput).trigger('change');
 				}
