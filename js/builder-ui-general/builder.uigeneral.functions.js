@@ -70,7 +70,7 @@ jQuery(document).on( 'click', '.dslca-currently-editing', function(){
 	if ( activeElement ) {
 		newOffset = activeElement.offset().top - 100;
 		if ( newOffset < 0 ) { newOffset = 0; }
-		$( 'html, body' ).animate({ scrollTop: newOffset }, 300, function(){
+		jQuery( 'html, body', DSLC.Editor.frame ).animate({ scrollTop: newOffset }, 300, function(){
 			activeElement.animate( { 'outline-color' : outlineColor }, 70, function(){
 				activeElement.animate({ 'outline-color' : 'transparent' }, 70, function(){
 					activeElement.animate( { 'outline-color' : outlineColor }, 70, function(){
