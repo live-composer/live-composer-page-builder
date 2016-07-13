@@ -582,10 +582,13 @@ function dslc_module_output_altered( callback ) {
 			dslc_show_publish_button();
 			dslc_carousel();
 			dslc_masonry( jQuery('.dslca-module-being-edited', DSLC.Editor.frame) );
+
 			jQuery( '.dslca-module-being-edited img' , DSLC.Editor.frame).load( function(){
+
 				dslc_masonry( jQuery('.dslca-module-being-edited', DSLC.Editor.frame) );
 				dslc_center();
 			});
+
 			dslc_tabs();
 			dslc_init_accordion();
 			dslc_init_square();
