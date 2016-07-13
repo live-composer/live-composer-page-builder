@@ -2054,6 +2054,7 @@ class DSLC_Module {
 
 	function module_start( $options ) {
 
+		global $dslc_active;
 		global $dslc_should_filter;
 		$dslc_should_filter = false;
 
@@ -2129,7 +2130,9 @@ class DSLC_Module {
 		 */
 
 		$title_attr = '';
-		if ( dslc_is_editor_active() ) {
+
+		if ( $dslc_active ) {
+
 			$title_attr = 'title="' . strtoupper( esc_attr( $this->module_title ) ) . '"';
 		}
 

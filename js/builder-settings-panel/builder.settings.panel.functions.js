@@ -952,7 +952,8 @@ function dslc_module_options_cancel_changes( callback ) {
 	dslc_module_output_altered( function(){
 
 		jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
-			// Clean up options container
+
+		// Clean up options container
 		if ( ! jQuery('body').hasClass('rtl') ) {
 
 			jQuery('.dslca-module-edit-options-inner').html('');
