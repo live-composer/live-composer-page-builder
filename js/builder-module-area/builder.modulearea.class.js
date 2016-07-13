@@ -93,7 +93,6 @@ DSLC.Editor.CModuleArea = function(elem) {
 			// + indexes from onEnd
 			// evt.preventDefault();
 			// evt.stopPropagation(); return false;
-			//console.info( 'sortable - onAdd' );
 		},
 
 		// Changed sorting within list
@@ -104,7 +103,6 @@ DSLC.Editor.CModuleArea = function(elem) {
 			// evt.stopPropagation(); return false;
 
 			dslc_show_publish_button();
-			//console.info( 'sortable - onUpdate' );
 		},
 
 		// Called by any change to the list (add / update / remove)
@@ -112,7 +110,6 @@ DSLC.Editor.CModuleArea = function(elem) {
 			// same properties as onUpdate
 			// evt.preventDefault();
 			// evt.stopPropagation(); return false;
-			//console.info( 'sortable - onSort' );
 		},
 
 		// Element is removed from the list into another list

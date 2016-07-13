@@ -136,7 +136,6 @@ DSLC.Editor.CRow = function(elem) {
 			evt.newIndex;  // element's new index within parent
 
 			evt.preventDefault();
-			console.info( 'sortable row - onEnd' );
 
 			dslc_generate_code();
 			jQuery('body').removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
@@ -150,7 +149,6 @@ DSLC.Editor.CRow = function(elem) {
 			// + indexes from onEnd
 			// evt.preventDefault();
 			// evt.stopPropagation(); return false;
-			console.info( 'sortable row - onAdd' );
 		},
 
 		// Changed sorting within list
@@ -162,7 +160,6 @@ DSLC.Editor.CRow = function(elem) {
 			// evt.stopPropagation(); return false;
 
 			dslc_show_publish_button();
-			console.info( 'sortable row - onUpdate' );
 		},
 
 		// Called by any change to the list (add / update / remove)
@@ -170,13 +167,11 @@ DSLC.Editor.CRow = function(elem) {
 			// same properties as onUpdate
 			// evt.preventDefault();
 			// evt.stopPropagation(); return false;
-			console.info( 'sortable row - onSort' );
 		},
 
 		// Element is removed from the list into another list
 		onRemove: function (evt) {
 
-			console.log('sortable row - onRemove');
 		  // same properties as onUpdate
 		},
 

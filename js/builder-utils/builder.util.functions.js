@@ -207,7 +207,7 @@ jQuery(document).ready(function($){
 	 */
 	$(document).on( 'click', '.dslca-refresh-module-hook', function(e){
 
-		$(this).css({
+		jQuery(this).css({
 			'-webkit-animation-name' : 'dslcRotate',
 			'-moz-animation-name' : 'dslcRotate',
 			'animation-name' : 'dslcRotate',
@@ -216,10 +216,10 @@ jQuery(document).ready(function($){
 			'animation-iteration-count' : 'infinite',
 			'-webkit-animation-iteration-count' : 'infinite'
 		});
-		$(this).closest('.dslc-module-front').addClass('dslca-module-being-edited');
+		jQuery(this).closest('.dslc-module-front').addClass('dslca-module-being-edited');
 		dslc_module_output_altered( function() {
 
-			$('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
+			jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
 		});
 	});
 });
@@ -472,10 +472,10 @@ window.onbeforeunload = function () { return; };
 
 		var dslcOptionValue = '',
 			dslcOptionValueOrig = '',
-			dslcOption = $(this),
+			dslcOption = jQuery(this),
 			dslcOptionID = dslcOption.data('id'),
 			dslcOptionWrap = dslcOption.closest('.dslca-module-edit-option'),
-			dslcModule = $('.dslca-module-being-edited', DSLC.Editor.frame),
+			dslcModule = jQuery('.dslca-module-being-edited', DSLC.Editor.frame),
 			dslcModuleID = dslcModule.data('dslc-module-id'),
 			dslcModuleOptions = jQuery( '.dslca-module-options-front textarea', dslcModule );
 

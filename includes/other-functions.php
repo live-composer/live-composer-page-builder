@@ -483,7 +483,7 @@ add_filter( 'dslc_admin_interface_on', 'dslc_admin_int_on', 1 );
 
 /**
  * ----------------------------------------------------------------------
- * 
+ *
  */
 
 
@@ -576,3 +576,18 @@ function livecomposer_editor_footer_display() {
 }
 
 add_action( 'admin_footer', 'livecomposer_editor_footer_display' );
+
+
+/* edit the admin page title for a particular custom post type */
+function dslc_editing_page_title() {
+	$screen = get_current_screen();
+
+	if ( 'toplevel_page_livecomposer_editor' !== $screen->id ) {
+		return;
+	}
+
+	$title = 'Edit: ' . get_the_title( intval($_GET['page_id']) );
+	return $title;
+}
+
+add_filter( 'admin_title', 'dslc_editing_page_title' );

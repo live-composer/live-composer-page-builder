@@ -1276,7 +1276,6 @@ function dslc_get_control_value ( control_id ) {
 
 /*
 	if ( control.hasClass('dslca-module-edit-option-select') ) {
-		console.info( 'select control' );
 
 	} else {
 		// text based controls
@@ -1409,14 +1408,11 @@ jQuery(document).ready(function($){
 
 	$(document).on( 'click', '.dslca-clear-styling-button', function(e){
 		e.preventDefault();
-		console.info( 'clicked to clear styling' );
 
 
 		$('.dslca-option-with-toggle').each(function(e){
 			// var control_id = $(this).find('.dslca-module-edit-field').data('id');
-			console.info( $(this).find('.dslca-module-edit-field').data('id') );
 			$(this).find('.dslca-module-edit-field').val('').trigger('change');
-			console.info( $(this).find('.dslca-module-edit-field').val() );
 		});
 
 		dslc_module_output_altered(); // call module regeneration
@@ -1453,8 +1449,6 @@ function disable_css_rule(selectorCSS, ruleCSS, moduleID) {
 
 		// Go through each CSS rule (ex.: .content h1 {...})
 		for (var R = 0; R < stylesheet[cssRules].length; R++) {
-
-			// console.info( stylesheet[cssRules][R].selectorCSSText );
 
 			// Is current CSS rule equal to the selectorCSS we are looking for?
 			// (ex.: '.content h1' == '.content h1' )

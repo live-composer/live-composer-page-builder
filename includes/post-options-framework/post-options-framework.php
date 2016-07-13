@@ -250,7 +250,7 @@ function DSLC_EditorInterface_post_options( $object, $metabox ) {
 
 						<?php foreach ( $post_option['choices'] as $key => $choice ) : ?>
 							<div class="dslca-post-option-field-choice">
-								<input type="radio" name="<?php echo $post_option['id']; ?>" id="<?php echo $post_option['id']; ?>" value="<?php echo $choice['value']; ?>" <?php if ( $choice['value'] == $curr_value ) echo 'checked="checked"'; ?> /> <?php echo $choice['label']; ?><br>
+								<input type="radio" name="<?php echo $post_option['id']; ?>" id="<?php echo $post_option['id']; ?>" value="<?php echo $choice['value']; ?>" <?php if ( $choice['value'] == $curr_value ) echo 'checked="checked"'; ?> /> <label for="<?php echo $post_option['id'] . $key; ?>"><?php echo $choice['label']; ?></label>
 							</div><!-- .dslca-post-option-field-choice -->
 						<?php endforeach; ?>
 
