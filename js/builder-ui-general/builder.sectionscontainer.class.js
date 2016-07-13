@@ -48,7 +48,6 @@ DSLC.Editor.CSectionsContainer = function(elem) {
 			evt.newIndex;  // element's new index within parent
 
 			evt.preventDefault();
-			console.info( 'sortable - onEnd' );
 
 			dslc_generate_code();
 			jQuery('body').removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
@@ -61,7 +60,6 @@ DSLC.Editor.CSectionsContainer = function(elem) {
 			// + indexes from onEnd
 			// evt.preventDefault();
 			// evt.stopPropagation(); return false;
-			console.info( 'sortable - onAdd' );
 		},
 
 		// Changed sorting within list
@@ -72,7 +70,6 @@ DSLC.Editor.CSectionsContainer = function(elem) {
 			// evt.stopPropagation(); return false;
 
 			dslc_show_publish_button();
-			console.info( 'sortable - onUpdate' );
 		},
 
 		// Called by any change to the list (add / update / remove)
@@ -80,7 +77,6 @@ DSLC.Editor.CSectionsContainer = function(elem) {
 			// same properties as onUpdate
 			// evt.preventDefault();
 			// evt.stopPropagation(); return false;
-			console.info( 'sortable - onSort' );
 		},
 
 		// Element is removed from the list into another list
@@ -118,8 +114,6 @@ DSLC.Editor.CSectionsContainer = function(elem) {
 
 				});
 			}*/
-
-			console.log('sortable sections container - onMove');
 		}
 	});
 }

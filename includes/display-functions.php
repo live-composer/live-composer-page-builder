@@ -909,7 +909,7 @@ function dslc_modules_section_front( $atts, $content = null ) {
 	 */
 
 	// Overlay
-	$bg_video = '<div class="dslc-bg-video dslc-force-show"><div class="dslc-bg-video-inner"></div><div class="dslc-bg-video-overlay" style="' . $overlay_style . '"></div></div>';
+	$bg_video = '<div class="dslc-bg-video dslc-force-show"><div class="dslc-bg-video-overlay" style="' . $overlay_style . '"></div></div>';
 
 	// BG Video
 	if ( isset( $atts['bg_video'] ) && $atts['bg_video'] !== '' && $atts['bg_video'] !== 'disabled' ) {

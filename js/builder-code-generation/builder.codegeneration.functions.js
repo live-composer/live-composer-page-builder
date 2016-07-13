@@ -143,14 +143,15 @@ function dslc_generate_code() {
 	 */
 
 	jQuery('#dslc-main .dslc-modules-area', DSLC.Editor.frame).each(function(){
-
+		console.info( 'here 1' );
+		console.info( jQuery('.dslc-module-front', this).length );
 		if ( jQuery('.dslc-module-front', this).length ) {
 
-		//	jQuery(this).removeClass('dslc-modules-area-empty').addClass('dslc-modules-area-not-empty');
+			jQuery(this).removeClass('dslc-modules-area-empty').addClass('dslc-modules-area-not-empty');
 			jQuery('.dslca-no-content', this).hide();
 		} else {
 
-			//jQuery(this).removeClass('dslc-modules-area-not-empty').addClass('dslc-modules-area-empty');
+			jQuery(this).removeClass('dslc-modules-area-not-empty').addClass('dslc-modules-area-empty');
 			jQuery('.dslca-no-content:not(:visible)', this).show().css({
 				'-webkit-animation-name' : 'dslcBounceIn',
 				'-moz-animation-name' : 'dslcBounceIn',

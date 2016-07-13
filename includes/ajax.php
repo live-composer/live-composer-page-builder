@@ -45,7 +45,7 @@ function dslc_ajax_add_modules_section( $atts ) {
 
 		// The output
 		$output = '<div class="dslc-modules-section dslc-modules-section-empty ' . $extra_classes . '" style="' . dslc_row_get_style() . '">
-			<div class="dslc-bg-video"><div class="dslc-bg-video-inner"></div><div class="dslc-bg-video-overlay"></div></div>
+			<div class="dslc-bg-video dslc-force-show"><div class="dslc-bg-video-inner"></div><div class="dslc-bg-video-overlay"></div></div>
 			<div class="dslc-modules-section-wrapper">
 				<div class="dslc-modules-section-inner dslc-clearfix">
 					<div class="dslc-modules-area dslc-col dslc-12-col" data-size="12">
@@ -478,6 +478,8 @@ function dslc_ajax_display_module_options( $atts ) {
 				'elements',
 				'post_elements',
 				'carousel_elements',
+				'thumb_resize_width',
+				'thumb_resize_width_manual',
 			);
 
 			$control_with_toggle = '';
@@ -522,7 +524,7 @@ function dslc_ajax_display_module_options( $atts ) {
 							/**
 							 * Display styling control toggle [On/Off]
 							 */
-							if ( ! in_array( $module_option['id'], $controls_without_toggle, true ) && in_array( $module_option['section'], $sections_with_toggle, true ) ) {
+							if ( ! in_array( $module_option['id'], $controls_without_toggle, true ) && in_array( $module_option['section'], $sections_with_toggle, true ) && ! stristr($module_option['id'], 'css_res_') ) {
 								echo'<span class="dslc-control-toggle dslc-icon dslc-icon-"></span>';
 							}
 						?>

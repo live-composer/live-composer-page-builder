@@ -17,32 +17,33 @@ jQuery(document).ready(function($){
 	dslc_module_options_box_shadow();
 	dslc_module_options_text_shadow();
 
-	$(document).on('click', '.dslca-module-edit-field-colorpicker', function() {
+	jQuery(document).on('click', '.dslca-module-edit-field-colorpicker', function() {
 
 		dslc_module_options_color( this );
 		$( this ).next().click();
 	});
 
-	$(document).on('click', '.dslca-modules-section-edit-field-colorpicker', function() {
+	jQuery(document).on('click', '.dslca-modules-section-edit-field-colorpicker', function() {
 
-		dslc_row_edit_colorpicker_init( this );
+		dslc_module_options_color( this );
+		// dslc_row_edit_colorpicker_init( this );
 		$( this ).next().click();
 	});
 
-	$(document).on('hover', '.dslca-module-edit-field-slider-input', function() {
+	jQuery(document).on('hover', '.dslca-module-edit-field-slider-input', function() {
 
 		dslc_module_options_numeric( this );
 	});
 
-	$(document).on('hover', '.dslca-modules-section-edit-field', function() {
+	jQuery(document).on('hover', '.dslca-modules-section-edit-field', function() {
 
-		dslc_section_options_numeric( this );
+		dslc_module_options_numeric( this );
 	});
 
 	/**
 	 * Hook - Submit
 	 */
-	$('.dslca-module-edit-form').submit( function(e){
+	jQuery('.dslca-module-edit-form').submit( function(e){
 
 		e.preventDefault();
 		dslc_module_output_altered();
@@ -65,7 +66,9 @@ jQuery(document).ready(function($){
 		$('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
 		$(this).addClass('dslca-active');
 
-		dslc_module_options_section_filter( jQuery(this).data('section') );
+		var currentSection = jQuery(this).data('section');
+
+		dslc_module_options_section_filter( currentSection );
 
 		// If previous was responsive reload module
 		if ( dslcPrev == 'responsive' ) {
@@ -82,7 +85,25 @@ jQuery(document).ready(function($){
 				// Hide the loader
 				jQuery('.dslca-container-loader').hide();
 			});
+
+
+			/**
+			 * Destroy resizable preview functionality
+			 * when leaving Responsive view.
+			 */
+			jQuery('#page-builder-preview-area').resizable('destroy').css('width','inherit');
+
 		}
+
+		/**
+		 * Make the preview area resizable
+		 * when entering Responsive view.
+		 */
+		if ( currentSection == 'responsive' ) {
+
+			jQuery('#page-builder-preview-area').resizable();
+		}
+
 	});
 
 	/**
@@ -804,18 +825,20 @@ function dslc_module_options_hideshow_tabs() {
 	}
 
 	/**
-	 * Text Module
+	 * Check 'Enable/Disable Custom CSS' control
 	 */
 
 	if ( jQuery('.dslca-options-filter-hook[data-section="styling"]').hasClass('dslca-active') ) {
 
-		if ( jQuery('.dslca-module-being-edited').data('dslc-module-id') == 'DSLC_Text_Simple' ||
-			jQuery('.dslca-module-being-edited').data('dslc-module-id') == 'DSLC_TP_Content' || jQuery('.dslca-module-being-edited').data('dslc-module-id') == 'DSLC_Html' ) {
+		if ( jQuery('.dslca-module-being-edited', DSLC.Editor.frame).data('dslc-module-id') == 'DSLC_Text_Simple' ||
+			  jQuery('.dslca-module-being-edited', DSLC.Editor.frame).data('dslc-module-id') == 'DSLC_TP_Content' || 
+			  jQuery('.dslca-module-being-edited', DSLC.Editor.frame).data('dslc-module-id') == 'DSLC_Html' ) {
 
 			var dslcCustomCSS = jQuery('.dslca-module-edit-option[data-id="css_custom"]'),
 			dslcCustomCSSVal = dslcCustomCSS.find('select').val();
 
 			if ( dslcCustomCSSVal == 'enabled' ) {
+
 				jQuery('.dslca-module-edit-option[data-section="styling"]').css({ visibility : 'visible' });
 				jQuery('.dslca-module-edit-options-tabs').show();
 			} else {
@@ -1626,7 +1649,8 @@ function dslc_module_options_color( field ) {
 				}
 
 				// Change current value of option
-				dslcColorField.val( dslcColorFieldVal );
+				dslcColorField.val( dslcColorFieldVal ).trigger('change');
+				dslcColorField.css('background', dslcColorFieldVal);
 
 				// Live change
 				dslcAffectOnChangeEl = dslcColorField.data('affect-on-change-el');
@@ -1634,7 +1658,7 @@ function dslc_module_options_color( field ) {
 				jQuery( dslcAffectOnChangeEl ,'.dslca-module-being-edited' ).css( dslcAffectOnChangeRule , dslcColorFieldVal );
 
 				// Update option
-				dslcModule = jQuery('.dslca-module-being-edited');
+				dslcModule = jQuery('.dslca-module-being-edited', DSLC.Editor.frame);
 				dslcOptionID = dslcColorField.data('id');
 				jQuery('.dslca-module-option-front[data-id="' + dslcOptionID + '"]', dslcModule).val( dslcColorFieldVal );
 
@@ -1657,7 +1681,7 @@ function dslc_module_options_color( field ) {
 				}
 
 				// Change current value of option
-				dslcColorField.val( dslcColorFieldVal );
+				dslcColorField.val( dslcColorFieldVal ).trigger('change');
 
 				// Live change
 				dslcAffectOnChangeEl = dslcColorField.data('affect-on-change-el');
@@ -1665,7 +1689,7 @@ function dslc_module_options_color( field ) {
 				jQuery( dslcAffectOnChangeEl ,'.dslca-module-being-edited' ).css( dslcAffectOnChangeRule , dslcColorFieldVal );
 
 				// Update option
-				dslcModule = jQuery('.dslca-module-being-edited');
+				dslcModule = jQuery('.dslca-module-being-edited', DSLC.Editor.frame);
 				dslcOptionID = dslcColorField.data('id');
 				jQuery('.dslca-module-option-front[data-id="' + dslcOptionID + '"]', dslcModule).val( dslcColorFieldVal );
 
@@ -1714,146 +1738,6 @@ function dslc_module_options_color( field ) {
 /**
  * MODULES SETTINGS PANEL - Numeric Option Type
  */
-function dslc_section_options_numeric( field ) {
-
-	var $ = jQuery;
-
-	if ( dslcDebug ) console.log( 'dslc_section_options_numeric' );
-
-	var query = field || '.dslca-modules-section-edit-field-slider-numeric';
-
-	jQuery(query).each(function(){
-
-		if( this.classList.contains('slider-initiated') ) return;
-
-		var handle = false;
-		var temp = 0;
-		var sliderInput = this;
-
-		/*
-		var max = 2000;
-		var min = -2000;
-		var inc = 1;
-		*/
-
-		var max = parseInt($(this).data('max')) > 0 ? parseInt($(this).data('max')) : 2000;
-		var min = parseInt($(this).data('min')) > -2000 ? parseInt($(this).data('min')) : 0;
-		var inc = parseInt($(this).data('increment')) > 0 ? parseInt($(this).data('increment')) : 1;
-
-
-		var dslcSlider, dslcSliderField, dslcSliderInput, dslcSliderVal, dslcAffectOnChangeRule, dslcAffectOnChangeEl,
-		dslcSliderTooltip, dslcSliderTooltipOffset, dslcSliderTooltipPos, dslcModule, dslcOptionID, dslcSliderExt,
-		dslcAffectOnChangeRules;
-
-		sliderInput.classList.add("slider-initiated");
-
-		$(sliderInput).mousedown(function(e){
-
-			handle = parseFloat(e.pageX);
-			temp = parseInt(sliderInput.value && sliderInput.value != '' ? sliderInput.value : 0);
-		});
-
-		$(sliderInput).keydown(function(e){
-
-			if( e.shiftKey ) {
-
-				if( e.keyCode == 38 ) {
-
-					this.value = ( parseInt(this.value) || 0 ) + 9;
-					$(this).trigger('change');
-				}
-
-				if( e.keyCode == 40 ) {
-
-					this.value = ( parseInt(this.value) + 0 ) - 9;
-					$(this).trigger('change');
-				}
-			}
-
-			if( e.keyCode == 38 ) {
-
-				this.value = ( parseInt(this.value) || 0 ) + inc;
-				$(this).trigger('change');
-			}
-
-			if( e.keyCode == 40 ) {
-
-				this.value = ( parseInt(this.value) + 0 ) - inc;
-				$(this).trigger('change');
-			}
-
-			// Backspace
-			if( e.keyCode == 8 ) {
-				$(this).trigger('change');
-			}
-
-			// "-"
-			if( e.keyCode == 45 ) {
-				$(this).trigger('change');
-			}
-
-
-			console.info( e.keyCode );
-			/*
-			if( ! e.key.match(/\d/) && e.keyCode != 8 && e.keyCode != 39 && e.keyCode != 37 && e.keyCode != 46 ) {
-
-				return false;
-			}*/
-
-		});
-
-		$(sliderInput).unbind('change');
-		$(sliderInput).change(function(e){
-
-			console.info( 'change' );
-
-			console.info( this.value );
-
-			if( this.value > max ) {
-
-				this.value = max;
-			}
-
-			if( this.value < min ) {
-
-				this.value = min;
-			}
-
-			dslcModule = jQuery('.dslca-modules-section-being-edited', DSLC.Editor.frame);
-
-			// Add changed class
-			dslcModule.addClass('dslca-modules-section-change-made');
-		});
-
-		$(document).mouseup(function(){
-
-			console.info( 'mouseup' );
-
-			handle = false;
-		});
-
-		$(document).mousemove(function(e){
-
-			if( handle !== false ) {
-
-				console.info( 'mousemove' );
-
-				var fut_val = Math.floor( temp - handle + parseFloat(e.pageX) );
-
-				if( fut_val % inc != 0 ) return false;
-
-				sliderInput.value = fut_val;
-				$(sliderInput).trigger('change');
-			}
-		});
-
-		return false;
-	});
-}
-
-/**
- * MODULES SETTINGS PANEL - Numeric Option Type
- */
 function dslc_module_options_numeric( field ) {
 
 	var $ = jQuery;
@@ -1876,9 +1760,9 @@ function dslc_module_options_numeric( field ) {
 		var inc = 1;
 		*/
 
-		var max = parseInt($(this).data('max')) > 0 ? parseInt($(this).data('max')) : 2000;
-		var min = parseInt($(this).data('min')) > -2000 ? parseInt($(this).data('min')) : 0;
-		var inc = parseInt($(this).data('increment')) > 0 ? parseInt($(this).data('increment')) : 1;
+		var max = parseFloat(jQuery(this).data('max')) > 0 ? parseFloat($(this).data('max')) : 2000;
+		var min = parseFloat(jQuery(this).data('min')) > -2000 ? parseFloat($(this).data('min')) : 0;
+		var inc = parseFloat(jQuery(this).data('increment')) > 0 ? parseFloat($(this).data('increment')) : 1;
 
 		var dslcSlider, dslcSliderField, dslcSliderInput, dslcSliderVal, dslcAffectOnChangeRule, dslcAffectOnChangeEl,
 		dslcSliderTooltip, dslcSliderTooltipOffset, dslcSliderTooltipPos, dslcModule, dslcOptionID, dslcSliderExt,
@@ -1886,7 +1770,7 @@ function dslc_module_options_numeric( field ) {
 
 		sliderInput.classList.add("slider-initiated");
 
-		$(sliderInput).keyup(function(e){
+		jQuery(sliderInput).keyup(function(e){
 
 			// Shift + Up/Down
 			if( e.shiftKey ) {
@@ -1894,24 +1778,24 @@ function dslc_module_options_numeric( field ) {
 				if( e.keyCode == 38 ) {
 
 					this.value = ( parseInt(this.value) || 0 ) + 9;
-					$(this).trigger('change');
+					jQuery(this).trigger('change');
 				}
 
 				if( e.keyCode == 40 ) {
 
 					this.value = ( parseInt(this.value) + 0 ) - 9;
-					$(this).trigger('change');
+					jQuery(this).trigger('change');
 				}
 			}
 
 			// Backspace, "-"
 			if( e.keyCode == 8 || e.keyCode == 45 ) {
-				$(this).trigger('change');
+				jQuery(this).trigger('change');
 			}
 
 			// If number key pressed
 			if ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105)) {
-				$(this).trigger('change');
+				jQuery(this).trigger('change');
 			}
 
 			if( ! e.key.match(/\d/) && e.keyCode != 8 && e.keyCode != 39 && e.keyCode != 37 && e.keyCode != 46 ) {
@@ -1920,8 +1804,8 @@ function dslc_module_options_numeric( field ) {
 			}
 		});
 
-		$(sliderInput).unbind('change');
-		$(sliderInput).change(function(e){
+		jQuery(sliderInput).unbind('change');
+		jQuery(sliderInput).change(function(e){
 
 			if( this.value > max ) {
 
@@ -1939,16 +1823,16 @@ function dslc_module_options_numeric( field ) {
 			dslcModule.addClass('dslca-module-change-made');
 		});
 
-		$(document).mouseup(function(){
+		jQuery(document).mouseup(function(){
 
 			handle = false;
 		});
 
-		$(sliderInput).mousedown(function(e){
+		jQuery(sliderInput).mousedown(function(e){
 
 			// Set handle to the point were we started to drag mouse from
 			handle = parseFloat(e.pageX);
-			temp = parseInt(sliderInput.value && sliderInput.value != '' ? sliderInput.value : 0);
+			temp = parseFloat(sliderInput.value && sliderInput.value != '' ? sliderInput.value : 0);
 			var prev_pos = 0;
 
 			var el_clicked = e.target || e.srcElement;
@@ -1961,28 +1845,20 @@ function dslc_module_options_numeric( field ) {
 
 					var x = e.clientX;
 
-					// var x = e.pageX; <- Alternative
+					var this_move = x - prev_pos;
 
+					if ( 0 < this_move ) {
 
-						// var this_move = x - handle;
-						var this_move = x - prev_pos;
-						// this_move = Math.round(this_move);
+						sliderInput.value = parseFloat(sliderInput.value) + inc;
+					} else {
 
-						if ( 0 < this_move ) {
-							sliderInput.value = parseInt(sliderInput.value) + inc;
-						} else {
-							sliderInput.value = parseInt(sliderInput.value) - inc;
-						}
+						sliderInput.value = parseFloat(sliderInput.value) - inc;
+					}
 
-						prev_pos = x;
-						// if( fut_val % inc != 0 ) return false;
-
-					// Trigger change only every 8th px movement
-					// if ( x % 2 === 0 ) {
-
-						$(sliderInput).trigger('change');
-
-					// }
+					prev_pos = x;
+					
+					console.info( jQuery(sliderInput) );
+					jQuery(sliderInput).trigger('change');
 				}
 			}
 		});

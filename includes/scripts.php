@@ -236,6 +236,7 @@ final class DSLC_Scripts{
 			wp_enqueue_script( 'jquery-ui-droppable' );
 			wp_enqueue_script( 'jquery-effects-core' );
 			wp_enqueue_script( 'jquery-ui-slider' );
+			wp_enqueue_script( 'jquery-ui-resizable' );
 			wp_enqueue_script( 'wp-color-picker' );
 			wp_enqueue_script( 'dslc-load-fonts', '//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js' );
 			wp_enqueue_script( 'dslc-builder-plugins-js', DS_LIVE_COMPOSER_URL . 'js/libs/builder.plugins.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );

@@ -302,7 +302,7 @@ function dslc_row_edit( row ) {
 	jQuery('.dslca-row-edit-actions').show();
 
 	// Set current values
-	jQuery('.dslca-modules-section-edit-field' , DSLC.Editor.frame).each(function(){
+	jQuery('.dslca-modules-section-edit-field').each(function(){
 
 
 		/**
@@ -313,15 +313,15 @@ function dslc_row_edit( row ) {
 		 */
 		if ( 'type' === jQuery(this).data('id') ) {
 
-			if ( '' === jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="type"]').val() ||
-				  'wrapped' === jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="type"]').val() ) {
+			if ( '' === jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="type"]', DSLC.Editor.frame).val() ||
+				  'wrapped' === jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="type"]', DSLC.Editor.frame).val() ) {
 				jQuery('select[data-id="type"]').val('wrapper').change();
 			}
 		}
 
 		if ( jQuery(this).data('id') == 'border-top' ) {
 
-			if ( jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="border"]').val().indexOf('top') >= 0 ) {
+			if ( jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="border"]', DSLC.Editor.frame).val().indexOf('top') >= 0 ) {
 				jQuery(this).prop('checked', true);
 				jQuery(this).siblings('.dslca-modules-section-edit-option-checkbox-hook').find('.dslca-icon').removeClass('dslc-icon-check-empty').addClass('dslc-icon-check');
 			} else {
@@ -331,7 +331,7 @@ function dslc_row_edit( row ) {
 
 		} else if ( jQuery(this).data('id') == 'border-right' ) {
 
-			if ( jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="border"]').val().indexOf('right') >= 0 ) {
+			if ( jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="border"]', DSLC.Editor.frame).val().indexOf('right') >= 0 ) {
 				jQuery(this).prop('checked', true);
 				jQuery(this).siblings('.dslca-modules-section-edit-option-checkbox-hook').find('.dslca-icon').removeClass('dslc-icon-check-empty').addClass('dslc-icon-check');
 			} else {
@@ -341,7 +341,7 @@ function dslc_row_edit( row ) {
 
 		} else if ( jQuery(this).data('id') == 'border-bottom' ) {
 
-			if ( jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="border"]').val().indexOf('bottom') >= 0 ) {
+			if ( jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="border"]', DSLC.Editor.frame).val().indexOf('bottom') >= 0 ) {
 				jQuery(this).prop('checked', true);
 				jQuery(this).siblings('.dslca-modules-section-edit-option-checkbox-hook').find('.dslca-icon').removeClass('dslc-icon-check-empty').addClass('dslc-icon-check');
 			} else {
@@ -351,7 +351,7 @@ function dslc_row_edit( row ) {
 
 		} else if ( jQuery(this).data('id') == 'border-left' ) {
 
-			if ( jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="border"]').val().indexOf('left') >= 0 ) {
+			if ( jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="border"]', DSLC.Editor.frame).val().indexOf('left') >= 0 ) {
 				jQuery(this).prop('checked', true);
 				jQuery(this).siblings('.dslca-modules-section-edit-option-checkbox-hook').find('.dslca-icon').removeClass('dslc-icon-check-empty').addClass('dslc-icon-check');
 			} else {
@@ -360,7 +360,7 @@ function dslc_row_edit( row ) {
 			}
 		} else if ( jQuery(this).hasClass('dslca-modules-section-edit-field-checkbox') ) {
 
-			if ( jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="' + jQuery(this).data('id') + '"]').val().indexOf( jQuery(this).data('val') ) >= 0 ) {
+			if ( jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="' + jQuery(this).data('id') + '"]', DSLC.Editor.frame).val().indexOf( jQuery(this).data('val') ) >= 0 ) {
 				jQuery( this ).prop('checked', true);
 				jQuery( this ).siblings('.dslca-modules-section-edit-option-checkbox-hook').find('.dslca-icon').removeClass('dslc-icon-check-empty').addClass('dslc-icon-check');
 			} else {
@@ -369,7 +369,7 @@ function dslc_row_edit( row ) {
 			}
 		} else {
 
-			jQuery(this).val( jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="' + jQuery(this).data('id') + '"]').val() );
+			jQuery(this).val( jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="' + jQuery(this).data('id') + '"]', DSLC.Editor.frame ).val() );
 
 			if ( jQuery( this ).hasClass( 'dslca-modules-section-edit-field-colorpicker' ) ) {
 
@@ -400,153 +400,16 @@ function dslc_row_edit( row ) {
 	});
 
 	// Initiate numeric option sliders
-	dslc_row_edit_slider_init();
+	// dslc_row_edit_slider_init();
 
 	// Show options management
 	dslc_show_section('.dslca-modules-section-edit');
 
-	// Hide the publish butotn
+	// Hide the publish button
 	jQuery('.dslca-save-composer-hook').css({ 'visibility' : 'hidden' });
 	jQuery('.dslca-save-draft-composer-hook').css({ 'visibility' : 'hidden' });
 }
 
-/**
- * Row - Edit - Initiate Colorpicker
- */
-function dslc_row_edit_colorpicker_init( field ) {
-
-	if ( dslcDebug ) console.log( 'dslc_row_edit_colorpicker_init' );
-
-	var dslcField,
-	dslcFieldID,
-	dslcEl,
-	dslcModulesSection,
-	dslcVal,
-	dslcRule,
-	dslcSetting,
-	dslcTargetEl,
-	dslcCurrColor;
-
-	/**
-	 * Color Pallete
-	 */
-
-	var dslcColorPallete = [],
-	currStorage,
-	index;
-
-	dslcColorPallete[0] = [];
-	dslcColorPallete[1] = [];
-	dslcColorPallete[2] = [];
-	dslcColorPallete[3] = [];
-
-	if ( localStorage['dslcColorpickerPalleteStorage'] == undefined ) {
-	} else {
-
-		currStorage = JSON.parse( localStorage['dslcColorpickerPalleteStorage'] );
-
-		for	( index = 0; index < currStorage.length; index++ ) {
-
-			var key = Math.floor( index / 3 );
-
-			if ( key < 4 ) {
-
-				dslcColorPallete[key].push( currStorage[index] );
-			}
-		}
-	}
-
-	var query = field || '.dslca-modules-section-edit-field-colorpicker';
-
-	jQuery(query).each( function(){
-
-		dslcCurrColor = jQuery(this).val();
-
-		jQuery(this).spectrum({
-			color: dslcCurrColor,
-			showInput: true,
-			allowEmpty: true,
-			showAlpha: true,
-			clickoutFiresChange: true,
-			cancelText: '',
-			chooseText: '',
-			preferredFormat: 'rgb',
-			showPalette: true,
-			palette: dslcColorPallete,
-			move: function( color ) {
-
-				dslcField = jQuery(this);
-				dslcFieldID = dslcField.data('id');
-
-				if ( color == null ) {
-
-					dslcVal = '';
-					// dslcVal = 'transparent';
-				} else {
-
-					dslcVal = color.toRgbString();
-				}
-
-				dslcRule = dslcField.data('css-rule');
-				dslcEl = jQuery('.dslca-modules-section-being-edited');
-				dslcTargetEl = dslcEl;
-				dslcSetting = jQuery('.dslca-modules-section-settings input[data-id="' + dslcFieldID + '"]', dslcEl );
-
-				dslcEl.addClass('dslca-modules-section-change-made');
-
-				if ( dslcField.data('css-element') ) {
-
-					dslcTargetEl = jQuery( dslcField.data('css-element'), dslcEl );
-				}
-
-				dslcTargetEl.css(dslcRule, dslcVal);
-				dslcSetting.val( dslcVal );
-			},
-			change: function( color ) {
-
-				dslcField = jQuery(this);
-				dslcFieldID = dslcField.data('id');
-
-				if ( color == null ) {
-
-					dslcVal = '';
-					// dslcVal = 'transparent';
-				} else {
-
-					dslcVal = color.toRgbString();
-				}
-
-				// Update pallete local storage
-				if ( localStorage['dslcColorpickerPalleteStorage'] == undefined ) {
-
-					var newStorage = [ dslcVal ];
-					localStorage['dslcColorpickerPalleteStorage'] = JSON.stringify(newStorage);
-				} else {
-
-					var newStorage = JSON.parse( localStorage['dslcColorpickerPalleteStorage'] );
-
-					if ( newStorage.indexOf( dslcVal ) == -1 ) {
-
-						newStorage.unshift( dslcVal );
-					}
-
-					localStorage['dslcColorpickerPalleteStorage'] = JSON.stringify(newStorage);
-				}
-			},
-			show: function( color ) {
-
-				jQuery('body').addClass('dslca-disable-selection');
-				jQuery(this).spectrum( 'set', jQuery(this).val() );
-			},
-			hide: function() {
-
-				jQuery('body').removeClass('dslca-disable-selection');
-			}
-		});
-
-		DSLC.Editor.colorpickers.push( jQuery( this ) );
-	});
-}
 
 /**
  * Row - Edit - Initiate Slider
@@ -596,7 +459,7 @@ function dslc_row_edit_slider_init() {
 				dslcSliderInput.val( dslcSliderVal );
 
 				// Live change
-				dslcAffectOnChangeEl = jQuery('.dslca-modules-section-being-edited');
+				dslcAffectOnChangeEl = jQuery('.dslca-modules-section-being-edited', DSLC.Editor.frame);
 
 				if ( dslcSliderInput.data('css-element') ) {
 
@@ -613,7 +476,7 @@ function dslc_row_edit_slider_init() {
 				}
 
 				// Update option
-				dslcSection = jQuery('.dslca-modules-section-being-edited');
+				dslcSection = jQuery('.dslca-modules-section-being-edited', DSLC.Editor.frame);
 				dslcOptionID = dslcSliderInput.data('id');
 				jQuery('.dslca-modules-section-settings input[data-id="' + dslcOptionID + '"]', dslcSection).val( ui.value );
 
@@ -690,7 +553,7 @@ function dslc_row_edit_cancel( callback ) {
 	callback = typeof callback !== 'undefined' ? callback : false;
 
 	// Recover original data from data-def attribute for each control
-	jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input').each(function(){
+	jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input', DSLC.Editor.frame).each(function(){
 
 		jQuery(this).val( jQuery(this).data('def') );
 
@@ -714,7 +577,7 @@ function dslc_row_edit_cancel( callback ) {
 	jQuery('.dslca-save-draft-composer-hook').css({ 'visibility' : 'visible' });
 
 	// Remove being edited class
-	jQuery('.dslca-modules-section-being-edited').removeClass('dslca-modules-section-being-edited dslca-modules-section-change-made');
+	jQuery('.dslca-modules-section-being-edited', DSLC.Editor.frame).removeClass('dslca-modules-section-being-edited dslca-modules-section-change-made');
 
 	if ( callback ) { callback(); }
 
@@ -732,7 +595,7 @@ function dslc_row_edit_confirm( callback ) {
 
 	callback = typeof callback !== 'undefined' ? callback : false;
 
-	jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input').each(function(){
+	jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input', DSLC.Editor.frame).each(function(){
 
 		jQuery(this).data( 'def', jQuery(this).val() );
 	});
@@ -753,7 +616,7 @@ function dslc_row_edit_confirm( callback ) {
 	jQuery('.dslca-save-draft-composer-hook').css({ 'visibility' : 'visible' });
 
 	// Remove being edited class
-	jQuery('.dslca-modules-section-being-edited').removeClass('dslca-modules-section-being-edited dslca-modules-section-change-made');
+	jQuery('.dslca-modules-section-being-edited', DSLC.Editor.frame).removeClass('dslca-modules-section-being-edited dslca-modules-section-change-made');
 
 	dslc_generate_code();
 	dslc_show_publish_button();
@@ -811,7 +674,7 @@ function dslc_row_copy( row ) {
 		}).done(function( response ) {
 
 			// Remove "being-edited" class
-			jQuery('.dslca-module-being-edited').removeClass('dslca-module-being-edited');
+			jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
 
 			// Get new ID
 			dslcModuleID = response.output;
@@ -821,7 +684,7 @@ function dslc_row_copy( row ) {
 
 			// Reload the module, remove "being-edited" class and show module
 			dslc_module_output_altered( function(){
-				jQuery('.dslca-module-being-edited').removeClass('dslca-module-being-edited').animate({
+				jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited').animate({
 					opacity : 1
 				}, 300);
 			});

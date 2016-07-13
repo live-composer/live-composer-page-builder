@@ -11,7 +11,7 @@ $dslc_extension; // Used in template
  */
 class DSLC_Options_Extender {
 
-	private $extension_options = [];
+	private $extension_options = array();
 
 
 	/**

@@ -81,7 +81,7 @@
 	DSLC.Editor.frame.on( 'click', '.dslca-module-edit-hook, .dslc-module-front > div:not(.dslca-module-manage)', function(e){
 
 		e.preventDefault();
-		var curr_module_edited = $('.dslca-module-being-edited').length;
+		var curr_module_edited = jQuery('.dslca-module-being-edited', DSLC.Editor.frame).length;
 
 		// If composer not hidden & not clicked on editable element
 		if ( curr_module_edited == 0 && ! $('body').hasClass( 'dslca-composer-hidden' ) && ! $(e.target).hasClass( 'dslca-editable-content' ) ) {
@@ -92,7 +92,7 @@
 			var content = '';
 
 			// If another module being edited and has changes
-			if ( $('.dslca-module-being-edited.dslca-module-change-made').length ) {
+			if ( jQuery('.dslca-module-being-edited.dslca-module-change-made', DSLC.Editor.frame).length ) {
 
 				DSLC.Editor.CModalWindow({
 					title: DSLCString.str_module_curr_edit_title,
@@ -117,7 +117,7 @@
 					DSLCString.str_module_curr_edit_descr + '</span>', $(this) );*/
 
 			// If a section is being edited and has changes
-			} else if ( $('.dslca-modules-section-being-edited.dslca-modules-section-change-made').length ) {
+			} else if ( jQuery('.dslca-modules-section-being-edited.dslca-modules-section-change-made', DSLC.Editor.frame).length ) {
 
 				DSLC.Editor.CModalWindow({
 					title: DSLCString.str_row_curr_edit_title,
@@ -146,8 +146,8 @@
 			} else {
 
 				// If a module section is being edited but has no changes, cancel it
-				if ( $('.dslca-modules-section-being-edited').length ) {
-					$('.dslca-module-edit-cancel').trigger('click');
+				if ( jQuery('.dslca-modules-section-being-edited', DSLC.Editor.frame).length ) {
+					jQuery('.dslca-module-edit-cancel').trigger('click');
 				}
 
 				// Vars

@@ -244,8 +244,8 @@
 			'affect_on_change_rule' => 'opacity',
 			'affect_on_change_el' => '.dslc-bg-video-overlay',
 			'min' => 0,
-			'max' => 1.01,
-			'increment' => 0.1,
+			'max' => 1,
+			'increment' => 0.05,
 		);
 
 		$dslc_var_row_options['border_color'] = array(
