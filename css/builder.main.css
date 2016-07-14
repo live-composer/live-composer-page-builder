@@ -59,6 +59,8 @@ body {
    cursor: pointer;
 }
 
+
+.dslca-modules-section-edit-option-select .dslca-icon,
 .dslca-module-edit-option-select .dslca-icon {
 	position: absolute;
 	right: 40px;
