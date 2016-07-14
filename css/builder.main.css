@@ -47,7 +47,23 @@ body {
 }
 
 .dslca-container select {
-	line-height: 30px; /* Fixes the height in Safari */
+	line-height: 12px; /* Fixes the height in Safari */
+	padding: 6px 10px;
+	min-height: 32px;
+
+	/* Reset default dropdown select styling */
+	-webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+
+   cursor: pointer;
+}
+
+.dslca-module-edit-option-select .dslca-icon {
+	position: absolute;
+	right: 40px;
+	top: 64px;
+	cursor: pointer;
 }
 
 .dslca-container input[type="submit"] {
@@ -438,6 +454,11 @@ body {
 			padding: 16px 15px 5px 15px;
 			overflow-x: auto;
 			min-height: 58px;
+
+			transform: translate(0,0); 
+			/* fix the bug with wrong position
+			of the horizontal scrolling bar
+			in macOS Chorme */
 		}
 
 			.dslca-modules-section-edit-option,
@@ -471,10 +492,6 @@ body {
 					width: 100%;
 					min-width: 140px;
 					height: auto;
-				}
-
-				.dslca-module-edit-option select {
-					min-width: 155px;
 				}
 
 				.dslca-module-edit-option-text {
@@ -2816,10 +2833,8 @@ body.rtl .dslca-modules-area-placeholder {
 	}
 
 	.dslca-module-edit-option-slider .dslca-module-edit-field-numeric-ext {
-		top:auto;
-		right: auto;
-		margin-left: -23px;
-		margin-top: 9px;
+		right: 40px;
+		top: 68px;
 	}
 
 /**
