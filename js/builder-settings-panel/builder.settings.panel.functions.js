@@ -239,15 +239,7 @@ jQuery(document).ready(function($){
 
 				$(this).attr('contenteditable', 'true');
 
-				var medium = new MediumEditor(this, {
-					// buttonLabels: 'fontawesome',
-					imageDragging: false,
-					toolbar: {
-						buttons: ['bold', 'italic', 'unorderedlist', 'orderedlist',  'h2', 'h3', 'removeFormat'],
-						diffLeft: 25,
-						diffTop: 10,
-					},
-				});
+				var medium = DSLC.Editor.frameContext.DSLC_Iframe.initMediumEditor(this);
 
 				self.mediumEditors.push( medium );
 			}

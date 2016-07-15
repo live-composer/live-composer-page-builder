@@ -105,6 +105,8 @@ final class DSLC_Scripts{
 			wp_enqueue_script( 'util-js', DS_LIVE_COMPOSER_URL . 'js/common/util.class.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 			wp_enqueue_script( 'base64', DS_LIVE_COMPOSER_URL . 'js/libs/base64.js', array(), DS_LIVE_COMPOSER_VER );
 			wp_enqueue_script( 'modernizr', DS_LIVE_COMPOSER_URL . 'js/libs/modernizr-custom.js', array(), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_script( 'iframe-main-js', DS_LIVE_COMPOSER_URL . 'js/iframe.main.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_script( 'iframe-panel-settings-js', DS_LIVE_COMPOSER_URL . 'js/iframe-settings-panel/iframe.settings.panel.functions.js', array( 'jquery', 'iframe-main-js' ), DS_LIVE_COMPOSER_VER );
 		}
 	}
 
