@@ -65,7 +65,16 @@ function dslc_icons_modal() {
 		global $dslc_active,
 				 $dslc_var_icons; // array with icon sets
 
-		if ( $dslc_active && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+		$screen = get_current_screen();
+
+		if ( $screen->id != 'toplevel_page_livecomposer_editor' ) {
+
+			return;
+		}
+
+
+		if ( current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+
 			// output list of icons
 			foreach ( $dslc_var_icons as $key => $value ) {
 
@@ -81,12 +90,12 @@ function dslc_icons_modal() {
 					}
 
 					echo '</ul>';
-				echo '</div>';
+				echo '</div><div class="dslca-prompt-modal-custom"></div>';
 			}
 		}
 	}
 }
-add_action( 'wp_footer', 'dslc_icons_modal' );
+add_action( 'admin_footer', 'dslc_icons_modal' );
 
 
 /**

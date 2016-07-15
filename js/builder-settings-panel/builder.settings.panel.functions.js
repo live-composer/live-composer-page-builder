@@ -1284,17 +1284,14 @@ function dslc_module_options_icon_returnid() {
 		jQuery(this).closest('.dslca-module-edit-option-icon').find('input').addClass('icon-modal-active');
 	});
 
-	jQuery(document).on('editorFrameLoaded', function(){
+	jQuery(document).on('click', '.dslca-modal-icons .icon-item', function(el) {
 
-		DSLC.Editor.frame.on('click', '.dslca-modal-icons .icon-item', function(el) {
+		// Get selected item code
+		var selectedIconCode = jQuery(this).find('.icon-item_name').text();
+		jQuery('input.icon-modal-active').val(selectedIconCode).change();
 
-			// Get selected item code
-			var selectedIconCode = jQuery(this).find('.icon-item_name').text();
-			jQuery('input.icon-modal-active').val(selectedIconCode).change();
-
-			// Close modal window
-			dslc_hide_modal( '', jQuery('.dslca-modal:visible', DSLC.Editor.frame) );
-		});
+		// Close modal window
+		dslc_hide_modal( '', jQuery('.dslca-modal:visible') );
 	});
 }
 

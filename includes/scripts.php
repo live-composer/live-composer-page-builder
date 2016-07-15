@@ -241,6 +241,7 @@ final class DSLC_Scripts{
 			wp_enqueue_script( 'dslc-load-fonts', '//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js' );
 			wp_enqueue_script( 'dslc-builder-plugins-js', DS_LIVE_COMPOSER_URL . 'js/libs/builder.plugins.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 
+			wp_enqueue_script( 'mq-outerhide-js', DS_LIVE_COMPOSER_URL . 'js/libs/mq-outer-hide.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 			wp_enqueue_script( 'mq-mutation-observer-js', DS_LIVE_COMPOSER_URL . 'js/libs/mq-mutation-observer.js', array(), DS_LIVE_COMPOSER_VER );
 			wp_enqueue_script( 'util-js', DS_LIVE_COMPOSER_URL . 'js/common/util.class.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 			wp_enqueue_script( 'base64', DS_LIVE_COMPOSER_URL . 'js/libs/base64.js', array(), DS_LIVE_COMPOSER_VER );
