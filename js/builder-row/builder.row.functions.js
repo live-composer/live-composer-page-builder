@@ -135,61 +135,17 @@
 
 		var self = this;
 
+		var module_edited = jQuery('.dslca-module-being-edited', DSLC.Editor.frame).length;
+		var row_edited = jQuery('.dslca-modules-section-being-edited', DSLC.Editor.frame).length;
+
+		/// If settings panel opened - finish func
+		if ( $('body').hasClass( 'dslca-composer-hidden' ) || module_edited > 0 || row_edited > 0 ) return false;
+
 		// If not disabled ( disabling used for tutorial )
 		if ( ! $(this).hasClass('dslca-action-disabled') ) {
 
-			// If a module is being edited
-			if ( jQuery('.dslca-module-being-edited.dslca-module-change-made', DSLC.Editor.frame).length ) {
-
-				DSLC.Editor.CModalWindow({
-					title: DSLCString.str_module_curr_edit_title,
-					content: DSLCString.str_module_curr_edit_descr,
-					confirm: function() {
-
-						dslc_module_options_confirm_changes( function(){
-							$(self).trigger('click');
-						});
-					},
-					cancel: function() {
-
-						dslc_module_options_cancel_changes( function(){
-							$(self).trigger('click');
-						});
-					}
-				});
-
-				// Ask to confirm or cancel
-				/*dslc_js_confirm( 'edit_in_progress', '<span class="dslca-prompt-modal-title">' + DSLCString.str_module_curr_edit_title +
-					'</span><span class="dslca-prompt-modal-descr">' + DSLCString.str_module_curr_edit_descr + '</span>', jQuery(this) );*/
-			// If another section is being edited
-			} else if ( jQuery('.dslca-modules-section-being-edited.dslca-modules-section-change-made', DSLC.Editor.frame).length ) {
-
-				DSLC.Editor.CModalWindow({
-					title: DSLCString.str_row_curr_edit_title,
-					content: DSLCString.str_row_curr_edit_descr,
-					confirm: function() {
-
-						dslc_module_options_confirm_changes( function(){
-							$(self).trigger('click');
-						});
-					},
-					cancel: function() {
-
-						dslc_module_options_cancel_changes( function(){
-							$(self).trigger('click');
-						});
-					}
-				});
-
-				// Ask to confirm or cancel
-				/*dslc_js_confirm( 'edit_in_progress', '<span class="dslca-prompt-modal-title">' + DSLCString.str_row_curr_edit_title +
-					'</span><span class="dslca-prompt-modal-descr">' + DSLCString.str_row_curr_edit_descr + '</span>', jQuery(this) );*/
-			// All good to proceed
-			} else {
-
-				// Trigger the function to edit
-				dslc_row_edit( $(this).closest('.dslc-modules-section') );
-			}
+			// Trigger the function to edit
+			dslc_row_edit( $(this).closest('.dslc-modules-section') );
 		}
 	});
 });

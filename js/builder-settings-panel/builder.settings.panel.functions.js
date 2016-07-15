@@ -278,6 +278,7 @@ jQuery(document).ready(function($){
 			self.mediumEditors.forEach(function(item){
 
 				item.destroy();
+				jQuery(item.origElements).attr('contenteditable', true);
 			});
 
 			self.mediumEditors = [];
