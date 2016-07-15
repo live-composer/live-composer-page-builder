@@ -12,4 +12,8 @@ var dslcAllFontsArray = dslcRegularFontsArray.concat( dslcGoogleFontsArray );
 var dslcIconsCurrentSet = DSLCIcons.fontawesome;
 var dslcDebug = true;
 
-DSLC.Editor = {};
+DSLC.Editor = {
+	flags: {
+		generate_code_after_row_changed: true
+	}
+};

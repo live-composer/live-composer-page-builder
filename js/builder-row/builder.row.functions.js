@@ -552,6 +552,9 @@ function dslc_row_edit_cancel( callback ) {
 
 	callback = typeof callback !== 'undefined' ? callback : false;
 
+	// Time to generate code optimized {HACK}
+	DSLC.Editor.flags.generate_code_after_row_changed = false;
+
 	// Recover original data from data-def attribute for each control
 	jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input', DSLC.Editor.frame).each(function(){
 
@@ -560,6 +563,10 @@ function dslc_row_edit_cancel( callback ) {
 		// Fire change for every ROW control, so it redraw linked CSS properties
 		jQuery('.dslca-modules-section-edit-field[data-id="' + jQuery(this).data('id') + '"]').val( jQuery(this).data('def') ).trigger('change');
 	});
+
+	DSLC.Editor.flags.generate_code_after_row_changed = true;
+	dslc_generate_code();
+	dslc_show_publish_button();
 
 	dslc_show_section('.dslca-modules');
 
@@ -767,6 +774,7 @@ jQuery(document).ready(function($){
 	$(document).on( 'click', '.dslca-row-edit-save', function(){
 
 		dslc_row_edit_confirm();
+		$(".dslca-currently-editing").removeAttr('style');
 		$('.dslca-row-options-filter-hook.dslca-active').removeClass('dslca-active');
 		dslc_responsive_classes( true );
 	});
@@ -777,6 +785,7 @@ jQuery(document).ready(function($){
 	$(document).on( 'click', '.dslca-row-edit-cancel', function(){
 
 		dslc_row_edit_cancel();
+		$(".dslca-currently-editing").removeAttr('style');
 		$('.dslca-row-options-filter-hook.dslca-active').removeClass('dslca-active');
 		dslc_responsive_classes( true );
 	});

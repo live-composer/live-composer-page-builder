@@ -117,7 +117,7 @@
 					DSLCString.str_module_curr_edit_descr + '</span>', $(this) );*/
 
 			// If a section is being edited and has changes
-			} else if ( jQuery('.dslca-modules-section-being-edited.dslca-modules-section-change-made', DSLC.Editor.frame).length ) {
+			} else if ( jQuery('.dslca-modules-section-being-edited', DSLC.Editor.frame).length ) {
 
 				DSLC.Editor.CModalWindow({
 					title: DSLCString.str_row_curr_edit_title,
@@ -130,9 +130,9 @@
 					},
 					cancel: function() {
 
-						dslc_module_options_cancel_changes( function(){
+						/*dslc_module_options_cancel_changes( function(){
 							$(self).trigger('click');
-						});
+						});*/
 					}
 				});
 
@@ -267,19 +267,22 @@
 
 		if (  jQuery(this).data('type') == 'simple' ) {
 
-			if ( ! jQuery('body').hasClass( 'dslca-composer-hidden' ) ) {
+			if ( ! jQuery(this).closest('.dslc-module-front').hasClass('dslca-module-being-edited') ) {
 
-				if ( ! jQuery(this).closest('.dslc-module-front').hasClass('dslca-module-being-edited') ) {
-					jQuery(this).closest('.dslc-module-front').find('.dslca-module-edit-hook').trigger('click');
-				}
+				jQuery(this).closest('.dslc-module-front').find('.dslca-module-edit-hook').trigger('click');
+			}/*
+			if ( jQuery('.dslca-currently-editing strong').html() == '' ) {
+
+				
 			} else {
 
 				jQuery(this).trigger('blur');
-			}
+			}*/
 		}
 	}).on('keyup', '.dslca-editable-content', function(){
 
-		if ( jQuery(this).data('type') == 'simple' ) {
+		if ( jQuery(this).data('type') == 'simple' ){
+
 			jQuery(this).closest('.dslc-module-front').addClass('dslca-module-change-made');
 		}
 	});

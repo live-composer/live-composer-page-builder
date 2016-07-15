@@ -447,6 +447,8 @@ window.onbeforeunload = function () { return; };
 
 		dslcSetting.val( dslcValReal );
 
+		if ( ! DSLC.Editor.flags.generate_code_after_row_changed ) return false;
+
 		dslc_generate_code();
 		dslc_show_publish_button();
 	});
@@ -708,8 +710,11 @@ window.onbeforeunload = function () { return; };
 	//Preview Module Section Opt Change - Numeric
 	jQuery(document).on( 'keyup, blur, change', '.dslca-modules-section-edit-field-numeric, .dslca-modules-section-edit-field-slider-numeric', function(){
 
+		var dslcOption = jQuery(this);
+
+		if ( dslcOption.data('css-element') != undefined ) return false;
+
 		var dslcOptionValue = '',
-			dslcOption = jQuery(this),
 			dslcOptionID = dslcOption.data('id'),
 			dslcOptionWrap = dslcOption.closest('.dslca-modules-section-edit-option'),
 			dslcModulesSection = jQuery('.dslca-modules-section-being-edited', DSLC.Editor.frame),
@@ -717,6 +722,7 @@ window.onbeforeunload = function () { return; };
 			dslcAffectOnChangeValOrig = dslcOption.val(),
 			dslcAffectOnChangeVal = dslcAffectOnChangeValOrig + dslcOption.data('ext'),
 			dslcAffectOnChangeRules;
+
 
 		// Add changed class
 		dslcModulesSection.addClass('dslca-modules-section-change-made');
