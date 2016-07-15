@@ -143,8 +143,7 @@ function dslc_generate_code() {
 	 */
 
 	jQuery('#dslc-main .dslc-modules-area', DSLC.Editor.frame).each(function(){
-		console.info( 'here 1' );
-		console.info( jQuery('.dslc-module-front', this).length );
+
 		if ( jQuery('.dslc-module-front', this).length ) {
 
 			jQuery(this).removeClass('dslc-modules-area-empty').addClass('dslc-modules-area-not-empty');

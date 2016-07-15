@@ -35,7 +35,7 @@ jQuery(document).ready(function($){
 		dslc_module_options_numeric( this );
 	});
 
-	jQuery(document).on('hover', '.dslca-modules-section-edit-field', function() {
+	jQuery(document).on('hover', '.dslca-modules-section-edit-option-slider .dslca-modules-section-edit-field', function() {
 
 		dslc_module_options_numeric( this );
 	});
@@ -1848,15 +1848,14 @@ function dslc_module_options_numeric( field ) {
 
 					if ( 0 < this_move ) {
 
-						sliderInput.value = parseFloat(sliderInput.value) + inc;
+						sliderInput.value = Math.round( ( parseFloat(sliderInput.value) + inc ) * 100) / 100;
 					} else {
 
-						sliderInput.value = parseFloat(sliderInput.value) - inc;
+						sliderInput.value = Math.round( ( parseFloat(sliderInput.value) - inc ) * 100) / 100;
 					}
 
 					prev_pos = x;
 
-					console.info( jQuery(sliderInput) );
 					jQuery(sliderInput).trigger('change');
 				}
 			}

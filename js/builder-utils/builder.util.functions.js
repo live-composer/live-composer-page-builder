@@ -706,13 +706,13 @@ window.onbeforeunload = function () { return; };
 
 
 	//Preview Module Section Opt Change - Numeric
-	$(document).on( 'keyup', '.dslca-modules-section-edit-field-numeric', function(){
+	jQuery(document).on( 'keyup, blur, change', '.dslca-modules-section-edit-field-numeric, .dslca-modules-section-edit-field-slider-numeric', function(){
 
 		var dslcOptionValue = '',
-			dslcOption = $(this),
+			dslcOption = jQuery(this),
 			dslcOptionID = dslcOption.data('id'),
 			dslcOptionWrap = dslcOption.closest('.dslca-modules-section-edit-option'),
-			dslcModulesSection = $('.dslca-modules-section-being-edited', DSLC.editor.frame),
+			dslcModulesSection = jQuery('.dslca-modules-section-being-edited', DSLC.Editor.frame),
 			dslcAffectOnChangeRule = dslcOption.data('css-rule'),
 			dslcAffectOnChangeValOrig = dslcOption.val(),
 			dslcAffectOnChangeVal = dslcAffectOnChangeValOrig + dslcOption.data('ext'),
@@ -728,7 +728,6 @@ window.onbeforeunload = function () { return; };
 
 		// Loop through rules (useful when there are multiple rules)
 		for ( var i = 0; i < dslcAffectOnChangeRules.length; i++ ) {
-			
 			dslcModulesSection.css( dslcAffectOnChangeRules[i] , dslcAffectOnChangeVal );
 		}
 

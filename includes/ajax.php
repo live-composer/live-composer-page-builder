@@ -82,7 +82,6 @@ function dslc_ajax_add_modules_section( $atts ) {
 					</div>
 				</div>
 				<div class="dslca-modules-section-settings">' . dslc_row_get_options_fields() . '</div><!-- .dslca-module-section-settings -->
-				<div class="dslca-module-loading dslca-modules-area-loading"><div class="dslca-module-loading-inner"></div></div>
 			</div><!-- .dslc-module-section-wrapper -->
 		</div>';
 
@@ -142,8 +141,6 @@ function dslc_ajax_add_modules_area( $atts ) {
 					<span class="dslca-manage-action dslca-delete-modules-area-hook" title="Delete" ><span class="dslca-icon dslc-icon-remove"></span></span>
 				</div>
 			</div>
-
-			<div class="dslca-module-loading"><div class="dslca-module-loading-inner"></div></div>
 		</div>';
 
 		// Set the output
@@ -551,6 +548,7 @@ function dslc_ajax_display_module_options( $atts ) {
 								<option value="<?php echo $select_option['value']; ?>" <?php if ( $curr_value == $select_option['value'] ) echo 'selected="selected"'; ?>><?php echo $select_option['label']; ?></option>
 							<?php endforeach; ?>
 						</select>
+						<span class="dslca-icon dslc-icon-caret-down"></span>
 
 					<?php elseif ( $module_option['type'] == 'checkbox' ) : ?>
 

@@ -87,6 +87,7 @@ function dslc_row_display_options() {
 						<option value="<?php echo esc_attr( $choice['value'] ); ?>"><?php echo esc_attr( $choice['label'] ); ?></option>
 					<?php endforeach; ?>
 				</select>
+				<span class="dslca-icon dslc-icon-caret-down"></span>
 
 			<?php elseif ( 'color' === $row_option['type'] ) : 
 

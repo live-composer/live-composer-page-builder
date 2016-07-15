@@ -70,7 +70,7 @@ jQuery(document).on( 'click', '.dslca-currently-editing', function(){
 	if ( activeElement ) {
 		newOffset = activeElement.offset().top - 100;
 		if ( newOffset < 0 ) { newOffset = 0; }
-		$( 'html, body' ).animate({ scrollTop: newOffset }, 300, function(){
+		jQuery( 'html, body', DSLC.Editor.frame ).animate({ scrollTop: newOffset }, 300, function(){
 			activeElement.animate( { 'outline-color' : outlineColor }, 70, function(){
 				activeElement.animate({ 'outline-color' : 'transparent' }, 70, function(){
 					activeElement.animate( { 'outline-color' : outlineColor }, 70, function(){
@@ -376,243 +376,202 @@ function dslc_drag_and_drop() {
 
 	var modulesSection, modulesArea, moduleID, moduleOutput;
 
-	// Modules Sections / Rows – Drag & Drop – Make sections draggable/sortable
-	/*jQuery( '.dslc-content' ).sortable({
-		items: ".dslc-modules-section",
-		handle: '.dslca-move-modules-section-hook:not(".dslca-action-disabled")',
-		placeholder: 'dslca-modules-section-placeholder',
-		tolerance : 'pointer',
-		cursorAt: { bottom: 10 },
-		axis: 'y',
-		scroll: true,
-		scrollSensitivity: 200,
-		scrollSpeed : 10,
-		sort: function() {
-			jQuery( this ).removeClass( "ui-state-default" );
+	// Drag and Drop for module icons from the list of modules
+	var modules_list = jQuery('.dslca-modules .dslca-section-scroller-content'); // Groups that can hold modules
+	// jQuery(modules_list).each(function (i,e) {
+
+	if( modules_list.length == 0 ) {
+
+		modules_list = [ document.createElement( 'div' ) ];
+	}
+
+	var modules_list_sortable = Sortable.create( modules_list[0] , {
+		sort: false, // do not allow sorting inside the list of modules
+		group: { name: 'modules', pull: 'clone', put: false },
+		animation: 150,
+		handle: '.dslca-module',
+		draggable: '.dslca-module',
+		// ghostClass: 'dslca-module-placeholder',
+		chosenClass: 'dslca-module-dragging',
+		scroll: true, // or HTMLElement
+		scrollSensitivity: 150, // px, how near the mouse must be to an edge to start scrolling.
+		scrollSpeed: 15, // px
+
+
+		setData: function (dataTransfer, dragEl) {
+		//dragEl – contains html of the draggable element like:
+		//<div class="dslca-module dslca-scroller-item dslca-origin dslca-origin-General" data-id="DSLC_Button" data-origin="General" draggable="false" style="">
+
+			  // dataTransfer.setData('Text', dragEl.textContent);
+			  dataTransfer.setData('text/html', dragEl.innerHTML);
 		},
-		update: function (e, ui) {
+
+		// dragging started
+		onStart: function (/**Event*/evt) {
+			evt.oldIndex;  // element index within parent
+
+			// jQuery( '.dslc-modules-area' ).sortable( "refreshPositions" );
+			jQuery('body').removeClass('dslca-new-module-drag-not-in-progress').addClass('dslca-new-module-drag-in-progress');
+			jQuery('#dslc-header').addClass('dslca-header-low-z-index');
+		},
+
+		// dragging ended
+		onEnd: function (/**Event*/evt) {
+			evt.oldIndex;  // element's old index within parent
+			evt.newIndex;  // element's new index within parent
+
+			var itemEl = evt.item;  // dragged HTMLElement
+			// evt.preventDefault();
+			// evt.stopPropagation(); 
+			//return false;
+
+			jQuery( '.dslca-options-hovered', DSLC.Editor.frame ).removeClass('dslca-options-hovered');
+
+			// Vars
+			modulesArea = jQuery(itemEl.parentNode); //jQuery(this);
+			moduleID = itemEl.dataset.id; // get value of data-id attr.
+
 			dslc_generate_code();
-			dslc_show_publish_button();
-		},
-		start: function(e, ui){
-			jQuery('body').removeClass('dslca-drag-not-in-progress').addClass('dslca-drag-in-progress');
-			ui.placeholder.html('<span class="dslca-placeholder-help-text"><span class="dslca-placeholder-help-text-inner">' + DSLCString.str_row_helper_text + '</span></span>');
-			jQuery( '.dslc-content' ).sortable( "refreshPositions" );
-		},
-		stop: function(e, ui){
-			jQuery('body').removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
-			jQuery('.dslca-anim-opacity-drop').removeClass('dslca-anim-opacity-drop');
-			jQuery('.dslc-modules-section').css({ overflow : 'visible', 'max-height' : 'none' });
-		}
-	});
-*/
-	// Modules Sections / Rows – Drag & Drop – Receive Elements Inside
 
-	/*jQuery( '.dslc-modules-section' ).droppable({
-		drop: function( event, ui ) {
-			var modulesSection = jQuery(this).find('.dslc-modules-section-inner');
-			var moduleID = ui.draggable.data( 'id' );
-			if ( moduleID == 'DSLC_M_A' ) {
-				dslc_modules_area_add( modulesSection );
-			}
-		}
-	});*/
+			if ( moduleID == 'DSLC_M_A' || jQuery('body').hasClass('dslca-module-drop-in-progress') || 
+				modulesArea.closest('#dslc-header').length || modulesArea.closest('#dslc-footer').length ) {
 
-	// Modules Area – Drag & Drop – Receive Elements Inside
+				// nothing
 
-	//After frame loaded
+			} else {
 
-	// List of modules
-		var modules_list = jQuery('.dslca-modules .dslca-section-scroller-content'); // Groups that can hold modules
-		// jQuery(modules_list).each(function (i,e) {
+				jQuery('body').addClass('dslca-anim-in-progress dslca-module-drop-in-progress');
 
-		if( modules_list.length == 0 ) {
+				// Add padding to modules area
+				/*
+				if ( modulesArea.hasClass('dslc-modules-area-not-empty') )
+					modulesArea.animate({ paddingBottom : 50 }, 150);
+				*/
 
-			modules_list = [ document.createElement( 'div' ) ];
-		}
+				// Load Output
+				dslc_module_output_default( moduleID, function( response ){
 
-		var modules_list_sortable = Sortable.create( modules_list[0] , {
-			sort: false, // do not allow sorting inside the list of modules
-			group: { name: 'modules', pull: 'clone', put: false },
-			animation: 150,
-			handle: '.dslca-module',
-			draggable: '.dslca-module',
-			// ghostClass: 'dslca-module-placeholder',
-			chosenClass: 'dslca-module-dragging',
-			scroll: true, // or HTMLElement
-			scrollSensitivity: 150, // px, how near the mouse must be to an edge to start scrolling.
-			scrollSpeed: 15, // px
+					// Append Content
+					moduleOutput = response.output;
 
+					// Remove extra padding from area
+					// modulesArea.css({ paddingBottom : 0 });
 
-			setData: function (dataTransfer, dragEl) {
-			//dragEl – contains html of the draggable element like:
-			//<div class="dslca-module dslca-scroller-item dslca-origin dslca-origin-General" data-id="DSLC_Button" data-origin="General" draggable="false" style="">
+					// Hide loader
+					jQuery('.dslca-module-loading', modulesArea ).hide();
 
-				  // dataTransfer.setData('Text', dragEl.textContent);
-				  dataTransfer.setData('text/html', dragEl.innerHTML);
-			},
+					// Add output
+					// TODO: optimize jQuery in the string below
+					var dslcJustAdded = jQuery(moduleOutput).insertAfter( jQuery('.dslca-module', modulesArea) ) ; /*.appendTo(modulesArea);*/
+					jQuery('.dslca-module', modulesArea).remove();
 
-			// dragging started
-			onStart: function (/**Event*/evt) {
-				evt.oldIndex;  // element index within parent
-
-				// jQuery( '.dslc-modules-area' ).sortable( "refreshPositions" );
-				jQuery('body').removeClass('dslca-new-module-drag-not-in-progress').addClass('dslca-new-module-drag-in-progress');
-				jQuery('#dslc-header').addClass('dslca-header-low-z-index');
-			},
-
-			// dragging ended
-			onEnd: function (/**Event*/evt) {
-				evt.oldIndex;  // element's old index within parent
-				evt.newIndex;  // element's new index within parent
-
-				var itemEl = evt.item;  // dragged HTMLElement
-				// evt.preventDefault();
-				// evt.stopPropagation(); 
-				//return false;
-
-				// Vars
-				modulesArea = jQuery(itemEl.parentNode); //jQuery(this);
-				moduleID = itemEl.dataset.id; // get value of data-id attr.
-
-				dslc_generate_code();
-
-				if ( moduleID == 'DSLC_M_A' || jQuery('body').hasClass('dslca-module-drop-in-progress') || 
-					modulesArea.closest('#dslc-header').length || modulesArea.closest('#dslc-footer').length ) {
-
-					// nothing
-
-				} else {
-
-					jQuery('body').addClass('dslca-anim-in-progress dslca-module-drop-in-progress');
-
-					// Add padding to modules area
-					if ( modulesArea.hasClass('dslc-modules-area-not-empty') )
-						modulesArea.animate({ paddingBottom : 50 }, 150);
-
-					// Load Output
-					dslc_module_output_default( moduleID, function( response ){
-
-						// Append Content
-						moduleOutput = response.output;
-
-						// Remove extra padding from area
-						modulesArea.css({ paddingBottom : 0 });
-
-						// Hide loader
-						jQuery('.dslca-module-loading', modulesArea ).hide();
-
-						// Add output
-						// TODO: optimize jQuery in the string below
-						var dslcJustAdded = jQuery(moduleOutput).insertAfter( jQuery('.dslca-module', modulesArea) ) ; /*.appendTo(modulesArea);*/
-						jQuery('.dslca-module', modulesArea).remove();
-
-						dslcJustAdded.css({
-							'-webkit-animation-name' : 'dslcBounceIn',
-							'-moz-animation-name' : 'dslcBounceIn',
-							'animation-name' : 'dslcBounceIn',
-							'animation-duration' : '0.6s',
-							'-webkit-animation-duration' : '0.6s'
-						});
-
-						setTimeout( function(){
-							dslc_init_square();
-							dslc_center();
-							dslc_masonry( dslcJustAdded );
-							jQuery('body').removeClass('dslca-anim-in-progress dslca-module-drop-in-progress');
-						}, 700 );
-
-						// "Show" no content text
-						jQuery('.dslca-no-content-primary', modulesArea ).css({ opacity : 1 });
-
-						// "Show" modules area management
-						jQuery('.dslca-modules-area-manage', modulesArea).css ({ visibility : 'visible' });
-
-						// Show publish
-						jQuery('.dslca-save-composer-hook').css({ 'visibility' : 'visible' });
-						jQuery('.dslca-save-draft-composer-hook').css({ 'visibility' : 'visible' });
-
-						// Generete
-						dslc_carousel();
-						dslc_tabs();
-						dslc_init_accordion();
-						dslc_init_square();
-						dslc_center();
-						dslc_generate_code();
-						dslc_show_publish_button();
-
-						DSLC.Editor.initMediumEditor();
+					dslcJustAdded.css({
+						'-webkit-animation-name' : 'dslcBounceIn',
+						'-moz-animation-name' : 'dslcBounceIn',
+						'animation-name' : 'dslcBounceIn',
+						'animation-duration' : '0.6s',
+						'-webkit-animation-duration' : '0.6s'
 					});
 
-					// Loading animation
+					setTimeout( function(){
+						dslc_init_square();
+						dslc_center();
+						dslc_masonry( dslcJustAdded );
+						jQuery('body').removeClass('dslca-anim-in-progress dslca-module-drop-in-progress');
+					}, 700 );
 
-					// Show loader – Not used anymore.
-					// jQuery('.dslca-module-loading', modulesArea).show();
+					// "Show" no content text
+					jQuery('.dslca-no-content-primary', modulesArea ).css({ opacity : 1 });
 
-					// Change module icon to the spinning loader.
-					jQuery(itemEl).find('.dslca-icon').attr('class', '').attr('class', 'dslca-icon dslc-icon-refresh dslc-icon-spin');
+					// "Show" modules area management
+					jQuery('.dslca-modules-area-manage', modulesArea).css ({ visibility : 'visible' });
+
+					// Show publish
+					jQuery('.dslca-save-composer-hook').css({ 'visibility' : 'visible' });
+					jQuery('.dslca-save-draft-composer-hook').css({ 'visibility' : 'visible' });
+
+					// Generete
+					dslc_carousel();
+					dslc_tabs();
+					dslc_init_accordion();
+					dslc_init_square();
+					dslc_center();
+					dslc_generate_code();
+					dslc_show_publish_button();
+
+					DSLC.Editor.initMediumEditor();
+				});
+
+				// Loading animation
+
+				// Show loader – Not used anymore.
+				// jQuery('.dslca-module-loading', modulesArea).show();
+
+				// Change module icon to the spinning loader.
+				jQuery(itemEl).find('.dslca-icon').attr('class', '').attr('class', 'dslca-icon dslc-icon-refresh dslc-icon-spin');
 
 
-					// Hide no content text
-					jQuery('.dslca-no-content-primary', modulesArea).css({ opacity : 0 });
+				// Hide no content text
+				jQuery('.dslca-no-content-primary', modulesArea).css({ opacity : 0 });
 
-					// Hide modules area management
-					jQuery('.dslca-modules-area-manage', modulesArea).css ({ visibility : 'hidden' });
+				// Hide modules area management
+				jQuery('.dslca-modules-area-manage', modulesArea).css ({ visibility : 'hidden' });
 
-					// Animate loading
-					var randomLoadingTime = Math.floor(Math.random() * (100 - 50 + 1) + 50) * 100;
-					jQuery('.dslca-module-loading-inner', modulesArea).css({ width : 0 }).animate({
-						width : '100%'
-					}, randomLoadingTime, 'linear' );
-				}
-
-				jQuery('body').removeClass('dslca-new-module-drag-in-progress').addClass('dslca-new-module-drag-not-in-progress');
-				jQuery('#dslc-header').removeClass('dslca-header-low-z-index');
-			},
-
-			// Element is dropped into the list from another list
-			onAdd: function (/**Event*/evt) {
-				var itemEl = evt.item;  // dragged HTMLElement
-				evt.from;  // previous list
-				// + indexes from onEnd
-				// evt.preventDefault();
-			},
-
-			// Changed sorting within list
-			onUpdate: function (/**Event*/evt) {
-				var itemEl = evt.item;  // dragged HTMLElement
-				// + indexes from onEnd
-				dslc_show_publish_button();
-				// evt.preventDefault();
-			},
-
-			// Called by any change to the list (add / update / remove)
-			onSort: function (/**Event*/evt) {
-				// same properties as onUpdate
-				evt.preventDefault();
-				// evt.stopPropagation(); return false;
-			},
-
-			// Element is removed from the list into another list
-			onRemove: function (/**Event*/evt) {
-				  // same properties as onUpdate
-			},
-
-			// Attempt to drag a filtered element
-			onFilter: function (/**Event*/evt) {
-				var itemEl = evt.item;  // HTMLElement receiving the `mousedown|tapstart` event.
-			},
-
-			// Event when you move an item in the list or between lists
-			onMove: function (/**Event*/evt) {
-				// Example: http://jsbin.com/tuyafe/1/edit?js,output
-				evt.dragged; // dragged HTMLElement
-				evt.draggedRect; // TextRectangle {left, top, right и bottom}
-				evt.related; // HTMLElement on which have guided
-				evt.relatedRect; // TextRectangle
-				// return false; — for cancel
+				// Animate loading
+				var randomLoadingTime = Math.floor(Math.random() * (100 - 50 + 1) + 50) * 100;
+				jQuery('.dslca-module-loading-inner', modulesArea).css({ width : 0 }).animate({
+					width : '100%'
+				}, randomLoadingTime, 'linear' );
 			}
-		});
+
+			jQuery('body').removeClass('dslca-new-module-drag-in-progress').addClass('dslca-new-module-drag-not-in-progress');
+			jQuery('#dslc-header').removeClass('dslca-header-low-z-index');
+		},
+
+		// Element is dropped into the list from another list
+		onAdd: function (/**Event*/evt) {
+			var itemEl = evt.item;  // dragged HTMLElement
+			evt.from;  // previous list
+			// + indexes from onEnd
+			// evt.preventDefault();
+		},
+
+		// Changed sorting within list
+		onUpdate: function (/**Event*/evt) {
+			var itemEl = evt.item;  // dragged HTMLElement
+			// + indexes from onEnd
+			dslc_show_publish_button();
+			// evt.preventDefault();
+		},
+
+		// Called by any change to the list (add / update / remove)
+		onSort: function (/**Event*/evt) {
+			// same properties as onUpdate
+			evt.preventDefault();
+			// evt.stopPropagation(); return false;
+		},
+
+		// Element is removed from the list into another list
+		onRemove: function (/**Event*/evt) {
+			  // same properties as onUpdate
+		},
+
+		// Attempt to drag a filtered element
+		onFilter: function (/**Event*/evt) {
+			var itemEl = evt.item;  // HTMLElement receiving the `mousedown|tapstart` event.
+		},
+
+		// Event when you move an item in the list or between lists
+		onMove: function (/**Event*/evt) {
+			// Example: http://jsbin.com/tuyafe/1/edit?js,output
+			evt.dragged; // dragged HTMLElement
+			evt.draggedRect; // TextRectangle {left, top, right и bottom}
+			evt.related; // HTMLElement on which have guided
+			evt.relatedRect; // TextRectangle
+			// return false; — for cancel
+			jQuery( evt.to ).addClass('dslca-options-hovered');
+		}
+	});
 }
 
 /**
