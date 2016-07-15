@@ -22,6 +22,7 @@ jQuery(document).ready(function($) {
  	jQuery("#page-builder-frame").on('load', function(){
 
  		var self = this;
+ 		DSLC.Editor.frameContext = this.contentWindow;
  		DSLC.Editor.frame = jQuery(this).contents();
 
  		// Disable WP admin bar in editing mode
