@@ -71,6 +71,9 @@ jQuery(document).on( 'click', '.dslca-currently-editing', function(){
 	if ( activeElement ) {
 		newOffset = activeElement.offset().top - 100;
 		if ( newOffset < 0 ) { newOffset = 0; }
+
+		var callbacks = [];
+
 		jQuery( 'html, body', DSLC.Editor.frame ).animate({ scrollTop: newOffset }, 300, function(){
 			activeElement.animate( { 'outline-color' : outlineColor }, 70, function(){
 				activeElement.animate({ 'outline-color' : 'transparent' }, 70, function(){
@@ -123,17 +126,17 @@ jQuery(document).on( 'click', '.dslca-go-to-section-hook', function(e){
 	e.preventDefault();
 
 	// Do nothing if clicked on active tab
-	if ( $(this).hasClass('dslca-active') ) {
+	if ( jQuery(this).hasClass('dslca-active') ) {
 
 		return;
 	}
 
-	var sectionTitle = $(this).data('section');
+	var sectionTitle = jQuery(this).data('section');
 	dslc_show_section( sectionTitle );
 
-	if ( $(this).hasClass('dslca-go-to-section-modules') || $(this).hasClass('dslca-go-to-section-templates')  ) {
+	if ( jQuery(this).hasClass('dslca-go-to-section-modules') || jQuery(this).hasClass('dslca-go-to-section-templates')  ) {
 
-		$(this).addClass('dslca-active').siblings('.dslca-go-to-section-hook').removeClass('dslca-active');
+		jQuery(this).addClass('dslca-active').siblings('.dslca-go-to-section-hook').removeClass('dslca-active');
 	}
 });
 
@@ -145,10 +148,10 @@ jQuery(document).on( 'click', '.dslca-close-composer-hook', function(e){
 
 	e.preventDefault();
 
-	if ( ! $('body').hasClass('dslca-saving-in-progress') ) {
+	if ( ! jQuery('body').hasClass('dslca-saving-in-progress') ) {
 
 		dslc_js_confirm( 'disable_lc', '<span class="dslca-prompt-modal-title">' +
-			DSLCString.str_exit_title + '</span><span class="dslca-prompt-modal-descr">' + DSLCString.str_exit_descr + '</span>', $(this).attr('href') );
+			DSLCString.str_exit_title + '</span><span class="dslca-prompt-modal-descr">' + DSLCString.str_exit_descr + '</span>', jQuery(this).attr('href') );
 	}
 });
 
@@ -170,10 +173,10 @@ jQuery(document).on( 'click', '.dslca-section-title', function(e){
 
 	e.stopPropagation();
 
-	if ( $('.dslca-section-title-filter', this).length ) {
+	if ( jQuery('.dslca-section-title-filter', this).length ) {
 
 		dslc_generate_filters();
-		$('.dslca-section-title-filter-options').slideToggle(300);
+		jQuery('.dslca-section-title-filter-options').slideToggle(300);
 	}
 });
 
@@ -185,18 +188,18 @@ jQuery(document).on( 'click', '.dslca-section-title-filter-options span', functi
 
 	e.stopPropagation();
 
-	var origin = $(this).data('origin');
-	var section = $(this).closest('.dslca-section');
+	var origin = jQuery(this).data('origin');
+	var section = jQuery(this).closest('.dslca-section');
 
 	if ( section.hasClass('dslca-templates-load') ) {
 
-		$('.dslca-section-title-filter-curr', section).text( $(this).text());
+		jQuery('.dslca-section-title-filter-curr', section).text( $(this).text());
 	} else {
 
-		$('.dslca-section-title-filter-curr', section).text( $(this).text());
+		jQuery('.dslca-section-title-filter-curr', section).text( $(this).text());
 	}
 
-	$('.dslca-section-scroller-inner').css({ left : 0 });
+	jQuery('.dslca-section-scroller-inner').css({ left : 0 });
 
 	dslc_filter_origin( origin, section );
 });
