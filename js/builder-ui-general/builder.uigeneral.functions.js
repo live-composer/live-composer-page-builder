@@ -422,8 +422,11 @@ function dslc_drag_and_drop() {
 
 			var itemEl = evt.item;  // dragged HTMLElement
 			// evt.preventDefault();
-			// evt.stopPropagation(); 
+			// evt.stopPropagation();
 			//return false;
+
+			// Prevent drop into modules listing
+			if(itemEl.closest('.dslca-section-scroller-content')) return false;
 
 			jQuery( '.dslca-options-hovered', DSLC.Editor.frame ).removeClass('dslca-options-hovered');
 
@@ -433,7 +436,7 @@ function dslc_drag_and_drop() {
 
 			dslc_generate_code();
 
-			if ( moduleID == 'DSLC_M_A' || jQuery('body').hasClass('dslca-module-drop-in-progress') || 
+			if ( moduleID == 'DSLC_M_A' || jQuery('body').hasClass('dslca-module-drop-in-progress') ||
 				modulesArea.closest('#dslc-header').length || modulesArea.closest('#dslc-footer').length ) {
 
 				// nothing

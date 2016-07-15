@@ -3639,7 +3639,7 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
  */
 
 .dslca-modal.dslca-modal-icons {
-	width: auto;
+	width: 70%;
 	position: fixed;
 	padding:0;
 	overflow: scroll;
@@ -3647,6 +3647,19 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 	left: 50%;
 	visibility: visible;
 	transform: translate(-50%, 0%);
+	z-index: 100001;
+}
+
+.dslca-prompt-modal-custom {
+    background: rgba( 255, 255, 255, 0.80 );
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100000;
+    height: 100%;
 }
 
 /*.dslca-modal.dslca-modal-icons:before,

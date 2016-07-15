@@ -24,14 +24,20 @@
 		dslc_hide_modal( '', jQuery('.dslca-modal:visible') );
 
 		// Vars
-		var modal = jQuery(modal, DSLC.Editor.frame);
+		var modal = jQuery(modal);
 
 		// Calc popup height
 		var containerHeight = jQuery('.dslca-container').height();
-		var finalHeight = jQuery(DSLC.Editor.frame).height() - containerHeight - 20;
+		modal.outerHide({
+			clbk: function(){
+
+				dslc_hide_modal( '', jQuery('.dslca-modal:visible') );
+			}
+		});
 
 		// Show Modal
-		modal.show().height(finalHeight);
+		modal.show();
+		jQuery(".dslca-prompt-modal-custom").length > 0 && jQuery(".dslca-prompt-modal-custom").fadeIn();
 		modal.addClass('dslca-modal-open');
 
 		// Animate Modal
@@ -55,10 +61,12 @@
 		if ( dslcDebug ) console.log( 'dslc_hide_modal' );
 
 		// Vars
-		var modal = jQuery(modal, DSLC.Editor.frame);
+		var modal = jQuery(modal);
 
 		// Hide ( with animation )
+		modal.outerHide( 'destroy' );
 		modal.hide();
+		jQuery(".dslca-prompt-modal-custom").length > 0 && jQuery(".dslca-prompt-modal-custom").fadeOut();
 		modal.removeClass('dslca-modal-open');
 		/*
 		modal.css({
@@ -73,7 +81,7 @@
 	}
 
 	// Hide if clicked outside of modal
-	jQuery(document).mouseup(function (e) {
+	/*jQuery(document).mouseup(function (e) {
 		 var container = jQuery(".dslca-modal-open");
 
 		 if (!container.is(e.target) // if the target of the click isn't the container...
@@ -81,7 +89,7 @@
 		 {
 			container.hide();
 		 }
-	});
+	});*/
 
 	/**
 	 * MODAL - Document Ready
@@ -97,7 +105,6 @@
 
 			var modal = $(this).data('modal');
 			dslc_show_modal( $(this), modal );
-
 		});
 
 		/**
@@ -110,9 +117,7 @@
 
 				var modal = $(this).data('modal');
 				dslc_hide_modal( $(this), modal );
-
 			}
-
 		});
 
 	});
