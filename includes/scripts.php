@@ -5,8 +5,8 @@
  * @package LiveComposer
  *
  * Table of Contents
- * - dslc_load_scripts ( Load CSS and JS files )
- * - dslc_load_admin_scripts ( Load CSS and JS files for the admin )
+ * - dslc_load_scripts_frontend ( Load CSS and JS files )
+ * - dslc_load_scripts_admin ( Load CSS and JS files for the admin )
  * - dslc_load_fonts ( Load Google Fonts )
  */
 
@@ -23,7 +23,7 @@ final class DSLC_Scripts{
 	 *
 	 * @since 1.0
 	 */
-	public static function dslc_load_scripts() {
+	public static function dslc_load_scripts_frontend() {
 
 		global $dslc_active;
 
@@ -115,12 +115,9 @@ final class DSLC_Scripts{
 	 */
 	public function init() {
 
-		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'dslc_load_scripts' ) );
+		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'dslc_load_scripts_frontend' ) );
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'dslc_load_fonts' ) );
-
-		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'dslc_load_editing_scripts' ) );
-		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'dslc_load_admin_scripts' ) );
-
+		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'dslc_load_scripts_admin' ) );
 		add_action( 'admin_footer-plugins.php', array( __CLASS__, 'dslc_inline_js_plugin_title' ) );
 	}
 
@@ -129,147 +126,178 @@ final class DSLC_Scripts{
 	 *
 	 * @since 1.1
 	 */
-	public static function dslc_load_editing_scripts() {
+	public static function dslc_load_scripts_admin( $hook ) {
 
-		$translation_array = array(
-			'str_confirm' => __( 'Confirm', 'live-composer-page-builder' ),
-			'str_ok' => __( 'OK', 'live-composer-page-builder' ),
-			'str_import' => __( 'IMPORT', 'live-composer-page-builder' ),
-			'str_exit_title' => __( 'You are about to exit Live Composer', 'live-composer-page-builder' ),
-			'str_exit_descr' => __( 'If you have unsaved changed they will be lost.<br>If the "Publish Changes" button is shown in bottom right corner click it to save.', 'live-composer-page-builder' ),
-			'str_area_helper_text' => __( 'MODULES AREA', 'live-composer-page-builder' ),
-			'str_row_helper_text' => __( 'MODULES ROW', 'live-composer-page-builder' ),
-			'str_import_row_title' => __( 'Import Row', 'live-composer-page-builder' ),
-			'str_import_row_descr' => __( 'Copy the row export code bellow.', 'live-composer-page-builder' ),
-			'str_del_module_title' => __( 'Delete Module', 'live-composer-page-builder' ),
-			'str_del_module_descr' => __( 'Are you sure you want to delete this module?', 'live-composer-page-builder' ),
-			'str_del_area_title' => __( 'Delete Area/Column', 'live-composer-page-builder' ),
-			'str_del_area_descr' => __( 'Are you sure you want to delete this modules area?', 'live-composer-page-builder' ),
-			'str_del_row_title' => __( 'Delete Row', 'live-composer-page-builder' ),
-			'str_del_row_descr' => __( 'Are you sure you want to delete this row?', 'live-composer-page-builder' ),
-			'str_export_row_title' => __( 'Export Row', 'live-composer-page-builder' ),
-			'str_export_row_descr' => __( 'The code bellow is the importable code for this row.', 'live-composer-page-builder' ),
-			'str_module_curr_edit_title' => __( 'You are currently editing a module', 'live-composer-page-builder' ),
-			'str_module_curr_edit_descr' => __( 'You need to either <strong>confirm</strong> or <strong>cancel</strong> those changes before continuing.', 'live-composer-page-builder' ),
-			'str_row_curr_edit_title' => __( 'You are currently editing a modules row', 'live-composer-page-builder' ),
-			'str_row_curr_edit_descr' => __( 'You need to either <strong>confirm</strong> or <strong>cancel</strong> those changes before continuing.', 'live-composer-page-builder' ),
-			'str_refresh_title' => __( 'You are about to refresh the page', 'live-composer-page-builder' ),
-			'str_refresh_descr' => __( 'If you have unsaved changed they will be lost.<br>If the "Publish Changes" button is shown in bottom right corner click it to save.', 'live-composer-page-builder' ),
-			'str_res_tablet' => __( 'Tablet', 'live-composer-page-builder' ),
-			'str_res_phone' => __( 'Phone', 'live-composer-page-builder' ),
-		);
+		/* Check current screen id and set var accordingly */
+		$current_screen = '';
 
-		$screen = get_current_screen();
-
-		if ( 'toplevel_page_livecomposer_editor' !== $screen->id ) {
-
-			return;
+		if ( 'post-new.php' === $hook ||  'post.php' === $hook ) {
+			$current_screen = 'post-editing';
 		}
 
-		global $dslc_active;
+		if ( false !== strpos( $hook, 'dslc_plugin_options' ) ||
+			  false !== strpos( $hook, 'dslc_getting_started' ) ||
+			 'dslc_plugin_options' === get_admin_page_parent() ) {
 
-		// Allow devs to alter available fonts.
-		$fonts_array = apply_filters( 'dslc_available_fonts', self::$fonts_array );
-
-		// Array of icons available to be used.
-		global $dslc_var_icons;
-
-		/**
-		 * CSS
-		 */
-		if ( ! SCRIPT_DEBUG ) {
-
-			wp_enqueue_style( 'dslc-main-css', DS_LIVE_COMPOSER_URL . 'css/main.min.css', array(), DS_LIVE_COMPOSER_VER );
-			wp_enqueue_style( 'dslc-font-awesome', DS_LIVE_COMPOSER_URL . 'css/font-awesome.min.css', array(), DS_LIVE_COMPOSER_VER );
-			wp_enqueue_style( 'dslc-modules-css', DS_LIVE_COMPOSER_URL . 'css/modules.min.css', array(), DS_LIVE_COMPOSER_VER );
-		} else {
-
-			wp_enqueue_style( 'dslc-main-css', DS_LIVE_COMPOSER_URL . 'css/main.css', array(), DS_LIVE_COMPOSER_VER );
-			wp_enqueue_style( 'dslc-font-awesome', DS_LIVE_COMPOSER_URL . 'css/font-awesome.css', array(), DS_LIVE_COMPOSER_VER );
-			wp_enqueue_style( 'dslc-modules-css', DS_LIVE_COMPOSER_URL . 'css/modules.css', array(), DS_LIVE_COMPOSER_VER );
+			$current_screen = 'dslc-options';
 		}
 
-		wp_enqueue_style( 'dslc-plugins-css', DS_LIVE_COMPOSER_URL . 'css/plugins.css', array(), DS_LIVE_COMPOSER_VER );
+		if ( 'toplevel_page_livecomposer_editor' === $hook ) {
+			$current_screen = 'dslc-editing-screen';
+		}
 
-		/**
-		 * JavaScript
-		 */
-		wp_enqueue_script( 'dslc-plugins-js', DS_LIVE_COMPOSER_URL . 'js/libs/plugins.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
-		wp_enqueue_script( 'wp-mediaelement' );
+		/* Define some variables affecting further scripts loading */
+
+		// Load minimized scripts and css resources.
+		$min_suffix = '';
 
 		if ( ! SCRIPT_DEBUG ) {
-
-			wp_enqueue_script( 'dslc-main-js', DS_LIVE_COMPOSER_URL . 'js/common/main.min.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
-		} else {
-
-			wp_enqueue_script( 'dslc-main-js', DS_LIVE_COMPOSER_URL . 'js/common/main.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+			$min_suffix = '.min';
 		}
+
+		// What protocol to use.
+		$protocol = 'http';
 
 		if ( is_ssl() ) {
-
-			wp_localize_script( 'dslc-main-js', 'DSLCAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php', 'https' ) ) );
-		} else {
-
-			wp_localize_script( 'dslc-main-js', 'DSLCAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php', 'http' ) ) );
+			$protocol = 'https';
 		}
 
-		/**
-		 * Live Composer Active
-		 */
-		if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
-			wp_enqueue_media();
+		/* If current screen is Live Composer editing screen */
+		if ( 'dslc-editing-screen' === $current_screen ) {
+
+			global $dslc_active;
+
+			// Allow devs to alter available fonts.
+			$fonts_array = apply_filters( 'dslc_available_fonts', self::$fonts_array );
 
 			/**
 			 * CSS
 			 */
-
-			wp_enqueue_style( 'jquery-ui-slider' );
-			wp_enqueue_style( 'dslc-builder-main-css', DS_LIVE_COMPOSER_URL . 'css/builder.main.css', array(), DS_LIVE_COMPOSER_VER );
-			wp_enqueue_style( 'dslc-builder-plugins-css', DS_LIVE_COMPOSER_URL . 'css/builder.plugins.css', array(), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_style( 'dslc-main-css',     DS_LIVE_COMPOSER_URL . 'css/main' . $min_suffix . '.css', array(), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_style( 'dslc-font-awesome', DS_LIVE_COMPOSER_URL . 'css/font-awesome' . $min_suffix . '.css', array(), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_style( 'dslc-modules-css',  DS_LIVE_COMPOSER_URL . 'css/modules' . $min_suffix . '.css', array(), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_style( 'dslc-plugins-css',  DS_LIVE_COMPOSER_URL . 'css/plugins.css', array(), DS_LIVE_COMPOSER_VER );
 
 			/**
 			 * JavaScript
 			 */
+			wp_enqueue_script( 'dslc-plugins-js', DS_LIVE_COMPOSER_URL . 'js/libs/plugins.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_script( 'wp-mediaelement' );
+			wp_enqueue_script( 'dslc-main-js', DS_LIVE_COMPOSER_URL . 'js/common/main' . $min_suffix . '.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+			wp_localize_script( 'dslc-main-js', 'DSLCAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php', $protocol ) ) );
 
-			wp_enqueue_script( 'jquery-ui-core' );
-			wp_enqueue_script( 'jquery-ui-sortable' );
-			wp_enqueue_script( 'jquery-ui-draggable' );
-			wp_enqueue_script( 'jquery-ui-droppable' );
-			wp_enqueue_script( 'jquery-effects-core' );
-			wp_enqueue_script( 'jquery-ui-slider' );
-			wp_enqueue_script( 'jquery-ui-resizable' );
-			wp_enqueue_script( 'wp-color-picker' );
-			wp_enqueue_script( 'dslc-load-fonts', '//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js' );
-			wp_enqueue_script( 'dslc-builder-plugins-js', DS_LIVE_COMPOSER_URL . 'js/libs/builder.plugins.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 
-			wp_enqueue_script( 'mq-outerhide-js', DS_LIVE_COMPOSER_URL . 'js/libs/mq-outer-hide.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
-			wp_enqueue_script( 'mq-mutation-observer-js', DS_LIVE_COMPOSER_URL . 'js/libs/mq-mutation-observer.js', array(), DS_LIVE_COMPOSER_VER );
-			wp_enqueue_script( 'util-js', DS_LIVE_COMPOSER_URL . 'js/common/util.class.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
-			wp_enqueue_script( 'base64', DS_LIVE_COMPOSER_URL . 'js/libs/base64.js', array(), DS_LIVE_COMPOSER_VER );
-			wp_enqueue_script( 'modernizr', DS_LIVE_COMPOSER_URL . 'js/libs/modernizr-custom.js', array(), DS_LIVE_COMPOSER_VER );
+			/**
+			 * Live Composer Active
+			 */
+			if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
-			if ( ! SCRIPT_DEBUG ) {
+				wp_enqueue_media();
 
-				wp_enqueue_script( 'dslc-builder-main-js', DS_LIVE_COMPOSER_URL . 'js/builder.main.min.js', array( 'dslc-main-js' ), DS_LIVE_COMPOSER_VER );
-			} else {
+				/**
+				 * CSS
+				 */
 
-				wp_enqueue_script( 'dslc-builder-main-js', DS_LIVE_COMPOSER_URL . 'js/builder.main.js', array( 'dslc-main-js' ), DS_LIVE_COMPOSER_VER );
+				wp_enqueue_style( 'jquery-ui-slider' );
+				wp_enqueue_style( 'dslc-builder-main-css', DS_LIVE_COMPOSER_URL . 'css/builder.main.css', array(), DS_LIVE_COMPOSER_VER );
+				wp_enqueue_style( 'dslc-builder-plugins-css', DS_LIVE_COMPOSER_URL . 'css/builder.plugins.css', array(), DS_LIVE_COMPOSER_VER );
 
-				self::load_scripts( 'builder*', [ 'dslc-builder-main-js' ] );
+				/**
+				 * JavaScript
+				 */
+
+				wp_enqueue_script( 'jquery-ui-core' );
+				wp_enqueue_script( 'jquery-ui-sortable' );
+				wp_enqueue_script( 'jquery-ui-draggable' );
+				wp_enqueue_script( 'jquery-ui-droppable' );
+				wp_enqueue_script( 'jquery-effects-core' );
+				wp_enqueue_script( 'jquery-ui-slider' );
+				wp_enqueue_script( 'jquery-ui-resizable' );
+				wp_enqueue_script( 'wp-color-picker' );
+				wp_enqueue_script( 'dslc-load-fonts', '//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js' );
+				wp_enqueue_script( 'dslc-builder-plugins-js', DS_LIVE_COMPOSER_URL . 'js/libs/builder.plugins.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+
+				wp_enqueue_script( 'mq-outerhide-js', DS_LIVE_COMPOSER_URL . 'js/libs/mq-outer-hide.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+				wp_enqueue_script( 'mq-mutation-observer-js', DS_LIVE_COMPOSER_URL . 'js/libs/mq-mutation-observer.js', array(), DS_LIVE_COMPOSER_VER );
+				wp_enqueue_script( 'util-js', DS_LIVE_COMPOSER_URL . 'js/common/util.class.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+				wp_enqueue_script( 'base64', DS_LIVE_COMPOSER_URL . 'js/libs/base64.js', array(), DS_LIVE_COMPOSER_VER );
+				wp_enqueue_script( 'modernizr', DS_LIVE_COMPOSER_URL . 'js/libs/modernizr-custom.js', array(), DS_LIVE_COMPOSER_VER );
+
+				if ( ! SCRIPT_DEBUG ) {
+
+					wp_enqueue_script( 'dslc-builder-main-js', DS_LIVE_COMPOSER_URL . 'js/builder.all.min.js', array( 'dslc-main-js' ), DS_LIVE_COMPOSER_VER );
+				} else {
+					self::load_scripts( 'builder', 'dslc-builder-main-js' );
+				}
+
+				wp_localize_script( 'dslc-builder-main-js', 'DSLCAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php', $protocol ) ) );
+
+				$translation_array = array(
+					'str_confirm' => __( 'Confirm', 'live-composer-page-builder' ),
+					'str_ok' => __( 'OK', 'live-composer-page-builder' ),
+					'str_import' => __( 'IMPORT', 'live-composer-page-builder' ),
+					'str_exit_title' => __( 'You are about to exit Live Composer', 'live-composer-page-builder' ),
+					'str_exit_descr' => __( 'If you have unsaved changed they will be lost.<br>If the "Publish Changes" button is shown in bottom right corner click it to save.', 'live-composer-page-builder' ),
+					'str_area_helper_text' => __( 'MODULES AREA', 'live-composer-page-builder' ),
+					'str_row_helper_text' => __( 'MODULES ROW', 'live-composer-page-builder' ),
+					'str_import_row_title' => __( 'Import Row', 'live-composer-page-builder' ),
+					'str_import_row_descr' => __( 'Copy the row export code bellow.', 'live-composer-page-builder' ),
+					'str_del_module_title' => __( 'Delete Module', 'live-composer-page-builder' ),
+					'str_del_module_descr' => __( 'Are you sure you want to delete this module?', 'live-composer-page-builder' ),
+					'str_del_area_title' => __( 'Delete Area/Column', 'live-composer-page-builder' ),
+					'str_del_area_descr' => __( 'Are you sure you want to delete this modules area?', 'live-composer-page-builder' ),
+					'str_del_row_title' => __( 'Delete Row', 'live-composer-page-builder' ),
+					'str_del_row_descr' => __( 'Are you sure you want to delete this row?', 'live-composer-page-builder' ),
+					'str_export_row_title' => __( 'Export Row', 'live-composer-page-builder' ),
+					'str_export_row_descr' => __( 'The code bellow is the importable code for this row.', 'live-composer-page-builder' ),
+					'str_module_curr_edit_title' => __( 'You are currently editing a module', 'live-composer-page-builder' ),
+					'str_module_curr_edit_descr' => __( 'You need to either <strong>confirm</strong> or <strong>cancel</strong> those changes before continuing.', 'live-composer-page-builder' ),
+					'str_row_curr_edit_title' => __( 'You are currently editing a modules row', 'live-composer-page-builder' ),
+					'str_row_curr_edit_descr' => __( 'You need to either <strong>confirm</strong> or <strong>cancel</strong> those changes before continuing.', 'live-composer-page-builder' ),
+					'str_refresh_title' => __( 'You are about to refresh the page', 'live-composer-page-builder' ),
+					'str_refresh_descr' => __( 'If you have unsaved changed they will be lost.<br>If the "Publish Changes" button is shown in bottom right corner click it to save.', 'live-composer-page-builder' ),
+					'str_res_tablet' => __( 'Tablet', 'live-composer-page-builder' ),
+					'str_res_phone' => __( 'Phone', 'live-composer-page-builder' ),
+				);
+
+				wp_localize_script( 'dslc-builder-main-js', 'DSLCString', $translation_array );
+				wp_localize_script( 'dslc-builder-main-js', 'DSLCFonts', self::$fonts_array );
+
+				// Array of icons available to be used.
+				global $dslc_var_icons;
+
+				wp_localize_script( 'dslc-builder-main-js', 'DSLCIcons', $dslc_var_icons );
 			}
 
-			if ( is_ssl() ) {
+		}
 
-				wp_localize_script( 'dslc-builder-main-js', 'DSLCAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php', 'https' ) ) );
-			} else {
+		/* If current screen is post editing screen in WP Admin */
+		if ( 'post-editing' === $current_screen ) {
 
-				wp_localize_script( 'dslc-builder-main-js', 'DSLCAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php', 'http' ) ) );
+			wp_enqueue_script( 'dslc-post-options-js-admin', DS_LIVE_COMPOSER_URL . 'includes/post-options-framework/js/main' . $min_suffix . '.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker' ), DS_LIVE_COMPOSER_VER );
+
+			if ( get_post_type( get_the_ID() ) == 'page' && $hook == 'post.php' ) {
+
+				wp_localize_script( 'dslc-post-options-js-admin', 'tabData', array( 'tabTitle' => __( 'Page Builder', 'live-composer-page-builder' ) ) );
 			}
 
-			wp_localize_script( 'dslc-builder-main-js', 'DSLCString', $translation_array );
-			wp_localize_script( 'dslc-builder-main-js', 'DSLCFonts', self::$fonts_array );
-			wp_localize_script( 'dslc-builder-main-js', 'DSLCIcons', $dslc_var_icons );
+			wp_enqueue_style( 'jquery-ui-datepicker', '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/smoothness/jquery-ui.css' );
+			wp_enqueue_style( 'dslc-post-options-css-admin', DS_LIVE_COMPOSER_URL . 'includes/post-options-framework/css/main' . $min_suffix . '.css', array(), DS_LIVE_COMPOSER_VER );
+		}
+
+		/* If current screen is Live Composer options page */
+		if ( 'dslc-options' === $current_screen ) {
+
+			wp_enqueue_script( 'dslc-plugin-options-js-admin', DS_LIVE_COMPOSER_URL . 'includes/plugin-options-framework/js/main' . $min_suffix . '.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_style( 'dslc-plugin-options-css-admin', DS_LIVE_COMPOSER_URL . 'includes/plugin-options-framework/css/main' . $min_suffix . '.css', array(), DS_LIVE_COMPOSER_VER );
+			wp_localize_script( 'dslc-plugin-options-js-admin', 'dslcajax', array( 'nonce' => wp_create_nonce( 'dslc-optionspanel-ajax' ) ) );
+		}
+
+		/* If current screen is post editing screen and Yoast WP is active */
+		if ( 'post-editing' === $current_screen && defined( 'WPSEO_VERSION' ) ) {
+
+			wp_enqueue_script( 'dslc-yoast-seo-admin', DS_LIVE_COMPOSER_URL . 'js/libs/yoast-seo.js', array(), DS_LIVE_COMPOSER_VER, true );
 		}
 	}
 
@@ -280,14 +308,17 @@ final class DSLC_Scripts{
 	 * @param  string $dir          scripts search dir.
 	 * @param  array  $exclude_dirs exclude dirs from search.
 	 */
-	public static function load_scripts( $dir = '*', $scriptdeps, $exclude_dirs = [] ) {
+	public static function load_scripts( $dir = '*', $scriptdeps = '', $exclude_dirs = [] ) {
 
 		/** Load builder files dynamically */
 		$directories = glob( DS_LIVE_COMPOSER_ABS . '/js/' . $dir, GLOB_ONLYDIR );
 
+		vovaphperror( $directories, '$directories');
 		foreach ( $directories as $dir ) {
 
 			$files = glob( $dir . '/*.js' );
+
+			vovaphperror( $files, '$files');
 
 			foreach ( $files as $file ) {
 
@@ -302,66 +333,12 @@ final class DSLC_Scripts{
 					continue;
 				}
 
-				wp_enqueue_script( $filename, DS_LIVE_COMPOSER_URL . '/js/' . $filedir . '/' . $filename, $scriptdeps, DS_LIVE_COMPOSER_VER );
+				wp_enqueue_script( $filename, DS_LIVE_COMPOSER_URL . 'js/' . $filedir . '/' . $filename, $scriptdeps, DS_LIVE_COMPOSER_VER );
 			}
 		}
 	}
 
-	/**
-	 * Load CSS and JS files for the admin
-	 *
-	 * @param string $hook 	 some hook
-	 * @since 1.0
-	 */
-	public static function dslc_load_admin_scripts( $hook ) {
 
-		// Check if current screen is post editing.
-		$current_screen = '';
-
-		if ( 'post-new.php' === $hook ||  'post.php' === $hook ) {
-
-			$current_screen = 'post-editing';
-		}
-
-		if ( false !== strpos( $hook, 'dslc_plugin_options' ) || 'dslc_plugin_options' === get_admin_page_parent() || false !== strpos( $hook, 'dslc_getting_started' ) ) {
-
-			$current_screen = 'dslc-options';
-		}
-
-		// Load minimized scripts and css resources.
-		$min_suffix = '';
-
-		if ( ! SCRIPT_DEBUG ) {
-
-			$min_suffix = '.min';
-		}
-
-		if ( 'post-editing' === $current_screen ) {
-
-			wp_enqueue_script( 'dslc-post-options-js-admin', DS_LIVE_COMPOSER_URL . 'includes/post-options-framework/js/main' . $min_suffix . '.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker' ), DS_LIVE_COMPOSER_VER );
-
-			if ( get_post_type( get_the_ID() ) == 'page' && $hook == 'post.php' ) {
-
-				wp_localize_script( 'dslc-post-options-js-admin', 'tabData', array( 'tabTitle' => __( 'Page Builder', 'live-composer-page-builder' ) ) );
-			}
-
-			wp_enqueue_style( 'jquery-ui-datepicker', '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/smoothness/jquery-ui.css' );
-			wp_enqueue_style( 'dslc-post-options-css-admin', DS_LIVE_COMPOSER_URL . 'includes/post-options-framework/css/main' . $min_suffix . '.css', array(), DS_LIVE_COMPOSER_VER );
-		}
-
-		if ( 'dslc-options' === $current_screen ) {
-
-			wp_enqueue_script( 'dslc-plugin-options-js-admin', DS_LIVE_COMPOSER_URL . 'includes/plugin-options-framework/js/main' . $min_suffix . '.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
-			wp_enqueue_style( 'dslc-plugin-options-css-admin', DS_LIVE_COMPOSER_URL . 'includes/plugin-options-framework/css/main' . $min_suffix . '.css', array(), DS_LIVE_COMPOSER_VER );
-			wp_localize_script( 'dslc-plugin-options-js-admin', 'dslcajax', array( 'nonce' => wp_create_nonce( 'dslc-optionspanel-ajax' ) ) );
-		}
-
-		// Yoast SEO.
-		if ( 'post-editing' === $current_screen && defined( 'WPSEO_VERSION' ) ) {
-
-			wp_enqueue_script( 'dslc-yoast-seo-admin', DS_LIVE_COMPOSER_URL . 'js/libs/yoast-seo.js', array(), DS_LIVE_COMPOSER_VER, true );
-		}
-	}
 
 	/**
 	 * Load Google Fonts
