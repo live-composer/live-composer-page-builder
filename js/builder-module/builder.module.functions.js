@@ -81,90 +81,29 @@
 	DSLC.Editor.frame.on( 'click', '.dslca-module-edit-hook, .dslc-module-front > div:not(.dslca-module-manage)', function(e){
 
 		e.preventDefault();
-		var curr_module_edited = jQuery('.dslca-module-being-edited', DSLC.Editor.frame).length;
+		var module_edited = jQuery('.dslca-module-being-edited', DSLC.Editor.frame).length;
+		var row_edited = jQuery('.dslca-modules-section-being-edited', DSLC.Editor.frame).length;
 
-		// If composer not hidden & not clicked on editable element
-		if ( curr_module_edited == 0 && ! $('body').hasClass( 'dslca-composer-hidden' ) && ! $(e.target).hasClass( 'dslca-editable-content' ) ) {
+		/// If settings panel opened - finish func
+		if ( $('body').hasClass( 'dslca-composer-hidden' ) || module_edited > 0 || row_edited > 0 ) return false;
 
-			if(dslcDebug) console.log('dslca-module-edit-hook');
 
-			var title = '';
-			var content = '';
+		if(dslcDebug) console.log('dslca-module-edit-hook');
 
-			// If another module being edited and has changes
-			if ( jQuery('.dslca-module-being-edited.dslca-module-change-made', DSLC.Editor.frame).length ) {
+		// Vars
+		var dslcModule = $(this).closest('.dslc-module-front'),
+		dslcModuleID = dslcModule.data('dslc-module-id'),
+		dslcModuleCurrCode = dslcModule.find('.dslca-module-code').val();
 
-				DSLC.Editor.CModalWindow({
-					title: DSLCString.str_module_curr_edit_title,
-					content: DSLCString.str_module_curr_edit_descr,
-					confirm: function() {
+		// If a module is bening edited remove the "being edited" class from it
+		$('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
 
-						dslc_module_options_confirm_changes( function(){
-							dslcTarget.trigger('click');
-						});
-					},
-					cancel: function() {
+		// Add the "being edited" class to current module
+		dslcModule.addClass('dslca-module-being-edited');
 
-						dslc_module_options_cancel_changes( function(){
-							$(self).trigger('click');
-						});
-					}
-				});
+		// Call the function to display options
+		dslc_module_options_show( dslcModuleID );
 
-				/*dslc_js_confirm( 'edit_in_progress', '<span class="dslca-prompt-modal-title">' +
-					DSLCString.str_module_curr_edit_title +
-					'</span><span class="dslca-prompt-modal-descr">' +
-					DSLCString.str_module_curr_edit_descr + '</span>', $(this) );*/
-
-			// If a section is being edited and has changes
-			} else if ( jQuery('.dslca-modules-section-being-edited.dslca-modules-section-change-made', DSLC.Editor.frame).length ) {
-
-				DSLC.Editor.CModalWindow({
-					title: DSLCString.str_row_curr_edit_title,
-					content: DSLCString.str_row_curr_edit_descr,
-					confirm: function() {
-
-						dslc_module_options_confirm_changes( function(){
-							dslcTarget.trigger('click');
-						});
-					},
-					cancel: function() {
-
-						dslc_module_options_cancel_changes( function(){
-							$(self).trigger('click');
-						});
-					}
-				});
-
-				/*
-				dslc_js_confirm( 'edit_in_progress', '<span class="dslca-prompt-modal-title">' +
-					DSLCString.str_row_curr_edit_title +
-					'</span><span class="dslca-prompt-modal-descr">' +
-					DSLCString.str_row_curr_edit_descr + '</span>', $(this) );*/
-
-			// All good, proceed
-			} else {
-
-				// If a module section is being edited but has no changes, cancel it
-				if ( jQuery('.dslca-modules-section-being-edited', DSLC.Editor.frame).length ) {
-					jQuery('.dslca-module-edit-cancel').trigger('click');
-				}
-
-				// Vars
-				var dslcModule = $(this).closest('.dslc-module-front'),
-				dslcModuleID = dslcModule.data('dslc-module-id'),
-				dslcModuleCurrCode = dslcModule.find('.dslca-module-code').val();
-
-				// If a module is bening edited remove the "being edited" class from it
-				$('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
-
-				// Add the "being edited" class to current module
-				dslcModule.addClass('dslca-module-being-edited');
-
-				// Call the function to display options
-				dslc_module_options_show( dslcModuleID );
-			}
-		}
 	});
 
 	/**
@@ -265,21 +204,14 @@
 		}
 	}).on('focus', '.dslca-editable-content', function() {
 
-		if (  jQuery(this).data('type') == 'simple' ) {
+		if ( ! jQuery(this).closest('.dslc-module-front').hasClass('dslca-module-being-edited') ) {
 
-			if ( ! jQuery('body').hasClass( 'dslca-composer-hidden' ) ) {
-
-				if ( ! jQuery(this).closest('.dslc-module-front').hasClass('dslca-module-being-edited') ) {
-					jQuery(this).closest('.dslc-module-front').find('.dslca-module-edit-hook').trigger('click');
-				}
-			} else {
-
-				jQuery(this).trigger('blur');
-			}
+			jQuery(this).trigger('blur');
 		}
 	}).on('keyup', '.dslca-editable-content', function(){
 
-		if ( jQuery(this).data('type') == 'simple' ) {
+		if ( jQuery(this).data('type') == 'simple' ){
+
 			jQuery(this).closest('.dslc-module-front').addClass('dslca-module-change-made');
 		}
 	});

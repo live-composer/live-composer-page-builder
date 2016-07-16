@@ -239,15 +239,7 @@ jQuery(document).ready(function($){
 
 				$(this).attr('contenteditable', 'true');
 
-				var medium = new MediumEditor(this, {
-					// buttonLabels: 'fontawesome',
-					imageDragging: false,
-					toolbar: {
-						buttons: ['bold', 'italic', 'unorderedlist', 'orderedlist',  'h2', 'h3', 'removeFormat'],
-						diffLeft: 25,
-						diffTop: 10,
-					},
-				});
+				var medium = DSLC.Editor.frameContext.DSLC_Iframe.initMediumEditor(this);
 
 				self.mediumEditors.push( medium );
 			}
@@ -278,6 +270,7 @@ jQuery(document).ready(function($){
 			self.mediumEditors.forEach(function(item){
 
 				item.destroy();
+				jQuery(item.origElements).attr('contenteditable', true);
 			});
 
 			self.mediumEditors = [];
@@ -1284,17 +1277,14 @@ function dslc_module_options_icon_returnid() {
 		jQuery(this).closest('.dslca-module-edit-option-icon').find('input').addClass('icon-modal-active');
 	});
 
-	jQuery(document).on('editorFrameLoaded', function(){
+	jQuery(document).on('click', '.dslca-modal-icons .icon-item', function(el) {
 
-		DSLC.Editor.frame.on('click', '.dslca-modal-icons .icon-item', function(el) {
+		// Get selected item code
+		var selectedIconCode = jQuery(this).find('.icon-item_name').text();
+		jQuery('input.icon-modal-active').val(selectedIconCode).change();
 
-			// Get selected item code
-			var selectedIconCode = jQuery(this).find('.icon-item_name').text();
-			jQuery('input.icon-modal-active').val(selectedIconCode).change();
-
-			// Close modal window
-			dslc_hide_modal( '', jQuery('.dslca-modal:visible', DSLC.Editor.frame) );
-		});
+		// Close modal window
+		dslc_hide_modal( '', jQuery('.dslca-modal:visible') );
 	});
 }
 
