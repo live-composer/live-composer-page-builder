@@ -105,7 +105,6 @@ final class DSLC_Scripts{
 			wp_enqueue_script( 'util-js', DS_LIVE_COMPOSER_URL . 'js/common/util.class.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 			wp_enqueue_script( 'base64', DS_LIVE_COMPOSER_URL . 'js/libs/base64.js', array(), DS_LIVE_COMPOSER_VER );
 			wp_enqueue_script( 'modernizr', DS_LIVE_COMPOSER_URL . 'js/libs/modernizr-custom.js', array(), DS_LIVE_COMPOSER_VER );
-			wp_enqueue_script( 'iframe-main-js', DS_LIVE_COMPOSER_URL . 'js/iframe.main.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 			wp_enqueue_script( 'iframe-panel-settings-js', DS_LIVE_COMPOSER_URL . 'js/iframe-settings-panel/iframe.settings.panel.functions.js', array( 'jquery', 'iframe-main-js' ), DS_LIVE_COMPOSER_VER );
 		}
 	}
@@ -161,7 +160,6 @@ final class DSLC_Scripts{
 		if ( is_ssl() ) {
 			$protocol = 'https';
 		}
-
 
 		/* If current screen is Live Composer editing screen */
 		if ( 'dslc-editing-screen' === $current_screen ) {
@@ -269,7 +267,6 @@ final class DSLC_Scripts{
 
 				wp_localize_script( 'dslc-builder-main-js', 'DSLCIcons', $dslc_var_icons );
 			}
-
 		}
 
 		/* If current screen is post editing screen in WP Admin */
@@ -333,7 +330,8 @@ final class DSLC_Scripts{
 					continue;
 				}
 
-				wp_enqueue_script( $filename, DS_LIVE_COMPOSER_URL . 'js/' . $filedir . '/' . $filename, $scriptdeps, DS_LIVE_COMPOSER_VER );
+				$filehandle = 'dslc-' . str_replace( '.', '-', $filename );
+				wp_enqueue_script( $filehandle, DS_LIVE_COMPOSER_URL . 'js/' . $filedir . '/' . $filename, $scriptdeps, DS_LIVE_COMPOSER_VER );
 			}
 		}
 	}

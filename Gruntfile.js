@@ -8,10 +8,14 @@ module.exports = function(grunt) {
 				compress: true,
 				manage: false,
 			},
-			all_src : {
+			js_builder_minify : {
 				src : 'js/builder/*.js',
 				dest : 'js/builder.all.min.js'
-		   }
+			},
+			js_main_minify : {
+				src : 'js/common/main.js',
+				dest : 'js/common/main.min.js'
+			},
 		},
 	});
 

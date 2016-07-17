@@ -39,6 +39,7 @@ jQuery(document).ready(function($) {
 
  		dslc_drag_and_drop();
  		dslc_generate_code();
+
  	});
 
  	jQuery('body').addClass('dslca-enabled dslca-drag-not-in-progress');
