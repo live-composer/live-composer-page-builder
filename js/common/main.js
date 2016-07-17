@@ -26,6 +26,12 @@ var DSLC = {
 };
 
 /**
+ * Iframe builder main scripts
+ */
+
+var DSLC_Iframe = {};
+
+/**
  * Responsive Classes
  */
 
@@ -54,59 +60,6 @@ function dslc_responsive_classes( force ) {
 			body.addClass( 'dslc-res-big' );
 		}
 	}
-/*
-	if ( ! body.hasClass('dslca-enabled') ) {
-
-		if ( windowWidth >= 768 && windowWidth < 1024 ) {
-
-			jQuery('.dslc-modules-area').each(function() {
-
-				if ( jQuery(this).find('.dslc-module-front').length != 0 && jQuery(this).find('.dslc-module-front').length == jQuery(this).find('.dslc-module-front.dslc-hide-on-tablet').length ) {
-					jQuery(this).hide();
-				} else {
-					jQuery(this).show();
-				}
-
-			});
-
-		} else if ( windowWidth < 768 ) {
-
-			jQuery('.dslc-modules-area').each(function() {
-
-				if ( jQuery(this).find('.dslc-module-front').length != 0 && jQuery(this).find('.dslc-module-front').length == jQuery(this).find('.dslc-module-front.dslc-hide-on-phone').length ) {
-					jQuery(this).hide();
-				} else {
-					jQuery(this).show();
-				}
-
-			});
-
-		} else {
-
-			jQuery('.dslc-modules-area').each(function() {
-
-				if ( jQuery(this).find('.dslc-module-front').length != 0 && jQuery(this).find('.dslc-module-front').length == jQuery(this).find('.dslc-module-front.dslc-hide-on-desktop').length ) {
-					jQuery(this).hide();
-				} else {
-					jQuery(this).show();
-				}
-
-			});
-
-		}
-
-		jQuery('.dslc-modules-section').each(function() {
-
-			jQuery(this).show();
-
-			if ( jQuery(this).find('.dslc-modules-area').length == jQuery(this).find('.dslc-modules-area:not(:visible)').length ) {
-				jQuery(this).hide();
-			}
-
-		});
-
-	}
-	*/
 
 	dslc_masonry();
 	dslc_center();
