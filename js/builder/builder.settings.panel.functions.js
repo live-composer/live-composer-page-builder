@@ -235,7 +235,7 @@ jQuery(document).ready(function($){
 
 		jQuery(".dslca-editable-content.medium-editor", DSLC.Editor.frame).each(function(){
 
-			if( null === jQuery(this).data('medium-editor-element') ){
+			if( undefined === jQuery(this).data('medium-editor-element') ){
 
 				jQuery(this).attr('contenteditable', 'true');
 

@@ -105,7 +105,15 @@ final class DSLC_Scripts{
 			wp_enqueue_script( 'util-js', DS_LIVE_COMPOSER_URL . 'js/common/util.class.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 			wp_enqueue_script( 'base64', DS_LIVE_COMPOSER_URL . 'js/libs/base64.js', array(), DS_LIVE_COMPOSER_VER );
 			wp_enqueue_script( 'modernizr', DS_LIVE_COMPOSER_URL . 'js/libs/modernizr-custom.js', array(), DS_LIVE_COMPOSER_VER );
-			wp_enqueue_script( 'iframe-panel-settings-js', DS_LIVE_COMPOSER_URL . 'js/iframe-settings-panel/iframe.settings.panel.functions.js', array( 'jquery', 'iframe-main-js' ), DS_LIVE_COMPOSER_VER );
+
+			if ( ! SCRIPT_DEBUG ) {
+
+				wp_enqueue_script( 'iframe-main-all-js', DS_LIVE_COMPOSER_URL . 'js/iframe.all.min.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+			} else {
+
+				wp_enqueue_script( 'iframe-main-js', DS_LIVE_COMPOSER_URL . 'js/iframe/iframe.main.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+				wp_enqueue_script( 'iframe-panel-settings-js', DS_LIVE_COMPOSER_URL . 'js/iframe/iframe.settings.panel.functions.js', array( 'jquery', 'iframe-main-js' ), DS_LIVE_COMPOSER_VER );
+			}
 		}
 	}
 
@@ -310,12 +318,9 @@ final class DSLC_Scripts{
 		/** Load builder files dynamically */
 		$directories = glob( DS_LIVE_COMPOSER_ABS . '/js/' . $dir, GLOB_ONLYDIR );
 
-		vovaphperror( $directories, '$directories');
 		foreach ( $directories as $dir ) {
 
 			$files = glob( $dir . '/*.js' );
-
-			vovaphperror( $files, '$files');
 
 			foreach ( $files as $file ) {
 
