@@ -41,7 +41,6 @@
 		modal.addClass('dslca-modal-open');
 
 		// Animate Modal
-		/*
 		modal.css({
 			'-webkit-animation-name' : 'dslcBounceIn',
 			'-moz-animation-name' : 'dslcBounceIn',
@@ -49,7 +48,6 @@
 			'animation-duration' : '0.6s',
 			'-webkit-animation-duration' : '0.6s'
 		}).fadeIn(600);
-		*/
 	}
 
 	/**

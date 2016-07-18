@@ -183,10 +183,6 @@ class DSLC_Row extends DSLC_Container{
 						</div>
 					</div>
 					<div class="dslca-modules-section-settings">' . dslc_row_get_options_fields( $atts ) . '</div>';
-
-				// Loading
-				$output .= '<div class="dslca-module-loading dslca-modules-area-loading"><div class="dslca-module-loading-inner"></div></div>';
-
 			}
 
 		$output .= '</div>';

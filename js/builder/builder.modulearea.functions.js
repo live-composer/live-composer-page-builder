@@ -161,7 +161,7 @@ function dslc_modules_area_add( row ) {
 	'<span data-size="7">7/12</span><span data-size="8">8/12</span> <span data-size="9">9/12</span><span data-size="10">10/12</span>'+
 	'<span data-size="11">11/12</span><span data-size="12">12/12</span> </div> </span>'+
 	'<span class="dslca-manage-action dslca-delete-modules-area-hook" title="Delete" ><span class="dslca-icon dslc-icon-remove"></span></span> </div> </div>'+
-	'<div class="dslca-module-loading"><div class="dslca-module-loading-inner"></div></div> </div>';
+	'</div>';
 
 
 	// Append new area and animate

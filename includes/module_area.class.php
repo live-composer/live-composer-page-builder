@@ -52,10 +52,6 @@ class DSLC_Module_Area extends DSLC_Container{
 						<span class="dslca-manage-action dslca-delete-modules-area-hook" title="Delete" ><span class="dslca-icon dslc-icon-remove"></span></span>
 					</div>
 				</div>';
-
-				// Loading
-				$output .= '<div class="dslca-module-loading"><div class="dslca-module-loading-inner"></div></div>';
-
 			}
 
 			// Modules output

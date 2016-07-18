@@ -151,6 +151,7 @@ function dslc_generate_code() {
 		} else {
 
 			jQuery(this).removeClass('dslc-modules-area-not-empty').addClass('dslc-modules-area-empty');
+
 			jQuery('.dslca-no-content:not(:visible)', this).show().css({
 				'-webkit-animation-name' : 'dslcBounceIn',
 				'-moz-animation-name' : 'dslcBounceIn',

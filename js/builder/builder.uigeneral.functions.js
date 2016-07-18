@@ -465,21 +465,10 @@ function dslc_drag_and_drop() {
 					// Remove extra padding from area
 					// modulesArea.css({ paddingBottom : 0 });
 
-					// Hide loader
-					jQuery('.dslca-module-loading', modulesArea ).hide();
-
 					// Add output
 					// TODO: optimize jQuery in the string below
 					var dslcJustAdded = jQuery(moduleOutput).insertAfter( jQuery('.dslca-module', modulesArea) ) ; /*.appendTo(modulesArea);*/
 					jQuery('.dslca-module', modulesArea).remove();
-
-					dslcJustAdded.css({
-						'-webkit-animation-name' : 'dslcBounceIn',
-						'-moz-animation-name' : 'dslcBounceIn',
-						'animation-name' : 'dslcBounceIn',
-						'animation-duration' : '0.6s',
-						'-webkit-animation-duration' : '0.6s'
-					});
 
 					setTimeout( function(){
 						dslc_init_square();
@@ -526,10 +515,12 @@ function dslc_drag_and_drop() {
 				jQuery('.dslca-modules-area-manage', modulesArea).css ({ visibility : 'hidden' });
 
 				// Animate loading
+				/*
 				var randomLoadingTime = Math.floor(Math.random() * (100 - 50 + 1) + 50) * 100;
 				jQuery('.dslca-module-loading-inner', modulesArea).css({ width : 0 }).animate({
 					width : '100%'
 				}, randomLoadingTime, 'linear' );
+				*/
 			}
 
 			jQuery('body').removeClass('dslca-new-module-drag-in-progress').addClass('dslca-new-module-drag-not-in-progress');

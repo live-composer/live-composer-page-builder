@@ -50,20 +50,6 @@ DSLC.Editor.CModuleArea = function(elem) {
 			evt.oldIndex;  // element index within parent
 
 			jQuery('body').removeClass('dslca-drag-not-in-progress').addClass('dslca-drag-in-progress');
-
-			if ( jQuery('.dslc-module-front', evt.from).length < 2 ) {
-
-				jQuery('.dslca-no-content:not(:visible)', evt.from).show().css({
-					'-webkit-animation-name' : 'dslcBounceIn',
-					'-moz-animation-name' : 'dslcBounceIn',
-					'animation-name' : 'dslcBounceIn',
-					'animation-duration' : '0.6s',
-					'-webkit-animation-duration' : '0.6s',
-					padding : 0
-				}).animate({ padding : '35px 0' }, 300, function(){
-
-				});
-			}
 		},
 		// dragging ended
 

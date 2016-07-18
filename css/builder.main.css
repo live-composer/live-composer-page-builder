@@ -373,6 +373,13 @@ body {
 			min-width: 70px;
 
 			transition: transform 0.05s linear 0.01s;
+
+			/**
+			 * We need z-index to make sure the module
+			 * covers "Drop modules here" line
+			 */
+			z-index: 1;
+			position: relative;
 		}
 
 		.dslca-module[data-id="DSLC_Separator"],
@@ -1156,43 +1163,6 @@ body {
 	width: 110px;
 }
 
-.dslca-module-loading {
-	background: #cee1f2;
-	border-radius: 6px;
-	display: none;
-	height: 6px;
-	left: 50%;
-	position: absolute;
-	top: 55px;
-	overflow: hidden;
-	width: 236px;
-	margin-left: -118px;
-}
-
-.dslc-modules-area.dslc-2-col .dslca-module-loading,
-.dslc-modules-area.dslc-1-col .dslca-module-loading {
-	width: 60px;
-	margin-left: -30px;
-}
-
-.dslca-modules-area-loading {
-	top: auto;
-	bottom: 35px;
-	position: relative;
-}
-
-.dslc-modules-area-not-empty .dslca-module-loading {
-	top: auto;
-	bottom: 30px;
-}
-
-	.dslca-module-loading-inner {
-		background: #74a8e1;
-		border-radius: 6px;
-		height: 6px;
-		width: 0%;
-	}
-
 .dslca-module-reloading {
 	position: absolute;
 	left: 0;
@@ -1286,6 +1256,13 @@ body {
 .dslc-modules-area:hover .dslc-module-front:hover {
 	/*outline-color: #5890e5;*/
 	box-shadow: 0 0 0 2px #5890e5;
+}
+
+/**
+ * Removes blinking animation on drag and drop
+ */
+.dslc-module-front.dslca-module-dragging {
+	animation:none!important;
 }
 
 .dslc-modules-area.dslca-options-hovered .dslc-module-front {

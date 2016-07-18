@@ -1033,10 +1033,6 @@ function dslc_modules_section_front( $atts, $content = null ) {
 					</div>
 				</div>
 				<div class="dslca-modules-section-settings">' . dslc_row_get_options_fields( $atts ) . '</div>';
-
-			// Loading
-			$output .= '<div class="dslca-module-loading dslca-modules-area-loading"><div class="dslca-module-loading-inner"></div></div>';
-
 		}
 
 	$output .= '</div>';
@@ -1090,11 +1086,6 @@ function dslc_modules_area_front( $atts, $content = null ) {
 					<span class="dslca-manage-action dslca-delete-modules-area-hook" title="Delete" ><span class="dslca-icon dslc-icon-remove"></span></span>
 				</div>
 			</div>';
-
-
-			// Loading
-			$output .= '<div class="dslca-module-loading"><div class="dslca-module-loading-inner"></div></div>';
-
 		}
 
 		// Modules output
