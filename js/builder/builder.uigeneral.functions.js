@@ -76,15 +76,7 @@ jQuery(document).on( 'click', '.dslca-currently-editing', function(){
 		var callbacks = [];
 
 		jQuery( 'html, body', DSLC.Editor.frame ).animate({ scrollTop: newOffset }, 300, function(){
-			activeElement.animate( { 'outline-color' : outlineColor }, 70, function(){
-				activeElement.animate({ 'outline-color' : 'transparent' }, 70, function(){
-					activeElement.animate( { 'outline-color' : outlineColor }, 70, function(){
-						activeElement.animate({ 'outline-color' : 'transparent' }, 70, function(){
-							activeElement.removeAttr('style');
-						});
-					});
-				});
-			});
+			activeElement.removeAttr('style');
 		});
 	}
 
@@ -280,9 +272,6 @@ function dslc_show_section( section ) {
 
 	// Hide ( animate ) the container
 	jQuery('.dslca-container').css({ bottom: -500 });
-
-	// Change the section color
-	jQuery('.dslca-sections').animate({ backgroundColor : newColor }, 200);
 
 	// Hide all sections and show specific section
 	jQuery('.dslca-section').hide();

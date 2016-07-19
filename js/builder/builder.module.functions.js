@@ -7,7 +7,6 @@
  * - dslc_module_copy ( Copies a module )
  * - dslc_module_width_set ( Sets a width to module )
  * - dslc_module_options_show ( Show module options )
- * - dslc_module_options_scrollbar ( Scrollbar for options )
  * - dslc_module_options_section_filter ( Filter options section )
  * - dslc_module_options_tab_filter ( Filter options tab )
  * - dslc_module_options_hideshow_tabs ( Hide show tabs based on option choices )

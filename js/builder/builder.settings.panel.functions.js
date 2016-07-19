@@ -246,13 +246,7 @@ jQuery(document).ready(function($){
 		});
 	}
 
-	MediumEditor.extensions.button.prototype.defaults.bold.contentDefault = '<span class="dashicons dashicons-editor-bold"></span>';
-	MediumEditor.extensions.button.prototype.defaults.italic.contentDefault = '<span class="dashicons dashicons-editor-italic"></span>';
-	MediumEditor.extensions.button.prototype.defaults.quote.contentDefault = '<span class="dashicons dashicons-editor-quote"></span>';
-	MediumEditor.extensions.button.prototype.defaults.orderedlist.contentDefault = '<span class="dashicons dashicons-editor-ol"></span>';
-	MediumEditor.extensions.button.prototype.defaults.unorderedlist.contentDefault = '<span class="dashicons dashicons-editor-ul"></span>';
-	MediumEditor.extensions.button.prototype.defaults.removeFormat.contentDefault = '<span class="dashicons dashicons-editor-removeformatting"></span>';
-
+	
 	DSLC.Editor.clearUtils = function() {
 
 		if( Array.isArray(self.colorpickers ) ) {
@@ -366,39 +360,6 @@ jQuery(document).ready(function($){
 
 
 /**
- * MODULES SETTINGS PANEL - Options Scrollbar
- */
-function dslc_module_options_scrollbar() {
-
-	if ( dslcDebug ) console.log( 'dslc_module_options_scrollbar' );
-	/*
-	var dslcWidth = 0;
-
-	jQuery('.dslca-module-edit-option:visible').each(function(){
-
-		dslcWidth += jQuery(this).outerWidth(true) + 1;
-	});
-
-	if ( dslcWidth > jQuery( '.dslca-module-edit-options' ).width() ) {
-
-		jQuery('.dslca-module-edit-options-wrapper').width( dslcWidth );
-	} else {
-
-		jQuery('.dslca-module-edit-options-wrapper').width( 'auto' );
-	}
-
-	if ( ! jQuery('body').hasClass('rtl') ) {
-
-		if ( jQuery('.dslca-module-edit-options-inner').data('jsp') ) {
-
-			var scroller = jQuery('.dslca-module-edit-options-inner').data('jsp');
-			scroller.reinitialise();
-		}
-	}
-	*/
-}
-
-/**
  * MODULES SETTINGS PANEL - Filter Module Options
  */
 function dslc_module_options_section_filter( sectionID ) {
@@ -447,9 +408,6 @@ function dslc_module_options_tab_filter( dslcTab ) {
 		// Hide/Show options
 		jQuery('.dslca-module-edit-option').hide();
 		jQuery('.dslca-module-edit-option[data-tab="' + dslcTabID + '"]').show();
-
-		// Recreate scrollbar
-		dslc_module_options_scrollbar();
 
 		// Hide/Show Tabs
 		dslc_module_options_hideshow_tabs();
@@ -1862,5 +1820,4 @@ function dslc_confirm_changes( callback ) { dslc_module_options_confirm_changes(
 function dslc_cancel_changes( callback ) { dslc_module_options_cancel_changes( callback ); }
 function dslc_init_colorpicker() { dslc_module_options_color(); }
 function dslc_init_options_slider() { dslc_module_options_numeric(); }
-function dslc_init_options_scrollbar() { dslc_module_options_scrollbar(); }
 function dslc_module_edit_options_hideshow_tabs() { dslc_module_options_hideshow_tabs(); }

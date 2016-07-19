@@ -90,12 +90,14 @@ function dslca_gen_content_for_search() {
 /**
  * Other - Recalculate drag and drop centering
  */
+/*
 function dslca_draggable_calc_center( dslcArea ) {
 
 	if ( dslcDebug ) console.log( 'dslca_draggable_calc_center' );
 
 	jQuery( ".dslc-modules-section-inner" ).sortable( "option", "cursorAt", { top: dslcArea.outerHeight() / 2, left: dslcArea.outerWidth() / 2 } );
 }
+*/
 
 /**
  * Other - Generate code of editable content
@@ -233,11 +235,11 @@ window.onbeforeunload = function () { return; };
 *
 *********************************/
 
- jQuery(document).ready(function($) {
+jQuery(document).ready(function($) {
 
 	// Option changes
 
-	$(document).on( 'change', '.dslca-modules-section-edit-field', function() {
+	jQuery(document).on( 'change', '.dslca-modules-section-edit-field', function() {
 
 		var dslcField, dslcFieldID, dslcEl, dslcModulesSection, dslcVal, dslcValReal, dslcRule, dslcSetting, dslcTargetEl, dslcImgURL;
 
@@ -454,7 +456,7 @@ window.onbeforeunload = function () { return; };
 	});
 
 
-	$(document).on( 'blur', '.dslc-editable-area', function(e){
+	jQuery(document).on( 'blur', '.dslc-editable-area', function(e){
 
 		var module = $(this).closest('.dslc-module-front');
 		var optionID = $(this).data('dslc-option-id');
@@ -465,9 +467,8 @@ window.onbeforeunload = function () { return; };
 		dslc_module_output_altered();
 	});
 
-	// Preview Module Settings
-
-	$(document).on( 'change', '.dslca-module-edit-field', function(){
+	// Preview Module Settings once any setting changed
+	jQuery(document).on( 'change', '.dslca-module-edit-field', function(){
 
 		// Hide/Show tabs
 		dslc_module_options_hideshow_tabs();
@@ -484,6 +485,7 @@ window.onbeforeunload = function () { return; };
 		// Add changed class
 		dslcModule.addClass('dslca-module-change-made');
 
+		// If option is set to refresh the module code from the server
 		if ( jQuery(this).closest('.dslca-module-edit-option').data('refresh-on-change') == 'active' ) {
 
 			/**
@@ -492,7 +494,7 @@ window.onbeforeunload = function () { return; };
 
 			if ( dslcOptionWrap.find('.dslca-module-edit-option-checkbox-wrapper').length ) {
 
-				var dslcOptionChoices = $('input[type="checkbox"]', dslcOptionWrap);
+				var dslcOptionChoices = jQuery('input[type="checkbox"]', dslcOptionWrap);
 
 				dslcOptionChoices.each(function(){
 
@@ -505,7 +507,7 @@ window.onbeforeunload = function () { return; };
 
 			} else if ( dslcOption.hasClass('dslca-module-edit-option-radio') ) {
 
-				var dslcOptionValue = $('.dslca-module-edit-field:checked', dslcOption).val();
+				var dslcOptionValue = jQuery('.dslca-module-edit-field:checked', dslcOption).val();
 			} else {
 
 				var dslcOptionValue = dslcOption.val();
@@ -545,6 +547,7 @@ window.onbeforeunload = function () { return; };
 
 				jQuery('body').removeClass('dslca-new-preset-added');
 			});
+
 		} else { // Do not refresh on change
 
 			/**
@@ -560,11 +563,12 @@ window.onbeforeunload = function () { return; };
 				var dslcAffectOnChangeRule = dslcOption.data('affect-on-change-rule');
 				var dslcAffectOnChangeVal = dslcOption.val();
 				var dslcAffectOnChangeValOrig = dslcAffectOnChangeVal;
-				var module = $(".dslca-module-being-edited", DSLC.Editor.frame);
+				var module = jQuery(".dslca-module-being-edited", DSLC.Editor.frame);
 
 				if ( dslcOption.val().length && dslcGoogleFontsArray.indexOf( dslcOption.val() ) !== -1  ) {
 
-					WebFont.load({
+					// Call WebFont function from the iframe
+					document.getElementById('page-builder-frame').contentWindow.WebFont.load({
 							google: {
 								families: [ dslcFontsToLoad ]
 							},
@@ -608,13 +612,14 @@ window.onbeforeunload = function () { return; };
 						jQuery( dslcAffectOnChangeEl, module ).css( dslcAffectOnChangeRule , dslcAffectOnChangeVal );
 					}, 100);
 				}
+
 			} else if ( dslcOption.hasClass('dslca-module-edit-field-checkbox') ) {
 
-				var dslcOptionChoices = $('input[type="checkbox"]', dslcOptionWrap);
+				var dslcOptionChoices = jQuery('input[type="checkbox"]', dslcOptionWrap);
 
 				dslcOptionChoices.each(function(){
 
-					if ( $(this).prop('checked') ) {
+					if ( jQuery(this).prop('checked') ) {
 
 						dslcOptionValue = dslcOptionValue + 'solid ';
 						dslcOptionValueOrig = dslcOptionValueOrig + $(this).val() + ' ';
@@ -824,7 +829,7 @@ jQuery(document).ready(function($){
 	 * Confirm changes in standard WP Editor (TinyMCE) WYSIWYG
 	 */
 
-	$(document).on( 'click', '.dslca-wp-editor-save-hook', function(){
+	jQuery(document).on( 'click', '.dslca-wp-editor-save-hook', function(){
 
 		var module = jQuery('.dslca-wysiwyg-active', DSLC.Editor.frame ).closest('.dslc-module-front');
 
@@ -863,7 +868,7 @@ jQuery(document).ready(function($){
 	 * Cancel WYSIWYG
 	 */
 
-	$(document).on( 'click', '.dslca-wp-editor-cancel-hook', function(){
+	jQuery(document).on( 'click', '.dslca-wp-editor-cancel-hook', function(){
 
 		$('.dslca-wp-editor').hide();
 		$('.dslca-wysiwyg-active', DSLC.Editor.frame ).removeClass('dslca-wysiwyg-active');

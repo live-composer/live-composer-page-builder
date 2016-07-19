@@ -374,7 +374,7 @@ function dslc_masonry( dslcWrapper, dslcAnimate ) {
 
 		if ( dslcContainer.data('masonry') ) {
 
-			jQuery(dslcContainer).waitForImages(function() {
+				jQuery(dslcContainer).imagesLoaded(function() {
 
 				jQuery(dslcContainer).masonry('destroy').masonry({
 					gutter : dslcGutterWidth,
@@ -394,7 +394,7 @@ function dslc_masonry( dslcWrapper, dslcAnimate ) {
 
 			jQuery(dslcSelector).css({ marginRight : 0 });
 
-			jQuery(dslcContainer).waitForImages(function() {
+			jQuery(dslcContainer).imagesLoaded(function() {
 
 				jQuery(dslcContainer).masonry({
 					gutter : dslcGutterWidth,

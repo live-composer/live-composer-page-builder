@@ -23,6 +23,9 @@
 		// If a modal already visibile hide it
 		dslc_hide_modal( '', jQuery('.dslca-modal:visible') );
 
+
+
+
 		// Vars
 		var modal = jQuery(modal);
 
@@ -35,18 +38,24 @@
 			}
 		});
 
+		// Vars ( Calc Offset )
+		var position = jQuery(hook).position(),
+		diff = modal.outerWidth() / 2 - hook.outerWidth() / 2,
+		offset = position.left - diff;
+
 		// Show Modal
-		modal.show();
+		modal.css({ left : offset }).show();
+		jQuery(".dslca-prompt-modal-custom").insertAfter( modal );
 		jQuery(".dslca-prompt-modal-custom").length > 0 && jQuery(".dslca-prompt-modal-custom").fadeIn();
 		modal.addClass('dslca-modal-open');
 
 		// Animate Modal
 		modal.css({
-			'-webkit-animation-name' : 'dslcBounceIn',
-			'-moz-animation-name' : 'dslcBounceIn',
-			'animation-name' : 'dslcBounceIn',
-			'animation-duration' : '0.6s',
-			'-webkit-animation-duration' : '0.6s'
+			// '-webkit-animation-name' : 'dslcBounceIn',
+			// '-moz-animation-name' : 'dslcBounceIn',
+			// 'animation-name' : 'dslcBounceIn',
+			// 'animation-duration' : '0.6s',
+			// '-webkit-animation-duration' : '0.6s'
 		}).fadeIn(600);
 	}
 
@@ -101,20 +110,20 @@
 
 		$(document).on( 'click', '.dslca-open-modal-hook', function(){
 
-			var modal = $(this).data('modal');
-			dslc_show_modal( $(this), modal );
+			var modal = jQuery(this).data('modal');
+			dslc_show_modal( jQuery(this), modal );
 		});
 
 		/**
 		 * Hook - Hide Modal
 		 */
 
-		$(document).on( 'click', '.dslca-close-modal-hook', function(){
+		jQuery(document).on( 'click', '.dslca-close-modal-hook', function(){
 
-			if ( ! $(this).hasClass('dslca-action-disabled') ) {
+			if ( ! jQuery(this).hasClass('dslca-action-disabled') ) {
 
-				var modal = $(this).data('modal');
-				dslc_hide_modal( $(this), modal );
+				var modal = jQuery(this).data('modal');
+				dslc_hide_modal( jQuery(this), modal );
 			}
 		});
 

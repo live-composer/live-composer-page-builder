@@ -21,7 +21,7 @@
 
 			jQuery(this).closest('.dslc-modules-area').addClass('dslca-options-hovered');
 
-			dslca_draggable_calc_center( jQuery(this).closest('.dslc-modules-area') );
+			// dslca_draggable_calc_center( jQuery(this).closest('.dslc-modules-area') );
 
 		}).on( 'mouseleave', '.dslca-modules-area-manage', function(){
 

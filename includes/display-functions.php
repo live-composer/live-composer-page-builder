@@ -178,7 +178,7 @@ function dslc_display_composer() {
 
 					<!-- Module Templates -->
 
-					<div class="dslca-section dslca-templates dslc-clearfix" data-bg="#ca564f">
+					<div class="dslca-section dslca-templates dslc-clearfix">
 
 						<div class="dslca-section-title">
 							<?php _e( 'Designs', 'live-composer-page-builder' ); ?>
@@ -189,7 +189,7 @@ function dslc_display_composer() {
 						<span class="dslca-open-modal-hook" data-modal=".dslca-modal-templates-import"><span class="dslca-icon dslc-icon-download-alt"></span><?php _e( 'Import Page Code', 'live-composer-page-builder' ); ?></span>
 						<span class="dslca-open-modal-hook" data-modal=".dslca-modal-templates-export"><span class="dslca-icon dslc-icon-upload-alt"></span><?php _e( 'Export Page Code', 'live-composer-page-builder' ); ?></span>
 
-						<div class="dslca-modal dslca-modal-templates-save" data-bg="#ca564f">
+						<div class="dslca-modal dslca-modal-templates-save">
 
 							<form class="dslca-template-save-form">
 								<input type="text" id="dslca-save-template-title" placeholder="<?php _e( 'Name of the template', 'live-composer-page-builder' ); ?>">
@@ -199,7 +199,7 @@ function dslc_display_composer() {
 
 						</div><!-- .dslca-modal -->
 
-						<div class="dslca-modal dslca-modal-templates-export" data-bg="#ca564f">
+						<div class="dslca-modal dslca-modal-templates-export">
 
 							<form class="dslca-template-export-form">
 								<textarea id="dslca-export-code"></textarea>
@@ -208,7 +208,7 @@ function dslc_display_composer() {
 
 						</div><!-- .dslca-modal -->
 
-						<div class="dslca-modal dslca-modal-templates-import" data-bg="#ca564f">
+						<div class="dslca-modal dslca-modal-templates-import">
 
 							<form class="dslca-template-import-form">
 								<textarea id="dslca-import-code" placeholder="<?php _e( 'Enter the exported code heree', 'live-composer-page-builder' ); ?>"></textarea>
@@ -230,7 +230,7 @@ function dslc_display_composer() {
 
 					<!-- Module Template Load -->
 
-					<div class="dslca-section dslca-templates-load dslc-clearfix" data-bg="#ca564f">
+					<div class="dslca-section dslca-templates-load dslc-clearfix">
 
 						<span class="dslca-go-to-section-hook dslca-section-back" data-section=".dslca-templates"><span class="dslca-icon dslc-icon-reply"></span></span>
 

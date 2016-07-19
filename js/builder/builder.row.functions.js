@@ -489,14 +489,6 @@ function dslc_row_edit_scrollbar_init() {
 
 		jQuery('.dslca-modules-section-edit-options-wrapper').width( 'auto' );
 	}
-
-	if ( ! jQuery('body').hasClass('rtl') ) {
-
-		if ( jQuery('.dslca-modules-section-edit-options-inner').data('jsp') ) {
-			jQuery('.dslca-modules-section-edit-options-inner').data('jsp').destroy();
-		}
-		// jQuery('.dslca-modules-section-edit-options-inner').jScrollPane();
-	}
 }
 
 /**
