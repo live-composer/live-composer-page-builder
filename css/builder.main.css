@@ -134,7 +134,13 @@ html {
 }
 
 .dslca-container,
-.dslca-container * {
+.dslca-container *,
+.dslca-container *::after,
+.dslca-container *::before,
+.dslca-module-manage,
+.dslca-module-manage *,
+.dslca-module-manage *::after,
+.dslca-module-manage *::before {
 	box-sizing: border-box;
 }
 
@@ -1716,6 +1722,7 @@ html {
 			background: #e5855f;
 			border-radius: 3px;
 			display: inline-block;
+			line-height: 1;
 			position: relative;
 			z-index: 99999;
 			vertical-align: middle;
@@ -2036,6 +2043,7 @@ body.rtl .dslca-modules-area-placeholder {
 	text-align: center;
 	z-index: 99999;
 	overflow: hidden;
+	line-height: 1;
 }
 
 .dslca-module-manage.dslca-module-manage-change-width-active {

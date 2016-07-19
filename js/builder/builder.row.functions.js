@@ -21,7 +21,7 @@
 
 	var $ = jQuery;
 
-	$(".dslc-modules-section", DSLC.Editor.frame).each(function(){
+	jQuery(".dslc-modules-section", DSLC.Editor.frame).each(function(){
 
 		new DSLC.Editor.CRow(this);
 	});
@@ -647,6 +647,12 @@ function dslc_row_copy( row ) {
 		});
 
 	});
+
+
+	// Re-initiate JS classes
+	new DSLC.Editor.CRow(dslcModulesSectionCloned);
+	new DSLC.Editor.CModuleArea(dslcModulesSectionCloned.find('.dslc-modules-area').eq(0)[0]);
+
 
 	// Call additional functions
 	dslc_drag_and_drop();
