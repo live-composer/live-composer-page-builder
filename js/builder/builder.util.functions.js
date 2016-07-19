@@ -717,7 +717,11 @@ jQuery(document).ready(function($) {
 
 		var dslcOption = jQuery(this);
 
-		if ( dslcOption.data('css-element') != undefined ) return false;
+		/**
+		 * We DON'T need the line below, as ROW doesn't require
+		 * css-element property. All the row controls change the same section div.
+		 */
+		// if ( dslcOption.data('css-element') != undefined ) return false;
 
 		var dslcOptionValue = '',
 			dslcOptionID = dslcOption.data('id'),
@@ -727,7 +731,6 @@ jQuery(document).ready(function($) {
 			dslcAffectOnChangeValOrig = dslcOption.val(),
 			dslcAffectOnChangeVal = dslcAffectOnChangeValOrig + dslcOption.data('ext'),
 			dslcAffectOnChangeRules;
-
 
 		// Add changed class
 		dslcModulesSection.addClass('dslca-modules-section-change-made');
