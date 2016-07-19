@@ -103,9 +103,9 @@
 	 */
 	DSLC.Editor.frame.on( 'click', '.dslca-copy-modules-section-hook', function() {
 
-		if ( ! $(this).hasClass('dslca-action-disabled') ) {
+		if ( ! jQuery(this).hasClass('dslca-action-disabled') ) {
 
-			dslc_row_copy( $(this).closest('.dslc-modules-section') );
+			dslc_row_copy( jQuery(this).closest('.dslc-modules-section') );
 		}
 	});
 
@@ -596,7 +596,7 @@ function dslc_row_copy( row ) {
 	dslcModule;
 
 	// Clone the row
-	dslcModulesSectionCloned = row.clone().appendTo('#dslc-main');
+	dslcModulesSectionCloned = row.clone().appendTo( jQuery('#dslc-main', DSLC.Editor.frame ) );
 
 	// Go through each area of the new row and apply correct data-size
 	dslcModulesSectionCloned.find('.dslc-modules-area').each(function(){
