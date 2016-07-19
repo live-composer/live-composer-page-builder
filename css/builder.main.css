@@ -1,5 +1,12 @@
-body {
+/**
+ * builder.main.css gets loaded in the editing preview iframe
+ * ONLY when the Live Compose is in active editing mode.
+ */
 
+/* Compensate margin-top set for the admin top bar (disabled in LC) */
+html {
+   top: -32px;
+   position: relative;
 }
 
 .dslc-module-heading:before,

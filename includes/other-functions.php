@@ -542,6 +542,24 @@ function livecomposer_editor_display() {
 	do_action( 'dslc_hook_pagebuilder_iframe_before' );
 
 ?>
+	<div id="page-builder-preview-area">
+		<iframe id="page-builder-frame" src="<?php echo $frame_url ?>"></iframe>
+	</div>
+	<?php
+	// Include all the code needed on the editing page.
+	do_action( 'dslc_hook_pagebuilder_iframe_after' );
+}
+
+
+function livecomposer_remove_notices() {
+
+	$screen = get_current_screen();
+
+	// Proceed only if current page is Live Composer editing page in WP Admin.
+	if ( 'toplevel_page_livecomposer_editor' !== $screen->id ) {
+		return;
+	}
+	?>
 	<style>
 		#wpcontent, #wpbody, #wpbody-content, #page-builder-frame, #page-builder-preview-area {
 		   height: 100%;
@@ -552,15 +570,21 @@ function livecomposer_editor_display() {
 		   margin: 0;
 		   padding: 0;
 		}
-	</style>
 
-	<div id="page-builder-preview-area">
-		<iframe id="page-builder-frame" src="<?php echo $frame_url ?>"></iframe>
-	</div>
+		.update-nag, .updated {
+			display: none !important;
+			opacity: 0 !important;
+			visibility: hidden !important;
+		}
+
+		#page-builder-preview-area {
+		  z-index: 10000;
+		  background: #fff;
+		}
+	</style>
 	<?php
-	// Include all the code needed on the editing page.
-	do_action( 'dslc_hook_pagebuilder_iframe_after' );
 }
+add_action( 'admin_head', 'livecomposer_remove_notices' );
 
 
 function livecomposer_editor_footer_display() {
