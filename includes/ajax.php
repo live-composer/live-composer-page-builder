@@ -19,6 +19,12 @@
  * - dslc_ajax_save_preset ( Save module styling preset )
  */
 
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
+
 /**
  * Add/display a new module section
  *

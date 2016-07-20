@@ -14,6 +14,12 @@
  * - dslc_hf_get_footer ( Get the footer output code )
  */
 
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
+
 /**
  * Register custom post type and add options
  *

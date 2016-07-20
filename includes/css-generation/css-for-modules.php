@@ -9,6 +9,12 @@
  * - dslc_generate_custom_css ( Generate module CSS )
  */
 
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
+
 /**
  * Generate module CSS (for all devices)
  *

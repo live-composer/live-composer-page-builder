@@ -9,6 +9,13 @@
  * dslc_icons_current_set ( Returns the ID of the currently used set based on icon )
  * dslc_get_attachment_alt ( Returnt he ALT attribute for an attachment )
  */
+
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
+
 if ( ! class_exists( 'DSLC_Aq_Resize' ) ) {
 
 	/**
@@ -522,13 +529,6 @@ function livecomposer_editor_display() {
 	if ( 'toplevel_page_livecomposer_editor' !== $screen->id ) {
 		return;
 	}
-
-	/*
-		if( ! defined( 'ABSPATH' ) ) {
-			header('HTTP/1.0 403 Forbidden');
-			exit;
-		}
-	*/
 
 	$frame_url = get_permalink( $_GET['page_id'] );
 

@@ -1,5 +1,11 @@
 <?php
 
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
+
 if ( dslc_is_module_active( 'DSLC_Partners' ) )
 	include DS_LIVE_COMPOSER_ABS . '/modules/partners/functions.php';
 

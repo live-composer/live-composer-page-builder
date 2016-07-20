@@ -8,6 +8,12 @@
  * - dslc_w3tc_admin_notice (Show notice if some of the W3TC settings are problematic)
  */
 
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
+
 
 /**
  * Additional links on plugin listings page

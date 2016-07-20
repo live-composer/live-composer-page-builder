@@ -10,6 +10,13 @@
  * - dslc_load_fonts ( Load Google Fonts )
  */
 
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
+
+
 final class DSLC_Scripts{
 
 	/** Array of fonts available to be used in LC editor. */

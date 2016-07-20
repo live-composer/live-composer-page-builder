@@ -14,6 +14,11 @@
  * – dslc_module_front ( HTML output for the modules/elements )
  */
 
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
 
 /**
  * Display the composer panels in active editing mode

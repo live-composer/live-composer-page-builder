@@ -29,10 +29,13 @@
  *
  */
 
-// Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) exit;
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
 
-// Do not allow different versions of Live Composer to run at the same time
+// Do not allow different versions of Live Composer to run at the same time!
 if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) ):
 
 	/**

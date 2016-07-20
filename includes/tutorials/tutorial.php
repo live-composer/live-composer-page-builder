@@ -8,6 +8,11 @@
  * dslc_tut_options ( Register settings )
  */
 
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
 
 /**
  * Load scripts for the tutorial

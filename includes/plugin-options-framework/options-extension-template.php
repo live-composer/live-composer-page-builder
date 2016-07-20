@@ -1,3 +1,10 @@
+<?php
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
+?>
 <div class="wrap">
 	<h2 id="dslc-main-title"><?php echo $extension['title'] ?></h2>
 	<div class="wp-clearfix" id="dslc-settings-frame">

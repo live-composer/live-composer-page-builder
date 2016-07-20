@@ -25,6 +25,12 @@
  * - dslc_set_user_templates ( Set user templates )
  */
 
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
+
 /**
  * Load text domain
  *
