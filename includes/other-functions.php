@@ -494,13 +494,16 @@ function dslc_editing_iframe_page() {
 
 	global $dslc_plugin_options;
 
+	$capability = dslc_get_option( 'lc_min_capability_page', 'dslc_plugin_options_access_control' );
+	if ( ! $capability ) $capability = 'publish_posts';
+
 	// Base 64 encoded SVG image.
 	$icon_svg = dslc_get_menu_svg();
 
 	add_menu_page(
 		__( 'Live Composer Editing', 'live-composer-page-builder' ),
 		__( 'Live Composer Editing', 'live-composer-page-builder' ),
-		'manage_options', // Capability.
+		$capability, // Capability.
 		'livecomposer_editor', // Menu slug.
 		'livecomposer_editor_display', // Callable $function.
 		$icon_svg, // Icon_url.
@@ -508,10 +511,6 @@ function dslc_editing_iframe_page() {
 	);
 
 	remove_menu_page( 'livecomposer_editor', 'livecomposer_editor' );
-
-	// Custom options extension.
-	// global $dslc_options_extender;
-	// $dslc_options_extender->construct_panels();
 
 } add_action( 'admin_menu', 'dslc_editing_iframe_page' );
 

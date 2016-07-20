@@ -30,12 +30,14 @@ jQuery(document).ready(function($){
 		$( this ).next().click();
 	});
 
-	jQuery(document).on('hover', '.dslca-module-edit-field-slider-input', function() {
+	/* Initiate all the slider controls on the module options panel. */
+	jQuery('.dslca-container').on('hover', '.dslca-module-edit-option-slider .dslca-module-edit-field-numeric', function() {
 
 		dslc_module_options_numeric( this );
 	});
 
-	jQuery(document).on('hover', '.dslca-modules-section-edit-option-slider .dslca-modules-section-edit-field', function() {
+	/* Initiate all the slider controls on the row options panel. */
+	jQuery('.dslca-container').on('hover', '.dslca-modules-section-edit-option-slider .dslca-modules-section-edit-field', function() {
 
 		dslc_module_options_numeric( this );
 	});

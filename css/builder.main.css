@@ -2855,8 +2855,8 @@ body.rtl .dslca-modules-area-placeholder {
 	}
 
 	.dslca-module-edit-option-slider .dslca-module-edit-field-numeric-ext {
-		right: 40px;
-		top: 68px;
+		right: 10px;
+		top: 14px;
 	}
 
 /**
@@ -2865,6 +2865,7 @@ body.rtl .dslca-modules-area-placeholder {
 
 .dslca-separator-empty {
 	height: 1px;
+	line-height: 0;
 	border-bottom: 1px solid rgba( 0, 0, 0, 0.06 );
 	text-align: center;
 	position: absolute;

@@ -533,7 +533,7 @@ function dslc_tabs_generate_code( dslcTabs ) {
 	jQuery('.dslca-module-option-front[data-id="tabs_nav"]', dslcTabsContainer).val( dslcTabsNavVal );
 	jQuery('.dslca-module-option-front[data-id="tabs_content"]', dslcTabsContainer).val( dslcTabsContentVal );
 
-	dslc_option_changed();
+	parent.dslc_option_changed();
 }
 
 /**
@@ -565,7 +565,7 @@ function dslc_accordion_generate_code( dslcAccordion ) {
 	jQuery('.dslca-module-option-front[data-id="accordion_nav"]', dslcModule).val( dslcAccordionTitleVal );
 	jQuery('.dslca-module-option-front[data-id="accordion_content"]', dslcModule).val( dslcAccordionContentVal );
 
-	dslc_option_changed();
+	parent.dslc_option_changed();
 }
 
 /**
