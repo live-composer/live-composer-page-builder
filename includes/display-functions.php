@@ -476,20 +476,19 @@ function dslc_filter_content( $content ) {
 		return $content;
 	}
 
-	// Global variables
+	// Global variables.
 	global $dslc_should_filter;
 	global $wp_the_query;
 	global $dslc_post_types;
 
-	// Get ID of the post in which the content filter fired
-	$currID = get_the_ID();
+	// Get ID of the post in which the content filter fired.
+	$curr_id = get_the_ID();
 
-
-	// Get ID of the post from the main query
+	// Get ID of the post from the main query.
 	if ( isset( $wp_the_query->queried_object_id ) ) {
-		$realID = $wp_the_query->queried_object_id;
+		$real_id = $wp_the_query->queried_object_id;
 	} else {
-		$realID = 'nope';
+		$real_id = 'nope';
 	}
 
 	// Check if we should we filtering the content
@@ -497,7 +496,7 @@ function dslc_filter_content( $content ) {
 	// 2) Proceed if in a WordPress loop ( https://codex.wordpress.org/Function_Reference/in_the_loop )
 	// 3) Proceed if global var $dslc_should_filter is true
 	// Irrelevant of the other 3 proceed if archives, search or 404 page
-	if ( ( $currID == $realID && in_the_loop() && $dslc_should_filter ) || ( is_archive() && $dslc_should_filter ) || is_author() || is_search() || is_404() ) {
+	if ( ( $curr_id == $real_id && in_the_loop() && $dslc_should_filter ) || ( is_archive() && $dslc_should_filter ) || is_author() || is_search() || is_404() ) {
 
 		// Variables that are used throughout the function
 		$composer_wrapper_before = '';
@@ -608,20 +607,19 @@ function dslc_filter_content( $content ) {
 
 		}
 
-		// If currently showina 404 page
+		// If currently showing 404 page?
 		if ( is_404() ) {
 
 			// Get ID of the page set to power the 404 page
 			$template_id = dslc_get_option( '404_page', 'dslc_plugin_options_archives' );
 
-			// If there is a page that powers it
+			// If there is a page that powers it?
 			if ( $template_id ) {
 
-				// Get LC code of the page
+				// Get LC code of the page.
 				$composer_code = dslc_get_code( $template_id );
 
 			}
-
 		}
 
 		// If currently showing a singular post of a post type which is not "dslc_hf" ( used for header/footer )
@@ -633,7 +631,7 @@ function dslc_filter_content( $content ) {
 
 		}
 
-		// If editor is currently active clear the composer_prepend var
+		// If editor is currently active clear the composer_prepend var.
 		if ( dslc_is_editor_active( 'access' ) ) {
 			$composer_prepend = '';
 		}

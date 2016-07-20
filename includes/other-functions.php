@@ -530,7 +530,13 @@ function livecomposer_editor_display() {
 		}
 	*/
 
-	$frame_url = get_permalink( $_GET['page_id'] ) . '?dslc=active';
+	$frame_url = get_permalink( $_GET['page_id'] );
+
+	if ( stristr($frame_url, '?') ) {
+		$frame_url .= '&dslc=active';
+	} else {
+		$frame_url .= '?dslc=active';
+	}
 
 	if ( isset( $_GET['preview_id'] ) ) {
 
