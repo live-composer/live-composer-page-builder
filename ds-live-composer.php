@@ -78,7 +78,7 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) ):
 	$dslc_var_modules = array(); // Will hold modules information
 	$dslc_var_templates = array(); // Will hold templates information
 	$dslc_var_post_options = array(); // Will hold post options information
-	$dslc_var_icons = array(); // Will hold available icons array
+	$dslc_var_icons = array(); // Will hold available icons array.
 
 	$dslc_css_fonts = '';
 	$dslc_css_style = '';
@@ -90,6 +90,7 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) ):
 	 * Include all the files
 	 */
 
+	include DS_LIVE_COMPOSER_ABS . '/includes/editing-page.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/other-functions.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/css-generation/css-for-modules.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/functions.php';
@@ -122,43 +123,6 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) ):
 	 */
 	include DS_LIVE_COMPOSER_ABS . '/includes/class.module.php';
 
-/*
-	include DS_LIVE_COMPOSER_ABS . '/modules/posts/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/blog/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/projects/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/galleries/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/infobox/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/staff/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/woocommerce/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/separator/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/downloads/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/testimonials/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/text-simple/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/html/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tabs/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/sliders/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/partners/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/widgets/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/social/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/notification/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/button/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/image/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/progress-bars/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/accordion/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-title/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-content/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-excerpt/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-meta/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-downloads-button/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-thumbnail/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-gallery-slider/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-project-slider/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-comments/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-comments-form/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/tp-staff-social/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/icon/module.php';
-	include DS_LIVE_COMPOSER_ABS . '/modules/navigation/module.php';
-*/
 	/**
 	 * Tutorials disabled by default
 	 *
