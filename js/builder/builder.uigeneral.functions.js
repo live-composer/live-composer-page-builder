@@ -186,10 +186,10 @@ jQuery(document).on( 'click', '.dslca-section-title-filter-options span', functi
 
 	if ( section.hasClass('dslca-templates-load') ) {
 
-		jQuery('.dslca-section-title-filter-curr', section).text( $(this).text());
+		jQuery('.dslca-section-title-filter-curr', section).text( jQuery(this).text());
 	} else {
 
-		jQuery('.dslca-section-title-filter-curr', section).text( $(this).text());
+		jQuery('.dslca-section-title-filter-curr', section).text( jQuery(this).text());
 	}
 
 	jQuery('.dslca-section-scroller-inner').css({ left : 0 });

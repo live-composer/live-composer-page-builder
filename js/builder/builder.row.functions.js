@@ -682,12 +682,12 @@ function dslc_row_import( rowCode ) {
 			dslc_js_confirm_close();
 
 			// Add the new section
-			jQuery('#dslc-main').append( response.output );
+			jQuery('#dslc-main', DSLC.Editor.frame).append( response.output );
 
 			// Call other functions
 			dslc_bg_video();
 			dslc_carousel();
-			dslc_masonry( jQuery('#dslc-main').find('.dslc-modules-section:last-child') );
+			dslc_masonry( jQuery('#dslc-main', DSLC.Editor.frame).find('.dslc-modules-section:last-child') );
 			dslc_drag_and_drop();
 			dslc_show_publish_button();
 			dslc_generate_code();
