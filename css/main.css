@@ -1082,7 +1082,7 @@ body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-post-thumb .dslc-o
 /**
  * Show On / Hide On – Old code (js based)
  */
-
+/*
 .dslc-res-big .dslc-hide-on-desktop,
 .dslc-res-smaller-monitor .dslc-hide-on-desktop {
 	display: none !important;
@@ -1105,11 +1105,12 @@ body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-post-thumb .dslc-o
 .dslca-composer-hidden.dslc-res-smaller-monitor .dslc-hide-on-desktop {
 	display: none !important;
 }
-
+*/
 /**
- * Show On / Hide On – New code (media queries)
+ * Show On / Hide On (media queries)
  */
 
+/* Desktop */
 @media only screen and (min-width : 1025px) {
 
 	.dslc-hide-on-desktop {
@@ -1125,7 +1126,7 @@ body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-post-thumb .dslc-o
 	}
 }
 
-
+/* Tablet */
 @media only screen and (min-width : 768px) and (max-width : 1024px)  {
 
 	.dslc-hide-on-tablet {
@@ -1134,6 +1135,7 @@ body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-post-thumb .dslc-o
 
 }
 
+/* Smartphone */
 @media only screen and ( max-width: 767px ) {
 
 	.dslc-hide-on-phone {
