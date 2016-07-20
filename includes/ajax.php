@@ -477,6 +477,9 @@ function dslc_ajax_display_module_options( $atts ) {
 				'carousel_elements',
 				'thumb_resize_width',
 				'thumb_resize_width_manual',
+				'button_icon_id',
+				'icon_pos',
+				'button_state',
 			);
 
 			$control_with_toggle = '';
@@ -554,26 +557,23 @@ function dslc_ajax_display_module_options( $atts ) {
 
 						<?php
 
-							// Current Value Array
-							if ( empty( $curr_value ) )
-								$curr_value = array();
-							else
-								$curr_value = explode( ' ', trim( $curr_value ) );
+						// Current Value Array
+						if ( empty( $curr_value ) ) {
 
-							// Determined brakepoints
-							$chck_amount = count( $module_option['choices'] );
-							// $chck_breakpoint = ceil( $chck_amount / 1 );
-							$chck_count = 0;
+							$curr_value = array();
+						} else {
+
+							$curr_value = explode( ' ', trim( $curr_value ) );
+						}
 
 						?>
 
 						<div class="dslca-module-edit-option-checkbox-wrapper">
-							<?php foreach ( $module_option['choices'] as  $checkbox_option ) : $chck_count++; ?>
+							<?php foreach ( $module_option['choices'] as  $checkbox_option ) : ?>
 								<div class="dslca-module-edit-option-checkbox-single">
 									<span class="dslca-module-edit-option-checkbox-hook"><span class="dslca-icon <?php if ( in_array( $checkbox_option['value'], $curr_value ) ) echo 'dslc-icon-check'; else echo 'dslc-icon-check-empty'; ?>"></span><?php echo $checkbox_option['label']; ?></span>
 									<input type="checkbox" class="dslca-module-edit-field dslca-module-edit-field-checkbox" data-id="<?php echo $module_option['id']; ?>" name="<?php echo $module_option['id']; ?>" value="<?php echo $checkbox_option['value']; ?>" <?php if ( in_array( $checkbox_option['value'], $curr_value ) ) echo 'checked="checked"'; ?> <?php echo $affect_on_change_append ?> />
 								</div><!-- .dslca-module-edit-option-checkbox-single -->
-								<?php /* if ( $chck_count == $chck_breakpoint ) { echo '<br>'; $chck_count = 0; } */?>
 							<?php endforeach; ?>
 						</div><!-- .dslca-module-edit-option-checkbox-wrapper -->
 

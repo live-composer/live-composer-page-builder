@@ -281,19 +281,15 @@
 	 * Horizontal Orientation
 	 */
 
-	#dslc-content .dslc-posts-orientation-horizontal {
-
+	.dslc-posts-orientation-horizontal .dslc-post-thumb {
+		float: left;
+		margin-right: 20px;
+		width: 200px;
 	}
 
-		#dslc-content .dslc-posts-orientation-horizontal .dslc-post-thumb {
-			float: left;
-			margin-right: 20px;
-			width: 200px;
-		}
-
-		#dslc-content .dslc-posts-orientation-horizontal .dslc-post-main {
-			overflow: hidden;
-		}
+	#dslc-content .dslc-posts-orientation-horizontal .dslc-post-main {
+		overflow: hidden;
+	}
 
 
 /**

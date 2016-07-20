@@ -120,7 +120,7 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 			$module_settings['css_res_p'] = 'enabled';
 		}
 
-		// If option type is done with CSS and option is set.
+		// If option type is CSS-based and option is set.
 		if ( isset( $option_arr['affect_on_change_el'] ) && isset( $option_arr['affect_on_change_rule'] ) ) {
 
 			// Default.

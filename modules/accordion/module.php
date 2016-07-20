@@ -96,7 +96,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'min' => 0,
 				'max' => 10,
 				'increment' => 1,
-				
+
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -234,7 +234,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'min' => 0,
 				'max' => 10,
 				'increment' => 1,
-				
+
 				'std' => '1',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -351,7 +351,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'min' => 0,
 				'max' => 10,
 				'increment' => 1,
-				
+
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -563,7 +563,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'min' => 0,
 				'max' => 10,
 				'increment' => 1,
-				
+
 				'std' => '1',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -581,26 +581,26 @@ class DSLC_Accordion extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-accordion-content',
 				'affect_on_change_rule' => 'border-style',
 				'section' => 'styling',
-				'tab' => __( 'Content', 'live-composer-page-builder' )
+				'tab' => __( 'Content', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Color', 'live-composer-page-builder' ),

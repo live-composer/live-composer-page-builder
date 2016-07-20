@@ -512,15 +512,16 @@ jQuery(document).ready(function($) {
 
 				var dslcOptionValue = dslcOption.val();
 
-				// Orientation change
+				// Post Grid > Thumbnail: Orientation change.
+				// Need to change thumbnail width to get it work as expected
 				if ( dslcOptionID == 'orientation' && dslcOptionValue == 'horizontal' ) {
 
-					var dslcSliderEl = jQuery('.dslca-module-edit-option-thumb_width .dslca-module-edit-field-slider');
-					dslcSliderEl.slider({ value: 40 }).slider('option', 'slide')(null, { value: dslcSliderEl.slider('value') })
+					var dslcSliderEl = jQuery('.dslca-module-edit-option-thumb_width .dslca-module-edit-field');
+					dslcSliderEl.val('40').trigger('change');
 				} else if ( dslcOptionID == 'orientation' && dslcOptionValue == 'vertical' ) {
 
-					var dslcSliderEl = jQuery('.dslca-module-edit-option-thumb_width .dslca-module-edit-field-slider');
-					dslcSliderEl.slider({ value: 100 }).slider('option', 'slide')(null, { value: dslcSliderEl.slider('value') })
+					var dslcSliderEl = jQuery('.dslca-module-edit-option-thumb_width .dslca-module-edit-field');
+					dslcSliderEl.val('100').trigger('change');
 				}
 			}
 
