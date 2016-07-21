@@ -1294,15 +1294,16 @@ html {
 	/*background: rgba( 255, 255, 255, 0.75 );*/
 }
 
-.dslc-modules-area-empty:after {
+.dslc-modules-area-empty::after {
 	 content: "Drop modules here";
 	 display: inline-block;
-	 line-height: 120px;
 	 opacity: 1;
 	 color: #BEBDBD;
 
 	 left: 0;
 	 right: 0;
+	 top:50%;
+	 margin-top: -10px;
 	 position: absolute;
 
 	 font-size: 15px;

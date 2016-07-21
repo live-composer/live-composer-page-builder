@@ -26,7 +26,6 @@ jQuery(document).ready(function($){
 	jQuery(document).on('click', '.dslca-modules-section-edit-field-colorpicker', function() {
 
 		dslc_module_options_color( this );
-		// dslc_row_edit_colorpicker_init( this );
 		$( this ).next().click();
 	});
 
@@ -1604,7 +1603,11 @@ function dslc_module_options_color( field ) {
 				// Live change
 				dslcAffectOnChangeEl = dslcColorField.data('affect-on-change-el');
 				dslcAffectOnChangeRule = dslcColorField.data('affect-on-change-rule');
-				jQuery( dslcAffectOnChangeEl ,'.dslca-module-being-edited' ).css( dslcAffectOnChangeRule , dslcColorFieldVal );
+
+				// ROWs doesn't have 'dslcAffectOnChangeEl' defined
+				if ( null != dslcAffectOnChangeEl ) {
+					jQuery( dslcAffectOnChangeEl ,'.dslca-module-being-edited' ).css( dslcAffectOnChangeRule , dslcColorFieldVal );
+				}
 
 				// Update option
 				dslcModule = jQuery('.dslca-module-being-edited', DSLC.Editor.frame);
@@ -1635,7 +1638,11 @@ function dslc_module_options_color( field ) {
 				// Live change
 				dslcAffectOnChangeEl = dslcColorField.data('affect-on-change-el');
 				dslcAffectOnChangeRule = dslcColorField.data('affect-on-change-rule');
-				jQuery( dslcAffectOnChangeEl ,'.dslca-module-being-edited' ).css( dslcAffectOnChangeRule , dslcColorFieldVal );
+
+				// ROWs doesn't have 'dslcAffectOnChangeEl' defined
+				if ( null != dslcAffectOnChangeEl ) {
+					jQuery( dslcAffectOnChangeEl ,'.dslca-module-being-edited' ).css( dslcAffectOnChangeRule , dslcColorFieldVal );
+				}
 
 				// Update option
 				dslcModule = jQuery('.dslca-module-being-edited', DSLC.Editor.frame);

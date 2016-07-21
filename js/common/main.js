@@ -27,6 +27,7 @@ var DSLC = {
 
 /**
  * Responsive Classes
+ * TODO: we can delete this function.
  */
 
 function dslc_responsive_classes( force ) {

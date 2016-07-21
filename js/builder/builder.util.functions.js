@@ -4,7 +4,6 @@
  * = UTIL =
  *
  * - dslc_dm_get_defaults ( Get Alter Module Defaults Code )
- * - dslca_gen_content_for_search ( Generate Readable Content For Search )
  * - dslca_draggable_calc_center ( Recalculate drag and drop centering )
  * - dslc_editable_content_gen_code ( Generate code of editable content )
  *
@@ -34,57 +33,6 @@ function dslc_dm_get_defaults( module ) {
 			jQuery('.dslca-prompt-modal textarea').val( response.output );
 		}
 	);
-}
-
-/**
-* Other - Generate Readable Content For Search
-*/
-
-function dslca_gen_content_for_search() {
-
-	if ( dslcDebug ) console.log( 'dslca_gen_content_for_search' );
-
-	// Vars
-	var holder = document.getElementById('dslca-content-for-search');
-
-	if (null === holder) {
-
-		return;
-	}
-
-	var prevContent = holder.value;
-	var content = '';
-
-	// Go through each content element
-
-	var elements = document.querySelectorAll('#dslc-main .dslc-module-front [data-exportable-content]');
-	Array.prototype.forEach.call(elements, function(el, i){
-		// el - current DOM element, i – counter
-		var extracted_html_code;
-
-		if ( el.getAttribute('data-exportable-content') !== '' ) {
-
-			var wrapper_tag = el.getAttribute('data-exportable-content');
-			extracted_html_code = '<' + wrapper_tag + '>' + el.innerHTML + '</' + wrapper_tag + '>';
-		} else {
-
-			extracted_html_code = el.innerHTML;
-		}
-
-		if ( extracted_html_code !== null ) {
-
-			content += extracted_html_code.replace(/\s+/g, ' ').trim() + '\n';
-		}
-	});
-
-	// Set the value of the content field
-	holder.value = content;
-
-	// Used to show the publish button for pages made before this feature
-	if ( prevContent !== content ) {
-
-		dslc_show_publish_button();
-	}
 }
 
 /**
@@ -237,16 +185,17 @@ window.onbeforeunload = function () { return; };
 
 jQuery(document).ready(function($) {
 
-	// Option changes
+	// ROW styling option changes
 
 	jQuery(document).on( 'change', '.dslca-modules-section-edit-field', function() {
 
-		var dslcField, dslcFieldID, dslcEl, dslcModulesSection, dslcVal, dslcValReal, dslcRule, dslcSetting, dslcTargetEl, dslcImgURL;
+		var dslcField, dslcFieldID, dslcEl, dslcModulesSection, dslcVal, dslcValReal, dslcValExt, dslcRule, dslcSetting, dslcTargetEl, dslcImgURL;
 
 		dslcField = $(this);
 		dslcFieldID = dslcField.data('id');
 		dslcVal = dslcField.val();
 		dslcValReal = dslcVal;
+		dslcValExt = dslcVal + dslcField.data('ext');
 		dslcRule = dslcField.data('css-rule');
 
 		dslcEl = $('.dslca-modules-section-being-edited', DSLC.Editor.frame); // Currently editing element
@@ -444,9 +393,23 @@ jQuery(document).ready(function($) {
 				dslcTargetEl = jQuery( dslcField.data('css-element'), dslcEl );
 			}
 
-			dslcTargetEl.css(dslcRule, dslcVal);
+			dslcRule = dslcRule.replace(/ /g,'').split( ',' );
+
+			var dslcValToApply;
+
+			if ( null != dslcField.data('ext') ) {
+				dslcValToApply = dslcValExt;
+			} else {
+				dslcValToApply = dslcVal;
+			}
+
+			// Loop through rules (useful when there are multiple rules)
+			for ( var i = 0; i < dslcRule.length; i++ ) {
+				dslcTargetEl.css(dslcRule[i], dslcValToApply);
+			}
 		}
 
+		// Update hidden input with new value
 		dslcSetting.val( dslcValReal );
 
 		if ( ! DSLC.Editor.flags.generate_code_after_row_changed ) return false;
@@ -712,45 +675,6 @@ jQuery(document).ready(function($) {
 		}
 	});
 
-
-	//Preview Module Section Opt Change - Numeric
-	jQuery(document).on( 'keyup, blur, change', '.dslca-modules-section-edit-field-numeric, .dslca-modules-section-edit-field-slider-numeric', function(){
-
-		var dslcOption = jQuery(this);
-
-		/**
-		 * We DON'T need the line below, as ROW doesn't require
-		 * css-element property. All the row controls change the same section div.
-		 */
-		// if ( dslcOption.data('css-element') != undefined ) return false;
-
-		var dslcOptionValue = '',
-			dslcOptionID = dslcOption.data('id'),
-			dslcOptionWrap = dslcOption.closest('.dslca-modules-section-edit-option'),
-			dslcModulesSection = jQuery('.dslca-modules-section-being-edited', DSLC.Editor.frame),
-			dslcAffectOnChangeRule = dslcOption.data('css-rule'),
-			dslcAffectOnChangeValOrig = dslcOption.val(),
-			dslcAffectOnChangeVal = dslcAffectOnChangeValOrig + dslcOption.data('ext'),
-			dslcAffectOnChangeRules;
-
-		// Add changed class
-		dslcModulesSection.addClass('dslca-modules-section-change-made');
-
-		/**
-		 * Live Preview
-		 */
-		dslcAffectOnChangeRules = dslcAffectOnChangeRule.replace(/ /g,'').split( ',' );
-
-		// Loop through rules (useful when there are multiple rules)
-		for ( var i = 0; i < dslcAffectOnChangeRules.length; i++ ) {
-			dslcModulesSection.css( dslcAffectOnChangeRules[i] , dslcAffectOnChangeVal );
-		}
-
-		/**
-		 * Update option
-		 */
-		jQuery( '.dslca-modules-section-settings input[data-id="' + dslcOptionID + '"]', dslcModulesSection ).val( dslcAffectOnChangeValOrig );
-	});
 });
 
 

@@ -15,6 +15,7 @@
  * dslc_editing_page_head ( Code to output in the <head> section of the editing page (WP Admin). )
  * dslc_editing_page_footer ( Code to output before </body> on the editing page (WP Admin). )
  * dslc_editing_page_title ( Change page title for the editing page (WP Admin). )
+ * dslca_cancel_redirect_frontpage (Cancel canonical redirect for the main page.)
  */
 
 // Prevent direct access to the file.
@@ -76,15 +77,7 @@ function dslc_editing_page_content() {
 	}
 
 	// Compose URL used in iframe.
-	$frame_url = get_permalink( $_GET['page_id'] );
-
-	if ( stristr( $frame_url, '?' ) ) {
-
-		$frame_url .= '&dslc=active';
-	} else {
-
-		$frame_url .= '?dslc=active';
-	}
+	$frame_url = home_url() . '?page_id=' . $_GET['page_id'] . '&dslc=active';
 
 	// Preview id used when working with post templates in LC.
 	if ( isset( $_GET['preview_id'] ) ) {
@@ -188,3 +181,27 @@ function dslc_editing_page_title() {
 }
 
 add_filter( 'admin_title', 'dslc_editing_page_title' );
+
+/**
+ * Cancel canonical redirect for the home page.
+ *
+ * Functions prevents WP from redirecting the home page
+ * from https://lc-gh.dev/?page_id=132&dslc=active
+ * to   https://lc-gh.dev/?dslc=active
+ *
+ * Many users have 500 error when using LC on servers
+ * with restrictive settings. This function try to solve this problem.
+ *
+ * @param  string $redirect_url  Were to redirect.
+ * @param  string $requested_url Original URL.
+ * @return string                Filtered URL to use.
+ */
+function dslca_cancel_redirect_frontpage( $redirect_url, $requested_url ) {
+
+	if ( is_front_page() && DS_LIVE_COMPOSER_ACTIVE ) {
+		$redirect_url = $requested_url;
+	}
+
+	return $redirect_url;
+}
+add_filter( 'redirect_canonical', 'dslca_cancel_redirect_frontpage', 10, 3 );

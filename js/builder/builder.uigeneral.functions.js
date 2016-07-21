@@ -277,9 +277,6 @@ function dslc_show_section( section ) {
 	jQuery('.dslca-section').hide();
 	jQuery(section).show();
 
-	// Initiate row scrollbar if editing ar row
-	if ( section == '.dslca-modules-section-edit' ) { dslc_row_edit_scrollbar_init(); }
-
 	// Change "currently editing"
 	if ( section == '.dslca-module-edit' ) {
 

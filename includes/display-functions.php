@@ -939,8 +939,29 @@ function dslc_modules_section_front( $atts, $content = null ) {
 
 	}
 
-	// No video HTML if builder innactive or no video
-	if ( ! $dslc_active && $atts['bg_video'] == '' && $atts['bg_image'] == '' && isset( $atts['bg_image_thumb'] ) && $atts['bg_image_thumb'] == 'disabled' ) {
+	$output_bgoverlay = false;
+
+	/**
+	 * Always output bg overlay:
+	 * – if opacity property is set;
+	 * – if LC is in editing mode;
+	 * – if bg_video is set.
+	 */
+
+	if ( stristr( $overlay_style, 'opacity' ) ) {
+		$output_bgoverlay = true;
+	}
+
+	if ( DS_LIVE_COMPOSER_ACTIVE ) {
+		$output_bgoverlay = true;
+	}
+
+	if ( '' !== $atts['bg_video'] ) {
+		$output_bgoverlay = true;
+	}
+
+	// Do not output video HTML code when not needed.
+	if ( ! $output_bgoverlay ) {
 		$bg_video = '';
 	}
 

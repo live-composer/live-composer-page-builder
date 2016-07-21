@@ -6,9 +6,7 @@
  * - dslc_row_add ( Add New )
  * - dslc_row_delete ( Delete )
  * - dslc_row_edit ( Edit )
- * - dslc_row_edit_colorpicker_init ( Edit - Initiate Colorpicker )
  * - dslc_row_edit_slider_init ( Edit - Initiate Slider )
- * - dslc_row_edit_scrollbar_init ( Edit - Initiate Scrollbar )
  * - dslc_row_edit_cancel ( Edit - Cancel Changes )
  * - dslc_row_edit_confirm ( Edit - Confirm Changes )
  * - dslc_row_copy ( Copy )
@@ -366,131 +364,6 @@ function dslc_row_edit( row ) {
 	jQuery('.dslca-save-draft-composer-hook').css({ 'visibility' : 'hidden' });
 }
 
-
-/**
- * Row - Edit - Initiate Slider
- */
-function dslc_row_edit_slider_init() {
-
-	if ( dslcDebug ) console.log( 'dslc_row_edit_slider_init' );
-
-	jQuery('.dslca-modules-section-edit-field-slider').each(function(){
-
-		var dslcSlider, dslcSliderField, dslcSliderInput, dslcSliderVal, dslcAffectOnChangeRule, dslcAffectOnChangeEl,
-		dslcSliderTooltip, dslcSliderTooltipOffset, dslcSliderHandle, dslcSliderTooltipPos, dslcSection, dslcOptionID, dslcSliderExt = '',
-		dslcAffectOnChangeRules, dslcSliderMin = 0, dslcSliderMax = 300, dslcSliderIncr = 1;
-
-		dslcSlider = jQuery(this);
-		dslcSliderInput = dslcSlider.siblings('.dslca-modules-section-edit-field');
-		dslcSliderTooltip = dslcSlider.siblings('.dslca-modules-section-edit-field-slider-tooltip');
-
-		if ( dslcSlider.data('min') ) {
-
-			dslcSliderMin = dslcSlider.data('min');
-		}
-
-		if ( dslcSlider.data('max') ) {
-
-			dslcSliderMax = dslcSlider.data('max');
-		}
-
-		if ( dslcSlider.data('incr') ) {
-
-			dslcSliderIncr = dslcSlider.data('incr');
-		}
-
-		if ( dslcSlider.data('ext') ) {
-
-			dslcSliderExt = dslcSlider.data('ext');
-		}
-
-		dslcSlider.slider({
-			min : dslcSliderMin,
-			max : dslcSliderMax,
-			step: dslcSliderIncr,
-			value: dslcSliderInput.val(),
-			slide: function(event, ui) {
-
-				dslcSliderVal = ui.value + dslcSliderExt;
-				dslcSliderInput.val( dslcSliderVal );
-
-				// Live change
-				dslcAffectOnChangeEl = jQuery('.dslca-modules-section-being-edited', DSLC.Editor.frame);
-
-				if ( dslcSliderInput.data('css-element') ) {
-
-					dslcAffectOnChangeEl = jQuery( dslcSliderInput.data('css-element'), dslcAffectOnChangeEl );
-				}
-
-				dslcAffectOnChangeRule = dslcSliderInput.data('css-rule').replace(/ /g,'');
-				dslcAffectOnChangeRules = dslcAffectOnChangeRule.split( ',' );
-
-				// Loop through rules (useful when there are multiple rules)
-				for ( var i = 0; i < dslcAffectOnChangeRules.length; i++ ) {
-
-					jQuery( dslcAffectOnChangeEl ).css( dslcAffectOnChangeRules[i] , dslcSliderVal );
-				}
-
-				// Update option
-				dslcSection = jQuery('.dslca-modules-section-being-edited', DSLC.Editor.frame);
-				dslcOptionID = dslcSliderInput.data('id');
-				jQuery('.dslca-modules-section-settings input[data-id="' + dslcOptionID + '"]', dslcSection).val( ui.value );
-
-				dslcSection.addClass('dslca-modules-section-change-made');
-
-				// Tooltip
-				dslcSliderTooltip.text( dslcSliderVal );
-				dslcSliderHandle = dslcSlider.find('.ui-slider-handle');
-				dslcSliderTooltipOffset = dslcSliderHandle[0].style.left;
-				dslcSliderTooltip.css({ left : dslcSliderTooltipOffset });
-			},
-			stop: function( event, ui ) {
-
-				dslcSliderTooltip.hide();
-
-				var scrollOffset = jQuery( window ).scrollTop();
-				dslc_masonry();
-				jQuery( window ).scrollTop( scrollOffset );
-			},
-			start: function( event, ui ) {
-
-				dslcSliderVal = ui.value;
-
-				dslcSliderTooltip.show();
-
-				// Tooltip
-				dslcSliderTooltip.text( dslcSliderVal );
-				dslcSliderHandle = dslcSlider.find('.ui-slider-handle');
-				dslcSliderTooltipOffset = dslcSliderHandle[0].style.left;
-				dslcSliderTooltip.css({ left : dslcSliderTooltipOffset });
-			}
-		});
-	});
-}
-
-/**
- * Row - Edit - Initiate Scrollbar
- */
-function dslc_row_edit_scrollbar_init() {
-
-	if ( dslcDebug ) console.log( 'dslc_row_edit_scrollbar_init' );
-
-	var dslcWidth = 0;
-
-	jQuery('.dslca-modules-section-edit-option').each(function(){
-
-		dslcWidth += jQuery(this).outerWidth(true) + 1;
-	});
-
-	if ( dslcWidth > jQuery( '.dslca-modules-section-edit-options' ).width() ) {
-
-		jQuery('.dslca-modules-section-edit-options-wrapper').width( dslcWidth );
-	} else {
-
-		jQuery('.dslca-modules-section-edit-options-wrapper').width( 'auto' );
-	}
-}
-
 /**
  * Row - Edit - Cancel Changes
  */
@@ -702,9 +575,6 @@ function dslc_row_import( rowCode ) {
 function dslc_add_modules_section() { dslc_row_add(); }
 function dslc_delete_modules_section( row  ) { dslc_row_delete( row ); }
 function dslc_edit_modules_section( row ) { dslc_row_edit( row ); }
-function dslc_edit_modules_section_colorpicker() { dslc_row_edit_colorpicker_init(); }
-function dslc_edit_modules_section_slider() { dslc_row_edit_slider_init(); }
-function dslc_edit_modules_section_scroller() { dslc_row_edit_scrollbar_init(); }
 function dslc_copy_modules_section( row ) { dslc_row_copy( row ); }
 function dslc_import_modules_section( rowCode ) { dslc_row_import( rowCode ); }
 
@@ -715,19 +585,12 @@ function dslc_import_modules_section( rowCode ) { dslc_row_import( rowCode ); }
 jQuery(document).ready(function($){
 
 	/**
-	 * Initialize
-	 */
-
-	/*dslc_row_edit_colorpicker_init();
-	dslc_row_edit_slider_init();*/
-
-
-	/**
 	 * Hook - Confirm Row Changes
 	 */
 	$(document).on( 'click', '.dslca-row-edit-save', function(){
 
 		dslc_row_edit_confirm();
+
 		$(".dslca-currently-editing").removeAttr('style');
 		$('.dslca-row-options-filter-hook.dslca-active').removeClass('dslca-active');
 		dslc_responsive_classes( true );
@@ -739,6 +602,7 @@ jQuery(document).ready(function($){
 	$(document).on( 'click', '.dslca-row-edit-cancel', function(){
 
 		dslc_row_edit_cancel();
+
 		$(".dslca-currently-editing").removeAttr('style');
 		$('.dslca-row-options-filter-hook.dslca-active').removeClass('dslca-active');
 		dslc_responsive_classes( true );
