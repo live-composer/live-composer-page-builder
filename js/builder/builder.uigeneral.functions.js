@@ -457,7 +457,6 @@ function dslc_drag_and_drop() {
 					jQuery('.dslca-module', modulesArea).remove();
 
 					setTimeout( function(){
-						dslc_init_square();
 						dslc_center();
 						dslc_masonry( dslcJustAdded );
 						jQuery('body').removeClass('dslca-anim-in-progress dslca-module-drop-in-progress');
@@ -477,7 +476,6 @@ function dslc_drag_and_drop() {
 					dslc_carousel();
 					dslc_tabs();
 					dslc_init_accordion();
-					dslc_init_square();
 					dslc_center();
 					dslc_generate_code();
 					dslc_show_publish_button();

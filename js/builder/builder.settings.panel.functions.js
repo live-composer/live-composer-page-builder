@@ -247,7 +247,7 @@ jQuery(document).ready(function($){
 		});
 	}
 
-	
+	/* Destroy instanced of sliders, color pickers and other temporary elements */
 	DSLC.Editor.clearUtils = function() {
 
 		if( Array.isArray(self.colorpickers ) ) {

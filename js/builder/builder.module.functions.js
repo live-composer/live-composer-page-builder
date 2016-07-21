@@ -453,7 +453,7 @@ function dslc_module_output_default( dslcModuleID, callback ) {
 }
 
 /**
- * MODULES - Module output when settings altered
+ * MODULES - Redraw module output when settings altered
  */
 function dslc_module_output_altered( callback ) {
 
@@ -507,8 +507,11 @@ function dslc_module_output_altered( callback ) {
 
 			DSLC.Editor.clearUtils();
 
+			// Insert 'updated' module output after module we are editing.
 			dslcModule.after(response.output).next().addClass('dslca-module-being-edited');
+			// Delete 'old' instance of the module we are editing.
 			dslcModule.remove();
+
 			dslc_generate_code();
 			dslc_show_publish_button();
 			dslc_carousel();
@@ -522,7 +525,6 @@ function dslc_module_output_altered( callback ) {
 
 			dslc_tabs();
 			dslc_init_accordion();
-			dslc_init_square();
 			dslc_center();
 
 			if ( callback ) {
@@ -598,7 +600,6 @@ function dslc_module_output_reload( dslcModule, callback ) {
 
 			dslc_tabs();
 			dslc_init_accordion();
-			dslc_init_square();
 			dslc_center();
 
 			if ( callback ) {

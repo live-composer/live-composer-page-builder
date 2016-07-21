@@ -36,7 +36,7 @@ function dslc_tut_load_scripts() {
 
 	$tut_ids = array($tut_ch_one, $tut_ch_two, $tut_ch_three, $tut_ch_four);
 
-	if ( is_singular() && isset( $_GET['dslc'] ) && $_GET['dslc'] == 'active' && in_array( get_the_ID(), $tut_ids ) ) {
+	if ( is_singular() && isset( $_GET['dslc'] ) && in_array( get_the_ID(), $tut_ids ) ) {
 		wp_enqueue_style( 'dslc-tut-css', DS_LIVE_COMPOSER_URL . 'includes/tutorials/tutorial' . $min_suffix . '.css', array(), DS_LIVE_COMPOSER_VER );
 		wp_enqueue_script( 'dslc-tut-js', DS_LIVE_COMPOSER_URL . 'includes/tutorials/tutorial' . $min_suffix . '.js', array('jquery'), DS_LIVE_COMPOSER_VER );
 	}
@@ -59,7 +59,7 @@ function dslc_tut_modal() {
 
 	$tut_ids = array($tut_ch_one, $tut_ch_two, $tut_ch_three, $tut_ch_four);
 
-	if ( is_singular() && isset( $_GET['dslc'] ) && $_GET['dslc'] == 'active' && in_array( get_the_ID(), $tut_ids ) ) {
+	if ( is_singular() && isset( $_GET['dslc'] ) && in_array( get_the_ID(), $tut_ids ) ) {
 
 		$tut_ch_two_link = add_query_arg( array('dslc' => 'active'), get_permalink( $tut_ch_two ) );
 		$tut_ch_three_link = add_query_arg( array('dslc' => 'active'), get_permalink( $tut_ch_three ) );

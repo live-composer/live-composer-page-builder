@@ -103,7 +103,7 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 		$important_append = ' !important';
 	}
 
-	if ( isset( $_GET['dslc'] ) && 'active' === $_GET['dslc'] ) {
+	if ( isset( $_GET['dslc'] ) ) {
 		$important_append = '';
 	}
 

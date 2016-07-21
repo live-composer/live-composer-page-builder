@@ -373,7 +373,7 @@ function dslc_body_class( $classes ) {
 	}
 
 	// If page in LC mode, force the class?
-	if ( isset( $_GET['dslc'] ) && 'active' === $_GET['dslc'] ) {
+	if ( isset( $_GET['dslc'] ) ) {
 		$has_lc_content = true;
 	}
 

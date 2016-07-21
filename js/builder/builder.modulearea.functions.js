@@ -353,7 +353,6 @@ function dslc_modules_area_copy( area ) {
 /**
  * AREAS - Set Width
  */
-
 function dslc_modules_area_width_set( area, newWidth ) {
 
 	if ( dslcDebug ) console.log( 'dslc_modules_area_width_set' );
@@ -368,7 +367,6 @@ function dslc_modules_area_width_set( area, newWidth ) {
 		.data('size', newWidth);
 
 	// Call other functions
-	dslc_init_square();
 	dslc_center();
 	dslc_generate_code();
 	dslc_show_publish_button();
