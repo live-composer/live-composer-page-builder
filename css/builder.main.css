@@ -9,6 +9,13 @@ html {
    position: relative;
 }
 
+#dslc-preview-error {
+	text-align: center;
+	padding: 160px 0 0;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+}
+
 .dslc-module-heading:before,
 .dslc-module-heading:after,
 .dslc-clearfix:before,

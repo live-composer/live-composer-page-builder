@@ -76,23 +76,46 @@ function dslc_editing_page_content() {
 		return;
 	}
 
-	// Compose URL used in iframe.
-	$frame_url = home_url() . '?page_id=' . $_GET['page_id'] . '&dslc=active';
+	// Array with URL variables to be used in add_query_arg
+	// @see https://developer.wordpress.org/reference/functions/add_query_arg/ .
+	$previewurl_keys = array();
+	$preview_output = true;
+
+	// Set id of the page we are editing.
+	if ( isset( $_GET['page_id'] ) && is_numeric( $_GET['page_id'] ) ) {
+
+		$previewurl_keys['page_id'] = $_GET['page_id'];
+	} else {
+		// Otherwise signal to not output preview iframe.
+		$preview_output = false;
+	}
 
 	// Preview id used when working with post templates in LC.
 	if ( isset( $_GET['preview_id'] ) ) {
 
-		$frame_url .= '&preview_id=' . $_GET['preview_id'];
+		$previewurl_keys['preview_id'] = intval( $_GET['preview_id'] );
 	}
+
+	// Set 'dslc' key – indicating that Live Composer editing mode is active.
+	$previewurl_keys['dslc'] = '';
 
 	// Include all the code needed on the editing page.
 	do_action( 'dslc_hook_pagebuilder_iframe_before' );
 
-?>
-<div id="page-builder-preview-area">
-	<iframe id="page-builder-frame" src="<?php echo esc_url( $frame_url ) ?>"></iframe>
-</div>
-<?php
+	if ( $preview_output ) {
+
+		$frame_url = set_url_scheme( add_query_arg( $previewurl_keys, get_permalink( $previewurl_keys['page_id'] ) ) );
+
+		echo '<div id="page-builder-preview-area">';
+		echo '<iframe id="page-builder-frame" src="' . esc_url( $frame_url ) . '"></iframe>';
+		echo '</div>';
+
+	} else {
+
+		echo '<div id="dslc-preview-error"><p>';
+		echo esc_attr__( 'Error: No page id provided.', 'live-composer-page-builder' );
+		echo '</p></div>';
+	}
 
 	// Include all the code needed on the editing page.
 	do_action( 'dslc_hook_pagebuilder_iframe_after' );
@@ -172,7 +195,7 @@ add_action( 'admin_footer', 'dslc_editing_page_footer' );
 function dslc_editing_page_title() {
 	$screen = get_current_screen();
 
-	if ( 'toplevel_page_livecomposer_editor' !== $screen->id ) {
+	if ( 'toplevel_page_livecomposer_editor' !== $screen->id || ! isset( $_GET['page_id'] ) ) {
 		return;
 	}
 
@@ -196,6 +219,7 @@ add_filter( 'admin_title', 'dslc_editing_page_title' );
  * @param  string $requested_url Original URL.
  * @return string                Filtered URL to use.
  */
+/*
 function dslca_cancel_redirect_frontpage( $redirect_url, $requested_url ) {
 
 	if ( is_front_page() && DS_LIVE_COMPOSER_ACTIVE ) {
@@ -205,3 +229,4 @@ function dslca_cancel_redirect_frontpage( $redirect_url, $requested_url ) {
 	return $redirect_url;
 }
 add_filter( 'redirect_canonical', 'dslca_cancel_redirect_frontpage', 10, 3 );
+*/
