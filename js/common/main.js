@@ -10,7 +10,6 @@
  * - dslc_masonry
  * - dslc_browser_classes
  * - dslc_center
- * - dslc_init_square
  * - dslc_tabs_generate_code
  * - dslc_accordion_generate_code
  * - dslc_tabs
@@ -464,32 +463,6 @@ function dslc_center() {
 }
 
 /**
- * Make element squared
- */
-function dslc_init_square( dslcWrapper ) {
-
-	dslcWrapper = typeof dslcWrapper !== 'undefined' ? dslcWrapper : jQuery('body');
-
-	var dslcElement, dslcHeight, dslcWidth;
-
-	jQuery('.dslc-init-square', dslcWrapper).each( function(){
-
-		dslcElement = jQuery(this);
-		dslcElement.css({ width : 'auto', height : 'auto' });
-		dslcHeight = dslcElement.height();
-		dslcWidth = dslcElement.width();
-
-		if ( dslcHeight > dslcWidth ) {
-
-			dslcElement.width( dslcHeight );
-		} else {
-
-			dslcElement.height( dslcWidth );
-		}
-	});
-}
-
-/**
  * Generate Tabs Code
  */
 function dslc_tabs_generate_code( dslcTabs ) {
@@ -759,7 +732,6 @@ jQuery(document).ready(function($){
 	dslc_browser_classes();
 	dslc_bg_video();
 	dslc_tabs();
-	dslc_init_square();
 	dslc_center();
 
 	// Load More Posts
@@ -1186,7 +1158,6 @@ jQuery(window).load(function(){
 	dslc_responsive_classes();
 	dslc_carousel();
 	dslc_parallax();
-	dslc_init_square();
 	dslc_center();
 	dslc_init_lightbox();
 });
