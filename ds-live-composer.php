@@ -61,9 +61,11 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) ):
 
 	/**
 	 * Is live composer currently active?
+	 *
+	 * $_GET used on regular pages
+	 * $_POST used for AJAX requests
 	 */
-
-	if ( isset( $_REQUEST['dslc'] ) && 'active' === $_REQUEST['dslc'] ) {
+	if ( isset( $_GET['dslc'] ) || isset( $_POST['dslc'] ) ) {
 		$dslc_active = true;
 		define( 'DS_LIVE_COMPOSER_ACTIVE', true );
 	} else {
