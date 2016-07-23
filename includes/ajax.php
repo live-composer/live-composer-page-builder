@@ -358,20 +358,23 @@ function dslc_ajax_display_module_options( $atts ) {
 
 			$curr_value = $module_option['std'];
 
-			if ( isset( $_POST[$module_option['id']] ) )
-				$curr_value = $_POST[$module_option['id']];
+			if ( isset( $_POST[$module_option['id']] ) ) {
+							$curr_value = $_POST[$module_option['id']];
+			}
 
 			/**
 			 * Visibility
 			 */
 
-			if ( isset( $module_option['visibility'] ) )
-				$visibility = false;
-			else
-				$visibility = true;
+			if ( isset( $module_option['visibility'] ) ) {
+							$visibility = false;
+			} else {
+							$visibility = true;
+			}
 
-			if ( $module_option['type'] == 'checkbox' && count( $module_option['choices'] ) < 1 )
-				$visibility = false;
+			if ( $module_option['type'] == 'checkbox' && count( $module_option['choices'] ) < 1 ) {
+							$visibility = false;
+			}
 
 			/**
 			 * Refresh on change
@@ -379,27 +382,30 @@ function dslc_ajax_display_module_options( $atts ) {
 
 			if ( isset( $module_option['refresh_on_change'] ) ) {
 
-				if ( $module_option['refresh_on_change'] )
-					$refresh_on_change = 'active';
-				else
-					$refresh_on_change = 'inactive';
+				if ( $module_option['refresh_on_change'] ) {
+									$refresh_on_change = 'active';
+				} else {
+									$refresh_on_change = 'inactive';
+				}
 
 			} else {
 				$refresh_on_change = 'active';
 			}
 
 			// Force refresh on change for images ( due to the URL -> ID change )
-			if ( $module_option['type'] == 'image' )
-				$refresh_on_change = 'active';
+			if ( $module_option['type'] == 'image' ) {
+							$refresh_on_change = 'active';
+			}
 
 			/**
 			 * Section (functionality and styling)
 			 */
 
-			if ( isset( $module_option['section'] ) )
-				$section = $module_option['section'];
-			else
-				$section = 'functionality';
+			if ( isset( $module_option['section'] ) ) {
+							$section = $module_option['section'];
+			} else {
+							$section = 'functionality';
+			}
 
 			/**
 			 * Tab
@@ -451,12 +457,14 @@ function dslc_ajax_display_module_options( $atts ) {
 			}
 
 			$ext = ' ';
-			if ( isset( $module_option['ext'] ) )
-				$ext = $module_option['ext'];
+			if ( isset( $module_option['ext'] ) ) {
+							$ext = $module_option['ext'];
+			}
 
 			$affect_on_change_append = '';
-			if ( isset( $module_option['affect_on_change_el'] ) && isset( $module_option['affect_on_change_rule'] ) )
-				$affect_on_change_append = 'data-affect-on-change-el="' . $module_option['affect_on_change_el'] . '" data-affect-on-change-rule="' . $module_option['affect_on_change_rule'] . '"';
+			if ( isset( $module_option['affect_on_change_el'] ) && isset( $module_option['affect_on_change_rule'] ) ) {
+							$affect_on_change_append = 'data-affect-on-change-el="' . $module_option['affect_on_change_el'] . '" data-affect-on-change-rule="' . $module_option['affect_on_change_rule'] . '"';
+			}
 
 			/**
 			 * List of options that need not toggle
@@ -629,18 +637,22 @@ function dslc_ajax_display_module_options( $atts ) {
 							$slider_max = 100;
 							$slider_increment = 1;
 
-							if ( isset( $module_option['min'] ) )
-								$slider_min = $module_option['min'];
+							if ( isset( $module_option['min'] ) ) {
+															$slider_min = $module_option['min'];
+							}
 
-							if ( isset( $module_option['max'] ) )
-								$slider_max = $module_option['max'];
+							if ( isset( $module_option['max'] ) ) {
+															$slider_max = $module_option['max'];
+							}
 
-							if ( isset( $module_option['increment'] ) )
-								$slider_increment = $module_option['increment'];
+							if ( isset( $module_option['increment'] ) ) {
+															$slider_increment = $module_option['increment'];
+							}
 
 							$numeric_option_type = dslc_get_option( 'lc_numeric_opt_type', 'dslc_plugin_options_other' );
-							if ( empty( $numeric_option_type ) )
-								$numeric_option_type = 'slider';
+							if ( empty( $numeric_option_type ) ) {
+															$numeric_option_type = 'slider';
+							}
 
 						?>
 
@@ -876,15 +888,17 @@ function dslc_ajax_save_composer( $atts ) {
 		$post_id = $_POST['dslc_post_id'];
 
 		// Add/update the post/page with the composer code
-		if ( update_post_meta( $post_id, 'dslc_code', $composer_code ) )
-			$response['status'] = 'success';
-		else
-			$response['status'] = 'failed';
+		if ( update_post_meta( $post_id, 'dslc_code', $composer_code ) ) {
+					$response['status'] = 'success';
+		} else {
+					$response['status'] = 'failed';
+		}
 
 		// Add/update the post/page with the content for search
 		// wp_kses_post – Sanitize content for allowed HTML tags for post content.
-		if ( update_post_meta( $post_id, 'dslc_content_for_search', wp_kses_post( $content_for_search ) ) )
-			$response['status'] = 'success';
+		if ( update_post_meta( $post_id, 'dslc_content_for_search', wp_kses_post( $content_for_search ) ) ) {
+					$response['status'] = 'success';
+		}
 
 		// Delete draft code
 		delete_post_meta( $post_id, 'dslc_code_draft' );
@@ -930,10 +944,11 @@ function dslc_ajax_save_draft_composer( $atts ) {
 		$post_id = $_POST['dslc_post_id'];
 
 		// Add/update the post/page with the composer code
-		if ( update_post_meta( $post_id, 'dslc_code_draft', $composer_code ) )
-			$response['status'] = 'success';
-		else
-			$response['status'] = 'failed';
+		if ( update_post_meta( $post_id, 'dslc_code_draft', $composer_code ) ) {
+					$response['status'] = 'success';
+		} else {
+					$response['status'] = 'failed';
+		}
 
 		// Encode response
 		$response_json = json_encode( $response );
@@ -1066,10 +1081,11 @@ function dslc_ajax_save_template( $atts ) {
 		$templates = get_option( 'dslc_templates' );
 
 		// No templates = make empty array OR templates found = unserialize
-		if ( $templates === false )
-			$templates = array();
-		else
-			$templates = maybe_unserialize( $templates );
+		if ( $templates === false ) {
+					$templates = array();
+		} else {
+					$templates = maybe_unserialize( $templates );
+		}
 
 		// Append new template to templates array
 		$templates[$template_id] = array(
@@ -1313,10 +1329,11 @@ function dslc_ajax_save_preset() {
 		$module_id = stripslashes( $_POST['dslc_module_id'] );
 
 		// Save
-		if ( dslc_save_preset( $preset_name, $preset_code_raw, $module_id ) )
-			$response['status'] = 'success';
-		else
-			$response['status'] = 'error';
+		if ( dslc_save_preset( $preset_name, $preset_code_raw, $module_id ) ) {
+					$response['status'] = 'success';
+		} else {
+					$response['status'] = 'error';
+		}
 
 		// Encode response
 		$response_json = json_encode( $response );

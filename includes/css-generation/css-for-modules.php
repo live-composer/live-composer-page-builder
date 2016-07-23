@@ -287,6 +287,24 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 							$do_css_output_background = true;
 						}
 
+						// Adjust font-family output.
+						if ( 'font-family' === $rule ) {
+
+							$font_families = array();
+							$font_families = explode( ',', $value );
+
+							$value = '';
+
+							foreach ( $font_families as $font ) {
+								$font = trim( $font );
+								$font = '"' . $font . '",';
+
+								$value .= $font;
+							}
+
+							$value = rtrim( $value, ',' );
+						}
+
 						$css_output_rule .= $rule . ':' . $value . $important_append . ';';
 
 						if ( stristr( $rule, 'background-' ) && 'background-color' !== $rule ) {

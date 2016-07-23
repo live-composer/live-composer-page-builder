@@ -105,7 +105,7 @@ function dslc_row_display_options() {
 
 					if ( ! strpos( $curr_value, '#' ) ) {
 
-						$text_color_value =dslc_rgbtohex( $text_color_value );
+						$text_color_value = dslc_rgbtohex( $text_color_value );
 					}
 
 					$color = dslc_get_contrast_bw( $text_color_value );

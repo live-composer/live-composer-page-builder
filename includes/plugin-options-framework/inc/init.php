@@ -91,11 +91,11 @@ function dslc_plugin_options_display( $tab = '' ) {
 
 		<div id="jstabs">
 				<!-- Getting Started Tab -->
-				<div class="tab" <?php if ( $anchor != 'dslc_settings') echo 'style="display:block"'; ; ?> id="tab-for-dslc_getting_started">
+				<div class="tab" <?php if ( $anchor != 'dslc_settings' ) echo 'style="display:block"'; ; ?> id="tab-for-dslc_getting_started">
 					<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-getting-started.php'; ?>
 				</div>
 				<!-- Settings tab -->
-				<div class="tab" <?php if ( $anchor == 'dslc_settings') echo 'style="display:block"'; ; ?>  id="tab-for-tab-settings">
+				<div class="tab" <?php if ( $anchor == 'dslc_settings' ) echo 'style="display:block"'; ; ?>  id="tab-for-tab-settings">
 					<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-settings.php'; ?>
 				</div>
 				<!-- Themes tab -->

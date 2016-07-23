@@ -2864,10 +2864,11 @@ class DSLC_Info_Box extends DSLC_Module {
 
 		global $dslc_active;
 
-		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
-			$dslc_is_admin = true;
-		else
-			$dslc_is_admin = false;
+		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+					$dslc_is_admin = true;
+		} else {
+					$dslc_is_admin = false;
+		}
 
 		$this->module_start( $options );
 
@@ -2875,10 +2876,11 @@ class DSLC_Info_Box extends DSLC_Module {
 
 		// Main Elements
 		$elements = $options['elements'];
-		if ( ! empty( $elements ) )
-			$elements = explode( ' ', trim( $elements ) );
-		else
-			$elements = array();
+		if ( ! empty( $elements ) ) {
+					$elements = explode( ' ', trim( $elements ) );
+		} else {
+					$elements = array();
+		}
 
 		$image_alt = $options['image_alt'];
 		$image_alt_link_url = $options['image_alt_link_url'];

@@ -31,11 +31,11 @@ class DSLC_Options_Extender {
 
 		if ( ! isset( $this->extension_options[$ext_id] ) ) return array();
 
-		foreach( $this->extension_options[$ext_id]['sections'] as $section ) {
+		foreach ( $this->extension_options[$ext_id]['sections'] as $section ) {
 
-			foreach( $section['options'] as $option ) {
+			foreach ( $section['options'] as $option ) {
 
-				if( $option['id'] == $opt_id ) return $option;
+				if ( $option['id'] == $opt_id ) return $option;
 			}
 		}
 
@@ -65,7 +65,7 @@ class DSLC_Options_Extender {
 		// Fill settings stack with panels
 		do_action( 'dslc_extend_admin_panel_options' );
 
-		foreach( $this->extension_options as $extender ) {
+		foreach ( $this->extension_options as $extender ) {
 
 			$extender['extension_id'] = strtolower( $extender['extension_id'] );
 
@@ -73,9 +73,11 @@ class DSLC_Options_Extender {
 			$this->register_setting( $extender );
 
 			// Sections & fields
-			if ( ! is_array( $extender['sections'] ) ) return;
+			if ( ! is_array( $extender['sections'] ) ) {
+				return;
+			}
 
-			foreach( $extender['sections'] as $section ) {
+			foreach ( $extender['sections'] as $section ) {
 
 				$section['extension_id'] = $extender['extension_id'];
 
