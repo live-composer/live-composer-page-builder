@@ -515,18 +515,16 @@ function dslc_module_output_altered( callback ) {
 
 			dslc_generate_code();
 			dslc_show_publish_button();
-			dslc_carousel();
-			dslc_masonry( jQuery('.dslca-module-being-edited', DSLC.Editor.frame) );
+			DSLC.Editor.frameContext.dslc_carousel();
+			DSLC.Editor.frameContext.dslc_masonry( jQuery('.dslca-module-being-edited', DSLC.Editor.frame) );
 
 			jQuery( '.dslca-module-being-edited img' , DSLC.Editor.frame).load( function(){
 
-				dslc_masonry( jQuery('.dslca-module-being-edited', DSLC.Editor.frame) );
-				dslc_center();
+				DSLC.Editor.frameContext.dslc_masonry( jQuery('.dslca-module-being-edited', DSLC.Editor.frame) );
 			});
 
-			dslc_tabs();
-			dslc_init_accordion();
-			dslc_center();
+			DSLC.Editor.frameContext.dslc_tabs();
+			DSLC.Editor.frameContext.dslc_init_accordion();
 
 			if ( callback ) {
 				callback( response );
@@ -591,17 +589,15 @@ function dslc_module_output_reload( dslcModule, callback ) {
 			dslc_generate_code();
 			dslc_show_publish_button();
 
-			dslc_carousel();
-			dslc_masonry( jQuery('.dslca-module-being-edited', DSLC.Editor.frame) );
+			DSLC.Editor.frameContext.dslc_carousel();
+			DSLC.Editor.frameContext.dslc_masonry( jQuery('.dslca-module-being-edited', DSLC.Editor.frame) );
 
 			jQuery( '.dslca-module-being-edited img' , DSLC.Editor.frame).load( function(){
-				dslc_masonry( jQuery('.dslca-module-being-edited', DSLC.Editor.frame) );
-				dslc_center();
+				DSLC.Editor.frameContext.dslc_masonry( jQuery('.dslca-module-being-edited', DSLC.Editor.frame) );
 			});
 
-			dslc_tabs();
-			dslc_init_accordion();
-			dslc_center();
+			DSLC.Editor.frameContext.dslc_tabs();
+			DSLC.Editor.frameContext.dslc_init_accordion();
 
 			if ( callback ) {
 

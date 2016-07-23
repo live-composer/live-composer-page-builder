@@ -8,7 +8,6 @@
  * - dslc_bg_video ( Initiate row BG video )
  * - dslc_parallax
  * - dslc_masonry
- * - dslc_browser_classes
  * - dslc_center
  * - dslc_tabs_generate_code
  * - dslc_accordion_generate_code
@@ -26,7 +25,8 @@ var DSLC = {
 
 /**
  * Responsive Classes
- * TODO: we can delete this function.
+ *
+ * We use it only in Responsive preview panel and for compatibility.
  */
 
 function dslc_responsive_classes( force ) {
@@ -56,7 +56,6 @@ function dslc_responsive_classes( force ) {
 	}
 
 	dslc_masonry();
-	dslc_center();
 }
 
 /**
@@ -406,63 +405,6 @@ function dslc_masonry( dslcWrapper, dslcAnimate ) {
 }
 
 /**
- * Broser class
- */
-
-function dslc_browser_classes() {
-
-	var os = [
-		 'iphone',
-		 'ipad',
-		 'windows',
-		 'mac',
-		 'linux'
-	];
-
-	var match = navigator.appVersion.toLowerCase().match(new RegExp(os.join('|')));
-
-	if (match) {
-
-		jQuery('body').addClass(match[0]);
-	};
-}
-
-/**
- * Center element inside parent
- */
-
-function dslc_center() {
-
-	var dslcElement, dslcContainer, dslcElementHeight, dslcContainerHeight, dslcElementWidth, dslcContainerWidth, dslcTopOffset, dslcLeftOffset;
-
-	jQuery('.dslc-init-center').each(function(){
-
-		// Get elements
-		dslcElement = jQuery(this);
-		dslcContainer = dslcElement.parent();
-
-		// Get height and width
-		dslcElementWidth = dslcElement.outerWidth();
-		dslcElementHeight = dslcElement.outerHeight();
-		dslcContainerWidth = dslcContainer.width();
-		dslcContainerHeight = dslcContainer.height();
-
-		// Get center offset
-		dslcTopOffset = dslcContainerHeight / 2 - dslcElementHeight / 2;
-		dslcLeftOffset = dslcContainerWidth / 2 - dslcElementWidth / 2;
-
-		// Apply offset
-		if ( dslcTopOffset > 0 ) {
-
-			dslcElement.css({ top : dslcTopOffset, left : dslcLeftOffset });
-			dslcElement.css({ visibility : 'visible' });
-		}
-	});
-
-	jQuery( '.dslc-navigation .menu > li:has(ul):not(:has(.dslc-navigation-arrow)) > a').after('<span class="dslc-navigation-arrow dslc-icon dslc-icon-chevron-down"></span>');
-}
-
-/**
  * Generate Tabs Code
  */
 function dslc_tabs_generate_code( dslcTabs ) {
@@ -511,7 +453,7 @@ function dslc_tabs_generate_code( dslcTabs ) {
 }
 
 /**
- * Generate Accordion Code
+ * Generate Code for the New Accordion Tab
  */
 function dslc_accordion_generate_code( dslcAccordion ) {
 
@@ -726,13 +668,14 @@ function dslc_social_share( width, height, url ) {
 	return false;
 }
 
+
+
+
 jQuery(document).ready(function($){
 
 	dslc_el_anim_hover();
-	dslc_browser_classes();
 	dslc_bg_video();
 	dslc_tabs();
-	dslc_center();
 
 	// Load More Posts
 	$(document).on( 'click', '.dslc-pagination-load-more a', function(e){
@@ -1106,6 +1049,7 @@ jQuery(document).ready(function($){
 		}
 	});
 
+
 	$( '.dslc-navigation li' ).mouseenter(function(){
 
 		var subnav = $(this).children('ul');
@@ -1158,13 +1102,11 @@ jQuery(window).load(function(){
 	dslc_responsive_classes();
 	dslc_carousel();
 	dslc_parallax();
-	dslc_center();
 	dslc_init_lightbox();
 });
 
 jQuery(window).resize(function(){
 
-	dslc_center();
 	dslc_responsive_classes();
 	dslc_carousel_responsive();
 });

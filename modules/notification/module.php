@@ -336,12 +336,12 @@ class DSLC_Notification extends DSLC_Module {
 			array(
 				'label' => __( 'Enable/Disable', 'live-composer-page-builder' ),
 				'id' => 'css_close_display',
-				'std' => 'block',
+				'std' => 'flex',
 				'type' => 'select',
 				'choices' => array(
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'block'
+						'value' => 'flex'
 					),
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
@@ -490,11 +490,11 @@ class DSLC_Notification extends DSLC_Module {
 			array(
 				'label' => __( 'Size', 'live-composer-page-builder' ),
 				'id' => 'css_close_size',
-				'std' => '15',
+				'std' => '18',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-notification-box-close',
-				'affect_on_change_rule' => 'width,height',
+				'affect_on_change_rule' => 'width, height',
 				'section' => 'styling',
 				'ext' => 'px',
 				'tab' => __( 'Close', 'live-composer-page-builder' ),
@@ -527,11 +527,11 @@ class DSLC_Notification extends DSLC_Module {
 			array(
 				'label' => __( 'Icon - Size', 'live-composer-page-builder' ),
 				'id' => 'css_close_icon_size',
-				'std' => '12',
+				'std' => '13',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-notification-box-close .dslc-icon',
-				'affect_on_change_rule' => 'font-size',
+				'affect_on_change_rule' => 'font-size, width',
 				'section' => 'styling',
 				'ext' => 'px',
 				'tab' => __( 'Close', 'live-composer-page-builder' ),
@@ -825,7 +825,7 @@ class DSLC_Notification extends DSLC_Module {
 				<?php if ( $dslc_active ) : ?>
 					<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook"><?php _e( 'Open in WP Editor', 'live-composer-page-builder' ); ?></span></div>
 				<?php endif; ?>
-				<span class="dslc-notification-box-close"><span class="dslc-icon dslc-icon-remove dslc-init-center"></span></span>
+				<span class="dslc-notification-box-close"><span class="dslc-icon dslc-icon-remove"></span></span>
 			</div><!-- .dslc-notification-box -->
 
 			<?php

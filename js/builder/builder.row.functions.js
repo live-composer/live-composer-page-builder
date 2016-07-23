@@ -558,9 +558,9 @@ function dslc_row_import( rowCode ) {
 			jQuery('#dslc-main', DSLC.Editor.frame).append( response.output );
 
 			// Call other functions
-			dslc_bg_video();
-			dslc_carousel();
-			dslc_masonry( jQuery('#dslc-main', DSLC.Editor.frame).find('.dslc-modules-section:last-child') );
+			DSLC.Editor.frameContext.dslc_bg_video();
+			DSLC.Editor.frameContext.dslc_carousel();
+			DSLC.Editor.frameContext.dslc_masonry( jQuery('#dslc-main', DSLC.Editor.frame).find('.dslc-modules-section:last-child') );
 			dslc_drag_and_drop();
 			dslc_show_publish_button();
 			dslc_generate_code();

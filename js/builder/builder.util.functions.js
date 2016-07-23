@@ -217,7 +217,7 @@ jQuery(document).ready(function($) {
 		if ( dslcRule == 'background-image' ) {
 
 			dslcVal = 'url("' + dslcVal + '")';
-			dslc_bg_video();
+			DSLC.Editor.frameContext.dslc_bg_video();
 		}
 
 		if ( dslcFieldID == 'bg_image_attachment' ) {
@@ -333,7 +333,7 @@ jQuery(document).ready(function($) {
 			if ( dslcFieldID == 'bg_image_attachment' ) {
 
 				dslcEl.addClass( 'dslc-init-parallax' );
-				dslc_parallax();
+				DSLC.Editor.frameContext.dslc_parallax();
 			} else if ( dslcFieldID == 'type' ) {
 
 				if ( dslcVal == 'full' ) {
@@ -344,7 +344,7 @@ jQuery(document).ready(function($) {
 					dslcEl.removeClass('dslc-full');
 				}
 
-				dslc_masonry();
+				DSLC.Editor.frameContext.dslc_masonry();
 			}
 		} else if ( dslcFieldID == 'columns_spacing' ) {
 
@@ -369,7 +369,7 @@ jQuery(document).ready(function($) {
 				dslcVideoVal = dslcVideoVal.replace( '.webm', '' );
 				dslcVideoVal = dslcVideoVal.replace( '.mp4', '' );
 				jQuery('.dslc-bg-video-inner', dslcEl).html('<video><source type="video/mp4" src="' + dslcVideoVal + '.mp4" /><source type="video/webm" src="' + dslcVideoVal + '.webm" /></video>');
-				dslc_bg_video();
+				DSLC.Editor.frameContext.dslc_bg_video();
 			}
 
 		} else if ( dslcFieldID == 'bg_image_thumb' ) {
@@ -430,7 +430,7 @@ jQuery(document).ready(function($) {
 		dslc_module_output_altered();
 	});
 
-	// Preview Module Settings once any setting changed
+	// Live Preview for Module Settings Change
 	jQuery(document).on( 'change', '.dslca-module-edit-field', function(){
 
 		// Hide/Show tabs
@@ -512,7 +512,7 @@ jQuery(document).ready(function($) {
 				jQuery('body').removeClass('dslca-new-preset-added');
 			});
 
-		} else { // Do not refresh on change
+		} else { // Do not refresh from the server, but using JS
 
 			/**
 			 * Live Preview
@@ -577,6 +577,9 @@ jQuery(document).ready(function($) {
 					}, 100);
 				}
 
+			/**
+			 * Checkbox
+			 */
 			} else if ( dslcOption.hasClass('dslca-module-edit-field-checkbox') ) {
 
 				var dslcOptionChoices = jQuery('input[type="checkbox"]', dslcOptionWrap);
@@ -594,6 +597,9 @@ jQuery(document).ready(function($) {
 				});
 			}
 
+			/**
+			 * All other option types
+			 */
 			if ( ! dslcOption.hasClass('dslca-module-edit-field-font')  ) {
 
 				var dslcExt = dslcOption.data('ext') || '';
@@ -620,7 +626,9 @@ jQuery(document).ready(function($) {
 
 				dslcAffectOnChangeRule.split(',').forEach(function(rule){
 
-					var module = $(".dslca-module-being-edited", DSLC.Editor.frame);
+					rule = rule.replace(/\s+/g, '');
+
+					var module = jQuery(".dslca-module-being-edited", DSLC.Editor.frame);
 
 					jQuery( dslcAffectOnChangeEl, module ).css( rule , dslcAffectOnChangeVal + dslcExt );
 				});

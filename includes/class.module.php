@@ -1312,7 +1312,7 @@ class DSLC_Module {
 			array(
 				'label' => 'Size',
 				'id' => 'css_arrows_size',
-				'std' => '23',
+				'std' => '24',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-carousel-nav-prev,.dslc-carousel-nav-next',

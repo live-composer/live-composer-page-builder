@@ -1330,5 +1330,4 @@ class DSLC_Accordion extends DSLC_Module {
 		$this->module_end( $options );
 
 	}
-
 }

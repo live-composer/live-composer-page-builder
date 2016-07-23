@@ -1369,23 +1369,6 @@ html {
 	content: "\f204";
 }
 
-	.windows.mozilla .dslc-module-front {
-		outline: 0;
-	}
-
-	.windows.mozilla .dslc-modules-area:hover .dslc-module-front {
-		box-shadow: 0 0 0 2px #d3d3d3;
-	}
-
-	.windows.mozilla .dslc-modules-area:hover .dslc-module-front:hover {
-		box-shadow: 0 0 0 2px #5890e5;
-	}
-
-	.windows.mozilla .dslc-modules-area.dslca-options-hovered .dslc-module-front {
-		outline: 0;
-		box-shadow: none;
-	}
-
 .dslc-modules-area {
 	outline: 0;
 }
@@ -1402,16 +1385,9 @@ html {
 	box-shadow: 0 0 0 2px #D3D3D3;
 }
 
-
-
 .dslc-modules-area-empty.dslca-options-hovered {
 	outline: none !important;
 }
-
-	.windows.mozilla .dslc-modules-area.dslca-options-hovered {
-		outline: 0;
-		box-shadow: 0 0 0 2px #5890e5;
-	}
 
 .dslc-module-front.ui-sortable-helper {
 	background: #5890e5;
@@ -1656,15 +1632,6 @@ html {
 		/*outline-color: #eabba9;*/
 		box-shadow: 0 0 0 2px #eabba9;
 	}
-
-	.windows.mozilla .dslc-modules-section {
-		outline: 0;
-	}
-
-	.windows.mozilla .dslc-modules-section:hover {
-		box-shadow: 0 0 0 2px #eabba9;
-	}
-
 		.dslc-modules-section-inner {
 			min-height: 50px;
 		}
@@ -1872,10 +1839,6 @@ html {
 			margin-top: 10px;
 			position: relative;
 			z-index: 99999;
-		}
-
-		.windows.mozilla .dslca-modules-area-manage-inner {
-			margin-right: 2px;
 		}
 
 		.dslca-horizontal .dslca-modules-area-manage-inner {
@@ -3897,59 +3860,6 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 	    font-size: 0.1px;
 	    position: absolute;
 	}
-
-
-/*
-body.dslc-res-tablet.dslca-enabled::before {
-  background: black;
-  border-radius: 20px 20px 0 0;
-  content: "";
-  display: block;
-  height: 60px;
-  margin-left: -10px;
-  margin-top: -60px;
-  position: absolute;
-  width: 1044px;
-}
-
-body.dslc-res-tablet.dslca-enabled::after {
-  background: black;
-  border-radius: 0 0 20px 20px;
-  content: "";
-  display: block;
-  height: 60px;
-  margin-bottom: -60px;
-  margin-left: -10px;
-  position: absolute;
-  width: 1044px;
-}
-*/
-
-/*
-Disabled responsive preview styling as it doesn't work well with media queries
-
-body.dslc-res-tablet.dslca-enabled,
-body.dslc-res-phone.dslca-enabled {
-	border: 15px solid black;
-	border-right-width: 60px;
-	border-left-width: 60px;
-	border-radius: 30px;
-	margin: 60px auto;
-	max-height: 768px;
-	max-width: 1023px;
-	overflow: scroll;
-	box-shadow: 8px -8px 50px 0 rgba(24, 28, 33, 0.77);
-}
-
-body.dslc-res-phone.dslca-enabled {
-	border: 15px solid black;
-	border-top-width: 60px;
-	border-bottom-width: 100px;
-	max-height: 1023px;
-	max-width: 767px;
-
-}
-*/
 
 /**
  * Spectrum color picker hides the color input automatically,

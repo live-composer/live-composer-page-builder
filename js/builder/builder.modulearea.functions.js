@@ -367,10 +367,9 @@ function dslc_modules_area_width_set( area, newWidth ) {
 		.data('size', newWidth);
 
 	// Call other functions
-	dslc_center();
 	dslc_generate_code();
 	dslc_show_publish_button();
-	dslc_masonry();
+	DSLC.Editor.frameContext.dslc_masonry();
 
 }
 

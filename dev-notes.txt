@@ -1,0 +1,7 @@
+JS tips:
+
+Call JavaScript function defined inside iframe (preview area):
+DSLC.Editor.frameContext.funciton_name();
+
+(all the functions defined in main.js should be called that way from builder js files)
+

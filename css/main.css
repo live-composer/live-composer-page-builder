@@ -193,7 +193,11 @@ body.rtl .dslc-last-col {
 			background: #c9c9c9;
 			border: 0px solid transparent;
 			border-radius: 3px;
-			display: inline-block;
+
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
+
 			height: 23px;
 			position: relative;
 			width: 23px;
@@ -213,9 +217,9 @@ body.rtl .dslc-last-col {
 			.dslc-carousel-nav-next span {
 				color: #fff;
 				font-size: 10px;
-				position: absolute;
-				left: 0;
-				right: 0;
+				/*position: absolute;*/
+				/*left: 0;*/
+				/*right: 0;*/
 				text-align: center;
 				font-weight: normal;
 			}
@@ -583,10 +587,6 @@ body.rtl .dslc-last-col {
 		display: none;
 	}
 
-.dslc-init-center {
-	visibility: hidden;
-}
-
 .dslc-init-topleft {
 	position: absolute !important;
 	top: 0 !important;
@@ -702,22 +702,6 @@ body.rtl .dslc-last-col {
 			background: #000;
 		}
 
-/*
-#dslc-content[max-width~="850px"] {
-
-}
-
-	.dslc-modules-area[max-width~="850px"] .dslc-res-sm-auto.dslc-post.dslc-2-col {
-		width: 31.91489%;
-		margin-bottom: 15px;
-	}
-
-	.dslc-modules-area[max-width~="850px"] .dslc-res-sm-auto.dslc-post.dslc-2-col:nth-child(3n+3) {
-		margin-right: 0;
-	}
-*/
-
-
 
 
 .dslc-col {
@@ -764,17 +748,6 @@ body.rtl .dslc-last-col {
 /**
  * Responsive ( User Set )
  */
-
-body.dslc-res-phone .dslc-col {
-	width: 100%;
-	margin: 0;
-	/*margin-bottom: 30px;*/
-	min-width: 0px;
-}
-
-body.dslc-res-phone .dslc-module-front.dslc-col {
-	margin-bottom: 0;
-}
 
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px)  {
 
@@ -1080,33 +1053,6 @@ body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-post-thumb .dslc-o
  */
 
 /**
- * Show On / Hide On – Old code (js based)
- */
-/*
-.dslc-res-big .dslc-hide-on-desktop,
-.dslc-res-smaller-monitor .dslc-hide-on-desktop {
-	display: none !important;
-}
-
-.dslc-res-tablet .dslc-hide-on-tablet {
-	display: none !important;
-}
-
-.dslc-res-phone .dslc-hide-on-phone {
-	display: none !important;
-}
-
-.dslca-enabled.dslc-res-big .dslc-hide-on-desktop,
-.dslca-enabled.dslc-res-smaller-monitor .dslc-hide-on-desktop {
-	display: block !important;
-}
-
-.dslca-composer-hidden.dslc-res-big .dslc-hide-on-desktop,
-.dslca-composer-hidden.dslc-res-smaller-monitor .dslc-hide-on-desktop {
-	display: none !important;
-}
-*/
-/**
  * Show On / Hide On (media queries)
  */
 
@@ -1137,6 +1083,17 @@ body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-post-thumb .dslc-o
 
 /* Smartphone */
 @media only screen and ( max-width: 767px ) {
+
+	.dslc-col {
+		width: 100%;
+		margin: 0;
+		/*margin-bottom: 30px;*/
+		min-width: 0px;
+	}
+
+	.dslc-module-front.dslc-col {
+		margin-bottom: 0;
+	}
 
 	.dslc-hide-on-phone {
 		display: none !important;

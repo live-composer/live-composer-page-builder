@@ -35,7 +35,7 @@ function dslc_template_load( template ) {
 			jQuery('#dslc-main', DSLC.Editor.frame).html( response.output );
 
 			// Call other functions
-			dslc_carousel();
+			DSLC.Editor.frameContext.dslc_carousel();
 			dslc_drag_and_drop();
 			dslc_show_publish_button();
 			dslc_generate_code();
@@ -79,8 +79,7 @@ function dslc_template_import() {
 			dslc_hide_modal( '', '.dslca-modal-templates-import' );
 
 			// Call other functions
-			dslc_bg_video();
-			dslc_center();
+			DSLC.Editor.frameContext.dslc_bg_video();
 			dslc_drag_and_drop();
 			dslc_show_publish_button();
 			dslc_generate_code();

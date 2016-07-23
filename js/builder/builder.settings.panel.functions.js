@@ -1246,6 +1246,7 @@ function dslc_module_options_icon_returnid() {
 
 		// Close modal window
 		dslc_hide_modal( '', jQuery('.dslca-modal:visible') );
+		jQuery('input.icon-modal-active').removeClass('icon-modal-active');
 	});
 }
 

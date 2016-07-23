@@ -457,8 +457,7 @@ function dslc_drag_and_drop() {
 					jQuery('.dslca-module', modulesArea).remove();
 
 					setTimeout( function(){
-						dslc_center();
-						dslc_masonry( dslcJustAdded );
+						DSLC.Editor.frameContext.dslc_masonry( dslcJustAdded );
 						jQuery('body').removeClass('dslca-anim-in-progress dslca-module-drop-in-progress');
 					}, 700 );
 
@@ -473,10 +472,10 @@ function dslc_drag_and_drop() {
 					jQuery('.dslca-save-draft-composer-hook').css({ 'visibility' : 'visible' });
 
 					// Generete
-					dslc_carousel();
-					dslc_tabs();
-					dslc_init_accordion();
-					dslc_center();
+					DSLC.Editor.frameContext.dslc_carousel();
+					DSLC.Editor.frameContext.dslc_tabs();
+					DSLC.Editor.frameContext.dslc_init_accordion();
+
 					dslc_generate_code();
 					dslc_show_publish_button();
 
