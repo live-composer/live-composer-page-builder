@@ -756,7 +756,7 @@ function dslc_editor_code() {
 		</div>
 	<?php
 
-} add_action( 'dslca_editing_page_footer', 'dslc_editor_code' );
+} add_action( 'dslca_editing_screen_footer', 'dslc_editor_code' );
 
 
 /**

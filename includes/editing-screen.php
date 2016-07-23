@@ -10,11 +10,11 @@
  *
  * Table of Contents
  *
- * dslc_editing_page ( Register hidden page in WP Admin used as a wrapper for LC editing )
- * dslc_editing_page_content ( Output iframe with preview of the page we are editing. )
- * dslc_editing_page_head ( Code to output in the <head> section of the editing page (WP Admin). )
- * dslc_editing_page_footer ( Code to output before </body> on the editing page (WP Admin). )
- * dslc_editing_page_title ( Change page title for the editing page (WP Admin). )
+ * dslc_editing_screen ( Register hidden page in WP Admin used as a wrapper for LC editing )
+ * dslc_editing_screen_content ( Output iframe with preview of the page we are editing. )
+ * dslc_editing_screen_head ( Code to output in the <head> section of the editing page (WP Admin). )
+ * dslc_editing_screen_footer ( Code to output before </body> on the editing page (WP Admin). )
+ * dslc_editing_screen_title ( Change page title for the editing page (WP Admin). )
  * dslca_cancel_redirect_frontpage (Cancel canonical redirect for the main page.)
  */
 
@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.1
  */
-function dslc_editing_page() {
+function dslc_editing_screen() {
 
 	global $dslc_plugin_options;
 
@@ -49,14 +49,14 @@ function dslc_editing_page() {
 		__( 'Live Composer Editing', 'live-composer-page-builder' ),
 		$capability, // Capability.
 		'livecomposer_editor', // Menu slug.
-		'dslc_editing_page_content', // Callable $function.
+		'dslc_editing_screen_content', // Callable $function.
 		$icon_svg, // Icon_url.
 		'99' // Int $position.
 	);
 
 	remove_menu_page( 'livecomposer_editor', 'livecomposer_editor' );
 
-} add_action( 'admin_menu', 'dslc_editing_page' );
+} add_action( 'admin_menu', 'dslc_editing_screen' );
 
 
 /**
@@ -67,13 +67,13 @@ function dslc_editing_page() {
  *
  * @since 1.1
  */
-function dslc_editing_page_content() {
+function dslc_editing_screen_content() {
 
 	$screen = get_current_screen();
 
 	// Proceed only if current page is Live Composer editing page in WP Admin
 	// and has access role.
-	if ( 'toplevel_page_livecomposer_editor' !== $screen->id && ! current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+	if ( 'toplevel_page_livecomposer_editor' !== $screen->id || ! current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 		return;
 	}
 
@@ -103,7 +103,7 @@ function dslc_editing_page_content() {
 	// Output iframe with page being edited.
 	if ( $preview_output ) {
 
-		do_action( 'dslca_editing_page_preview_before' );
+		do_action( 'dslca_editing_screen_preview_before' );
 
 		$frame_url = set_url_scheme( add_query_arg( $previewurl_keys, get_permalink( $previewurl_keys['page_id'] ) ) );
 
@@ -111,7 +111,7 @@ function dslc_editing_page_content() {
 		echo '<iframe id="page-builder-frame" src="' . esc_url( $frame_url ) . '"></iframe>';
 		echo '</div>';
 
-		do_action( 'dslca_editing_page_preview_after' );
+		do_action( 'dslca_editing_screen_preview_after' );
 	} else {
 
 		// Output error if no page_id for editing provided.
@@ -130,12 +130,12 @@ function dslc_editing_page_content() {
  *
  * @since 1.1
  */
-function dslc_editing_page_head() {
+function dslc_editing_screen_head() {
 
 	$screen = get_current_screen();
 
 	// Proceed only if current page is Live Composer editing page in WP Admin.
-	if ( 'toplevel_page_livecomposer_editor' !== $screen->id && ! current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+	if ( 'toplevel_page_livecomposer_editor' !== $screen->id || ! current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 		return;
 	}
 	?>
@@ -164,9 +164,9 @@ function dslc_editing_page_head() {
 	</style>
 	<?php
 
-	do_action( 'dslca_editing_page_head' );
+	do_action( 'dslca_editing_screen_head' );
 }
-add_action( 'admin_head', 'dslc_editing_page_head' );
+add_action( 'admin_head', 'dslc_editing_screen_head' );
 
 /**
  * Code to output before </body> on the editing page (WP Admin).
@@ -175,20 +175,20 @@ add_action( 'admin_head', 'dslc_editing_page_head' );
  *
  * @since 1.1
  */
-function dslc_editing_page_footer() {
+function dslc_editing_screen_footer() {
 	$screen = get_current_screen();
 
-	if ( 'toplevel_page_livecomposer_editor' !== $screen->id && ! current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+	if ( 'toplevel_page_livecomposer_editor' !== $screen->id || ! current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 		return;
 	}
 
 	?>
 	<script type="text/javascript">jQuery('#wpadminbar,#wpfooter,#adminmenuwrap,#adminmenuback,#adminmenumain,#screen-meta, .update-nag, .updated').remove();</script>
 	<?php
-	do_action( 'dslca_editing_page_footer' );
+	do_action( 'dslca_editing_screen_footer' );
 }
 
-add_action( 'admin_footer', 'dslc_editing_page_footer' );
+add_action( 'admin_footer', 'dslc_editing_screen_footer' );
 
 
 /**
@@ -196,7 +196,7 @@ add_action( 'admin_footer', 'dslc_editing_page_footer' );
  *
  * @since 1.1
  */
-function dslc_editing_page_title() {
+function dslc_editing_screen_title() {
 	$screen = get_current_screen();
 
 	if ( 'toplevel_page_livecomposer_editor' !== $screen->id || ! isset( $_GET['page_id'] ) ) {
@@ -207,4 +207,4 @@ function dslc_editing_page_title() {
 	return $title;
 }
 
-add_filter( 'admin_title', 'dslc_editing_page_title' );
+add_filter( 'admin_title', 'dslc_editing_screen_title' );

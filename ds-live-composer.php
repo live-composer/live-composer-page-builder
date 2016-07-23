@@ -92,7 +92,7 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) ):
 	 * Include all the files
 	 */
 
-	include DS_LIVE_COMPOSER_ABS . '/includes/editing-page.php';
+	include DS_LIVE_COMPOSER_ABS . '/includes/editing-screen.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/other-functions.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/css-generation/css-for-modules.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/functions.php';
