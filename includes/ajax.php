@@ -749,7 +749,7 @@ function dslc_ajax_display_module_options( $atts ) {
 								<span><?php _e( 'Spread', 'live-composer-page-builder' ); ?></span><input class="dslca-module-edit-option-box-shadow-spread" step="0.1" type="number" value="<?php echo $box_shadow_spread_val; ?>" />
 							</div>
 							<div class="dslca-module-edit-option-box-shadow-single">
-								<span><?php _e( 'Color', 'live-composer-page-builder' ); ?></span><input class="dslca-module-edit-option-box-shadow-color" type="text" value="<?php echo $box_shadow_color_val; ?>" />
+								<span><?php _e( 'Color', 'live-composer-page-builder' ); ?></span><input type="text" class="dslca-module-edit-option-box-shadow-color" value="<?php echo $box_shadow_color_val; ?>" />
 							</div>
 
 							<input type="hidden" class="dslca-module-edit-field dslca-module-edit-field-box-shadow" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" <?php echo $affect_on_change_append ?> />

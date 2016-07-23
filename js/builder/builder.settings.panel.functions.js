@@ -17,16 +17,18 @@ jQuery(document).ready(function($){
 	dslc_module_options_box_shadow();
 	dslc_module_options_text_shadow();
 
-	jQuery(document).on('click', '.dslca-module-edit-field-colorpicker', function() {
 
+	/* Initiate all the color picker controls on the module/section options panel. */
+	var dslca_options_with_colorpicker = '';
+	dslca_options_with_colorpicker += '.dslca-module-edit-field-colorpicker';
+	dslca_options_with_colorpicker += ', .dslca-modules-section-edit-field-colorpicker';
+	dslca_options_with_colorpicker += ', .dslca-module-edit-option-box-shadow-color';
+	dslca_options_with_colorpicker += ', .dslca-module-edit-option-text-shadow-color';
+
+	// Init color picker on click only to not polute DOM with unwanted elements.
+	jQuery(document).on('click', dslca_options_with_colorpicker, function() {
 		dslc_module_options_color( this );
-		$( this ).next().click();
-	});
-
-	jQuery(document).on('click', '.dslca-modules-section-edit-field-colorpicker', function() {
-
-		dslc_module_options_color( this );
-		$( this ).next().click();
+		jQuery( this ).next().click();
 	});
 
 	/* Initiate all the slider controls on the module options panel. */
@@ -1321,111 +1323,6 @@ function dslc_module_options_box_shadow() {
 }
 
 /**
- * MODULES SETTINGS PANEL - Box Shadow Color Picker
- */
-function dslc_modules_options_box_shadow_color() {
-
-	/**
-	 * Color Pallete
-	 */
-
-	var dslcColorPallete = [],
-	currStorage,
-	index;
-
-	dslcColorPallete[0] = [];
-	dslcColorPallete[1] = [];
-	dslcColorPallete[2] = [];
-	dslcColorPallete[3] = [];
-
-	if ( localStorage['dslcColorpickerPalleteStorage'] == undefined ) {
-	} else {
-		currStorage = JSON.parse( localStorage['dslcColorpickerPalleteStorage'] );
-		for	( index = 0; index < currStorage.length; index++ ) {
-			var key = Math.floor( index / 3 );
-			if ( key < 4 ) {
-				dslcColorPallete[key].push( currStorage[index] );
-			}
-		}
-	}
-
-	jQuery('.dslca-module-edit-option-box-shadow-color').each( function(){
-
-		var inputField = jQuery(this),
-		currColor = inputField.val(),
-		dslcColorField, dslcColorFieldVal;
-
-		jQuery(this).spectrum({
-			color: currColor,
-			showInput: true,
-			allowEmpty: true,
-			showAlpha: true,
-			clickoutFiresChange: true,
-			cancelText: '',
-			chooseText: '',
-			preferredFormat: 'rgb',
-			showPalette: true,
-			palette: dslcColorPallete,
-			move: function( color ) {
-
-				// The option field
-				dslcColorField = jQuery(this);
-
-				// The new color
-				if ( color == null ) {
-					dslcColorFieldVal = '';
-					// dslcColorFieldVal = 'transparent';
-				} else {
-					dslcColorFieldVal = color.toRgbString().replace(/ /g,'');
-				}
-
-				// Change current value of option
-				dslcColorField.val( dslcColorFieldVal ).trigger('change');
-
-			},
-			change: function( color ) {
-
-				// The option field
-				dslcColorField = jQuery(this);
-
-				// The new color
-				if ( color == null ) {
-					dslcColorFieldVal = '';
-					// dslcColorFieldVal = 'transparent';
-				} else {
-					dslcColorFieldVal = color.toRgbString().replace(/ /g,'');
-				}
-
-				// Change current value of option
-				dslcColorField.val( dslcColorFieldVal ).trigger('change');
-
-				// Update pallete local storage
-				if ( localStorage['dslcColorpickerPalleteStorage'] == undefined ) {
-					var newStorage = [ dslcColorFieldVal ];
-					localStorage['dslcColorpickerPalleteStorage'] = JSON.stringify(newStorage);
-				} else {
-					var newStorage = JSON.parse( localStorage['dslcColorpickerPalleteStorage'] );
-					if ( newStorage.indexOf( dslcColorFieldVal ) == -1 ) {
-						newStorage.unshift( dslcColorFieldVal );
-					}
-					localStorage['dslcColorpickerPalleteStorage'] = JSON.stringify(newStorage);
-				}
-
-			},
-			show: function( color ) {
-				jQuery('body').addClass('dslca-disable-selection');
-			},
-			hide: function() {
-				jQuery('body').removeClass('dslca-disable-selection');
-			}
-		});
-
-		// Save this element to destroy on panel closed.
-		DSLC.Editor.colorpickers.push( jQuery(this) );
-	});
-}
-
-/**
  * MODULES SETTINGS PANEL - Text Shadow Option Type
  */
 function dslc_module_options_text_shadow() {
@@ -1449,74 +1346,6 @@ function dslc_module_options_text_shadow() {
 		var textShadowVal = textShadowHor + 'px ' + textShadowVer + 'px ' + textShadowBlur + 'px ' + textShadowColor;
 
 		textShadowInput.val( textShadowVal ).trigger('change');
-	});
-}
-
-/**
- * MODULES SETTINGS PANEL - Text Shadow Color Picker
- */
-function dslc_modules_options_text_shadow_color() {
-
-	jQuery('.dslca-module-edit-option-text-shadow-color').each( function(){
-
-		var inputField = jQuery(this),
-		currColor = inputField.val(),
-		dslcColorField, dslcColorFieldVal;
-
-		jQuery(this).spectrum({
-			color: currColor,
-			showInput: true,
-			allowEmpty: true,
-			showAlpha: true,
-			clickoutFiresChange: true,
-			cancelText: '',
-			chooseText: '',
-			preferredFormat: 'rgb',
-			move: function( color ) {
-
-				// The option field
-				dslcColorField = jQuery(this);
-
-				// The new color
-				if ( color == null ) {
-
-					dslcColorFieldVal = '';
-					// dslcColorFieldVal = 'transparent';
-				} else {
-
-					dslcColorFieldVal = color.toRgbString().replace(/ /g,'');
-				}
-
-				// Change current value of option
-				dslcColorField.val( dslcColorFieldVal ).trigger('change');
-			},
-			change: function( color ) {
-
-				// The option field
-				dslcColorField = jQuery(this);
-
-				// The new color
-				if ( color == null ) {
-
-					dslcColorFieldVal = '';
-					// dslcColorFieldVal = 'transparent';
-				} else {
-
-					dslcColorFieldVal = color.toRgbString().replace(/ /g,'');
-				}
-
-				// Change current value of option
-				dslcColorField.val( dslcColorFieldVal ).trigger('change');
-			},
-			show: function( color ) {
-
-				jQuery('body').addClass('dslca-disable-selection');
-			},
-			hide: function() {
-
-				jQuery('body').removeClass('dslca-disable-selection');
-			}
-		});
 	});
 }
 
@@ -1564,7 +1393,7 @@ function dslc_module_options_color( field ) {
 		}
 	}
 
-	var query = field || '.dslca-module-edit-field-colorpicker';
+	var query = field;
 
 	jQuery(query).each( function(){
 
@@ -1575,6 +1404,7 @@ function dslc_module_options_color( field ) {
 			showInput: true,
 			allowEmpty: true,
 			showAlpha: true,
+			// showInitial: true,
 			clickoutFiresChange: true,
 			cancelText: '',
 			chooseText: '',
@@ -1593,7 +1423,7 @@ function dslc_module_options_color( field ) {
 					// dslcColorFieldVal = 'transparent';
 				} else {
 
-					dslcColorFieldVal = color.toRgbString();
+					dslcColorFieldVal = color.toRgbString().replace(/ /g,'');
 				}
 
 				// Change current value of option
@@ -1629,7 +1459,7 @@ function dslc_module_options_color( field ) {
 					// dslcColorFieldVal = 'transparent';
 				} else {
 
-					dslcColorFieldVal = color.toRgbString();
+					dslcColorFieldVal = color.toRgbString().replace(/ /g,'');
 				}
 
 				// Change current value of option
