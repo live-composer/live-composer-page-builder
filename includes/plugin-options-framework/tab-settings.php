@@ -1,3 +1,10 @@
+<?php
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
+?>
 <div class="wp-clearfix" id="dslc-settings-frame">
 
 	<ul class="nav-subtabs wp-clearfix widget-inside" id="dslc-settings-column">

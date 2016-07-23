@@ -1,5 +1,11 @@
 <?php
 
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
+
 class DSLC_Info_Box extends DSLC_Module {
 
 	var $module_id;
@@ -2915,7 +2921,7 @@ class DSLC_Info_Box extends DSLC_Module {
 						<?php if ( in_array( 'icon', $elements ) ) : ?>
 							<div class="dslc-info-box-image">
 								<div class="dslc-info-box-image-inner">
-									<span class="dslc-icon dslc-icon-<?php echo $options['icon_id'];  /* dslc-init-center */ ?>"></span>
+									<span class="dslc-icon dslc-icon-<?php echo $options['icon_id'];?>"></span>
 									<?php if ( ! empty( $options['icon_link'] ) ) : ?>
 										<a class="dslc-info-box-image-link" href="<?php echo $options['icon_link']; ?>" target="<?php echo $options['icon_link_target']; ?>"></a>
 									<?php endif; ?>

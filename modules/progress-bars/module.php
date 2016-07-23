@@ -1,5 +1,11 @@
 <?php
 
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
+
 class DSLC_Progress_Bars extends DSLC_Module {
 
 	var $module_id;

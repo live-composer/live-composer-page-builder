@@ -5,6 +5,13 @@
  *
  * dslc_post_templates_init ( Initiates the post template system )
  */
+
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
+
 function dslc_post_templates_init() {
 
 	global $dslc_var_templates_pt;

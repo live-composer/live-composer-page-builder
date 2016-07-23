@@ -11,6 +11,13 @@
  * dslc_sc_category_description ( Category Description Shortcode )
  */
 
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
+
+
 /**
  * Notification Shortcode
  *

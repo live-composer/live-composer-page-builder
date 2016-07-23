@@ -1,5 +1,11 @@
 <?php
 
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
+
 if ( dslc_is_module_active( 'DSLC_Partners' ) )
 	include DS_LIVE_COMPOSER_ABS . '/modules/partners/functions.php';
 
@@ -1785,8 +1791,8 @@ class DSLC_Partners extends DSLC_Module {
 						<?php if ( $show_carousel_arrows ) : ?>
 							<span class="dslc-carousel-nav fr">
 								<span class="dslc-carousel-nav-inner">
-									<a href="#" class="dslc-carousel-nav-prev"><span class="dslc-icon-chevron-left dslc-init-center"></span></a>
-									<a href="#" class="dslc-carousel-nav-next"><span class="dslc-icon-chevron-right dslc-init-center"></span></a>
+									<a href="#" class="dslc-carousel-nav-prev"><span class="dslc-icon-chevron-left"></span></a>
+									<a href="#" class="dslc-carousel-nav-next"><span class="dslc-icon-chevron-right"></span></a>
 								</span>
 							</span><!-- .carousel-nav -->
 						<?php endif; ?>

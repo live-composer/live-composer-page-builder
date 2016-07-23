@@ -25,6 +25,12 @@
  * - dslc_set_user_templates ( Set user templates )
  */
 
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
+
 /**
  * Load text domain
  *
@@ -367,7 +373,7 @@ function dslc_body_class( $classes ) {
 	}
 
 	// If page in LC mode, force the class?
-	if ( isset( $_GET['dslc'] ) && 'active' === $_GET['dslc'] ) {
+	if ( isset( $_GET['dslc'] ) ) {
 		$has_lc_content = true;
 	}
 
@@ -554,7 +560,6 @@ function dslc_is_editor_active( $capability = 'save' ) {
 	} else {
 		return false;
 	}
-
 }
 
 /**

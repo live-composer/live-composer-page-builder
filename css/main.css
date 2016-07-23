@@ -45,90 +45,6 @@ body.admin-bar #dslc-header.dslc-header-pos-absolute {
 	z-index: 999999;
 }
 
-#dslc-header.dslca-header-low-z-index,
-.dslca-drag-in-progress #dslc-header {
-	z-index: 0;
-}
-
-#dslc-content {
-	position: relative;
-}
-
-.dslca-container .dslca-close-composer-hook,
-.dslca-activate-composer-hook,
-.dslca-container .dslca-hide-composer-hook,
-.dslca-container .dslca-show-composer-hook {
-	background: #e55f5f;
-	border-radius: 3px;
-	bottom: 4px;
-	color: #fff;
-	cursor: pointer;
-	display: block;
-	font-size: 11px;
-	font-family: 'Roboto', sans-serif;
-	font-weight: 900;
-	line-height: 1;
-	padding: 11px 12px;
-	text-transform: uppercase;
-	text-decoration: none;
-	white-space: nowrap;
-	float: left;
-	margin-left: 5px;
-}
-
-/* Use Open Sans here as Roboto is not available at this point */
-.dslca-activate-composer-hook {
-	font-family: 'Open Sans', sans-serif;
-}
-
-.dslca-container .dslca-close-composer-hook:hover {
-	background: #f27562;
-}
-
-.dslca-container .dslca-hide-composer-hook {
-	background: #06b2ac;
-}
-
-.dslca-container .dslca-show-composer-hook {
-	background: #9268a9;
-}
-
-.dslca-close-composer-hook:hover,
-.dslca-activate-composer-hook:hover,
-.dslca-activate-composer-hook:visited,
-.dslca-close-composer-hook:visited {
-	color: #fff;
-}
-
-.dslca-activate-composer-hook {
-	background: #54c13f;
-	color: #fff;
-	position: fixed;
-	z-index: 99999;
-	right: 5px;
-	bottom: 5px;
-}
-
-.dslca-activate-composer-hook:hover {
-	background: #40D71F;
-}
-
-.dslca-activate-composer-hook.dslca-position-left {
-	right: auto;
-	left: 5px;
-}
-
-.dslca-container .dslca-show-composer-hook {
-	display: none;
-}
-
-	.dslca-container .dslca-close-composer-hook .dslca-icon,
-	.dslca-activate-composer-hook .dslca-icon,
-	.dslca-container .dslca-hide-composer-hook .dslca-icon,
-	.dslca-container .dslca-show-composer-hook .dslca-icon {
-		color: rgba( 255, 255, 255, 0.66 );
-		margin-right: 5px;
-	}
 
 .dslc-modules-section {
 	border: 0px solid transparent;
@@ -277,7 +193,11 @@ body.rtl .dslc-last-col {
 			background: #c9c9c9;
 			border: 0px solid transparent;
 			border-radius: 3px;
-			display: inline-block;
+
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
+
 			height: 23px;
 			position: relative;
 			width: 23px;
@@ -297,9 +217,9 @@ body.rtl .dslc-last-col {
 			.dslc-carousel-nav-next span {
 				color: #fff;
 				font-size: 10px;
-				position: absolute;
-				left: 0;
-				right: 0;
+				/*position: absolute;*/
+				/*left: 0;*/
+				/*right: 0;*/
 				text-align: center;
 				font-weight: normal;
 			}
@@ -351,6 +271,53 @@ body.rtl .dslc-last-col {
 	opacity: 0;
 	max-height: 100px;
 }
+
+
+.dslca-activate-composer-hook {
+	background: #54c13f;
+	color: #fff;
+	border-radius: 3px;
+
+	position: fixed;
+	z-index: 99999;
+	right: 5px;
+	bottom: 5px;
+
+	cursor: pointer;
+	display: block;
+	font-size: 11px;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 900;
+	line-height: 1;
+	padding: 11px 12px;
+	text-transform: uppercase;
+	text-decoration: none;
+	white-space: nowrap;
+	float: left;
+	margin-left: 5px;
+}
+
+.dslca-activate-composer-hook:hover {
+	background: #40D71F;
+}
+
+.dslca-activate-composer-hook:visited {
+	color: #fff;
+}
+
+.dslca-activate-composer-hook.dslca-position-left {
+	right: auto;
+	left: 5px;
+}
+
+.dslca-activate-composer-hook .dslca-icon {
+	color: rgba( 255, 255, 255, 0.66 );
+	margin-right: 5px;
+}
+
+
+
+
 
 /**
  * Loader
@@ -620,10 +587,6 @@ body.rtl .dslc-last-col {
 		display: none;
 	}
 
-.dslc-init-center {
-	visibility: hidden;
-}
-
 .dslc-init-topleft {
 	position: absolute !important;
 	top: 0 !important;
@@ -739,22 +702,6 @@ body.rtl .dslc-last-col {
 			background: #000;
 		}
 
-/*
-#dslc-content[max-width~="850px"] {
-
-}
-
-	.dslc-modules-area[max-width~="850px"] .dslc-res-sm-auto.dslc-post.dslc-2-col {
-		width: 31.91489%;
-		margin-bottom: 15px;
-	}
-
-	.dslc-modules-area[max-width~="850px"] .dslc-res-sm-auto.dslc-post.dslc-2-col:nth-child(3n+3) {
-		margin-right: 0;
-	}
-*/
-
-
 
 
 .dslc-col {
@@ -802,17 +749,6 @@ body.rtl .dslc-last-col {
  * Responsive ( User Set )
  */
 
-body.dslc-res-phone .dslc-col {
-	width: 100%;
-	margin: 0;
-	/*margin-bottom: 30px;*/
-	min-width: 0px;
-}
-
-body.dslc-res-phone .dslc-module-front.dslc-col {
-	margin-bottom: 0;
-}
-
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px)  {
 
 	.dslc-modules-section.dslc-init-parallax {
@@ -830,20 +766,6 @@ body.dslc-res-phone .dslc-module-front.dslc-col {
 	}
 
 }
-
-/**
- * Responsive PREVIEW ( when a tab for responsive options is selected )
- */
-
- body.dslca-enabled.dslc-res-tablet #dslc-content {
- 	max-width: 768px;
- 	margin: 0 auto;
- }
-
- body.dslca-enabled.dslc-res-phone #dslc-content {
- 	max-width: 480px;
- 	margin: 0 auto;
- }
 
  /**
   * Animations moved outside of media queries
@@ -1114,42 +1036,27 @@ body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-post-thumb .dslc-o
 	opacity: 1;
 }
 
+
+#dslc-header.dslca-header-low-z-index,
+.dslca-drag-in-progress #dslc-header {
+	z-index: 0;
+}
+
+#dslc-content {
+	position: relative;
+}
+
+
 /**
  * ----------------------------------------------------------------------
  * Responsive classes and properties
  */
 
 /**
- * Show On / Hide On – Old code (js based)
+ * Show On / Hide On (media queries)
  */
 
-.dslc-res-big .dslc-hide-on-desktop,
-.dslc-res-smaller-monitor .dslc-hide-on-desktop {
-	display: none !important;
-}
-
-.dslc-res-tablet .dslc-hide-on-tablet {
-	display: none !important;
-}
-
-.dslc-res-phone .dslc-hide-on-phone {
-	display: none !important;
-}
-
-.dslca-enabled.dslc-res-big .dslc-hide-on-desktop,
-.dslca-enabled.dslc-res-smaller-monitor .dslc-hide-on-desktop {
-	display: block !important;
-}
-
-.dslca-composer-hidden.dslc-res-big .dslc-hide-on-desktop,
-.dslca-composer-hidden.dslc-res-smaller-monitor .dslc-hide-on-desktop {
-	display: none !important;
-}
-
-/**
- * Show On / Hide On – New code (media queries)
- */
-
+/* Desktop */
 @media only screen and (min-width : 1025px) {
 
 	.dslc-hide-on-desktop {
@@ -1165,7 +1072,7 @@ body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-post-thumb .dslc-o
 	}
 }
 
-
+/* Tablet */
 @media only screen and (min-width : 768px) and (max-width : 1024px)  {
 
 	.dslc-hide-on-tablet {
@@ -1174,7 +1081,19 @@ body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-post-thumb .dslc-o
 
 }
 
+/* Smartphone */
 @media only screen and ( max-width: 767px ) {
+
+	.dslc-col {
+		width: 100%;
+		margin: 0;
+		/*margin-bottom: 30px;*/
+		min-width: 0px;
+	}
+
+	.dslc-module-front.dslc-col {
+		margin-bottom: 0;
+	}
 
 	.dslc-hide-on-phone {
 		display: none !important;

@@ -14,6 +14,12 @@
  * - dslc_hf_get_footer ( Get the footer output code )
  */
 
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
+
 /**
  * Register custom post type and add options
  *
@@ -552,7 +558,7 @@ function dslc_hf_get_header( $post_ID = false ) {
 	$header_footer = dslc_hf_get_ID( $post_ID );
 
 	// If there is a header applied
-	if ( $header_footer['header'] ) {
+	if ( $header_footer['header'] && is_numeric ( $header_footer['header'] ) ) {
 
 		// Get the header LC code
 		$header_code = get_post_meta( $header_footer['header'], 'dslc_code', true );
@@ -570,11 +576,13 @@ function dslc_hf_get_header( $post_ID = false ) {
 
 		}
 
-		// If editor active
+		// If editor active? Add a link to the header editing.
 		if ( dslc_is_editor_active( 'access' ) ) {
 
-			// Set the HTML for the edit overlay
-			$append = '<div class="dslc-hf-block-overlay"><a target="_blank" href="' . add_query_arg( 'dslc', 'active', get_permalink( $header_footer['header'] ) ) . '" class="dslc-hf-block-overlay-button dslca-link">Edit Header</a></div>';
+			$header_link = DSLC_EditorInterface::get_editor_link( $header_footer['header'] );
+
+			// Set the HTML for the edit overlay.
+			$append = '<div class="dslc-hf-block-overlay"><a target="_blank" href="' . $header_link . '" class="dslc-hf-block-overlay-button dslca-link">' . __( 'Edit Header','live-composer-page-builder' ) . '</a></div>';
 
 		}
 
@@ -618,7 +626,7 @@ function dslc_hf_get_footer( $post_ID = false ) {
 	$header_footer = dslc_hf_get_ID( $post_ID );
 
 	// If there is a footer applied
-	if ( $header_footer['footer'] ) {
+	if ( $header_footer['footer'] && is_numeric ( $header_footer['footer'] )  ) {
 
 		// Get the footer LC code
 		$footer_code = get_post_meta( $header_footer['footer'], 'dslc_code', true );
@@ -636,15 +644,17 @@ function dslc_hf_get_footer( $post_ID = false ) {
 
 		}
 
-		// If editor active
+		// If editor active? Add a link to the footer editing.
 		if ( dslc_is_editor_active( 'access' ) ) {
 
-			// Set the HTML for the edit overlay
-			$append = '<div class="dslc-hf-block-overlay"><a target="_blank" href="' . add_query_arg( 'dslc', 'active', get_permalink( $header_footer['footer'] ) ) . '" class="dslc-hf-block-overlay-button dslca-link">Edit Footer</a></div>';
+			$footer_link = DSLC_EditorInterface::get_editor_link( $header_footer['footer'] );
+
+			// Set the HTML for the edit overlay.
+			$append = '<div class="dslc-hf-block-overlay"><a target="_blank" href="' . $footer_link . '" class="dslc-hf-block-overlay-button dslca-link">' . __( 'Edit Footer','live-composer-page-builder' ) . '</a></div>';
 
 		}
 
-		// Add the header code to the variable holder
+		// Add the header code to the variable holder.
 		return '<div id="dslc-footer"  class="dslc-footer-pos-' . $footer_position . '">' . do_shortcode( $footer_code ) . $append . '</div>' . $wrapper_end;
 
 	// If no header applied

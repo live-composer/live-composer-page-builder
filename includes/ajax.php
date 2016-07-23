@@ -19,6 +19,12 @@
  * - dslc_ajax_save_preset ( Save module styling preset )
  */
 
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
+
 /**
  * Add/display a new module section
  *
@@ -45,7 +51,7 @@ function dslc_ajax_add_modules_section( $atts ) {
 
 		// The output
 		$output = '<div class="dslc-modules-section dslc-modules-section-empty ' . $extra_classes . '" style="' . dslc_row_get_style() . '">
-			<div class="dslc-bg-video"><div class="dslc-bg-video-inner"></div><div class="dslc-bg-video-overlay"></div></div>
+			<div class="dslc-bg-video dslc-force-show"><div class="dslc-bg-video-inner"></div><div class="dslc-bg-video-overlay"></div></div>
 			<div class="dslc-modules-section-wrapper">
 				<div class="dslc-modules-section-inner dslc-clearfix">
 					<div class="dslc-modules-area dslc-col dslc-12-col" data-size="12">
@@ -69,8 +75,6 @@ function dslc_ajax_add_modules_section( $atts ) {
 									<span class="dslca-manage-action dslca-delete-modules-area-hook" title="Delete" ><span class="dslca-icon dslc-icon-remove"></span></span>
 								</div>
 							</div>
-							
-							<div class="dslca-module-loading"><div class="dslca-module-loading-inner"></div></div>
 						</div>
 					</div>
 				</div><!-- .dslc-module-section-inner -->
@@ -84,7 +88,6 @@ function dslc_ajax_add_modules_section( $atts ) {
 					</div>
 				</div>
 				<div class="dslca-modules-section-settings">' . dslc_row_get_options_fields() . '</div><!-- .dslca-module-section-settings -->
-				<div class="dslca-module-loading dslca-modules-area-loading"><div class="dslca-module-loading-inner"></div></div>
 			</div><!-- .dslc-module-section-wrapper -->
 		</div>';
 
@@ -144,8 +147,6 @@ function dslc_ajax_add_modules_area( $atts ) {
 					<span class="dslca-manage-action dslca-delete-modules-area-hook" title="Delete" ><span class="dslca-icon dslc-icon-remove"></span></span>
 				</div>
 			</div>
-
-			<div class="dslca-module-loading"><div class="dslca-module-loading-inner"></div></div>
 		</div>';
 
 		// Set the output
@@ -189,7 +190,7 @@ function dslc_ajax_add_module( $atts ) {
 			$preload_preset = 'disabled';
 		}
 
-		// If post ID is not numberic stop execution?
+		// If post ID is not numeric stop execution?
 		if ( ! is_numeric( $post_id ) ) {
 			return;
 		}
@@ -488,6 +489,11 @@ function dslc_ajax_display_module_options( $atts ) {
 				'elements',
 				'post_elements',
 				'carousel_elements',
+				'thumb_resize_width',
+				'thumb_resize_width_manual',
+				'button_icon_id',
+				'icon_pos',
+				'button_state',
 			);
 
 			$control_with_toggle = '';
@@ -532,7 +538,7 @@ function dslc_ajax_display_module_options( $atts ) {
 							/**
 							 * Display styling control toggle [On/Off]
 							 */
-							if ( ! in_array( $module_option['id'], $controls_without_toggle, true ) && in_array( $module_option['section'], $sections_with_toggle, true ) ) {
+							if ( ! in_array( $module_option['id'], $controls_without_toggle, true ) && in_array( $module_option['section'], $sections_with_toggle, true ) && ! stristr($module_option['id'], 'css_res_') ) {
 								echo'<span class="dslc-control-toggle dslc-icon dslc-icon-"></span>';
 							}
 						?>
@@ -559,32 +565,29 @@ function dslc_ajax_display_module_options( $atts ) {
 								<option value="<?php echo $select_option['value']; ?>" <?php if ( $curr_value == $select_option['value'] ) echo 'selected="selected"'; ?>><?php echo $select_option['label']; ?></option>
 							<?php endforeach; ?>
 						</select>
+						<span class="dslca-icon dslc-icon-caret-down"></span>
 
 					<?php elseif ( $module_option['type'] == 'checkbox' ) : ?>
 
 						<?php
 
-							// Current Value Array
-							if ( empty( $curr_value ) ) {
-															$curr_value = array();
-							} else {
-															$curr_value = explode( ' ', trim( $curr_value ) );
-							}
+						// Current Value Array
+						if ( empty( $curr_value ) ) {
 
-							// Determined brakepoints
-							$chck_amount = count( $module_option['choices'] );
-							// $chck_breakpoint = ceil( $chck_amount / 1 );
-							$chck_count = 0;
+							$curr_value = array();
+						} else {
+
+							$curr_value = explode( ' ', trim( $curr_value ) );
+						}
 
 						?>
 
 						<div class="dslca-module-edit-option-checkbox-wrapper">
-							<?php foreach ( $module_option['choices'] as  $checkbox_option ) : $chck_count++; ?>
+							<?php foreach ( $module_option['choices'] as  $checkbox_option ) : ?>
 								<div class="dslca-module-edit-option-checkbox-single">
 									<span class="dslca-module-edit-option-checkbox-hook"><span class="dslca-icon <?php if ( in_array( $checkbox_option['value'], $curr_value ) ) echo 'dslc-icon-check'; else echo 'dslc-icon-check-empty'; ?>"></span><?php echo $checkbox_option['label']; ?></span>
 									<input type="checkbox" class="dslca-module-edit-field dslca-module-edit-field-checkbox" data-id="<?php echo $module_option['id']; ?>" name="<?php echo $module_option['id']; ?>" value="<?php echo $checkbox_option['value']; ?>" <?php if ( in_array( $checkbox_option['value'], $curr_value ) ) echo 'checked="checked"'; ?> <?php echo $affect_on_change_append ?> />
 								</div><!-- .dslca-module-edit-option-checkbox-single -->
-								<?php /* if ( $chck_count == $chck_breakpoint ) { echo '<br>'; $chck_count = 0; } */?>
 							<?php endforeach; ?>
 						</div><!-- .dslca-module-edit-option-checkbox-wrapper -->
 
@@ -758,7 +761,7 @@ function dslc_ajax_display_module_options( $atts ) {
 								<span><?php _e( 'Spread', 'live-composer-page-builder' ); ?></span><input class="dslca-module-edit-option-box-shadow-spread" step="0.1" type="number" value="<?php echo $box_shadow_spread_val; ?>" />
 							</div>
 							<div class="dslca-module-edit-option-box-shadow-single">
-								<span><?php _e( 'Color', 'live-composer-page-builder' ); ?></span><input class="dslca-module-edit-option-box-shadow-color" type="text" value="<?php echo $box_shadow_color_val; ?>" />
+								<span><?php _e( 'Color', 'live-composer-page-builder' ); ?></span><input type="text" class="dslca-module-edit-option-box-shadow-color" value="<?php echo $box_shadow_color_val; ?>" />
 							</div>
 
 							<input type="hidden" class="dslca-module-edit-field dslca-module-edit-field-box-shadow" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" <?php echo $affect_on_change_append ?> />

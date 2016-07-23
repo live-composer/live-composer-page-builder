@@ -14,6 +14,11 @@
  * – dslc_module_front ( HTML output for the modules/elements )
  */
 
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
 
 /**
  * Display the composer panels in active editing mode
@@ -24,9 +29,9 @@ function dslc_display_composer() {
 
 	global $dslc_active;
 
-	$dslc_admin_interface_on = apply_filters( 'dslc_admin_interface_on_frontend', true );
+	$screen = get_current_screen();
 
-	if ( true !== $dslc_admin_interface_on ) {
+	if ( $screen->id != 'toplevel_page_livecomposer_editor' ) {
 
 		return;
 	}
@@ -35,7 +40,8 @@ function dslc_display_composer() {
 	wp_reset_query();
 
 	// Show the composer to users who are allowed to view it.
-	if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) :
+	// $dslc_active &&
+	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) :
 
 		$default_section = dslc_get_option( 'lc_default_opts_section', 'dslc_plugin_options_other' );
 
@@ -46,7 +52,7 @@ function dslc_display_composer() {
 
 		?>
 
-			<div class="dslca-container dslca-state-off" data-post-id="<?php the_ID(); ?>">
+			<div class="dslca-container dslca-state-off" data-post-id="<?php echo $_GET['page_id']; ?>">
 
 				<div class="dslca-header dslc-clearfix" data-default-section="<?php echo $default_section; ?>">
 
@@ -100,7 +106,7 @@ function dslc_display_composer() {
 					<span class="dslca-hide-composer-hook"><span class="dslca-icon dslc-icon-arrow-down"></span><?php _e( 'Hide Editor', 'live-composer-page-builder' ); ?></span>
 
 					<!-- Disable -->
-					<a href="<?php the_permalink(); ?>" class="dslca-close-composer-hook"><span class="dslca-icon dslc-icon-remove"></span><?php _e( 'Disable Editor', 'live-composer-page-builder' ); ?></a>
+					<a href="<?php the_permalink( $_GET['page_id'] ); ?>" class="dslca-close-composer-hook"><span class="dslca-icon dslc-icon-remove"></span><?php _e( 'Disable Editor', 'live-composer-page-builder' ); ?></a>
 
 					<div class="dslc-clear"></div>
 
@@ -176,7 +182,7 @@ function dslc_display_composer() {
 
 					<!-- Module Templates -->
 
-					<div class="dslca-section dslca-templates dslc-clearfix" data-bg="#ca564f">
+					<div class="dslca-section dslca-templates dslc-clearfix">
 
 						<div class="dslca-section-title">
 							<?php _e( 'Designs', 'live-composer-page-builder' ); ?>
@@ -187,7 +193,7 @@ function dslc_display_composer() {
 						<span class="dslca-open-modal-hook" data-modal=".dslca-modal-templates-import"><span class="dslca-icon dslc-icon-download-alt"></span><?php _e( 'Import Page Code', 'live-composer-page-builder' ); ?></span>
 						<span class="dslca-open-modal-hook" data-modal=".dslca-modal-templates-export"><span class="dslca-icon dslc-icon-upload-alt"></span><?php _e( 'Export Page Code', 'live-composer-page-builder' ); ?></span>
 
-						<div class="dslca-modal dslca-modal-templates-save" data-bg="#ca564f">
+						<div class="dslca-modal dslca-modal-templates-save">
 
 							<form class="dslca-template-save-form">
 								<input type="text" id="dslca-save-template-title" placeholder="<?php _e( 'Name of the template', 'live-composer-page-builder' ); ?>">
@@ -197,7 +203,7 @@ function dslc_display_composer() {
 
 						</div><!-- .dslca-modal -->
 
-						<div class="dslca-modal dslca-modal-templates-export" data-bg="#ca564f">
+						<div class="dslca-modal dslca-modal-templates-export">
 
 							<form class="dslca-template-export-form">
 								<textarea id="dslca-export-code"></textarea>
@@ -206,7 +212,7 @@ function dslc_display_composer() {
 
 						</div><!-- .dslca-modal -->
 
-						<div class="dslca-modal dslca-modal-templates-import" data-bg="#ca564f">
+						<div class="dslca-modal dslca-modal-templates-import">
 
 							<form class="dslca-template-import-form">
 								<textarea id="dslca-import-code" placeholder="<?php _e( 'Enter the exported code heree', 'live-composer-page-builder' ); ?>"></textarea>
@@ -228,7 +234,7 @@ function dslc_display_composer() {
 
 					<!-- Module Template Load -->
 
-					<div class="dslca-section dslca-templates-load dslc-clearfix" data-bg="#ca564f">
+					<div class="dslca-section dslca-templates-load dslc-clearfix">
 
 						<span class="dslca-go-to-section-hook dslca-section-back" data-section=".dslca-templates"><span class="dslca-icon dslc-icon-reply"></span></span>
 
@@ -260,7 +266,6 @@ function dslc_display_composer() {
 				<!-- Module Template Export -->
 
 				<textarea id="dslca-code"></textarea>
-				<div class="dslca-module-options-front-backup"></div>
 
 				<div class="dslca-container-loader">
 					<div class="dslca-container-loader-inner followingBallsGWrap">
@@ -319,106 +324,7 @@ function dslc_display_composer() {
 
 	endif;
 
-	global $dslc_var_templates_pt;
-
-	// Get the position of the activation button
-	$activate_button_position = dslc_get_option( 'lc_module_activate_button_pos', 'dslc_plugin_options_other' );
-	if ( empty( $activate_button_position ) ) {
-		$activate_button_position = 'right';
-	}
-
-	// LC and WP Customizer do not work well together, don't proceed if customizer active
-	if ( ( ! function_exists( 'is_customize_preview' ) || ! is_customize_preview() ) ) :
-
-		// If editor not active and user can access the editor
-		if ( ! DS_LIVE_COMPOSER_ACTIVE && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) :
-
-			// If a singular page ( posts and pages )
-			if ( is_singular() ) {
-
-				// If a page or a template go ahead normally
-				if ( is_page() || get_post_type() == 'dslc_templates' || ! isset( $dslc_var_templates_pt[get_post_type()] ) ) {
-
-					?><a href="<?php echo add_query_arg( array('dslc' => 'active'), get_permalink() ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo $activate_button_position; ?>"><?php _e( 'Activate Live Composer', 'live-composer-page-builder' ); ?></a><?php
-
-				// If not a page or a template post type
-				} else {
-
-					// Check if it has a template attached to it
-					$template = dslc_st_get_template_ID( get_the_ID() );
-
-					if ( $template ) {
-
-						?><a target="_blank" href="<?php echo add_query_arg( array('dslc' => 'active', 'preview_id' => get_the_ID()), get_permalink( $template ) ); ?>" class="dslca-activate-composer-hook"><?php _e( 'Edit Template', 'live-composer-page-builder' ); ?></a><?php
-
-					} else {
-
-						?><a target="_blank" href="<?php echo admin_url( 'post-new.php?post_type=dslc_templates' ); ?>" class="dslca-activate-composer-hook"><?php _e( 'Create Template', 'live-composer-page-builder' ); ?></a><?php
-
-					}
-
-				}
-
-			// If a 404 page
-			} elseif ( is_404() ) {
-
-				// Get ID of the page set to power the 404 page
-				$template_id = dslc_get_option( '404_page', 'dslc_plugin_options_archives' );
-
-				// If there is a page that powers it
-				if ( $template_id != 'none' ) {
-
-					// Output the button
-					?><a href="<?php echo add_query_arg( array('dslc' => 'active'), get_permalink( $template_id ) ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo $activate_button_position; ?>"><?php _e( 'Activate Live Composer', 'live-composer-page-builder' ); ?></a><?php
-
-				}
-
-			// If a search results page
-			} elseif ( is_search() ) {
-
-				// Get ID of the page set to power the search results page
-				$template_id = dslc_get_option( 'search_results', 'dslc_plugin_options_archives' );
-
-				// If there is a page that powers it?
-				if ( $template_id != 'none' ) {
-
-					// Output the button
-					?><a href="<?php echo esc_attr( add_query_arg( array('dslc' => 'active'), get_permalink( $template_id ) ) ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo $activate_button_position; ?>"><?php _e( 'Activate Live Composer', 'live-composer-page-builder' ); ?></a><?php
-
-				}
-
-			// If authors archives page?
-			} elseif ( is_author() ) {
-
-				// Get ID of the page set to power the author archives
-				$template_id = dslc_get_option( 'author', 'dslc_plugin_options_archives' );
-
-				// If there is a page that powers it?
-				if ( 'none' !== $template_id ) {
-
-					// Output the button.
-					?><a href="<?php echo esc_attr( add_query_arg( array('dslc' => 'active'), get_permalink( $template_id ) ) ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo $activate_button_position; ?>"><?php _e( 'Activate Live Composer', 'live-composer-page-builder' ); ?></a><?php
-
-				}
-			// If other archives ( not author )?
-			} elseif ( is_archive() ) {
-				// Get ID of the page set to power the archives of the shown post type.
-				$template_id = dslc_get_option( get_post_type(), 'dslc_plugin_options_archives' );
-
-				// If there is a page that powers it?
-				if ( 'none' !== $template_id ) {
-
-					// Output the button.
-					?><a href="<?php echo esc_attr( add_query_arg( array('dslc' => 'active'), get_permalink( $template_id ) ) ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo esc_attr( $activate_button_position ); ?>"><?php esc_html_e( 'Activate Live Composer', 'live-composer-page-builder' ); ?></a><?php
-
-				}
-			}
-
-		endif;
-
-	endif;
-
-} add_action( 'wp_footer', 'dslc_display_composer' );
+} add_action( 'admin_footer', 'dslc_display_composer' );
 
 /**
  * Returns array of active modules (false if none)
@@ -574,20 +480,19 @@ function dslc_filter_content( $content ) {
 		return $content;
 	}
 
-	// Global variables
+	// Global variables.
 	global $dslc_should_filter;
 	global $wp_the_query;
 	global $dslc_post_types;
 
-	// Get ID of the post in which the content filter fired
-	$currID = get_the_ID();
+	// Get ID of the post in which the content filter fired.
+	$curr_id = get_the_ID();
 
-
-	// Get ID of the post from the main query
+	// Get ID of the post from the main query.
 	if ( isset( $wp_the_query->queried_object_id ) ) {
-		$realID = $wp_the_query->queried_object_id;
+		$real_id = $wp_the_query->queried_object_id;
 	} else {
-		$realID = 'nope';
+		$real_id = 'nope';
 	}
 
 	// Check if we should we filtering the content
@@ -595,7 +500,7 @@ function dslc_filter_content( $content ) {
 	// 2) Proceed if in a WordPress loop ( https://codex.wordpress.org/Function_Reference/in_the_loop )
 	// 3) Proceed if global var $dslc_should_filter is true
 	// Irrelevant of the other 3 proceed if archives, search or 404 page
-	if ( ( $currID == $realID && in_the_loop() && $dslc_should_filter ) || ( is_archive() && $dslc_should_filter ) || is_author() || is_search() || is_404() ) {
+	if ( ( $curr_id == $real_id && in_the_loop() && $dslc_should_filter ) || ( is_archive() && $dslc_should_filter ) || is_author() || is_search() || is_404() ) {
 
 		// Variables that are used throughout the function
 		$composer_wrapper_before = '';
@@ -706,20 +611,19 @@ function dslc_filter_content( $content ) {
 
 		}
 
-		// If currently showina 404 page
+		// If currently showing 404 page?
 		if ( is_404() ) {
 
 			// Get ID of the page set to power the 404 page
 			$template_id = dslc_get_option( '404_page', 'dslc_plugin_options_archives' );
 
-			// If there is a page that powers it
+			// If there is a page that powers it?
 			if ( $template_id ) {
 
-				// Get LC code of the page
+				// Get LC code of the page.
 				$composer_code = dslc_get_code( $template_id );
 
 			}
-
 		}
 
 		// If currently showing a singular post of a post type which is not "dslc_hf" ( used for header/footer )
@@ -731,7 +635,7 @@ function dslc_filter_content( $content ) {
 
 		}
 
-		// If editor is currently active clear the composer_prepend var
+		// If editor is currently active clear the composer_prepend var.
 		if ( dslc_is_editor_active( 'access' ) ) {
 			$composer_prepend = '';
 		}
@@ -739,51 +643,11 @@ function dslc_filter_content( $content ) {
 		// If editor is currently active generate the LC elements and store them in composer_append var
 		if ( dslc_is_editor_active( 'access' ) ) {
 
-			// Get the editor type from the settings
-			$editor_type = dslc_get_option( 'lc_editor_type', 'dslc_plugin_options_other' );
-
-			// If no editor type set in settings
-			if ( empty( $editor_type ) ) {
-
-				// Default to "both" ( Visual and HTML )
-				$editor_type = 'both';
-
-			}
-
 			// The "Add modules row" and "Import" buttons
 			$composer_append = '<div class="dslca-add-modules-section">
 				<span class="dslca-add-modules-section-hook"><span class="dslca-icon dslc-icon-align-justify"></span>' . __( 'Add Modules Row', 'live-composer-page-builder' ) . '</span>
 				<span class="dslca-import-modules-section-hook"><span class="dslca-icon dslc-icon-download-alt"></span>' . __( 'Import', 'live-composer-page-builder' ) . '</span>
 			</div>';
-
-			// Start output fetching
-			ob_start();
-
-			?>
-				<div class="dslca-wp-editor">
-					<div class="dslca-wp-editor-inner">
-						<?php
-
-							if ( $editor_type == 'visual' ) {
-															wp_editor( '', 'dslcawpeditor', array('quicktags' => false) );
-							} else {
-															wp_editor( '', 'dslcawpeditor' );
-							}
-						?>
-						<div class="dslca-wp-editor-notification">
-							<?php _e( 'Module settings are being loaded. Save/Cancel actions will appear shortly.', 'live-composer-page-builder' ); ?>
-						</div><!-- .dslca-wp-editor-notification -->
-						<div class="dslca-wp-editor-actions">
-							<span class="dslca-wp-editor-save-hook"><?php _e( 'Confirm', 'live-composer-page-builder' ); ?></span>
-							<span class="dslca-wp-editor-cancel-hook"><?php _e( 'Cancel', 'live-composer-page-builder' ); ?></span>
-						</div>
-					</div>
-				</div>
-			<?php
-
-			// Stop output fetching
-			$composer_append .= ob_get_contents();
-			ob_end_clean();
 
 		}
 
@@ -851,6 +715,47 @@ function dslc_filter_content( $content ) {
 	}
 
 } add_filter( 'the_content', 'dslc_filter_content', 101 );
+
+/**
+ * Output hidden TinyMCE editor popup.
+ *
+ * @return void
+ */
+function dslc_editor_code() {
+
+	// Get the editor type from the settings.
+	$editor_type = dslc_get_option( 'lc_editor_type', 'dslc_plugin_options_other' );
+
+	// If no editor type set in settings.
+	if ( empty( $editor_type ) ) {
+
+		// Default to "both" ( Visual and HTML ).
+		$editor_type = 'both';
+
+	}
+
+	?>
+		<div class="dslca-wp-editor">
+			<div class="dslca-wp-editor-inner">
+				<?php
+				if ( 'visual' === $editor_type ) {
+					wp_editor( '', 'dslcawpeditor', array( 'quicktags' => false ) );
+				} else {
+					wp_editor( '', 'dslcawpeditor' );
+				}
+				?>
+				<div class="dslca-wp-editor-notification">
+					<?php _e( 'Module settings are being loaded. Save/Cancel actions will appear shortly.', 'live-composer-page-builder' ); ?>
+				</div><!-- .dslca-wp-editor-notification -->
+				<div class="dslca-wp-editor-actions">
+					<span class="dslca-wp-editor-save-hook"><?php _e( 'Confirm', 'live-composer-page-builder' ); ?></span>
+					<span class="dslca-wp-editor-cancel-hook"><?php _e( 'Cancel', 'live-composer-page-builder' ); ?></span>
+				</div>
+			</div>
+		</div>
+	<?php
+
+} add_action( 'dslca_editing_screen_footer', 'dslc_editor_code' );
 
 
 /**
@@ -1013,7 +918,7 @@ function dslc_modules_section_front( $atts, $content = null ) {
 	 */
 
 	// Overlay
-	$bg_video = '<div class="dslc-bg-video dslc-force-show"><div class="dslc-bg-video-inner"></div><div class="dslc-bg-video-overlay" style="' . $overlay_style . '"></div></div>';
+	$bg_video = '<div class="dslc-bg-video dslc-force-show"><div class="dslc-bg-video-overlay" style="' . $overlay_style . '"></div></div>';
 
 	// BG Video
 	if ( isset( $atts['bg_video'] ) && $atts['bg_video'] !== '' && $atts['bg_video'] !== 'disabled' ) {
@@ -1041,8 +946,29 @@ function dslc_modules_section_front( $atts, $content = null ) {
 
 	}
 
-	// No video HTML if builder innactive or no video
-	if ( ! $dslc_active && $atts['bg_video'] == '' && $atts['bg_image'] == '' && isset( $atts['bg_image_thumb'] ) && $atts['bg_image_thumb'] == 'disabled' ) {
+	$output_bgoverlay = false;
+
+	/**
+	 * Always output bg overlay:
+	 * – if opacity property is set;
+	 * – if LC is in editing mode;
+	 * – if bg_video is set.
+	 */
+
+	if ( stristr( $overlay_style, 'opacity' ) ) {
+		$output_bgoverlay = true;
+	}
+
+	if ( DS_LIVE_COMPOSER_ACTIVE ) {
+		$output_bgoverlay = true;
+	}
+
+	if ( '' !== $atts['bg_video'] ) {
+		$output_bgoverlay = true;
+	}
+
+	// Do not output video HTML code when not needed.
+	if ( ! $output_bgoverlay ) {
 		$bg_video = '';
 	}
 
@@ -1141,10 +1067,6 @@ function dslc_modules_section_front( $atts, $content = null ) {
 					</div>
 				</div>
 				<div class="dslca-modules-section-settings">' . dslc_row_get_options_fields( $atts ) . '</div>';
-
-			// Loading
-			$output .= '<div class="dslca-module-loading dslca-modules-area-loading"><div class="dslca-module-loading-inner"></div></div>';
-
 		}
 
 	$output .= '</div>';
@@ -1200,11 +1122,6 @@ function dslc_modules_area_front( $atts, $content = null ) {
 					<span class="dslca-manage-action dslca-delete-modules-area-hook" title="Delete" ><span class="dslca-icon dslc-icon-remove"></span></span>
 				</div>
 			</div>';
-
-
-			// Loading
-			$output .= '<div class="dslca-module-loading"><div class="dslca-module-loading-inner"></div></div>';
-
 		}
 
 		// Modules output

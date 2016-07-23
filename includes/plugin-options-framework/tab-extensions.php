@@ -1,3 +1,10 @@
+<?php
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
+?>
 <div class="wrap lc-wrap">
 
 <h2 class="dslc-tab-heading">Extend Live Composer with <a href="https://livecomposerplugin.com/add-ons/?utm_source=wp-admin&utm_medium=extension-tab&utm_campaign=section-title" target="_blank">Free Extensions</a></h2>

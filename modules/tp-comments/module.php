@@ -1,5 +1,11 @@
 <?php
 
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
+
 include DS_LIVE_COMPOSER_ABS . '/modules/tp-comments/functions.php';
 
 class DSLC_TP_Comments extends DSLC_Module {

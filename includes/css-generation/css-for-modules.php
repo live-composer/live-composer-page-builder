@@ -9,6 +9,12 @@
  * - dslc_generate_custom_css ( Generate module CSS )
  */
 
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
+
 /**
  * Generate module CSS (for all devices)
  *
@@ -97,7 +103,7 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 		$important_append = ' !important';
 	}
 
-	if ( isset( $_GET['dslc'] ) && 'active' === $_GET['dslc'] ) {
+	if ( isset( $_GET['dslc'] ) ) {
 		$important_append = '';
 	}
 
@@ -120,7 +126,7 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 			$module_settings['css_res_p'] = 'enabled';
 		}
 
-		// If option type is done with CSS and option is set.
+		// If option type is CSS-based and option is set.
 		if ( isset( $option_arr['affect_on_change_el'] ) && isset( $option_arr['affect_on_change_rule'] ) ) {
 
 			// Default.

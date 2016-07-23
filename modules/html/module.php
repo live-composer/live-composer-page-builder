@@ -1,5 +1,11 @@
 <?php
 
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
+
 class DSLC_Html extends DSLC_Module {
 
 	var $module_id;
@@ -272,7 +278,7 @@ class DSLC_Html extends DSLC_Module {
 				'std' => '13',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-html-module-content,.dslc-html-module-content p',
+				'affect_on_change_el' => '.dslc-html-module-content, .dslc-html-module-content p',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'styling',
 				'tab' => __( 'Content', 'live-composer-page-builder' ),
@@ -2972,7 +2978,7 @@ class DSLC_Html extends DSLC_Module {
 				'std' => '13',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-html-module-content',
+				'affect_on_change_el' => '.dslc-html-module-content, .dslc-html-module-content p',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
@@ -2993,6 +2999,53 @@ class DSLC_Html extends DSLC_Module {
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
+
+			array(
+				'label' => __( 'H1 - Font Size', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_h1_font_size',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
+				'std' => '13',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-html-module-content h1',
+				'affect_on_change_rule' => 'font-size',
+				'section' => 'responsive',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				'ext' => 'px'
+			),
+			array(
+				'label' => __( 'H1 - Line Height', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_h1_line_height',
+				'min' => 0,
+				'max' => 120,
+				'increment' => 1,
+				'std' => '13',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-html-module-content h1',
+				'affect_on_change_rule' => 'line-height',
+				'section' => 'responsive',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				'ext' => 'px'
+			),
+			array(
+				'label' => __( 'H1 - Margin Bottom', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_h1_margin_bottom',
+				'min' => -1000,
+				'max' => 1000,
+				'increment' => 1,
+				'std' => '15',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-html-module-content h1',
+				'affect_on_change_rule' => 'margin-bottom',
+				'section' => 'responsive',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				'ext' => 'px'
+			),
+
 			array(
 				'label' => __( 'H2 - Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_h2_font_size',
@@ -3297,7 +3350,7 @@ class DSLC_Html extends DSLC_Module {
 				'std' => '13',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-html-module-content',
+				'affect_on_change_el' => '.dslc-html-module-content, .dslc-html-module-content p',
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
@@ -3318,6 +3371,52 @@ class DSLC_Html extends DSLC_Module {
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px'
 			),
+			array(
+				'label' => __( 'H1 - Font Size', 'live-composer-page-builder' ),
+				'id' => 'css_res_ph_h1_font_size',
+				'min' => 0,
+				'max' => 100,
+				'increment' => 1,
+				'std' => '13',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-html-module-content h1',
+				'affect_on_change_rule' => 'font-size',
+				'section' => 'responsive',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+				'ext' => 'px'
+			),
+			array(
+				'label' => __( 'H1 - Line Height', 'live-composer-page-builder' ),
+				'id' => 'css_res_ph_h1_line_height',
+				'min' => 0,
+				'max' => 120,
+				'increment' => 1,
+				'std' => '13',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-html-module-content h1',
+				'affect_on_change_rule' => 'line-height',
+				'section' => 'responsive',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+				'ext' => 'px'
+			),
+			array(
+				'label' => __( 'H1 - Margin Bottom', 'live-composer-page-builder' ),
+				'id' => 'css_res_p_h1_margin_bottom',
+				'min' => -1000,
+				'max' => 1000,
+				'increment' => 1,
+				'std' => '15',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-html-module-content h1',
+				'affect_on_change_rule' => 'margin-bottom',
+				'section' => 'responsive',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+				'ext' => 'px'
+			),
+
 			array(
 				'label' => __( 'H2 - Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_res_ph_h2_font_size',

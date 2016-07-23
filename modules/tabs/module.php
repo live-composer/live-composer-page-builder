@@ -1,5 +1,11 @@
 <?php
 
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
+
 class DSLC_Tabs extends DSLC_Module {
 
 	var $module_id;
@@ -3820,7 +3826,7 @@ class DSLC_Tabs extends DSLC_Module {
 					<?php else : ?>
 
 						<div class="dslc-tabs-tab-content">
-							<h4 class="dslc-tabs-nav-hook">CLICK TO EDIT</h4>
+							<h4 class="dslc-tabs-nav-hook"><?php _e( 'Click to edit', 'live-composer-page-builder' ); ?></h4>
 							<div class="dslca-editable-content">
 								<?php _e( 'This is just placeholder text.', 'live-composer-page-builder' ); ?>
 							</div>

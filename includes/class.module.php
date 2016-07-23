@@ -1,5 +1,11 @@
 <?php
 
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
+
 class DSLC_Module {
 
 	function shared_options( $options_id, $atts = false ) {
@@ -1306,7 +1312,7 @@ class DSLC_Module {
 			array(
 				'label' => 'Size',
 				'id' => 'css_arrows_size',
-				'std' => '23',
+				'std' => '24',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-carousel-nav-prev,.dslc-carousel-nav-next',
@@ -2054,6 +2060,7 @@ class DSLC_Module {
 
 	function module_start( $options ) {
 
+		global $dslc_active;
 		global $dslc_should_filter;
 		$dslc_should_filter = false;
 
@@ -2137,7 +2144,9 @@ class DSLC_Module {
 		 */
 
 		$title_attr = '';
-		if ( dslc_is_editor_active() ) {
+
+		if ( $dslc_active ) {
+
 			$title_attr = 'title="' . strtoupper( esc_attr( $this->module_title ) ) . '"';
 		}
 
