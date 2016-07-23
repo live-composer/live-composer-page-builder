@@ -71,8 +71,9 @@ function dslc_editing_page_content() {
 
 	$screen = get_current_screen();
 
-	// Proceed only if current page is Live Composer editing page in WP Admin.
-	if ( 'toplevel_page_livecomposer_editor' !== $screen->id ) {
+	// Proceed only if current page is Live Composer editing page in WP Admin
+	// and has access role.
+	if ( 'toplevel_page_livecomposer_editor' !== $screen->id && ! current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 		return;
 	}
 
@@ -99,10 +100,10 @@ function dslc_editing_page_content() {
 	// Set 'dslc' key – indicating that Live Composer editing mode is active.
 	$previewurl_keys['dslc'] = '';
 
-	// Include all the code needed on the editing page.
-	do_action( 'dslc_hook_pagebuilder_iframe_before' );
-
+	// Output iframe with page being edited.
 	if ( $preview_output ) {
+
+		do_action( 'dslca_editing_page_preview_before' );
 
 		$frame_url = set_url_scheme( add_query_arg( $previewurl_keys, get_permalink( $previewurl_keys['page_id'] ) ) );
 
@@ -110,15 +111,14 @@ function dslc_editing_page_content() {
 		echo '<iframe id="page-builder-frame" src="' . esc_url( $frame_url ) . '"></iframe>';
 		echo '</div>';
 
+		do_action( 'dslca_editing_page_preview_after' );
 	} else {
 
+		// Output error if no page_id for editing provided.
 		echo '<div id="dslc-preview-error"><p>';
 		echo esc_attr__( 'Error: No page id provided.', 'live-composer-page-builder' );
 		echo '</p></div>';
 	}
-
-	// Include all the code needed on the editing page.
-	do_action( 'dslc_hook_pagebuilder_iframe_after' );
 }
 
 
@@ -135,7 +135,7 @@ function dslc_editing_page_head() {
 	$screen = get_current_screen();
 
 	// Proceed only if current page is Live Composer editing page in WP Admin.
-	if ( 'toplevel_page_livecomposer_editor' !== $screen->id ) {
+	if ( 'toplevel_page_livecomposer_editor' !== $screen->id && ! current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 		return;
 	}
 	?>
@@ -150,7 +150,8 @@ function dslc_editing_page_head() {
 		   padding: 0;
 		}
 
-		.update-nag, .updated {
+		.update-nag, .updated,
+		#wpadminbar, #wpfooter, #adminmenuwrap, #adminmenuback, #adminmenumain, #screen-meta  {
 			display: none !important;
 			opacity: 0 !important;
 			visibility: hidden !important;
@@ -162,6 +163,8 @@ function dslc_editing_page_head() {
 		}
 	</style>
 	<?php
+
+	do_action( 'dslca_editing_page_head' );
 }
 add_action( 'admin_head', 'dslc_editing_page_head' );
 
@@ -175,13 +178,14 @@ add_action( 'admin_head', 'dslc_editing_page_head' );
 function dslc_editing_page_footer() {
 	$screen = get_current_screen();
 
-	if ( 'toplevel_page_livecomposer_editor' !== $screen->id ) {
+	if ( 'toplevel_page_livecomposer_editor' !== $screen->id && ! current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 		return;
 	}
 
 	?>
-	<script type="text/javascript">jQuery('#wpadminbar,#wpfooter,#adminmenuwrap,#adminmenuback,#adminmenumain,#screen-meta').remove();</script>
+	<script type="text/javascript">jQuery('#wpadminbar,#wpfooter,#adminmenuwrap,#adminmenuback,#adminmenumain,#screen-meta, .update-nag, .updated').remove();</script>
 	<?php
+	do_action( 'dslca_editing_page_footer' );
 }
 
 add_action( 'admin_footer', 'dslc_editing_page_footer' );
@@ -204,29 +208,3 @@ function dslc_editing_page_title() {
 }
 
 add_filter( 'admin_title', 'dslc_editing_page_title' );
-
-/**
- * Cancel canonical redirect for the home page.
- *
- * Functions prevents WP from redirecting the home page
- * from https://lc-gh.dev/?page_id=132&dslc=active
- * to   https://lc-gh.dev/?dslc=active
- *
- * Many users have 500 error when using LC on servers
- * with restrictive settings. This function try to solve this problem.
- *
- * @param  string $redirect_url  Were to redirect.
- * @param  string $requested_url Original URL.
- * @return string                Filtered URL to use.
- */
-/*
-function dslca_cancel_redirect_frontpage( $redirect_url, $requested_url ) {
-
-	if ( is_front_page() && DS_LIVE_COMPOSER_ACTIVE ) {
-		$redirect_url = $requested_url;
-	}
-
-	return $redirect_url;
-}
-add_filter( 'redirect_canonical', 'dslca_cancel_redirect_frontpage', 10, 3 );
-*/
