@@ -805,6 +805,8 @@ html {
 						vertical-align: middle;
 						white-space: nowrap;
 						padding-left: 20px;
+
+						position: relative;
 					}
 
 					.dslca-module-edit-option-box-shadow-single:first-child,
@@ -822,10 +824,17 @@ html {
 						}
 
 						.dslca-module-edit-option-box-shadow-single input[type="number"],
-						.dslca-module-edit-option-text-shadow-single input[type="number"] {
+						.dslca-module-edit-option-text-shadow-single input[type="number"],
+						.dslca-module-edit-option-box-shadow-single input[type="text"],
+						.dslca-module-edit-option-text-shadow-single input[type="text"],
+
+						.dslca-module-edit-option-box-shadow-single input[type="number"]:focus,
+						.dslca-module-edit-option-text-shadow-single input[type="number"]:focus,
+						.dslca-module-edit-option-box-shadow-single input[type="text"]:focus,
+						.dslca-module-edit-option-text-shadow-single input[type="text"]:focus {
 							width: 60px !important;
 							min-width: auto;
-							padding: 3px;
+							padding: 3px 7px;
 							vertical-align: middle;
 						}
 
@@ -843,13 +852,6 @@ html {
 								font-size: 13px;
 								font-weight: normal;
 							}
-
-						.dslca-module-edit-option-box-shadow-single .sp-replacer,
-						.dslca-module-edit-option-text-shadow-single .sp-replacer {
-							display: inline-block !important;
-							width: 100px;
-							vertical-align: middle;
-						}
 
 
 
@@ -3949,13 +3951,29 @@ body.dslc-res-phone.dslca-enabled {
 }
 */
 
+/**
+ * Spectrum color picker hides the color input automatically,
+ * we want it to stay.
+ */
+
 .dslca-modules-section-edit-field-colorpicker,
-.dslca-module-edit-field-colorpicker {
+.dslca-module-edit-field-colorpicker{
 	display: block!important;
 	cursor: pointer;
 	position: relative;
 	z-index: 1;
 }
+
+.dslca-module-edit-option-box-shadow-color,
+.dslca-module-edit-option-text-shadow-color {
+	display: inline-block!important;
+	cursor: pointer;
+	position: relative;
+	z-index: 1;
+
+	width: auto;
+}
+
 
 body .sp-palette-container {
   border-right: 1px solid #3e3e3e;
@@ -3966,15 +3984,4 @@ body .sp-palette .sp-thumb-el {
   height: 25px;
   margin: 1px;
   width: 25px;
-}
-
-.dslca-modules-section-edit-option > .sp-replacer,
-.dslca-module-edit-option > .sp-replacer {
-  position: absolute;
-  top: 53px;
-  z-index: 0;
-}
-
-.dslca-container.sp-replacer {
-	opacity: 0;
 }

@@ -176,6 +176,9 @@
 			editable.addClass('dslca-wysiwyg-active');
 
 			jQuery('#dslcawpeditor_ifr, #dslcawpeditor').css({ height : jQuery('.dslca-wp-editor').height() - 300 });
+
+		} else {
+			console.info( 'Live Composer: TinyMCE is undefined.' );
 		}
 	});
 
@@ -340,7 +343,7 @@ function dslc_module_options_show( moduleID ) {
 	dslcModuleOptions = jQuery( '.dslca-module-options-front textarea', dslcModule ),
 	dslcDefaultSection = jQuery('.dslca-header').data('default-section');
 
-	// Settings array
+	// Settings array for the Ajax call
 	var dslcSettings = {};
 	dslcSettings['action'] = 'dslc-ajax-display-module-options';
 	dslcSettings['dslc'] = 'active';
@@ -348,7 +351,8 @@ function dslc_module_options_show( moduleID ) {
 	dslcSettings['dslc_post_id'] = jQuery('.dslca-container').data('data-post-id');
 	dslcSettings.dslc_url_vars = DSLC_Util.get_page_params();
 
-	// Go through each option
+	// Go through each option to fill dslcSettings array
+	// with current module setting values
 	dslcModuleOptions.each(function(){
 
 		// Vars
@@ -415,9 +419,6 @@ function dslc_module_options_show( moduleID ) {
 			// Hide the row save/cancel actions
 			jQuery('.dslca-row-edit-actions').hide();
 
-			// Initiate Colorpicker
-			dslc_modules_options_box_shadow_color();
-			dslc_modules_options_text_shadow_color();
 			DSLC.Editor.initMediumEditor();
 			DSLC.Editor.loadOptionsDeps();
 

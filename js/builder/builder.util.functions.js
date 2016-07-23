@@ -789,6 +789,8 @@ jQuery(document).ready(function($){
 
 			dslc_editable_content_gen_code( jQuery('.dslca-wysiwyg-active', DSLC.Editor.frame ) );
 			jQuery('.dslca-wysiwyg-active', DSLC.Editor.frame ).removeClass('dslca-wysiwyg-active');
+		} else {
+			console.info( 'Live Composer: TinyMCE is undefined.' );
 		}
 	});
 
