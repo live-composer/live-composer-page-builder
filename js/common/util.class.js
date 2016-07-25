@@ -7,16 +7,16 @@
 var DSLC_Util = {
 	addslashes: function(str)
 	{
-	    str = str.replace(/\\/g, '\\\\');
-	    str = str.replace(/\'/g, '\\\'');
-	    str = str.replace(/\"/g, '\\"');
-	    str = str.replace(/\0/g, '\\0');
-	    return str;
+		 str = str.replace(/\\/g, '\\\\');
+		 str = str.replace(/\'/g, '\\\'');
+		 str = str.replace(/\"/g, '\\"');
+		 str = str.replace(/\0/g, '\\0');
+		 return str;
 	},
 
 	basename: function(path)
 	{
-	   return path.split(/[\\/]/).pop();
+		return path.split(/[\\/]/).pop();
 	},
 
 	/**
@@ -69,44 +69,33 @@ var DSLC_Util = {
 	 * @param  {string} t utf-8
 	 * @return {string}   b64
 	 */
-	utf8_to_b64: function(t){
-        if(Modernizr && Modernizr.atobbtoa){
-            return window.btoa(unescape(encodeURIComponent(t)));
-        }else{
-            if(Base64 && Base64.encode)
-            return Base64.encode(unescape(encodeURIComponent(t)));
-        }
+	utf8_to_b64: function(t) {
 
-		return false;
-    },
+		return window.btoa(unescape(encodeURIComponent(t)));
 
-    /**
-     * Converts base64 to UTF-8
-     *
-     * @param  {string} t in b64
-     * @return {string}   in utf-8
-     */
-    b64_to_utf8: function(t)
-    {
-        if(Modernizr && Modernizr.atobbtoa){
-            return decodeURIComponent(escape(window.atob(t)));
-        }else{
-            if(Base64 && Base64.decode)
-            return decodeURIComponent(escape(Base64.decode(t)));
-        }
+	 },
 
-        return false;
-    },
+	 /**
+	  * Converts base64 to UTF-8
+	  *
+	  * @param  {string} str in b64
+	  * @return {string}   in utf-8
+	  */
+	 b64_to_utf8: function(str) {
 
-    /**
-     * Get Page Params
-     *
-     * @return {array}
-     */
-    get_page_params: function()
-    {
-    	return decodeURIComponent(window.location.search.slice(1)).split('&').reduce(function _reduce ( a, b) { b = b.split('='); a[b[0]] = b[1]; return a; }, {});
-    }
+		return decodeURIComponent(escape(window.atob(str)));
+
+	 },
+
+	 /**
+	  * Get Page Params
+	  *
+	  * @return {array}
+	  */
+	 get_page_params: function()
+	 {
+		return decodeURIComponent(window.location.search.slice(1)).split('&').reduce(function _reduce ( a, b) { b = b.split('='); a[b[0]] = b[1]; return a; }, {});
+	 }
 
 
 };

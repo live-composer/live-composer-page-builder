@@ -288,15 +288,16 @@ jQuery(document).ready(function($){
 			var elem = this;
 			var parsed = true;
 
-			try{
+			try {
 
 				var dep = JSON.parse( DSLC_Util.b64_to_utf8( $(this).data('dep') ) );
-			}catch(e){
+
+			} catch(e){
 
 				parsed = false;
 			}
 
-			if( parsed ) {
+			if ( parsed ) {
 
 				var handler = function(){
 
