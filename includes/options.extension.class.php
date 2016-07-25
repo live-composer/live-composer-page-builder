@@ -93,8 +93,9 @@ class DSLC_Options_Extender {
 	private function register_setting( $extension ) {
 
 		register_setting(
-			'dslc_custom_options_' . $extension['extension_id'],
-			'dslc_custom_options_' . $extension['extension_id']
+			'dslc_custom_options_' . $extension['extension_id'], // Option Group.
+			'dslc_custom_options_' . $extension['extension_id'], // Option Name.
+			'dslc_plugin_options_input_sanitize'// Sanitize.
 		);
 	}
 

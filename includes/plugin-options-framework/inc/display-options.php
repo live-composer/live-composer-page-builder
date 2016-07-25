@@ -186,12 +186,12 @@ function dslc_plugin_option_display_list( $option ) {
 		<input type="hidden" class="dslca-plugin-opts-list-code" id='<?php echo esc_attr( $option_id ); ?>' name='<?php echo esc_attr( $option['name'] ); ?>' value='<?php echo esc_attr( $value ); ?>' />
 
 		<?php
-			$sidebars_array = array();
-			if ( '' !== $value ) {
+		$sidebars_array = array();
+		if ( '' !== $value ) {
 
-				$sidebars = $value;
-				$sidebars_array = explode( ',', substr( $sidebars, 0, -1 ) );
-			}
+			$sidebars = $value;
+			$sidebars_array = explode( ',', substr( $sidebars, 0, -1 ) );
+		}
 		?>
 
 		<div class="dslca-plugin-opts-list">

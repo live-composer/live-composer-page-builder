@@ -157,8 +157,9 @@ function dslc_plugin_options_init() {
 		);
 
 		register_setting(
-			$section_id,
-			$section_id
+			$section_id, // Option Group.
+			$section_id, // Option Name.
+			'dslc_plugin_options_input_sanitize'// Sanitize.
 		);
 
 		foreach ( $section['options'] as $option_id => $option ) {
@@ -247,6 +248,34 @@ function dslc_option_display_funcitons_router( $option ) {
  */
 function dslc_plugin_options_display_options( $section ) {
 
+}
+
+/**
+ * Sanitize each setting field on submit
+ *
+ * @param array $input Contains all the settings as single array, with fields as array keys.
+ */
+function dslc_plugin_options_input_sanitize( $input ) {
+
+	$new_input = array();
+
+	foreach ( $input as $key => $option_value ) {
+
+		if ( ! is_array( $option_value ) ) {
+
+			$new_input[ $key ] = sanitize_text_field( $option_value );
+
+		} else {
+
+			foreach ( $option_value as $inner_key => $inner_option_value ) {
+
+				$new_input[ $key ][ $inner_key ] = sanitize_text_field( $inner_option_value );
+
+			}
+		}
+	}
+
+	return $new_input;
 }
 
 /**
