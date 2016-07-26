@@ -518,10 +518,10 @@ function dslc_ajax_display_module_options( $atts ) {
 
 			$dep = '';
 
-			// Show/hide dependency
-			if ( isset( $module_option['show_hide_dependency'] ) ) {
+			// Show/hide option controls that depend on current option.
+			if ( isset( $module_option['dependent_controls'] ) ) {
 
-				$dep = ' data-dep="' . base64_encode( json_encode( $module_option['show_hide_dependency'] ) ) . '"';
+				$dep = ' data-dep="' . base64_encode( json_encode( $module_option['dependent_controls'] ) ) . '"';
 			}
 
 			?>

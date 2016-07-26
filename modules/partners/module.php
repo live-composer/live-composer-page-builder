@@ -58,11 +58,6 @@ class DSLC_Partners extends DSLC_Module {
 						'value' => 'phone',
 					),
 				),
-				'show_hide_dependency' => array(
-
-					'phone' => 'link',
-					'desktop' => 'amount, orientation',
-				),
 			),
 			array(
 				'label' => __( 'Link', 'live-composer-page-builder' ),
