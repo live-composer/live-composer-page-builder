@@ -12,17 +12,13 @@ module.exports = function(grunt) {
 				src : 'js/builder/*.js',
 				dest : 'js/builder.all.min.js'
 			},
-			js_builder_minify : {
-				src : 'js/frontend/*.js',
-				dest : 'js/frontend.all.min.js'
-			},
 			js_iframe_minify : {
 				src : 'js/builder.frontend/*.js',
 				dest : 'js/builder.frontend.all.min.js'
 			},
-			js_main_minify : {
-				src : 'js/common/main.js',
-				dest : 'js/common/main.min.js'
+			js_builder_minify : {
+				src : 'js/frontend/*.js',
+				dest : 'js/frontend.all.min.js'
 			},
 			js_pluginoptions_minify : {
 				src : 'includes/plugin-options-framework/js/main.js',
