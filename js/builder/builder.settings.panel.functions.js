@@ -80,7 +80,7 @@ jQuery(document).ready(function($){
 			jQuery('.dslca-container-loader').show();
 
 			// Reset the responsive classes
-			dslc_responsive_classes();
+			DSLC.Editor.frameContext.dslc_responsive_classes();
 
 			// Reload Module
 			dslc_module_output_altered(function(){
@@ -121,7 +121,7 @@ jQuery(document).ready(function($){
 		});
 
 		jQuery('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
-		dslc_responsive_classes( true );
+		DSLC.Editor.frameContext.dslc_responsive_classes( true );
 	});
 
 	/**
@@ -136,7 +136,7 @@ jQuery(document).ready(function($){
 		});
 
 		jQuery('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
-		dslc_responsive_classes( true );
+		DSLC.Editor.frameContext.dslc_responsive_classes( true );
 	});
 
 	/**
@@ -288,15 +288,16 @@ jQuery(document).ready(function($){
 			var elem = this;
 			var parsed = true;
 
-			try{
+			try {
 
 				var dep = JSON.parse( DSLC_Util.b64_to_utf8( $(this).data('dep') ) );
-			}catch(e){
+
+			} catch(e){
 
 				parsed = false;
 			}
 
-			if( parsed ) {
+			if ( parsed ) {
 
 				var handler = function(){
 
@@ -879,9 +880,9 @@ function dslc_module_options_confirm_changes( callback ) {
 	// Show the section hooks
 	jQuery('.dslca-header .dslca-go-to-section-hook').show();
 
+	dslc_generate_code();
 	// Show the publish button
-	jQuery('.dslca-save-composer-hook').css({ 'visibility' : 'visible' });
-	jQuery('.dslca-save-draft-composer-hook').css({ 'visibility' : 'visible' });
+	dslc_show_publish_button();
 }
 
 /**
@@ -932,8 +933,7 @@ function dslc_module_options_cancel_changes( callback ) {
 	jQuery('.dslca-header .dslca-go-to-section-hook').show();
 
 	// Show the publish button
-	jQuery('.dslca-save-composer-hook').css({ 'visibility' : 'visible' });
-	jQuery('.dslca-save-draft-composer-hook').css({ 'visibility' : 'visible' });
+	dslc_show_publish_button();
 }
 
 /**

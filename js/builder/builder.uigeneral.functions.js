@@ -255,6 +255,14 @@ function dslc_show_publish_button() {
 	jQuery('.dslca-save-draft-composer').show().addClass('dslca-init-animation');
 }
 
+function dslc_hide_publish_button() {
+
+	if ( dslcDebug ) console.log( 'dslc_hide_publish_button' );
+
+	jQuery('.dslca-save-composer').hide();
+	jQuery('.dslca-save-draft-composer').hide();
+}
+
 /**
  * UI - GENERAL - Show Section
  */
@@ -467,16 +475,13 @@ function dslc_drag_and_drop() {
 					// "Show" modules area management
 					jQuery('.dslca-modules-area-manage', modulesArea).css ({ visibility : 'visible' });
 
-					// Show publish
-					jQuery('.dslca-save-composer-hook').css({ 'visibility' : 'visible' });
-					jQuery('.dslca-save-draft-composer-hook').css({ 'visibility' : 'visible' });
-
 					// Generete
 					DSLC.Editor.frameContext.dslc_carousel();
 					DSLC.Editor.frameContext.dslc_tabs();
 					DSLC.Editor.frameContext.dslc_init_accordion();
 
 					dslc_generate_code();
+					// Show publish
 					dslc_show_publish_button();
 
 					DSLC.Editor.initMediumEditor();
@@ -579,4 +584,218 @@ function dslc_fix_contenteditable() {
 
 		jQuery('[contenteditable]', DSLC.Editor.frame).attr('contenteditable', true);
 	});
+}
+
+/**
+ * Disable/Enable module control.
+ *
+ * @param  {string} control_id CSS ID of the control we are toggling
+ * @return {void}
+ */
+function dslc_toogle_control ( control_id ) {
+
+	if ( control_id === undefined) control_id = false;
+	if ( !control_id ) return;
+
+	var control        = jQuery('.dslca-module-edit-option-' + control_id );
+	var control_storage = control.find('.dslca-module-edit-field');
+
+	// Get the element we are editing
+	var module = jQuery('.dslca-module-being-edited', DSLC.Editor.frame);
+
+	// Get the element id
+	var module_id = module[0].id;
+
+	var responsive_prefix = '';
+
+	if ( 'tablet_responsive' === control.data('tab') ) {
+		responsive_prefix = 'body.dslc-res-tablet ';
+	} else if ( 'phone_responsive' === control.data('tab') ) {
+		responsive_prefix = 'body.dslc-res-phone ';
+	}
+
+	var affect_on_change_el = control_storage.data('affect-on-change-el');
+
+	if ( affect_on_change_el === undefined) return;
+
+	var affect_on_change_elmts = affect_on_change_el.split( ',' );
+
+	affect_on_change_el = '';
+
+	// Loop through elements (useful when there are multiple elements)
+	for ( var i = 0; i < affect_on_change_elmts.length; i++ ) {
+
+		if ( i > 0 ) {
+
+			affect_on_change_el += ', ';
+		}
+
+		affect_on_change_el += responsive_prefix + '#' + module_id + ' ' + affect_on_change_elmts[i];
+	}
+
+	var affect_on_change_rule  = control_storage.data('affect-on-change-rule').replace(/ /g,'');
+	var affect_on_change_rules = affect_on_change_rule.split( ',' );
+
+	var control_value;
+	var control_data_ext = control_storage.data('ext');
+
+	control.toggleClass('dslca-option-off');
+
+	if ( control.hasClass('dslca-option-off')) {
+		// Disable
+
+		control_value = dslc_get_control_value(control_id);
+		// Temporary backup the current value as data attribute
+		control_storage.data( 'val-bckp', control_value );
+		// control_value = dslc_combine_value_and_extension( control_value, control_data_ext);
+
+		// Loop through rules (useful when there are multiple rules)
+		for ( var i = 0; i < affect_on_change_rules.length; i++ ) {
+
+			// remove css rule in element inline style
+			jQuery( affect_on_change_el, DSLC.Editor.frame ).css( affect_on_change_rules[i] , '' );
+			// remove css rule in css block
+			disable_css_rule ( affect_on_change_el, affect_on_change_rules[i], module_id);
+			// PROBLEM do not work with multiply rules ex.: .dslc-text-module-content,.dslc-text-module-content p
+		}
+
+		control_storage.val('').trigger('change');
+	} else {
+		// Enable
+
+		// Restore value of the data backup attribute
+		control_storage.val( control_storage.data('val-bckp') ).trigger('change');
+		control_value = dslc_get_control_value(control_id);
+		control_value = dslc_combine_value_and_extension( control_value, control_data_ext);
+
+		// Loop through rules (useful when there are multiple rules)
+		for ( var i = 0; i < affect_on_change_rules.length; i++ ) {
+
+			jQuery( affect_on_change_el, DSLC.Editor.frame ).css( affect_on_change_rules[i] , control_value );
+		}
+	}
+}
+
+jQuery(document).ready(function($){
+
+	// Option Control Toggle
+	jQuery(document).on( 'click', '.dslca-module-edit-option .dslc-control-toggle', function(e){
+
+		e.preventDefault();
+		var control_id = $(e.target).closest('.dslca-module-edit-option').find('.dslca-module-edit-field').data('id');
+		dslc_toogle_control ( control_id );
+	});
+
+
+	// Disable Toggle If the Control Focused
+	jQuery(document).on( 'mousedown', '.dslca-module-edit-option', function(e){
+
+		var toggle = $('.dslc-control-toggle');
+		if ( ! toggle.is(e.target) // if the target of the click isn't the container...
+		     && toggle.has(e.target).length === 0 ) // ... nor a descendant of the container
+		{
+
+			if ( $(e.target).closest('.dslca-module-edit-option').hasClass('dslca-option-off') ) {
+
+				var control_id = $(e.target).closest('.dslca-module-edit-option').find('.dslca-module-edit-field').data('id');
+				dslc_toogle_control (control_id);
+			}
+		}
+	});
+
+/* Reset all styling – not ready
+
+	$(document).on( 'click', '.dslca-clear-styling-button', function(e){
+		e.preventDefault();
+
+
+		$('.dslca-option-with-toggle').each(function(e){
+			// var control_id = $(this).find('.dslca-module-edit-field').data('id');
+			$(this).find('.dslca-module-edit-field').val('').trigger('change');
+		});
+
+		dslc_module_output_altered(); // call module regeneration
+
+	});
+*/
+});
+
+// Very Slow do not use for live editing
+// Only use when you need to disable some of the CSS properties.
+
+function disable_css_rule(selectorCSS, ruleCSS, moduleID) {
+
+	var cssRules;
+	var target_stylsheet_ID = 'css-for-' + moduleID;
+	var stylesheet = document.getElementById('page-builder-frame').contentWindow.document.getElementById(target_stylsheet_ID);
+
+	selectorCSS = selectorCSS.replace( /\s\s+/g, ' ' );
+
+	if (stylesheet) {
+
+	   stylesheet = stylesheet.sheet;
+
+		if (stylesheet['rules']) {
+
+			cssRules = 'rules';
+		} else if (stylesheet['cssRules']) {
+
+			cssRules = 'cssRules';
+		} else {
+
+			//no rules found... browser unknown
+		}
+
+		// Go through each CSS rule (ex.: .content h1 {...})
+		for (var R = 0; R < stylesheet[cssRules].length; R++) {
+
+			// Is current CSS rule equal to the selectorCSS we are looking for?
+			// (ex.: '.content h1' == '.content h1' )
+			if (stylesheet[cssRules][R].selectorCSSText == selectorCSS) {
+
+				// Get CSS property we are looking for... (ex.: font-size : ...; )
+				if(stylesheet[cssRules][R].style[ruleCSS]){
+
+						stylesheet[cssRules][R].style[ruleCSS] = '';
+					break;
+				}
+			}
+		}
+	}
+}
+
+function dslc_combine_value_and_extension ( value, extension) {
+
+	if ( '' === value || null === value ) {
+
+		return value;
+	}
+
+	// Check if value do not already include extension
+	if ( value.indexOf(extension) == -1 ) {
+
+		value = value + extension;
+	}
+
+	return value;
+}
+
+function dslc_get_control_value ( control_id ) {
+
+	var control      = jQuery('.dslca-module-edit-option-' + control_id );
+	var control_type = 'text';
+	var control_storage = control.find('.dslca-module-edit-field');
+	var value;
+
+/*
+	if ( control.hasClass('dslca-module-edit-option-select') ) {
+
+	} else {
+		// text based controls
+		value = control_storage.val();
+	}
+*/
+	value = control_storage.val();
+
+	return value;
 }

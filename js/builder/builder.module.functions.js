@@ -375,8 +375,7 @@ function dslc_module_options_show( moduleID ) {
 		function( response ) {
 
 			// Hide the publish button
-			jQuery('.dslca-save-composer-hook').css({ 'visibility' : 'hidden' });
-			jQuery('.dslca-save-draft-composer-hook').css({ 'visibility' : 'hidden' });
+			dslc_hide_publish_button();
 
 			// Show edit section
 			dslc_show_section('.dslca-module-edit');
@@ -513,8 +512,8 @@ function dslc_module_output_altered( callback ) {
 			// Delete 'old' instance of the module we are editing.
 			dslcModule.remove();
 
-			dslc_generate_code();
-			dslc_show_publish_button();
+			// dslc_generate_code();
+			// dslc_show_publish_button();
 			DSLC.Editor.frameContext.dslc_carousel();
 			DSLC.Editor.frameContext.dslc_masonry( jQuery('.dslca-module-being-edited', DSLC.Editor.frame) );
 

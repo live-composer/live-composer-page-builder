@@ -251,7 +251,6 @@ function dslc_modules_area_delete( area ) {
 		// Remove the area
 		area.remove();
 
-
 		// Call other functions
 		dslc_generate_code();
 		dslc_show_publish_button();

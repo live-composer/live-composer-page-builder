@@ -139,12 +139,15 @@ jQuery(document).ready(function($){
 
 	/**
 	 * Actions - Prompt Modal on F5
-	 * TODO: Add cmnd+r for macs
+	 *
+	 * 116 – F5
+	 * 81 + event.metaKey = CMD + R
 	 */
 
 	$(document).on( 'keydown', function(e){
-		if ( ( e.which || e.keyCode ) == 116 ) {
-			if ( jQuery('.dslca-save-composer-hook').is(':visible') || jQuery('.dslca-module-edit-save').is(':visible') ) {
+
+		if ( e.which == 116 || ( e.which === 82 && event.metaKey ) ) {
+			if ( jQuery('.dslca-save-composer-hook').offsetParent !== null || jQuery('.dslca-module-edit-save').offsetParent !== null ) {
 				e.preventDefault();
 				dslc_js_confirm( 'disable_lc', '<span class="dslca-prompt-modal-title">' + DSLCString.str_refresh_title +
 				 '</span><span class="dslca-prompt-modal-descr">' + DSLCString.str_refresh_descr + '</span>', document.URL );
@@ -414,8 +417,8 @@ jQuery(document).ready(function($) {
 
 		if ( ! DSLC.Editor.flags.generate_code_after_row_changed ) return false;
 
-		dslc_generate_code();
-		dslc_show_publish_button();
+		// dslc_generate_code();
+		// dslc_show_publish_button();
 	});
 
 
@@ -433,8 +436,10 @@ jQuery(document).ready(function($) {
 	// Live Preview for Module Settings Change
 	jQuery(document).on( 'change', '.dslca-module-edit-field', function(){
 
+		if ( dslcDebug ) console.log( 'on change event for .dslca-module-edit-field' );
+
 		// Hide/Show tabs
-		dslc_module_options_hideshow_tabs();
+		// dslc_module_options_hideshow_tabs();
 
 		var dslcOptionValue = '',
 			dslcOptionValueOrig = '',
@@ -448,7 +453,11 @@ jQuery(document).ready(function($) {
 		// Add changed class
 		dslcModule.addClass('dslca-module-change-made');
 
-		// If option is set to refresh the module code from the server
+		/**
+		 * Refresh on change = true
+		 *
+		 * Refresh module HTML from the server on every field value change
+		 */
 		if ( jQuery(this).closest('.dslca-module-edit-option').data('refresh-on-change') == 'active' ) {
 
 			/**
@@ -463,7 +472,7 @@ jQuery(document).ready(function($) {
 
 					if ( $(this).prop('checked') ) {
 
-						dslcOptionValue = dslcOptionValue + $(this).val() + ' ';
+						dslcOptionValue = dslcOptionValue + jQuery(this).val() + ' ';
 					}
 
 				});
@@ -512,7 +521,12 @@ jQuery(document).ready(function($) {
 				jQuery('body').removeClass('dslca-new-preset-added');
 			});
 
-		} else { // Do not refresh from the server, but using JS
+		/**
+		 * Refresh on change = false
+		 *
+		 * Do not refresh from the server, but using JS
+		 */
+		} else {
 
 			/**
 			 * Live Preview

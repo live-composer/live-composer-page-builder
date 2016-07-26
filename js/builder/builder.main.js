@@ -10,7 +10,13 @@ var dslcAllFontsArray = dslcRegularFontsArray.concat( dslcGoogleFontsArray );
 
 // Set current/default icons set
 var dslcIconsCurrentSet = DSLCIcons.fontawesome;
-var dslcDebug = true;
+var dslcDebug = false;
+
+
+// Global Plugin Object
+var DSLC = {
+	Production: {}
+};
 
 DSLC.Editor = {
 	flags: {

@@ -56,33 +56,31 @@ final class DSLC_Scripts{
 		 */
 		if ( ! SCRIPT_DEBUG ) {
 
-			wp_enqueue_style( 'dslc-main-css', DS_LIVE_COMPOSER_URL . 'css/main.min.css', array(), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_style( 'dslc-frontend-css', DS_LIVE_COMPOSER_URL . 'css/frontend.min.css', array(), DS_LIVE_COMPOSER_VER );
 			wp_enqueue_style( 'dslc-font-awesome', DS_LIVE_COMPOSER_URL . 'css/font-awesome.min.css', array(), DS_LIVE_COMPOSER_VER );
-			wp_enqueue_style( 'dslc-modules-css', DS_LIVE_COMPOSER_URL . 'css/modules.min.css', array(), DS_LIVE_COMPOSER_VER );
+
 		} else {
 
-			wp_enqueue_style( 'dslc-main-css', DS_LIVE_COMPOSER_URL . 'css/main.css', array(), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_style( 'dslc-main-css', DS_LIVE_COMPOSER_URL . 'css/frontend/main.css', array(), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_style( 'dslc-modules-css', DS_LIVE_COMPOSER_URL . 'css/frontend/modules.css', array(), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_style( 'dslc-plugins-css', DS_LIVE_COMPOSER_URL . 'css/frontend/plugins.css', array(), DS_LIVE_COMPOSER_VER );
 			wp_enqueue_style( 'dslc-font-awesome', DS_LIVE_COMPOSER_URL . 'css/font-awesome.css', array(), DS_LIVE_COMPOSER_VER );
-			wp_enqueue_style( 'dslc-modules-css', DS_LIVE_COMPOSER_URL . 'css/modules.css', array(), DS_LIVE_COMPOSER_VER );
 		}
-
-		wp_enqueue_style( 'dslc-plugins-css', DS_LIVE_COMPOSER_URL . 'css/plugins.css', array(), DS_LIVE_COMPOSER_VER );
 
 		/**
 		 * JavaScript
 		 */
-
-		wp_enqueue_script( 'dslc-plugins-js', DS_LIVE_COMPOSER_URL . 'js/libs/plugins.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 		wp_enqueue_script( 'wp-mediaelement' ); // Used for playing videos.
 		wp_enqueue_script( 'imagesloaded' ); // Need this for Masonry.
 		wp_enqueue_script( 'jquery-masonry' );
 
 		if ( ! SCRIPT_DEBUG ) {
 
-			wp_enqueue_script( 'dslc-main-js', DS_LIVE_COMPOSER_URL . 'js/common/main.min.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_script( 'dslc-main-js', DS_LIVE_COMPOSER_URL . 'js/frontend.all.min.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 		} else {
 
-			wp_enqueue_script( 'dslc-main-js', DS_LIVE_COMPOSER_URL . 'js/common/main.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_script( 'dslc-plugins-js', DS_LIVE_COMPOSER_URL . 'js/frontend/plugins.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_script( 'dslc-main-js', DS_LIVE_COMPOSER_URL . 'js/frontend/main.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 		}
 
 		if ( is_ssl() ) {
@@ -101,22 +99,30 @@ final class DSLC_Scripts{
 			/**
 			 * CSS
 			 */
-			wp_enqueue_style( 'dslc-builder-main-css', DS_LIVE_COMPOSER_URL . 'css/builder.main.css', array(), DS_LIVE_COMPOSER_VER );
-			wp_enqueue_style( 'dslc-builder-plugins-css', DS_LIVE_COMPOSER_URL . 'css/builder.plugins.css', array(), DS_LIVE_COMPOSER_VER );
+			if ( ! SCRIPT_DEBUG ) {
+
+				wp_enqueue_style( 'dslc-builder-css', DS_LIVE_COMPOSER_URL . 'css/builder.min.css', array(), DS_LIVE_COMPOSER_VER );
+
+			} else {
+
+				wp_enqueue_style( 'dslc-builder-main-css', DS_LIVE_COMPOSER_URL . 'css/builder/builder.main.css', array(), DS_LIVE_COMPOSER_VER );
+				wp_enqueue_style( 'dslc-builder-plugins-css', DS_LIVE_COMPOSER_URL . 'css/builder/builder.plugins.css', array(), DS_LIVE_COMPOSER_VER );
+
+			}
 
 			/**
 			 * JavaScript
 			 */
 			wp_enqueue_script( 'dslc-load-fonts', '//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js' );
-			wp_enqueue_script( 'dslc-builder-plugins-js', DS_LIVE_COMPOSER_URL . 'js/libs/builder.plugins.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+			// wp_enqueue_script( 'dslc-builder-plugins-js', DS_LIVE_COMPOSER_URL . 'js/builder/builder.plugins.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 
 			if ( ! SCRIPT_DEBUG ) {
 
-				wp_enqueue_script( 'dslc-iframe-main-all-js', DS_LIVE_COMPOSER_URL . 'js/iframe.all.min.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+				wp_enqueue_script( 'dslc-iframe-main-all-js', DS_LIVE_COMPOSER_URL . 'js/builder.frontend.all.min.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 			} else {
 
-				wp_enqueue_script( 'dslc-iframe-main-js', DS_LIVE_COMPOSER_URL . 'js/iframe/iframe.main.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
-				wp_enqueue_script( 'dslc-iframe-panel-settings-js', DS_LIVE_COMPOSER_URL . 'js/iframe/iframe.settings.panel.functions.js', array( 'jquery', 'dslc-iframe-main-js' ), DS_LIVE_COMPOSER_VER );
+				wp_enqueue_script( 'dslc-iframe-main-js', DS_LIVE_COMPOSER_URL . 'js/builder.frontend/builder.frontend.main.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+				wp_enqueue_script( 'dslc-iframe-panel-settings-js', DS_LIVE_COMPOSER_URL . 'js/builder.frontend/builder.frontend.settings.panel.functions.js', array( 'jquery', 'dslc-iframe-main-js' ), DS_LIVE_COMPOSER_VER );
 			}
 		}
 	}
@@ -180,18 +186,17 @@ final class DSLC_Scripts{
 			 * CSS
 			 */
 
-			// wp_enqueue_style( 'jquery-ui-slider' );
-			wp_enqueue_style( 'dslc-builder-main-css', DS_LIVE_COMPOSER_URL . 'css/builder.main.css', array(), DS_LIVE_COMPOSER_VER );
-			wp_enqueue_style( 'dslc-builder-plugins-css', DS_LIVE_COMPOSER_URL . 'css/builder.plugins.css', array(), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_style( 'dslc-builder-main-css', DS_LIVE_COMPOSER_URL . 'css/builder/builder.main.css', array(), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_style( 'dslc-builder-plugins-css', DS_LIVE_COMPOSER_URL . 'css/builder/builder.plugins.css', array(), DS_LIVE_COMPOSER_VER );
 			wp_enqueue_style( 'dslc-font-awesome', DS_LIVE_COMPOSER_URL . 'css/font-awesome' . $min_suffix . '.css', array(), DS_LIVE_COMPOSER_VER );
 
 			/**
 			 * JavaScript
 			 */
 
-			wp_enqueue_script( 'dslc-plugins-js', DS_LIVE_COMPOSER_URL . 'js/libs/plugins.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
-			wp_enqueue_script( 'dslc-main-js', DS_LIVE_COMPOSER_URL . 'js/common/main' . $min_suffix . '.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
-			wp_localize_script( 'dslc-main-js', 'DSLCAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php', $protocol ) ) );
+			// wp_enqueue_script( 'dslc-plugins-js', DS_LIVE_COMPOSER_URL . 'js/libs/plugins.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+			// wp_enqueue_script( 'dslc-main-js', DS_LIVE_COMPOSER_URL . 'js/common/main' . $min_suffix . '.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+			// wp_localize_script( 'dslc-main-js', 'DSLCAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php', $protocol ) ) );
 
 			wp_enqueue_script( 'jquery-ui-core' );
 			wp_enqueue_script( 'jquery-ui-sortable' );
@@ -207,17 +212,11 @@ final class DSLC_Scripts{
 			wp_enqueue_script( 'jquery-masonry' );
 
 			// wp_enqueue_script( 'dslc-load-fonts', '//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js' );
-			wp_enqueue_script( 'dslc-builder-plugins-js', DS_LIVE_COMPOSER_URL . 'js/libs/builder.plugins.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
-
-			wp_enqueue_script( 'dslc-mq-outerhide-js', DS_LIVE_COMPOSER_URL . 'js/libs/mq-outer-hide.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
-			wp_enqueue_script( 'dslc-mq-mutation-observer-js', DS_LIVE_COMPOSER_URL . 'js/libs/mq-mutation-observer.js', array(), DS_LIVE_COMPOSER_VER );
-			wp_enqueue_script( 'dslc-util-js', DS_LIVE_COMPOSER_URL . 'js/common/util.class.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
-			wp_enqueue_script( 'dslc-base64', DS_LIVE_COMPOSER_URL . 'js/libs/base64.js', array(), DS_LIVE_COMPOSER_VER );
-			wp_enqueue_script( 'dslc-modernizr', DS_LIVE_COMPOSER_URL . 'js/libs/modernizr-custom.js', array(), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_script( 'dslc-builder-plugins-js', DS_LIVE_COMPOSER_URL . 'js/builder/builder.plugins.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 
 			if ( ! SCRIPT_DEBUG ) {
 
-				wp_enqueue_script( 'dslc-builder-main-js', DS_LIVE_COMPOSER_URL . 'js/builder.all.min.js', array( 'dslc-main-js' ), DS_LIVE_COMPOSER_VER );
+				wp_enqueue_script( 'dslc-builder-main-js', DS_LIVE_COMPOSER_URL . 'js/builder.all.min.js', array( 'dslc-main-js', 'jquery' ), DS_LIVE_COMPOSER_VER );
 			} else {
 				self::load_scripts( 'builder', 'dslc-builder-main-js' );
 			}
@@ -277,7 +276,7 @@ final class DSLC_Scripts{
 			/* If Yoast WP is active */
 			if ( defined( 'WPSEO_VERSION' ) ) {
 
-				wp_enqueue_script( 'dslc-yoast-seo-admin', DS_LIVE_COMPOSER_URL . 'js/libs/yoast-seo.js', array(), DS_LIVE_COMPOSER_VER, true );
+				wp_enqueue_script( 'dslc-yoast-seo-admin', DS_LIVE_COMPOSER_URL . 'js/builder.wpadmin/builder.yoast-seo.js', array(), DS_LIVE_COMPOSER_VER, true );
 			}
 		}
 

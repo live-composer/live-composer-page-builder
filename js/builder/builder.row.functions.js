@@ -360,8 +360,7 @@ function dslc_row_edit( row ) {
 	dslc_show_section('.dslca-modules-section-edit');
 
 	// Hide the publish button
-	jQuery('.dslca-save-composer-hook').css({ 'visibility' : 'hidden' });
-	jQuery('.dslca-save-draft-composer-hook').css({ 'visibility' : 'hidden' });
+	dslc_hide_publish_button();
 }
 
 /**
@@ -401,8 +400,7 @@ function dslc_row_edit_cancel( callback ) {
 	jQuery('.dslca-header .dslca-go-to-section-hook').show();
 
 	// Show the publish button
-	jQuery('.dslca-save-composer-hook').css({ 'visibility' : 'visible' });
-	jQuery('.dslca-save-draft-composer-hook').css({ 'visibility' : 'visible' });
+	dslc_show_publish_button;
 
 	// Remove being edited class
 	jQuery('.dslca-modules-section-being-edited', DSLC.Editor.frame).removeClass('dslca-modules-section-being-edited dslca-modules-section-change-made');
@@ -410,8 +408,7 @@ function dslc_row_edit_cancel( callback ) {
 	if ( callback ) { callback(); }
 
 	// Show the publish button
-	jQuery('.dslca-save-composer-hook').css({ 'visibility' : 'visible' });
-	jQuery('.dslca-save-draft-composer-hook').css({ 'visibility' : 'visible' });
+	dslc_show_publish_button;
 }
 
 /**
@@ -439,21 +436,15 @@ function dslc_row_edit_confirm( callback ) {
 	// Show the section hooks
 	jQuery('.dslca-header .dslca-go-to-section-hook').show();
 
-	// Show the publish button
-	jQuery('.dslca-save-composer-hook').css({ 'visibility' : 'visible' });
-	jQuery('.dslca-save-draft-composer-hook').css({ 'visibility' : 'visible' });
-
 	// Remove being edited class
 	jQuery('.dslca-modules-section-being-edited', DSLC.Editor.frame).removeClass('dslca-modules-section-being-edited dslca-modules-section-change-made');
 
 	dslc_generate_code();
+
+	// Show the publish button
 	dslc_show_publish_button();
 
 	if ( callback ) { callback(); }
-
-	// Show the publish button
-	jQuery('.dslca-save-composer-hook').css({ 'visibility' : 'visible' });
-	jQuery('.dslca-save-draft-composer-hook').css({ 'visibility' : 'visible' });
 }
 
 /**
@@ -593,7 +584,7 @@ jQuery(document).ready(function($){
 
 		$(".dslca-currently-editing").removeAttr('style');
 		$('.dslca-row-options-filter-hook.dslca-active').removeClass('dslca-active');
-		dslc_responsive_classes( true );
+		DSLC.Editor.frameContext.dslc_responsive_classes( true );
 	});
 
 	/**
@@ -605,6 +596,6 @@ jQuery(document).ready(function($){
 
 		$(".dslca-currently-editing").removeAttr('style');
 		$('.dslca-row-options-filter-hook.dslca-active').removeClass('dslca-active');
-		dslc_responsive_classes( true );
+		DSLC.Editor.frameContext.dslc_responsive_classes( true );
 	});
 });

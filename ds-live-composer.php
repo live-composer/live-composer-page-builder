@@ -4,7 +4,7 @@
  * Plugin URI: https://www.livecomposerplugin.com
  * Description: Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
  * Author: Live Composer Team
- * Version: 1.0.9.15
+ * Version: 1.0.9.16
  * Author URI: https://livecomposerplugin.com
  * License: GPL2
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -42,7 +42,7 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) ):
 	 * Constants
 	 */
 
-	define( 'DS_LIVE_COMPOSER_VER', '1.0.9.15' );
+	define( 'DS_LIVE_COMPOSER_VER', '1.0.9.16' );
 
 	define( 'DS_LIVE_COMPOSER_SHORTNAME', __( 'Live Composer', 'live-composer-page-builder' ) );
 	define( 'DS_LIVE_COMPOSER_BASENAME', plugin_basename( __FILE__ ) );
@@ -113,7 +113,6 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) ):
 	include DS_LIVE_COMPOSER_ABS . '/includes/other.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/options.extension.class.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/upgrade.class.php';
-	// include DS_LIVE_COMPOSER_ABS . '/includes/main.class.php';
 
 	$cap_page = dslc_get_option( 'lc_min_capability_page', 'dslc_plugin_options_access_control' );
 	if ( ! $cap_page ) $cap_page = 'publish_posts';
@@ -203,4 +202,3 @@ add_action( 'activated_plugin', 'lc_welcome' );
 
 dslc_load_modules( DS_LIVE_COMPOSER_ABS . '/modules', 'module.php' );
 DSLC_Upgrade::init();
-// register_activation_hook( __FILE__, array( 'DSLC_Main', 'dslc_on_activation' ) );

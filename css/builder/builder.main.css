@@ -1288,26 +1288,19 @@ html {
 */
 
 .dslc-modules-area.dslc-modules-area-empty {
-	/*margin-top: 15px;*/
 	margin-bottom: 25px;
 	min-height: 120px;
-
-	/*outline: 2px dashed #5890E5;*/
-	/*outline-offset: -1px;*/
-
-	box-shadow: 0 0 0 2px #D3D3D3;
+	box-shadow: 0 0 0 2px rgba(173, 175, 179, 0.4);
 
 	text-align: center;
 	vertical-align: middle;
-
-	/*background: rgba( 255, 255, 255, 0.75 );*/
 }
 
 .dslc-modules-area-empty::after {
 	 content: "Drop modules here";
 	 display: inline-block;
 	 opacity: 1;
-	 color: #BEBDBD;
+	 color: rgba(173, 175, 179, 0.4);
 
 	 left: 0;
 	 right: 0;
@@ -1324,8 +1317,8 @@ html {
 }
 
 .dslc-modules-area:hover {
-	/*outline-color: #d3d3d3;*/
-	box-shadow: 0 0 0 2px #d3d3d3;
+	/*outline-color: rgba(173, 175, 179, 0.4);*/
+	box-shadow: 0 0 0 2px rgba(173, 175, 179, 0.4);
 }
 
 .dslc-modules-area:hover .dslc-module-front:hover {
@@ -1378,11 +1371,11 @@ html {
 }
 
 .dslc-modules-area-empty.dslc-modules-area.dslca-options-hovered {
-	box-shadow: 0 0 0 2px #D3D3D3;
+	box-shadow: 0 0 0 2px rgba(173, 175, 179, 0.4);
 }
 
 .dslc-modules-area.dslca-options-hovered {
-	box-shadow: 0 0 0 2px #D3D3D3;
+	box-shadow: 0 0 0 2px rgba(173, 175, 179, 0.4);
 }
 
 .dslc-modules-area-empty.dslca-options-hovered {

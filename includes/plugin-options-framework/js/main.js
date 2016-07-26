@@ -19,8 +19,6 @@ jQuery(document).ready(function(){
 			}
 		});
 
-		console.log( duplicateFound );
-
 		// If there are duplicates show the error message, otherwise hide
 		if ( duplicateFound ) {
 			jQuery('.dslca-plugin-opts-list-error').show();
@@ -32,6 +30,8 @@ jQuery(document).ready(function(){
 		jQuery( '.dslca-plugin-opts-list-item', dslcTarget ).each( function(){
 
 			dslcTitle = jQuery(this).find('.dslca-plugin-opts-list-title').text();
+			dslcTitle = dslcTitle.replace(/([^a-z0-9 ]+)/gi, ''); // Clean string leaving only letters and numbers
+			jQuery(this).find('.dslca-plugin-opts-list-title').text(dslcTitle);
 			dslcCode += dslcTitle.trim() + ','
 
 		});
