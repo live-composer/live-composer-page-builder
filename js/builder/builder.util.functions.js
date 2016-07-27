@@ -95,14 +95,6 @@ jQuery(document).ready(function($){
 	});
 
 	/**
-	 * Action - Disable links from going anywhere
-	 */
-	$(document).on( 'click', 'a:not(.dslca-link)', function(e){
-
-		e.preventDefault();
-	});
-
-	/**
 	 * Action - Prevent backspace from navigating back
 	 */
 	$(document).unbind('keydown').bind('keydown', function (event) {
@@ -438,9 +430,6 @@ jQuery(document).ready(function($) {
 
 		if ( dslcDebug ) console.log( 'on change event for .dslca-module-edit-field' );
 
-		// Hide/Show tabs
-		// dslc_module_options_hideshow_tabs();
-
 		var dslcOptionValue = '',
 			dslcOptionValueOrig = '',
 			dslcOption = jQuery(this),
@@ -452,6 +441,16 @@ jQuery(document).ready(function($) {
 
 		// Add changed class
 		dslcModule.addClass('dslca-module-change-made');
+
+		// Hide/Show tabs in the module options panel.
+		// Required to show/hide particular options tabs based on the current selection.
+		// Active only for dropdowns and checkboxes.
+		if ( dslcOptionWrap.hasClass('dslca-module-edit-option-select') ||
+		dslcOptionWrap.hasClass('dslca-module-edit-option-checkbox') ) {
+
+			dslc_module_options_hideshow_tabs();
+
+		}
 
 		/**
 		 * Refresh on change = true

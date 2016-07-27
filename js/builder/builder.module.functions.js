@@ -91,8 +91,8 @@
 
 		// Vars
 		var dslcModule = $(this).closest('.dslc-module-front'),
-		dslcModuleID = dslcModule.data('dslc-module-id'),
-		dslcModuleCurrCode = dslcModule.find('.dslca-module-code').val();
+		dslcModuleID = dslcModule.data('dslc-module-id');
+		// dslcModuleCurrCode = dslcModule.find('.dslca-module-code').val();
 
 		// If a module is bening edited remove the "being edited" class from it
 		$('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
@@ -300,6 +300,8 @@ function dslc_module_copy( module ) {
 				// Fade in the module
 				jQuery('.dslca-module-being-edited', DSLC.Editor.frame).css({ opacity : 0 }).removeClass('dslca-module-being-edited').animate({ opacity : 1 }, 300);
 			});
+
+			dslc_show_publish_button();
 		}
 	);
 }
@@ -329,6 +331,8 @@ function dslc_module_width_set( module, newWidth ) {
 
 		jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
 	});
+
+	dslc_show_publish_button();
 }
 
 /**

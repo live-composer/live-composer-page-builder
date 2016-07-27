@@ -216,7 +216,7 @@ final class DSLC_Scripts{
 
 			if ( ! SCRIPT_DEBUG ) {
 
-				wp_enqueue_script( 'dslc-builder-main-js', DS_LIVE_COMPOSER_URL . 'js/builder.all.min.js', array( 'dslc-main-js', 'jquery' ), DS_LIVE_COMPOSER_VER );
+				wp_enqueue_script( 'dslc-builder-main-js', DS_LIVE_COMPOSER_URL . 'js/builder.all.min.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 			} else {
 				self::load_scripts( 'builder', 'dslc-builder-main-js' );
 			}

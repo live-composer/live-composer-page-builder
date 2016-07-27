@@ -5,7 +5,7 @@ module.exports = function(grunt) {
 
 		uglify: {
 			options: {
-				compress: true,
+				compress: false,
 				manage: false,
 			},
 			js_builder_minify : {
@@ -16,7 +16,7 @@ module.exports = function(grunt) {
 				src : 'js/builder.frontend/*.js',
 				dest : 'js/builder.frontend.all.min.js'
 			},
-			js_builder_minify : {
+			js_frontend_minify : {
 				src : 'js/frontend/*.js',
 				dest : 'js/frontend.all.min.js'
 			},

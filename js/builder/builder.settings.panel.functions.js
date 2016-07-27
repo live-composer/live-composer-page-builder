@@ -121,7 +121,9 @@ jQuery(document).ready(function($){
 		});
 
 		jQuery('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
-		DSLC.Editor.frameContext.dslc_responsive_classes( true );
+
+		dslc_disable_responsive_view();
+
 	});
 
 	/**
@@ -136,7 +138,8 @@ jQuery(document).ready(function($){
 		});
 
 		jQuery('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
-		DSLC.Editor.frameContext.dslc_responsive_classes( true );
+
+		dslc_disable_responsive_view();
 	});
 
 	/**
@@ -429,7 +432,7 @@ function dslc_module_options_tab_filter( dslcTab ) {
 		 * If responsive tab, change the width of the dslc-content div
 		 */
 
-		 jQuery('html').removeClass('dslc-responsive-preview');
+		dslc_disable_responsive_view();
 
 		// Tablet
 		if ( dslcTabID == DSLCString.str_res_tablet.toLowerCase() + '_responsive' ) {
@@ -461,6 +464,9 @@ function dslc_module_options_tab_filter( dslcTab ) {
 			});
 		}
 	}
+
+	// Scroll horizontally options panel to the left:
+	// jQuery('.dslca-module-edit-options-wrapper').offset({ left: 20 });
 }
 
 /**
@@ -1651,6 +1657,12 @@ function dslc_module_options_numeric( field ) {
 
 		return false;
 	});
+}
+
+function dslc_disable_responsive_view () {
+	jQuery('html').removeClass('dslc-responsive-preview');
+	jQuery('body').removeClass('dslc-res-big dslc-res-smaller-monitor dslc-res-phone dslc-res-tablet');
+
 }
 
 

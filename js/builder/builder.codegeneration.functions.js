@@ -18,6 +18,15 @@ function dslc_save_composer() {
 
 	if ( dslcDebug ) console.log( 'dslc_save_composer' );
 
+	/**
+	 * Before saving code via ajax
+	 * refresh the page source in a hidden #dslca-code
+	 */
+	dslc_generate_code();
+
+	// Generate content for search
+	dslca_gen_content_for_search();
+
 	// Vars
 	var composerCode = jQuery('#dslca-code').val(),
 	contentForSearch = jQuery('#dslca-content-for-search').val(),
@@ -320,9 +329,6 @@ function dslc_generate_code() {
 	// Apply the new code values to the setting containers
 	jQuery('#dslca-code').val(composerCode);
 	jQuery('#dslca-export-code').val(composerCode);
-
-	// Generate content for search
-	dslca_gen_content_for_search();
 }
 
 /**
@@ -451,7 +457,6 @@ function dslca_gen_content_for_search() {
 	var holder = document.getElementById('dslca-content-for-search');
 
 	if (null === holder) {
-
 		return;
 	}
 
@@ -460,7 +465,8 @@ function dslca_gen_content_for_search() {
 
 	// Go through each content element
 
-	var elements = document.querySelectorAll('#dslc-main .dslc-module-front [data-exportable-content]');
+	var elements = DSLC.Editor.frameContext.document.querySelectorAll('#dslc-main .dslc-module-front [data-exportable-content]');
+
 	Array.prototype.forEach.call(elements, function(el, i){
 		// el - current DOM element, i – counter
 		var extracted_html_code;

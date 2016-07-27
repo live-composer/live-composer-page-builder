@@ -264,8 +264,8 @@ function dslc_display_composer() {
 				</div><!-- .dslca-sections -->
 
 				<!-- Module Template Export -->
-
 				<textarea id="dslca-code"></textarea>
+				<textarea id="dslca-content-for-search"></textarea>
 
 				<div class="dslca-container-loader">
 					<div class="dslca-container-loader-inner followingBallsGWrap">
@@ -690,17 +690,6 @@ function dslc_filter_content( $content ) {
 		if ( $tut_page ) {
 			// Hidden input holding value of the current post ID
 			$composer_append .= '<input type="hidden" id="dslca-tut-page" value="' . get_the_ID() . '" />';
-		}
-
-		// Get readable representation of the LC modules output ( textual output )
-		$content_for_search = '';
-		if ( get_post_meta( get_the_ID(), 'dslc_content_for_search', true ) ) {
-			$content_for_search = get_post_meta( get_the_ID(), 'dslc_content_for_search', true );
-		}
-
-		// If editor active include a textarea that holds readable representation of the output
-		if ( DS_LIVE_COMPOSER_ACTIVE ) {
-			$composer_append .= '<textarea id="dslca-content-for-search">' . $content_for_search . '</textarea>';
 		}
 
 		// Pass the filtered content output

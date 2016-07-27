@@ -875,42 +875,55 @@ function dslc_ajax_save_composer( $atts ) {
 	// Allowed to do this?
 	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY_SAVE ) ) {
 
-		// The array we'll pass back to the AJAX call
+		// The array we'll pass back to the AJAX call.
 		$response = array();
 
-		// The composer code
-		$composer_code = $_POST['dslc_code'];
+		$composer_code = '';
+		$content_for_search = '';
 
-		// The content for search
-		$content_for_search = $_POST['dslc_content_for_search'];
+		// The composer code.
+		if ( isset( $_POST['dslc_code'] ) ) {
+			$composer_code = $_POST['dslc_code'];
+		}
+
+		// The content for search.
+		if ( isset( $_POST['dslc_content_for_search'] ) ) {
+			$content_for_search = $_POST['dslc_content_for_search'];
+		}
 
 		// The ID of the post/page
 		$post_id = $_POST['dslc_post_id'];
 
+		/**
+		 * WordPress return false your try to update identical code.
+		 * This problem cause frustration for the users, so we delete
+		 * 'dslc_code' meta completely before saving it again
+		 * to solve this problem.
+		 */
+		delete_post_meta($post_id, 'dslc_code');
+
 		// Add/update the post/page with the composer code
 		if ( update_post_meta( $post_id, 'dslc_code', $composer_code ) ) {
-					$response['status'] = 'success';
+			$response['status'] = 'success';
 		} else {
-					$response['status'] = 'failed';
+			$response['status'] = 'failed';
 		}
 
 		// Add/update the post/page with the content for search
 		// wp_kses_post – Sanitize content for allowed HTML tags for post content.
-		if ( update_post_meta( $post_id, 'dslc_content_for_search', wp_kses_post( $content_for_search ) ) ) {
-					$response['status'] = 'success';
-		}
+		update_post_meta( $post_id, 'dslc_content_for_search', wp_kses_post( $content_for_search ) );
 
-		// Delete draft code
+		// Delete draft code.
 		delete_post_meta( $post_id, 'dslc_code_draft' );
 
-		// Encode response
+		// Encode response.
 		$response_json = json_encode( $response );
 
-		// Send the response
+		// Send the response.
 		header( "Content-Type: application/json" );
 		echo $response_json;
 
-		// Refresh cache
+		// Refresh cache.
 		if ( function_exists( 'wp_cache_post_change' ) ) {
 			$GLOBALS['super_cache_enabled'] = 1;
 			wp_cache_post_change( $post_id );
