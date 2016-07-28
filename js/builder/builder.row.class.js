@@ -12,7 +12,8 @@ DSLC.Editor.CRow = function(elem) {
 	var self = this;
 	this.elem = elem;
 
-	var sortableContainer = jQuery(elem).find('.dslc-modules-section-wrapper .dslc-modules-section-inner').eq(0)[0];
+
+	var sortableContainer = jQuery( elem ).find('.dslc-modules-section-wrapper .dslc-modules-section-inner').eq(0)[0];
 
 	jQuery( elem ).droppable({
 		drop: function( event, ui ) {
@@ -89,5 +90,8 @@ DSLC.Editor.CRow = function(elem) {
 
 		}
 	});
+
+	// Mark section as initialized
+	jQuery( elem ).attr('data-jsinit', 'initialized');
 
 }

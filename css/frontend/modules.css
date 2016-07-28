@@ -1,3 +1,8 @@
+
+.dslc-module-front a {
+	text-decoration: none;
+}
+
 /**
  * CPT MODULE
  */
@@ -1425,9 +1430,9 @@
 	border: 0 solid transparent;
 }
 
-	#dslc-content .dslc-tp-title h1 {
+/*	#dslc-content .dslc-tp-title h1 {
 		border: 0 solid transparent;
-	}
+	}*/
 
 #dslc-content .dslc-tp-content {
 	border: 0 solid transparent;
@@ -1480,6 +1485,7 @@
 		#dslc-content .dslc-tp-meta-avatar img {
 			vertical-align: middle;
 			width: 100%;
+			height: auto;
 			border-radius: 50%;
 		}
 
@@ -1741,6 +1747,11 @@
 							margin-right: 5px;
 						}
 
+						.dslc-comment-meta-author a {
+						    color: inherit;
+						    text-decoration: none;
+						}
+
 							.dslc-comment-author-avatar img {
 								vertical-align: middle;
 							}
@@ -1764,6 +1775,14 @@
 
 		.dslc-comment .dslc-comment {
 			margin-left: 50px;
+		}
+
+
+		.dslc-tp-comment-form input[type=text]::-moz-placeholder,
+		.dslc-tp-comment-form input[type=url]::-moz-placeholder,
+		.dslc-tp-comment-form input[type=email]::-moz-placeholder,
+		.dslc-tp-comment-form textarea::-moz-placeholder {
+			opacity: 1; /* Firefox adds opacity to input placeholders by default */
 		}
 
 

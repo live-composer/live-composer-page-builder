@@ -24,6 +24,12 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 
 	function options() {
 
+		$css_inputs_color_selector = '';
+		$css_inputs_color_selector .= '.dslc-tp-comment-form input[type=text], .dslc-tp-comment-form input[type=url], .dslc-tp-comment-form input[type=email], .dslc-tp-comment-form textarea,';
+		$css_inputs_color_selector .= '.dslc-tp-comment-form input[type=text]::-moz-placeholder, .dslc-tp-comment-form input[type=url]::-moz-placeholder, .dslc-tp-comment-form input[type=email]::-moz-placeholder, .dslc-tp-comment-form textarea::-moz-placeholder,';
+		$css_inputs_color_selector .= '.dslc-tp-comment-form input[type=text]::-webkit-input-placeholder, .dslc-tp-comment-form input[type=url]::-webkit-input-placeholder, .dslc-tp-comment-form input[type=email]::-webkit-input-placeholder, .dslc-tp-comment-form textarea::-webkit-input-placeholder,';
+		$css_inputs_color_selector .= '.dslc-tp-comment-form input[type=text]:-ms-input-placeholder, .dslc-tp-comment-form input[type=url]:-ms-input-placeholder, .dslc-tp-comment-form input[type=email]:-ms-input-placeholder, .dslc-tp-comment-form textarea:-ms-input-placeholder';
+
 		$dslc_options = array(
 
 			array(
@@ -53,6 +59,12 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				'type' => 'text',
 			),
 			array(
+				'label' => __( '"Comment" Placeholder Text', 'live-composer-page-builder' ),
+				'id' => 'txt_comment',
+				'std' => '',
+				'type' => 'text',
+			),
+			array(
 				'label' => __( '"Name" Placeholder Text', 'live-composer-page-builder' ),
 				'id' => 'txt_name',
 				'std' => '',
@@ -67,12 +79,6 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 			array(
 				'label' => __( '"Website" Placeholder Text', 'live-composer-page-builder' ),
 				'id' => 'txt_url',
-				'std' => '',
-				'type' => 'text',
-			),
-			array(
-				'label' => __( '"Comment" Placeholder Text', 'live-composer-page-builder' ),
-				'id' => 'txt_comment',
 				'std' => '',
 				'type' => 'text',
 			),
@@ -113,7 +119,7 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				'min' => 0,
 				'max' => 10,
 				'increment' => 1,
-				
+
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -395,7 +401,7 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				'min' => 0,
 				'max' => 10,
 				'increment' => 1,
-				
+
 				'std' => '1',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -452,14 +458,15 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Inputs', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'label' => __( 'Color', 'live-composer-page-builder' ),
 				'id' => 'css_inputs_color',
 				'std' => '#4d4d4d',
 				'type' => 'color',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-tp-comment-form input[type=text],dslc-tp-comment-form input[type=url],dslc-tp-comment-form input[type=email],.dslc-tp-comment-form textarea',
-				'affect_on_change_rule' => 'color',
+				'refresh_on_change' => true,
+				// 'affect_on_change_el' => $css_inputs_color_selector,
+				// 'affect_on_change_rule' => 'color',
 				'section' => 'styling',
 				'tab' => __( 'Inputs', 'live-composer-page-builder' ),
 			),
@@ -632,7 +639,7 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				'min' => 0,
 				'max' => 10,
 				'increment' => 1,
-				
+
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1355,6 +1362,12 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 		if ( isset( $options['txt_url'] ) && $options['txt_url'] != '' )
 			$txt_url = $options['txt_url'];
 
+		if ( isset( $options['css_inputs_color'] ) && $options['css_inputs_color'] != '' ) {
+			$css_inputs_color = $options['css_inputs_color'];
+		} else {
+			$css_inputs_color = 'initial';
+		}
+
 		/* Module output starts here */
 
 			?>
@@ -1365,18 +1378,17 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 
 						<div id="respond" class="comment-respond">
 							<h3 id="reply-title" class="comment-reply-title"><?php echo $txt_leave_comment; ?></h3>
-							<form action="http://localhost/livecomposer/wp-comments-post.php" method="post" id="commentform" class="comment-form" onsubmit="return(false)">
-								<div class="comment-form-name"><input id="author" name="author" type=text value="" size="30" placeholder="<?php echo $txt_name; ?> *" aria-required="true"></div>
-								<div class="comment-form-email"><input id="email" name="email" type=text value="" size="30" placeholder="<?php echo $txt_email; ?> *" aria-required="true"></div>
-								<div class="comment-form-website"><input id="url" name="url" type=text value="" size="30" placeholder="<?php echo $txt_url; ?>"></div>
-								<div class="comment-form-comment"><textarea id="comment" name="comment" placeholder="<?php echo $txt_comment; ?>" aria-required="true"></textarea></div>
+							<form action="#" method="post" id="commentform" class="comment-form" novalidate="">
+								<div class="comment-form-comment"><textarea id="comment" name="comment"  placeholder="<?php echo $txt_comment; ?>" aria-required="true"></textarea></div>
+								<div class="comment-form-name"><input id="author" name="author" type="text" value="" size="30" placeholder="<?php echo $txt_name; ?> *" aria-required="true"></div>
+								<div class="comment-form-email"><input id="email" name="email" type="text" value="" size="30" placeholder="<?php echo $txt_email; ?> *" aria-required="true"></div>
+								<div class="comment-form-website"><input id="url" name="url" type="text" value="" size="30" placeholder="<?php echo $txt_url; ?>"></div>
+
 								<p class="form-submit">
-									<input name="submit" type="submit" id="submit" value="<?php echo $txt_submit_comment ?>">
-									<input type="hidden" name="comment_post_ID" value="14" id="comment_post_ID">
-									<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+									<input name="submit" type="submit" id="submit" class="submit" value="<?php echo $txt_submit_comment; ?>">
 								</p>
 							</form>
-						</div><!-- #respond -->
+						</div>
 
 					<?php else :
 
@@ -1400,6 +1412,23 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 
 				</div><!-- dslc-tp-comment-form -->
 
+				<?php
+				/**
+				 * In-line CSS below required to style placeholder text color.
+				 * Due to poor browser support we can't change it the normal way.
+				 */
+				?>
+				<style type="text/css">
+					.dslc-tp-comment-form input[type=text]::-moz-placeholder, .dslc-tp-comment-form input[type=url]::-moz-placeholder, .dslc-tp-comment-form input[type=email]::-moz-placeholder, .dslc-tp-comment-form textarea::-moz-placeholder {
+						color: <?php echo $css_inputs_color ?>;
+					}
+					.dslc-tp-comment-form input[type=text]::-webkit-input-placeholder, .dslc-tp-comment-form input[type=url]::-webkit-input-placeholder, .dslc-tp-comment-form input[type=email]::-webkit-input-placeholder, .dslc-tp-comment-form textarea::-webkit-input-placeholder {
+						color: <?php echo $css_inputs_color ?>;
+					}
+					.dslc-tp-comment-form input[type=text]:-ms-input-placeholder, .dslc-tp-comment-form input[type=url]:-ms-input-placeholder, .dslc-tp-comment-form input[type=email]:-ms-input-placeholder, .dslc-tp-comment-form textarea:-ms-input-placeholder {
+						color: <?php echo $css_inputs_color ?>;
+					}
+				</style>
 			<?php
 
 		/* Module output ends here */

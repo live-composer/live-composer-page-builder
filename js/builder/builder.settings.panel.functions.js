@@ -465,7 +465,7 @@ function dslc_module_options_tab_filter( dslcTab ) {
 		}
 	}
 
-	// Scroll horizontally options panel to the left:
+	// Scroll horizontally options panel to the left (not ready)
 	// jQuery('.dslca-module-edit-options-wrapper').offset({ left: 20 });
 }
 

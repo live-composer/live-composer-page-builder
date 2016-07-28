@@ -190,11 +190,6 @@ function dslc_ajax_add_module( $atts ) {
 			$preload_preset = 'disabled';
 		}
 
-		// If post ID is not numeric stop execution?
-		if ( ! is_numeric( $post_id ) ) {
-			return;
-		}
-
 		/**
 		 * The instance ID for this specific module
 		 */
@@ -232,9 +227,11 @@ function dslc_ajax_add_module( $atts ) {
 		}
 
 		// If module instance ID not numeric stop execution?
+		/*
 		if ( ! is_numeric( $module_instance_id ) ) {
 			return;
 		}
+		*/
 
 		// Instanciate the module class.
 		$module_instance = new $module_id();
@@ -494,6 +491,8 @@ function dslc_ajax_display_module_options( $atts ) {
 				'button_icon_id',
 				'icon_pos',
 				'button_state',
+				'resize_width',
+				'resize_height',
 			);
 
 			$control_with_toggle = '';
@@ -900,7 +899,7 @@ function dslc_ajax_save_composer( $atts ) {
 		 * 'dslc_code' meta completely before saving it again
 		 * to solve this problem.
 		 */
-		delete_post_meta($post_id, 'dslc_code');
+		delete_post_meta( $post_id, 'dslc_code' );
 
 		// Add/update the post/page with the composer code
 		if ( update_post_meta( $post_id, 'dslc_code', $composer_code ) ) {
@@ -1294,9 +1293,7 @@ function dslc_ajax_dm_module_defaults_code( $atts ) {
 						$code .= "		'" . $setting['id'] . "' => '" . $settings_new[$setting['id']] . "',
 ";
 					}
-
 				}
-
 			}
 
 			$code .= '	);

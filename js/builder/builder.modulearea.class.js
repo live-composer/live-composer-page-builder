@@ -135,4 +135,7 @@ DSLC.Editor.CModuleArea = function(elem) {
 			}
 		}
 	});
+
+	// Mark module area as initialized
+	jQuery( elem ).attr('data-jsinit', 'initialized');
 }

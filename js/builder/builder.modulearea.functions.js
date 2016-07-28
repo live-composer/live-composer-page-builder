@@ -336,6 +336,8 @@ function dslc_modules_area_copy( area ) {
 					opacity : 1
 				}, 300);
 
+				dslc_generate_code(); // Update firs/last column classes
+
 			});
 
 		});
@@ -344,7 +346,6 @@ function dslc_modules_area_copy( area ) {
 
 	// Call other functions
 	dslc_drag_and_drop();
-	dslc_generate_code();
 	dslc_show_publish_button();
 
 }
@@ -369,6 +370,27 @@ function dslc_modules_area_width_set( area, newWidth ) {
 	dslc_generate_code();
 	dslc_show_publish_button();
 	DSLC.Editor.frameContext.dslc_masonry();
+
+}
+
+/**
+ * Check Module Areas initialization
+ *
+ * @return void
+ */
+DSLC.Editor.moduleareas_init = function() {
+
+	// Select all the module areas form the main section of the page
+	jQuery( '#dslc-main .dslc-modules-area', DSLC.Editor.frame ).each( function() {
+
+		// Check if all the module areas have data attribute 'jsinit' set to 'initialized'?
+		if ( jQuery( this ).data('jsinit') !== 'initialized' ) {
+
+			// Initialize all the module areas without 'jsinit' attribute!
+			new DSLC.Editor.CModuleArea( this );
+
+		}
+	} );
 
 }
 

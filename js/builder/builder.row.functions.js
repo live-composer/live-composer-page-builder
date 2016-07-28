@@ -20,7 +20,6 @@
 	var $ = jQuery;
 
 	jQuery(".dslc-modules-section", DSLC.Editor.frame).each(function(){
-
 		new DSLC.Editor.CRow(this);
 	});
 
@@ -455,20 +454,31 @@ function dslc_row_copy( row ) {
 	if ( dslcDebug ) console.log( 'dslc_row_copy' );
 
 	// Vars that will be used
-	var dslcModuleID,
+	var dslc_module_id,
 	dslcModulesSectionCloned,
 	dslcModule;
 
 	// Clone the row
 	dslcModulesSectionCloned = row.clone().appendTo( jQuery('#dslc-main', DSLC.Editor.frame ) );
 
+	// Mark new ROW as NON initialized
+	dslcModulesSectionCloned[0].removeAttribute('data-jsinit');
+
 	// Go through each area of the new row and apply correct data-size
+	// Mark each module area inside as NON initialized (2)
 	dslcModulesSectionCloned.find('.dslc-modules-area').each(function(){
 		var dslcIndex = jQuery(this).index();
 		jQuery(this).data('size', row.find('.dslc-modules-area:eq( ' + dslcIndex + ' )').data('size') );
+
+		this.removeAttribute('data-jsinit'); // (2)
 	});
 
-	// Remove animations and temporary hide modules
+
+	/**
+	 * Re-render modules inside of the new ROW
+	 */
+
+	// Remove animations and temporary hide modules inside
 	dslcModulesSectionCloned.find('.dslc-module-front').css({
 		'-webkit-animation-name' : 'none',
 		'-moz-animation-name' : 'none',
@@ -477,50 +487,58 @@ function dslc_row_copy( row ) {
 		'-webkit-animation-duration' : '0',
 		opacity : 0
 
-	// Go through each module
+	// Go through each module inside the new ROW
 	}).each(function(){
 
 		// Current module
-		dslcModule = jQuery(this);
+		dslc_module = jQuery(this);
 
-		// Reguest new ID
-		jQuery.ajax({
-			type: 'POST',
-			method: 'POST',
-			url: DSLCAjax.ajaxurl,
-			data: { action : 'dslc-ajax-get-new-module-id' },
-			async: false
-		}).done(function( response ) {
+		// Generate new (pseudo) unique ID for the module
+		dslc_module_id = DSLC_Util.get_unique_id();
 
-			// Remove "being-edited" class
-			jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
+		// Remove "dslca-module-being-edited" class form any element
+		jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
 
-			// Get new ID
-			dslcModuleID = response.output;
+		// Update module attributes with new ID
+		dslc_module.data( 'module-id', dslc_module_id ).attr( 'id', 'dslc-module-' + dslc_module_id );
 
-			// Apply new ID and append "being-edited" class
-			dslcModule.data( 'module-id', dslcModuleID ).attr( 'id', 'dslc-module-' + dslcModuleID ).addClass('dslca-module-being-edited');
+		// Add "dslca-module-being-edited" class
+		// Class required for dslc_module_output_altered function.
+		dslc_module.addClass('dslca-module-being-edited');
 
-			// Reload the module, remove "being-edited" class and show module
-			dslc_module_output_altered( function(){
-				jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited').animate({
-					opacity : 1
-				}, 300);
-			});
+		// Add new postponed action to run after ajax is done
+		DSLC.Editor.add_postponed_action('dslc_actions_after_row_copy');
 
+		// Redraw module output, remove "being-edited" class and show module
+		dslc_module_output_altered( function(){
+
+			jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited').animate({
+				opacity : 1
+			}, 300);
+
+			// Ajax is done check-out postponed actions queue
+			DSLC.Editor.release_postponed_actions();
 		});
-
 	});
+}
 
+/**
+ * Set of actions to run after row being copied
+ * and all the ajax calls completed
+ *
+ * @return void
+ */
+function dslc_actions_after_row_copy() {
 
-	// Re-initiate JS classes
-	new DSLC.Editor.CRow(dslcModulesSectionCloned);
-	new DSLC.Editor.CModuleArea(dslcModulesSectionCloned.find('.dslc-modules-area').eq(0)[0]);
+	if ( dslcDebug ) console.info( 'dslc_after_copy_actions' );
 
+	// Check init for rows and module areas
+	DSLC.Editor.rows_init();
+	DSLC.Editor.moduleareas_init();
 
-	// Call additional functions
-	dslc_drag_and_drop();
 	dslc_generate_code();
+	dslc_drag_and_drop();
+
 	dslc_show_publish_button();
 }
 
@@ -599,3 +617,23 @@ jQuery(document).ready(function($){
 		DSLC.Editor.frameContext.dslc_responsive_classes( true );
 	});
 });
+
+/**
+ * Check ROWs initialization
+ *
+ * @return void
+ */
+DSLC.Editor.rows_init = function() {
+
+	// Select all the ROWs form the main section of the page
+	jQuery( '#dslc-main .dslc-modules-section', DSLC.Editor.frame ).each( function() {
+
+		// Check if all the rows have data attribute 'jsinit' set to 'initialized'?
+		if ( jQuery( this ).data('jsinit') !== 'initialized' ) {
+
+			// Initialize all the rows without 'jsinit' attribute!
+			new DSLC.Editor.CRow( this );
+		}
+	} );
+
+}

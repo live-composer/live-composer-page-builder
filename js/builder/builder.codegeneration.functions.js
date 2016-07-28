@@ -150,9 +150,12 @@ function dslc_generate_code() {
 
 	/**
 	 * Go through module areas (empty or not empty)
+	 * TODO: Optimize code to go though the section/area needed only,
+	 * not the whole page.
 	 */
 
 	jQuery('#dslc-main .dslc-modules-area', DSLC.Editor.frame).each(function(){
+
 
 		if ( jQuery('.dslc-module-front', this).length ) {
 
@@ -174,11 +177,12 @@ function dslc_generate_code() {
 	});
 
 	/**
-	 * Go through module sections (empty or not empty)
+	 * Go through each row (empty or not empty)
 	 */
 
 	jQuery('#dslc-main .dslc-modules-section', DSLC.Editor.frame).each(function(){
 
+		// Update dslc-modules-section-(not)empty classes
 		if ( jQuery('.dslc-modules-area', this).length ) {
 
 			jQuery(this).removeClass('dslc-modules-section-empty').addClass('dslc-modules-section-not-empty');
@@ -186,16 +190,11 @@ function dslc_generate_code() {
 
 			jQuery(this).removeClass('dslc-modules-section-not-empty').addClass('dslc-modules-section-empty');
 		}
-	});
 
-	// Remove last and first classes
-	jQuery('#dslc-main .dslc-modules-area.dslc-last-col, .dslc-modules-area.dslc-first-col', DSLC.Editor.frame).removeClass('dslc-last-col dslc-first-col');
-	jQuery('#dslc-main .dslc-module-front.dslc-last-col, .dslc-module-front.dslc-first-col', DSLC.Editor.frame).removeClass('dslc-last-col dslc-first-col');
+			// Remove last and first classes from module areas and modules
+		jQuery('.dslc-modules-area.dslc-last-col, .dslc-modules-area.dslc-first-col', this).removeClass('dslc-last-col dslc-first-col');
+		jQuery('.dslc-module-front.dslc-last-col, .dslc-module-front.dslc-first-col', this).removeClass('dslc-last-col dslc-first-col');
 
-	/**
-	 * Go through each row
-	 */
-	jQuery('#dslc-main .dslc-modules-section', DSLC.Editor.frame).each(function(){
 
 		// Vars
 		currPerRowA = 0;
@@ -214,6 +213,9 @@ function dslc_generate_code() {
 		 * Go through each column of current row
 		 */
 		jQuery('.dslc-modules-area', modulesSection).each(function(){
+
+			// Reset width counter for modules
+			currPerRow = 0;
 
 			// Vars
 			modulesArea = jQuery(this);
@@ -277,13 +279,15 @@ function dslc_generate_code() {
 				if ( currPerRow == maxPerRow ) {
 
 					// Add classes to current and next module
-					jQuery(this).addClass('dslc-last-col').next('.dslc-module-front').addClass('dslc-first-col');
+					jQuery(this).addClass('dslc-last-col');
+					jQuery(this).next('.dslc-module-front').addClass('dslc-first-col');
 
 					// Reset modules column counter
 					currPerRow = 0;
 
 					// Set shortcode's "last" state to "yes"
 					moduleLastState = 'yes';
+
 
 				// If modules column counter bigger than maximum
 				} else if ( currPerRow > maxPerRow ) {
@@ -303,12 +307,13 @@ function dslc_generate_code() {
 
 					// Set shorcode's "first" state to "yes"
 					moduleFirstState = 'yes';
-
+/*
 					// Add classes for current and next module
 					jQuery(this).addClass('dslc-last-col').next('.dslc-module-front').addClass('dslc-first-col');
 
 					// Resest modules column counter
 					currPerRow = 0;
+*/
 				}
 
 				// Get module's LC data

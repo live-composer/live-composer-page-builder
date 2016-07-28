@@ -90,7 +90,6 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 
 	$css_output = '';
 	global $dslc_googlefonts_array;
-	$googlefonts_output = '';
 	$regular_fonts = array( 'Georgia', 'Times', 'Arial', 'Lucida Sans Unicode', 'Tahoma', 'Trebuchet MS', 'Verdana', 'Helvetica' );
 	$organized_array = array();
 
@@ -134,7 +133,7 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 				$module_settings[ $option_arr['id'] ] = $option_arr['std'];
 			}
 
-			// Extension (px, %, em...).
+			// Extension for the input control (px, %, em...).
 			$ext = ' ';
 			if ( isset( $option_arr['ext'] ) ) {
 				$ext = $option_arr['ext'];
@@ -173,17 +172,6 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 
 				// Removed #dslc-content from the line for better CSS optimization.
 				$affect_el .= '#dslc-module-' . $module_settings['module_instance_id'] . ' ' . $affect_el_arr;
-
-				/**
-				 * If $restart = true >> we are redrawing the module code in LC editing mode.
-				 * It means we try to override module CSS that is already available in the page code.
-				 * To override it, we add .dslca-enabled for each CSS rule.
-				 */
-				/*
-				if ( $restart ) {
-					$affect_el = '.dslca-enabled ' . $affect_el;
-				}
-				*/
 			}
 
 			// Checkbox ( CSS ).
@@ -235,7 +223,6 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 			// Colors (transparent if empty ).
 			if ( '' === $module_settings[ $option_arr['id'] ] && ( 'background' === $option_arr['affect_on_change_rule'] || 'background-color' === $option_arr['affect_on_change_rule'] ) ) {
 
-				// $module_settings[$option_arr['id']] = 'transparent';
 				$module_settings[ $option_arr['id'] ] = '';
 			}
 
@@ -259,13 +246,10 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 
 		foreach ( $organized_array as $el => $rules ) {
 			$do_css_output = false;
-			$css_output_el = ''; // var for temporary output of current el
-
-			// $do_css_output_border = false;
-			// $css_output_el_border = ''; // process border CSS properties separately
+			$css_output_el = ''; // Var for temporary output of current el.
 
 			$do_css_output_background = false;
-			$css_output_el_background = ''; // process background CSS properties separately
+			$css_output_el_background = ''; // Process background CSS properties separately.
 
 			// Remove double spaces form css element address.
 			$el = preg_replace( '/ {2,}/', ' ', $el );

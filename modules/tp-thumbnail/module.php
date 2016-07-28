@@ -82,7 +82,7 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				'min' => 0,
 				'max' => 10,
 				'increment' => 1,
-				
+
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -362,6 +362,14 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 
 		$post_id = $options['post_id'];
 
+		$thumb_url = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
+
+		if ( ! $thumb_url && ! $dslc_active ) {
+			return; // Don't output module if no thumbnail set.
+		}
+
+		$thumb_url = $thumb_url[0];
+
 		$this->module_start( $options );
 
 		if ( is_singular() ) {
@@ -374,9 +382,6 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 			if ( ! empty( $options['resize_width'] ) || ! empty( $options['resize_height'] ) ) {
 
 				$manual_resize = true;
-				$thumb_url = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
-				$thumb_url = $thumb_url[0];
-
 				$resize_width = false;
 				$resize_height = false;
 
@@ -398,9 +403,24 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 						<?php else : ?>
 							<?php echo get_the_post_thumbnail( $post_id, 'full' ); ?>
 						<?php endif;
-					?></div><?php
+					?></div>
+				<?php
 				else :
-					?><div class="dslc-tp-thumbnail dslc-tp-thumbnail-fake"><img src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/placeholders/tpl-thumb-placeholder.png" /></div><?php
+
+					$placeholder_inline_style = 'style="';
+
+					if ( $resize_width ) {
+						$placeholder_inline_style .= 'width:' . $resize_width . 'px;';
+					}
+
+					if ( $resize_height ) {
+						$placeholder_inline_style .= 'height:' . $resize_height . 'px;';
+					}
+
+					$placeholder_inline_style .= '"';
+				?>
+					<div class="dslc-tp-thumbnail dslc-tp-thumbnail-fake"><img src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/placeholders/tpl-thumb-placeholder.png" <?php echo $placeholder_inline_style; ?> /></div>
+					<?php
 				endif;
 			else :
 				?><div class="dslc-tp-thumbnail">
@@ -418,10 +438,9 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				</div><?php
 			endif;
 
-		/* Module output ends here */
+		/* Module output ends here. */
 
 		$this->module_end( $options );
 
 	}
-
 }

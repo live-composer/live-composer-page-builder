@@ -426,11 +426,6 @@ html {
 	position: relative;
 }
 
-
-		.dslca-enabled .dslc-modules-area {
-			text-align: center;
-		}
-
 		.dslca-module {
 			color: #fff;
 			cursor: grab;
@@ -2103,7 +2098,7 @@ body.rtl .dslca-modules-area-placeholder {
 .dslca-section-scroller {
 	position: relative;
 	height: 74px;
-	margin-right: 70px;
+	margin-right: 80px;
 	overflow: hidden;
 }
 
@@ -2133,10 +2128,11 @@ body.rtl .dslca-modules-area-placeholder {
 	background: linear-gradient(to right,  rgba(88,144,229,0) 0%,rgba(70, 116, 185,1) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00004799', endColorstr='#5890e5',GradientType=1 );
 	position: absolute;
-	right: 70px;
-	width: 30px;
+	right: 80px;
+	width: 20px;
 	bottom: 0;
 	top: 0;
+	z-index: 1;
 }
 
 .dslca-section-scroller-nav {
@@ -2145,7 +2141,8 @@ body.rtl .dslca-modules-area-placeholder {
 	top: 0;
 	bottom: 0;
 	overflow: hidden;
-	width: 70px;
+	width: 80px;
+	font-size: 30px;
 }
 
 	.dslca-section-scroller-nav > a {
@@ -2155,7 +2152,7 @@ body.rtl .dslca-modules-area-placeholder {
 		align-items: center;
 
 		/*float: left;*/
-		width: 35px;
+		width: 40px;
 		position: absolute;
 		left: 0;
 		top: 0;

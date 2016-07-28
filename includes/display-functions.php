@@ -809,9 +809,7 @@ function dslc_module_front( $atts, $settings_raw = null ) {
 				} else {
 					$settings[$all_opt['id']] = false;
 				}
-
 			}
-
 		}
 
 		// Load preset options if preset supplied
@@ -1433,7 +1431,6 @@ function dslc_module_gen_css( $atts, $settings_raw ) {
 			if ( $option_arr['id'] == 'css_custom' && $module_id == 'DSLC_Text_Simple' && ! isset( $settings['css_custom'] ) ) {
 				$settings['css_custom'] = $option_arr['std'];
 			}
-
 		}
 
 		// Generate custom CSS
@@ -1449,7 +1446,6 @@ function dslc_module_gen_css( $atts, $settings_raw ) {
 		} else {
 					$css_output = dslc_generate_custom_css( $options_arr, $settings );
 		}
-
 	}
 
 } add_shortcode( 'dslc_module_gen_css', 'dslc_module_gen_css' );

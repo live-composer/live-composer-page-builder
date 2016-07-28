@@ -95,7 +95,33 @@ var DSLC_Util = {
 	 get_page_params: function()
 	 {
 		return decodeURIComponent(window.location.search.slice(1)).split('&').reduce(function _reduce ( a, b) { b = b.split('='); a[b[0]] = b[1]; return a; }, {});
-	 }
+	 },
+
+	get_unique_id: function() {
+		return Math.random().toString(32).slice(2);
+	},
+
+	encode: function (code) {
+		// Serialize
+		code = dslc_serialize( code );
+
+		// Encode
+		code = DSLC_Util.utf8_to_b64( code );
+
+		return code;
+	},
+
+	decode: function (code) {
+
+		// Decode base64 to utf8
+		code = DSLC_Util.b64_to_utf8( code );
+
+		// Unserialize decoded code into the object
+		code = dslc_unserialize( code );
+
+		return code;
+	},
+
 
 
 };

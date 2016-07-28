@@ -269,7 +269,7 @@ function dslc_module_copy( module ) {
 	// Vars
 	var dslcModuleID;
 
-	// AJX reguest new ID
+	// AJAX request new module ID
 	jQuery.post(
 
 		DSLCAjax.ajaxurl,
@@ -297,11 +297,14 @@ function dslc_module_copy( module ) {
 			// Reload module
 			dslc_module_output_altered( function(){
 
+				// Once module has been redrawn > run the code below:
+
 				// Fade in the module
 				jQuery('.dslca-module-being-edited', DSLC.Editor.frame).css({ opacity : 0 }).removeClass('dslca-module-being-edited').animate({ opacity : 1 }, 300);
-			});
 
-			dslc_show_publish_button();
+				dslc_generate_code(); // Need to call this function to update last column class for the modules.
+				dslc_show_publish_button();
+			});
 		}
 	);
 }
@@ -320,17 +323,36 @@ function dslc_module_width_set( module, newWidth ) {
 	module
 		.removeClass('dslc-1-col dslc-2-col dslc-3-col dslc-4-col dslc-5-col dslc-6-col dslc-7-col dslc-8-col dslc-9-col dslc-10-col dslc-11-col dslc-12-col')
 		.addClass(newClass)
-		.data('dslc-module-size', newWidth)
-		.addClass('dslca-module-being-edited');
+		.data('dslc-module-size', newWidth);
+		//.addClass('dslca-module-being-edited'); – Deprecated
 
-	// Change the module size field
+	// Change the module size attribute
 	jQuery( '.dslca-module-option-front[data-id="dslc_m_size"]', module ).val( newWidth );
 
-	// Preview Change
+	// Get module raw code
+	var module_code = module.find('.dslca-module-code').val();
+
+ 	// Decode
+	module_code = DSLC_Util.decode( module_code );
+
+	// Change size property
+	module_code.dslc_m_size = newWidth;
+
+	// Encode
+	module_code = DSLC_Util.encode( module_code );
+
+	// Update raw code
+	module.find('.dslca-module-code').val(module_code);
+
+	// Preview Change – DEPRECATED
+	/*
 	dslc_module_output_altered( function(){
 
 		jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
 	});
+	*/
+
+	dslc_generate_code();
 
 	dslc_show_publish_button();
 }
@@ -513,8 +535,11 @@ function dslc_module_output_altered( callback ) {
 
 			// Insert 'updated' module output after module we are editing.
 			dslcModule.after(response.output).next().addClass('dslca-module-being-edited');
+
 			// Delete 'old' instance of the module we are editing.
 			dslcModule.remove();
+
+			// TODO: Add new postponed action to run after all done
 
 			// dslc_generate_code();
 			// dslc_show_publish_button();

@@ -81,7 +81,6 @@ if ( ! class_exists( 'DSLC_Aq_Resize' ) ) {
 				$upload_url = str_replace( $https_prefix, $http_prefix, $upload_url );
 			}
 
-
 			// Check if $img_url is local.
 			if ( false === strpos( $url, $upload_url ) ) return false;
 

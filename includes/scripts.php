@@ -45,9 +45,6 @@ final class DSLC_Scripts{
 
 		global $dslc_active;
 
-		// Allow devs to alter available fonts.
-		$fonts_array = apply_filters( 'dslc_available_fonts', self::$fonts_array );
-
 		// Array of icons available to be used.
 		global $dslc_var_icons;
 
@@ -179,9 +176,6 @@ final class DSLC_Scripts{
 
 			wp_enqueue_media();
 
-			// Allow devs to alter available fonts.
-			$fonts_array = apply_filters( 'dslc_available_fonts', self::$fonts_array );
-
 			/**
 			 * CSS
 			 */
@@ -194,24 +188,17 @@ final class DSLC_Scripts{
 			 * JavaScript
 			 */
 
-			// wp_enqueue_script( 'dslc-plugins-js', DS_LIVE_COMPOSER_URL . 'js/libs/plugins.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
-			// wp_enqueue_script( 'dslc-main-js', DS_LIVE_COMPOSER_URL . 'js/common/main' . $min_suffix . '.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
-			// wp_localize_script( 'dslc-main-js', 'DSLCAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php', $protocol ) ) );
-
 			wp_enqueue_script( 'jquery-ui-core' );
 			wp_enqueue_script( 'jquery-ui-sortable' );
 			wp_enqueue_script( 'jquery-ui-draggable' );
 			wp_enqueue_script( 'jquery-ui-droppable' );
 			wp_enqueue_script( 'jquery-effects-core' );
-			// wp_enqueue_script( 'jquery-ui-slider' );
 			wp_enqueue_script( 'jquery-ui-resizable' );
-			// wp_enqueue_script( 'wp-color-picker' );
 
 			wp_enqueue_script( 'wp-mediaelement' );
 			wp_enqueue_script( 'imagesloaded' ); // Need this for Masonry.
 			wp_enqueue_script( 'jquery-masonry' );
 
-			// wp_enqueue_script( 'dslc-load-fonts', '//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js' );
 			wp_enqueue_script( 'dslc-builder-plugins-js', DS_LIVE_COMPOSER_URL . 'js/builder/builder.plugins.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 
 			if ( ! SCRIPT_DEBUG ) {
@@ -250,6 +237,9 @@ final class DSLC_Scripts{
 				'str_res_tablet' => __( 'Tablet', 'live-composer-page-builder' ),
 				'str_res_phone' => __( 'Phone', 'live-composer-page-builder' ),
 			);
+
+			// Allow devs to alter available fonts.
+			$fonts_array = apply_filters( 'dslc_available_fonts', self::$fonts_array );
 
 			wp_localize_script( 'dslc-builder-main-js', 'DSLCString', $translation_array );
 			wp_localize_script( 'dslc-builder-main-js', 'DSLCFonts', self::$fonts_array );
