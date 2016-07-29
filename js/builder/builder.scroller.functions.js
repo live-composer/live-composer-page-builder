@@ -180,6 +180,21 @@
 	jQuery(document).ready(function($){
 
 		/**
+		 * Scroll list of modules with a mouse wheel.
+		 */
+		$('.dslca-section-scroller').on( 'wheel', function(event) {
+
+			if (event.originalEvent.deltaY >= 10 || event.originalEvent.deltaX >= 10) {
+			   event.preventDefault();
+			   dslc_scroller_next( $(this).closest('.dslca-section').find('.dslca-section-scroller') );
+
+			} else if (event.originalEvent.deltaY <= -10 || event.originalEvent.deltaX <= -10) {
+			   event.preventDefault();
+			   dslc_scroller_prev( $(this).closest('.dslca-section').find('.dslca-section-scroller') );
+			}
+		} );
+
+		/**
 		 * Hook - Scroller Prev
 		 */
 
