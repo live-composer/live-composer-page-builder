@@ -169,6 +169,8 @@ jQuery(document).on( 'click', '.dslca-section-title', function(e){
 	if ( jQuery('.dslca-section-title-filter', this).length ) {
 
 		dslc_generate_filters();
+
+		// Open filter panel
 		jQuery('.dslca-section-title-filter-options').slideToggle(300);
 	}
 });
@@ -195,6 +197,9 @@ jQuery(document).on( 'click', '.dslca-section-title-filter-options span', functi
 	jQuery('.dslca-section-scroller-inner').css({ left : 0 });
 
 	dslc_filter_origin( origin, section );
+
+	// Close filter panel
+	jQuery('.dslca-section-title-filter-options').slideToggle(300);
 });
 
 

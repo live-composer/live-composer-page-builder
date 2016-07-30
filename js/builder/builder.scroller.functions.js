@@ -174,34 +174,73 @@
 	}
 
 	/**
-	 * SCROLLER - Document Ready
+	 * Listen for users actions on the scroller element.
+	 * @return void
 	 */
-
-	jQuery(document).ready(function($){
+	function dslc_scroller_inputevents() {
 
 		/**
 		 * Scroll list of modules with a mouse wheel.
 		 */
-		$('.dslca-section-scroller').on( 'wheel', function(event) {
 
+		var scrolling_completed = true;
+		var scrolling_direction = ''; // 'X' or 'Y'
+
+		jQuery('.dslca-section-scroller').on( 'wheel', function(event) {
+
+			/* Detect scroll to the right (vertical or horizontal) */
 			if (event.originalEvent.deltaY >= 10 || event.originalEvent.deltaX >= 10) {
-			   event.preventDefault();
-			   dslc_scroller_next( $(this).closest('.dslca-section').find('.dslca-section-scroller') );
+				event.preventDefault();
 
+				if ( scrolling_completed ) {
+					// Scrolling function
+					dslc_scroller_next( jQuery(this).closest('.dslca-section').find('.dslca-section-scroller') );
+					/*
+						event.originalEvent.delta is changing like this on every scroll:
+						0 .. 5 .. 16 .. 57 .. 104 .. 57 .. 16 .. 5 .. 0
+
+						We don't want the scrolling function to run on every delta number change.
+						Instead we just determine direction, run function once
+						and wait will delta value goes back to 0.
+					 */
+					scrolling_completed = false;
+				}
+
+			/* Detect scroll to the left (vertical or horizontal) */
 			} else if (event.originalEvent.deltaY <= -10 || event.originalEvent.deltaX <= -10) {
-			   event.preventDefault();
-			   dslc_scroller_prev( $(this).closest('.dslca-section').find('.dslca-section-scroller') );
+				event.preventDefault();
+
+				if ( scrolling_completed ) {
+					// Scrolling function
+					dslc_scroller_prev( jQuery(this).closest('.dslca-section').find('.dslca-section-scroller') );
+					scrolling_completed = false;
+				}
 			}
+
+			/* Set the scrolling direction (vertical or horizontal) */
+			if (event.originalEvent.deltaY >= 10 || event.originalEvent.deltaY <= -10) {
+				scrolling_direction = 'Y';
+			} else if (event.originalEvent.deltaX >= 10 || event.originalEvent.deltaX <= -10) {
+				scrolling_direction = 'X';
+			}
+
+			/* Scrolling delta reached 0 – we can run scrolling functions again */
+			if ( scrolling_completed === false && scrolling_direction === 'Y' && event.originalEvent.deltaY === 0 ) {
+				scrolling_completed = true;
+			} else if ( scrolling_completed === false && scrolling_direction === 'X' && event.originalEvent.deltaX === 0 ) {
+				scrolling_completed = true;
+			}
+
 		} );
 
 		/**
 		 * Hook - Scroller Prev
 		 */
 
-		$(document).on( 'click', '.dslca-section-scroller-prev', function(e){
+		jQuery(document).on( 'click', '.dslca-section-scroller-prev', function(e){
 
 			e.preventDefault();
-			dslc_scroller_prev( $(this).closest('.dslca-section').find('.dslca-section-scroller') );
+			dslc_scroller_prev( jQuery(this).closest('.dslca-section').find('.dslca-section-scroller') );
 
 		});
 
@@ -209,12 +248,22 @@
 		 * Hook - Scroller Next
 		 */
 
-		$(document).on( 'click', '.dslca-section-scroller-next', function(e){
+		jQuery(document).on( 'click', '.dslca-section-scroller-next', function(e){
 
 			e.preventDefault();
-			dslc_scroller_next( $(this).closest('.dslca-section').find('.dslca-section-scroller') );
+			dslc_scroller_next( jQuery(this).closest('.dslca-section').find('.dslca-section-scroller') );
 
 		});
+	}
+
+	/**
+	 * SCROLLER - Document Ready
+	 */
+
+	jQuery(document).ready(function($){
+
+		// Listen for users actions on the scroller element.
+		dslc_scroller_inputevents();
 
 	});
 
