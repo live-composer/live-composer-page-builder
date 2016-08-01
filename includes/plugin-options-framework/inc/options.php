@@ -1,6 +1,10 @@
 <?php
 
-
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
 
 	global $content_width;
 
@@ -253,115 +257,95 @@ function dslc_feature_control_unregister() {
 
 } add_action( 'dslc_hook_unregister_modules', 'dslc_feature_control_unregister', 999 );
 
-/**
- * Register Other Options
- *
- * @since 1.0
- */
+	/**
+	 * Register Other Options
+	 *
+	 * @since 1.0
+	 */
+	function dslc_plugin_opts_other() {
 
-function dslc_plugin_opts_other() {
+		global $dslc_plugin_options;
 
-	global $dslc_plugin_options;
+		$dslc_plugin_options['dslc_plugin_options_other'] = array(
+			'title' => __( 'Other', 'live-composer-page-builder' ),
+			'options' => array(
 
-	$dslc_plugin_options['dslc_plugin_options_other'] = array(
-		'title' => __( 'Other', 'live-composer-page-builder' ),
-		'options' => array(
+				'lc_editor_type' => array(
 
-			'lc_editor_type' => array(
-
-				'section' => 'dslc_plugin_options_other',
-				'label' => __( 'Text Editor Type', 'live-composer-page-builder' ),
-				'std' => 'both',
-				'type' => 'select',
-				'descr' => __( 'Choose if you want both the Visual and HTML mode for the editor or only Visual.', 'live-composer-page-builder' ),
-				'choices' => array(
-					array(
-						'label' => 'Visual and HTML',
-						'value' => 'both',
+					'section' => 'dslc_plugin_options_other',
+					'label' => __( 'Text Editor Type', 'live-composer-page-builder' ),
+					'std' => 'both',
+					'type' => 'select',
+					'descr' => __( 'Choose if you want both the Visual and HTML mode for the editor or only Visual.', 'live-composer-page-builder' ),
+					'choices' => array(
+						array(
+							'label' => 'Visual and HTML',
+							'value' => 'both',
+						),
+						array(
+							'label' => 'Visual Only',
+							'value' => 'visual',
+						),
 					),
-					array(
-						'label' => 'Visual Only',
-						'value' => 'visual',
-					)
-				)
+				),
+
+				'lc_default_opts_section' => array(
+
+					'section' => 'dslc_plugin_options_other',
+					'label' => __( 'Default Options Section', 'live-composer-page-builder' ),
+					'std' => 'functionality',
+					'type' => 'select',
+					'descr' => __( 'Choose which options section is active by default ( when you click to edit a module and the options show up ).', 'live-composer-page-builder' ),
+					'choices' => array(
+						array(
+							'label' => 'Functionality',
+							'value' => 'functionality',
+						),
+						array(
+							'label' => 'Styling',
+							'value' => 'styling',
+						),
+					),
+				),
+
+				'lc_module_listing_order' => array(
+
+					'section' => 'dslc_plugin_options_other',
+					'label' => __( 'Modules Listing Order', 'live-composer-page-builder' ),
+					'std' => 'original',
+					'type' => 'select',
+					'descr' => __( 'Choose how the modules should be ordered in the listing ( when in builder mode ).', 'live-composer-page-builder' ),
+					'choices' => array(
+						array(
+							'label' => 'Original',
+							'value' => 'original',
+						),
+						array(
+							'label' => 'Alphabetic',
+							'value' => 'alphabetic',
+						),
+					),
+				),
+
+				'lc_module_activate_button_pos' => array(
+
+					'section' => 'dslc_plugin_options_other',
+					'label' => __( '"Activate Editor" Position', 'live-composer-page-builder' ),
+					'std' => 'right',
+					'type' => 'select',
+					'descr' => __( 'Choose the position of the "Activate Editor" button.', 'live-composer-page-builder' ),
+					'choices' => array(
+						array(
+							'label' => 'Left',
+							'value' => 'left',
+						),
+						array(
+							'label' => 'Right',
+							'value' => 'right',
+						),
+					),
+				),
 			),
+		);
 
-			'lc_default_opts_section' => array(
-
-				'section' => 'dslc_plugin_options_other',
-				'label' => __( 'Default Options Section', 'live-composer-page-builder' ),
-				'std' => 'functionality',
-				'type' => 'select',
-				'descr' => __( 'Choose which options section is active by default ( when you click to edit a module and the options show up ).', 'live-composer-page-builder' ),
-				'choices' => array(
-					array(
-						'label' => 'Functionality',
-						'value' => 'functionality',
-					),
-					array(
-						'label' => 'Styling',
-						'value' => 'styling',
-					)
-				)
-			),
-
-			'lc_numeric_opt_type' => array(
-
-				'section' => 'dslc_plugin_options_other',
-				'label' => __( 'Numeric Option Type', 'live-composer-page-builder' ),
-				'std' => 'slider',
-				'type' => 'select',
-				'descr' => __( 'Choose the type of option used for numeric options.', 'live-composer-page-builder' ),
-				'choices' => array(
-					array(
-						'label' => 'Slider',
-						'value' => 'slider',
-					),
-					array(
-						'label' => 'Field',
-						'value' => 'field',
-					)
-				)
-			),
-
-			'lc_module_listing_order' => array(
-
-				'section' => 'dslc_plugin_options_other',
-				'label' => __( 'Modules Listing Order', 'live-composer-page-builder' ),
-				'std' => 'original',
-				'type' => 'select',
-				'descr' => __( 'Choose how the modules should be ordered in the listing ( when in builder mode ).', 'live-composer-page-builder' ),
-				'choices' => array(
-					array(
-						'label' => 'Original',
-						'value' => 'original',
-					),
-					array(
-						'label' => 'Alphabetic',
-						'value' => 'alphabetic',
-					)
-				)
-			),
-
-			'lc_module_activate_button_pos' => array(
-
-				'section' => 'dslc_plugin_options_other',
-				'label' => __( '"Activate Editor" Position', 'live-composer-page-builder' ),
-				'std' => 'right',
-				'type' => 'select',
-				'descr' => __( 'Choose the position of the "Activate Editor" button.', 'live-composer-page-builder' ),
-				'choices' => array(
-					array(
-						'label' => 'Left',
-						'value' => 'left',
-					),
-					array(
-						'label' => 'Right',
-						'value' => 'right',
-					)
-				)
-			)
-		)
-	);
-
-} add_action( 'dslc_hook_register_options', 'dslc_plugin_opts_other', 50 );
+	} add_action( 'dslc_hook_register_options', 'dslc_plugin_opts_other', 50 );

@@ -3,15 +3,21 @@
  * Extending admin interface with custom options
  */
 
-/// Bad code style!
-$dslc_extension; /// Used in template
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
+
+// Bad code style!
+$dslc_extension; // Used in template
 
 /**
  * DSLC_Extend_Options class
  */
 class DSLC_Options_Extender {
 
-	private $extension_options = [];
+	private $extension_options = array();
 
 
 	/**
@@ -25,11 +31,11 @@ class DSLC_Options_Extender {
 
 		if ( ! isset( $this->extension_options[$ext_id] ) ) return array();
 
-		foreach( $this->extension_options[$ext_id]['sections'] as $section ) {
+		foreach ( $this->extension_options[$ext_id]['sections'] as $section ) {
 
-			foreach( $section['options'] as $option ) {
+			foreach ( $section['options'] as $option ) {
 
-				if( $option['id'] == $opt_id ) return $option;
+				if ( $option['id'] == $opt_id ) return $option;
 			}
 		}
 
@@ -44,7 +50,7 @@ class DSLC_Options_Extender {
 
 		if ( ! isset( $this->extension_options[$options_array['extension_id']] ) ) {
 
-			$this->extension_options[$options_array['extension_id']] = $options_array;
+			$this->extension_options[ $options_array['extension_id'] ] = $options_array;
 		} else {
 
 			throw new Exception( "Settings panel with given extension_id already exists. Try another extension_id." );
@@ -56,20 +62,22 @@ class DSLC_Options_Extender {
 	 */
 	function construct_panels() {
 
-		/// Fill settings stack with panels
+		// Fill settings stack with panels
 		do_action( 'dslc_extend_admin_panel_options' );
 
-		foreach( $this->extension_options as $extender ) {
+		foreach ( $this->extension_options as $extender ) {
 
 			$extender['extension_id'] = strtolower( $extender['extension_id'] );
 
 			$this->add_submenu_page( $extender );
 			$this->register_setting( $extender );
 
-			/// Sections & fields
-			if ( ! is_array( $extender['sections'] ) ) return;
+			// Sections & fields
+			if ( ! is_array( $extender['sections'] ) ) {
+				return;
+			}
 
-			foreach( $extender['sections'] as $section ) {
+			foreach ( $extender['sections'] as $section ) {
 
 				$section['extension_id'] = $extender['extension_id'];
 
@@ -85,8 +93,9 @@ class DSLC_Options_Extender {
 	private function register_setting( $extension ) {
 
 		register_setting(
-			'dslc_custom_options_' . $extension['extension_id'],
-			'dslc_custom_options_' . $extension['extension_id']
+			'dslc_custom_options_' . $extension['extension_id'], // Option Group.
+			'dslc_custom_options_' . $extension['extension_id'], // Option Name.
+			'dslc_plugin_options_input_sanitize'// Sanitize.
 		);
 	}
 
@@ -118,7 +127,7 @@ class DSLC_Options_Extender {
 		global $dslc_extension;
 		$extension = $dslc_extension;
 
-		/// Include template
+		// Include template
 		include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/options-extension-template.php';
 	}
 
@@ -129,13 +138,13 @@ class DSLC_Options_Extender {
 	private function add_setting_section( $section ) {
 
 		add_settings_section(
-			'dslc_' . $section['extension_id'] . '_' . $section['id'], /// id
-			$section['title'], /// title
-			'dslc_plugin_options_display_options', /// callback
-			'dslc_' . $section['extension_id'] . '_' . $section['id'] /// where to show
+			'dslc_' . $section['extension_id'] . '_' . $section['id'], // id
+			$section['title'], // title
+			'dslc_plugin_options_display_options', // callback
+			'dslc_' . $section['extension_id'] . '_' . $section['id'] // where to show
 		);
 
-		if( ! is_array( $section['options'] ) ) continue;
+		if( ! is_array( $section['options'] ) ) return;
 
 		foreach ( $section['options'] as $option ) {
 
@@ -175,29 +184,27 @@ class DSLC_Options_Extender {
 			$option //args
 		);
 	}
-
 }
 
-// Create class object
-$DSLC_Options_Extender = new DSLC_Options_Extender;
+// Create class object.
+$dslc_options_extender = new DSLC_Options_Extender;
 
 function dslc_get_c_option( $opt_id, $ext_id ) {
 
 	$value = get_option( 'dslc_custom_options_' . $ext_id );
 
-	if ( isset( $value[$opt_id] ) ) {
+	if ( isset( $value[ $opt_id ] ) ) {
 
-		return $value[$opt_id];
-	}else{
+		return $value[ $opt_id ];
 
-		global $DSLC_Options_Extender;
-		$option = $DSLC_Options_Extender->get_option_array( $opt_id, $ext_id );
+	} else {
+
+		global $dslc_options_extender;
+		$option = $dslc_options_extender->get_option_array( $opt_id, $ext_id );
 
 		if ( isset( $option['std'] ) ) {
-
 			return $option['std'];
-		}else{
-
+		} else {
 			return '';
 		}
 	}

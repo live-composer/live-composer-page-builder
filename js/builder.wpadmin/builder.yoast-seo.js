@@ -22,9 +22,9 @@ jQuery(document).ready(function(){
 		if ( lcContent !== 'undefined' ) {
 			data = data + ' ' + lcContent;
 		}
-		
+
 		// Pass it back to Yoast
-		return data;		
+		return data;
 
 	};
 

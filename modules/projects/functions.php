@@ -1,5 +1,11 @@
 <?php
 
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
+
 global $dslc_var_post_options;
 
 $dslc_var_post_options['dslc-projects-post-options'] = array(

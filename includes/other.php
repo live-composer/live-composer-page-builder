@@ -8,6 +8,12 @@
  * - dslc_w3tc_admin_notice (Show notice if some of the W3TC settings are problematic)
  */
 
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
+
 
 /**
  * Additional links on plugin listings page
@@ -65,7 +71,16 @@ function dslc_icons_modal() {
 		global $dslc_active,
 				 $dslc_var_icons; // array with icon sets
 
-		if ( $dslc_active && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+		$screen = get_current_screen();
+
+		if ( $screen->id != 'toplevel_page_livecomposer_editor' ) {
+
+			return;
+		}
+
+
+		if ( current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+
 			// output list of icons
 			foreach ( $dslc_var_icons as $key => $value ) {
 
@@ -81,12 +96,12 @@ function dslc_icons_modal() {
 					}
 
 					echo '</ul>';
-				echo '</div>';
+				echo '</div><div class="dslca-prompt-modal-custom"></div>';
 			}
 		}
 	}
 }
-add_action( 'wp_footer', 'dslc_icons_modal' );
+add_action( 'admin_footer', 'dslc_icons_modal' );
 
 
 /**
@@ -231,3 +246,45 @@ function dslc_check_wpsettings_admin_notice() {
 		<?php }
 }
 add_action( 'admin_notices', 'dslc_check_wpsettings_admin_notice' );
+
+function dslc_module_options_func( $module_options ) {
+
+	return array_merge( $module_options, DSLC_Module::common_options() );
+}
+add_filter( 'dslc_module_options', 'dslc_module_options_func', 1 );
+
+/**
+ * Get contrast color for color picker text.
+ *
+ * @param  string $hexcolor Color to analyze.
+ * @return string 'black' or 'white' depending on contrast.
+ */
+function dslc_get_contrast_bw( $hexcolor ) {
+
+	$r = hexdec( substr( $hexcolor, 0, 2 ) );
+	$g = hexdec( substr( $hexcolor, 2, 4 ) );
+	$b = hexdec( substr( $hexcolor, 4, 6 ) );
+
+	$yiq = ( ( $r * 299 ) + ( $g * 587 ) + ( $b * 114 ) ) / 1000;
+
+	return ( $yiq >= 128 ) ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)';
+}
+
+function dslc_rgbtohex( $rgb ) {
+
+	if ( isset($rgb) && 6 === strlen($rgb) ) {
+
+
+		preg_match_all( '/\d+/', $rgb, $matches );
+
+		// String padding bug found and the solution put forth by Pete Williams (http://snipplr.com/users/PeteW).
+		$hex = '#';
+		$hex .= str_pad( dechex( $matches[0][0] ), 2, '0', STR_PAD_LEFT );
+		$hex .= str_pad( dechex( $matches[0][1] ), 2, '0', STR_PAD_LEFT );
+		$hex .= str_pad( dechex( $matches[0][2] ), 2, '0', STR_PAD_LEFT );
+
+		return $hex;
+	} else {
+		return;
+	}
+}

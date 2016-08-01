@@ -8,6 +8,12 @@
  * dslc_search_filter_distinct ( Eliminate duplicated search results )
  */
 
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
+
 
 /**
  * Include the post meta table in search results

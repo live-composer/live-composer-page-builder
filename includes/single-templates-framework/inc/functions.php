@@ -1,9 +1,14 @@
 <?php
 
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
+
 /**
  * "st" in function names stands for "single template", that's what the functions are related to
  */
-
 function dslc_st_init() {
 
 	$capability = dslc_get_option( 'lc_min_capability_page', 'dslc_plugin_options_access_control' );
@@ -27,7 +32,7 @@ function dslc_st_init() {
 			'parent' => __( 'Parent Template', 'live-composer-page-builder' ),
 		),
 		'public' => true,
-		'supports' => array('title', 'custom-fields', 'thumbnail'),
+		'supports' => array( 'title', 'custom-fields', 'thumbnail' ),
 		'capabilities' => array(
 			'publish_posts' => $capability,
 			'edit_posts' => $capability,
@@ -37,7 +42,7 @@ function dslc_st_init() {
 			'read_private_posts' => $capability,
 			'edit_post' => $capability,
 			'delete_post' => $capability,
-			'read_post' => $capability
+			'read_post' => $capability,
 		),
 	) );
 
@@ -45,11 +50,14 @@ function dslc_st_init() {
 
 	// Generate the choices
 	global $dslc_var_templates_pt;
+
 	$pt_choices = array();
+
 	foreach ( $dslc_var_templates_pt as $pt_id => $pt_label ) {
+
 		$pt_choices[] = array(
 			'label' => $pt_label,
-			'value' => $pt_id
+			'value' => $pt_id,
 		);
 	}
 
@@ -63,7 +71,7 @@ function dslc_st_init() {
 				'std' => '',
 				'id' => 'dslc_template_for',
 				'type' => 'select',
-				'choices' => $pt_choices
+				'choices' => $pt_choices,
 			),
 			array(
 				'label' => __( 'Base', 'live-composer-page-builder' ),
@@ -74,13 +82,13 @@ function dslc_st_init() {
 				'choices' => array(
 					array(
 						'label' => 'Theme Template',
-						'value' => 'theme'
+						'value' => 'theme',
 					),
 					array(
 						'label' => 'Plugin Template',
-						'value' => 'custom'
+						'value' => 'custom',
 					),
-				)
+				),
 			),
 			array(
 				'label' => __( 'Type', 'live-composer-page-builder' ),
@@ -91,25 +99,24 @@ function dslc_st_init() {
 				'choices' => array(
 					array(
 						'label' => 'Regular',
-						'value' => 'regular'
+						'value' => 'regular',
 					),
 					array(
 						'label' => 'Default',
-						'value' => 'default'
+						'value' => 'default',
 					),
-				)
+				),
 			),
-		)
+		),
 	);
 
-} add_action( 'init', 'dslc_st_init' );
+} add_action( 'init', 'dslc_st_init', 90 );
 
 /**
  * Get the template ID of a specific post
  *
  * @since 1.0
  */
-
 function dslc_st_get_template_ID( $post_ID ) {
 
 	// Get the template ID set for the post ( returns false if not set )

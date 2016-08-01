@@ -3,7 +3,7 @@ Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page
 Requires at least: 3.9
 Tested up to: 4.5.2
-Stable tag: 1.0.8.1
+Stable tag: 1.0.8.3
 License: GPLv3
 
 Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
@@ -123,6 +123,24 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 1. Editor activated on a page
 
 == Changelog ==
+
+= 1.0.8.4 - May 2@st 2016 =
+
+* Bug Fixed: Responsive navigation do not display
+
+= 1.0.8.3 - May 21st 2016 =
+
+* Bug Fixed: A few font display issues introduced in the previous release
+
+= 1.0.8.2 - May 21st 2016 =
+
+* Module Options: New Max-Width setting in the IMAGE module added.
+* Code Improvements: New Live Composer automatically deacitvate Lite and Previous generation of the plugin.
+* Code Improvements: When save process fails, errors are more informative now.
+* Code Improvements: Removed all the custom fonts from Module defaults.
+* Bug Fixed: Fixed problems when styling options do not apply after.
+* Bug Fixed: Fixed infinite loop when full content displayed on posts archive listing.
+
 
 = 1.0.8.1 - May 14th 2016 =
 

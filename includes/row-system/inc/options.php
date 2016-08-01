@@ -6,6 +6,11 @@
  * - dslc_row_register_options ( Register options )
  */
 
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
 
 	/**
 	 * Register Options
@@ -35,12 +40,12 @@
 					'label' => 'Phone',
 					'value' => 'phone',
 				),
-			)
+			),
 		);
 
 		$dslc_var_row_options['type'] = array(
 			'id' => 'type',
-			'std' => 'wrapped',
+			'std' => 'wrapper',
 			'label' => __( 'Type', 'live-composer-page-builder' ),
 			'type' => 'select',
 			'choices' => array(
@@ -52,7 +57,7 @@
 					'label' => 'Full',
 					'value' => 'full',
 				),
-			)
+			),
 		);
 
 		$dslc_var_row_options['columns_spacing'] = array(
@@ -244,8 +249,8 @@
 			'affect_on_change_rule' => 'opacity',
 			'affect_on_change_el' => '.dslc-bg-video-overlay',
 			'min' => 0,
-			'max' => 1.01,
-			'increment' => 0.1,
+			'max' => 1,
+			'increment' => 0.05,
 		);
 
 		$dslc_var_row_options['border_color'] = array(
@@ -257,11 +262,13 @@
 
 		$dslc_var_row_options['border_width'] = array(
 			'id' => 'border_width',
+			'min' => 0,
+			'increment' => 1,
 			'std' => '0',
 			'label' => __( 'Border Width', 'live-composer-page-builder' ),
 			'type' => 'slider',
 			'affect_on_change_rule' => 'border-width',
-			'ext' => 'px'
+			'ext' => 'px',
 		);
 
 		$dslc_var_row_options['border_style'] = array(
@@ -348,7 +355,11 @@
 			'type' => 'text',
 		);
 
-		// Hook to register custom modules or alter current
+		// Hook to register custom modules or alter current.
 		do_action( 'dslc_hook_row_options' );
 
-	} add_action( 'init', 'dslc_row_register_options' );
+		// Filter to filter the registered row controls.
+		$dslc_var_row_options = apply_filters( 'dslc_filter_row_options', $dslc_var_row_options );
+	}
+
+	add_action( 'init', 'dslc_row_register_options' );

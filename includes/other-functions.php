@@ -10,6 +10,12 @@
  * dslc_get_attachment_alt ( Returnt he ALT attribute for an attachment )
  */
 
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
+
 if ( ! class_exists( 'DSLC_Aq_Resize' ) ) {
 
 	/**
@@ -74,7 +80,6 @@ if ( ! class_exists( 'DSLC_Aq_Resize' ) ) {
 			elseif ( ! strncmp( $url, $http_prefix, strlen( $http_prefix ) ) ) { //if url begins with http:// make $upload_url begin with http:// as well
 				$upload_url = str_replace( $https_prefix, $http_prefix, $upload_url );
 			}
-
 
 			// Check if $img_url is local.
 			if ( false === strpos( $url, $upload_url ) ) return false;
@@ -469,3 +474,14 @@ function dslc_generate_notice_nonce( $notice_id ) {
 	return $notice_nonce;
 }
 
+/**
+ * Filter returns admin interface turned on value
+ *
+ * @return bool
+ */
+function dslc_admin_int_on() {
+
+	return true;
+}
+
+add_filter( 'dslc_admin_interface_on', 'dslc_admin_int_on', 1 );

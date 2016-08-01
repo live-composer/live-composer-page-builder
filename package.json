@@ -1,0 +1,21 @@
+{
+  "name": "live-composer-page-builder",
+  "version": "1.0.9",
+  "description": "Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.",
+  "main": "ds-live-composer.php",
+  "repository": {
+    "type": "git",
+    "url": "git+https://livecomposer@github.com/livecomposer/Live-Composer.git"
+  },
+  "author": "Live Composer Team",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/livecomposer/Live-Composer/issues"
+  },
+  "homepage": "https://github.com/livecomposer/Live-Composer#readme",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-cssmin": "^1.0.1",
+    "grunt-contrib-uglify": "^1.0.1"
+  }
+}
