@@ -393,12 +393,12 @@ function dslc_ajax_display_module_options( $atts ) {
 
 			$ext = ' ';
 			if ( isset( $module_option['ext'] ) ) {
-							$ext = $module_option['ext'];
+				$ext = $module_option['ext'];
 			}
 
 			$affect_on_change_append = '';
 			if ( isset( $module_option['affect_on_change_el'] ) && isset( $module_option['affect_on_change_rule'] ) ) {
-							$affect_on_change_append = 'data-affect-on-change-el="' . $module_option['affect_on_change_el'] . '" data-affect-on-change-rule="' . $module_option['affect_on_change_rule'] . '"';
+				$affect_on_change_append = 'data-affect-on-change-el="' . $module_option['affect_on_change_el'] . '" data-affect-on-change-rule="' . $module_option['affect_on_change_rule'] . '"';
 			}
 
 			/**
@@ -589,7 +589,7 @@ function dslc_ajax_display_module_options( $atts ) {
 						?>
 
 						<div class="dslca-module-edit-field-numeric-wrap">
-							<input type="text" class="dslca-module-edit-field dslca-module-edit-field-numeric" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" data-starting-val="<?php echo $curr_value; ?>" data-ext="<?php echo $ext; ?>" <?php echo $affect_on_change_append; ?> />
+							<input type="number" class="dslca-module-edit-field dslca-module-edit-field-numeric" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" data-starting-val="<?php echo $curr_value; ?>" data-min="<?php echo $slider_min; ?>" data-max="<?php echo $slider_max; ?>"  data-increment="<?php echo $slider_increment; ?>" data-ext="<?php echo $ext; ?>" <?php echo $affect_on_change_append; ?> />
 							<span class="dslca-module-edit-field-numeric-ext"><?php echo $module_option['ext']; ?></span>
 						</div>
 

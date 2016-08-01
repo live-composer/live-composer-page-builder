@@ -1537,15 +1537,18 @@ function dslc_module_options_numeric( field ) {
 
 	if ( dslcDebug ) console.log( 'dslc_module_options_numeric' );
 
-	var query = field || '.dslca-module-edit-field-slider-input';
+	var query = field || '.dslca-module-edit-option-slider .dslca-module-edit-field-numeric';
 
 	jQuery(query).each(function(){
 
 		if( this.classList.contains('slider-initiated') ) return;
 
 		var handle = false;
+		var pseudoelement = false;
 		var temp = 0;
 		var sliderInput = this;
+		var prev_pos = 0;
+
 
 		/*
 		var max = 2000;
@@ -1626,37 +1629,36 @@ function dslc_module_options_numeric( field ) {
 			// Set handle to the point were we started to drag mouse from
 			handle = parseFloat(e.pageX);
 			temp = parseFloat(sliderInput.value && sliderInput.value != '' ? sliderInput.value : 0);
-			var prev_pos = 0;
+			prev_pos = 0;
 
-			var el_clicked = e.target || e.srcElement;
+		});
 
-			el_clicked.onmousemove = function(e) {
+		jQuery('.dslca-module-edit-form').mousemove(function(e){
 
-				// Process only if we dragging, not just move mouse over
-				if( handle !== false ) {
-					e = e || window.event;
+			// Process only if we dragging slider handle, not just move mouse over
+			if( handle !== false ) {
+				e = e || window.event;
 
-					var x = e.clientX;
+				var x = e.clientX;
 
-					var this_move = x - prev_pos;
+				var this_move = x - prev_pos;
 
-					if ( 0 < this_move ) {
+				if ( 0 < this_move ) {
 
-						sliderInput.value = Math.round( ( parseFloat(sliderInput.value) + inc ) * 100) / 100;
-					} else {
+					sliderInput.value = Math.round( ( parseFloat(sliderInput.value) + inc ) * 100) / 100;
+				} else {
 
-						sliderInput.value = Math.round( ( parseFloat(sliderInput.value) - inc ) * 100) / 100;
-					}
-
-					prev_pos = x;
-
-					jQuery(sliderInput).trigger('change');
+					sliderInput.value = Math.round( ( parseFloat(sliderInput.value) - inc ) * 100) / 100;
 				}
+
+				prev_pos = x;
+
+				jQuery(sliderInput).trigger('change');
 			}
 		});
 
 		return false;
-	});
+	}); // .each
 }
 
 function dslc_disable_responsive_view () {
