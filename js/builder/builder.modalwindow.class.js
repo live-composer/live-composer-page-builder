@@ -60,8 +60,9 @@ DSLC.Editor.CModalWindow = function(params) {
             400,
             function()
             {
-                jQuery(this).remove();
                 params.confirm();
+                jQuery(this).remove();
+                // – moved here as it prevent some JS to get value on time
             }
         );
 

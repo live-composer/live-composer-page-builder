@@ -54,16 +54,15 @@
 
 		e.preventDefault();
 
-		if ( ! $(this).hasClass('dslca-action-disabled') ) {
+		if ( ! jQuery(this).hasClass('dslca-action-disabled') ) {
 
 			DSLC.Editor.CModalWindow({
 				title: DSLCString.str_import_row_title,
 				content: DSLCString.str_import_row_descr + '<br><br><textarea></textarea>',
 				confirm: function(){
-
-					dslc_row_import( $('.dslca-prompt-modal textarea').val() );
-					$('.dslca-prompt-modal-confirm-hook span').css({ opacity : 0 });
-					$('.dslca-prompt-modal-confirm-hook .dslca-loading').show();
+					dslc_row_import( jQuery('.dslca-prompt-modal textarea').val() );
+					jQuery('.dslca-prompt-modal-confirm-hook span').css({ opacity : 0 });
+					jQuery('.dslca-prompt-modal-confirm-hook .dslca-loading').show();
 				},
 				confirm_title: DSLCString.str_import
 			});
@@ -570,9 +569,15 @@ function dslc_row_import( rowCode ) {
 			DSLC.Editor.frameContext.dslc_bg_video();
 			DSLC.Editor.frameContext.dslc_carousel();
 			DSLC.Editor.frameContext.dslc_masonry( jQuery('#dslc-main', DSLC.Editor.frame).find('.dslc-modules-section:last-child') );
+
+			// Check init for rows and module areas
+			DSLC.Editor.rows_init();
+			DSLC.Editor.moduleareas_init();
+
 			dslc_drag_and_drop();
-			dslc_show_publish_button();
 			dslc_generate_code();
+
+			dslc_show_publish_button();
 		}
 	);
 }

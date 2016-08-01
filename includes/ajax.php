@@ -4,7 +4,6 @@
  * Table of contents
  *
  * - dslc_ajax_add_modules_section ( Echo new modules section HTML )
- * - dslc_ajax_add_modules_area ( Echo new modules area HTML )
  * - dslc_ajax_add_module ( Load the module's front ened output)
  * - dslc_ajax_display_module_options ( Display options for a specific module )
  * - dslc_ajax_save_composer ( Save the composer code )
@@ -30,16 +29,15 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0
  */
-
 function dslc_ajax_add_modules_section( $atts ) {
 
 	// Allowed to do this?
 	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
-		// The array we'll pass back to the AJAX call
+		// The array we'll pass back to the AJAX call.
 		$response = array();
 
-		// Allows devs to add classes
+		// Allows devs to add classes.
 		$filter_classes = array();
 		$filter_classes = apply_filters( 'dslc_row_class', $filter_classes );
 		$extra_classes = '';
@@ -49,7 +47,7 @@ function dslc_ajax_add_modules_section( $atts ) {
 			}
 		}
 
-		// The output
+		// The output.
 		$output = '<div class="dslc-modules-section dslc-modules-section-empty ' . $extra_classes . '" style="' . dslc_row_get_style() . '">
 			<div class="dslc-bg-video dslc-force-show"><div class="dslc-bg-video-inner"></div><div class="dslc-bg-video-overlay"></div></div>
 			<div class="dslc-modules-section-wrapper">
@@ -91,80 +89,20 @@ function dslc_ajax_add_modules_section( $atts ) {
 			</div><!-- .dslc-module-section-wrapper -->
 		</div>';
 
-		// Set the output
+		// Set the output.
 		$response['output'] = $output;
 
-		// Encode response
+		// Encode response.
 		$response_json = json_encode( $response );
 
-		// Send the response
+		// Send the response.
 		header( "Content-Type: application/json" );
 		echo $response_json;
 
-		// Good night
+		// Good night.
 		exit;
-
 	}
-
 } add_action( 'wp_ajax_dslc-ajax-add-modules-section', 'dslc_ajax_add_modules_section' );
-
-/**
- * Add a new modules area
- * TODO: Delete this function. This all code in JS now.
- *
- * @since 1.0
- */
-
-// DEPRECATED!
-
-function dslc_ajax_add_modules_area( $atts ) {
-
-	// Allowed to do this?
-	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
-
-		// The array we'll pass back to the AJAX call
-		$response = array();
-
-		// The output
-		$output = '<div class="dslc-modules-area dslc-col dslc-12-col" data-size="12">
-			<div class="dslca-modules-area-manage">
-				<div class="dslca-modules-area-manage-inner">
-					<span class="dslca-manage-action dslca-copy-modules-area-hook" title="Duplicate" ><span class="dslca-icon dslc-icon-copy"></span></span>
-					<span class="dslca-manage-action dslca-move-modules-area-hook" title="Drag to move" ><span class="dslca-icon dslc-icon-move"></span></span>
-					<span class="dslca-manage-action dslca-change-width-modules-area-hook" title="Change width" >
-						<span class="dslca-icon dslc-icon-columns"></span>
-						<div class="dslca-change-width-modules-area-options">';
-						$output .= '<span>' . __( 'Container Width', 'live-composer-page-builder' ) . '</span>';
-						$output .= '
-							<span data-size="1">1/12</span><span data-size="2">2/12</span>
-							<span data-size="3">3/12</span><span data-size="4">4/12</span>
-							<span data-size="5">5/12</span><span data-size="6">6/12</span>
-							<span data-size="7">7/12</span><span data-size="8">8/12</span>
-							<span data-size="9">9/12</span><span data-size="10">10/12</span>
-							<span data-size="11">11/12</span><span data-size="12">12/12</span>
-						</div>
-					</span>
-					<span class="dslca-manage-action dslca-delete-modules-area-hook" title="Delete" ><span class="dslca-icon dslc-icon-remove"></span></span>
-				</div>
-			</div>
-		</div>';
-
-		// Set the output
-		$response['output'] = $output;
-
-		// Encode response
-		$response_json = json_encode( $response );
-
-		// Send the response
-		header( "Content-Type: application/json" );
-		echo $response_json;
-
-		// Good night
-		exit;
-
-	}
-
-} add_action( 'wp_ajax_dslc-ajax-add-modules-area', 'dslc_ajax_add_modules_area' );
 
 /**
  * Add a new module
@@ -632,42 +570,28 @@ function dslc_ajax_display_module_options( $atts ) {
 
 						<?php
 
-							$slider_min = 0;
-							$slider_max = 100;
-							$slider_increment = 1;
+						$slider_min = 0;
+						$slider_max = 100;
+						$slider_increment = 1;
 
-							if ( isset( $module_option['min'] ) ) {
-															$slider_min = $module_option['min'];
-							}
+						if ( isset( $module_option['min'] ) ) {
+							$slider_min = $module_option['min'];
+						}
 
-							if ( isset( $module_option['max'] ) ) {
-															$slider_max = $module_option['max'];
-							}
+						if ( isset( $module_option['max'] ) ) {
+							$slider_max = $module_option['max'];
+						}
 
-							if ( isset( $module_option['increment'] ) ) {
-															$slider_increment = $module_option['increment'];
-							}
-
-							$numeric_option_type = dslc_get_option( 'lc_numeric_opt_type', 'dslc_plugin_options_other' );
-							if ( empty( $numeric_option_type ) ) {
-															$numeric_option_type = 'slider';
-							}
+						if ( isset( $module_option['increment'] ) ) {
+							$slider_increment = $module_option['increment'];
+						}
 
 						?>
 
-						<?php if ( 'slider' === $numeric_option_type  ) : ?>
-
-							<input type="number" class="dslca-module-edit-field dslca-module-edit-field-slider-input" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" data-affect-on-change-el="<?php echo $module_option['affect_on_change_el']; ?>" data-affect-on-change-rule="<?php echo $module_option['affect_on_change_rule']; ?>" data-min="<?php echo $slider_min; ?>" data-max="<?php echo $slider_max; ?>" data-ext="<?php echo $ext; ?>" data-increment="<?php echo $slider_increment; ?>" />
+						<div class="dslca-module-edit-field-numeric-wrap">
+							<input type="text" class="dslca-module-edit-field dslca-module-edit-field-numeric" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" data-starting-val="<?php echo $curr_value; ?>" data-ext="<?php echo $ext; ?>" <?php echo $affect_on_change_append; ?> />
 							<span class="dslca-module-edit-field-numeric-ext"><?php echo $module_option['ext']; ?></span>
-						<?php else : ?>
-
-							<div class="dslca-module-edit-field-numeric-wrap">
-								<input type="text" class="dslca-module-edit-field dslca-module-edit-field-numeric" name="<?php echo $module_option['id']; ?>" data-id="<?php echo $module_option['id']; ?>" value="<?php echo $curr_value; ?>" data-starting-val="<?php echo $curr_value; ?>" data-ext="<?php echo $ext; ?>" <?php echo $affect_on_change_append; ?> />
-								<span class="dslca-module-edit-field-numeric-ext"><?php echo $module_option['ext']; ?></span>
-							</div>
-
-
-						<?php endif; ?>
+						</div>
 
 					<?php elseif ( $module_option['type'] == 'font' ) : ?>
 
@@ -830,36 +754,34 @@ function dslc_ajax_display_module_options( $atts ) {
 		$output_fields = ob_get_contents();
 		ob_end_clean();
 
-		// Output Start
+		// Output Start.
 		$output_start = '<div class="dslca-module-edit-options-wrapper dslc-clearfix">';
 
-		// Output End
+		// Output End.
 		$output_end = '</div>';
 
-		// Output Tabs
+		// Output Tabs.
 		$output_tabs = '';
 		foreach ( $tabs as $tab ) {
 			$output_tabs .= '<span class="dslca-module-edit-options-tab-hook" data-section="' . $tab['section'] . '" data-id="' . $tab['id'] . '">' . $tab['title'] . '</span>';
 		}
 
-		// Combine output
+		// Combine output.
 		$response['output_tabs'] .= $output_tabs;
 		$response['output'] .= $output_start;
 		$response['output'] .= $output_fields;
 		$response['output'] .= $output_end;
 
-		// Encode response
+		// Encode response.
 		$response_json = json_encode( $response );
 
-		// Send the response
+		// Send the response.
 		header( "Content-Type: application/json" );
 		echo $response_json;
 
-		// Auf wiedersehen
+		// Auf wiedersehen.
 		exit;
-
 	}
-
 } add_action( 'wp_ajax_dslc-ajax-display-module-options', 'dslc_ajax_display_module_options' );
 
 
@@ -868,7 +790,6 @@ function dslc_ajax_display_module_options( $atts ) {
  *
  * @since 1.0
  */
-
 function dslc_ajax_save_composer( $atts ) {
 
 	// Allowed to do this?
@@ -890,7 +811,7 @@ function dslc_ajax_save_composer( $atts ) {
 			$content_for_search = $_POST['dslc_content_for_search'];
 		}
 
-		// The ID of the post/page
+		// The ID of the post/page.
 		$post_id = $_POST['dslc_post_id'];
 
 		/**
@@ -928,11 +849,9 @@ function dslc_ajax_save_composer( $atts ) {
 			wp_cache_post_change( $post_id );
 		}
 
-		// Au revoir
+		// Au revoir.
 		exit;
-
 	}
-
 } add_action( 'wp_ajax_dslc-ajax-save-composer', 'dslc_ajax_save_composer' );
 
 /**
@@ -940,46 +859,43 @@ function dslc_ajax_save_composer( $atts ) {
  *
  * @since 1.0
  */
-
 function dslc_ajax_save_draft_composer( $atts ) {
 
 	// Allowed to do this?
 	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY_SAVE ) ) {
 
-		// The array we'll pass back to the AJAX call
+		// The array we'll pass back to the AJAX call.
 		$response = array();
 
-		// The composer code
+		// The composer code.
 		$composer_code = $_POST['dslc_code'];
 
-		// The ID of the post/page
+		// The ID of the post/page.
 		$post_id = $_POST['dslc_post_id'];
 
-		// Add/update the post/page with the composer code
+		// Add/update the post/page with the composer code.
 		if ( update_post_meta( $post_id, 'dslc_code_draft', $composer_code ) ) {
 					$response['status'] = 'success';
 		} else {
 					$response['status'] = 'failed';
 		}
 
-		// Encode response
+		// Encode response.
 		$response_json = json_encode( $response );
 
-		// Send the response
+		// Send the response.
 		header( "Content-Type: application/json" );
 		echo $response_json;
 
-		// Refresh cache
+		// Refresh cache.
 		if ( function_exists( 'wp_cache_post_change' ) ) {
 			$GLOBALS['super_cache_enabled'] = 1;
 			wp_cache_post_change( $post_id );
 		}
 
-		// Au revoir
+		// Au revoir.
 		exit;
-
 	}
-
 } add_action( 'wp_ajax_dslc-ajax-save-draft-composer', 'dslc_ajax_save_draft_composer' );
 
 /**
@@ -993,37 +909,35 @@ function dslc_ajax_load_template( $atts ) {
 	// Allowed to do this?
 	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
-		// The array that holds active templates
+		// The array that holds active templates.
 		$templates = dslc_get_templates();
 
-		// The array we'll pass back to the AJAX call
+		// The array we'll pass back to the AJAX call.
 		$response = array();
 
-		// The ID of the template to load
+		// The ID of the template to load.
 		$template_id = $_POST['dslc_template_id'];
 
-		// The code of the template to load
+		// The code of the template to load.
 		$template_code = $templates[$template_id]['code'];
 
-		// Apply for new ID
+		// Apply for new ID.
 		$template_code = str_replace( '[dslc_module ', '[dslc_module give_new_id="true" ', $template_code );
 		$template_code = str_replace( '[dslc_module]', '[dslc_module give_new_id="true"]', $template_code );
 
-		// Get the front-end output
+		// Get the front-end output.
 		$response['output'] = do_shortcode( $template_code );
 
-		// Encode response
+		// Encode response.
 		$response_json = json_encode( $response );
 
-		// Send the response
+		// Send the response.
 		header( "Content-Type: application/json" );
 		echo $response_json;
 
-		// Cheers
+		// Cheers.
 		exit;
-
 	}
-
 } add_action( 'wp_ajax_dslc-ajax-load-template', 'dslc_ajax_load_template' );
 
 
@@ -1033,37 +947,34 @@ function dslc_ajax_load_template( $atts ) {
  *
  * @since 1.0
  */
-
 function dslc_ajax_import_template( $atts ) {
 
 	// Allowed to do this?
 	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
-		// The array we'll pass back to the AJAX call
+		// The array we'll pass back to the AJAX call.
 		$response = array();
 
-		// The code of the template
+		// The code of the template.
 		$template_code = stripslashes( $_POST['dslc_template_code'] );
 
-		// Apply for new ID
+		// Apply for new ID.
 		$template_code = str_replace( '[dslc_module ', '[dslc_module give_new_id="true" ', $template_code );
 		$template_code = str_replace( '[dslc_module]', '[dslc_module give_new_id="true"]', $template_code );
 
-		// Get the front-end output
+		// Get the front-end output.
 		$response['output'] = do_shortcode( $template_code );
 
-		// Encode response
+		// Encode response.
 		$response_json = json_encode( $response );
 
-		// Send the response
+		// Send the response.
 		header( "Content-Type: application/json" );
 		echo $response_json;
 
-		// Bye bye
+		// Bye bye.
 		exit;
-
 	}
-
 } add_action( 'wp_ajax_dslc-ajax-import-template', 'dslc_ajax_import_template' );
 
 
@@ -1072,34 +983,33 @@ function dslc_ajax_import_template( $atts ) {
  *
  * @since 1.0
  */
-
 function dslc_ajax_save_template( $atts ) {
 
 	// Allowed to do this?
 	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY_SAVE ) ) {
 
-		// Response to the AJAX call
+		// Response to the AJAX call.
 		$response = array();
 
-		// To let the AJAX know how it went (all good for now)
+		// To let the AJAX know how it went (all good for now).
 		$response['status'] = 'success';
 
-		// Get new template data
+		// Get new template data.
 		$template_title = stripslashes( $_POST['dslc_template_title'] );
 		$template_id = strtolower( str_replace( ' ', '-', $template_title ) );
 		$template_code = stripslashes( $_POST['dslc_template_code'] );
 
-		// Get current templates
+		// Get current templates.
 		$templates = get_option( 'dslc_templates' );
 
-		// No templates = make empty array OR templates found = unserialize
+		// No templates = make empty array OR templates found = unserialize.
 		if ( $templates === false ) {
 					$templates = array();
 		} else {
 					$templates = maybe_unserialize( $templates );
 		}
 
-		// Append new template to templates array
+		// Append new template to templates array.
 		$templates[$template_id] = array(
 			'title' => $template_title,
 			'id' => $template_id,
@@ -1107,24 +1017,22 @@ function dslc_ajax_save_template( $atts ) {
 			'section' => 'user'
 		);
 
-		// Save new templates array to db
+		// Save new templates array to db.
 		update_option( 'dslc_templates', maybe_serialize( $templates ) );
 
-		// Generate response
+		// Generate response.
 		$response['output'] = $templates;
 
-		// Encode response
+		// Encode response.
 		$response_json = json_encode( $response );
 
-		// AJAX phone home
+		// AJAX phone home.
 		header( "Content-Type: application/json" );
 		echo $response_json;
 
-		// Asta la vista
+		// Asta la vista.
 		exit;
-
 	}
-
 } add_action( 'wp_ajax_dslc-ajax-save-template', 'dslc_ajax_save_template' );
 
 /**
@@ -1132,7 +1040,6 @@ function dslc_ajax_save_template( $atts ) {
  *
  * @since 1.0
  */
-
 function dslc_ajax_delete_template( $atts ) {
 
 	// Allowed to do this?
@@ -1141,29 +1048,29 @@ function dslc_ajax_delete_template( $atts ) {
 		$response = array();
 		$response['status'] = 'success';
 
-		// ID of the template to delete
+		// ID of the template to delete.
 		$template_id = $_POST['dslc_template_id'];
 
-		// Get all templates
+		// Get all templates.
 		$templates = maybe_unserialize( get_option( 'dslc_templates' ) );
 
-		// Remove the template
+		// Remove the template.
 		unset( $templates[$template_id] );
 
-		// Save new templates array to db
+		// Save new templates array to db.
 		update_option( 'dslc_templates', maybe_serialize( $templates ) );
 
-		// Generate response
+		// Generate response.
 		$response['output'] = $templates;
 
-		// Encode response
+		// Encode response.
 		$response_json = json_encode( $response );
 
-		// AJAX phone home
+		// AJAX phone home.
 		header( "Content-Type: application/json" );
 		echo $response_json;
 
-		// Asta la vista
+		// Asta la vista.
 		exit;
 
 	}
@@ -1175,7 +1082,6 @@ function dslc_ajax_delete_template( $atts ) {
  *
  * @since 1.0
  */
-
 function dslc_ajax_get_new_module_id() {
 
 	// Allowed to do this?
@@ -1184,30 +1090,28 @@ function dslc_ajax_get_new_module_id() {
 		$response = array();
 		$response['status'] = 'success';
 
-		// Get current count
+		// Get current count.
 		$module_id_count = get_option( 'dslc_module_id_count' );
 
-		// Increment by one
+		// Increment by one.
 		$module_instance_id = $module_id_count + 1;
 
-		// Update the count
+		// Update the count.
 		update_option( 'dslc_module_id_count', $module_instance_id );
 
-		// Generate response
+		// Generate response.
 		$response['output'] = $module_instance_id;
 
-		// Encode response
+		// Encode response.
 		$response_json = json_encode( $response );
 
-		// AJAX phone home
+		// AJAX phone home.
 		header( "Content-Type: application/json" );
 		echo $response_json;
 
 		// Asta la vista
 		exit;
-
 	}
-
 } add_action( 'wp_ajax_dslc-ajax-get-new-module-id', 'dslc_ajax_get_new_module_id' );
 
 /**
@@ -1215,37 +1119,34 @@ function dslc_ajax_get_new_module_id() {
  *
  * @since 1.0
  */
-
 function dslc_ajax_import_modules_section( $atts ) {
 
 	// Allowed to do this?
 	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
-		// The array we'll pass back to the AJAX call
+		// The array we'll pass back to the AJAX call.
 		$response = array();
 
-		// The code of the modules section
+		// The code of the modules section.
 		$modules_code = stripslashes( $_POST['dslc_modules_section_code'] );
 
-		// Apply for new ID
+		// Apply for new ID.
 		$modules_code = str_replace( '[dslc_module ', '[dslc_module give_new_id="true" ', $modules_code );
 		$modules_code = str_replace( '[dslc_module]', '[dslc_module give_new_id="true"]', $modules_code );
 
-		// Get the front-end output
+		// Get the front-end output.
 		$response['output'] = do_shortcode( $modules_code );
 
-		// Encode response
+		// Encode response.
 		$response_json = json_encode( $response );
 
-		// Send the response
+		// Send the response.
 		header( "Content-Type: application/json" );
 		echo $response_json;
 
-		// Bye bye
+		// Bye bye.
 		exit;
-
 	}
-
 } add_action( 'wp_ajax_dslc-ajax-import-modules-section', 'dslc_ajax_import_modules_section' );
 
 /**
@@ -1253,38 +1154,37 @@ function dslc_ajax_import_modules_section( $atts ) {
  *
  * @since 1.0
  */
-
 function dslc_ajax_dm_module_defaults_code( $atts ) {
 	// Allowed to do this?
 	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
 		$code = '';
 
-		// The array we'll pass back to the AJAX call
+		// The array we'll pass back to the AJAX call.
 		$response = array();
 
-		// The options serialized array
+		// The options serialized array.
 		$modules_code = stripslashes( $_POST['dslc_modules_options'] );
 
-		// Turn the string of settings into an array
+		// Turn the string of settings into an array.
 		$settings_new = maybe_unserialize( base64_decode( $modules_code ) );
 
 		if ( is_array( $settings_new ) ) {
 
-			// The ID of the module
+			// The ID of the module.
 			$module_id = $settings_new['module_id'];
 
-			// Instanciate the module class
+			// Instanciate the module class.
 			$module_instance = new $module_id();
 
-			// Module output
+			// Module output.
 			$settings = $module_instance->options();
 
 			$code .= "if ( " . '$id' . " == '" . $module_id . "' ) {
 	". '$new_defaults = array(' . "
 ";
 
-			// Fix settings when a new option added after a module is used
+			// Fix settings when a new option added after a module is used.
 			foreach ( $settings as $key => $setting ) {
 
 				if ( isset( $settings_new[$setting['id']] ) ) {
@@ -1301,21 +1201,19 @@ function dslc_ajax_dm_module_defaults_code( $atts ) {
 
 		}
 
-		// Get the front-end output
+		// Get the front-end output.
 		$response['output'] = $code;
 
-		// Encode response
+		// Encode response.
 		$response_json = json_encode( $response );
 
-		// Send the response
+		// Send the response.
 		header( "Content-Type: application/json" );
 		echo $response_json;
 
-		// Bye bye
+		// Bye bye.
 		exit;
-
 	}
-
 } add_action( 'wp_ajax_dslc-ajax-dm-module-defaults', 'dslc_ajax_dm_module_defaults_code' );
 
 /**
@@ -1324,37 +1222,34 @@ function dslc_ajax_dm_module_defaults_code( $atts ) {
  *
  * @since 1.0
  */
-
 function dslc_ajax_save_preset() {
 
 	// Allowed to do this?
 	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
-		// The array we'll pass back to the AJAX call
+		// The array we'll pass back to the AJAX call.
 		$response = array();
 
-		// Get the preset data
+		// Get the preset data.
 		$preset_name = stripslashes( $_POST['dslc_preset_name'] );
 		$preset_code_raw = stripslashes( $_POST['dslc_preset_code'] );
 		$module_id = stripslashes( $_POST['dslc_module_id'] );
 
-		// Save
+		// Save.
 		if ( dslc_save_preset( $preset_name, $preset_code_raw, $module_id ) ) {
 					$response['status'] = 'success';
 		} else {
 					$response['status'] = 'error';
 		}
 
-		// Encode response
+		// Encode response.
 		$response_json = json_encode( $response );
 
-		// Send the response
+		// Send the response.
 		header( "Content-Type: application/json" );
 		echo $response_json;
 
-		// Bye bye
+		// Bye bye.
 		exit;
-
 	}
-
 } add_action( 'wp_ajax_dslc-ajax-save-preset', 'dslc_ajax_save_preset' );

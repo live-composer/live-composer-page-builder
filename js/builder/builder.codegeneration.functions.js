@@ -472,24 +472,26 @@ function dslca_gen_content_for_search() {
 
 	var elements = DSLC.Editor.frameContext.document.querySelectorAll('#dslc-main .dslc-module-front [data-exportable-content]');
 
-	Array.prototype.forEach.call(elements, function(el, i){
-		// el - current DOM element, i – counter
-		var extracted_html_code;
+	if ( undefined !== elements ) {
+		Array.prototype.forEach.call(elements, function(el, i){
+			// el - current DOM element, i – counter
+			var extracted_html_code;
 
-		if ( el.getAttribute('data-exportable-content') !== '' ) {
+			if ( el.getAttribute('data-exportable-content') !== '' ) {
 
-			var wrapper_tag = el.getAttribute('data-exportable-content');
-			extracted_html_code = '<' + wrapper_tag + '>' + el.innerHTML + '</' + wrapper_tag + '>';
-		} else {
+				var wrapper_tag = el.getAttribute('data-exportable-content');
+				extracted_html_code = '<' + wrapper_tag + '>' + el.innerHTML + '</' + wrapper_tag + '>';
+			} else {
 
-			extracted_html_code = el.innerHTML;
-		}
+				extracted_html_code = el.innerHTML;
+			}
 
-		if ( extracted_html_code !== null ) {
+			if ( extracted_html_code !== null ) {
 
-			content += extracted_html_code.replace(/\s+/g, ' ').trim() + '\n';
-		}
-	});
+				content += extracted_html_code.replace(/\s+/g, ' ').trim() + '\n';
+			}
+		});
+	}
 
 	// Set the value of the content field
 	holder.value = content;
