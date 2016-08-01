@@ -91,7 +91,7 @@
 
 		// Vars
 		var dslcModule = $(this).closest('.dslc-module-front'),
-		dslcModuleID = dslcModule.data('dslc-module-id');
+		dslc_module_id = dslcModule.data('dslc-module-id');
 		// dslcModuleCurrCode = dslcModule.find('.dslca-module-code').val();
 
 		// If a module is bening edited remove the "being edited" class from it
@@ -101,7 +101,7 @@
 		dslcModule.addClass('dslca-module-being-edited');
 
 		// Call the function to display options
-		dslc_module_options_show( dslcModuleID );
+		dslc_module_options_show( dslc_module_id );
 
 	});
 
@@ -267,46 +267,46 @@ function dslc_module_copy( module ) {
 	if ( dslcDebug ) console.log( 'dslc_copy_module' );
 
 	// Vars
-	var dslcModuleID;
+	var dslc_module_id;
 
-	// AJAX request new module ID
-	jQuery.post(
+	// Generate new (pseudo) unique ID for the module
+	dslc_module_id = DSLC_Util.get_unique_id();
 
-		DSLCAjax.ajaxurl,
-		{
-			action : 'dslc-ajax-get-new-module-id',
-		},
-		function( response ) {
+	// Remove being edited class if some module is being edited
+	jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
 
-			// Remove being edited class if some module is being edited
-			jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
+	var dslc_module_id_original = module.attr('id');
 
-			// Store the new ID
-			dslcModuleID = response.output;
+	// Duplicate the module and append it to the same area
+	var module_new = module.clone().appendTo( module.closest( '.dslc-modules-area' ) ).css({
+		'-webkit-animation-name' : 'none',
+		'-moz-animation-name' : 'none',
+		'animation-name' : 'none',
+		'animation-duration' : '0',
+		'-webkit-animation-duration' : '0',
+		opacity : 0
+	}).data( 'module-id', dslc_module_id ).attr( 'id', 'dslc-module-' + dslc_module_id ).addClass('dslca-module-being-edited');
 
-			// Duplicate the module and append it to the same area
-			module.clone().appendTo( module.closest( '.dslc-modules-area' ) ).css({
-				'-webkit-animation-name' : 'none',
-				'-moz-animation-name' : 'none',
-				'animation-name' : 'none',
-				'animation-duration' : '0',
-				'-webkit-animation-duration' : '0',
-				opacity : 0
-			}).data( 'module-id', dslcModuleID ).attr( 'id', 'dslc-module-' + dslcModuleID ).addClass('dslca-module-being-edited');
+	/**
+	 * Replace module id in the inline CSS
+	 */
+	var inline_css_el = module_new[0].getElementsByTagName( 'style' )[0];
+	var inline_css_code = inline_css_el.textContent;
+	// Update id for <style> element with new value
+	inline_css_el.setAttribute( 'id', '#css-for-dslc-module-' + dslc_module_id );
+	// Search/Replace all occurrences of module ID in inline CSS
+	inline_css_code = inline_css_code.split( dslc_module_id_original ).join( 'dslc-module-' + dslc_module_id );
+	// Put CSS code back into <style> element
+	inline_css_el.textContent = inline_css_code;
 
-			// Reload module
-			dslc_module_output_altered( function(){
-
-				// Once module has been redrawn > run the code below:
-
-				// Fade in the module
-				jQuery('.dslca-module-being-edited', DSLC.Editor.frame).css({ opacity : 0 }).removeClass('dslca-module-being-edited').animate({ opacity : 1 }, 300);
-
-				dslc_generate_code(); // Need to call this function to update last column class for the modules.
-				dslc_show_publish_button();
-			});
-		}
-	);
+	/**
+	 * Module fully cloned. Finish the process.
+	 */
+	// Fade in the module
+	module_new.css({ opacity : 0 }).removeClass('dslca-module-being-edited').animate({ opacity : 1 }, 300);
+	// Need to call this function to update last column class for the modules.
+	dslc_generate_code();
+	dslc_show_publish_button();
 }
 
 /**
@@ -457,7 +457,7 @@ function dslc_module_options_show( moduleID ) {
 /**
  * MODULES - Module output default settings
  */
-function dslc_module_output_default( dslcModuleID, callback ) {
+function dslc_module_output_default( dslc_module_id, callback ) {
 
 	if ( dslcDebug ) console.log( 'dslc_module_output_default' );
 
@@ -467,7 +467,7 @@ function dslc_module_output_default( dslcModuleID, callback ) {
 		{
 			action : 'dslc-ajax-add-module',
 			dslc : 'active',
-			dslc_module_id : dslcModuleID,
+			dslc_module_id : dslc_module_id,
 			dslc_post_id : jQuery('.dslca-container').data('post-id'),
 			dslc_url_vars: DSLC_Util.get_page_params()
 		},
@@ -488,7 +488,7 @@ function dslc_module_output_altered( callback ) {
 	callback = typeof callback !== 'undefined' ? callback : false;
 
 	var dslcModule = jQuery('.dslca-module-being-edited', DSLC.Editor.frame),
-	dslcModuleID = dslcModule.data('dslc-module-id'),
+	dslc_module_id = dslcModule.data('dslc-module-id'),
 	dslcModuleOptions = jQuery( '.dslca-module-options-front textarea', dslcModule ),
 	dslcModuleInstanceID = dslcModule.data('module-id');
 
@@ -500,7 +500,7 @@ function dslc_module_output_altered( callback ) {
 
 	dslcSettings['action'] = 'dslc-ajax-add-module';
 	dslcSettings['dslc'] = 'active';
-	dslcSettings['dslc_module_id'] = dslcModuleID;
+	dslcSettings['dslc_module_id'] = dslc_module_id;
 	dslcSettings['dslc_module_instance_id'] = dslcModuleInstanceID;
 	dslcSettings['dslc_post_id'] = jQuery('.dslca-container').data('post-id');
 
@@ -570,7 +570,7 @@ function dslc_module_output_reload( dslcModule, callback ) {
 
 	callback = typeof callback !== 'undefined' ? callback : false;
 
-	var dslcModuleID = dslcModule.data('dslc-module-id'),
+	var dslc_module_id = dslcModule.data('dslc-module-id'),
 	dslcModuleOptions = jQuery( '.dslca-module-options-front textarea', dslcModule ),
 	dslcModuleInstanceID = dslcModule.data('module-id');
 
@@ -582,7 +582,7 @@ function dslc_module_output_reload( dslcModule, callback ) {
 
 	dslcSettings['action'] = 'dslc-ajax-add-module';
 	dslcSettings['dslc'] = 'active';
-	dslcSettings['dslc_module_id'] = dslcModuleID;
+	dslcSettings['dslc_module_id'] = dslc_module_id;
 	dslcSettings['dslc_module_instance_id'] = dslcModuleInstanceID;
 	dslcSettings['dslc_post_id'] = jQuery('.dslca-container').data('post-id');
 	dslcSettings['dslc_preload_preset'] = 'enabled';

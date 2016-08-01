@@ -536,6 +536,11 @@ function dslc_actions_after_row_copy() {
 	DSLC.Editor.moduleareas_init();
 
 	dslc_generate_code();
+
+	/**
+	 * Re-init drag and drop from modules list into modules areas.
+	 * Need this function, so we can drop new modules on the cloned areas.
+	 */
 	dslc_drag_and_drop();
 
 	dslc_show_publish_button();

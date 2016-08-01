@@ -455,6 +455,7 @@ function dslc_drag_and_drop() {
 					modulesArea.animate({ paddingBottom : 50 }, 150);
 				*/
 
+				// TODO: Optimize expensive ajax call in this function!
 				// Load Output
 				dslc_module_output_default( moduleID, function( response ){
 
