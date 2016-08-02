@@ -187,6 +187,27 @@
 	}
 
 	/**
+	 * Hook - Confirm on Enter, Cancel on Esc
+	 */
+
+	function dslc_modal_keypress_events(e) {
+
+		// Enter ( confirm )
+		if( e.which == 13 ) {
+			if ( jQuery('.dslca-prompt-modal-active').length ) {
+				jQuery('.dslca-prompt-modal-confirm-hook').trigger('click');
+			}
+
+		// Escape ( cancel )
+		} else if ( e.which == 27 ) {
+			if ( jQuery('.dslca-prompt-modal-active').length ) {
+				jQuery('.dslca-prompt-modal-cancel-hook').trigger('click');
+			}
+		}
+
+	}
+
+	/**
 	 * UI - PROMPT MODAL - Document Ready
 	 */
 
@@ -266,27 +287,6 @@
 				dslc_js_confirm_close();
 
 			jQuery('.dslca-prompt-modal').data( 'id', '' );
-		});
-
-		/**
-		 * Hook - Confirm on Enter, Cancel on Esc
-		 */
-
-		$(window).on( 'keydown', function(e) {
-
-			// Enter ( confirm )
-			if( e.which == 13 ) {
-				if ( $('.dslca-prompt-modal-active').length ) {
-					$('.dslca-prompt-modal-confirm-hook').trigger('click');
-				}
-
-			// Escape ( cancel )
-			} else if ( e.which == 27 ) {
-				if ( $('.dslca-prompt-modal-active').length ) {
-					$('.dslca-prompt-modal-cancel-hook').trigger('click');
-				}
-			}
-
 		});
 
 	});

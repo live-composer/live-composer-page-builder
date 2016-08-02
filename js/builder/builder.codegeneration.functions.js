@@ -289,6 +289,9 @@ function dslc_generate_code() {
 					// Set shortcode's "last" state to "yes"
 					moduleLastState = 'yes';
 
+					// Set shorcode's "first" state to "yes"
+					moduleFirstState = 'yes';
+
 
 				// If modules column counter bigger than maximum
 				} else if ( currPerRow > maxPerRow ) {
@@ -301,20 +304,6 @@ function dslc_generate_code() {
 
 					// Set shortcode's "first" state to "yes"
 					moduleFirstState = 'yes';
-				}
-
-				// If modules column counter same as maximum
-				if ( currPerRow == maxPerRow ) {
-
-					// Set shorcode's "first" state to "yes"
-					moduleFirstState = 'yes';
-/*
-					// Add classes for current and next module
-					jQuery(this).addClass('dslc-last-col').next('.dslc-module-front').addClass('dslc-first-col');
-
-					// Resest modules column counter
-					currPerRow = 0;
-*/
 				}
 
 				// Get module's LC data

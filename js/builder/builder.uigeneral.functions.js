@@ -40,6 +40,9 @@ jQuery(document).ready(function($) {
  		dslc_drag_and_drop();
  		dslc_generate_code();
 
+ 		// Catch keypress events (from both parent and iframe) to add keyboard support
+ 		dslc_keypress_events();
+
  	});
 
  	jQuery('body').addClass('dslca-enabled dslca-drag-not-in-progress');
@@ -804,4 +807,80 @@ function dslc_get_control_value ( control_id ) {
 	value = control_storage.val();
 
 	return value;
+}
+
+/**
+ * Bind keypress events with both parent and iframe pages.
+ * Function called when content inside iframe is loaded.
+ *
+ * @return {void}
+ */
+function dslc_keypress_events() {
+
+	jQuery( [document, DSLC.Editor.frameContext.document ] ).unbind('keydown').bind('keydown', function (keydown_event) {
+
+		// Modal window [ESC]/[Enter]
+		dslc_modal_keypress_events(keydown_event);
+
+		// Prevent backspace from navigating back
+		dslc_disable_backspace_navigation(keydown_event);
+
+		// Prompt Modal on F5
+		dslc_notice_on_refresh(keydown_event);
+
+	});
+}
+
+/**
+ * Action - Prevent backspace from navigating back
+ */
+
+function dslc_disable_backspace_navigation (event) {
+
+	var doPrevent = false;
+
+	if (event.keyCode === 8) {
+
+		var d = event.srcElement || event.target;
+
+		if ( (d.tagName.toUpperCase() === 'INPUT' && (
+				d.type.toUpperCase() === 'TEXT' ||
+				d.type.toUpperCase() === 'PASSWORD' ||
+				d.type.toUpperCase() === 'NUMBER' ||
+				d.type.toUpperCase() === 'FILE')
+			  )
+			 || d.tagName.toUpperCase() === 'TEXTAREA'
+			 || jQuery(d).hasClass('dslca-editable-content')
+			 || jQuery(d).hasClass('dslc-tabs-nav-hook-title')
+			 || jQuery(d).hasClass('dslc-accordion-title') ) {
+
+			doPrevent = d.readOnly || d.disabled;
+		} else {
+
+			doPrevent = true;
+		}
+	}
+
+	if (doPrevent) {
+		event.preventDefault();
+	}
+
+}
+
+/**
+ * Actions - Prompt Modal on F5
+ *
+ * 116 – F5
+ * 81 + event.metaKey = CMD + R
+ */
+
+function dslc_notice_on_refresh(e) {
+
+	if ( e.which == 116 || ( e.which === 82 && e.metaKey ) ) {
+		if ( jQuery('.dslca-save-composer-hook').offsetParent !== null || jQuery('.dslca-module-edit-save').offsetParent !== null ) {
+			e.preventDefault();
+			dslc_js_confirm( 'disable_lc', '<span class="dslca-prompt-modal-title">' + DSLCString.str_refresh_title +
+			 '</span><span class="dslca-prompt-modal-descr">' + DSLCString.str_refresh_descr + '</span>', document.URL );
+		}
+	}
 }

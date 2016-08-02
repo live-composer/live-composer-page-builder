@@ -854,6 +854,9 @@ function dslc_module_options_confirm_changes( callback ) {
 
 			// Update preset
 			dslc_update_preset();
+
+			dslc_generate_code();
+
 			jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
 
 			// Remove classes so we know saving finished
@@ -886,7 +889,7 @@ function dslc_module_options_confirm_changes( callback ) {
 	// Show the section hooks
 	jQuery('.dslca-header .dslca-go-to-section-hook').show();
 
-	dslc_generate_code();
+	// dslc_generate_code();
 	// Show the publish button
 	dslc_show_publish_button();
 }

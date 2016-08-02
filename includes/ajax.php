@@ -452,11 +452,11 @@ function dslc_ajax_display_module_options( $atts ) {
 
 			?>
 
-				<div class="dslca-module-edit-option dslca-module-edit-option-<?php echo esc_attr( $module_option['type'] ); ?> dslca-module-edit-option-<?php echo esc_attr( $module_option['id'] ); ?> <?php if ( ! $visibility ) { echo 'dslca-module-edit-option-hidden'; } ?> <?php echo esc_attr( $control_with_toggle ); ?>" 
+				<div class="dslca-module-edit-option dslca-module-edit-option-<?php echo esc_attr( $module_option['type'] ); ?> dslca-module-edit-option-<?php echo esc_attr( $module_option['id'] ); ?> <?php if ( ! $visibility ) { echo 'dslca-module-edit-option-hidden'; } ?> <?php echo esc_attr( $control_with_toggle ); ?>"
 					data-id="<?php echo esc_attr( $module_option['id'] ); ?>"
-					<?php echo $dep; /* Base64 code. */ ?> 
-					data-refresh-on-change="<?php echo esc_attr( $refresh_on_change ); ?>" 
-					data-section="<?php echo esc_attr( $section ); ?>" 
+					<?php echo $dep; /* Base64 code. */ ?>
+					data-refresh-on-change="<?php echo esc_attr( $refresh_on_change ); ?>"
+					data-section="<?php echo esc_attr( $section ); ?>"
 					data-tab="<?php echo esc_attr( $tab_id ); ?>">
 
 					<?php if ( isset( $module_option['help'] ) ) : ?>
@@ -655,7 +655,7 @@ function dslc_ajax_display_module_options( $atts ) {
 							$box_shadow_blur_val = str_replace( 'px', '', $box_shadow_val[2] );
 							$box_shadow_spread_val = str_replace( 'px', '', $box_shadow_val[3] );
 							$box_shadow_color_val = str_replace( 'px', '', $box_shadow_val[4] );
-							
+
 							if ( isset( $box_shadow_val[5] ) ) {
 								$box_shadow_inset_val = $box_shadow_val[5];
 							}
