@@ -12,7 +12,7 @@
  * - dslc_ajax_import_template ( Loads front ened output of an exported template )
  * - dslc_ajax_save_template ( Save template for future use )
  * - dslc_ajax_delete_template ( Deletes a saved template )
- * - dslc_ajax_get_new_module_id ( Returns a new unique ID, similar to post ID )
+ * - REMOVED dslc_ajax_get_new_module_id ( Returns a new unique ID, similar to post ID )
  * - dslc_ajax_import_modules_section ( Loads front-end output for exported section )
  * - dslc_ajax_dm_module_defaults_code ( Returns the code to alter the defaults for the module options )
  * - dslc_ajax_save_preset ( Save module styling preset )
@@ -1072,43 +1072,6 @@ function dslc_ajax_delete_template( $atts ) {
 	}
 
 } add_action( 'wp_ajax_dslc-ajax-delete-template', 'dslc_ajax_delete_template' );
-
-/**
- * Get new module ID
- *
- * @since 1.0
- */
-function dslc_ajax_get_new_module_id() {
-
-	// Allowed to do this?
-	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY_SAVE ) ) {
-
-		$response = array();
-		$response['status'] = 'success';
-
-		// Get current count.
-		$module_id_count = get_option( 'dslc_module_id_count' );
-
-		// Increment by one.
-		$module_instance_id = $module_id_count + 1;
-
-		// Update the count.
-		update_option( 'dslc_module_id_count', $module_instance_id );
-
-		// Generate response.
-		$response['output'] = $module_instance_id;
-
-		// Encode response.
-		$response_json = wp_json_encode( $response );
-
-		// AJAX phone home.
-		header( 'Content-Type: application/json' );
-		echo $response_json;
-
-		// Asta la vista
-		exit;
-	}
-} add_action( 'wp_ajax_dslc-ajax-get-new-module-id', 'dslc_ajax_get_new_module_id' );
 
 /**
  * Import a modules section

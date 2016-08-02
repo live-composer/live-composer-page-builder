@@ -266,16 +266,8 @@ function dslc_module_copy( module ) {
 
 	if ( dslcDebug ) console.log( 'dslc_copy_module' );
 
-	// Vars
-	var dslc_module_id;
-
-	// Generate new (pseudo) unique ID for the module
-	dslc_module_id = DSLC_Util.get_unique_id();
-
 	// Remove being edited class if some module is being edited
 	jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
-
-	var dslc_module_id_original = module.attr('id');
 
 	// Duplicate the module and append it to the same area
 	var module_new = module.clone().appendTo( module.closest( '.dslc-modules-area' ) ).css({
@@ -285,28 +277,51 @@ function dslc_module_copy( module ) {
 		'animation-duration' : '0',
 		'-webkit-animation-duration' : '0',
 		opacity : 0
-	}).data( 'module-id', dslc_module_id ).attr( 'id', 'dslc-module-' + dslc_module_id ).addClass('dslca-module-being-edited');
+	}).addClass('dslca-module-being-edited');
+
+	// Generate new ID for the new module and change it in HTML/CSS of the module.
+	dslc_module_new_id( module_new[0] );
+
+	// Module fully cloned. Finish the process.
+	// Need to call this function to update last column class for the modules.
+	dslc_generate_code();
+
+	// Fade in the module
+	module_new.css({ opacity : 0 }).removeClass('dslca-module-being-edited').animate({ opacity : 1 }, 300);
+
+	dslc_show_publish_button();
+}
+
+/**
+ * Generate new ID for the module provided
+ *
+ * Search/Replace old module ID with new one in HTML/CSS of the module.
+ *
+ * @param DOM module Module that needs ID updated (new ID).
+ * @return void
+ */
+function dslc_module_new_id( module ) {
+
+	// Vars
+	var dslc_module_id = DSLC_Util.get_unique_id(); // Generate new module ID.
+	var dslc_module_id_original = module.getAttribute( 'id' ); // Original Module ID.
+
+	// Update module ID in date attribute
+	module.setAttribute( 'data-module-id', dslc_module_id );
+	// Update module ID in id attribute of element
+	module.setAttribute( 'id', 'dslc-module-' + dslc_module_id );
 
 	/**
-	 * Replace module id in the inline CSS
+	 * Search/Replace module id in the inline CSS
 	 */
-	var inline_css_el = module_new[0].getElementsByTagName( 'style' )[0];
+	var inline_css_el = module.getElementsByTagName( 'style' )[0];
 	var inline_css_code = inline_css_el.textContent;
-	// Update id for <style> element with new value
+	// Update id attribute for <style> element with new value
 	inline_css_el.setAttribute( 'id', '#css-for-dslc-module-' + dslc_module_id );
 	// Search/Replace all occurrences of module ID in inline CSS
 	inline_css_code = inline_css_code.split( dslc_module_id_original ).join( 'dslc-module-' + dslc_module_id );
 	// Put CSS code back into <style> element
 	inline_css_el.textContent = inline_css_code;
-
-	/**
-	 * Module fully cloned. Finish the process.
-	 */
-	// Fade in the module
-	module_new.css({ opacity : 0 }).removeClass('dslca-module-being-edited').animate({ opacity : 1 }, 300);
-	// Need to call this function to update last column class for the modules.
-	dslc_generate_code();
-	dslc_show_publish_button();
 }
 
 /**

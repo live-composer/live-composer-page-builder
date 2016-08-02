@@ -191,7 +191,7 @@ function dslc_generate_code() {
 			jQuery(this).removeClass('dslc-modules-section-not-empty').addClass('dslc-modules-section-empty');
 		}
 
-			// Remove last and first classes from module areas and modules
+		// Remove last and first classes from module areas and modules
 		jQuery('.dslc-modules-area.dslc-last-col, .dslc-modules-area.dslc-first-col', this).removeClass('dslc-last-col dslc-first-col');
 		jQuery('.dslc-module-front.dslc-last-col, .dslc-module-front.dslc-first-col', this).removeClass('dslc-last-col dslc-first-col');
 
@@ -200,7 +200,7 @@ function dslc_generate_code() {
 		currPerRowA = 0;
 		modulesSection = jQuery(this);
 
-		// Generate attributes for row shortcode
+		// Generate attributes for the row shortcode
 		modulesSectionAtts = '';
 		jQuery('.dslca-modules-section-settings input', modulesSection).each(function(){
 			modulesSectionAtts = modulesSectionAtts + jQuery(this).data('id') + '="' + jQuery(this).val() + '" ';
