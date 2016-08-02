@@ -132,8 +132,16 @@ var DSLC_Util = {
 	 */
 	update_module_property_raw: function (module, property_name, property_value ) {
 
+		// Hidden textarea element with raw base64 code of the module
+		// <textarea class="dslca-module-code">YTo2On....iOjE7fQ==</textarea>
+		var module_code_container = module.getElementsByClassName('dslca-module-code')[0];
+
+		// Hidden textarea element with value of this particular setting
+		// <textarea data-id="property_name">property_value</textarea>
+		var property_container = module.querySelector( '.dslca-module-option-front[data-id="' + property_name + '"]' );
+
 		// Get module raw code
-		var module_code = module.getElementsByClassName('dslca-module-code')[0].value;
+		var module_code = module_code_container.value;
 
 	 	// Decode
 		module_code = DSLC_Util.decode( module_code );
@@ -145,12 +153,18 @@ var DSLC_Util = {
 		module_code = DSLC_Util.encode( module_code );
 
 		// Update raw code
-		module.getElementsByClassName('dslca-module-code')[0].value = module_code;
+		module_code_container.value = module_code;
+		module_code_container.innerHTML = module_code; // See comment block below
 
 		// Change the property in hidden textarea as well
-		module.querySelector( '.dslca-module-option-front[data-id="' + property_name + '"]' ).value = property_value;
+		property_container.value = property_value;
+		property_container.innerHTML  = property_value; // See comment block below
+
+		/**
+		 * FireFox will not duplicate textarea value properly using .cloneNode(true)
+		 * if we don't use .innerHTML statement (Chrome works fine with .value only).
+		 *
+		 * See bug report: https://bugzilla.mozilla.org/show_bug.cgi?id=237783
+		 */
 	},
-
-
-
 };
