@@ -93,6 +93,10 @@ final class DSLC_Scripts{
 		 */
 		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
+			ob_start();
+			wp_editor();
+			ob_end_clean();
+
 			/**
 			 * CSS
 			 */

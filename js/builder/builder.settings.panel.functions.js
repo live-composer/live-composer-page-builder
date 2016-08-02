@@ -235,21 +235,14 @@ jQuery(document).ready(function($){
 	var self = DSLC.Editor;
 
 	DSLC.Editor.colorpickers = [];
-	DSLC.Editor.mediumEditors = [];
 
-	DSLC.Editor.initMediumEditor = function(){
+	DSLC.Editor.initInlineEditor = function(elem){
 
-		jQuery(".dslca-editable-content.medium-editor", DSLC.Editor.frame).each(function(){
+		jQuery( '.inline-editor', elem).each(function(){
 
-			if( undefined === jQuery(this).data('medium-editor-element') ){
-
-				jQuery(this).attr('contenteditable', 'true');
-
-				var medium = DSLC.Editor.frameContext.DSLC_Iframe.initMediumEditor(this);
-
-				self.mediumEditors.push( medium );
-			}
-		});
+			jQuery(this).attr('contenteditable', 'true');
+			DSLC.Editor.frameContext.DSLC_Iframe.initInlineEditor(this);
+		})
 	}
 
 	/* Destroy instanced of sliders, color pickers and other temporary elements */
@@ -265,15 +258,12 @@ jQuery(document).ready(function($){
 			self.colorpickers = [];
 		}
 
-		if( Array.isArray( self.mediumEditors ) ) {
+		if( Array.isArray( this.frameContext.tinyMCE.editors ) ) {
 
-			self.mediumEditors.forEach(function(item){
+			this.frameContext.tinyMCE.editors.forEach(function(item){
 
-				item.destroy();
-				jQuery(item.origElements).attr('contenteditable', true);
+				item.remove();
 			});
-
-			self.mediumEditors = [];
 		}
 
 		jQuery('.sp-container').remove();

@@ -29,7 +29,6 @@ jQuery(document).ready(function($) {
  		jQuery('#wpadminbar', DSLC.Editor.frame).remove();
  		jQuery('body', DSLC.Editor.frame).addClass('dslca-enabled dslca-drag-not-in-progress');
 
- 		DSLC.Editor.initMediumEditor();
  		dslc_fix_contenteditable();
 
  		var mainDraggable = DSLC.Editor.frame.find("#dslc-main").eq(0)[0];
