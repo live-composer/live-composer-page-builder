@@ -1021,7 +1021,7 @@ jQuery(document).ready(function($){
 			'dslc_event' : 'click.dslc_tut_modules_info',
 			'dslc_animation' : 'fade',
 			'dslc_func_start' : function(){
-				$('.dslca-section-title-filter-options span[data-origin="user"]').trigger('click');
+				$('.dslca-section-title-filter-options a[data-origin="user"]').trigger('click');
 			}
 		},
 		{

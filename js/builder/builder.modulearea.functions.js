@@ -114,11 +114,6 @@
 			// Is hidden
 			} else {
 
-				// Set active
-				jQuery('.dslca-change-width-modules-area-options .dslca-active-width', DSLC.Editor.frame).removeClass('dslca-active-width');
-				var currSize = jQuery(this).closest('.dslc-modules-area').data('size');
-				jQuery('.dslca-change-width-modules-area-options span[data-size="' + currSize + '"]', DSLC.Editor.frame).addClass('dslca-active-width');
-
 				// Show
 				jQuery('.dslca-change-width-modules-area-options', this).show();
 			}

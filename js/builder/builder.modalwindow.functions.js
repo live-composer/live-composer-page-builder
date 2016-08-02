@@ -108,7 +108,9 @@
 		 * Hook - Show Modal
 		 */
 
-		$(document).on( 'click', '.dslca-open-modal-hook', function(){
+		$(document).on( 'click', '.dslca-open-modal-hook', function(e){
+
+			e.preventDefault();
 
 			var modal = jQuery(this).data('modal');
 			dslc_show_modal( jQuery(this), modal );
@@ -118,7 +120,9 @@
 		 * Hook - Hide Modal
 		 */
 
-		jQuery(document).on( 'click', '.dslca-close-modal-hook', function(){
+		jQuery(document).on( 'click', '.dslca-close-modal-hook', function(e){
+
+			e.preventDefault();
 
 			if ( ! jQuery(this).hasClass('dslca-action-disabled') ) {
 

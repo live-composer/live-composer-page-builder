@@ -112,7 +112,9 @@ jQuery(document).ready(function($){
 	/**
 	 * Hook - Confirm Changes
 	 */
-	jQuery(document).on( 'click', '.dslca-module-edit-save', function(){
+	jQuery(document).on( 'click', '.dslca-module-edit-save', function(e){
+
+		e.preventDefault();
 
 		dslc_module_options_confirm_changes(function(){
 
@@ -129,7 +131,9 @@ jQuery(document).ready(function($){
 	/**
 	 * Hook - Cancel Changes
 	 */
-	jQuery(document).on( 'click', '.dslca-module-edit-cancel', function(){
+	jQuery(document).on( 'click', '.dslca-module-edit-cancel', function(e){
+
+		e.preventDefault();
 
 		dslc_module_options_cancel_changes(function(){
 
@@ -913,6 +917,8 @@ function dslc_module_options_cancel_changes( callback ) {
 
 	// Reload module
 	dslc_module_output_altered( function(){
+
+		dslc_generate_code();
 
 		jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
 

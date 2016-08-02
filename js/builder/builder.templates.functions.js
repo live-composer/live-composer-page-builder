@@ -156,8 +156,9 @@ jQuery(document).ready(function($) {
 	/**
 	 * Hook - Load Template
 	 */
-	jQuery(document).on( 'click', '.dslca-template', function(){
+	jQuery(document).on( 'click', '.dslca-template', function(e){
 
+		e.preventDefault();
 		dslc_template_load( jQuery(this).data('id') );
 	});
 

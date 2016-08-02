@@ -90,6 +90,7 @@ jQuery(document).on( 'click', '.dslca-currently-editing', function(){
  */
 
 jQuery(document).on( 'click', '.dslca-hide-composer-hook', function(){
+	e.preventDefault();
 
 	dslc_hide_composer()
 });
@@ -99,6 +100,7 @@ jQuery(document).on( 'click', '.dslca-hide-composer-hook', function(){
  */
 
 jQuery(document).on( 'click', '.dslca-show-composer-hook', function(){
+	e.preventDefault();
 
 	dslc_show_composer();
 });
@@ -182,8 +184,9 @@ jQuery(document).on( 'click', '.dslca-section-title', function(e){
  * Hook - Apply Filter Origin
  */
 
-jQuery(document).on( 'click', '.dslca-section-title-filter-options span', function(e){
+jQuery(document).on( 'click', '.dslca-section-title-filter-options a', function(e){
 
+	e.preventDefault();
 	e.stopPropagation();
 
 	var origin = jQuery(this).data('origin');
@@ -339,7 +342,7 @@ function dslc_generate_filters() {
 	if ( dslcDebug ) console.log( 'dslc_generate_filters' );
 
 	// Vars
-	var el, filters = [], filtersHTML = '<span data-origin="">Show All</span>', els = jQuery('.dslca-section:visible .dslca-origin');
+	var el, filters = [], filtersHTML = '<a html="#" data-origin="">Show All</a>', els = jQuery('.dslca-section:visible .dslca-origin');
 
 	// Go through each and generate the filters
 	els.each(function(){
@@ -347,7 +350,7 @@ function dslc_generate_filters() {
 
 		if ( jQuery.inArray( el.data('origin'), filters ) == -1 ) {
 			filters.push( el.data('origin') );
-			filtersHTML += '<span data-origin="' + el.data('origin') + '">' + el.data('origin') + '</span>';
+			filtersHTML += '<a href="#" data-origin="' + el.data('origin') + '">' + el.data('origin') + '</a>';
 		}
 	});
 

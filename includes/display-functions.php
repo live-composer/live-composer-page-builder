@@ -60,8 +60,8 @@ function dslc_display_composer() {
 					<span class="dslca-currently-editing"><span class="dslca-icon dslc-icon-info"></span>You Are Editing: <strong></strong></span>
 
 					<!-- Tabs -->
-					<span class="dslca-go-to-section-hook dslca-go-to-section-modules dslca-active" data-section=".dslca-modules"><span class="dslca-icon dslc-icon-th-large"></span></span>
-					<span class="dslca-go-to-section-hook dslca-go-to-section-templates" data-section=".dslca-templates"><span class="dslca-icon dslc-icon-cloud"></span></span>
+					<a href="#" class="dslca-go-to-section-hook dslca-go-to-section-modules dslca-active" data-section=".dslca-modules"><span class="dslca-icon dslc-icon-th-large"></span></a>
+					<a href="#" class="dslca-go-to-section-hook dslca-go-to-section-templates" data-section=".dslca-templates"><span class="dslca-icon dslc-icon-cloud"></span></a>
 
 					<!-- Module Option filters -->
 					<span class="dslca-options-filter-hook" data-section="functionality"><span class="dslca-icon dslc-icon-cog"></span> <?php _e( 'Functionality', 'live-composer-page-builder' ); ?></span>
@@ -70,8 +70,8 @@ function dslc_display_composer() {
 
 					<!-- Module Options Actions -->
 					<div class="dslca-module-edit-actions">
-						<span class="dslca-module-edit-save"><?php _e( 'Confirm', 'live-composer-page-builder' ); ?></span>
-						<span class="dslca-module-edit-cancel"><?php _e( 'Cancel', 'live-composer-page-builder' ); ?></span>
+						<a href="#" class="dslca-module-edit-save"><?php _e( 'Confirm', 'live-composer-page-builder' ); ?></a>
+						<a href="#" class="dslca-module-edit-cancel"><?php _e( 'Cancel', 'live-composer-page-builder' ); ?></a>
 					</div><!-- .dslca-module-edit-actions -->
 
 					<!-- Row Options Filters -->
@@ -102,8 +102,8 @@ function dslc_display_composer() {
 					</div><!-- .dslca-save-draft-composer -->
 
 					<!-- Hide/Show -->
-					<span class="dslca-show-composer-hook"><span class="dslca-icon dslc-icon-arrow-up"></span><?php _e( 'Show Editor', 'live-composer-page-builder' ); ?></span>
-					<span class="dslca-hide-composer-hook"><span class="dslca-icon dslc-icon-arrow-down"></span><?php _e( 'Hide Editor', 'live-composer-page-builder' ); ?></span>
+					<a href="#" class="dslca-show-composer-hook"><span class="dslca-icon dslc-icon-arrow-up"></span><?php _e( 'Show Editor', 'live-composer-page-builder' ); ?></a>
+					<a href="#" class="dslca-hide-composer-hook"><span class="dslca-icon dslc-icon-arrow-down"></span><?php _e( 'Hide Editor', 'live-composer-page-builder' ); ?></a>
 
 					<!-- Disable -->
 					<a href="<?php the_permalink( $_GET['page_id'] ); ?>" class="dslca-close-composer-hook"><span class="dslca-icon dslc-icon-remove"></span><?php _e( 'Disable Editor', 'live-composer-page-builder' ); ?></a>
@@ -188,10 +188,10 @@ function dslc_display_composer() {
 							<?php _e( 'Designs', 'live-composer-page-builder' ); ?>
 						</div><!-- .dslca-section-title -->
 
-						<span class="dslca-go-to-section-hook" data-section=".dslca-templates-load"><span class="dslca-icon dslc-icon-circle-arrow-down"></span><?php _e( 'Load Page Design', 'live-composer-page-builder' ); ?></span>
-						<span class="dslca-open-modal-hook" data-modal=".dslca-modal-templates-save"><span class="dslca-icon dslc-icon-save"></span><?php _e( 'Save Page Design', 'live-composer-page-builder' ); ?></span>
-						<span class="dslca-open-modal-hook" data-modal=".dslca-modal-templates-import"><span class="dslca-icon dslc-icon-download-alt"></span><?php _e( 'Import Page Code', 'live-composer-page-builder' ); ?></span>
-						<span class="dslca-open-modal-hook" data-modal=".dslca-modal-templates-export"><span class="dslca-icon dslc-icon-upload-alt"></span><?php _e( 'Export Page Code', 'live-composer-page-builder' ); ?></span>
+						<a href="#" class="dslca-go-to-section-hook" data-section=".dslca-templates-load"><span class="dslca-icon dslc-icon-circle-arrow-down"></span><?php _e( 'Load Page Design', 'live-composer-page-builder' ); ?></a>
+						<a href="#" class="dslca-open-modal-hook" data-modal=".dslca-modal-templates-save"><span class="dslca-icon dslc-icon-save"></span><?php _e( 'Save Page Design', 'live-composer-page-builder' ); ?></a>
+						<a href="#" class="dslca-open-modal-hook" data-modal=".dslca-modal-templates-import"><span class="dslca-icon dslc-icon-download-alt"></span><?php _e( 'Import Page Code', 'live-composer-page-builder' ); ?></a>
+						<a href="#" class="dslca-open-modal-hook" data-modal=".dslca-modal-templates-export"><span class="dslca-icon dslc-icon-upload-alt"></span><?php _e( 'Export Page Code', 'live-composer-page-builder' ); ?></a>
 
 						<div class="dslca-modal dslca-modal-templates-save">
 
@@ -236,7 +236,7 @@ function dslc_display_composer() {
 
 					<div class="dslca-section dslca-templates-load dslc-clearfix">
 
-						<span class="dslca-go-to-section-hook dslca-section-back" data-section=".dslca-templates"><span class="dslca-icon dslc-icon-reply"></span></span>
+						<a href="#" class="dslca-go-to-section-hook dslca-section-back" data-section=".dslca-templates"><span class="dslca-icon dslc-icon-reply"></span></a>
 
 						<div class="dslca-section-title">
 							<div class="dslca-section-title-filter">
@@ -291,7 +291,7 @@ function dslc_display_composer() {
 					<div class="dslca-prompt-modal-actions">
 
 						<a href="#" class="dslca-prompt-modal-confirm-hook"><span class="dslc-icon dslc-icon-ok"></span><?php _e( 'Confirm', 'live-composer-page-builder' ); ?></a>
-						<span class="dslca-prompt-modal-cancel-hook"><span class="dslc-icon dslc-icon-remove"></span><?php _e( 'Cancel', 'live-composer-page-builder' ); ?></span>
+						<a href="#" class="dslca-prompt-modal-cancel-hook"><span class="dslc-icon dslc-icon-remove"></span><?php _e( 'Cancel', 'live-composer-page-builder' ); ?></a>
 
 					</div>
 
@@ -444,14 +444,14 @@ function dslc_display_templates() {
 				// Go through each template in a section.
 				foreach ( $template_section_tpls as $template ) { ?>
 
-					<div class="dslca-template dslca-scroller-item dslca-origin dslca-template-origin-<?php echo esc_attr( $template_section_id ); ?>" data-origin="<?php echo esc_attr( $template['section_title'] ); ?>" data-id="<?php echo esc_attr( $template['id'] ); ?>">
+					<a href="#" class="dslca-template dslca-scroller-item dslca-origin dslca-template-origin-<?php echo esc_attr( $template_section_id ); ?>" data-origin="<?php echo esc_attr( $template['section_title'] ); ?>" data-id="<?php echo esc_attr( $template['id'] ); ?>">
 						<span class="dslca-template-title"><?php echo esc_html( $template['title'] ); ?></span>
 						<?php if ( 'user' === $template_section_id ) : ?>
 							<span class="dslca-delete-template-hook" data-id="<?php echo esc_attr( $template['id'] ); ?>">
 								<span class="dslca-icon dslc-icon-trash"></span>
 							</span>
 						<?php endif; ?>
-					</div><!-- .dslc-template -->
+					</a><!-- .dslc-template -->
 
 					<?php
 				}
