@@ -135,7 +135,7 @@ function dslc_generate_code() {
 
 	// Vars
 	var moduleCode,
-	moduleSize,
+	module_size,
 	composerCode = '',
 	maxPerRow = 12,
 	maxPerRowA = 12,
@@ -194,7 +194,6 @@ function dslc_generate_code() {
 		// Remove last and first classes from module areas and modules
 		jQuery('.dslc-modules-area.dslc-last-col, .dslc-modules-area.dslc-first-col', this).removeClass('dslc-last-col dslc-first-col');
 		jQuery('.dslc-module-front.dslc-last-col, .dslc-module-front.dslc-first-col', this).removeClass('dslc-last-col dslc-first-col');
-
 
 		// Vars
 		currPerRowA = 0;
@@ -267,13 +266,15 @@ function dslc_generate_code() {
 
 			jQuery('.dslc-module-front', modulesArea).each(function(){
 
+				var dslc_module = jQuery(this);
+
 				// Vars
-				moduleSize = parseInt( jQuery(this).data('dslc-module-size') );
+				module_size = parseInt( dslc_module[0].getAttribute('data-dslc-module-size') );
 				var moduleLastState = 'no';
 				var moduleFirstState = 'no';
 
 				// Increment modules column counter
-				currPerRow += moduleSize;
+				currPerRow += module_size;
 
 				// If modules column counter same as maximum
 				if ( currPerRow == maxPerRow ) {
@@ -296,7 +297,7 @@ function dslc_generate_code() {
 					jQuery(this).removeClass('dslc-last-col').addClass('dslc-first-col');
 
 					// Set modules column counter to the size of current module
-					currPerRow = moduleSize;
+					currPerRow = module_size;
 
 					// Set shortcode's "first" state to "yes"
 					moduleFirstState = 'yes';
@@ -317,7 +318,7 @@ function dslc_generate_code() {
 				}
 
 				// Get module's LC data
-				moduleCode = jQuery(this).find('.dslca-module-code').val();
+				moduleCode = dslc_module[0].querySelector('.dslca-module-code').value;
 
 				// Add the module shortcode containing the data
 				composerCode = composerCode + '[dslc_module last="' + moduleLastState + '"]' + moduleCode + '[/dslc_module] ';
@@ -344,7 +345,7 @@ function dslc_generate_section_code( theModulesSection ) {
 	if ( dslcDebug ) console.log( 'dslc_generate_section_code' );
 
 	var moduleCode,
-	moduleSize,
+	module_size,
 	composerCode = '',
 	maxPerRow = 12,
 	maxPerRowA = 12,
@@ -399,8 +400,8 @@ function dslc_generate_section_code( theModulesSection ) {
 		// Go through each module in the area
 		jQuery('.dslc-module-front', modulesArea).each(function(){
 
-			moduleSize = parseInt( jQuery(this).data('dslc-module-size') );
-			currPerRow += moduleSize;
+			module_size = parseInt( jQuery(this).data('dslc-module-size') );
+			currPerRow += module_size;
 
 			if ( currPerRow == modulesAreaSize ) {
 

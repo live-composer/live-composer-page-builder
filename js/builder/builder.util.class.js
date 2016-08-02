@@ -122,6 +122,35 @@ var DSLC_Util = {
 		return code;
 	},
 
+	/**
+	 * Update module option in raw base64 code (dslc_code) of the module
+	 *
+	 * @param  {DOM element} module    Module Element
+	 * @param  {string} property_name  Name of the option we change
+	 * @param  {string} property_value Value of the option we change
+	 * @return {void}
+	 */
+	update_module_property_raw: function (module, property_name, property_value ) {
+
+		// Get module raw code
+		var module_code = module.getElementsByClassName('dslca-module-code')[0].value;
+
+	 	// Decode
+		module_code = DSLC_Util.decode( module_code );
+
+		// Change module property
+		module_code[property_name] = property_value;
+
+		// Encode
+		module_code = DSLC_Util.encode( module_code );
+
+		// Update raw code
+		module.getElementsByClassName('dslca-module-code')[0].value = module_code;
+
+		// Change the property in hidden textarea as well
+		module.querySelector( '.dslca-module-option-front[data-id="' + property_name + '"]' ).value = property_value;
+	},
+
 
 
 };
