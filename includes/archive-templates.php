@@ -237,3 +237,20 @@ function dslc_flush_permalinks_on_404() {
 	}
 }
 add_action( 'template_redirect', 'dslc_flush_permalinks_on_404' );
+
+/**
+ * Redirect page with ?dslc=active
+ * to the page without this URL var when users has no rights to edit page
+ *
+ * @since 1.1
+ * @return void
+ */
+function dslc_redirect_unauthorized() {
+
+	// Allowed to do this?
+	if ( isset( $_GET['dslc'] ) && ( ! is_user_logged_in() || ! current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) ) {
+		wp_safe_redirect( get_permalink() );
+		exit;
+	}
+}
+add_action( 'template_redirect', 'dslc_redirect_unauthorized' );

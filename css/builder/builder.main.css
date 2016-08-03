@@ -9,6 +9,48 @@ html {
    position: relative;
 }
 
+/* Disable text selection when builder is active */
+body {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+/* Re-enable text selection for text-based modules */
+
+.inline-editor {
+	-webkit-touch-callout: text;
+	-webkit-user-select: text;
+	-khtml-user-select: text;
+	-moz-user-select: text;
+	-ms-user-select: text;
+	user-select: text;
+}
+
+body .inline-editor:hover,
+body .dslca-editable-content:hover {
+	cursor: text;
+}
+
+/* Disable text editing cursor on UI elements */
+div:hover,
+span > span:hover,
+div > span:hover {
+	cursor: default;
+}
+
+body a {
+	text-decoration: none;
+}
+
+body a:focus {
+	color: inherit;
+	box-shadow: none;
+}
+
 #dslc-preview-error {
 	text-align: center;
 	padding: 160px 0 0;
@@ -222,6 +264,7 @@ html {
 			border-top-color: #4777c2;
 			background: #3b6fbe;
 			color: #fff;
+			cursor: default;
 		}
 
 		.dslca-header .dslca-options-filter-hook .dslca-icon,
@@ -251,6 +294,8 @@ html {
 			margin-top: 1px;
 		}
 
+			.dslca-prompt-modal-cancel-hook,
+			.dslca-prompt-modal-confirm-hook,
 			.dslca-module-edit-save,
 			.dslca-row-edit-save,
 			.dslca-module-edit-cancel,
@@ -268,24 +313,30 @@ html {
 				line-height: 1;
 				padding: 10px 12px;
 				margin-right: 6px;
+				text-decoration: none;
 			}
 
 			.dslca-module-edit-cancel,
 			.dslca-row-edit-cancel,
-			.dslca-wp-editor-cancel-hook {
+			.dslca-wp-editor-cancel-hook,
+			.dslca-prompt-modal-cancel-hook {
 				background: #e55f5f;
 			}
 
 			.dslca-module-edit-save:hover,
 			.dslca-row-edit-save:hover,
-			.dslca-wp-editor-save-hook:hover {
+			.dslca-wp-editor-save-hook:hover,
+			.dslca-prompt-modal-confirm-hook:hover {
 				background: #91dc1e;
+				color: #fff;
 			}
 
 			.dslca-module-edit-cancel:hover,
 			.dslca-row-edit-cancel:hover,
-			.dslca-wp-editor-cancel-hook:hover  {
+			.dslca-wp-editor-cancel-hook:hover,
+			.dslca-prompt-modal-cancel-hook:hover  {
 				background: #f27562;
+				color: #fff;
 			}
 
 	/**
@@ -343,6 +394,12 @@ html {
 				width: 32px;
 				line-height: 74px;
 				text-align: center;
+				color: #fff;
+			}
+
+			.dslca-section-back:hover {
+				background: #e25c54;
+				color: #fff;
 			}
 
 			.dslca-section-title {
@@ -355,6 +412,11 @@ html {
 				line-height: 1;
 				padding: 28px 25px;
 				/* text-transform: uppercase; */
+			}
+
+			.dslca-section-title:hover,
+			.dslca-section-title:hover * {
+				cursor: pointer;
 			}
 
 			.dslca-templates .dslca-section-title,
@@ -385,16 +447,13 @@ html {
 						display: none;
 						min-width: 100px;
 						left: -10px;
-						/*padding: 10px;*/
 						position: absolute;
-						/*right: 0;*/
 						z-index: 999999;
 						box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.21);
 					}
 
-						.dslca-section-title-filter-options span {
-							/* background: rgba( 0, 0, 0, 0.1 ); */
-							/* border-radius: 3px; */
+
+						.dslca-section-title-filter-options a {
 							display: block;
 							cursor: pointer;
 							margin: 1px 0 0;
@@ -402,7 +461,21 @@ html {
 							border-top: 1px solid rgba(0, 0, 0, 0.09);
 							font-size: 13px;
 							white-space: nowrap;
+							color: #fff;
 						}
+
+						.dslca-section-title-filter-options a:hover {
+							background: #5890E5;
+						}
+
+					/* Orange popup filter */
+					.dslca-section.dslca-templates-load .dslca-section-title-filter-options {
+						background: #CA564F;
+					}
+
+					.dslca-section.dslca-templates-load .dslca-section-title-filter-options a:hover {
+						background: #e25c54;
+					}
 
 	/**
 	 * Subsections
@@ -428,8 +501,6 @@ html {
 
 		.dslca-module {
 			color: #fff;
-			cursor: grab;
-			cursor: -webkit-grab;
 
 			display: inline-block;
 			/*float: left;*/
@@ -483,23 +554,38 @@ html {
 		  transform: translate(1px, -2px);
 		}
 
-		.dslca-module.ui-draggable-dragging {
+		div.dslca-module:hover,
+		div.dslca-module:hover * {
+			color: #fff;
+			cursor: grab;
+			cursor: -webkit-grab;
+		}
+
+		div.dslca-module.dslca-module-dragging {
 			background: #6b9ff1;
 			border: 0;
 			z-index: 9999999 !important;
 			border-radius: 3px;
-
-			cursor: grabbing;
-			cursor: -webkit-grabbing;
 
 			box-shadow: -6px 8px 3px 0 rgba(0, 0, 0, 0.075),
 			0 1px 3px 0 rgba(0, 0, 0, 0.25),
 			-1px 1px 0px 0 rgba(255, 255, 255, 0.05) inset;
 		}
 
+		div.dslca-module.dslca-module-dragging *,
+		div.dslca-module.dslca-module-dragging,
+		div.dslca-module.dslca-module-dragging:hover,
+		div.dslca-module.dslca-module-dragging:hover *{
+			cursor: grabbing;
+			cursor: -webkit-grabbing;
+		}
+
 		.dslca-manage-action.dslca-move-modules-section-hook:hover,
+		.dslca-manage-action.dslca-move-modules-section-hook:hover *,
 		.dslca-manage-action.dslca-move-modules-area-hook:hover,
-		.dslca-manage-action.dslca-move-module-hook:hover {
+		.dslca-manage-action.dslca-move-modules-area-hook:hover *,
+		.dslca-manage-action.dslca-move-module-hook:hover,
+		.dslca-manage-action.dslca-move-module-hook:hover * {
 			cursor: grab;
 			cursor: -webkit-grab;
 		}
@@ -925,6 +1011,7 @@ html {
 
 			.dslca-module-edit-options-tab-hook:hover {
 				background: rgba(169, 239, 255, 0.17);
+				color: #fff;
 			}
 
 			.dslca-module-edit-options-tab-hook[data-id="animation_styling"],
@@ -1043,9 +1130,10 @@ html {
 		position: relative;
 	}
 
+		.dslca-template,
 		.dslca-templates .dslca-go-to-section-hook,
 		.dslca-templates .dslca-open-modal-hook {
-			border-right: 1px solid #d57872;
+			border-right: 1px solid rgba(0, 0, 0, 0.12);
 			color: #fff;
 			cursor: pointer;
 			display: block;
@@ -1055,6 +1143,13 @@ html {
 			line-height: 1;
 			padding: 29px 29px 27px 29px;
 			/* text-transform: uppercase; */
+		}
+
+		.dslca-templates .dslca-go-to-section-hook:hover,
+		.dslca-templates .dslca-open-modal-hook:hover,
+		.dslca-template:hover {
+			background: #e25c54;
+			color: #fff;
 		}
 
 			.dslca-templates .dslca-go-to-section-hook .dslca-icon,
@@ -1073,23 +1168,9 @@ html {
 		border-top: 1px solid #d8827d;
 	}
 
-		.dslca-template {
-			border-right: 1px solid #d57872;
-			color: #fff;
-			cursor: pointer;
-			display: block;
-			float: left;
-			font-family: 'Open Sans', sans-serif;
-			font-size: 15px;
-			line-height: 1;
-			padding: 25px;
-			position: relative;
-			/* text-transform: uppercase; */
-		}
-
-		.dslca-template-title {
+		/*.dslca-template-title {
 			 line-height: 26px;
-		}
+		}*/
 
 		.dslca-template-origin-user {
 			padding-right: 50px;
@@ -1099,15 +1180,11 @@ html {
 				background: rgba( 0, 0, 0, 0.2 );
 				border-radius: 3px;
 				display: inline-block;
+				margin-top: -6px;
 				margin-left: 7px;
 				padding: 5px 7px;
-
+				cursor: pointer;
 			}
-
-				.dslca-template .dslca-delete-template-hook .dslca-icon {
-
-				}
-
 	/**
 	 * Template Save
 	 */
@@ -1309,6 +1386,11 @@ html {
 
 .dslc-module-front {
 	min-height: 30px;
+}
+
+.dslc-module-front:hover,
+.dslc-module-front:hover * {
+	cursor: pointer;
 }
 
 .dslc-modules-area:hover {
@@ -1591,7 +1673,8 @@ html {
 
 		.dslca-add-modules-section-hook:hover,
 		.dslca-import-modules-section-hook:hover {
-		  background: #FF9162;
+			background: #FF9162;
+			color: #fff;
 		}
 
 			.dslca-add-modules-section .dslca-icon {
@@ -1643,9 +1726,6 @@ html {
 	}
 
 		.dslca-icon {
-			/*font-size: 12px;*/
-			/*position: relative;*/
-			/*top: -1px;*/
 			vertical-align: middle;
 		}
 
@@ -1841,11 +1921,9 @@ html {
 		.dslca-modules-area-manage .dslca-manage-action {
 			color: #fff;
 			display: block;
-			/*height: 18px;*/
 			text-decoration: none;
 			font-size: 12px;
 			line-height: 16px;
-			/*width: 18px;*/
 			text-align: center;
 			margin: 0;
 		}
@@ -1948,6 +2026,11 @@ html {
 					width: 44px;
 				}
 
+				.dslca-change-width-modules-area-options span:hover,
+				.dslca-change-width-module-options span:hover {
+					background: #6B9FF1;
+				}
+
 				.dslca-change-width-modules-area-options span:first-child,
 				.dslca-change-width-module-options span:first-child {
 					background: none;
@@ -1959,9 +2042,36 @@ html {
 					width: auto;
 				}
 
-				.dslca-change-width-modules-area-options span.dslca-active-width,
-				.dslca-change-width-module-options  span.dslca-active-width {
-					background: #3b6fbe;
+				/* Highlight current width selection */
+
+				.dslc-modules-area.dslc-1-col .dslca-change-width-modules-area-options span[data-size="1"],
+				.dslc-modules-area.dslc-2-col .dslca-change-width-modules-area-options span[data-size="2"],
+				.dslc-modules-area.dslc-3-col .dslca-change-width-modules-area-options span[data-size="3"],
+				.dslc-modules-area.dslc-4-col .dslca-change-width-modules-area-options span[data-size="4"],
+				.dslc-modules-area.dslc-5-col .dslca-change-width-modules-area-options span[data-size="5"],
+				.dslc-modules-area.dslc-6-col .dslca-change-width-modules-area-options span[data-size="6"],
+				.dslc-modules-area.dslc-7-col .dslca-change-width-modules-area-options span[data-size="7"],
+				.dslc-modules-area.dslc-8-col .dslca-change-width-modules-area-options span[data-size="8"],
+				.dslc-modules-area.dslc-9-col .dslca-change-width-modules-area-options span[data-size="9"],
+				.dslc-modules-area.dslc-10-col .dslca-change-width-modules-area-options span[data-size="10"],
+				.dslc-modules-area.dslc-11-col .dslca-change-width-modules-area-options span[data-size="11"],
+				.dslc-modules-area.dslc-12-col .dslca-change-width-modules-area-options span[data-size="12"],
+
+				.dslc-module-front.dslc-1-col .dslca-change-width-module-options span[data-size="1"],
+				.dslc-module-front.dslc-2-col .dslca-change-width-module-options span[data-size="2"],
+				.dslc-module-front.dslc-3-col .dslca-change-width-module-options span[data-size="3"],
+				.dslc-module-front.dslc-4-col .dslca-change-width-module-options span[data-size="4"],
+				.dslc-module-front.dslc-5-col .dslca-change-width-module-options span[data-size="5"],
+				.dslc-module-front.dslc-6-col .dslca-change-width-module-options span[data-size="6"],
+				.dslc-module-front.dslc-7-col .dslca-change-width-module-options span[data-size="7"],
+				.dslc-module-front.dslc-8-col .dslca-change-width-module-options span[data-size="8"],
+				.dslc-module-front.dslc-9-col .dslca-change-width-module-options span[data-size="9"],
+				.dslc-module-front.dslc-10-col .dslca-change-width-module-options span[data-size="10"],
+				.dslc-module-front.dslc-11-col .dslca-change-width-module-options span[data-size="11"],
+				.dslc-module-front.dslc-12-col .dslca-change-width-module-options span[data-size="12"] {
+					background: #3B6FBE;
+					box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.28) inset;
+					cursor: default;
 				}
 
 	/**
@@ -2054,47 +2164,6 @@ body.rtl .dslca-modules-area-placeholder {
 */
 
 
-/**
- * Modal
- */
-
-.dslca-modal {
-	background: #fff;
-	border-radius: 3px;
-	color: #444;
-	display: none;
-	padding: 14px 17px;
-	position: absolute;
-	bottom: 55px;
-	-moz-box-shadow: 0 1px 6px rgba(0,0,0,.2); /* drop shadow */
-	-webkit-box-shadow: 0 1px 6px rgba(0,0,0,.2); /* drop shadow */
-	box-shadow: 0 1px 6px rgba(0,0,0,.2); /* drop shadow */
-	z-index: 9999991;
-}
-
-	.dslca-modal-title {
-
-	}
-
-	.dslca-modal:after {
-		top: 100%;
-		border: solid transparent;
-		content: " ";
-		height: 0;
-		width: 0;
-		position: absolute;
-		pointer-events: none;
-	}
-
-	.dslca-modal:after {
-		border-color: rgba(255, 255, 255, 0);
-		border-top-color: #ffffff;
-		border-width: 7px;
-		left: 50%;
-		margin-left: -7px;
-	}
-
-
 .dslca-section-scroller {
 	position: relative;
 	height: 74px;
@@ -2184,6 +2253,49 @@ body.rtl .dslca-modules-area-placeholder {
 			/*margin-top: 20px;*/
 		}
 
+
+
+
+/**
+ * Modal
+ */
+
+.dslca-modal {
+	background: #fff;
+	border-radius: 3px;
+	color: #444;
+	display: none;
+	padding: 14px 17px;
+	position: absolute;
+	bottom: 55px;
+	-moz-box-shadow: 0 1px 6px rgba(0,0,0,.2); /* drop shadow */
+	-webkit-box-shadow: 0 1px 6px rgba(0,0,0,.2); /* drop shadow */
+	box-shadow: 0 1px 6px rgba(0,0,0,.2); /* drop shadow */
+	z-index: 9999991;
+}
+
+	.dslca-modal-title {
+
+	}
+
+	.dslca-modal:after {
+		top: 100%;
+		border: solid transparent;
+		content: " ";
+		height: 0;
+		width: 0;
+		position: absolute;
+		pointer-events: none;
+	}
+
+	.dslca-modal:after {
+		border-color: rgba(255, 255, 255, 0);
+		border-top-color: #ffffff;
+		border-width: 7px;
+		left: 50%;
+		margin-left: -7px;
+	}
+
 /** Modal Window class */
 
 
@@ -2241,40 +2353,89 @@ body.rtl .dslca-modules-area-placeholder {
 			text-align: center;
 		}
 
-			.dslca-prompt-modal-cancel-hook,
 			.dslca-prompt-modal-confirm-hook {
-				background: #e55f5f;
-				border-radius: 3px;
-				cursor: pointer;
-				color: #fff;
-				display: inline-block;
-				font-size: 13px;
-				font-family: "Open Sans", sans-serif;
-				font-weight: bold;
-				line-height: 1;
-				padding: 13px 15px;
-				text-transform: uppercase;
-				text-decoration: none;
-				position: relative;
-			}
-
-			.dslca-prompt-modal-confirm-hook:hover {
-				color: #fff;
-			}
-
-			.dslca-prompt-modal-confirm-hook {
-				background: #4cc12d;
 				margin-right: 7px;
-			}
-
-			.dslca-prompt-modal-cancel-hook {
-
 			}
 
 			.dslca-prompt-modal-actions .dslc-icon {
 				color: rgba( 255, 255, 255, 0.5 );
 				margin-right: 6px;
 			}
+
+
+			/**
+			 * Modal
+			 */
+
+			.dslca-prompt-modal {
+				background: rgba( 255, 255, 255, 0.80 );
+				display: none;
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				z-index: 99999999;
+				height: 100%;
+			}
+
+				.dslca-prompt-modal-content {
+					background: #fff;
+					border-radius: 3px;
+					top: 50%;
+					position: relative;
+					width: 400px;
+					margin: 0 auto;
+					margin-top: -123px;
+					padding: 30px 20px;
+					-moz-box-shadow: 0 2px 2px rgba(0,0,0,.04), 0 0 7px rgba(0,0,0,.12); /* drop shadow and outer glow */
+					-webkit-box-shadow: 0 2px 2px rgba(0,0,0,.04), 0 0 7px rgba(0,0,0,.12); /* drop shadow and outer glow */
+					box-shadow: 0 2px 2px rgba(0,0,0,.04), 0 0 7px rgba(0,0,0,.12); /* drop shadow and outer glow */
+				}
+
+					.dslca-prompt-modal-msg {
+						text-align: center;
+					}
+
+						.dslca-prompt-modal-title {
+							color: #424242;
+							display: block;
+							font-family: 'Open Sans', sans-serif;
+							font-size: 16px;
+							font-weight: bold;
+							line-height: 1;
+							margin-bottom: 22px;
+						}
+
+						.dslca-prompt-modal-descr {
+							color: #8a8a8a;
+							display: block;
+							font-family: 'Open Sans', sans-serif;
+							font-size: 13px;
+							font-weight: normal;
+							line-height: 22px;
+							margin-bottom: 22px;
+						}
+
+						.dslca-prompt-modal-descr textarea {
+							width: 100%;
+							min-height: 80px;
+							padding: 5px;
+							font-size: 11px;
+						}
+
+					.dslca-prompt-modal-actions {
+						text-align: center;
+					}
+
+						.dslca-prompt-modal-cancel-hook {
+
+						}
+
+						.dslca-prompt-modal-actions .dslc-icon {
+							color: rgba( 255, 255, 255, 0.5 );
+							margin-right: 6px;
+						}
 
 /**
  * Front
@@ -2708,7 +2869,9 @@ body.rtl .dslca-modules-area-placeholder {
 	outline: 1px dashed rgba( 0, 0, 0, 0.2);
 }
 
-.dslca-manage-action {
+span.dslca-manage-action,
+span.dslca-manage-action:hover,
+span.dslca-manage-action:hover * {
 	cursor: pointer;
 }
 
@@ -2784,10 +2947,12 @@ body.rtl .dslca-modules-area-placeholder {
 			margin-left: -6px;
 		}
 
+		.dslca-modules-section-edit-option-slider input,
 		.dslca-module-edit-option-slider input {
 			 cursor: ew-resize;
 		}
 
+		.dslca-modules-section-edit-option-slider:hover:after,
 		.dslca-module-edit-option-slider:hover:after {
 			content: "click and drag";
 			display: block;
@@ -2849,106 +3014,6 @@ body.rtl .dslca-modules-area-placeholder {
 		position: relative;
 		top: -7px;
 	}
-
-/**
- * Modal
- */
-
-.dslca-prompt-modal {
-	background: rgba( 255, 255, 255, 0.80 );
-	display: none;
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	z-index: 99999999;
-	height: 100%;
-}
-
-	.dslca-prompt-modal-content {
-		background: #fff;
-		border-radius: 3px;
-		top: 50%;
-		position: relative;
-		width: 400px;
-		margin: 0 auto;
-		margin-top: -123px;
-		padding: 30px 20px;
-		-moz-box-shadow: 0 2px 2px rgba(0,0,0,.04), 0 0 7px rgba(0,0,0,.12); /* drop shadow and outer glow */
-		-webkit-box-shadow: 0 2px 2px rgba(0,0,0,.04), 0 0 7px rgba(0,0,0,.12); /* drop shadow and outer glow */
-		box-shadow: 0 2px 2px rgba(0,0,0,.04), 0 0 7px rgba(0,0,0,.12); /* drop shadow and outer glow */
-	}
-
-		.dslca-prompt-modal-msg {
-			text-align: center;
-		}
-
-			.dslca-prompt-modal-title {
-				color: #424242;
-				display: block;
-				font-family: 'Open Sans', sans-serif;
-				font-size: 16px;
-				font-weight: bold;
-				line-height: 1;
-				margin-bottom: 22px;
-			}
-
-			.dslca-prompt-modal-descr {
-				color: #8a8a8a;
-				display: block;
-				font-family: 'Open Sans', sans-serif;
-				font-size: 13px;
-				font-weight: normal;
-				line-height: 22px;
-				margin-bottom: 22px;
-			}
-
-			.dslca-prompt-modal-descr textarea {
-				width: 100%;
-				min-height: 80px;
-				padding: 5px;
-				font-size: 11px;
-			}
-
-		.dslca-prompt-modal-actions {
-			text-align: center;
-		}
-
-			.dslca-prompt-modal-cancel-hook,
-			.dslca-prompt-modal-confirm-hook {
-				background: #e55f5f;
-				border-radius: 3px;
-				cursor: pointer;
-				color: #fff;
-				display: inline-block;
-				font-size: 13px;
-				font-family: 'Open Sans', sans-serif;
-				font-weight: bold;
-				line-height: 1;
-				padding: 13px 15px;
-				/* text-transform: uppercase; */
-				text-decoration: none;
-				position: relative;
-			}
-
-			.dslca-prompt-modal-confirm-hook:hover {
-				color: #fff;
-			}
-
-			.dslca-prompt-modal-confirm-hook {
-				background: #4cc12d;
-				margin-right: 7px;
-			}
-
-			.dslca-prompt-modal-cancel-hook {
-
-			}
-
-			.dslca-prompt-modal-actions .dslc-icon {
-				color: rgba( 255, 255, 255, 0.5 );
-				margin-right: 6px;
-			}
 
 /**
  * WP Editor

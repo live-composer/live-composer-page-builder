@@ -108,7 +108,9 @@
 		 * Hook - Show Modal
 		 */
 
-		$(document).on( 'click', '.dslca-open-modal-hook', function(){
+		$(document).on( 'click', '.dslca-open-modal-hook', function(e){
+
+			e.preventDefault();
 
 			var modal = jQuery(this).data('modal');
 			dslc_show_modal( jQuery(this), modal );
@@ -118,7 +120,9 @@
 		 * Hook - Hide Modal
 		 */
 
-		jQuery(document).on( 'click', '.dslca-close-modal-hook', function(){
+		jQuery(document).on( 'click', '.dslca-close-modal-hook', function(e){
+
+			e.preventDefault();
 
 			if ( ! jQuery(this).hasClass('dslca-action-disabled') ) {
 
@@ -183,6 +187,27 @@
 		jQuery('.dslca-prompt-modal-content').animate({
 			top : '55%'
 		}, 400);
+
+	}
+
+	/**
+	 * Hook - Confirm on Enter, Cancel on Esc
+	 */
+
+	function dslc_modal_keypress_events(e) {
+
+		// Enter ( confirm )
+		if( e.which == 13 ) {
+			if ( jQuery('.dslca-prompt-modal-active').length ) {
+				jQuery('.dslca-prompt-modal-confirm-hook').trigger('click');
+			}
+
+		// Escape ( cancel )
+		} else if ( e.which == 27 ) {
+			if ( jQuery('.dslca-prompt-modal-active').length ) {
+				jQuery('.dslca-prompt-modal-cancel-hook').trigger('click');
+			}
+		}
 
 	}
 
@@ -266,27 +291,6 @@
 				dslc_js_confirm_close();
 
 			jQuery('.dslca-prompt-modal').data( 'id', '' );
-		});
-
-		/**
-		 * Hook - Confirm on Enter, Cancel on Esc
-		 */
-
-		$(window).on( 'keydown', function(e) {
-
-			// Enter ( confirm )
-			if( e.which == 13 ) {
-				if ( $('.dslca-prompt-modal-active').length ) {
-					$('.dslca-prompt-modal-confirm-hook').trigger('click');
-				}
-
-			// Escape ( cancel )
-			} else if ( e.which == 27 ) {
-				if ( $('.dslca-prompt-modal-active').length ) {
-					$('.dslca-prompt-modal-cancel-hook').trigger('click');
-				}
-			}
-
 		});
 
 	});

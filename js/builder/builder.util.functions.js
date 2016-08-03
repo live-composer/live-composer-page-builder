@@ -93,59 +93,6 @@ jQuery(document).ready(function($){
 	});
 
 	/**
-	 * Action - Prevent backspace from navigating back
-	 */
-	$(document).unbind('keydown').bind('keydown', function (event) {
-
-		var doPrevent = false;
-
-		if (event.keyCode === 8) {
-
-			var d = event.srcElement || event.target;
-
-			if ( (d.tagName.toUpperCase() === 'INPUT' && (
-					d.type.toUpperCase() === 'TEXT' ||
-					d.type.toUpperCase() === 'PASSWORD' ||
-					d.type.toUpperCase() === 'NUMBER' ||
-					d.type.toUpperCase() === 'FILE')
-				  )
-				 || d.tagName.toUpperCase() === 'TEXTAREA'
-				 || $(d).hasClass('dslca-editable-content')
-				 || $(d).hasClass('dslc-tabs-nav-hook-title')
-				 || $(d).hasClass('dslc-accordion-title') ) {
-
-				doPrevent = d.readOnly || d.disabled;
-			} else {
-
-				doPrevent = true;
-			}
-		}
-
-		if (doPrevent) {
-			event.preventDefault();
-		}
-
-	});
-
-	/**
-	 * Actions - Prompt Modal on F5
-	 *
-	 * 116 – F5
-	 * 81 + event.metaKey = CMD + R
-	 */
-
-	$(document).on( 'keydown', function(e){
-
-		if ( e.which == 116 || ( e.which === 82 && event.metaKey ) ) {
-			if ( jQuery('.dslca-save-composer-hook').offsetParent !== null || jQuery('.dslca-module-edit-save').offsetParent !== null ) {
-				e.preventDefault();
-				dslc_js_confirm( 'disable_lc', '<span class="dslca-prompt-modal-title">' + DSLCString.str_refresh_title +
-				 '</span><span class="dslca-prompt-modal-descr">' + DSLCString.str_refresh_descr + '</span>', document.URL );
-			}
-		}
-	});
-
-	/**
 	 * Hook - Refresh Module
 	 */
 	$(document).on( 'click', '.dslca-refresh-module-hook', function(e){

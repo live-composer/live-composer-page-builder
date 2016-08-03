@@ -59,6 +59,6 @@ abstract class DSLC_Container {
 		$out['options'] = self::$options;
 		$out['content'] = self::$options;
 
-		return json_encode( $out );
+		return wp_json_encode( $out );
 	}
 }

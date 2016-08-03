@@ -108,7 +108,8 @@
 	/**
 	 * Hook - Add Row
 	 */
-	DSLC.Editor.frame.on( 'click', '.dslca-add-modules-section-hook', function(){
+	DSLC.Editor.frame.on( 'click', '.dslca-add-modules-section-hook', function(e){
+		e.preventDefault();
 
 		var button = $(this);
 
@@ -492,54 +493,36 @@ function dslc_row_copy( row ) {
 		// Current module
 		dslc_module = jQuery(this);
 
-		// Generate new (pseudo) unique ID for the module
-		dslc_module_id = DSLC_Util.get_unique_id();
+		//Generate new ID for the new module and change it in HTML/CSS of the module.
+		dslc_module_new_id( dslc_module[0] );
+
+		// Check init for rows and module areas
+		DSLC.Editor.rows_init();
+		DSLC.Editor.moduleareas_init();
+
+		// TODO: the next function contains AJAX call. It needs optimization.
+		dslc_generate_code();
+
+		/**
+		 * Re-init drag and drop from modules list into modules areas.
+		 * Need this function, so we can drop new modules on the cloned areas.
+		 */
+		dslc_drag_and_drop();
 
 		// Remove "dslca-module-being-edited" class form any element
 		jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
 
-		// Update module attributes with new ID
-		dslc_module.data( 'module-id', dslc_module_id ).attr( 'id', 'dslc-module-' + dslc_module_id );
+		// Show back new created module
+		dslc_module.animate({
+			opacity : 1
+		}, 300);
 
-		// Add "dslca-module-being-edited" class
-		// Class required for dslc_module_output_altered function.
-		dslc_module.addClass('dslca-module-being-edited');
+		dslc_show_publish_button();
 
-		// Add new postponed action to run after ajax is done
-		DSLC.Editor.add_postponed_action('dslc_actions_after_row_copy');
 
-		// Redraw module output, remove "being-edited" class and show module
-		dslc_module_output_altered( function(){
-
-			jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited').animate({
-				opacity : 1
-			}, 300);
-
-			// Ajax is done check-out postponed actions queue
-			DSLC.Editor.release_postponed_actions();
-		});
 	});
 }
 
-/**
- * Set of actions to run after row being copied
- * and all the ajax calls completed
- *
- * @return void
- */
-function dslc_actions_after_row_copy() {
-
-	if ( dslcDebug ) console.info( 'dslc_after_copy_actions' );
-
-	// Check init for rows and module areas
-	DSLC.Editor.rows_init();
-	DSLC.Editor.moduleareas_init();
-
-	dslc_generate_code();
-	dslc_drag_and_drop();
-
-	dslc_show_publish_button();
-}
 
 /**
  * Row - Import

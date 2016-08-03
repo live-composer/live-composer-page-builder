@@ -40,6 +40,9 @@ jQuery(document).ready(function($) {
  		dslc_drag_and_drop();
  		dslc_generate_code();
 
+ 		// Catch keypress events (from both parent and iframe) to add keyboard support
+ 		dslc_keypress_events();
+
  	});
 
  	jQuery('body').addClass('dslca-enabled dslca-drag-not-in-progress');
@@ -86,8 +89,8 @@ jQuery(document).on( 'click', '.dslca-currently-editing', function(){
  * Hook - Hide Composer
  */
 
-jQuery(document).on( 'click', '.dslca-hide-composer-hook', function(){
-
+jQuery(document).on( 'click', '.dslca-hide-composer-hook', function(e){
+	e.preventDefault();
 	dslc_hide_composer()
 });
 
@@ -95,8 +98,8 @@ jQuery(document).on( 'click', '.dslca-hide-composer-hook', function(){
  * Hook - Show Composer
  */
 
-jQuery(document).on( 'click', '.dslca-show-composer-hook', function(){
-
+jQuery(document).on( 'click', '.dslca-show-composer-hook', function(e){
+	e.preventDefault();
 	dslc_show_composer();
 });
 
@@ -105,7 +108,6 @@ jQuery(document).on( 'click', '.dslca-show-composer-hook', function(){
  */
 
 jQuery(document).on( 'click', '.dslca-go-to-modules-hook', function(e){
-
 	e.preventDefault();
 	dslc_show_section( '.dslca-modules' );
 });
@@ -179,8 +181,9 @@ jQuery(document).on( 'click', '.dslca-section-title', function(e){
  * Hook - Apply Filter Origin
  */
 
-jQuery(document).on( 'click', '.dslca-section-title-filter-options span', function(e){
+jQuery(document).on( 'click', '.dslca-section-title-filter-options a', function(e){
 
+	e.preventDefault();
 	e.stopPropagation();
 
 	var origin = jQuery(this).data('origin');
@@ -277,7 +280,7 @@ function dslc_show_section( section ) {
 	if ( dslcDebug ) console.log( 'dslc_show_section' );
 
 	// Add class to body so we know it's in progress
-	jQuery('body').addClass('dslca-anim-in-progress');
+	// jQuery('body').addClass('dslca-anim-in-progress');
 
 	// Get vars
 	var sectionTitle = jQuery(section).data('title'),
@@ -319,12 +322,12 @@ function dslc_show_section( section ) {
 	if ( section != '.dslca-module-edit' ) { dslc_scroller_init(); }
 
 	// Show ( animate ) the container
-	setTimeout( function() {
+	// setTimeout( function() {
 		jQuery('.dslca-container').css({ bottom : 0 });
-	}, 300 );
+	// }, 300 );
 
 	// Remove class from body so we know it's finished
-	jQuery('body').removeClass('dslca-anim-in-progress');
+	// jQuery('body').removeClass('dslca-anim-in-progress');
 }
 
 /**
@@ -336,7 +339,7 @@ function dslc_generate_filters() {
 	if ( dslcDebug ) console.log( 'dslc_generate_filters' );
 
 	// Vars
-	var el, filters = [], filtersHTML = '<span data-origin="">Show All</span>', els = jQuery('.dslca-section:visible .dslca-origin');
+	var el, filters = [], filtersHTML = '<a html="#" data-origin="">Show All</a>', els = jQuery('.dslca-section:visible .dslca-origin');
 
 	// Go through each and generate the filters
 	els.each(function(){
@@ -344,7 +347,7 @@ function dslc_generate_filters() {
 
 		if ( jQuery.inArray( el.data('origin'), filters ) == -1 ) {
 			filters.push( el.data('origin') );
-			filtersHTML += '<span data-origin="' + el.data('origin') + '">' + el.data('origin') + '</span>';
+			filtersHTML += '<a href="#" data-origin="' + el.data('origin') + '">' + el.data('origin') + '</a>';
 		}
 	});
 
@@ -447,7 +450,7 @@ function dslc_drag_and_drop() {
 
 			} else {
 
-				jQuery('body').addClass('dslca-anim-in-progress dslca-module-drop-in-progress');
+				jQuery('body').addClass('dslca-module-drop-in-progress');
 
 				// Add padding to modules area
 				/*
@@ -455,6 +458,7 @@ function dslc_drag_and_drop() {
 					modulesArea.animate({ paddingBottom : 50 }, 150);
 				*/
 
+				// TODO: Optimize expensive ajax call in this function!
 				// Load Output
 				dslc_module_output_default( moduleID, function( response ){
 
@@ -471,7 +475,7 @@ function dslc_drag_and_drop() {
 
 					setTimeout( function(){
 						DSLC.Editor.frameContext.dslc_masonry( dslcJustAdded );
-						jQuery('body').removeClass('dslca-anim-in-progress dslca-module-drop-in-progress');
+						jQuery('body').removeClass('dslca-module-drop-in-progress');
 					}, 700 );
 
 					// "Show" no content text
@@ -803,4 +807,80 @@ function dslc_get_control_value ( control_id ) {
 	value = control_storage.val();
 
 	return value;
+}
+
+/**
+ * Bind keypress events with both parent and iframe pages.
+ * Function called when content inside iframe is loaded.
+ *
+ * @return {void}
+ */
+function dslc_keypress_events() {
+
+	jQuery( [document, DSLC.Editor.frameContext.document ] ).unbind('keydown').bind('keydown', function (keydown_event) {
+
+		// Modal window [ESC]/[Enter]
+		dslc_modal_keypress_events(keydown_event);
+
+		// Prevent backspace from navigating back
+		dslc_disable_backspace_navigation(keydown_event);
+
+		// Prompt Modal on F5
+		dslc_notice_on_refresh(keydown_event);
+
+	});
+}
+
+/**
+ * Action - Prevent backspace from navigating back
+ */
+
+function dslc_disable_backspace_navigation (event) {
+
+	var doPrevent = false;
+
+	if (event.keyCode === 8) {
+
+		var d = event.srcElement || event.target;
+
+		if ( (d.tagName.toUpperCase() === 'INPUT' && (
+				d.type.toUpperCase() === 'TEXT' ||
+				d.type.toUpperCase() === 'PASSWORD' ||
+				d.type.toUpperCase() === 'NUMBER' ||
+				d.type.toUpperCase() === 'FILE')
+			  )
+			 || d.tagName.toUpperCase() === 'TEXTAREA'
+			 || jQuery(d).hasClass('dslca-editable-content')
+			 || jQuery(d).hasClass('dslc-tabs-nav-hook-title')
+			 || jQuery(d).hasClass('dslc-accordion-title') ) {
+
+			doPrevent = d.readOnly || d.disabled;
+		} else {
+
+			doPrevent = true;
+		}
+	}
+
+	if (doPrevent) {
+		event.preventDefault();
+	}
+
+}
+
+/**
+ * Actions - Prompt Modal on F5
+ *
+ * 116 – F5
+ * 81 + event.metaKey = CMD + R
+ */
+
+function dslc_notice_on_refresh(e) {
+
+	if ( e.which == 116 || ( e.which === 82 && e.metaKey ) ) {
+		if ( jQuery('.dslca-save-composer-hook').offsetParent !== null || jQuery('.dslca-module-edit-save').offsetParent !== null ) {
+			e.preventDefault();
+			dslc_js_confirm( 'disable_lc', '<span class="dslca-prompt-modal-title">' + DSLCString.str_refresh_title +
+			 '</span><span class="dslca-prompt-modal-descr">' + DSLCString.str_refresh_descr + '</span>', document.URL );
+		}
+	}
 }

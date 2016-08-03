@@ -135,7 +135,7 @@ function dslc_generate_code() {
 
 	// Vars
 	var moduleCode,
-	moduleSize,
+	module_size,
 	composerCode = '',
 	maxPerRow = 12,
 	maxPerRowA = 12,
@@ -191,16 +191,15 @@ function dslc_generate_code() {
 			jQuery(this).removeClass('dslc-modules-section-not-empty').addClass('dslc-modules-section-empty');
 		}
 
-			// Remove last and first classes from module areas and modules
+		// Remove last and first classes from module areas and modules
 		jQuery('.dslc-modules-area.dslc-last-col, .dslc-modules-area.dslc-first-col', this).removeClass('dslc-last-col dslc-first-col');
 		jQuery('.dslc-module-front.dslc-last-col, .dslc-module-front.dslc-first-col', this).removeClass('dslc-last-col dslc-first-col');
-
 
 		// Vars
 		currPerRowA = 0;
 		modulesSection = jQuery(this);
 
-		// Generate attributes for row shortcode
+		// Generate attributes for the row shortcode
 		modulesSectionAtts = '';
 		jQuery('.dslca-modules-section-settings input', modulesSection).each(function(){
 			modulesSectionAtts = modulesSectionAtts + jQuery(this).data('id') + '="' + jQuery(this).val() + '" ';
@@ -267,13 +266,15 @@ function dslc_generate_code() {
 
 			jQuery('.dslc-module-front', modulesArea).each(function(){
 
+				var dslc_module = jQuery(this);
+
 				// Vars
-				moduleSize = parseInt( jQuery(this).data('dslc-module-size') );
+				module_size = parseInt( dslc_module[0].getAttribute('data-dslc-module-size') );
 				var moduleLastState = 'no';
 				var moduleFirstState = 'no';
 
 				// Increment modules column counter
-				currPerRow += moduleSize;
+				currPerRow += module_size;
 
 				// If modules column counter same as maximum
 				if ( currPerRow == maxPerRow ) {
@@ -288,6 +289,9 @@ function dslc_generate_code() {
 					// Set shortcode's "last" state to "yes"
 					moduleLastState = 'yes';
 
+					// Set shorcode's "first" state to "yes"
+					moduleFirstState = 'yes';
+
 
 				// If modules column counter bigger than maximum
 				} else if ( currPerRow > maxPerRow ) {
@@ -296,28 +300,14 @@ function dslc_generate_code() {
 					jQuery(this).removeClass('dslc-last-col').addClass('dslc-first-col');
 
 					// Set modules column counter to the size of current module
-					currPerRow = moduleSize;
+					currPerRow = module_size;
 
 					// Set shortcode's "first" state to "yes"
 					moduleFirstState = 'yes';
 				}
 
-				// If modules column counter same as maximum
-				if ( currPerRow == maxPerRow ) {
-
-					// Set shorcode's "first" state to "yes"
-					moduleFirstState = 'yes';
-/*
-					// Add classes for current and next module
-					jQuery(this).addClass('dslc-last-col').next('.dslc-module-front').addClass('dslc-first-col');
-
-					// Resest modules column counter
-					currPerRow = 0;
-*/
-				}
-
 				// Get module's LC data
-				moduleCode = jQuery(this).find('.dslca-module-code').val();
+				moduleCode = dslc_module[0].querySelector('.dslca-module-code').value;
 
 				// Add the module shortcode containing the data
 				composerCode = composerCode + '[dslc_module last="' + moduleLastState + '"]' + moduleCode + '[/dslc_module] ';
@@ -344,7 +334,7 @@ function dslc_generate_section_code( theModulesSection ) {
 	if ( dslcDebug ) console.log( 'dslc_generate_section_code' );
 
 	var moduleCode,
-	moduleSize,
+	module_size,
 	composerCode = '',
 	maxPerRow = 12,
 	maxPerRowA = 12,
@@ -399,8 +389,8 @@ function dslc_generate_section_code( theModulesSection ) {
 		// Go through each module in the area
 		jQuery('.dslc-module-front', modulesArea).each(function(){
 
-			moduleSize = parseInt( jQuery(this).data('dslc-module-size') );
-			currPerRow += moduleSize;
+			module_size = parseInt( jQuery(this).data('dslc-module-size') );
+			currPerRow += module_size;
 
 			if ( currPerRow == modulesAreaSize ) {
 
@@ -428,7 +418,8 @@ jQuery(document).ready(function($){
 	/**
 	 * Hook - Save Page
 	 */
-	$(document).on( 'click', '.dslca-save-composer-hook', function(){
+	$(document).on( 'click', '.dslca-save-composer-hook', function(e){
+		e.preventDefault();
 
 		// If some saving action not already in progress
 		if ( ! $('body').hasClass('dslca-module-saving-in-progress') && ! $('body').hasClass('dslca-saving-in-progress') ) {
@@ -440,7 +431,8 @@ jQuery(document).ready(function($){
 	/**
 	 * Hook - Save Draft
 	 */
-	$(document).on( 'click', '.dslca-save-draft-composer-hook', function(){
+	$(document).on( 'click', '.dslca-save-draft-composer-hook', function(e){
+		e.preventDefault();
 
 		// If some saving action not already in progress
 		if ( ! $('body').hasClass('dslca-module-saving-in-progress') && ! $('body').hasClass('dslca-saving-in-progress') ) {

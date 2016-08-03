@@ -114,11 +114,6 @@
 			// Is hidden
 			} else {
 
-				// Set active
-				jQuery('.dslca-change-width-modules-area-options .dslca-active-width', DSLC.Editor.frame).removeClass('dslca-active-width');
-				var currSize = jQuery(this).closest('.dslc-modules-area').data('size');
-				jQuery('.dslca-change-width-modules-area-options span[data-size="' + currSize + '"]', DSLC.Editor.frame).addClass('dslca-active-width');
-
 				// Show
 				jQuery('.dslca-change-width-modules-area-options', this).show();
 			}
@@ -285,19 +280,19 @@ function dslc_modules_area_copy( area ) {
 	if ( dslcDebug ) console.log( 'dslc_copy_modules_area' );
 
 	// Vars
-	var dslcModuleID,
+	var dslc_moduleID,
 	modulesSection = area.closest('.dslc-modules-section').find('.dslc-modules-section-inner');
 
 	// Copy the area and append to the row
-	var dslcModulesAreaCloned = area.clone().appendTo(modulesSection);
+	var dslc_modulesAreaCloned = area.clone().appendTo(modulesSection);
 
-	new DSLC.Editor.CModuleArea(dslcModulesAreaCloned[0]);
+	new DSLC.Editor.CModuleArea(dslc_modulesAreaCloned[0]);
 
 	// Trigger mouseleave ( so the actions that show on hover go away )
-	dslcModulesAreaCloned.find('.dslca-modules-area-manage').trigger('mouseleave');
+	dslc_modulesAreaCloned.find('.dslca-modules-area-manage').trigger('mouseleave');
 
 	// Apply correct data size and get rid of animations
-	dslcModulesAreaCloned.data('size', area.data('size') ).find('.dslc-module-front').css({
+	dslc_modulesAreaCloned.data('size', area.data('size') ).find('.dslc-module-front').css({
 		'-webkit-animation-name' : 'none',
 		'-moz-animation-name' : 'none',
 		'animation-name' : 'none',
@@ -308,39 +303,21 @@ function dslc_modules_area_copy( area ) {
 	// Go through each module in the area
 	}).each(function(){
 
-		var dslcModule = jQuery(this);
+		var dslc_module = jQuery(this);
 
-		// Reguest new ID
-		jQuery.ajax({
-			type: 'POST',
-			method: 'POST',
-			url: DSLCAjax.ajaxurl,
-			data: { action : 'dslc-ajax-get-new-module-id' },
-			async: false
-		}).done(function( response ) {
+		//Generate new ID for the new module and change it in HTML/CSS of the module.
+		dslc_module_new_id( dslc_module[0] );
 
-			// Remove being edited class
-			jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
+		// Remove "dslca-module-being-edited" class form any element
+		jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
 
-			// Store the new ID
-			dslcModuleID = response.output;
+		// Need to call this function to update last column class for the modules.
+		dslc_generate_code();
 
-			// Apply the new ID and add being edited class
-			dslcModule.data( 'module-id', dslcModuleID ).attr( 'id', 'dslc-module-' + dslcModuleID ).addClass('dslca-module-being-edited');
-
-			// Reload the module
-			dslc_module_output_altered( function(){
-
-				// Remove being edited class and show the module
-				jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited').animate({
-					opacity : 1
-				}, 300);
-
-				dslc_generate_code(); // Update firs/last column classes
-
-			});
-
-		});
+		// Show back new created module
+		dslc_module.animate({
+			opacity : 1
+		}, 300);
 
 	});
 
