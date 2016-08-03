@@ -116,7 +116,7 @@ jQuery(document).ready(function($){
 
 		dslc_module_options_confirm_changes(function(){
 
-			DSLC.Editor.clearUtils();
+			DSLC.Editor.initInlineEditors();
 			DSLC.Editor.unloadOptionsDeps();
 		});
 
@@ -133,7 +133,7 @@ jQuery(document).ready(function($){
 
 		dslc_module_options_cancel_changes(function(){
 
-			DSLC.Editor.clearUtils();
+			DSLC.Editor.initInlineEditors();
 			DSLC.Editor.unloadOptionsDeps();
 		});
 
@@ -236,17 +236,15 @@ jQuery(document).ready(function($){
 
 	DSLC.Editor.colorpickers = [];
 
-	DSLC.Editor.initInlineEditor = function(elem){
+	DSLC.Editor.initInlineEditors = function(){
 
-		jQuery( '.inline-editor', elem).each(function(){
-
-			jQuery(this).attr('contenteditable', 'true');
-			DSLC.Editor.frameContext.DSLC_Iframe.initInlineEditor(this);
-		})
+		DSLC.Editor.frameContext.DSLC_Iframe.initInlineEditors();
 	}
 
 	/* Destroy instanced of sliders, color pickers and other temporary elements */
 	DSLC.Editor.clearUtils = function() {
+
+		console.trace('sdfgdgdfg');
 
 		if( Array.isArray(self.colorpickers ) ) {
 
@@ -256,14 +254,6 @@ jQuery(document).ready(function($){
 			});
 
 			self.colorpickers = [];
-		}
-
-		if( Array.isArray( this.frameContext.tinyMCE.editors ) ) {
-
-			this.frameContext.tinyMCE.editors.forEach(function(item){
-
-				item.remove();
-			});
 		}
 
 		jQuery('.sp-container').remove();

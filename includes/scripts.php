@@ -34,6 +34,7 @@ final class DSLC_Scripts{
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'dslc_load_fonts' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'dslc_load_scripts_admin' ) );
 		add_action( 'admin_footer-plugins.php', array( __CLASS__, 'dslc_inline_js_plugin_title' ) );
+		add_filter( 'mce_external_plugins', array( __CLASS__, 'add_tinymce_plugins' ) );
 	}
 
 	/**
@@ -94,7 +95,7 @@ final class DSLC_Scripts{
 		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
 			ob_start();
-			wp_editor();
+			wp_editor( '', 'enqueue_tinymce_scripts' );
 			ob_end_clean();
 
 			/**
@@ -332,6 +333,19 @@ final class DSLC_Scripts{
 			wp_enqueue_style( 'dslc-gf-opensans', '//fonts.googleapis.com/css?family=Open+Sans:400,600' );
 			wp_enqueue_style( 'dslc-gf-roboto-condesed', '//fonts.googleapis.com/css?family=Roboto+Condensed:400,900' );
 		}
+	}
+
+	/**
+	 * Adding tinymce plugins
+	 *
+	 * @param array $plugins
+	 * @since 1.1
+	 */
+	public static function add_tinymce_plugins( $plugins ) {
+
+		$plugins['link'] = DS_LIVE_COMPOSER_URL . 'js/tinymce/link.plugin.min.js';
+		//$plugins['unlink'] = DS_LIVE_COMPOSER_URL . 'js/tinymce/unlink.plugin.js';
+		return $plugins;
 	}
 
 	/**

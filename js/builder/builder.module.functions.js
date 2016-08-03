@@ -102,7 +102,6 @@
 
 		// Call the function to display options
 		dslc_module_options_show( dslcModuleID );
-
 	});
 
 	/**
@@ -206,7 +205,7 @@
 		}
 	}).on('focus', '.dslca-editable-content', function() {
 
-		if ( ! jQuery(this).closest('.dslc-module-front').hasClass('dslca-module-being-edited') ) {
+		if ( jQuery('.dslca-module-being-edited', DSLC.Editor.frame).length > 0 && ! jQuery(this).closest('.dslc-module-front').hasClass('dslca-module-being-edited') ) {
 
 			jQuery(this).trigger('blur');
 		}
@@ -394,14 +393,20 @@ function dslc_module_options_show( moduleID ) {
 	jQuery('.dslca-wp-editor-actions').hide();
 	jQuery('.dslca-wp-editor-notification').show();
 
+	// Hide the publish button
+	dslc_hide_publish_button();
+
+	DSLC.Editor.initInlineEditors();
+
+	// Set up backup
+	var moduleBackup = jQuery('.dslca-module-options-front', dslcModule).children().clone();
+	DSLC.Editor.moduleBackup = moduleBackup;
+
 	// AJAX call to get options HTML
 	jQuery.post(
 		DSLCAjax.ajaxurl,
 		dslcSettings,
 		function( response ) {
-
-			// Hide the publish button
-			dslc_hide_publish_button();
 
 			// Show edit section
 			dslc_show_section('.dslca-module-edit');
@@ -444,12 +449,7 @@ function dslc_module_options_show( moduleID ) {
 			// Hide the row save/cancel actions
 			jQuery('.dslca-row-edit-actions').hide();
 
-			DSLC.Editor.initInlineEditor( dslcModule );
 			DSLC.Editor.loadOptionsDeps();
-
-			// Set up backup
-			var moduleBackup = jQuery('.dslca-module-options-front', dslcModule).children().clone();
-			DSLC.Editor.moduleBackup = moduleBackup;
 		}
 	);
 }
