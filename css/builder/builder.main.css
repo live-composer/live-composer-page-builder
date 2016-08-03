@@ -30,7 +30,8 @@ body {
 	user-select: text;
 }
 
-.inline-editor:hover {
+body .inline-editor:hover,
+body .dslca-editable-content:hover {
 	cursor: text;
 }
 
@@ -1010,6 +1011,7 @@ body a:focus {
 
 			.dslca-module-edit-options-tab-hook:hover {
 				background: rgba(169, 239, 255, 0.17);
+				color: #fff;
 			}
 
 			.dslca-module-edit-options-tab-hook[data-id="animation_styling"],
@@ -1384,6 +1386,11 @@ body a:focus {
 
 .dslc-module-front {
 	min-height: 30px;
+}
+
+.dslc-module-front:hover,
+.dslc-module-front:hover * {
+	cursor: pointer;
 }
 
 .dslc-modules-area:hover {

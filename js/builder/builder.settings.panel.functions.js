@@ -55,7 +55,9 @@ jQuery(document).ready(function($){
 	/**
 	 * Hook - Tab Switch
 	 */
-	$(document).on( 'click', '.dslca-module-edit-options-tab-hook', function(){
+	$(document).on( 'click', '.dslca-module-edit-options-tab-hook', function(e){
+
+		e.preventDefault();
 		dslc_module_options_tab_filter( $(this) );
 	});
 
@@ -64,6 +66,7 @@ jQuery(document).ready(function($){
 	 */
 	$(document).on( 'click', '.dslca-options-filter-hook', function(e){
 
+		e.preventDefault();
 		var dslcPrev = jQuery('.dslca-options-filter-hook.dslca-active').data('section');
 
 		$('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');

@@ -760,7 +760,7 @@ function dslc_ajax_display_module_options( $atts ) {
 		// Output Tabs.
 		$output_tabs = '';
 		foreach ( $tabs as $tab ) {
-			$output_tabs .= '<span class="dslca-module-edit-options-tab-hook" data-section="' . $tab['section'] . '" data-id="' . $tab['id'] . '">' . $tab['title'] . '</span>';
+			$output_tabs .= '<a href="#" class="dslca-module-edit-options-tab-hook" data-section="' . $tab['section'] . '" data-id="' . $tab['id'] . '">' . $tab['title'] . '</a>';
 		}
 
 		// Combine output.
