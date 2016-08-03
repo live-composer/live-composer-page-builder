@@ -263,6 +263,7 @@ jQuery(document).ready(function($){
 			self.colorpickers = [];
 		}
 
+		jQuery('.temp-styles-for-module', DSLC.Editor.frame).remove();
 		jQuery('.sp-container').remove();
 	}
 

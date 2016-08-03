@@ -504,7 +504,22 @@ jQuery(document).ready(function($) {
 									jQuery('.dslca-font-loading').removeClass('dslca-font-loading').find('.dslca-icon').removeClass('dslc-icon-spin').addClass('dslc-icon-chevron-left');
 								}
 
-								jQuery( dslcAffectOnChangeEl, module).css( dslcAffectOnChangeRule , dslcAffectOnChangeVal );
+								var id = dslcAffectOnChangeRule + dslcAffectOnChangeEl;
+								var elems = dslcAffectOnChangeEl.split(',');
+								var styleContent = "#" + module[0].id + " " + elems.join(", #" + module[0].id) + "{" + dslcAffectOnChangeRule + ": " + dslcAffectOnChangeVal + "}";
+
+								if ( DSLC.Editor.frame[0].getElementById(id) == null ) {
+
+									var styleTag = document.createElement('style');
+									styleTag.innerHTML = styleContent;
+									styleTag.id = id;
+									styleTag.className = "temp-styles-for-module";
+
+									DSLC.Editor.frame[0].body.appendChild(styleTag);
+								} else {
+
+									DSLC.Editor.frame[0].getElementById(id).innerHTML = styleContent;
+								}
 							},
 							inactive : function ( familyName, fvd ) {
 
@@ -531,7 +546,22 @@ jQuery(document).ready(function($) {
 							jQuery('.dslca-font-loading').removeClass('dslca-font-loading').find('.dslca-icon').removeClass('dslc-icon-spin').addClass('dslc-icon-chevron-left');
 						}
 
-						jQuery( dslcAffectOnChangeEl, module ).css( dslcAffectOnChangeRule , dslcAffectOnChangeVal );
+						var id = dslcAffectOnChangeRule + dslcAffectOnChangeEl;
+						var elems = dslcAffectOnChangeEl.split(',');
+						var styleContent = "#" + module[0].id + " " + elems.join(", #" + module[0].id) + "{" + dslcAffectOnChangeRule + ": " + dslcAffectOnChangeVal + "}";
+
+						if ( DSLC.Editor.frame[0].getElementById(id) == null ) {
+
+							var styleTag = document.createElement('style');
+							styleTag.innerHTML = styleContent;
+							styleTag.id = id;
+							styleTag.className = "temp-styles-for-module";
+
+							DSLC.Editor.frame[0].body.appendChild(styleTag);
+						} else {
+
+							DSLC.Editor.frame[0].getElementById(id).innerHTML = styleContent;
+						}
 					}, 100);
 				}
 
@@ -588,7 +618,24 @@ jQuery(document).ready(function($) {
 
 					var module = jQuery(".dslca-module-being-edited", DSLC.Editor.frame);
 
-					jQuery( dslcAffectOnChangeEl, module ).css( rule , dslcAffectOnChangeVal + dslcExt );
+					var id = rule + dslcAffectOnChangeEl;
+					var elems = dslcAffectOnChangeEl.split(',');
+					var styleContent = "#" + module[0].id + " " + elems.join(", #" + module[0].id) + "{" + rule + ": " + dslcAffectOnChangeVal + dslcExt + "}";
+
+					if ( DSLC.Editor.frame[0].getElementById(id) == null ) {
+
+						var styleTag = document.createElement('style');
+						styleTag.innerHTML = styleContent;
+						styleTag.id = id;
+						styleTag.className = "temp-styles-for-module";
+
+						DSLC.Editor.frame[0].body.appendChild(styleTag);
+					} else {
+
+						DSLC.Editor.frame[0].getElementById(id).innerHTML = styleContent;
+					}
+
+					//jQuery( dslcAffectOnChangeEl, module ).css( rule , dslcAffectOnChangeVal + dslcExt );
 				});
 			}
 
@@ -604,6 +651,7 @@ jQuery(document).ready(function($) {
 	// Preview Module Opt Change - Numeric
 	$(document).on( 'keyup, blur', '.dslca-module-edit-field-numeric', function(){
 
+		return false;
 		var dslcOptionValue = '',
 			dslcOption = $(this),
 			dslcOptionID = dslcOption.data('id'),
@@ -628,11 +676,11 @@ jQuery(document).ready(function($) {
 			dslcAffectOnChangeRules = dslcAffectOnChangeRule.replace(/ /g,'').split( ',' );
 
 			// Loop through rules (useful when there are multiple rules)
-			for ( var i = 0; i < dslcAffectOnChangeRules.length; i++ ) {
+			/*for ( var i = 0; i < dslcAffectOnChangeRules.length; i++ ) {
 
 				var module = $(".dslca-module-being-edited", DSLC.Editor.frame);
 				jQuery( dslcAffectOnChangeEl, module ).css( dslcAffectOnChangeRules[i] , dslcAffectOnChangeVal );
-			}
+			}*/
 
 			/**
 			 * Update option
