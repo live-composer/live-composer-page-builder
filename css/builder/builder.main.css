@@ -19,6 +19,21 @@ body {
 	user-select: none;
 }
 
+/* Re-enable text selection for text-based modules */
+
+.inline-editor {
+	-webkit-touch-callout: text;
+	-webkit-user-select: text;
+	-khtml-user-select: text;
+	-moz-user-select: text;
+	-ms-user-select: text;
+	user-select: text;
+}
+
+.inline-editor:hover {
+	cursor: text;
+}
+
 /* Disable text editing cursor on UI elements */
 div:hover,
 span > span:hover,

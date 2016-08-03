@@ -418,7 +418,8 @@ jQuery(document).ready(function($){
 	/**
 	 * Hook - Save Page
 	 */
-	$(document).on( 'click', '.dslca-save-composer-hook', function(){
+	$(document).on( 'click', '.dslca-save-composer-hook', function(e){
+		e.preventDefault();
 
 		// If some saving action not already in progress
 		if ( ! $('body').hasClass('dslca-module-saving-in-progress') && ! $('body').hasClass('dslca-saving-in-progress') ) {
@@ -430,7 +431,8 @@ jQuery(document).ready(function($){
 	/**
 	 * Hook - Save Draft
 	 */
-	$(document).on( 'click', '.dslca-save-draft-composer-hook', function(){
+	$(document).on( 'click', '.dslca-save-draft-composer-hook', function(e){
+		e.preventDefault();
 
 		// If some saving action not already in progress
 		if ( ! $('body').hasClass('dslca-module-saving-in-progress') && ! $('body').hasClass('dslca-saving-in-progress') ) {

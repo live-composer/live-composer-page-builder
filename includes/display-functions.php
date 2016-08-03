@@ -91,15 +91,15 @@ function dslc_display_composer() {
 				<div class="dslca-actions">
 
 					<!-- Save Composer -->
-					<div class="dslca-save-composer dslca-save-composer-hook">
+					<a href="#" class="dslca-save-composer dslca-save-composer-hook">
 						<span class="dslca-save-composer-helptext"><?php _e( 'Publish Changes', 'live-composer-page-builder' ); ?></span>
 						<span class="dslca-save-composer-icon"><span class="dslca-icon dslc-icon-ok"></span></span>
-					</div><!-- .dslca-save-composer -->
+					</a><!-- .dslca-save-composer -->
 
-					<div class="dslca-save-draft-composer dslca-save-draft-composer-hook">
+					<a href="#" class="dslca-save-draft-composer dslca-save-draft-composer-hook">
 						<span class="dslca-save-draft-composer-helptext"><?php _e( 'Save As Draft', 'live-composer-page-builder' ); ?></span>
 						<span class="dslca-save-draft-composer-icon"><span class="dslca-icon dslc-icon-save"></span></span>
-					</div><!-- .dslca-save-draft-composer -->
+					</a><!-- .dslca-save-draft-composer -->
 
 					<!-- Hide/Show -->
 					<a href="#" class="dslca-show-composer-hook"><span class="dslca-icon dslc-icon-arrow-up"></span><?php _e( 'Show Editor', 'live-composer-page-builder' ); ?></a>
