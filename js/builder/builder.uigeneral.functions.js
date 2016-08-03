@@ -88,9 +88,8 @@ jQuery(document).on( 'click', '.dslca-currently-editing', function(){
  * Hook - Hide Composer
  */
 
-jQuery(document).on( 'click', '.dslca-hide-composer-hook', function(){
+jQuery(document).on( 'click', '.dslca-hide-composer-hook', function(e){
 	e.preventDefault();
-
 	dslc_hide_composer()
 });
 
@@ -98,9 +97,8 @@ jQuery(document).on( 'click', '.dslca-hide-composer-hook', function(){
  * Hook - Show Composer
  */
 
-jQuery(document).on( 'click', '.dslca-show-composer-hook', function(){
+jQuery(document).on( 'click', '.dslca-show-composer-hook', function(e){
 	e.preventDefault();
-
 	dslc_show_composer();
 });
 
@@ -109,7 +107,6 @@ jQuery(document).on( 'click', '.dslca-show-composer-hook', function(){
  */
 
 jQuery(document).on( 'click', '.dslca-go-to-modules-hook', function(e){
-
 	e.preventDefault();
 	dslc_show_section( '.dslca-modules' );
 });
@@ -282,7 +279,7 @@ function dslc_show_section( section ) {
 	if ( dslcDebug ) console.log( 'dslc_show_section' );
 
 	// Add class to body so we know it's in progress
-	jQuery('body').addClass('dslca-anim-in-progress');
+	// jQuery('body').addClass('dslca-anim-in-progress');
 
 	// Get vars
 	var sectionTitle = jQuery(section).data('title'),
@@ -324,12 +321,12 @@ function dslc_show_section( section ) {
 	if ( section != '.dslca-module-edit' ) { dslc_scroller_init(); }
 
 	// Show ( animate ) the container
-	setTimeout( function() {
+	// setTimeout( function() {
 		jQuery('.dslca-container').css({ bottom : 0 });
-	}, 300 );
+	// }, 300 );
 
 	// Remove class from body so we know it's finished
-	jQuery('body').removeClass('dslca-anim-in-progress');
+	// jQuery('body').removeClass('dslca-anim-in-progress');
 }
 
 /**
@@ -452,7 +449,7 @@ function dslc_drag_and_drop() {
 
 			} else {
 
-				jQuery('body').addClass('dslca-anim-in-progress dslca-module-drop-in-progress');
+				jQuery('body').addClass('dslca-module-drop-in-progress');
 
 				// Add padding to modules area
 				/*
@@ -477,7 +474,7 @@ function dslc_drag_and_drop() {
 
 					setTimeout( function(){
 						DSLC.Editor.frameContext.dslc_masonry( dslcJustAdded );
-						jQuery('body').removeClass('dslca-anim-in-progress dslca-module-drop-in-progress');
+						jQuery('body').removeClass('dslca-module-drop-in-progress');
 					}, 700 );
 
 					// "Show" no content text
