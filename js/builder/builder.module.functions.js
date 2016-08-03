@@ -444,7 +444,7 @@ function dslc_module_options_show( moduleID ) {
 			// Hide the row save/cancel actions
 			jQuery('.dslca-row-edit-actions').hide();
 
-			DSLC.Editor.initMediumEditor();
+			DSLC.Editor.initInlineEditor( dslcModule );
 			DSLC.Editor.loadOptionsDeps();
 
 			// Set up backup
