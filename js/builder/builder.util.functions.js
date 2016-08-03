@@ -61,8 +61,6 @@ function dslc_editable_content_gen_code( dslcField ) {
 	dslcFieldID = dslcField.data('id');
 
 	jQuery('.dslca-module-option-front[data-id="' + dslcFieldID + '"]', dslcModule).val( dslcContent );
-
-	dslc_show_publish_button();
 }
 
 /**
