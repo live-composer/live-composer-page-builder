@@ -21,7 +21,8 @@ body {
 
 /* Re-enable text selection for text-based modules */
 
-.inline-editor {
+.inline-editor,
+.inline-editor * {
 	-webkit-touch-callout: text;
 	-webkit-user-select: text;
 	-khtml-user-select: text;
@@ -31,7 +32,9 @@ body {
 }
 
 body .inline-editor:hover,
-body .dslca-editable-content:hover {
+body .inline-editor:hover *,
+body .dslca-editable-content:hover,
+body .dslca-editable-content:hover * {
 	cursor: text;
 }
 
