@@ -1642,7 +1642,7 @@ function dslc_module_options_numeric( field ) {
 
 		});
 
-		jQuery('.dslca-module-edit-form').mousemove(function(e){
+		jQuery('.dslca-section').mousemove(function(e){
 
 			// Process only if we dragging slider handle, not just move mouse over
 			if( handle !== false ) {

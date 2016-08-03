@@ -108,7 +108,8 @@
 	/**
 	 * Hook - Add Row
 	 */
-	DSLC.Editor.frame.on( 'click', '.dslca-add-modules-section-hook', function(){
+	DSLC.Editor.frame.on( 'click', '.dslca-add-modules-section-hook', function(e){
+		e.preventDefault();
 
 		var button = $(this);
 

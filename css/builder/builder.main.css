@@ -1651,7 +1651,8 @@ body a:focus {
 
 		.dslca-add-modules-section-hook:hover,
 		.dslca-import-modules-section-hook:hover {
-		  background: #FF9162;
+			background: #FF9162;
+			color: #fff;
 		}
 
 			.dslca-add-modules-section .dslca-icon {
@@ -2924,10 +2925,12 @@ span.dslca-manage-action:hover * {
 			margin-left: -6px;
 		}
 
+		.dslca-modules-section-edit-option-slider input,
 		.dslca-module-edit-option-slider input {
 			 cursor: ew-resize;
 		}
 
+		.dslca-modules-section-edit-option-slider:hover:after,
 		.dslca-module-edit-option-slider:hover:after {
 			content: "click and drag";
 			display: block;
