@@ -251,8 +251,6 @@ jQuery(document).ready(function($){
 	/* Destroy instanced of sliders, color pickers and other temporary elements */
 	DSLC.Editor.clearUtils = function() {
 
-		console.trace('sdfgdgdfg');
-
 		if( Array.isArray(self.colorpickers ) ) {
 
 			self.colorpickers.forEach(function(item){
