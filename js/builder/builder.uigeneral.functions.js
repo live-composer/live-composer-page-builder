@@ -675,12 +675,37 @@ function dslc_toogle_control ( control_id ) {
 		// Restore value of the data backup attribute
 		control_storage.val( control_storage.data('val-bckp') ).trigger('change');
 		control_value = dslc_get_control_value(control_id);
-		control_value = dslc_combine_value_and_extension( control_value, control_data_ext);
+		control_value = dslc_combine_value_and_extension( control_value, control_data_ext || '');
 
 		// Loop through rules (useful when there are multiple rules)
 		for ( var i = 0; i < affect_on_change_rules.length; i++ ) {
 
-			jQuery( affect_on_change_el, DSLC.Editor.frame ).css( affect_on_change_rules[i] , control_value );
+			var resp_prefix = '';
+
+			if ( control.closest(".dslca-module-edit-option").data('tab') == 'tablet_responsive' ) {
+
+				resp_prefix = '@media only screen and (max-width: 1024px) and (min-width: 768px) ';
+			} else if ( control.closest(".dslca-module-edit-option").data('tab') == 'phone_responsive' ) {
+
+				resp_prefix = '@media only screen and (max-width: 767px) ';
+			}
+
+			var id = resp_prefix + affect_on_change_rules[i] + affect_on_change_elmts.join(', ').trim();
+			id = id.replace(/ /gi, '');
+			var style = DSLC.Editor.frame[0].getElementById( id );
+
+			if ( style == null ) {
+
+				var style = document.createElement('style');
+				style.id = id
+				style.className = 'temp-styles-for-module';
+
+				DSLC.Editor.frame[0].body.appendChild( style );
+			}
+
+			style.innerHTML = resp_prefix + affect_on_change_el + "{" + affect_on_change_rules[i] + ": " + control_value + "}";
+
+			//jQuery( affect_on_change_el, DSLC.Editor.frame ).css( affect_on_change_rules[i] , control_value );
 		}
 	}
 }
@@ -771,6 +796,14 @@ function disable_css_rule(selectorCSS, ruleCSS, moduleID) {
 			}
 		}
 	}
+
+	/*var id = ruleCSS + selectorCSS.replace('#' + moduleID, '').trim();
+	var style = DSLC.Editor.frame[0].getElementById( id );
+
+	if( style != null ) {
+
+		style.parentNode.removeChild( style );
+	}*/
 }
 
 function dslc_combine_value_and_extension ( value, extension) {
