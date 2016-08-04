@@ -504,9 +504,22 @@ jQuery(document).ready(function($) {
 									jQuery('.dslca-font-loading').removeClass('dslca-font-loading').find('.dslca-icon').removeClass('dslc-icon-spin').addClass('dslc-icon-chevron-left');
 								}
 
-								var id = dslcAffectOnChangeRule + dslcAffectOnChangeEl;
+								var resp_prefix = '', resp_postfix = '';
+
+								if ( dslcOption.closest(".dslca-module-edit-option").data('tab') == 'tablet_responsive' ) {
+
+									resp_prefix = '@media only screen and (max-width: 1024px) and (min-width: 768px) {';
+									resp_postfix = '}';
+								} else if ( dslcOption.closest(".dslca-module-edit-option").data('tab') == 'phone_responsive' ) {
+
+									resp_prefix = '@media only screen and (max-width: 767px) {';
+									resp_postfix = '}';
+								}
+
+								var id = resp_prefix + dslcAffectOnChangeRule + dslcAffectOnChangeEl;
+								id = id.replace(/ /gi, '');
 								var elems = dslcAffectOnChangeEl.split(',');
-								var styleContent = "#" + module[0].id + " " + elems.join(", #" + module[0].id) + "{" + dslcAffectOnChangeRule + ": " + dslcAffectOnChangeVal + "}";
+								var styleContent = resp_prefix + "#" + module[0].id + " " + elems.join(", #" + module[0].id) + "{" + dslcAffectOnChangeRule + ": " + dslcAffectOnChangeVal + "}" + resp_postfix;
 
 								if ( DSLC.Editor.frame[0].getElementById(id) == null ) {
 
@@ -546,15 +559,28 @@ jQuery(document).ready(function($) {
 							jQuery('.dslca-font-loading').removeClass('dslca-font-loading').find('.dslca-icon').removeClass('dslc-icon-spin').addClass('dslc-icon-chevron-left');
 						}
 
+						var resp_prefix = '', resp_postfix = '';
+
+						if ( dslcOption.data('tab') == 'tablet_responsive' ) {
+
+							resp_prefix = '@media only screen and (max-width: 1024px) and (min-width: 768px) {';
+							resp_postfix = '}';
+						} else if ( dslcOption.data('tab') == 'phone_responsive' ) {
+
+							resp_prefix = '@media only screen and (max-width: 767px) {';
+							resp_postfix = '}';
+						}
+
 						var id = dslcAffectOnChangeRule + dslcAffectOnChangeEl;
+						id = id.replace(/ /gi, '');
 						var elems = dslcAffectOnChangeEl.split(',');
-						var styleContent = "#" + module[0].id + " " + elems.join(", #" + module[0].id) + "{" + dslcAffectOnChangeRule + ": " + dslcAffectOnChangeVal + "}";
+						var styleContent = resp_prefix + "#" + module[0].id + " " + elems.join(", #" + module[0].id) + "{" + dslcAffectOnChangeRule + ": " + dslcAffectOnChangeVal + "}" + resp_postfix;
 
 						if ( DSLC.Editor.frame[0].getElementById(id) == null ) {
 
 							var styleTag = document.createElement('style');
 							styleTag.innerHTML = styleContent;
-							styleTag.id = id;
+							styleTag.id = id
 							styleTag.className = "temp-styles-for-module";
 
 							DSLC.Editor.frame[0].body.appendChild(styleTag);
@@ -618,15 +644,28 @@ jQuery(document).ready(function($) {
 
 					var module = jQuery(".dslca-module-being-edited", DSLC.Editor.frame);
 
+					var resp_prefix = '', resp_postfix = '';
+
+					if ( dslcOption.closest(".dslca-module-edit-option").data('tab') == 'tablet_responsive' ) {
+
+						resp_prefix = '@media only screen and (max-width: 1024px) and (min-width: 768px) {';
+						resp_postfix = '}';
+					} else if ( dslcOption.closest(".dslca-module-edit-option").data('tab') == 'phone_responsive' ) {
+
+						resp_prefix = '@media only screen and (max-width: 767px) {';
+						resp_postfix = '}';
+					}
+
 					var id = rule + dslcAffectOnChangeEl;
+					id = id.replace(/ /gi, '');
 					var elems = dslcAffectOnChangeEl.split(',');
-					var styleContent = "#" + module[0].id + " " + elems.join(", #" + module[0].id) + "{" + rule + ": " + dslcAffectOnChangeVal + dslcExt + "}";
+					var styleContent = resp_prefix + "#" + module[0].id + " " + elems.join(", #" + module[0].id) + "{" + rule + ": " + dslcAffectOnChangeVal + dslcExt + "}" + resp_postfix;
 
 					if ( DSLC.Editor.frame[0].getElementById(id) == null ) {
 
 						var styleTag = document.createElement('style');
 						styleTag.innerHTML = styleContent;
-						styleTag.id = id;
+						styleTag.id = id
 						styleTag.className = "temp-styles-for-module";
 
 						DSLC.Editor.frame[0].body.appendChild(styleTag);
