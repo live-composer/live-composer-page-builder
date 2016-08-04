@@ -704,8 +704,6 @@ function dslc_toogle_control ( control_id ) {
 			}
 
 			style.innerHTML = resp_prefix + affect_on_change_el + "{" + affect_on_change_rules[i] + ": " + control_value + "}";
-
-			//jQuery( affect_on_change_el, DSLC.Editor.frame ).css( affect_on_change_rules[i] , control_value );
 		}
 	}
 }
