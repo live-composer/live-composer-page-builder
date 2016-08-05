@@ -359,6 +359,27 @@ class DSLC_Button extends DSLC_Module {
 				'ext' => 'px'
 			),
 			array(
+				'label' => __( 'Font Style', 'live-composer-page-builder' ),
+				'id' => 'css_button_font_style',
+				'std' => 'normal',
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-button a',
+				'affect_on_change_rule' => 'font-style',
+				'section' => 'styling',
+				'tab' => __( 'Typography', 'live-composer-page-builder' ),
+				'choices' => array(
+					array(
+						'label' => __( 'Normal', 'live-composer-page-builder' ),
+						'value' => 'normal',
+					),
+					array(
+						'label' => __( 'Italic', 'live-composer-page-builder' ),
+						'value' => 'italic',
+					),
+				)
+			),
+			array(
 				'label' => __( 'Font Weight', 'live-composer-page-builder' ),
 				'id' => 'css_button_font_weight',
 				'std' => '800',
