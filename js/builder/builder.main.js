@@ -14,47 +14,59 @@ var dslcDebug = false;
 
 
 // Global Plugin Object
-var DSLC = {
-	Production: {}
+var LiveComposer = {
+
+    Builder: {
+
+        Elements: {},
+        UI: {},
+        Actions: {},
+        Flags: {},
+        PreviewFrame: {},
+        Helpers: {}
+    },
+    Production: {
+
+    },
+    Utils: {}
 };
 
-DSLC.Editor = {
-	flags: {
+(function(){
+
+	LiveComposer.Builder.Flags = {
+
 		generate_code_after_row_changed: true
-	},
+	};
 
-	postponed_actions_queue: {},
-/*
-	{
-		'action_to_run' : counter
-		action_to_run – function name to launch once counter == 0
-	},
-*/
+	LiveComposer.Builder.Actions = {
 
-	add_postponed_action: function( action_name ) {
+		postponed_actions_queue: {},
+		add_postponed_action: function( action_name ) {
 
-		if (action_name === undefined) {
-		   return;
-		}
-
-		if ( isNaN ( this.postponed_actions_queue[ action_name ] ) ) {
-			this.postponed_actions_queue[ action_name ] = 0;
-		}
-
-		this.postponed_actions_queue[ action_name ] += 1;
-	},
-
-	release_postponed_actions: function() {
-
-		jQuery.each( this.postponed_actions_queue, function(index, value) {
-
-			if ( 1 < value ) {
-				DSLC.Editor.postponed_actions_queue[index] -= 1;
-			} else if ( 1 == value ) {
-				window[index](); // Run function with action name
-				DSLC.Editor.postponed_actions_queue[index] -= 1;
+			if (action_name === undefined) {
+			   return;
 			}
-		});
-	}
 
-};
+			if ( isNaN ( this.postponed_actions_queue[ action_name ] ) ) {
+				this.postponed_actions_queue[ action_name ] = 0;
+			}
+
+			this.postponed_actions_queue[ action_name ] += 1;
+		},
+
+		release_postponed_actions: function() {
+
+			var self = this;
+
+			jQuery.each( this.postponed_actions_queue, function(index, value) {
+
+				if ( 1 < value ) {
+					self.postponed_actions_queue[index] -= 1;
+				} else if ( 1 == value ) {
+					window[index](); // Run function with action name
+					self.postponed_actions_queue[index] -= 1;
+				}
+			});
+		}
+	}
+}());

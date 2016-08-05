@@ -15,7 +15,7 @@
  * @params.confirm_title {string} - modal window confirm title
  * @params.ok_title {string} - modal window OK title
  */
-DSLC.Editor.CModalWindow = function(params) {
+LiveComposer.Builder.UI.CModalWindow = function(params) {
 
     if(typeof params != 'object') return false;
 
