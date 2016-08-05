@@ -4,7 +4,7 @@
 
 'use strict';
 
-DSLC.Editor.CModuleArea = function(elem) {
+LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 
 	var self = this;
 	this.section = elem.closest('.dslc-modules-section');

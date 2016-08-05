@@ -154,7 +154,7 @@ function dslc_generate_code() {
 	 * not the whole page.
 	 */
 
-	jQuery('#dslc-main .dslc-modules-area', DSLC.Editor.frame).each(function(){
+	jQuery('#dslc-main .dslc-modules-area', LiveComposer.Builder.PreviewFrame).each(function(){
 
 
 		if ( jQuery('.dslc-module-front', this).length ) {
@@ -180,7 +180,7 @@ function dslc_generate_code() {
 	 * Go through each row (empty or not empty)
 	 */
 
-	jQuery('#dslc-main .dslc-modules-section', DSLC.Editor.frame).each(function(){
+	jQuery('#dslc-main .dslc-modules-section', LiveComposer.Builder.PreviewFrame).each(function(){
 
 		// Update dslc-modules-section-(not)empty classes
 		if ( jQuery('.dslc-modules-area', this).length ) {
@@ -462,7 +462,7 @@ function dslca_gen_content_for_search() {
 
 	// Go through each content element
 
-	var elements = DSLC.Editor.frameContext.document.querySelectorAll('#dslc-main .dslc-module-front [data-exportable-content]');
+	var elements = LiveComposer.Builder.PreviewFrameContext.document.querySelectorAll('#dslc-main .dslc-module-front [data-exportable-content]');
 
 	if ( undefined !== elements ) {
 		Array.prototype.forEach.call(elements, function(el, i){

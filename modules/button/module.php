@@ -24,6 +24,13 @@ class DSLC_Button extends DSLC_Module {
 
 	function options() {
 
+		// Custom classes fix
+		if ( ! empty( $_POST['button_class'] ) ) {
+
+			$_POST['custom_class'] = $_POST['button_class'];
+			$_POST['button_class'] = '';
+		}
+
 		$dslc_options = array(
 
 			array(
@@ -58,6 +65,7 @@ class DSLC_Button extends DSLC_Module {
 				'id' => 'button_class',
 				'std' => '',
 				'type' => 'text',
+				'visibility' => 'hidden',
 			),
 
 			/**
@@ -1006,7 +1014,6 @@ class DSLC_Button extends DSLC_Module {
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		return apply_filters( 'dslc_module_options', $dslc_options, $this->module_id );
-
 	}
 
 	function output( $options ) {
@@ -1023,16 +1030,20 @@ class DSLC_Button extends DSLC_Module {
 
 		/* Module output starts here */
 
-			$anchor_append = '';
+		$anchor_append = '';
 
-			if ( isset( $options['button_onclick'] ) && $options['button_onclick'] !== '' )
-				$anchor_append = ' onClick="' . stripslashes( $options['button_onclick'] ) . '"';
+		if ( isset( $options['button_onclick'] ) && $options['button_onclick'] !== '' ) {
+
+			$anchor_append = ' onClick="' . stripslashes( $options['button_onclick'] ) . '"';
+		}
+
+		$classes = $options['button_class'] . ' ' . $options['custom_class'];
 
 			?>
 
 			<div class="dslc-button">
 				<?php if ( $options['button_target'] == 'lightbox' ) : ?>
-					<a href="<?php echo do_shortcode( $options['button_url'] ); ?>" <?php echo $anchor_append; if ( $options['link_nofollow'] ) echo 'rel="nofollow"'; ?> class="dslc-lightbox-image <?php echo esc_attr( $options['button_class'] ); ?>">
+					<a href="<?php echo do_shortcode( $options['button_url'] ); ?>" <?php echo $anchor_append; if ( $options['link_nofollow'] ) echo 'rel="nofollow"'; ?> class="dslc-lightbox-image <?php echo trim( esc_attr( $classes ) ); ?>">
 						<?php if ( $options['button_state'] == 'enabled' && $options['icon_pos'] == 'left' ) : ?>
 							<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 						<?php endif; ?>
@@ -1046,7 +1057,7 @@ class DSLC_Button extends DSLC_Module {
 						<?php endif; ?>
 					</a>
 				<?php else : ?>
-					<a href="<?php echo do_shortcode( $options['button_url'] ); ?>" target="<?php echo $options['button_target']; ?>" <?php echo $anchor_append; if ( $options['link_nofollow'] ) echo 'rel="nofollow"'; ?> class="<?php echo esc_attr( $options['button_class'] ); ?>">
+					<a href="<?php echo do_shortcode( $options['button_url'] ); ?>" target="<?php echo $options['button_target']; ?>" <?php echo $anchor_append; if ( $options['link_nofollow'] ) echo 'rel="nofollow"'; ?> class="<?php echo trim( esc_attr( $classes ) ); ?>">
 						<?php if ( $options['button_state'] == 'enabled' && $options['icon_pos'] == 'left' ) : ?>
 							<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 						<?php endif; ?>

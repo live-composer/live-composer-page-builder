@@ -328,9 +328,11 @@ function dslc_ajax_display_module_options( $atts ) {
 			 */
 
 			if ( isset( $module_option['section'] ) ) {
-							$section = $module_option['section'];
+
+				$section = $module_option['section'];
 			} else {
-							$section = 'functionality';
+
+				$section = 'functionality';
 			}
 
 			/**
@@ -354,7 +356,6 @@ function dslc_ajax_display_module_options( $atts ) {
 				}
 
 				$tab_id = 'general_' . $section;
-
 			}
 
 			if ( isset( $module_option['tab'] ) ) {

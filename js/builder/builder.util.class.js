@@ -4,7 +4,7 @@
 
 'use strict';
 
-var DSLC_Util = {
+LiveComposer.Utils = {
 	addslashes: function(str)
 	{
 		 str = str.replace(/\\/g, '\\\\');
@@ -106,7 +106,7 @@ var DSLC_Util = {
 		code = dslc_serialize( code );
 
 		// Encode
-		code = DSLC_Util.utf8_to_b64( code );
+		code = LiveComposer.Utils.utf8_to_b64( code );
 
 		return code;
 	},
@@ -114,7 +114,7 @@ var DSLC_Util = {
 	decode: function (code) {
 
 		// Decode base64 to utf8
-		code = DSLC_Util.b64_to_utf8( code );
+		code = LiveComposer.Utils.b64_to_utf8( code );
 
 		// Unserialize decoded code into the object
 		code = dslc_unserialize( code );
@@ -144,13 +144,13 @@ var DSLC_Util = {
 		var module_code = module_code_container.value;
 
 	 	// Decode
-		module_code = DSLC_Util.decode( module_code );
+		module_code = LiveComposer.Utils.decode( module_code );
 
 		// Change module property
 		module_code[property_name] = property_value;
 
 		// Encode
-		module_code = DSLC_Util.encode( module_code );
+		module_code = LiveComposer.Utils.encode( module_code );
 
 		// Update raw code
 		module_code_container.value = module_code;

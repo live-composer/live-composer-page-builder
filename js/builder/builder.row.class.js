@@ -7,7 +7,7 @@
  * Builder row class
  */
 
-DSLC.Editor.CRow = function(elem) {
+LiveComposer.Builder.Elements.CRow = function(elem) {
 
 	var self = this;
 	this.elem = elem;
