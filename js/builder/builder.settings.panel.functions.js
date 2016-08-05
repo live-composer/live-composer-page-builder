@@ -387,6 +387,49 @@ jQuery(document).ready(function($){
 
 		self.Helpers.depsHandlers = [];
 	}
+
+	/**
+	 * Creates inline style tag when editing WYSWIG
+	 *
+	 * @param  {object} params
+	 *    params.rule
+	 *    params.elems
+	 *    params.module_id
+	 */
+	LiveComposer.Builder.Helpers.processInlineStyleTag = function( params ) {
+
+		if ( typeof params != 'object' ) return false;
+
+		var resp_prefix = '', resp_postfix = '';
+
+		if ( params.context.closest(".dslca-module-edit-option").data('tab') == 'tablet_responsive' ) {
+
+			resp_prefix = '@media only screen and (max-width: 1024px) and (min-width: 768px) {';
+			resp_postfix = '}';
+		} else if ( params.context.closest(".dslca-module-edit-option").data('tab') == 'phone_responsive' ) {
+
+			resp_prefix = '@media only screen and (max-width: 767px) {';
+			resp_postfix = '}';
+		}
+
+		params.styleContent = resp_prefix + params.styleContent + resp_postfix;
+
+		var id = resp_prefix + params.rule + params.elems;
+		id = id.replace(/ /gi, '');
+
+		if ( LiveComposer.Builder.PreviewFrame[0].getElementById(id) == null ) {
+
+			var styleTag = document.createElement('style');
+			styleTag.innerHTML = params.styleContent;
+			styleTag.id = id;
+			styleTag.className = "temp-styles-for-module";
+
+			LiveComposer.Builder.PreviewFrame[0].body.appendChild(styleTag);
+		} else {
+
+			LiveComposer.Builder.PreviewFrame[0].getElementById(id).innerHTML = params.styleContent;
+		}
+	}
 }());
 
 

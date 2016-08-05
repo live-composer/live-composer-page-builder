@@ -680,30 +680,15 @@ function dslc_toogle_control ( control_id ) {
 		// Loop through rules (useful when there are multiple rules)
 		for ( var i = 0; i < affect_on_change_rules.length; i++ ) {
 
-			var resp_prefix = '';
+			var styleContent = affect_on_change_el + "{" + affect_on_change_rules[i] + ": " + control_value + "}";
 
-			if ( control.closest(".dslca-module-edit-option").data('tab') == 'tablet_responsive' ) {
+			LiveComposer.Builder.Helpers.processInlineStyleTag({
 
-				resp_prefix = '@media only screen and (max-width: 1024px) and (min-width: 768px) ';
-			} else if ( control.closest(".dslca-module-edit-option").data('tab') == 'phone_responsive' ) {
-
-				resp_prefix = '@media only screen and (max-width: 767px) ';
-			}
-
-			var id = resp_prefix + affect_on_change_rules[i] + affect_on_change_elmts.join(', ').trim();
-			id = id.replace(/ /gi, '');
-			var style = LiveComposer.Builder.PreviewFrame[0].getElementById( id );
-
-			if ( style == null ) {
-
-				var style = document.createElement('style');
-				style.id = id
-				style.className = 'temp-styles-for-module';
-
-				LiveComposer.Builder.PreviewFrame[0].body.appendChild( style );
-			}
-
-			style.innerHTML = resp_prefix + affect_on_change_el + "{" + affect_on_change_rules[i] + ": " + control_value + "}";
+				context: control,
+				rule: affect_on_change_rules[i],
+				elems: affect_on_change_el,
+				styleContent: styleContent
+			});
 		}
 	}
 }
