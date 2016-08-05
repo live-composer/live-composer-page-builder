@@ -97,7 +97,7 @@ jQuery(document).ready(function($){
 			 * Destroy resizable preview functionality
 			 * when leaving Responsive view.
 			 */
-			jQuery('#page-builder-preview-area').resizable('destroy').css('width','inherit');
+			jQuery('#page-builder-preview-area').resizable('destroy').attr('style','');
 
 		}
 
