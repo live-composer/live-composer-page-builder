@@ -51,7 +51,6 @@ jQuery(document).ready(function($) {
 
 });
 
-
 /**
  * Action - "Currently Editing" scroll on click
  */

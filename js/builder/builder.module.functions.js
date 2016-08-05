@@ -366,7 +366,10 @@ function dslc_module_options_show( moduleID ) {
 	// Vars
 	var dslcModule = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewFrame),
 	dslcModuleOptions = jQuery( '.dslca-module-options-front textarea', dslcModule ),
-	dslcDefaultSection = jQuery('.dslca-header').data('default-section');
+	dslcDefaultSection = jQuery('.dslca-header').data('default-section'),
+	pseudoPanel = jQuery(jQuery('#pseudo-panel').html());
+
+	jQuery("#wpwrap").append(pseudoPanel);
 
 	// Settings array for the Ajax call
 	var dslcSettings = {};
@@ -401,6 +404,9 @@ function dslc_module_options_show( moduleID ) {
 	// Set up backup
 	var moduleBackup = jQuery('.dslca-module-options-front', dslcModule).children().clone();
 	LiveComposer.Builder.moduleBackup = moduleBackup;
+
+	// Show pseudo settings panel
+	pseudoPanel.show();
 
 	// AJAX call to get options HTML
 	jQuery.post(
@@ -442,6 +448,9 @@ function dslc_module_options_show( moduleID ) {
 			// Show the save/cancel actions for text editor and hide notification
 			jQuery('.dslca-wp-editor-notification').hide();
 			jQuery('.dslca-wp-editor-actions').show();
+
+			// Hide pseudo panel
+			pseudoPanel.remove();
 
 			// Hide the section hooks
 			jQuery('.dslca-header .dslca-go-to-section-hook').hide();
