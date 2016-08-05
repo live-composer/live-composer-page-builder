@@ -2,7 +2,7 @@
  * Sections container class
  */
 
-DSLC.Editor.CSectionsContainer = function(elem) {
+LiveComposer.Builder.Elements.CSectionsContainer = function(elem) {
 
 	this.sortable = Sortable.create(elem, {
 		group: 'sections',
