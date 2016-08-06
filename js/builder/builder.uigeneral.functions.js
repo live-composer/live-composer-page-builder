@@ -85,6 +85,19 @@ jQuery(document).on( 'click', '.dslca-currently-editing', function(){
 });
 
 /**
+ * Save composer code with CMD+S or Ctrl+S
+ */
+jQuery(window).keypress( function(e){
+
+	if ((e.metaKey || e.ctrlKey) && e.keyCode == 83) {
+
+		dslc_ajax_save_composer();
+		e.preventDefault();
+        return false;
+	}
+});
+
+/**
  * Hook - Hide Composer
  */
 
