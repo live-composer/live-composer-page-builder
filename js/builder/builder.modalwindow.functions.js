@@ -23,9 +23,6 @@
 		// If a modal already visibile hide it
 		dslc_hide_modal( '', jQuery('.dslca-modal:visible') );
 
-
-
-
 		// Vars
 		var modal = jQuery(modal);
 

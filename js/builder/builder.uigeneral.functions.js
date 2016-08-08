@@ -12,11 +12,43 @@
  * - dslc_drag_and_drop ( Initiate drag and drop functionality )
  ***********************************/
 
+ window.onerror = function(e, f, l, c) {
+
+ 		var title = 'Third-party plugin JS error';
+
+ 		if( f.match("wp-content\/plugins\/Live-Composer\/js") != null ) {
+
+ 			title = 'Live Composer JS error';
+ 		}
+
+		LiveComposer.Builder.UI.CModalWindow({
+
+			title: title,
+			content: '<textarea class="js-error-text" disabled>' + e + ' in file "' + f + '" on line ' + l + ', char ' + c + '</textarea>'
+		});
+	}
+
 /**
  * UI - GENERAL - Document Ready
  */
 
 jQuery(document).ready(function($) {
+
+	jQuery("#page-builder-frame")[0].contentWindow.onerror = function(e, f, l, c) {
+
+			var title = 'Preview Frame: third-party plugin JS error';
+
+	 		if( f.match("wp-content\/plugins\/Live-Composer\/js") != null ) {
+
+	 			title = 'Preview Frame: Live Composer JS error';
+	 		}
+
+			LiveComposer.Builder.UI.CModalWindow({
+
+			title: title,
+			content: '<textarea class="js-error-text" disabled>' + e + ' in file "' + f + '" on line ' + l + ', char ' + c + '</textarea>'
+		});
+	}
 
  	// On iframe loaded
  	jQuery("#page-builder-frame").on('load', function(){
@@ -85,11 +117,24 @@ jQuery(document).on( 'click', '.dslca-currently-editing', function(){
 });
 
 /**
+ * Save composer code with CMD+S or Ctrl+S
+ */
+jQuery(window).keypress( function(e){
+
+	if ((e.metaKey || e.ctrlKey) && e.keyCode == 83) {
+
+		dslc_ajax_save_composer();
+		e.preventDefault();
+        return false;
+	}
+});
+
+/**
  * Hook - Hide Composer
  */
 
 jQuery(document).on( 'click', '.dslca-hide-composer-hook', function(e){
-	e.preventDefault();
+	e.preventDeault();
 	dslc_hide_composer()
 });
 
@@ -144,8 +189,15 @@ jQuery(document).on( 'click', '.dslca-close-composer-hook', function(e){
 
 	if ( ! jQuery('body').hasClass('dslca-saving-in-progress') ) {
 
-		dslc_js_confirm( 'disable_lc', '<span class="dslca-prompt-modal-title">' +
-			DSLCString.str_exit_title + '</span><span class="dslca-prompt-modal-descr">' + DSLCString.str_exit_descr + '</span>', jQuery(this).attr('href') );
+		LiveComposer.Builder.UI.CModalWindow({
+
+			title: DSLCString.str_exit_title,
+			content: DSLCString.str_exit_descr,
+			confirm: window.location.reload
+		});
+
+		/*dslc_js_confirm( 'disable_lc', '<span class="dslca-prompt-modal-title">' +
+			DSLCString.str_exit_title + '</span><span class="dslca-prompt-modal-descr">' + DSLCString.str_exit_descr + '</span>', jQuery(this).attr('href') );*/
 	}
 });
 
@@ -892,10 +944,22 @@ function dslc_disable_backspace_navigation (event) {
 function dslc_notice_on_refresh(e) {
 
 	if ( e.which == 116 || ( e.which === 82 && e.metaKey ) ) {
+
 		if ( jQuery('.dslca-save-composer-hook').offsetParent !== null || jQuery('.dslca-module-edit-save').offsetParent !== null ) {
+
 			e.preventDefault();
-			dslc_js_confirm( 'disable_lc', '<span class="dslca-prompt-modal-title">' + DSLCString.str_refresh_title +
-			 '</span><span class="dslca-prompt-modal-descr">' + DSLCString.str_refresh_descr + '</span>', document.URL );
+			LiveComposer.Builder.UI.CModalWindow({
+
+				title: DSLCString.str_refresh_title,
+				content: DSLCString.str_refresh_descr,
+				confirm: function() {
+
+					window.location.reload();
+				}
+			});
+
+			/*dslc_js_confirm( 'disable_lc', '<span class="dslca-prompt-modal-title">' + DSLCString.str_refresh_title +
+			 '</span><span class="dslca-prompt-modal-descr">' + DSLCString.str_refresh_descr + '</span>', document.URL );*/
 		}
 	}
 }
