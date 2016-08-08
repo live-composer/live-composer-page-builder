@@ -73,9 +73,22 @@
 
 			if ( ! modulesAreaEmpty ) {
 
+				var self = jQuery(this);
+
+				LiveComposer.Builder.UI.CModalWindow({
+
+					title: DSLCString.str_del_area_title,
+					content: DSLCString.str_del_area_descr,
+					confirm: function() {
+
+						var modulesArea = self.closest('.dslc-modules-area');
+						dslc_modules_area_delete( modulesArea );
+					}
+				});
+
 				// Show confirmation modal only if the module area isn't empty.
-				dslc_js_confirm( 'delete_modules_area', '<span class="dslca-prompt-modal-title">' + DSLCString.str_del_area_title +
-					'</span><span class="dslca-prompt-modal-descr">' + DSLCString.str_del_area_descr + '</span>', jQuery(this) );
+				/*dslc_js_confirm( 'delete_modules_area', '<span class="dslca-prompt-modal-title">' + DSLCString.str_del_area_title +
+					'</span><span class="dslca-prompt-modal-descr">' + DSLCString.str_del_area_descr + '</span>', jQuery(this) );*/
 			} else {
 
 				var modulesArea = jQuery(this).closest('.dslc-modules-area');

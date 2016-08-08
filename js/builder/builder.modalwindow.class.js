@@ -17,7 +17,9 @@
  */
 LiveComposer.Builder.UI.CModalWindow = function(params) {
 
-    if(typeof params != 'object') return false;
+    if(typeof params != 'object' || this.instancesExists === true) return false;
+
+    var self = this;
 
     // Show Modal Window
     var modalWindowWrap = '<div class="dslca-prompt-modal dslca-prompt-modal-active">' +
@@ -25,17 +27,19 @@ LiveComposer.Builder.UI.CModalWindow = function(params) {
      '<span class="dslca-prompt-modal-title">' + params.title + '</span>' +
       '<span class="dslca-prompt-modal-descr">' + params.content + '</span></div>';
 
+      var modalWindowActions = '';
+
     if (params.confirm || params.cancel) {
 
-        var modalWindowActions = '<div class="dslca-prompt-modal-actions">' +
+        modalWindowActions = '<div class="dslca-prompt-modal-actions">' +
         '<a href="#" class="dslca-prompt-modal-confirm-hook"><span class="dslc-icon dslc-icon-ok">' +
         '</span>' + (params.confirm_title ? params.confirm_title : 'Confirm') + '</a><span class="dslca-prompt-modal-cancel-hook"><span class="dslc-icon dslc-icon-remove">' +
         '</span>' + (params.cancel_title ? params.cancel_title : 'Cancel') +'</span></div>';
     } else {
 
-        var modalWindowActions = '<div class="dslca-prompt-modal-actions">' +
+        modalWindowActions = '<div class="dslca-prompt-modal-actions">' +
         '<a href="#" class="dslca-prompt-modal-confirm-hook"><span class="dslc-icon dslc-icon-ok">' +
-        '</span>' + params.ok_title ? params.ok_title : 'OK' + '</a></div>';
+        '</span>' + (params.ok_title ? params.ok_title : 'OK') + '</a></div>';
     }
 
     modalWindowWrap += modalWindowActions + '</div>';
@@ -61,6 +65,7 @@ LiveComposer.Builder.UI.CModalWindow = function(params) {
             function()
             {
                 params.confirm();
+                self.instancesExists = false;
                 jQuery(this).remove();
                 // – moved here as it prevent some JS to get value on time
             }
@@ -86,6 +91,7 @@ LiveComposer.Builder.UI.CModalWindow = function(params) {
             function()
             {
                 jQuery(this).remove();
+                self.instancesExists = false;
                 params.cancel();
             }
         );
@@ -104,4 +110,6 @@ LiveComposer.Builder.UI.CModalWindow = function(params) {
     modalWindowWrap.find('.dslca-prompt-modal-content').css({top: '55%'}).animate({
         top: '50%'
     }, 400);
+
+    this.instancesExists = true;
 }

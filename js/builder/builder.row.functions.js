@@ -88,9 +88,15 @@
 			$('.dslca-prompt-modal-cancel-hook').hide();
 			$('.dslca-prompt-modal-confirm-hook').html('<span class="dslc-icon dslc-icon-ok"></span>' + DSLCString.str_ok);
 
-			dslc_js_confirm( 'export_modules_section', '<span class="dslca-prompt-modal-title">' + DSLCString.str_export_row_title +
-				'</span><span class="dslca-prompt-modal-descr">' + DSLCString.str_export_row_descr + ' <br><br><textarea></textarea></span>', $(this) );
-			$('.dslca-prompt-modal textarea').val( dslc_generate_section_code( $(this).closest('.dslc-modules-section') ) );
+			LiveComposer.Builder.UI.CModalWindow({
+
+				title: DSLCString.str_export_row_title,
+				content: DSLCString.str_export_row_descr + '<br><br><textarea>' + dslc_generate_section_code( $(this).closest('.dslc-modules-section') ) + '</textarea></span>'
+			});
+
+			// dslc_js_confirm( 'export_modules_section', '<span class="dslca-prompt-modal-title">' + DSLCString.str_export_row_title +
+			// 	'</span><span class="dslca-prompt-modal-descr">' + DSLCString.str_export_row_descr + ' <br><br><textarea></textarea></span>', $(this) );
+			// $('.dslca-prompt-modal textarea').val( dslc_generate_section_code( $(this).closest('.dslc-modules-section') ) );
 		}
 	});
 

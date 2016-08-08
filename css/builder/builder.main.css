@@ -2301,6 +2301,14 @@ body.rtl .dslca-modules-area-placeholder {
 
 /** Modal Window class */
 
+.dslca-prompt-modal-msg textarea.js-error-text{
+	width: 100%;
+    min-height: 80px;
+    padding: 5px;
+    line-height: 1.6em;
+    font-size: 13px;
+	color: #848484;
+}
 
 .dslca-prompt-modal {
 	background: rgba( 255, 255, 255, 0.80 );
