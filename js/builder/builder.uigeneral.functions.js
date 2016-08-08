@@ -26,8 +26,6 @@
 			title: title,
 			content: '<textarea class="js-error-text" disabled>' + e + ' in file "' + f + '" on line ' + l + ', char ' + c + '</textarea>'
 		});
-
-		return true;
 	}
 
 /**
@@ -50,8 +48,6 @@ jQuery(document).ready(function($) {
 			title: title,
 			content: '<textarea class="js-error-text" disabled>' + e + ' in file "' + f + '" on line ' + l + ', char ' + c + '</textarea>'
 		});
-
-		return true;
 	}
 
  	// On iframe loaded
