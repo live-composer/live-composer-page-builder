@@ -37,7 +37,7 @@
 	/**
 	 * Hook - Copy Module
 	 */
-	DSLC.Editor.frame.on( 'click', '.dslca-copy-module-hook', function(e){
+	LiveComposer.Builder.PreviewFrame.on( 'click', '.dslca-copy-module-hook', function(e){
 
 		e.preventDefault();
 
@@ -50,14 +50,14 @@
 	/**
 	 * Hook - Module Delete
 	 */
-	DSLC.Editor.frame.on( 'click', '.dslca-delete-module-hook', function(e){
+	LiveComposer.Builder.PreviewFrame.on( 'click', '.dslca-delete-module-hook', function(e){
 
 		e.preventDefault();
 		var self = this;
 
 		if ( ! $(this).hasClass('dslca-action-disabled') ) {
 
-			DSLC.Editor.CModalWindow({
+			LiveComposer.Builder.UI.CModalWindow({
 				title: DSLCString.str_del_module_title,
 				content: DSLCString.str_del_module_descr,
 				confirm: function() {
@@ -77,11 +77,11 @@
 	/**
 	 * Hook - Edit Module On Click ( Display Options Panel )
 	 */
-	DSLC.Editor.frame.on( 'click', '.dslca-module-edit-hook, .dslc-module-front > div:not(.dslca-module-manage)', function(e){
+	LiveComposer.Builder.PreviewFrame.on( 'click', '.dslca-module-edit-hook, .dslc-module-front > div:not(.dslca-module-manage)', function(e){
 
 		e.preventDefault();
-		var module_edited = jQuery('.dslca-module-being-edited', DSLC.Editor.frame).length;
-		var row_edited = jQuery('.dslca-modules-section-being-edited', DSLC.Editor.frame).length;
+		var module_edited = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewFrame).length;
+		var row_edited = jQuery('.dslca-modules-section-being-edited', LiveComposer.Builder.PreviewFrame).length;
 
 		/// If settings panel opened - finish func
 		if ( $('body').hasClass( 'dslca-composer-hidden' ) || module_edited > 0 || row_edited > 0 ) return false;
@@ -95,7 +95,7 @@
 		// dslcModuleCurrCode = dslcModule.find('.dslca-module-code').val();
 
 		// If a module is bening edited remove the "being edited" class from it
-		$('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
+		$('.dslca-module-being-edited', LiveComposer.Builder.PreviewFrame).removeClass('dslca-module-being-edited');
 
 		// Add the "being edited" class to current module
 		dslcModule.addClass('dslca-module-being-edited');
@@ -107,7 +107,7 @@
 	/**
 	 * Action - Show/Hide Width Options
 	 */
-	DSLC.Editor.frame.on( 'click', '.dslca-change-width-module-hook', function(e){
+	LiveComposer.Builder.PreviewFrame.on( 'click', '.dslca-change-width-module-hook', function(e){
 
 		e.preventDefault();
 
@@ -121,7 +121,7 @@
 	/**
 	 * Hook - Set Module Width
 	 */
-	DSLC.Editor.frame.on( 'click', '.dslca-change-width-module-options span', function(){
+	LiveComposer.Builder.PreviewFrame.on( 'click', '.dslca-change-width-module-options span', function(){
 
 		dslc_module_width_set( jQuery(this).closest('.dslc-module-front'), jQuery(this).data('size') );
 	});
@@ -129,7 +129,7 @@
 	/**
 	 * Show WYSIWYG
 	 */
-	DSLC.Editor.frame.on( 'click', '.dslca-wysiwyg-actions-edit-hook', function(){
+	LiveComposer.Builder.PreviewFrame.on( 'click', '.dslca-wysiwyg-actions-edit-hook', function(){
 
 		var editable = jQuery(this).parent().siblings('.dslca-editable-content');
 		var module = editable.closest('.dslc-module-front');
@@ -182,7 +182,7 @@
 	});
 
 	// Editable Content
-	DSLC.Editor.frame.on('blur', '.dslca-editable-content', function() {
+	LiveComposer.Builder.PreviewFrame.on('blur', '.dslca-editable-content', function() {
 
 		if ( ! jQuery('body').hasClass( 'dslca-composer-hidden' ) && jQuery(this).data('type') == 'simple' ) {
 
@@ -205,7 +205,7 @@
 		}
 	}).on('focus', '.dslca-editable-content', function() {
 
-		if ( jQuery('.dslca-module-being-edited', DSLC.Editor.frame).length > 0 && ! jQuery(this).closest('.dslc-module-front').hasClass('dslca-module-being-edited') ) {
+		if ( jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewFrame).length > 0 && ! jQuery(this).closest('.dslc-module-front').hasClass('dslca-module-being-edited') ) {
 
 			jQuery(this).trigger('blur');
 		}
@@ -266,7 +266,7 @@ function dslc_module_copy( module ) {
 	if ( dslcDebug ) console.log( 'dslc_copy_module' );
 
 	// Remove being edited class if some module is being edited
-	jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
+	jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewFrame).removeClass('dslca-module-being-edited');
 
 	// Duplicate the module and append it to the same area
 	var module_new = module[0].cloneNode(true);
@@ -304,7 +304,7 @@ function dslc_module_copy( module ) {
 function dslc_module_new_id( module ) {
 
 	// Vars
-	var dslc_module_id = DSLC_Util.get_unique_id(); // Generate new module ID.
+	var dslc_module_id = LiveComposer.Utils.get_unique_id(); // Generate new module ID.
 	var dslc_module_id_original = module.getAttribute( 'id' ); // Original Module ID.
 
 	// Update module ID in data attribute
@@ -326,7 +326,7 @@ function dslc_module_new_id( module ) {
 
 
 	// Update module ID in raw base64 code (dslc_code) of the module
-	DSLC_Util.update_module_property_raw( module, 'module_instance_id', dslc_module_id );
+	LiveComposer.Utils.update_module_property_raw( module, 'module_instance_id', dslc_module_id );
 }
 
 /**
@@ -350,7 +350,7 @@ function dslc_module_width_set( module, new_width ) {
 	module[0].setAttribute('data-dslc-module-size',new_width);
 
 	// Update module size in raw base64 code (dslc_code) of the module
-	DSLC_Util.update_module_property_raw( module[0], 'dslc_m_size', new_width );
+	LiveComposer.Utils.update_module_property_raw( module[0], 'dslc_m_size', new_width );
 
 	dslc_generate_code();
 	dslc_show_publish_button();
@@ -364,9 +364,12 @@ function dslc_module_options_show( moduleID ) {
 	if ( dslcDebug ) console.log( 'dslc_module_options_show' );
 
 	// Vars
-	var dslcModule = jQuery('.dslca-module-being-edited', DSLC.Editor.frame),
+	var dslcModule = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewFrame),
 	dslcModuleOptions = jQuery( '.dslca-module-options-front textarea', dslcModule ),
-	dslcDefaultSection = jQuery('.dslca-header').data('default-section');
+	dslcDefaultSection = jQuery('.dslca-header').data('default-section'),
+	pseudoPanel = jQuery(jQuery('#pseudo-panel').html());
+
+	jQuery("#wpwrap").append(pseudoPanel);
 
 	// Settings array for the Ajax call
 	var dslcSettings = {};
@@ -374,7 +377,7 @@ function dslc_module_options_show( moduleID ) {
 	dslcSettings['dslc'] = 'active';
 	dslcSettings['dslc_module_id'] = moduleID;
 	dslcSettings['dslc_post_id'] = jQuery('.dslca-container').data('data-post-id');
-	dslcSettings.dslc_url_vars = DSLC_Util.get_page_params();
+	dslcSettings.dslc_url_vars = LiveComposer.Utils.get_page_params();
 
 	// Go through each option to fill dslcSettings array
 	// with current module setting values
@@ -396,11 +399,14 @@ function dslc_module_options_show( moduleID ) {
 	// Hide the publish button
 	dslc_hide_publish_button();
 
-	DSLC.Editor.initInlineEditors();
+	LiveComposer.Builder.UI.initInlineEditors();
 
 	// Set up backup
 	var moduleBackup = jQuery('.dslca-module-options-front', dslcModule).children().clone();
-	DSLC.Editor.moduleBackup = moduleBackup;
+	LiveComposer.Builder.moduleBackup = moduleBackup;
+
+	// Show pseudo settings panel
+	pseudoPanel.show();
 
 	// AJAX call to get options HTML
 	jQuery.post(
@@ -443,13 +449,16 @@ function dslc_module_options_show( moduleID ) {
 			jQuery('.dslca-wp-editor-notification').hide();
 			jQuery('.dslca-wp-editor-actions').show();
 
+			// Hide pseudo panel
+			pseudoPanel.remove();
+
 			// Hide the section hooks
 			jQuery('.dslca-header .dslca-go-to-section-hook').hide();
 
 			// Hide the row save/cancel actions
 			jQuery('.dslca-row-edit-actions').hide();
 
-			DSLC.Editor.loadOptionsDeps();
+			LiveComposer.Builder.UI.loadOptionsDeps();
 		}
 	);
 }
@@ -469,7 +478,7 @@ function dslc_module_output_default( dslc_module_id, callback ) {
 			dslc : 'active',
 			dslc_module_id : dslc_module_id,
 			dslc_post_id : jQuery('.dslca-container').data('post-id'),
-			dslc_url_vars: DSLC_Util.get_page_params()
+			dslc_url_vars: LiveComposer.Utils.get_page_params()
 		},
 		function( response ) {
 
@@ -487,7 +496,7 @@ function dslc_module_output_altered( callback ) {
 
 	callback = typeof callback !== 'undefined' ? callback : false;
 
-	var dslcModule = jQuery('.dslca-module-being-edited', DSLC.Editor.frame),
+	var dslcModule = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewFrame),
 	dslc_module_id = dslcModule.data('dslc-module-id'),
 	dslcModuleOptions = jQuery( '.dslca-module-options-front textarea', dslcModule ),
 	dslcModuleInstanceID = dslcModule.data('module-id');
@@ -521,7 +530,7 @@ function dslc_module_output_altered( callback ) {
 
 	});
 
-	dslcSettings.dslc_url_vars = DSLC_Util.get_page_params();
+	dslcSettings.dslc_url_vars = LiveComposer.Utils.get_page_params();
 
 	/**
 	 * Call AJAX for preview
@@ -531,28 +540,48 @@ function dslc_module_output_altered( callback ) {
 		DSLCAjax.ajaxurl, dslcSettings,
 		function( response ) {
 
-			DSLC.Editor.clearUtils();
+			LiveComposer.Builder.UI.clearUtils();
+
+			// Fixing inline scripts bug in third-party plugins
+			var newModule = jQuery(response.output);
+			var scripts = [];
+
+			newModule.find('script').each(function(){
+
+				scripts.push(this.innerHTML);
+				jQuery(this).remove();
+			});
 
 			// Insert 'updated' module output after module we are editing.
-			dslcModule.after(response.output).next().addClass('dslca-module-being-edited');
+			dslcModule.after(newModule);
 
 			// Delete 'old' instance of the module we are editing.
 			dslcModule.remove();
+
+			newModule.addClass('dslca-module-being-edited');
+
+			scripts.forEach(function(item) {
+
+				var script = LiveComposer.Builder.PreviewFrameContext.createElement('script');
+				script.innerHTML = item;
+				script.type = 'text/javascript';
+				newModule.append(script);
+			});
 
 			// TODO: Add new postponed action to run after all done
 
 			// dslc_generate_code();
 			// dslc_show_publish_button();
-			DSLC.Editor.frameContext.dslc_carousel();
-			DSLC.Editor.frameContext.dslc_masonry( jQuery('.dslca-module-being-edited', DSLC.Editor.frame) );
+			LiveComposer.Builder.PreviewFrameContext.dslc_carousel();
+			LiveComposer.Builder.PreviewFrameContext.dslc_masonry( jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewFrame) );
 
-			jQuery( '.dslca-module-being-edited img' , DSLC.Editor.frame).load( function(){
+			jQuery( '.dslca-module-being-edited img' , LiveComposer.Builder.PreviewFrame).load( function(){
 
-				DSLC.Editor.frameContext.dslc_masonry( jQuery('.dslca-module-being-edited', DSLC.Editor.frame) );
+				LiveComposer.Builder.PreviewFrameContext.dslc_masonry( jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewFrame) );
 			});
 
-			DSLC.Editor.frameContext.dslc_tabs();
-			DSLC.Editor.frameContext.dslc_init_accordion();
+			LiveComposer.Builder.PreviewFrameContext.dslc_tabs();
+			LiveComposer.Builder.PreviewFrameContext.dslc_init_accordion();
 
 			if ( callback ) {
 				callback( response );
@@ -617,22 +646,22 @@ function dslc_module_output_reload( dslcModule, callback ) {
 			dslc_generate_code();
 			dslc_show_publish_button();
 
-			DSLC.Editor.frameContext.dslc_carousel();
-			DSLC.Editor.frameContext.dslc_masonry( jQuery('.dslca-module-being-edited', DSLC.Editor.frame) );
+			LiveComposer.Builder.PreviewFrameContext.dslc_carousel();
+			LiveComposer.Builder.PreviewFrameContext.dslc_masonry( jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewFrame) );
 
-			jQuery( '.dslca-module-being-edited img' , DSLC.Editor.frame).load( function(){
-				DSLC.Editor.frameContext.dslc_masonry( jQuery('.dslca-module-being-edited', DSLC.Editor.frame) );
+			jQuery( '.dslca-module-being-edited img' , LiveComposer.Builder.PreviewFrame).load( function(){
+				LiveComposer.Builder.PreviewFrameContext.dslc_masonry( jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewFrame) );
 			});
 
-			DSLC.Editor.frameContext.dslc_tabs();
-			DSLC.Editor.frameContext.dslc_init_accordion();
+			LiveComposer.Builder.PreviewFrameContext.dslc_tabs();
+			LiveComposer.Builder.PreviewFrameContext.dslc_init_accordion();
 
 			if ( callback ) {
 
 				callback( response );
 			}
 
-			jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
+			jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewFrame).removeClass('dslca-module-being-edited');
 		}
 	);
 }

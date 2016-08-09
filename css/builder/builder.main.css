@@ -2301,6 +2301,14 @@ body.rtl .dslca-modules-area-placeholder {
 
 /** Modal Window class */
 
+.dslca-prompt-modal-msg textarea.js-error-text{
+	width: 100%;
+    min-height: 80px;
+    padding: 5px;
+    line-height: 1.6em;
+    font-size: 13px;
+	color: #848484;
+}
 
 .dslca-prompt-modal {
 	background: rgba( 255, 255, 255, 0.80 );
@@ -3952,4 +3960,31 @@ body .sp-palette .sp-thumb-el {
   height: 25px;
   margin: 1px;
   width: 25px;
+}
+
+/** PSEUDO SETTINGS PANEL */
+.dslca-pseudo-panel {
+    position: relative;
+    display: none;
+}
+.dslca-pseudo-panel-cover {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    z-index: 2;
+    left: 0px;
+}
+span.dslca-module-edit-label.pseudo-label {
+    width: 80px;
+    height: 10px;
+    background: #6c9fed;
+    border-radius: 3px;
+}
+input.dslca-module-edit-field.pseudo-input {
+    border: 0px;
+    width: 191px;
+}
+.dslca-pseudo-panel .dslca-module-edit-options{
+    height: 164px;
 }

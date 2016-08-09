@@ -83,7 +83,7 @@ jQuery(document).ready(function($){
 			jQuery('.dslca-container-loader').show();
 
 			// Reset the responsive classes
-			DSLC.Editor.frameContext.dslc_responsive_classes();
+			LiveComposer.Builder.PreviewFrameContext.dslc_responsive_classes();
 
 			// Reload Module
 			dslc_module_output_altered(function(){
@@ -121,8 +121,8 @@ jQuery(document).ready(function($){
 
 		dslc_module_options_confirm_changes(function(){
 
-			DSLC.Editor.initInlineEditors();
-			DSLC.Editor.unloadOptionsDeps();
+			LiveComposer.Builder.UI.initInlineEditors();
+			LiveComposer.Builder.UI.unloadOptionsDeps();
 		});
 
 		jQuery('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
@@ -140,8 +140,8 @@ jQuery(document).ready(function($){
 
 		dslc_module_options_cancel_changes(function(){
 
-			DSLC.Editor.initInlineEditors();
-			DSLC.Editor.unloadOptionsDeps();
+			LiveComposer.Builder.UI.initInlineEditors();
+			LiveComposer.Builder.UI.unloadOptionsDeps();
 		});
 
 		jQuery('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
@@ -239,74 +239,54 @@ jQuery(document).ready(function($){
 (function() {
 
 	var $ = jQuery;
-	var self = DSLC.Editor;
 
-	DSLC.Editor.colorpickers = [];
+	var self = LiveComposer.Builder;
 
-	DSLC.Editor.initInlineEditors = function(){
+	LiveComposer.Builder.Helpers.colorpickers = [];
 
-		DSLC.Editor.frameContext.tinyMCE.init({
+	LiveComposer.Builder.UI.initInlineEditors = function(){
+
+		LiveComposer.Builder.PreviewFrameContext.tinyMCE.init({
 			selector: '.inline-editor.dslca-editable-content',
 			editor_deselector: 'mce-content-body',
 			menubar: false,
 		  	inline: true,
 		  	plugins: 'link',
 		  	style_formats: [
-			    {title: 'Headers', items: [
+			      {title: 'Paragraph', format: 'p'},
 			      {title: 'Header 1', format: 'h1'},
 			      {title: 'Header 2', format: 'h2'},
 			      {title: 'Header 3', format: 'h3'},
 			      {title: 'Header 4', format: 'h4'},
 			      {title: 'Header 5', format: 'h5'},
-			      {title: 'Header 6', format: 'h6'}
-			    ]},
-			   /* {title: 'Inline', items: [
-			      {title: 'Bold', icon: 'bold', format: 'bold'},
-			      {title: 'Italic', icon: 'italic', format: 'italic'},
-			      {title: 'Underline', icon: 'underline', format: 'underline'},
-			      {title: 'Strikethrough', icon: 'strikethrough', format: 'strikethrough'},
-			      {title: 'Superscript', icon: 'superscript', format: 'superscript'},
-			      {title: 'Subscript', icon: 'subscript', format: 'subscript'},
-			      {title: 'Code', icon: 'code', format: 'code'}
-			    ]},*/
-			    {title: 'Blocks', items: [
-			      {title: 'Paragraph', format: 'p'},
-			     // {title: 'Blockquote', format: 'blockquote'},
-			      {title: 'Div', format: 'div'},
-			      {title: 'Pre', format: 'pre'}
-			    ]},
-			   /* {title: 'Alignment', items: [
-			      {title: 'Left', icon: 'alignleft', format: 'alignleft'},
-			      {title: 'Center', icon: 'aligncenter', format: 'aligncenter'},
-			      {title: 'Right', icon: 'alignright', format: 'alignright'},
-			      {title: 'Justify', icon: 'alignjustify', format: 'alignjustify'}
-			    ]}*/
+			      {title: 'Header 6', format: 'h6'},
+			      {title: 'Pre', format: 'preformatted'},
 			  ],
 		  	toolbar: 'styleselect | bold italic blockquote | removeformat | link unlink | bullist numlist '
 		});
 	}
 
 	/* Destroy instanced of sliders, color pickers and other temporary elements */
-	DSLC.Editor.clearUtils = function() {
+	LiveComposer.Builder.UI.clearUtils = function() {
 
-		if( Array.isArray(self.colorpickers ) ) {
+		if( Array.isArray(self.Helpers.colorpickers ) ) {
 
-			self.colorpickers.forEach(function(item){
+			self.Helpers.colorpickers.forEach(function(item){
 
 				item.spectrum('destroy');
 			});
 
-			self.colorpickers = [];
+			self.Helpers.colorpickers = [];
 		}
 
-		jQuery('.temp-styles-for-module', DSLC.Editor.frame).remove();
+		jQuery('.temp-styles-for-module', LiveComposer.Builder.PreviewFrame).remove();
 		jQuery('.sp-container').remove();
 	}
 
 	/** Options dependencies */
-	DSLC.Editor.depsHandlers = [];
+	LiveComposer.Builder.Helpers.depsHandlers = [];
 
-	DSLC.Editor.loadOptionsDeps = function() {
+	LiveComposer.Builder.UI.loadOptionsDeps = function() {
 
 		var self = this;
 
@@ -317,7 +297,7 @@ jQuery(document).ready(function($){
 
 			try {
 
-				var dep = JSON.parse( DSLC_Util.b64_to_utf8( $(this).data('dep') ) );
+				var dep = JSON.parse( LiveComposer.Utils.b64_to_utf8( $(this).data('dep') ) );
 
 			} catch(e){
 
@@ -370,22 +350,65 @@ jQuery(document).ready(function($){
 				}
 
 				$(document).on('change dslc-init-deps', '.dslca-module-edit-option *[data-id="' + $(this).data('id') + '"]', handler);
-				self.depsHandlers.push( handler );
+				self.Helpers.depsHandlers.push( handler );
 			}
 		});
 
 		$(".dslca-module-edit-option input, .dslca-module-edit-option select").trigger('dslc-init-deps');
 	}
 
-	DSLC.Editor.unloadOptionsDeps = function() {
+	LiveComposer.Builder.UI.unloadOptionsDeps = function() {
 
-		this.depsHandlers.forEach(function(handler){
+		self.Helpers.depsHandlers.forEach(function(handler){
 
 			$(document).unbind( 'change', handler );
 			$(document).unbind( 'dslc-init-deps', handler );
 		});
 
-		this.depsHandlers = [];
+		self.Helpers.depsHandlers = [];
+	}
+
+	/**
+	 * Creates inline style tag when editing WYSWIG
+	 *
+	 * @param  {object} params
+	 *    params.rule
+	 *    params.elems
+	 *    params.module_id
+	 */
+	LiveComposer.Builder.Helpers.processInlineStyleTag = function( params ) {
+
+		if ( typeof params != 'object' ) return false;
+
+		var resp_prefix = '', resp_postfix = '';
+
+		if ( params.context.closest(".dslca-module-edit-option").data('tab') == 'tablet_responsive' ) {
+
+			resp_prefix = '@media only screen and (max-width: 1024px) and (min-width: 768px) {';
+			resp_postfix = '}';
+		} else if ( params.context.closest(".dslca-module-edit-option").data('tab') == 'phone_responsive' ) {
+
+			resp_prefix = '@media only screen and (max-width: 767px) {';
+			resp_postfix = '}';
+		}
+
+		params.styleContent = resp_prefix + params.styleContent + resp_postfix;
+
+		var id = resp_prefix + params.rule + params.elems;
+		id = id.replace(/ /gi, '');
+
+		if ( LiveComposer.Builder.PreviewFrame[0].getElementById(id) == null ) {
+
+			var styleTag = document.createElement('style');
+			styleTag.innerHTML = params.styleContent;
+			styleTag.id = id;
+			styleTag.className = "temp-styles-for-module";
+
+			LiveComposer.Builder.PreviewFrame[0].body.appendChild(styleTag);
+		} else {
+
+			LiveComposer.Builder.PreviewFrame[0].getElementById(id).innerHTML = params.styleContent;
+		}
 	}
 }());
 
@@ -815,9 +838,9 @@ function dslc_module_options_hideshow_tabs() {
 
 	if ( jQuery('.dslca-options-filter-hook[data-section="styling"]').hasClass('dslca-active') ) {
 
-		if ( jQuery('.dslca-module-being-edited', DSLC.Editor.frame).data('dslc-module-id') == 'DSLC_Text_Simple' ||
-			  jQuery('.dslca-module-being-edited', DSLC.Editor.frame).data('dslc-module-id') == 'DSLC_TP_Content' || 
-			  jQuery('.dslca-module-being-edited', DSLC.Editor.frame).data('dslc-module-id') == 'DSLC_Html' ) {
+		if ( jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewFrame).data('dslc-module-id') == 'DSLC_Text_Simple' ||
+			  jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewFrame).data('dslc-module-id') == 'DSLC_TP_Content' || 
+			  jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewFrame).data('dslc-module-id') == 'DSLC_Html' ) {
 
 			var dslcCustomCSS = jQuery('.dslca-module-edit-option[data-id="css_custom"]'),
 			dslcCustomCSSVal = dslcCustomCSS.find('select').val();
@@ -864,9 +887,9 @@ function dslc_module_options_confirm_changes( callback ) {
 	callback = typeof callback !== 'undefined' ? callback : false;
 
 	// If slider module
-	if ( jQuery('.dslca-module-being-edited', DSLC.Editor.frame).hasClass('dslc-module-DSLC_Sliders') ) {
+	if ( jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewFrame).hasClass('dslc-module-DSLC_Sliders') ) {
 
-		jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
+		jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewFrame).removeClass('dslca-module-being-edited');
 	// If not slider module
 	} else {
 
@@ -881,7 +904,7 @@ function dslc_module_options_confirm_changes( callback ) {
 
 			dslc_generate_code();
 
-			jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
+			jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewFrame).removeClass('dslca-module-being-edited');
 
 			// Remove classes so we know saving finished
 			jQuery('body').removeClass('dslca-module-saving-in-progress');
@@ -929,18 +952,18 @@ function dslc_module_options_cancel_changes( callback ) {
 	callback = typeof callback !== 'undefined' ? callback : false;
 
 	// Vars
-	var editedModule = jQuery('.dslca-module-being-edited', DSLC.Editor.frame);
+	var editedModule = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewFrame);
 
 	// Add backup option values
-	jQuery('.dslca-module-options-front', editedModule).html('').append(DSLC.Editor.moduleBackup);
-	DSLC.Editor.moduleBackup = false;
+	jQuery('.dslca-module-options-front', editedModule).html('').append(LiveComposer.Builder.moduleBackup);
+	LiveComposer.Builder.moduleBackup = false;
 
 	// Reload module
 	dslc_module_output_altered( function(){
 
 		dslc_generate_code();
 
-		jQuery('.dslca-module-being-edited', DSLC.Editor.frame).removeClass('dslca-module-being-edited');
+		jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewFrame).removeClass('dslca-module-being-edited');
 
 		// Clean up options container
 		if ( ! jQuery('body').hasClass('rtl') ) {
@@ -1476,7 +1499,7 @@ function dslc_module_options_color( field ) {
 				}
 
 				// Update option
-				dslcModule = jQuery('.dslca-module-being-edited', DSLC.Editor.frame);
+				dslcModule = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewFrame);
 				dslcOptionID = dslcColorField.data('id');
 				jQuery('.dslca-module-option-front[data-id="' + dslcOptionID + '"]', dslcModule).val( dslcColorFieldVal );
 
@@ -1511,7 +1534,7 @@ function dslc_module_options_color( field ) {
 				}
 
 				// Update option
-				dslcModule = jQuery('.dslca-module-being-edited', DSLC.Editor.frame);
+				dslcModule = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewFrame);
 				dslcOptionID = dslcColorField.data('id');
 				jQuery('.dslca-module-option-front[data-id="' + dslcOptionID + '"]', dslcModule).val( dslcColorFieldVal );
 
@@ -1545,7 +1568,7 @@ function dslc_module_options_color( field ) {
 		});
 
 		// Save this element to destroy on panel closed.
-		DSLC.Editor.colorpickers.push( jQuery(this) );
+		LiveComposer.Builder.Helpers.colorpickers.push( jQuery(this) );
 	});
 
 	// Revert to default
@@ -1642,7 +1665,7 @@ function dslc_module_options_numeric( field ) {
 				this.value = min;
 			}
 
-			dslcModule = jQuery('.dslca-module-being-edited', DSLC.Editor.frame);
+			dslcModule = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewFrame);
 
 			// Add changed class
 			dslcModule.addClass('dslca-module-change-made');

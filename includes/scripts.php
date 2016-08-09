@@ -124,7 +124,6 @@ final class DSLC_Scripts{
 			} else {
 
 				wp_enqueue_script( 'dslc-iframe-main-js', DS_LIVE_COMPOSER_URL . 'js/builder.frontend/builder.frontend.main.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
-				wp_enqueue_script( 'dslc-iframe-panel-settings-js', DS_LIVE_COMPOSER_URL . 'js/builder.frontend/builder.frontend.settings.panel.functions.js', array( 'jquery', 'dslc-iframe-main-js' ), DS_LIVE_COMPOSER_VER );
 			}
 		}
 	}

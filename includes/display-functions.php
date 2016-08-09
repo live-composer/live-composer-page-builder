@@ -319,7 +319,90 @@ function dslc_display_composer() {
 			</div>
 
 			<div class="dslca-invisible-overlay"></div>
+			<script id="pseudo-panel" type="template">
+			<div class="dslca-pseudo-panel">
+				<div class="dslca-pseudo-panel-cover"></div>
+			<div class="dslca-pseudo-panel-container">
 
+				<div class="dslca-container dslca-state-off" data-post-id="26" style="bottom: 0px;">
+
+				<div class="dslca-header dslc-clearfix" data-default-section="functionality">
+
+					<div class="dslca-pseudo-panel-cover"></div>
+					<!-- Currently Editing -->
+					<span class="dslca-currently-editing" style="display: block;"><span class="dslca-icon dslc-icon-info"></span>You Are Editing: <strong>Live Composer element</strong></span>
+
+					<!-- Tabs -->
+					<!-- Module Option filters -->
+					<span class="dslca-options-filter-hook dslca-active" data-section="functionality" style="display: block;"><span class="dslca-icon dslc-icon-cog"></span> Functionality</span>
+					<span class="dslca-options-filter-hook" data-section="styling" style="display: block;"><span class="dslca-icon dslc-icon-tint"></span> Styling</span>
+					<span class="dslca-options-filter-hook" data-section="responsive" style="display: block;"><span class="dslca-icon dslc-icon-mobile-phone"></span> Responsive</span>
+
+					<!-- Module Options Actions -->
+					<div class="dslca-module-edit-actions" style="display: block;">
+						<div class="dslca-pseudo-panel-cover"></div>
+						<a href="#" class="dslca-module-edit-save">Confirm</a>
+						<a href="#" class="dslca-module-edit-cancel">Cancel</a>
+					</div>
+					<!-- Row Options Actions -->
+
+				</div><!-- .dslca-header -->
+
+				<div class="dslca-actions">
+
+					<!-- Hide/Show -->
+					<div class="dslca-pseudo-panel-cover"></div>
+					<a href="#" class="dslca-show-composer-hook"><span class="dslca-icon dslc-icon-arrow-up"></span>Show Editor</a>
+					<a href="#" class="dslca-hide-composer-hook"><span class="dslca-icon dslc-icon-arrow-down"></span>Hide Editor</a>
+
+					<!-- Disable -->
+					<a href="http://livecomp/" class="dslca-close-composer-hook"><span class="dslca-icon dslc-icon-remove"></span>Disable Editor</a>
+
+					<div class="dslc-clear"></div>
+
+				</div><!-- .dslca-actions -->
+
+				<div class="dslca-sections">
+
+					<!-- Modules Listing -->
+					<!-- .dslca-modules -->
+
+					<!-- Module Edit -->
+
+					<div class="dslca-section dslca-module-edit" data-bg="#5890e5" style="display: block;">
+					<form class="dslca-module-edit-form">
+						<div class="dslca-module-edit-options dslc-clearfix">
+							<div class="dslca-pseudo-panel-cover"></div>
+							<div class="dslca-module-edit-options-wrapper dslc-clearfix">
+								<div class="dslca-module-edit-option" style="display: table-cell;">
+									<span class="dslca-module-edit-label pseudo-label"></span>
+									<input type="text" class="dslca-module-edit-field pseudo-input">
+								</div><!-- .dslc-module-edit-option -->
+								<div class="dslca-module-edit-option" style="display: table-cell;">
+									<span class="dslca-module-edit-label pseudo-label"></span>
+									<input type="text" class="dslca-module-edit-field pseudo-input">
+								</div><!-- .dslc-module-edit-option -->
+								<div class="dslca-module-edit-option" style="display: table-cell;">
+									<span class="dslca-module-edit-label pseudo-label"></span>
+									<input type="text" class="dslca-module-edit-field pseudo-input">
+								</div><!-- .dslc-module-edit-option -->
+								<div class="dslca-module-edit-option" style="display: table-cell;">
+									<span class="dslca-module-edit-label pseudo-label"></span>
+									<input type="text" class="dslca-module-edit-field pseudo-input">
+								</div><!-- .dslc-module-edit-option -->
+								<div class="dslca-module-edit-option" style="display: table-cell;">
+									<span class="dslca-module-edit-label pseudo-label"></span>
+									<input type="text" class="dslca-module-edit-field pseudo-input">
+								</div><!-- .dslc-module-edit-option -->
+							</div>
+						</div>
+					</form>
+					</div>
+				</div><!-- .dslca-sections -->
+			</div>
+			</div>
+			</div>
+			</script>
 		<?php
 
 	endif;
