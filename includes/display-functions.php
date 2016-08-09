@@ -598,16 +598,16 @@ function dslc_filter_content( $content ) {
 		$template_code = false; // LC code if current post powered by template
 		$template_id = false; // ID of the template that powers current post
 
-		// Wrapping all LC elements ( unless header/footer outputed by theme )
+		// Wrapping all LC elements ( unless header/footer outputed by theme ).
 		if ( ! defined( 'DS_LIVE_COMPOSER_HF_AUTO' ) || DS_LIVE_COMPOSER_HF_AUTO ) {
 			$composer_wrapper_before = '<div id="dslc-content" class="dslc-content dslc-clearfix">';
 			$composer_wrapper_after = '</div>';
 		}
 
-		// Get LC code of the current post
+		// Get LC code of the current post.
 		$composer_code = dslc_get_code( get_the_ID() );
 
-		// Interactive Tutorials
+		// Interactive Tutorials.
 		$tut_page = false;
 		$tut_ch_one = dslc_get_option( 'lc_tut_chapter_one', 'dslc_plugin_options_tuts' );
 		$tut_ch_two = dslc_get_option( 'lc_tut_chapter_two', 'dslc_plugin_options_tuts' );
@@ -619,47 +619,45 @@ function dslc_filter_content( $content ) {
 			$tut_page = true;
 			$composer_code = '';
 
-		// If current page set to be tutorial chapter two
+		// If current page set to be tutorial chapter two.
 		} elseif ( get_the_ID() == $tut_ch_two ) {
 			$tut_page = true;
 			$composer_code = '[dslc_modules_section type="wrapped" columns_spacing="spacing" bg_color="rgb(242, 245, 247)" bg_image_thumb="disabled" bg_image="" bg_image_repeat="repeat" bg_image_position="left top" bg_image_attachment="scroll" bg_image_size="auto" bg_video="" bg_video_overlay_color="#000000" bg_video_overlay_opacity="0" border_color="" border_width="0" border_style="solid" border="top right bottom left" margin_h="0" margin_b="0" padding="85" padding_h="0" custom_class="" custom_id="" ] [dslc_modules_area last="yes" first="no" size="12"] [/dslc_modules_area] [/dslc_modules_section] ';
 
-		// If current page set to be tutorial chapter three
+		// If current page set to be tutorial chapter three.
 		} elseif ( get_the_ID() == $tut_ch_three ) {
 			$tut_page = true;
 			$composer_code = '[dslc_modules_section type="wrapped" columns_spacing="spacing" bg_color="rgb(242, 245, 247)" bg_image_thumb="disabled" bg_image="" bg_image_repeat="repeat" bg_image_position="left top" bg_image_attachment="scroll" bg_image_size="auto" bg_video="" bg_video_overlay_color="#000000" bg_video_overlay_opacity="0" border_color="" border_width="0" border_style="solid" border="top right bottom left" margin_h="0" margin_b="0" padding="85" padding_h="0" custom_class="" custom_id="" ] [dslc_modules_area last="yes" first="no" size="12"] [/dslc_modules_area] [/dslc_modules_section] ';
 		}
 
-		// If currently showing a singular post of a post type that supports "post templates"
+		// If currently showing a singular post of a post type that supports "post templates".
 		if ( is_singular( $dslc_post_types ) ) {
 
-			// Get template ID set for currently shown post
+			// Get template ID set for currently shown post.
 			$template_id = dslc_st_get_template_ID( get_the_ID() );
 
-			// If template ID exists
+			// If template ID exists.
 			if ( $template_id ) {
 
-				// Get LC code of the template
+				// Get LC code of the template.
 				$composer_code = dslc_get_code( $template_id );
 
 			}
-
 		}
 
-		// If currently showing a category archive page
+		// If currently showing a category archive page.
 		if ( is_archive() && ! is_author() && ! is_search() ) {
 
-			// Get ID of the page set to power the category of the current post type
+			// Get ID of the page set to power the category of the current post type.
 			$template_id = dslc_get_option( get_post_type(), 'dslc_plugin_options_archives' );
 
-			// If there is a page that powers it
+			// If there is a page that powers it.
 			if ( $template_id ) {
 
-				// Get LC code of the page
+				// Get LC code of the page.
 				$composer_code = dslc_get_code( $template_id );
 
 			}
-
 		}
 
 		// If currently showing an author archive page
