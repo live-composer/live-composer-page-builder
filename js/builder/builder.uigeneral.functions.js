@@ -134,7 +134,8 @@ jQuery(window).keypress( function(e){
  */
 
 jQuery(document).on( 'click', '.dslca-hide-composer-hook', function(e){
-	e.preventDeault();
+
+	e.preventDefault();
 	dslc_hide_composer()
 });
 
