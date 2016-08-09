@@ -737,7 +737,7 @@ function dslc_toogle_control ( control_id ) {
 
 				context: control,
 				rule: affect_on_change_rules[i],
-				elems: affect_on_change_el,
+				elems: affect_on_change_el.replace(new RegExp('#' + module_id, 'gi'), '').trim(),
 				styleContent: styleContent
 			});
 		}
@@ -819,7 +819,7 @@ function disable_css_rule(selectorCSS, ruleCSS, moduleID) {
 
 			// Is current CSS rule equal to the selectorCSS we are looking for?
 			// (ex.: '.content h1' == '.content h1' )
-			if (stylesheet[cssRules][R].selectorCSSText == selectorCSS) {
+			if (stylesheet[cssRules][R].selectorText == selectorCSS) {
 
 				// Get CSS property we are looking for... (ex.: font-size : ...; )
 				if(stylesheet[cssRules][R].style[ruleCSS]){
@@ -830,14 +830,6 @@ function disable_css_rule(selectorCSS, ruleCSS, moduleID) {
 			}
 		}
 	}
-
-	/*var id = ruleCSS + selectorCSS.replace('#' + moduleID, '').trim();
-	var style = LiveComposer.Builder.PreviewFrame[0].getElementById( id );
-
-	if( style != null ) {
-
-		style.parentNode.removeChild( style );
-	}*/
 }
 
 function dslc_combine_value_and_extension ( value, extension) {
