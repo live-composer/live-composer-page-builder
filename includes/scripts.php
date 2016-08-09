@@ -33,7 +33,7 @@ final class DSLC_Scripts{
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'dslc_load_scripts_frontend' ) );
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'dslc_load_fonts' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'dslc_load_scripts_admin' ) );
-		add_action( 'admin_footer-plugins.php', array( __CLASS__, 'dslc_inline_js_plugin_title' ) );
+		add_action( 'admin_footer', array( __CLASS__, 'dslc_inline_js_plugin_title' ) );
 		add_filter( 'mce_external_plugins', array( __CLASS__, 'add_tinymce_plugins' ) );
 	}
 
@@ -282,6 +282,8 @@ final class DSLC_Scripts{
 			wp_enqueue_style( 'dslc-plugin-options-css-admin', DS_LIVE_COMPOSER_URL . 'includes/plugin-options-framework/css/main' . $min_suffix . '.css', array(), DS_LIVE_COMPOSER_VER );
 			wp_localize_script( 'dslc-plugin-options-js-admin', 'dslcajax', array( 'nonce' => wp_create_nonce( 'dslc-optionspanel-ajax' ) ) );
 		}
+
+		wp_enqueue_style( 'dslc-css-wpadmin', DS_LIVE_COMPOSER_URL . 'css/wp-admin.css', array(), DS_LIVE_COMPOSER_VER );
 	}
 
 	/**
@@ -358,10 +360,25 @@ final class DSLC_Scripts{
 
 		<script type="text/javascript">
 			jQuery(document).ready(function($){
+				// Shorten plugin name
 				jQuery('.plugins [data-slug="live-composer-page-builder"] .plugin-title strong').text('Live Composer');
+
+				var target_menu_items = '';
+				target_menu_items += '#adminmenu a[href="edit.php?post_type=dslc_templates"],';
+				target_menu_items += '#adminmenu a[href="edit.php?post_type=dslc_hf"],';
+				target_menu_items += '#adminmenu a[href="edit.php?post_type=dslc_testimonials"].menu-top,';
+				target_menu_items += '#adminmenu a[href="edit.php?post_type=dslc_staff"].menu-top,';
+				target_menu_items += '#adminmenu a[href="edit.php?post_type=dslc_projects"].menu-top,';
+				target_menu_items += '#adminmenu a[href="edit.php?post_type=dslc_galleries"].menu-top,';
+				target_menu_items += '#adminmenu a[href="edit.php?post_type=dslc_partners"].menu-top,';
+				target_menu_items += '#adminmenu a[href="edit.php?post_type=dslc_downloads"].menu-top';
+
+				// Add LC badge to our links in WP Admin sidebar
+				jQuery( target_menu_items ).append(' <attr title="Live Composer" class="dslc-menu-label">LC</attr>');
 			});
+
 		</script>
-	<?php 
+	<?php
 	}
 }
 

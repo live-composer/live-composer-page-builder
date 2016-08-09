@@ -44,11 +44,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</a>
 		</li>
 		<li class="dslc-submenu-section">
-			<a href="#archives"  data-nav-to="<?php echo 'tab-1' ?>" class="nav-subtab <?php echo $anchor == 'tab-1' ? 'nav-tab-active' : ''; ?>">
-				<span class="dashicons dashicons-exerpt-view"></span> <?php _e( 'Archive and Search', 'live-composer-page-builder' ) ?>
-			</a>
-		</li>
-		<li class="dslc-submenu-section">
 			<a href="#cpt-slugs"  data-nav-to="<?php echo 'tab-1' ?>" class="nav-subtab <?php echo $anchor == 'tab-1' ? 'nav-tab-active' : ''; ?>">
 				<span class="dashicons dashicons-index-card"></span> <?php _e( 'Post Types', 'live-composer-page-builder' ) ?>
 			</a>
@@ -100,12 +95,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<a href="#dslc-top" class="dslc-scroll-back"><span class="dashicons dashicons-arrow-up-alt"></span> Top</a>
 			<div class="dslc-panel">
 					<?php do_settings_sections( 'dslc_plugin_options_features' ); ?>
-					<?php submit_button(); ?>
-			</div>
-			<a name="archives"></a>
-			<a href="#dslc-top" class="dslc-scroll-back"><span class="dashicons dashicons-arrow-up-alt"></span> Top</a>
-			<div class="dslc-panel">
-					<?php do_settings_sections( 'dslc_plugin_options_archives' ); ?>
 					<?php submit_button(); ?>
 			</div>
 			<a name="cpt-slugs"></a>

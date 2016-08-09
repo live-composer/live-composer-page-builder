@@ -52,11 +52,21 @@ function dslc_get_cpt_templates() {
 	if ( $templates ) {
 
 		foreach ( $templates as $template ) {
-			$template_for = get_post_meta( $template->ID, 'dslc_template_for', true );
-			$templates_array[ $template_for ][] = array(
-				'label' => $template->post_title,
-				'value' => $template->ID,
-			);
+			// Get array with CPT names this template assigned for.
+			$template_for = get_post_meta( $template->ID, 'dslc_template_for' );
+
+			if ( ! empty( $template_for ) ) {
+
+				foreach ( $template_for as $template_cpt ) {
+					// Go through each CPT to fill templates_array array.
+					if ( is_string( $template_cpt ) ) {
+						$templates_array[ $template_cpt ][] = array(
+							'label' => $template->post_title,
+							'value' => $template->ID,
+						);
+					}
+				}
+			}
 		}
 
 		foreach ( $dslc_var_templates_pt as $pt_id => $pt_label ) {
@@ -170,14 +180,19 @@ function DSLC_EditorInterface_post_options( $object, $metabox ) {
 		<?php foreach ( $post_options as $post_option ) : ?>
 
 			<?php
-			$curr_value_no_esc = get_post_meta( $object->ID, $post_option['id'], true );
+			// Get current value as array.
+			$curr_value_no_esc = get_post_meta( $object->ID, $post_option['id'] );
 
-			if ( ! isset( $curr_value_no_esc ) || '' === $curr_value_no_esc ) {
-
-				$curr_value_no_esc = $post_option['std'];
+			// If there is only one value in array – transform it into the string.
+			if ( 1 === count( $curr_value_no_esc ) && is_string( $curr_value_no_esc[0] ) ) {
+				$curr_value = esc_attr( $curr_value_no_esc[0] );
 			}
 
-			$curr_value = esc_attr( $curr_value_no_esc );
+			if ( empty( $curr_value_no_esc ) ) {
+				// $curr_value_no_esc[] = $post_option['std'];
+				$curr_value  = esc_attr( $post_option['std'] );
+			}
+
 			?>
 
 			<div class="dslca-post-option" id="post-option-<?php echo esc_attr( $post_option['id'] ); ?>" >
@@ -206,19 +221,19 @@ function DSLC_EditorInterface_post_options( $object, $metabox ) {
 
 				<?php endif; ?>
 
-				<div class="dslca-post-option-field dslca-post-option-field-<?php echo $post_option['type']; ?>">
+				<div class="dslca-post-option-field dslca-post-option-field-<?php echo esc_attr( $post_option['type'] ); ?>">
 
 					<?php if ( $post_option['type'] == 'text' ) : ?>
 
-						<input type="text" name="<?php echo $post_option['id']; ?>" id="<?php echo $post_option['id']; ?>" value="<?php echo $curr_value; ?>" size="30" />
+						<input type="text" name="<?php echo esc_attr( $post_option['id'] ); ?>" id="<?php echo esc_attr( $post_option['id'] ); ?>" value="<?php echo $curr_value; ?>" size="30" />
 
 					<?php elseif ( $post_option['type'] == 'textarea' ) : ?>
 
-						<textarea name="<?php echo $post_option['id']; ?>" id="<?php echo $post_option['id']; ?>"><?php echo $curr_value; ?></textarea>
+						<textarea name="<?php echo esc_attr( $post_option['id'] ); ?>" id="<?php echo esc_attr( $post_option['id'] ); ?>"><?php echo $curr_value; ?></textarea>
 
 					<?php elseif ( $post_option['type'] == 'select' ) : ?>
 
-						<select type="text" name="<?php echo $post_option['id']; ?>" id="<?php echo $post_option['id']; ?>">
+						<select type="text" name="<?php echo esc_attr( $post_option['id'] ); ?>" id="<?php echo esc_attr( $post_option['id'] ); ?>">
 							<?php foreach ( $post_option['choices'] as $choice ) : ?>
 								<option value="<?php echo $choice['value']; ?>" <?php if ( $curr_value == $choice['value'] ) echo 'selected="selected"'; ?>><?php echo $choice['label']; ?></option>
 							<?php endforeach; ?>
@@ -236,21 +251,37 @@ function DSLC_EditorInterface_post_options( $object, $metabox ) {
 
 					<?php elseif ( 'checkbox' === $post_option['type'] ) : ?>
 
+						<div class="dslca-post-option-field-inner-wrapper">
+
 						<?php
 						$curr_value_array = maybe_unserialize( $curr_value_no_esc );
 						if ( ! is_array( $curr_value_array ) ) {
 							$curr_value_array = array();
 						}
 
-						if ( '' !== $curr_value && empty( $curr_value_array ) ) {
+						if ( isset( $curr_value ) && '' !== $curr_value && empty( $curr_value_array ) ) {
 							$curr_value_array = explode( ' ', $curr_value );
 						}
+
 						?>
 						<?php foreach ( $post_option['choices'] as $key => $choice ) : ?>
+
+							<?php if ( 'list-heading' !== esc_attr( $choice['value'] ) ): ?>
+
 								<div class="dslca-post-option-field-choice">
-									<input type="checkbox" name="<?php echo $post_option['id']; ?>[]" id="<?php echo $post_option['id'] . $key; ?>" value="<?php echo $choice['value']; ?>" <?php if ( in_array( $choice['value'], $curr_value_array ) ) echo 'checked="checked"'; ?> /> <label for="<?php echo $post_option['id'] . $key; ?>"><?php echo $choice['label']; ?></label>
+									<input type="checkbox" name="<?php echo esc_attr( $post_option['id'] ); ?>[]" id="<?php echo esc_attr( $post_option['id'] . $key ); ?>" value="<?php echo esc_attr( $choice['value'] ); ?>" <?php if ( in_array(  esc_attr( $choice['value'] ),  $curr_value_array ) ) echo 'checked="checked"'; ?> /> <label for="<?php echo  esc_attr( $post_option['id'] . $key ); ?>"><?php echo  esc_html( $choice['label'] ); ?></label>
 								</div><!-- .dslca-post-option-field-choice -->
+
+							<?php else: ?>
+
+								</div>
+								<div class="dslca-post-option-field-inner-wrapper">
+								<p><strong><?php echo  esc_html( $choice['label'] ); ?></strong></p>
+
+							<?php endif; ?>
 						<?php endforeach; ?>
+
+						</div>
 
 					<?php elseif ( $post_option['type'] == 'radio' ) : ?>
 
@@ -367,14 +398,23 @@ function dslc_save_post_options( $post_id, $post ) {
 				$new_option_value = ( isset( $_POST[ $post_option['id'] ] ) ? $_POST[ $post_option['id'] ] : '' );
 				$curr_option_value = get_post_meta( $post_id, $meta_key, true );
 
-				if ( is_array( $new_option_value ) ) {
-					$new_option_value = serialize( $new_option_value );
-				}
+				// Serialize array. (Deleted as WP serialize arrays on it's own)
+				// if ( is_array( $new_option_value ) ) {
+				// 	$new_option_value = serialize( $new_option_value );
+				// }
 
 				// Save, Update, Delete option.
+				// DON'T CHANGE IT TO udpate_post_meta!
+				// We don't want to struggle with serialized arrays.
 				if ( isset( $new_option_value ) ) {
-
-					update_post_meta( $post_id, $meta_key, $new_option_value );
+					delete_post_meta( $post_id, $meta_key );
+					if ( is_array( $new_option_value ) ) {
+						foreach ( $new_option_value as $value ) {
+							add_post_meta( $post_id, $meta_key, $value );
+						}
+					} else {
+						add_post_meta( $post_id, $meta_key, $new_option_value );
+					}
 				} elseif ( '' === $new_option_value && isset( $curr_option_value ) ) {
 
 					delete_post_meta( $post_id, $meta_key, $curr_option_value );

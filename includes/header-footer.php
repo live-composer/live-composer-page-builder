@@ -37,7 +37,8 @@ function dslc_hf_init() {
 	register_post_type( 'dslc_hf', array(
 		'menu_icon' => 'dashicons-image-flip-vertical',
 		'labels' => array(
-			'name' => __( 'Header/Footer', 'live-composer-page-builder' ),
+			'name' => __( 'Headers & Footers', 'live-composer-page-builder' ),
+			'menu_name' => __( 'Headers/Footers', 'live-composer-page-builder' ),
 			'singular_name' => __( 'Add Header/Footer', 'live-composer-page-builder' ),
 			'add_new' => __( 'Add Header/Footer', 'live-composer-page-builder' ),
 			'add_new_item' => __( 'Add Header/Footer', 'live-composer-page-builder' ),
@@ -52,6 +53,8 @@ function dslc_hf_init() {
 			'parent' => __( 'Parent Header/Footer', 'live-composer-page-builder' ),
 		),
 		'public' => true,
+		'exclude_from_search' => true,
+		'publicly_queryable' => false,
 		'supports' => array('title', 'custom-fields', 'author', 'thumbnail'),
 		'capabilities' => array(
 			'publish_posts' => $capability,
@@ -64,6 +67,7 @@ function dslc_hf_init() {
 			'delete_post' => $capability,
 			'read_post' => $capability
 		),
+		'show_in_menu' =>'themes.php',
 	) );
 
 	/**

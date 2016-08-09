@@ -97,6 +97,10 @@ function dslc_st_template_switch() {
 
 } add_action( 'template_redirect', 'dslc_st_template_switch' );
 
+/**
+ * Add columns to the Templates Listing table.
+ */
+
 function dslc_templates_col_title( $defaults ) {
 
 	unset( $defaults['date'] );
@@ -109,7 +113,50 @@ function dslc_templates_col_title( $defaults ) {
 function dslc_templates_col_content( $column_name, $post_ID ) {
 
 	if ( $column_name == 'dslc_templates_col_cpt' ) {
-		echo get_post_meta( $post_ID, 'dslc_template_for', true );
+		$post_types = get_post_meta( $post_ID, 'dslc_template_for');
+
+		foreach ($post_types as $key => $value) {
+			if ( '404_page' === $value) {
+				$post_types[$key] = __('404 – Page Not Found', 'live-composer-page-builder' );
+			} elseif ( 'search_results' === $value) {
+				$post_types[$key] = __('Search Results', 'live-composer-page-builder' );
+			} elseif ( 'author' === $value) {
+				$post_types[$key] = __('Author Archive Page', 'live-composer-page-builder' );
+			} elseif ( 'post' === $value) {
+				$post_types[$key] = __('Blog Post', 'live-composer-page-builder' );
+			} elseif ( 'dslc_projects' === $value) {
+				$post_types[$key] = __('Projects', 'live-composer-page-builder' );
+			} elseif ( 'dslc_staff' === $value) {
+				$post_types[$key] = __('Staff', 'live-composer-page-builder' );
+			} elseif ( 'dslc_partners' === $value) {
+				$post_types[$key] = __('Partners', 'live-composer-page-builder' );
+			} elseif ( 'dslc_downloads' === $value) {
+				$post_types[$key] = __('Downloads', 'live-composer-page-builder' );
+			} elseif ( 'dslc_galleries' === $value) {
+				$post_types[$key] = __('Galleries', 'live-composer-page-builder' );
+
+			} elseif ( 'dslc_projects_archive' === $value) {
+				$post_types[$key] = __('Projects Archive', 'live-composer-page-builder' );
+			} elseif ( 'dslc_staff_archive' === $value) {
+				$post_types[$key] = __('Staff Archive', 'live-composer-page-builder' );
+			} elseif ( 'dslc_partners_archive' === $value) {
+				$post_types[$key] = __('Partners Archive', 'live-composer-page-builder' );
+			} elseif ( 'dslc_downloads_archive' === $value) {
+				$post_types[$key] = __('Downloads Archive', 'live-composer-page-builder' );
+			} elseif ( 'dslc_galleries_archive' === $value) {
+				$post_types[$key] = __('Galleries Archive', 'live-composer-page-builder' );
+			} elseif ( ! is_string( $value ) ) {
+				unset( $post_types[$key] );
+			}
+		}
+
+		$cpt_col_val = '<ul><li> – ';
+		$cpt_col_val .= implode('</li><li> – ', $post_types);
+		$cpt_col_val .= '</li></ul>';
+
+		if ( ! empty( $post_types ) ) {
+			echo $cpt_col_val;
+		}
 	}
 
 	if ( $column_name == 'dslc_templates_col_default' ) {
@@ -122,27 +169,201 @@ function dslc_templates_col_content( $column_name, $post_ID ) {
 add_filter( 'manage_dslc_templates_posts_columns', 'dslc_templates_col_title', 5 );
 add_action( 'manage_dslc_templates_posts_custom_column', 'dslc_templates_col_content', 10, 2 );
 
+
 /**
  * Makes sure there is only one default template per post type
  *
- * @since 1.0
+ * If current template set as default
+ * go though all other templates for this post type
+ * and make sure there is no other default template set.
+ *
+ * @param  String $post_id  ID of the post being saved.
+ * @return void
  */
-
 function dslc_tp_unique_default( $post_id ) {
 
-	// If no post type ( not really a save action ) stop execution
-	if ( ! isset( $_POST['post_type'] ) ) return;
+	// Allowed to do this?
+	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY_SAVE ) ) {
 
-	// If not a template stop execution
-	if ( $_POST['post_type'] !== 'dslc_templates' ) return;
+		// If no post type ( not really a save action ) stop execution.
+		if ( ! isset( $_POST['post_type'] ) ) {
+			return;
+		}
 
-	// If template type not supplied stop execution
-	if ( ! isset( $_REQUEST['dslc_template_type'] ) ) return;
+		// If template type not supplied stop execution.
+		if ( ! isset( $_POST['dslc_template_for'] ) ) {
+			return;
+		}
 
-	// If template not default stop execution
-	if ( $_REQUEST['dslc_template_type'] !== 'default' ) return;
+		// If template type not supplied stop execution.
+		if ( ! isset( $_REQUEST['dslc_template_type'] ) ) {
+			return;
+		}
 
-	// Get templates ( if any ) in same CPT that are default
+		// If not a template stop execution.
+		$post_type = esc_attr( $_POST['post_type'] );
+		if ( 'dslc_templates' !== $post_type ) { return; }
+
+		// If template not default stop execution.
+		$dslc_template_type = esc_attr( $_REQUEST['dslc_template_type'] );
+		if ( 'default' !== $dslc_template_type ) { return; }
+
+		// Make dslc_template_for an array even if it's string (for easier processing).
+		$dslc_template_for = array();
+		if ( ! is_array( $_POST['dslc_template_for'] ) ) {
+			$dslc_template_for[] = $_POST['dslc_template_for'];
+		} else {
+			$dslc_template_for = $_POST['dslc_template_for'];
+		}
+
+		// Get templates ( if any ) in same CPT that are default.
+		$args = array(
+			'post_type' => 'dslc_templates',
+			'post_status' => 'any',
+			'posts_per_page' => -1,
+			'meta_query' => array(
+				array(
+					'key' => 'dslc_template_for',
+					'value' => $dslc_template_for,
+					'compare' => 'IN',
+				),
+				array(
+					'key' => 'dslc_template_type',
+					'value' => 'default',
+					'compare' => '=',
+				),
+			),
+		);
+
+		$templates = get_posts( $args );
+
+		// Set those old defaults to regular templates.
+		if ( $templates ) {
+			foreach ( $templates as $template ) {
+				update_post_meta( $template->ID, 'dslc_template_type', 'regular' );
+			}
+		}
+
+		// Reset query.
+		wp_reset_query();
+
+	} else {
+		return;
+	}
+
+} add_action( 'save_post', 'dslc_tp_unique_default' );
+
+/**
+ * Update dslc_plugin_options_archives option
+ * if current template created for archive listing / 404 page / Search Results.
+ *
+ * @param  String $post_id  ID of the post being saved.
+ * @return void
+ */
+function dslc_tp_update_archive_templates_option( $post_id ) {
+
+	// Allowed to do this?
+	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY_SAVE ) ) {
+
+		// If no post type ( not really a save action ) stop execution.
+		if ( ! isset( $_POST['post_type'] ) ) {
+			return;
+		}
+
+		// If template type not supplied stop execution.
+		if ( ! isset( $_POST['dslc_template_for'] ) ) {
+			return;
+		}
+
+		// If not a template stop execution.
+		$post_type = esc_attr( $_POST['post_type'] );
+		if ( 'dslc_templates' !== $post_type ) { return; }
+
+		// Make dslc_template_for an array even if it's string (for easier processing).
+		$dslc_template_for = array();
+		if ( ! is_array( $_POST['dslc_template_for'] ) ) {
+			$dslc_template_for[] = $_POST['dslc_template_for'];
+		} else {
+			$dslc_template_for = $_POST['dslc_template_for'];
+		}
+
+		$plugin_options = get_option( 'dslc_plugin_options' );
+
+		// Sanitize and process.
+		foreach ( $dslc_template_for as $key => $value ) {
+			$dslc_template_for[$key] = esc_attr( $value );
+
+			if ( '404_page' === $value ) {
+
+				$plugin_options['404_page'] = $post_id;
+				// Make sure we have only one template for 404_page.
+				dslc_tp_remove_template_from_meta( '404_page' );
+
+			} else if ( 'search_results' === $value ) {
+
+				$plugin_options['search_results'] = $post_id;
+				// Make sure we have only one template for search_results.
+				dslc_tp_remove_template_from_meta( 'search_results' );
+
+			} else if ( 'author' === $value ) {
+
+				$plugin_options['author'] = $post_id;
+				// Make sure we have only one template for search_results.
+				dslc_tp_remove_template_from_meta( 'author' );
+
+			} else if ( 'post' === $value ) {
+
+				$plugin_options['post'] = $post_id;
+				dslc_tp_remove_template_from_meta( 'post' );
+
+			} else if ( 'dslc_projects_archive' === $value ) {
+
+				$plugin_options['dslc_projects'] = $post_id;
+				dslc_tp_remove_template_from_meta( 'dslc_projects_archive' );
+
+			} else if ( 'dslc_galleries_archive' === $value ) {
+
+				$plugin_options['dslc_galleries'] = $post_id;
+				dslc_tp_remove_template_from_meta( 'dslc_galleries_archive' );
+
+			} else if ( 'dslc_downloads_archive' === $value ) {
+
+				$plugin_options['dslc_downloads'] = $post_id;
+				dslc_tp_remove_template_from_meta( 'dslc_downloads_archive' );
+
+			} else if ( 'dslc_staff_archive' === $value ) {
+
+				$plugin_options['dslc_staff'] = $post_id;
+				dslc_tp_remove_template_from_meta( 'dslc_staff_archive' );
+
+			} else if ( 'dslc_partners_archive' === $value ) {
+
+				$plugin_options['dslc_partners'] = $post_id;
+				dslc_tp_remove_template_from_meta( 'dslc_partners_archive' );
+
+			}
+		}
+
+		update_option( 'dslc_plugin_options', $plugin_options );
+
+		// Reset query.
+		wp_reset_query();
+
+	} else {
+		return;
+	}
+
+} add_action( 'save_post', 'dslc_tp_update_archive_templates_option' );
+
+/**
+ * Remove template type from 'dslc_template_for' meta key (Array).
+ *
+ * @param  String $template_to_remove  Name of the template to remove.
+ * @return void
+ */
+function dslc_tp_remove_template_from_meta( $template_to_remove ) {
+	// Get templates ( if any ) in same CPT that has $template_to_remove
+	// as value for 'dslc_template_for' custom field.
 	$args = array(
 		'post_type' => 'dslc_templates',
 		'post_status' => 'any',
@@ -150,26 +371,32 @@ function dslc_tp_unique_default( $post_id ) {
 		'meta_query' => array(
 			array(
 				'key' => 'dslc_template_for',
-				'value' => $_POST['dslc_template_for'],
-				'compare' => '=',
-			),
-			array(
-				'key' => 'dslc_template_type',
-				'value' => 'default',
-				'compare' => '=',
+				'value' => $template_to_remove,
+				'compare' => 'IN',
 			),
 		),
 	);
+
 	$templates = get_posts( $args );
 
-	// Set those old defaults to regular tempaltes
+	// Set those old defaults to regular templates.
 	if ( $templates ) {
 		foreach ( $templates as $template ) {
-			update_post_meta( $template->ID, 'dslc_template_type', 'regular' );
+			// Get current value of 'dslc_template_for' custom field.
+			$dslc_template_for = get_post_meta( $template->ID, 'dslc_template_for' );
+			delete_post_meta( $template->ID, 'dslc_template_for' );
+
+			// Remove value from the array.
+			if ( ( $key = array_search( $template_to_remove, $dslc_template_for ) ) !== false ) {
+			    unset( $dslc_template_for[ $key ] );
+			}
+
+			// Put back updated value for 'dslc_template_for' custom field.
+			// DON'T CHANGE IT TO udpate_post_meta!
+			// We don't want to struggle with serialized arrays.
+			foreach ( $dslc_template_for as $template_cpt ) {
+				add_post_meta( $template->ID, 'dslc_template_for', $template_cpt );
+			}
 		}
 	}
-
-	// Reset query
-	wp_reset_query();
-
-} add_action( 'save_post', 'dslc_tp_unique_default' );
+}
