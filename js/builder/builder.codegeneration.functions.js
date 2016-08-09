@@ -134,7 +134,7 @@ function dslc_generate_code() {
 	if ( dslcDebug ) console.log( 'dslc_generate_code' );
 
 	// Vars
-	var moduleCode,
+	var moduleCode = '',
 	module_size,
 	composerCode = '',
 	maxPerRow = 12,
@@ -306,11 +306,22 @@ function dslc_generate_code() {
 					moduleFirstState = 'yes';
 				}
 
-				// Get module's LC data
-				moduleCode = dslc_module[0].querySelector('.dslca-module-code').value;
+				try {
+					// Get module's LC data
+					moduleCode = dslc_module[0].querySelector('.dslca-module-code').value;
 
-				// Add the module shortcode containing the data
-				composerCode = composerCode + '[dslc_module last="' + moduleLastState + '"]' + moduleCode + '[/dslc_module] ';
+				} catch(err) {
+					console.info( 'No DSLC code found in module: ' + dslc_module[0].getAttribute('id') );
+				}
+
+				if ( '' !== moduleCode ) {
+					// Add the module shortcode containing the data
+					composerCode = composerCode + '[dslc_module last="' + moduleLastState + '"]' + moduleCode + '[/dslc_module] ';
+				}
+
+				// Fix bug with modules duplication if broken module saved.
+				moduleCode = '';
+
 			});
 
 			// Close area shortcode
