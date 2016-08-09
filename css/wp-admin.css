@@ -1,0 +1,21 @@
+.dslc-menu-label {
+	display: inline-block;
+	background: #9EA3A8;
+	padding: 3px 4px;
+	position: absolute;
+	margin-left: 7px;
+	margin-top: -7px;
+	border-radius: 4px;
+	font-size: 70%;
+	font-weight: bold;
+	color: #23282D;
+	top: 50%;
+	right: 10px;
+	line-height: 1;
+	box-shadow: 1px 1px 1px rgba(11, 12, 12, 0.51);
+	opacity: .5;
+}
+
+.wp-submenu > li {
+	position: relative;
+}

@@ -131,6 +131,13 @@
 		// Vars
 		var scrollerCurr = scroller.data('current');
 
+
+		var scrollerLenght = scroller.find('.dslca-scroller-item:visible').length;
+		// Reset current if out of range
+		if (  scrollerCurr > scrollerLenght  ) {
+			scrollerCurr = scrollerLenght;
+		}
+
 		// Two places before current
 		var scrollerNew = scroller.find('.dslca-scroller-item:eq(' + scrollerCurr +  ')').prevAll('.dslca-scroller-item:visible').eq(3).index();
 
@@ -157,6 +164,13 @@
 
 		// Vars
 		var scrollerCurr = scroller.data('current');
+
+		var scrollerLenght = scroller.find('.dslca-scroller-item:visible').length;
+		// Reset current if out of range
+		if (  scrollerCurr > scrollerLenght  ) {
+			scrollerCurr = scrollerLenght;
+		}
+
 
 		// Two places after current
 		var scrollerNew = scroller.find('.dslca-scroller-item:eq(' + scrollerCurr +  ')').nextAll('.dslca-scroller-item:visible').eq(3).index();
@@ -211,6 +225,7 @@
 				event.preventDefault();
 
 				if ( scrolling_completed ) {
+
 					// Scrolling function
 					dslc_scroller_prev( jQuery(this).closest('.dslca-section').find('.dslca-section-scroller') );
 					scrolling_completed = false;
@@ -225,9 +240,9 @@
 			}
 
 			/* Scrolling delta reached 0 – we can run scrolling functions again */
-			if ( scrolling_completed === false && scrolling_direction === 'Y' && event.originalEvent.deltaY === 0 ) {
+			if ( scrolling_completed === false && scrolling_direction === 'Y' && event.originalEvent.deltaY === -0 ) {
 				scrolling_completed = true;
-			} else if ( scrolling_completed === false && scrolling_direction === 'X' && event.originalEvent.deltaX === 0 ) {
+			} else if ( scrolling_completed === false && scrolling_direction === 'X' && event.originalEvent.deltaX === -0 ) {
 				scrolling_completed = true;
 			}
 
