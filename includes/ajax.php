@@ -118,8 +118,15 @@ function dslc_ajax_add_module( $atts ) {
 		$response = array();
 
 		// The ID of the module to add.
-		$module_id = $_POST['dslc_module_id'];
-		$post_id = $_POST['dslc_post_id'];
+		$module_id = esc_attr( $_POST['dslc_module_id'] );
+
+		if ( ! class_exists( $module_id ) ) {
+
+			header('HTTP/1.1 400 Bad Request', true, 400);
+			die();
+		}
+
+		$post_id = intval( $_POST['dslc_post_id'] );
 		if ( isset( $_POST['dslc_preload_preset'] ) && 'enabled' === $_POST['dslc_preload_preset'] ) {
 
 			$preload_preset = 'enabled';
@@ -184,7 +191,7 @@ function dslc_ajax_add_module( $atts ) {
 		 * Function dslc_module_settings get current module settings
 		 * form $_POST[ $option['id'] ].
 		 */
-		$module_settings = dslc_module_settings( $all_opts, $moudle_id );
+		$module_settings = dslc_module_settings( $all_opts, $module_id );
 
 		// Append ID to settings.
 		$module_settings['module_instance_id'] = $module_instance_id;
@@ -268,8 +275,14 @@ function dslc_ajax_display_module_options( $atts ) {
 		$response['output'] = '';
 		$response['output_tabs'] = '';
 
-		// The ID of the module.
-		$module_id = $_POST['dslc_module_id'];
+		// The ID of the module to add.
+		$module_id = esc_attr( $_POST['dslc_module_id'] );
+
+		if ( ! class_exists( $module_id ) ) {
+
+			header('HTTP/1.1 400 Bad Request', true, 400);
+			die();
+		}
 
 		// Instanciate the module class.
 		$module_instance = new $module_id();
@@ -288,7 +301,8 @@ function dslc_ajax_display_module_options( $atts ) {
 			$curr_value = $module_option['std'];
 
 			if ( isset( $_POST[ $module_option['id'] ] ) ) {
-				$curr_value = $_POST[ $module_option['id'] ];
+
+				$curr_value = esc_attr( $_POST[ $module_option['id'] ] );
 			}
 
 			/**
@@ -561,7 +575,7 @@ function dslc_ajax_display_module_options( $atts ) {
 						}
 						?>
 
-						<input type="text" class="dslca-module-edit-field dslca-module-edit-field-colorpicker" <?php echo $style;?> name="<?php echo esc_attr( $module_option['id'] ); ?>" data-id="<?php echo esc_attr( $module_option['id'] ); ?>" value="<?php echo esc_attr( $curr_value ); ?>" data-affect-on-change-el="<?php echo $module_option['affect_on_change_el']; ?>" data-affect-on-change-rule="<?php echo $module_option['affect_on_change_rule']; ?>" <?php if ( $default_value ) : ?> data-default="<?php echo $default_value; ?>" <?php endif; ?> />
+						<input type="text" class="dslca-module-edit-field dslca-module-edit-field-colorpicker" <?php echo wp_kses( $style, array(), array() );?> name="<?php echo esc_attr( $module_option['id'] ); ?>" data-id="<?php echo esc_attr( $module_option['id'] ); ?>" value="<?php echo esc_attr( $curr_value ); ?>" data-affect-on-change-el="<?php echo $module_option['affect_on_change_el']; ?>" data-affect-on-change-rule="<?php echo $module_option['affect_on_change_rule']; ?>" <?php if ( $default_value ) : ?> data-default="<?php echo $default_value; ?>" <?php endif; ?> />
 
 					<?php elseif ( 'slider' === $module_option['type'] ) : ?>
 
@@ -1196,10 +1210,18 @@ function dslc_ajax_save_preset() {
 		$preset_code_raw = stripslashes( $_POST['dslc_preset_code'] );
 		$module_id = stripslashes( $_POST['dslc_module_id'] );
 
+		if ( ! class_exists( $module_id ) ) {
+
+			header('HTTP/1.1 400 Bad Request', true, 400);
+			die();
+		}
+
 		// Save.
 		if ( dslc_save_preset( $preset_name, $preset_code_raw, $module_id ) ) {
+
 			$response['status'] = 'success';
 		} else {
+
 			$response['status'] = 'error';
 		}
 
