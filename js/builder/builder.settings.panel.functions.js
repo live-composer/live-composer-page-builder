@@ -123,6 +123,7 @@ jQuery(document).ready(function($){
 
 			LiveComposer.Builder.UI.initInlineEditors();
 			LiveComposer.Builder.UI.unloadOptionsDeps();
+			LiveComposer.Builder.Flags.panelOpened = false;
 		});
 
 		jQuery('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
@@ -142,6 +143,7 @@ jQuery(document).ready(function($){
 
 			LiveComposer.Builder.UI.initInlineEditors();
 			LiveComposer.Builder.UI.unloadOptionsDeps();
+			LiveComposer.Builder.Flags.panelOpened = false;
 		});
 
 		jQuery('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
@@ -410,6 +412,16 @@ jQuery(document).ready(function($){
 			LiveComposer.Builder.PreviewFrame[0].getElementById(id).innerHTML = params.styleContent;
 		}
 	}
+
+	LiveComposer.Builder.UI.shakePanelConfirmButton = function() {
+
+		jQuery('.dslca-module-edit-save').addClass('lc-shake-effect active');
+
+		setTimeout(function(){
+
+			jQuery('.dslca-module-edit-save').removeClass('lc-shake-effect active');
+		}, 1000);
+	};
 }());
 
 

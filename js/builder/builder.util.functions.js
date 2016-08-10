@@ -576,7 +576,10 @@ jQuery(document).ready(function($) {
 			/**
 			 * All other option types
 			 */
-			if ( ! dslcOption.hasClass('dslca-module-edit-field-font')  ) {
+			if ( ! dslcOption.hasClass('dslca-module-edit-field-font') &&
+					dslcOption.data('affect-on-change-el') != null &&
+					dslcOption.data('affect-on-change-rule') != null
+					 ) {
 
 				var dslcExt = dslcOption.data('ext') || '';
 				var dslcAffectOnChangeEl = dslcOption.data('affect-on-change-el');
@@ -624,6 +627,13 @@ jQuery(document).ready(function($) {
 			 */
 
 			jQuery( '.dslca-module-option-front[data-id="' + dslcOptionID + '"]', dslcModule ).val( dslcAffectOnChangeValOrig );
+
+			LiveComposer.Utils.publish( 'moduleChanged', {
+
+				moduleId: dslcModule[0].id,
+				optionID: dslcOptionID,
+				optionVal: dslcAffectOnChangeValOrig
+			});
 		}
 	});
 

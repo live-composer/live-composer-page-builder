@@ -19,6 +19,17 @@
 
 	var $ = jQuery;
 
+	var actionAvail = function() {
+
+		if ( LiveComposer.Builder.Flags.panelOpened ) {
+
+			LiveComposer.Builder.UI.shakePanelConfirmButton();
+			return false;
+		}
+
+		return true;
+	}
+
 	jQuery(".dslc-modules-section", LiveComposer.Builder.PreviewFrame).each(function(){
 		new LiveComposer.Builder.Elements.CRow(this);
 	});
@@ -27,6 +38,9 @@
 	 * Hook - Delete Row
 	 */
 	LiveComposer.Builder.PreviewFrame.on( 'click', '.dslca-delete-modules-section-hook', function(e){
+
+		// Check if action can be fired
+		if ( !actionAvail() ) return false;
 
 		e.preventDefault();
 		var self = this;
@@ -53,6 +67,9 @@
 	LiveComposer.Builder.PreviewFrame.on( 'click', '.dslca-import-modules-section-hook', function(e) {
 
 		e.preventDefault();
+
+		// Check if action can be fired
+		if ( !actionAvail() ) return false;
 
 		if ( ! jQuery(this).hasClass('dslca-action-disabled') ) {
 
@@ -83,6 +100,9 @@
 
 		e.preventDefault();
 
+		// Check if action can be fired
+		if ( !actionAvail() ) return false;
+
 		if ( ! $(this).hasClass('dslca-action-disabled') ) {
 
 			$('.dslca-prompt-modal-cancel-hook').hide();
@@ -105,6 +125,9 @@
 	 */
 	LiveComposer.Builder.PreviewFrame.on( 'click', '.dslca-copy-modules-section-hook', function() {
 
+		// Check if action can be fired
+		if ( !actionAvail() ) return false;
+
 		if ( ! jQuery(this).hasClass('dslca-action-disabled') ) {
 
 			dslc_row_copy( jQuery(this).closest('.dslc-modules-section') );
@@ -115,7 +138,11 @@
 	 * Hook - Add Row
 	 */
 	LiveComposer.Builder.PreviewFrame.on( 'click', '.dslca-add-modules-section-hook', function(e){
+
 		e.preventDefault();
+
+		// Check if action can be fired
+		if ( !actionAvail() ) return false;
 
 		var button = $(this);
 
@@ -135,6 +162,9 @@
 	 * Hook - Edit Row
 	 */
 	LiveComposer.Builder.PreviewFrame.on( 'click', '.dslca-edit-modules-section-hook', function(){
+
+		// Check if action can be fired
+		if ( !actionAvail() ) return false;
 
 		var self = this;
 
@@ -364,6 +394,8 @@ function dslc_row_edit( row ) {
 	// Show options management
 	dslc_show_section('.dslca-modules-section-edit');
 
+	LiveComposer.Builder.Flags.panelOpened = true;
+
 	// Hide the publish button
 	dslc_hide_publish_button();
 }
@@ -412,8 +444,7 @@ function dslc_row_edit_cancel( callback ) {
 
 	if ( callback ) { callback(); }
 
-	// Show the publish button
-	dslc_show_publish_button;
+	LiveComposer.Builder.Flags.panelOpened = false;
 }
 
 /**
@@ -450,6 +481,8 @@ function dslc_row_edit_confirm( callback ) {
 	dslc_show_publish_button();
 
 	if ( callback ) { callback(); }
+
+	LiveComposer.Builder.Flags.panelOpened = false;
 }
 
 /**

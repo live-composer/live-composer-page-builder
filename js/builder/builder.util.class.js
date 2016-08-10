@@ -167,4 +167,25 @@ LiveComposer.Utils = {
 		 * See bug report: https://bugzilla.mozilla.org/show_bug.cgi?id=237783
 		 */
 	},
+
+	/**
+	 * Provide custom events publish
+	 *
+	 * @param  {string} eventName
+	 * @param  {object||string||null||numeric} eventData [description]
+	 */
+	publish: function( eventName, eventData ) {
+
+		eventData = eventData ? eventData : {};
+
+		this.checkParams( [
+			[eventName, 'string'],
+			[eventData, 'object']
+		] );
+
+		jQuery.event.trigger( {
+			type: eventName,
+			message: {details: eventData}
+		} );
+	}
 };
