@@ -1194,7 +1194,7 @@ function dslc_modules_area_front( $atts, $content = null ) {
 
 		// Modules output
 		if ( empty( $content ) || $content == ' ' ) {
-					$output .= '&nbsp;';
+					$output .= ''; //'&nbsp;';
 		} else {
 					$output .= do_shortcode( $content );
 		}

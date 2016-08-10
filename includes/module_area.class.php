@@ -62,7 +62,7 @@ class DSLC_Module_Area extends DSLC_Container {
 
 			// Modules output
 			if ( empty( self::$content ) || self::$content == ' ' ) {
-							$output .= '&nbsp;';
+							$output .= ''; // '&nbsp;';
 			} else {
 							$output .= do_shortcode( self::$content );
 			}
