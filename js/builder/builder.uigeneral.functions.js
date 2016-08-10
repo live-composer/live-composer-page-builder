@@ -188,13 +188,17 @@ jQuery(document).on( 'click', '.dslca-close-composer-hook', function(e){
 
 	e.preventDefault();
 
+	var redirect_url = jQuery(this).attr('href');
+
 	if ( ! jQuery('body').hasClass('dslca-saving-in-progress') ) {
 
 		LiveComposer.Builder.UI.CModalWindow({
 
 			title: DSLCString.str_exit_title,
 			content: DSLCString.str_exit_descr,
-			confirm: window.location.reload
+			confirm: function() {
+				window.location = redirect_url;
+			}
 		});
 
 		/*dslc_js_confirm( 'disable_lc', '<span class="dslca-prompt-modal-title">' +

@@ -195,7 +195,7 @@ class DSLC_Image extends DSLC_Module {
 				'min' => 0,
 				'max' => 10,
 				'increment' => 1,
-				
+
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -355,6 +355,17 @@ class DSLC_Image extends DSLC_Module {
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-image, .dslc-image a, .dslc-image img',
 				'affect_on_change_rule' => 'width',
+				'section' => 'styling',
+			),
+
+			array(
+				'label' => __( 'Box Shadow', 'live-composer-page-builder' ),
+				'id' => 'css_box_shadow',
+				'std' => '',
+				'type' => 'box_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-image',
+				'affect_on_change_rule' => 'box-shadow',
 				'section' => 'styling',
 			),
 

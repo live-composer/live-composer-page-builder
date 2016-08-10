@@ -34,7 +34,7 @@ function dslc_st_init() {
 		),
 		'public' => true,
 		'exclude_from_search' => true,
-		'publicly_queryable' => false,
+		'publicly_queryable' => true,
 		'supports' => array( 'title', 'custom-fields', 'thumbnail' ),
 		'capabilities' => array(
 			'publish_posts' => $capability,

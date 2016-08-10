@@ -54,7 +54,7 @@ function dslc_hf_init() {
 		),
 		'public' => true,
 		'exclude_from_search' => true,
-		'publicly_queryable' => false,
+		'publicly_queryable' => true,
 		'supports' => array('title', 'custom-fields', 'author', 'thumbnail'),
 		'capabilities' => array(
 			'publish_posts' => $capability,
