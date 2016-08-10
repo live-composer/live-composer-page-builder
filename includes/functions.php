@@ -156,7 +156,7 @@ function dslc_unregister_module( $module_id ) {
  *
  * @since 1.0
  */
-function dslc_module_settings( $options, $custom = false ) {
+function dslc_module_settings( $options, $module_id ) {
 
 	// Array to hold the settings.
 	$settings = array();
@@ -166,24 +166,32 @@ function dslc_module_settings( $options, $custom = false ) {
 
 		if ( isset( $_POST[ $option['id'] ] ) ) {
 
+			$settings[ $option['id'] ] = $_POST[ $option['id'] ];
+
 			/**
 			 * Extension developers can decide for themselves
 			 * what escaping function to use for a particular option id.
 			 *
 			 * See switch block below for available options.
-			 */
+			 *
+			 * NOT READY - Cause too many problems for the current users
+			 * who have iframes, scripts and other hard to filter code.
+			 * Escape on output instead.
 
-			$default_settings_escape_function = 'esc_attr';
-			$custom_settings_escape_function = $default_settings_escape_function;
-			$custom_settings_escape_function = apply_filters( 'dslc_module_settings_cleaning_function', $default_settings_escape_function, $option['id'] );
+
+			$escape_function_default = 'esc_attr';
+			$escape_function_custom = $escape_function_default;
+			$escape_function_custom = apply_filters( 'dslc_module_settings_sanitize_function', $escape_function_default, $option['id'], $module_id );
 
 			// If value set use it?
 			if ( 'content' === $option['id'] ) {
 
 				$settings[ $option['id'] ] = wp_kses_post( $_POST[ $option['id'] ] );
-			} elseif ( $custom_settings_escape_function !== $default_settings_escape_function ) {
 
-				switch ( $custom_settings_escape_function ) {
+
+			} elseif ( $escape_function_custom !== $escape_function_default ) {
+
+				switch ( $escape_function_custom ) {
 					case 'wp_kses_post':
 						$settings[ $option['id'] ] = wp_kses_post( $_POST[ $option['id'] ] );
 						break;
@@ -240,6 +248,8 @@ function dslc_module_settings( $options, $custom = false ) {
 
 				$settings[ $option['id'] ] = esc_attr( $_POST[ $option['id'] ] );
 			}
+			*/
+
 		} else {
 			// If value not set use default?
 			$settings[ $option['id'] ] = $option['std'];

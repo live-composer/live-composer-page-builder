@@ -171,6 +171,9 @@ function dslc_ajax_add_module( $atts ) {
 		// Array $all_opts - has a structure of the module setting (not actual data).
 		$all_opts = $module_instance->options();
 
+		// Module type. Like 'DSLC_Html'.
+		$moudle_id = $module_instance->module_id;
+
 		/**
 		 * Array $module_settings - has all the module settings (actual data).
 		 * Ex.: [css_bg_color] => rgb(184, 61, 61).
@@ -181,7 +184,7 @@ function dslc_ajax_add_module( $atts ) {
 		 * Function dslc_module_settings get current module settings
 		 * form $_POST[ $option['id'] ].
 		 */
-		$module_settings = dslc_module_settings( $all_opts );
+		$module_settings = dslc_module_settings( $all_opts, $moudle_id  );
 
 		// Append ID to settings.
 		$module_settings['module_instance_id'] = $module_instance_id;
@@ -797,16 +800,10 @@ function dslc_ajax_save_composer( $atts ) {
 		$response = array();
 
 		$composer_code = '';
-		$content_for_search = '';
 
 		// The composer code.
 		if ( isset( $_POST['dslc_code'] ) ) {
 			$composer_code = $_POST['dslc_code'];
-		}
-
-		// The content for search.
-		if ( isset( $_POST['dslc_content_for_search'] ) ) {
-			$content_for_search = $_POST['dslc_content_for_search'];
 		}
 
 		// The ID of the post/page.
@@ -827,13 +824,6 @@ function dslc_ajax_save_composer( $atts ) {
 			$response['status'] = 'failed';
 		}
 
-		// Add/update the post/page with the content for search
-		// wp_kses_post – Sanitize content for allowed HTML tags for post content.
-		update_post_meta( $post_id, 'dslc_content_for_search', wp_kses_post( $content_for_search ) );
-
-		// Delete draft code.
-		delete_post_meta( $post_id, 'dslc_code_draft' );
-
 		// Encode response.
 		$response_json = wp_json_encode( $response );
 
@@ -845,6 +835,21 @@ function dslc_ajax_save_composer( $atts ) {
 		if ( function_exists( 'wp_cache_post_change' ) ) {
 			$GLOBALS['super_cache_enabled'] = 1;
 			wp_cache_post_change( $post_id );
+		}
+
+		// Delete draft code.
+		delete_post_meta( $post_id, 'dslc_code_draft' );
+
+		$content_for_search = '';
+
+
+		// The content for search.
+		if ( isset( $_POST['dslc_content_for_search'] ) ) {
+			$content_for_search = $_POST['dslc_content_for_search'];
+
+			// Add/update the post/page with the content for search
+			// wp_kses_post – Sanitize content for allowed HTML tags for post content.
+			update_post_meta( $post_id, 'dslc_content_for_search', wp_kses_post( $content_for_search ) );
 		}
 
 		// Au revoir.
