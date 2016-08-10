@@ -73,4 +73,43 @@ var LiveComposer = {
 			});
 		}
 	}
+
+	/**
+	 * Inserts module fixing inline scripts bug
+	 *
+	 * @param {string} moduleHTML
+	 * @param {string} afterObject after what module should be inserted
+	 *
+	 * @return {DOM} inserted object
+	 */
+	LiveComposer.Builder.Helpers.insertModule = function( moduleHTML, afterObject ) {
+
+		var newModule = jQuery(moduleHTML),
+			afterObject = jQuery(afterObject);
+
+		var scripts = [];
+
+		newModule.find('script').each(function(){
+
+			scripts.push(this.innerHTML);
+			this.parentNode.removeChild(this);
+		});
+
+		// Insert 'updated' module output after module we are editing.
+		// && Delete 'old' instance of the module we are editing.
+		afterObject
+			.after(newModule)
+			.remove();
+
+		scripts.forEach(function(item) {
+
+			var script = LiveComposer.Builder.PreviewFrame[0].createElement('script');
+			script.innerHTML = item;
+			script.type = 'text/javascript';
+
+			LiveComposer.Builder.PreviewFrame[0].getElementById(newModule[0].id).appendChild(script);
+		});
+
+		return newModule;
+	}
 }());

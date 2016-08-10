@@ -526,8 +526,12 @@ function dslc_drag_and_drop() {
 
 					// Add output
 					// TODO: optimize jQuery in the string below
-					var dslcJustAdded = jQuery(moduleOutput).insertAfter( jQuery('.dslca-module', modulesArea) ) ; /*.appendTo(modulesArea);*/
-					jQuery('.dslca-module', modulesArea).remove();
+
+					var dslcJustAdded = LiveComposer.
+										Builder.
+										Helpers.
+										insertModule( moduleOutput, jQuery('.dslca-module', modulesArea) );
+
 
 					setTimeout( function(){
 						LiveComposer.Builder.PreviewFrameContext.dslc_masonry( dslcJustAdded );

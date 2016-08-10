@@ -571,31 +571,12 @@ function dslc_module_output_altered( callback ) {
 
 			LiveComposer.Builder.UI.clearUtils();
 
-			// Fixing inline scripts bug in third-party plugins
-			var newModule = jQuery(response.output);
-			var scripts = [];
-
-			newModule.find('script').each(function(){
-
-				scripts.push(this.innerHTML);
-				jQuery(this).remove();
-			});
-
-			// Insert 'updated' module output after module we are editing.
-			dslcModule.after(newModule);
-
-			// Delete 'old' instance of the module we are editing.
-			dslcModule.remove();
+			var newModule = LiveComposer.
+								Builder.
+								Helpers.
+								insertModule( response.output, dslcModule );
 
 			newModule.addClass('dslca-module-being-edited');
-
-			scripts.forEach(function(item) {
-
-				var script = LiveComposer.Builder.PreviewFrameContext.createElement('script');
-				script.innerHTML = item;
-				script.type = 'text/javascript';
-				newModule.append(script);
-			});
 
 			// TODO: Add new postponed action to run after all done
 
