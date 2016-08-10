@@ -35,6 +35,10 @@ var LiveComposer = {
 
 	LiveComposer.Builder.Flags = {
 
+		panelOpened: false, // Settings panel opened
+
+		// Used to prevent multiple code generation when
+		// cancelling row edits
 		generate_code_after_row_changed: true
 	};
 

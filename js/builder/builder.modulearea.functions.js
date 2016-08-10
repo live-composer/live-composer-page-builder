@@ -31,6 +31,18 @@
 		});
 	}
 
+
+	var actionAvail = function() {
+
+		if ( LiveComposer.Builder.Flags.panelOpened ) {
+
+			LiveComposer.Builder.UI.shakePanelConfirmButton();
+			return false;
+		}
+
+		return true;
+	}
+
 	/**
 	 * Action - Automatically Add a Row if Empty
 	 */
@@ -52,6 +64,9 @@
 
 		e.preventDefault();
 
+		// Check if action can be fired
+		if ( !actionAvail() ) return false;
+
 		if ( ! jQuery(this).hasClass('dslca-action-disabled') ) {
 
 			var modulesArea = jQuery(this).closest('.dslc-modules-area');
@@ -65,6 +80,9 @@
 	LiveComposer.Builder.PreviewFrame.on( 'click', '.dslca-delete-modules-area-hook', function(e){
 
 		e.preventDefault();
+
+		// Check if action can be fired
+		if ( !actionAvail() ) return false;
 
 		if ( ! jQuery(this).hasClass('dslca-action-disabled') ) {
 
@@ -140,6 +158,9 @@
 	LiveComposer.Builder.PreviewFrame.on( 'click', '.dslca-add-modules-area-hook', function(e){
 
 		e.preventDefault();
+
+		// Check if action can be fired
+		if ( !actionAvail() ) return false;
 
 		dslc_modules_area_add( jQuery(this).closest('.dslc-modules-section').find('.dslc-modules-section-inner') );
 	});
@@ -361,9 +382,15 @@ function dslc_modules_area_width_set( area, newWidth ) {
 		.data('size', newWidth);
 
 	// Call other functions
+	LiveComposer.Builder.PreviewFrameContext.dslc_masonry();
+
+	if ( LiveComposer.Builder.Flags.panelOpened ) {
+
+		return false;
+	}
+
 	dslc_generate_code();
 	dslc_show_publish_button();
-	LiveComposer.Builder.PreviewFrameContext.dslc_masonry();
 
 }
 
