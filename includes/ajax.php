@@ -122,7 +122,7 @@ function dslc_ajax_add_module( $atts ) {
 
 		if ( ! class_exists( $module_id ) ) {
 
-			header('HTTP/1.1 400 Bad Request', true, 400);
+			header( 'HTTP/1.1 400 Bad Request', true, 400 );
 			die();
 		}
 
@@ -177,9 +177,6 @@ function dslc_ajax_add_module( $atts ) {
 		// Generate settings.
 		// Array $all_opts - has a structure of the module setting (not actual data).
 		$all_opts = $module_instance->options();
-
-		// Module type. Like 'DSLC_Html'.
-		$moudle_id = $module_instance->module_id;
 
 		/**
 		 * Array $module_settings - has all the module settings (actual data).
