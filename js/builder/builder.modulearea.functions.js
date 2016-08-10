@@ -338,6 +338,10 @@ function dslc_modules_area_copy( area ) {
 	dslc_drag_and_drop();
 	dslc_show_publish_button();
 
+	// Need to call this function to update last column class for the module areas.
+	dslc_generate_code();
+
+
 }
 
 /**

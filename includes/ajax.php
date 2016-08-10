@@ -184,7 +184,7 @@ function dslc_ajax_add_module( $atts ) {
 		 * Function dslc_module_settings get current module settings
 		 * form $_POST[ $option['id'] ].
 		 */
-		$module_settings = dslc_module_settings( $all_opts, $moudle_id  );
+		$module_settings = dslc_module_settings( $all_opts, $moudle_id );
 
 		// Append ID to settings.
 		$module_settings['module_instance_id'] = $module_instance_id;
@@ -246,7 +246,6 @@ function dslc_ajax_add_module( $atts ) {
 
 		// Good night.
 		exit;
-
 	}
 
 } add_action( 'wp_ajax_dslc-ajax-add-module', 'dslc_ajax_add_module' );
@@ -839,9 +838,6 @@ function dslc_ajax_save_composer( $atts ) {
 
 		// Delete draft code.
 		delete_post_meta( $post_id, 'dslc_code_draft' );
-
-		$content_for_search = '';
-
 
 		// The content for search.
 		if ( isset( $_POST['dslc_content_for_search'] ) ) {
