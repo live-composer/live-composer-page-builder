@@ -1632,6 +1632,13 @@ function dslc_module_options_numeric( field ) {
 
 		jQuery(sliderInput).keyup(function(e){
 
+			// In some rare cases we have the next error:
+			// TypeError: undefined is not an object (evaluating 'a.key.match')
+			if (undefined === e) {
+
+				return false;
+			}
+
 			// Shift + Up/Down
 			if( e.shiftKey ) {
 
@@ -1657,6 +1664,7 @@ function dslc_module_options_numeric( field ) {
 			if ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105)) {
 				jQuery(this).trigger('change');
 			}
+
 
 			if( ! e.key.match(/\d/) && e.keyCode != 8 && e.keyCode != 39 && e.keyCode != 37 && e.keyCode != 46 ) {
 

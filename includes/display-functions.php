@@ -62,6 +62,7 @@ function dslc_display_composer() {
 					<!-- Tabs -->
 					<a href="#" class="dslca-go-to-section-hook dslca-go-to-section-modules dslca-active" data-section=".dslca-modules"><span class="dslca-icon dslc-icon-th-large"></span></a>
 					<a href="#" class="dslca-go-to-section-hook dslca-go-to-section-templates" data-section=".dslca-templates"><span class="dslca-icon dslc-icon-cloud"></span></a>
+					<a href="#" class="dslca-show-js-error-hook" ><span class="dslca-icon dslc-icon-bug"></span> Error Detected</a>
 
 					<!-- Module Option filters -->
 					<span class="dslca-options-filter-hook" data-section="functionality"><span class="dslca-icon dslc-icon-cog"></span> <?php _e( 'Functionality', 'live-composer-page-builder' ); ?></span>
@@ -266,6 +267,7 @@ function dslc_display_composer() {
 				<!-- Module Template Export -->
 				<textarea id="dslca-code"></textarea>
 				<textarea id="dslca-content-for-search"></textarea>
+				<textarea id="dslca-js-errors-report"></textarea>
 
 				<div class="dslca-container-loader">
 					<div class="dslca-container-loader-inner followingBallsGWrap">

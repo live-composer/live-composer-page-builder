@@ -12,21 +12,33 @@
  * - dslc_drag_and_drop ( Initiate drag and drop functionality )
  ***********************************/
 
- window.onerror = function(e, f, l, c) {
+/**
+ * Try to detect JS errors in WP Admin part.
+ */
+ window.onerror = function( error, file, line, char ) {
 
- 		var title = 'Third-party plugin JS error';
+	dslca_generate_error_report ( error, file, line, char );
+}
 
- 		if( f.match("wp-content\/plugins\/Live-Composer\/js") != null ) {
+/**
+ * Hook - Open Error Log button
+ */
+jQuery(document).on( 'click', '.dslca-show-js-error-hook', function(e){
 
- 			title = 'Live Composer JS error';
- 		}
+	e.preventDefault();
+
+	var errors_container = document.getElementById('dslca-js-errors-report');
+
+	if ( ! jQuery('body').hasClass('dslca-saving-in-progress') ) {
 
 		LiveComposer.Builder.UI.CModalWindow({
 
-			title: title,
-			content: '<textarea class="js-error-text" disabled>' + e + ' in file "' + f + '" on line ' + l + ', char ' + c + '</textarea>'
+			title: '<a href="https://livecomposerplugin.com/support/support-request/" target="_blank"><span class="dslca-icon dslc-icon-comment"></span> &nbsp; Open Support Ticket</a>',
+			content: '<span class="dslca-error-report">' + errors_container.value + '</span>',
 		});
 	}
+});
+
 
 /**
  * UI - GENERAL - Document Ready
@@ -34,21 +46,16 @@
 
 jQuery(document).ready(function($) {
 
-	jQuery("#page-builder-frame")[0].contentWindow.onerror = function(e, f, l, c) {
+	/**
+	 * Try to detect JS errors in preview area.
+	 */
+	jQuery("#page-builder-frame")[0].contentWindow.onerror = function( error, file, line, char ) {
 
-			var title = 'Preview Frame: third-party plugin JS error';
-
-	 		if( f.match("wp-content\/plugins\/Live-Composer\/js") != null ) {
-
-	 			title = 'Preview Frame: Live Composer JS error';
-	 		}
-
-			LiveComposer.Builder.UI.CModalWindow({
-
-			title: title,
-			content: '<textarea class="js-error-text" disabled>' + e + ' in file "' + f + '" on line ' + l + ', char ' + c + '</textarea>'
-		});
+		dslca_generate_error_report ( error, file, line, char );
 	}
+
+	// Put JS error log data in a hidden textarea.
+	dslca_update_report_log();
 
  	// On iframe loaded
  	jQuery("#page-builder-frame").on('load', function(){
@@ -962,5 +969,47 @@ function dslc_notice_on_refresh(e) {
 			/*dslc_js_confirm( 'disable_lc', '<span class="dslca-prompt-modal-title">' + DSLCString.str_refresh_title +
 			 '</span><span class="dslca-prompt-modal-descr">' + DSLCString.str_refresh_descr + '</span>', document.URL );*/
 		}
+	}
+}
+
+/**
+ * Generate report about JS error and save it in a local storage.
+ * @param  String error Error text
+ * @param  String file  File with error
+ * @param  String line  Line with error
+ * @param  String char  Column with error
+ * @return void
+ */
+function dslca_generate_error_report ( error, file, line, char ) {
+
+	var title = 'JavaScript error detected in a third-party plugin';
+
+	if ( file.match("wp-content\/plugins\/live-composer-page-builder\/js") != null ) {
+
+		title = 'Live Composer returned JS error';
+	}
+
+	var error_report = '';
+	error_report += '<br /><strong style="color:#E55F5F;">' + title + '</strong><br />';
+	error_report += error + '<br /> File "' + file + '", line ' + line + ', char ' + char + '<br />';
+
+	if ( 'undefined' !== typeof(Storage)) {
+		localStorage.setItem('js_errors_report', error_report);
+	}
+}
+
+/**
+ * Put in a hidden div#dslca-js-errors-report information from local storage
+ * @return void
+ */
+function dslca_update_report_log() {
+
+	var errors_container = document.getElementById('dslca-js-errors-report');
+	var error_report = localStorage.getItem('js_errors_report');
+
+	if ( null !== error_report ) {
+		errors_container.value = error_report;
+		localStorage.removeItem('js_errors_report');
+		document.querySelector( '.dslca-show-js-error-hook' ).setAttribute('style','visibility:visible');
 	}
 }

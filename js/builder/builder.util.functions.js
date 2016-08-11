@@ -54,6 +54,12 @@ function dslc_editable_content_gen_code( dslcField ) {
 
 	if ( dslcDebug ) console.log( 'dslc_editable_content_gen_code' );
 
+	// In some rare cases we have the next error:
+	// TypeError: undefined is not an object (evaluating 'dslcField.html().trim()...')
+	if ( undefined === dslcField ) {
+		return false;
+	}
+
 	var dslcModule, dslcContent, dslcFieldID;
 
 	dslcModule = dslcField.closest('.dslc-module-front');

@@ -196,6 +196,49 @@ body a:focus {
 	box-sizing: border-box;
 }
 
+/* Error status button */
+.dslca-show-js-error-hook {
+	padding: 10px;
+	bottom: -1px;
+	display: inline-block;
+	color: rgba(199, 199, 199, 0.64)!important;
+	visibility: hidden;
+}
+
+.dslca-show-js-error-hook:hover {
+	color: #ff4040;
+}
+
+.dslca-show-js-error-hook  .dslca-icon {
+	color: #ff4040;
+	margin-right: 5px;
+	margin-left: 8px;
+}
+
+#dslca-js-errors-report {
+	display: none;
+}
+
+.dslca-error-report {
+	display: block;
+	overflow: scroll;
+	text-align: left;
+	white-space: nowrap;
+	font-size:12px;
+	max-height: 120px;
+
+	-webkit-touch-callout: text;
+	-webkit-user-select: text;
+	-khtml-user-select: text;
+	-moz-user-select: text;
+	-ms-user-select: text;
+	user-select: text;
+}
+
+.dslca-error-report:hover {
+	cursor: text;
+}
+
 	/**
 	 * Header
 	 */
@@ -1662,7 +1705,7 @@ body a:focus {
 			background: #e5855f;
 			/*border: 1px solid #d97a54;*/
 			border-radius: 3px;
-			color: #fff;
+			color: #fff!important;
 			cursor: pointer;
 			display: block;
 			font-size: 15px;
