@@ -54,6 +54,12 @@ function dslc_editable_content_gen_code( dslcField ) {
 
 	if ( dslcDebug ) console.log( 'dslc_editable_content_gen_code' );
 
+	// In some rare cases we have the next error:
+	// TypeError: undefined is not an object (evaluating 'dslcField.html().trim()...')
+	if ( undefined === dslcField ) {
+		return false;
+	}
+
 	var dslcModule, dslcContent, dslcFieldID;
 
 	dslcModule = dslcField.closest('.dslc-module-front');
@@ -576,7 +582,10 @@ jQuery(document).ready(function($) {
 			/**
 			 * All other option types
 			 */
-			if ( ! dslcOption.hasClass('dslca-module-edit-field-font')  ) {
+			if ( ! dslcOption.hasClass('dslca-module-edit-field-font') &&
+					dslcOption.data('affect-on-change-el') != null &&
+					dslcOption.data('affect-on-change-rule') != null
+					 ) {
 
 				var dslcExt = dslcOption.data('ext') || '';
 				var dslcAffectOnChangeEl = dslcOption.data('affect-on-change-el');
@@ -624,6 +633,13 @@ jQuery(document).ready(function($) {
 			 */
 
 			jQuery( '.dslca-module-option-front[data-id="' + dslcOptionID + '"]', dslcModule ).val( dslcAffectOnChangeValOrig );
+
+			LiveComposer.Utils.publish( 'moduleChanged', {
+
+				moduleId: dslcModule[0].id,
+				optionID: dslcOptionID,
+				optionVal: dslcAffectOnChangeValOrig
+			});
 		}
 	});
 

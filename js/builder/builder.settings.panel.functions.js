@@ -123,6 +123,7 @@ jQuery(document).ready(function($){
 
 			LiveComposer.Builder.UI.initInlineEditors();
 			LiveComposer.Builder.UI.unloadOptionsDeps();
+			LiveComposer.Builder.Flags.panelOpened = false;
 		});
 
 		jQuery('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
@@ -142,6 +143,7 @@ jQuery(document).ready(function($){
 
 			LiveComposer.Builder.UI.initInlineEditors();
 			LiveComposer.Builder.UI.unloadOptionsDeps();
+			LiveComposer.Builder.Flags.panelOpened = false;
 		});
 
 		jQuery('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
@@ -410,6 +412,16 @@ jQuery(document).ready(function($){
 			LiveComposer.Builder.PreviewFrame[0].getElementById(id).innerHTML = params.styleContent;
 		}
 	}
+
+	LiveComposer.Builder.UI.shakePanelConfirmButton = function() {
+
+		jQuery('.dslca-module-edit-save').addClass('lc-shake-effect active');
+
+		setTimeout(function(){
+
+			jQuery('.dslca-module-edit-save').removeClass('lc-shake-effect active');
+		}, 1000);
+	};
 }());
 
 
@@ -1620,6 +1632,13 @@ function dslc_module_options_numeric( field ) {
 
 		jQuery(sliderInput).keyup(function(e){
 
+			// In some rare cases we have the next error:
+			// TypeError: undefined is not an object (evaluating 'a.key.match')
+			if (undefined === e) {
+
+				return false;
+			}
+
 			// Shift + Up/Down
 			if( e.shiftKey ) {
 
@@ -1645,6 +1664,7 @@ function dslc_module_options_numeric( field ) {
 			if ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105)) {
 				jQuery(this).trigger('change');
 			}
+
 
 			if( ! e.key.match(/\d/) && e.keyCode != 8 && e.keyCode != 39 && e.keyCode != 37 && e.keyCode != 46 ) {
 
