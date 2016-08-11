@@ -500,6 +500,16 @@ function dslc_save_preset( $preset_name, $preset_code_raw, $module_id ) {
 	// Clean up ( step 1 - get data ).
 	$preset_code_raw = maybe_unserialize( base64_decode( $preset_code_raw ) );
 	$preset_code = array();
+
+	// The ID of the module to add.
+	$module_id = esc_attr( $module_id );
+
+	if ( ! class_exists( $module_id ) ) {
+
+		header( 'HTTP/1.1 400 Bad Request', true, 400 );
+		die();
+	}
+
 	$module = new $module_id();
 	$module_options = $module->options();
 
