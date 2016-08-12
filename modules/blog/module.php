@@ -3328,8 +3328,7 @@ class DSLC_Blog extends DSLC_Module {
 								?>
 
 									<div class="dslc-post-filters">
-
-										<span class="dslc-post-filter dslc-active" data-id=" "><?php _ex( 'All', 'Post Filter', 'live-composer-page-builder' ); ?></span>
+										<span class="dslc-post-filter dslc-active dslca-editable-content" data-id="<?php if ( $dslc_is_admin ){ echo 'contenteditable'; } else { echo ' '; } ?>" data-type="simple" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?> ><?php echo $options['main_filter_title_all']; ?></span>
 
 										<?php foreach ( $cats_array as $cat_slug => $cat_name ) : ?>
 											<span class="dslc-post-filter dslc-inactive" data-id="<?php echo $cat_slug; ?>"><?php echo $cat_name; ?></span>

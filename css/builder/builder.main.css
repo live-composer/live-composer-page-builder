@@ -285,7 +285,7 @@ body a:focus {
 		.dslca-header .dslca-options-filter-hook,
 		.dslca-header .dslca-row-options-filter-hook,
 		.dslca-pseudo-header .dslca-pseudo-options-filter-hook {
-			bottom: -1px;
+			bottom: 0;
 			background: #313131;
 			border-radius: 3px 3px 0 0;
 			color: #adadad;
@@ -1076,7 +1076,7 @@ body a:focus {
 			}
 
 			.dslca-module-edit-options-tab-hook:hover,
-			.dslca-pseudo-module-edit-options-tab-hook:hiver {
+			.dslca-pseudo-module-edit-options-tab-hook:hover {
 				background: rgba(169, 239, 255, 0.17);
 				color: #fff;
 			}

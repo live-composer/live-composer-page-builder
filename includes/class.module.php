@@ -314,7 +314,7 @@ class DSLC_Module {
 				'min' => 0,
 				'max' => 10,
 				'increment' => 1,
-				
+
 				'std' => '1',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -619,7 +619,7 @@ class DSLC_Module {
 			 * Responsive Phone
 			 */
 
-					array(
+			array(
 				'label' => 'Filters - Font Size',
 				'id' => 'css_res_p_filter_font_size',
 				'min' => 0,
@@ -711,6 +711,14 @@ class DSLC_Module {
 				'label' => 'View All Title',
 				'id' => 'main_heading_link_title',
 				'std' => 'VIEW ALL',
+				'type' => 'text',
+				'visibility' => 'hidden'
+			),
+
+			array(
+				'label' => 'Post Filter – All',
+				'id' => 'main_filter_title_all',
+				'std' => 'All',
 				'type' => 'text',
 				'visibility' => 'hidden'
 			),
@@ -1244,7 +1252,7 @@ class DSLC_Module {
 				'min' => 0,
 				'max' => 10,
 				'increment' => 1,
-				
+
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1508,7 +1516,7 @@ class DSLC_Module {
 				'min' => 0,
 				'max' => 10,
 				'increment' => 1,
-				
+
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1646,7 +1654,7 @@ class DSLC_Module {
 				'min' => 0,
 				'max' => 10,
 				'increment' => 1,
-				
+
 				'std' => '1',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -2271,7 +2279,7 @@ class DSLC_Module {
 
 		?>
 
-			<?php 
+			<?php
 			// If Live Composer is in editing mode: output some additional (hidden) elements.
 			if ( DS_LIVE_COMPOSER_ACTIVE && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) : ?>
 

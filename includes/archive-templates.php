@@ -265,8 +265,7 @@ function dslc_flush_permalinks_on_404() {
 			return;
 		}
 	}
-}
-add_action( 'template_redirect', 'dslc_flush_permalinks_on_404' );
+} add_action( 'template_redirect', 'dslc_flush_permalinks_on_404' );
 
 /**
  * Redirect page with ?dslc=active

@@ -253,33 +253,44 @@ function DSLC_EditorInterface_post_options( $object, $metabox ) {
 
 						<div class="dslca-post-option-field-inner-wrapper">
 
-						<?php
-						$curr_value_array = maybe_unserialize( $curr_value_no_esc );
-						if ( ! is_array( $curr_value_array ) ) {
-							$curr_value_array = array();
-						}
+							<?php
+							$curr_value_array = maybe_unserialize( $curr_value_no_esc );
+							if ( ! is_array( $curr_value_array ) ) {
+								$curr_value_array = array();
+							}
 
-						if ( isset( $curr_value ) && '' !== $curr_value && empty( $curr_value_array ) ) {
-							$curr_value_array = explode( ' ', $curr_value );
-						}
+							if ( isset( $curr_value ) && '' !== $curr_value && empty( $curr_value_array ) ) {
+								$curr_value_array = explode( ' ', $curr_value );
+							}
 
-						?>
-						<?php foreach ( $post_option['choices'] as $key => $choice ) : ?>
+							?>
+							<?php foreach ( $post_option['choices'] as $key => $choice ) : ?>
 
-							<?php if ( 'list-heading' !== esc_attr( $choice['value'] ) ): ?>
+								<?php if ( 'list-heading' !== esc_attr( $choice['value'] ) ): ?>
 
-								<div class="dslca-post-option-field-choice">
-									<input type="checkbox" name="<?php echo esc_attr( $post_option['id'] ); ?>[]" id="<?php echo esc_attr( $post_option['id'] . $key ); ?>" value="<?php echo esc_attr( $choice['value'] ); ?>" <?php if ( in_array(  esc_attr( $choice['value'] ),  $curr_value_array ) ) echo 'checked="checked"'; ?> /> <label for="<?php echo  esc_attr( $post_option['id'] . $key ); ?>"><?php echo  esc_html( $choice['label'] ); ?></label>
-								</div><!-- .dslca-post-option-field-choice -->
+									<div class="dslca-post-option-field-choice">
+										<input type="checkbox" name="<?php echo esc_attr( $post_option['id'] ); ?>[]" id="<?php echo esc_attr( $post_option['id'] . $key ); ?>" value="<?php echo esc_attr( $choice['value'] ); ?>" <?php if ( in_array(  esc_attr( $choice['value'] ),  $curr_value_array ) ) echo 'checked="checked"'; ?> /> <label for="<?php echo  esc_attr( $post_option['id'] . $key ); ?>"><?php echo  esc_html( $choice['label'] ); ?></label>
+									</div><!-- .dslca-post-option-field-choice -->
 
-							<?php else: ?>
+								<?php else: ?>
 
-								</div>
-								<div class="dslca-post-option-field-inner-wrapper">
-								<p><strong><?php echo  esc_html( $choice['label'] ); ?></strong></p>
+									<?php if ( 0 !== $key ) : ?>
+										</div>
+										<div class="dslca-post-option-field-inner-wrapper">
+									<?php endif;?>
 
-							<?php endif; ?>
-						<?php endforeach; ?>
+										<p>
+										<strong><?php echo  esc_html( $choice['label'] ); ?></strong>
+										</p>
+										<?php
+										if ( isset( $choice['description'] ) ) {
+											echo  '<p class="control-description">' . esc_html( $choice['description'] ) . '</p>';
+										}
+										?>
+
+
+								<?php endif; ?>
+							<?php endforeach; ?>
 
 						</div>
 

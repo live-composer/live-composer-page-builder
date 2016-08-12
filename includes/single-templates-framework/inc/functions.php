@@ -33,7 +33,7 @@ function dslc_st_init() {
 			'parent' => __( 'Parent Template', 'live-composer-page-builder' ),
 		),
 		'public' => true,
-		'exclude_from_search' => true,
+		// 'exclude_from_search' => true, // 404 page is broken with this parameter.
 		'publicly_queryable' => true,
 		'supports' => array( 'title', 'custom-fields', 'thumbnail' ),
 		'capabilities' => array(
@@ -59,7 +59,8 @@ function dslc_st_init() {
 	$template_for = array();
 
 	$template_for[] = array(
-		'label' => __( 'Single Posts:', 'live-composer-page-builder' ),
+		'label' => __( 'Single Post Templates:', 'live-composer-page-builder' ),
+		'description' => __( 'Design for a single blog post or custom post type entries', 'live-composer-page-builder' ),
 		'value' => 'list-heading',
 	);
 
@@ -72,7 +73,8 @@ function dslc_st_init() {
 	}
 
 	$template_for[] = array(
-		'label' => __( 'Post Listing Pages:', 'live-composer-page-builder' ),
+		'label' => __( 'Archive Index Templates:', 'live-composer-page-builder' ),
+		'description' => __( 'Design for posts listings like Category, Tag, Date or Custom Taxonomies', 'live-composer-page-builder' ),
 		'value' => 'list-heading',
 	);
 
@@ -85,7 +87,8 @@ function dslc_st_init() {
 	}
 
 	$template_for[] = array(
-		'label' => __( 'Special Pages:', 'live-composer-page-builder' ),
+		'label' => __( 'Special Page Templates:', 'live-composer-page-builder' ),
+		'description' => __( 'Design a custom "Page Not Found" screen or search results page', 'live-composer-page-builder' ),
 		'value' => 'list-heading',
 	);
 
@@ -109,8 +112,8 @@ function dslc_st_init() {
 		'show_on' => 'dslc_templates',
 		'options' => array(
 			array(
-				'label' => __( 'Post Type', 'live-composer-page-builder' ),
-				'descr' => __( 'Which post type is this template for?', 'live-composer-page-builder' ),
+				'label' => __( 'Use this template to output...', 'live-composer-page-builder' ),
+				// 'descr' => __( '', 'live-composer-page-builder' ),
 				'std' => '',
 				'id' => 'dslc_template_for',
 				'type' => 'checkbox',

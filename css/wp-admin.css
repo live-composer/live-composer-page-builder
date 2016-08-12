@@ -19,3 +19,19 @@
 .wp-submenu > li {
 	position: relative;
 }
+
+/* Columns in checkbox lists on Template creation page */
+#post-option-dslc_template_for .dslca-post-option-field {
+	display: flex;
+}
+
+#post-option-dslc_template_for  .dslca-post-option-field-inner-wrapper {
+	flex-grow: 1;
+	flex-basis: 32%;
+	padding-right: 5%;
+}
+
+.dslca-post-option-field-inner-wrapper .control-description {
+	font-size: 12px;
+	opacity: .75;
+}

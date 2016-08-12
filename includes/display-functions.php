@@ -87,8 +87,6 @@ function dslc_display_composer() {
 					</div><!-- .dslca-row-edit-actions -->
 
 					<a href="#" class="dslca-show-js-error-hook" ><span class="dslca-icon dslc-icon-bug"></span><?php esc_attr_e( 'Error Detected', 'live-composer-page-builder' ); ?></a>
-
-					<script>.test();</script>
 				</div><!-- .dslca-header -->
 
 				<div class="dslca-actions">

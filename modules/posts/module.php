@@ -24,11 +24,11 @@ class DSLC_Posts extends DSLC_Module {
 
 	function options() {
 
-		// Get registered post types
+		// Get registered post types.
 		$post_types = get_post_types( array('public' => true), 'objects' );
 		$post_types_choices = array();
 
-		// Generate usable array of post types
+		// Generate usable array of post types.
 		foreach ( $post_types as $post_type_id => $post_type ) {
 			$post_types_choices[] = array(
 				'label' => $post_type->labels->name,
@@ -36,7 +36,7 @@ class DSLC_Posts extends DSLC_Module {
 			);
 		}
 
-		// Options
+		// Options.
 		$dslc_options = array(
 
 			array(
@@ -337,7 +337,7 @@ class DSLC_Posts extends DSLC_Module {
 				'min' => 0,
 				'max' => 10,
 				'increment' => 1,
-				
+
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -599,7 +599,7 @@ class DSLC_Posts extends DSLC_Module {
 				'min' => 0,
 				'max' => 10,
 				'increment' => 1,
-				
+
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -825,7 +825,7 @@ class DSLC_Posts extends DSLC_Module {
 				'min' => 0,
 				'max' => 10,
 				'increment' => 1,
-				
+
 				'std' => '1',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1217,7 +1217,7 @@ class DSLC_Posts extends DSLC_Module {
 				'min' => 0,
 				'max' => 10,
 				'increment' => 1,
-				
+
 				'std' => '1',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1600,7 +1600,7 @@ class DSLC_Posts extends DSLC_Module {
 				'min' => 0,
 				'max' => 10,
 				'increment' => 1,
-				
+
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -2569,18 +2569,19 @@ class DSLC_Posts extends DSLC_Module {
 	function output( $options ) {
 
 		if ( is_feed() ) {
-			// Prevent category/tag feeds to stuck in an infinite loop
+			// Prevent category/tag feeds to stuck in an infinite loop.
 			return false;
 		}
 
 		global $dslc_active;
 
-		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
+		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 			$dslc_is_admin = true;
-		else
+		} else {
 			$dslc_is_admin = false;
+		}
 
-		// Fix slashes on apostrophes
+		// Fix slashes on apostrophes.
 		if ( isset( $options['button_text'] ) ) {
 			$options['button_text'] = stripslashes( $options['button_text'] );
 		}
@@ -2589,23 +2590,25 @@ class DSLC_Posts extends DSLC_Module {
 
 		/* CUSTOM START */
 
-		if ( ! isset( $options['excerpt_length'] ) ) $options['excerpt_length'] = 20;
+		if ( ! isset( $options['excerpt_length'] ) ) {
+			$options['excerpt_length'] = 20;
+		}
 
 		/**
 		 * Query
 		 */
 
-			// Fix for pagination
+			// Fix for pagination.
 			if ( is_front_page() ) { $paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1; } else { $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1; }
 
-			// Fix for pagination from other modules affecting this one when pag disabled
-			if ( $options['pagination_type'] == 'disabled' ) $paged = 1;
+			// Fix for pagination from other modules affecting this one when pag disabled.
+			if ( 'disabled' === $options['pagination_type'] ) $paged = 1;
 
-			// Fix for offset braking pagination
+			// Fix for offset braking pagination.
 			$query_offset = $options['offset'];
 			if ( $query_offset > 0 && $paged > 1 ) $query_offset = ( $paged - 1 ) * $options['amount'] + $options['offset'];
 
-			// General args
+			// General args.
 			$args = array(
 				'paged' => $paged,
 				'post_type' => $options['post_type'],
@@ -2614,61 +2617,68 @@ class DSLC_Posts extends DSLC_Module {
 				'orderby' => $options['orderby'],
 			);
 
-			// Add offset
+			// Add offset.
 			if ( $query_offset > 0 ) {
 				$args['offset'] = $query_offset;
 			}
 
 			if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-				$args['post_status'] = array('publish', 'private');
+				$args['post_status'] = array( 'publish', 'private' );
 			}
 
-			// Category args
-			if ( isset( $options['categories'] ) && $options['categories'] != '' ) {
+			// Category args.
+			if ( isset( $options['categories'] ) && '' !== $options['categories'] ) {
 				$cats_array = explode( ' ', $options['categories'] );
 				$args['category__in'] = $cats_array;
 			}
 
-			// Exlcude and Include arrays
+			// Exlcude and Include arrays.
 			$exclude = array();
 			$include = array();
 
-			// Exclude current post
-			if ( is_singular( get_post_type() ) )
+			// Exclude current post.
+			if ( is_singular( get_post_type() ) ) {
 				$exclude[] = get_the_ID();
+			}
 
-			// Exclude posts ( option )
-			if ( $options['query_post_not_in'] )
+			// Exclude posts ( option ).
+			if ( $options['query_post_not_in'] ) {
 				$exclude = array_merge( $exclude, explode( ' ', $options['query_post_not_in'] ) );
+			}
 
-			// Include posts ( option )
-			if ( $options['query_post_in'] )
+			// Include posts ( option ).
+			if ( $options['query_post_in'] ) {
 				$include = array_merge( $include, explode( ' ', $options['query_post_in'] ) );
+			}
 
-			// Include query parameter
-			if ( ! empty( $include ) )
+			// Include query parameter.
+			if ( ! empty( $include ) ) {
 				$args['post__in'] = $include;
+			}
 
-			// Exclude query parameter
-			if ( ! empty( $exclude ) )
+			// Exclude query parameter.
+			if ( ! empty( $exclude ) ) {
 				$args['post__not_in'] = $exclude;
+			}
 
-			// Author archive page
-			if ( is_author() && $options['query_alter'] == 'enabled' ) {
+			// Author archive page.
+			if ( is_author() && 'enabled' === $options['query_alter'] ) {
 				global $authordata;
 				$args['author__in'] = array($authordata->data->ID);
 			}
 
-			// No paging
-			if ( $options['pagination_type'] == 'disabled' )
+			// No paging.
+			if ( 'disabled' === $options['pagination_type'] ) {
 				$args['no_found_rows'] = true;
+			}
 
-			// Sticky Posts
-			if ( $options['sticky_posts'] == 'disabled' )
+			// Sticky Posts.
+			if ( 'disabled' === $options['sticky_posts'] ) {
 				$args['ignore_sticky_posts'] = true;
+			}
 
-			// Do the query
-			if ( ( is_category() || is_tag() || is_tax() || is_search() || is_date() ) && $options['query_alter'] == 'enabled' ) {
+			// Do the query.
+			if ( ( is_category() || is_tag() || is_tax() || is_search() || is_date() ) && 'enabled' === $options['query_alter'] ) {
 				global $wp_query;
 				$dslc_query = $wp_query;
 			} else {
@@ -2739,17 +2749,20 @@ class DSLC_Posts extends DSLC_Module {
 			$show_carousel_arrows = false;
 			$show_view_all_link = false;
 
-			if ( in_array( 'main_heading', $elements ) )
+			if ( in_array( 'main_heading', $elements, true ) )
 				$show_heading = true;
 
-			if ( ( $elements == 'all' || in_array( 'filters', $elements ) ) && $options['type'] !== 'carousel' )
+			if ( ( 'all' === $elements || in_array( 'filters', $elements, true ) ) && 'carousel' !== $options['type'] ) {
 				$show_filters = true;
+			}
 
-			if ( $options['type'] == 'carousel' && in_array( 'arrows', $carousel_elements ) )
+			if ( 'carousel' === $options['type'] && in_array( 'arrows', $carousel_elements, true ) ) {
 				$show_carousel_arrows = true;
+			}
 
-			if ( $show_heading || $show_filters || $show_carousel_arrows )
+			if ( $show_heading || $show_filters || $show_carousel_arrows ) {
 				$show_header = true;
+			}
 
 		/**
 		 * Carousel Items
@@ -2804,58 +2817,53 @@ class DSLC_Posts extends DSLC_Module {
 
 						<?php
 
-							$taxonomy_name = '';
-							if ( $show_filters ) {
+						$taxonomy_name = '';
+						if ( $show_filters ) {
 
-								$cats_array = array();
+							$cats_array = array();
 
-								$cats_count = 0;
+							$cats_count = 0;
 
-								if ( $dslc_query->have_posts() ) {
+							if ( $dslc_query->have_posts() ) {
 
-									while ( $dslc_query->have_posts() ) {
+								while ( $dslc_query->have_posts() ) {
 
-										$dslc_query->the_post();
+									$dslc_query->the_post();
 
-										$cats_count++;
+									$cats_count++;
 
-										if ( $cats_count == 1 ) {
+									if ( $cats_count == 1 ) {
 
-											$post_type_taxonomies = get_object_taxonomies( get_post_type(), 'objects' );
-											foreach ( $post_type_taxonomies as $taxonomy ) {
-												if ( $taxonomy->hierarchical == true ) {
-													$taxonomy_name = $taxonomy->name;
-												}
-											}
-
-										}
-
-										$post_cats = get_the_terms( get_the_ID(), $taxonomy_name );
-										if ( ! empty( $post_cats ) ) {
-											foreach ( $post_cats as $post_cat ) {
-												$cats_array[$post_cat->slug] = $post_cat->name;
+										$post_type_taxonomies = get_object_taxonomies( get_post_type(), 'objects' );
+										foreach ( $post_type_taxonomies as $taxonomy ) {
+											if ( $taxonomy->hierarchical == true ) {
+												$taxonomy_name = $taxonomy->name;
 											}
 										}
-
 									}
 
+									$post_cats = get_the_terms( get_the_ID(), $taxonomy_name );
+									if ( ! empty( $post_cats ) ) {
+										foreach ( $post_cats as $post_cat ) {
+											$cats_array[$post_cat->slug] = $post_cat->name;
+										}
+									}
 								}
-
-								?>
-
-									<div class="dslc-post-filters">
-
-										<span class="dslc-post-filter dslc-active" data-id=" "><?php _ex( 'All', 'Post Filter', 'live-composer-page-builder' ); ?></span>
-
-										<?php foreach ( $cats_array as $cat_slug => $cat_name ) : ?>
-											<span class="dslc-post-filter dslc-inactive" data-id="<?php echo $cat_slug; ?>"><?php echo $cat_name; ?></span>
-										<?php endforeach; ?>
-
-									</div><!-- .dslc-post-filters -->
-
-								<?php
-
 							}
+
+							?>
+
+								<div class="dslc-post-filters">
+									<span class="dslc-post-filter dslc-active dslca-editable-content" data-id="<?php if ( $dslc_is_admin ){ echo 'contenteditable'; } else { echo ' '; } ?>" data-type="simple" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?> ><?php echo $options['main_filter_title_all']; ?></span>
+
+									<?php foreach ( $cats_array as $cat_slug => $cat_name ) : ?>
+										<span class="dslc-post-filter dslc-inactive" data-id="<?php echo $cat_slug; ?>"><?php echo $cat_name; ?></span>
+									<?php endforeach; ?>
+
+								</div><!-- .dslc-post-filters -->
+
+							<?php
+						}
 
 						?>
 

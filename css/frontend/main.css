@@ -441,7 +441,10 @@ body.rtl .dslc-last-col {
 	position: relative;
 	font-size: 14px;
 	line-height: 25px;
-	/*font-family: '';*/
+}
+
+.dslc-module-DSLC_Image .dslc-notification {
+	font-family: 'Open Sans', sans-serif;
 }
 
 	.dslc-notification .dslc-icon {
