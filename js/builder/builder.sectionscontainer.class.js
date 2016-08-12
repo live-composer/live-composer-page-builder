@@ -2,6 +2,8 @@
  * Sections container class
  */
 
+'use strict';
+
 LiveComposer.Builder.Elements.CSectionsContainer = function(elem) {
 
 	this.sortable = Sortable.create(elem, {

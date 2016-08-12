@@ -203,6 +203,7 @@ body a:focus {
 	display: inline-block;
 	color: rgba(199, 199, 199, 0.64)!important;
 	visibility: hidden;
+	float: left;
 }
 
 .dslca-show-js-error-hook:hover {
@@ -282,7 +283,8 @@ body a:focus {
 
 		.dslca-header .dslca-go-to-section-hook,
 		.dslca-header .dslca-options-filter-hook,
-		.dslca-header .dslca-row-options-filter-hook {
+		.dslca-header .dslca-row-options-filter-hook,
+		.dslca-pseudo-header .dslca-pseudo-options-filter-hook {
 			bottom: -1px;
 			background: #313131;
 			border-radius: 3px 3px 0 0;
@@ -299,14 +301,16 @@ body a:focus {
 		}
 
 		.dslca-header .dslca-options-filter-hook,
-		.dslca-header .dslca-row-options-filter-hook {
+		.dslca-pseudo-options-filter-hook,
+		.dslca-header .dslca-row-pseudo-options-filter-hook {
 			display: none;
 			margin-right: 3px;
 		}
 
 		.dslca-header .dslca-go-to-section-hook.dslca-active,
 		.dslca-header .dslca-options-filter-hook.dslca-active,
-		.dslca-header .dslca-row-options-filter-hook.dslca-active {
+		.dslca-header .dslca-row-options-filter-hook.dslca-active,
+		.dslca-pseudo-header .dslca-pseudo-options-filter-hook.dslca-active {
 			border-top-color: #4777c2;
 			background: #3b6fbe;
 			color: #fff;
@@ -314,12 +318,14 @@ body a:focus {
 		}
 
 		.dslca-header .dslca-options-filter-hook .dslca-icon,
-		.dslca-header .dslca-row-options-filter-hook .dslca-icon {
+		.dslca-header .dslca-row-options-filter-hook .dslca-icon,
+		.dslca-pseudo-header .dslca-pseudo-options-filter-hook .dslca-icon {
 			margin-right: 4px;
 		}
 
 		.dslca-header .dslca-options-filter-hook.dslca-active,
-		.dslca-header .dslca-row-options-filter-hook.dslca-active {
+		.dslca-header .dslca-row-options-filter-hook.dslca-active,
+		.dslca-pseudo-header .dslca-pseudo-options-filter-hook.dslca-active {
 			background: #5890e5;
 		}
 
@@ -333,7 +339,8 @@ body a:focus {
 			}
 
 		.dslca-module-edit-actions,
-		.dslca-row-edit-actions {
+		.dslca-row-edit-actions,
+		.dslca-pseudo-module-edit-actions {
 			display: none;
 			float: left;
 			margin-left: 4px;
@@ -343,8 +350,10 @@ body a:focus {
 			.dslca-prompt-modal-cancel-hook,
 			.dslca-prompt-modal-confirm-hook,
 			.dslca-module-edit-save,
+			.dslca-pseudo-module-edit-save,
 			.dslca-row-edit-save,
 			.dslca-module-edit-cancel,
+			.dslca-pseudo-module-edit-cancel,
 			.dslca-row-edit-cancel,
 			.dslca-wp-editor-save-hook,
 			.dslca-wp-editor-cancel-hook {
@@ -365,14 +374,16 @@ body a:focus {
 			.dslca-module-edit-cancel,
 			.dslca-row-edit-cancel,
 			.dslca-wp-editor-cancel-hook,
-			.dslca-prompt-modal-cancel-hook {
+			.dslca-prompt-modal-cancel-hook,
+			.dslca-pseudo-module-edit-cancel {
 				background: #e55f5f;
 			}
 
 			.dslca-module-edit-save:hover,
 			.dslca-row-edit-save:hover,
 			.dslca-wp-editor-save-hook:hover,
-			.dslca-prompt-modal-confirm-hook:hover {
+			.dslca-prompt-modal-confirm-hook:hover,
+			.dslca-pseudo-module-edit-save:hover {
 				background: #91dc1e;
 				color: #fff;
 			}
@@ -380,7 +391,8 @@ body a:focus {
 			.dslca-module-edit-cancel:hover,
 			.dslca-row-edit-cancel:hover,
 			.dslca-wp-editor-cancel-hook:hover,
-			.dslca-prompt-modal-cancel-hook:hover  {
+			.dslca-prompt-modal-cancel-hook:hover,
+			.dslca-pseudo-module-edit-cancel:hover  {
 				background: #f27562;
 				color: #fff;
 			}
@@ -389,7 +401,8 @@ body a:focus {
 	 * Actions
 	 */
 
-	.dslca-actions {
+	.dslca-actions,
+	.dslca-pseudo-actions {
 		position: absolute;
 		bottom: 100%;
 		right: 0;
@@ -409,6 +422,7 @@ body a:focus {
 
 	/* Module settings panel */
 	.dslca-section.dslca-module-edit,
+	.dslca-pseudo-section,
 	.dslca-section.dslca-modules-section-edit {
 		background: #5890e5;
 	}
@@ -660,7 +674,8 @@ body a:focus {
 	}
 
 		.dslca-modules-section-edit-options,
-		.dslca-module-edit-options {
+		.dslca-module-edit-options,
+		.dslca-pseudo-module-edit-options {
 			padding: 16px 15px 5px 15px;
 			overflow-x: auto;
 			min-height: 58px;
@@ -672,7 +687,8 @@ body a:focus {
 		}
 
 			.dslca-modules-section-edit-option,
-			.dslca-module-edit-option {
+			.dslca-module-edit-option,
+			.dslca-pseudo-module-edit-option {
 				display: table-cell;
 				/*float: left;*/
 				padding-bottom: 20px;
@@ -695,7 +711,8 @@ body a:focus {
 				.dslca-module-edit-option input[type="email"]:focus,
 				.dslca-module-edit-option input[type="number"]:focus,
 				.dslca-module-edit-option textarea:focus,
-				.dslca-module-edit-option select:focus {
+				.dslca-module-edit-option select:focus,
+				.dslca-pseudo-module-edit-field {
 					background: #6c9fed;
 					border: 1px solid #447bce;
 					border-radius: 3px;
@@ -704,7 +721,8 @@ body a:focus {
 					height: auto;
 				}
 
-				.dslca-module-edit-option-text {
+				.dslca-module-edit-option-text,
+				.dslca-pseudo-module-edit-option {
 					width: 235px;
 				}
 
@@ -717,6 +735,7 @@ body a:focus {
 				}
 
 				.dslca-module-edit-label,
+				.dslca-pseudo-module-edit-label,
 				.dslca-modules-section-edit-label {
 					color: #fff;
 					display: block;
@@ -1033,7 +1052,8 @@ body a:focus {
 			/*padding-right: 100px;*/
 		}
 
-			.dslca-module-edit-options-tab-hook {
+			.dslca-module-edit-options-tab-hook,
+			.dslca-pseudo-module-edit-options-tab-hook {
 				color: #fff;
 				cursor: pointer;
 
@@ -1055,7 +1075,8 @@ body a:focus {
 				box-shadow: -1px 1px 1px 0 rgba(0, 0, 0, 0.22) inset;
 			}
 
-			.dslca-module-edit-options-tab-hook:hover {
+			.dslca-module-edit-options-tab-hook:hover,
+			.dslca-pseudo-module-edit-options-tab-hook:hiver {
 				background: rgba(169, 239, 255, 0.17);
 				color: #fff;
 			}
@@ -3584,9 +3605,11 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 
 
 .dslca-container .dslca-close-composer-hook,
-.dslca-activate-composer-hook,
+.dslca-pseudo-panel .dslca-pseudo-close-composer-hook,
+.dslca-container .dslca-activate-composer-hook,
 .dslca-container .dslca-hide-composer-hook,
-.dslca-container .dslca-show-composer-hook {
+.dslca-container .dslca-show-composer-hook,
+.dslca-pseudo-panel .dslca-pseudo-hide-composer-hook {
 	background: #e55f5f;
 	border-radius: 3px;
 	bottom: 4px;
@@ -3614,7 +3637,8 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 	background: #f27562;
 }
 
-.dslca-container .dslca-hide-composer-hook {
+.dslca-container .dslca-hide-composer-hook,
+.dslca-pseudo-panel .dslca-pseudo-hide-composer-hook {
 	background: #06b2ac;
 }
 
@@ -3652,8 +3676,10 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 }
 
 	.dslca-container .dslca-close-composer-hook .dslca-icon,
+	.dslca-pseudo-close-composer-hook .dslca-icon,
 	.dslca-activate-composer-hook .dslca-icon,
 	.dslca-container .dslca-hide-composer-hook .dslca-icon,
+	.dslca-pseudo-hide-composer-hook .dslca-icon,
 	.dslca-container .dslca-show-composer-hook .dslca-icon {
 		color: rgba( 255, 255, 255, 0.66 );
 		margin-right: 5px;
@@ -3720,7 +3746,8 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 
 
 .dslca-modules-section-edit-options-wrapper,
-.dslca-module-edit-options-wrapper {
+.dslca-module-edit-options-wrapper,
+.dslca-pseudo-module-edit-options-wrapper {
 	display: table-cell;
 	padding: 0 0 20px;
 }
@@ -4008,28 +4035,60 @@ body .sp-palette .sp-thumb-el {
 /** PSEUDO SETTINGS PANEL */
 .dslca-pseudo-panel {
     position: relative;
-    display: none;
+    /*display: none;*/
+
+   bottom: 0px;
+	left: 0;
+	position: fixed;
+	right: 0;
+	z-index: 99999;
+	-webkit-transition: bottom 0.3s;
+	-moz-transition: bottom 0.3s;
+	transition: bottom 0.3s;
 }
-.dslca-pseudo-panel-cover {
+
+.dslca-pseudo-header {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0px;
-    z-index: 2;
-    left: 0px;
+    z-index: 100;
+    min-height: 38px;
+    bottom: 100%;
+    left: 0;
 }
-span.dslca-module-edit-label.pseudo-label {
+
+.dslca-pseudo-module-edit-label {
     width: 80px;
-    height: 10px;
     background: #6c9fed;
     border-radius: 3px;
 }
-input.dslca-module-edit-field.pseudo-input {
+.dslca-pseudo-module-edit-field {
     border: 0px;
-    width: 191px;
+    width: 100%;
+    height: 33px;
 }
-.dslca-pseudo-panel .dslca-module-edit-options{
-    height: 164px;
+
+.dslca-pseudo-module-edit-option {
+	opacity: 0;
+	transition: opacity .3s 0s ease-in;
+}
+
+.dslca-pseudo-module-edit-option:nth-child(2) {
+	transition-delay: .15s;
+}
+
+.dslca-pseudo-module-edit-option:nth-child(3) {
+	transition-delay: .25s;
+}
+
+.dslca-pseudo-module-edit-option:nth-child(4) {
+	transition-delay: .5s;
+}
+
+.dslca-pseudo-module-edit-option:nth-child(5) {
+	transition-delay: .75s;
+}
+
+.dslca-pseudo-panel.show .dslca-pseudo-module-edit-option {
+	opacity: 1;
 }
 
 /** SETTINGS PANEL */

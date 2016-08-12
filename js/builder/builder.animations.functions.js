@@ -1,4 +1,3 @@
-
 /*********************************
  *
  * = UI - ANIMATIONS =
@@ -6,6 +5,8 @@
  * - dslc_ui_animations ( Animations for the UI )
  *
  ***********************************/
+
+'use strict';
 
 	/**
 	 * ANIMATIONS - Initiate

@@ -1,4 +1,3 @@
-
 /*********************************
  *
  * = CODE GENERATION =
@@ -10,6 +9,8 @@
  * - dslca_gen_content_for_search ( Generate Readable Content For Search )
  *
  ***********************************/
+
+'use strict';
 
 /**
  * CODE GENERATION - Save Page Changes

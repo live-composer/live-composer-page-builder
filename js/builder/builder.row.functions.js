@@ -1,4 +1,3 @@
-
 /*********************************
  *
  * = ROWS =
@@ -14,6 +13,7 @@
  *
  ***********************************/
 
+'use strict';
 
 ;jQuery(document).on('editorFrameLoaded', function(){
 
