@@ -73,17 +73,17 @@ jQuery(document).ready(function($) {
  	jQuery("#page-builder-frame").on('load', function(){
 
  		var self = this;
- 		LiveComposer.Builder.PreviewFrameContext = this.contentWindow;
- 		LiveComposer.Builder.PreviewFrame = jQuery(this).contents();
+ 		LiveComposer.Builder.PreviewAreaWindow = this.contentWindow;
+ 		LiveComposer.Builder.PreviewAreaDocument = jQuery(this).contents();
 
  		// Disable WP admin bar in editing mode
- 		jQuery('#wpadminbar', LiveComposer.Builder.PreviewFrame).remove();
- 		jQuery('body', LiveComposer.Builder.PreviewFrame).addClass('dslca-enabled dslca-drag-not-in-progress');
+ 		jQuery('#wpadminbar', LiveComposer.Builder.PreviewAreaDocument).remove();
+ 		jQuery('body', LiveComposer.Builder.PreviewAreaDocument).addClass('dslca-enabled dslca-drag-not-in-progress');
 
  		LiveComposer.Builder.UI.initInlineEditors();
  		dslc_fix_contenteditable();
 
- 		var mainDraggable = LiveComposer.Builder.PreviewFrame.find("#dslc-main").eq(0)[0];
+ 		var mainDraggable = LiveComposer.Builder.PreviewAreaDocument.find("#dslc-main").eq(0)[0];
  		new LiveComposer.Builder.Elements.CSectionsContainer( mainDraggable );
 
  		jQuery(document).trigger('editorFrameLoaded');
@@ -112,13 +112,13 @@ jQuery(document).on( 'click', '.dslca-currently-editing', function(){
 	newOffset = false,
 	outlineColor;
 
-	if ( jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewFrame).length ) {
+	if ( jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).length ) {
 
-		activeElement = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewFrame);
+		activeElement = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument);
 		outlineColor = '#5890e5';
-	} else if ( jQuery('.dslca-modules-section-being-edited', LiveComposer.Builder.PreviewFrame).length ) {
+	} else if ( jQuery('.dslca-modules-section-being-edited', LiveComposer.Builder.PreviewAreaDocument).length ) {
 
-		activeElement = jQuery('.dslca-modules-section-being-edited', LiveComposer.Builder.PreviewFrame);
+		activeElement = jQuery('.dslca-modules-section-being-edited', LiveComposer.Builder.PreviewAreaDocument);
 		outlineColor = '#eabba9';
 	}
 
@@ -128,7 +128,7 @@ jQuery(document).on( 'click', '.dslca-currently-editing', function(){
 
 		var callbacks = [];
 
-		jQuery( 'html, body', LiveComposer.Builder.PreviewFrame ).animate({ scrollTop: newOffset }, 300, function(){
+		jQuery( 'html, body', LiveComposer.Builder.PreviewAreaDocument ).animate({ scrollTop: newOffset }, 300, function(){
 			activeElement.removeAttr('style');
 		});
 	}
@@ -374,7 +374,7 @@ function dslc_show_section( section ) {
 		jQuery('.dslca-currently-editing')
 			.show()
 				.find('strong')
-				.text( jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewFrame).attr('title') + ' element' );
+				.text( jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).attr('title') + ' element' );
 	} else if ( section == '.dslca-modules-section-edit' ) {
 
 		jQuery('.dslca-currently-editing')
@@ -505,7 +505,7 @@ function dslc_drag_and_drop() {
 			// Prevent drop into modules listing
 			if(itemEl.closest('.dslca-section-scroller-content')) return false;
 
-			jQuery( '.dslca-options-hovered', LiveComposer.Builder.PreviewFrame ).removeClass('dslca-options-hovered');
+			jQuery( '.dslca-options-hovered', LiveComposer.Builder.PreviewAreaDocument ).removeClass('dslca-options-hovered');
 
 			// Vars
 			modulesArea = jQuery(itemEl.parentNode); //jQuery(this);
@@ -548,7 +548,7 @@ function dslc_drag_and_drop() {
 
 
 					setTimeout( function(){
-						LiveComposer.Builder.PreviewFrameContext.dslc_masonry( dslcJustAdded );
+						LiveComposer.Builder.PreviewAreaWindow.dslc_masonry( dslcJustAdded );
 						jQuery('body').removeClass('dslca-module-drop-in-progress');
 					}, 700 );
 
@@ -559,9 +559,9 @@ function dslc_drag_and_drop() {
 					jQuery('.dslca-modules-area-manage', modulesArea).css ({ visibility : 'visible' });
 
 					// Generete
-					LiveComposer.Builder.PreviewFrameContext.dslc_carousel();
-					LiveComposer.Builder.PreviewFrameContext.dslc_tabs();
-					LiveComposer.Builder.PreviewFrameContext.dslc_init_accordion();
+					LiveComposer.Builder.PreviewAreaWindow.dslc_carousel();
+					LiveComposer.Builder.PreviewAreaWindow.dslc_tabs();
+					LiveComposer.Builder.PreviewAreaWindow.dslc_init_accordion();
 
 					dslc_generate_code();
 					// Show publish
@@ -658,14 +658,14 @@ function dslc_module_dragdrop_init() { dslc_drag_and_drop(); }
  */
 function dslc_fix_contenteditable() {
 
-	LiveComposer.Builder.PreviewFrame.on('dragstart', '.dslca-module, .dslc-module-front, .dslc-modules-area, .dslc-modules-section', function (e) {
+	LiveComposer.Builder.PreviewAreaDocument.on('dragstart', '.dslca-module, .dslc-module-front, .dslc-modules-area, .dslc-modules-section', function (e) {
 
-		jQuery('[contenteditable]', LiveComposer.Builder.PreviewFrame).attr('contenteditable', false);
+		jQuery('[contenteditable]', LiveComposer.Builder.PreviewAreaDocument).attr('contenteditable', false);
 	});
 
-	LiveComposer.Builder.PreviewFrame.on('dragend', '.dslca-module, .dslc-module-front, .dslc-modules-area, .dslc-modules-section', function (e) {
+	LiveComposer.Builder.PreviewAreaDocument.on('dragend', '.dslca-module, .dslc-module-front, .dslc-modules-area, .dslc-modules-section', function (e) {
 
-		jQuery('[contenteditable]', LiveComposer.Builder.PreviewFrame).attr('contenteditable', true);
+		jQuery('[contenteditable]', LiveComposer.Builder.PreviewAreaDocument).attr('contenteditable', true);
 	});
 }
 
@@ -684,7 +684,7 @@ function dslc_toogle_control ( control_id ) {
 	var control_storage = control.find('.dslca-module-edit-field');
 
 	// Get the element we are editing
-	var module = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewFrame);
+	var module = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument);
 
 	// Get the element id
 	var module_id = module[0].id;
@@ -736,7 +736,7 @@ function dslc_toogle_control ( control_id ) {
 		for ( var i = 0; i < affect_on_change_rules.length; i++ ) {
 
 			// remove css rule in element inline style
-			jQuery( affect_on_change_el, LiveComposer.Builder.PreviewFrame ).css( affect_on_change_rules[i] , '' );
+			jQuery( affect_on_change_el, LiveComposer.Builder.PreviewAreaDocument ).css( affect_on_change_rules[i] , '' );
 			// remove css rule in css block
 			disable_css_rule ( affect_on_change_el, affect_on_change_rules[i], module_id);
 			// PROBLEM do not work with multiply rules ex.: .dslc-text-module-content,.dslc-text-module-content p
@@ -899,7 +899,7 @@ function dslc_get_control_value ( control_id ) {
  */
 function dslc_keypress_events() {
 
-	jQuery( [document, LiveComposer.Builder.PreviewFrameContext.document ] ).unbind('keydown').bind('keydown', function (keydown_event) {
+	jQuery( [document, LiveComposer.Builder.PreviewAreaWindow.document ] ).unbind('keydown').bind('keydown', function (keydown_event) {
 
 		// Modal window [ESC]/[Enter]
 		dslc_modal_keypress_events(keydown_event);

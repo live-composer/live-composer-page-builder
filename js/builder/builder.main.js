@@ -103,11 +103,11 @@ var LiveComposer = {
 
 		scripts.forEach(function(item) {
 
-			var script = LiveComposer.Builder.PreviewFrame[0].createElement('script');
+			var script = LiveComposer.Builder.PreviewAreaDocument[0].createElement('script');
 			script.innerHTML = item;
 			script.type = 'text/javascript';
 
-			LiveComposer.Builder.PreviewFrame[0].getElementById(newModule[0].id).appendChild(script);
+			LiveComposer.Builder.PreviewAreaDocument[0].getElementById(newModule[0].id).appendChild(script);
 		});
 
 		return newModule;

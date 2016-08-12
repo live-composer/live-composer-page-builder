@@ -32,10 +32,10 @@ function dslc_template_load( template ) {
 		function( response ) {
 
 			// Apply the template's HTML
-			jQuery('#dslc-main', LiveComposer.Builder.PreviewFrame).html( response.output );
+			jQuery('#dslc-main', LiveComposer.Builder.PreviewAreaDocument).html( response.output );
 
 			// Call other functions
-			LiveComposer.Builder.PreviewFrameContext.dslc_carousel();
+			LiveComposer.Builder.PreviewAreaWindow.dslc_carousel();
 			dslc_drag_and_drop();
 			dslc_show_publish_button();
 			dslc_generate_code();
@@ -69,7 +69,7 @@ function dslc_template_import() {
 		function( response ) {
 
 			// Apply the template's HTML
-			jQuery('#dslc-main', LiveComposer.Builder.PreviewFrame).html( response.output );
+			jQuery('#dslc-main', LiveComposer.Builder.PreviewAreaDocument).html( response.output );
 
 			// Hide the loading on the button and show the title
 			jQuery('.dslca-modal-templates-import .dslca-loading').hide();
@@ -79,7 +79,7 @@ function dslc_template_import() {
 			dslc_hide_modal( '', '.dslca-modal-templates-import' );
 
 			// Call other functions
-			LiveComposer.Builder.PreviewFrameContext.dslc_bg_video();
+			LiveComposer.Builder.PreviewAreaWindow.dslc_bg_video();
 			dslc_drag_and_drop();
 			dslc_show_publish_button();
 			dslc_generate_code();

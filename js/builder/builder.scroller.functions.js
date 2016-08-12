@@ -13,6 +13,7 @@ jQuery(document).ready(function($){
 	/**
 	 * Scroll list of modules with a mouse wheel.
 	 */
+	var deltaKoef = .75;
 	var increment = 500;
 	var scroller = jQuery('.dslca-section-scroller');
 	var scrollInner = jQuery('.dslca-section-scroller-inner', this)[0];
@@ -30,6 +31,8 @@ jQuery(document).ready(function($){
 	 * @param  {int} delta
 	 */
 	function scroll_to(delta) {
+
+		delta = delta * deltaKoef;
 
 		var lisdtWidth = parseInt(scroller.find('.dslca-section-scroller-content').width() || 0);
 
