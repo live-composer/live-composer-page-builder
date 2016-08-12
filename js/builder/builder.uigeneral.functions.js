@@ -946,7 +946,6 @@ function dslc_disable_backspace_navigation (event) {
 	if (doPrevent) {
 		event.preventDefault();
 	}
-
 }
 
 /**
