@@ -345,8 +345,6 @@ jQuery(document).ready(function($){
 
 								opt_wrap.hide();
 							}
-
-							dslc_scroller_init();
 						});
 					});
 				}

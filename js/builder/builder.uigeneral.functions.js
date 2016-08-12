@@ -46,6 +46,18 @@ jQuery(document).on( 'click', '.dslca-show-js-error-hook', function(e){
 
 jQuery(document).ready(function($) {
 
+	// Scroll view when dragging module
+	jQuery('#page-builder-frame').height(window.innerHeight - 72);
+
+	jQuery(window).load(function(){
+
+		// Initiate scroller on window resize
+		jQuery(window).resize(function(){
+
+			jQuery('#page-builder-frame').height(window.innerHeight - 72);
+		});
+	});
+
 	/**
 	 * Try to detect JS errors in preview area.
 	 */
@@ -381,9 +393,6 @@ function dslc_show_section( section ) {
 	// Filter module option tabs
 	dslc_module_options_tab_filter();
 
-	// Initiate scroller ( if not module options edit section )
-	if ( section != '.dslca-module-edit' ) { dslc_scroller_init(); }
-
 	// Show ( animate ) the container
 	// setTimeout( function() {
 		jQuery('.dslca-container').css({ bottom : 0 });
@@ -431,8 +440,6 @@ function dslc_filter_origin( origin, section ) {
 	if ( origin == '' ) {
 		jQuery('.dslca-origin', section).show();
 	}
-
-	dslc_scroller_init();
 }
 
 
