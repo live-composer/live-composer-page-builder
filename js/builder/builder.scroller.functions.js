@@ -31,7 +31,11 @@ jQuery(document).ready(function($){
 	 */
 	function scroll_to(delta) {
 
-		var scrollMax = parseInt(scroller.find('.dslca-section-scroller-content').width() || 0) - window.innerWidth + 240;
+		var lisdtWidth = parseInt(scroller.find('.dslca-section-scroller-content').width() || 0);
+
+		if ( lisdtWidth <= window.innerWidth - 260 ) return false;
+
+		var scrollMax = lisdtWidth - window.innerWidth + 240;
 		delta = parseInt(scrollInner.style.left || 0) - delta;
 		delta = delta >= 0 ? 0 : delta;
 		delta = delta <= -scrollMax ? -scrollMax : delta;
