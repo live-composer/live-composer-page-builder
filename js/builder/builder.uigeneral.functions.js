@@ -1,4 +1,3 @@
-
 /*********************************
  *
  * = UI - GENERAL =
@@ -11,6 +10,8 @@
  * - dslc_filter_origin ( Origin filtering for templates/modules listing )
  * - dslc_drag_and_drop ( Initiate drag and drop functionality )
  ***********************************/
+
+'use strict';
 
 /**
  * Try to detect JS errors in WP Admin part.

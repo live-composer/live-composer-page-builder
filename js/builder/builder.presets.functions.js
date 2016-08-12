@@ -6,6 +6,8 @@
 *
 ***********************************/
 
+'use strict';
+
 /**
  * Module Presets - Update
  */

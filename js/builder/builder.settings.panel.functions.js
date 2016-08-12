@@ -2,6 +2,8 @@
  * Builder settings panel functions providing work with modules
  */
 
+'use strict';
+
 /**
  * Modules - Document Ready
  */
@@ -67,12 +69,13 @@ jQuery(document).ready(function($){
 	$(document).on( 'click', '.dslca-options-filter-hook', function(e){
 
 		e.preventDefault();
+
 		var dslcPrev = jQuery('.dslca-options-filter-hook.dslca-active').data('section');
+		var currentSection = jQuery(this).data('section');
 
 		$('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
 		$(this).addClass('dslca-active');
 
-		var currentSection = jQuery(this).data('section');
 
 		dslc_module_options_section_filter( currentSection );
 

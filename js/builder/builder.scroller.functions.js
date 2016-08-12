@@ -1,4 +1,3 @@
-
 /*********************************
  *
  * = UI - SCROLLER =
@@ -9,6 +8,8 @@
  * - dslc_scroller_next ( Scroll Forward )
  *
  ***********************************/
+
+'use strict';
 
 	/**
 	 * SCROLLER - Initiate

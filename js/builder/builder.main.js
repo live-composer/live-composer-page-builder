@@ -2,7 +2,7 @@
  * Main builder file
  */
 
-"use strict";
+'use strict';
 
 var dslcRegularFontsArray = DSLCFonts.regular;
 var dslcGoogleFontsArray = DSLCFonts.google;

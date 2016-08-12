@@ -1,4 +1,3 @@
-
 /*********************************
  *
  * = UTIL =
@@ -8,6 +7,8 @@
  * - dslc_editable_content_gen_code ( Generate code of editable content )
  *
  ***********************************/
+
+'use strict';
 
 /**
  * Other - Get Alter Module Defaults Code

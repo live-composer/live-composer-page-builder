@@ -97,6 +97,8 @@
 	 */
 	LiveComposer.Builder.PreviewFrame.on( 'click', '.dslca-module-edit-hook, .dslc-module-front > div:not(.dslca-module-manage)', function(e){
 
+		if(dslcDebug) console.log('dslca-module-edit-hook');
+
 		e.preventDefault();
 
 		var module_edited = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewFrame).length;
@@ -112,9 +114,6 @@
 
 			return false;
 		}
-
-
-		if(dslcDebug) console.log('dslca-module-edit-hook');
 
 		// Vars
 		var dslcModule = $(this).closest('.dslc-module-front'),
@@ -436,12 +435,16 @@ function dslc_module_options_show( moduleID ) {
 
 	// Show pseudo settings panel
 	pseudoPanel.show();
+	pseudoPanel.addClass('show');
 
 	// AJAX call to get options HTML
 	jQuery.post(
 		DSLCAjax.ajaxurl,
 		dslcSettings,
 		function( response ) {
+
+			// Hide pseudo panel
+			pseudoPanel.remove();
 
 			// Show edit section
 			dslc_show_section('.dslca-module-edit');
@@ -462,11 +465,9 @@ function dslc_module_options_show( moduleID ) {
 
 			// Trigger click on first filter hook
 			if ( jQuery('.dslca-module-edit-option[data-section="' + dslcDefaultSection + '"]').length ) {
-
 				jQuery('.dslca-header .dslca-options-filter-hook[data-section="' + dslcDefaultSection + '"]').show();
 				jQuery('.dslca-header .dslca-options-filter-hook[data-section="' + dslcDefaultSection + '"]').trigger('click');
 			} else {
-
 				jQuery('.dslca-header .dslca-options-filter-hook:first').hide();
 				jQuery('.dslca-header .dslca-options-filter-hook:first').next('.dslca-options-filter-hook').trigger('click');
 			}
@@ -477,9 +478,6 @@ function dslc_module_options_show( moduleID ) {
 			// Show the save/cancel actions for text editor and hide notification
 			jQuery('.dslca-wp-editor-notification').hide();
 			jQuery('.dslca-wp-editor-actions').show();
-
-			// Hide pseudo panel
-			pseudoPanel.remove();
 
 			// Hide the section hooks
 			jQuery('.dslca-header .dslca-go-to-section-hook').hide();

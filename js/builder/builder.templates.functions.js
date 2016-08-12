@@ -1,4 +1,3 @@
-
 /*********************************
  *
  * = TEMPLATES =
@@ -9,6 +8,8 @@
  * - dslc_delete_template ( Delete Template )
  *
  ***********************************/
+
+'use strict';
 
 /**
  * TEMPLATES - Load
