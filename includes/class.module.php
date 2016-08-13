@@ -13,43 +13,43 @@ class DSLC_Module {
 		$animation_options_choices = array(
 			array(
 				'label' => 'None',
-				'value' => 'none'
+				'value' => 'none',
 			),
 			array(
 				'label' => 'Fade In',
-				'value' => 'dslcFadeIn'
+				'value' => 'dslcFadeIn',
 			),
 			array(
 				'label' => 'Slide Up',
-				'value' => 'dslcSlideUp'
+				'value' => 'dslcSlideUp',
 			),
 			array(
 				'label' => 'Slide Down',
-				'value' => 'dslcSlideDown'
+				'value' => 'dslcSlideDown',
 			),
 			array(
 				'label' => 'Slide Right',
-				'value' => 'dslcSlideRight'
+				'value' => 'dslcSlideRight',
 			),
 			array(
 				'label' => 'Slide Left',
-				'value' => 'dslcSlideLeft'
+				'value' => 'dslcSlideLeft',
 			),
 			array(
 				'label' => 'Slide Up + Fade In',
-				'value' => 'dslcSlideUpFadeIn'
+				'value' => 'dslcSlideUpFadeIn',
 			),
 			array(
 				'label' => 'Slide Down + Fade In',
-				'value' => 'dslcSlideDownFadeIn'
+				'value' => 'dslcSlideDownFadeIn',
 			),
 			array(
 				'label' => 'Slide Right + Fade In',
-				'value' => 'dslcSlideRightFadeIn'
+				'value' => 'dslcSlideRightFadeIn',
 			),
 			array(
 				'label' => 'Slide Left + Fade In',
-				'value' => 'dslcSlideLeftFadeIn'
+				'value' => 'dslcSlideLeftFadeIn',
 			),
 		);
 
@@ -64,7 +64,7 @@ class DSLC_Module {
 				'type' => 'select',
 				'section' => 'styling',
 				'tab' => 'Animation',
-				'choices' => $animation_options_choices
+				'choices' => $animation_options_choices,
 			),
 			array(
 				'label' => 'On Load Animation - Delay ( ms )',
@@ -72,7 +72,7 @@ class DSLC_Module {
 				'std' => '0',
 				'type' => 'text',
 				'section' => 'styling',
-				'tab' => 'Animation'
+				'tab' => 'Animation',
 			),
 			array(
 				'label' => 'On Load Anim - Duration ( ms )',
@@ -80,7 +80,7 @@ class DSLC_Module {
 				'std' => '650',
 				'type' => 'text',
 				'section' => 'styling',
-				'tab' => 'Animation'
+				'tab' => 'Animation',
 			),
 			array(
 				'label' => 'On Load Animation - Easing',
@@ -92,25 +92,25 @@ class DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => 'Default',
-						'value' => 'ease'
+						'value' => 'ease',
 					),
 					array(
 						'label' => 'Linear',
-						'value' => 'linear'
+						'value' => 'linear',
 					),
 					array(
 						'label' => 'Ease In',
-						'value' => 'ease-in'
+						'value' => 'ease-in',
 					),
 					array(
 						'label' => 'Ease Out',
-						'value' => 'ease-out'
+						'value' => 'ease-out',
 					),
 					array(
 						'label' => 'Ease In Out',
-						'value' => 'ease-in-out'
+						'value' => 'ease-in-out',
 					),
-				)
+				),
 			),
 
 		);
@@ -127,43 +127,43 @@ class DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => 'None',
-						'value' => 'none'
+						'value' => 'none',
 					),
 					array(
 						'label' => 'Fade In',
-						'value' => 'dslcFadeIn'
+						'value' => 'dslcFadeIn',
 					),
 					array(
 						'label' => 'Slide Up',
-						'value' => 'dslcSlideUp'
+						'value' => 'dslcSlideUp',
 					),
 					array(
 						'label' => 'Slide Down',
-						'value' => 'dslcSlideDown'
+						'value' => 'dslcSlideDown',
 					),
 					array(
 						'label' => 'Slide Right',
-						'value' => 'dslcSlideRight'
+						'value' => 'dslcSlideRight',
 					),
 					array(
 						'label' => 'Slide Left',
-						'value' => 'dslcSlideLeft'
+						'value' => 'dslcSlideLeft',
 					),
 					array(
 						'label' => 'Slide Up + Fade In',
-						'value' => 'dslcSlideUpFadeIn'
+						'value' => 'dslcSlideUpFadeIn',
 					),
 					array(
 						'label' => 'Slide Down + Fade In',
-						'value' => 'dslcSlideDownFadeIn'
+						'value' => 'dslcSlideDownFadeIn',
 					),
 					array(
 						'label' => 'Slide Right + Fade In',
-						'value' => 'dslcSlideRightFadeIn'
+						'value' => 'dslcSlideRightFadeIn',
 					),
 					array(
 						'label' => 'Slide Left + Fade In',
-						'value' => 'dslcSlideLeftFadeIn'
+						'value' => 'dslcSlideLeftFadeIn',
 					),
 				)
 			),
@@ -173,7 +173,7 @@ class DSLC_Module {
 				'std' => '650',
 				'type' => 'text',
 				'section' => 'styling',
-				'tab' => 'Animation'
+				'tab' => 'Animation',
 			),
 
 		);
@@ -273,7 +273,7 @@ class DSLC_Module {
 				'affect_on_change_el' => '.dslc-post-filter.dslc-inactive',
 				'affect_on_change_rule' => 'background-color',
 				'section' => 'styling',
-				'tab' => 'Filters'
+				'tab' => 'Filters',
 			),
 			array(
 				'label' => 'BG Color - Active',
@@ -284,7 +284,7 @@ class DSLC_Module {
 				'affect_on_change_el' => '.dslc-post-filter.dslc-active',
 				'affect_on_change_rule' => 'background-color',
 				'section' => 'styling',
-				'tab' => 'Filters'
+				'tab' => 'Filters',
 			),
 			array(
 				'label' => 'Border Color',
@@ -295,7 +295,7 @@ class DSLC_Module {
 				'affect_on_change_el' => '.dslc-post-filter.dslc-inactive',
 				'affect_on_change_rule' => 'border-color',
 				'section' => 'styling',
-				'tab' => 'Filters'
+				'tab' => 'Filters',
 			),
 			array(
 				'label' => 'Border Color - Active',
@@ -306,7 +306,7 @@ class DSLC_Module {
 				'affect_on_change_el' => '.dslc-post-filter.dslc-active',
 				'affect_on_change_rule' => 'border-color',
 				'section' => 'styling',
-				'tab' => 'Filters'
+				'tab' => 'Filters',
 			),
 			array(
 				'label' => 'Border Width',
@@ -322,7 +322,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'border-width',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => 'Filters'
+				'tab' => 'Filters',
 			),
 			array(
 				'label' => 'Borders',
@@ -332,19 +332,19 @@ class DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => 'Top',
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => 'Right',
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => 'Bottom',
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => 'Left',
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -369,7 +369,7 @@ class DSLC_Module {
 				'increment' => 1,
 				'section' => 'styling',
 				'tab' => 'Filters',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => 'Color',
@@ -380,7 +380,7 @@ class DSLC_Module {
 				'affect_on_change_el' => '.dslc-post-filter.dslc-inactive',
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
-				'tab' => 'Filters'
+				'tab' => 'Filters',
 			),
 			array(
 				'label' => 'Color - Active',
@@ -391,7 +391,7 @@ class DSLC_Module {
 				'affect_on_change_el' => '.dslc-post-filter.dslc-active',
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
-				'tab' => 'Filters'
+				'tab' => 'Filters',
 			),
 			array(
 				'label' => 'Font Size',
@@ -406,7 +406,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'styling',
 				'tab' => 'Filters',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => 'Font Weight',
@@ -482,7 +482,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => 'Filters'
+				'tab' => 'Filters',
 			),
 			array(
 				'label' => 'Padding Horizontal',
@@ -497,7 +497,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => 'Filters'
+				'tab' => 'Filters',
 			),
 			array(
 				'label' => 'Position',
@@ -520,7 +520,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => 'Filters'
+				'tab' => 'Filters',
 			),
 			array(
 				'label' => 'Margin Bottom',
@@ -535,7 +535,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'styling',
 				'tab' => 'Filters',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 
 			/**
@@ -555,7 +555,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
 				'tab' => 'Tablet',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => 'Filters - Padding Vertical',
@@ -570,7 +570,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => 'Tablet'
+				'tab' => 'Tablet',
 			),
 			array(
 				'label' => 'Filters - Padding Horizontal',
@@ -585,7 +585,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => 'Tablet'
+				'tab' => 'Tablet',
 			),
 			array(
 				'label' => 'Filters - Spacing',
@@ -597,7 +597,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => 'Tablet'
+				'tab' => 'Tablet',
 			),
 			array(
 				'label' => 'Filters - Margin Bottom',
@@ -612,7 +612,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
 				'tab' => 'Tablet',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 
 			/**
@@ -632,7 +632,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
 				'tab' => 'Phone',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => 'Filters - Padding Vertical',
@@ -647,7 +647,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => 'Phone'
+				'tab' => 'Phone',
 			),
 			array(
 				'label' => 'Filters - Padding Horizontal',
@@ -662,7 +662,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => 'Phone'
+				'tab' => 'Phone',
 			),
 			array(
 				'label' => 'Filters - Spacing',
@@ -674,7 +674,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'responsive',
 				'ext' => 'px',
-				'tab' => 'Phone'
+				'tab' => 'Phone',
 			),
 			array(
 				'label' => 'Filters - Margin Bottom',
@@ -689,7 +689,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
 				'tab' => 'Phone',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 
 		);
@@ -705,14 +705,14 @@ class DSLC_Module {
 				'id' => 'main_heading_title',
 				'std' => 'CLICK TO EDIT',
 				'type' => 'text',
-				'visibility' => 'hidden'
+				'visibility' => 'hidden',
 			),
 			array(
 				'label' => 'View All Title',
 				'id' => 'main_heading_link_title',
 				'std' => 'VIEW ALL',
 				'type' => 'text',
-				'visibility' => 'hidden'
+				'visibility' => 'hidden',
 			),
 
 			array(
@@ -720,7 +720,7 @@ class DSLC_Module {
 				'id' => 'main_filter_title_all',
 				'std' => 'All',
 				'type' => 'text',
-				'visibility' => 'hidden'
+				'visibility' => 'hidden',
 			),
 
 			array(
@@ -732,7 +732,7 @@ class DSLC_Module {
 				'affect_on_change_el' => '.dslc-module-heading h2',
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
-				'tab' => 'Heading'
+				'tab' => 'Heading',
 			),
 			array(
 				'label' => 'Title - Font Size',
@@ -747,7 +747,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'styling',
 				'tab' => 'Heading',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => 'Title - Font Weight',
@@ -825,7 +825,7 @@ class DSLC_Module {
 				'tab' => 'Heading',
 				'ext' => 'px',
 				'min' => -50,
-				'max' => 50
+				'max' => 50,
 			),
 			array(
 				'label' => 'Title - Line Height',
@@ -840,9 +840,8 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'line-height',
 				'section' => 'styling',
 				'tab' => 'Heading',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
-
 
 			array(
 				'label' => 'Link - Color',
@@ -853,7 +852,7 @@ class DSLC_Module {
 				'affect_on_change_el' => '.dslc-module-heading-view-all a',
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
-				'tab' => 'Heading'
+				'tab' => 'Heading',
 			),
 			array(
 				'label' => 'Link - Color - Hover',
@@ -864,7 +863,7 @@ class DSLC_Module {
 				'affect_on_change_el' => '.dslc-module-heading-view-all a:hover',
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
-				'tab' => 'Heading'
+				'tab' => 'Heading',
 			),
 			array(
 				'label' => 'Link - Font Size',
@@ -879,7 +878,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'styling',
 				'tab' => 'Heading',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => 'Link - Font Weight',
@@ -969,7 +968,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'styling',
 				'tab' => 'Heading',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => 'Link - URL',
@@ -988,7 +987,7 @@ class DSLC_Module {
 				'affect_on_change_el' => '.dslc-module-heading-view-all a',
 				'affect_on_change_rule' => 'border-left-color',
 				'section' => 'styling',
-				'tab' => 'Heading'
+				'tab' => 'Heading',
 			),
 			array(
 				'label' => 'Separator - Style',
@@ -1029,7 +1028,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'styling',
 				'tab' => 'Heading',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 
 			/**
@@ -1049,7 +1048,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
 				'tab' => 'Tablet',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => 'Heading - Line Height',
@@ -1064,7 +1063,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'line-height',
 				'section' => 'responsive',
 				'tab' => 'Tablet',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => 'Heading Link - Font Size',
@@ -1079,7 +1078,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
 				'tab' => 'Tablet',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => 'Heading Link - Padding Vertical',
@@ -1091,7 +1090,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
 				'tab' => 'Tablet',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => 'Heading - Margin Bottom',
@@ -1106,7 +1105,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
 				'tab' => 'Tablet',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 
 			/**
@@ -1126,7 +1125,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
 				'tab' => 'Phone',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => 'Heading - Line Height',
@@ -1141,7 +1140,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'line-height',
 				'section' => 'responsive',
 				'tab' => 'Phone',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => 'Heading Link - Font Size',
@@ -1156,7 +1155,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
 				'tab' => 'Phone',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => 'Heading Link - Padding Vertical',
@@ -1168,7 +1167,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'responsive',
 				'tab' => 'Phone',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => 'Heading - Margin Bottom',
@@ -1183,7 +1182,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
 				'tab' => 'Phone',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 
 		);
@@ -1200,7 +1199,7 @@ class DSLC_Module {
 				'std' => '200',
 				'type' => 'text',
 				'section' => 'styling',
-				'tab' => 'Carousel Arrows'
+				'tab' => 'Carousel Arrows',
 			),
 			array(
 				'label' => 'BG Color',
@@ -1211,7 +1210,7 @@ class DSLC_Module {
 				'affect_on_change_el' => '.dslc-carousel-nav-prev,.dslc-carousel-nav-next',
 				'affect_on_change_rule' => 'background-color',
 				'section' => 'styling',
-				'tab' => 'Carousel Arrows'
+				'tab' => 'Carousel Arrows',
 			),
 			array(
 				'label' => 'BG Color - Hover',
@@ -1222,7 +1221,7 @@ class DSLC_Module {
 				'affect_on_change_el' => '.dslc-carousel-nav-prev:hover,.dslc-carousel-nav-next:hover',
 				'affect_on_change_rule' => 'background-color',
 				'section' => 'styling',
-				'tab' => 'Carousel Arrows'
+				'tab' => 'Carousel Arrows',
 			),
 			array(
 				'label' => 'Border Color',
@@ -1278,7 +1277,7 @@ class DSLC_Module {
 				'increment' => 1,
 				'section' => 'styling',
 				'tab' => 'Carousel Arrows',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => 'Color',
@@ -1289,7 +1288,7 @@ class DSLC_Module {
 				'affect_on_change_el' => '.dslc-carousel-nav-prev span,.dslc-carousel-nav-next span',
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
-				'tab' => 'Carousel Arrows'
+				'tab' => 'Carousel Arrows',
 			),
 			array(
 				'label' => 'Color - Hover',
@@ -1300,7 +1299,7 @@ class DSLC_Module {
 				'affect_on_change_el' => '.dslc-carousel-nav-prev:hover span,.dslc-carousel-nav-next:hover span',
 				'affect_on_change_rule' => 'color',
 				'section' => 'styling',
-				'tab' => 'Carousel Arrows'
+				'tab' => 'Carousel Arrows',
 			),
 			array(
 				'label' => 'Margin Top',
@@ -1315,7 +1314,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'margin-top',
 				'section' => 'styling',
 				'tab' => 'Carousel Arrows',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => 'Size',
@@ -1327,7 +1326,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'width,height',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => 'Carousel Arrows'
+				'tab' => 'Carousel Arrows',
 			),
 			array(
 				'label' => 'Size - Arrows',
@@ -1339,7 +1338,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => 'Carousel Arrows'
+				'tab' => 'Carousel Arrows',
 			),
 			array(
 				'label' => 'Margin Bottom',
@@ -1354,7 +1353,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'styling',
 				'tab' => 'Carousel Arrows',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 
 		);
@@ -1371,7 +1370,7 @@ class DSLC_Module {
 				'std' => '800',
 				'type' => 'text',
 				'section' => 'styling',
-				'tab' => 'Carousel Circles'
+				'tab' => 'Carousel Circles',
 			),
 			array(
 				'label' => 'Color',
@@ -1382,7 +1381,7 @@ class DSLC_Module {
 				'affect_on_change_el' => '.owl-pagination .owl-page span',
 				'affect_on_change_rule' => 'background-color',
 				'section' => 'styling',
-				'tab' => 'Carousel Circles'
+				'tab' => 'Carousel Circles',
 			),
 			array(
 				'label' => 'Color - Active',
@@ -1393,7 +1392,7 @@ class DSLC_Module {
 				'affect_on_change_el' => '.owl-pagination .owl-page.active span',
 				'affect_on_change_rule' => 'background-color',
 				'section' => 'styling',
-				'tab' => 'Carousel Circles'
+				'tab' => 'Carousel Circles',
 			),
 			array(
 				'label' => 'Margin Top',
@@ -1408,7 +1407,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'margin-top',
 				'section' => 'styling',
 				'tab' => 'Carousel Circles',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => 'Size',
@@ -1420,7 +1419,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'width,height',
 				'section' => 'styling',
 				'tab' => 'Carousel Circles',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => 'Spacing',
@@ -1432,7 +1431,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'margin-left,margin-right',
 				'section' => 'styling',
 				'tab' => 'Carousel Circles',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 
 		);
@@ -1508,7 +1507,7 @@ class DSLC_Module {
 				'affect_on_change_el' => '.dslc-pagination',
 				'affect_on_change_rule' => 'border-color',
 				'section' => 'styling',
-				'tab' => 'Pagination'
+				'tab' => 'Pagination',
 			),
 			array(
 				'label' => 'Container - Border Width',
@@ -1524,7 +1523,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'border-width',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => 'Pagination'
+				'tab' => 'Pagination',
 			),
 			array(
 				'label' => 'Container - Borders',
@@ -1534,19 +1533,19 @@ class DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => 'Top',
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => 'Right',
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => 'Bottom',
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => 'Left',
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -1571,7 +1570,7 @@ class DSLC_Module {
 				'increment' => 1,
 				'section' => 'styling',
 				'tab' => 'Pagination',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => 'Container - Padding Vertical',
@@ -1586,7 +1585,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => 'Pagination'
+				'tab' => 'Pagination',
 			),
 			array(
 				'label' => 'Container - Padding Horizontal',
@@ -1601,7 +1600,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => 'Pagination'
+				'tab' => 'Pagination',
 			),
 
 			array(
@@ -1635,7 +1634,7 @@ class DSLC_Module {
 				'affect_on_change_el' => '.dslc-pagination li.dslc-inactive a',
 				'affect_on_change_rule' => 'border-color',
 				'section' => 'styling',
-				'tab' => 'Pagination'
+				'tab' => 'Pagination',
 			),
 			array(
 				'label' => 'Item - Active - Border Color',
@@ -1646,7 +1645,7 @@ class DSLC_Module {
 				'affect_on_change_el' => '.dslc-pagination li.dslc-active a',
 				'affect_on_change_rule' => 'border-color',
 				'section' => 'styling',
-				'tab' => 'Pagination'
+				'tab' => 'Pagination',
 			),
 			array(
 				'label' => 'Item - Border Width',
@@ -1662,7 +1661,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'border-width',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => 'Pagination'
+				'tab' => 'Pagination',
 			),
 			array(
 				'label' => 'Item - Active - Border Width',
@@ -1674,7 +1673,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'border-width',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => 'Pagination'
+				'tab' => 'Pagination',
 			),
 			array(
 				'label' => 'Item - Borders',
@@ -1684,19 +1683,19 @@ class DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => 'Top',
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => 'Right',
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => 'Bottom',
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => 'Left',
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -1721,7 +1720,7 @@ class DSLC_Module {
 				'increment' => 1,
 				'section' => 'styling',
 				'tab' => 'Pagination',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => 'Item - Color',
@@ -1758,7 +1757,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'styling',
 				'tab' => 'Pagination',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => 'Item - Font Weight',
@@ -1836,7 +1835,7 @@ class DSLC_Module {
 				'tab' => 'Pagination',
 				'ext' => 'px',
 				'min' => -50,
-				'max' => 50
+				'max' => 50,
 			),
 			array(
 				'label' => 'Item - Padding Vertical',
@@ -1851,7 +1850,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => 'Pagination'
+				'tab' => 'Pagination',
 			),
 			array(
 				'label' => 'Item - Padding Horizontal',
@@ -1866,7 +1865,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => 'Pagination'
+				'tab' => 'Pagination',
 			),
 			array(
 				'label' => 'Item - Spacing',
@@ -1878,7 +1877,7 @@ class DSLC_Module {
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => 'Pagination'
+				'tab' => 'Pagination',
 			),
 
 		);
@@ -1924,7 +1923,7 @@ class DSLC_Module {
 					),
 				),
 				'tab' => 'smaller monitor',
-				'section' => 'responsive'
+				'section' => 'responsive',
 			),
 			array(
 				'label' => 'Thumbnail',
@@ -1945,7 +1944,7 @@ class DSLC_Module {
 				'section' => 'responsive',
 				'refresh_on_change' => false,
 				'affect_on_change_rule' => 'display',
-				'affect_on_change_el' => '.dslc-blog-post-thumb'
+				'affect_on_change_el' => '.dslc-blog-post-thumb',
 			),
 
 			/**
@@ -1984,7 +1983,7 @@ class DSLC_Module {
 					),
 				),
 				'tab' => 'tablet portrait',
-				'section' => 'responsive'
+				'section' => 'responsive',
 			),
 
 			/**
@@ -2023,7 +2022,7 @@ class DSLC_Module {
 					),
 				),
 				'tab' => 'Phone',
-				'section' => 'responsive'
+				'section' => 'responsive',
 			),
 
 		);
@@ -2053,14 +2052,14 @@ class DSLC_Module {
 	}
 
 	/**
- 	 * Declare module options
- 	 */
+	 * Declare module options
+	 */
 	function options() {
 		die( 'Function "options" must be over-ridden in a sub-class (the module class).' );
 	}
 
 	/**
-	 * The front-end output of the module
+	 * The front-end output of the module.
 	 */
 	function output( $options ) {
 		die( 'Function "output" must be over-ridden in a sub-class (the module class).' );
@@ -2102,7 +2101,7 @@ class DSLC_Module {
 			$data_attr_size = $options['dslc_m_size'];
 		}
 
-		if ( isset( $options['dslc_m_size_last'] ) && $options['dslc_m_size_last'] == 'yes' ) {
+		if ( isset( $options['dslc_m_size_last'] ) && 'yes' === $options['dslc_m_size_last'] ) {
 			$class_size_output .= ' dslc-last-col';
 		}
 
@@ -2111,22 +2110,22 @@ class DSLC_Module {
 		 */
 
 		$class_show_on = '';
+
 		if ( isset( $options['css_show_on'] ) ) {
 
 			$show_on = explode( ' ', trim( $options['css_show_on'] ) );
 
-			if ( ! in_array( 'desktop', $show_on ) ) {
+			if ( ! in_array( 'desktop', $show_on, true ) ) {
 							$class_show_on .= 'dslc-hide-on-desktop ';
 			}
 
-			if ( ! in_array( 'tablet', $show_on ) ) {
+			if ( ! in_array( 'tablet', $show_on, true ) ) {
 							$class_show_on .= 'dslc-hide-on-tablet ';
 			}
 
-			if ( ! in_array( 'phone', $show_on ) ) {
+			if ( ! in_array( 'phone', $show_on, true ) ) {
 							$class_show_on .= 'dslc-hide-on-phone ';
 			}
-
 		}
 
 		/**
@@ -2166,7 +2165,7 @@ class DSLC_Module {
 			$options['css_load_preset'] = '';
 		}
 
-		// Module class array
+		// Module class array.
 		$module_class_arr = array();
 		$module_class_arr[] = 'dslc-module-front';
 		$module_class_arr[] = 'dslc-module-' . $this->module_id;
@@ -2185,15 +2184,15 @@ class DSLC_Module {
 
 		$module_class_arr[] = $custom_class;
 
-		// Module class array apply filters
+		// Module class array apply filters.
 		$module_class_arr = apply_filters( 'dslc_module_class', $module_class_arr, $this->module_id, $options );
 
-		// Turn module class array into string
+		// Turn module class array into string.
 		$module_class = implode( ' ', $module_class_arr );
 
 		?>
 
-		<div id="dslc-module-<?php echo $options['module_instance_id']; ?>" class="<?php echo $module_class; ?>" data-module-id="<?php echo $options['module_instance_id']; ?>" data-dslc-module-id="<?php echo $this->module_id; ?>" data-dslc-module-size="<?php echo $data_attr_size ?>" data-dslc-anim="<?php echo $options['css_anim'] ?>" data-dslc-anim-delay="<?php echo $options['css_anim_delay']; ?>" data-dslc-anim-duration="<?php echo $options['css_anim_duration']; ?>"  data-dslc-anim-easing="<?php echo $options['css_anim_easing']; ?>" data-dslc-preset="<?php echo $options['css_load_preset']; ?>" <?php echo $title_attr; ?>>
+		<div id="dslc-module-<?php echo esc_attr( $options['module_instance_id'] ); ?>" class="<?php echo esc_attr( $module_class ); ?>" data-module-id="<?php echo esc_attr( $options['module_instance_id'] ); ?>" data-dslc-module-id="<?php echo esc_attr( $this->module_id ); ?>" data-dslc-module-size="<?php echo esc_attr( $data_attr_size ); ?>" data-dslc-anim="<?php echo esc_attr( $options['css_anim'] ); ?>" data-dslc-anim-delay="<?php echo esc_attr( $options['css_anim_delay'] ); ?>" data-dslc-anim-duration="<?php echo esc_attr( $options['css_anim_duration'] ); ?>"  data-dslc-anim-easing="<?php echo esc_attr( $options['css_anim_easing'] ); ?>" data-dslc-preset="<?php echo esc_attr( $options['css_load_preset'] ); ?>" <?php echo $title_attr; ?>>
 
 			<?php do_action( 'dslc_module_before' ); ?>
 
@@ -2201,28 +2200,26 @@ class DSLC_Module {
 				// If Live Composer in editing mode: output <style> block for the current module.
 				if ( DS_LIVE_COMPOSER_ACTIVE && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) : ?>
 
-				<style type="text/css" id="css-for-dslc-module-<?php echo $options['module_instance_id']; ?>"><?php
+				<style type="text/css" id="css-for-dslc-module-<?php echo esc_attr( $options['module_instance_id'] ); ?>"><?php
 
-					$options_arr = $this->options();
+				$options_arr = $this->options();
 
-					if ( isset( $options['css_custom'] ) && $options['css_custom'] == 'disabled' ) {
+				if ( ! isset( $options['css_custom'] ) && 'disabled' !== $options['css_custom'] ) {
 
-
-					} else {
-						dslc_generate_custom_css( $options_arr, $options, true );
-						$googlefonts_output = '';
-						foreach ( $dslc_googlefonts_array as $googlefont ) {
-							if ( in_array( $googlefont, $dslc_all_googlefonts_array ) ) {
-								$googlefont = str_replace( ' ', '+', $googlefont );
-								if ( $googlefont != '' ) {
-									$googlefonts_output .= '@import url("//fonts.googleapis.com/css?family=' . $googlefont . ':100,200,300,400,500,600,700,800,900&subset=latin,latin-ext"); ';
-								}
+					dslc_generate_custom_css( $options_arr, $options, true );
+					$googlefonts_output = '';
+					foreach ( $dslc_googlefonts_array as $googlefont ) {
+						if ( in_array( $googlefont, $dslc_all_googlefonts_array, true ) ) {
+							$googlefont = str_replace( ' ', '+', $googlefont );
+							if ( '' !== $googlefont ) {
+								$googlefonts_output .= '@import url("//fonts.googleapis.com/css?family=' . $googlefont . ':100,200,300,400,500,600,700,800,900&subset=latin,latin-ext"); ';
 							}
 						}
-						echo $googlefonts_output;
-						echo $dslc_css_style;
-
 					}
+					echo $googlefonts_output;
+					echo $dslc_css_style;
+
+				}
 
 				?></style>
 
@@ -2260,73 +2257,74 @@ class DSLC_Module {
 
 	function module_end( $user_options ) {
 
-		// Get options array
+		$options = array();
+		$options_ids = array();
+
+		// Get options array.
 		$options = $this->options();
 
-		// Bring back IDs for image options
+		// Bring back IDs for image options.
 		global $dslc_var_image_option_bckp;
 		foreach ( $dslc_var_image_option_bckp as $key => $value ) {
-			$user_options[$key] = $value;
+			$user_options[ $key ] = $value;
 		}
 
-		// Other vars
+		// Other vars.
 		$user_options['module_id'] = $this->module_id;
 		if ( ! isset( $user_options['dslc_m_size'] ) ) {
 			$user_options['dslc_m_size'] = '12';
 		}
-		$option_ids = array();
+
 		$user_options_no_defaults = $user_options;
 
-		?>
+		// If Live Composer is in editing mode: output some additional (hidden) elements.
+		if ( DS_LIVE_COMPOSER_ACTIVE && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) : ?>
 
-			<?php
-			// If Live Composer is in editing mode: output some additional (hidden) elements.
-			if ( DS_LIVE_COMPOSER_ACTIVE && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) : ?>
+			<div class="dslca-module-options-front">
 
-				<div class="dslca-module-options-front">
+				<?php foreach ( $options as $key => $option ) : ?>
 
-					<?php foreach ( $options as $key => $option ) : ?>
+				<?php
 
-						<?php
+				// Option ID.
+				$option_id = $option['id'];
+				$options_ids[] = $option['id'];
 
-							// Option ID
-							$option_id = $option['id'];
-							$options_ids[] = $option['id'];
+				// If value already set use it, if not use default.
+				if ( isset( $user_options[ $option_id ] ) ) {
+					$option_value = $user_options[ $option_id ];
+				} else {
+					$option_value = $option['std'];
+				}
 
-							// If value already set use it, if not use default
-							if ( isset( $user_options[$option_id] ) ) {
-															$option_value = $user_options[$option_id];
-							} else {
-															$option_value = $option['std'];
-							}
+				if ( isset( $user_options[ $option_id ] ) && $user_options[ $option_id ] === $option['std'] ) {
+					unset( $user_options_no_defaults[ $option_id ] );
+				}
 
-							if ( isset( $user_options[$option_id] ) && $user_options[$option_id] == $option['std'] ) {
-								unset( $user_options_no_defaults[$option_id] );
-							}
-						?>
+				?>
 
-						<textarea class="dslca-module-option-front" data-id="<?php echo $option_id; ?>"><?php echo stripslashes( $option_value ); ?></textarea>
-					<?php endforeach; ?>
+					<textarea class="dslca-module-option-front" data-id="<?php echo esc_attr( $option_id ); ?>"><?php echo stripslashes( $option_value ); ?></textarea>
+				<?php endforeach; ?>
 
-					<?php foreach ( $user_options as $user_option_id => $user_option_val ) : ?>
+				<?php foreach ( $user_options as $user_option_id => $user_option_val ) : ?>
 
-						<?php if ( ! in_array( $user_option_id, $options_ids ) ) : ?>
+					<?php if ( ! in_array( $user_option_id, $options_ids, true ) ) : ?>
 
-							<textarea class="dslca-module-option-front" data-id="<?php echo $user_option_id; ?>"><?php echo stripslashes( $user_option_val ); ?></textarea>
+						<textarea class="dslca-module-option-front" data-id="<?php echo esc_attr( $user_option_id ); ?>"><?php echo stripslashes( $user_option_val ); ?></textarea>
 
-						<?php endif; ?>
+					<?php endif; ?>
 
-					<?php endforeach; ?>
+				<?php endforeach; ?>
 
-				</div><!-- dslca-module-options-front -->
+			</div><!-- dslca-module-options-front -->
 
-				<textarea class="dslca-module-code"><?php echo base64_encode( serialize( $user_options_no_defaults ) ); ?></textarea>
+			<textarea class="dslca-module-code"><?php echo base64_encode( serialize( $user_options_no_defaults ) ); ?></textarea>
 
-				<span class="dslc-sortable-helper-icon dslc-icon-<?php echo $this->module_icon; ?>" data-title="<?php echo $this->module_title; ?>" data-icon="<?php echo $this->module_icon; ?>"></span>
+			<span class="dslc-sortable-helper-icon dslc-icon-<?php echo esc_attr( $this->module_icon ); ?>" data-title="<?php echo esc_attr( $this->module_title ); ?>" data-icon="<?php echo esc_attr( $this->module_icon ); ?>"></span>
 
-			<?php endif; ?>
+		<?php endif; ?>
 
-			<?php do_action( 'dslc_module_after' ); ?>
+		<?php do_action( 'dslc_module_after' ); ?>
 
 		</div><!-- .dslc-module -->
 		<?php
@@ -2336,6 +2334,11 @@ class DSLC_Module {
 
 	}
 
+	/**
+	 * Add presets data for the current module
+	 *
+	 * @return array Array with two more options to add into the module options
+	 */
 	function presets_options() {
 
 		$choices = array(
@@ -2345,17 +2348,15 @@ class DSLC_Module {
 			),
 		);
 
-		// Get current presets
+		// Get current presets.
 		$presets = get_option( 'dslc_presets' );
-		if ( $presets === false ) {
-			$presets = array();
-		} else {
+		if ( false !== $presets ) {
 			$presets = maybe_unserialize( $presets );
 			foreach ( $presets as $preset ) {
-				if ( $preset['module'] == $this->module_id ) {
+				if ( $preset['module'] === $this->module_id ) {
 					$choices[] = array(
 						'label' => $preset['title'],
-						'value' => $preset['id']
+						'value' => $preset['id'],
 					);
 				}
 			}
@@ -2384,7 +2385,5 @@ class DSLC_Module {
 		);
 
 		return $options;
-
 	}
-
 }

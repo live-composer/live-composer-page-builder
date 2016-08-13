@@ -352,24 +352,7 @@ function dslc_ajax_display_module_options( $atts ) {
 			 * Tab
 			 */
 
-			if ( ! isset( $module_option['tab'] ) ) {
-
-				if ( 'functionality' === $section ) {
-					$tabs['general_functionality'] = array(
-						'title' => __( 'General', 'live-composer-page-builder' ),
-						'id' => 'general_functionality',
-						'section' => 'functionality',
-					);
-				} else {
-					$tabs['general_styling'] = array(
-						'title' => __( 'General', 'live-composer-page-builder' ),
-						'id' => 'general_styling',
-						'section' => 'styling',
-					);
-				}
-
-				$tab_id = 'general_' . $section;
-			}
+			$tab_id = '';
 
 			if ( isset( $module_option['tab'] ) ) {
 
@@ -386,13 +369,32 @@ function dslc_ajax_display_module_options( $atts ) {
 				if ( ! in_array( $tab_id, $tabs, true ) ) {
 
 					// Add it to the tabs array.
-					$tabs[$tab_id] = array(
+					$tabs[ $tab_id ] = array(
 						'title' => $module_option['tab'],
 						'id' => $tab_id,
 						'section' => $section,
 					);
 
 				}
+			} else {
+
+				if ( 'functionality' === $section ) {
+
+					$tabs['general_functionality'] = array(
+						'title' => __( 'General', 'live-composer-page-builder' ),
+						'id' => 'general_functionality',
+						'section' => 'functionality',
+					);
+				} else {
+
+					$tabs['general_styling'] = array(
+						'title' => __( 'General', 'live-composer-page-builder' ),
+						'id' => 'general_styling',
+						'section' => 'styling',
+					);
+				}
+
+				$tab_id = 'general_' . $section;
 			}
 
 			$ext = ' ';
