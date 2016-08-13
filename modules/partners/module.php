@@ -1840,8 +1840,10 @@ class DSLC_Partners extends DSLC_Module {
 							 */
 
 							$link_to_single = true;
-							if ( $options['link'] == 'disabled' )
+
+							if ( isset( $options['link'] ) && 'disabled' === $options['link'] ) {
 								$link_to_single = false;
+							}
 
 							?>
 
@@ -1940,7 +1942,9 @@ class DSLC_Partners extends DSLC_Module {
 
 													</div><!-- .dslc-partner-main -->
 
-													<a href="<?php the_permalink(); ?>" class="dslc-post-main-inner-link-cover"></a>
+													<?php if ( $link_to_single ) : ?>
+														<a href="<?php the_permalink(); ?>" class="dslc-post-main-inner-link-cover"></a>
+													<?php endif; ?>
 
 												</div><!-- .dslc-partner-main -->
 

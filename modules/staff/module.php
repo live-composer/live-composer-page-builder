@@ -2613,7 +2613,9 @@ class DSLC_Staff extends DSLC_Module {
 
 													</div><!-- .dslc-staff-member-main -->
 
-													<a href="<?php the_permalink(); ?>" class="dslc-post-main-inner-link-cover"></a>
+													<?php if ( $link_to_single ) : ?>
+														<a href="<?php the_permalink(); ?>" class="dslc-post-main-inner-link-cover"></a>
+													<?php endif; ?>
 
 												</div><!-- .dslc-staff-member-main -->
 
