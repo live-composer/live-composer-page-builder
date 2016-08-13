@@ -2204,7 +2204,7 @@ class DSLC_Module {
 
 				$options_arr = $this->options();
 
-				if ( isset( $options['css_custom'] ) && 'disabled' !== $options['css_custom'] ) {
+				if ( ! isset( $options['css_custom'] ) || 'enabled' === $options['css_custom'] ) {
 
 					dslc_generate_custom_css( $options_arr, $options, true );
 					$googlefonts_output = '';
