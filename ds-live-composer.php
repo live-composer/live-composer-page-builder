@@ -195,6 +195,7 @@ function lc_welcome( $plugin ) {
 
 		wp_safe_redirect( admin_url( 'admin.php?page=dslc_plugin_options#dslc-top' ) );
 		exit; // ! important to keep this exit line
+		// Function wp_redirect() does not exit automatically and should almost always be followed by exit.
 	}
 
 }

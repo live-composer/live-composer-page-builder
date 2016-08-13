@@ -7,6 +7,7 @@ checks:
     avoid_superglobals: false
     one_class_per_file: false
     code_rating: true
+    no_exit: false
     coding_standard:
         name: WordPress
 
