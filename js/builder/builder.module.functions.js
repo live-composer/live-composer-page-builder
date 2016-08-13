@@ -141,6 +141,9 @@
 
 		e.preventDefault();
 
+		// Check if action can be fired
+		if ( !actionAvail() ) return false;
+
 		if ( ! $(this).hasClass('dslca-action-disabled') ) {
 
 			$('.dslca-change-width-module-options', this).toggle();

@@ -632,13 +632,13 @@ jQuery(document).ready(function($) {
 			 * Update option
 			 */
 
-			jQuery( '.dslca-module-option-front[data-id="' + dslcOptionID + '"]', dslcModule ).val( dslcAffectOnChangeValOrig );
+			jQuery( '.dslca-module-option-front[data-id="' + dslcOptionID + '"]', dslcModule ).val( dslcAffectOnChangeValOrig || dslcOption.val() );
 
 			LiveComposer.Utils.publish( 'moduleChanged', {
 
 				moduleId: dslcModule[0].id,
 				optionID: dslcOptionID,
-				optionVal: dslcAffectOnChangeValOrig
+				optionVal: dslcAffectOnChangeValOrig || dslcOption.val()
 			});
 		}
 	});

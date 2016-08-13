@@ -121,10 +121,12 @@
 	 */
 	LiveComposer.Builder.PreviewAreaDocument.on( 'click', '.dslca-change-width-modules-area-options span', function(){
 
+		// Check if action can be fired
+		if ( !actionAvail() ) return false;
+
 		if ( ! jQuery(this).hasClass('dslca-action-disabled') ) {
 			dslc_modules_area_width_set( jQuery(this).closest('.dslc-modules-area'), jQuery(this).data('size') );
 		}
-
 	});
 
 	/**
@@ -133,6 +135,9 @@
 	LiveComposer.Builder.PreviewAreaDocument.on( 'click', '.dslca-change-width-modules-area-hook', function(e){
 
 		e.preventDefault();
+
+		// Check if action can be fired
+		if ( !actionAvail() ) return false;
 
 		if ( ! jQuery(this).hasClass('dslca-action-disabled') ) {
 
