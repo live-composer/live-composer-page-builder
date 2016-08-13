@@ -8,6 +8,7 @@ checks:
     one_class_per_file: false
     code_rating: true
     no_exit: false
+    side_effects_or_types: false
     coding_standard:
         name: WordPress
 
