@@ -162,10 +162,12 @@ function dslc_st_init() {
  * Get the template ID of a specific post.
  *
  * @since 1.0
- * @param  string $post_id Post ID that we want to find template ID for.
- * @return string          Template ID
+ * @param  string $post_id  Post ID that we want to find template ID for.
+ * @return string/boolean   Template ID or false if not found
  */
 function dslc_st_get_template_id( $post_id ) {
+
+	$template_id = false;
 
 	// Get the template ID set for the post ( returns false if not set ).
 	$template = get_post_meta( $post_id, 'dslc_post_template', true );

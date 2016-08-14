@@ -388,9 +388,14 @@ function dslc_hf_get_ID( $post_ID = false ) {
 
 	}
 
-	// Get header/footer template
-	$header_tpl = get_post_meta( $post_ID, 'dslc_header', true );
-	$footer_tpl = get_post_meta( $post_ID, 'dslc_footer', true );
+	if ( $post_ID ) {
+		// Get header/footer template
+		$header_tpl = get_post_meta( $post_ID, 'dslc_header', true );
+		$footer_tpl = get_post_meta( $post_ID, 'dslc_footer', true );
+	} else {
+		$header_tpl = false;
+		$footer_tpl = false;
+	}
 
 	// If no header template set, make it "default"
 	if ( ! $header_tpl ) {
