@@ -624,7 +624,7 @@ function dslc_filter_content( $content ) {
 		if ( is_singular( $dslc_post_types ) ) {
 
 			// Get template ID set for currently shown post.
-			$template_id = dslc_st_get_template_ID( get_the_ID() );
+			$template_id = dslc_st_get_template_id( get_the_ID() );
 
 			// If template ID exists.
 			if ( $template_id ) {
@@ -1282,7 +1282,7 @@ function dslc_custom_css( $dslc_code = '' ) {
 
 		// If single, load template?
 		if ( is_singular( $dslc_post_types ) ) {
-			$template_id = dslc_st_get_template_ID( get_the_ID() );
+			$template_id = dslc_st_get_template_id( get_the_ID() );
 		}
 
 		// If archive, load template?
@@ -1306,7 +1306,7 @@ function dslc_custom_css( $dslc_code = '' ) {
 		if ( $template_id ) {
 			$header_footer = dslc_hf_get_ID( $template_id );
 		} else if ( is_singular( $dslc_post_types ) ) {
-			$template_id = dslc_st_get_template_ID( get_the_ID() );
+			$template_id = dslc_st_get_template_id( get_the_ID() );
 			$header_footer = dslc_hf_get_ID( $template_id );
 		} else {
 			$header_footer = dslc_hf_get_ID( get_the_ID() );

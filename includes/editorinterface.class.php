@@ -79,7 +79,7 @@ class DSLC_EditorInterface{
 					} else {
 
 						// Check if it has a template attached to it.
-						$template = dslc_st_get_template_ID( get_the_ID() );
+						$template = dslc_st_get_template_id( get_the_ID() );
 
 						if ( $template ) {
 

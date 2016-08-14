@@ -57,7 +57,7 @@ function dslc_st_template_switch() {
 	if ( in_array( $post->post_type, $dslc_post_types ) ) {
 
 		// Get template ID
-		$template_ID = dslc_st_get_template_ID( $post->ID );
+		$template_ID = dslc_st_get_template_id( $post->ID );
 
 		// If the post has specific template, set it in variable
 		if ( $template_ID ) {
@@ -257,13 +257,21 @@ function dslc_tp_unique_default( $post_id ) {
  * Update dslc_plugin_options_archives option
  * if current template created for archive listing / 404 page / Search Results.
  *
+ * Archive, Author, 404 and Search result templates can't have multiply templates
+ * as single post templates. In this function we check:
+ * – if we are saving a template that can't have more than one template,
+ * – update the LC plugin options with selected template
+ * - remove 'dslc_template_for' meta value from any other duplicates.
+ *
+ * This function has nothing to do with single post templates.
+ *
  * @param  String $post_id  ID of the post being saved.
  * @return void
  */
 function dslc_tp_update_archive_templates_option( $post_id ) {
 
 	// Allowed to do this?
-	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY_SAVE ) ) {
+	if ( dslc_current_user_can( 'save' ) ) {
 
 		// If no post type ( not really a save action ) stop execution.
 		if ( ! isset( $_POST['post_type'] ) ) {
@@ -311,34 +319,34 @@ function dslc_tp_update_archive_templates_option( $post_id ) {
 				// Make sure we have only one template for search_results.
 				dslc_tp_remove_template_from_meta( 'author' );
 
-			} else if ( 'post' === $value ) {
-
-				$plugin_options['post'] = $post_id;
-				dslc_tp_remove_template_from_meta( 'post' );
-
 			} else if ( 'dslc_projects_archive' === $value ) {
 
 				$plugin_options['dslc_projects'] = $post_id;
+				// Make sure we have only one template for dslc_projects_archive.
 				dslc_tp_remove_template_from_meta( 'dslc_projects_archive' );
 
 			} else if ( 'dslc_galleries_archive' === $value ) {
 
 				$plugin_options['dslc_galleries'] = $post_id;
+				// Make sure we have only one template for dslc_galleries_archive.
 				dslc_tp_remove_template_from_meta( 'dslc_galleries_archive' );
 
 			} else if ( 'dslc_downloads_archive' === $value ) {
 
 				$plugin_options['dslc_downloads'] = $post_id;
+				// Make sure we have only one template for dslc_downloads_archive.
 				dslc_tp_remove_template_from_meta( 'dslc_downloads_archive' );
 
 			} else if ( 'dslc_staff_archive' === $value ) {
 
 				$plugin_options['dslc_staff'] = $post_id;
+				// Make sure we have only one template for dslc_staff_archive.
 				dslc_tp_remove_template_from_meta( 'dslc_staff_archive' );
 
 			} else if ( 'dslc_partners_archive' === $value ) {
 
 				$plugin_options['dslc_partners'] = $post_id;
+				// Make sure we have only one template for dslc_partners_archive.
 				dslc_tp_remove_template_from_meta( 'dslc_partners_archive' );
 
 			}

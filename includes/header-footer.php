@@ -363,7 +363,7 @@ function dslc_hf_get_ID( $post_ID = false ) {
 
 		// If currently showing a singular post of a post type that supports "post templates"
 		if ( is_singular( $dslc_post_types ) ) {
-			$post_ID = dslc_st_get_template_ID( get_the_ID() );
+			$post_ID = dslc_st_get_template_id( get_the_ID() );
 
 		// If currently showing a category archive page
 		} elseif ( is_archive() && ! is_author() && ! is_search() ) {
