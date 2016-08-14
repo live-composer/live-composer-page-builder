@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 function dslc_st_init() {
 
 	$capability = dslc_get_option( 'lc_min_capability_page', 'dslc_plugin_options_access_control' );
-	if ( ! $capability ) $capability = 'publish_posts';
+	if ( ! $capability ) { $capability = 'publish_posts'; }
 
 	register_post_type( 'dslc_templates', array(
 		'menu_icon' => 'dashicons-admin-page',
@@ -47,7 +47,7 @@ function dslc_st_init() {
 			'delete_post' => $capability,
 			'read_post' => $capability,
 		),
-		'show_in_menu' =>'themes.php',
+		'show_in_menu' => 'themes.php',
 	) );
 
 	global $dslc_var_post_options;
@@ -162,11 +162,13 @@ function dslc_st_init() {
  * Get the template ID of a specific post.
  *
  * @since 1.0
+ * @param  string $post_id Post ID that we want to find template ID for.
+ * @return string          Template ID
  */
-function dslc_st_get_template_ID( $post_ID ) {
+function dslc_st_get_template_id( $post_id ) {
 
 	// Get the template ID set for the post ( returns false if not set ).
-	$template = get_post_meta( $post_ID, 'dslc_post_template', true );
+	$template = get_post_meta( $post_id, 'dslc_post_template', true );
 
 	// If no template set, make it "default".
 	if ( ! $template ) {
@@ -184,7 +186,7 @@ function dslc_st_get_template_ID( $post_ID ) {
 			'meta_query' => array(
 				array(
 					'key' => 'dslc_template_for',
-					'value' => get_post_type( $post_ID ),
+					'value' => get_post_type( $post_id ),
 					'compare' => '=',
 				),
 				array(
@@ -193,23 +195,23 @@ function dslc_st_get_template_ID( $post_ID ) {
 					'compare' => '=',
 				),
 			),
-			'order' => 'DESC'
+			'order' => 'DESC',
 		);
 		$tpls = get_posts( $args );
 
 		// If default template found set the ID if not make it false.
-		if ( $tpls )
-			$template_ID = $tpls[0]->ID;
-		else
-			$template_ID = false;
+		if ( $tpls ) {
+			$template_id = $tpls[0]->ID;
+		} else {
+			$template_id = false;
+		}
 
 	// Specific template supplied, return the ID.
 	} elseif ( $template ) {
 
-		$template_ID = $template;
-
+		$template_id = $template;
 	}
 
 	// Return the template ID.
-	return $template_ID;
+	return $template_id;
 }

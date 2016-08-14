@@ -472,7 +472,7 @@ function dslc_post_add_row_action( $actions, $post ) {
 
 		if ( array_key_exists( $post_type, $dslc_var_templates_pt ) ) {
 
-			$template_id = dslc_st_get_template_ID( $post->ID );
+			$template_id = dslc_st_get_template_id( $post->ID );
 			$url = DSLC_EditorInterface::get_editor_link( $template_id, $post->ID );
 
 			$actions = array('edit-in-live-composer' => '<a href="'. $url . '">'. __( 'Edit Template', 'live-composer-page-builder' ) .'</a>') + $actions;

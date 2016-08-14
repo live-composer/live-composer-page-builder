@@ -403,7 +403,7 @@ function dslc_body_class( $classes ) {
 	if ( ! $has_lc_content && is_singular( $dslc_post_types ) ) {
 
 		// Get the ID of the template.
-		$template_id = dslc_st_get_template_ID( get_the_ID() );
+		$template_id = dslc_st_get_template_id( get_the_ID() );
 
 		// If template exists, allow the class.
 		if ( $template_id ) {
@@ -581,6 +581,31 @@ function dslc_is_editor_active( $capability = 'save' ) {
 		return false;
 	}
 }
+
+/**
+ * Check the current user permissions
+ *
+ * @param  string $capability Keyword for the capability to check against ('save' or 'access').
+ * @return boolean            Allowed or not.
+ */
+function dslc_current_user_can( $capability = 'save' ) {
+
+	// Check for saving capability.
+	if ( 'save' === $capability ) {
+		$capability_check = DS_LIVE_COMPOSER_CAPABILITY_SAVE;
+	// Check for access capability ( can use editor but can't publish changes ).
+	} elseif ( 'access' === $capability ) {
+		$capability_check = DS_LIVE_COMPOSER_CAPABILITY;
+	}
+
+	// Check if editor is activated and current user can use the editor.
+	if ( is_user_logged_in() && current_user_can( $capability_check ) ) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
 
 /**
  * Gets LC code of a specific post/page
