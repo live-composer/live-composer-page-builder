@@ -590,12 +590,11 @@ function dslc_is_editor_active( $capability = 'save' ) {
  */
 function dslc_current_user_can( $capability = 'save' ) {
 
-	// Check for saving capability.
-	if ( 'save' === $capability ) {
-		$capability_check = DS_LIVE_COMPOSER_CAPABILITY_SAVE;
 	// Check for access capability ( can use editor but can't publish changes ).
-	} elseif ( 'access' === $capability ) {
+	if ( 'access' === $capability ) {
 		$capability_check = DS_LIVE_COMPOSER_CAPABILITY;
+	} else { // ( 'save' === $capability ) { // Check for saving capability.
+		$capability_check = DS_LIVE_COMPOSER_CAPABILITY_SAVE;
 	}
 
 	// Check if editor is activated and current user can use the editor.
