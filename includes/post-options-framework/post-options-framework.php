@@ -223,15 +223,15 @@ function DSLC_EditorInterface_post_options( $object, $metabox ) {
 
 				<div class="dslca-post-option-field dslca-post-option-field-<?php echo esc_attr( $post_option['type'] ); ?>">
 
-					<?php if ( $post_option['type'] == 'text' ) : ?>
+					<?php if ( 'text' === $post_option['type'] ) : ?>
 
 						<input type="text" name="<?php echo esc_attr( $post_option['id'] ); ?>" id="<?php echo esc_attr( $post_option['id'] ); ?>" value="<?php echo $curr_value; ?>" size="30" />
 
-					<?php elseif ( $post_option['type'] == 'textarea' ) : ?>
+					<?php elseif ( 'textarea' === $post_option['type'] ) : ?>
 
 						<textarea name="<?php echo esc_attr( $post_option['id'] ); ?>" id="<?php echo esc_attr( $post_option['id'] ); ?>"><?php echo $curr_value; ?></textarea>
 
-					<?php elseif ( $post_option['type'] == 'select' ) : ?>
+					<?php elseif ( 'select' === $post_option['type'] ) : ?>
 
 						<select type="text" name="<?php echo esc_attr( $post_option['id'] ); ?>" id="<?php echo esc_attr( $post_option['id'] ); ?>">
 							<?php foreach ( $post_option['choices'] as $choice ) : ?>
@@ -294,15 +294,18 @@ function DSLC_EditorInterface_post_options( $object, $metabox ) {
 
 						</div>
 
-					<?php elseif ( $post_option['type'] == 'radio' ) : ?>
+					<?php elseif ( 'radio' === $post_option['type'] ) : ?>
 
 						<?php foreach ( $post_option['choices'] as $key => $choice ) : ?>
 							<div class="dslca-post-option-field-choice">
-								<input type="radio" name="<?php echo $post_option['id']; ?>" id="<?php echo $post_option['id']; ?>" value="<?php echo $choice['value']; ?>" <?php if ( $choice['value'] == $curr_value ) echo 'checked="checked"'; ?> /> <label for="<?php echo $post_option['id'] . $key; ?>"><?php echo $choice['label']; ?></label>
+								<input type="radio" name="<?php echo esc_attr( $post_option['id'] ); ?>" id="<?php echo esc_attr( $post_option['id'] . $key ); ?>" value="<?php echo esc_attr( $choice['value'] ); ?>" <?php if ( $choice['value'] === $curr_value ) { echo 'checked="checked"'; } ?> /> 
+								<label for="<?php echo esc_attr( $post_option['id'] . $key ); ?>">
+									<?php echo $choice['label']; ?>
+								</label>
 							</div><!-- .dslca-post-option-field-choice -->
 						<?php endforeach; ?>
 
-					<?php elseif ( $post_option['type'] == 'file' ) : ?>
+					<?php elseif ( 'file' === $post_option['type'] ) : ?>
 
 						<span class="dslca-post-option-add-file-hook">Choose File</span><br>
 
@@ -338,7 +341,7 @@ function DSLC_EditorInterface_post_options( $object, $metabox ) {
 
 						<input type="hidden" class="dslca-post-options-field-file" name="<?php echo $post_option['id']; ?>" id="<?php echo $post_option['id']; ?>" value="<?php echo $curr_value; ?>" />
 
-					<?php elseif ( $post_option['type'] == 'files' ) : ?>
+					<?php elseif ( 'files' === $post_option['type'] ) : ?>
 
 						<span class="dslca-post-option-add-file-hook" data-multiple="true">Add Files</span><br>
 
@@ -365,7 +368,7 @@ function DSLC_EditorInterface_post_options( $object, $metabox ) {
 
 						<input type="hidden" class="dslca-post-options-field-file" name="<?php echo $post_option['id']; ?>" id="<?php echo $post_option['id']; ?>" value="<?php echo $curr_value; ?>" />
 
-					<?php elseif ( $post_option['type'] == 'date' ) : ?>
+					<?php elseif ( 'date' === $post_option['type'] ) : ?>
 
 						<input class="dslca-post-options-field-datepicker" type="text" name="<?php echo $post_option['id']; ?>" id="<?php echo $post_option['id']; ?>" value="<?php echo $curr_value; ?>" size="30" />
 
