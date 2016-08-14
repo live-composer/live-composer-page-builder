@@ -1452,7 +1452,19 @@ body a:focus {
 }
 
 .dslc-module-front {
+	position: relative;
 	min-height: 30px;
+}
+
+.dslc-module-front.deactivated:before,
+.dslc-modules-section.deactivated:before{
+
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.55);
 }
 
 .dslc-module-front:hover,

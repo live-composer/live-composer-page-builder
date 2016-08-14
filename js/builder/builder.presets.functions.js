@@ -16,7 +16,7 @@ function dslc_update_preset() {
 	if ( dslcDebug ) console.log( 'dslc_update_preset' );
 
 	// Vars
-	var module = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewFrame),
+	var module = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument),
 	presetName = module.find('.dslca-module-option-front[data-id="css_load_preset"]').val(),
 	presetCode = module.find('.dslca-module-code').val(),
 	moduleID = module.data('dslc-module-id');
@@ -80,6 +80,6 @@ jQuery(document).ready(function($){
 	 */
 
 	$(document).on( 'change', '.dslca-module-edit-field[name="css_load_preset"]', function(e){
-		$('.dslca-module-being-edited', LiveComposer.Builder.PreviewFrame).addClass('dslca-preload-preset');
+		$('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).addClass('dslca-preload-preset');
 	});
 });

@@ -37,12 +37,16 @@ function dslc_generate_custom_css( $module_structure, $module_settings, $restart
 	foreach ( $module_structure as $single_option ) {
 
 		if ( isset( $single_option['section'] ) && 'responsive' === $single_option['section'] ) {
+
 			if ( isset( $single_option['tab'] ) && 'Phone' === $single_option['tab'] ) {
+
 				$module_structure_resp_phone[] = $single_option;
 			} elseif ( 'Tablet' === $single_option['tab'] ) {
+
 				$module_structure_resp_tablet[] = $single_option;
 			}
 		} else {
+
 			$module_structure_resp_desktop[] = $single_option;
 		}
 	}
@@ -50,8 +54,16 @@ function dslc_generate_custom_css( $module_structure, $module_settings, $restart
 	$module_structure = array(); // Reset array.
 
 	$module_structure['desktop'] = $module_structure_resp_desktop;
-	$module_structure['tablet'] = $module_structure_resp_tablet;
-	$module_structure['phone'] = $module_structure_resp_phone;
+
+	if ( 'enabled' === $module_settings['css_res_t'] ) {
+
+		$module_structure['tablet'] = $module_structure_resp_tablet;
+	}
+
+	if ( 'enabled' === $module_settings['css_res_p'] ) {
+
+		$module_structure['phone'] = $module_structure_resp_phone;
+	}
 
 	/* Go through each device group */
 
@@ -62,14 +74,17 @@ function dslc_generate_custom_css( $module_structure, $module_settings, $restart
 		if ( '' !== $device_css ) {
 
 			if ( 'tablet' === $device ) {
+
 				$css_output .= '@media only screen and (min-width : 768px) and (max-width : 1024px)  {';
 			} elseif ( 'phone' === $device ) {
+
 				$css_output .= '@media only screen and ( max-width: 767px ) {';
 			}
 
 			$css_output .= $device_css;
 
 			if ( 'desktop' !== $device ) {
+
 				$css_output .= '}';
 			}
 		}

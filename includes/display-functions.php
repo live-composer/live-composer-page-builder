@@ -548,10 +548,6 @@ function dslc_display_templates() {
  */
 function dslc_filter_content( $content ) {
 
-	// Remove filter the_content. Need to fire it once on the page start.
-	// TODO: find a true purpose of this as it breaks the page editing.
-	// remove_filter( 'the_content', 'dslc_filter_content', 101 );
-
 	// If post pass protected and pass not supplied return original content
 	if ( post_password_required( get_the_ID() ) ) {
 		return $content;
