@@ -83,9 +83,9 @@ LiveComposer.Builder.Elements.CRow = function(elem) {
 		},
 		stop: function(e, ui){
 
+			clearInterval(LiveComposer.Builder.Flags.windowScroller);
 			jQuery('body').removeClass('dslca-drag-in-progress dslca-modules-area-drag-in-progress').addClass('dslca-drag-not-in-progress');
 			jQuery('.dslca-anim-opacity-drop').removeClass('dslca-anim-opacity-drop');
-
 		},
 		change: function( e, ui ) {
 

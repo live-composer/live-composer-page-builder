@@ -94,7 +94,7 @@ jQuery(document).ready(function($) {
 
  		// Catch keypress events (from both parent and iframe) to add keyboard support
  		dslc_keypress_events();
-
+ 		LiveComposer.Builder.UI.initPreviewAreaScroller();
  	});
 
  	jQuery('body').addClass('dslca-enabled dslca-drag-not-in-progress');
@@ -595,6 +595,7 @@ function dslc_drag_and_drop() {
 				*/
 			}
 
+			clearInterval(LiveComposer.Builder.Flags.windowScroller);
 			jQuery('body').removeClass('dslca-new-module-drag-in-progress').addClass('dslca-new-module-drag-not-in-progress');
 			jQuery('#dslc-header').removeClass('dslca-header-low-z-index');
 		},

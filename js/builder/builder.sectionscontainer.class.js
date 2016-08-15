@@ -52,6 +52,7 @@ LiveComposer.Builder.Elements.CSectionsContainer = function(elem) {
 			evt.preventDefault();
 
 			dslc_generate_code();
+			clearInterval(LiveComposer.Builder.Flags.windowScroller);
 			jQuery('body').removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
 		},
 

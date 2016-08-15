@@ -73,3 +73,38 @@ jQuery(document).ready(function($){
 		});
 	});
 });
+
+/** Window Y-scroller */
+jQuery(document).ready(function($){
+
+	/** Scroll preview area when mouse are on some distant of edge */
+	LiveComposer.Builder.UI.initPreviewAreaScroller = function() {
+
+		var pxInTik = 3;
+		var timerTik = 5;
+
+		LiveComposer.Builder.Flags.windowScroller = false;
+		jQuery(LiveComposer.Builder.PreviewAreaDocument).on('drag', 'body', function(e) {
+
+			if (LiveComposer.Builder.Flags.windowScroller != false) clearInterval(LiveComposer.Builder.Flags.windowScroller);
+
+			LiveComposer.Builder.Flags.windowScroller = setInterval(function(){
+
+				if ( e.clientY < 180 ) {
+
+					LiveComposer.Builder.PreviewAreaWindow.scrollBy(0, -pxInTik);
+				}
+
+				if ( e.clientY > window.innerHeight - 260 ) {
+
+					LiveComposer.Builder.PreviewAreaWindow.scrollBy(0 ,pxInTik);
+				}
+			}, timerTik);
+		});
+
+		jQuery(LiveComposer.Builder.PreviewAreaDocument).on('dragend mouseup', 'body', function(e) {
+
+			if( LiveComposer.Builder.Flags.windowScroller ) clearInterval(LiveComposer.Builder.Flags.windowScroller);
+		});
+	};
+});

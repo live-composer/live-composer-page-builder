@@ -47,9 +47,11 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 
 		// dragging started
 		onStart: function (evt) {
+
 			evt.oldIndex;  // element index within parent
 
 			jQuery('body').removeClass('dslca-drag-not-in-progress').addClass('dslca-drag-in-progress');
+			jQuery('body', LiveComposer.Builder.PreviewAreaWindow.document).removeClass('dslca-drag-not-in-progress').addClass('dslca-drag-in-progress');
 		},
 		// dragging ended
 
@@ -61,7 +63,9 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 			evt.preventDefault();
 
 			dslc_generate_code();
+			clearInterval(LiveComposer.Builder.Flags.windowScroller);
 			jQuery('body').removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
+			jQuery('body', LiveComposer.Builder.PreviewAreaWindow.document).removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
 		},
 
 		// Element is dropped into the list from another list
