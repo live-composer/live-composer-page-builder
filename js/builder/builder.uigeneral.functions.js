@@ -463,7 +463,7 @@ function dslc_drag_and_drop() {
 		modules_list = [ document.createElement( 'div' ) ];
 	}
 
-	var modules_list_sortable = LiveComposer.Builder.PreviewAreaWindow.Sortable.create( modules_list[0] , {
+	var modules_list_sortable = Sortable.create( modules_list[0] , {
 		sort: false, // do not allow sorting inside the list of modules
 		group: { name: 'modules', pull: 'clone', put: false },
 		animation: 150,
@@ -471,8 +471,8 @@ function dslc_drag_and_drop() {
 		draggable: '.dslca-module',
 		// ghostClass: 'dslca-module-placeholder',
 		chosenClass: 'dslca-module-dragging',
-		scroll: LiveComposer.Builder.PreviewAreaWindow, // or HTMLElement
-		scrollSensitivity: 170, // px, how near the mouse must be to an edge to start scrolling.
+		scroll: true, // or HTMLElement
+		scrollSensitivity: 150, // px, how near the mouse must be to an edge to start scrolling.
 		scrollSpeed: 15, // px
 
 
