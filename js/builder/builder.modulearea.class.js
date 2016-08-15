@@ -29,15 +29,15 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 	/**
 	 * Make MODULES inside the Modules Area draggable/sortable
 	 */
-	this.sortable = Sortable.create(elem, {
+	this.sortable = LiveComposer.Builder.PreviewAreaWindow.Sortable.create(elem, {
 		group: 'modules',
 		animation: 150,
 		handle: '.dslca-move-module-hook',
 		draggable: '.dslc-module-front',
 		// ghostClass: 'dslca-module-placeholder',
 		chosenClass: 'dslca-module-dragging',
-		scroll: true, // or HTMLElement
-		scrollSensitivity: 150, // px, how near the mouse must be to an edge to start scrolling.
+		scroll: LiveComposer.Builder.PreviewAreaWindow, // or HTMLElement
+		scrollSensitivity: 170, // px, how near the mouse must be to an edge to start scrolling.
 		scrollSpeed: 15, // px
 
 		setData: function (dataTransfer, dragEl) {
