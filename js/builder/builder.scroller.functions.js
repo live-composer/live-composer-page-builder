@@ -103,8 +103,6 @@ jQuery(document).ready(function($){
 			if ( e.clientY < topArea && direction == 'up') return false;
 			if ( e.clientY > window.innerHeight - bottomArea && direction == 'down') return false;
 
-			console.log(LiveComposer.Builder.Flags.windowScroller + ' - ' + direction + ' ' + e.clientY);
-
 			LiveComposer.Builder.Flags.windowScroller != false && LiveComposer.Builder.UI.stopScroller();
 
 			var curPxInTik = '';
@@ -136,8 +134,6 @@ jQuery(document).ready(function($){
 	};
 
 	LiveComposer.Builder.UI.stopScroller = function() {
-
-		console.trace('stopScroller');
 
 		LiveComposer.Utils.publish('LC.sortableOn', {});
 		direction = '';
