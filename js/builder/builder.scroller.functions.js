@@ -84,13 +84,15 @@ jQuery(document).ready(function($){
 
 		var pxInTik = 3;
 		var timerTik = 5;
+		var topArea = 180;
+		var bottomArea = 260; // Including module panel
 		LiveComposer.Builder.Flags.windowScroller = false;
 
 		jQuery(LiveComposer.Builder.PreviewAreaDocument).on('drag', 'body', function(e) {
 
 			/** If mouse is dragging within the scroll area */
-			if ( e.clientY > 180 &&
-				e.clientY < window.innerHeight - 260
+			if ( e.clientY > topArea &&
+				e.clientY < window.innerHeight - bottomArea
 			) {
 
 				LiveComposer.Builder.Flags.windowScroller != false && LiveComposer.Builder.UI.stopScroller();
@@ -98,8 +100,8 @@ jQuery(document).ready(function($){
 			}
 
 			/** Don't need scroll reinit when moving mouse in scroll area */
-			if ( e.clientY < 180 && direction == 'up') return false;
-			if ( e.clientY > window.innerHeight - 260 && direction == 'down') return false;
+			if ( e.clientY < topArea && direction == 'up') return false;
+			if ( e.clientY > window.innerHeight - bottomArea && direction == 'down') return false;
 
 			console.log(LiveComposer.Builder.Flags.windowScroller + ' - ' + direction + ' ' + e.clientY);
 
@@ -107,13 +109,13 @@ jQuery(document).ready(function($){
 
 			var curPxInTik = '';
 
-			if ( e.clientY < 180 ) {
+			if ( e.clientY < topArea ) {
 
 				direction = 'up';
 				curPxInTik = -pxInTik;
 			}
 
-			if ( e.clientY > window.innerHeight - 260 ) {
+			if ( e.clientY > window.innerHeight - bottomArea ) {
 
 				direction = 'down';
 				curPxInTik = pxInTik;

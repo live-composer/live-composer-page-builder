@@ -47,18 +47,6 @@ jQuery(document).on( 'click', '.dslca-show-js-error-hook', function(e){
 
 jQuery(document).ready(function($) {
 
-	// Scroll view when dragging module
-	jQuery('#page-builder-frame').height(window.innerHeight - 72);
-
-	jQuery(window).load(function(){
-
-		// Initiate scroller on window resize
-		jQuery(window).resize(function(){
-
-			jQuery('#page-builder-frame').height(window.innerHeight - 72);
-		});
-	});
-
 	/**
 	 * Try to detect JS errors in preview area.
 	 */
