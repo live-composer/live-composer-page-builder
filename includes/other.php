@@ -65,39 +65,40 @@ function dslc_icons() {
 
 function dslc_icons_modal() {
 
-	// Make no sense to continue if used not logged in
+	// Make no sense to continue if used not logged in.
 	if ( is_user_logged_in() ) {
+		return;
+	}
 
-		global $dslc_active,
-				 $dslc_var_icons; // array with icon sets
+	global $dslc_active,
+			 $dslc_var_icons; // Array with icon sets.
 
-		$screen = get_current_screen();
+	$screen = get_current_screen();
 
-		if ( $screen->id != 'toplevel_page_livecomposer_editor' ) {
+	if ( $screen->id != 'toplevel_page_livecomposer_editor' ) {
 
-			return;
-		}
+		return;
+	}
 
 
-		if ( current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+	if ( current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
-			// output list of icons
-			foreach ( $dslc_var_icons as $key => $value ) {
+		// output list of icons
+		foreach ( $dslc_var_icons as $key => $value ) {
 
-				echo '<div class="dslca-modal-icons dslca-modal dslc-list-icons-' . $key . '" style="display:none;">';
-					echo '<ul class="dslc-icons-grid">';
+			echo '<div class="dslca-modal-icons dslca-modal dslc-list-icons-' . $key . '" style="display:none;">';
+				echo '<ul class="dslc-icons-grid">';
 
-					foreach ( $dslc_var_icons[$key] as $k => $v ) {
-						$icon_name = $v;
-						echo '<li class="icon-item">';
-							echo '<span class="icon-item_icon dslc-icon-' . $icon_name . '"></span>';
-							echo '<span class="icon-item_name">' . $icon_name . '</span>';
-						echo '</li>';
-					}
+				foreach ( $dslc_var_icons[$key] as $k => $v ) {
+					$icon_name = $v;
+					echo '<li class="icon-item">';
+						echo '<span class="icon-item_icon dslc-icon-' . $icon_name . '"></span>';
+						echo '<span class="icon-item_name">' . $icon_name . '</span>';
+					echo '</li>';
+				}
 
-					echo '</ul>';
-				echo '</div><div class="dslca-prompt-modal-custom"></div>';
-			}
+				echo '</ul>';
+			echo '</div><div class="dslca-prompt-modal-custom"></div>';
 		}
 	}
 }
