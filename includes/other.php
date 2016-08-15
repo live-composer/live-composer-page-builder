@@ -288,3 +288,22 @@ function dslc_rgbtohex( $rgb ) {
 		return;
 	}
 }
+
+/**
+ * Remove Yoast WP meta-boxes for Header/Footer and Template CPT
+ *
+ * @return void
+ */
+function dslc_remove_yoast_metabox() {
+	$disalbe_for_cpt = array(
+		'dslc_hf',
+		'dslc_templates',
+		'dslc_testimonials', // Testimonials CPT has no public posts.
+
+	);
+
+	foreach ( $disalbe_for_cpt as $cpt ) {
+		remove_meta_box( 'wpseo_meta', $cpt, 'normal' );
+	}
+}
+add_action( 'add_meta_boxes', 'dslc_remove_yoast_metabox',11 );

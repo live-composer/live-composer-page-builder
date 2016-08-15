@@ -55,12 +55,12 @@ function dslc_generate_custom_css( $module_structure, $module_settings, $restart
 
 	$module_structure['desktop'] = $module_structure_resp_desktop;
 
-	if ( 'enabled' === $module_settings['css_res_t'] ) {
+	if ( isset( $module_settings['css_res_t'] ) && 'enabled' === $module_settings['css_res_t'] ) {
 
 		$module_structure['tablet'] = $module_structure_resp_tablet;
 	}
 
-	if ( 'enabled' === $module_settings['css_res_p'] ) {
+	if ( isset( $module_settings['css_res_p'] ) &&  'enabled' === $module_settings['css_res_p'] ) {
 
 		$module_structure['phone'] = $module_structure_resp_phone;
 	}

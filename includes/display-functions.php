@@ -912,7 +912,7 @@ function dslc_module_front( $atts, $settings_raw = null ) {
 
 	} elseif ( dslc_current_user_can( 'access' ) ) {
 
-		return __('A module broke', 'live-composer-page-builder');
+		return __( 'A module broke', 'live-composer-page-builder' );
 
 	}
 

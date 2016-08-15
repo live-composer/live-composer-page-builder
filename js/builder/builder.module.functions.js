@@ -186,7 +186,7 @@
 			var content = module.find( '.dslca-module-option-front[data-id="' + editable.data('id') + '"]' ).val().replace(/<lctextarea/g, '<textarea').replace(/<\/lctextarea/g, '</textarea');
 		}
 
-		if ( typeof tinymce != "undefined" ) {
+		if ( typeof tinymce != 'undefined' ) {
 
 			var editor = tinymce.get( 'dslcawpeditor' );
 

@@ -593,7 +593,7 @@ function dslc_current_user_can( $capability = 'save' ) {
 	// Check for access capability ( can use editor but can't publish changes ).
 	if ( 'access' === $capability ) {
 		$capability_check = DS_LIVE_COMPOSER_CAPABILITY;
-	} else { // ( 'save' === $capability ) { // Check for saving capability.
+	} else { // Check for saving capability (capability = save).
 		$capability_check = DS_LIVE_COMPOSER_CAPABILITY_SAVE;
 	}
 

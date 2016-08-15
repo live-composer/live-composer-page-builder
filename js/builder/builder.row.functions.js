@@ -182,7 +182,7 @@
 		}
 
 		jQuery('.dslc-modules-section', LiveComposer.Builder.PreviewAreaDocument).not( $(this).closest('.dslc-modules-section') ).addClass('deactivated');
-		jQuery('.dslc-module-front', $(this).closest('.dslc-modules-section')).addClass('deactivated');
+		jQuery('.dslc-module-front', $(this).closest('.dslc-modules-section')).not( $(this) ).addClass('deactivated');
 	});
 });
 
