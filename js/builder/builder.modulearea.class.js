@@ -63,7 +63,7 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 			evt.preventDefault();
 
 			dslc_generate_code();
-			clearInterval(LiveComposer.Builder.Flags.windowScroller);
+			LiveComposer.Builder.UI.stopScroller();
 			jQuery('body').removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
 			jQuery('body', LiveComposer.Builder.PreviewAreaWindow.document).removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
 		},
@@ -142,4 +142,15 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 
 	// Mark module area as initialized
 	jQuery( elem ).attr('data-jsinit', 'initialized');
+
+	/** Sort option setter */
+	jQuery(document).on('LC.sortableOff', function(){
+
+		self.sortable.option('disabled', true);
+	});
+
+	jQuery(document).on('LC.sortableOn', function(){
+
+		self.sortable.option('disabled', false);
+	});
 }

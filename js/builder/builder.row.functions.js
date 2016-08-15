@@ -31,6 +31,7 @@
 	}
 
 	jQuery(".dslc-modules-section", LiveComposer.Builder.PreviewAreaDocument).each(function(){
+
 		new LiveComposer.Builder.Elements.CRow(this);
 	});
 

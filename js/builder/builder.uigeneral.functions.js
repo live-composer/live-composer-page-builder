@@ -595,7 +595,7 @@ function dslc_drag_and_drop() {
 				*/
 			}
 
-			clearInterval(LiveComposer.Builder.Flags.windowScroller);
+			LiveComposer.Builder.UI.stopScroller();
 			jQuery('body').removeClass('dslca-new-module-drag-in-progress').addClass('dslca-new-module-drag-not-in-progress');
 			jQuery('#dslc-header').removeClass('dslca-header-low-z-index');
 		},

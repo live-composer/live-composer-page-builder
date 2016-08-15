@@ -77,34 +77,69 @@ jQuery(document).ready(function($){
 /** Window Y-scroller */
 jQuery(document).ready(function($){
 
+	var direction = '';
+
 	/** Scroll preview area when mouse are on some distant of edge */
 	LiveComposer.Builder.UI.initPreviewAreaScroller = function() {
 
 		var pxInTik = 3;
 		var timerTik = 5;
-
 		LiveComposer.Builder.Flags.windowScroller = false;
+
 		jQuery(LiveComposer.Builder.PreviewAreaDocument).on('drag', 'body', function(e) {
 
-			if (LiveComposer.Builder.Flags.windowScroller != false) clearInterval(LiveComposer.Builder.Flags.windowScroller);
+			/** If mouse is dragging within the scroll area */
+			if ( e.clientY > 180 &&
+				e.clientY < window.innerHeight - 260
+			) {
+
+				LiveComposer.Builder.Flags.windowScroller != false && LiveComposer.Builder.UI.stopScroller();
+				return false;
+			}
+
+			/** Don't need scroll reinit when moving mouse in scroll area */
+			if ( e.clientY < 180 && direction == 'up') return false;
+			if ( e.clientY > window.innerHeight - 260 && direction == 'down') return false;
+
+			console.log(LiveComposer.Builder.Flags.windowScroller + ' - ' + direction + ' ' + e.clientY);
+
+			LiveComposer.Builder.Flags.windowScroller != false && LiveComposer.Builder.UI.stopScroller();
+
+			var curPxInTik = '';
+
+			if ( e.clientY < 180 ) {
+
+				direction = 'up';
+				curPxInTik = -pxInTik;
+			}
+
+			if ( e.clientY > window.innerHeight - 260 ) {
+
+				direction = 'down';
+				curPxInTik = pxInTik;
+			}
+
+			LiveComposer.Utils.publish('LC.sortableOff', {});
 
 			LiveComposer.Builder.Flags.windowScroller = setInterval(function(){
 
-				if ( e.clientY < 180 ) {
-
-					LiveComposer.Builder.PreviewAreaWindow.scrollBy(0, -pxInTik);
-				}
-
-				if ( e.clientY > window.innerHeight - 260 ) {
-
-					LiveComposer.Builder.PreviewAreaWindow.scrollBy(0 ,pxInTik);
-				}
+				LiveComposer.Builder.PreviewAreaWindow.scrollBy(0 ,curPxInTik);
 			}, timerTik);
 		});
 
 		jQuery(LiveComposer.Builder.PreviewAreaDocument).on('dragend mouseup', 'body', function(e) {
 
-			if( LiveComposer.Builder.Flags.windowScroller ) clearInterval(LiveComposer.Builder.Flags.windowScroller);
+			LiveComposer.Builder.Flags.windowScroller && LiveComposer.Builder.UI.stopScroller();
 		});
 	};
+
+	LiveComposer.Builder.UI.stopScroller = function() {
+
+		console.trace('stopScroller');
+
+		LiveComposer.Utils.publish('LC.sortableOn', {});
+		direction = '';
+		clearInterval(LiveComposer.Builder.Flags.windowScroller);
+		LiveComposer.Builder.Flags.windowScroller = false;
+	}
 });

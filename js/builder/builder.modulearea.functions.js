@@ -414,7 +414,6 @@ LiveComposer.Builder.moduleareas_init = function() {
 
 			// Initialize all the module areas without 'jsinit' attribute!
 			new LiveComposer.Builder.Elements.CModuleArea( this );
-
 		}
 	} );
 

@@ -6,6 +6,8 @@
 
 LiveComposer.Builder.Elements.CSectionsContainer = function(elem) {
 
+	var self = this;
+
 	this.sortable = Sortable.create(elem, {
 		group: 'sections',
 		animation: 150,
@@ -52,7 +54,7 @@ LiveComposer.Builder.Elements.CSectionsContainer = function(elem) {
 			evt.preventDefault();
 
 			dslc_generate_code();
-			clearInterval(LiveComposer.Builder.Flags.windowScroller);
+			LiveComposer.Builder.UI.stopScroller();
 			jQuery('body').removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
 		},
 
@@ -118,5 +120,16 @@ LiveComposer.Builder.Elements.CSectionsContainer = function(elem) {
 				});
 			}*/
 		}
+	});
+
+	/** Sort option setter */
+	jQuery(document).on('LC.sortableOff', function(){
+
+		self.sortable.option('disabled', true);
+	});
+
+	jQuery(document).on('LC.sortableOn', function(){
+
+		self.sortable.option('disabled', false);
 	});
 }

@@ -83,7 +83,7 @@ LiveComposer.Builder.Elements.CRow = function(elem) {
 		},
 		stop: function(e, ui){
 
-			clearInterval(LiveComposer.Builder.Flags.windowScroller);
+			LiveComposer.Builder.UI.stopScroller();
 			jQuery('body').removeClass('dslca-drag-in-progress dslca-modules-area-drag-in-progress').addClass('dslca-drag-not-in-progress');
 			jQuery('.dslca-anim-opacity-drop').removeClass('dslca-anim-opacity-drop');
 		},
@@ -95,4 +95,14 @@ LiveComposer.Builder.Elements.CRow = function(elem) {
 	// Mark section as initialized
 	jQuery( elem ).attr('data-jsinit', 'initialized');
 
+	/** Sort option setter */
+	jQuery(document).on('LC.sortableOff', function(){
+
+		self.sortable.sortable('option','disabled', true);
+	});
+
+	jQuery(document).on('LC.sortableOn', function(){
+
+		self.sortable.sortable('option','disabled', false);
+	});
 }
