@@ -130,7 +130,8 @@
 		dslc_module_options_show( dslc_module_id );
 
 		// Cover up other modules with semi transp cover
-		jQuery(".dslc-module-front", LiveComposer.Builder.PreviewAreaDocument).not(dslcModule).addClass('deactivated'); //bookmark1
+		jQuery("body", LiveComposer.Builder.PreviewAreaDocument).addClass('module-editing-in-progress');
+
 	});
 
 	/**
