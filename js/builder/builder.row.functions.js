@@ -182,8 +182,7 @@
 			dslc_row_edit( $(this).closest('.dslc-modules-section') );
 		}
 
-		jQuery('.dslc-modules-section', LiveComposer.Builder.PreviewAreaDocument).not( $(this).closest('.dslc-modules-section') ).addClass('deactivated');
-		jQuery('.dslc-module-front', $(this).closest('.dslc-modules-section')).not( $(this) ).addClass('deactivated');
+		jQuery('body', LiveComposer.Builder.PreviewAreaDocument).addClass('section-editing-in-progress');
 	});
 });
 
@@ -449,7 +448,8 @@ function dslc_row_edit_cancel( callback ) {
 	if ( callback ) { callback(); }
 
 	LiveComposer.Builder.Flags.panelOpened = false;
-	jQuery(".dslc-module-front, .dslc-modules-section", LiveComposer.Builder.PreviewAreaDocument).removeClass('deactivated');
+	jQuery("body", LiveComposer.Builder.PreviewAreaDocument).removeClass('section-editing-in-progress');
+
 }
 
 /**

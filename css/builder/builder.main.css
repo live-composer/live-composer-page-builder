@@ -1464,19 +1464,10 @@ body a:focus {
 	min-height: 30px;
 }
 
-.dslc-module-front.deactivated,
-.dslc-modules-section.deactivated {
+body.module-editing-in-progress .dslc-module-front:not(.dslca-module-being-edited),
+body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-section-being-edited) {
 	opacity: .5;
 	cursor: default!important;
-}
-
-.dslc-module-front.deactivated:before,
-.dslc-modules-section.deactivated:before {
-	content: "";
-	position: absolute;
-	height: 100%;
-	width: 100%;
-	z-index: 2;
 }
 
 .dslc-module-front:hover,
