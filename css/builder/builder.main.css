@@ -1470,6 +1470,17 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 	cursor: default!important;
 }
 
+/* Cover all other modules and areas when already editing module/area */
+body.module-editing-in-progress .dslc-module-front:not(.dslca-module-being-edited):before,
+body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-section-being-edited):before {
+	content: "";
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	z-index: 199999;
+}
+
+
 .dslc-module-front:hover,
 .dslc-module-front:hover * {
 	cursor: pointer;
