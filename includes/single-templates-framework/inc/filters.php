@@ -307,6 +307,12 @@ function dslc_tp_update_archive_templates_option( $post_id ) {
 				// Make sure we have only one template for 404_page.
 				dslc_tp_remove_template_from_meta( '404_page' );
 
+			} else if ( 'post_archive' === $value ) {
+
+				$plugin_options['post_archive'] = $post_id;
+				// Make sure we have only one template for post_archive.
+				dslc_tp_remove_template_from_meta( 'post_archive' );
+
 			} else if ( 'search_results' === $value ) {
 
 				$plugin_options['search_results'] = $post_id;
