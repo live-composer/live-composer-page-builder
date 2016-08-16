@@ -1079,6 +1079,10 @@ body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-post-thumb .dslc-o
 /* Tablet */
 @media only screen and (min-width : 768px) and (max-width : 1024px)  {
 
+	body.dslca-enabled.dslc-res-tablet {
+		padding-bottom: 200px;
+	}
+
 	.dslc-hide-on-tablet {
 		display: none !important;
 	}
@@ -1087,6 +1091,10 @@ body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-post-thumb .dslc-o
 
 /* Smartphone */
 @media only screen and ( max-width: 767px ) {
+
+	body.dslca-enabled.dslc-res-phone {
+		padding-bottom: 200px;
+	}
 
 	.dslc-col,
 	.dslc-no-columns-spacing .dslc-col {

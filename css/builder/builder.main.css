@@ -19,6 +19,10 @@ body {
 	user-select: none;
 }
 
+body.toplevel_page_livecomposer_editor {
+	background: #464646;
+}
+
 /* Re-enable text selection for text-based modules */
 
 .inline-editor,
@@ -3656,7 +3660,7 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 
 /* Use Open Sans here as Roboto is not available at this point */
 .dslca-activate-composer-hook {
-	font-family: 'Open Sans', sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
 .dslca-container .dslca-close-composer-hook:hover {

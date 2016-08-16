@@ -488,8 +488,7 @@ function dslc_row_edit_confirm( callback ) {
 	if ( callback ) { callback(); }
 
 	LiveComposer.Builder.Flags.panelOpened = false;
-
-	jQuery(".dslc-module-front, .dslc-modules-section", LiveComposer.Builder.PreviewAreaDocument).removeClass('deactivated');
+	jQuery("body", LiveComposer.Builder.PreviewAreaDocument).removeClass('section-editing-in-progress');
 }
 
 /**

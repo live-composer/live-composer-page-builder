@@ -674,9 +674,6 @@
 	}
 */
 		#dslc-content .dslc-partner .dslc-partner-thumb {
-			/*border: 1px solid #ebebeb;*/
-			/*padding: 50px 0;*/
-			/*text-align: center;*/
 			position: relative;
 			line-height: 0;
 		}
@@ -718,21 +715,11 @@
 				opacity: 1;
 			}
 
-/*
-		#dslc-content .dslc-partner .dslc-partner-main {
-			border: 0px solid transparent;
-		}
-*/
 			#dslc-content .dslc-partner-title {
 				margin-bottom: 10px;
 			}
 
 				#dslc-content .dslc-partner-title h2 {
-					/*color: #222;*/
-					/*font-family: '';*/
-					/*font-weight: bold;*/
-					/*font-size: 14px;*/
-					/*line-height: 1;*/
 					margin: 0;
 					padding: 0;
 				}
@@ -742,15 +729,6 @@
 						color: inherit;
 						text-decoration: none;
 					}
-
-		#dslc-content .dslc-partner .dslc-partner-excerpt {
-			/*color: #444;*/
-			/*font-family: "Open Sans";*/
-			/*font-weight: 400;*/
-			/*font-size: 12px;*/
-			/*line-height: 22px;*/
-		}
-
 
 /**
  * PROJECTS MODULE
@@ -937,45 +915,14 @@
 				body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-staff-member-thumb .dslc-staff-member-main {
 					opacity: 1;
 				}
-/*
-– all properties are already in the module defaults
 
-			#dslc-content .dslc-staff-member-social {
-				background: #40bde6;
-				border: 0px solid transparent;
-				border-radius: 0 0 3px 3px;
-				padding: 12px 0;
-				margin-bottom: 25px;
-			}
-
-*/
 				#dslc-content .dslc-staff-member-social a {
-					/*color: #fff;
-					font-size: 13px; – already in the module defaults */
 					margin: 0 6px;
 					text-decoration: none;
 				}
-/*
-– already in the module defaults
-
-			#dslc-content .dslc-staff-member-main {
-				border: 0px solid transparent;
-			}
-
-				#dslc-content .dslc-staff-member-title {
-					margin-bottom: 23px;
-				}
-*/
 
 
 					#dslc-content .dslc-staff-member-title h2 {
-/*
-						color: #323232;
-						font-size: 15px;
-						font-family: "Open Sans";
-						font-weight: 600;
-						line-height: 1;
-*/
 						margin: 0;
 						padding: 0;
 					}
@@ -986,21 +933,7 @@
 							text-decoration: none;
 							color: inherit;
 						}
-/*
-– already in the module defaults
-				#dslc-content .dslc-staff-member-position {
-					border: 1px solid #e5e5e5;
-					font-size: 12px;
-					font-weight: 600;
-					font-style: italic;
-					line-height: 1;
-					margin-bottom: 20px;
-				}
 
-				#dslc-content .dslc-staff-member-excerpt {
-
-				}
-*/
 /**
  * TABS MODULE
  */
