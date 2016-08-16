@@ -770,7 +770,7 @@ function dslc_filter_content( $content ) {
 		}
 
 		// Pass the filtered content output
-		return $composer_wrapper_before . do_action( 'dslc_output_prepend' ) . $composer_header . '<div id="dslc-main">' . $composer_prepend . $composer_content . '</div>' . $composer_append . $composer_footer . do_action( 'dslc_output_append' ) . $composer_wrapper_after;
+		return $composer_wrapper_before . do_action( 'dslc_output_prepend' ) . $composer_header . '<div id="dslc-main">' . $composer_prepend . $composer_content . '</div>' . $composer_append . $composer_footer . do_action( 'dslc_output_append' ) . $composer_wrapper_after . '<div class="lc-scroll-top-area"></div><div class="lc-scroll-bottom-area"></div>';
 
 	// If LC should not filter the content
 	} else {
