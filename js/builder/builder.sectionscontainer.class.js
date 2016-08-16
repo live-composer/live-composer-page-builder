@@ -22,7 +22,7 @@ LiveComposer.Builder.Elements.CSectionsContainer = function(elem) {
 
 		setData: function (dataTransfer, dragEl) {
 
-		  dataTransfer.setData('text/html', dragEl.innerHTML);
+		  dataTransfer.setData(LiveComposer.Utils.msieversion() !== false ? 'Text' : 'text/html', dragEl.innerHTML);
 		},
 
 		// dragging started
@@ -30,6 +30,7 @@ LiveComposer.Builder.Elements.CSectionsContainer = function(elem) {
 			evt.oldIndex;  // element index within parent
 
 			jQuery('body').removeClass('dslca-drag-not-in-progress').addClass('dslca-drag-in-progress');
+			jQuery('body', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-drag-not-in-progress').addClass('dslca-drag-in-progress');
 
 		/*	if ( jQuery('.dslc-module-front', evt.from).length < 2 ) {
 
@@ -55,6 +56,7 @@ LiveComposer.Builder.Elements.CSectionsContainer = function(elem) {
 
 			dslc_generate_code();
 			LiveComposer.Builder.UI.stopScroller();
+			jQuery('body', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
 			jQuery('body').removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
 		},
 

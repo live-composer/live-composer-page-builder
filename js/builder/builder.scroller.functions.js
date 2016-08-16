@@ -77,94 +77,55 @@ jQuery(document).ready(function($){
 /** Window Y-scroller */
 jQuery(document).ready(function($){
 
-	function msieversion() {
-
-	    var ua = window.navigator.userAgent;
-	    var msie = ua.indexOf("MSIE ");
-
-	    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))  // If Internet Explorer, return version number
-	    {
-	        return parseInt(ua.substring(msie + 5, ua.indexOf(".", msie)));
-	    }
-	    else  // If another browser, return 0
-	    {
-	        return false;
-	    }
-	}
-
-	var direction = '';
-
 	/** Scroll preview area when mouse are on some distant of edge */
 	LiveComposer.Builder.UI.initPreviewAreaScroller = function() {
 
-		if ( msieversion() !== false ) return false;
-
 		var pxInTik = 5;
 		var timerTik = 6;
-		var topArea = 80;
-		var bottomArea = 140; // Including module panel
-		var clientY = false;
 		LiveComposer.Builder.Flags.windowScroller = false;
 
-		jQuery(LiveComposer.Builder.PreviewAreaDocument).on('dragover dragenter', function(e) {
+		/** Stop scroll if within areas */
+		jQuery(LiveComposer.Builder.PreviewAreaDocument).on('dragleave','.lc-scroll-top-area, .lc-scroll-bottom-area', function(e) {
 
-			clientY = e.clientY;
+			LiveComposer.Builder.UI.stopScroller();
 		});
 
-		jQuery(LiveComposer.Builder.PreviewAreaDocument).on('drag', 'body', function(e) {
-
-			if ( ! clientY ) return false;
-
-			/** If mouse is dragging within the scroll area */
-			if ( clientY > topArea &&
-				clientY < window.innerHeight - bottomArea
-			) {
-
-				LiveComposer.Builder.Flags.windowScroller != false && LiveComposer.Builder.UI.stopScroller();
-				return false;
-			}
-
-			/** Don't need scroll reinit when moving mouse in scroll area */
-			if ( clientY < topArea && direction == 'up') return false;
-			if ( clientY > window.innerHeight - bottomArea && direction == 'down') return false;
-
-
-			//console.log('not scrolling now');
-			LiveComposer.Builder.Flags.windowScroller != false && LiveComposer.Builder.UI.stopScroller();
-
-			var curPxInTik = '';
-
-			if ( clientY < topArea ) {
-
-				direction = 'up';
-				curPxInTik = -pxInTik;
-			}
-
-			if ( clientY > window.innerHeight - bottomArea ) {
-
-				direction = 'down';
-				curPxInTik = pxInTik;
-			}
+		/** Scroll bottom */
+		jQuery(LiveComposer.Builder.PreviewAreaDocument).on('dragenter','.lc-scroll-bottom-area', function(e) {
 
 			LiveComposer.Utils.publish('LC.sortableOff', {});
 
 			LiveComposer.Builder.Flags.windowScroller = setInterval(function(){
 
-				LiveComposer.Builder.PreviewAreaWindow.scrollBy(0 ,curPxInTik);
+				LiveComposer.Builder.PreviewAreaWindow.scrollBy(0 , pxInTik);
 			}, timerTik);
 		});
 
+		/** Scroll top */
+		jQuery(LiveComposer.Builder.PreviewAreaDocument).on('dragenter','.lc-scroll-top-area', function(e) {
+
+			LiveComposer.Utils.publish('LC.sortableOff', {});
+
+			LiveComposer.Builder.Flags.windowScroller = setInterval(function(){
+
+				LiveComposer.Builder.PreviewAreaWindow.scrollBy(0 , -pxInTik);
+			}, timerTik);
+		});
+
+		/** Stop scroll if click or drag ended */
 		jQuery(LiveComposer.Builder.PreviewAreaDocument).on('dragend mouseup', 'body', function(e) {
 
 			LiveComposer.Builder.Flags.windowScroller && LiveComposer.Builder.UI.stopScroller();
 		});
 	};
 
+	/**
+	 * Stops scroller function
+	 */
 	LiveComposer.Builder.UI.stopScroller = function() {
 
-		clientY = false;
 		LiveComposer.Utils.publish('LC.sortableOn', {});
-		direction = '';
+
 		clearInterval(LiveComposer.Builder.Flags.windowScroller);
 		LiveComposer.Builder.Flags.windowScroller = false;
 	}

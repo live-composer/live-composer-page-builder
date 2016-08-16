@@ -438,21 +438,6 @@ function dslc_filter_origin( origin, section ) {
 
 function dslc_drag_and_drop() {
 
-	function msieversion() {
-
-	    var ua = window.navigator.userAgent;
-	    var msie = ua.indexOf("MSIE ");
-
-	    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))  // If Internet Explorer, return version number
-	    {
-	        return parseInt(ua.substring(msie + 5, ua.indexOf(".", msie)));
-	    }
-	    else  // If another browser, return 0
-	    {
-	        return false;
-	    }
-	}
-
 	if ( dslcDebug ) console.log( 'dslc_drag_and_drop' );
 
 	var modulesSection, modulesArea, moduleID, moduleOutput;
@@ -484,7 +469,7 @@ function dslc_drag_and_drop() {
 		//<div class="dslca-module dslca-scroller-item dslca-origin dslca-origin-General" data-id="DSLC_Button" data-origin="General" draggable="false" style="">
 
 			  // dataTransfer.setData('Text', dragEl.textContent);
-			dataTransfer.setData(msieversion() !== false ? 'Text' : 'text/html', dragEl.innerHTML);
+			dataTransfer.setData(LiveComposer.Utils.msieversion() !== false ? 'Text' : 'text/html', dragEl.innerHTML);
 		},
 
 		// dragging started
