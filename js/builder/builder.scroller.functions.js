@@ -73,3 +73,71 @@ jQuery(document).ready(function($){
 		});
 	});
 });
+
+/** Window Y-scroller */
+jQuery(document).ready(function($){
+
+	var direction = '';
+
+	/** Scroll preview area when mouse are on some distant of edge */
+	LiveComposer.Builder.UI.initPreviewAreaScroller = function() {
+
+		var pxInTik = 5;
+		var timerTik = 6;
+		var topArea = 80;
+		var bottomArea = 140; // Including module panel
+		LiveComposer.Builder.Flags.windowScroller = false;
+
+		jQuery(LiveComposer.Builder.PreviewAreaDocument).on('drag', 'body', function(e) {
+
+			/** If mouse is dragging within the scroll area */
+			if ( e.clientY > topArea &&
+				e.clientY < window.innerHeight - bottomArea
+			) {
+
+				LiveComposer.Builder.Flags.windowScroller != false && LiveComposer.Builder.UI.stopScroller();
+				return false;
+			}
+
+			/** Don't need scroll reinit when moving mouse in scroll area */
+			if ( e.clientY < topArea && direction == 'up') return false;
+			if ( e.clientY > window.innerHeight - bottomArea && direction == 'down') return false;
+
+			LiveComposer.Builder.Flags.windowScroller != false && LiveComposer.Builder.UI.stopScroller();
+
+			var curPxInTik = '';
+
+			if ( e.clientY < topArea ) {
+
+				direction = 'up';
+				curPxInTik = -pxInTik;
+			}
+
+			if ( e.clientY > window.innerHeight - bottomArea ) {
+
+				direction = 'down';
+				curPxInTik = pxInTik;
+			}
+
+			LiveComposer.Utils.publish('LC.sortableOff', {});
+
+			LiveComposer.Builder.Flags.windowScroller = setInterval(function(){
+
+				LiveComposer.Builder.PreviewAreaWindow.scrollBy(0 ,curPxInTik);
+			}, timerTik);
+		});
+
+		jQuery(LiveComposer.Builder.PreviewAreaDocument).on('dragend mouseup', 'body', function(e) {
+
+			LiveComposer.Builder.Flags.windowScroller && LiveComposer.Builder.UI.stopScroller();
+		});
+	};
+
+	LiveComposer.Builder.UI.stopScroller = function() {
+
+		LiveComposer.Utils.publish('LC.sortableOn', {});
+		direction = '';
+		clearInterval(LiveComposer.Builder.Flags.windowScroller);
+		LiveComposer.Builder.Flags.windowScroller = false;
+	}
+});

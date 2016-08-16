@@ -47,18 +47,6 @@ jQuery(document).on( 'click', '.dslca-show-js-error-hook', function(e){
 
 jQuery(document).ready(function($) {
 
-	// Scroll view when dragging module
-	jQuery('#page-builder-frame').height(window.innerHeight - 72);
-
-	jQuery(window).load(function(){
-
-		// Initiate scroller on window resize
-		jQuery(window).resize(function(){
-
-			jQuery('#page-builder-frame').height(window.innerHeight - 72);
-		});
-	});
-
 	/**
 	 * Try to detect JS errors in preview area.
 	 */
@@ -94,7 +82,7 @@ jQuery(document).ready(function($) {
 
  		// Catch keypress events (from both parent and iframe) to add keyboard support
  		dslc_keypress_events();
-
+ 		LiveComposer.Builder.UI.initPreviewAreaScroller();
  	});
 
  	jQuery('body').addClass('dslca-enabled dslca-drag-not-in-progress');
@@ -595,6 +583,7 @@ function dslc_drag_and_drop() {
 				*/
 			}
 
+			LiveComposer.Builder.UI.stopScroller();
 			jQuery('body').removeClass('dslca-new-module-drag-in-progress').addClass('dslca-new-module-drag-not-in-progress');
 			jQuery('#dslc-header').removeClass('dslca-header-low-z-index');
 		},

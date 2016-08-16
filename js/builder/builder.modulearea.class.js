@@ -31,10 +31,10 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 	 */
 	this.sortable = Sortable.create(elem, {
 		group: 'modules',
-		animation: 150,
+		animation: 350,
 		handle: '.dslca-move-module-hook',
 		draggable: '.dslc-module-front',
-		// ghostClass: 'dslca-module-placeholder',
+		ghostClass: 'dslca-module-ghost',
 		chosenClass: 'dslca-module-dragging',
 		scroll: true, // or HTMLElement
 		scrollSensitivity: 150, // px, how near the mouse must be to an edge to start scrolling.
@@ -47,9 +47,11 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 
 		// dragging started
 		onStart: function (evt) {
+
 			evt.oldIndex;  // element index within parent
 
 			jQuery('body').removeClass('dslca-drag-not-in-progress').addClass('dslca-drag-in-progress');
+			jQuery('body', LiveComposer.Builder.PreviewAreaWindow.document).removeClass('dslca-drag-not-in-progress').addClass('dslca-drag-in-progress');
 		},
 		// dragging ended
 
@@ -61,7 +63,9 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 			evt.preventDefault();
 
 			dslc_generate_code();
+			LiveComposer.Builder.UI.stopScroller();
 			jQuery('body').removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
+			jQuery('body', LiveComposer.Builder.PreviewAreaWindow.document).removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
 		},
 
 		// Element is dropped into the list from another list
@@ -96,6 +100,7 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 			// same properties as onUpdate
 			// evt.preventDefault();
 			// evt.stopPropagation(); return false;
+
 		},
 
 		// Element is removed from the list into another list
@@ -116,6 +121,7 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 			evt.related; // HTMLElement on which have guided
 			evt.relatedRect; // TextRectangle
 			// return false; — for cancel
+
 
 			// Add here the function to update underlying class
 			if ( jQuery('.dslc-modules-area-empty').find('.dslc-module-front').length > 0 ) {
@@ -138,4 +144,15 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 
 	// Mark module area as initialized
 	jQuery( elem ).attr('data-jsinit', 'initialized');
+
+	/** Sort option setter */
+	jQuery(document).on('LC.sortableOff', function(){
+
+		self.sortable.option('disabled', true);
+	});
+
+	jQuery(document).on('LC.sortableOn', function(){
+
+		self.sortable.option('disabled', false);
+	});
 }

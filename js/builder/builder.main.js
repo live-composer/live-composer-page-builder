@@ -35,6 +35,7 @@ var LiveComposer = {
 
 	LiveComposer.Builder.Flags = {
 
+		windowScroller: false,
 		panelOpened: false, // Settings panel opened
 
 		// Used to prevent multiple code generation when
