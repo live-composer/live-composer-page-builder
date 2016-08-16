@@ -28,7 +28,14 @@ function dslc_archive_template_redirect( $archive_template ) {
 
 	if ( $post ) {
 
-		$template = dslc_get_option( $post->post_type, 'dslc_plugin_options_archives' );
+		$post_type = $post->post_type;
+
+		if ( isset( $post_type ) && 'post' === $post_type ) {
+			$post_type = 'post_archive';
+		}
+
+		$template = dslc_get_option( $post_type, 'dslc_plugin_options_archives' );
+
 	} else {
 
 		$template = false;
