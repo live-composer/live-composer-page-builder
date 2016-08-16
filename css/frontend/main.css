@@ -76,6 +76,7 @@ body.admin-bar #dslc-header.dslc-header-pos-absolute {
 	display: block;
 	float: left;
 	margin-right: 2.12766%;
+	min-height: 1px; /* to make sure even empty columns render as expected */
 }
 
 body.rtl .dslc-col {

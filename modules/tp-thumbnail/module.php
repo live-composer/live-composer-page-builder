@@ -34,15 +34,15 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Desktop', 'live-composer-page-builder' ),
-						'value' => 'desktop'
+						'value' => 'desktop',
 					),
 					array(
 						'label' => __( 'Tablet', 'live-composer-page-builder' ),
-						'value' => 'tablet'
+						'value' => 'tablet',
 					),
 					array(
 						'label' => __( 'Phone', 'live-composer-page-builder' ),
-						'value' => 'phone'
+						'value' => 'phone',
 					),
 				),
 			),
@@ -99,19 +99,19 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -134,7 +134,7 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				'max' => 100,
 				'increment' => 1,
 				'section' => 'styling',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Border Radius - Bottom', 'live-composer-page-builder' ),
@@ -151,7 +151,7 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				'max' => 100,
 				'increment' => 1,
 				'section' => 'styling',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Lightbox', 'live-composer-page-builder' ),
@@ -161,11 +161,11 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 				),
 				'section' => 'styling',
@@ -196,7 +196,7 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				'ext' => 'px',
 				'min' => 0,
 				'max' => 1000,
-				'increment' => 5
+				'increment' => 5,
 			),
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
@@ -227,19 +227,19 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				'ext' => 'px',
 			),
 			array(
- 				'label' => __( 'Resize - Width', 'live-composer-page-builder' ),
- 				'id' => 'resize_width',
- 				'std' => '',
- 				'type' => 'text',
- 				'section' => 'styling',
- 			),
- 			array(
- 				'label' => __( 'Resize - Height', 'live-composer-page-builder' ),
- 				'id' => 'resize_height',
- 				'std' => '',
- 				'type' => 'text',
- 				'section' => 'styling',
- 			),
+				'label' => __( 'Resize - Width', 'live-composer-page-builder' ),
+				'id' => 'resize_width',
+				'std' => '',
+				'type' => 'text',
+				'section' => 'styling',
+			),
+			array(
+				'label' => __( 'Resize - Height', 'live-composer-page-builder' ),
+				'id' => 'resize_height',
+				'std' => '',
+				'type' => 'text',
+				'section' => 'styling',
+			),
 
 			/**
 			 * Responsive Tablet
@@ -253,11 +253,11 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 				),
 				'section' => 'responsive',
@@ -306,11 +306,11 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 				),
 				'section' => 'responsive',
@@ -349,22 +349,32 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 
 		);
 
-		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array('hover_opts' => false) ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array( 'hover_opts' => false ) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		return apply_filters( 'dslc_module_options', $dslc_options, $this->module_id );
 
 	}
 
+	/**
+	 * Output module HTML.
+	 *
+	 * @param  array $options Current module options.
+	 * @return void
+	 */
 	function output( $options ) {
 
 		global $dslc_active;
 
 		$post_id = $options['post_id'];
 
+		if ( is_singular() ) {
+			$post_id = get_the_ID();
+		}
+
 		$thumb_url = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
 
-		if ( ! $thumb_url && ! $dslc_active ) {
+		if ( ! $thumb_url ) {
 			return; // Don't output module if no thumbnail set.
 		}
 
@@ -372,73 +382,73 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 
 		$this->module_start( $options );
 
-		if ( is_singular() ) {
-			$post_id = get_the_ID();
-		}
-
 		/* Module output starts here */
 
-			$manual_resize = false;
-			if ( ! empty( $options['resize_width'] ) || ! empty( $options['resize_height'] ) ) {
+		$manual_resize = false;
+		if ( ! empty( $options['resize_width'] ) || ! empty( $options['resize_height'] ) ) {
 
-				$manual_resize = true;
-				$resize_width = false;
-				$resize_height = false;
+			$manual_resize = true;
+			$resize_width = false;
+			$resize_height = false;
 
-				if ( isset( $options['resize_width'] ) && ! empty( $options['resize_width'] ) ) {
-					$resize_width = $options['resize_width'];
-				}
-
-				if ( isset( $options['resize_height'] ) && ! empty( $options['resize_height'] ) ) {
-					$resize_height = $options['resize_height'];
-				}
-
+			if ( isset( $options['resize_width'] ) && ! empty( $options['resize_width'] ) ) {
+				$resize_width = $options['resize_width'];
 			}
 
-			if ( get_post_type( $post_id ) == 'dslc_templates' || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) :
-				if ( has_post_thumbnail( $post_id ) ) :
-					?><div class="dslc-tp-thumbnail"><?php
-						if ( $manual_resize ) : ?>
-							<img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" />
-						<?php else : ?>
-							<?php echo get_the_post_thumbnail( $post_id, 'full' ); ?>
-						<?php endif;
-					?></div>
+			if ( isset( $options['resize_height'] ) && ! empty( $options['resize_height'] ) ) {
+				$resize_height = $options['resize_height'];
+			}
+		}
+
+		if ( 'dslc_templates' === get_post_type( $post_id ) || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) :
+
+			if ( has_post_thumbnail( $post_id ) ) : ?>
+				<div class="dslc-tp-thumbnail">
 				<?php
-				else :
+				if ( $manual_resize ) : ?>
+					<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); ?>
+					<img src="<?php echo esc_attr( $res_img ); ?>" />
+				<?php else : ?>
+					<?php echo get_the_post_thumbnail( $post_id, 'full' ); ?>
+				<?php endif;?>
+				</div>
+			<?php else : ?>
 
-					$placeholder_inline_style = 'style="';
+				<?php $placeholder_inline_style = 'style="';
 
-					if ( $resize_width ) {
-						$placeholder_inline_style .= 'width:' . $resize_width . 'px;';
-					}
+				if ( isset( $resize_width ) ) {
+					$placeholder_inline_style .= 'width:' . $resize_width . 'px;';
+				}
 
-					if ( $resize_height ) {
-						$placeholder_inline_style .= 'height:' . $resize_height . 'px;';
-					}
+				if ( isset( $resize_height ) ) {
+					$placeholder_inline_style .= 'height:' . $resize_height . 'px;';
+				}
 
-					$placeholder_inline_style .= '"';
-				?>
-					<div class="dslc-tp-thumbnail dslc-tp-thumbnail-fake"><img src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/placeholders/tpl-thumb-placeholder.png" <?php echo $placeholder_inline_style; ?> /></div>
-					<?php
-				endif;
-			else :
-				?><div class="dslc-tp-thumbnail">
-					<?php if ( isset( $options['lightbox_state'] ) && $options['lightbox_state'] == 'enabled' ) : ?>
-						<a href="<?php $thumb = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'full' ); echo $thumb[0]; ?>" class="dslc-lightbox-image">
+				$placeholder_inline_style .= '"'; ?>
+				<div class="dslc-tp-thumbnail dslc-tp-thumbnail-fake"><img src="<?php echo esc_attr( DS_LIVE_COMPOSER_URL ); ?>/images/placeholders/tpl-thumb-placeholder.png" <?php echo $placeholder_inline_style; ?> /></div>
+			<?php endif; ?>
+
+		<?php else : ?>
+
+			<div class="dslc-tp-thumbnail">
+				<?php if ( isset( $options['lightbox_state'] ) && 'enabled' === $options['lightbox_state'] ) : ?>
+					<?php $thumb = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'full' ); ?>
+					<a href="<?php echo esc_attr( $thumb[0] ); ?>" class="dslc-lightbox-image">
+				<?php endif; ?>
+					<?php if ( $manual_resize ) : ?>
+						<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true );?>
+						<img src="<?php echo esc_attr( $res_img ); ?>" alt="<?php echo esc_attr( dslc_get_attachment_alt( get_post_thumbnail_id() ) ); ?>" />
+					<?php else : ?>
+						<?php the_post_thumbnail( 'full' ); ?>
 					<?php endif; ?>
-						<?php if ( $manual_resize ) : ?>
-							<img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo dslc_get_attachment_alt( get_post_thumbnail_id() ); ?>" />
-						<?php else : ?>
-							<?php the_post_thumbnail( 'full' ); ?>
-						<?php endif; ?>
-					<?php if ( isset( $options['lightbox_state'] ) && $options['lightbox_state'] == 'enabled' ) : ?>
-						</a>
-					<?php endif; ?>
-				</div><?php
-			endif;
+				<?php if ( isset( $options['lightbox_state'] ) && 'enabled' === $options['lightbox_state'] ) : ?>
+					</a>
+				<?php endif; ?>
+			</div>
 
-		/* Module output ends here. */
+		<?php endif; ?>
+
+		<?php /* Module output ends here. */
 
 		$this->module_end( $options );
 
