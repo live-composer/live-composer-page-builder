@@ -4144,7 +4144,8 @@ body .sp-palette .sp-thumb-el {
 }
 
 /** SCROLL AREAS */
-body.dslca-new-module-drag-in-progress .lc-scroll-top-area{
+body.dslca-new-module-drag-in-progress .lc-scroll-top-area,
+body.dslca-drag-in-progress .lc-scroll-top-area{
 
 	position: fixed;
 	top: 0px;
@@ -4152,7 +4153,7 @@ body.dslca-new-module-drag-in-progress .lc-scroll-top-area{
 	width: 100%;
 	height: 80px;
 }
-
+body.dslca-drag-in-progress .lc-scroll-bottom-area,
 body.dslca-new-module-drag-in-progress .lc-scroll-bottom-area{
 
 	position: fixed;
