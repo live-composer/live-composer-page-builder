@@ -82,10 +82,10 @@ jQuery(document).ready(function($){
 	/** Scroll preview area when mouse are on some distant of edge */
 	LiveComposer.Builder.UI.initPreviewAreaScroller = function() {
 
-		var pxInTik = 3;
-		var timerTik = 5;
-		var topArea = 180;
-		var bottomArea = 260; // Including module panel
+		var pxInTik = 5;
+		var timerTik = 6;
+		var topArea = 80;
+		var bottomArea = 140; // Including module panel
 		LiveComposer.Builder.Flags.windowScroller = false;
 
 		jQuery(LiveComposer.Builder.PreviewAreaDocument).on('drag', 'body', function(e) {

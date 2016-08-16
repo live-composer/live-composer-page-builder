@@ -31,10 +31,10 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 	 */
 	this.sortable = Sortable.create(elem, {
 		group: 'modules',
-		animation: 150,
+		animation: 350,
 		handle: '.dslca-move-module-hook',
 		draggable: '.dslc-module-front',
-		// ghostClass: 'dslca-module-placeholder',
+		ghostClass: 'dslca-module-ghost',
 		chosenClass: 'dslca-module-dragging',
 		scroll: true, // or HTMLElement
 		scrollSensitivity: 150, // px, how near the mouse must be to an edge to start scrolling.
@@ -100,6 +100,7 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 			// same properties as onUpdate
 			// evt.preventDefault();
 			// evt.stopPropagation(); return false;
+
 		},
 
 		// Element is removed from the list into another list
@@ -120,6 +121,7 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 			evt.related; // HTMLElement on which have guided
 			evt.relatedRect; // TextRectangle
 			// return false; — for cancel
+
 
 			// Add here the function to update underlying class
 			if ( jQuery('.dslc-modules-area-empty').find('.dslc-module-front').length > 0 ) {
