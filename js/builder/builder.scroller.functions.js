@@ -77,47 +77,22 @@ jQuery(document).ready(function($){
 /** Window Y-scroller */
 jQuery(document).ready(function($){
 
-	function msieversion() {
-
-	    var ua = window.navigator.userAgent;
-	    var msie = ua.indexOf("MSIE ");
-
-	    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))  // If Internet Explorer, return version number
-	    {
-	        return parseInt(ua.substring(msie + 5, ua.indexOf(".", msie)));
-	    }
-	    else  // If another browser, return 0
-	    {
-	        return false;
-	    }
-	}
-
 	var direction = '';
 
 	/** Scroll preview area when mouse are on some distant of edge */
 	LiveComposer.Builder.UI.initPreviewAreaScroller = function() {
 
-		if ( msieversion() !== false ) return false;
-
 		var pxInTik = 5;
 		var timerTik = 6;
 		var topArea = 80;
 		var bottomArea = 140; // Including module panel
-		var clientY = false;
 		LiveComposer.Builder.Flags.windowScroller = false;
-
-		jQuery(LiveComposer.Builder.PreviewAreaDocument).on('dragover dragenter', function(e) {
-
-			clientY = e.clientY;
-		});
 
 		jQuery(LiveComposer.Builder.PreviewAreaDocument).on('drag', 'body', function(e) {
 
-			if ( ! clientY ) return false;
-
 			/** If mouse is dragging within the scroll area */
-			if ( clientY > topArea &&
-				clientY < window.innerHeight - bottomArea
+			if ( e.clientY > topArea &&
+				e.clientY < window.innerHeight - bottomArea
 			) {
 
 				LiveComposer.Builder.Flags.windowScroller != false && LiveComposer.Builder.UI.stopScroller();
@@ -125,22 +100,20 @@ jQuery(document).ready(function($){
 			}
 
 			/** Don't need scroll reinit when moving mouse in scroll area */
-			if ( clientY < topArea && direction == 'up') return false;
-			if ( clientY > window.innerHeight - bottomArea && direction == 'down') return false;
+			if ( e.clientY < topArea && direction == 'up') return false;
+			if ( e.clientY > window.innerHeight - bottomArea && direction == 'down') return false;
 
-
-			//console.log('not scrolling now');
 			LiveComposer.Builder.Flags.windowScroller != false && LiveComposer.Builder.UI.stopScroller();
 
 			var curPxInTik = '';
 
-			if ( clientY < topArea ) {
+			if ( e.clientY < topArea ) {
 
 				direction = 'up';
 				curPxInTik = -pxInTik;
 			}
 
-			if ( clientY > window.innerHeight - bottomArea ) {
+			if ( e.clientY > window.innerHeight - bottomArea ) {
 
 				direction = 'down';
 				curPxInTik = pxInTik;
@@ -162,7 +135,6 @@ jQuery(document).ready(function($){
 
 	LiveComposer.Builder.UI.stopScroller = function() {
 
-		clientY = false;
 		LiveComposer.Utils.publish('LC.sortableOn', {});
 		direction = '';
 		clearInterval(LiveComposer.Builder.Flags.windowScroller);
