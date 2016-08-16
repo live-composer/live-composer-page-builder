@@ -128,7 +128,8 @@ jQuery(document).ready(function($){
 			LiveComposer.Builder.UI.unloadOptionsDeps();
 			LiveComposer.Builder.Flags.panelOpened = false;
 
-			jQuery(".dslc-module-front", LiveComposer.Builder.PreviewAreaDocument).removeClass('deactivated');
+			jQuery("body", LiveComposer.Builder.PreviewAreaDocument).removeClass('module-editing-in-progress');
+
 		});
 
 		jQuery('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
@@ -150,7 +151,8 @@ jQuery(document).ready(function($){
 			LiveComposer.Builder.UI.unloadOptionsDeps();
 			LiveComposer.Builder.Flags.panelOpened = false;
 
-			jQuery(".dslc-module-front", LiveComposer.Builder.PreviewAreaDocument).removeClass('deactivated');
+			jQuery("body", LiveComposer.Builder.PreviewAreaDocument).removeClass('module-editing-in-progress');
+
 		});
 
 		jQuery('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
