@@ -374,7 +374,7 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 
 		$thumb_url = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
 
-		if ( ! $thumb_url ) {
+		if ( ! $thumb_url && ! dslc_current_user_can( 'save' ) ) {
 			return; // Don't output module if no thumbnail set.
 		}
 

@@ -26,7 +26,14 @@ function dslc_archive_template_redirect( $archive_template ) {
 
 	global $post;
 
-	$template = dslc_get_option( $post->post_type, 'dslc_plugin_options_archives' );
+	if ( $post ) {
+
+		$template = dslc_get_option( $post->post_type, 'dslc_plugin_options_archives' );
+	} else {
+
+		$template = false;
+	}
+
 	if ( ! $template || 'none' === $template ) {
 		return $archive_template;
 	}
@@ -38,6 +45,33 @@ function dslc_archive_template_redirect( $archive_template ) {
 // Replace the template used whenever the "archive" or "category" template is called.
 add_filter( 'archive_template', 'dslc_archive_template_redirect' );
 add_filter( 'category_template', 'dslc_archive_template_redirect' );
+
+
+/**
+ * Redirect to 404 page if archive posts listing has no posts
+ *
+ * @since 1.1
+ * @return void
+ */
+function dslc_archive_noposts() {
+
+	global $post;
+
+	// Allowed to do this?
+	if ( is_archive() & ! $post ) {
+
+		$template = dslc_get_option( '404_page', 'dslc_plugin_options_archives' );
+
+		if ( ! $template || 'none' === $template ) {
+			return;
+		}
+
+		wp_safe_redirect( get_permalink( $template ) );
+		exit;
+	}
+}
+add_action( 'template_redirect', 'dslc_archive_noposts' );
+
 
 /**
  * Load custom template for the author archive.
@@ -85,6 +119,7 @@ function dslc_search_template_redirect( $search_template ) {
 function dslc_404_template_redirect( $not_found_template ) {
 
 	$template = dslc_get_option( '404_page', 'dslc_plugin_options_archives' );
+
 	if ( ! $template || 'none' === $template ) {
 		return $not_found_template;
 	}
@@ -99,6 +134,7 @@ function dslc_404_template_redirect( $not_found_template ) {
  *
  * @since 1.0
  */
+/*
 function dslc_archive_template_init() {
 
 	global $dslc_plugin_options;
@@ -192,9 +228,8 @@ function dslc_archive_template_init() {
 		'options' => $opts,
 	);
 
-}
-
-//add_action( 'dslc_hook_register_options', 'dslc_archive_template_init' );
+} add_action( 'dslc_hook_register_options', 'dslc_archive_template_init' );
+*/
 
 /**
  * Fixes 404 on pagination caused when regular WP query has no more post
