@@ -569,6 +569,10 @@ jQuery(document).ready(function($) {
 
 				dslcOptionChoices.each(function(){
 
+					/*
+					@todo This function is specific to borders. Needs review.
+					 */
+
 					if ( jQuery(this).prop('checked') ) {
 
 						dslcOptionValue = dslcOptionValue + 'solid ';
@@ -578,6 +582,8 @@ jQuery(document).ready(function($) {
 						dslcOptionValue = dslcOptionValue + 'none ';
 					}
 				});
+
+				// Here dslcOptionValue will look like: none none none solid.
 			}
 
 			/**
@@ -633,7 +639,18 @@ jQuery(document).ready(function($) {
 			 * Update option
 			 */
 
-			jQuery( '.dslca-module-option-front[data-id="' + dslcOptionID + '"]', dslcModule ).val( dslcAffectOnChangeValOrig || dslcOption.val() );
+			var dslcOptionToApply = '';
+
+			// Do we work with CSS control or module property?
+			if ( dslcOptionID.indexOf('css_') !== -1 ) {
+				// Apply CSS property.
+				dslcOptionToApply = dslcAffectOnChangeValOrig;
+			} else {
+				// Apply module property.
+				dslcOptionToApply = dslcOption.val();
+			}
+
+			jQuery( '.dslca-module-option-front[data-id="' + dslcOptionID + '"]', dslcModule ).val( dslcOptionToApply );
 
 			LiveComposer.Utils.publish( 'moduleChanged', {
 

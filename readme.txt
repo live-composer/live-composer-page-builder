@@ -129,7 +129,7 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 
 == Changelog ==
 
-= 1.1.3 - August 17th 2016 =
+= 1.1.3 - August XXth 2016 =
 
 * [Report any bugs on GitHub](https://github.com/livecomposer/Live-Composer/issues/)
 * [See latest changes in details with animated gifs and videos](https://livecomposerplugin.com/blog/live-composer-1-1-released/)
@@ -137,6 +137,7 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 = Bug fixes: =
 
 * Issue [#174](https://github.com/livecomposer/Live-Composer/issues/174): Click "Edit template" in WP Admin on CPT listing is broken
+* Problem with border settings control. If set to 'none none none none' it will break.
 
 
 
