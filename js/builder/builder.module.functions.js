@@ -169,7 +169,7 @@
 
 		if ( module.hasClass('dslc-module-handle-like-accordion') ) {
 
-			dslc_accordion_generate_code( module.find('.dslc-accordion') );
+			LiveComposer.Builder.PreviewAreaWindow.dslc_accordion_generate_code( module.find('.dslc-accordion') );
 			var full_content = module.find( '.dslca-module-option-front[data-id="accordion_content"]' ).val();
 			var full_content_arr = full_content.split('(dslc_sep)');
 			var key_value = editable.closest('.dslc-accordion-item').index();
@@ -177,7 +177,7 @@
 
 		} else if ( module.hasClass('dslc-module-handle-like-tabs') ) {
 
-			dslc_tabs_generate_code( module.find('.dslc-tabs') );
+			LiveComposer.Builder.PreviewAreaWindow.dslc_tabs_generate_code( module.find('.dslc-tabs') );
 			var full_content = module.find( '.dslca-module-option-front[data-id="tabs_content"]' ).val();
 			var full_content_arr = full_content.split('(dslc_sep)');
 			var key_value = editable.closest('.dslc-tabs-tab-content').index();
