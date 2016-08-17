@@ -3,7 +3,7 @@ Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page, page builder plugin, drag-n-drop page builder
 Requires at least: 4.3
 Tested up to: 4.6
-Stable tag: 1.1
+Stable tag: 1.1.1
 License: GPLv3
 
 Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
@@ -128,6 +128,19 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 1. Editor activated on a page
 
 == Changelog ==
+
+= 1.1.1 - August 17th 2016 =
+
+[Report any bugs on GitHub](https://github.com/livecomposer/Live-Composer/issues/)
+[See latest changes in details with animated gifs and videos](https://livecomposerplugin.com/blog/live-composer-1-1-released/)
+
+= Bug fixes: =
+
+* Infobox Title Editing is broken #162
+* Icon selection control is broken #159
+* Modules Row Edit Menu Disappears after moving. #158
+* WP Admin Bar is not visible even when LC is not in active mode #155
+* Cannot open "WP Editor" for Accordion or Tabs modules #153
 
 = 1.1 - August 16th 2016 =
 
