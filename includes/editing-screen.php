@@ -208,6 +208,26 @@ add_action( 'admin_footer', 'dslc_editing_screen_footer' );
 
 
 /**
+ * Code to show in preview area head section.
+ *
+ * @since 1.1
+ */
+function dslc_preview_area_head() {
+	?>
+	<style>
+		#wpadminbar {
+			display: none !important;
+			opacity: 0 !important;
+			visibility: hidden !important;
+		}
+	</style>
+	<?php
+}
+
+add_action( 'wp_head', 'dslc_preview_area_head' );
+
+
+/**
  * Change page title for the editing page (WP Admin).
  *
  * @since 1.1

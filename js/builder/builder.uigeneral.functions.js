@@ -469,7 +469,7 @@ function dslc_drag_and_drop() {
 		//<div class="dslca-module dslca-scroller-item dslca-origin dslca-origin-General" data-id="DSLC_Button" data-origin="General" draggable="false" style="">
 
 			  // dataTransfer.setData('Text', dragEl.textContent);
-			  dataTransfer.setData('text/html', dragEl.innerHTML);
+			dataTransfer.setData(LiveComposer.Utils.msieversion() !== false ? 'Text' : 'text/html', dragEl.innerHTML);
 		},
 
 		// dragging started
@@ -478,6 +478,7 @@ function dslc_drag_and_drop() {
 
 			// jQuery( '.dslc-modules-area' ).sortable( "refreshPositions" );
 			jQuery('body').removeClass('dslca-new-module-drag-not-in-progress').addClass('dslca-new-module-drag-in-progress');
+			jQuery('body', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-new-module-drag-not-in-progress').addClass('dslca-new-module-drag-in-progress');
 			jQuery('#dslc-header').addClass('dslca-header-low-z-index');
 		},
 
@@ -486,13 +487,13 @@ function dslc_drag_and_drop() {
 			evt.oldIndex;  // element's old index within parent
 			evt.newIndex;  // element's new index within parent
 
-			var itemEl = evt.item;  // dragged HTMLElement
-			// evt.preventDefault();
+			var itemEl = evt.item;  // dragged HTML
+			evt.preventDefault();
 			// evt.stopPropagation();
 			//return false;
 
 			// Prevent drop into modules listing
-			if(itemEl.closest('.dslca-section-scroller-content')) return false;
+			if(jQuery(itemEl).closest('.dslca-section-scroller-content').length > 0) return false;
 
 			jQuery( '.dslca-options-hovered', LiveComposer.Builder.PreviewAreaDocument ).removeClass('dslca-options-hovered');
 
@@ -585,6 +586,7 @@ function dslc_drag_and_drop() {
 
 			LiveComposer.Builder.UI.stopScroller();
 			jQuery('body').removeClass('dslca-new-module-drag-in-progress').addClass('dslca-new-module-drag-not-in-progress');
+			jQuery('body', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-new-module-drag-in-progress').addClass('dslca-new-module-drag-not-in-progress');
 			jQuery('#dslc-header').removeClass('dslca-header-low-z-index');
 		},
 

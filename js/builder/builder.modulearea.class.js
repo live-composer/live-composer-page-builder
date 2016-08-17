@@ -42,7 +42,7 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 
 		setData: function (dataTransfer, dragEl) {
 
-		  dataTransfer.setData('text/html', dragEl.innerHTML);
+		  dataTransfer.setData( LiveComposer.Utils.msieversion() !== false ? 'Text' : 'text/html', dragEl.innerHTML);
 		},
 
 		// dragging started
