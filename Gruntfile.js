@@ -9,7 +9,7 @@ module.exports = function(grunt) {
 				manage: false,
 			},
 			js_builder_minify : {
-				src : 'js/builder/*.js',
+				src : ['js/builder/*.js', '!js/builder/builder.plugins.js'],
 				dest : 'js/builder.all.min.js'
 			},
 			js_iframe_minify : {
