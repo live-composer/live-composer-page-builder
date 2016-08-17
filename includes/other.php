@@ -66,7 +66,7 @@ function dslc_icons() {
 function dslc_icons_modal() {
 
 	// Make no sense to continue if used not logged in.
-	if ( is_user_logged_in() ) {
+	if ( ! is_user_logged_in() ) {
 		return;
 	}
 
