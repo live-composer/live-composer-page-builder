@@ -1800,9 +1800,9 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 		/*outline-color: #eabba9;*/
 		box-shadow: 0 0 0 2px #eabba9;
 	}
-		.dslc-modules-section-inner {
+		/*.dslc-modules-section-inner {
 			min-height: 50px;
-		}
+		}*/
 
 	/* Manage */
 
@@ -1886,10 +1886,14 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 
 	.dslca-modules-section-placeholder {
 		position: relative;
-		background: #5890e5;
+		background: #E5855F;
 		height: 2px;
 		width: 100%;
 		margin: 10px 0;
+	}
+
+	.dslca-modules-section-placeholder .dslca-placeholder-help-text-inner {
+		background: #E5855F;
 	}
 
 		.dslca-placeholder-help-text {

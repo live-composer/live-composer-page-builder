@@ -12,11 +12,11 @@ LiveComposer.Builder.Elements.CSectionsContainer = function(elem) {
 		items: ".dslc-modules-section",
 		handle: '.dslca-move-modules-section-hook:not(".dslca-action-disabled")',
 		placeholder: 'dslca-modules-section-placeholder',
-		tolerance : 'pointer',
+		tolerance : 'intersect',
 		cursorAt: { bottom: 10 },
 		axis: 'y',
 		scroll: true,
-		scrollSensitivity: 200,
+		scrollSensitivity: 140,
 		scrollSpeed : 5,
 		sort: function() {
 
@@ -40,6 +40,7 @@ LiveComposer.Builder.Elements.CSectionsContainer = function(elem) {
 			LiveComposer.Builder.UI.stopScroller();
 			jQuery('body', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
 			jQuery('body').removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
+			jQuery('.dslca-anim-opacity-drop').removeClass('dslca-anim-opacity-drop');
 		}
 	});
 
