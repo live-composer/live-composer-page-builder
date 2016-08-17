@@ -213,7 +213,10 @@ add_action( 'admin_footer', 'dslc_editing_screen_footer' );
  * @since 1.1
  */
 function dslc_preview_area_head() {
-	?>
+
+	global $dslc_active;
+
+	if ( $dslc_active ) : ?>
 	<style>
 		#wpadminbar {
 			display: none !important;
@@ -221,7 +224,7 @@ function dslc_preview_area_head() {
 			visibility: hidden !important;
 		}
 	</style>
-	<?php
+	<?php endif;
 }
 
 add_action( 'wp_head', 'dslc_preview_area_head' );
