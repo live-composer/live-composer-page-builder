@@ -75,8 +75,7 @@ It's easy to create responsive websites in our page builder. You can customize r
 
 == Installation ==
 
-1. Install and Activate as you would any other plugin
-2. Try the [interactive tutorial](https://livecomposerplugin.com/playground/tutorial-chapter-one/?dslc=active) to get familiar with how it works
+Install and Activate as you would any other plugin
 
 == Frequently Asked Questions ==
 
@@ -130,9 +129,92 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 
 == Changelog ==
 
-= 1.0.1 - August 15th 2016 =
+= 1.1 - August 16th 2016 =
 
+[See latest changes in details with animated gifs and videos](https://livecomposerplugin.com/blog/live-composer-1-1-released/)
 
+= New: =
+
+* Inline text editing using TinyMCE
+* New toggle next to each styling control in module settings
+* Added JS Error reporting feature
+* Added Custom Class option for all the modules
+* Added box-shadow option for the image modules
+* Added possibility to change label text (“All”) on post categories filter
+
+= Improved: =
+
+* Better responsive design code based on media queries
+* Faster duplication for modules, module areas and rows (no AJAX requests)
+* Faster width change action for modules and module areas (no AJAX requests)
+* Empty module containers adds much faster on the page (no AJAX requests)
+* Changed drag and drop library for better performance (still in beta)
+* Improved browser performance thanks to better memory usage
+* Automatic soft permalinks flush on 404 error pages
+
+= Changes in UI: =
+
+* New ‘invisible’ slider for number-based controls
+* Click on any module to open settings panel
+* New responsive preview
+* Updated look for the modules panel
+* You can now scroll module panels with mouse wheel (removed custom scrolling)
+* Moved Templates and Header/Footers menu items under Appearance section
+* Removed Archives and Search settings in favor of template post settings
+* Improved post options panel for templates
+* New feature: dependency for options (show hide controls conditionally)
+* Module areas are grey from now for better color coding
+* Settings panel loading effect added
+* Removed Yoast WP meta-boxes for Header/Footer and Template CPT
+* Improved checkboxes in post options by making labels clickable
+* Changed control type for all the FONT WEIGHT controls
+* Added descriptive titles for action icons on module/container/row
+* Better preview for post thumbnails
+* Better current module/container width highlighting
+* Improved hover states for most of the UI elements
+* Text selection disabled for UI elements
+* Migrate all the UI animations and effects to pure-CSS when possible
+* Semi-transparent module area borders
+
+= Changes in code: =
+
+* Editing moved into iframe inside WP admin
+* We use grunt to run automatic tasks like JS/CSS files compression
+* Reorganized all the JS and CSS files for better structure and automatic minimization
+* New global object ‘LiveComposer’ in JS with the next structure:
+* LiveComposer
+* Builder
+* Elements
+* UI
+* Actions
+* Flags
+* PreviewAreaDocument
+* PreviewAreaWindow
+* Helpers
+* Production
+* Utils
+* Destroy controls when not used, cleared number of DOM nodes dramatically
+* Restricted access to the page with ?dslc=active  in URL
+* On-flight JS debugging
+* Started to change code according to WP Code Styling standards
+* Improved module settings sanitization
+* Removed all the browser-depended styles
+* Clean automatically illegal characters in the sidebar name fields
+* Prevent direct access to any of php files in the plugin
+* Completely reworked modal window functions
+* Log version updates in database
+* New API for extension developers to create setting panels in Live Composer
+* New filter for ROW controls: dslc_filter_row_options
+* Deleted a few JS plugins we don’t use
+* Removed JS script for elements centering (in favor of flexbox )
+* Removed dslc_init_square JS function
+
+= Bug fixes: =
+
+* Fixed image styling bug
+* Sidebar content disappear when reserve LC settings
+* Option “Don’t link to the single post” wasn’t working for Partners, Staff and Downloads modules
+* Live Composer now work with custom fonts that require quotes in a name to work properly
 
 = 1.0.8.4 - May 22nd 2016 =
 
