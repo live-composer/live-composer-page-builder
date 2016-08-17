@@ -3,7 +3,7 @@ Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page, page builder plugin, drag-n-drop page builder
 Requires at least: 4.3
 Tested up to: 4.6
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv3
 
 Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
@@ -128,6 +128,15 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 1. Editor activated on a page
 
 == Changelog ==
+
+= 1.1.2 - August 17th 2016 =
+
+[Report any bugs on GitHub](https://github.com/livecomposer/Live-Composer/issues/)
+[See latest changes in details with animated gifs and videos](https://livecomposerplugin.com/blog/live-composer-1-1-released/)
+
+= Bug fixes: =
+
+* Issue [#169](https://github.com/livecomposer/Live-Composer/issues/169) + [#166](https://github.com/livecomposer/Live-Composer/issues/166): Drag & Drop broken due to JS error (Uncaught TypeError: a.addEventListener is not a function...)
 
 = 1.1.1 - August 17th 2016 =
 
