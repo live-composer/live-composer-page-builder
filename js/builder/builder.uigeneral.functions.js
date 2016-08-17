@@ -655,7 +655,7 @@ function dslc_fix_contenteditable() {
 		jQuery('[contenteditable]', LiveComposer.Builder.PreviewAreaDocument).attr('contenteditable', false);
 	});
 
-	LiveComposer.Builder.PreviewAreaDocument.on('dragend', '.dslca-module, .dslc-module-front, .dslc-modules-area, .dslc-modules-section', function (e) {
+	LiveComposer.Builder.PreviewAreaDocument.on('dragend mousedown', '.dslca-module, .dslc-module-front, .dslc-modules-area, .dslc-modules-section', function (e) {
 
 		jQuery('[contenteditable]', LiveComposer.Builder.PreviewAreaDocument).attr('contenteditable', true);
 	});
