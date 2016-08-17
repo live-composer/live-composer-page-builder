@@ -460,6 +460,14 @@ function dslc_page_add_row_action( $actions, $page_object ) {
 }
 add_filter( 'page_row_actions', 'dslc_page_add_row_action', 10, 2 );
 
+/**
+ * Adds 'Open in Live Composer', 'Edit Template' actions
+ * next to each page in WP Admin posts listing table.
+ *
+ * @param  array   $actions An array of row action links. Defaults are 'Edit', 'Quick Edit', 'Restore, 'Trash', 'Delete Permanently', 'Preview', and 'View'.
+ * @param  WP_Post $post    The post object.
+ * @return array            Filter the array of row action links on the Posts list table.
+ */
 function dslc_post_add_row_action( $actions, $post ) {
 
 	global $dslc_var_templates_pt;
@@ -468,24 +476,30 @@ function dslc_post_add_row_action( $actions, $post ) {
 	$post_type = $post->post_type;
 	$dslc_admin_interface_on = apply_filters( 'dslc_admin_interface_on_listing', true );
 
-	if ( true === $dslc_admin_interface_on && $post_status != 'trash' ) {
+	if ( true === $dslc_admin_interface_on && 'trash' !== $post_status ) {
 
 		if ( array_key_exists( $post_type, $dslc_var_templates_pt ) ) {
 
 			$template_id = dslc_st_get_template_id( $post->ID );
 			$url = DSLC_EditorInterface::get_editor_link( $template_id, $post->ID );
 
-			$actions = array('edit-in-live-composer' => '<a href="'. $url . '">'. __( 'Edit Template', 'live-composer-page-builder' ) .'</a>') + $actions;
+			// If default template for current CPT exists.
+			if ( $template_id ) {
+				$actions = array( 'edit-in-live-composer' => '<a href="'. $url . '">'. __( 'Edit Template', 'live-composer-page-builder' ) .'</a>' ) + $actions;
+			} else {
+				$actions = array( 'edit-in-live-composer' => '<a href="'. admin_url( 'post-new.php?post_type=dslc_templates' ) . '">'. __( 'Create Template', 'live-composer-page-builder' ) .'</a>' ) + $actions;
+			}
 		} else {
 
 			$url = DSLC_EditorInterface::get_editor_link( $post->ID );
 
-			$actions = array('edit-in-live-composer' => '<a href="'. $url . '">'. __( 'Edit in Live Composer', 'live-composer-page-builder' ) .'</a>') + $actions;
+			$actions = array( 'edit-in-live-composer' => '<a href="'. $url . '">'. __( 'Edit in Live Composer', 'live-composer-page-builder' ) .'</a>' ) + $actions;
 		}
 	}
 
-    return $actions;
+	return $actions;
 }
+
 add_filter( 'post_row_actions', 'dslc_post_add_row_action', 10, 2 );
 
 /**

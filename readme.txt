@@ -129,14 +129,29 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 
 == Changelog ==
 
+= 1.1.3 - August 17th 2016 =
+
+* [Report any bugs on GitHub](https://github.com/livecomposer/Live-Composer/issues/)
+* [See latest changes in details with animated gifs and videos](https://livecomposerplugin.com/blog/live-composer-1-1-released/)
+
+= Bug fixes: =
+
+* Issue [#174](https://github.com/livecomposer/Live-Composer/issues/174): Click "Edit template" in WP Admin on CPT listing is broken
+
+
+
+
 = 1.1.2 - August 17th 2016 =
 
-[Report any bugs on GitHub](https://github.com/livecomposer/Live-Composer/issues/)
-[See latest changes in details with animated gifs and videos](https://livecomposerplugin.com/blog/live-composer-1-1-released/)
+* [Report any bugs on GitHub](https://github.com/livecomposer/Live-Composer/issues/)
+* [See latest changes in details with animated gifs and videos](https://livecomposerplugin.com/blog/live-composer-1-1-released/)
 
 = Bug fixes: =
 
 * Issue [#169](https://github.com/livecomposer/Live-Composer/issues/169) + [#166](https://github.com/livecomposer/Live-Composer/issues/166): Drag & Drop broken due to JS error (Uncaught TypeError: a.addEventListener is not a function...)
+
+
+
 
 = 1.1.1 - August 17th 2016 =
 
@@ -150,6 +165,9 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 * Modules Row Edit Menu Disappears after moving. #158
 * WP Admin Bar is not visible even when LC is not in active mode #155
 * Cannot open "WP Editor" for Accordion or Tabs modules #153
+
+
+
 
 = 1.1 - August 16th 2016 =
 
