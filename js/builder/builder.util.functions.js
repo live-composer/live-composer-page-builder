@@ -790,12 +790,12 @@ jQuery(document).ready(function($){
 
 				jQuery('.dslca-wysiwyg-active', LiveComposer.Builder.PreviewAreaDocument ).siblings('.dslca-accordion-plain-content').val( content );
 				var dslcAccordion = module.find('.dslc-accordion');
-				dslc_accordion_generate_code( dslcAccordion );
+				LiveComposer.Builder.PreviewAreaWindow.dslc_accordion_generate_code( dslcAccordion );
 			} else if ( module.hasClass('dslc-module-handle-like-tabs') ) {
 
 				jQuery('.dslca-wysiwyg-active', LiveComposer.Builder.PreviewAreaDocument ).siblings('.dslca-tab-plain-content').val( content );
 				var dslcTabs = module.find('.dslc-tabs');
-				dslc_tabs_generate_code( dslcTabs );
+				LiveComposer.Builder.PreviewAreaWindow.dslc_tabs_generate_code( dslcTabs );
 			}
 
 			dslc_editable_content_gen_code( jQuery('.dslca-wysiwyg-active', LiveComposer.Builder.PreviewAreaDocument ) );
