@@ -28,7 +28,7 @@ final class DSLC_Scripts{
 	/**
 	 * Init Scripts loading
 	 */
-	public function init() {
+	public static function init() {
 
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'dslc_load_scripts_frontend' ) );
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'dslc_load_fonts' ) );
@@ -292,7 +292,7 @@ final class DSLC_Scripts{
 	 * @param  string $dir          scripts search dir.
 	 * @param  array  $exclude_dirs exclude dirs from search.
 	 */
-	public static function load_scripts( $dir = '*', $scriptdeps = '', $exclude_dirs = [] ) {
+	public static function load_scripts( $dir = '*', $scriptdeps = '', $exclude_dirs = array() ) {
 
 		/** Load builder files dynamically */
 		$directories = glob( DS_LIVE_COMPOSER_ABS . '/js/' . $dir, GLOB_ONLYDIR );
@@ -381,4 +381,4 @@ final class DSLC_Scripts{
 	}
 }
 
-( new DSLC_Scripts )->init();
+DSLC_Scripts::init();
