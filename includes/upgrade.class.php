@@ -17,7 +17,7 @@ final class DSLC_Upgrade {
 
 		if ( ! is_array( $curr_version ) ) {
 
-			$curr_version = [];
+			$curr_version = array();
 		}
 
 		/** Migration usage example
