@@ -8,130 +8,50 @@ LiveComposer.Builder.Elements.CSectionsContainer = function(elem) {
 
 	var self = this;
 
-	this.sortable = Sortable.create(elem, {
-		group: 'sections',
-		animation: 150,
-		handle: '.dslca-move-modules-section-hook',
-		draggable: '.dslc-modules-section',
-		// ghostClass: 'dslca-module-placeholder',
-		chosenClass: 'dslca-section-dragging',
-		sort: true,
-		scroll: true, // or HTMLElement
-		scrollSensitivity: 150, // px, how near the mouse must be to an edge to start scrolling.
-		scrollSpeed: 15, // px
+	this.sortable = jQuery(elem).sortable({
+		items: ".dslc-modules-section",
+		handle: '.dslca-move-modules-section-hook:not(".dslca-action-disabled")',
+		placeholder: 'dslca-modules-section-placeholder',
+		tolerance : 'pointer',
+		cursorAt: { bottom: 10 },
+		axis: 'y',
+		scroll: true,
+		scrollSensitivity: 200,
+		scrollSpeed : 5,
+		sort: function() {
 
-		setData: function (dataTransfer, dragEl) {
-
-		  dataTransfer.setData(LiveComposer.Utils.msieversion() !== false ? 'Text' : 'text/html', dragEl.innerHTML);
+			jQuery( this ).removeClass( "ui-state-default" );
 		},
-
-		// dragging started
-		onStart: function (evt) {
-			evt.oldIndex;  // element index within parent
-
-			jQuery('body').removeClass('dslca-drag-not-in-progress').addClass('dslca-drag-in-progress');
-			jQuery('body', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-drag-not-in-progress').addClass('dslca-drag-in-progress');
-
-		/*	if ( jQuery('.dslc-module-front', evt.from).length < 2 ) {
-
-				jQuery('.dslca-no-content:not(:visible)', evt.from).show().css({
-					'-webkit-animation-name' : 'dslcBounceIn',
-					'-moz-animation-name' : 'dslcBounceIn',
-					'animation-name' : 'dslcBounceIn',
-					'animation-duration' : '0.6s',
-					'-webkit-animation-duration' : '0.6s',
-					padding : 0
-				}).animate({ padding : '35px 0' }, 300, function(){
-
-				});
-			}*/
-		},
-		// dragging ended
-
-		onEnd: function (evt) {
-			evt.oldIndex;  // element's old index within parent
-			evt.newIndex;  // element's new index within parent
-
-			evt.preventDefault();
-
-			dslc_generate_code();
-			LiveComposer.Builder.UI.stopScroller();
-			jQuery('body', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
-			jQuery('body').removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
-		},
-
-		// Element is dropped into the list from another list
-		onAdd: function (evt) {
-			var itemEl = evt.item;  // dragged HTMLElement
-			evt.from;  // previous list
-			// + indexes from onEnd
-			// evt.preventDefault();
-			// evt.stopPropagation(); return false;
-		},
-
-		// Changed sorting within list
-		onUpdate: function (evt) {
-			var itemEl = evt.item;  // dragged HTMLElement
-			// + indexes from onEnd
-			// evt.preventDefault();
-			// evt.stopPropagation(); return false;
+		update: function (e, ui) {
 
 			dslc_show_publish_button();
 		},
+		start: function(e, ui){
 
-		// Called by any change to the list (add / update / remove)
-		onSort: function (evt) {
-			// same properties as onUpdate
-			// evt.preventDefault();
-			// evt.stopPropagation(); return false;
+			jQuery('body').removeClass('dslca-drag-not-in-progress').addClass('dslca-drag-in-progress');
+			jQuery('body', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-drag-not-in-progress').addClass('dslca-drag-in-progress');
+			ui.placeholder.html('<span class="dslca-placeholder-help-text"><span class="dslca-placeholder-help-text-inner">' + DSLCString.str_row_helper_text + '</span></span>');
+			jQuery( '.dslc-content' ).sortable( "refreshPositions" );
 		},
+		stop: function(e, ui){
 
-		// Element is removed from the list into another list
-		onRemove: function (evt) {
-		  // same properties as onUpdate
-		},
+			dslc_generate_code();
 
-		// Attempt to drag a filtered element
-		onFilter: function (evt) {
-			var itemEl = evt.item;  // HTMLElement receiving the `mousedown|tapstart` event.
-		},
-
-		// Event when you move an item in the list or between lists
-		onMove: function (evt) {
-			// Example: http://jsbin.com/tuyafe/1/edit?js,output
-			evt.dragged; // dragged HTMLElement
-			evt.draggedRect; // TextRectangle {left, top, right и bottom}
-			evt.related; // HTMLElement on which have guided
-			evt.relatedRect; // TextRectangle
-			// return false; — for cancel
-
-			// Add here the function to update underlying class
-			/**if ( jQuery('.dslc-modules-area-empty').find('.dslc-module-front').length > 0 ) {
-
-				jQuery(this).removeClass('dslc-modules-area-empty').addClass('dslc-modules-area-not-empty');
-
-				jQuery('.dslca-no-content:not(:visible)', this).show().css({
-					'-webkit-animation-name' : 'dslcBounceIn',
-					'-moz-animation-name' : 'dslcBounceIn',
-					'animation-name' : 'dslcBounceIn',
-					'animation-duration' : '0.6s',
-					'-webkit-animation-duration' : '0.6s',
-					padding : 0
-				}).animate({ padding : '35px 0' }, 300, function(){
-
-				});
-			}*/
+			LiveComposer.Builder.UI.stopScroller();
+			jQuery('body', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
+			jQuery('body').removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
 		}
 	});
+
 
 	/** Sort option setter */
 	jQuery(document).on('LC.sortableOff', function(){
 
-		self.sortable.option('disabled', true);
+		self.sortable.sortable('option','disabled', true);
 	});
 
 	jQuery(document).on('LC.sortableOn', function(){
 
-		self.sortable.option('disabled', false);
+		self.sortable.sortable('option', 'disabled', false);
 	});
 }

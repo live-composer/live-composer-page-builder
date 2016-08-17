@@ -518,6 +518,8 @@ function dslc_row_copy( row ) {
 		this.removeAttribute('data-jsinit'); // (2)
 	});
 
+	new LiveComposer.Builder.Elements.CRow(dslcModulesSectionCloned);
+
 
 	/**
 	 * Re-render modules inside of the new ROW
@@ -536,7 +538,7 @@ function dslc_row_copy( row ) {
 	}).each(function(){
 
 		// Current module
-		dslc_module = jQuery(this);
+		var dslc_module = jQuery(this);
 
 		//Generate new ID for the new module and change it in HTML/CSS of the module.
 		dslc_module_new_id( dslc_module[0] );
@@ -563,8 +565,6 @@ function dslc_row_copy( row ) {
 		}, 300);
 
 		dslc_show_publish_button();
-
-
 	});
 }
 

@@ -451,7 +451,7 @@ function dslc_drag_and_drop() {
 		modules_list = [ document.createElement( 'div' ) ];
 	}
 
-	var modules_list_sortable = Sortable.create( modules_list[0] , {
+	var modules_list_sortable = jQuery(modules_list[0]).sortable_vanilla({
 		sort: false, // do not allow sorting inside the list of modules
 		group: { name: 'modules', pull: 'clone', put: false },
 		animation: 150,

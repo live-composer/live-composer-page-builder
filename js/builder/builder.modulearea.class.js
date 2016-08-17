@@ -29,7 +29,7 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 	/**
 	 * Make MODULES inside the Modules Area draggable/sortable
 	 */
-	this.sortable = Sortable.create(elem, {
+	this.sortable = jQuery(elem).sortable_vanilla({
 		group: 'modules',
 		animation: 350,
 		handle: '.dslca-move-module-hook',
@@ -148,11 +148,11 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 	/** Sort option setter */
 	jQuery(document).on('LC.sortableOff', function(){
 
-		self.sortable.option('disabled', true);
+		self.sortable.data('sortable').option('disabled', true);
 	});
 
 	jQuery(document).on('LC.sortableOn', function(){
 
-		self.sortable.option('disabled', false);
+		self.sortable.data('sortable').option('disabled', false);
 	});
 }
