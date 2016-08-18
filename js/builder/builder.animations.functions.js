@@ -64,7 +64,7 @@
 
 			 if ( ! jQuery('body').hasClass('dslca-composer-hidden' ) ) {
 
-				jQuery('#dslc-header').addClass('dslca-header-low-z-index');
+				// jQuery('#dslc-header').addClass('dslca-header-low-z-index');
 
 				if ( jQuery(this).height() < 130 )
 					jQuery('.dslca-modules-area-manage', this).addClass('dslca-horizontal');
@@ -79,7 +79,7 @@
 
 			if ( ! jQuery('body').hasClass('dslca-composer-hidden' ) ) {
 
-				jQuery('#dslc-header').removeClass('dslca-header-low-z-index');
+				// jQuery('#dslc-header').removeClass('dslca-header-low-z-index');
 
 			}
 
