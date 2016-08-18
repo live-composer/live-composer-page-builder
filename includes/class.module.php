@@ -2097,7 +2097,7 @@ class DSLC_Module {
 		$data_attr_size = '12';
 
 		if ( isset( $options['dslc_m_size'] ) ) {
-			$class_size_output .= ' dslc-col dslc-' . $options['dslc_m_size'] . '-col';
+			$class_size_output .= ' lc-column lc-small-' . ( $options['dslc_m_size'] * 2 );
 			$data_attr_size = $options['dslc_m_size'];
 		}
 

@@ -54,8 +54,8 @@ function dslc_ajax_add_modules_section( $atts ) {
 		$output = '<div class="dslc-modules-section dslc-modules-section-empty ' . $extra_classes . '" style="' . dslc_row_get_style() . '">
 			<div class="dslc-bg-video dslc-force-show"><div class="dslc-bg-video-inner"></div><div class="dslc-bg-video-overlay"></div></div>
 			<div class="dslc-modules-section-wrapper">
-				<div class="dslc-modules-section-inner dslc-clearfix">
-					<div class="dslc-modules-area dslc-col dslc-12-col" data-size="12">
+				<div class="dslc-modules-section-inner lc-row lc-small-24 dslc-clearfix">
+					<div class="dslc-modules-area lc-column lc-small-24" data-size="12">
 						<div class="dslc-modules-area-inner">
 							<div class="dslca-modules-area-manage">
 								<div class="dslca-modules-area-manage-inner">

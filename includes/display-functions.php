@@ -1049,7 +1049,7 @@ function dslc_modules_section_front( $atts, $content = null ) {
 
 	if ( $dslc_active ) {
 		$a_container_class .= 'dslc-modules-section-empty ';
-		$a_prepend = '<div class="dslc-modules-section-inner dslc-clearfix">';
+		$a_prepend = '<div class="dslc-modules-section-inner lc-row lc-small-24 dslc-clearfix">';
 		$a_append = '</div>';
 	}
 
@@ -1114,7 +1114,7 @@ function dslc_modules_section_front( $atts, $content = null ) {
 
 				'.$bg_video . '
 
-				<div class="dslc-modules-section-wrapper dslc-clearfix">'
+				<div class="dslc-modules-section-wrapper lc-row dslc-clearfix">'
 
 					. $a_prepend . do_shortcode( $content ) . $a_append
 
@@ -1164,7 +1164,8 @@ function dslc_modules_area_front( $atts, $content = null ) {
 			$pos_class = 'dslc-first-col';
 	}
 
-	$output = '<div class="dslc-modules-area dslc-col dslc-' . $atts['size'] . '-col ' . $pos_class . '" data-size="' . $atts['size'] . '">';
+	$output = '<div class="dslc-modules-area lc-column lc-small-' . ( $atts['size'] * 2 ) . ' ' . $pos_class . '" data-size="' . $atts['size'] . '">';
+		$output .= '<div class="lc-row">';
 
 		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
@@ -1198,6 +1199,7 @@ function dslc_modules_area_front( $atts, $content = null ) {
 					$output .= do_shortcode( $content );
 		}
 
+		$output .= '</div>';
 	$output .= '</div>';
 
 	// Return the output

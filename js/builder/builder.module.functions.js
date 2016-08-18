@@ -370,11 +370,11 @@ function dslc_module_width_set( module, new_width ) {
 	if ( dslcDebug ) console.log( 'dslc_module_width_set' );
 
 	// Generate new column class
-	var newClass = 'dslc-' + new_width + '-col';
+	var newClass = 'lc-small-' + ( new_width * 2 );
 
 	// Add new column class and change size "data"
 	module
-		.removeClass('dslc-1-col dslc-2-col dslc-3-col dslc-4-col dslc-5-col dslc-6-col dslc-7-col dslc-8-col dslc-9-col dslc-10-col dslc-11-col dslc-12-col')
+		.removeClass('lc-small-1 lc-small-2 lc-small-3 lc-small-4 lc-small-5 lc-small-6 lc-small-7 lc-small-8 lc-small-9 lc-small-10 lc-small-11 lc-small-12 lc-small-13 lc-small-14 lc-small-15 lc-small-16 lc-small-17 lc-small-18 lc-small-19 lc-small-20 lc-small-21 lc-small-22 lc-small-23 lc-small-24')
 		.addClass(newClass);
 		// .data('dslc-module-size', new_width);
 		//.addClass('dslca-module-being-edited'); – Deprecated
