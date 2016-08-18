@@ -23,6 +23,11 @@ body.toplevel_page_livecomposer_editor {
 	background: #464646;
 }
 
+/* Temporary and dirty fix for bug with wrong position for TinyMCE link inline popup */
+body div.mce-inline-toolbar-grp.mce-arrow-up {
+	margin-top: 48px;
+}
+
 /* Re-enable text selection for text-based modules */
 
 .inline-editor,
