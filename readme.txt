@@ -131,33 +131,33 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 
 = 1.1.3 - August XXth 2016 =
 
-* [Report any bugs on GitHub](https://github.com/livecomposer/Live-Composer/issues/)
+* [Report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
 * [See latest changes in details with animated gifs and videos](https://livecomposerplugin.com/blog/live-composer-1-1-released/)
 
 = Bug fixes: =
 
-* Issue [#174](https://github.com/livecomposer/Live-Composer/issues/174): Click "Edit template" in WP Admin on CPT listing is broken
+* Issue [#174](https://github.com/livecomposer/live-composer-page-builder/issues/174): Click "Edit template" in WP Admin on CPT listing is broken
 * Problem with border settings control. If set to 'none none none none' it will break.
-* Issue [#186](https://github.com/livecomposer/Live-Composer/issues/186): Version 1.1+ problem with post archive templates, post styling is missing
+* Issue [#186](https://github.com/livecomposer/live-composer-page-builder/issues/186): Version 1.1+ problem with post archive templates, post styling is missing
 
 
 
 
 = 1.1.2 - August 17th 2016 =
 
-* [Report any bugs on GitHub](https://github.com/livecomposer/Live-Composer/issues/)
+* [Report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
 * [See latest changes in details with animated gifs and videos](https://livecomposerplugin.com/blog/live-composer-1-1-released/)
 
 = Bug fixes: =
 
-* Issue [#169](https://github.com/livecomposer/Live-Composer/issues/169) + [#166](https://github.com/livecomposer/Live-Composer/issues/166): Drag & Drop broken due to JS error (Uncaught TypeError: a.addEventListener is not a function...)
+* Issue [#169](https://github.com/livecomposer/live-composer-page-builder/issues/169) + [#166](https://github.com/livecomposer/live-composer-page-builder/issues/166): Drag & Drop broken due to JS error (Uncaught TypeError: a.addEventListener is not a function...)
 
 
 
 
 = 1.1.1 - August 17th 2016 =
 
-[Report any bugs on GitHub](https://github.com/livecomposer/Live-Composer/issues/)
+[Report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
 [See latest changes in details with animated gifs and videos](https://livecomposerplugin.com/blog/live-composer-1-1-released/)
 
 = Bug fixes: =
