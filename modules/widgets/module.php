@@ -158,9 +158,8 @@ class DSLC_Widgets extends DSLC_Module {
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_widgets_border_width',
 				'min' => 0,
-				'max' => 10,
+				'max' => 1000,
 				'increment' => 1,
-				
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -329,9 +328,8 @@ class DSLC_Widgets extends DSLC_Module {
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_widget_border_width',
 				'min' => 0,
-				'max' => 10,
+				'max' => 1000,
 				'increment' => 1,
-				
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -700,9 +698,8 @@ class DSLC_Widgets extends DSLC_Module {
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_title_inner_border_width',
 				'min' => 0,
-				'max' => 10,
+				'max' => 1000,
 				'increment' => 1,
-				
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1174,9 +1171,8 @@ class DSLC_Widgets extends DSLC_Module {
 				'label' => __( 'Item - Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_ul_li_border_width',
 				'min' => 0,
-				'max' => 10,
+				'max' => 1000,
 				'increment' => 1,
-				
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,

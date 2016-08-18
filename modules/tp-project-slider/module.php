@@ -148,9 +148,8 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_border_width',
 				'min' => 0,
-				'max' => 10,
+				'max' => 1000,
 				'increment' => 1,
-				
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -308,9 +307,8 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_slider_border_width',
 				'min' => 0,
-				'max' => 10,
+				'max' => 1000,
 				'increment' => 1,
-				
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -446,9 +444,8 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_slider_item_border_width',
 				'min' => 0,
-				'max' => 10,
+				'max' => 1000,
 				'increment' => 1,
-				
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,

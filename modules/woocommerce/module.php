@@ -503,9 +503,8 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_thumb_border_width',
 				'min' => 0,
-				'max' => 10,
+				'max' => 1000,
 				'increment' => 1,
-				
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -695,9 +694,8 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_price_border_width',
 				'min' => 0,
-				'max' => 10,
+				'max' => 1000,
 				'increment' => 1,
-				
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
