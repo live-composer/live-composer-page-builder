@@ -1179,7 +1179,7 @@ function dslc_modules_area_front( $atts, $content = null ) {
 						<span class="dslca-icon dslc-icon-columns"></span>
 						<div class="dslca-change-width-modules-area-options">';
 			$output .= '<span>' . __( 'Container Width', 'live-composer-page-builder' ) . '</span>';
-			$output .= '<span data-size="1">1/12</span><span data-size="2">2/12</span>
+			$output .= '<span data-size="">Auto</span><span data-size="1">1/12</span><span data-size="2">2/12</span>
 							<span data-size="3">3/12</span><span data-size="4">4/12</span>
 							<span data-size="5">5/12</span><span data-size="6">6/12</span>
 							<span data-size="7">7/12</span><span data-size="8">8/12</span>

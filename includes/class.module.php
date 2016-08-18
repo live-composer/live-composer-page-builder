@@ -2233,6 +2233,7 @@ class DSLC_Module {
 							<span class="dslca-icon dslc-icon-columns"></span>
 							<div class="dslca-change-width-module-options">
 								<span><?php esc_attr_e( 'Element Width', 'live-composer-page-builder' ); ?></span>
+								<span data-size="">Auto</span>
 								<span data-size="1">1/12</span><span data-size="2">2/12</span>
 								<span data-size="3">3/12</span><span data-size="4">4/12</span>
 								<span data-size="5">5/12</span><span data-size="6">6/12</span>

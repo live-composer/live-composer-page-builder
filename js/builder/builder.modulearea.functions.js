@@ -190,7 +190,7 @@ function dslc_modules_area_add( row ) {
 	'<span class="dslca-icon dslc-icon-move"></span></span>'+
 	'<span class="dslca-manage-action dslca-change-width-modules-area-hook" title="Change width" >'+
 	'<span class="dslca-icon dslc-icon-columns"></span> <div class="dslca-change-width-modules-area-options">'+
-	'<span>Container Width</span><span data-size="1">1/12</span><span data-size="2">2/12</span>'+
+	'<span>Container Width</span><span data-size="">Auto</span><span data-size="1">1/12</span><span data-size="2">2/12</span>'+
 	'<span data-size="3">3/12</span><span data-size="4">4/12</span> <span data-size="5">5/12</span><span data-size="6">6/12</span>'+
 	'<span data-size="7">7/12</span><span data-size="8">8/12</span> <span data-size="9">9/12</span><span data-size="10">10/12</span>'+
 	'<span data-size="11">11/12</span><span data-size="12">12/12</span> </div> </span>'+
@@ -379,6 +379,10 @@ function dslc_modules_area_width_set( area, newWidth ) {
 
 	// Generate new class based on width
 	var newClass = 'lc-small-' + ( newWidth * 2 );
+
+	if ( newWidth === '' ) {
+		newClass = '';
+	}
 
 	// Remove width classes, add new width class and set the data-size attr
 	area

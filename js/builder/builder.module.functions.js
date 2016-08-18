@@ -304,7 +304,7 @@ function dslc_module_copy( module ) {
 	// Duplicate the module and append it to the same area
 	var module_new = module[0].cloneNode(true);
 
-	jQuery( module_new ).appendTo( module.closest( '.dslc-modules-area' ) ).css({
+	jQuery( module_new ).appendTo( module.closest( '.dslc-modules-area > .lc-row' ) ).css({
 		'-webkit-animation-name' : 'none',
 		'-moz-animation-name' : 'none',
 		'animation-name' : 'none',
@@ -371,6 +371,10 @@ function dslc_module_width_set( module, new_width ) {
 
 	// Generate new column class
 	var newClass = 'lc-small-' + ( new_width * 2 );
+
+	if ( new_width === '' ) {
+		newClass = '';
+	}
 
 	// Add new column class and change size "data"
 	module
