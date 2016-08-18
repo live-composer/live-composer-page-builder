@@ -1296,7 +1296,13 @@ function dslc_custom_css( $dslc_code = '' ) {
 
 		// If archive, load template?
 		if ( is_archive() && ! is_author() && ! is_search() ) {
-			$template_id = dslc_get_option( get_post_type(), 'dslc_plugin_options_archives' );
+			$post_type = get_post_type();
+
+			if ( $post_type && 'post' === $post_type ) {
+				$post_type = 'post_archive';
+			}
+
+			$template_id = dslc_get_option( $post_type, 'dslc_plugin_options_archives' );
 		}
 
 		if ( is_author() ) {
@@ -1427,13 +1433,18 @@ function dslc_custom_css( $dslc_code = '' ) {
 
 }
 
+/**
+ * Indicates were to output generated CSS for this page content.
+ *
+ * @return void
+ */
 function dslc_dynamic_css_hook() {
 
 	$dynamic_css_location = dslc_get_option( 'lc_css_position', 'dslc_plugin_options' );
 	if ( ! $dynamic_css_location ) {
 		$dynamic_css_location = 'head';
 	}
-	if ( $dynamic_css_location == 'head' ) {
+	if ( 'head' === $dynamic_css_location ) {
 			add_action( 'wp_head', 'dslc_custom_css' );
 	} else {
 			add_action( 'wp_footer', 'dslc_custom_css' );
@@ -1444,7 +1455,6 @@ function dslc_dynamic_css_hook() {
 /**
  * Generate CSS - Modules Section
  */
-
 function dslc_modules_section_gen_css( $atts, $content = null ) {
 
 	return do_shortcode( $content );

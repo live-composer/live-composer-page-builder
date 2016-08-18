@@ -138,6 +138,7 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 
 * Issue [#174](https://github.com/livecomposer/Live-Composer/issues/174): Click "Edit template" in WP Admin on CPT listing is broken
 * Problem with border settings control. If set to 'none none none none' it will break.
+* Issue [#186](https://github.com/livecomposer/Live-Composer/issues/186): Version 1.1+ problem with post archive templates, post styling is missing
 
 
 
