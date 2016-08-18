@@ -10,68 +10,85 @@
  */
 jQuery(document).ready(function($){
 
-	/**
-	 * Scroll list of modules with a mouse wheel.
-	 */
-	var deltaKoef = .75;
-	var increment = 500;
-	var scroller = jQuery('.dslca-section-scroller');
-	var scrollInner = jQuery('.dslca-section-scroller-inner', this)[0];
+	var scrollerPlugin = function(container){
 
-	jQuery('.dslca-section-scroller').on( 'wheel', function(event) {
+		/**
+		 * Scroll list of modules with a mouse wheel.
+		 */
+		var deltaKoef = .75;
+		var increment = 500;
+		var scrollinc = 100;
+		var scroller = jQuery('.dslca-section-scroller', container);
+		var scrollInner = jQuery('.dslca-section-scroller-inner', container)[0];
 
-		scroll_to( event.originalEvent.deltaY || event.originalEvent.deltaX );
+		scroller.on( 'wheel', function(event) {
 
-		return false;
-	});
+			scroll_to( event.originalEvent.deltaY || event.originalEvent.deltaX );
 
-	/**
-	 * Scroll to delta
-	 *
-	 * @param  {int} delta
-	 */
-	function scroll_to(delta) {
+			return false;
+		});
 
-		delta = delta * deltaKoef;
+		/**
+		 * Scroll to delta
+		 *
+		 * @param  {int} delta
+		 */
+		function scroll_to(delta) {
 
-		var lisdtWidth = parseInt(scroller.find('.dslca-section-scroller-content').width() || 0);
+			if (delta < 0 ) {
 
-		if ( lisdtWidth <= window.innerWidth - 260 ) return false;
+				delta = -scrollinc;
+			} else {
 
-		var scrollMax = lisdtWidth - window.innerWidth + 240;
-		delta = parseInt(scrollInner.style.left || 0) - delta;
-		delta = delta >= 0 ? 0 : delta;
-		delta = delta <= -scrollMax ? -scrollMax : delta;
+				delta = scrollinc;
+			}
 
-		scrollInner.style.left = delta + 'px';
+			delta = delta * deltaKoef;
+
+			var listWidth = scroller.find('.dslca-section-scroller-content').width();
+			var contentWidth = scroller.width();
+
+			if ( listWidth <= contentWidth ) return false;
+
+			var scrollMax = listWidth - contentWidth + 10;
+
+			delta = parseInt(scrollInner.style.left || 0) - delta;
+			delta = delta >= 0 ? 0 : delta;
+			delta = delta <= -scrollMax ? -scrollMax : delta;
+
+			scrollInner.style.left = delta + 'px';
+		}
+
+		/**
+		 * Hook - Scroller Prev
+		 */
+		jQuery('.dslca-section-scroller-prev', container).click(function(e){
+
+			e.preventDefault();
+			scroll_to( -increment );
+		});
+
+		/**
+		 * Hook - Scroller Next
+		 */
+		jQuery('.dslca-section-scroller-next', container).click(function(e){
+
+			e.preventDefault();
+			scroll_to( increment );
+		});
+
+		jQuery(window).load(function(){
+
+			// Initiate scroller on window resize
+			jQuery(window).resize(function(){
+
+				scroll_to( 0 );
+			});
+		});
 	}
 
-	/**
-	 * Hook - Scroller Prev
-	 */
-	jQuery(document).on( 'click', '.dslca-section-scroller-prev', function(e){
-
-		e.preventDefault();
-		scroll_to( -increment );
-	});
-
-	/**
-	 * Hook - Scroller Next
-	 */
-	jQuery(document).on( 'click', '.dslca-section-scroller-next', function(e){
-
-		e.preventDefault();
-		scroll_to( increment );
-	});
-
-	jQuery(window).load(function(){
-
-		// Initiate scroller on window resize
-		jQuery(window).resize(function(){
-
-			scroll_to( 0 );
-		});
-	});
+	scrollerPlugin(jQuery('.dslca-section.dslca-modules'));
+	scrollerPlugin(jQuery('.dslca-section.dslca-templates-load'));
 });
 
 /** Window Y-scroller */
