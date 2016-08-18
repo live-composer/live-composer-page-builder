@@ -4,7 +4,6 @@
  *
  * - dslc_display_composer ( Displays the composer code in the front-end )
  * - dslc_get_modules ( Returns an array of active modules )
- * - dslc_sort_alphabetically ( Sorts an array alphabetically )
  * - dslc_display_modules ( Displays a list of active modules )
  * - dslc_display_templates ( Displays a list of active templates )
  * - dslc_filter_content ( Filters the_content() to show composer output )
@@ -421,35 +420,14 @@ function dslc_get_modules() {
 }
 
 /**
- * Sorting Function
- *
- * @since 1.0
- * @param array $a array to sort.
- * @param array $b array to sort.
- */
-function dslc_sort_alphabetically( $a, $b ) {
-	return strcmp( $a['title'], $b['title'] );
-}
-
-/**
- * Displays a list of modules (for drag&drop)
+ * Displays list of all modules in modules panel (for drag & drop)
+ * – Modules order defined in dslc_register_modules() function.
  *
  * @since 1.0
  */
 function dslc_display_modules() {
 
 	$dslc_modules = dslc_get_modules();
-
-	// Get value of module listing order option.
-	$module_listing_order = dslc_get_option( 'lc_module_listing_order', 'dslc_plugin_options_other' );
-	if ( empty( $module_listing_order ) ) {
-		$module_listing_order = 'original';
-	}
-
-	// Order alphabetically if needed.
-	if ( 'alphabetic' === $module_listing_order ) {
-		usort( $dslc_modules, 'dslc_sort_alphabetically' );
-	}
 
 	if ( $dslc_modules ) {
 
@@ -480,7 +458,7 @@ function dslc_display_modules() {
 		}
 	} else {
 
-		echo 'No Modules Found.';
+		esc_html_e( 'No Modules Found.', 'live-composer-page-builder' );
 
 	}
 

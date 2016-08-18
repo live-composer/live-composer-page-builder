@@ -139,6 +139,16 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 * Issue [#174](https://github.com/livecomposer/live-composer-page-builder/issues/174): Click "Edit template" in WP Admin on CPT listing is broken
 * Problem with border settings control. If set to 'none none none none' it will break.
 * Issue [#186](https://github.com/livecomposer/live-composer-page-builder/issues/186): Version 1.1+ problem with post archive templates, post styling is missing
+* Issue [#182](https://github.com/livecomposer/live-composer-page-builder/issues/182): Make sure disabled modules (WP Admin > Live Composer > Settings > Feature Control) do not show in list of the modules available for drag and drop.
+
+= For developers: =
+
+* New filter added 'dslc_filter_modules'. Use it to enable/disable/sort/rename registered modules.
+* Removed dslc_sort_alphabetically function.
+
+= Other changes: =
+
+* Completely removed 'Modules Listing Order' setting from WP Admin > Live Composer > Settings
 
 
 
