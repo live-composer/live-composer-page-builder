@@ -149,7 +149,7 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 = Other changes: =
 
 * Completely removed 'Modules Listing Order' setting from WP Admin > Live Composer > Settings
-
+* Issue [#181](https://github.com/livecomposer/live-composer-page-builder/issues/181): Fixed headers cover working area while editing page. From now Fixed / Absolute headers will looks like a regular header in editing more. If you want to see it fixed as on production, please click on "Hide Editor" button.
 
 
 
