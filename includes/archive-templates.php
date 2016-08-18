@@ -145,7 +145,6 @@ function dslc_404_template_redirect( $not_found_template ) {
 function dslc_archive_template_init() {
 
 	global $dslc_plugin_options;
-	global $dslc_var_modules;
 	global $dslc_post_types;
 
 	$opts = array();

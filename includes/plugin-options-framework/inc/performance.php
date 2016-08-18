@@ -14,7 +14,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 function dslc_perf_settings_init() {
 
 	global $dslc_plugin_options;
-	global $dslc_var_modules;
 
 	$dslc_plugin_options['dslc_plugin_options_performance'] = array(
 		'title' => __( 'Performance', 'live-composer-page-builder' ),
