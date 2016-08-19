@@ -2915,7 +2915,7 @@ class DSLC_Info_Box extends DSLC_Module {
 										<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 									<?php endif; ?>
 									<?php if ( $dslc_is_admin ) : ?>
-										<span class="dslca-editable-content" data-id="button_title" data-type="simple" contenteditable><?php echo $options['button_title']; ?></span>
+										<span class="dslca-editable-content" data-id="button_title" data-type="simple" contenteditable="true"><?php echo $options['button_title']; ?></span>
 									<?php else : echo $options['button_title']; endif; ?>
 								</a>
 							<?php endif; ?>
@@ -2925,7 +2925,7 @@ class DSLC_Info_Box extends DSLC_Module {
 										<span class="dslc-icon dslc-icon-<?php echo $options['button_2_icon_id']; ?>"></span>
 									<?php endif; ?>
 									<?php if ( $dslc_is_admin ) : ?>
-										<span class="dslca-editable-content" data-id="button_2_title" data-type="simple" contenteditable><?php echo $options['button_2_title']; ?></span>
+										<span class="dslca-editable-content" data-id="button_2_title" data-type="simple" contenteditable="true"><?php echo $options['button_2_title']; ?></span>
 									<?php else : echo $options['button_2_title']; endif; ?>
 								</a>
 							<?php endif; ?>
@@ -2994,7 +2994,7 @@ class DSLC_Info_Box extends DSLC_Module {
 												<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 											<?php endif; ?>
 											<?php if ( $dslc_is_admin ) : ?>
-												<span class="dslca-editable-content" data-id="button_title" data-type="simple" contenteditable><?php echo $options['button_title']; ?></span>
+												<span class="dslca-editable-content" data-id="button_title" data-type="simple" contenteditable="true"><?php echo $options['button_title']; ?></span>
 											<?php else : echo $options['button_title']; endif; ?>
 										</a>
 									<?php endif; ?>
@@ -3004,7 +3004,7 @@ class DSLC_Info_Box extends DSLC_Module {
 												<span class="dslc-icon dslc-icon-<?php echo $options['button_2_icon_id']; ?>"></span>
 											<?php endif; ?>
 											<?php if ( $dslc_is_admin ) : ?>
-												<span class="dslca-editable-content" data-id="button_2_title" data-type="simple" contenteditable><?php echo $options['button_2_title']; ?></span>
+												<span class="dslca-editable-content" data-id="button_2_title" data-type="simple" contenteditable="true"><?php echo $options['button_2_title']; ?></span>
 											<?php else : echo $options['button_2_title']; endif; ?>
 										</a>
 									<?php endif; ?>

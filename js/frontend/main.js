@@ -734,7 +734,7 @@ jQuery(document).ready(function($){
 		dslcTabsContent = jQuery('.dslc-tabs-content', dslcTabs),
 		dslcTabContentLast = jQuery('.dslc-tabs-tab-content:last', dslcTabs);
 
-		dslcTabsNavLast.after('<span class="dslc-tabs-nav-hook"><span class="dslc-tabs-nav-hook-title" contenteditable>Click to edit title</span><span class="dslca-delete-tab-hook"><span class="dslca-icon dslc-icon-remove"></span></span></span>');
+		dslcTabsNavLast.after('<span class="dslc-tabs-nav-hook"><span class="dslc-tabs-nav-hook-title" contenteditable="true">Click to edit title</span><span class="dslca-delete-tab-hook"><span class="dslca-icon dslc-icon-remove"></span></span></span>');
 		dslcTabContentLast.after('<div class="dslc-tabs-tab-content"><div class="dslca-editable-content">This is just placeholder text.</div><textarea class="dslca-tab-plain-content">This is just placeholder text.</textarea><div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook">Open in WP Editor</span></div></div>');
 
 		jQuery('.dslc-tabs-nav-hook:last', dslcTabs).click();

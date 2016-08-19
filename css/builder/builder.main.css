@@ -33,7 +33,16 @@ body div.mce-inline-toolbar-grp.mce-arrow-up {
 .inline-editor,
 .inline-editor *,
 .dslca-editable-content,
-.dslca-editable-content * {
+.dslca-editable-content *,
+div[contenteditable="true"],
+span[contenteditable="true"],
+a[contenteditable="true"],
+h1[contenteditable="true"],
+h2[contenteditable="true"],
+h3[contenteditable="true"],
+h4[contenteditable="true"],
+h5[contenteditable="true"],
+h6[contenteditable="true"] {
 	-webkit-touch-callout: text;
 	-webkit-user-select: text;
 	-khtml-user-select: text;

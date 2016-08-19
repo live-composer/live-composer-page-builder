@@ -1089,7 +1089,7 @@ class DSLC_Button extends DSLC_Module {
 							<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 						<?php endif; ?>
 						<?php if ( $dslc_is_admin ) : ?>
-							<span class="dslca-editable-content" data-id="button_text"  data-type="simple" contenteditable><?php echo stripslashes( $options['button_text'] ); ?></span>
+							<span class="dslca-editable-content" data-id="button_text"  data-type="simple" contenteditable="true"><?php echo stripslashes( $options['button_text'] ); ?></span>
 						<?php else : ?>
 							<?php echo stripslashes( $options['button_text'] ); ?>
 						<?php endif; ?>
@@ -1103,7 +1103,7 @@ class DSLC_Button extends DSLC_Module {
 							<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 						<?php endif; ?>
 						<?php if ( $dslc_is_admin ) : ?>
-							<span class="dslca-editable-content" data-id="button_text"  data-type="simple" contenteditable><?php echo stripslashes( $options['button_text'] ); ?></span>
+							<span class="dslca-editable-content" data-id="button_text"  data-type="simple" contenteditable="true"><?php echo stripslashes( $options['button_text'] ); ?></span>
 						<?php else : ?>
 							<?php echo stripslashes( $options['button_text'] ); ?>
 						<?php endif; ?>

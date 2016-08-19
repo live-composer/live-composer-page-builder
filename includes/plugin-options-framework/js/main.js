@@ -47,7 +47,7 @@ jQuery(document).ready(function(){
 		var dslcWrapper = jQuery(this).closest('.dslca-plugin-opts-list-wrap');
 		var dslcTarget = dslcWrapper.find('.dslca-plugin-opts-list');
 
-		jQuery('<div class="dslca-plugin-opts-list-item"><span class="dslca-plugin-opts-list-title" contenteditable>Click to edit</span><a href="#" class="dslca-plugin-opts-list-delete-hook">delete</a></div>').appendTo( dslcTarget );
+		jQuery('<div class="dslca-plugin-opts-list-item"><span class="dslca-plugin-opts-list-title" contenteditable="true">Click to edit</span><a href="#" class="dslca-plugin-opts-list-delete-hook">delete</a></div>').appendTo( dslcTarget );
 
 		dslc_plugin_opts_generate_list_code( dslcWrapper );
 
