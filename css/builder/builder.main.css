@@ -31,7 +31,9 @@ body div.mce-inline-toolbar-grp.mce-arrow-up {
 /* Re-enable text selection for text-based modules */
 
 .inline-editor,
-.inline-editor * {
+.inline-editor *,
+.dslca-editable-content,
+.dslca-editable-content * {
 	-webkit-touch-callout: text;
 	-webkit-user-select: text;
 	-khtml-user-select: text;

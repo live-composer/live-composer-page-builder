@@ -142,6 +142,7 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 * Issue [#182](https://github.com/livecomposer/live-composer-page-builder/issues/182): Make sure disabled modules (WP Admin > Live Composer > Settings > Feature Control) do not show in list of the modules available for drag and drop.
 * Issue [#170](https://github.com/livecomposer/live-composer-page-builder/issues/170): Load Templates section is not scrollable anymore
 * Issue [#178](https://github.com/livecomposer/live-composer-page-builder/issues/178): TinyMCE inline link popup has a wrong position.
+* Issue [#172](https://github.com/livecomposer/live-composer-page-builder/issues/172): Element Titles cannot be changed in Safari on Mac
 
 = For developers: =
 
