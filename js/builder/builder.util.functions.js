@@ -512,7 +512,7 @@ jQuery(document).ready(function($) {
 								}
 
 								var elems = dslcAffectOnChangeEl.split(',');
-								var styleContent = "#" + module[0].id + " " + elems.join(", #" + module[0].id) + "{" + dslcAffectOnChangeRule + ": " + dslcAffectOnChangeVal + "}";
+								var styleContent = "#" + module[0].id + " " + elems.join(", #" + module[0].id + " ") + " {" + dslcAffectOnChangeRule + ": " + dslcAffectOnChangeVal + "}";
 
 								LiveComposer.Builder.Helpers.processInlineStyleTag({
 
@@ -548,7 +548,7 @@ jQuery(document).ready(function($) {
 						}
 
 						var elems = dslcAffectOnChangeEl.split(',');
-						var styleContent = "#" + module[0].id + " " + elems.join(", #" + module[0].id) + "{" + dslcAffectOnChangeRule + ": " + dslcAffectOnChangeVal + "}";
+						var styleContent = "#" + module[0].id + " " + elems.join(", #" + module[0].id + " ") + " {" + dslcAffectOnChangeRule + ": " + dslcAffectOnChangeVal + "}";
 
 						LiveComposer.Builder.Helpers.processInlineStyleTag({
 
@@ -623,7 +623,7 @@ jQuery(document).ready(function($) {
 					var module = jQuery(".dslca-module-being-edited", LiveComposer.Builder.PreviewAreaDocument);
 
 					var elems = dslcAffectOnChangeEl.split(',');
-					var styleContent = "#" + module[0].id + " " + elems.join(", #" + module[0].id) + "{" + rule + ": " + dslcAffectOnChangeVal + dslcExt + "}";
+					var styleContent = "#" + module[0].id + " " + elems.join(", #" + module[0].id + " ") + " {" + rule + ": " + dslcAffectOnChangeVal + dslcExt + "}";
 
 					LiveComposer.Builder.Helpers.processInlineStyleTag({
 
