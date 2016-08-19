@@ -430,6 +430,8 @@ function dslc_ajax_display_module_options( $atts ) {
 				'css_res_t',
 				'css_res_p',
 				'image',
+				'image_alt',
+				'image_alt_link_url',
 				'elements',
 				'post_elements',
 				'carousel_elements',

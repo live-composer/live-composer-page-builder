@@ -38,7 +38,7 @@ function dslc_update_preset() {
 
 				// Reload all modules with the same preset
 				jQuery('.dslc-module-front:not(#' + module.attr('id') + ')[data-dslc-module-id="' + module.data('dslc-module-id') +
-					'"][data-dslc-preset="' + module.data('dslc-preset') + '"]').each(function(){
+					'"][data-dslc-preset="' + module.data('dslc-preset') + '"]', LiveComposer.Builder.PreviewAreaDocument ).each(function(){
 					dslc_module_output_reload( jQuery(this) );
 				});
 			}

@@ -132,6 +132,7 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 = 1.1.3 - August XXth 2016 =
 
 * [Report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
+* [Here you can download any previous verison](https://wordpress.org/plugins/live-composer-page-builder/developers/)
 * [See latest changes in details with animated gifs and videos](https://livecomposerplugin.com/blog/live-composer-1-1-released/)
 
 = Bug fixes: =
@@ -143,6 +144,8 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 * Issue [#170](https://github.com/livecomposer/live-composer-page-builder/issues/170): Load Templates section is not scrollable anymore
 * Issue [#178](https://github.com/livecomposer/live-composer-page-builder/issues/178): TinyMCE inline link popup has a wrong position.
 * Issue [#172](https://github.com/livecomposer/live-composer-page-builder/issues/172): Element Titles cannot be changed in Safari on Mac
+* Presets: fixed presets auto-reload on module options change. (Thank you Paul!)
+* Presets: removed Infobox > Image and Infobox > Image Url form synchronization. (Thank you Paul!)
 
 = For developers: =
 
