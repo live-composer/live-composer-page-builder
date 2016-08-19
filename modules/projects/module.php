@@ -2745,9 +2745,9 @@ class DSLC_Projects extends DSLC_Module {
 
 											<?php if ( ( $options['main_location'] == 'inside' || $options['main_location'] == 'inside_visible' ) && ( $post_elements == 'all' || in_array( 'title', $post_elements ) || in_array( 'categories', $post_elements ) || in_array( 'excerpt', $post_elements ) || in_array( 'button', $post_elements ) ) ) : ?>
 
-												<div class="dslc-project-main <?php if ( $options['main_location'] == 'inside_visible' ) echo 'dslc-project-main-visible'; ?> dslc-on-hover-anim-target dslc-anim-<?php echo $options['css_anim_hover']; ?>" data-dslc-anim="<?php echo $options['css_anim_hover']; ?>" data-dslc-anim-speed="<?php echo $options['css_anim_speed']; ?>">
+												<div class="dslc-project-main dslc-init-<?php echo $options['main_position']; ?> <?php if ( $options['main_location'] == 'inside_visible' ) echo 'dslc-project-main-visible'; ?> dslc-on-hover-anim-target dslc-anim-<?php echo $options['css_anim_hover']; ?>" data-dslc-anim="<?php echo $options['css_anim_hover']; ?>" data-dslc-anim-speed="<?php echo $options['css_anim_speed']; ?>">
 
-													<div class="dslc-project-main-inner dslc-init-<?php echo $options['main_position']; ?>">
+													<div class="dslc-project-main-inner dslc-init-target">
 
 														<?php if ( $post_elements == 'all' || in_array( 'title', $post_elements ) ) : ?>
 

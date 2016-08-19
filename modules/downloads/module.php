@@ -2858,9 +2858,9 @@ class DSLC_Downloads extends DSLC_Module {
 
 											<?php if ( ( $options['main_location'] == 'inside' || $options['main_location'] == 'inside_visible' ) && ( $post_elements == 'all' || in_array( 'title', $post_elements ) || in_array( 'tags', $post_elements ) || in_array( 'excerpt', $post_elements ) || in_array( 'button', $post_elements ) || in_array( 'count', $post_elements ) ) ) : ?>
 
-												<div class="dslc-post-main dslc-download-main <?php if ( $options['main_location'] == 'inside_visible' ) echo 'dslc-download-main-visible'; ?>">
+												<div class="dslc-post-main dslc-download-main dslc-init-<?php echo $options['main_position']; ?> <?php if ( $options['main_location'] == 'inside_visible' ) echo 'dslc-download-main-visible'; ?>">
 
-													<div class="dslc-download-main-inner dslc-init-<?php echo $options['main_position']; ?> dslc-on-hover-anim-target dslc-anim-<?php echo $options['css_anim_hover']; ?>" data-dslc-anim="<?php echo $options['css_anim_hover'] ?>" data-dslc-anim-speed="<?php echo $options['css_anim_speed']; ?>">
+													<div class="dslc-download-main-inner dslc-init-target dslc-on-hover-anim-target dslc-anim-<?php echo $options['css_anim_hover']; ?>" data-dslc-anim="<?php echo $options['css_anim_hover'] ?>" data-dslc-anim-speed="<?php echo $options['css_anim_speed']; ?>">
 
 														<?php if ( $post_elements == 'all' || in_array( 'title', $post_elements ) ) : ?>
 

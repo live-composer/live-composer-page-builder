@@ -599,7 +599,14 @@ body.rtl .dslc-last-col {
 		display: none;
 	}
 
-.dslc-init-topleft {
+
+.dslc-init-center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.dslc-init-topleft .dslc-init-target {
 	position: absolute !important;
 	top: 0 !important;
 	left: 0 !important;
@@ -607,7 +614,7 @@ body.rtl .dslc-last-col {
 	right: auto !important;
 }
 
-.dslc-init-topright {
+.dslc-init-topright .dslc-init-target {
 	position: absolute !important;
 	top: 0 !important;
 	right: 0 !important;
@@ -615,7 +622,7 @@ body.rtl .dslc-last-col {
 	left: auto !important
 }
 
-.dslc-init-bottomleft {
+.dslc-init-bottomleft .dslc-init-target {
 	position: absolute !important;
 	bottom: 0 !important;
 	left: 0 !important;
@@ -623,7 +630,7 @@ body.rtl .dslc-last-col {
 	right: auto !important;
 }
 
-.dslc-init-bottomright {
+.dslc-init-bottomright .dslc-init-target {
 	position: absolute !important;
 	bottom: 0 !important;
 	right: 0 !important;
