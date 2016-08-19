@@ -141,6 +141,7 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 * Issue [#186](https://github.com/livecomposer/live-composer-page-builder/issues/186): Version 1.1+ problem with post archive templates, post styling is missing
 * Issue [#182](https://github.com/livecomposer/live-composer-page-builder/issues/182): Make sure disabled modules (WP Admin > Live Composer > Settings > Feature Control) do not show in list of the modules available for drag and drop.
 * Issue [#170](https://github.com/livecomposer/live-composer-page-builder/issues/170): Load Templates section is not scrollable anymore
+* Issue [#178](https://github.com/livecomposer/live-composer-page-builder/issues/178): TinyMCE inline link popup has a wrong position.
 
 = For developers: =
 
@@ -150,7 +151,8 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 = Other changes: =
 
 * Completely removed 'Modules Listing Order' setting from WP Admin > Live Composer > Settings
-
+* Issue [#181](https://github.com/livecomposer/live-composer-page-builder/issues/181): Fixed headers cover working area while editing page. From now Fixed / Absolute headers will looks like a regular header in editing more. If you want to see it fixed as on production, please click on "Hide Editor" button.
+* Changed limit for border width value (from 10 to 1000)
 
 
 

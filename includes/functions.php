@@ -459,6 +459,13 @@ function dslc_body_class( $classes ) {
 		$classes[] = 'dslc-page-has-hf';
 	}
 
+	global $dslc_active;
+
+	if ( $dslc_active && dslc_current_user_can( 'save' ) ) {
+		$classes[] = 'dslca-enabled';
+		$classes[] = 'dslca-drag-not-in-progress';
+	}
+
 	// If responsive disabled append class.
 	if ( defined( 'DS_LIVE_COMPOSER_RESPONSIVE' ) && ! DS_LIVE_COMPOSER_RESPONSIVE ) {
 		$classes[] = 'dslc-res-disabled';

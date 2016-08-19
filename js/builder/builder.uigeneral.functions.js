@@ -67,7 +67,6 @@ jQuery(document).ready(function($) {
 
  		// Disable WP admin bar in editing mode
  		jQuery('#wpadminbar', LiveComposer.Builder.PreviewAreaDocument).remove();
- 		jQuery('body', LiveComposer.Builder.PreviewAreaDocument).addClass('dslca-enabled dslca-drag-not-in-progress');
 
  		LiveComposer.Builder.UI.initInlineEditors();
  		dslc_fix_contenteditable();
@@ -284,6 +283,8 @@ function dslc_hide_composer() {
 
 	// Add class to know it's hidden
 	jQuery('body').addClass('dslca-composer-hidden');
+	jQuery('body', LiveComposer.Builder.PreviewAreaDocument).addClass('dslca-composer-hidden');
+
 
 	// Hide ( animation ) the main composer area ( at the bottom )
 	jQuery('.dslca-container').css({ bottom : jQuery('.dslca-container').outerHeight() * -1 });
@@ -307,6 +308,8 @@ function dslc_show_composer() {
 
 	// Remove the class from the body so we know it's not hidden
 	jQuery('body').removeClass('dslca-composer-hidden');
+	jQuery('body', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-composer-hidden');
+
 
 	// Show ( animate ) the main composer area ( at the bottom )
 	jQuery('.dslca-container').css({ bottom : 0 });

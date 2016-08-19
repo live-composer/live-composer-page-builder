@@ -123,9 +123,8 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_wrapper_border_width',
 				'min' => 0,
-				'max' => 10,
+				'max' => 1000,
 				'increment' => 1,
-				
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -438,9 +437,8 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_loader_border_width',
 				'min' => 0,
-				'max' => 10,
+				'max' => 1000,
 				'increment' => 1,
-				
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
