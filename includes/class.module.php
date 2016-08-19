@@ -956,7 +956,7 @@ class DSLC_Module {
 				'tab' => 'Heading',
 				'ext' => 'px',
 				'min' => -50,
-				'max' => 50
+				'max' => 50,
 			),
 			array(
 				'label' => 'Link - Padding Vertical',

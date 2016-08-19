@@ -25,6 +25,21 @@ class DSLC_Testimonials extends DSLC_Module {
 
 	}
 
+	/**
+	 * Module options.
+	 * Function build array with all the module functionality and styling options.
+	 * Based on this array Live Composer builds module settings panel.
+	 * – Every array inside $dslc_options means one option = one control.
+	 * – Every option should have unique (for this module) id.
+	 * – Options divides on "Functionality" and "Styling".
+	 * – Styling options start with css_XXXXXXX
+	 * – Responsive options start with css_res_t_ (Tablet) or css_res_p_ (Phone)
+	 * – Options can be hidden.
+	 * – Options can have a default value.
+	 * – Options can request refresh from server on change or do live refresh via CSS.
+	 *
+	 * @return array All the module options in array.
+	 */
 	function options() {
 
 		$cats = get_terms( 'dslc_testimonials_cats' );
@@ -226,7 +241,7 @@ class DSLC_Testimonials extends DSLC_Module {
 						'value' => 'filters'
 					),
 				),
-				'section' => 'styling'
+				'section' => 'styling',
 			),
 
 			array(
@@ -252,7 +267,7 @@ class DSLC_Testimonials extends DSLC_Module {
 						'value' => 'position',
 					),
 				),
-				'section' => 'styling'
+				'section' => 'styling',
 			),
 
 			array(
@@ -270,7 +285,7 @@ class DSLC_Testimonials extends DSLC_Module {
 						'value' => 'circles'
 					),
 				),
-				'section' => 'styling'
+				'section' => 'styling',
 			),
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
@@ -568,7 +583,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			
 				'section' => 'styling',
 				'tab' => __( 'Main', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Border Radius - Bottom', 'live-composer-page-builder' ),
@@ -584,7 +599,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				
 				'section' => 'styling',
 				'tab' => __( 'Main', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
@@ -701,7 +716,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'styling',
 				'tab' => __( 'Quote', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Font Weight', 'live-composer-page-builder' ),
@@ -777,7 +792,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => 'line-height',
 				'section' => 'styling',
 				'tab' => __( 'Quote', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
@@ -1017,7 +1032,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'increment' => 1,
 				'section' => 'styling',
 				'tab' => __( 'Avatar', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Margin Right', 'live-composer-page-builder' ),
@@ -1029,7 +1044,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'styling',
 				'tab' => __( 'Avatar', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Padding', 'live-composer-page-builder' ),
@@ -1055,7 +1070,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'tab' => __( 'Avatar', 'live-composer-page-builder' ),
 				'min' => 1,
 				'max' => 100,
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 
 			/**
@@ -1086,7 +1101,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'styling',
 				'tab' => __( 'Name', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Font Weight', 'live-composer-page-builder' ),
@@ -1208,7 +1223,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'styling',
 				'tab' => __( 'Position', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Font Weight', 'live-composer-page-builder' ),
@@ -1379,7 +1394,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Quote - Line Height', 'live-composer-page-builder' ),
@@ -1394,7 +1409,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => 'line-height',
 				'section' => 'responsive',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Quote - Margin Bottom', 'live-composer-page-builder' ),
@@ -1507,7 +1522,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'responsive',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Avatar - Padding', 'live-composer-page-builder' ),
@@ -1533,7 +1548,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'min' => 1,
 				'max' => 100,
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Name - Font Size', 'live-composer-page-builder' ),
@@ -1548,7 +1563,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Name - Margin Bottom', 'live-composer-page-builder' ),
@@ -1593,7 +1608,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 
 			/**
@@ -1690,7 +1705,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Quote - Line Height', 'live-composer-page-builder' ),
@@ -1705,7 +1720,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => 'line-height',
 				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Quote - Margin Bottom', 'live-composer-page-builder' ),
@@ -1818,7 +1833,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Avatar - Padding', 'live-composer-page-builder' ),
@@ -1844,7 +1859,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'min' => 1,
 				'max' => 100,
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Name - Font Size', 'live-composer-page-builder' ),
@@ -1859,7 +1874,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Name - Margin Bottom', 'live-composer-page-builder' ),
@@ -1904,7 +1919,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => 'font-size',
 				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 
 		);
@@ -1921,7 +1936,12 @@ class DSLC_Testimonials extends DSLC_Module {
 		return apply_filters( 'dslc_module_options', $dslc_options, $this->module_id );
 
 	}
-
+	/**
+	 * Module HTML output.
+	 *
+	 * @param  array $options Module options to fill the module template.
+	 * @return void
+	 */
 	function output( $options ) {
 
 		global $dslc_active;

@@ -66,6 +66,21 @@ class DSLC_Widgets extends DSLC_Module {
 	 *
 	 * @return array All module controls in array
 	 */
+	/**
+	 * Module options.
+	 * Function build array with all the module functionality and styling options.
+	 * Based on this array Live Composer builds module settings panel.
+	 * – Every array inside $dslc_options means one option = one control.
+	 * – Every option should have unique (for this module) id.
+	 * – Options divides on "Functionality" and "Styling".
+	 * – Styling options start with css_XXXXXXX
+	 * – Responsive options start with css_res_t_ (Tablet) or css_res_p_ (Phone)
+	 * – Options can be hidden.
+	 * – Options can have a default value.
+	 * – Options can request refresh from server on change or do live refresh via CSS.
+	 *
+	 * @return array All the module options in array.
+	 */
 	function options() {
 
 		$sidebars = dslc_get_option( 'sidebars', 'dslc_plugin_options_widgets_m' );
@@ -1655,9 +1670,9 @@ class DSLC_Widgets extends DSLC_Module {
 	}
 
 	/**
-	 * Output Module Code
+	 * Module HTML output.
 	 *
-	 * @param  array $options All the module options.
+	 * @param  array $options Module options to fill the module template.
 	 * @return void
 	 */
 	function output( $options ) {
