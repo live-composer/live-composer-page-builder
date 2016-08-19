@@ -140,6 +140,7 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 * Problem with border settings control. If set to 'none none none none' it will break.
 * Issue [#186](https://github.com/livecomposer/live-composer-page-builder/issues/186): Version 1.1+ problem with post archive templates, post styling is missing
 * Issue [#182](https://github.com/livecomposer/live-composer-page-builder/issues/182): Make sure disabled modules (WP Admin > Live Composer > Settings > Feature Control) do not show in list of the modules available for drag and drop.
+* Issue [#170](https://github.com/livecomposer/live-composer-page-builder/issues/170): Load Templates section is not scrollable anymore
 
 = For developers: =
 
