@@ -129,7 +129,7 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 
 == Changelog ==
 
-= 1.1.3 - August XXth 2016 =
+= 1.1.3 - August 19th 2016 =
 
 * [Report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
 * [Here you can download any previous verison](https://wordpress.org/plugins/live-composer-page-builder/developers/)
