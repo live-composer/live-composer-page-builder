@@ -146,6 +146,7 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 * Issue [#172](https://github.com/livecomposer/live-composer-page-builder/issues/172): Element Titles cannot be changed in Safari on Mac
 * Issue [#208](https://github.com/livecomposer/live-composer-page-builder/issues/208): Responsive settings do not work for THE CONTENT module
 * Issue [#203](https://github.com/livecomposer/live-composer-page-builder/issues/203): Responsive line-height settings do not work in HTML module
+* Issue [#196](https://github.com/livecomposer/live-composer-page-builder/issues/196): Uncaught Error: cannot call methods on sortable prior to initialization; attempted to call method 'option'
 * Presets: Fixed presets auto-reload on module options change. (Thank you Paul!)
 * Presets: Removed Infobox > Image and Infobox > Image Url form synchronization. (Thank you Paul!)
 * Post Grids: Wrong post title centering over thumbnail. (Thank you Jacob!)

@@ -146,13 +146,18 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 	jQuery( elem ).attr('data-jsinit', 'initialized');
 
 	/** Sort option setter */
-	jQuery(document).on('LC.sortableOff', function(){
+/* why it's here? Sortable by pybaxa doesn't have .sortable option
 
-		self.sortable.option('disabled', true);
+	jQuery(document).on('LC.sortableOff', function(){
+		if ( undefined !== self.sortable.sortable( "instance" ) ) {
+			self.sortable.sortable('option','disabled', true);
+		}
 	});
 
 	jQuery(document).on('LC.sortableOn', function(){
-
-		self.sortable.option('disabled', false);
+		if ( undefined !== self.sortable.sortable( "instance" ) ) {
+			self.sortable.sortable('option','disabled', false);
+		}
 	});
+*/
 }
