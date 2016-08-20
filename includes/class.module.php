@@ -2380,7 +2380,7 @@ class DSLC_Module {
 				'section' => 'styling',
 				'tab' => 'Presets',
 				'refresh_on_change' => false,
-				'help' => __( 'Type in the name of the preset and hit enter,<br>it will automatically be added to the presets on the left.', 'live-composer-page-builder' ),
+				'help' => __( 'Type in the name of the preset and hit enter, it will automatically be added to the presets on the left.', 'live-composer-page-builder' ),
 			),
 		);
 

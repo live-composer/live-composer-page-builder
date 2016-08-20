@@ -6,8 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( dslc_is_module_active( 'DSLC_Navigation' ) )
+if ( dslc_is_module_active( 'DSLC_Navigation' ) ) {
 	include DS_LIVE_COMPOSER_ABS . '/modules/navigation/functions.php';
+}
 
 class DSLC_Navigation extends DSLC_Module {
 
@@ -51,10 +52,10 @@ class DSLC_Navigation extends DSLC_Module {
 		);
 
 		if ( ! empty( $locs ) ) {
-			foreach ( $locs as $loc_ID => $loc_label ) {
+			foreach ( $locs as $loc_id => $loc_label ) {
 				$loc_choices[] = array(
 					'label' => $loc_label,
-					'value' => $loc_ID,
+					'value' => $loc_id,
 				);
 			}
 		}
@@ -73,15 +74,15 @@ class DSLC_Navigation extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Desktop', 'live-composer-page-builder' ),
-						'value' => 'desktop'
+						'value' => 'desktop',
 					),
 					array(
 						'label' => __( 'Tablet', 'live-composer-page-builder' ),
-						'value' => 'tablet'
+						'value' => 'tablet',
 					),
 					array(
 						'label' => __( 'Phone', 'live-composer-page-builder' ),
-						'value' => 'phone'
+						'value' => 'phone',
 					),
 				),
 			),
@@ -256,19 +257,19 @@ class DSLC_Navigation extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -336,7 +337,7 @@ class DSLC_Navigation extends DSLC_Module {
 				'ext' => 'px',
 				'min' => 0,
 				'max' => 1000,
-				'increment' => 5
+				'increment' => 5,
 			),
 			array(
 				'label' => __( 'Orientation', 'live-composer-page-builder' ),
@@ -477,19 +478,19 @@ class DSLC_Navigation extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -713,19 +714,19 @@ class DSLC_Navigation extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'None', 'live-composer-page-builder' ),
-						'value' => 'none'
+						'value' => 'none',
 					),
 					array(
 						'label' => __( 'Capitalize', 'live-composer-page-builder' ),
-						'value' => 'capitalize'
+						'value' => 'capitalize',
 					),
 					array(
 						'label' => __( 'Uppercase', 'live-composer-page-builder' ),
-						'value' => 'uppercase'
+						'value' => 'uppercase',
 					),
 					array(
 						'label' => __( 'Lowercase', 'live-composer-page-builder' ),
-						'value' => 'lowercase'
+						'value' => 'lowercase',
 					),
 				),
 				'refresh_on_change' => false,
@@ -766,7 +767,7 @@ class DSLC_Navigation extends DSLC_Module {
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
 						'value' => 'none',
 					),
-				)
+				),
 			),
 			array(
 				'label' => __( 'Chevron - Color', 'live-composer-page-builder' ),
@@ -983,7 +984,6 @@ class DSLC_Navigation extends DSLC_Module {
 				'min' => 0,
 				'max' => 10,
 				'increment' => 1,
-				
 				'std' => '1',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1001,19 +1001,19 @@ class DSLC_Navigation extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -1165,7 +1165,6 @@ class DSLC_Navigation extends DSLC_Module {
 				'min' => 0,
 				'max' => 10,
 				'increment' => 1,
-				
 				'std' => '1',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1183,19 +1182,19 @@ class DSLC_Navigation extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -1419,19 +1418,19 @@ class DSLC_Navigation extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'None', 'live-composer-page-builder' ),
-						'value' => 'none'
+						'value' => 'none',
 					),
 					array(
 						'label' => __( 'Capitalize', 'live-composer-page-builder' ),
-						'value' => 'capitalize'
+						'value' => 'capitalize',
 					),
 					array(
 						'label' => __( 'Uppercase', 'live-composer-page-builder' ),
-						'value' => 'uppercase'
+						'value' => 'uppercase',
 					),
 					array(
 						'label' => __( 'Lowercase', 'live-composer-page-builder' ),
-						'value' => 'lowercase'
+						'value' => 'lowercase',
 					),
 				),
 				'refresh_on_change' => false,
@@ -1453,11 +1452,11 @@ class DSLC_Navigation extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 				),
 				'section' => 'responsive',
@@ -1521,11 +1520,11 @@ class DSLC_Navigation extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 				),
 				'section' => 'responsive',
@@ -1600,71 +1599,83 @@ class DSLC_Navigation extends DSLC_Module {
 
 		/* Module output starts here */
 
-			global $dslc_active;
+		global $dslc_active;
 
-			if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
-				$dslc_is_admin = true;
-			else
-				$dslc_is_admin = false;
+		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+			$dslc_is_admin = true;
+		} else {
+			$dslc_is_admin = false;
+		}
 
+		if ( 'not_set' === $options['location'] ) {
+
+			if ( $dslc_is_admin ) {
+
+				?><div class="dslc-notification dslc-red"><?php esc_attr_e( 'Edit the module and choose which location to show.', 'live-composer-page-builder' ); ?> <span class="dslca-refresh-module-hook dslc-icon dslc-icon-refresh"></span></span></div><?php
+			}
+		} elseif ( ! has_nav_menu( $options['location'] ) ) {
+
+			if ( $dslc_is_admin ) {
+
+				?><div class="dslc-notification dslc-red"><?php esc_attr_e( 'The chosen location does not have a menu assigned.', 'live-composer-page-builder' ); ?> <span class="dslca-refresh-module-hook dslc-icon dslc-icon-refresh"></span></span></div><?php
+			}
+		} else {
 			?>
+			<div class="dslc-navigation dslc-navigation-sub-position-<?php echo esc_attr( $options['css_subnav_position'] ); ?> dslc-navigation-res-t-<?php echo esc_attr( $options['css_res_t'] ); ?> dslc-navigation-res-p-<?php echo esc_attr( $options['css_res_p'] ); ?> dslc-navigation-orientation-<?php echo esc_attr( $options['nav_orientation'] ); ?>">
+				<div class="dslc-navigation-inner">
+					<?php wp_nav_menu( array( 'theme_location' => $options['location'] ) ); ?>
+				</div>
+			</div>
+			<div class="dslc-mobile-navigation dslc-navigation-res-t-<?php echo esc_attr( $options['css_res_t'] ); ?>  dslc-navigation-res-p-<?php echo esc_attr( $options['css_res_p'] ); ?>">
+				<?php
+				if ( has_nav_menu( $options['location'] ) ) {
 
-			<?php
-				if ( $options['location'] == 'not_set' ) {
-					if ( $dslc_is_admin ) {
-						?><div class="dslc-notification dslc-red"><?php _e( 'Edit the module and choose which location to show.', 'live-composer-page-builder' ); ?> <span class="dslca-refresh-module-hook dslc-icon dslc-icon-refresh"></span></span></div><?php
-					}
-				} elseif ( ! has_nav_menu( $options['location'] ) ) {
-					if ( $dslc_is_admin ) {
-						?><div class="dslc-notification dslc-red"><?php _e( 'The chosen location does not have a menu assigned.', 'live-composer-page-builder' ); ?> <span class="dslca-refresh-module-hook dslc-icon dslc-icon-refresh"></span></span></div><?php
-					}
-				} else {
-					?>
-					<div class="dslc-navigation dslc-navigation-sub-position-<?php echo $options['css_subnav_position']; ?> dslc-navigation-res-t-<?php echo $options['css_res_t']; ?> dslc-navigation-res-p-<?php echo $options['css_res_p']; ?> dslc-navigation-orientation-<?php echo $options['nav_orientation']; ?>">
-						<div class="dslc-navigation-inner">
-							<?php wp_nav_menu( array('theme_location' => $options['location']) ); ?>
-						</div>
-					</div>
-					<div class="dslc-mobile-navigation dslc-navigation-res-t-<?php echo $options['css_res_t']; ?>  dslc-navigation-res-p-<?php echo $options['css_res_p']; ?>">
-						<?php
-							if ( has_nav_menu( $options['location'] ) ) {
+					$mobile_nav_output = '';
+					$mobile_nav_output .= '<select>';
+					$mobile_nav_output .= '<option>' . __( '- Select -', 'live-composer-page-builder' ) . '</option>';
 
-								$mobile_nav_output = '';
-								$mobile_nav_output .= '<select>';
-								$mobile_nav_output .= '<option>' . __( '- Select -', 'live-composer-page-builder' ) . '</option>';
+					if ( has_nav_menu( $options['location'] ) ) {
 
-								if ( has_nav_menu( $options['location'] ) ) {
+						$locations = get_nav_menu_locations();
+						$menu = wp_get_nav_menu_object( $locations[ $options['location'] ] );
+						$menu_items = wp_get_nav_menu_items( $menu->term_id );
 
-									$locations = get_nav_menu_locations();
-									$menu = wp_get_nav_menu_object( $locations[$options['location']] );
-									$menu_items = wp_get_nav_menu_items( $menu->term_id );
+						foreach ( $menu_items as $key => $menu_item ) {
 
-									foreach ( $menu_items as $key => $menu_item ) {
-										$title = $menu_item->title;
-										$url = $menu_item->url;
-										$nav_selected = '';
-										if ( $menu_item->post_parent !== 0 ) {
-											$mobile_nav_output .= '<option value="' . $url . '" ' . $nav_selected . '> - ' . $title . '</option>';
-										} else {
-											$mobile_nav_output .= '<option value="' . $url . '" ' . $nav_selected . '>' . $title . '</option>';
-										}
-									}
+							$title = $menu_item->title;
+							$url = $menu_item->url;
+							$nav_selected = '';
 
-								}
-
-								$mobile_nav_output .= '</select>';
-								echo $mobile_nav_output;
+							if ( 0 !== $menu_item->post_parent ) {
+								$mobile_nav_output .= '<option value="' . $url . '" ' . $nav_selected . '> - ' . $title . '</option>';
+							} else {
+								$mobile_nav_output .= '<option value="' . $url . '" ' . $nav_selected . '>' . $title . '</option>';
 							}
-						?>
-						<div class="dslc-mobile-navigation-hook"><span class="dslc-icon dslc-icon-reorder"></span></div>
-					</div><!-- .dslc-mobile-navigation -->
-					<?php
+						}
+					}
+
+					$mobile_nav_output .= '</select>';
+					echo $mobile_nav_output;
 				}
+				?>
+				<div class="dslc-mobile-navigation-hook"><span class="dslc-icon dslc-icon-reorder"></span></div>
+			</div><!-- .dslc-mobile-navigation -->
+
+			<?php /* Add chevron icon */ ?>
+
+			<script type="text/javascript">
+				var menuItems = document.querySelectorAll( '.dslc-navigation .menu > li.menu-item-has-children:not(.dslc-navigation-arrow) > a' );
+
+				for (var i = 0, len = menuItems.length; i < len; i++) {
+				  menuItems[i].insertAdjacentHTML('afterend', '<span class="dslc-navigation-arrow dslc-icon dslc-icon-chevron-down"></span>');
+				}
+			</script>
+			<?php
+		}
 
 		/* Module output ends here */
 
 		$this->module_end( $options );
 
 	}
-
 }

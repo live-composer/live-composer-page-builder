@@ -1045,6 +1045,10 @@ jQuery(document).ready(function($){
 	});
 
 
+	/**
+	 * Navigation Module
+	 */
+
 	$( '.dslc-navigation li' ).mouseenter(function(){
 
 		var subnav = $(this).children('ul');

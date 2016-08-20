@@ -148,6 +148,7 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 * Issue [#203](https://github.com/livecomposer/live-composer-page-builder/issues/203): Responsive line-height settings do not work in HTML module
 * Issue [#196](https://github.com/livecomposer/live-composer-page-builder/issues/196): Uncaught Error – cannot call methods on sortable prior to initialization; attempted to call method 'option'
 * Issue [#202](https://github.com/livecomposer/live-composer-page-builder/issues/202): Inline Editor – Bold, Italic text styling do not apply in some themes.
+* Issue [#193](https://github.com/livecomposer/live-composer-page-builder/issues/193): Navigation Module – Chevron not showing when enabled in navigation module
 * Presets: Fixed presets auto-reload on module options change. (Thank you Paul!)
 * Presets: Removed Infobox > Image and Infobox > Image Url form synchronization. (Thank you Paul!)
 * Post Grids: Wrong post title centering over thumbnail. (Thank you Jacob!)
