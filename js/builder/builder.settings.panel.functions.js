@@ -265,13 +265,11 @@ jQuery(document).ready(function($){
 		  	plugins: 'link',
 		  	style_formats: [
 			      {title: 'Paragraph', format: 'p'},
-			      {title: 'Header 1', format: 'h1'},
 			      {title: 'Header 2', format: 'h2'},
 			      {title: 'Header 3', format: 'h3'},
 			      {title: 'Header 4', format: 'h4'},
 			      {title: 'Header 5', format: 'h5'},
 			      {title: 'Header 6', format: 'h6'},
-			      {title: 'Pre', format: 'preformatted'},
 			  ],
 		  	toolbar: 'styleselect | bold italic blockquote | removeformat | link unlink | bullist numlist '
 		});
