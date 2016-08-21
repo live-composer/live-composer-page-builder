@@ -55,29 +55,30 @@ function dslc_ajax_add_modules_section( $atts ) {
 			<div class="dslc-bg-video dslc-force-show"><div class="dslc-bg-video-inner"></div><div class="dslc-bg-video-overlay"></div></div>
 			<div class="dslc-modules-section-wrapper">
 				<div class="dslc-modules-section-inner lc-row lc-small-24 dslc-clearfix">
-					<div class="dslc-modules-area lc-column lc-small-24" data-size="12">
+					<div class="dslc-modules-area lc-column data-size="12">
 						<div class="dslc-modules-area-inner">
-							<div class="lc-row">
-								<div class="dslca-modules-area-manage">
-									<div class="dslca-modules-area-manage-inner">
-										<span class="dslca-manage-action dslca-copy-modules-area-hook" title="Duplicate" ><span class="dslca-icon dslc-icon-copy"></span></span>
-										<span class="dslca-manage-action dslca-move-modules-area-hook" title="Drag to move" ><span class="dslca-icon dslc-icon-move"></span></span>
-										<span class="dslca-manage-action dslca-change-width-modules-area-hook" title="Change width" >
-											<span class="dslca-icon dslc-icon-columns"></span>
-											<div class="dslca-change-width-modules-area-options">';
-												$output .= '<span>' . __( 'Container Width', 'live-composer-page-builder' ) . '</span>';
-												$output .= '<span data-size="">Auto</span><span data-size="1">1/12</span><span data-size="2">2/12</span>
-												<span data-size="3">3/12</span><span data-size="4">4/12</span>
-												<span data-size="5">5/12</span><span data-size="6">6/12</span>
-												<span data-size="7">7/12</span><span data-size="8">8/12</span>
-												<span data-size="9">9/12</span><span data-size="10">10/12</span>
-												<span data-size="11">11/12</span><span data-size="12">12/12</span>
-											</div>
-										</span>
-										<span class="dslca-manage-action dslca-delete-modules-area-hook" title="Delete" ><span class="dslca-icon dslc-icon-remove"></span></span>
-									</div>
+							<div class="dslca-modules-area-manage">
+								<div class="dslca-modules-area-manage-inner">
+									<span class="dslca-manage-action dslca-copy-modules-area-hook" title="Duplicate" ><span class="dslca-icon dslc-icon-copy"></span></span>
+									<span class="dslca-manage-action dslca-move-modules-area-hook" title="Drag to move" ><span class="dslca-icon dslc-icon-move"></span></span>
+									<span class="dslca-manage-action dslca-change-width-modules-area-hook" title="Change width" >
+										<span class="dslca-icon dslc-icon-columns"></span>
+										<div class="dslca-change-width-modules-area-options">';
+											$output .= '<span>' . __( 'Container Width', 'live-composer-page-builder' ) . '</span>';
+											$output .= '<span data-size="">Auto</span><span data-size="1">1/12</span><span data-size="2">2/12</span>
+											<span data-size="3">3/12</span><span data-size="4">4/12</span>
+											<span data-size="5">5/12</span><span data-size="6">6/12</span>
+											<span data-size="7">7/12</span><span data-size="8">8/12</span>
+											<span data-size="9">9/12</span><span data-size="10">10/12</span>
+											<span data-size="11">11/12</span><span data-size="12">12/12</span>
+										</div>
+									</span>
+									<span class="dslca-manage-action dslca-delete-modules-area-hook" title="Delete" ><span class="dslca-icon dslc-icon-remove"></span></span>
 								</div>
 							</div>
+						</div>
+						<div class="lc-row">
+							<!-- Modules html output goes here -->
 						</div>
 					</div>
 				</div><!-- .dslc-module-section-inner -->

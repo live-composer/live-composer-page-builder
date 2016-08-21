@@ -1439,6 +1439,10 @@ body a:focus {
 */
 
 .dslc-modules-area.dslc-modules-area-empty {
+	/* Make sure columns do not touch each other with sides. */
+	margin-right: 4px;
+	margin-left: 4px;
+
 	margin-bottom: 25px;
 	min-height: 120px;
 	box-shadow: 0 0 0 2px rgba(173, 175, 179, 0.4);
