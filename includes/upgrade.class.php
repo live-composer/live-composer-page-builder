@@ -13,11 +13,15 @@ final class DSLC_Upgrade {
 
 	public static function init() {
 
-		$curr_version = get_option( 'dslc_version' );
+		$curr_version_db = get_option( 'dslc_version' );
 
-		if ( ! is_array( $curr_version ) ) {
+		if ( ! is_array( $curr_version_db ) ) {
 
 			$curr_version = array();
+		}
+		else {
+
+			$curr_version = $curr_version_db;
 		}
 
 		/** Migration usage example
@@ -41,8 +45,11 @@ final class DSLC_Upgrade {
 
 		$curr_version = sort( $curr_version );
 
-		// Updated ro current version.
-		update_option( 'dslc_version', $curr_version );
+		if( $curr_version !== $curr_version_db ) {
+
+			// Updated ro current version.
+			update_option( 'dslc_version', $curr_version );
+		}
 	}
 
 	/**
