@@ -233,8 +233,8 @@
 					dslcRealInput.html( dslcRealInput.text() );
 				}
 
-				dslc_editable_content_gen_code( jQuery(this) );
-			}, 1);
+				dslc_editable_content_gen_code( dslcRealInput );
+			}, 100);
 		}
 	}).on('focus', '.dslca-editable-content', function() {
 

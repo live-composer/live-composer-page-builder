@@ -129,11 +129,17 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 
 == Changelog ==
 
-= 1.1.3 - August 19th 2016 =
+= 1.1.4 - August XXth 2016 =
 
-* [Report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
-* [Here you can download any previous verison](https://wordpress.org/plugins/live-composer-page-builder/developers/)
-* [See latest changes in details with animated gifs and videos](https://livecomposerplugin.com/blog/live-composer-1-1-released/)
+* [Please, report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
+* [You can download any previous version here](https://wordpress.org/plugins/live-composer-page-builder/developers/)
+* [See latest major changes in details with animated gifs and videos](https://livecomposerplugin.com/blog/live-composer-1-1-released/)
+
+= Bug fixes: =
+
+* [JS Bug](https://wordpress.org/support/topic/js-error-when-editing?replies=1#post-8788982): TypeError: a.html(...) is undefined
+
+= 1.1.3 - August 19th 2016 =
 
 = Bug fixes: =
 
@@ -167,9 +173,6 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 
 
 = 1.1.2 - August 17th 2016 =
-
-* [Report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
-* [See latest changes in details with animated gifs and videos](https://livecomposerplugin.com/blog/live-composer-1-1-released/)
 
 = Bug fixes: =
 
