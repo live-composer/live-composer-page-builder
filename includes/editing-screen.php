@@ -235,11 +235,11 @@ add_action( 'wp_head', 'dslc_preview_area_head' );
  *
  * @since 1.1
  */
-function dslc_editing_screen_title() {
+function dslc_editing_screen_title($title) {
 	$screen = get_current_screen();
 
 	if ( 'toplevel_page_livecomposer_editor' !== $screen->id || ! isset( $_GET['page_id'] ) ) {
-		return;
+		return $title;
 	}
 
 	$title = 'Edit: ' . get_the_title( intval( $_GET['page_id'] ) );
