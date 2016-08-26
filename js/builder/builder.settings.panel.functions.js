@@ -290,6 +290,7 @@ jQuery(document).ready(function($){
 
 		jQuery('.temp-styles-for-module', LiveComposer.Builder.PreviewAreaDocument).remove();
 		jQuery('.sp-container').remove();
+		jQuery('.mce-tinymce', LiveComposer.Builder.PreviewAreaDocument).hide();
 	}
 
 	/** Options dependencies */
