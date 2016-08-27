@@ -120,7 +120,7 @@ function dslc_carousel() {
 		carousel = jQuery( this );
 		container = carousel.closest( '.dslc-module-front' );
 
-		if ( container.closest('.dslc-modules-section').hasClass('dslc-no-columns-spacing') ) {
+		if ( container.closest('.dslc-modules-section').hasClass('lc-collapse') ) {
 
 			var margin = 0;
 		} else {
@@ -262,7 +262,7 @@ function dslc_carousel_responsive() {
 
 		carousel.css({ 'margin-left' : 0, 'width' : 'auto' });
 
-		if ( container.closest('.dslc-modules-section').hasClass('dslc-no-columns-spacing') ) {
+		if ( container.closest('.dslc-modules-section').hasClass('lc-collapse') ) {
 
 			var margin = 0;
 		} else {
@@ -358,7 +358,7 @@ function dslc_masonry( dslcWrapper, dslcAnimate ) {
 		dslcItemWidth = jQuery(dslcSelector, dslcContainer).width();
 		dslcContainerWidth = jQuery(dslcContainer).width();
 
-		if ( jQuery(this).closest('.dslc-modules-section').hasClass('dslc-no-columns-spacing') ) {
+		if ( jQuery(this).closest('.dslc-modules-section').hasClass('lc-collapse') ) {
 
 			dslcGutterWidth = 0;
 		} else {

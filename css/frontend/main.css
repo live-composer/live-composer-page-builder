@@ -1157,13 +1157,21 @@ a img.aligncenter { display: block; margin-left: auto; margin-right: auto }
    -webkit-flex-flow: row wrap;
        -ms-flex-flow: row wrap;
            flex-flow: row wrap; }
+
    .lc-row .lc-row {
      max-width: none;
      margin-left: -0.9375rem;
      margin-right: -0.9375rem; }
+
+   .lc-collapse .lc-row:not(.dslc-modules-section-wrapper) {
+		margin-left: 0;
+		margin-right: 0;
+   }
    .lc-row.expanded {
      max-width: none; }
-   .lc-row.collapse > .lc-column, .lc-row.collapse > .lc-columns {
+
+   .lc-row.lc-collapse > .lc-column, .lc-row.lc-collapse > .lc-columns,
+   .lc-collapse .lc-column, .lc-collapse .lc-columns {
      padding-left: 0;
      padding-right: 0; }
 

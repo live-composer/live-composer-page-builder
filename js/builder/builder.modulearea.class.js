@@ -76,7 +76,7 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 
 			if ( jQuery(itemEl).data('id') == 'DSLC_M_A' ) {
 
-				dslc_modules_area_add( jQuery(self.section).find('.dslc-modules-section-wrapper .dslc-modules-section-inner') );
+				dslc_modules_area_add( jQuery(self.section).find('.dslc-modules-section-wrapper .dslc-modules-section-inner > .lc-row') );
 				itemEl.remove();
 			}
 

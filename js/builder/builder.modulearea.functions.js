@@ -58,7 +58,7 @@
 	}
 
 	/**
-	 * Hook - Copy Module Area
+	 * Hook - Copy / Duplicate Module Area
 	 */
 	LiveComposer.Builder.PreviewAreaDocument.on( 'click', '.dslca-copy-modules-area-hook', function(e){
 
@@ -320,7 +320,7 @@ function dslc_modules_area_copy( area ) {
 
 	// Vars
 	var dslc_moduleID,
-	modulesSection = area.closest('.dslc-modules-section').find('.dslc-modules-section-inner');
+	modulesSection = area.closest('.dslc-modules-section').find('.dslc-modules-section-inner >.lc-row');
 
 	// Copy the area and append to the row
 	var dslc_modulesAreaCloned = area.clone().appendTo(modulesSection);

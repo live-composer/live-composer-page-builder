@@ -64,12 +64,38 @@ function dslc_display_composer() {
 					<a href="#" class="dslca-go-to-section-hook dslca-go-to-section-templates" data-section=".dslca-templates"><span class="dslca-icon dslc-icon-cloud"></span></a>
 
 					<!-- Module Option filters -->
-					<span class="dslca-options-filter-hook" data-section="functionality"><span class="dslca-icon dslc-icon-cog"></span> <?php esc_attr_e( 'Functionality', 'live-composer-page-builder' ); ?></span>
-					<span class="dslca-options-filter-hook" data-section="styling"><span class="dslca-icon dslc-icon-tint"></span> <?php esc_attr_e( 'Styling', 'live-composer-page-builder' ); ?></span>
-					<span class="dslca-options-filter-hook" data-section="responsive"><span class="dslca-icon dslc-icon-mobile-phone"></span> <?php esc_attr_e( 'Responsive', 'live-composer-page-builder' ); ?></span>
+					<?php
+						$module_options_panel_sections = array(
+
+							'functionality' => array(
+								'label' => __( 'Functionality', 'live-composer-page-builder' ),
+								'icon' => 'dslc-icon-cog',
+							),
+
+							'styling' => array(
+								'label' => __( 'Styling', 'live-composer-page-builder' ),
+								'icon' => 'dslc-icon-tint',
+							),
+
+							'responsive' => array(
+								'label' => __( 'Responsive', 'live-composer-page-builder' ),
+								'icon' => 'dslc-icon-mobile-phone',
+							),
+						);
+
+						/**
+						 * Allow developers to add custom sections.
+						 * @link https://livecomposer.help/article/195-filter-dslcfilteroptionspanelsections-add-custom-sections-in-module-options-panel
+						 */
+						$module_options_panel_sections = apply_filters( 'dslc_filter_options_panel_sections', $module_options_panel_sections );
+
+						foreach ($module_options_panel_sections as $section_id => $section_meta) {
+							echo '<span class="dslca-options-filter-hook" data-section="' . esc_attr( $section_id ) . '" style="display:none;"><span class="dslca-icon ' . esc_attr( $section_meta['icon'] ) . '"></span> ' . esc_attr( $section_meta['label'] ) . '</span>';
+						}
+					?>
 
 					<!-- Module Options Actions -->
-					<div class="dslca-module-edit-actions">
+					<div class="dslca-module-edit-actions">	
 						<a href="#" class="dslca-module-edit-save"><?php esc_attr_e( 'Confirm', 'live-composer-page-builder' ); ?></a>
 						<a href="#" class="dslca-module-edit-cancel"><?php esc_attr_e( 'Cancel', 'live-composer-page-builder' ); ?></a>
 					</div><!-- .dslca-module-edit-actions -->
@@ -1049,13 +1075,13 @@ function dslc_modules_section_front( $atts, $content = null ) {
 
 	if ( $dslc_active ) {
 		$a_container_class .= 'dslc-modules-section-empty ';
-		$a_prepend = '<div class="dslc-modules-section-inner lc-row lc-small-24 dslc-clearfix">';
-		$a_append = '</div>';
+		$a_prepend = '<div class="dslc-modules-section-inner lc-small-24 dslc-clearfix"><div class="lc-row">';
+		$a_append = '</div></div>';
 	}
 
 	// Columns spacing
-	if ( $atts['columns_spacing'] == 'nospacing' ) {
-			$section_class .= 'dslc-no-columns-spacing ';
+	if ( 'nospacing' === $atts['columns_spacing']  ) {
+			$section_class .= 'lc-collapse ';
 	}
 
 	// Custom Class.
