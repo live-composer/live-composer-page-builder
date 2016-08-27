@@ -134,6 +134,10 @@ function dslc_editing_screen_head() {
 
 	$screen = get_current_screen();
 
+	if ( ! $screen ) {
+		return;
+	}
+
 	// Proceed only if current page is Live Composer editing page in WP Admin.
 	if ( 'toplevel_page_livecomposer_editor' !== $screen->id || ! current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 		return;
