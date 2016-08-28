@@ -58,36 +58,37 @@ jQuery(document).ready(function($) {
 	// Put JS error log data in a hidden textarea.
 	dslca_update_report_log();
 
- 	// On iframe loaded
- 	jQuery("#page-builder-frame").on('load', function(){
-
- 		var self = this;
- 		LiveComposer.Builder.PreviewAreaWindow = this.contentWindow;
- 		LiveComposer.Builder.PreviewAreaDocument = jQuery(this).contents();
-
- 		// Disable WP admin bar in editing mode
- 		jQuery('#wpadminbar', LiveComposer.Builder.PreviewAreaDocument).remove();
-
- 		LiveComposer.Builder.UI.initInlineEditors();
- 		dslc_fix_contenteditable();
-
- 		var mainDraggable = LiveComposer.Builder.PreviewAreaDocument.find("#dslc-main").eq(0)[0];
- 		new LiveComposer.Builder.Elements.CSectionsContainer( mainDraggable );
-
- 		jQuery(document).trigger('editorFrameLoaded');
-
- 		dslc_drag_and_drop();
- 		dslc_generate_code();
-
- 		// Catch keypress events (from both parent and iframe) to add keyboard support
- 		dslc_keypress_events();
- 		LiveComposer.Builder.UI.initPreviewAreaScroller();
- 	});
 
  	jQuery('body').addClass('dslca-enabled dslca-drag-not-in-progress');
  	jQuery('.dslca-invisible-overlay').hide();
  	jQuery('.dslca-section').eq(0).show();
 
+
+	/** Wait till tinyMCE loaded */
+	window.previewAreaTinyMCELoaded = function(){
+
+		var self = this;
+		LiveComposer.Builder.PreviewAreaWindow = this;
+		LiveComposer.Builder.PreviewAreaDocument = jQuery(this.document);
+
+		// Disable WP admin bar in editing mode
+		jQuery('#wpadminbar', LiveComposer.Builder.PreviewAreaDocument).remove();
+
+		LiveComposer.Builder.UI.initInlineEditors();
+		dslc_fix_contenteditable();
+
+		var mainDraggable = LiveComposer.Builder.PreviewAreaDocument.find("#dslc-main").eq(0)[0];
+		new LiveComposer.Builder.Elements.CSectionsContainer( mainDraggable );
+
+		jQuery(document).trigger('editorFrameLoaded');
+
+		dslc_drag_and_drop();
+		dslc_generate_code();
+
+		// Catch keypress events (from both parent and iframe) to add keyboard support
+		dslc_keypress_events();
+		LiveComposer.Builder.UI.initPreviewAreaScroller();
+	};
 });
 
 /**
