@@ -45,7 +45,7 @@ final class DSLC_Upgrade {
 
 		$curr_version = sort( $curr_version );
 
-		if( $curr_version !== $curr_version_db ) {
+		if( $curr_version != $curr_version_db ) {
 
 			// Updated ro current version.
 			update_option( 'dslc_version', $curr_version );
