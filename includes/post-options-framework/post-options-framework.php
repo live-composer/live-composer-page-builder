@@ -451,7 +451,7 @@ function dslc_page_add_row_action( $actions, $page_object ) {
 
 	if ( true === $dslc_admin_interface_on && $page_status != 'trash' ) {
 
-		$url = DSLC_EditorInterface::get_editor_link( $id );
+		$url = DSLC_EditorInterface::get_editor_link_url( $id );
 
 		$actions = array('edit-in-live-composer' => '<a href="' . $url . '">' . __( 'Edit in Live Composer', 'live-composer-page-builder' ) . '</a>') + $actions;
 	}
@@ -481,7 +481,7 @@ function dslc_post_add_row_action( $actions, $post ) {
 		if ( array_key_exists( $post_type, $dslc_var_templates_pt ) ) {
 
 			$template_id = dslc_st_get_template_id( $post->ID );
-			$url = DSLC_EditorInterface::get_editor_link( $template_id, $post->ID );
+			$url = DSLC_EditorInterface::get_editor_link_url( $template_id, $post->ID );
 
 			// If default template for current CPT exists.
 			if ( $template_id ) {
@@ -491,7 +491,7 @@ function dslc_post_add_row_action( $actions, $post ) {
 			}
 		} else {
 
-			$url = DSLC_EditorInterface::get_editor_link( $post->ID );
+			$url = DSLC_EditorInterface::get_editor_link_url( $post->ID );
 
 			$actions = array( 'edit-in-live-composer' => '<a href="'. $url . '">'. __( 'Edit in Live Composer', 'live-composer-page-builder' ) .'</a>' ) + $actions;
 		}
@@ -518,7 +518,7 @@ function dslc_add_button_permalink( $return, $id, $new_title, $new_slug ) {
 		 ! array_key_exists( $current_post_type, $dslc_var_templates_pt ) &&
 		 $current_post_type != 'dslc_testimonials' ) {
 
-		$url = DSLC_EditorInterface::get_editor_link( $id );
+		$url = DSLC_EditorInterface::get_editor_link_url( $id );
 
 		$return .= '<a class="button button-small" target="_blank" href="' . $url . '">' . __( 'Open in Live Composer', 'live-composer-page-builder' ) . '</a>';
 	}
@@ -539,7 +539,7 @@ function dslc_post_submitbox_add_button() {
 
 	if ( true === $dslc_admin_interface_on && $current_screen->action != 'add' && ! array_key_exists( $current_post_type, $dslc_var_templates_pt ) && $current_post_type != 'dslc_testimonials' ) {
 
-		$url = DSLC_EditorInterface::get_editor_link( get_the_ID() );
+		$url = DSLC_EditorInterface::get_editor_link_url( get_the_ID() );
 
 		echo '<a class="button button-hero" target="_blank" href="' . $url . '">' . __( 'Open in Live Composer', 'live-composer-page-builder' ) . '</a>';
 	}
@@ -554,7 +554,7 @@ function dslc_tab_content( $content ) {
 
 	if ( get_post_type( get_the_ID() ) == 'page' && is_admin() ) {
 
-		$url = DSLC_EditorInterface::get_editor_link( get_the_ID() );
+		$url = DSLC_EditorInterface::get_editor_link_url( get_the_ID() );
 		?>
 		<div id="lc_content_wrap">
 				<h2> <?php _e( 'Edit this page in Live Composer', 'live-composer-page-builder' ); ?></h2>

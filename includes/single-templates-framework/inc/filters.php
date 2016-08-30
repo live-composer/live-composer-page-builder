@@ -86,14 +86,13 @@ function dslc_st_template_switch() {
 				$return_template = DS_LIVE_COMPOSER_ABS . '/templates/dslc-single.php';
 			}
 
-			// Redirect
+			// Redirect.
 			include( $return_template );
 
-			// Bye bye
-        	exit();
+			// Bye bye.
+			exit();
 
 		}
-
 	}
 
 } add_action( 'template_redirect', 'dslc_st_template_switch' );
@@ -101,7 +100,6 @@ function dslc_st_template_switch() {
 /**
  * Add columns to the Templates Listing table.
  */
-
 function dslc_templates_col_title( $defaults ) {
 
 	unset( $defaults['date'] );

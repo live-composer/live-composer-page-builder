@@ -23,11 +23,11 @@ class DSLC_EditorInterface{
 	}
 
 	/**
-	 * Returns editor link
+	 * Returns editor link URL
 	 *
 	 * @return string
 	 */
-	static function get_editor_link( $page_id, $preview_id = '' ) {
+	static function get_editor_link_url( $page_id, $preview_id = '' ) {
 
 		if ( '' !== $preview_id ) {
 
@@ -35,6 +35,28 @@ class DSLC_EditorInterface{
 		}
 
 		return admin_url( 'admin.php?page=livecomposer_editor&page_id=' . $page_id . $preview_id);
+	}
+
+	/**
+	 * Print prepared editor link
+	 *
+	 * @return void
+	 */
+	static function the_editor_link( $link_url, $link_text ) {
+
+		// Get the position of the activation button.
+		$activate_button_position = dslc_get_option( 'lc_module_activate_button_pos', 'dslc_plugin_options_other' );
+
+		if ( empty( $activate_button_position ) ) {
+
+			$activate_button_position = 'right';
+		}
+
+		?>
+		<a href="<?php echo esc_url( $link_url ); ?>" class="dslca-position-<?php echo esc_attr( $activate_button_position ); ?> dslca-activate-composer-hook">
+			<?php echo esc_html( $link_text ); ?>
+		</a>
+		<?php
 	}
 
 	/**
@@ -47,7 +69,6 @@ class DSLC_EditorInterface{
 		$dslc_admin_interface_on = apply_filters( 'dslc_admin_interface_on_frontend', true );
 
 		if ( true !== $dslc_admin_interface_on ) {
-
 			return;
 		}
 
@@ -62,95 +83,105 @@ class DSLC_EditorInterface{
 		}
 
 		// LC and WP Customizer do not work well together, don't proceed if customizer active.
-		if ( ( ! function_exists( 'is_customize_preview' ) || ! is_customize_preview() ) ) :
+		if ( function_exists( 'is_customize_preview' ) && is_customize_preview() ) {
+			return;
+		}
 
-			// If editor not active and user can access the editor.
-			if ( ! DS_LIVE_COMPOSER_ACTIVE && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) :
+		// If editor not active and user can access the editor.
+		if ( DS_LIVE_COMPOSER_ACTIVE || ! is_user_logged_in() || ! current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+			return;
+		}
 
-				// If a singular page ( posts and pages ).
-				if ( is_singular() ) {
+		// If a singular page ( posts and pages ).
+		if ( is_singular() ) {
 
-					// If a page or a template go ahead normally.
-					if ( is_page() || get_post_type() === 'dslc_templates' || ! isset( $dslc_var_templates_pt[ get_post_type() ] ) ) {
+			// If a page go ahead normally.
+			if ( is_page() ) {
 
-						?><a href="<?php echo self::get_editor_link( get_the_ID() ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo $activate_button_position; ?>"><?php _e( 'Activate Live Composer', 'live-composer-page-builder' ); ?></a><?php
+				// Output the button.
+				self::the_editor_link( self::get_editor_link_url( get_the_ID() ), __( 'Activate Live Composer', 'live-composer-page-builder' ) );
 
-					// If not a page or a template post type.
-					} else {
+			// If a template post type go ahead normally.
+			} elseif ( 'dslc_templates' === get_post_type() ) {
 
-						// Check if it has a template attached to it.
-						$template = dslc_st_get_template_id( get_the_ID() );
+				// Output the button.
+				self::the_editor_link( self::get_editor_link_url( get_the_ID() ), __( 'Edit Template', 'live-composer-page-builder' ) );
 
-						if ( $template ) {
+			// If a post of the CPT managed by LC templates.
+			} elseif ( isset( $dslc_var_templates_pt[ get_post_type() ] )  ) {
 
-							?><a target="_blank" href="<?php echo self::get_editor_link( $template, get_the_ID() ); ?>" class="dslca-activate-composer-hook"><?php _e( 'Edit Template', 'live-composer-page-builder' ); ?></a><?php
+				// Check if it has a template attached to it.
+				$template = dslc_st_get_template_id( get_the_ID() );
 
-						} else {
+				if ( $template ) {
 
-							?><a target="_blank" href="<?php echo admin_url( 'post-new.php?post_type=dslc_templates' ); ?>" class="dslca-activate-composer-hook"><?php _e( 'Create Template', 'live-composer-page-builder' ); ?></a><?php
+					// Output the button.
+					self::the_editor_link( self::get_editor_link_url( $template, get_the_ID() ), __( 'Edit Template', 'live-composer-page-builder' ) );
 
-						}
+				} else {
 
-					}
+					// Output the button.
+					self::the_editor_link( admin_url( 'post-new.php?post_type=dslc_templates' ) , __( 'Create Template', 'live-composer-page-builder' ) );
 
-				// If a 404 page.
-				} elseif ( is_404() ) {
-
-					// Get ID of the page set to power the 404 page.
-					$template_id = dslc_get_option( '404_page', 'dslc_plugin_options_archives' );
-
-					// If there is a page that powers it.
-					if ( $template_id != 'none' ) {
-
-						// Output the button
-						?><a href="<?php echo self::get_editor_link( $template_id ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo $activate_button_position; ?>"><?php _e( 'Activate Live Composer', 'live-composer-page-builder' ); ?></a><?php
-
-					}
-
-				// If a search results page.
-				} elseif ( is_search() ) {
-
-					// Get ID of the page set to power the search results page.
-					$template_id = dslc_get_option( 'search_results', 'dslc_plugin_options_archives' );
-
-					// If there is a page that powers it?
-					if ( $template_id != 'none' ) {
-
-						// Output the button.
-						?><a href="<?php echo esc_attr( self::get_editor_link( $template_id, get_the_ID() ) ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo $activate_button_position; ?>"><?php _e( 'Activate Live Composer', 'live-composer-page-builder' ); ?></a><?php
-
-					}
-
-				// If authors archives page?
-				} elseif ( is_author() ) {
-
-					// Get ID of the page set to power the author archives
-					$template_id = dslc_get_option( 'author', 'dslc_plugin_options_archives' );
-
-					// If there is a page that powers it?
-					if ( 'none' !== $template_id ) {
-
-						// Output the button.
-						?><a href="<?php echo esc_attr( self::get_editor_link( $template_id, get_the_ID() ) ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo $activate_button_position; ?>"><?php _e( 'Activate Live Composer', 'live-composer-page-builder' ); ?></a><?php
-
-					}
-				// If other archives ( not author )?
-				} elseif ( is_archive() ) {
-					// Get ID of the page set to power the archives of the shown post type.
-					$template_id = dslc_get_option( get_post_type(), 'dslc_plugin_options_archives' );
-
-					// If there is a page that powers it?
-					if ( 'none' !== $template_id ) {
-
-						// Output the button.
-						?><a href="<?php echo esc_attr( self::get_editor_link( $template_id, get_the_ID() ) ); ?>" class="dslca-activate-composer-hook dslca-position-<?php echo esc_attr( $activate_button_position ); ?>"><?php esc_html_e( 'Activate Live Composer', 'live-composer-page-builder' ); ?></a><?php
-
-					}
 				}
+			}
 
-			endif;
+		// If a 404 page.
+		} elseif ( is_404() ) {
 
-		endif;
+			// Get ID of the page set to power the 404 page.
+			$template_id = dslc_get_option( '404_page', 'dslc_plugin_options_archives' );
+
+			// If there is a page that powers it.
+			if ( 'none' !== $template_id ) {
+
+				// Output the button.
+				self::the_editor_link( self::get_editor_link_url( $template_id ), __( 'Activate Live Composer', 'live-composer-page-builder' ) );
+
+			}
+
+		// If a search results page.
+		} elseif ( is_search() ) {
+
+			// Get ID of the page set to power the search results page.
+			$template_id = dslc_get_option( 'search_results', 'dslc_plugin_options_archives' );
+
+			// If there is a page that powers it?
+			if ( 'none' !== $template_id ) {
+
+				// Output the button.
+				self::the_editor_link( self::get_editor_link_url( $template_id, get_the_ID() ), __( 'Activate Live Composer', 'live-composer-page-builder' ) );
+
+			}
+
+		// If authors archives page?
+		} elseif ( is_author() ) {
+
+			// Get ID of the page set to power the author archives.
+			$template_id = dslc_get_option( 'author', 'dslc_plugin_options_archives' );
+
+			// If there is a page that powers it?
+			if ( 'none' !== $template_id ) {
+
+				// Output the button.
+				self::the_editor_link( self::get_editor_link_url( $template_id, get_the_ID() ), __( 'Activate Live Composer', 'live-composer-page-builder' ) );
+
+			}
+
+		// If other archives ( not author )?
+		} elseif ( is_archive() && isset( $dslc_var_templates_pt[ get_post_type() ] ) ) {
+
+			// Get ID of the page set to power the archives of the shown post type.
+			$template_id = dslc_get_option( get_post_type(), 'dslc_plugin_options_archives' );
+
+			// If there is a page that powers it?
+			if ( 'none' !== $template_id ) {
+
+				// Output the button.
+				self::the_editor_link( self::get_editor_link_url( $template_id, get_the_ID() ), __( 'Activate Live Composer', 'live-composer-page-builder' ) );
+
+			}
+		}
 
 		if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) :
 

@@ -588,7 +588,7 @@ function dslc_hf_get_header( $post_ID = false ) {
 		// If editor active? Add a link to the header editing.
 		if ( dslc_is_editor_active( 'access' ) ) {
 
-			$header_link = DSLC_EditorInterface::get_editor_link( $header_footer['header'] );
+			$header_link = DSLC_EditorInterface::get_editor_link_url( $header_footer['header'] );
 
 			// Set the HTML for the edit overlay.
 			$append = '<div class="dslc-hf-block-overlay"><a target="_blank" href="' . $header_link . '" class="dslc-hf-block-overlay-button dslca-link">' . __( 'Edit Header','live-composer-page-builder' ) . '</a>';
@@ -664,7 +664,7 @@ function dslc_hf_get_footer( $post_ID = false ) {
 		// If editor active? Add a link to the footer editing.
 		if ( dslc_is_editor_active( 'access' ) ) {
 
-			$footer_link = DSLC_EditorInterface::get_editor_link( $header_footer['footer'] );
+			$footer_link = DSLC_EditorInterface::get_editor_link_url( $header_footer['footer'] );
 
 			// Set the HTML for the edit overlay.
 			$append = '<div class="dslc-hf-block-overlay"><a target="_blank" href="' . $footer_link . '" class="dslc-hf-block-overlay-button dslca-link">' . __( 'Edit Footer','live-composer-page-builder' ) . '</a>';
