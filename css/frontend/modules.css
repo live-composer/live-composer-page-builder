@@ -435,10 +435,10 @@
 					overflow: hidden;
 				}
 
-				#dslc-content .dslc-gallery-thumb a {
+				/*#dslc-content .dslc-gallery-thumb a {
 					display: inline-block;
 					max-width: 100%;
-				}
+				}*/
 
 				#dslc-content .dslc-gallery-thumb img {
 					border-radius: 0;
@@ -451,13 +451,19 @@
 					height: auto;
 				}
 
-				#dslc-content .dslc-gallery-images-count {
+				#dslc-content .dslc-gallery-thumb .dslc-gallery-images-count {
 					background: transparent;
-					border: 0px solid transparent;
-					border-radius: 50%;
+					color: #fff;
+					font-weight: 400;
+					font-size: 25px;
+					line-height: 1;
+
 					position: absolute;
-					top: 40%;
-					left: 35%;
+					left: 0;
+					top: 0;
+					width: 100%;
+					height: 100%;
+
 					text-align: center;
 					text-decoration: none;
 				}
