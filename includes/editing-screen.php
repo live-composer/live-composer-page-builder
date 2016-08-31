@@ -42,7 +42,7 @@ function dslc_editing_screen() {
 	}
 
 	// Base 64 encoded SVG image.
-	$icon_svg = dslc_get_menu_svg();
+	$icon_svg = Live_Composer()->sidebar_icon;
 
 	add_menu_page(
 		__( 'Live Composer Editing', 'live-composer-page-builder' ),

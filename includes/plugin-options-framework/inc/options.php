@@ -262,9 +262,7 @@ function dslc_feature_control_unregister() {
  *
  * @since 1.0
  */
-function dslc_plugin_opts_other() {
-
-	global $dslc_plugin_options;
+function dslc_plugin_opts_other( $dslc_plugin_options ) {
 
 	$dslc_plugin_options['dslc_plugin_options_other'] = array(
 		'title' => __( 'Other', 'live-composer-page-builder' ),
@@ -329,4 +327,6 @@ function dslc_plugin_opts_other() {
 		),
 	);
 
-} add_action( 'dslc_hook_register_options', 'dslc_plugin_opts_other', 50 );
+	return $dslc_plugin_options;
+
+} add_filter( 'dslc_filter_register_options', 'dslc_plugin_opts_other' );

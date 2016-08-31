@@ -61,7 +61,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<?php 
 					global $dslc_plugin_options;
 
-					vovaphperror( $dslc_plugin_options, '$dslc_plugin_options');
 					do_settings_sections( 'dslc_plugin_options' ); ?>
 					<?php submit_button(); ?>
 			</div>

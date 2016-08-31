@@ -11,47 +11,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/**
- * Returns a base64 URL for the svg for use in the menu
- *
- * @return string
- */
-function dslc_get_menu_svg() {
-	$icon_svg = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9Ii0yOTcgMzg4IDE3IDE3IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IC0yOTcgMzg4IDE3IDE3OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6IzlFQTNBODt9Cjwvc3R5bGU+Cjx0aXRsZT5TbGljZSAxPC90aXRsZT4KPGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0tMjg0LjIsMzg4aC05LjhjLTEuNiwwLTMsMS4zLTMsM3Y4LjljMCwxLjYsMS4zLDMsMywzaDEuNXYtMmgtMS41Yy0wLjYsMC0xLTAuNC0xLTFWMzkxYzAtMC41LDAuNC0xLDEtMWg5LjgKCWMwLjUsMCwxLDAuNCwxLDF2Mi4zaDJWMzkxQy0yODEuMiwzODkuMy0yODIuNSwzODgtMjg0LjIsMzg4eiIvPgo8ZyBpZD0iR3JvdXAtMTgiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMuNTMxMjUwLCA1LjI5Njg3NSkiPgoJPHBhdGggaWQ9IkNvbWJpbmVkLVNoYXBlIiBjbGFzcz0ic3QwIiBkPSJNLTI5Mi4yLDM5OS42di0xLjJjMCwwLTEuOC0yLjQtMi42LTMuM2MtMC44LTAuOS0xLjItMi40LDAtM2MxLjItMC42LDEuOCwxLjIsMS44LDEuMgoJCXMtMS43LTMuNywwLjItNGMxLjMtMC4yLDEuNiwxLjYsMS42LDEuNnMtMC4xLTIsMS40LTJjMS41LDAsMS41LDIsMS41LDJzMC0xLjgsMS4yLTEuOGMxLjIsMCwxLjQsMS41LDEuNCwxLjVzLTAuMi0wLjksMC45LTAuOQoJCWMwLjksMCwxLjEsMC42LDEuMiwxLjdjMCwwLjQtMC4xLDEuNS0wLjEsMmMwLDMtMiwzLjctMiwzLjd2Mi40aC0xLjJjMCwwLTAuOC0xLjItMS4yLTEuMnMtMC42LDEuMi0wLjYsMS4ySC0yOTIuMnogTS0yOTEuNSwzOTMuMQoJCXYyLjVjMCwwLjMsMC4yLDAuNSwwLjUsMC41YzAuMywwLDAuNS0wLjIsMC41LTAuNXYtMi41YzAtMC4zLTAuMi0wLjUtMC41LTAuNUMtMjkxLjIsMzkyLjYtMjkxLjUsMzkyLjgtMjkxLjUsMzkzLjF6CgkJIE0tMjg5LjUsMzkzLjF2M2MwLDAuMywwLjIsMC41LDAuNSwwLjVjMC4zLDAsMC41LTAuMiwwLjUtMC41di0zYzAtMC4zLTAuMi0wLjUtMC41LTAuNUMtMjg5LjMsMzkyLjYtMjg5LjUsMzkyLjgtMjg5LjUsMzkzLjF6CgkJIE0tMjg3LjUsMzkzLjF2Mi41YzAsMC4zLDAuMiwwLjUsMC41LDAuNWMwLjMsMCwwLjUtMC4yLDAuNS0wLjV2LTIuNWMwLTAuMy0wLjItMC41LTAuNS0wLjVDLTI4Ny4yLDM5Mi42LTI4Ny41LDM5Mi45LTI4Ny41LDM5My4xCgkJeiIvPgo8L2c+Cjwvc3ZnPgo=';
-
-	return $icon_svg;
-}
-
-/**
- * Register all the option pages
- */
-function dslc_plugin_options_setup() {
-
-	global $dslc_plugin_options;
-	do_action( 'dslc_hook_register_options' );
-
-	// Base 64 encoded SVG image.
-	$icon_svg = dslc_get_menu_svg();
-
-	add_menu_page(
-		__( 'Live Composer', 'live-composer-page-builder' ),
-		__( 'Live Composer', 'live-composer-page-builder' ),
-		'manage_options',
-		'dslc_plugin_options',
-		'dslc_plugin_options_display',
-		$icon_svg,
-		'99.99'
-	);
-
-	// Custom options extension.
-	global $dslc_options_extender;
-	// Create class object.
-	$dslc_options_extender = new LC_Options_Extender;
-
-	$dslc_options_extender->construct_panels();
-
-} add_action( 'admin_menu', 'dslc_plugin_options_setup' );
-
 
 /**
  * Display option pages
@@ -59,161 +18,22 @@ function dslc_plugin_options_setup() {
  * @param string $tab Tab to display.
  */
 function dslc_plugin_options_display( $tab = '' ) {
-
-	global $dslc_plugin_options;
-
-	?>
-	<style>
-		#jstabs .tab{display: none}
-	</style>
-	<div class="wrap">
-		<h2 id="dslc-main-title">Live Composer <span class="dslc-ver"><?php echo esc_html( DS_LIVE_COMPOSER_VER ); ?></span></h2>
-
-		<form autocomplete="off" class="docs-search-form" id="dslc-headersearch" method="GET" action="//livecomposer.help/search"  target="_blank">
-			<input type="hidden" value="" name="collectionId">
-			Search the knowledge base: &nbsp;
-			<input type="text" value="" placeholder="Your question here..." class="search-query" title="search-query" name="query">
-			<button type="submit" class="hssearch button button-hero"><span class="dashicons dashicons-search"></span> Search</button>
-		</form>
-
-		<?php
-		settings_errors();
-
-		$anchor = sanitize_text_field( @$_GET['anchor'] );
-		$anchor = '' !== $anchor ? $anchor : 'dslc_getting_started';
-		?>
-		<a name="dslc-top"></a>
-		<h2 class="nav-tab-wrapper dslc-settigns-tabs" id="dslc-tabs">
-			<a href="#" data-nav-to="dslc_getting_started" class="nav-tab <?php echo 'dslc_getting_started' === $anchor ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Getting Started', 'live-composer-page-builder' ) ?></a>
-			<a href="#" data-nav-to="tab-settings" class="nav-tab <?php echo 'dslc_settings' === $anchor ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Settings', 'live-composer-page-builder' ) ?></a>
-			<a href="#" data-nav-to="tab-extensions" class="nav-tab <?php echo 'dslc_extensions' === $anchor ? 'nav-tab-active' : ''; ?>"><?php  echo esc_html__( 'Extensions', 'live-composer-page-builder' ) . ' <span class="tag">' . esc_html__( 'Free', 'live-composer-page-builder' ) . '</span>'; ?></a>
-			<a href="#" data-nav-to="tab-themes" class="nav-tab <?php echo 'dslc_themes' === $anchor ? 'nav-tab-active' : ''; ?>"><?php  echo esc_html__( 'Themes', 'live-composer-page-builder' ) . ' <span class="tag">' . esc_html__( 'Free', 'live-composer-page-builder' ) . '</span>'; ?></a>
-			<a href="#" data-nav-to="tab-docs" class="nav-tab <?php echo 'dslc_docs' === $anchor ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Docs &amp; Support', 'live-composer-page-builder' ) ?></a>
-		</h2>
-
-
-		<div id="jstabs">
-				<!-- Getting Started Tab -->
-				<div class="tab" <?php if ( $anchor != 'dslc_settings' ) echo 'style="display:block"'; ; ?> id="tab-for-dslc_getting_started">
-					<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-getting-started.php'; ?>
-				</div>
-				<!-- Settings tab -->
-				<div class="tab" <?php if ( $anchor == 'dslc_settings' ) echo 'style="display:block"'; ; ?>  id="tab-for-tab-settings">
-					<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-settings.php'; ?>
-				</div>
-				<!-- Themes tab -->
-				<div class="tab" id="tab-for-tab-themes">
-					<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-themes.php'; ?>
-				</div>
-				<!-- Extensions tab -->
-				<div class="tab" id="tab-for-tab-extensions">
-					<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-extensions.php'; ?>
-				</div>
-				<!-- Docs & Support tab -->
-				<div class="tab" id="tab-for-tab-docs">
-					<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-docs.php'; ?>
-				</div>
-
-
-		</div>
-	</div><!-- /.wrap -->
-	<script>
-		jQuery(document).ready(function($) {
-			jQuery(".nav-tab-wrapper > a").on('click', function() {
-				if ($(this).data('nav-to') != null ) {
-
-					$("#jstabs .tab").hide();
-					$(".nav-tab-active").removeClass('nav-tab-active');
-					$("#tab-for-" + $(this).data('nav-to')).show();
-					$(this).addClass('nav-tab-active')
-
-					var refer = $("#jstabs").find("input[name='_wp_http_referer']");
-					refer.val( '<?php echo admin_url( 'admin.php?page=dslc_plugin_options&anchor=dslc_settings&settings-updated=true' ); ?>' );
-
-					return false;
-				}
-			});
-		});
-	</script>
-	<?php
-
+	// Moved to LC_Plugin_Options > plugin_options_page_content.
 }
 
 /**
  * Register options
  */
 function dslc_plugin_options_init() {
+	// Moved to LC_Plugin_Options > register_option_panels.
+}
 
-	global $dslc_plugin_options;
-
-	/**
-	 * Add Sections and Fields on the settings page
-	 */
-
-	foreach ( $dslc_plugin_options as $section_id => $section ) {
-
-		add_settings_section(
-			$section_id,
-			$section['title'],
-			'dslc_plugin_options_display_options',
-			$section_id
-		);
-
-		register_setting(
-			$section_id, // Option Group.
-			$section_id, // Option Name.
-			'dslc_plugin_options_input_sanitize'// Sanitize.
-		);
-
-		foreach ( $section['options'] as $option_id => $option ) {
-
-			$option['id'] = $option_id;
-
-			if ( ! isset( $option['section'] ) ) {
-
-				$option['section'] = $section_id;
-			}
-
-			$option['name'] = 'dslc_plugin_options[' . $option['id'] . ']';
-
-			$value = '';
-			$options = get_option( 'dslc_plugin_options' );
-
-			if ( isset( $options[ $option_id ] ) ) {
-				$value = $options[ $option_id ];
-			}
-
-			// Previous version structure.
-			if ( '' === $value ) {
-
-				$options = get_option( $section_id );
-
-				if ( isset( $options[ $option_id ] ) ) {
-
-					$value = $options[ $option_id ];
-				}
-
-				if ( '' === $value ) {
-
-					$value = $option['std'];
-				}
-			}
-
-			$option['value'] = $value;
-
-			add_settings_field(
-
-				$option_id, // Id.
-				$option['label'], // Title.
-				'dslc_option_display_funcitons_router', // Callback.
-				$section_id, // Page.
-				$section_id, // Section.
-				$option // Args.
-			);
-		}
-	}
-
-} add_action( 'admin_init', 'dslc_plugin_options_init' );
+/**
+ * Register all the option pages
+ */
+function dslc_plugin_options_setup() {
+// Deprecated. Moved into LC_Plugin_Options > create_plugin_options_page
+}
 
 /**
  * Function router to not use anonymous functions

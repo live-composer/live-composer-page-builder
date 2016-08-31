@@ -30,31 +30,10 @@ function dslc_get_options( $section_id = false ) {
  * Retrieve value of a single option
  */
 function dslc_get_option( $option_id, $section_id ) {
-
-	global $dslc_plugin_options;
-
-	$value = null;
-	$options = get_option( 'dslc_plugin_options' );
-
-	// New way to get options since 1.0.8 (no section required).
-	if ( isset( $options[ $option_id ] ) ) {
-
-		$value = $options[ $option_id ];
-	}
-
-	// Old way to get options (section + option id).
-	if ( null === $value ) {
-
-		$options = get_option( $section_id );
-
-		if ( isset( $options[ $option_id ] ) ) {
-			$value = $options[ $option_id ];
-		} elseif ( isset( $dslc_plugin_options[ $section_id ]['options'][ $option_id ] ) ) {
-			$value = $dslc_plugin_options[ $section_id ]['options'][ $option_id ]['std'];
-		} else {
-			$value = '';
-		}
-	}
+	$LC = Live_Composer();
+	var_dump($LC);
+	vovaphperror( $LC->plugin_options, 'ive_Composer()->plugin_options');
+	$LC->plugin_options->get_option( $option_id, $deprecated_section_id );
 
 	return $value;
 }

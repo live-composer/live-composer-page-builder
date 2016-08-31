@@ -62,7 +62,7 @@ class LC_Options_Extender {
 	 */
 	function construct_panels() {
 
-		// Fill settings stack with panels
+		// Fill settings stack with panels.
 		do_action( 'dslc_extend_admin_panel_options' );
 
 		foreach ( $this->extension_options as $extender ) {
