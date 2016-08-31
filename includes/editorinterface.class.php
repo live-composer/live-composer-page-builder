@@ -111,7 +111,7 @@ class DSLC_EditorInterface{
 			} elseif ( isset( $dslc_var_templates_pt[ get_post_type() ] )  ) {
 
 				// Check if it has a template attached to it.
-				$template = dslc_st_get_template_id( get_the_ID() );
+				$template = Live_Composer()->cpt_templates->get_template( 'by_post', get_the_ID() );
 
 				if ( $template ) {
 

@@ -15,7 +15,7 @@ $dslc_extension; // Used in template
 /**
  * DSLC_Extend_Options class
  */
-class DSLC_Options_Extender {
+class LC_Options_Extender {
 
 	private $extension_options = array();
 
@@ -187,7 +187,7 @@ class DSLC_Options_Extender {
 }
 
 // Create class object.
-$dslc_options_extender = new DSLC_Options_Extender;
+$dslc_options_extender = new LC_Options_Extender;
 
 function dslc_get_c_option( $opt_id, $ext_id ) {
 

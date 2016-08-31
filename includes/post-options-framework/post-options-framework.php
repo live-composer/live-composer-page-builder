@@ -480,7 +480,7 @@ function dslc_post_add_row_action( $actions, $post ) {
 
 		if ( array_key_exists( $post_type, $dslc_var_templates_pt ) ) {
 
-			$template_id = dslc_st_get_template_id( $post->ID );
+			$template_id = Live_Composer()->cpt_templates->get_template( 'by_post', $post->ID );
 			$url = DSLC_EditorInterface::get_editor_link_url( $template_id, $post->ID );
 
 			// If default template for current CPT exists.

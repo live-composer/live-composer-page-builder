@@ -9,16 +9,36 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Upgrade class
  */
-final class DSLC_Upgrade {
+class LC_Upgrade {
 
-	public static function init() {
+	/**
+	 * Holds plugin versions archive.
+	 *
+	 * @var array
+	 * @access private
+	 * @since 1.1.4
+	 */
+	private $versions_archive;
 
+	/**
+	 * Holds current plugin version.
+	 *
+	 * @var string
+	 * @access private
+	 * @since 1.1.4
+	 */
+	private $plugin_version;
+
+	public function init() {
+		// @todo Change to __constuct.
+		// @todo Divide into methods.
 		$curr_version_db = get_option( 'dslc_version' );
 
 		if ( ! is_array( $curr_version_db ) ) {
 
 			$curr_version = array();
 		}
+
 		else {
 
 			$curr_version = $curr_version_db;
@@ -50,6 +70,11 @@ final class DSLC_Upgrade {
 			// Updated ro current version.
 			update_option( 'dslc_version', $curr_version );
 		}
+
+		$this->plugin_version = DS_LIVE_COMPOSER_VER;
+		$this->versions_archive = $curr_version;
+
+		return $this->plugin_version;
 	}
 
 	/**

@@ -39,28 +39,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) ):
 
 	/**
-	 * Constants
+	 * ALL THE GLOBAL VARIABLES WILL BE REMOVED.
+	 * DO NOT USE IT IN YOUR PLUGINS OR THEMES!
 	 */
-
-	define( 'DS_LIVE_COMPOSER_VER', '1.1.3.1' );
-
-	define( 'DS_LIVE_COMPOSER_SHORTNAME', __( 'Live Composer', 'live-composer-page-builder' ) );
-	define( 'DS_LIVE_COMPOSER_BASENAME', plugin_basename( __FILE__ ) );
-	define( 'DS_LIVE_COMPOSER_URL', plugin_dir_url( __FILE__ ) );
-	define( 'DS_LIVE_COMPOSER_DIR_NAME', dirname( plugin_basename( __FILE__ ) ) );
-	define( 'DS_LIVE_COMPOSER_ABS', dirname( __FILE__ ) );
-	define( 'DS_LIVE_COMPOSER_DEV_MODE', false );
-
-	define( 'DSLC_PO_FRAMEWORK_ABS', DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework' );
-	define( 'DSLC_ST_FRAMEWORK_ABS', DS_LIVE_COMPOSER_ABS . '/includes/single-templates-framework' );
-	define( 'DSLC_ROW_SYSTEM_ABS', DS_LIVE_COMPOSER_ABS . '/includes/row-system' );
-
 
 	$dslc_var_image_option_bckp = array();
 	$dslc_var_row_options = array();
 
 	/**
-	 * Is live composer currently active?
+	 * Is Live Composer currently active?
 	 *
 	 * $_GET used on regular pages
 	 * $_POST used for AJAX requests
@@ -88,118 +75,326 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) ):
 	$dslc_all_googlefonts_array = array( "ABeeZee", "Abel", "Abril Fatface", "Aclonica", "Acme", "Actor", "Adamina", "Advent Pro", "Aguafina Script", "Akronim", "Aladin", "Aldrich", "Alef", "Alegreya", "Alegreya SC", "Alex Brush", "Alfa Slab One", "Alice", "Alike", "Alike Angular", "Allan", "Allerta", "Allerta Stencil", "Allura", "Almendra", "Almendra Display", "Almendra SC", "Amarante", "Amaranth", "Amatic SC", "Amethysta", "Anaheim", "Andada", "Andika", "Annie Use Your Telescope", "Anonymous Pro", "Antic", "Antic Didone", "Antic Slab", "Anton", "Arapey", "Arbutus", "Arbutus Slab", "Architects Daughter", "Archivo Black", "Archivo Narrow", "Arimo", "Arizonia", "Armata", "Artifika", "Arvo", "Asap", "Asset", "Astloch", "Asul", "Atomic Age", "Aubrey", "Audiowide", "Autour One", "Average", "Average Sans", "Averia Gruesa Libre", "Averia Libre", "Averia Sans Libre", "Averia Serif Libre", "Bad Script", "Balthazar", "Bangers", "Basic", "Baumans", "Belgrano", "Belleza", "BenchNine", "Bentham", "Berkshire Swash", "Bevan", "Bigelow Rules", "Bigshot One", "Bilbo", "Bilbo Swash Caps", "Bitter", "Black Ops One", "Bonbon", "Boogaloo", "Bowlby One", "Bowlby One SC", "Brawler", "Bree Serif", "Bubblegum Sans", "Bubbler One", "Buda", "Buenard", "Butcherman", "Butterfly Kids", "Cabin", "Cabin Condensed", "Cabin Sketch", "Caesar Dressing", "Cagliostro", "Calligraffitti", "Cambo", "Candal", "Cantarell", "Cantata One", "Cantora One", "Capriola", "Cardo", "Carme", "Carrois Gothic", "Carrois Gothic SC", "Carter One", "Caudex", "Cedarville Cursive", "Ceviche One", "Changa One", "Chango", "Chau Philomene One", "Chela One", "Chelsea Market", "Cherry Cream Soda", "Cherry Swash", "Chewy", "Chicle", "Chivo", "Cinzel", "Cinzel Decorative", "Clicker Script", "Coda", "Coda Caption", "Codystar", "Combo", "Comfortaa", "Coming Soon", "Concert One", "Condiment", "Contrail One", "Convergence", "Cookie", "Copse", "Corben", "Courgette", "Cousine", "Coustard", "Covered By Your Grace", "Crafty Girls", "Creepster", "Crete Round", "Crimson Text", "Croissant One", "Crushed", "Cuprum", "Cutive", "Cutive Mono", "Damion", "Dancing Script", "Dawning of a New Day", "Days One", "Delius", "Delius Swash Caps", "Delius Unicase", "Della Respira", "Denk One", "Devonshire", "Didact Gothic", "Diplomata", "Diplomata SC", "Domine", "Donegal One", "Doppio One", "Dorsa", "Dosis", "Dr Sugiyama", "Droid Sans", "Droid Sans Mono", "Droid Serif", "Duru Sans", "Dynalight", "Eagle Lake", "Eater", "EB Garamond", "Economica", "Electrolize", "Elsie", "Elsie Swash Caps", "Emblema One", "Emilys Candy", "Engagement", "Englebert", "Enriqueta", "Erica One", "Esteban", "Euphoria Script", "Ewert", "Exo", "Expletus Sans", "Fanwood Text", "Fascinate", "Fascinate Inline", "Faster One", "Fauna One", "Federant", "Federo", "Felipa", "Fenix", "Finger Paint", "Fjalla One", "Fjord One", "Flamenco", "Flavors", "Fondamento", "Fontdiner Swanky", "Forum", "Francois One", "Freckle Face", "Fredericka the Great", "Fredoka One", "Fresca", "Frijole", "Fruktur", "Fugaz One", "Gabriela", "Gafata", "Galdeano", "Galindo", "Gentium Basic", "Gentium Book Basic", "Geo", "Geostar", "Geostar Fill", "Germania One", "GFS Didot", "GFS Neohellenic", "Gilda Display", "Give You Glory", "Glass Antiqua", "Glegoo", "Gloria Hallelujah", "Goblin One", "Gochi Hand", "Gorditas", "Goudy Bookletter 1911", "Graduate", "Grand Hotel", "Gravitas One", "Great Vibes", "Griffy", "Gruppo", "Gudea", "Habibi", "Hammersmith One", "Hanalei", "Hanalei Fill", "Handlee", "Happy Monkey", "Headland One", "Henny Penny", "Herr Von Muellerhoff", "Holtwood One SC", "Homemade Apple", "Homenaje", "Iceberg", "Iceland", "IM Fell Double Pica", "IM Fell Double Pica SC", "IM Fell DW Pica", "IM Fell DW Pica SC", "IM Fell English", "IM Fell English SC", "IM Fell French Canon", "IM Fell French Canon SC", "IM Fell Great Primer", "IM Fell Great Primer SC", "Imprima", "Inconsolata", "Inder", "Indie Flower", "Inika", "Irish Grover", "Istok Web", "Italiana", "Italianno", "Jacques Francois", "Jacques Francois Shadow", "Jim Nightshade", "Jockey One", "Jolly Lodger", "Josefin Sans", "Josefin Slab", "Joti One", "Judson", "Julee", "Julius Sans One", "Junge", "Jura", "Just Another Hand", "Just Me Again Down Here", "Kameron", "Karla", "Kaushan Script", "Kavoon", "Keania One", "Kelly Slab", "Kenia", "Kite One", "Knewave", "Kotta One", "Kranky", "Kreon", "Kristi", "Krona One", "La Belle Aurore", "Lancelot", "Lato", "League Script", "Leckerli One", "Ledger", "Lekton", "Lemon", "Libre Baskerville", "Life Savers", "Lilita One", "Lily Script One", "Limelight", "Linden Hill", "Lobster", "Lobster Two", "Londrina Outline", "Londrina Shadow", "Londrina Sketch", "Londrina Solid", "Lora", "Love Ya Like A Sister", "Loved by the King", "Lovers Quarrel", "Luckiest Guy", "Lusitana", "Lustria", "Macondo", "Macondo Swash Caps", "Magra", "Maiden Orange", "Mako", "Marcellus", "Marcellus SC", "Marck Script", "Margarine", "Marko One", "Marmelad", "Marvel", "Mate", "Mate SC", "Maven Pro", "McLaren", "Meddon", "MedievalSharp", "Medula One", "Megrim", "Meie Script", "Merienda", "Merienda One", "Merriweather", "Merriweather Sans", "Metal Mania", "Metamorphous", "Metrophobic", "Michroma", "Milonga", "Miltonian", "Miltonian Tattoo", "Miniver", "Miss Fajardose", "Modern Antiqua", "Molengo", "Molle", "Monda", "Monofett", "Monoton", "Monsieur La Doulaise", "Montaga", "Montez", "Montserrat", "Montserrat Alternates", "Montserrat Subrayada", "Mountains of Christmas", "Mouse Memoirs", "Mr Bedfort", "Mr Dafoe", "Mr De Haviland", "Mrs Saint Delafield", "Mrs Sheppards", "Muli", "Mystery Quest", "Neucha", "Neuton", "New Rocker", "News Cycle", "Niconne", "Nixie One", "Nobile", "Norican", "Nosifer", "Nothing You Could Do", "Noticia Text", "Noto Sans", "Noto Serif", "Nova Cut", "Nova Flat", "Nova Mono", "Nova Oval", "Nova Round", "Nova Script", "Nova Slim", "Nova Square", "Numans", "Nunito", "Offside", "Old Standard TT", "Oldenburg", "Oleo Script", "Oleo Script Swash Caps", "Open Sans", "Open Sans Condensed", "Oranienbaum", "Orbitron", "Oregano", "Orienta", "Original Surfer", "Oswald", "Over the Rainbow", "Overlock", "Overlock SC", "Ovo", "Oxygen", "Oxygen Mono", "Pacifico", "Paprika", "Parisienne", "Passero One", "Passion One", "Pathway Gothic One", "Patrick Hand", "Patrick Hand SC", "Patua One", "Paytone One", "Peralta", "Permanent Marker", "Petit Formal Script", "Petrona", "Philosopher", "Piedra", "Pinyon Script", "Pirata One", "Plaster", "Play", "Playball", "Playfair Display", "Playfair Display SC", "Podkova", "Poiret One", "Poller One", "Poly", "Pompiere", "Poppins", "Pontano Sans", "Port Lligat Sans", "Port Lligat Slab", "Prata", "Press Start 2P", "Princess Sofia", "Prociono", "Prosto One", "PT Mono", "PT Sans", "PT Sans Caption", "PT Sans Narrow", "PT Serif", "PT Serif Caption", "Puritan", "Purple Purse", "Quando", "Quantico", "Quattrocento", "Quattrocento Sans", "Questrial", "Quicksand", "Quintessential", "Qwigley", "Racing Sans One", "Radley", "Raleway", "Raleway Dots", "Rambla", "Rammetto One", "Ranchers", "Rancho", "Rationale", "Redressed", "Reenie Beanie", "Revalia", "Ribeye", "Ribeye Marrow", "Righteous", "Risque", "Roboto", "Roboto Condensed", "Roboto Slab", "Rochester", "Rock Salt", "Rokkitt", "Romanesco", "Ropa Sans", "Rosario", "Rosarivo", "Rouge Script", "Ruda", "Rufina", "Ruge Boogie", "Ruluko", "Rum Raisin", "Ruslan Display", "Russo One", "Ruthie", "Rye", "Sacramento", "Sail", "Salsa", "Sanchez", "Sancreek", "Sansita One", "Sarina", "Satisfy", "Scada", "Schoolbell", "Seaweed Script", "Sevillana", "Seymour One", "Shadows Into Light", "Shadows Into Light Two", "Shanti", "Share", "Share Tech", "Share Tech Mono", "Shojumaru", "Short Stack", "Sigmar One", "Signika", "Signika Negative", "Simonetta", "Sintony", "Sirin Stencil", "Six Caps", "Skranji", "Slackey", "Smokum", "Smythe", "Sniglet", "Snippet", "Snowburst One", "Sofadi One", "Sofia", "Sonsie One", "Sorts Mill Goudy", "Source Code Pro", "Source Sans Pro", "Special Elite", "Spicy Rice", "Spinnaker", "Spirax", "Squada One", "Stalemate", "Stalinist One", "Stardos Stencil", "Stint Ultra Condensed", "Stint Ultra Expanded", "Stoke", "Strait", "Sue Ellen Francisco", "Sunshiney", "Supermercado One", "Swanky and Moo Moo", "Syncopate", "Tangerine", "Tauri", "Telex", "Tenor Sans", "Text Me One", "The Girl Next Door", "Tienne", "Tinos", "Titan One", "Titillium Web", "Trade Winds", "Trocchi", "Trochut", "Trykker", "Tulpen One", "Ubuntu", "Ubuntu Condensed", "Ubuntu Mono", "Ultra", "Uncial Antiqua", "Underdog", "Unica One", "UnifrakturCook", "UnifrakturMaguntia", "Unkempt", "Unlock", "Unna", "Vampiro One", "Varela", "Varela Round", "Vast Shadow", "Vibur", "Vidaloka", "Viga", "Voces", "Volkhov", "Vollkorn", "Voltaire", "VT323", "Waiting for the Sunrise", "Wallpoet", "Walter Turncoat", "Warnes", "Wellfleet", "Wendy One", "Wire One", "Yanone Kaffeesatz", "Yellowtail", "Yeseva One", "Yesteryear", "Zeyada" );
 	$dslc_should_filter = true;
 
-	/**
-	 * Include all the files
-	 */
-
-	include DS_LIVE_COMPOSER_ABS . '/includes/editing-screen.php';
-	include DS_LIVE_COMPOSER_ABS . '/includes/other-functions.php';
-	include DS_LIVE_COMPOSER_ABS . '/includes/css-generation/css-for-modules.php';
-	include DS_LIVE_COMPOSER_ABS . '/includes/functions.php';
-	include DS_LIVE_COMPOSER_ABS . '/includes/display-functions.php';
-	include DS_LIVE_COMPOSER_ABS . '/includes/editorinterface.class.php';
-	include DS_LIVE_COMPOSER_ABS . '/includes/row-system/init.php';
-	include DS_LIVE_COMPOSER_ABS . '/includes/ajax.php';
-	include DS_LIVE_COMPOSER_ABS . '/includes/shortcodes.php';
-	include DS_LIVE_COMPOSER_ABS . '/includes/scripts.php';
-	include DS_LIVE_COMPOSER_ABS . '/includes/post-options-framework/post-options-framework.php';
-	include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/plugin-options-framework.php';
-	include DSLC_ST_FRAMEWORK_ABS . '/single-templates-framework.php';
-	include DS_LIVE_COMPOSER_ABS . '/includes/archive-templates.php';
-	include DS_LIVE_COMPOSER_ABS . '/includes/styling-presets.php';
-	include DS_LIVE_COMPOSER_ABS . '/includes/header-footer.php';
-	include DS_LIVE_COMPOSER_ABS . '/includes/search-filter.php';
-	include DS_LIVE_COMPOSER_ABS . '/includes/post-templates.php';
-	include DS_LIVE_COMPOSER_ABS . '/includes/other.php';
-	include DS_LIVE_COMPOSER_ABS . '/includes/options.extension.class.php';
-	include DS_LIVE_COMPOSER_ABS . '/includes/upgrade.class.php';
-
-	$cap_page = dslc_get_option( 'lc_min_capability_page', 'dslc_plugin_options_access_control' );
-	if ( ! $cap_page ) $cap_page = 'publish_posts';
-	define( 'DS_LIVE_COMPOSER_CAPABILITY', $cap_page );
-	define( 'DS_LIVE_COMPOSER_CAPABILITY_SAVE', $cap_page );
-
-	/**
-	 * Include Modules
-	 */
-	include DS_LIVE_COMPOSER_ABS . '/includes/class.module.php';
-
-	/**
-	 * Tutorials disabled by default
-	 *
-	 * Use the next call to activate tutorials form your theme
-	 * add_filter( 'dslc_tutorials', '__return_true' );
-	 *
-	 * @since 1.0.7
-	 */
-	function dslc_tutorials_load() {
-		$dslc_tutorials = false;
-		if ( apply_filters( 'dslc_tutorials', $dslc_tutorials ) ) {
-			include DS_LIVE_COMPOSER_ABS . '/includes/tutorials/tutorial.php';
-		}
-	}
-	add_action( 'after_setup_theme', 'dslc_tutorials_load' );
-
 endif; // ! defined( 'DS_LIVE_COMPOSER_VER' )
 
-/**
- * On plugin activation check if there is lite version
- * or previous generation of the plugin installed.
- * If found, disable these "unwanted" versions of LC.
- *
- * @return void
- */
-function dslc_disable_old_plugin() {
 
-	if ( stristr( __FILE__ , 'live-composer-page-builder/') ) {
+if ( ! class_exists( 'Live_Composer' ) ) :
+	/**
+	 * Main Live_Composer Class.
+	 *
+	 * Code inspiration: Easy Digital Downloads (GPL)
+	 *
+	 * @since 1.1.4
+	 */
+	final class Live_Composer {
+		/** Singleton *************************************************************/
+		/**
+		 * Instance
+		 *
+		 * @var Live_Composer The one true Live_Composer
+		 * @since 1.1.4
+		 */
+		private static $instance;
 
 		/**
-		 * Deactivate the old version of Live Composer.
-		 * New version is live-composer-page-builder/ds-live-composer.php
+		 * LC Custom Post Type Templates Engine
+		 *
+		 * @var object|LC_CPT_Templates
+		 * @since 1.1.4
 		 */
-		$old_lc = 'ds-live-composer/ds-live-composer.php';
-		if ( is_plugin_active( $old_lc ) ) {
-			deactivate_plugins( $old_lc );
+		public $cpt_templates;
+
+		/**
+		 * LC Plugin Options
+		 *
+		 * @var object|LC_Plugin_Options
+		 * @since 1.1.4
+		 */
+		// public $plugin_options;
+
+		/**
+		 * LC Plugin Version
+		 *
+		 * @var object|LC_Upgrade
+		 * @since 1.1.4
+		 */
+		public $version;
+
+		/**
+		 * Main Live_Composer Instance.
+		 *
+		 * Insures that only one instance of Live_Composer exists in memory at any one
+		 * time. Also prevents needing to define globals all over the place.
+		 *
+		 * @since 1.1.4
+		 * @static
+		 * @static var $instance
+		 * @return object|Live_Composer The one true Live_Composer
+		 */
+		public static function instance() {
+
+			if ( ! isset( self::$instance ) && ! ( self::$instance instanceof Live_Composer ) ) {
+
+				self::$instance = new Live_Composer;
+
+				// Setup the constants needed.
+				self::$instance->setup_constants();
+
+				// Disable old and free verions of LC.
+				register_activation_hook( __FILE__, array( self::$instance, 'disable_old_versions' ) );
+
+				// Load the language files.
+				add_action( 'plugins_loaded', array( self::$instance, 'load_textdomain' ) );
+
+				// Include the required files.
+				self::$instance->includes();
+				// self::$instance->plugin_options = new LC_Plugin_Options();
+				self::$instance->cpt_templates = new LC_CPT_Templates();
+				self::$instance->version = new LC_Upgrade();
+
+				// Show welcome screen after plugin activated.
+				add_action( 'activated_plugin', array( self::$instance, 'redirect_to_welcome' ) );
+
+				// Load Tutorials.
+				add_action( 'after_setup_theme', array( self::$instance, 'load_tutorials' ) );
+			}
+
+			return self::$instance;
+		}
+		/**
+		 * Throw error on object clone.
+		 *
+		 * The whole idea of the singleton design pattern is that there is a single
+		 * object therefore, we don't want the object to be cloned.
+		 *
+		 * @since 1.1.4
+		 * @access protected
+		 * @return void
+		 */
+		public function __clone() {
+			// Cloning instances of the class is forbidden.
+			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'live-composer-page-builder' ), '1.6' );
+		}
+		/**
+		 * Disable unserializing of the class.
+		 *
+		 * @since 1.1.4
+		 * @access protected
+		 * @return void
+		 */
+		public function __wakeup() {
+			// Unserializing instances of the class is forbidden.
+			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'live-composer-page-builder' ), '1.1.4' );
+		}
+		/**
+		 * Setup plugin constants.
+		 *
+		 * @access private
+		 * @since 1.1.4
+		 * @return void
+		 */
+		private function setup_constants() {
+
+			// Plugin version.
+			if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) ) {
+				define( 'DS_LIVE_COMPOSER_VER', '1.1.3.1' );
+			}
+
+			if ( ! defined( 'DS_LIVE_COMPOSER_SHORTNAME' ) ) {
+				define( 'DS_LIVE_COMPOSER_SHORTNAME', __( 'Live Composer', 'live-composer-page-builder' ) );
+			}
+
+			// Plugin Folder Path.
+			if ( ! defined( 'DS_LIVE_COMPOSER_ABS' ) ) {
+				define( 'DS_LIVE_COMPOSER_ABS', dirname( __FILE__ ) );
+			}
+			// Plugin Folder URL.
+			if ( ! defined( 'DS_LIVE_COMPOSER_URL' ) ) {
+				define( 'DS_LIVE_COMPOSER_URL', plugin_dir_url( __FILE__ ) );
+			}
+
+			if ( ! defined( 'DS_LIVE_COMPOSER_BASENAME' ) ) {
+				define( 'DS_LIVE_COMPOSER_BASENAME', plugin_basename( __FILE__ ) );
+			}
+
+			if ( ! defined( 'DS_LIVE_COMPOSER_DIR_NAME' ) ) {
+				define( 'DS_LIVE_COMPOSER_DIR_NAME', dirname( plugin_basename( __FILE__ ) ) );
+			}
+
+			if ( ! defined( 'DS_LIVE_COMPOSER_DEV_MODE' ) ) {
+				define( 'DS_LIVE_COMPOSER_DEV_MODE', false );
+			}
+
+			if ( ! defined( 'DSLC_PO_FRAMEWORK_ABS' ) ) {
+				define( 'DSLC_PO_FRAMEWORK_ABS', DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework' );
+			}
+
+			if ( ! defined( 'DSLC_ST_FRAMEWORK_ABS' ) ) {
+				define( 'DSLC_ST_FRAMEWORK_ABS', DS_LIVE_COMPOSER_ABS . '/includes/single-templates-framework' );
+			}
+
+			if ( ! defined( 'DSLC_ROW_SYSTEM_ABS' ) ) {
+				define( 'DSLC_ROW_SYSTEM_ABS', DS_LIVE_COMPOSER_ABS . '/includes/row-system' );
+			}
 		}
 
-		/* Deactivate lite version of the Live Composer */
-		$lc_lite = 'live-composer-lite/lite-ds-live-composer.php';
-		if ( is_plugin_active( $lc_lite ) ) {
-			deactivate_plugins( $lc_lite );
+		/**
+		 * Include required files.
+		 *
+		 * @access private
+		 * @since 1.1.4
+		 * @return void
+		 */
+		private function includes() {
+			require_once DS_LIVE_COMPOSER_ABS . '/includes/editing-screen.php';
+			require_once DS_LIVE_COMPOSER_ABS . '/includes/other-functions.php';
+			require_once DS_LIVE_COMPOSER_ABS . '/includes/css-generation/css-for-modules.php';
+			require_once DS_LIVE_COMPOSER_ABS . '/includes/functions.php';
+			require_once DS_LIVE_COMPOSER_ABS . '/includes/display-functions.php';
+			require_once DS_LIVE_COMPOSER_ABS . '/includes/editorinterface.class.php';
+			require_once DS_LIVE_COMPOSER_ABS . '/includes/row-system/init.php';
+			require_once DS_LIVE_COMPOSER_ABS . '/includes/ajax.php';
+			require_once DS_LIVE_COMPOSER_ABS . '/includes/shortcodes.php';
+			require_once DS_LIVE_COMPOSER_ABS . '/includes/scripts.php';
+			require_once DS_LIVE_COMPOSER_ABS . '/includes/options.extension.class.php';
+			require_once DS_LIVE_COMPOSER_ABS . '/includes/post-options-framework/post-options-framework.php';
+			require_once DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/plugin-options-framework.php';
+			require_once DSLC_ST_FRAMEWORK_ABS . '/single-templates-framework.php';
+			require_once DS_LIVE_COMPOSER_ABS . '/includes/archive-templates.php';
+			require_once DS_LIVE_COMPOSER_ABS . '/includes/styling-presets.php';
+			require_once DS_LIVE_COMPOSER_ABS . '/includes/header-footer.php';
+			require_once DS_LIVE_COMPOSER_ABS . '/includes/search-filter.php';
+			require_once DS_LIVE_COMPOSER_ABS . '/includes/post-templates.php';
+			require_once DS_LIVE_COMPOSER_ABS . '/includes/other.php';
+			require_once DS_LIVE_COMPOSER_ABS . '/includes/class.lc-upgrade.php';
+			require_once DS_LIVE_COMPOSER_ABS . '/includes/class.module.php';
+
+			// Setup default user rights.
+			$cap_page = dslc_get_option( 'lc_min_capability_page', 'dslc_plugin_options_access_control' );
+
+			if ( ! $cap_page ) {
+				$cap_page = 'publish_posts';
+			}
+
+			if ( ! defined( 'DS_LIVE_COMPOSER_CAPABILITY' ) ) {
+				define( 'DS_LIVE_COMPOSER_CAPABILITY', $cap_page );
+			}
+
+			if ( ! defined( 'DS_LIVE_COMPOSER_CAPABILITY_SAVE' ) ) {
+				define( 'DS_LIVE_COMPOSER_CAPABILITY_SAVE', $cap_page );
+			}
+
+			dslc_load_modules( DS_LIVE_COMPOSER_ABS . '/modules', 'module.php' );
+		}
+
+		/**
+		 * Loads the plugin language files.
+		 *
+		 * @access public
+		 * @since 1.1.4
+		 * @return void
+		 */
+		public function load_textdomain() {
+			load_plugin_textdomain( 'live-composer-page-builder', false, DS_LIVE_COMPOSER_DIR_NAME . '/lang/' );
+		}
+
+		/**
+		 * On plugin activation check if there is
+		 * lite version or previous generation of the Live Composer installed.
+		 * If found any: disable these "unwanted" versions.
+		 *
+		 * @access public
+		 * @since 1.1.4
+		 * @return void
+		 */
+		public function disable_old_versions() {
+
+			// On Live Composer activation...
+			if ( stristr( __FILE__ , 'live-composer-page-builder/') ) {
+
+				/**
+				 * Deactivate the old version of Live Composer.
+				 * New version is live-composer-page-builder/ds-live-composer.php
+				 */
+				$old_lc = 'ds-live-composer/ds-live-composer.php';
+				if ( is_plugin_active( $old_lc ) ) {
+					deactivate_plugins( $old_lc );
+				}
+
+				/* Deactivate lite version of the Live Composer */
+				$lc_lite = 'live-composer-lite/lite-ds-live-composer.php';
+				if ( is_plugin_active( $lc_lite ) ) {
+					deactivate_plugins( $lc_lite );
+				}
+			}
+		}
+
+		/**
+		 * Redirects to the 'Welcome Screen' on plugin activation.
+		 * Theme developers we have 'dslc_show_welcome_screen' filter for you
+		 * to make it possible to disable this behavior from the theme.
+		 *
+		 * @access public
+		 * @since 1.1.4
+		 * @return void
+		 */
+		public function redirect_to_welcome( $plugin ) {
+
+			if ( plugin_basename( __FILE__ ) === $plugin ) {
+				// Make Welcome screen optional for the theme developers.
+				$show_welcome_screen = true;
+				if ( ! apply_filters( 'dslc_show_welcome_screen', $show_welcome_screen ) ) {
+					return;
+				}
+
+				// Bail if activating from network, or bulk.
+				if ( is_network_admin() || isset( $_GET['activate-multi'] ) || isset( $_GET['tgmpa-activate'] ) ) {
+					return;
+				}
+
+				wp_safe_redirect( admin_url( 'admin.php?page=dslc_plugin_options#dslc-top' ) );
+				exit; // ! important to keep this exit line
+				// Function wp_redirect() does not exit automatically and should almost always be followed by exit.
+			}
+		}
+
+		/**
+		 * Tutorials disabled by default
+		 *
+		 * Use the next call to activate tutorials form your theme
+		 * add_filter( 'dslc_tutorials', '__return_true' );
+		 *
+		 * @access public
+		 * @since 1.0.7
+		 * @return void
+		 */
+		public function load_tutorials() {
+			$dslc_tutorials = false;
+			if ( apply_filters( 'dslc_tutorials', $dslc_tutorials ) ) {
+				include DS_LIVE_COMPOSER_ABS . '/includes/tutorials/tutorial.php';
+			}
 		}
 	}
-}
-register_activation_hook( __FILE__, 'dslc_disable_old_plugin' );
+
+endif; // End if class_exists check.
 
 /**
- * Function redirects to the 'Welcome Screen' on plugin activation.
- * Theme developers we have 'dslc_show_welcome_screen' filter for you
- * to make it possible to disable this behavior from the theme.
+ * The main function for that returns Live_Composer
  *
- * @param string $plugin Full path to the plugin that WP just activated.
- * @return void
+ * The main function responsible for returning the one true Live_Composer
+ * Instance to functions everywhere.
+ *
+ * Use this function like you would a global variable, except without needing
+ * to declare the global.
+ *
+ * Example: <?php $LC = LC(); ?>
+ *
+ * @since 1.1.4
+ * @return object|Live_Composer The one true Live_Composer Instance.
  */
-function lc_welcome( $plugin ) {
-
-	if ( plugin_basename( __FILE__ ) === $plugin ) {
-		// Make Welcome screen optional for the theme developers.
-		$show_welcome_screen = true;
-		if ( ! apply_filters( 'dslc_show_welcome_screen', $show_welcome_screen ) ) {
-			return;
-		}
-
-		// Bail if activating from network, or bulk.
-		if ( is_network_admin() || isset( $_GET['activate-multi'] ) || isset( $_GET['tgmpa-activate'] ) ) {
-			return;
-		}
-
-		wp_safe_redirect( admin_url( 'admin.php?page=dslc_plugin_options#dslc-top' ) );
-		exit; // ! important to keep this exit line
-		// Function wp_redirect() does not exit automatically and should almost always be followed by exit.
-	}
-
+function Live_Composer() {
+	return Live_Composer::instance();
 }
-add_action( 'activated_plugin', 'lc_welcome' );
 
-dslc_load_modules( DS_LIVE_COMPOSER_ABS . '/modules', 'module.php' );
-DSLC_Upgrade::init();
+// Get LC Running.
+Live_Composer();

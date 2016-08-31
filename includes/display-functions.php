@@ -526,6 +526,8 @@ function dslc_display_templates() {
  */
 function dslc_filter_content( $content ) {
 
+	error_log('dslc_filter_content');
+
 	// If post pass protected and pass not supplied return original content
 	if ( post_password_required( get_the_ID() ) ) {
 		return $content;
@@ -602,7 +604,7 @@ function dslc_filter_content( $content ) {
 		if ( is_singular( $dslc_post_types ) ) {
 
 			// Get template ID set for currently shown post.
-			$template_id = dslc_st_get_template_id( get_the_ID() );
+			$template_id = Live_Composer()->cpt_templates->get_template( 'by_post', get_the_ID() );
 
 			// If template ID exists.
 			if ( $template_id ) {
@@ -618,12 +620,12 @@ function dslc_filter_content( $content ) {
 
 			$post_type = get_post_type();
 
-			if ( 'post' === $post_type ) {
-				$post_type = 'post_archive';
-			}
+			// if ( 'post' === $post_type ) {
+			// 	$post_type = 'post_archive';
+			// }
 
 			// Get ID of the page set to power the category of the current post type.
-			$template_id = dslc_get_option( $post_type, 'dslc_plugin_options_archives' );
+			$template_id = Live_Composer()->cpt_templates->get_template('by_type', $post_type . '_archive');
 
 			// If there is a page that powers it.
 			if ( $template_id ) {
@@ -1269,18 +1271,18 @@ function dslc_custom_css( $dslc_code = '' ) {
 
 		// If single, load template?
 		if ( is_singular( $dslc_post_types ) ) {
-			$template_id = dslc_st_get_template_id( get_the_ID() );
+			$template_id = Live_Composer()->cpt_templates->get_template( 'by_post', get_the_ID() );
 		}
 
 		// If archive, load template?
 		if ( is_archive() && ! is_author() && ! is_search() ) {
 			$post_type = get_post_type();
 
-			if ( $post_type && 'post' === $post_type ) {
-				$post_type = 'post_archive';
-			}
+			// if ( $post_type && 'post' === $post_type ) {
+			// 	$post_type = 'post_archive';
+			// }
 
-			$template_id = dslc_get_option( $post_type, 'dslc_plugin_options_archives' );
+			$template_id = Live_Composer()->cpt_templates->get_template( 'by_type', $post_type . '_archive' );
 		}
 
 		if ( is_author() ) {
@@ -1299,7 +1301,7 @@ function dslc_custom_css( $dslc_code = '' ) {
 		if ( $template_id ) {
 			$header_footer = dslc_hf_get_ID( $template_id );
 		} else if ( is_singular( $dslc_post_types ) ) {
-			$template_id = dslc_st_get_template_id( get_the_ID() );
+			$template_id = Live_Composer()->cpt_templates->get_template( 'by_post', get_the_ID() );
 			$header_footer = dslc_hf_get_ID( $template_id );
 		} else {
 			$header_footer = dslc_hf_get_ID( get_the_ID() );

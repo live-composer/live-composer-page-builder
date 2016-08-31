@@ -58,7 +58,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<!-- <div class="tab" <?php echo $anchor == 'tab-1' ? 'style="display: block"' : ''?> id="tab-for-tab-1"> -->
 			<a name="general"></a>
 			<div class="dslc-panel">
-					<?php do_settings_sections( 'dslc_plugin_options' ); ?>
+					<?php 
+					global $dslc_plugin_options;
+
+					vovaphperror( $dslc_plugin_options, '$dslc_plugin_options');
+					do_settings_sections( 'dslc_plugin_options' ); ?>
 					<?php submit_button(); ?>
 			</div>
 			<a name="performance"></a>

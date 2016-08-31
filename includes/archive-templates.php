@@ -29,12 +29,7 @@ function dslc_archive_template_redirect( $archive_template ) {
 	if ( $post ) {
 
 		$post_type = $post->post_type;
-
-		if ( isset( $post_type ) && 'post' === $post_type ) {
-			$post_type = 'post_archive';
-		}
-
-		$template = dslc_get_option( $post_type, 'dslc_plugin_options_archives' );
+		$template = Live_Composer()->cpt_templates->get_template( 'by_type', $post_type . '_archive' );
 
 	} else {
 
@@ -67,7 +62,7 @@ function dslc_archive_noposts() {
 	// Allowed to do this?
 	if ( is_archive() & ! $post ) {
 
-		$template = dslc_get_option( '404_page', 'dslc_plugin_options_archives' );
+		$template = Live_Composer()->cpt_templates->get_template( 'by_option', '404_page' );
 
 		if ( ! $template || 'none' === $template ) {
 			return;
@@ -89,7 +84,8 @@ add_action( 'template_redirect', 'dslc_archive_noposts' );
  */
 function dslc_author_archive_template_redirect( $archive_template ) {
 
-	$template = dslc_get_option( 'author', 'dslc_plugin_options_archives' );
+	$template = Live_Composer()->cpt_templates->get_template( 'by_option', 'author' );
+
 	if ( ! $template || 'none' === $template ) {
 		return $archive_template;
 	}
@@ -108,7 +104,8 @@ add_filter( 'author_template', 'dslc_author_archive_template_redirect' );
  */
 function dslc_search_template_redirect( $search_template ) {
 
-	$template = dslc_get_option( 'search_results', 'dslc_plugin_options_archives' );
+	$template = Live_Composer()->cpt_templates->get_template( 'by_option', 'search_results' );
+
 	if ( ! $template || 'none' === $template ) {
 		return $search_template;
 	}
@@ -125,7 +122,7 @@ function dslc_search_template_redirect( $search_template ) {
  */
 function dslc_404_template_redirect( $not_found_template ) {
 
-	$template = dslc_get_option( '404_page', 'dslc_plugin_options_archives' );
+	$template = Live_Composer()->cpt_templates->get_template( 'by_option', '404_page' );
 
 	if ( ! $template || 'none' === $template ) {
 		return $not_found_template;
@@ -247,7 +244,8 @@ function dslc_archive_template_404_fix( $query ) {
 
 	if ( $query->is_author() && $query->is_archive() && $query->is_main_query() ) {
 
-		$template = dslc_get_option( 'author', 'dslc_plugin_options_archives' );
+		$template = Live_Composer()->cpt_templates->get_template( 'by_option', 'author' );
+
 		if ( ! $template || 'none' === $template ) { /* nothing */ } else { $query->set( 'posts_per_page', 1 ); }
 
 	}

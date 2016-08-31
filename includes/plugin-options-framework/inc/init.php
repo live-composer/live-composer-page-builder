@@ -45,6 +45,9 @@ function dslc_plugin_options_setup() {
 
 	// Custom options extension.
 	global $dslc_options_extender;
+	// Create class object.
+	$dslc_options_extender = new LC_Options_Extender;
+
 	$dslc_options_extender->construct_panels();
 
 } add_action( 'admin_menu', 'dslc_plugin_options_setup' );
