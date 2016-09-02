@@ -12,24 +12,25 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 1.0
  */
 
-function dslc_nav_menus_opts() {
-
-	global $dslc_plugin_options;
+function dslc_nav_menus_opts( $dslc_plugin_options ) {
 
 	$dslc_plugin_options['dslc_plugin_options_navigation_m'] = array(
 		'title' => __( 'Navigation Module', 'live-composer-page-builder' ),
+		'icon' => 'menu',
 		'options' => array(
 
 			'menus' => array(
 				'name' => 'dslc_plugin_options_navigation_m[menus]',
 				'label' => __( 'Menus', 'live-composer-page-builder' ),
 				'std' => '',
-				'type' => 'list'
-			)
-		)
+				'type' => 'list',
+			),
+		),
 	);
 
-} add_action( 'dslc_hook_register_options', 'dslc_nav_menus_opts' );
+	return $dslc_plugin_options;
+
+} add_filter( 'dslc_filter_register_options', 'dslc_nav_menus_opts' );
 
 
 /**

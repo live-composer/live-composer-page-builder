@@ -1,3 +1,13 @@
+/**
+ * This file contain CSS that outputs on plugin options page
+ */
+
+/* Remove notices from our plugin options page */
+
+#wpbody-content #message {
+    display: none!important;
+}
+
 .dslc-settigns-notice {
     background: #fff none repeat scroll 0 0;
     border-left: 4px solid #fff;

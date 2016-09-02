@@ -139,6 +139,33 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 
 * [JS Bug](https://wordpress.org/support/topic/js-error-when-editing?replies=1#post-8788982): TypeError: a.html(...) is undefined
 
+= API Changes: =
+
+* We are moving toward removing all the global variables and functions. Live Composer now has one main class Live_Composer with all the settings stored inside of the class or in other classes initiated later.
+
+You can access class methods and properties using code like this:
+$lc = Live_Composer();
+$lc->something();
+$lc->something->something();
+
+* Deprecated function 'dslc_get_options()'. We do not store settings by sections anymore.
+* Deprecated function 'dslc_get_option()'. Use the next code instead:
+
+	$lc = Live_Composer();
+	$value = $lc->plugin_options->get_option( $option_id, $deprecated_section_id );
+
+* Deprecated hook 'dslc_hook_register_options' please use 'dslc_filter_register_options' instead
+* Global variable $dslc_plugin_options  deprecated. Please use the next code to get the plugin options structure:
+
+	$lc = Live_Composer();
+	$plugin_options_structure = $lc->plugin_options->plugin_options_structure;
+
+= Other changes: =
+
+* You can manage presets in the WP Admin > Live Composer > Settings > Presets.
+
+
+
 = 1.1.3 - August 19th 2016 =
 
 = Bug fixes: =

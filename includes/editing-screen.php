@@ -34,8 +34,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function dslc_editing_screen() {
 
-	global $dslc_plugin_options;
-
 	$capability = dslc_get_option( 'lc_min_capability_page', 'dslc_plugin_options_access_control' );
 	if ( ! $capability ) {
 		$capability = 'publish_posts';

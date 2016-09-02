@@ -95,7 +95,7 @@ class LC_Options_Extender {
 		register_setting(
 			'dslc_custom_options_' . $extension['extension_id'], // Option Group.
 			'dslc_custom_options_' . $extension['extension_id'], // Option Name.
-			'dslc_plugin_options_input_sanitize'// Sanitize.
+			'dslc_plugin_options_input_sanitize' // Sanitize.
 		);
 	}
 

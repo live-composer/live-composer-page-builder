@@ -76,27 +76,27 @@ function dslc_presets_load( $settings ) {
 } add_filter( 'dslc_filter_settings', 'dslc_presets_load' );
 
 /**
- * Register Options
+ * Add STYLING PRESETS section in plugin settings panel.
  *
  * @since 1.0
  */
-
-function dslc_plugin_opts_presets() {
-
-	global $dslc_plugin_options;
+function dslc_plugin_opts_presets( $dslc_plugin_options ) {
 
 	$dslc_plugin_options['dslc_plugin_options_presets'] = array(
 		'title' => __( 'Styling Presets', 'live-composer-page-builder' ),
+		'icon' => 'admin-page',
 		'options' => array(
 
 			'lc_styling_presets' => array(
-				'name' => 'dslc_plugin_options_presets[lc_styling_presets]',
+				// 'name' => 'dslc_plugin_options_presets[lc_styling_presets]',
 				'label' => __( 'Styling Presets', 'live-composer-page-builder' ),
-				'std' => 'both',
+				'std' => '',
 				'type' => 'styling_presets',
 				'descr' => __( 'Here you can delete styling presets.', 'live-composer-page-builder' ),
-			)
-		)
+			),
+		),
 	);
 
-} //add_action( 'dslc_hook_register_options', 'dslc_plugin_opts_presets', 45 );
+	return $dslc_plugin_options;
+
+} add_filter( 'dslc_filter_register_options', 'dslc_plugin_opts_presets' );

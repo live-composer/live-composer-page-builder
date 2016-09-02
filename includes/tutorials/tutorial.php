@@ -87,9 +87,7 @@ function dslc_tut_modal() {
  * @since 1.0
  */
 
-function dslc_tut_options() {
-
-	global $dslc_plugin_options;
+function dslc_tut_options( $dslc_plugin_options ) {
 
 	$pages = get_pages();
 	$pages_opts = array(
@@ -107,6 +105,7 @@ function dslc_tut_options() {
 
 	$dslc_plugin_options['dslc_plugin_options_tuts'] = array(
 		'title' => __( 'Tutorials', 'live-composer-page-builder' ),
+		'icon' => 'welcome-learn-more',
 		'options' => array(
 			'lc_tut_chapter_one' => array(
 				'label' => __( 'Chapter One', 'live-composer-page-builder' ),
@@ -139,4 +138,6 @@ function dslc_tut_options() {
 		)
 	);
 
-} add_action( 'dslc_hook_register_options', 'dslc_tut_options' );
+	return $dslc_plugin_options;
+
+} add_filter( 'dslc_filter_register_options', 'dslc_tut_options' );

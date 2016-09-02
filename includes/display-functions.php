@@ -526,8 +526,6 @@ function dslc_display_templates() {
  */
 function dslc_filter_content( $content ) {
 
-	error_log('dslc_filter_content');
-
 	// If post pass protected and pass not supplied return original content
 	if ( post_password_required( get_the_ID() ) ) {
 		return $content;

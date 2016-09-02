@@ -8,4 +8,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 include DSLC_ST_FRAMEWORK_ABS . '/inc/filters.php';
 include DSLC_ST_FRAMEWORK_ABS . '/inc/functions.php';
-include DSLC_ST_FRAMEWORK_ABS . '/inc/class.lc-cpt-templates.php';
+// include DSLC_ST_FRAMEWORK_ABS . '/inc/class.lc-cpt-templates.php';

@@ -22,7 +22,7 @@ class LC_Plugin_Options {
 	 * @access private
 	 * @since 1.1.4
 	 */
-	// private $plugin_options;
+	private $plugin_options;
 
 	/**
 	 * Holds all plugin options structure.
@@ -33,22 +33,119 @@ class LC_Plugin_Options {
 	 */
 	private $plugin_options_structure = array();
 
+	/**
+	 * Setup the class.
+	 */
 	public function __construct() {
-		// Allow extension developers to add their own setting pages.
-		$this->plugin_options_structure = apply_filters( 'dslc_filter_register_options', $this->plugin_options_structure );
 
 		// Fill the options attribute from DB.
-		// $this->plugin_options = get_option( 'dslc_plugin_options' );
+		$this->plugin_options = get_option( 'dslc_plugin_options' );
 
 		add_action( 'admin_menu', array( $this, 'create_plugin_options_page' ) );
 		add_action( 'admin_init', array( $this, 'register_option_panels' ) );
+
+		// Allow extension developers to add their own setting pages.
+		add_action( 'init', array( $this, 'filter_options' ) );
+
+		// Additional processing on options saving.
+		add_action( 'update_option', array( $this, 'on_options_update' ), 10, 4 );
+
 	}
-/*
+
+	/**
+	 * Actions to run when saving options page.
+	 *
+	 * @param  string $option     Name of the option being saved.
+	 * @param  array  $old_value  Old settings values.
+	 * @param  array  $value     	New settings values.
+	 * @return void
+	 */
+	public function on_options_update( $option, $old_value, $value ) {
+
+		// If Live Composer Plugins Changed/Updated.
+		if ( 'dslc_plugin_options' !== $option ) { return; }
+
+		/**
+		 * Do update/delete actions on presets.
+		 *
+		 * Presets get stored as a separate row
+		 * called 'dslc_presets' in wp_options table.
+		 */
+
+		// 1. Get presets from the database.
+		// 2. Get only keys of $presets array.
+		// 3. Remove empty keys.
+		$presets = maybe_unserialize( get_option( 'dslc_presets' ) ); // 1.
+
+		if ( ! is_array( $presets ) ) { return; }
+
+		$presets_old = array_keys( $presets ); // 2.
+		$presets_old = array_filter(
+			$presets_old,
+			function ( $value ) {
+				return '' !== $value;
+			}
+		); // 3.
+
+		if ( empty( $presets_old ) ) { return; }
+
+		// 4. Get presets submitted by form on settings page (string).
+		// 5. Create array from $presets_submited string.
+		// 6. Remove empty keys.
+		$presets_submited = $value['lc_styling_presets']; // 4.
+		$presets_new = explode( ',', $presets_submited ); // 5.
+		if ( ! $presets_new ) { $presets_new = array(); }
+
+		// Remove empty keys.
+		$presets_new = array_filter(
+			$presets_new,
+			function ( $value ) {
+				return '' !== $value;
+			}
+		); // 6.
+
+		// Function array_diff depends on the order of arguments,
+		// so we compare twice and then merge result to get what wee need.
+		$presets_to_delete_a = array_diff( $presets_old, $presets_new );
+		$presets_to_delete_b = array_diff( $presets_new, $presets_old );
+		$presets_to_delete   = array_merge( $presets_to_delete_a, $presets_to_delete_b );
+
+		if ( ! empty( $presets_to_delete ) ) {
+
+			foreach ( $presets as $preset_key => $value ) {
+
+				if ( in_array( $preset_key, $presets_to_delete, true ) || '' === $preset_key ) {
+					unset( $presets[ $preset_key ] );
+				}
+			}
+
+			// Put presets back into the database.
+			update_option( 'dslc_presets', maybe_serialize( $presets ) );
+		}
+	}
+
+
+	/**
+	 * Allow extension developers to add their own setting pages.
+	 *
+	 * @return void
+	 */
+	public function filter_options() {
+		// Allow extension developers to add their own setting pages.
+		$this->plugin_options_structure = apply_filters( 'dslc_filter_register_options', $this->plugin_options_structure );
+
+	}
+
+	/**
+	 * Return plugin options if called directly.
+	 *
+	 * @return array Plugin options.
+	 */
 	public function init() {
 
 		return $this->plugin_options;
 	}
-*/
+
 	/**
 	 * Retrieve value of a single option
 	 *
@@ -61,7 +158,7 @@ class LC_Plugin_Options {
 
 		$value = null;
 		$dslc_plugin_options_structure = $this->plugin_options_structure;
-		$options = get_option( 'dslc_plugin_options' );
+		$options = $this->plugin_options;
 
 		// Since 1.0.8 no section required to get the option value.
 		if ( isset( $options[ $option_id ] ) ) {
@@ -88,6 +185,19 @@ class LC_Plugin_Options {
 	}
 
 	/**
+	 * Retrieve all plugin options in array.
+	 *
+	 * @since  1.1.4
+	 * @return array All plugin options in array.
+	 */
+	public function get_all_options() {
+
+		$options = $this->plugin_options;
+
+		return $options;
+	}
+
+	/**
 	 * Register all the pages with plugin options
 	 *
 	 * @since  1.1.4
@@ -99,7 +209,7 @@ class LC_Plugin_Options {
 		// Get plugin icon.
 		$icon_svg = Live_Composer()->sidebar_icon;
 
-		add_menu_page(
+		$page_hook_suggix = add_menu_page(
 			__( 'Live Composer', 'live-composer-page-builder' ),
 			__( 'Live Composer', 'live-composer-page-builder' ),
 			'manage_options', 										      // Cap.
@@ -156,23 +266,23 @@ class LC_Plugin_Options {
 			<div id="jstabs">
 					<!-- Getting Started Tab -->
 					<div class="tab" <?php if ( $anchor != 'dslc_settings' ) echo 'style="display:block"'; ; ?> id="tab-for-dslc_getting_started">
-						<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-getting-started.php'; ?>
+						<?php include DSLC_PO_FRAMEWORK_ABS . '/options-page-tabs/tab-getting-started.php'; ?>
 					</div>
 					<!-- Settings tab -->
 					<div class="tab" <?php if ( $anchor == 'dslc_settings' ) echo 'style="display:block"'; ; ?>  id="tab-for-tab-settings">
-						<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-settings.php'; ?>
+						<?php include DSLC_PO_FRAMEWORK_ABS . '/options-page-tabs/tab-settings.php'; ?>
 					</div>
 					<!-- Themes tab -->
 					<div class="tab" id="tab-for-tab-themes">
-						<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-themes.php'; ?>
+						<?php include DSLC_PO_FRAMEWORK_ABS . '/options-page-tabs/tab-themes.php'; ?>
 					</div>
 					<!-- Extensions tab -->
 					<div class="tab" id="tab-for-tab-extensions">
-						<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-extensions.php'; ?>
+						<?php include DSLC_PO_FRAMEWORK_ABS . '/options-page-tabs/tab-extensions.php'; ?>
 					</div>
 					<!-- Docs & Support tab -->
 					<div class="tab" id="tab-for-tab-docs">
-						<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-docs.php'; ?>
+						<?php include DSLC_PO_FRAMEWORK_ABS . '/options-page-tabs/tab-docs.php'; ?>
 					</div>
 
 
@@ -215,6 +325,7 @@ class LC_Plugin_Options {
 
 		foreach ( $dslc_plugin_options as $section_id => $section ) {
 
+			// Init action.
 			add_settings_section(
 				$section_id,
 				$section['title'],
@@ -222,6 +333,7 @@ class LC_Plugin_Options {
 				$section_id
 			);
 
+			// Register a setting and its sanitization callback.
 			register_setting(
 				$section_id, // Option Group.
 				$section_id, // Option Name.
@@ -281,7 +393,4 @@ class LC_Plugin_Options {
 
 include DSLC_PO_FRAMEWORK_ABS . '/inc/options.php';
 include DSLC_PO_FRAMEWORK_ABS . '/inc/functions.php';
-include DSLC_PO_FRAMEWORK_ABS . '/inc/performance.php';
-include DSLC_PO_FRAMEWORK_ABS . '/inc/access-control.php';
 include DSLC_PO_FRAMEWORK_ABS . '/inc/display-options.php';
-include DSLC_PO_FRAMEWORK_ABS . '/inc/init.php';

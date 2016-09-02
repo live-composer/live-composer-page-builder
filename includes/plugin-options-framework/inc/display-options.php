@@ -19,8 +19,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function dslc_plugin_option_display_text( $option ) {
 
-	global $dslc_plugin_options;
-
 	$section_id = $option['section'];
 	$option_id = $option['id'];
 	$value = $option['value'];
@@ -43,8 +41,6 @@ function dslc_plugin_option_display_text( $option ) {
  * @return void
  */
 function dslc_plugin_option_display_textarea( $option ) {
-
-	global $dslc_plugin_options;
 
 	$section_id = $option['section_id'];
 	$option_id = $option['id'];
@@ -71,8 +67,6 @@ function dslc_plugin_option_display_textarea( $option ) {
  * @return void
  */
 function dslc_plugin_option_display_select( $option ) {
-
-	global $dslc_plugin_options;
 
 	$section_id = $option['section'];
 	$option_id = $option['id'];
@@ -108,8 +102,6 @@ function dslc_plugin_option_display_select( $option ) {
  */
 function dslc_plugin_option_display_checkbox( $option ) {
 
-	global $dslc_plugin_options;
-
 	$section_id = $option['section'];
 	$option_id = $option['id'];
 	$value = $option['value'];
@@ -142,8 +134,6 @@ function dslc_plugin_option_display_checkbox( $option ) {
  */
 function dslc_plugin_option_display_radio( $option ) {
 
-	global $dslc_plugin_options;
-
 	$section_id = $option['section'];
 	$option_id = $option['id'];
 	$value = $option['value'];
@@ -173,8 +163,6 @@ function dslc_plugin_option_display_radio( $option ) {
  * @return void
  */
 function dslc_plugin_option_display_list( $option ) {
-
-	global $dslc_plugin_options;
 
 	$section_id = $option['section'];
 	$option_id = $option['id'];
@@ -234,27 +222,22 @@ function dslc_plugin_option_display_list( $option ) {
  */
 function dslc_plugin_option_display_styling_presets( $option ) {
 
-	global $dslc_plugin_options;
-
 	$section_id = $option['section'];
 	$option_id = $option['id'];
-
+	$value = $option['value'];
 	$presets = maybe_unserialize( get_option( 'dslc_presets' ) );
 
 	?>
 
 	<div class="dslca-plugin-opts-list-wrap">
 
-		<?php
+		<input type="hidden" class="dslca-plugin-opts-list-code" id='<?php echo esc_attr( $option_id ); ?>' name='<?php echo esc_attr( $option['name'] ); ?>' value='<?php echo esc_attr( $value ); ?>' />
 
-		/*
-		<input type="hidden" class="dslca-plugin-opts-list-code" id='<?php echo esc_attr( $option_id ); ?>' name='<?php echo esc_attr( $section_id ); ?>[<?php echo esc_attr( $option_id ); ?>]' value='<?php echo esc_attr( $value ); ?>' />
-		*/ ?>
 
 		<div class="dslca-plugin-opts-list">
 			<?php foreach ( $presets as $preset ) : ?>
 				<div class="dslca-plugin-opts-list-item">
-					<span class="dslca-plugin-opts-list-title" contenteditable="true">
+					<span class="dslca-plugin-opts-list-title">
 						<?php echo esc_html( $preset['title'] ); ?>
 					</span>
 					<a href="#" class="dslca-plugin-opts-list-delete-hook">

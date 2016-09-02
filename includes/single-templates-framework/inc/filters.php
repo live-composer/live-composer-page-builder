@@ -313,8 +313,6 @@ function dslc_tp_update_archive_templates_option( $post_id ) {
 		$this_template_in_options = array();
 
 		foreach ( $plugin_options as $key => $value ) {
-			// error_log( '$post_id type:' . gettype( $post_id ) );
-			// error_log( '$value type:' . gettype( $value ) );
 			if ( ! is_array( $value ) && strval( $value ) === strval( $post_id ) ) {
 				$this_template_in_options[] = $key;
 			}

@@ -98,8 +98,8 @@ function dslc_register_modules() {
 
 	// Developers can filter list of available modules.
 	$dslc_var_modules = apply_filters( 'dslc_filter_modules', $dslc_var_modules );
-
-} add_action( 'init', 'dslc_register_modules', 1 );
+}
+add_action( 'init', 'dslc_register_modules', 1 );
 
 
 /**
@@ -379,8 +379,10 @@ function dslc_body_class( $classes ) {
 	$has_lc_content = false;
 	$has_lc_header_footer = false;
 
+	$lc = Live_Composer();
+
 	if ( is_archive() && ! is_author() && ! is_search() ) {
-		$template_id = dslc_get_option( get_post_type(), 'dslc_plugin_options_archives' );
+		$template_id = $lc->plugin_options->get_option( get_post_type(), 'dslc_plugin_options_archives' );
 		if ( $template_id ) {
 			$proceed = true;
 			$has_lc_content = true;
@@ -388,7 +390,7 @@ function dslc_body_class( $classes ) {
 	}
 
 	if ( is_author() ) {
-		$template_id = dslc_get_option( 'author', 'dslc_plugin_options_archives' );
+		$template_id = $lc->plugin_options->get_option( 'author', 'dslc_plugin_options_archives' );
 		if ( $template_id ) {
 			$proceed = true;
 			$has_lc_content = true;
@@ -396,7 +398,7 @@ function dslc_body_class( $classes ) {
 	}
 
 	if ( is_search() ) {
-		$template_id = dslc_get_option( 'search_results', 'dslc_plugin_options_archives' );
+		$template_id = $lc->plugin_options->get_option( 'search_results', 'dslc_plugin_options_archives' );
 		if ( $template_id ) {
 			$proceed = true;
 			$has_lc_content = true;
@@ -514,7 +516,9 @@ function dslc_is_module_active( $module_id, $check_registered = false ) {
 
 	global $dslc_var_modules;
 
-	if ( 'disabled' === dslc_get_option( $module_id, 'dslc_plugin_options_features' ) ) {
+	$lc = Live_Composer();
+
+	if ( 'disabled' === $lc->plugin_options->get_option( $module_id, 'dslc_plugin_options_features' ) ) {
 		return false;
 	} elseif ( true === $check_registered && ! isset( $dslc_var_modules[ $module_id ] ) ) {
 		return false;

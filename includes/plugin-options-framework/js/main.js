@@ -30,7 +30,7 @@ jQuery(document).ready(function(){
 		jQuery( '.dslca-plugin-opts-list-item', dslcTarget ).each( function(){
 
 			dslcTitle = jQuery(this).find('.dslca-plugin-opts-list-title').text();
-			dslcTitle = dslcTitle.replace(/([^a-z0-9 ]+)/gi, ''); // Clean string leaving only letters and numbers
+			dslcTitle = dslcTitle.replace(/([^a-z0-9- ]+)/gi, ''); // Clean string leaving only letters, numbers and '-'
 			jQuery(this).find('.dslca-plugin-opts-list-title').text(dslcTitle);
 			dslcCode += dslcTitle.trim() + ','
 
