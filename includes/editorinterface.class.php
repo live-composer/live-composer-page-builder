@@ -9,6 +9,70 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+
+/**
+ * Adds action in row
+ */
+function dslc_page_add_row_action( $actions, $page_object ) {
+
+	$screen = get_current_screen();
+	$dslc_admin_interface_on = apply_filters( 'dslc_admin_interface_on', $screen->post_type );
+	$page_status = $page_object->post_status;
+	$id = $page_object->ID;
+
+	if ( true === $dslc_admin_interface_on && $page_status != 'trash' ) {
+
+		$url = DSLC_EditorInterface::get_editor_link_url( $id );
+
+		$actions = array('edit-in-live-composer' => '<a href="' . $url . '">' . __( 'Edit in Live Composer', 'live-composer-page-builder' ) . '</a>') + $actions;
+	}
+
+	return $actions;
+}
+add_filter( 'page_row_actions', 'dslc_page_add_row_action', 10, 2 );
+
+/**
+ * Adds 'Open in Live Composer', 'Edit Template' actions
+ * next to each page in WP Admin posts listing table.
+ *
+ * @param  array   $actions An array of row action links. Defaults are 'Edit', 'Quick Edit', 'Restore, 'Trash', 'Delete Permanently', 'Preview', and 'View'.
+ * @param  WP_Post $post    The post object.
+ * @return array            Filter the array of row action links on the Posts list table.
+ */
+function dslc_post_add_row_action( $actions, $post ) {
+
+	$post_status = $post->post_status;
+	$post_type = $post->post_type;
+	$dslc_admin_interface_on = apply_filters( 'dslc_admin_interface_on_listing', true );
+	$lc = Live_Composer();
+	$dslc_var_templates_pt = $lc->cpt_templates->get_posttypes_with_templates( true );
+
+	if ( true === $dslc_admin_interface_on && 'trash' !== $post_status ) {
+
+		if ( array_key_exists( $post_type, $dslc_var_templates_pt ) ) {
+
+			$template_id = $lc->cpt_templates->get_template( 'by_post', $post->ID );
+			$url = DSLC_EditorInterface::get_editor_link_url( $template_id, $post->ID );
+
+			// If default template for current CPT exists.
+			if ( $template_id ) {
+				$actions = array( 'edit-in-live-composer' => '<a href="'. $url . '">'. __( 'Edit Template', 'live-composer-page-builder' ) .'</a>' ) + $actions;
+			} else {
+				$actions = array( 'edit-in-live-composer' => '<a href="'. admin_url( 'post-new.php?post_type=dslc_templates' ) . '">'. __( 'Create Template', 'live-composer-page-builder' ) .'</a>' ) + $actions;
+			}
+		} else {
+
+			$url = DSLC_EditorInterface::get_editor_link_url( $post->ID );
+
+			$actions = array( 'edit-in-live-composer' => '<a href="'. $url . '">'. __( 'Edit in Live Composer', 'live-composer-page-builder' ) .'</a>' ) + $actions;
+		}
+	}
+
+	return $actions;
+}
+
+add_filter( 'post_row_actions', 'dslc_post_add_row_action', 10, 2 );
+
 /**
  * DSLC_EditorInterface class
  */
@@ -72,7 +136,9 @@ class DSLC_EditorInterface{
 			return;
 		}
 
-		global $dslc_active, $dslc_var_templates_pt;
+		global $dslc_active;
+		$lc = Live_Composer();
+		$dslc_var_templates_pt = $lc->cpt_templates->get_posttypes_with_templates( true );
 
 		// Get the position of the activation button.
 		$activate_button_position = dslc_get_option( 'lc_module_activate_button_pos', 'dslc_plugin_options_other' );
@@ -111,7 +177,7 @@ class DSLC_EditorInterface{
 			} elseif ( isset( $dslc_var_templates_pt[ get_post_type() ] )  ) {
 
 				// Check if it has a template attached to it.
-				$template = Live_Composer()->cpt_templates->get_template( 'by_post', get_the_ID() );
+				$template = $lc->cpt_templates->get_template( 'by_post', get_the_ID() );
 
 				if ( $template ) {
 

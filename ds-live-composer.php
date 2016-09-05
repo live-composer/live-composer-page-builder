@@ -66,7 +66,13 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) ):
 
 	$dslc_var_modules = array(); // Will hold modules information
 	$dslc_var_templates = array(); // Will hold templates information
-	$dslc_var_post_options = array(); // Will hold post options information
+
+	/**
+	 * $dslc_var_post_options = array();
+	 * Deprecated ⬆ global variable.
+	 * Please use 'dslc_filter_metaboxes' filter instead ☻.
+	 */
+
 	$dslc_var_icons = array(); // Will hold available icons array.
 
 	$dslc_css_fonts = '';
@@ -111,6 +117,14 @@ if ( ! class_exists( 'Live_Composer' ) ) :
 		 * @since 1.1.4
 		 */
 		public $plugin_options;
+
+		/**
+		 * LC Post Options
+		 *
+		 * @var object|LC_Post_Options
+		 * @since 1.1.4
+		 */
+		public $post_options;
 
 		/**
 		 * LC Plugin Version
@@ -164,10 +178,14 @@ if ( ! class_exists( 'Live_Composer' ) ) :
 				// Include the required files.
 				self::$instance->includes();
 
-				require_once DSLC_ST_FRAMEWORK_ABS . '/inc/class.lc-cpt-templates.php';
+				require_once DSLC_ST_FRAMEWORK_ABS . '/class.lc-cpt-templates.php';
 				require_once DS_LIVE_COMPOSER_ABS . '/includes/class.lc-upgrade.php';
 				self::$instance->cpt_templates  = new LC_CPT_Templates();
 				self::$instance->version        = new LC_Upgrade();
+
+				require_once DS_LIVE_COMPOSER_ABS . '/includes/post-options-framework/post-options-framework.php';
+				self::$instance->post_options = new LC_Post_Options();
+
 
 				self::$instance->sidebar_icon = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9Ii0yOTcgMzg4IDE3IDE3IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IC0yOTcgMzg4IDE3IDE3OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6IzlFQTNBODt9Cjwvc3R5bGU+Cjx0aXRsZT5TbGljZSAxPC90aXRsZT4KPGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0tMjg0LjIsMzg4aC05LjhjLTEuNiwwLTMsMS4zLTMsM3Y4LjljMCwxLjYsMS4zLDMsMywzaDEuNXYtMmgtMS41Yy0wLjYsMC0xLTAuNC0xLTFWMzkxYzAtMC41LDAuNC0xLDEtMWg5LjgKCWMwLjUsMCwxLDAuNCwxLDF2Mi4zaDJWMzkxQy0yODEuMiwzODkuMy0yODIuNSwzODgtMjg0LjIsMzg4eiIvPgo8ZyBpZD0iR3JvdXAtMTgiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMuNTMxMjUwLCA1LjI5Njg3NSkiPgoJPHBhdGggaWQ9IkNvbWJpbmVkLVNoYXBlIiBjbGFzcz0ic3QwIiBkPSJNLTI5Mi4yLDM5OS42di0xLjJjMCwwLTEuOC0yLjQtMi42LTMuM2MtMC44LTAuOS0xLjItMi40LDAtM2MxLjItMC42LDEuOCwxLjIsMS44LDEuMgoJCXMtMS43LTMuNywwLjItNGMxLjMtMC4yLDEuNiwxLjYsMS42LDEuNnMtMC4xLTIsMS40LTJjMS41LDAsMS41LDIsMS41LDJzMC0xLjgsMS4yLTEuOGMxLjIsMCwxLjQsMS41LDEuNCwxLjVzLTAuMi0wLjksMC45LTAuOQoJCWMwLjksMCwxLjEsMC42LDEuMiwxLjdjMCwwLjQtMC4xLDEuNS0wLjEsMmMwLDMtMiwzLjctMiwzLjd2Mi40aC0xLjJjMCwwLTAuOC0xLjItMS4yLTEuMnMtMC42LDEuMi0wLjYsMS4ySC0yOTIuMnogTS0yOTEuNSwzOTMuMQoJCXYyLjVjMCwwLjMsMC4yLDAuNSwwLjUsMC41YzAuMywwLDAuNS0wLjIsMC41LTAuNXYtMi41YzAtMC4zLTAuMi0wLjUtMC41LTAuNUMtMjkxLjIsMzkyLjYtMjkxLjUsMzkyLjgtMjkxLjUsMzkzLjF6CgkJIE0tMjg5LjUsMzkzLjF2M2MwLDAuMywwLjIsMC41LDAuNSwwLjVjMC4zLDAsMC41LTAuMiwwLjUtMC41di0zYzAtMC4zLTAuMi0wLjUtMC41LTAuNUMtMjg5LjMsMzkyLjYtMjg5LjUsMzkyLjgtMjg5LjUsMzkzLjF6CgkJIE0tMjg3LjUsMzkzLjF2Mi41YzAsMC4zLDAuMiwwLjUsMC41LDAuNWMwLjMsMCwwLjUtMC4yLDAuNS0wLjV2LTIuNWMwLTAuMy0wLjItMC41LTAuNS0wLjVDLTI4Ny4yLDM5Mi42LTI4Ny41LDM5Mi45LTI4Ny41LDM5My4xCgkJeiIvPgo8L2c+Cjwvc3ZnPgo=';
 
@@ -280,12 +298,13 @@ if ( ! class_exists( 'Live_Composer' ) ) :
 			// require_once DS_LIVE_COMPOSER_ABS . '/includes/options.extension.class.php'; // @todo: needs code refactoring.
 			require_once DS_LIVE_COMPOSER_ABS . '/includes/post-options-framework/post-options-framework.php';
 			// require_once DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/plugin-options-framework.php';
-			require_once DSLC_ST_FRAMEWORK_ABS . '/single-templates-framework.php';
+			// require_once DSLC_ST_FRAMEWORK_ABS . '/single-templates-framework.php';
+			require_once DSLC_ST_FRAMEWORK_ABS . '/filters.php';
 			require_once DS_LIVE_COMPOSER_ABS . '/includes/archive-templates.php';
 			require_once DS_LIVE_COMPOSER_ABS . '/includes/styling-presets.php';
 			require_once DS_LIVE_COMPOSER_ABS . '/includes/header-footer.php';
 			require_once DS_LIVE_COMPOSER_ABS . '/includes/search-filter.php';
-			require_once DS_LIVE_COMPOSER_ABS . '/includes/post-templates.php';
+			// require_once DS_LIVE_COMPOSER_ABS . '/includes/post-templates.php';
 			require_once DS_LIVE_COMPOSER_ABS . '/includes/other.php';
 			// require_once DS_LIVE_COMPOSER_ABS . '/includes/class.lc-upgrade.php';
 			require_once DS_LIVE_COMPOSER_ABS . '/includes/class.module.php';

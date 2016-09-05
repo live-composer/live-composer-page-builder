@@ -6,50 +6,60 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-global $dslc_var_post_options;
 
-$dslc_var_post_options['dslc-staff-post-options'] = array(
-	'title' => 'Staff Member Options',
-	'show_on' => 'dslc_staff',
-	'options' => array(
-		array(
-			'label' => 'Position',
-			'std' => '',
-			'id' => 'dslc_staff_position',
-			'type' => 'text',
-		),
-		array(
-			'label' => 'Social - Twitter',
-			'std' => '',
-			'id' => 'dslc_staff_social_twitter',
-			'type' => 'text',
-		),
-		array(
-			'label' => 'Social - Facebook',
-			'std' => '',
-			'id' => 'dslc_staff_social_facebook',
-			'type' => 'text',
-		),
-		array(
-			'label' => 'Social - GooglePlus',
-			'std' => '',
-			'id' => 'dslc_staff_social_googleplus',
-			'type' => 'text',
-		),
-		array(
-			'label' => 'Social - LinkedIn',
-			'std' => '',
-			'id' => 'dslc_staff_social_linkedin',
-			'type' => 'text',
-		),
-		array(
-			'label' => 'Social - Email',
-			'std' => '',
-			'id' => 'dslc_staff_social_email',
-			'type' => 'text',
+/**
+ * Post Options
+ */
+function dslc_add_metaboxes_for_staff_cpt( $metaboxes ) {
+
+	$metaboxes['dslc-staff-post-options'] = array(
+		'title' => 'Staff Member Options',
+		'show_on' => 'dslc_staff',
+		'options' => array(
+			array(
+				'label' => 'Position',
+				'std' => '',
+				'id' => 'dslc_staff_position',
+				'type' => 'text',
+			),
+			array(
+				'label' => 'Social - Twitter',
+				'std' => '',
+				'id' => 'dslc_staff_social_twitter',
+				'type' => 'text',
+			),
+			array(
+				'label' => 'Social - Facebook',
+				'std' => '',
+				'id' => 'dslc_staff_social_facebook',
+				'type' => 'text',
+			),
+			array(
+				'label' => 'Social - GooglePlus',
+				'std' => '',
+				'id' => 'dslc_staff_social_googleplus',
+				'type' => 'text',
+			),
+			array(
+				'label' => 'Social - LinkedIn',
+				'std' => '',
+				'id' => 'dslc_staff_social_linkedin',
+				'type' => 'text',
+			),
+			array(
+				'label' => 'Social - Email',
+				'std' => '',
+				'id' => 'dslc_staff_social_email',
+				'type' => 'text',
+			)
 		)
-	)
-);
+	);
+
+	return $metaboxes;
+
+}
+
+add_filter( 'dslc_filter_metaboxes', 'dslc_add_metaboxes_for_staff_cpt' );
 
 /**
  * Register Post Type and Taxonomies

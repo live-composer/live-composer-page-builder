@@ -6,27 +6,36 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-global $dslc_var_post_options;
+/**
+ * Post Options
+ */
+function dslc_add_metaboxes_for_projects_cpt( $metaboxes ) {
 
-$dslc_var_post_options['dslc-projects-post-options'] = array(
-	'title' => 'Project Options',
-	'show_on' => 'dslc_projects',
-	'options' => array(
-		array(
-			'label' => 'Project URL',
-			'std' => '',
-			'id' => 'dslc_project_url',
-			'type' => 'text',
-		),
-		array(
-			'label' => 'Images',
-			'descr' => 'These images can be shown using the "Project Images Slider" module.',
-			'std' => '',
-			'id' => 'dslc_project_images',
-			'type' => 'files',
-		),
-	)
-);
+	$metaboxes['dslc-projects-post-options'] = array(
+		'title' => 'Project Options',
+		'show_on' => 'dslc_projects',
+		'options' => array(
+			array(
+				'label' => 'Project URL',
+				'std' => '',
+				'id' => 'dslc_project_url',
+				'type' => 'text',
+			),
+			array(
+				'label' => 'Images',
+				'descr' => 'These images can be shown using the "Project Images Slider" module.',
+				'std' => '',
+				'id' => 'dslc_project_images',
+				'type' => 'files',
+			),
+		)
+	);
+
+	return $metaboxes;
+
+}
+
+add_filter( 'dslc_filter_metaboxes', 'dslc_add_metaboxes_for_projects_cpt' );
 
 /**
  * Register Post Type and Taxonomies

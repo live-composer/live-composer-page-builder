@@ -6,20 +6,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-global $dslc_var_post_options;
 
-$dslc_var_post_options['dslc-testimonials-post-options'] = array(
-	'title' => 'Testimonial Options',
-	'show_on' => 'dslc_testimonials',
-	'options' => array(
-		array(
-			'label' => 'Position',
-			'std' => '',
-			'id' => 'dslc_testimonial_author_pos',
-			'type' => 'text',
-		),
-	)
-);
+/**
+ * Post Options
+ */
+function dslc_add_metaboxes_for_testimonials_cpt( $metaboxes ) {
+
+	$metaboxes['dslc-testimonials-post-options'] = array(
+		'title' => 'Testimonial Options',
+		'show_on' => 'dslc_testimonials',
+		'options' => array(
+			array(
+				'label' => 'Position',
+				'std' => '',
+				'id' => 'dslc_testimonial_author_pos',
+				'type' => 'text',
+			),
+		)
+	);
+
+	return $metaboxes;
+
+}
+
+add_filter( 'dslc_filter_metaboxes', 'dslc_add_metaboxes_for_testimonials_cpt' );
 
 /**
  * Register Post Type and Taxonomies

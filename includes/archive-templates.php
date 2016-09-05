@@ -25,11 +25,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 function dslc_archive_template_redirect( $archive_template ) {
 
 	global $post;
+	$lc = Live_Composer();
 
 	if ( $post ) {
 
 		$post_type = $post->post_type;
-		$template = Live_Composer()->cpt_templates->get_template( 'by_type', $post_type . '_archive' );
+		$template = $lc->cpt_templates->get_template( 'by_type', $post_type . '_archive' );
 
 	} else {
 
@@ -58,11 +59,12 @@ add_filter( 'category_template', 'dslc_archive_template_redirect' );
 function dslc_archive_noposts() {
 
 	global $post;
+	$lc = Live_Composer();
 
 	// Allowed to do this?
 	if ( is_archive() & ! $post ) {
 
-		$template = Live_Composer()->cpt_templates->get_template( 'by_option', '404_page' );
+		$template = $lc->cpt_templates->get_template( 'by_option', '404_page' );
 
 		if ( ! $template || 'none' === $template ) {
 			return;
@@ -84,7 +86,8 @@ add_action( 'template_redirect', 'dslc_archive_noposts' );
  */
 function dslc_author_archive_template_redirect( $archive_template ) {
 
-	$template = Live_Composer()->cpt_templates->get_template( 'by_option', 'author' );
+	$lc = Live_Composer();
+	$template = $lc->cpt_templates->get_template( 'by_option', 'author' );
 
 	if ( ! $template || 'none' === $template ) {
 		return $archive_template;
@@ -104,7 +107,8 @@ add_filter( 'author_template', 'dslc_author_archive_template_redirect' );
  */
 function dslc_search_template_redirect( $search_template ) {
 
-	$template = Live_Composer()->cpt_templates->get_template( 'by_option', 'search_results' );
+	$lc = Live_Composer();
+	$template = $lc->cpt_templates->get_template( 'by_option', 'search_results' );
 
 	if ( ! $template || 'none' === $template ) {
 		return $search_template;
@@ -122,7 +126,8 @@ function dslc_search_template_redirect( $search_template ) {
  */
 function dslc_404_template_redirect( $not_found_template ) {
 
-	$template = Live_Composer()->cpt_templates->get_template( 'by_option', '404_page' );
+	$lc = Live_Composer();
+	$template = $lc->cpt_templates->get_template( 'by_option', '404_page' );
 
 	if ( ! $template || 'none' === $template ) {
 		return $not_found_template;
@@ -141,9 +146,11 @@ function dslc_404_template_redirect( $not_found_template ) {
  */
 function dslc_archive_template_404_fix( $query ) {
 
+	$lc = Live_Composer();
+
 	if ( $query->is_author() && $query->is_archive() && $query->is_main_query() ) {
 
-		$template = Live_Composer()->cpt_templates->get_template( 'by_option', 'author' );
+		$template = $lc->cpt_templates->get_template( 'by_option', 'author' );
 
 		if ( ! $template || 'none' === $template ) { /* nothing */ } else { $query->set( 'posts_per_page', 1 ); }
 
@@ -165,7 +172,9 @@ function dslc_archive_template_404_fix( $query ) {
 function dslc_flush_permalinks_on_404() {
 
 	global $wp;
-	global $dslc_var_templates_pt;
+
+	$lc = Live_Composer();
+	$dslc_var_templates_pt = $lc->cpt_templates->get_posttypes_with_templates( true );
 
 	if ( ! is_404() ) {
 		return;

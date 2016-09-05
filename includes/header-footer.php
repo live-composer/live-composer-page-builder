@@ -70,73 +70,6 @@ function dslc_hf_init() {
 		'show_in_menu' =>'themes.php',
 	) );
 
-	/**
-	 * Options
-	 */
-
-	global $dslc_var_post_options;
-	$dslc_var_post_options['dslc-hf-opts'] = array(
-		'title' => 'Options',
-		'show_on' => 'dslc_hf',
-		'options' => array(
-			array(
-				'label' => __( 'For', 'live-composer-page-builder' ),
-				'descr' => __( 'Choose what is this for, header or footer.', 'live-composer-page-builder' ),
-				'std' => 'header',
-				'id' => 'dslc_hf_for',
-				'type' => 'select',
-				'choices' => array(
-					array(
-						'label' => 'Header',
-						'value' => 'header'
-					),
-					array(
-						'label' => 'Footer',
-						'value' => 'footer'
-					),
-				)
-			),
-			array(
-				'label' => __( 'Type', 'live-composer-page-builder' ),
-				'std' => 'regular',
-				'descr' => __( '<strong>Default</strong> will be used as the default for all the posts and pages. <strong>Regular</strong> is an additional type that you can set to specific posts/pages.', 'live-composer-page-builder' ),
-				'id' => 'dslc_hf_type',
-				'type' => 'radio',
-				'choices' => array(
-					array(
-						'label' => 'Regular',
-						'value' => 'regular'
-					),
-					array(
-						'label' => 'Default',
-						'value' => 'default'
-					),
-				)
-			),
-			array(
-				'label' => __( 'Position', 'live-composer-page-builder' ),
-				'std' => 'relative',
-				'descr' => __( '<strong>Relative</strong> is normal positioning. <strong>Fixed</strong> will make the header/footer scroll with the page. <strong>Absolute</strong> will make the regular page content go behind the header/footer.', 'live-composer-page-builder' ),
-				'id' => 'dslc_hf_position',
-				'type' => 'radio',
-				'choices' => array(
-					array(
-						'label' => 'Relative',
-						'value' => 'relative'
-					),
-					array(
-						'label' => 'Fixed',
-						'value' => 'fixed'
-					),
-					array(
-						'label' => 'Absolute',
-						'value' => 'absolute'
-					),
-				)
-			),
-		)
-	);
-
 } add_action( 'init', 'dslc_hf_init' );
 
 /**
@@ -248,12 +181,97 @@ function dslc_hf_unique_default( $post_id ) {
 } add_action( 'save_post', 'dslc_hf_unique_default' );
 
 /**
- * Register options for posts/pages to choose which header/footer to use
+ * Header/Footer CPT options.
+ * Creates options to show when you are editing header/footer post.
+ * – For (header/footer)
+ * – Type (regular/default)
+ * – Position (relative/fixed/absolute)
  *
- * @since 1.0
+ * @param  array $post_options_structure Post options structure to change.
+ * @return array                         Modified post options structure.
+ * @since  1.1.4
  */
+function dslc_addpostoptions_headerfooter( $post_options_structure ) {
 
-function dslc_hf_options() {
+	$post_options_structure['dslc-hf-opts'] = array(
+		'title' => 'Options',
+		'show_on' => 'dslc_hf',
+		'options' => array(
+			array(
+				'label' => __( 'For', 'live-composer-page-builder' ),
+				'descr' => __( 'Choose what is this for, header or footer.', 'live-composer-page-builder' ),
+				'std' => 'header',
+				'id' => 'dslc_hf_for',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => 'Header',
+						'value' => 'header'
+					),
+					array(
+						'label' => 'Footer',
+						'value' => 'footer'
+					),
+				)
+			),
+			array(
+				'label' => __( 'Type', 'live-composer-page-builder' ),
+				'std' => 'regular',
+				'descr' => __( '<strong>Default</strong> will be used as the default for all the posts and pages. <strong>Regular</strong> is an additional type that you can set to specific posts/pages.', 'live-composer-page-builder' ),
+				'id' => 'dslc_hf_type',
+				'type' => 'radio',
+				'choices' => array(
+					array(
+						'label' => 'Regular',
+						'value' => 'regular'
+					),
+					array(
+						'label' => 'Default',
+						'value' => 'default'
+					),
+				)
+			),
+			array(
+				'label' => __( 'Position', 'live-composer-page-builder' ),
+				'std' => 'relative',
+				'descr' => __( '<strong>Relative</strong> is normal positioning. <strong>Fixed</strong> will make the header/footer scroll with the page. <strong>Absolute</strong> will make the regular page content go behind the header/footer.', 'live-composer-page-builder' ),
+				'id' => 'dslc_hf_position',
+				'type' => 'radio',
+				'choices' => array(
+					array(
+						'label' => 'Relative',
+						'value' => 'relative'
+					),
+					array(
+						'label' => 'Fixed',
+						'value' => 'fixed'
+					),
+					array(
+						'label' => 'Absolute',
+						'value' => 'absolute'
+					),
+				)
+			),
+		)
+	);
+
+	return $post_options_structure;
+
+}
+
+add_filter ('dslc_filter_metaboxes', 'dslc_addpostoptions_headerfooter');
+
+
+/**
+ * Metabox: Custom Header/Footer for the current page.
+ * Creates 'Header/Footer' metabox located on the top-right
+ * of every page editing screen.
+ *
+ * @param  array $post_options Post options structure to change.
+ * @return array               Modified post options structure.
+ * @since  1.1.4
+ */
+function dslc_addmetabox_headerfooter_forcurrpost( $post_options_structure ) {
 
 	$dslc_admin_interface_on = apply_filters( 'dslc_admin_interface_on', true );
 
@@ -281,8 +299,6 @@ function dslc_hf_options() {
 		'value' => '_disabled_',
 	);
 
-	global $dslc_var_post_options;
-
 	// Get header/footer.
 	$args = array(
 		'post_type' => 'dslc_hf',
@@ -309,7 +325,7 @@ function dslc_hf_options() {
 			}
 		}
 
-		$dslc_var_post_options['dslc-hf-options'] = array(
+		$post_options_structure['dslc-hf-options'] = array(
 			'title' => __( 'Header/Footer', 'live-composer-page-builder' ),
 			'show_on' => array('page', 'dslc_templates'),
 			'context' => 'side',
@@ -333,7 +349,11 @@ function dslc_hf_options() {
 
 	}
 
-} add_action( 'init', 'dslc_hf_options' );
+	return $post_options_structure;
+
+}
+
+add_filter( 'dslc_filter_metaboxes', 'dslc_addmetabox_headerfooter_forcurrpost' );
 
 /**
  * Get the header and footer IDs of a specific post/page
@@ -356,14 +376,16 @@ function dslc_hf_get_ID( $post_ID = false ) {
 	}
 
 	// Global vars
-	global $dslc_post_types;
+	// global $dslc_post_types;
+	$lc = Live_Composer();
+	$dslc_post_types = $lc->cpt_templates->get_posttypes_with_templates();
 
 	// If post ID not supplied, figure it out
 	if ( ! $post_ID ) {
 
 		// If currently showing a singular post of a post type that supports "post templates"
 		if ( is_singular( $dslc_post_types ) ) {
-			$post_ID = Live_Composer()->cpt_templates->get_template( 'by_post', get_the_ID() );
+			$post_ID = $lc->cpt_templates->get_template( 'by_post', get_the_ID() );
 
 		// If currently showing a category archive page
 		} elseif ( is_archive() && ! is_author() && ! is_search() ) {

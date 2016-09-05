@@ -150,12 +150,17 @@ function dslc_downloads_module_init() {
 	// Register taxonomy
 	register_taxonomy( 'dslc_downloads_tags', 'dslc_downloads', $tags_args );
 
-	/**
-	 * Post Options
-	 */
+	
 
-	global $dslc_var_post_options;
-	$dslc_var_post_options['dslc-downloads-module-options'] = array(
+} add_action( 'init', 'dslc_downloads_module_init' );
+
+
+/**
+ * Post Options
+ */
+function dslc_add_metaboxes_for_downloads_cpt( $metaboxes ) {
+
+	$metaboxes['dslc-downloads-module-options'] = array(
 		'title' => 'Download Options',
 		'show_on' => 'dslc_downloads',
 		'options' => array(
@@ -176,4 +181,8 @@ function dslc_downloads_module_init() {
 		)
 	);
 
-} add_action( 'init', 'dslc_downloads_module_init' );
+	return $metaboxes;
+
+}
+
+add_filter( 'dslc_filter_metaboxes', 'dslc_add_metaboxes_for_downloads_cpt' );

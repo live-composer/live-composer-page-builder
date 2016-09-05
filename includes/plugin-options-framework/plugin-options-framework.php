@@ -132,7 +132,7 @@ class LC_Plugin_Options {
 	 */
 	public function filter_options() {
 		// Allow extension developers to add their own setting pages.
-		$this->plugin_options_structure = apply_filters( 'dslc_filter_register_options', $this->plugin_options_structure );
+		$this->plugin_options_structure = apply_filters( 'dslc_filter_plugin_options', $this->plugin_options_structure );
 
 	}
 
@@ -154,7 +154,7 @@ class LC_Plugin_Options {
 	 * @param  string $deprecated_section_id  Optional option class/section (deprecated).
 	 * @return string             				Option Value
 	 */
-	public function get_option( $option_id, $deprecated_section_id ) {
+	public function get_option( $option_id, $deprecated_section_id = '' ) {
 
 		$value = null;
 		$dslc_plugin_options_structure = $this->plugin_options_structure;
@@ -206,8 +206,9 @@ class LC_Plugin_Options {
 
 		do_action( 'dslc_hook_register_options' ); //@todo remove this action;
 
+		$lc = Live_Composer();
 		// Get plugin icon.
-		$icon_svg = Live_Composer()->sidebar_icon;
+		$icon_svg = $lc->sidebar_icon;
 
 		$page_hook_suggix = add_menu_page(
 			__( 'Live Composer', 'live-composer-page-builder' ),

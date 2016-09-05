@@ -6,28 +6,38 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-global $dslc_var_post_options;
 
-$dslc_var_post_options['dslc-gallery-post-options'] = array(
-	'title' => 'Gallery Options',
-	'show_on' => 'dslc_galleries',
-	'options' => array(
-		array(
-			'label' => 'Images',
-			'descr' => __( 'These images can be displayed on single gallery post pages using "Gallery Slider" module.', 'live-composer-page-builder' ),
-			'std' => '',
-			'id' => 'dslc_gallery_images',
-			'type' => 'files',
-		),
-		array(
-			'label' => 'Custom URL',
-			'descr' => __( 'By default links in the "Galleries" module will link to single gallery post page. If you want them to go to a custom URL, enter it here.', 'live-composer-page-builder' ),
-			'std' => '',
-			'id' => 'dslc_custom_url',
-			'type' => 'text',
-		),
-	)
-);
+/**
+ * Post Options
+ */
+function dslc_add_metaboxes_for_gallery_cpt( $metaboxes ) {
+
+	$metaboxes['dslc-gallery-post-options'] = array(
+		'title' => 'Gallery Options',
+		'show_on' => 'dslc_galleries',
+		'options' => array(
+			array(
+				'label' => 'Images',
+				'descr' => __( 'These images can be displayed on single gallery post pages using "Gallery Slider" module.', 'live-composer-page-builder' ),
+				'std' => '',
+				'id' => 'dslc_gallery_images',
+				'type' => 'files',
+			),
+			array(
+				'label' => 'Custom URL',
+				'descr' => __( 'By default links in the "Galleries" module will link to single gallery post page. If you want them to go to a custom URL, enter it here.', 'live-composer-page-builder' ),
+				'std' => '',
+				'id' => 'dslc_custom_url',
+				'type' => 'text',
+			),
+		)
+	);
+
+	return $metaboxes;
+
+}
+
+add_filter( 'dslc_filter_metaboxes', 'dslc_add_metaboxes_for_gallery_cpt' );
 
 /**
  * Register Post Type and Taxonomies

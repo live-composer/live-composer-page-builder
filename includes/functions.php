@@ -373,7 +373,9 @@ function dslc_unregister_template( $template_id ) {
  */
 function dslc_body_class( $classes ) {
 
-	global $dslc_post_types;
+	// global $dslc_post_types;
+	$lc = Live_Composer();
+	$dslc_post_types = $lc->cpt_templates->get_posttypes_with_templates();
 
 	$proceed = false;
 	$has_lc_content = false;
@@ -434,7 +436,7 @@ function dslc_body_class( $classes ) {
 	if ( ! $has_lc_content && is_singular( $dslc_post_types ) ) {
 
 		// Get the ID of the template.
-		$template_id = Live_Composer()->cpt_templates->get_template( 'by_post', get_the_ID() );
+		$template_id = $lc->cpt_templates->get_template( 'by_post', get_the_ID() );
 
 		// If template exists, allow the class.
 		if ( $template_id ) {

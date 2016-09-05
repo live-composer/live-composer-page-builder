@@ -99,4 +99,4 @@ function dslc_plugin_opts_presets( $dslc_plugin_options ) {
 
 	return $dslc_plugin_options;
 
-} add_filter( 'dslc_filter_register_options', 'dslc_plugin_opts_presets' );
+} add_filter( 'dslc_filter_plugin_options', 'dslc_plugin_opts_presets' );

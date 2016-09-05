@@ -534,7 +534,9 @@ function dslc_filter_content( $content ) {
 	// Global variables.
 	global $dslc_should_filter;
 	global $wp_the_query;
-	global $dslc_post_types;
+	// global $dslc_post_types;
+	$lc = Live_Composer();
+	$dslc_post_types = $lc->cpt_templates->get_posttypes_with_templates();
 
 	// Get ID of the post in which the content filter fired.
 	$curr_id = get_the_ID();
@@ -602,7 +604,7 @@ function dslc_filter_content( $content ) {
 		if ( is_singular( $dslc_post_types ) ) {
 
 			// Get template ID set for currently shown post.
-			$template_id = Live_Composer()->cpt_templates->get_template( 'by_post', get_the_ID() );
+			$template_id = $lc->cpt_templates->get_template( 'by_post', get_the_ID() );
 
 			// If template ID exists.
 			if ( $template_id ) {
@@ -623,7 +625,7 @@ function dslc_filter_content( $content ) {
 			// }
 
 			// Get ID of the page set to power the category of the current post type.
-			$template_id = Live_Composer()->cpt_templates->get_template('by_type', $post_type . '_archive');
+			$template_id = $lc->cpt_templates->get_template('by_type', $post_type . '_archive');
 
 			// If there is a page that powers it.
 			if ( $template_id ) {
@@ -1242,7 +1244,9 @@ function dslc_custom_css( $dslc_code = '' ) {
 	global $content_width;
 	global $dslc_googlefonts_array;
 	global $dslc_all_googlefonts_array;
-	global $dslc_post_types;
+	// global $dslc_post_types;
+	$lc = Live_Composer();
+	$dslc_post_types = $lc->cpt_templates->get_posttypes_with_templates();
 
 	$composer_code = '';
 	$template_code = '';
@@ -1269,7 +1273,7 @@ function dslc_custom_css( $dslc_code = '' ) {
 
 		// If single, load template?
 		if ( is_singular( $dslc_post_types ) ) {
-			$template_id = Live_Composer()->cpt_templates->get_template( 'by_post', get_the_ID() );
+			$template_id = $lc->cpt_templates->get_template( 'by_post', get_the_ID() );
 		}
 
 		// If archive, load template?
@@ -1280,7 +1284,7 @@ function dslc_custom_css( $dslc_code = '' ) {
 			// 	$post_type = 'post_archive';
 			// }
 
-			$template_id = Live_Composer()->cpt_templates->get_template( 'by_type', $post_type . '_archive' );
+			$template_id = $lc->cpt_templates->get_template( 'by_type', $post_type . '_archive' );
 		}
 
 		if ( is_author() ) {
@@ -1299,7 +1303,7 @@ function dslc_custom_css( $dslc_code = '' ) {
 		if ( $template_id ) {
 			$header_footer = dslc_hf_get_ID( $template_id );
 		} else if ( is_singular( $dslc_post_types ) ) {
-			$template_id = Live_Composer()->cpt_templates->get_template( 'by_post', get_the_ID() );
+			$template_id = $lc->cpt_templates->get_template( 'by_post', get_the_ID() );
 			$header_footer = dslc_hf_get_ID( $template_id );
 		} else {
 			$header_footer = dslc_hf_get_ID( get_the_ID() );
