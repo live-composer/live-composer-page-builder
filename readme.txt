@@ -138,6 +138,8 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 = Bug fixes: =
 
 * [JS Bug](https://wordpress.org/support/topic/js-error-when-editing?replies=1#post-8788982): TypeError: a.html(...) is undefined
+* Issue [#262](https://github.com/livecomposer/live-composer-page-builder/issues/262): The LC templates are listed on WordPress search listing
+
 
 = 1.1.3 - August 19th 2016 =
 

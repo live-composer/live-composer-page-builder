@@ -526,6 +526,8 @@ function dslc_display_templates() {
  */
 function dslc_filter_content( $content ) {
 
+	error_log('test');
+
 	// If post pass protected and pass not supplied return original content
 	if ( post_password_required( get_the_ID() ) ) {
 		return $content;
@@ -668,6 +670,8 @@ function dslc_filter_content( $content ) {
 
 		// If currently showing 404 page?
 		if ( is_404() ) {
+
+			error_log('is 404');
 
 			// Get ID of the page set to power the 404 page
 			$template_id = dslc_get_option( '404_page', 'dslc_plugin_options_archives' );
