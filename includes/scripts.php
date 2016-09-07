@@ -94,6 +94,8 @@ final class DSLC_Scripts{
 		 */
 		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
+			add_action( 'after_wp_tiny_mce', array( __CLASS__, 'callback_tinymce' ) );
+
 			ob_start();
 			wp_editor( '', 'enqueue_tinymce_scripts' );
 			ob_end_clean();
@@ -109,7 +111,6 @@ final class DSLC_Scripts{
 
 				wp_enqueue_style( 'dslc-builder-main-css', DS_LIVE_COMPOSER_URL . 'css/builder/builder.main.css', array(), DS_LIVE_COMPOSER_VER );
 				wp_enqueue_style( 'dslc-builder-plugins-css', DS_LIVE_COMPOSER_URL . 'css/builder/builder.plugins.css', array(), DS_LIVE_COMPOSER_VER );
-
 			}
 
 			/**
@@ -127,6 +128,19 @@ final class DSLC_Scripts{
 			}
 		}
 	}
+
+	/**
+	 * Fires after tinyMCE included
+	 */
+	public static function callback_tinymce() {
+
+		?>
+		<script type="text/javascript">
+			window.parent.previewAreaTinyMCELoaded.call(window);
+		</script>
+		<?php
+	}
+
 
 	/**
 	 * Load CSS and JS files in wp-admin area
