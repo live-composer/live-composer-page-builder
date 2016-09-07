@@ -482,7 +482,7 @@ function dslc_ajax_display_module_options( $atts ) {
 					data-tab="<?php echo esc_attr( $tab_id ); ?>">
 
 					<?php if ( isset( $module_option['help'] ) ) : ?>
-						<div class="dslca-module-edit-field-ttip-content"><?php echo esc_html( $module_option['help'] ); ?></div>
+						<div class="dslca-module-edit-field-ttip-content"><?php echo $module_option['help']; ?></div>
 					<?php endif; ?>
 
 					<span class="dslca-module-edit-label">
