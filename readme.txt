@@ -141,6 +141,10 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 * Issue [#262](https://github.com/livecomposer/live-composer-page-builder/issues/262): The LC templates are listed on WordPress search listing
 * Issue [#260](https://github.com/livecomposer/live-composer-page-builder/issues/260): Chevrons doubling up in Navigation Module
 
+= Other changes: =
+
+* Issue [#253](https://github.com/livecomposer/live-composer-page-builder/issues/253): Added animations for the ICON module.
+
 
 = 1.1.3 - August 19th 2016 =
 
