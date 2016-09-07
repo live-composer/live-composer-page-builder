@@ -435,6 +435,7 @@ function dslc_ajax_display_module_options( $atts ) {
 				'elements',
 				'post_elements',
 				'carousel_elements',
+				'thumb_resize_height',
 				'thumb_resize_width',
 				'thumb_resize_width_manual',
 				'button_icon_id',
