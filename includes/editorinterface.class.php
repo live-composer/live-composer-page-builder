@@ -172,7 +172,7 @@ class DSLC_EditorInterface{
 		} elseif ( is_archive() && isset( $dslc_var_templates_pt[ get_post_type() ] ) ) {
 
 			// Get ID of the page set to power the archives of the shown post type.
-			$template_id = dslc_get_option( get_post_type(), 'dslc_plugin_options_archives' );
+			$template_id = dslc_get_option( get_post_type() . '_archive', 'dslc_plugin_options_archives' );
 
 			// If there is a page that powers it?
 			if ( 'none' !== $template_id ) {
