@@ -143,6 +143,7 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 * Issue [#246](https://github.com/livecomposer/live-composer-page-builder/issues/246): [JS Bug] – Cannot read property 'init' of undefined
 * Issue [#232](https://github.com/livecomposer/live-composer-page-builder/issues/232): Broken Resize Height Control
 * Issue [#225](https://github.com/livecomposer/live-composer-page-builder/issues/225): WooCommerce Module – settings broken for the title and price position.
+* Issue [#224](https://github.com/livecomposer/live-composer-page-builder/issues/224): Posts Module showing error when Media post type selected.
 
 
 = Other changes: =

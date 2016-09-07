@@ -47,6 +47,7 @@ class DSLC_Posts extends DSLC_Module {
 		$post_types_to_ignore = array(
 			'dslc_templates',
 			'dslc_hf',
+			'attachment',
 		);
 
 		// Generate usable array of post types.
