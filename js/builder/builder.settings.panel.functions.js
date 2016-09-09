@@ -290,6 +290,8 @@ jQuery(document).ready(function($){
 
 		jQuery('.temp-styles-for-module', LiveComposer.Builder.PreviewAreaDocument).remove();
 		jQuery('.sp-container').remove();
+
+		// Hide inline editor panel if on [Confirm] or [Cancel] button click.
 		jQuery('.mce-tinymce', LiveComposer.Builder.PreviewAreaDocument).hide();
 	}
 
