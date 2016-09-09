@@ -452,18 +452,11 @@
 				}
 
 				#dslc-content .dslc-gallery-thumb .dslc-gallery-images-count {
-					background: transparent;
-					color: #fff;
-					font-weight: 400;
-					font-size: 25px;
-					line-height: 1;
-
 					position: absolute;
 					left: 0;
 					top: 0;
 					width: 100%;
 					height: 100%;
-
 					text-align: center;
 					text-decoration: none;
 				}
