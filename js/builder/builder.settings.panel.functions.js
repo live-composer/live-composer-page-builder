@@ -124,7 +124,7 @@ jQuery(document).ready(function($){
 
 		dslc_module_options_confirm_changes(function(){
 
-			LiveComposer.Builder.UI.initInlineEditors();
+			LiveComposer.Builder.UI.initInlineEditors({withRemove:true});
 			LiveComposer.Builder.UI.unloadOptionsDeps();
 			LiveComposer.Builder.Flags.panelOpened = false;
 
@@ -147,7 +147,7 @@ jQuery(document).ready(function($){
 
 		dslc_module_options_cancel_changes(function(){
 
-			LiveComposer.Builder.UI.initInlineEditors();
+			LiveComposer.Builder.UI.initInlineEditors({withRemove:true});
 			LiveComposer.Builder.UI.unloadOptionsDeps();
 			LiveComposer.Builder.Flags.panelOpened = false;
 
@@ -255,14 +255,21 @@ jQuery(document).ready(function($){
 
 	LiveComposer.Builder.Helpers.colorpickers = [];
 
-	LiveComposer.Builder.UI.initInlineEditors = function(){
+	LiveComposer.Builder.UI.initInlineEditors = function(params){
+
+		params = params || {};
+
+		if ( params.withRemove == true ) {
+
+			LiveComposer.Builder.PreviewAreaWindow.tinyMCE.remove();
+		}
 
 		LiveComposer.Builder.PreviewAreaWindow.tinyMCE.init({
 			selector: '.inline-editor.dslca-editable-content',
 			editor_deselector: 'mce-content-body',
 			menubar: false,
 		  	inline: true,
-		  	plugins: 'link',
+		  	plugins: ['link lists paste'],
 		  	style_formats: [
 			      {title: 'Paragraph', format: 'p'},
 			      {title: 'Header 2', format: 'h2'},
@@ -290,6 +297,9 @@ jQuery(document).ready(function($){
 
 		jQuery('.temp-styles-for-module', LiveComposer.Builder.PreviewAreaDocument).remove();
 		jQuery('.sp-container').remove();
+
+		// Hide inline editor panel if on [Confirm] or [Cancel] button click.
+		jQuery('.mce-tinymce', LiveComposer.Builder.PreviewAreaDocument).hide();
 	}
 
 	/** Options dependencies */

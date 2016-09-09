@@ -832,16 +832,29 @@ jQuery(document).ready(function($){
 	 */
 	$(document).on( 'click', '.dslc-post-filter', function(){
 
-		// Get info
-		var dslcCat = $(this).data('id');
-		var dslcPosts = $(this).closest('.dslc-module-front').find('.dslc-post');
-		var dslcFilterPosts = $(this).closest('.dslc-module-front').find('.dslc-post[data-cats*="' + dslcCat + '"]');
-		var dslcNotFilterPosts = $(this).closest('.dslc-module-front').find('.dslc-post:not([data-cats*="' + dslcCat + '"])');
-		var dslcContainer = dslcPosts.closest('.dslc-posts');
-		var dslcWrapper = $(this).closest('.dslc-module-front');
+		// Get info.
+		var selectedFilterEl = $(this);
+		var dslcContainer    = selectedFilterEl.closest('.dslc-module-front').find('.dslc-posts');
+		var dslcWrapper      = selectedFilterEl.closest('.dslc-module-front');
+
+		// Filter posts according to selected filter.
+		var dslcCat = selectedFilterEl.data('filter-id');
+		var dslcFilterPosts    = $(); // Empty jQuery object.
+		var dslcNotFilterPosts = $();
+
+		if ( dslcCat === 'show-all' ) {
+
+			dslcFilterPosts    = dslcContainer.closest('.dslc-module-front').find('.dslc-post');
+			dslcNotFilterPosts = $(); // Empty jQuery object.
+
+		} else {
+
+			dslcFilterPosts    = dslcContainer.closest('.dslc-module-front').find('.dslc-post[data-cats*="' + dslcCat + '"]');
+			dslcNotFilterPosts = dslcContainer.closest('.dslc-module-front').find('.dslc-post:not([data-cats*="' + dslcCat + '"])');
+		}
 
 		// Set active
-		$(this).removeClass('dslc-inactive').addClass('dslc-active').siblings('.dslc-active').removeClass('dslc-active').addClass('dslc-inactive');
+		selectedFilterEl.removeClass('dslc-inactive').addClass('dslc-active').siblings('.dslc-active').removeClass('dslc-active').addClass('dslc-inactive');
 
 		if ( dslcContainer.hasClass('dslc-init-grid' ) ) {
 

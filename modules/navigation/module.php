@@ -1664,10 +1664,11 @@ class DSLC_Navigation extends DSLC_Module {
 			<?php /* Add chevron icon */ ?>
 
 			<script type="text/javascript">
-				var menuItems = document.querySelectorAll( '.dslc-navigation .menu > li.menu-item-has-children:not(.dslc-navigation-arrow) > a' );
+				var menuItems = document.querySelectorAll( '.dslc-navigation .menu > li.menu-item-has-children:not(.menu-with-arrow) > a' );
 
 				for (var i = 0, len = menuItems.length; i < len; i++) {
 				  menuItems[i].insertAdjacentHTML('afterend', '<span class="dslc-navigation-arrow dslc-icon dslc-icon-chevron-down"></span>');
+				  menuItems[i].parentElement.className += " menu-with-arrow";
 				}
 			</script>
 			<?php

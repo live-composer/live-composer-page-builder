@@ -43,12 +43,23 @@ class DSLC_Posts extends DSLC_Module {
 		$post_types = get_post_types( array('public' => true), 'objects' );
 		$post_types_choices = array();
 
+		// System post types that should not appear in selector.
+		$post_types_to_ignore = array(
+			'dslc_templates',
+			'dslc_hf',
+			'attachment',
+		);
+
 		// Generate usable array of post types.
 		foreach ( $post_types as $post_type_id => $post_type ) {
-			$post_types_choices[] = array(
-				'label' => $post_type->labels->name,
-				'value' => $post_type_id
-			);
+
+			// Do not output system post-types.
+			if ( ! in_array( $post_type_id, $post_types_to_ignore ) ) {
+				$post_types_choices[] = array(
+					'label' => $post_type->labels->name,
+					'value' => $post_type_id
+				);
+			}
 		}
 
 		// Options.
@@ -75,11 +86,12 @@ class DSLC_Posts extends DSLC_Module {
 				),
 			),
 			array(
-				'label' => __( 'Post Type', 'live-composer-page-builder' ),
+				'label' => __( 'Post Types', 'live-composer-page-builder' ),
 				'id' => 'post_type',
 				'std' => 'post',
-				'type' => 'select',
-				'choices' => $post_types_choices
+				'type' => 'checkbox',
+				'choices' => $post_types_choices,
+				'tab' => 'posts query',
 			),
 
 			array(
@@ -103,6 +115,13 @@ class DSLC_Posts extends DSLC_Module {
 				)
 			),
 			array(
+				'label' => __( 'Posts Per Row', 'live-composer-page-builder' ),
+				'id' => 'columns',
+				'std' => '3',
+				'type' => 'select',
+				'choices' => $this->shared_options( 'posts_per_row_choices' ),
+			),
+			array(
 				'label' => __( 'Orientation', 'live-composer-page-builder' ),
 				'id' => 'orientation',
 				'std' => 'vertical',
@@ -123,6 +142,7 @@ class DSLC_Posts extends DSLC_Module {
 				'id' => 'amount',
 				'std' => '4',
 				'type' => 'text',
+				'tab' => 'pagination',
 			),
 			array(
 				'label' => __( 'Pagination', 'live-composer-page-builder' ),
@@ -147,13 +167,7 @@ class DSLC_Posts extends DSLC_Module {
 						'value' => 'loadmore',
 					),
 				),
-			),
-			array(
-				'label' => __( 'Posts Per Row', 'live-composer-page-builder' ),
-				'id' => 'columns',
-				'std' => '3',
-				'type' => 'select',
-				'choices' => $this->shared_options( 'posts_per_row_choices' ),
+				'tab' => 'pagination',
 			),
 			array(
 				'label' => __( 'Order By', 'live-composer-page-builder' ),
@@ -204,6 +218,7 @@ class DSLC_Posts extends DSLC_Module {
 				'id' => 'offset',
 				'std' => '0',
 				'type' => 'text',
+				'tab' => 'posts query',
 			),
 			array(
 				'label' => __( 'Sticky Posts', 'live-composer-page-builder' ),
@@ -220,19 +235,22 @@ class DSLC_Posts extends DSLC_Module {
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
 						'value' => 'disabled'
 					)
-				)
+				),
+				'tab' => 'pagination',
 			),
 			array(
 				'label' => __( 'Include (IDs)', 'live-composer-page-builder' ),
 				'id' => 'query_post_in',
 				'std' => '',
 				'type' => 'text',
+				'tab' => 'posts query',
 			),
 			array(
 				'label' => __( 'Exclude (IDs)', 'live-composer-page-builder' ),
 				'id' => 'query_post_not_in',
 				'std' => '',
 				'type' => 'text',
+				'tab' => 'posts query',
 			),
 
 			// Archive Listinging
@@ -251,6 +269,7 @@ class DSLC_Posts extends DSLC_Module {
 						'value' => 'disabled'
 					),
 				),
+				'tab' => 'posts query',
 				'help' => __( 'Apply Page Query – show posts according to the selected tag, category, author or search query.<br /> Ignore Page Query – ignore the page query and list posts as on any other page.', 'live-composer-page-builder' ),
 			),
 
@@ -2588,6 +2607,7 @@ class DSLC_Posts extends DSLC_Module {
 	 */
 	function output( $options ) {
 
+
 		if ( is_feed() ) {
 			// Prevent category/tag feeds to stuck in an infinite loop.
 			return false;
@@ -2614,6 +2634,24 @@ class DSLC_Posts extends DSLC_Module {
 			$options['excerpt_length'] = 20;
 		}
 
+		$post_type = array();
+
+		if ( isset( $options['post_type'] ) ) {
+
+			$post_type_str = trim( $options['post_type'] );
+
+			if ( stristr( $post_type_str , ' ' ) ) {
+
+				// Many post types selected.
+				$post_type = explode( ' ', trim( $options['post_type'] ) );
+
+			} else {
+
+				// Single post type selected
+				$post_type[] = $post_type_str;
+			}
+		}
+
 		/**
 		 * Query
 		 */
@@ -2631,7 +2669,7 @@ class DSLC_Posts extends DSLC_Module {
 			// General args.
 			$args = array(
 				'paged' => $paged,
-				'post_type' => $options['post_type'],
+				'post_type' => $post_type,
 				'posts_per_page' => $options['amount'],
 				'order' => $options['order'],
 				'orderby' => $options['orderby'],
@@ -2704,6 +2742,7 @@ class DSLC_Posts extends DSLC_Module {
 			} else {
 				$dslc_query = new WP_Query( $args );
 			}
+
 
 		/**
 		 * Unnamed
@@ -2874,10 +2913,10 @@ class DSLC_Posts extends DSLC_Module {
 							?>
 
 								<div class="dslc-post-filters">
-									<span class="dslc-post-filter dslc-active dslca-editable-content" data-id="<?php if ( $dslc_is_admin ){ echo 'main_filter_title_all'; } else { echo ''; } ?>" data-type="simple" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?> ><?php echo $options['main_filter_title_all']; ?></span>
+									<span class="dslc-post-filter dslc-active dslca-editable-content" data-filter-id="show-all" <?php if ( $dslc_is_admin ){ echo 'data-id="main_filter_title_all" data-type="simple" contenteditable '; } ?>><?php echo $options['main_filter_title_all']; ?></span>
 
 									<?php foreach ( $cats_array as $cat_slug => $cat_name ) : ?>
-										<span class="dslc-post-filter dslc-inactive" data-id="<?php echo $cat_slug; ?>"><?php echo $cat_name; ?></span>
+										<span class="dslc-post-filter dslc-inactive" data-filter-id="<?php echo $cat_slug; ?>"><?php echo $cat_name; ?></span>
 									<?php endforeach; ?>
 
 								</div><!-- .dslc-post-filters -->
