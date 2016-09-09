@@ -145,6 +145,12 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 * Issue [#225](https://github.com/livecomposer/live-composer-page-builder/issues/225): WooCommerce Module – settings broken for the title and price position.
 * Issue [#224](https://github.com/livecomposer/live-composer-page-builder/issues/224): Posts Module showing error when Media post type selected.
 * Issue [#223](https://github.com/livecomposer/live-composer-page-builder/issues/223): Link to editing archive listing template is broken.
+* Issue [#249](https://github.com/livecomposer/live-composer-page-builder/issues/249): [JS] Copy/Paste does not work in-line
+* Issue [#276](https://github.com/livecomposer/live-composer-page-builder/issues/276): Posts and Blog module filtering bug
+* Issue [#240](https://github.com/livecomposer/live-composer-page-builder/issues/240): [JS] tinyMCE multiple instances
+* Issue [#198](https://github.com/livecomposer/live-composer-page-builder/issues/198): [JS] Inline Editor do not disappear on module CONFIRM click ( Firefox )
+* Infobox inline-editor in "content": https://github.com/livecomposer/live-composer-page-builder/commit/a964e976b54e5e3bff498e5af861350beda61f04
+
 
 
 = Other changes: =
