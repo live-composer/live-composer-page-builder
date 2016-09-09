@@ -138,6 +138,7 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 = Bug fixes: =
 
 * [JS Bug](https://wordpress.org/support/topic/js-error-when-editing?replies=1#post-8788982): TypeError: a.html(...) is undefined
+* Issue [#226](https://github.com/livecomposer/live-composer-page-builder/issues/226): Galleries Module – Styling -> Count -> Position is not work.
 * Issue [#262](https://github.com/livecomposer/live-composer-page-builder/issues/262): The LC templates are listed on WordPress search listing
 * Issue [#260](https://github.com/livecomposer/live-composer-page-builder/issues/260): Chevrons doubling up in Navigation Module
 * Issue [#246](https://github.com/livecomposer/live-composer-page-builder/issues/246): [JS Bug] – Cannot read property 'init' of undefined
@@ -150,8 +151,6 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 * Issue [#240](https://github.com/livecomposer/live-composer-page-builder/issues/240): [JS] tinyMCE multiple instances
 * Issue [#198](https://github.com/livecomposer/live-composer-page-builder/issues/198): [JS] Inline Editor do not disappear on module CONFIRM click ( Firefox )
 * Infobox inline-editor in "content": https://github.com/livecomposer/live-composer-page-builder/commit/a964e976b54e5e3bff498e5af861350beda61f04
-
-
 
 = Other changes: =
 
