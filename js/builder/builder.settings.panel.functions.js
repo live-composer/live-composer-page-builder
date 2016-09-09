@@ -124,7 +124,7 @@ jQuery(document).ready(function($){
 
 		dslc_module_options_confirm_changes(function(){
 
-			LiveComposer.Builder.UI.initInlineEditors();
+			LiveComposer.Builder.UI.initInlineEditors({withRemove:true});
 			LiveComposer.Builder.UI.unloadOptionsDeps();
 			LiveComposer.Builder.Flags.panelOpened = false;
 
@@ -147,7 +147,7 @@ jQuery(document).ready(function($){
 
 		dslc_module_options_cancel_changes(function(){
 
-			LiveComposer.Builder.UI.initInlineEditors();
+			LiveComposer.Builder.UI.initInlineEditors({withRemove:true});
 			LiveComposer.Builder.UI.unloadOptionsDeps();
 			LiveComposer.Builder.Flags.panelOpened = false;
 
@@ -255,7 +255,14 @@ jQuery(document).ready(function($){
 
 	LiveComposer.Builder.Helpers.colorpickers = [];
 
-	LiveComposer.Builder.UI.initInlineEditors = function(){
+	LiveComposer.Builder.UI.initInlineEditors = function(params){
+
+		params = params || {};
+
+		if ( params.withRemove == true ) {
+
+			LiveComposer.Builder.PreviewAreaWindow.tinyMCE.remove();
+		}
 
 		LiveComposer.Builder.PreviewAreaWindow.tinyMCE.init({
 			selector: '.inline-editor.dslca-editable-content',
