@@ -145,6 +145,7 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 * Issue [#225](https://github.com/livecomposer/live-composer-page-builder/issues/225): WooCommerce Module – settings broken for the title and price position.
 * Issue [#224](https://github.com/livecomposer/live-composer-page-builder/issues/224): Posts Module showing error when Media post type selected.
 * Issue [#223](https://github.com/livecomposer/live-composer-page-builder/issues/223): Link to editing archive listing template is broken.
+* Issue [#228](https://github.com/livecomposer/live-composer-page-builder/issues/228): Masonry Gird is broken when you choose it.
 
 
 = Other changes: =

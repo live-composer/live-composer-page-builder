@@ -588,7 +588,8 @@ function dslc_module_output_altered( callback ) {
 			dslc_generate_code(); // Do not delete. It refresh classes on "option preview refresh -> true"
 			// dslc_show_publish_button();
 			LiveComposer.Builder.PreviewAreaWindow.dslc_carousel();
-			LiveComposer.Builder.PreviewAreaWindow.dslc_masonry( jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument) );
+			LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();
+			//LiveComposer.Builder.PreviewAreaWindow.dslc_masonry( jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument) );
 
 			jQuery( '.dslca-module-being-edited img' , LiveComposer.Builder.PreviewAreaDocument).load( function(){
 
