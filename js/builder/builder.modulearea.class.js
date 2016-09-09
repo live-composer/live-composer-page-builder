@@ -148,11 +148,11 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 	/** Sort option setter */
 	jQuery(document).on('LC.sortableOff', function(){
 
-		self.sortable.option('disabled', true);
+		self.sortable && self.sortable.option && self.sortable.option('disabled', true);
 	});
 
 	jQuery(document).on('LC.sortableOn', function(){
 
-		self.sortable.option('disabled', false);
+		self.sortable && self.sortable.option && self.sortable.option('disabled', false);
 	});
 }
