@@ -25,6 +25,12 @@
 
 	var observerClass = function(element, callback, config) {
 
+		if ( ! window.MutationObserver ) {
+
+			console.error('mq_mutation_obs:: Browser does not support mutations! Please, install IE11+ or update your current browser to newest version.' );
+			return false;
+		}
+
 		if( ! element || typeof callback != 'function' || ( typeof config != 'object' && config ) ) {
 
 			console.error('mq_mutation_obs:: invalid arguments in class constructor');

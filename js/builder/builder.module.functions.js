@@ -221,7 +221,7 @@
 
 			dslc_editable_content_gen_code( jQuery(this) );
 		}
-	}).on( 'paste', '.dslca-editable-content', function(){
+	}).on( 'paste', '.dslca-editable-content:not(.inline-editor)', function(){
 
 		if ( ! jQuery('body').hasClass( 'dslca-composer-hidden' )  && jQuery(this).data('type') == 'simple' ) {
 

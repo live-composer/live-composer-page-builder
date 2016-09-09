@@ -262,7 +262,7 @@ jQuery(document).ready(function($){
 			editor_deselector: 'mce-content-body',
 			menubar: false,
 		  	inline: true,
-		  	plugins: 'link',
+		  	plugins: ['link lists paste'],
 		  	style_formats: [
 			      {title: 'Paragraph', format: 'p'},
 			      {title: 'Header 2', format: 'h2'},
