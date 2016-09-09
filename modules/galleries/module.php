@@ -77,7 +77,7 @@ class DSLC_Galleries extends DSLC_Module {
 			array(
 				'label' => __( 'Type', 'live-composer-page-builder' ),
 				'id' => 'type',
-				'std' => 'grid',
+				'std' => 'masonry',
 				'type' => 'select',
 				'choices' => array(
 					array(
