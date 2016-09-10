@@ -139,6 +139,7 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 
 * [JS Bug](https://wordpress.org/support/topic/js-error-when-editing?replies=1#post-8788982): TypeError: a.html(...) is undefined
 * Issue [#226](https://github.com/livecomposer/live-composer-page-builder/issues/226): Galleries Module – Styling -> Count -> Position is not work.
+* Issue [#228](https://github.com/livecomposer/live-composer-page-builder/issues/228): Grids of posts with masonry grid will not refresh the grid properly on options change.
 * Issue [#262](https://github.com/livecomposer/live-composer-page-builder/issues/262): The LC templates are listed on WordPress search listing
 * Issue [#260](https://github.com/livecomposer/live-composer-page-builder/issues/260): Chevrons doubling up in Navigation Module
 * Issue [#246](https://github.com/livecomposer/live-composer-page-builder/issues/246): [JS Bug] – Cannot read property 'init' of undefined

@@ -385,6 +385,8 @@ function dslc_module_width_set( module, new_width ) {
 	// Update module size in raw base64 code (dslc_code) of the module
 	LiveComposer.Utils.update_module_property_raw( module[0], 'dslc_m_size', new_width );
 
+	LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();
+
 	dslc_generate_code();
 	dslc_show_publish_button();
 }
@@ -588,12 +590,8 @@ function dslc_module_output_altered( callback ) {
 			dslc_generate_code(); // Do not delete. It refresh classes on "option preview refresh -> true"
 			// dslc_show_publish_button();
 			LiveComposer.Builder.PreviewAreaWindow.dslc_carousel();
-			LiveComposer.Builder.PreviewAreaWindow.dslc_masonry( jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument) );
 
-			jQuery( '.dslca-module-being-edited img' , LiveComposer.Builder.PreviewAreaDocument).load( function(){
-
-				LiveComposer.Builder.PreviewAreaWindow.dslc_masonry( jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument) );
-			});
+			LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();
 
 			LiveComposer.Builder.PreviewAreaWindow.dslc_tabs();
 			LiveComposer.Builder.PreviewAreaWindow.dslc_init_accordion();
@@ -662,11 +660,7 @@ function dslc_module_output_reload( dslcModule, callback ) {
 			dslc_show_publish_button();
 
 			LiveComposer.Builder.PreviewAreaWindow.dslc_carousel();
-			LiveComposer.Builder.PreviewAreaWindow.dslc_masonry( jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument) );
-
-			jQuery( '.dslca-module-being-edited img' , LiveComposer.Builder.PreviewAreaDocument).load( function(){
-				LiveComposer.Builder.PreviewAreaWindow.dslc_masonry( jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument) );
-			});
+			LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();
 
 			LiveComposer.Builder.PreviewAreaWindow.dslc_tabs();
 			LiveComposer.Builder.PreviewAreaWindow.dslc_init_accordion();

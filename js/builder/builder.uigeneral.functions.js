@@ -542,7 +542,7 @@ function dslc_drag_and_drop() {
 
 
 					setTimeout( function(){
-						LiveComposer.Builder.PreviewAreaWindow.dslc_masonry( dslcJustAdded );
+						LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();
 						jQuery('body').removeClass('dslca-module-drop-in-progress');
 					}, 700 );
 

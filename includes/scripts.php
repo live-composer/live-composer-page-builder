@@ -214,8 +214,8 @@ final class DSLC_Scripts{
 			wp_enqueue_script( 'jquery-ui-resizable' );
 
 			wp_enqueue_script( 'wp-mediaelement' );
-			wp_enqueue_script( 'imagesloaded' ); // Need this for Masonry.
-			wp_enqueue_script( 'jquery-masonry' );
+			//wp_enqueue_script( 'imagesloaded' ); // Need this for Masonry.
+			//wp_enqueue_script( 'jquery-masonry' );
 
 			wp_enqueue_script( 'dslc-builder-plugins-js', DS_LIVE_COMPOSER_URL . 'js/builder/builder.plugins.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 

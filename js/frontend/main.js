@@ -49,8 +49,6 @@ function dslc_responsive_classes( force ) {
 			body.addClass( 'dslc-res-big' );
 		}
 	}
-
-	dslc_masonry();
 }
 
 /**
@@ -368,7 +366,7 @@ function dslc_masonry( dslcWrapper, dslcAnimate ) {
 
 		if ( dslcContainer.data('masonry') ) {
 
-				jQuery(dslcContainer).imagesLoaded(function() {
+			jQuery(dslcContainer).imagesLoaded(function() {
 
 				jQuery(dslcContainer).masonry('destroy').masonry({
 					gutter : dslcGutterWidth,
@@ -384,6 +382,7 @@ function dslc_masonry( dslcWrapper, dslcAnimate ) {
 					}, 500);
 				}
 			});
+
 		} else {
 
 			jQuery(dslcSelector).css({ marginRight : 0 });
@@ -1112,6 +1111,7 @@ jQuery(document).ready(function($){
 jQuery(window).load(function(){
 
 	dslc_responsive_classes();
+	dslc_masonry();
 	dslc_carousel();
 	dslc_parallax();
 	dslc_init_lightbox();

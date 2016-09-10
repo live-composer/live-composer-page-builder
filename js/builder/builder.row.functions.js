@@ -596,7 +596,7 @@ function dslc_row_import( rowCode ) {
 			// Call other functions
 			LiveComposer.Builder.PreviewAreaWindow.dslc_bg_video();
 			LiveComposer.Builder.PreviewAreaWindow.dslc_carousel();
-			LiveComposer.Builder.PreviewAreaWindow.dslc_masonry( jQuery('#dslc-main', LiveComposer.Builder.PreviewAreaDocument).find('.dslc-modules-section:last-child') );
+			LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();
 
 			// Check init for rows and module areas
 			LiveComposer.Builder.rows_init();
