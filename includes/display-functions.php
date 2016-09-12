@@ -320,6 +320,7 @@ function dslc_display_composer() {
 			</div>
 
 			<div class="dslca-invisible-overlay"></div>
+			<div id="scroller-stopper"></div>
 			<script id="pseudo-panel" type="template">
 			<div class="dslca-pseudo-panel">
 

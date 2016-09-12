@@ -108,7 +108,9 @@ jQuery(document).ready(function($){
 		});
 
 		/** Scroll bottom */
-		jQuery(LiveComposer.Builder.PreviewAreaDocument).on('dragenter','.lc-scroll-bottom-area', function(e) {
+		jQuery(LiveComposer.Builder.PreviewAreaDocument).on('dragenter dragover','.lc-scroll-bottom-area', function(e) {
+
+			if( LiveComposer.Builder.Flags.windowScroller !== false ) return false;
 
 			LiveComposer.Utils.publish('LC.sortableOff', {});
 
@@ -120,6 +122,8 @@ jQuery(document).ready(function($){
 
 		/** Scroll top */
 		jQuery(LiveComposer.Builder.PreviewAreaDocument).on('dragenter','.lc-scroll-top-area', function(e) {
+
+			if( LiveComposer.Builder.Flags.windowScroller !== false ) return false;
 
 			LiveComposer.Utils.publish('LC.sortableOff', {});
 
@@ -146,4 +150,9 @@ jQuery(document).ready(function($){
 		clearInterval(LiveComposer.Builder.Flags.windowScroller);
 		LiveComposer.Builder.Flags.windowScroller = false;
 	}
+
+	jQuery("#scroller-stopper").on('dragover', function(){
+
+		LiveComposer.Builder.UI.stopScroller();
+	});
 });
