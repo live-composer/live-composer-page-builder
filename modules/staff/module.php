@@ -875,7 +875,7 @@ class DSLC_Staff extends DSLC_Module {
 				'min' => 0,
 				'max' => 10,
 				'increment' => 1,
-				
+
 				'std' => '1',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1252,7 +1252,7 @@ class DSLC_Staff extends DSLC_Module {
 				'min' => 0,
 				'max' => 10,
 				'increment' => 1,
-				
+
 				'std' => '1',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -2510,6 +2510,7 @@ class DSLC_Staff extends DSLC_Module {
 
 							$position = get_post_meta( get_the_ID(), 'dslc_staff_position', true );
 							$social_twitter = get_post_meta( get_the_ID(), 'dslc_staff_social_twitter', true );
+							$social_instagram = get_post_meta( get_the_ID(), 'dslc_staff_social_instagram', true );
 							$social_facebook = get_post_meta( get_the_ID(), 'dslc_staff_social_facebook', true );
 							$social_googleplus = get_post_meta( get_the_ID(), 'dslc_staff_social_googleplus', true );
 							$social_linkedin = get_post_meta( get_the_ID(), 'dslc_staff_social_linkedin', true );
@@ -2646,12 +2647,16 @@ class DSLC_Staff extends DSLC_Module {
 
 								<?php if ( $post_elements == 'all' || in_array( 'social', $post_elements ) ) : ?>
 
-									<?php if ( $social_twitter || $social_facebook || $social_googleplus || $social_linkedin || $social_email ) : ?>
+									<?php if ( $social_twitter || $social_instagram || $social_facebook || $social_googleplus || $social_linkedin || $social_email ) : ?>
 
 										<div class="dslc-staff-member-social">
 
 											<?php if ( $social_twitter ) : ?>
 												<a target="<?php echo $options['social_link_target']; ?>" href="<?php echo $social_twitter; ?>"><span class="dslc-icon dslc-icon-twitter"></span></a>
+											<?php endif; ?>
+
+											<?php if ( $social_instagram ) : ?>
+												<a target="<?php echo $options['social_link_target']; ?>" href="<?php echo $social_instagram; ?>"><span class="dslc-icon dslc-icon-instagram"></span></a>
 											<?php endif; ?>
 
 											<?php if ( $social_facebook ) : ?>

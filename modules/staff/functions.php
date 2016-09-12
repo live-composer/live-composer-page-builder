@@ -25,6 +25,12 @@ $dslc_var_post_options['dslc-staff-post-options'] = array(
 			'type' => 'text',
 		),
 		array(
+			'label' => 'Social - Instagram',
+			'std' => '',
+			'id' => 'dslc_staff_social_instagram',
+			'type' => 'text',
+		),
+		array(
 			'label' => 'Social - Facebook',
 			'std' => '',
 			'id' => 'dslc_staff_social_facebook',
@@ -114,13 +120,13 @@ function dslc_staff_module_cpt() {
 
 	// Register post type
 	register_post_type( 'dslc_staff', $cpt_args );
-	
+
 	/**
 	 * Register Taxonomy ( Category )
 	 */
 
 	// Arguments
-	$cats_args = array( 
+	$cats_args = array(
 		'labels' => array(
 			'name' => __( 'Staff Categories', 'live-composer-page-builder' ),
 			'singular_name' => __( 'Category', 'live-composer-page-builder' ),
@@ -134,9 +140,9 @@ function dslc_staff_module_cpt() {
 			'new_item_name' => __( 'New Category Name', 'live-composer-page-builder' ),
 			'menu_name' => __( 'Categories', 'live-composer-page-builder' ),
 		),
-		'hierarchical' => true, 
-		'public' => true, 
-		'rewrite' => array( 
+		'hierarchical' => true,
+		'public' => true,
+		'rewrite' => array(
 			'slug' => dslc_get_option( 'staff_cats_slug', 'dslc_plugin_options_cpt_slugs' ),
 			'with_front' => $with_front
 		)
