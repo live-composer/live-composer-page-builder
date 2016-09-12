@@ -129,6 +129,13 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 
 == Changelog ==
 
+Upcoming Releases:
+
+* PREMIUM EXTENSION: WooCommerce Integration > [Get 50% off coupon](https://livecomposerplugin.com/halfprice-coupon/?utm_source=changelog)
+* PREMIUM EXTENSION: bbPress Forums Integration > [Get 50% off coupon](https://livecomposerplugin.com/halfprice-coupon/?utm_source=changelog)
+* PREMIUM THEME: Digital Marketer & SEO Theme > [Get 50% off coupon](https://livecomposerplugin.com/halfprice-coupon/?utm_source=changelog)
+
+
 = 1.1.4 - September 12th 2016 =
 
 * [Please, report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
@@ -142,22 +149,22 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 = Bug fixes: =
 
 * [JS Bug](https://wordpress.org/support/topic/js-error-when-editing?replies=1#post-8788982): TypeError: a.html(...) is undefined
+* Issue [#198](https://github.com/livecomposer/live-composer-page-builder/issues/198): [JS] Inline Editor do not disappear on module CONFIRM click ( Firefox )
+* Issue [#207](https://github.com/livecomposer/live-composer-page-builder/issues/207): [JS] Cick on module (in the modules list) freezes the Live Composer
+* Issue [#223](https://github.com/livecomposer/live-composer-page-builder/issues/223): Link to editing archive listing template is broken.
+* Issue [#224](https://github.com/livecomposer/live-composer-page-builder/issues/224): Posts Module showing error when Media post type selected.
+* Issue [#225](https://github.com/livecomposer/live-composer-page-builder/issues/225): WooCommerce Module – settings broken for the title and price position.
 * Issue [#226](https://github.com/livecomposer/live-composer-page-builder/issues/226): Galleries Module – Styling -> Count -> Position is not work.
 * Issue [#228](https://github.com/livecomposer/live-composer-page-builder/issues/228): Grids of posts with masonry grid will not refresh the grid properly on options change.
-* Issue [#262](https://github.com/livecomposer/live-composer-page-builder/issues/262): The LC templates are listed on WordPress search listing
-* Issue [#260](https://github.com/livecomposer/live-composer-page-builder/issues/260): Chevrons doubling up in Navigation Module
-* Issue [#246](https://github.com/livecomposer/live-composer-page-builder/issues/246): [JS Bug] – Cannot read property 'init' of undefined
 * Issue [#232](https://github.com/livecomposer/live-composer-page-builder/issues/232): Broken Resize Height Control
 * Issue [#233](https://github.com/livecomposer/live-composer-page-builder/issues/233): Module Downloads - Main -> Location contol is broken
-* Issue [#225](https://github.com/livecomposer/live-composer-page-builder/issues/225): WooCommerce Module – settings broken for the title and price position.
-* Issue [#224](https://github.com/livecomposer/live-composer-page-builder/issues/224): Posts Module showing error when Media post type selected.
-* Issue [#223](https://github.com/livecomposer/live-composer-page-builder/issues/223): Link to editing archive listing template is broken.
-* Issue [#249](https://github.com/livecomposer/live-composer-page-builder/issues/249): [JS] Copy/Paste does not work in-line
-* Issue [#276](https://github.com/livecomposer/live-composer-page-builder/issues/276): Posts and Blog module filtering bug
 * Issue [#240](https://github.com/livecomposer/live-composer-page-builder/issues/240): [JS] tinyMCE multiple instances
-* Issue [#198](https://github.com/livecomposer/live-composer-page-builder/issues/198): [JS] Inline Editor do not disappear on module CONFIRM click ( Firefox )
+* Issue [#246](https://github.com/livecomposer/live-composer-page-builder/issues/246): [JS Bug] – Cannot read property 'init' of undefined
+* Issue [#249](https://github.com/livecomposer/live-composer-page-builder/issues/249): [JS] Copy/Paste does not work in-line
+* Issue [#260](https://github.com/livecomposer/live-composer-page-builder/issues/260): Chevrons doubling up in Navigation Module
+* Issue [#262](https://github.com/livecomposer/live-composer-page-builder/issues/262): The LC templates are listed on WordPress search listing
+* Issue [#276](https://github.com/livecomposer/live-composer-page-builder/issues/276): Posts and Blog module filtering bug
 * Infobox inline-editor in "content": https://github.com/livecomposer/live-composer-page-builder/commit/a964e976b54e5e3bff498e5af861350beda61f04
-
 
 
 = 1.1.3 - August 19th 2016 =

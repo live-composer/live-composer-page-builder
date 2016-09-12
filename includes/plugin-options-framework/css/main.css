@@ -519,25 +519,30 @@ display: inline-block;
 }
 
 #new-products-coming .button-hero {
-        background: #9FE02C;
+    background: #9FE02C;
     border-color: #a8ea32;
     box-shadow: 0 2px 0 #2c8ac5;
     font-size: 18px;
+    line-height: 20px;
     height: auto;
     color: #2d400b;
-    padding: 4px 26px;
+    padding: 16px 26px 16px 56px;
     vertical-align: top;
     margin: 10px 0 0px;
+    position: relative;
     text-shadow: none;
     display: inline-block;
-    width: 30%;
+    max-width: 30%;
+    white-space: normal;
 }
 
 #new-products-coming .button-hero .dashicons {
-    display: inline-block;
     font-size: 150%;
-    margin-right: 14px;
+    left: 18px;
     vertical-align: text-top;
+    position: absolute;
+    top: 50%;
+    margin-top: -14px;
 }
 
 #new-products-coming .button-hero:active {
