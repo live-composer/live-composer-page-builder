@@ -57,9 +57,53 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div>
 <?php endif;?>
 
+
+<div class="dslc-panel" id="new-products-coming">
+	<div class="dslc-panel-content">
+		<h2><?php esc_attr_e( 'Upcoming Releases', 'live-composer-page-builder' ); ?></h2>
+		<p class="about-description"><?php _e( 'Get our paid extensions <b>half-price</b> on&nbsp;the&nbsp;day of&nbsp;release.', 'live-composer-page-builder' ); ?></p>
+		<a href="https://livecomposerplugin.com/halfprice-coupon/?utm_source=wp-admin&utm_medium=welcom-promo-block-herobutton&utm_campaign=50off-new-releases" class="button button-primary button-hero" target="_blank"><span class="dashicons dashicons-tickets"></span> Generate 50% OFF coupon</a>
+		<hr>
+
+		<div class="dslc-panel-column-container">
+			<div class="dslc-panel-column">
+				<span class="label"><?php _e( 'Premium Extension', 'live-composer-page-builder' ); ?></span>
+				<h3><?php esc_attr_e( 'WooCommerce Integration', 'live-composer-page-builder' ); ?></h3>
+				<h4><span class="dashicons dashicons-cart"></span> <?php _e( 'Drag and Drop E-Commerce', 'live-composer-page-builder' ); ?></h4>
+				<p><?php esc_attr_e( 'Create a fully customizable WooCoomerce website using drag and drop builder.', 'live-composer-page-builder' ); ?></p>
+				<!-- <p><span class="dashicons dashicons-yes"></span> <?php _e( 'Custom Design = Higher Conversion', 'live-composer-page-builder' ); ?></p> -->
+				<span class="price original"><?php _e( 'Regular Price: <b>$60</b>', 'live-composer-page-builder' ); ?></span><a href="https://livecomposerplugin.com/halfprice-coupon/?utm_source=wp-admin&utm_medium=welcom-promo-block-pricelink&utm_campaign=50off-new-releases" class="price promo" target="_blank"><?php _e( 'On Release Day: $29', 'live-composer-page-builder' ); ?></a>
+			</div>
+			<div class="dslc-panel-column dslc-panel-last">
+				<span class="label"><?php _e( 'Premium Extension', 'live-composer-page-builder' ); ?></span>
+				<h3><?php _e( "bbPress&nbsp;Forums Integration", 'live-composer-page-builder' ); ?></h3>
+				<h4><span class="dashicons dashicons-format-chat"></span> <?php _e( "New Level of&nbsp;Customization", 'live-composer-page-builder' ); ?></h4>
+				<p><?php _e( 'No other page builder provides this level of integration with bbPress. ', 'live-composer-page-builder' ); ?></p>
+				<span class="price original"><?php _e( 'Regular Price: <b>$40</b>', 'live-composer-page-builder' ); ?></span><a href="https://livecomposerplugin.com/halfprice-coupon/?utm_source=wp-admin&utm_medium=welcom-promo-block-pricelink&utm_campaign=50off-new-releases" class="price promo" target="_blank"><?php _e( 'On Release Day: $19', 'live-composer-page-builder' ); ?></a>
+			</div>
+			<div class="dslc-panel-column">
+				<span class="label"><?php _e( 'Premium Theme', 'live-composer-page-builder' ); ?></span>
+				<h3><?php _e( "Digital Marketer &amp;&nbsp;SEO&nbsp;Pro", 'live-composer-page-builder' ); ?></h3>
+				<h4><span class="dashicons dashicons-art"></span> <?php _e( "Flexible Drag and Drop Theme", 'live-composer-page-builder' ); ?></h4>
+				<p><?php _e( 'Specially designed for SEO, Digital Marketing Agencies and Social Media professionals.', 'live-composer-page-builder' ); ?></p>
+				<span class="price original"><?php _e( 'Regular Price: <b>$80</b>', 'live-composer-page-builder' ); ?></span><a href="https://livecomposerplugin.com/halfprice-coupon/?utm_source=wp-admin&utm_medium=welcom-promo-block-pricelink&utm_campaign=50off-new-releases" class="price promo" target="_blank"><?php _e( 'On Release Day: $39', 'live-composer-page-builder' ); ?></a>
+			</div>
+		</div>
+
+<!--
+		<img src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/livecomposer-mink-curious.png" class="mink-illustration">
+
+		<div style="text-align:center;">
+			<a href="//livecomposerplugin.com/live-composer-2-coming/?utm_source=wp-admin&utm_medium=lc2-iscoming-block&utm_campaign=bethefirsttogetit" class="button button-primary button-hero load-customize hide-if-no-customize" target="_blank"><span class="dashicons dashicons-tickets"></span> Generate 50% OFF coupon</a>
+		</div>
+-->
+
+	</div>
+</div>
+
 <div class="dslc-panel" id="keep-it-secure">
 	<div class="dslc-panel-content">
-		<h2><?php _e( 'Keep Your Website Secure', 'live-composer-page-builder' ); ?></h2>
+		<h2><span class="dashicons dashicons-lock"></span> <?php _e( 'Keep Your Website Secure', 'live-composer-page-builder' ); ?></h2>
 		<p class="about-description"><?php _e( 'Security updates', 'live-composer-page-builder' ); ?> &#8226; <?php _e( 'New features', 'live-composer-page-builder' ); ?> &#8226;  <?php _e( 'Extension releases', 'live-composer-page-builder' ); ?></p>
 
 		<div class="dslc-panel-column-container">
@@ -118,6 +162,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</div>
 </div>
 
+<!--
 <div class="dslc-panel" id="new-lc-coming">
 	<div class="dslc-panel-content">
 		<img src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/livecomposer-mink-curious.png" class="mink-illustration">
@@ -143,6 +188,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</div>
 	</div>
 </div>
+-->
 
 <br>
 <hr>

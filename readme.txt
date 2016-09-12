@@ -129,11 +129,15 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 
 == Changelog ==
 
-= 1.1.4 - August XXth 2016 =
+= 1.1.4 - September 12th 2016 =
 
 * [Please, report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
 * [You can download any previous version here](https://wordpress.org/plugins/live-composer-page-builder/developers/)
-* [See latest major changes in details with animated gifs and videos](https://livecomposerplugin.com/blog/live-composer-1-1-released/)
+* [See the latest major changes in details with animated gifs and videos](https://livecomposerplugin.com/blog/live-composer-1-1-released/)
+
+= Improved: =
+
+* Issue [#253](https://github.com/livecomposer/live-composer-page-builder/issues/253): Added animations for the ICON module.
 
 = Bug fixes: =
 
@@ -154,9 +158,6 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 * Issue [#198](https://github.com/livecomposer/live-composer-page-builder/issues/198): [JS] Inline Editor do not disappear on module CONFIRM click ( Firefox )
 * Infobox inline-editor in "content": https://github.com/livecomposer/live-composer-page-builder/commit/a964e976b54e5e3bff498e5af861350beda61f04
 
-= Other changes: =
-
-* Issue [#253](https://github.com/livecomposer/live-composer-page-builder/issues/253): Added animations for the ICON module.
 
 
 = 1.1.3 - August 19th 2016 =
@@ -191,6 +192,7 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 * Completely removed 'Modules Listing Order' setting from WP Admin > Live Composer > Settings
 * Issue [#181](https://github.com/livecomposer/live-composer-page-builder/issues/181): Fixed headers cover working area while editing page. From now Fixed / Absolute headers will looks like a regular header in editing more. If you want to see it fixed as on production, please click on "Hide Editor" button.
 * Changed limit for border width value (from 10 to 1000)
+
 
 
 
