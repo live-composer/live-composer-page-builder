@@ -478,7 +478,6 @@ class DSLC_Partners extends DSLC_Module {
 				'min' => 0,
 				'max' => 10,
 				'increment' => 1,
-				
 				'std' => '1',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -655,7 +654,7 @@ class DSLC_Partners extends DSLC_Module {
 					),
 					array(
 						'label' => __( 'Inside Thumbnail ( hover )', 'live-composer-page-builder' ),
-						'value' => 'inside'
+						'value' => 'inside',
 					),
 					array(
 						'label' => __( 'Inside Thumbnail ( always visible )', 'live-composer-page-builder' ),
@@ -738,7 +737,7 @@ class DSLC_Partners extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-partner-main',
+				'affect_on_change_el' => '.dslc-post',
 				'affect_on_change_rule' => 'border-top-left-radius,border-top-right-radius',
 				'min' => 0,
 				'max' => 100,
@@ -756,7 +755,7 @@ class DSLC_Partners extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-partner-main',
+				'affect_on_change_el' => '.dslc-post',
 				'affect_on_change_rule' => 'border-bottom-left-radius,border-bottom-right-radius',
 				'min' => 0,
 				'max' => 100,
@@ -817,6 +816,18 @@ class DSLC_Partners extends DSLC_Module {
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-partner-main',
 				'affect_on_change_rule' => 'text-align',
+				'section' => 'styling',
+				'tab' => __( 'Main', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Box Shadow', 'live-composer-page-builder' ),
+				'id' => 'css_main_box_shadow',
+				'std' => '',
+				'type' => 'box_shadow',
+				'wihtout_inner_shadow' => true,
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-post',
+				'affect_on_change_rule' => 'box-shadow',
 				'section' => 'styling',
 				'tab' => __( 'Main', 'live-composer-page-builder' ),
 			),

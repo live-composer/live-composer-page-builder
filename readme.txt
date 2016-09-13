@@ -141,6 +141,7 @@ Upcoming Releases:
 = Bug fixes: =
 
 * Issue [#297](https://github.com/livecomposer/live-composer-page-builder/issues/297): Can't change module width due to overlay problem with popup control.
+* Issue [#261](https://github.com/livecomposer/live-composer-page-builder/issues/261): FEATURE REQUEST: Shadows with blog module
 
 
 = 1.1.4 - September 12th 2016 =

@@ -1101,7 +1101,6 @@ class DSLC_Galleries extends DSLC_Module {
 				'min' => 0,
 				'max' => 10,
 				'increment' => 1,
-
 				'std' => '1',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1276,7 +1275,7 @@ class DSLC_Galleries extends DSLC_Module {
 						'label' => __( 'Bottom Right', 'live-composer-page-builder' ),
 						'value' => 'bottomright',
 					),
-				)
+				),
 			),
 			array(
 				'label' => __( 'Margin', 'live-composer-page-builder' ),
