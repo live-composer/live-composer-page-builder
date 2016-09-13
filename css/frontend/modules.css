@@ -1776,7 +1776,7 @@
 		box-shadow: none;
 		border-radius: none;
 		position: relative;
-		z-index: -1;
+		/*z-index: -1; – used this to make inner shadow working but it cause more issues */
 	}
 
 /**
