@@ -469,8 +469,32 @@ function dslc_module_options_show( moduleID ) {
 
 			jQuery('.dslca-module-edit-options-tabs').html( response.output_tabs );
 
+
+			var sectionsUsed = []; // – Array with tab ids to show for current module.
+
+			/**
+			 * Go through each option and check its tab property.
+			 * Fill sectionsUsed array with ids of the tabs to display.
+			 * We don't want to display tabs with no options inside.
+			 */
+			jQuery('.dslca-module-edit-options-inner .dslca-module-edit-option').each(function(){
+				var currentOptionSection = jQuery(this).data('section');
+
+				// Check if this section is in the list of tabs to show.
+				if ( sectionsUsed.indexOf(currentOptionSection) == -1 ) {
+					sectionsUsed.push(currentOptionSection);
+				}
+			});
+
+			var tabs_total = sectionsUsed.length;
+
+			for (var i = 0; i < tabs_total; i++) {
+				// Show the tabs used by the current module.
+				jQuery('.dslca-header .dslca-options-filter-hook[data-section="' + sectionsUsed[i] + '"]').show();
+			}
+
 			// Show the filter hooks
-			jQuery('.dslca-header .dslca-options-filter-hook').show();
+			// jQuery('.dslca-header .dslca-options-filter-hook').show();
 
 			// Trigger click on first filter hook
 			if ( jQuery('.dslca-module-edit-option[data-section="' + dslcDefaultSection + '"]').length ) {
