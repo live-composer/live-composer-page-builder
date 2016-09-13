@@ -145,6 +145,7 @@ Upcoming Releases:
 = Improved: =
 
 * Issue [#253](https://github.com/livecomposer/live-composer-page-builder/issues/253): Added animations for the ICON module.
+* Add Instagram as a social option to STAFF module. Thank you [Mario Zigliotto](https://github.com/mariozig).
 
 = Bug fixes: =
 
@@ -160,11 +161,32 @@ Upcoming Releases:
 * Issue [#233](https://github.com/livecomposer/live-composer-page-builder/issues/233): Module Downloads - Main -> Location contol is broken
 * Issue [#240](https://github.com/livecomposer/live-composer-page-builder/issues/240): [JS] tinyMCE multiple instances
 * Issue [#246](https://github.com/livecomposer/live-composer-page-builder/issues/246): [JS Bug] – Cannot read property 'init' of undefined
-* Issue [#249](https://github.com/livecomposer/live-composer-page-builder/issues/249): [JS] Copy/Paste does not work in-line
-* Issue [#260](https://github.com/livecomposer/live-composer-page-builder/issues/260): Chevrons doubling up in Navigation Module
+* Issue [#249](https://github.com/livecomposer/live-composer-page-builder/issues/249): [JS] Copy/Paste does not work in-line. Thank you [Luke Perrie](https://github.com/lukeperrie).
+* Issue [#260](https://github.com/livecomposer/live-composer-page-builder/issues/260): Chevrons doubling up in Navigation Module. Thank you [Luke Perrie](https://github.com/lukeperrie).
 * Issue [#262](https://github.com/livecomposer/live-composer-page-builder/issues/262): The LC templates are listed on WordPress search listing
 * Issue [#276](https://github.com/livecomposer/live-composer-page-builder/issues/276): Posts and Blog module filtering bug
 * Infobox inline-editor in "content": https://github.com/livecomposer/live-composer-page-builder/commit/a964e976b54e5e3bff498e5af861350beda61f04
+
+
+Thanks to the next contributors for helping with this update:
+
+* [Luke Perrie](https://github.com/lukeperrie)
+* [Mario Zigliotto](https://github.com/mariozig)
+* [tristanleboss](https://github.com/tristanleboss)
+* [Aleksej Vukomanovic](https://github.com/zutigrm)
+* [Deanphillips](https://github.com/Deanphillips)
+* [menachemshapiro](https://github.com/menachemshapiro)
+* [Slobodan Kustrimovic](https://github.com/BobaWebDev)
+* [branislavs](https://github.com/branislavs)
+* [galschjodt](https://github.com/galschjodt)
+* [tbenci](https://github.com/tbenci)
+* [elfomaniac](https://github.com/elfomaniac)
+* [Jessica Hawkins](https://github.com/jessicahawkins3344)
+* [Christian Seiler](https://github.com/Christian-Seiler)
+
+
+
+
 
 
 = 1.1.3 - August 19th 2016 =
@@ -213,9 +235,6 @@ Upcoming Releases:
 
 
 = 1.1.1 - August 17th 2016 =
-
-[Report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
-[See latest changes in details with animated gifs and videos](https://livecomposerplugin.com/blog/live-composer-1-1-released/)
 
 = Bug fixes: =
 
