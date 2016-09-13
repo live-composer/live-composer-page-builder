@@ -3,12 +3,16 @@
 	text-decoration: none;
 }
 
+
+ 	#dslc-content .dslc-post {
+		overflow: hidden; /* <- Makes sure border radius crops inner content. */
+	}
+
 /**
  * CPT MODULE
  */
 
  	#dslc-content .dslc-cpt-post {
-
 	}
 
 		#dslc-content .dslc-cpt-post-main {
@@ -1623,7 +1627,7 @@
  */
 
 #dslc-content .dslc-button {
-	overflow: hidden;
+	/*overflow: hidden;*/ /* <- Crops box-shadow. Not sure why we have it here. */
 }
 
 	#dslc-content .dslc-button a {

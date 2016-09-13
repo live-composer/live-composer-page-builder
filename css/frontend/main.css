@@ -168,7 +168,8 @@ body.rtl .dslc-last-col {
 }
 
 .dslc-posts {
-	overflow: hidden; /* Eliminate scroller ( due to negat. margin and width increase ) */
+	/*overflow: hidden;  Eliminate scroller ( due to negat. margin and width increase ) */
+	/* <- disabled to not affect box-shadow. Carousels have their own overflow hidden. */
 }
 
 .dslc-carousel .dslc-col,
@@ -280,6 +281,11 @@ body.rtl .dslc-last-col {
 .dslc-carousel {
 	opacity: 0;
 	max-height: 100px;
+	overflow: hidden; /* Moved here from .owl-wrapper-outer */
+}
+
+.dslc-carousel.owl-carousel .owl-wrapper-outer {
+	overflow: visible; /* Do not crop box-shadows. */
 }
 
 

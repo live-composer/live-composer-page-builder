@@ -146,6 +146,7 @@ Upcoming Releases:
 
 * Issue [#253](https://github.com/livecomposer/live-composer-page-builder/issues/253): Added animations for the ICON module.
 * Add Instagram as a social option to STAFF module. Thank you [Mario Zigliotto](https://github.com/mariozig).
+* Issue [#261](https://github.com/livecomposer/live-composer-page-builder/issues/261): Shadows for posts in the BLOG and POSTS module
 
 = Bug fixes: =
 

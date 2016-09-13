@@ -686,10 +686,20 @@ function dslc_ajax_display_module_options( $atts ) {
 
 						<div class="dslca-module-edit-option-box-shadow-wrapper">
 
+							<?php
+
+							$show_inner_shadow = true;
+
+							if ( isset( $module_option['wihtout_inner_shadow'] ) && true === $module_option['wihtout_inner_shadow'] ) {
+								$show_inner_shadow = false;
+							}
+
+							if ( $show_inner_shadow ) : ?>
 							<div class="dslca-module-edit-option-box-shadow-single">
 								<span class="dslca-module-edit-option-checkbox-hook"><?php esc_html_e( 'Inner', 'live-composer-page-builder' ); ?><span class="dslca-icon <?php if ( $box_shadow_inset_val == 'inset' ) echo 'dslc-icon-check'; else echo 'dslc-icon-check-empty'; ?>"></span></span>
 								<input type="checkbox" class="dslca-module-edit-field-checkbox dslca-module-edit-option-box-shadow-inset" <?php if ( $box_shadow_inset_val == 'inset' ) echo 'checked="checked"'; ?> />
 							</div>
+							<?php endif; ?>
 							<div class="dslca-module-edit-option-box-shadow-single">
 								<span><?php esc_html_e( 'Hor', 'live-composer-page-builder' ); ?></span><input class="dslca-module-edit-option-box-shadow-hor" step="0.1" type="number" value="<?php echo $box_shadow_hor_val; ?>" />
 							</div>
