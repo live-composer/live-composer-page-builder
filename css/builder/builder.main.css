@@ -1484,6 +1484,10 @@ body a:focus {
 	min-height: 30px;
 }
 
+.dslc-module-front:hover {
+	z-index: 9999;
+}
+
 body.module-editing-in-progress .dslc-module-front:not(.dslca-module-being-edited),
 body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-section-being-edited) {
 	opacity: .5;

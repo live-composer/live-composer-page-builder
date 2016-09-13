@@ -3,7 +3,7 @@ Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page, page builder plugin, drag-n-drop page builder
 Requires at least: 4.3
 Tested up to: 4.6
-Stable tag: 1.1.3
+Stable tag: 1.1.4
 License: GPLv3
 
 Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
@@ -134,6 +134,13 @@ Upcoming Releases:
 * PREMIUM EXTENSION: WooCommerce Integration > [Get 50% off coupon](https://livecomposerplugin.com/halfprice-coupon/?utm_source=changelog)
 * PREMIUM EXTENSION: bbPress Forums Integration > [Get 50% off coupon](https://livecomposerplugin.com/halfprice-coupon/?utm_source=changelog)
 * PREMIUM THEME: Digital Marketer & SEO Theme > [Get 50% off coupon](https://livecomposerplugin.com/halfprice-coupon/?utm_source=changelog)
+
+
+= 1.1.5 - September XXth 2016 =
+
+= Bug fixes: =
+
+* Issue [#297](https://github.com/livecomposer/live-composer-page-builder/issues/297): Can't change module width due to overlay problem with popup control.
 
 
 = 1.1.4 - September 12th 2016 =
