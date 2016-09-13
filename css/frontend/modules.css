@@ -1771,6 +1771,8 @@
 		vertical-align: middle;
 		box-shadow: none;
 		border-radius: none;
+		position: relative;
+		z-index: -1;
 	}
 
 /**
