@@ -11,16 +11,17 @@ function dslc_st_template_switch() {
 	global $post;
 	global $dslc_post_types;
 
-	// If there's no post, stop execution
+	// If there's no post, stop execution.
 	if ( ! isset( $post ) )
 		return;
 
-	// If the post is not supporting templates or it's not a template itself, stop execution
+	// If the post is not supporting templates or it's not a template itself, stop execution.
+	// @todo: Rewrite this condition.
 	if ( is_singular( $dslc_post_types ) || is_singular( 'dslc_templates' ) ) { } else {
 		return;
 	}
 
-	// If the currently shown page is the template CPT
+	// If the currently shown page is the template CPT.
 	if ( $post->post_type == 'dslc_templates' ) {
 
 		// Get template base
@@ -85,14 +86,13 @@ function dslc_st_template_switch() {
 				$return_template = DS_LIVE_COMPOSER_ABS . '/templates/dslc-single.php';
 			}
 
-			// Redirect
+			// Redirect.
 			include( $return_template );
 
-			// Bye bye
-        	exit();
+			// Bye bye.
+			exit();
 
 		}
-
 	}
 
 } add_action( 'template_redirect', 'dslc_st_template_switch' );
@@ -100,7 +100,6 @@ function dslc_st_template_switch() {
 /**
  * Add columns to the Templates Listing table.
  */
-
 function dslc_templates_col_title( $defaults ) {
 
 	unset( $defaults['date'] );

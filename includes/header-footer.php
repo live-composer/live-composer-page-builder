@@ -588,10 +588,18 @@ function dslc_hf_get_header( $post_ID = false ) {
 		// If editor active? Add a link to the header editing.
 		if ( dslc_is_editor_active( 'access' ) ) {
 
-			$header_link = DSLC_EditorInterface::get_editor_link( $header_footer['header'] );
+			$header_link = DSLC_EditorInterface::get_editor_link_url( $header_footer['header'] );
 
 			// Set the HTML for the edit overlay.
-			$append = '<div class="dslc-hf-block-overlay"><a target="_blank" href="' . $header_link . '" class="dslc-hf-block-overlay-button dslca-link">' . __( 'Edit Header','live-composer-page-builder' ) . '</a></div>';
+			$append = '<div class="dslc-hf-block-overlay"><a target="_blank" href="' . $header_link . '" class="dslc-hf-block-overlay-button dslca-link">' . __( 'Edit Header','live-composer-page-builder' ) . '</a>';
+
+			if ( 'fixed' === $header_position  ) {
+				$append .= ' <span class="dslc-hf-block-overlay-text">' . __( 'To preview FIXED positioning click on "Hide Editor" button.','live-composer-page-builder' ) . '</span>';
+			} elseif ( 'absolute' === $header_position  ) {
+				$append .= ' <span class="dslc-hf-block-overlay-text">' . __( 'To preview ABSOLUTE positioning click on "Hide Editor" button.','live-composer-page-builder' ) . '</span>';
+			}
+
+			$append .= '</div>';
 
 		}
 
@@ -656,10 +664,18 @@ function dslc_hf_get_footer( $post_ID = false ) {
 		// If editor active? Add a link to the footer editing.
 		if ( dslc_is_editor_active( 'access' ) ) {
 
-			$footer_link = DSLC_EditorInterface::get_editor_link( $header_footer['footer'] );
+			$footer_link = DSLC_EditorInterface::get_editor_link_url( $header_footer['footer'] );
 
 			// Set the HTML for the edit overlay.
-			$append = '<div class="dslc-hf-block-overlay"><a target="_blank" href="' . $footer_link . '" class="dslc-hf-block-overlay-button dslca-link">' . __( 'Edit Footer','live-composer-page-builder' ) . '</a></div>';
+			$append = '<div class="dslc-hf-block-overlay"><a target="_blank" href="' . $footer_link . '" class="dslc-hf-block-overlay-button dslca-link">' . __( 'Edit Footer','live-composer-page-builder' ) . '</a>';
+
+			if ( 'fixed' === $footer_position  ) {
+				$append .= ' <span class="dslc-hf-block-overlay-text">' . __( 'To preview FIXED positioning click on "Hide Editor" button.','live-composer-page-builder' ) . '</span>';
+			} elseif ( 'absolute' === $footer_position  ) {
+				$append .= ' <span class="dslc-hf-block-overlay-text">' . __( 'To preview ABSOLUTE positioning click on "Hide Editor" button.','live-composer-page-builder' ) . '</span>';
+			}
+
+			$append .= '</div>';
 
 		}
 

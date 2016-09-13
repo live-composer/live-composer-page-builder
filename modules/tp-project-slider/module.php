@@ -22,6 +22,21 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 
 	}
 
+	/**
+	 * Module options.
+	 * Function build array with all the module functionality and styling options.
+	 * Based on this array Live Composer builds module settings panel.
+	 * – Every array inside $dslc_options means one option = one control.
+	 * – Every option should have unique (for this module) id.
+	 * – Options divides on "Functionality" and "Styling".
+	 * – Styling options start with css_XXXXXXX
+	 * – Responsive options start with css_res_t_ (Tablet) or css_res_p_ (Phone)
+	 * – Options can be hidden.
+	 * – Options can have a default value.
+	 * – Options can request refresh from server on change or do live refresh via CSS.
+	 *
+	 * @return array All the module options in array.
+	 */
 	function options() {
 
 		$dslc_options = array(
@@ -148,9 +163,8 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_border_width',
 				'min' => 0,
-				'max' => 10,
+				'max' => 1000,
 				'increment' => 1,
-				
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -202,7 +216,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'max' => 100,
 				'increment' => 1,
 				'section' => 'styling',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Border Radius - Bottom', 'live-composer-page-builder' ),
@@ -219,7 +233,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'max' => 100,
 				'increment' => 1,
 				'section' => 'styling',
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
@@ -308,9 +322,8 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_slider_border_width',
 				'min' => 0,
-				'max' => 10,
+				'max' => 1000,
 				'increment' => 1,
-				
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -446,9 +459,8 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_slider_item_border_width',
 				'min' => 0,
-				'max' => 10,
+				'max' => 1000,
 				'increment' => 1,
-				
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -611,7 +623,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'affect_on_change_rule' => 'margin',
 				'section' => 'styling',
 				'tab' => __( 'Navigation', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Size', 'live-composer-page-builder' ),
@@ -623,7 +635,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'affect_on_change_rule' => 'width,height',
 				'section' => 'styling',
 				'tab' => __( 'Navigation', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Spacing', 'live-composer-page-builder' ),
@@ -635,7 +647,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'affect_on_change_rule' => 'margin-left,margin-right',
 				'section' => 'styling',
 				'tab' => __( 'Navigation', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 
 			/**
@@ -778,7 +790,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'affect_on_change_rule' => 'margin',
 				'section' => 'responsive',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Nav - Size', 'live-composer-page-builder' ),
@@ -790,7 +802,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'affect_on_change_rule' => 'width,height',
 				'section' => 'responsive',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Nav - Spacing', 'live-composer-page-builder' ),
@@ -802,7 +814,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'affect_on_change_rule' => 'margin-left,margin-right',
 				'section' => 'responsive',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 
 			/**
@@ -945,7 +957,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'affect_on_change_rule' => 'margin',
 				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Nav - Size', 'live-composer-page-builder' ),
@@ -957,7 +969,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'affect_on_change_rule' => 'width,height',
 				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Nav - Spacing', 'live-composer-page-builder' ),
@@ -969,7 +981,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'affect_on_change_rule' => 'margin-left,margin-right',
 				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-				'ext' => 'px'
+				'ext' => 'px',
 			),
 
 
@@ -981,7 +993,12 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 		return apply_filters( 'dslc_module_options', $dslc_options, $this->module_id );
 
 	}
-
+	/**
+	 * Module HTML output.
+	 *
+	 * @param  array $options Module options to fill the module template.
+	 * @return void
+	 */
 	function output( $options ) {
 
 		global $dslc_active;

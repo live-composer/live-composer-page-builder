@@ -1,5 +1,5 @@
 /**
- * builder.main.css gets loaded in the editing preview iframe
+ * builder.main.css gets loaded for both WP Admin and Preview Iframe Area
  * ONLY when the Live Compose is in active editing mode.
  */
 
@@ -23,10 +23,26 @@ body.toplevel_page_livecomposer_editor {
 	background: #464646;
 }
 
+/* Temporary and dirty fix for bug with wrong position for TinyMCE link inline popup */
+body div.mce-inline-toolbar-grp.mce-arrow-up {
+	margin-top: 48px;
+}
+
 /* Re-enable text selection for text-based modules */
 
 .inline-editor,
-.inline-editor * {
+.inline-editor *,
+.dslca-editable-content,
+.dslca-editable-content *,
+div[contenteditable="true"],
+span[contenteditable="true"],
+a[contenteditable="true"],
+h1[contenteditable="true"],
+h2[contenteditable="true"],
+h3[contenteditable="true"],
+h4[contenteditable="true"],
+h5[contenteditable="true"],
+h6[contenteditable="true"] {
 	-webkit-touch-callout: text;
 	-webkit-user-select: text;
 	-khtml-user-select: text;
@@ -1477,6 +1493,10 @@ body a:focus {
 .dslc-module-front {
 	position: relative;
 	min-height: 30px;
+}
+
+.dslc-module-front:hover {
+	z-index: 9999;
 }
 
 body.module-editing-in-progress .dslc-module-front:not(.dslca-module-being-edited),
@@ -3398,6 +3418,11 @@ span.dslca-manage-action:hover * {
 }
 
 .dslc-hf-block-overlay {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -3416,20 +3441,21 @@ span.dslca-manage-action:hover * {
 	opacity: 1;
 }
 
-	.dslc-hf-block-overlay-button {
-		text-align: center;
-		position: absolute;
-		left: 0;
-		right: 0;
-		top: 45%;
+	.dslc-hf-block-overlay-button,
+	.dslc-hf-block-overlay-text {
 		display: inline-block;
 		color: #fff;
 		font-size: 20px;
-		font-family: 'Open Sans', sans-serif;
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 		text-decoration: none;
-		font-weight: bold;
-		/* text-transform: uppercase; */
 	}
+
+	.dslc-hf-block-overlay-text {
+		font-size: 13px;
+		opacity: .5;
+		margin-top: 5px;
+	}
+
 
 /**
  * Composer Hidden
@@ -3438,7 +3464,7 @@ span.dslca-manage-action:hover * {
 body.dslca-composer-hidden .dslc-module-front,
 body.dslca-composer-hidden .dslc-modules-area,
 body.dslca-composer-hidden .dslc-modules-section {
-	outline: none !important;
+	box-shadow: none !important;
 	border: none !important;
 }
 
@@ -4182,4 +4208,12 @@ body.dslca-new-module-drag-in-progress .lc-scroll-bottom-area{
 	z-index: 99999;
 	width: 100%;
 	height: 140px;
+}
+
+div#scroller-stopper {
+    position: absolute;
+    bottom: -33px;
+    left: 0px;
+    width: 100%;
+    height: 83px;
 }

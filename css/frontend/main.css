@@ -20,10 +20,18 @@
 	z-index: 999999;
 }
 
-body.admin-bar #dslc-header.dslc-header-pos-fixed,
-body.admin-bar #dslc-header.dslc-header-pos-absolute {
-    top: 32px;
+/*body.admin-bar:not(.dslca-enabled) #dslc-header.dslc-header-pos-absolute, */
+body.admin-bar:not(.dslca-enabled) #dslc-header.dslc-header-pos-fixed {
+   top: 32px;
 }
+
+
+/* Disable fixed and absolute header in editing mode */
+body.dslca-enabled:not(.dslca-composer-hidden) #dslc-header.dslc-header-pos-fixed,
+body.dslca-enabled:not(.dslca-composer-hidden) #dslc-header.dslc-header-pos-absolute {
+   position: relative;
+}
+
 
 #dslc-footer {
 	position: relative;
@@ -66,6 +74,7 @@ body.admin-bar #dslc-header.dslc-header-pos-absolute {
 
 .dslc-module-front {
 	position: relative;
+	z-index: 0;
 }
 
 /**
@@ -159,7 +168,8 @@ body.rtl .dslc-last-col {
 }
 
 .dslc-posts {
-	overflow: hidden; /* Eliminate scroller ( due to negat. margin and width increase ) */
+	/*overflow: hidden;  Eliminate scroller ( due to negat. margin and width increase ) */
+	/* <- disabled to not affect box-shadow. Carousels have their own overflow hidden. */
 }
 
 .dslc-carousel .dslc-col,
@@ -271,6 +281,11 @@ body.rtl .dslc-last-col {
 .dslc-carousel {
 	opacity: 0;
 	max-height: 100px;
+	overflow: hidden; /* Moved here from .owl-wrapper-outer */
+}
+
+.dslc-carousel.owl-carousel .owl-wrapper-outer {
+	overflow: visible; /* Do not crop box-shadows. */
 }
 
 
@@ -591,7 +606,14 @@ body.rtl .dslc-last-col {
 		display: none;
 	}
 
-.dslc-init-topleft {
+
+.dslc-init-center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.dslc-init-topleft .dslc-init-target {
 	position: absolute !important;
 	top: 0 !important;
 	left: 0 !important;
@@ -599,7 +621,7 @@ body.rtl .dslc-last-col {
 	right: auto !important;
 }
 
-.dslc-init-topright {
+.dslc-init-topright .dslc-init-target {
 	position: absolute !important;
 	top: 0 !important;
 	right: 0 !important;
@@ -607,7 +629,7 @@ body.rtl .dslc-last-col {
 	left: auto !important
 }
 
-.dslc-init-bottomleft {
+.dslc-init-bottomleft .dslc-init-target {
 	position: absolute !important;
 	bottom: 0 !important;
 	left: 0 !important;
@@ -615,12 +637,44 @@ body.rtl .dslc-last-col {
 	right: auto !important;
 }
 
-.dslc-init-bottomright {
+.dslc-init-bottomright .dslc-init-target {
 	position: absolute !important;
 	bottom: 0 !important;
 	right: 0 !important;
 	top: auto !important;
 	left: auto !important;
+}
+
+#dslc-content .dslc-products .dslc-product-thumb .dslc-init-topleft {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: auto;
+	right: auto;
+}
+
+#dslc-content .dslc-products .dslc-product-thumb .dslc-init-topright {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: auto;
+	left: auto;
+}
+
+#dslc-content .dslc-products .dslc-product-thumb .dslc-init-bottomleft {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	top: auto;
+	right: auto;
+}
+
+#dslc-content .dslc-products .dslc-product-thumb .dslc-init-bottomright {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	top: auto;
+	left: auto;
 }
 
 /**
@@ -1041,11 +1095,6 @@ body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-post-thumb .dslc-o
 }
 
 
-#dslc-header.dslca-header-low-z-index,
-.dslca-drag-in-progress #dslc-header {
-	z-index: 0;
-}
-
 #dslc-content {
 	position: relative;
 }
@@ -1072,6 +1121,17 @@ a img.aligncenter { display: block; margin-left: auto; margin-right: auto }
 .wp-caption img { border: 0 none; height: auto; margin:0; max-width: 98.5%; padding:0; width: auto; }
 .wp-caption p.wp-caption-text { font-size:11px; line-height:17px; margin:0; padding:0 4px 5px; }
 .gallery-caption { font-weight: bold; }
+
+
+.dslc-content strong,
+.dslc-content b {
+	font-weight: bolder;
+}
+
+.dslc-content i,
+.dslc-content em {
+	font-style: italic;
+}
 
 /**
  * ----------------------------------------------------------------------

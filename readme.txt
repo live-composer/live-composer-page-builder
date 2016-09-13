@@ -3,7 +3,7 @@ Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page, page builder plugin, drag-n-drop page builder
 Requires at least: 4.3
 Tested up to: 4.6
-Stable tag: 1.1.2
+Stable tag: 1.1.4
 License: GPLv3
 
 Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
@@ -129,35 +129,133 @@ The Page Builder Sandwich available on WordPress.org is a light version of Page 
 
 == Changelog ==
 
-= 1.1.3 - August XXth 2016 =
+Upcoming Releases:
 
-* [Report any bugs on GitHub](https://github.com/livecomposer/Live-Composer/issues/)
-* [See latest changes in details with animated gifs and videos](https://livecomposerplugin.com/blog/live-composer-1-1-released/)
+* PREMIUM EXTENSION: WooCommerce Integration > [Get 50% off coupon](https://livecomposerplugin.com/halfprice-coupon/?utm_source=changelog)
+* PREMIUM EXTENSION: bbPress Forums Integration > [Get 50% off coupon](https://livecomposerplugin.com/halfprice-coupon/?utm_source=changelog)
+* PREMIUM THEME: Digital Marketer & SEO Theme > [Get 50% off coupon](https://livecomposerplugin.com/halfprice-coupon/?utm_source=changelog)
+
+* [Please, report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
+* [You can download any previous version here](https://wordpress.org/plugins/live-composer-page-builder/developers/)
+* [See the latest major changes in details with animated gifs and videos](https://livecomposerplugin.com/blog/live-composer-1-1-released/)
+
+= 1.1.5 - September XXth 2016 =
 
 = Bug fixes: =
 
-* Issue [#174](https://github.com/livecomposer/Live-Composer/issues/174): Click "Edit template" in WP Admin on CPT listing is broken
+* Issue [#297](https://github.com/livecomposer/live-composer-page-builder/issues/297): Can't change module width due to overlay problem with popup control.
+* Image module: background color overlays the image.
+
+= For developers: =
+
+* Developers now have a possibility to create custom sections in the modules.
+'section' => 'some-custom-section-id',
+
+= Thanks to the next contributors for helping with this update: =
+
+* []()
+
+
+
+
+
+= 1.1.4 - September 12th 2016 =
+
+= Improved: =
+
+* Issue [#253](https://github.com/livecomposer/live-composer-page-builder/issues/253): Added animations for the ICON module.
+* Add Instagram as a social option to STAFF module. Thank you [Mario Zigliotto](https://github.com/mariozig).
+* Issue [#261](https://github.com/livecomposer/live-composer-page-builder/issues/261): Shadows for posts in the BLOG and POSTS module
+
+= Bug fixes: =
+
+* [JS Bug](https://wordpress.org/support/topic/js-error-when-editing?replies=1#post-8788982): TypeError: a.html(...) is undefined
+* Issue [#198](https://github.com/livecomposer/live-composer-page-builder/issues/198): [JS] Inline Editor do not disappear on module CONFIRM click ( Firefox )
+* Issue [#207](https://github.com/livecomposer/live-composer-page-builder/issues/207): [JS] Cick on module (in the modules list) freezes the Live Composer
+* Issue [#223](https://github.com/livecomposer/live-composer-page-builder/issues/223): Link to editing archive listing template is broken.
+* Issue [#224](https://github.com/livecomposer/live-composer-page-builder/issues/224): Posts Module showing error when Media post type selected.
+* Issue [#225](https://github.com/livecomposer/live-composer-page-builder/issues/225): WooCommerce Module – settings broken for the title and price position.
+* Issue [#226](https://github.com/livecomposer/live-composer-page-builder/issues/226): Galleries Module – Styling -> Count -> Position is not work.
+* Issue [#228](https://github.com/livecomposer/live-composer-page-builder/issues/228): Grids of posts with masonry grid will not refresh the grid properly on options change.
+* Issue [#232](https://github.com/livecomposer/live-composer-page-builder/issues/232): Broken Resize Height Control
+* Issue [#233](https://github.com/livecomposer/live-composer-page-builder/issues/233): Module Downloads - Main -> Location contol is broken
+* Issue [#240](https://github.com/livecomposer/live-composer-page-builder/issues/240): [JS] tinyMCE multiple instances
+* Issue [#246](https://github.com/livecomposer/live-composer-page-builder/issues/246): [JS Bug] – Cannot read property 'init' of undefined
+* Issue [#249](https://github.com/livecomposer/live-composer-page-builder/issues/249): [JS] Copy/Paste does not work in-line. Thank you [Luke Perrie](https://github.com/lukeperrie).
+* Issue [#260](https://github.com/livecomposer/live-composer-page-builder/issues/260): Chevrons doubling up in Navigation Module. Thank you [Luke Perrie](https://github.com/lukeperrie).
+* Issue [#262](https://github.com/livecomposer/live-composer-page-builder/issues/262): The LC templates are listed on WordPress search listing
+* Issue [#276](https://github.com/livecomposer/live-composer-page-builder/issues/276): Posts and Blog module filtering bug
+* Issue [#279](https://github.com/livecomposer/live-composer-page-builder/issues/279): Module Image - Box shadow ( Inner ) does not work
+* Infobox inline-editor in "content": https://github.com/livecomposer/live-composer-page-builder/commit/a964e976b54e5e3bff498e5af861350beda61f04
+
+
+Thanks to the next contributors for helping with this update:
+
+* [Luke Perrie](https://github.com/lukeperrie)
+* [Mario Zigliotto](https://github.com/mariozig)
+* [tristanleboss](https://github.com/tristanleboss)
+* [Aleksej Vukomanovic](https://github.com/zutigrm)
+* [Deanphillips](https://github.com/Deanphillips)
+* [menachemshapiro](https://github.com/menachemshapiro)
+* [Slobodan Kustrimovic](https://github.com/BobaWebDev)
+* [branislavs](https://github.com/branislavs)
+* [galschjodt](https://github.com/galschjodt)
+* [tbenci](https://github.com/tbenci)
+* [elfomaniac](https://github.com/elfomaniac)
+* [Jessica Hawkins](https://github.com/jessicahawkins3344)
+* [Christian Seiler](https://github.com/Christian-Seiler)
+
+
+
+
+
+
+= 1.1.3 - August 19th 2016 =
+
+= Bug fixes: =
+
+* Issue [#174](https://github.com/livecomposer/live-composer-page-builder/issues/174): Click "Edit template" in WP Admin on CPT listing is broken
 * Problem with border settings control. If set to 'none none none none' it will break.
+* Issue [#186](https://github.com/livecomposer/live-composer-page-builder/issues/186): Version 1.1+ problem with post archive templates, post styling is missing
+* Issue [#182](https://github.com/livecomposer/live-composer-page-builder/issues/182): Make sure disabled modules (WP Admin > Live Composer > Settings > Feature Control) do not show in list of the modules available for drag and drop.
+* Issue [#170](https://github.com/livecomposer/live-composer-page-builder/issues/170): Load Templates section is not scrollable anymore
+* Issue [#178](https://github.com/livecomposer/live-composer-page-builder/issues/178): TinyMCE inline link popup has a wrong position.
+* Issue [#172](https://github.com/livecomposer/live-composer-page-builder/issues/172): Element Titles cannot be changed in Safari on Mac
+* Issue [#208](https://github.com/livecomposer/live-composer-page-builder/issues/208): Responsive settings do not work for THE CONTENT module
+* Issue [#203](https://github.com/livecomposer/live-composer-page-builder/issues/203): Responsive line-height settings do not work in HTML module
+* Issue [#196](https://github.com/livecomposer/live-composer-page-builder/issues/196): Uncaught Error – cannot call methods on sortable prior to initialization; attempted to call method 'option'
+* Issue [#202](https://github.com/livecomposer/live-composer-page-builder/issues/202): Inline Editor – Bold, Italic text styling do not apply in some themes.
+* Issue [#193](https://github.com/livecomposer/live-composer-page-builder/issues/193): Navigation Module – Chevron not showing when enabled in navigation module
+* Issue [#276](https://github.com/livecomposer/live-composer-page-builder/issues/276): Post Filters – "All" button instead showing all the posts, is hiding them at all
+
+* Presets: Fixed presets auto-reload on module options change. (Thank you Paul!)
+* Presets: Removed Infobox > Image and Infobox > Image Url form synchronization. (Thank you Paul!)
+* Post Grids: Wrong post title centering over thumbnail. (Thank you Jacob!)
+
+= For developers: =
+
+* New filter added 'dslc_filter_modules'. Use it to enable/disable/sort/rename registered modules.
+* Removed dslc_sort_alphabetically function.
+
+= Other changes: =
+
+* Completely removed 'Modules Listing Order' setting from WP Admin > Live Composer > Settings
+* Issue [#181](https://github.com/livecomposer/live-composer-page-builder/issues/181): Fixed headers cover working area while editing page. From now Fixed / Absolute headers will looks like a regular header in editing more. If you want to see it fixed as on production, please click on "Hide Editor" button.
+* Changed limit for border width value (from 10 to 1000)
 
 
 
 
 = 1.1.2 - August 17th 2016 =
 
-* [Report any bugs on GitHub](https://github.com/livecomposer/Live-Composer/issues/)
-* [See latest changes in details with animated gifs and videos](https://livecomposerplugin.com/blog/live-composer-1-1-released/)
-
 = Bug fixes: =
 
-* Issue [#169](https://github.com/livecomposer/Live-Composer/issues/169) + [#166](https://github.com/livecomposer/Live-Composer/issues/166): Drag & Drop broken due to JS error (Uncaught TypeError: a.addEventListener is not a function...)
+* Issue [#169](https://github.com/livecomposer/live-composer-page-builder/issues/169) + [#166](https://github.com/livecomposer/live-composer-page-builder/issues/166): Drag & Drop broken due to JS error (Uncaught TypeError: a.addEventListener is not a function...)
 
 
 
 
 = 1.1.1 - August 17th 2016 =
-
-[Report any bugs on GitHub](https://github.com/livecomposer/Live-Composer/issues/)
-[See latest changes in details with animated gifs and videos](https://livecomposerplugin.com/blog/live-composer-1-1-released/)
 
 = Bug fixes: =
 

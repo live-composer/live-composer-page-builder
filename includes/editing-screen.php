@@ -134,6 +134,10 @@ function dslc_editing_screen_head() {
 
 	$screen = get_current_screen();
 
+	if ( ! $screen ) {
+		return;
+	}
+
 	// Proceed only if current page is Live Composer editing page in WP Admin.
 	if ( 'toplevel_page_livecomposer_editor' !== $screen->id || ! current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 		return;
@@ -235,11 +239,11 @@ add_action( 'wp_head', 'dslc_preview_area_head' );
  *
  * @since 1.1
  */
-function dslc_editing_screen_title() {
+function dslc_editing_screen_title($title) {
 	$screen = get_current_screen();
 
 	if ( 'toplevel_page_livecomposer_editor' !== $screen->id || ! isset( $_GET['page_id'] ) ) {
-		return;
+		return $title;
 	}
 
 	$title = 'Edit: ' . get_the_title( intval( $_GET['page_id'] ) );

@@ -93,7 +93,38 @@ function dslc_register_modules() {
 	do_action( 'dslc_hook_register_modules' );
 	do_action( 'dslc_hook_unregister_modules' );
 
+	// Array that holds all active modules.
+	global $dslc_var_modules;
+
+	// Developers can filter list of available modules.
+	$dslc_var_modules = apply_filters( 'dslc_filter_modules', $dslc_var_modules );
+
 } add_action( 'init', 'dslc_register_modules', 1 );
+
+
+/**
+ * Remove non-active modules form the list of all modules.
+ *
+ * @param  array $dslc_var_modules Original list of active modules.
+ * @return array                   Modified list of active modules.
+ * @since 1.1.3
+ */
+function dslc_filter_disabled_modules( $dslc_var_modules ) {
+
+	foreach ( $dslc_var_modules as $key => $dslc_module ) {
+
+		// The ID of the module.
+		$module_id = $dslc_module['id'];
+
+		// Check if active?
+		if ( ! dslc_is_module_active( $module_id ) ) {
+			unset( $dslc_var_modules[ $key ] );
+		}
+	}
+
+	return $dslc_var_modules;
+
+} add_filter( 'dslc_filter_modules', 'dslc_filter_disabled_modules', 10 );
 
 
 /**
@@ -129,9 +160,7 @@ function dslc_register_module( $module_id ) {
 			'icon' => $module_instance->module_icon,
 			'origin' => $module_instance->module_category,
 		);
-
 	}
-
 }
 
 /**
@@ -428,6 +457,13 @@ function dslc_body_class( $classes ) {
 
 	if ( $has_lc_header_footer ) {
 		$classes[] = 'dslc-page-has-hf';
+	}
+
+	global $dslc_active;
+
+	if ( $dslc_active && dslc_current_user_can( 'save' ) ) {
+		$classes[] = 'dslca-enabled';
+		$classes[] = 'dslca-drag-not-in-progress';
 	}
 
 	// If responsive disabled append class.

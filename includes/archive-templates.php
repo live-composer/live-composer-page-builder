@@ -123,18 +123,27 @@ function dslc_search_template_redirect( $search_template ) {
  *
  * @since 1.0
  */
-function dslc_404_template_redirect( $not_found_template ) {
+function dslc_404_template_redirect( $template ) {
 
-	$template = dslc_get_option( '404_page', 'dslc_plugin_options_archives' );
+	if ( is_404() ) {
 
-	if ( ! $template || 'none' === $template ) {
+		$template = dslc_get_option( '404_page', 'dslc_plugin_options_archives' );
+
+		if ( ! $template || 'none' === $template ) {
+			return $template;
+		}
+
+		$not_found_template = DS_LIVE_COMPOSER_ABS . '/templates/dslc-404.php';
+
 		return $not_found_template;
 	}
 
-	$not_found_template = DS_LIVE_COMPOSER_ABS . '/templates/dslc-404.php';
-	return $not_found_template;
+	return $template;
 
-} add_filter( '404_template', 'dslc_404_template_redirect' );
+} add_filter( 'template_include', 'dslc_404_template_redirect' );
+// add_filter( '404_template', 'dslc_404_template_redirect' );
+
+
 
 /**
  * Register 'Archives and Search' options panel fields.
@@ -145,7 +154,6 @@ function dslc_404_template_redirect( $not_found_template ) {
 function dslc_archive_template_init() {
 
 	global $dslc_plugin_options;
-	global $dslc_var_modules;
 	global $dslc_post_types;
 
 	$opts = array();

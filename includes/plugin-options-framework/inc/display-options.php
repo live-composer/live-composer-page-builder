@@ -197,7 +197,7 @@ function dslc_plugin_option_display_list( $option ) {
 		<div class="dslca-plugin-opts-list">
 			<?php foreach ( $sidebars_array as $sidebar ) : ?>
 				<div class="dslca-plugin-opts-list-item">
-					<span class="dslca-plugin-opts-list-title" contenteditable>
+					<span class="dslca-plugin-opts-list-title" contenteditable="true">
 						<?php echo esc_html( $sidebar ); ?>
 					</span>
 					<a href="#" class="dslca-plugin-opts-list-delete-hook">
@@ -254,7 +254,7 @@ function dslc_plugin_option_display_styling_presets( $option ) {
 		<div class="dslca-plugin-opts-list">
 			<?php foreach ( $presets as $preset ) : ?>
 				<div class="dslca-plugin-opts-list-item">
-					<span class="dslca-plugin-opts-list-title" contenteditable>
+					<span class="dslca-plugin-opts-list-title" contenteditable="true">
 						<?php echo esc_html( $preset['title'] ); ?>
 					</span>
 					<a href="#" class="dslca-plugin-opts-list-delete-hook">

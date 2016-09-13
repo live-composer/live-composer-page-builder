@@ -25,6 +25,12 @@ $dslc_var_post_options['dslc-staff-post-options'] = array(
 			'type' => 'text',
 		),
 		array(
+			'label' => 'Social - Instagram',
+			'std' => '',
+			'id' => 'dslc_staff_social_instagram',
+			'type' => 'text',
+		),
+		array(
 			'label' => 'Social - Facebook',
 			'std' => '',
 			'id' => 'dslc_staff_social_facebook',
@@ -47,7 +53,7 @@ $dslc_var_post_options['dslc-staff-post-options'] = array(
 			'std' => '',
 			'id' => 'dslc_staff_social_email',
 			'type' => 'text',
-		)
+		),
 	)
 );
 
@@ -58,15 +64,15 @@ $dslc_var_post_options['dslc-staff-post-options'] = array(
  */
 function dslc_staff_module_cpt() {
 
-	// If module not active return
+	// If module not active return.
 	if ( ! dslc_is_module_active( 'DSLC_Staff', true ) )
 		return;
 
-	// Get capability
+	// Get capability.
 	$capability = dslc_get_option( 'lc_min_capability_staff_m', 'dslc_plugin_options_access_control' );
 	if ( ! $capability ) $capability = 'publish_posts';
 
-	// With Front
+	// With Front.
 	$with_front = dslc_get_option( 'with_front', 'dslc_plugin_options_cpt_slugs' );
 	if ( empty ( $with_front ) ) $with_front = 'disabled';
 	if ( $with_front == 'enabled' ) $with_front = true; else $with_front = false;
@@ -75,7 +81,7 @@ function dslc_staff_module_cpt() {
 	 * Register Post Type
 	 */
 
-	// Arguments
+	// Arguments.
 	$cpt_args = array(
 		'menu_icon' => 'dashicons-id',
 		'labels' => array(
@@ -109,18 +115,18 @@ function dslc_staff_module_cpt() {
 		),
 	);
 
-	// Apply filters
+	// Apply filters.
 	$cpt_args = apply_filters( 'dslc_staff_cpt_args', $cpt_args );
 
-	// Register post type
+	// Register post type.
 	register_post_type( 'dslc_staff', $cpt_args );
-	
+
 	/**
 	 * Register Taxonomy ( Category )
 	 */
 
-	// Arguments
-	$cats_args = array( 
+	// Arguments.
+	$cats_args = array(
 		'labels' => array(
 			'name' => __( 'Staff Categories', 'live-composer-page-builder' ),
 			'singular_name' => __( 'Category', 'live-composer-page-builder' ),
@@ -134,18 +140,18 @@ function dslc_staff_module_cpt() {
 			'new_item_name' => __( 'New Category Name', 'live-composer-page-builder' ),
 			'menu_name' => __( 'Categories', 'live-composer-page-builder' ),
 		),
-		'hierarchical' => true, 
-		'public' => true, 
-		'rewrite' => array( 
+		'hierarchical' => true,
+		'public' => true,
+		'rewrite' => array(
 			'slug' => dslc_get_option( 'staff_cats_slug', 'dslc_plugin_options_cpt_slugs' ),
-			'with_front' => $with_front
-		)
+			'with_front' => $with_front,
+		),
 	);
 
-	// Apply filters
+	// Apply filters.
 	$cats_args = apply_filters( 'dslc_staff_cats_args', $cats_args );
 
-	// Register taxonomy
+	// Register taxonomy.
 	register_taxonomy( 'dslc_staff_cats', 'dslc_staff', $cats_args );
 
 } add_action( 'init', 'dslc_staff_module_cpt' );

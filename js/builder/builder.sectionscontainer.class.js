@@ -47,12 +47,15 @@ LiveComposer.Builder.Elements.CSectionsContainer = function(elem) {
 
 	/** Sort option setter */
 	jQuery(document).on('LC.sortableOff', function(){
-
-		self.sortable.sortable('option','disabled', true);
+		if ( undefined !== self.sortable.sortable( "instance" ) ) {
+			self.sortable.sortable('option','disabled', true);
+		}
 	});
 
 	jQuery(document).on('LC.sortableOn', function(){
-
-		self.sortable.sortable('option', 'disabled', false);
+		if ( undefined !== self.sortable.sortable( "instance" ) ) {
+			self.sortable.sortable('option','disabled', false);
+		}
 	});
+
 }

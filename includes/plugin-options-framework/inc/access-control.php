@@ -21,7 +21,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 function dslc_access_control_init() {
 
 	global $dslc_plugin_options;
-	global $dslc_var_modules;
 
 	$capability_opts = array(
 		array(

@@ -308,25 +308,6 @@ function dslc_plugin_opts_other() {
 				),
 			),
 
-			'lc_module_listing_order' => array(
-
-				'section' => 'dslc_plugin_options_other',
-				'label' => __( 'Modules Listing Order', 'live-composer-page-builder' ),
-				'std' => 'original',
-				'type' => 'select',
-				'descr' => __( 'Choose how the modules should be ordered in the listing ( when in builder mode ).', 'live-composer-page-builder' ),
-				'choices' => array(
-					array(
-						'label' => 'Original',
-						'value' => 'original',
-					),
-					array(
-						'label' => 'Alphabetic',
-						'value' => 'alphabetic',
-					),
-				),
-			),
-
 			'lc_module_activate_button_pos' => array(
 
 				'section' => 'dslc_plugin_options_other',

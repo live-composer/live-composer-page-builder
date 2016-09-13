@@ -221,7 +221,7 @@
 
 			dslc_editable_content_gen_code( jQuery(this) );
 		}
-	}).on( 'paste', '.dslca-editable-content', function(){
+	}).on( 'paste', '.dslca-editable-content:not(.inline-editor)', function(){
 
 		if ( ! jQuery('body').hasClass( 'dslca-composer-hidden' )  && jQuery(this).data('type') == 'simple' ) {
 
@@ -233,8 +233,8 @@
 					dslcRealInput.html( dslcRealInput.text() );
 				}
 
-				dslc_editable_content_gen_code( jQuery(this) );
-			}, 1);
+				dslc_editable_content_gen_code( dslcRealInput );
+			}, 100);
 		}
 	}).on('focus', '.dslca-editable-content', function() {
 
@@ -389,6 +389,8 @@ function dslc_module_width_set( module, new_width ) {
 	// Update module size in raw base64 code (dslc_code) of the module
 	LiveComposer.Utils.update_module_property_raw( module[0], 'dslc_m_size', new_width );
 
+	LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();
+
 	dslc_generate_code();
 	dslc_show_publish_button();
 }
@@ -471,8 +473,32 @@ function dslc_module_options_show( moduleID ) {
 
 			jQuery('.dslca-module-edit-options-tabs').html( response.output_tabs );
 
+
+			var sectionsUsed = []; // – Array with tab ids to show for current module.
+
+			/**
+			 * Go through each option and check its tab property.
+			 * Fill sectionsUsed array with ids of the tabs to display.
+			 * We don't want to display tabs with no options inside.
+			 */
+			jQuery('.dslca-module-edit-options-inner .dslca-module-edit-option').each(function(){
+				var currentOptionSection = jQuery(this).data('section');
+
+				// Check if this section is in the list of tabs to show.
+				if ( sectionsUsed.indexOf(currentOptionSection) == -1 ) {
+					sectionsUsed.push(currentOptionSection);
+				}
+			});
+
+			var tabs_total = sectionsUsed.length;
+
+			for (var i = 0; i < tabs_total; i++) {
+				// Show the tabs used by the current module.
+				jQuery('.dslca-header .dslca-options-filter-hook[data-section="' + sectionsUsed[i] + '"]').show();
+			}
+
 			// Show the filter hooks
-			jQuery('.dslca-header .dslca-options-filter-hook').show();
+			// jQuery('.dslca-header .dslca-options-filter-hook').show();
 
 			// Trigger click on first filter hook
 			if ( jQuery('.dslca-module-edit-option[data-section="' + dslcDefaultSection + '"]').length ) {
@@ -592,12 +618,8 @@ function dslc_module_output_altered( callback ) {
 			dslc_generate_code(); // Do not delete. It refresh classes on "option preview refresh -> true"
 			// dslc_show_publish_button();
 			LiveComposer.Builder.PreviewAreaWindow.dslc_carousel();
-			LiveComposer.Builder.PreviewAreaWindow.dslc_masonry( jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument) );
 
-			jQuery( '.dslca-module-being-edited img' , LiveComposer.Builder.PreviewAreaDocument).load( function(){
-
-				LiveComposer.Builder.PreviewAreaWindow.dslc_masonry( jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument) );
-			});
+			LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();
 
 			LiveComposer.Builder.PreviewAreaWindow.dslc_tabs();
 			LiveComposer.Builder.PreviewAreaWindow.dslc_init_accordion();
@@ -666,11 +688,7 @@ function dslc_module_output_reload( dslcModule, callback ) {
 			dslc_show_publish_button();
 
 			LiveComposer.Builder.PreviewAreaWindow.dslc_carousel();
-			LiveComposer.Builder.PreviewAreaWindow.dslc_masonry( jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument) );
-
-			jQuery( '.dslca-module-being-edited img' , LiveComposer.Builder.PreviewAreaDocument).load( function(){
-				LiveComposer.Builder.PreviewAreaWindow.dslc_masonry( jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument) );
-			});
+			LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();
 
 			LiveComposer.Builder.PreviewAreaWindow.dslc_tabs();
 			LiveComposer.Builder.PreviewAreaWindow.dslc_init_accordion();

@@ -33,7 +33,7 @@ function dslc_st_init() {
 			'parent' => __( 'Parent Template', 'live-composer-page-builder' ),
 		),
 		'public' => true,
-		// 'exclude_from_search' => true, // 404 page is broken with this parameter.
+		'exclude_from_search' => true, // 404 page is broken with this parameter.
 		'publicly_queryable' => true,
 		'supports' => array( 'title', 'custom-fields', 'thumbnail' ),
 		'capabilities' => array(

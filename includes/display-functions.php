@@ -4,7 +4,6 @@
  *
  * - dslc_display_composer ( Displays the composer code in the front-end )
  * - dslc_get_modules ( Returns an array of active modules )
- * - dslc_sort_alphabetically ( Sorts an array alphabetically )
  * - dslc_display_modules ( Displays a list of active modules )
  * - dslc_display_templates ( Displays a list of active templates )
  * - dslc_filter_content ( Filters the_content() to show composer output )
@@ -347,6 +346,7 @@ function dslc_display_composer() {
 			</div>
 
 			<div class="dslca-invisible-overlay"></div>
+			<div id="scroller-stopper"></div>
 			<script id="pseudo-panel" type="template">
 			<div class="dslca-pseudo-panel">
 
@@ -447,35 +447,14 @@ function dslc_get_modules() {
 }
 
 /**
- * Sorting Function
- *
- * @since 1.0
- * @param array $a array to sort.
- * @param array $b array to sort.
- */
-function dslc_sort_alphabetically( $a, $b ) {
-	return strcmp( $a['title'], $b['title'] );
-}
-
-/**
- * Displays a list of modules (for drag&drop)
+ * Displays list of all modules in modules panel (for drag & drop)
+ * – Modules order defined in dslc_register_modules() function.
  *
  * @since 1.0
  */
 function dslc_display_modules() {
 
 	$dslc_modules = dslc_get_modules();
-
-	// Get value of module listing order option.
-	$module_listing_order = dslc_get_option( 'lc_module_listing_order', 'dslc_plugin_options_other' );
-	if ( empty( $module_listing_order ) ) {
-		$module_listing_order = 'original';
-	}
-
-	// Order alphabetically if needed.
-	if ( 'alphabetic' === $module_listing_order ) {
-		usort( $dslc_modules, 'dslc_sort_alphabetically' );
-	}
 
 	if ( $dslc_modules ) {
 
@@ -506,7 +485,7 @@ function dslc_display_modules() {
 		}
 	} else {
 
-		echo 'No Modules Found.';
+		esc_html_e( 'No Modules Found.', 'live-composer-page-builder' );
 
 	}
 
@@ -1326,7 +1305,13 @@ function dslc_custom_css( $dslc_code = '' ) {
 
 		// If archive, load template?
 		if ( is_archive() && ! is_author() && ! is_search() ) {
-			$template_id = dslc_get_option( get_post_type(), 'dslc_plugin_options_archives' );
+			$post_type = get_post_type();
+
+			if ( $post_type && 'post' === $post_type ) {
+				$post_type = 'post_archive';
+			}
+
+			$template_id = dslc_get_option( $post_type, 'dslc_plugin_options_archives' );
 		}
 
 		if ( is_author() ) {
@@ -1457,13 +1442,18 @@ function dslc_custom_css( $dslc_code = '' ) {
 
 }
 
+/**
+ * Indicates were to output generated CSS for this page content.
+ *
+ * @return void
+ */
 function dslc_dynamic_css_hook() {
 
 	$dynamic_css_location = dslc_get_option( 'lc_css_position', 'dslc_plugin_options' );
 	if ( ! $dynamic_css_location ) {
 		$dynamic_css_location = 'head';
 	}
-	if ( $dynamic_css_location == 'head' ) {
+	if ( 'head' === $dynamic_css_location ) {
 			add_action( 'wp_head', 'dslc_custom_css' );
 	} else {
 			add_action( 'wp_footer', 'dslc_custom_css' );
@@ -1474,7 +1464,6 @@ function dslc_dynamic_css_hook() {
 /**
  * Generate CSS - Modules Section
  */
-
 function dslc_modules_section_gen_css( $atts, $content = null ) {
 
 	return do_shortcode( $content );
