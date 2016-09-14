@@ -260,6 +260,15 @@ body a:focus {
 	cursor: text;
 }
 
+/**
+ * Disable margin bottom for paragraphs in the text inside inline editor.
+ * WordPress clean-out <p> tags if there is only one paragraph in the block.
+ * This creates unwanted difference between front-end and editing-mode.
+ */
+.dslca-editable-content > p:only-child {
+	margin-bottom: 0!important;
+}
+
 	/**
 	 * Header
 	 */
