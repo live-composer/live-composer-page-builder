@@ -145,6 +145,7 @@ Upcoming Releases:
 
 * Issue [#297](https://github.com/livecomposer/live-composer-page-builder/issues/297): Can't change module width due to overlay problem with popup control.
 * Image module: background color overlays the image.
+* Fix JS bug in inline TinyMCE: indexOF....
 
 = For developers: =
 

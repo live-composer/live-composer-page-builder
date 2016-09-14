@@ -268,17 +268,17 @@ jQuery(document).ready(function($){
 			selector: '.inline-editor.dslca-editable-content',
 			editor_deselector: 'mce-content-body',
 			menubar: false,
-		  	inline: true,
-		  	plugins: ['link lists paste'],
-		  	style_formats: [
-			      {title: 'Paragraph', format: 'p'},
-			      {title: 'Header 2', format: 'h2'},
-			      {title: 'Header 3', format: 'h3'},
-			      {title: 'Header 4', format: 'h4'},
-			      {title: 'Header 5', format: 'h5'},
-			      {title: 'Header 6', format: 'h6'},
+			inline: true,
+			plugins: ['link lists'],
+			style_formats: [
+					{title: 'Paragraph', format: 'p'},
+					{title: 'Header 2', format: 'h2'},
+					{title: 'Header 3', format: 'h3'},
+					{title: 'Header 4', format: 'h4'},
+					{title: 'Header 5', format: 'h5'},
+					{title: 'Header 6', format: 'h6'},
 			  ],
-		  	toolbar: 'styleselect | bold italic blockquote | removeformat | link unlink | bullist numlist '
+			toolbar: 'styleselect | bold italic blockquote | removeformat | link unlink | bullist numlist '
 		});
 	}
 
