@@ -841,11 +841,11 @@ class DSLC_Image extends DSLC_Module {
 			$anchor_target = '_blank';
 		}
 
-		if ( '' !== $options['link_url'] ) {
+		if ( ! empty( $options['link_url'] ) ) {
 			$anchor_href = do_shortcode( $options['link_url'] );
 		}
 
-		if ( 'lightbox' === $options['link_type'] && '' !== $options['link_lb_image'] ) {
+		if ( 'lightbox' === $options['link_type'] && ! empty( $options['link_lb_image'] ) ) {
 			$anchor_class .= 'dslc-lightbox-image ';
 			$anchor_href = $options['link_lb_image'];
 		}
@@ -871,17 +871,17 @@ class DSLC_Image extends DSLC_Module {
 
 				} else {
 
-					if ( '' !== $options['resize_width'] || '' !== $options['resize_height'] ) {
+					if ( ! empty( $options['resize_width'] ) || ! empty ( $options['resize_height'] ) ) {
 
 						$resize = true;
 						$resize_width = false;
 						$resize_height = false;
 
-						if ( '' !== $options['resize_width'] ) {
+						if ( ! empty( $options['resize_width'] ) ) {
 							$resize_width = $options['resize_width'];
 						}
 
-						if ( '' !== $options['resize_height'] ) {
+						if ( ! empty ( $options['resize_height'] ) ) {
 							$resize_height = $options['resize_height'];
 						}
 
