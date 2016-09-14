@@ -10,7 +10,7 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 	this.section = jQuery(elem).closest('.dslc-modules-section');
 	this.elem = elem;
 
-	/** Set observer to change elems class */
+	/** Set observer to change elements class */
 	this.observer = new mqMutationObserver(elem, function(){
 
 		var classList = self.elem.classList;
@@ -28,8 +28,15 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 
 	/**
 	 * Make MODULES inside the Modules Area draggable/sortable
+	 *
+	 * this = <div class="dslc-modules-area....
 	 */
-	this.sortable = Sortable.create(elem, {
+
+	// New flexbox grid requires all the modules to sit in the .lc-row container.
+	var moduleAreaInnerContainer = elem.querySelectorAll('.lc-row')[0];
+
+	// moduleAreaInnerContainer.sortable = Sortable.create(elem, {
+	moduleAreaInnerContainer.sortable = Sortable.create(moduleAreaInnerContainer, {
 		group: 'modules',
 		animation: 350,
 		handle: '.dslca-move-module-hook',
