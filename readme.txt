@@ -141,6 +141,7 @@ Upcoming Releases:
 = Bug fixes: =
 
 * Issue [#297](https://github.com/livecomposer/live-composer-page-builder/issues/297): Can't change module width due to overlay problem with popup control.
+* Issue [#290](https://github.com/livecomposer/live-composer-page-builder/issues/290): LC blog and Post modules can't show only 1 post but return 2 posts
 
 
 = 1.1.4 - September 12th 2016 =
