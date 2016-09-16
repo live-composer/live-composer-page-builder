@@ -72,6 +72,13 @@ final class DSLC_Scripts{
 		wp_enqueue_script( 'imagesloaded' ); // Need this for Masonry.
 		wp_enqueue_script( 'jquery-masonry' );
 
+		wp_enqueue_script( 'jquery-ui-core' );
+		wp_enqueue_script( 'jquery-ui-sortable' );
+		wp_enqueue_script( 'jquery-ui-draggable' );
+		wp_enqueue_script( 'jquery-ui-droppable' );
+		wp_enqueue_script( 'jquery-effects-core' );
+		wp_enqueue_script( 'jquery-ui-resizable' );
+
 		if ( ! SCRIPT_DEBUG ) {
 
 			wp_enqueue_script( 'dslc-main-js', DS_LIVE_COMPOSER_URL . 'js/frontend.all.min.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );

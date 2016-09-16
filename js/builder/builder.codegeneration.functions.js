@@ -138,8 +138,8 @@ function dslc_generate_code() {
 	var moduleCode = '',
 	module_size,
 	composerCode = '',
-	maxPerRow = 12,
-	maxPerRowA = 12,
+	maxPerRow = 24,
+	maxPerRowA = 24,
 	currPerRow = 0,
 	currPerRowA = 0,
 	modulesAreaSize,
@@ -192,12 +192,7 @@ function dslc_generate_code() {
 			jQuery(this).removeClass('dslc-modules-section-not-empty').addClass('dslc-modules-section-empty');
 		}
 
-		// Remove last and first classes from module areas and modules
-		jQuery('.dslc-modules-area.dslc-last-col, .dslc-modules-area.dslc-first-col', this).removeClass('dslc-last-col dslc-first-col');
-		jQuery('.dslc-module-front.dslc-last-col, .dslc-module-front.dslc-first-col', this).removeClass('dslc-last-col dslc-first-col');
-
 		// Vars
-		currPerRowA = 0;
 		modulesSection = jQuery(this);
 
 		// Generate attributes for the row shortcode
@@ -214,52 +209,12 @@ function dslc_generate_code() {
 		 */
 		jQuery('.dslc-modules-area', modulesSection).each(function(){
 
-			// Reset width counter for modules
-			currPerRow = 0;
-
 			// Vars
 			modulesArea = jQuery(this);
 			modulesAreaSize = parseInt( modulesArea.data('size') );
-			modulesAreaLastState = 'no';
-			modulesAreaFirstState = 'no';
-
-			// Increment area column counter
-			currPerRowA += modulesAreaSize;
-
-			// If area column counter same as maximum
-			if ( currPerRowA == maxPerRowA ) {
-
-				// Apply classes to current and next column
-				jQuery(this).addClass('dslc-last-col').next('.dslc-modules-area').addClass('dslc-first-col');
-
-				// Reset area column counter
-				currPerRowA = 0;
-
-				// Set shortcode's "last" attribute to "yes"
-				modulesAreaLastState = 'yes';
-
-			// If area column counter bigger than maximum
-			} else if ( currPerRowA > maxPerRowA ) {
-
-				// Apply classes to current and previous column
-				jQuery(this).removeClass('dslc-last-col').addClass('dslc-first-col');
-
-				// Set area column counter to the size of the current area
-				currPerRowA = modulesAreaSize;
-
-				// Set shortcode's "first" attribute to yes
-				modulesAreaFirstState = 'yes';
-			}
-
-			// If area column counter same as current area size
-			if ( currPerRowA == modulesAreaSize ) {
-
-				// Set shortcode's "first" attribute to yes
-				modulesAreaFirstState = 'yes';
-			}
 
 			// Open the modules area ( area ) shortcode
-			composerCode = composerCode + '[dslc_modules_area last="' + modulesAreaLastState + '" first="' + modulesAreaFirstState + '" size="' + modulesAreaSize + '"] ';
+			composerCode = composerCode + '[dslc_modules_area size="' + modulesAreaSize + '"] ';
 
 			/**
 			 * Go through each module of current area
@@ -270,42 +225,7 @@ function dslc_generate_code() {
 				var dslc_module = jQuery(this);
 
 				// Vars
-				module_size = parseInt( dslc_module[0].getAttribute('data-dslc-module-size') );
-				var moduleLastState = 'no';
-				var moduleFirstState = 'no';
-
-				// Increment modules column counter
-				currPerRow += module_size;
-
-				// If modules column counter same as maximum
-				if ( currPerRow == maxPerRow ) {
-
-					// Add classes to current and next module
-					jQuery(this).addClass('dslc-last-col');
-					jQuery(this).next('.dslc-module-front').addClass('dslc-first-col');
-
-					// Reset modules column counter
-					currPerRow = 0;
-
-					// Set shortcode's "last" state to "yes"
-					moduleLastState = 'yes';
-
-					// Set shorcode's "first" state to "yes"
-					moduleFirstState = 'yes';
-
-
-				// If modules column counter bigger than maximum
-				} else if ( currPerRow > maxPerRow ) {
-
-					// Add classes to current and previous module
-					jQuery(this).removeClass('dslc-last-col').addClass('dslc-first-col');
-
-					// Set modules column counter to the size of current module
-					currPerRow = module_size;
-
-					// Set shortcode's "first" state to "yes"
-					moduleFirstState = 'yes';
-				}
+				// module_size = parseInt( dslc_module[0].getAttribute('data-lc-width-large') );
 
 				try {
 					// Get module's LC data
@@ -317,7 +237,7 @@ function dslc_generate_code() {
 
 				if ( '' !== moduleCode ) {
 					// Add the module shortcode containing the data
-					composerCode = composerCode + '[dslc_module last="' + moduleLastState + '"]' + moduleCode + '[/dslc_module] ';
+					composerCode = composerCode + '[dslc_module]' + moduleCode + '[/dslc_module] ';
 				}
 
 				// Fix bug with modules duplication if broken module saved.

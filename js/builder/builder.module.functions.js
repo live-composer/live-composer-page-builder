@@ -154,6 +154,7 @@
 	/**
 	 * Hook - Set Module Width
 	 */
+	/*
 	LiveComposer.Builder.PreviewAreaDocument.on( 'click', '.dslca-change-width-module-options span', function(){
 
 		dslc_module_width_set( jQuery(this).closest('.dslc-module-front'), jQuery(this).data('size') );
@@ -301,6 +302,9 @@ function dslc_module_copy( module ) {
 	// Remove being edited class if some module is being edited
 	jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-module-being-edited');
 
+	// Destroy resizable instance befor duplicating.
+	jQuery(module).resizable( "destroy" );
+
 	// Duplicate the module and append it to the same area
 	var module_new = module[0].cloneNode(true);
 
@@ -316,8 +320,13 @@ function dslc_module_copy( module ) {
 	// Generate new ID for the new module and change it in HTML/CSS of the module.
 	dslc_module_new_id( module_new );
 
+	// Initiate module resize feature for current and new modules
+	LiveComposer.Builder.UI.initResizableModules( module );
+	LiveComposer.Builder.UI.initResizableModules( module_new );
+
 	// Module fully cloned. Finish the process.
 	// Need to call this function to update last column class for the modules.
+	// @todo Do we really need it now since last/first classes deprecated?
 	dslc_generate_code();
 
 	// Fade in the module
@@ -370,7 +379,7 @@ function dslc_module_width_set( module, new_width ) {
 	if ( dslcDebug ) console.log( 'dslc_module_width_set' );
 
 	// Generate new column class
-	var newClass = 'lc-small-' + ( new_width * 2 );
+	var newClass = 'lc-small-' + new_width;
 
 	if ( new_width === '' ) {
 		newClass = '';
@@ -384,10 +393,10 @@ function dslc_module_width_set( module, new_width ) {
 		//.addClass('dslca-module-being-edited'); – Deprecated
 
 	// Change module size in element attribute
-	module[0].setAttribute('data-dslc-module-size',new_width);
+	module[0].setAttribute('data-lc-width-large',new_width);
 
 	// Update module size in raw base64 code (dslc_code) of the module
-	LiveComposer.Utils.update_module_property_raw( module[0], 'dslc_m_size', new_width );
+	LiveComposer.Utils.update_module_property_raw( module[0], 'lc_width_large', new_width );
 
 	LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();
 

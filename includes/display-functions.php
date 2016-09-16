@@ -347,6 +347,9 @@ function dslc_display_composer() {
 
 			<div class="dslca-invisible-overlay"></div>
 			<div id="scroller-stopper"></div>
+
+			<div id="grid-rule"> <div class="grid-measure"></div><div class="grid-measure"></div> <div class="grid-measure"></div> <div class="grid-measure"></div> <div class="grid-measure"></div> <div class="grid-measure"></div> <div class="grid-measure grid-measure-major">25</div> <div class="grid-measure"></div> <div class="grid-measure"></div> <div class="grid-measure"></div> <div class="grid-measure"></div><div class="grid-measure"></div> <div class="grid-measure grid-measure-major">50</div> <div class="grid-measure"></div> <div class="grid-measure"></div><div class="grid-measure"></div> <div class="grid-measure"></div><div class="grid-measure"></div> <div class="grid-measure grid-measure-major">75</div> <div class="grid-measure"></div><div class="grid-measure"></div> <div class="grid-measure"></div> <div class="grid-measure"></div><div class="grid-measure"></div></div>
+
 			<script id="pseudo-panel" type="template">
 			<div class="dslca-pseudo-panel">
 
@@ -862,12 +865,6 @@ function dslc_module_front( $atts, $settings_raw = null ) {
 			$settings['module_instance_id'] = dslc_get_new_module_id();
 		}
 
-		if ( isset( $atts['last'] ) && $atts['last'] == 'yes' ) {
-			$settings['dslc_m_size_last'] = 'yes';
-		} else {
-			$settings['dslc_m_size_last'] = 'no';
-		}
-
 		// Instanciate the module class
 		$module_instance = new $module_id();
 
@@ -1169,7 +1166,7 @@ function dslc_modules_area_front( $atts, $content = null ) {
 			$pos_class = 'dslc-first-col';
 	}
 
-	$output = '<div class="dslc-modules-area lc-column lc-small-' . ( $atts['size'] * 2 ) . ' ' . $pos_class . '" data-size="' . $atts['size'] . '">';
+	$output = '<div class="dslc-modules-area lc-column lc-small-' . $atts['size'] . ' ' . $pos_class . '" data-size="' . $atts['size'] . '">';
 
 	if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 

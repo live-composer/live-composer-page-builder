@@ -59,9 +59,9 @@ jQuery(document).ready(function($) {
 	dslca_update_report_log();
 
 
- 	jQuery('body').addClass('dslca-enabled dslca-drag-not-in-progress');
- 	jQuery('.dslca-invisible-overlay').hide();
- 	jQuery('.dslca-section').eq(0).show();
+	jQuery('body').addClass('dslca-enabled dslca-drag-not-in-progress');
+	jQuery('.dslca-invisible-overlay').hide();
+	jQuery('.dslca-section').eq(0).show();
 
 
 	/** Wait till tinyMCE loaded */
@@ -88,8 +88,220 @@ jQuery(document).ready(function($) {
 		// Catch keypress events (from both parent and iframe) to add keyboard support
 		dslc_keypress_events();
 		LiveComposer.Builder.UI.initPreviewAreaScroller();
+
+		// Make modules resizable in width;
+		LiveComposer.Builder.UI.initResizableModules();
+
+
 	};
 });
+
+/*
+	Resizable project todos:
+
+	@todo: Make old code render properly.
+	@todo: Re-init resize once the module changes saved/canceled.
+	@todo: Disable the shrink property if you resize.
+ */
+LiveComposer.Builder.UI.initResizableModules = function(el) {
+
+	if ( dslcDebug ) console.log( 'initResizableModules' );
+
+	var elementsToResize = LiveComposer.Builder.PreviewAreaDocument.find(".dslc-module-front");
+
+	if ( undefined !== el ) {
+		elementsToResize = jQuery(el, LiveComposer.Builder.PreviewAreaDocument);
+	}
+
+	//LiveComposer.Builder.PreviewAreaDocument[0]
+	var gridRuler = document.getElementById('grid-rule');
+
+	// var modules = 	
+	elementsToResize.each( function() {
+
+		var thisModuleJQ = jQuery(this);
+		var parentRow    = thisModuleJQ.parent();
+		var gridRullerCurrent;
+		var resizable = jQuery(this).resizable({
+
+			handles: "e", //"n, e, s, w"
+			// containment: "parent", // Don't go out of the parent container.
+
+			resize: function(e, ui) { // pas besoin pour l'instant
+
+				var thisModuleWidth  = thisModuleJQ[0].style.width.replace("px", "");
+				var cellPercentWidth = 100 * thisModuleWidth / parentRow.innerWidth();
+
+				/**
+				 * Launch the function that manipulates grid CSS classes
+				 * based on the current resize offset.
+				 */
+				var snapToGridArgs = {
+					percent: cellPercentWidth,
+					obj: this
+				};
+
+				LiveComposer.Builder.UI.snapToGrid(snapToGridArgs);
+
+				/**
+				 * While imitating module resize process with JQuery
+				 * we are disabling grid influence on the width.
+				 */
+				this.style.flex = 'none';
+				this.style.maxWidth = 'none';
+			},
+
+			stop: function( event, ui ) {
+				// Actions to run when users stops resizing.
+
+				/**
+				 * Delete inline styles. We use it to imitate the resize process.
+				 * Actual width change is happening via CSS class change.
+				 */
+				this.style = '';
+
+				// Update module size in raw base64 code (dslc_code) of the module
+				LiveComposer.Utils.update_module_property_raw( this, 'lc_width_large', this.getAttribute('data-lc-width-large') );
+
+				LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();
+
+				/**
+				 * Regenerate the page code to make sure our changes get saved.
+				 */
+				dslc_generate_code();
+				dslc_show_publish_button();
+
+				jQuery('#grid-rule', LiveComposer.Builder.PreviewAreaDocument).remove();
+			},
+
+			start: function( event, ui ) {
+				gridRullerCurrent = thisModuleJQ.prepend(gridRuler);
+				jQuery('#grid-rule', LiveComposer.Builder.PreviewAreaDocument).css('width', parentRow.innerWidth() + 'px' );
+			}
+		}); // .resizable
+	}); // .each
+}
+
+/**
+ * [snapToGrid description]
+ * @param  {Object} params  { percent: cellPercentWidth, obj: this, grid: 12/24,};
+ * @return {[type]}        [description]
+ */
+LiveComposer.Builder.UI.snapToGrid = function(params) {
+
+	if(typeof params != 'object' || this.instancesExists === true) return false;
+
+	var self = this;
+	var grid = 24;
+
+	if ( params.grid !== undefined ) {
+		grid = params.grid;
+	}
+
+	// 100/12 = 8.3333 - % value for 1 column.
+	var grid12SizeToPercent = {
+		0: 0,
+		1: 8.333,
+		2: 16.666,
+		3: 24.999,
+		4: 33.333,
+		5: 41.666,
+		6: 49.999,
+		7: 58.333,
+		8: 66.666,
+		9: 74.999,
+		10: 83.333,
+		11: 91.666,
+		12: 100
+	};
+
+	// 100/24 = 4.14 - % value for 1 column.
+	var grid24SizeToPercent = {
+		0: 0,
+		1: 4.16,
+		2: 8.333,
+		3: 12.49,
+		4: 16.666,
+		5: 20.83,
+		6: 24.999,
+		7: 29.16,
+		8: 33.333,
+		9: 37.49,
+		10: 41.666,
+		11: 45.83,
+		12: 49.999,
+		13: 54.16,
+		14: 58.333,
+		15: 62.49,
+		16: 66.666,
+		17: 70.83,
+		18: 74.999,
+		19: 79.16,
+		20: 83.333,
+		21: 87.49,
+		22: 91.666,
+		23: 95.82,
+		24: 100
+	};
+
+	var gridArray = grid12SizeToPercent;
+
+	if ( grid === 24 ) {
+		gridArray = grid24SizeToPercent;
+	}
+
+	var gridWidthToApply = LiveComposer.Builder.Helpers.closest(gridArray, params.percent);
+
+	if ( grid !== 24 ) {
+		gridWidthToApply = gridWidthToApply * 2;
+	}
+
+
+	// Update element class.
+	jQuery(params.obj).removeClass (function (index, css) {
+		return (css.match (/(^|\s)lc-small-\S+/g) || []).join(' ');
+	});
+
+	jQuery(params.obj).addClass( 'lc-small-' + gridWidthToApply );
+
+
+	// Update element data attribute (it has max 12 columns).
+	params.obj.setAttribute( 'data-lc-width-large', gridWidthToApply );
+}
+
+/**
+ * Find the key in the object with closes value to the provided
+ */
+LiveComposer.Builder.Helpers.closest = function(obj, closestTo){
+
+	 var closest = 100; //Set the highest number.
+/*
+	 for(var i = 0; i < Object.keys(obj).length; i++){ //Loop the array
+		  if(obj[i] >= closestTo && obj[i] < closest) closest = obj[i]; //Check if it's higher than your number, but lower than your closest value
+	 }
+*/
+	Object.keys(obj).forEach(function(key,index) {
+		// key: the name of the object key
+		// index: the ordinal position of the key within the object 
+
+		// console.info( 'key:' + key );
+		// console.info( obj[key] );
+
+		if( obj[key] >= closestTo && obj[key] < closest) closest = key; //Check if it's higher than your number, but lower than your closest value
+	});
+
+	// If 100% set closest to the proper key
+	if ( closest === 100 ) {
+
+		for(var key in obj) {
+			 if( obj[key] === 100) {
+				 closest = key;
+			 }
+		}
+	}
+
+	 return closest; // return the value
+}
 
 /**
  * Action - "Currently Editing" scroll on click
@@ -133,7 +345,7 @@ jQuery(window).keypress( function(e){
 
 		dslc_ajax_save_composer();
 		e.preventDefault();
-        return false;
+		  return false;
 	}
 });
 
@@ -779,7 +991,7 @@ jQuery(document).ready(function($){
 
 		var toggle = $('.dslc-control-toggle');
 		if ( ! toggle.is(e.target) // if the target of the click isn't the container...
-		     && toggle.has(e.target).length === 0 ) // ... nor a descendant of the container
+			  && toggle.has(e.target).length === 0 ) // ... nor a descendant of the container
 		{
 
 			if ( $(e.target).closest('.dslca-module-edit-option').hasClass('dslca-option-off') ) {
@@ -820,7 +1032,7 @@ function disable_css_rule(selectorCSS, ruleCSS, moduleID) {
 
 	if (stylesheet) {
 
-	   stylesheet = stylesheet.sheet;
+		stylesheet = stylesheet.sheet;
 
 		if (stylesheet['rules']) {
 

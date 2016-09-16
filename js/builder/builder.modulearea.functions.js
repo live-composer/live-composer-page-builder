@@ -373,22 +373,25 @@ function dslc_modules_area_copy( area ) {
 /**
  * AREAS - Set Width
  */
-function dslc_modules_area_width_set( area, newWidth ) {
+function dslc_modules_area_width_set( area, new_width ) {
 
 	if ( dslcDebug ) console.log( 'dslc_modules_area_width_set' );
 
 	// Generate new class based on width
-	var newClass = 'lc-small-' + ( newWidth * 2 );
+	var newClass = 'lc-small-' + new_width;
 
-	if ( newWidth === '' ) {
+	if ( new_width === '' ) {
 		newClass = '';
 	}
 
 	// Remove width classes, add new width class and set the data-size attr
 	area
 		.removeClass('lc-small-1 lc-small-2 lc-small-3 lc-small-4 lc-small-5 lc-small-6 lc-small-7 lc-small-8 lc-small-9 lc-small-10 lc-small-11 lc-small-12 lc-small-13 lc-small-14 lc-small-15 lc-small-16 lc-small-17 lc-small-18 lc-small-19 lc-small-20 lc-small-21 lc-small-22 lc-small-23 lc-small-24')
-		.addClass(newClass)
-		.data('size', newWidth);
+		.addClass(newClass);
+		// .data('size', new_width);
+
+	// Change area size in element attribute
+	area[0].setAttribute('data-size',new_width);
 
 	// Call other functions
 	LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();

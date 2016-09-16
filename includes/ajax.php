@@ -231,12 +231,12 @@ function dslc_ajax_add_module( $atts ) {
 		}
 
 		// Module size.
-		if ( isset( $_POST['dslc_m_size'] ) ) {
+		if ( isset( $_POST['lc_width_large'] ) ) {
 
-			$module_settings['dslc_m_size'] = $_POST['dslc_m_size'];
+			$module_settings['lc_width_large'] = $_POST['lc_width_large'];
 		} else {
 
-			$module_settings['dslc_m_size'] = '12';
+			$module_settings['lc_width_large'] = '24';
 		}
 
 		// Output.

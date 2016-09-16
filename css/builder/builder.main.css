@@ -2096,7 +2096,7 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 				top: -10px;
 				left: 22px;
 				z-index: 99999;
-				width: 120px;
+				width: 110px;
 			}
 
 			.dslca-change-width-module-options {
@@ -2148,7 +2148,7 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 					background: #4785db;
 					border-radius: 3px;
 					display: inline-block;
-					font-family: 'Open Sans', sans-serif;
+					font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 					font-size: 13px;
 					font-weight: 400;
 					line-height: 24px;
@@ -2168,39 +2168,52 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 					background: none;
 					color: #5e636a;
 					display: inline-block;
-					font-size: 13px;
+					font-size: 10px;
 					margin-bottom: 5px;
 					max-width: none;
+					text-transform: uppercase;
 					width: auto;
+					line-height: 1.3;
+					letter-spacing: .5px;
+				}
+
+				.dslca-change-width-modules-area-options span[data-size=""],
+				.dslca-change-width-module-options span[data-size=""] {
+					width: 100%;
+					max-width: 88px;
+					margin-bottom: 10px;
 				}
 
 				/* Highlight current width selection */
 
-				.dslc-modules-area.dslc-1-col .dslca-change-width-modules-area-options span[data-size="1"],
-				.dslc-modules-area.dslc-2-col .dslca-change-width-modules-area-options span[data-size="2"],
-				.dslc-modules-area.dslc-3-col .dslca-change-width-modules-area-options span[data-size="3"],
-				.dslc-modules-area.dslc-4-col .dslca-change-width-modules-area-options span[data-size="4"],
-				.dslc-modules-area.dslc-5-col .dslca-change-width-modules-area-options span[data-size="5"],
-				.dslc-modules-area.dslc-6-col .dslca-change-width-modules-area-options span[data-size="6"],
-				.dslc-modules-area.dslc-7-col .dslca-change-width-modules-area-options span[data-size="7"],
-				.dslc-modules-area.dslc-8-col .dslca-change-width-modules-area-options span[data-size="8"],
-				.dslc-modules-area.dslc-9-col .dslca-change-width-modules-area-options span[data-size="9"],
-				.dslc-modules-area.dslc-10-col .dslca-change-width-modules-area-options span[data-size="10"],
-				.dslc-modules-area.dslc-11-col .dslca-change-width-modules-area-options span[data-size="11"],
-				.dslc-modules-area.dslc-12-col .dslca-change-width-modules-area-options span[data-size="12"],
+				.dslc-modules-area[data-size=""] .dslca-change-width-modules-area-options span[data-size=""],
+				.dslc-modules-area[data-size="1"] .dslca-change-width-modules-area-options span[data-size="1"],
+				.dslc-modules-area[data-size="2"] .dslca-change-width-modules-area-options span[data-size="2"],
+				.dslc-modules-area[data-size="3"] .dslca-change-width-modules-area-options span[data-size="3"],
+				.dslc-modules-area[data-size="4"] .dslca-change-width-modules-area-options span[data-size="4"],
+				.dslc-modules-area[data-size="5"] .dslca-change-width-modules-area-options span[data-size="5"],
+				.dslc-modules-area[data-size="6"] .dslca-change-width-modules-area-options span[data-size="6"],
+				.dslc-modules-area[data-size="7"] .dslca-change-width-modules-area-options span[data-size="7"],
+				.dslc-modules-area[data-size="8"] .dslca-change-width-modules-area-options span[data-size="8"],
+				.dslc-modules-area[data-size="9"] .dslca-change-width-modules-area-options span[data-size="9"],
+				.dslc-modules-area[data-size="10"] .dslca-change-width-modules-area-options span[data-size="10"],
+				.dslc-modules-area[data-size="11"] .dslca-change-width-modules-area-options span[data-size="11"],
+				.dslc-modules-area[data-size="12"] .dslca-change-width-modules-area-options span[data-size="12"],
 
-				.dslc-module-front.dslc-1-col .dslca-change-width-module-options span[data-size="1"],
-				.dslc-module-front.dslc-2-col .dslca-change-width-module-options span[data-size="2"],
-				.dslc-module-front.dslc-3-col .dslca-change-width-module-options span[data-size="3"],
-				.dslc-module-front.dslc-4-col .dslca-change-width-module-options span[data-size="4"],
-				.dslc-module-front.dslc-5-col .dslca-change-width-module-options span[data-size="5"],
-				.dslc-module-front.dslc-6-col .dslca-change-width-module-options span[data-size="6"],
-				.dslc-module-front.dslc-7-col .dslca-change-width-module-options span[data-size="7"],
-				.dslc-module-front.dslc-8-col .dslca-change-width-module-options span[data-size="8"],
-				.dslc-module-front.dslc-9-col .dslca-change-width-module-options span[data-size="9"],
-				.dslc-module-front.dslc-10-col .dslca-change-width-module-options span[data-size="10"],
-				.dslc-module-front.dslc-11-col .dslca-change-width-module-options span[data-size="11"],
-				.dslc-module-front.dslc-12-col .dslca-change-width-module-options span[data-size="12"] {
+				.dslc-module-front[data-dslc-module-size=""] .dslca-change-width-module-options span[data-size=""],
+				.dslc-module-front[data-dslc-module-size="1"] .dslca-change-width-module-options span[data-size="1"],
+				.dslc-module-front[data-dslc-module-size="2"] .dslca-change-width-module-options span[data-size="2"],
+				.dslc-module-front[data-dslc-module-size="3"] .dslca-change-width-module-options span[data-size="3"],
+				.dslc-module-front[data-dslc-module-size="4"] .dslca-change-width-module-options span[data-size="4"],
+				.dslc-module-front[data-dslc-module-size="5"] .dslca-change-width-module-hook span[data-size="5"],
+				.dslc-module-front[data-dslc-module-size="5"] .dslca-change-width-module-options span[data-size="5"],
+				.dslc-module-front[data-dslc-module-size="6"] .dslca-change-width-module-options span[data-size="6"],
+				.dslc-module-front[data-dslc-module-size="7"] .dslca-change-width-module-options span[data-size="7"],
+				.dslc-module-front[data-dslc-module-size="8"] .dslca-change-width-module-options span[data-size="8"],
+				.dslc-module-front[data-dslc-module-size="9"] .dslca-change-width-module-options span[data-size="9"],
+				.dslc-module-front[data-dslc-module-size="10"] .dslca-change-width-module-options span[data-size="10"],
+				.dslc-module-front[data-dslc-module-size="11"] .dslca-change-width-module-options span[data-size="11"],
+				.dslc-module-front[data-dslc-module-size="12"] .dslca-change-width-module-options span[data-size="12"] {
 					background: #3B6FBE;
 					box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.28) inset;
 					cursor: default;
@@ -4216,4 +4229,150 @@ div#scroller-stopper {
     left: 0px;
     width: 100%;
     height: 83px;
+}
+
+
+/**
+ * ----------------------------------------------------------------------
+ * JQuery UI Resizable elements
+ */
+.dslc-module-front .ui-resizable-handle {
+	position: absolute;
+	font-size: 0.1px;
+	display: none;
+	-ms-touch-action: none;
+	touch-action: none;
+
+	/*background: rgba(238, 238, 238, 0.37);*/
+	cursor: ew-resize!important;
+}
+
+.dslc-module-front .ui-resizable-handle {
+	right: -10px;
+	top: 0;
+	height: 100%;
+	width: 20px;	
+}
+
+.dslc-module-front .ui-resizable-handle:after {
+	display: none;
+	content: '';
+	position: absolute;
+	border: 2px solid #5890E5;
+	width: 10px;
+	height: 10px;
+	background: #FFF;
+	z-index: 10000;
+}
+
+.dslc-module-front:hover .ui-resizable-handle:after,
+.dslc-module-front.ui-resizable-resizing .ui-resizable-handle:after {
+	display: block;
+}
+
+/* East */
+.dslc-module-front .ui-resizable-handle.ui-resizable-e:after {
+	top: 50%;
+	right: 4px;
+}
+
+.ui-resizable {
+	position: relative;
+}
+.ui-resizable-handle {
+	position: absolute;
+	font-size: 0.1px;
+	display: block;
+	-ms-touch-action: none;
+	touch-action: none;
+}
+
+.dslc-module-front:hover{
+	z-index: 100; /* Helps to keep resizable area over the nearby modules. */
+}
+
+.dslc-module-front.ui-resizable-resizing {
+	position: relative; /* Align ruler with current module. */
+}
+
+/* Show border on the right side of the module while resizing. */
+.dslc-module-front.ui-resizable-resizing:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: -2px;
+	width: 2px;
+	bottom: 0;
+   background: #5890e5;
+}
+
+.dslc-module-front.ui-resizable-resizing .ui-resizable-handle:before {
+	content: '▲';
+	display: inline-block;
+	position: absolute;
+	top: -10px;
+	right: 3px;
+	font-size: 12px;
+	line-height: 1;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #5890e5;
+}
+
+
+.dslc-module-front.ui-resizable-resizing #grid-rule {
+
+
+}
+
+
+
+#grid-rule {
+	display: none;
+	position: absolute;
+	display: flex;
+	width: 100%;
+	height: 20px;
+	background: #eee;
+	color: grey;
+	border-bottom: 1px solid #ddd;
+	border-radius: 2px;
+	text-align: left;
+	margin-top: -20px;
+	margin-left: -0.9375rem; /* Compensate gutter paddings. */
+	vertical-align: top;
+	overflow: hidden;
+	align-items: flex-end;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+.grid-measure {
+	height: 100%;
+	line-height: 18px;
+	display: inline-block;
+	width: 4.166666%;
+	position: relative;
+	text-align: center;
+	overflow: hidden;
+	color: rgba(50, 55, 60, 0.19);
+}
+
+.grid-measure:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 50%;
+	border-left: 1px solid #ddd;
+}
+
+.grid-measure:first-child:after {
+	border: none;
+}
+
+
+.grid-measure.grid-measure-major:after {
+	border-left-width: 1px;
+	height: 100%;
+	border-left-color:#ccc;
 }
