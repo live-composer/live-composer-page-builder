@@ -172,15 +172,24 @@ class DSLC_EditorInterface{
 		} elseif ( is_archive() && isset( $dslc_var_templates_pt[ get_post_type() ] ) ) {
 
 			// Get ID of the page set to power the archives of the shown post type.
-			$template_id = dslc_get_option( get_post_type(), 'dslc_plugin_options_archives' );
+			if ( get_post_type() == 'post' ) {
+				$template_id = dslc_get_option( get_post_type() . '_archive', 'dslc_plugin_options_archives' );
+			} else {
+				$template_id = dslc_get_option( get_post_type(), 'dslc_plugin_options_archives' );
+			}
 
 			$preview_id = get_queried_object_id(); //replace get_the_id in the method get_editor_link_url
 
 			// If there is a page that powers it?
-			if ( 'none' !== $template_id ) {
+			if ( '' !== $template_id ) {
 
 				// Output the button.
 				self::the_editor_link( self::get_editor_link_url( $template_id, $preview_id ), __( 'EDIT TEMPLATE', 'live-composer-page-builder' ) );
+
+			} else {
+
+				// Output the button.
+				self::the_editor_link( admin_url( 'post-new.php?post_type=dslc_templates' ) , __( 'Create Template', 'live-composer-page-builder' ) );
 
 			}
 		}
