@@ -348,7 +348,35 @@ function dslc_display_composer() {
 			<div class="dslca-invisible-overlay"></div>
 			<div id="scroller-stopper"></div>
 
-			<div id="grid-rule"> <div class="grid-measure"></div><div class="grid-measure"></div> <div class="grid-measure"></div> <div class="grid-measure"></div> <div class="grid-measure"></div> <div class="grid-measure"></div> <div class="grid-measure grid-measure-major">25</div> <div class="grid-measure"></div> <div class="grid-measure"></div> <div class="grid-measure"></div> <div class="grid-measure"></div><div class="grid-measure"></div> <div class="grid-measure grid-measure-major">50</div> <div class="grid-measure"></div> <div class="grid-measure"></div><div class="grid-measure"></div> <div class="grid-measure"></div><div class="grid-measure"></div> <div class="grid-measure grid-measure-major">75</div> <div class="grid-measure"></div><div class="grid-measure"></div> <div class="grid-measure"></div> <div class="grid-measure"></div><div class="grid-measure"></div></div>
+			<div id="grid-rule">
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+
+				<div class="grid-measure grid-measure-major">25</div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+
+				<div class="grid-measure grid-measure-major">50</div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+
+				<div class="grid-measure grid-measure-major">75</div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+			</div>
 
 			<script id="pseudo-panel" type="template">
 			<div class="dslca-pseudo-panel">

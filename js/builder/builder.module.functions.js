@@ -626,6 +626,7 @@ function dslc_module_output_altered( callback ) {
 
 			dslc_generate_code(); // Do not delete. It refresh classes on "option preview refresh -> true"
 			// dslc_show_publish_button();
+			LiveComposer.Builder.UI.initResizableModules( newModule );
 			LiveComposer.Builder.PreviewAreaWindow.dslc_carousel();
 
 			LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();

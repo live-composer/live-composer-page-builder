@@ -239,6 +239,15 @@ function dslc_ajax_add_module( $atts ) {
 			$module_settings['lc_width_large'] = '24';
 		}
 
+		// Module Offset.
+		if ( isset( $_POST['lc_offset_large'] ) ) {
+
+			$module_settings['lc_offset_large'] = $_POST['lc_offset_large'];
+		} else {
+
+			$module_settings['lc_offset_large'] = '0';
+		}
+
 		// Output.
 		$module_instance->output( $module_settings );
 

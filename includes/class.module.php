@@ -2090,7 +2090,7 @@ class DSLC_Module {
 		$options['module_id'] = $this->module_id;
 
 		/**
-		 * Size Classes
+		 * Grid Size Classes
 		 */
 
 		$class_size_output = '';
@@ -2099,6 +2099,18 @@ class DSLC_Module {
 		if ( isset( $options['lc_width_large'] ) ) {
 			$class_size_output .= ' lc-column lc-small-' . $options['lc_width_large'];
 			$data_attr_size = $options['lc_width_large'];
+		}
+
+		/**
+		 * Grid Offset Classes
+		 */
+
+		$class_offset_large_output = '';
+		$data_attr_offset_large = '0';
+
+		if ( isset( $options['lc_offset_large'] ) ) {
+			$class_offset_large_output .= ' lc-offset-small-' . $options['lc_offset_large'];
+			$data_attr_offset_large = $options['lc_offset_large'];
 		}
 
 		/**
@@ -2157,6 +2169,7 @@ class DSLC_Module {
 		$module_class_arr[] = 'dslc-in-viewport-check';
 		$module_class_arr[] = 'dslc-in-viewport-anim-' . $options['css_anim'];
 		$module_class_arr[] = $class_size_output;
+		$module_class_arr[] = $class_offset_large_output;
 		$module_class_arr[] = $class_show_on;
 		$module_class_arr[] = $class_handle_like;
 
@@ -2186,7 +2199,8 @@ class DSLC_Module {
 			// Attributes to output in editing mode only.
 			$module_attributes['data-module-id']        = $options['module_instance_id'];
 			$module_attributes['data-dslc-module-id']   = $this->module_id;
-			$module_attributes['data-lc-width-large'] = $data_attr_size;
+			$module_attributes['data-lc-width-large']   = $data_attr_size;
+			$module_attributes['data-lc-offset-large']  = $data_attr_offset_large;
 			$module_attributes['data-dslc-anim']        = $options['css_anim'];
 			$module_attributes['data-dslc-anim-delay']  = $options['css_anim_delay'];
 			$module_attributes['data-dslc-anim-easing'] = $options['css_anim_easing'];
@@ -2286,8 +2300,15 @@ class DSLC_Module {
 
 		// Other vars.
 		$user_options['module_id'] = $this->module_id;
+
+		// Make sure width field is among options.
 		if ( ! isset( $user_options['lc_width_large'] ) ) {
 			$user_options['lc_width_large'] = '12';
+		}
+
+		// Make sure offset field is among options.
+		if ( ! isset( $user_options['lc_offset_large'] ) ) {
+			$user_options['lc_offset_large'] = '0';
 		}
 
 		$user_options_no_defaults = $user_options;

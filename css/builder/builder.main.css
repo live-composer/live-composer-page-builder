@@ -1526,8 +1526,7 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 	box-shadow: 0 0 0 2px rgba(173, 175, 179, 0.4);
 }
 
-.dslc-modules-area:hover .dslc-module-front:hover {
-	/*outline-color: #5890e5;*/
+.dslc-modules-area:hover .dslc-module-front:not(.ui-resizable-resizing):hover {
 	box-shadow: 0 0 0 2px #5890e5;
 }
 
@@ -3902,8 +3901,8 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 	transform: translate(0,-50px);*/
 }
 
-.dslca-drag-not-in-progress #dslc-content .dslc-module-front:hover .dslca-module-manage-inner,
-.dslca-drag-not-in-progress #dslc-content .dslc-module-front:hover .dslca-wysiwyg-actions-edit-hook {
+.dslca-drag-not-in-progress #dslc-content .dslc-module-front:not(.ui-resizable-resizing):hover .dslca-module-manage-inner,
+.dslca-drag-not-in-progress #dslc-content .dslc-module-front:not(.ui-resizable-resizing):hover .dslca-wysiwyg-actions-edit-hook {
 	top: 0;
 	opacity: 1;
 
@@ -4031,15 +4030,10 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 		display: block;
 		margin: 0 auto;
 		position: relative;
-
 		border: 14px solid black;
 		border-top-width: 60px;
-		/*border-bottom-width: 14px;*/
 		border-radius: 16px;
-
 		top: 40px;
-
-		/*max-height: calc(100% - 320px);*/
 	}
 
 	body.dslca-enabled.dslc-res-phone #page-builder-preview-area {
@@ -4064,21 +4058,21 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 	}
 
 	#page-builder-preview-area.ui-resizable-resizing .ui-resizable-e {
-	   width: 100%;
+		width: 100%;
 	}
 
 	#page-builder-preview-area .ui-resizable-e {
-	    cursor: e-resize;
-	    height: 100%;
-	    right: -14px;
-	   width: 14px;
-	   top: 0;
+		cursor: e-resize;
+		height: 100%;
+		right: -14px;
+		width: 14px;
+		top: 0;
 	}
 
 	#page-builder-preview-area .ui-resizable-handle {
-	    display: block;
-	    font-size: 0.1px;
-	    position: absolute;
+		display: block;
+		font-size: 0.1px;
+		position: absolute;
 	}
 
 /**
@@ -4248,10 +4242,9 @@ div#scroller-stopper {
 }
 
 .dslc-module-front .ui-resizable-handle {
-	right: -10px;
 	top: 0;
 	height: 100%;
-	width: 20px;	
+	width: 20px;
 }
 
 .dslc-module-front .ui-resizable-handle:after {
@@ -4271,9 +4264,23 @@ div#scroller-stopper {
 }
 
 /* East */
+.dslc-module-front .ui-resizable-handle.ui-resizable-e {
+	right: -10px;
+}
+
 .dslc-module-front .ui-resizable-handle.ui-resizable-e:after {
 	top: 50%;
 	right: 4px;
+}
+
+/* West */
+.dslc-module-front .ui-resizable-handle.ui-resizable-w {
+	left: -10px;
+}
+
+.dslc-module-front .ui-resizable-handle.ui-resizable-w:after {
+	top: 50%;
+	left: 4px;
 }
 
 .ui-resizable {
@@ -4292,7 +4299,7 @@ div#scroller-stopper {
 }
 
 .dslc-module-front.ui-resizable-resizing {
-	position: relative; /* Align ruler with current module. */
+/*position: relative;  Align ruler with current module. */
 }
 
 /* Show border on the right side of the module while resizing. */
@@ -4301,6 +4308,17 @@ div#scroller-stopper {
 	position: absolute;
 	top: 0;
 	right: -2px;
+	width: 2px;
+	bottom: 0;
+   background: #5890e5;
+}
+
+/* Show border on the left side of the module while resizing. */
+.dslc-module-front.ui-resizable-resizing:before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
 	width: 2px;
 	bottom: 0;
    background: #5890e5;
@@ -4328,29 +4346,28 @@ div#scroller-stopper {
 
 #grid-rule {
 	display: none;
-	position: absolute;
-	display: flex;
-	width: 100%;
+	position: fixed;
+	/*width: 100%;*/
 	height: 20px;
+	/*left: 0;*/
 	background: #eee;
 	color: grey;
 	border-bottom: 1px solid #ddd;
 	border-radius: 2px;
 	text-align: left;
 	margin-top: -20px;
-	margin-left: -0.9375rem; /* Compensate gutter paddings. */
-	vertical-align: top;
+	/*margin-left: -0.9375rem;  Compensate gutter paddings. */
 	overflow: hidden;
-	align-items: flex-end;
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
 .grid-measure {
 	height: 100%;
 	line-height: 18px;
-	display: inline-block;
-	width: 4.166666%;
+	display: block;
+	width: 4.16%;
 	position: relative;
+	float: left;
 	text-align: center;
 	overflow: hidden;
 	color: rgba(50, 55, 60, 0.19);
