@@ -133,6 +133,8 @@ function dslc_save_draft_composer() {
 function dslc_generate_code() {
 
 	if ( dslcDebug ) console.log( 'dslc_generate_code' );
+	// console.info("caller is " + arguments.callee.caller.name);
+	console.trace()
 
 	// Vars
 	var moduleCode = '',

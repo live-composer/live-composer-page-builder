@@ -64,6 +64,8 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 
 		onEnd: function (evt) {
 
+			if ( dslcDebug ) console.log( 'CModuleArea - Sortable - onEnd' );
+
 			evt.oldIndex;  // element's old index within parent
 			evt.newIndex;  // element's new index within parent
 
@@ -71,6 +73,10 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 
 			dslc_generate_code();
 			LiveComposer.Builder.UI.stopScroller();
+
+			// Init resizable.
+			LiveComposer.Builder.UI.initResizableModules();
+
 			jQuery('body').removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
 			jQuery('body', LiveComposer.Builder.PreviewAreaWindow.document).removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
 		},

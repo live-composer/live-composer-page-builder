@@ -100,7 +100,6 @@ jQuery(document).ready(function($) {
 	Resizable project todos:
 
 	@todo: Make old code render properly.
-	@todo: Re-init resizable once the module changes saved/canceled.
 	@todo: Re-init resizable once the module moved between areas.
 	@todo: Add resize to the module areas.
 	@todo: Disable the shrink property if you resize.
@@ -117,10 +116,6 @@ LiveComposer.Builder.UI.initResizableModules = function(el) {
 
 	var gridRuler = document.getElementById('grid-rule');
 
-	console.info( 'gridRuler 1:' );	
-
-	console.info( gridRuler );
-
 	// var modules = 	
 	elementsToResize.each( function() {
 
@@ -130,6 +125,8 @@ LiveComposer.Builder.UI.initResizableModules = function(el) {
 		var offsetOriginal = 0;
 		var offset = 0;
 		var grid = 24;
+
+		thisModuleJQ.resizable( 'destroy' );
 
 		var resizable = jQuery(this).resizable({
 
@@ -245,9 +242,8 @@ LiveComposer.Builder.UI.initResizableModules = function(el) {
 					offsetOriginal = 0;
 				}
 
-				console.info( gridRuler );
 				var parrentRect = parentRow[0].getBoundingClientRect(); 
-				gridRullerCurrent = parentRow.prepend( gridRulerp.cloneNode(true) );
+				gridRullerCurrent = parentRow.prepend( gridRuler.cloneNode(true) );
 				jQuery('#grid-rule', LiveComposer.Builder.PreviewAreaDocument).css({'display': 'block','width': parentRow.innerWidth() + 'px', 'left': parrentRect.left + 'px', 'top': parrentRect.top + 'px' });
 			}
 		}); // .resizable
@@ -821,6 +817,9 @@ function dslc_drag_and_drop() {
 
 		// dragging ended
 		onEnd: function (/**Event*/evt) {
+
+			if ( dslcDebug ) console.log( 'dslc_drag_and_drop - sortable - onEnd' );
+
 			evt.oldIndex;  // element's old index within parent
 			evt.newIndex;  // element's new index within parent
 
@@ -838,7 +837,7 @@ function dslc_drag_and_drop() {
 			modulesArea = jQuery(itemEl.parentNode); //jQuery(this);
 			moduleID = itemEl.dataset.id; // get value of data-id attr.
 
-			dslc_generate_code();
+			dslc_generate_code(); // @todo: check if we can delete it?
 
 			if ( moduleID == 'DSLC_M_A' || jQuery('body').hasClass('dslca-module-drop-in-progress') ||
 				modulesArea.closest('#dslc-header').length || modulesArea.closest('#dslc-footer').length ) {
@@ -889,6 +888,9 @@ function dslc_drag_and_drop() {
 					LiveComposer.Builder.PreviewAreaWindow.dslc_carousel();
 					LiveComposer.Builder.PreviewAreaWindow.dslc_tabs();
 					LiveComposer.Builder.PreviewAreaWindow.dslc_init_accordion();
+
+					// Init resizable.
+					LiveComposer.Builder.UI.initResizableModules( dslcJustAdded );
 
 					dslc_generate_code();
 					// Show publish
