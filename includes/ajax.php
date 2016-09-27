@@ -51,46 +51,10 @@ function dslc_ajax_add_modules_section( $atts ) {
 		}
 
 		// The output.
-		$output = '<div class="dslc-modules-section dslc-modules-section-empty ' . $extra_classes . '" style="' . dslc_row_get_style() . '">
-			<div class="dslc-bg-video dslc-force-show"><div class="dslc-bg-video-inner"></div><div class="dslc-bg-video-overlay"></div></div>
-			<div class="dslc-modules-section-wrapper">
-				<div class="dslc-modules-section-inner dslc-clearfix">
-					<div class="dslc-modules-area dslc-col dslc-12-col" data-size="12">
-						<div class="dslc-modules-area-inner">
-							<div class="dslca-modules-area-manage">
-								<div class="dslca-modules-area-manage-inner">
-									<span class="dslca-manage-action dslca-copy-modules-area-hook" title="Duplicate" ><span class="dslca-icon dslc-icon-copy"></span></span>
-									<span class="dslca-manage-action dslca-move-modules-area-hook" title="Drag to move" ><span class="dslca-icon dslc-icon-move"></span></span>
-									<span class="dslca-manage-action dslca-change-width-modules-area-hook" title="Change width" >
-										<span class="dslca-icon dslc-icon-columns"></span>
-										<div class="dslca-change-width-modules-area-options">';
-											$output .= '<span>' . __( 'Container Width', 'live-composer-page-builder' ) . '</span>';
-											$output .= '<span data-size="1">1/12</span><span data-size="2">2/12</span>
-											<span data-size="3">3/12</span><span data-size="4">4/12</span>
-											<span data-size="5">5/12</span><span data-size="6">6/12</span>
-											<span data-size="7">7/12</span><span data-size="8">8/12</span>
-											<span data-size="9">9/12</span><span data-size="10">10/12</span>
-											<span data-size="11">11/12</span><span data-size="12">12/12</span>
-										</div>
-									</span>
-									<span class="dslca-manage-action dslca-delete-modules-area-hook" title="Delete" ><span class="dslca-icon dslc-icon-remove"></span></span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div><!-- .dslc-module-section-inner -->
-				<div class="dslca-modules-section-manage">
-					<div class="dslca-modules-section-manage-inner">
-						<span class="dslca-manage-action dslca-edit-modules-section-hook" title="Edit options" ><span class="dslca-icon dslc-icon-cog"></span></span>
-						<span class="dslca-manage-action dslca-copy-modules-section-hook" title="Duplicate" ><span class="dslca-icon dslc-icon-copy"></span></span>
-						<span class="dslca-manage-action dslca-move-modules-section-hook" title="Drag to move" ><span class="dslca-icon dslc-icon-move"></span></span>
-						<span class="dslca-manage-action dslca-export-modules-section-hook" title="Export section code" ><span class="dslca-icon dslc-icon-upload-alt"></span></span>
-						<span class="dslca-manage-action dslca-delete-modules-section-hook" title="Delete" ><span class="dslca-icon dslc-icon-remove"></span></span>
-					</div>
-				</div>
-				<div class="dslca-modules-section-settings">' . dslc_row_get_options_fields() . '</div><!-- .dslca-module-section-settings -->
-			</div><!-- .dslc-module-section-wrapper -->
-		</div>';
+		$empty_atts = array();
+
+		$section_content = dslc_modules_area_front( $empty_atts, '' );
+		$output = dslc_modules_section_front( $seciton_atts, $section_content );
 
 		// Set the output.
 		$response['output'] = $output;
@@ -120,7 +84,7 @@ function dslc_ajax_add_module( $atts ) {
 		// The array we'll pass back to the AJAX call.
 		$response = array();
 
-		// The ID of the module to add.
+		// The ID of the module to add. ex: DSLC_Button
 		$module_id = esc_attr( $_POST['dslc_module_id'] );
 
 		if ( ! class_exists( $module_id ) ) {
