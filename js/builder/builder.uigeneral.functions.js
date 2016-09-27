@@ -431,7 +431,15 @@ function dslc_filter_origin( origin, section ) {
 	jQuery('.dslca-origin[data-origin="' + origin + '"]', section).show();
 
 	if ( origin == '' ) {
-		jQuery('.dslca-origin', section).show();
+
+		jQuery('.dslca-origin', section).each(function(i){
+			console.log(jQuery(this));
+			if ( jQuery(this).hasClass('exclude') ) {
+				jQuery(this).hide();
+			} else {
+				jQuery(this).show();
+			}
+		});
 	}
 }
 

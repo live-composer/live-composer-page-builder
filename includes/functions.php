@@ -153,13 +153,24 @@ function dslc_register_module( $module_id ) {
 	// If the array ID not taken?
 	if ( ! isset( $dslc_var_modules[ $module_id ] ) ) {
 
-		// Append new module to the global array.
-		$dslc_var_modules[ $module_id ] = array(
-			'id' => $module_id,
-			'title' => $module_instance->module_title,
-			'icon' => $module_instance->module_icon,
-			'origin' => $module_instance->module_category,
-		);
+		if ( ! isset( $module_instance->exclude_from_main_listing ) ) {
+			// Append new module to the global array.
+			$dslc_var_modules[ $module_id ] = array(
+				'id' => $module_id,
+				'title' => $module_instance->module_title,
+				'icon' => $module_instance->module_icon,
+				'origin' => $module_instance->module_category,
+			);
+		} else {
+			// Append new module to the global array.
+			$dslc_var_modules[ $module_id ] = array(
+				'id' => $module_id,
+				'title' => $module_instance->module_title,
+				'icon' => $module_instance->module_icon,
+				'origin' => $module_instance->module_category,
+				'exclude' => $module_instance->exclude_from_main_listing,
+			);
+		}
 	}
 }
 

@@ -148,6 +148,7 @@ Upcoming Releases:
 *
 * Image module: background color overlays the image.
 * Fix JS bug in inline TinyMCE: indexOF....
+* Issue [#324](https://github.com/livecomposer/live-composer-page-builder/issues/324): FEATURE REQUEST: Exclude module from main listing
 
 = For developers: =
 
