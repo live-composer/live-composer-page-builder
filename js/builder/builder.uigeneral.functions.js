@@ -428,13 +428,13 @@ function dslc_filter_origin( origin, section ) {
 	if ( dslcDebug ) console.log( 'dslc_filter_origin' );
 
 	jQuery('.dslca-origin', section).hide();
-	jQuery('.dslca-origin[data-origin="' + origin + '"]', section).show();
+	jQuery('.dslca-origin[data-origin="' + origin + '"]', section).css('display', 'inline-block');
 
 	if ( origin == '' ) {
 
 		jQuery('.dslca-origin', section).each(function(i){
-			console.log(jQuery(this));
-			if ( jQuery(this).hasClass('exclude') ) {
+
+			if ( jQuery(this).hasClass('dslca-exclude') ) {
 				jQuery(this).hide();
 			} else {
 				jQuery(this).show();

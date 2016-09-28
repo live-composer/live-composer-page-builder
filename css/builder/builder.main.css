@@ -566,6 +566,10 @@ body a:focus {
 						background: #e25c54;
 					}
 
+	.dslca-sections .dslca-exclude {
+		display: none;
+	}
+
 	/**
 	 * Subsections
 	 */
