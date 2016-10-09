@@ -536,7 +536,7 @@ function dslc_module_output_default( dslc_module_id, callback ) {
 		{
 			action : 'dslc-ajax-add-module',
 			dslc : 'active',
-			dslc_module_id : dslc_module_id,
+			dslc_module_id : dslc_module_id, // ex. DSLC_Button
 			dslc_post_id : jQuery('.dslca-container').data('post-id'),
 			dslc_url_vars: LiveComposer.Utils.get_page_params()
 		},

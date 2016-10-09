@@ -34,13 +34,13 @@ jQuery(document).ready(function($){
 	});
 
 	/* Initiate all the slider controls on the module options panel. */
-	jQuery('.dslca-container').on('hover', '.dslca-module-edit-option-slider .dslca-module-edit-field-numeric', function() {
+	jQuery('.dslca-container').on('mouseenter', '.dslca-module-edit-option-slider', function() {
 
 		dslc_module_options_numeric( this );
 	});
 
 	/* Initiate all the slider controls on the row options panel. */
-	jQuery('.dslca-container').on('hover', '.dslca-modules-section-edit-option-slider .dslca-modules-section-edit-field', function() {
+	jQuery('.dslca-container').on('mouseenter', '.dslca-modules-section-edit-option-slider', function() {
 
 		dslc_module_options_numeric( this );
 	});
@@ -1610,47 +1610,145 @@ function dslc_module_options_color( field ) {
 /**
  * MODULES SETTINGS PANEL - Numeric Option Type
  */
-function dslc_module_options_numeric( field ) {
-
-	var $ = jQuery;
+function dslc_module_options_numeric( fieldWrapper ) {
 
 	if ( dslcDebug ) console.log( 'dslc_module_options_numeric' );
 
-	var query = field || '.dslca-module-edit-option-slider .dslca-module-edit-field-numeric';
+	var query = fieldWrapper; // || '.dslca-module-edit-option-slider';
 
 	jQuery(query).each(function(){
 
-		if( this.classList.contains('slider-initiated') ) return;
+		var controlWrapper = jQuery(this);
 
-		var handle = false;
-		var pseudoelement = false;
-		var temp = 0;
-		var sliderInput = this;
-		var prev_pos = 0;
+		/* Create an empty div to be uses by jQuery as the slider container. */
+		if ( 0 === jQuery('.dslca-module-edit-field-slider', controlWrapper).length ) {
+			controlWrapper.append('<div class="dslca-module-edit-field-slider"></div>');
+		}
+
+		var workingWithModule = true;
+
+		/* Is the control part of the module setting panel or section settings? */
+		if ( controlWrapper.hasClass('dslca-modules-section-edit-option') ) {
+			// We are working with seciton.
+			workingWithModule = false;
+		} else {
+			// We are working with module.
+			workingWithModule = true;
+		}
+
+		if ( workingWithModule ) {
+			var sliderInput = controlWrapper.find('.dslca-module-edit-field');
+		} else {
+			var sliderInput = controlWrapper.find('.dslca-modules-section-edit-field');
+		}
+
+		/* Is the control part of the module setting panel or section settings? */
+		if ( controlWrapper.hasClass('dslca-modules-section-edit-option') ) {
+			// We are working with seciton.
+			var sliderInput = controlWrapper.find('.dslca-modules-section-edit-field');
+		} else {
+			// We are working with module.
+			var sliderInput = controlWrapper.find('.dslca-module-edit-field');
+		}
+
+		var sliderExt = '',
+		sliderControl = controlWrapper.find('.dslca-module-edit-field-slider'),
+		currentVal    = parseFloat( sliderInput.val() ),
+
+		// Max value. By default max is 100.
+		max = parseFloat( sliderInput.data('max') ),
+		// Min value. By default min is 0.
+		min = parseFloat( sliderInput.data('min') ),
+		// Increment value. By default increment is 1.
+		inc = parseFloat( sliderInput.data('increment') ),
+		// Backup values.
+		max_orig = max,
+		min_orig = min;
+
+		/**
+		 * Check if value can't be negative according to module settings.
+		 */
+		var onlypositive = false;
+
+		if ( undefined !== sliderInput.data('onlypositive') && 1 === sliderInput.data('onlypositive')  ) {
+			onlypositive = true;
+		}
+
+		/**
+		 * If the current slider value gets to the max or min,
+		 * we set new 'wider' max/min values.
+		 *
+		 * This way slider has no fixed top or bottom limit one one hand
+		 * and works precise enough for both small and big values.
+		 */
+		if ( currentVal >= max ) {
+			max = currentVal * 2;
+		}
+
+		if ( ! onlypositive && currentVal <= min ) {
+			min = currentVal * 2;
+		}
+
+		sliderControl.slider({
+			min : min,
+			max : max,
+			step: inc,
+			value: sliderInput.val(),
+
+			slide: function(event, ui) {
+
+				sliderInput.val( ui.value + sliderExt );
+				sliderInput.trigger('change');
+			},
+
+			change: function(event, ui) {
+
+				/**
+				 * If the current slider value gets to the max or min,
+				 * we reset the slider (destroy/call again) so script above
+				 * set new bigger max/min values.
+				 *
+				 * This way slider has no top or bottom limit one one hand
+				 * and precise enough for both small and big values.
+				 */
+				if ( ui.value >= max || ui.value <= min ) {
+					sliderControl.slider( "destroy" );
+					dslc_module_options_numeric( controlWrapper );
+				}
+			},
+			/*
+			stop: function( event, ui ) {
+			},
+			start: function( event, ui ) {
+			}
+			*/
+		});
+
+		/**
+		 * Once the slider initiated, show it in HTML.
+		 * Slider control is hidden by default. We show it on hover only.
+		 */
+		sliderControl.show();
+
+		/* On mouse leave: Remove empty DIV and destroy the slider. */
+		jQuery(controlWrapper).on('mouseleave', function() {
+
+			if ( undefined !== sliderControl.slider( 'instance' ) ) {
+				jQuery(sliderControl).slider( 'destroy' );
+			}
+
+			sliderControl.remove();
+		});
 
 
-		/*
-		var max = 2000;
-		var min = -2000;
-		var inc = 1;
-		*/
+		if( sliderInput[0].classList.contains('slider-initiated') ) return;
+		sliderInput[0].classList.add("slider-initiated");
 
-		var max = parseFloat(jQuery(this).data('max')) > 0 ? parseFloat($(this).data('max')) : 2000;
-		var min = parseFloat(jQuery(this).data('min')) > -2000 ? parseFloat($(this).data('min')) : 0;
-		var inc = parseFloat(jQuery(this).data('increment')) > 0 ? parseFloat($(this).data('increment')) : 1;
-
-		var dslcSlider, dslcSliderField, dslcSliderInput, dslcSliderVal, dslcAffectOnChangeRule, dslcAffectOnChangeEl,
-		dslcSliderTooltip, dslcSliderTooltipOffset, dslcSliderTooltipPos, dslcModule, dslcOptionID, dslcSliderExt,
-		dslcAffectOnChangeRules;
-
-		sliderInput.classList.add("slider-initiated");
-
-		jQuery(sliderInput).keyup(function(e){
+		sliderInput.on('keyup', function(e){
 
 			// In some rare cases we have the next error:
 			// TypeError: undefined is not an object (evaluating 'a.key.match')
 			if (undefined === e) {
-
 				return false;
 			}
 
@@ -1658,89 +1756,62 @@ function dslc_module_options_numeric( field ) {
 			if( e.shiftKey ) {
 
 				if( e.keyCode == 38 ) {
-
 					this.value = ( parseInt(this.value) || 0 ) + 9;
-					jQuery(this).trigger('change');
+					sliderInput.trigger('change');
 				}
 
 				if( e.keyCode == 40 ) {
-
 					this.value = ( parseInt(this.value) + 0 ) - 9;
-					jQuery(this).trigger('change');
+					sliderInput.trigger('change');
 				}
 			}
 
 			// Backspace, "-"
 			if( e.keyCode == 8 || e.keyCode == 45 ) {
-				jQuery(this).trigger('change');
+				sliderInput.trigger('change');
 			}
 
 			// If number key pressed
 			if ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105)) {
-				jQuery(this).trigger('change');
+				sliderInput.trigger('change');
 			}
 
+			var charCode = (e.which) ? e.which : e.keyCode;
 
-			if( ! e.key.match(/\d/) && e.keyCode != 8 && e.keyCode != 39 && e.keyCode != 37 && e.keyCode != 46 ) {
-
+			//@todo more work here
+			if( ( (charCode >= 48 && charCode <= 57) || (charCode >= 96 && charCode <= 105) ) && e.keyCode != 8 && e.keyCode != 39 && e.keyCode != 37 && e.keyCode != 46 ) {
 				return false;
 			}
 		});
 
-		jQuery(sliderInput).unbind('change');
-		jQuery(sliderInput).change(function(e){
+		// sliderInput.unbind('change');
+		sliderInput.on('change', function(e){
 
-			if( this.value > max ) {
-
-				this.value = max;
+			if ( onlypositive && this.value < 0 ) {
+				this.value = 0;
 			}
 
-			if( this.value < min ) {
+			var containerWrapper;
 
-				this.value = min;
+			if ( workingWithModule ) {
+				containerWrapper = jQuery( e.target.closest('.dslca-module-edit-option-slider') );
+			} else {
+				containerWrapper = jQuery( e.target.closest('.dslca-modules-section-edit-option-slider') );
 			}
 
-			dslcModule = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument);
+			/**
+			 * Move the slider needle to reflect the value changes
+			 * made via direct input of via keyboard arrow keys.
+			 */
+			var currentSliderInstance = containerWrapper.find('.dslca-module-edit-field-slider');
+			if ( undefined !== currentSliderInstance.slider( 'instance' ) ) {
+				currentSliderInstance.slider( 'value', this.value );
+			}
 
-			// Add changed class
-			dslcModule.addClass('dslca-module-change-made');
-		});
-
-		jQuery(document).mouseup(function(){
-
-			handle = false;
-		});
-
-		jQuery(sliderInput).mousedown(function(e){
-
-			// Set handle to the point were we started to drag mouse from
-			handle = parseFloat(e.pageX);
-			temp = parseFloat(sliderInput.value && sliderInput.value != '' ? sliderInput.value : 0);
-			prev_pos = 0;
-
-		});
-
-		jQuery('.dslca-section').mousemove(function(e){
-
-			// Process only if we dragging slider handle, not just move mouse over
-			if( handle !== false ) {
-				e = e || window.event;
-
-				var x = e.clientX;
-
-				var this_move = x - prev_pos;
-
-				if ( 0 < this_move ) {
-
-					sliderInput.value = Math.round( ( parseFloat(sliderInput.value) + inc ) * 100) / 100;
-				} else {
-
-					sliderInput.value = Math.round( ( parseFloat(sliderInput.value) - inc ) * 100) / 100;
-				}
-
-				prev_pos = x;
-
-				jQuery(sliderInput).trigger('change');
+			if ( workingWithModule ) {
+				// Add changed class to the module.
+				var module = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument);
+				module.addClass('dslca-module-change-made');
 			}
 		});
 

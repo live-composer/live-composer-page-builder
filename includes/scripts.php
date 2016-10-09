@@ -212,6 +212,7 @@ final class DSLC_Scripts{
 			wp_enqueue_script( 'jquery-ui-droppable' );
 			wp_enqueue_script( 'jquery-effects-core' );
 			wp_enqueue_script( 'jquery-ui-resizable' );
+			wp_enqueue_script( 'jquery-ui-slider' );
 
 			wp_enqueue_script( 'wp-mediaelement' );
 			//wp_enqueue_script( 'imagesloaded' ); // Need this for Masonry.

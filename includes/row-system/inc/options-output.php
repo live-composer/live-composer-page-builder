@@ -129,16 +129,15 @@ function dslc_row_display_options() {
 
 			<?php elseif ( 'slider' === $row_option['type'] ) : ?>
 
-					<?php
-						$slider_min = $row_option['min'];
-						$slider_max = $row_option['max'];
-						$slider_increment = $row_option['increment'];
-						$ext = $row_option['ext'];
-						$curr_value = $row_option['std'];
+				<?php
+					$slider_min = $row_option['min'];
+					$slider_max = $row_option['max'];
+					$slider_increment = $row_option['increment'];
+					$ext = $row_option['ext'];
+					$curr_value = $row_option['std'];
 
-					?>
-
-					<input type="number" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-slider-numeric" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" value="<?php echo $curr_value; ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" data-min="<?php echo $slider_min; ?>" data-max="<?php echo $slider_max; ?>" data-ext="<?php echo $ext; ?>" data-increment="<?php echo esc_attr( $row_option['increment'] ); ?>" data-ext="<?php echo esc_attr( $row_option['ext'] ); ?>"/>
+				?>
+				<input type="number" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-slider-numeric" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" value="<?php echo $curr_value; ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" data-min="<?php echo $slider_min; ?>" data-max="<?php echo $slider_max; ?>" data-ext="<?php echo $ext; ?>" data-increment="<?php echo esc_attr( $row_option['increment'] ); ?>" data-ext="<?php echo esc_attr( $row_option['ext'] ); ?>"/>
 
 			<?php elseif ( 'border_checkbox' === $row_option['type'] ) : ?>
 

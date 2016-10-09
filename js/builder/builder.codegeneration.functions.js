@@ -129,15 +129,16 @@ function dslc_save_draft_composer() {
 
 /**
  * CODE GENERATION - Generate LC Data
+ * @param section is not required. If no parameter provided function generates
  */
 function dslc_generate_code() {
-
 	if ( dslcDebug ) console.log( 'dslc_generate_code' );
 
 	// Vars
 	var moduleCode = '',
 	module_size,
 	composerCode = '',
+	pageCodeInJson = '',
 	maxPerRow = 12,
 	maxPerRowA = 12,
 	currPerRow = 0,
@@ -147,7 +148,8 @@ function dslc_generate_code() {
 	modulesAreaLastState,
 	modulesAreaFirstState,
 	modulesSection,
-	modulesSectionAtts = '';
+	modulesSectionAtts = '',
+	modulesSectionJson;
 
 	/**
 	 * Go through module areas (empty or not empty)
@@ -157,11 +159,11 @@ function dslc_generate_code() {
 
 	jQuery('#dslc-main .dslc-modules-area', LiveComposer.Builder.PreviewAreaDocument).each(function(){
 
-
 		if ( jQuery('.dslc-module-front', this).length ) {
 
 			jQuery(this).removeClass('dslc-modules-area-empty').addClass('dslc-modules-area-not-empty');
 			jQuery('.dslca-no-content', this).hide();
+
 		} else {
 
 			jQuery(this).removeClass('dslc-modules-area-not-empty').addClass('dslc-modules-area-empty');
@@ -183,171 +185,50 @@ function dslc_generate_code() {
 
 	jQuery('#dslc-main .dslc-modules-section', LiveComposer.Builder.PreviewAreaDocument).each(function(){
 
-		// Update dslc-modules-section-(not)empty classes
-		if ( jQuery('.dslc-modules-area', this).length ) {
-
-			jQuery(this).removeClass('dslc-modules-section-empty').addClass('dslc-modules-section-not-empty');
-		} else {
-
-			jQuery(this).removeClass('dslc-modules-section-not-empty').addClass('dslc-modules-section-empty');
-		}
-
-		// Remove last and first classes from module areas and modules
-		jQuery('.dslc-modules-area.dslc-last-col, .dslc-modules-area.dslc-first-col', this).removeClass('dslc-last-col dslc-first-col');
-		jQuery('.dslc-module-front.dslc-last-col, .dslc-module-front.dslc-first-col', this).removeClass('dslc-last-col dslc-first-col');
-
-		// Vars
-		currPerRowA = 0;
 		modulesSection = jQuery(this);
 
-		// Generate attributes for the row shortcode
-		modulesSectionAtts = '';
-		jQuery('.dslca-modules-section-settings input', modulesSection).each(function(){
-			modulesSectionAtts = modulesSectionAtts + jQuery(this).data('id') + '="' + jQuery(this).val() + '" ';
-		});
+		var testing = modulesSection.find('.dslca-section-code').val();
 
-		// Open the module section ( row ) shortcode
-		composerCode = composerCode + '[dslc_modules_section ' + modulesSectionAtts + '] ';
+		modulesSectionJson = dslc_generate_section_code( modulesSection );
 
-		/**
-		 * Go through each column of current row
-		 */
-		jQuery('.dslc-modules-area', modulesSection).each(function(){
+		// Update JSON in hidden text area with updated code.
+		modulesSection.find('.dslca-section-code').val( modulesSectionJson );
 
-			// Reset width counter for modules
-			currPerRow = 0;
-
-			// Vars
-			modulesArea = jQuery(this);
-			modulesAreaSize = parseInt( modulesArea.data('size') );
-			modulesAreaLastState = 'no';
-			modulesAreaFirstState = 'no';
-
-			// Increment area column counter
-			currPerRowA += modulesAreaSize;
-
-			// If area column counter same as maximum
-			if ( currPerRowA == maxPerRowA ) {
-
-				// Apply classes to current and next column
-				jQuery(this).addClass('dslc-last-col').next('.dslc-modules-area').addClass('dslc-first-col');
-
-				// Reset area column counter
-				currPerRowA = 0;
-
-				// Set shortcode's "last" attribute to "yes"
-				modulesAreaLastState = 'yes';
-
-			// If area column counter bigger than maximum
-			} else if ( currPerRowA > maxPerRowA ) {
-
-				// Apply classes to current and previous column
-				jQuery(this).removeClass('dslc-last-col').addClass('dslc-first-col');
-
-				// Set area column counter to the size of the current area
-				currPerRowA = modulesAreaSize;
-
-				// Set shortcode's "first" attribute to yes
-				modulesAreaFirstState = 'yes';
-			}
-
-			// If area column counter same as current area size
-			if ( currPerRowA == modulesAreaSize ) {
-
-				// Set shortcode's "first" attribute to yes
-				modulesAreaFirstState = 'yes';
-			}
-
-			// Open the modules area ( area ) shortcode
-			composerCode = composerCode + '[dslc_modules_area last="' + modulesAreaLastState + '" first="' + modulesAreaFirstState + '" size="' + modulesAreaSize + '"] ';
-
-			/**
-			 * Go through each module of current area
-			 */
-
-			jQuery('.dslc-module-front', modulesArea).each(function(){
-
-				var dslc_module = jQuery(this);
-
-				// Vars
-				module_size = parseInt( dslc_module[0].getAttribute('data-dslc-module-size') );
-				var moduleLastState = 'no';
-				var moduleFirstState = 'no';
-
-				// Increment modules column counter
-				currPerRow += module_size;
-
-				// If modules column counter same as maximum
-				if ( currPerRow == maxPerRow ) {
-
-					// Add classes to current and next module
-					jQuery(this).addClass('dslc-last-col');
-					jQuery(this).next('.dslc-module-front').addClass('dslc-first-col');
-
-					// Reset modules column counter
-					currPerRow = 0;
-
-					// Set shortcode's "last" state to "yes"
-					moduleLastState = 'yes';
-
-					// Set shorcode's "first" state to "yes"
-					moduleFirstState = 'yes';
-
-
-				// If modules column counter bigger than maximum
-				} else if ( currPerRow > maxPerRow ) {
-
-					// Add classes to current and previous module
-					jQuery(this).removeClass('dslc-last-col').addClass('dslc-first-col');
-
-					// Set modules column counter to the size of current module
-					currPerRow = module_size;
-
-					// Set shortcode's "first" state to "yes"
-					moduleFirstState = 'yes';
-				}
-
-				try {
-					// Get module's LC data
-					moduleCode = dslc_module[0].querySelector('.dslca-module-code').value;
-
-				} catch(err) {
-					console.info( 'No DSLC code found in module: ' + dslc_module[0].getAttribute('id') );
-				}
-
-				if ( '' !== moduleCode ) {
-					// Add the module shortcode containing the data
-					composerCode = composerCode + '[dslc_module last="' + moduleLastState + '"]' + moduleCode + '[/dslc_module] ';
-				}
-
-				// Fix bug with modules duplication if broken module saved.
-				moduleCode = '';
-
-			});
-
-			// Close area shortcode
-			composerCode = composerCode + '[/dslc_modules_area] ';
-		});
+		// Add row code into the the whole page code.
+		pageCodeInJson = pageCodeInJson + modulesSectionJson + ',';
 
 		// Close row ( section ) shortcode
-		composerCode = composerCode + '[/dslc_modules_section] ';
+		// composerCode = composerCode + '[/dslc_modules_section] ';
 	});
 
+	// Remove the last comma in the code.
+	pageCodeInJson = pageCodeInJson.slice(0, -1);
+
+	// pageCodeInJson = pageCodeInJson;
+	pageCodeInJson = '[' + pageCodeInJson + ']';
+
 	// Apply the new code values to the setting containers
-	jQuery('#dslca-code').val(composerCode);
-	jQuery('#dslca-export-code').val(composerCode);
+	jQuery('#dslca-code').val(pageCodeInJson);
+
+	jQuery('#dslca-export-code').val(pageCodeInJson);
 }
+
 
 /**
  * CODE GENERATION - Generate LC Data for Section
+ *
+ * @param  {jQuery Object} theModulesSection jQuery element for the section to process
+ * @return {String}                   			JSON code for the section
  */
 function dslc_generate_section_code( theModulesSection ) {
 
 	if ( dslcDebug ) console.log( 'dslc_generate_section_code' );
 
-	var moduleCode,
+	// Vars
+	var moduleCode = '',
 	module_size,
 	composerCode = '',
+	pageCodeInJson = '',
 	maxPerRow = 12,
 	maxPerRowA = 12,
 	currPerRow = 0,
@@ -357,69 +238,226 @@ function dslc_generate_section_code( theModulesSection ) {
 	modulesAreaLastState,
 	modulesAreaFirstState,
 	modulesSection,
-	modulesSectionAtts = '';
+	modulesSectionAtts = '',
+	modulesSectionJsonString = '',
+	modulesSectionJson;
 
+	modulesSection = theModulesSection;
+
+	// Update dslc-modules-section-(not)empty classes
+	if ( jQuery('.dslc-modules-area', modulesSection).length ) {
+
+		modulesSection.removeClass('dslc-modules-section-empty').addClass('dslc-modules-section-not-empty');
+	} else {
+
+		modulesSection.removeClass('dslc-modules-section-not-empty').addClass('dslc-modules-section-empty');
+	}
+
+	// Remove last and first classes from module areas and modules
+	jQuery('.dslc-modules-area.dslc-last-col, .dslc-modules-area.dslc-first-col', this).removeClass('dslc-last-col dslc-first-col');
+	jQuery('.dslc-module-front.dslc-last-col, .dslc-module-front.dslc-first-col', this).removeClass('dslc-last-col dslc-first-col');
+
+	// Vars
 	currPerRowA = 0;
 
-	var modulesSection = theModulesSection;
+	// Get current JSON.
+	modulesSectionJsonString = modulesSection.find('.dslca-section-code').val();
+
+	modulesSectionJson = JSON.parse(modulesSectionJsonString);
+
+	// Generate attributes for the row shortcode
+	modulesSectionAtts = '';
 
 	jQuery('.dslca-modules-section-settings input', modulesSection).each(function(){
 
-		modulesSectionAtts = modulesSectionAtts + jQuery(this).data('id') + '="' + jQuery(this).val() + '" ';
+		var currentInput = jQuery(this);
+		var currentAttrKey = currentInput.data('id');
+		var currentAttrVal = currentInput.val();
+
+		// Update hidden text fields with row attributes.
+		modulesSectionAtts = modulesSectionAtts + currentAttrKey + '="' + currentAttrVal + '" ';
+
+		// Update JSON object.
+		modulesSectionJson[currentAttrKey] = currentAttrVal;
 	});
 
-	composerCode = composerCode + '[dslc_modules_section ' + modulesSectionAtts + '] ';
+	// Prepare place for module areas.
+	modulesSectionJson['content'] = [];
 
-	// Go through each modules area
+	// Open the module section ( row ) shortcode
+	// composerCode = composerCode + '[dslc_modules_section ' + modulesSectionAtts + '] ';
+
+	/**
+	 * Go through each column of current row
+	 */
 	jQuery('.dslc-modules-area', modulesSection).each(function(){
 
+		// Reset width counter for modules
+		currPerRow = 0;
+
+		// Vars
 		modulesArea = jQuery(this);
 		modulesAreaSize = parseInt( modulesArea.data('size') );
 		modulesAreaLastState = 'no';
 		modulesAreaFirstState = 'no';
 
+		// Increment area column counter
 		currPerRowA += modulesAreaSize;
+
+		jQuery(this).removeClass('dslc-first-col');
+		jQuery(this).removeClass('dslc-last-col');
+
+		// If area column counter same as maximum
 		if ( currPerRowA == maxPerRowA ) {
 
+			// Apply classes to current and next column
 			jQuery(this).addClass('dslc-last-col').next('.dslc-modules-area').addClass('dslc-first-col');
+
+			// Reset area column counter
 			currPerRowA = 0;
+
+			// Set shortcode's "last" attribute to "yes"
 			modulesAreaLastState = 'yes';
+
+		// If area column counter bigger than maximum
 		} else if ( currPerRowA > maxPerRowA ) {
 
+			// Apply classes to current and previous column
 			jQuery(this).removeClass('dslc-last-col').addClass('dslc-first-col');
+
+			// Set area column counter to the size of the current area
 			currPerRowA = modulesAreaSize;
+
+			// Set shortcode's "first" attribute to yes
 			modulesAreaFirstState = 'yes';
 		}
 
+		// If area column counter same as current area size
 		if ( currPerRowA == modulesAreaSize ) {
 
+			// Set shortcode's "first" attribute to yes
 			modulesAreaFirstState = 'yes';
+
+			// Apply classes to current and previous column
+			jQuery(this).removeClass('dslc-last-col').addClass('dslc-first-col');
+
 		}
 
-		composerCode = composerCode + '[dslc_modules_area last="' + modulesAreaLastState + '" first="' + modulesAreaFirstState + '" size="' + modulesAreaSize + '"] ';
+		// Open the modules area ( area ) shortcode
+		// composerCode = composerCode + '[dslc_modules_area last="' + modulesAreaLastState + '" first="' + modulesAreaFirstState + '" size="' + modulesAreaSize + '"] ';
 
-		// Go through each module in the area
+		var moduleAreaJSON = '{"element_type":"module_area","last":"' + modulesAreaLastState + '","first":"' + modulesAreaFirstState + '","size":"' + modulesAreaSize + '"}';
+
+		// pageCodeInJson = pageCodeInJson +  moduleAreaJSON + ',';
+
+		moduleAreaJSON = JSON.parse( moduleAreaJSON );
+		moduleAreaJSON.content = [];
+
+		/**
+		 * Go through each module of current area
+		 */
+
 		jQuery('.dslc-module-front', modulesArea).each(function(){
 
-			module_size = parseInt( jQuery(this).data('dslc-module-size') );
+			var dslc_module = jQuery(this);
+
+			// Vars
+			module_size = parseInt( dslc_module[0].getAttribute('data-dslc-module-size') );
+			var moduleLastState = 'no';
+			var moduleFirstState = 'no';
+
+			jQuery(this).removeClass('dslc-first-col');
+			jQuery(this).removeClass('dslc-last-col');
+
+			// Increment modules column counter
 			currPerRow += module_size;
 
-			if ( currPerRow == modulesAreaSize ) {
+			// If modules column counter same as maximum
+			if ( currPerRow == maxPerRow ) {
 
-				jQuery(this).addClass('dslc-last-col').next('.dslc-module-front').addClass('dslc-first-col');
+				// Add classes to current and next module
+				jQuery(this).addClass('dslc-last-col');
+				jQuery(this).next('.dslc-module-front').addClass('dslc-first-col');
+
+				// Reset modules column counter
 				currPerRow = 0;
+
+				// Set shortcode's "last" state to "yes"
+				moduleLastState = 'yes';
+
+				// Set shorcode's "first" state to "yes"
+				moduleFirstState = 'yes';
+
+
+			// If modules column counter bigger than maximum
+			} else if ( currPerRow > maxPerRow ) {
+
+				// Add classes to current and previous module
+				jQuery(this).removeClass('dslc-last-col').addClass('dslc-first-col');
+
+				// Set modules column counter to the size of current module
+				currPerRow = module_size;
+
+				// Set shortcode's "first" state to "yes"
+				moduleFirstState = 'yes';
 			}
 
-			moduleCode = jQuery(this).find('.dslca-module-code').val();
-			composerCode = composerCode + '[dslc_module]' + moduleCode + '[/dslc_module] ';
+			// If modules column counter same as current module size
+			if ( currPerRow == module_size ) {
+
+				// Set shortcode's "first" attribute to yes
+				moduleFirstState = 'yes';
+
+				// Apply classes to current and previous column
+				jQuery(this).removeClass('dslc-last-col').addClass('dslc-first-col');
+
+			}
+
+			try {
+				// Get module's LC data
+				moduleCode = dslc_module[0].querySelector('.dslca-module-code').value;
+
+			} catch(err) {
+				console.info( 'No DSLC code found in module: ' + dslc_module[0].getAttribute('id') );
+			}
+
+			if ( '' !== moduleCode ) {
+				// Add the module shortcode containing the data
+				// composerCode = composerCode + '[dslc_module last="' + moduleLastState + '"]' + moduleCode + '[/dslc_module] ';
+
+				var moduleCodeJSON = JSON.parse(moduleCode);
+				// Add idicator for the last module in the row.
+				moduleCodeJSON.last = moduleLastState;
+
+				// Clearn the module code from keys with empty values.
+				jQuery.each(moduleCodeJSON, function(index, el) {
+					if ( false === el || '' === el ) {
+						delete moduleCodeJSON[index];
+					}
+				});
+
+				// Put optimized code back into the hidden textarea.
+				dslc_module[0].querySelector('.dslca-module-code').value = JSON.stringify(moduleCodeJSON);
+
+				// Add the module JSON as array item
+				moduleAreaJSON['content'].push( moduleCodeJSON );
+
+				// pageCodeInJson = pageCodeInJson + moduleCode + ',';
+
+			}
+
+			// Fix bug with modules duplication if broken module saved.
+			moduleCode = '';
+
 		});
 
-		composerCode = composerCode + '[/dslc_modules_area] ';
+		modulesSectionJson['content'].push(moduleAreaJSON);
+
+		// Close area shortcode
+		// composerCode = composerCode + '[/dslc_modules_area] ';
 	});
 
-	composerCode = composerCode + '[/dslc_modules_section] ';
-
-	return composerCode;
+	return JSON.stringify( modulesSectionJson );
 }
 
 /**

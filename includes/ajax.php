@@ -54,7 +54,7 @@ function dslc_ajax_add_modules_section( $atts ) {
 		$empty_atts = array();
 
 		$section_content = dslc_modules_area_front( $empty_atts, '' );
-		$output = dslc_modules_section_front( $seciton_atts, $section_content );
+		$output = dslc_modules_section_front( $empty_atts, $section_content );
 
 		// Set the output.
 		$response['output'] = $output;
@@ -94,6 +94,7 @@ function dslc_ajax_add_module( $atts ) {
 		}
 
 		$post_id = intval( $_POST['dslc_post_id'] );
+
 		if ( isset( $_POST['dslc_preload_preset'] ) && 'enabled' === $_POST['dslc_preload_preset'] ) {
 
 			$preload_preset = 'enabled';
@@ -111,31 +112,9 @@ function dslc_ajax_add_module( $atts ) {
 
 			$module_instance_id = esc_attr( $_POST['dslc_module_instance_id'] );
 
-		// If it is a new module ( no ID )?
 		} else {
-
-			// Get current count.
-			$module_id_count = get_option( 'dslc_module_id_count' );
-
-			// If not the first one?
-			if ( $module_id_count ) {
-
-				// Increment by one.
-				$module_instance_id = $module_id_count + 1;
-
-				// Update the count.
-				update_option( 'dslc_module_id_count', $module_instance_id );
-
-			// If it is the first one?
-			} else {
-
-				// Set 1 as the ID.
-				$module_instance_id = 1;
-
-				// Update the count.
-				update_option( 'dslc_module_id_count', $module_instance_id );
-
-			}
+			// If it is a new module ( no ID )?
+			$module_instance_id = dslc_get_new_module_id();
 		}
 
 		// Instanciate the module class.
@@ -553,6 +532,7 @@ function dslc_ajax_display_module_options( $atts ) {
 						$slider_min = 0;
 						$slider_max = 100;
 						$slider_increment = 1;
+						$onlypositive = false;
 
 						if ( isset( $module_option['min'] ) ) {
 							$slider_min = $module_option['min'];
@@ -566,11 +546,26 @@ function dslc_ajax_display_module_options( $atts ) {
 							$slider_increment = $module_option['increment'];
 						}
 
+						if ( isset( $module_option['onlypositive'] ) ) {
+							$onlypositive = $module_option['onlypositive'];
+						}
+
 						?>
 
 						<div class="dslca-module-edit-field-numeric-wrap">
-							<input type="number" class="dslca-module-edit-field dslca-module-edit-field-numeric" name="<?php echo esc_attr( $module_option['id'] ); ?>" data-id="<?php echo esc_attr( $module_option['id'] ); ?>" value="<?php echo esc_attr( $curr_value ); ?>" data-starting-val="<?php echo esc_attr( $curr_value ); ?>" data-min="<?php echo esc_attr( $slider_min ); ?>" data-max="<?php echo esc_attr( $slider_max ); ?>"  data-increment="<?php echo esc_attr( $slider_increment ); ?>" data-ext="<?php echo esc_attr( $ext ); ?>" <?php echo $affect_on_change_append; ?> />
+							<input type="number" 
+								class="dslca-module-edit-field dslca-module-edit-field-numeric"
+								name="<?php echo esc_attr( $module_option['id'] ); ?>"
+								value="<?php echo esc_attr( $curr_value ); ?>"
+								data-starting-val="<?php echo esc_attr( $curr_value ); ?>"
+								data-id="<?php echo esc_attr( $module_option['id'] ); ?>"
+								data-min="<?php echo esc_attr( $slider_min ); ?>"
+								data-max="<?php echo esc_attr( $slider_max ); ?>"
+								data-increment="<?php echo esc_attr( $slider_increment ); ?>"
+								data-onlypositive="<?php echo esc_attr( $onlypositive ); ?>"
+								data-ext="<?php echo esc_attr( $ext ); ?>" <?php echo $affect_on_change_append; ?> />
 							<span class="dslca-module-edit-field-numeric-ext"><?php echo $module_option['ext']; ?></span>
+
 						</div>
 
 					<?php elseif ( 'font' === $module_option['type'] ) : ?>
@@ -809,8 +804,19 @@ function dslc_ajax_save_composer( $atts ) {
 		 */
 		delete_post_meta( $post_id, 'dslc_code' );
 
+		/**
+		 * Function: json_decode
+		 * Convert JSON data into an array
+		 * to store in the custom field of the post as serialized data.
+		 *
+		 * Function: stripslashes
+		 * jQuery Ajax esape all quotes automatically,
+		 * so we need stripslashes in the code below.
+		 */
+		$serialized_composer_code = json_decode( stripslashes( $composer_code ), true );
+
 		// Add/update the post/page with the composer code.
-		if ( update_post_meta( $post_id, 'dslc_code', $composer_code ) ) {
+		if ( update_post_meta( $post_id, 'dslc_code', maybe_serialize( $serialized_composer_code ) ) ) {
 			$response['status'] = 'success';
 		} else {
 			$response['status'] = 'failed';
@@ -912,12 +918,7 @@ function dslc_ajax_load_template( $atts ) {
 		// The code of the template to load.
 		$template_code = $templates[ $template_id ]['code'];
 
-		// Apply for new ID.
-		$template_code = str_replace( '[dslc_module ', '[dslc_module give_new_id="true" ', $template_code );
-		$template_code = str_replace( '[dslc_module]', '[dslc_module give_new_id="true"]', $template_code );
-
-		// Get the front-end output.
-		$response['output'] = do_shortcode( $template_code );
+		$response['output'] = dslc_render_content( $template_code, true );
 
 		// Encode response.
 		$response_json = wp_json_encode( $response );
@@ -949,12 +950,7 @@ function dslc_ajax_import_template( $atts ) {
 		// The code of the template.
 		$template_code = stripslashes( $_POST['dslc_template_code'] );
 
-		// Apply for new ID.
-		$template_code = str_replace( '[dslc_module ', '[dslc_module give_new_id="true" ', $template_code );
-		$template_code = str_replace( '[dslc_module]', '[dslc_module give_new_id="true"]', $template_code );
-
-		// Get the front-end output.
-		$response['output'] = do_shortcode( $template_code );
+		$response['output'] = dslc_render_content( $template_code, true );
 
 		// Encode response.
 		$response_json = wp_json_encode( $response );
@@ -1082,14 +1078,9 @@ function dslc_ajax_import_modules_section( $atts ) {
 		$response = array();
 
 		// The code of the modules section.
-		$modules_code = stripslashes( $_POST['dslc_modules_section_code'] );
+		$code_to_import = stripslashes( $_POST['dslc_modules_section_code'] );
 
-		// Apply for new ID.
-		$modules_code = str_replace( '[dslc_module ', '[dslc_module give_new_id="true" ', $modules_code );
-		$modules_code = str_replace( '[dslc_module]', '[dslc_module give_new_id="true"]', $modules_code );
-
-		// Get the front-end output.
-		$response['output'] = do_shortcode( $modules_code );
+		$response['output'] = dslc_render_content( $code_to_import, true );
 
 		// Encode response.
 		$response_json = wp_json_encode( $response );
@@ -1102,6 +1093,7 @@ function dslc_ajax_import_modules_section( $atts ) {
 		exit;
 	}
 } add_action( 'wp_ajax_dslc-ajax-import-modules-section', 'dslc_ajax_import_modules_section' );
+
 
 /**
  * Return the code to alter defaults for a module
@@ -1121,7 +1113,7 @@ function dslc_ajax_dm_module_defaults_code( $atts ) {
 		$modules_code = stripslashes( $_POST['dslc_modules_options'] );
 
 		// Turn the string of settings into an array.
-		$settings_new = maybe_unserialize( base64_decode( $modules_code ) );
+		$settings_new = dslc_json_decode( $modules_code );
 
 		if ( is_array( $settings_new ) ) {
 

@@ -47,7 +47,8 @@ function dslc_presets_load( $settings ) {
 		if ( $preset_data ) {
 
 			// Get preset settings
-			$preset_settings = maybe_unserialize( base64_decode( $preset_data['code'] ) );
+			$preset_settings = dslc_json_decode( $preset_data['code'] );
+			// $preset_settings = maybe_unserialize( base64_decode( $preset_data['code'] ) );
 			$preset_settings_stripped = $preset_settings;
 
 			// Go through all the settings

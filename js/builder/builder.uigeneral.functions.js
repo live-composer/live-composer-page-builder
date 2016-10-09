@@ -105,6 +105,7 @@ jQuery(document).on( 'click', '.dslca-currently-editing', function(){
 
 		activeElement = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument);
 		outlineColor = '#5890e5';
+
 	} else if ( jQuery('.dslca-modules-section-being-edited', LiveComposer.Builder.PreviewAreaDocument).length ) {
 
 		activeElement = jQuery('.dslca-modules-section-being-edited', LiveComposer.Builder.PreviewAreaDocument);

@@ -2275,6 +2275,10 @@ class DSLC_Module {
 			$user_options['dslc_m_size'] = '12';
 		}
 
+		if ( ! isset( $user_options['element_type'] ) ) {
+			$user_options['element_type'] = 'module';
+		}
+
 		$user_options_no_defaults = $user_options;
 
 		// If Live Composer is in editing mode: output some additional (hidden) elements.
@@ -2297,7 +2301,7 @@ class DSLC_Module {
 					$option_value = $option['std'];
 				}
 
-				if ( isset( $user_options[ $option_id ] ) && $user_options[ $option_id ] === $option['std'] ) {
+				if ( isset( $user_options[ $option_id ] ) && $user_options[ $option_id ] === $option['std'] || '' === $user_options[ $option_id ] ) {
 					unset( $user_options_no_defaults[ $option_id ] );
 				}
 
@@ -2318,7 +2322,7 @@ class DSLC_Module {
 
 			</div><!-- dslca-module-options-front -->
 
-			<textarea class="dslca-module-code"><?php echo base64_encode( serialize( $user_options_no_defaults ) ); ?></textarea>
+			<textarea class="dslca-module-code"><?php echo json_encode( $user_options_no_defaults ); ?></textarea>
 
 			<span class="dslc-sortable-helper-icon dslc-icon-<?php echo esc_attr( $this->module_icon ); ?>" data-title="<?php echo esc_attr( $this->module_title ); ?>" data-icon="<?php echo esc_attr( $this->module_icon ); ?>"></span>
 

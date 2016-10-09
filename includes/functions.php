@@ -297,19 +297,8 @@ function dslc_get_new_module_id() {
 
 	// Allowed to do this?
 	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
-
-		// Get current count.
-		$module_id_count = get_option( 'dslc_module_id_count' );
-
-		// Increment by one.
-		$module_instance_id = $module_id_count + 1;
-
-		// Update the count.
-		update_option( 'dslc_module_id_count', $module_instance_id );
-
-		// Return new ID.
-		return $module_instance_id;
-
+		// Generates unique id like 'kojb85j8oc'.
+		return substr(str_shuffle(MD5(microtime())), 0, 11);
 	}
 }
 
@@ -534,7 +523,7 @@ function dslc_save_preset( $preset_name, $preset_code_raw, $module_id ) {
 	$preset_id = strtolower( str_replace( ' ', '-', $preset_name ) );
 
 	// Clean up ( step 1 - get data ).
-	$preset_code_raw = maybe_unserialize( base64_decode( $preset_code_raw ) );
+	$preset_code_raw = dslc_json_decode( $preset_code_raw );
 	$preset_code = array();
 
 	// The ID of the module to add.

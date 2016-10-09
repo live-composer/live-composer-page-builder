@@ -665,7 +665,7 @@ jQuery(document).ready(function($) {
 	// Preview Module Opt Change - Numeric
 	$(document).on( 'keyup, blur', '.dslca-module-edit-field-numeric', function(){
 
-		return false;
+		return false; // @todo: Can we delete this whole listener?
 		var dslcOptionValue = '',
 			dslcOption = $(this),
 			dslcOptionID = dslcOption.data('id'),

@@ -259,23 +259,29 @@ function dslc_plugin_options_input_sanitize( $input ) {
 
 	$new_input = array();
 
-	foreach ( $input as $key => $option_value ) {
+	if ( is_array( $input ) ) {
+		foreach ( $input as $key => $option_value ) {
 
-		if ( ! is_array( $option_value ) ) {
+			if ( ! is_array( $option_value ) ) {
 
-			$new_input[ $key ] = sanitize_text_field( $option_value );
+				$new_input[ $key ] = sanitize_text_field( $option_value );
 
-		} else {
+			} else {
 
-			foreach ( $option_value as $inner_key => $inner_option_value ) {
+				foreach ( $option_value as $inner_key => $inner_option_value ) {
 
-				$new_input[ $key ][ $inner_key ] = sanitize_text_field( $inner_option_value );
+					$new_input[ $key ][ $inner_key ] = sanitize_text_field( $inner_option_value );
 
+				}
 			}
 		}
+
+		return $new_input;
+
+	} else {
+		return $input;
 	}
 
-	return $new_input;
 }
 
 /**
