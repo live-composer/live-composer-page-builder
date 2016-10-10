@@ -274,7 +274,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		$dslc_var_row_options['border_width'] = array(
 			'id' => 'border_width',
 			'min' => 0,
-			'increment' => 1,
+			
+
 			'std' => '0',
 			'label' => __( 'Border Width', 'live-composer-page-builder' ),
 			'type' => 'slider',
@@ -319,7 +320,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 			'affect_on_change_rule' => 'margin-left,margin-right',
 			'ext' => '%',
 			'max' => 90,
-			'increment' => 1,
+			
+
 		);
 
 		$dslc_var_row_options['margin_b'] = array(
@@ -330,7 +332,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 			'affect_on_change_rule' => 'margin-bottom',
 			'ext' => 'px',
 			'max' => 500,
-			'increment' => 1,
+			
+
 		);
 
 		$dslc_var_row_options['padding'] = array(
@@ -351,7 +354,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 			'affect_on_change_rule' => 'padding-left,padding-right',
 			'ext' => '%',
 			'max' => 90,
-			'increment' => 1,
+			
+
 		);
 
 		$dslc_var_row_options['custom_class'] = array(
