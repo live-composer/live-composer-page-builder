@@ -193,16 +193,20 @@ body a:focus {
 }
 
 .dslca-container {
-	font-family: 'Open Sans', sans-serif;
-	bottom: 0;
-	color: #fff;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 	left: 0;
+	top: 0;
+	bottom: 0;
 	position: fixed;
-	right: 0;
 	z-index: 99999;
-	-webkit-transition: bottom 0.3s;
-	-moz-transition: bottom 0.3s;
-	transition: bottom 0.3s;
+
+	-webkit-transition: left 0.3s;
+	-moz-transition: left 0.3s;
+	transition: left 0.3s;
+
+	background: #EEEEEE;
+
+	width: 294px;
 }
 
 .dslca-container,
@@ -445,8 +449,9 @@ body a:focus {
 
 	.dslca-sections {
 		/*background: #5890e5;*/
-		background: #4A7AC3;
+		/*background: #4A7AC3;*/
 		box-sizing: border-box;
+		height: 100%;
 	}
 
 	/* Module settings panel */
@@ -493,7 +498,7 @@ body a:focus {
 
 			.dslca-section-title {
 				display: block;
-				float: left;
+				/*float: left;*/
 				background: #3b6fbe;
 				color: #fff;
 				font-family: 'Open Sans', sans-serif;
@@ -579,7 +584,7 @@ body a:focus {
 	 */
 
 	.dslca-modules {
-
+		height: 100%;
 	}
 
 
@@ -589,21 +594,24 @@ body a:focus {
 }
 
 		.dslca-module {
-			color: #fff;
+			color: #555;
+			background: #FFFFFF;
 
-			display: inline-block;
-			/*float: left;*/
-			font-family: 'Roboto Condensed', sans-serif;
-			font-size: 15px;
+			width: 47%;
+			min-height: 44px;
+			margin: 5px 0 0 2%;
+
+			display: inline-flex;
+			align-items: center;
+
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+			font-size: 14px;
 			font-weight: 400;
 			line-height: 1;
-			padding: 2px 12px 9px 12px;
-			background: #5890e5;
-			margin: 4px 2px;
+
 			box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15), -1px 1px 0px 0 rgba(255, 255, 255, 0.05) inset;
 			border-radius: 2px;
 			text-align: center;
-			min-width: 70px;
 
 			transition: transform 0.05s linear 0.01s;
 
@@ -619,7 +627,7 @@ body a:focus {
 		.dslca-module[data-id="DSLC_Notification"],
 		.dslca-module[data-id="DSLC_Sliders"],
 		.dslca-module[data-id="DSLC_Staff"]{
-			margin-right: 14px;
+			/*margin-right: 14px;*/
 		}
 
 		.dslca-module[data-id="DSLC_M_A"] {
@@ -692,13 +700,12 @@ body a:focus {
 		}
 
 			.dslca-module .dslca-icon {
-				color: #AECEF9;
-				vertical-align: top;
+				color: #a0a5aa;
 				font-size: 20px;
-				display: block;
-				line-height: 41px;
+				line-height: 1;
 				text-align: center;
-				text-shadow: 0px 1px rgba(0, 0, 0, 0.05);
+				text-shadow: 0 1px rgba(0, 0, 0, 0.05);
+				width: 30%;
 			}
 
 			.dslca-module.ui-draggable-dragging .dslca-icon {
@@ -2296,13 +2303,13 @@ body.rtl .dslca-modules-area-placeholder {
 
 .dslca-section-scroller {
 	position: relative;
-	height: 74px;
-	margin-right: 80px;
-	overflow: hidden;
+	height: 100%;
+	overflow: scroll;
+	padding: 10px;
 }
 
 	.dslca-section-scroller-inner {
-		position: absolute;
+/*		position: absolute;
 		top: 0;
 		left: 0;
 		bottom: 0;
@@ -2310,15 +2317,20 @@ body.rtl .dslca-modules-area-placeholder {
 		text-align: left;
 		-webkit-transition: left 0.3s ease-in-out;
 		-moz-transition: left 0.3s ease-in-out;
-		transition: left 0.3s ease-in-out;
+		transition: left 0.3s ease-in-out;*/
 	}
 
 		.dslca-section-scroller-content {
-			display: inline-block;
-			padding-right: 80px;
+			/*display: inline-block;*/
+			/*padding-right: 80px;*/
+align-content: flex-start;
+display: flex;
+flex-wrap: wrap;
 		}
 
 .dslca-section-scroller-fade {
+	display: none;
+
 	background: -moz-linear-gradient(left,  rgba(88,144,229,0) 0%, rgba(70, 116, 185,1) 100%);
 	background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(88,144,229,0)), color-stop(100%,rgba(70, 116, 185,1)));
 	background: -webkit-linear-gradient(left,  rgba(88,144,229,0) 0%,rgba(70, 116, 185,1) 100%);
@@ -2335,13 +2347,15 @@ body.rtl .dslca-modules-area-placeholder {
 }
 
 .dslca-section-scroller-nav {
-	position: absolute;
+	display: none;
+
+/*	position: absolute;
 	right: 0;
 	top: 0;
 	bottom: 0;
 	overflow: hidden;
 	width: 80px;
-	font-size: 30px;
+	font-size: 30px;*/
 }
 
 	.dslca-section-scroller-nav > a {
