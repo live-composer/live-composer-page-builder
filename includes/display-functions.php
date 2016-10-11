@@ -903,6 +903,7 @@ function dslc_json_decode( $raw_code ) {
 
 	$decoded = false;
 
+	// $raw_code = maybe_unserialize( stripslashes($raw_code) );
 	$raw_code = maybe_unserialize( $raw_code );
 
 	// Array already provided. Do nothing.
@@ -960,12 +961,12 @@ function dslc_module_front( $atts, $settings_raw = null ) {
 
 		// Check if active.
 		if ( ! dslc_is_module_active( $module_id ) ) {
-					return;
+			return;
 		}
 
 		// If class does not exists.
 		if ( ! class_exists( $module_id ) ) {
-					return;
+			return;
 		}
 
 		// Apply new instance ID if needed.
@@ -1597,12 +1598,13 @@ function dslc_shortcodes_add_suffix_css( $composer_code ){
  */
 function dslc_render_css( $composer_code ) {
 
-	$composer_code = maybe_unserialize( $composer_code );
+	// $composer_code = maybe_unserialize( $composer_code );
+	$composer_code_array = dslc_json_decode( $composer_code );
 
-	if ( is_array( $composer_code ) ) {
+	if ( is_array( $composer_code_array ) ) {
 		// JSON based code version.
 		// Go though ROWs.
-		foreach ( $composer_code as $row) {
+		foreach ( $composer_code_array as $row) {
 			// Go through each Module Area.
 			foreach ( $row['content'] as $module_area) {
 				// Go through each Module.
