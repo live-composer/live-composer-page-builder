@@ -156,6 +156,12 @@
 		}
 	});
 
+	LiveComposer.Builder.PreviewAreaDocument.on( 'mouseleave', '.dslca-change-width-modules-area-options', function(e){
+
+		// Hide width seleciton panel.
+		jQuery(this).hide();
+	});
+
 	/**
 	 * Hook - Add Modules Area
 	 * TODO: Where we use it? Delete maybe?

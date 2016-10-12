@@ -146,9 +146,17 @@
 
 		if ( ! $(this).hasClass('dslca-action-disabled') ) {
 
-			$('.dslca-change-width-module-options', this).toggle();
-			$(this).closest('.dslca-module-manage').toggleClass('dslca-module-manage-change-width-active');
+			jQuery('.dslca-change-width-module-options', this).toggle();
+			$(this).closest('.dslc-module-front').toggleClass('dslca-change-width-active');
 		}
+	});
+
+	LiveComposer.Builder.PreviewAreaDocument.on( 'mouseleave', '.dslca-change-width-module-options', function(e){
+
+			// Hide width seleciton panel.
+			jQuery(this).hide();
+			// Remove class that puts module on the very top level.
+			$(this).closest('.dslc-module-front').removeClass('dslca-change-width-active');
 	});
 
 	/**
