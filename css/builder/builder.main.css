@@ -1490,7 +1490,7 @@ body a:focus {
 
 body.module-editing-in-progress .dslc-module-front:not(.dslca-module-being-edited),
 body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-section-being-edited) {
-	opacity: .5;
+	/*opacity: .5;*/
 	cursor: default!important;
 }
 
