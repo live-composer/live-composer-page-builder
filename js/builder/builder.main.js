@@ -111,6 +111,9 @@ var LiveComposer = {
 			LiveComposer.Builder.PreviewAreaDocument[0].getElementById(newModule[0].id).appendChild(script);
 		});
 
+		scripts = null;
+		afterObject = null;
+
 		return newModule;
 	}
 }());

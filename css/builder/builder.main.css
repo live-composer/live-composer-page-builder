@@ -275,7 +275,7 @@ body a:focus {
 
 	.dslca-header {
 		position: absolute;
-		z-index: 100;
+		/*z-index: 100; - breaks color picker*/
 		/* keep LC styling panel Confirm/Cancel buttons on the top */
 		min-height: 38px;
 		bottom: 100%;
@@ -697,7 +697,6 @@ body a:focus {
 			}
 
 	.dslca-module-edit {
-		overflow: hidden;
 		position: relative;
 	}
 
@@ -705,7 +704,6 @@ body a:focus {
 		.dslca-module-edit-options,
 		.dslca-pseudo-module-edit-options {
 			padding: 16px 15px 5px 15px;
-			overflow-x: auto;
 			min-height: 58px;
 
 			transform: translate(0,0); 

@@ -617,6 +617,9 @@ function dslc_module_output_altered( callback ) {
 
 			newModule.addClass('dslca-module-being-edited');
 
+			response = null;
+			newModule = null;
+
 			// TODO: Add new postponed action to run after all done
 
 			dslc_generate_code(); // Do not delete. It refresh classes on "option preview refresh -> true"

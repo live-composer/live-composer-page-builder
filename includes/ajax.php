@@ -512,18 +512,11 @@ function dslc_ajax_display_module_options( $atts ) {
 
 							$text_color_value = $curr_value;
 
-							if ( ! strpos( $curr_value, '#' ) ) {
-
-								$text_color_value =dslc_rgbtohex( $text_color_value );
-							}
-
-							$color = dslc_get_contrast_bw( $text_color_value );
-
-							$style = ' style="background: ' . $curr_value . '; color: ' . $color . '"';
+							$style = ' style="background: ' . $curr_value . '; "';
 						}
 						?>
 
-						<input type="text" class="dslca-module-edit-field dslca-module-edit-field-colorpicker" <?php echo wp_kses( $style, array(), array() );?> name="<?php echo esc_attr( $module_option['id'] ); ?>" data-id="<?php echo esc_attr( $module_option['id'] ); ?>" value="<?php echo esc_attr( $curr_value ); ?>" data-affect-on-change-el="<?php echo $module_option['affect_on_change_el']; ?>" data-affect-on-change-rule="<?php echo $module_option['affect_on_change_rule']; ?>" <?php if ( $default_value ) : ?> data-default="<?php echo $default_value; ?>" <?php endif; ?> />
+						<input type="text" class="dslca-module-edit-field dslca-module-edit-field-colorpicker" data-alpha="true" <?php echo wp_kses( $style, array(), array() );?> name="<?php echo esc_attr( $module_option['id'] ); ?>" data-id="<?php echo esc_attr( $module_option['id'] ); ?>" value="<?php echo esc_attr( $curr_value ); ?>" data-affect-on-change-el="<?php echo $module_option['affect_on_change_el']; ?>" data-affect-on-change-rule="<?php echo $module_option['affect_on_change_rule']; ?>" <?php if ( $default_value ) : ?> data-default="<?php echo $default_value; ?>" <?php endif; ?> />
 
 					<?php elseif ( 'slider' === $module_option['type'] ) : ?>
 

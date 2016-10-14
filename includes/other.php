@@ -254,41 +254,6 @@ function dslc_module_options_func( $module_options ) {
 }
 add_filter( 'dslc_module_options', 'dslc_module_options_func', 1 );
 
-/**
- * Get contrast color for color picker text.
- *
- * @param  string $hexcolor Color to analyze.
- * @return string 'black' or 'white' depending on contrast.
- */
-function dslc_get_contrast_bw( $hexcolor ) {
-
-	$r = hexdec( substr( $hexcolor, 0, 2 ) );
-	$g = hexdec( substr( $hexcolor, 2, 4 ) );
-	$b = hexdec( substr( $hexcolor, 4, 6 ) );
-
-	$yiq = ( ( $r * 299 ) + ( $g * 587 ) + ( $b * 114 ) ) / 1000;
-
-	return ( $yiq >= 128 ) ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)';
-}
-
-function dslc_rgbtohex( $rgb ) {
-
-	if ( isset($rgb) && 6 === strlen($rgb) ) {
-
-
-		preg_match_all( '/\d+/', $rgb, $matches );
-
-		// String padding bug found and the solution put forth by Pete Williams (http://snipplr.com/users/PeteW).
-		$hex = '#';
-		$hex .= str_pad( dechex( $matches[0][0] ), 2, '0', STR_PAD_LEFT );
-		$hex .= str_pad( dechex( $matches[0][1] ), 2, '0', STR_PAD_LEFT );
-		$hex .= str_pad( dechex( $matches[0][2] ), 2, '0', STR_PAD_LEFT );
-
-		return $hex;
-	} else {
-		return;
-	}
-}
 
 /**
  * Remove Yoast WP meta-boxes for Header/Footer and Template CPT

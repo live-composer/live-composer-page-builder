@@ -103,14 +103,7 @@ function dslc_row_display_options() {
 
 					$text_color_value = $curr_value;
 
-					if ( ! strpos( $curr_value, '#' ) ) {
-
-						$text_color_value = dslc_rgbtohex( $text_color_value );
-					}
-
-					$color = dslc_get_contrast_bw( $text_color_value );
-
-					$style = ' style="background: ' . $curr_value . '; color: ' . $color . '"';
+					$style = ' style="background: ' . $curr_value . ';"';
 				}?>
 
 				<input type="text" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-colorpicker" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" />
