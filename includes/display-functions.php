@@ -115,15 +115,11 @@ function dslc_display_composer() {
 				<div class="dslca-sections">
 
 					<!-- Modules Listing -->
-					<div class="dslca-section dslca-modules" data-bg="#4A7AC3">
+					<div class="dslca-section dslca-modules" id="dslca-modules">
 
-						<div class="dslca-section-title">
-							<div class="dslca-section-title-filter">
-								<span class="dslca-section-title-filter-curr"><?php _e( 'Elements', 'live-composer-page-builder' ); ?></span>
-								<span class="dslca-icon dslc-icon-angle-up"></span>
-								<div class="dslca-section-title-filter-options"></div>
-							</div><!-- .dslca-section-title-filter -->
-						</div><!-- .dslca-section-title -->
+						<form class="dslca-search-modules" method="get">
+							<input type="search" id="modules-search-input" class="modules-search-input" name="modules-search" value="" placeholder="Start typing to search modules..." >
+						</form>
 
 						<div class="dslca-section-scroller">
 							<div class="dslca-section-scroller-inner">
@@ -439,24 +435,43 @@ function dslc_display_modules() {
 		</div><!-- .dslc-module -->
 
 		<?php
+		// Create an array of modules sorted by section.
+		$modules_bysection = array();
 
+		// Sort modules by section.
 		foreach ( $dslc_modules as $dslc_module ) {
+
+			$section = __('Other', 'live-composer-page-builder');
+
+			if ( ! empty( $dslc_module['origin'] ) ) {
+				$section = $dslc_module['origin'];
+			} else {
+				$dslc_module['origin'] = $section;
+			}
 
 			if ( empty( $dslc_module['icon'] ) ) {
 				$dslc_module['icon'] = 'circle';
 			}
 
-			if ( empty( $dslc_module['origin'] ) ) {
-				$dslc_module['origin'] = 'lc';
-			}
+			$modules_bysection[ $section ][ $dslc_module['id'] ] = $dslc_module;
+		}
+
+
+		foreach ( $modules_bysection as $section_title => $section ) {
 
 			?>
-				<div class="dslca-module dslca-scroller-item dslca-origin dslca-origin-<?php echo esc_attr( $dslc_module['origin'] ); ?>" data-origin="<?php echo esc_attr( $dslc_module['origin'] ); ?>" data-id="<?php echo esc_attr( $dslc_module['id'] ); ?>">
-					<span class="dslca-icon dslc-icon-<?php echo esc_attr( $dslc_module['icon'] ); ?>"></span><span class="dslca-module-title"><?php echo esc_html( $dslc_module['title'] ); ?></span>
-				</div><!-- .dslc-module -->
+				<div class="dslca-module-section"><?php echo esc_html( $section_title ); ?></div><!-- .dslc-module -->
 			<?php
 
+			foreach ( $section as $module_id => $module ) {
+				?>
+					<div class="dslca-module dslca-scroller-item dslca-origin dslca-origin-<?php echo esc_attr( $module['origin'] ); ?>" data-origin="<?php echo esc_attr( $module['origin'] ); ?>" data-id="<?php echo esc_attr( $module_id ); ?>">
+						<span class="dslca-icon dslc-icon-<?php echo esc_attr( $module['icon'] ); ?>"></span><span class="dslca-module-title"><?php echo esc_html( $module['title'] ); ?></span>
+					</div><!-- .dslc-module -->
+				<?php
+			}
 		}
+
 	} else {
 
 		esc_html_e( 'No Modules Found.', 'live-composer-page-builder' );

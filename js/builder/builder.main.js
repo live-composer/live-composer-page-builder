@@ -12,6 +12,8 @@ var dslcAllFontsArray = dslcRegularFontsArray.concat( dslcGoogleFontsArray );
 var dslcIconsCurrentSet = DSLCIcons.fontawesome;
 var dslcDebug = false;
 
+dslcDebug = true;
+
 
 // Global Plugin Object
 var LiveComposer = {

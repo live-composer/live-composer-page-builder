@@ -87,7 +87,32 @@ jQuery(document).ready(function($) {
 
 		// Catch keypress events (from both parent and iframe) to add keyboard support
 		dslc_keypress_events();
-		LiveComposer.Builder.UI.initPreviewAreaScroller();
+		LiveComposer.Builder.UI.initPreviewAreaScroller(); // @todo: remove it?
+
+		// Init modules search field functionality.
+		// Documentation: http://www.listjs.com/docs/options
+		new List('dslca-modules', {
+			valueNames: [ 'dslca-module-title' ],
+			listClass: 'dslca-section-scroller-content',
+			searchClass: 'modules-search-input',
+		});
+
+		// Set focus on the search field.
+		// document.getElementById('modules-search-input').focus(); 
+		// @todo: not working.
+		// @todo: firstly check if anyother field focused: http://stackoverflow.com/a/1593282
+
+		// Make sidebar resizable.
+		// @todo: add sidebar colapse on click on the resizing handle.
+		jQuery( '.dslca-container' ).resizable({
+			handles: 'e',
+			resize: function( event, ui ) {
+				// console.log( event );
+				// console.log( ui.size.width );
+				jQuery( '#wpbody-content' ).css( 'margin-left', ui.size.width + 'px' );
+			}
+		});
+
 	};
 });
 
@@ -925,6 +950,7 @@ function dslc_disable_backspace_navigation (event) {
 				d.type.toUpperCase() === 'TEXT' ||
 				d.type.toUpperCase() === 'PASSWORD' ||
 				d.type.toUpperCase() === 'NUMBER' ||
+				d.type.toUpperCase() === 'SEARCH' ||
 				d.type.toUpperCase() === 'FILE')
 			  )
 			 || d.tagName.toUpperCase() === 'TEXTAREA'

@@ -148,8 +148,10 @@ function dslc_editing_screen_head() {
 		   height: 100%;
 		   top: 0;
 		   left: 0;
+			right: 0;
+			bottom: 0;
 		   position: fixed;
-		   width: 100%;
+		   width: auto;
 		   margin: 0;
 		   padding: 0;
 		}

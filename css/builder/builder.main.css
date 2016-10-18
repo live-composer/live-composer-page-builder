@@ -117,6 +117,24 @@ body a:focus {
 
 
 
+#wpbody-content #page-builder-preview-area {
+	position: absolute;
+	left: 0;
+	right: auto;
+	top: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+}
+
+#wpbody-content #page-builder-preview-area #page-builder-frame {
+
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+
 .dslca-container * {
 	padding: 0;
 	margin: 0;
@@ -192,8 +210,13 @@ body a:focus {
 	line-height: 17px;
 }
 
+/* Customizer-like side panel */
 .dslca-container {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 1.3;
+
 	left: 0;
 	top: 0;
 	bottom: 0;
@@ -204,9 +227,54 @@ body a:focus {
 	-moz-transition: left 0.3s;
 	transition: left 0.3s;
 
-	background: #EEEEEE;
+	background: #eee;
+	border-right: 1px solid #ddd;
 
-	width: 294px;
+	width: 310px; /* if change value here, change #wpbody-content as well. */
+}
+
+body #wpbody-content {
+	margin-left: 310px;
+}
+
+.dslca-container .ui-resizable-handle {
+	position: absolute;
+	right: -9px;
+	top: 0;
+	bottom: 0;
+	width: 8px;
+	cursor: col-resize;
+}
+
+.dslca-container.ui-resizable-resizing .ui-resizable-handle,
+.dslca-container .ui-resizable-handle:hover {
+	background: #dfdfdf;
+}
+
+.ui-resizable-handle.ui-resizable-e:before {
+	position: absolute;
+	content: '';
+	width: 100%;
+	height: 50px;
+	top: 50%;
+	margin-top: -15px;
+	border-radius: 0 2px 2px 0;
+	background: #dfdfdf url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAHBAMAAADdS/HjAAAAGFBMVEUzMzP///9tbW1QUFCKiopBQUF8fHxfX1/IXlmXAAAAHUlEQVQImWMQEGAQFWUQFmYQF2cQEmIQE2MQEQEACy4BF67hpEwAAAAASUVORK5CYII=) no-repeat 1px center;
+}
+
+
+/* This seudo element is covering big part of the page
+   on the right side of the resizable panel.
+   It makes resizing functionality more stable,
+   especially when you resize the panel very quickly. */
+
+.dslca-container.ui-resizable-resizing:before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 200%;
+	height: 100%;
 }
 
 .dslca-container,
@@ -496,80 +564,12 @@ body a:focus {
 				color: #fff;
 			}
 
-			.dslca-section-title {
-				display: block;
-				/*float: left;*/
-				background: #3b6fbe;
-				color: #fff;
-				font-family: 'Open Sans', sans-serif;
-				font-size: 17px;
-				line-height: 1;
-				padding: 28px 25px;
-				/* text-transform: uppercase; */
-			}
-
-			.dslca-section-title:hover,
-			.dslca-section-title:hover * {
-				cursor: pointer;
-			}
 
 			.dslca-templates .dslca-section-title,
 			.dslca-templates-load .dslca-section-title,
 			.dslca-templates-save .dslca-section-title {
 				background: #a94640;
 			}
-
-				.dslca-section-title-filter {
-					position: relative;
-					cursor: pointer;
-				}
-
-					.dslca-section-title-filter-curr {
-
-					}
-
-					.dslca-section-title-filter .dslca-icon {
-						color: rgba( 255, 255, 255, 0.5 );
-						margin-left: 10px;
-						vertical-align: top;
-					}
-
-					.dslca-section-title-filter-options {
-						background: #5890E5;
-						border-radius: 3px 3px 0 0;
-						bottom: 35px;
-						display: none;
-						min-width: 100px;
-						left: -10px;
-						position: absolute;
-						z-index: 999999;
-						box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.21);
-					}
-
-
-						.dslca-section-title-filter-options a {
-							display: block;
-							cursor: pointer;
-							margin: 1px 0 0;
-							padding: 10px 13px;
-							border-top: 1px solid rgba(0, 0, 0, 0.09);
-							font-size: 13px;
-							white-space: nowrap;
-							color: #fff;
-						}
-
-						.dslca-section-title-filter-options a:hover {
-							background: #5890E5;
-						}
-
-					/* Orange popup filter */
-					.dslca-section.dslca-templates-load .dslca-section-title-filter-options {
-						background: #CA564F;
-					}
-
-					.dslca-section.dslca-templates-load .dslca-section-title-filter-options a:hover {
-						background: #e25c54;
-					}
 
 	/**
 	 * Subsections
@@ -593,25 +593,32 @@ body a:focus {
 	position: relative;
 }
 
+		.dslca-module-section {
+			width: 100%;
+			padding: 7px 0;
+			margin-top: 15px;
+			text-transform: uppercase;
+			font-size: 12px;
+			letter-spacing: 2px;
+			color: #777;
+		}
+
 		.dslca-module {
-			color: #555;
+			color: #000; /* #555; */
 			background: #FFFFFF;
 
 			width: 47%;
 			min-height: 44px;
-			margin: 5px 0 0 2%;
+			margin: 5px 2% 0 0;
+			padding: 8px 12px;
+
+			overflow: hidden;
 
 			display: inline-flex;
 			align-items: center;
 
-			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-			font-size: 14px;
-			font-weight: 400;
-			line-height: 1;
-
 			box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15), -1px 1px 0px 0 rgba(255, 255, 255, 0.05) inset;
 			border-radius: 2px;
-			text-align: center;
 
 			transition: transform 0.05s linear 0.01s;
 
@@ -623,6 +630,18 @@ body a:focus {
 			position: relative;
 		}
 
+		/* Gradient disolving text that goes over limits of the module block. */
+		.dslca-module:before {
+			content: '';
+			position: absolute;
+			right: 0;
+			width: 20px;
+			top: 0;
+			bottom: 0;
+			background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); ;
+
+		}
+
 		.dslca-module[data-id="DSLC_Separator"],
 		.dslca-module[data-id="DSLC_Notification"],
 		.dslca-module[data-id="DSLC_Sliders"],
@@ -631,29 +650,29 @@ body a:focus {
 		}
 
 		.dslca-module[data-id="DSLC_M_A"] {
-			margin-left: 5px;
-			margin-right: 14px;
-			background: #b2b7bc;
-			box-shadow: none;
+			/*margin-left: 5px;*/
+			/*margin-right: 14px;*/
+			/*background: #b2b7bc;*/
+			/*box-shadow: none;*/
 		}
 
 		.dslca-module[data-id="DSLC_M_A"] .dslca-icon {
-			color: #fff;
+			/*color: #fff;*/
 		}
 
 		.dslca-module[data-id="DSLC_M_A"]:hover {
-			background: #BDC3C9;
+			/*background: #BDC3C9;*/
 		}
 
 		.dslca-module:hover {
-		  background: #6b9ff1;
+		  /*background: #6b9ff1;*/
 		  box-shadow: -2px 4px 3px 0 rgba(0, 0, 0, 0.19), -1px 1px 0 0 rgba(255, 255, 255, 0.05) inset;
 		  transform: translate(1px, -2px);
 		}
 
 		div.dslca-module:hover,
 		div.dslca-module:hover * {
-			color: #fff;
+			/*color: #fff;*/
 			cursor: grab;
 			cursor: -webkit-grab;
 		}
@@ -705,12 +724,17 @@ body a:focus {
 				line-height: 1;
 				text-align: center;
 				text-shadow: 0 1px rgba(0, 0, 0, 0.05);
-				width: 30%;
+				min-width: 24px;
+			   margin-right: 10px;
 			}
 
 			.dslca-module.ui-draggable-dragging .dslca-icon {
 				margin-right: 0;
 			}
+
+			/*.dslca-module .dslca-module-title {
+				padding: 10px;
+			}*/
 
 	.dslca-module-edit {
 		overflow: hidden;
@@ -2301,11 +2325,22 @@ body.rtl .dslca-modules-area-placeholder {
 */
 
 
+.dslca-search-modules {
+	padding: 18px;
+}
+
+.dslca-search-modules > input {
+	padding: 8px 10px;
+	width: 100%;
+}
+
 .dslca-section-scroller {
 	position: relative;
 	height: 100%;
-	overflow: scroll;
-	padding: 10px;
+	padding: 10px 6px 10px 18px;
+
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 
 	.dslca-section-scroller-inner {
@@ -2321,11 +2356,10 @@ body.rtl .dslca-modules-area-placeholder {
 	}
 
 		.dslca-section-scroller-content {
-			/*display: inline-block;*/
-			/*padding-right: 80px;*/
-align-content: flex-start;
-display: flex;
-flex-wrap: wrap;
+			align-content: flex-start;
+			display: flex;
+			flex-wrap: wrap;
+			padding-bottom: 80px;
 		}
 
 .dslca-section-scroller-fade {
@@ -3777,11 +3811,6 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
  body.rtl .dslca-templates .dslca-open-modal-hook .dslca-icon {
 	margin-right: 0;
 	margin-left: 9px;
- }
-
- body.rtl .dslca-section-title-filter .dslca-icon {
-	margin-left: 0;
-	margin-right: 10px;
  }
 
  body.rtl .dslca-container .dslca-close-composer-hook .dslca-icon,

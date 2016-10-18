@@ -21,12 +21,14 @@ jQuery(document).ready(function($){
 		var scroller = jQuery('.dslca-section-scroller', container);
 		var scrollInner = jQuery('.dslca-section-scroller-inner', container)[0];
 
+		/*
 		scroller.on( 'wheel', function(event) {
 
 			scroll_to( event.originalEvent.deltaY || event.originalEvent.deltaX );
 
 			return false;
 		});
+		*/
 
 		/**
 		 * Scroll to delta
