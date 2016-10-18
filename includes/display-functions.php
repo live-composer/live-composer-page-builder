@@ -935,6 +935,10 @@ function dslc_json_decode( $raw_code ) {
 			// 1. it's old code of the module settings serialized + base64.
 			// Get array out of it.
 			$decoded = maybe_unserialize( $decoded_base64 );
+
+			// Add a marker indicating that this module
+			// was imported from shortcode format.
+			$decoded['code_version'] = 1;
 		}
 	} else {
 		// Decode JSON.
@@ -952,7 +956,17 @@ function dslc_json_decode( $raw_code ) {
  */
 function dslc_module_front( $atts, $settings_raw = null ) {
 
+	// Settings RAW can be a serialized array (old version of dslc_code)
+	// or json array (new generation).
 	$settings = dslc_json_decode( $settings_raw );
+
+	// If this module was just imported from the first generation
+	// of dslc_code (shortcodes + base64) launch a special migration process.
+	// In migration process we fix some issues to make sure nothing breaks
+	// when we switch users to JSON code format.
+	if ( isset( $settings['code_version'] ) && 1 === $settings['code_version'] ) {
+		$settings = dslc_code_migration( $settings );
+	}
 
 	if ( is_array( $settings ) ) {
 
@@ -994,17 +1008,17 @@ function dslc_module_front( $atts, $settings_raw = null ) {
 		// Fixing the options array
 		global $dslc_var_image_option_bckp;
 		$dslc_var_image_option_bckp = array();
-		$all_opts = $module_instance->options();
+		$module_struct = $module_instance->options();
 
-		foreach ( $all_opts as $all_opt ) {
+		foreach ( $module_struct as $option ) {
 
 			// Fix settings when a new option added after a module is used
-			if ( ! isset( $settings[$all_opt['id']] ) ) {
+			if ( ! isset( $settings[$option['id']] ) ) {
 
-				if ( isset( $all_opt['std'] ) && $all_opt['std'] !== '' ) {
-					$settings[$all_opt['id']] = $all_opt['std'];
+				if ( isset( $option['std'] ) && $option['std'] !== '' ) {
+					$settings[$option['id']] = $option['std'];
 				} else {
-					$settings[$all_opt['id']] = false;
+					$settings[$option['id']] = false;
 				}
 			}
 		}
@@ -1013,15 +1027,15 @@ function dslc_module_front( $atts, $settings_raw = null ) {
 		$settings = apply_filters( 'dslc_filter_settings', $settings );
 
 		// Transform image ID to URL
-		foreach ( $all_opts as $all_opt ) {
+		foreach ( $module_struct as $option ) {
 
-			if ( $all_opt['type'] == 'image' ) {
+			if ( $option['type'] == 'image' ) {
 
-				if ( isset( $settings[$all_opt['id']] ) && ! empty( $settings[$all_opt['id']] ) && is_numeric( $settings[$all_opt['id']] ) ) {
+				if ( isset( $settings[$option['id']] ) && ! empty( $settings[$option['id']] ) && is_numeric( $settings[$option['id']] ) ) {
 
-					$dslc_var_image_option_bckp[$all_opt['id']] = $settings[$all_opt['id']];
-					$image_info = wp_get_attachment_image_src( $settings[$all_opt['id']], 'full' );
-					$settings[$all_opt['id']] = $image_info[0];
+					$dslc_var_image_option_bckp[$option['id']] = $settings[$option['id']];
+					$image_info = wp_get_attachment_image_src( $settings[$option['id']], 'full' );
+					$settings[$option['id']] = $image_info[0];
 				}
 			}
 		}

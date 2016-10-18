@@ -1464,49 +1464,68 @@ function dslc_module_options_color( field ) {
 	dslcCurrColor;
 
 	/**
-	 * Color Pallete
+	 * Color Pallete.
+	 *
+	 * Last three selected colors get stored in the local storage
+	 * of the browser under the key 'dslcColors-example.com'.
+	 *
+	 * Beside latest three custom colors, color palette includes
+	 * three predefined/fixed colors: white, black and transparent.
 	 */
 
 	var dslcColorPallete = [],
 	currStorage,
 	index;
 
-	dslcColorPallete[0] = [];
-	dslcColorPallete[1] = [];
-	dslcColorPallete[2] = [];
-	dslcColorPallete[3] = [];
+	var palleteCurrentDommain = 'dslcColors-' + document.domain
 
-	if ( localStorage['dslcColorpickerPalleteStorage'] == undefined ) {
-	} else {
-
-		currStorage = JSON.parse( localStorage['dslcColorpickerPalleteStorage'] );
-
-		for	( index = 0; index < currStorage.length; index++ ) {
-
-			var key = Math.floor( index / 3 );
-
-			if ( key < 4 ) {
-
-				dslcColorPallete[key].push( currStorage[index] );
-			}
-		}
+	// Get three recent colors from the local storage.
+	if ( undefined !== localStorage[ palleteCurrentDommain ] ) {
+		currStorage = JSON.parse( localStorage[ palleteCurrentDommain ] );
+		dslcColorPallete = currStorage;
 	}
+
+	// Set default colors if not enough custom colors. Should be six.
+	if ( 1 > dslcColorPallete.length ) {
+		dslcColorPallete.push( '#78b' );
+	}
+
+	if ( 2 > dslcColorPallete.length ) {
+		dslcColorPallete.push( '#ab0' );
+	}
+
+	if ( 3 > dslcColorPallete.length ) {
+		dslcColorPallete.push( '#de3' );
+	}
+
+	// Add the next "fixed" colors to the end of the pallete.
+	dslcColorPallete.push( '#fff' );
+	dslcColorPallete.push( '#000' );
+	dslcColorPallete.push( 'rgba(0,0,0,0)' );
 
 	var query = field;
 
+	// For each color picker input field.
 	jQuery(query).each( function(){
 
+		// Set setting the conotrol wrapper.
 		var wrapper = jQuery(this).closest('.dslca-module-edit-option-color');
 		var input = jQuery(this);
 
 		dslcCurrColor = jQuery(this).val();
 
+		/**
+		 * Init standard WP color pickers (Iris).
+		 *
+		 * See: http://automattic.github.io/Iris/
+		 * See: https://github.com/23r9i0/wp-color-picker-alpha
+		 */
 		input.wpColorPicker({
 			mode: 'hsl',
+			palettes: dslcColorPallete,
 			change: function(event, ui) {
 
 				// @todo: get the code below into a separate function!
-
          	// The option field
          	dslcColorField = input;
 
@@ -1514,11 +1533,8 @@ function dslc_module_options_color( field ) {
 
          	// The new color
          	if ( color == null ) {
-
          		dslcColorFieldVal = '';
-         		// dslcColorFieldVal = 'transparent';
          	} else {
-
          		dslcColorFieldVal = color;
          	}
 
@@ -1544,25 +1560,6 @@ function dslc_module_options_color( field ) {
 
          	// Add changed class
          	dslcModule.addClass('dslca-module-change-made');
-
-         	// @todo: make the palletes work again.
-
-         	// Update pallete local storage
-         	if ( localStorage['dslcColorpickerPalleteStorage'] == undefined ) {
-
-         		var newStorage = [ dslcColorFieldVal ];
-         		localStorage['dslcColorpickerPalleteStorage'] = JSON.stringify(newStorage);
-         	} else {
-
-         		var newStorage = JSON.parse( localStorage['dslcColorpickerPalleteStorage'] );
-
-         		if ( newStorage.indexOf( dslcColorFieldVal ) == -1 ) {
-
-         			newStorage.unshift( dslcColorFieldVal );
-         		}
-
-         		localStorage['dslcColorpickerPalleteStorage'] = JSON.stringify(newStorage);
-         	}
 			}
 		});
 
@@ -1573,8 +1570,43 @@ function dslc_module_options_color( field ) {
 
 		input.wpColorPicker( 'open' );
 
+		// If [APPLY] button clicked...
 		jQuery(apply).on('click', function() {
-			// colorPickerPopup.hide();
+
+			// If new color is not one of the "fixed" colors...
+			if ( '#fff' !== dslcColorFieldVal &&
+				  '#ffffff' !== dslcColorFieldVal &&
+				  '#000' !== dslcColorFieldVal &&
+				  '#000000' !== dslcColorFieldVal &&
+				  'rgba(0,0,0,0)' !== dslcColorFieldVal ) {
+
+				// Update pallete colors in the local storage.
+				if ( undefined === localStorage[ palleteCurrentDommain ] ) {
+
+					// Create new record if no local storage found.
+					var newStorage = [ dslcColorFieldVal ];
+					localStorage[ palleteCurrentDommain ] = JSON.stringify(newStorage);
+
+				} else {
+
+					// Update existing record in the local storage.
+					var newStorage = JSON.parse( localStorage[ palleteCurrentDommain ] );
+
+					if ( newStorage.indexOf( dslcColorFieldVal ) == -1 ) {
+
+						// Add new color to the head of the pallete array.
+						newStorage.unshift( dslcColorFieldVal );
+
+						if ( 3 < newStorage.length ) {
+							// Remove the last color from the pallete.
+							newStorage.pop();
+						}
+					}
+
+					localStorage[ palleteCurrentDommain ] = JSON.stringify(newStorage);
+				}
+			}
+
 			input.wpColorPicker( 'close' );
 		});
 

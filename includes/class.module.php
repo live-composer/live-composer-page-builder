@@ -2084,6 +2084,8 @@ class DSLC_Module {
 
 				if ( ! isset( $options['css_custom'] ) || 'enabled' === $options['css_custom'] ) {
 
+					// Generate CSS for the module based on the selected options.
+					// Funciton 'dslc_generate_custom_css' will fill global $dslc_css_style with CSS code.
 					dslc_generate_custom_css( $options_arr, $options, true );
 					$googlefonts_output = '';
 					foreach ( $dslc_googlefonts_array as $googlefont ) {
@@ -2138,8 +2140,32 @@ class DSLC_Module {
 		$options = array();
 		$options_ids = array();
 
-		// Get options array.
+
+		// Clearn the custom options by getting rid of all the default values.
+
+		// Get the module structure.
+		// Array of options with deafut values only.
 		$options = $this->options();
+
+		foreach ( $options as $default_option ) {
+
+			$id = $default_option['id'];
+
+			// Only clean options in the styling or custon sections.
+			// Never clean 'Functionality' section (it has no section parameter set).
+			if ( isset( $default_option['section'] ) && strtoupper( 'functionality' ) !== strtoupper( $default_option['section'] ) ) {
+
+				// Do we have option with this id in the custom settings set by the user?
+				if ( isset( $user_options[ $id ] )  ) {
+
+					// If current option is empty or the same as default value for this setting.
+					if ( empty( $user_options[ $id ] ) || isset( $default_option['std'] ) && $default_option['std'] === $user_options[ $id ] ) {
+
+						unset( $user_options[ $id ] );
+					}
+				}
+			}
+		}
 
 		// Bring back IDs for image options.
 		global $dslc_var_image_option_bckp;
@@ -2164,39 +2190,44 @@ class DSLC_Module {
 
 			<div class="dslca-module-options-front">
 
-				<?php foreach ( $options as $key => $option ) : ?>
-
 				<?php
+				// Output each options as a hidden textarea.
 
-				// Option ID.
-				$option_id = $option['id'];
-				$options_ids[] = $option['id'];
+				// Go through standard set of options described in the module class.
+				// Array $options do not contains custom data, but structure and defaults.
+				// Array $user_options contains custom module settings.
+				foreach ( $options as $key => $option ) {
 
-				// If value already set use it, if not use default.
-				if ( isset( $user_options[ $option_id ] ) ) {
-					$option_value = $user_options[ $option_id ];
-				} else {
-					$option_value = $option['std'];
+					// Option ID.
+					$option_id = $option['id'];
+					$options_ids[] = $option['id'];
+
+					// Set the setting value.
+					if ( isset( $user_options[ $option_id ] ) ) {
+						$option_value = $user_options[ $option_id ];
+					} else {
+						$option_value = '';
+						// $option_value = $option['std'];
+					}
+
+					if ( isset( $user_options[ $option_id ] ) ) {
+
+						if ( $user_options[ $option_id ] === $option['std'] || '' === $user_options[ $option_id ] ) {
+							unset( $user_options_no_defaults[ $option_id ] );
+						}
+					}
+
+					echo '<textarea class="dslca-module-option-front" data-id="' . esc_attr( $option_id ) . '">' . stripslashes( $option_value ) . '</textarea>';
 				}
 
-				if ( isset( $user_options[ $option_id ] ) && $user_options[ $option_id ] === $option['std'] || '' === $user_options[ $option_id ] ) {
-					unset( $user_options_no_defaults[ $option_id ] );
-				}
+				// Output additonal (custom) options that are not part of the default module structure.
+				foreach ( $user_options as $user_option_id => $user_option_val ) {
 
-				?>
+					if ( ! in_array( $user_option_id, $options_ids, true ) ) {
 
-					<textarea class="dslca-module-option-front" data-id="<?php echo esc_attr( $option_id ); ?>"><?php echo stripslashes( $option_value ); ?></textarea>
-				<?php endforeach; ?>
-
-				<?php foreach ( $user_options as $user_option_id => $user_option_val ) : ?>
-
-					<?php if ( ! in_array( $user_option_id, $options_ids, true ) ) : ?>
-
-						<textarea class="dslca-module-option-front" data-id="<?php echo esc_attr( $user_option_id ); ?>"><?php echo stripslashes( $user_option_val ); ?></textarea>
-
-					<?php endif; ?>
-
-				<?php endforeach; ?>
+						echo '<textarea class="dslca-module-option-front" data-id="' . esc_attr( $user_option_id ) . '">' . stripslashes( $user_option_val ) . '</textarea>';
+					}
+				} ?>
 
 			</div><!-- dslca-module-options-front -->
 

@@ -72,7 +72,7 @@ function dslc_ajax_add_modules_section( $atts ) {
 } add_action( 'wp_ajax_dslc-ajax-add-modules-section', 'dslc_ajax_add_modules_section' );
 
 /**
- * Add a new module
+ * Add a new module or re-render module output via ajax
  *
  * @since 1.0
  */
@@ -128,13 +128,15 @@ function dslc_ajax_add_module( $atts ) {
 		 * Array $module_settings - has all the module settings (actual data).
 		 * Ex.: [css_bg_color] => rgb(184, 61, 61).
 		 *
-		 * Function dslc_module_settings form the module settings array
+		 * Function dslc_module_settings creates the full module settings array
 		 * based on default settings + current settings.
 		 *
-		 * Function dslc_module_settings get current module settings
+		 * Function dslc_module_settings get the custom settings for the current module
 		 * form $_POST[ $option['id'] ].
 		 */
 		$module_settings = dslc_module_settings( $all_opts, $module_id );
+
+		vovaphperror( $module_settings, '$module_settings' );
 
 		// Append ID to settings.
 		$module_settings['module_instance_id'] = $module_instance_id;
@@ -241,11 +243,24 @@ function dslc_ajax_display_module_options( $atts ) {
 		// Go through each option, generate the option HTML and append to output.
 		foreach ( $module_options as $module_option ) {
 
-			$curr_value = $module_option['std'];
-
+			$curr_value = '';
 			if ( isset( $_POST[ $module_option['id'] ] ) ) {
-
 				$curr_value = esc_attr( $_POST[ $module_option['id'] ] );
+			}
+
+			/**
+			 * If no current value set, the control is disabled.
+			 * In this case when you enable the control using toggle
+			 * it will be filled with an empty value. That's not right.
+			 * Even if the control disable it still has some default value.
+			 * This is what $starting_value variable is about –
+			 * to set a standard value as a starting point.
+			 */
+			$starting_value = '';
+			if ( empty( $curr_value ) && isset( $module_option['std'] ) ) {
+				$starting_value = $module_option['std'];
+			} else {
+				$starting_value = $curr_value;
 			}
 
 			/**
@@ -448,7 +463,7 @@ function dslc_ajax_display_module_options( $atts ) {
 
 					<?php if ( 'text' === $module_option['type'] ) : ?>
 
-						<input type="text" class="dslca-module-edit-field" name="<?php echo esc_attr( $module_option['id'] ); ?>" data-id="<?php echo esc_attr( $module_option['id'] ); ?>" value="<?php echo esc_attr( stripslashes( $curr_value ) ); ?>" data-starting-val="<?php echo esc_attr( stripslashes( $curr_value ) ); ?>" <?php echo $affect_on_change_append ?> />
+						<input type="text" class="dslca-module-edit-field" name="<?php echo esc_attr( $module_option['id'] ); ?>" data-id="<?php echo esc_attr( $module_option['id'] ); ?>" value="<?php echo esc_attr( stripslashes( $curr_value ) ); ?>" data-val-bckp="<?php echo esc_attr( stripslashes( $curr_value ) ); ?>" <?php echo $affect_on_change_append ?> />
 
 					<?php elseif ( 'textarea' === $module_option['type'] ) : ?>
 
@@ -497,10 +512,10 @@ function dslc_ajax_display_module_options( $atts ) {
 							<?php endforeach; ?>
 						</div><!-- .dslca-module-edit-option-radio-wrapper -->
 
-					<?php elseif ( 'color' === $module_option['type'] ) : ?>
+					<?php elseif ( 'color' === $module_option['type'] ) :
 
-						<?php
 						$default_value = false;
+
 						if ( isset( $module_option['std'] ) ) {
 
 							$default_value = $module_option['std'];
@@ -510,17 +525,13 @@ function dslc_ajax_display_module_options( $atts ) {
 
 						if ( '' !== $curr_value ) {
 
-							$text_color_value = $curr_value;
-
 							$style = ' style="background: ' . $curr_value . '; "';
 						}
 						?>
 
-						<input type="text" class="dslca-module-edit-field dslca-module-edit-field-colorpicker" data-alpha="true" <?php echo wp_kses( $style, array(), array() );?> name="<?php echo esc_attr( $module_option['id'] ); ?>" data-id="<?php echo esc_attr( $module_option['id'] ); ?>" value="<?php echo esc_attr( $curr_value ); ?>" data-affect-on-change-el="<?php echo $module_option['affect_on_change_el']; ?>" data-affect-on-change-rule="<?php echo $module_option['affect_on_change_rule']; ?>" <?php if ( $default_value ) : ?> data-default="<?php echo $default_value; ?>" <?php endif; ?> />
+						<input type="text" class="dslca-module-edit-field dslca-module-edit-field-colorpicker" data-alpha="true" <?php echo wp_kses( $style, array(), array() );?> name="<?php echo esc_attr( $module_option['id'] ); ?>" data-id="<?php echo esc_attr( $module_option['id'] ); ?>" value="<?php echo esc_attr( $curr_value ); ?>" data-affect-on-change-el="<?php echo $module_option['affect_on_change_el']; ?>" data-affect-on-change-rule="<?php echo $module_option['affect_on_change_rule']; ?>" <?php if ( $default_value ) : ?> data-val-bckp="<?php echo $default_value; ?>" <?php endif; ?> />
 
-					<?php elseif ( 'slider' === $module_option['type'] ) : ?>
-
-						<?php
+					<?php elseif ( 'slider' === $module_option['type'] ) :
 
 						$slider_min = 0;
 						$slider_max = 100;
@@ -542,7 +553,6 @@ function dslc_ajax_display_module_options( $atts ) {
 						if ( isset( $module_option['onlypositive'] ) ) {
 							$onlypositive = $module_option['onlypositive'];
 						}
-
 						?>
 
 						<div class="dslca-module-edit-field-numeric-wrap">
@@ -550,7 +560,7 @@ function dslc_ajax_display_module_options( $atts ) {
 								class="dslca-module-edit-field dslca-module-edit-field-numeric"
 								name="<?php echo esc_attr( $module_option['id'] ); ?>"
 								value="<?php echo esc_attr( $curr_value ); ?>"
-								data-starting-val="<?php echo esc_attr( $curr_value ); ?>"
+								data-val-bckp="<?php echo esc_attr( $starting_value ); ?>"
 								data-id="<?php echo esc_attr( $module_option['id'] ); ?>"
 								data-min="<?php echo esc_attr( $slider_min ); ?>"
 								data-max="<?php echo esc_attr( $slider_max ); ?>"
@@ -720,7 +730,7 @@ function dslc_ajax_display_module_options( $atts ) {
 
 						<?php else : ?>
 
-							<input type="text" class="dslca-module-edit-field" name="<?php echo esc_attr( $module_option['id'] ); ?>" data-id="<?php echo esc_attr( $module_option['id'] ); ?>" value="<?php echo esc_attr( $curr_value ); ?>" data-starting-val="<?php echo $curr_value; ?>" <?php echo $affect_on_change_append ?> />
+							<input type="text" class="dslca-module-edit-field" name="<?php echo esc_attr( $module_option['id'] ); ?>" data-id="<?php echo esc_attr( $module_option['id'] ); ?>" value="<?php echo esc_attr( $curr_value ); ?>" data-val-bckp="<?php echo $curr_value; ?>" <?php echo $affect_on_change_append ?> />
 
 						<?php endif; ?>
 

@@ -187,8 +187,6 @@ function dslc_generate_code() {
 
 		modulesSection = jQuery(this);
 
-		var testing = modulesSection.find('.dslca-section-code').val();
-
 		modulesSectionJson = dslc_generate_section_code( modulesSection );
 
 		// Update JSON in hidden text area with updated code.
