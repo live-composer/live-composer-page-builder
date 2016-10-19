@@ -868,7 +868,7 @@ function dslc_code_migration( $settings ) {
 				$settings[ $id ] = '0';
 			}
 
-			if ( isset( $settings[ $id ] ) && empty( $settings[ $id ] ) ) {
+			if ( isset( $settings[ $id ] ) && '' === $settings[ $id ] ) {
 				$settings[ $id ] = '0';
 			}
 		}
