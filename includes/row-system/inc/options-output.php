@@ -77,8 +77,14 @@ function dslc_row_display_options() {
 			$row_option['increment'] = 1;
 		}
 
+		$option_type_class = 'dslca-modules-section-edit-option-' . $row_option['type'] . ' ';
+
+		if ( 'color' === $row_option['type'] ) {
+			$option_type_class = 'dslca-module-edit-option-color';
+		}
+
 		?>
-		<div class="dslca-modules-section-edit-option dslca-modules-section-edit-option-<?php echo $row_option['type']; ?> <?php echo esc_attr( $extra_class ); ?>" data-id="<?php echo esc_attr( $row_option['id'] ); ?>">
+		<div class="dslca-modules-section-edit-option <?php echo esc_attr( $option_type_class ) . esc_attr( $extra_class ); ?>" data-id="<?php echo esc_attr( $row_option['id'] ); ?>">
 
 			<span class="dslca-modules-section-edit-label"><?php echo esc_html( $row_option['label'] ); ?></span>
 
@@ -106,7 +112,7 @@ function dslc_row_display_options() {
 					$style = ' style="background: ' . $curr_value . ';"';
 				}?>
 
-				<input type="text" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-colorpicker" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" />
+				<input type="text" class="dslca-modules-section-edit-field dslca-module-edit-field-colorpicker" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" />
 
 			<?php elseif ( 'image' === $row_option['type'] ) : ?>
 

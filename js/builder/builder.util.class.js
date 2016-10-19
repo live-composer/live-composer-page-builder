@@ -160,7 +160,8 @@ LiveComposer.Utils = {
 	},
 
 	/**
-	 * Provide custom events publish
+	 * Provide custom events publish.
+	 * Also echoes all the custom events in the preview iframe as well.
 	 *
 	 * @param  {string} eventName
 	 * @param  {object||string||null||numeric} eventData [description]
@@ -174,9 +175,11 @@ LiveComposer.Utils = {
 			[eventData, 'object']
 		] );
 
-		jQuery.event.trigger( {
+		jQuery(document).trigger( {
 			type: eventName,
 			message: {details: eventData}
 		} );
+
+		LiveComposer.Builder.PreviewAreaWindow.dslca_publish_event( eventName, eventData );
 	}
 };

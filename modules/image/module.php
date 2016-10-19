@@ -263,7 +263,7 @@ class DSLC_Image extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-image',
+				'affect_on_change_el' => '.dslc-image-container',
 				'affect_on_change_rule' => 'margin-top',
 				'section' => 'styling',
 				'ext' => 'px',

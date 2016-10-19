@@ -1575,6 +1575,18 @@ function dslc_custom_css( $dslc_code = '' ) {
 	// Wrapper width.
 	echo '.dslc-modules-section-wrapper, .dslca-add-modules-section { width : ' . $lc_width . '; } ';
 
+
+	// Add horizontal padding to the secitons (set in the plugins settings).
+	$section_padding_hor = dslc_get_option( 'lc_section_paddings', 'dslc_plugin_options' );
+
+	if ( ! empty( $section_padding_hor ) ) {
+
+		echo '.dslc-modules-section:not(.dslc-full) { padding-left: ' . $section_padding_hor . ';  padding-right: ' . $section_padding_hor . '; } ';
+
+	}
+
+
+
 	// Initial ( default ) row CSS.
 	echo dslc_row_get_initial_style();
 

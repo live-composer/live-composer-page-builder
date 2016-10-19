@@ -965,6 +965,8 @@ function dslc_module_options_confirm_changes( callback ) {
 			jQuery('.dslca-module-edit-options-inner').html('');
 			jQuery('.dslca-module-edit-options-tabs').html('');
 
+			LiveComposer.Builder.UI.clearUtils();
+
 			// Callback if there's one
 			if ( callback ) { callback(); }
 		});
@@ -985,8 +987,6 @@ function dslc_module_options_confirm_changes( callback ) {
 	// dslc_generate_code();
 	// Show the publish button
 	dslc_show_publish_button();
-
-	LiveComposer.Builder.UI.clearUtils();
 }
 
 /**
