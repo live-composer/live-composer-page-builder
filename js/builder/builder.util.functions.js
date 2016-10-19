@@ -470,6 +470,16 @@ jQuery(document).ready(function($) {
 				}
 
 				jQuery('body').removeClass('dslca-new-preset-added');
+
+
+				// Trigger 'LC.moduleChange' event.
+				// This event can be used by 3-rd party developers to re-init
+				// some of the JavaScript code on modure re-rendering.
+				LiveComposer.Utils.publish( 'LC.moduleChange', {
+					moduleId: dslcModuleID,
+					optionID: dslcOptionID,
+					optionVal: dslcOption.val()
+				});
 			});
 
 		/**
@@ -652,7 +662,10 @@ jQuery(document).ready(function($) {
 
 			jQuery( '.dslca-module-option-front[data-id="' + dslcOptionID + '"]', dslcModule ).val( dslcOptionToApply );
 
-			LiveComposer.Utils.publish( 'moduleChanged', {
+			// Trigger 'LC.moduleChange' event.
+			// This event can be used by 3-rd party developers to re-init
+			// some of the JavaScript code on modure re-rendering.
+			LiveComposer.Utils.publish( 'LC.moduleChange', {
 
 				moduleId: dslcModule[0].id,
 				optionID: dslcOptionID,
@@ -665,7 +678,7 @@ jQuery(document).ready(function($) {
 	// Preview Module Opt Change - Numeric
 	$(document).on( 'keyup, blur', '.dslca-module-edit-field-numeric', function(){
 
-		return false;
+		return false; // @todo: Can we delete this whole listener?
 		var dslcOptionValue = '',
 			dslcOption = $(this),
 			dslcOptionID = dslcOption.data('id'),

@@ -130,22 +130,24 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 	// Go through array of options.
 	foreach ( $module_structure as $option_arr ) {
 
+		$option_id = $option_arr['id'];
+
 		// Fix for "alter_defaults" and responsive tablet state.
-		if ( 'css_res_t' === $option_arr['id'] && 'enabled' === $option_arr['std'] && ! isset( $module_settings['css_res_t'] ) ) {
+		if ( 'css_res_t' === $option_id && 'enabled' === $option_arr['std'] && ! isset( $module_settings['css_res_t'] ) ) {
 			$module_settings['css_res_t'] = 'enabled';
 		}
 
 		// Fix for "alter_defaults" and responsive phone state.
-		if ( 'css_res_p' === $option_arr['id'] && 'enabled' === $option_arr['std'] && ! isset( $module_settings['css_res_p'] ) ) {
+		if ( 'css_res_p' === $option_id && 'enabled' === $option_arr['std'] && ! isset( $module_settings['css_res_p'] ) ) {
 			$module_settings['css_res_p'] = 'enabled';
 		}
 
 		// If option type is CSS-based and option is set.
 		if ( isset( $option_arr['affect_on_change_el'] ) && isset( $option_arr['affect_on_change_rule'] ) ) {
 
-			// Default.
-			if ( ! isset( $module_settings[ $option_arr['id'] ] ) ) {
-				$module_settings[ $option_arr['id'] ] = $option_arr['std'];
+			// Fill the missing setting with default values.
+			if ( ! isset( $module_settings[ $option_id ] ) || empty( $module_settings[ $option_id ] )  ) {
+				$module_settings[ $option_id ] = $option_arr['std'];
 			}
 
 			// Extension for the input control (px, %, em...).
@@ -194,13 +196,13 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 
 				$checkbox_val = '';
 
-				if ( '' === $module_settings[ $option_arr['id'] ] ) {
+				if ( '' === $module_settings[ $option_id ] ) {
 
 					$checkbox_val = '';
 
 				} else {
 
-					$checkbox_arr = explode( ' ', trim( $module_settings[ $option_arr['id'] ] ) );
+					$checkbox_arr = explode( ' ', trim( $module_settings[ $option_id ] ) );
 
 					if ( in_array( 'top', $checkbox_arr, true ) ) {
 						$checkbox_val .= 'solid ';
@@ -231,19 +233,19 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 					}
 				}
 
-				$module_settings[ $option_arr['id'] ] = $checkbox_val;
+				$module_settings[ $option_id ] = $checkbox_val;
 
 			}
 
 			// Colors (transparent if empty ).
-			if ( '' === $module_settings[ $option_arr['id'] ] && ( 'background' === $option_arr['affect_on_change_rule'] || 'background-color' === $option_arr['affect_on_change_rule'] ) ) {
+			if ( '' === $module_settings[ $option_id ] && ( 'background' === $option_arr['affect_on_change_rule'] || 'background-color' === $option_arr['affect_on_change_rule'] ) ) {
 
-				$module_settings[ $option_arr['id'] ] = '';
+				$module_settings[ $option_id ] = '';
 			}
 
 			foreach ( $affect_rules_arr as $affect_rule ) {
-				if ( '' !== $module_settings[ $option_arr['id'] ] ) {
-					$organized_array[ $affect_el ][ $affect_rule ] = $prepend . $module_settings[ $option_arr['id'] ] . $ext . $append;
+				if ( '' !== $module_settings[ $option_id ] ) {
+					$organized_array[ $affect_el ][ $affect_rule ] = $prepend . $module_settings[ $option_id ] . $ext . $append;
 				}
 			}
 		}
@@ -251,8 +253,8 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 		// If option type is font?
 		if ( 'font' === $option_arr['type'] ) {
 
-			if ( ! in_array( $module_settings[ $option_arr['id'] ], $dslc_googlefonts_array, true ) && ! in_array( $module_settings[ $option_arr['id'] ], $regular_fonts, true ) ) {
-				$dslc_googlefonts_array[] = $module_settings[ $option_arr['id'] ];
+			if ( ! in_array( $module_settings[ $option_id ], $dslc_googlefonts_array, true ) && ! in_array( $module_settings[ $option_id ], $regular_fonts, true ) ) {
+				$dslc_googlefonts_array[] = $module_settings[ $option_id ];
 			}
 		}
 	}

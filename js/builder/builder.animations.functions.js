@@ -47,13 +47,9 @@
 
 			if ( ! jQuery('body').hasClass('dslca-composer-hidden' ) ) {
 
-				jQuery(this).find('.dslca-change-width-module-options').hide();
+				// jQuery(this).find('.dslca-change-width-module-options').hide();
 
 			}
-
-			// Hide "width change opts"
-			jQuery(this).find('.dslca-module-manage').removeClass('dslca-module-manage-change-width-active');
-
 		});
 
 		// Mouse Enter/Leave - Modules Area

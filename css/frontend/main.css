@@ -74,7 +74,7 @@ body.dslca-enabled:not(.dslca-composer-hidden) #dslc-header.dslc-header-pos-abso
 
 .dslc-module-front {
 	position: relative;
-	z-index: 0;
+	/*z-index: 0; – Breaks module width change popup */
 }
 
 /**
