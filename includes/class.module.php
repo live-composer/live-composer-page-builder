@@ -2159,8 +2159,7 @@ class DSLC_Module {
 				if ( isset( $user_options[ $id ] )  ) {
 
 					// If current option is empty or the same as default value for this setting.
-					if ( empty( $user_options[ $id ] ) || isset( $default_option['std'] ) && $default_option['std'] === $user_options[ $id ] ) {
-
+					if ( '' === $user_options[ $id ] || isset( $default_option['std'] ) && $default_option['std'] === $user_options[ $id ] ) {
 						unset( $user_options[ $id ] );
 					}
 				}

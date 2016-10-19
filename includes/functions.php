@@ -193,7 +193,7 @@ function dslc_module_settings( $options, $module_id ) {
 	// Go through all options.
 	foreach ( $options as $option ) {
 
-		if ( isset( $_POST[ $option['id'] ] ) && ! empty( $_POST[ $option['id'] ] ) ) {
+		if ( isset( $_POST[ $option['id'] ] ) && '' !== $_POST[ $option['id'] ] ) {
 
 			$settings[ $option['id'] ] = $_POST[ $option['id'] ];
 

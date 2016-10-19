@@ -136,8 +136,6 @@ function dslc_ajax_add_module( $atts ) {
 		 */
 		$module_settings = dslc_module_settings( $all_opts, $module_id );
 
-		vovaphperror( $module_settings, '$module_settings' );
-
 		// Append ID to settings.
 		$module_settings['module_instance_id'] = $module_instance_id;
 
@@ -257,7 +255,8 @@ function dslc_ajax_display_module_options( $atts ) {
 			 * to set a standard value as a starting point.
 			 */
 			$starting_value = '';
-			if ( empty( $curr_value ) && isset( $module_option['std'] ) ) {
+
+			if ( '' === $curr_value && isset( $module_option['std'] ) ) {
 				$starting_value = $module_option['std'];
 			} else {
 				$starting_value = $curr_value;

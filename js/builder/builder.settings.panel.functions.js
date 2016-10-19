@@ -278,7 +278,11 @@ jQuery(document).ready(function($){
 
 		if ( params.withRemove == true ) {
 
-			LiveComposer.Builder.PreviewAreaWindow.tinyMCE.remove();
+			try {
+				LiveComposer.Builder.PreviewAreaWindow.tinyMCE.remove();
+			} catch(err) {
+				console.info( 'No tinyMCE code found. Error code: 10181116.' );
+			}
 		}
 
 		LiveComposer.Builder.PreviewAreaWindow.tinyMCE.init({
