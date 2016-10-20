@@ -99,6 +99,7 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) ):
 	include DS_LIVE_COMPOSER_ABS . '/includes/display-functions.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/editorinterface.class.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/row-system/init.php';
+	include DS_LIVE_COMPOSER_ABS . '/includes/module-controls.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/ajax.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/shortcodes.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/scripts.php';
