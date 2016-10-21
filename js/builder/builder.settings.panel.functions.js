@@ -290,7 +290,7 @@ jQuery(document).ready(function($){
 			editor_deselector: 'mce-content-body',
 			menubar: false,
 			inline: true,
-			plugins: ['link lists'],
+			plugins: 'wordpress wplink lists',
 			style_formats: [
 					{title: 'Paragraph', format: 'p'},
 					{title: 'Header 2', format: 'h2'},
@@ -299,8 +299,8 @@ jQuery(document).ready(function($){
 					{title: 'Header 5', format: 'h5'},
 					{title: 'Header 6', format: 'h6'},
 			  ],
-			toolbar: 'styleselect | bold italic blockquote | removeformat | link unlink | bullist numlist '
-		});
+			toolbar: 'styleselect | bold italic blockquote | removeformat | bullist numlist '
+		}); /* link unlink */
 	}
 
 	/* Destroy instanced of sliders, color pickers and other temporary elements */
