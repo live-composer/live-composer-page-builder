@@ -93,14 +93,12 @@ class LC_Control {
 
 		$module_type = $this->_module_control['type'];
 
-		error_log($module_type);
-
 		if ( 'group' === $module_type ) {
 			// It's not a control but group openner/closer.
 
 			$action = $this->_module_control['action'];
 			if ( 'open' === $action ) {
-				echo '<div class="dslca-module-control-group">';
+				echo '<div class="dslca-module-control-group dslca-module-edit-options-tab-hook" data-tab="' . esc_attr( $this->_tab_id ) . '">';
 			} else {
 				echo '</div>';
 			}
