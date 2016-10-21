@@ -719,9 +719,41 @@ body a:focus {
 				padding-bottom: 40px;
 				padding-left: 15px;
 				padding-right: 15px;
-				padding-top: 30px;
+				padding-top: 40px;
 				min-width: 180px;
 				position: relative;
+			}
+
+			.dslca-module-control-group {
+				padding: 4px;
+			}
+
+			.dslca-module-control-group > .controls-group-inner {
+				padding-left: 15px;
+				padding-right: 15px;
+				padding-top: 0;
+				padding-bottom: 0;
+				min-width: 180px;
+				border: 1px solid rgba(0,0,0,.1);
+				border-radius: 3px;
+				position: relative;
+			}
+
+			.dslca-module-control-group > .controls-group-inner > .dslca-module-edit-label {
+				position: absolute;
+				background: rgba(76, 129, 207, 0.4);
+				padding: 6px 11px;
+				left: 0;
+				border-radius: 2px 2px 0 0;
+				width: 100%;
+				text-transform: uppercase;
+				letter-spacing: 1px;
+				font-size: 75%;
+				border-bottom: 1px solid #4C81CF;
+			}
+
+			.dslca-module-control-group > .controls-group-inner > .dslca-module-edit-label .dslc-control-toggle {
+				display: none;
 			}
 
 			.dslca-module-edit-option-hidden {
@@ -3777,6 +3809,7 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 	.dslca-modules-section-edit-options-inner,
 	.dslca-module-edit-options-inner {
 		overflow-x: scroll;
+		padding-top: 4px;
 	}
 
 /**
