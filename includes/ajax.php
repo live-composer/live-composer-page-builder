@@ -233,20 +233,14 @@ function dslc_ajax_display_module_options( $atts ) {
 		// Get the module options.
 		$module_controls = $module_instance->options();
 
-
+		// New object for options panel.
 		$module_options_panel = new LC_Module_Options_Panel();
-
-		// Tabs.
-		// $tabs = array();
 
 		ob_start();
 
 		// Go through each option,
 		// generate the control HTML and append to output.
 		foreach ( $module_controls as $module_control ) {
-			// $module_options_panel->add_control( $module_control );
-			// $module_options_panel->output_control( $module_control['id'] );
-
 			$module_option_control = new LC_Control( $module_options_panel );
 			$module_option_control->set_control_options( $module_control );
 			$module_option_control->output_option_control();
@@ -277,6 +271,7 @@ function dslc_ajax_display_module_options( $atts ) {
 		// Auf wiedersehen.
 		exit;
 	}
+
 } add_action( 'wp_ajax_dslc-ajax-display-module-options', 'dslc_ajax_display_module_options' );
 
 

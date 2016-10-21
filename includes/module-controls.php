@@ -18,7 +18,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 class LC_Module_Options_Panel {
 
 	protected $tabs = array();
-	// protected $controls = array();
 
 	// function __construct() {
 	// 	# code...
@@ -59,16 +58,16 @@ class LC_Module_Options_Panel {
 class LC_Control {
 
 	private $options_panel; // Object of Class LC_Module_Options_Panel.
-	protected $_module_control = array();
+	private $_module_control = array();
 
-	protected $_option_id;
-	protected $_curr_value;
-	protected $_starting_value;
-	protected $_visibility;
-	protected $_refresh_on_change;
-	protected $_section;
-	protected $_control_with_toggle;
-	protected $_tab_id;
+	private $_option_id;
+	private $_curr_value;
+	private $_starting_value;
+	private $_visibility;
+	private $_refresh_on_change;
+	private $_section;
+	private $_control_with_toggle;
+	private $_tab_id;
 
 
 	function __construct( $options_panel_obj ) {
@@ -164,28 +163,32 @@ class LC_Control {
 					</select>
 					<span class="dslca-icon dslc-icon-caret-down"></span>
 
-				<?php elseif ( $module_control['type'] == 'checkbox' ) : ?>
+				<?php elseif ( 'checkbox' === $module_control['type'] ) : ?>
 
 					<?php
 
-					// Current Value Array.
-					if ( empty( $this->_curr_value ) ) {
+					$curr_value = $this->get_starting_value();
 
-						$this->_curr_value = array();
+					// Current Value Array.
+					if ( empty( $curr_value ) ) {
+
+						$curr_value = array();
 					} else {
 
-						$this->_curr_value = explode( ' ', trim( $this->_curr_value ) );
+						$curr_value = explode( ' ', trim( $curr_value ) );
 					}
 
 					?>
 
 					<div class="dslca-module-edit-option-checkbox-wrapper">
+
 						<?php foreach ( $module_control['choices'] as  $checkbox_option ) : ?>
 							<div class="dslca-module-edit-option-checkbox-single">
-								<span class="dslca-module-edit-option-checkbox-hook"><span class="dslca-icon <?php if ( in_array( $checkbox_option['value'], $this->_curr_value ) ) echo 'dslc-icon-check'; else echo 'dslc-icon-check-empty'; ?>"></span><?php echo $checkbox_option['label']; ?></span>
-								<input type="checkbox" class="dslca-module-edit-field dslca-module-edit-field-checkbox" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" name="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo $checkbox_option['value']; ?>" <?php if ( in_array( $checkbox_option['value'], $this->_curr_value ) ) echo 'checked="checked"'; ?> <?php echo $affect_on_change_append ?> />
+								<span class="dslca-module-edit-option-checkbox-hook"><span class="dslca-icon <?php if ( in_array( $checkbox_option['value'], $curr_value ) ) echo 'dslc-icon-check'; else echo 'dslc-icon-check-empty'; ?>"></span><?php echo $checkbox_option['label']; ?></span>
+								<input type="checkbox" class="dslca-module-edit-field dslca-module-edit-field-checkbox" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" name="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo $checkbox_option['value']; ?>" <?php if ( in_array( $checkbox_option['value'], $curr_value ) ) echo 'checked="checked"'; ?> <?php echo $affect_on_change_append ?> />
 							</div><!-- .dslca-module-edit-option-checkbox-single -->
 						<?php endforeach; ?>
+
 					</div><!-- .dslca-module-edit-option-checkbox-wrapper -->
 
 				<?php elseif ( 'radio' === $module_control['type'] ) : ?>
@@ -441,7 +444,7 @@ class LC_Control {
 		}
 	}
 
-	private function get_starting_value () {
+	private function get_starting_value() {
 
 		$module_control = $this->_module_control;
 
@@ -452,6 +455,8 @@ class LC_Control {
 		 * Even if the control disable it still has some default value.
 		 * This is what $this->_starting_value variable is about –
 		 * to set a standard value as a starting point.
+		 *
+		 * 🔖 RAW CODE CLEANUP
 		 */
 		$starting_value = '';
 		$curr_value = $this->get_curr_value();
@@ -463,7 +468,7 @@ class LC_Control {
 		}
 	}
 
-	private function get_visibility () {
+	private function get_visibility() {
 
 		$module_control = $this->_module_control;
 		$visibility = true;
@@ -568,6 +573,8 @@ class LC_Control {
 		 * – Show On
 		 * – Presets controls
 		 * – Animation controls
+		 *
+		 * 🔖 RAW CODE CLEANUP
 		 */
 		$controls_without_toggle = array(
 			'css_custom',

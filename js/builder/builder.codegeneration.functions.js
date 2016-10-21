@@ -427,7 +427,7 @@ function dslc_generate_section_code( theModulesSection ) {
 				// Add idicator for the last module in the row.
 				moduleCodeJSON.last = moduleLastState;
 
-				// Clearn the module code from keys with empty values.
+				// RAW CODE CLEANUP: Clean the module code from keys with empty values.
 				jQuery.each(moduleCodeJSON, function(index, el) {
 					if ( false === el || '' === el ) {
 						delete moduleCodeJSON[index];
