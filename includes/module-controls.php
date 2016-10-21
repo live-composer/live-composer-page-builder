@@ -98,9 +98,11 @@ class LC_Control {
 
 			$action = $this->_module_control['action'];
 			if ( 'open' === $action ) {
-				echo '<div class="dslca-module-control-group dslca-module-edit-options-tab-hook" data-tab="' . esc_attr( $this->_tab_id ) . '">';
+				echo '<div class="dslca-module-control-group dslca-module-edit-option" data-tab="' . esc_attr( $this->_tab_id ) . '">';
+				echo '<div class="controls-group-inner">';
+				echo $this->get_label ();
 			} else {
-				echo '</div>';
+				echo '</div></div>';
 			}
 		} else {
 			// Render the control.
