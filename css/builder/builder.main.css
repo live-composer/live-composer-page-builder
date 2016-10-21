@@ -724,6 +724,16 @@ body a:focus {
 				position: relative;
 			}
 
+			.dslca-module-control-group {
+				display: table-cell;
+				padding-left: 15px;
+				padding-right: 15px;
+				min-width: 180px;
+				position: relative;
+				border: 1px solid rgba(0,0,0,.1);
+				border-radius: 3px;
+			}
+
 			.dslca-module-edit-option-hidden {
 				display: none !important;
 			}
