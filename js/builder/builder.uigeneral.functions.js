@@ -106,6 +106,7 @@ jQuery(document).ready(function($) {
 		// @todo: add sidebar colapse on click on the resizing handle.
 		jQuery( '.dslca-container' ).resizable({
 			handles: 'e',
+			minWidth: 200,
 			resize: function( event, ui ) {
 				// console.log( event );
 				// console.log( ui.size.width );
