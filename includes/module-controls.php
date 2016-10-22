@@ -154,11 +154,14 @@ class LC_Control {
 
 					<textarea class="dslca-module-edit-field" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" <?php echo $affect_on_change_append ?>><?php echo stripslashes( $this->_curr_value ); ?></textarea>
 
-				<?php elseif ( 'select' === $module_control['type'] ) : ?>
+				<?php elseif ( 'select' === $module_control['type'] ) :
+
+					$curr_value = $this->get_starting_value();
+				?>
 
 					<select class="dslca-module-edit-field" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" <?php echo $affect_on_change_append ?> >
 						<?php foreach ( $module_control['choices'] as $select_option ) : ?>
-							<option value="<?php echo $select_option['value']; ?>" <?php if ( $this->_curr_value == $select_option['value'] ) echo 'selected="selected"'; ?>><?php echo $select_option['label']; ?></option>
+							<option value="<?php echo $select_option['value']; ?>" <?php if ( $curr_value == $select_option['value'] ) echo 'selected="selected"'; ?>><?php echo $select_option['label']; ?></option>
 						<?php endforeach; ?>
 					</select>
 					<span class="dslca-icon dslc-icon-caret-down"></span>
