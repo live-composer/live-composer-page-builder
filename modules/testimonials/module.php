@@ -290,9 +290,6 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_margin_bottom',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -304,6 +301,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Minimum Height', 'live-composer-page-builder' ),
 				'id' => 'css_min_height',
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -311,8 +309,6 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => 'min-height',
 				'section' => 'styling',
 				'ext' => 'px',
-				'min' => 0,
-				'max' => 1000,
 				'increment' => 5
 			),
 
@@ -334,13 +330,13 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Height', 'live-composer-page-builder' ),
 				'id' => 'css_sep_height',
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '32',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-post-separator',
 				'affect_on_change_rule' => 'margin-bottom,padding-bottom',
 				'ext' => 'px',
-				'min' => 0,
 				'max' => 300,
 				'section' => 'styling',
 				'tab' => __( 'Row Separator', 'live-composer-page-builder' ),
@@ -348,13 +344,13 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Thickness', 'live-composer-page-builder' ),
 				'id' => 'css_sep_thickness',
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '1',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-post-separator',
 				'affect_on_change_rule' => 'border-bottom-width',
 				'ext' => 'px',
-				'min' => 0,
 				'max' => 50,
 				'section' => 'styling',
 				'tab' => __( 'Row Separator', 'live-composer-page-builder' ),
@@ -528,9 +524,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_main_border_width',
-				'min' => 0,
-				'max' => 1000,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -572,9 +566,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Border Radius - Top', 'live-composer-page-builder' ),
 				'id' => 'css_main_border_radius_top',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '4',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -588,9 +580,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Border Radius - Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_main_border_radius_bottom',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '4',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -604,9 +594,8 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_main_padding_vertical',
-				'min' => 0,
+				'onlypositive' => true, // Value can't be negative.
 				'max' => 600,
-				'increment' => 1,
 				'std' => '24',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -619,9 +608,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Padding Horizontal', 'live-composer-page-builder' ),
 				'id' => 'css_main_padding_horizontal',
-				'min' => 0,
-				'max' => 1000,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '30',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -650,10 +637,8 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_quote_border_width',
-				'min' => 0,
+				'onlypositive' => true, // Value can't be negative.
 				'max' => 10,
-				'increment' => 1,
-				
 				'std' => '1',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -706,9 +691,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_quote_font_size',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '17',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -782,9 +765,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Line Height', 'live-composer-page-builder' ),
 				'id' => 'css_quote_line_height',
-				'min' => 0,
-				'max' => 120,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '29',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -797,9 +778,6 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_quote_margin',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '18',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -812,9 +790,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Padding Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_quote_padding_bottom',
-				'min' => 0,
 				'max' => 600,
-				'increment' => 1,
 				'std' => '13',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -827,9 +803,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Padding Top', 'live-composer-page-builder' ),
 				'id' => 'css_quote_padding_top',
-				'min' => 0,
 				'max' => 600,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -892,9 +866,6 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_author_margin_bottom',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -907,9 +878,6 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Margin Top', 'live-composer-page-builder' ),
 				'id' => 'css_author_margin_top',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -975,9 +943,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_avatar_border_width',
-				'min' => 0,
-				'max' => 1000,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1019,17 +985,12 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Border Radius', 'live-composer-page-builder' ),
 				'id' => 'css_avatar_border_radius_top',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '100',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-testimonial-author-avatar img, .dslc-testimonial-author-avatar',
 				'affect_on_change_rule' => 'border-radius',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
 				'section' => 'styling',
 				'tab' => __( 'Avatar', 'live-composer-page-builder' ),
 				'ext' => 'px',
@@ -1091,9 +1052,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_name_font_size',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '15',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1167,9 +1126,6 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_name_margin_bottom',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '8',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1182,9 +1138,6 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Margin Top', 'live-composer-page-builder' ),
 				'id' => 'css_name_margin_top',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '10',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1213,9 +1166,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_position_font_size',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '11',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1325,9 +1276,6 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_margin_bottom',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1340,6 +1288,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Separator - Height', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_sep_height',
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '32',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1354,9 +1303,8 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Main - Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_main_padding_vertical',
-				'min' => 0,
+				'onlypositive' => true, // Value can't be negative.
 				'max' => 600,
-				'increment' => 1,
 				'std' => '24',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1369,9 +1317,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Main - Padding Horizontal', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_main_padding_horizontal',
-				'min' => 0,
-				'max' => 1000,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '30',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1384,9 +1330,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Quote - Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_quote_font_size',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '17',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1399,9 +1343,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Quote - Line Height', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_quote_line_height',
-				'min' => 0,
-				'max' => 120,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '29',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1414,9 +1356,6 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Quote - Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_quote_margin',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '18',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1429,9 +1368,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Quote - Padding Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_quote_padding_bottom',
-				'min' => 0,
 				'max' => 600,
-				'increment' => 1,
 				'std' => '13',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1444,9 +1381,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Quote - Padding Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_quote_padding_top',
-				'min' => 0,
 				'max' => 600,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1459,9 +1394,6 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Author - Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_author_margin_bottom',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1474,9 +1406,6 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Author - Margin Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_author_margin_top',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1553,9 +1482,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Name - Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_name_font_size',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '15',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1568,9 +1495,6 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Name - Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_name_margin_bottom',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '8',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1583,9 +1507,6 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Name - Margin Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_name_margin_top',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '10',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1598,9 +1519,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Position - Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_position_font_size',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '11',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1636,9 +1555,6 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_margin_bottom',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1651,6 +1567,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Separator - Height', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_sep_height',
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '32',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1665,9 +1582,8 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Main - Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_main_padding_vertical',
-				'min' => 0,
+				'onlypositive' => true, // Value can't be negative.
 				'max' => 600,
-				'increment' => 1,
 				'std' => '24',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1680,9 +1596,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Main - Padding Horizontal', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_main_padding_horizontal',
-				'min' => 0,
-				'max' => 1000,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '30',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1695,9 +1609,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Quote - Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_quote_font_size',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '17',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1710,9 +1622,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Quote - Line Height', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_quote_line_height',
-				'min' => 0,
-				'max' => 120,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '29',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1725,9 +1635,6 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Quote - Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_quote_margin',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '18',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1740,9 +1647,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Quote - Padding Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_quote_padding_bottom',
-				'min' => 0,
 				'max' => 600,
-				'increment' => 1,
 				'std' => '13',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1755,9 +1660,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Quote - Padding Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_quote_padding_top',
-				'min' => 0,
 				'max' => 600,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1770,9 +1673,6 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Author - Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_author_margin_bottom',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1785,9 +1685,6 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Author - Margin Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_author_margin_top',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1864,9 +1761,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Name - Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_name_font_size',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '15',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1879,9 +1774,6 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Name - Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_name_margin_bottom',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '8',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1894,9 +1786,6 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Name - Margin Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_name_margin_top',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '10',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1909,9 +1798,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			array(
 				'label' => __( 'Position - Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_position_font_size',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '11',
 				'type' => 'slider',
 				'refresh_on_change' => false,

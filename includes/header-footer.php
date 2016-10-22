@@ -600,19 +600,18 @@ function dslc_hf_get_header( $post_ID = false ) {
 			}
 
 			$append .= '</div>';
-
 		}
 
-		// Add the header code to the variable holder
-		return $wrapper_start . '<div id="dslc-header" class="dslc-header-pos-' . $header_position . '">' . do_shortcode( $header_code ) . $append . '</div>';
+		// Render content. Support both old and new version of the page code.
+		$header_render = dslc_render_content( $header_code );
 
-	// If no header applied
+		// Add the header code to the variable holder.
+		return $wrapper_start . '<div id="dslc-header" class="dslc-header-pos-' . $header_position . '">' . $header_render . $append . '</div>';
+
 	} else {
-
+		// If no header applied.
 		return $wrapper_start . '';
-
 	}
-
 }
 
 /**
@@ -679,8 +678,11 @@ function dslc_hf_get_footer( $post_ID = false ) {
 
 		}
 
+		// Render content. Support both old and new version of the page code.
+		$footer_render = dslc_render_content( $footer_code );
+
 		// Add the header code to the variable holder.
-		return '<div id="dslc-footer"  class="dslc-footer-pos-' . $footer_position . '">' . do_shortcode( $footer_code ) . $append . '</div>' . $wrapper_end;
+		return '<div id="dslc-footer"  class="dslc-footer-pos-' . $footer_position . '">' . $footer_render . $append . '</div>' . $wrapper_end;
 
 	// If no header applied
 	} else {

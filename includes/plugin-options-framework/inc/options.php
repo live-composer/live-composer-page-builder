@@ -21,6 +21,15 @@ $dslc_plugin_options['dslc_plugin_options'] = array(
 			'descr' => __( 'The width of the modules section when row is set to wrapped. If not set the $content_width variable from theme will be used.', 'live-composer-page-builder' ),
 		),
 
+		'lc_section_paddings' => array(
+
+		   'section' => 'dslc_plugin_options',
+			'label' => __( 'Section Paddings <br>(horizontal)', 'live-composer-page-builder' ),
+			'std' => '4%',
+			'type' => 'text',
+			'descr' => __( 'Spacing to add on the left and right side of the each row. Used to prevent the content from touching the sides of the window. Default: 4%', 'live-composer-page-builder' ),
+		),
+
 		'lc_force_important_css' => array(
 
 			'section' => 'dslc_plugin_options',

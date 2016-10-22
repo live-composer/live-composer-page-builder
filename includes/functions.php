@@ -193,7 +193,7 @@ function dslc_module_settings( $options, $module_id ) {
 	// Go through all options.
 	foreach ( $options as $option ) {
 
-		if ( isset( $_POST[ $option['id'] ] ) ) {
+		if ( isset( $_POST[ $option['id'] ] ) && '' !== $_POST[ $option['id'] ] ) {
 
 			$settings[ $option['id'] ] = $_POST[ $option['id'] ];
 
@@ -297,19 +297,8 @@ function dslc_get_new_module_id() {
 
 	// Allowed to do this?
 	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
-
-		// Get current count.
-		$module_id_count = get_option( 'dslc_module_id_count' );
-
-		// Increment by one.
-		$module_instance_id = $module_id_count + 1;
-
-		// Update the count.
-		update_option( 'dslc_module_id_count', $module_instance_id );
-
-		// Return new ID.
-		return $module_instance_id;
-
+		// Generates unique id like 'kojb85j8oc'.
+		return substr(str_shuffle(MD5(microtime())), 0, 11);
 	}
 }
 
@@ -534,7 +523,7 @@ function dslc_save_preset( $preset_name, $preset_code_raw, $module_id ) {
 	$preset_id = strtolower( str_replace( ' ', '-', $preset_name ) );
 
 	// Clean up ( step 1 - get data ).
-	$preset_code_raw = maybe_unserialize( base64_decode( $preset_code_raw ) );
+	$preset_code_raw = dslc_json_decode( $preset_code_raw );
 	$preset_code = array();
 
 	// The ID of the module to add.
@@ -830,4 +819,65 @@ function dslc_load_modules( $dir_path, $init_filename = '' ) {
 			require_once $widgetpath;
 		}
 	}
+}
+
+/**
+ * Migrate code from dslc_code generation one to two.
+ * First generation: shortcodes + base64.
+ * Second generation: JSON only.
+ *
+ * @param  array  $settings Array with all the module properties.
+ * @return array            The same array but adjusted to make migration seamless.
+ */
+function dslc_code_migration( $settings ) {
+
+	if ( ! isset( $settings['module_id'] ) || ! class_exists( $settings['module_id'] ) ) {
+		return;
+	}
+
+	// The ID of the module.
+	$module_id = $settings['module_id'];
+
+	// Instanciate the module class
+	$module_instance = new $module_id();
+	$module_struct = $module_instance->options();
+
+	// Go trough module standard settings and check every color setting.
+	foreach ( $module_struct as $control ) {
+		$id = $control['id'];
+		$type = $control['type'];
+
+		// Check the conrol options in the old code and adjust them if needed.
+		if ( 'color' === $type ) {
+
+			// If this setting is set but value is empty...
+			if ( isset( $settings[ $id ] ) && empty( $settings[ $id ] ) ) {
+				// If the color is empty make it transparent.
+				// In old code empty = transparent.
+				// In new code empty = default color.
+				// In new code transparent = rgba(0,0,0,0).
+				$settings[ $id ] = 'rgba(0,0,0,0)';
+			}
+		}
+
+		// Set border-radius = 0 if in old version it was disabled.
+		if ( 'css_border_radius' === $type ) {
+
+			// If this setting isn't set at all...
+			if ( ! isset( $settings[ $id ] )  ) {
+				$settings[ $id ] = '0';
+			}
+
+			if ( isset( $settings[ $id ] ) && '' === $settings[ $id ] ) {
+				$settings[ $id ] = '0';
+			}
+		}
+	}
+
+	// Migration done. Remove the key code_version = 1.
+	if ( isset( $settings['code_version'] ) ) {
+		unset( $settings['code_version'] );
+	}
+
+	return $settings;
 }

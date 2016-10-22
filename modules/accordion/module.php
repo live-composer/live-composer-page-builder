@@ -114,10 +114,8 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_border_width',
-				'min' => 0,
+				'onlypositive' => true, // Value can't be negative.
 				'max' => 10,
-				'increment' => 1,
-
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -157,9 +155,6 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_margin_bottom',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -171,6 +166,7 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Minimum Height', 'live-composer-page-builder' ),
 				'id' => 'css_min_height',
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -178,16 +174,13 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_rule' => 'min-height',
 				'section' => 'styling',
 				'ext' => 'px',
-				'min' => 0,
-				'max' => 2000,
 				'increment' => 5,
 			),
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_padding_vertical',
-				'min' => 0,
+				'onlypositive' => true, // Value can't be negative.
 				'max' => 600,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -199,9 +192,7 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Padding Horizontal', 'live-composer-page-builder' ),
 				'id' => 'css_padding_horizontal',
-				'min' => 0,
-				'max' => 1000,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -252,10 +243,8 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_header_border_width',
-				'min' => 0,
+				'onlypositive' => true, // Value can't be negative.
 				'max' => 10,
-				'increment' => 1,
-
 				'std' => '1',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -297,9 +286,6 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_header_margin_bottom',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -312,9 +298,8 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_header_padding_vertical',
-				'min' => 0,
+				'onlypositive' => true, // Value can't be negative.
 				'max' => 600,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -327,9 +312,7 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Padding Horizontal', 'live-composer-page-builder' ),
 				'id' => 'css_header_padding_horizontal',
-				'min' => 0,
-				'max' => 1000,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -369,10 +352,8 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_title_border_width',
-				'min' => 0,
+				'onlypositive' => true, // Value can't be negative.
 				'max' => 10,
-				'increment' => 1,
-
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -425,9 +406,7 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_title_font_size',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -513,9 +492,8 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_title_padding_vertical',
-				'min' => 0,
+				'onlypositive' => true, // Value can't be negative.
 				'max' => 600,
-				'increment' => 1,
 				'std' => '15',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -528,9 +506,7 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Padding Horizontal', 'live-composer-page-builder' ),
 				'id' => 'css_title_padding_horizontal',
-				'min' => 0,
-				'max' => 1000,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '15',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -581,10 +557,8 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_content_border_width',
-				'min' => 0,
+				'onlypositive' => true, // Value can't be negative.
 				'max' => 10,
-				'increment' => 1,
-
 				'std' => '1',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -637,9 +611,7 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_content_font_size',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -713,9 +685,7 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Line Height', 'live-composer-page-builder' ),
 				'id' => 'css_content_line_height',
-				'min' => 0,
-				'max' => 120,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '22',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -728,9 +698,8 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_content_padding_vertical',
-				'min' => 0,
+				'onlypositive' => true, // Value can't be negative.
 				'max' => 600,
-				'increment' => 1,
 				'std' => '25',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -743,9 +712,7 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Padding Horizontal', 'live-composer-page-builder' ),
 				'id' => 'css_content_padding_horizontal',
-				'min' => 0,
-				'max' => 1000,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '25',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -792,9 +759,6 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_margin_bottom',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -807,9 +771,8 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_padding_vertical',
-				'min' => 0,
+				'onlypositive' => true, // Value can't be negative.
 				'max' => 600,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -822,9 +785,7 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Padding Horizontal', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_padding_horizontal',
-				'min' => 0,
-				'max' => 1000,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -837,9 +798,6 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Header - Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_header_margin_bottom',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -852,9 +810,8 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Header - Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_header_padding_vertical',
-				'min' => 0,
+				'onlypositive' => true, // Value can't be negative.
 				'max' => 600,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -867,9 +824,7 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Header - Padding Horizontal', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_header_padding_horizontal',
-				'min' => 0,
-				'max' => 1000,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -882,9 +837,7 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Title - Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_title_font_size',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -909,9 +862,8 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Title - Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_title_padding_vertical',
-				'min' => 0,
+				'onlypositive' => true, // Value can't be negative.
 				'max' => 600,
-				'increment' => 1,
 				'std' => '15',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -924,9 +876,7 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Title - Padding Horizontal', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_title_padding_horizontal',
-				'min' => 0,
-				'max' => 1000,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '15',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -939,9 +889,7 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Content - Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_content_font_size',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -954,9 +902,7 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Content - Line Height', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_content_line_height',
-				'min' => 0,
-				'max' => 120,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '22',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -969,9 +915,8 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Content - Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_content_padding_vertical',
-				'min' => 0,
+				'onlypositive' => true, // Value can't be negative.
 				'max' => 600,
-				'increment' => 1,
 				'std' => '25',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -984,9 +929,7 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Content - Padding Horizontal', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_content_padding_horizontal',
-				'min' => 0,
-				'max' => 1000,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '25',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1022,9 +965,6 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_margin_bottom',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1037,9 +977,8 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_padding_vertical',
-				'min' => 0,
+				'onlypositive' => true, // Value can't be negative.
 				'max' => 600,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1052,9 +991,7 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Padding Horizontal', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_padding_horizontal',
-				'min' => 0,
-				'max' => 1000,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1067,9 +1004,6 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Header - Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_header_margin_bottom',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1082,9 +1016,8 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Header - Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_header_padding_vertical',
-				'min' => 0,
+				'onlypositive' => true, // Value can't be negative.
 				'max' => 600,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1097,9 +1030,7 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Header - Padding Horizontal', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_header_padding_horizontal',
-				'min' => 0,
-				'max' => 1000,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1112,9 +1043,7 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Title - Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_title_font_size',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1139,9 +1068,8 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Title - Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_title_padding_vertical',
-				'min' => 0,
+				'onlypositive' => true, // Value can't be negative.
 				'max' => 600,
-				'increment' => 1,
 				'std' => '15',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1154,9 +1082,7 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Title - Padding Horizontal', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_title_padding_horizontal',
-				'min' => 0,
-				'max' => 1000,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '15',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1169,9 +1095,7 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Content - Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_content_font_size',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1184,9 +1108,7 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Content - Line Height', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_content_line_height',
-				'min' => 0,
-				'max' => 120,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '22',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1199,9 +1121,8 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Content - Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_content_padding_vertical',
-				'min' => 0,
+				'onlypositive' => true, // Value can't be negative.
 				'max' => 600,
-				'increment' => 1,
 				'std' => '25',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1214,9 +1135,7 @@ class DSLC_Accordion extends DSLC_Module {
 			array(
 				'label' => __( 'Content - Padding Horizontal', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_content_padding_horizontal',
-				'min' => 0,
-				'max' => 1000,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '25',
 				'type' => 'slider',
 				'refresh_on_change' => false,

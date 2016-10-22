@@ -22,6 +22,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		global $dslc_var_row_options;
 
+		$dslc_var_row_options['element_type'] = array(
+			'id' => 'element_type',
+			'std' => 'row',
+			'label' => '',
+			'type' => 'hidden',
+		);
+
 		$dslc_var_row_options['show_on'] = array(
 			'id' => 'show_on',
 			'std' => 'desktop tablet phone',
@@ -79,6 +86,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		$dslc_var_row_options['bg_color'] = array(
 			'id' => 'bg_color',
+			'std' => '',
 			'label' => __( 'BG Color', 'live-composer-page-builder' ),
 			'type' => 'color',
 			'affect_on_change_rule' => 'background-color',
@@ -104,6 +112,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		$dslc_var_row_options['bg_image'] = array(
 			'id' => 'bg_image',
+			'std' => '',
 			'label' => __( 'BG Image', 'live-composer-page-builder' ),
 			'type' => 'image',
 			'affect_on_change_rule' => 'background-image',
@@ -227,6 +236,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		$dslc_var_row_options['bg_video'] = array(
 			'id' => 'bg_video',
+			'std' => '',
 			'label' => __( 'BG Video', 'live-composer-page-builder' ),
 			'type' => 'video',
 			'affect_on_change_rule' => 'background-video',
@@ -255,6 +265,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		$dslc_var_row_options['border_color'] = array(
 			'id' => 'border_color',
+			'std' => '',
 			'label' => __( 'Border Color', 'live-composer-page-builder' ),
 			'type' => 'color',
 			'affect_on_change_rule' => 'border-color',
@@ -263,7 +274,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		$dslc_var_row_options['border_width'] = array(
 			'id' => 'border_width',
 			'min' => 0,
-			'increment' => 1,
+			
+
 			'std' => '0',
 			'label' => __( 'Border Width', 'live-composer-page-builder' ),
 			'type' => 'slider',
@@ -307,8 +319,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 			'type' => 'slider',
 			'affect_on_change_rule' => 'margin-left,margin-right',
 			'ext' => '%',
-			'max' => 30,
-			'increment' => 0.5,
+			'max' => 90,
+			
+
 		);
 
 		$dslc_var_row_options['margin_b'] = array(
@@ -319,7 +332,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 			'affect_on_change_rule' => 'margin-bottom',
 			'ext' => 'px',
 			'max' => 500,
-			'increment' => 1,
+			
+
 		);
 
 		$dslc_var_row_options['padding'] = array(
@@ -339,8 +353,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 			'type' => 'slider',
 			'affect_on_change_rule' => 'padding-left,padding-right',
 			'ext' => '%',
-			'max' => 30,
-			'increment' => 0.5,
+			'max' => 90,
+			
+
 		);
 
 		$dslc_var_row_options['custom_class'] = array(
@@ -354,7 +369,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 			'label' => __( 'Custom ID', 'live-composer-page-builder' ),
 			'type' => 'text',
 		);
-
+/*
+		$dslc_var_row_options['section_instance_id'] = array(
+			'id' => 'section_instance_id',
+			'label' => '',
+			'type' => 'hidden',
+		);
+*/
 		// Hook to register custom modules or alter current.
 		do_action( 'dslc_hook_row_options' );
 

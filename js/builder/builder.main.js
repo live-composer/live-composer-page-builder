@@ -11,6 +11,7 @@ var dslcAllFontsArray = dslcRegularFontsArray.concat( dslcGoogleFontsArray );
 // Set current/default icons set
 var dslcIconsCurrentSet = DSLCIcons.fontawesome;
 var dslcDebug = false;
+// dslcDebug = true;
 
 dslcDebug = true;
 
@@ -112,6 +113,9 @@ var LiveComposer = {
 
 			LiveComposer.Builder.PreviewAreaDocument[0].getElementById(newModule[0].id).appendChild(script);
 		});
+
+		scripts = null;
+		afterObject = null;
 
 		return newModule;
 	}

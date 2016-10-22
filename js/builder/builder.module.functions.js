@@ -146,9 +146,17 @@
 
 		if ( ! $(this).hasClass('dslca-action-disabled') ) {
 
-			$('.dslca-change-width-module-options', this).toggle();
-			$(this).closest('.dslca-module-manage').toggleClass('dslca-module-manage-change-width-active');
+			jQuery('.dslca-change-width-module-options', this).toggle();
+			$(this).closest('.dslc-module-front').toggleClass('dslca-change-width-active');
 		}
+	});
+
+	LiveComposer.Builder.PreviewAreaDocument.on( 'mouseleave', '.dslca-change-width-module-options', function(e){
+
+			// Hide width seleciton panel.
+			jQuery(this).hide();
+			// Remove class that puts module on the very top level.
+			$(this).closest('.dslc-module-front').removeClass('dslca-change-width-active');
 	});
 
 	/**
@@ -536,7 +544,7 @@ function dslc_module_output_default( dslc_module_id, callback ) {
 		{
 			action : 'dslc-ajax-add-module',
 			dslc : 'active',
-			dslc_module_id : dslc_module_id,
+			dslc_module_id : dslc_module_id, // ex. DSLC_Button
 			dslc_post_id : jQuery('.dslca-container').data('post-id'),
 			dslc_url_vars: LiveComposer.Utils.get_page_params()
 		},
@@ -608,6 +616,9 @@ function dslc_module_output_altered( callback ) {
 								insertModule( response.output, dslcModule );
 
 			newModule.addClass('dslca-module-being-edited');
+
+			response = null;
+			newModule = null;
 
 			// TODO: Add new postponed action to run after all done
 

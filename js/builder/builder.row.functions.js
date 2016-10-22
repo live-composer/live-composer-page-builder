@@ -112,7 +112,7 @@
 			LiveComposer.Builder.UI.CModalWindow({
 
 				title: DSLCString.str_export_row_title,
-				content: DSLCString.str_export_row_descr + '<br><br><textarea>' + dslc_generate_section_code( $(this).closest('.dslc-modules-section') ) + '</textarea></span>'
+				content: DSLCString.str_export_row_descr + '<br><br><textarea>' + '[' + dslc_generate_section_code( $(this).closest('.dslc-modules-section') ) + ']' + '</textarea></span>'
 			});
 
 			// dslc_js_confirm( 'export_modules_section', '<span class="dslca-prompt-modal-title">' + DSLCString.str_export_row_title +
@@ -196,39 +196,73 @@ function dslc_row_add( callback ) {
 	callback = typeof callback !== 'undefined' ? callback : false;
 
 	var defer = jQuery.Deferred();
+	var browserCacheTmp = sessionStorage;
 
-	// AJAX Request
-	jQuery.post(
+	var newRow = jQuery();
+	var cachedAjaxRequest = browserCacheTmp.getItem( 'cache-dslc-ajax-add-modules-section' );
 
-		DSLCAjax.ajaxurl,
-		{
-			action : 'dslc-ajax-add-modules-section',
-			dslc : 'active'
-		},
-		function( response ) {
+	// If no cache for current Ajax request.
+	if ( null === cachedAjaxRequest ) {
 
-			var newRow = jQuery(response.output);
+		// AJAX Request
+		jQuery.post(
 
-			// Append new row
-			newRow.appendTo(LiveComposer.Builder.PreviewAreaDocument.find("#dslc-main"));
+			DSLCAjax.ajaxurl,
+			{
+				action : 'dslc-ajax-add-modules-section',
+				dslc : 'active'
+			},
+			function( response ) {
 
-			// Call other functions
-			dslc_drag_and_drop();
-			dslc_generate_code();
-			dslc_show_publish_button();
+				// newRow = jQuery(response.output);
+				browserCacheTmp.setItem( 'cache-dslc-ajax-add-modules-section', response.output );
 
-			new LiveComposer.Builder.Elements.CRow(newRow);
-			new LiveComposer.Builder.Elements.CModuleArea(newRow.find('.dslc-modules-area').eq(0)[0]);
+				newRow = dslc_row_after_add( response.output );
 
-			if ( callback ) { callback(); }
+				if ( callback ) { callback(); }
 
-			newRow.find('.dslc-modules-area').addClass('dslc-modules-area-empty dslc-last-col');
+				defer.resolve(newRow[0]);
+				return defer;
+			}
+		);
 
-			defer.resolve(newRow[0]);
-		}
-	);
+	} else {
+		// There is cached version of AJAX request.
+		// newRow = jQuery(cachedAjaxRequest);
 
-	return defer;
+		newRow = dslc_row_after_add( cachedAjaxRequest );
+
+		if ( callback ) { callback(); }
+
+		defer.resolve(newRow[0]);
+		return defer;
+	}
+}
+
+/**
+ * Finish new row creation process.
+ *
+ * @param  {String} newRowHTML HTML code of the new row.
+ * @return {jQuery}            New ROW jQuery object.
+ */
+function dslc_row_after_add( newRowHTML ) {
+
+	var newRow = jQuery(newRowHTML);
+
+	// Append new row
+	newRow.appendTo(LiveComposer.Builder.PreviewAreaDocument.find("#dslc-main"));
+
+	// Call other functions
+	dslc_drag_and_drop();
+	dslc_generate_code();
+	dslc_show_publish_button();
+
+	new LiveComposer.Builder.Elements.CRow(newRow);
+	new LiveComposer.Builder.Elements.CModuleArea( newRow.find('.dslc-modules-area').eq(0)[0] );
+
+	newRow.find('.dslc-modules-area').addClass('dslc-modules-area-empty dslc-last-col');
+
+	return newRow;
 }
 
 /**
