@@ -250,10 +250,10 @@ function dslc_ajax_display_module_options( $atts ) {
 		ob_end_clean();
 
 		// Output Start.
-		$output_start = '<div class="dslca-module-edit-options-wrapper dslc-clearfix">';
+		$output_start = ''; //'<div class="dslca-module-edit-options-wrapper dslc-clearfix">';
 
 		// Output End.
-		$output_end = '</div>';
+		$output_end = ''; //'</div>';
 
 		// Combine output.
 		$response['output_tabs'] .= $module_options_panel->get_tabs_render();

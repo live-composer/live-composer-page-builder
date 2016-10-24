@@ -155,11 +155,9 @@ function dslc_display_composer() {
 						<div class="dslca-section-scroller-fade"></div>
 
 						<div class="dslca-section-scroller">
-							<div class="dslca-section-scroller-inner">
 								<div class="dslca-section-scroller-content">
 									<?php dslc_display_modules(); ?>
 								</div><!-- .dslca-section-scroller-content -->
-							</div><!-- .dslca-section-scroller-inner -->
 						</div><!-- .dslca-section-scroller-content -->
 
 
@@ -289,11 +287,9 @@ function dslc_display_composer() {
 						</div><!-- .dslca-section-title -->
 
 						<div class="dslca-section-scroller">
-							<div class="dslca-section-scroller-inner">
 								<div class="dslca-section-scroller-content">
 									<?php dslc_display_templates(); ?>
 								</div>
-							</div>
 						</div>
 
 

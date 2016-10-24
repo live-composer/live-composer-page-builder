@@ -288,8 +288,6 @@ jQuery(document).on( 'click', '.dslca-section-title-filter-options a', function(
 		jQuery('.dslca-section-title-filter-curr', section).text( jQuery(this).text());
 	}
 
-	jQuery('.dslca-section-scroller-inner').css({ left : 0 });
-
 	dslc_filter_origin( origin, section );
 
 	// Close filter panel
