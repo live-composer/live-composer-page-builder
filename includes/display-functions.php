@@ -90,12 +90,6 @@ function dslc_display_composer() {
 
 				<div class="dslca-actions">
 
-					<!-- Save Composer -->
-					<a href="#" class="dslca-save-composer dslca-save-composer-hook">
-						<span class="dslca-save-composer-helptext"><?php _e( 'Publish Changes', 'live-composer-page-builder' ); ?></span>
-						<span class="dslca-save-composer-icon"><span class="dslca-icon dslc-icon-ok"></span></span>
-					</a><!-- .dslca-save-composer -->
-
 					<a href="#" class="dslca-save-draft-composer dslca-save-draft-composer-hook">
 						<span class="dslca-save-draft-composer-helptext"><?php _e( 'Save As Draft', 'live-composer-page-builder' ); ?></span>
 						<span class="dslca-save-draft-composer-icon"><span class="dslca-icon dslc-icon-save"></span></span>
@@ -105,9 +99,7 @@ function dslc_display_composer() {
 					<a href="#" class="dslca-show-composer-hook"><span class="dslca-icon dslc-icon-arrow-up"></span><?php _e( 'Show Editor', 'live-composer-page-builder' ); ?></a>
 					<a href="#" class="dslca-hide-composer-hook"><span class="dslca-icon dslc-icon-arrow-down"></span><?php _e( 'Hide Editor', 'live-composer-page-builder' ); ?></a>
 
-					<!-- Disable -->
-					<a href="<?php the_permalink( $_GET['page_id'] ); ?>" class="dslca-close-composer-hook"><span class="dslca-icon dslc-icon-remove"></span><?php _e( 'Disable Editor', 'live-composer-page-builder' ); ?></a>
-
+					
 					<div class="dslc-clear"></div>
 
 				</div><!-- .dslca-actions -->
@@ -117,9 +109,50 @@ function dslc_display_composer() {
 					<!-- Modules Listing -->
 					<div class="dslca-section dslca-modules" id="dslca-modules">
 
+						<div class="dslca-header-actions wp-clearfix">
+							<!-- Save Composer -->
+							<a href="#" class="dslca-save-composer dslca-save-composer-hook button button-primary disabled">
+								<span class="dslca-save-composer-helptext"><span class="on"><?php _e( 'Save', 'live-composer-page-builder' ); ?></span><span class="off"><?php _e( 'Saved', 'live-composer-page-builder' ); ?></span></span>
+							</a><!-- .dslca-save-composer -->
+							<span class="spinner"></span>
+
+							<!-- Close -->
+							<a href="<?php the_permalink( $_GET['page_id'] ); ?>" class="dslca-close dslca-close-composer-hook">
+								<!-- <span class="dslca-icon dslc-icon-remove"></span> -->
+								<span class="screen-reader-text"><?php _e( 'Disable Editor', 'live-composer-page-builder' ); ?></span>
+							</a>
+
+							<!-- Undo -->
+							<a href="<?php the_permalink( $_GET['page_id'] ); ?>" class="dslca-undo dslca-close-composer-hook disabled">
+								<!-- <span class="dslca-icon dslc-icon-remove"></span> -->
+								<span class="screen-reader-text"><?php _e( 'Disable Editor', 'live-composer-page-builder' ); ?></span>
+							</a>
+
+						</div>
+
+						<div class="dslca-subsection-title">
+							<button class="dslca-section-back" tabindex="0">
+								<span class="screen-reader-text">Back</span>
+							</button>
+							<h3>
+								<span class="dslca-action">
+									Customizing
+								</span>
+								Site Identity
+							</h3>
+						</div>
+
+						<ul class="dslca-subsection-tabs wp-clearfix">
+							<li class="dslca-tab-active" ><a href="#"><?php _e( 'Modules', 'live-composer-page-builder' ); ?></a></li>
+							<li><a href="#"><?php _e( 'Sections', 'live-composer-page-builder' ); ?></a></li>
+							<li><a href="#"><?php _e( 'Pages', 'live-composer-page-builder' ); ?></a></li>
+						</ul>
+
 						<form class="dslca-search-modules" method="get">
 							<input type="search" id="modules-search-input" class="modules-search-input" name="modules-search" value="" placeholder="Start typing to search modules..." >
 						</form>
+
+						<div class="dslca-section-scroller-fade"></div>
 
 						<div class="dslca-section-scroller">
 							<div class="dslca-section-scroller-inner">
@@ -129,12 +162,25 @@ function dslc_display_composer() {
 							</div><!-- .dslca-section-scroller-inner -->
 						</div><!-- .dslca-section-scroller-content -->
 
-						<div class="dslca-section-scroller-fade"></div>
 
-						<div class="dslca-section-scroller-nav">
-							<a href="#" class="dslca-section-scroller-prev"><span class="dslca-icon dslc-icon-angle-left"></span></a>
-							<a href="#" class="dslca-section-scroller-next"><span class="dslca-icon dslc-icon-angle-right"></span></a>
-						</div><!-- .dslca-section-scroller -->
+						<div id="customize-footer-actions" class="wp-full-overlay-footer">
+							<div class="devices">
+								<button type="button" class="preview-desktop active" aria-pressed="true" data-device="desktop">
+									<span class="screen-reader-text">Enter desktop preview mode</span>
+								</button>
+								<button type="button" class="preview-tablet" aria-pressed="false" data-device="tablet">
+									<span class="screen-reader-text">Enter tablet preview mode</span>
+								</button>
+								<button type="button" class="preview-mobile" aria-pressed="false" data-device="mobile">
+									<span class="screen-reader-text">Enter mobile preview mode</span>
+								</button>
+							</div>
+							<button type="button" class="collapse-sidebar button-secondary" aria-expanded="true" aria-label="Collapse Sidebar">
+								<span class="collapse-sidebar-arrow"></span>
+								<span class="collapse-sidebar-label">Collapse</span>
+							</button>
+						</div>
+
 
 					</div><!-- .dslca-modules -->
 
@@ -250,10 +296,6 @@ function dslc_display_composer() {
 							</div>
 						</div>
 
-						<div class="dslca-section-scroller-nav">
-							<a href="#" class="dslca-section-scroller-prev"><span class="dslca-icon dslc-icon-angle-left"></span></a>
-							<a href="#" class="dslca-section-scroller-next"><span class="dslca-icon dslc-icon-angle-right"></span></a>
-						</div><!-- .dslca-section-scroller -->
 
 					</div><!-- .dslca-templates-load -->
 

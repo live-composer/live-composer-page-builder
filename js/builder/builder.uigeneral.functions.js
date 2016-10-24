@@ -106,7 +106,7 @@ jQuery(document).ready(function($) {
 		// @todo: add sidebar colapse on click on the resizing handle.
 		jQuery( '.dslca-container' ).resizable({
 			handles: 'e',
-			minWidth: 200,
+			minWidth: 255,
 			resize: function( event, ui ) {
 				// console.log( event );
 				// console.log( ui.size.width );
@@ -354,7 +354,9 @@ function dslc_show_publish_button() {
 
 	if ( dslcDebug ) console.log( 'dslc_show_publish_button' );
 
-	jQuery('.dslca-save-composer').show().addClass('dslca-init-animation');
+	// Show button "Save".
+	jQuery('.dslca-save-composer').removeClass('disabled');
+
 	jQuery('.dslca-save-draft-composer').show().addClass('dslca-init-animation');
 }
 
@@ -362,7 +364,7 @@ function dslc_hide_publish_button() {
 
 	if ( dslcDebug ) console.log( 'dslc_hide_publish_button' );
 
-	jQuery('.dslca-save-composer').hide();
+	jQuery('.dslca-save-composer').addClass('disabled');
 	jQuery('.dslca-save-draft-composer').hide();
 }
 

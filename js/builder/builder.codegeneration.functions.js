@@ -36,6 +36,10 @@ function dslc_save_composer() {
 	// Apply class to body to know saving is in progress
 	jQuery('body').addClass('dslca-saving-in-progress');
 
+	// Show spinner.
+	// jQuery('.dslca-header-actions').css('background','red');
+	jQuery('.dslca-header-actions .spinner').css('visibility','visible');
+
 	// Replace the check in publish button with a loading animation
 	jQuery('.dslca-save-composer .dslca-icon').removeClass('dslc-icon-ok').addClass('dslc-icon-spin dslc-icon-spinner');
 
@@ -56,7 +60,13 @@ function dslc_save_composer() {
 
 		// On success hide the publish button
 		if ( response.status == 'success' ) {
-			jQuery('.dslca-save-composer').fadeOut(250);
+			// Change button to "Saved".
+			jQuery('.dslca-save-composer').addClass('disabled');
+
+			// Hide spinner.
+			jQuery('.dslca-header-actions .spinner').css('visibility', 'hidden');
+
+
 			jQuery('.dslca-save-draft-composer').fadeOut(250);
 		// On fail show an alert message
 		} else {
