@@ -1655,8 +1655,11 @@ function dslc_render_css( $composer_code ) {
 
 function dslc_render_gfonts() {
 
+	/* This array gets filled with fonts used on the page (temporary storage) */
 	global $dslc_googlefonts_array;
-	global $dslc_all_googlefonts_array;
+
+	global $dslc_available_fonts;
+	$dslc_all_googlefonts_array = $dslc_available_fonts['google'];
 
 	// Google Fonts Import.
 	$gfonts_output_subsets = '';

@@ -2022,7 +2022,9 @@ class DSLC_Module {
 
 		global $dslc_css_style;
 		global $dslc_googlefonts_array;
-		global $dslc_all_googlefonts_array;
+
+		global $dslc_available_fonts;
+		$dslc_all_googlefonts_array = $dslc_available_fonts['google'];
 
 		/**
 		 * Title Attr

@@ -220,8 +220,6 @@ function dslc_row_add( callback ) {
 				newRow = dslc_row_after_add( response.output );
 
 				if ( callback ) { callback(); }
-
-				defer.resolve(newRow[0]);
 				return defer;
 			}
 		);
@@ -233,8 +231,6 @@ function dslc_row_add( callback ) {
 		newRow = dslc_row_after_add( cachedAjaxRequest );
 
 		if ( callback ) { callback(); }
-
-		defer.resolve(newRow[0]);
 		return defer;
 	}
 }
