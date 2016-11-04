@@ -72,7 +72,7 @@ function dslc_ajax_add_modules_section( $atts ) {
 } add_action( 'wp_ajax_dslc-ajax-add-modules-section', 'dslc_ajax_add_modules_section' );
 
 /**
- * Add a new module or re-render module output via ajax
+ * Add a new module OR re-render module output via ajax
  *
  * @since 1.0
  */

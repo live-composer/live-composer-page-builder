@@ -2,7 +2,8 @@
 
 /* Make Color Picker Float In Popup */
 .dslca-modules-section-edit-option .wp-picker-holder,
-.dslca-module-edit-option-color .wp-picker-holder {
+.dslca-module-edit-option-color .wp-picker-holder,
+.dslca-module-edit-option-box-shadow-single .wp-picker-holder {
 	/*display: none;*/
 	position: fixed;
 	margin-top: -315px;
@@ -10,7 +11,8 @@
 }
 
 body .dslca-modules-section-edit-option input[type="text"].dslca-modules-section-edit-field-colorpicker,
-body .dslca-module-edit-option-color input[type="text"].dslca-module-edit-field-colorpicker {
+body .dslca-module-edit-option-color input[type="text"].dslca-module-edit-field-colorpicker,
+body .dslca-module-edit-option-box-shadow-single input[type="text"].dslca-module-edit-option-box-shadow-color {
 	color: #fff;
 	text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.7),0px 0px 7px rgba(0, 0, 0, 0.28),4px 3px 6px rgba(0, 0, 0, 0.1);
 	padding: 0;
@@ -22,12 +24,14 @@ body .dslca-module-edit-option-color input[type="text"].dslca-module-edit-field-
 /* Remove the default color button */
 /*.dslca-module-edit-option-color .wp-color-result,*/
 .dslca-modules-section-edit-option .wp-picker-clear,
-.dslca-module-edit-option-color .wp-picker-clear {
+.dslca-module-edit-option-color .wp-picker-clear,
+.dslca-module-edit-option-box-shadow-single .wp-picker-clear {
 	display: none;
 }
 
 .dslca-modules-section-edit-option .wp-color-result,
-.dslca-module-edit-option-color .wp-color-result {
+.dslca-module-edit-option-color .wp-color-result,
+.dslca-module-edit-option-box-shadow-single .wp-color-result {
     position: absolute;
     top: 53px;
     z-index: 2;
@@ -39,14 +43,16 @@ body .dslca-module-edit-option-color input[type="text"].dslca-module-edit-field-
 
 /* Remove Imput Styling by the Color Picker */
 .dslca-modules-section-edit-option .wp-picker-container input[type="text"].wp-color-picker,
-.dslca-module-edit-option-color .wp-picker-container input[type="text"].wp-color-picker {
+.dslca-module-edit-option-color .wp-picker-container input[type="text"].wp-color-picker,
+.dslca-module-edit-option-box-shadow-single .wp-picker-container input[type="text"].wp-color-picker  {
 	width: 100%!important;
 	font-family: inherit;
 	margin: inherit;
 }
 
 .dslca-modules-section-edit-option .iris-picker.iris-border,
-.dslca-module-edit-option-color .iris-picker.iris-border {
+.dslca-module-edit-option-color .iris-picker.iris-border,
+.dslca-module-edit-option-box-shadow-single .iris-picker.iris-border  {
 	border-top-right-radius: 3px;
 	border-top-left-radius: 3px;
 }
@@ -73,13 +79,15 @@ body .dslca-module-edit-option-color input[type="text"].dslca-module-edit-field-
 
 /* Last color in palette is transparent */
 .dslca-modules-section-edit-option .iris-picker .iris-palette:last-child,
-.dslca-module-edit-option-color .iris-picker .iris-palette:last-child {
+.dslca-module-edit-option-color .iris-picker .iris-palette:last-child,
+.dslca-module-edit-option-box-shadow-single .iris-picker .iris-palette:last-child {
 	position: relative;
 	background: linear-gradient(rgba(255,255,255,.4) 0%, rgba(255,255,255,.6) 100%), url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAAHnlligAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHJJREFUeNpi+P///4EDBxiAGMgCCCAGFB5AADGCRBgYDh48CCRZIJS9vT2QBAggFBkmBiSAogxFBiCAoHogAKIKAlBUYTELAiAmEtABEECk20G6BOmuIl0CIMBQ/IEMkO0myiSSraaaBhZcbkUOs0HuBwDplz5uFJ3Z4gAAAABJRU5ErkJggg==")!important;
 }
 
 .dslca-modules-section-edit-option .iris-picker .iris-palette:last-child:before,
-.dslca-module-edit-option-color .iris-picker .iris-palette:last-child:before {
+.dslca-module-edit-option-color .iris-picker .iris-palette:last-child:before,
+.dslca-module-edit-option-box-shadow-single .iris-picker .iris-palette:last-child:before {
 	content: '×';
 	position: absolute;
 	left: 0;

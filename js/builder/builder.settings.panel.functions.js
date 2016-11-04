@@ -30,22 +30,39 @@ jQuery(document).ready(function($){
 	// Init color picker on click only to not polute DOM with unwanted elements.
 	// It will fire only once (first time) as color picker then put it's own listeners.
 	jQuery(document).on('click', dslca_options_with_colorpicker, function() {
+
 		// Call the color picker init function.
 		dslc_module_options_color( this );
 
 		// Make sure the color picker popup appears in the right place.
-		var wrapper = jQuery( this ).closest('.dslca-module-edit-option-color');
+		var wrapper = jQuery( this ).closest('.dslca-color-option');
 		var optionsPanel = jQuery( '.dslca-module-edit-options-inner');
 		var colorpicker = wrapper.find('.wp-picker-holder');
 		var offset = wrapper.offset();
+		var offsetPopup = offset.left + 15;
+		var windoWidth = window.innerWidth;
+		var popupWidth = 260;
+
+
+		if ( windoWidth < offsetPopup + popupWidth ) {
+			offsetPopup = windoWidth - popupWidth;
+		}
 
 		// Set the right position for the color picker popup on first click.
-		colorpicker.css('left', offset.left + 15 + 'px' );
+		colorpicker.css('left', offsetPopup + 'px' );
 
 		// Update position left for the color picker on options scroll.
 		jQuery(optionsPanel).on('scroll', function(event) {
 			offset = wrapper.offset();
-			colorpicker.css('left', offset.left + 15 + 'px' );
+			var offsetPopup = offset.left + 15;
+			var windoWidth = window.innerWidth;
+			var popupWidth = 260;
+
+			if ( windoWidth < offsetPopup + popupWidth ) {
+				offsetPopup = windoWidth - popupWidth;
+			}
+
+			colorpicker.css('left', offsetPopup + 'px' );
 		});
 	});
 
@@ -290,7 +307,8 @@ jQuery(document).ready(function($){
 			editor_deselector: 'mce-content-body',
 			menubar: false,
 			inline: true,
-			plugins: 'wordpress wplink lists',
+			plugins: 'wordpress wplink lists paste',
+			paste_as_text: true, // Paste styled text as plain text only. Requires 'paste' in plugins.
 			style_formats: [
 					{title: 'Paragraph', format: 'p'},
 					{title: 'Header 2', format: 'h2'},
@@ -1510,7 +1528,7 @@ function dslc_module_options_color( field ) {
 	jQuery(query).each( function(){
 
 		// Set setting the conotrol wrapper.
-		var wrapper = jQuery(this).closest('.dslca-module-edit-option-color');
+		var wrapper = jQuery(this).closest('.dslca-color-option');
 		var input = jQuery(this);
 
 		dslcCurrColor = jQuery(this).val();

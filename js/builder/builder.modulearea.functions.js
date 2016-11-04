@@ -48,10 +48,7 @@
 	 */
 	if ( ! jQuery( '#dslc-main .dslc-modules-section', LiveComposer.Builder.PreviewAreaDocument).length && ! jQuery( '#dslca-tut-page', LiveComposer.Builder.PreviewAreaDocument).length ) {
 
-		dslc_row_add().then(function(row){
-
-			init_sortables();
-		});
+		dslc_row_add( init_sortables() );
 	} else {
 
 		init_sortables();

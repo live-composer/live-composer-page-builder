@@ -673,49 +673,6 @@ jQuery(document).ready(function($) {
 			});
 		}
 	});
-
-
-	// Preview Module Opt Change - Numeric
-	$(document).on( 'keyup, blur', '.dslca-module-edit-field-numeric', function(){
-
-		return false; // @todo: Can we delete this whole listener?
-		var dslcOptionValue = '',
-			dslcOption = $(this),
-			dslcOptionID = dslcOption.data('id'),
-			dslcOptionWrap = dslcOption.closest('.dslca-module-edit-option'),
-			dslcModule = $('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument),
-			dslcModuleID = dslcModule.data('dslc-module-id'),
-			dslcModuleOptions = jQuery( '.dslca-module-options-front textarea', dslcModule ),
-			dslcAffectOnChangeEl = dslcOption.data('affect-on-change-el'),
-			dslcAffectOnChangeRule = dslcOption.data('affect-on-change-rule'),
-			dslcAffectOnChangeValOrig = dslcOption.val(),
-			dslcAffectOnChangeVal = dslcAffectOnChangeValOrig + dslcOption.data('ext'),
-			dslcAffectOnChangeRules;
-
-		// Add changed class
-		dslcModule.addClass('dslca-module-change-made');
-
-		if ( jQuery(this).closest('.dslca-module-edit-option').data('refresh-on-change') != 'active' ) {
-
-			/**
-			 * Live Preview
-			 */
-			dslcAffectOnChangeRules = dslcAffectOnChangeRule.replace(/ /g,'').split( ',' );
-
-			// Loop through rules (useful when there are multiple rules)
-			/*for ( var i = 0; i < dslcAffectOnChangeRules.length; i++ ) {
-
-				var module = $(".dslca-module-being-edited", LiveComposer.Builder.PreviewAreaDocument);
-				jQuery( dslcAffectOnChangeEl, module ).css( dslcAffectOnChangeRules[i] , dslcAffectOnChangeVal );
-			}*/
-
-			/**
-			 * Update option
-			 */
-			jQuery( '.dslca-module-option-front[data-id="' + dslcOptionID + '"]', dslcModule ).val( dslcAffectOnChangeValOrig );
-		}
-	});
-
 });
 
 
