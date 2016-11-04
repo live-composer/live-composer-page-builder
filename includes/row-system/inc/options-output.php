@@ -80,7 +80,7 @@ function dslc_row_display_options() {
 		$option_type_class = 'dslca-modules-section-edit-option-' . $row_option['type'] . ' ';
 
 		if ( 'color' === $row_option['type'] ) {
-			$option_type_class = 'dslca-module-edit-option-color';
+			$option_type_class = 'dslca-module-edit-option-color dslca-color-option';
 		}
 
 		?>
@@ -112,7 +112,7 @@ function dslc_row_display_options() {
 					$style = ' style="background: ' . $curr_value . ';"';
 				}?>
 
-				<input type="text" class="dslca-modules-section-edit-field dslca-module-edit-field-colorpicker" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" />
+				<input type="text" class="dslca-modules-section-edit-field dslca-module-edit-field-colorpicker" data-alpha="true" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" />
 
 			<?php elseif ( 'image' === $row_option['type'] ) : ?>
 

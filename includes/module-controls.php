@@ -131,9 +131,15 @@ class LC_Control {
 			$dep = ' data-dep="' . base64_encode( wp_json_encode( $module_control['dependent_controls'] ) ) . '"';
 		}
 
+
+		$additional_class = '';
+		if ( 'color' === $module_control['type'] ) {
+			$additional_class = 'dslca-module-edit-option-color dslca-color-option';
+		}
+
 		?>
 
-			<div class="dslca-module-edit-option dslca-module-edit-option-<?php echo esc_attr( $module_control['type'] ); ?> dslca-module-edit-option-<?php echo esc_attr( $module_control['id'] ); ?> <?php if ( ! $this->_visibility ) { echo 'dslca-module-edit-option-hidden'; } ?> <?php echo esc_attr( $this->_control_with_toggle ); ?>"
+			<div class="dslca-module-edit-option dslca-module-edit-option-<?php echo esc_attr( $module_control['type'] ) . ' ' . $additional_class; ?> dslca-module-edit-option-<?php echo esc_attr( $module_control['id'] ); ?> <?php if ( ! $this->_visibility ) { echo 'dslca-module-edit-option-hidden'; } ?> <?php echo esc_attr( $this->_control_with_toggle ); ?>"
 				data-id="<?php echo esc_attr( $module_control['id'] ); ?>"
 				<?php echo $dep; /* Base64 code. */ ?>
 				data-refresh-on-change="<?php echo esc_attr( $this->_refresh_on_change ); ?>"
@@ -364,8 +370,8 @@ class LC_Control {
 						<div class="dslca-module-edit-option-box-shadow-single">
 							<span><?php esc_html_e( 'Spread', 'live-composer-page-builder' ); ?></span><input class="dslca-module-edit-option-box-shadow-spread" step="0.1" type="number" value="<?php echo $box_shadow_spread_val; ?>" />
 						</div>
-						<div class="dslca-module-edit-option-box-shadow-single">
-							<span><?php esc_html_e( 'Color', 'live-composer-page-builder' ); ?></span><input type="text" class="dslca-module-edit-option-box-shadow-color" value="<?php echo $box_shadow_color_val; ?>" />
+						<div class="dslca-module-edit-option-box-shadow-single dslca-color-option">
+							<span><?php esc_html_e( 'Color', 'live-composer-page-builder' ); ?></span><input type="text" class="dslca-module-edit-option-box-shadow-color" data-alpha="true" value="<?php echo $box_shadow_color_val; ?>" />
 						</div>
 
 						<input type="hidden" class="dslca-module-edit-field dslca-module-edit-field-box-shadow" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo esc_attr( $this->_curr_value ); ?>" <?php echo $affect_on_change_append ?> />
@@ -404,11 +410,11 @@ class LC_Control {
 						<div class="dslca-module-edit-option-text-shadow-single">
 							<span><?php esc_html_e( 'Blur', 'live-composer-page-builder' ); ?></span><input class="dslca-module-edit-option-text-shadow-blur" step="0.1" type="number" value="<?php echo $text_shadow_blur_val; ?>" />
 						</div>
-						<div class="dslca-module-edit-option-text-shadow-single">
+						<div class="dslca-module-edit-option-text-shadow-single dslca-color-option">
 							<span><?php esc_html_e( 'Color', 'live-composer-page-builder' ); ?></span><input class="dslca-module-edit-option-text-shadow-color" type="text" value="<?php echo $text_shadow_color_val; ?>" />
 						</div>
 
-						<input type="hidden" class="dslca-module-edit-field dslca-module-edit-field-text-shadow" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo esc_attr( $this->_curr_value ); ?>" <?php echo $affect_on_change_append ?> />
+						<input type="hidden" class="dslca-module-edit-field dslca-module-edit-field-text-shadow" data-alpha="true" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo esc_attr( $this->_curr_value ); ?>" <?php echo $affect_on_change_append ?> />
 
 					</div><!-- .dslca-module-edit-option-text-shadow-wrapper -->
 

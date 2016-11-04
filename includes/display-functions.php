@@ -788,7 +788,8 @@ function dslc_render_content( $page_code, $update_ids = false ) {
 		return do_shortcode( $page_code );
 	}
 
-	$page_html = '';
+	$page_html = ''; // Final content part rendering.
+
 	// If new (JSON) code format go through elements of the page.
 	foreach ( $page_code_array as $element ) {
 
@@ -835,7 +836,6 @@ function dslc_render_content( $page_code, $update_ids = false ) {
 
 	// $page_code can be old base64 code
 	// or new version (serialized only)
-
 }
 
 
@@ -1010,18 +1010,31 @@ function dslc_module_front( $atts, $settings_raw = null ) {
 		$dslc_var_image_option_bckp = array();
 		$module_struct = $module_instance->options();
 
+		// 🔖 RAW CODE CLEANUP
+		/* Previous version.
 		foreach ( $module_struct as $option ) {
 
 			// Fix settings when a new option added after a module is used
 			if ( ! isset( $settings[$option['id']] ) ) {
 
-				if ( isset( $option['std'] ) && $option['std'] !== '' ) {
-					$settings[$option['id']] = $option['std'];
-				} else {
+				// if ( isset( $option['std'] ) && $option['std'] !== '' ) {
+				// 	$settings[$option['id']] = $option['std'];
+				// } else {
 					$settings[$option['id']] = false;
-				}
+				// }
 			}
 		}
+		*/
+
+		// 🔖 RAW CODE CLEANUP
+		foreach ( $module_struct as $option ) {
+
+			// Fix 'Undefined index' notices.
+			if ( ! isset( $settings[$option['id']] ) ) {
+				$settings[$option['id']] = false;
+			}
+		}
+
 
 		// Load preset options if preset supplied
 		$settings = apply_filters( 'dslc_filter_settings', $settings );
@@ -1259,10 +1272,9 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1 ) {
 	} elseif ( 2 === $version )  {
 
 		// New JSON-based dslc_code.
-
 		if ( isset( $atts['give_new_id'] ) && 'true' === $atts['give_new_id'] ) {
 			// Udpdate ids of the elements inside.
-			$content_render = dslc_render_content( $content, false, 2 );
+			$content_render = dslc_render_content( $content, true );
 		} else {
 			$content_render = dslc_render_content( $content );
 		}
@@ -1371,10 +1383,9 @@ function dslc_modules_area_front( $atts, $content = null, $version = 1 ) {
 		} elseif ( 2 === $version )  {
 
 			// New JSON-based dslc_code.
-
 			if ( isset( $atts['give_new_id'] ) && 'true' === $atts['give_new_id'] ) {
 				// Udpdate ids of the elements inside.
-				$content_render = dslc_render_content( $content, 2 );
+				$content_render = dslc_render_content( $content, true );
 			} else {
 				$content_render = dslc_render_content( $content );
 			}

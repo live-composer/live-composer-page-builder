@@ -279,6 +279,12 @@ function dslc_generate_section_code( theModulesSection ) {
 		modulesSectionJson[currentAttrKey] = currentAttrVal;
 	});
 
+	// Delete attribute 'give_new_id'.
+	// It supposed to be used only once and by this time it was already applied.
+	if (  undefined !== modulesSectionJson['give_new_id'] ) {
+		delete modulesSectionJson['give_new_id'];
+	}
+
 	// Prepare place for module areas.
 	modulesSectionJson['content'] = [];
 
@@ -349,6 +355,13 @@ function dslc_generate_section_code( theModulesSection ) {
 		// pageCodeInJson = pageCodeInJson +  moduleAreaJSON + ',';
 
 		moduleAreaJSON = JSON.parse( moduleAreaJSON );
+
+		// Delete attribute 'give_new_id'.
+		// It supposed to be used only once and by this time it was already applied.
+		if (  undefined !== moduleAreaJSON['give_new_id'] ) {
+			delete moduleAreaJSON['give_new_id'];
+		}
+
 		moduleAreaJSON.content = [];
 
 		/**
@@ -430,6 +443,10 @@ function dslc_generate_section_code( theModulesSection ) {
 				// RAW CODE CLEANUP: Clean the module code from keys with empty values.
 				jQuery.each(moduleCodeJSON, function(index, el) {
 					if ( false === el || '' === el ) {
+						delete moduleCodeJSON[index];
+					}
+
+					if ( 'give_new_id' === index ) {
 						delete moduleCodeJSON[index];
 					}
 				});

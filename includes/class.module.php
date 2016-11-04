@@ -2056,11 +2056,15 @@ class DSLC_Module {
 		$module_class_arr[] = $class_handle_like;
 
 		// Process all class definitions.
-		$custom_class = preg_replace( '/,/', ' ', $options['custom_class'] );
-		$custom_class = preg_replace( '/\b\.\b/', ' ', $custom_class );
-		$custom_class = preg_replace( '/\./', '', $custom_class );
-		$custom_class = preg_replace( '/\s{2,}/', ' ', $custom_class );
-		$custom_class = trim( $custom_class );
+		if ( isset( $options['custom_class'] ) ) {
+			$custom_class = preg_replace( '/,/', ' ', $options['custom_class'] );
+			$custom_class = preg_replace( '/\b\.\b/', ' ', $custom_class );
+			$custom_class = preg_replace( '/\./', '', $custom_class );
+			$custom_class = preg_replace( '/\s{2,}/', ' ', $custom_class );
+			$custom_class = trim( $custom_class );
+		} else {
+			$custom_class = '';
+		}
 
 		$module_class_arr[] = $custom_class;
 
@@ -2149,10 +2153,13 @@ class DSLC_Module {
 		// Array of options with deafut values only.
 		$options = $this->options();
 
+		/* Not ready for production. Causes more issues than benefits.
+		*/
 		foreach ( $options as $default_option ) {
 
 			$id = $default_option['id'];
 
+			// 🔖 RAW CODE CLEANUP
 			// Only clean options in the styling or custon sections.
 			// Never clean 'Functionality' section (it has no section parameter set).
 			if ( isset( $default_option['section'] ) && strtoupper( 'functionality' ) !== strtoupper( $default_option['section'] ) ) {
@@ -2161,12 +2168,15 @@ class DSLC_Module {
 				if ( isset( $user_options[ $id ] )  ) {
 
 					// If current option is empty or the same as default value for this setting.
-					if ( '' === $user_options[ $id ] || isset( $default_option['std'] ) && $default_option['std'] === $user_options[ $id ] ) {
+					// if ( '' === $user_options[ $id ] || isset( $default_option['std'] ) && $default_option['std'] === $user_options[ $id ] ) {
+					if ( '' === $user_options[ $id ] || false === $user_options[ $id ] ) {
 						unset( $user_options[ $id ] );
 					}
 				}
 			}
 		}
+
+
 
 		// Bring back IDs for image options.
 		global $dslc_var_image_option_bckp;
@@ -2213,7 +2223,9 @@ class DSLC_Module {
 
 					if ( isset( $user_options[ $option_id ] ) ) {
 
-						if ( $user_options[ $option_id ] === $option['std'] || '' === $user_options[ $option_id ] ) {
+						// 🔖 RAW CODE CLEANUP
+						// if ( $user_options[ $option_id ] === $option['std'] || '' === $user_options[ $option_id ] ) {
+						if ( false === $user_options[ $option_id ] || '' === $user_options[ $option_id ] ) {
 							unset( $user_options_no_defaults[ $option_id ] );
 						}
 					}

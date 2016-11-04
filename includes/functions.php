@@ -190,99 +190,29 @@ function dslc_module_settings( $options, $module_id ) {
 	// Array to hold the settings.
 	$settings = array();
 
-	// Go through all options.
-	foreach ( $options as $option ) {
+	/**
+	 * If it's all new module then just fill it's settings with default values.
+	 * Else go through each option and fill it with custom values sent.
+	 * 🔖 RAW CODE CLEANUP
+	 */
+	if ( isset( $_POST['dslc_new_module'] ) ) {
 
-		if ( isset( $_POST[ $option['id'] ] ) && '' !== $_POST[ $option['id'] ] ) {
-
-			$settings[ $option['id'] ] = $_POST[ $option['id'] ];
-
-			/**
-			 * Extension developers can decide for themselves
-			 * what escaping function to use for a particular option id.
-			 *
-			 * See switch block below for available options.
-			 *
-			 * NOT READY - Cause too many problems for the current users
-			 * who have iframes, scripts and other hard to filter code.
-			 * Escape on output instead.
-
-
-			$escape_function_default = 'esc_attr';
-			$escape_function_custom = $escape_function_default;
-			$escape_function_custom = apply_filters( 'dslc_module_settings_sanitize_function', $escape_function_default, $option['id'], $module_id );
-
-			// If value set use it?
-			if ( 'content' === $option['id'] ) {
-
-				$settings[ $option['id'] ] = wp_kses_post( $_POST[ $option['id'] ] );
-
-
-			} elseif ( $escape_function_custom !== $escape_function_default ) {
-
-				switch ( $escape_function_custom ) {
-					case 'wp_kses_post':
-						$settings[ $option['id'] ] = wp_kses_post( $_POST[ $option['id'] ] );
-						break;
-
-					case 'sanitize_email':
-						$settings[ $option['id'] ] = sanitize_email( $_POST[ $option['id'] ] );
-						break;
-
-					case 'sanitize_file_name':
-						$settings[ $option['id'] ] = sanitize_file_name( $_POST[ $option['id'] ] );
-						break;
-
-					case 'sanitize_html_class':
-						$settings[ $option['id'] ] = sanitize_html_class( $_POST[ $option['id'] ] );
-						break;
-
-					case 'sanitize_key':
-						$settings[ $option['id'] ] = sanitize_key( $_POST[ $option['id'] ] );
-						break;
-
-					case 'sanitize_meta':
-						$settings[ $option['id'] ] = sanitize_meta( $_POST[ $option['id'] ] );
-						break;
-
-					case 'sanitize_text_field':
-						$settings[ $option['id'] ] = sanitize_text_field( $_POST[ $option['id'] ] );
-						break;
-
-					case 'sanitize_title':
-						$settings[ $option['id'] ] = sanitize_title( $_POST[ $option['id'] ] );
-						break;
-
-					case 'esc_html':
-						$settings[ $option['id'] ] = esc_html( $_POST[ $option['id'] ] );
-						break;
-
-					case 'esc_url':
-						$settings[ $option['id'] ] = esc_url( $_POST[ $option['id'] ] );
-						break;
-
-					case 'esc_js':
-						$settings[ $option['id'] ] = esc_js( $_POST[ $option['id'] ] );
-						break;
-
-					case 'esc_textarea':
-						$settings[ $option['id'] ] = esc_textarea( $_POST[ $option['id'] ] );
-						break;
-
-					default:
-						$settings[ $option['id'] ] = esc_attr( $_POST[ $option['id'] ] );
-						break;
-				}
-			} else {
-
-				$settings[ $option['id'] ] = esc_attr( $_POST[ $option['id'] ] );
-			}
-			*/
-
-		} else {
-			// If value not set use default?
+		// Go through all options and fill array with default/standard values.
+		foreach ( $options as $option ) {
 			$settings[ $option['id'] ] = $option['std'];
 		}
+
+	} else {
+
+		// Go through all options and fill array with custom values, otherwise leave empty.
+		foreach ( $options as $option ) {
+			if ( isset( $_POST[ $option['id'] ] ) && '' !== $_POST[ $option['id'] ] ) {
+				$settings[ $option['id'] ] = $_POST[ $option['id'] ];
+			} else {
+				$settings[ $option['id'] ] = '';
+			}
+		}
+
 	}
 
 	return $settings;
@@ -843,10 +773,27 @@ function dslc_code_migration( $settings ) {
 	$module_struct = $module_instance->options();
 
 	// Go trough module standard settings and check every color setting.
+	// 🔖 RAW CODE CLEANUP
 	foreach ( $module_struct as $control ) {
 		$id = $control['id'];
 		$type = $control['type'];
 
+/*
+		// When import shortcodes code, 'Display on' setting is empty
+		// when all the checkboxes selected. This makes the module completely
+		// hidden in new version of code rendering.
+		if ( 'css_show_on' === $id ) {
+			if ( empty( $settings[ $id ] ) ) {
+				$settings[ $id ] = 'desktop tablet phone';
+			}
+		}
+
+		if ( stristr( $id, 'border_trbl' ) ) {
+			if ( ! isset( $settings[ $id ] ) || empty( $settings[ $id ] ) ) {
+				$settings[ $id ] = 'top right bottom left';
+			}
+		}
+*/
 		// Check the conrol options in the old code and adjust them if needed.
 		if ( 'color' === $type ) {
 
@@ -856,7 +803,7 @@ function dslc_code_migration( $settings ) {
 				// In old code empty = transparent.
 				// In new code empty = default color.
 				// In new code transparent = rgba(0,0,0,0).
-				$settings[ $id ] = 'rgba(0,0,0,0)';
+				$settings[ $id ] = 'rgba(0,0,0,0)'; // @todo: still need it?
 			}
 		}
 
@@ -872,6 +819,12 @@ function dslc_code_migration( $settings ) {
 				$settings[ $id ] = '0';
 			}
 		}
+
+		// All other cases.
+		if ( empty( $settings[ $id ] ) && isset( $control['std'] ) ) {
+			$settings[ $id ] = $control['std'];
+		}
+
 	}
 
 	// Migration done. Remove the key code_version = 1.
