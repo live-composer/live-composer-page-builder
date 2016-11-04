@@ -63,7 +63,7 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 			evt.preventDefault();
 
 			dslc_generate_code();
-			LiveComposer.Builder.UI.stopScroller();
+			// LiveComposer.Builder.UI.stopScroller();
 			jQuery('body').removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
 			jQuery('body', LiveComposer.Builder.PreviewAreaWindow.document).removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
 		},

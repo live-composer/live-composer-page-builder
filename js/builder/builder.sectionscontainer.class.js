@@ -37,7 +37,7 @@ LiveComposer.Builder.Elements.CSectionsContainer = function(elem) {
 
 			dslc_generate_code();
 
-			LiveComposer.Builder.UI.stopScroller();
+			// LiveComposer.Builder.UI.stopScroller();
 			jQuery('body', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
 			jQuery('body').removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
 			jQuery('.dslca-anim-opacity-drop').removeClass('dslca-anim-opacity-drop');

@@ -87,7 +87,6 @@ jQuery(document).ready(function($) {
 
 		// Catch keypress events (from both parent and iframe) to add keyboard support
 		dslc_keypress_events();
-		LiveComposer.Builder.UI.initPreviewAreaScroller(); // @todo: remove it?
 
 		// Init modules search field functionality.
 		// Documentation: http://www.listjs.com/docs/options
@@ -482,7 +481,7 @@ function dslc_drag_and_drop() {
 	var modulesSection, modulesArea, moduleID, moduleOutput;
 
 	// Drag and Drop for module icons from the list of modules
-	var modules_list = jQuery('.dslca-modules .dslca-section-scroller-content'); // Groups that can hold modules
+	var modules_list = jQuery('#modules-list'); // Groups that can hold modules
 	// jQuery(modules_list).each(function (i,e) {
 
 	if( modules_list.length == 0 ) {
@@ -623,7 +622,7 @@ function dslc_drag_and_drop() {
 				*/
 			}
 
-			LiveComposer.Builder.UI.stopScroller();
+			// LiveComposer.Builder.UI.stopScroller();
 			jQuery('body').removeClass('dslca-new-module-drag-in-progress').addClass('dslca-new-module-drag-not-in-progress');
 			jQuery('body', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-new-module-drag-in-progress').addClass('dslca-new-module-drag-not-in-progress');
 			jQuery('#dslc-header').removeClass('dslca-header-low-z-index');
@@ -1051,3 +1050,69 @@ function dslca_update_report_log() {
 		document.querySelector( '.dslca-show-js-error-hook' ).setAttribute('style','visibility:visible');
 	}
 }
+
+
+/**
+ * Render list of modules with Vue.
+ */
+
+// console.log( "DSLCModules:" ); console.log( DSLCModules );
+
+/**
+ * Go through all DSLCModules.icon properties and prepare data for output.
+ */
+(function() {
+	var i,
+		 hasOwn = Object.prototype.hasOwnProperty,
+		 DLSCModulesWithSections = []; // Temporary object that we use to create objects by category
+
+	for ( i in DSLCModules) {
+		if ( hasOwn.call( DSLCModules, i ) ) { // filter out prototypes
+			// Add additional icon classes we need for rendering.
+			DSLCModules[i].icon = 'dslca-icon dslc-icon-' + DSLCModules[i].icon;
+			// console.log( DSLCModules[i] );
+
+
+			// Do we have this section id in the object already?
+			if ( undefined === DLSCModulesWithSections[ DSLCModules[i].origin ] ) {
+				DLSCModulesWithSections[ DSLCModules[i].origin ] = DSLCModules[i].origin;
+			}
+
+			DLSCModulesWithSections.push(  DSLCModules[i] );
+			/*
+			// Add new module to the section sub-tree.
+			DLSCModulesBySection[ DSLCModules[i].origin ][ DSLCModules[i].id ] = DSLCModules[i] ;
+
+			// console.log( DLSCModulesBySection );
+			*/
+		}
+	}
+
+	console.log( DLSCModulesWithSections );
+/*
+	DSLCModules = {};
+	console.log( "DLSCModulesBySection:" ); console.log( DLSCModulesBySection );
+	for ( i in DLSCModulesBySection) {
+		if ( hasOwn.call( DLSCModulesBySection, i ) ) { // filter out prototypes
+			// DSLCModules[i] = {};
+			// console.log( DLSCModulesBySection[i] );
+			DSLCModules[ DLSCModulesBySection[i] ] = DLSCModulesBySection[i];
+		}
+	}
+
+	// We don't want to create many globals,
+	// so replace original object with sorted one.
+	// DSLCModules = DLSCModulesBySection;
+*/
+}());
+
+// console.log( DSLCModules );
+
+var LiveComposerApp = new Vue({
+	el: '#modules-list',
+	data: {
+		modules: DSLCModules,
+	}
+})
+
+

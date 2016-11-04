@@ -479,6 +479,19 @@ function dslc_display_modules() {
 
 	$dslc_modules = dslc_get_modules();
 
+	?>
+
+	<div id="modules-list">
+		<div v-for="module in modules"
+			  v-bind:data-origin="module.origin"
+			  v-bind:data-id="module.id"
+			  class="dslca-module dslca-scroller-item dslca-origin" >
+			<span v-bind:class="module.icon"></span><span class="dslca-module-title">{{ module.title }}</span>
+		</div><!-- .dslc-module -->
+	</div>
+
+	<?php
+/*
 	if ( $dslc_modules ) {
 
 		?>
@@ -530,7 +543,7 @@ function dslc_display_modules() {
 		esc_html_e( 'No Modules Found.', 'live-composer-page-builder' );
 
 	}
-
+*/
 }
 
 /**

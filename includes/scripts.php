@@ -189,14 +189,22 @@ final class DSLC_Scripts{
 			//wp_enqueue_script( 'imagesloaded' ); // Need this for Masonry.
 			//wp_enqueue_script( 'jquery-masonry' );
 
-			wp_enqueue_script( 'dslc-builder-plugins-js', DS_LIVE_COMPOSER_URL . 'js/builder/builder.plugins.js', array( 'jquery', 'wp-color-picker' ), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_script( 'dslc-builder-plugins-js', DS_LIVE_COMPOSER_URL . 'js/builder/builder.plugins.js', array( 'jquery', 'wp-color-picker' ), DS_LIVE_COMPOSER_VER , true );
+
+			// Vue.js
+			wp_enqueue_script( 'dslc-builder-plugin-vue', DS_LIVE_COMPOSER_URL . 'js/builder/vue.js', array( 'dslc-builder-main-js' ), DS_LIVE_COMPOSER_VER, true );
 
 			if ( ! SCRIPT_DEBUG ) {
 
-				wp_enqueue_script( 'dslc-builder-main-js', DS_LIVE_COMPOSER_URL . 'js/builder.all.min.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+				wp_enqueue_script( 'dslc-builder-main-js', DS_LIVE_COMPOSER_URL . 'js/builder.all.min.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER, true );
 			} else {
 				self::load_scripts( 'builder', 'dslc-builder-main-js' );
 			}
+
+			// Transmit data to Vue.js app.
+			$dslc_modules = dslc_get_modules();
+			wp_localize_script( 'dslc-builder-main-js', 'DSLCModules', $dslc_modules );
+
 
 			wp_localize_script( 'dslc-builder-main-js', 'DSLCAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php', $protocol ) ) );
 
@@ -300,7 +308,7 @@ final class DSLC_Scripts{
 				}
 
 				$filehandle = 'dslc-' . str_replace( '.', '-', $filename );
-				wp_enqueue_script( $filehandle, DS_LIVE_COMPOSER_URL . 'js/' . $filedir . '/' . $filename, $scriptdeps, DS_LIVE_COMPOSER_VER );
+				wp_enqueue_script( $filehandle, DS_LIVE_COMPOSER_URL . 'js/' . $filedir . '/' . $filename, $scriptdeps, DS_LIVE_COMPOSER_VER, true );
 			}
 		}
 	}
