@@ -473,7 +473,7 @@ function dslc_module_options_section_filter( sectionID ) {
 	if ( dslcDebug ) console.log( 'dslc_module_options_section_filter' );
 
 	// Hide all options
-	jQuery('.dslca-module-edit-option').hide();
+	// jQuery('.dslca-module-edit-option').hide();
 
 	// Show options for current section
 	jQuery('.dslca-module-edit-option[data-section="' + sectionID + '"]').show();
@@ -506,13 +506,13 @@ function dslc_module_options_tab_filter( dslcTab ) {
 	jQuery('.dslca-module-edit-options-tabs').show();
 
 	// Hide/Show tabs hooks
-	jQuery('.dslca-module-edit-options-tab-hook').hide();
+	// jQuery('.dslca-module-edit-options-tab-hook').hide();
 	jQuery('.dslca-module-edit-options-tab-hook[data-section="' + dslcSectionID + '"]').show();
 
 	if ( dslcTabID ) {
 
 		// Hide/Show options
-		jQuery('.dslca-module-edit-option').hide();
+		// jQuery('.dslca-module-edit-option').hide();
 		jQuery('.dslca-module-edit-option[data-tab="' + dslcTabID + '"]').show();
 
 		// Hide/Show Tabs
@@ -521,7 +521,7 @@ function dslc_module_options_tab_filter( dslcTab ) {
 		// If only one tab hide the tabs container
 		if ( jQuery('.dslca-module-edit-options-tab-hook:visible').length < 2 ) {
 
-			jQuery('.dslca-module-edit-options-tabs').hide();
+			// jQuery('.dslca-module-edit-options-tabs').hide();
 		} else {
 
 			jQuery('.dslca-module-edit-options-tabs').show();

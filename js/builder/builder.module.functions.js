@@ -454,6 +454,8 @@ function dslc_module_options_show( moduleID ) {
 	pseudoPanel.show();
 	pseudoPanel.addClass('show');
 
+	jQuery('.dslca-subsection-tabs').hide();
+
 	// AJAX call to get options HTML
 	jQuery.post(
 		DSLCAjax.ajaxurl,

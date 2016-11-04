@@ -52,6 +52,18 @@ class LC_Module_Options_Panel {
 		}
 		return $tabs_render;
 	}
+
+
+	public function get_tab_render($tab_id) {
+		// Output Tabs.
+		$tabs = $this->get_tabs();
+		// vovaphperror( $tabs, '$tabs' );
+		// vovaphperror( $tab_id, '$tab_id' );
+		$tab = $tabs[ $tab_id ];
+		// vovaphperror( $tab, '$tab' );
+		$tabs_render = '<a href="#" class="dslca-module-edit-options-tab-hook" data-section="' . $tab['section'] . '" data-id="' . $tab['id'] . '">' . $tab['title'] . '</a>';
+		return $tabs_render;
+	}
 }
 
 
@@ -92,6 +104,8 @@ class LC_Control {
 
 		$module_type = $this->_module_control['type'];
 
+		ob_start();
+
 		if ( 'group' === $module_type ) {
 			// It's not a control but group openner/closer.
 
@@ -107,6 +121,11 @@ class LC_Control {
 			// Render the control.
 			$this->output_control();
 		}
+
+		$output_control = ob_get_contents();
+		ob_end_clean();
+
+		return $output_control;
 	}
 
 	public function output_control () {

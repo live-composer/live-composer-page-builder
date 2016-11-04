@@ -55,19 +55,4 @@ jQuery(document).ready(function($){
 		});
 	};
 
-	/**
-	 * Stops scroller function
-	 */
-	LiveComposer.Builder.UI.stopScroller = function() {
-
-		LiveComposer.Utils.publish('LC.sortableOn', {});
-
-		clearInterval(LiveComposer.Builder.Flags.windowScroller);
-		LiveComposer.Builder.Flags.windowScroller = false;
-	}
-
-	jQuery("#scroller-stopper").on('dragover', function(){
-
-		LiveComposer.Builder.UI.stopScroller();
-	});
 });

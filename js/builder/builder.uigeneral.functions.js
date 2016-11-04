@@ -97,6 +97,14 @@ jQuery(document).ready(function($) {
 			searchClass: 'modules-search-input',
 		});
 
+		// Init properties search field functionality.
+		// Documentation: http://www.listjs.com/docs/options
+		new List('dslca-edit', {
+			valueNames: [ 'dslca-module-edit-label' ],
+			listClass: 'dslca-section-scroller-content',
+			searchClass: 'properties-search-input',
+		});
+
 		// Set focus on the search field.
 		// document.getElementById('modules-search-input').focus(); 
 		// @todo: not working.

@@ -346,12 +346,10 @@ body #wpbody-content {
 	 */
 
 	.dslca-header {
-		position: absolute;
-		/*z-index: 100; - breaks color picker*/
-		/* keep LC styling panel Confirm/Cancel buttons on the top */
-		min-height: 38px;
-		bottom: 100%;
-		left: 0;
+    position: absolute;
+    min-height: 38px;
+    top: 0;
+    right: 0;
 	}
 
 		.dslca-header .dslca-currently-editing {
@@ -413,7 +411,7 @@ body #wpbody-content {
 		.dslca-header .dslca-row-options-filter-hook.dslca-active,
 		.dslca-pseudo-header .dslca-pseudo-options-filter-hook.dslca-active {
 			border-top-color: #4777c2;
-			background: #3b6fbe;
+			
 			color: #fff;
 			cursor: default;
 		}
@@ -737,12 +735,13 @@ body #wpbody-content {
 
 	.dslca-module-edit {
 		position: relative;
+		height: 100%;
 	}
 
 		.dslca-modules-section-edit-options,
 		.dslca-module-edit-options,
 		.dslca-pseudo-module-edit-options {
-			padding: 16px 15px 5px 15px;
+			/*padding: 16px 15px 5px 15px;*/
 			min-height: 58px;
 
 			transform: translate(0,0); 
@@ -754,12 +753,7 @@ body #wpbody-content {
 			.dslca-modules-section-edit-option,
 			.dslca-module-edit-option,
 			.dslca-pseudo-module-edit-option {
-				/*display: table-cell;*/
-				padding-bottom: 40px;
-				padding-left: 15px;
-				padding-right: 15px;
-				padding-top: 40px;
-				min-width: 180px;
+				padding: 20px 0;
 				position: relative;
 			}
 
@@ -820,7 +814,7 @@ body #wpbody-content {
 
 				.dslca-module-edit-option-text,
 				.dslca-pseudo-module-edit-option {
-					width: 235px;
+					/*width: 235px;*/
 				}
 
 				.dslca-module-edit-option-checkbox {
@@ -828,7 +822,7 @@ body #wpbody-content {
 				}
 
 				.dslca-module-edit-option-textarea {
-					width: 500px;
+					/*width: 500px;*/
 				}
 
 				.dslca-module-edit-label,
@@ -869,7 +863,7 @@ body #wpbody-content {
 
 						.dslca-options-iconbutton {
 							background: #3b6fbe none repeat scroll 0 0;
-							border: 1px solid #3565ad;
+							border: 1px solid rgba(0, 0, 0, 0.1);
 							border-radius: 3px;
 							cursor: pointer;
 
@@ -920,15 +914,13 @@ body #wpbody-content {
 
 				.dslca-module-edit-option-checkbox-wrapper {
 					display: table-cell;
-					background: #3b6fbe;
 					border-radius: 3px;
-					border: 1px solid #3565ad;
+					border: 1px solid rgba(0, 0, 0, 0.1);
 					padding: 0 10px;
 				}
 
 					.dslca-module-edit-option-checkbox-single {
 						padding: 6px 8px;
-						display: table-cell;
 					}
 
 						.dslca-module-edit-option-checkbox-hook {
@@ -951,9 +943,9 @@ body #wpbody-content {
 				}
 
 				.dslca-module-edit-option-radio-wrapper {
-					background: #3b6fbe;
+					
 					border-radius: 4px;
-					border: 1px solid #3565ad;
+					border: 1px solid rgba(0, 0, 0, 0.1);
 					padding: 0 10px;
 				}
 
@@ -1032,17 +1024,17 @@ body #wpbody-content {
 
 				.dslca-module-edit-option-box-shadow-wrapper,
 				.dslca-module-edit-option-text-shadow-wrapper {
-					display: table-cell;
-					background: #3b6fbe;
+					/*display: table-cell;*/
+					
 					border-radius: 4px;
-					border: 1px solid #3565ad;
+					border: 1px solid rgba(0, 0, 0, 0.1);
 					padding: 2px 10px;
 					font-size: 0;
 				}
 
 					.dslca-module-edit-option-box-shadow-single,
 					.dslca-module-edit-option-text-shadow-single {
-						display: table-cell;
+						/*display: table-cell;*/
 						width: auto;
 						line-height: 1;
 						vertical-align: middle;
@@ -1111,9 +1103,9 @@ body #wpbody-content {
 				}
 
 				.dslca-module-edit-option-text-align-wrapper {
-					background: #3b6fbe;
+					
 					border-radius: 4px;
-					border: 1px solid #3565ad;
+					border: 1px solid rgba(0, 0, 0, 0.1);
 					padding: 0 10px;
 					font-size: 0;
 					display: table-cell;
@@ -1256,9 +1248,9 @@ body #wpbody-content {
 				}
 
 				.dslca-modules-section-edit-option-checkbox-wrapper {
-					background: #3b6fbe;
+					
 					border-radius: 4px;
-					border: 1px solid #3565ad;
+					border: 1px solid rgba(0, 0, 0, 0.1);
 					padding: 0 10px;
 				}
 
@@ -2617,9 +2609,9 @@ body.rtl .dslca-modules-area-placeholder {
 }
 
 		.dslca-section-scroller-content {
-			align-content: flex-start;
-			display: flex;
-			flex-wrap: wrap;
+			/*align-content: flex-start;*/
+			/*display: flex;*/
+			/*flex-wrap: wrap;*/
 			padding-bottom: 80px;
 		}
 
@@ -3306,8 +3298,8 @@ span.dslca-manage-action:hover * {
 
 		.dslca-container .dslca-module-edit-field-slider .ui-slider-handle,
 		.dslca-container .dslca-modules-section-edit-field-slider .ui-slider-handle {
-			background: #3b6fbe;
-			border: 1px solid #3565ad;
+			
+			border: 1px solid rgba(0, 0, 0, 0.1);
 			border-radius: 50%;
 			top: -6px;
 			position: absolute;
@@ -3498,7 +3490,7 @@ span.dslca-manage-action:hover * {
 
 .dslca-module-edit-field-icon-ttip-hook,
 .dslca-module-edit-field-ttip-hook {
-	background: #3b6fbe;
+	
 	color: #5890e5;
 	cursor: pointer;
 	border-radius: 50%;
@@ -3602,8 +3594,8 @@ span.dslca-manage-action:hover * {
 .dslca-modules-section-edit-field-image-remove-hook,
 .dslca-module-edit-field-image-add-hook,
 .dslca-module-edit-field-image-remove-hook {
-	background: #3b6fbe;
-	border: 1px solid #3565ad;
+	
+	border: 1px solid rgba(0, 0, 0, 0.1);
 	border-radius: 3px;
 	color: #a0c0f0;
 	cursor: pointer;
@@ -4027,7 +4019,6 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 */
 	.dslca-modules-section-edit-options-inner,
 	.dslca-module-edit-options-inner {
-		overflow-x: scroll;
 		padding-top: 4px;
 	}
 
@@ -4392,12 +4383,4 @@ body.dslca-new-module-drag-in-progress .lc-scroll-bottom-area{
 	z-index: 99999;
 	width: 100%;
 	height: 140px;
-}
-
-div#scroller-stopper {
-    position: absolute;
-    bottom: -33px;
-    left: 0px;
-    width: 100%;
-    height: 83px;
 }

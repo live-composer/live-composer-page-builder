@@ -234,18 +234,24 @@ function dslc_ajax_display_module_options( $atts ) {
 		$module_controls = $module_instance->options();
 
 		// New object for options panel.
-		$module_options_panel = new LC_Module_Options_Panel();
+		$panel = new LC_Module_Options_Panel();
+		$panel_render = array();
 
-		ob_start();
+
+		// vovaphperror( $module_controls, '$module_controls' );
 
 		// Go through each option,
 		// generate the control HTML and append to output.
 		foreach ( $module_controls as $module_control ) {
-			$module_option_control = new LC_Control( $module_options_panel );
+			$module_option_control = new LC_Control( $panel );
 			$module_option_control->set_control_options( $module_control );
-			$module_option_control->output_option_control();
+			$panel_render[ $module_option_control->get_tab_id() ][] = $module_option_control->output_option_control();
 		}
 
+		// vovaphperror( $panel_render, '$panel_render' );
+
+		ob_start();
+// output here
 		$output_fields = ob_get_contents();
 		ob_end_clean();
 
@@ -256,10 +262,21 @@ function dslc_ajax_display_module_options( $atts ) {
 		$output_end = ''; //'</div>';
 
 		// Combine output.
-		$response['output_tabs'] .= $module_options_panel->get_tabs_render();
+		// $response['output_tabs'] .= $panel->get_tabs_render();
 		$response['output'] .= $output_start;
 		$response['output'] .= $output_fields;
 		$response['output'] .= $output_end;
+
+		foreach ($panel_render as $tab_id => $tab_content) {
+			$response['output'] .= '<div>';
+
+			// Tab Name.
+			$response['output'] .= $panel->get_tab_render($tab_id);
+			// Controls.
+			$response['output'] .= implode( $tab_content );
+
+			$response['output'] .= '</div>';
+		}
 
 		// Encode response.
 		$response_json = wp_json_encode( $response );
