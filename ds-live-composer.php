@@ -115,7 +115,7 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) ):
 
 	include DS_LIVE_COMPOSER_ABS . '/includes/editing-screen.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/other-functions.php';
-	include DS_LIVE_COMPOSER_ABS . '/includes/css-generation/css-for-modules.php';
+	include DS_LIVE_COMPOSER_ABS . '/includes/css-generation.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/functions.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/display-functions.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/editorinterface.class.php';
