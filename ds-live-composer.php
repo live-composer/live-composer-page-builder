@@ -49,7 +49,7 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) ):
 	define( 'DS_LIVE_COMPOSER_URL', plugin_dir_url( __FILE__ ) );
 	define( 'DS_LIVE_COMPOSER_DIR_NAME', dirname( plugin_basename( __FILE__ ) ) );
 	define( 'DS_LIVE_COMPOSER_ABS', dirname( __FILE__ ) );
-	define( 'DS_LIVE_COMPOSER_DEV_MODE', false );
+	define( 'DS_LIVE_COMPOSER_DEV_MODE', false ); // Used by theme/plugin developers only.
 
 	define( 'DSLC_PO_FRAMEWORK_ABS', DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework' );
 	define( 'DSLC_ST_FRAMEWORK_ABS', DS_LIVE_COMPOSER_ABS . '/includes/single-templates-framework' );
