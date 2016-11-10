@@ -485,8 +485,10 @@ function dslc_display_modules() {
 		<div v-for="module in modules"
 			  v-bind:data-origin="module.origin"
 			  v-bind:data-id="module.id"
-			  class="dslca-module dslca-scroller-item dslca-origin" >
-			<span v-bind:class="module.icon"></span><span class="dslca-module-title">{{ module.title }}</span>
+			  v-bind:class="'dslca-origin dslca-' + module.type">
+			<span v-if="module.icon"
+					v-bind:class="'dslca-icon dslc-icon-' + module.icon"></span>
+			<span class="dslca-module-title">{{ module.title }}</span>
 		</div><!-- .dslc-module -->
 	</div>
 

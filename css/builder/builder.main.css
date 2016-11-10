@@ -590,14 +590,19 @@ body #wpbody-content {
 	position: relative;
 }
 
-		.dslca-module-section {
+
+		.dslca-heading {
 			width: 100%;
-			padding: 7px 0;
-			margin-top: 15px;
+			margin-top: 35px;
+			margin-bottom: 10px;
 			text-transform: uppercase;
 			font-size: 12px;
 			letter-spacing: 2px;
 			color: #777;
+		}
+
+		#modules-list > .dslca-heading:first-child {
+			margin-top: 0;
 		}
 
 		.dslca-module {
@@ -2602,7 +2607,7 @@ body.rtl .dslca-modules-area-placeholder {
 .dslca-section-scroller {
 	position: relative;
 	height: 100%;
-	padding: 10px 6px 10px 18px;
+	padding: 10px 6px 180px 18px;
 
 	overflow-y: auto;
 	overflow-x: hidden;

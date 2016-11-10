@@ -1064,19 +1064,22 @@ function dslca_update_report_log() {
 (function() {
 	var i,
 		 hasOwn = Object.prototype.hasOwnProperty,
-		 DLSCModulesWithSections = []; // Temporary object that we use to create objects by category
+		 DLSCModulesWithSections = [],
+		 DLSCModulesSections = [];; // Temporary object that we use to create objects by category
 
 	for ( i in DSLCModules) {
 		if ( hasOwn.call( DSLCModules, i ) ) { // filter out prototypes
-			// Add additional icon classes we need for rendering.
-			DSLCModules[i].icon = 'dslca-icon dslc-icon-' + DSLCModules[i].icon;
 			// console.log( DSLCModules[i] );
 
+			console.log( DLSCModulesSections[ DSLCModules[i].origin ] );
 
 			// Do we have this section id in the object already?
-			if ( undefined === DLSCModulesWithSections[ DSLCModules[i].origin ] ) {
-				DLSCModulesWithSections[ DSLCModules[i].origin ] = DSLCModules[i].origin;
+			if ( undefined === DLSCModulesSections[ DSLCModules[i].origin ] ) {
+				DLSCModulesSections[ DSLCModules[i].origin ] = DSLCModules[i].origin;
+				DLSCModulesWithSections.push( { 'type': 'heading', 'id': DSLCModules[i].origin, 'title': DSLCModules[i].origin, 'origin': DSLCModules[i].origin } );
 			}
+
+			DSLCModules[i].type = 'module';
 
 			DLSCModulesWithSections.push(  DSLCModules[i] );
 			/*
@@ -1099,11 +1102,11 @@ function dslca_update_report_log() {
 			DSLCModules[ DLSCModulesBySection[i] ] = DLSCModulesBySection[i];
 		}
 	}
-
+*/
 	// We don't want to create many globals,
 	// so replace original object with sorted one.
-	// DSLCModules = DLSCModulesBySection;
-*/
+	DSLCModules = DLSCModulesWithSections;
+
 }());
 
 // console.log( DSLCModules );
