@@ -143,10 +143,12 @@ Upcoming Releases:
 
 = Bug fixes: =
 
-* Issue [#275](https://github.com/livecomposer/live-composer-page-builder/issues/275): Padding Vertical Shows Differently in Editor Mode than in Live Mode.
-* Issue [#297](https://github.com/livecomposer/live-composer-page-builder/issues/297): Can't change module width due to overlay problem with popup control.
 * Issue [#307](https://github.com/livecomposer/live-composer-page-builder/issues/307): Dropdown control do not open when clicking on the arrows.
-*
+* Issue [#304](https://github.com/livecomposer/live-composer-page-builder/issues/304): Image module background colour overlapping the picture.
+* Issue [#297](https://github.com/livecomposer/live-composer-page-builder/issues/297): Can't change module width due to overlay problem with popup control.
+* Issue [#290](https://github.com/livecomposer/live-composer-page-builder/issues/290): LC blog and Post modules can't show only 1 post but return 2 posts
+* Issue [#275](https://github.com/livecomposer/live-composer-page-builder/issues/275): Padding Vertical Shows Differently in Editor Mode than in Live Mode.
+
 * Image module: background color overlays the image.
 * Fix JS bug in inline TinyMCE: indexOF....
 
