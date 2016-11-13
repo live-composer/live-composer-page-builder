@@ -936,12 +936,7 @@ class DSLC_Blog extends DSLC_Module {
 				'section' => 'styling',
 				'ext' => 'px',
 				'tab' => __( 'Main', 'live-composer-page-builder' ),
-<<<<<<< HEAD
-				'min' => 0,
 				'max' => 500,
-=======
-				'max' => 500
->>>>>>> master
 			),
 			array(
 				'label' => __( 'Text Align', 'live-composer-page-builder' ),
@@ -1217,10 +1212,6 @@ class DSLC_Blog extends DSLC_Module {
 				'id' => 'css_meta_border_width',
 				'onlypositive' => true, // Value can't be negative.
 				'max' => 10,
-<<<<<<< HEAD
-				'increment' => 1,
-=======
->>>>>>> master
 				'std' => '1',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -2104,10 +2095,6 @@ class DSLC_Blog extends DSLC_Module {
 				'id' => 'css_social_count_border_width',
 				'onlypositive' => true, // Value can't be negative.
 				'max' => 10,
-<<<<<<< HEAD
-				'increment' => 1,
-=======
->>>>>>> master
 				'std' => '1',
 				'type' => 'slider',
 				'refresh_on_change' => false,

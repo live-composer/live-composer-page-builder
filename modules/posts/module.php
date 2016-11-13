@@ -457,13 +457,7 @@ class DSLC_Posts extends DSLC_Module {
 				'affect_on_change_rule' => 'min-height',
 				'section' => 'styling',
 				'ext' => 'px',
-<<<<<<< HEAD
-				'min' => 0,
-				'max' => 1000,
-				'increment' => 5,
-=======
 				'increment' => 5
->>>>>>> master
 			),
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
@@ -936,12 +930,7 @@ class DSLC_Posts extends DSLC_Module {
 				'section' => 'styling',
 				'ext' => 'px',
 				'tab' => __( 'Main', 'live-composer-page-builder' ),
-<<<<<<< HEAD
-				'min' => 0,
 				'max' => 500,
-=======
-				'max' => 500
->>>>>>> master
 			),
 			array(
 				'label' => __( 'Text Align', 'live-composer-page-builder' ),
