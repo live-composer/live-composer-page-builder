@@ -139,12 +139,13 @@ Upcoming Releases:
 * [You can download any previous version here](https://wordpress.org/plugins/live-composer-page-builder/developers/)
 * [See the latest major changes in details with animated gifs and videos](https://livecomposerplugin.com/blog/live-composer-1-1-released/)
 
-= 1.1.5 - September XXth 2016 =
+= 1.2 - Novermber XXth 2016 =
 
 = Bug fixes: =
 
 * Issue [#275](https://github.com/livecomposer/live-composer-page-builder/issues/275): Padding Vertical Shows Differently in Editor Mode than in Live Mode.
 * Issue [#297](https://github.com/livecomposer/live-composer-page-builder/issues/297): Can't change module width due to overlay problem with popup control.
+* Issue [#307](https://github.com/livecomposer/live-composer-page-builder/issues/307): Dropdown control do not open when clicking on the arrows.
 *
 * Image module: background color overlays the image.
 * Fix JS bug in inline TinyMCE: indexOF....
