@@ -70,57 +70,6 @@ function dslc_editable_content_gen_code( dslcField ) {
 	jQuery('.dslca-module-option-front[data-id="' + dslcFieldID + '"]', dslcModule).val( dslcContent );
 }
 
-/**
- * Other - Document Ready
- */
-jQuery(document).ready(function($){
-
-	/**
-	 * Action - Show code for altering module's defaults
-	 */
-	$(document).on( 'click', '.dslca-module-get-defaults-hook', function(){
-
-		// Vars
-		var module = jQuery(this).closest('.dslc-module-front');
-		var code = dslc_dm_get_defaults( module );
-
-		// Generate modal's text
-		var message = '<span class="dslca-prompt-modal-title">Module Defaults</span>'
-			+ '<span class="dslca-prompt-modal-descr">The code bellow is used to alter the defaults.</span>'
-			+ '<textarea></textarea><br><br>';
-
-		// Hide modal's cancel button
-		$('.dslca-prompt-modal-cancel-hook').hide();
-
-		// Show confirm button and change it to "OK"
-		$('.dslca-prompt-modal-confirm-hook').html('<span class="dslc-icon dslc-icon-ok"></span>OK');
-
-		// Show the modal prompt
-		dslc_js_confirm( 'dev_mode_get_default', message, module );
-	});
-
-	/**
-	 * Hook - Refresh Module
-	 */
-	$(document).on( 'click', '.dslca-refresh-module-hook', function(e){
-
-		jQuery(this).css({
-			'-webkit-animation-name' : 'dslcRotate',
-			'-moz-animation-name' : 'dslcRotate',
-			'animation-name' : 'dslcRotate',
-			'animation-duration' : '0.6s',
-			'-webkit-animation-duration' : '0.6s',
-			'animation-iteration-count' : 'infinite',
-			'-webkit-animation-iteration-count' : 'infinite'
-		});
-		jQuery(this).closest('.dslc-module-front').addClass('dslca-module-being-edited');
-		dslc_module_output_altered( function() {
-
-			jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-module-being-edited');
-		});
-	});
-});
-
 // Disable the prompt ( are you sure ) on refresh
 window.onbeforeunload = function () { return; };
 
@@ -470,6 +419,16 @@ jQuery(document).ready(function($) {
 				}
 
 				jQuery('body').removeClass('dslca-new-preset-added');
+
+
+				// Trigger 'LC.moduleChange' event.
+				// This event can be used by 3-rd party developers to re-init
+				// some of the JavaScript code on modure re-rendering.
+				LiveComposer.Utils.publish( 'LC.moduleChange', {
+					moduleId: dslcModuleID,
+					optionID: dslcOptionID,
+					optionVal: dslcOption.val()
+				});
 			});
 
 		/**
@@ -652,7 +611,10 @@ jQuery(document).ready(function($) {
 
 			jQuery( '.dslca-module-option-front[data-id="' + dslcOptionID + '"]', dslcModule ).val( dslcOptionToApply );
 
-			LiveComposer.Utils.publish( 'moduleChanged', {
+			// Trigger 'LC.moduleChange' event.
+			// This event can be used by 3-rd party developers to re-init
+			// some of the JavaScript code on modure re-rendering.
+			LiveComposer.Utils.publish( 'LC.moduleChange', {
 
 				moduleId: dslcModule[0].id,
 				optionID: dslcOptionID,
@@ -660,49 +622,6 @@ jQuery(document).ready(function($) {
 			});
 		}
 	});
-
-
-	// Preview Module Opt Change - Numeric
-	$(document).on( 'keyup, blur', '.dslca-module-edit-field-numeric', function(){
-
-		return false;
-		var dslcOptionValue = '',
-			dslcOption = $(this),
-			dslcOptionID = dslcOption.data('id'),
-			dslcOptionWrap = dslcOption.closest('.dslca-module-edit-option'),
-			dslcModule = $('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument),
-			dslcModuleID = dslcModule.data('dslc-module-id'),
-			dslcModuleOptions = jQuery( '.dslca-module-options-front textarea', dslcModule ),
-			dslcAffectOnChangeEl = dslcOption.data('affect-on-change-el'),
-			dslcAffectOnChangeRule = dslcOption.data('affect-on-change-rule'),
-			dslcAffectOnChangeValOrig = dslcOption.val(),
-			dslcAffectOnChangeVal = dslcAffectOnChangeValOrig + dslcOption.data('ext'),
-			dslcAffectOnChangeRules;
-
-		// Add changed class
-		dslcModule.addClass('dslca-module-change-made');
-
-		if ( jQuery(this).closest('.dslca-module-edit-option').data('refresh-on-change') != 'active' ) {
-
-			/**
-			 * Live Preview
-			 */
-			dslcAffectOnChangeRules = dslcAffectOnChangeRule.replace(/ /g,'').split( ',' );
-
-			// Loop through rules (useful when there are multiple rules)
-			/*for ( var i = 0; i < dslcAffectOnChangeRules.length; i++ ) {
-
-				var module = $(".dslca-module-being-edited", LiveComposer.Builder.PreviewAreaDocument);
-				jQuery( dslcAffectOnChangeEl, module ).css( dslcAffectOnChangeRules[i] , dslcAffectOnChangeVal );
-			}*/
-
-			/**
-			 * Update option
-			 */
-			jQuery( '.dslca-module-option-front[data-id="' + dslcOptionID + '"]', dslcModule ).val( dslcAffectOnChangeValOrig );
-		}
-	});
-
 });
 
 

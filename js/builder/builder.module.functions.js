@@ -146,9 +146,17 @@
 
 		if ( ! $(this).hasClass('dslca-action-disabled') ) {
 
-			$('.dslca-change-width-module-options', this).toggle();
-			$(this).closest('.dslca-module-manage').toggleClass('dslca-module-manage-change-width-active');
+			jQuery('.dslca-change-width-module-options', this).toggle();
+			$(this).closest('.dslc-module-front').toggleClass('dslca-change-width-active');
 		}
+	});
+
+	LiveComposer.Builder.PreviewAreaDocument.on( 'mouseleave', '.dslca-change-width-module-options', function(e){
+
+			// Hide width seleciton panel.
+			jQuery(this).hide();
+			// Remove class that puts module on the very top level.
+			$(this).closest('.dslc-module-front').removeClass('dslca-change-width-active');
 	});
 
 	/**
@@ -157,6 +165,53 @@
 	LiveComposer.Builder.PreviewAreaDocument.on( 'click', '.dslca-change-width-module-options span', function(){
 
 		dslc_module_width_set( jQuery(this).closest('.dslc-module-front'), jQuery(this).data('size') );
+	});
+
+	/**
+	 * Hook - Show code for altering module's defaults
+	 */
+	LiveComposer.Builder.PreviewAreaDocument.on( 'click', '.dslca-module-get-defaults-hook', function(){
+
+		// Vars
+		var module = jQuery(this).closest('.dslc-module-front');
+		var code = dslc_dm_get_defaults( module );
+
+		// Generate modal's text
+		var message = '<span class="dslca-prompt-modal-title">Module Defaults</span>'
+			+ '<span class="dslca-prompt-modal-descr">The code bellow is used to alter the defaults.</span>'
+			+ '<textarea></textarea><br><br>';
+
+		// Hide modal's cancel button
+		$('.dslca-prompt-modal-cancel-hook').hide();
+
+		// Show confirm button and change it to "OK"
+		$('.dslca-prompt-modal-confirm-hook').html('<span class="dslc-icon dslc-icon-ok"></span>OK');
+
+		// Show the modal prompt
+		dslc_js_confirm( 'dev_mode_get_default', message, module );
+	});
+
+	/**
+	 * Hook - Refresh Module
+	 * We have 'refresh' icon on blog posts grid and other post-based modules.
+	 * It's visible only when there are no posts to render.
+	 */
+	LiveComposer.Builder.PreviewAreaDocument.on( 'click', '.dslca-refresh-module-hook', function(e){
+
+		jQuery(this).css({
+			'-webkit-animation-name' : 'dslcRotate',
+			'-moz-animation-name' : 'dslcRotate',
+			'animation-name' : 'dslcRotate',
+			'animation-duration' : '0.6s',
+			'-webkit-animation-duration' : '0.6s',
+			'animation-iteration-count' : 'infinite',
+			'-webkit-animation-iteration-count' : 'infinite'
+		});
+		jQuery(this).closest('.dslc-module-front').addClass('dslca-module-being-edited');
+		dslc_module_output_altered( function() {
+
+			jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-module-being-edited');
+		});
 	});
 
 	/**
@@ -469,8 +524,32 @@ function dslc_module_options_show( moduleID ) {
 
 			jQuery('.dslca-module-edit-options-tabs').html( response.output_tabs );
 
+
+			var sectionsUsed = []; // – Array with tab ids to show for current module.
+
+			/**
+			 * Go through each option and check its tab property.
+			 * Fill sectionsUsed array with ids of the tabs to display.
+			 * We don't want to display tabs with no options inside.
+			 */
+			jQuery('.dslca-module-edit-options-inner .dslca-module-edit-option').each(function(){
+				var currentOptionSection = jQuery(this).data('section');
+
+				// Check if this section is in the list of tabs to show.
+				if ( sectionsUsed.indexOf(currentOptionSection) == -1 ) {
+					sectionsUsed.push(currentOptionSection);
+				}
+			});
+
+			var tabs_total = sectionsUsed.length;
+
+			for (var i = 0; i < tabs_total; i++) {
+				// Show the tabs used by the current module.
+				jQuery('.dslca-header .dslca-options-filter-hook[data-section="' + sectionsUsed[i] + '"]').show();
+			}
+
 			// Show the filter hooks
-			jQuery('.dslca-header .dslca-options-filter-hook').show();
+			// jQuery('.dslca-header .dslca-options-filter-hook').show();
 
 			// Trigger click on first filter hook
 			if ( jQuery('.dslca-module-edit-option[data-section="' + dslcDefaultSection + '"]').length ) {
@@ -512,9 +591,10 @@ function dslc_module_output_default( dslc_module_id, callback ) {
 		{
 			action : 'dslc-ajax-add-module',
 			dslc : 'active',
-			dslc_module_id : dslc_module_id,
+			dslc_module_id : dslc_module_id, // ex. DSLC_Button
 			dslc_post_id : jQuery('.dslca-container').data('post-id'),
-			dslc_url_vars: LiveComposer.Utils.get_page_params()
+			dslc_url_vars: LiveComposer.Utils.get_page_params(),
+			dslc_new_module: true
 		},
 		function( response ) {
 
@@ -584,6 +664,9 @@ function dslc_module_output_altered( callback ) {
 								insertModule( response.output, dslcModule );
 
 			newModule.addClass('dslca-module-being-edited');
+
+			response = null;
+			newModule = null;
 
 			// TODO: Add new postponed action to run after all done
 

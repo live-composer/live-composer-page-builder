@@ -135,19 +135,36 @@ Upcoming Releases:
 * PREMIUM EXTENSION: bbPress Forums Integration > [Get 50% off coupon](https://livecomposerplugin.com/halfprice-coupon/?utm_source=changelog)
 * PREMIUM THEME: Digital Marketer & SEO Theme > [Get 50% off coupon](https://livecomposerplugin.com/halfprice-coupon/?utm_source=changelog)
 
-
-= 1.1.5 - September XXth 2016 =
-
-= Bug fixes: =
-
-* Issue [#297](https://github.com/livecomposer/live-composer-page-builder/issues/297): Can't change module width due to overlay problem with popup control.
-
-
-= 1.1.4 - September 12th 2016 =
-
 * [Please, report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
 * [You can download any previous version here](https://wordpress.org/plugins/live-composer-page-builder/developers/)
 * [See the latest major changes in details with animated gifs and videos](https://livecomposerplugin.com/blog/live-composer-1-1-released/)
+
+= 1.2 - Novermber XXth 2016 =
+
+= Bug fixes: =
+
+* Issue [#275](https://github.com/livecomposer/live-composer-page-builder/issues/275): Padding Vertical Shows Differently in Editor Mode than in Live Mode.
+* Issue [#297](https://github.com/livecomposer/live-composer-page-builder/issues/297): Can't change module width due to overlay problem with popup control.
+* Issue [#307](https://github.com/livecomposer/live-composer-page-builder/issues/307): Dropdown control do not open when clicking on the arrows.
+*
+* Image module: background color overlays the image.
+* Fix JS bug in inline TinyMCE: indexOF....
+
+= For developers: =
+
+* Developers now have a possibility to create custom sections in the modules.
+'section' => 'some-custom-section-id',
+
+= Thanks to the next contributors for helping with this update: =
+
+* [Luke Perrie](https://github.com/lukeperrie)
+* []()
+
+
+
+
+
+= 1.1.4 - September 12th 2016 =
 
 = Improved: =
 
