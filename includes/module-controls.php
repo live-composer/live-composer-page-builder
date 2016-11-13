@@ -170,7 +170,6 @@ class LC_Control {
 							<option value="<?php echo $select_option['value']; ?>" <?php if ( $curr_value == $select_option['value'] ) echo 'selected="selected"'; ?>><?php echo $select_option['label']; ?></option>
 						<?php endforeach; ?>
 					</select>
-					<span class="dslca-icon dslc-icon-caret-down"></span>
 
 				<?php elseif ( 'checkbox' === $module_control['type'] ) : ?>
 
