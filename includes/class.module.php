@@ -311,10 +311,8 @@ class DSLC_Module {
 			array(
 				'label' => 'Border Width',
 				'id' => 'css_filter_border_width',
-				'min' => 0,
-				'max' => 10,
-				'increment' => 1,
 
+				'max' => 10,
 				'std' => '1',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -356,17 +354,12 @@ class DSLC_Module {
 			array(
 				'label' => 'Border Radius',
 				'id' => 'css_filter_border_radius',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
 				'std' => '3',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-post-filter',
 				'affect_on_change_rule' => 'border-radius',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
+
 				'section' => 'styling',
 				'tab' => 'Filters',
 				'ext' => 'px',
@@ -396,9 +389,6 @@ class DSLC_Module {
 			array(
 				'label' => 'Font Size',
 				'id' => 'css_filter_font_size',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
 				'std' => '11',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -472,9 +462,7 @@ class DSLC_Module {
 			array(
 				'label' => 'Padding Vertical',
 				'id' => 'css_filter_padding_vertical',
-				'min' => 0,
 				'max' => 600,
-				'increment' => 1,
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -487,9 +475,6 @@ class DSLC_Module {
 			array(
 				'label' => 'Padding Horizontal',
 				'id' => 'css_filter_padding_horizontal',
-				'min' => 0,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -525,9 +510,6 @@ class DSLC_Module {
 			array(
 				'label' => 'Margin Bottom',
 				'id' => 'css_filter_margin_bottom',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '20',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -545,9 +527,6 @@ class DSLC_Module {
 			array(
 				'label' => 'Filters - Font Size',
 				'id' => 'css_res_t_filter_font_size',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
 				'std' => '11',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -560,9 +539,7 @@ class DSLC_Module {
 			array(
 				'label' => 'Filters - Padding Vertical',
 				'id' => 'css_res_t_filter_padding_vertical',
-				'min' => 0,
 				'max' => 600,
-				'increment' => 1,
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -575,9 +552,6 @@ class DSLC_Module {
 			array(
 				'label' => 'Filters - Padding Horizontal',
 				'id' => 'css_res_t_filter_padding_horizontal',
-				'min' => 0,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -602,9 +576,6 @@ class DSLC_Module {
 			array(
 				'label' => 'Filters - Margin Bottom',
 				'id' => 'css_res_t_filter_margin_bottom',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '20',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -622,9 +593,6 @@ class DSLC_Module {
 			array(
 				'label' => 'Filters - Font Size',
 				'id' => 'css_res_p_filter_font_size',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
 				'std' => '11',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -637,9 +605,7 @@ class DSLC_Module {
 			array(
 				'label' => 'Filters - Padding Vertical',
 				'id' => 'css_res_p_filter_padding_vertical',
-				'min' => 0,
 				'max' => 600,
-				'increment' => 1,
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -652,9 +618,6 @@ class DSLC_Module {
 			array(
 				'label' => 'Filters - Padding Horizontal',
 				'id' => 'css_res_p_filter_padding_horizontal',
-				'min' => 0,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -679,9 +642,6 @@ class DSLC_Module {
 			array(
 				'label' => 'Filters - Margin Bottom',
 				'id' => 'css_res_p_filter_margin_bottom',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '20',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -737,9 +697,6 @@ class DSLC_Module {
 			array(
 				'label' => 'Title - Font Size',
 				'id' => 'css_main_heading_font_size',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
 				'std' => '17',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -813,9 +770,8 @@ class DSLC_Module {
 			array(
 				'label' => __( 'Title - Letter Spacing', 'live-composer-page-builder' ),
 				'id' => 'css_main_heading_letter_spacing',
-				'min' => 0,
+
 				'max' => 30,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -830,9 +786,6 @@ class DSLC_Module {
 			array(
 				'label' => 'Title - Line Height',
 				'id' => 'css_main_heading_line_height',
-				'min' => 0,
-				'max' => 120,
-				'increment' => 1,
 				'std' => '37',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -868,9 +821,6 @@ class DSLC_Module {
 			array(
 				'label' => 'Link - Font Size',
 				'id' => 'css_main_heading_link_font_size',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
 				'std' => '11',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -944,9 +894,8 @@ class DSLC_Module {
 			array(
 				'label' => __( 'Link - Letter Spacing', 'live-composer-page-builder' ),
 				'id' => 'css_main_heading_link_letter_spacing',
-				'min' => 0,
+
 				'max' => 30,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1018,9 +967,6 @@ class DSLC_Module {
 			array(
 				'label' => 'Margin Bottom',
 				'id' => 'css_heading_margin_bottom',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '20',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1038,9 +984,6 @@ class DSLC_Module {
 			array(
 				'label' => 'Heading - Font Size',
 				'id' => 'css_res_t_main_heading_font_size',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
 				'std' => '17',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1053,9 +996,6 @@ class DSLC_Module {
 			array(
 				'label' => 'Heading - Line Height',
 				'id' => 'css_res_t_main_heading_line_height',
-				'min' => 0,
-				'max' => 120,
-				'increment' => 1,
 				'std' => '37',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1068,9 +1008,6 @@ class DSLC_Module {
 			array(
 				'label' => 'Heading Link - Font Size',
 				'id' => 'css_res_t_main_heading_link_font_size',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
 				'std' => '11',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1095,9 +1032,6 @@ class DSLC_Module {
 			array(
 				'label' => 'Heading - Margin Bottom',
 				'id' => 'css_res_t_heading_margin_bottom',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '20',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1115,9 +1049,6 @@ class DSLC_Module {
 			array(
 				'label' => 'Heading - Font Size',
 				'id' => 'css_res_p_main_heading_font_size',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
 				'std' => '17',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1130,9 +1061,6 @@ class DSLC_Module {
 			array(
 				'label' => 'Heading - Line Height',
 				'id' => 'css_res_p_main_heading_line_height',
-				'min' => 0,
-				'max' => 120,
-				'increment' => 1,
 				'std' => '37',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1145,9 +1073,6 @@ class DSLC_Module {
 			array(
 				'label' => 'Heading Link - Font Size',
 				'id' => 'css_res_p_main_heading_link_font_size',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
 				'std' => '11',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1172,9 +1097,6 @@ class DSLC_Module {
 			array(
 				'label' => 'Heading - Margin Bottom',
 				'id' => 'css_res_p_heading_margin_bottom',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '20',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1248,10 +1170,8 @@ class DSLC_Module {
 			array(
 				'label' => 'Border Width',
 				'id' => 'css_arrows_border_width',
-				'min' => 0,
-				'max' => 10,
-				'increment' => 1,
 
+				'max' => 10,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1264,17 +1184,12 @@ class DSLC_Module {
 			array(
 				'label' => 'Border Radius',
 				'id' => 'css_arrows_border_radius',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
 				'std' => '3',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-carousel-nav-prev,.dslc-carousel-nav-next',
 				'affect_on_change_rule' => 'border-radius',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
+
 				'section' => 'styling',
 				'tab' => 'Carousel Arrows',
 				'ext' => 'px',
@@ -1304,9 +1219,6 @@ class DSLC_Module {
 			array(
 				'label' => 'Margin Top',
 				'id' => 'css_arrows_margin_top',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '6',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1343,9 +1255,6 @@ class DSLC_Module {
 			array(
 				'label' => 'Margin Bottom',
 				'id' => 'css_arrows_margin_bottom',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '20',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1397,9 +1306,6 @@ class DSLC_Module {
 			array(
 				'label' => 'Margin Top',
 				'id' => 'css_circles_margin_top',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '20',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1512,10 +1418,8 @@ class DSLC_Module {
 			array(
 				'label' => 'Container - Border Width',
 				'id' => 'css_pag_border_width',
-				'min' => 0,
-				'max' => 10,
-				'increment' => 1,
 
+				'max' => 10,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1557,17 +1461,12 @@ class DSLC_Module {
 			array(
 				'label' => 'Container - Border Radius',
 				'id' => 'css_pag_border_radius',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-pagination',
 				'affect_on_change_rule' => 'border-radius',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
+
 				'section' => 'styling',
 				'tab' => 'Pagination',
 				'ext' => 'px',
@@ -1575,9 +1474,7 @@ class DSLC_Module {
 			array(
 				'label' => 'Container - Padding Vertical',
 				'id' => 'css_pag_padding_vertical',
-				'min' => 0,
 				'max' => 600,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1590,9 +1487,6 @@ class DSLC_Module {
 			array(
 				'label' => 'Container - Padding Horizontal',
 				'id' => 'css_pag_padding_horizontal',
-				'min' => 0,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1650,10 +1544,8 @@ class DSLC_Module {
 			array(
 				'label' => 'Item - Border Width',
 				'id' => 'css_pag_item_border_width',
-				'min' => 0,
-				'max' => 10,
-				'increment' => 1,
 
+				'max' => 10,
 				'std' => '1',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1707,17 +1599,12 @@ class DSLC_Module {
 			array(
 				'label' => 'Item - Border Radius',
 				'id' => 'css_pag_item_border_radius',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
 				'std' => '3',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-pagination li a',
 				'affect_on_change_rule' => 'border-radius',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
+
 				'section' => 'styling',
 				'tab' => 'Pagination',
 				'ext' => 'px',
@@ -1747,9 +1634,6 @@ class DSLC_Module {
 			array(
 				'label' => 'Item - Font Size',
 				'id' => 'css_pag_item_font_size',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
 				'std' => '11',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1823,9 +1707,8 @@ class DSLC_Module {
 			array(
 				'label' => __( 'Item - Letter Spacing', 'live-composer-page-builder' ),
 				'id' => 'css_pag_item_letter_spacing',
-				'min' => 0,
+
 				'max' => 30,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1840,9 +1723,7 @@ class DSLC_Module {
 			array(
 				'label' => 'Item - Padding Vertical',
 				'id' => 'css_pag_item_padding_vertical',
-				'min' => 0,
 				'max' => 600,
-				'increment' => 1,
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1855,9 +1736,6 @@ class DSLC_Module {
 			array(
 				'label' => 'Item - Padding Horizontal',
 				'id' => 'css_pag_item_padding_horizontal',
-				'min' => 0,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -2144,7 +2022,9 @@ class DSLC_Module {
 
 		global $dslc_css_style;
 		global $dslc_googlefonts_array;
-		global $dslc_all_googlefonts_array;
+
+		global $dslc_available_fonts;
+		$dslc_all_googlefonts_array = $dslc_available_fonts['google'];
 
 		/**
 		 * Title Attr
@@ -2176,11 +2056,15 @@ class DSLC_Module {
 		$module_class_arr[] = $class_handle_like;
 
 		// Process all class definitions.
-		$custom_class = preg_replace( '/,/', ' ', $options['custom_class'] );
-		$custom_class = preg_replace( '/\b\.\b/', ' ', $custom_class );
-		$custom_class = preg_replace( '/\./', '', $custom_class );
-		$custom_class = preg_replace( '/\s{2,}/', ' ', $custom_class );
-		$custom_class = trim( $custom_class );
+		if ( isset( $options['custom_class'] ) ) {
+			$custom_class = preg_replace( '/,/', ' ', $options['custom_class'] );
+			$custom_class = preg_replace( '/\b\.\b/', ' ', $custom_class );
+			$custom_class = preg_replace( '/\./', '', $custom_class );
+			$custom_class = preg_replace( '/\s{2,}/', ' ', $custom_class );
+			$custom_class = trim( $custom_class );
+		} else {
+			$custom_class = '';
+		}
 
 		$module_class_arr[] = $custom_class;
 
@@ -2206,6 +2090,8 @@ class DSLC_Module {
 
 				if ( ! isset( $options['css_custom'] ) || 'enabled' === $options['css_custom'] ) {
 
+					// Generate CSS for the module based on the selected options.
+					// Funciton 'dslc_generate_custom_css' will fill global $dslc_css_style with CSS code.
 					dslc_generate_custom_css( $options_arr, $options, true );
 					$googlefonts_output = '';
 					foreach ( $dslc_googlefonts_array as $googlefont ) {
@@ -2260,8 +2146,37 @@ class DSLC_Module {
 		$options = array();
 		$options_ids = array();
 
-		// Get options array.
+
+		// Clearn the custom options by getting rid of all the default values.
+
+		// Get the module structure.
+		// Array of options with deafut values only.
 		$options = $this->options();
+
+		/* Not ready for production. Causes more issues than benefits.
+		*/
+		foreach ( $options as $default_option ) {
+
+			$id = $default_option['id'];
+
+			// 🔖 RAW CODE CLEANUP
+			// Only clean options in the styling or custon sections.
+			// Never clean 'Functionality' section (it has no section parameter set).
+			if ( isset( $default_option['section'] ) && strtoupper( 'functionality' ) !== strtoupper( $default_option['section'] ) ) {
+
+				// Do we have option with this id in the custom settings set by the user?
+				if ( isset( $user_options[ $id ] )  ) {
+
+					// If current option is empty or the same as default value for this setting.
+					// if ( '' === $user_options[ $id ] || isset( $default_option['std'] ) && $default_option['std'] === $user_options[ $id ] ) {
+					if ( '' === $user_options[ $id ] || false === $user_options[ $id ] ) {
+						unset( $user_options[ $id ] );
+					}
+				}
+			}
+		}
+
+
 
 		// Bring back IDs for image options.
 		global $dslc_var_image_option_bckp;
@@ -2275,6 +2190,10 @@ class DSLC_Module {
 			$user_options['dslc_m_size'] = '12';
 		}
 
+		if ( ! isset( $user_options['element_type'] ) ) {
+			$user_options['element_type'] = 'module';
+		}
+
 		$user_options_no_defaults = $user_options;
 
 		// If Live Composer is in editing mode: output some additional (hidden) elements.
@@ -2282,43 +2201,50 @@ class DSLC_Module {
 
 			<div class="dslca-module-options-front">
 
-				<?php foreach ( $options as $key => $option ) : ?>
-
 				<?php
+				// Output each options as a hidden textarea.
 
-				// Option ID.
-				$option_id = $option['id'];
-				$options_ids[] = $option['id'];
+				// Go through standard set of options described in the module class.
+				// Array $options do not contains custom data, but structure and defaults.
+				// Array $user_options contains custom module settings.
+				foreach ( $options as $key => $option ) {
 
-				// If value already set use it, if not use default.
-				if ( isset( $user_options[ $option_id ] ) ) {
-					$option_value = $user_options[ $option_id ];
-				} else {
-					$option_value = $option['std'];
+					// Option ID.
+					$option_id = $option['id'];
+					$options_ids[] = $option['id'];
+
+					// Set the setting value.
+					if ( isset( $user_options[ $option_id ] ) ) {
+						$option_value = $user_options[ $option_id ];
+					} else {
+						$option_value = '';
+						// $option_value = $option['std'];
+					}
+
+					if ( isset( $user_options[ $option_id ] ) ) {
+
+						// 🔖 RAW CODE CLEANUP
+						// if ( $user_options[ $option_id ] === $option['std'] || '' === $user_options[ $option_id ] ) {
+						if ( false === $user_options[ $option_id ] || '' === $user_options[ $option_id ] ) {
+							unset( $user_options_no_defaults[ $option_id ] );
+						}
+					}
+
+					echo '<textarea class="dslca-module-option-front" data-id="' . esc_attr( $option_id ) . '">' . stripslashes( $option_value ) . '</textarea>';
 				}
 
-				if ( isset( $user_options[ $option_id ] ) && $user_options[ $option_id ] === $option['std'] ) {
-					unset( $user_options_no_defaults[ $option_id ] );
-				}
+				// Output additonal (custom) options that are not part of the default module structure.
+				foreach ( $user_options as $user_option_id => $user_option_val ) {
 
-				?>
+					if ( ! in_array( $user_option_id, $options_ids, true ) ) {
 
-					<textarea class="dslca-module-option-front" data-id="<?php echo esc_attr( $option_id ); ?>"><?php echo stripslashes( $option_value ); ?></textarea>
-				<?php endforeach; ?>
-
-				<?php foreach ( $user_options as $user_option_id => $user_option_val ) : ?>
-
-					<?php if ( ! in_array( $user_option_id, $options_ids, true ) ) : ?>
-
-						<textarea class="dslca-module-option-front" data-id="<?php echo esc_attr( $user_option_id ); ?>"><?php echo stripslashes( $user_option_val ); ?></textarea>
-
-					<?php endif; ?>
-
-				<?php endforeach; ?>
+						echo '<textarea class="dslca-module-option-front" data-id="' . esc_attr( $user_option_id ) . '">' . stripslashes( $user_option_val ) . '</textarea>';
+					}
+				} ?>
 
 			</div><!-- dslca-module-options-front -->
 
-			<textarea class="dslca-module-code"><?php echo base64_encode( serialize( $user_options_no_defaults ) ); ?></textarea>
+			<textarea class="dslca-module-code"><?php echo json_encode( $user_options_no_defaults ); ?></textarea>
 
 			<span class="dslc-sortable-helper-icon dslc-icon-<?php echo esc_attr( $this->module_icon ); ?>" data-title="<?php echo esc_attr( $this->module_title ); ?>" data-icon="<?php echo esc_attr( $this->module_icon ); ?>"></span>
 

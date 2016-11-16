@@ -74,6 +74,7 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 			var itemEl = evt.item;  // dragged HTMLElement
 			evt.from;  // previous list
 
+			// If container/column/modules area droped.
 			if ( jQuery(itemEl).data('id') == 'DSLC_M_A' ) {
 
 				dslc_modules_area_add( jQuery(self.section).find('.dslc-modules-section-wrapper .dslc-modules-section-inner') );

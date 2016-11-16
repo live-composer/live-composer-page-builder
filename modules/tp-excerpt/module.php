@@ -84,9 +84,7 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 			array(
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_border_width',
-				'min' => 0,
-				'max' => 1000,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -126,43 +124,30 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 			array(
 				'label' => __( 'Border Radius - Top', 'live-composer-page-builder' ),
 				'id' => 'css_border_radius_top',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-tp-excerpt',
 				'affect_on_change_rule' => 'border-top-left-radius,border-top-right-radius',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
 				'section' => 'styling',
 				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Border Radius - Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_border_radius_bottom',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-tp-excerpt',
 				'affect_on_change_rule' => 'border-bottom-left-radius,border-bottom-right-radius',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
 				'section' => 'styling',
 				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_margin_bottom',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -174,6 +159,7 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 			array(
 				'label' => __( 'Minimum Height', 'live-composer-page-builder' ),
 				'id' => 'css_min_height',
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -181,16 +167,13 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 				'affect_on_change_rule' => 'min-height',
 				'section' => 'styling',
 				'ext' => 'px',
-				'min' => 0,
-				'max' => 1000,
 				'increment' => 5
 			),
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_padding_vertical',
-				'min' => 0,
+				'onlypositive' => true, // Value can't be negative.
 				'max' => 600,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -202,9 +185,7 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 			array(
 				'label' => __( 'Padding Horizontal', 'live-composer-page-builder' ),
 				'id' => 'css_padding_horizontal',
-				'min' => 0,
-				'max' => 1000,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -232,9 +213,7 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 			array(
 				'label' => __( 'Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_font_size',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '14',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -308,9 +287,7 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 			array(
 				'label' => __( 'Line Height', 'live-composer-page-builder' ),
 				'id' => 'css_line_height',
-				'min' => 0,
-				'max' => 120,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '26',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -368,9 +345,6 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_margin_bottom',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -383,9 +357,8 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_padding_vertical',
-				'min' => 0,
+				'onlypositive' => true, // Value can't be negative.
 				'max' => 600,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -398,9 +371,7 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 			array(
 				'label' => __( 'Padding Horizontal', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_padding_horizontal',
-				'min' => 0,
-				'max' => 1000,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -413,9 +384,7 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 			array(
 				'label' => __( 'Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_font_size',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '14',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -428,9 +397,7 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 			array(
 				'label' => __( 'Line Height', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_line_height',
-				'min' => 0,
-				'max' => 120,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '26',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -466,9 +433,6 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_margin_bottom',
-				'min' => -1000,
-				'max' => 1000,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -481,9 +445,8 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_padding_vertical',
-				'min' => 0,
+				'onlypositive' => true, // Value can't be negative.
 				'max' => 600,
-				'increment' => 1,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -496,9 +459,7 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 			array(
 				'label' => __( 'Padding Horizontal', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_padding_horizontal',
-				'min' => 0,
-				'max' => 1000,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -511,9 +472,7 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 			array(
 				'label' => __( 'Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_font_size',
-				'min' => 0,
-				'max' => 100,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '14',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -526,9 +485,7 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 			array(
 				'label' => __( 'Line Height', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_line_height',
-				'min' => 0,
-				'max' => 120,
-				'increment' => 1,
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '26',
 				'type' => 'slider',
 				'refresh_on_change' => false,

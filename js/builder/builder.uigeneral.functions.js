@@ -105,6 +105,7 @@ jQuery(document).on( 'click', '.dslca-currently-editing', function(){
 
 		activeElement = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument);
 		outlineColor = '#5890e5';
+
 	} else if ( jQuery('.dslca-modules-section-being-edited', LiveComposer.Builder.PreviewAreaDocument).length ) {
 
 		activeElement = jQuery('.dslca-modules-section-being-edited', LiveComposer.Builder.PreviewAreaDocument);
@@ -676,7 +677,7 @@ function dslc_toogle_control ( control_id ) {
 	if ( control_id === undefined) control_id = false;
 	if ( !control_id ) return;
 
-	var control        = jQuery('.dslca-module-edit-option-' + control_id );
+	var control         = jQuery('.dslca-module-edit-option-' + control_id );
 	var control_storage = control.find('.dslca-module-edit-field');
 
 	// Get the element we are editing
@@ -769,7 +770,7 @@ jQuery(document).ready(function($){
 	jQuery(document).on( 'click', '.dslca-module-edit-option .dslc-control-toggle', function(e){
 
 		e.preventDefault();
-		var control_id = $(e.target).closest('.dslca-module-edit-option').find('.dslca-module-edit-field').data('id');
+		var control_id = jQuery(e.target).closest('.dslca-module-edit-option').find('.dslca-module-edit-field').data('id');
 		dslc_toogle_control ( control_id );
 	});
 
@@ -782,7 +783,7 @@ jQuery(document).ready(function($){
 		     && toggle.has(e.target).length === 0 ) // ... nor a descendant of the container
 		{
 
-			if ( $(e.target).closest('.dslca-module-edit-option').hasClass('dslca-option-off') ) {
+			if ( jQuery(e.target).closest('.dslca-module-edit-option').hasClass('dslca-option-off') ) {
 
 				var control_id = $(e.target).closest('.dslca-module-edit-option').find('.dslca-module-edit-field').data('id');
 				dslc_toogle_control (control_id);

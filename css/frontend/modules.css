@@ -8,6 +8,13 @@
 		overflow: hidden; /* <- Makes sure border radius crops inner content. */
 	}
 
+
+
+/* Default system font for all the elements in page builder*/
+.dslc-module-front {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
 /**
  * CPT MODULE
  */
@@ -67,9 +74,9 @@
 				}
 
 			#dslc-content .dslc-cpt-post-meta {
-				border: 1px solid #e5e5e5;
-				border-left: 0;
-				border-right: 0;
+				/*border: 1px solid #e5e5e5;*/
+				/*border-left: 0;
+				border-right: 0;*/
 				margin-bottom: 20px;
 				overflow: hidden;
 				padding: 13px 0;
@@ -634,7 +641,7 @@
 			}
 
 				#dslc-content .dslc-info-box-title {
-					margin-bottom: 25px;
+					/*margin-bottom: 25px;*/
 				}
 
 					#dslc-content .dslc-info-box-title h4 {
@@ -662,6 +669,7 @@
 					display: inline-block;
 					line-height: 1;
 					text-decoration: none;
+					box-shadow: none;
 				}
 
 		#dslc-content .dslc-info-box-button-aside {
@@ -1111,6 +1119,14 @@
 					}
 
 
+/**
+ * Button input
+ */
+
+input[type="button"], input[type="submit"], input[type="reset"], input[type="file"]::-webkit-file-upload-button, button {
+    border-style: none;
+}
+
 
 /**
  * TEXT MODULE
@@ -1148,7 +1164,7 @@
 					#dslc-content .dslc-widget-title {
 						font-size: 15px;
 						font-weight: 600;
-						border-bottom: 1px solid #e5e5e5;
+						/*border-bottom: 1px solid #e5e5e5;*/
 						margin-bottom: 10px;
 						padding-bottom: 10px;
 						line-height: 1;
@@ -1634,6 +1650,7 @@
 		display: inline-block;
 		text-decoration: none;
 		line-height: 1;
+		box-shadow: none; /* override themes styling */
 	}
 
 /**
@@ -1760,8 +1777,10 @@
  * Image Module
  */
 
-.dslc-image {
-
+.dslc-image,
+.dslc-image img {
+	border: 0;
+	box-shadow: none;
 }
 
 	#dslc-content .dslc-image,
