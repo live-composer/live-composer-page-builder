@@ -145,6 +145,7 @@ Upcoming Releases:
 
 * Issue [#368](https://github.com/livecomposer/live-composer-page-builder/issues/368): Border hover on buttons not working.
 * Issue [#307](https://github.com/livecomposer/live-composer-page-builder/issues/307): Dropdown control do not open when clicking on the arrows.
+* Issue [#308](https://github.com/livecomposer/live-composer-page-builder/issues/308): Archive Templates does not work properly with all the post types.
 * Issue [#304](https://github.com/livecomposer/live-composer-page-builder/issues/304): Image module background colour overlapping the picture.
 * Issue [#297](https://github.com/livecomposer/live-composer-page-builder/issues/297): Can't change module width due to overlay problem with popup control.
 * Issue [#290](https://github.com/livecomposer/live-composer-page-builder/issues/290): LC blog and Post modules can't show only 1 post but return 2 posts

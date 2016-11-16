@@ -165,7 +165,13 @@ function dslc_st_init() {
  * @param  string $post_id  Post ID that we want to find template ID for.
  * @return string/boolean   Template ID or false if not found
  */
+// Old Function Name.
 function dslc_st_get_template_id( $post_id ) {
+	return dslc_get_template_by_id( $post_id );
+}
+
+// New Function Name.
+function dslc_get_template_by_id( $post_id ) {
 
 	$template_id = false;
 
@@ -215,5 +221,38 @@ function dslc_st_get_template_id( $post_id ) {
 	}
 
 	// Return the template ID.
+	return $template_id;
+}
+
+/**
+ * Get the template ID of a specific post type provided.
+ *
+ * @since 1.2
+ * @param  string $post_type_slug  Post type slug.
+ * @return string/boolean   Template ID or false if not found
+ */
+function dslc_get_archive_template_by_pt( $post_type_slug ) {
+
+	// All the archive templates saved in DB with '_archive' suffix.
+	if ( ! stristr( $post_type_slug , '_archive' ) ) {
+		$post_type_slug = $post_type_slug . '_archive';
+	}
+
+	// Get the template ID by post type or by option name.
+	$template_id = dslc_get_option( $post_type_slug, 'dslc_plugin_options_archives' );
+
+	/**
+	 * Add back-compatability with post archive options without '_archive' suffix.
+	 * In some of the past versions with didn't add '_archive' to these.
+	 */
+	if ( ! $template_id && stristr( $post_type_slug, '_archive' ) ) {
+		$template_id = dslc_get_option( str_replace( '_archive', '', $post_type_slug ), 'dslc_plugin_options_archives' );
+	}
+
+	// Make sure it returns false, not empty line if no template id found.
+	if ( empty( $template_id ) ) {
+		$template_id = false;
+	}
+
 	return $template_id;
 }
