@@ -162,11 +162,7 @@ function dslc_register_module( $module_id ) {
 		);
 
 		if ( isset( $module_instance->exclude_from_main_listing ) ) {
-			$arr = array(
-				'exclude' => $module_instance->exclude_from_main_listing,
-			);
-
-			$dslc_var_modules[ $module_id ] = array_merge( $dslc_var_modules[ $module_id ], $arr );
+			$dslc_var_modules[ $module_id ]['exclude'] = $module_instance->exclude_from_main_listing;
 		}
 	}
 }
