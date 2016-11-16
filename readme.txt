@@ -149,6 +149,7 @@ Upcoming Releases:
 * Issue [#297](https://github.com/livecomposer/live-composer-page-builder/issues/297): Can't change module width due to overlay problem with popup control.
 * Issue [#290](https://github.com/livecomposer/live-composer-page-builder/issues/290): LC blog and Post modules can't show only 1 post but return 2 posts
 * Issue [#275](https://github.com/livecomposer/live-composer-page-builder/issues/275): Padding Vertical Shows Differently in Editor Mode than in Live Mode.
+* Issue [#385](https://github.com/livecomposer/live-composer-page-builder/issues/385): IE 11 is not rending images.
 
 * Image module: background color overlays the image.
 * Fix JS bug in inline TinyMCE: indexOF....
