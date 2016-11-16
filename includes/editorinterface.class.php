@@ -171,8 +171,11 @@ class DSLC_EditorInterface{
 		// If other archives ( not author )?
 		} elseif ( is_archive() && isset( $dslc_var_templates_pt[ get_post_type() ] ) ) {
 
+
+			// $template_id = dslc_get_option( get_post_type(), 'dslc_plugin_options_archives' );
+
 			// Get ID of the page set to power the archives of the shown post type.
-			if ( get_post_type() == 'post' ) {
+			if ( 'post' === get_post_type() ) {
 				$template_id = dslc_get_option( get_post_type() . '_archive', 'dslc_plugin_options_archives' );
 			} else {
 				$template_id = dslc_get_option( get_post_type(), 'dslc_plugin_options_archives' );
@@ -180,11 +183,12 @@ class DSLC_EditorInterface{
 
 			$preview_id = get_queried_object_id(); //replace get_the_id in the method get_editor_link_url
 
+			// if ( 'none' !== $template_id ) {
 			// If there is a page that powers it?
 			if ( '' !== $template_id ) {
 
 				// Output the button.
-				self::the_editor_link( self::get_editor_link_url( $template_id, $preview_id ), __( 'EDIT TEMPLATE', 'live-composer-page-builder' ) );
+				self::the_editor_link( self::get_editor_link_url( $template_id, $preview_id ), __( 'Edit Template', 'live-composer-page-builder' ) );
 
 			} else {
 
