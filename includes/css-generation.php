@@ -362,8 +362,6 @@ function dslc_module_gen_css( $atts, $settings_raw ) {
 		* if ( ( $module_id == 'DSLC_TP_Content' || $module_id == 'DSLC_Html' ) && ! isset( $settings['css_custom'] ) )
 		* Line above was breaking styling for DSLC_TP_Content modules when used in template
 		*/
-		
-		// vovaphperror( $settings['css_custom'], '$settings[css_custom]' );
 
 		$css_output = '';
 
@@ -374,8 +372,6 @@ function dslc_module_gen_css( $atts, $settings_raw ) {
 		} else {
 			$css_output = dslc_generate_custom_css( $options_arr, $settings );
 		}
-
-		error_log ( $css_output );
 
 		return $css_output;
 	}

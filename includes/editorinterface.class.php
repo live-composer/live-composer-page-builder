@@ -140,20 +140,6 @@ class DSLC_EditorInterface{
 
 			}
 
-		// If a search results page.
-		} elseif ( is_search() ) {
-
-			// Get ID of the page set to power the search results page.
-			$template_id = dslc_get_option( 'search_results', 'dslc_plugin_options_archives' );
-
-			// If there is a page that powers it?
-			if ( 'none' !== $template_id ) {
-
-				// Output the button.
-				self::the_editor_link( self::get_editor_link_url( $template_id, get_the_ID() ), __( 'Activate Live Composer', 'live-composer-page-builder' ) );
-
-			}
-
 		// If authors archives page?
 		} elseif ( is_author() ) {
 
@@ -171,8 +157,35 @@ class DSLC_EditorInterface{
 		// If other archives ( not author )?
 		} elseif ( is_archive() && isset( $dslc_var_templates_pt[ get_post_type() ] ) ) {
 
+			/**
+			 * Function get_post_type() returns type of the posts
+			 * in the current listing. We use it to decide what template to load.
+			 */
+			$listing_pt_slug = get_post_type();
+
 			// Get ID of the page set to power the archives of the shown post type.
-			$template_id = dslc_get_option( get_post_type() . '_archive', 'dslc_plugin_options_archives' );
+			$template_id =  dslc_get_archive_template_by_pt ( $listing_pt_slug );
+
+			// If there is a page that powers it?
+			if ( false !== $template_id ) {
+
+				// Prepare 'preview_id' in URL variables.
+				$preview_id = get_queried_object_id();
+
+				// Output the button.
+				self::the_editor_link( self::get_editor_link_url( $template_id, $preview_id ), __( 'Edit Template', 'live-composer-page-builder' ) );
+
+			} else {
+
+				// Output the button.
+				self::the_editor_link( admin_url( 'post-new.php?post_type=dslc_templates' ) , __( 'Create Template', 'live-composer-page-builder' ) );
+			}
+
+		// If a search results page (keep this check last!!).
+		} elseif ( is_search() ) {
+
+			// Get ID of the page set to power the search results page.
+			$template_id = dslc_get_option( 'search_results', 'dslc_plugin_options_archives' );
 
 			// If there is a page that powers it?
 			if ( 'none' !== $template_id ) {
@@ -182,6 +195,7 @@ class DSLC_EditorInterface{
 
 			}
 		}
+
 
 		if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) :
 
