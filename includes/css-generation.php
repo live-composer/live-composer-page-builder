@@ -484,6 +484,7 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 
 	global $dslc_css_fonts;
 	global $dslc_css_style;
+	global $dslc_active;
 
 	$important_append = '';
 	$force_important = dslc_get_option( 'lc_force_important_css', 'dslc_plugin_options' );
@@ -758,6 +759,15 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 					$output_border_declaration = true;
 				}
 			}
+
+			// Always output all the border properties when:
+			// – LC in the editing mode.
+			// – CSS rules are for :hover state.
+			// Otherwise it breaks live preview for border properties.
+			if ( $dslc_active || stristr( $css_selector, ':hover' ) ) {
+				$output_border_declaration = true;
+			}
+
 			/*
 			if ( $output_border_declaration && isset( $css_declaration_borders['border-style'] )  ) {
 				$border_style = $css_declaration_borders['border-style'];
