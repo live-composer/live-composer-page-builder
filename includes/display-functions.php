@@ -617,14 +617,10 @@ function dslc_filter_content( $content ) {
 		// If currently showing a category archive page.
 		if ( is_archive() && ! is_author() && ! is_search() ) {
 
-			$post_type = get_post_type();
-
-			if ( 'post' === $post_type ) {
-				$post_type = 'post_archive';
-			}
+			$post_type_slug = get_post_type();
 
 			// Get ID of the page set to power the category of the current post type.
-			$template_id = dslc_get_option( $post_type, 'dslc_plugin_options_archives' );
+			$template_id = dslc_get_archive_template_by_pt( $post_type_slug );
 
 			// If there is a page that powers it.
 			if ( $template_id ) {

@@ -331,7 +331,7 @@ final class DSLC_Scripts{
 
 		<script type="text/javascript">
 			jQuery(document).ready(function($){
-				// Shorten plugin name
+				// Shorten plugin name.
 				jQuery('.plugins [data-slug="live-composer-page-builder"] .plugin-title strong').text('Live Composer');
 
 				var target_menu_items = '';
@@ -344,8 +344,12 @@ final class DSLC_Scripts{
 				target_menu_items += '#adminmenu a[href="edit.php?post_type=dslc_partners"].menu-top,';
 				target_menu_items += '#adminmenu a[href="edit.php?post_type=dslc_downloads"].menu-top';
 
-				// Add LC badge to our links in WP Admin sidebar
+				// Add LC badge to our links in WP Admin sidebar.
 				jQuery( target_menu_items ).append(' <attr title="Live Composer" class="dslc-menu-label">LC</attr>');
+
+				// Add LC badge to action link in WP Admin > posts listing.
+				jQuery( '.edit-in-live-composer a' ).prepend(' <attr title="Live Composer" class="dslc-action-label">LC</attr>');
+
 			});
 
 		</script>

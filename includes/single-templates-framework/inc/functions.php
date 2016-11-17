@@ -190,7 +190,8 @@ function dslc_get_template_by_id( $post_id ) {
 		$args = array(
 			'post_type' => 'dslc_templates',
 			'post_status' => 'publish',
-			'posts_per_page' => 1,
+			'posts_per_page' => 99, // For performance we set limit to 99.
+			'offset'         => 0, // Posts_per_page doesn't work without offset!
 			'meta_query' => array(
 				array(
 					'key' => 'dslc_template_for',

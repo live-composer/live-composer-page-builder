@@ -1,4 +1,5 @@
-.dslc-menu-label {
+.dslc-menu-label,
+.dslc-action-label {
 	display: inline-block;
 	background: #9EA3A8;
 	padding: 3px 4px;
@@ -14,6 +15,17 @@
 	line-height: 1;
 	box-shadow: 1px 1px 1px rgba(11, 12, 12, 0.51);
 	opacity: .5;
+}
+
+.dslc-action-label {
+	position: relative;
+	right: auto;
+	margin-right: 6px;
+	margin-left: 3px;
+	top: -1px;
+	box-shadow: none;
+	background: rgba(0, 0, 0, 0.15);
+	opacity: .4;
 }
 
 .wp-submenu > li {

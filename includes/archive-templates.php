@@ -28,31 +28,30 @@ function dslc_archive_template_redirect( $archive_template ) {
 
 	if ( $post ) {
 
-		$post_type = $post->post_type;
-
-		if ( isset( $post_type ) && 'post' === $post_type ) {
-			$post_type = 'post_archive';
-		}
-
-		$template = dslc_get_option( $post_type, 'dslc_plugin_options_archives' );
+		$template = dslc_get_archive_template_by_pt( $post->post_type );
 
 	} else {
 
 		$template = false;
 	}
 
+	// Do nothing, follow standard WP templates flow.
 	if ( ! $template || 'none' === $template ) {
 		return $archive_template;
 	}
 
 	$archive_template = DS_LIVE_COMPOSER_ABS . '/templates/dslc-archive.php';
+
 	return $archive_template;
-
 }
-// Replace the template used whenever the "archive" or "category" template is called.
-add_filter( 'archive_template', 'dslc_archive_template_redirect' );
-add_filter( 'category_template', 'dslc_archive_template_redirect' );
-
+/**
+ * Filter 'template_include'.
+ *
+ * This filter hook is executed immediately before WordPress includes
+ * the predetermined template file. This can be used to override
+ * WordPress's default template behavior.
+ */
+add_filter( 'template_include', 'dslc_archive_template_redirect', 99 );
 
 /**
  * Redirect to 404 page if archive posts listing has no posts
@@ -142,109 +141,6 @@ function dslc_404_template_redirect( $template ) {
 
 } add_filter( 'template_include', 'dslc_404_template_redirect' );
 // add_filter( '404_template', 'dslc_404_template_redirect' );
-
-
-
-/**
- * Register 'Archives and Search' options panel fields.
- *
- * @since 1.0
- */
-/*
-function dslc_archive_template_init() {
-
-	global $dslc_plugin_options;
-	global $dslc_post_types;
-
-	$opts = array();
-
-	// Page Options.
-	$pages_opts = array();
-	$pages_opts[] = array(
-		'label' => __( 'Default', 'live-composer-page-builder' ),
-		'value' => 'none',
-	);
-
-	$pages = get_pages();
-	// Add 'dslc_archive_template_cpt' filter to give the theme developers
-	// an option to show their own custom posts types in the templates dropdown.
-	$pages = apply_filters( 'dslc_archive_template_cpt', $pages );
-
-	foreach ( $pages as $page ) {
-		$pages_opts[] = array(
-			'label' => $page->post_title,
-			'value' => $page->ID,
-		);
-	}
-
-	// Form list of Templates ('dslc_templates' post type).
-	$lc_templates = array();
-
-	$lc_templates_args = array(
-		'post_type' => 'dslc_templates',
-		'post_status' => 'publish',
-	);
-
-	$templates_array = get_posts( $lc_templates_args );
-
-	foreach ( $templates_array as $post ) {
-		$lc_templates[] = array(
-			'label' => $post->post_title,
-			'value' => $post->ID,
-		);
-	}
-
-	$lc_templates[] = array(
-		'label' => __( 'Default', 'live-composer-page-builder' ),
-		'value' => 'none',
-	);
-
-	foreach ( $dslc_post_types as $post_type ) {
-
-		$opts[ $post_type ] = array(
-			'name' => 'dslc_plugin_options_archives[' . $post_type . ']',
-			'label' => $post_type . ' archives',
-			'descr' => __( 'Choose which page should serve as template.', 'live-composer-page-builder' ),
-			'std' => 'none',
-			'type' => 'select',
-			'choices' => $pages_opts,
-		);
-	}
-
-	$opts['author'] = array(
-		'name' => 'dslc_plugin_options_archives[author]',
-		'label' => 'Author archives',
-		'descr' => __( 'Author posts listing template.', 'live-composer-page-builder' ),
-		'std' => 'none',
-		'type' => 'select',
-		'choices' => $lc_templates,
-	);
-
-	$opts['search_results'] = array(
-		'name' => 'dslc_plugin_options_archives[search_results]',
-		'label' => 'Search Results',
-		'descr' => __( 'Search results listing template.', 'live-composer-page-builder' ),
-		'std' => 'none',
-		'type' => 'select',
-		'choices' => $lc_templates,
-	);
-
-	$opts['404_page'] = array(
-		'name' => 'dslc_plugin_options_archives[404_page]',
-		'label' => '404 Page',
-		'descr' => __( 'Custom template for 404 error page.', 'live-composer-page-builder' ),
-		'std' => 'none',
-		'type' => 'select',
-		'choices' => $lc_templates,
-	);
-
-	$dslc_plugin_options['dslc_plugin_options_archives'] = array(
-		'title' => __( 'Archives and Search', 'live-composer-page-builder' ),
-		'options' => $opts,
-	);
-
-} add_action( 'dslc_hook_register_options', 'dslc_archive_template_init' );
-*/
 
 /**
  * Fixes 404 on pagination caused when regular WP query has no more post
