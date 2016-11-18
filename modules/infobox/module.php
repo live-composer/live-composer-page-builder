@@ -921,7 +921,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'std' => 'center',
 				'type' => 'text_align',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-info-box-image-alt-inner',
+				'affect_on_change_el' => '.dslc-info-box-image-alt',
 				'affect_on_change_rule' => 'text-align',
 				'section' => 'styling',
 				'tab' => __( 'Image', 'live-composer-page-builder' ),
@@ -1041,6 +1041,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-image-alt-inner',
 				'affect_on_change_rule' => 'max-width',
 				'section' => 'styling',
+				'tab' => __( 'Image', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
 			array(
