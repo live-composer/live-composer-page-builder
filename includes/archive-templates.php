@@ -18,6 +18,78 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Load custom template for the archive listings.
  *
+ * @param  String $template  Path to a template to filter.
+ * @return String            Return the a full path to a template file.
+ * @since 1.0
+ */
+function dslc_template_redirects( $template ) {
+
+	global $post;
+
+	$template_custom = '';
+
+	if ( is_author() && $post ) {
+		// If authors archives page?
+		$template_custom = dslc_author_archive_template_redirect( $template );
+
+	} elseif ( is_archive() && $post ) {
+		// If archive page (when there are posts to show).
+		$template_custom = dslc_archive_template_redirect( $template );
+
+	} elseif ( is_search() && $post ) {
+		// If search results post.
+		$template_custom = dslc_search_template_redirect( $template );
+
+	} elseif ( is_404() ||
+			( is_archive() && ! $post ) ||
+			( is_search() && ! $post ) ||
+			( is_author() && ! $post ) ) {
+
+		// If 404 page.
+		// If Archive page and no posts to show.
+		// If Search page and no posts to show.
+		// If Author post listing and no posts to show.
+		// ---
+		// Redirect to 404 page if archive posts listing has no posts.
+		$template_custom = dslc_404_template_redirect( $template );
+
+	}
+
+	// Return custom or default template.
+	if ( $template_custom ) {
+		return $template_custom;
+	} else {
+		return $template;
+	}
+
+}
+/**
+ * Filter 'template_include'.
+ *
+ * This filter hook is executed immediately before WordPress includes
+ * the predetermined template file. This can be used to override
+ * WordPress's default template behavior.
+ */
+add_filter( 'template_include', 'dslc_template_redirects', 99 );
+
+
+/*
+	Below I was trying to fix redirects from author listing with no posts to show.
+	No luck for now.
+
+	function dslc_fix_unwanted_redirects( $redirect_url, $requested_url ) {
+
+		return $redirect_url;
+	}
+	// add_filter( 'redirect_canonical', 'dslc_fix_unwanted_redirects', 10, 2  );
+
+	// remove the filter 
+	remove_filter( 'redirect_canonical', 'filter_redirect_canonical', 10, 2 );
+*/
+
+/**
+ * Load custom template for the archive listings.
+ *
  * @param  String $archive_template  Path to a template to filter.
  * @return String                    Return the a full path to a template file.
  * @since 1.0
@@ -40,43 +112,10 @@ function dslc_archive_template_redirect( $archive_template ) {
 		return $archive_template;
 	}
 
-	$archive_template = DS_LIVE_COMPOSER_ABS . '/templates/dslc-archive.php';
+	$custom_archive_template = DS_LIVE_COMPOSER_ABS . '/templates/dslc-archive.php';
 
-	return $archive_template;
+	return $custom_archive_template;
 }
-/**
- * Filter 'template_include'.
- *
- * This filter hook is executed immediately before WordPress includes
- * the predetermined template file. This can be used to override
- * WordPress's default template behavior.
- */
-add_filter( 'template_include', 'dslc_archive_template_redirect', 99 );
-
-/**
- * Redirect to 404 page if archive posts listing has no posts
- *
- * @since 1.1
- * @return void
- */
-function dslc_archive_noposts() {
-
-	global $post;
-
-	// Allowed to do this?
-	if ( is_archive() & ! $post ) {
-
-		$template = dslc_get_option( '404_page', 'dslc_plugin_options_archives' );
-
-		if ( ! $template || 'none' === $template ) {
-			return;
-		}
-
-		wp_safe_redirect( get_permalink( $template ) );
-		exit;
-	}
-}
-add_action( 'template_redirect', 'dslc_archive_noposts' );
 
 
 /**
@@ -97,12 +136,12 @@ function dslc_author_archive_template_redirect( $archive_template ) {
 	return $archive_template;
 
 }
-// Replace the template used whenever the "author archive listing" template is called.
-add_filter( 'author_template', 'dslc_author_archive_template_redirect' );
 
 /**
- * Load custom template for search
+ * Load custom template for search.
  *
+ * @param  String $search_template  Path to a template to filter.
+ * @return String                  Return the a full path to a template file.
  * @since 1.0
  */
 function dslc_search_template_redirect( $search_template ) {
@@ -115,39 +154,33 @@ function dslc_search_template_redirect( $search_template ) {
 	$search_template = DS_LIVE_COMPOSER_ABS . '/templates/dslc-archive.php';
 	return $search_template;
 
-} add_filter( 'search_template', 'dslc_search_template_redirect' );
+}
 
 /**
  * Load custom template for 404
  *
+ * @param  String $template  Path to a template to filter.
+ * @return String            Return the a full path to a template file.
  * @since 1.0
  */
 function dslc_404_template_redirect( $template ) {
 
-	if ( is_404() ) {
+	$template_id = dslc_get_archive_template_by_pt( '404_page' );
 
-		$template = dslc_get_option( '404_page', 'dslc_plugin_options_archives' );
-
-		if ( ! $template || 'none' === $template ) {
-			return $template;
-		}
-
-		$not_found_template = DS_LIVE_COMPOSER_ABS . '/templates/dslc-404.php';
-
-		return $not_found_template;
+	if ( ! $template_id || 'none' === $template_id ) {
+		return $template;
 	}
 
-	return $template;
+	$not_found_template = DS_LIVE_COMPOSER_ABS . '/templates/dslc-404.php';
 
-} add_filter( 'template_include', 'dslc_404_template_redirect' );
-// add_filter( '404_template', 'dslc_404_template_redirect' );
+	return $not_found_template;
+}
 
 /**
  * Fixes 404 on pagination caused when regular WP query has no more post
  *
  * @since 1.0
  */
-
 function dslc_archive_template_404_fix( $query ) {
 
 	if ( $query->is_author() && $query->is_archive() && $query->is_main_query() ) {
@@ -162,7 +195,7 @@ function dslc_archive_template_404_fix( $query ) {
 } add_action( 'pre_get_posts', 'dslc_archive_template_404_fix' );
 
 /**
- * Flush permalinks when a 404 error is detected
+ * Flush permalinks when a 404 error is detected.
  *
  * Code from EDD (GPL).
  * https://github.com/easydigitaldownloads/easy-digital-downloads/
@@ -224,8 +257,7 @@ function dslc_redirect_unauthorized() {
 
 	// Allowed to do this?
 	if ( isset( $_GET['dslc'] ) && ( ! is_user_logged_in() || ! current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) ) {
-		wp_safe_redirect( get_permalink() );
+		wp_safe_redirect( get_home_url() );
 		exit;
 	}
-}
-add_action( 'template_redirect', 'dslc_redirect_unauthorized' );
+} add_action( 'template_redirect', 'dslc_redirect_unauthorized' );

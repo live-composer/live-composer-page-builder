@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * DSLC_EditorInterface class
  */
-class DSLC_EditorInterface{
+class DSLC_EditorInterface {
 
 	/**
 	 * Init all hooks
@@ -59,20 +59,104 @@ class DSLC_EditorInterface{
 		<?php
 	}
 
+	static function the_edit_singular_link() {
+
+		$string_open_lc    = __( 'Edit in Live Composer', 'live-composer-page-builder' );
+		$string_create_tpl = __( 'Create Template', 'live-composer-page-builder' );
+		$string_edit_tpl   = __( 'Edit Template', 'live-composer-page-builder' );
+		$preview_id        = '';
+
+		// If on a LC template post preview.
+		if ( 'dslc_templates' === get_post_type() ) {
+
+			self::the_editor_link( self::get_editor_link_url( get_the_ID() ), $string_edit_tpl );
+
+		// If a page or CPT like page – go ahead normally.
+		} elseif ( is_page() || ! dslc_cpt_use_templates( get_post_type() ) ) {
+
+			self::the_editor_link( self::get_editor_link_url( get_the_ID() ), $string_open_lc );
+
+		// If a post of the CPT managed by LC templates.
+		}  elseif ( dslc_can_edit_in_lc( get_post_type() ) ) {
+
+			// Check if it has a template attached to it.
+			$template = dslc_st_get_template_id( get_the_ID() );
+
+			if ( $template ) {
+
+				// Output the button.
+				self::the_editor_link( self::get_editor_link_url( $template, get_the_ID() ), $string_edit_tpl );
+
+			} else {
+
+				// Output the button.
+				self::the_editor_link( admin_url( 'post-new.php?post_type=dslc_templates&for=' . get_post_type() ) , $string_create_tpl );
+
+			}
+		}
+	}
+
+	static function the_edit_template_link( $page_data, $with_preivew_id = false ) {
+
+		$string_edit_tpl   = __( 'Edit Template', 'live-composer-page-builder' );
+		$string_create_tpl = __( 'Create Template', 'live-composer-page-builder' );
+		$preview_id        = '';
+
+		/**
+		 * Prepare 'preview_id' to be included in URL variables.
+		 * Preview id is needed for modules that rely on post ID.
+		 */
+		if ( $with_preivew_id ) {
+			$preview_id = get_queried_object_id();
+		}
+
+		if ( is_int( $page_data ) ) {
+			/**
+			 * Page ID provided with method call.
+			 *
+			 * We need to find a proper template that powers post with this ID,
+			 * or propose to create a template if nothing found.
+			 */
+
+			$post_id = $page_data;
+			$page_data = get_post_type(); // Needed for new template creation request.
+
+			// Check if it has a template attached to it.
+			$template_id = dslc_st_get_template_id( $post_id );
+
+		} else {
+			/**
+			 * Post type provided with method call.
+			 *
+			 * We need to find a proper template that powers post with this type,
+			 * or propose to create a template if nothing found.
+			 */
+
+			// Get ID of the template that powering current page/post.
+			$template_id = dslc_get_archive_template_by_pt( $page_data );
+
+		}
+
+		// If there is a page that powers it.
+		if ( $template_id ) {
+
+			// Output 'Edit Template' button.
+			self::the_editor_link( self::get_editor_link_url( $template_id, $preview_id ), $string_edit_tpl );
+
+		} else {
+
+			// Output 'Create Template' button.
+			self::the_editor_link( admin_url( 'post-new.php?post_type=dslc_templates&for=' . $page_data ) , $string_create_tpl );
+
+		}
+	}
+
 	/**
 	 * Shows button on front
 	 *
 	 * @echoes string{HTML}
 	 */
 	static function show_lc_button_on_front() {
-
-		$dslc_admin_interface_on = apply_filters( 'dslc_admin_interface_on_frontend', true );
-
-		if ( true !== $dslc_admin_interface_on ) {
-			return;
-		}
-
-		global $dslc_active, $dslc_var_templates_pt;
 
 		// Get the position of the activation button.
 		$activate_button_position = dslc_get_option( 'lc_module_activate_button_pos', 'dslc_plugin_options_other' );
@@ -92,110 +176,58 @@ class DSLC_EditorInterface{
 			return;
 		}
 
-		// If a singular page ( posts and pages ).
-		if ( is_singular() ) {
+		/**
+		 * Is current post type using LC templates system?
+		 */
+		$use_lc_templates = true;
 
-			// If a page go ahead normally.
-			if ( is_page() ) {
+		if ( dslc_can_edit_in_lc( get_post_type() ) &&
+				! dslc_cpt_use_templates( get_post_type() ) ) {
 
-				// Output the button.
-				self::the_editor_link( self::get_editor_link_url( get_the_ID() ), __( 'Activate Live Composer', 'live-composer-page-builder' ) );
+			$use_lc_templates = false;
+		}
 
-			// If a template post type go ahead normally.
-			} elseif ( 'dslc_templates' === get_post_type() ) {
+		/**
+		 * Is current post is LC template?
+		 */
+		$is_lc_template = false;
 
-				// Output the button.
-				self::the_editor_link( self::get_editor_link_url( get_the_ID() ), __( 'Edit Template', 'live-composer-page-builder' ) );
+		if ( 'dslc_templates' === get_post_type() ) {
+			$is_lc_template = true;
+		}
 
-			// If a post of the CPT managed by LC templates.
-			} elseif ( isset( $dslc_var_templates_pt[ get_post_type() ] )  ) {
+		if ( is_singular() && ! $use_lc_templates || $is_lc_template ) {
+			// If a singular page ( posts and pages ) and NOT using LC templates.
+			self::the_edit_singular_link();
 
-				// Check if it has a template attached to it.
-				$template = dslc_st_get_template_id( get_the_ID() );
+		} elseif ( is_singular() && $use_lc_templates  ) {
+			// If a singular page ( posts and pages ) and IS using LC templates.
+			self::the_edit_template_link( get_the_ID() );
 
-				if ( $template ) {
-
-					// Output the button.
-					self::the_editor_link( self::get_editor_link_url( $template, get_the_ID() ), __( 'Edit Template', 'live-composer-page-builder' ) );
-
-				} else {
-
-					// Output the button.
-					self::the_editor_link( admin_url( 'post-new.php?post_type=dslc_templates' ) , __( 'Create Template', 'live-composer-page-builder' ) );
-
-				}
-			}
-
-		// If a 404 page.
 		} elseif ( is_404() ) {
+			// If it's a 404 page.
+			self::the_edit_template_link( '404_page' );
 
-			// Get ID of the page set to power the 404 page.
-			$template_id = dslc_get_option( '404_page', 'dslc_plugin_options_archives' );
-
-			// If there is a page that powers it.
-			if ( 'none' !== $template_id ) {
-
-				// Output the button.
-				self::the_editor_link( self::get_editor_link_url( $template_id ), __( 'Activate Live Composer', 'live-composer-page-builder' ) );
-
-			}
-
-		// If authors archives page?
 		} elseif ( is_author() ) {
+			// If authors archives page?
+			self::the_edit_template_link( 'author' );
 
-			// Get ID of the page set to power the author archives.
-			$template_id = dslc_get_option( 'author', 'dslc_plugin_options_archives' );
-
-			// If there is a page that powers it?
-			if ( 'none' !== $template_id ) {
-
-				// Output the button.
-				self::the_editor_link( self::get_editor_link_url( $template_id, get_the_ID() ), __( 'Activate Live Composer', 'live-composer-page-builder' ) );
-
-			}
-
-		// If other archives ( not author )?
-		} elseif ( is_archive() && isset( $dslc_var_templates_pt[ get_post_type() ] ) ) {
+		} elseif ( is_archive() && dslc_can_edit_in_lc( get_post_type() ) ) {
+			// If other archives ( not author )?
+			// $count = $GLOBALS['wp_query']->post_count;
 
 			/**
 			 * Function get_post_type() returns type of the posts
 			 * in the current listing. We use it to decide what template to load.
 			 */
 			$listing_pt_slug = get_post_type();
-
-			// Get ID of the page set to power the archives of the shown post type.
-			$template_id =  dslc_get_archive_template_by_pt ( $listing_pt_slug );
-
-			// If there is a page that powers it?
-			if ( false !== $template_id ) {
-
-				// Prepare 'preview_id' in URL variables.
-				$preview_id = get_queried_object_id();
-
-				// Output the button.
-				self::the_editor_link( self::get_editor_link_url( $template_id, $preview_id ), __( 'Edit Template', 'live-composer-page-builder' ) );
-
-			} else {
-
-				// Output the button.
-				self::the_editor_link( admin_url( 'post-new.php?post_type=dslc_templates' ) , __( 'Create Template', 'live-composer-page-builder' ) );
-			}
+			self::the_edit_template_link( $listing_pt_slug, true );
 
 		// If a search results page (keep this check last!!).
 		} elseif ( is_search() ) {
 
-			// Get ID of the page set to power the search results page.
-			$template_id = dslc_get_option( 'search_results', 'dslc_plugin_options_archives' );
-
-			// If there is a page that powers it?
-			if ( 'none' !== $template_id ) {
-
-				// Output the button.
-				self::the_editor_link( self::get_editor_link_url( $template_id, get_the_ID() ), __( 'Activate Live Composer', 'live-composer-page-builder' ) );
-
-			}
+			self::the_edit_template_link( 'search_results' );
 		}
-
 
 		if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) :
 
