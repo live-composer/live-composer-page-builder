@@ -632,6 +632,10 @@
 							/*position: absolute;*/
 						}
 
+			#dslc-content .dslc-info-box-image-alt-inner {
+				display: inline-block;
+			}
+
 			#dslc-content .dslc-info-box-image-alt-inner img {
 				/*
 				-webkit-transition: all 0.2s ease-in-out;
