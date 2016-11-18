@@ -536,6 +536,7 @@ function dslc_filter_content( $content ) {
 	global $dslc_should_filter;
 	global $wp_the_query;
 	global $dslc_post_types;
+	global $post;
 
 	// Get ID of the post in which the content filter fired.
 	$curr_id = get_the_ID();
@@ -551,21 +552,21 @@ function dslc_filter_content( $content ) {
 	// 1) Proceed if ID of the post in which content filter fired is same as the post ID from the main query
 	// 2) Proceed if in a WordPress loop ( https://codex.wordpress.org/Function_Reference/in_the_loop )
 	// 3) Proceed if global var $dslc_should_filter is true
-	// Irrelevant of the other 3 proceed if archives, search or 404 page
+	// Irrelevant of the other 3 proceed if archives, search or 404 page.
 	if ( ( $curr_id == $real_id && in_the_loop() && $dslc_should_filter ) || ( is_archive() && $dslc_should_filter ) || is_author() || is_search() || is_404() ) {
 
-		// Variables that are used throughout the function
+		// Variables that are used throughout the function.
 		$composer_wrapper_before = '';
 		$composer_wrapper_after = '';
-		$composer_header_append = ''; // HTML to output after LC header HTML
-		$composer_footer_append = ''; // HTML to otuput after LC footer HTML
-		$composer_header = ''; // HTML for LC header
-		$composer_footer = ''; // HTML for LC footer
-		$composer_prepend = ''; // HTML to output before LC content
-		$composer_content = ''; // HTML for LC content
-		$composer_append = ''; // HTML to ouput after LC content
-		$template_code = false; // LC code if current post powered by template
-		$template_id = false; // ID of the template that powers current post
+		$composer_header_append = ''; // HTML to output after LC header HTML.
+		$composer_footer_append = ''; // HTML to otuput after LC footer HTML.
+		$composer_header = ''; // HTML for LC header.
+		$composer_footer = ''; // HTML for LC footer.
+		$composer_prepend = ''; // HTML to output before LC content.
+		$composer_content = ''; // HTML for LC content.
+		$composer_append = ''; // HTML to ouput after LC content.
+		$template_code = false; // LC code if current post powered by template.
+		$template_id = false; // ID of the template that powers current post.
 
 		// Wrapping all LC elements ( unless header/footer outputed by theme ).
 		if ( ! defined( 'DS_LIVE_COMPOSER_HF_AUTO' ) || DS_LIVE_COMPOSER_HF_AUTO ) {
@@ -583,7 +584,7 @@ function dslc_filter_content( $content ) {
 		$tut_ch_three = dslc_get_option( 'lc_tut_chapter_three', 'dslc_plugin_options_tuts' );
 		$tut_ch_four = dslc_get_option( 'lc_tut_chapter_four', 'dslc_plugin_options_tuts' );
 
-		// If current page set to be tutorial chapter one or four
+		// If current page set to be tutorial chapter one or four.
 		if ( get_the_ID() == $tut_ch_one || get_the_ID() == $tut_ch_four ) {
 			$tut_page = true;
 			$composer_code = '';
@@ -614,8 +615,10 @@ function dslc_filter_content( $content ) {
 			}
 		}
 
+		$showing_404_page = dslc_postid_is_404_template( $post->ID );
+
 		// If currently showing a category archive page.
-		if ( is_archive() && ! is_author() && ! is_search() ) {
+		if ( is_archive() && ! $showing_404_page && ! is_author() && ! is_search() ) {
 
 			$post_type_slug = get_post_type();
 
@@ -631,42 +634,43 @@ function dslc_filter_content( $content ) {
 			}
 		}
 
-		// If currently showing an author archive page
-		if ( is_author() ) {
+		// If currently showing an author archive page.
+		if ( is_author() && ! $showing_404_page ) {
 
-			// Get ID of the page set to power the author archives
+			// Get ID of the page set to power the author archives.
 			$template_id = dslc_get_option( 'author', 'dslc_plugin_options_archives' );
 
-			// If there is a page that powers it
+			// If there is a page that powers it.
 			if ( $template_id ) {
 
-				// Get LC code of the page
+				// Get LC code of the page.
 				$composer_code = dslc_get_code( $template_id );
 
 			}
-
 		}
 
-		// If currently showing a search results page
-		if ( is_search() ) {
+		// If currently showing a search results page.
+		if ( is_search() && ! $showing_404_page ) {
 
-			// Get ID of the page set to power the search results page
+			// Get ID of the page set to power the search results page.
 			$template_id = dslc_get_option( 'search_results', 'dslc_plugin_options_archives' );
 
-			// If there is a page that powers it
+			// If there is a page that powers it.
 			if ( $template_id ) {
 
-				// Get LC code of the page
+				// Get LC code of the page.
 				$composer_code = dslc_get_code( $template_id );
 
 			}
-
 		}
 
 		// If currently showing 404 page?
-		if ( is_404() ) {
+		if ( is_404() ||
+			( is_archive() && $showing_404_page ) ||
+			( is_search() && $showing_404_page ) ||
+			( is_author() && $showing_404_page ) ) {
 
-			// Get ID of the page set to power the 404 page
+			// Get ID of the page set to power the 404 page.
 			$template_id = dslc_get_option( '404_page', 'dslc_plugin_options_archives' );
 
 			// If there is a page that powers it?
@@ -760,6 +764,22 @@ function dslc_filter_content( $content ) {
 
 } add_filter( 'the_content', 'dslc_filter_content', 101 );
 
+
+/**
+ * Check if provided id is template for the custom 404 page.
+ *
+ * @param  int $post_id Post to check.
+ * @return bool         True post id = 404 template id, otherwise false.
+ */
+function dslc_postid_is_404_template( $post_id ) {
+	$template_404_id = dslc_get_option( '404_page', 'dslc_plugin_options_archives' );
+
+	if ( intval($post_id) === intval($template_404_id) ) {
+		return true;
+	}
+
+	return false;
+}
 
 /**
  * Alternative to do_shortcode used before.

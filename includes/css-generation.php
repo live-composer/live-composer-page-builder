@@ -106,32 +106,33 @@ function dslc_custom_css( $dslc_code = '' ) {
 
 		$template_id = false;
 
+		global $post;
+
 		// If single, load template?
 		if ( is_singular( $dslc_post_types ) ) {
 			$template_id = dslc_st_get_template_id( get_the_ID() );
 		}
 
 		// If archive, load template?
-		if ( is_archive() && ! is_author() && ! is_search() ) {
+		if ( is_archive() && $post && ! is_author() && ! is_search() ) {
 			$post_type = get_post_type();
 
-			if ( $post_type && 'post' === $post_type ) {
-				$post_type = 'post_archive';
-			}
-
-			$template_id = dslc_get_option( $post_type, 'dslc_plugin_options_archives' );
+			$template_id = dslc_get_archive_template_by_pt( $post_type );
 		}
 
-		if ( is_author() ) {
-			$template_id = dslc_get_option( 'author', 'dslc_plugin_options_archives' );
+		if ( is_author() && $post ) {
+			$template_id = dslc_get_archive_template_by_pt( 'author' );
 		}
 
-		if ( is_search() ) {
-			$template_id = dslc_get_option( 'search_results', 'dslc_plugin_options_archives' );
+		if ( is_search() && $post ) {
+			$template_id = dslc_get_archive_template_by_pt( 'search_results' );
 		}
 
-		if ( is_404() ) {
-			$template_id = dslc_get_option( '404_page', 'dslc_plugin_options_archives' );
+		if ( is_404() ||
+			( is_archive() && ! $post ) ||
+			( is_search() && ! $post ) ||
+			( is_author() && ! $post ) ) {
+			$template_id = dslc_get_archive_template_by_pt( '404_page' );
 		}
 
 		// Header/Footer.
