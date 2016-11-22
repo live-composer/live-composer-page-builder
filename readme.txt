@@ -143,6 +143,7 @@ Upcoming Releases:
 
 = Bug fixes: =
 
+* Issue [#411](https://github.com/livecomposer/live-composer-page-builder/issues/411): Header/Footer editing is broken.
 * Issue [#368](https://github.com/livecomposer/live-composer-page-builder/issues/368): Border hover on buttons not working.
 * Issue [#307](https://github.com/livecomposer/live-composer-page-builder/issues/307): Dropdown control do not open when clicking on the arrows.
 * Issue [#319](https://github.com/livecomposer/live-composer-page-builder/issues/319): Archive index templates not loading on custom taxonomies.

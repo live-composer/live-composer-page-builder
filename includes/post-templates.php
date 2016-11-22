@@ -63,12 +63,15 @@ function dslc_can_edit_in_lc( $post_data ) {
 	if ( is_int( $post_data ) ) {
 		# code...
 	} else {
-		// Attribue $post_data is post type.
+		// Parameter $post_data is post type.
 		$post_type = $post_data;
 
 		// If $post_type is included in $dslc_var_templates_pt (can edit with LC).
 		if ( array_key_exists( $post_type, $dslc_var_templates_pt ) ||
 				array_key_exists( $post_type, $dslc_enabled_cpt ) ) {
+			return true;
+		} elseif ( 'dslc_hf' === $post_type ) {
+			// Make header/footer CPT as editable.
 			return true;
 		}
 	}
