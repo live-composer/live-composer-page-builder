@@ -64,7 +64,7 @@ class DSLC_Video_Embed extends DSLC_Module {
 			array(
 				'label' => __( 'Embed code', 'live-composer-page-builder' ),
 				'id' => 'content',
-				'std' => 'A video embed needs to be set in the module options.',
+				'std' => 'Paste here the embed code.',
 				'type' => 'textarea',
 				'section' => 'functionality',
 			),
