@@ -1287,6 +1287,28 @@ class DSLC_Info_Box extends DSLC_Module {
 				'tab' => __( 'Content', 'live-composer-page-builder' ),
 			),
 			array(
+				'label' => __( 'Link Color', 'live-composer-page-builder' ),
+				'id' => 'css_content_link_color',
+				'std' => '',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-content a',
+				'affect_on_change_rule' => 'color',
+				'section' => 'styling',
+				'tab' => __( 'Content', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Link - Hover Color', 'live-composer-page-builder' ),
+				'id' => 'css_content_link_color_hover',
+				'std' => '',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-content a:hover',
+				'affect_on_change_rule' => 'color',
+				'section' => 'styling',
+				'tab' => __( 'Content', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_content_font_size',
 				'onlypositive' => true, // Value can't be negative.
