@@ -444,77 +444,6 @@ function dslc_is_module_active( $module_id, $check_registered = false ) {
 }
 
 /**
- * Save Preset
- *
- * @since 1.0
- */
-function dslc_save_preset( $preset_name, $preset_code_raw, $module_id ) {
-
-	$preset_id = strtolower( str_replace( ' ', '-', $preset_name ) );
-
-	// Clean up ( step 1 - get data ).
-	$preset_code_raw = dslc_json_decode( $preset_code_raw );
-	$preset_code = array();
-
-	// The ID of the module to add.
-	$module_id = esc_attr( $module_id );
-
-	if ( ! class_exists( $module_id ) ) {
-
-		header( 'HTTP/1.1 400 Bad Request', true, 400 );
-		die();
-	}
-
-	$module = new $module_id();
-	$module_options = $module->options();
-
-	// Clean up ( step 2 - generate correct preset code ).
-	foreach ( $module_options as $module_option ) {
-
-		// Allowed to have a preset.
-		if ( ! isset( $module_option['include_in_preset'] ) || true === $module_option['include_in_preset'] ) {
-
-			// Modules section not set or module section not functionality.
-			if ( ( isset( $module_option['section'] ) && 'functionality' !== $module_option['section'] ) && ( ! isset( $module_option['visibility'] ) || 'hidden' !== $module_option['visibility'] ) ) {
-
-				if ( isset( $preset_code_raw[ $module_option['id'] ] ) ) {
-					$preset_code[ $module_option['id'] ] = $preset_code_raw[ $module_option['id'] ];
-				}
-			}
-		}
-	}
-
-	// Clean up ( step 3 - final ).
-	$preset_code = base64_encode( maybe_serialize( $preset_code ) );
-
-	// Get current presets.
-	$presets = get_option( 'dslc_presets' );
-
-	// No presets = make empty array OR presets found = unserialize.
-	if ( $presets === false ) {
-		$presets = array();
-	} else {
-		$presets = maybe_unserialize( $presets );
-	}
-
-	// Append new preset to presets array.
-	$presets[$preset_id] = array(
-		'title' => $preset_name,
-		'id' => $preset_id,
-		'code' => $preset_code,
-		'module' => $module_id
-	);
-
-	// Save new presets array to db and set the status.
-	if ( update_option( 'dslc_presets', maybe_serialize( $presets ) ) ) {
-		return true;
-	} else {
-		return false;
-	}
-
-}
-
-/**
  * Check if editor is currently active
  *
  * @since 1.0
@@ -834,3 +763,164 @@ function dslc_code_migration( $settings ) {
 
 	return $settings;
 }
+
+function dslc_sanitize_option_val ( $data_to_sanitize ) {
+
+	$id = $data_to_sanitize['id'];
+	$value = $data_to_sanitize['value'];
+
+	if ( stristr( $value, '{\\') ) {
+		// Filter out values with json code left by broken presets functionality.
+		return '';
+	} else {
+		return $value;
+	}
+}
+
+/*
+Work in progress.
+
+function dslc_sanitize_option_val ( $data_to_sanitize ) {
+
+	$id = $data_to_sanitize['id'];
+
+	$value = $data_to_sanitize['value'];
+	$value_std = '';
+	$option_type = '';
+	$option_sanitize = '';
+
+	if ( stristr( $id, 'css_' ) ) {
+		// Sanitize CSS properties.
+
+		// Allowed values (desktop ..., -80%, 20px, rgba(34,234,23), #0000).
+		$pattern = '/^[0-9,a-z, ,\.,\-,(),#,%]{1,30}$/is';
+
+		// CSS Value can't be more that 30 characters long. Don't ask why :).
+		if ( preg_match( $pattern, $value ) ) {
+			return $value;
+		} else {
+			return '';
+		}
+
+	} else {
+		// Sanitize all other properties.
+
+		// Extract all the option settings from the module settings.
+		if ( isset( $data_to_sanitize['definition'] ) ) {
+
+			$option_settings = $data_to_sanitize['definition'];
+
+			if ( isset( $option_settings['type'] ) ) {
+				$option_type = $option_settings['type'];
+			}
+
+			if ( isset( $option_settings['std'] ) ) {
+				$value_std = $option_settings['std'];
+			}
+
+			if ( isset( $option_settings['sanitize'] ) ) {
+				$option_sanitize = $option_settings['sanitize'];
+			}
+		}
+
+		// First of all check if current value is default.
+		if ( $value === $value_std ) {
+			return $value;
+		}
+
+		// If there is no special sanitization option for the current option.
+		if ( ! $option_sanitize ) {
+
+			if ( 'slider' === $option_type ) {
+
+				// Allow numbers only.
+				$pattern_slider = '/^[0-9]{1,9}$/s';
+
+				if ( preg_match( $pattern_slider, $value ) ) {
+					return $value;
+				} else {
+					return '';
+				}
+			} elseif ( 'color' === $option_type ) {
+
+				// Allowed characters.
+				$pattern_color = '/^[0-9,a-zA-Z, ,\.,(),#]{1,30}$/s';
+
+				if ( preg_match( $pattern_color, $value ) ) {
+					return $value;
+				} else {
+					return '';
+				}
+			} elseif ( 'font' === $option_type ) {
+
+				// Allowed characters.
+				$pattern_font = '/^[0-9,a-zA-Z, ,",\',_,-]{1,80}$/s';
+
+				if ( preg_match( $pattern_font, $value ) ) {
+					return $value;
+				} else {
+					return '';
+				}
+			} elseif ( 'icon' === $option_type ) {
+
+				// Allowed characters.
+				$pattern_icon = '/^[0-9,a-zA-Z, ,_,-]{1,30}$/s';
+
+				if (preg_match( $pattern_icon, $value ) ) {
+					return $value;
+				} else {
+					return '';
+				}
+			} elseif ( 'image' === $option_type ) {
+
+				// Allow numbers only for image IDs.
+				$pattern_image = '/^[0-9]{1,9}$/s';
+
+				if ( stristr( $value, '/') ) {
+					// Image is URL.
+					return esc_url( $value );
+				} elseif ( preg_match( $pattern_image, $value ) ) {
+					// Image is ID.
+					return $value;
+				} else {
+					// Non-valid.
+					return '';
+				}
+			} elseif ( 'checkbox' === $option_type || 'select' === $option_type ) {
+				return $value;
+			} elseif ( 'text' === $option_type && stristr( $id, '_class' ) ) {
+
+				// Allowed characters.
+				$pattern_font = '/^[0-9,a-zA-Z, ,",\',_,-]{1,80}$/s';
+
+				if ( preg_match( $pattern_font, $value ) ) {
+					return $value;
+				} else {
+					return '';
+				}
+			} elseif ( 'text' === $option_type && stristr( $id, '_url' ) ) {
+
+				// Allowed characters.
+				$pattern_relative_path = '/^[^\s/$.?#]*[^\s]*$/is';
+
+				if ( stristr( $value , 'http') ) {
+					return esc_url( $value );
+				} elseif ( preg_match( $pattern_relative_path, $value ) && 1000 > strlen( $value ) ) {
+					return $value;
+				} else {
+					return '';
+				}
+			} elseif ( 'text' ) {
+				return ;
+			} elseif ( stristr( $id, '_onclick' ) ) {
+				return esc_js( $value );
+			} else {
+				// All other cases.
+				return esc_attr($value );
+			}
+		}
+	}
+
+	// return $value;
+}
+*/
