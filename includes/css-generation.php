@@ -400,12 +400,16 @@ function dslc_generate_custom_css( $module_structure, $module_settings, $restart
 
 	foreach ( $module_structure as $single_option ) {
 
+		// Make sure our function do not break when setting case is wrong.
+		$single_option['tab'] = strtolower( $single_option['tab'] );
+		$single_option['section'] = strtolower( $single_option['section'] );
+
 		if ( isset( $single_option['section'] ) && 'responsive' === $single_option['section'] ) {
 
-			if ( isset( $single_option['tab'] ) && 'Phone' === $single_option['tab'] ) {
+			if ( isset( $single_option['tab'] ) && 'phone' === $single_option['tab'] ) {
 
 				$module_structure_resp_phone[] = $single_option;
-			} elseif ( 'Tablet' === $single_option['tab'] ) {
+			} elseif ( 'tablet' === $single_option['tab'] ) {
 
 				$module_structure_resp_tablet[] = $single_option;
 			}
@@ -424,7 +428,7 @@ function dslc_generate_custom_css( $module_structure, $module_settings, $restart
 		$module_structure['tablet'] = $module_structure_resp_tablet;
 	}
 
-	if ( isset( $module_settings['css_res_p'] ) &&  'enabled' === $module_settings['css_res_p'] ) {
+	if ( isset( $module_settings['css_res_p'] ) && 'enabled' === $module_settings['css_res_p'] ) {
 
 		$module_structure['phone'] = $module_structure_resp_phone;
 	}
@@ -508,11 +512,13 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 		// if ( isset( $module_settings[ $option_id ] ) && ! empty( $module_settings[ $option_id ] )  ) {
 		if ( isset( $module_settings[ $option_id ] ) && '' !== $module_settings[ $option_id ] && false !== $module_settings[ $option_id ]  ) {
 
+			// Never strip responsive enable/disable property.
 			// Fix for "alter_defaults" and responsive tablet state.
 			if ( 'css_res_t' === $option_id && 'enabled' === $option_arr['std'] && ! isset( $module_settings['css_res_t'] ) ) {
 				$module_settings['css_res_t'] = 'enabled';
 			}
 
+			// Never strip responsive enable/disable property.
 			// Fix for "alter_defaults" and responsive phone state.
 			if ( 'css_res_p' === $option_id && 'enabled' === $option_arr['std'] && ! isset( $module_settings['css_res_p'] ) ) {
 				$module_settings['css_res_p'] = 'enabled';
