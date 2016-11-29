@@ -1173,7 +1173,7 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1 ) {
 		$bg_video = '
 		<div class="dslc-bg-video">
 			<div class="dslc-bg-video-inner">
-				<video>
+				<video muted autoplay loop playsinline webkit-playsinline>
 					<source type="video/mp4" src="' . $atts['bg_video'] . '.mp4" />
 					<source type="video/webm" src="' . $atts['bg_video'] . '.webm" />
 				</video>

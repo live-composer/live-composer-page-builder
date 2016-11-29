@@ -281,6 +281,15 @@ function dslc_carousel_responsive() {
  */
 function dslc_bg_video() {
 
+	//Test for playing video without user interaction
+	//Most browsers that don't (mobile browsers) will either support autoplay+muted or won't support background video at all
+	var test = document.createElement("video");
+	var playAllowed = true;
+	test.play();
+	if(test.paused){
+		playAllowed = false;
+	}
+
 	jQuery('.dslc-bg-video').each(function(){
 
 		if ( ! jQuery(this).find( 'video' ).length ) {
@@ -289,18 +298,30 @@ function dslc_bg_video() {
 		}
 	});
 
-	jQuery('.dslc-bg-video video').mediaelementplayer({
-		loop: true,
-		pauseOtherPlayers: false,
-		success: function(mediaElement, domObject) {
+	if(playAllowed){
 
-			mediaElement.addEventListener('loadeddata', function (e) {
-				jQuery(domObject).closest('.dslc-bg-video').animate({ opacity : 1 }, 400);
-			});
+		//If the browser allows programatic play, let mediaelementplayer handle it
+		jQuery('.dslc-bg-video video').mediaelementplayer({
+			loop: true,
+			pauseOtherPlayers: false,
+			success: function(mediaElement, domObject) {
 
-			mediaElement.play();
-		}
-	});
+				mediaElement.addEventListener('loadeddata', function (e) {
+					jQuery(domObject).closest('.dslc-bg-video').animate({ opacity : 1 }, 400);
+				});
+			}
+		});
+	} else {
+
+		//if the browser doesn't support programmatic play, see if they've started autoplaying anyway. If they have, show them. If they haven't, leave everything alone
+		jQuery('.dslc-bg-video').each(function(){
+			var video = jQuery(this).find( 'video' );
+			if( video.length && !video[0].paused ){
+				jQuery(this).animate({opacity: 1}, 400);
+			}
+		});
+	}
+
 }
 
 /**
