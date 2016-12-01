@@ -4,7 +4,7 @@
  * Plugin URI: https://www.livecomposerplugin.com
  * Description: Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
  * Author: Live Composer Team
- * Version: 1.1.5
+ * Version: 1.1.8
  * Author URI: https://livecomposerplugin.com
  * License: GPL2
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -42,14 +42,14 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) ):
 	 * Constants
 	 */
 
-	define( 'DS_LIVE_COMPOSER_VER', '1.1.5' );
+	define( 'DS_LIVE_COMPOSER_VER', '1.1.8' );
 
 	define( 'DS_LIVE_COMPOSER_SHORTNAME', __( 'Live Composer', 'live-composer-page-builder' ) );
 	define( 'DS_LIVE_COMPOSER_BASENAME', plugin_basename( __FILE__ ) );
 	define( 'DS_LIVE_COMPOSER_URL', plugin_dir_url( __FILE__ ) );
 	define( 'DS_LIVE_COMPOSER_DIR_NAME', dirname( plugin_basename( __FILE__ ) ) );
 	define( 'DS_LIVE_COMPOSER_ABS', dirname( __FILE__ ) );
-	define( 'DS_LIVE_COMPOSER_DEV_MODE', false );
+	define( 'DS_LIVE_COMPOSER_DEV_MODE', false ); // Used by theme/plugin developers only.
 
 	define( 'DSLC_PO_FRAMEWORK_ABS', DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework' );
 	define( 'DSLC_ST_FRAMEWORK_ABS', DS_LIVE_COMPOSER_ABS . '/includes/single-templates-framework' );
@@ -115,7 +115,7 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) ):
 
 	include DS_LIVE_COMPOSER_ABS . '/includes/editing-screen.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/other-functions.php';
-	include DS_LIVE_COMPOSER_ABS . '/includes/css-generation/css-for-modules.php';
+	include DS_LIVE_COMPOSER_ABS . '/includes/css-generation.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/functions.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/display-functions.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/editorinterface.class.php';

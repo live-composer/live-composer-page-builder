@@ -623,7 +623,8 @@ function dslc_ajax_import_modules_section( $atts ) {
 
 
 /**
- * Return the code to alter defaults for a module
+ * Return the code to alter defaults for a module.
+ * Used by the theme/plugin developers to the module defaults.
  *
  * @since 1.0
  */
@@ -664,6 +665,11 @@ function dslc_ajax_dm_module_defaults_code( $atts ) {
 
 					if ( $settings_new[ $setting['id'] ] !== $settings[ $key ]['std'] ) {
 						$code .= "		'" . $setting['id'] . "' => '" . $settings_new[$setting['id']] . "',
+";
+					}
+				} else {
+					if ( isset( $settings[ $key ]['std'] ) && '' !== $settings[ $key ]['std'] ) {
+						$code .= "		'" . $setting['id'] . "' => '" . "',
 ";
 					}
 				}

@@ -179,7 +179,8 @@ body a:focus {
 	height: auto;
 }
 
-.dslca-container select {
+.dslca-container select,
+.dslca-modules-section-edit-option select {
 	line-height: 12px; /* Fixes the height in Safari */
 	padding: 6px 10px;
 	min-height: 32px;
@@ -190,6 +191,8 @@ body a:focus {
    appearance: none;
 
    cursor: pointer;
+
+   background: url(../../images/dropdown-arrow.png) 90% 55% / 7px no-repeat #6c9fed;
 }
 
 
@@ -1222,7 +1225,7 @@ body #wpbody-content {
 				.dslca-modules-section-edit-option input[type="number"],
 				.dslca-modules-section-edit-option textarea,
 				.dslca-modules-section-edit-option select {
-					background: #6c9fed;
+					background-color: #6c9fed;
 					border: 1px solid #447bce;
 					width: 100%;
 					height: auto;
@@ -2683,7 +2686,7 @@ body.rtl .dslca-modules-area-placeholder {
 
 /** Modal Window class */
 
-.dslca-prompt-modal-msg textarea.js-error-text{
+.dslca-prompt-modal-msg textarea{
 	width: 100%;
     min-height: 80px;
     padding: 5px;

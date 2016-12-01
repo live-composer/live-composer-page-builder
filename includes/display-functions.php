@@ -8,7 +8,6 @@
  * - dslc_display_templates ( Displays a list of active templates )
  * - dslc_filter_content ( Filters the_content() to show composer output )
  * - dslc_module_front ( Returns front-end output of a specific module )
- * - dslc_custom_css ( Generates Custom CSS for the show page )
  * – dslc_modules_section_front ( HTML output for the sections )
  * – dslc_module_front ( HTML output for the modules/elements )
  */
@@ -619,6 +618,7 @@ function dslc_filter_content( $content ) {
 	global $dslc_should_filter;
 	global $wp_the_query;
 	global $dslc_post_types;
+	global $post;
 
 	// Get ID of the post in which the content filter fired.
 	$curr_id = get_the_ID();
@@ -634,21 +634,21 @@ function dslc_filter_content( $content ) {
 	// 1) Proceed if ID of the post in which content filter fired is same as the post ID from the main query
 	// 2) Proceed if in a WordPress loop ( https://codex.wordpress.org/Function_Reference/in_the_loop )
 	// 3) Proceed if global var $dslc_should_filter is true
-	// Irrelevant of the other 3 proceed if archives, search or 404 page
+	// Irrelevant of the other 3 proceed if archives, search or 404 page.
 	if ( ( $curr_id == $real_id && in_the_loop() && $dslc_should_filter ) || ( is_archive() && $dslc_should_filter ) || is_author() || is_search() || is_404() ) {
 
-		// Variables that are used throughout the function
+		// Variables that are used throughout the function.
 		$composer_wrapper_before = '';
 		$composer_wrapper_after = '';
-		$composer_header_append = ''; // HTML to output after LC header HTML
-		$composer_footer_append = ''; // HTML to otuput after LC footer HTML
-		$composer_header = ''; // HTML for LC header
-		$composer_footer = ''; // HTML for LC footer
-		$composer_prepend = ''; // HTML to output before LC content
-		$composer_content = ''; // HTML for LC content
-		$composer_append = ''; // HTML to ouput after LC content
-		$template_code = false; // LC code if current post powered by template
-		$template_id = false; // ID of the template that powers current post
+		$composer_header_append = ''; // HTML to output after LC header HTML.
+		$composer_footer_append = ''; // HTML to otuput after LC footer HTML.
+		$composer_header = ''; // HTML for LC header.
+		$composer_footer = ''; // HTML for LC footer.
+		$composer_prepend = ''; // HTML to output before LC content.
+		$composer_content = ''; // HTML for LC content.
+		$composer_append = ''; // HTML to ouput after LC content.
+		$template_code = false; // LC code if current post powered by template.
+		$template_id = false; // ID of the template that powers current post.
 
 		// Wrapping all LC elements ( unless header/footer outputed by theme ).
 		if ( ! defined( 'DS_LIVE_COMPOSER_HF_AUTO' ) || DS_LIVE_COMPOSER_HF_AUTO ) {
@@ -666,7 +666,7 @@ function dslc_filter_content( $content ) {
 		$tut_ch_three = dslc_get_option( 'lc_tut_chapter_three', 'dslc_plugin_options_tuts' );
 		$tut_ch_four = dslc_get_option( 'lc_tut_chapter_four', 'dslc_plugin_options_tuts' );
 
-		// If current page set to be tutorial chapter one or four
+		// If current page set to be tutorial chapter one or four.
 		if ( get_the_ID() == $tut_ch_one || get_the_ID() == $tut_ch_four ) {
 			$tut_page = true;
 			$composer_code = '';
@@ -697,17 +697,15 @@ function dslc_filter_content( $content ) {
 			}
 		}
 
+		$showing_404_page = dslc_postid_is_404_template( $post->ID );
+
 		// If currently showing a category archive page.
-		if ( is_archive() && ! is_author() && ! is_search() ) {
+		if ( is_archive() && ! $showing_404_page && ! is_author() && ! is_search() ) {
 
-			$post_type = get_post_type();
-
-			if ( 'post' === $post_type ) {
-				$post_type = 'post_archive';
-			}
+			$post_type_slug = get_post_type();
 
 			// Get ID of the page set to power the category of the current post type.
-			$template_id = dslc_get_option( $post_type, 'dslc_plugin_options_archives' );
+			$template_id = dslc_get_archive_template_by_pt( $post_type_slug );
 
 			// If there is a page that powers it.
 			if ( $template_id ) {
@@ -718,42 +716,43 @@ function dslc_filter_content( $content ) {
 			}
 		}
 
-		// If currently showing an author archive page
-		if ( is_author() ) {
+		// If currently showing an author archive page.
+		if ( is_author() && ! $showing_404_page ) {
 
-			// Get ID of the page set to power the author archives
+			// Get ID of the page set to power the author archives.
 			$template_id = dslc_get_option( 'author', 'dslc_plugin_options_archives' );
 
-			// If there is a page that powers it
+			// If there is a page that powers it.
 			if ( $template_id ) {
 
-				// Get LC code of the page
+				// Get LC code of the page.
 				$composer_code = dslc_get_code( $template_id );
 
 			}
-
 		}
 
-		// If currently showing a search results page
-		if ( is_search() ) {
+		// If currently showing a search results page.
+		if ( is_search() && ! $showing_404_page ) {
 
-			// Get ID of the page set to power the search results page
+			// Get ID of the page set to power the search results page.
 			$template_id = dslc_get_option( 'search_results', 'dslc_plugin_options_archives' );
 
-			// If there is a page that powers it
+			// If there is a page that powers it.
 			if ( $template_id ) {
 
-				// Get LC code of the page
+				// Get LC code of the page.
 				$composer_code = dslc_get_code( $template_id );
 
 			}
-
 		}
 
 		// If currently showing 404 page?
-		if ( is_404() ) {
+		if ( is_404() ||
+			( is_archive() && $showing_404_page ) ||
+			( is_search() && $showing_404_page ) ||
+			( is_author() && $showing_404_page ) ) {
 
-			// Get ID of the page set to power the 404 page
+			// Get ID of the page set to power the 404 page.
 			$template_id = dslc_get_option( '404_page', 'dslc_plugin_options_archives' );
 
 			// If there is a page that powers it?
@@ -847,6 +846,22 @@ function dslc_filter_content( $content ) {
 
 } add_filter( 'the_content', 'dslc_filter_content', 101 );
 
+
+/**
+ * Check if provided id is template for the custom 404 page.
+ *
+ * @param  int $post_id Post to check.
+ * @return bool         True post id = 404 template id, otherwise false.
+ */
+function dslc_postid_is_404_template( $post_id ) {
+	$template_404_id = dslc_get_option( '404_page', 'dslc_plugin_options_archives' );
+
+	if ( intval($post_id) === intval($template_404_id) ) {
+		return true;
+	}
+
+	return false;
+}
 
 /**
  * Alternative to do_shortcode used before.
@@ -1475,7 +1490,7 @@ function dslc_modules_area_front( $atts, $content = null, $version = 1 ) {
 
 		// Modules output
 		if ( empty( $content ) || $content == ' ' ) {
-					$output .= ''; //'&nbsp;';
+			$output .= ''; //'&nbsp;';
 		} else {
 			$output .= $content_render;
 		}
@@ -1511,239 +1526,6 @@ function dslc_load_template( $filename, $default = '' ) {
 
 	}
 
-}
-
-/**
- * Custom CSS
- *
- * @since 1.0
- */
-function dslc_custom_css( $dslc_code = '' ) {
-
-	// Allow theme developers to output CSS for non-standard custom post types.
-	$dslc_custom_css_ignore_check = false;
-	$dslc_custom_css_ignore_check = apply_filters( 'dslc_generate_custom_css', $dslc_custom_css_ignore_check );
-
-	if ( $dslc_code ) {
-
-		$dslc_custom_css_ignore_check = true;
-	}
-
-	if ( ! is_singular() &&
-		 ! is_archive() &&
-		 ! is_author() &&
-		 ! is_search() &&
-		 ! is_404() &&
-		 ! is_home() &&
-		 ! $dslc_custom_css_ignore_check
-	) {
-
-		return;
-	}
-
-	global $dslc_active;
-	global $dslc_css_style;
-	global $content_width;
-	global $dslc_post_types;
-
-	$composer_code;
-	$template_code;
-
-	$lc_width = dslc_get_option( 'lc_max_width', 'dslc_plugin_options' );
-
-	if ( empty( $lc_width ) ) {
-
-		$lc_width = $content_width . 'px';
-	} else {
-
-		if ( false === strpos( $lc_width, 'px' ) && false === strpos( $lc_width, '%' ) ) {
-
-			$lc_width = $lc_width . 'px';
-		}
-	}
-
-	// Filter $lc_width ( for devs ).
-	$lc_width = apply_filters( 'dslc_content_width', $lc_width );
-
-	if ( ! $dslc_code ) {
-
-		$template_id = false;
-
-		// If single, load template?
-		if ( is_singular( $dslc_post_types ) ) {
-			$template_id = dslc_st_get_template_id( get_the_ID() );
-		}
-
-		// If archive, load template?
-		if ( is_archive() && ! is_author() && ! is_search() ) {
-			$post_type = get_post_type();
-
-			if ( $post_type && 'post' === $post_type ) {
-				$post_type = 'post_archive';
-			}
-
-			$template_id = dslc_get_option( $post_type, 'dslc_plugin_options_archives' );
-		}
-
-		if ( is_author() ) {
-			$template_id = dslc_get_option( 'author', 'dslc_plugin_options_archives' );
-		}
-
-		if ( is_search() ) {
-			$template_id = dslc_get_option( 'search_results', 'dslc_plugin_options_archives' );
-		}
-
-		if ( is_404() ) {
-			$template_id = dslc_get_option( '404_page', 'dslc_plugin_options_archives' );
-		}
-
-		// Header/Footer.
-		if ( $template_id ) {
-			$header_footer = dslc_hf_get_ID( $template_id );
-		} else if ( is_singular( $dslc_post_types ) ) {
-			$template_id = dslc_st_get_template_id( get_the_ID() );
-			$header_footer = dslc_hf_get_ID( $template_id );
-		} else {
-			$header_footer = dslc_hf_get_ID( get_the_ID() );
-		}
-
-		// Header.
-		if ( $header_footer['header'] ) {
-			$header_code = get_post_meta( $header_footer['header'], 'dslc_code', true );
-		}
-
-		// Footer.
-		if ( $header_footer['footer'] ) {
-			$footer_code = get_post_meta( $header_footer['footer'], 'dslc_code', true );
-		}
-
-		// Template content.
-		if ( $template_id ) {
-			$template_code = get_post_meta( $template_id, 'dslc_code', true );
-		}
-
-		// Post/Page content.
-		$post_id = get_the_ID();
-		$composer_code = get_post_meta( $post_id, 'dslc_code', true );
-
-	} else { // ! $dslc_code.
-
-		$composer_code = $dslc_code;
-	}
-
-	echo '<style type="text/css">';
-
-	$output_css = false;
-
-	// Generate CSS if page code is set.
-	// Genrated code added into $dslc_css_style global var.
-	if ( isset( $composer_code ) && $composer_code ) {
-		dslc_render_css( $composer_code );
-		$output_css = true;
-	}
-
-	// Generate CSS if template code is set.
-	// Genrated code added into $dslc_css_style global var.
-	if ( isset( $template_code ) && $template_code ) {
-		dslc_render_css( $template_code );
-		$output_css = true;
-	}
-
-	// Generate CSS if header code is set.
-	// Genrated code added into $dslc_css_style global var.
-	if ( isset( $header_code ) && $header_code ) {
-		dslc_render_css( $header_code );
-		$output_css = true;
-	}
-
-	// Generate CSS if footer code is set.
-	// Genrated code added into $dslc_css_style global var.
-	if ( isset( $footer_code ) && $footer_code ) {
-		dslc_render_css( $footer_code );
-		$output_css = true;
-	}
-
-	dslc_render_gfonts();
-
-	// Wrapper width.
-	echo '.dslc-modules-section-wrapper, .dslca-add-modules-section { width : ' . $lc_width . '; } ';
-
-
-	// Add horizontal padding to the secitons (set in the plugins settings).
-	$section_padding_hor = dslc_get_option( 'lc_section_paddings', 'dslc_plugin_options' );
-
-	if ( ! empty( $section_padding_hor ) ) {
-
-		echo '.dslc-modules-section:not(.dslc-full) { padding-left: ' . $section_padding_hor . ';  padding-right: ' . $section_padding_hor . '; } ';
-
-	}
-
-
-
-	// Initial ( default ) row CSS.
-	echo dslc_row_get_initial_style();
-
-	// Echo CSS style.
-	if ( ! $dslc_active ) {
-		if ( $dslc_custom_css_ignore_check || $output_css ) {
-			echo $dslc_css_style;
-		}
-	}
-
-	echo '</style>';
-}
-
-
-/**
- * Rename shortcodes in the dslc_code for CSS generation.
- * Not used in new version of dslc_code (JSON based).
- */
-function dslc_shortcodes_add_suffix_css( $composer_code ){
-
-	// Replace shortcode names.
-	$composer_code = str_replace( 'dslc_modules_section', 'dslc_modules_section_gen_css', $composer_code );
-	$composer_code = str_replace( 'dslc_modules_area', 'dslc_modules_area_gen_css', $composer_code );
-	$composer_code = str_replace( '[dslc_module]', '[dslc_module_gen_css]', $composer_code );
-	$composer_code = str_replace( '[dslc_module ', '[dslc_module_gen_css ', $composer_code );
-	$composer_code = str_replace( '[/dslc_module]', '[/dslc_module_gen_css]', $composer_code );
-
-	return $composer_code;
-
-}
-
-/**
- * Render CSS code based on provided raw code of the page.
- * Works with both old (shortcodes) and new verion (JSON) of dslc_code.
- */
-function dslc_render_css( $composer_code ) {
-
-	// $composer_code = maybe_unserialize( $composer_code );
-	$composer_code_array = dslc_json_decode( $composer_code );
-
-	if ( is_array( $composer_code_array ) ) {
-		// JSON based code version.
-		// Go though ROWs.
-		foreach ( $composer_code_array as $row) {
-			// Go through each Module Area.
-			foreach ( $row['content'] as $module_area) {
-				// Go through each Module.
-				foreach ( $module_area['content'] as $module) {
-
-					dslc_module_gen_css( array(), $module );
-				}
-			}
-		}
-
-	} else {
-		// Old (shortcodes based) code version.
-		// Replace shortcode names.
-		$composer_code = dslc_shortcodes_add_suffix_css( $composer_code );
-
-		// Do CSS shortcode.
-		$css_output = do_shortcode( $composer_code );
-
-		return $css_output;
-	}
 }
 
 function dslc_render_gfonts() {
@@ -1802,119 +1584,6 @@ function dslc_render_gfonts() {
 		}
 	}
 }
-
-/**
- * Indicates were to output generated CSS for this page content.
- *
- * @return void
- */
-function dslc_dynamic_css_hook() {
-
-	$dynamic_css_location = dslc_get_option( 'lc_css_position', 'dslc_plugin_options' );
-	if ( ! $dynamic_css_location ) {
-		$dynamic_css_location = 'head';
-	}
-	if ( 'head' === $dynamic_css_location ) {
-			add_action( 'wp_head', 'dslc_custom_css' );
-	} else {
-			add_action( 'wp_footer', 'dslc_custom_css' );
-	}
-
-} add_action( 'init', 'dslc_dynamic_css_hook' );
-
-/**
- * Generate CSS - Modules Section
- */
-function dslc_modules_section_gen_css( $atts, $content = null ) {
-
-	return do_shortcode( $content );
-
-} add_shortcode( 'dslc_modules_section_gen_css', 'dslc_modules_section_gen_css' );
-
-/**
- * Generate CSS - Modules Area
- */
-
-function dslc_modules_area_gen_css( $atts, $content = null ) {
-
-	return do_shortcode( $content );
-
-} add_shortcode( 'dslc_modules_area_gen_css', 'dslc_modules_area_gen_css' );
-
-/**
- * Generate CSS - Module
- */
-
-function dslc_module_gen_css( $atts, $settings_raw ) {
-
-	// Check if it's JSON or base64 code. No matter what return array.
-	$settings = dslc_json_decode( $settings_raw );
-
-	// $settings = maybe_unserialize( base64_decode( $settings_raw ) );
-
-	// If it's an array
-	if ( is_array( $settings ) ) {
-
-		// The ID of the module
-		$module_id = $settings['module_id'];
-
-		// Check if module exists
-		if ( ! dslc_is_module_active( $module_id ) ) {
-			return;
-		}
-
-		// If class does not exists
-		if ( ! class_exists( $module_id ) ) {
-			return;
-		}
-
-		// Instanciate the module class
-		$module_instance = new $module_id();
-
-		// Get array of options
-		$options_arr = $module_instance->options();
-
-		// Load preset options if preset supplied
-		$settings = apply_filters( 'dslc_filter_settings', $settings );
-
-		// Transform image ID to URL
-		global $dslc_var_image_option_bckp;
-		$dslc_var_image_option_bckp = array();
-
-		foreach ( $options_arr as $option_arr ) {
-
-			if ( $option_arr['type'] == 'image' ) {
-				if ( isset( $settings[$option_arr['id']] ) && ! empty( $settings[$option_arr['id']] ) && is_numeric( $settings[$option_arr['id']] ) ) {
-					$dslc_var_image_option_bckp[$option_arr['id']] = $settings[$option_arr['id']];
-					$image_info = wp_get_attachment_image_src( $settings[$option_arr['id']], 'full' );
-					$settings[$option_arr['id']] = $image_info[0];
-				}
-			}
-
-			// Fix css_custom value ( issue when default changed programmatically )
-			if ( $option_arr['id'] == 'css_custom' && $module_id == 'DSLC_Text_Simple' && ! isset( $settings['css_custom'] ) ) {
-				$settings['css_custom'] = $option_arr['std'];
-			}
-		}
-
-		// Generate custom CSS
-		/*
-		* Changed from the next line in ver.1.0.8
-		* if ( ( $module_id == 'DSLC_TP_Content' || $module_id == 'DSLC_Html' ) && ! isset( $settings['css_custom'] ) )
-		* Line above was breaking styling for DSLC_TP_Content modules when used in template
-		*/
-		if ( $module_id == 'DSLC_Html' && ! isset( $settings['css_custom'] ) ) {
-			$css_output = '';
-		} elseif ( isset( $settings['css_custom'] ) && $settings['css_custom'] == 'disabled' ) {
-			$css_output = '';
-		} else {
-			$css_output = dslc_generate_custom_css( $options_arr, $settings );
-		}
-
-		return $css_output;
-	}
-
-} add_shortcode( 'dslc_module_gen_css', 'dslc_module_gen_css' );
 
 /**
  * Pagination for modules

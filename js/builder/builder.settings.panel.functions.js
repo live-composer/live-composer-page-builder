@@ -324,7 +324,7 @@ jQuery(document).ready(function($){
 	/* Destroy instanced of sliders, color pickers and other temporary elements */
 	LiveComposer.Builder.UI.clearUtils = function() {
 
-		if( Array.isArray(self.Helpers.colorpickers ) ) {
+		if ( Array.isArray(self.Helpers.colorpickers ) ) {
 
 			self.Helpers.colorpickers.forEach(function(item){
 				jQuery(item).remove();
@@ -334,7 +334,9 @@ jQuery(document).ready(function($){
 		}
 
 		// Delete module backups form memory.
-		LiveComposer.Builder.moduleBackup.remove();
+		if ( undefined !== LiveComposer.Builder.moduleBackup ) {
+			LiveComposer.Builder.moduleBackup.remove();
+		}
 
 		// Delete the color picker events.
 		jQuery( 'body' ).off( 'click.wpcolorpicker' );

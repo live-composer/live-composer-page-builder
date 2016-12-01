@@ -1,12 +1,22 @@
 <?php
 /**
- *	CSS code generation for modules/elements
+ * CSS generation functions.
  *
  * @package LiveComposer
+ * @since 1.2
  *
  * Table of Contents
  *
- * - dslc_generate_custom_css ( Generate module CSS )
+ * - dslc_dynamic_css_hook ( Were to output generated CSS. )
+ * - dslc_custom_css ( Generates all the Custom CSS )
+ * - dslc_render_css ( Render CSS code based on provided raw code of the page )
+ * - dslc_shortcodes_add_suffix_css ( Rename shortcodes in the dslc_code for CSS generation. )
+ * - dslc_modules_section_gen_css ( Generate CSS - Modules Section. )
+ * - dslc_modules_area_gen_css ( Generate CSS - Modules Area. )
+ * - dslc_module_gen_css ( Generate CSS - Modules. )
+ * - dslc_generate_custom_css ( Generate module CSS (for all devices) )
+ * - dslc_generate_module_css ( Worker function used by dslc_generate_custom_css. )
+ * - dslc_helper_is_border_radius ( Check if string provided is variation of the border radius property in CSS. )
  */
 
 // Prevent direct access to the file.
@@ -14,6 +24,360 @@ if ( ! defined( 'ABSPATH' ) ) {
 	header( 'HTTP/1.0 403 Forbidden' );
 	exit;
 }
+
+/**
+ * Indicates were to output generated CSS for this page content.
+ * In the <head> or before </body> ?
+ *
+ * @return void
+ */
+function dslc_dynamic_css_hook() {
+
+	if ( is_admin() ) {
+		return; // Do not call this function form wp-admin parent page.
+	}
+
+	$dynamic_css_location = dslc_get_option( 'lc_css_position', 'dslc_plugin_options' );
+
+	if ( ! $dynamic_css_location ) {
+		$dynamic_css_location = 'head';
+	}
+
+	if ( 'head' === $dynamic_css_location ) {
+		add_action( 'wp_head', 'dslc_custom_css' );
+	} else {
+		add_action( 'wp_footer', 'dslc_custom_css' );
+	}
+
+} add_action( 'wp_loaded', 'dslc_dynamic_css_hook' );
+
+/**
+ * Custom CSS
+ * Generates all the Custom CSS.
+ *
+ * @since 1.0
+ */
+function dslc_custom_css( $dslc_code = '' ) {
+
+	// Allow theme developers to output CSS for non-standard custom post types.
+	$dslc_custom_css_ignore_check = false;
+	$dslc_custom_css_ignore_check = apply_filters( 'dslc_generate_custom_css', $dslc_custom_css_ignore_check );
+
+	if ( $dslc_code ) {
+		$dslc_custom_css_ignore_check = true;
+	}
+
+	if ( ! is_singular() &&
+		 ! is_archive() &&
+		 ! is_author() &&
+		 ! is_search() &&
+		 ! is_404() &&
+		 ! is_home() &&
+		 ! $dslc_custom_css_ignore_check
+	) {
+		return;
+	}
+
+	global $dslc_active;
+	global $dslc_css_style;
+	global $content_width;
+	global $dslc_post_types;
+
+	$code = '';
+	$template_code = '';
+
+	$lc_width = dslc_get_option( 'lc_max_width', 'dslc_plugin_options' );
+
+	if ( empty( $lc_width ) ) {
+
+		$lc_width = $content_width . 'px';
+
+	} else {
+
+		if ( false === strpos( $lc_width, 'px' ) && false === strpos( $lc_width, '%' ) ) {
+			$lc_width = $lc_width . 'px';
+		}
+	}
+
+	// Filter $lc_width ( for devs ).
+	$lc_width = apply_filters( 'dslc_content_width', $lc_width );
+
+	if ( ! $dslc_code ) {
+
+		$template_id = false;
+
+		global $post;
+
+		// If single, load template?
+		if ( is_singular( $dslc_post_types ) ) {
+			$template_id = dslc_st_get_template_id( get_the_ID() );
+		}
+
+		// If archive, load template?
+		if ( is_archive() && $post && ! is_author() && ! is_search() ) {
+			$post_type = get_post_type();
+
+			$template_id = dslc_get_archive_template_by_pt( $post_type );
+		}
+
+		if ( is_author() && $post ) {
+			$template_id = dslc_get_archive_template_by_pt( 'author' );
+		}
+
+		if ( is_search() && $post ) {
+			$template_id = dslc_get_archive_template_by_pt( 'search_results' );
+		}
+
+		if ( is_404() ||
+			( is_archive() && ! $post ) ||
+			( is_search() && ! $post ) ||
+			( is_author() && ! $post ) ) {
+			$template_id = dslc_get_archive_template_by_pt( '404_page' );
+		}
+
+		// Header/Footer.
+		if ( $template_id ) {
+
+			$header_footer = dslc_hf_get_ID( $template_id );
+
+		} elseif ( is_singular( $dslc_post_types ) ) {
+
+			$template_id = dslc_st_get_template_id( get_the_ID() );
+			$header_footer = dslc_hf_get_ID( $template_id );
+
+		} else {
+
+			$header_footer = dslc_hf_get_ID( get_the_ID() );
+		}
+
+		// Header.
+		if ( $header_footer['header'] ) {
+			$header_code = get_post_meta( $header_footer['header'], 'dslc_code', true );
+		}
+
+		// Footer.
+		if ( $header_footer['footer'] ) {
+			$footer_code = get_post_meta( $header_footer['footer'], 'dslc_code', true );
+		}
+
+		// Template content.
+		if ( $template_id ) {
+			$template_code = get_post_meta( $template_id, 'dslc_code', true );
+		}
+
+		// Post/Page content.
+		$post_id = get_the_ID();
+		$code = get_post_meta( $post_id, 'dslc_code', true );
+
+	} else { // End of ! $dslc_code check.
+
+		$code = $dslc_code;
+	}
+
+	echo '<style type="text/css">';
+
+	$output_css = false;
+
+	// Generate CSS if page code is set.
+	// Genrated code added into $dslc_css_style global var.
+	if ( isset( $code ) && $code ) {
+		dslc_render_css( $code );
+		$output_css = true;
+	}
+
+	// Generate CSS if template code is set.
+	// Genrated code added into $dslc_css_style global var.
+	if ( isset( $template_code ) && $template_code ) {
+		dslc_render_css( $template_code );
+		$output_css = true;
+	}
+
+	// Generate CSS if header code is set.
+	// Genrated code added into $dslc_css_style global var.
+	if ( isset( $header_code ) && $header_code ) {
+		dslc_render_css( $header_code );
+		$output_css = true;
+	}
+
+	// Generate CSS if footer code is set.
+	// Genrated code added into $dslc_css_style global var.
+	if ( isset( $footer_code ) && $footer_code ) {
+		dslc_render_css( $footer_code );
+		$output_css = true;
+	}
+
+	dslc_render_gfonts();
+
+	// Wrapper width.
+	echo '.dslc-modules-section-wrapper, .dslca-add-modules-section { width : ' . $lc_width . '; } ';
+
+	// Add horizontal padding to the secitons (set in the plugins settings).
+	$section_padding_hor = dslc_get_option( 'lc_section_paddings', 'dslc_plugin_options' );
+
+	if ( ! empty( $section_padding_hor ) ) {
+		echo '.dslc-modules-section:not(.dslc-full) { padding-left: ' . $section_padding_hor . ';  padding-right: ' . $section_padding_hor . '; } ';
+	}
+
+	// Initial ( default ) row CSS.
+	echo dslc_row_get_initial_style();
+
+	// Echo CSS style.
+	if ( ! $dslc_active ) {
+		if ( $dslc_custom_css_ignore_check || $output_css ) {
+			echo $dslc_css_style;
+		}
+	}
+
+	echo '</style>';
+}
+
+/**
+ * Render CSS code based on provided raw code of the page.
+ * Works with both old (shortcodes) and new verion (JSON) of dslc_code.
+ *
+ * @param  string/json $code Code to render CSS for. Can be shortcode based string or JSON.
+ * @return string            Generated CSS output.
+ */
+function dslc_render_css( $code ) {
+
+	$code_array = dslc_json_decode( $code );
+
+	if ( is_array( $code_array ) ) {
+		// JSON based code version.
+		// Go though ROWs.
+		foreach ( $code_array as $row ) {
+			// Go through each Module Area.
+			foreach ( $row['content'] as $module_area ) {
+				// Go through each Module.
+				foreach ( $module_area['content'] as $module ) {
+
+					dslc_module_gen_css( array(), $module );
+				}
+			}
+		}
+	} else {
+		// Old (shortcodes based) code version.
+		// Replace shortcode names.
+		$code = dslc_shortcodes_add_suffix_css( $code );
+
+		// Do CSS shortcode.
+		$css_output = do_shortcode( $code );
+
+		return $css_output;
+	}
+}
+
+/**
+ * Rename shortcodes in the dslc_code for CSS generation.
+ * Not used in new version of dslc_code (JSON based).
+ *
+ * @param  string $code String with shortcode-based page code.
+ * @return string       String with modified shortcodes.
+ */
+function dslc_shortcodes_add_suffix_css( $code ) {
+
+	// Replace shortcode names.
+	$code = str_replace( 'dslc_modules_section', 'dslc_modules_section_gen_css', $code );
+	$code = str_replace( 'dslc_modules_area', 'dslc_modules_area_gen_css', $code );
+	$code = str_replace( '[dslc_module]', '[dslc_module_gen_css]', $code );
+	$code = str_replace( '[dslc_module ', '[dslc_module_gen_css ', $code );
+	$code = str_replace( '[/dslc_module]', '[/dslc_module_gen_css]', $code );
+
+	return $code;
+}
+
+/**
+ * Generate CSS - Modules Section
+ */
+function dslc_modules_section_gen_css( $atts, $content = null ) {
+
+	return do_shortcode( $content );
+
+} add_shortcode( 'dslc_modules_section_gen_css', 'dslc_modules_section_gen_css' );
+
+/**
+ * Generate CSS - Modules Area
+ */
+function dslc_modules_area_gen_css( $atts, $content = null ) {
+
+	return do_shortcode( $content );
+
+} add_shortcode( 'dslc_modules_area_gen_css', 'dslc_modules_area_gen_css' );
+
+/**
+ * Generate CSS - Module
+ */
+function dslc_module_gen_css( $atts, $settings_raw ) {
+
+	// Check if it's JSON or base64 code. No matter what return array.
+	$settings = dslc_json_decode( $settings_raw );
+
+	// If it's an array?
+	if ( is_array( $settings ) ) {
+
+		// The ID of the module.
+		$module_id = $settings['module_id'];
+
+		// Check if module exists.
+		if ( ! dslc_is_module_active( $module_id ) ) {
+			return;
+		}
+
+		// If class does not exists.
+		if ( ! class_exists( $module_id ) ) {
+			return;
+		}
+
+		// Instanciate the module class.
+		$module_instance = new $module_id();
+
+		// Get array of options.
+		$options_arr = $module_instance->options();
+
+		// Load preset options if preset supplied.
+		$settings = apply_filters( 'dslc_filter_settings', $settings );
+
+		// Transform image ID to URL.
+		global $dslc_var_image_option_bckp;
+		$dslc_var_image_option_bckp = array();
+
+		foreach ( $options_arr as $option_arr ) {
+
+			if ( 'image' === $option_arr['type'] ) {
+				if ( isset( $settings[$option_arr['id']] ) && ! empty( $settings[$option_arr['id']] ) && is_numeric( $settings[$option_arr['id']] ) ) {
+					$dslc_var_image_option_bckp[$option_arr['id']] = $settings[$option_arr['id']];
+					$image_info = wp_get_attachment_image_src( $settings[$option_arr['id']], 'full' );
+					$settings[$option_arr['id']] = $image_info[0];
+				}
+			}
+
+			// Fix css_custom value ( issue when default changed programmatically ).
+			if ( 'css_custom' === $option_arr['id'] && 'DSLC_Text_Simple' === $module_id && ! isset( $settings['css_custom'] ) ) {
+				$settings['css_custom'] = $option_arr['std'];
+			}
+		}
+
+		// Generate custom CSS.
+		/*
+		* Changed from the next line in ver.1.0.8
+		* if ( ( $module_id == 'DSLC_TP_Content' || $module_id == 'DSLC_Html' ) && ! isset( $settings['css_custom'] ) )
+		* Line above was breaking styling for DSLC_TP_Content modules when used in template
+		*/
+
+		$css_output = '';
+
+		if ( $module_id == 'DSLC_Html' && ! isset( $settings['css_custom'] ) ) {
+			$css_output = '';
+		} elseif ( isset( $settings['css_custom'] ) && 'disabled' === $settings['css_custom'] ) {
+			$css_output = '';
+		} else {
+			$css_output = dslc_generate_custom_css( $options_arr, $settings );
+		}
+
+		return $css_output;
+	}
+
+} add_shortcode( 'dslc_module_gen_css', 'dslc_module_gen_css' );
 
 /**
  * Generate module CSS (for all devices)
@@ -91,7 +455,6 @@ function dslc_generate_custom_css( $module_structure, $module_settings, $restart
 	}
 
 	$dslc_css_style .= $css_output;
-
 }
 
 /**
@@ -102,7 +465,6 @@ function dslc_generate_custom_css( $module_structure, $module_settings, $restart
  * @since 1.0
  */
 function dslc_generate_module_css( $module_structure, $module_settings, $restart = false ) {
-
 
 	// If this module was just imported from the first generation
 	// of dslc_code (shortcodes + base64) launch a special migration process.
@@ -119,6 +481,7 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 
 	global $dslc_css_fonts;
 	global $dslc_css_style;
+	global $dslc_active;
 
 	$important_append = '';
 	$force_important = dslc_get_option( 'lc_force_important_css', 'dslc_plugin_options' );
@@ -393,6 +756,15 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 					$output_border_declaration = true;
 				}
 			}
+
+			// Always output all the border properties when:
+			// – LC in the editing mode.
+			// – CSS rules are for :hover state.
+			// Otherwise it breaks live preview for border properties.
+			if ( $dslc_active || stristr( $css_selector, ':hover' ) ) {
+				$output_border_declaration = true;
+			}
+
 			/*
 			if ( $output_border_declaration && isset( $css_declaration_borders['border-style'] )  ) {
 				$border_style = $css_declaration_borders['border-style'];

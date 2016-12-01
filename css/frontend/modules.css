@@ -74,9 +74,9 @@
 				}
 
 			#dslc-content .dslc-cpt-post-meta {
-				border: 1px solid #e5e5e5;
-				border-left: 0;
-				border-right: 0;
+				/*border: 1px solid #e5e5e5;*/
+				/*border-left: 0;
+				border-right: 0;*/
 				margin-bottom: 20px;
 				overflow: hidden;
 				padding: 13px 0;
@@ -632,6 +632,10 @@
 							/*position: absolute;*/
 						}
 
+			#dslc-content .dslc-info-box-image-alt-inner {
+				display: inline-block;
+			}
+
 			#dslc-content .dslc-info-box-image-alt-inner img {
 				/*
 				-webkit-transition: all 0.2s ease-in-out;
@@ -641,7 +645,7 @@
 			}
 
 				#dslc-content .dslc-info-box-title {
-					margin-bottom: 25px;
+					/*margin-bottom: 25px;*/
 				}
 
 					#dslc-content .dslc-info-box-title h4 {
@@ -1119,6 +1123,14 @@
 					}
 
 
+/**
+ * Button input
+ */
+
+input[type="button"], input[type="submit"], input[type="reset"], input[type="file"]::-webkit-file-upload-button, button {
+    border-style: none;
+}
+
 
 /**
  * TEXT MODULE
@@ -1156,7 +1168,7 @@
 					#dslc-content .dslc-widget-title {
 						font-size: 15px;
 						font-weight: 600;
-						border-bottom: 1px solid #e5e5e5;
+						/*border-bottom: 1px solid #e5e5e5;*/
 						margin-bottom: 10px;
 						padding-bottom: 10px;
 						line-height: 1;

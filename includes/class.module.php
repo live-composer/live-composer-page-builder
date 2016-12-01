@@ -2157,6 +2157,17 @@ class DSLC_Module {
 		*/
 		foreach ( $options as $default_option ) {
 
+			// Sanitize User Option Values.
+			if ( isset( $id ) && isset( $user_options[ $id ] ) ) {
+				$option_satinitize_data = array(
+					'value' => $user_options[ $id ],
+					'id' => $id,
+					// 'definition' => $default_option,
+				);
+
+				$user_options[ $id ] = dslc_sanitize_option_val ( $option_satinitize_data );
+			}
+
 			$id = $default_option['id'];
 
 			// 🔖 RAW CODE CLEANUP
@@ -2228,6 +2239,18 @@ class DSLC_Module {
 						if ( false === $user_options[ $option_id ] || '' === $user_options[ $option_id ] ) {
 							unset( $user_options_no_defaults[ $option_id ] );
 						}
+					}
+
+					// Sanitize Option Values.
+					if ( $option_value ) {
+
+						$option_satinitize_data = array(
+							'value' => $option_value,
+							'id' => $option_id,
+							'definition' => $option,
+						);
+
+						$option_value = dslc_sanitize_option_val ( $option_satinitize_data );
 					}
 
 					echo '<textarea class="dslca-module-option-front" data-id="' . esc_attr( $option_id ) . '">' . stripslashes( $option_value ) . '</textarea>';
