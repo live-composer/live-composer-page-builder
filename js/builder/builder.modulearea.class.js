@@ -32,7 +32,7 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 	this.sortable = Sortable.create(elem, {
 		group: 'modules',
 		animation: 350,
-		handle: '.dslca-move-module-hook',
+		handle: '.dslc-module-front', // .dslca-move-module-hook
 		draggable: '.dslc-module-front',
 		ghostClass: 'dslca-module-ghost',
 		chosenClass: 'dslca-module-dragging',
