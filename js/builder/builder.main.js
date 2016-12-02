@@ -24,7 +24,7 @@ var LiveComposer = {
         Elements: {},
         UI: {},
         Actions: {},
-        Flags: {},
+        State: {},
         PreviewFrame: {},
         Helpers: {}
     },
@@ -36,14 +36,27 @@ var LiveComposer = {
 
 (function(){
 
-	LiveComposer.Builder.Flags = {
+	LiveComposer.Builder.State = {
 
 		windowScroller: false,
-		panelOpened: false, // Settings panel opened
+		panelOpened: false, // Settings panel opened.
+		moduleBeingEdited: '', // ID of the module we currently editing.
 
 		// Used to prevent multiple code generation when
 		// cancelling row edits
-		generate_code_after_row_changed: true
+		generate_code_after_row_changed: true,
+
+		pageCode: '',
+
+		pageRevisions: {},
+		movingInHistory: false
+
+		// pageRevisions: {
+		// 	revisions: {},
+		// 	current: 0,
+		// 	count: 0,
+		// 	movingInHistory: false
+		// } // Store page code changes.
 	};
 
 	LiveComposer.Builder.Actions = {

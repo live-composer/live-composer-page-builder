@@ -47,9 +47,13 @@ function dslc_template_load( template ) {
 /**
  * TEMPLATES - Import
  */
-function dslc_template_import() {
+function dslc_template_import( codeToImport ) {
 
 	if ( dslcDebug ) console.log( 'dslc_import_template' );
+
+	if ( undefined === codeToImport ) {
+		codeToImport = jQuery('#dslca-import-code').val();
+	}
 
 	// Vars
 	var dslcModule, dslcModuleID;
@@ -65,7 +69,7 @@ function dslc_template_import() {
 		{
 			action : 'dslc-ajax-import-template',
 			dslc : 'active',
-			dslc_template_code : jQuery('#dslca-import-code').val()
+			dslc_template_code : codeToImport
 		},
 		function( response ) {
 
@@ -82,8 +86,12 @@ function dslc_template_import() {
 			// Call other functions
 			LiveComposer.Builder.PreviewAreaWindow.dslc_bg_video();
 			dslc_drag_and_drop();
-			dslc_show_publish_button();
+			// dslc_show_publish_button();
 			dslc_generate_code();
+
+
+			// Re-init drag and drop functionality.
+			jQuery(document).trigger('editorFrameLoaded');
 		}
 	);
 }

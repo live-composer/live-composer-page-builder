@@ -659,11 +659,7 @@ class LC_Control {
 
 		$module_control = $this->_module_control;
 		$output = '';
-		$output .= '<span class="dslca-module-edit-label">';
 
-		if ( isset( $module_control['label'] ) ) {
-			$output .= esc_html( $module_control['label'] );
-		}
 
 		/**
 		 * Display styling control toggle [On/Off]
@@ -680,6 +676,14 @@ class LC_Control {
 
 		if ( isset( $module_control['help'] ) ) {
 			$output .= '<span class="dslca-module-edit-field-ttip-hook"><span class="dslca-icon dslc-icon-info"></span></span>';
+		}
+
+
+
+		$output .= '<span class="dslca-module-edit-label">';
+
+		if ( isset( $module_control['label'] ) ) {
+			$output .= esc_html( $module_control['label'] );
 		}
 
 		$output .= '</span>';

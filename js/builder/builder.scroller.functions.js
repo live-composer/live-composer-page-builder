@@ -15,7 +15,7 @@ jQuery(document).ready(function($){
 
 		var pxInTik = 5;
 		var timerTik = 6;
-		LiveComposer.Builder.Flags.windowScroller = false;
+		LiveComposer.Builder.State.windowScroller = false;
 
 		/** Stop scroll if within areas */
 		// jQuery(LiveComposer.Builder.PreviewAreaDocument).on('dragleave','.lc-scroll-top-area, .lc-scroll-bottom-area', function(e) {
@@ -26,11 +26,11 @@ jQuery(document).ready(function($){
 		/** Scroll bottom */
 		// jQuery(LiveComposer.Builder.PreviewAreaDocument).on('dragenter dragover','.lc-scroll-bottom-area', function(e) {
 
-		// 	if( LiveComposer.Builder.Flags.windowScroller !== false ) return false;
+		// 	if( LiveComposer.Builder.State.windowScroller !== false ) return false;
 
 		// 	LiveComposer.Utils.publish('LC.sortableOff', {});
 
-		// 	LiveComposer.Builder.Flags.windowScroller = setInterval(function(){
+		// 	LiveComposer.Builder.State.windowScroller = setInterval(function(){
 
 		// 		LiveComposer.Builder.PreviewAreaWindow.scrollBy(0 , pxInTik);
 		// 	}, timerTik);
@@ -39,11 +39,11 @@ jQuery(document).ready(function($){
 		/** Scroll top */
 		// jQuery(LiveComposer.Builder.PreviewAreaDocument).on('dragenter','.lc-scroll-top-area', function(e) {
 
-		// 	if( LiveComposer.Builder.Flags.windowScroller !== false ) return false;
+		// 	if( LiveComposer.Builder.State.windowScroller !== false ) return false;
 
 		// 	LiveComposer.Utils.publish('LC.sortableOff', {});
 
-		// 	LiveComposer.Builder.Flags.windowScroller = setInterval(function(){
+		// 	LiveComposer.Builder.State.windowScroller = setInterval(function(){
 
 		// 		LiveComposer.Builder.PreviewAreaWindow.scrollBy(0 , -pxInTik);
 		// 	}, timerTik);
@@ -52,7 +52,7 @@ jQuery(document).ready(function($){
 		/** Stop scroll if click or drag ended *//*
 		jQuery(LiveComposer.Builder.PreviewAreaDocument).on('dragend mouseup', 'body', function(e) {
 
-			// LiveComposer.Builder.Flags.windowScroller && LiveComposer.Builder.UI.stopScroller();
+			// LiveComposer.Builder.State.windowScroller && LiveComposer.Builder.UI.stopScroller();
 		});
 	};
 	*/

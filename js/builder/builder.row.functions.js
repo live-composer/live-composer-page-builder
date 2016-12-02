@@ -21,7 +21,7 @@
 
 	var actionAvail = function() {
 
-		if ( LiveComposer.Builder.Flags.panelOpened ) {
+		if ( LiveComposer.Builder.State.panelOpened ) {
 
 			LiveComposer.Builder.UI.shakePanelConfirmButton();
 			return false;
@@ -427,7 +427,7 @@ function dslc_row_edit( row ) {
 	// Show options management
 	dslc_show_section('.dslca-modules-section-edit');
 
-	LiveComposer.Builder.Flags.panelOpened = true;
+	LiveComposer.Builder.State.panelOpened = true;
 
 	// Hide the publish button
 	dslc_hide_publish_button();
@@ -443,7 +443,7 @@ function dslc_row_edit_cancel( callback ) {
 	callback = typeof callback !== 'undefined' ? callback : false;
 
 	// Time to generate code optimized {HACK}
-	LiveComposer.Builder.Flags.generate_code_after_row_changed = false;
+	LiveComposer.Builder.State.generate_code_after_row_changed = false;
 
 	// Recover original data from data-def attribute for each control
 	jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input', LiveComposer.Builder.PreviewAreaDocument).each(function(){
@@ -454,7 +454,7 @@ function dslc_row_edit_cancel( callback ) {
 		jQuery('.dslca-modules-section-edit-field[data-id="' + jQuery(this).data('id') + '"]').val( jQuery(this).data('def') ).trigger('change');
 	});
 
-	LiveComposer.Builder.Flags.generate_code_after_row_changed = true;
+	LiveComposer.Builder.State.generate_code_after_row_changed = true;
 	dslc_generate_code();
 	dslc_show_publish_button();
 
@@ -477,7 +477,7 @@ function dslc_row_edit_cancel( callback ) {
 
 	if ( callback ) { callback(); }
 
-	LiveComposer.Builder.Flags.panelOpened = false;
+	LiveComposer.Builder.State.panelOpened = false;
 	jQuery("body", LiveComposer.Builder.PreviewAreaDocument).removeClass('section-editing-in-progress');
 
 }
@@ -517,7 +517,7 @@ function dslc_row_edit_confirm( callback ) {
 
 	if ( callback ) { callback(); }
 
-	LiveComposer.Builder.Flags.panelOpened = false;
+	LiveComposer.Builder.State.panelOpened = false;
 	jQuery("body", LiveComposer.Builder.PreviewAreaDocument).removeClass('section-editing-in-progress');
 }
 

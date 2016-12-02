@@ -150,9 +150,30 @@ jQuery(document).ready(function($){
 	});
 
 	/**
-	 * Hook - Confirm Changes
+	 * Hook - Undo
 	 */
-	jQuery(document).on( 'click', '.dslca-module-edit-save', function(e){
+	jQuery(document).on( 'click', '.dslca-undo', function(e){
+
+		e.preventDefault();
+		dslc_undo();
+
+	});
+
+	/**
+	 * Hook - Redo
+	 */
+	jQuery(document).on( 'click', '.dslca-redo', function(e){
+
+		e.preventDefault();
+		dslc_redo();
+
+	});
+
+	/**
+	 * Hook - Confirm Changes
+	 * @todo : delete .dslca-module-edit-save in code below
+	 */
+	jQuery(document).on( 'click', '.dslca-module-edit-save, .dslca-section-back', function(e){
 
 		e.preventDefault();
 
@@ -160,7 +181,7 @@ jQuery(document).ready(function($){
 
 			LiveComposer.Builder.UI.initInlineEditors({withRemove:true});
 			LiveComposer.Builder.UI.unloadOptionsDeps();
-			LiveComposer.Builder.Flags.panelOpened = false;
+			LiveComposer.Builder.State.panelOpened = false;
 
 			jQuery("body", LiveComposer.Builder.PreviewAreaDocument).removeClass('module-editing-in-progress');
 
@@ -183,7 +204,7 @@ jQuery(document).ready(function($){
 
 			LiveComposer.Builder.UI.initInlineEditors({withRemove:true});
 			LiveComposer.Builder.UI.unloadOptionsDeps();
-			LiveComposer.Builder.Flags.panelOpened = false;
+			LiveComposer.Builder.State.panelOpened = false;
 
 			jQuery("body", LiveComposer.Builder.PreviewAreaDocument).removeClass('module-editing-in-progress');
 

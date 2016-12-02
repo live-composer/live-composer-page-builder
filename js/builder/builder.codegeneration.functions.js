@@ -217,8 +217,8 @@ function dslc_generate_code() {
 
 	// Apply the new code values to the setting containers
 	jQuery('#dslca-code').val(pageCodeInJson);
-
 	jQuery('#dslca-export-code').val(pageCodeInJson);
+
 }
 
 

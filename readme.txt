@@ -337,7 +337,7 @@ Thanks to the next contributors for helping with this update:
 * Elements
 * UI
 * Actions
-* Flags
+* State
 * PreviewAreaDocument
 * PreviewAreaWindow
 * Helpers

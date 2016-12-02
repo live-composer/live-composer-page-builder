@@ -34,7 +34,7 @@
 
 	var actionAvail = function() {
 
-		if ( LiveComposer.Builder.Flags.panelOpened ) {
+		if ( LiveComposer.Builder.State.panelOpened ) {
 
 			LiveComposer.Builder.UI.shakePanelConfirmButton();
 			return false;
@@ -392,7 +392,7 @@ function dslc_modules_area_width_set( area, newWidth ) {
 	// Call other functions
 	LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();
 
-	if ( LiveComposer.Builder.Flags.panelOpened ) {
+	if ( LiveComposer.Builder.State.panelOpened ) {
 
 		return false;
 	}

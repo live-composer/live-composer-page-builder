@@ -2112,8 +2112,6 @@ class DSLC_Module {
 				<div class="dslca-module-manage">
 					<span class="dslca-module-manage-line"></span>
 					<div class="dslca-module-manage-inner">
-						<span class="dslca-manage-action dslca-module-manage-hook dslca-module-edit-hook" title="<?php esc_attr_e( 'Edit options', 'live-composer-page-builder' ); ?>"><span class="dslca-icon dslc-icon-cog"></span></span>
-						<span class="dslca-manage-action dslca-module-manage-hook dslca-copy-module-hook" title="<?php esc_attr_e( 'Duplicate', 'live-composer-page-builder' ); ?>"><span class="dslca-icon dslc-icon-copy"></span></span>
 						<span class="dslca-manage-action dslca-module-manage-hook dslca-move-module-hook" title="<?php esc_attr_e( 'Drag to move', 'live-composer-page-builder' ); ?>"><span class="dslca-icon dslc-icon-move"></span></span>
 						<span class="dslca-manage-action dslca-module-manage-hook dslca-change-width-module-hook" title="<?php esc_attr_e( 'Change width', 'live-composer-page-builder' ); ?>">
 							<span class="dslca-icon dslc-icon-columns"></span>
@@ -2127,7 +2125,6 @@ class DSLC_Module {
 								<span data-size="11">11/12</span><span data-size="12">12/12</span>
 							</div>
 						</span>
-						<span class="dslca-manage-action dslca-module-manage-hook dslca-delete-module-hook" title="<?php esc_attr_e( 'Delete', 'live-composer-page-builder' ); ?>"><span class="dslca-icon dslc-icon-remove"></span></span>
 					</div>
 					<?php if ( DS_LIVE_COMPOSER_DEV_MODE ) : ?>
 						<div class="dslca-manage-action dslca-module-manage-inner dslca-dev-mode">

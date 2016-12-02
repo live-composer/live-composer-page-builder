@@ -63,7 +63,6 @@ jQuery(document).ready(function($) {
  	jQuery('.dslca-invisible-overlay').hide();
  	jQuery('.dslca-section').eq(0).show();
 
-
 	/** Wait till tinyMCE loaded */
 	window.previewAreaTinyMCELoaded = function(){
 
@@ -92,7 +91,7 @@ jQuery(document).ready(function($) {
 		// Documentation: http://www.listjs.com/docs/options
 		new List('dslca-modules', {
 			valueNames: [ 'dslca-module-title' ],
-			listClass: 'dslca-section-scroller-content',
+			listClass: 'lc-modules-list',
 			searchClass: 'modules-search-input',
 		});
 
@@ -120,6 +119,10 @@ jQuery(document).ready(function($) {
 				jQuery( '#wpbody-content' ).css( 'margin-left', ui.size.width + 'px' );
 			}
 		});
+
+		// Init Undo/Redo functionality.
+		dslc_undoredo();
+
 
 	};
 });
@@ -363,7 +366,178 @@ function dslc_show_publish_button() {
 	jQuery('.dslca-save-composer').removeClass('disabled');
 
 	jQuery('.dslca-save-draft-composer').show().addClass('dslca-init-animation');
+
+	//%%%%%%%
+
+	// Save Code Revision
+	dslc_save_revision();
 }
+
+
+	function myObjectSerializer(done) {
+	   done( LiveComposer.Builder.State.pageCode  );
+	    // done(JSON.stringify( LiveComposer.Builder.State.pageCode ));
+	}
+
+function dslc_undoredo() {
+	if ( dslcDebug ) console.log( 'dslc_undoredo' );
+
+	LiveComposer.Builder.State.pageCode = jQuery('#dslca-code').val();
+
+	LiveComposer.Builder.State.pageRevisions = new SimpleUndo({
+	   maxLength: 1000,
+	   provider: function(done) {
+			done( LiveComposer.Builder.State.pageCode );
+		},
+		onUpdate: function() {
+			//onUpdate is called in constructor, making history undefined
+			if (!LiveComposer.Builder.State.pageRevisions.stack) return;
+
+			dslc_updateButtons();
+		},
+		initialItem: LiveComposer.Builder.State.pageCode
+	});
+}
+
+
+function dslc_save_revision() {
+	if ( dslcDebug ) console.log( 'dslc_save_revision' );
+
+	if ( ! LiveComposer.Builder.State.movingInHistory ) {
+		LiveComposer.Builder.State.pageCode = jQuery('#dslca-code').val();
+		LiveComposer.Builder.State.pageRevisions.save();
+	}
+
+	LiveComposer.Builder.State.movingInHistory = false;
+}
+
+function dslc_updateButtons() {
+
+	if ( ! LiveComposer.Builder.State.pageRevisions.canUndo() ) {
+		jQuery('.dslca-undo').addClass('disabled');
+	} else {
+		jQuery('.dslca-undo').removeClass('disabled');
+	}
+
+	if ( ! LiveComposer.Builder.State.pageRevisions.canRedo() ) {
+		jQuery('.dslca-redo').addClass('disabled');
+	} else {
+		jQuery('.dslca-redo').removeClass('disabled');
+	}
+
+
+	// $('#undo').attr('disabled',!history.canUndo());
+	// $('#redo').attr('disabled',!history.canRedo());
+}
+
+function dslc_undo() {
+	if ( dslcDebug ) console.log( 'dslc_undo' );
+
+	// if ( LiveComposer.Builder.State.pageRevisions.position > 0 ) {
+
+		LiveComposer.Builder.State.movingInHistory = true;
+
+		LiveComposer.Builder.State.pageRevisions.undo(
+			// Callback.
+			function(pageCode) {
+				LiveComposer.Builder.State.pageCode = pageCode;
+				dslc_template_import( pageCode );
+			}
+		);
+
+	// }
+}
+
+function dslc_redo() {
+	if ( dslcDebug ) console.log( 'dslc_redo' );
+
+	// if ( LiveComposer.Builder.State.pageRevisions.position > 0 ) {
+
+		LiveComposer.Builder.State.movingInHistory = true;
+
+		LiveComposer.Builder.State.pageRevisions.redo(
+			// Callback.
+			function(pageCode) {
+				LiveComposer.Builder.State.pageCode = pageCode;
+				dslc_template_import( pageCode );
+			}
+		);
+
+	// }
+}
+
+
+function dslc_undo_old() {
+	if ( dslcDebug ) console.log( 'dslc_undo' );
+
+	var currentRevision = LiveComposer.Builder.State.pageRevisions.currentRevision;
+	var prevRevision =  LiveComposer.Builder.State.pageRevisions.revisions[ currentRevision - 1 ];
+
+	if ( undefined !== prevRevision ) {
+		var codeToImport = prevRevision.code;
+		LiveComposer.Builder.State.pageRevisions.currentRevision = LiveComposer.Builder.State.pageRevisions.currentRevision - 1;
+		LiveComposer.Builder.State.pageRevisions.movingInHistory = true;
+		dslc_template_import( codeToImport );
+	}
+}
+
+
+function dslc_save_revision_old() {
+	if ( dslcDebug ) console.log( 'dslc_save_revision' );
+
+	var date = new Date(),
+	dateLastRevision,
+	revisions = LiveComposer.Builder.State.pageRevisions,
+	// revisionsIndex,
+	// previousCodeRevision = LiveComposer.Builder.State.pageRevisions[ LiveComposer.Builder.State.current ],
+	pageCodeInJson = jQuery('#dslca-code').val();
+
+
+	console.log( "LiveComposer.Builder.State.pageRevisions:" ); console.log( LiveComposer.Builder.State.pageRevisions.revisions );
+
+	var revisionsStorage = LiveComposer.Builder.State.pageRevisions;
+	var revisionsLenth = Object.keys( revisionsStorage.revisions ).length;
+	var current = revisionsStorage.current;
+	var count = revisionsStorage.count;
+	var movingInHistory = revisionsStorage.movingInHistory;
+
+	if ( ! movingInHistory ) {
+
+		console.log( "current:" + current );
+		console.log( "count:" + count );
+		// console.log( "revisionsLenth:" + revisionsLenth );
+
+
+		if ( current + 1 < count + 1 ) {
+
+		
+
+		}
+
+		++count;
+		revisionsStorage.revisions[ count ] = { code: pageCodeInJson, date: date};
+		current = count ;
+
+	} else {
+		current
+	}
+
+	revisionsStorage.movingInHistory = false;
+
+	// console.log( "current:" ); console.log( current );
+	// console.log( "revisionsLenth:" ); console.log( revisionsLenth );
+	if ( 1 < current && 1 < revisionsLenth  ) {
+		jQuery('.dslca-undo').removeClass('disabled');
+	} else {
+		// No more undo steps left - disable the button.
+		jQuery('.dslca-undo').addClass('disabled');
+	}
+
+	LiveComposer.Builder.State.pageRevisions = revisionsStorage;
+	// delete revisionsStorage;
+
+}
+
 
 function dslc_hide_publish_button() {
 
@@ -395,13 +569,15 @@ function dslc_show_section( section ) {
 	jQuery('.dslca-section').hide();
 	jQuery(section).show();
 
+
+
 	// Change "currently editing"
 	if ( section == '.dslca-module-edit' ) {
 
 		jQuery('.dslca-currently-editing')
 			.show()
 				.find('strong')
-				.text( jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).attr('title') + ' element' );
+				.text( jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).attr('title') );
 	} else if ( section == '.dslca-modules-section-edit' ) {
 
 		jQuery('.dslca-currently-editing')

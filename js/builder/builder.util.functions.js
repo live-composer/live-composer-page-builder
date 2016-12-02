@@ -308,7 +308,7 @@ jQuery(document).ready(function($) {
 		// Update hidden input with new value
 		dslcSetting.val( dslcValReal );
 
-		if ( ! LiveComposer.Builder.Flags.generate_code_after_row_changed ) return false;
+		if ( ! LiveComposer.Builder.State.generate_code_after_row_changed ) return false;
 
 		// dslc_generate_code();
 		// dslc_show_publish_button();

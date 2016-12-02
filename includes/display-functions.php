@@ -52,15 +52,14 @@ function dslc_display_composer() {
 
 					<div class="dslca-header dslc-clearfix" data-default-section="<?php echo $default_section; ?>">
 
-						<!-- Currently Editing -->
-						<span class="dslca-currently-editing"><span class="dslca-icon dslc-icon-info"></span>You Are Editing: <strong></strong></span>
-
+						
 						<!-- Tabs -->
 		<!--
 						<a href="#" class="dslca-go-to-section-hook dslca-go-to-section-modules dslca-active" data-section=".dslca-modules"><span class="dslca-icon dslc-icon-th-large"></span></a>
 						<a href="#" class="dslca-go-to-section-hook dslca-go-to-section-templates" data-section=".dslca-templates"><span class="dslca-icon dslc-icon-cloud"></span></a>
 		-->
 						<!-- Module Option filters -->
+<?php /*
 						<span class="dslca-options-filter-hook" data-section="functionality"><span class="dslca-icon dslc-icon-cog"></span> <?php esc_attr_e( 'Functionality', 'live-composer-page-builder' ); ?></span>
 						<span class="dslca-options-filter-hook" data-section="styling"><span class="dslca-icon dslc-icon-tint"></span> <?php esc_attr_e( 'Styling', 'live-composer-page-builder' ); ?></span>
 						<span class="dslca-options-filter-hook" data-section="responsive"><span class="dslca-icon dslc-icon-mobile-phone"></span> <?php esc_attr_e( 'Responsive', 'live-composer-page-builder' ); ?></span>
@@ -70,6 +69,7 @@ function dslc_display_composer() {
 							<a href="#" class="dslca-module-edit-save"><?php esc_attr_e( 'Confirm', 'live-composer-page-builder' ); ?></a>
 							<a href="#" class="dslca-module-edit-cancel"><?php esc_attr_e( 'Cancel', 'live-composer-page-builder' ); ?></a>
 						</div><!-- .dslca-module-edit-actions -->
+*/?>
 
 						<!-- Row Options Filters -->
 						<?php /*
@@ -119,21 +119,27 @@ function dslc_display_composer() {
 							</a>
 
 							<!-- Undo -->
-							<a href="<?php the_permalink( $_GET['page_id'] ); ?>" class="dslca-undo dslca-close-composer-hook disabled">
-								<!-- <span class="dslca-icon dslc-icon-remove"></span> -->
-								<span class="screen-reader-text"><?php _e( 'Disable Editor', 'live-composer-page-builder' ); ?></span>
+							<a href="<?php the_permalink( $_GET['page_id'] ); ?>" class="dslca-undo disabled">
+								<span class="screen-reader-text"><?php _e( 'Undo Changes', 'live-composer-page-builder' ); ?></span>
+							</a>
+
+							<!-- Redo -->
+							<a href="<?php the_permalink( $_GET['page_id'] ); ?>" class="dslca-redo disabled">
+								<span class="screen-reader-text"><?php _e( 'Redo Changes', 'live-composer-page-builder' ); ?></span>
 							</a>
 						</div>
 
 						<div class="dslca-subsection-title">
 							<button class="dslca-section-back" tabindex="0">
-								<span class="screen-reader-text">Back</span>
+								<span class="screen-reader-text"><?php _e( 'Back', 'live-composer-page-builder' ); ?></span>
 							</button>
 							<h3>
 								<span class="dslca-action">
-									Customizing
+									<?php _e( 'Editing', 'live-composer-page-builder' ); ?>
 								</span>
-								Site Identity
+								<!-- Currently Editing -->
+								<span class="dslca-currently-editing"><strong></strong></span>
+
 							</h3>
 						</div>
 
@@ -166,6 +172,17 @@ function dslc_display_composer() {
 
 						<!-- SECTION: Modules Editing -->
 						<div class="dslca-section dslca-module-edit" id="dslca-edit">
+
+							<!-- Module Actions -->
+							<div class="dslca-section-set">
+								<a href="#" class="button dslca-manage-action dslca-module-manage-hook dslca-copy-module-hook">
+									<span class="dashicons dashicons-admin-page"></span> <?php esc_attr_e( 'Duplicate', 'live-composer-page-builder' ); ?>
+								</a>
+
+								<a href="#" class="button dslca-manage-action dslca-module-manage-hook dslca-delete-module-hook">
+									<span class="dashicons dashicons-trash"></span> <?php esc_attr_e( 'Delete', 'live-composer-page-builder' ); ?>
+								</a>
+							</div>
 
 							<form class="dslca-search-properties" method="get">
 								<input type="search" id="properties-search-input" class="properties-search-input" name="properties-search" value="" placeholder="Start typing to search styling properties..." >
@@ -480,7 +497,7 @@ function dslc_display_modules() {
 
 	?>
 
-	<div id="modules-list">
+	<div id="modules-list" class="lc-modules-list">
 		<div v-for="module in modules"
 			  v-bind:data-origin="module.origin"
 			  v-bind:data-id="module.id"
