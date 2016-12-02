@@ -1594,9 +1594,8 @@ function dslc_modules_area_front( $atts, $content = null, $version = 1 ) {
 		$output .= $content_render;
 	}
 
-	// $output .= '</div>'; // lc-row
-
 	$output .= '</div>'; // dslc-modules-area
+	$output .= '</div>'; // lc-row
 
 	// Return the output
 	return $output;

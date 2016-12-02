@@ -257,9 +257,9 @@ body #wpbody-content {
 }
 
 .dslca-container .ui-resizable-handle.ui-resizable-e:before {
-	position: absolute;
+	position: fixed;
 	content: '';
-	width: 100%;
+	width: 8px;
 	height: 50px;
 	top: 50%;
 	margin-top: -15px;

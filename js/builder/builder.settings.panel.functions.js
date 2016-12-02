@@ -177,19 +177,25 @@ jQuery(document).ready(function($){
 
 		e.preventDefault();
 
-		dslc_module_options_confirm_changes(function(){
+		var moduleBeingEdited = jQuery("body", LiveComposer.Builder.PreviewAreaDocument).hasClass('module-editing-in-progress');
 
-			LiveComposer.Builder.UI.initInlineEditors({withRemove:true});
-			LiveComposer.Builder.UI.unloadOptionsDeps();
-			LiveComposer.Builder.State.panelOpened = false;
+		if ( moduleBeingEdited ) {
 
-			jQuery("body", LiveComposer.Builder.PreviewAreaDocument).removeClass('module-editing-in-progress');
+			dslc_module_options_confirm_changes(function(){
 
-		});
+				LiveComposer.Builder.UI.initInlineEditors({withRemove:true});
+				LiveComposer.Builder.UI.unloadOptionsDeps();
+				LiveComposer.Builder.State.panelOpened = false;
 
-		jQuery('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
+				jQuery("body", LiveComposer.Builder.PreviewAreaDocument).removeClass('module-editing-in-progress');
 
-		dslc_disable_responsive_view();
+			});
+
+			jQuery('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
+
+			dslc_disable_responsive_view();
+
+		}
 
 	});
 
