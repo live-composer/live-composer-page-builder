@@ -154,6 +154,7 @@
 	/**
 	 * Hook - Set Module Width
 	 */
+	/*
 	LiveComposer.Builder.PreviewAreaDocument.on( 'click', '.dslca-change-width-module-options span', function(){
 
 		dslc_module_width_set( jQuery(this).closest('.dslc-module-front'), jQuery(this).data('size') );
@@ -349,7 +350,12 @@ function dslc_module_copy( moduleElId ) {
 	// jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-module-being-edited');
 
 
+
 	var module = LiveComposer.Builder.PreviewAreaDocument[0].getElementById( 'dslc-module-' + moduleElId );
+
+	// Destroy resizable instance before duplicating.
+	jQuery(module).resizable( "destroy" );
+
 	// Duplicate the module and append it to the same area
 	var module_new = module.cloneNode(true);
 
@@ -365,8 +371,13 @@ function dslc_module_copy( moduleElId ) {
 	// Generate new ID for the new module and change it in HTML/CSS of the module.
 	dslc_module_new_id( module_new );
 
+	// Initiate module resize feature for current and new modules
+	LiveComposer.Builder.UI.initResizableModules( module );
+	LiveComposer.Builder.UI.initResizableModules( module_new );
+
 	// Module fully cloned. Finish the process.
 	// Need to call this function to update last column class for the modules.
+	// @todo Do we really need it now since last/first classes deprecated?
 	dslc_generate_code();
 
 	// Fade in the module
@@ -419,20 +430,24 @@ function dslc_module_width_set( module, new_width ) {
 	if ( dslcDebug ) console.log( 'dslc_module_width_set' );
 
 	// Generate new column class
-	var newClass = 'dslc-' + new_width + '-col';
+	var newClass = 'lc-small-' + new_width;
+
+	if ( new_width === '' ) {
+		newClass = '';
+	}
 
 	// Add new column class and change size "data"
 	module
-		.removeClass('dslc-1-col dslc-2-col dslc-3-col dslc-4-col dslc-5-col dslc-6-col dslc-7-col dslc-8-col dslc-9-col dslc-10-col dslc-11-col dslc-12-col')
+		.removeClass('lc-small-1 lc-small-2 lc-small-3 lc-small-4 lc-small-5 lc-small-6 lc-small-7 lc-small-8 lc-small-9 lc-small-10 lc-small-11 lc-small-12 lc-small-13 lc-small-14 lc-small-15 lc-small-16 lc-small-17 lc-small-18 lc-small-19 lc-small-20 lc-small-21 lc-small-22 lc-small-23 lc-small-24')
 		.addClass(newClass);
 		// .data('dslc-module-size', new_width);
 		//.addClass('dslca-module-being-edited'); – Deprecated
 
 	// Change module size in element attribute
-	module[0].setAttribute('data-dslc-module-size',new_width);
+	module[0].setAttribute('data-lc-width-large',new_width);
 
 	// Update module size in raw base64 code (dslc_code) of the module
-	LiveComposer.Utils.update_module_property_raw( module[0], 'dslc_m_size', new_width );
+	LiveComposer.Utils.update_module_property_raw( module[0], 'lc_width_large', new_width );
 
 	LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();
 
@@ -668,6 +683,7 @@ function dslc_module_output_altered( callback ) {
 
 			dslc_generate_code(); // Do not delete. It refresh classes on "option preview refresh -> true"
 			// dslc_show_publish_button();
+			LiveComposer.Builder.UI.initResizableModules( newModule );
 			LiveComposer.Builder.PreviewAreaWindow.dslc_carousel();
 
 			LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();

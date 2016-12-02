@@ -59,9 +59,9 @@ jQuery(document).ready(function($) {
 	dslca_update_report_log();
 
 
- 	jQuery('body').addClass('dslca-enabled dslca-drag-not-in-progress');
- 	jQuery('.dslca-invisible-overlay').hide();
- 	jQuery('.dslca-section').eq(0).show();
+	jQuery('body').addClass('dslca-enabled dslca-drag-not-in-progress');
+	jQuery('.dslca-invisible-overlay').hide();
+	jQuery('.dslca-section').eq(0).show();
 
 	/** Wait till tinyMCE loaded */
 	window.previewAreaTinyMCELoaded = function(){
@@ -86,6 +86,7 @@ jQuery(document).ready(function($) {
 
 		// Catch keypress events (from both parent and iframe) to add keyboard support
 		dslc_keypress_events();
+
 
 		// Init modules search field functionality.
 		// Documentation: http://www.listjs.com/docs/options
@@ -123,9 +124,336 @@ jQuery(document).ready(function($) {
 		// Init Undo/Redo functionality.
 		dslc_undoredo();
 
+		// Make modules resizable in width;
+		LiveComposer.Builder.UI.initResizableModules();
+
 
 	};
 });
+
+/*
+	Resizable project todos:
+
+	@todo: Make old code render properly.
+	@todo: Re-init resizable once the module moved between areas.
+	@todo: Add resize to the module areas.
+	@todo: Disable the shrink property if you resize.
+ */
+LiveComposer.Builder.UI.initResizableModules = function(el) {
+
+	if ( dslcDebug ) console.log( 'initResizableModules' );
+
+	var elementsToResize = LiveComposer.Builder.PreviewAreaDocument.find(".dslc-module-front");
+
+	if ( undefined !== el ) {
+		elementsToResize = jQuery(el, LiveComposer.Builder.PreviewAreaDocument);
+	}
+
+	var gridRuler = document.getElementById('grid-rule');
+
+	// var modules = 	
+	elementsToResize.each( function() {
+
+		var thisModuleJQ = jQuery(this);
+		var parentRow    = thisModuleJQ.parent();
+		var gridRullerCurrent;
+		var offsetOriginal = 0;
+		var offset = 0;
+		var grid = 24;
+
+		// thisModuleJQ.resizable( 'destroy' ); // @todo: check this cause error.
+
+		var resizable = jQuery(this).resizable({
+
+			handles: "e, w", //"n, e, s, w"
+			// containment: "parent", // Don't go out of the parent container.
+
+			resize: function(e, ui) { // pas besoin pour l'instant
+
+				/* Grid Offset Detection and Change */
+				var jqResizeOffsetPx = ui.position.left;
+				var jqResizeOffsetPercent = 100 * ui.position.left / parentRow.innerWidth();
+
+				var oneGridColInPx = parentRow.innerWidth() / 24;
+				var attrOffsetCols = this.getAttribute( 'data-lc-offset-large');
+				var attrOffsetColsPercent = 100 * ( attrOffsetCols * oneGridColInPx ) / parentRow.innerWidth();
+
+
+				var cellPercentOffsetParam = jqResizeOffsetPercent;
+
+				// if ( jqResizeOffsetPercent < 0 ) {
+				// 	cellPercentOffsetParam = attrOffsetColsPercent + jqResizeOffsetPercent;
+				// }
+
+				// if ( cellPercentOffsetParam > 0 ) {
+
+					offset = Math.round( cellPercentOffsetParam / ( 100 / grid ) );
+
+					// var offsetGridArgs = {
+					// 	percent: cellPercentOffsetParam,
+					// 	obj: this
+					// };
+
+					// LiveComposer.Builder.UI.updateOffsetGridAttr(offsetGridArgs);
+
+				// }
+
+				/* Grid Width Detection and Change */
+
+				// jQuery UI has a bug https://bugs.jqueryui.com/ticket/8932
+				// We need to compensate paddings to make it work as expected.
+				var modulePadding = thisModuleJQ.css('padding-left').replace("px", "");
+				ui.size.width = ui.size.width + modulePadding * 2;
+
+				var thisModuleWidth  = ui.size.width;
+				var cellPercentWidth = 100 * thisModuleWidth / parentRow.innerWidth();
+
+				/**
+				 * Launch the function that manipulates grid CSS classes
+				 * based on the current resize offset.
+				 */
+				var updateGridWidthArgs = {
+					percent: cellPercentWidth,
+					obj: this
+				};
+
+				// Do not change module width if dragging the left side to the 
+				// if ( cellOffsetPercent < 0 ) {
+
+					LiveComposer.Builder.UI.updateGridWidthAttr(updateGridWidthArgs);
+				// }
+
+				/**
+				 * While imitating module resize process with JQuery
+				 * we are disabling grid influence on the width.
+				 */
+				this.style.flex = 'none';
+				this.style.maxWidth = 'none';
+			},
+
+			stop: function( event, ui ) {
+				// Actions to run when users stops resizing.
+
+				/**
+				 * Delete inline styles. We use it to imitate the resize process.
+				 * Actual width change is happening via CSS class change.
+				 */
+				this.style = '';
+
+				// Update classes for the current module based on attributes
+				offset = parseInt(offsetOriginal) + parseInt(offset);
+
+				if ( offset < 0 ) {
+					offset = 0;
+				}
+
+				this.setAttribute( 'data-lc-offset-large', offset );
+				LiveComposer.Builder.UI.updateOffsetGridClass(this);
+				LiveComposer.Builder.UI.updateGridWidthClass(this);
+
+				// Update module size in raw base64 code (dslc_code) of the module
+				LiveComposer.Utils.update_module_property_raw( this, 'lc_offset_large', this.getAttribute('data-lc-offset-large') );
+				LiveComposer.Utils.update_module_property_raw( this, 'lc_width_large',  this.getAttribute('data-lc-width-large') );
+
+				LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();
+
+				/**
+				 * Regenerate the page code to make sure our changes get saved.
+				 */
+				dslc_generate_code();
+				dslc_show_publish_button();
+
+				jQuery('#grid-rule', LiveComposer.Builder.PreviewAreaDocument).remove();
+			},
+
+			start: function( event, ui ) {
+
+				if ( dslcDebug ) console.log( 'jQuery UI .resizable - start event' );
+
+				// Set original offset value.
+				offsetOriginal = this.getAttribute( 'data-lc-offset-large');
+
+				if ( offsetOriginal === null ) {
+					offsetOriginal = 0;
+				}
+
+				var parrentRect = parentRow[0].getBoundingClientRect(); 
+				gridRullerCurrent = parentRow.prepend( gridRuler.cloneNode(true) );
+				jQuery('#grid-rule', LiveComposer.Builder.PreviewAreaDocument).css({'display': 'block','width': parentRow.innerWidth() + 'px', 'left': parrentRect.left + 'px', 'top': parrentRect.top + 'px' });
+			}
+		}); // .resizable
+	}); // .each
+}
+
+/**
+ * [updateGridWidthAttr description]
+ * @param  {Object} params  { percent: cellPercentWidth, obj: this, grid: 12/24,};
+ * @return {[type]}        [description]
+ */
+LiveComposer.Builder.UI.updateGridWidthAttr = function(params) {
+
+	if(typeof params != 'object' || this.instancesExists === true) return false;
+
+	var self = this;
+ 	var gridWidthToApply = LiveComposer.Builder.UI.covertPercentToGrid ( params.percent );
+
+	// Update element data attribute (it has max 12 columns).
+	params.obj.setAttribute( 'data-lc-width-large', gridWidthToApply );
+}
+
+LiveComposer.Builder.UI.updateGridWidthClass = function(obj) {
+
+	var self = this;
+	var gridWidth = obj.getAttribute('data-lc-width-large');
+
+	// Update element class.
+	jQuery(obj).removeClass (function (index, css) {
+		return (css.match (/(^|\s)lc-small-\S+/g) || []).join(' ');
+	});
+
+	jQuery(obj).addClass( 'lc-small-' + gridWidth );
+}
+
+/**
+ * ----------------------------------------------------------------------
+ * Grid Offset Apply Functions
+ */
+/*
+LiveComposer.Builder.UI.updateOffsetGridAttr = function(params) {
+
+	if(typeof params != 'object' || this.instancesExists === true) return false;
+
+	var self = this;
+ 	var gridOffsetToApply = LiveComposer.Builder.UI.covertPercentToGrid ( params.percent );
+
+ 	console.info( 'offset GRID attr to set:' + gridOffsetToApply );
+
+	// Update element data attribute (it has max 12 columns).
+	params.obj.setAttribute( 'data-lc-offset-large', gridOffsetToApply );
+}
+*/
+
+
+LiveComposer.Builder.UI.updateOffsetGridClass = function(obj) {
+
+	var self = this;
+	var gridOffset = obj.getAttribute('data-lc-offset-large');
+
+	// Update element class.
+	jQuery(obj).removeClass (function (index, css) {
+		return (css.match (/(^|\s)lc-offset-small-\S+/g) || []).join(' ');
+	});
+
+	if ( gridOffset > 0 ) {
+		jQuery(obj).addClass( 'lc-offset-small-' + gridOffset );
+	}
+}
+
+/**
+ * ----------------------------------------------------------------------
+ */
+
+
+LiveComposer.Builder.UI.covertPercentToGrid = function( percent ) {
+
+	var self = this;
+
+
+	var grid = 24;
+
+	// if ( params.grid !== undefined ) {
+	// 	grid = params.grid;
+	// }
+
+	// 100/12 = 8.3333 - % value for 1 column.
+	var grid12SizeToPercent = {
+		0: 0,
+		1: 8.333,
+		2: 16.666,
+		3: 24.999,
+		4: 33.333,
+		5: 41.666,
+		6: 49.999,
+		7: 58.333,
+		8: 66.666,
+		9: 74.999,
+		10: 83.333,
+		11: 91.666,
+		12: 100
+	};
+
+	// 100/24 = 4.14 - % value for 1 column.
+	var grid24SizeToPercent = {
+		0: 0,
+		1: 4.16,
+		2: 8.333,
+		3: 12.49,
+		4: 16.666,
+		5: 20.83,
+		6: 24.999,
+		7: 29.16,
+		8: 33.333,
+		9: 37.49,
+		10: 41.666,
+		11: 45.83,
+		12: 49.999,
+		13: 54.16,
+		14: 58.333,
+		15: 62.49,
+		16: 66.666,
+		17: 70.83,
+		18: 74.999,
+		19: 79.16,
+		20: 83.333,
+		21: 87.49,
+		22: 91.666,
+		23: 95.82,
+		24: 100
+	};
+
+	var gridArray = grid12SizeToPercent;
+
+	if ( grid === 24 ) {
+		gridArray = grid24SizeToPercent;
+	}
+
+	var gridWidthValue = Math.round( percent / ( 100 / grid ) );
+	// LiveComposer.Builder.Helpers.closest(gridArray, percent);
+
+	return gridWidthValue;
+}
+
+/**
+ * Find the key in the object with closes value to the provided
+ */
+LiveComposer.Builder.Helpers.closest = function(obj, closestTo){
+
+	// @todo: recode so var closest = max value in the object.
+	var closest = 100; //Set the highest number.
+/*
+	 for(var i = 0; i < Object.keys(obj).length; i++){ //Loop the array
+		  if(obj[i] >= closestTo && obj[i] < closest) closest = obj[i]; //Check if it's higher than your number, but lower than your closest value
+	 }
+*/
+	Object.keys(obj).forEach(function(key,index) {
+		// key: the name of the object key
+		// index: the ordinal position of the key within the object 
+
+		if( obj[key] >= closestTo && obj[key] < closest ) closest = key; //Check if it's higher than your number, but lower than your closest value
+	});
+
+	// If 100% set closest to the proper key
+	if ( closest === 100 ) {
+
+		for(var key in obj) {
+			 if( obj[key] === 100) {
+				 closest = key;
+			 }
+		}
+	}
+
+	return closest; // return the value
+}
 
 /**
  * Action - "Currently Editing" scroll on click
@@ -170,7 +498,7 @@ jQuery(window).keypress( function(e){
 
 		dslc_ajax_save_composer();
 		e.preventDefault();
-        return false;
+		  return false;
 	}
 });
 
@@ -698,6 +1026,9 @@ function dslc_drag_and_drop() {
 
 		// dragging ended
 		onEnd: function (/**Event*/evt) {
+
+			if ( dslcDebug ) console.log( 'dslc_drag_and_drop - sortable - onEnd' );
+
 			evt.oldIndex;  // element's old index within parent
 			evt.newIndex;  // element's new index within parent
 
@@ -715,7 +1046,7 @@ function dslc_drag_and_drop() {
 			modulesArea = jQuery(itemEl.parentNode); //jQuery(this);
 			moduleID = itemEl.dataset.id; // get value of data-id attr.
 
-			dslc_generate_code();
+			dslc_generate_code(); // @todo: check if we can delete it?
 
 			if ( moduleID == 'DSLC_M_A' || jQuery('body').hasClass('dslca-module-drop-in-progress') ||
 				modulesArea.closest('#dslc-header').length || modulesArea.closest('#dslc-footer').length ) {
@@ -766,6 +1097,9 @@ function dslc_drag_and_drop() {
 					LiveComposer.Builder.PreviewAreaWindow.dslc_carousel();
 					LiveComposer.Builder.PreviewAreaWindow.dslc_tabs();
 					LiveComposer.Builder.PreviewAreaWindow.dslc_init_accordion();
+
+					// Init resizable.
+					LiveComposer.Builder.UI.initResizableModules( dslcJustAdded );
 
 					dslc_generate_code();
 					// Show publish
@@ -989,7 +1323,7 @@ jQuery(document).ready(function($){
 
 		var toggle = $('.dslc-control-toggle');
 		if ( ! toggle.is(e.target) // if the target of the click isn't the container...
-		     && toggle.has(e.target).length === 0 ) // ... nor a descendant of the container
+			  && toggle.has(e.target).length === 0 ) // ... nor a descendant of the container
 		{
 
 			if ( jQuery(e.target).closest('.dslca-module-edit-option').hasClass('dslca-option-off') ) {
@@ -1030,7 +1364,7 @@ function disable_css_rule(selectorCSS, ruleCSS, moduleID) {
 
 	if (stylesheet) {
 
-	   stylesheet = stylesheet.sheet;
+		stylesheet = stylesheet.sheet;
 
 		if (stylesheet['rules']) {
 

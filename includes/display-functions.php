@@ -198,6 +198,37 @@ function dslc_display_composer() {
 											<div class="dslca-module-edit-options dslc-clearfix">
 												<div class="dslca-module-edit-options-tabs dslc-clearfix"></div>
 
+												<!-- Module Option filters -->
+												<?php
+													$module_options_panel_sections = array(
+
+														'functionality' => array(
+															'label' => __( 'Functionality', 'live-composer-page-builder' ),
+															'icon' => 'dslc-icon-cog',
+														),
+
+														'styling' => array(
+															'label' => __( 'Styling', 'live-composer-page-builder' ),
+															'icon' => 'dslc-icon-tint',
+														),
+
+														'responsive' => array(
+															'label' => __( 'Responsive', 'live-composer-page-builder' ),
+															'icon' => 'dslc-icon-mobile-phone',
+														),
+													);
+
+													/**
+													 * Allow developers to add custom sections.
+													 * @link https://livecomposer.help/article/195-filter-dslcfilteroptionspanelsections-add-custom-sections-in-module-options-panel
+													 */
+													$module_options_panel_sections = apply_filters( 'dslc_filter_options_panel_sections', $module_options_panel_sections );
+
+													foreach ($module_options_panel_sections as $section_id => $section_meta) {
+														echo '<span class="dslca-options-filter-hook" data-section="' . esc_attr( $section_id ) . '" style="display:none;"><span class="dslca-icon ' . esc_attr( $section_meta['icon'] ) . '"></span> ' . esc_attr( $section_meta['label'] ) . '</span>';
+													}
+												?>
+
 												<div class="dslca-module-edit-options-inner"></div>
 											</div>
 											<?php do_action( 'dslc_options_append' ); ?>
@@ -385,6 +416,38 @@ function dslc_display_composer() {
 			</div>
 
 			<div class="dslca-invisible-overlay"></div>
+
+			<div id="grid-rule">
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+
+				<div class="grid-measure grid-measure-major">25</div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+
+				<div class="grid-measure grid-measure-major">50</div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+
+				<div class="grid-measure grid-measure-major">75</div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+				<div class="grid-measure"></div>
+			</div>
+
+
 			<script id="pseudo-panel" type="template">
 			<div class="dslca-pseudo-panel">
 
@@ -1102,12 +1165,6 @@ function dslc_module_front( $atts, $settings_raw = null ) {
 			$settings['module_instance_id'] = dslc_get_new_module_id();
 		}
 
-		if ( isset( $atts['last'] ) && $atts['last'] == 'yes' ) {
-			$settings['dslc_m_size_last'] = 'yes';
-		} else {
-			$settings['dslc_m_size_last'] = 'no';
-		}
-
 		// Instanciate the module class
 		$module_instance = new $module_id();
 
@@ -1318,13 +1375,13 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1 ) {
 
 	if ( $dslc_active ) {
 		$a_container_class .= 'dslc-modules-section-empty ';
-		$a_prepend = '<div class="dslc-modules-section-inner dslc-clearfix">';
-		$a_append = '</div>';
+		$a_prepend = '<div class="dslc-modules-section-inner lc-small-24 dslc-clearfix"><div class="lc-row">';
+		$a_append = '</div></div>';
 	}
 
 	// Columns spacing
-	if ( $atts['columns_spacing'] == 'nospacing' ) {
-			$section_class .= 'dslc-no-columns-spacing ';
+	if ( 'nospacing' === $atts['columns_spacing']  ) {
+			$section_class .= 'lc-collapse ';
 	}
 
 	// Custom Class.
@@ -1400,7 +1457,7 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1 ) {
 
 				'.$bg_video . '
 
-				<div class="dslc-modules-section-wrapper dslc-clearfix">'
+				<div class="dslc-modules-section-wrapper lc-row dslc-clearfix">'
 
 					. $a_prepend . $content_render . $a_append
 
@@ -1462,9 +1519,35 @@ function dslc_modules_area_front( $atts, $content = null, $version = 1 ) {
 			$pos_class = 'dslc-first-col';
 	}
 
-	$output = '<div class="dslc-modules-area dslc-col dslc-' . $atts['size'] . '-col ' . $pos_class . '" data-size="' . $atts['size'] . '">';
+	$output = '<div class="dslc-modules-area lc-column lc-small-' . $atts['size'] . ' ' . $pos_class . '" data-size="' . $atts['size'] . '">';
 
-		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+	if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+
+		// Management.
+		$output .= '<div class="dslca-modules-area-manage">
+							<span class="dslca-modules-area-manage-line"></span>
+							<div class="dslca-modules-area-manage-inner">
+								<span class="dslca-manage-action dslca-copy-modules-area-hook" title="Duplicate" ><span class="dslca-icon dslc-icon-copy"></span></span>
+								<span class="dslca-manage-action dslca-move-modules-area-hook" title="Drag to move" ><span class="dslca-icon dslc-icon-move"></span></span>
+								<span class="dslca-manage-action dslca-change-width-modules-area-hook" title="Change width" >
+									<span class="dslca-icon dslc-icon-columns"></span>
+									<div class="dslca-change-width-modules-area-options">';
+						$output .= '<span>' . __( 'Container Width', 'live-composer-page-builder' ) . '</span>';
+						$output .= '<span data-size="">Auto</span><span data-size="1">1/12</span><span data-size="2">2/12</span>
+										<span data-size="3">3/12</span><span data-size="4">4/12</span>
+										<span data-size="5">5/12</span><span data-size="6">6/12</span>
+										<span data-size="7">7/12</span><span data-size="8">8/12</span>
+										<span data-size="9">9/12</span><span data-size="10">10/12</span>
+										<span data-size="11">11/12</span><span data-size="12">12/12</span>
+									</div>
+								</span>
+								<span class="dslca-manage-action dslca-delete-modules-area-hook" title="Delete" ><span class="dslca-icon dslc-icon-remove"></span></span>
+							</div>
+						</div>';
+	}
+
+	$output .= '<div class="lc-row">';
+
 
 			// Management.
 			$output .= '<div class="dslca-modules-area-manage">
@@ -1487,32 +1570,33 @@ function dslc_modules_area_front( $atts, $content = null, $version = 1 ) {
 					<span class="dslca-manage-action dslca-delete-modules-area-hook" title="Delete" ><span class="dslca-icon dslc-icon-remove"></span></span>
 				</div>
 			</div>';
-		}
 
 		$content_render = '';
 
-		if ( 2 !== $version ) {
-			// Back-compatibility for shortcode-based dslc_code.
-			$content_render = do_shortcode( $content );
-		} elseif ( 2 === $version )  {
+	if ( 2 !== $version ) {
+		// Back-compatibility for shortcode-based dslc_code.
+		$content_render = do_shortcode( $content );
+	} elseif ( 2 === $version )  {
 
-			// New JSON-based dslc_code.
-			if ( isset( $atts['give_new_id'] ) && 'true' === $atts['give_new_id'] ) {
-				// Udpdate ids of the elements inside.
-				$content_render = dslc_render_content( $content, true );
-			} else {
-				$content_render = dslc_render_content( $content );
-			}
-		}
-
-		// Modules output
-		if ( empty( $content ) || $content == ' ' ) {
-			$output .= ''; //'&nbsp;';
+		// New JSON-based dslc_code.
+		if ( isset( $atts['give_new_id'] ) && 'true' === $atts['give_new_id'] ) {
+			// Udpdate ids of the elements inside.
+			$content_render = dslc_render_content( $content, true );
 		} else {
-			$output .= $content_render;
+			$content_render = dslc_render_content( $content );
 		}
+	}
 
-	$output .= '</div>';
+	// Modules output.
+	if ( empty( $content ) || $content == ' ' ) {
+		$output .= ''; //'&nbsp;';
+	} else {
+		$output .= $content_render;
+	}
+
+	// $output .= '</div>'; // lc-row
+
+	$output .= '</div>'; // dslc-modules-area
 
 	// Return the output
 	return $output;

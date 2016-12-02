@@ -246,10 +246,10 @@ jQuery(document).ready(function($) {
 
 			if ( dslcVal == 'nospacing' ) {
 
-				dslcEl.addClass('dslc-no-columns-spacing');
+				dslcEl.addClass('lc-collapse');
 			} else {
 
-				dslcEl.removeClass('dslc-no-columns-spacing');
+				dslcEl.removeClass('lc-collapse');
 			}
 		} else if ( dslcFieldID == 'custom_class' ) {
 

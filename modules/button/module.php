@@ -6,6 +6,71 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Move into plugin
+ */
+function lbmn_add_section_layout( $sections ) {
+
+	$sections['layout'] = array (
+		'label' => __( 'Layout', 'live-composer-page-builder' ),
+		'icon' => 'dslc-icon-cog',
+	);
+
+	return $sections;
+
+} add_filter( 'dslc_filter_options_panel_sections', 'lbmn_add_section_layout', 10 );
+
+
+function lbmn_add_section_layout_options( $dslc_options, $module_id  ) {
+
+	$dslc_options[] = array(
+		'label' => __( 'Flexbox Properties', 'live-composer-page-builder' ),
+		'id' => 'layout_flexbox',
+		'std' => '',
+		'type' => 'checkbox',
+		'choices' => array(
+			array(
+				'label' => __( 'Shrink', 'live-composer-page-builder' ),
+				'value' => 'shrink',
+			),
+		),
+		'section' => 'layout',
+	);
+
+	return $dslc_options;
+
+} add_filter( 'dslc_module_options', 'lbmn_add_section_layout_options', 10, 2 );
+
+
+function lbmn_extend_layout_options_class( $module_class_arr, $module_id, $options  ) {
+
+	if ( stristr($options['layout_flexbox'], 'shrink') ) {
+		$module_class_arr[] = 'lc-shrink';
+	}
+
+/*
+	$dslc_options[] = array(
+		'label' => __( 'Flexbox Properties', 'live-composer-page-builder' ),
+		'id' => 'layout_flexbox',
+		'std' => '',
+		'type' => 'checkbox',
+		'choices' => array(
+			array(
+				'label' => __( 'Shrink', 'live-composer-page-builder' ),
+				'value' => 'shrink',
+			),
+		),
+		'section' => 'layout',
+	);
+
+*/
+	return $module_class_arr;
+
+} add_filter( 'dslc_module_class', 'lbmn_extend_layout_options_class', 10, 3 );
+
+
+
+
 class DSLC_Button extends DSLC_Module {
 
 	var $module_id;
@@ -47,6 +112,7 @@ class DSLC_Button extends DSLC_Module {
 		}
 
 		$dslc_options = array(
+
 
 			array(
 				'label' => __( 'Show On', 'live-composer-page-builder' ),

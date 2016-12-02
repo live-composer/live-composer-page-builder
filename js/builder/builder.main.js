@@ -13,8 +13,6 @@ var dslcIconsCurrentSet = DSLCIcons.fontawesome;
 var dslcDebug = false;
 // dslcDebug = true;
 
-dslcDebug = true;
-
 
 // Global Plugin Object
 var LiveComposer = {

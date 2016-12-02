@@ -1968,19 +1968,27 @@ class DSLC_Module {
 		$options['module_id'] = $this->module_id;
 
 		/**
-		 * Size Classes
+		 * Grid Size Classes
 		 */
 
 		$class_size_output = '';
-		$data_attr_size = '12';
+		$data_attr_size = '24';
 
-		if ( isset( $options['dslc_m_size'] ) ) {
-			$class_size_output .= ' dslc-col dslc-' . $options['dslc_m_size'] . '-col';
-			$data_attr_size = $options['dslc_m_size'];
+		if ( isset( $options['lc_width_large'] ) ) {
+			$class_size_output .= ' lc-column lc-small-' . $options['lc_width_large'];
+			$data_attr_size = $options['lc_width_large'];
 		}
 
-		if ( isset( $options['dslc_m_size_last'] ) && 'yes' === $options['dslc_m_size_last'] ) {
-			$class_size_output .= ' dslc-last-col';
+		/**
+		 * Grid Offset Classes
+		 */
+
+		$class_offset_large_output = '';
+		$data_attr_offset_large = '0';
+
+		if ( isset( $options['lc_offset_large'] ) ) {
+			$class_offset_large_output .= ' lc-offset-small-' . $options['lc_offset_large'];
+			$data_attr_offset_large = $options['lc_offset_large'];
 		}
 
 		/**
@@ -2027,17 +2035,6 @@ class DSLC_Module {
 		$dslc_all_googlefonts_array = $dslc_available_fonts['google'];
 
 		/**
-		 * Title Attr
-		 */
-
-		$title_attr = '';
-
-		if ( $dslc_active ) {
-
-			$title_attr = 'title="' . strtoupper( esc_attr( $this->module_title ) ) . '"';
-		}
-
-		/**
 		 * Option Preset
 		 */
 
@@ -2052,6 +2049,7 @@ class DSLC_Module {
 		$module_class_arr[] = 'dslc-in-viewport-check';
 		$module_class_arr[] = 'dslc-in-viewport-anim-' . $options['css_anim'];
 		$module_class_arr[] = $class_size_output;
+		$module_class_arr[] = $class_offset_large_output;
 		$module_class_arr[] = $class_show_on;
 		$module_class_arr[] = $class_handle_like;
 
@@ -2074,9 +2072,37 @@ class DSLC_Module {
 		// Turn module class array into string.
 		$module_class = implode( ' ', $module_class_arr );
 
+		$module_attributes = array();
+
+		// Attributes to output in editing and production modes.
+		$module_attributes['id'] = 'dslc-module-' . $options['module_instance_id'];
+		$module_attributes['class'] = $module_class;
+
+		if ( $dslc_active ) {
+			// @todo: make sure non of the bellow needed in production mode.
+			// Attributes to output in editing mode only.
+			$module_attributes['data-module-id']        = $options['module_instance_id'];
+			$module_attributes['data-dslc-module-id']   = $this->module_id;
+			$module_attributes['data-lc-width-large']   = $data_attr_size;
+			$module_attributes['data-lc-offset-large']  = $data_attr_offset_large;
+			$module_attributes['data-dslc-anim']        = $options['css_anim'];
+			$module_attributes['data-dslc-anim-delay']  = $options['css_anim_delay'];
+			$module_attributes['data-dslc-anim-easing'] = $options['css_anim_easing'];
+			$module_attributes['data-dslc-preset']      = $options['css_load_preset'];
+			$module_attributes['data-dslc-anim-duration'] = $options['css_anim_duration'];
+			$module_attributes['title'] = strtoupper( $this->module_title ); // Module name.
+		}
+
+		$module_attributes_str = '';
+
+		foreach ( $module_attributes as $key => $value ) {
+			$module_attributes_str .= ' ';
+			$module_attributes_str .= $key . '="' . esc_attr( $value ) . '"';
+		}
+
 		?>
 
-		<div id="dslc-module-<?php echo esc_attr( $options['module_instance_id'] ); ?>" class="<?php echo esc_attr( $module_class ); ?>" data-module-id="<?php echo esc_attr( $options['module_instance_id'] ); ?>" data-dslc-module-id="<?php echo esc_attr( $this->module_id ); ?>" data-dslc-module-size="<?php echo esc_attr( $data_attr_size ); ?>" data-dslc-anim="<?php echo esc_attr( $options['css_anim'] ); ?>" data-dslc-anim-delay="<?php echo esc_attr( $options['css_anim_delay'] ); ?>" data-dslc-anim-duration="<?php echo esc_attr( $options['css_anim_duration'] ); ?>"  data-dslc-anim-easing="<?php echo esc_attr( $options['css_anim_easing'] ); ?>" data-dslc-preset="<?php echo esc_attr( $options['css_load_preset'] ); ?>" <?php echo $title_attr; ?>>
+		<div <?php echo $module_attributes_str; ?>>
 
 			<?php do_action( 'dslc_module_before' ); ?>
 
@@ -2111,20 +2137,6 @@ class DSLC_Module {
 
 				<div class="dslca-module-manage">
 					<span class="dslca-module-manage-line"></span>
-					<div class="dslca-module-manage-inner">
-						<span class="dslca-manage-action dslca-module-manage-hook dslca-change-width-module-hook" title="<?php esc_attr_e( 'Change width', 'live-composer-page-builder' ); ?>">
-							<span class="dslca-icon dslc-icon-columns"></span>
-							<div class="dslca-change-width-module-options">
-								<span><?php esc_attr_e( 'Element Width', 'live-composer-page-builder' ); ?></span>
-								<span data-size="1">1/12</span><span data-size="2">2/12</span>
-								<span data-size="3">3/12</span><span data-size="4">4/12</span>
-								<span data-size="5">5/12</span><span data-size="6">6/12</span>
-								<span data-size="7">7/12</span><span data-size="8">8/12</span>
-								<span data-size="9">9/12</span><span data-size="10">10/12</span>
-								<span data-size="11">11/12</span><span data-size="12">12/12</span>
-							</div>
-						</span>
-					</div>
 					<?php if ( DS_LIVE_COMPOSER_DEV_MODE ) : ?>
 						<div class="dslca-manage-action dslca-module-manage-inner dslca-dev-mode">
 							<span class="dslca-module-manage-hook dslca-module-get-defaults-hook"><span class="dslca-icon dslc-icon-upload-alt"></span></span>
@@ -2193,8 +2205,15 @@ class DSLC_Module {
 
 		// Other vars.
 		$user_options['module_id'] = $this->module_id;
-		if ( ! isset( $user_options['dslc_m_size'] ) ) {
-			$user_options['dslc_m_size'] = '12';
+
+		// Make sure width field is among options.
+		if ( ! isset( $user_options['lc_width_large'] ) ) {
+			$user_options['lc_width_large'] = '12';
+		}
+
+		// Make sure offset field is among options.
+		if ( ! isset( $user_options['lc_offset_large'] ) ) {
+			$user_options['lc_offset_large'] = '0';
 		}
 
 		if ( ! isset( $user_options['element_type'] ) ) {

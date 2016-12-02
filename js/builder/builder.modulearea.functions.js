@@ -55,7 +55,7 @@
 	}
 
 	/**
-	 * Hook - Copy Module Area
+	 * Hook - Copy / Duplicate Module Area
 	 */
 	LiveComposer.Builder.PreviewAreaDocument.on( 'click', '.dslca-copy-modules-area-hook', function(e){
 
@@ -186,14 +186,14 @@ function dslc_modules_area_add( row ) {
 	// Add class to body so we know it's in progress
 	// jQuery('body', LiveComposer.Builder.PreviewAreaDocument).addClass('dslca-anim-in-progress');
 
-	var output = '<div class="dslc-modules-area dslc-col dslc-12-col dslc-modules-area-empty " data-size="12">'+
+	var output = '<div class="dslc-modules-area lc-column dslc-modules-area-empty " data-size="12">'+
 	'<div class="dslca-modules-area-manage"> <div class="dslca-modules-area-manage-inner">'+
 	'<span class="dslca-manage-action dslca-copy-modules-area-hook" title="Duplicate" ><span class="dslca-icon dslc-icon-copy">'+
 	'</span></span> <span class="dslca-manage-action dslca-move-modules-area-hook" title="Drag to move" >'+
 	'<span class="dslca-icon dslc-icon-move"></span></span>'+
 	'<span class="dslca-manage-action dslca-change-width-modules-area-hook" title="Change width" >'+
 	'<span class="dslca-icon dslc-icon-columns"></span> <div class="dslca-change-width-modules-area-options">'+
-	'<span>Container Width</span><span data-size="1">1/12</span><span data-size="2">2/12</span>'+
+	'<span>Container Width</span><span data-size="">Auto</span><span data-size="1">1/12</span><span data-size="2">2/12</span>'+
 	'<span data-size="3">3/12</span><span data-size="4">4/12</span> <span data-size="5">5/12</span><span data-size="6">6/12</span>'+
 	'<span data-size="7">7/12</span><span data-size="8">8/12</span> <span data-size="9">9/12</span><span data-size="10">10/12</span>'+
 	'<span data-size="11">11/12</span><span data-size="12">12/12</span> </div> </span>'+
@@ -323,7 +323,7 @@ function dslc_modules_area_copy( area ) {
 
 	// Vars
 	var dslc_moduleID,
-	modulesSection = area.closest('.dslc-modules-section').find('.dslc-modules-section-inner');
+	modulesSection = area.closest('.dslc-modules-section').find('.dslc-modules-section-inner >.lc-row');
 
 	// Copy the area and append to the row
 	var dslc_modulesAreaCloned = area.clone().appendTo(modulesSection);
@@ -376,18 +376,25 @@ function dslc_modules_area_copy( area ) {
 /**
  * AREAS - Set Width
  */
-function dslc_modules_area_width_set( area, newWidth ) {
+function dslc_modules_area_width_set( area, new_width ) {
 
 	if ( dslcDebug ) console.log( 'dslc_modules_area_width_set' );
 
 	// Generate new class based on width
-	var newClass = 'dslc-' + newWidth + '-col';
+	var newClass = 'lc-small-' + new_width;
+
+	if ( new_width === '' ) {
+		newClass = '';
+	}
 
 	// Remove width classes, add new width class and set the data-size attr
 	area
-		.removeClass('dslc-1-col dslc-2-col dslc-3-col dslc-4-col dslc-5-col dslc-6-col dslc-7-col dslc-8-col dslc-9-col dslc-10-col dslc-11-col dslc-12-col')
-		.addClass(newClass)
-		.data('size', newWidth);
+		.removeClass('lc-small-1 lc-small-2 lc-small-3 lc-small-4 lc-small-5 lc-small-6 lc-small-7 lc-small-8 lc-small-9 lc-small-10 lc-small-11 lc-small-12 lc-small-13 lc-small-14 lc-small-15 lc-small-16 lc-small-17 lc-small-18 lc-small-19 lc-small-20 lc-small-21 lc-small-22 lc-small-23 lc-small-24')
+		.addClass(newClass);
+		// .data('size', new_width);
+
+	// Change area size in element attribute
+	area[0].setAttribute('data-size',new_width);
 
 	// Call other functions
 	LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();

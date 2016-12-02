@@ -51,6 +51,7 @@ function dslc_ajax_add_modules_section( $atts ) {
 		}
 
 		// The output.
+
 		$empty_atts = array();
 
 		$section_content = dslc_modules_area_front( $empty_atts, '' );
@@ -169,12 +170,21 @@ function dslc_ajax_add_module( $atts ) {
 		}
 
 		// Module size.
-		if ( isset( $_POST['dslc_m_size'] ) ) {
+		if ( isset( $_POST['lc_width_large'] ) ) {
 
-			$module_settings['dslc_m_size'] = $_POST['dslc_m_size'];
+			$module_settings['lc_width_large'] = $_POST['lc_width_large'];
 		} else {
 
-			$module_settings['dslc_m_size'] = '12';
+			$module_settings['lc_width_large'] = '24';
+		}
+
+		// Module Offset.
+		if ( isset( $_POST['lc_offset_large'] ) ) {
+
+			$module_settings['lc_offset_large'] = $_POST['lc_offset_large'];
+		} else {
+
+			$module_settings['lc_offset_large'] = '0';
 		}
 
 		// Output.
@@ -231,6 +241,7 @@ function dslc_ajax_display_module_options( $atts ) {
 		$module_instance = new $module_id();
 
 		// Get the module options.
+
 		$module_controls = $module_instance->options();
 
 		// New object for options panel.

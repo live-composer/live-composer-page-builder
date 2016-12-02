@@ -10,7 +10,7 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 	this.section = jQuery(elem).closest('.dslc-modules-section');
 	this.elem = elem;
 
-	/** Set observer to change elems class */
+	/** Set observer to change elements class */
 	this.observer = new mqMutationObserver(elem, function(){
 
 		var classList = self.elem.classList;
@@ -28,8 +28,15 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 
 	/**
 	 * Make MODULES inside the Modules Area draggable/sortable
+	 *
+	 * this = <div class="dslc-modules-area....
 	 */
-	this.sortable = Sortable.create(elem, {
+
+	// New flexbox grid requires all the modules to sit in the .lc-row container.
+	var moduleAreaInnerContainer = elem.querySelectorAll('.lc-row')[0];
+
+	// moduleAreaInnerContainer.sortable = Sortable.create(elem, {
+	moduleAreaInnerContainer.sortable = Sortable.create(moduleAreaInnerContainer, {
 		group: 'modules',
 		animation: 350,
 		handle: '.dslc-module-front', // .dslca-move-module-hook
@@ -57,13 +64,18 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 
 		onEnd: function (evt) {
 
+			if ( dslcDebug ) console.log( 'CModuleArea - Sortable - onEnd' );
+
 			evt.oldIndex;  // element's old index within parent
 			evt.newIndex;  // element's new index within parent
 
 			evt.preventDefault();
 
 			dslc_generate_code();
-			// LiveComposer.Builder.UI.stopScroller();
+
+			// Init resizable.
+			LiveComposer.Builder.UI.initResizableModules();
+
 			jQuery('body').removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
 			jQuery('body', LiveComposer.Builder.PreviewAreaWindow.document).removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
 		},
@@ -77,7 +89,7 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 			// If container/column/modules area droped.
 			if ( jQuery(itemEl).data('id') == 'DSLC_M_A' ) {
 
-				dslc_modules_area_add( jQuery(self.section).find('.dslc-modules-section-wrapper .dslc-modules-section-inner') );
+				dslc_modules_area_add( jQuery(self.section).find('.dslc-modules-section-wrapper .dslc-modules-section-inner > .lc-row') );
 				itemEl.remove();
 			}
 
