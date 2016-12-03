@@ -1,0 +1,5 @@
+/* Disable animations in IE versions prior to IE 10 */
+.dslc-in-viewport-check {
+	transform: none !important;
+	opacity: 1 !important;
+}

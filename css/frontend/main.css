@@ -1197,10 +1197,15 @@ a img.aligncenter { display: block; margin-left: auto; margin-right: auto }
 }
 
 /* @hack: IE10+ specific styles only.
-	Used rending images in IE.
+	Used to disable animations in IE and fix image rendering.
  */
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
 	.dslc-image-container .dslc-image, .dslc-image-container .dslc-image a {
 		width: 100% !important;
+	}
+
+	.dslc-in-viewport-check {
+		transform: none !important;
+		opacity: 1 !important;
 	}
 }
