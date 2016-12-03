@@ -3,3 +3,9 @@
 	transform: none !important;
 	opacity: 1 !important;
 }
+
+/* Fix image display in IE versions prior to IE 10 */
+.dslc-image-container .dslc-image,
+.dslc-image-container .dslc-image a {
+	width: 100% !important;
+}
