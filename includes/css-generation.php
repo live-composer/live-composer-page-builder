@@ -470,6 +470,8 @@ function dslc_generate_custom_css( $module_structure, $module_settings, $restart
  */
 function dslc_generate_module_css( $module_structure, $module_settings, $restart = false ) {
 
+	// vovaphperror( $module_settings, '$module_settings' );
+
 	// If this module was just imported from the first generation
 	// of dslc_code (shortcodes + base64) launch a special migration process.
 	// In migration process we fix some issues to make sure nothing breaks
@@ -508,6 +510,20 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 
 		$option_id = $option_arr['id'];
 
+		if ( 'css_title_margin' == $option_arr['id']  ) {
+			# code...
+			// vovaphperror( $option_arr, '!!!!!!!!!' );
+			// vovaphperror( $module_settings, '$module_settings[ $option_id ]' );
+		}
+
+		// Fill the missing setting with default values.
+		// 🔖 RAW CODE CLEANUP
+		if ( ! isset( $module_settings[ $option_id ] ) || empty( $module_settings[ $option_id ] )  ) {
+			// vovaphperror( $option_id, '$option_id' );
+			// vovaphperror( $module_settings[ $option_id ], '$module_settings[ $option_id ]' );
+			$module_settings[ $option_id ] = $option_arr['std'];
+		}
+
 		// 🔖 RAW CODE CLEANUP
 		// if ( isset( $module_settings[ $option_id ] ) && ! empty( $module_settings[ $option_id ] )  ) {
 		if ( isset( $module_settings[ $option_id ] ) && '' !== $module_settings[ $option_id ] && false !== $module_settings[ $option_id ]  ) {
@@ -529,9 +545,9 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 
 				// Fill the missing setting with default values.
 				// 🔖 RAW CODE CLEANUP
-				// if ( ! isset( $module_settings[ $option_id ] ) || empty( $module_settings[ $option_id ] )  ) {
-				// 	$module_settings[ $option_id ] = $option_arr['std'];
-				// }
+				if ( ! isset( $module_settings[ $option_id ] ) || empty( $module_settings[ $option_id ] )  ) {
+					$module_settings[ $option_id ] = $option_arr['std'];
+				}
 
 				// Extension for the input control (px, %, em...).
 				$ext = ' ';
@@ -644,8 +660,11 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 		} // If isset and not empty.
 	}
 
-// ------- SPLIT INTO SEPARATE FUNCTION ------------------------------------
+	// ------- SPLIT INTO SEPARATE FUNCTION ------------------------------------
+
 	if ( count( $organized_array ) > 0 ) {
+
+		// vovaphperror( $organized_array, '$organized_array' );
 
 		foreach ( $organized_array as $el => $rules ) {
 
@@ -787,7 +806,6 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 			} else {
 				// $css_declaration['border'] = 'none'; // Causing issues
 			}
-			
 
 			//---------
 

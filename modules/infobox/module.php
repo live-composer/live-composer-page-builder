@@ -1229,8 +1229,8 @@ class DSLC_Info_Box extends DSLC_Module {
 				),
 				array(
 					'label' => __( 'Bottom', 'live-composer-page-builder' ),
-					'id' => 'css_title_bottom',
-					'std' => '0',
+					'id' => 'css_title_margin',
+					'std' => '21',
 					'type' => 'slider',
 					'refresh_on_change' => false,
 					'affect_on_change_el' => '.dslc-info-box-title',
@@ -1431,7 +1431,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				array(
 					'label' => __( 'Bottom', 'live-composer-page-builder' ),
 					'id' => 'css_content_bottom',
-					'std' => '0',
+					'std' => '28',
 					'type' => 'slider',
 					'refresh_on_change' => false,
 					'affect_on_change_el' => '.dslc-info-box-content',
