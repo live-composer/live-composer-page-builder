@@ -143,6 +143,7 @@ Upcoming Releases:
 
 = Bug fixes: =
 
+* Issue [#138](https://github.com/livecomposer/live-composer-page-builder/issues/138): Broken responsive settings on some of the themes.
 * Issue [#411](https://github.com/livecomposer/live-composer-page-builder/issues/411): Header/Footer editing is broken.
 * Issue [#336](https://github.com/livecomposer/live-composer-page-builder/issues/336): Animations in Internet Explorer not working.
 * Issue [#385](https://github.com/livecomposer/live-composer-page-builder/issues/385): IE 11 is not rending images.
