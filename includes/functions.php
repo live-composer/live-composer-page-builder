@@ -710,6 +710,19 @@ function dslc_code_migration( $settings ) {
 		$id = $control['id'];
 		$type = $control['type'];
 
+		/**
+		 * If code migrated from the shortcodes ('code_version' = 1),
+		 * go through each missing setting and fill it with default data.
+		 */
+		if ( 1 === $settings['code_version'] ) {
+
+			if ( ! isset( $settings[ $id ] ) && isset( $control['std'] ) ) {
+				$settings[ $id ] = $control['std'];
+			}
+		}
+
+		// $module_settings[ $option_id ] = $option_arr['std'];
+
 /*
 		// When import shortcodes code, 'Display on' setting is empty
 		// when all the checkboxes selected. This makes the module completely
@@ -736,6 +749,10 @@ function dslc_code_migration( $settings ) {
 				// In new code empty = default color.
 				// In new code transparent = rgba(0,0,0,0).
 				$settings[ $id ] = 'rgba(0,0,0,0)'; // @todo: still need it?
+			
+				if ( stristr($id, 'icon_color') ) {
+					$settings[ $id ] = '';
+				}
 			}
 		}
 

@@ -272,17 +272,19 @@ function dslc_tp_update_archive_templates_option( $post_id ) {
 	// Allowed to do this?
 	if ( dslc_current_user_can( 'save' ) ) {
 
+		$post_type = get_post_type( $post_id );
+
 		// If no post type ( not really a save action ) stop execution.
-		if ( ! isset( $_POST['post_type'] ) || 'dslc_templates' !== $_POST['post_type'] ) {
+		if ( 'dslc_templates' !== $post_type ) {
 			return;
 		}
 
-		// If template type not supplied stop execution.
+		// If template type not supplied.
 		if ( ! isset( $_POST['dslc_template_for'] ) ) {
 			$_POST['dslc_template_for'] = false;
 		}
 
-		$post_type = esc_attr( $_POST['post_type'] );
+		$post_type = esc_attr( $post_type );
 
 		// Make dslc_template_for an array even if it's string (for easier processing).
 		$dslc_template_for = array();
@@ -356,7 +358,45 @@ function dslc_tp_update_archive_templates_option( $post_id ) {
 		return;
 	}
 
-} add_action( 'save_post', 'dslc_tp_update_archive_templates_option' );
+}
+
+add_action( 'save_post', 'dslc_tp_update_archive_templates_option' );
+
+
+/**
+ * Archive Template Moved To Trash.
+ */
+function dslc_tp_update_archive_templates_option_ondelete( $post_id ) {
+
+	// Allowed to do this?
+	if ( dslc_current_user_can( 'save' ) ) {
+
+		$post_type = get_post_type( $post_id );
+
+		// If no post type ( not really a save action ) stop execution.
+		if ( 'dslc_templates' !== $post_type ) {
+			return;
+		}
+
+		$plugin_options = get_option( 'dslc_plugin_options' );
+
+		$this_template_in_options = array();
+		foreach ( $plugin_options as $key => $value ) {
+			if ( ! is_array( $value ) && strval( $value ) === strval( $post_id ) ) {
+				unset( $plugin_options[ $key ] );
+			}
+		}
+
+		update_option( 'dslc_plugin_options', $plugin_options );
+
+	} else {
+		return;
+	}
+
+}
+
+add_action( 'wp_trash_post', 'dslc_tp_update_archive_templates_option_ondelete' );
+
 
 /**
  * Remove template type from 'dslc_template_for' meta key (Array).

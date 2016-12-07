@@ -4,7 +4,7 @@
  *
  * - dslc_setup_post_options ( Sets up the post options )
  * - dslc_add_post_options ( Adds metaboxes )
- * - DSLC_EditorInterface_post_options ( Displays options )
+ * - dslc_editorinterface_post_options ( Displays options )
  * - dslc_save_post_options ( Saves options to post )
  * - dslc_page_add_row_action ( Adds action in row )
  * - dslc_post_add_row_action ( Adds action in row )
@@ -138,7 +138,7 @@ function dslc_add_post_options() {
 					add_meta_box(
 						$dslc_post_option_key,
 						$dslc_post_option['title'],
-						'DSLC_EditorInterface_post_options',
+						'dslc_editorinterface_post_options',
 						$dslc_post_option_show_on,
 						$dslc_post_option['context'],
 						'high'
@@ -151,7 +151,7 @@ function dslc_add_post_options() {
 				add_meta_box(
 					$dslc_post_option_key,
 					$dslc_post_option['title'],
-					'DSLC_EditorInterface_post_options',
+					'dslc_editorinterface_post_options',
 					$dslc_post_option['show_on'],
 					$dslc_post_option['context'],
 					'high'
@@ -166,7 +166,7 @@ function dslc_add_post_options() {
  *
  * @since 1.0
  */
-function DSLC_EditorInterface_post_options( $object, $metabox ) {
+function dslc_editorinterface_post_options( $object, $metabox ) {
 
 	global $dslc_var_post_options;
 

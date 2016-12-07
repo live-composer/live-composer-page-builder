@@ -344,10 +344,10 @@ function dslc_module_gen_css( $atts, $settings_raw ) {
 		foreach ( $options_arr as $option_arr ) {
 
 			if ( 'image' === $option_arr['type'] ) {
-				if ( isset( $settings[$option_arr['id']] ) && ! empty( $settings[$option_arr['id']] ) && is_numeric( $settings[$option_arr['id']] ) ) {
-					$dslc_var_image_option_bckp[$option_arr['id']] = $settings[$option_arr['id']];
-					$image_info = wp_get_attachment_image_src( $settings[$option_arr['id']], 'full' );
-					$settings[$option_arr['id']] = $image_info[0];
+				if ( isset( $settings[ $option_arr['id'] ] ) && ! empty( $settings[ $option_arr['id'] ] ) && is_numeric( $settings[ $option_arr['id'] ] ) ) {
+					$dslc_var_image_option_bckp[ $option_arr['id'] ] = $settings[ $option_arr['id'] ];
+					$image_info = wp_get_attachment_image_src( $settings[ $option_arr['id'] ], 'full' );
+					$settings[ $option_arr['id'] ] = $image_info[0];
 				}
 			}
 
@@ -366,7 +366,7 @@ function dslc_module_gen_css( $atts, $settings_raw ) {
 
 		$css_output = '';
 
-		if ( $module_id == 'DSLC_Html' && ! isset( $settings['css_custom'] ) ) {
+		if ( 'DSLC_Html' === $module_id && ! isset( $settings['css_custom'] ) ) {
 			$css_output = '';
 		} elseif ( isset( $settings['css_custom'] ) && 'disabled' === $settings['css_custom'] ) {
 			$css_output = '';
@@ -401,8 +401,13 @@ function dslc_generate_custom_css( $module_structure, $module_settings, $restart
 	foreach ( $module_structure as $single_option ) {
 
 		// Make sure our function do not break when setting case is wrong.
-		$single_option['tab'] = strtolower( $single_option['tab'] );
-		$single_option['section'] = strtolower( $single_option['section'] );
+		if ( isset( $single_option['tab'] ) ) {
+			$single_option['tab'] = strtolower( $single_option['tab'] );
+		}
+
+		if ( isset( $single_option['section'] ) ) {
+			$single_option['section'] = strtolower( $single_option['section'] );
+		}
 
 		if ( isset( $single_option['section'] ) && 'responsive' === $single_option['section'] ) {
 
@@ -470,13 +475,11 @@ function dslc_generate_custom_css( $module_structure, $module_settings, $restart
  */
 function dslc_generate_module_css( $module_structure, $module_settings, $restart = false ) {
 
-	// vovaphperror( $module_settings, '$module_settings' );
-
 	// If this module was just imported from the first generation
 	// of dslc_code (shortcodes + base64) launch a special migration process.
 	// In migration process we fix some issues to make sure nothing breaks
 	// when we switch users to JSON code format.
-	if ( isset( $settings['code_version'] ) && 1 === $settings['code_version'] ) {
+	if ( isset( $module_settings['code_version'] ) && 1 === $module_settings['code_version'] ) {
 		$module_settings = dslc_code_migration( $module_settings );
 	}
 
@@ -510,20 +513,6 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 
 		$option_id = $option_arr['id'];
 
-		if ( 'css_title_margin' == $option_arr['id']  ) {
-			# code...
-			// vovaphperror( $option_arr, '!!!!!!!!!' );
-			// vovaphperror( $module_settings, '$module_settings[ $option_id ]' );
-		}
-
-		// Fill the missing setting with default values.
-		// 🔖 RAW CODE CLEANUP
-		if ( ! isset( $module_settings[ $option_id ] ) || empty( $module_settings[ $option_id ] )  ) {
-			// vovaphperror( $option_id, '$option_id' );
-			// vovaphperror( $module_settings[ $option_id ], '$module_settings[ $option_id ]' );
-			$module_settings[ $option_id ] = $option_arr['std'];
-		}
-
 		// 🔖 RAW CODE CLEANUP
 		// if ( isset( $module_settings[ $option_id ] ) && ! empty( $module_settings[ $option_id ] )  ) {
 		if ( isset( $module_settings[ $option_id ] ) && '' !== $module_settings[ $option_id ] && false !== $module_settings[ $option_id ]  ) {
@@ -545,9 +534,9 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 
 				// Fill the missing setting with default values.
 				// 🔖 RAW CODE CLEANUP
-				if ( ! isset( $module_settings[ $option_id ] ) || empty( $module_settings[ $option_id ] )  ) {
-					$module_settings[ $option_id ] = $option_arr['std'];
-				}
+				// if ( ! isset( $module_settings[ $option_id ] ) || empty( $module_settings[ $option_id ] )  ) {
+				// 	$module_settings[ $option_id ] = $option_arr['std'];
+				// }
 
 				// Extension for the input control (px, %, em...).
 				$ext = ' ';
@@ -663,8 +652,6 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 	// ------- SPLIT INTO SEPARATE FUNCTION ------------------------------------
 
 	if ( count( $organized_array ) > 0 ) {
-
-		// vovaphperror( $organized_array, '$organized_array' );
 
 		foreach ( $organized_array as $el => $rules ) {
 

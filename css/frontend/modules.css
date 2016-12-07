@@ -674,6 +674,7 @@
 					line-height: 1;
 					text-decoration: none;
 					box-shadow: none;
+					-webkit-appearance: none;
 				}
 
 		#dslc-content .dslc-info-box-button-aside {
@@ -1129,6 +1130,7 @@
 
 input[type="button"], input[type="submit"], input[type="reset"], input[type="file"]::-webkit-file-upload-button, button {
     border-style: none;
+    -webkit-appearance: none;
 }
 
 
@@ -1454,6 +1456,7 @@ input[type="button"], input[type="submit"], input[type="reset"], input[type="fil
 	line-height: 1;
 	text-decoration: none;
 	text-align: center;
+	-webkit-appearance: none;
 }
 
 #dslc-content .dslc-tp-thumbnail {
@@ -1655,6 +1658,7 @@ input[type="button"], input[type="submit"], input[type="reset"], input[type="fil
 		text-decoration: none;
 		line-height: 1;
 		box-shadow: none; /* override themes styling */
+		-webkit-appearance: none;
 	}
 
 /**
