@@ -1223,7 +1223,7 @@ class DSLC_Galleries extends DSLC_Module {
 						'label' => __( 'Bottom Right', 'live-composer-page-builder' ),
 						'value' => 'bottomright',
 					),
-				)
+				),
 			),
 			array(
 				'label' => __( 'Margin', 'live-composer-page-builder' ),
