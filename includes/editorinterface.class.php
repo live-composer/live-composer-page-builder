@@ -29,12 +29,15 @@ class DSLC_EditorInterface {
 	 */
 	static function get_editor_link_url( $page_id, $preview_id = '' ) {
 
+		$additional_vars = '';
+		$additional_vars = apply_filters( 'lc_edit_url_vars', $additional_vars, $page_id );
+
 		if ( '' !== $preview_id ) {
 
-			$preview_id = '&preview_id=' . $preview_id;
+			$additional_vars .= '&preview_id=' . $preview_id;
 		}
 
-		return admin_url( 'admin.php?page=livecomposer_editor&page_id=' . $page_id . $preview_id);
+		return admin_url( 'admin.php?page=livecomposer_editor&page_id=' . $page_id . $additional_vars);
 	}
 
 	/**
