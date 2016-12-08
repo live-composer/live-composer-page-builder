@@ -4189,3 +4189,25 @@ div#scroller-stopper {
     width: 100%;
     height: 83px;
 }
+
+.dslca-module-edit-option-checkbox-hook .dslca-icon:hover,
+.dslc-control-toggle:hover,
+.dslca-prompt-modal-cancel-hook:hover,
+.dslca-module-edit-field-ttip-hook:hover,
+.dslca-module-edit-field-ttip-hook .dslca-icon,
+.dslca-module-edit-field-ttip-close,
+.dslca-module-edit-field-ttip-close .dslc-icon,
+.dslca-module-edit-option-text-align-hook .dslca-icon,
+.dslca-modules-section-edit-field-image-add-hook:hover,
+.dslca-modules-section-edit-field-image-add-hook .dslca-icon:hover,
+.dslca-modules-section-edit-field-image-remove-hook:hover,
+.dslca-modules-section-edit-field-image-remove-hook .dslca-icon:hover,
+.dslca-row-edit-save:hover,
+.dslca-row-edit-cancel:hover,
+.dslca-modules-section-edit-option-checkbox-hook .dslca-icon,
+.dslca-module-edit-field-icon-ttip-hook:hover,
+.dslca-module-edit-field-icon-ttip-hook .dslca-icon,
+.dslca-options-iconbutton:hover,
+.dslca-options-iconbutton .dslca-icon {
+	cursor: pointer;
+}
