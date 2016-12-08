@@ -75,7 +75,10 @@ function dslc_register_modules() {
 
 	dslc_register_module( 'DSLC_Widgets' );
 	dslc_register_module( 'DSLC_Navigation' );
-	dslc_register_module( 'DSLC_Sliders' );
+
+	if ( class_exists( 'RevSliderBase' ) ) {
+		dslc_register_module( 'DSLC_Sliders' );
+	}
 
 	dslc_register_module( 'DSLC_TP_Thumbnail' );
 	dslc_register_module( 'DSLC_TP_Title' );
@@ -194,99 +197,29 @@ function dslc_module_settings( $options, $module_id ) {
 	// Array to hold the settings.
 	$settings = array();
 
-	// Go through all options.
-	foreach ( $options as $option ) {
+	/**
+	 * If it's all new module then just fill it's settings with default values.
+	 * Else go through each option and fill it with custom values sent.
+	 * 🔖 RAW CODE CLEANUP
+	 */
+	if ( isset( $_POST['dslc_new_module'] ) ) {
 
-		if ( isset( $_POST[ $option['id'] ] ) ) {
-
-			$settings[ $option['id'] ] = $_POST[ $option['id'] ];
-
-			/**
-			 * Extension developers can decide for themselves
-			 * what escaping function to use for a particular option id.
-			 *
-			 * See switch block below for available options.
-			 *
-			 * NOT READY - Cause too many problems for the current users
-			 * who have iframes, scripts and other hard to filter code.
-			 * Escape on output instead.
-
-
-			$escape_function_default = 'esc_attr';
-			$escape_function_custom = $escape_function_default;
-			$escape_function_custom = apply_filters( 'dslc_module_settings_sanitize_function', $escape_function_default, $option['id'], $module_id );
-
-			// If value set use it?
-			if ( 'content' === $option['id'] ) {
-
-				$settings[ $option['id'] ] = wp_kses_post( $_POST[ $option['id'] ] );
-
-
-			} elseif ( $escape_function_custom !== $escape_function_default ) {
-
-				switch ( $escape_function_custom ) {
-					case 'wp_kses_post':
-						$settings[ $option['id'] ] = wp_kses_post( $_POST[ $option['id'] ] );
-						break;
-
-					case 'sanitize_email':
-						$settings[ $option['id'] ] = sanitize_email( $_POST[ $option['id'] ] );
-						break;
-
-					case 'sanitize_file_name':
-						$settings[ $option['id'] ] = sanitize_file_name( $_POST[ $option['id'] ] );
-						break;
-
-					case 'sanitize_html_class':
-						$settings[ $option['id'] ] = sanitize_html_class( $_POST[ $option['id'] ] );
-						break;
-
-					case 'sanitize_key':
-						$settings[ $option['id'] ] = sanitize_key( $_POST[ $option['id'] ] );
-						break;
-
-					case 'sanitize_meta':
-						$settings[ $option['id'] ] = sanitize_meta( $_POST[ $option['id'] ] );
-						break;
-
-					case 'sanitize_text_field':
-						$settings[ $option['id'] ] = sanitize_text_field( $_POST[ $option['id'] ] );
-						break;
-
-					case 'sanitize_title':
-						$settings[ $option['id'] ] = sanitize_title( $_POST[ $option['id'] ] );
-						break;
-
-					case 'esc_html':
-						$settings[ $option['id'] ] = esc_html( $_POST[ $option['id'] ] );
-						break;
-
-					case 'esc_url':
-						$settings[ $option['id'] ] = esc_url( $_POST[ $option['id'] ] );
-						break;
-
-					case 'esc_js':
-						$settings[ $option['id'] ] = esc_js( $_POST[ $option['id'] ] );
-						break;
-
-					case 'esc_textarea':
-						$settings[ $option['id'] ] = esc_textarea( $_POST[ $option['id'] ] );
-						break;
-
-					default:
-						$settings[ $option['id'] ] = esc_attr( $_POST[ $option['id'] ] );
-						break;
-				}
-			} else {
-
-				$settings[ $option['id'] ] = esc_attr( $_POST[ $option['id'] ] );
-			}
-			*/
-
-		} else {
-			// If value not set use default?
+		// Go through all options and fill array with default/standard values.
+		foreach ( $options as $option ) {
 			$settings[ $option['id'] ] = $option['std'];
 		}
+
+	} else {
+
+		// Go through all options and fill array with custom values, otherwise leave empty.
+		foreach ( $options as $option ) {
+			if ( isset( $_POST[ $option['id'] ] ) && '' !== $_POST[ $option['id'] ] ) {
+				$settings[ $option['id'] ] = $_POST[ $option['id'] ];
+			} else {
+				$settings[ $option['id'] ] = '';
+			}
+		}
+
 	}
 
 	return $settings;
@@ -301,19 +234,8 @@ function dslc_get_new_module_id() {
 
 	// Allowed to do this?
 	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
-
-		// Get current count.
-		$module_id_count = get_option( 'dslc_module_id_count' );
-
-		// Increment by one.
-		$module_instance_id = $module_id_count + 1;
-
-		// Update the count.
-		update_option( 'dslc_module_id_count', $module_instance_id );
-
-		// Return new ID.
-		return $module_instance_id;
-
+		// Generates unique id like 'kojb85j8oc'.
+		return substr(str_shuffle(MD5(microtime())), 0, 11);
 	}
 }
 
@@ -524,77 +446,6 @@ function dslc_is_module_active( $module_id, $check_registered = false ) {
 		return false;
 	} else {
 		return true;
-	}
-
-}
-
-/**
- * Save Preset
- *
- * @since 1.0
- */
-function dslc_save_preset( $preset_name, $preset_code_raw, $module_id ) {
-
-	$preset_id = strtolower( str_replace( ' ', '-', $preset_name ) );
-
-	// Clean up ( step 1 - get data ).
-	$preset_code_raw = maybe_unserialize( base64_decode( $preset_code_raw ) );
-	$preset_code = array();
-
-	// The ID of the module to add.
-	$module_id = esc_attr( $module_id );
-
-	if ( ! class_exists( $module_id ) ) {
-
-		header( 'HTTP/1.1 400 Bad Request', true, 400 );
-		die();
-	}
-
-	$module = new $module_id();
-	$module_options = $module->options();
-
-	// Clean up ( step 2 - generate correct preset code ).
-	foreach ( $module_options as $module_option ) {
-
-		// Allowed to have a preset.
-		if ( ! isset( $module_option['include_in_preset'] ) || true === $module_option['include_in_preset'] ) {
-
-			// Modules section not set or module section not functionality.
-			if ( ( isset( $module_option['section'] ) && 'functionality' !== $module_option['section'] ) && ( ! isset( $module_option['visibility'] ) || 'hidden' !== $module_option['visibility'] ) ) {
-
-				if ( isset( $preset_code_raw[ $module_option['id'] ] ) ) {
-					$preset_code[ $module_option['id'] ] = $preset_code_raw[ $module_option['id'] ];
-				}
-			}
-		}
-	}
-
-	// Clean up ( step 3 - final ).
-	$preset_code = base64_encode( maybe_serialize( $preset_code ) );
-
-	// Get current presets.
-	$presets = get_option( 'dslc_presets' );
-
-	// No presets = make empty array OR presets found = unserialize.
-	if ( $presets === false ) {
-		$presets = array();
-	} else {
-		$presets = maybe_unserialize( $presets );
-	}
-
-	// Append new preset to presets array.
-	$presets[$preset_id] = array(
-		'title' => $preset_name,
-		'id' => $preset_id,
-		'code' => $preset_code,
-		'module' => $module_id
-	);
-
-	// Save new presets array to db and set the status.
-	if ( update_option( 'dslc_presets', maybe_serialize( $presets ) ) ) {
-		return true;
-	} else {
-		return false;
 	}
 
 }
@@ -835,3 +686,265 @@ function dslc_load_modules( $dir_path, $init_filename = '' ) {
 		}
 	}
 }
+
+/**
+ * Migrate code from dslc_code generation one to two.
+ * First generation: shortcodes + base64.
+ * Second generation: JSON only.
+ *
+ * @param  array  $settings Array with all the module properties.
+ * @return array            The same array but adjusted to make migration seamless.
+ */
+function dslc_code_migration( $settings ) {
+
+	if ( ! isset( $settings['module_id'] ) || ! class_exists( $settings['module_id'] ) ) {
+		return;
+	}
+
+	// The ID of the module.
+	$module_id = $settings['module_id'];
+
+	// Instanciate the module class
+	$module_instance = new $module_id();
+	$module_struct = $module_instance->options();
+
+	// Go trough module standard settings and check every color setting.
+	// 🔖 RAW CODE CLEANUP
+	foreach ( $module_struct as $control ) {
+		$id = $control['id'];
+		$type = $control['type'];
+
+		/**
+		 * If code migrated from the shortcodes ('code_version' = 1),
+		 * go through each missing setting and fill it with default data.
+		 */
+		if ( 1 === $settings['code_version'] ) {
+
+			if ( ! isset( $settings[ $id ] ) && isset( $control['std'] ) ) {
+				$settings[ $id ] = $control['std'];
+			}
+		}
+
+		// $module_settings[ $option_id ] = $option_arr['std'];
+
+/*
+		// When import shortcodes code, 'Display on' setting is empty
+		// when all the checkboxes selected. This makes the module completely
+		// hidden in new version of code rendering.
+		if ( 'css_show_on' === $id ) {
+			if ( empty( $settings[ $id ] ) ) {
+				$settings[ $id ] = 'desktop tablet phone';
+			}
+		}
+
+		if ( stristr( $id, 'border_trbl' ) ) {
+			if ( ! isset( $settings[ $id ] ) || empty( $settings[ $id ] ) ) {
+				$settings[ $id ] = 'top right bottom left';
+			}
+		}
+*/
+		// Check the conrol options in the old code and adjust them if needed.
+		if ( 'color' === $type ) {
+
+			// If this setting is set but value is empty...
+			if ( isset( $settings[ $id ] ) && empty( $settings[ $id ] ) ) {
+				// If the color is empty make it transparent.
+				// In old code empty = transparent.
+				// In new code empty = default color.
+				// In new code transparent = rgba(0,0,0,0).
+				$settings[ $id ] = 'rgba(0,0,0,0)'; // @todo: still need it?
+			
+				if ( stristr($id, 'icon_color') ) {
+					$settings[ $id ] = '';
+				}
+			}
+		}
+
+		// Set border-radius = 0 if in old version it was disabled.
+		if ( 'css_border_radius' === $type ) {
+
+			// If this setting isn't set at all...
+			if ( ! isset( $settings[ $id ] )  ) {
+				$settings[ $id ] = '0';
+			}
+
+			if ( isset( $settings[ $id ] ) && '' === $settings[ $id ] ) {
+				$settings[ $id ] = '0';
+			}
+		}
+
+		// All other cases.
+		if ( empty( $settings[ $id ] ) && isset( $control['std'] ) ) {
+			$settings[ $id ] = $control['std'];
+		}
+
+	}
+
+	// Migration done. Remove the key code_version = 1.
+	if ( isset( $settings['code_version'] ) ) {
+		unset( $settings['code_version'] );
+	}
+
+	return $settings;
+}
+
+function dslc_sanitize_option_val ( $data_to_sanitize ) {
+
+	$id = $data_to_sanitize['id'];
+	$value = $data_to_sanitize['value'];
+
+	if ( stristr( $value, '{\\') ) {
+		// Filter out values with json code left by broken presets functionality.
+		return '';
+	} else {
+		return $value;
+	}
+}
+
+/*
+Work in progress.
+
+function dslc_sanitize_option_val ( $data_to_sanitize ) {
+
+	$id = $data_to_sanitize['id'];
+
+	$value = $data_to_sanitize['value'];
+	$value_std = '';
+	$option_type = '';
+	$option_sanitize = '';
+
+	if ( stristr( $id, 'css_' ) ) {
+		// Sanitize CSS properties.
+
+		// Allowed values (desktop ..., -80%, 20px, rgba(34,234,23), #0000).
+		$pattern = '/^[0-9,a-z, ,\.,\-,(),#,%]{1,30}$/is';
+
+		// CSS Value can't be more that 30 characters long. Don't ask why :).
+		if ( preg_match( $pattern, $value ) ) {
+			return $value;
+		} else {
+			return '';
+		}
+
+	} else {
+		// Sanitize all other properties.
+
+		// Extract all the option settings from the module settings.
+		if ( isset( $data_to_sanitize['definition'] ) ) {
+
+			$option_settings = $data_to_sanitize['definition'];
+
+			if ( isset( $option_settings['type'] ) ) {
+				$option_type = $option_settings['type'];
+			}
+
+			if ( isset( $option_settings['std'] ) ) {
+				$value_std = $option_settings['std'];
+			}
+
+			if ( isset( $option_settings['sanitize'] ) ) {
+				$option_sanitize = $option_settings['sanitize'];
+			}
+		}
+
+		// First of all check if current value is default.
+		if ( $value === $value_std ) {
+			return $value;
+		}
+
+		// If there is no special sanitization option for the current option.
+		if ( ! $option_sanitize ) {
+
+			if ( 'slider' === $option_type ) {
+
+				// Allow numbers only.
+				$pattern_slider = '/^[0-9]{1,9}$/s';
+
+				if ( preg_match( $pattern_slider, $value ) ) {
+					return $value;
+				} else {
+					return '';
+				}
+			} elseif ( 'color' === $option_type ) {
+
+				// Allowed characters.
+				$pattern_color = '/^[0-9,a-zA-Z, ,\.,(),#]{1,30}$/s';
+
+				if ( preg_match( $pattern_color, $value ) ) {
+					return $value;
+				} else {
+					return '';
+				}
+			} elseif ( 'font' === $option_type ) {
+
+				// Allowed characters.
+				$pattern_font = '/^[0-9,a-zA-Z, ,",\',_,-]{1,80}$/s';
+
+				if ( preg_match( $pattern_font, $value ) ) {
+					return $value;
+				} else {
+					return '';
+				}
+			} elseif ( 'icon' === $option_type ) {
+
+				// Allowed characters.
+				$pattern_icon = '/^[0-9,a-zA-Z, ,_,-]{1,30}$/s';
+
+				if (preg_match( $pattern_icon, $value ) ) {
+					return $value;
+				} else {
+					return '';
+				}
+			} elseif ( 'image' === $option_type ) {
+
+				// Allow numbers only for image IDs.
+				$pattern_image = '/^[0-9]{1,9}$/s';
+
+				if ( stristr( $value, '/') ) {
+					// Image is URL.
+					return esc_url( $value );
+				} elseif ( preg_match( $pattern_image, $value ) ) {
+					// Image is ID.
+					return $value;
+				} else {
+					// Non-valid.
+					return '';
+				}
+			} elseif ( 'checkbox' === $option_type || 'select' === $option_type ) {
+				return $value;
+			} elseif ( 'text' === $option_type && stristr( $id, '_class' ) ) {
+
+				// Allowed characters.
+				$pattern_font = '/^[0-9,a-zA-Z, ,",\',_,-]{1,80}$/s';
+
+				if ( preg_match( $pattern_font, $value ) ) {
+					return $value;
+				} else {
+					return '';
+				}
+			} elseif ( 'text' === $option_type && stristr( $id, '_url' ) ) {
+
+				// Allowed characters.
+				$pattern_relative_path = '/^[^\s/$.?#]*[^\s]*$/is';
+
+				if ( stristr( $value , 'http') ) {
+					return esc_url( $value );
+				} elseif ( preg_match( $pattern_relative_path, $value ) && 1000 > strlen( $value ) ) {
+					return $value;
+				} else {
+					return '';
+				}
+			} elseif ( 'text' ) {
+				return ;
+			} elseif ( stristr( $id, '_onclick' ) ) {
+				return esc_js( $value );
+			} else {
+				// All other cases.
+				return esc_attr($value );
+			}
+		}
+	}
+
+	// return $value;
+}
+*/

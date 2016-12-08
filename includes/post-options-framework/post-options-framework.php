@@ -4,7 +4,7 @@
  *
  * - dslc_setup_post_options ( Sets up the post options )
  * - dslc_add_post_options ( Adds metaboxes )
- * - DSLC_EditorInterface_post_options ( Displays options )
+ * - dslc_editorinterface_post_options ( Displays options )
  * - dslc_save_post_options ( Saves options to post )
  * - dslc_page_add_row_action ( Adds action in row )
  * - dslc_post_add_row_action ( Adds action in row )
@@ -138,7 +138,7 @@ function dslc_add_post_options() {
 					add_meta_box(
 						$dslc_post_option_key,
 						$dslc_post_option['title'],
-						'DSLC_EditorInterface_post_options',
+						'dslc_editorinterface_post_options',
 						$dslc_post_option_show_on,
 						$dslc_post_option['context'],
 						'high'
@@ -151,7 +151,7 @@ function dslc_add_post_options() {
 				add_meta_box(
 					$dslc_post_option_key,
 					$dslc_post_option['title'],
-					'DSLC_EditorInterface_post_options',
+					'dslc_editorinterface_post_options',
 					$dslc_post_option['show_on'],
 					$dslc_post_option['context'],
 					'high'
@@ -166,7 +166,7 @@ function dslc_add_post_options() {
  *
  * @since 1.0
  */
-function DSLC_EditorInterface_post_options( $object, $metabox ) {
+function dslc_editorinterface_post_options( $object, $metabox ) {
 
 	global $dslc_var_post_options;
 
@@ -440,28 +440,7 @@ function dslc_save_post_options( $post_id, $post ) {
 }
 
 /**
- * Adds action in row
- */
-function dslc_page_add_row_action( $actions, $page_object ) {
-
-	$screen = get_current_screen();
-	$dslc_admin_interface_on = apply_filters( 'dslc_admin_interface_on', $screen->post_type );
-	$page_status = $page_object->post_status;
-	$id = $page_object->ID;
-
-	if ( true === $dslc_admin_interface_on && $page_status != 'trash' ) {
-
-		$url = DSLC_EditorInterface::get_editor_link_url( $id );
-
-		$actions = array('edit-in-live-composer' => '<a href="' . $url . '">' . __( 'Edit in Live Composer', 'live-composer-page-builder' ) . '</a>') + $actions;
-	}
-
-	return $actions;
-}
-add_filter( 'page_row_actions', 'dslc_page_add_row_action', 10, 2 );
-
-/**
- * Adds 'Open in Live Composer', 'Edit Template' actions
+ * Adds 'Edit Template', 'Create Template' and 'Edit in Live Composer' actions
  * next to each page in WP Admin posts listing table.
  *
  * @param  array   $actions An array of row action links. Defaults are 'Edit', 'Quick Edit', 'Restore, 'Trash', 'Delete Permanently', 'Preview', and 'View'.
@@ -470,30 +449,30 @@ add_filter( 'page_row_actions', 'dslc_page_add_row_action', 10, 2 );
  */
 function dslc_post_add_row_action( $actions, $post ) {
 
-	global $dslc_var_templates_pt;
-
 	$post_status = $post->post_status;
 	$post_type = $post->post_type;
-	$dslc_admin_interface_on = apply_filters( 'dslc_admin_interface_on_listing', true );
 
-	if ( true === $dslc_admin_interface_on && 'trash' !== $post_status ) {
+	if ( dslc_can_edit_in_lc( $post_type ) && 'trash' !== $post_status ) {
 
-		if ( array_key_exists( $post_type, $dslc_var_templates_pt ) ) {
+		// If post use templates.
+		if ( dslc_cpt_use_templates( $post_type ) ) {
 
-			$template_id = dslc_st_get_template_id( $post->ID );
+			$template_id = dslc_get_template_by_id( $post->ID );
 			$url = DSLC_EditorInterface::get_editor_link_url( $template_id, $post->ID );
 
 			// If default template for current CPT exists.
 			if ( $template_id ) {
-				$actions = array( 'edit-in-live-composer' => '<a href="'. $url . '">'. __( 'Edit Template', 'live-composer-page-builder' ) .'</a>' ) + $actions;
+				$actions = $actions + array( 'edit-in-live-composer' => '<a href="'. $url . '">'. __( 'Edit Template', 'live-composer-page-builder' ) .'</a>' );
 			} else {
-				$actions = array( 'edit-in-live-composer' => '<a href="'. admin_url( 'post-new.php?post_type=dslc_templates' ) . '">'. __( 'Create Template', 'live-composer-page-builder' ) .'</a>' ) + $actions;
+				$actions = $actions + array( 'edit-in-live-composer' => '<a href="'. admin_url( 'post-new.php?post_type=dslc_templates' ) . '">'. __( 'Create Template', 'live-composer-page-builder' ) .'</a>' );
 			}
+
+		// Each post can be edited in the page builder.
 		} else {
 
 			$url = DSLC_EditorInterface::get_editor_link_url( $post->ID );
 
-			$actions = array( 'edit-in-live-composer' => '<a href="'. $url . '">'. __( 'Edit in Live Composer', 'live-composer-page-builder' ) .'</a>' ) + $actions;
+			$actions = $actions + array( 'edit-in-live-composer' => '<a href="'. $url . '">'. __( 'Open in Page Builder', 'live-composer-page-builder' ) .'</a>' );
 		}
 	}
 
@@ -501,22 +480,20 @@ function dslc_post_add_row_action( $actions, $post ) {
 }
 
 add_filter( 'post_row_actions', 'dslc_post_add_row_action', 10, 2 );
+add_filter( 'page_row_actions', 'dslc_post_add_row_action', 10, 2 );
 
 /**
- * Adds button in permalink
+ * Adds 'Open in Live Composer' button in WP Admin > Post Edit > Permalink field.
  *
  * @return  string
  */
 function dslc_add_button_permalink( $return, $id, $new_title, $new_slug ) {
 
-	global $dslc_var_templates_pt;
+	$post_type = get_post_type( $id );
 
-	$current_post_type = get_post_type( $id );
-	$dslc_admin_interface_on = apply_filters( 'dslc_admin_interface_on_slug_box', true );
-
-	if ( true === $dslc_admin_interface_on &&
-		 ! array_key_exists( $current_post_type, $dslc_var_templates_pt ) &&
-		 $current_post_type != 'dslc_testimonials' ) {
+	if ( dslc_can_edit_in_lc( $post_type ) &&
+			! dslc_cpt_use_templates( $post_type ) &&
+			$post_type != 'dslc_testimonials' ) {
 
 		$url = DSLC_EditorInterface::get_editor_link_url( $id );
 
@@ -524,28 +501,27 @@ function dslc_add_button_permalink( $return, $id, $new_title, $new_slug ) {
 	}
 
 	return $return;
-}
-add_filter( 'get_sample_permalink_html', 'dslc_add_button_permalink', 10, 4 );
+} add_filter( 'get_sample_permalink_html', 'dslc_add_button_permalink', 10, 4 );
 
 /**
- * Adds button in submitbox
+ * Adds button 'Open in Live Composer' in WP Admin > Post Edit > Publish Box.
  */
 function dslc_post_submitbox_add_button() {
 
-	global $post, $current_screen, $dslc_var_templates_pt;
-	$current_post_type = $post->post_type;
-	$dslc_admin_interface_on = apply_filters( 'dslc_admin_interface_on_submitdiv', $current_post_type );
+	global $post, $current_screen;
+	$post_type = $post->post_type;
 
-
-	if ( true === $dslc_admin_interface_on && $current_screen->action != 'add' && ! array_key_exists( $current_post_type, $dslc_var_templates_pt ) && $current_post_type != 'dslc_testimonials' ) {
+	if ( 'add' !== $current_screen->action &&
+			dslc_can_edit_in_lc( $post_type ) &&
+			! dslc_cpt_use_templates( $post_type ) &&
+			'dslc_testimonials' !== $post_type ) {
 
 		$url = DSLC_EditorInterface::get_editor_link_url( get_the_ID() );
 
 		echo '<a class="button button-hero" target="_blank" href="' . $url . '">' . __( 'Open in Live Composer', 'live-composer-page-builder' ) . '</a>';
 	}
 
-}
-add_action( 'post_submitbox_start', 'dslc_post_submitbox_add_button' );
+} add_action( 'post_submitbox_start', 'dslc_post_submitbox_add_button' );
 
 /**
  * Creates a tab for pages and different post types

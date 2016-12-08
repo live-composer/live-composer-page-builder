@@ -161,7 +161,8 @@ body a:focus {
 	height: auto;
 }
 
-.dslca-container select {
+.dslca-container select,
+.dslca-modules-section-edit-option select {
 	line-height: 12px; /* Fixes the height in Safari */
 	padding: 6px 10px;
 	min-height: 32px;
@@ -172,14 +173,16 @@ body a:focus {
    appearance: none;
 
    cursor: pointer;
+
+   background: url(../../images/dropdown-arrow.png) 90% 55% / 7px no-repeat #6c9fed;
 }
 
 
 .dslca-modules-section-edit-option-select .dslca-icon,
 .dslca-module-edit-option-select .dslca-icon {
 	position: absolute;
-	right: 40px;
-	top: 64px;
+	right: 30px;
+	top: 77px;
 	cursor: pointer;
 }
 
@@ -275,7 +278,7 @@ body a:focus {
 
 	.dslca-header {
 		position: absolute;
-		z-index: 100;
+		/*z-index: 100; - breaks color picker*/
 		/* keep LC styling panel Confirm/Cancel buttons on the top */
 		min-height: 38px;
 		bottom: 100%;
@@ -586,18 +589,10 @@ body a:focus {
 
 	}
 
-
-
-.dslc-modules-area {
-	position: relative;
-}
-
 		.dslca-module {
 			color: #fff;
-
 			display: inline-block;
-			/*float: left;*/
-			font-family: 'Roboto Condensed', sans-serif;
+			font-family: font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 			font-size: 15px;
 			font-weight: 400;
 			line-height: 1;
@@ -608,7 +603,6 @@ body a:focus {
 			border-radius: 2px;
 			text-align: center;
 			min-width: 70px;
-
 			transition: transform 0.05s linear 0.01s;
 
 			/**
@@ -710,7 +704,6 @@ body a:focus {
 			}
 
 	.dslca-module-edit {
-		overflow: hidden;
 		position: relative;
 	}
 
@@ -718,7 +711,6 @@ body a:focus {
 		.dslca-module-edit-options,
 		.dslca-pseudo-module-edit-options {
 			padding: 16px 15px 5px 15px;
-			overflow-x: auto;
 			min-height: 58px;
 
 			transform: translate(0,0); 
@@ -731,12 +723,44 @@ body a:focus {
 			.dslca-module-edit-option,
 			.dslca-pseudo-module-edit-option {
 				display: table-cell;
-				/*float: left;*/
-				padding-bottom: 20px;
-				padding-right: 30px;
-				padding-top: 30px;
+				padding-bottom: 40px;
+				padding-left: 15px;
+				padding-right: 15px;
+				padding-top: 40px;
 				min-width: 180px;
 				position: relative;
+			}
+
+			.dslca-module-control-group {
+				padding: 4px;
+			}
+
+			.dslca-module-control-group > .controls-group-inner {
+				padding-left: 15px;
+				padding-right: 15px;
+				padding-top: 0;
+				padding-bottom: 0;
+				min-width: 180px;
+				border: 1px solid rgba(0,0,0,.1);
+				border-radius: 3px;
+				position: relative;
+			}
+
+			.dslca-module-control-group > .controls-group-inner > .dslca-module-edit-label {
+				position: absolute;
+				background: rgba(76, 129, 207, 0.4);
+				padding: 6px 11px;
+				left: 0;
+				border-radius: 2px 2px 0 0;
+				width: 100%;
+				text-transform: uppercase;
+				letter-spacing: 1px;
+				font-size: 75%;
+				border-bottom: 1px solid #4C81CF;
+			}
+
+			.dslca-module-control-group > .controls-group-inner > .dslca-module-edit-label .dslc-control-toggle {
+				display: none;
 			}
 
 			.dslca-module-edit-option-hidden {
@@ -754,7 +778,7 @@ body a:focus {
 				.dslca-module-edit-option textarea:focus,
 				.dslca-module-edit-option select:focus,
 				.dslca-pseudo-module-edit-field {
-					background: #6c9fed;
+					background-color: #6c9fed;
 					border: 1px solid #447bce;
 					border-radius: 3px;
 					width: 100%;
@@ -1157,7 +1181,6 @@ body a:focus {
 	 */
 
 	.dslca-modules-section-edit {
-		overflow: hidden;
 		position: relative;
 	}
 
@@ -1170,7 +1193,7 @@ body a:focus {
 				.dslca-modules-section-edit-option input[type="number"],
 				.dslca-modules-section-edit-option textarea,
 				.dslca-modules-section-edit-option select {
-					background: #6c9fed;
+					background-color: #6c9fed;
 					border: 1px solid #447bce;
 					width: 100%;
 					height: auto;
@@ -1497,13 +1520,13 @@ body a:focus {
 	min-height: 30px;
 }
 
-.dslc-module-front:hover {
-	z-index: 9999;
+.dslc-module-front.dslca-change-width-active {
+	z-index: 999999;
 }
 
 body.module-editing-in-progress .dslc-module-front:not(.dslca-module-being-edited),
 body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-section-being-edited) {
-	opacity: .5;
+	/*opacity: .5;*/
 	cursor: default!important;
 }
 
@@ -1529,8 +1552,7 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 }
 
 .dslc-modules-area:hover .dslc-module-front:hover {
-	/*outline-color: #5890e5;*/
-	box-shadow: 0 0 0 2px #5890e5;
+	box-shadow: 0 0 0 2px rgb(79, 143, 241);
 }
 
 /**
@@ -1825,13 +1847,15 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 	/* Main */
 
 	.dslc-modules-section {
-		/*outline: 2px dashed transparent;*/
 		position: relative;
 	}
 
 	.dslc-modules-section:hover {
-		/*outline-color: #eabba9;*/
-		box-shadow: 0 0 0 2px #eabba9;
+		box-shadow: 0 0 0 2px #fd8f67;
+	}
+
+	.dslc-modules-section.dslca-change-width-active {
+		z-index: 100;
 	}
 		/*.dslc-modules-section-inner {
 			min-height: 50px;
@@ -1876,25 +1900,21 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 		left: 0;
 		right: 0;
 		visibility: hidden;
-		margin-bottom: -13px;
+		margin-bottom: 0;
 		padding-right: 0;
 		position: absolute;
-		z-index: 99998;
-		width: 100%;
+		z-index: 99998; /* Should be less than module control elements */
+ 		width: 100%;
 		text-align: center;
 	}
 
-	.dslca-modules-section-manage:hover {
-		z-index: 99999;
-	}
 
 	.dslc-modules-section:hover .dslca-modules-section-manage {
 		visibility: visible !important;
 	}
-
 		.dslca-modules-section-manage-inner,
 		.dslca-module-manage-inner {
-			background: #e5855f;
+			background: #f17c56;
 			border-radius: 3px;
 			display: inline-block;
 			line-height: 1;
@@ -1903,11 +1923,15 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 			vertical-align: middle;
 			opacity: 0;
 			cursor: pointer;
+		}
 
+		.dslca-modules-section-manage-inner {
+			border-bottom-right-radius: 0;
+			border-bottom-left-radius: 0;
 		}
 
 			.dslca-modules-section-manage .dslca-manage-action:hover {
-			  background: #da7348;
+			  background: #db6a3a;
 			}
 
 			.dslca-module-manage-inner .dslca-manage-action:hover {
@@ -2095,14 +2119,19 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 				display: none;
 				padding: 7px;
 				position: absolute;
-				top: -10px;
-				left: 22px;
+				top: -6px;
+				left: 25px;
 				z-index: 99999;
-				width: 120px;
+				width: 122px;
 			}
 
 			.dslca-change-width-module-options {
-				top: 30px;
+				top: 24px;
+				left: 0;
+				border-top-right-radius: 0;
+				border-top-left-radius: 0;
+				border-top: none;
+				padding-bottom: 18px;
 			}
 
 			.dslca-change-width-modules-area-options:after,
@@ -2247,13 +2276,12 @@ body.rtl .dslca-modules-area-placeholder {
 	top: -2px;
 	text-align: center;
 	z-index: 99999;
-	overflow: hidden;
 	line-height: 1;
 }
 
-.dslca-module-manage.dslca-module-manage-change-width-active {
+/*.dslca-module-manage.dslca-module-manage-change-width-active {
 	z-index: 100000;
-}
+}*/
 
 	.dslca-module-manage-inner {
 		background: #5890e5;
@@ -2432,7 +2460,7 @@ body.rtl .dslca-modules-area-placeholder {
 
 /** Modal Window class */
 
-.dslca-prompt-modal-msg textarea.js-error-text{
+.dslca-prompt-modal-msg textarea{
 	width: 100%;
     min-height: 80px;
     padding: 5px;
@@ -2599,7 +2627,8 @@ body.rtl .dslca-modules-area-placeholder {
 .dslca-module-edit-option-size,
 #dslca-code,
 #dslca-content-for-search,
-.dslca-module-code {
+.dslca-module-code,
+.dslca-section-code {
 	display: none !important;
 }
 
@@ -2695,7 +2724,6 @@ body.rtl .dslca-modules-area-placeholder {
 				line-height: 1;
 				font-weight: bold;
 				position: relative;
-				top: -50px;
 				padding: 7px 10px;
 				border-radius: 0 0 0 3px;
 				letter-spacing: 0;
@@ -3034,13 +3062,20 @@ span.dslca-manage-action:hover * {
 	position: relative;
 }
 
+	/* Slider is hidden by default and we show it on hover only */
+	.dslca-modules-edit-field-slider {
+		display: none;
+	}
+
 	.dslca-container .dslca-module-edit-field-slider,
 	.dslca-container .dslca-modules-section-edit-field-slider {
 		background: #6c9fed;
 		border-radius: 5px;
-		position: relative;
+		position: absolute;
 		height: 5px;
-		margin-top: 20px;
+		left: 15px; /* compensate conrol wrapper paddings */
+		right: 15px; /* compensate conrol wrapper paddings */
+		margin-top: 15px;
 	}
 
 		.dslca-container .dslca-module-edit-field-slider .ui-slider-handle,
@@ -3053,56 +3088,9 @@ span.dslca-manage-action:hover * {
 			width: 15px;
 			height: 15px;
 			margin-left: -7px;
+			cursor: ew-resize;
 		}
 
-		.dslca-container .dslca-module-edit-field-slider-tooltip,
-		.dslca-container .dslca-modules-section-edit-field-slider-tooltip {
-			display: none;
-			position: absolute;
-			background: #fff;
-			border-radius: 3px;
-			bottom: 20px;
-			line-height: 1;
-			padding: 10px;
-			color: #838383;
-			margin-left: -15px;
-			font-size: 14px;
-		}
-
-		.dslca-container .dslca-module-edit-field-slider-tooltip:after,
-		.dslca-container .dslca-modules-section-edit-field-slider-tooltip:after {
-			top: 100%;
-			border: solid transparent;
-			content: " ";
-			height: 0;
-			width: 0;
-			position: absolute;
-			pointer-events: none;
-		}
-
-		.dslca-container .dslca-module-edit-field-slider-tooltip:after,
-		.dslca-container .dslca-modules-section-edit-field-slider-tooltip:after {
-			border-color: transparent;
-			border-top-color: #fff;
-			border-width: 6px;
-			left: 50%;
-			margin-left: -6px;
-		}
-
-		.dslca-modules-section-edit-option-slider input,
-		.dslca-module-edit-option-slider input {
-			 cursor: ew-resize;
-		}
-
-		.dslca-modules-section-edit-option-slider:hover:after,
-		.dslca-module-edit-option-slider:hover:after {
-			content: "click and drag";
-			display: block;
-			font-size: 11px;
-			margin-top: 5px;
-			opacity: 0.4;
-			position: absolute;
-		}
 
 /**
  * Numeric Text
@@ -3822,12 +3810,13 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 .dslca-module-edit-options-wrapper,
 .dslca-pseudo-module-edit-options-wrapper {
 	display: table-cell;
-	padding: 0 0 20px;
+	padding: 0;
 }
 
 	.dslca-modules-section-edit-options-inner,
 	.dslca-module-edit-options-inner {
 		overflow-x: scroll;
+		padding-top: 4px;
 	}
 
 /**
@@ -3865,46 +3854,26 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
  */
 
 .dslca-drag-not-in-progress .dslc-module-front .dslca-module-manage {
-	overflow: hidden;
+	/*overflow: hidden;*/
 }
 
 /* Visible overflow if module width opts shown */
+/*.dslca-drag-not-in-progress .dslc-modules-section.dslca-change-width-active .dslca-module-manage.dslca-module-manage-change-width-active,
 .dslca-drag-not-in-progress .dslc-module-front:hover .dslca-module-manage.dslca-module-manage-change-width-active {
 	overflow: visible;
-}
+}*/
 
-.dslca-drag-not-in-progress #dslc-content .dslc-module-front .dslca-module-manage-inner,
-.dslca-drag-not-in-progress #dslc-content .dslc-module-front .dslca-wysiwyg-actions-edit-hook {
-	top: 0;
-	opacity: 0;
-	-webkit-transition: opacity 0.1s ease-in-out;
-	-moz-transition: opacity 0.1s ease-in-out;
-	transition: opacity 0.1s ease-in-out;
-
-/*	top: -50;*/
-/*	-webkit-transition: transform 0.2s ease-in-out;
-	-moz-transition: transform 0.2s ease-in-out;
-	transition: transform 0.2s ease-in-out;
-
-	-ms-transform: translate(0,-50px);
-	-webkit-transform: translate(0,-50px);
-	transform: translate(0,-50px);*/
-}
-
+.dslca-drag-not-in-progress #dslc-content .dslc-module-front .dslca-module-manage-inner:hover,
 .dslca-drag-not-in-progress #dslc-content .dslc-module-front:hover .dslca-module-manage-inner,
-.dslca-drag-not-in-progress #dslc-content .dslc-module-front:hover .dslca-wysiwyg-actions-edit-hook {
-	top: 0;
+.dslca-drag-not-in-progress #dslc-content .dslc-module-front:hover .dslca-wysiwyg-actions-edit {
 	opacity: 1;
-
-/*	-ms-transform: translate(0,0);
-	-webkit-transform: translate(0,0);
-	transform: translate(0,0);*/
 }
 
 /**
  * Area Actions - hide/show on hover
  */
 
+.dslca-drag-not-in-progress .dslc-module-front .dslca-wysiwyg-actions-edit,
 .dslca-drag-not-in-progress .dslc-modules-area .dslca-modules-area-manage-inner {
 	opacity: 0;
 /*	-webkit-transition: opacity 0.2s ease-in-out;
@@ -3912,6 +3881,7 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 	transition: opacity 0.2s ease-in-out;*/
 }
 
+.dslca-drag-not-in-progress .dslc-modules-area .dslca-modules-area-manage-inner:hover,
 .dslca-drag-not-in-progress .dslc-modules-area:hover .dslca-modules-area-manage-inner {
 	opacity: 1;
 }

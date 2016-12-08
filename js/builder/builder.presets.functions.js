@@ -22,7 +22,7 @@ function dslc_update_preset() {
 	moduleID = module.data('dslc-module-id');
 
 	// If preset value not "none"
-	if ( presetName !== 'none' ) {
+	if ( 'none' !== presetName && '' !== presetName ) {
 
 		// AJAX Call to Save Preset
 		jQuery.post(

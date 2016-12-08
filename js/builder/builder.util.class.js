@@ -90,58 +90,36 @@ LiveComposer.Utils = {
 	utf8_to_b64: function(t) {
 
 		return window.btoa(unescape(encodeURIComponent(t)));
-
-	 },
-
-	 /**
-	  * Converts base64 to UTF-8
-	  *
-	  * @param  {string} str in b64
-	  * @return {string}   in utf-8
-	  */
-	 b64_to_utf8: function(str) {
-
-		return decodeURIComponent(escape(window.atob(str)));
-
-	 },
-
-	 /**
-	  * Get Page Params
-	  *
-	  * @return {array}
-	  */
-	 get_page_params: function()
-	 {
-		return decodeURIComponent(window.location.search.slice(1)).split('&').reduce(function _reduce ( a, b) { b = b.split('='); a[b[0]] = b[1]; return a; }, {});
-	 },
-
-	get_unique_id: function() {
-		return Math.random().toString(32).slice(2);
-	},
-
-	encode: function (code) {
-		// Serialize
-		code = dslc_serialize( code );
-
-		// Encode
-		code = LiveComposer.Utils.utf8_to_b64( code );
-
-		return code;
-	},
-
-	decode: function (code) {
-
-		// Decode base64 to utf8
-		code = LiveComposer.Utils.b64_to_utf8( code );
-
-		// Unserialize decoded code into the object
-		code = dslc_unserialize( code );
-
-		return code;
 	},
 
 	/**
-	 * Update module option in raw base64 code (dslc_code) of the module
+	 * Converts base64 to UTF-8
+	 *
+	 * @param  {string} str in b64
+	 * @return {string}   in utf-8
+	 */
+	b64_to_utf8: function(str) {
+
+		return decodeURIComponent(escape(window.atob(str)));
+	},
+
+	/**
+	 * Get Page Params
+	 *
+	 * @return {array}
+	 */
+	get_page_params: function() {
+
+		return decodeURIComponent(window.location.search.slice(1)).split('&').reduce(function _reduce ( a, b) { b = b.split('='); a[b[0]] = b[1]; return a; }, {});
+	},
+
+	get_unique_id: function() {
+
+		return Math.random().toString(32).slice(2);
+	},
+
+	/**
+	 * Update module option in raw JSON code (dslc_code) of the module
 	 *
 	 * @param  {DOM element} module    Module Element
 	 * @param  {string} property_name  Name of the option we change
@@ -161,14 +139,9 @@ LiveComposer.Utils = {
 		// Get module raw code
 		var module_code = module_code_container.value;
 
-	 	// Decode
-		module_code = LiveComposer.Utils.decode( module_code );
-
-		// Change module property
+		module_code = JSON.parse( module_code );
 		module_code[property_name] = property_value;
-
-		// Encode
-		module_code = LiveComposer.Utils.encode( module_code );
+		module_code = JSON.stringify( module_code );
 
 		// Update raw code
 		module_code_container.value = module_code;
@@ -187,7 +160,8 @@ LiveComposer.Utils = {
 	},
 
 	/**
-	 * Provide custom events publish
+	 * Provide custom events publish.
+	 * Also echoes all the custom events in the preview iframe as well.
 	 *
 	 * @param  {string} eventName
 	 * @param  {object||string||null||numeric} eventData [description]
@@ -201,9 +175,11 @@ LiveComposer.Utils = {
 			[eventData, 'object']
 		] );
 
-		jQuery.event.trigger( {
+		jQuery(document).trigger( {
 			type: eventName,
 			message: {details: eventData}
 		} );
+
+		LiveComposer.Builder.PreviewAreaWindow.dslca_publish_event( eventName, eventData );
 	}
 };

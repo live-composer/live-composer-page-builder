@@ -8,6 +8,13 @@
 		overflow: hidden; /* <- Makes sure border radius crops inner content. */
 	}
 
+
+
+/* Default system font for all the elements in page builder*/
+.dslc-module-front {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
 /**
  * CPT MODULE
  */
@@ -67,9 +74,9 @@
 				}
 
 			#dslc-content .dslc-cpt-post-meta {
-				border: 1px solid #e5e5e5;
-				border-left: 0;
-				border-right: 0;
+				/*border: 1px solid #e5e5e5;*/
+				/*border-left: 0;
+				border-right: 0;*/
 				margin-bottom: 20px;
 				overflow: hidden;
 				padding: 13px 0;
@@ -625,6 +632,10 @@
 							/*position: absolute;*/
 						}
 
+			#dslc-content .dslc-info-box-image-alt-inner {
+				display: inline-block;
+			}
+
 			#dslc-content .dslc-info-box-image-alt-inner img {
 				/*
 				-webkit-transition: all 0.2s ease-in-out;
@@ -634,7 +645,7 @@
 			}
 
 				#dslc-content .dslc-info-box-title {
-					margin-bottom: 25px;
+					/*margin-bottom: 25px;*/
 				}
 
 					#dslc-content .dslc-info-box-title h4 {
@@ -662,6 +673,8 @@
 					display: inline-block;
 					line-height: 1;
 					text-decoration: none;
+					box-shadow: none;
+					-webkit-appearance: none;
 				}
 
 		#dslc-content .dslc-info-box-button-aside {
@@ -1111,6 +1124,15 @@
 					}
 
 
+/**
+ * Button input
+ */
+
+input[type="button"], input[type="submit"], input[type="reset"], input[type="file"]::-webkit-file-upload-button, button {
+    border-style: none;
+    -webkit-appearance: none;
+}
+
 
 /**
  * TEXT MODULE
@@ -1148,7 +1170,7 @@
 					#dslc-content .dslc-widget-title {
 						font-size: 15px;
 						font-weight: 600;
-						border-bottom: 1px solid #e5e5e5;
+						/*border-bottom: 1px solid #e5e5e5;*/
 						margin-bottom: 10px;
 						padding-bottom: 10px;
 						line-height: 1;
@@ -1434,6 +1456,7 @@
 	line-height: 1;
 	text-decoration: none;
 	text-align: center;
+	-webkit-appearance: none;
 }
 
 #dslc-content .dslc-tp-thumbnail {
@@ -1634,6 +1657,8 @@
 		display: inline-block;
 		text-decoration: none;
 		line-height: 1;
+		box-shadow: none; /* override themes styling */
+		-webkit-appearance: none;
 	}
 
 /**
@@ -1760,8 +1785,10 @@
  * Image Module
  */
 
-.dslc-image {
-
+.dslc-image,
+.dslc-image img {
+	border: 0;
+	box-shadow: none;
 }
 
 	#dslc-content .dslc-image,
