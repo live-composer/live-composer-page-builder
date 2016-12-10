@@ -714,17 +714,6 @@ function dslc_code_migration( $settings ) {
 		$id = $control['id'];
 		$type = $control['type'];
 
-		/**
-		 * If code migrated from the shortcodes ('code_version' = 1),
-		 * go through each missing setting and fill it with default data.
-		 */
-		if ( 1 === $settings['code_version'] ) {
-
-			if ( ! isset( $settings[ $id ] ) && isset( $control['std'] ) ) {
-				$settings[ $id ] = $control['std'];
-			}
-		}
-
 		// $module_settings[ $option_id ] = $option_arr['std'];
 
 /*
@@ -752,16 +741,19 @@ function dslc_code_migration( $settings ) {
 				// In old code empty = transparent.
 				// In new code empty = default color.
 				// In new code transparent = rgba(0,0,0,0).
-				$settings[ $id ] = 'rgba(0,0,0,0)'; // @todo: still need it?
-			
-				if ( stristr($id, 'icon_color') ) {
+				$settings[ $id ] = 'inherit'; // @todo: still need it?
+
+				if ( stristr( $id, 'icon_color' ) ) {
 					$settings[ $id ] = '';
 				}
 			}
-		}
 
+			// All other cases.
+			if ( ! isset( $settings[ $id ] ) && isset( $control['std'] ) ) {
+				$settings[ $id ] = $control['std'];
+			}
+		} elseif ( 'css_border_radius' === $type ) {
 		// Set border-radius = 0 if in old version it was disabled.
-		if ( 'css_border_radius' === $type ) {
 
 			// If this setting isn't set at all...
 			if ( ! isset( $settings[ $id ] )  ) {
@@ -771,13 +763,19 @@ function dslc_code_migration( $settings ) {
 			if ( isset( $settings[ $id ] ) && '' === $settings[ $id ] ) {
 				$settings[ $id ] = '0';
 			}
-		}
+		} elseif ( 'button_icon_id' === $id ) {
 
-		// All other cases.
-		if ( empty( $settings[ $id ] ) && isset( $control['std'] ) ) {
+			if ( isset( $settings[ $id ] ) && '' === $settings[ $id ] ) {
+				$settings[ $id ] = '';
+			}
+		// } elseif ( empty( $settings[ $id ] ) && isset( $control['std'] ) ) {
+		} elseif ( ( ! isset( $settings[ $id ] ) || '' === $settings[ $id ] ) &&
+					isset( $control['std'] ) ) {
+
+			// All other cases.
+			// Go through each missing setting and fill it with default data.
 			$settings[ $id ] = $control['std'];
 		}
-
 	}
 
 	// Migration done. Remove the key code_version = 1.
