@@ -727,7 +727,8 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 
 
 				// Separate all the boder properties (beside 'border-radius') into a new array.
-				if ( stristr( $css_property, 'border-' ) && ! dslc_helper_is_border_radius( $css_property ) ) {
+				if ( stristr( $css_property, 'border-' ) &&
+						! dslc_helper_is_border_radius( $css_property ) ) {
 					$css_declaration_borders[ $css_property ] = $css_value;
 					unset( $css_declaration[ $css_property ] );
 				}
@@ -762,11 +763,19 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 
 			$output_border_declaration = false;
 
-			if ( isset( $css_declaration_borders['border-width'] )  ) {
+			if ( isset( $css_declaration_borders['border-width'] ) ) {
+
 				$border_width = $css_declaration_borders['border-width'];
 				if ( ! empty( $border_width ) && '0px' !== $border_width ) {
 					$output_border_declaration = true;
 				}
+
+			// The code below fix the bug with posts grid and separator property.
+			} elseif ( isset( $css_declaration_borders['border-top-width'] ) ||
+					isset( $css_declaration_borders['border-right-width'] ) ||
+					isset( $css_declaration_borders['border-bottom-width'] ) ||
+					isset( $css_declaration_borders['border-left-width'] ) ) {
+				$output_border_declaration = true;
 			}
 
 			// Always output all the border properties when:

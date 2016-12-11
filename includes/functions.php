@@ -780,8 +780,8 @@ function dslc_code_migration( $settings ) {
 			// Go through each missing setting and fill it with default data.
 			$settings[ $id ] = $control['std'];
 		}
-	}
 
+	}
 	// Migration done. Remove the key code_version = 1.
 	if ( isset( $settings['code_version'] ) ) {
 		unset( $settings['code_version'] );
