@@ -768,6 +768,10 @@ function dslc_code_migration( $settings ) {
 			if ( isset( $settings[ $id ] ) && '' === $settings[ $id ] ) {
 				$settings[ $id ] = '';
 			}
+		} elseif ( stristr( $id, 'border_trbl' ) ) {
+			if ( isset( $settings[ $id ] ) && '' === $settings[ $id ] ) {
+				$settings[ $id ] = '';
+			}
 		// } elseif ( empty( $settings[ $id ] ) && isset( $control['std'] ) ) {
 		} elseif ( ( ! isset( $settings[ $id ] ) || '' === $settings[ $id ] ) &&
 					isset( $control['std'] ) ) {
