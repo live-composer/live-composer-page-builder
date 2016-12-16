@@ -565,6 +565,9 @@ class DSLC_Button extends DSLC_Module {
 				),
 				'section' => 'styling',
 				'tab' => __( 'Icon', 'live-composer-page-builder' ),
+				// 'dependent_controls' => array(
+				// 	'enabled' => 'icon_pos',
+				// ),
 			),
 			array(
 				'label' => __( 'Position', 'live-composer-page-builder' ),
