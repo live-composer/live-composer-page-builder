@@ -1491,12 +1491,16 @@ body a:focus {
 */
 
 .dslc-modules-area.dslc-modules-area-empty {
-	margin-bottom: 25px;
+	margin-bottom: 20px;
 	min-height: 120px;
-	box-shadow: 0 0 0 2px rgba(173, 175, 179, 0.4);
+	box-shadow: 0 0 0 2px rgba(173, 175, 179, 0.4) inset;
 
 	text-align: center;
 	vertical-align: middle;
+}
+
+.dslc-modules-area.dslc-modules-area-empty:last-child {
+	margin-bottom: 0px;
 }
 
 .dslc-modules-area-empty::after {
@@ -1548,11 +1552,11 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 
 .dslc-modules-area:hover {
 	/*outline-color: rgba(173, 175, 179, 0.4);*/
-	box-shadow: 0 0 0 2px rgba(173, 175, 179, 0.4);
+	box-shadow: 0 0 0 2px rgba(173, 175, 179, 0.4) inset;
 }
 
 .dslc-modules-area:hover .dslc-module-front:hover {
-	box-shadow: 0 0 0 2px rgb(79, 143, 241);
+	box-shadow: 0 0 0 2px rgb(79, 143, 241) inset;
 }
 
 /**
@@ -1851,7 +1855,7 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 	}
 
 	.dslc-modules-section:hover {
-		box-shadow: 0 0 0 2px #fd8f67;
+		box-shadow: 0 0 0 2px #EF7C5B inset;
 	}
 
 	.dslc-modules-section.dslca-change-width-active {
@@ -1896,7 +1900,7 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 
 
 	.dslca-modules-section-manage {
-		bottom: 0;
+		bottom: -25px;
 		left: 0;
 		right: 0;
 		visibility: hidden;
@@ -1926,8 +1930,8 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 		}
 
 		.dslca-modules-section-manage-inner {
-			border-bottom-right-radius: 0;
-			border-bottom-left-radius: 0;
+			border-top-right-radius: 0;
+			border-top-left-radius: 0;
 		}
 
 			.dslca-modules-section-manage .dslca-manage-action:hover {
@@ -2039,8 +2043,8 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 	.dslca-modules-area-manage {
 		bottom: 0;
 		position: absolute;
-		left: auto;
-		right: 100%;
+		left: -24px;
+		/*right: 100%;*/
 		top: 0;
 		margin-right: 0px;
 		text-align: center;
@@ -2273,7 +2277,7 @@ body.rtl .dslca-modules-area-placeholder {
 	position: absolute;
 	left: 50%;
 	margin-left: -47px;
-	top: -2px;
+	top: 0;
 	text-align: center;
 	z-index: 99999;
 	line-height: 1;

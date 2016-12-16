@@ -327,7 +327,12 @@ jQuery(document).ready(function($){
 		if ( Array.isArray(self.Helpers.colorpickers ) ) {
 
 			self.Helpers.colorpickers.forEach(function(item){
-				jQuery(item).remove();
+				// Do not delete color picker instance from row settings panel,
+				// as it stays on page and not get loaded via Ajax.
+				if ( ! jQuery(item).hasClass('dslca-modules-section-edit-field') ) {
+					// Destroy color picker instance.
+					jQuery(item).remove();
+				}
 			});
 
 			self.Helpers.colorpickers = [];
