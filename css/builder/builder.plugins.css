@@ -19,6 +19,7 @@ body .dslca-module-edit-option-box-shadow-single input[type="text"].dslca-module
 	line-height: 31px;
 	text-align: center;
 	font-size: 14px;
+	height: 33px;
 }
 
 /* Remove the default color button */
