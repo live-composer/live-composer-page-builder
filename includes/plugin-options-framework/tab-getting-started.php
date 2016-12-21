@@ -62,7 +62,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="dslc-panel-content">
 		<h2>Live Composer updated</h2>
 		<p class="about-description">We changed the code format used to store your pages. Amazing new features are coming soon.</p>
-		<a href="https://livecomposerplugin.com/halfprice-coupon/?utm_source=wp-admin&utm_medium=welcome-promo-block-herobutton&utm_campaign=50off-new-releases" class="button button-primary button-hero" target="_blank"><span class="dashicons dashicons-media-text"></span> See release notes</a>
+		<a href="https://livecomposerplugin.com/blog/live-composer-1-2/?utm_source=wp-admin&utm_medium=welcome-promo-block-herobutton&utm_campaign=lc-update-1.2" class="button button-primary button-hero" target="_blank"><span class="dashicons dashicons-media-text"></span> See release notes</a>
 <!--
 		<img src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/livecomposer-mink-curious.png" class="mink-illustration">
 
