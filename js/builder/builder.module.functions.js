@@ -30,7 +30,7 @@
 
 'use strict';
 
-;jQuery(document).on('editorFrameLoaded', function(){
+jQuery(document).on('editorFrameLoaded', function(){
 
 	var $ = jQuery;
 
@@ -666,6 +666,8 @@ function dslc_module_output_altered( callback ) {
 
 		DSLCAjax.ajaxurl, dslcSettings,
 		function( response ) {
+
+			console.log( "response:" ); console.log( response );
 
 			LiveComposer.Builder.UI.clearUtils();
 

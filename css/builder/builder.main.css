@@ -3940,12 +3940,9 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 }
 
 
-
-.dslca-pseudo-panel .dslca-pseudo-close-composer-hook,
 .dslca-container .dslca-activate-composer-hook,
 .dslca-container .dslca-hide-composer-hook,
-.dslca-container .dslca-show-composer-hook,
-.dslca-pseudo-panel .dslca-pseudo-hide-composer-hook {
+.dslca-container .dslca-show-composer-hook {
 	background: #e55f5f;
 	border-radius: 3px;
 	bottom: 4px;
@@ -3969,8 +3966,7 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
-.dslca-container .dslca-hide-composer-hook,
-.dslca-pseudo-panel .dslca-pseudo-hide-composer-hook {
+.dslca-container .dslca-hide-composer-hook {
 	background: #06b2ac;
 }
 
@@ -4331,65 +4327,6 @@ body .sp-palette .sp-thumb-el {
   width: 25px;
 }
 
-/** PSEUDO SETTINGS PANEL */
-.dslca-pseudo-panel {
-    position: relative;
-    /*display: none;*/
-
-   bottom: 0px;
-	left: 0;
-	position: fixed;
-	right: 0;
-	z-index: 99999;
-	-webkit-transition: bottom 0.3s;
-	-moz-transition: bottom 0.3s;
-	transition: bottom 0.3s;
-}
-
-.dslca-pseudo-header {
-    position: absolute;
-    z-index: 100;
-    min-height: 38px;
-    bottom: 100%;
-    left: 0;
-}
-
-.dslca-pseudo-module-edit-label {
-    width: 80px;
-    background: #6c9fed;
-    border-radius: 3px;
-}
-.dslca-pseudo-module-edit-field {
-    border: 0px;
-    width: 100%;
-    height: 33px;
-}
-
-.dslca-pseudo-module-edit-option {
-	opacity: 0;
-	transition: opacity .3s 0s ease-in;
-}
-
-.dslca-pseudo-module-edit-option:nth-child(2) {
-	transition-delay: .15s;
-}
-
-.dslca-pseudo-module-edit-option:nth-child(3) {
-	transition-delay: .25s;
-}
-
-.dslca-pseudo-module-edit-option:nth-child(4) {
-	transition-delay: .5s;
-}
-
-.dslca-pseudo-module-edit-option:nth-child(5) {
-	transition-delay: .75s;
-}
-
-.dslca-pseudo-panel.show .dslca-pseudo-module-edit-option {
-	opacity: 1;
-}
-
 /** SETTINGS PANEL */
 .lc-shake-effect.active {
   animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
@@ -4451,6 +4388,12 @@ div#scroller-stopper {
  * ----------------------------------------------------------------------
  * JQuery UI Resizable elements
  */
+
+/* Hide the handles when drag and drop is in progress */
+.dslc-module-front.dslca-module-dragging .ui-resizable-handle {
+	display: none!important;
+}
+
 .dslc-module-front .ui-resizable-handle {
 	position: absolute;
 	font-size: 0.1px;
@@ -4479,8 +4422,9 @@ div#scroller-stopper {
 	z-index: 10000;
 }
 
-.dslc-module-front:hover .ui-resizable-handle:after,
-.dslc-module-front.ui-resizable-resizing .ui-resizable-handle:after {
+
+.dslc-modules-area:hover .dslc-module-front:hover .ui-resizable-handle:after,
+.dslc-modules-area:hover .dslc-module-front.ui-resizable-resizing .ui-resizable-handle:after {
 	display: block;
 }
 

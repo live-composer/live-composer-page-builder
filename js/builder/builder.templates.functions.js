@@ -91,7 +91,8 @@ function dslc_template_import( codeToImport ) {
 
 
 			// Re-init drag and drop functionality.
-			jQuery(document).trigger('editorFrameLoaded');
+			// jQuery(document).trigger('editorFrameLoaded');
+			// @todo: v.2 – don't use 'editorFrameLoaded' as it cause many problems. Be more specific.
 		}
 	);
 }

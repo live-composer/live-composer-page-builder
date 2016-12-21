@@ -64,71 +64,12 @@ jQuery(document).ready(function($) {
 	jQuery('.dslca-section').eq(0).show();
 
 	/** Wait till tinyMCE loaded */
-	window.previewAreaTinyMCELoaded = function(){
+	// window.previewAreaTinyMCELoaded = function(){
 
-		var self = this;
-		LiveComposer.Builder.PreviewAreaWindow = this;
-		LiveComposer.Builder.PreviewAreaDocument = jQuery(this.document);
-
-		// Disable WP admin bar in editing mode
-		jQuery('#wpadminbar', LiveComposer.Builder.PreviewAreaDocument).remove();
-
-		LiveComposer.Builder.UI.initInlineEditors();
-		dslc_fix_contenteditable();
-
-		var mainDraggable = LiveComposer.Builder.PreviewAreaDocument.find("#dslc-main").eq(0)[0];
-		new LiveComposer.Builder.Elements.CSectionsContainer( mainDraggable );
-
-		jQuery(document).trigger('editorFrameLoaded');
-
-		dslc_drag_and_drop();
-		dslc_generate_code();
-
-		// Catch keypress events (from both parent and iframe) to add keyboard support
-		dslc_keypress_events();
+		
 
 
-		// Init modules search field functionality.
-		// Documentation: http://www.listjs.com/docs/options
-		new List('dslca-modules', {
-			valueNames: [ 'dslca-module-title' ],
-			listClass: 'lc-modules-list',
-			searchClass: 'modules-search-input',
-		});
-
-		// Init properties search field functionality.
-		// Documentation: http://www.listjs.com/docs/options
-		new List('dslca-edit', {
-			valueNames: [ 'dslca-module-edit-label' ],
-			listClass: 'dslca-section-scroller-content',
-			searchClass: 'properties-search-input',
-		});
-
-		// Set focus on the search field.
-		// document.getElementById('modules-search-input').focus(); 
-		// @todo: not working.
-		// @todo: firstly check if anyother field focused: http://stackoverflow.com/a/1593282
-
-		// Make sidebar resizable.
-		// @todo: add sidebar colapse on click on the resizing handle.
-		jQuery( '.dslca-container' ).resizable({
-			handles: 'e',
-			minWidth: 255,
-			resize: function( event, ui ) {
-				// console.log( event );
-				// console.log( ui.size.width );
-				jQuery( '#wpbody-content' ).css( 'margin-left', ui.size.width + 'px' );
-			}
-		});
-
-		// Init Undo/Redo functionality.
-		dslc_undoredo();
-
-		// Make modules resizable in width;
-		LiveComposer.Builder.UI.initResizableModules();
-
-
-	};
+	// };
 });
 
 /*
@@ -697,174 +638,13 @@ function dslc_show_publish_button() {
 
 	//%%%%%%%
 
-	// Save Code Revision
-	dslc_save_revision();
-}
-
-
-	function myObjectSerializer(done) {
-	   done( LiveComposer.Builder.State.pageCode  );
-	    // done(JSON.stringify( LiveComposer.Builder.State.pageCode ));
-	}
-
-function dslc_undoredo() {
-	if ( dslcDebug ) console.log( 'dslc_undoredo' );
-
-	LiveComposer.Builder.State.pageCode = jQuery('#dslca-code').val();
-
-	LiveComposer.Builder.State.pageRevisions = new SimpleUndo({
-	   maxLength: 1000,
-	   provider: function(done) {
-			done( LiveComposer.Builder.State.pageCode );
-		},
-		onUpdate: function() {
-			//onUpdate is called in constructor, making history undefined
-			if (!LiveComposer.Builder.State.pageRevisions.stack) return;
-
-			dslc_updateButtons();
-		},
-		initialItem: LiveComposer.Builder.State.pageCode
+	// Create the app object with revision module loaded.
+	LCAPP( 'revisions', function(lcApp){
+		// Save Code Revision.
+		lcApp.revisions.save();
 	});
 }
 
-
-function dslc_save_revision() {
-	if ( dslcDebug ) console.log( 'dslc_save_revision' );
-
-	if ( ! LiveComposer.Builder.State.movingInHistory ) {
-		LiveComposer.Builder.State.pageCode = jQuery('#dslca-code').val();
-		LiveComposer.Builder.State.pageRevisions.save();
-	}
-
-	LiveComposer.Builder.State.movingInHistory = false;
-}
-
-function dslc_updateButtons() {
-
-	if ( ! LiveComposer.Builder.State.pageRevisions.canUndo() ) {
-		jQuery('.dslca-undo').addClass('disabled');
-	} else {
-		jQuery('.dslca-undo').removeClass('disabled');
-	}
-
-	if ( ! LiveComposer.Builder.State.pageRevisions.canRedo() ) {
-		jQuery('.dslca-redo').addClass('disabled');
-	} else {
-		jQuery('.dslca-redo').removeClass('disabled');
-	}
-
-
-	// $('#undo').attr('disabled',!history.canUndo());
-	// $('#redo').attr('disabled',!history.canRedo());
-}
-
-function dslc_undo() {
-	if ( dslcDebug ) console.log( 'dslc_undo' );
-
-	// if ( LiveComposer.Builder.State.pageRevisions.position > 0 ) {
-
-		LiveComposer.Builder.State.movingInHistory = true;
-
-		LiveComposer.Builder.State.pageRevisions.undo(
-			// Callback.
-			function(pageCode) {
-				LiveComposer.Builder.State.pageCode = pageCode;
-				dslc_template_import( pageCode );
-			}
-		);
-
-	// }
-}
-
-function dslc_redo() {
-	if ( dslcDebug ) console.log( 'dslc_redo' );
-
-	// if ( LiveComposer.Builder.State.pageRevisions.position > 0 ) {
-
-		LiveComposer.Builder.State.movingInHistory = true;
-
-		LiveComposer.Builder.State.pageRevisions.redo(
-			// Callback.
-			function(pageCode) {
-				LiveComposer.Builder.State.pageCode = pageCode;
-				dslc_template_import( pageCode );
-			}
-		);
-
-	// }
-}
-
-
-function dslc_undo_old() {
-	if ( dslcDebug ) console.log( 'dslc_undo' );
-
-	var currentRevision = LiveComposer.Builder.State.pageRevisions.currentRevision;
-	var prevRevision =  LiveComposer.Builder.State.pageRevisions.revisions[ currentRevision - 1 ];
-
-	if ( undefined !== prevRevision ) {
-		var codeToImport = prevRevision.code;
-		LiveComposer.Builder.State.pageRevisions.currentRevision = LiveComposer.Builder.State.pageRevisions.currentRevision - 1;
-		LiveComposer.Builder.State.pageRevisions.movingInHistory = true;
-		dslc_template_import( codeToImport );
-	}
-}
-
-
-function dslc_save_revision_old() {
-	if ( dslcDebug ) console.log( 'dslc_save_revision' );
-
-	var date = new Date(),
-	dateLastRevision,
-	revisions = LiveComposer.Builder.State.pageRevisions,
-	// revisionsIndex,
-	// previousCodeRevision = LiveComposer.Builder.State.pageRevisions[ LiveComposer.Builder.State.current ],
-	pageCodeInJson = jQuery('#dslca-code').val();
-
-
-	console.log( "LiveComposer.Builder.State.pageRevisions:" ); console.log( LiveComposer.Builder.State.pageRevisions.revisions );
-
-	var revisionsStorage = LiveComposer.Builder.State.pageRevisions;
-	var revisionsLenth = Object.keys( revisionsStorage.revisions ).length;
-	var current = revisionsStorage.current;
-	var count = revisionsStorage.count;
-	var movingInHistory = revisionsStorage.movingInHistory;
-
-	if ( ! movingInHistory ) {
-
-		console.log( "current:" + current );
-		console.log( "count:" + count );
-		// console.log( "revisionsLenth:" + revisionsLenth );
-
-
-		if ( current + 1 < count + 1 ) {
-
-		
-
-		}
-
-		++count;
-		revisionsStorage.revisions[ count ] = { code: pageCodeInJson, date: date};
-		current = count ;
-
-	} else {
-		current
-	}
-
-	revisionsStorage.movingInHistory = false;
-
-	// console.log( "current:" ); console.log( current );
-	// console.log( "revisionsLenth:" ); console.log( revisionsLenth );
-	if ( 1 < current && 1 < revisionsLenth  ) {
-		jQuery('.dslca-undo').removeClass('disabled');
-	} else {
-		// No more undo steps left - disable the button.
-		jQuery('.dslca-undo').addClass('disabled');
-	}
-
-	LiveComposer.Builder.State.pageRevisions = revisionsStorage;
-	// delete revisionsStorage;
-
-}
 
 
 function dslc_hide_publish_button() {
@@ -1050,8 +830,7 @@ function dslc_drag_and_drop() {
 
 			if ( moduleID == 'DSLC_M_A' || jQuery('body').hasClass('dslca-module-drop-in-progress') ||
 				modulesArea.closest('#dslc-header').length || modulesArea.closest('#dslc-footer').length ) {
-
-				// nothing
+				// nothing - don't drop on header/footer areas
 
 			} else {
 
@@ -1560,72 +1339,4 @@ function dslca_update_report_log() {
 		document.querySelector( '.dslca-show-js-error-hook' ).setAttribute('style','visibility:visible');
 	}
 }
-
-
-/**
- * Render list of modules with Vue.
- */
-
-// console.log( "DSLCModules:" ); console.log( DSLCModules );
-
-/**
- * Go through all DSLCModules.icon properties and prepare data for output.
- */
-(function() {
-	var i,
-		 hasOwn = Object.prototype.hasOwnProperty,
-		 DLSCModulesWithSections = [],
-		 DLSCModulesSections = [];; // Temporary object that we use to create objects by category
-
-	for ( i in DSLCModules) {
-		if ( hasOwn.call( DSLCModules, i ) ) { // filter out prototypes
-			// console.log( DSLCModules[i] );
-
-			console.log( DLSCModulesSections[ DSLCModules[i].origin ] );
-
-			// Do we have this section id in the object already?
-			if ( undefined === DLSCModulesSections[ DSLCModules[i].origin ] ) {
-				DLSCModulesSections[ DSLCModules[i].origin ] = DSLCModules[i].origin;
-				DLSCModulesWithSections.push( { 'type': 'heading', 'id': DSLCModules[i].origin, 'title': DSLCModules[i].origin, 'origin': DSLCModules[i].origin } );
-			}
-
-			DSLCModules[i].type = 'module';
-
-			DLSCModulesWithSections.push(  DSLCModules[i] );
-			/*
-			// Add new module to the section sub-tree.
-			DLSCModulesBySection[ DSLCModules[i].origin ][ DSLCModules[i].id ] = DSLCModules[i] ;
-
-			// console.log( DLSCModulesBySection );
-			*/
-		}
-	}
-
-	console.log( DLSCModulesWithSections );
-/*
-	DSLCModules = {};
-	console.log( "DLSCModulesBySection:" ); console.log( DLSCModulesBySection );
-	for ( i in DLSCModulesBySection) {
-		if ( hasOwn.call( DLSCModulesBySection, i ) ) { // filter out prototypes
-			// DSLCModules[i] = {};
-			// console.log( DLSCModulesBySection[i] );
-			DSLCModules[ DLSCModulesBySection[i] ] = DLSCModulesBySection[i];
-		}
-	}
-*/
-	// We don't want to create many globals,
-	// so replace original object with sorted one.
-	DSLCModules = DLSCModulesWithSections;
-
-}());
-
-// console.log( DSLCModules );
-
-var LiveComposerApp = new Vue({
-	el: '#modules-list',
-	data: {
-		modules: DSLCModules,
-	}
-})
-
 

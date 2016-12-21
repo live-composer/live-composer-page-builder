@@ -27,6 +27,7 @@ final class DSLC_Scripts{
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'dslc_load_scripts_frontend' ) );
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'dslc_load_fonts' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'dslc_load_scripts_admin' ) );
+		// wp_enqueue_script( 'dslc-builder-js', DS_LIVE_COMPOSER_URL . 'js/builder/builder.main.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 		add_action( 'admin_footer', array( __CLASS__, 'dslc_inline_js_plugin_title' ) );
 	}
 

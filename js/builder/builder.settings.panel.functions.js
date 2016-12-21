@@ -150,26 +150,6 @@ jQuery(document).ready(function($){
 	});
 
 	/**
-	 * Hook - Undo
-	 */
-	jQuery(document).on( 'click', '.dslca-undo', function(e){
-
-		e.preventDefault();
-		dslc_undo();
-
-	});
-
-	/**
-	 * Hook - Redo
-	 */
-	jQuery(document).on( 'click', '.dslca-redo', function(e){
-
-		e.preventDefault();
-		dslc_redo();
-
-	});
-
-	/**
 	 * Hook - Confirm Changes
 	 * @todo : delete .dslca-module-edit-save in code below
 	 */

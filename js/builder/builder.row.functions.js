@@ -200,6 +200,7 @@ function dslc_row_add( callback ) {
 
 	var newRow = jQuery();
 	var cachedAjaxRequest = browserCacheTmp.getItem( 'cache-dslc-ajax-add-modules-section' );
+	// @todo: v2 – add app verions in this cache id, so it reset after plugin update.
 
 	// If no cache for current Ajax request.
 	if ( null === cachedAjaxRequest ) {

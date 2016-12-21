@@ -35,16 +35,20 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 	// New flexbox grid requires all the modules to sit in the .lc-row container.
 	var moduleAreaInnerContainer = elem.querySelectorAll('.lc-row')[0];
 
+	// console.log( "elem:" ); console.log( elem );
+	// console.log( "moduleAreaInnerContainer:" ); console.log( moduleAreaInnerContainer );
+
+
 	// moduleAreaInnerContainer.sortable = Sortable.create(elem, {
 	moduleAreaInnerContainer.sortable = Sortable.create(moduleAreaInnerContainer, {
 		group: 'modules',
-		animation: 350,
+		animation: 150,
 		handle: '.dslc-module-front', // .dslca-move-module-hook
 		draggable: '.dslc-module-front',
-		ghostClass: 'dslca-module-ghost',
-		chosenClass: 'dslca-module-dragging',
+		ghostClass: 'dslca-module-ghost', // - original module that stays in place
+		chosenClass: 'dslca-module-dragging', // - both original and floating
 		scroll: true, // or HTMLElement
-		scrollSensitivity: 150, // px, how near the mouse must be to an edge to start scrolling.
+		scrollSensitivity: 50, // px, how near the mouse must be to an edge to start scrolling.
 		scrollSpeed: 15, // px
 
 		setData: function (dataTransfer, dragEl) {
@@ -54,11 +58,18 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 
 		// dragging started
 		onStart: function (evt) {
+			// console.log( 'onStart' );
 
 			evt.oldIndex;  // element index within parent
 
 			jQuery('body').removeClass('dslca-drag-not-in-progress').addClass('dslca-drag-in-progress');
 			jQuery('body', LiveComposer.Builder.PreviewAreaWindow.document).removeClass('dslca-drag-not-in-progress').addClass('dslca-drag-in-progress');
+
+			LCAPP( function(lcApp){
+				// Update dragging status in the app state.
+				lcApp.state.dragging = true;
+			});
+
 		},
 		// dragging ended
 
@@ -78,6 +89,13 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 
 			jQuery('body').removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
 			jQuery('body', LiveComposer.Builder.PreviewAreaWindow.document).removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
+
+
+			LCAPP( function(lcApp){
+				// Update dragging status in the app state.
+				lcApp.state.dragging = false;
+			});
+
 		},
 
 		// Element is dropped into the list from another list
@@ -128,6 +146,7 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 
 		// Event when you move an item in the list or between lists
 		onMove: function (evt) {
+			// console.log('onMove');
 			// Example: http://jsbin.com/tuyafe/1/edit?js,output
 			evt.dragged; // dragged HTMLElement
 			evt.draggedRect; // TextRectangle {left, top, right и bottom}

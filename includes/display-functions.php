@@ -101,10 +101,20 @@ function dslc_display_composer() {
 
 					</div><!-- .dslca-actions -->
 
+
+
+
+
+
+
+
+
+
 			<div class="dslca-container dslca-state-off" data-post-id="<?php echo intval( $_GET['page_id'] ); ?>">
-				<div class="dslca-sections">
+				<div id="livecomposer-app">
+					<div class="dslca-sections">
 
-
+						<!-- HEADER ACTIONS -->
 						<div class="dslca-header-actions wp-clearfix">
 							<!-- Save Composer -->
 							<a href="#" class="dslca-save-composer dslca-save-composer-hook button button-primary disabled">
@@ -119,16 +129,18 @@ function dslc_display_composer() {
 							</a>
 
 							<!-- Undo -->
-							<a href="<?php the_permalink( $_GET['page_id'] ); ?>" class="dslca-undo disabled">
+							<a href="#undo" class="dslca-undo disabled">
 								<span class="screen-reader-text"><?php _e( 'Undo Changes', 'live-composer-page-builder' ); ?></span>
 							</a>
 
 							<!-- Redo -->
-							<a href="<?php the_permalink( $_GET['page_id'] ); ?>" class="dslca-redo disabled">
+							<a href="#redo" class="dslca-redo disabled">
 								<span class="screen-reader-text"><?php _e( 'Redo Changes', 'live-composer-page-builder' ); ?></span>
 							</a>
 						</div>
+						<!-- /HEADER ACTIONS -->
 
+						<!-- TITLE -->
 						<div class="dslca-subsection-title">
 							<button class="dslca-section-back" tabindex="0">
 								<span class="screen-reader-text"><?php _e( 'Back', 'live-composer-page-builder' ); ?></span>
@@ -142,16 +154,19 @@ function dslc_display_composer() {
 
 							</h3>
 						</div>
+						<!-- /TITLE -->
 
+						<!-- TABS -->
 						<ul class="dslca-subsection-tabs wp-clearfix">
 							<li class="dslca-tab-active" ><a href="#"><span class="dslca-icon dslc-icon-th-large"></span> <?php _e( 'Modules', 'live-composer-page-builder' ); ?></a></li>
 							<li><a href="#"><?php _e( 'Sections', 'live-composer-page-builder' ); ?></a></li>
 							<li><a href="#"><?php _e( 'Pages', 'live-composer-page-builder' ); ?></a></li>
 						</ul>
+						<!-- /TABS -->
 
 						<!-- PANEL CONTENT -->
 
-						<!-- SECTION: Modules Listing -->
+						<!-- MODULES LISTING -->
 						<div class="dslca-section dslca-modules" id="dslca-modules">
 
 							<form class="dslca-search-modules" method="get">
@@ -162,13 +177,15 @@ function dslc_display_composer() {
 
 							<div class="dslca-section-scroller">
 									<div class="dslca-section-scroller-content">
-
-										<?php dslc_display_modules(); ?>
-
+										<modules-list></modules-list>
 									</div><!-- .dslca-section-scroller-content -->
 							</div><!-- .dslca-section-scroller-content -->
 
-						</div><!-- .dslca-modules -->
+						</div>
+						<!-- /MODULES LISTING -->
+
+
+						
 
 						<!-- SECTION: Modules Editing -->
 						<div class="dslca-section dslca-module-edit" id="dslca-edit">
@@ -240,6 +257,24 @@ function dslc_display_composer() {
 						</div><!-- .dslca-modules -->
 
 
+
+						<!-- Module Section Edit -->
+
+						<div class="dslca-section dslca-modules-section-edit" data-bg="#5890e5">
+							<form class="dslca-modules-section-edit-form">
+								<div class="dslca-modules-section-edit-options dslc-clearfix">
+									<div class="dslca-modules-section-edit-options-inner">
+										<div class="dslca-modules-section-edit-options-wrapper dslc-clearfix">
+
+											<?php dslc_row_display_options(); ?>
+
+										</div><!-- .dslca-modules-section-edit-options-wrapper -->
+									</div><!-- .dslca-modules-section-edit-options-inner -->
+								</div><!-- .dslca-modules-section-edit-options -->
+							</form><!-- .dslca-modules-section-edit-form -->
+						</div><!-- .dslca-module-section-edit -->
+
+
 						<!-- SIDEBAR FOOTER -->
 
 						<div id="customize-footer-actions" class="wp-full-overlay-footer">
@@ -264,115 +299,135 @@ function dslc_display_composer() {
 
 
 
+					</div><!-- /.dslca-sections -->
+				</div> <!-- /#livecomposer-app -->
 
-
-					<!-- Module Section Edit -->
-
-					<div class="dslca-section dslca-modules-section-edit" data-bg="#5890e5">
-						<form class="dslca-modules-section-edit-form">
-							<div class="dslca-modules-section-edit-options dslc-clearfix">
-								<div class="dslca-modules-section-edit-options-inner">
-									<div class="dslca-modules-section-edit-options-wrapper dslc-clearfix">
-
-										<?php dslc_row_display_options(); ?>
-
-									</div><!-- .dslca-modules-section-edit-options-wrapper -->
-								</div><!-- .dslca-modules-section-edit-options-inner -->
-							</div><!-- .dslca-modules-section-edit-options -->
-						</form><!-- .dslca-modules-section-edit-form -->
-					</div><!-- .dslca-module-section-edit -->
-
-					<!-- Module Templates -->
-
-					<div class="dslca-section dslca-templates dslc-clearfix">
-
-						<div class="dslca-section-title">
-							<?php _e( 'Designs', 'live-composer-page-builder' ); ?>
-						</div><!-- .dslca-section-title -->
-
-						<a href="#" class="dslca-go-to-section-hook" data-section=".dslca-templates-load"><span class="dslca-icon dslc-icon-circle-arrow-down"></span><?php _e( 'Load Page Design', 'live-composer-page-builder' ); ?></a>
-						<a href="#" class="dslca-open-modal-hook" data-modal=".dslca-modal-templates-save"><span class="dslca-icon dslc-icon-save"></span><?php _e( 'Save Page Design', 'live-composer-page-builder' ); ?></a>
-						<a href="#" class="dslca-open-modal-hook" data-modal=".dslca-modal-templates-import"><span class="dslca-icon dslc-icon-download-alt"></span><?php _e( 'Import Page Code', 'live-composer-page-builder' ); ?></a>
-						<a href="#" class="dslca-open-modal-hook" data-modal=".dslca-modal-templates-export"><span class="dslca-icon dslc-icon-upload-alt"></span><?php _e( 'Export Page Code', 'live-composer-page-builder' ); ?></a>
-
-						<div class="dslca-modal dslca-modal-templates-save">
-
-							<form class="dslca-template-save-form">
-								<input type="text" id="dslca-save-template-title" placeholder="<?php _e( 'Name of the template', 'live-composer-page-builder' ); ?>">
-								<span class="dslca-submit"><?php _e( 'Save', 'live-composer-page-builder' ); ?></span>
-								<span class="dslca-cancel dslca-close-modal-hook" data-modal=".dslca-modal-templates-save"><?php _e( 'Cancel', 'live-composer-page-builder' ); ?></span>
-							</form>
-
-						</div><!-- .dslca-modal -->
-
-						<div class="dslca-modal dslca-modal-templates-export">
-
-							<form class="dslca-template-export-form">
-								<textarea id="dslca-export-code"></textarea>
-								<span class="dslca-cancel dslca-close-modal-hook" data-modal=".dslca-modal-templates-export"><?php _e( 'Close', 'live-composer-page-builder' ); ?></span>
-							</form>
-
-						</div><!-- .dslca-modal -->
-
-						<div class="dslca-modal dslca-modal-templates-import">
-
-							<form class="dslca-template-import-form">
-								<textarea id="dslca-import-code" placeholder="<?php _e( 'Enter the exported code heree', 'live-composer-page-builder' ); ?>"></textarea>
-								<span class="dslca-submit">
-									<span class="dslca-modal-title"><?php _e( 'Import', 'live-composer-page-builder' ); ?></span>
-									<div class="dslca-loading followingBallsGWrap">
-										<div class="followingBallsG_1 followingBallsG"></div>
-										<div class="followingBallsG_2 followingBallsG"></div>
-										<div class="followingBallsG_3 followingBallsG"></div>
-										<div class="followingBallsG_4 followingBallsG"></div>
-									</div>
-								</span>
-								<span class="dslca-cancel dslca-close-modal-hook" data-modal=".dslca-modal-templates-import"><?php _e( 'Cancel', 'live-composer-page-builder' ); ?></span>
-							</form>
-
-						</div><!-- .dslca-modal -->
-
-					</div><!-- .dslca-section-templates -->
-
-					<!-- Module Template Load -->
-
-					<div class="dslca-section dslca-templates-load dslc-clearfix">
-
-						<a href="#" class="dslca-go-to-section-hook dslca-section-back" data-section=".dslca-templates"><span class="dslca-icon dslc-icon-reply"></span></a>
-
-						<div class="dslca-section-title">
-							<div class="dslca-section-title-filter">
-								<span class="dslca-section-title-filter-curr"><?php _e( 'All Templates', 'live-composer-page-builder' ); ?></span>
-								<span class="dslca-icon dslc-icon-angle-up"></span>
-								<div class="dslca-section-title-filter-options"></div>
-							</div><!-- .dslca-section-title-filter -->
-						</div><!-- .dslca-section-title -->
-
-						<div class="dslca-section-scroller">
-								<div class="dslca-section-scroller-content">
-									<?php dslc_display_templates(); ?>
-								</div>
-						</div>
-
-
-					</div><!-- .dslca-templates-load -->
-
-				</div><!-- .dslca-sections -->
-
-				<!-- Module Template Export -->
-				<textarea id="dslca-code"></textarea>
-				<textarea id="dslca-content-for-search"></textarea>
-				<textarea id="dslca-js-errors-report"></textarea>
-
-				<div class="dslca-container-loader">
-					<div class="dslca-container-loader-inner followingBallsGWrap">
-						<div class="followingBallsG_1 followingBallsG"></div>
-						<div class="followingBallsG_2 followingBallsG"></div>
-						<div class="followingBallsG_3 followingBallsG"></div>
-						<div class="followingBallsG_4 followingBallsG"></div>
+				<?php
+				/**
+				 * Modules List Component
+				 * Used by Vue to render available modules in the sidebar.
+				 */
+				?>
+				<script type="text/x-template" id="modules-list-template">
+					<div id="modules-list" class="lc-modules-list">
+						<div v-for="module in modules"
+							  v-bind:data-origin="module.origin"
+							  v-bind:data-id="module.id"
+							  v-bind:class="'dslca-origin dslca-' + module.type">
+							<span v-if="module.icon"
+									v-bind:class="'dslca-icon dslc-icon-' + module.icon"></span>
+							<span class="dslca-module-title">{{ module.title }}</span>
+						</div><!-- .dslc-module -->
 					</div>
-				</div>
+				</script>
 
+					<div class="dslca-sections">
+
+
+
+
+							
+
+
+
+
+
+
+
+						
+
+						<!-- Module Templates -->
+
+						<div class="dslca-section dslca-templates dslc-clearfix">
+
+							<div class="dslca-section-title">
+								<?php _e( 'Designs', 'live-composer-page-builder' ); ?>
+							</div><!-- .dslca-section-title -->
+
+							<a href="#" class="dslca-go-to-section-hook" data-section=".dslca-templates-load"><span class="dslca-icon dslc-icon-circle-arrow-down"></span><?php _e( 'Load Page Design', 'live-composer-page-builder' ); ?></a>
+							<a href="#" class="dslca-open-modal-hook" data-modal=".dslca-modal-templates-save"><span class="dslca-icon dslc-icon-save"></span><?php _e( 'Save Page Design', 'live-composer-page-builder' ); ?></a>
+							<a href="#" class="dslca-open-modal-hook" data-modal=".dslca-modal-templates-import"><span class="dslca-icon dslc-icon-download-alt"></span><?php _e( 'Import Page Code', 'live-composer-page-builder' ); ?></a>
+							<a href="#" class="dslca-open-modal-hook" data-modal=".dslca-modal-templates-export"><span class="dslca-icon dslc-icon-upload-alt"></span><?php _e( 'Export Page Code', 'live-composer-page-builder' ); ?></a>
+
+							<div class="dslca-modal dslca-modal-templates-save">
+
+								<form class="dslca-template-save-form">
+									<input type="text" id="dslca-save-template-title" placeholder="<?php _e( 'Name of the template', 'live-composer-page-builder' ); ?>">
+									<span class="dslca-submit"><?php _e( 'Save', 'live-composer-page-builder' ); ?></span>
+									<span class="dslca-cancel dslca-close-modal-hook" data-modal=".dslca-modal-templates-save"><?php _e( 'Cancel', 'live-composer-page-builder' ); ?></span>
+								</form>
+
+							</div><!-- .dslca-modal -->
+
+							<div class="dslca-modal dslca-modal-templates-export">
+
+								<form class="dslca-template-export-form">
+									<textarea id="dslca-export-code"></textarea>
+									<span class="dslca-cancel dslca-close-modal-hook" data-modal=".dslca-modal-templates-export"><?php _e( 'Close', 'live-composer-page-builder' ); ?></span>
+								</form>
+
+							</div><!-- .dslca-modal -->
+
+							<div class="dslca-modal dslca-modal-templates-import">
+
+								<form class="dslca-template-import-form">
+									<textarea id="dslca-import-code" placeholder="<?php _e( 'Enter the exported code heree', 'live-composer-page-builder' ); ?>"></textarea>
+									<span class="dslca-submit">
+										<span class="dslca-modal-title"><?php _e( 'Import', 'live-composer-page-builder' ); ?></span>
+										<div class="dslca-loading followingBallsGWrap">
+											<div class="followingBallsG_1 followingBallsG"></div>
+											<div class="followingBallsG_2 followingBallsG"></div>
+											<div class="followingBallsG_3 followingBallsG"></div>
+											<div class="followingBallsG_4 followingBallsG"></div>
+										</div>
+									</span>
+									<span class="dslca-cancel dslca-close-modal-hook" data-modal=".dslca-modal-templates-import"><?php _e( 'Cancel', 'live-composer-page-builder' ); ?></span>
+								</form>
+
+							</div><!-- .dslca-modal -->
+
+						</div><!-- .dslca-section-templates -->
+
+						<!-- Module Template Load -->
+
+						<div class="dslca-section dslca-templates-load dslc-clearfix">
+
+							<a href="#" class="dslca-go-to-section-hook dslca-section-back" data-section=".dslca-templates"><span class="dslca-icon dslc-icon-reply"></span></a>
+
+							<div class="dslca-section-title">
+								<div class="dslca-section-title-filter">
+									<span class="dslca-section-title-filter-curr"><?php _e( 'All Templates', 'live-composer-page-builder' ); ?></span>
+									<span class="dslca-icon dslc-icon-angle-up"></span>
+									<div class="dslca-section-title-filter-options"></div>
+								</div><!-- .dslca-section-title-filter -->
+							</div><!-- .dslca-section-title -->
+
+							<div class="dslca-section-scroller">
+									<div class="dslca-section-scroller-content">
+										<?php dslc_display_templates(); ?>
+									</div>
+							</div>
+
+
+						</div><!-- .dslca-templates-load -->
+
+					</div><!-- .dslca-sections -->
+
+					<!-- Module Template Export -->
+					<textarea id="dslca-code"></textarea>
+					<textarea id="dslca-content-for-search"></textarea>
+					<textarea id="dslca-js-errors-report"></textarea>
+
+					<div class="dslca-container-loader">
+						<div class="dslca-container-loader-inner followingBallsGWrap">
+							<div class="followingBallsG_1 followingBallsG"></div>
+							<div class="followingBallsG_2 followingBallsG"></div>
+							<div class="followingBallsG_3 followingBallsG"></div>
+							<div class="followingBallsG_4 followingBallsG"></div>
+						</div>
+					</div>
+
+				<!-- </div>#livecomposer-app -->
 			</div><!-- .dscla-container -->
 
 			<div class="dslca-prompt-modal">
@@ -447,83 +502,6 @@ function dslc_display_composer() {
 				<div class="grid-measure"></div>
 			</div>
 
-
-			<script id="pseudo-panel" type="template">
-			<div class="dslca-pseudo-panel">
-
-				<div class="dslca-pseudo-header dslc-clearfix">
-
-					<!-- Tabs -->
-					<!-- Module Option filters -->
-					<span class="dslca-pseudo-options-filter-hook dslca-active" data-section="functionality" style="display: block;"><span class="dslca-icon dslc-icon-cog"></span> Functionality</span>
-					<span class="dslca-pseudo-options-filter-hook" data-section="styling" style="display: block;"><span class="dslca-icon dslc-icon-tint"></span> Styling</span>
-					<span class="dslca-pseudo-options-filter-hook" data-section="responsive" style="display: block;"><span class="dslca-icon dslc-icon-mobile-phone"></span> Responsive</span>
-
-					<!-- Module Options Actions -->
-					<div class="dslca-pseudo-module-edit-actions" style="display: block;">
-						<a href="#" class="dslca-pseudo-module-edit-save">Confirm</a>
-						<a href="#" class="dslca-pseudo-module-edit-cancel">Cancel</a>
-					</div>
-					<!-- Row Options Actions -->
-
-				</div><!-- .dslca-header -->
-
-				<div class="dslca-pseudo-actions">
-
-					<!-- Hide/Show -->
-					<a href="#" class="dslca-pseudo-hide-composer-hook"><span class="dslca-icon dslc-icon-arrow-down"></span>Hide Editor</a>
-
-					<!-- Disable -->
-					<a href="#" class="dslca-pseudo-close-composer-hook"><span class="dslca-icon dslc-icon-remove"></span>Disable Editor</a>
-
-					<div class="dslc-clear"></div>
-
-				</div><!-- .dslca-actions -->
-
-
-
-					<!-- Modules Listing -->
-					<!-- .dslca-modules -->
-
-					<!-- Module Edit -->
-
-					<div class="dslca-pseudo-section" data-bg="#5890e5" style="display: block;">
-
-						<div class="dslca-pseudo-module-edit-options dslc-clearfix">
-							<div class="dslca-pseudo-module-edit-options-tabs dslc-clearfix" style="display: none;">
-								<a href="#" class="dslca-pseudo-module-edit-options-tab-hook">General</a>
-								<a href="#" class="dslca-pseudo-module-edit-options-tab-hook">Settigns</a>
-								<a href="#" class="dslca-pseudo-module-edit-options-tab-hook">Content</a>
-							</div>
-
-							<div class="dslca-pseudo-module-edit-options-wrapper dslc-clearfix">
-								<div class="dslca-pseudo-module-edit-option" style="display: table-cell;">
-									<span class="dslca-pseudo-module-edit-label">&nbsp;</span>
-									<div class="dslca-pseudo-module-edit-field">&nbsp;</div>
-								</div><!-- .dslc-module-edit-option -->
-								<div class="dslca-pseudo-module-edit-option" style="display: table-cell;">
-									<span class="dslca-pseudo-module-edit-label">&nbsp;</span>
-									<div class="dslca-pseudo-module-edit-field">&nbsp;</div>
-								</div><!-- .dslc-module-edit-option -->
-								<div class="dslca-pseudo-module-edit-option" style="display: table-cell;">
-									<span class="dslca-pseudo-module-edit-label">&nbsp;</span>
-									<div class="dslca-pseudo-module-edit-field">&nbsp;</div>
-								</div><!-- .dslc-module-edit-option -->
-								<div class="dslca-pseudo-module-edit-option" style="display: table-cell;">
-									<span class="dslca-pseudo-module-edit-label">&nbsp;</span>
-									<div class="dslca-pseudo-module-edit-field">&nbsp;</div>
-								</div><!-- .dslc-module-edit-option -->
-								<div class="dslca-pseudo-module-edit-option" style="display: table-cell;">
-									<span class="dslca-pseudo-module-edit-label">&nbsp;</span>
-									<div class="dslca-pseudo-module-edit-field">&nbsp;</div>
-								</div><!-- .dslc-module-edit-option -->
-							</div>
-						</div>
-
-					</div>
-
-			</div>
-			</script>
 		<?php
 
 	endif;
@@ -548,84 +526,7 @@ function dslc_get_modules() {
 
 }
 
-/**
- * Displays list of all modules in modules panel (for drag & drop)
- * – Modules order defined in dslc_register_modules() function.
- *
- * @since 1.0
- */
-function dslc_display_modules() {
 
-	$dslc_modules = dslc_get_modules();
-
-	?>
-
-	<div id="modules-list" class="lc-modules-list">
-		<div v-for="module in modules"
-			  v-bind:data-origin="module.origin"
-			  v-bind:data-id="module.id"
-			  v-bind:class="'dslca-origin dslca-' + module.type">
-			<span v-if="module.icon"
-					v-bind:class="'dslca-icon dslc-icon-' + module.icon"></span>
-			<span class="dslca-module-title">{{ module.title }}</span>
-		</div><!-- .dslc-module -->
-	</div>
-
-	<?php
-/*
-	if ( $dslc_modules ) {
-
-		?>
-
-		<div class="dslca-module dslca-scroller-item dslca-origin" data-origin="General" data-id="DSLC_M_A">
-			<span class="dslca-icon dslc-icon-th-large"></span><span class="dslca-module-title"><?php esc_html_e( 'Container', 'live-composer-page-builder' ); ?></span>
-		</div><!-- .dslc-module -->
-
-		<?php
-		// Create an array of modules sorted by section.
-		$modules_bysection = array();
-
-		// Sort modules by section.
-		foreach ( $dslc_modules as $dslc_module ) {
-
-			$section = __('Other', 'live-composer-page-builder');
-
-			if ( ! empty( $dslc_module['origin'] ) ) {
-				$section = $dslc_module['origin'];
-			} else {
-				$dslc_module['origin'] = $section;
-			}
-
-			if ( empty( $dslc_module['icon'] ) ) {
-				$dslc_module['icon'] = 'circle';
-			}
-
-			$modules_bysection[ $section ][ $dslc_module['id'] ] = $dslc_module;
-		}
-
-
-		foreach ( $modules_bysection as $section_title => $section ) {
-
-			?>
-				<div class="dslca-module-section"><?php echo esc_html( $section_title ); ?></div><!-- .dslc-module -->
-			<?php
-
-			foreach ( $section as $module_id => $module ) {
-				?>
-					<div class="dslca-module dslca-scroller-item dslca-origin dslca-origin-<?php echo esc_attr( $module['origin'] ); ?>" data-origin="<?php echo esc_attr( $module['origin'] ); ?>" data-id="<?php echo esc_attr( $module_id ); ?>">
-						<span class="dslca-icon dslc-icon-<?php echo esc_attr( $module['icon'] ); ?>"></span><span class="dslca-module-title"><?php echo esc_html( $module['title'] ); ?></span>
-					</div><!-- .dslc-module -->
-				<?php
-			}
-		}
-
-	} else {
-
-		esc_html_e( 'No Modules Found.', 'live-composer-page-builder' );
-
-	}
-*/
-}
 
 /**
  * Displays a list of templates
