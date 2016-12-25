@@ -6,7 +6,11 @@
 
 LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 
-	var self = this;
+	/* Local vars. */
+	var self = this,
+	moduleAreaInnerContainer = null;
+
+	/* Object properties */
 	this.section = jQuery(elem).closest('.dslc-modules-section');
 	this.elem = elem;
 
@@ -33,7 +37,11 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 	 */
 
 	// New flexbox grid requires all the modules to sit in the .lc-row container.
-	var moduleAreaInnerContainer = elem.querySelectorAll('.lc-row')[0];
+	if ( elem.classList.contains('lc-row') ) {
+		moduleAreaInnerContainer = elem;
+	} else {
+		moduleAreaInnerContainer = elem.querySelectorAll('.lc-row')[0];
+	}
 
 	// console.log( "elem:" ); console.log( elem );
 	// console.log( "moduleAreaInnerContainer:" ); console.log( moduleAreaInnerContainer );

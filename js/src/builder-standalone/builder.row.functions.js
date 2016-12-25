@@ -249,6 +249,7 @@ function dslc_row_after_add( newRowHTML ) {
 	// Append new row
 	newRow.appendTo(LiveComposer.Builder.PreviewAreaDocument.find("#dslc-main"));
 
+
 	// Call other functions
 	dslc_drag_and_drop();
 	dslc_generate_code();

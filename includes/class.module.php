@@ -2044,7 +2044,7 @@ class DSLC_Module {
 
 		// Module class array.
 		$module_class_arr = array();
-		$module_class_arr[] = 'dslc-module-front';
+		$module_class_arr[] = 'lc-module dslc-module-front';
 		$module_class_arr[] = 'dslc-module-' . $this->module_id;
 		$module_class_arr[] = 'dslc-in-viewport-check';
 		$module_class_arr[] = 'dslc-in-viewport-anim-' . $options['css_anim'];

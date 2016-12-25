@@ -169,10 +169,6 @@ function dslc_display_composer() {
 						<!-- MODULES LISTING -->
 						<div class="dslca-section dslca-modules" id="dslca-modules">
 
-							<form class="dslca-search-modules" method="get">
-								<input type="search" id="modules-search-input" class="modules-search-input" name="modules-search" value="" placeholder="Start typing to search modules..." >
-							</form>
-
 							<div class="dslca-section-scroller-fade"></div>
 
 							<div class="dslca-section-scroller">
@@ -184,8 +180,6 @@ function dslc_display_composer() {
 						</div>
 						<!-- /MODULES LISTING -->
 
-
-						
 
 						<!-- SECTION: Modules Editing -->
 						<div class="dslca-section dslca-module-edit" id="dslca-edit">
@@ -310,10 +304,22 @@ function dslc_display_composer() {
 				?>
 				<script type="text/x-template" id="modules-list-template">
 					<div id="modules-list" class="lc-modules-list">
+
+						<input
+							type="search"
+							id="modules-search-input"
+							class="lc-panel-search"
+							value=""
+							placeholder="Start typing to search modules..."
+							v-model="modulesSearch"
+						>
 						<div v-for="module in modules"
 							  v-bind:data-origin="module.origin"
 							  v-bind:data-id="module.id"
-							  v-bind:class="'dslca-origin dslca-' + module.type">
+							  v-bind:class="'dslca-origin dslca-' + module.type"
+							  v-bind:tabindex="module.tabindex"
+							  v-if="module.show"
+						>
 							<span v-if="module.icon"
 									v-bind:class="'dslca-icon dslc-icon-' + module.icon"></span>
 							<span class="dslca-module-title">{{ module.title }}</span>
@@ -322,20 +328,6 @@ function dslc_display_composer() {
 				</script>
 
 					<div class="dslca-sections">
-
-
-
-
-							
-
-
-
-
-
-
-
-						
-
 						<!-- Module Templates -->
 
 						<div class="dslca-section dslca-templates dslc-clearfix">
@@ -1420,7 +1412,7 @@ function dslc_modules_area_front( $atts, $content = null, $version = 1 ) {
 			$pos_class = 'dslc-first-col';
 	}
 
-	$output = '<div class="dslc-modules-area lc-column lc-small-' . $atts['size'] . ' ' . $pos_class . '" data-size="' . $atts['size'] . '">';
+	$output = '<div class="lc-module dslc-modules-area lc-column lc-small-' . $atts['size'] . ' ' . $pos_class . '" data-size="' . $atts['size'] . '">';
 
 	if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 

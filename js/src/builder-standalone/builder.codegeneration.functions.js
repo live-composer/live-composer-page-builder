@@ -194,6 +194,23 @@ function dslc_generate_code() {
 	/**
 	 * Go through each row (empty or not empty)
 	 */
+/*
+	jQuery('#dslc-main .dslc-modules-section', LiveComposer.Builder.PreviewAreaDocument).each(function(){
+
+		modulesSection = jQuery(this);
+
+		modulesSectionJson = dslc_generate_section_code( modulesSection );
+
+		// Update JSON in hidden text area with updated code.
+		modulesSection.find('.dslca-section-code').val( modulesSectionJson );
+
+		// Add row code into the the whole page code.
+		pageCodeInJson = pageCodeInJson + modulesSectionJson + ',';
+
+		// Close row ( section ) shortcode
+		// composerCode = composerCode + '[/dslc_modules_section] ';
+	});
+*/
 
 	jQuery('#dslc-main .dslc-modules-section', LiveComposer.Builder.PreviewAreaDocument).each(function(){
 
@@ -303,9 +320,43 @@ function dslc_generate_section_code( theModulesSection ) {
 	// Open the module section ( row ) shortcode
 	// composerCode = composerCode + '[dslc_modules_section ' + modulesSectionAtts + '] ';
 
+
+
+	// console.log( "modulesSection:" ); console.log( modulesSection[0] );
+
+	var modulesSectionEl = modulesSection[0],
+	sectionInnerContentEl = modulesSectionEl.getElementsByClassName('dslc-modules-section-inner'),
+	sectionChildren;
+
+	sectionInnerContentEl = sectionInnerContentEl[0].getElementsByClassName('lc-row');
+	sectionInnerContentEl = sectionInnerContentEl[0];
+
+	// console.log( "sectionInnerContentEl.children:" ); console.log( sectionInnerContentEl.children );
+
+	sectionChildren = sectionInnerContentEl.children;
+
+
+	(function() {
+		var i,
+			 hasOwn = Object.prototype.hasOwnProperty;
+
+		for ( i in sectionChildren) {
+			if ( hasOwn.call( sectionChildren, i ) ) { // filter out prototypes
+				// console.log( sectionChildren[i] );
+				// dslc_generate_module_code( sectionChildren[i] );
+			}
+		}
+
+	}());
+
+	// modulesSectionJson['content'].push(moduleAreaJSON);
+
+
+
 	/**
 	 * Go through each column of current row
 	 */
+/*
 	jQuery('.dslc-modules-area', modulesSection).each(function(){
 
 		// Reset width counter for modules
@@ -375,117 +426,214 @@ function dslc_generate_section_code( theModulesSection ) {
 		}
 
 		moduleAreaJSON.content = [];
-
+*/
 		/**
 		 * Go through each module of current area
 		 */
+		// moduleAreaJSON.content = dslc_generate_module_code( modulesArea );
 
-		jQuery('.dslc-module-front', modulesArea).each(function(){
-
-			var dslc_module = jQuery(this);
-
-			// Vars
-			module_size = parseInt( dslc_module[0].getAttribute('data-dslc-module-size') );
-			var moduleLastState = 'no';
-			var moduleFirstState = 'no';
-
-			jQuery(this).removeClass('dslc-first-col');
-			jQuery(this).removeClass('dslc-last-col');
-
-			// Increment modules column counter
-			currPerRow += module_size;
-
-			// If modules column counter same as maximum
-			if ( currPerRow == maxPerRow ) {
-
-				// Add classes to current and next module
-				jQuery(this).addClass('dslc-last-col');
-				jQuery(this).next('.dslc-module-front').addClass('dslc-first-col');
-
-				// Reset modules column counter
-				currPerRow = 0;
-
-				// Set shortcode's "last" state to "yes"
-				moduleLastState = 'yes';
-
-				// Set shorcode's "first" state to "yes"
-				moduleFirstState = 'yes';
-
-
-			// If modules column counter bigger than maximum
-			} else if ( currPerRow > maxPerRow ) {
-
-				// Add classes to current and previous module
-				jQuery(this).removeClass('dslc-last-col').addClass('dslc-first-col');
-
-				// Set modules column counter to the size of current module
-				currPerRow = module_size;
-
-				// Set shortcode's "first" state to "yes"
-				moduleFirstState = 'yes';
-			}
-
-			// If modules column counter same as current module size
-			if ( currPerRow == module_size ) {
-
-				// Set shortcode's "first" attribute to yes
-				moduleFirstState = 'yes';
-
-				// Apply classes to current and previous column
-				jQuery(this).removeClass('dslc-last-col').addClass('dslc-first-col');
-
-			}
-
-			try {
-				// Get module's LC data
-				moduleCode = dslc_module[0].querySelector('.dslca-module-code').value;
-
-			} catch(err) {
-				console.info( 'No DSLC code found in module: ' + dslc_module[0].getAttribute('id') );
-			}
-
-			if ( '' !== moduleCode ) {
-				// Add the module shortcode containing the data
-				// composerCode = composerCode + '[dslc_module last="' + moduleLastState + '"]' + moduleCode + '[/dslc_module] ';
-
-				var moduleCodeJSON = JSON.parse(moduleCode);
-				// Add idicator for the last module in the row.
-				moduleCodeJSON.last = moduleLastState;
-
-				// RAW CODE CLEANUP: Clean the module code from keys with empty values.
-				jQuery.each(moduleCodeJSON, function(index, el) {
-					if ( false === el || '' === el ) {
-						delete moduleCodeJSON[index];
-					}
-
-					if ( 'give_new_id' === index ) {
-						delete moduleCodeJSON[index];
-					}
-				});
-
-				// Put optimized code back into the hidden textarea.
-				dslc_module[0].querySelector('.dslca-module-code').value = JSON.stringify(moduleCodeJSON);
-
-				// Add the module JSON as array item
-				moduleAreaJSON['content'].push( moduleCodeJSON );
-
-				// pageCodeInJson = pageCodeInJson + moduleCode + ',';
-
-			}
-
-			// Fix bug with modules duplication if broken module saved.
-			moduleCode = '';
-
-		});
-
-		modulesSectionJson['content'].push(moduleAreaJSON);
+		// modulesSectionJson['content'].push(moduleAreaJSON);
 
 		// Close area shortcode
 		// composerCode = composerCode + '[/dslc_modules_area] ';
-	});
+	// });
 
 	return JSON.stringify( modulesSectionJson );
 }
+
+function dslc_generate_module_code( moduleEl ) {
+
+	if ( dslcDebug ) console.log( 'dslc_generate_module_code' );
+
+	// Vars
+	var dslc_module = this,
+	moduleCode,
+	moduleCodeJSON,
+	moduleAreaJSON = {
+		content: []
+	};
+
+	// console.log( "moduleEl:" ); console.log( moduleEl );
+
+	
+
+		// console.log( "this:" ); console.log( this );
+
+		// dslc_module = this,
+		// moduleCode = '',
+		// moduleCodeJSON = '';
+
+		try {
+			// Get module's LC data
+			moduleCode = dslc_module.querySelector('.dslca-module-code').value;
+
+		} catch(err) {
+			console.info( 'No DSLC code found in module: ' + dslc_module.getAttribute('id') );
+		}
+
+		if ( '' !== moduleCode ) {
+
+			moduleCodeJSON = JSON.parse(moduleCode);
+
+			// jQuery(moduleEl).children('.lc-row').children('.lc-module').each(function(){
+			jQuery('.dslc-module-front', this).each(function(){
+				console.log( "this:" ); console.log( this );
+				console.log('found nested modules');
+				moduleCodeJSON['inner_modules'] = [];
+				console.log( "dslc_generate_module_code( this ):" ); console.log( dslc_generate_module_code( this ) );
+				moduleCodeJSON['inner_modules'] = dslc_generate_module_code( this );
+			});
+
+			// console.log( "moduleCodeJSON:" ); console.log( moduleCodeJSON );
+
+			// Iterate through properties of the object
+			(function() {
+				var i,
+					 hasOwn = Object.prototype.hasOwnProperty;
+
+				for ( i in moduleCodeJSON) {
+					if ( hasOwn.call( moduleCodeJSON, i ) ) { // filter out prototypes
+						if ( i === 'inner_modules' ) {
+							console.log( "FOUND!" );
+							console.log( "i:" ); console.log( i );
+							console.log( moduleCodeJSON[i] );
+						}
+					}
+				}
+
+			}());
+
+			// RAW CODE CLEANUP: Clean the module code from keys with empty values.
+			jQuery.each(moduleCodeJSON, function(index, el) {
+				if ( false === el || '' === el ) {
+					delete moduleCodeJSON[index];
+				}
+
+				if ( 'give_new_id' === index ) {
+					delete moduleCodeJSON[index];
+				}
+
+				// console.log('.');
+
+				if ( index === 'modulesContainer' ) {
+					console.log( "el:" ); console.log( el );
+					console.log( "index:" ); console.log( index );
+				}
+
+				if ( el === 'modulesContainer' ) {
+					console.log( "el:" ); console.log( el );
+					console.log( "index:" ); console.log( index );
+				}
+			});
+
+			// Put optimized code back into the hidden textarea.
+			dslc_module.querySelector('.dslca-module-code').value = JSON.stringify(moduleCodeJSON);
+
+			// Add the module JSON as array item
+			moduleAreaJSON['content'].push( moduleCodeJSON );
+
+			// pageCodeInJson = pageCodeInJson + moduleCode + ',';
+
+		}
+
+		// Fix bug with modules duplication if broken module saved.
+		moduleCode = '';
+
+	// });
+
+	return moduleAreaJSON.content;
+}
+
+/*
+function dslc_generate_module_code( modulesArea ) {
+
+	if ( dslcDebug ) console.log( 'dslc_generate_module_code' );
+
+	// Vars
+	var dslc_module = this,
+	moduleCode,
+	moduleCodeJSON,
+	moduleAreaJSON = {
+		content: []
+	};
+
+	jQuery('.dslc-module-front', modulesArea).each(function(){
+
+		dslc_module = this,
+		moduleCode = '',
+		moduleCodeJSON = '';
+
+		try {
+			// Get module's LC data
+			moduleCode = dslc_module.querySelector('.dslca-module-code').value;
+
+		} catch(err) {
+			console.info( 'No DSLC code found in module: ' + dslc_module.getAttribute('id') );
+		}
+
+		if ( '' !== moduleCode ) {
+
+			moduleCodeJSON = JSON.parse(moduleCode);
+
+			console.log( "moduleCodeJSON:" ); console.log( moduleCodeJSON );
+
+			// Iterate through properties of the object
+			(function() {
+				var i,
+					 hasOwn = Object.prototype.hasOwnProperty;
+
+				for ( i in moduleCodeJSON) {
+					if ( hasOwn.call( moduleCodeJSON, i ) ) { // filter out prototypes
+						if ( i === 'inner_modules' ) {
+							console.log( "FOUND!" );
+							console.log( "i:" ); console.log( i );
+							console.log( moduleCodeJSON[i] );
+						}
+					}
+				}
+
+			}());
+
+			// RAW CODE CLEANUP: Clean the module code from keys with empty values.
+			jQuery.each(moduleCodeJSON, function(index, el) {
+				if ( false === el || '' === el ) {
+					delete moduleCodeJSON[index];
+				}
+
+				if ( 'give_new_id' === index ) {
+					delete moduleCodeJSON[index];
+				}
+
+				// console.log('.');
+
+				if ( index === 'modulesContainer' ) {
+					console.log( "el:" ); console.log( el );
+					console.log( "index:" ); console.log( index );
+				}
+
+				if ( el === 'modulesContainer' ) {
+					console.log( "el:" ); console.log( el );
+					console.log( "index:" ); console.log( index );
+				}
+			});
+
+			// Put optimized code back into the hidden textarea.
+			dslc_module.querySelector('.dslca-module-code').value = JSON.stringify(moduleCodeJSON);
+
+			// Add the module JSON as array item
+			moduleAreaJSON['content'].push( moduleCodeJSON );
+
+			// pageCodeInJson = pageCodeInJson + moduleCode + ',';
+
+		}
+
+		// Fix bug with modules duplication if broken module saved.
+		moduleCode = '';
+
+	});
+
+	return moduleAreaJSON.content;
+}*/
 
 /**
  * CODE GENERATION - Document Ready

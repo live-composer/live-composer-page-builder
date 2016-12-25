@@ -13,6 +13,19 @@
 
 'use strict';
 
+
+	function init_sortables() {
+
+		console.log( "init_sortables" );
+
+		var el = jQuery('.dslc-modules-area, .lc-droppable', LiveComposer.Builder.PreviewAreaDocument); // Groups that can hold modules
+
+		jQuery(el).each(function (i,e) {
+
+			new LiveComposer.Builder.Elements.CModuleArea(e);
+		});
+	}
+
 /**
  * Module Area Actions (Duplicate, Change Width, Delete, ...)
  *
@@ -21,15 +34,7 @@
 
 ;jQuery(document).on('editorFrameLoaded', function(){
 
-	function init_sortables() {
-
-		var el = jQuery('.dslc-modules-area', LiveComposer.Builder.PreviewAreaDocument); // Groups that can hold modules
-
-		jQuery(el).each(function (i,e) {
-
-			new LiveComposer.Builder.Elements.CModuleArea(e);
-		});
-	}
+	init_sortables();
 
 
 	var actionAvail = function() {

@@ -71,7 +71,7 @@ LCAPP.modules.revisions = function (lcApp) {
 
 			// console.log( "lcApp.PageCode:" ); console.log( lcApp.state.pageCode );
 
-			lcApp.state.pageRevisions.save();
+			// lcApp.state.pageRevisions.save();
 
 			// console.log( "lcApp.state.pageRevisions:" ); console.log( lcApp.state.pageRevisions );
 

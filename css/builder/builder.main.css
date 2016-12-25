@@ -596,103 +596,7 @@ body #wpbody-content {
 }
 
 
-		.dslca-heading {
-			width: 100%;
-			margin-top: 35px;
-			margin-bottom: 10px;
-			text-transform: uppercase;
-			font-size: 12px;
-			letter-spacing: 2px;
-			color: #777;
-		}
-
-		#modules-list > .dslca-heading:first-child {
-			margin-top: 0;
-		}
-
-		.dslca-module {
-			color: #000; /* #555; */
-			background: #FFFFFF;
-
-			width: 47%;
-			min-height: 44px;
-			margin: 5px 2% 0 0;
-			padding: 8px 12px;
-
-			overflow: hidden;
-
-			display: inline-flex;
-			align-items: center;
-
-			box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15), -1px 1px 0px 0 rgba(255, 255, 255, 0.05) inset;
-			border-radius: 2px;
-
-			transition: transform 0.05s linear 0.01s;
-
-			/**
-			 * We need z-index to make sure the module
-			 * covers "Drop modules here" line
-			 */
-			z-index: 1;
-			position: relative;
-		}
-
-		/* Gradient disolving text that goes over limits of the module block. */
-		.dslca-module:before {
-			content: '';
-			position: absolute;
-			right: 0;
-			width: 20px;
-			top: 0;
-			bottom: 0;
-			background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); ;
-
-		}
-
-		.dslca-module[data-id="DSLC_Separator"],
-		.dslca-module[data-id="DSLC_Notification"],
-		.dslca-module[data-id="DSLC_Sliders"],
-		.dslca-module[data-id="DSLC_Staff"]{
-			/*margin-right: 14px;*/
-		}
-
-		.dslca-module[data-id="DSLC_M_A"] {
-			/*margin-left: 5px;*/
-			/*margin-right: 14px;*/
-			/*background: #b2b7bc;*/
-			/*box-shadow: none;*/
-		}
-
-		.dslca-module[data-id="DSLC_M_A"] .dslca-icon {
-			/*color: #fff;*/
-		}
-
-		.dslca-module[data-id="DSLC_M_A"]:hover {
-			/*background: #BDC3C9;*/
-		}
-
-		.dslca-module:hover {
-		  /*background: #6b9ff1;*/
-		  box-shadow: -2px 4px 3px 0 rgba(0, 0, 0, 0.1), -1px 1px 1px 0 rgba(0, 0, 0, 0.05);
-		  transform: translate(1px, -2px);
-		}
-
-		div.dslca-module:hover,
-		div.dslca-module:hover * {
-			/*color: #fff;*/
-			cursor: grab;
-			cursor: -webkit-grab;
-		}
-
-		div.dslca-module.dslca-module-dragging {
-			position: relative;
-			opacity: 1;
-
-		}
-
-		.dslc-module-front.dslca-module-dragging {
-			box-shadow: none!important;
-		}
+		
 
 		/* Module that follow the cursor */
 		/*.dslc-module-front.dslca-module-dragging:not(.dslca-module-ghost) {
@@ -2643,16 +2547,14 @@ body.rtl .dslca-modules-area-placeholder {
 
 
 
-.dslca-search-modules,
-.dslca-search-properties,
 .dslca-section-set {
 	padding: 18px;
 }
 
-.dslca-search-modules > input,
-.dslca-search-properties > input {
+.lc-panel-search {
 	padding: 8px 10px;
 	width: 100%;
+	margin: 20px 0 30px;
 }
 
 .dslca-section-scroller {

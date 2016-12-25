@@ -834,6 +834,9 @@ function dslc_drag_and_drop() {
 
 			} else {
 
+				// re-init droppable areas.
+				init_sortables();
+
 				jQuery('body').addClass('dslca-module-drop-in-progress');
 
 				// Add padding to modules area
@@ -849,6 +852,7 @@ function dslc_drag_and_drop() {
 					// Append Content
 					moduleOutput = response.output;
 
+
 					// Remove extra padding from area
 					// modulesArea.css({ paddingBottom : 0 });
 
@@ -859,6 +863,59 @@ function dslc_drag_and_drop() {
 										Builder.
 										Helpers.
 										insertModule( moduleOutput, jQuery('.dslca-module', modulesArea) );
+
+
+
+					var dslcJustAddedEl = dslcJustAdded[0];
+
+					// 1. Get the new module code.
+					var moduleJSONCode = dslcJustAddedEl.getElementsByClassName('dslca-module-code');
+					moduleJSONCode = moduleJSONCode[0].value;
+
+
+					// 2. Find were it placed (parent ID and neighbor ID).
+					var pathToModule = [];
+					var parentModule = dslcJustAddedEl.closest('.lc-module');
+					var parentModuleId = parentModule.getAttribute('data-module-id');
+
+					pathToModule.push(parentModuleId);
+
+					var grandParentModule = parentModule.parentElement.closest('.lc-module');
+
+					while ( grandParentModule !== null ) {
+						var grandParentModuleId = grandParentModule.getAttribute('data-module-id');
+						if ( grandParentModuleId !== null ) {
+							pathToModule.push(grandParentModuleId);
+						}
+						grandParentModule = grandParentModule.parentElement.closest('.lc-module');
+					}
+
+					var prevEl = dslcJustAddedEl.previousElementSibling;
+					var prevElId = '';
+
+					var nextEl = dslcJustAddedEl.nextElementSibling;
+					var nextElId = '';
+
+					if ( prevEl !== null
+							&& prevEl.classList.contains('lc-module')  ) {
+
+						prevElId = prevEl.getAttribute('data-module-id');
+
+					} else if (nextEl !== null
+							&& nextEl.classList.contains('lc-module') ) {
+
+						nextElId = nextEl.getAttribute('data-module-id');
+
+					}
+
+					// 3. Insert into the page JSON under the right address.
+
+
+					var pageCode = LiveComposerState.state.pageCode;
+					console.log( "pageCode:" ); console.log( JSON.parse(pageCode) );
+
+
+
 
 
 					setTimeout( function(){

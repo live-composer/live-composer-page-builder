@@ -58,8 +58,8 @@ final class DSLC_Scripts{
 		wp_enqueue_script( 'imagesloaded' ); // Need this for Masonry.
 		wp_enqueue_script( 'jquery-masonry' );
 
-		wp_enqueue_script( 'dslc-plugins-js', DS_LIVE_COMPOSER_URL . 'js/frontend/plugins.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
-		wp_enqueue_script( 'dslc-main-js', DS_LIVE_COMPOSER_URL . 'js/frontend/main.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+		wp_enqueue_script( 'dslc-plugins-js', DS_LIVE_COMPOSER_URL . 'js/src/frontend/plugins.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+		wp_enqueue_script( 'dslc-main-js', DS_LIVE_COMPOSER_URL . 'js/src/frontend/main.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 
 		wp_enqueue_script( 'jquery-ui-core' );
 		wp_enqueue_script( 'jquery-ui-sortable' );
@@ -99,7 +99,7 @@ final class DSLC_Scripts{
 			 * JavaScript
 			 */
 			wp_enqueue_script( 'dslc-load-fonts', '//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js' );
-			wp_enqueue_script( 'dslc-iframe-main-js', DS_LIVE_COMPOSER_URL . 'js/builder.frontend/builder.frontend.main.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_script( 'dslc-iframe-main-js', DS_LIVE_COMPOSER_URL . 'js/src/builder.frontend/builder.frontend.main.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 
 		}
 	}
@@ -197,21 +197,28 @@ final class DSLC_Scripts{
 			//wp_enqueue_script( 'imagesloaded' ); // Need this for Masonry.
 			//wp_enqueue_script( 'jquery-masonry' );
 
-			wp_enqueue_script( 'dslc-builder-plugins-js', DS_LIVE_COMPOSER_URL . 'js/builder/builder.plugins.js', array( 'jquery', 'wp-color-picker' ), DS_LIVE_COMPOSER_VER , true );
+			wp_enqueue_script( 'dslc-builder-plugins-js', DS_LIVE_COMPOSER_URL . 'js/src/lib/builder.plugins.js', array( 'jquery', 'wp-color-picker' ), DS_LIVE_COMPOSER_VER , true );
 
-			// Vue.js
-			wp_enqueue_script( 'dslc-builder-plugin-vue', DS_LIVE_COMPOSER_URL . 'js/builder/vue.js', array( 'dslc-builder-main-js' ), DS_LIVE_COMPOSER_VER, true );
+			// Vuex.js – loaded via broserify
+			// wp_enqueue_script( 'dslc-builder-plugin-vuex', DS_LIVE_COMPOSER_URL . 'js/src/lib/vuex.js', array( 'dslc-builder-main-js' ), DS_LIVE_COMPOSER_VER, true );
 
+			// Vue.js – loaded via broserify
+			// wp_enqueue_script( 'dslc-builder-plugin-vue', DS_LIVE_COMPOSER_URL . 'js/src/lib/vue.js', array( 'dslc-builder-main-js' ), DS_LIVE_COMPOSER_VER, true );
+
+			wp_enqueue_script( 'lc-app-js', DS_LIVE_COMPOSER_URL . 'js/build/main.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER, true );
+			self::load_scripts( '/js/src/builder-standalone', 'dslc-builder-main-js' );
+			/*
 			if ( ! SCRIPT_DEBUG ) {
 
 				wp_enqueue_script( 'dslc-builder-main-js', DS_LIVE_COMPOSER_URL . 'js/builder.all.min.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER, true );
 			} else {
-				self::load_scripts( 'builder', 'dslc-builder-main-js' );
+				self::load_scripts( 'builder-standalone', 'dslc-builder-main-js' );
 			}
+			*/
 
 			// Transmit data to Vue.js app.
 			$dslc_modules = dslc_get_modules();
-			wp_localize_script( 'dslc-builder-main-js', 'DSLCModules', $dslc_modules );
+			wp_localize_script( 'lc-app-js', 'DSLCModules', $dslc_modules );
 
 
 			wp_localize_script( 'dslc-builder-main-js', 'DSLCAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php', $protocol ) ) );
@@ -296,7 +303,9 @@ final class DSLC_Scripts{
 	public static function load_scripts( $dir = '*', $scriptdeps = '', $exclude_dirs = array() ) {
 
 		/** Load builder files dynamically */
-		$directories = glob( DS_LIVE_COMPOSER_ABS . '/js/' . $dir, GLOB_ONLYDIR );
+		$directories = glob( DS_LIVE_COMPOSER_ABS . $dir, GLOB_ONLYDIR );
+
+		vovaphperror( $directories, '$directories' );
 
 		foreach ( $directories as $dir ) {
 
@@ -316,7 +325,7 @@ final class DSLC_Scripts{
 				}
 
 				$filehandle = 'dslc-' . str_replace( '.', '-', $filename );
-				wp_enqueue_script( $filehandle, DS_LIVE_COMPOSER_URL . 'js/' . $filedir . '/' . $filename, $scriptdeps, DS_LIVE_COMPOSER_VER, true );
+				wp_enqueue_script( $filehandle, DS_LIVE_COMPOSER_URL .'js/src/'. $filedir . '/' . $filename, $scriptdeps, DS_LIVE_COMPOSER_VER, true );
 			}
 		}
 	}
