@@ -77,83 +77,25 @@
 
 var Vue = require('vue');
 
-/*
-var Vuex = require('vuex');
-Vue.use(Vuex);
-
-const LiveComposerState = new Vuex.Store({
-	// root state object.
-	state: {
-		pageCode: null
-	},
-	// mutations are operations that actually mutates the state.
-	// each mutation handler gets the entire state tree as the
-	// first argument, followed by additional payload arguments.
-	mutations: {
-		updatePageCode (state, newCode) {
-			state.pageCode = newCode;
-		}
-	}
-});
-
-*/
-
 // Makes possible to update LiveComposerState.state.pageCode
 // outside compiled js file. (Browserify wrap all the code making it unaccessible)
 window.lcUpdatePageCode =function( newCode ){
-	LiveComposerState.commit('updatePageCode', newCode);
+	// LiveComposerState.commit('updatePageCode', newCode);
 };
-
-// LiveComposerState.state.pageCode
-// LiveComposerState.commit('updatePageCode', 'something')
-// To use in components call: this.$LiveComposerState.state.pageCode
-
-// http://defiantjs.com/ – search over JSON
-//
-// You can quickly find element in JSON by getting id of all the parents first
-// from HTML (creating a path to the item before searching for it in JSON).
-
-
-/**
- * Prepare DSLCModules variable for component.
- * Go through all DSLCModules.icon properties and prepare data for output.
- */
-(function() {
-	var i,
-		 hasOwn = Object.prototype.hasOwnProperty,
-		 DLSCModulesWithSections = [],
-		 DLSCModulesSections = []; // Temporary object that we use to create objects by category
-
-	for ( i in DSLCModules) {
-		if ( hasOwn.call( DSLCModules, i ) ) { // filter out prototypes
-
-			// Do we have this section id in the object already?
-			if ( undefined === DLSCModulesSections[ DSLCModules[i].origin ] ) {
-				DLSCModulesSections[ DSLCModules[i].origin ] = DSLCModules[i].origin;
-				DLSCModulesWithSections.push( { 'type': 'heading', 'id': DSLCModules[i].origin, 'title': DSLCModules[i].origin, 'origin': DSLCModules[i].origin, 'show': true } );
-			}
-
-			DSLCModules[i].type = 'module';
-			DSLCModules[i].show = true;
-
-			DLSCModulesWithSections.push(  DSLCModules[i] );
-		}
-	}
-	// We don't want to create many globals,
-	// so replace original object with sorted one.
-	DSLCModules = DLSCModulesWithSections;
-
-}());
 
 // Request modules-list component:
 var modulesList = require('./components/modules-list.vue');
-var LiveComposerState = require('./store/store.vue');
+var droppableArea = require('./components/droppable-area.vue');
+
+var storeFunctions = require('./lib/functions.store.js')(Vue);
+var appState = require('./store/store.js');
 
 var LiveComposerApp = new Vue({
 	el: '#livecomposer-app',
-	LiveComposerState,
+	appState,
 	components : {
-      modulesList
+      modulesList,
+      droppableArea
    },
 	// render: function (createElement) {
 	// 	return createElement(App)
@@ -164,5 +106,10 @@ var LiveComposerApp = new Vue({
 		// console.log( "document.getElementById('dslca-code'):" ); console.log( document.getElementById('dslca-code').value );
 
 		// console.log( "LiveComposerState.state.pageCode:" ); console.log( LiveComposerState.state.pageCode );
+		Vue.use(blah);
 	}
 });
+
+function blah(Vue) {
+	console.log('blah');
+}

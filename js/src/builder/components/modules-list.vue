@@ -1,5 +1,21 @@
 <template>
- 	<div id="modules-list" class="lc-modules-list">
+
+	<draggable id="modules-list" class="lc-modules-list"
+		:list="modules"
+		:options="{
+			sort: false, // do not allow sorting inside the list of modules
+			group: { name: 'modules', pull: 'clone', put: false },
+			animation: 150,
+			handle: '.dslca-module',
+			draggable: '.dslca-module',
+			// ghostClass: 'dslca-module-placeholder',
+			chosenClass: 'dslca-module-dragging',
+			scroll: true, // or HTMLElement
+			scrollSensitivity: 150, // px, how near the mouse must be to an edge to start scrolling.
+			scrollSpeed: 15
+		}"
+	>
+ 	<!-- <div id="modules-list" class="lc-modules-list"> -->
 
  		<input
  			type="search"
@@ -20,10 +36,14 @@
  					v-bind:class="'dslca-icon dslc-icon-' + module.icon"></span>
  			<span class="dslca-module-title">{{ module.title }}</span>
  		</div><!-- .dslc-module -->
- 	</div>
+ 	<!-- </div> -->
+ 	</draggable>
 </template>
 
 <script>
+
+import draggable from 'vuedraggable'
+
 /**
  * Render list of modules with Vue.
  * We receive DSLCModules global var via WordPress localize.
@@ -41,6 +61,10 @@ export default {
 			modules: DSLCModules,
 			modulesSearch : ''
 		};
+	},
+
+	components: {
+		draggable,
 	},
 
 	watch: {

@@ -173,7 +173,9 @@ function dslc_display_composer() {
 
 							<div class="dslca-section-scroller">
 									<div class="dslca-section-scroller-content">
+										<droppable-area></droppable-area>
 										<modules-list></modules-list>
+
 									</div><!-- .dslca-section-scroller-content -->
 							</div><!-- .dslca-section-scroller-content -->
 
@@ -806,6 +808,9 @@ function dslc_filter_content( $content ) {
 		if ( dslc_is_editor_active( 'access' ) ) {
 			$composer_wrapper_after .= '<div class="lc-scroll-top-area"></div><div class="lc-scroll-bottom-area"></div>';
 		}
+
+		$composer_append .= 'DROPPABLE:<droppable-area></droppable-area>';
+
 		// Pass the filtered content output.
 		return $composer_wrapper_before . do_action( 'dslc_output_prepend' ) . $composer_header . '<div id="dslc-main">' . $composer_prepend . $composer_content . '</div>' . $composer_append . $composer_footer . do_action( 'dslc_output_append' ) . $composer_wrapper_after;
 
