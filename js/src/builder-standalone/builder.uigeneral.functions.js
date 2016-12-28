@@ -760,9 +760,6 @@ function dslc_filter_origin( origin, section ) {
 
 function dslc_drag_and_drop() {
 
-	if ( dslcDebug ) console.log( 'dslc_drag_and_drop' );
-
-
 }
 
 /**

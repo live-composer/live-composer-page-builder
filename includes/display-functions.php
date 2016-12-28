@@ -173,8 +173,31 @@ function dslc_display_composer() {
 
 							<div class="dslca-section-scroller">
 									<div class="dslca-section-scroller-content">
-										<droppable-area></droppable-area>
-										<modules-list></modules-list>
+										<!-- <droppable-area></droppable-area> -->
+										<script type="text/x-template" id="modules-list-template">
+										<div id="modules-list">
+											<input
+												type="search"
+												id="modules-search-input"
+												class="lc-panel-search"
+												value=""
+												placeholder="Start typing to search modules..."
+												v-model="modulesSearch"
+											>
+											<div v-for="module in modules"
+												  v-bind:data-origin="module.origin"
+												  v-bind:data-id="module.id"
+												  v-bind:class="'dslca-origin dslca-' + module.type"
+												  v-bind:tabindex="module.tabindex"
+												  v-if="module.show"
+											>
+												<span v-if="module.icon"
+														v-bind:class="'dslca-icon dslc-icon-' + module.icon"></span>
+												<span class="dslca-module-title" v-text="module.title"></span>
+											</div><!-- .dslc-module -->
+										<div>
+										</script>
+										<modules-list ref="modulesList"></modules-list>
 
 									</div><!-- .dslca-section-scroller-content -->
 							</div><!-- .dslca-section-scroller-content -->

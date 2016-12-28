@@ -200,12 +200,20 @@ final class DSLC_Scripts{
 			wp_enqueue_script( 'dslc-builder-plugins-js', DS_LIVE_COMPOSER_URL . 'js/src/lib/builder.plugins.js', array( 'jquery', 'wp-color-picker' ), DS_LIVE_COMPOSER_VER , true );
 
 			// Vuex.js – loaded via broserify
-			// wp_enqueue_script( 'dslc-builder-plugin-vuex', DS_LIVE_COMPOSER_URL . 'js/src/lib/vuex.js', array( 'dslc-builder-main-js' ), DS_LIVE_COMPOSER_VER, true );
+			wp_enqueue_script( 'lc-vue-vuex', DS_LIVE_COMPOSER_URL . 'js/src/lib/vuex.js', array( 'dslc-builder-main-js' ), DS_LIVE_COMPOSER_VER, true );
 
 			// Vue.js – loaded via broserify
-			// wp_enqueue_script( 'dslc-builder-plugin-vue', DS_LIVE_COMPOSER_URL . 'js/src/lib/vue.js', array( 'dslc-builder-main-js' ), DS_LIVE_COMPOSER_VER, true );
+			wp_enqueue_script( 'lc-vue-vue', DS_LIVE_COMPOSER_URL . 'js/src/lib/vue.js', array( 'dslc-builder-main-js' ), DS_LIVE_COMPOSER_VER, true );
 
-			wp_enqueue_script( 'lc-app-js', DS_LIVE_COMPOSER_URL . 'js/build/main.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER, true );
+			wp_enqueue_script( 'lc-vue-component-moduleslist', DS_LIVE_COMPOSER_URL . 'js/src/builder/components/modules-list.js', array( 'lc-vue-vue'), DS_LIVE_COMPOSER_VER, true );
+
+			// Transmit data to Vue.js app.
+			$dslc_modules = dslc_get_modules();
+			wp_localize_script( 'lc-vue-component-moduleslist', 'DSLCModules', $dslc_modules );
+
+			wp_enqueue_script( 'lc-vue-storage', DS_LIVE_COMPOSER_URL . 'js/src/builder/store/store.js',  array( 'lc-vue-vue', 'lc-vue-vuex' ), DS_LIVE_COMPOSER_VER, true );
+
+			wp_enqueue_script( 'lc-app-js', DS_LIVE_COMPOSER_URL . 'js/src/builder/main.js', array( 'lc-vue-vue', 'lc-vue-vuex' ), DS_LIVE_COMPOSER_VER, true );
 			self::load_scripts( '/js/src/builder-standalone', 'dslc-builder-main-js' );
 			/*
 			if ( ! SCRIPT_DEBUG ) {
@@ -216,9 +224,7 @@ final class DSLC_Scripts{
 			}
 			*/
 
-			// Transmit data to Vue.js app.
-			$dslc_modules = dslc_get_modules();
-			wp_localize_script( 'lc-app-js', 'DSLCModules', $dslc_modules );
+			// wp_localize_script( 'lc-app-js', 'DSLCModules', $dslc_modules );
 
 
 			wp_localize_script( 'dslc-builder-main-js', 'DSLCAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php', $protocol ) ) );

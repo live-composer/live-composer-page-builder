@@ -226,9 +226,9 @@ window.previewAreaTinyMCELoaded = function(){
 	 * Update LiveComposerState.state.pageCode with current JSON code.
 	 */
 	var currentPageCode = document.getElementById('dslca-code').value;
-	lcUpdatePageCode(currentPageCode);
+	// lcUpdatePageCode(currentPageCode);
 	// LiveComposerState.commit('updatePageCode', currentPageCode);
 
 	// On load set focus on elements search field.
-	document.getElementById('modules-search-input').focus();
+	// document.getElementById('modules-search-input').focus();
 };

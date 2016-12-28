@@ -1,5 +1,4 @@
-var Vue = require('vue');
-var Vuex = require('vuex');
+'use strict';
 
 Vue.use(Vuex);
 
@@ -20,15 +19,6 @@ var liveComposerState = new Vuex.Store({
 	}
 });
 
-module.exports = liveComposerState;
+// console.log( "LiveComposerState.state.pageCode:" );
+// console.log( LiveComposerState.state.pageCode );
 
-/*
-LiveComposerState.state.pageCode
-LiveComposerState.commit('updatePageCode', 'something')
-To use in components call: this.$LiveComposerState.state.pageCode
-
-http://defiantjs.com/ – search over JSON
-
-You can quickly find element in JSON by getting id of all the parents first
-from HTML (creating a path to the item before searching for it in JSON).
-*/

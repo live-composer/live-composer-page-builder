@@ -4,6 +4,11 @@
 'use strict';
 
 /**
+ * Coding Standards:
+ * https://github.com/airbnb/javascript
+ */
+
+/**
  *   Live Composer team is using next tools for development:
  *
  * – Vue as main app "framework".
@@ -75,40 +80,26 @@
  * 	printenv
  */
 
-var Vue = require('vue');
+// var Vue = require('vue');
 
 // Makes possible to update LiveComposerState.state.pageCode
 // outside compiled js file. (Browserify wrap all the code making it unaccessible)
-window.lcUpdatePageCode =function( newCode ){
+window.lcUpdatePageCode = function( newCode ){
 	// LiveComposerState.commit('updatePageCode', newCode);
-};
+}
 
-// Request modules-list component:
-var modulesList = require('./components/modules-list.vue');
-var droppableArea = require('./components/droppable-area.vue');
 
-var storeFunctions = require('./lib/functions.store.js')(Vue);
-var appState = require('./store/store.js');
-
-var LiveComposerApp = new Vue({
+const LiveComposerApp = new Vue({
 	el: '#livecomposer-app',
-	appState,
-	components : {
-      modulesList,
-      droppableArea
-   },
+	liveComposerState,
 	// render: function (createElement) {
 	// 	return createElement(App)
 	// },
 	mounted: function () {
-		console.log( 'Root Vue mounted' );
-		// document.getElementById('dslca-code');
-		// console.log( "document.getElementById('dslca-code'):" ); console.log( document.getElementById('dslca-code').value );
-
-		// console.log( "LiveComposerState.state.pageCode:" ); console.log( LiveComposerState.state.pageCode );
-		Vue.use(blah);
+		console.log( 'Root Vue mounted' )
+		Vue.use(blah)
 	}
-});
+})
 
 function blah(Vue) {
 	console.log('blah');
