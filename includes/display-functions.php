@@ -142,29 +142,12 @@ function dslc_display_composer() {
 						<!-- /TITLE -->
 
 						<!-- TABS -->
-						<ul class="dslca-subsection-tabs wp-clearfix">
-							<li class="dslca-tab-active" ><a href="#"><span class="dslca-icon dslc-icon-th-large"></span> <?php _e( 'Modules', 'live-composer-page-builder' ); ?></a></li>
-							<li><a href="#"><?php _e( 'Sections', 'live-composer-page-builder' ); ?></a></li>
-							<li><a href="#"><?php _e( 'Pages', 'live-composer-page-builder' ); ?></a></li>
-						</ul>
+						<section-tabs></section-tabs>
 						<!-- /TABS -->
 
 						<!-- PANEL CONTENT -->
 
-						<!-- MODULES LISTING -->
-						<div class="dslca-section dslca-modules" id="dslca-modules">
-
-							<div class="dslca-section-scroller-fade"></div>
-
-							<div class="dslca-section-scroller">
-									<div class="dslca-section-scroller-content">
-										<modules-list></modules-list>
-
-									</div><!-- .dslca-section-scroller-content -->
-							</div><!-- .dslca-section-scroller-content -->
-
-						</div>
-						<!-- /MODULES LISTING -->
+						
 
 
 						<!-- SECTION: Modules Editing -->

@@ -90,7 +90,7 @@ if (module.hot) {(function () {  var hotAPI = require("vueify/node_modules/vue-h
     hotAPI.rerender("data-v-30423bd8", __vue__options__)
   }
 })()}
-},{"vue":8,"vueify/lib/insert-css":9,"vueify/node_modules/vue-hot-reload-api":10}],2:[function(require,module,exports){
+},{"vue":9,"vueify/lib/insert-css":10,"vueify/node_modules/vue-hot-reload-api":11}],2:[function(require,module,exports){
 var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("/* Heading used to separate modules by type */\n.dslca-heading {\n\twidth: 100%;\n\tmargin-top: 35px;\n\tmargin-bottom: 10px;\n\ttext-transform: uppercase;\n\tfont-size: 12px;\n\tletter-spacing: 2px;\n\tcolor: #777;\n}\n\n#modules-list > .dslca-heading:first-of-type {\n\tmargin-top: 0;\n}\n\n/* Module in the modules library on the sidebar */\n\n.dslca-module {\n\tcolor: #000;\n\tbackground: #FFFFFF;\n\n\twidth: 47%;\n\tmin-height: 44px;\n\tmargin: 5px 2% 0 0;\n\tpadding: 8px 12px;\n\n\toverflow: hidden;\n\n\tdisplay: inline-flex;\n\talign-items: center;\n\n\tbox-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15), -1px 1px 0px 0 rgba(255, 255, 255, 0.05) inset;\n\tborder-radius: 2px;\n\tborder: 2px solid transparent;\n\n\ttransition: transform 0.05s linear 0.01s;\n\n\t/**\n\t * We need z-index to make sure the module\n\t * covers \"Drop modules here\" line\n\t */\n\tz-index: 1;\n\tposition: relative;\n}\n\n.dslca-module:focus {\n\tborder-color: #00a0d2;\n}\n\n/* Gradient disolving text that goes over limits of the module block. */\n.dslca-module:before {\n\tcontent: '';\n\tposition: absolute;\n\tright: 0;\n\twidth: 20px;\n\ttop: 0;\n\tbottom: 0;\n\tbackground: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); ;\n\n}\n\n.dslca-module[data-id=\"DSLC_M_A\"] {\n\n}\n\n.dslca-module:hover {\n  box-shadow: -2px 4px 3px 0 rgba(0, 0, 0, 0.1), -1px 1px 1px 0 rgba(0, 0, 0, 0.05);\n  transform: translate(1px, -2px);\n}\n\ndiv.dslca-module:hover,\ndiv.dslca-module:hover * {\n\tcursor: grab;\n\tcursor: -webkit-grab;\n}\n\ndiv.dslca-module.dslca-module-dragging {\n\tposition: relative;\n\topacity: 1;\n}\n\n.dslc-module-front.dslca-module-dragging {\n\tbox-shadow: none!important;\n}")
 ;(function(){
 'use strict';
@@ -359,7 +359,61 @@ if (module.hot) {(function () {  var hotAPI = require("vueify/node_modules/vue-h
     hotAPI.rerender("data-v-4b9caff8", __vue__options__)
   }
 })()}
-},{"vue":8,"vueify/lib/insert-css":9,"vueify/node_modules/vue-hot-reload-api":10}],3:[function(require,module,exports){
+},{"vue":9,"vueify/lib/insert-css":10,"vueify/node_modules/vue-hot-reload-api":11}],3:[function(require,module,exports){
+;(function(){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+
+var modulesList = require('./modules-list.vue');
+
+exports.default = {
+
+	data: function data() {
+		return {
+			actve: false
+		};
+	},
+
+	components: {
+		modulesList: modulesList
+	},
+
+	mounted: function mounted() {},
+
+	computed: {
+		buttonState: function buttonState() {}
+	},
+
+	watch: {
+		buttonState: function buttonState(state) {}
+	},
+
+	methods: {
+		updateButtonState: function updateButtonState(newState) {}
+	}
+
+};
+})()
+if (module.exports.__esModule) module.exports = module.exports.default
+var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
+if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_vm._m(0),_vm._v(" "),_c('div',{staticClass:"dslca-section dslca-modules",attrs:{"id":"dslca-modules"}},[_c('div',{staticClass:"dslca-section-scroller-fade"}),_vm._v(" "),_c('div',{staticClass:"dslca-section-scroller"},[_c('div',{staticClass:"dslca-section-scroller-content"},[_c('modules-list')],1)])])])}
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('ul',{staticClass:"dslca-subsection-tabs wp-clearfix"},[_c('li',{staticClass:"dslca-tab-active"},[_c('a',{attrs:{"href":"#"}},[_c('span',{staticClass:"dslca-icon dslc-icon-th-large"}),_vm._v(" Modules")])]),_vm._v(" "),_c('li',[_c('a',{attrs:{"href":"#"}},[_vm._v("Sections")])]),_vm._v(" "),_c('li',[_c('a',{attrs:{"href":"#"}},[_vm._v("Pages")])])])}]
+if (module.hot) {(function () {  var hotAPI = require("vueify/node_modules/vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-9d72558c", __vue__options__)
+  } else {
+    hotAPI.rerender("data-v-9d72558c", __vue__options__)
+  }
+})()}
+},{"./modules-list.vue":2,"vue":9,"vueify/node_modules/vue-hot-reload-api":11}],4:[function(require,module,exports){
 ;(function(){
 "use strict";
 
@@ -405,7 +459,7 @@ if (module.hot) {(function () {  var hotAPI = require("vueify/node_modules/vue-h
     hotAPI.reload("data-v-65c1cf4c", __vue__options__)
   }
 })()}
-},{"vue":8,"vueify/node_modules/vue-hot-reload-api":10}],4:[function(require,module,exports){
+},{"vue":9,"vueify/node_modules/vue-hot-reload-api":11}],5:[function(require,module,exports){
 /**
  * Custom utils
  */
@@ -494,19 +548,21 @@ var store = require('./store/store.js');
 // console.log( "appState:" ); console.log( store.state.pageCode );
 
 // Request modules-list component:
-var modulesList = require('./components/modules-list.vue');
-var buttonSave  = require('./components/button-save.vue');
-var sectionTitle  = require('./components/section-title.vue');
+
+const buttonSave  = require('./components/button-save.vue');
+const sectionTitle  = require('./components/section-title.vue');
+const sectionTabs  = require('./components/section-tabs.vue');
 // var droppableArea = require('./components/droppable-area.vue');
 // var storeFunctions = require('./lib/functions.store.js')(Vue);
 
-var LiveComposerApp = new Vue({
+const LiveComposerApp = new Vue({
 	el: '#livecomposer-app',
 	store,
 	components : {
-		modulesList,
 		buttonSave,
-		sectionTitle
+		sectionTitle,
+		sectionTabs
+		// – modulesList
 	},
 	// render: function (createElement) {
 	// 	return createElement(App)
@@ -534,7 +590,7 @@ console.log( "LiveComposerApp:" ); console.log( LiveComposerApp );
 function blah(Vue) {
 	console.log('blah');
 }
-},{"./components/button-save.vue":1,"./components/modules-list.vue":2,"./components/section-title.vue":3,"./store/store.js":5,"vue":8,"vuex":11}],5:[function(require,module,exports){
+},{"./components/button-save.vue":1,"./components/section-tabs.vue":3,"./components/section-title.vue":4,"./store/store.js":6,"vue":9,"vuex":12}],6:[function(require,module,exports){
 "use strict";
 
 var Vuex = require('vuex');
@@ -613,7 +669,7 @@ You can quickly find element in JSON by getting id of all the parents first
 from HTML (creating a path to the item before searching for it in JSON).
 */
 
-},{"./store.plugin.savepage.js":6,"./store.plugins.js":7,"vuex":11}],6:[function(require,module,exports){
+},{"./store.plugin.savepage.js":7,"./store.plugins.js":8,"vuex":12}],7:[function(require,module,exports){
 'use strict';
 
 // const debug = process.env.NODE_ENV !== 'production';
@@ -680,7 +736,7 @@ module.exports = store => {
 }
 
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 "use strict";
 
 // var Vuex = require('vuex');
@@ -709,7 +765,7 @@ module.exports = store => {
 }
 
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 (function (process,global){
 /*!
  * Vue.js v2.1.7
@@ -9186,7 +9242,7 @@ Vue$3.compile = compileToFunctions;
 module.exports = Vue$3;
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":12}],9:[function(require,module,exports){
+},{"_process":13}],10:[function(require,module,exports){
 var inserted = exports.cache = {}
 
 function noop () {}
@@ -9211,7 +9267,7 @@ exports.insert = function (css) {
   }
 }
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 var Vue // late bind
 var map = window.__VUE_HOT_MAP__ = Object.create(null)
 var installed = false
@@ -9337,7 +9393,7 @@ exports.reload = tryWrap(function (id, options) {
   })
 })
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 /**
  * vuex v2.1.1
  * (c) 2016 Evan You
@@ -10099,7 +10155,7 @@ var index = {
 return index;
 
 })));
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -10281,4 +10337,4 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}]},{},[4]);
+},{}]},{},[5]);

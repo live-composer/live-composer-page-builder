@@ -86,19 +86,21 @@ var store = require('./store/store.js');
 // console.log( "appState:" ); console.log( store.state.pageCode );
 
 // Request modules-list component:
-var modulesList = require('./components/modules-list.vue');
-var buttonSave  = require('./components/button-save.vue');
-var sectionTitle  = require('./components/section-title.vue');
+
+const buttonSave  = require('./components/button-save.vue');
+const sectionTitle  = require('./components/section-title.vue');
+const sectionTabs  = require('./components/section-tabs.vue');
 // var droppableArea = require('./components/droppable-area.vue');
 // var storeFunctions = require('./lib/functions.store.js')(Vue);
 
-var LiveComposerApp = new Vue({
+const LiveComposerApp = new Vue({
 	el: '#livecomposer-app',
 	store,
 	components : {
-		modulesList,
 		buttonSave,
-		sectionTitle
+		sectionTitle,
+		sectionTabs
+		// – modulesList
 	},
 	// render: function (createElement) {
 	// 	return createElement(App)
