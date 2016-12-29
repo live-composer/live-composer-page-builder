@@ -52,7 +52,7 @@ jQuery(document).on('editorFrameLoaded', function(){
 
 		e.preventDefault();
 
-		// var module = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument);
+		// var module = jQuery('.dslca-module-being-edited');
 		var moduleElId = LiveComposer.Builder.State.moduleBeingEdited;
 		dslc_module_copy( moduleElId );
 
@@ -65,7 +65,7 @@ jQuery(document).on('editorFrameLoaded', function(){
 
 		e.preventDefault();
 
-		var module = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument);
+		var module = jQuery('.dslca-module-being-edited');
 		dslc_delete_module( module );
 
 		/* @todo: move the next code into a separate function. */
@@ -74,7 +74,7 @@ jQuery(document).on('editorFrameLoaded', function(){
 		LiveComposer.Builder.UI.unloadOptionsDeps();
 		LiveComposer.Builder.State.panelOpened = false;
 
-		jQuery("body", LiveComposer.Builder.PreviewAreaDocument).removeClass('module-editing-in-progress');
+		jQuery("body").removeClass('module-editing-in-progress');
 		jQuery('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
 
 		dslc_disable_responsive_view();
@@ -83,20 +83,20 @@ jQuery(document).on('editorFrameLoaded', function(){
 	/**
 	 * Hook - Edit Module On Click ( Display Options Panel )
 	 */
-	LiveComposer.Builder.PreviewAreaDocument.on( 'click', '.dslca-module-edit-hook, .dslc-module-front > div:not(.dslca-module-manage)', function(e){
+	jQuery(document).on( 'click', '.dslca-module-edit-hook, .dslc-module-front > div:not(.dslca-module-manage)', function(e){
 
 		if(dslcDebug) console.log('dslca-module-edit-hook');
 
 		e.preventDefault();
 
 
-		var module_edited = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).length;
-		var row_edited = jQuery('.dslca-modules-section-being-edited', LiveComposer.Builder.PreviewAreaDocument).length;
+		var module_edited = jQuery('.dslca-module-being-edited').length;
+		var row_edited = jQuery('.dslca-modules-section-being-edited').length;
 
 		/// If settings panel opened - finish func
 		if ( $('body').hasClass( 'dslca-composer-hidden' ) || module_edited > 0 || row_edited > 0 ) {
 
-			if ( jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument)[0] != jQuery(this).closest('.dslc-module-front')[0] ) {
+			if ( jQuery('.dslca-module-being-edited')[0] != jQuery(this).closest('.dslc-module-front')[0] ) {
 
 				LiveComposer.Builder.UI.shakePanelConfirmButton();
 			}
@@ -113,7 +113,7 @@ jQuery(document).on('editorFrameLoaded', function(){
 		LiveComposer.Builder.State.moduleBeingEdited = dslcModule.data('module-id');
 
 		// If a module is bening edited remove the "being edited" class from it
-		$('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-module-being-edited');
+		$('.dslca-module-being-edited').removeClass('dslca-module-being-edited');
 
 		// Add the "being edited" class to current module
 		dslcModule.addClass('dslca-module-being-edited');
@@ -122,14 +122,14 @@ jQuery(document).on('editorFrameLoaded', function(){
 		dslc_module_options_show( dslc_module_id );
 
 		// Cover up other modules with semi transp cover
-		jQuery("body", LiveComposer.Builder.PreviewAreaDocument).addClass('module-editing-in-progress');
+		jQuery("body").addClass('module-editing-in-progress');
 
 	});
 
 	/**
 	 * Action - Show/Hide Width Options
 	 */
-	LiveComposer.Builder.PreviewAreaDocument.on( 'click', '.dslca-change-width-module-hook', function(e){
+	jQuery(document).on( 'click', '.dslca-change-width-module-hook', function(e){
 
 		e.preventDefault();
 
@@ -143,7 +143,7 @@ jQuery(document).on('editorFrameLoaded', function(){
 		}
 	});
 
-	LiveComposer.Builder.PreviewAreaDocument.on( 'mouseleave', '.dslca-change-width-module-options', function(e){
+	jQuery(document).on( 'mouseleave', '.dslca-change-width-module-options', function(e){
 
 			// Hide width seleciton panel.
 			jQuery(this).hide();
@@ -155,7 +155,7 @@ jQuery(document).on('editorFrameLoaded', function(){
 	 * Hook - Set Module Width
 	 */
 	/*
-	LiveComposer.Builder.PreviewAreaDocument.on( 'click', '.dslca-change-width-module-options span', function(){
+	jQuery(document).on( 'click', '.dslca-change-width-module-options span', function(){
 
 		dslc_module_width_set( jQuery(this).closest('.dslc-module-front'), jQuery(this).data('size') );
 	});
@@ -163,7 +163,7 @@ jQuery(document).on('editorFrameLoaded', function(){
 	/**
 	 * Hook - Show code for altering module's defaults
 	 */
-	LiveComposer.Builder.PreviewAreaDocument.on( 'click', '.dslca-module-get-defaults-hook', function(){
+	jQuery(document).on( 'click', '.dslca-module-get-defaults-hook', function(){
 
 		// Vars
 		var module = jQuery(this).closest('.dslc-module-front');
@@ -189,7 +189,7 @@ jQuery(document).on('editorFrameLoaded', function(){
 	 * We have 'refresh' icon on blog posts grid and other post-based modules.
 	 * It's visible only when there are no posts to render.
 	 */
-	LiveComposer.Builder.PreviewAreaDocument.on( 'click', '.dslca-refresh-module-hook', function(e){
+	jQuery(document).on( 'click', '.dslca-refresh-module-hook', function(e){
 
 		jQuery(this).css({
 			'-webkit-animation-name' : 'dslcRotate',
@@ -203,14 +203,14 @@ jQuery(document).on('editorFrameLoaded', function(){
 		jQuery(this).closest('.dslc-module-front').addClass('dslca-module-being-edited');
 		dslc_module_output_altered( function() {
 
-			jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-module-being-edited');
+			jQuery('.dslca-module-being-edited').removeClass('dslca-module-being-edited');
 		});
 	});
 
 	/**
 	 * Show WYSIWYG
 	 */
-	LiveComposer.Builder.PreviewAreaDocument.on( 'click', '.dslca-wysiwyg-actions-edit-hook', function(){
+	jQuery(document).on( 'click', '.dslca-wysiwyg-actions-edit-hook', function(){
 
 		var editable = jQuery(this).parent().siblings('.dslca-editable-content');
 		var module = editable.closest('.dslc-module-front');
@@ -263,7 +263,7 @@ jQuery(document).on('editorFrameLoaded', function(){
 	});
 
 	// Editable Content
-	LiveComposer.Builder.PreviewAreaDocument.on('blur', '.dslca-editable-content', function() {
+	jQuery(document).on('blur', '.dslca-editable-content', function() {
 
 		if ( ! jQuery('body').hasClass( 'dslca-composer-hidden' ) && jQuery(this).data('type') == 'simple' ) {
 
@@ -286,7 +286,7 @@ jQuery(document).on('editorFrameLoaded', function(){
 		}
 	}).on('focus', '.dslca-editable-content', function() {
 
-		if ( jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).length > 0 && ! jQuery(this).closest('.dslc-module-front').hasClass('dslca-module-being-edited') ) {
+		if ( jQuery('.dslca-module-being-edited').length > 0 && ! jQuery(this).closest('.dslc-module-front').hasClass('dslca-module-being-edited') ) {
 
 			jQuery(this).trigger('blur');
 		}
@@ -347,7 +347,7 @@ function dslc_module_copy( moduleElId ) {
 	if ( dslcDebug ) console.log( 'dslc_copy_module' );
 
 	// Remove being edited class if some module is being edited
-	// jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-module-being-edited');
+	// jQuery('.dslca-module-being-edited').removeClass('dslca-module-being-edited');
 
 
 
@@ -463,7 +463,7 @@ function dslc_module_options_show( moduleID ) {
 	if ( dslcDebug ) console.log( 'dslc_module_options_show' );
 
 	// Vars
-	var dslcModule = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument),
+	var dslcModule = jQuery('.dslca-module-being-edited'),
 	dslcModuleOptions = jQuery( '.dslca-module-options-front textarea', dslcModule ),
 	dslcDefaultSection = jQuery('.dslca-header').data('default-section'),
 	pseudoPanel = jQuery(jQuery('#pseudo-panel').html());
@@ -623,7 +623,7 @@ function dslc_module_output_altered( callback ) {
 
 	callback = typeof callback !== 'undefined' ? callback : false;
 
-	var dslcModule = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument),
+	var dslcModule = jQuery('.dslca-module-being-edited'),
 	dslc_module_id = dslcModule.data('dslc-module-id'),
 	dslcModuleOptions = jQuery( '.dslca-module-options-front textarea', dslcModule ),
 	dslcModuleInstanceID = dslcModule.data('module-id');
@@ -767,7 +767,7 @@ function dslc_module_output_reload( dslcModule, callback ) {
 				callback( response );
 			}
 
-			jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-module-being-edited');
+			jQuery('.dslca-module-being-edited').removeClass('dslca-module-being-edited');
 		}
 	);
 }

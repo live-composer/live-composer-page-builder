@@ -76,27 +76,30 @@
  */
 
 var Vue = require('vue');
+var Vuex = require('vuex');
 
-// Makes possible to update LiveComposerState.state.pageCode
-// outside compiled js file. (Browserify wrap all the code making it unaccessible)
-window.lcUpdatePageCode =function( newCode ){
-	// LiveComposerState.commit('updatePageCode', newCode);
-};
+Vue.use(Vuex);
+
+var store = require('./store/store.js');
+
+// store.commit('updatePageCode', 'something');
+// console.log( "appState:" ); console.log( store.state.pageCode );
 
 // Request modules-list component:
 var modulesList = require('./components/modules-list.vue');
-var droppableArea = require('./components/droppable-area.vue');
-
-var storeFunctions = require('./lib/functions.store.js')(Vue);
-var appState = require('./store/store.js');
+var buttonSave  = require('./components/button-save.vue');
+var sectionTitle  = require('./components/section-title.vue');
+// var droppableArea = require('./components/droppable-area.vue');
+// var storeFunctions = require('./lib/functions.store.js')(Vue);
 
 var LiveComposerApp = new Vue({
 	el: '#livecomposer-app',
-	appState,
+	store,
 	components : {
-      modulesList,
-      droppableArea
-   },
+		modulesList,
+		buttonSave,
+		sectionTitle
+	},
 	// render: function (createElement) {
 	// 	return createElement(App)
 	// },
@@ -107,8 +110,18 @@ var LiveComposerApp = new Vue({
 
 		// console.log( "LiveComposerState.state.pageCode:" ); console.log( LiveComposerState.state.pageCode );
 		Vue.use(blah);
+	},
+
+
+
+	methods: {
+		onEnd: function () {
+			console.log('END vue app');
+		}
 	}
 });
+
+console.log( "LiveComposerApp:" ); console.log( LiveComposerApp );
 
 function blah(Vue) {
 	console.log('blah');

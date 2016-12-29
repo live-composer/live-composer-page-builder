@@ -15,6 +15,7 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 	this.elem = elem;
 
 	/** Set observer to change elements class */
+
 	this.observer = new mqMutationObserver(elem, function(){
 
 		var classList = self.elem.classList;
@@ -71,7 +72,7 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 			evt.oldIndex;  // element index within parent
 
 			jQuery('body').removeClass('dslca-drag-not-in-progress').addClass('dslca-drag-in-progress');
-			jQuery('body', LiveComposer.Builder.PreviewAreaWindow.document).removeClass('dslca-drag-not-in-progress').addClass('dslca-drag-in-progress');
+			jQuery('body', document).removeClass('dslca-drag-not-in-progress').addClass('dslca-drag-in-progress');
 
 			LCAPP( function(lcApp){
 				// Update dragging status in the app state.
@@ -96,7 +97,7 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 			LiveComposer.Builder.UI.initResizableModules();
 
 			jQuery('body').removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
-			jQuery('body', LiveComposer.Builder.PreviewAreaWindow.document).removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
+			jQuery('body', document).removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
 
 
 			LCAPP( function(lcApp){

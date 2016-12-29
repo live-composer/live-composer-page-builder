@@ -151,7 +151,7 @@ function dslc_editing_screen_head() {
 			right: 0;
 			bottom: 0;
 		   position: fixed;
-		   width: auto;
+		   width: 100%;
 		   margin: 0;
 		   padding: 0;
 		}

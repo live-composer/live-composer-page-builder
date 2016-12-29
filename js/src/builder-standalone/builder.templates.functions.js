@@ -33,7 +33,7 @@ function dslc_template_load( template ) {
 		function( response ) {
 
 			// Apply the template's HTML
-			jQuery('#dslc-main', LiveComposer.Builder.PreviewAreaDocument).html( response.output );
+			jQuery('#dslc-main').html( response.output );
 
 			// Call other functions
 			LiveComposer.Builder.PreviewAreaWindow.dslc_carousel();
@@ -74,7 +74,7 @@ function dslc_template_import( codeToImport ) {
 		function( response ) {
 
 			// Apply the template's HTML
-			jQuery('#dslc-main', LiveComposer.Builder.PreviewAreaDocument).html( response.output );
+			jQuery('#dslc-main').html( response.output );
 
 			// Hide the loading on the button and show the title
 			jQuery('.dslca-modal-templates-import .dslca-loading').hide();

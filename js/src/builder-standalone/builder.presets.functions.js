@@ -16,7 +16,7 @@ function dslc_update_preset() {
 	if ( dslcDebug ) console.log( 'dslc_update_preset' );
 
 	// Vars
-	var module = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument),
+	var module = jQuery('.dslca-module-being-edited'),
 	presetName = module.find('.dslca-module-option-front[data-id="css_load_preset"]').val(),
 	presetCode = module.find('.dslca-module-code').val(),
 	moduleID = module.data('dslc-module-id');
@@ -38,7 +38,7 @@ function dslc_update_preset() {
 
 				// Reload all modules with the same preset
 				jQuery('.dslc-module-front:not(#' + module.attr('id') + ')[data-dslc-module-id="' + module.data('dslc-module-id') +
-					'"][data-dslc-preset="' + module.data('dslc-preset') + '"]', LiveComposer.Builder.PreviewAreaDocument ).each(function(){
+					'"][data-dslc-preset="' + module.data('dslc-preset') + '"]').each(function(){
 					dslc_module_output_reload( jQuery(this) );
 				});
 			}
@@ -80,6 +80,6 @@ jQuery(document).ready(function($){
 	 */
 
 	$(document).on( 'change', '.dslca-module-edit-field[name="css_load_preset"]', function(e){
-		$('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).addClass('dslca-preload-preset');
+		$('.dslca-module-being-edited').addClass('dslca-preload-preset');
 	});
 });

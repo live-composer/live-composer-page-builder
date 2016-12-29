@@ -10,6 +10,13 @@
  * - dslc_load_fonts ( Load Google Fonts )
  */
 
+/**
+ * Reference
+ *
+ * All the default script/style handlers:
+ * https://core.trac.wordpress.org/browser/tags/4.7/src/wp-includes/script-loader.php
+ */
+
 // Prevent direct access to the file.
 if ( ! defined( 'ABSPATH' ) ) {
 	header( 'HTTP/1.0 403 Forbidden' );
@@ -91,7 +98,7 @@ final class DSLC_Scripts{
 			/**
 			 * CSS
 			 */
-			wp_enqueue_style( 'dslc-builder-main-css', DS_LIVE_COMPOSER_URL . 'css/builder/builder.main.css', array(), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_style( 'dslc-builder-main-css', DS_LIVE_COMPOSER_URL . 'css/builder/builder.main.css', array('dashicons'), DS_LIVE_COMPOSER_VER );
 			wp_enqueue_style( 'dslc-builder-plugins-css', DS_LIVE_COMPOSER_URL . 'css/builder/builder.plugins.css', array(), DS_LIVE_COMPOSER_VER );
 
 
@@ -100,6 +107,154 @@ final class DSLC_Scripts{
 			 */
 			wp_enqueue_script( 'dslc-load-fonts', '//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js' );
 			wp_enqueue_script( 'dslc-iframe-main-js', DS_LIVE_COMPOSER_URL . 'js/src/builder.frontend/builder.frontend.main.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+
+
+			/**
+			 * CLEAN IT BELOW -=========
+			 */
+
+
+			$min_suffix = '';
+
+			if ( ! SCRIPT_DEBUG ) {
+				$min_suffix = '.min';
+			}
+
+			/**
+			 * Live Composer Active
+			 */
+
+			wp_enqueue_media();
+
+			/**
+			 * CSS
+			 */
+
+			wp_enqueue_style( 'dslc-builder-main-css', DS_LIVE_COMPOSER_URL . 'css/builder/builder.main.css', array(), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_style( 'dslc-builder-plugins-css', DS_LIVE_COMPOSER_URL . 'css/builder/builder.plugins.css', array(), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_style( 'dslc-font-awesome', DS_LIVE_COMPOSER_URL . 'css/font-awesome' . $min_suffix . '.css', array(), DS_LIVE_COMPOSER_VER );
+
+			/**
+			 * JavaScript
+			 */
+
+			wp_enqueue_script( 'jquery-ui-core' );
+			wp_enqueue_script( 'jquery-ui-sortable' );
+			wp_enqueue_script( 'jquery-ui-draggable' );
+			wp_enqueue_script( 'jquery-ui-droppable' );
+			wp_enqueue_script( 'jquery-effects-core' );
+			wp_enqueue_script( 'jquery-ui-resizable' );
+			wp_enqueue_script( 'jquery-ui-slider' );
+
+			wp_enqueue_style( 'buttons');
+
+			//wp_enqueue_script( 'imagesloaded' ); // Need this for Masonry.
+			//wp_enqueue_script( 'jquery-masonry' );
+
+			// Calling default handle 'dashicons' is not working on front-end.
+			wp_enqueue_style( 'dashicons-frontend', includes_url( '/css/dashicons.min.css'), array(), DS_LIVE_COMPOSER_VER );
+
+			global $wp_styles;
+			vovaphperror( $wp_styles, '$wp_styles' );
+
+			// Color picker.
+			// Only handle for the 'wp-color-picker' on front-end doesn't work:
+			// http://wordpress.stackexchange.com/a/82722
+			wp_enqueue_style( 'wp-color-picker' );
+			wp_enqueue_script( 'iris', admin_url( 'js/iris.min.js' ), array( 'jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch' ), DS_LIVE_COMPOSER_VER, true );
+			wp_enqueue_script( 'wp-color-picker', admin_url( 'js/color-picker.min.js' ), array( 'iris' ), DS_LIVE_COMPOSER_VER, true);
+			$colorpicker_l10n = array(
+				'clear' => __( 'Clear' ),
+				'defaultString' => __( 'Default' ),
+				'pick' => __( 'Select Color' ),
+				'current' => __( 'Current Color' ),
+			);
+			wp_localize_script( 'wp-color-picker', 'wpColorPickerL10n', $colorpicker_l10n );
+
+			wp_enqueue_script( 'dslc-builder-plugins-js', DS_LIVE_COMPOSER_URL . 'js/src/lib/builder.plugins.js', array( 'jquery', 'wp-color-picker' ), DS_LIVE_COMPOSER_VER , true );
+
+			// Vuex.js – loaded via broserify
+			// wp_enqueue_script( 'dslc-builder-plugin-vuex', DS_LIVE_COMPOSER_URL . 'js/src/lib/vuex.js', array( 'dslc-builder-main-js' ), DS_LIVE_COMPOSER_VER, true );
+
+			// Vue.js – loaded via broserify
+			// wp_enqueue_script( 'dslc-builder-plugin-vue', DS_LIVE_COMPOSER_URL . 'js/src/lib/vue.js', array( 'dslc-builder-main-js' ), DS_LIVE_COMPOSER_VER, true );
+
+			wp_enqueue_script( 'lc-app-js', DS_LIVE_COMPOSER_URL . 'js/build/main.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER, true );
+			self::load_scripts( '/js/src/builder-standalone' );
+			/*
+			if ( ! SCRIPT_DEBUG ) {
+
+				wp_enqueue_script( 'dslc-builder-main-js', DS_LIVE_COMPOSER_URL . 'js/builder.all.min.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER, true );
+			} else {jQuery("#page-builder-frame")
+				self::load_scripts( 'builder-standalone', 'dslc-builder-main-js' );
+			}
+			*/
+
+			// Transmit data to Vue.js app.
+			$dslc_modules = dslc_get_modules();
+			wp_localize_script( 'lc-app-js', 'DSLCModules', $dslc_modules );
+
+			$pageCode = get_post_meta( $post_id, 'dslc_code', true );
+
+			if ( ! $pageCode ) {
+				$pageCode = '[]';
+			}
+
+			$dslc_js_data = array(
+				'postID' => get_the_ID(),
+				'modulesList' => $dslc_modules,
+				'pageCode' => $pageCode,
+			);
+
+			wp_localize_script( 'lc-app-js', 'lcDataOnLoad', $dslc_js_data );
+
+
+			// What protocol to use.
+			$protocol = 'http';
+
+			if ( is_ssl() ) {
+				$protocol = 'https';
+			}
+
+			wp_localize_script( 'dslc-builder-main-js', 'DSLCAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php', $protocol ) ) );
+
+			$translation_array = array(
+				'str_confirm' => __( 'Confirm', 'live-composer-page-builder' ),
+				'str_ok' => __( 'OK', 'live-composer-page-builder' ),
+				'str_import' => __( 'IMPORT', 'live-composer-page-builder' ),
+				'str_exit_title' => __( 'You are about to exit Live Composer', 'live-composer-page-builder' ),
+				'str_exit_descr' => __( 'If you have unsaved changed they will be lost.<br>If the "Publish Changes" button is shown in bottom right corner click it to save.', 'live-composer-page-builder' ),
+				'str_area_helper_text' => __( 'MODULES AREA', 'live-composer-page-builder' ),
+				'str_row_helper_text' => __( 'MODULES ROW', 'live-composer-page-builder' ),
+				'str_import_row_title' => __( 'Import Row', 'live-composer-page-builder' ),
+				'str_import_row_descr' => __( 'Copy the row export code bellow.', 'live-composer-page-builder' ),
+				'str_del_module_title' => __( 'Delete Module', 'live-composer-page-builder' ),
+				'str_del_module_descr' => __( 'Are you sure you want to delete this module?', 'live-composer-page-builder' ),
+				'str_del_area_title' => __( 'Delete Area/Column', 'live-composer-page-builder' ),
+				'str_del_area_descr' => __( 'Are you sure you want to delete this modules area?', 'live-composer-page-builder' ),
+				'str_del_row_title' => __( 'Delete Row', 'live-composer-page-builder' ),
+				'str_del_row_descr' => __( 'Are you sure you want to delete this row?', 'live-composer-page-builder' ),
+				'str_export_row_title' => __( 'Export Row', 'live-composer-page-builder' ),
+				'str_export_row_descr' => __( 'The code bellow is the importable code for this row.', 'live-composer-page-builder' ),
+				'str_module_curr_edit_title' => __( 'You are currently editing a module', 'live-composer-page-builder' ),
+				'str_module_curr_edit_descr' => __( 'You need to either <strong>confirm</strong> or <strong>cancel</strong> those changes before continuing.', 'live-composer-page-builder' ),
+				'str_row_curr_edit_title' => __( 'You are currently editing a modules row', 'live-composer-page-builder' ),
+				'str_row_curr_edit_descr' => __( 'You need to either <strong>confirm</strong> or <strong>cancel</strong> those changes before continuing.', 'live-composer-page-builder' ),
+				'str_refresh_title' => __( 'You are about to refresh the page', 'live-composer-page-builder' ),
+				'str_refresh_descr' => __( 'If you have unsaved changed they will be lost.<br>If the "Publish Changes" button is shown in bottom right corner click it to save.', 'live-composer-page-builder' ),
+				'str_res_tablet' => __( 'Tablet', 'live-composer-page-builder' ),
+				'str_res_phone' => __( 'Phone', 'live-composer-page-builder' ),
+			);
+
+			global $dslc_available_fonts;
+
+			wp_localize_script( 'dslc-builder-main-js', 'DSLCString', $translation_array );
+			wp_localize_script( 'dslc-builder-main-js', 'DSLCFonts', $dslc_available_fonts );
+
+			// Array of icons available to be used.
+			global $dslc_var_icons;
+
+			wp_localize_script( 'dslc-builder-main-js', 'DSLCIcons', $dslc_var_icons );
 
 		}
 	}
@@ -111,7 +266,8 @@ final class DSLC_Scripts{
 
 		?>
 		<script type="text/javascript">
-			window.parent.previewAreaTinyMCELoaded.call(window);
+		console.log('B');
+			// window.previewAreaTinyMCELoaded.call(window);
 		</script>
 		<?php
 	}
@@ -163,103 +319,6 @@ final class DSLC_Scripts{
 
 			global $dslc_active;
 
-			/**
-			 * Live Composer Active
-			 */
-
-			wp_enqueue_media();
-
-			/**
-			 * CSS
-			 */
-
-			wp_enqueue_style( 'dslc-builder-main-css', DS_LIVE_COMPOSER_URL . 'css/builder/builder.main.css', array(), DS_LIVE_COMPOSER_VER );
-			wp_enqueue_style( 'dslc-builder-plugins-css', DS_LIVE_COMPOSER_URL . 'css/builder/builder.plugins.css', array(), DS_LIVE_COMPOSER_VER );
-			wp_enqueue_style( 'dslc-font-awesome', DS_LIVE_COMPOSER_URL . 'css/font-awesome' . $min_suffix . '.css', array(), DS_LIVE_COMPOSER_VER );
-
-			/**
-			 * JavaScript
-			 */
-
-			wp_enqueue_script( 'jquery-ui-core' );
-			wp_enqueue_script( 'jquery-ui-sortable' );
-			wp_enqueue_script( 'jquery-ui-draggable' );
-			wp_enqueue_script( 'jquery-ui-droppable' );
-			wp_enqueue_script( 'jquery-effects-core' );
-			wp_enqueue_script( 'jquery-ui-resizable' );
-			wp_enqueue_script( 'jquery-ui-slider' );
-
-			wp_enqueue_script( 'wp-mediaelement' );
-
-			// Color picker.
-			wp_enqueue_style( 'wp-color-picker' );
-
-			//wp_enqueue_script( 'imagesloaded' ); // Need this for Masonry.
-			//wp_enqueue_script( 'jquery-masonry' );
-
-			wp_enqueue_script( 'dslc-builder-plugins-js', DS_LIVE_COMPOSER_URL . 'js/src/lib/builder.plugins.js', array( 'jquery', 'wp-color-picker' ), DS_LIVE_COMPOSER_VER , true );
-
-			// Vuex.js – loaded via broserify
-			// wp_enqueue_script( 'dslc-builder-plugin-vuex', DS_LIVE_COMPOSER_URL . 'js/src/lib/vuex.js', array( 'dslc-builder-main-js' ), DS_LIVE_COMPOSER_VER, true );
-
-			// Vue.js – loaded via broserify
-			// wp_enqueue_script( 'dslc-builder-plugin-vue', DS_LIVE_COMPOSER_URL . 'js/src/lib/vue.js', array( 'dslc-builder-main-js' ), DS_LIVE_COMPOSER_VER, true );
-
-			wp_enqueue_script( 'lc-app-js', DS_LIVE_COMPOSER_URL . 'js/build/main.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER, true );
-			self::load_scripts( '/js/src/builder-standalone', 'dslc-builder-main-js' );
-			/*
-			if ( ! SCRIPT_DEBUG ) {
-
-				wp_enqueue_script( 'dslc-builder-main-js', DS_LIVE_COMPOSER_URL . 'js/builder.all.min.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER, true );
-			} else {
-				self::load_scripts( 'builder-standalone', 'dslc-builder-main-js' );
-			}
-			*/
-
-			// Transmit data to Vue.js app.
-			$dslc_modules = dslc_get_modules();
-			wp_localize_script( 'lc-app-js', 'DSLCModules', $dslc_modules );
-
-
-			wp_localize_script( 'dslc-builder-main-js', 'DSLCAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php', $protocol ) ) );
-
-			$translation_array = array(
-				'str_confirm' => __( 'Confirm', 'live-composer-page-builder' ),
-				'str_ok' => __( 'OK', 'live-composer-page-builder' ),
-				'str_import' => __( 'IMPORT', 'live-composer-page-builder' ),
-				'str_exit_title' => __( 'You are about to exit Live Composer', 'live-composer-page-builder' ),
-				'str_exit_descr' => __( 'If you have unsaved changed they will be lost.<br>If the "Publish Changes" button is shown in bottom right corner click it to save.', 'live-composer-page-builder' ),
-				'str_area_helper_text' => __( 'MODULES AREA', 'live-composer-page-builder' ),
-				'str_row_helper_text' => __( 'MODULES ROW', 'live-composer-page-builder' ),
-				'str_import_row_title' => __( 'Import Row', 'live-composer-page-builder' ),
-				'str_import_row_descr' => __( 'Copy the row export code bellow.', 'live-composer-page-builder' ),
-				'str_del_module_title' => __( 'Delete Module', 'live-composer-page-builder' ),
-				'str_del_module_descr' => __( 'Are you sure you want to delete this module?', 'live-composer-page-builder' ),
-				'str_del_area_title' => __( 'Delete Area/Column', 'live-composer-page-builder' ),
-				'str_del_area_descr' => __( 'Are you sure you want to delete this modules area?', 'live-composer-page-builder' ),
-				'str_del_row_title' => __( 'Delete Row', 'live-composer-page-builder' ),
-				'str_del_row_descr' => __( 'Are you sure you want to delete this row?', 'live-composer-page-builder' ),
-				'str_export_row_title' => __( 'Export Row', 'live-composer-page-builder' ),
-				'str_export_row_descr' => __( 'The code bellow is the importable code for this row.', 'live-composer-page-builder' ),
-				'str_module_curr_edit_title' => __( 'You are currently editing a module', 'live-composer-page-builder' ),
-				'str_module_curr_edit_descr' => __( 'You need to either <strong>confirm</strong> or <strong>cancel</strong> those changes before continuing.', 'live-composer-page-builder' ),
-				'str_row_curr_edit_title' => __( 'You are currently editing a modules row', 'live-composer-page-builder' ),
-				'str_row_curr_edit_descr' => __( 'You need to either <strong>confirm</strong> or <strong>cancel</strong> those changes before continuing.', 'live-composer-page-builder' ),
-				'str_refresh_title' => __( 'You are about to refresh the page', 'live-composer-page-builder' ),
-				'str_refresh_descr' => __( 'If you have unsaved changed they will be lost.<br>If the "Publish Changes" button is shown in bottom right corner click it to save.', 'live-composer-page-builder' ),
-				'str_res_tablet' => __( 'Tablet', 'live-composer-page-builder' ),
-				'str_res_phone' => __( 'Phone', 'live-composer-page-builder' ),
-			);
-
-			global $dslc_available_fonts;
-
-			wp_localize_script( 'dslc-builder-main-js', 'DSLCString', $translation_array );
-			wp_localize_script( 'dslc-builder-main-js', 'DSLCFonts', $dslc_available_fonts );
-
-			// Array of icons available to be used.
-			global $dslc_var_icons;
-
-			wp_localize_script( 'dslc-builder-main-js', 'DSLCIcons', $dslc_var_icons );
 		}
 
 		/* If current screen is standard post editing screen in WP Admin */
@@ -300,12 +359,10 @@ final class DSLC_Scripts{
 	 * @param  string $dir          scripts search dir.
 	 * @param  array  $exclude_dirs exclude dirs from search.
 	 */
-	public static function load_scripts( $dir = '*', $scriptdeps = '', $exclude_dirs = array() ) {
+	public static function load_scripts( $dir = '*', $scriptdeps = array(), $exclude_dirs = array() ) {
 
 		/** Load builder files dynamically */
 		$directories = glob( DS_LIVE_COMPOSER_ABS . $dir, GLOB_ONLYDIR );
-
-		vovaphperror( $directories, '$directories' );
 
 		foreach ( $directories as $dir ) {
 
@@ -325,7 +382,9 @@ final class DSLC_Scripts{
 				}
 
 				$filehandle = 'dslc-' . str_replace( '.', '-', $filename );
-				wp_enqueue_script( $filehandle, DS_LIVE_COMPOSER_URL .'js/src/'. $filedir . '/' . $filename, $scriptdeps, DS_LIVE_COMPOSER_VER, true );
+				$filename = DS_LIVE_COMPOSER_URL . 'js/src/' . $filedir . '/' . $filename;
+
+				wp_enqueue_script( $filehandle, $filename, array(), DS_LIVE_COMPOSER_VER, true );
 			}
 		}
 	}

@@ -27,19 +27,19 @@ function dslc_display_composer() {
 
 	global $dslc_active;
 
-	$screen = get_current_screen();
+	// $screen = get_current_screen();
 
-	if ( $screen->id != 'toplevel_page_livecomposer_editor' ) {
+	// if ( $screen->id != 'toplevel_page_livecomposer_editor' ) {
 
-		return;
-	}
+	// 	return;
+	// }
 
 	// Reset the query ( because some devs leave their queries non-reseted ).
 	wp_reset_query();
 
 	// Show the composer to users who are allowed to view it.
 	// $dslc_active &&
-	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) :
+	if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) :
 
 		$default_section = dslc_get_option( 'lc_default_opts_section', 'dslc_plugin_options_other' );
 
@@ -48,6 +48,8 @@ function dslc_display_composer() {
 			$default_section = 'functionality';
 		}
 
+
+		$page_id = get_the_ID();
 		?>
 
 					<div class="dslca-header dslc-clearfix" data-default-section="<?php echo $default_section; ?>">
@@ -110,20 +112,15 @@ function dslc_display_composer() {
 
 
 
-			<div class="dslca-container dslca-state-off" data-post-id="<?php echo intval( $_GET['page_id'] ); ?>">
-				<div id="livecomposer-app">
+			<div class="wp-core-ui dslca-container dslca-state-off expanded" data-post-id="<?php echo intval( $page_id ); ?>">
 					<div class="dslca-sections">
 
 						<!-- HEADER ACTIONS -->
 						<div class="dslca-header-actions wp-clearfix">
-							<!-- Save Composer -->
-							<a href="#" class="dslca-save-composer dslca-save-composer-hook button button-primary disabled">
-								<span class="dslca-save-composer-helptext"><span class="on"><?php _e( 'Save', 'live-composer-page-builder' ); ?></span><span class="off"><?php _e( 'Saved', 'live-composer-page-builder' ); ?></span></span>
-							</a><!-- .dslca-save-composer -->
-							<span class="spinner"></span>
+							<button-save></button-save>
 
 							<!-- Close -->
-							<a href="<?php the_permalink( $_GET['page_id'] ); ?>" class="dslca-close dslca-close-composer-hook">
+							<a href="<?php the_permalink( $page_id ); ?>" class="dslca-close dslca-close-composer-hook">
 								<!-- <span class="dslca-icon dslc-icon-remove"></span> -->
 								<span class="screen-reader-text"><?php _e( 'Disable Editor', 'live-composer-page-builder' ); ?></span>
 							</a>
@@ -141,19 +138,7 @@ function dslc_display_composer() {
 						<!-- /HEADER ACTIONS -->
 
 						<!-- TITLE -->
-						<div class="dslca-subsection-title">
-							<button class="dslca-section-back" tabindex="0">
-								<span class="screen-reader-text"><?php _e( 'Back', 'live-composer-page-builder' ); ?></span>
-							</button>
-							<h3>
-								<span class="dslca-action">
-									<?php _e( 'Editing', 'live-composer-page-builder' ); ?>
-								</span>
-								<!-- Currently Editing -->
-								<span class="dslca-currently-editing"><strong></strong></span>
-
-							</h3>
-						</div>
+						<section-title></section-title>
 						<!-- /TITLE -->
 
 						<!-- TABS -->
@@ -173,7 +158,6 @@ function dslc_display_composer() {
 
 							<div class="dslca-section-scroller">
 									<div class="dslca-section-scroller-content">
-										<droppable-area></droppable-area>
 										<modules-list></modules-list>
 
 									</div><!-- .dslca-section-scroller-content -->
@@ -273,7 +257,7 @@ function dslc_display_composer() {
 
 						<!-- SIDEBAR FOOTER -->
 
-						<div id="customize-footer-actions" class="wp-full-overlay-footer">
+						<div id="customize-footer-actions" class="lc-panel-footer">
 							<div class="devices">
 								<button type="button" class="preview-desktop active" aria-pressed="true" data-device="desktop">
 									<span class="screen-reader-text">Enter desktop preview mode</span>
@@ -287,7 +271,7 @@ function dslc_display_composer() {
 							</div>
 							<button type="button" class="collapse-sidebar button-secondary" aria-expanded="true" aria-label="Collapse Sidebar">
 								<span class="collapse-sidebar-arrow"></span>
-								<span class="collapse-sidebar-label">Collapse</span>
+								<span class="collapse-sidebar-label">Hide Controls</span>
 							</button>
 						</div>
 
@@ -296,38 +280,6 @@ function dslc_display_composer() {
 
 
 					</div><!-- /.dslca-sections -->
-				</div> <!-- /#livecomposer-app -->
-
-				<?php
-				/**
-				 * Modules List Component
-				 * Used by Vue to render available modules in the sidebar.
-				 */
-				?>
-				<script type="text/x-template" id="modules-list-template">
-					<div id="modules-list" class="lc-modules-list">
-
-						<input
-							type="search"
-							id="modules-search-input"
-							class="lc-panel-search"
-							value=""
-							placeholder="Start typing to search modules..."
-							v-model="modulesSearch"
-						>
-						<div v-for="module in modules"
-							  v-bind:data-origin="module.origin"
-							  v-bind:data-id="module.id"
-							  v-bind:class="'dslca-origin dslca-' + module.type"
-							  v-bind:tabindex="module.tabindex"
-							  v-if="module.show"
-						>
-							<span v-if="module.icon"
-									v-bind:class="'dslca-icon dslc-icon-' + module.icon"></span>
-							<span class="dslca-module-title">{{ module.title }}</span>
-						</div><!-- .dslc-module -->
-					</div>
-				</script>
 
 					<div class="dslca-sections">
 						<!-- Module Templates -->
@@ -464,7 +416,7 @@ function dslc_display_composer() {
 				?>
 			</div>
 
-			<div class="dslca-invisible-overlay"></div>
+			<!-- <div class="dslca-invisible-overlay"></div> -->
 
 			<div id="grid-rule">
 				<div class="grid-measure"></div>
@@ -500,7 +452,7 @@ function dslc_display_composer() {
 
 	endif;
 
-} add_action( 'admin_footer', 'dslc_display_composer' );
+} add_action( 'wp_footer', 'dslc_display_composer' );
 
 
 /**
@@ -809,7 +761,7 @@ function dslc_filter_content( $content ) {
 			$composer_wrapper_after .= '<div class="lc-scroll-top-area"></div><div class="lc-scroll-bottom-area"></div>';
 		}
 
-		$composer_append .= 'DROPPABLE:<droppable-area></droppable-area>';
+		// $composer_append .= 'DROPPABLE:<droppable-area></droppable-area>   <div v-for="element in pageCode">{{element.id}}</div>';
 
 		// Pass the filtered content output.
 		return $composer_wrapper_before . do_action( 'dslc_output_prepend' ) . $composer_header . '<div id="dslc-main">' . $composer_prepend . $composer_content . '</div>' . $composer_append . $composer_footer . do_action( 'dslc_output_append' ) . $composer_wrapper_after;
@@ -920,6 +872,8 @@ function dslc_render_content( $page_code, $update_ids = false ) {
  * @return void
  */
 function dslc_editor_code() {
+	global $dslc_active;
+	if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) :
 
 	// Get the editor type from the settings.
 	$editor_type = dslc_get_option( 'lc_editor_type', 'dslc_plugin_options_other' );
@@ -953,8 +907,38 @@ function dslc_editor_code() {
 		</div>
 	<?php
 
-} add_action( 'dslca_editing_screen_footer', 'dslc_editor_code' );
+	endif;
 
+} add_action( 'wp_footer', 'dslc_editor_code' );
+
+
+
+
+function dslc_add_appwrapper_head() {
+	global $dslc_active;
+	if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) :
+
+	?>
+		<div id="livecomposer-app">
+
+	<?php
+
+	endif;
+
+} add_action( 'wp_head', 'dslc_add_appwrapper_head' );
+
+function dslc_add_appwrapper_footer() {
+	global $dslc_active;
+	if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) :
+
+	?>
+		</div><!-- id="livecomposer-app" -->
+
+	<?php
+
+	endif;
+
+} add_action( 'wp_footer', 'dslc_add_appwrapper_footer' );
 
 /**
  * Checks if the code provided in $string attribute is JSON.
@@ -1417,7 +1401,7 @@ function dslc_modules_area_front( $atts, $content = null, $version = 1 ) {
 			$pos_class = 'dslc-first-col';
 	}
 
-	$output = '<div class="lc-module dslc-modules-area lc-column lc-small-' . $atts['size'] . ' ' . $pos_class . '" data-size="' . $atts['size'] . '">';
+	$output = '<div class="lc-module dslc-modules-area lc-column lc-small-' . $atts['size'] * 2 . ' ' . $pos_class . '" data-size="' . $atts['size'] . '">';
 
 	if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 

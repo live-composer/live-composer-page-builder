@@ -29,7 +29,7 @@ LiveComposer.Builder.Elements.CSectionsContainer = function(elem) {
 		start: function(e, ui){
 
 			jQuery('body').removeClass('dslca-drag-not-in-progress').addClass('dslca-drag-in-progress');
-			jQuery('body', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-drag-not-in-progress').addClass('dslca-drag-in-progress');
+			jQuery('body').removeClass('dslca-drag-not-in-progress').addClass('dslca-drag-in-progress');
 			ui.placeholder.html('<span class="dslca-placeholder-help-text"><span class="dslca-placeholder-help-text-inner">' + DSLCString.str_row_helper_text + '</span></span>');
 			jQuery( '.dslc-content' ).sortable( "refreshPositions" );
 		},
@@ -38,7 +38,7 @@ LiveComposer.Builder.Elements.CSectionsContainer = function(elem) {
 			dslc_generate_code();
 
 			// LiveComposer.Builder.UI.stopScroller();
-			jQuery('body', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
+			jQuery('body').removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
 			jQuery('body').removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
 			jQuery('.dslca-anim-opacity-drop').removeClass('dslca-anim-opacity-drop');
 		}

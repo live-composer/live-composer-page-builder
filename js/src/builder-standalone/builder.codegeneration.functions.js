@@ -40,9 +40,6 @@ function dslc_save_composer() {
 	// jQuery('.dslca-header-actions').css('background','red');
 	jQuery('.dslca-header-actions .spinner').css('visibility','visible');
 
-	// Replace the check in publish button with a loading animation
-	jQuery('.dslca-save-composer .dslca-icon').removeClass('dslc-icon-ok').addClass('dslc-icon-spin dslc-icon-spinner');
-
 	// Ajax call to save the new content
 	jQuery.ajax({
 		method: 'POST',
@@ -60,8 +57,6 @@ function dslc_save_composer() {
 
 		// On success hide the publish button
 		if ( response.status == 'success' ) {
-			// Change button to "Saved".
-			jQuery('.dslca-save-composer').addClass('disabled');
 
 			// Hide spinner.
 			jQuery('.dslca-header-actions .spinner').css('visibility', 'hidden');
@@ -80,9 +75,6 @@ function dslc_save_composer() {
 			alert( 'Something went wrong. Please try again. Error Code: ' + response.statusText  );
 		}
 	}).always(function( reseponse ) {
-
-		// Replace the loading animation with a check icon
-		jQuery('.dslca-save-composer .dslca-icon').removeClass('dslc-icon-spin dslc-icon-spinner').addClass('dslc-icon-ok')
 
 		// Remove the class previously added so we know saving is finished
 		jQuery('body').removeClass('dslca-saving-in-progress');
@@ -169,7 +161,7 @@ function dslc_generate_code() {
 	 * not the whole page.
 	 */
 
-	jQuery('#dslc-main .dslc-modules-area', LiveComposer.Builder.PreviewAreaDocument).each(function(){
+	jQuery('#dslc-main .dslc-modules-area').each(function(){
 
 		if ( jQuery('.dslc-module-front', this).length ) {
 
@@ -195,7 +187,7 @@ function dslc_generate_code() {
 	 * Go through each row (empty or not empty)
 	 */
 /*
-	jQuery('#dslc-main .dslc-modules-section', LiveComposer.Builder.PreviewAreaDocument).each(function(){
+	jQuery('#dslc-main .dslc-modules-section').each(function(){
 
 		modulesSection = jQuery(this);
 
@@ -212,7 +204,7 @@ function dslc_generate_code() {
 	});
 */
 
-	jQuery('#dslc-main .dslc-modules-section', LiveComposer.Builder.PreviewAreaDocument).each(function(){
+	jQuery('#dslc-main .dslc-modules-section').each(function(){
 
 		modulesSection = jQuery(this);
 
@@ -641,19 +633,6 @@ function dslc_generate_module_code( modulesArea ) {
 jQuery(document).ready(function($){
 
 	/**
-	 * Hook - Save Page
-	 */
-	$(document).on( 'click', '.dslca-save-composer-hook', function(e){
-		e.preventDefault();
-
-		// If some saving action not already in progress
-		if ( ! $('body').hasClass('dslca-module-saving-in-progress') && ! $('body').hasClass('dslca-saving-in-progress') ) {
-			// Call the function to save
-			dslc_save_composer();
-		}
-	});
-
-	/**
 	 * Hook - Save Draft
 	 */
 	$(document).on( 'click', '.dslca-save-draft-composer-hook', function(e){
@@ -687,7 +666,7 @@ function dslca_gen_content_for_search() {
 
 	// Go through each content element
 
-	var elements = LiveComposer.Builder.PreviewAreaWindow.document.querySelectorAll('#dslc-main .dslc-module-front [data-exportable-content]');
+	var elements = document.querySelectorAll('#dslc-main .dslc-module-front [data-exportable-content]');
 
 	if ( undefined !== elements ) {
 		Array.prototype.forEach.call(elements, function(el, i){

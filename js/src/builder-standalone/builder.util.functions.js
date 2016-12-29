@@ -94,7 +94,7 @@ jQuery(document).ready(function($) {
 		dslcValExt = dslcVal + dslcField.data('ext');
 		dslcRule = dslcField.data('css-rule');
 
-		dslcEl = $('.dslca-modules-section-being-edited', LiveComposer.Builder.PreviewAreaDocument); // Currently editing element
+		dslcEl = $('.dslca-modules-section-being-edited'); // Currently editing element
 		dslcTargetEl = dslcEl;
 		dslcSetting = $('.dslca-modules-section-settings input[data-id="' + dslcFieldID + '"]', dslcEl );
 
@@ -200,26 +200,26 @@ jQuery(document).ready(function($) {
 
 				if ( checkboxesVal.indexOf( 'desktop' ) !== -1 ) {
 
-					$('.dslca-modules-section-being-edited', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslc-hide-on-desktop');
+					$('.dslca-modules-section-being-edited').removeClass('dslc-hide-on-desktop');
 				} else {
 
-					$('.dslca-modules-section-being-edited', LiveComposer.Builder.PreviewAreaDocument).addClass('dslc-hide-on-desktop');
+					$('.dslca-modules-section-being-edited').addClass('dslc-hide-on-desktop');
 				}
 
 				if ( checkboxesVal.indexOf( 'tablet' ) !== -1 ) {
 
-					$('.dslca-modules-section-being-edited', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslc-hide-on-tablet');
+					$('.dslca-modules-section-being-edited').removeClass('dslc-hide-on-tablet');
 				} else {
 
-					$('.dslca-modules-section-being-edited', LiveComposer.Builder.PreviewAreaDocument).addClass('dslc-hide-on-tablet');
+					$('.dslca-modules-section-being-edited').addClass('dslc-hide-on-tablet');
 				}
 
 				if ( checkboxesVal.indexOf( 'phone' ) !== -1 ) {
 
-					$('.dslca-modules-section-being-edited', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslc-hide-on-phone');
+					$('.dslca-modules-section-being-edited').removeClass('dslc-hide-on-phone');
 				} else {
 
-					$('.dslca-modules-section-being-edited', LiveComposer.Builder.PreviewAreaDocument).addClass('dslc-hide-on-phone');
+					$('.dslca-modules-section-being-edited').addClass('dslc-hide-on-phone');
 				}
 
 			}
@@ -336,7 +336,7 @@ jQuery(document).ready(function($) {
 			dslcOption = jQuery(this),
 			dslcOptionID = dslcOption.data('id'),
 			dslcOptionWrap = dslcOption.closest('.dslca-module-edit-option'),
-			dslcModule = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument),
+			dslcModule = jQuery('.dslca-module-being-edited'),
 			dslcModuleID = dslcModule.data('dslc-module-id'),
 			dslcModuleOptions = jQuery( '.dslca-module-options-front textarea', dslcModule );
 
@@ -407,7 +407,7 @@ jQuery(document).ready(function($) {
 
 			dslc_module_output_altered( function(){
 
-				jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).addClass('dslca-module-change-made');
+				jQuery('.dslca-module-being-edited').addClass('dslca-module-change-made');
 
 				if ( dslcOptionID == 'css_load_preset' && ! jQuery('body').hasClass('dslca-new-preset-added') ) {
 
@@ -451,7 +451,7 @@ jQuery(document).ready(function($) {
 				var dslcAffectOnChangeRule = dslcOption.data('affect-on-change-rule');
 				var dslcAffectOnChangeVal = dslcOption.val();
 				var dslcAffectOnChangeValOrig = dslcAffectOnChangeVal;
-				var module = jQuery(".dslca-module-being-edited", LiveComposer.Builder.PreviewAreaDocument);
+				var module = jQuery(".dslca-module-being-edited");
 
 				if ( dslcOption.val().length && dslcGoogleFontsArray.indexOf( dslcOption.val() ) !== -1  ) {
 
@@ -579,7 +579,7 @@ jQuery(document).ready(function($) {
 
 					rule = rule.replace(/\s+/g, '');
 
-					var module = jQuery(".dslca-module-being-edited", LiveComposer.Builder.PreviewAreaDocument);
+					var module = jQuery(".dslca-module-being-edited");
 
 					var elems = dslcAffectOnChangeEl.split(',');
 					var styleContent = "#" + module[0].id + " " + elems.join(", #" + module[0].id + " ") + " {" + rule + ": " + dslcAffectOnChangeVal + dslcExt + "}";
@@ -670,7 +670,7 @@ jQuery(document).ready(function($){
 			Save image URL as data attribute of input in dslca-modules-section-settings set
 			We need URL in 'dslca-img-url' for live preview
 			 */
-			jQuery('.dslca-modules-section-being-edited', LiveComposer.Builder.PreviewAreaDocument).find('.dslca-modules-section-settings input[data-id="dslca-img-url"]').val( attachment.url );
+			jQuery('.dslca-modules-section-being-edited').find('.dslca-modules-section-settings input[data-id="dslca-img-url"]').val( attachment.url );
 			field.trigger('change'); // trigger change only after 'dslca-img-url' is set
 
 			hook.hide();
@@ -706,7 +706,7 @@ jQuery(document).ready(function($){
 
 	jQuery(document).on( 'click', '.dslca-wp-editor-save-hook', function(){
 
-		var module = jQuery('.dslca-wysiwyg-active', LiveComposer.Builder.PreviewAreaDocument ).closest('.dslc-module-front');
+		var module = jQuery('.dslca-wysiwyg-active').closest('.dslc-module-front');
 
 		if( typeof tinymce != "undefined" ) {
 
@@ -720,22 +720,22 @@ jQuery(document).ready(function($){
 			}
 
 			jQuery('.dslca-wp-editor').hide();
-			jQuery('.dslca-wysiwyg-active', LiveComposer.Builder.PreviewAreaDocument ).html( content );
+			jQuery('.dslca-wysiwyg-active').html( content );
 
 			if ( module.hasClass('dslc-module-handle-like-accordion') ) {
 
-				jQuery('.dslca-wysiwyg-active', LiveComposer.Builder.PreviewAreaDocument ).siblings('.dslca-accordion-plain-content').val( content );
+				jQuery('.dslca-wysiwyg-active').siblings('.dslca-accordion-plain-content').val( content );
 				var dslcAccordion = module.find('.dslc-accordion');
 				LiveComposer.Builder.PreviewAreaWindow.dslc_accordion_generate_code( dslcAccordion );
 			} else if ( module.hasClass('dslc-module-handle-like-tabs') ) {
 
-				jQuery('.dslca-wysiwyg-active', LiveComposer.Builder.PreviewAreaDocument ).siblings('.dslca-tab-plain-content').val( content );
+				jQuery('.dslca-wysiwyg-active').siblings('.dslca-tab-plain-content').val( content );
 				var dslcTabs = module.find('.dslc-tabs');
 				LiveComposer.Builder.PreviewAreaWindow.dslc_tabs_generate_code( dslcTabs );
 			}
 
-			dslc_editable_content_gen_code( jQuery('.dslca-wysiwyg-active', LiveComposer.Builder.PreviewAreaDocument ) );
-			jQuery('.dslca-wysiwyg-active', LiveComposer.Builder.PreviewAreaDocument ).removeClass('dslca-wysiwyg-active');
+			dslc_editable_content_gen_code( jQuery('.dslca-wysiwyg-active') );
+			jQuery('.dslca-wysiwyg-active').removeClass('dslca-wysiwyg-active');
 		} else {
 			console.info( 'Live Composer: TinyMCE is undefined.' );
 		}
@@ -748,6 +748,6 @@ jQuery(document).ready(function($){
 	jQuery(document).on( 'click', '.dslca-wp-editor-cancel-hook', function(){
 
 		$('.dslca-wp-editor').hide();
-		$('.dslca-wysiwyg-active', LiveComposer.Builder.PreviewAreaDocument ).removeClass('dslca-wysiwyg-active');
+		$('.dslca-wysiwyg-active').removeClass('dslca-wysiwyg-active');
 	});
 });

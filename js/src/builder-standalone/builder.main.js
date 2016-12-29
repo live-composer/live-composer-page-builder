@@ -11,7 +11,7 @@ var dslcAllFontsArray = dslcRegularFontsArray.concat( dslcGoogleFontsArray );
 // Set current/default icons set
 var dslcIconsCurrentSet = DSLCIcons.fontawesome;
 var dslcDebug = false;
-// dslcDebug = true;
+dslcDebug = true;
 
 
 // Global Plugin Object
@@ -139,6 +139,8 @@ var LiveComposer = {
  * https://github.com/shichuan/javascript-patterns/blob/master/object-creation-patterns/sandbox.html
  */
 
+console.log('A');
+
 /** Wait till tinyMCE loaded */
 window.previewAreaTinyMCELoaded = function(){
 
@@ -149,12 +151,12 @@ window.previewAreaTinyMCELoaded = function(){
 	LiveComposer.Builder.PreviewAreaDocument = jQuery(this.document);
 
 	// Disable WP admin bar in editing mode
-	jQuery('#wpadminbar', LiveComposer.Builder.PreviewAreaDocument).remove();
+	jQuery('#wpadminbar').remove();
 
 	LiveComposer.Builder.UI.initInlineEditors();
 	dslc_fix_contenteditable();
 
-	var mainDraggable = LiveComposer.Builder.PreviewAreaDocument.find("#dslc-main").eq(0)[0];
+	var mainDraggable = jQuery(document).find("#dslc-main").eq(0)[0];
 	new LiveComposer.Builder.Elements.CSectionsContainer( mainDraggable );
 
 	jQuery(document).trigger('editorFrameLoaded');
@@ -179,7 +181,7 @@ window.previewAreaTinyMCELoaded = function(){
 		resize: function( event, ui ) {
 			// console.log( event );
 			// console.log( ui.size.width );
-			jQuery( '#wpbody-content' ).css( 'margin-left', ui.size.width + 'px' );
+			// jQuery( '#wpbody-content' ).css( 'margin-left', ui.size.width + 'px' );
 		}
 	});
 
@@ -226,7 +228,7 @@ window.previewAreaTinyMCELoaded = function(){
 	 * Update LiveComposerState.state.pageCode with current JSON code.
 	 */
 	var currentPageCode = document.getElementById('dslca-code').value;
-	lcUpdatePageCode(currentPageCode);
+	// lcUpdatePageCode(currentPageCode);
 	// LiveComposerState.commit('updatePageCode', currentPageCode);
 
 	// On load set focus on elements search field.

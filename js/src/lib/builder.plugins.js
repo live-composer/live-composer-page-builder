@@ -1,7 +1,6 @@
 'use strict';
 
 
-
 /**!
  * Sortable
  * @author	RubaXa   <trash@rubaxa.org>
@@ -95,7 +94,6 @@
 
 		_autoScroll = _throttle(function (/**Event*/evt, /**Object*/options, /**HTMLElement*/rootEl) {
 			// Bug: https://bugzilla.mozilla.org/show_bug.cgi?id=505521
-			// console.log( "_autoScroll" );
 			if (rootEl && options.scroll) {
 				var el,
 					rect,
