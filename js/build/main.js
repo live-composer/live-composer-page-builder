@@ -553,7 +553,12 @@ const buttonSave  = require('./components/button-save.vue');
 const sectionTitle  = require('./components/section-title.vue');
 const sectionTabs  = require('./components/section-tabs.vue');
 // var droppableArea = require('./components/droppable-area.vue');
-// var storeFunctions = require('./lib/functions.store.js')(Vue);
+
+// var draganddropPlugin = require('./plugins/vue.plugin.draganddrop.js')(Vue);
+
+// draganddrop.install = draganddropPlugin
+
+// Vue.use(draganddropPlugin);
 
 const LiveComposerApp = new Vue({
 	el: '#livecomposer-app',
@@ -573,7 +578,6 @@ const LiveComposerApp = new Vue({
 		// console.log( "document.getElementById('dslca-code'):" ); console.log( document.getElementById('dslca-code').value );
 
 		// console.log( "LiveComposerState.state.pageCode:" ); console.log( LiveComposerState.state.pageCode );
-		Vue.use(blah);
 	},
 
 
