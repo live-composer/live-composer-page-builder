@@ -426,7 +426,7 @@ function dslc_ajax_load_template( $atts ) {
 		$template_id = $_POST['dslc_template_id'];
 
 		// The code of the template to load.
-		$template_code = stripslashes_deep( $templates[ $template_id ]['code'] );
+		$template_code = stripslashes( $templates[ $template_id ]['code'] );
 
 		$response['output'] = dslc_render_content( $template_code, true );
 
