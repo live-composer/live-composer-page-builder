@@ -1138,9 +1138,14 @@ input[type="button"], input[type="submit"], input[type="reset"], input[type="fil
  * TEXT MODULE
  */
 
-	.dslc-text-module-content {
-		border: 0px solid transparent;
-	}
+.dslc-module-DSLC_Text_Simple img {
+	max-width: 100%;
+	height: auto;
+}
+
+.dslc-text-module-content {
+	border: 0px solid transparent;
+}
 
 /**
  * WIDGETS MODULE
