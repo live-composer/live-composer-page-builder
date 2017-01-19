@@ -19,7 +19,7 @@ body .dslca-module-edit-option-box-shadow-single input[type="text"].dslca-module
 	line-height: 31px;
 	text-align: center;
 	font-size: 14px;
-	height: 33px;
+	min-height: 33px; /* Issue 350 - https://github.com/live-composer/live-composer-page-builder/issues/350 */
 }
 
 /* Remove the default color button */
