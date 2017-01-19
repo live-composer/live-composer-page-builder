@@ -840,18 +840,18 @@ class DSLC_Image extends DSLC_Module {
 					}
 				}
 
-				if ( '' != $options['image'] ) {
+				if ( $dslc_is_admin && ( strlen( $options['image'] ) > 0 ) ) {
 					$image_id = attachment_url_to_postid( $options['image'] );
 					$image_alt = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
 					$image_title = get_the_title( $image_id );
 
-					if ( '' == $options['image_alt'] ) {
+					if ( strlen( $options['image_alt'] ) === 0 ) {
 						$options['image_alt'] = $image_alt;
 					} elseif ( $options['image_alt'] !== $image_alt ) {
 						update_post_meta( $image_id, '_wp_attachment_image_alt', $options['image_alt'] );
 					}
 
-					if ( '' == $options['image_title'] ) {
+					if ( strlen( $options['image_title'] ) === 0 ) {
 						$options['image_title'] = $image_title;
 					} elseif ( $options['image_title'] !== $image_title ) {
 						$image = array();
