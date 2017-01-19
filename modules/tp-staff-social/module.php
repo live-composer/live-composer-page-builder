@@ -426,18 +426,25 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 				<ul class="dslc-staff-social">
 					<?php if ( $show_fake ) : ?>
 						<li><a target="_blank" href="#"><span class="dslc-icon dslc-icon-twitter"></span></a></li>
+						<li><a target="_blank" href="#"><span class="dslc-icon dslc-icon-instagram"></span></a></li>
 						<li><a target="_blank" href="#"><span class="dslc-icon dslc-icon-facebook"></span></a></li>
 						<li><a target="_blank" href="#"><span class="dslc-icon dslc-icon-google-plus"></span></a></li>
 						<li><a target="_blank" href="#"><span class="dslc-icon dslc-icon-linkedin"></span></a></li>
+						<li><a target="_blank" href="#"><span class="dslc-icon dslc-icon-envelope"></span></a></li>
 					<?php else : ?>
 						<?php
 							$social_twitter = get_post_meta( get_the_ID(), 'dslc_staff_social_twitter', true );
+							$social_instagram = get_post_meta( get_the_ID(), 'dslc_staff_social_instagram', true );
 							$social_facebook = get_post_meta( get_the_ID(), 'dslc_staff_social_facebook', true );
 							$social_googleplus = get_post_meta( get_the_ID(), 'dslc_staff_social_googleplus', true );
 							$social_linkedin = get_post_meta( get_the_ID(), 'dslc_staff_social_linkedin', true );
+							$social_email = get_post_meta( get_the_ID(), 'dslc_staff_social_email', true );
 						?>
 						<?php if ( $social_twitter ) : ?>
 							<li><a target="_blank" href="<?php echo $social_twitter; ?>"><span class="dslc-icon dslc-icon-twitter"></span></a></li>
+						<?php endif; ?>
+						<?php if ( $social_instagram ) : ?>
+							<li><a target="_blank" href="<?php echo $social_instagram; ?>"><span class="dslc-icon dslc-icon-instagram"></span></a></li>
 						<?php endif; ?>
 						<?php if ( $social_facebook ) : ?>
 							<li><a target="_blank" href="<?php echo $social_facebook; ?>"><span class="dslc-icon dslc-icon-facebook"></span></a></li>
@@ -447,6 +454,9 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 						<?php endif; ?>
 						<?php if ( $social_linkedin ) : ?>
 							<li><a target="_blank" href="<?php echo $social_linkedin; ?>"><span class="dslc-icon dslc-icon-linkedin"></span></a></li>
+						<?php endif; ?>
+						<?php if ( $social_email ) : ?>
+							<li><a target="_blank" href="<?php echo $social_email; ?>"><span class="dslc-icon dslc-icon-envelope"></span></a></li>
 						<?php endif; ?>
 					<?php endif; ?>
 				</ul><!-- .dslc-staff-social -->
