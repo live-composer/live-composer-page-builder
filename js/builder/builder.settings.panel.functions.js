@@ -311,6 +311,7 @@ jQuery(document).ready(function($){
 			paste_as_text: true, // Paste styled text as plain text only. Requires 'paste' in plugins.
 			style_formats: [
 					{title: 'Paragraph', format: 'p'},
+					{title: 'Header 1', format: 'h1'},
 					{title: 'Header 2', format: 'h2'},
 					{title: 'Header 3', format: 'h3'},
 					{title: 'Header 4', format: 'h4'},
