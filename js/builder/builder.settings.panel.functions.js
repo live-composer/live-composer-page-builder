@@ -309,6 +309,7 @@ jQuery(document).ready(function($){
 			inline: true,
 			plugins: 'wordpress wplink lists paste',
 			paste_as_text: true, // Paste styled text as plain text only. Requires 'paste' in plugins.
+			paste_filter_drop: false, // Disabled drop action for inline editor to prevent js errors in the console. https://www.tinymce.com/docs/plugins/paste/#paste_filter_drop
 			style_formats: [
 					{title: 'Paragraph', format: 'p'},
 					{title: 'Header 1', format: 'h1'},
