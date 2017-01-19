@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class DSLC_Video_Embed extends DSLC_Module {
+class DSLC_Video extends DSLC_Module {
 
 	var $module_id;
 	var $module_title;
@@ -15,8 +15,8 @@ class DSLC_Video_Embed extends DSLC_Module {
 
 	function __construct() {
 
-		$this->module_id = 'DSLC_Video_Embed';
-		$this->module_title = __( 'Video Embed', 'live-composer-page-builder' );
+		$this->module_id = 'DSLC_Video';
+		$this->module_title = __( 'Video', 'live-composer-page-builder' );
 		$this->module_icon = 'play';
 		$this->module_category = 'General';
 
@@ -64,22 +64,9 @@ class DSLC_Video_Embed extends DSLC_Module {
 			array(
 				'label' => __( 'Embed code', 'live-composer-page-builder' ),
 				'id' => 'content',
-				'std' => 'Paste here the embed code.',
+				'std' => 'Insert here video embed code.',
 				'type' => 'textarea',
 				'section' => 'functionality',
-			),
-			array(
-				'label' => __( 'Error-Proof Mode', 'live-composer-page-builder' ),
-				'id' => 'error_proof_mode',
-				'std' => '',
-				'type' => 'checkbox',
-				'choices' => array(
-					array(
-						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'active',
-					),
-				),
-				'help' => __( 'Some JavaScript code and shortcodes can break the page editing.<br> Use <b>Error-Proof Mode</b> to make it work.', 'live-composer-page-builder' ),
 			),
 
 			/**
