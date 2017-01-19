@@ -52,6 +52,7 @@ function dslc_register_modules() {
 	// Register default modules.
 	dslc_register_module( 'DSLC_Html' );
 	dslc_register_module( 'DSLC_Text_Simple' );
+	dslc_register_module( 'DSLC_Video' );
 	dslc_register_module( 'DSLC_Image' );
 	dslc_register_module( 'DSLC_Button' );
 	dslc_register_module( 'DSLC_Icon' );
