@@ -449,6 +449,9 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 						<?php if ( $social_facebook ) : ?>
 							<li><a target="_blank" href="<?php echo $social_facebook; ?>"><span class="dslc-icon dslc-icon-facebook"></span></a></li>
 						<?php endif; ?>
+						<?php if ( $social_instagram ) : ?>
+							<li><a target="_blank" href="<?php echo $social_instagram; ?>"><span class="dslc-icon dslc-icon-instagram"></span></a></li>
+						<?php endif; ?>
 						<?php if ( $social_googleplus ) : ?>
 							<li><a target="_blank" href="<?php echo $social_googleplus; ?>"><span class="dslc-icon dslc-icon-google-plus"></span></a></li>
 						<?php endif; ?>
