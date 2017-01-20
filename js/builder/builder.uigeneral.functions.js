@@ -394,6 +394,13 @@ function dslc_show_section( section ) {
 
 	// Remove class from body so we know it's finished
 	// jQuery('body').removeClass('dslca-anim-in-progress');
+
+	// Set initial background color for the color picker fields
+	// Fixes the bug with section color pickers to keep values from the previously
+	// edited section.
+	jQuery(section).find('input.dslca-module-edit-field-colorpicker').each( function (item) {
+		jQuery(this).css('background', jQuery(this).val());
+	});
 }
 
 /**
