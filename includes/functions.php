@@ -772,8 +772,10 @@ function dslc_code_migration( $settings ) {
 		} elseif ( stristr( $id, 'border_trbl' ) ) {
 			if ( isset( $settings[ $id ] ) && '' === $settings[ $id ] ) {
 				$settings[ $id ] = '';
+			} elseif ( ! isset( $settings[ $id ] ) ) {
+				/* Fix bug with disappearing borders when migrating to new version */
+				$settings[ $id ] = $control['std'];
 			}
-		// } elseif ( empty( $settings[ $id ] ) && isset( $control['std'] ) ) {
 		} elseif ( ( ! isset( $settings[ $id ] ) || '' === $settings[ $id ] ) &&
 					isset( $control['std'] ) ) {
 
