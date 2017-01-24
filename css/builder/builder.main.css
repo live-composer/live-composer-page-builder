@@ -3659,6 +3659,18 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 	display: none !important;
 }
 
+.dslca-module.dslca-origin[data-display-module="true"] {
+	display: inline-block;
+}
+
+.dslca-module.dslca-origin[data-display-module="false"] {
+	display: none;
+}
+
+.dslca-module.dslca-exclude {
+	display: none;
+}
+
 .media-modal {
 	z-index: 999999999 !important;
 }

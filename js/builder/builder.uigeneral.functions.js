@@ -435,19 +435,13 @@ function dslc_filter_origin( origin, section ) {
 
 	if ( dslcDebug ) console.log( 'dslc_filter_origin' );
 
-	jQuery('.dslca-origin', section).hide();
-	jQuery('.dslca-origin[data-origin="' + origin + '"]', section).css('display', 'inline-block');
+	jQuery('.dslca-origin', section).attr('data-display-module', 'false');
+	jQuery('.dslca-origin[data-origin="' + origin + '"]', section).attr('data-display-module', 'true');
 
 	if ( origin == '' ) {
 
-		jQuery('.dslca-origin', section).each(function(i){
-
-			if ( jQuery(this).hasClass('dslca-exclude') ) {
-				jQuery(this).hide();
-			} else {
-				jQuery(this).show();
-			}
-		});
+		jQuery('.dslca-origin', section).attr('data-display-module', 'true');
+		jQuery('.dslca-origin.dslca-exclude', section).attr('data-display-module', 'false')
 	}
 }
 
