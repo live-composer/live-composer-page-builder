@@ -1034,6 +1034,11 @@ body a:focus {
 							vertical-align: middle;
 						}
 
+						.dslca-module-edit-option-box-shadow-single span.wp-picker-input-wrap,
+						.dslca-module-edit-option-text-shadow-single span.wp-picker-input-wrap {
+							margin-right: 0;
+						}
+
 						.dslca-module-edit-option-box-shadow-single input[type="number"],
 						.dslca-module-edit-option-text-shadow-single input[type="number"],
 						.dslca-module-edit-option-box-shadow-single input[type="text"],
@@ -1043,10 +1048,15 @@ body a:focus {
 						.dslca-module-edit-option-text-shadow-single input[type="number"]:focus,
 						.dslca-module-edit-option-box-shadow-single input[type="text"]:focus,
 						.dslca-module-edit-option-text-shadow-single input[type="text"]:focus {
-							width: 60px !important;
+							width: 60px;
 							min-width: auto;
 							padding: 3px 7px;
 							vertical-align: middle;
+						}
+
+						.dslca-module-edit-option-box-shadow-single input[type="text"].dslca-module-edit-option-box-shadow-color,
+						.dslca-module-edit-option-text-shadow-single input[type="text"].dslca-module-edit-option-text-shadow-color {
+							width: 100px;
 						}
 
 						.dslca-module-edit-option-box-shadow-single input[type="checkbox"] {
