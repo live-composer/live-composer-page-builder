@@ -780,9 +780,10 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 
 			// Always output all the border properties when:
 			// – LC in the editing mode.
-			// – CSS rules are for :hover state.
+			// – CSS rules are for :hover or active state
 			// Otherwise it breaks live preview for border properties.
-			if ( $dslc_active || stristr( $css_selector, ':hover' ) ) {
+			if ( $dslc_active || stristr( $css_selector, ':hover' ) ||
+					stristr( $css_selector, '.dslc-active' ) ) {
 				$output_border_declaration = true;
 			}
 
