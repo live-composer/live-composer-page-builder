@@ -9,6 +9,10 @@ html {
    position: relative;
 }
 
+#wpwrap {
+	overflow: hidden;
+}
+
 /* Disable text selection when builder is active */
 body {
 	-webkit-touch-callout: none;
