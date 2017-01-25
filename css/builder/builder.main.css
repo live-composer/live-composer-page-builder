@@ -10,7 +10,7 @@ html {
 }
 
 #wpwrap {
-	overflow: hidden;
+	overflow: hidden; /* https://github.com/live-composer/live-composer-page-builder/issues/440 */
 }
 
 /* Disable text selection when builder is active */
