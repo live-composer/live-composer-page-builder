@@ -315,6 +315,7 @@ jQuery(document).ready(function($) {
 	});
 
 
+	// @todo: check if we need this code.
 	jQuery(document).on( 'blur', '.dslc-editable-area', function(e){
 
 		var module = $(this).closest('.dslc-module-front');
