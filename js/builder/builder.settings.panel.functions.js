@@ -326,6 +326,24 @@ jQuery(document).ready(function($){
 	/* Destroy instanced of sliders, color pickers and other temporary elements */
 	LiveComposer.Builder.UI.clearUtils = function() {
 
+		if ( dslcDebug ) console.log( 'LiveComposer.Builder.UI.clearUtils' );
+
+		// Destroy all Color Pickers
+		LiveComposer.Builder.UI.clearColorPickers();
+
+		// Delete module backups form memory.
+		if ( undefined !== LiveComposer.Builder.moduleBackup ) {
+			LiveComposer.Builder.moduleBackup.remove();
+		}
+
+		jQuery('.temp-styles-for-module', LiveComposer.Builder.PreviewAreaDocument).remove();
+
+		// Hide inline editor panel if on [Confirm] or [Cancel] button click.
+		jQuery('.mce-tinymce', LiveComposer.Builder.PreviewAreaDocument).hide();
+	}
+
+	LiveComposer.Builder.UI.clearColorPickers = function() {
+
 		if ( Array.isArray(self.Helpers.colorpickers ) ) {
 
 			self.Helpers.colorpickers.forEach(function(item){
@@ -340,18 +358,8 @@ jQuery(document).ready(function($){
 			self.Helpers.colorpickers = [];
 		}
 
-		// Delete module backups form memory.
-		if ( undefined !== LiveComposer.Builder.moduleBackup ) {
-			LiveComposer.Builder.moduleBackup.remove();
-		}
-
 		// Delete the color picker events.
 		jQuery( 'body' ).off( 'click.wpcolorpicker' );
-
-		jQuery('.temp-styles-for-module', LiveComposer.Builder.PreviewAreaDocument).remove();
-
-		// Hide inline editor panel if on [Confirm] or [Cancel] button click.
-		jQuery('.mce-tinymce', LiveComposer.Builder.PreviewAreaDocument).hide();
 	}
 
 	/** Options dependencies */
@@ -1043,6 +1051,8 @@ function dslc_module_options_cancel_changes( callback ) {
 		// Clean up options container
 		jQuery('.dslca-module-edit-options-inner').html('');
 		jQuery('.dslca-module-edit-options-tabs').html('');
+
+		LiveComposer.Builder.UI.clearUtils();
 
 		if ( callback ) { callback(); }
 	});
