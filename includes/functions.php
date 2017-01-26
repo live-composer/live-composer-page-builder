@@ -797,8 +797,10 @@ function dslc_sanitize_option_val ( $data_to_sanitize ) {
 	$id = $data_to_sanitize['id'];
 	$value = $data_to_sanitize['value'];
 
-	if ( stristr( $value, '{\\') ) {
+	if ( $id !== 'content' &&  stristr( $value, '{\\') ) {
 		// Filter out values with json code left by broken presets functionality.
+		// But don't touch 'content' values as it used in HTML module, that can
+		// contain complex html/css/js code.
 		return '';
 	} else {
 		return $value;

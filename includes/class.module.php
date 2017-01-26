@@ -2146,15 +2146,13 @@ class DSLC_Module {
 		$options = array();
 		$options_ids = array();
 
-
-		// Clearn the custom options by getting rid of all the default values.
+		// Clear the custom options by getting rid of all the default values.
 
 		// Get the module structure.
-		// Array of options with deafut values only.
+		// Array of options with default values only.
 		$options = $this->options();
 
-		/* Not ready for production. Causes more issues than benefits.
-		*/
+		/* Not ready for production. Causes more issues than benefits.*/
 		foreach ( $options as $default_option ) {
 
 			// Sanitize User Option Values.

@@ -65,7 +65,7 @@ final class DSLC_Scripts{
 		wp_enqueue_script( 'jquery-masonry' );
 
 		wp_enqueue_script( 'dslc-plugins-js', DS_LIVE_COMPOSER_URL . 'js/frontend/plugins.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
-		wp_enqueue_script( 'dslc-main-js', DS_LIVE_COMPOSER_URL . 'js/frontend/main.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+		wp_enqueue_script( 'dslc-main-js', DS_LIVE_COMPOSER_URL . 'js/frontend/main.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER, $in_footer = true );
 
 		if ( is_ssl() ) {
 
