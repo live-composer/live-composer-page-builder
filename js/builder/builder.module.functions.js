@@ -656,8 +656,6 @@ function dslc_module_output_altered( callback ) {
 		DSLCAjax.ajaxurl, dslcSettings,
 		function( response ) {
 
-			LiveComposer.Builder.UI.clearUtils();
-
 			var newModule = LiveComposer.
 								Builder.
 								Helpers.
