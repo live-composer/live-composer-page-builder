@@ -677,6 +677,19 @@ function dslc_module_output_altered( callback ) {
 			LiveComposer.Builder.PreviewAreaWindow.dslc_tabs();
 			LiveComposer.Builder.PreviewAreaWindow.dslc_init_accordion();
 
+
+			/**
+			 * Create Custom Event/Hook
+			 *
+			 * Third-party developers should use it like this:
+			 * window.addEventListener('dslc_module_output_altered', function (e) {
+			 * 	....
+			 * }, false);
+			 */
+			var event = new Event('dslc_module_output_altered');
+			// Dispatch the event.
+			LiveComposer.Builder.PreviewAreaWindow.dispatchEvent(event);
+
 			if ( callback ) {
 				callback( response );
 			}
