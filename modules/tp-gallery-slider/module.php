@@ -22,6 +22,27 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 
 	}
 
+	public function galleries_posts_list() {
+		$posts_list = array(
+			array(
+				'label' => __( 'Current Gallery', 'live-composer-page-builder' ),
+				'value' => '0',
+			),
+		);
+
+		$posts_galleries = get_posts( array('post_type' => 'dslc_galleries') );
+
+		foreach ($posts_galleries as $post) {
+
+			$posts_list[] = array(
+				'label' => $post->post_title,
+				'value' => $post->ID,
+			);
+		}
+
+		return $posts_list;
+	}
+
 	/**
 	 * Module options.
 	 * Function build array with all the module functionality and styling options.
@@ -60,6 +81,13 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 						'value' => 'phone'
 					),
 				),
+			),
+			array(
+				'label' => __( 'Display Pictures From', 'live-composer-page-builder' ),
+				'id' => 'gallery_post_id',
+				'std' => '0',
+				'type' => 'select',
+				'choices' => $this->galleries_posts_list(),
 			),
 			array(
 				'label' => __( 'Animation', 'live-composer-page-builder' ),
@@ -921,13 +949,24 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 
 		if ( is_singular() && get_post_type() !== 'dslc_templates' ) {
 
-			$gallery_images = get_post_meta( get_the_ID(), 'dslc_gallery_images', true );
-			if ( $gallery_images ) {
-				$show_real = true;
-				$gallery_images = explode( ' ', trim( $gallery_images ) );
+			if ( intval($options['gallery_post_id']) > 0 ) {
+
+				$gallery_images = get_post_meta( intval($options['gallery_post_id']), 'dslc_gallery_images', true );
+
+			} else {
+
+				$gallery_images = get_post_meta( get_the_ID(), 'dslc_gallery_images', true );
+
 			}
 
-			$show_placeholder = false;
+			if ( ! empty( $gallery_images ) ) {
+				$show_real = true;
+				$show_placeholder = false;
+
+				$gallery_images = explode( ' ', trim( $gallery_images ) );
+			} else {
+				$gallery_images = array();
+			}
 
 		}
 
