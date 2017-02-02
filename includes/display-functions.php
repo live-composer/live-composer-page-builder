@@ -904,7 +904,7 @@ function dslc_editor_code() {
  */
 function dslc_is_json( $string ) {
 	json_decode( $string );
-	return ( json_last_error() == JSON_ERROR_NONE );
+	return ( function_exists('json_last_error') && json_last_error() == JSON_ERROR_NONE );
 }
 
 /**

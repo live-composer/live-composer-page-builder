@@ -36,7 +36,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Do not allow different versions of Live Composer to run at the same time!
-if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) ):
+if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) && version_compare( PHP_VERSION, '5.3.0', '>' ) ):
+
+	dimaphperror('yes');
 
 	/**
 	 * Constants
@@ -164,6 +166,15 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) ):
 
 endif; // ! defined( 'DS_LIVE_COMPOSER_VER' )
 
+function dslc_php_version() {
+	if ( version_compare( PHP_VERSION, '5.3.0', '<' ) ) { ?>
+		<div class="notice notice-error">
+			<p><?php echo __( 'You need to use not less 5.3 version of PHP.', 'live-composer-page-builder' ); ?></p>
+		</div>
+	<?php }
+}
+add_action( 'admin_notices', 'dslc_php_version' );
+
 /**
  * On plugin activation check if there is lite version
  * or previous generation of the plugin installed.
@@ -223,5 +234,7 @@ function lc_welcome( $plugin ) {
 }
 add_action( 'activated_plugin', 'lc_welcome' );
 
-dslc_load_modules( DS_LIVE_COMPOSER_ABS . '/modules', 'module.php' );
-DSLC_Upgrade::init();
+if ( version_compare( PHP_VERSION, '5.3.0', '>' ) ) {
+	dslc_load_modules( DS_LIVE_COMPOSER_ABS . '/modules', 'module.php' );
+	DSLC_Upgrade::init();
+}
