@@ -188,6 +188,12 @@ class DSLC_Social extends DSLC_Module {
 				'std' => '',
 				'type' => 'text',
 			),
+			array(
+				'label' => __( 'XING', 'live-composer-page-builder' ),
+				'id' => 'xing',
+				'std' => '',
+				'type' => 'text',
+			),
 
 			/**
 			 * Styling
@@ -925,6 +931,14 @@ class DSLC_Social extends DSLC_Module {
 							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['vk']; ?>"><span class="dslc-icon dslc-icon-vk"></span></a>
 							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
 								<a class="dslc-social-label" target="_blank" href="<?php echo $options['vk']; ?>"><span><?php _e( 'VK', 'live-composer-page-builder' ); ?></span></a>
+							<?php endif; ?>
+						</li>
+					<?php endif; ?>
+					<?php if ( isset( $options['xing'] ) && $options['xing'] != '' ) : ?>
+						<li>
+							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['xing']; ?>"><span class="dslc-icon dslc-icon-xing"></span></a>
+							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
+								<a class="dslc-social-label" target="_blank" href="<?php echo $options['xing']; ?>"><span><?php _e( 'XING', 'live-composer-page-builder' ); ?></span></a>
 							<?php endif; ?>
 						</li>
 					<?php endif; ?>
