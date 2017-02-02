@@ -3,6 +3,7 @@
  * Table of Contents
  *
  * - dslc_display_composer ( Displays the composer code in the front-end )
+ * - dslc_editor_messages ( Display the editor messages )
  * - dslc_get_modules ( Returns an array of active modules )
  * - dslc_display_modules ( Displays a list of active modules )
  * - dslc_display_templates ( Displays a list of active templates )
@@ -401,6 +402,24 @@ function dslc_display_composer() {
 	endif;
 
 } add_action( 'admin_footer', 'dslc_display_composer' );
+
+/**
+ * Display the editor messages
+ *
+ * @since 1.0
+ */
+function dslc_editor_messages() {
+
+	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) { ?>
+
+		<div class="dslca_editor_messages_section">
+			<a href="#" class="dslca_editor_messages_title"><span>Live Composer</span> Updates</a>
+			<a href="#" class="dslca_editor_messages_hide"><span class="dslc-icon dslc-icon-remove"></span>Hide this Line</a>
+			<div class="dslca_editor_messages_content"><span class="dslc-icon dslc-icon-align-left"></span>We asked 17,000 Live Composer users about their hosting experience. <a href="#">Here are three best companies.</a></div>
+		</div>
+
+	<?php }
+} add_action( 'admin_footer', 'dslc_editor_messages' );
 
 
 /**
