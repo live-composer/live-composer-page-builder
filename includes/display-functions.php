@@ -3,6 +3,7 @@
  * Table of Contents
  *
  * - dslc_display_composer ( Displays the composer code in the front-end )
+ * - dslc_editor_messages ( Display the editor messages )
  * - dslc_get_modules ( Returns an array of active modules )
  * - dslc_display_modules ( Displays a list of active modules )
  * - dslc_display_templates ( Displays a list of active templates )
@@ -398,9 +399,27 @@ function dslc_display_composer() {
 			</script>
 		<?php
 
+		// Output editor messages
+		dslc_print_editor_messages();
+
 	endif;
 
 } add_action( 'admin_footer', 'dslc_display_composer' );
+
+/**
+ * Display the editor messages
+ *
+ * @since 1.0
+ */
+function dslc_print_editor_messages() { ?>
+
+	<div class="dslca_editor_messages_section">
+		<a href="#" class="dslca_editor_messages_title"><span>Live Composer</span> Updates</a>
+		<a href="#" class="dslca_editor_messages_hide"><span class="dslc-icon dslc-icon-remove"></span>Hide this Line</a>
+		<div class="dslca_editor_messages_content"><span class="dslc-icon dslc-icon-align-left"></span>Our <a href="https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=editing-sreen&utm_medium=editor-messages&utm_campaign=woo-integration" target="_blank">WooCommerce integration add-on</a> is almost ready for realese. Price growths with every update. <a href="https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=editing-sreen&utm_medium=editor-messages&utm_campaign=woo-integration" target="_blank">Buy it today to save 30%!</a></div>
+	</div>
+
+<?php }
 
 
 /**
