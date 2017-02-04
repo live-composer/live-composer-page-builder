@@ -4247,6 +4247,11 @@ div#scroller-stopper {
 	cursor: pointer;
 }
 
+.mce-tinymce .mce-btn button:hover {
+	background-color: #e3e3e3;
+    border-color: #ccc;
+}
+
 /**
  * Display the editor messages
  */
