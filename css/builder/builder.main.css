@@ -1915,7 +1915,7 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 
 
 	.dslca-modules-section-manage {
-		bottom: -25px;
+		bottom: 0;
 		left: 0;
 		right: 0;
 		visibility: hidden;
@@ -1925,6 +1925,10 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 		z-index: 99998; /* Should be less than module control elements */
  		width: 100%;
 		text-align: center;
+	}
+
+	.dslca-modules-section-manage:hover {
+	    z-index: 100000;
 	}
 
 
