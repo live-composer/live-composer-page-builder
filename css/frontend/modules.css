@@ -1604,51 +1604,43 @@ input[type="button"], input[type="submit"], input[type="reset"], input[type="fil
  * Notification
  */
 
-#dslc-content .dslc-notification-box {
-	background: #f65757;
-	padding: 15px;
-	border: 1px solid #e43737;
-	border-radius: 3px;
-	color: #fff;
+.dslc-notification-box-has-timeout {
+	display: none;
 }
 
-	.dslc-notification-box-has-timeout {
-		display: none;
+body.dslca-enabled .dslc-notification-box-has-timeout {
+	display: block;
+}
+
+#dslc-content .dslc-notification-box-content {
+
+}
+
+	#dslc-content .dslc-notification-box-content p:last-child {
+		margin-bottom: 0;
 	}
 
-	body.dslca-enabled .dslc-notification-box-has-timeout {
-		display: block;
-	}
+#dslc-content .dslc-notification-box-close {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
-	#dslc-content .dslc-notification-box-content {
+	position: absolute;
+	right: 15px;
+	top: 20px;
+	cursor: pointer;
+	background: #ffffff;
+	color: #f65757;
+	border-radius: 50%;
+	width: 15px;
+	height: 15px;
+}
 
-	}
-
-		#dslc-content .dslc-notification-box-content p:last-child {
-			margin-bottom: 0;
-		}
-
-	#dslc-content .dslc-notification-box-close {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-
-		position: absolute;
-		right: 15px;
-		top: 20px;
-		cursor: pointer;
-		background: #ffffff;
+	#dslc-content .dslc-notification-box-close .dslc-icon {
 		color: #f65757;
-		border-radius: 50%;
-		width: 15px;
-		height: 15px;
+		font-size: 12px;
+		text-align: center;
 	}
-
-		#dslc-content .dslc-notification-box-close .dslc-icon {
-			color: #f65757;
-			font-size: 12px;
-			text-align: center;
-		}
 
 /**
  * Button
