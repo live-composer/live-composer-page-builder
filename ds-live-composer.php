@@ -36,7 +36,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Do not allow different versions of Live Composer to run at the same time!
-if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) ):
+if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) && version_compare( PHP_VERSION, '5.3.0', '>' ) ):
 
 	/**
 	 * Constants
@@ -162,7 +162,19 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) ):
 	}
 	add_action( 'after_setup_theme', 'dslc_tutorials_load' );
 
+	dslc_load_modules( DS_LIVE_COMPOSER_ABS . '/modules', 'module.php' );
+	DSLC_Upgrade::init();
+
 endif; // ! defined( 'DS_LIVE_COMPOSER_VER' )
+
+function dslc_php_version() {
+	if ( version_compare( PHP_VERSION, '5.3.0', '<' ) ) { ?>
+		<div class="notice notice-error">
+			<p><?php echo __( 'Live Composer requires PHP version 5.3+. Your version of PHP is 6 years old. The latest version is PHP 7. Please, contact your hosting to upgrade the server.', 'live-composer-page-builder' ); ?></p>
+		</div>
+	<?php }
+}
+add_action( 'admin_notices', 'dslc_php_version' );
 
 /**
  * On plugin activation check if there is lite version
@@ -222,6 +234,3 @@ function lc_welcome( $plugin ) {
 
 }
 add_action( 'activated_plugin', 'lc_welcome' );
-
-dslc_load_modules( DS_LIVE_COMPOSER_ABS . '/modules', 'module.php' );
-DSLC_Upgrade::init();
