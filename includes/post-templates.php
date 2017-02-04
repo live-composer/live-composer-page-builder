@@ -60,7 +60,7 @@ function dslc_can_edit_in_lc( $post_data ) {
 	global $dslc_var_templates_pt;
 	global $dslc_enabled_cpt;
 
-	if ( is_int( $post_data ) ) {
+	if ( is_int( $post_data ) || empty( $post_data ) ) {
 		# code...
 	} else {
 		// Parameter $post_data is post type.
