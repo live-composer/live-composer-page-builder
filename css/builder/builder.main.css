@@ -4302,15 +4302,18 @@ a.dslca_editor_messages_hide:hover {
 .dslca_editor_messages_content {
 	padding: 12px 0;
 	font-size: 14px;
+	text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .dslca_editor_messages_content a {
 	color: #45c0ff;
-	text-decoration: underline;
+	text-decoration: none;
 }
 
 .dslca_editor_messages_content a:hover {
-	text-decoration: none;
+	text-decoration: underline;
 }
 
 .dslca_editor_messages_content .dslc-icon {

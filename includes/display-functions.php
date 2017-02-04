@@ -399,6 +399,9 @@ function dslc_display_composer() {
 			</script>
 		<?php
 
+		// Output editor messages
+		dslc_print_editor_messages();
+
 	endif;
 
 } add_action( 'admin_footer', 'dslc_display_composer' );
@@ -408,18 +411,15 @@ function dslc_display_composer() {
  *
  * @since 1.0
  */
-function dslc_editor_messages() {
+function dslc_print_editor_messages() { ?>
 
-	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) { ?>
+	<div class="dslca_editor_messages_section">
+		<a href="#" class="dslca_editor_messages_title"><span>Live Composer</span> Updates</a>
+		<a href="#" class="dslca_editor_messages_hide"><span class="dslc-icon dslc-icon-remove"></span>Hide this Line</a>
+		<div class="dslca_editor_messages_content"><span class="dslc-icon dslc-icon-align-left"></span>Our <a href="https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=editing-sreen&utm_medium=editor-messages&utm_campaign=woo-integration" target="_blank">WooCommerce integration add-on</a> is almost ready for realese. Price growths with every update. <a href="https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=editing-sreen&utm_medium=editor-messages&utm_campaign=woo-integration" target="_blank">Buy it today to save 30%!</a></div>
+	</div>
 
-		<div class="dslca_editor_messages_section">
-			<a href="#" class="dslca_editor_messages_title"><span>Live Composer</span> Updates</a>
-			<a href="#" class="dslca_editor_messages_hide"><span class="dslc-icon dslc-icon-remove"></span>Hide this Line</a>
-			<div class="dslca_editor_messages_content"><span class="dslc-icon dslc-icon-align-left"></span>We asked 17,000 Live Composer users about their hosting experience. <a href="#">Here are three best companies.</a></div>
-		</div>
-
-	<?php }
-} add_action( 'admin_footer', 'dslc_editor_messages' );
+<?php }
 
 
 /**
