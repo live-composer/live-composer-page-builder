@@ -1957,9 +1957,10 @@ body.dslca-enabled .dslc-notification-box-has-timeout {
 	font-size: 0;
 }
 
-	#dslc-content .dslc-navigation-inner {
+	/* https://github.com/live-composer/live-composer-page-builder/issues/547 */
+	/*#dslc-content .dslc-navigation-inner {
 		display: inline-block;
-	}
+	}*/
 
 	#dslc-content .dslc-navigation .menu {
 		list-style: none;
