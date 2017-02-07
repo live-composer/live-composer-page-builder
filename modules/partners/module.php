@@ -79,6 +79,7 @@ class DSLC_Partners extends DSLC_Module {
 				'id' => 'link',
 				'std' => 'enabled',
 				'type' => 'select',
+				'help' => __( '<strong>Link to partner page</strong> links to the partner page on this website.<br><strong>Link to custom partner URL</strong> links to the URL set in the partner options.', 'live-composer-page-builder' ),
 				'choices' => array(
 					array(
 						'label' => __( 'Link to partner page', 'live-composer-page-builder' ),
@@ -87,6 +88,10 @@ class DSLC_Partners extends DSLC_Module {
 					array(
 						'label' => __( 'Do NOT link to partner page', 'live-composer-page-builder' ),
 						'value' => 'disabled',
+					),
+					array(
+						'label' => __( 'Link to custom partner URL', 'live-composer-page-builder' ),
+						'value' => 'custom',
 					),
 				),
 			),
@@ -1793,6 +1798,15 @@ class DSLC_Partners extends DSLC_Module {
 								$link_to_single = false;
 							}
 
+							// Project URL
+							$the_partner_url = get_permalink();
+							if ( $options['link'] == 'custom' ) {
+								if ( get_post_meta( get_the_ID(), 'dslc_partner_url', true ) )
+									$the_partner_url = get_post_meta( get_the_ID(), 'dslc_partner_url', true );
+								else
+									$the_partner_url = '#';
+							}
+
 							?>
 
 							<div class="<?php echo $element_class . $columns_class . $extra_class; ?>" data-cats="<?php echo $post_cats_data; ?>">
@@ -1834,13 +1848,13 @@ class DSLC_Partners extends DSLC_Module {
 
 											<?php if ( $manual_resize ) : ?>
 												<?php if ( $link_to_single ) : ?>
-													<a href="<?php the_permalink(); ?>"><img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" /></a>
+													<a href="<?php echo $the_partner_url; ?>"><img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" /></a>
 												<?php else : ?>
 													<img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" />
 												<?php endif; ?>
 											<?php else : ?>
 												<?php if ( $link_to_single ) : ?>
-													<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'full' ); ?></a>
+													<a href="<?php echo $the_partner_url; ?>"><?php the_post_thumbnail( 'full' ); ?></a>
 												<?php else : ?>
 													<?php the_post_thumbnail( 'full' ); ?>
 												<?php endif; ?>
@@ -1856,7 +1870,7 @@ class DSLC_Partners extends DSLC_Module {
 
 															<div class="dslc-partner-title">
 																<?php if ( $link_to_single ) : ?>
-																	<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+																	<h2><a href="<?php echo $the_partner_url; ?>"><?php the_title(); ?></a></h2>
 																<?php else : ?>
 																	<h2><?php the_title(); ?></h2>
 																<?php endif; ?>
@@ -1891,7 +1905,7 @@ class DSLC_Partners extends DSLC_Module {
 													</div><!-- .dslc-partner-main -->
 
 													<?php if ( $link_to_single ) : ?>
-														<a href="<?php the_permalink(); ?>" class="dslc-post-main-inner-link-cover"></a>
+														<a href="<?php echo $the_partner_url; ?>" class="dslc-post-main-inner-link-cover"></a>
 													<?php endif; ?>
 
 												</div><!-- .dslc-partner-main -->
@@ -1912,7 +1926,7 @@ class DSLC_Partners extends DSLC_Module {
 
 											<div class="dslc-partner-title">
 												<?php if ( $link_to_single ) : ?>
-													<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+													<h2><a href="<?php echo $the_partner_url; ?>"><?php the_title(); ?></a></h2>
 												<?php else : ?>
 													<h2><?php the_title(); ?></h2>
 												<?php endif; ?>
