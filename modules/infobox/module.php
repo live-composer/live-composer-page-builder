@@ -893,9 +893,9 @@ class DSLC_Info_Box extends DSLC_Module {
 				'tab' => __( 'Icon', 'live-composer-page-builder' ),
 			),
 
-      /**
-			 * Image
-			 */
+			/**
+			* Image
+			*/
 
 			 array(
 				'label' => __( 'Image - File', 'live-composer-page-builder' ),
@@ -1003,6 +1003,24 @@ class DSLC_Info_Box extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'Image', 'live-composer-page-builder' ),
 				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Position', 'live-composer-page-builder' ),
+				'id' => 'image_position',
+				'std' => 'above',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'Above', 'live-composer-page-builder' ),
+						'value' => 'above',
+					),
+					array(
+						'label' => __( 'Aside', 'live-composer-page-builder' ),
+						'value' => 'aside',
+					),
+				),
+				'section' => 'styling',
+				'tab' => __( 'Image', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
@@ -2889,7 +2907,7 @@ class DSLC_Info_Box extends DSLC_Module {
 
 		?>
 
-			<div class="dslc-info-box dslc-info-box-icon-pos-<?php echo $options['icon_position']; ?>">
+			<div class="dslc-info-box dslc-info-box-icon-pos-<?php echo $options['icon_position']; ?> dslc-info-box-image-pos-<?php echo $options['image_position']; ?>">
 
 				<div class="dslc-info-box-wrapper">
 
