@@ -1,0 +1,76 @@
+/**
+ * Display the editor messages
+ */
+
+.dslca_editor_messages_section {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	height: 40px;
+	font-family: 'Open Sans', sans-serif;
+	color: #fff;
+	font-weight: 100;
+	background: #404a58;
+}
+
+.dslca_editor_messages_title {
+	float: left;
+    background: #303030;
+    color: #fff;
+    font-size: 14px;
+    line-height: 22px;
+    text-transform: uppercase;
+    padding: 12px 17px;
+    text-align: center;
+    display: block;
+    margin-right: 25px;
+}
+
+.dslca_editor_messages_title span {
+	font-weight: 500;
+}
+
+a.dslca_editor_messages_title:hover {
+	color: #fff;
+}
+
+.dslca_editor_messages_hide {
+	float: right;
+    padding: 12px 17px;
+    background: #283546;
+    font-size: 14px;
+    text-align: center;
+    display: block;
+    color: #fff;
+    display: none;
+}
+
+.dslca_editor_messages_hide .dslc-icon {
+	font-size: 17px;
+	margin-right: 10px;
+}
+
+a.dslca_editor_messages_hide:hover {
+    color: #fff;
+}
+
+#editor_messages {
+	font-size: 14px;
+	text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+#editor_messages a {
+	color: #45c0ff;
+	text-decoration: none;
+}
+
+#editor_messages a:hover {
+	text-decoration: underline;
+}
+
+#editor_messages .dslc-icon {
+	font-size: 19px;
+	margin-right: 10px;
+}
