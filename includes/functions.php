@@ -57,7 +57,6 @@ function dslc_register_modules() {
 	dslc_register_module( 'DSLC_Icon' );
 	dslc_register_module( 'DSLC_Info_Box' );
 	dslc_register_module( 'DSLC_Social' );
-	dslc_register_module( 'DSLC_Logo' );
 	dslc_register_module( 'DSLC_Separator' );
 	dslc_register_module( 'DSLC_Tabs' );
 	dslc_register_module( 'DSLC_Accordion' );
@@ -76,6 +75,7 @@ function dslc_register_modules() {
 
 	dslc_register_module( 'DSLC_Widgets' );
 	dslc_register_module( 'DSLC_Navigation' );
+	dslc_register_module( 'DSLC_Logo' );
 
 	if ( class_exists( 'RevSliderBase' ) ) {
 		dslc_register_module( 'DSLC_Sliders' );
