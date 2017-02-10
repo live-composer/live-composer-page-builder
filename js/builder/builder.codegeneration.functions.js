@@ -508,17 +508,6 @@ jQuery(document).ready(function($){
 });
 
 /**
- * If Control or Command key is pressed and the S key is pressed run dslc_save_composer. 83 is the key code for S.
- */
-jQuery(window).keydown(function (e){
-    if ( ( ( e.metaKey || e.ctrlKey ) && e.keyCode == 83 ) && jQuery('.dslca-save-composer-hook').css('display') == 'block' ) {
-        dslc_save_composer();
-        e.preventDefault();
-        return false;
-    }
-});
-
-/**
 * Other - Generate Readable Content For Search
 */
 
