@@ -6,6 +6,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+global $dslc_var_post_options;
+
+$dslc_var_post_options['dslc-partners-post-options'] = array(
+	'title' => 'Partner Options',
+	'show_on' => 'dslc_partners',
+	'options' => array(
+		array(
+			'label' => 'Partner URL',
+			'std' => '',
+			'id' => 'dslc_partner_url',
+			'type' => 'text',
+		),
+	)
+);
+
 /**
  * Register Post Types and Taxonomies
  *
