@@ -124,7 +124,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div>
 			<div class="dslc-panel-column dslc-panel-last">
 				<h3><?php _e( "You're not alone", 'live-composer-page-builder' ); ?></h3>
-				<p><?php _e( 'There are 20,000+ of Live Composer users. What to see what others do with it or share your work?', 'live-composer-page-builder' ); ?></p>
+				<p><?php _e( 'There are 40,000+ of Live Composer users. What to see what others do with it or share your work?', 'live-composer-page-builder' ); ?></p>
 				<ul>
 					<li><a class="dslc-panel-icon dslc-panel-facebook" href="//www.facebook.com/groups/livecomposer/" traget="_blank"><?php _e( 'Join Private Users Group', 'live-composer-page-builder' ); ?></a></li>
 					<li><span class="dashicons dashicons-heart"></span> <?php _e( 'Share your project', 'live-composer-page-builder' ); ?></li>

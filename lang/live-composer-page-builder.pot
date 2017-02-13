@@ -1223,7 +1223,7 @@ msgstr ""
 
 #: ../includes/plugin-options-framework/tab-getting-started.php:53
 msgid ""
-"There are 20,000+ of Live Composer users. What to see what others do with it "
+"There are 40,000+ of Live Composer users. What to see what others do with it "
 "or share your work?"
 msgstr ""
 
