@@ -916,6 +916,8 @@ function dslc_keypress_events() {
 		// Prompt Modal on F5
 		dslc_notice_on_refresh(keydown_event);
 
+		// Save Page
+		dslc_save_page(keydown_event);
 	});
 }
 
@@ -982,6 +984,21 @@ function dslc_notice_on_refresh(e) {
 			 '</span><span class="dslca-prompt-modal-descr">' + DSLCString.str_refresh_descr + '</span>', document.URL );*/
 		}
 	}
+}
+
+/**
+ * If Control or Command key is pressed and the S key is pressed run dslc_save_composer.
+ * 83 is the key code for S.
+ */
+function dslc_save_page(e) {
+
+    if ( e.which == 83 && ( e.metaKey || e.ctrlKey )  ) {
+    	if ( jQuery('.dslca-save-composer-hook').css('display') == 'block' ) {
+	        dslc_save_composer();
+	        e.preventDefault();
+	        return false;
+	    }
+    }
 }
 
 /**
