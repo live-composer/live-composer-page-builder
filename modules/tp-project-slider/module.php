@@ -394,6 +394,17 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Slider', 'live-composer-page-builder' ),
 			),
+			array(
+				'label' => __( 'Align', 'live-composer-page-builder' ),
+				'id' => 'css_slider_align',
+				'std' => '',
+				'type' => 'text_align',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-tp-project-slider .dslc-slider-item',
+				'affect_on_change_rule' => 'text-align',
+				'section' => 'styling',
+				'tab' => __( 'slider', 'live-composer-page-builder' ),
+			),
 
 			/**
 			 * Slides
