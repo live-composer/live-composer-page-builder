@@ -226,6 +226,30 @@ class DSLC_Navigation extends DSLC_Module {
 				'section' => 'styling',
 			),
 			array(
+				'label' => __( 'BG Image Size', 'live-composer-page-builder' ),
+				'id' => 'bg_image_size',
+				'std' => 'auto',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-navigation-inner',
+				'affect_on_change_rule' => 'background-size',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'Original', 'live-composer-page-builder' ),
+						'value' => 'auto',
+					),
+					array(
+						'label' => __( 'Cover', 'live-composer-page-builder' ),
+						'value' => 'cover',
+					),
+					array(
+						'label' => __( 'Contain', 'live-composer-page-builder' ),
+						'value' => 'contain',
+					),
+				),
+				'section' => 'styling',
+			),
+			array(
 				'label' => __( 'Border Color', 'live-composer-page-builder' ),
 				'id' => 'css_main_border_color',
 				'std' => '',
