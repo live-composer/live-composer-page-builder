@@ -632,6 +632,15 @@
 							/*position: absolute;*/
 						}
 
+			#dslc-content .dslc-info-box-image-pos-aside .dslc-info-box-main {
+				overflow: hidden;
+			}
+
+				#dslc-content .dslc-info-box-image-pos-aside .dslc-info-box-image-alt {
+					float: left;
+					margin-right: 20px;
+				}
+
 			#dslc-content .dslc-info-box-image-alt-inner {
 				display: inline-block;
 			}
