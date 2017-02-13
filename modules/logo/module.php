@@ -56,7 +56,7 @@ class DSLC_Logo extends DSLC_Module {
 		$this->module_id = 'DSLC_Logo';
 		$this->module_title = __( 'Logo', 'live-composer-page-builder' );
 		$this->module_icon = 'picture';
-		$this->module_category = 'general';
+		$this->module_category = 'General';
 
 	}
 
