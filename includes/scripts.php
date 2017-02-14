@@ -238,11 +238,6 @@ final class DSLC_Scripts{
 			global $dslc_var_icons;
 
 			wp_localize_script( 'dslc-builder-main-js', 'DSLCIcons', $dslc_var_icons );
-
-			/* Editor Messages */
-			wp_enqueue_style( 'dslc-editor-messages-css', DS_LIVE_COMPOSER_URL . 'includes/editor-messages/css/main.css', array(), DS_LIVE_COMPOSER_VER );
-			wp_enqueue_script( 'dslc-editor-messages-ticker-js', DS_LIVE_COMPOSER_URL . 'includes/editor-messages/js/jquery.newsTicker.js', array(), DS_LIVE_COMPOSER_VER, true );
-			wp_enqueue_script( 'dslc-editor-messages-js', DS_LIVE_COMPOSER_URL . 'includes/editor-messages/js/main.js', array(), DS_LIVE_COMPOSER_VER, true );
 		}
 
 		/* If current screen is standard post editing screen in WP Admin */
@@ -306,7 +301,7 @@ final class DSLC_Scripts{
 				}
 
 				$filehandle = 'dslc-' . str_replace( '.', '-', $filename );
-				wp_enqueue_script( $filehandle, DS_LIVE_COMPOSER_URL . 'js/' . $filedir . '/' . $filename, $scriptdeps, DS_LIVE_COMPOSER_VER );
+				wp_enqueue_script( $filehandle, DS_LIVE_COMPOSER_URL . 'js/' . $filedir . '/' . $filename, $scriptdeps, DS_LIVE_COMPOSER_VER, true );
 			}
 		}
 	}
