@@ -301,7 +301,7 @@ final class DSLC_Scripts{
 				}
 
 				$filehandle = 'dslc-' . str_replace( '.', '-', $filename );
-				wp_enqueue_script( $filehandle, DS_LIVE_COMPOSER_URL . 'js/' . $filedir . '/' . $filename, $scriptdeps, DS_LIVE_COMPOSER_VER );
+				wp_enqueue_script( $filehandle, DS_LIVE_COMPOSER_URL . 'js/' . $filedir . '/' . $filename, $scriptdeps, DS_LIVE_COMPOSER_VER, true );
 			}
 		}
 	}

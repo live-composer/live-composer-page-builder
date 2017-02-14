@@ -4268,7 +4268,7 @@ div#scroller-stopper {
 }
 
 .dslca_editor_messages_title {
-	float: left;
+    float: left;
     background: #303030;
     color: #fff;
     font-size: 14px;
@@ -4277,15 +4277,50 @@ div#scroller-stopper {
     padding: 12px 17px;
     text-align: center;
     display: block;
-    margin-right: 25px;
-}
-
-.dslca_editor_messages_title span {
-	font-weight: 500;
+    letter-spacing: 1px;
 }
 
 a.dslca_editor_messages_title:hover {
 	color: #fff;
+}
+
+#editor_messages {
+    font-size: 14px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0 !important;
+    padding: 0 !important;
+    opacity: 0;
+}
+
+#editor_messages li {
+    position: relative;
+    padding: 13px 20px 11px 50px !important;
+    margin: 0;
+    line-height: 1;
+    font-size: 16px;
+}
+
+#editor_messages a {
+    text-decoration: none;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#editor_messages strong {
+	font-weight: 500;
+}
+
+#editor_messages .dslc-icon {
+    font-size: 19px;
+    margin-right: 10px;
+    position: absolute;
+    left: 20px;
+    top: 12px;
 }
 
 .dslca_editor_messages_hide {
@@ -4306,26 +4341,4 @@ a.dslca_editor_messages_title:hover {
 
 a.dslca_editor_messages_hide:hover {
     color: #fff;
-}
-
-.dslca_editor_messages_content {
-	padding: 12px 0;
-	font-size: 14px;
-	text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-}
-
-.dslca_editor_messages_content a {
-	color: #45c0ff;
-	text-decoration: none;
-}
-
-.dslca_editor_messages_content a:hover {
-	text-decoration: underline;
-}
-
-.dslca_editor_messages_content .dslc-icon {
-	font-size: 19px;
-	margin-right: 10px;
 }
