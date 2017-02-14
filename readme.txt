@@ -138,7 +138,7 @@ Upcoming Releases:
 
 = Bug fixes: =
 
-* [See closed issues for milestone 1.2.3 on GitHub](https://github.com/live-composer/live-composer-page-builder/issues?page=1&q=is%3Aissue+milestone%3A1.2.4+is%3Aclosed)
+* [See closed issues for milestone 1.2.4 on GitHub](https://github.com/live-composer/live-composer-page-builder/issues?page=1&q=is%3Aissue+milestone%3A1.2.4+is%3Aclosed)
 
 
 
