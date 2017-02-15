@@ -542,3 +542,22 @@ function dslc_tab_content( $content ) {
 	return $content;
 }
 add_filter( 'the_editor', 'dslc_tab_content' );
+
+/**
+ * Add notice in in WP Editor
+ *
+ * @param array $wrapper HTML output.
+ */
+function dslc_notice( $wrapper ) {
+
+	global $current_screen;
+
+	$url = DSLC_EditorInterface::get_editor_link_url( get_the_ID() );
+
+	if ( ( 'page' === get_post_type( get_the_ID() ) ) && is_admin() && ( 'add' !== $current_screen->action ) ) {
+		$wrapper = str_replace( '</textarea>', '</textarea><div class="lc-notice">Please, do not edit the page content here. It was created in the page builder. <a target="_blank" href="'. $url . '">'.  __( 'Open in Live Composer', 'live-composer-page-builder' ) .'</a></div>', $wrapper );
+	}
+
+	return $wrapper;
+}
+add_filter( 'the_editor', 'dslc_notice' );
