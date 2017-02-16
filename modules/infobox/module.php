@@ -820,7 +820,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-info-box-image',
+				'affect_on_change_el' => '.dslc-info-box-image, .dslc-info-box-icon-pos-aside .dslc-info-box-image',
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'styling',
 				'tab' => __( 'Icon', 'live-composer-page-builder' ),
