@@ -935,9 +935,11 @@ function dslc_module_options_hideshow_tabs() {
 			if ( dslcCustomCSSVal == 'enabled' ) {
 
 				jQuery('.dslca-module-edit-option[data-section="styling"]').css({ visibility : 'visible' });
+				jQuery('.dslca-module-edit-option[data-tab]').css( 'visibility', 'visible' );
 				jQuery('.dslca-module-edit-options-tabs').show();
 			} else {
 				jQuery('.dslca-module-edit-option[data-section="styling"]').css({ visibility : 'hidden' });
+				jQuery('.dslca-module-edit-option[data-tab]').css( 'visibility', 'hidden' );
 				jQuery('.dslca-module-edit-options-tabs').hide();
 				dslcCustomCSS.css({ visibility : 'visible' });
 			}
@@ -950,14 +952,18 @@ function dslc_module_options_hideshow_tabs() {
 
 	if ( jQuery('select.dslca-module-edit-field[data-id="css_res_t"]').val() == 'disabled' ) {
 		jQuery('.dslca-module-edit-option[data-id*="css_res_t"]').css( 'visibility', 'hidden' );
+		jQuery('.dslca-module-edit-option[data-tab="tablet_responsive"]').css( 'visibility', 'hidden' );
 	} else {
 		jQuery('.dslca-module-edit-option[data-id*="css_res_t"]').css( 'visibility', 'visible' );
+		jQuery('.dslca-module-edit-option[data-tab="tablet_responsive"]').css( 'visibility', 'visible' );
 	}
 
 	if ( jQuery('select.dslca-module-edit-field[data-id="css_res_p"]').val() == 'disabled' ) {
 		jQuery('.dslca-module-edit-option[data-id*="css_res_p"]').css( 'visibility', 'hidden' );
+		jQuery('.dslca-module-edit-option[data-tab="phone_responsive"]').css( 'visibility', 'hidden' );
 	} else {
 		jQuery('.dslca-module-edit-option[data-id*="css_res_p"]').css( 'visibility', 'visible' );
+		jQuery('.dslca-module-edit-option[data-tab="phone_responsive"]').css( 'visibility', 'visible' );
 	}
 
 	jQuery('.dslca-module-edit-option[data-id="css_res_p"], .dslca-module-edit-option[data-id="css_res_t"]').css( 'visibility', 'visible' );
