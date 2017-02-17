@@ -692,7 +692,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 							<?php else : ?>
 								<?php
 									foreach ( $post_type_taxonomies as $taxonomy ) {
-										if ( $taxonomy->hierarchical == true ) {
+										if ( $taxonomy->hierarchical == true && $taxonomy->public ) {
 
 											$cats = get_the_terms( get_the_ID(), $taxonomy->name );
 											$cats_count = 0;
@@ -719,7 +719,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 							<?php else : ?>
 								<?php
 									foreach ( $post_type_taxonomies as $taxonomy ) {
-										if ( $taxonomy->hierarchical == false ) {
+										if ( $taxonomy->hierarchical == false && $taxonomy->public ) {
 
 											$cats = get_the_terms( get_the_ID(), $taxonomy->name );
 											$tags_count = 0;
