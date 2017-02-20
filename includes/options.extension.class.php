@@ -167,9 +167,10 @@ class DSLC_Options_Extender {
 		$value = '';
 		$options = get_option( 'dslc_custom_options_' . $option['extension_id'] );
 
-		if ( isset( $options[$option['id']] ) ) {
-
-			$value = $options[$option['id']];
+		if ( isset( $options[ $option['id'] ] ) ) {
+			$value = $options[ $option['id'] ];
+		} elseif ( isset( $option['std'] ) ) {
+			$value = $option['std'];
 		}
 
 		$option['value'] = $value;
