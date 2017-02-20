@@ -252,7 +252,7 @@ function dslc_option_display_funcitons_router( $option ) {
  * @param section $section Docs section.
  */
 function dslc_plugin_options_display_options( $section ) {
-
+	echo apply_filters( 'dslc_filter_section_description', '', $section['id'] );
 }
 
 /**
