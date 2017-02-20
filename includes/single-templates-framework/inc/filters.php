@@ -311,9 +311,12 @@ function dslc_tp_update_archive_templates_option( $post_id ) {
 		$plugin_options = get_option( 'dslc_plugin_options' );
 
 		$this_template_in_options = array();
-		foreach ( $plugin_options as $key => $value ) {
-			if ( ! is_array( $value ) && strval( $value ) === strval( $post_id ) ) {
-				$this_template_in_options[] = $key;
+
+		if ( $plugin_options ) {
+			foreach ( $plugin_options as $key => $value ) {
+				if ( ! is_array( $value ) && strval( $value ) === strval( $post_id ) ) {
+					$this_template_in_options[] = $key;
+				}
 			}
 		}
 		/**
