@@ -668,7 +668,6 @@ function dslc_module_output_altered( callback ) {
 
 			// TODO: Add new postponed action to run after all done
 
-			dslc_generate_code(); // Do not delete. It refresh classes on "option preview refresh -> true"
 			// dslc_show_publish_button();
 			LiveComposer.Builder.PreviewAreaWindow.dslc_carousel();
 
