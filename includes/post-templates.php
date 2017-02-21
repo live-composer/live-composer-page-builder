@@ -60,6 +60,8 @@ function dslc_can_edit_in_lc( $post_data ) {
 	global $dslc_var_templates_pt;
 	global $dslc_enabled_cpt;
 
+	$can_edit = false;
+
 	if ( is_int( $post_data ) || empty( $post_data ) ) {
 		# code...
 	} else {
@@ -69,24 +71,30 @@ function dslc_can_edit_in_lc( $post_data ) {
 		// If $post_type is included in $dslc_var_templates_pt (can edit with LC).
 		if ( array_key_exists( $post_type, $dslc_var_templates_pt ) ||
 				array_key_exists( $post_type, $dslc_enabled_cpt ) ) {
-			return true;
+			$can_edit = true;
 		} elseif ( 'dslc_hf' === $post_type ) {
 			// Make header/footer CPT as editable.
-			return true;
+			$can_edit = true;
 		}
+
+		$can_edit = apply_filters( 'dslc_can_edit_in_lc', $can_edit, $post_type );
 	}
 
-	return false;
+	return $can_edit;
 }
 
 function dslc_cpt_use_templates( $post_type ) {
 
 	global $dslc_var_templates_pt;
 
+	$use_templates = false;
+
 	// If $post_type is included in $dslc_var_templates_pt (can edit with LC).
 	if ( array_key_exists( $post_type, $dslc_var_templates_pt ) ) {
-		return true;
+		$use_templates = true;
 	}
 
-	return false;
+	$use_templates = apply_filters( 'dslc_cpt_use_templates', $use_templates, $post_type );
+
+	return $use_templates;
 }

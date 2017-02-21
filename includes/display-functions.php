@@ -196,8 +196,8 @@ function dslc_display_composer() {
 
 							<form class="dslca-template-save-form">
 								<input type="text" id="dslca-save-template-title" placeholder="<?php _e( 'Name of the template', 'live-composer-page-builder' ); ?>">
-								<span class="dslca-submit"><?php _e( 'Save', 'live-composer-page-builder' ); ?></span>
-								<span class="dslca-cancel dslca-close-modal-hook" data-modal=".dslca-modal-templates-save"><?php _e( 'Cancel', 'live-composer-page-builder' ); ?></span>
+								<div class="dslca-submit"><?php _e( 'Save', 'live-composer-page-builder' ); ?></div>
+								<div class="dslca-cancel dslca-close-modal-hook" data-modal=".dslca-modal-templates-save"><?php _e( 'Cancel', 'live-composer-page-builder' ); ?></div>
 							</form>
 
 						</div><!-- .dslca-modal -->
@@ -215,15 +215,15 @@ function dslc_display_composer() {
 
 							<form class="dslca-template-import-form">
 								<textarea id="dslca-import-code" placeholder="<?php _e( 'Enter the exported code heree', 'live-composer-page-builder' ); ?>"></textarea>
-								<span class="dslca-submit">
-									<span class="dslca-modal-title"><?php _e( 'Import', 'live-composer-page-builder' ); ?></span>
+								<div class="dslca-submit">
+									<div class="dslca-modal-title"><?php _e( 'Import', 'live-composer-page-builder' ); ?></div>
 									<div class="dslca-loading followingBallsGWrap">
 										<div class="followingBallsG_1 followingBallsG"></div>
 										<div class="followingBallsG_2 followingBallsG"></div>
 										<div class="followingBallsG_3 followingBallsG"></div>
 										<div class="followingBallsG_4 followingBallsG"></div>
 									</div>
-								</span>
+								</div>
 								<span class="dslca-cancel dslca-close-modal-hook" data-modal=".dslca-modal-templates-import"><?php _e( 'Cancel', 'live-composer-page-builder' ); ?></span>
 							</form>
 
@@ -321,36 +321,35 @@ function dslc_display_composer() {
 			<div class="dslca-invisible-overlay"></div>
 			<div id="scroller-stopper"></div>
 			<script id="pseudo-panel" type="template">
-			<div class="dslca-pseudo-panel">
+				<div class="dslca-pseudo-panel">
+					<div class="dslca-pseudo-header dslc-clearfix">
 
-				<div class="dslca-pseudo-header dslc-clearfix">
+						<!-- Tabs -->
+						<!-- Module Option filters -->
+						<span class="dslca-pseudo-options-filter-hook dslca-active" data-section="functionality" style="display: block;"><span class="dslca-icon dslc-icon-cog"></span> Functionality</span>
+						<span class="dslca-pseudo-options-filter-hook" data-section="styling" style="display: block;"><span class="dslca-icon dslc-icon-tint"></span> Styling</span>
+						<span class="dslca-pseudo-options-filter-hook" data-section="responsive" style="display: block;"><span class="dslca-icon dslc-icon-mobile-phone"></span> Responsive</span>
 
-					<!-- Tabs -->
-					<!-- Module Option filters -->
-					<span class="dslca-pseudo-options-filter-hook dslca-active" data-section="functionality" style="display: block;"><span class="dslca-icon dslc-icon-cog"></span> Functionality</span>
-					<span class="dslca-pseudo-options-filter-hook" data-section="styling" style="display: block;"><span class="dslca-icon dslc-icon-tint"></span> Styling</span>
-					<span class="dslca-pseudo-options-filter-hook" data-section="responsive" style="display: block;"><span class="dslca-icon dslc-icon-mobile-phone"></span> Responsive</span>
+						<!-- Module Options Actions -->
+						<div class="dslca-pseudo-module-edit-actions" style="display: block;">
+							<a href="#" class="dslca-pseudo-module-edit-save">Confirm</a>
+							<a href="#" class="dslca-pseudo-module-edit-cancel">Cancel</a>
+						</div>
+						<!-- Row Options Actions -->
 
-					<!-- Module Options Actions -->
-					<div class="dslca-pseudo-module-edit-actions" style="display: block;">
-						<a href="#" class="dslca-pseudo-module-edit-save">Confirm</a>
-						<a href="#" class="dslca-pseudo-module-edit-cancel">Cancel</a>
-					</div>
-					<!-- Row Options Actions -->
+					</div><!-- .dslca-header -->
 
-				</div><!-- .dslca-header -->
+					<div class="dslca-pseudo-actions">
 
-				<div class="dslca-pseudo-actions">
+						<!-- Hide/Show -->
+						<a href="#" class="dslca-pseudo-hide-composer-hook"><span class="dslca-icon dslc-icon-arrow-down"></span>Hide Editor</a>
 
-					<!-- Hide/Show -->
-					<a href="#" class="dslca-pseudo-hide-composer-hook"><span class="dslca-icon dslc-icon-arrow-down"></span>Hide Editor</a>
+						<!-- Disable -->
+						<a href="#" class="dslca-pseudo-close-composer-hook"><span class="dslca-icon dslc-icon-remove"></span>Disable Editor</a>
 
-					<!-- Disable -->
-					<a href="#" class="dslca-pseudo-close-composer-hook"><span class="dslca-icon dslc-icon-remove"></span>Disable Editor</a>
+						<div class="dslc-clear"></div>
 
-					<div class="dslc-clear"></div>
-
-				</div><!-- .dslca-actions -->
+					</div><!-- .dslca-actions -->
 
 
 
@@ -391,10 +390,8 @@ function dslc_display_composer() {
 								</div><!-- .dslc-module-edit-option -->
 							</div>
 						</div>
-
 					</div>
-
-			</div>
+				</div>
 			</script>
 		<?php
 
