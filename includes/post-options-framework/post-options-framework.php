@@ -550,12 +550,11 @@ add_filter( 'the_editor', 'dslc_tab_content' );
  */
 function dslc_notice( $wrapper ) {
 
-	global $current_screen;
-
+	$custom_fields = get_post_custom( get_the_ID() );
 	$url = DSLC_EditorInterface::get_editor_link_url( get_the_ID() );
 
-	if ( ( 'page' === get_post_type( get_the_ID() ) ) && is_admin() && ( 'add' !== $current_screen->action ) ) {
-		$wrapper = str_replace( '</textarea>', '</textarea><div class="lc-notice">Please, do not edit the page content here. It was created in the page builder. <a target="_blank" href="'. $url . '">'.  __( 'Open in Live Composer', 'live-composer-page-builder' ) .'</a></div>', $wrapper );
+	if ( is_admin() && is_array( $custom_fields ) && array_key_exists( 'dslc_code', $custom_fields ) ) {
+		$wrapper .= '</textarea><div class="lc-notice">This page was created in a page builder. <a target="_blank" href="'. $url . '">'.  __( 'Open in Live Composer', 'live-composer-page-builder' ) .'</a> to make any content or design changes.</div>';
 	}
 
 	return $wrapper;

@@ -163,7 +163,7 @@
 	display: block;
 }
 
-.lc-active #post-status-info, .lc-active #wp-content-editor-container {
+.lc-active #post-status-info, .lc-active #wp-content-editor-container, .lc-active .lc-notice {
 	display: none;
 	opacity: 0;
 }
@@ -228,6 +228,7 @@
     font-size: 14px;
     line-height: 1;
     border-top: 1px solid #E8E5E5;
+    border-right: 1px solid #E8E5E5;
 }
 
 .lc-notice a {
