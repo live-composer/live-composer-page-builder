@@ -116,7 +116,12 @@ function dslc_save_preset( $preset_name, $preset_code_raw, $module_id ) {
 			if ( ( isset( $module_option['section'] ) && 'functionality' !== $module_option['section'] ) && ( ! isset( $module_option['visibility'] ) || 'hidden' !== $module_option['visibility'] ) ) {
 
 				if ( isset( $preset_code_raw[ $module_option['id'] ] ) ) {
-					$preset_code[ $module_option['id'] ] = $preset_code_raw[ $module_option['id'] ];
+
+					if ( 'view_all_link' === $module_option['id'] ) {
+						$preset_code[ $module_option['id'] ] = '#';
+					} else {
+						$preset_code[ $module_option['id'] ] = $preset_code_raw[ $module_option['id'] ];
+					}
 				}
 			}
 		}
