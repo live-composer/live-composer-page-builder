@@ -853,9 +853,17 @@ class DSLC_Image extends DSLC_Module {
 					<div class="dslc-image-caption">
 
 						<?php if ( $dslc_is_admin ) : ?>
-							<div class="dslca-editable-content" data-id="custom_text" data-type="simple" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?>><?php echo stripslashes( $options['custom_text'] ); ?></div>
+							<div class="dslca-editable-content" data-id="custom_text" data-type="simple" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?>>
+								<?php
+								$output_content = stripslashes( $options['custom_text'] );
+								echo apply_filters( 'dslc_before_render', $output_content );
+								?>
+							</div>
 						<?php else : ?>
-							<?php echo stripslashes( $options['custom_text'] ); ?>
+							<?php
+							$output_content = stripslashes( $options['custom_text'] );
+							echo apply_filters( 'dslc_before_render', $output_content );
+							?>
 						<?php endif; ?>
 
 					</div>

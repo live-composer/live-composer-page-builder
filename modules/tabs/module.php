@@ -3580,9 +3580,8 @@ class DSLC_Tabs extends DSLC_Module {
 								<div class="dslca-editable-content"<?php if ( $dslc_is_admin ) echo ' data-exportable-content'; ?>>
 									<?php
 										$tab_content_output = stripslashes( $tab_content );
-										$tab_content_output = str_replace( '<lctextarea', '<textarea', $tab_content_output );
-										$tab_content_output = str_replace( '</lctextarea', '</textarea', $tab_content_output );
-										echo do_shortcode( $tab_content_output );
+										$tab_content_output = do_shortcode( $tab_content_output );
+										echo apply_filters( 'dslc_before_render', $tab_content_output );
 									?>
 								</div>
 								<?php if ( $dslc_is_admin ) : ?>

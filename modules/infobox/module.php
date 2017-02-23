@@ -2981,11 +2981,17 @@ class DSLC_Info_Box extends DSLC_Module {
 								<div class="dslc-info-box-content">
 									<?php if ( $dslc_is_admin ) : ?>
 										<div class="dslca-editable-content inline-editor" data-type="simple" data-id="content">
-											<?php echo stripslashes( $options['content'] ); ?>
+											<?php
+											$output_content = stripslashes( $options['content'] );
+											echo apply_filters( 'dslc_before_render', $output_content );
+											?>
 										</div><!-- .dslca-editable-content -->
 										<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook"><?php _e( 'Open in WP Editor', 'live-composer-page-builder' ); ?></span></div>
 									<?php else : ?>
-										<?php echo do_shortcode( stripslashes( $options['content'] ) ); ?>
+										<?php
+										$output_content = stripslashes( $options['content'] );
+										echo apply_filters( 'dslc_before_render', $output_content );
+										?>
 									<?php endif; ?>
 								</div><!-- .dslc-info-box-content -->
 							<?php endif; ?>

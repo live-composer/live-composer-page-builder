@@ -70,6 +70,26 @@ function dslc_editable_content_gen_code( dslcField ) {
 	jQuery('.dslca-module-option-front[data-id="' + dslcFieldID + '"]', dslcModule).val( dslcContent );
 }
 
+/**
+ * Filter Textarea
+ */
+function dslc_filter_textarea( dslcOptionValue ) {
+
+	if ( dslcDebug ) console.log( 'dslc_filter_textarea' );
+
+	// In some rare cases we have the next error:
+	// TypeError: undefined is not an object (evaluating 'dslcField.html().trim()...')
+	if ( undefined === dslcOptionValue ) {
+		return false;
+	}
+
+	var dslcContent;
+
+	dslcContent = dslcOptionValue.trim().replace(/<textarea/g, '<lctextarea').replace(/<\/textarea/g, '</lctextarea');
+
+	return dslcContent;
+}
+
 // Disable the prompt ( are you sure ) on refresh
 window.onbeforeunload = function () { return; };
 
@@ -401,6 +421,8 @@ jQuery(document).ready(function($) {
 			/**
 			 * Change old value with new value
 			 */
+
+			dslcOptionValue = dslc_filter_textarea( dslcOptionValue );
 
 			jQuery( '.dslca-module-options-front textarea[data-id="' + dslcOptionID + '"]', dslcModule ).val(dslcOptionValue);
 
