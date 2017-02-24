@@ -328,6 +328,29 @@ class DSLC_Text_Simple extends DSLC_Module {
 					'affect_on_change_rule' => 'background-position',
 					'section' => 'styling',
 				),
+				array(
+					'id' => 'css_main_bg_img_size',
+					'std' => 'auto',
+					'label' => __( 'BG Image Size', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'choices' => array(
+						array(
+							'label' => __( 'Original', 'live-composer-page-builder' ),
+							'value' => 'auto',
+						),
+						array(
+							'label' => __( 'Cover', 'live-composer-page-builder' ),
+							'value' => 'cover',
+						),
+						array(
+							'label' => __( 'Contain', 'live-composer-page-builder' ),
+							'value' => 'contain',
+						),
+					),
+					'affect_on_change_rule' => 'background-size',
+					'affect_on_change_el' => '.dslc-text-module-content',
+					'section' => 'styling'
+				),
 
 			array(
 				'id' => 'css_main_bg_group',
