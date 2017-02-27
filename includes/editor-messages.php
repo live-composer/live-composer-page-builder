@@ -1,11 +1,14 @@
 <?php
 
 /**
- * Update Options
+ * Main Editor_Messages Class.
  */
-function dslc_update_messages() {
+class Editor_Messages {
 
-	$dslc_messages = array(
+	/**
+	 * Messages
+	 */
+	public $array_messages = array(
 		'messages' => array(
 			'message_1' => array(
 				'text' => 'Our WooCommerce integration add-on is almost ready for realese. Price growths with every update. <strong>Buy it today to save 30%!</strong>',
@@ -41,39 +44,37 @@ function dslc_update_messages() {
 		'can_hide' => 0,
 	);
 
-	return add_option( 'dslc_editor_messages', $dslc_messages );
-}
+	/**
+	 * Display the editor messages
+	 */
+	public function dslc_print_editor_messages() {
+	?>
+	    <div class="dslca_editor_messages_section">
+	    	<a href="#" class="dslca_editor_messages_title"><?php echo __( 'Live Composer Updates', 'live-composer-page-builder' ); ?></a>
+	    	<a href="#" class="dslca_editor_messages_hide"><span class="dslc-icon dslc-icon-remove"></span><?php echo __( 'Hide this Line', 'live-composer-page-builder' ); ?></a>
+	    	<ul id="editor_messages">
+	    		<?php
 
-/**
- * Display the editor messages
- */
-function dslc_print_editor_messages() {
-?>
+	    		if ( false === get_option( 'dslc_editor_messages' ) ) {
 
-	<div class="dslca_editor_messages_section">
-	<a href="#" class="dslca_editor_messages_title"><?php echo __( 'Live Composer Updates', 'live-composer-page-builder' ); ?></a>
-	<a href="#" class="dslca_editor_messages_hide"><span class="dslc-icon dslc-icon-remove"></span><?php echo __( 'Hide this Line', 'live-composer-page-builder' ); ?></a>
-	<ul id="editor_messages">
-		<?php
+	    			$dslc_messages = $this->array_messages;
+	    			add_option( 'dslc_editor_messages', $dslc_messages );
+	    		}
 
-		if ( false === get_option( 'dslc_editor_messages' ) ) {
-			dslc_update_messages();
-		}
+	    		$array = get_option( 'dslc_editor_messages' );
 
-		$array = get_option( 'dslc_editor_messages' );
-
-		foreach ( $array as $key => $messages ) {
-			if ( 'can_hide' !== $key ) {
-				foreach ( $messages as $message ) { ?>
-				<li>
-					<span class="dslc-icon <?php echo $message['icon']; ?>"></span><?php echo $message['text']; ?><a href="<?php echo $message['link']; ?>" target="_blank"></a>
-				</li>
-			<?php }
-			}
-		}
-		?>
-	</ul>
-</div>
-
-<?php
+	    		foreach ( $array as $key => $messages ) {
+	    			if ( 'can_hide' !== $key ) {
+	    				foreach ( $messages as $message ) { ?>
+	    				<li>
+	    					<span class="dslc-icon <?php echo $message['icon']; ?>"></span><?php echo $message['text']; ?><a href="<?php echo $message['link']; ?>" target="_blank"></a>
+	    				</li>
+	    			<?php }
+	    			}
+	    		}
+	    		?>
+	    	</ul>
+	    </div>
+	<?php
+	}
 }
