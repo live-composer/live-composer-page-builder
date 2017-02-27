@@ -214,37 +214,36 @@ add_action( 'admin_notices', 'dslc_w3tc_admin_notice' );
  * In this case users can't edit website via front end
  * as they not logged in as admin there.
  */
-
 function dslc_check_wpsettings_admin_notice() {
-		$wp_url = get_option( 'siteurl' );
-		$wp_site_url = get_option( 'home' );
-		$check_url = strcmp( $wp_url, $wp_site_url );
 
-		$screen = get_current_screen();
-		$current_parent_base = $screen->parent_base;
+	$wp_url = get_option( 'siteurl' );
+	$wp_site_url = get_option( 'home' );
+	$check_url = strcmp( $wp_url, $wp_site_url );
 
-		$notice_id = 'wrong_wpsettings_settings';
-		$display_notice = false;
-		$notice_dismissed = dslc_notice_dismissed( $notice_id );
-		$notice_nonce = dslc_generate_notice_nonce( $notice_id );
+	$screen = get_current_screen();
+	$current_parent_base = $screen->parent_base;
 
+	$notice_id = 'wrong_wpsettings_settings';
+	$display_notice = false;
+	$notice_dismissed = dslc_notice_dismissed( $notice_id );
+	$notice_nonce = dslc_generate_notice_nonce( $notice_id );
 
-		if ( ! $notice_dismissed && $check_url ) {
-			$display_notice = true;
-		}
+	if ( ! $notice_dismissed && $check_url ) {
+		$display_notice = true;
+	}
 
-		if ( $display_notice && $current_parent_base != 'dslc_plugin_options' ) {?>
+	if ( $display_notice && $current_parent_base != 'dslc_plugin_options' ) {?>
+
+		<div class="notice dslc-notice notice-error is-dismissible" id="<?php echo $notice_id; ?>" data-nonce="<?php echo $notice_nonce; ?>">
+			<p><?php _e( '<strong>Live Composer:</strong> probably there is a problem with your website settings. <a href="' . admin_url( 'admin.php?page=dslc_plugin_options' ) . '">Click here to find out more.</a>', 'live-composer-page-builder' ); ?></p>
+		</div><?php
+
+	} elseif ( $display_notice && $current_parent_base == 'dslc_plugin_options' ) { ?>
 
 			<div class="notice dslc-notice notice-error is-dismissible" id="<?php echo $notice_id; ?>" data-nonce="<?php echo $notice_nonce; ?>">
-				<p><?php _e( '<strong>Live Composer:</strong> probably there is a problem with your website settings. <a href="' . admin_url( 'admin.php?page=dslc_getting_started' ) . '">Click here to find out more.</a>', 'live-composer-page-builder' ); ?></p>
-			</div><?php
-
-		} elseif ( $display_notice && $current_parent_base == 'dslc_plugin_options' ) { ?>
-
-				<div class="notice dslc-notice notice-error is-dismissible" id="<?php echo $notice_id; ?>" data-nonce="<?php echo $notice_nonce; ?>">
-					<p><?php _e( 'Wrong settings found in <strong><a href="' . admin_url( 'options-general.php' ) . '" target="_blank">WP Admin &#8594; Settings</a></strong>: <strong>Wordpress Address</strong> and <strong>Site Address</strong> should be the same to make front-editing possible with Live Composer.', 'live-composer-page-builder' ); ?></p>
-				</div>
-		<?php }
+				<p><?php _e( 'Wrong settings found in <strong><a href="' . admin_url( 'options-general.php' ) . '" target="_blank">WP Admin &#8594; Settings</a></strong>: <strong>Wordpress Address</strong> and <strong>Site Address</strong> should be the same to make front-editing possible with Live Composer.', 'live-composer-page-builder' ); ?></p>
+			</div>
+	<?php }
 }
 add_action( 'admin_notices', 'dslc_check_wpsettings_admin_notice' );
 
