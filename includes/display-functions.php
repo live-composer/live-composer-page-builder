@@ -395,8 +395,9 @@ function dslc_display_composer() {
 			</script>
 		<?php
 
-		// Output editor messages
-		dslc_print_editor_messages();
+		// Output editor messages.
+		$editor_messages = new Editor_Messages();
+		echo $editor_messages->dslc_print_editor_messages();
 
 	endif;
 
