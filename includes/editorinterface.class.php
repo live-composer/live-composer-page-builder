@@ -205,7 +205,7 @@ class DSLC_EditorInterface {
 
 		} elseif ( is_singular() && $use_lc_templates  ) {
 			// If a singular page ( posts and pages ) and IS using LC templates.
-			self::the_edit_template_link( get_the_ID() );
+			self::the_edit_template_link( get_the_ID(), true );
 
 		} elseif ( is_404() ) {
 			// If it's a 404 page.
