@@ -160,6 +160,40 @@ LiveComposer.Utils = {
 	},
 
 	/**
+	 * Update section option in raw JSON code (dslc_code) of the section
+	 *
+	 * @param  {DOM element} section    `section Element
+	 * @param  {string} property_name  Name of the option we change
+	 * @param  {string} property_value Value of the option we change
+	 * @return {void}
+	 */
+	update_section_property_raw: function (section, property_name, property_value ) {
+
+		// Hidden textarea element with raw base64 code of the roq
+		// <textarea class="dslca-section-code"></textarea>
+		var section_code_container = section.getElementsByClassName('dslca-section-code')[0];
+
+		// Hidden input element with value of this particular setting
+		// <input data-id="property_name">property_value</textarea>
+		var property_container = section.querySelector( '.dslca-modules-section-settings input[data-id="' + property_name + '"]' );
+
+		// Get module raw code
+		var section_code = section_code_container.value;
+
+		section_code = JSON.parse( section_code );
+		section_code[property_name] = property_value;
+		section_code = JSON.stringify( section_code );
+
+		// Update raw code
+		section_code_container.value = section_code;
+		section_code_container.innerHTML = section_code; // See comment block below
+
+		// Change the property in hidden textarea as well
+		property_container.setAttribute( 'value', property_value );
+		property_container.setAttribute( 'data-def', property_value );
+	},
+
+	/**
 	 * Provide custom events publish.
 	 * Also echoes all the custom events in the preview iframe as well.
 	 *

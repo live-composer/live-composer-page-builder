@@ -1123,12 +1123,17 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1 ) {
 	if ( ! isset( $atts['show_on'] ) ) {
 			$atts['show_on'] = 'desktop tablet phone';
 	}
-/*
+
 	// Unique section ID
 	if ( ! isset( $atts['section_instance_id'] ) ) {
 		$atts['section_instance_id'] = dslc_get_new_module_id();
 	}
-*/
+
+	// Apply new instance ID if needed.
+	if ( isset( $atts['give_new_id'] ) ) {
+		$atts['section_instance_id'] = dslc_get_new_module_id();
+	}
+
 	// Custom ID.
 	if ( ! isset( $atts['custom_id'] ) ) {
 			$atts['custom_id'] = '';
@@ -1302,7 +1307,7 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1 ) {
 
 	//data-section-id='. $atts['section_instance_id'] . '
 	$output = '
-		<div ' . $section_id_output . ' class="dslc-modules-section ' . $a_container_class . $parallax_class . $section_class . $extra_classes . '" style="' . dslc_row_get_style( $atts ) . '">
+		<div ' . $section_id_output . ' class="dslc-modules-section ' . $a_container_class . $parallax_class . $section_class . $extra_classes . '" style="' . dslc_row_get_style( $atts ) . '" data-section-id="' . $atts['section_instance_id'] . '">
 
 				'.$bg_video . '
 

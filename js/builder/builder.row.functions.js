@@ -550,7 +550,6 @@ function dslc_row_copy( row ) {
 
 	new LiveComposer.Builder.Elements.CRow(dslcModulesSectionCloned);
 
-
 	/**
 	 * Re-render modules inside of the new ROW
 	 */
@@ -596,6 +595,29 @@ function dslc_row_copy( row ) {
 
 		dslc_show_publish_button();
 	});
+
+	// Generate new ID for the new section.
+	dslc_section_new_id( dslcModulesSectionCloned[0] );
+}
+
+/**
+ * Generate new ID for the section provided
+ *
+ *
+ * @param DOM section that needs ID updated (new ID).
+ * @return void
+ */
+function dslc_section_new_id( section ) {
+
+	if ( dslcDebug ) console.log( 'dslc_section_new_id' );
+
+	var dslc_section_id = LiveComposer.Utils.get_unique_id(); // Generate new section ID.
+
+	// Update section ID in data attribute
+	section.setAttribute( 'data-section-id', dslc_section_id );
+
+	// Update section ID in raw base64 code (dslc_code) of the section
+	LiveComposer.Utils.update_section_property_raw( section, 'section_instance_id', dslc_section_id );
 }
 
 
