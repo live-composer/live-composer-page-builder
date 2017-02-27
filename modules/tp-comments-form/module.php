@@ -1317,7 +1317,7 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 							'comment_notes_after' => '',
 							'title_reply' => $txt_leave_comment,
 							'title_reply_to' => __( 'Reply to %s.', 'live-composer-page-builder' ),
-							'comment_field' => '<div class="comment-form-comment"><textarea id="comment" name="comment" placeholder="' . __( 'Comment', 'live-composer-page-builder' ) . '" aria-required="true"></textarea></div>',
+							'comment_field' => '<div class="comment-form-comment"><textarea id="comment" name="comment" placeholder="' . $txt_comment . '" aria-required="true"></textarea></div>',
 							'fields' => apply_filters( 'comment_form_default_fields', array(
 								'author' => '<div class="comment-form-name"><input id="author" name="author" type=text value="' . esc_attr( $commenter['comment_author'] ) . '" size="30" placeholder="' . $txt_name . ' *" aria-required="true" /></div>',
 								'email' => '<div class="comment-form-email"><input id="email" name="email" type=text value="' . esc_attr( $commenter['comment_author_email'] ) . '" size="30" placeholder="' . $txt_email . ' *" aria-required="true" /></div>',
