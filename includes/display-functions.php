@@ -48,6 +48,12 @@ function dslc_display_composer() {
 			$default_section = 'functionality';
 		}
 
+		if ( isset( $_GET['preview_id'] ) ) {
+			$url_id = $_GET['preview_id'];
+		} else {
+			$url_id = $_GET['page_id'];
+		}
+
 		?>
 
 			<div class="dslca-container dslca-state-off" data-post-id="<?php echo intval( $_GET['page_id'] ); ?>">
@@ -105,7 +111,7 @@ function dslc_display_composer() {
 					<a href="#" class="dslca-hide-composer-hook"><span class="dslca-icon dslc-icon-arrow-down"></span><?php _e( 'Hide Editor', 'live-composer-page-builder' ); ?></a>
 
 					<!-- Disable -->
-					<a href="<?php the_permalink( $_GET['page_id'] ); ?>" class="dslca-close-composer-hook"><span class="dslca-icon dslc-icon-remove"></span><?php _e( 'Disable Editor', 'live-composer-page-builder' ); ?></a>
+					<a href="<?php the_permalink( $url_id ); ?>" class="dslca-close-composer-hook"><span class="dslca-icon dslc-icon-remove"></span><?php _e( 'Disable Editor', 'live-composer-page-builder' ); ?></a>
 
 					<div class="dslc-clear"></div>
 
