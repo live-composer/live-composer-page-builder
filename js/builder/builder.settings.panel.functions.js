@@ -640,7 +640,8 @@ function dslc_module_options_hideshow_tabs() {
 		dslcElDetails = true,
 		dslcElQuote = true,
 		dslcElAuthorName = true,
-		dslcElAuthorPos = true;
+		dslcElAuthorPos = true,
+		dslcElImage = true;
 
 
 		// Is heading selected?
@@ -768,6 +769,11 @@ function dslc_module_options_hideshow_tabs() {
 		// Is author position enabled?
 		if ( ! jQuery('.dslca-module-edit-field[data-id*="elements"][value="author_position"]').is(':checked') ) {
 			dslcElAuthorPos = false;
+		}
+
+		// Is image enabled?
+		if ( ! jQuery('.dslca-module-edit-field[data-id*="elements"][value="image"]').is(':checked') ) {
+			dslcElImage = false;
 		}
 
 
@@ -916,6 +922,12 @@ function dslc_module_options_hideshow_tabs() {
 			jQuery('.dslca-module-edit-options-tab-hook[data-id="author_position_styling"]').show();
 		else
 			jQuery('.dslca-module-edit-options-tab-hook[data-id="author_position_styling"]').hide();
+
+		// Show/Hide Image
+		if ( dslcElImage )
+			jQuery('.dslca-module-edit-options-tab-hook[data-id="image_styling"]').show();
+		else
+			jQuery('.dslca-module-edit-options-tab-hook[data-id="image_styling"]').hide();
 
 	}
 
