@@ -4964,10 +4964,8 @@ class DSLC_Text_Simple extends DSLC_Module {
 				}
 
 					$output_content = stripslashes( $options['content'] );
-					$output_content = str_replace( '<lctextarea', '<textarea', $output_content );
-					$output_content = str_replace( '</lctextarea', '</textarea', $output_content );
 					$output_content = do_shortcode( $output_content );
-					echo $output_content;
+					echo apply_filters( 'dslc_before_render', $output_content );
 
 				if ( $dslc_active ) {
 					?></div><!-- .dslca-editable-content --><?php

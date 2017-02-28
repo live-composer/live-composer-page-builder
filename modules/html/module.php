@@ -3503,7 +3503,7 @@ class DSLC_Html extends DSLC_Module {
 					$output_content = '<div class="dslc-notification dslc-green">' . __('Save and refresh the page to display the module safely.', 'live-composer-page-builder') . '</div>';
 				}
 
-				echo $output_content;
+				echo apply_filters( 'dslc_before_render', $output_content );
 
 			?></div><?php
 

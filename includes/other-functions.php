@@ -485,3 +485,19 @@ function dslc_admin_int_on() {
 }
 
 add_filter( 'dslc_admin_interface_on', 'dslc_admin_int_on', 1 );
+
+
+/**
+ * Filter textarea
+ *
+ * @param string $content Get textarea.
+ */
+function dslc_filter_textarea( $content ) {
+
+	$content = str_replace( '<lctextarea', '<textarea', $content );
+	$content = str_replace( '</lctextarea', '</textarea', $content );
+
+	return $content;
+}
+
+add_filter( 'dslc_before_render', 'dslc_filter_textarea' );
