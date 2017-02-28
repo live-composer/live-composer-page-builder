@@ -3,7 +3,7 @@ Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page, page builder plugin, drag-n-drop page builder
 Requires at least: 4.3
 Tested up to: 4.7.2
-Stable tag: 1.2.4
+Stable tag: 1.2.5
 License: GPLv3
 
 Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
@@ -133,6 +133,42 @@ Upcoming Releases:
 
 * [Please, report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
 * [You can download any previous version here](https://wordpress.org/plugins/live-composer-page-builder/developers/)
+
+= 1.2.5 - February 28th 2017 =
+
+= New: =
+
+* Added unique ID for every section. In the future updates it will help to improve the plugin performance.
+* Extension developers now have possibility to create description for the plugin setting panels
+* Added notice in the standard WP Editor to warn users to not make changes in the back-end.
+* New Shortcode module.
+
+= Improved: =
+
+* Added more margin options to the CONTENT module.
+* Issue [#589](https://github.com/livecomposer/live-composer-page-builder/issues/589): Minor optimization in the code generation functions
+* Issue [#577](https://github.com/livecomposer/live-composer-page-builder/issues/577): Improved editor messages: added PHP class
+* Issue [#604](https://github.com/livecomposer/live-composer-page-builder/issues/604): Improve function the_edit_template_link and button 'Disable Editor'
+
+= Bug fixes: =
+
+* Issue [#587](https://github.com/livecomposer/live-composer-page-builder/issues/587): Fixed a broken link in the Live Composer configuration notice.
+* Issue [#583](https://github.com/livecomposer/live-composer-page-builder/issues/583): Fixed broken comment form placeholders.
+* Issue [#581](https://github.com/livecomposer/live-composer-page-builder/issues/581): Inline editor - the wrong button hovers colors in some themes.
+* Issue [#579](https://github.com/livecomposer/live-composer-page-builder/issues/579): Image tab doesn't hide in the Info Box module settings.
+* Issue [#578](https://github.com/livecomposer/live-composer-page-builder/issues/578): Settings group wrapper doesn't hide in the responsive tab.
+* Issue [#574](https://github.com/livecomposer/live-composer-page-builder/issues/574): Infobox > Icon > Margin Right setting doesn't working
+* Issue [#573](https://github.com/livecomposer/live-composer-page-builder/issues/573): HTML element > insert -  textarea = broken module
+* Fixed the notice that appears when LC installed but settings never saved.
+* Updated Meta module to ignore private taxonomies (compatibility with Yoast WP Pro).
+* Make ‘std’ option in custom setting panel work as expected (needed for CPT extension to work properly).
+
+
+
+
+
+
+
 
 = 1.2.4 - February 14th 2017 =
 
