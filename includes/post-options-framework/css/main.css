@@ -163,7 +163,7 @@
 	display: block;
 }
 
-.lc-active #post-status-info, .lc-active #wp-content-editor-container {
+.lc-active #post-status-info, .lc-active #wp-content-editor-container, .lc-active .dslc-notice {
 	display: none;
 	opacity: 0;
 }
@@ -215,4 +215,23 @@
 
 #lc_content_wrap {
 	display: none;
+}
+
+/**
+ * Backed Content in WP Editor
+ */
+
+.dslc-notice {
+    background: #fff;
+    border-left: 4px solid #dc3232;
+    padding: 7px 0px 7px 10px;
+    font-size: 14px;
+    line-height: 1;
+    border-top: 1px solid #E8E5E5;
+    border-right: 1px solid #E8E5E5;
+}
+
+.dslc-notice a {
+	text-decoration: none;
+	font-weight: bold;
 }
