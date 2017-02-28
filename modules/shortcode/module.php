@@ -2898,7 +2898,7 @@ class DSLC_Shortcode extends DSLC_Module {
 		<?php
 
 		if ( empty( $options['content'] ) ) {
-			$output_content = '<div class="dslc-notification dslc-red">' . __( 'Please add your shortcode.', 'live-composer-page-builder' ) . '</div>';
+			$output_content = '<div class="dslc-notification dslc-red">' . __( 'Please add your shortcode in the module settings.', 'live-composer-page-builder' ) . '</div>';
 		} elseif ( $render_code ) {
 			$output_content = stripslashes( $options['content'] );
 			$output_content = do_shortcode( $output_content );
