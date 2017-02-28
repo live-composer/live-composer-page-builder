@@ -554,7 +554,7 @@ function dslc_notice( $wrapper ) {
 	$url = DSLC_EditorInterface::get_editor_link_url( get_the_ID() );
 
 	if ( is_admin() && is_array( $custom_fields ) && array_key_exists( 'dslc_code', $custom_fields ) ) {
-		$wrapper .= '</textarea><div class="lc-notice">This page was created in a page builder. <a target="_blank" href="'. $url . '">'.  __( 'Open in Live Composer', 'live-composer-page-builder' ) .'</a> to make any content or design changes.</div>';
+		$wrapper .= '</textarea><div class="dslc-notice">This page was created in a page builder. <a target="_blank" href="'. $url . '">'.  __( 'Open it in Live Composer', 'live-composer-page-builder' ) .'</a> to make any content or design changes.</div>';
 	}
 
 	return $wrapper;

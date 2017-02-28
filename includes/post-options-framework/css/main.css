@@ -163,7 +163,7 @@
 	display: block;
 }
 
-.lc-active #post-status-info, .lc-active #wp-content-editor-container, .lc-active .lc-notice {
+.lc-active #post-status-info, .lc-active #wp-content-editor-container, .lc-active .dslc-notice {
 	display: none;
 	opacity: 0;
 }
@@ -221,7 +221,7 @@
  * Backed Content in WP Editor
  */
 
-.lc-notice {
+.dslc-notice {
     background: #fff;
     border-left: 4px solid #dc3232;
     padding: 7px 0px 7px 10px;
@@ -231,7 +231,7 @@
     border-right: 1px solid #E8E5E5;
 }
 
-.lc-notice a {
+.dslc-notice a {
 	text-decoration: none;
 	font-weight: bold;
 }
