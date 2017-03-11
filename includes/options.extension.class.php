@@ -18,7 +18,7 @@ $dslc_extension; // Used in template
 class DSLC_Options_Extender {
 
 	private $extension_options = array();
-
+	protected $views = array();
 
 	/**
 	 * Returns option array
@@ -101,33 +101,31 @@ class DSLC_Options_Extender {
 
 	/**
 	 * Adds one submenu page
-	 * @param array $extension
+	 *
+	 * @param array $extension Options.
 	 */
 	private function add_submenu_page( $extension ) {
 
-		global $dslc_extension;
-		$dslc_extension = $extension;
-
-		add_submenu_page(
+		$submenu_page = add_submenu_page(
 			'dslc_plugin_options',
 			__( $extension['title'], 'live-composer-page-builder' ),
 			__( $extension['title'], 'live-composer-page-builder' ),
 			'manage_options',
 			'dslc_options_' . $extension['extension_id'],
-			array( $this, 'render_options_page' )
+			array( &$this, 'render_options_page' )
 		);
+
+		$this->views[ $submenu_page ] = $extension;
 	}
 
 	/**
 	 * Render options page
-	 * @param  array $extension
 	 */
 	function render_options_page() {
 
-		global $dslc_extension;
-		$extension = $dslc_extension;
+		$extension = $this->views[ current_filter() ];
 
-		// Include template
+		// Include template.
 		include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/options-extension-template.php';
 	}
 
