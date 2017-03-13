@@ -30,7 +30,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 			),
 		);
 
-		$posts_galleries = get_posts( array('post_type' => 'dslc_galleries') );
+		$posts_galleries = get_posts( array( 'numberposts' => -1, 'post_type' => 'dslc_galleries' ) );
 
 		foreach ($posts_galleries as $post) {
 
