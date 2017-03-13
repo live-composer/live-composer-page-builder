@@ -2247,5 +2247,8 @@ body.dslca-enabled .dslc-notification-box-has-timeout {
 		display: block;
 	}
 
+	.dslc-carousel .dslc-carousel-item {
+	    margin-left: 0 !important; /* https://github.com/live-composer/live-composer-page-builder/issues/555 */
+	}
 
 }
