@@ -926,6 +926,7 @@ class DSLC_Module {
 				'type' => 'text',
 				'section' => 'styling',
 				'tab' => 'Heading',
+				'ignored_by_preset' => true,
 			),
 			array(
 				'label' => 'Separator - Color',

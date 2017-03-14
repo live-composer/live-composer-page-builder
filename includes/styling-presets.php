@@ -117,9 +117,7 @@ function dslc_save_preset( $preset_name, $preset_code_raw, $module_id ) {
 
 				if ( isset( $preset_code_raw[ $module_option['id'] ] ) ) {
 
-					if ( 'view_all_link' === $module_option['id'] ) {
-						$preset_code[ $module_option['id'] ] = '#';
-					} else {
+					if ( ! $module_option['ignored_by_preset'] ) {
 						$preset_code[ $module_option['id'] ] = $preset_code_raw[ $module_option['id'] ];
 					}
 				}
