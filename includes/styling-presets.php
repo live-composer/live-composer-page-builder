@@ -116,7 +116,10 @@ function dslc_save_preset( $preset_name, $preset_code_raw, $module_id ) {
 			if ( ( isset( $module_option['section'] ) && 'functionality' !== $module_option['section'] ) && ( ! isset( $module_option['visibility'] ) || 'hidden' !== $module_option['visibility'] ) ) {
 
 				if ( isset( $preset_code_raw[ $module_option['id'] ] ) ) {
-					$preset_code[ $module_option['id'] ] = $preset_code_raw[ $module_option['id'] ];
+
+					if ( ! $module_option['ignored_by_preset'] ) {
+						$preset_code[ $module_option['id'] ] = $preset_code_raw[ $module_option['id'] ];
+					}
 				}
 			}
 		}
