@@ -49,21 +49,48 @@ class Editor_Messages {
 	 */
 	public function dslc_print_editor_messages() {
 	?>
-	    <div class="dslca_editor_messages_section">
-	    	<a href="#" class="dslca_editor_messages_title"><?php echo __( 'Live Composer Updates', 'live-composer-page-builder' ); ?></a>
-	    	<a href="#" class="dslca_editor_messages_hide"><span class="dslc-icon dslc-icon-remove"></span><?php echo __( 'Hide this Line', 'live-composer-page-builder' ); ?></a>
-	    	<ul id="editor_messages">
+		<?php
+
+		// If an option set in MySQL.
+		if ( false === get_option( 'dslc_editor_messages' ) ) {
+
+			$dslc_messages = $this->array_messages;
+			add_option( 'dslc_editor_messages', $dslc_messages );
+		}
+
+		// Get entire array.
+		$options_messages = get_option( 'dslc_editor_messages' );
+
+		// If any our add-ons are installed.
+		if ( function_exists( 'lcgooglemaps_plugin_init' ) ) {
+
+			if ( 0 === $options_messages['can_hide'] ) {
+
+				// Alter the options array appropriately.
+				$options_messages['can_hide'] = 1;
+
+				// Update entire array.
+				update_option( 'dslc_editor_messages', $options_messages );
+			}
+		} else {
+
+			// Alter the options array appropriately.
+			$options_messages['can_hide'] = 0;
+
+			// Update entire array.
+			update_option( 'dslc_editor_messages', $options_messages );
+		}
+
+		$hide_panel = $options_messages['can_hide'];
+
+		?>
+	    <div class="dslc-editor-messages-section">
+	    	<a href="#" class="dslc-editor-messages-title"><?php echo __( 'Live Composer Updates', 'live-composer-page-builder' ); ?></a>
+	    	<a href="#" data-can-hide="<?php echo $hide_panel;  ?>" class="dslc-editor-messages-hide"><span class="dslc-icon dslc-icon-remove"></span><?php echo __( 'Hide this Line', 'live-composer-page-builder' ); ?></a>
+	    	<ul id="editor-messages">
 	    		<?php
 
-	    		if ( false === get_option( 'dslc_editor_messages' ) ) {
-
-	    			$dslc_messages = $this->array_messages;
-	    			add_option( 'dslc_editor_messages', $dslc_messages );
-	    		}
-
-	    		$array = get_option( 'dslc_editor_messages' );
-
-	    		foreach ( $array as $key => $messages ) {
+	    		foreach ( $options_messages as $key => $messages ) {
 	    			if ( 'can_hide' !== $key ) {
 	    				foreach ( $messages as $message ) { ?>
 	    				<li>

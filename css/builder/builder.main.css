@@ -210,7 +210,6 @@ body a:focus {
 	-webkit-transition: bottom 0.3s;
 	-moz-transition: bottom 0.3s;
 	transition: bottom 0.3s;
-	margin-bottom: 40px;
 }
 
 .dslca-container,
@@ -4256,7 +4255,11 @@ div#scroller-stopper {
  * Display the editor messages
  */
 
-.dslca_editor_messages_section {
+.dslca-container.active-message-panel {
+	margin-bottom: 40px;
+}
+
+.dslc-editor-messages-section {
 	position: fixed;
 	bottom: 0;
 	width: 100%;
@@ -4265,9 +4268,10 @@ div#scroller-stopper {
 	color: #fff;
 	font-weight: 100;
 	background: #404a58;
+	display: none;
 }
 
-.dslca_editor_messages_title {
+.dslc-editor-messages-title {
     float: left;
     background: #303030;
     color: #fff;
@@ -4280,11 +4284,11 @@ div#scroller-stopper {
     letter-spacing: 1px;
 }
 
-a.dslca_editor_messages_title:hover {
+a.dslc-editor-messages-title:hover {
 	color: #fff;
 }
 
-#editor_messages {
+#editor-messages {
     font-size: 14px;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -4293,7 +4297,7 @@ a.dslca_editor_messages_title:hover {
     opacity: 0;
 }
 
-#editor_messages li {
+#editor-messages li {
     position: relative;
     padding: 13px 20px 11px 50px !important;
     margin: 0;
@@ -4301,7 +4305,7 @@ a.dslca_editor_messages_title:hover {
     font-size: 16px;
 }
 
-#editor_messages a {
+#editor-messages a {
     text-decoration: none;
     display: block;
     position: absolute;
@@ -4311,11 +4315,11 @@ a.dslca_editor_messages_title:hover {
     height: 100%;
 }
 
-#editor_messages strong {
+#editor-messages strong {
 	font-weight: 500;
 }
 
-#editor_messages .dslc-icon {
+#editor-messages .dslc-icon {
     font-size: 19px;
     margin-right: 10px;
     position: absolute;
@@ -4323,7 +4327,14 @@ a.dslca_editor_messages_title:hover {
     top: 12px;
 }
 
-.dslca_editor_messages_hide {
+#editor-messages .dslc-notice {
+    background: #d90a0a;
+    margin: 0;
+    padding: 12px 17px;
+    font-size: 16px;
+}
+
+.dslc-editor-messages-hide {
 	float: right;
     padding: 12px 17px;
     background: #283546;
@@ -4331,14 +4342,13 @@ a.dslca_editor_messages_title:hover {
     text-align: center;
     display: block;
     color: #fff;
-    display: none;
 }
 
-.dslca_editor_messages_hide .dslc-icon {
+.dslc-editor-messages-hide .dslc-icon {
 	font-size: 17px;
 	margin-right: 10px;
 }
 
-a.dslca_editor_messages_hide:hover {
+a.dslc-editor-messages-hide:hover {
     color: #fff;
 }
