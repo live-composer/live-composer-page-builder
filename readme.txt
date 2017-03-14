@@ -2,8 +2,8 @@
 Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page, page builder plugin, drag-n-drop page builder
 Requires at least: 4.3
-Tested up to: 4.7.2
-Stable tag: 1.2.5
+Tested up to: 4.7.3
+Stable tag: 1.2.6
 License: GPLv3
 
 Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
@@ -133,6 +133,27 @@ Upcoming Releases:
 
 * [Please, report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
 * [You can download any previous version here](https://wordpress.org/plugins/live-composer-page-builder/developers/)
+
+= 1.2.6 - March 14th 2017 =
+
+= Bug fixes: =
+
+* Issue [#630](https://github.com/livecomposer/live-composer-page-builder/issues/630): Custom setting panels in WP Admin now render properly settings for add-ons (used by developers who create extensions for Live Composer)
+* Issue [#591](https://github.com/livecomposer/live-composer-page-builder/issues/591): Module presets: Heading URL should not be copied in style presets between modules.
+* Issue [#584](https://github.com/livecomposer/live-composer-page-builder/issues/584): Module presets: Problem with styling presets and default values (Social Links Module + Presets)
+* Issue [#621](https://github.com/livecomposer/live-composer-page-builder/issues/621): Module Gallery slider: The "Display the pictures from" feature are limited to few options.
+
+Thanks to the next contributors for helping with this update:
+- [delorimier](https://github.com/delorimier)
+- [Slobodan Kustrimovic](https://github.com/BobaWebDev)
+- [Karen Totten](https://github.com/ktotten)
+
+
+
+
+
+
+
 
 = 1.2.5 - February 28th 2017 =
 
