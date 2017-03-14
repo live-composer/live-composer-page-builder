@@ -17,10 +17,18 @@ var massagesTicker = jQuery('#editor-messages').newsTicker({
 
 jQuery(document).ready(function($){
 
+    /**
+     * If any our add-ons are not installed.
+     */
+
     $(document).on( 'click', '.dslc-editor-messages-hide', function(e){
 
         $('#editor-messages').html('<div class="dslc-notice">Please install and activate any our add-on.</div>');
     });
+
+    /**
+     * Hide Panel
+     */
 
     var hide_panel = $('.dslc-editor-messages-hide').data('can-hide');
 

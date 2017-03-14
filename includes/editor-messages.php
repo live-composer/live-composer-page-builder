@@ -62,7 +62,15 @@ class Editor_Messages {
 		$options_messages = get_option( 'dslc_editor_messages' );
 
 		// If any our add-ons are installed.
-		if ( function_exists( 'lcgooglemaps_plugin_init' ) ) {
+		if ( function_exists( 'lc_gallery_grid_module_init' ) ||
+			function_exists( 'lcgooglemaps_plugin_init' ) ||
+			function_exists( 'sklc_linecons_alter_icons' ) ||
+			function_exists( 'sklc_addon_anim_filter' ) ||
+			function_exists( 'lc_video_embed_module_init' ) ||
+			function_exists( 'sklc_addon_prnep_register_module' ) ||
+			function_exists( 'sklc_ppcw_options' ) ||
+			function_exists( 'lcwoo_plugin_init' )
+		) {
 
 			if ( 0 === $options_messages['can_hide'] ) {
 
