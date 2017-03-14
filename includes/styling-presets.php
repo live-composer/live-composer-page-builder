@@ -54,7 +54,7 @@ function dslc_presets_load( $settings ) {
 		if ( $preset_data ) {
 
 			// Get preset settings.
-			$preset_settings = dslc_json_decode( $preset_data['code'] );
+			$preset_settings = dslc_json_decode( $preset_data['code'], $ignore_migration = true );
 			// $preset_settings = maybe_unserialize( base64_decode( $preset_data['code'] ) );
 
 			$preset_settings_stripped = $preset_settings;
@@ -91,7 +91,7 @@ function dslc_save_preset( $preset_name, $preset_code_raw, $module_id ) {
 	$preset_id = strtolower( str_replace( ' ', '-', $preset_name ) );
 
 	// Clean up ( step 1 - get data ).
-	$preset_code_raw = dslc_json_decode( $preset_code_raw );
+	$preset_code_raw = dslc_json_decode( $preset_code_raw, $ignore_migration = true );
 	$preset_code = array();
 
 	// The ID of the module to add.

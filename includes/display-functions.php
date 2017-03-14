@@ -920,7 +920,7 @@ function dslc_is_json( $string ) {
  * @param  String $raw_code Can be JSON, base64+serialized array, or serialized array.
  * @return Array/Bool       Code as array or FALSE if not posible to decode.
  */
-function dslc_json_decode( $raw_code ) {
+function dslc_json_decode( $raw_code, $ignore_migration = false ) {
 
 	$decoded = false;
 
@@ -960,6 +960,12 @@ function dslc_json_decode( $raw_code ) {
 			// Add a marker indicating that this module
 			// was imported from shortcode format.
 			$decoded['code_version'] = 1;
+
+			// Preset is always being stored in base64 format,
+			// so we need to ignore code version parameter as it's not relevant.
+			if ( $ignore_migration ) {
+				unset( $decoded['code_version'] );
+			}
 		}
 	} else {
 		// Decode JSON.
