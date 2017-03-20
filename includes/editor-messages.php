@@ -1,4 +1,9 @@
 <?php
+/**
+ * Editor Messages
+ *
+ * @package LiveComposer
+ */
 
 /**
  * Main Editor_Messages Class.
@@ -7,9 +12,55 @@ class Editor_Messages {
 
 	/**
 	 * Messages
+	 *
+	 * @var array
 	 */
-	public $array_messages = array(
-		'messages' => array(
+	public $messages = array();
+
+	/**
+	 * Can hide
+	 *
+	 * @var bool
+	 */
+	public $can_hide = 0;
+
+	/**
+	 * Construct
+	 */
+	public function __construct() {
+		$messages = $this->get_messages();
+
+		if ( empty( $messages ) ) {
+			$this->on_plugin_install();
+		}
+
+		$this->set_can_hide();
+	}
+
+	/**
+	 * Get all messages
+	 */
+	public function get_messages() {
+		return get_option( 'dslc_editor_messages' );
+	}
+
+	/**
+	 * Add all messages
+	 *
+	 * @param array $messages Default messages.
+	 */
+	public function add_messages( $messages ) {
+
+		if ( false === get_option( 'dslc_editor_messages' ) ) {
+			add_option( 'dslc_editor_messages', $messages );
+		}
+	}
+
+	/**
+	 * Plugin install
+	 */
+	public function on_plugin_install() {
+		$default_messages = array(
 			'message_1' => array(
 				'text' => 'Our WooCommerce integration add-on is almost ready for realese. Price growths with every update. <strong>Buy it today to save 30%!</strong>',
 				'link' => 'https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=editing-sreen&utm_medium=editor-messages&utm_campaign=woo-integration',
@@ -40,28 +91,16 @@ class Editor_Messages {
 				'icon' => 'dslc-icon-link',
 				'color' => '',
 			),
-		),
-		'can_hide' => 0,
-	);
+		);
+
+		$this->add_messages( $default_messages );
+	}
 
 	/**
-	 * Display the editor messages
+	 * Our addon active
 	 */
-	public function dslc_print_editor_messages() {
-	?>
-		<?php
+	public function is_addon_active() {
 
-		// If an option set in MySQL.
-		if ( false === get_option( 'dslc_editor_messages' ) ) {
-
-			$dslc_messages = $this->array_messages;
-			add_option( 'dslc_editor_messages', $dslc_messages );
-		}
-
-		// Get entire array.
-		$options_messages = get_option( 'dslc_editor_messages' );
-
-		// If any our add-ons are installed.
 		if ( function_exists( 'lc_gallery_grid_module_init' ) ||
 			function_exists( 'lcgooglemaps_plugin_init' ) ||
 			function_exists( 'sklc_linecons_alter_icons' ) ||
@@ -69,44 +108,59 @@ class Editor_Messages {
 			function_exists( 'lc_video_embed_module_init' ) ||
 			function_exists( 'sklc_addon_prnep_register_module' ) ||
 			function_exists( 'sklc_ppcw_options' ) ||
-			function_exists( 'lcwoo_plugin_init' )
+			function_exists( 'lcwoo_plugin_init' ) ||
+			class_exists( 'LC_Before_After_Image' )
 		) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
-			if ( 0 === $options_messages['can_hide'] ) {
+	/**
+	 * Set can hide
+	 */
+	public function set_can_hide() {
 
-				// Alter the options array appropriately.
-				$options_messages['can_hide'] = 1;
-
-				// Update entire array.
-				update_option( 'dslc_editor_messages', $options_messages );
-			}
+		if ( false === get_option( 'dslc_editor_messages_can_hide' ) ) {
+			add_option( 'dslc_editor_messages_can_hide', $this->can_hide );
 		} else {
 
-			// Alter the options array appropriately.
-			$options_messages['can_hide'] = 0;
+			$addon_active = $this->is_addon_active();
 
-			// Update entire array.
-			update_option( 'dslc_editor_messages', $options_messages );
+			if ( true === $addon_active ) {
+				update_option( 'dslc_editor_messages_can_hide', 1 );
+			} else {
+				update_option( 'dslc_editor_messages_can_hide', 0 );
+			}
 		}
+	}
 
-		$hide_panel = $options_messages['can_hide'];
+	/**
+	 * Get can hide
+	 */
+	public function get_can_hide() {
+		return get_option( 'dslc_editor_messages_can_hide' );
+	}
 
-		?>
+	/**
+	 * Display the editor messages
+	 */
+	public function print_messages() {
+	?>
 	    <div class="dslc-editor-messages-section">
 	    	<a href="#" class="dslc-editor-messages-title"><?php echo __( 'Live Composer Updates', 'live-composer-page-builder' ); ?></a>
-	    	<a href="#" data-can-hide="<?php echo $hide_panel;  ?>" class="dslc-editor-messages-hide"><span class="dslc-icon dslc-icon-remove"></span><?php echo __( 'Hide this Line', 'live-composer-page-builder' ); ?></a>
+	    	<a href="#" data-can-hide="<?php echo $this->get_can_hide();  ?>" class="dslc-editor-messages-hide"><span class="dslc-icon dslc-icon-remove"></span><?php echo __( 'Hide this Line', 'live-composer-page-builder' ); ?></a>
 	    	<ul id="editor-messages">
 	    		<?php
 
-	    		foreach ( $options_messages as $key => $messages ) {
-	    			if ( 'can_hide' !== $key ) {
-	    				foreach ( $messages as $message ) { ?>
-	    				<li>
-	    					<span class="dslc-icon <?php echo $message['icon']; ?>"></span><?php echo $message['text']; ?><a href="<?php echo $message['link']; ?>" target="_blank"></a>
-	    				</li>
-	    			<?php }
-	    			}
-	    		}
+	    		$messages = $this->get_messages();
+
+	    		foreach ( $messages as $key => $message ) { ?>
+					<li>
+						<span class="dslc-icon <?php echo $message['icon']; ?>"></span><?php echo $message['text']; ?><a href="<?php echo $message['link']; ?>" target="_blank"></a>
+					</li>
+				<?php }
 	    		?>
 	    	</ul>
 	    </div>

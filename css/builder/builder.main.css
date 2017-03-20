@@ -4334,6 +4334,11 @@ a.dslc-editor-messages-title:hover {
     font-size: 16px;
 }
 
+#editor-messages .dslc-notice a {
+	position: relative;
+	color: #fff;
+}
+
 .dslc-editor-messages-hide {
 	float: right;
     padding: 12px 17px;

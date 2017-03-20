@@ -23,14 +23,28 @@ jQuery(document).ready(function($){
 
     $(document).on( 'click', '.dslc-editor-messages-hide', function(e){
 
-        $('#editor-messages').html('<div class="dslc-notice">Please install and activate any our add-on.</div>');
+
+        var hide_panel = $('.dslc-editor-messages-hide').data('can-hide');
+
+        if ( hide_panel == '1' ) {
+            $('.dslc-editor-messages-section').css('display', 'none');
+            $('.dslca-container').removeClass( "active-message-panel" );
+        } else {
+            /*$('.dslc-editor-messages-section').css('display', 'block');
+            $('.dslca-container').addClass( "active-message-panel" );*/
+
+            $('#editor-messages').html('<div class="dslc-notice"><a href="https://livecomposerplugin.com/add-ons/?utm_source=editing-sreen&utm_medium=editor-messages&utm_campaign=add-ons" target="_blank">You can hide this panel once you have any of our premium add-ons installed.</a></div>');
+        }
     });
+
+    $('.dslc-editor-messages-section').css('display', 'block');
+    $('.dslca-container').addClass( "active-message-panel" );
 
     /**
      * Hide Panel
      */
 
-    var hide_panel = $('.dslc-editor-messages-hide').data('can-hide');
+/*    var hide_panel = $('.dslc-editor-messages-hide').data('can-hide');
 
     if ( hide_panel == '1' ) {
         $('.dslc-editor-messages-section').css('display', 'none');
@@ -38,5 +52,5 @@ jQuery(document).ready(function($){
     } else {
         $('.dslc-editor-messages-section').css('display', 'block');
         $('.dslca-container').addClass( "active-message-panel" );
-    }
+    }*/
 });

@@ -403,7 +403,7 @@ function dslc_display_composer() {
 
 		// Output editor messages.
 		$editor_messages = new Editor_Messages();
-		echo $editor_messages->dslc_print_editor_messages();
+		echo $editor_messages->print_messages();
 
 	endif;
 
