@@ -406,36 +406,6 @@ function dslc_display_composer() {
 
 		if ( ! $editor_messages->get_hidden() ) {
 			echo $editor_messages->print_messages();
-
-			/*
-			$message = array(
-				'test' => array(
-					'text' => 'Hi, Dima!',
-					'link' => 'https://livecomposerplugin.com/',
-					'icon' => 'dslc-icon-shopping-cart',
-					'color' => '',
-				),
-				'test2' => array(
-					'text' => 'Hi, Dima 2!',
-					'link' => 'https://livecomposerplugin.com/',
-					'icon' => 'dslc-icon-shopping-cart',
-					'color' => '',
-				),
-				'test3' => array(
-					'text' => 'Hi, Dima 3!',
-					'link' => 'https://livecomposerplugin.com/',
-					'icon' => 'dslc-icon-shopping-cart',
-					'color' => '',
-				),
-			);
-
-			$editor_messages->add_messages( $message );
-			*/
-
-			/*
-			$keys = array( 'test' );
-			$editor_messages->delete_messages( $keys );
-			*/
 		}
 
 	endif;

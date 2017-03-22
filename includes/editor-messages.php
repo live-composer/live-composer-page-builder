@@ -38,7 +38,7 @@ class Editor_Messages {
 
 		$this->set_can_hide();
 
-		// add_action( 'wp_ajax_dslc-ajax-set-hidden', array( $this, 'ajax_set_hidden' ) );
+		add_action( 'wp_ajax_dslc-ajax-set-hidden', array( $this, 'ajax_set_hidden' ) );
 	}
 
 	/**
@@ -218,17 +218,4 @@ class Editor_Messages {
 	}
 }
 
-/**
- * Ajax set hidden ( panel )
- */
-function ajax_set_hidden() {
-
-	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
-
-		$editor_messages = new Editor_Messages();
-		$editor_messages->set_hidden();
-
-		exit;
-	}
-}
-add_action( 'wp_ajax_dslc-ajax-set-hidden', 'ajax_set_hidden' );
+$editor_messages = new Editor_Messages();

@@ -29,11 +29,6 @@ jQuery(document).ready(function($){
                 DSLCAjax.ajaxurl,
                 {
                     action : 'dslc-ajax-set-hidden',
-                    dslc : 'active'
-                },
-                function( response ) {
-
-                    console.log( response );
                 }
             );
 
