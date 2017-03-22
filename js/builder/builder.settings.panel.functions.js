@@ -951,7 +951,7 @@ function dslc_module_options_hideshow_tabs() {
 				jQuery('.dslca-module-edit-options-tabs').show();
 			} else {
 				jQuery('.dslca-module-edit-option[data-section="styling"]').css({ visibility : 'hidden' });
-				jQuery('.dslca-module-edit-option[data-tab]').css( 'visibility', 'hidden' );
+				jQuery('.dslca-module-control-group.dslca-module-edit-option').css( 'visibility', 'hidden' );
 				jQuery('.dslca-module-edit-options-tabs').hide();
 				dslcCustomCSS.css({ visibility : 'visible' });
 			}
