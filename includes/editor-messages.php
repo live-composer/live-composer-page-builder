@@ -5,10 +5,16 @@
  * @package LiveComposer
  */
 
+// Prevent direct access to the file.
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	exit;
+}
+
 /**
  * Main Editor_Messages Class.
  */
-class Editor_Messages {
+class LC_Editor_Messages {
 
 	/**
 	 * Messages
@@ -18,11 +24,11 @@ class Editor_Messages {
 	public $messages = array();
 
 	/**
-	 * Can hide
+	 * Premium user
 	 *
 	 * @var bool
 	 */
-	public $can_hide = false;
+	public $premium_user = false;
 
 	/**
 	 * Construct
@@ -36,9 +42,9 @@ class Editor_Messages {
 			$this->messages = $this->get_messages();
 		}
 
-		$this->set_can_hide();
-
-		add_action( 'wp_ajax_dslc-ajax-set-hidden', array( $this, 'ajax_set_hidden' ) );
+		if ( $this->is_premium_user() ) {
+			$this->premium_user = true;
+		}
 	}
 
 	/**
@@ -153,21 +159,20 @@ class Editor_Messages {
 	}
 
 	/**
-	 * Set can hide
+	 * Premium User
 	 */
-	public function set_can_hide() {
-		if ( true === $this->is_addon_active() ) {
-			$this->can_hide = true;
-		} else {
-			$this->can_hide = false;
-		}
-	}
+	public function is_premium_user() {
 
-	/**
-	 * Get can hide
-	 */
-	public function get_can_hide() {
-		return $this->can_hide;
+		if ( true == get_option( 'dslc_premium_user' ) ) {
+			return true;
+		} else {
+			if ( true == $this->is_addon_active() ) {
+				update_option( 'dslc_premium_user', true );
+				return true;
+			} else {
+				return false;
+			}
+		}
 	}
 
 	/**
@@ -178,34 +183,13 @@ class Editor_Messages {
 	}
 
 	/**
-	 * Set hidden ( panel )
-	 */
-	public function set_hidden() {
-		return update_option( 'dslc_editor_messages_hidden', true );
-	}
-
-	/**
-	 * Ajax set hidden ( panel )
-	 */
-	public function ajax_set_hidden() {
-
-		if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
-
-			$editor_messages = new Editor_Messages();
-			$editor_messages->set_hidden();
-
-			exit;
-		}
-	}
-
-	/**
 	 * Display the editor messages
 	 */
 	public function print_messages() {
 	?>
 	    <div class="dslc-editor-messages-section">
 	    	<a href="#" class="dslc-editor-messages-title"><?php echo __( 'Live Composer Updates', 'live-composer-page-builder' ); ?></a>
-	    	<a href="#" data-can-hide="<?php echo $this->get_can_hide();  ?>" data-hidden-panel="<?php echo $this->get_hidden();  ?>" class="dslc-editor-messages-hide"><span class="dslc-icon dslc-icon-remove"></span><?php echo __( 'Hide this Line', 'live-composer-page-builder' ); ?></a>
+	    	<a href="#" data-can-hide="<?php echo $this->premium_user; ?>" class="dslc-editor-messages-hide"><span class="dslc-icon dslc-icon-remove"></span><?php echo __( 'Hide this', 'live-composer-page-builder' ); ?></a>
 	    	<ul id="editor-messages">
 	    		<?php foreach ( $this->messages as $key => $message ) { ?>
 					<li>
@@ -217,5 +201,3 @@ class Editor_Messages {
 	<?php
 	}
 }
-
-$editor_messages = new Editor_Messages();

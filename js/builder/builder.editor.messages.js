@@ -19,7 +19,6 @@ jQuery(document).ready(function($){
 
     $(document).on( 'click', '.dslc-editor-messages-hide', function(e){
 
-
         var hide_panel = $('.dslc-editor-messages-hide').data('can-hide');
 
         if ( hide_panel == '1' ) {
@@ -28,7 +27,7 @@ jQuery(document).ready(function($){
 
                 DSLCAjax.ajaxurl,
                 {
-                    action : 'dslc-ajax-set-hidden',
+                    action : 'dslc-ajax-hidden-panel',
                 }
             );
 

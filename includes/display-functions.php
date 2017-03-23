@@ -402,7 +402,7 @@ function dslc_display_composer() {
 		<?php
 
 		// Output editor messages.
-		$editor_messages = new Editor_Messages();
+		$editor_messages = new LC_Editor_Messages();
 
 		if ( ! $editor_messages->get_hidden() ) {
 			echo $editor_messages->print_messages();
