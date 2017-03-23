@@ -189,8 +189,6 @@
 	font-size: 15px;
 }
 
-
-
 /**
  * ----------------------------------------------------------------------
  * New Panel Styles for the LC options seciton
@@ -321,6 +319,106 @@
 
 /**
  * ----------------------------------------------------------------------
+ * Panel Tab Seo
+ */
+
+.dslc-panel-green {
+    background: #70b853;
+    box-shadow: none;
+    border: 0;
+    padding: 36px 3% 36px 3%;
+}
+
+.dslc-panel-green .dslc-tab-seo-hide {
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: 1px;
+    border: 2px solid #fff;
+    padding: 5px 10px;
+    float: right;
+}
+
+.dslc-panel-green .dslc-tab-seo-hide:hover {
+    cursor: pointer;
+    background: #78d75d;
+    border: 2px solid #78d75d;
+}
+
+.dslc-panel-green .dslc-panel-content {
+    margin: 0;
+    max-width: 1485px;
+}
+
+.dslc-panel-green h2 {
+    text-align: center;
+    color: #fff;
+    font-size: 35px;
+    line-height: 1;
+    margin-bottom: 25px;
+}
+
+.dslc-panel-green .about-description {
+    color: #fff;
+    text-align: center;
+    font-size: 20px;
+    letter-spacing: 1px;
+}
+
+.dslc-panel-green .dslc-notice {
+    padding-top: 8px;
+    text-align: center;
+}
+
+.dslc-panel-green .dslc-notice a {
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+#dslc-seo-search {
+    padding-top: 20px;
+    margin-left: 37%;
+}
+
+#dslc-seo-search label {
+    font-size: 15px;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+#dslc-seo-search input[type="text"] {
+    font-size: 16px;
+    height: 46px;
+    line-height: 1;
+    padding: 10px 17px;
+    width: 40%;
+    border: 0;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+#dslc-seo-search button[type="submit"] {
+    font-size: 16px;
+    height: 46px;
+    line-height: 1;
+    padding: 10px 40px 10px 40px;
+    border: 0;
+    background: #409926;
+    color: #fff;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    width: 40%;
+    margin-top: 5px;
+}
+
+#dslc-seo-search button[type="submit"]:hover {
+    cursor: pointer;
+    background: #78d75d;
+}
+
+/**
+ * ----------------------------------------------------------------------
  * New LC is Coming Panel
  */
 
@@ -392,7 +490,6 @@ display: inline-block;
 	top: 28px;
 	width: 80px;
 }
-
 
 /**
  * ----------------------------------------------------------------------

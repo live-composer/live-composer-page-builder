@@ -78,6 +78,11 @@ function dslc_plugin_options_display( $tab = '' ) {
 
 		$anchor = sanitize_text_field( @$_GET['anchor'] );
 		$anchor = '' !== $anchor ? $anchor : 'dslc_getting_started';
+
+		// Tab Seo.
+		include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-seo.php';
+		$tab_seo = new LC_Settings_Tab_Seo();
+
 		?>
 		<a name="dslc-top"></a>
 		<h2 class="nav-tab-wrapper dslc-settigns-tabs" id="dslc-tabs">
@@ -87,6 +92,9 @@ function dslc_plugin_options_display( $tab = '' ) {
 			<a href="#" data-nav-to="tab-themes" class="nav-tab <?php echo 'dslc_themes' === $anchor ? 'nav-tab-active' : ''; ?>"><?php  echo esc_html__( 'Themes', 'live-composer-page-builder' ) . ' <span class="tag">' . esc_html__( 'Free', 'live-composer-page-builder' ) . '</span>'; ?></a>
 			<a href="#" data-nav-to="tab-designs" class="nav-tab <?php echo 'dslc_designs' === $anchor ? 'nav-tab-active' : ''; ?>"><?php  echo esc_html__( 'Designs', 'live-composer-page-builder' ) . ' <span class="tag">' . esc_html__( 'New', 'live-composer-page-builder' ) . '</span>'; ?></a>
 			<a href="#" data-nav-to="tab-docs" class="nav-tab <?php echo 'dslc_docs' === $anchor ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Docs &amp; Support', 'live-composer-page-builder' ) ?></a>
+			<?php if ( ! $tab_seo->get_hidden() ) { ?>
+			<a href="#" data-nav-to="tab-seo" class="nav-tab <?php echo 'dslc_seo' === $anchor ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Site SEO', 'live-composer-page-builder' ) ?></a>
+			<?php } ?>
 		</h2>
 
 
@@ -115,8 +123,12 @@ function dslc_plugin_options_display( $tab = '' ) {
 				<div class="tab" id="tab-for-tab-docs">
 					<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-docs.php'; ?>
 				</div>
-
-
+				<!-- Site Seo tab -->
+				<?php if ( ! $tab_seo->get_hidden() ) { ?>
+				<div class="tab" id="tab-for-tab-seo">
+					<?php echo $tab_seo->print_tab_seo(); ?>
+				</div>
+				<?php } ?>
 		</div>
 	</div><!-- /.wrap -->
 	<script>
