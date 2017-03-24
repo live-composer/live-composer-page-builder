@@ -2776,7 +2776,7 @@ class DSLC_Downloads extends DSLC_Module {
 														<?php if ( $post_elements == 'all' || in_array( 'button', $post_elements ) ) : ?>
 
 															<div class="dslc-download-download">
-																<a target="_blank" class="dslc-download-count-hook" data-post-id="<?php echo get_the_ID(); ?>" href="<?php echo $download_link; ?>">
+																<a target="_blank" class="dslc-download-count-hook" data-post-id="<?php echo get_the_ID(); ?>" href="<?php echo $download_link; ?>" download>
 																	<?php if ( isset( $options['button_icon_id'] ) && $options['button_icon_id'] != '' ) : ?>
 																		<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 																	<?php endif; ?>
@@ -2869,7 +2869,7 @@ class DSLC_Downloads extends DSLC_Module {
 										<?php if ( ( $post_elements == 'all' || in_array( 'button', $post_elements ) ) && $download_link ) : ?>
 
 											<div class="dslc-download-download">
-												<a target="_blank" class="dslc-download-count-hook" data-post-id="<?php echo get_the_ID(); ?>" href="<?php echo $download_link; ?>">
+												<a target="_blank" class="dslc-download-count-hook" data-post-id="<?php echo get_the_ID(); ?>" href="<?php echo $download_link; ?>" download>
 													<?php if ( isset( $options['button_icon_id'] ) && $options['button_icon_id'] != '' ) : ?>
 														<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 													<?php endif; ?>
