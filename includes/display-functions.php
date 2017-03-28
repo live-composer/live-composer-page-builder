@@ -1312,8 +1312,16 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1 ) {
 		}
 	}
 
-	//data-section-id='. $atts['section_instance_id'] . '
-	$output = '
+	$output = '';
+
+	if ( ! $dslc_active ) {
+
+		// Before Section.
+		$before_section_content = '';
+		$output .= apply_filters( 'dslc_before_section', $before_section_content, $atts );
+	}
+
+	$output .= '
 		<div ' . $section_id_output . ' class="dslc-modules-section ' . $a_container_class . $parallax_class . $section_class . $extra_classes . '" style="' . dslc_row_get_style( $atts ) . '" data-section-id="' . $atts['section_instance_id'] . '">
 
 				'.$bg_video . '
@@ -1343,6 +1351,13 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1 ) {
 		}
 
 	$output .= '</div>';
+
+	if ( ! $dslc_active ) {
+
+		// After Section.
+		$after_section_content = '';
+		$output .= apply_filters( 'dslc_after_section', $after_section_content, $atts );
+	}
 
 	// Return the output
 	return $output;

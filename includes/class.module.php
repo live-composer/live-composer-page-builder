@@ -2075,6 +2075,13 @@ class DSLC_Module {
 		// Turn module class array into string.
 		$module_class = implode( ' ', $module_class_arr );
 
+		if ( ! $dslc_active ) {
+
+			// Before Module.
+			$before_module_content = '';
+			echo apply_filters( 'dslc_before_module', $before_module_content, $options );
+		}
+
 		?>
 
 		<div id="dslc-module-<?php echo esc_attr( $options['module_instance_id'] ); ?>" class="<?php echo esc_attr( $module_class ); ?>" data-module-id="<?php echo esc_attr( $options['module_instance_id'] ); ?>" data-dslc-module-id="<?php echo esc_attr( $this->module_id ); ?>" data-dslc-module-size="<?php echo esc_attr( $data_attr_size ); ?>" data-dslc-anim="<?php echo esc_attr( $options['css_anim'] ); ?>" data-dslc-anim-delay="<?php echo esc_attr( $options['css_anim_delay'] ); ?>" data-dslc-anim-duration="<?php echo esc_attr( $options['css_anim_duration'] ); ?>"  data-dslc-anim-easing="<?php echo esc_attr( $options['css_anim_easing'] ); ?>" data-dslc-preset="<?php echo esc_attr( $options['css_load_preset'] ); ?>" <?php echo $title_attr; ?>>
@@ -2143,6 +2150,8 @@ class DSLC_Module {
 	}
 
 	function module_end( $user_options ) {
+
+		global $dslc_active;
 
 		$options = array();
 		$options_ids = array();
@@ -2276,6 +2285,13 @@ class DSLC_Module {
 
 		</div><!-- .dslc-module -->
 		<?php
+
+		if ( ! $dslc_active ) {
+
+			// After Module.
+			$after_module_content = '';
+			echo apply_filters( 'dslc_after_module', $after_module_content, $user_options );
+		}
 
 		global $dslc_should_filter;
 		$dslc_should_filter = true;
