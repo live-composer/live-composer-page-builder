@@ -25,8 +25,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-
-
 /**
  * Add/display a new module section
  *
@@ -723,3 +721,16 @@ function dslc_ajax_save_preset() {
 		exit;
 	}
 } add_action( 'wp_ajax_dslc-ajax-save-preset', 'dslc_ajax_save_preset' );
+
+/**
+ * Ajax set hidden ( panel )
+ */
+function dslc_ajax_hidden_panel() {
+
+	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+
+		update_option( 'dslc_editor_messages_hidden', true );
+
+		exit;
+	}
+} add_action( 'wp_ajax_dslc-ajax-hidden-panel', 'dslc_ajax_hidden_panel' );
