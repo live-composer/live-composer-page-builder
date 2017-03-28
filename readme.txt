@@ -3,7 +3,7 @@ Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page, page builder plugin, drag-n-drop page builder
 Requires at least: 4.3
 Tested up to: 4.7.3
-Stable tag: 1.2.6
+Stable tag: 1.2.7
 License: GPLv3
 
 Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
@@ -134,6 +134,33 @@ Upcoming Releases:
 * [Please, report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
 * [You can download any previous version here](https://wordpress.org/plugins/live-composer-page-builder/developers/)
 
+= 1.2.7 - March 27th 2017 =
+
+= Bug fixes: =
+* Issue [#645](https://github.com/livecomposer/live-composer-page-builder/issues/645): Fixed bug in THE CONTENT and HTML modules (can't open Functionality tab)
+* Issue [#640](https://github.com/livecomposer/live-composer-page-builder/issues/640): Broken border color = active control in the navigation module
+* Issue [#628](https://github.com/livecomposer/live-composer-page-builder/issues/628): Clicking on the download button now downloads a file instead of opening it in the new tab.
+* Issue [#598](https://github.com/livecomposer/live-composer-page-builder/issues/598): Border controls are broken for active items in the Posts Grid > Filters
+* Issue [#555](https://github.com/livecomposer/live-composer-page-builder/issues/555): Woo Products Carousel showing part of the previous image
+
+= New: =
+* Issue [#642](https://github.com/livecomposer/live-composer-page-builder/issues/642): Added a new filters for developers to insert custom HTML before and after any module or section.
+
+= Improved: =
+* Issue [#626](https://github.com/livecomposer/live-composer-page-builder/issues/626): Possibility to hide promo messages panel in the Live Composer.
+
+Thanks to the next contributors for helping with this update:
+* [Silcarus](https://github.com/Silcarus)
+* [Janki Gajera](https://github.com/jgajera)
+* [ruut95](https://github.com/ruut95)
+
+
+
+
+
+
+
+
 = 1.2.6 - March 14th 2017 =
 
 = Bug fixes: =
@@ -144,9 +171,9 @@ Upcoming Releases:
 * Issue [#621](https://github.com/livecomposer/live-composer-page-builder/issues/621): Module Gallery slider: The "Display the pictures from" feature are limited to few options.
 
 Thanks to the next contributors for helping with this update:
-- [delorimier](https://github.com/delorimier)
-- [Slobodan Kustrimovic](https://github.com/BobaWebDev)
-- [Karen Totten](https://github.com/ktotten)
+* [delorimier](https://github.com/delorimier)
+* [Slobodan Kustrimovic](https://github.com/BobaWebDev)
+* [Karen Totten](https://github.com/ktotten)
 
 
 
