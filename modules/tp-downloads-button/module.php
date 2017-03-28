@@ -534,7 +534,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 					<?php if ( $show_fake ) : ?>
 					<a href="#">
 					<?php else : ?>
-					<a target="_blank" class="dslc-download-count-hook" data-post-id="<?php echo $post_id; ?>" href="<?php echo $download_link; ?>">
+					<a target="_blank" class="dslc-download-count-hook" data-post-id="<?php echo $post_id; ?>" href="<?php echo $download_link; ?>" download>
 					<?php endif; ?>
 						<?php if ( isset( $options['button_icon_id'] ) && $options['button_icon_id'] != '' ) : ?>
 							<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
