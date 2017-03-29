@@ -8,6 +8,7 @@
  * - dslc_row_get_options_fields ( Output hidden text input elements that will be used as data storage. )
  * - dslc_row_get_style ( Generate CSS styles for the ROW )
  * - dslc_row_get_initial_style ( Get initial ( default ) row style )
+ * - dslc_get_section_help ( Get control help )
  *
  * @package LiveComposer
  */
@@ -86,7 +87,12 @@ function dslc_row_display_options() {
 		?>
 		<div class="dslca-modules-section-edit-option <?php echo esc_attr( $option_type_class ) . esc_attr( $extra_class ); ?>" data-id="<?php echo esc_attr( $row_option['id'] ); ?>">
 
-			<span class="dslca-modules-section-edit-label"><?php echo esc_html( $row_option['label'] ); ?></span>
+			<?php if ( isset( $row_option['help'] ) ) : ?>
+				<div class="dslca-modules-section-edit-field-ttip-content"><?php echo $row_option['help']; ?></div>
+				<span class="dslca-modules-section-edit-label"><?php echo esc_html( $row_option['label'] ); echo dslc_get_section_help(); ?></span>
+			<?php else : ?>
+				<span class="dslca-modules-section-edit-label"><?php echo esc_html( $row_option['label'] ); ?></span>
+			<?php endif; ?>
 
 			<?php if ( 'text' === $row_option['type'] ) : ?>
 
@@ -435,4 +441,14 @@ function dslc_row_get_initial_style() {
 	}
 
 	return '.dslc-modules-section { ' . $style . ' }';
+}
+
+/**
+ * Get control help
+ */
+function dslc_get_section_help() {
+
+	$output = '<span class="dslca-modules-section-edit-field-ttip-hook"><span class="dslca-icon dslc-icon-info"></span></span>';
+
+	return $output;
 }
