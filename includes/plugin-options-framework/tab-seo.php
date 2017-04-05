@@ -86,11 +86,11 @@ class LC_Settings_Tab_Seo {
 	public function print_tab_seo() {
 	?>
 	    <div class="wrap lc-wrap">
-		    <div class="dslc-panel dslc-panel-green">
+		    <div class="dslc-panel dslc-panel-seo">
 		    	<a href="#" data-can-hide="<?php echo $this->premium_user; ?>" class="dslc-tab-seo-hide"><?php echo __( 'Hide this', 'live-composer-page-builder' ); ?></a>
 		    	<div class="dslc-panel-content">
 		    		<h2><?php _e( "Do you want more traffic?", 'live-composer-page-builder' ); ?></h2>
-		    		<p class="about-description"><?php _e( "Don't pay SEO, pay only for results! Enter your domain to see exactly how you <br/> can start ranking your site today", 'live-composer-page-builder' ); ?></p>
+		    		<p class="about-description"><?php _e( "Don't pay SEO, pay only for results! <br>Enter your domain to see exactly how you can start ranking your site today", 'live-composer-page-builder' ); ?></p>
 		    		<form id="dslc-seo-search" action="https://www.rankpay.com/keywords" method="post"  target="_blank">
 		    			<input type="hidden" value="2579" name="pid">
 		    			<label>Your domain:</label><br>
