@@ -202,7 +202,7 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 					),
 					array(
 						'label' => __( 'Price', 'live-composer-page-builder' ),
-						'value' => 'price',
+						'value' => 'meta_value_num',
 					),
 				),
 			),
@@ -2472,11 +2472,6 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 
 			/* Module output stars here */
 
-				if ( $options['orderby'] == 'price' ) {
-					$options['orderby'] = 'meta_value_num';
-					$orderby = 'price';
-				}
-
 				if ( is_front_page() ) { $paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1; } else { $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1; }
 
 				// Fix for pagination from other modules affecting this one when pag disabled
@@ -2518,10 +2513,8 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 
 				}
 
-				if ( isset( $orderby ) && $orderby == 'price' ) {
-
+				if ( $options['orderby'] == 'meta_value_num' ) {
 					$args['meta_key'] = '_price';
-
 				}
 
 				// Exlcude and Include arrays
@@ -2576,6 +2569,8 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 				} else {
 					$dslc_query = new WP_Query( $args );
 				}
+
+				dimaphperror( $dslc_query );
 
 				$columns_class = 'dslc-col dslc-' . $options['columns'] . '-col ';
 				$count = 0;
