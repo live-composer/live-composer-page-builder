@@ -47,3 +47,7 @@
 	font-size: 12px;
 	opacity: .75;
 }
+
+#post-option-dslc_template_base {
+	display: none;
+}

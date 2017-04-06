@@ -148,4 +148,24 @@ jQuery(document).ready(function(){
 	  jQuery('.wp-editor-expand').removeClass('lc-active');
 	});
 
+	/**
+	 * Hide Template Base
+	 */
+
+	jQuery(document).on('click', '#dslca_single_post_templates input[type="checkbox"]', function(e) {
+
+		if ( jQuery( '#dslca_single_post_templates input[type="checkbox"]:checked' ).length ) {
+	        jQuery("#post-option-dslc_template_base").show();
+	    } else {
+	        jQuery("#post-option-dslc_template_base").hide();
+	    }
+	});
+
+	if ( jQuery('#dslca_single_post_templates input[type="checkbox"]').is(':checked') ) {
+		jQuery('#post-option-dslc_template_base').show();
+	} else {
+		jQuery('#post-option-dslc_template_base').hide();
+	}
+
+
 }); // jQuery(document).ready

@@ -62,6 +62,7 @@ function dslc_st_init() {
 		'label' => __( 'Single Post Templates:', 'live-composer-page-builder' ),
 		'description' => __( 'Design for a single blog post or custom post type entries', 'live-composer-page-builder' ),
 		'value' => 'list-heading',
+		'id' => 'dslca_single_post_templates',
 	);
 
 	foreach ( $dslc_var_templates_pt as $pt_id => $pt_label ) {

@@ -251,7 +251,17 @@ function dslc_editorinterface_post_options( $object, $metabox ) {
 
 					<?php elseif ( 'checkbox' === $post_option['type'] ) : ?>
 
-						<div class="dslca-post-option-field-inner-wrapper">
+						<?php
+
+						if ( ! empty ( $post_option['choices'][0]['id'] ) ) {
+							$dslca_post_option_id = 'id="' . $post_option['choices'][0]['id'] . '"';
+						} else {
+							$dslca_post_option_id = '';
+						}
+
+						?>
+
+						<div class="dslca-post-option-field-inner-wrapper" <?php echo $dslca_post_option_id; ?> >
 
 							<?php
 							$curr_value_array = maybe_unserialize( $curr_value_no_esc );
