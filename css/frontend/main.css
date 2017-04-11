@@ -1097,7 +1097,7 @@ body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-post-thumb .dslc-o
 
 #dslc-content {
 	position: relative;
-	overflow: hidden; /* Fix: Slide Left Temporarily Extends Page Width; */
+	overflow: hidden; /* Fix Issue 272: Slide Left Temporarily Extends Page Width; */
 }
 
 /**
