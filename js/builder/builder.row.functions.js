@@ -701,6 +701,8 @@ jQuery(document).ready(function($){
 		$('.dslca-row-options-filter-hook.dslca-active').removeClass('dslca-active');
 		LiveComposer.Builder.PreviewAreaWindow.dslc_responsive_classes( true );
 	});
+
+	dslc_section_options_tooltip();
 });
 
 /**
@@ -721,4 +723,51 @@ LiveComposer.Builder.rows_init = function() {
 		}
 	} );
 
+}
+
+/**
+ * MODULES SETTINGS PANEL - Option Tooltips
+ */
+function dslc_section_options_tooltip() {
+
+	// Close Tooltip
+	jQuery(document).on( 'click', '.dslca-modules-section-edit-field-ttip-close', function(){
+		jQuery('.dslca-modules-section-edit-field-ttip, .dslca-modules-section-edit-field-icon-ttip').hide();
+	});
+
+	// Show Tooltip
+	jQuery(document).on( 'click', '.dslca-modules-section-edit-field-ttip-hook', function(){
+
+		var dslcTtip = jQuery('.dslca-modules-section-edit-field-ttip'),
+		dslcTtipInner = dslcTtip.find('.dslca-modules-section-edit-field-ttip-inner'),
+		dslcHook = jQuery(this),
+		dslcTtipContent = dslcHook.closest('.dslca-modules-section-edit-option').find('.dslca-modules-section-edit-field-ttip-content').html();
+
+		if ( dslcTtip.is(':visible') ) {
+
+			jQuery('.dslca-modules-section-edit-field-ttip').hide();
+		} else {
+
+			dslcTtipInner.html( dslcTtipContent );
+
+			var dslcOffset = dslcHook.offset();
+			var dslcTtipHeight = dslcTtip.outerHeight();
+			var dslcTtipWidth = dslcTtip.outerWidth();
+			var dslcTtipLeft = dslcOffset.left - ( dslcTtipWidth / 2 ) + 6;
+			var dslcTtipArrLeft = '50%';
+
+			if ( dslcTtipLeft < 0 ) {
+
+				dslcTtipArrLeft = ( dslcTtipWidth / 2 ) + dslcTtipLeft + 'px';
+				dslcTtipLeft = 0;
+			}
+
+			jQuery('.dslca-modules-section-edit-field-ttip').show().css({
+				top : dslcOffset.top - dslcTtipHeight - 20,
+				left: dslcTtipLeft
+			});
+
+			jQuery("head").append(jQuery('<style>.dslca-modules-section-edit-field-ttip:after, .dslca-modules-section-edit-field-ttip:before { left: ' + dslcTtipArrLeft + ' }</style>'));
+		}
+	});
 }

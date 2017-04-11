@@ -315,6 +315,11 @@ function dslc_display_composer() {
 				<div class="dslca-module-edit-field-ttip-inner"></div>
 			</div>
 
+			<div class="dslca-modules-section-edit-field-ttip">
+				<span class="dslca-modules-section-edit-field-ttip-close"><span class="dslc-icon dslc-icon-remove"></span></span>
+				<div class="dslca-modules-section-edit-field-ttip-inner"></div>
+			</div>
+
 			<div class="dslca-module-edit-field-icon-switch-sets">
 				<?php
 					global $dslc_var_icons;
