@@ -3,7 +3,7 @@ Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page, page builder plugin, drag-n-drop page builder
 Requires at least: 4.3
 Tested up to: 4.7.3
-Stable tag: 1.2.7
+Stable tag: 1.2.8
 License: GPLv3
 
 Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
@@ -134,6 +134,38 @@ Upcoming Releases:
 * [Please, report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
 * [You can download any previous version here](https://wordpress.org/plugins/live-composer-page-builder/developers/)
 
+= 1.2.8 - April 11th 2017 =
+
+= Bug fixes: =
+* Issue [#659](https://github.com/livecomposer/live-composer-page-builder/issues/659): "Show on" feature is missing from the BLOG module
+* Issue [#646](https://github.com/livecomposer/live-composer-page-builder/issues/646): SHORTCODE module not displaying styling options in some cases
+* Issue [#623](https://github.com/livecomposer/live-composer-page-builder/issues/623): Issue with INFOBOX module in IE11
+
+= New: =
+* Issue [#638](https://github.com/livecomposer/live-composer-page-builder/issues/638): New SEO tab in the plugin settings to check how much it will cost to promote website in Google for particular keywords  (you can hide this tab if you have/had any of our premium add-ons installed).
+* Issue [#545](https://github.com/livecomposer/live-composer-page-builder/issues/545): Added Arabic, Thai and all other non-English languages available in Google Fonts directory.
+* Issue [#650](https://github.com/livecomposer/live-composer-page-builder/issues/650): Developers now can add info popup for controls in the section settings 
+
+= Improved: =
+* Issue [#595](https://github.com/livecomposer/live-composer-page-builder/issues/595): Module presets: Added an option to refresh modules with design presets only after the page reload. It can be useful if you have too many modules with the same preset on the page. See *WP Admin > Live Composer > Settings > Performance* panel.
+* Issue [#528](https://github.com/livecomposer/live-composer-page-builder/issues/528): Show submenu dropdown when editing SUBNAV in navigation module
+* Issue [#661](https://github.com/livecomposer/live-composer-page-builder/issues/661): Improve filters for developers to insert custom HTML before and after any module or section.
+* Add BG Image Size option to Text Module
+
+= Thanks to the next contributors for helping with this update: =
+
+* [angeltrendy](https://github.com/angeltrendy)
+* [HYBargouth](https://github.com/HYBargouth)
+* [menachemshapiro](https://github.com/menachemshapiro)
+* [jamesdlow](https://github.com/jamesdlow)
+
+
+
+
+
+
+
+
 = 1.2.7 - March 27th 2017 =
 
 = Bug fixes: =
@@ -149,7 +181,8 @@ Upcoming Releases:
 = Improved: =
 * Issue [#626](https://github.com/livecomposer/live-composer-page-builder/issues/626): Possibility to hide promo messages panel in the Live Composer.
 
-Thanks to the next contributors for helping with this update:
+= Thanks to the next contributors for helping with this update: =
+
 * [Silcarus](https://github.com/Silcarus)
 * [Janki Gajera](https://github.com/jgajera)
 * [ruut95](https://github.com/ruut95)
@@ -170,7 +203,8 @@ Thanks to the next contributors for helping with this update:
 * Issue [#584](https://github.com/livecomposer/live-composer-page-builder/issues/584): Module presets: Problem with styling presets and default values (Social Links Module + Presets)
 * Issue [#621](https://github.com/livecomposer/live-composer-page-builder/issues/621): Module Gallery slider: The "Display the pictures from" feature are limited to few options.
 
-Thanks to the next contributors for helping with this update:
+= Thanks to the next contributors for helping with this update: =
+
 * [delorimier](https://github.com/delorimier)
 * [Slobodan Kustrimovic](https://github.com/BobaWebDev)
 * [Karen Totten](https://github.com/ktotten)
