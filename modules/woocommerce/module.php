@@ -2570,8 +2570,6 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 					$dslc_query = new WP_Query( $args );
 				}
 
-				dimaphperror( $dslc_query );
-
 				$columns_class = 'dslc-col dslc-' . $options['columns'] . '-col ';
 				$count = 0;
 				$real_count = 0;
