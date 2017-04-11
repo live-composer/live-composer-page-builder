@@ -331,7 +331,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 				array(
 					'id' => 'css_main_bg_img_size',
 					'std' => 'auto',
-					'label' => __( 'BG Image Size', 'live-composer-page-builder' ),
+					'label' => __( 'Image Size', 'live-composer-page-builder' ),
 					'type' => 'select',
 					'choices' => array(
 						array(
@@ -351,7 +351,6 @@ class DSLC_Text_Simple extends DSLC_Module {
 					'affect_on_change_el' => '.dslc-text-module-content',
 					'section' => 'styling'
 				),
-
 			array(
 				'id' => 'css_main_bg_group',
 				'type' => 'group',
