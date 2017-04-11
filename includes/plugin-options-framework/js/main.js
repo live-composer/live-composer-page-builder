@@ -288,4 +288,29 @@ jQuery(document).ready(function(){
 
 	}
 
+	jQuery(document).on( 'click', '.dslc-tab-seo-hide', function(e){
+
+	    var hide_panel = jQuery('.dslc-tab-seo-hide').data('can-hide');
+
+	    if ( hide_panel == '1' ) {
+
+	        jQuery.ajax({
+            	type: "POST",
+            	data: {
+            		security: dslcajax,
+            		action: 'dslc-ajax-hidden-tab-seo',
+            	},
+            	url: ajaxurl,
+            });
+
+	        jQuery('.dslc-panel-green').css('display', 'none');
+	        jQuery(".dslc-settigns-tabs [data-nav-to='tab-seo']").css('display', 'none');
+	        jQuery(".dslc-settigns-tabs [data-nav-to='tab-seo']").removeClass( "nav-tab-active" );
+	        jQuery(".dslc-settigns-tabs [data-nav-to='dslc_getting_started']").addClass( "nav-tab-active" );
+	        jQuery('#tab-for-dslc_getting_started').css('display', 'block');
+	    } else {
+	        jQuery('.dslc-panel-seo').addClass('showing-notice');
+	        jQuery('.dslc-panel-content').html('<div class="dslc-notice">You can hide this tab once you have <a href="https://livecomposerplugin.com/add-ons/?utm_source=editing-sreen&utm_medium=tab-seo&utm_campaign=add-ons" target="_blank">any of our premium add-ons</a> installed.</div>');
+	    }
+	});
 });

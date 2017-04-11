@@ -189,8 +189,6 @@
 	font-size: 15px;
 }
 
-
-
 /**
  * ----------------------------------------------------------------------
  * New Panel Styles for the LC options seciton
@@ -321,6 +319,132 @@
 
 /**
  * ----------------------------------------------------------------------
+ * Panel Tab Seo
+ */
+
+.dslc-panel-seo {
+    background: #2E97E0 url(../../../images/seo-tab-bg.png) no-repeat;
+    box-shadow: none;
+    border: 0;
+    padding: 36px 5%;
+    background-position: right bottom;
+    background-size: 70%;
+}
+
+.dslc-panel-seo.showing-notice {
+    background: #2E97E0;
+}
+
+.dslc-panel-seo.showing-notice .dslc-tab-seo-hide {
+    display: none;
+}
+
+.dslc-panel-seo .dslc-tab-seo-hide {
+        color: #fff;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border: 1px solid #fff;
+    padding: 2px 16px;
+    float: right;
+    border-radius: 5px;
+    font-weight: 300;
+    opacity: .5;
+    margin-top: 20px;
+}
+
+.dslc-panel-seo .dslc-tab-seo-hide:hover {
+    opacity: 1;
+    cursor: pointer;
+    background:#b2ff2a;
+    color: #2D400B;
+    border: 2px solid #b2ff2a;
+}
+
+.dslc-panel-seo .dslc-panel-content {
+    margin: 30px 0 0 40px;
+    max-width: 500px;
+    text-align: left;
+}
+
+.dslc-panel-seo.showing-notice .dslc-panel-content {
+    margin: 20px 0 0 -10px;
+    max-width: none;
+    text-align: center;
+}
+
+.dslc-panel-seo h2 {
+    color: #fff;
+    font-size: 36px;
+    line-height: 1;
+    margin-bottom: 25px;
+    font-weight: 300;
+}
+
+.dslc-panel-seo .about-description {
+    color: #32373c;
+    font-size: 18px;
+}
+
+.dslc-panel-seo .dslc-notice {
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: 1px;
+    line-height: 1.55;
+    margin-top: -25px;
+}
+
+.dslc-panel-seo .dslc-notice a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+#dslc-seo-search {
+    padding-top: 20px;
+}
+
+#dslc-seo-search label {
+    font-size: 17px;
+    font-weight: 300;
+    color: #fff;
+    margin-bottom: 4px;
+    display: inline-block;
+}
+
+#dslc-seo-search input[type="text"] {
+    font-size: 16px;
+    height: 46px;
+    line-height: 1;
+    padding: 10px 17px;
+    width: 60%;
+    border: 0;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+#dslc-seo-search button[type="submit"] {
+    font-size: 16px;
+    line-height: 1;
+    padding: 20px 40px;
+    border: 0;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+
+    letter-spacing: 3px;
+    text-transform: uppercase;
+
+    background: #9FE02C;
+    color: #2D400B;
+}
+
+#dslc-seo-search button[type="submit"]:hover {
+    cursor: pointer;
+    background:#b2ff2a;
+}
+
+/**
+ * ----------------------------------------------------------------------
  * New LC is Coming Panel
  */
 
@@ -392,7 +516,6 @@ display: inline-block;
 	top: 28px;
 	width: 80px;
 }
-
 
 /**
  * ----------------------------------------------------------------------
