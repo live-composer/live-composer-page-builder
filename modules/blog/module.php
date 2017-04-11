@@ -56,6 +56,27 @@ class DSLC_Blog extends DSLC_Module {
 		 */
 
 		$dslc_options = array(
+
+			array(
+				'label' => __( 'Show On', 'live-composer-page-builder' ),
+				'id' => 'css_show_on',
+				'std' => 'desktop tablet phone',
+				'type' => 'checkbox',
+				'choices' => array(
+					array(
+						'label' => __( 'Desktop', 'live-composer-page-builder' ),
+						'value' => 'desktop',
+					),
+					array(
+						'label' => __( 'Tablet', 'live-composer-page-builder' ),
+						'value' => 'tablet',
+					),
+					array(
+						'label' => __( 'Phone', 'live-composer-page-builder' ),
+						'value' => 'phone',
+					),
+				),
+			),
 			array(
 				'label' => __( 'Type', 'live-composer-page-builder' ),
 				'id' => 'type',
@@ -263,27 +284,6 @@ class DSLC_Blog extends DSLC_Module {
 			 * Styling
 			 */
 
-			array(
-				'label' => __( 'Show On', 'live-composer-page-builder' ),
-				'id' => 'css_show_on',
-				'std' => 'desktop tablet phone',
-				'type' => 'checkbox',
-				'choices' => array(
-					array(
-						'label' => __( 'Desktop', 'live-composer-page-builder' ),
-						'value' => 'desktop',
-					),
-					array(
-						'label' => __( 'Tablet', 'live-composer-page-builder' ),
-						'value' => 'tablet',
-					),
-					array(
-						'label' => __( 'Phone', 'live-composer-page-builder' ),
-						'value' => 'phone',
-					),
-				),
-				'section' => 'styling',
-			),
 			array(
 				'label' => __( 'Elements', 'live-composer-page-builder' ),
 				'id' => 'elements',
