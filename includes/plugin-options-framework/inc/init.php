@@ -30,6 +30,14 @@ function dslc_plugin_options_setup() {
 	global $dslc_plugin_options;
 	do_action( 'dslc_hook_register_options' );
 
+	// Custom options extension.
+	global $dslc_options_extender;
+	$dslc_options_extender->construct_panels();
+
+} add_action( 'plugins_loaded', 'dslc_plugin_options_setup' );
+
+function dslc_add_lc_settings_page() {
+
 	// Base 64 encoded SVG image.
 	$icon_svg = dslc_get_menu_svg();
 
@@ -43,11 +51,7 @@ function dslc_plugin_options_setup() {
 		'99.99'
 	);
 
-	// Custom options extension.
-	global $dslc_options_extender;
-	$dslc_options_extender->construct_panels();
-
-} add_action( 'admin_menu', 'dslc_plugin_options_setup' );
+} add_action( 'admin_menu', 'dslc_add_lc_settings_page' );
 
 
 /**

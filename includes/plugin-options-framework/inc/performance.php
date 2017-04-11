@@ -10,7 +10,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0
  */
-
 function dslc_perf_settings_init() {
 
 	global $dslc_plugin_options;
@@ -18,7 +17,6 @@ function dslc_perf_settings_init() {
 	$dslc_plugin_options['dslc_plugin_options_performance'] = array(
 		'title' => __( 'Performance', 'live-composer-page-builder' ),
 		'options' => array(
-
 			'lc_gfont_subsets' => array(
 
 				'section' => 'dslc_plugin_options_performance',
@@ -54,10 +52,87 @@ function dslc_perf_settings_init() {
 					array(
 						'label' => 'Vietnamese',
 						'value' => 'vietnamese',
-					)
-				)
-			)
-		)
+					),
+					array(
+						'label' => 'Arabic',
+						'value' => 'arabic',
+					),
+					array(
+						'label' => 'Bengali',
+						'value' => 'bengali',
+					),
+					array(
+						'label' => 'Devanagari',
+						'value' => 'devanagari',
+					),
+					array(
+						'label' => 'Gujarati',
+						'value' => 'gujarati',
+					),
+					array(
+						'label' => 'Gurmukhi',
+						'value' => 'gurmukhi',
+					),
+					array(
+						'label' => 'Hebrew',
+						'value' => 'hebrew',
+					),
+					array(
+						'label' => 'Kannada',
+						'value' => 'kannada',
+					),
+					array(
+						'label' => 'Khmer',
+						'value' => 'khmer',
+					),
+					array(
+						'label' => 'Malayalam',
+						'value' => 'malayalam',
+					),
+					array(
+						'label' => 'Myanmar',
+						'value' => 'myanmar',
+					),
+					array(
+						'label' => 'Oriya',
+						'value' => 'oriya',
+					),
+					array(
+						'label' => 'Sinhala',
+						'value' => 'sinhala',
+					),
+					array(
+						'label' => 'Tamil',
+						'value' => 'tamil',
+					),
+					array(
+						'label' => 'Telugu',
+						'value' => 'telugu',
+					),
+					array(
+						'label' => 'Thai',
+						'value' => 'thai',
+					),
+				),
+			),
+			'lc_preset' => array(
+
+				'section' => 'dslc_plugin_options_performance',
+				'label' => __( 'Update modules with the same preset', 'live-composer-page-builder' ),
+				'std' => 'enabled',
+				'type' => 'radio',
+				'choices' => array(
+					array(
+						'label' => 'After styling panel closes',
+						'value' => 'enabled',
+					),
+					array(
+						'label' => 'After page reloads',
+						'value' => 'disabled',
+					),
+				),
+			),
+		),
 	);
 
 } add_action( 'dslc_hook_register_options', 'dslc_perf_settings_init' );
