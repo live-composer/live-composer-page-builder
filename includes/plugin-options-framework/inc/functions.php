@@ -40,6 +40,10 @@ function dslc_get_option( $option_id, $section_id ) {
 	if ( isset( $options[ $option_id ] ) ) {
 
 		$value = $options[ $option_id ];
+	} elseif ( isset( $dslc_plugin_options[ $section_id ]['options'][ $option_id ] ) ) {
+		$value = $dslc_plugin_options[ $section_id ]['options'][ $option_id ]['std'];
+	} else {
+		$value = '';
 	}
 
 	// Old way to get options (section + option id).

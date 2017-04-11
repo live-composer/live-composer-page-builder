@@ -712,6 +712,9 @@ function dslc_ajax_save_preset() {
 			$response['status'] = 'error';
 		}
 
+		// Live Composer > Settings > Performance.
+		$response['preset_setting'] = dslc_get_option( 'lc_preset', 'dslc_plugin_options_performance' );
+
 		// Encode response.
 		$response_json = wp_json_encode( $response );
 

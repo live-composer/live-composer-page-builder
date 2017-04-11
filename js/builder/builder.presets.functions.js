@@ -36,11 +36,14 @@ function dslc_update_preset() {
 			},
 			function( response ) {
 
-				// Reload all modules with the same preset
-				jQuery('.dslc-module-front:not(#' + module.attr('id') + ')[data-dslc-module-id="' + module.data('dslc-module-id') +
-					'"][data-dslc-preset="' + module.data('dslc-preset') + '"]', LiveComposer.Builder.PreviewAreaDocument ).each(function(){
-					dslc_module_output_reload( jQuery(this) );
-				});
+				if ( response.preset_setting == 'enabled' ) {
+
+					// Reload all modules with the same preset
+					jQuery('.dslc-module-front:not(#' + module.attr('id') + ')[data-dslc-module-id="' + module.data('dslc-module-id') +
+						'"][data-dslc-preset="' + module.data('dslc-preset') + '"]', LiveComposer.Builder.PreviewAreaDocument ).each(function(){
+						dslc_module_output_reload( jQuery(this) );
+					});
+				}
 			}
 		);
 	}
