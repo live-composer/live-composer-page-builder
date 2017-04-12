@@ -1096,7 +1096,7 @@ function dslc_module_front( $atts, $settings_raw = null ) {
 		ob_end_clean();
 
 		// Return the output
-		return do_shortcode( $output );
+		return $output;
 
 	} elseif ( dslc_current_user_can( 'access' ) ) {
 
@@ -1368,7 +1368,7 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1 ) {
 	}
 
 	// Return the output
-	return do_shortcode( $output );
+	return $output;
 
 } add_shortcode( 'dslc_modules_section', 'dslc_modules_section_front' );
 
