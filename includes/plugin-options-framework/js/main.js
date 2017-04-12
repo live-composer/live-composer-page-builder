@@ -310,7 +310,7 @@ jQuery(document).ready(function(){
 	        jQuery('#tab-for-dslc_getting_started').css('display', 'block');
 	    } else {
 	        jQuery('.dslc-panel-seo').addClass('showing-notice');
-	        jQuery('.dslc-panel-content').html('<div class="dslc-notice">You can hide this tab once you have <a href="https://livecomposerplugin.com/add-ons/?utm_source=editing-sreen&utm_medium=tab-seo&utm_campaign=add-ons" target="_blank">any of our premium add-ons</a> installed.</div>');
+	        jQuery('#tab-for-tab-seo .dslc-panel-content').html('<div class="dslc-notice">You can hide this tab once you have <a href="https://livecomposerplugin.com/add-ons/?utm_source=editing-sreen&utm_medium=tab-seo&utm_campaign=add-ons" target="_blank">any of our premium add-ons</a> installed.</div>');
 	    }
 	});
 });
