@@ -3,7 +3,7 @@ Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page, page builder plugin, drag-n-drop page builder
 Requires at least: 4.3
 Tested up to: 4.7.3
-Stable tag: 1.2.8
+Stable tag: 1.2.9
 License: GPLv3
 
 Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
@@ -133,6 +133,24 @@ Upcoming Releases:
 
 * [Please, report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
 * [You can download any previous version here](https://wordpress.org/plugins/live-composer-page-builder/developers/)
+
+= 1.2.9 - April 12th 2017 =
+
+= Bug fixes: =
+* Issue [#648](https://github.com/livecomposer/live-composer-page-builder/issues/648): Module Tabs: Shortcodes are getting converted to html
+* Issue [#677](https://github.com/livecomposer/live-composer-page-builder/issues/677): Fixed SyntaxError: JSON.parse
+* Issue [#674](https://github.com/livecomposer/live-composer-page-builder/issues/674): Fixed bug SEO tab in the plugin settings
+
+= Thanks to the next contributors for helping with this update: =
+
+* [urbanimatic](https://github.com/urbanimatic)
+
+
+
+
+
+
+
 
 = 1.2.8 - April 11th 2017 =
 
