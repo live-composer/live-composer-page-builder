@@ -719,21 +719,13 @@ jQuery(document).ready(function($){
 		var dataId = hook.parent().attr("data-id");
 
 		if ( dataId == 'image' ) {
-			jQuery('.dslca-module-edit-option-image_alt input[data-id="image_alt"]').val('');
-			jQuery('.dslca-module-edit-option-image_title input[data-id="image_title"]').val('');
+			jQuery('.dslca-module-edit-option-image_alt input').attr('value', '').trigger( 'change' );
+			jQuery('.dslca-module-edit-option-image_alt input').attr('data-val-bckp', '').trigger( 'change' );
+			jQuery('.dslca-module-edit-option-image_title input').attr('value', '').trigger( 'change' );
+			jQuery('.dslca-module-edit-option-image_title input').attr('data-val-bckp', '').trigger( 'change' );
 		}
 		hook.hide();
 		addHook.show();
-	});
-
-	jQuery(document).on('change', '.dslca-module-edit-option-image_url input', function(){
-
-	   var hook = jQuery(this);
-
-	   if ( hook.val() == '' ) {
-	   		jQuery('.dslca-module-edit-option-image_alt input[data-id="image_alt"]').val('');
-	   		jQuery('.dslca-module-edit-option-image_title input[data-id="image_title"]').val('');
-	   }
 	});
 
 	/**

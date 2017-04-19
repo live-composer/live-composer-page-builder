@@ -804,8 +804,12 @@ class DSLC_Image extends DSLC_Module {
 				<div class="dslc-notification dslc-red"><?php _e( 'No image has been set yet, edit the module to set one.', 'live-composer-page-builder' ); ?></div>
 
 				<?php
+
+				if ( $dslc_is_admin ) {
 					$options['image_alt'] = '';
 					$options['image_title'] = '';
+				}
+
 				?>
 
 			<?php else : ?>
