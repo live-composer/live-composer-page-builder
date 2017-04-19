@@ -253,10 +253,11 @@ function dslc_editorinterface_post_options( $object, $metabox ) {
 
 						<?php
 
-						if ( ! empty ( $post_option['choices'][0]['id'] ) ) {
-							$dslca_post_option_id = 'id="' . $post_option['choices'][0]['id'] . '"';
-						} else {
-							$dslca_post_option_id = '';
+						foreach ( $post_option['choices'] as $key => $choice ) {
+
+							if ( 'list-heading' === $choice['value'] && 'dslca_single_post_templates' === $choice['id'] ) {
+								$dslca_post_option_id = 'id="' . $choice['id'] . '"';
+							}
 						}
 
 						?>
@@ -286,7 +287,18 @@ function dslc_editorinterface_post_options( $object, $metabox ) {
 
 									<?php if ( 0 !== $key ) : ?>
 										</div>
-										<div class="dslca-post-option-field-inner-wrapper">
+										<?php
+
+										if ( 'dslca_archive_index_templates' === $choice['id'] ) {
+											$dslca_post_option_id = 'id="' . $choice['id'] . '"';
+										} elseif ( 'dslca_special_page_templates' === $choice['id'] ) {
+											$dslca_post_option_id = 'id="' . $choice['id'] . '"';
+										} else {
+											$dslca_post_option_id = '';
+										}
+
+										?>
+										<div class="dslca-post-option-field-inner-wrapper" <?php echo $dslca_post_option_id; ?>>
 									<?php endif;?>
 
 										<p>
