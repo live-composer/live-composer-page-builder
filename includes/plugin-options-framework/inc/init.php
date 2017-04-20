@@ -30,10 +30,6 @@ function dslc_plugin_options_setup() {
 	global $dslc_plugin_options;
 	do_action( 'dslc_hook_register_options' );
 
-	// Custom options extension.
-	global $dslc_options_extender;
-	$dslc_options_extender->construct_panels();
-
 } add_action( 'plugins_loaded', 'dslc_plugin_options_setup' );
 
 function dslc_add_lc_settings_page() {
@@ -50,6 +46,10 @@ function dslc_add_lc_settings_page() {
 		$icon_svg,
 		'99.99'
 	);
+
+	// Custom options extension.
+	global $dslc_options_extender;
+	$dslc_options_extender->construct_panels();
 
 } add_action( 'admin_menu', 'dslc_add_lc_settings_page' );
 
