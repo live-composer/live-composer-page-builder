@@ -88,10 +88,10 @@ function dslc_row_display_options() {
 		<div class="dslca-modules-section-edit-option <?php echo esc_attr( $option_type_class ) . esc_attr( $extra_class ); ?>" data-id="<?php echo esc_attr( $row_option['id'] ); ?>">
 
 			<?php if ( isset( $row_option['help'] ) ) : ?>
-				<div class="dslca-modules-section-edit-field-ttip-content"><?php echo $row_option['help']; ?></div>
-				<span class="dslca-modules-section-edit-label"><?php echo esc_html( $row_option['label'] ); echo dslc_get_section_help(); ?></span>
+				<div class="dslca-module-edit-field-ttip-content"><?php echo $row_option['help']; ?></div>
+				<span class="dslca-module-edit-label"><?php echo esc_html( $row_option['label'] ); echo dslc_get_section_help(); ?></span>
 			<?php else : ?>
-				<span class="dslca-modules-section-edit-label"><?php echo esc_html( $row_option['label'] ); ?></span>
+				<span class="dslca-module-edit-label"><?php echo esc_html( $row_option['label'] ); ?></span>
 			<?php endif; ?>
 
 			<?php if ( 'text' === $row_option['type'] ) : ?>
@@ -448,7 +448,7 @@ function dslc_row_get_initial_style() {
  */
 function dslc_get_section_help() {
 
-	$output = '<span class="dslca-modules-section-edit-field-ttip-hook"><span class="dslca-icon dslc-icon-info"></span></span>';
+	$output = '<span class="dslca-module-edit-field-ttip-hook"><span class="dslca-icon dslc-icon-info"></span></span>';
 
 	return $output;
 }
