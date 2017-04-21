@@ -89,7 +89,7 @@ class DSLC_Posts extends DSLC_Module {
 				'label' => __( 'Post Types', 'live-composer-page-builder' ),
 				'id' => 'post_type',
 				'std' => 'post',
-				'type' => 'checkbox',
+				'type' => 'select',
 				'choices' => $post_types_choices,
 				'tab' => 'posts query',
 			),
