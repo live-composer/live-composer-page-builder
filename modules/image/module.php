@@ -805,6 +805,7 @@ class DSLC_Image extends DSLC_Module {
 
 				<?php
 
+				// Alt and title empty when an image will remove.
 				if ( $dslc_is_admin ) {
 					$options['image_alt'] = '';
 					$options['image_title'] = '';
