@@ -689,6 +689,22 @@ jQuery(document).ready(function($){
 			// field.val( attachment.id ).data( 'dslca-img-url', attachment.url ).trigger('change'); - previous version
 			field.val( attachment.id );
 
+			var dataId = hook.parent().attr("data-id");
+
+			/*
+			Save alt as value of the image input.
+			 */
+			if ( attachment.alt != '' && dataId == 'image' ) {
+				jQuery('.dslca-module-edit-option-image_alt input[data-id="image_alt"]').val( attachment.alt );
+			}
+
+			/*
+			Save alt as value of the image input.
+			 */
+			if ( attachment.title != '' && dataId == 'image' ) {
+				jQuery('.dslca-module-edit-option-image_title input[data-id="image_title"]').val( attachment.title );
+			}
+
 			/*
 			Save image URL as data attribute of input in dslca-modules-section-settings set
 			We need URL in 'dslca-img-url' for live preview
@@ -719,6 +735,18 @@ jQuery(document).ready(function($){
 		}
 
 		field.val('').trigger('change'); // .dslca-modules-section-edit-field
+
+		/*
+		Delete alt and title value.
+		 */
+		var dataId = hook.parent().attr("data-id");
+
+		if ( dataId == 'image' ) {
+			jQuery('.dslca-module-edit-option-image_alt input').attr('value', '').trigger( 'change' );
+			jQuery('.dslca-module-edit-option-image_alt input').attr('data-val-bckp', '').trigger( 'change' );
+			jQuery('.dslca-module-edit-option-image_title input').attr('value', '').trigger( 'change' );
+			jQuery('.dslca-module-edit-option-image_title input').attr('data-val-bckp', '').trigger( 'change' );
+		}
 		hook.hide();
 		addHook.show();
 	});

@@ -152,7 +152,6 @@ class DSLC_Image extends DSLC_Module {
 				'std' => '',
 				'type' => 'text',
 			),
-
 			array(
 				'label' => __( 'Image - TITLE attribute', 'live-composer-page-builder' ),
 				'id' => 'image_title',
@@ -749,11 +748,9 @@ class DSLC_Image extends DSLC_Module {
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
-
-
 		);
 
-		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array('hover_opts' => false) ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array( 'hover_opts' => false ) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		return apply_filters( 'dslc_module_options', $dslc_options, $this->module_id );
@@ -806,6 +803,15 @@ class DSLC_Image extends DSLC_Module {
 
 				<div class="dslc-notification dslc-red"><?php _e( 'No image has been set yet, edit the module to set one.', 'live-composer-page-builder' ); ?></div>
 
+				<?php
+
+				if ( $dslc_is_admin ) {
+					$options['image_alt'] = '';
+					$options['image_title'] = '';
+				}
+
+				?>
+
 			<?php else : ?>
 
 				<?php
@@ -835,6 +841,27 @@ class DSLC_Image extends DSLC_Module {
 
 						$the_image = dslc_aq_resize( $options['image'], $resize_width, $resize_height, true );
 
+					}
+				}
+
+				if ( $dslc_is_admin && ( strlen( $options['image'] ) > 0 ) ) {
+					$image_id = attachment_url_to_postid( $options['image'] );
+					$image_alt = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
+					$image_title = get_the_title( $image_id );
+
+					if ( strlen( $options['image_alt'] ) === 0 ) {
+						$options['image_alt'] = $image_alt;
+					} elseif ( $options['image_alt'] !== $image_alt ) {
+						update_post_meta( $image_id, '_wp_attachment_image_alt', $options['image_alt'] );
+					}
+
+					if ( strlen( $options['image_title'] ) === 0 ) {
+						$options['image_title'] = $image_title;
+					} elseif ( $options['image_title'] !== $image_title ) {
+						$image = array();
+						$image['ID'] = $image_id;
+						$image['post_title'] = $options['image_title'];
+						wp_update_post( $image );
 					}
 				}
 
