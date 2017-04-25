@@ -1293,19 +1293,41 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 
 					<?php if ( $show_fake ) : ?>
 
-						<div id="respond" class="comment-respond">
-							<h3 id="reply-title" class="comment-reply-title"><?php echo $txt_leave_comment; ?></h3>
-							<form action="#" method="post" id="commentform" class="comment-form" novalidate="">
-								<div class="comment-form-comment"><textarea id="comment" name="comment"  placeholder="<?php echo $txt_comment; ?>" aria-required="true"></textarea></div>
-								<div class="comment-form-name"><input id="author" name="author" type="text" value="" size="30" placeholder="<?php echo $txt_name; ?> *" aria-required="true"></div>
-								<div class="comment-form-email"><input id="email" name="email" type="text" value="" size="30" placeholder="<?php echo $txt_email; ?> *" aria-required="true"></div>
-								<div class="comment-form-website"><input id="url" name="url" type="text" value="" size="30" placeholder="<?php echo $txt_url; ?>"></div>
+						<?php
 
-								<p class="form-submit">
-									<input name="submit" type="submit" id="submit" class="submit" value="<?php echo $txt_submit_comment; ?>">
-								</p>
-							</form>
-						</div>
+						if ( isset( $_POST['dslc_post_id'] ) ) {
+							$page_id = $_POST['dslc_post_id'];
+						} elseif ( isset( $_GET['dslc_post_id'] ) ) {
+							$page_id = $_GET['dslc_post_id'];
+						} else {
+							$page_id = get_the_ID();
+						}
+
+						?>
+
+						<?php if ( get_post_type( $page_id ) === 'dslc_templates' || comments_open( $page_id ) ) { ?>
+
+							<div id="respond" class="comment-respond">
+								<h3 id="reply-title" class="comment-reply-title"><?php echo $txt_leave_comment; ?></h3>
+								<form action="#" method="post" id="commentform" class="comment-form" novalidate="">
+									<div class="comment-form-comment"><textarea id="comment" name="comment"  placeholder="<?php echo $txt_comment; ?>" aria-required="true"></textarea></div>
+									<div class="comment-form-name"><input id="author" name="author" type="text" value="" size="30" placeholder="<?php echo $txt_name; ?> *" aria-required="true"></div>
+									<div class="comment-form-email"><input id="email" name="email" type="text" value="" size="30" placeholder="<?php echo $txt_email; ?> *" aria-required="true"></div>
+									<div class="comment-form-website"><input id="url" name="url" type="text" value="" size="30" placeholder="<?php echo $txt_url; ?>"></div>
+
+									<p class="form-submit">
+										<input name="submit" type="submit" id="submit" class="submit" value="<?php echo $txt_submit_comment; ?>">
+									</p>
+								</form>
+							</div>
+
+						<?php } else {
+
+							if ( $dslc_active ) {
+								echo '<div class="dslc-notification dslc-red">' . __( 'Comments disabled for the current post ( whole website ), please see this article for more details on how to enable comments on your website.', 'live-composer-page-builder' ) . '</div>';
+							}
+
+						} ?>
 
 					<?php else :
 
