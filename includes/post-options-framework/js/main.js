@@ -148,4 +148,31 @@ jQuery(document).ready(function(){
 	  jQuery('.wp-editor-expand').removeClass('lc-active');
 	});
 
+	/**
+	 * Hide Template Base
+	 */
+
+	jQuery(document).on('click', '#dslca_single_post_templates input[type="checkbox"], #dslca_archive_index_templates input[type="checkbox"], #dslca_special_page_templates input[type="checkbox"]', function(e) {
+
+		var singleTemplate, archiveTemplate, specialPage;
+
+		singleTemplate = jQuery( '#dslca_single_post_templates input[type="checkbox"]:checked' ).length;
+		archiveTemplate = jQuery( '#dslca_archive_index_templates input[type="checkbox"]:checked' ).length;
+		specialPage = jQuery( '#dslca_special_page_templates input[type="checkbox"]:checked' ).length;
+
+		if ( singleTemplate && archiveTemplate == 0 && specialPage == 0 ) {
+			console.log('1');
+	        jQuery("#post-option-dslc_template_base").show();
+	    } else {
+			console.log('3');
+	        jQuery("#post-option-dslc_template_base").hide();
+	    }
+	});
+
+	if ( jQuery('#dslca_single_post_templates input[type="checkbox"]').is(':checked') ) {
+		jQuery('#post-option-dslc_template_base').show();
+	} else {
+		jQuery('#post-option-dslc_template_base').hide();
+	}
+
 }); // jQuery(document).ready

@@ -62,6 +62,7 @@ function dslc_st_init() {
 		'label' => __( 'Single Post Templates:', 'live-composer-page-builder' ),
 		'description' => __( 'Design for a single blog post or custom post type entries', 'live-composer-page-builder' ),
 		'value' => 'list-heading',
+		'id' => 'dslca_single_post_templates',
 	);
 
 	foreach ( $dslc_var_templates_pt as $pt_id => $pt_label ) {
@@ -76,6 +77,7 @@ function dslc_st_init() {
 		'label' => __( 'Archive Index Templates:', 'live-composer-page-builder' ),
 		'description' => __( 'Design for posts listings like Category, Tag, Date or Custom Taxonomies', 'live-composer-page-builder' ),
 		'value' => 'list-heading',
+		'id' => 'dslca_archive_index_templates',
 	);
 
 	foreach ( $dslc_var_templates_pt as $pt_id => $pt_label ) {
@@ -90,6 +92,7 @@ function dslc_st_init() {
 		'label' => __( 'Special Page Templates:', 'live-composer-page-builder' ),
 		'description' => __( 'Design a custom "Page Not Found" screen or search results page', 'live-composer-page-builder' ),
 		'value' => 'list-heading',
+		'id' => 'dslca_special_page_templates',
 	);
 
 	$template_for[] = array(

@@ -251,7 +251,18 @@ function dslc_editorinterface_post_options( $object, $metabox ) {
 
 					<?php elseif ( 'checkbox' === $post_option['type'] ) : ?>
 
-						<div class="dslca-post-option-field-inner-wrapper">
+						<?php
+
+						foreach ( $post_option['choices'] as $key => $choice ) {
+
+							if ( 'list-heading' === $choice['value'] && 'dslca_single_post_templates' === $choice['id'] ) {
+								$dslca_post_option_id = 'id="' . $choice['id'] . '"';
+							}
+						}
+
+						?>
+
+						<div class="dslca-post-option-field-inner-wrapper" <?php echo $dslca_post_option_id; ?> >
 
 							<?php
 							$curr_value_array = maybe_unserialize( $curr_value_no_esc );
@@ -276,7 +287,18 @@ function dslc_editorinterface_post_options( $object, $metabox ) {
 
 									<?php if ( 0 !== $key ) : ?>
 										</div>
-										<div class="dslca-post-option-field-inner-wrapper">
+										<?php
+
+										if ( 'dslca_archive_index_templates' === $choice['id'] ) {
+											$dslca_post_option_id = 'id="' . $choice['id'] . '"';
+										} elseif ( 'dslca_special_page_templates' === $choice['id'] ) {
+											$dslca_post_option_id = 'id="' . $choice['id'] . '"';
+										} else {
+											$dslca_post_option_id = '';
+										}
+
+										?>
+										<div class="dslca-post-option-field-inner-wrapper" <?php echo $dslca_post_option_id; ?>>
 									<?php endif;?>
 
 										<p>
