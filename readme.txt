@@ -2,8 +2,8 @@
 Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page, page builder plugin, drag-n-drop page builder
 Requires at least: 4.3
-Tested up to: 4.7.3
-Stable tag: 1.2.9
+Tested up to: 4.7.4
+Stable tag: 1.3
 License: GPLv3
 
 Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
@@ -133,6 +133,25 @@ Upcoming Releases:
 
 * [Please, report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
 * [You can download any previous version here](https://wordpress.org/plugins/live-composer-page-builder/developers/)
+
+= 1.3 - April 25th 2017 =
+
+= Improved: =
+* Issue [#639](https://github.com/livecomposer/live-composer-page-builder/issues/639): New filter added for the developers to adjust display of the composer panels
+* Issue [#684](https://github.com/livecomposer/live-composer-page-builder/issues/684): Improved filter allowing to insert custom code before and after any module or section.
+* Issue [#680](https://github.com/livecomposer/live-composer-page-builder/issues/680): Text module: Added margin-bottom (paragraph) for Tablets and Phones
+* Issue [#673](https://github.com/livecomposer/live-composer-page-builder/issues/673): Improved 'help' control for modules and sections
+* Issue [#576](https://github.com/livecomposer/live-composer-page-builder/issues/576): Improved the comments form
+* Issue [#435](https://github.com/livecomposer/live-composer-page-builder/issues/435): Simplified settings for the template posts
+* Issue [#404](https://github.com/livecomposer/live-composer-page-builder/issues/404): When editing any template LC, it will send you back to the original post when closed
+* Issue [#302](https://github.com/livecomposer/live-composer-page-builder/issues/302): Image Module: ALT and TITLE attributes now synchronize with the ones set in WP Media library
+
+
+
+
+
+
+
 
 = 1.2.9 - April 12th 2017 =
 
