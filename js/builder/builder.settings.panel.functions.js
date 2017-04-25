@@ -1109,7 +1109,16 @@ function dslc_module_options_tooltip() {
 		var dslcTtip = jQuery('.dslca-module-edit-field-ttip'),
 		dslcTtipInner = dslcTtip.find('.dslca-module-edit-field-ttip-inner'),
 		dslcHook = jQuery(this),
-		dslcTtipContent = dslcHook.closest('.dslca-module-edit-option').find('.dslca-module-edit-field-ttip-content').html();
+		dslcTtipContent,
+		dslcLabel;
+
+		dslcLabel = dslcHook.parent();
+
+		if ( dslcLabel.parent().hasClass('dslca-modules-section-edit-option') ) {
+			dslcTtipContent = dslcHook.closest('.dslca-modules-section-edit-option').find('.dslca-module-edit-field-ttip-content').html();
+		} else {
+			dslcTtipContent = dslcHook.closest('.dslca-module-edit-option').find('.dslca-module-edit-field-ttip-content').html();
+		}
 
 		if ( dslcTtip.is(':visible') ) {
 
