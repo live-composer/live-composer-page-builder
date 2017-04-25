@@ -991,6 +991,8 @@ function dslc_json_decode( $raw_code, $ignore_migration = false ) {
  */
 function dslc_module_front( $atts, $settings_raw = null ) {
 
+	global $dslc_active;
+
 	// Settings RAW can be a serialized array (old version of dslc_code)
 	// or json array (new generation).
 	$settings = dslc_json_decode( $settings_raw );
@@ -1095,9 +1097,13 @@ function dslc_module_front( $atts, $settings_raw = null ) {
 		$output = ob_get_contents();
 		ob_end_clean();
 
-		// Return the output
-		return $output;
-
+		if ( $dslc_active ) {
+			// Return the output.
+			return $output;
+		} else {
+			// Return the output.
+			return do_shortcode( $output );
+		}
 	} elseif ( dslc_current_user_can( 'access' ) ) {
 
 		return __( 'A module broke', 'live-composer-page-builder' );
@@ -1367,8 +1373,13 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1 ) {
 		$output .= apply_filters( 'dslc_after_section', $after_section_content, $atts );
 	}
 
-	// Return the output
-	return $output;
+	if ( $dslc_active ) {
+		// Return the output.
+		return $output;
+	} else {
+		// Return the output.
+		return do_shortcode( $output );
+	}
 
 } add_shortcode( 'dslc_modules_section', 'dslc_modules_section_front' );
 
