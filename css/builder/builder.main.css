@@ -589,6 +589,10 @@ body a:focus {
 	 * Modules
 	 */
 
+	.dslca-module-non-active {
+		opacity: 0.5 !important ;
+	}
+
 	.dslca-modules {
 
 	}

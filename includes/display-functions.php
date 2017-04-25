@@ -133,7 +133,7 @@ function dslc_display_composer() {
 						<div class="dslca-section-scroller">
 							<div class="dslca-section-scroller-inner">
 								<div class="dslca-section-scroller-content">
-									<?php dslc_display_modules(); ?>
+									<?php dslc_display_modules( $_GET['page_id'] ); ?>
 								</div><!-- .dslca-section-scroller-content -->
 							</div><!-- .dslca-section-scroller-inner -->
 						</div><!-- .dslca-section-scroller-content -->
@@ -435,7 +435,7 @@ function dslc_get_modules() {
  *
  * @since 1.0
  */
-function dslc_display_modules() {
+function dslc_display_modules( $page_id ) {
 
 	$dslc_modules = dslc_get_modules();
 
@@ -459,8 +459,18 @@ function dslc_display_modules() {
 				$dslc_module['origin'] = 'lc';
 			}
 
+			$module_id = $dslc_module['id'];
+			$module_active = true;
+			$module_active = apply_filters( 'dslc_modules_panel_item_class', $module_active, $page_id, $module_id );
+
+			if ( ! $module_active ) {
+				$module_non_active = 'dslca-module-non-active';
+			} else {
+				$module_non_active = '';
+			}
+
 			?>
-				<div class="dslca-module dslca-scroller-item dslca-origin dslca-origin-<?php echo esc_attr( $dslc_module['origin'] ); ?> <?php if ( isset( $dslc_module['exclude'] ) ) { echo 'dslca-exclude'; } ?>" data-origin="<?php echo esc_attr( $dslc_module['origin'] ); ?>" data-id="<?php echo esc_attr( $dslc_module['id'] ); ?>">
+				<div class="dslca-module dslca-scroller-item dslca-origin dslca-origin-<?php echo esc_attr( $dslc_module['origin'] ); ?> <?php if ( isset( $dslc_module['exclude'] ) ) { echo 'dslca-exclude'; } ?> <?php echo $module_non_active; ?>" data-origin="<?php echo esc_attr( $dslc_module['origin'] ); ?>" data-id="<?php echo esc_attr( $dslc_module['id'] ); ?>">
 					<span class="dslca-icon dslc-icon-<?php echo esc_attr( $dslc_module['icon'] ); ?>"></span><span class="dslca-module-title"><?php echo esc_html( $dslc_module['title'] ); ?></span>
 				</div><!-- .dslc-module -->
 			<?php
@@ -471,7 +481,6 @@ function dslc_display_modules() {
 		esc_html_e( 'No Modules Found.', 'live-composer-page-builder' );
 
 	}
-
 }
 
 /**
