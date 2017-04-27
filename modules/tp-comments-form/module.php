@@ -1324,7 +1324,7 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 						<?php } else {
 
 							if ( $dslc_active ) {
-								echo '<div class="dslc-notification dslc-red">' . __( 'Comments disabled for the current post ( whole website ), please see this article for more details on how to enable comments on your website.', 'live-composer-page-builder' ) . '</div>';
+								echo '<div class="dslc-notification dslc-red">' . __( 'Comments disabled for the current post ( whole website ), please enable comments on your website.', 'live-composer-page-builder' ) . '</div>';
 							}
 
 						} ?>
