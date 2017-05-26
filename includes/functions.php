@@ -777,6 +777,31 @@ function dslc_code_migration( $settings ) {
 				/* Fix bug with disappearing borders when migrating to new version */
 				$settings[ $id ] = $control['std'];
 			}
+		} elseif ( 'elements' === $id ) {
+
+			if ( isset( $settings[ $id ] ) && '' === $settings[ $id ] ) {
+				$settings[ $id ] = '';
+			}
+		} elseif ( 'content' === $id ) {
+
+			if ( isset( $settings[ $id ] ) && '' === $settings[ $id ] ) {
+				$settings[ $id ] = '';
+			}
+		} elseif ( 'button_text' === $id ) {
+
+			if ( isset( $settings[ $id ] ) && '' === $settings[ $id ] ) {
+				$settings[ $id ] = '';
+			}
+		} elseif ( 'main_heading_link_title' === $id ) {
+
+			if ( isset( $settings[ $id ] ) && '' === $settings[ $id ] ) {
+				$settings[ $id ] = '';
+			}
+		} elseif ( stristr( $id, 'font_family' ) ) {
+
+			if ( isset( $settings[ $id ] ) && '' === $settings[ $id ] ) {
+				$settings[ $id ] = '';
+			}
 		} elseif ( ( ! isset( $settings[ $id ] ) || '' === $settings[ $id ] ) &&
 					isset( $control['std'] ) ) {
 

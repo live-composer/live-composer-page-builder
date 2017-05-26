@@ -22,9 +22,9 @@
  	#dslc-content .dslc-cpt-post {
 	}
 
-		#dslc-content .dslc-cpt-post-main {
+		/*#dslc-content .dslc-cpt-post-main {
 			border: 0px solid transparent;
-		}
+		}*/
 
 			#dslc-content .dslc-cpt-post-thumb {
 				margin-bottom: 20px;
@@ -214,7 +214,7 @@
 				}
 
 			#dslc-content .dslc-blog-post-meta {
-				border: 1px solid #e5e5e5;
+				/*border: 1px solid #e5e5e5;*/
 				border-left: 0;
 				border-right: 0;
 				margin-bottom: 20px;
@@ -1150,9 +1150,9 @@ input[type="button"], input[type="submit"], input[type="reset"], input[type="fil
 	height: auto;
 }
 
-.dslc-text-module-content {
+/*.dslc-text-module-content {
 	border: 0px solid transparent;
-}
+}*/
 
 /**
  * WIDGETS MODULE
@@ -1211,9 +1211,9 @@ input[type="button"], input[type="submit"], input[type="reset"], input[type="fil
 		margin-right: 0;
 	}
 
-	#dslc-content .dslc-widget li {
+	/*#dslc-content .dslc-widget li {
 		border-style: solid;
-	}
+	}*/
 
 /**
  * PRODUCTS MODULE

@@ -775,8 +775,17 @@ function dslc_filter_content( $content ) {
 		if ( dslc_is_editor_active( 'access' ) ) {
 			$composer_wrapper_after .= '<div class="lc-scroll-top-area"></div><div class="lc-scroll-bottom-area"></div>';
 		}
+
+		// Before Content.
+		$content_before = '';
+		$dslc_content_before = apply_filters( 'dslc_content_before', $content_before );
+
+		// After Content.
+		$content_after = '';
+		$dslc_content_after = apply_filters( 'dslc_content_after', $content_after );
+
 		// Pass the filtered content output.
-		return $composer_wrapper_before . do_action( 'dslc_output_prepend' ) . $composer_header . '<div id="dslc-main">' . $composer_prepend . $composer_content . '</div>' . $composer_append . $composer_footer . do_action( 'dslc_output_append' ) . $composer_wrapper_after;
+		return $dslc_content_before . $composer_wrapper_before . do_action( 'dslc_output_prepend' ) . $composer_header . '<div id="dslc-main">' . $composer_prepend . $composer_content . '</div>' . $composer_append . $composer_footer . do_action( 'dslc_output_append' ) . $composer_wrapper_after . $dslc_content_after;
 
 	// If LC should not filter the content
 	} else {

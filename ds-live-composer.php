@@ -214,24 +214,26 @@ register_activation_hook( __FILE__, 'dslc_disable_old_plugin' );
  * @param string $plugin Full path to the plugin that WP just activated.
  * @return void
  */
-function lc_welcome( $plugin ) {
+if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
+	function lc_welcome( $plugin ) {
 
-	if ( plugin_basename( __FILE__ ) === $plugin ) {
-		// Make Welcome screen optional for the theme developers.
-		$show_welcome_screen = true;
-		if ( ! apply_filters( 'dslc_show_welcome_screen', $show_welcome_screen ) ) {
-			return;
+		if ( plugin_basename( __FILE__ ) === $plugin ) {
+			// Make Welcome screen optional for the theme developers.
+			$show_welcome_screen = true;
+			if ( ! apply_filters( 'dslc_show_welcome_screen', $show_welcome_screen ) ) {
+				return;
+			}
+
+			// Bail if activating from network, or bulk.
+			if ( is_network_admin() || isset( $_GET['activate-multi'] ) || isset( $_GET['tgmpa-activate'] ) ) {
+				return;
+			}
+
+			wp_safe_redirect( admin_url( 'admin.php?page=dslc_plugin_options#dslc-top' ) );
+			exit; // ! important to keep this exit line
+			// Function wp_redirect() does not exit automatically and should almost always be followed by exit.
 		}
 
-		// Bail if activating from network, or bulk.
-		if ( is_network_admin() || isset( $_GET['activate-multi'] ) || isset( $_GET['tgmpa-activate'] ) ) {
-			return;
-		}
-
-		wp_safe_redirect( admin_url( 'admin.php?page=dslc_plugin_options#dslc-top' ) );
-		exit; // ! important to keep this exit line
-		// Function wp_redirect() does not exit automatically and should almost always be followed by exit.
 	}
-
+	add_action( 'activated_plugin', 'lc_welcome' );
 }
-add_action( 'activated_plugin', 'lc_welcome' );

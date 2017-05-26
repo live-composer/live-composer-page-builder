@@ -566,6 +566,14 @@ function dslc_hf_get_header( $post_ID = false ) {
 	// Get header/footer ID associated with the post
 	$header_footer = dslc_hf_get_ID( $post_ID );
 
+	// Before Header.
+	$header_before = '';
+	$dslc_header_before = apply_filters( 'dslc_header_before', $header_before );
+
+	// After Header.
+	$header_after = '';
+	$dslc_header_after = apply_filters( 'dslc_header_after', $header_after );
+
 	// If there is a header applied
 	if ( $header_footer['header'] && is_numeric ( $header_footer['header'] ) ) {
 
@@ -606,11 +614,11 @@ function dslc_hf_get_header( $post_ID = false ) {
 		$header_render = dslc_render_content( $header_code );
 
 		// Add the header code to the variable holder.
-		return $wrapper_start . '<div id="dslc-header" class="dslc-header-pos-' . $header_position . '">' . $header_render . $append . '</div>';
+		return $dslc_header_before . $wrapper_start . '<div id="dslc-header" class="dslc-header-pos-' . $header_position . '">' . $header_render . $append . '</div>' . $dslc_header_after;
 
 	} else {
 		// If no header applied.
-		return $wrapper_start . '';
+		return $dslc_header_before . $wrapper_start . '' . $dslc_header_after;
 	}
 }
 
@@ -640,6 +648,14 @@ function dslc_hf_get_footer( $post_ID = false ) {
 
 	// Get header/footer ID associated with the post
 	$header_footer = dslc_hf_get_ID( $post_ID );
+
+	// Before Footer.
+	$footer_before = '';
+	$dslc_footer_before = apply_filters( 'dslc_footer_before', $footer_before );
+
+	// After Footer.
+	$footer_after = '';
+	$dslc_footer_after = apply_filters( 'dslc_footer_after', $footer_after );
 
 	// If there is a footer applied
 	if ( $header_footer['footer'] && is_numeric ( $header_footer['footer'] )  ) {
@@ -682,12 +698,12 @@ function dslc_hf_get_footer( $post_ID = false ) {
 		$footer_render = dslc_render_content( $footer_code );
 
 		// Add the header code to the variable holder.
-		return '<div id="dslc-footer"  class="dslc-footer-pos-' . $footer_position . '">' . $footer_render . $append . '</div>' . $wrapper_end;
+		return $dslc_footer_before . '<div id="dslc-footer"  class="dslc-footer-pos-' . $footer_position . '">' . $footer_render . $append . '</div>' . $wrapper_end . $dslc_footer_after;
 
 	// If no header applied
 	} else {
 
-		return '' . $wrapper_end;
+		return $dslc_footer_before . '' . $wrapper_end . $dslc_footer_after;
 
 	}
 
