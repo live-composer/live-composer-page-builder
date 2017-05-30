@@ -781,6 +781,8 @@ function dslc_code_migration( $settings ) {
 
 			if ( isset( $settings[ $id ] ) && '' === $settings[ $id ] ) {
 				$settings[ $id ] = '';
+			} elseif ( ! isset( $settings[ $id ] ) ) {
+				$settings[ $id ] = $control['std'];
 			}
 		} elseif ( 'content' === $id ) {
 
