@@ -63,6 +63,7 @@ function dslc_testimonials_module_cpt() {
 			'not_found_in_trash' => __( 'No Testimonials found in Trash', 'live-composer-page-builder' ),
 			'parent' => __( 'Parent Testimonial', 'live-composer-page-builder' ),
 		),
+		'publicly_queryable'  => false,
 		'public' => true,
 		'rewrite' => array('slug' => dslc_get_option( 'testimonials_slug', 'dslc_plugin_options_cpt_slugs' ), 'with_front' => $with_front),
 		'supports' => array('title', 'custom-fields', 'excerpt', 'editor', 'author', 'thumbnail'),

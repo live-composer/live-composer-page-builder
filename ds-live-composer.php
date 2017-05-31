@@ -224,7 +224,7 @@ function lc_welcome( $plugin ) {
 		}
 
 		// Bail if activating from network, or bulk.
-		if ( is_network_admin() || isset( $_GET['activate-multi'] ) || isset( $_GET['tgmpa-activate'] ) ) {
+		if ( is_network_admin() || isset( $_GET['activate-multi'] ) || isset( $_GET['tgmpa-activate'] ) || isset( $_GET['tgmpa-install'] ) ) {
 			return;
 		}
 
