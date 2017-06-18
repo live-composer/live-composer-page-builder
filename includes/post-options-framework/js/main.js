@@ -161,10 +161,8 @@ jQuery(document).ready(function(){
 		specialPage = jQuery( '#dslca_special_page_templates input[type="checkbox"]:checked' ).length;
 
 		if ( singleTemplate && archiveTemplate == 0 && specialPage == 0 ) {
-			console.log('1');
 	        jQuery("#post-option-dslc_template_base").show();
 	    } else {
-			console.log('3');
 	        jQuery("#post-option-dslc_template_base").hide();
 	    }
 	});
