@@ -1060,7 +1060,7 @@ jQuery(document).ready(function($){
 	/**
 	 * Navigation Module
 	 */
-
+/* Disabled in favour of CSS hover.
 	$( '.dslc-navigation li' ).mouseenter(function(){
 
 		var subnav = $(this).children('ul');
@@ -1097,7 +1097,7 @@ jQuery(document).ready(function($){
 			$(this).css({ 'display' : 'none' }).children('ul').removeClass('dslc-navigation-invert-subnav');
 		});
 	});
-
+*/
 	dslc_check_viewport();
 	dslc_check_progress_bar_viewport();
 
