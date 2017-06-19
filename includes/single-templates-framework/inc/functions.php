@@ -248,6 +248,7 @@ function dslc_get_archive_template_by_pt( $post_type_slug ) {
 	/**
 	 * Add back-compatability with post archive options without '_archive' suffix.
 	 * In some of the past versions with didn't add '_archive' to these.
+	 * Also important for '404_page', etc. templates.
 	 */
 	if ( ! $template_id && stristr( $post_type_slug, '_archive' ) ) {
 		$template_id = dslc_get_option( str_replace( '_archive', '', $post_type_slug ), 'dslc_plugin_options_archives' );
