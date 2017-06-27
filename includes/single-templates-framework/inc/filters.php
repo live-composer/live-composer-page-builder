@@ -272,27 +272,30 @@ function dslc_tp_update_archive_templates_option( $post_id ) {
 	// Allowed to do this?
 	if ( dslc_current_user_can( 'save' ) ) {
 
-		$post_type = get_post_type( $post_id );
+		// $post_type = get_post_type( $post_id );
 
 		// If no post type ( not really a save action ) stop execution.
-		if ( 'dslc_templates' !== $post_type ) {
+		/*if ( 'dslc_templates' !== $post_type ) {
 			return;
-		}
+		}*/
 
 		// If template type not supplied.
-		if ( ! isset( $_POST['dslc_template_for'] ) ) {
+		/*if ( ! isset( $_POST['dslc_template_for'] ) ) {
 			$_POST['dslc_template_for'] = false;
 		}
 
-		$post_type = esc_attr( $post_type );
+		$post_type = esc_attr( $post_type );*/
 
 		// Make dslc_template_for an array even if it's string (for easier processing).
 		$dslc_template_for = array();
-		if ( ! is_array( $_POST['dslc_template_for'] ) ) {
+		/*if ( ! is_array( $_POST['dslc_template_for'] ) ) {
 			$dslc_template_for[] = $_POST['dslc_template_for'];
 		} else {
 			$dslc_template_for = $_POST['dslc_template_for'];
-		}
+		}*/
+
+		$dslc_metadata = get_post_meta( $post_id, 'dslc_template_for' );
+		$dslc_template_for = $dslc_metadata;
 
 		// List of options that should have single template only (no alternative designs).
 		// Like: Search results, 404 page, Author listing, Archive pages, etc.
@@ -348,7 +351,7 @@ function dslc_tp_update_archive_templates_option( $post_id ) {
 				// Put template post ID into plugin options.
 				$plugin_options[ $value ] = $post_id;
 				// Make sure we have only one LC template for this option.
-				dslc_tp_remove_template_from_meta( $value );
+				dslc_tp_remove_template_from_meta( $value, $post_id );
 			}
 		}
 
@@ -363,7 +366,20 @@ function dslc_tp_update_archive_templates_option( $post_id ) {
 
 }
 
-add_action( 'save_post', 'dslc_tp_update_archive_templates_option' );
+// add_action( 'save_post', 'dslc_tp_update_archive_templates_option' );
+
+add_action( 'added_post_meta', 'dslc_template_for_meta_updated', 10, 4 );
+add_action( 'updated_postmeta', 'dslc_template_for_meta_updated', 10, 4 );
+add_action( 'deleted_post_meta', 'dslc_template_for_meta_updated', 10, 4 );
+
+function dslc_template_for_meta_updated( $meta_id, $object_id, $meta_key, $meta_value ) {
+
+	if ( 'dslc_template_for' !== $meta_key ) {
+		return;
+	}
+
+	dslc_tp_update_archive_templates_option( $object_id );
+}
 
 
 /**
@@ -407,7 +423,7 @@ add_action( 'wp_trash_post', 'dslc_tp_update_archive_templates_option_ondelete' 
  * @param  String $template_to_remove  Name of the template to remove.
  * @return void
  */
-function dslc_tp_remove_template_from_meta( $template_to_remove ) {
+function dslc_tp_remove_template_from_meta( $template_to_remove, $post_id_to_keep ) {
 	// Get templates ( if any ) in same CPT that has $template_to_remove
 	// as value for 'dslc_template_for' custom field.
 	$args = array(
@@ -428,21 +444,39 @@ function dslc_tp_remove_template_from_meta( $template_to_remove ) {
 	// Set those old defaults to regular templates.
 	if ( $templates ) {
 		foreach ( $templates as $template ) {
-			// Get current value of 'dslc_template_for' custom field.
-			$dslc_template_for = get_post_meta( $template->ID, 'dslc_template_for' );
-			delete_post_meta( $template->ID, 'dslc_template_for' );
+			if ( $template->ID !== $post_id_to_keep  ) {
+				// Get current value of 'dslc_template_for' custom field.
+				$dslc_template_for = get_post_meta( $template->ID, 'dslc_template_for' );
+				delete_post_meta( $template->ID, 'dslc_template_for' );
 
-			// Remove value from the array.
-			if ( ( $key = array_search( $template_to_remove, $dslc_template_for ) ) !== false ) {
-			    unset( $dslc_template_for[ $key ] );
-			}
+				// Remove value from the array.
+				if ( ( $key = array_search( $template_to_remove, $dslc_template_for ) ) !== false ) {
+				    unset( $dslc_template_for[ $key ] );
+				}
 
-			// Put back updated value for 'dslc_template_for' custom field.
-			// DON'T CHANGE IT TO udpate_post_meta!
-			// We don't want to struggle with serialized arrays.
-			foreach ( $dslc_template_for as $template_cpt ) {
-				add_post_meta( $template->ID, 'dslc_template_for', $template_cpt );
+				// Put back updated value for 'dslc_template_for' custom field.
+				// DON'T CHANGE IT TO udpate_post_meta!
+				// We don't want to struggle with serialized arrays.
+				foreach ( $dslc_template_for as $template_cpt ) {
+					add_post_meta( $template->ID, 'dslc_template_for', $template_cpt );
+				}
 			}
 		}
+	}
+}
+
+function dslc_refresh_template_ids() {
+
+	// Get all the posts of 'dslc_templates' type.
+	$args = array(
+		'posts_per_page' => 99, // Not likely someone have more.
+		'post_type' => 'dslc_templates',
+	);
+
+	$template_posts = get_posts( $args );
+
+	foreach ( $template_posts as $template ) {
+		$template_id = $template->ID;
+		dslc_tp_update_archive_templates_option( $template_id );
 	}
 }

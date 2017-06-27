@@ -1960,7 +1960,7 @@ body.dslca-enabled .dslc-notification-box-has-timeout {
  */
 
 #dslc-content .dslc-navigation {
-	z-index: 99998;
+	z-index: 999;
 	position: relative;
 	text-align: right;
 	font-size: 0;
@@ -1981,7 +1981,7 @@ body.dslca-enabled .dslc-notification-box-has-timeout {
 		#dslc-content .dslc-navigation .menu > li {
 			display: inline-block;
 			position: relative;
-			z-index: 99998;
+			z-index: 999;
 		}
 
 		/* Top level horizontal menu li */
