@@ -612,6 +612,7 @@ class LC_Control {
 			'css_anim_duration',
 			'css_anim_easing',
 			'css_toggle_dropdown',
+			'css_toggle_menu',
 			'content',
 			'css_res_t',
 			'css_res_p',
