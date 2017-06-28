@@ -19,7 +19,7 @@
 
 	function dslc_show_modal( hook, modal ) {
 
-		if ( dslcDebug ) console.log( 'dslc_show_modal' );
+		if ( typeof dslcDebug !== 'undefined' && dslcDebug ) console.log( 'dslc_show_modal' );
 
 		// If a modal already visibile hide it
 		dslc_hide_modal( '', jQuery('.dslca-modal:visible') );
@@ -63,7 +63,7 @@
 
 	function dslc_hide_modal( hook, modal ) {
 
-		if ( dslcDebug ) console.log( 'dslc_hide_modal' );
+		if ( typeof dslcDebug !== 'undefined' && dslcDebug ) console.log( 'dslc_hide_modal' );
 
 		// Vars
 		var modal = jQuery(modal);
@@ -140,10 +140,9 @@
  * - dslc_js_confirm_close
  *
  ***********************************/
-
 	function dslc_js_confirm( dslcID, dslcContent, dslcTarget ) {
 
-		if ( dslcDebug ) console.log( 'dslc_js_confirm' );
+		if ( typeof dslcDebug !== 'undefined' && dslcDebug ) console.log( 'dslc_js_confirm' );
 
 		// Add "active" class
 		jQuery('.dslca-prompt-modal').addClass('dslca-prompt-modal-active');
@@ -168,7 +167,7 @@
 
 	function dslc_js_confirm_close() {
 
-		if ( dslcDebug ) console.log( 'dslc_js_confirm_close' );
+		if ( typeof dslcDebug !== 'undefined' && dslcDebug ) console.log( 'dslc_js_confirm_close' );
 
 		// Remove "active" class
 		jQuery('.dslca-prompt-modal').removeClass('dslca-prompt-modal-active');

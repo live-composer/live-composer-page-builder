@@ -74,12 +74,14 @@ function dslc_icons_modal() {
 			 $dslc_var_icons; // Array with icon sets.
 
 	$screen = get_current_screen();
+	$screens_with_icon_modal = array(
+			'toplevel_page_livecomposer_editor',
+			'nav-menus',
+		);
 
-	if ( $screen->id != 'toplevel_page_livecomposer_editor' ) {
-
+	if ( ! in_array( $screen->id, $screens_with_icon_modal, true ) ) {
 		return;
 	}
-
 
 	if ( current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 

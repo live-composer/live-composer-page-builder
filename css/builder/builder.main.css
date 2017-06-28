@@ -3401,12 +3401,13 @@ span.dslca-manage-action:hover * {
 .dslca-modules-section-edit-field-image-add-hook,
 .dslca-modules-section-edit-field-image-remove-hook,
 .dslca-module-edit-field-image-add-hook,
-.dslca-module-edit-field-image-remove-hook {
+.dslca-module-edit-field-image-remove-hook,
+.dslca-module-edit-field-button-hook {
 	background: #3b6fbe;
 	border: 1px solid #3565ad;
 	border-radius: 3px;
 	color: #a0c0f0;
-	cursor: pointer;
+	cursor: pointer!important;
 	display: inline-block;
 	font-size: 12px;
 	font-family: 'Open Sans', sans-serif;

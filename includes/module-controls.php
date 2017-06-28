@@ -68,6 +68,7 @@ class LC_Control {
 	private $_section;
 	private $_control_with_toggle;
 	private $_tab_id;
+	private $_advanced_action;
 
 
 	function __construct( $options_panel_obj ) {
@@ -85,6 +86,7 @@ class LC_Control {
 		$this->_refresh_on_change   = $this->get_refresh_on_change();
 		$this->_control_with_toggle = $this->get_toggle_classes();
 		$this->_tab_id              = $this->get_tab_id();
+		$this->_advanced_action     = $this->get_advanced_action();
 	}
 
 
@@ -286,7 +288,6 @@ class LC_Control {
 					<span class="dslca-options-iconbutton dslca-open-modal-hook" data-modal=".dslc-list-icons-fontawesome"><span class="dslca-icon dslc-icon-th"></span></span>
 					<span class="dslca-module-edit-field-icon-switch-set"><span class="dslca-icon dslc-icon-cog"></span> <span class="dslca-module-edit-field-icon-curr-set"><?php echo dslc_icons_current_set( $this->_curr_value ); ?></span></span>
 
-
 				<?php elseif ( 'image' === $module_control['type'] ) : ?>
 
 					<?php $this->output_image_control( $module_control, $this->_curr_value, $affect_on_change_append ); ?>
@@ -417,6 +418,13 @@ class LC_Control {
 
 					</div><!-- .dslca-module-edit-option-text-shadow-wrapper -->
 
+				<?php elseif ( 'button' === $module_control['type'] ) : ?>
+
+					<?php
+						$this->output_button_control( $module_control, $this->_curr_value, $this->get_advanced_action() );
+
+						?>
+
 				<?php else : ?>
 
 					<?php if ( has_action( 'dslc_custom_option_type_' . $module_control['type'] ) ) : ?>
@@ -490,6 +498,16 @@ class LC_Control {
 		}
 
 		return $visibility;
+	}
+
+	private function get_advanced_action() {
+		$module_control = $this->_module_control;
+		$action = '';
+
+		if ( isset( $module_control['advanced_action'] ) ) {
+			$action = $module_control['advanced_action'];
+		}
+		return $action;
 	}
 
 	private function get_refresh_on_change () {
@@ -593,6 +611,7 @@ class LC_Control {
 			'css_anim_delay',
 			'css_anim_duration',
 			'css_anim_easing',
+			'css_toggle_dropdown',
 			'content',
 			'css_res_t',
 			'css_res_p',
@@ -673,6 +692,12 @@ class LC_Control {
 		<span class="dslca-module-edit-field-image-add-hook" <?php if ( $this->_curr_value != '' ) echo 'style="display: none;"'; ?>><span class="dslca-icon dslc-icon-cloud-upload"></span><?php esc_html_e( 'Upload Image', 'live-composer-page-builder' ); ?></span>
 		<span class="dslca-module-edit-field-image-remove-hook" <?php if ( $this->_curr_value == '' ) echo 'style="display: none;"'; ?>><span class="dslca-icon dslc-icon-remove"></span><?php esc_html_e( 'Remove Image', 'live-composer-page-builder' ); ?></span>
 		<input type="hidden" class="dslca-module-edit-field dslca-module-edit-field-image" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo esc_attr( $this->_curr_value ); ?>" <?php echo $affect_on_change_append ?> />
+		<?php
+	}
+
+	private function output_button_control ( $module_control, $curr_value = '', $action = '' ) {
+		?>
+		<span class="dslca-module-edit-field-button-hook" <?php echo 'onclick="' . esc_attr( $action ) . '"'; ?>><span class="dslca-icon dslc-icon-ok"></span> <?php echo esc_attr( $module_control['label_alt'] ) ?></span>
 		<?php
 	}
 

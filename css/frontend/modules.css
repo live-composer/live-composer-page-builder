@@ -1981,7 +1981,7 @@ body.dslca-enabled .dslc-notification-box-has-timeout {
 		#dslc-content .dslc-navigation .menu > li {
 			display: inline-block;
 			position: relative;
-			z-index: 999;
+			/*z-index: 99998; – it breaks sub-menu popups. No z-index should be here.*/
 		}
 
 		/* Top level horizontal menu li */
@@ -2021,14 +2021,15 @@ body.dslca-enabled .dslc-notification-box-has-timeout {
 
 	/* Inner level menu ul */
 	#dslc-content .dslc-navigation .menu ul {
-		border-style: solid;
 		display: none;
 		list-style-type: none;
 		margin: 0;
 		opacity: 0;
 		position: absolute;
+		z-index:10; /* Required to have sub-menu pop-up to cover other meny items properly*/
 		top: 100%;
 		left: -28px;
+		text-align: left;
 	}
 
 	/* Left position menu */
@@ -2064,6 +2065,8 @@ body.dslca-enabled .dslc-notification-box-has-timeout {
 		/* Inner level menu li */
 		#dslc-content .dslc-navigation .menu ul li {
 			display: block;
+			position: relative;
+			z-index: 3;
 			white-space: nowrap;
 			margin: 0;
 		}
@@ -2100,8 +2103,35 @@ body.dslca-enabled .dslc-notification-box-has-timeout {
 		/* Second Level menu ul */
 		#dslc-content .dslc-navigation .menu ul ul {
 			left: 100%;
-			margin-left: -10px;
+			margin-left: -1px;
 			top: -1px;
+		}
+
+		/* We don't apply design settings to sub-menu ul directly
+			but using pseudo element. */
+		#dslc-content .dslc-navigation .menu ul:before {
+		    position: absolute;
+		    content: '';
+		    display: block;
+		    left: 0;
+		    top: 0;
+		    bottom: 0;
+		    right: 0;
+		    z-index: 2;
+
+		    border-style: solid;
+		}
+
+		/* Invisible buffer for better hover experience */
+		#dslc-content .dslc-navigation .menu li:hover > ul.sub-menu:after {
+		    display: block;
+		    content: "";
+		    left: -10px;
+		    right: -10px;
+		    bottom: -10px;
+		    top: -10px;
+		    z-index: 0;
+		    position: absolute;
 		}
 
 			/* Second level menu inverted */
@@ -2111,8 +2141,9 @@ body.dslca-enabled .dslc-notification-box-has-timeout {
 			}
 
 		/* Inner level menu show */
-		#dslc-content .dslc-navigation .menu li:hover > ul {
+		#dslc-content .dslc-navigation .menu li:hover > ul.sub-menu {
 			display: block;
+			opacity: 1;
 		}
 
 /**
