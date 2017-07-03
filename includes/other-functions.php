@@ -332,30 +332,40 @@ function dslc_get_social_count( $post_ID = false, $refresh_in = 3600 ) {
  */
 function dslc_icons_current_set( $icon = false ) {
 
+	// Get array with available icons
+	global $dslc_var_icons;
+
 	// If no icon set return to the default "fontawesome"
 	// If empty icon return default
 	// If there is no "-" in icon, there is no set, return default
 	if ( $icon == false || strlen( $icon ) == 0 || strpos( $icon, '-' ) === false ) {
-		return 'fontawesome';
+		if ( isset( $dslc_var_icons['fontawesome'] ) ) {
+			return 'fontawesome';
+		} else {
+			// If fontawesome not avaibale return the first icon set.
+			reset( $dslc_var_icons );
+			return key( $dslc_var_icons );
+		}
 	}
-
-	// Get array with available icons
-	global $dslc_var_icons;
 
 	// Get the first part of the icon ( representing the set )
 	$icon_parts = explode( '-', $icon );
 	$icon_set = $icon_parts[0];
-
-
 
 	// If there is an icon set by that name return it
 	if ( isset( $dslc_var_icons[$icon_set] ) ) {
 		return $icon_set;
 	// Otherwise return the default
 	} else {
-		return 'fontawesome';
-	}
 
+		if ( isset( $dslc_var_icons['fontawesome'] ) ) {
+			return 'fontawesome';
+		} else {
+			// If fontawesome not avaibale return the first icon set.
+			reset( $dslc_var_icons );
+			return key( $dslc_var_icons );
+		}
+	}
 }
 
 /**
