@@ -4366,3 +4366,41 @@ a.dslc-editor-messages-title:hover {
 a.dslc-editor-messages-hide:hover {
     color: #fff;
 }
+
+.dslca-enabled.dslc-res-tablet .dslc-modules-section:hover, .dslca-enabled.dslc-res-phone .dslc-modules-section:hover {
+	box-shadow: none;
+}
+
+.dslca-enabled.dslc-res-tablet .dslc-modules-section:hover .dslca-modules-section-manage, .dslca-enabled.dslc-res-phone .dslc-modules-section:hover .dslca-modules-section-manage {
+	visibility: hidden !important;
+}
+
+.dslca-enabled.dslc-res-tablet .dslc-modules-area:hover, .dslca-enabled.dslc-res-phone .dslc-modules-area:hover {
+    box-shadow: none;
+}
+
+.dslca-enabled.dslc-res-tablet .dslc-modules-area:hover .dslca-modules-area-manage, .dslca-enabled.dslc-res-phone .dslc-modules-area:hover .dslca-modules-area-manage {
+	visibility: hidden !important;
+	opacity: 0;
+}
+
+.dslca-enabled.dslca-drag-not-in-progress.dslc-res-tablet #dslc-content .dslc-module-front .dslca-module-manage-inner:hover,
+.dslca-enabled.dslca-drag-not-in-progress.dslc-res-tablet #dslc-content .dslc-module-front:hover .dslca-module-manage-inner,
+.dslca-enabled.dslca-drag-not-in-progress.dslc-res-tablet #dslc-content .dslc-module-front:hover .dslca-wysiwyg-actions-edit,
+.dslca-enabled.dslca-drag-not-in-progress.dslc-res-phone #dslc-content .dslc-module-front .dslca-module-manage-inner:hover,
+.dslca-enabled.dslca-drag-not-in-progress.dslc-res-phone #dslc-content .dslc-module-front:hover .dslca-module-manage-inner,
+.dslca-enabled.dslca-drag-not-in-progress.dslc-res-phone #dslc-content .dslc-module-front:hover .dslca-wysiwyg-actions-edit {
+	opacity: 0;
+}
+
+.dslca-enabled.dslc-res-tablet .dslc-modules-area:hover .dslc-module-front:hover, .dslca-enabled.dslc-res-phone .dslc-modules-area:hover .dslc-module-front:hover {
+	box-shadow: none;
+}
+
+body.module-editing-in-progress.dslc-res-tablet .dslc-module-front:not(.dslca-module-being-edited):before,
+body.section-editing-in-progress.dslc-res-tablet .dslc-modules-section:not(.dslca-modules-section-being-edited):before,
+body.module-editing-in-progress.dslc-res-phone .dslc-module-front:not(.dslca-module-being-edited):before,
+body.section-editing-in-progress.dslc-res-phone .dslc-modules-section:not(.dslca-modules-section-being-edited):before {
+	z-index: 1;
+}
+
