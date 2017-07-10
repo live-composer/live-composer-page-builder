@@ -39,6 +39,13 @@ class DSLC_Text_Simple extends DSLC_Module {
 	 */
 	function options() {
 
+		// Check if we have this module options already calculated
+		// and cached in WP Object Cache.
+		$cached_dslc_options = wp_cache_get( 'dslc_options_' . $this->module_id, 'dslc_modules' );
+		if ( $cached_dslc_options ) {
+			return apply_filters( 'dslc_module_options', $cached_dslc_options, $this->module_id );
+		}
+
 		$dslc_options = array(
 
 			array(
@@ -4978,6 +4985,9 @@ class DSLC_Text_Simple extends DSLC_Module {
 		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array( 'hover_opts' => false ) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
+		// Cache calculated array in WP Object Cache.
+		wp_cache_add( 'dslc_options_' . $this->module_id, $dslc_options ,'dslc_modules' );
+
 		return apply_filters( 'dslc_module_options', $dslc_options, $this->module_id );
 
 	}
@@ -4988,7 +4998,6 @@ class DSLC_Text_Simple extends DSLC_Module {
 	 * @return void
 	 */
 	function output( $options ) {
-
 		global $dslc_active;
 
 		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
@@ -5010,7 +5019,8 @@ class DSLC_Text_Simple extends DSLC_Module {
 				}
 
 					$output_content = stripslashes( $options['content'] );
-					$output_content = do_shortcode( $output_content );
+					// $output_content = do_shortcode( $output_content );
+					$output_content = $output_content; // Removed do_shortcode for caching.
 					echo apply_filters( 'dslc_before_render', $output_content );
 
 				if ( $dslc_active ) {
@@ -5021,8 +5031,6 @@ class DSLC_Text_Simple extends DSLC_Module {
 			?></div><?php
 
 		/* Module output ends here */
-
 		$this->module_end( $options );
-
 	}
 }

@@ -262,7 +262,6 @@ final class DSLC_Scripts{
 
 		/* If current screen is Live Composer options page */
 		if ( 'dslc-options' === $current_screen ) {
-
 			wp_enqueue_script( 'dslc-plugin-options-js-admin', DS_LIVE_COMPOSER_URL . 'includes/plugin-options-framework/js/main' . $min_suffix . '.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 			wp_enqueue_style( 'dslc-plugin-options-css-admin', DS_LIVE_COMPOSER_URL . 'includes/plugin-options-framework/css/main' . $min_suffix . '.css', array(), DS_LIVE_COMPOSER_VER );
 			wp_localize_script( 'dslc-plugin-options-js-admin', 'dslcajax', array( 'nonce' => wp_create_nonce( 'dslc-optionspanel-ajax' ) ) );

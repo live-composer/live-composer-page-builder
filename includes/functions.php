@@ -208,7 +208,9 @@ function dslc_module_settings( $options, $module_id ) {
 
 		// Go through all options and fill array with default/standard values.
 		foreach ( $options as $option ) {
-			$settings[ $option['id'] ] = $option['std'];
+			if ( isset( $option['std'] ) ) {
+				$settings[ $option['id'] ] = $option['std'];
+			}
 		}
 
 	} else {

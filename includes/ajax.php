@@ -355,6 +355,10 @@ function dslc_ajax_save_composer( $atts ) {
 			update_post_meta( $post_id, 'dslc_content_for_search', wp_kses_post( $content_for_search ) );
 		}
 
+		// Request just saved page in the background
+		// to make sure it has cache built properly.
+		$response = wp_remote_get( site_url() . '/?p=' . $post_id );
+
 		// Au revoir.
 		exit;
 	}
@@ -750,3 +754,19 @@ function dslc_ajax_hidden_tab_seo() {
 		exit;
 	}
 } add_action( 'wp_ajax_dslc-ajax-hidden-tab-seo', 'dslc_ajax_hidden_tab_seo' );
+
+/**
+ * Ajax Clear Cache (Plugin Settings Tab).
+ */
+function dslc_ajax_clear_cache() {
+
+	// Check Nonce.
+	if ( ! wp_verify_nonce( $_POST['security']['nonce'], 'dslc-optionspanel-ajax' ) ) {
+		wp_die( 'You do not have rights!' );
+	}
+
+	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+		delete_transient( 'lc_cache' );
+		exit;
+	}
+} add_action( 'wp_ajax_dslc_ajax_clear_cache', 'dslc_ajax_clear_cache' );
