@@ -1183,7 +1183,7 @@ a img.aligncenter { display: block; margin-left: auto; margin-right: auto }
 	.dslc-no-columns-spacing .dslc-col {
 		width: 100%;
 		margin: 0;
-		/*margin-bottom: 30px;*/
+		margin-bottom: 30px;
 		min-width: 0px;
 	}
 
