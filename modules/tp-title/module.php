@@ -559,7 +559,6 @@ class DSLC_TP_Title extends DSLC_Module {
 			$post_id = get_the_ID();
 		}
 
-		$this->module_start( $options );
 
 		/* Module output starts here */
 
@@ -592,9 +591,7 @@ class DSLC_TP_Title extends DSLC_Module {
 
 			<?php
 
-		/* Module output ends here */
 
-		$this->module_end( $options );
 
 	}
 

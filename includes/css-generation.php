@@ -727,7 +727,7 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 			$css_element_output[ $css_selector ] = array();
 
 			// ------- SPLIT INTO SEPARATE FUNCTION ------------------------------------
-			// Argument: $css_declaration and $important_append (or decalre it inside)
+			// Argument: $css_declaration and $important_append (or declare it inside)
 			// Output: array with css property:value pairs.
 			// Go through each propery to compose css declaration block.
 
@@ -820,6 +820,10 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 					isset( $css_declaration_borders['border-bottom-width'] ) ||
 					isset( $css_declaration_borders['border-left-width'] ) ) {
 				$output_border_declaration = true;
+			} elseif ( $dslc_active ) {
+				$css_declaration_borders['border-width'] = '0px';
+				// ↑↑↑ Fixes 🐛 with unwanted black border due to:
+				// border-style:solid solid solid solid; when editing the page.
 			}
 
 			// Always output all the border properties when:

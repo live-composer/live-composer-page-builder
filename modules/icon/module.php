@@ -437,7 +437,6 @@ class DSLC_Icon extends DSLC_Module {
 			$dslc_is_admin = false;
 		}
 
-		$this->module_start( $options );
 
 		/* Module output stars here */
 
@@ -449,9 +448,7 @@ class DSLC_Icon extends DSLC_Module {
 
 		<?php
 
-		/* Module output ends here */
 
-		$this->module_end( $options );
 
 	}
 }

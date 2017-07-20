@@ -200,6 +200,7 @@ final class DSLC_Scripts{
 			self::load_scripts( 'builder', 'dslc-builder-main-js' );
 
 			wp_localize_script( 'dslc-builder-main-js', 'DSLCAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php', $protocol ) ) );
+			wp_localize_script( 'dslc-builder-main-js', 'DSLCSiteData', array( 'siteurl' => get_option( 'siteurl' ) ) );
 
 			$translation_array = array(
 				'str_confirm' => __( 'Confirm', 'live-composer-page-builder' ),

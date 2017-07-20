@@ -774,7 +774,6 @@ class DSLC_Image extends DSLC_Module {
 	 */
 	function output( $options ) {
 
-		$this->module_start( $options );
 
 		/* Module output starts here */
 
@@ -797,7 +796,7 @@ class DSLC_Image extends DSLC_Module {
 		}
 
 		if ( ! empty( $options['link_url'] ) ) {
-			$anchor_href = do_shortcode( $options['link_url'] );
+			$anchor_href = $options['link_url'];
 		}
 
 		if ( 'lightbox' === $options['link_type'] && ! empty( $options['link_lb_image'] ) ) {
@@ -832,7 +831,7 @@ class DSLC_Image extends DSLC_Module {
 
 				if ( empty( $options['image'] ) ) {
 
-					$the_image = do_shortcode( $options['image_url'] );
+					$the_image = $options['image_url'];
 
 				} else {
 
@@ -914,9 +913,7 @@ class DSLC_Image extends DSLC_Module {
 		</div>
 		<?php
 
-		/* Module output ends here */
 
-		$this->module_end( $options );
 
 	}
 }

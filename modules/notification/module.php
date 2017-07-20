@@ -784,7 +784,6 @@ class DSLC_Notification extends DSLC_Module {
 		else
 			$dslc_is_admin = false;
 
-		$this->module_start( $options );
 
 		/* Module output starts here */
 
@@ -802,7 +801,6 @@ class DSLC_Notification extends DSLC_Module {
 				<div class="dslc-notification-box-content  dslca-editable-content" data-id="content"<?php if ( $dslc_is_admin ) echo ' data-exportable-content'; ?>>
 					<?php
 						$output_content = stripslashes( $options['content'] );
-						$output_content = do_shortcode( $output_content );
 						echo $output_content;
 					?>
 				</div>
@@ -814,9 +812,7 @@ class DSLC_Notification extends DSLC_Module {
 
 			<?php
 
-		/* Module output ends here */
 
-		$this->module_end( $options );
 
 	}
 

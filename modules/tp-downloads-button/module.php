@@ -517,7 +517,6 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 		else
 			$dslc_is_admin = false;
 
-		$this->module_start( $options );
 
 		$show_fake = true;
 
@@ -559,9 +558,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 
 			<?php
 
-		/* Module output ends here */
 
-		$this->module_end( $options );
 
 	}
 

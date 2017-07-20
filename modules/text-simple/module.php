@@ -5008,29 +5008,22 @@ class DSLC_Text_Simple extends DSLC_Module {
 			$dslc_is_admin = false;
 		}
 
-		$this->module_start( $options );
-
 		/* Module output starts here */
 
-			?><div class="dslc-text-module-content"><?php
+		?><div class="dslc-text-module-content"><?php
 
-				if ( $dslc_active ) {
-					?><div class="dslca-editable-content inline-editor" data-type="simple" data-id="content"<?php if ( $dslc_is_admin ) echo ' data-exportable-content'; ?>><?php
-				}
+			if ( $dslc_active ) {
+				?><div class="dslca-editable-content" data-type="simple" data-id="content"<?php if ( $dslc_is_admin ) echo ' data-exportable-content'; ?>><?php
+			}
 
-					$output_content = stripslashes( $options['content'] );
-					// $output_content = do_shortcode( $output_content );
-					$output_content = $output_content; // Removed do_shortcode for caching.
-					echo apply_filters( 'dslc_before_render', $output_content );
+				$output_content = stripslashes( $options['content'] );
+				echo apply_filters( 'dslc_before_render', $output_content );
 
-				if ( $dslc_active ) {
-					?></div><!-- .dslca-editable-content --><?php
-					?><div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook"><?php _e( 'Open in WP Editor', 'live-composer-page-builder' ); ?></span></div><?php
-				}
+			if ( $dslc_active ) {
+				?></div><!-- .dslca-editable-content --><?php
+				?><div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook"><?php _e( 'Open in WP Editor', 'live-composer-page-builder' ); ?></span></div><?php
+			}
 
-			?></div><?php
-
-		/* Module output ends here */
-		$this->module_end( $options );
+		?></div><?php
 	}
 }

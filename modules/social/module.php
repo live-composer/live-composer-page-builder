@@ -791,7 +791,6 @@ class DSLC_Social extends DSLC_Module {
 	 */
 	function output( $options ) {
 
-		$this->module_start( $options );
 
 		/* Module output starts here */
 
@@ -958,9 +957,7 @@ class DSLC_Social extends DSLC_Module {
 
 			<?php
 
-		/* Module output ends here */
 
-		$this->module_end( $options );
 
 	}
 

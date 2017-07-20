@@ -2182,6 +2182,7 @@ class DSLC_Module {
 		}
 
 		$user_options_no_defaults = $user_options;
+		$user_options_no_defaults = dslc_encode_shortcodes_in_array( $user_options_no_defaults );
 
 		// If Live Composer is in editing mode: output some additional (hidden) elements.
 		if ( DS_LIVE_COMPOSER_ACTIVE && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) : ?>
@@ -2264,6 +2265,8 @@ class DSLC_Module {
 						$option_value = dslc_sanitize_option_val( $option_satinitize_data );
 					}
 
+					$option_value = dslc_encode_shortcodes( $option_value );
+
 					echo '<textarea class="dslca-module-option-front" data-id="' . esc_attr( $id ) . '">' . stripslashes( $option_value ) . '</textarea>';
 				}
 
@@ -2271,7 +2274,7 @@ class DSLC_Module {
 				foreach ( $user_options as $user_option_id => $user_option_val ) {
 
 					if ( ! in_array( $user_option_id, $options_ids, true ) ) {
-
+						$user_option_val = dslc_encode_shortcodes( $user_option_val );
 						echo '<textarea class="dslca-module-option-front" data-id="' . esc_attr( $user_option_id ) . '">' . stripslashes( $user_option_val ) . '</textarea>';
 					}
 				}

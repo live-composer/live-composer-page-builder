@@ -426,7 +426,6 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 			$show_fake = true;
 		}
 
-		$this->module_start( $options );
 
 		/* Module output starts here */
 
@@ -474,9 +473,7 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 
 			<?php
 
-		/* Module output ends here */
 
-		$this->module_end( $options );
 
 	}
 

@@ -2901,7 +2901,6 @@ class DSLC_Blog extends DSLC_Module {
 			$options['button_text'] = stripslashes( $options['button_text'] );
 		}
 
-		$this->module_start( $options );
 
 		/* CUSTOM START */
 
@@ -3324,27 +3323,24 @@ class DSLC_Blog extends DSLC_Module {
 															<div class="dslc-blog-post-excerpt">
 																<?php if ( $options['excerpt_or_content'] == 'content' ) : ?>
 																<?php
-																	// Disable LC content filering in this case
-																	// to prevent infitie loop on custon archive listing
-																	global $dslc_should_filter;
-																	$dslc_should_filter = false;
-
-																		the_content();
-
-																	$dslc_should_filter = true;
+																	if ( $options['excerpt_length'] > 0 ) {
+																		echo wp_trim_words( get_the_content(), $options['excerpt_length'] );
+																	} else {
+																		echo get_the_content();
+																	}
 																?>
 																<?php else : ?>
 																	<?php
 																		if ( $options['excerpt_length'] > 0 ) {
 																			if ( has_excerpt() )
-																				echo do_shortcode( wp_trim_words( get_the_excerpt(), $options['excerpt_length'] ) );
+																				echo wp_trim_words( get_the_excerpt(), $options['excerpt_length'] );
 																			else
-																				echo do_shortcode( wp_trim_words( get_the_content(), $options['excerpt_length'] ) );
+																				echo wp_trim_words( get_the_content(), $options['excerpt_length'] );
 																		} else {
 																			if ( has_excerpt() )
-																				echo do_shortcode( get_the_excerpt() );
+																				echo get_the_excerpt();
 																			else
-																				echo do_shortcode( get_the_content() );
+																				echo get_the_content();
 																		}
 																	?>
 																<?php endif; ?>
@@ -3425,27 +3421,24 @@ class DSLC_Blog extends DSLC_Module {
 											<div class="dslc-blog-post-excerpt">
 												<?php if ( $options['excerpt_or_content'] == 'content' ) : ?>
 													<?php
-														// Disable LC content filering in this case
-														// to prevent infitie loop on custon archive listing
-														global $dslc_should_filter;
-														$dslc_should_filter = false;
-
-															the_content();
-
-														$dslc_should_filter = true;
+														if ( $options['excerpt_length'] > 0 ) {
+															echo wp_trim_words( get_the_content(), $options['excerpt_length'] );
+														} else {
+															echo get_the_content();
+														}
 													?>
 												<?php else : ?>
 													<?php
 														if ( $options['excerpt_length'] > 0 ) {
 															if ( has_excerpt() )
-																echo do_shortcode( wp_trim_words( get_the_excerpt(), $options['excerpt_length'] ) );
+																echo wp_trim_words( get_the_excerpt(), $options['excerpt_length'] );
 															else
-																echo do_shortcode( wp_trim_words( get_the_content(), $options['excerpt_length'] ) );
+																echo wp_trim_words( get_the_content(), $options['excerpt_length'] );
 														} else {
 															if ( has_excerpt() )
-																echo do_shortcode( get_the_excerpt() );
+																echo get_the_excerpt();
 															else
-																echo do_shortcode( get_the_content() );
+																echo get_the_content();
 														}
 													?>
 												<?php endif; ?>
@@ -3546,8 +3539,6 @@ class DSLC_Blog extends DSLC_Module {
 
 
 		wp_reset_postdata();
-
-		$this->module_end( $options );
 
 	}
 

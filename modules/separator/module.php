@@ -415,10 +415,8 @@ class DSLC_Separator extends DSLC_Module {
 
 		global $dslc_active;
 
-		$this->module_start( $options );
 
 		/* Module output stars here */
-
 			?>
 			<div class="dslc-separator-wrapper">
 				<div class="dslc-separator dslc-separator-style-<?php echo $options['style']; ?>">
@@ -429,9 +427,6 @@ class DSLC_Separator extends DSLC_Module {
 			</div><!-- .dslc-separator-wrapper -->
 			<?php
 
-		/* Module output ends here */
-
-		$this->module_end( $options );
 
 	}
 

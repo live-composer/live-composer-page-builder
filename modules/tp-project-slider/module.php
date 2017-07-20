@@ -952,7 +952,6 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 
 		}
 
-		$this->module_start( $options );
 
 		/* Module output starts here */
 
@@ -1028,9 +1027,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 
 			}
 
-		/* Module output ends here */
 
-		$this->module_end( $options );
 
 	}
 

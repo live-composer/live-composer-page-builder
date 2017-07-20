@@ -3500,7 +3500,6 @@ class DSLC_Html extends DSLC_Module {
 			$render_code = false;
 		}
 
-		$this->module_start( $options );
 
 		/* Module output starts here */
 
@@ -3508,8 +3507,6 @@ class DSLC_Html extends DSLC_Module {
 
 				if ( $render_code ) {
 					$output_content = stripslashes( $options['content'] );
-					// $output_content = do_shortcode( $output_content );
-					$output_content = $output_content; // Removed do_shortcode for caching.
 				} else {
 					$output_content = '<div class="dslc-notification dslc-green">' . __('Save and refresh the page to display the module safely.', 'live-composer-page-builder') . '</div>';
 				}
@@ -3524,9 +3521,7 @@ class DSLC_Html extends DSLC_Module {
 
 			endif;
 
-		/* Module output ends here */
 
-		$this->module_end( $options );
 
 	}
 

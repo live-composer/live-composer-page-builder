@@ -1857,7 +1857,6 @@ class DSLC_Testimonials extends DSLC_Module {
 		else
 			$dslc_is_admin = false;
 
-		$this->module_start( $options );
 
 		/* Module output stars here */
 
@@ -2207,7 +2206,7 @@ class DSLC_Testimonials extends DSLC_Module {
 										<?php if ( $post_elements == 'all' || in_array( 'quote', $post_elements ) ) : ?>
 
 											<div class="dslc-testimonial-quote">
-												<?php echo do_shortcode( get_the_content() ); ?>
+												<?php echo get_the_content(); ?>
 											</div><!-- .dslc-testimonial-quote -->
 
 										<?php endif; ?>
@@ -2265,9 +2264,7 @@ class DSLC_Testimonials extends DSLC_Module {
 
 			wp_reset_postdata();
 
-		/* Module output ends here */
 
-		$this->module_end( $options );
 
 	}
 

@@ -600,7 +600,6 @@ class DSLC_Logo extends DSLC_Module {
 	 */
 	function output( $options ) {
 
-		$this->module_start( $options );
 
 		global $dslc_active;
 
@@ -619,7 +618,7 @@ class DSLC_Logo extends DSLC_Module {
 		}
 
 		if ( '' !== $options['link_url'] ) {
-			$anchor_href = do_shortcode( $options['link_url'] );
+			$anchor_href = $options['link_url'];
 		}
 
 		?>
@@ -673,8 +672,6 @@ class DSLC_Logo extends DSLC_Module {
 		</div>
 
 		<?php
-
-		$this->module_end( $options );
 
 	}
 }

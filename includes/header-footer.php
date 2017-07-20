@@ -530,6 +530,105 @@ function dslc_hf_get_code( $post_id = false, $h_or_f = 'header' ) {
 	return $code;
 }
 
+
+function dslc_hf_get_headerfooter( $post_id = false, $hf_type = 'header' ) {
+
+	// Compilation time 3.375 sec. before caching / 0.03 sec after caching.
+
+	// Get header/footer ID associated with the post.
+	$header_footer = dslc_hf_get_ID( $post_id );
+	$hf_id = false;
+
+	// Var defaults.
+	$append = '';
+	$wrapper_start = '';
+
+	if ( $header_footer[ $hf_type ] && is_numeric( $header_footer[ $hf_type ] ) ) {
+		$hf_id = $header_footer[ $hf_type ];
+	}
+
+	$position = get_post_meta( $hf_id, 'dslc_hf_position', true );
+
+	// If the "position" option value exists
+	if ( ! $position ) {
+		// Set the "position" option value to default "relative"
+		$position = 'relative';
+	}
+
+
+	// If editor active? Add a link to the header editing.
+	if ( dslc_is_editor_active( 'access' ) ) {
+
+		$header_link = DSLC_EditorInterface::get_editor_link_url( $hf_id );
+
+		// Set the HTML for the edit overlay.
+		$append = '<div class="dslc-hf-block-overlay"><a target="_blank" href="' . $header_link . '" class="dslc-hf-block-overlay-button dslca-link">' . __( 'Edit Header','live-composer-page-builder' ) . '</a>';
+
+		if ( 'fixed' === $position ) {
+			$append .= ' <span class="dslc-hf-block-overlay-text">' . __( 'To preview FIXED positioning click on "Hide Editor" button.','live-composer-page-builder' ) . '</span>';
+		} elseif ( 'absolute' === $position ) {
+			$append .= ' <span class="dslc-hf-block-overlay-text">' . __( 'To preview ABSOLUTE positioning click on "Hide Editor" button.','live-composer-page-builder' ) . '</span>';
+		}
+
+		$append .= '</div>';
+	}
+
+	// Initiate simple html rendering cache.
+	$cache = new DSLC_Cache( 'html' );
+	$cache_id = $hf_id;
+
+	// Check if we have html for this code cached?
+	if ( ! dslc_is_editor_active() || dslc_is_editor_active() && 'dslc_hf' !== get_post_type( $post_id ) ) {
+		if ( $cache->enabled() && $cache->cached( $cache_id ) ) {
+			// Check if any dynamic content included before caching.
+			$cached_html = $cache->get_cache( $cache_id );
+
+			// Insert header/footer editing overlay code before the last </div>
+			$cached_html = substr_replace( $cached_html, $append, strrpos( $cached_html, '</div>' ), 0 );
+
+			// $cached_html .= $append;
+			return do_shortcode( $cached_html );
+		}
+	}
+
+	// Wrap if handled by theme.
+	if ( defined( 'DS_LIVE_COMPOSER_HF_AUTO' ) && ! DS_LIVE_COMPOSER_HF_AUTO ) {
+		$wrapper_start = '<div id="dslc-content" class="dslc-content dslc-clearfix">';
+	}
+
+	// If the page displayed is header/footer, do not repeat.
+	if ( is_singular( 'dslc_hf' ) ) {
+		return $wrapper_start;
+	}
+
+	// Code to insert before.
+	$code_before = apply_filters( 'dslc_' . $hf_type . '_before', '' );
+
+	// Code to insert after.
+	$code_after = apply_filters( 'dslc_' . $hf_type . '_after', '' );
+
+	// If there is a header/footer applied.
+	if ( $hf_id ) {
+
+		// Render content. Support both old and new version of the page code.
+		$rendered_code = dslc_render_content( get_post_meta( $hf_id, 'dslc_code', true ) );
+		$rendered_code = $code_before . $wrapper_start . '<div id="dslc-' . $hf_type . '" class="dslc-' . $hf_type . '-pos-' . $position . '">' . $rendered_code . $append . '</div>' . $code_after;
+
+		$rendered_code = dslc_decode_shortcodes( $rendered_code );
+
+		if ( ! dslc_is_editor_active() ) { // && ! is_singular( 'dslc_hf' )
+			$cache->set_cache( $rendered_code, $cache_id );
+		}
+		// Add the code to the variable holder.
+		return do_shortcode( $rendered_code );
+
+	} else {
+
+		// If no header/footer applied.
+		return $code_before . $wrapper_start . '' . $code_after;
+	} // End if().
+}
+
 /**
  * Get the header output code
  *
@@ -540,96 +639,7 @@ function dslc_hf_get_code( $post_id = false, $h_or_f = 'header' ) {
  */
 function dslc_hf_get_header( $post_id = false ) {
 	// Compilation time 3.375 sec. before caching / 0.03 sec after caching.
-
-	// Get header/footer ID associated with the post.
-	$header_footer = dslc_hf_get_ID( $post_id );
-	$header_id = false;
-
-	if ( $header_footer['header'] && is_numeric( $header_footer['header'] ) ) {
-		$header_id = $header_footer['header'];
-	}
-
-	// Initiate simple html rendering cache.
-	$cache = new DSLC_Cache( 'html' );
-	$cache_id = $header_id;
-
-	// Check if we have html for this code cached?
-	if ( ! dslc_is_editor_active() && $cache->enabled() && $cache->cached( $cache_id ) ) {
-		// Check if any dynamic content included before caching.
-		$cached_header_html = $cache->get_cache( $cache_id );
-		$cached_header_html = str_replace( '%{%', '[', $cached_header_html );
-
-		return  do_shortcode( $cached_header_html );
-	}
-
-	// Var defaults.
-	$append = '';
-	$wrapper_start = '';
-
-	// Wrap if header handled by theme.
-	if ( defined( 'DS_LIVE_COMPOSER_HF_AUTO' ) && ! DS_LIVE_COMPOSER_HF_AUTO ) {
-		$wrapper_start = '<div id="dslc-content" class="dslc-content dslc-clearfix">';
-	}
-
-	// If the page displayed is header/footer, do not repeat.
-	if ( is_singular( 'dslc_hf' ) ) {
-		return $wrapper_start;
-	}
-
-	// Before Header.
-	$header_before = '';
-	$dslc_header_before = apply_filters( 'dslc_header_before', $header_before );
-
-	// After Header.
-	$header_after = '';
-	$dslc_header_after = apply_filters( 'dslc_header_after', $header_after );
-
-	// If there is a header applied
-	if ( $header_footer['header'] && is_numeric( $header_footer['header'] ) ) {
-
-		// Get the header LC code
-		$header_code = get_post_meta( $header_footer['header'], 'dslc_code', true );
-
-		// If the "position" option value exists
-		if ( get_post_meta( $header_footer['header'], 'dslc_hf_position', true ) ) {
-			// Set the "position" option value to the one from the settings
-			$header_position = get_post_meta( $header_footer['header'], 'dslc_hf_position', true );
-		} else {
-			// Set the "position" option value to default "relative"
-			$header_position = 'relative';
-		}
-
-		// If editor active? Add a link to the header editing.
-		if ( dslc_is_editor_active( 'access' ) ) {
-
-			$header_link = DSLC_EditorInterface::get_editor_link_url( $header_footer['header'] );
-
-			// Set the HTML for the edit overlay.
-			$append = '<div class="dslc-hf-block-overlay"><a target="_blank" href="' . $header_link . '" class="dslc-hf-block-overlay-button dslca-link">' . __( 'Edit Header','live-composer-page-builder' ) . '</a>';
-
-			if ( 'fixed' === $header_position ) {
-				$append .= ' <span class="dslc-hf-block-overlay-text">' . __( 'To preview FIXED positioning click on "Hide Editor" button.','live-composer-page-builder' ) . '</span>';
-			} elseif ( 'absolute' === $header_position ) {
-				$append .= ' <span class="dslc-hf-block-overlay-text">' . __( 'To preview ABSOLUTE positioning click on "Hide Editor" button.','live-composer-page-builder' ) . '</span>';
-			}
-
-			$append .= '</div>';
-		}
-
-		// Render content. Support both old and new version of the page code.
-		$header_render = dslc_render_content( $header_code );
-		$rendered_header_code = $dslc_header_before . $wrapper_start . '<div id="dslc-header" class="dslc-header-pos-' . $header_position . '">' . $header_render . $append . '</div>' . $dslc_header_after;
-
-		$cache->set_cache( $rendered_header_code, $cache_id );
-
-		// Add the header code to the variable holder.
-		return $rendered_header_code;
-
-	} else {
-
-		// If no header applied.
-		return $dslc_header_before . $wrapper_start . '' . $dslc_header_after;
-	} // End if().
+	return dslc_hf_get_headerfooter( $post_id, 'header' );
 }
 
 /**
@@ -642,100 +652,5 @@ function dslc_hf_get_header( $post_id = false ) {
  */
 function dslc_hf_get_footer( $post_id = false ) {
 	// Compilation time 1.16 sec. before caching / 0.04 sec after caching.
-
-	// Get header/footer ID associated with the post.
-	$header_footer = dslc_hf_get_ID( $post_id );
-	$footer_id = false;
-
-	if ( $header_footer['footer'] && is_numeric( $header_footer['footer'] ) ) {
-		$footer_id = $header_footer['footer'];
-	}
-
-	// Initiate simple html rendering cache.
-	$cache = new DSLC_Cache( 'html' );
-	$cache_id = $footer_id;
-
-	// Check if we have html for this code cached?
-	if ( ! dslc_is_editor_active() && $cache->enabled() && $cache->cached( $cache_id ) ) {
-		// Check if any dynamic content included before caching.
-		$cached_footer_html = $cache->get_cache( $cache_id );
-		$cached_footer_html = str_replace( '%{%', '[', $cached_footer_html );
-
-		return do_shortcode( $cached_footer_html );
-	}
-
-	// Var defaults
-	$append = '';
-	$wrapper_end = '';
-
-	// Wrap if header handled by theme
-	if ( defined( 'DS_LIVE_COMPOSER_HF_AUTO' ) && ! DS_LIVE_COMPOSER_HF_AUTO ) {
-		$wrapper_end = '</div>';
-	}
-
-	// If the page displayed is header/footer, do not repeat
-	if ( is_singular( 'dslc_hf' ) ) {
-		return $wrapper_end;
-	}
-
-	// Before Footer.
-	$footer_before = '';
-	$dslc_footer_before = apply_filters( 'dslc_footer_before', $footer_before );
-
-	// After Footer.
-	$footer_after = '';
-	$dslc_footer_after = apply_filters( 'dslc_footer_after', $footer_after );
-
-	// If there is a footer applied
-	if ( $header_footer['footer'] && is_numeric ( $header_footer['footer'] ) ) {
-
-		// Get the footer LC code
-		$footer_code = get_post_meta( $header_footer['footer'], 'dslc_code', true );
-
-		// If the "position" option value exists
-		if ( get_post_meta( $header_footer['footer'], 'dslc_hf_position', true ) ) {
-
-			// Set the "position" option value to the one from the settings
-			$footer_position = get_post_meta( $header_footer['footer'], 'dslc_hf_position', true );
-
-		} else {
-
-			// Set the "position" option value to default "relative"
-			$footer_position = 'relative';
-
-		}
-
-		// If editor active? Add a link to the footer editing.
-		if ( dslc_is_editor_active( 'access' ) ) {
-
-			$footer_link = DSLC_EditorInterface::get_editor_link_url( $header_footer['footer'] );
-
-			// Set the HTML for the edit overlay.
-			$append = '<div class="dslc-hf-block-overlay"><a target="_blank" href="' . $footer_link . '" class="dslc-hf-block-overlay-button dslca-link">' . __( 'Edit Footer','live-composer-page-builder' ) . '</a>';
-
-			if ( 'fixed' === $footer_position ) {
-				$append .= ' <span class="dslc-hf-block-overlay-text">' . __( 'To preview FIXED positioning click on "Hide Editor" button.','live-composer-page-builder' ) . '</span>';
-			} elseif ( 'absolute' === $footer_position ) {
-				$append .= ' <span class="dslc-hf-block-overlay-text">' . __( 'To preview ABSOLUTE positioning click on "Hide Editor" button.','live-composer-page-builder' ) . '</span>';
-			}
-
-			$append .= '</div>';
-
-		}
-
-		// Render content. Support both old and new version of the page code.
-		$footer_render = dslc_render_content( $footer_code );
-		$rendered_footer_code = $dslc_footer_before . '<div id="dslc-footer"  class="dslc-footer-pos-' . $footer_position . '">' . $footer_render . $append . '</div>' . $wrapper_end . $dslc_footer_after;
-
-		$cache->set_cache( $rendered_footer_code, $cache_id );
-
-		// Add the header code to the variable holder.
-		return $rendered_footer_code;
-
-	} else {
-
-		// If no header applied.
-		return $dslc_footer_before . '' . $wrapper_end . $dslc_footer_after;
-
-	} // End if().
+	return dslc_hf_get_headerfooter( $post_id, 'footer' );
 }

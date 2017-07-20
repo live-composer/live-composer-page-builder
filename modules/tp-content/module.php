@@ -4773,7 +4773,6 @@ class DSLC_TP_Content extends DSLC_Module {
 			$post_id = get_the_ID();
 		}
 
-		$this->module_start( $options );
 
 		/* Module output starts here */
 
@@ -4819,9 +4818,7 @@ class DSLC_TP_Content extends DSLC_Module {
 
 			?></div><?php
 
-		/* Module output ends here */
 
-		$this->module_end( $options );
 
 	}
 

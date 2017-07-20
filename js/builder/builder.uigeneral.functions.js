@@ -83,6 +83,7 @@ jQuery(document).ready(function($) {
 		jQuery(document).trigger('editorFrameLoaded');
 
 		dslc_drag_and_drop();
+
 		dslc_generate_code();
 
 		// Catch keypress events (from both parent and iframe) to add keyboard support

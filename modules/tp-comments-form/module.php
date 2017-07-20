@@ -1262,7 +1262,6 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 			$show_fake = false;
 		}
 
-		$this->module_start( $options );
 
 		$txt_submit_comment = __( 'SUBMIT YOUR COMMENT', 'live-composer-page-builder' );
 		$txt_leave_comment = __( 'Leave a Comment', 'live-composer-page-builder' );
@@ -1380,9 +1379,7 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				</style>
 			<?php
 
-		/* Module output ends here */
 
-		$this->module_end( $options );
 
 	}
 

@@ -380,7 +380,6 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 
 		$thumb_url = $thumb_url[0];
 
-		$this->module_start( $options );
 
 		/* Module output starts here */
 
@@ -449,8 +448,6 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 		<?php endif; ?>
 
 		<?php /* Module output ends here. */
-
-		$this->module_end( $options );
 
 	}
 }

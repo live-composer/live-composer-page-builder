@@ -1217,8 +1217,6 @@ class DSLC_Accordion extends DSLC_Module {
 		else
 			$dslc_is_admin = false;
 
-		$this->module_start( $options );
-
 		/* Module output stars here */
 
 			$accordion_nav = explode( '(dslc_sep)', trim( $options['accordion_nav'] ) );
@@ -1255,12 +1253,11 @@ class DSLC_Accordion extends DSLC_Module {
 									<div class="dslca-editable-content"<?php if ( $dslc_is_admin ) echo ' data-exportable-content'; ?>>
 										<?php
 											$accordion_content_output = stripslashes( $accordion_content );
-											$accordion_content_output = do_shortcode( $accordion_content_output );
 											echo apply_filters( 'dslc_before_render', $accordion_content_output );
 										?>
 									</div>
 									<?php if ( $dslc_is_admin ) : ?>
-										<textarea class="dslca-accordion-plain-content"><?php echo trim( $accordion_content_output ); ?></textarea>
+										<textarea class="dslca-accordion-plain-content"><?php echo dslc_encode_protected_shortcodes( trim( $accordion_content_output ) ); ?></textarea>
 										<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook"><?php _e( 'Open in WP Editor', 'live-composer-page-builder' ); ?></span></div>
 									<?php endif; ?>
 								</div><!-- .dslc-accordion-content -->
@@ -1312,8 +1309,6 @@ class DSLC_Accordion extends DSLC_Module {
 				</div><!-- .dslc-accordion -->
 
 		<?php /* Module output ends here */
-
-		$this->module_end( $options );
 
 	}
 }

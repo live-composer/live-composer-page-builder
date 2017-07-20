@@ -122,7 +122,6 @@ class DSLC_Sliders extends DSLC_Module {
 		else
 			$dslc_is_admin = false;
 
-		$this->module_start( $options );
 
 		/* Module output stars here */
 
@@ -134,13 +133,11 @@ class DSLC_Sliders extends DSLC_Module {
 
 			} else {
 
-				echo do_shortcode( '[rev_slider '. $options['slider'] .']' );
+				echo '[rev_slider '. $options['slider'] .']';
 
 			}
 
-		/* Module output ends here */
 
-		$this->module_end( $options );
 
 	}
 

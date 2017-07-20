@@ -542,7 +542,6 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 			$the_excerpt = apply_filters( 'get_the_excerpt', $post->post_excerpt );
 		}
 
-		$this->module_start( $options );
 
 		/* Module output starts here */
 
@@ -550,9 +549,7 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 				?><div class="dslc-tp-excerpt"><?php echo $the_excerpt; ?></div><?php
 			endif;
 
-		/* Module output ends here */
 
-		$this->module_end( $options );
 
 	}
 

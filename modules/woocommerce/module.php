@@ -2473,7 +2473,6 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 			$options['details_text'] = stripslashes( $options['details_text'] );
 		}
 
-		$this->module_start( $options );
 
 		if ( ! isset( $options['price_pos'] ) )
 			$options['price_pos'] = 'center';
@@ -2856,7 +2855,7 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 													<?php endif; ?>
 
 													<?php if ( $post_elements == 'all' || in_array( 'price', $post_elements ) ) : ?>
-														<a href="<?php echo do_shortcode( '[add_to_cart_url id="' . get_the_ID() . '"]' ); ?>" class="dslc-product-price dslc-init-<?php echo $options['price_pos']; ?>"><span class="dslc-product-price-main dslc-product-price-bg dslc-init-target"><?php echo $product->get_price_html(); ?></span></a>
+														<a href="<?php echo '[add_to_cart_url id=\'' . get_the_ID() . '\']'; ?>" class="dslc-product-price dslc-init-<?php echo $options['price_pos']; ?>"><span class="dslc-product-price-main dslc-product-price-bg dslc-init-target">???<?php echo $product->get_price_html(); ?></span></a>
 													<?php endif; ?>
 
 												</div><!-- .dslc-product-thumb-inner -->
@@ -2888,22 +2887,28 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 
 																<div class="dslc-product-excerpt">
 																	<?php if ( $options['excerpt_or_content'] == 'content' ) : ?>
-																		<?php the_content(); ?>
+																		<?php
+																			if ( $options['excerpt_length'] > 0 ) {
+																				echo wp_trim_words( get_the_content(), $options['excerpt_length'] );
+																			} else {
+																				echo get_the_content();
+																			}
+																				?>
 																	<?php else : ?>
 																		<?php
 																		if ( $options['excerpt_length'] > 0 ) {
 
 																			if ( has_excerpt() ) {
-																				echo do_shortcode( wp_trim_words( get_the_excerpt(), $options['excerpt_length'] ) );
+																				echo wp_trim_words( get_the_excerpt(), $options['excerpt_length'] );
 																			} else {
-																				echo do_shortcode( wp_trim_words( get_the_content(), $options['excerpt_length'] ) );
+																				echo wp_trim_words( get_the_content(), $options['excerpt_length'] );
 																			}
 																		} else {
 
 																			if ( has_excerpt() ) {
-																				echo do_shortcode( get_the_excerpt() );
+																				echo get_the_excerpt();
 																			} else {
-																				echo do_shortcode( get_the_content() );
+																				echo get_the_content();
 																			}
 																		}
 																		?>
@@ -2915,7 +2920,7 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 															<div class="dslc-product-extra dslc-clearfix">
 
 																<?php if ( $post_elements == 'all' || in_array( 'addtocart', $post_elements ) ) : ?>
-																	<a href="<?php echo do_shortcode( '[add_to_cart_url id="' . get_the_ID() . '"]' ); ?>" class="dslc-product-add-to-cart"><span class="dslc-icon dslc-icon-shopping-cart"></span><?php echo $options['addtocart_text']; ?></a>
+																	<a href="<?php echo '[add_to_cart_url id=\'' . get_the_ID() . '\']'; ?>" class="dslc-product-add-to-cart"><span class="dslc-icon dslc-icon-shopping-cart"></span><?php echo $options['addtocart_text']; ?></a>
 																<?php endif; ?>
 
 																<?php if ( $post_elements == 'all' || in_array( 'details', $post_elements ) ) : ?>
@@ -2963,19 +2968,25 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 
 												<div class="dslc-product-excerpt">
 													<?php if ( $options['excerpt_or_content'] == 'content' ) : ?>
-														<?php the_content(); ?>
+														<?php
+														if ( $options['excerpt_length'] > 0 ) {
+															echo wp_trim_words( get_the_content(), $options['excerpt_length'] );
+														} else {
+															echo get_the_content();
+														}
+															?>
 													<?php else : ?>
 														<?php
 															if ( $options['excerpt_length'] > 0 ) {
 																if ( has_excerpt() )
-																	echo do_shortcode( wp_trim_words( get_the_excerpt(), $options['excerpt_length'] ) );
+																	echo wp_trim_words( get_the_excerpt(), $options['excerpt_length'] );
 																else
-																	echo do_shortcode( wp_trim_words( get_the_content(), $options['excerpt_length'] ) );
+																	echo wp_trim_words( get_the_content(), $options['excerpt_length'] );
 															} else {
 																if ( has_excerpt() )
-																	echo do_shortcode( get_the_excerpt() );
+																	echo get_the_excerpt();
 																else
-																	echo do_shortcode( get_the_content() );
+																	echo get_the_content();
 															}
 														?>
 													<?php endif; ?>
@@ -2986,7 +2997,7 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 											<div class="dslc-product-extra dslc-clearfix">
 
 												<?php if ( $post_elements == 'all' || in_array( 'addtocart', $post_elements ) ) : ?>
-													<a href="<?php echo do_shortcode( '[add_to_cart_url id="' . get_the_ID() . '"]' ); ?>" class="dslc-product-add-to-cart"><span class="dslc-icon dslc-icon-shopping-cart"></span><?php echo $options['addtocart_text']; ?></a>
+													<a href="<?php echo '[add_to_cart_url id=\'' . get_the_ID() . '\']'; ?>" class="dslc-product-add-to-cart"><span class="dslc-icon dslc-icon-shopping-cart"></span><?php echo $options['addtocart_text']; ?></a>
 												<?php endif; ?>
 
 												<?php if ( $post_elements == 'all' || in_array( 'details', $post_elements ) ) : ?>
@@ -3049,10 +3060,6 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 			}
 
 			wp_reset_postdata();
-
-		/* Module output ends here */
-
-		$this->module_end( $options );
 
 	}
 

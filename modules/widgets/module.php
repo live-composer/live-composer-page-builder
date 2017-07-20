@@ -1560,7 +1560,6 @@ class DSLC_Widgets extends DSLC_Module {
 			$dslc_is_admin = false;
 		}
 
-		$this->module_start( $options );
 
 		/* Module output starts here */
 
@@ -1592,8 +1591,6 @@ class DSLC_Widgets extends DSLC_Module {
 			</div>
 		<?php
 
-		/* Module output ends here */
-		$this->module_end( $options );
 
 	}
 }

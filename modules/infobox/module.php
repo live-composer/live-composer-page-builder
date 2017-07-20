@@ -2900,7 +2900,6 @@ class DSLC_Info_Box extends DSLC_Module {
 			$dslc_is_admin = false;
 		}
 
-		$this->module_start( $options );
 
 		/* Module output stars here */
 
@@ -3040,7 +3039,5 @@ class DSLC_Info_Box extends DSLC_Module {
 			</div><!-- .dslc-info-box -->
 
 		<?php
-		/* Module output ends here */
-		$this->module_end( $options );
 	}
 }

@@ -567,9 +567,7 @@ function dslc_filter_content( $content ) {
 	if ( ! dslc_is_editor_active() && $cache->enabled() && $cache->cached( $cache_id ) ) {
 		// Check if any dynamic content included before caching.
 		$cached_page_html = $cache->get_cache( $cache_id );
-		$cached_page_html = str_replace( '%{%', '[', $cached_page_html );
-
-		return  do_shortcode( $cached_page_html );
+		return do_shortcode( $cached_page_html );
 	}
 
 	// Global variables.
@@ -719,9 +717,6 @@ function dslc_filter_content( $content ) {
 			if ( ! dslc_is_editor_active() ) {
 
 				$rendered_header_footer = $composer_wrapper_before . $composer_header . '<div id="dslc-theme-content"><div id="dslc-theme-content-inner">' . $content . '</div></div>' . $composer_footer . $composer_wrapper_after;
-
-				// Restore disabled shortcodes in content.
-				$rendered_header_footer = str_replace( '%{%', '[', $rendered_header_footer );
 				$cache->set_cache( $rendered_header_footer, $cache_id );
 
 				// Pass the LC header, regular content and LC footer
@@ -757,19 +752,14 @@ function dslc_filter_content( $content ) {
 		$dslc_content_after = apply_filters( 'dslc_content_after', $content_after );
 		$rendered_page = $dslc_content_before . $composer_wrapper_before . do_action( 'dslc_output_prepend' ) . $composer_header . '<div id="dslc-main">' . $composer_prepend . $composer_content . '</div>' . $composer_append . $composer_footer . do_action( 'dslc_output_append' ) . $composer_wrapper_after . $dslc_content_after;
 
-		if ( ! dslc_is_editor_active() ) {
+		if ( ! dslc_is_editor_active() && ! is_singular( 'dslc_hf' ) ) {
 			$cache->set_cache( $rendered_page, $cache_id );
 		}
 
-		// Restore disabled shortcodes in content.
-		$rendered_page = str_replace( '%{%', '[', $rendered_page );
-
-		// Pass the filtered content output.
-		return $rendered_page;
-		// return do_shortcode( $rendered_page ); – do_shortcode was very slow.
+		return do_shortcode( $rendered_page );
 
 	} else {
-		// If LC should not filter the content.
+		// If LC should not filter the content (full content posts output in the blog/posts modules ).
 		// Pass back the original wrapped in a div ( in case there's a need to style it )
 		return '<div id="dslc-theme-content"><div id="dslc-theme-content-inner">' . $content . '</div></div>';
 	} // End if().
@@ -812,7 +802,6 @@ function dslc_render_content( $page_code, $update_ids = false ) {
 	 * if can't transform data into array.
 	 */
 	if ( ! is_array( $page_code_array ) ) {
-
 		// Brute-force disable inner shortcodes.
 		// To optimize the code rendering times.
 		$page_code = str_replace( '[dslc_modules_area ', '{dslc_modules_area ', $page_code );
@@ -866,6 +855,7 @@ function dslc_render_content( $page_code, $update_ids = false ) {
 			}
 
 			$page_html .= dslc_module_front( $module_atts, $element );
+
 		} // End if().
 	} // End foreach().
 
@@ -1090,19 +1080,27 @@ function dslc_module_front( $atts, $settings_raw = null ) {
 			}
 		}
 
-		$settings = str_replace( '[', '%{%', $settings );
-
-		// Start output fetching
+		// Code before module output.
 		ob_start();
-
-		// Module output
-		$module_instance->output( $settings );
-
-		// End output fetching
-		$output = ob_get_contents();
+			$module_instance->module_start( $settings );
+			$output_start = ob_get_contents();
 		ob_end_clean();
 
-		return $output;
+		// Module output.
+		ob_start();
+			$module_instance->output( $settings );
+			$output_body = ob_get_contents();
+		ob_end_clean();
+
+		// Code after module output.
+		ob_start();
+			$module_instance->module_end( $settings );
+			$output_end = ob_get_contents();
+		ob_end_clean();
+
+		$output_body = dslc_decode_shortcodes( $output_body); //, 'storage' );
+
+		return $output_start . $output_body . $output_end;
 
 	} elseif ( dslc_current_user_can( 'access' ) ) {
 
@@ -1355,6 +1353,8 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1 ) {
 
 		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
+			$atts = dslc_encode_shortcodes_in_array( $atts );
+
 			// Management
 			$output .= '
 				<div class="dslca-modules-section-manage">
@@ -1366,7 +1366,7 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1 ) {
 						<span class="dslca-manage-action dslca-delete-modules-section-hook" title="Delete" ><span class="dslca-icon dslc-icon-remove"></span></span>
 					</div>
 				</div>
-				<div class="dslca-modules-section-settings">' . dslc_row_get_options_fields( $atts ) . '</div>';
+				<div class="dslca-modules-section-settings">' . dslc_encode_shortcodes( dslc_row_get_options_fields( $atts ) ) . '</div>';
 
 			$output .= '<textarea class="dslca-section-code">' . json_encode( $atts ) . '</textarea>';
 		}
@@ -1660,5 +1660,68 @@ function dslc_post_pagination( $atts ) {
 
 		</div><!-- .dslc-pagination --><?php
 	}
+}
 
+/**
+ * Disable shortcode rendering for the string provided by replacing
+ * all WordPress shortcode brackets as follow: [ -> %(%  |  ] -> %)%.
+ *
+ * @param  string $code String with code to filter.
+ * @return string       Filtered code.
+ */
+function dslc_encode_shortcodes( $code ) {
+	$braket_open =  '%(%';
+	$braket_close =  '%)%';
+
+	// if ( 'storage' === $mode ) {
+	// 	$braket_open =  '%((%';
+	// 	$braket_close =  '%))%';
+	// }
+
+ 	$code = str_replace( '[',   $braket_open,  $code );
+	$code = str_replace( '%{%', $braket_open,  $code );
+	$code = str_replace( ']',   $braket_close, $code );
+	$code = str_replace( '%}%', $braket_close, $code );
+
+	return $code;
+}
+
+function dslc_encode_protected_shortcodes( $code ) {
+
+	$braket_open =  '%((%';
+	$braket_close =  '%))%';
+
+ 	$code = str_replace( '[',   $braket_open,  $code );
+	$code = str_replace( '%(%', $braket_open,  $code );
+	$code = str_replace( ']',   $braket_close, $code );
+	$code = str_replace( '%)%', $braket_close, $code );
+
+	return $code;
+}
+
+function dslc_decode_shortcodes( $code , $mode = 'display' ) {
+	$braket_open =  '%(%';
+	$braket_close =  '%)%';
+
+	// if ( 'storage' === $mode ) {
+	// 	$braket_open =  '%((%';
+	// 	$braket_close =  '%))%';
+	// }
+
+	$code = str_replace( $braket_open,  '[', $code );
+	$code = str_replace( $braket_close, ']', $code );
+
+	return $code;
+}
+
+function dslc_encode_shortcodes_in_array( $atts ) {
+	if ( is_array( $atts ) ) {
+		foreach ( $atts as $key=>$value ) {
+			$atts[$key] = dslc_encode_shortcodes_in_array( $value );
+		}
+	} else {
+		return dslc_encode_shortcodes( $atts );
+	}
+
+	return $atts;
 }

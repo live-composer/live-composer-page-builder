@@ -902,7 +902,6 @@ class DSLC_Progress_Bars extends DSLC_Module {
 		else
 			$dslc_is_admin = false;
 
-		$this->module_start( $options );
 
 		/* Module output starts here */
 
@@ -941,9 +940,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 
 			<?php
 
-		/* Module output ends here */
 
-		$this->module_end( $options );
 
 	}
 

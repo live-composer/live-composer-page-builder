@@ -67,15 +67,38 @@ class DSLC_Cache {
 	 */
 	public function on_post_save( $post_id ) {
 
-		// Remove previous version of HTML render from page cache.
+		/*
+		Remove cached pages or particular post type.
+		💂 Needs more work. Not ready for production.
+
+		$post_type = get_post_type( $post_id );
+
+		$post_types_reset_cache = array(
+			'dslc_templates',
+			'dslc_downloads',
+			'post',
+		);
+
+		if ( in_array( $post_type, $post_types_reset_cache ) ) {
+			$this->cache = array( 'html', 'css' );
+		}
+		*/
+
+		/* Remove previous version of HTML render from page cache.
 		if ( isset( $this->cache['html'][ $post_id ] ) ) {
 			unset( $this->cache['html'][ $post_id ] );
 		}
 
 		if ( isset( $this->cache['css'][ $post_id ] ) ) {
 			unset( $this->cache['css'][ $post_id ] );
-		}
+		}*/
 
+		/*
+		For now we rest all the cache after any post or page saved.
+		This is temporary solution to have post grids and sliders to show
+		actual information and template designs to updates properly.
+		*/
+		$this->cache = array( 'html', 'css' );
 		$this->update_db();
 	}
 
