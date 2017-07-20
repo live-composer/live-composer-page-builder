@@ -2855,7 +2855,7 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 													<?php endif; ?>
 
 													<?php if ( $post_elements == 'all' || in_array( 'price', $post_elements ) ) : ?>
-														<a href="<?php echo '[add_to_cart_url id=\'' . get_the_ID() . '\']'; ?>" class="dslc-product-price dslc-init-<?php echo $options['price_pos']; ?>"><span class="dslc-product-price-main dslc-product-price-bg dslc-init-target">???<?php echo $product->get_price_html(); ?></span></a>
+														<a href="<?php echo '[add_to_cart_url id=\'' . get_the_ID() . '\']'; ?>" class="dslc-product-price dslc-init-<?php echo $options['price_pos']; ?>"><span class="dslc-product-price-main dslc-product-price-bg dslc-init-target"><?php echo $product->get_price_html(); ?></span></a>
 													<?php endif; ?>
 
 												</div><!-- .dslc-product-thumb-inner -->
