@@ -321,15 +321,6 @@ function dslc_display_composer() {
 				<div class="dslca-module-edit-field-ttip-inner"></div>
 			</div>
 
-			<div class="dslca-module-edit-field-icon-switch-sets">
-				<?php
-					global $dslc_var_icons;
-					foreach ( $dslc_var_icons as $key => $value ) :
-						?><span data-set="<?php echo $key; ?>"><?php echo $key; ?></span><?php
-					endforeach;
-				?>
-			</div>
-
 			<div class="dslca-invisible-overlay"></div>
 			<div id="scroller-stopper"></div>
 			<script id="pseudo-panel" type="template">
@@ -1082,7 +1073,7 @@ function dslc_module_front( $atts, $settings_raw = null ) {
 
 		// Code before module output.
 		ob_start();
-			$module_instance->module_start( $settings );
+			$module_instance->module_before( $settings );
 			$output_start = ob_get_contents();
 		ob_end_clean();
 
@@ -1094,7 +1085,7 @@ function dslc_module_front( $atts, $settings_raw = null ) {
 
 		// Code after module output.
 		ob_start();
-			$module_instance->module_end( $settings );
+			$module_instance->module_after( $settings );
 			$output_end = ob_get_contents();
 		ob_end_clean();
 

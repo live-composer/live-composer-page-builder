@@ -24,10 +24,51 @@ final class DSLC_Scripts{
 	 */
 	public static function init() {
 
+		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'dslc_load_iconfont_files' ) );
+		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'dslc_load_iconfont_files' ) );
+
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'dslc_load_scripts_frontend' ) );
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'dslc_load_fonts' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'dslc_load_scripts_admin' ) );
 		add_action( 'admin_footer', array( __CLASS__, 'dslc_inline_js_plugin_title' ) );
+	}
+
+	/**
+	 * Load icon font files (css).
+	 *
+	 * @return void
+	 */
+	public static function dslc_load_iconfont_files() {
+
+		$load_for_admin_screens = array( 'toplevel_page_livecomposer_editor' );
+		// ↑↑↑ List of admin screens were to load icon font files.
+		$load_for_admin_screens = apply_filters( 'dslc_icons_admin_screens', $load_for_admin_screens );
+		// Theme/extension plugin authors can extend list of the admin screens
+		// were they want to use icons popup.
+
+		if ( is_admin() ) {
+			$screen_data = get_current_screen();
+			$screen = $screen_data->base;
+		} else {
+			$screen = false;
+		}
+
+		if ( ! $screen || in_array( $screen, $load_for_admin_screens, true ) ) {
+
+			// Array of icon fonts for load.
+			global $dslc_var_icon_fonts;
+
+			foreach ( $dslc_var_icon_fonts as $key => $font_details ) {
+				$version_stamp = DS_LIVE_COMPOSER_VER;
+
+				if ( isset( $font_details['version'] ) ) {
+					$version_stamp = $font_details['version'];
+				}
+
+				wp_enqueue_style( 'dslc-' . $key, $font_details['font_path'], array(), $version_stamp );
+				// wp_enqueue_style( 'dslc-font-awesome', DS_LIVE_COMPOSER_URL . 'css/font-awesome.css', array(), DS_LIVE_COMPOSER_VER );
+			}
+		}
 	}
 
 	/**
@@ -39,16 +80,12 @@ final class DSLC_Scripts{
 
 		global $dslc_active;
 
-		// Array of icons available to be used.
-		global $dslc_var_icons;
-
 		/**
 		 * CSS
 		 */
 		wp_enqueue_style( 'dslc-main-css', DS_LIVE_COMPOSER_URL . 'css/frontend/main.css', array(), DS_LIVE_COMPOSER_VER );
 		wp_enqueue_style( 'dslc-modules-css', DS_LIVE_COMPOSER_URL . 'css/frontend/modules.css', array(), DS_LIVE_COMPOSER_VER );
 		wp_enqueue_style( 'dslc-plugins-css', DS_LIVE_COMPOSER_URL . 'css/frontend/plugins.css', array(), DS_LIVE_COMPOSER_VER );
-		wp_enqueue_style( 'dslc-font-awesome', DS_LIVE_COMPOSER_URL . 'css/font-awesome.css', array(), DS_LIVE_COMPOSER_VER );
 
 		/**
 		 * Load our IE-only stylesheet for all versions of IE:

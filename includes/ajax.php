@@ -174,7 +174,7 @@ function dslc_ajax_add_module( $atts ) {
 
 		// Code before module output.
 		ob_start();
-			$module_instance->module_start( $module_settings );
+			$module_instance->module_before( $module_settings );
 			$output_start = ob_get_contents();
 		ob_end_clean();
 
@@ -186,7 +186,7 @@ function dslc_ajax_add_module( $atts ) {
 
 		// Code after module output.
 		ob_start();
-			$module_instance->module_end( $module_settings );
+			$module_instance->module_after( $module_settings );
 			$output_end = ob_get_contents();
 		ob_end_clean();
 

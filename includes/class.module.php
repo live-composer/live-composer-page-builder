@@ -1944,7 +1944,11 @@ class DSLC_Module {
 		die( 'Function "output" must be over-ridden in a sub-class (the module class).' );
 	}
 
-	function module_start( $options ) {
+	function module_start( $user_options ) {
+		// Function disabled. See new function module_before.
+	}
+
+	function module_before( $options ) {
 		// Average running time 0.0339393615723 (28%)
 
 		global $dslc_active;
@@ -2152,6 +2156,10 @@ class DSLC_Module {
 	}
 
 	function module_end( $user_options ) {
+		// Function disabled. See new function module_after.
+	}
+
+	function module_after( $user_options ) {
 		// Average running time 0.0530054050943 (48%)
 
 		global $dslc_active;

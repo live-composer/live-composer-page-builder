@@ -952,60 +952,6 @@ body a:focus {
 					}
 
 			/**
-			 * Icon option type - Switch set
-			 */
-
-			.dslca-module-edit-field-icon-switch-set {
-				/*display: inline-block;*/
-				position: absolute;
-				/*top: 0;*/
-				/*right: 0;*/
-				margin-top: 8px;
-				font-size: 10px;
-				line-height: 13px;
-				cursor: pointer;
-			}
-
-				.dslca-module-edit-field-icon-switch-set .dslca-icon {
-					color: rgba( 255, 255, 255, 0.7 );
-					margin-right: 4px;
-				}
-
-			.dslca-module-edit-field-icon-switch-sets {
-				background: #fff;
-				color: #8a8a8a;
-				font-family: 'Open Sans', sans-serif;
-				font-size: 13px;
-				display: none;
-				border-radius: 3px;
-				padding: 20px 25px;
-				border: 1px solid rgba(0,0,0,.12);
-				position: absolute;
-				-moz-box-shadow: 0 2px 2px rgba(0,0,0,.04), 0 0 7px rgba(0,0,0,.12);
-				-webkit-box-shadow: 0 2px 2px rgba(0,0,0,.04), 0 0 7px rgba(0,0,0,.12);
-				box-shadow: 0 2px 2px rgba(0,0,0,.04), 0 0 7px rgba(0,0,0,.12);
-				text-align: center;
-				z-index: 999999;
-			}
-
-				.dslca-module-edit-field-icon-switch-sets span {
-					display: block;
-					padding: 5px 10px;
-					cursor: pointer;
-					border-radius: 3px;
-				}
-
-				.dslca-module-edit-field-icon-switch-sets span:hover {
-					background: rgba( 0, 0, 0, 0.1 );
-				}
-
-				.dslca-module-edit-field-icon-switch-sets span.dslca-active {
-					background: #5890e5;
-					color: #fff;
-				}
-
-
-			/**
 			 * Box shadow option type
 			 * and
 			 * Text shadow option type
@@ -4025,6 +3971,17 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 		font-size: 12px;
 		line-height: 1.25;
 		padding: 5px 8px 12px;
+	}
+
+	.dslca-modal-icons .set-heading {
+		text-transform: uppercase;
+		padding: 30px;
+		text-align: center;
+		letter-spacing: 6px;
+		font-family: 'Open Sans', sans-serif;
+		font-size: 16px;
+		font-weight: 300;
+		line-height: 1.25;
 	}
 
 

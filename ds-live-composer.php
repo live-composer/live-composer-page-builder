@@ -81,6 +81,7 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) && version_compare( PHP_VERSION, '5.3.0
 	$dslc_var_templates = array(); // Will hold templates information
 	$dslc_var_post_options = array(); // Will hold post options information
 	$dslc_var_icons = array(); // Will hold available icons array.
+	$dslc_var_icon_fonts = array(); // Will hold available icons array.
 
 	$dslc_css_fonts = '';
 	$dslc_css_style = '';

@@ -53,6 +53,34 @@ function dslc_icons() {
 
 	// Dear developers, make sure to have icon set name written without spaces
 
+	global $dslc_var_icon_fonts;
+
+	$dslc_var_icon_fonts = array(
+		'fontawesome' => array(
+				'font_path' => DS_LIVE_COMPOSER_URL . 'css/font-awesome.css', // File.
+				'version' => DS_LIVE_COMPOSER_VER, // Version stamp to reset browser cache.
+			),
+	);
+
+	$dslc_var_icon_fonts = apply_filters( 'dslc_icon_fonts', $dslc_var_icon_fonts );
+
+	/**
+	 * Usage example from 3-rd party plugin:
+	 *
+	 * function sklc_linecons_alter_icons( $icons ) {
+	 * 	$icons['linecons'] = array( "linecons-banknote", "linecons-bubble", ... );
+	 * 	return $icons;
+	 * } add_filter( 'dslc_available_icons', 'sklc_linecons_alter_icons' );
+	 *
+	 * function sklc_linecons_add_files( $icon_fonts ) {
+	 * 	$icon_fonts['linecons'] = array(
+	 * 		'font_path' => plugin_dir_url( __FILE__ ) . 'css/font-linecons.css',
+	 * 	),
+	 * 	return $icon_fonts;
+	 * } add_filter( 'dslc_icon_fonts', 'sklc_linecons_add_files' );
+	 */
+
+
 } add_action( 'init', 'dslc_icons' );
 
 
@@ -86,22 +114,24 @@ function dslc_icons_modal() {
 	if ( current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
 		// output list of icons
-		foreach ( $dslc_var_icons as $key => $value ) {
-
-			echo '<div class="dslca-modal-icons dslca-modal dslc-list-icons-' . $key . '" style="display:none;">';
+			echo '<div class="dslca-modal-icons dslca-modal dslc-list-icons" style="display:none;">';
 				echo '<ul class="dslc-icons-grid">';
+				foreach ( $dslc_var_icons as $key => $value ) {
 
-				foreach ( $dslc_var_icons[$key] as $k => $v ) {
-					$icon_name = $v;
-					echo '<li class="icon-item">';
-						echo '<span class="icon-item_icon dslc-icon-' . $icon_name . '"></span>';
-						echo '<span class="icon-item_name">' . $icon_name . '</span>';
-					echo '</li>';
+					echo '<li class="set-heading">' . $key . '</li>';
+
+					foreach ( $dslc_var_icons[$key] as $k => $v ) {
+						$icon_name = $v;
+						echo '<li class="icon-item">';
+							echo '<span class="icon-item_icon dslc-icon-' . $icon_name . '"></span>';
+							echo '<span class="icon-item_name">' . $icon_name . '</span>';
+						echo '</li>';
+					}
+
 				}
 
 				echo '</ul>';
 			echo '</div><div class="dslca-prompt-modal-custom"></div>';
-		}
 	}
 }
 add_action( 'admin_footer', 'dslc_icons_modal' );

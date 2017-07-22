@@ -193,91 +193,6 @@ jQuery(document).ready(function($){
 
 		dslc_disable_responsive_view();
 	});
-
-	/**
-	 * Hook - Show/Hide Icon Set Switch
-	 */
-	jQuery(document).on( 'click', '.dslca-module-edit-field-icon-switch-set', function(){
-
-		var dslcTtip = jQuery('.dslca-module-edit-field-icon-switch-sets');
-		var dslcHook = jQuery(this);
-
-		// Add/Remo active classes
-		jQuery('.dslca-module-edit-field-icon-switch-set.dslca-active').removeClass('dslca-active');
-		dslcHook.addClass('dslca-active');
-
-		if ( dslcTtip.is(':visible') ) {
-
-			jQuery('.dslca-module-edit-field-icon-switch-sets').hide();
-		} else {
-
-			// Icon vars
-			var currIconSet = dslcHook.find('.dslca-module-edit-field-icon-curr-set').text();
-
-			jQuery('.dslca-module-edit-field-icon-switch-sets span.dslca-active').removeClass('dslca-active');
-			jQuery('.dslca-module-edit-field-icon-switch-sets span[data-set="' + currIconSet + '"]').addClass('dslca-active');
-
-			// Positioning vars
-			var dslcOffset = dslcHook.offset(),
-			dslcTtipHeight = dslcTtip.outerHeight(),
-			dslcTtipWidth = dslcTtip.outerWidth(),
-			dslcTtipLeft = dslcOffset.left - ( dslcTtipWidth / 2 ) + 6,
-			dslcTtipArrLeft = '50%';
-
-			if ( dslcTtipLeft < 0 ) {
-				dslcTtipArrLeft = ( dslcTtipWidth / 2 ) + dslcTtipLeft + 'px';
-				dslcTtipLeft = 0;
-			}
-
-			jQuery('.dslca-module-edit-field-icon-switch-sets').show().css({
-				top : dslcOffset.top - dslcTtipHeight - 20,
-				left: dslcTtipLeft
-			});
-
-			jQuery("head").append(jQuery('<style>.dslca-module-edit-field-icon-switch-sets:after, .dslca-module-edit-field-icon-switch-sets:before { left: ' + dslcTtipArrLeft + ' }</style>'));
-		}
-	});
-
-	/**
-	 * Hook - Switch Icon Set
-	 */
-	jQuery(document).on( 'click', '.dslca-module-edit-field-icon-switch-sets span', function(){
-
-		var iconSet = $(this).data('set');
-
-		// Change current icon set
-		dslcIconsCurrentSet = DSLCIcons[iconSet];
-
-		// Update 'icons grid' button data-modal attribute with selected set
-		$('.dslca-open-modal-hook[data-modal^=".dslc-list-icons"]').data('modal', '.dslc-list-icons-' + iconSet );
-
-
-		// Change active states
-		$(this).addClass('dslca-active').siblings('.dslca-active').removeClass('dslca-active');
-
-		// Change current text
-		$('.dslca-module-edit-field-icon-switch-set.dslca-active .dslca-module-edit-field-icon-curr-set').text( iconSet );
-
-		// Go to next icon
-		$('.dslca-module-edit-field-icon-switch-set.dslca-active').closest('.dslca-module-edit-option').find('.dslca-module-edit-field-icon-next').trigger('click');
-
-		// Hide sets
-		$('.dslca-module-edit-field-icon-switch-sets').hide();
-	});
-
-	/**
-	 * Action - Change current set on mouse enter of icon option
-	 */
-	jQuery(document).on( 'mouseenter', '.dslca-module-edit-option-icon', function(){
-
-		var iconSet = $(this).find('.dslca-module-edit-field-icon-curr-set').text();
-
-		// Change current icon set
-		dslcIconsCurrentSet = DSLCIcons[iconSet];
-
-		// Update 'icons grid' button data-modal attribute with selected set
-		$('.dslca-open-modal-hook[data-modal^=".dslc-list-icons"]').data('modal', '.dslc-list-icons-' + iconSet );
-	});
 });
 
 /* Editor scripts */
@@ -1400,7 +1315,6 @@ function dslc_module_options_icon() {
 function dslc_module_options_icon_returnid() {
 
 	jQuery(document).on('click', '.dslca-open-modal-hook[data-modal^=".dslc-list-icons"]', function(el) {
-
 		jQuery(this).closest('.dslca-module-edit-option-icon').find('input').addClass('icon-modal-active');
 	});
 

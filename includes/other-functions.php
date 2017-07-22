@@ -322,6 +322,23 @@ function dslc_get_social_count( $post_ID = false, $refresh_in = 3600 ) {
 
 }
 
+function dslc_get_default_icon_set() {
+	// Get array with available icons
+	global $dslc_var_icons;
+
+	$default_set = 'fontawesome';
+	$default_set = apply_filters( 'dslc_default_icon_set', $default_set );
+
+	if ( isset( $dslc_var_icons[ $default_set ] ) ) {
+		// Try to return the default icon set ("fontawesome").
+		return $default_set;
+	} else {
+		// If no default set found, return the first set in $dslc_var_icons.
+		reset( $dslc_var_icons );
+		return key( $dslc_var_icons );
+	}
+}
+
 /**
  * Returns the ID of the currently used set based on icon
  *
@@ -332,30 +349,27 @@ function dslc_get_social_count( $post_ID = false, $refresh_in = 3600 ) {
  */
 function dslc_icons_current_set( $icon = false ) {
 
+	// Get array with available icons.
+	global $dslc_var_icons;
+
 	// If no icon set return to the default "fontawesome"
 	// If empty icon return default
 	// If there is no "-" in icon, there is no set, return default
-	if ( $icon == false || strlen( $icon ) == 0 || strpos( $icon, '-' ) === false ) {
-		return 'fontawesome';
+	if ( false === $icon || 0 === strlen( $icon ) || false === strpos( $icon, '-' ) ) {
+		return dslc_get_default_icon_set();
 	}
 
-	// Get array with available icons
-	global $dslc_var_icons;
-
-	// Get the first part of the icon ( representing the set )
+	// Get the first part of the icon ( representing the set ).
 	$icon_parts = explode( '-', $icon );
 	$icon_set = $icon_parts[0];
 
-
-
-	// If there is an icon set by that name return it
-	if ( isset( $dslc_var_icons[$icon_set] ) ) {
+	if ( isset( $dslc_var_icons[ $icon_set ] ) ) {
+		// If there is an icon set by that name return it.
 		return $icon_set;
-	// Otherwise return the default
 	} else {
-		return 'fontawesome';
+		// Otherwise return the default.
+		return dslc_get_default_icon_set();
 	}
-
 }
 
 /**
@@ -368,10 +382,10 @@ function dslc_icons_current_set( $icon = false ) {
  */
 function dslc_get_attachment_alt( $attachment_ID ) {
 
-	// Get ALT
+	// Get ALT.
 	$thumb_alt = trim( strip_tags( get_post_meta( $attachment_ID, '_wp_attachment_image_alt', true ) ) );
 
-	// No ALT supplied get attachment info
+	// No ALT supplied get attachment info.
 	if ( empty( $thumb_alt ) )
 		$attachment = get_post( $attachment_ID );
 
