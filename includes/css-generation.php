@@ -170,7 +170,6 @@ function dslc_custom_css( $dslc_code = '' ) {
 			if ( $footer_code ) {
 				$code_to_render[ $header_footer['footer'] ] = $footer_code;
 			}
-
 		}
 
 		// Template content.
@@ -189,11 +188,10 @@ function dslc_custom_css( $dslc_code = '' ) {
 		if ( $code ) {
 			$code_to_render[ $post_id ] = $code;
 		}
-
 	} else { // End of ! $dslc_code check.
 
 		$code = $dslc_code;
-	}
+	} // End if().
 
 	echo '<style type="text/css">';
 
@@ -204,7 +202,7 @@ function dslc_custom_css( $dslc_code = '' ) {
 	foreach ($code_to_render as $id => $code) {
 		if ( $code ) {
 
-			$dslc_css_style .= "\n/*  CSS FOR POST ID: " . $id . " */\n";
+			$dslc_css_style .= "\n/*  CSS FOR POST ID: " . $id . " */\n\n";
 			$cache_id = $id;
 
 			// Initiate simple CSS rendering cache.
@@ -218,7 +216,6 @@ function dslc_custom_css( $dslc_code = '' ) {
 
 			} else {
 				$rendered_code = dslc_render_css( $code );
-
 				// Save rendered CSS in the cache engine.
 				$cache->set_cache( $rendered_code, $cache_id );
 				$dslc_css_style .= $rendered_code;
@@ -260,7 +257,6 @@ function dslc_custom_css( $dslc_code = '' ) {
  * @return string            Generated CSS output.
  */
 function dslc_render_css( $code ) {
-
 	$code_array = dslc_json_decode( $code );
 	$css_output = '';
 
@@ -277,7 +273,6 @@ function dslc_render_css( $code ) {
 			}
 		}
 	} else {
-
 		// Old (shortcodes based) code version.
 		// Replace shortcode names.
 		// $code = dslc_shortcodes_add_suffix_css( $code );
@@ -348,7 +343,6 @@ function dslc_module_gen_css( $atts, $settings_raw ) {
 
 	// Check if it's JSON or base64 code. No matter what return array.
 	$settings = dslc_json_decode( $settings_raw );
-
 
 	// If it's an array?
 	if ( is_array( $settings ) ) {
@@ -505,7 +499,8 @@ function dslc_generate_custom_css( $module_structure, $module_settings, $restart
 	}
 
 	$module_instance_id = $module_settings['module_instance_id'];
-	$dslc_css_style .= $css_output;
+	// $dslc_css_style .= $css_output;
+	// ↑↑↑ Cause duplication of CSS code. $dslc_css_style is global.
 
 	return $css_output;
 }

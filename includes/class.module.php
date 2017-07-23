@@ -2105,7 +2105,7 @@ class DSLC_Module {
 
 					// Generate CSS for the module based on the selected options.
 					// Funciton 'dslc_generate_custom_css' will fill global $dslc_css_style with CSS code.
-					dslc_generate_custom_css( $options_arr, $options, true );
+					$module_css = dslc_generate_custom_css( $options_arr, $options, true );
 					$googlefonts_output = '';
 					foreach ( $dslc_googlefonts_array as $googlefont ) {
 						if ( in_array( $googlefont, $dslc_all_googlefonts_array, true ) ) {
@@ -2116,8 +2116,8 @@ class DSLC_Module {
 						}
 					}
 					echo $googlefonts_output;
-					echo $dslc_css_style;
-
+					echo $module_css;
+					// echo $dslc_css_style; // <– old method using globals.
 				}
 
 				?></style>
