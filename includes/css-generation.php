@@ -815,10 +815,14 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 					isset( $css_declaration_borders['border-bottom-width'] ) ||
 					isset( $css_declaration_borders['border-left-width'] ) ) {
 				$output_border_declaration = true;
-			} elseif ( $dslc_active ) {
-				$css_declaration_borders['border-width'] = '0px';
-				// ↑↑↑ Fixes 🐛 with unwanted black border due to:
-				// border-style:solid solid solid solid; when editing the page.
+			}
+
+			// Remove border-style property if width isn't set or is set to 0px.
+			// This rule fixes bugs with extra borders on text/shortcode elements.
+			if ( isset( $css_declaration_borders['border-style'] ) ) {
+				if ( empty( $css_declaration_borders['border-width'] ) || '0px' === $css_declaration_borders['border-width'] ) {
+					unset( $css_declaration_borders['border-style'] );
+				}
 			}
 
 			// Always output all the border properties when:
