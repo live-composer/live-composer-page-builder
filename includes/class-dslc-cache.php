@@ -98,7 +98,11 @@ class DSLC_Cache {
 		This is temporary solution to have post grids and sliders to show
 		actual information and template designs to updates properly.
 		*/
-		$this->cache = array( 'html', 'css', 'fonts' );
+		$this->cache = array(
+				'html' => array(),
+				'css' => array(),
+				'fonts' => array(),
+			);
 		$this->update_db();
 	}
 
@@ -107,11 +111,11 @@ class DSLC_Cache {
 	 * @return string/boolean Cached code or false if not found.
 	 */
 	public function get_cache( $identificator = false, $cache_type = false ) {
-		if ( ! $cache_type ) {
-			$cache_type = $this->type;
-		}
-
 		if ( $identificator && $this->cached( $identificator ) ) {
+			if ( ! $cache_type ) {
+				$cache_type = $this->type;
+			}
+
 			return $this->cache[ $cache_type ][ $identificator ];
 		} else {
 			return false;
@@ -127,7 +131,12 @@ class DSLC_Cache {
 				$cache_type = $this->type;
 			}
 
+			vovaphperror( $cache_type, '$cache_type' );
+
 			$this->cache[ $cache_type ][ $identificator ] = $code_to_cache;
+
+			vovaphperror( $this->cache, '$this->cache' );
+
 			$this->update_db();
 		}
 	}

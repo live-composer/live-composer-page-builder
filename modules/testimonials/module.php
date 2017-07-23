@@ -1898,10 +1898,9 @@ class DSLC_Testimonials extends DSLC_Module {
 						'taxonomy' => 'dslc_testimonials_cats',
 						'field' => 'slug',
 						'terms' => $cats_array,
-						'operator' => $options['categories_operator']
-					)
+						'operator' => $options['categories_operator'],
+					),
 				);
-
 			}
 
 			// Exlcude and Include arrays
@@ -2263,9 +2262,5 @@ class DSLC_Testimonials extends DSLC_Module {
 			}
 
 			wp_reset_postdata();
-
-
-
 	}
-
 }
