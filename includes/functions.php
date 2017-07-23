@@ -795,7 +795,10 @@ function dslc_code_migration( $settings ) {
 
 			if ( isset( $settings[ $id ] ) && '' === $settings[ $id ] ) {
 				$settings[ $id ] = '';
+			} elseif ( ! isset( $settings[ $id ] ) && isset( $control['std'] ) ) {
+				$settings[ $id ] = $control['std']; // Fix missing default button labels.
 			}
+
 		} elseif ( 'main_heading_link_title' === $id ) {
 
 			if ( isset( $settings[ $id ] ) && '' === $settings[ $id ] ) {
