@@ -1512,7 +1512,7 @@ function dslc_load_template( $filename, $default = '' ) {
 
 }
 
-function dslc_render_gfonts() {
+function dslc_get_gfonts() {
 
 	/* This array gets filled with fonts used on the page (temporary storage) */
 	global $dslc_googlefonts_array;
@@ -1520,25 +1520,12 @@ function dslc_render_gfonts() {
 	global $dslc_available_fonts;
 	$dslc_all_googlefonts_array = $dslc_available_fonts['google'];
 
-	// Google Fonts Import.
-	$gfonts_output_subsets = '';
-	$gfonts_subsets_arr = dslc_get_option( 'lc_gfont_subsets', 'dslc_plugin_options_performance' );
-	if ( ! $gfonts_subsets_arr ) {
-		$gfonts_subsets_arr = array('latin', 'latin-ext', 'cyrillic', 'cyrillic-ext');
-	}
-	foreach ( $gfonts_subsets_arr as $gfonts_subset ) {
-		if ( $gfonts_output_subsets == '' ) {
-			$gfonts_output_subsets .= $gfonts_subset;
-		} else {
-			$gfonts_output_subsets .= ',' . $gfonts_subset;
-		}
-	}
 
 	if ( ! defined( 'DS_LIVE_COMPOSER_GFONTS' ) || DS_LIVE_COMPOSER_GFONTS ) {
 
-		$gfonts_output_prepend = '@import url("//fonts.googleapis.com/css?family=';
-		$gfonts_output_append = '&subset=' . $gfonts_output_subsets . '"); ';
-		$gfonts_ouput_inner = '';
+		$gfonts_output_prepend = '';//'@import url("//fonts.googleapis.com/css?family=';
+		$gfonts_output_append = ''; //'&subset=' . $gfonts_output_subsets . '"); ';
+		$gfonts_ouput_inner = array();
 
 		$gfonts_do_output = true;
 
@@ -1550,22 +1537,55 @@ function dslc_render_gfonts() {
 			if ( in_array( $gfont, $dslc_all_googlefonts_array ) ) {
 				$gfont = str_replace( ' ', '+', $gfont );
 				if ( $gfont != '' ) {
-					if ( $gfonts_ouput_inner == '' ) {
-						$gfonts_ouput_inner .= $gfont . ':100,200,300,400,500,600,700,800,900';
-					} else {
-						$gfonts_ouput_inner .= '|' . $gfont . ':100,200,300,400,500,600,700,800,900';
-					}
+					$gfonts_ouput_inner[] = $gfont . ':100,200,300,400,500,600,700,800,900';
 				}
 			}
 		}
 
 		// Do not output empty Google font calls (when font set to an empty string)
-		if ( $gfonts_do_output ) {
-			$gfonts_output = $gfonts_output_prepend . $gfonts_ouput_inner . $gfonts_output_append;
-			if ( $gfonts_ouput_inner != '' ) {
-				echo $gfonts_output;
+		if ( $gfonts_do_output && count( $gfonts_ouput_inner ) ) {
+			// $gfonts_output = $gfonts_output_prepend . $gfonts_ouput_inner . $gfonts_output_append;
+			// if ( '' !== $gfonts_ouput_inner ) {
+				return $gfonts_ouput_inner;
+			// }
+		}
+	}
+}
+
+function dslc_render_gfonts( $fonts_array ) {
+
+	if ( is_array( $fonts_array ) && ! empty( $fonts_array) ) {
+
+		// Google Fonts Import.
+		$gfonts_output = '';
+		$gfonts_output_subsets = '';
+		$gfonts_subsets_arr = dslc_get_option( 'lc_gfont_subsets', 'dslc_plugin_options_performance' );
+		if ( ! $gfonts_subsets_arr ) {
+			$gfonts_subsets_arr = array( 'latin', 'latin-ext', 'cyrillic', 'cyrillic-ext' );
+		}
+
+		foreach ( $gfonts_subsets_arr as $gfonts_subset ) {
+			if ( '' === $gfonts_output_subsets ) {
+				$gfonts_output_subsets .= $gfonts_subset;
+			} else {
+				$gfonts_output_subsets .= ',' . $gfonts_subset;
 			}
 		}
+
+		$gfonts_output .= '<link href="//fonts.googleapis.com/css?family=';
+
+		foreach ( $fonts_array as $key => $font ) {
+			if ( 0 < $key ) {
+				$gfonts_output .= '|';
+			}
+
+			$gfonts_output .= $font;
+		}
+
+		$gfonts_output .= '&amp;subset=' . $gfonts_output_subsets;
+		$gfonts_output .= '" rel="stylesheet">';
+
+		echo $gfonts_output;
 	}
 }
 

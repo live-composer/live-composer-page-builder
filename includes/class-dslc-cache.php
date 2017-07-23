@@ -98,7 +98,7 @@ class DSLC_Cache {
 		This is temporary solution to have post grids and sliders to show
 		actual information and template designs to updates properly.
 		*/
-		$this->cache = array( 'html', 'css' );
+		$this->cache = array( 'html', 'css', 'fonts' );
 		$this->update_db();
 	}
 
@@ -106,11 +106,13 @@ class DSLC_Cache {
 	 * Return cached code (HTML or CSS).
 	 * @return string/boolean Cached code or false if not found.
 	 */
-	public function get_cache( $identificator = false ) {
-		$type = $this->type;
+	public function get_cache( $identificator = false, $cache_type = false ) {
+		if ( ! $cache_type ) {
+			$cache_type = $this->type;
+		}
 
 		if ( $identificator && $this->cached( $identificator ) ) {
-			return $this->cache[ $type ][ $identificator ];
+			return $this->cache[ $cache_type ][ $identificator ];
 		} else {
 			return false;
 		}
@@ -119,9 +121,13 @@ class DSLC_Cache {
 	/**
 	 * Save cached code (HTML or CSS).
 	 */
-	public function set_cache( $code_to_cache = false, $identificator = false ) {
+	public function set_cache( $code_to_cache = false, $identificator = false, $cache_type = false ) {
 		if ( $code_to_cache ) {
-			$this->cache[ $this->type ][ $identificator ] = $code_to_cache;
+			if ( ! $cache_type ) {
+				$cache_type = $this->type;
+			}
+
+			$this->cache[ $cache_type ][ $identificator ] = $code_to_cache;
 			$this->update_db();
 		}
 	}

@@ -193,6 +193,8 @@ function dslc_custom_css( $dslc_code = '' ) {
 		$code = $dslc_code;
 	} // End if().
 
+	$fonts_to_output = array();
+
 	echo '<style type="text/css">';
 
 	$output_css = false;
@@ -202,7 +204,7 @@ function dslc_custom_css( $dslc_code = '' ) {
 	foreach ($code_to_render as $id => $code) {
 		if ( $code ) {
 
-			$dslc_css_style .= "\n/*  CSS FOR POST ID: " . $id . " */\n\n";
+			$dslc_css_style .= "\n\n/*  CSS FOR POST ID: " . $id . " */\n";
 			$cache_id = $id;
 
 			// Initiate simple CSS rendering cache.
@@ -214,18 +216,26 @@ function dslc_custom_css( $dslc_code = '' ) {
 				$cached_page_css = $cache->get_cache( $cache_id );
 				$dslc_css_style .= $cached_page_css;
 
+				// Get cached Google Fonts request link.
+				$google_fonts = $cache->get_cache( $cache_id, 'fonts' );
+				$fonts_to_output = array_merge( $fonts_to_output, $google_fonts );
+
 			} else {
 				$rendered_code = dslc_render_css( $code );
 				// Save rendered CSS in the cache engine.
 				$cache->set_cache( $rendered_code, $cache_id );
 				$dslc_css_style .= $rendered_code;
+
+				// Save Google Fonts request for used fonts.
+				$google_fonts = dslc_get_gfonts();
+				$fonts_to_output = array_merge( $fonts_to_output, $google_fonts );
+				$cache->set_cache( $google_fonts, $cache_id, 'fonts' );
+				$dslc_googlefonts_array = array(); // Reset temporary fonts storage.
 			}
 
 			$output_css = true;
 		}
 	}
-
-	dslc_render_gfonts();
 
 	// Wrapper width.
 	echo '.dslc-modules-section-wrapper, .dslca-add-modules-section { width : ' . $lc_width . '; } ';
@@ -247,6 +257,9 @@ function dslc_custom_css( $dslc_code = '' ) {
 	}
 
 	echo '</style>';
+
+	// Output Google Fonts request link.
+	dslc_render_gfonts( $fonts_to_output );
 }
 
 /**
@@ -680,7 +693,6 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 
 			// If option type is font?
 			if ( 'font' === $option_arr['type'] ) {
-
 				if ( ! in_array( $module_settings[ $option_id ], $dslc_googlefonts_array, true ) && ! in_array( $module_settings[ $option_id ], $regular_fonts, true ) ) {
 					$dslc_googlefonts_array[] = $module_settings[ $option_id ];
 				}
