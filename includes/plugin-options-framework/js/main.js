@@ -321,7 +321,7 @@ jQuery(document).ready(function(){
 function dslc_clear_cache(e) {
 	e.preventDefault();
 
-	jQuery('.dslc-clear-cache .dashicons').removeClass('dashicons-trash').addClass('dashicons-update dslc-icon-spin');
+	jQuery('.dslc-clear-cache .dashicons').removeClass('dashicons-trash').addClass('dashicons-update dashicon-spin');
 
 	jQuery.ajax({
 		type: "POST",

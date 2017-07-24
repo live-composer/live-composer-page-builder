@@ -248,7 +248,7 @@ a [class*=" dslc-icon-"] {
   *line-height: 1em;
 }
 /* Animated rotating dslc-icon */
-.dslc-icon-spin {
+.dslc-icon-spin, .dashicon-spin {
   display: inline-block;
   -moz-animation: spin 2s infinite linear;
   -o-animation: spin 2s infinite linear;
