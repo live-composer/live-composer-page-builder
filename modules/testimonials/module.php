@@ -188,10 +188,6 @@ class DSLC_Testimonials extends DSLC_Module {
 						'label' => __( 'Alphabetic', 'live-composer-page-builder' ),
 						'value' => 'title',
 					),
-					array(
-						'label' => __( 'Comment Count', 'live-composer-page-builder' ),
-						'value' => 'comment_count',
-					),
 				)
 			),
 			array(
