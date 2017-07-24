@@ -1,3 +1,16 @@
+.dslc-clear-cache {
+    color: #D54E21;
+    margin-left: 12px;
+    vertical-align: middle;
+}
+
+.dslc-clear-cache .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    margin-top: 7px;
+}
+
 .dslc-settigns-notice {
     background: #fff none repeat scroll 0 0;
     border-left: 4px solid #fff;
@@ -2243,4 +2256,60 @@ margin-left: -90px;
 #dslc-settings-frame {
     margin-left: 300px;
 margin-top: 23px;
+}
+
+
+/* Animated rotating dslc-icon */
+.dslc-icon-spin {
+  display: inline-block;
+  -moz-animation: spin 2s infinite linear;
+  -o-animation: spin 2s infinite linear;
+  -webkit-animation: spin 2s infinite linear;
+  animation: spin 2s infinite linear;
+}
+/* Prevent stack and spinners from being taken inline when inside a link */
+a .dslc-icon-spin {
+  display: inline-block;
+  text-decoration: none;
+}
+
+@-moz-keyframes spin {
+  0% {
+    -moz-transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(359deg);
+  }
+}
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+  }
+}
+@-o-keyframes spin {
+  0% {
+    -o-transform: rotate(0deg);
+  }
+  100% {
+    -o-transform: rotate(359deg);
+  }
+}
+@-ms-keyframes spin {
+  0% {
+    -ms-transform: rotate(0deg);
+  }
+  100% {
+    -ms-transform: rotate(359deg);
+  }
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
 }

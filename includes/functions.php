@@ -208,7 +208,9 @@ function dslc_module_settings( $options, $module_id ) {
 
 		// Go through all options and fill array with default/standard values.
 		foreach ( $options as $option ) {
-			$settings[ $option['id'] ] = $option['std'];
+			if ( isset( $option['std'] ) ) {
+				$settings[ $option['id'] ] = $option['std'];
+			}
 		}
 
 	} else {
@@ -793,7 +795,10 @@ function dslc_code_migration( $settings ) {
 
 			if ( isset( $settings[ $id ] ) && '' === $settings[ $id ] ) {
 				$settings[ $id ] = '';
+			} elseif ( ! isset( $settings[ $id ] ) && isset( $control['std'] ) ) {
+				$settings[ $id ] = $control['std']; // Fix missing default button labels.
 			}
+
 		} elseif ( 'main_heading_link_title' === $id ) {
 
 			if ( isset( $settings[ $id ] ) && '' === $settings[ $id ] ) {

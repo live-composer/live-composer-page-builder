@@ -81,6 +81,7 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) && version_compare( PHP_VERSION, '5.3.0
 	$dslc_var_templates = array(); // Will hold templates information
 	$dslc_var_post_options = array(); // Will hold post options information
 	$dslc_var_icons = array(); // Will hold available icons array.
+	$dslc_var_icon_fonts = array(); // Will hold available icons array.
 
 	$dslc_css_fonts = '';
 	$dslc_css_style = '';
@@ -136,6 +137,7 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) && version_compare( PHP_VERSION, '5.3.0
 	include DS_LIVE_COMPOSER_ABS . '/includes/options.extension.class.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/upgrade.class.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/editor-messages.php';
+	include DS_LIVE_COMPOSER_ABS . '/includes/class-dslc-cache.php'; // Simple HTML/CSS caching class.
 
 	$cap_page = dslc_get_option( 'lc_min_capability_page', 'dslc_plugin_options_access_control' );
 	if ( ! $cap_page ) $cap_page = 'publish_posts';
@@ -146,22 +148,6 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) && version_compare( PHP_VERSION, '5.3.0
 	 * Include Modules
 	 */
 	include DS_LIVE_COMPOSER_ABS . '/includes/class.module.php';
-
-	/**
-	 * Tutorials disabled by default
-	 *
-	 * Use the next call to activate tutorials form your theme
-	 * add_filter( 'dslc_tutorials', '__return_true' );
-	 *
-	 * @since 1.0.7
-	 */
-	function dslc_tutorials_load() {
-		$dslc_tutorials = false;
-		if ( apply_filters( 'dslc_tutorials', $dslc_tutorials ) ) {
-			include DS_LIVE_COMPOSER_ABS . '/includes/tutorials/tutorial.php';
-		}
-	}
-	add_action( 'after_setup_theme', 'dslc_tutorials_load' );
 
 	dslc_load_modules( DS_LIVE_COMPOSER_ABS . '/modules', 'module.php' );
 	DSLC_Upgrade::init();
@@ -186,7 +172,7 @@ add_action( 'admin_notices', 'dslc_php_version' );
  */
 function dslc_disable_old_plugin() {
 
-	if ( stristr( __FILE__ , 'live-composer-page-builder/') ) {
+	if ( stristr( __FILE__ , 'live-composer-page-builder/' ) ) {
 
 		/**
 		 * Deactivate the old version of Live Composer.

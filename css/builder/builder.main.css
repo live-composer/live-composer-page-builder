@@ -446,6 +446,16 @@ body a:focus {
 		padding-right: 5px;
 	}
 
+	/* Disabled actions while module saving is in progress. */
+
+	.dslca-module-saving-in-progress .dslca-actions .dslca-save-composer-helptext,
+	.dslca-module-saving-in-progress .dslca-actions .dslca-save-draft-composer-helptext,
+	.dslca-module-saving-in-progress .dslca-actions .dslca-save-composer-icon,
+	.dslca-module-saving-in-progress .dslca-actions .dslca-save-draft-composer-icon {
+		opacity: .5;
+		cursor: wait!important;
+	}
+
 	/**
 	 * Sections
 	 */
@@ -940,60 +950,6 @@ body a:focus {
 						font-weight: 400;
 						font-family: 'Open Sans', sans-serif;
 					}
-
-			/**
-			 * Icon option type - Switch set
-			 */
-
-			.dslca-module-edit-field-icon-switch-set {
-				/*display: inline-block;*/
-				position: absolute;
-				/*top: 0;*/
-				/*right: 0;*/
-				margin-top: 8px;
-				font-size: 10px;
-				line-height: 13px;
-				cursor: pointer;
-			}
-
-				.dslca-module-edit-field-icon-switch-set .dslca-icon {
-					color: rgba( 255, 255, 255, 0.7 );
-					margin-right: 4px;
-				}
-
-			.dslca-module-edit-field-icon-switch-sets {
-				background: #fff;
-				color: #8a8a8a;
-				font-family: 'Open Sans', sans-serif;
-				font-size: 13px;
-				display: none;
-				border-radius: 3px;
-				padding: 20px 25px;
-				border: 1px solid rgba(0,0,0,.12);
-				position: absolute;
-				-moz-box-shadow: 0 2px 2px rgba(0,0,0,.04), 0 0 7px rgba(0,0,0,.12);
-				-webkit-box-shadow: 0 2px 2px rgba(0,0,0,.04), 0 0 7px rgba(0,0,0,.12);
-				box-shadow: 0 2px 2px rgba(0,0,0,.04), 0 0 7px rgba(0,0,0,.12);
-				text-align: center;
-				z-index: 999999;
-			}
-
-				.dslca-module-edit-field-icon-switch-sets span {
-					display: block;
-					padding: 5px 10px;
-					cursor: pointer;
-					border-radius: 3px;
-				}
-
-				.dslca-module-edit-field-icon-switch-sets span:hover {
-					background: rgba( 0, 0, 0, 0.1 );
-				}
-
-				.dslca-module-edit-field-icon-switch-sets span.dslca-active {
-					background: #5890e5;
-					color: #fff;
-				}
-
 
 			/**
 			 * Box shadow option type
@@ -1824,7 +1780,7 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 		margin-left: auto;
 		margin-right: auto;
 		max-width: 100%;
-		margin-bottom: 120px;
+		margin-bottom: 180px;
 		overflow: hidden;
 	}
 
@@ -3489,7 +3445,8 @@ body.dslca-composer-hidden .dslca-module-manage,
 body.dslca-composer-hidden .dslca-modules-area-manage,
 body.dslca-composer-hidden .dslc-modules-section .dslca-modules-section-manage,
 .dslca-composer-hidden .dslc-modules-section:hover .dslca-modules-section-manage,
-.dslca-composer-hidden .dslca-add-modules-section {
+.dslca-composer-hidden .dslca-add-modules-section,
+body.dslca-composer-hidden .dslc-hf-block-overlay {
 	display: none !important;
 }
 
@@ -4014,6 +3971,17 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 		font-size: 12px;
 		line-height: 1.25;
 		padding: 5px 8px 12px;
+	}
+
+	.dslca-modal-icons .set-heading {
+		text-transform: uppercase;
+		padding: 30px;
+		text-align: center;
+		letter-spacing: 6px;
+		font-family: 'Open Sans', sans-serif;
+		font-size: 16px;
+		font-weight: 300;
+		line-height: 1.25;
 	}
 
 

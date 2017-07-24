@@ -65,8 +65,8 @@ function dslc_testimonials_module_cpt() {
 		),
 		'publicly_queryable'  => false,
 		'public' => true,
-		'rewrite' => array('slug' => dslc_get_option( 'testimonials_slug', 'dslc_plugin_options_cpt_slugs' ), 'with_front' => $with_front),
-		'supports' => array('title', 'custom-fields', 'excerpt', 'editor', 'author', 'thumbnail'),
+		'rewrite' => array( 'slug' => dslc_get_option( 'testimonials_slug', 'dslc_plugin_options_cpt_slugs' ), 'with_front' => $with_front ),
+		'supports' => array( 'title', 'custom-fields', 'excerpt', 'editor', 'author', 'thumbnail' ),
 		'capabilities' => array(
 			'publish_posts' => $capability,
 			'edit_posts' => $capability,
@@ -76,7 +76,7 @@ function dslc_testimonials_module_cpt() {
 			'read_private_posts' => $capability,
 			'edit_post' => $capability,
 			'delete_post' => $capability,
-			'read_post' => $capability
+			'read_post' => $capability,
 		),
 	);
 
@@ -85,13 +85,13 @@ function dslc_testimonials_module_cpt() {
 
 	// Register post type
 	register_post_type( 'dslc_testimonials', $cpt_args );
-	
+
 	/**
 	 * Register Taxonomy ( Category )
 	 */
 
 	// Arguments
-	$cats_args = array( 
+	$cats_args = array(
 		'labels' => array(
 			'name' => __( 'Testimonials Categories', 'live-composer-page-builder' ),
 			'singular_name' => __( 'Category', 'live-composer-page-builder' ),
@@ -105,11 +105,11 @@ function dslc_testimonials_module_cpt() {
 			'new_item_name' => __( 'New Category Name', 'live-composer-page-builder' ),
 			'menu_name' => __( 'Categories', 'live-composer-page-builder' ),
 		),
-		'hierarchical' => true, 
+		'hierarchical' => true,
 		'public' => true,
-		'rewrite' => array( 
+		'rewrite' => array(
 			'slug' => dslc_get_option( 'testimonials_cats_slug', 'dslc_plugin_options_cpt_slugs' ),
-			'with_front' => $with_front
+			'with_front' => $with_front,
 		),
 		'capabilities' => array(
 			'manage_terms' => $capability,

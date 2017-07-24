@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class DSLC_Module {
 
 	function shared_options( $options_id, $atts = false ) {
+		// Average running time 0.00150696436564 (1.3%)
 
 		$animation_options_choices = array(
 			array(
@@ -165,7 +166,7 @@ class DSLC_Module {
 						'label' => 'Slide Left + Fade In',
 						'value' => 'dslcSlideLeftFadeIn',
 					),
-				)
+				),
 			),
 			array(
 				'label' => 'On Hover Animation - Speed ( ms )',
@@ -1905,7 +1906,6 @@ class DSLC_Module {
 			),
 
 		);
-
 		return $$options_id;
 	}
 
@@ -1944,7 +1944,12 @@ class DSLC_Module {
 		die( 'Function "output" must be over-ridden in a sub-class (the module class).' );
 	}
 
-	function module_start( $options ) {
+	function module_start( $user_options ) {
+		// Function disabled. See new function module_before.
+	}
+
+	function module_before( $options ) {
+		// Average running time 0.0339393615723 (28%)
 
 		global $dslc_active;
 		global $dslc_should_filter;
@@ -2100,7 +2105,7 @@ class DSLC_Module {
 
 					// Generate CSS for the module based on the selected options.
 					// Funciton 'dslc_generate_custom_css' will fill global $dslc_css_style with CSS code.
-					dslc_generate_custom_css( $options_arr, $options, true );
+					$module_css = dslc_generate_custom_css( $options_arr, $options, true );
 					$googlefonts_output = '';
 					foreach ( $dslc_googlefonts_array as $googlefont ) {
 						if ( in_array( $googlefont, $dslc_all_googlefonts_array, true ) ) {
@@ -2111,8 +2116,8 @@ class DSLC_Module {
 						}
 					}
 					echo $googlefonts_output;
-					echo $dslc_css_style;
-
+					echo $module_css;
+					// echo $dslc_css_style; // <– old method using globals.
 				}
 
 				?></style>
@@ -2147,9 +2152,15 @@ class DSLC_Module {
 			<?php endif; ?>
 
 		<?php
+
 	}
 
 	function module_end( $user_options ) {
+		// Function disabled. See new function module_after.
+	}
+
+	function module_after( $user_options ) {
+		// Average running time 0.0530054050943 (48%)
 
 		global $dslc_active;
 
@@ -2157,48 +2168,13 @@ class DSLC_Module {
 		$options_ids = array();
 
 		// Clear the custom options by getting rid of all the default values.
-
 		// Get the module structure.
 		// Array of options with default values only.
 		$options = $this->options();
 
-		/* Not ready for production. Causes more issues than benefits.*/
-		foreach ( $options as $default_option ) {
-
-			// Sanitize User Option Values.
-			if ( isset( $id ) && isset( $user_options[ $id ] ) ) {
-				$option_satinitize_data = array(
-					'value' => $user_options[ $id ],
-					'id' => $id,
-					// 'definition' => $default_option,
-				);
-
-				$user_options[ $id ] = dslc_sanitize_option_val ( $option_satinitize_data );
-			}
-
-			$id = $default_option['id'];
-
-			// 🔖 RAW CODE CLEANUP
-			// Only clean options in the styling or custon sections.
-			// Never clean 'Functionality' section (it has no section parameter set).
-			if ( isset( $default_option['section'] ) && strtoupper( 'functionality' ) !== strtoupper( $default_option['section'] ) ) {
-
-				// Do we have option with this id in the custom settings set by the user?
-				if ( isset( $user_options[ $id ] )  ) {
-
-					// If current option is empty or the same as default value for this setting.
-					// if ( '' === $user_options[ $id ] || isset( $default_option['std'] ) && $default_option['std'] === $user_options[ $id ] ) {
-					if ( '' === $user_options[ $id ] || false === $user_options[ $id ] ) {
-						unset( $user_options[ $id ] );
-					}
-				}
-			}
-		}
-
-
-
 		// Bring back IDs for image options.
 		global $dslc_var_image_option_bckp;
+
 		foreach ( $dslc_var_image_option_bckp as $key => $value ) {
 			$user_options[ $key ] = $value;
 		}
@@ -2214,6 +2190,7 @@ class DSLC_Module {
 		}
 
 		$user_options_no_defaults = $user_options;
+		$user_options_no_defaults = dslc_encode_shortcodes_in_array( $user_options_no_defaults );
 
 		// If Live Composer is in editing mode: output some additional (hidden) elements.
 		if ( DS_LIVE_COMPOSER_ACTIVE && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) : ?>
@@ -2226,52 +2203,91 @@ class DSLC_Module {
 				// Go through standard set of options described in the module class.
 				// Array $options do not contains custom data, but structure and defaults.
 				// Array $user_options contains custom module settings.
+
 				foreach ( $options as $key => $option ) {
 
+					$id = $option['id'];
+					$uid = false;
+					if ( isset( $id ) && isset( $user_options[ $id ] ) ) {
+						$uid = $user_options[ $id ];
+					}
+
+					// Sanitize User Option Values.
+					if ( $uid ) {
+						$option_satinitize_data = array(
+							'value' => $uid,
+							'id' => $id,
+							// 'definition' => $option,
+						);
+
+						$uid = dslc_sanitize_option_val( $option_satinitize_data );
+					}
+
+					// 🔖 RAW CODE CLEANUP
+					// Only clean options in the styling or custon sections.
+					// Never clean 'Functionality' section (it has no section parameter set).
+					/*
+					if (
+						isset( $uid ) &&
+						isset( $option['section'] ) && 'FUNCTIONALITY' !== strtoupper( $option['section'] ) ) {
+
+						// Do we have option with this id in the custom settings set by the user?
+						// if ( isset( $user_options[ $id ] )  ) {
+
+							// If current option is empty or the same as default value for this setting.
+							// if ( '' === $user_options[ $id ] || isset( $option['std'] ) && $option['std'] === $user_options[ $id ] ) {
+							if ( '' === $uid || false === $uid ) {
+								unset( $user_options[ $id ] );
+							}
+						// }
+					}
+					*/
+
 					// Option ID.
-					$option_id = $option['id'];
 					$options_ids[] = $option['id'];
 
 					// Set the setting value.
-					if ( isset( $user_options[ $option_id ] ) ) {
-						$option_value = $user_options[ $option_id ];
+					if ( $uid ) {
+						$option_value = $uid;
 					} else {
 						$option_value = '';
 						// $option_value = $option['std'];
 					}
 
-					if ( isset( $user_options[ $option_id ] ) ) {
-
-						// 🔖 RAW CODE CLEANUP
-						// if ( $user_options[ $option_id ] === $option['std'] || '' === $user_options[ $option_id ] ) {
-						if ( false === $user_options[ $option_id ] || '' === $user_options[ $option_id ] ) {
-							unset( $user_options_no_defaults[ $option_id ] );
-						}
+					// 🔖 RAW CODE CLEANUP
+					// if ( $user_options[ $id ] === $option['std'] || '' === $user_options[ $id ] ) {
+					if ( false === $uid || '' === $uid ) {
+						unset( $user_options_no_defaults[ $id ] );
 					}
 
 					// Sanitize Option Values.
+
 					if ( $option_value ) {
 
 						$option_satinitize_data = array(
 							'value' => $option_value,
-							'id' => $option_id,
+							'id' => $id,
 							'definition' => $option,
 						);
 
-						$option_value = dslc_sanitize_option_val ( $option_satinitize_data );
+						$option_value = dslc_sanitize_option_val( $option_satinitize_data );
 					}
 
-					echo '<textarea class="dslca-module-option-front" data-id="' . esc_attr( $option_id ) . '">' . stripslashes( $option_value ) . '</textarea>';
+					$option_value = dslc_encode_shortcodes( $option_value );
+
+					echo '<textarea class="dslca-module-option-front" data-id="' . esc_attr( $id ) . '">' . stripslashes( $option_value ) . '</textarea>';
 				}
 
-				// Output additonal (custom) options that are not part of the default module structure.
+				// Output additional (custom) options that are not part of the default module structure.
 				foreach ( $user_options as $user_option_id => $user_option_val ) {
 
 					if ( ! in_array( $user_option_id, $options_ids, true ) ) {
-
+						$user_option_val = dslc_encode_shortcodes( $user_option_val );
 						echo '<textarea class="dslca-module-option-front" data-id="' . esc_attr( $user_option_id ) . '">' . stripslashes( $user_option_val ) . '</textarea>';
 					}
-				} ?>
+				}
+
+				?>
 
 			</div><!-- dslca-module-options-front -->
 
@@ -2279,15 +2295,13 @@ class DSLC_Module {
 
 			<span class="dslc-sortable-helper-icon dslc-icon-<?php echo esc_attr( $this->module_icon ); ?>" data-title="<?php echo esc_attr( $this->module_title ); ?>" data-icon="<?php echo esc_attr( $this->module_icon ); ?>"></span>
 
-		<?php endif; ?>
+		<?php endif;?>
 
 		<?php do_action( 'dslc_module_after' ); ?>
-
 		</div><!-- .dslc-module -->
 		<?php
 
 		if ( ! $dslc_active ) {
-
 			// After Module.
 			$after_module_content = '';
 			echo apply_filters( 'dslc_after_module', $after_module_content, $user_options );
@@ -2295,7 +2309,6 @@ class DSLC_Module {
 
 		global $dslc_should_filter;
 		$dslc_should_filter = true;
-
 	}
 
 	/**
@@ -2304,7 +2317,7 @@ class DSLC_Module {
 	 * @return array Array with two more options to add into the module options
 	 */
 	function presets_options() {
-
+		// Average time per module 0.00111207209135 (1%).
 		$choices = array(
 			array(
 				'label' => 'None',

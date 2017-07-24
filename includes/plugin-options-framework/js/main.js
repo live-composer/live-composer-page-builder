@@ -1,5 +1,8 @@
 jQuery(document).ready(function(){
 
+	// Add a link 'Clear cache' in the performance section.
+	jQuery('#lc_caching_engine').after(' <a href="#" class="dslc-clear-cache" onclick="dslc_clear_cache(event)"><span class="dashicons dashicons-trash"></span> clear cache</a>');
+
 	function dslc_plugin_opts_generate_list_code( dslcTarget ) {
 
 		// Vars
@@ -314,3 +317,22 @@ jQuery(document).ready(function(){
 	    }
 	});
 });
+
+function dslc_clear_cache(e) {
+	e.preventDefault();
+
+	jQuery('.dslc-clear-cache .dashicons').removeClass('dashicons-trash').addClass('dashicons-update dslc-icon-spin');
+
+	jQuery.ajax({
+		type: "POST",
+		data: {
+			security: dslcajax,
+			action: 'dslc_ajax_clear_cache',
+		},
+		url: ajaxurl,
+	}).done(function() {
+		jQuery('.dslc-clear-cache').css('color','green');
+		jQuery('.dslc-clear-cache').text( 'done' );
+		jQuery('.dslc-clear-cache').prepend('<span class="dashicons dashicons-yes"></span> ');
+	});
+}

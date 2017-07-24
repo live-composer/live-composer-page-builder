@@ -39,6 +39,13 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 	 */
 	function options() {
 
+		// Check if we have this module options already calculated
+		// and cached in WP Object Cache.
+		$cached_dslc_options = wp_cache_get( 'dslc_options_' . $this->module_id, 'dslc_modules' );
+		if ( $cached_dslc_options ) {
+			return apply_filters( 'dslc_module_options', $cached_dslc_options, $this->module_id );
+		}
+
 		$dslc_options = array(
 
 			array(
@@ -342,6 +349,9 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array( 'hover_opts' => false ) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
+		// Cache calculated array in WP Object Cache.
+		wp_cache_add( 'dslc_options_' . $this->module_id, $dslc_options ,'dslc_modules' );
+
 		return apply_filters( 'dslc_module_options', $dslc_options, $this->module_id );
 
 	}
@@ -370,7 +380,6 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 
 		$thumb_url = $thumb_url[0];
 
-		$this->module_start( $options );
 
 		/* Module output starts here */
 
@@ -439,8 +448,6 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 		<?php endif; ?>
 
 		<?php /* Module output ends here. */
-
-		$this->module_end( $options );
 
 	}
 }

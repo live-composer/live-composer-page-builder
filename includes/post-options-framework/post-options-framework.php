@@ -183,14 +183,11 @@ function dslc_editorinterface_post_options( $object, $metabox ) {
 			// Get current value as array.
 			$curr_value_no_esc = get_post_meta( $object->ID, $post_option['id'] );
 
+			$curr_value  = esc_attr( $post_option['std'] );
+
 			// If there is only one value in array – transform it into the string.
 			if ( 1 === count( $curr_value_no_esc ) && is_string( $curr_value_no_esc[0] ) ) {
 				$curr_value = esc_attr( $curr_value_no_esc[0] );
-			}
-
-			if ( empty( $curr_value_no_esc ) ) {
-				// $curr_value_no_esc[] = $post_option['std'];
-				$curr_value  = esc_attr( $post_option['std'] );
 			}
 
 			?>

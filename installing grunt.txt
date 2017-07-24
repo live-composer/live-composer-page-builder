@@ -1,0 +1,3 @@
+1. Change to the project's root directory.
+2. Install project dependencies with ‘npm install’.
+3. Run Grunt with ‘grunt’.

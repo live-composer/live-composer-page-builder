@@ -285,8 +285,7 @@ class LC_Control {
 						<input type="text" class="dslca-module-edit-field dslca-module-edit-field-icon" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo esc_attr( $this->_curr_value ); ?>" <?php echo $affect_on_change_append ?> />
 						<span class="dslca-module-edit-field-icon-suggest"></span>
 					</div>
-					<span class="dslca-options-iconbutton dslca-open-modal-hook" data-modal=".dslc-list-icons-fontawesome"><span class="dslca-icon dslc-icon-th"></span></span>
-					<span class="dslca-module-edit-field-icon-switch-set"><span class="dslca-icon dslc-icon-cog"></span> <span class="dslca-module-edit-field-icon-curr-set"><?php echo dslc_icons_current_set( $this->_curr_value ); ?></span></span>
+					<span class="dslca-options-iconbutton dslca-open-modal-hook" data-modal=".dslc-list-icons"><span class="dslca-icon dslc-icon-th"></span></span>
 
 				<?php elseif ( 'image' === $module_control['type'] ) : ?>
 
