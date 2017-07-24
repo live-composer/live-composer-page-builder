@@ -1565,6 +1565,10 @@ input[type="button"], input[type="submit"], input[type="reset"], input[type="fil
 			display: block;
 		}
 
+#dslc-content ul.dslc-social li:last-child {
+	margin-right: 0;
+}
+
 /**
  * Staff Social
  */
