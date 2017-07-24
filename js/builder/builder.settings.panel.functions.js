@@ -854,7 +854,7 @@ function dslc_module_options_hideshow_tabs() {
 
 		if ( jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).data('dslc-module-id') == 'DSLC_Text_Simple' ||
 			  jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).data('dslc-module-id') == 'DSLC_TP_Content' ||
-			  jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).data('dslc-module-id') == 'DSLC_Html' ) {
+			  jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).data('dslc-module-id') == 'DSLC_Html' || jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).data('dslc-module-id') == 'DSLC_Shortcode' ) {
 
 			var dslcCustomCSS = jQuery('.dslca-module-edit-option[data-id="css_custom"]'),
 			dslcCustomCSSVal = dslcCustomCSS.find('select').val();
