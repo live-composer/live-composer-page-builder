@@ -218,8 +218,9 @@ function dslc_custom_css( $dslc_code = '' ) {
 
 				// Get cached Google Fonts request link.
 				$google_fonts = $cache->get_cache( $cache_id, 'fonts' );
-				$fonts_to_output = array_merge( $fonts_to_output, $google_fonts );
-
+				if ( ! empty( $google_fonts ) ) {
+					$fonts_to_output = array_merge( $fonts_to_output, $google_fonts );
+				}
 			} else {
 				$rendered_code = dslc_render_css( $code );
 				// Save rendered CSS in the cache engine.
@@ -228,14 +229,16 @@ function dslc_custom_css( $dslc_code = '' ) {
 
 				// Save Google Fonts request for used fonts.
 				$google_fonts = dslc_get_gfonts();
-				$fonts_to_output = array_merge( $fonts_to_output, $google_fonts );
+				if ( ! empty( $google_fonts ) ) {
+					$fonts_to_output = array_merge( $fonts_to_output, $google_fonts );
+				}
 				$cache->set_cache( $google_fonts, $cache_id, 'fonts' );
 				$dslc_googlefonts_array = array(); // Reset temporary fonts storage.
 			}
 
 			$output_css = true;
-		}
-	}
+		} // End if().
+	} // End foreach().
 
 	// Wrapper width.
 	echo '.dslc-modules-section-wrapper, .dslca-add-modules-section { width : ' . $lc_width . '; } ';

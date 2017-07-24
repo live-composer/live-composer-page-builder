@@ -111,7 +111,7 @@ class DSLC_Cache {
 	 * @return string/boolean Cached code or false if not found.
 	 */
 	public function get_cache( $identificator = false, $cache_type = false ) {
-		if ( $identificator && $this->cached( $identificator ) ) {
+		if ( $identificator && $this->cached( $identificator, $cache_type ) ) {
 			if ( ! $cache_type ) {
 				$cache_type = $this->type;
 			}
@@ -131,12 +131,7 @@ class DSLC_Cache {
 				$cache_type = $this->type;
 			}
 
-			vovaphperror( $cache_type, '$cache_type' );
-
 			$this->cache[ $cache_type ][ $identificator ] = $code_to_cache;
-
-			vovaphperror( $this->cache, '$this->cache' );
-
 			$this->update_db();
 		}
 	}
@@ -152,11 +147,13 @@ class DSLC_Cache {
 	 * Is html/css code for the page cached or not?
 	 * @return boolean True/False.
 	 */
-	public function cached( $identificator = false ) {
-		$type = $this->type;
+	public function cached( $identificator = false, $cache_type = false ) {
+		if ( ! $cache_type ) {
+			$cache_type = $this->type;
+		}
 
-		if ( isset( $this->cache[ $type ] )
-				&& isset( $this->cache[ $type ][ $identificator ] ) ) {
+		if ( isset( $this->cache[ $cache_type ] )
+				&& isset( $this->cache[ $cache_type ][ $identificator ] ) ) {
 			return true;
 		} else {
 			return false;

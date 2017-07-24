@@ -314,7 +314,6 @@ function dslc_parallax() {
 	jQuery('.dslc-init-parallax').each(function(){
 		var $paralaxEl = jQuery(this);
 		$paralaxEl.imagesLoaded( { background: true }, function(){
-			console.log('dslc-init-parallax background image loaded');
 			var dslcSpeed = 4,
 			bgPosition = $paralaxEl.css( 'background-position' ).split( ' ' ),
 			bgPositionHor = bgPosition[0],
