@@ -29,7 +29,6 @@ function dslca_publish_event( eventName, eventData ) {
  */
 jQuery(window).load(function($) {
 	var scrollTo = jQuery('#dslc-main').offset().top;
-	console.log( "scrollTo:" ); console.log( scrollTo );
 	if ( scrollTo ) {
 		jQuery('html, body').animate({
 			scrollTop: scrollTo
