@@ -790,6 +790,8 @@ function dslc_code_migration( $settings ) {
 
 			if ( isset( $settings[ $id ] ) && '' === $settings[ $id ] ) {
 				$settings[ $id ] = '';
+			} elseif ( ! isset( $settings[ $id ] ) && isset( $control['std'] ) ) {
+				$settings[ $id ] = $control['std']; // Fix missing default content.
 			}
 		} elseif ( 'button_text' === $id ) {
 
@@ -808,6 +810,8 @@ function dslc_code_migration( $settings ) {
 
 			if ( isset( $settings[ $id ] ) && '' === $settings[ $id ] ) {
 				$settings[ $id ] = '';
+			} elseif ( ! isset( $settings[ $id ] ) && isset( $control['std'] ) ) {
+				$settings[ $id ] = $control['std']; // Fix missing default font family.
 			}
 		} elseif ( ( ! isset( $settings[ $id ] ) || '' === $settings[ $id ] ) &&
 					isset( $control['std'] ) ) {
