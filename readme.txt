@@ -3,7 +3,7 @@ Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page, page builder plugin, drag-n-drop page builder
 Requires at least: 4.3
 Tested up to: 4.8
-Stable tag: 1.3.2
+Stable tag: 1.3.2.1
 License: GPLv3
 
 Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
@@ -134,7 +134,7 @@ Upcoming Releases:
 * [Please, report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
 * [You can download any previous version here](https://wordpress.org/plugins/live-composer-page-builder/developers/)
 
-= 1.3.2 - July 25th 2017 =
+= 1.3.2.1 - July 25th 2017 =
 
 = New: =
 * Live Composer now comes with a simple object-based cache. It will use 2-5 times fewer server resources. Pages will load 3-5 times faster. You can clear cache or disable it completely in WP Admin > Live Composer > Performance > HTML/CSS caching.
