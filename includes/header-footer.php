@@ -555,6 +555,11 @@ function dslc_hf_get_headerfooter( $post_id = false, $hf_type = 'header' ) {
 		$position = 'relative';
 	}
 
+	// Code to insert before.
+	$code_before = apply_filters( 'dslc_' . $hf_type . '_before', '' );
+
+	// Code to insert after.
+	$code_after = apply_filters( 'dslc_' . $hf_type . '_after', '' );
 
 	// If editor active? Add a link to the header editing.
 	if ( dslc_is_editor_active( 'access' ) ) {
@@ -600,12 +605,6 @@ function dslc_hf_get_headerfooter( $post_id = false, $hf_type = 'header' ) {
 	if ( is_singular( 'dslc_hf' ) ) {
 		return $wrapper_start;
 	}
-
-	// Code to insert before.
-	$code_before = apply_filters( 'dslc_' . $hf_type . '_before', '' );
-
-	// Code to insert after.
-	$code_after = apply_filters( 'dslc_' . $hf_type . '_after', '' );
 
 	// If there is a header/footer applied.
 	if ( $hf_id ) {
