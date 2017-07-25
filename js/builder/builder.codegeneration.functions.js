@@ -51,13 +51,24 @@ function dslc_save_composer() {
 			dslc_code : composerCode,
 			dslc_content_for_search : contentForSearch
 		},
-		timeout: 10000
+		timeout: 30000
 	}).done(function( response ) {
 
 		// On success hide the publish button
 		if ( response.status == 'success' ) {
 			jQuery('.dslca-save-composer').fadeOut(250);
 			jQuery('.dslca-save-draft-composer').fadeOut(250);
+
+			// Create new cache version after it's saved.
+			jQuery('body').append( '<iframe class="lbmn-cache-iframe" id="lbmn-cache-iframe-' + postID + '" src="'+ DSLCSiteData.siteurl + '/?p=' + postID +'" ></iframe>' );
+
+			jQuery('.lbmn-cache-iframe').each(function(index, el) {
+				jQuery(el).load(function() {
+					jQuery(el).remove();
+					// Cache built at this point. Remove iframe.
+				});
+			});
+
 		// On fail show an alert message
 		} else {
 			alert( 'Something went wrong, please try to save again. Are you sure to make any changes? Error Code: ' + response.status);
@@ -65,7 +76,7 @@ function dslc_save_composer() {
 	}).fail(function( response ) {
 
 		if ( response.statusText == 'timeout' ) {
-			alert( 'The request timed out after 10 seconds. Server do not respond in time. Please try again.' );
+			alert( 'The request timed out after 30 seconds. Server do not respond in time. Please try again.' );
 		} else {
 			alert( 'Something went wrong. Please try again. Error Code: ' + response.statusText  );
 		}
@@ -199,6 +210,7 @@ function dslc_generate_code() {
 		// composerCode = composerCode + '[/dslc_modules_section] ';
 	});
 
+
 	// Remove the last comma in the code.
 	pageCodeInJson = pageCodeInJson.slice(0, -1);
 
@@ -260,7 +272,6 @@ function dslc_generate_section_code( theModulesSection ) {
 
 	// Get current JSON.
 	modulesSectionJsonString = modulesSection.find('.dslca-section-code').val();
-
 	modulesSectionJson = JSON.parse(modulesSectionJsonString);
 
 	// Generate attributes for the row shortcode
@@ -456,9 +467,6 @@ function dslc_generate_section_code( theModulesSection ) {
 
 				// Add the module JSON as array item
 				moduleAreaJSON['content'].push( moduleCodeJSON );
-
-				// pageCodeInJson = pageCodeInJson + moduleCode + ',';
-
 			}
 
 			// Fix bug with modules duplication if broken module saved.
@@ -472,7 +480,9 @@ function dslc_generate_section_code( theModulesSection ) {
 		// composerCode = composerCode + '[/dslc_modules_area] ';
 	});
 
-	return JSON.stringify( modulesSectionJson );
+	var generatedCode = JSON.stringify( modulesSectionJson );
+
+	return generatedCode;
 }
 
 /**

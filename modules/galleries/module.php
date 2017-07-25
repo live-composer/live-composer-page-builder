@@ -42,6 +42,13 @@ class DSLC_Galleries extends DSLC_Module {
 	 */
 	function options() {
 
+		// Check if we have this module options already calculated
+		// and cached in WP Object Cache.
+		$cached_dslc_options = wp_cache_get( 'dslc_options_' . $this->module_id, 'dslc_modules' );
+		if ( $cached_dslc_options ) {
+			return apply_filters( 'dslc_module_options', $cached_dslc_options, $this->module_id );
+		}
+
 		$cats = get_terms( 'dslc_galleries_cats' );
 		$cats_choices = array();
 
@@ -2380,6 +2387,9 @@ class DSLC_Galleries extends DSLC_Module {
 		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options' ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
+		// Cache calculated array in WP Object Cache.
+		wp_cache_add( 'dslc_options_' . $this->module_id, $dslc_options ,'dslc_modules' );
+
 		return apply_filters( 'dslc_module_options', $dslc_options, $this->module_id );
 
 	}
@@ -2408,7 +2418,6 @@ class DSLC_Galleries extends DSLC_Module {
 			$options['button_text'] = stripslashes( $options['button_text'] );
 		}
 
-		$this->module_start( $options );
 
 		if ( ! isset( $options['count_pos'] ) )
 			$options['count_pos'] = 'center';
@@ -2826,19 +2835,25 @@ class DSLC_Galleries extends DSLC_Module {
 
 															<div class="dslc-gallery-excerpt">
 																<?php if ( $options['excerpt_or_content'] == 'content' ) : ?>
-																	<?php the_content(); ?>
+																	<?php
+																	if ( $options['excerpt_length'] > 0 ) {
+																		echo wp_trim_words( get_the_content(), $options['excerpt_length'] );
+																	} else {
+																		echo get_the_content();
+																	}
+																	?>
 																<?php else : ?>
 																	<?php
 																		if ( $options['excerpt_length'] > 0 ) {
 																			if ( has_excerpt() )
-																				echo do_shortcode( wp_trim_words( get_the_excerpt(), $options['excerpt_length'] ) );
+																				echo wp_trim_words( get_the_excerpt(), $options['excerpt_length'] );
 																			else
-																				echo do_shortcode( wp_trim_words( get_the_content(), $options['excerpt_length'] ) );
+																				echo wp_trim_words( get_the_content(), $options['excerpt_length'] );
 																		} else {
 																			if ( has_excerpt() )
-																				echo do_shortcode( get_the_excerpt() );
+																				echo get_the_excerpt();
 																			else
-																				echo do_shortcode( get_the_content() );
+																				echo get_the_content();
 																		}
 																	?>
 																<?php endif; ?>
@@ -2893,19 +2908,25 @@ class DSLC_Galleries extends DSLC_Module {
 
 											<div class="dslc-gallery-excerpt">
 												<?php if ( $options['excerpt_or_content'] == 'content' ) : ?>
-													<?php the_content(); ?>
+													<?php
+													if ( $options['excerpt_length'] > 0 ) {
+														echo wp_trim_words( get_the_content(), $options['excerpt_length'] );
+													} else {
+														echo get_the_content();
+													}
+													?>
 												<?php else : ?>
 													<?php
 														if ( $options['excerpt_length'] > 0 ) {
 															if ( has_excerpt() )
-																echo do_shortcode( wp_trim_words( get_the_excerpt(), $options['excerpt_length'] ) );
+																echo wp_trim_words( get_the_excerpt(), $options['excerpt_length'] );
 															else
-																echo do_shortcode( wp_trim_words( get_the_content(), $options['excerpt_length'] ) );
+																echo wp_trim_words( get_the_content(), $options['excerpt_length'] );
 														} else {
 															if ( has_excerpt() )
-																echo do_shortcode( get_the_excerpt() );
+																echo get_the_excerpt();
 															else
-																echo do_shortcode( get_the_content() );
+																echo get_the_content();
 														}
 													?>
 												<?php endif; ?>
@@ -2995,9 +3016,7 @@ class DSLC_Galleries extends DSLC_Module {
 
 			wp_reset_postdata();
 
-		/* Module output ends here */
 
-		$this->module_end( $options );
 
 	}
 

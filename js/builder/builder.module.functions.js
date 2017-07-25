@@ -242,6 +242,16 @@
 			var content = module.find( '.dslca-module-option-front[data-id="' + editable.data('id') + '"]' ).val().replace(/<lctextarea/g, '<textarea').replace(/<\/lctextarea/g, '</textarea');
 		}
 
+		if ( content.includes( '%' ) ) {
+			// Restore shortcodes presentation.
+			content = content.replace(/%\(\(%/g, '[');
+			content = content.replace(/%\)\)%/g, ']');
+			content = content.replace(/%\(%/g, '[');
+			content = content.replace(/%\)%/g, ']');
+			content = content.replace(/%\{%/g, '[');
+			content = content.replace(/%\}%/g, ']');
+		}
+
 		if ( typeof tinymce != 'undefined' ) {
 
 			var editor = tinymce.get( 'dslcawpeditor' );
@@ -477,6 +487,16 @@ function dslc_module_options_show( moduleID ) {
 		var dslcOption = jQuery(this),
 		dslcOptionID = dslcOption.data('id'),
 		dslcOptionValue = dslcOption.val();
+
+		if ( dslcOptionValue.includes( '%' ) ) {
+			// Restore shortcodes.
+			dslcOptionValue = dslcOptionValue.replace(/%\(\(%/g, '[');
+			dslcOptionValue = dslcOptionValue.replace(/%\)\)%/g, ']');
+			dslcOptionValue = dslcOptionValue.replace(/%\(%/g, '[');
+			dslcOptionValue = dslcOptionValue.replace(/%\)%/g, ']');
+			dslcOptionValue = dslcOptionValue.replace(/%\{%/g, '[');
+			dslcOptionValue = dslcOptionValue.replace(/%\}%/g, ']');
+		}
 
 		// Add option ID and value to the settings array
 		dslcSettings[dslcOptionID] = dslcOptionValue;

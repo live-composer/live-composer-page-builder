@@ -105,6 +105,7 @@ function dslc_custom_css( $dslc_code = '' ) {
 	if ( ! $dslc_code ) {
 
 		$template_id = false;
+		$code_to_render = array();
 
 		global $post;
 
@@ -150,63 +151,94 @@ function dslc_custom_css( $dslc_code = '' ) {
 			$header_footer = dslc_hf_get_ID( get_the_ID() );
 		}
 
+		// ============================================================
+		// Extract code to render CSS for.
+
 		// Header.
 		if ( $header_footer['header'] ) {
 			$header_code = get_post_meta( $header_footer['header'], 'dslc_code', true );
+
+			if ( $header_code ) {
+				$code_to_render[ $header_footer['header'] ] = $header_code;
+			}
 		}
 
 		// Footer.
 		if ( $header_footer['footer'] ) {
 			$footer_code = get_post_meta( $header_footer['footer'], 'dslc_code', true );
+
+			if ( $footer_code ) {
+				$code_to_render[ $header_footer['footer'] ] = $footer_code;
+			}
 		}
 
 		// Template content.
 		if ( $template_id ) {
 			$template_code = get_post_meta( $template_id, 'dslc_code', true );
+
+			if ( $template_code ) {
+				$code_to_render[ $template_id ] = $template_code;
+			}
 		}
 
 		// Post/Page content.
 		$post_id = get_the_ID();
 		$code = get_post_meta( $post_id, 'dslc_code', true );
 
+		if ( $code ) {
+			$code_to_render[ $post_id ] = $code;
+		}
 	} else { // End of ! $dslc_code check.
 
 		$code = $dslc_code;
-	}
+	} // End if().
+
+	$fonts_to_output = array();
 
 	echo '<style type="text/css">';
 
 	$output_css = false;
 
-	// Generate CSS if page code is set.
-	// Genrated code added into $dslc_css_style global var.
-	if ( isset( $code ) && $code ) {
-		dslc_render_css( $code );
-		$output_css = true;
-	}
+	// Generate CSS for defined code.
+	// Generated code gets added into $dslc_css_style global var.
+	foreach ($code_to_render as $id => $code) {
+		if ( $code ) {
 
-	// Generate CSS if template code is set.
-	// Genrated code added into $dslc_css_style global var.
-	if ( isset( $template_code ) && $template_code ) {
-		dslc_render_css( $template_code );
-		$output_css = true;
-	}
+			$dslc_css_style .= "\n\n/*  CSS FOR POST ID: " . $id . " */\n";
+			$cache_id = $id;
 
-	// Generate CSS if header code is set.
-	// Genrated code added into $dslc_css_style global var.
-	if ( isset( $header_code ) && $header_code ) {
-		dslc_render_css( $header_code );
-		$output_css = true;
-	}
+			// Initiate simple CSS rendering cache.
+			$cache = new DSLC_Cache( 'css' );
 
-	// Generate CSS if footer code is set.
-	// Genrated code added into $dslc_css_style global var.
-	if ( isset( $footer_code ) && $footer_code ) {
-		dslc_render_css( $footer_code );
-		$output_css = true;
-	}
+			// Check if we have CSS for this code cached?
+			if ( ! dslc_is_editor_active() && $cache->enabled() && $cache->cached( $cache_id ) ) {
+				// Get cached CSS.
+				$cached_page_css = $cache->get_cache( $cache_id );
+				$dslc_css_style .= $cached_page_css;
 
-	dslc_render_gfonts();
+				// Get cached Google Fonts request link.
+				$google_fonts = $cache->get_cache( $cache_id, 'fonts' );
+				if ( ! empty( $google_fonts ) ) {
+					$fonts_to_output = array_merge( $fonts_to_output, $google_fonts );
+				}
+			} else {
+				$rendered_code = dslc_render_css( $code );
+				// Save rendered CSS in the cache engine.
+				$cache->set_cache( $rendered_code, $cache_id );
+				$dslc_css_style .= $rendered_code;
+
+				// Save Google Fonts request for used fonts.
+				$google_fonts = dslc_get_gfonts();
+				if ( ! empty( $google_fonts ) ) {
+					$fonts_to_output = array_merge( $fonts_to_output, $google_fonts );
+				}
+				$cache->set_cache( $google_fonts, $cache_id, 'fonts' );
+				$dslc_googlefonts_array = array(); // Reset temporary fonts storage.
+			}
+
+			$output_css = true;
+		} // End if().
+	} // End foreach().
 
 	// Wrapper width.
 	echo '.dslc-modules-section-wrapper, .dslca-add-modules-section { width : ' . $lc_width . '; } ';
@@ -220,7 +252,6 @@ function dslc_custom_css( $dslc_code = '' ) {
 
 	// Initial ( default ) row CSS.
 	echo dslc_row_get_initial_style();
-
 	// Echo CSS style.
 	if ( ! $dslc_active ) {
 		if ( $dslc_custom_css_ignore_check || $output_css ) {
@@ -229,6 +260,9 @@ function dslc_custom_css( $dslc_code = '' ) {
 	}
 
 	echo '</style>';
+
+	// Output Google Fonts request link.
+	dslc_render_gfonts( $fonts_to_output );
 }
 
 /**
@@ -239,8 +273,8 @@ function dslc_custom_css( $dslc_code = '' ) {
  * @return string            Generated CSS output.
  */
 function dslc_render_css( $code ) {
-
 	$code_array = dslc_json_decode( $code );
+	$css_output = '';
 
 	if ( is_array( $code_array ) ) {
 		// JSON based code version.
@@ -250,21 +284,35 @@ function dslc_render_css( $code ) {
 			foreach ( $row['content'] as $module_area ) {
 				// Go through each Module.
 				foreach ( $module_area['content'] as $module ) {
-
-					dslc_module_gen_css( array(), $module );
+					$css_output .= dslc_module_gen_css( array(), $module );
 				}
 			}
 		}
 	} else {
 		// Old (shortcodes based) code version.
 		// Replace shortcode names.
-		$code = dslc_shortcodes_add_suffix_css( $code );
-
+		// $code = dslc_shortcodes_add_suffix_css( $code );
 		// Do CSS shortcode.
-		$css_output = do_shortcode( $code );
+		// $css_output = do_shortcode( $code );
+		// $css_output .= $code;
 
-		return $css_output;
+		// Get rid of section/area shortcodes leaving only modules code.
+		$code = str_replace( '[/dslc_modules_section]', '', $code );
+		$code = str_replace( '[/dslc_modules_area]', '', $code );
+		$code = preg_replace( "/(?:\[dslc_modules_section[A-Za-z=\"' 0-9\-_#(),]*\])/", '', $code );
+		$code = preg_replace( "/(?:\[dslc_modules_area[A-Za-z=\"' 0-9\-_#(),]*\])/", '', $code );
+
+		$code_modules_only = explode( '[/dslc_module]', trim( $code ) );
+
+		foreach ( $code_modules_only as $module ) {
+			if ( trim( $module ) ) {
+				$module_settings_encoded = preg_replace( "/(?:\[dslc_module[A-Za-z=\"' 0-9\-_]*\])/", '', $module );
+				$css_output .= dslc_module_gen_css(array(), $module_settings_encoded );
+			}
+		}
 	}
+
+	return $css_output;
 }
 
 /**
@@ -317,6 +365,9 @@ function dslc_module_gen_css( $atts, $settings_raw ) {
 
 		// The ID of the module.
 		$module_id = $settings['module_id'];
+
+		// Check if we have cached css for this module?
+		$module_instance_id = $settings['module_instance_id'];
 
 		// Check if module exists.
 		if ( ! dslc_is_module_active( $module_id ) ) {
@@ -463,7 +514,11 @@ function dslc_generate_custom_css( $module_structure, $module_settings, $restart
 		}
 	}
 
-	$dslc_css_style .= $css_output;
+	$module_instance_id = $module_settings['module_instance_id'];
+	// $dslc_css_style .= $css_output;
+	// ↑↑↑ Cause duplication of CSS code. $dslc_css_style is global.
+
+	return $css_output;
 }
 
 /**
@@ -641,7 +696,6 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 
 			// If option type is font?
 			if ( 'font' === $option_arr['type'] ) {
-
 				if ( ! in_array( $module_settings[ $option_id ], $dslc_googlefonts_array, true ) && ! in_array( $module_settings[ $option_id ], $regular_fonts, true ) ) {
 					$dslc_googlefonts_array[] = $module_settings[ $option_id ];
 				}
@@ -683,7 +737,7 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 			$css_element_output[ $css_selector ] = array();
 
 			// ------- SPLIT INTO SEPARATE FUNCTION ------------------------------------
-			// Argument: $css_declaration and $important_append (or decalre it inside)
+			// Argument: $css_declaration and $important_append (or declare it inside)
 			// Output: array with css property:value pairs.
 			// Go through each propery to compose css declaration block.
 
@@ -776,6 +830,14 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 					isset( $css_declaration_borders['border-bottom-width'] ) ||
 					isset( $css_declaration_borders['border-left-width'] ) ) {
 				$output_border_declaration = true;
+			}
+
+			// Remove border-style property if width isn't set or is set to 0px.
+			// This rule fixes bugs with extra borders on text/shortcode elements.
+			if ( isset( $css_declaration_borders['border-style'] ) ) {
+				if ( empty( $css_declaration_borders['border-width'] ) || '0px' === $css_declaration_borders['border-width'] ) {
+					unset( $css_declaration_borders['border-style'] );
+				}
 			}
 
 			// Always output all the border properties when:

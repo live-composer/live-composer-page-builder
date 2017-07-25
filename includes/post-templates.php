@@ -72,8 +72,8 @@ function dslc_can_edit_in_lc( $post_data ) {
 		if ( array_key_exists( $post_type, $dslc_var_templates_pt ) ||
 				array_key_exists( $post_type, $dslc_enabled_cpt ) ) {
 			$can_edit = true;
-		} elseif ( 'dslc_hf' === $post_type ) {
-			// Make header/footer CPT as editable.
+		} elseif ( 'dslc_hf' === $post_type || 'dslc_templates' === $post_type ) {
+			// Make header/footer and templates as editable.
 			$can_edit = true;
 		}
 

@@ -1093,7 +1093,6 @@ class DSLC_Button extends DSLC_Module {
 					$dslc_is_admin = false;
 		}
 
-		$this->module_start( $options );
 
 		/* Module output starts here */
 
@@ -1110,7 +1109,7 @@ class DSLC_Button extends DSLC_Module {
 
 			<div class="dslc-button">
 				<?php if ( $options['button_target'] == 'lightbox' ) : ?>
-					<a href="<?php echo do_shortcode( $options['button_url'] ); ?>" <?php echo $anchor_append; if ( $options['link_nofollow'] ) echo 'rel="nofollow"'; ?> class="dslc-lightbox-image <?php echo trim( esc_attr( $classes ) ); ?>">
+					<a href="<?php echo $options['button_url']; ?>" <?php echo $anchor_append; if ( $options['link_nofollow'] ) echo 'rel="nofollow"'; ?> class="dslc-lightbox-image <?php echo trim( esc_attr( $classes ) ); ?>">
 						<?php if ( $options['button_state'] == 'enabled' && $options['icon_pos'] == 'left' ) : ?>
 							<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 						<?php endif; ?>
@@ -1124,7 +1123,7 @@ class DSLC_Button extends DSLC_Module {
 						<?php endif; ?>
 					</a>
 				<?php else : ?>
-					<a href="<?php echo do_shortcode( $options['button_url'] ); ?>" target="<?php echo $options['button_target']; ?>" <?php echo $anchor_append; if ( $options['link_nofollow'] ) echo 'rel="nofollow"'; ?> class="<?php echo trim( esc_attr( $classes ) ); ?>">
+					<a href="<?php echo $options['button_url']; ?>" target="<?php echo $options['button_target']; ?>" <?php echo $anchor_append; if ( $options['link_nofollow'] ) echo 'rel="nofollow"'; ?> class="<?php echo trim( esc_attr( $classes ) ); ?>">
 						<?php if ( $options['button_state'] == 'enabled' && $options['icon_pos'] == 'left' ) : ?>
 							<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 						<?php endif; ?>
@@ -1144,16 +1143,14 @@ class DSLC_Button extends DSLC_Module {
 			<?php if ( $dslc_is_admin ) :
 			/* We output this button code for clean html export only */ ?>
 				<div style="display: none;"<?php if ( $dslc_is_admin ) echo ' data-exportable-content'; ?>>
-					<a href="<?php echo do_shortcode( $options['button_url'] ); ?>" target="<?php echo $options['button_target']; ?>" <?php if ( $options['link_nofollow'] ) echo 'rel="nofollow"'; ?>>
+					<a href="<?php echo $options['button_url']; ?>" target="<?php echo $options['button_target']; ?>" <?php if ( $options['link_nofollow'] ) echo 'rel="nofollow"'; ?>>
 							<?php echo stripslashes( $options['button_text'] ); ?>
 					</a>
 				</div><!-- .dslc-button -->
 			<?php endif; ?>
 			<?php
 
-		/* Module output ends here */
 
-		$this->module_end( $options );
 
 	}
 

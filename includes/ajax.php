@@ -4,12 +4,12 @@
  * Table of contents
  *
  * - dslc_ajax_add_modules_section ( Echo new modules section HTML )
- * - dslc_ajax_add_module ( Load the module's front ened output)
+ * - dslc_ajax_add_module ( Load the module's front end output)
  * - dslc_ajax_display_module_options ( Display options for a specific module )
  * - dslc_ajax_save_composer ( Save the composer code )
  * - dslc_ajax_save_draft_composer ( Save changes as draft )
  * - dslc_ajax_load_template ( Loads front end output of a specific template )
- * - dslc_ajax_import_template ( Loads front ened output of an exported template )
+ * - dslc_ajax_import_template ( Loads front end output of an exported template )
  * - dslc_ajax_save_template ( Save template for future use )
  * - dslc_ajax_delete_template ( Deletes a saved template )
  * - REMOVED dslc_ajax_get_new_module_id ( Returns a new unique ID, similar to post ID )
@@ -140,9 +140,6 @@ function dslc_ajax_add_module( $atts ) {
 		// Append post ID to settings.
 		$module_settings['post_id'] = $post_id;
 
-		// Start output fetching.
-		ob_start();
-
 		// Load preset if there was no preset before.
 		if ( 'enabled' === $preload_preset ) {
 
@@ -175,15 +172,28 @@ function dslc_ajax_add_module( $atts ) {
 			$module_settings['dslc_m_size'] = '12';
 		}
 
-		// Output.
-		$module_instance->output( $module_settings );
-
-		// Get the output and stop fetching.
-		$output = ob_get_contents();
+		// Code before module output.
+		ob_start();
+			$module_instance->module_before( $module_settings );
+			$output_start = ob_get_contents();
 		ob_end_clean();
 
-		// Set the output.
-		$response['output'] = $output;
+		// Module output.
+		ob_start();
+			$module_instance->output( $module_settings );
+			$output_body = ob_get_contents();
+		ob_end_clean();
+
+		// Code after module output.
+		ob_start();
+			$module_instance->module_after( $module_settings );
+			$output_end = ob_get_contents();
+		ob_end_clean();
+
+		$output_body = dslc_decode_shortcodes( $output_body );
+
+		$response['output'] = $output_start . $output_body . $output_end;
+		$response['output'] = do_shortcode( $response['output'] );
 
 		// Encode response.
 		$response_json = wp_json_encode( $response );
@@ -258,6 +268,9 @@ function dslc_ajax_display_module_options( $atts ) {
 		$response['output'] .= $output_start;
 		$response['output'] .= $output_fields;
 		$response['output'] .= $output_end;
+
+		// Decode shortcodes for proper presentation.
+		$response['output'] = dslc_decode_shortcodes( $response['output'] );
 
 		// Encode response.
 		$response_json = wp_json_encode( $response );
@@ -589,6 +602,7 @@ function dslc_ajax_import_modules_section( $atts ) {
 		$code_to_import = stripslashes( $_POST['dslc_modules_section_code'] );
 
 		$response['output'] = dslc_render_content( $code_to_import, true );
+		$response['output'] = do_shortcode( $response['output'] );
 
 		// Encode response.
 		$response_json = wp_json_encode( $response );
@@ -750,3 +764,19 @@ function dslc_ajax_hidden_tab_seo() {
 		exit;
 	}
 } add_action( 'wp_ajax_dslc-ajax-hidden-tab-seo', 'dslc_ajax_hidden_tab_seo' );
+
+/**
+ * Ajax Clear Cache (Plugin Settings Tab).
+ */
+function dslc_ajax_clear_cache() {
+
+	// Check Nonce.
+	if ( ! wp_verify_nonce( $_POST['security']['nonce'], 'dslc-optionspanel-ajax' ) ) {
+		wp_die( 'You do not have rights!' );
+	}
+
+	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+		delete_transient( 'lc_cache' );
+		exit;
+	}
+} add_action( 'wp_ajax_dslc_ajax_clear_cache', 'dslc_ajax_clear_cache' );

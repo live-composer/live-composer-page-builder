@@ -74,6 +74,13 @@ class DSLC_Shortcode extends DSLC_Module {
 	 */
 	function options() {
 
+		// Check if we have this module options already calculated
+		// and cached in WP Object Cache.
+		$cached_dslc_options = wp_cache_get( 'dslc_options_' . $this->module_id, 'dslc_modules' );
+		if ( $cached_dslc_options ) {
+			return apply_filters( 'dslc_module_options', $cached_dslc_options, $this->module_id );
+		}
+
 		$dslc_options = array(
 
 			array(
@@ -124,6 +131,23 @@ class DSLC_Shortcode extends DSLC_Module {
 			 * Styling Options
 			 */
 
+			array(
+				'label' => __( 'Enable/Disable Custom CSS', 'live-composer-page-builder' ),
+				'id' => 'css_custom',
+				'std' => 'disabled',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'Enabled', 'live-composer-page-builder' ),
+						'value' => 'enabled',
+					),
+					array(
+						'label' => __( 'Disabled', 'live-composer-page-builder' ),
+						'value' => 'disabled',
+					),
+				),
+				'section' => 'styling',
+			),
 			array(
 				'label' => __( 'BG Color', 'live-composer-page-builder' ),
 				'id' => 'css_main_bg_color',
@@ -2872,7 +2896,6 @@ class DSLC_Shortcode extends DSLC_Module {
 			$render_code = false;
 		}
 
-		$this->module_start( $options );
 
 		?>
 
@@ -2884,7 +2907,7 @@ class DSLC_Shortcode extends DSLC_Module {
 			$output_content = '<div class="dslc-notification dslc-red">' . __( 'Please add your shortcode in the module settings.', 'live-composer-page-builder' ) . '</div>';
 		} elseif ( $render_code ) {
 			$output_content = stripslashes( $options['content'] );
-			$output_content = do_shortcode( $output_content );
+			$output_content = $output_content;
 		} else {
 			$output_content = '<div class="dslc-notification dslc-green">' . __( 'Save and refresh the page to display the module safely.', 'live-composer-page-builder' ) . '</div>';
 		}
@@ -2896,8 +2919,6 @@ class DSLC_Shortcode extends DSLC_Module {
 		</div>
 
 		<?php
-
-		$this->module_end( $options );
 
 	}
 }

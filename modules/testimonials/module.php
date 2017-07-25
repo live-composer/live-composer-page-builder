@@ -42,6 +42,13 @@ class DSLC_Testimonials extends DSLC_Module {
 	 */
 	function options() {
 
+		// Check if we have this module options already calculated
+		// and cached in WP Object Cache.
+		$cached_dslc_options = wp_cache_get( 'dslc_options_' . $this->module_id, 'dslc_modules' );
+		if ( $cached_dslc_options ) {
+			return apply_filters( 'dslc_module_options', $cached_dslc_options, $this->module_id );
+		}
+
 		$cats = get_terms( 'dslc_testimonials_cats' );
 		$cats_choices = array();
 
@@ -180,10 +187,6 @@ class DSLC_Testimonials extends DSLC_Module {
 					array(
 						'label' => __( 'Alphabetic', 'live-composer-page-builder' ),
 						'value' => 'title',
-					),
-					array(
-						'label' => __( 'Comment Count', 'live-composer-page-builder' ),
-						'value' => 'comment_count',
 					),
 				)
 			),
@@ -1829,6 +1832,9 @@ class DSLC_Testimonials extends DSLC_Module {
 		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options' ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
+		// Cache calculated array in WP Object Cache.
+		wp_cache_add( 'dslc_options_' . $this->module_id, $dslc_options ,'dslc_modules' );
+
 		return apply_filters( 'dslc_module_options', $dslc_options, $this->module_id );
 
 	}
@@ -1847,7 +1853,6 @@ class DSLC_Testimonials extends DSLC_Module {
 		else
 			$dslc_is_admin = false;
 
-		$this->module_start( $options );
 
 		/* Module output stars here */
 
@@ -1889,10 +1894,9 @@ class DSLC_Testimonials extends DSLC_Module {
 						'taxonomy' => 'dslc_testimonials_cats',
 						'field' => 'slug',
 						'terms' => $cats_array,
-						'operator' => $options['categories_operator']
-					)
+						'operator' => $options['categories_operator'],
+					),
 				);
-
 			}
 
 			// Exlcude and Include arrays
@@ -2197,7 +2201,7 @@ class DSLC_Testimonials extends DSLC_Module {
 										<?php if ( $post_elements == 'all' || in_array( 'quote', $post_elements ) ) : ?>
 
 											<div class="dslc-testimonial-quote">
-												<?php echo do_shortcode( get_the_content() ); ?>
+												<?php echo get_the_content(); ?>
 											</div><!-- .dslc-testimonial-quote -->
 
 										<?php endif; ?>
@@ -2254,11 +2258,5 @@ class DSLC_Testimonials extends DSLC_Module {
 			}
 
 			wp_reset_postdata();
-
-		/* Module output ends here */
-
-		$this->module_end( $options );
-
 	}
-
 }

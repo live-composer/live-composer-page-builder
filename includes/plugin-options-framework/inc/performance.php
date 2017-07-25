@@ -17,6 +17,24 @@ function dslc_perf_settings_init() {
 	$dslc_plugin_options['dslc_plugin_options_performance'] = array(
 		'title' => __( 'Performance', 'live-composer-page-builder' ),
 		'options' => array(
+			'lc_caching_engine' => array(
+
+				'section' => 'dslc_plugin_options_performance',
+				'label' => __( 'Basic HTML/CSS Caching', 'live-composer-page-builder' ),
+				'std' => 'enabled',
+				'type' => 'select',
+				'descr' => __( 'Basic caching engine reduce page loading times. Rendered HTML and CSS get saved in the database.', 'live-composer-page-builder' ),
+				'choices' => array(
+					array(
+						'label' => 'Enabled',
+						'value' => 'enabled',
+					),
+					array(
+						'label' => 'Disabled',
+						'value' => 'disabled',
+					),
+				),
+			),
 			'lc_gfont_subsets' => array(
 
 				'section' => 'dslc_plugin_options_performance',

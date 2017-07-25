@@ -168,7 +168,6 @@ LiveComposer.Utils = {
 	 * @return {void}
 	 */
 	update_section_property_raw: function (section, property_name, property_value ) {
-
 		// Hidden textarea element with raw base64 code of the roq
 		// <textarea class="dslca-section-code"></textarea>
 		var section_code_container = section.getElementsByClassName('dslca-section-code')[0];
