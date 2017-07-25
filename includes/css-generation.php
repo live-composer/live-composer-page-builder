@@ -154,12 +154,16 @@ function dslc_custom_css( $dslc_code = '' ) {
 		// ============================================================
 		// Extract code to render CSS for.
 
+		$header_id = false;
+		$footer_id = false;
+
 		// Header.
 		if ( $header_footer['header'] ) {
 			$header_code = get_post_meta( $header_footer['header'], 'dslc_code', true );
 
 			if ( $header_code ) {
 				$code_to_render[ $header_footer['header'] ] = $header_code;
+				$header_id = $header_footer['header'];
 			}
 		}
 
@@ -169,6 +173,7 @@ function dslc_custom_css( $dslc_code = '' ) {
 
 			if ( $footer_code ) {
 				$code_to_render[ $header_footer['footer'] ] = $footer_code;
+				$footer_id = $header_footer['footer'];
 			}
 		}
 
@@ -198,46 +203,58 @@ function dslc_custom_css( $dslc_code = '' ) {
 	echo '<style type="text/css">';
 
 	$output_css = false;
+	$post_id = get_the_ID();
 
 	// Generate CSS for defined code.
 	// Generated code gets added into $dslc_css_style global var.
 	foreach ($code_to_render as $id => $code) {
+		// Never output CSS for the currently editing page (already rendered by module).
 		if ( $code ) {
+			if ( ! ( dslc_is_editor_active() && intval($post_id) === intval($id) ) ) {
+			// Output CSS if it's NOT in editing mode
+			// OR outputting CSS for the header/footer.
+			if ( ! dslc_is_editor_active()
+					|| intval($id) === intval($header_id)
+					|| intval($id) === intval($footer_id) ) {
 
-			$dslc_css_style .= "\n\n/*  CSS FOR POST ID: " . $id . " */\n";
-			$cache_id = $id;
+				// ! is_singular( 'dslc_hf' )
 
-			// Initiate simple CSS rendering cache.
-			$cache = new DSLC_Cache( 'css' );
+				$dslc_css_style .= "\n\n/*  CSS FOR POST ID: " . $id . " */\n";
+				$cache_id = $id;
 
-			// Check if we have CSS for this code cached?
-			if ( ! dslc_is_editor_active() && $cache->enabled() && $cache->cached( $cache_id ) ) {
-				// Get cached CSS.
-				$cached_page_css = $cache->get_cache( $cache_id );
-				$dslc_css_style .= $cached_page_css;
+				// Initiate simple CSS rendering cache.
+				$cache = new DSLC_Cache( 'css' );
 
-				// Get cached Google Fonts request link.
-				$google_fonts = $cache->get_cache( $cache_id, 'fonts' );
-				if ( ! empty( $google_fonts ) ) {
-					$fonts_to_output = array_merge( $fonts_to_output, $google_fonts );
+				// Check if we have CSS for this code cached?
+				if ( $cache->enabled() && $cache->cached( $cache_id ) ) {
+					// Get cached CSS.
+					$cached_page_css = $cache->get_cache( $cache_id );
+					$dslc_css_style .= $cached_page_css;
+
+					// Get cached Google Fonts request link.
+					$google_fonts = $cache->get_cache( $cache_id, 'fonts' );
+					if ( ! empty( $google_fonts ) ) {
+						$fonts_to_output = array_merge( $fonts_to_output, $google_fonts );
+					}
+				} else {
+					$rendered_code = dslc_render_css( $code );
+					// Save rendered CSS in the cache engine.
+					$cache->set_cache( $rendered_code, $cache_id );
+					$dslc_css_style .= $rendered_code;
+
+					// Save Google Fonts request for used fonts.
+					$google_fonts = dslc_get_gfonts();
+					if ( ! empty( $google_fonts ) ) {
+						$fonts_to_output = array_merge( $fonts_to_output, $google_fonts );
+					}
+					$cache->set_cache( $google_fonts, $cache_id, 'fonts' );
+					$dslc_googlefonts_array = array(); // Reset temporary fonts storage.
 				}
-			} else {
-				$rendered_code = dslc_render_css( $code );
-				// Save rendered CSS in the cache engine.
-				$cache->set_cache( $rendered_code, $cache_id );
-				$dslc_css_style .= $rendered_code;
 
-				// Save Google Fonts request for used fonts.
-				$google_fonts = dslc_get_gfonts();
-				if ( ! empty( $google_fonts ) ) {
-					$fonts_to_output = array_merge( $fonts_to_output, $google_fonts );
-				}
-				$cache->set_cache( $google_fonts, $cache_id, 'fonts' );
-				$dslc_googlefonts_array = array(); // Reset temporary fonts storage.
+				$output_css = true;
+			} // End if().
 			}
-
-			$output_css = true;
-		} // End if().
+		}
 	} // End foreach().
 
 	// Wrapper width.
@@ -253,10 +270,9 @@ function dslc_custom_css( $dslc_code = '' ) {
 	// Initial ( default ) row CSS.
 	echo dslc_row_get_initial_style();
 	// Echo CSS style.
-	if ( ! $dslc_active ) {
-		if ( $dslc_custom_css_ignore_check || $output_css ) {
-			echo $dslc_css_style;
-		}
+
+	if ( $dslc_custom_css_ignore_check || $output_css ) {
+		echo $dslc_css_style;
 	}
 
 	echo '</style>';
@@ -834,7 +850,7 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 
 			// Remove border-style property if width isn't set or is set to 0px.
 			// This rule fixes bugs with extra borders on text/shortcode elements.
-			if ( isset( $css_declaration_borders['border-style'] ) ) {
+			if ( isset( $css_declaration_borders['border-style'] ) && 'none' !== $css_declaration_borders['border-style'] ) {
 				if ( empty( $css_declaration_borders['border-width'] ) || '0px' === $css_declaration_borders['border-width'] ) {
 					unset( $css_declaration_borders['border-style'] );
 				}
