@@ -3450,6 +3450,14 @@ body.dslca-composer-hidden .dslc-hf-block-overlay {
 	display: none !important;
 }
 
+body.dslca-composer-hidden .dslca-container.active-message-panel {
+	margin-bottom: 0;
+}
+
+body.dslca-composer-hidden .dslc-editor-messages-section {
+	display: none !important;
+}
+
 .dslca-loading {
 	position: absolute;
 	top: 15px;
