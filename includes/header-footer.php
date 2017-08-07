@@ -598,10 +598,13 @@ function dslc_hf_get_headerfooter( $post_id = false, $hf_type = 'header' ) {
 	}
 
 	// Wrap if handled by theme.
+	// Class .dslc-content needed to have all the elements properly styled.
+	// When DS_LIVE_COMPOSER_HF_AUTO = false theme outputs LC header and footer,
+	// so we need to add div with .dslc-content before the header
+	// and closing it after the footer.
 	if ( defined( 'DS_LIVE_COMPOSER_HF_AUTO' ) && ! DS_LIVE_COMPOSER_HF_AUTO ) {
 		if ( 'header' === $hf_type ) {
 			$wrapper_start = '<div id="dslc-content" class="dslc-content dslc-clearfix">';
-			// $wrapper_start = '';
 		} elseif ( 'footer' === $hf_type ) {
 			$wrapper_end = '</div>';
 		}
@@ -618,24 +621,25 @@ function dslc_hf_get_headerfooter( $post_id = false, $hf_type = 'header' ) {
 		// Render content. Support both old and new version of the page code.
 		$rendered_code = dslc_render_content( get_post_meta( $hf_id, 'dslc_code', true ) );
 
-		if ( ! empty( $rendered_code ) ) {
-
-			$rendered_code = $code_before . $wrapper_start . '<div id="dslc-' . $hf_type . '" class="dslc-' . $hf_type . '-pos-' . $position . '">' . $rendered_code . $append . '</div>' . $wrapper_end . $code_after;
-
-			$rendered_code = dslc_decode_shortcodes( $rendered_code );
-
-			if ( ! dslc_is_editor_active() ) { // && ! is_singular( 'dslc_hf' )
-				$cache->set_cache( $rendered_code, $cache_id );
-			}
-			// Add the code to the variable holder.
-			return do_shortcode( $rendered_code );
+		if ( ! empty( $rendered_code ) && ! dslc_is_editor_active() ) {
+			$rendered_code = '<div id="dslc-' . $hf_type . '" class="dslc-' . $hf_type . '-pos-' . $position . '">' . $rendered_code . $append . '</div>';
 
 		}
+
+		$rendered_code = $code_before . $wrapper_start . $rendered_code . $wrapper_end . $code_after;
+
+		$rendered_code = dslc_decode_shortcodes( $rendered_code );
+
+		if ( ! dslc_is_editor_active() ) { // && ! is_singular( 'dslc_hf' )
+			$cache->set_cache( $rendered_code, $cache_id );
+		}
+		// Add the code to the variable holder.
+		return do_shortcode( $rendered_code );
 
 	} else {
 
 		// If no header/footer applied.
-		return $code_before . $wrapper_start . '' .  $wrapper_end . $code_after;
+		return $code_before . $wrapper_start . '' . $wrapper_end . $code_after;
 	} // End if().
 }
 

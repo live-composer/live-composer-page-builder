@@ -594,7 +594,11 @@ function dslc_filter_content( $content ) {
 		$template_code = false; // LC code if current post powered by template.
 		$template_id = false; // ID of the template that powers current post.
 
-		// Wrapping all LC elements ( unless header/footer outputed by theme ).
+		// Wrapping all LC elements ( unless header/footer outputed by the theme ).
+		// Class .dslc-content needed to have all the elements properly styled.
+		// When DS_LIVE_COMPOSER_HF_AUTO = true LC outputs header and footer,
+		// automatically adding div .dslc-content before header
+		// and closing it after the footer.
 		if ( ! defined( 'DS_LIVE_COMPOSER_HF_AUTO' ) || DS_LIVE_COMPOSER_HF_AUTO ) {
 			$composer_wrapper_before = '<div id="dslc-content" class="dslc-content dslc-clearfix">';
 			$composer_wrapper_after = '</div>';
