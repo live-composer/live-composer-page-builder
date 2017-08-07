@@ -542,6 +542,7 @@ function dslc_hf_get_headerfooter( $post_id = false, $hf_type = 'header' ) {
 	// Var defaults.
 	$append = '';
 	$wrapper_start = '';
+	$wrapper_end = '';
 
 	if ( $header_footer[ $hf_type ] && is_numeric( $header_footer[ $hf_type ] ) ) {
 		$hf_id = $header_footer[ $hf_type ];
@@ -598,7 +599,12 @@ function dslc_hf_get_headerfooter( $post_id = false, $hf_type = 'header' ) {
 
 	// Wrap if handled by theme.
 	if ( defined( 'DS_LIVE_COMPOSER_HF_AUTO' ) && ! DS_LIVE_COMPOSER_HF_AUTO ) {
-		$wrapper_start = '<div id="dslc-content" class="dslc-content dslc-clearfix">';
+		if ( 'header' === $hf_type ) {
+			$wrapper_start = '<div id="dslc-content" class="dslc-content dslc-clearfix">';
+			// $wrapper_start = '';
+		} elseif ( 'footer' === $hf_type ) {
+			$wrapper_end = '</div>';
+		}
 	}
 
 	// If the page displayed is header/footer, do not repeat.
@@ -611,20 +617,25 @@ function dslc_hf_get_headerfooter( $post_id = false, $hf_type = 'header' ) {
 
 		// Render content. Support both old and new version of the page code.
 		$rendered_code = dslc_render_content( get_post_meta( $hf_id, 'dslc_code', true ) );
-		$rendered_code = $code_before . $wrapper_start . '<div id="dslc-' . $hf_type . '" class="dslc-' . $hf_type . '-pos-' . $position . '">' . $rendered_code . $append . '</div>' . $code_after;
 
-		$rendered_code = dslc_decode_shortcodes( $rendered_code );
+		if ( ! empty( $rendered_code ) ) {
 
-		if ( ! dslc_is_editor_active() ) { // && ! is_singular( 'dslc_hf' )
-			$cache->set_cache( $rendered_code, $cache_id );
+			$rendered_code = $code_before . $wrapper_start . '<div id="dslc-' . $hf_type . '" class="dslc-' . $hf_type . '-pos-' . $position . '">' . $rendered_code . $append . '</div>' . $wrapper_end . $code_after;
+
+			$rendered_code = dslc_decode_shortcodes( $rendered_code );
+
+			if ( ! dslc_is_editor_active() ) { // && ! is_singular( 'dslc_hf' )
+				$cache->set_cache( $rendered_code, $cache_id );
+			}
+			// Add the code to the variable holder.
+			return do_shortcode( $rendered_code );
+
 		}
-		// Add the code to the variable holder.
-		return do_shortcode( $rendered_code );
 
 	} else {
 
 		// If no header/footer applied.
-		return $code_before . $wrapper_start . '' . $code_after;
+		return $code_before . $wrapper_start . '' .  $wrapper_end . $code_after;
 	} // End if().
 }
 
