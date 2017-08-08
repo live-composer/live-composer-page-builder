@@ -48,12 +48,31 @@ function dslc_nav_menus() {
 
 		foreach ( $menus_array as $menu ) {
 
-			$menu_ID = 'dslc_' . strtolower( str_replace( ' ', '_', $menu ) );
-
-			register_nav_menu( $menu_ID, $menu );
-
+			$menu_id = 'dslc_' . strtolower( str_replace( ' ', '_', $menu ) );
+			register_nav_menu( $menu_id, $menu );
 		}
-
 	}
 
 } add_action( 'init', 'dslc_nav_menus' );
+
+
+/**
+ * Shortcode needed to render Menu to make sure
+ * current menu item highlighted properly even when LC cache enabled.
+ */
+function dslc_nav_render_menu ( $atts, $content = null ) {
+
+	$menu_location = '';
+
+	if ( isset( $atts['location'] ) ) {
+		$menu_location = $atts['location'];
+	}
+
+	ob_start();
+		wp_nav_menu( array( 'theme_location' => $menu_location ) );
+	$shortcode_rendered = ob_get_contents();
+	ob_end_clean();
+
+	return $shortcode_rendered;
+
+} add_shortcode( 'dslc_nav_render_menu', 'dslc_nav_render_menu' );

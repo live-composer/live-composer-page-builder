@@ -543,6 +543,7 @@ function dslc_hf_get_headerfooter( $post_id = false, $hf_type = 'header' ) {
 	$append = '';
 	$wrapper_start = '';
 	$wrapper_end = '';
+	$editing_parametters = '';
 
 	if ( $header_footer[ $hf_type ] && is_numeric( $header_footer[ $hf_type ] ) ) {
 		$hf_id = $header_footer[ $hf_type ];
@@ -567,16 +568,22 @@ function dslc_hf_get_headerfooter( $post_id = false, $hf_type = 'header' ) {
 
 		$header_link = DSLC_EditorInterface::get_editor_link_url( $hf_id );
 
-		// Set the HTML for the edit overlay.
-		$append = '<div class="dslc-hf-block-overlay"><a target="_blank" href="' . $header_link . '" class="dslc-hf-block-overlay-button dslca-link">' . __( 'Edit Header','live-composer-page-builder' ) . '</a>';
+		$editing_parametters .= ' data-editing-link="' . $header_link . '"';
+		$editing_parametters .= ' data-editing-type="' . $hf_type . '"';
 
-		if ( 'fixed' === $position ) {
-			$append .= ' <span class="dslc-hf-block-overlay-text">' . __( 'To preview FIXED positioning click on "Hide Editor" button.','live-composer-page-builder' ) . '</span>';
-		} elseif ( 'absolute' === $position ) {
-			$append .= ' <span class="dslc-hf-block-overlay-text">' . __( 'To preview ABSOLUTE positioning click on "Hide Editor" button.','live-composer-page-builder' ) . '</span>';
+		if ( 'header' === $hf_type ) {
+			$editing_parametters .= ' data-editing-label="' . __( 'Edit Header','live-composer-page-builder' ) . '"';
+		} else {
+			$editing_parametters .= ' data-editing-label="' . __( 'Edit Footer','live-composer-page-builder' ) . '"';
 		}
 
-		$append .= '</div>';
+		// ============================================================
+
+		if ( 'fixed' === $position ) {
+			$editing_parametters .= ' data-editing-sublabel="' . __( 'To preview FIXED positioning click on "Hide Editor" button.','live-composer-page-builder' ) . '"';
+		} elseif ( 'absolute' === $position ) {
+			$editing_parametters .= ' data-editing-sublabel="' . __( 'To preview ABSOLUTE positioning click on "Hide Editor" button.','live-composer-page-builder' ) . '"';
+		}
 	}
 
 	// Initiate simple html rendering cache.
@@ -590,9 +597,10 @@ function dslc_hf_get_headerfooter( $post_id = false, $hf_type = 'header' ) {
 			$cached_html = $cache->get_cache( $cache_id );
 
 			// Insert header/footer editing overlay code before the last </div>
-			$cached_html = substr_replace( $cached_html, $append, strrpos( $cached_html, '</div>' ), 0 );
+			if ( stristr( $cached_html, 'data-hf' ) ) {
+				$cached_html = substr_replace( $cached_html, $editing_parametters, strrpos( $cached_html, 'data-hf' ), 0 );
+			}
 
-			// $cached_html .= $append;
 			return do_shortcode( $cached_html );
 		}
 	}
@@ -622,8 +630,7 @@ function dslc_hf_get_headerfooter( $post_id = false, $hf_type = 'header' ) {
 		$rendered_code = dslc_render_content( get_post_meta( $hf_id, 'dslc_code', true ) );
 
 		if ( ! empty( $rendered_code ) && ! dslc_is_editor_active() ) {
-			$rendered_code = '<div id="dslc-' . $hf_type . '" class="dslc-' . $hf_type . '-pos-' . $position . '">' . $rendered_code . $append . '</div>';
-
+			$rendered_code = '<div id="dslc-' . $hf_type . '" class="dslc-' . $hf_type . '-pos-' . $position . '" data-hf>' . $rendered_code . $append . '</div>';
 		}
 
 		$rendered_code = $code_before . $wrapper_start . $rendered_code . $wrapper_end . $code_after;
