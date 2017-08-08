@@ -1587,7 +1587,8 @@ class DSLC_Navigation extends DSLC_Module {
 			?>
 			<div class="dslc-navigation dslc-navigation-sub-position-<?php echo esc_attr( $options['css_subnav_position'] ); ?> dslc-navigation-res-t-<?php echo esc_attr( $options['css_res_t'] ); ?> dslc-navigation-res-p-<?php echo esc_attr( $options['css_res_p'] ); ?> dslc-navigation-orientation-<?php echo esc_attr( $options['nav_orientation'] ); ?>">
 				<div class="dslc-navigation-inner">
-					<?php wp_nav_menu( array( 'theme_location' => $options['location'] ) ); ?>
+					[dslc_nav_render_menu location="<?php echo $options['location'] ?>"]
+					<?php // wp_nav_menu( array( 'theme_location' => $options['location'] ) ); ?>
 				</div>
 			</div>
 			<div class="dslc-mobile-navigation dslc-navigation-res-t-<?php echo esc_attr( $options['css_res_t'] ); ?>  dslc-navigation-res-p-<?php echo esc_attr( $options['css_res_p'] ); ?>">
