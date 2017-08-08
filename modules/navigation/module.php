@@ -1587,42 +1587,12 @@ class DSLC_Navigation extends DSLC_Module {
 			?>
 			<div class="dslc-navigation dslc-navigation-sub-position-<?php echo esc_attr( $options['css_subnav_position'] ); ?> dslc-navigation-res-t-<?php echo esc_attr( $options['css_res_t'] ); ?> dslc-navigation-res-p-<?php echo esc_attr( $options['css_res_p'] ); ?> dslc-navigation-orientation-<?php echo esc_attr( $options['nav_orientation'] ); ?>">
 				<div class="dslc-navigation-inner">
-					[dslc_nav_render_menu location="<?php echo $options['location'] ?>"]
+					[dslc_nav_render_menu theme_location="<?php echo $options['location'] ?>"]
 					<?php // wp_nav_menu( array( 'theme_location' => $options['location'] ) ); ?>
 				</div>
 			</div>
 			<div class="dslc-mobile-navigation dslc-navigation-res-t-<?php echo esc_attr( $options['css_res_t'] ); ?>  dslc-navigation-res-p-<?php echo esc_attr( $options['css_res_p'] ); ?>">
-				<?php
-				if ( has_nav_menu( $options['location'] ) ) {
-
-					$mobile_nav_output = '';
-					$mobile_nav_output .= '<select>';
-					$mobile_nav_output .= '<option>' . __( '- Select -', 'live-composer-page-builder' ) . '</option>';
-
-					if ( has_nav_menu( $options['location'] ) ) {
-
-						$locations = get_nav_menu_locations();
-						$menu = wp_get_nav_menu_object( $locations[ $options['location'] ] );
-						$menu_items = wp_get_nav_menu_items( $menu->term_id );
-
-						foreach ( $menu_items as $key => $menu_item ) {
-
-							$title = $menu_item->title;
-							$url = $menu_item->url;
-							$nav_selected = '';
-
-							if ( 0 !== $menu_item->post_parent ) {
-								$mobile_nav_output .= '<option value="' . $url . '" ' . $nav_selected . '> - ' . $title . '</option>';
-							} else {
-								$mobile_nav_output .= '<option value="' . $url . '" ' . $nav_selected . '>' . $title . '</option>';
-							}
-						}
-					}
-
-					$mobile_nav_output .= '</select>';
-					echo $mobile_nav_output;
-				}
-				?>
+				[dslc_nav_render_mobile_menu theme_location="<?php echo $options['location'] ?>"]
 				<div class="dslc-mobile-navigation-hook"><span class="dslc-icon dslc-icon-reorder"></span></div>
 			</div><!-- .dslc-mobile-navigation -->
 
