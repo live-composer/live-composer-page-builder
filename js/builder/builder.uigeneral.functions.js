@@ -1043,3 +1043,33 @@ function dslca_update_report_log() {
 		document.querySelector( '.dslca-show-js-error-hook' ).setAttribute('style','visibility:visible');
 	}
 }
+
+
+// ============================================================
+jQuery(document).on('editorFrameLoaded', function(){
+
+	var $ = jQuery;
+	console.log( 'editorFrameLoaded' );
+
+	var headerFooter = $('div[data-hf]', LiveComposer.Builder.PreviewAreaDocument);
+	var overlay = '';
+
+	headerFooter.each(function(index, el) {
+		var linkToEdit = $(el).data('editing-link');
+		var hfType = $(el).data('editing-type');
+		var editingLabel = $(el).data('editing-label');
+		var editingSubLabel = $(el).data('editing-sublabel');
+
+		overlay += '<div class="dslc-hf-block-overlay"><a target="_blank" href="' + linkToEdit + '" class="dslc-hf-block-overlay-button dslca-link">' + editingLabel + '</a>';
+		if ( editingSubLabel !== undefined ) {
+			overlay += ' <span class="dslc-hf-block-overlay-text">' + editingSubLabel + '</span>';
+		}
+		overlay += '</div>';
+
+		var htmlObject = document.createElement('div');
+		htmlObject.innerHTML = overlay;
+
+		el.append( htmlObject );
+	});
+
+});
