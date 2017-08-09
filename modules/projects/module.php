@@ -2228,6 +2228,7 @@ class DSLC_Projects extends DSLC_Module {
 	 * @return void
 	 */
 	function output( $options ) {
+		$options['module_id'] = $this->module_id;
 	?>
 		[dslc_module_projects_output]<?php echo serialize($options); ?>[/dslc_module_projects_output]
 	<?php
@@ -2257,8 +2258,6 @@ function dslc_module_projects_output ( $atts, $content = null ) {
 	if ( isset( $options['button_text'] ) ) {
 		$options['button_text'] = stripslashes( $options['button_text'] );
 	}
-
-	$options['module_id'] = $this->module_id;
 
 
 	/* Module output stars here */
