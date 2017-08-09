@@ -2,8 +2,8 @@
 Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page, page builder plugin, drag-n-drop page builder
 Requires at least: 4.3
-Tested up to: 4.8
-Stable tag: 1.3.2.1
+Tested up to: 4.8.1
+Stable tag: 1.3.3
 License: GPLv3
 
 Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
@@ -133,6 +133,28 @@ Upcoming Releases:
 
 * [Please, report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
 * [You can download any previous version here](https://wordpress.org/plugins/live-composer-page-builder/developers/)
+
+= 1.3.3 - August 9th 2017 =
+
+= Bug Fixes: =
+* Fixes the broken div wrappers in header/footers introduced in the previous version
+* Fixes a JS error that appears in the Menu Pro (no outerHide function)
+* Issue [#753](https://github.com/livecomposer/live-composer-page-builder/issues/753): Fixes a bug of pagination when the LC caching is active
+* Issue [#754](https://github.com/livecomposer/live-composer-page-builder/issues/754): Fixes a bug with the active menu style when the LC caching is active
+* Issue [#755](https://github.com/livecomposer/live-composer-page-builder/issues/755): Fixes the broken google map when the LC caching is active
+* Issue [#756](https://github.com/livecomposer/live-composer-page-builder/issues/756): Fixes a bug in builder.frontend.main.js
+* Issue [#757](https://github.com/livecomposer/live-composer-page-builder/issues/757): Fixes a bug with the header/footer editing overlay
+
+= Information about cache: =
+
+If have problems with the cache, you can disable the Live Composer caching feature from WP Admin > Live Composer > Settings > Performance > HTML/CSS caching.
+
+
+
+
+
+
+
 
 = 1.3.2.1 - July 25th 2017 =
 
