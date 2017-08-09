@@ -2460,7 +2460,24 @@ class DSLC_Posts extends DSLC_Module {
 	 * @return void
 	 */
 	function output( $options ) {
+		// Render the module output in the shortcode
+		// to make sure it's not cached in LC and pagination works as expected.
 
+		// @todo: add conditional caching only if pagination used.
+		// if ( 'disabled' === $options['pagination_type'] )
+		// 	# code...
+		// }
+?>
+		[dslc_module_posts_output]<?php echo serialize($options); ?>[/dslc_module_posts_output]
+<?php
+	}
+}
+
+function dslc_module_posts_output ( $atts, $content = null ) {
+	// Uncode module options passed as serialized content.
+	$options = unserialize( $content );
+
+	ob_start();
 
 		if ( is_feed() ) {
 			// Prevent category/tag feeds to stuck in an infinite loop.
@@ -3113,6 +3130,9 @@ class DSLC_Posts extends DSLC_Module {
 
 		wp_reset_postdata();
 
-	}
+	$shortcode_rendered = ob_get_contents();
+	ob_end_clean();
 
-}
+	return $shortcode_rendered;
+
+} add_shortcode( 'dslc_module_posts_output', 'dslc_module_posts_output' );
