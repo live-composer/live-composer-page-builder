@@ -28,11 +28,14 @@ function dslca_publish_event( eventName, eventData ) {
  * as we need all styles/images loaded before scrolling.
  */
 jQuery(window).load(function($) {
-	var scrollTo = jQuery('#dslc-main').offset().top;
-	if ( scrollTo ) {
-		jQuery('html, body').animate({
-			scrollTop: scrollTo
-		}, 1000);
+	var mainContentBlock = jQuery('#dslc-main');
+	// Condition fixes issues/756.
+	if ( mainContentBlock.length ) {
+		var scrollTo = mainContentBlock.offset().top;
+		if ( scrollTo ) {
+			jQuery('html, body').animate({
+				scrollTop: scrollTo
+			}, 1000);
+		}
 	}
-
 });

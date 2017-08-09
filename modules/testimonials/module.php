@@ -1845,6 +1845,18 @@ class DSLC_Testimonials extends DSLC_Module {
 	 * @return void
 	 */
 	function output( $options ) {
+	?>
+		[dslc_module_testimonials_output]<?php echo serialize($options); ?>[/dslc_module_testimonials_output]
+	<?php
+
+	}
+}
+
+function dslc_module_testimonials_output ( $atts, $content = null ) {
+	// Uncode module options passed as serialized content.
+	$options = unserialize( $content );
+
+	ob_start();
 
 		global $dslc_active;
 
@@ -2258,5 +2270,10 @@ class DSLC_Testimonials extends DSLC_Module {
 			}
 
 			wp_reset_postdata();
-	}
-}
+
+	$shortcode_rendered = ob_get_contents();
+	ob_end_clean();
+
+	return $shortcode_rendered;
+
+} add_shortcode( 'dslc_module_testimonials_output', 'dslc_module_testimonials_output' );
