@@ -631,6 +631,8 @@ class LC_Control {
 			'resize_height',
 		);
 
+		$controls_without_toggle = apply_filters( 'dslc_controls_without_toggle', $controls_without_toggle );
+
 		$control_with_toggle = false;
 
 		$sections_with_toggle = array(
