@@ -1969,6 +1969,12 @@ body.dslca-enabled .dslc-notification-box-has-timeout {
 	text-align: right;
 	font-size: 0;
 }
+	/* Disable pro menu icons in a regular navigation module. */
+	body .dslc-navigation .menu-item[class^="dslc-icon-"]:before,
+	body .dslc-navigation .menu-item[class*=" dslc-icon-"]:before {
+		display: none;
+	}
+
 
 	/* https://github.com/live-composer/live-composer-page-builder/issues/547 */
 	/*#dslc-content .dslc-navigation-inner {
