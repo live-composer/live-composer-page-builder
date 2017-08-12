@@ -629,12 +629,12 @@ function dslc_hf_get_headerfooter( $post_id = false, $hf_type = 'header' ) {
 		// Render content. Support both old and new version of the page code.
 		$rendered_code = dslc_render_content( get_post_meta( $hf_id, 'dslc_code', true ) );
 
-		if ( ! empty( $rendered_code ) && ! dslc_is_editor_active() ) {
-			$rendered_code = '<div id="dslc-' . $hf_type . '" class="dslc-' . $hf_type . '-pos-' . $position . '" data-hf>' . $rendered_code . $append . '</div>';
+		// if ( ! empty( $rendered_code ) && ! dslc_is_editor_active() ) {
+		if ( ! empty( $rendered_code ) ) {
+			$rendered_code = '<div id="dslc-' . $hf_type . '" class="dslc-' . $hf_type . '-pos-' . $position . '" data-hf ' . $editing_parametters . '>' . $rendered_code . $append . '</div>';
 		}
 
 		$rendered_code = $code_before . $wrapper_start . $rendered_code . $wrapper_end . $code_after;
-
 		$rendered_code = dslc_decode_shortcodes( $rendered_code );
 
 		if ( ! dslc_is_editor_active() ) { // && ! is_singular( 'dslc_hf' )

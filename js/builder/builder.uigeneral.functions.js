@@ -1049,8 +1049,6 @@ function dslca_update_report_log() {
 jQuery(document).on('editorFrameLoaded', function(){
 
 	var $ = jQuery;
-	console.log( 'editorFrameLoaded' );
-
 	var headerFooter = $('div[data-hf]', LiveComposer.Builder.PreviewAreaDocument);
 	var overlay = '';
 

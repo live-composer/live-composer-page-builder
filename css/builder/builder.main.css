@@ -2696,6 +2696,10 @@ body.rtl .dslca-modules-area-placeholder {
 			overflow: hidden;
 		}
 
+			.dslca-enabled.dslca-composer-hidden #dslc-content .dslca-wysiwyg-actions-edit {
+				display: none;
+			}
+
 			#dslc-content .dslca-wysiwyg-actions-edit-hook {
 				background: #5890e5;
 				color: #fff;
@@ -3427,6 +3431,15 @@ span.dslca-manage-action:hover * {
 		font-size: 13px;
 		opacity: .5;
 		margin-top: 5px;
+	}
+
+	.dslc-hf-block-overlay-button {
+		padding: 40px 90px;
+	}
+
+	.dslc-hf-block-overlay-button:hover {
+		color: #fff;
+		cursor: pointer;
 	}
 
 

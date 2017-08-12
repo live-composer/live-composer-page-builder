@@ -37,6 +37,12 @@ body.dslca-enabled:not(.dslca-composer-hidden) #dslc-header.dslc-header-pos-abso
 	position: relative;
 }
 
+/* https://github.com/live-composer/live-composer-page-builder/issues/764 */
+.dslca-enabled:not(.dslca-composer-hidden) #dslc-footer {
+	margin-bottom: 74px;
+}
+
+
 #dslc-footer.dslc-footer-pos-absolute {
 	position: absolute;
 	bottom: 0;

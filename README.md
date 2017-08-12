@@ -10,10 +10,6 @@ http://livecomposerplugin.com
 
 **Original Plugin Idea and Development:** [Slobodan Kustrimovic](https://github.com/WPCanyon)
 
-**Contributors:** [Joel Milne](https://github.com/goldhat)
-
-**Version:** 1.0.8.1
-
 ## Description
 
 Live Composer is a front-end WordPress page builder plugin. Front-end means you build the page directly on the page, not in the admin panel, which allows you to see exactly how the page will look like as you build it, with live feedback on every change you make.
