@@ -2,7 +2,7 @@
 Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page, page builder plugin, drag-n-drop page builder
 Requires at least: 4.7
-Tested up to: 4.8
+Tested up to: 4.8.1
 Stable tag: 1.3.4
 License: GPLv3
 
@@ -133,6 +133,24 @@ Upcoming Releases:
 
 * [Please, report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
 * [You can download any previous version here](https://wordpress.org/plugins/live-composer-page-builder/developers/)
+
+= 1.3.4 - August 13th 2017 =
+
+= Bug Fixes: =
+* Issue [#760](https://github.com/livecomposer/live-composer-page-builder/issues/760): Fixed NAVIGATION module subnav styling settings
+* Issue [#762](https://github.com/livecomposer/live-composer-page-builder/issues/762): Fixed Header/Footer Editing Functionality
+* Issue [#763](https://github.com/livecomposer/live-composer-page-builder/issues/763): Add option for developers to filter controls with on/off toggle
+* Issue [#764](https://github.com/livecomposer/live-composer-page-builder/issues/764): Fixed issue with height ( Footer )
+
+* [You can download any previous version here](https://wordpress.org/plugins/live-composer-page-builder/advanced/)
+* If something isn't working as expected, please try to disable cache first and report a problem.You can disable the Live Composer caching feature from WP Admin > Live Composer > Settings > Performance > HTML/CSS caching.
+
+
+
+
+
+
+
 
 = 1.3.3 - August 9th 2017 =
 
