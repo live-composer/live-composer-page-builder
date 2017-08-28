@@ -1354,6 +1354,11 @@ a .dslc-icon-flip-vertical:before {
 .dslc-icon-xing-sign:before {
   content: "\f169";
 }
+
+.dslc-icon-email:before {
+  content: "\f0e0";
+}
+
 .dslc-icon-youtube-play:before {
   content: "\f16a";
 }
