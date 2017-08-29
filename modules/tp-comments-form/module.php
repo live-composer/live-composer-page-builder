@@ -1243,6 +1243,7 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 		return apply_filters( 'dslc_module_options', $dslc_options, $this->module_id );
 
 	}
+
 	/**
 	 * Module HTML output.
 	 *
@@ -1250,137 +1251,151 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 	 * @return void
 	 */
 	function output( $options ) {
-
-		global $dslc_active;
-
-		$post_id = $options['post_id'];
-		$show_fake = true;
-
-		if ( is_singular() && get_post_type() !== 'dslc_templates' && !$dslc_active ) {
-
-			$post_id = get_the_ID();
-			$show_fake = false;
-		}
-
-
-		$txt_submit_comment = __( 'SUBMIT YOUR COMMENT', 'live-composer-page-builder' );
-		$txt_leave_comment = __( 'Leave a Comment', 'live-composer-page-builder' );
-		$txt_comment = __( 'Comment', 'live-composer-page-builder' );
-		$txt_name = __( 'Name', 'live-composer-page-builder' );
-		$txt_email = __( 'Email', 'live-composer-page-builder' );
-		$txt_url = __( 'Website', 'live-composer-page-builder' );
-
-		if ( isset( $options['txt_submit_comment'] ) && $options['txt_submit_comment'] != '' )
-			$txt_submit_comment = $options['txt_submit_comment'];
-
-		if ( isset( $options['txt_leave_comment'] ) && $options['txt_leave_comment'] != '' )
-			$txt_leave_comment = $options['txt_leave_comment'];
-
-		if ( isset( $options['txt_comment'] ) && $options['txt_comment'] != '' )
-			$txt_comment = $options['txt_comment'];
-
-		if ( isset( $options['txt_name'] ) && $options['txt_name'] != '' )
-			$txt_name = $options['txt_name'];
-
-		if ( isset( $options['txt_email'] ) && $options['txt_email'] != '' )
-			$txt_email = $options['txt_email'];
-
-		if ( isset( $options['txt_url'] ) && $options['txt_url'] != '' )
-			$txt_url = $options['txt_url'];
-
-		if ( isset( $options['css_inputs_color'] ) && $options['css_inputs_color'] != '' ) {
-			$css_inputs_color = $options['css_inputs_color'];
-		} else {
-			$css_inputs_color = 'initial';
-		}
-
-		/* Module output starts here */
-
-			?>
-
-				<div class="dslc-tp-comment-form">
-
-					<?php if ( $show_fake ) : ?>
-
-						<?php
-
-						if ( isset( $_POST['dslc_post_id'] ) ) {
-							$page_id = $_POST['dslc_post_id'];
-						} elseif ( isset( $_GET['dslc_post_id'] ) ) {
-							$page_id = $_GET['dslc_post_id'];
-						} else {
-							$page_id = get_the_ID();
-						}
-
-						?>
-
-						<?php if ( get_post_type( $page_id ) === 'dslc_templates' || comments_open( $page_id ) ) { ?>
-
-							<div id="respond" class="comment-respond">
-								<h3 id="reply-title" class="comment-reply-title"><?php echo $txt_leave_comment; ?></h3>
-								<form action="#" method="post" id="commentform" class="comment-form" novalidate="">
-									<div class="comment-form-comment"><textarea id="comment" name="comment"  placeholder="<?php echo $txt_comment; ?>" aria-required="true"></textarea></div>
-									<div class="comment-form-name"><input id="author" name="author" type="text" value="" size="30" placeholder="<?php echo $txt_name; ?> *" aria-required="true"></div>
-									<div class="comment-form-email"><input id="email" name="email" type="text" value="" size="30" placeholder="<?php echo $txt_email; ?> *" aria-required="true"></div>
-									<div class="comment-form-website"><input id="url" name="url" type="text" value="" size="30" placeholder="<?php echo $txt_url; ?>"></div>
-
-									<p class="form-submit">
-										<input name="submit" type="submit" id="submit" class="submit" value="<?php echo $txt_submit_comment; ?>">
-									</p>
-								</form>
-							</div>
-
-						<?php } else {
-
-							if ( $dslc_active ) {
-								echo '<div class="dslc-notification dslc-red">' . __( 'Comments disabled for the current post ( whole website ), please enable comments on your website.', 'live-composer-page-builder' ) . '</div>';
-							}
-
-						} ?>
-
-					<?php else :
-
-						global $commenter;
-						comment_form( array(
-							'label_submit' => $txt_submit_comment,
-							'cancel_reply_link' => 'cancel',
-							'comment_notes_before' => '',
-							'comment_notes_after' => '',
-							'title_reply' => $txt_leave_comment,
-							'title_reply_to' => __( 'Reply to %s.', 'live-composer-page-builder' ),
-							'comment_field' => '<div class="comment-form-comment"><textarea id="comment" name="comment" placeholder="' . $txt_comment . '" aria-required="true"></textarea></div>',
-							'fields' => apply_filters( 'comment_form_default_fields', array(
-								'author' => '<div class="comment-form-name"><input id="author" name="author" type=text value="' . esc_attr( $commenter['comment_author'] ) . '" size="30" placeholder="' . $txt_name . ' *" aria-required="true" /></div>',
-								'email' => '<div class="comment-form-email"><input id="email" name="email" type=text value="' . esc_attr( $commenter['comment_author_email'] ) . '" size="30" placeholder="' . $txt_email . ' *" aria-required="true" /></div>',
-								'url' => '<div class="comment-form-website"><input id="url" name="url" type=text value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30" placeholder="' . $txt_url . '" /></div>'
-							) ),
-						), $post_id );
-
-					endif; ?>
-
-				</div><!-- dslc-tp-comment-form -->
-
-				<?php
-				/**
-				 * In-line CSS below required to style placeholder text color.
-				 * Due to poor browser support we can't change it the normal way.
-				 */
-				?>
-				<style type="text/css">
-					.dslc-tp-comment-form input[type=text]::-moz-placeholder, .dslc-tp-comment-form input[type=url]::-moz-placeholder, .dslc-tp-comment-form input[type=email]::-moz-placeholder, .dslc-tp-comment-form textarea::-moz-placeholder {
-						color: <?php echo $css_inputs_color ?>;
-					}
-					.dslc-tp-comment-form input[type=text]::-webkit-input-placeholder, .dslc-tp-comment-form input[type=url]::-webkit-input-placeholder, .dslc-tp-comment-form input[type=email]::-webkit-input-placeholder, .dslc-tp-comment-form textarea::-webkit-input-placeholder {
-						color: <?php echo $css_inputs_color ?>;
-					}
-					.dslc-tp-comment-form input[type=text]:-ms-input-placeholder, .dslc-tp-comment-form input[type=url]:-ms-input-placeholder, .dslc-tp-comment-form input[type=email]:-ms-input-placeholder, .dslc-tp-comment-form textarea:-ms-input-placeholder {
-						color: <?php echo $css_inputs_color ?>;
-					}
-				</style>
-			<?php
+	?>
+		[dslc_module_tp_template_output]<?php echo serialize($options); ?>[/dslc_module_tp_template_output]
+	<?php
+	}
+}
 
 
 
+function dslc_module_tp_template_output( $atts, $content = null ) {
+
+	// Uncode module options passed as serialized content.
+	$options = unserialize( $content );
+
+	ob_start();
+
+	global $dslc_active;
+
+	$post_id = $options['post_id'];
+	$show_fake = true;
+
+	if ( is_singular() && get_post_type() !== 'dslc_templates' && !$dslc_active ) {
+
+		$post_id = get_the_ID();
+		$show_fake = false;
 	}
 
-}
+
+	$txt_submit_comment = __( 'SUBMIT YOUR COMMENT', 'live-composer-page-builder' );
+	$txt_leave_comment = __( 'Leave a Comment', 'live-composer-page-builder' );
+	$txt_comment = __( 'Comment', 'live-composer-page-builder' );
+	$txt_name = __( 'Name', 'live-composer-page-builder' );
+	$txt_email = __( 'Email', 'live-composer-page-builder' );
+	$txt_url = __( 'Website', 'live-composer-page-builder' );
+
+	if ( isset( $options['txt_submit_comment'] ) && $options['txt_submit_comment'] != '' )
+		$txt_submit_comment = $options['txt_submit_comment'];
+
+	if ( isset( $options['txt_leave_comment'] ) && $options['txt_leave_comment'] != '' )
+		$txt_leave_comment = $options['txt_leave_comment'];
+
+	if ( isset( $options['txt_comment'] ) && $options['txt_comment'] != '' )
+		$txt_comment = $options['txt_comment'];
+
+	if ( isset( $options['txt_name'] ) && $options['txt_name'] != '' )
+		$txt_name = $options['txt_name'];
+
+	if ( isset( $options['txt_email'] ) && $options['txt_email'] != '' )
+		$txt_email = $options['txt_email'];
+
+	if ( isset( $options['txt_url'] ) && $options['txt_url'] != '' )
+		$txt_url = $options['txt_url'];
+
+	if ( isset( $options['css_inputs_color'] ) && $options['css_inputs_color'] != '' ) {
+		$css_inputs_color = $options['css_inputs_color'];
+	} else {
+		$css_inputs_color = 'initial';
+	}
+
+	/* Module output starts here */
+	?>
+
+		<div class="dslc-tp-comment-form">
+
+			<?php if ( $show_fake ) : ?>
+
+				<?php
+
+				if ( isset( $_POST['dslc_post_id'] ) ) {
+					$page_id = $_POST['dslc_post_id'];
+				} elseif ( isset( $_GET['dslc_post_id'] ) ) {
+					$page_id = $_GET['dslc_post_id'];
+				} else {
+					$page_id = get_the_ID();
+				}
+
+				?>
+
+				<?php if ( get_post_type( $page_id ) === 'dslc_templates' || comments_open( $page_id ) ) { ?>
+
+					<div id="respond" class="comment-respond">
+						<h3 id="reply-title" class="comment-reply-title"><?php echo $txt_leave_comment; ?></h3>
+						<form action="#" method="post" id="commentform" class="comment-form" novalidate="">
+							<div class="comment-form-comment"><textarea id="comment" name="comment"  placeholder="<?php echo $txt_comment; ?>" aria-required="true"></textarea></div>
+							<div class="comment-form-name"><input id="author" name="author" type="text" value="" size="30" placeholder="<?php echo $txt_name; ?> *" aria-required="true"></div>
+							<div class="comment-form-email"><input id="email" name="email" type="text" value="" size="30" placeholder="<?php echo $txt_email; ?> *" aria-required="true"></div>
+							<div class="comment-form-website"><input id="url" name="url" type="text" value="" size="30" placeholder="<?php echo $txt_url; ?>"></div>
+
+							<p class="form-submit">
+								<input name="submit" type="submit" id="submit" class="submit" value="<?php echo $txt_submit_comment; ?>">
+							</p>
+						</form>
+					</div>
+
+				<?php } else {
+
+					if ( $dslc_active ) {
+						echo '<div class="dslc-notification dslc-red">' . __( 'Comments disabled for the current post ( whole website ), please enable comments on your website.', 'live-composer-page-builder' ) . '</div>';
+					}
+
+				} ?>
+
+			<?php else :
+
+				global $commenter;
+				comment_form( array(
+					'label_submit' => $txt_submit_comment,
+					'cancel_reply_link' => 'cancel',
+					'comment_notes_before' => '',
+					'comment_notes_after' => '',
+					'title_reply' => $txt_leave_comment,
+					'title_reply_to' => __( 'Reply to %s.', 'live-composer-page-builder' ),
+					'comment_field' => '<div class="comment-form-comment"><textarea id="comment" name="comment" placeholder="' . $txt_comment . '" aria-required="true"></textarea></div>',
+					'fields' => apply_filters( 'comment_form_default_fields', array(
+						'author' => '<div class="comment-form-name"><input id="author" name="author" type=text value="' . esc_attr( $commenter['comment_author'] ) . '" size="30" placeholder="' . $txt_name . ' *" aria-required="true" /></div>',
+						'email' => '<div class="comment-form-email"><input id="email" name="email" type=text value="' . esc_attr( $commenter['comment_author_email'] ) . '" size="30" placeholder="' . $txt_email . ' *" aria-required="true" /></div>',
+						'url' => '<div class="comment-form-website"><input id="url" name="url" type=text value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30" placeholder="' . $txt_url . '" /></div>'
+					) ),
+				), $post_id );
+
+			endif; ?>
+
+		</div><!-- dslc-tp-comment-form -->
+
+		<?php
+		/**
+		 * In-line CSS below required to style placeholder text color.
+		 * Due to poor browser support we can't change it the normal way.
+		 */
+		?>
+		<style type="text/css">
+			.dslc-tp-comment-form input[type=text]::-moz-placeholder, .dslc-tp-comment-form input[type=url]::-moz-placeholder, .dslc-tp-comment-form input[type=email]::-moz-placeholder, .dslc-tp-comment-form textarea::-moz-placeholder {
+				color: <?php echo $css_inputs_color ?>;
+			}
+			.dslc-tp-comment-form input[type=text]::-webkit-input-placeholder, .dslc-tp-comment-form input[type=url]::-webkit-input-placeholder, .dslc-tp-comment-form input[type=email]::-webkit-input-placeholder, .dslc-tp-comment-form textarea::-webkit-input-placeholder {
+				color: <?php echo $css_inputs_color ?>;
+			}
+			.dslc-tp-comment-form input[type=text]:-ms-input-placeholder, .dslc-tp-comment-form input[type=url]:-ms-input-placeholder, .dslc-tp-comment-form input[type=email]:-ms-input-placeholder, .dslc-tp-comment-form textarea:-ms-input-placeholder {
+				color: <?php echo $css_inputs_color ?>;
+			}
+		</style>
+		<?php
+
+	$shortcode_rendered = ob_get_contents();
+	ob_end_clean();
+
+	return $shortcode_rendered;
+
+} add_shortcode( 'dslc_module_tp_template_output', 'dslc_module_tp_template_output' );
