@@ -961,7 +961,7 @@ class DSLC_Social extends DSLC_Module {
 						<li>
 							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['email']; ?>"><span class="dslc-icon dslc-icon-envelope"></span></a>
 							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
-								<a class="dslc-social-label" target="_blank" href="<?php echo $options['email']; ?>"><span><?php _e( 'XING', 'live-composer-page-builder' ); ?></span></a>
+								<a class="dslc-social-label" target="_blank" href="<?php echo $options['email']; ?>"><span><?php _e( 'Email', 'live-composer-page-builder' ); ?></span></a>
 							<?php endif; ?>
 						</li>
 					<?php endif; ?>
