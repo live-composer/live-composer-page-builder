@@ -201,6 +201,12 @@ class DSLC_Social extends DSLC_Module {
 				'std' => '',
 				'type' => 'text',
 			),
+			array(
+				'label' => __( 'Email', 'live-composer-page-builder' ),
+				'id' => 'email',
+				'std' => '',
+				'type' => 'text',
+			),
 
 			/**
 			 * Styling
@@ -948,6 +954,14 @@ class DSLC_Social extends DSLC_Module {
 							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['xing']; ?>"><span class="dslc-icon dslc-icon-xing"></span></a>
 							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
 								<a class="dslc-social-label" target="_blank" href="<?php echo $options['xing']; ?>"><span><?php _e( 'XING', 'live-composer-page-builder' ); ?></span></a>
+							<?php endif; ?>
+						</li>
+					<?php endif; ?>
+					<?php if ( isset( $options['email'] ) && $options['email'] != '' ) : ?>
+						<li>
+							<a class="dslc-social-icon" target="_blank" href="<?php echo $options['email']; ?>"><span class="dslc-icon dslc-icon-envelope"></span></a>
+							<?php if ( $options['show_labels'] == 'enabled' ) : ?>
+								<a class="dslc-social-label" target="_blank" href="<?php echo $options['email']; ?>"><span><?php _e( 'Email', 'live-composer-page-builder' ); ?></span></a>
 							<?php endif; ?>
 						</li>
 					<?php endif; ?>
