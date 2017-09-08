@@ -536,7 +536,7 @@ function dslc_hf_get_headerfooter( $post_id = false, $hf_type = 'header' ) {
 	// Compilation time 3.375 sec. before caching / 0.03 sec after caching.
 
 	// Get header/footer ID associated with the post.
-	$header_footer = dslc_hf_get_ID( $post_id );
+	$header_footer = apply_filters( 'dslc_hf_ids_filter', dslc_hf_get_ID( $post_id ) );
 	$hf_id = false;
 
 	// Var defaults.
