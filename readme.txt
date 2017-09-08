@@ -3,7 +3,7 @@ Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page, page builder plugin, drag-n-drop page builder
 Requires at least: 4.7
 Tested up to: 4.8.1
-Stable tag: 1.3.4
+Stable tag: 1.3.5
 License: GPLv3
 
 Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
@@ -133,6 +133,28 @@ Upcoming Releases:
 
 * [Please, report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
 * [You can download any previous version here](https://wordpress.org/plugins/live-composer-page-builder/developers/)
+
+= 1.3.5 - September 8th 2017 =
+
+= Bug Fixes: =
+* Issue [#722](https://github.com/livecomposer/live-composer-page-builder/issues/722): Fixed notice of module 'Image'
+* Issue [#776](https://github.com/livecomposer/live-composer-page-builder/issues/776): Fixed issue on templates import
+* Issue [#777](https://github.com/livecomposer/live-composer-page-builder/issues/777): Fixed blog comments
+
+= New: =
+* Issue [#788](https://github.com/livecomposer/live-composer-page-builder/issues/788): Added filter for WPML
+* Issue [#788](https://github.com/livecomposer/live-composer-page-builder/issues/788): Added new icon for module 'Social Element'
+
+= Thanks to the next contributors for helping with this update: =
+
+* [lejardindeden](https://github.com/lejardindeden)
+
+
+
+
+
+
+
 
 = 1.3.4 - August 13th 2017 =
 
