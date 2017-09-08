@@ -440,6 +440,7 @@ function dslc_ajax_load_template( $atts ) {
 		$template_code = stripslashes( $templates[ $template_id ]['code'] );
 
 		$response['output'] = dslc_render_content( $template_code, true );
+		$response['output'] = do_shortcode( $response['output'] );
 
 		// Encode response.
 		$response_json = wp_json_encode( $response );
