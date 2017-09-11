@@ -1252,14 +1252,14 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 	 */
 	function output( $options ) {
 	?>
-		[dslc_module_tp_template_output]<?php echo serialize($options); ?>[/dslc_module_tp_template_output]
+		[dslc_module_comments_form_output]<?php echo serialize($options); ?>[/dslc_module_comments_form_output]
 	<?php
 	}
 }
 
 
 
-function dslc_module_tp_template_output( $atts, $content = null ) {
+function dslc_module_comments_form_output( $atts, $content = null ) {
 
 	// Uncode module options passed as serialized content.
 	$options = unserialize( $content );
@@ -1398,4 +1398,4 @@ function dslc_module_tp_template_output( $atts, $content = null ) {
 
 	return $shortcode_rendered;
 
-} add_shortcode( 'dslc_module_tp_template_output', 'dslc_module_tp_template_output' );
+} add_shortcode( 'dslc_module_comments_form_output', 'dslc_module_comments_form_output' );
