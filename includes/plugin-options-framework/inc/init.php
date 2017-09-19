@@ -278,7 +278,6 @@ function dslc_plugin_options_display_options( $section ) {
  */
 function dslc_plugin_options_input_sanitize( $input ) {
 
-	$old_options = get_option( 'dslc_plugin_options' );
 	$new_input = array();
 
 	if ( is_array( $input ) ) {
@@ -295,13 +294,6 @@ function dslc_plugin_options_input_sanitize( $input ) {
 					$new_input[ $key ][ $inner_key ] = sanitize_text_field( $inner_option_value );
 
 				}
-			}
-		}
-
-		// Fixed: Archives listing template is broken - https://github.com/live-composer/live-composer-page-builder/issues/800
-		foreach ( $old_options as $old_key => $old_value ) {
-			if ( ! array_key_exists( $old_key, $new_input ) ) {
-				$new_input[ $old_key ] = $old_value;
 			}
 		}
 

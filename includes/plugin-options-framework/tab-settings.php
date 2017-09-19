@@ -103,10 +103,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<?php do_settings_sections( 'dslc_plugin_options_cpt_slugs' ); ?>
 					<?php submit_button(); ?>
 			</div>
+			<div class="dslc-panel">
+					<?php do_settings_sections( 'dslc_plugin_options_archives' ); ?>
+					<?php submit_button(); ?>
+			</div>
 			<!-- </div> -->
 
-
-		
 		</form>
 	</div>
 </div>
