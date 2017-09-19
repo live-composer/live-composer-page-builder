@@ -2192,28 +2192,32 @@ margin-left: -90px;
   width: 281px;
 }
 
- .dslc-settings-form {
- /*   float: left;
+.dslc-settings-form {
+    /*float: left;
     width: 70%;
     max-width: 640px;
     padding-left: 4%;
     padding-top: 20px;
     border-left: solid 1px #E3E3E3;*/
- }
+}
 
- .dslc-settings-form .dslc-panel {
+.dslc-settings-form .dslc-panel {
     padding: 40px;
     margin-top: 10px;
     max-width: 640px;
- }
+}
 
- .dslc-settings-form .dslc-panel h2 {
+.dslc-settings-form .dslc-panel h2 {
     margin-bottom: 30px;
 }
 
- .dslc-submenu-section {
-  border-bottom: 1px solid #ddd;
-  margin: 0;
+.dslc-settings-form .dslc-panel:last-child {
+    display: none;
+}
+
+.dslc-submenu-section {
+    border-bottom: 1px solid #ddd;
+    margin: 0;
 }
 
 .dslc-submenu-section:hover {

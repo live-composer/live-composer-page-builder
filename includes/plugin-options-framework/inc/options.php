@@ -342,3 +342,48 @@ function dslc_plugin_opts_other() {
 	);
 
 } add_action( 'dslc_hook_register_options', 'dslc_plugin_opts_other', 50 );
+
+/**
+ * Register Archives Options
+ *
+ * @since 1.0
+ */
+function dslc_plugin_opts_archives() {
+
+	global $dslc_plugin_options;
+
+	$module_opts_array = array();
+
+	$args = array(
+		'post_type' => 'dslc_templates',
+		'post_status' => 'publish',
+		'numberposts' => -1,
+	);
+
+	$templates = get_posts( $args );
+
+	foreach ( $templates as $template ) {
+		$custom_fields = get_post_meta( $template->ID, 'dslc_template_for', false );
+
+		foreach ( $custom_fields as $custom_field ) {
+			if ( ! empty( $custom_field ) ) {
+				if ( 'author' == $custom_field || 'search_results' == $custom_field || '404_page' == $custom_field || strripos( $custom_field, '_archive' ) ) {
+
+					$module_opts_array[ $custom_field ] = array(
+
+						'section' => 'dslc_plugin_options_archives',
+						'label' => '' . $template->post_title . '',
+						'std' => '' . $template->ID . '',
+						'type' => 'text',
+					);
+				}
+			}
+		}
+	}
+
+	$dslc_plugin_options['dslc_plugin_options_archives'] = array(
+		'title' => __( 'Archives', 'live-composer-page-builder' ),
+		'options' => $module_opts_array,
+	);
+
+} add_action( 'dslc_hook_register_options', 'dslc_plugin_opts_archives', 999 );
