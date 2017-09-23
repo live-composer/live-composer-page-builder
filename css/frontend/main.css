@@ -1176,6 +1176,16 @@ a img.aligncenter { display: block; margin-left: auto; margin-right: auto }
 		display: none !important;
 	}
 
+	/* https://github.com/live-composer/live-composer-page-builder/issues/797 */
+
+	.dslc-post-heading {
+		overflow: hidden;
+	}
+
+	.dslc-post-filters {
+		float: left;
+	}
+
 }
 
 /* Smartphone */
@@ -1201,6 +1211,15 @@ a img.aligncenter { display: block; margin-left: auto; margin-right: auto }
 		display: none !important;
 	}
 
+	/* https://github.com/live-composer/live-composer-page-builder/issues/797 */
+
+	.dslc-post-heading {
+		overflow: hidden;
+	}
+
+	.dslc-post-filters {
+		float: left;
+	}
 }
 
 /* @hack: IE10+ specific styles only.

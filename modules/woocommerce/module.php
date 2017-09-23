@@ -2704,6 +2704,8 @@ function dslc_module_woocommerce_output ( $atts, $content = null ) {
 
 						<?php if ( $show_heading ) : ?>
 
+						<div class="dslc-post-heading">
+
 							<h2 class="dslca-editable-content" data-id="main_heading_title" data-type="simple" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?> ><?php echo stripslashes( $options['main_heading_title'] ); ?></h2>
 
 							<!-- View all -->
@@ -2713,6 +2715,8 @@ function dslc_module_woocommerce_output ( $atts, $content = null ) {
 								<span class="dslc-module-heading-view-all"><a href="<?php echo $options['view_all_link']; ?>" class="dslca-editable-content" data-id="main_heading_link_title" data-type="simple" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?> ><?php echo $options['main_heading_link_title']; ?></a></span>
 
 							<?php endif; ?>
+
+						</div>
 
 						<?php endif; ?>
 
