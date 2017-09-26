@@ -196,11 +196,21 @@
 	border: solid 1px #FCB6AC;
 }
 
-
 #share-buttons span.dslc_social_text {
 	margin-left: 10px;
 	font-size: 15px;
 }
+
+/**
+ * Tabs in LC
+ */
+
+.dslc-settigns-tabs .nav-tab {
+    padding-right: 15px;
+    padding-left: 15px;
+    font-size: 18px;
+}
+
 
 /**
  * ----------------------------------------------------------------------
@@ -330,131 +340,35 @@
    content: "\f529";
 }
 
+.dslc-panel .dslc-panel-heart:before {
+   content: "\f487";
+}
+
 /**
- * ----------------------------------------------------------------------
- * Panel Tab Seo
+ * Tab Extend
  */
 
-.dslc-panel-seo {
-    background: #2E97E0 url(../../../images/seo-tab-bg.png) no-repeat;
-    box-shadow: none;
-    border: 0;
-    padding: 36px 5%;
-    background-position: right bottom;
-    background-size: 70%;
+.dslc-tab-extend {
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
 }
 
-.dslc-panel-seo.showing-notice {
-    background: #2E97E0;
+.dslc-tab-extend .headline-feature {
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
-.dslc-panel-seo.showing-notice .dslc-tab-seo-hide {
-    display: none;
+.dslc-tab-extend .feature-section {
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
-.dslc-panel-seo .dslc-tab-seo-hide {
-        color: #fff;
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    border: 1px solid #fff;
-    padding: 2px 16px;
-    float: right;
-    border-radius: 5px;
-    font-weight: 300;
-    opacity: .5;
-    margin-top: 20px;
+.dslc-tab-extend .feature-section p {
+    margin-right: 0;
+    margin-left: 0;
 }
 
-.dslc-panel-seo .dslc-tab-seo-hide:hover {
-    opacity: 1;
-    cursor: pointer;
-    background:#b2ff2a;
-    color: #2D400B;
-    border: 2px solid #b2ff2a;
-}
-
-.dslc-panel-seo .dslc-panel-content {
-    margin: 30px 0 0 40px;
-    max-width: 500px;
-    text-align: left;
-}
-
-.dslc-panel-seo.showing-notice .dslc-panel-content {
-    margin: 20px 0 0 -10px;
-    max-width: none;
-    text-align: center;
-}
-
-.dslc-panel-seo h2 {
-    color: #fff;
-    font-size: 36px;
-    line-height: 1;
-    margin-bottom: 25px;
-    font-weight: 300;
-}
-
-.dslc-panel-seo .about-description {
-    color: #32373c;
-    font-size: 18px;
-}
-
-.dslc-panel-seo .dslc-notice {
-    color: #fff;
-    font-size: 16px;
-    letter-spacing: 1px;
-    line-height: 1.55;
-    margin-top: -25px;
-}
-
-.dslc-panel-seo .dslc-notice a {
-    color: #fff;
-    text-decoration: underline;
-}
-
-#dslc-seo-search {
-    padding-top: 20px;
-}
-
-#dslc-seo-search label {
-    font-size: 17px;
-    font-weight: 300;
-    color: #fff;
-    margin-bottom: 4px;
-    display: inline-block;
-}
-
-#dslc-seo-search input[type="text"] {
-    font-size: 16px;
-    height: 46px;
-    line-height: 1;
-    padding: 10px 17px;
-    width: 60%;
-    border: 0;
-    border-radius: 5px;
-    margin-bottom: 20px;
-}
-
-#dslc-seo-search button[type="submit"] {
-    font-size: 16px;
-    line-height: 1;
-    padding: 20px 40px;
-    border: 0;
-    border-radius: 5px;
-    margin-top: 5px;
-    margin-bottom: 20px;
-
-    letter-spacing: 3px;
-    text-transform: uppercase;
-
-    background: #9FE02C;
-    color: #2D400B;
-}
-
-#dslc-seo-search button[type="submit"]:hover {
-    cursor: pointer;
-    background:#b2ff2a;
-}
 
 /**
  * ----------------------------------------------------------------------
@@ -608,19 +522,22 @@ display: inline-block;
     /*border-bottom-left-radius: 0;*/
 }
 
+#new-products-coming .dslc-panel-header {
+    width: 34%;
+    display: inline-block;
+}
+
 #new-products-coming h2 {
-        font-size: 27px;
+    font-size: 27px;
     color: #fff;
     text-align: left;
-    width: 34%;
     margin: 24px 0 0;
-    display: inline-block;
     line-height: 1;
     vertical-align: top;
 }
 
 #new-products-coming h3 {
-        color: #fff;
+    color: #fff;
     margin-top: 0;
     margin-bottom: 7px;
     font-size: 21px;
