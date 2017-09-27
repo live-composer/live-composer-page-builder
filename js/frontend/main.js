@@ -1062,6 +1062,16 @@ jQuery(document).ready(function($){
 		}
 	});
 
+	/**
+	 * Header Fixed/Absolute - https://github.com/live-composer/live-composer-page-builder/issues/787
+	 */
+
+	if ( jQuery( "#dslc-header" ).hasClass( "dslc-header-extra-padding" ) && !jQuery( "body" ).hasClass( "dslca-enabled" ) ) {
+
+		var headerHeight = jQuery( "#dslc-header" ).height();
+		jQuery( "#dslc-main .dslc-modules-section:first-child" ).css({ paddingTop : headerHeight });
+	}
+
 
 	/**
 	 * Navigation Module

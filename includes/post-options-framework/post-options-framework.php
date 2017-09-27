@@ -254,6 +254,8 @@ function dslc_editorinterface_post_options( $object, $metabox ) {
 
 							if ( 'list-heading' === $choice['value'] && 'dslca_single_post_templates' === $choice['id'] ) {
 								$dslca_post_option_id = 'id="' . $choice['id'] . '"';
+							} else {
+								$dslca_post_option_id = '';
 							}
 						}
 
