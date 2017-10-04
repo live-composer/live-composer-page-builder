@@ -2,8 +2,8 @@
 Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page, page builder plugin, drag-n-drop page builder
 Requires at least: 4.7
-Tested up to: 4.8.1
-Stable tag: 1.3.6
+Tested up to: 4.8.2
+Stable tag: 1.3.7
 License: GPLv3
 
 Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
@@ -133,6 +133,25 @@ Upcoming Releases:
 
 * [Please, report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
 * [You can download any previous version here](https://github.com/live-composer/live-composer-page-builder/releases)
+
+= 1.3.7 - October 4th 2017 =
+
+= Bug Fixes: =
+* Issue [#804](https://github.com/livecomposer/live-composer-page-builder/issues/804): Fixed: Link is not correct on LC WordPress
+* Issue [#797](https://github.com/livecomposer/live-composer-page-builder/issues/797): Fixed: The filter buttons should not be visible on mobile
+* Issue [#787](https://github.com/livecomposer/live-composer-page-builder/issues/787): Fixed: The sticky/fixed header option is not working properly
+* Issue [#784](https://github.com/livecomposer/live-composer-page-builder/issues/784): Fixed: The category archive listing issue with the very first post
+
+= Thanks to the next contributors for helping with this update: =
+
+* [emingus](https://github.com/emingus)
+
+
+
+
+
+
+
 
 = 1.3.6 - September 19th 2017 =
 
