@@ -134,6 +134,19 @@ function dslc_hf_init() {
 					),
 				),
 			),
+			array(
+				'label' => __( '', 'live-composer-page-builder' ),
+				'std' => '',
+				'descr' => __( 'Add extra bottom padding on the top of the page under the header.' ),
+				'id' => 'dslc_extra_padding',
+				'type' => 'checkbox',
+				'choices' => array(
+					array(
+						'label' => 'Bottom padding',
+						'value' => 'bottom_padding',
+					),
+				),
+			),
 		),
 	);
 
@@ -557,6 +570,20 @@ function dslc_hf_get_headerfooter( $post_id = false, $hf_type = 'header' ) {
 		$position = 'relative';
 	}
 
+	$header_padding = get_post_meta( $hf_id, 'dslc_extra_padding', true );
+
+	if ( ! empty( $header_padding ) ) {
+		$header_padding = 'dslc-header-extra-padding';
+	} else {
+		$header_padding = '';
+	}
+
+	// If the "position" option value exists
+	if ( ! $position ) {
+		// Set the "position" option value to default "relative"
+		$position = 'relative';
+	}
+
 	// Code to insert before.
 	$code_before = apply_filters( 'dslc_' . $hf_type . '_before', '' );
 
@@ -631,7 +658,7 @@ function dslc_hf_get_headerfooter( $post_id = false, $hf_type = 'header' ) {
 
 		// if ( ! empty( $rendered_code ) && ! dslc_is_editor_active() ) {
 		if ( ! empty( $rendered_code ) ) {
-			$rendered_code = '<div id="dslc-' . $hf_type . '" class="dslc-' . $hf_type . '-pos-' . $position . '" data-hf ' . $editing_parametters . '>' . $rendered_code . $append . '</div>';
+			$rendered_code = '<div id="dslc-' . $hf_type . '" class="dslc-' . $hf_type . '-pos-' . $position . ' ' . $header_padding .'" data-hf ' . $editing_parametters . '>' . $rendered_code . $append . '</div>';
 		}
 
 		$rendered_code = $code_before . $wrapper_start . $rendered_code . $wrapper_end . $code_after;
