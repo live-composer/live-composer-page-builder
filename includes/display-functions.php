@@ -545,6 +545,11 @@ function dslc_filter_content( $content ) {
 	// Get ID of the post in which the content filter fired.
 	$curr_id = get_the_ID();
 
+	if ( is_archive() ) {
+		$categories = get_the_category();
+		$curr_id = $categories[0]->cat_ID;
+	}
+
 	// If post pass protected and pass not supplied return original content
 	if ( post_password_required( $curr_id ) ) {
 		return $content;
