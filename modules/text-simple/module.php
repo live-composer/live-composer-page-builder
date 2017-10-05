@@ -5013,7 +5013,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 		?><div class="dslc-text-module-content"><?php
 
 			if ( $dslc_active ) {
-				?><div class="dslca-editable-content" data-type="simple" data-id="content"<?php if ( $dslc_is_admin ) echo ' data-exportable-content'; ?>><?php
+				?><div class="dslca-editable-content inline-editor" data-type="simple" data-id="content"<?php if ( $dslc_is_admin ) echo ' data-exportable-content'; ?>><?php
 			}
 
 				$output_content = stripslashes( $options['content'] );
