@@ -550,6 +550,28 @@ function dslc_filter_content( $content ) {
 		$curr_id = $categories[0]->cat_ID;
 	}
 
+	if ( is_search() ) {
+
+		$args = array(
+		    'post_type'  => 'dslc_templates',
+		    'meta_query' => array(
+				array(
+				    'key'     => 'dslc_template_for',
+				    'value'   => 'search_results',
+				),
+				array(
+				    'key'     => 'dslc_template_type',
+				    'value'   => 'default',
+				),
+		    ),
+		);
+
+		$query = get_posts( $args );
+
+		$template_search = $query[0];
+		$curr_id = $template_search->ID;
+	}
+
 	// If post pass protected and pass not supplied return original content
 	if ( post_password_required( $curr_id ) ) {
 		return $content;
