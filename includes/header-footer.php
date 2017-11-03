@@ -116,7 +116,7 @@ function dslc_hf_init() {
 			array(
 				'label' => __( 'Position', 'live-composer-page-builder' ),
 				'std' => 'relative',
-				'descr' => __( '<strong>Relative</strong> is normal positioning. <strong>Fixed</strong> will make the header/footer scroll with the page. <strong>Absolute</strong> will make the regular page content go behind the header/footer.', 'live-composer-page-builder' ),
+				'descr' => __( '<strong>Relative</strong> is normal positioning. <strong>Fixed</strong> position will make the header/footer sticky on the top of the browser while the page is scrolled. <strong>Absolute</strong> will make the regular page content go behind the header/footer.', 'live-composer-page-builder' ),
 				'id' => 'dslc_hf_position',
 				'type' => 'radio',
 				'choices' => array(
