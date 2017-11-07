@@ -545,6 +545,16 @@ function dslc_filter_content( $content ) {
 	// Get ID of the post in which the content filter fired.
 	$curr_id = get_the_ID();
 
+	if ( is_category() ) {
+		$categories = get_the_category();
+		$curr_id = $categories[0]->cat_ID;
+	}
+
+	if ( is_tag() ) {
+		$tags = get_the_tags();
+		$curr_id = $tags[0]->term_id;
+	}
+
 	if ( is_search() ) {
 
 		$args = array(
