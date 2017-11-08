@@ -65,7 +65,7 @@ function dslc_plugin_options_display( $tab = '' ) {
 
 	?>
 	<style>
-		#jstabs .tab{display: none}
+		#lc-settings-tabs .tab{display: none}
 	</style>
 	<div class="wrap">
 		<h2 id="dslc-main-title">Live Composer <span class="dslc-ver"><?php echo esc_html( DS_LIVE_COMPOSER_VER ); ?></span></h2>
@@ -92,7 +92,7 @@ function dslc_plugin_options_display( $tab = '' ) {
 		</h2>
 
 
-		<div id="jstabs">
+		<div id="lc-settings-tabs">
 				<!-- Getting Started Tab -->
 				<div class="tab" <?php if ( $anchor != 'dslc_settings' ) echo 'style="display:block"'; ; ?> id="tab-for-tab-extend">
 					<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-extend.php'; ?>
@@ -112,12 +112,12 @@ function dslc_plugin_options_display( $tab = '' ) {
 			jQuery(".nav-tab-wrapper > a").on('click', function() {
 				if ($(this).data('nav-to') != null ) {
 
-					$("#jstabs .tab").hide();
+					$("#lc-settings-tabs .tab").hide();
 					$(".nav-tab-active").removeClass('nav-tab-active');
 					$("#tab-for-" + $(this).data('nav-to')).show();
 					$(this).addClass('nav-tab-active')
 
-					var refer = $("#jstabs").find("input[name='_wp_http_referer']");
+					var refer = $("#lc-settings-tabsjstabs").find("input[name='_wp_http_referer']");
 					refer.val( '<?php echo admin_url( 'admin.php?page=dslc_plugin_options&anchor=dslc_settings&settings-updated=true' ); ?>' );
 
 					return false;

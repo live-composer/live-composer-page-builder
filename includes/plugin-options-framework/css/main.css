@@ -1,3 +1,4 @@
+
 .dslc-clear-cache {
     color: #D54E21;
     margin-left: 12px;
@@ -212,6 +213,10 @@
 }
 
 
+#lc-settings-tabs, #lc-settings-tabs * {
+    box-sizing: border-box;
+}
+
 /**
  * ----------------------------------------------------------------------
  * New Panel Styles for the LC options seciton
@@ -226,7 +231,55 @@
 	margin: 16px 0;
 	overflow: auto;
 	padding: 36px 3% 23px 3%;
-	position: relative;
+    position: relative;
+}
+
+.dslc-panel.no-top-margin {
+    margin-top: -20px;
+    border-top: none;
+}
+
+.lc-panel-cta {
+    margin-top: 3em;
+    margin-bottom: 3em;
+}
+
+.lc-align-center {
+    text-align: center;
+}
+
+.lc-wrap.lc-centered-panels  {
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dslc-panel.padding-medium{
+    padding: 36px 9% 36px 9%;
+}
+
+.dslc-panel hr {
+    margin: 3em 0;
+}
+
+
+
+.lc-panel-icon-hero {
+    color: #9EA3A8;
+    margin: 40px 0 -10px;
+    text-align: center;
+}
+
+.dashicons.orange {
+    color: #D54E21;
+}
+    
+
+.lc-panel-icon-hero  .dashicons {
+    font-size: 80px;
+    line-height: 1;
+    width: auto;
+    height: auto;
 }
 
 .dslc-panel h2 {
@@ -236,9 +289,34 @@
     margin: 0;
 }
 
+.dslc-panel h2.lc-huge {
+    margin: 40px 0 .6em;
+    font-size: 3.3em;
+    line-height: 1.2;
+    font-weight: 300;
+    text-align: center;
+}
+
+.dslc-panel.lc-dark-panel h2,
+.dslc-panel.lc-dark-panel h3,
+.dslc-panel.lc-dark-panel .lc-column-list {
+    color: #fff;
+}
+
+.dslc-panel.lc-dark-panel .lc-column-list .dashicons {
+    color: rgba(255, 255, 255, 0.65);
+}
+
 .dslc-panel h3 {
 	font-size: 16px;
 	margin: 1.33em 0 0;
+}
+
+.dslc-panel h3.lc-huge {
+    margin: 40px 0 .6em;
+    font-size: 2.4em;
+    line-height: 1.2;
+    font-weight: 300;
 }
 
 .dslc-panel h3 .dashicons{
@@ -288,6 +366,97 @@
 .dslc-panel p {
     color: #72777c;
 }
+
+.dslc-panel.lc-dark-panel p {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.dslc-panel  .lc-larger-text {
+    font-size: 1.2em;
+}
+
+
+.dslc-panel .lc-description{
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 300;
+    line-height: 1.4;
+    margin-bottom: 2em;
+    color: #23282d;
+}
+
+.dslc-panel img {
+    max-width: 100%;
+    margin-bottom: 0;
+}
+
+.dslc-panel.lc-dark-panel p.lc-description {
+    color: rgba(255, 255, 255, 1);
+}
+
+.lc-premium-features,
+.lc-divided-panels {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.lc-premium-feature-screenshot {
+    line-height: 0; /* Removes unwanted spacing bellow the image */
+}
+
+.lc-divided-panels {
+    align-items: center;
+}
+
+.lc-panel-half {
+    max-width: 50%;
+}
+
+.lc-image-column {
+    padding-left: 30px;
+}
+
+.lc-image-column img {
+    right: -10px;
+    position: relative;
+}
+
+.lc-column-list {
+
+}
+
+.lc-column-list li {
+    display: inline-block;
+    width: 49%;
+    margin-bottom: 12px;
+    font-size: 1.2em;
+    font-weight: 300;
+}
+
+.lc-column-list li .dashicons {
+    margin-top: 6px;
+    margin-right: 10px;
+}
+
+.lc-premium-features > div {
+    max-width: 190px;
+    min-width: 180px;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+#wpbody-content .lc-premium-feature-description {
+    color: #23282D;
+    padding: 10px;
+    margin: 0;
+    text-align: center;
+    font-size: 1.2em;
+    line-height: 1.4;
+}
+
 .dslc-panel a {
     text-decoration: none;
 }
@@ -344,15 +513,44 @@
    content: "\f487";
 }
 
+
+.lc-panel-woo {
+    background-color: #A55095;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.lc-panel-ninjaforms {
+    background-color: #FFFFFF;
+    background-repeat: no-repeat;
+    background-size: 310px;
+    background-position: 90% bottom;
+}
+
+.lc-panel-acf {
+    background-color: #26E6B9;
+}
+
+
+#lc-settings-tabs .lc-panel-designs {
+    padding-bottom: 320px;
+}
+
+.lc-text-center {
+    text-align: center;
+}
+
+
+
 /**
  * Tab Extend
  */
 
-.dslc-tab-extend {
-    margin: 0;
-    padding: 0;
-    max-width: 100%;
-}
+/* .dslc-tab-extend { */
+    /* margin: 0; */
+    /* padding: 0; */
+    /* max-width: 100%; */
+/* } */
 
 .dslc-tab-extend .headline-feature {
     max-width: 1100px;
