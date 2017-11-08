@@ -2,8 +2,8 @@
 Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page, page builder plugin, drag-n-drop page builder
 Requires at least: 4.7
-Tested up to: 4.8.2
-Stable tag: 1.3.7
+Tested up to: 4.8
+Stable tag: 1.3.8
 License: GPLv3
 
 Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
@@ -133,6 +133,16 @@ Upcoming Releases:
 
 * [Please, report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
 * [You can download any previous version here](https://github.com/live-composer/live-composer-page-builder/releases)
+
+= 1.3.8 - November 8th 2017 =
+
+= Bug Fixes: =
+* Issue [#784](https://github.com/livecomposer/live-composer-page-builder/issues/784): Fixed: The search archive listing issue with the very first post
+* Issue [#830](https://github.com/live-composer/live-composer-page-builder/issues/830): Fixed: Header position description is not quite accurate
+
+= Improved: =
+Issue [#825](https://github.com/livecomposer/live-composer-page-builder/issues/825): Improve function 'dslc_get_archive_template_by_pt'
+
 
 = 1.3.7 - October 4th 2017 =
 
