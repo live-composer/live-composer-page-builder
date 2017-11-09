@@ -14,9 +14,11 @@ matrix:
     env: WP_VERSION=latest WP_MULTISITE=1
   - php: 5.3
     env: WP_VERSION=latest
-    dist: precise
+    # dist: precise
+    dist: trusty # this enables us to use jdk_switcher
 
 before_script:
+- jdk_switcher use oraclejdk8 # select the right Java for Selenium tests
 - export PATH="$HOME/.composer/vendor/bin:$PATH"
 - |
   if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
