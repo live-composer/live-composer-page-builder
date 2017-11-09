@@ -18,7 +18,7 @@ matrix:
     dist: precise # trusty not working with php 5.3
 
 before_script:
-- jdk_switcher use oraclejdk8 # select the right Java for Selenium tests
+# - jdk_switcher use oraclejdk8 # select the right Java for Selenium tests
 - export PATH="$HOME/.composer/vendor/bin:$PATH"
 - |
   if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
