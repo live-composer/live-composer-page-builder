@@ -1,0 +1,3 @@
+
+To run tests in terminal launch:
+$> clear && composer test

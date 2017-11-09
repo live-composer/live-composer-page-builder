@@ -17,3 +17,6 @@ $RECYCLE.BIN/
 
 # Grunt
 node_modules
+
+# Composer
+vendor

@@ -1,33 +1,68 @@
-# This file is congiguration file for Travis CI
-# We use it for testing and code quality controls.
+sudo: false
 
 language: php
 
-php:
-#- 5.3
-- 5.4
-#- 5.5
-#- 5.6
-#- 7.0
-#- hhvm
+notifications:
+  email:
+    on_success: never
+    on_failure: change
 
-env:
-- WP_VERSION=latest WP_MULTISITE=0
-#- WP_VERSION=4.4 WP_MULTISITE=0
-#- WP_VERSION=4.3 WP_MULTISITE=0
-#- WP_VERSION=4.2 WP_MULTISITE=0
-#- WP_VERSION=4.1 WP_MULTISITE=0
-#- WP_VERSION=4.0 WP_MULTISITE=0
+branches:
+  only:
+    - master
 
-#matrix:
-#  include:
-#    - php: 5.3
-#      env: WP_VERSION=latest WP_MULTISITE=1
-#  exclude:
-#    - php: hhvm
-#      env: WP_VERSION=4.0 WP_MULTISITE=0
+cache:
+  directories:
+    - vendor
+    - $HOME/.composer/cache
+
+matrix:
+  include:
+    - php: 7.1
+      env: WP_VERSION=latest
+    - php: 7.0
+      env: WP_VERSION=latest
+    - php: 5.6
+      env: WP_VERSION=4.7
+    - php: 5.6
+      env: WP_VERSION=latest
+    - php: 5.6
+      env: WP_VERSION=trunk
+    - php: 5.6
+      env: WP_TRAVISCI=phpcs
+    - php: 5.3
+      env: WP_VERSION=latest
 
 before_script:
-    - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+  - export PATH="$HOME/.composer/vendor/bin:$PATH"
+  - |
+    if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
+      phpenv config-rm xdebug.ini
+    else
+      echo "xdebug.ini does not exist"
+    fi
+  - |
+    if [[ ! -z "$WP_VERSION" ]] ; then
+      bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+      if [[ ${TRAVIS_PHP_VERSION:0:2} == "5." ]]; then
+        composer global require "phpunit/phpunit=4.8.*"
+      else
+        composer global require "phpunit/phpunit=5.7.*"
+      fi
+    fi
+  - |
+    if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
+      composer global require wp-coding-standards/wpcs
+      phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
+    fi
 
-script: phpunit
+script:
+  - |
+    if [[ ! -z "$WP_VERSION" ]] ; then
+      phpunit
+      WP_MULTISITE=1 phpunit
+    fi
+  - |
+    if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
+      phpcs
+    fi
