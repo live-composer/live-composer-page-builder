@@ -53,7 +53,7 @@ script:
   fi
 - whereis google-chrome-stable
 - whereis chromedriver
-– codecept run acceptance --steps
+– php codecept run acceptance --steps
 
 addons:
   sauce_connect: # Connecto to Sauce Labs
