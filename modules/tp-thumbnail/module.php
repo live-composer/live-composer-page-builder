@@ -346,7 +346,9 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 
 		);
 
-		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array( 'hover_opts' => false ) ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array(
+			'hover_opts' => false,
+		) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		// Cache calculated array in WP Object Cache.
@@ -379,7 +381,6 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 		}
 
 		$thumb_url = $thumb_url[0];
-
 
 		/* Module output starts here */
 

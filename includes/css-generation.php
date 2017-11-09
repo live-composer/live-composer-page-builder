@@ -153,7 +153,6 @@ function dslc_custom_css( $dslc_code = '' ) {
 
 		// ============================================================
 		// Extract code to render CSS for.
-
 		$header_id = false;
 		$footer_id = false;
 
@@ -207,54 +206,53 @@ function dslc_custom_css( $dslc_code = '' ) {
 
 	// Generate CSS for defined code.
 	// Generated code gets added into $dslc_css_style global var.
-	foreach ($code_to_render as $id => $code) {
+	foreach ( $code_to_render as $id => $code ) {
 		// Never output CSS for the currently editing page (already rendered by module).
 		if ( $code ) {
-			if ( ! ( dslc_is_editor_active() && intval($post_id) === intval($id) ) ) {
-			// Output CSS if it's NOT in editing mode
-			// OR outputting CSS for the header/footer.
-			if ( ! dslc_is_editor_active()
-					|| intval($id) === intval($header_id)
-					|| intval($id) === intval($footer_id) ) {
+			if ( ! ( dslc_is_editor_active() && intval( $post_id ) === intval( $id ) ) ) {
+				// Output CSS if it's NOT in editing mode
+				// OR outputting CSS for the header/footer.
+				if ( ! dslc_is_editor_active()
+					|| intval( $id ) === intval( $header_id )
+					|| intval( $id ) === intval( $footer_id ) ) {
 
-				// ! is_singular( 'dslc_hf' )
+					// ! is_singular( 'dslc_hf' )
+					$dslc_css_style .= "\n\n/*  CSS FOR POST ID: " . $id . " */\n";
+					$cache_id = $id;
 
-				$dslc_css_style .= "\n\n/*  CSS FOR POST ID: " . $id . " */\n";
-				$cache_id = $id;
+					// Initiate simple CSS rendering cache.
+					$cache = new DSLC_Cache( 'css' );
 
-				// Initiate simple CSS rendering cache.
-				$cache = new DSLC_Cache( 'css' );
+					// Check if we have CSS for this code cached?
+					if ( $cache->enabled() && $cache->cached( $cache_id ) ) {
+						// Get cached CSS.
+						$cached_page_css = $cache->get_cache( $cache_id );
+						$dslc_css_style .= $cached_page_css;
 
-				// Check if we have CSS for this code cached?
-				if ( $cache->enabled() && $cache->cached( $cache_id ) ) {
-					// Get cached CSS.
-					$cached_page_css = $cache->get_cache( $cache_id );
-					$dslc_css_style .= $cached_page_css;
+						// Get cached Google Fonts request link.
+						$google_fonts = $cache->get_cache( $cache_id, 'fonts' );
+						if ( ! empty( $google_fonts ) ) {
+							$fonts_to_output = array_merge( $fonts_to_output, $google_fonts );
+						}
+					} else {
+						$rendered_code = dslc_render_css( $code );
+						// Save rendered CSS in the cache engine.
+						$cache->set_cache( $rendered_code, $cache_id );
+						$dslc_css_style .= $rendered_code;
 
-					// Get cached Google Fonts request link.
-					$google_fonts = $cache->get_cache( $cache_id, 'fonts' );
-					if ( ! empty( $google_fonts ) ) {
-						$fonts_to_output = array_merge( $fonts_to_output, $google_fonts );
+						// Save Google Fonts request for used fonts.
+						$google_fonts = dslc_get_gfonts();
+						if ( ! empty( $google_fonts ) ) {
+							$fonts_to_output = array_merge( $fonts_to_output, $google_fonts );
+						}
+						$cache->set_cache( $google_fonts, $cache_id, 'fonts' );
+						$dslc_googlefonts_array = array(); // Reset temporary fonts storage.
 					}
-				} else {
-					$rendered_code = dslc_render_css( $code );
-					// Save rendered CSS in the cache engine.
-					$cache->set_cache( $rendered_code, $cache_id );
-					$dslc_css_style .= $rendered_code;
 
-					// Save Google Fonts request for used fonts.
-					$google_fonts = dslc_get_gfonts();
-					if ( ! empty( $google_fonts ) ) {
-						$fonts_to_output = array_merge( $fonts_to_output, $google_fonts );
-					}
-					$cache->set_cache( $google_fonts, $cache_id, 'fonts' );
-					$dslc_googlefonts_array = array(); // Reset temporary fonts storage.
-				}
-
-				$output_css = true;
-			} // End if().
-			}
-		}
+						$output_css = true;
+				} // End if().
+			}// End if().
+		}// End if().
 	} // End foreach().
 
 	// Wrapper width.
@@ -270,7 +268,6 @@ function dslc_custom_css( $dslc_code = '' ) {
 	// Initial ( default ) row CSS.
 	echo dslc_row_get_initial_style();
 	// Echo CSS style.
-
 	if ( $dslc_custom_css_ignore_check || $output_css ) {
 		echo $dslc_css_style;
 	}
@@ -311,7 +308,6 @@ function dslc_render_css( $code ) {
 		// Do CSS shortcode.
 		// $css_output = do_shortcode( $code );
 		// $css_output .= $code;
-
 		// Get rid of section/area shortcodes leaving only modules code.
 		$code = str_replace( '[/dslc_modules_section]', '', $code );
 		$code = str_replace( '[/dslc_modules_area]', '', $code );
@@ -323,7 +319,7 @@ function dslc_render_css( $code ) {
 		foreach ( $code_modules_only as $module ) {
 			if ( trim( $module ) ) {
 				$module_settings_encoded = preg_replace( "/(?:\[dslc_module[A-Za-z=\"' 0-9\-_]*\])/", '', $module );
-				$css_output .= dslc_module_gen_css(array(), $module_settings_encoded );
+				$css_output .= dslc_module_gen_css( array(), $module_settings_encoded );
 			}
 		}
 	}
@@ -442,7 +438,7 @@ function dslc_module_gen_css( $atts, $settings_raw ) {
 		}
 
 		return $css_output;
-	}
+	}// End if().
 
 } add_shortcode( 'dslc_module_gen_css', 'dslc_module_gen_css' );
 
@@ -533,7 +529,6 @@ function dslc_generate_custom_css( $module_structure, $module_settings, $restart
 	$module_instance_id = $module_settings['module_instance_id'];
 	// $dslc_css_style .= $css_output;
 	// ↑↑↑ Cause duplication of CSS code. $dslc_css_style is global.
-
 	return $css_output;
 }
 
@@ -586,7 +581,7 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 
 		// 🔖 RAW CODE CLEANUP
 		// if ( isset( $module_settings[ $option_id ] ) && ! empty( $module_settings[ $option_id ] )  ) {
-		if ( isset( $module_settings[ $option_id ] ) && '' !== $module_settings[ $option_id ] && false !== $module_settings[ $option_id ]  ) {
+		if ( isset( $module_settings[ $option_id ] ) && '' !== $module_settings[ $option_id ] && false !== $module_settings[ $option_id ] ) {
 
 			// Never strip responsive enable/disable property.
 			// Fix for "alter_defaults" and responsive tablet state.
@@ -606,9 +601,8 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 				// Fill the missing setting with default values.
 				// 🔖 RAW CODE CLEANUP
 				// if ( ! isset( $module_settings[ $option_id ] ) || empty( $module_settings[ $option_id ] )  ) {
-				// 	$module_settings[ $option_id ] = $option_arr['std'];
+				// $module_settings[ $option_id ] = $option_arr['std'];
 				// }
-
 				// Extension for the input control (px, %, em...).
 				$ext = ' ';
 				if ( isset( $option_arr['ext'] ) ) {
@@ -691,11 +685,11 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 						if ( 'none none none none ' === $checkbox_val ) {
 							$checkbox_val = 'none';
 						}
-					}
+					}// End if().
 
 					$module_settings[ $option_id ] = $checkbox_val;
 
-				}
+				}// End if().
 
 				// Colors (transparent if empty ).
 				if ( '' === $module_settings[ $option_id ] && ( 'background' === $option_arr['affect_on_change_rule'] || 'background-color' === $option_arr['affect_on_change_rule'] ) ) {
@@ -708,7 +702,7 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 						$organized_array[ $affect_el ][ $affect_rule ] = $prepend . $module_settings[ $option_id ] . $ext . $append;
 					}
 				}
-			}
+			}// End if().
 
 			// If option type is font?
 			if ( 'font' === $option_arr['type'] ) {
@@ -716,11 +710,10 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 					$dslc_googlefonts_array[] = $module_settings[ $option_id ];
 				}
 			}
-		} // If isset and not empty.
-	}
+		} // End if().
+	}// End foreach().
 
 	// ------- SPLIT INTO SEPARATE FUNCTION ------------------------------------
-
 	if ( count( $organized_array ) > 0 ) {
 
 		foreach ( $organized_array as $el => $rules ) {
@@ -733,7 +726,6 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 			 * #selector {
 			 * 	property: value;
 			 * }
-			 *
 			 */
 
 			$css_selector = $el;
@@ -756,7 +748,6 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 			// Argument: $css_declaration and $important_append (or declare it inside)
 			// Output: array with css property:value pairs.
 			// Go through each propery to compose css declaration block.
-
 			$css_declaration_backgrounds = array();
 			$css_declaration_borders = array();
 
@@ -771,12 +762,12 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 				}
 
 				// Do not output properties with restricted characters in value.
-				if ( preg_match( "/([\[\];<>]+)/", $css_value ) ) {
+				if ( preg_match( '/([\[\];<>]+)/', $css_value ) ) {
 					unset( $css_declaration[ $css_property ] );
 				}
 
 				// Do not output properties if it's not in allowed characters set.
-				if ( ! preg_match( "/([-a-z@]{3,60})/", $css_property ) ) {
+				if ( ! preg_match( '/([-a-z@]{3,60})/', $css_property ) ) {
 					unset( $css_declaration[ $css_property ] );
 				}
 
@@ -786,7 +777,6 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 				}
 
 				// -------- SPLIT INTO A SEPARATE FUNCTION -------------
-
 				// Separate all the backgroud properties (beside 'background-color') into a new array.
 				/*
 				if ( 'background-color' !== $css_property && stristr( $css_property, 'background-' ) ) {
@@ -794,7 +784,6 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 					unset( $css_declaration[ $css_property ] );
 				}
 				*/
-
 
 				// Separate all the boder properties (beside 'border-radius') into a new array.
 				if ( stristr( $css_property, 'border-' ) &&
@@ -813,8 +802,8 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 
 					foreach ( $font_families as $font ) {
 						$font = trim( $font );
-						$font = str_replace('"', '', $font);
-						$font = str_replace('\'', '', $font);
+						$font = str_replace( '"', '', $font );
+						$font = str_replace( '\'', '', $font );
 						$font = '"' . $font . '",';
 
 						$css_value .= $font;
@@ -823,8 +812,7 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 					$css_value = rtrim( $css_value, ',' ); // Remove trailing comma.
 					$css_declaration[ $css_property ] = $css_value;
 				}
-
-			}
+			}// End foreach().
 
 			/**
 			 * Add $css_declaration_borders to the main css block
@@ -839,8 +827,6 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 				if ( ! empty( $border_width ) && '0px' !== $border_width ) {
 					$output_border_declaration = true;
 				}
-
-			// The code below fix the bug with posts grid and separator property.
 			} elseif ( isset( $css_declaration_borders['border-top-width'] ) ||
 					isset( $css_declaration_borders['border-right-width'] ) ||
 					isset( $css_declaration_borders['border-bottom-width'] ) ||
@@ -885,8 +871,7 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 				// $css_declaration['border'] = 'none'; // Causing issues
 			}
 
-			//---------
-
+			// ---------
 			$css_output_el = ''; // Var for temporary output of current el.
 			$css_output_el .= $css_selector . '{';
 
@@ -899,26 +884,24 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 			if ( $do_css_output ) {
 				$css_output .= $css_output_el;
 			}
-
-			// @todo: dont' forget about . $important_append after each value;
-
-		}
-	}
-// ------- SPLIT INTO SEPARATE FUNCTION ------------------------------------
+		}// End foreach().
+	}// End if().
+	// ------- SPLIT INTO SEPARATE FUNCTION ------------------------------------
 	return $css_output;
 }
 
 
 /**
  * Check if string provided is variation of the border radius property in CSS.
+ *
  * @param  string $property_name Property name to chek.
  * @return bool                  True if it's variation of the border radius property.
  */
-function dslc_helper_is_border_radius ( $property_name ) {
+function dslc_helper_is_border_radius( $property_name ) {
 	// Remove empty spaces.
 	$property_name = trim( $property_name );
 
-	if ( stristr( $property_name, 'border-') && stristr( $property_name, '-radius') ) {
+	if ( stristr( $property_name, 'border-' ) && stristr( $property_name, '-radius' ) ) {
 		return true;
 	} else {
 		return false;

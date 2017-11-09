@@ -583,7 +583,9 @@ class DSLC_Logo extends DSLC_Module {
 
 		);
 
-		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array( 'hover_opts' => false ) ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array(
+			'hover_opts' => false,
+		) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		// Cache calculated array in WP Object Cache.
@@ -599,7 +601,6 @@ class DSLC_Logo extends DSLC_Module {
 	 * @return void
 	 */
 	function output( $options ) {
-
 
 		global $dslc_active;
 

@@ -34,7 +34,6 @@ if ( ! function_exists( 'dslc_search_filter_join' ) ) {
 		return $join;
 
 	}
-
 } add_filter( 'posts_join', 'dslc_search_filter_join' );
 
 
@@ -44,7 +43,7 @@ if ( ! function_exists( 'dslc_search_filter_join' ) ) {
  * @since 1.0
  */
 
-if( ! function_exists( 'dslc_search_filter_request' ) ) {
+if ( ! function_exists( 'dslc_search_filter_request' ) ) {
 
 	function dslc_search_filter_request( $where ) {
 
@@ -64,18 +63,18 @@ if( ! function_exists( 'dslc_search_filter_request' ) ) {
 			$user_request = esc_sql( trim( $wp_query->query_vars['s'] ) );
 
 			// Separate keywords from search terms
-			$user_request_arr = preg_split( "/[\s,]+/", $user_request );
+			$user_request_arr = preg_split( '/[\s,]+/', $user_request );
 
 			// Append the post meta ( dslc_content_for_search ) in the request
-			$where .=  " OR (" . $wpdb->postmeta . ".meta_key IN ('dslc_content_for_search') ";
+			$where .= ' OR (' . $wpdb->postmeta . ".meta_key IN ('dslc_content_for_search') ";
 
 			// Append the post value(s) in the request
 			foreach ( $user_request_arr as $value ) {
-				$where .= "AND " . $wpdb->postmeta . ".meta_value LIKE '%" . $value . "%' ";
+				$where .= 'AND ' . $wpdb->postmeta . ".meta_value LIKE '%" . $value . "%' ";
 			}
 
 			// End with the usual WP checks like post status
-			$where .= $request_append . ") ";
+			$where .= $request_append . ') ';
 
 		}
 
@@ -83,8 +82,8 @@ if( ! function_exists( 'dslc_search_filter_request' ) ) {
 		return $where;
 
 	}
-
-} add_filter( 'posts_where', 'dslc_search_filter_request' );
+}// End if().
+	add_filter( 'posts_where', 'dslc_search_filter_request' );
 
 /**
  * Eliminate duplicated search results
@@ -98,11 +97,11 @@ if ( ! function_exists( 'dslc_search_filter_distinct' ) ) {
 
 		global $wp_query;
 
-		if ( is_search() && ! empty( $wp_query->query_vars['s'] ) )
-			$distinct .= "DISTINCT";
+		if ( is_search() && ! empty( $wp_query->query_vars['s'] ) ) {
+			$distinct .= 'DISTINCT';
+		}
 
 		return $distinct;
 
 	}
-
 } add_filter( 'posts_distinct', 'dslc_search_filter_distinct' );

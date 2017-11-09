@@ -10,7 +10,6 @@ class DSLC_Module {
 
 	function shared_options( $options_id, $atts = false ) {
 		// Average running time 0.00150696436564 (1.3%)
-
 		$animation_options_choices = array(
 			array(
 				'label' => 'None',
@@ -987,7 +986,7 @@ class DSLC_Module {
 						'label' => 'Dotted',
 						'value' => 'dotted',
 					),
-				)
+				),
 			),
 
 			array(
@@ -1974,7 +1973,6 @@ class DSLC_Module {
 
 	function module_before( $options ) {
 		// Average running time 0.0339393615723 (28%)
-
 		global $dslc_active;
 		global $dslc_should_filter;
 		$dslc_should_filter = false;
@@ -2119,7 +2117,7 @@ class DSLC_Module {
 
 			<?php
 				// If Live Composer in editing mode: output <style> block for the current module.
-				if ( DS_LIVE_COMPOSER_ACTIVE && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) : ?>
+			if ( DS_LIVE_COMPOSER_ACTIVE && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) : ?>
 
 				<style type="text/css" id="css-for-dslc-module-<?php echo esc_attr( $options['module_instance_id'] ); ?>"><?php
 
@@ -2147,26 +2145,26 @@ class DSLC_Module {
 				?></style>
 
 				<div class="dslca-module-manage">
-					<span class="dslca-module-manage-line"></span>
-					<div class="dslca-module-manage-inner">
-						<span class="dslca-manage-action dslca-module-manage-hook dslca-module-edit-hook" title="<?php esc_attr_e( 'Edit options', 'live-composer-page-builder' ); ?>"><span class="dslca-icon dslc-icon-cog"></span></span>
-						<span class="dslca-manage-action dslca-module-manage-hook dslca-copy-module-hook" title="<?php esc_attr_e( 'Duplicate', 'live-composer-page-builder' ); ?>"><span class="dslca-icon dslc-icon-copy"></span></span>
-						<span class="dslca-manage-action dslca-module-manage-hook dslca-move-module-hook" title="<?php esc_attr_e( 'Drag to move', 'live-composer-page-builder' ); ?>"><span class="dslca-icon dslc-icon-move"></span></span>
-						<span class="dslca-manage-action dslca-module-manage-hook dslca-change-width-module-hook" title="<?php esc_attr_e( 'Change width', 'live-composer-page-builder' ); ?>">
-							<span class="dslca-icon dslc-icon-columns"></span>
-							<div class="dslca-change-width-module-options">
-								<span><?php esc_attr_e( 'Element Width', 'live-composer-page-builder' ); ?></span>
-								<span data-size="1">1/12</span><span data-size="2">2/12</span>
-								<span data-size="3">3/12</span><span data-size="4">4/12</span>
-								<span data-size="5">5/12</span><span data-size="6">6/12</span>
-								<span data-size="7">7/12</span><span data-size="8">8/12</span>
-								<span data-size="9">9/12</span><span data-size="10">10/12</span>
-								<span data-size="11">11/12</span><span data-size="12">12/12</span>
-							</div>
-						</span>
-						<span class="dslca-manage-action dslca-module-manage-hook dslca-delete-module-hook" title="<?php esc_attr_e( 'Delete', 'live-composer-page-builder' ); ?>"><span class="dslca-icon dslc-icon-remove"></span></span>
+				<span class="dslca-module-manage-line"></span>
+				<div class="dslca-module-manage-inner">
+				<span class="dslca-manage-action dslca-module-manage-hook dslca-module-edit-hook" title="<?php esc_attr_e( 'Edit options', 'live-composer-page-builder' ); ?>"><span class="dslca-icon dslc-icon-cog"></span></span>
+				<span class="dslca-manage-action dslca-module-manage-hook dslca-copy-module-hook" title="<?php esc_attr_e( 'Duplicate', 'live-composer-page-builder' ); ?>"><span class="dslca-icon dslc-icon-copy"></span></span>
+				<span class="dslca-manage-action dslca-module-manage-hook dslca-move-module-hook" title="<?php esc_attr_e( 'Drag to move', 'live-composer-page-builder' ); ?>"><span class="dslca-icon dslc-icon-move"></span></span>
+				<span class="dslca-manage-action dslca-module-manage-hook dslca-change-width-module-hook" title="<?php esc_attr_e( 'Change width', 'live-composer-page-builder' ); ?>">
+					<span class="dslca-icon dslc-icon-columns"></span>
+					<div class="dslca-change-width-module-options">
+						<span><?php esc_attr_e( 'Element Width', 'live-composer-page-builder' ); ?></span>
+						<span data-size="1">1/12</span><span data-size="2">2/12</span>
+						<span data-size="3">3/12</span><span data-size="4">4/12</span>
+						<span data-size="5">5/12</span><span data-size="6">6/12</span>
+						<span data-size="7">7/12</span><span data-size="8">8/12</span>
+						<span data-size="9">9/12</span><span data-size="10">10/12</span>
+						<span data-size="11">11/12</span><span data-size="12">12/12</span>
 					</div>
-					<?php if ( DS_LIVE_COMPOSER_DEV_MODE ) : ?>
+				</span>
+				<span class="dslca-manage-action dslca-module-manage-hook dslca-delete-module-hook" title="<?php esc_attr_e( 'Delete', 'live-composer-page-builder' ); ?>"><span class="dslca-icon dslc-icon-remove"></span></span>
+				</div>
+				<?php if ( DS_LIVE_COMPOSER_DEV_MODE ) : ?>
 						<div class="dslca-manage-action dslca-module-manage-inner dslca-dev-mode">
 							<span class="dslca-module-manage-hook dslca-module-get-defaults-hook"><span class="dslca-icon dslc-icon-upload-alt"></span></span>
 						</div>
@@ -2185,7 +2183,6 @@ class DSLC_Module {
 
 	function module_after( $user_options ) {
 		// Average running time 0.0530054050943 (48%)
-
 		global $dslc_active;
 
 		$options = array();
@@ -2223,11 +2220,9 @@ class DSLC_Module {
 
 				<?php
 				// Output each options as a hidden textarea.
-
 				// Go through standard set of options described in the module class.
 				// Array $options do not contains custom data, but structure and defaults.
 				// Array $user_options contains custom module settings.
-
 				foreach ( $options as $key => $option ) {
 
 					$id = $option['id'];
@@ -2285,7 +2280,6 @@ class DSLC_Module {
 					}
 
 					// Sanitize Option Values.
-
 					if ( $option_value ) {
 
 						$option_satinitize_data = array(
@@ -2300,7 +2294,7 @@ class DSLC_Module {
 					$option_value = dslc_encode_shortcodes( $option_value );
 
 					echo '<textarea class="dslca-module-option-front" data-id="' . esc_attr( $id ) . '">' . stripslashes( $option_value ) . '</textarea>';
-				}
+				}// End foreach().
 
 				// Output additional (custom) options that are not part of the default module structure.
 				foreach ( $user_options as $user_option_id => $user_option_val ) {

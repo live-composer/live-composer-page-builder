@@ -29,13 +29,15 @@ class DSLC_Options_Extender {
 	 */
 	function get_option_array( $opt_id, $ext_id ) {
 
-		if ( ! isset( $this->extension_options[$ext_id] ) ) return array();
+		if ( ! isset( $this->extension_options[ $ext_id ] ) ) { return array();
+		}
 
-		foreach ( $this->extension_options[$ext_id]['sections'] as $section ) {
+		foreach ( $this->extension_options[ $ext_id ]['sections'] as $section ) {
 
 			foreach ( $section['options'] as $option ) {
 
-				if ( $option['id'] == $opt_id ) return $option;
+				if ( $option['id'] == $opt_id ) { return $option;
+				}
 			}
 		}
 
@@ -44,16 +46,17 @@ class DSLC_Options_Extender {
 
 	/**
 	 * Add settings new panel to existing panels stack
+	 *
 	 * @param array $options_array
 	 */
 	function add_settings_panel( $options_array ) {
 
-		if ( ! isset( $this->extension_options[$options_array['extension_id']] ) ) {
+		if ( ! isset( $this->extension_options[ $options_array['extension_id'] ] ) ) {
 
 			$this->extension_options[ $options_array['extension_id'] ] = $options_array;
 		} else {
 
-			throw new Exception( "Settings panel with given extension_id already exists. Try another extension_id." );
+			throw new Exception( 'Settings panel with given extension_id already exists. Try another extension_id.' );
 		}
 	}
 
@@ -88,6 +91,7 @@ class DSLC_Options_Extender {
 
 	/**
 	 * Registers desired extension settings
+	 *
 	 * @param  array $extension
 	 */
 	private function register_setting( $extension ) {
@@ -131,6 +135,7 @@ class DSLC_Options_Extender {
 
 	/**
 	 * Process one custom section
+	 *
 	 * @param array $section
 	 */
 	private function add_setting_section( $section ) {
@@ -142,11 +147,12 @@ class DSLC_Options_Extender {
 			'dslc_' . $section['extension_id'] . '_' . $section['id'] // where to show
 		);
 
-		if( ! is_array( $section['options'] ) ) return;
+		if ( ! is_array( $section['options'] ) ) { return;
+		}
 
 		foreach ( $section['options'] as $option ) {
 
-			$option['section'] = 'dslc_' . $section['extension_id'] . "_" . $section['id'];
+			$option['section'] = 'dslc_' . $section['extension_id'] . '_' . $section['id'];
 			$option['extension_id'] = $section['extension_id'];
 
 			$this->add_option_field( $option );
@@ -155,6 +161,7 @@ class DSLC_Options_Extender {
 
 	/**
 	 * Adds one option field into system
+	 *
 	 * @param array $field
 	 */
 	private function add_option_field( $option ) {
@@ -176,11 +183,11 @@ class DSLC_Options_Extender {
 		add_settings_field(
 
 			$option['id'], // id
-			$option['label'], //title
-			'dslc_option_display_funcitons_router', //callback
-			$option['section'], //page
-			$option['section'], //section
-			$option //args
+			$option['label'], // title
+			'dslc_option_display_funcitons_router', // callback
+			$option['section'], // page
+			$option['section'], // section
+			$option // args
 		);
 	}
 }

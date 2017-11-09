@@ -24,9 +24,9 @@ function dslc_nav_menus_opts() {
 				'name' => 'dslc_plugin_options_navigation_m[menus]',
 				'label' => __( 'Menus', 'live-composer-page-builder' ),
 				'std' => '',
-				'type' => 'list'
-			)
-		)
+				'type' => 'list',
+			),
+		),
 	);
 
 } add_action( 'dslc_hook_register_options', 'dslc_nav_menus_opts' );
@@ -60,7 +60,7 @@ function dslc_nav_menus() {
  * Shortcode needed to render Menu to make sure
  * current menu item highlighted properly even when LC cache enabled.
  */
-function dslc_nav_render_menu ( $atts, $content = null ) {
+function dslc_nav_render_menu( $atts, $content = null ) {
 
 	$theme_location = '';
 	$menu_class = 'menu';
@@ -74,7 +74,10 @@ function dslc_nav_render_menu ( $atts, $content = null ) {
 	}
 
 	ob_start();
-	wp_nav_menu( array( 'theme_location' => $theme_location, 'menu_class' => $menu_class ));
+	wp_nav_menu( array(
+		'theme_location' => $theme_location,
+		'menu_class' => $menu_class,
+	) );
 	$shortcode_rendered = ob_get_contents();
 	ob_end_clean();
 
@@ -86,7 +89,7 @@ function dslc_nav_render_menu ( $atts, $content = null ) {
  * Shortcode needed to render Menu to make sure
  * current menu item highlighted properly even when LC cache enabled.
  */
-function dslc_nav_render_mobile_menu ( $atts, $content = null ) {
+function dslc_nav_render_mobile_menu( $atts, $content = null ) {
 
 	$theme_location = '';
 

@@ -757,7 +757,9 @@ class DSLC_Image extends DSLC_Module {
 			),
 		);
 
-		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array( 'hover_opts' => false ) ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array(
+			'hover_opts' => false,
+		) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		// Cache calculated array in WP Object Cache.
@@ -773,7 +775,6 @@ class DSLC_Image extends DSLC_Module {
 	 * @return void
 	 */
 	function output( $options ) {
-
 
 		/* Module output starts here */
 
@@ -806,7 +807,7 @@ class DSLC_Image extends DSLC_Module {
 
 		?>
 		<div class="dslc-image-container">
-		<div class="dslc-image"<?php if ( $dslc_is_admin ) echo ' data-exportable-content'; ?>>
+		<div class="dslc-image"<?php if ( $dslc_is_admin ) { echo ' data-exportable-content';} ?>>
 
 			<?php if ( empty( $options['image'] ) && empty( $options['image_url'] ) && is_user_logged_in() ) : ?>
 
@@ -835,7 +836,7 @@ class DSLC_Image extends DSLC_Module {
 
 				} else {
 
-					if ( ! empty( $options['resize_width'] ) || ! empty ( $options['resize_height'] ) ) {
+					if ( ! empty( $options['resize_width'] ) || ! empty( $options['resize_height'] ) ) {
 
 						$resize = true;
 						$resize_width = false;
@@ -845,7 +846,7 @@ class DSLC_Image extends DSLC_Module {
 							$resize_width = $options['resize_width'];
 						}
 
-						if ( ! empty ( $options['resize_height'] ) ) {
+						if ( ! empty( $options['resize_height'] ) ) {
 							$resize_height = $options['resize_height'];
 						}
 
@@ -890,7 +891,7 @@ class DSLC_Image extends DSLC_Module {
 					<div class="dslc-image-caption">
 
 						<?php if ( $dslc_is_admin ) : ?>
-							<div class="dslca-editable-content" data-id="custom_text" data-type="simple" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?>>
+							<div class="dslca-editable-content" data-id="custom_text" data-type="simple" <?php if ( $dslc_is_admin ) { echo 'contenteditable';} ?>>
 								<?php
 								$output_content = stripslashes( $options['custom_text'] );
 								echo apply_filters( 'dslc_before_render', $output_content );
@@ -912,8 +913,6 @@ class DSLC_Image extends DSLC_Module {
 		</div><!-- .dslc-image -->
 		</div>
 		<?php
-
-
 
 	}
 }

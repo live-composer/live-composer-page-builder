@@ -2451,13 +2451,13 @@ class DSLC_WooCommerce_Products extends DSLC_Module {
 	 */
 	function output( $options ) {
 	?>
-		[dslc_module_woocommerce_output]<?php echo serialize($options); ?>[/dslc_module_woocommerce_output]
+		[dslc_module_woocommerce_output]<?php echo serialize( $options ); ?>[/dslc_module_woocommerce_output]
 	<?php
 
 	}
 }
 
-function dslc_module_woocommerce_output ( $atts, $content = null ) {
+function dslc_module_woocommerce_output( $atts, $content = null ) {
 	// Uncode module options passed as serialized content.
 	$options = unserialize( $content );
 
@@ -2470,10 +2470,10 @@ function dslc_module_woocommerce_output ( $atts, $content = null ) {
 
 	global $dslc_active;
 
-	if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
+	if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 		$dslc_is_admin = true;
-	else
-		$dslc_is_admin = false;
+	} else { $dslc_is_admin = false;
+	}
 
 	// Fix slashes on apostrophes
 	if ( isset( $options['addtocart_text'] ) ) {
@@ -2485,22 +2485,25 @@ function dslc_module_woocommerce_output ( $atts, $content = null ) {
 		$options['details_text'] = stripslashes( $options['details_text'] );
 	}
 
-
-	if ( ! isset( $options['price_pos'] ) )
+	if ( ! isset( $options['price_pos'] ) ) {
 		$options['price_pos'] = 'center';
+	}
 
 	if ( class_exists( 'Woocommerce' ) ) :
 
 		/* Module output stars here */
 
-			if ( is_front_page() ) { $paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1; } else { $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1; }
+		if ( is_front_page() ) { $paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1;
+		} else { $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1; }
 
 			// Fix for pagination from other modules affecting this one when pag disabled
-			if ( $options['pagination_type'] == 'disabled' ) $paged = 1;
+		if ( $options['pagination_type'] == 'disabled' ) { $paged = 1;
+		}
 
 			// Fix for offset braking pagination
 			$query_offset = $options['offset'];
-			if ( $query_offset > 0 && $paged > 1 ) $query_offset = ( $paged - 1 ) * $options['amount'] + $options['offset'];
+		if ( $query_offset > 0 && $paged > 1 ) { $query_offset = ( $paged - 1 ) * $options['amount'] + $options['offset'];
+		}
 
 			$args = array(
 				'paged' => $paged,
@@ -2511,85 +2514,91 @@ function dslc_module_woocommerce_output ( $atts, $content = null ) {
 			);
 
 			// Add offset
-			if ( $query_offset > 0 ) {
-				$args['offset'] = $query_offset;
-			}
+		if ( $query_offset > 0 ) {
+			$args['offset'] = $query_offset;
+		}
 
-			if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-				$args['post_status'] = array('publish', 'private');
-			}
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+			$args['post_status'] = array( 'publish', 'private' );
+		}
 
-			if ( isset( $options['categories'] ) && $options['categories'] != '' ) {
+		if ( isset( $options['categories'] ) && $options['categories'] != '' ) {
 
-				$cats_array = explode( ' ', trim( $options['categories'] ) );
+			$cats_array = explode( ' ', trim( $options['categories'] ) );
 
-				$args['tax_query'] = array(
-					array(
-						'taxonomy' => 'product_cat',
-						'field' => 'slug',
-						'terms' => $cats_array,
-						'operator' => $options['categories_operator']
-					)
-				);
+			$args['tax_query'] = array(
+			array(
+				'taxonomy' => 'product_cat',
+				'field' => 'slug',
+				'terms' => $cats_array,
+				'operator' => $options['categories_operator'],
+			),
+			);
 
-			}
+		}
 
-			if ( $options['orderby'] == 'meta_value_num' ) {
-				$args['meta_key'] = '_price';
-			}
+		if ( $options['orderby'] == 'meta_value_num' ) {
+			$args['meta_key'] = '_price';
+		}
 
 			// Exlcude and Include arrays
 			$exclude = array();
 			$include = array();
 
 			// Exclude current post
-			if ( is_singular( get_post_type() ) )
-				$exclude[] = get_the_ID();
+		if ( is_singular( get_post_type() ) ) {
+			$exclude[] = get_the_ID();
+		}
 
 			// Exclude posts ( option )
-			if ( $options['query_post_not_in'] )
-				$exclude = array_merge( $exclude, explode( ' ', $options['query_post_not_in'] ) );
+		if ( $options['query_post_not_in'] ) {
+			$exclude = array_merge( $exclude, explode( ' ', $options['query_post_not_in'] ) );
+		}
 
 			// Include posts ( option )
-			if ( $options['query_post_in'] )
-				$include = array_merge( $include, explode( ' ', $options['query_post_in'] ) );
+		if ( $options['query_post_in'] ) {
+			$include = array_merge( $include, explode( ' ', $options['query_post_in'] ) );
+		}
 
 			// Include query parameter
-			if ( ! empty( $include ) )
-				$args['post__in'] = $include;
+		if ( ! empty( $include ) ) {
+			$args['post__in'] = $include;
+		}
 
 			// Exclude query parameter
-			if ( ! empty( $exclude ) )
-				$args['post__not_in'] = $exclude;
+		if ( ! empty( $exclude ) ) {
+			$args['post__not_in'] = $exclude;
+		}
 
 			// Author archive page
-			if ( is_author() && $options['query_alter'] == 'enabled' ) {
-				global $authordata;
-				$args['author__in'] = array($authordata->data->ID);
-			}
+		if ( is_author() && $options['query_alter'] == 'enabled' ) {
+			global $authordata;
+			$args['author__in'] = array( $authordata->data->ID );
+		}
 
 			// No paging
-			if ( $options['pagination_type'] == 'disabled' )
-				$args['no_found_rows'] = true;
+		if ( $options['pagination_type'] == 'disabled' ) {
+			$args['no_found_rows'] = true;
+		}
 
 			// Out of stock ( show/hide )
-			if ( $options['outofstock'] == 'disabled' ) {
-				$args['meta_query'] = array(
-					array(
-						'key'     => '_stock_status',
-						'value'   => 'outofstock',
-						'compare' => '!=',
-					),
-				);
-			}
+		if ( $options['outofstock'] == 'disabled' ) {
+			$args['meta_query'] = array(
+			array(
+				'key'     => '_stock_status',
+				'value'   => 'outofstock',
+				'compare' => '!=',
+			),
+			);
+		}
 
 			// Do the query
-			if ( ( is_category() || is_tag() || is_tax() || is_search() || is_date() ) && $options['query_alter'] == 'enabled' ) {
-				global $wp_query;
-				$dslc_query = $wp_query;
-			} else {
-				$dslc_query = new WP_Query( $args );
-			}
+		if ( ( is_category() || is_tag() || is_tax() || is_search() || is_date() ) && $options['query_alter'] == 'enabled' ) {
+			global $wp_query;
+			$dslc_query = $wp_query;
+		} else {
+			$dslc_query = new WP_Query( $args );
+		}
 
 			$columns_class = 'dslc-col dslc-' . $options['columns'] . '-col ';
 			$count = 0;
@@ -2603,48 +2612,48 @@ function dslc_module_woocommerce_output ( $atts, $content = null ) {
 
 			// Main Elements
 			$elements = $options['elements'];
-			if ( ! empty( $elements ) )
-				$elements = explode( ' ', trim( $elements ) );
-			else
-				$elements = array();
-
+		if ( ! empty( $elements ) ) {
+			$elements = explode( ' ', trim( $elements ) );
+		} else { $elements = array();
+		}
 
 			// Post Elements
 			$post_elements = $options['post_elements'];
-			if ( ! empty( $post_elements ) )
-				$post_elements = explode( ' ', trim( $post_elements ) );
-			else
-				$post_elements = 'all';
+		if ( ! empty( $post_elements ) ) {
+			$post_elements = explode( ' ', trim( $post_elements ) );
+		} else { $post_elements = 'all';
+		}
 
 			// Carousel Elements
 			$carousel_elements = $options['carousel_elements'];
-			if ( ! empty( $carousel_elements ) )
-				$carousel_elements = explode( ' ', trim( $carousel_elements ) );
-			else
-				$carousel_elements = array();
+		if ( ! empty( $carousel_elements ) ) {
+			$carousel_elements = explode( ' ', trim( $carousel_elements ) );
+		} else { $carousel_elements = array();
+		}
 
 			/* Container Class */
 
 			$container_class = 'dslc-posts dslc-products dslc-clearfix dslc-products-type-' . $options['type'] . ' dslc-posts-orientation-' . $options['orientation'] . ' ';
 
-			if ( $options['type'] == 'masonry' )
-				$container_class .= 'dslc-init-masonry ';
-			elseif ( $options['type'] == 'grid' )
-				$container_class .= 'dslc-init-grid ';
+		if ( $options['type'] == 'masonry' ) {
+			$container_class .= 'dslc-init-masonry ';
+		} elseif ( $options['type'] == 'grid' ) {
+			$container_class .= 'dslc-init-grid ';
+		}
 
 			/* Element Class */
 
 			$element_class = 'dslc-post dslc-product ';
 
-			if ( $options['type'] == 'masonry' )
-				$element_class .= 'dslc-masonry-item ';
-			elseif ( $options['type'] == 'carousel' )
-				$element_class .= 'dslc-carousel-item ';
+		if ( $options['type'] == 'masonry' ) {
+			$element_class .= 'dslc-masonry-item ';
+		} elseif ( $options['type'] == 'carousel' ) {
+			$element_class .= 'dslc-carousel-item ';
+		}
 
 			// Responsive
-			//$element_class .= 'dslc-res-sm-' . $options['res_sm_columns'] . ' ';
-			//$element_class .= 'dslc-res-tp-' . $options['res_tp_columns'] . ' ';
-
+			// $element_class .= 'dslc-res-sm-' . $options['res_sm_columns'] . ' ';
+			// $element_class .= 'dslc-res-tp-' . $options['res_tp_columns'] . ' ';
 		/**
 		 * What is shown
 		 */
@@ -2655,64 +2664,68 @@ function dslc_module_woocommerce_output ( $atts, $content = null ) {
 			$show_carousel_arrows = false;
 			$show_view_all_link = false;
 
-			if ( in_array( 'main_heading', $elements ) )
-				$show_heading = true;
+		if ( in_array( 'main_heading', $elements ) ) {
+			$show_heading = true;
+		}
 
-			if ( ( $elements == 'all' || in_array( 'filters', $elements ) ) && $options['type'] !== 'carousel' )
-				$show_filters = true;
+		if ( ( $elements == 'all' || in_array( 'filters', $elements ) ) && $options['type'] !== 'carousel' ) {
+			$show_filters = true;
+		}
 
-			if ( $options['type'] == 'carousel' && in_array( 'arrows', $carousel_elements ) )
-				$show_carousel_arrows = true;
+		if ( $options['type'] == 'carousel' && in_array( 'arrows', $carousel_elements ) ) {
+			$show_carousel_arrows = true;
+		}
 
-			if ( $show_heading || $show_filters || $show_carousel_arrows )
-				$show_header = true;
+		if ( $show_heading || $show_filters || $show_carousel_arrows ) {
+			$show_header = true;
+		}
 
 		/**
 		 * Carousel Items
 		 */
 
-			switch ( $options['columns'] ) {
-				case 12 :
-					$carousel_items = 1;
-					break;
-				case 6 :
-					$carousel_items = 2;
-					break;
-				case 4 :
-					$carousel_items = 3;
-					break;
-				case 3 :
-					$carousel_items = 4;
-					break;
-				case 2 :
-					$carousel_items = 6;
-					break;
-				default:
-					$carousel_items = 6;
-					break;
-			}
+		switch ( $options['columns'] ) {
+			case 12 :
+				$carousel_items = 1;
+				break;
+			case 6 :
+				$carousel_items = 2;
+				break;
+			case 4 :
+				$carousel_items = 3;
+				break;
+			case 3 :
+				$carousel_items = 4;
+				break;
+			case 2 :
+				$carousel_items = 6;
+				break;
+			default:
+				$carousel_items = 6;
+				break;
+		}
 
 		/**
 		 * Heading ( output )
 		 */
 
-			if ( $show_header ) :
-				?>
-					<div class="dslc-module-heading">
+		if ( $show_header ) :
+			?>
+			<div class="dslc-module-heading">
 
-						<!-- Heading -->
+				<!-- Heading -->
 
-						<?php if ( $show_heading ) : ?>
+				<?php if ( $show_heading ) : ?>
 
 						<div class="dslc-post-heading">
 
-							<h2 class="dslca-editable-content" data-id="main_heading_title" data-type="simple" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?> ><?php echo stripslashes( $options['main_heading_title'] ); ?></h2>
+							<h2 class="dslca-editable-content" data-id="main_heading_title" data-type="simple" <?php if ( $dslc_is_admin ) { echo 'contenteditable';} ?> ><?php echo stripslashes( $options['main_heading_title'] ); ?></h2>
 
 							<!-- View all -->
 
 							<?php if ( isset( $options['view_all_link'] ) && $options['view_all_link'] !== '' ) : ?>
 
-								<span class="dslc-module-heading-view-all"><a href="<?php echo $options['view_all_link']; ?>" class="dslca-editable-content" data-id="main_heading_link_title" data-type="simple" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?> ><?php echo $options['main_heading_link_title']; ?></a></span>
+								<span class="dslc-module-heading-view-all"><a href="<?php echo $options['view_all_link']; ?>" class="dslca-editable-content" data-id="main_heading_link_title" data-type="simple" <?php if ( $dslc_is_admin ) { echo 'contenteditable';} ?> ><?php echo $options['main_heading_link_title']; ?></a></span>
 
 							<?php endif; ?>
 
@@ -2720,51 +2733,49 @@ function dslc_module_woocommerce_output ( $atts, $content = null ) {
 
 						<?php endif; ?>
 
-						<!-- Filters -->
+				<!-- Filters -->
 
-						<?php
+				<?php
 
-							if ( $show_filters ) {
+				if ( $show_filters ) {
 
-								$cats_array = array();
+					$cats_array = array();
 
-								if ( $dslc_query->have_posts() ) {
+					if ( $dslc_query->have_posts() ) {
 
-									while ( $dslc_query->have_posts() ) {
+						while ( $dslc_query->have_posts() ) {
 
-										$dslc_query->the_post();
+							$dslc_query->the_post();
 
-										$post_cats = get_the_terms( get_the_ID(), 'product_cat' );
-										if ( ! empty( $post_cats ) ) {
-											foreach ( $post_cats as $post_cat ) {
-												$cats_array[$post_cat->slug] = $post_cat->name;
-											}
-										}
-
-									}
-
+							$post_cats = get_the_terms( get_the_ID(), 'product_cat' );
+							if ( ! empty( $post_cats ) ) {
+								foreach ( $post_cats as $post_cat ) {
+									$cats_array[ $post_cat->slug ] = $post_cat->name;
 								}
+							}
+						}
+					}
 
-								?>
+					?>
 
-									<div class="dslc-post-filters">
-										<span class="dslc-post-filter dslc-active dslca-editable-content" data-filter-id="show-all" <?php if ( $dslc_is_admin ){ echo 'data-id="main_filter_title_all" data-type="simple" contenteditable '; } ?>><?php echo $options['main_filter_title_all']; ?></span>
+					<div class="dslc-post-filters">
+						<span class="dslc-post-filter dslc-active dslca-editable-content" data-filter-id="show-all" <?php if ( $dslc_is_admin ) { echo 'data-id="main_filter_title_all" data-type="simple" contenteditable '; } ?>><?php echo $options['main_filter_title_all']; ?></span>
 
-										<?php foreach ( $cats_array as $cat_slug => $cat_name ) : ?>
+						<?php foreach ( $cats_array as $cat_slug => $cat_name ) : ?>
 											<span class="dslc-post-filter dslc-inactive" data-filter-id="<?php echo $cat_slug; ?>"><?php echo $cat_name; ?></span>
 										<?php endforeach; ?>
 
-									</div><!-- .dslc-post-filters -->
+					</div><!-- .dslc-post-filters -->
 
-								<?php
+						<?php
 
-							}
+				}
 
-						?>
+					?>
 
-						<!-- Carousel -->
+					<!-- Carousel -->
 
-						<?php if ( $show_carousel_arrows ) : ?>
+					<?php if ( $show_carousel_arrows ) : ?>
 							<span class="dslc-carousel-nav fr">
 								<span class="dslc-carousel-nav-inner">
 									<a href="#" class="dslc-carousel-nav-prev"><span class="dslc-icon-chevron-left"></span></a>
@@ -2782,49 +2793,53 @@ function dslc_module_woocommerce_output ( $atts, $content = null ) {
 		 * Posts ( output )
 		 */
 
-			if ( $dslc_query->have_posts() ) :
+		if ( $dslc_query->have_posts() ) :
 
-				?><div class="<?php echo $container_class; ?>"><?php
+			?><div class="<?php echo $container_class; ?>"><?php
 
-					?><div class="dslc-posts-inner"><?php
+			?><div class="dslc-posts-inner"><?php
 
-						if ( 'carousel' === $options['type'] ) :
+if ( 'carousel' === $options['type'] ) :
 
-							?><div class="dslc-loader"></div><div class="dslc-carousel" data-stop-on-hover="<?php echo $options['carousel_autoplay_hover']; ?>" data-autoplay="<?php echo $options['carousel_autoplay']; ?>" data-columns="<?php echo $carousel_items; ?>" data-pagination="<?php if ( in_array( 'circles', $carousel_elements ) ) echo 'true'; else echo 'false'; ?>" data-slide-speed="<?php echo $options['arrows_slide_speed']; ?>" data-pagination-speed="<?php echo $options['circles_slide_speed']; ?>"><?php
+	?><div class="dslc-loader"></div><div class="dslc-carousel" data-stop-on-hover="<?php echo $options['carousel_autoplay_hover']; ?>" data-autoplay="<?php echo $options['carousel_autoplay']; ?>" data-columns="<?php echo $carousel_items; ?>" data-pagination="<?php if ( in_array( 'circles', $carousel_elements ) ) { echo 'true';
+	} else { echo 'false';
+	} ?>" data-slide-speed="<?php echo $options['arrows_slide_speed']; ?>" data-pagination-speed="<?php echo $options['circles_slide_speed']; ?>"><?php
 
-						endif;
+				endif;
 
-						while ( $dslc_query->have_posts() ) : $dslc_query->the_post(); $count += $increment; $real_count++;
+while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
+	$count += $increment;
+	$real_count++;
 
-							global $product;
+	global $product;
 
-							if ( $count == $max_count ) {
-								$count = 0;
-								$extra_class = ' dslc-last-col';
-							} elseif ( $count == $increment ) {
-								$extra_class = ' dslc-first-col';
-							} else {
-								$extra_class = '';
-							}
+	if ( $count == $max_count ) {
+		$count = 0;
+		$extra_class = ' dslc-last-col';
+	} elseif ( $count == $increment ) {
+		$extra_class = ' dslc-first-col';
+	} else {
+		$extra_class = '';
+	}
 
-							if ( ! has_post_thumbnail() ) {
-								$extra_class .= ' dslc-post-no-thumb';
-							}
+	if ( ! has_post_thumbnail() ) {
+		$extra_class .= ' dslc-post-no-thumb';
+	}
 
-							$post_cats = get_the_terms( get_the_ID(), 'product_cat' );
-							$post_cats_data = '';
+	$post_cats = get_the_terms( get_the_ID(), 'product_cat' );
+	$post_cats_data = '';
 
-							if ( ! empty( $post_cats ) ) {
-								foreach ( $post_cats as $post_cat ) {
-									$post_cats_data .= $post_cat->slug . ' ';
-								}
-							}
+	if ( ! empty( $post_cats ) ) {
+		foreach ( $post_cats as $post_cat ) {
+			$post_cats_data .= $post_cat->slug . ' ';
+		}
+	}
 
-							?>
+	?>
 
-							<div class="<?php echo $element_class . $columns_class . $extra_class; ?>" data-cats="<?php echo $post_cats_data; ?>">
+	<div class="<?php echo $element_class . $columns_class . $extra_class; ?>" data-cats="<?php echo $post_cats_data; ?>">
 
-								<?php if ( $post_elements == 'all' || in_array( 'thumbnail', $post_elements ) ) : ?>
+	<?php if ( $post_elements == 'all' || in_array( 'thumbnail', $post_elements ) ) : ?>
 
 									<?php if ( has_post_thumbnail() ) : ?>
 
@@ -2865,7 +2880,8 @@ function dslc_module_woocommerce_output ( $atts, $content = null ) {
 											<div class="dslc-product-thumb-inner dslca-post-thumb">
 
 												<?php if ( $manual_resize ) : ?>
-												<a href="<?php the_permalink(); ?>"><img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" /></a>
+												<a href="<?php the_permalink(); ?>"><img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true );
+												echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" /></a>
 												<?php else : ?>
 													<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'full' ); ?></a>
 												<?php endif; ?>
@@ -2878,7 +2894,7 @@ function dslc_module_woocommerce_output ( $atts, $content = null ) {
 
 											<?php if ( ( $options['main_location'] == 'inside' || $options['main_location'] == 'inside_visible' ) && ( $post_elements == 'all' || in_array( 'title', $post_elements ) || in_array( 'excerpt', $post_elements ) || in_array( 'addtocart', $post_elements ) || in_array( 'details', $post_elements ) ) ) : ?>
 
-												<div class="dslc-post-main dslc-init-<?php echo $options['main_position']; ?> dslc-product-main <?php if ( $options['main_location'] == 'inside_visible' ) echo 'dslc-product-main-visible'; ?> dslc-on-hover-anim-target dslc-anim-<?php echo $options['css_anim_hover']; ?>" data-dslc-anim="<?php echo $options['css_anim_hover'] ?>" data-dslc-anim-speed="<?php echo $options['css_anim_speed']; ?>">
+												<div class="dslc-post-main dslc-init-<?php echo $options['main_position']; ?> dslc-product-main <?php if ( $options['main_location'] == 'inside_visible' ) { echo 'dslc-product-main-visible';} ?> dslc-on-hover-anim-target dslc-anim-<?php echo $options['css_anim_hover']; ?>" data-dslc-anim="<?php echo $options['css_anim_hover'] ?>" data-dslc-anim-speed="<?php echo $options['css_anim_speed']; ?>">
 
 													<div class="dslc-product-main-inner dslc-init-target">
 
@@ -2904,11 +2920,11 @@ function dslc_module_woocommerce_output ( $atts, $content = null ) {
 															<div class="dslc-product-excerpt">
 																<?php if ( $options['excerpt_or_content'] == 'content' ) : ?>
 																	<?php
-																		if ( $options['excerpt_length'] > 0 ) {
-																			echo wp_trim_words( get_the_content(), $options['excerpt_length'] );
-																		} else {
-																			echo get_the_content();
-																		}
+																	if ( $options['excerpt_length'] > 0 ) {
+																		echo wp_trim_words( get_the_content(), $options['excerpt_length'] );
+																	} else {
+																		echo get_the_content();
+																	}
 																			?>
 																<?php else : ?>
 																	<?php
@@ -2993,17 +3009,17 @@ function dslc_module_woocommerce_output ( $atts, $content = null ) {
 														?>
 												<?php else : ?>
 													<?php
-														if ( $options['excerpt_length'] > 0 ) {
-															if ( has_excerpt() )
-																echo wp_trim_words( get_the_excerpt(), $options['excerpt_length'] );
-															else
-																echo wp_trim_words( get_the_content(), $options['excerpt_length'] );
-														} else {
-															if ( has_excerpt() )
-																echo get_the_excerpt();
-															else
-																echo get_the_content();
+													if ( $options['excerpt_length'] > 0 ) {
+														if ( has_excerpt() ) {
+															echo wp_trim_words( get_the_excerpt(), $options['excerpt_length'] );
+														} else { echo wp_trim_words( get_the_content(), $options['excerpt_length'] );
 														}
+													} else {
+														if ( has_excerpt() ) {
+															echo get_the_excerpt();
+														} else { echo get_the_content();
+														}
+													}
 													?>
 												<?php endif; ?>
 											</div><!-- .dslc-product-excerpt -->
@@ -3037,15 +3053,15 @@ function dslc_module_woocommerce_output ( $atts, $content = null ) {
 
 						endwhile;
 
-						if ( $options['type'] == 'carousel' ) :
+if ( $options['type'] == 'carousel' ) :
 
-							?></div><?php
+	?></div><?php
 
-						endif;
+				endif;
 
-					?></div><!-- .dslc-posts-inner --><?php
+				?></div><!-- .dslc-posts-inner --><?php
 
-				?></div><?php
+		?></div><?php
 
 			else :
 
@@ -3072,14 +3088,17 @@ function dslc_module_woocommerce_output ( $atts, $content = null ) {
 			if ( $options['offset'] > 0 ) {
 				$num_pages = ceil( ( $dslc_query->found_posts - $options['offset'] ) / $options['amount'] );
 			}
-			dslc_post_pagination( array('pages' => $num_pages, 'type' => $options['pagination_type']) );
+			dslc_post_pagination( array(
+				'pages' => $num_pages,
+				'type' => $options['pagination_type'],
+			) );
 		}
 
 		wp_reset_postdata();
 
-	$shortcode_rendered = ob_get_contents();
-	ob_end_clean();
+		$shortcode_rendered = ob_get_contents();
+		ob_end_clean();
 
-	return $shortcode_rendered;
+		return $shortcode_rendered;
 
 } add_shortcode( 'dslc_module_woocommerce_output', 'dslc_module_woocommerce_output' );

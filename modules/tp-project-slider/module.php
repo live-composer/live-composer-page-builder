@@ -56,15 +56,15 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Desktop', 'live-composer-page-builder' ),
-						'value' => 'desktop'
+						'value' => 'desktop',
 					),
 					array(
 						'label' => __( 'Tablet', 'live-composer-page-builder' ),
-						'value' => 'tablet'
+						'value' => 'tablet',
 					),
 					array(
 						'label' => __( 'Phone', 'live-composer-page-builder' ),
-						'value' => 'phone'
+						'value' => 'phone',
 					),
 				),
 			),
@@ -76,25 +76,25 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Fade', 'live-composer-page-builder' ),
-						'value' => 'fade'
+						'value' => 'fade',
 					),
 					array(
 						'label' => __( 'Fade Up Slide', 'live-composer-page-builder' ),
-						'value' => 'fadeUp'
+						'value' => 'fadeUp',
 					),
 					array(
 						'label' => __( 'Slide', 'live-composer-page-builder' ),
-						'value' => 'false'
+						'value' => 'false',
 					),
 					array(
 						'label' => __( 'Back Slide', 'live-composer-page-builder' ),
-						'value' => 'backSlide'
+						'value' => 'backSlide',
 					),
 					array(
 						'label' => __( 'Go Down', 'live-composer-page-builder' ),
-						'value' => 'goDown'
+						'value' => 'goDown',
 					),
-				)
+				),
 			),
 			array(
 				'label' => __( 'Animation Speed (ms)', 'live-composer-page-builder' ),
@@ -116,13 +116,13 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'true'
+						'value' => 'true',
 					),
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'false'
-					)
-				)
+						'value' => 'false',
+					),
+				),
 			),
 			array(
 				'label' => __( 'Lightbox', 'live-composer-page-builder' ),
@@ -133,13 +133,13 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
-				)
+				),
 			),
 
 			/**
@@ -186,19 +186,19 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -252,7 +252,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'affect_on_change_rule' => 'min-height',
 				'section' => 'styling',
 				'ext' => 'px',
-				'increment' => 5
+				'increment' => 5,
 			),
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
@@ -327,19 +327,19 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -460,19 +460,19 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -623,11 +623,11 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 				),
 				'section' => 'responsive',
@@ -775,11 +775,11 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 				),
 				'section' => 'responsive',
@@ -915,10 +915,11 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 				'ext' => 'px',
 			),
 
-
 		);
 
-		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array('hover_opts' => false) ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array(
+			'hover_opts' => false,
+		) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		// Cache calculated array in WP Object Cache.
@@ -952,51 +953,49 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 
 		}
 
-
 		/* Module output starts here */
 
-			if ( $show_placeholder || $show_real ) {
+		if ( $show_placeholder || $show_real ) {
 
-				$img_class = '';
-				if ( $options['lightbox_state'] == 'enabled' ) {
-					$img_class = 'dslc-trigger-lightbox-gallery';
-				}
+			$img_class = '';
+			if ( $options['lightbox_state'] == 'enabled' ) {
+				$img_class = 'dslc-trigger-lightbox-gallery';
+			}
 
-				?>
+			?>
 
-					<div class="dslc-tp-project-slider">
+			<div class="dslc-tp-project-slider">
 
-						<div class="dslc-tp-project-slider-main">
+				<div class="dslc-tp-project-slider-main">
 
-							<div class="dslc-loader"></div>
+					<div class="dslc-loader"></div>
 
-							<div class="dslc-slider"  data-animation="<?php echo $options['animation']; ?>" data-animation-speed="<?php echo $options['animation_speed']; ?>" data-autoplay="<?php echo $options['autoplay']; ?>" data-flexible-height="<?php echo $options['flexible_height']; ?>">
+					<div class="dslc-slider"  data-animation="<?php echo $options['animation']; ?>" data-animation-speed="<?php echo $options['animation_speed']; ?>" data-autoplay="<?php echo $options['autoplay']; ?>" data-flexible-height="<?php echo $options['flexible_height']; ?>">
 
-								<?php
+						<?php
 
-									if ( $show_placeholder ) {
+						if ( $show_placeholder ) {
 
-										for ( $i = 0; $i < 15; $i++ ) {
-											?><div class="dslc-slider-item"><img src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/placeholders/big-placeholder.png" /></div><?php
-										}
+							for ( $i = 0; $i < 15; $i++ ) {
+								?><div class="dslc-slider-item"><img src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/placeholders/big-placeholder.png" /></div><?php
+							}
+						} else {
 
-									} else {
+							foreach ( $project_images as $project_image ) {
 
-										foreach ( $project_images as $project_image ) {
+								$project_image_src = wp_get_attachment_image_src( $project_image, 'full' );
+								$project_image_src = $project_image_src[0];
 
-											$project_image_src = wp_get_attachment_image_src( $project_image, 'full' );
-											$project_image_src = $project_image_src[0];
+								$thumb_alt = get_post_meta( $project_image, '_wp_attachment_image_alt', true );
+								if ( ! $thumb_alt ) { $thumb_alt = '';
+								}
 
-											$thumb_alt = get_post_meta( $project_image, '_wp_attachment_image_alt', true );
-											if ( ! $thumb_alt ) $thumb_alt = '';
+								?><div class="dslc-slider-item"><img class="<?php echo $img_class; ?>" src="<?php echo $project_image_src; ?>" alt="<?php echo $thumb_alt; ?>" /></div><?php
 
-											?><div class="dslc-slider-item"><img class="<?php echo $img_class; ?>" src="<?php echo $project_image_src; ?>" alt="<?php echo $thumb_alt; ?>" /></div><?php
+							}
+						}
 
-										}
-
-									}
-
-								?>
+							?>
 
 							</div><!-- .dslc-slider -->
 
@@ -1025,9 +1024,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 
 				<?php
 
-			}
-
-
+		}// End if().
 
 	}
 

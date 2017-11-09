@@ -212,7 +212,6 @@ function dslc_module_settings( $options, $module_id ) {
 				$settings[ $option['id'] ] = $option['std'];
 			}
 		}
-
 	} else {
 
 		// Go through all options and fill array with custom values, otherwise leave empty.
@@ -223,7 +222,6 @@ function dslc_module_settings( $options, $module_id ) {
 				$settings[ $option['id'] ] = '';
 			}
 		}
-
 	}
 
 	return $settings;
@@ -239,7 +237,7 @@ function dslc_get_new_module_id() {
 	// Allowed to do this?
 	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 		// Generates unique id like 'kojb85j8oc'.
-		return substr(str_shuffle(MD5(microtime())), 0, 11);
+		return substr( str_shuffle( MD5( microtime() ) ), 0, 11 );
 	}
 }
 
@@ -464,7 +462,7 @@ function dslc_is_editor_active( $capability = 'save' ) {
 	// Check for saving capability.
 	if ( 'save' === $capability ) {
 		$capability_check = DS_LIVE_COMPOSER_CAPABILITY_SAVE;
-	// Check for access capability ( can use editor but can't publish changes ).
+		// Check for access capability ( can use editor but can't publish changes ).
 	} elseif ( 'access' === $capability ) {
 		$capability_check = DS_LIVE_COMPOSER_CAPABILITY;
 	}
@@ -662,7 +660,7 @@ function dslc_set_user_templates( $templates ) {
 	$user_templates = maybe_unserialize( get_option( 'dslc_templates' ) );
 
 	// If there are any, merge them with the templates array.
-	if ( ! empty ( $user_templates ) && is_array( $user_templates ) ) {
+	if ( ! empty( $user_templates ) && is_array( $user_templates ) ) {
 		$templates = array_merge( $templates, $user_templates );
 	}
 
@@ -696,7 +694,7 @@ function dslc_load_modules( $dir_path, $init_filename = '' ) {
  * First generation: shortcodes + base64.
  * Second generation: JSON only.
  *
- * @param  array  $settings Array with all the module properties.
+ * @param  array $settings Array with all the module properties.
  * @return array            The same array but adjusted to make migration seamless.
  */
 function dslc_code_migration( $settings ) {
@@ -719,8 +717,7 @@ function dslc_code_migration( $settings ) {
 		$type = $control['type'];
 
 		// $module_settings[ $option_id ] = $option_arr['std'];
-
-/*
+		/*
 		// When import shortcodes code, 'Display on' setting is empty
 		// when all the checkboxes selected. This makes the module completely
 		// hidden in new version of code rendering.
@@ -735,7 +732,7 @@ function dslc_code_migration( $settings ) {
 				$settings[ $id ] = 'top right bottom left';
 			}
 		}
-*/
+		*/
 		// Check the conrol options in the old code and adjust them if needed.
 		if ( 'color' === $type ) {
 
@@ -757,10 +754,9 @@ function dslc_code_migration( $settings ) {
 				$settings[ $id ] = $control['std'];
 			}
 		} elseif ( 'css_border_radius' === $type ) {
-		// Set border-radius = 0 if in old version it was disabled.
-
+			// Set border-radius = 0 if in old version it was disabled.
 			// If this setting isn't set at all...
-			if ( ! isset( $settings[ $id ] )  ) {
+			if ( ! isset( $settings[ $id ] ) ) {
 				$settings[ $id ] = '0';
 			}
 
@@ -800,7 +796,6 @@ function dslc_code_migration( $settings ) {
 			} elseif ( ! isset( $settings[ $id ] ) && isset( $control['std'] ) ) {
 				$settings[ $id ] = $control['std']; // Fix missing default button labels.
 			}
-
 		} elseif ( 'main_heading_link_title' === $id ) {
 
 			if ( isset( $settings[ $id ] ) && '' === $settings[ $id ] ) {
@@ -819,9 +814,8 @@ function dslc_code_migration( $settings ) {
 			// All other cases.
 			// Go through each missing setting and fill it with default data.
 			$settings[ $id ] = $control['std'];
-		}
-
-	}
+		}// End if().
+	}// End foreach().
 	// Migration done. Remove the key code_version = 1.
 	if ( isset( $settings['code_version'] ) ) {
 		unset( $settings['code_version'] );
@@ -830,12 +824,12 @@ function dslc_code_migration( $settings ) {
 	return $settings;
 }
 
-function dslc_sanitize_option_val ( $data_to_sanitize ) {
+function dslc_sanitize_option_val( $data_to_sanitize ) {
 
 	$id = $data_to_sanitize['id'];
 	$value = $data_to_sanitize['value'];
 
-	if ( $id !== 'content' &&  stristr( $value, '{\\') ) {
+	if ( $id !== 'content' &&  stristr( $value, '{\\' ) ) {
 		// Filter out values with json code left by broken presets functionality.
 		// But don't touch 'content' values as it used in HTML module, that can
 		// contain complex html/css/js code.

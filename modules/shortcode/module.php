@@ -2856,7 +2856,9 @@ class DSLC_Shortcode extends DSLC_Module {
 			),
 		);
 
-		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array( 'hover_opts' => false ) ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array(
+			'hover_opts' => false,
+		) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		return apply_filters( 'dslc_module_options', $dslc_options, $this->module_id );
@@ -2895,7 +2897,6 @@ class DSLC_Shortcode extends DSLC_Module {
 		if ( $dslc_is_admin && $error_proof_mode && $ajax_module_render ) {
 			$render_code = false;
 		}
-
 
 		?>
 

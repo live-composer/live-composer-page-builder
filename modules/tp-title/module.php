@@ -56,15 +56,15 @@ class DSLC_TP_Title extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Desktop', 'live-composer-page-builder' ),
-						'value' => 'desktop'
+						'value' => 'desktop',
 					),
 					array(
 						'label' => __( 'Tablet', 'live-composer-page-builder' ),
-						'value' => 'tablet'
+						'value' => 'tablet',
 					),
 					array(
 						'label' => __( 'Phone', 'live-composer-page-builder' ),
-						'value' => 'phone'
+						'value' => 'phone',
 					),
 				),
 			),
@@ -108,19 +108,19 @@ class DSLC_TP_Title extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -174,7 +174,7 @@ class DSLC_TP_Title extends DSLC_Module {
 				'affect_on_change_rule' => 'min-height',
 				'section' => 'styling',
 				'ext' => 'px',
-				'increment' => 5
+				'increment' => 5,
 			),
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
@@ -323,19 +323,19 @@ class DSLC_TP_Title extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'None', 'live-composer-page-builder' ),
-						'value' => 'none'
+						'value' => 'none',
 					),
 					array(
 						'label' => __( 'Capitalize', 'live-composer-page-builder' ),
-						'value' => 'capitalize'
+						'value' => 'capitalize',
 					),
 					array(
 						'label' => __( 'Uppercase', 'live-composer-page-builder' ),
-						'value' => 'uppercase'
+						'value' => 'uppercase',
 					),
 					array(
 						'label' => __( 'Lowercase', 'live-composer-page-builder' ),
-						'value' => 'lowercase'
+						'value' => 'lowercase',
 					),
 				),
 				'refresh_on_change' => false,
@@ -368,11 +368,11 @@ class DSLC_TP_Title extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 				),
 				'section' => 'responsive',
@@ -456,11 +456,11 @@ class DSLC_TP_Title extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 				),
 				'section' => 'responsive',
@@ -534,7 +534,9 @@ class DSLC_TP_Title extends DSLC_Module {
 
 		);
 
-		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array('hover_opts' => false) ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array(
+			'hover_opts' => false,
+		) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		// Cache calculated array in WP Object Cache.
@@ -559,39 +561,36 @@ class DSLC_TP_Title extends DSLC_Module {
 			$post_id = get_the_ID();
 		}
 
-
 		/* Module output starts here */
 
-			if ( is_category() ) {
-				$title = single_cat_title( '', false );
-			} elseif ( is_tag() ) {
-				$title = single_tag_title( '', false );
-			} elseif ( is_author() ) {
-				$title = get_the_author();
-			} elseif ( is_year() ) {
-				$title = get_the_date( 'Y' );
-			} elseif ( is_month() ) {
-				$title = get_the_date( 'F Y' );
-			} elseif ( is_day() ) {
-				$title = get_the_date( 'F j, Y' );
-			} elseif ( is_post_type_archive() ) {
-				$title = post_type_archive_title( '', false );
-			} elseif ( is_tax() ) {
-				$tax = get_taxonomy( get_queried_object()->taxonomy );
-				$title = $tax->labels->singular_name . ' ' . single_term_title( '', false );
-			} elseif ( is_search() ) {
-				$title = get_the_title( $post_id ) . ' ' . get_search_query();
-			} else {
-				$title = get_the_title( $post_id );
-			}
+		if ( is_category() ) {
+			$title = single_cat_title( '', false );
+		} elseif ( is_tag() ) {
+			$title = single_tag_title( '', false );
+		} elseif ( is_author() ) {
+			$title = get_the_author();
+		} elseif ( is_year() ) {
+			$title = get_the_date( 'Y' );
+		} elseif ( is_month() ) {
+			$title = get_the_date( 'F Y' );
+		} elseif ( is_day() ) {
+			$title = get_the_date( 'F j, Y' );
+		} elseif ( is_post_type_archive() ) {
+			$title = post_type_archive_title( '', false );
+		} elseif ( is_tax() ) {
+			$tax = get_taxonomy( get_queried_object()->taxonomy );
+			$title = $tax->labels->singular_name . ' ' . single_term_title( '', false );
+		} elseif ( is_search() ) {
+			$title = get_the_title( $post_id ) . ' ' . get_search_query();
+		} else {
+			$title = get_the_title( $post_id );
+		}
 
 			?>
 
 				<div class="dslc-tp-title"><h1><?php echo $title; ?></h1></div>
 
 			<?php
-
-
 
 	}
 

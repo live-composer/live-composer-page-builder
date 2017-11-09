@@ -56,15 +56,15 @@ class DSLC_Notification extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Desktop', 'live-composer-page-builder' ),
-						'value' => 'desktop'
+						'value' => 'desktop',
 					),
 					array(
 						'label' => __( 'Tablet', 'live-composer-page-builder' ),
-						'value' => 'tablet'
+						'value' => 'tablet',
 					),
 					array(
 						'label' => __( 'Phone', 'live-composer-page-builder' ),
-						'value' => 'phone'
+						'value' => 'phone',
 					),
 				),
 			),
@@ -121,19 +121,19 @@ class DSLC_Notification extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -175,7 +175,7 @@ class DSLC_Notification extends DSLC_Module {
 				'affect_on_change_rule' => 'min-height',
 				'section' => 'styling',
 				'ext' => 'px',
-				'increment' => 5
+				'increment' => 5,
 			),
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
@@ -345,11 +345,11 @@ class DSLC_Notification extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'flex'
+						'value' => 'flex',
 					),
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'none'
+						'value' => 'none',
 					),
 				),
 				'refresh_on_change' => false,
@@ -423,19 +423,19 @@ class DSLC_Notification extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -545,11 +545,11 @@ class DSLC_Notification extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 				),
 				'section' => 'responsive',
@@ -657,11 +657,11 @@ class DSLC_Notification extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 				),
 				'section' => 'responsive',
@@ -757,10 +757,11 @@ class DSLC_Notification extends DSLC_Module {
 				'ext' => 'px',
 			),
 
-
 		);
 
-		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array('hover_opts' => false) ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array(
+			'hover_opts' => false,
+		) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		// Cache calculated array in WP Object Cache.
@@ -779,11 +780,10 @@ class DSLC_Notification extends DSLC_Module {
 
 		global $dslc_active;
 
-		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
+		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 			$dslc_is_admin = true;
-		else
-			$dslc_is_admin = false;
-
+		} else { $dslc_is_admin = false;
+		}
 
 		/* Module output starts here */
 
@@ -791,14 +791,14 @@ class DSLC_Notification extends DSLC_Module {
 			$classes = 'dslc-notification-box ';
 
 			// Timeout after closing
-			if ( is_numeric( $options['notification_timeout'] ) ) {
-				$classes .= 'dslc-notification-box-has-timeout ';
-			}
+		if ( is_numeric( $options['notification_timeout'] ) ) {
+			$classes .= 'dslc-notification-box-has-timeout ';
+		}
 
 			?>
 
 			<div class="<?php echo $classes; ?>" data-notification-timeout="<?php echo $options['notification_timeout']; ?>">
-				<div class="dslc-notification-box-content  dslca-editable-content" data-id="content"<?php if ( $dslc_is_admin ) echo ' data-exportable-content'; ?>>
+				<div class="dslc-notification-box-content  dslca-editable-content" data-id="content"<?php if ( $dslc_is_admin ) { echo ' data-exportable-content';} ?>>
 					<?php
 						$output_content = stripslashes( $options['content'] );
 						echo $output_content;
@@ -811,8 +811,6 @@ class DSLC_Notification extends DSLC_Module {
 			</div><!-- .dslc-notification-box -->
 
 			<?php
-
-
 
 	}
 

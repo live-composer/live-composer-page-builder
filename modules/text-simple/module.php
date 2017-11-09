@@ -56,15 +56,15 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Desktop', 'live-composer-page-builder' ),
-						'value' => 'desktop'
+						'value' => 'desktop',
 					),
 					array(
 						'label' => __( 'Tablet', 'live-composer-page-builder' ),
-						'value' => 'tablet'
+						'value' => 'tablet',
 					),
 					array(
 						'label' => __( 'Phone', 'live-composer-page-builder' ),
-						'value' => 'phone'
+						'value' => 'phone',
 					),
 				),
 			),
@@ -89,11 +89,11 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 				),
 				'section' => 'styling',
@@ -356,7 +356,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 					),
 					'affect_on_change_rule' => 'background-size',
 					'affect_on_change_el' => '.dslc-text-module-content',
-					'section' => 'styling'
+					'section' => 'styling',
 				),
 			array(
 				'id' => 'css_main_bg_group',
@@ -403,19 +403,19 @@ class DSLC_Text_Simple extends DSLC_Module {
 					'choices' => array(
 						array(
 							'label' => __( 'Top', 'live-composer-page-builder' ),
-							'value' => 'top'
+							'value' => 'top',
 						),
 						array(
 							'label' => __( 'Right', 'live-composer-page-builder' ),
-							'value' => 'right'
+							'value' => 'right',
 						),
 						array(
 							'label' => __( 'Bottom', 'live-composer-page-builder' ),
-							'value' => 'bottom'
+							'value' => 'bottom',
 						),
 						array(
 							'label' => __( 'Left', 'live-composer-page-builder' ),
-							'value' => 'left'
+							'value' => 'left',
 						),
 					),
 					'refresh_on_change' => false,
@@ -573,7 +573,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 						'label' => __( 'Italic', 'live-composer-page-builder' ),
 						'value' => 'italic',
 					),
-				)
+				),
 			),
 			array(
 				'label' => __( 'Letter Spacing', 'live-composer-page-builder' ),
@@ -746,7 +746,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 						'label' => __( 'Italic', 'live-composer-page-builder' ),
 						'value' => 'italic',
 					),
-				)
+				),
 			),
 			array(
 				'label' => __( 'Letter Spacing', 'live-composer-page-builder' ),
@@ -871,19 +871,19 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -934,7 +934,6 @@ class DSLC_Text_Simple extends DSLC_Module {
 			/**
 			 * Heading 2
 			 */
-
 
 			array(
 				'label' => __( 'Color', 'live-composer-page-builder' ),
@@ -1040,7 +1039,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 						'label' => __( 'Italic', 'live-composer-page-builder' ),
 						'value' => 'italic',
 					),
-				)
+				),
 			),
 			array(
 				'label' => __( 'Letter Spacing', 'live-composer-page-builder' ),
@@ -1165,19 +1164,19 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -1333,7 +1332,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 						'label' => __( 'Italic', 'live-composer-page-builder' ),
 						'value' => 'italic',
 					),
-				)
+				),
 			),
 			array(
 				'label' => __( 'Letter Spacing', 'live-composer-page-builder' ),
@@ -1457,19 +1456,19 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -1625,7 +1624,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 						'label' => __( 'Italic', 'live-composer-page-builder' ),
 						'value' => 'italic',
 					),
-				)
+				),
 			),
 			array(
 				'label' => __( 'Letter Spacing', 'live-composer-page-builder' ),
@@ -1749,19 +1748,19 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -1917,7 +1916,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 						'label' => __( 'Italic', 'live-composer-page-builder' ),
 						'value' => 'italic',
 					),
-				)
+				),
 			),
 			array(
 				'label' => __( 'Letter Spacing', 'live-composer-page-builder' ),
@@ -2042,19 +2041,19 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -2210,7 +2209,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 						'label' => __( 'Italic', 'live-composer-page-builder' ),
 						'value' => 'italic',
 					),
-				)
+				),
 			),
 			array(
 				'label' => __( 'Letter Spacing', 'live-composer-page-builder' ),
@@ -2335,19 +2334,19 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -2600,79 +2599,79 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Armenian', 'live-composer-page-builder' ),
-						'value' => 'armenian'
+						'value' => 'armenian',
 					),
 					array(
 						'label' => __( 'Circle', 'live-composer-page-builder' ),
-						'value' => 'circle'
+						'value' => 'circle',
 					),
 					array(
 						'label' => __( 'Cjk-ideographic', 'live-composer-page-builder' ),
-						'value' => 'cjk-ideographic'
+						'value' => 'cjk-ideographic',
 					),
 					array(
 						'label' => __( 'Decimal', 'live-composer-page-builder' ),
-						'value' => 'decimal'
+						'value' => 'decimal',
 					),
 					array(
 						'label' => __( 'Decimal Leading Zero', 'live-composer-page-builder' ),
-						'value' => 'decimal-leading-zero'
+						'value' => 'decimal-leading-zero',
 					),
 					array(
 						'label' => __( 'Hebrew', 'live-composer-page-builder' ),
-						'value' => 'hebrew'
+						'value' => 'hebrew',
 					),
 					array(
 						'label' => __( 'Hiragana', 'live-composer-page-builder' ),
-						'value' => 'hiragana'
+						'value' => 'hiragana',
 					),
 					array(
 						'label' => __( 'Hiragana Iroha', 'live-composer-page-builder' ),
-						'value' => 'hiragana-iroha'
+						'value' => 'hiragana-iroha',
 					),
 					array(
 						'label' => __( 'Katakana', 'live-composer-page-builder' ),
-						'value' => 'katakana'
+						'value' => 'katakana',
 					),
 					array(
 						'label' => __( 'Katakana Iroha', 'live-composer-page-builder' ),
-						'value' => 'katakana-iroha'
+						'value' => 'katakana-iroha',
 					),
 					array(
 						'label' => __( 'Lower Alpha', 'live-composer-page-builder' ),
-						'value' => 'lower-alpha'
+						'value' => 'lower-alpha',
 					),
 					array(
 						'label' => __( 'Lower Greek', 'live-composer-page-builder' ),
-						'value' => 'lower-greek'
+						'value' => 'lower-greek',
 					),
 					array(
 						'label' => __( 'Lower Latin', 'live-composer-page-builder' ),
-						'value' => 'lower-latin'
+						'value' => 'lower-latin',
 					),
 					array(
 						'label' => __( 'Lower Roman', 'live-composer-page-builder' ),
-						'value' => 'lower-roman'
+						'value' => 'lower-roman',
 					),
 					array(
 						'label' => __( 'None', 'live-composer-page-builder' ),
-						'value' => 'none'
+						'value' => 'none',
 					),
 					array(
 						'label' => __( 'Upper Alpha', 'live-composer-page-builder' ),
-						'value' => 'upper-alpha'
+						'value' => 'upper-alpha',
 					),
 					array(
 						'label' => __( 'Upper Latin', 'live-composer-page-builder' ),
-						'value' => 'upper-latin'
+						'value' => 'upper-latin',
 					),
 					array(
 						'label' => __( 'Upper Roman', 'live-composer-page-builder' ),
-						'value' => 'upper-roman'
+						'value' => 'upper-roman',
 					),
 					array(
 						'label' => __( 'Inherit', 'live-composer-page-builder' ),
-						'value' => 'inherit'
+						'value' => 'inherit',
 					),
 				),
 				'section' => 'styling',
@@ -2689,79 +2688,79 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Armenian', 'live-composer-page-builder' ),
-						'value' => 'armenian'
+						'value' => 'armenian',
 					),
 					array(
 						'label' => __( 'Circle', 'live-composer-page-builder' ),
-						'value' => 'circle'
+						'value' => 'circle',
 					),
 					array(
 						'label' => __( 'Cjk-ideographic', 'live-composer-page-builder' ),
-						'value' => 'cjk-ideographic'
+						'value' => 'cjk-ideographic',
 					),
 					array(
 						'label' => __( 'Decimal', 'live-composer-page-builder' ),
-						'value' => 'decimal'
+						'value' => 'decimal',
 					),
 					array(
 						'label' => __( 'Decimal Leading Zero', 'live-composer-page-builder' ),
-						'value' => 'decimal-leading-zero'
+						'value' => 'decimal-leading-zero',
 					),
 					array(
 						'label' => __( 'Hebrew', 'live-composer-page-builder' ),
-						'value' => 'hebrew'
+						'value' => 'hebrew',
 					),
 					array(
 						'label' => __( 'Hiragana', 'live-composer-page-builder' ),
-						'value' => 'hiragana'
+						'value' => 'hiragana',
 					),
 					array(
 						'label' => __( 'Hiragana Iroha', 'live-composer-page-builder' ),
-						'value' => 'hiragana-iroha'
+						'value' => 'hiragana-iroha',
 					),
 					array(
 						'label' => __( 'Katakana', 'live-composer-page-builder' ),
-						'value' => 'katakana'
+						'value' => 'katakana',
 					),
 					array(
 						'label' => __( 'Katakana Iroha', 'live-composer-page-builder' ),
-						'value' => 'katakana-iroha'
+						'value' => 'katakana-iroha',
 					),
 					array(
 						'label' => __( 'Lower Alpha', 'live-composer-page-builder' ),
-						'value' => 'lower-alpha'
+						'value' => 'lower-alpha',
 					),
 					array(
 						'label' => __( 'Lower Greek', 'live-composer-page-builder' ),
-						'value' => 'lower-greek'
+						'value' => 'lower-greek',
 					),
 					array(
 						'label' => __( 'Lower Latin', 'live-composer-page-builder' ),
-						'value' => 'lower-latin'
+						'value' => 'lower-latin',
 					),
 					array(
 						'label' => __( 'Lower Roman', 'live-composer-page-builder' ),
-						'value' => 'lower-roman'
+						'value' => 'lower-roman',
 					),
 					array(
 						'label' => __( 'None', 'live-composer-page-builder' ),
-						'value' => 'none'
+						'value' => 'none',
 					),
 					array(
 						'label' => __( 'Upper Alpha', 'live-composer-page-builder' ),
-						'value' => 'upper-alpha'
+						'value' => 'upper-alpha',
 					),
 					array(
 						'label' => __( 'Upper Latin', 'live-composer-page-builder' ),
-						'value' => 'upper-latin'
+						'value' => 'upper-latin',
 					),
 					array(
 						'label' => __( 'Upper Roman', 'live-composer-page-builder' ),
-						'value' => 'upper-roman'
+						'value' => 'upper-roman',
 					),
 					array(
 						'label' => __( 'Inherit', 'live-composer-page-builder' ),
-						'value' => 'inherit'
+						'value' => 'inherit',
 					),
 				),
 				'section' => 'styling',
@@ -2826,19 +2825,19 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -2915,7 +2914,6 @@ class DSLC_Text_Simple extends DSLC_Module {
 			/**
 			 * Inputs
 			 */
-
 
 			array(
 				'label' => __( 'Color', 'live-composer-page-builder' ),
@@ -3099,19 +3097,19 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -3149,7 +3147,6 @@ class DSLC_Text_Simple extends DSLC_Module {
 			/**
 			 * Blockquote
 			 */
-
 
 			array(
 				'label' => __( 'Color', 'live-composer-page-builder' ),
@@ -3482,19 +3479,19 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -3612,19 +3609,19 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -3828,11 +3825,11 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 				),
 				'section' => 'responsive',
@@ -4410,11 +4407,11 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 				),
 				'section' => 'responsive',
@@ -5012,17 +5009,18 @@ class DSLC_Text_Simple extends DSLC_Module {
 
 		?><div class="dslc-text-module-content"><?php
 
-			if ( $dslc_active ) {
-				?><div class="dslca-editable-content" data-type="simple" data-id="content"<?php if ( $dslc_is_admin ) echo ' data-exportable-content'; ?>><?php
-			}
+if ( $dslc_active ) {
+	?><div class="dslca-editable-content" data-type="simple" data-id="content"<?php if ( $dslc_is_admin ) { echo ' data-exportable-content';
+	} ?>><?php
+}
 
 				$output_content = stripslashes( $options['content'] );
 				echo apply_filters( 'dslc_before_render', $output_content );
 
-			if ( $dslc_active ) {
-				?></div><!-- .dslca-editable-content --><?php
-				?><div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook"><?php _e( 'Open in WP Editor', 'live-composer-page-builder' ); ?></span></div><?php
-			}
+if ( $dslc_active ) {
+	?></div><!-- .dslca-editable-content --><?php
+?><div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook"><?php _e( 'Open in WP Editor', 'live-composer-page-builder' ); ?></span></div><?php
+}
 
 		?></div><?php
 	}

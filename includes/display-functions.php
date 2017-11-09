@@ -477,7 +477,7 @@ function dslc_display_modules( $page_id ) {
 
 		esc_html_e( 'No Modules Found.', 'live-composer-page-builder' );
 
-	}
+	}// End if().
 }
 
 /**
@@ -531,7 +531,7 @@ function dslc_display_templates() {
 
 			echo 'No Templates Found';
 		}
-	}
+	}// End if().
 }
 
 /**
@@ -541,7 +541,6 @@ function dslc_display_templates() {
  */
 function dslc_filter_content( $content ) {
 	// Uses 50% of the page loading time when not cached or in editing mode.
-
 	// Get ID of the post in which the content filter fired.
 	$curr_id = get_the_ID();
 
@@ -913,7 +912,9 @@ function dslc_editor_code() {
 			<div class="dslca-wp-editor-inner">
 				<?php
 				if ( 'visual' === $editor_type ) {
-					wp_editor( '', 'dslcawpeditor', array( 'quicktags' => false ) );
+					wp_editor( '', 'dslcawpeditor', array(
+						'quicktags' => false,
+					) );
 				} else {
 					wp_editor( '', 'dslcawpeditor' );
 				}
@@ -940,7 +941,7 @@ function dslc_editor_code() {
  */
 function dslc_is_json( $string ) {
 	json_decode( $string );
-	return ( function_exists('json_last_error') && json_last_error() == JSON_ERROR_NONE );
+	return ( function_exists( 'json_last_error' ) && json_last_error() == JSON_ERROR_NONE );
 }
 
 /**
@@ -966,7 +967,6 @@ function dslc_json_decode( $raw_code, $ignore_migration = false ) {
 		// If it's not JSON then:
 		// 1. it's old code of the module settings serialized + base64.
 		// 2. it's old code containing both shortocodes + base64.
-
 		/**
 		 * Is it's valid base64?
 		 *
@@ -1068,7 +1068,8 @@ function dslc_module_front( $atts, $settings_raw = null ) {
 		$module_struct = $module_instance->options();
 
 		// 🔖 RAW CODE CLEANUP
-		/* Previous version.
+		/*
+		 Previous version.
 		foreach ( $module_struct as $option ) {
 
 			// Fix settings when a new option added after a module is used
@@ -1125,7 +1126,7 @@ function dslc_module_front( $atts, $settings_raw = null ) {
 			$output_end = ob_get_contents();
 		ob_end_clean();
 
-		$output_body = dslc_decode_shortcodes( $output_body); //, 'storage' );
+		$output_body = dslc_decode_shortcodes( $output_body ); // , 'storage' );
 
 		return $output_start . $output_body . $output_end;
 
@@ -1234,7 +1235,7 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1 ) {
 					<source type="video/webm" src="' . $atts['bg_video'] . '.webm" />
 				</video>
 			</div>
-			<div class="dslc-bg-video-overlay" style="'. $overlay_style . '"></div>
+			<div class="dslc-bg-video-overlay" style="' . $overlay_style . '"></div>
 		</div>';
 
 	}
@@ -1288,11 +1289,11 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1 ) {
 	if ( $atts['custom_class'] != '' ) {
 
 		// Process all class definitions.
-  		$custom_class = preg_replace( '/,/', ' ', $atts['custom_class'] );
-  		$custom_class = preg_replace( '/\b\.\b/', ' ', $custom_class );
-  		$custom_class = preg_replace( '/\./', '', $custom_class );
-  		$custom_class = preg_replace( '/\s{2,}/', ' ', $custom_class );
-  		$custom_class = trim( $custom_class );
+			$custom_class = preg_replace( '/,/', ' ', $atts['custom_class'] );
+			$custom_class = preg_replace( '/\b\.\b/', ' ', $custom_class );
+			$custom_class = preg_replace( '/\./', '', $custom_class );
+			$custom_class = preg_replace( '/\s{2,}/', ' ', $custom_class );
+			$custom_class = trim( $custom_class );
 
 		$section_class .= $custom_class . ' ';
 	}
@@ -1346,7 +1347,7 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1 ) {
 
 		$content_render = do_shortcode( $content );
 
-	} elseif ( 2 === $version )  {
+	} elseif ( 2 === $version ) {
 
 		// New JSON-based dslc_code.
 		if ( isset( $atts['give_new_id'] ) && 'true' === $atts['give_new_id'] ) {
@@ -1356,7 +1357,6 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1 ) {
 			$content_render = dslc_render_content( $content );
 		}
 	}
-
 
 	$output = '';
 
@@ -1370,7 +1370,7 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1 ) {
 	$output .= '
 		<div ' . $section_id_output . ' class="dslc-modules-section ' . $a_container_class . $parallax_class . $section_class . $extra_classes . '" style="' . dslc_row_get_style( $atts ) . '" data-section-id="' . $atts['section_instance_id'] . '">
 
-				'.$bg_video . '
+				' . $bg_video . '
 
 				<div class="dslc-modules-section-wrapper dslc-clearfix">'
 
@@ -1378,12 +1378,12 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1 ) {
 
 					. '</div>';
 
-		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+	if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
-			$atts = dslc_encode_shortcodes_in_array( $atts );
+		$atts = dslc_encode_shortcodes_in_array( $atts );
 
-			// Management
-			$output .= '
+		// Management
+		$output .= '
 				<div class="dslca-modules-section-manage">
 					<div class="dslca-modules-section-manage-inner">
 						<span class="dslca-manage-action dslca-edit-modules-section-hook" title="Edit options" ><span class="dslca-icon dslc-icon-cog"></span></span>
@@ -1395,8 +1395,8 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1 ) {
 				</div>
 				<div class="dslca-modules-section-settings">' . dslc_encode_shortcodes( dslc_row_get_options_fields( $atts ) ) . '</div>';
 
-			$output .= '<textarea class="dslca-section-code">' . json_encode( $atts ) . '</textarea>';
-		}
+		$output .= '<textarea class="dslca-section-code">' . json_encode( $atts ) . '</textarea>';
+	}
 
 	$output .= '</div>';
 
@@ -1483,11 +1483,10 @@ function dslc_modules_area_front( $atts, $content = null, $version = 1 ) {
 	if ( 2 !== $version ) {
 		// Back-compatibility for shortcode-based dslc_code.
 		// OLD: $content_render = do_shortcode( $content );
-
 		// Restore module shortcodes.
-		$content = str_replace('{dslc_module ', '[dslc_module ', $content);
-		$content = str_replace('{dslc_module}', '[dslc_module]', $content);
-		$content = str_replace('{/dslc_module}', '[/dslc_module]', $content);
+		$content = str_replace( '{dslc_module ', '[dslc_module ', $content );
+		$content = str_replace( '{dslc_module}', '[dslc_module]', $content );
+		$content = str_replace( '{/dslc_module}', '[/dslc_module]', $content );
 
 		$modules = explode( '[/dslc_module]', trim( $content ) );
 
@@ -1510,7 +1509,7 @@ function dslc_modules_area_front( $atts, $content = null, $version = 1 ) {
 
 	// Modules output.
 	if ( empty( $content ) || ' ' === $content ) {
-		$output .= ''; //'&nbsp;';
+		$output .= ''; // '&nbsp;';
 	} else {
 		$output .= $content_render;
 	}
@@ -1535,7 +1534,7 @@ function dslc_load_template( $filename, $default = '' ) {
 	if ( $filename ) {
 
 		// Look for template in the theme
-		$template = locate_template( array($filename) );
+		$template = locate_template( array( $filename ) );
 
 		// If not found in theme load default
 		if ( ! $template ) {
@@ -1556,11 +1555,10 @@ function dslc_get_gfonts() {
 	global $dslc_available_fonts;
 	$dslc_all_googlefonts_array = $dslc_available_fonts['google'];
 
-
 	if ( ! defined( 'DS_LIVE_COMPOSER_GFONTS' ) || DS_LIVE_COMPOSER_GFONTS ) {
 
-		$gfonts_output_prepend = '';//'@import url("//fonts.googleapis.com/css?family=';
-		$gfonts_output_append = ''; //'&subset=' . $gfonts_output_subsets . '"); ';
+		$gfonts_output_prepend = '';// '@import url("//fonts.googleapis.com/css?family=';
+		$gfonts_output_append = ''; // '&subset=' . $gfonts_output_subsets . '"); ';
 		$gfonts_ouput_inner = array();
 
 		$gfonts_do_output = true;
@@ -1590,7 +1588,7 @@ function dslc_get_gfonts() {
 
 function dslc_render_gfonts( $fonts_array ) {
 
-	if ( is_array( $fonts_array ) && ! empty( $fonts_array) ) {
+	if ( is_array( $fonts_array ) && ! empty( $fonts_array ) ) {
 
 		// Google Fonts Import.
 		$gfonts_output = '';
@@ -1631,7 +1629,8 @@ function dslc_render_gfonts( $fonts_array ) {
 
 function dslc_post_pagination( $atts ) {
 
-	if ( is_front_page() ) { $paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1; } else { $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1; }
+	if ( is_front_page() ) { $paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1;
+	} else { $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1; }
 
 	if ( ! isset( $atts['force_number'] ) ) {
 		$force_number = false;
@@ -1652,7 +1651,7 @@ function dslc_post_pagination( $atts ) {
 
 	$showitems = ( $range * 2 ) + 1;
 
-	if ( empty ( $paged ) ) { $paged = 1; }
+	if ( empty( $paged ) ) { $paged = 1; }
 
 	if ( $pages == '' ) {
 		global $wp_query;
@@ -1669,34 +1668,32 @@ function dslc_post_pagination( $atts ) {
 			<ul class="dslc-clearfix">
 				<?php
 
-					if ( $type == 'numbered' ) {
+				if ( $type == 'numbered' ) {
 
-						if ( $paged > 2 && $paged > $range + 1 && $showitems < $pages ) { echo "<li class='dslc-inactive'><a href='" . get_pagenum_link( 1 ) . "'>&laquo;</a></li>"; }
-						if ( $paged > 1 && $showitems < $pages ) { echo "<li class='dslc-inactive'><a href='" . get_pagenum_link( $paged - 1 ) . "' >&lsaquo;</a></li>"; }
+					if ( $paged > 2 && $paged > $range + 1 && $showitems < $pages ) { echo "<li class='dslc-inactive'><a href='" . get_pagenum_link( 1 ) . "'>&laquo;</a></li>"; }
+					if ( $paged > 1 && $showitems < $pages ) { echo "<li class='dslc-inactive'><a href='" . get_pagenum_link( $paged - 1 ) . "' >&lsaquo;</a></li>"; }
 
-						for ( $i = 1; $i <= $pages; $i++ ) {
-							if ( 1 != $pages && ( ! ( $i >= $paged + $range + 1 || $i <= $paged - $range - 1 ) || $pages <= $showitems ) ) {
-								echo ( $paged == $i ) ? "<li class='dslc-active'><a href='" . get_pagenum_link( $i ) . "'>" . $i . "</a></li>" : "<li class='dslc-inactive'><a class='inactive' href='" . get_pagenum_link( $i ) . "'>" . $i . "</a></li>";
-							}
-						}
-
-						if ( $paged < $pages && $showitems < $pages ) { echo "<li class='dslc-inactive'><a href='" . get_pagenum_link( $paged + 1 ) . "'>&rsaquo;</a></li>"; }
-						if ( $paged < $pages - 1 && $paged + $range - 1 < $pages && $showitems < $pages ) { echo "<li class='dslc-inactive'><a href='" . get_pagenum_link( $pages ) . "'>&raquo;</a></li>"; }
-
-					} elseif ( $type == 'prevnext' ) {
-
-						if ( $paged > 1 ) { echo "<li class='dslc-inactive dslc-fl'><a href='" . get_pagenum_link( $paged - 1 ) . "' >" . __( 'Newer', 'live-composer-page-builder' ) . "</a></li>"; }
-						if ( $paged < $pages ) { echo "<li class='dslc-inactive dslc-fr'><a href='" . get_pagenum_link( $paged + 1 ) . "'>" . __( 'Older', 'live-composer-page-builder' ) . "</a></li>"; }
-
-					}
-
-					if ( $type == 'loadmore' ) {
-						if ( $paged < $pages ) {
-							echo "<li class='dslc-pagination-load-more dslc-active'><a href='" . get_pagenum_link( $paged + 1 ) . "'><span class='dslc-icon dslc-icon-refresh'></span>" . __( 'Load More Items', 'live-composer-page-builder' ) . "</a></li>";
-						} else {
-							echo "<li class='dslc-pagination-load-more dslc-inactive'><a href='#'><span class='dslc-icon dslc-icon-refresh'></span>" . __( 'Load More Items', 'live-composer-page-builder' ) . "</a></li>";
+					for ( $i = 1; $i <= $pages; $i++ ) {
+						if ( 1 != $pages && ( ! ( $i >= $paged + $range + 1 || $i <= $paged - $range - 1 ) || $pages <= $showitems ) ) {
+							echo ( $paged == $i ) ? "<li class='dslc-active'><a href='" . get_pagenum_link( $i ) . "'>" . $i . '</a></li>' : "<li class='dslc-inactive'><a class='inactive' href='" . get_pagenum_link( $i ) . "'>" . $i . '</a></li>';
 						}
 					}
+
+					if ( $paged < $pages && $showitems < $pages ) { echo "<li class='dslc-inactive'><a href='" . get_pagenum_link( $paged + 1 ) . "'>&rsaquo;</a></li>"; }
+					if ( $paged < $pages - 1 && $paged + $range - 1 < $pages && $showitems < $pages ) { echo "<li class='dslc-inactive'><a href='" . get_pagenum_link( $pages ) . "'>&raquo;</a></li>"; }
+				} elseif ( $type == 'prevnext' ) {
+
+					if ( $paged > 1 ) { echo "<li class='dslc-inactive dslc-fl'><a href='" . get_pagenum_link( $paged - 1 ) . "' >" . __( 'Newer', 'live-composer-page-builder' ) . '</a></li>'; }
+					if ( $paged < $pages ) { echo "<li class='dslc-inactive dslc-fr'><a href='" . get_pagenum_link( $paged + 1 ) . "'>" . __( 'Older', 'live-composer-page-builder' ) . '</a></li>'; }
+				}
+
+				if ( $type == 'loadmore' ) {
+					if ( $paged < $pages ) {
+						echo "<li class='dslc-pagination-load-more dslc-active'><a href='" . get_pagenum_link( $paged + 1 ) . "'><span class='dslc-icon dslc-icon-refresh'></span>" . __( 'Load More Items', 'live-composer-page-builder' ) . '</a></li>';
+					} else {
+						echo "<li class='dslc-pagination-load-more dslc-inactive'><a href='#'><span class='dslc-icon dslc-icon-refresh'></span>" . __( 'Load More Items', 'live-composer-page-builder' ) . '</a></li>';
+					}
+				}
 
 				?>
 			</ul>
@@ -1706,7 +1703,7 @@ function dslc_post_pagination( $atts ) {
 			<?php endif; ?>
 
 		</div><!-- .dslc-pagination --><?php
-	}
+	}// End if().
 }
 
 /**
@@ -1717,15 +1714,14 @@ function dslc_post_pagination( $atts ) {
  * @return string       Filtered code.
  */
 function dslc_encode_shortcodes( $code ) {
-	$braket_open =  '%(%';
-	$braket_close =  '%)%';
+	$braket_open = '%(%';
+	$braket_close = '%)%';
 
 	// if ( 'storage' === $mode ) {
-	// 	$braket_open =  '%((%';
-	// 	$braket_close =  '%))%';
+	// $braket_open =  '%((%';
+	// $braket_close =  '%))%';
 	// }
-
- 	$code = str_replace( '[',   $braket_open,  $code );
+		$code = str_replace( '[',   $braket_open,  $code );
 	$code = str_replace( '%{%', $braket_open,  $code );
 	$code = str_replace( ']',   $braket_close, $code );
 	$code = str_replace( '%}%', $braket_close, $code );
@@ -1735,10 +1731,10 @@ function dslc_encode_shortcodes( $code ) {
 
 function dslc_encode_protected_shortcodes( $code ) {
 
-	$braket_open =  '%((%';
-	$braket_close =  '%))%';
+	$braket_open = '%((%';
+	$braket_close = '%))%';
 
- 	$code = str_replace( '[',   $braket_open,  $code );
+		$code = str_replace( '[',   $braket_open,  $code );
 	$code = str_replace( '%(%', $braket_open,  $code );
 	$code = str_replace( ']',   $braket_close, $code );
 	$code = str_replace( '%)%', $braket_close, $code );
@@ -1746,15 +1742,14 @@ function dslc_encode_protected_shortcodes( $code ) {
 	return $code;
 }
 
-function dslc_decode_shortcodes( $code , $mode = 'display' ) {
-	$braket_open =  '%(%';
-	$braket_close =  '%)%';
+function dslc_decode_shortcodes( $code, $mode = 'display' ) {
+	$braket_open = '%(%';
+	$braket_close = '%)%';
 
 	// if ( 'storage' === $mode ) {
-	// 	$braket_open =  '%((%';
-	// 	$braket_close =  '%))%';
+	// $braket_open =  '%((%';
+	// $braket_close =  '%))%';
 	// }
-
 	$code = str_replace( $braket_open,  '[', $code );
 	$code = str_replace( $braket_close, ']', $code );
 
@@ -1763,8 +1758,8 @@ function dslc_decode_shortcodes( $code , $mode = 'display' ) {
 
 function dslc_encode_shortcodes_in_array( $atts ) {
 	if ( is_array( $atts ) ) {
-		foreach ( $atts as $key=>$value ) {
-			$atts[$key] = dslc_encode_shortcodes_in_array( $value );
+		foreach ( $atts as $key => $value ) {
+			$atts[ $key ] = dslc_encode_shortcodes_in_array( $value );
 		}
 	} else {
 		return dslc_encode_shortcodes( $atts );

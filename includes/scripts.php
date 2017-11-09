@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-final class DSLC_Scripts{
+final class DSLC_Scripts {
 
 	/**
 	 * Init Scripts loading
@@ -45,7 +45,6 @@ final class DSLC_Scripts{
 		$load_for_admin_screens = apply_filters( 'dslc_icons_admin_screens', $load_for_admin_screens );
 		// Theme/extension plugin authors can extend list of the admin screens
 		// were they want to use icons popup.
-
 		if ( is_admin() ) {
 			$screen_data = get_current_screen();
 			$screen = $screen_data->base;
@@ -91,7 +90,7 @@ final class DSLC_Scripts{
 		 * Load our IE-only stylesheet for all versions of IE:
 		 * <!--[if IE]> ... <![endif]-->
 		 */
-		wp_enqueue_style( 'dslc-css-ie',  DS_LIVE_COMPOSER_URL . 'css/ie.css', array('dslc-main-css'), DS_LIVE_COMPOSER_VER );
+		wp_enqueue_style( 'dslc-css-ie',  DS_LIVE_COMPOSER_URL . 'css/ie.css', array( 'dslc-main-css' ), DS_LIVE_COMPOSER_VER );
 		wp_style_add_data( 'dslc-css-ie', 'conditional', 'IE' );
 
 		/**
@@ -106,10 +105,14 @@ final class DSLC_Scripts{
 
 		if ( is_ssl() ) {
 
-			wp_localize_script( 'dslc-main-js', 'DSLCAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php', 'https' ) ) );
+			wp_localize_script( 'dslc-main-js', 'DSLCAjax', array(
+				'ajaxurl' => admin_url( 'admin-ajax.php', 'https' ),
+			) );
 		} else {
 
-			wp_localize_script( 'dslc-main-js', 'DSLCAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php', 'http' ) ) );
+			wp_localize_script( 'dslc-main-js', 'DSLCAjax', array(
+				'ajaxurl' => admin_url( 'admin-ajax.php', 'http' ),
+			) );
 		}
 
 		/**
@@ -128,7 +131,6 @@ final class DSLC_Scripts{
 			 */
 			wp_enqueue_style( 'dslc-builder-main-css', DS_LIVE_COMPOSER_URL . 'css/builder/builder.main.css', array(), DS_LIVE_COMPOSER_VER );
 			wp_enqueue_style( 'dslc-builder-plugins-css', DS_LIVE_COMPOSER_URL . 'css/builder/builder.plugins.css', array(), DS_LIVE_COMPOSER_VER );
-
 
 			/**
 			 * JavaScript
@@ -229,15 +231,18 @@ final class DSLC_Scripts{
 			// Color picker.
 			wp_enqueue_style( 'wp-color-picker' );
 
-			//wp_enqueue_script( 'imagesloaded' ); // Need this for Masonry.
-			//wp_enqueue_script( 'jquery-masonry' );
-
+			// wp_enqueue_script( 'imagesloaded' ); // Need this for Masonry.
+			// wp_enqueue_script( 'jquery-masonry' );
 			wp_enqueue_script( 'dslc-builder-plugins-js', DS_LIVE_COMPOSER_URL . 'js/builder/builder.plugins.js', array( 'jquery', 'wp-color-picker' ), DS_LIVE_COMPOSER_VER );
 
 			self::load_scripts( 'builder', 'dslc-builder-main-js' );
 
-			wp_localize_script( 'dslc-builder-main-js', 'DSLCAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php', $protocol ) ) );
-			wp_localize_script( 'dslc-builder-main-js', 'DSLCSiteData', array( 'siteurl' => get_option( 'siteurl' ) ) );
+			wp_localize_script( 'dslc-builder-main-js', 'DSLCAjax', array(
+				'ajaxurl' => admin_url( 'admin-ajax.php', $protocol ),
+			) );
+			wp_localize_script( 'dslc-builder-main-js', 'DSLCSiteData', array(
+				'siteurl' => get_option( 'siteurl' ),
+			) );
 
 			$translation_array = array(
 				'str_confirm' => __( 'Confirm', 'live-composer-page-builder' ),
@@ -276,7 +281,7 @@ final class DSLC_Scripts{
 			global $dslc_var_icons;
 
 			wp_localize_script( 'dslc-builder-main-js', 'DSLCIcons', $dslc_var_icons );
-		}
+		}// End if().
 
 		/* If current screen is standard post editing screen in WP Admin */
 		if ( 'post-editing' === $current_screen ) {
@@ -285,7 +290,9 @@ final class DSLC_Scripts{
 
 			if ( 'page' === get_post_type( get_the_ID() ) && 'post.php' === $hook ) {
 
-				wp_localize_script( 'dslc-post-options-js-admin', 'tabData', array( 'tabTitle' => __( 'Page Builder', 'live-composer-page-builder' ) ) );
+				wp_localize_script( 'dslc-post-options-js-admin', 'tabData', array(
+					'tabTitle' => __( 'Page Builder', 'live-composer-page-builder' ),
+				) );
 			}
 
 			wp_enqueue_style( 'jquery-ui-datepicker', '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/smoothness/jquery-ui.css' );
@@ -302,7 +309,9 @@ final class DSLC_Scripts{
 		if ( 'dslc-options' === $current_screen ) {
 			wp_enqueue_script( 'dslc-plugin-options-js-admin', DS_LIVE_COMPOSER_URL . 'includes/plugin-options-framework/js/main' . $min_suffix . '.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 			wp_enqueue_style( 'dslc-plugin-options-css-admin', DS_LIVE_COMPOSER_URL . 'includes/plugin-options-framework/css/main' . $min_suffix . '.css', array(), DS_LIVE_COMPOSER_VER );
-			wp_localize_script( 'dslc-plugin-options-js-admin', 'dslcajax', array( 'nonce' => wp_create_nonce( 'dslc-optionspanel-ajax' ) ) );
+			wp_localize_script( 'dslc-plugin-options-js-admin', 'dslcajax', array(
+				'nonce' => wp_create_nonce( 'dslc-optionspanel-ajax' ),
+			) );
 		}
 
 		wp_enqueue_style( 'dslc-css-wpadmin', DS_LIVE_COMPOSER_URL . 'css/wp-admin.css', array(), DS_LIVE_COMPOSER_VER );

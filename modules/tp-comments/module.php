@@ -58,15 +58,15 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Desktop', 'live-composer-page-builder' ),
-						'value' => 'desktop'
+						'value' => 'desktop',
 					),
 					array(
 						'label' => __( 'Tablet', 'live-composer-page-builder' ),
-						'value' => 'tablet'
+						'value' => 'tablet',
 					),
 					array(
 						'label' => __( 'Phone', 'live-composer-page-builder' ),
-						'value' => 'phone'
+						'value' => 'phone',
 					),
 				),
 			),
@@ -110,19 +110,19 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -164,7 +164,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'affect_on_change_rule' => 'min-height',
 				'section' => 'styling',
 				'ext' => 'px',
-				'increment' => 5
+				'increment' => 5,
 			),
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
@@ -239,19 +239,19 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -361,19 +361,19 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -495,19 +495,19 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -899,19 +899,19 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -945,16 +945,16 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'tab' => __( 'Main', 'live-composer-page-builder' ),
 			),
 			array(
- 				'label' => __( 'Color - Link', 'live-composer-page-builder' ),
- 				'id' => 'css_cm_link_color',
- 				'std' => '',
- 				'type' => 'color',
- 				'refresh_on_change' => false,
- 				'affect_on_change_el' => '.dslc-comment-inner a',
- 				'affect_on_change_rule' => 'color',
- 				'section' => 'styling',
- 				'tab' => __( 'Main', 'live-composer-page-builder' ),
- 			),
+					'label' => __( 'Color - Link', 'live-composer-page-builder' ),
+					'id' => 'css_cm_link_color',
+					'std' => '',
+					'type' => 'color',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-comment-inner a',
+					'affect_on_change_rule' => 'color',
+					'section' => 'styling',
+					'tab' => __( 'Main', 'live-composer-page-builder' ),
+				),
 			array(
 				'label' => __( 'Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_cm_font_size',
@@ -1081,11 +1081,11 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 				),
 				'section' => 'responsive',
@@ -1363,11 +1363,11 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 				),
 				'section' => 'responsive',
@@ -1633,10 +1633,11 @@ class DSLC_TP_Comments extends DSLC_Module {
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 
-
 		);
 
-		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array('hover_opts' => false) ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array(
+			'hover_opts' => false,
+		) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		// Cache calculated array in WP Object Cache.
@@ -1655,7 +1656,7 @@ class DSLC_TP_Comments extends DSLC_Module {
 	 */
 	function output( $options ) {
 	?>
-		[dslc_module_comments_output]<?php echo serialize($options); ?>[/dslc_module_comments_output]
+		[dslc_module_comments_output]<?php echo serialize( $options ); ?>[/dslc_module_comments_output]
 	<?php
 	}
 }
@@ -1683,7 +1684,6 @@ function dslc_module_comments_output( $atts, $content = null ) {
 		$post_id = get_the_ID();
 		$show_fake = false;
 	}
-
 
 	/* Module output starts here */
 
@@ -1789,7 +1789,9 @@ function dslc_module_comments_output( $atts, $content = null ) {
 
 					<?php if ( defined( 'DISQUS_VERSION' ) ) : comments_template(); else : ?>
 
-						<?php $comments = get_comments( array('post_id' => $post_id) ); ?>
+						<?php $comments = get_comments( array(
+							'post_id' => $post_id,
+						) ); ?>
 
 						<?php if ( get_comment_pages_count( $comments ) > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through ?>
 
@@ -1798,7 +1800,9 @@ function dslc_module_comments_output( $atts, $content = null ) {
 						<?php endif; ?>
 
 						<ol class="comments clean-list">
-							<?php wp_list_comments( array('callback' => 'dslc_display_comments'), $comments ); ?>
+							<?php wp_list_comments( array(
+								'callback' => 'dslc_display_comments',
+							), $comments ); ?>
 						</ol><!-- .commentlist -->
 
 						<?php if ( get_comment_pages_count( $comments ) > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through ?>
@@ -1819,9 +1823,9 @@ function dslc_module_comments_output( $atts, $content = null ) {
 
 		<?php
 
-	$shortcode_rendered = ob_get_contents();
-	ob_end_clean();
+		$shortcode_rendered = ob_get_contents();
+		ob_end_clean();
 
-	return $shortcode_rendered;
+		return $shortcode_rendered;
 
 } add_shortcode( 'dslc_module_comments_output', 'dslc_module_comments_output' );

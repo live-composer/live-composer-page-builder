@@ -56,15 +56,15 @@ class DSLC_Separator extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Desktop', 'live-composer-page-builder' ),
-						'value' => 'desktop'
+						'value' => 'desktop',
 					),
 					array(
 						'label' => __( 'Tablet', 'live-composer-page-builder' ),
-						'value' => 'tablet'
+						'value' => 'tablet',
 					),
 					array(
 						'label' => __( 'Phone', 'live-composer-page-builder' ),
-						'value' => 'phone'
+						'value' => 'phone',
 					),
 				),
 			),
@@ -89,19 +89,19 @@ class DSLC_Separator extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Invisible', 'live-composer-page-builder' ),
-						'value' => 'invisible'
+						'value' => 'invisible',
 					),
 					array(
 						'label' => __( 'Solid', 'live-composer-page-builder' ),
-						'value' => 'solid'
+						'value' => 'solid',
 					),
 					array(
 						'label' => __( 'Dashed', 'live-composer-page-builder' ),
-						'value' => 'dashed'
+						'value' => 'dashed',
 					),
 					array(
 						'label' => __( 'Dotted', 'live-composer-page-builder' ),
-						'value' => 'dotted'
+						'value' => 'dotted',
 					),
 				),
 				'section' => 'styling',
@@ -252,19 +252,19 @@ class DSLC_Separator extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -332,11 +332,11 @@ class DSLC_Separator extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 				),
 				'section' => 'responsive',
@@ -369,11 +369,11 @@ class DSLC_Separator extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 				),
 				'section' => 'responsive',
@@ -396,7 +396,9 @@ class DSLC_Separator extends DSLC_Module {
 
 		);
 
-		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array('hover_opts' => false) ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array(
+			'hover_opts' => false,
+		) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		// Cache calculated array in WP Object Cache.
@@ -415,7 +417,6 @@ class DSLC_Separator extends DSLC_Module {
 
 		global $dslc_active;
 
-
 		/* Module output stars here */
 			?>
 			<div class="dslc-separator-wrapper">
@@ -426,7 +427,6 @@ class DSLC_Separator extends DSLC_Module {
 				</div><div></div>
 			</div><!-- .dslc-separator-wrapper -->
 			<?php
-
 
 	}
 

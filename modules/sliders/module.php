@@ -62,10 +62,9 @@ class DSLC_Sliders extends DSLC_Module {
 			foreach ( $sliders as $slider ) {
 				$slider_choices[] = array(
 					'label' => $slider->title,
-					'value' => $slider->alias
+					'value' => $slider->alias,
 				);
 			}
-
 		}
 
 		$dslc_options = array(
@@ -77,15 +76,15 @@ class DSLC_Sliders extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Desktop', 'live-composer-page-builder' ),
-						'value' => 'desktop'
+						'value' => 'desktop',
 					),
 					array(
 						'label' => __( 'Tablet', 'live-composer-page-builder' ),
-						'value' => 'tablet'
+						'value' => 'tablet',
 					),
 					array(
 						'label' => __( 'Phone', 'live-composer-page-builder' ),
-						'value' => 'phone'
+						'value' => 'phone',
 					),
 				),
 			),
@@ -94,11 +93,13 @@ class DSLC_Sliders extends DSLC_Module {
 				'id' => 'slider',
 				'std' => 'not_set',
 				'type' => 'select',
-				'choices' => $slider_choices
-			)
+				'choices' => $slider_choices,
+			),
 		);
 
-		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array( 'hover_opts' => false ) ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array(
+			'hover_opts' => false,
+		) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		// Cache calculated array in WP Object Cache.
@@ -117,27 +118,24 @@ class DSLC_Sliders extends DSLC_Module {
 
 		global $dslc_active;
 
-		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
+		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 			$dslc_is_admin = true;
-		else
-			$dslc_is_admin = false;
-
+		} else { $dslc_is_admin = false;
+		}
 
 		/* Module output stars here */
 
-			if ( ! isset( $options['slider'] ) || $options['slider'] == 'not_set' ) {
+		if ( ! isset( $options['slider'] ) || $options['slider'] == 'not_set' ) {
 
-				if ( $dslc_is_admin ) :
-					?><div class="dslc-notification dslc-red"><?php _e( 'Click the cog icon on the right of this box to choose which slider to show.', 'live-composer-page-builder' ); ?> <span class="dslca-module-edit-hook dslc-icon dslc-icon-cog"></span></span></div><?php
-				endif;
+			if ( $dslc_is_admin ) :
+				?><div class="dslc-notification dslc-red"><?php _e( 'Click the cog icon on the right of this box to choose which slider to show.', 'live-composer-page-builder' ); ?> <span class="dslca-module-edit-hook dslc-icon dslc-icon-cog"></span></span></div><?php
+		endif;
 
-			} else {
+		} else {
 
-				echo '[rev_slider '. $options['slider'] .']';
+			echo '[rev_slider ' . $options['slider'] . ']';
 
-			}
-
-
+		}
 
 	}
 

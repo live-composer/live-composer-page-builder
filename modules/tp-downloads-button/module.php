@@ -56,15 +56,15 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Desktop', 'live-composer-page-builder' ),
-						'value' => 'desktop'
+						'value' => 'desktop',
 					),
 					array(
 						'label' => __( 'Tablet', 'live-composer-page-builder' ),
-						'value' => 'tablet'
+						'value' => 'tablet',
 					),
 					array(
 						'label' => __( 'Phone', 'live-composer-page-builder' ),
-						'value' => 'phone'
+						'value' => 'phone',
 					),
 				),
 			),
@@ -136,19 +136,19 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -190,7 +190,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_rule' => 'min-height',
 				'section' => 'styling',
 				'ext' => 'px',
-				'increment' => 5
+				'increment' => 5,
 			),
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
@@ -293,7 +293,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'affect_on_change_rule' => 'font-weight',
 				'section' => 'styling',
 				'tab' => __( 'Typography', 'live-composer-page-builder' ),
-				'ext' => ''
+				'ext' => '',
 			),
 			array(
 				'label' => __( 'Font Family', 'live-composer-page-builder' ),
@@ -355,11 +355,11 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 				),
 				'section' => 'responsive',
@@ -429,11 +429,11 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 				),
 				'section' => 'responsive',
@@ -493,7 +493,9 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 
 		);
 
-		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array('hover_opts' => false) ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array(
+			'hover_opts' => false,
+		) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		// Cache calculated array in WP Object Cache.
@@ -512,11 +514,10 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 
 		global $dslc_active;
 
-		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
+		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 			$dslc_is_admin = true;
-		else
-			$dslc_is_admin = false;
-
+		} else { $dslc_is_admin = false;
+		}
 
 		$show_fake = true;
 
@@ -526,12 +527,12 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 			if ( get_post_type( $post_id ) == 'dslc_templates' ) {
 				$show_fake = true;
 			} else {
-				if ( get_post_meta( $post_id, 'dslc_download_file', true ) )
+				if ( get_post_meta( $post_id, 'dslc_download_file', true ) ) {
 					$download_link = wp_get_attachment_url( get_post_meta( $post_id, 'dslc_download_file', true ) );
-				elseif ( get_post_meta( $post_id, 'dslc_download_url', true ) )
+				} elseif ( get_post_meta( $post_id, 'dslc_download_url', true ) ) {
 					$download_link = get_post_meta( $post_id, 'dslc_download_url', true );
-				else
-					$download_link = false;
+				} else { $download_link = false;
+				}
 			}
 		}
 
@@ -549,7 +550,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 							<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 						<?php endif; ?>
 						<?php if ( $dslc_is_admin ) : ?>
-							<span class="dslca-editable-content" data-id="button_text" data-type="simple" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?>><?php echo $options['button_text']; ?></span>
+							<span class="dslca-editable-content" data-id="button_text" data-type="simple" <?php if ( $dslc_is_admin ) { echo 'contenteditable';} ?>><?php echo $options['button_text']; ?></span>
 						<?php else : ?>
 							<span><?php echo $options['button_text']; ?></span>
 						<?php endif; ?>
@@ -557,8 +558,6 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 				</div><!-- .dslc-download-button -->
 
 			<?php
-
-
 
 	}
 

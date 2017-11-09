@@ -56,25 +56,24 @@ function dslc_presets_load( $settings ) {
 			// Get preset settings.
 			$preset_settings = dslc_json_decode( $preset_data['code'], $ignore_migration = true );
 			// $preset_settings = maybe_unserialize( base64_decode( $preset_data['code'] ) );
-
 			$preset_settings_stripped = $preset_settings;
 
 			// Go through all the settings.
 			foreach ( $settings as $key => $value ) {
 
 				// If the setting is in the presets, use it.
-				if ( isset( $preset_settings[$key] ) ) {
-					$settings[$key] = $preset_settings[$key];
-					unset( $preset_settings_stripped[$key] );
+				if ( isset( $preset_settings[ $key ] ) ) {
+					$settings[ $key ] = $preset_settings[ $key ];
+					unset( $preset_settings_stripped[ $key ] );
 				}
 			}
 
 			// Fill in the blanks.
 			foreach ( $preset_settings_stripped as $key => $value ) {
-				$settings[$key] = $value;
+				$settings[ $key ] = $value;
 			}
 		}
-	}
+	}// End if().
 
 	// Pass the settings back.
 	return $settings;
@@ -149,9 +148,8 @@ function dslc_save_preset( $preset_name, $preset_code_raw, $module_id ) {
 	// Allowed characters.
 	$pattern_presset = '/^[0-9,\p{L},a-zA-Z, ,_,-]{1,80}$/s';
 
-
 	// Quick presets validation.
-	foreach ($presets as $id => $preset) {
+	foreach ( $presets as $id => $preset ) {
 
 		if ( empty( $preset['id'] ) ) {
 			unset( $presets[ $id ] );
@@ -161,7 +159,6 @@ function dslc_save_preset( $preset_name, $preset_code_raw, $module_id ) {
 			unset( $presets[ $id ] );
 		}
 	}
-
 
 	// Save new presets array to db and set the status.
 	if ( update_option( 'dslc_presets', maybe_serialize( $presets ) ) ) {
@@ -192,8 +189,8 @@ function dslc_plugin_opts_presets() {
 				'std' => 'both',
 				'type' => 'styling_presets',
 				'descr' => __( 'Here you can delete styling presets.', 'live-composer-page-builder' ),
-			)
-		)
+			),
+		),
 	);
 
 } //add_action( 'dslc_hook_register_options', 'dslc_plugin_opts_presets', 45 );

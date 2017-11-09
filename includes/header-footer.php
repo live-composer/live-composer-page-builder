@@ -351,12 +351,11 @@ function dslc_hf_options() {
  *
  * @since 1.0
  *
- * @param int     $post_id ID of the post/page. Default false ( Automatically finds ID ).
+ * @param int $post_id ID of the post/page. Default false ( Automatically finds ID ).
  * @return array  The IDs of the header and footer associated with the post/page. False if none.
  */
 function dslc_hf_get_ID( $post_id = false ) {
 	// Called 4 times. 0.166 sec. No profit from caching achieved.
-
 	// If theme does not define header/footer compatibility return false.
 	// If current page is actually header/footer post, return false.
 	if ( ! defined( 'DS_LIVE_COMPOSER_HF' ) || ! DS_LIVE_COMPOSER_HF || is_singular( 'dslc_hf' ) ) {
@@ -491,7 +490,6 @@ function dslc_hf_get_ID( $post_id = false ) {
 		$footer_tpl_id = false;
 	} // End if().
 
-
 	$result = array(
 		'header' => apply_filters( 'wpml_object_id', $header_tpl_id, 'dslc_hf', true ),
 		'footer' => apply_filters( 'wpml_object_id', $footer_tpl_id, 'dslc_hf', true ),
@@ -506,8 +504,8 @@ function dslc_hf_get_ID( $post_id = false ) {
  *
  * @since 1.0.2
  *
- * @param int     $post_id ID of the post/page. Default false.
- * @param string  $h_or_f Accepted values 'header' and 'footer'. Defaults to 'header'
+ * @param int    $post_id ID of the post/page. Default false.
+ * @param string $h_or_f Accepted values 'header' and 'footer'. Defaults to 'header'
  * @return string The LC code for the header/footer of the post/page. Empty string if no LC code.
  */
 function dslc_hf_get_code( $post_id = false, $h_or_f = 'header' ) {
@@ -547,7 +545,6 @@ function dslc_hf_get_code( $post_id = false, $h_or_f = 'header' ) {
 function dslc_hf_get_headerfooter( $post_id = false, $hf_type = 'header' ) {
 
 	// Compilation time 3.375 sec. before caching / 0.03 sec after caching.
-
 	// Get header/footer ID associated with the post.
 	$header_footer = dslc_hf_get_ID( $post_id );
 	$hf_id = false;
@@ -605,7 +602,6 @@ function dslc_hf_get_headerfooter( $post_id = false, $hf_type = 'header' ) {
 		}
 
 		// ============================================================
-
 		if ( 'fixed' === $position ) {
 			$editing_parametters .= ' data-editing-sublabel="' . __( 'To preview FIXED positioning click on "Hide Editor" button.','live-composer-page-builder' ) . '"';
 		} elseif ( 'absolute' === $position ) {
@@ -658,7 +654,7 @@ function dslc_hf_get_headerfooter( $post_id = false, $hf_type = 'header' ) {
 
 		// if ( ! empty( $rendered_code ) && ! dslc_is_editor_active() ) {
 		if ( ! empty( $rendered_code ) ) {
-			$rendered_code = '<div id="dslc-' . $hf_type . '" class="dslc-' . $hf_type . '-pos-' . $position . ' ' . $header_padding .'" data-hf ' . $editing_parametters . '>' . $rendered_code . $append . '</div>';
+			$rendered_code = '<div id="dslc-' . $hf_type . '" class="dslc-' . $hf_type . '-pos-' . $position . ' ' . $header_padding . '" data-hf ' . $editing_parametters . '>' . $rendered_code . $append . '</div>';
 		}
 
 		$rendered_code = $code_before . $wrapper_start . $rendered_code . $wrapper_end . $code_after;
@@ -682,7 +678,7 @@ function dslc_hf_get_headerfooter( $post_id = false, $hf_type = 'header' ) {
  *
  * @since 1.0.2
  *
- * @param int     $post_id ID of the post/page. Default false.
+ * @param int $post_id ID of the post/page. Default false.
  * @return string The HTML ouput of the header for a defined post/page
  */
 function dslc_hf_get_header( $post_id = false ) {
@@ -695,7 +691,7 @@ function dslc_hf_get_header( $post_id = false ) {
  *
  * @since 1.0.2
  *
- * @param int     $post_id ID of the post/page. Default false.
+ * @param int $post_id ID of the post/page. Default false.
  * @return string The HTML ouput of the footer for a defined post/page
  */
 function dslc_hf_get_footer( $post_id = false ) {

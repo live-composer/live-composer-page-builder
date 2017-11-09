@@ -204,7 +204,7 @@ function dslc_ajax_add_module( $atts ) {
 
 		// Good night.
 		exit;
-	}
+	}// End if().
 
 } add_action( 'wp_ajax_dslc-ajax-add-module', 'dslc_ajax_add_module' );
 
@@ -231,7 +231,7 @@ function dslc_ajax_display_module_options( $atts ) {
 
 		if ( ! class_exists( $module_id ) ) {
 
-			header('HTTP/1.1 400 Bad Request', true, 400);
+			header( 'HTTP/1.1 400 Bad Request', true, 400 );
 			die();
 		}
 
@@ -281,7 +281,7 @@ function dslc_ajax_display_module_options( $atts ) {
 
 		// Auf wiedersehen.
 		exit;
-	}
+	}// End if().
 
 } add_action( 'wp_ajax_dslc-ajax-display-module-options', 'dslc_ajax_display_module_options' );
 
@@ -337,7 +337,7 @@ function dslc_ajax_save_composer( $atts ) {
 		 */
 
 		// Add/update the post/page with the composer code.
-		if ( update_post_meta( $post_id, 'dslc_code', wp_slash( $serialized_composer_code )  ) ) {
+		if ( update_post_meta( $post_id, 'dslc_code', wp_slash( $serialized_composer_code ) ) ) {
 			$response['status'] = 'success';
 		} else {
 			$response['status'] = 'failed';
@@ -370,7 +370,7 @@ function dslc_ajax_save_composer( $atts ) {
 
 		// Au revoir.
 		exit;
-	}
+	}// End if().
 } add_action( 'wp_ajax_dslc-ajax-save-composer', 'dslc_ajax_save_composer' );
 
 /**
@@ -523,7 +523,7 @@ function dslc_ajax_save_template( $atts ) {
 			'title' => $template_title,
 			'id' => $template_id,
 			'code' => $template_code,
-			'section' => 'user'
+			'section' => 'user',
 		);
 
 		// Save new templates array to db.
@@ -541,7 +541,7 @@ function dslc_ajax_save_template( $atts ) {
 
 		// Asta la vista.
 		exit;
-	}
+	}// End if().
 } add_action( 'wp_ajax_dslc-ajax-save-template', 'dslc_ajax_save_template' );
 
 /**
@@ -650,9 +650,9 @@ function dslc_ajax_dm_module_defaults_code( $atts ) {
 			// Module output.
 			$settings = $module_instance->options();
 
-			$code .= "if ( " . '$id' . " == '" . $module_id . "' ) {
-	". '$new_defaults = array(' . "
-";
+			$code .= 'if ( ' . '$id' . " == '" . $module_id . "' ) {
+	" . '$new_defaults = array(' . '
+';
 
 			// Fix settings when a new option added after a module is used.
 			foreach ( $settings as $key => $setting ) {
@@ -660,7 +660,7 @@ function dslc_ajax_dm_module_defaults_code( $atts ) {
 				if ( isset( $settings_new[ $setting['id'] ] ) ) {
 
 					if ( $settings_new[ $setting['id'] ] !== $settings[ $key ]['std'] ) {
-						$code .= "		'" . $setting['id'] . "' => '" . $settings_new[$setting['id']] . "',
+						$code .= "		'" . $setting['id'] . "' => '" . $settings_new[ $setting['id'] ] . "',
 ";
 					}
 				} else {
@@ -674,7 +674,7 @@ function dslc_ajax_dm_module_defaults_code( $atts ) {
 			$code .= '	);
 }';
 
-		}
+		}// End if().
 
 		// Get the front-end output.
 		$response['output'] = $code;
@@ -688,7 +688,7 @@ function dslc_ajax_dm_module_defaults_code( $atts ) {
 
 		// Bye bye.
 		exit;
-	}
+	}// End if().
 } add_action( 'wp_ajax_dslc-ajax-dm-module-defaults', 'dslc_ajax_dm_module_defaults_code' );
 
 /**
@@ -712,7 +712,7 @@ function dslc_ajax_save_preset() {
 
 		if ( ! class_exists( $module_id ) ) {
 
-			header('HTTP/1.1 400 Bad Request', true, 400);
+			header( 'HTTP/1.1 400 Bad Request', true, 400 );
 			die();
 		}
 
@@ -737,7 +737,7 @@ function dslc_ajax_save_preset() {
 
 		// Bye bye.
 		exit;
-	}
+	}// End if().
 } add_action( 'wp_ajax_dslc-ajax-save-preset', 'dslc_ajax_save_preset' );
 
 /**

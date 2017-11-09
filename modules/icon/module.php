@@ -316,7 +316,6 @@ class DSLC_Icon extends DSLC_Module {
 				'section' => 'responsive',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'max' => 500,
-				
 
 				'ext' => 'px',
 			),
@@ -381,7 +380,6 @@ class DSLC_Icon extends DSLC_Module {
 				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'max' => 500,
-				
 
 				'ext' => 'px',
 			),
@@ -412,7 +410,9 @@ class DSLC_Icon extends DSLC_Module {
 			),
 		);
 
-		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array( 'hover_opts' => false ) ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array(
+			'hover_opts' => false,
+		) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		// Cache calculated array in WP Object Cache.
@@ -437,7 +437,6 @@ class DSLC_Icon extends DSLC_Module {
 			$dslc_is_admin = false;
 		}
 
-
 		/* Module output stars here */
 
 		?>
@@ -447,8 +446,6 @@ class DSLC_Icon extends DSLC_Module {
 			</div><!-- .dslc-micon-module -->
 
 		<?php
-
-
 
 	}
 }

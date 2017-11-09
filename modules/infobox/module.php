@@ -17,7 +17,7 @@ class DSLC_Info_Box extends DSLC_Module {
 
 		$this->module_id = 'DSLC_Info_Box';
 		$this->module_title = __( 'Info Box', 'live-composer-page-builder' );
-		$this->module_icon = 'mouse-pointer';//'info';
+		$this->module_icon = 'mouse-pointer';// 'info';
 		$this->module_category = 'General';
 
 	}
@@ -72,7 +72,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'label' => __( 'Title Link', 'live-composer-page-builder' ),
 				'id' => 'title_link',
 				'std' => '',
-				'type' => 'text'
+				'type' => 'text',
 			),
 			array(
 				'label' => __( 'Title Link - Open in', 'live-composer-page-builder' ),
@@ -88,13 +88,13 @@ class DSLC_Info_Box extends DSLC_Module {
 						'label' => __( 'New Tab', 'live-composer-page-builder' ),
 						'value' => '_blank',
 					),
-				)
+				),
 			),
 			array(
 				'label' => __( 'Icon Link', 'live-composer-page-builder' ),
 				'id' => 'icon_link',
 				'std' => '',
-				'type' => 'text'
+				'type' => 'text',
 			),
 			array(
 				'label' => __( 'Icon Link - Open in', 'live-composer-page-builder' ),
@@ -110,13 +110,13 @@ class DSLC_Info_Box extends DSLC_Module {
 						'label' => __( 'New Tab', 'live-composer-page-builder' ),
 						'value' => '_blank',
 					),
-				)
+				),
 			),
 			array(
 				'label' => __( 'Primary Button Link', 'live-composer-page-builder' ),
 				'id' => 'button_link',
 				'std' => '#',
-				'type' => 'text'
+				'type' => 'text',
 			),
 			array(
 				'label' => __( 'Primary Button - Open in', 'live-composer-page-builder' ),
@@ -132,13 +132,13 @@ class DSLC_Info_Box extends DSLC_Module {
 						'label' => __( 'New Tab', 'live-composer-page-builder' ),
 						'value' => '_blank',
 					),
-				)
+				),
 			),
 			array(
 				'label' => __( 'Secondary Button Link', 'live-composer-page-builder' ),
 				'id' => 'button_2_link',
 				'std' => '',
-				'type' => 'text'
+				'type' => 'text',
 			),
 			array(
 				'label' => __( 'Secondary Button - Open in', 'live-composer-page-builder' ),
@@ -154,7 +154,7 @@ class DSLC_Info_Box extends DSLC_Module {
 						'label' => __( 'New Tab', 'live-composer-page-builder' ),
 						'value' => '_blank',
 					),
-				)
+				),
 			),
 
 			array(
@@ -474,7 +474,6 @@ class DSLC_Info_Box extends DSLC_Module {
 				'section' => 'styling',
 			),
 
-
 			/**
 			 * Wrapper
 			 */
@@ -488,7 +487,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-wrapper',
 				'affect_on_change_rule' => 'background-color',
 				'section' => 'styling',
-				'tab' => __( 'Wrapper', 'live-composer-page-builder' )
+				'tab' => __( 'Wrapper', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'BG Image', 'live-composer-page-builder' ),
@@ -499,7 +498,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-wrapper',
 				'affect_on_change_rule' => 'background-image',
 				'section' => 'styling',
-				'tab' => __( 'Wrapper', 'live-composer-page-builder' )
+				'tab' => __( 'Wrapper', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'BG Image Repeat', 'live-composer-page-builder' ),
@@ -528,7 +527,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-wrapper',
 				'affect_on_change_rule' => 'background-repeat',
 				'section' => 'styling',
-				'tab' => __( 'Wrapper', 'live-composer-page-builder' )
+				'tab' => __( 'Wrapper', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'BG Image Attachment', 'live-composer-page-builder' ),
@@ -549,7 +548,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-wrapper',
 				'affect_on_change_rule' => 'background-attachment',
 				'section' => 'styling',
-				'tab' => __( 'Wrapper', 'live-composer-page-builder' )
+				'tab' => __( 'Wrapper', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'BG Image Position', 'live-composer-page-builder' ),
@@ -598,7 +597,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-wrapper',
 				'affect_on_change_rule' => 'background-position',
 				'section' => 'styling',
-				'tab' => __( 'Wrapper', 'live-composer-page-builder' )
+				'tab' => __( 'Wrapper', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Border Color', 'live-composer-page-builder' ),
@@ -609,7 +608,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-wrapper',
 				'affect_on_change_rule' => 'border-color',
 				'section' => 'styling',
-				'tab' => __( 'Wrapper', 'live-composer-page-builder' )
+				'tab' => __( 'Wrapper', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
@@ -622,7 +621,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_rule' => 'border-width',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'Wrapper', 'live-composer-page-builder' )
+				'tab' => __( 'Wrapper', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Borders', 'live-composer-page-builder' ),
@@ -651,7 +650,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_el' => '.dslc-info-box-wrapper',
 				'affect_on_change_rule' => 'border-style',
 				'section' => 'styling',
-				'tab' => __( 'Wrapper', 'live-composer-page-builder' )
+				'tab' => __( 'Wrapper', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Border Radius', 'live-composer-page-builder' ),
@@ -664,7 +663,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_rule' => 'border-radius',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'Wrapper', 'live-composer-page-builder' )
+				'tab' => __( 'Wrapper', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
@@ -679,7 +678,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'section' => 'styling',
 				'max' => 500,
 				'ext' => 'px',
-				'tab' => __( 'Wrapper', 'live-composer-page-builder' )
+				'tab' => __( 'Wrapper', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Padding Horizontal', 'live-composer-page-builder' ),
@@ -692,7 +691,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'styling',
 				'ext' => 'px',
-				'tab' => __( 'Wrapper', 'live-composer-page-builder' )
+				'tab' => __( 'Wrapper', 'live-composer-page-builder' ),
 			),
 
 			/**
@@ -1283,7 +1282,6 @@ class DSLC_Info_Box extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'Title', 'live-composer-page-builder' ),
 			),
-
 
 			/**
 			 * Content
@@ -2898,7 +2896,9 @@ class DSLC_Info_Box extends DSLC_Module {
 
 		);
 
-		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array( 'hover_opts' => false ) ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array(
+			'hover_opts' => false,
+		) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		// Cache calculated array in WP Object Cache.
@@ -2924,7 +2924,6 @@ class DSLC_Info_Box extends DSLC_Module {
 			$dslc_is_admin = false;
 		}
 
-
 		/* Module output stars here */
 
 		// Main Elements.
@@ -2947,23 +2946,25 @@ class DSLC_Info_Box extends DSLC_Module {
 					<?php if ( $options['button_pos'] == 'aside' && in_array( 'button', $elements ) ) : ?>
 						<div class="dslc-info-box-button dslc-info-box-button-aside">
 							<?php if ( isset( $options['button_link'] ) && ! empty( $options['button_link'] ) ) : ?>
-								<a href="<?php echo $options['button_link']; ?>" target="<?php echo $options['button_target']; ?>" <?php if ( $options['link_nofollow'] ) echo 'rel="nofollow"'; ?> class="dslc-primary">
+								<a href="<?php echo $options['button_link']; ?>" target="<?php echo $options['button_target']; ?>" <?php if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?> class="dslc-primary">
 									<?php if ( isset( $options['button_icon_id'] ) && $options['button_icon_id'] != '' ) : ?>
 										<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 									<?php endif; ?>
 									<?php if ( $dslc_is_admin ) : ?>
 										<span class="dslca-editable-content" data-id="button_title" data-type="simple" contenteditable="true"><?php echo $options['button_title']; ?></span>
-									<?php else : echo $options['button_title']; endif; ?>
+									<?php else : echo $options['button_title'];
+endif; ?>
 								</a>
 							<?php endif; ?>
 							<?php if ( isset( $options['button_2_link'] ) && ! empty( $options['button_2_link'] ) ) : ?>
-								<a href="<?php echo $options['button_2_link']; ?>" target="<?php echo $options['button_2_target']; ?>" <?php if ( $options['link_nofollow'] ) echo 'rel="nofollow"'; ?> class="dslc-secondary">
+								<a href="<?php echo $options['button_2_link']; ?>" target="<?php echo $options['button_2_target']; ?>" <?php if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?> class="dslc-secondary">
 									<?php if ( isset( $options['button_2_icon_id'] ) && $options['button_2_icon_id'] != '' ) : ?>
 										<span class="dslc-icon dslc-icon-<?php echo $options['button_2_icon_id']; ?>"></span>
 									<?php endif; ?>
 									<?php if ( $dslc_is_admin ) : ?>
 										<span class="dslca-editable-content" data-id="button_2_title" data-type="simple" contenteditable="true"><?php echo $options['button_2_title']; ?></span>
-									<?php else : echo $options['button_2_title']; endif; ?>
+									<?php else : echo $options['button_2_title'];
+endif; ?>
 								</a>
 							<?php endif; ?>
 						</div><!-- .dslc-info-box-button -->
@@ -2976,7 +2977,7 @@ class DSLC_Info_Box extends DSLC_Module {
 								<div class="dslc-info-box-image-inner">
 									<span class="dslc-icon dslc-icon-<?php echo $options['icon_id'];?>"></span>
 									<?php if ( ! empty( $options['icon_link'] ) ) : ?>
-										<a class="dslc-info-box-image-link" href="<?php echo $options['icon_link']; ?>" <?php if ( $options['link_nofollow'] ) echo 'rel="nofollow"'; ?> target="<?php echo $options['icon_link_target']; ?>"></a>
+										<a class="dslc-info-box-image-link" href="<?php echo $options['icon_link']; ?>" <?php if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?> target="<?php echo $options['icon_link_target']; ?>"></a>
 									<?php endif; ?>
 								</div><!-- .dslc-info-box-image-inner -->
 							</div><!-- .dslc-info-box-image -->
@@ -2985,10 +2986,10 @@ class DSLC_Info_Box extends DSLC_Module {
 						<?php if ( in_array( 'image', $elements ) && $image_alt ) : ?>
 							<div class="dslc-info-box-image-alt">
 								<div class="dslc-info-box-image-alt-inner">
-									<?php if ( ! $image_alt_link_url) : ?>
-										<img src="<?php echo esc_url($image_alt);?>">
+									<?php if ( ! $image_alt_link_url ) : ?>
+										<img src="<?php echo esc_url( $image_alt );?>">
 									<?php else : ?>
-										<a href="<?php echo esc_url($image_alt_link_url);?>" <?php if ( $options['link_nofollow'] ) echo 'rel="nofollow"'; ?>><img src="<?php echo esc_url($image_alt);?>"></a>
+										<a href="<?php echo esc_url( $image_alt_link_url );?>" <?php if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?>><img src="<?php echo esc_url( $image_alt );?>"></a>
 									<?php endif; ?>
 								</div><!-- .dslc-info-box-image-alt-inner -->
 							</div><!-- .dslc-info-box-image-alt -->
@@ -2999,10 +3000,10 @@ class DSLC_Info_Box extends DSLC_Module {
 							<?php if ( in_array( 'title', $elements ) ) : ?>
 								<div class="dslc-info-box-title">
 									<?php if ( $dslc_is_admin ) : ?>
-										<h4 class="dslca-editable-content" data-id="title" data-type="simple" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?>><?php echo stripslashes( $options['title'] ); ?></h4>
+										<h4 class="dslca-editable-content" data-id="title" data-type="simple" <?php if ( $dslc_is_admin ) { echo 'contenteditable';} ?>><?php echo stripslashes( $options['title'] ); ?></h4>
 									<?php else : ?>
 										<?php if ( $options['title_link'] != '' ) : ?>
-											<h4><a href="<?php echo $options['title_link']; ?>" <?php if ( $options['link_nofollow'] ) echo 'rel="nofollow"'; ?> target="<?php echo $options['title_link_target']; ?>"><?php echo stripslashes( $options['title'] ); ?></a></h4>
+											<h4><a href="<?php echo $options['title_link']; ?>" <?php if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?> target="<?php echo $options['title_link_target']; ?>"><?php echo stripslashes( $options['title'] ); ?></a></h4>
 										<?php else : ?>
 											<h4><?php echo stripslashes( $options['title'] ); ?></h4>
 										<?php endif; ?>
@@ -3032,23 +3033,25 @@ class DSLC_Info_Box extends DSLC_Module {
 							<?php if ( $options['button_pos'] == 'bellow' && in_array( 'button', $elements ) ) : ?>
 								<div class="dslc-info-box-button">
 									<?php if ( isset( $options['button_link'] ) && ! empty( $options['button_link'] ) ) : ?>
-										<a href="<?php echo $options['button_link']; ?>" <?php if ( $options['link_nofollow'] ) echo 'rel="nofollow"'; ?> target="<?php echo $options['button_target']; ?>" class="dslc-primary">
+										<a href="<?php echo $options['button_link']; ?>" <?php if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?> target="<?php echo $options['button_target']; ?>" class="dslc-primary">
 											<?php if ( isset( $options['button_icon_id'] ) && $options['button_icon_id'] != '' ) : ?>
 												<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 											<?php endif; ?>
 											<?php if ( $dslc_is_admin ) : ?>
 												<span class="dslca-editable-content" data-id="button_title" data-type="simple" contenteditable="true"><?php echo $options['button_title']; ?></span>
-											<?php else : echo $options['button_title']; endif; ?>
+											<?php else : echo $options['button_title'];
+endif; ?>
 										</a>
 									<?php endif; ?>
 									<?php if ( isset( $options['button_2_link'] ) && ! empty( $options['button_2_link'] ) ) : ?>
-										<a href="<?php echo $options['button_2_link']; ?>" <?php if ( $options['link_nofollow'] ) echo 'rel="nofollow"'; ?> target="<?php echo $options['button_2_target']; ?>" class="dslc-secondary">
+										<a href="<?php echo $options['button_2_link']; ?>" <?php if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?> target="<?php echo $options['button_2_target']; ?>" class="dslc-secondary">
 											<?php if ( isset( $options['button_2_icon_id'] ) && $options['button_2_icon_id'] != '' ) : ?>
 												<span class="dslc-icon dslc-icon-<?php echo $options['button_2_icon_id']; ?>"></span>
 											<?php endif; ?>
 											<?php if ( $dslc_is_admin ) : ?>
 												<span class="dslca-editable-content" data-id="button_2_title" data-type="simple" contenteditable="true"><?php echo $options['button_2_title']; ?></span>
-											<?php else : echo $options['button_2_title']; endif; ?>
+											<?php else : echo $options['button_2_title'];
+endif; ?>
 										</a>
 									<?php endif; ?>
 								</div><!-- .dslc-info-box-button -->

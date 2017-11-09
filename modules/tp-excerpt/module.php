@@ -56,15 +56,15 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Desktop', 'live-composer-page-builder' ),
-						'value' => 'desktop'
+						'value' => 'desktop',
 					),
 					array(
 						'label' => __( 'Tablet', 'live-composer-page-builder' ),
-						'value' => 'tablet'
+						'value' => 'tablet',
 					),
 					array(
 						'label' => __( 'Phone', 'live-composer-page-builder' ),
-						'value' => 'phone'
+						'value' => 'phone',
 					),
 				),
 			),
@@ -108,19 +108,19 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -174,7 +174,7 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 				'affect_on_change_rule' => 'min-height',
 				'section' => 'styling',
 				'ext' => 'px',
-				'increment' => 5
+				'increment' => 5,
 			),
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
@@ -339,11 +339,11 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 				),
 				'section' => 'responsive',
@@ -427,11 +427,11 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 				),
 				'section' => 'responsive',
@@ -505,7 +505,9 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 
 		);
 
-		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array('hover_opts' => false) ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array(
+			'hover_opts' => false,
+		) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		// Cache calculated array in WP Object Cache.
@@ -526,15 +528,15 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 
 		$post_id = $options['post_id'];
 
-		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
+		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 			$dslc_is_admin = true;
-		else
-			$dslc_is_admin = false;
+		} else { $dslc_is_admin = false;
+		}
 
-		if ( $dslc_is_admin )
+		if ( $dslc_is_admin ) {
 			$the_excerpt = __( 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'live-composer-page-builder' );
-		else
-			$the_excerpt = false;
+		} else { $the_excerpt = false;
+		}
 
 		if ( is_singular() && get_post_type() !== 'dslc_templates' && has_excerpt() ) {
 			$post_id = get_the_ID();
@@ -542,14 +544,11 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 			$the_excerpt = apply_filters( 'get_the_excerpt', $post->post_excerpt );
 		}
 
-
 		/* Module output starts here */
 
-			if ( $the_excerpt ) :
-				?><div class="dslc-tp-excerpt"><?php echo $the_excerpt; ?></div><?php
+		if ( $the_excerpt ) :
+			?><div class="dslc-tp-excerpt"><?php echo $the_excerpt; ?></div><?php
 			endif;
-
-
 
 	}
 

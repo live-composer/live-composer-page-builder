@@ -42,7 +42,10 @@ function dslc_display_comments( $comment, $args, $depth ) {
 							</ul>
 
 							<span class="dslc-comment-reply">
-								<?php comment_reply_link( array_merge( $args, array('depth' => $depth, 'max_depth' => $args['max_depth']) ) ); ?>
+								<?php comment_reply_link( array_merge( $args, array(
+									'depth' => $depth,
+									'max_depth' => $args['max_depth'],
+								) ) ); ?>
 							</span>
 
 						</div><!-- .comment-info -->

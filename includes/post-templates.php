@@ -51,7 +51,6 @@ function dslc_post_templates_init() {
 
 	$dslc_enabled_cpt = apply_filters( 'dslc_enabled_cpt', $dslc_enabled_cpt );
 
-
 } add_action( 'init', 'dslc_post_templates_init', 20 );
 
 
@@ -63,7 +62,7 @@ function dslc_can_edit_in_lc( $post_data ) {
 	$can_edit = false;
 
 	if ( is_int( $post_data ) || empty( $post_data ) ) {
-		# code...
+		// code...
 	} else {
 		// Parameter $post_data is post type.
 		$post_type = $post_data;

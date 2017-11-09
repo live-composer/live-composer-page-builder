@@ -187,7 +187,6 @@ function dslc_archive_template_404_fix( $query ) {
 
 		$template = dslc_get_option( 'author', 'dslc_plugin_options_archives' );
 		if ( ! $template || 'none' === $template ) { /* nothing */ } else { $query->set( 'posts_per_page', 1 ); }
-
 	}
 
 	return $query;
@@ -237,7 +236,9 @@ function dslc_flush_permalinks_on_404() {
 
 			flush_rewrite_rules( false );
 			set_transient( 'dslc_flush_permalinks', 1, HOUR_IN_SECONDS * 12 );
-			wp_redirect( home_url( add_query_arg( array( 'dslc-flush' => 1 ), $wp->request ) ) );
+			wp_redirect( home_url( add_query_arg( array(
+				'dslc-flush' => 1,
+			), $wp->request ) ) );
 			exit;
 
 		} else {

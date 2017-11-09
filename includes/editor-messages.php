@@ -61,7 +61,7 @@ class LC_Editor_Messages {
 	 */
 	public function add_messages( $messages ) {
 
-		if ( ! $this->messages  ) {
+		if ( ! $this->messages ) {
 			add_option( 'dslc_editormessages', $messages );
 		} else {
 

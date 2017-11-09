@@ -62,15 +62,15 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Desktop', 'live-composer-page-builder' ),
-						'value' => 'desktop'
+						'value' => 'desktop',
 					),
 					array(
 						'label' => __( 'Tablet', 'live-composer-page-builder' ),
-						'value' => 'tablet'
+						'value' => 'tablet',
 					),
 					array(
 						'label' => __( 'Phone', 'live-composer-page-builder' ),
-						'value' => 'phone'
+						'value' => 'phone',
 					),
 				),
 			),
@@ -156,19 +156,19 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -230,7 +230,7 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				'affect_on_change_rule' => 'min-height',
 				'section' => 'styling',
 				'ext' => 'px',
-				'increment' => 5
+				'increment' => 5,
 			),
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
@@ -421,19 +421,19 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -642,19 +642,19 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -834,11 +834,11 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 				),
 				'section' => 'responsive',
@@ -1039,11 +1039,11 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 				),
 				'section' => 'responsive',
@@ -1234,7 +1234,9 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 
 		);
 
-		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array('hover_opts' => false) ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array(
+			'hover_opts' => false,
+		) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		// Cache calculated array in WP Object Cache.
@@ -1252,7 +1254,7 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 	 */
 	function output( $options ) {
 	?>
-		[dslc_module_comments_form_output]<?php echo serialize($options); ?>[/dslc_module_comments_form_output]
+		[dslc_module_comments_form_output]<?php echo serialize( $options ); ?>[/dslc_module_comments_form_output]
 	<?php
 	}
 }
@@ -1271,12 +1273,11 @@ function dslc_module_comments_form_output( $atts, $content = null ) {
 	$post_id = $options['post_id'];
 	$show_fake = true;
 
-	if ( is_singular() && get_post_type() !== 'dslc_templates' && !$dslc_active ) {
+	if ( is_singular() && get_post_type() !== 'dslc_templates' && ! $dslc_active ) {
 
 		$post_id = get_the_ID();
 		$show_fake = false;
 	}
-
 
 	$txt_submit_comment = __( 'SUBMIT YOUR COMMENT', 'live-composer-page-builder' );
 	$txt_leave_comment = __( 'Leave a Comment', 'live-composer-page-builder' );
@@ -1285,23 +1286,29 @@ function dslc_module_comments_form_output( $atts, $content = null ) {
 	$txt_email = __( 'Email', 'live-composer-page-builder' );
 	$txt_url = __( 'Website', 'live-composer-page-builder' );
 
-	if ( isset( $options['txt_submit_comment'] ) && $options['txt_submit_comment'] != '' )
+	if ( isset( $options['txt_submit_comment'] ) && $options['txt_submit_comment'] != '' ) {
 		$txt_submit_comment = $options['txt_submit_comment'];
+	}
 
-	if ( isset( $options['txt_leave_comment'] ) && $options['txt_leave_comment'] != '' )
+	if ( isset( $options['txt_leave_comment'] ) && $options['txt_leave_comment'] != '' ) {
 		$txt_leave_comment = $options['txt_leave_comment'];
+	}
 
-	if ( isset( $options['txt_comment'] ) && $options['txt_comment'] != '' )
+	if ( isset( $options['txt_comment'] ) && $options['txt_comment'] != '' ) {
 		$txt_comment = $options['txt_comment'];
+	}
 
-	if ( isset( $options['txt_name'] ) && $options['txt_name'] != '' )
+	if ( isset( $options['txt_name'] ) && $options['txt_name'] != '' ) {
 		$txt_name = $options['txt_name'];
+	}
 
-	if ( isset( $options['txt_email'] ) && $options['txt_email'] != '' )
+	if ( isset( $options['txt_email'] ) && $options['txt_email'] != '' ) {
 		$txt_email = $options['txt_email'];
+	}
 
-	if ( isset( $options['txt_url'] ) && $options['txt_url'] != '' )
+	if ( isset( $options['txt_url'] ) && $options['txt_url'] != '' ) {
 		$txt_url = $options['txt_url'];
+	}
 
 	if ( isset( $options['css_inputs_color'] ) && $options['css_inputs_color'] != '' ) {
 		$css_inputs_color = $options['css_inputs_color'];
@@ -1346,11 +1353,10 @@ function dslc_module_comments_form_output( $atts, $content = null ) {
 
 				<?php } else {
 
-					if ( $dslc_active ) {
-						echo '<div class="dslc-notification dslc-red">' . __( 'Comments disabled for the current post ( whole website ), please enable comments on your website.', 'live-composer-page-builder' ) . '</div>';
-					}
-
-				} ?>
+	if ( $dslc_active ) {
+		echo '<div class="dslc-notification dslc-red">' . __( 'Comments disabled for the current post ( whole website ), please enable comments on your website.', 'live-composer-page-builder' ) . '</div>';
+	}
+} ?>
 
 			<?php else :
 
@@ -1366,7 +1372,7 @@ function dslc_module_comments_form_output( $atts, $content = null ) {
 					'fields' => apply_filters( 'comment_form_default_fields', array(
 						'author' => '<div class="comment-form-name"><input id="author" name="author" type=text value="' . esc_attr( $commenter['comment_author'] ) . '" size="30" placeholder="' . $txt_name . ' *" aria-required="true" /></div>',
 						'email' => '<div class="comment-form-email"><input id="email" name="email" type=text value="' . esc_attr( $commenter['comment_author_email'] ) . '" size="30" placeholder="' . $txt_email . ' *" aria-required="true" /></div>',
-						'url' => '<div class="comment-form-website"><input id="url" name="url" type=text value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30" placeholder="' . $txt_url . '" /></div>'
+						'url' => '<div class="comment-form-website"><input id="url" name="url" type=text value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30" placeholder="' . $txt_url . '" /></div>',
 					) ),
 				), $post_id );
 
@@ -1393,9 +1399,9 @@ function dslc_module_comments_form_output( $atts, $content = null ) {
 		</style>
 		<?php
 
-	$shortcode_rendered = ob_get_contents();
-	ob_end_clean();
+		$shortcode_rendered = ob_get_contents();
+		ob_end_clean();
 
-	return $shortcode_rendered;
+		return $shortcode_rendered;
 
 } add_shortcode( 'dslc_module_comments_form_output', 'dslc_module_comments_form_output' );

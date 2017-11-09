@@ -27,8 +27,9 @@ function dslc_dlm_count_increment( $atts ) {
 	$download_count = get_post_meta( $post_ID, 'dslc_download_count', true );
 
 	// If no download count exists set it to 0
-	if ( ! $download_count ) 
+	if ( ! $download_count ) {
 		$download_count = 0;
+	}
 
 	// Increment count by 1
 	$download_count += 1;
@@ -37,8 +38,8 @@ function dslc_dlm_count_increment( $atts ) {
 	update_post_meta( $post_ID, 'dslc_download_count', $download_count );
 
 	// Good night
-	exit;	
+	exit;
 
-} 
-add_action( 'wp_ajax_dslc-download-count-increment', 'dslc_dlm_count_increment' ); 
+}
+add_action( 'wp_ajax_dslc-download-count-increment', 'dslc_dlm_count_increment' );
 add_action( 'wp_ajax_nopriv_dslc-download-count-increment', 'dslc_dlm_count_increment' );

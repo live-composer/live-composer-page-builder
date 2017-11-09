@@ -56,15 +56,15 @@ class DSLC_TP_Meta extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Desktop', 'live-composer-page-builder' ),
-						'value' => 'desktop'
+						'value' => 'desktop',
 					),
 					array(
 						'label' => __( 'Tablet', 'live-composer-page-builder' ),
-						'value' => 'tablet'
+						'value' => 'tablet',
 					),
 					array(
 						'label' => __( 'Phone', 'live-composer-page-builder' ),
-						'value' => 'phone'
+						'value' => 'phone',
 					),
 				),
 			),
@@ -86,27 +86,27 @@ class DSLC_TP_Meta extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Date', 'live-composer-page-builder' ),
-						'value' => 'date'
+						'value' => 'date',
 					),
 					array(
 						'label' => __( 'Avatar', 'live-composer-page-builder' ),
-						'value' => 'avatar'
+						'value' => 'avatar',
 					),
 					array(
 						'label' => __( 'Author', 'live-composer-page-builder' ),
-						'value' => 'author'
+						'value' => 'author',
 					),
 					array(
 						'label' => __( 'Category', 'live-composer-page-builder' ),
-						'value' => 'category'
+						'value' => 'category',
 					),
 					array(
 						'label' => __( 'Tags', 'live-composer-page-builder' ),
-						'value' => 'tags'
+						'value' => 'tags',
 					),
 					array(
 						'label' => __( 'Comments', 'live-composer-page-builder' ),
-						'value' => 'comments'
+						'value' => 'comments',
 					),
 				),
 				'section' => 'styling',
@@ -119,11 +119,11 @@ class DSLC_TP_Meta extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Horizontal', 'live-composer-page-builder' ),
-						'value' => 'horizontal'
+						'value' => 'horizontal',
 					),
 					array(
 						'label' => __( 'Vertical', 'live-composer-page-builder' ),
-						'value' => 'vertical'
+						'value' => 'vertical',
 					),
 				),
 				'section' => 'styling',
@@ -180,19 +180,19 @@ class DSLC_TP_Meta extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -246,7 +246,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 				'affect_on_change_rule' => 'min-height',
 				'section' => 'styling',
 				'ext' => 'px',
-				'increment' => 5
+				'increment' => 5,
 			),
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
@@ -473,7 +473,6 @@ class DSLC_TP_Meta extends DSLC_Module {
 				'tab' => __( 'Typography', 'live-composer-page-builder' ),
 			),
 
-
 			/**
 			 * Responsive Tablet
 			 */
@@ -486,11 +485,11 @@ class DSLC_TP_Meta extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 				),
 				'section' => 'responsive',
@@ -549,11 +548,11 @@ class DSLC_TP_Meta extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 				),
 				'section' => 'responsive',
@@ -602,7 +601,9 @@ class DSLC_TP_Meta extends DSLC_Module {
 
 		);
 
-		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array('hover_opts' => false) ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array(
+			'hover_opts' => false,
+		) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		// Cache calculated array in WP Object Cache.
@@ -633,7 +634,6 @@ class DSLC_TP_Meta extends DSLC_Module {
 			$show_fake = true;
 		}
 
-
 		/* Module output starts here */
 
 		$the_post = get_post( $post_id );
@@ -643,22 +643,22 @@ class DSLC_TP_Meta extends DSLC_Module {
 
 		if ( comments_open( $post_id ) ) {
 
-			if ( $num_comments == 0 )
+			if ( $num_comments == 0 ) {
 				$comments = __( 'No Comments' );
-			elseif ( $num_comments > 1 )
+			} elseif ( $num_comments > 1 ) {
 				$comments = $num_comments . __( ' Comments' );
-			else
-				$comments = __( '1 Comment' );
+			} else { $comments = __( '1 Comment' );
+			}
 
 			$comments_output = '<a href="#dslc-comments">' . $comments . '</a>';
 
 		}
 
 		$tp_elements = $options['tp_elements'];
-		if ( ! empty( $tp_elements ) )
+		if ( ! empty( $tp_elements ) ) {
 			$tp_elements = explode( ' ', trim( $tp_elements ) );
-		else
-			$tp_elements = 'all';
+		} else { $tp_elements = 'all';
+		}
 
 		if ( ! $show_fake ) {
 			$post_type_taxonomies = get_object_taxonomies( get_post_type(), 'objects' );
@@ -700,24 +700,24 @@ class DSLC_TP_Meta extends DSLC_Module {
 								<li><a href="#"><?php _e( 'Category One', 'live-composer-page-builder' ); ?></a>, <a href="#"><?php _e( 'Category Two', 'live-composer-page-builder' ); ?></a></li>
 							<?php else : ?>
 								<?php
-									foreach ( $post_type_taxonomies as $taxonomy ) {
-										if ( $taxonomy->hierarchical == true && $taxonomy->public ) {
+								foreach ( $post_type_taxonomies as $taxonomy ) {
+									if ( $taxonomy->hierarchical == true && $taxonomy->public ) {
 
-											$cats = get_the_terms( get_the_ID(), $taxonomy->name );
-											$cats_count = 0;
-											if ( $cats ) {
-												echo '<li>';
-													foreach ( $cats as $cat ) {
-														$cats_count++;
-														if ( $cats_count > 1 ) {
-															echo ', ';
-														}
-														echo '<a href="' . get_term_link( $cat, $taxonomy->name ) . '">' . $cat->name . '</a>';
-													}
-												echo '</li>';
+										$cats = get_the_terms( get_the_ID(), $taxonomy->name );
+										$cats_count = 0;
+										if ( $cats ) {
+											echo '<li>';
+											foreach ( $cats as $cat ) {
+												$cats_count++;
+												if ( $cats_count > 1 ) {
+													echo ', ';
+												}
+												echo '<a href="' . get_term_link( $cat, $taxonomy->name ) . '">' . $cat->name . '</a>';
 											}
+											echo '</li>';
 										}
 									}
+								}
 								?>
 							<?php endif; ?>
 						<?php endif; ?>
@@ -727,24 +727,24 @@ class DSLC_TP_Meta extends DSLC_Module {
 								<li><a href="#"><?php _e( 'One', 'live-composer-page-builder' ); ?></a>, <a href="#"><?php _e( 'Two', 'live-composer-page-builder' ); ?></a>, <a href="#"><?php _e( 'Three', 'live-composer-page-builder' ); ?></a></li>
 							<?php else : ?>
 								<?php
-									foreach ( $post_type_taxonomies as $taxonomy ) {
-										if ( $taxonomy->hierarchical == false && $taxonomy->public ) {
+								foreach ( $post_type_taxonomies as $taxonomy ) {
+									if ( $taxonomy->hierarchical == false && $taxonomy->public ) {
 
-											$cats = get_the_terms( get_the_ID(), $taxonomy->name );
-											$tags_count = 0;
-											if ( $cats ) {
-												echo '<li>';
-													foreach ( $cats as $cat ) {
-														$tags_count++;
-														if ( $tags_count > 1 ) {
-															echo ', ';
-														}
-														echo '<a href="' . get_term_link( $cat, $taxonomy->name ) . '">' . $cat->name . '</a>';
-													}
-												echo '</li>';
+										$cats = get_the_terms( get_the_ID(), $taxonomy->name );
+										$tags_count = 0;
+										if ( $cats ) {
+											echo '<li>';
+											foreach ( $cats as $cat ) {
+												$tags_count++;
+												if ( $tags_count > 1 ) {
+													echo ', ';
+												}
+												echo '<a href="' . get_term_link( $cat, $taxonomy->name ) . '">' . $cat->name . '</a>';
 											}
+											echo '</li>';
 										}
 									}
+								}
 								?>
 							<?php endif; ?>
 						<?php endif; ?>
@@ -761,8 +761,6 @@ class DSLC_TP_Meta extends DSLC_Module {
 				</div>
 
 			<?php
-
-
 
 	}
 

@@ -1561,7 +1561,6 @@ class DSLC_Navigation extends DSLC_Module {
 	 */
 	function output( $options ) {
 
-
 		/* Module output starts here */
 
 		global $dslc_active;
@@ -1630,9 +1629,7 @@ class DSLC_Navigation extends DSLC_Module {
 			</style>
 
 			<?php }
-		}
-
-
+		}// End if().
 
 	}
 }

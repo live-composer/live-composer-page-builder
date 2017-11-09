@@ -39,8 +39,8 @@ class DSLC_Cache {
 			$this->type = $cache_type;
 		}
 
-		//  If the transient does not exist, does not have a value,
-		//  or has expired, then get_transient will return false.
+		// If the transient does not exist, does not have a value,
+		// or has expired, then get_transient will return false.
 		$this->cache = get_transient( 'lc_cache' );
 
 		$caching_engine_setting = dslc_get_option( 'lc_caching_engine', 'dslc_plugin_options_performance' );
@@ -53,6 +53,7 @@ class DSLC_Cache {
 
 	/**
 	 * Delete cached code (HTML or CSS) on page code update.
+	 *
 	 * @return void
 	 */
 	public function on_meta_added( $meta_id, $post_id, $meta_key, $meta_value ) {
@@ -63,6 +64,7 @@ class DSLC_Cache {
 
 	/**
 	 * Delete cached code (HTML or CSS) on page save.
+	 *
 	 * @return void
 	 */
 	public function on_post_save( $post_id ) {
@@ -84,7 +86,8 @@ class DSLC_Cache {
 		}
 		*/
 
-		/* Remove previous version of HTML render from page cache.
+		/*
+		 Remove previous version of HTML render from page cache.
 		if ( isset( $this->cache['html'][ $post_id ] ) ) {
 			unset( $this->cache['html'][ $post_id ] );
 		}
@@ -108,6 +111,7 @@ class DSLC_Cache {
 
 	/**
 	 * Return cached code (HTML or CSS).
+	 *
 	 * @return string/boolean Cached code or false if not found.
 	 */
 	public function get_cache( $identificator = false, $cache_type = false ) {
@@ -145,6 +149,7 @@ class DSLC_Cache {
 
 	/**
 	 * Is html/css code for the page cached or not?
+	 *
 	 * @return boolean True/False.
 	 */
 	public function cached( $identificator = false, $cache_type = false ) {

@@ -1193,7 +1193,9 @@ class DSLC_Accordion extends DSLC_Module {
 
 		);
 
-		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array( 'hover_opts' => false) ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array(
+			'hover_opts' => false,
+		) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		// Cache calculated array in WP Object Cache.
@@ -1212,19 +1214,19 @@ class DSLC_Accordion extends DSLC_Module {
 
 		global $dslc_active;
 
-		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
+		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 			$dslc_is_admin = true;
-		else
-			$dslc_is_admin = false;
+		} else { $dslc_is_admin = false;
+		}
 
 		/* Module output stars here */
 
 			$accordion_nav = explode( '(dslc_sep)', trim( $options['accordion_nav'] ) );
 
-			if ( empty( $options['accordion_content'] ) )
-				$accordion_contents = false;
-			else
-				$accordion_contents = explode( '(dslc_sep)', trim( $options['accordion_content'] ) );
+		if ( empty( $options['accordion_content'] ) ) {
+			$accordion_contents = false;
+		} else { $accordion_contents = explode( '(dslc_sep)', trim( $options['accordion_content'] ) );
+		}
 
 			$count = 0;
 
@@ -1239,7 +1241,7 @@ class DSLC_Accordion extends DSLC_Module {
 							<div class="dslc-accordion-item">
 
 								<div class="dslc-accordion-header dslc-accordion-hook">
-									<span class="dslc-accordion-title" <?php if ( $dslc_is_admin ) echo 'contenteditable data-exportable-content="h3"'; ?>><?php echo stripslashes( $accordion_nav[$count] ); ?></span>
+									<span class="dslc-accordion-title" <?php if ( $dslc_is_admin ) { echo 'contenteditable data-exportable-content="h3"';} ?>><?php echo stripslashes( $accordion_nav[ $count ] ); ?></span>
 									<?php if ( $dslc_is_admin ) : ?>
 										<div class="dslca-accordion-action-hooks">
 											<span class="dslca-move-up-accordion-hook"><span class="dslca-icon dslc-icon-arrow-up"></span></span>
@@ -1250,7 +1252,7 @@ class DSLC_Accordion extends DSLC_Module {
 								</div>
 
 								<div class="dslc-accordion-content">
-									<div class="dslca-editable-content"<?php if ( $dslc_is_admin ) echo ' data-exportable-content'; ?>>
+									<div class="dslca-editable-content"<?php if ( $dslc_is_admin ) { echo ' data-exportable-content';} ?>>
 										<?php
 											$accordion_content_output = stripslashes( $accordion_content );
 											echo apply_filters( 'dslc_before_render', $accordion_content_output );
@@ -1264,14 +1266,15 @@ class DSLC_Accordion extends DSLC_Module {
 
 							</div><!-- .dslc-accordion-item -->
 
-						<?php $count++; endforeach; ?>
+						<?php $count++;
+endforeach; ?>
 
 					<?php else : ?>
 
 						<div class="dslc-accordion-item">
 
 							<div class="dslc-accordion-header dslc-accordion-hook">
-								<span class="dslc-accordion-title" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?>><?php _e( 'CLICK TO EDIT', 'live-composer-page-builder' ); ?></span>
+								<span class="dslc-accordion-title" <?php if ( $dslc_is_admin ) { echo 'contenteditable';} ?>><?php _e( 'CLICK TO EDIT', 'live-composer-page-builder' ); ?></span>
 								<?php if ( $dslc_is_admin ) : ?>
 									<div class="dslca-accordion-action-hooks">
 										<span class="dslca-move-up-accordion-hook"><span class="dslca-icon dslc-icon-arrow-up"></span></span>

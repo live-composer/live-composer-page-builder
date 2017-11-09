@@ -56,15 +56,15 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Desktop', 'live-composer-page-builder' ),
-						'value' => 'desktop'
+						'value' => 'desktop',
 					),
 					array(
 						'label' => __( 'Tablet', 'live-composer-page-builder' ),
-						'value' => 'tablet'
+						'value' => 'tablet',
 					),
 					array(
 						'label' => __( 'Phone', 'live-composer-page-builder' ),
-						'value' => 'phone'
+						'value' => 'phone',
 					),
 				),
 			),
@@ -100,11 +100,11 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 					array(
 						'label' => __( 'Enabled ', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 				),
 				'section' => 'functionality',
@@ -161,19 +161,19 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -227,7 +227,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'affect_on_change_rule' => 'min-height',
 				'section' => 'styling',
 				'ext' => 'px',
-				'increment' => 5
+				'increment' => 5,
 			),
 			array(
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
@@ -391,11 +391,11 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Above', 'live-composer-page-builder' ),
-						'value' => 'above'
+						'value' => 'above',
 					),
 					array(
 						'label' => __( 'Inside ', 'live-composer-page-builder' ),
-						'value' => 'inside'
+						'value' => 'inside',
 					),
 				),
 				'section' => 'styling',
@@ -449,19 +449,19 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Top', 'live-composer-page-builder' ),
-						'value' => 'top'
+						'value' => 'top',
 					),
 					array(
 						'label' => __( 'Right', 'live-composer-page-builder' ),
-						'value' => 'right'
+						'value' => 'right',
 					),
 					array(
 						'label' => __( 'Bottom', 'live-composer-page-builder' ),
-						'value' => 'bottom'
+						'value' => 'bottom',
 					),
 					array(
 						'label' => __( 'Left', 'live-composer-page-builder' ),
-						'value' => 'left'
+						'value' => 'left',
 					),
 				),
 				'refresh_on_change' => false,
@@ -558,11 +558,11 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 				),
 				'section' => 'responsive',
@@ -723,11 +723,11 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'choices' => array(
 					array(
 						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled'
+						'value' => 'disabled',
 					),
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled'
+						'value' => 'enabled',
 					),
 				),
 				'section' => 'responsive',
@@ -878,7 +878,9 @@ class DSLC_Progress_Bars extends DSLC_Module {
 
 		);
 
-		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array('hover_opts' => false) ) );
+		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options', array(
+			'hover_opts' => false,
+		) ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		// Cache calculated array in WP Object Cache.
@@ -897,18 +899,18 @@ class DSLC_Progress_Bars extends DSLC_Module {
 
 		global $dslc_active;
 
-		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) )
+		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 			$dslc_is_admin = true;
-		else
-			$dslc_is_admin = false;
-
+		} else { $dslc_is_admin = false;
+		}
 
 		/* Module output starts here */
 
 			$wrapper_class = '';
 
-			if ( $options['animation'] == 'enabled' )
-				$wrapper_class .= 'dslc-progress-bar-animated ';
+		if ( $options['animation'] == 'enabled' ) {
+			$wrapper_class .= 'dslc-progress-bar-animated ';
+		}
 
 			?>
 
@@ -917,7 +919,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 					<?php if ( $options['label_position'] == 'above' ) : ?>
 
 						<?php if ( $dslc_is_admin ) : ?>
-							<h4 class="dslc-progress-bar-label dslca-editable-content" data-id="label" data-type="simple" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?>><?php echo $options['label']; ?></h4>
+							<h4 class="dslc-progress-bar-label dslca-editable-content" data-id="label" data-type="simple" <?php if ( $dslc_is_admin ) { echo 'contenteditable';} ?>><?php echo $options['label']; ?></h4>
 						<?php else : ?>
 							<h4 class="dslc-progress-bar-label"><?php echo $options['label']; ?></h4>
 						<?php endif; ?>
@@ -928,7 +930,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 						<span class="dslc-progress-bar-loader-inner dslc-in-viewport" data-amount="<?php echo $options['amount']; ?>" data-speed="<?php echo $options['animation_speed']; ?>">
 							<?php if ( $options['label_position'] == 'inside' ) : ?>
 								<?php if ( $dslc_is_admin ) : ?>
-									<h4 class="dslc-progress-bar-label dslca-editable-content" data-id="label" data-type="simple" <?php if ( $dslc_is_admin ) echo 'contenteditable'; ?>><?php echo $options['label']; ?></h4>
+									<h4 class="dslc-progress-bar-label dslca-editable-content" data-id="label" data-type="simple" <?php if ( $dslc_is_admin ) { echo 'contenteditable';} ?>><?php echo $options['label']; ?></h4>
 								<?php else : ?>
 									<h4 class="dslc-progress-bar-label"><?php echo $options['label']; ?></h4>
 								<?php endif; ?>
@@ -939,8 +941,6 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				</div><!-- .dslc-progress-bar -->
 
 			<?php
-
-
 
 	}
 

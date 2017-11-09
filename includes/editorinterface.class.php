@@ -37,7 +37,7 @@ class DSLC_EditorInterface {
 			$additional_vars .= '&preview_id=' . $preview_id;
 		}
 
-		return admin_url( 'admin.php?page=livecomposer_editor&page_id=' . $page_id . $additional_vars);
+		return admin_url( 'admin.php?page=livecomposer_editor&page_id=' . $page_id . $additional_vars );
 	}
 
 	/**
@@ -74,13 +74,13 @@ class DSLC_EditorInterface {
 
 			self::the_editor_link( self::get_editor_link_url( get_the_ID() ), $string_edit_tpl );
 
-		// If a page or CPT like page – go ahead normally.
+			// If a page or CPT like page – go ahead normally.
 		} elseif ( is_page() || ! dslc_cpt_use_templates( get_post_type() ) ) {
 
 			self::the_editor_link( self::get_editor_link_url( get_the_ID() ), $string_open_lc );
 
-		// If a post of the CPT managed by LC templates.
-		}  elseif ( dslc_can_edit_in_lc( get_post_type() ) ) {
+			// If a post of the CPT managed by LC templates.
+		} elseif ( dslc_can_edit_in_lc( get_post_type() ) ) {
 
 			// Check if it has a template attached to it.
 			$template = dslc_st_get_template_id( get_the_ID() );
@@ -208,7 +208,7 @@ class DSLC_EditorInterface {
 			// If a singular page ( posts and pages ) and NOT using LC templates.
 			self::the_edit_singular_link();
 
-		} elseif ( is_singular() && $use_lc_templates  ) {
+		} elseif ( is_singular() && $use_lc_templates ) {
 			// If a singular page ( posts and pages ) and IS using LC templates.
 			self::the_edit_template_link( get_the_ID(), true );
 
@@ -223,7 +223,6 @@ class DSLC_EditorInterface {
 		} elseif ( is_archive() && dslc_can_edit_in_lc( get_post_type() ) ) {
 			// If other archives ( not author )?
 			// $count = $GLOBALS['wp_query']->post_count;
-
 			/**
 			 * Function get_post_type() returns type of the posts
 			 * in the current listing. We use it to decide what template to load.
@@ -231,7 +230,7 @@ class DSLC_EditorInterface {
 			$listing_pt_slug = get_post_type();
 			self::the_edit_template_link( $listing_pt_slug, true );
 
-		// If a search results page (keep this check last!!).
+			// If a search results page (keep this check last!!).
 		} elseif ( is_search() ) {
 
 			self::the_edit_template_link( 'search_results' );
