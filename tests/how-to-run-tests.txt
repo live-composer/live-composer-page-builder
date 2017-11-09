@@ -1,3 +1,12 @@
 
 To run tests in terminal launch:
 $> clear && composer test
+
+
+Codeceptance tests:
+
+verbose $> clear && codecept run acceptance --steps
+verbose $> clear && codecept run acceptance
+
+for debuging use: --debug
+

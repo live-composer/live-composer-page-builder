@@ -12,10 +12,10 @@ matrix:
   include:
   - php: 7.1
     env: WP_VERSION=latest WP_MULTISITE=1
+    dist: trusty # this enables us to use jdk_switcher
   - php: 5.3
     env: WP_VERSION=latest
-    # dist: precise
-    dist: trusty # this enables us to use jdk_switcher
+    dist: precise # trusty not working with php 5.3
 
 before_script:
 - jdk_switcher use oraclejdk8 # select the right Java for Selenium tests
@@ -53,6 +53,7 @@ script:
   fi
 - whereis google-chrome-stable
 - whereis chromedriver
+– codecept run acceptance --steps
 
 addons:
   sauce_connect: # Connecto to Sauce Labs
