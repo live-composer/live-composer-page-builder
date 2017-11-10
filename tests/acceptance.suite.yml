@@ -40,11 +40,11 @@ env:
                     dump: 'tests/_data/dump.sql'
                     populate: true #import the dump before the tests
                     cleanup: true #import the dump between tests
-                    url: 'http://127.0.0.1'
+                    url: 'http://127.0.0.1:8888'
                     urlReplacement: true #replace the hardcoded dump URL with the one above
                     tablePrefix: 'wp_'
                 WPBrowser:
-                    url: 'http://127.0.0.1'
+                    url: 'http://127.0.0.1:8888'
                     adminUsername: 'admin'
                     adminPassword: 'admin'
                     adminPath: '/wp-admin'

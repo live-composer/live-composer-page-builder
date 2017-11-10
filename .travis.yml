@@ -57,6 +57,8 @@ script:
   fi
 # - whereis google-chrome-stable
 # - whereis chromedriver
+- curl http://127.0.0.1:8888 -S --data status
+
 - php vendor/bin/codecept run acceptance --steps -vvv --env travis
 
 addons:
