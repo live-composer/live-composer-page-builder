@@ -56,7 +56,7 @@ script:
   fi
 - whereis google-chrome-stable
 - whereis chromedriver
-- php codecept run acceptance --steps -vvv
+- php vendor/bin/codecept run acceptance --steps -vvv
 
 addons:
   sauce_connect: # Connecto to Sauce Labs
