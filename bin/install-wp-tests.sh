@@ -17,6 +17,15 @@ TMPDIR=$(echo $TMPDIR | sed -e "s/\/$//")
 WP_TESTS_DIR=${WP_TESTS_DIR-$TMPDIR/wordpress-tests-lib}
 WP_CORE_DIR=${WP_CORE_DIR-$TMPDIR/wordpress/}
 
+echo "DB_NAME: $DB_NAME"
+echo "DB_USER: $DB_USER"
+echo "DB_PASS: $DB_PASS"
+echo "DB_HOST: $DB_HOST"
+echo "WP_VERSION: $WP_VERSIONDB_USER"
+echo "WP_CORE_DIR: $WP_CORE_DIR"
+
+
+
 download() {
     if [ `which curl` ]; then
         curl -s "$1" > "$2";

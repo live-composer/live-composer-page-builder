@@ -13,9 +13,9 @@ matrix:
   - php: 7.1
     env: WP_VERSION=latest WP_MULTISITE=1
     dist: trusty # this enables us to use jdk_switcher
-  - php: 5.3
-    env: WP_VERSION=latest
-    dist: precise # trusty not working with php 5.3
+  # - php: 5.3 # too old and crash composer dependances
+  #   env: WP_VERSION=latest
+  #   dist: precise # trusty not working with php 5.3
 
 before_script:
 # - jdk_switcher use oraclejdk8 # select the right Java for Selenium tests
@@ -56,7 +56,7 @@ script:
   fi
 - whereis google-chrome-stable
 - whereis chromedriver
-- php vendor/bin/codecept run acceptance --steps -vvv
+- php vendor/bin/codecept run acceptance --steps -vvv --env travis
 
 addons:
   sauce_connect: # Connecto to Sauce Labs
