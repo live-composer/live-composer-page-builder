@@ -61,6 +61,7 @@ script:
 - curl http://127.0.0.1:8888/ -S --data status
 - curl http://127.0.0.1:8888/tmp/ -S --data status
 - curl http://127.0.0.1:8888/tmp/wordpress/ -S --data status
+- echo $HOME
 
 - php vendor/bin/codecept run acceptance --steps -vvv --env travis
 
