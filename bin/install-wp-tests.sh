@@ -161,4 +161,4 @@ install_test_suite
 install_db
 
 # We start the server up early so that it has time to prepare.
-php -S "127.0.0.1:8888" -t "$WP_CORE_DIR" &
+php -S "127.0.0.1:8080" -t "$WP_CORE_DIR" &
