@@ -11,7 +11,7 @@ cache:
 matrix:
   include:
   - php: 7.1
-    env: WP_VERSION=latest WP_MULTISITE=1
+    env: WP_VERSION=latest #WP_MULTISITE=1
     dist: trusty # this enables us to use jdk_switcher
   # - php: 5.3 # too old and crash composer dependances
   #   env: WP_VERSION=latest
@@ -40,9 +40,10 @@ before_script:
     composer global require wp-coding-standards/wpcs
     phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
   fi
-- composer install -vvv
-- composer show
-- composer info
+- composer install
+# - composer install -vvv
+# - composer show
+# - composer info
 
 script:
 - |
