@@ -58,9 +58,9 @@ script:
 # - whereis google-chrome-stable
 # - whereis chromedriver
 - curl http://127.0.0.1:8888 -S --data status
-- curl http://127.0.0.1:80 -S --data status
-- curl 127.0.0.1 -S --data status
-- curl http://localhost -S --data status
+- curl http://127.0.0.1:8888/ -S --data status
+- curl http://127.0.0.1:8888/tmp/ -S --data status
+- curl http://127.0.0.1:8888/tmp/wordpress/ -S --data status
 
 - php vendor/bin/codecept run acceptance --steps -vvv --env travis
 
