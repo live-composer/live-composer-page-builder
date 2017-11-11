@@ -68,8 +68,10 @@ script:
 #33785
 # - curl http://127.0.0.1:8888 -S --data status
 # - curl http://lc.dev:8888 -S --data status
-# - curl http://127.0.0.1:8080 -S --data status
-# - curl http://127.0.0.1:8080/tmp/wordpress/ -S --data status
+- curl http://127.0.0.1:8080 -S --data status
+- curl http://127.0.0.1:8080/wp-login.php -S --data status
+- curl http://127.0.0.1:8080/tmp/wordpress/ -S --data status
+- curl http://127.0.0.1:8080/tmp/wordpress/wp-login.php -S --data status
 
 # /home/travis/build/live-composer/live-composer-page-builder/
 - php vendor/bin/codecept run acceptance --steps --debug -vvv --env travis
