@@ -156,9 +156,36 @@ install_db() {
 	mysqladmin create $DB_NAME --user="$DB_USER" --password="$DB_PASS"$EXTRA
 }
 
+wpcept-run() {
+
+	# if [[ $DO_WP_CEPT == 0 ]]; then
+	# 	echo Not running codecept tests.
+	# 	return
+	# fi
+
+	# Custom Code: Start server for codeception tests.
+	# We start the server up early so that it has time to prepare.
+	php -S "127.0.0.1:8080" -t "$WP_CORE_DIR" &
+
+	# Configure WordPress for access through a web server.
+	cd "$WP_DEVELOP_DIR"
+	sed -i "s/example.org/$WP_CEPT_SERVER/" wp-tests-config.php
+	cp wp-tests-config.php wp-config.php
+	echo "require_once(ABSPATH . 'wp-settings.php');" >> wp-config.php
+	cd -
+
+	sed -i "s/wptests.local/$WP_CEPT_SERVER/" codeception.dist.yml
+
+	phantomjs --webdriver=4444 >/dev/null &
+
+	# Give PhantomJS time to start.
+	sleep 3
+
+	vendor/bin/wpcept run --debug
+}
+
 install_wp
 install_test_suite
 install_db
 
-# We start the server up early so that it has time to prepare.
-php -S "127.0.0.1:8080" -t "$WP_CORE_DIR" &
+wpcept-run # custom
