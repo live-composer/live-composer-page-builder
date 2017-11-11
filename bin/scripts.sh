@@ -28,8 +28,9 @@ wpcept-run() {
 
 	echo "$WP_TESTS_DIR ----------------------"
 	find . -maxdepth 1  # list files in current dirrectory
-	sed -i "s/example.org/$WP_CEPT_SERVER/" wp-tests-config.php
+	sed -i "s/example.org/$WP_CEPT_SERVER/" wp-tests-config.php #Update site URL in tests config
 	cp "$WP_TESTS_DIR/wp-tests-config.php" "$WP_CORE_DIR/wp-config.php"
+	echo "require_once(ABSPATH . 'wp-settings.php');" >> wp-config.php
 	echo "$WP_TESTS_DIR ----------------------"
 	find . -maxdepth 1  # list files in current dirrectory
 	echo "$WP_CORE_DIR ----------------------"
