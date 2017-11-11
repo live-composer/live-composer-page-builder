@@ -66,8 +66,8 @@ script:
 # - whereis google-chrome-stable
 # - whereis chromedriver
 #33785
-# - curl http://127.0.0.1:8888 -S --data status
-# - curl http://lc.dev:8888 -S --data status
+- curl http://127.0.0.1:8888 -S --data status
+- curl http://lc.dev:8888 -S --data status
 - curl http://127.0.0.1:8080 -S --data status
 - curl http://127.0.0.1:8080/wp-login.php -S --data status
 - curl http://127.0.0.1:8080/tmp/wordpress-tests-lib/ -S --data status
