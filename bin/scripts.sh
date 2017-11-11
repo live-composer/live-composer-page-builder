@@ -52,6 +52,9 @@ wpcept-run() {
 
 	cd -
 
+	echo "XXXXXXXX ----------------------"
+	find . -maxdepth 1  # list files in current dirrectory
+
 	# sed -i "s/wptests.local/$WP_CEPT_SERVER/" codeception.dist.yml
 	# phantomjs --webdriver=4444 >/dev/null &
 
