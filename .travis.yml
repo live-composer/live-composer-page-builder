@@ -44,7 +44,7 @@ before_script:
   fi
 
 # - composer install
-# - composer install -vvv
+- composer install -vvv
 # - composer show
 # - composer info
 # - mysql -e 'create database homestead_test;'
