@@ -35,7 +35,10 @@ modules:
             adminUsername: 'admin'
             adminPassword: 'admin'
             adminPath: '/wp-admin'
-
+extensions:
+    enabled:
+        - Codeception\Extension\RunProcess:
+            - chromedriver
 env:
     travis:
         modules:
