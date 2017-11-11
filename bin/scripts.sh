@@ -57,10 +57,10 @@ wpcept-run() {
 	find . -maxdepth 1  # list files in current dirrectory
 
 	# sed -i "s/wptests.local/$WP_CEPT_SERVER/" codeception.dist.yml
-	# phantomjs --webdriver=4444 >/dev/null &
+	phantomjs --webdriver=4444 >/dev/null &
 
 	# Give PhantomJS time to start.
-	# sleep 3
+	sleep 3
 
 	# php vendor/bin/codecept run acceptance --steps --debug -vvv --env travis
 }
