@@ -31,6 +31,8 @@ wpcept-run() {
 	sed -i "s/example.org/$WP_CEPT_SERVER/" wp-tests-config.php
 	cp wp-tests-config.php wp-config.php
 
+	find . -maxdepth 1  # list files in current dirrectory
+
 	# sed -i "s/example.org/$WP_TESTS_DIR/" wp-config-sample.php
 	# cp wp-config-sample.php wp-config.php
 
@@ -43,7 +45,7 @@ wpcept-run() {
 	# 	require_once(ABSPATH . 'wp-settings.php');
 	# " >> wp-config.php
 
-	cat wp-config.php
+	# cat wp-config.php # show file content
 
 	cd -
 
