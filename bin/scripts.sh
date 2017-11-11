@@ -26,11 +26,14 @@ wpcept-run() {
 	# Configure WordPress for access through a web server.
 	cd "$WP_TESTS_DIR"
 
+	echo "$WP_TESTS_DIR ----------------------"
 	find . -maxdepth 1  # list files in current dirrectory
-
 	sed -i "s/example.org/$WP_CEPT_SERVER/" wp-tests-config.php
-	cp wp-tests-config.php wp-config.php
-
+	cp "$WP_TESTS_DIR/wp-tests-config.php" "$WP_CORE_DIR/wp-config.php"
+	echo "$WP_TESTS_DIR ----------------------"
+	find . -maxdepth 1  # list files in current dirrectory
+	echo "$WP_CORE_DIR ----------------------"
+	cd "$WP_CORE_DIR"
 	find . -maxdepth 1  # list files in current dirrectory
 
 	# sed -i "s/example.org/$WP_TESTS_DIR/" wp-config-sample.php
