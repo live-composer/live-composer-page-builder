@@ -12,6 +12,13 @@ modules:
         - WPBrowser
         - Asserts
         - \Helper\Acceptance
+        - WebDriver:
+             url: 'http://127.0.0.1:8080/'
+             window_size: false # disabled in ChromeDriver
+             port: 9515
+             browser: chrome
+             capabilities:
+                 chromeOptions: # additional chrome options
     config:
         WPDb:
             dsn: 'mysql:host=localhost;dbname=wordpress_lcdev_'
