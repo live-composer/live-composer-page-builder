@@ -26,8 +26,12 @@ wpcept-run() {
 
 	find . -maxdepth 1  # list files in current dirrectory
 
-	sed -i "s/example.org/$WP_CEPT_SERVER/" wp-tests-config.php
-	cp wp-tests-config.php wp-config.php
+	# sed -i "s/example.org/$WP_CEPT_SERVER/" wp-tests-config.php
+	# cp wp-tests-config.php wp-config.php
+
+	sed -i "s/example.org/$WP_CEPT_SERVER/" wp-config-sample.php
+	cp wp-config-sample.php wp-config.php
+
 	echo "
 		if ( ! defined( 'WP_INSTALLING' ) && ( getenv( 'WP_MULTISITE' ) || file_exists( dirname( __FILE__ ) . '/is-multisite' ) ) ) {
 			define( 'MULTISITE', true );
