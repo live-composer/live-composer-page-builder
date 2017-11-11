@@ -1,5 +1,7 @@
 sudo: false
 language: php
+dist: trusty
+
 notifications:
   email:
     on_success: never
@@ -12,17 +14,15 @@ matrix:
   include:
   - php: 7.1
     env: WP_VERSION=latest #WP_MULTISITE=1
-    dist: trusty # this enables us to use jdk_switcher
+    # dist: trusty # this enables us to use jdk_switcher
   # - php: 5.3 # too old and crash composer dependances
   #   env: WP_VERSION=latest
   #   dist: precise # trusty not working with php 5.3
 
-before_install:
-- sudo [ $(ip addr show | grep "inet6 ::1" | wc -l) -lt "1" ] && sudo sed -i '/^::1/d' /etc/hosts
+# before_install:
+# - sudo [ $(ip addr show | grep "inet6 ::1" | wc -l) -lt "1" ] && sudo sed -i '/^::1/d' /etc/hosts
 
 before_script:
-# - curl http://127.0.0.1:8888 -S --data status
-# - curl http://lc.dev:8888 -S --data status
 # - jdk_switcher use oraclejdk8 # select the right Java for Selenium tests
 - export PATH="$HOME/.composer/vendor/bin:$PATH"
 - |

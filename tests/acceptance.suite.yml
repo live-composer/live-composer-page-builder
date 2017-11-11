@@ -12,13 +12,13 @@ modules:
         - WPBrowser
         - Asserts
         - \Helper\Acceptance
-        - WebDriver:
-             url: 'http://127.0.0.1:8080/'
-             window_size: false # disabled in ChromeDriver
-             port: 9515
-             browser: chrome
-             capabilities:
-                 chromeOptions: # additional chrome options
+        # - WebDriver:
+        #      url: 'http://127.0.0.1:8080/'
+        #      window_size: false # disabled in ChromeDriver
+        #      port: 9515
+        #      browser: chrome
+        #      capabilities:
+        #          chromeOptions: # additional chrome options
     config:
         WPDb:
             dsn: 'mysql:host=localhost;dbname=wordpress_lcdev_'
@@ -30,11 +30,19 @@ modules:
             url: 'https://lc.dev'
             urlReplacement: true #replace the hardcoded dump URL with the one above
             tablePrefix: 'wp_'
-        WPBrowser:
-            url: 'https://lc.dev'
-            adminUsername: 'admin'
-            adminPassword: 'admin'
-            adminPath: '/wp-admin'
+        WPWebDriver:
+              url: 'http://127.0.0.1/'
+              browser: chrome
+              port: 8080
+              window_size: false # disabled in ChromeDriver
+              adminUsername: 'admin'
+              adminPassword: 'admin'
+              adminPath: '/wp-admin'
+        # WPBrowser:
+        #     url: 'https://lc.dev'
+        #     adminUsername: 'admin'
+        #     adminPassword: 'admin'
+        #     adminPath: '/wp-admin'
 extensions:
     enabled:
         - Codeception\Extension\RunProcess:
@@ -53,9 +61,9 @@ env:
                     url: 'http://127.0.0.1:8080'
                     urlReplacement: true #replace the hardcoded dump URL with the one above
                     tablePrefix: 'wp_'
-                WPBrowser:
-                    url: 'http://127.0.0.1:8080'
-                    adminUsername: 'admin'
-                    adminPassword: 'admin'
-                    adminPath: '/wp-admin'
+                # WPBrowser:
+                #     url: 'http://127.0.0.1:8080'
+                #     adminUsername: 'admin'
+                #     adminPassword: 'admin'
+                #     adminPath: '/wp-admin'
 
