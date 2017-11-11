@@ -32,14 +32,16 @@ wpcept-run() {
 	sed -i "s/example.org/$WP_CEPT_SERVER/" wp-config-sample.php
 	cp wp-config-sample.php wp-config.php
 
-	echo "
-		if ( ! defined( 'WP_INSTALLING' ) && ( getenv( 'WP_MULTISITE' ) || file_exists( dirname( __FILE__ ) . '/is-multisite' ) ) ) {
-			define( 'MULTISITE', true );
-			define( 'SUBDOMAIN_INSTALL', false );
-			\$GLOBALS['base'] = '/';
-		}
-		require_once(ABSPATH . 'wp-settings.php');
-	" >> wp-config.php
+	# echo "
+	# 	if ( ! defined( 'WP_INSTALLING' ) && ( getenv( 'WP_MULTISITE' ) || file_exists( dirname( __FILE__ ) . '/is-multisite' ) ) ) {
+	# 		define( 'MULTISITE', true );
+	# 		define( 'SUBDOMAIN_INSTALL', false );
+	# 		\$GLOBALS['base'] = '/';
+	# 	}
+	# 	require_once(ABSPATH . 'wp-settings.php');
+	# " >> wp-config.php
+
+	cat wp-config.php
 
 	cd -
 
