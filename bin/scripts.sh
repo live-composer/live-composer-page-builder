@@ -8,6 +8,9 @@ wpcept-run() {
 	# 	return
 	# fi
 
+	TMPDIR=${TMPDIR-/tmp}
+	TMPDIR=$(echo $TMPDIR | sed -e "s/\/$//")
+	WP_CORE_DIR=${WP_CORE_DIR-$TMPDIR/wordpress/}
 	WP_CORE_DIR=${WP_CORE_DIR-$TMPDIR/wordpress/}
 	WP_CEPT_SERVER='127.0.0.1:8080'
 
