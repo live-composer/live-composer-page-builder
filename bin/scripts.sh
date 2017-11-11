@@ -10,27 +10,29 @@ wpcept-run() {
 
 	TMPDIR=${TMPDIR-/tmp}
 	TMPDIR=$(echo $TMPDIR | sed -e "s/\/$//")
+	WP_TESTS_DIR=${WP_TESTS_DIR-$TMPDIR/wordpress-tests-lib}
 	WP_CORE_DIR=${WP_CORE_DIR-$TMPDIR/wordpress/}
 	WP_CORE_DIR=${WP_CORE_DIR-$TMPDIR/wordpress/}
 	WP_CEPT_SERVER='127.0.0.1:8080'
 
 	echo "WP_CORE_DIR: $WP_CORE_DIR"
+	echo "WP_CORE_DIR: $WP_TESTS_DIR"
 	# Custom Code: Start server for codeception tests.
 	# We start the server up early so that it has time to prepare.
-	php -S "$WP_CEPT_SERVER" -t "$WP_CORE_DIR" &
+	php -S "$WP_CEPT_SERVER" -t "$WP_TESTS_DIR" &
 
 	# export WP_DEVELOP_DIR=/tmp/wordpress
 
 	# Configure WordPress for access through a web server.
-	cd "$WP_CORE_DIR"
+	cd "$WP_TESTS_DIR"
 
 	find . -maxdepth 1  # list files in current dirrectory
 
-	# sed -i "s/example.org/$WP_CEPT_SERVER/" wp-tests-config.php
-	# cp wp-tests-config.php wp-config.php
+	sed -i "s/example.org/$WP_CEPT_SERVER/" wp-tests-config.php
+	cp wp-tests-config.php wp-config.php
 
-	sed -i "s/example.org/$WP_CEPT_SERVER/" wp-config-sample.php
-	cp wp-config-sample.php wp-config.php
+	# sed -i "s/example.org/$WP_TESTS_DIR/" wp-config-sample.php
+	# cp wp-config-sample.php wp-config.php
 
 	# echo "
 	# 	if ( ! defined( 'WP_INSTALLING' ) && ( getenv( 'WP_MULTISITE' ) || file_exists( dirname( __FILE__ ) . '/is-multisite' ) ) ) {
