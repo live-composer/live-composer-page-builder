@@ -62,10 +62,10 @@ script:
 # - whereis google-chrome-stable
 # - whereis chromedriver
 #33785
-- curl http://127.0.0.1:8888 -S --data status
-- curl http://lc.dev:8888 -S --data status
-- curl http://127.0.0.1:8080 -S --data status
-- curl http://127.0.0.1:8080/tmp/wordpress/ -S --data status
+# - curl http://127.0.0.1:8888 -S --data status
+# - curl http://lc.dev:8888 -S --data status
+# - curl http://127.0.0.1:8080 -S --data status
+# - curl http://127.0.0.1:8080/tmp/wordpress/ -S --data status
 
 # /home/travis/build/live-composer/live-composer-page-builder/
 # - php vendor/bin/codecept run acceptance --steps -vvv --env travis
