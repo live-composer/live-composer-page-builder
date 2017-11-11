@@ -62,7 +62,7 @@ wpcept-run() {
 	# Give PhantomJS time to start.
 	# sleep 3
 
-	php vendor/bin/codecept run acceptance --steps --debug -vvv --env travis
+	# php vendor/bin/codecept run acceptance --steps --debug -vvv --env travis
 }
 
 wpcept-run # custom

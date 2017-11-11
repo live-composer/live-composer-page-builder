@@ -50,7 +50,7 @@ before_script:
 # - mysql -e 'create database homestead_test;'
 
 script:
-# - bash bin/scripts.sh
+- bash bin/scripts.sh
 
 
 
@@ -72,7 +72,7 @@ script:
 # - curl http://127.0.0.1:8080/tmp/wordpress/ -S --data status
 
 # /home/travis/build/live-composer/live-composer-page-builder/
-- php vendor/bin/codecept run acceptance --steps -vvv --env travis
+- php vendor/bin/codecept run acceptance --steps --debug -vvv --env travis
 
 
 
