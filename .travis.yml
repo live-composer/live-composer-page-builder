@@ -17,6 +17,9 @@ matrix:
   #   env: WP_VERSION=latest
   #   dist: precise # trusty not working with php 5.3
 
+before_install:
+- sudo [ $(ip addr show | grep "inet6 ::1" | wc -l) -lt "1" ] && sudo sed -i '/^::1/d' /etc/hosts
+
 before_script:
 # - curl http://127.0.0.1:8888 -S --data status
 # - curl http://lc.dev:8888 -S --data status
@@ -51,7 +54,7 @@ before_script:
 
 script:
 - bash bin/scripts.sh
-
+- cat /etc/hosts; ip addr show; exit 0
 
 
 # - |
@@ -86,8 +89,8 @@ addons:
   #   access_key: 
   #     secure: "uNd18W5u4nfySwEjXXby24lA34II4d7Q+YTm5q9bnZDnQFsI7OkVScu8V4D8XLlNKZtG5pmqcXaputN0gJJCNKNATvlnXfw4reHFHHbBL1Ko0PiRxiALLIArJaMT1QNMEo/bc1Ok8l2AjoovibEco3zLGmkr5E/1dMHTdyAax0s5bhAbCjhiK++dIwpdbI7z6Pal0DBZ7FqmALrj61So+Iwa6l8ZL+U/Wx9uuIBZB+uZS1GJ061Dp2R+iMfWkpinLJhCr3NsQuIbFEBlgA0eLG/tXjJ9ATsd9hToPtSoxa1a0kbjE1wGApGfdNaFa5bXTe/k9nGmMcZPSEFCTrXXP84pjQ8q+wiz0yI76aDukgxzu5qL41VrqNcbCOYXx9xqtbyoqyrXCKNp6qZD717uQ8AlmbrOWjIxRfO7i2qHYRnHKCKk7sEr9ZcTEZSQFfCBLYmO3hhTqPXWYCPhnXUoAf+exnXL5FKHzHV2IsNOdkTWGYeF3+vQ3xAWQfIvhQvZsVOJy49DXRQ5nyRxWs7K71ggMsbCliZfBpy92gdfYCZrCK/LNqFMW+H+yZvCjELRUxwlLYawGUnjgQwjcD5cXY3Deh0Qu1NPzvZ5WRp872DyiSO5Dx+9ewqhgJAWQC1tbf0eRpqpiNJoQAu12HIoZwrFVLv7wUg6Na9Bhgoam3k="
   # chrome: stable # get google-chrome-stable
-  hosts:
-    - lc.dev # create a virtual host/domain.
+  # hosts:
+  #   - lc.dev # create a virtual host/domain.
 
 install: # Install ChromeDriver (64bits; replace 64 with 32 for 32bits).
   # - wget -N http://chromedriver.storage.googleapis.com/2.30/chromedriver_linux64.zip -P ~/
