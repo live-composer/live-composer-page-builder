@@ -3,3 +3,12 @@ class_name: AcceptanceTester
 modules:
     enabled:
         - WPWebDriver
+    config:
+          WPWebDriver:
+              url: 'http://127.0.0.1:8888'
+              browser: phantomjs
+              port: 4444
+              window_size: 1024x768
+              adminUsername: 'root'
+              adminPassword: 'root'
+              adminPath: '/wp-core/wp-admin
