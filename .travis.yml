@@ -149,7 +149,7 @@ script:
 - |
   if [[ "$RUN_WPCEPT" == 1 ]] ; then
     echo "RUN ACCEPTANCE TESTS"
-    vendor/bin/wpcept run --steps --debug -vvv
+    vendor/bin/wpcept run --steps -vvv --env travis # --debug
   fi
 
 

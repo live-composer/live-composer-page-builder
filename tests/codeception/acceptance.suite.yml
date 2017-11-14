@@ -5,10 +5,24 @@ modules:
         - WPWebDriver
     config:
           WPWebDriver:
-              url: 'http://127.0.0.1:8888'
+              url: 'http://lc.testing'
               browser: phantomjs
               port: 4444
               window_size: 1024x768
               adminUsername: 'admin'
-              adminPassword: 'password'
+              adminPassword: 'admin'
               adminPath: '/wp-core/wp-admin'
+
+env:
+    travis:
+        modules:
+            config:
+                WPWebDriver:
+                    url: 'http://127.0.0.1:8888'
+                    browser: phantomjs
+                    port: 4444
+                    window_size: 1024x768
+                    adminUsername: 'admin'
+                    adminPassword: 'password'
+                    adminPath: '/wp-core/wp-admin'
+

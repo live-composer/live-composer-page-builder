@@ -20,3 +20,10 @@ node_modules
 
 # Composer
 vendor
+
+# PhantomJS
+bin/phantomjs
+
+# Temporary Test Files
+tests/codeception/_output/*
+tests/codeception/**/_generated
