@@ -59,25 +59,10 @@ env:
   #   dist: precise # trusty not working with php 5.3
 
 before_script:
-- echo "TESTING"
-# - echo [ -z "$RUN_WPCEPT" ]
-# - echo [[ -z "$RUN_WPCEPT" ]]
-
-# - echo [ -n "$RUN_WPCEPT" ]
-- echo [[ -n "$RUN_WPCEPT" ]]
-- |
-  if [[ -n "$RUN_WPCEPT" ]] ; then
-    echo "!!!!! PHPUNIT TESTS"
-  if
-
-- |
-  if [[ "$RUN_WPCEPT" == 1 ]] ; then
-    echo "!!!!! ACCEPTANCE TESTS"
-  if
 
 # BEFORE:
 - |
-  if [[ "$RUN_WPCEPT" -ne 1 ]] ; then
+  if [[ ! -z "$RUN_WPCEPT" ]] ; then
     echo "PREPARE PHPUNIT TESTS"
     export PATH="$HOME/.composer/vendor/bin:$PATH"
 
@@ -134,7 +119,7 @@ script:
 # - cat /etc/hosts; ip addr show; exit 0
 
 - |
-  if [[ "$RUN_WPCEPT" -ne 1 ]] ; then
+  if [[ ! -z "$RUN_WPCEPT" ]] ; then
     echo "RUN PHPUNIT TESTS"
 
     if [[ ! -z "$WP_VERSION" ]] ; then
