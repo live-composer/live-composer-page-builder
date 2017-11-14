@@ -1,9 +1,9 @@
 {
 	"config": {
-		        "platform": {
-		            "php": "5.6"
-		        }
-		    },
+		"platform": {
+			"php": "5.6"
+		}
+	},
     "require": {
       	"codeception/codeception": "2.2",
       	"lucatume/wp-browser": "1.14"
