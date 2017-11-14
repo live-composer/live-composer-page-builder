@@ -25,7 +25,7 @@ php:
 
 # Run against regular and multisite.
 env:
-    - WP_MULTISITE=0
+    # - WP_MULTISITE=0
     - WP_MULTISITE=1
 
 # matrix:
