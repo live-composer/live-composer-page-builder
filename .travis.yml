@@ -60,10 +60,13 @@ env:
 
 before_script:
 - echo "TESTING"
-- echo [ -z "$RUN_WPCEPT" ]
-- echo [[ -z "$RUN_WPCEPT" ]]
+# - echo [ -z "$RUN_WPCEPT" ]
+# - echo [[ -z "$RUN_WPCEPT" ]]
+
+# - echo [ -n "$RUN_WPCEPT" ]
+- echo [[ -n "$RUN_WPCEPT" ]]
 - |
-  if [[ -z "$RUN_WPCEPT" ]] ; then
+  if [[ -n "$RUN_WPCEPT" ]] ; then
     echo "!!!!! PHPUNIT TESTS"
   if
 
