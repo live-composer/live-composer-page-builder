@@ -62,7 +62,7 @@ before_script:
 
 # BEFORE:
 - |
-  if [[ ! -z "$RUN_WPCEPT" ]] ; then
+  if [ -z "$RUN_WPCEPT" ] ; then # if "$RUN_WPCEPT" string is empty
     echo "PREPARE PHPUNIT TESTS"
     export PATH="$HOME/.composer/vendor/bin:$PATH"
 
@@ -117,9 +117,9 @@ script:
 #BEFORE:
 # - bash bin/scripts.sh
 # - cat /etc/hosts; ip addr show; exit 0
-
+# if [ -z "$string" ]; then
 - |
-  if [[ ! -z "$RUN_WPCEPT" ]] ; then
+  if [ -z "$RUN_WPCEPT" ] ; then # if "$RUN_WPCEPT" string is empty
     echo "RUN PHPUNIT TESTS"
 
     if [[ ! -z "$WP_VERSION" ]] ; then
