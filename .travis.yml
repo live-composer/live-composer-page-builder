@@ -27,6 +27,7 @@ php:
 env:
     # - WP_MULTISITE=0
     - WP_MULTISITE=1
+    - WP_VERSION=latest
 
 # matrix:
 #     include:
@@ -59,27 +60,27 @@ env:
 
 before_script:
 # BEFORE:
-# - export PATH="$HOME/.composer/vendor/bin:$PATH"
-# - |
-#   if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
-#     phpenv config-rm xdebug.ini
-#   else
-#     echo "xdebug.ini does not exist"
-#   fi
-# - |
-#   if [[ ! -z "$WP_VERSION" ]] ; then
-#     bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
-#     if [[ ${TRAVIS_PHP_VERSION:0:2} == "5." ]]; then
-#       composer global require "phpunit/phpunit=4.8.*"
-#     else
-#       composer global require "phpunit/phpunit=5.7.*"
-#     fi
-#   fi
-# - |
-#   if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
-#     composer global require wp-coding-standards/wpcs
-#     phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
-#   fi
+- export PATH="$HOME/.composer/vendor/bin:$PATH"
+- |
+  if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
+    phpenv config-rm xdebug.ini
+  else
+    echo "xdebug.ini does not exist"
+  fi
+- |
+  if [[ ! -z "$WP_VERSION" ]] ; then
+    bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+    if [[ ${TRAVIS_PHP_VERSION:0:2} == "5." ]]; then
+      composer global require "phpunit/phpunit=4.8.*"
+    else
+      composer global require "phpunit/phpunit=5.7.*"
+    fi
+  fi
+- |
+  if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
+    composer global require wp-coding-standards/wpcs
+    phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
+  fi
 
 # - composer install -vvv
 # # - composer show
@@ -109,15 +110,15 @@ script:
 # - cat /etc/hosts; ip addr show; exit 0
 
 
-# - |
-#   if [[ ! -z "$WP_VERSION" ]] ; then
-#     phpunit
-#     WP_MULTISITE=1 phpunit
-#   fi
-# - |
-#   if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
-#     phpcs
-#   fi
+- |
+  if [[ ! -z "$WP_VERSION" ]] ; then
+    phpunit
+    WP_MULTISITE=1 phpunit
+  fi
+- |
+  if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
+    phpcs
+  fi
 # - whereis google-chrome-stable
 # - whereis chromedriver
 #33785
