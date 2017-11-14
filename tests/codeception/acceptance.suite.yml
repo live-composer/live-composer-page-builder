@@ -11,4 +11,4 @@ modules:
               window_size: 1024x768
               adminUsername: 'root'
               adminPassword: 'root'
-              adminPath: '/wp-core/wp-admin
+              adminPath: '/wp-core/wp-admin'
