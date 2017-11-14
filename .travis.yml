@@ -134,7 +134,7 @@ script:
 # - php vendor/bin/codecept run acceptance --steps --debug -vvv --env travis
 
 #AFTER:
-- vendor/bin/wpcept run
+- vendor/bin/wpcept run --steps --debug -vvv
 
 
 
