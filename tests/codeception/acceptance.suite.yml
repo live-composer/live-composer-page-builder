@@ -9,6 +9,6 @@ modules:
               browser: phantomjs
               port: 4444
               window_size: 1024x768
-              adminUsername: 'root'
-              adminPassword: 'root'
+              adminUsername: 'admin'
+              adminPassword: 'password'
               adminPath: '/wp-core/wp-admin'
