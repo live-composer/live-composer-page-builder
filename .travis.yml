@@ -1,4 +1,6 @@
+# Use the new container-based infrastructure (it's faster).
 sudo: false
+
 language: php
 dist: trusty
 
@@ -6,54 +8,80 @@ notifications:
   email:
     on_success: never
     on_failure: change
+
 cache:
   directories:
   - vendor
   - "$HOME/.composer/cache"
-matrix:
-  include:
-  - php: 7.1
-    env: WP_VERSION=latest #WP_MULTISITE=1
+
+# 5.6 is required for Codeception.
+php:
+    - 5.6
+    - 7.0
+
+# Run against regular and multisite.
+env:
+    - WP_MULTISITE=0
+    - WP_MULTISITE=1
+
+# matrix:
+#   include:
+#   - php: 7.1
+#     env: WP_VERSION=latest #WP_MULTISITE=1
     # dist: trusty # this enables us to use jdk_switcher
   # - php: 5.3 # too old and crash composer dependances
   #   env: WP_VERSION=latest
   #   dist: precise # trusty not working with php 5.3
 
-# before_install:
-# - sudo [ $(ip addr show | grep "inet6 ::1" | wc -l) -lt "1" ] && sudo sed -i '/^::1/d' /etc/hosts
-
 before_script:
-# - jdk_switcher use oraclejdk8 # select the right Java for Selenium tests
-- export PATH="$HOME/.composer/vendor/bin:$PATH"
-- |
-  if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
-    phpenv config-rm xdebug.ini
-  else
-    echo "xdebug.ini does not exist"
-  fi
-- |
-  if [[ ! -z "$WP_VERSION" ]] ; then
-    bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
-    if [[ ${TRAVIS_PHP_VERSION:0:2} == "5." ]]; then
-      composer global require "phpunit/phpunit=4.8.*"
-    else
-      composer global require "phpunit/phpunit=5.7.*"
-    fi
-  fi
-- |
-  if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
-    composer global require wp-coding-standards/wpcs
-    phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
-  fi
+# BEFORE:
+# - export PATH="$HOME/.composer/vendor/bin:$PATH"
+# - |
+#   if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
+#     phpenv config-rm xdebug.ini
+#   else
+#     echo "xdebug.ini does not exist"
+#   fi
+# - |
+#   if [[ ! -z "$WP_VERSION" ]] ; then
+#     bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+#     if [[ ${TRAVIS_PHP_VERSION:0:2} == "5." ]]; then
+#       composer global require "phpunit/phpunit=4.8.*"
+#     else
+#       composer global require "phpunit/phpunit=5.7.*"
+#     fi
+#   fi
+# - |
+#   if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
+#     composer global require wp-coding-standards/wpcs
+#     phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
+#   fi
 
-# - composer install
-- composer install -vvv
-# - composer show
-# - composer info
-# - mysql -e 'create database homestead_test;'
+# - composer install -vvv
+# # - composer show
+# # - composer info
+# # - mysql -e 'create database homestead_test;'
+
+#AFTER:
+# Define vars.
+- export WP_VERSION=master
+- export WP_DEVELOP_DIR=/tmp/wordpress
+- export WP_CORE_DIR=/tmp/wordpress/src
+- export WP_CEPT_SERVER='127.0.0.1:8888'
+# Install WordPress
+- source travis.sh
+- install-wordpress
+# Start up a web server.
+- php -S "$WP_CEPT_SERVER" -t "$WP_CORE_DIR" >/dev/null 2>&1 &
+# Start up the webdriver.
+- phantomjs --webdriver=4444 >/dev/null 2>&1 &
+# Install Codeception and WP Browser.
+# Doing this last gives the webdriver and server time to start up.
+- composer install --prefer-source
 
 script:
-- bash bin/scripts.sh
+#BEFORE:
+# - bash bin/scripts.sh
 # - cat /etc/hosts; ip addr show; exit 0
 
 
@@ -78,24 +106,26 @@ script:
 # - curl http://127.0.0.1:8080/tmp/wordpress/wp-login.php -S --data status
 
 # /home/travis/build/live-composer/live-composer-page-builder/
-- php vendor/bin/codecept run acceptance --steps --debug -vvv --env travis
+# - php vendor/bin/codecept run acceptance --steps --debug -vvv --env travis
+
+#AFTER:
+- vendor/bin/wpcept run
 
 
 
+# addons:
+#   # sauce_connect: # Connecto to Sauce Labs
+#   #   username: livecomposer
+#   #   access_key: 
+#   #     secure: "uNd18W5u4nfySwEjXXby24lA34II4d7Q+YTm5q9bnZDnQFsI7OkVScu8V4D8XLlNKZtG5pmqcXaputN0gJJCNKNATvlnXfw4reHFHHbBL1Ko0PiRxiALLIArJaMT1QNMEo/bc1Ok8l2AjoovibEco3zLGmkr5E/1dMHTdyAax0s5bhAbCjhiK++dIwpdbI7z6Pal0DBZ7FqmALrj61So+Iwa6l8ZL+U/Wx9uuIBZB+uZS1GJ061Dp2R+iMfWkpinLJhCr3NsQuIbFEBlgA0eLG/tXjJ9ATsd9hToPtSoxa1a0kbjE1wGApGfdNaFa5bXTe/k9nGmMcZPSEFCTrXXP84pjQ8q+wiz0yI76aDukgxzu5qL41VrqNcbCOYXx9xqtbyoqyrXCKNp6qZD717uQ8AlmbrOWjIxRfO7i2qHYRnHKCKk7sEr9ZcTEZSQFfCBLYmO3hhTqPXWYCPhnXUoAf+exnXL5FKHzHV2IsNOdkTWGYeF3+vQ3xAWQfIvhQvZsVOJy49DXRQ5nyRxWs7K71ggMsbCliZfBpy92gdfYCZrCK/LNqFMW+H+yZvCjELRUxwlLYawGUnjgQwjcD5cXY3Deh0Qu1NPzvZ5WRp872DyiSO5Dx+9ewqhgJAWQC1tbf0eRpqpiNJoQAu12HIoZwrFVLv7wUg6Na9Bhgoam3k="
+#   chrome: stable # get google-chrome-stable
+#   # hosts:
+#   #   - lc.dev # create a virtual host/domain.
 
-addons:
-  # sauce_connect: # Connecto to Sauce Labs
-  #   username: livecomposer
-  #   access_key: 
-  #     secure: "uNd18W5u4nfySwEjXXby24lA34II4d7Q+YTm5q9bnZDnQFsI7OkVScu8V4D8XLlNKZtG5pmqcXaputN0gJJCNKNATvlnXfw4reHFHHbBL1Ko0PiRxiALLIArJaMT1QNMEo/bc1Ok8l2AjoovibEco3zLGmkr5E/1dMHTdyAax0s5bhAbCjhiK++dIwpdbI7z6Pal0DBZ7FqmALrj61So+Iwa6l8ZL+U/Wx9uuIBZB+uZS1GJ061Dp2R+iMfWkpinLJhCr3NsQuIbFEBlgA0eLG/tXjJ9ATsd9hToPtSoxa1a0kbjE1wGApGfdNaFa5bXTe/k9nGmMcZPSEFCTrXXP84pjQ8q+wiz0yI76aDukgxzu5qL41VrqNcbCOYXx9xqtbyoqyrXCKNp6qZD717uQ8AlmbrOWjIxRfO7i2qHYRnHKCKk7sEr9ZcTEZSQFfCBLYmO3hhTqPXWYCPhnXUoAf+exnXL5FKHzHV2IsNOdkTWGYeF3+vQ3xAWQfIvhQvZsVOJy49DXRQ5nyRxWs7K71ggMsbCliZfBpy92gdfYCZrCK/LNqFMW+H+yZvCjELRUxwlLYawGUnjgQwjcD5cXY3Deh0Qu1NPzvZ5WRp872DyiSO5Dx+9ewqhgJAWQC1tbf0eRpqpiNJoQAu12HIoZwrFVLv7wUg6Na9Bhgoam3k="
-  chrome: stable # get google-chrome-stable
-  # hosts:
-  #   - lc.dev # create a virtual host/domain.
-
-install: # Install ChromeDriver (64bits; replace 64 with 32 for 32bits).
-  - wget -N http://chromedriver.storage.googleapis.com/2.30/chromedriver_linux64.zip -P ~/
-  - unzip ~/chromedriver_linux64.zip -d ~/
-  - rm ~/chromedriver_linux64.zip
-  - sudo mv -f ~/chromedriver /usr/local/share/
-  - sudo chmod +x /usr/local/share/chromedriver
-  - sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
+# install: # Install ChromeDriver (64bits; replace 64 with 32 for 32bits).
+#   - wget -N http://chromedriver.storage.googleapis.com/2.30/chromedriver_linux64.zip -P ~/
+#   - unzip ~/chromedriver_linux64.zip -d ~/
+#   - rm ~/chromedriver_linux64.zip
+#   - sudo mv -f ~/chromedriver /usr/local/share/
+#   - sudo chmod +x /usr/local/share/chromedriver
+#   - sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver

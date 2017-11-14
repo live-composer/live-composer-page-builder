@@ -1,0 +1,5 @@
+# Codeception Acceptance Test Suite Configuration
+class_name: AcceptanceTester
+modules:
+    enabled:
+        - WPWebDriver

@@ -1,0 +1,20 @@
+# Codeception Test Suite Configuration
+actor: Tester
+paths:
+    tests: tests/codeception
+    log: tests/codeception/_output
+    data: tests/codeception/_data
+    helpers: tests/codeception/_support
+settings:
+    bootstrap: bootstrap.php
+    colors: true
+    memory_limit: 1024M
+modules:
+    config:
+        WPWebDriver:
+            url: 'http://127.0.0.1:8888'
+            browser: phantomjs
+            window_size: '1024x768'
+            adminUsername: admin
+            adminPassword: password
+            adminUrl: /wp-admin
