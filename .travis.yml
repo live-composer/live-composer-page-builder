@@ -59,6 +59,9 @@ env:
   #   dist: precise # trusty not working with php 5.3
 
 before_script:
+- echo "TESTING"
+- echo [ -z "$RUN_WPCEPT" ]
+- echo [[ -z "$RUN_WPCEPT" ]]
 - |
   if [[ -z "$RUN_WPCEPT" ]] ; then
     echo "!!!!! PHPUNIT TESTS"
