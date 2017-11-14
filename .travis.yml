@@ -101,13 +101,25 @@ before_script:
     export WP_DEVELOP_DIR=/tmp/wordpress
     export WP_CORE_DIR=/tmp/wordpress/src
     export WP_CEPT_SERVER='127.0.0.1:8888'
+  fi
+
+- |
+  if [[ "$RUN_WPCEPT" == 1 ]] ; then
     # Install WordPress
     source travis.sh
     install-wordpress
+  fi
+
+- |
+  if [[ "$RUN_WPCEPT" == 1 ]] ; then
     # Start up a web server.
     php -S "$WP_CEPT_SERVER" -t "$WP_CORE_DIR" >/dev/null 2>&1 &
     # Start up the webdriver.
     phantomjs --webdriver=4444 >/dev/null 2>&1 &
+  fi
+
+- |
+  if [[ "$RUN_WPCEPT" == 1 ]] ; then
     # Install Codeception and WP Browser.
     # Doing this last gives the webdriver and server time to start up.
     composer install --prefer-source
