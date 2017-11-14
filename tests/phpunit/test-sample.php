@@ -24,7 +24,7 @@ class SampleTest extends WP_UnitTestCase {
 
 		// Extract version number from the plugin meta comment block.
 		$path_to_current_folder = __DIR__;
-		$abspath = str_replace( '/tests', '', $path_to_current_folder );
+		$abspath = str_replace( '/tests/phpunit', '', $path_to_current_folder );
 		$version = get_file_data( $abspath . '/ds-live-composer.php', array( 'Version' ), 'plugin' );
 		$version = $version[0];
 		// Compare DS_LIVE_COMPOSER_VER with extracted above version.
