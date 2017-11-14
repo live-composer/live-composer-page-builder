@@ -1,0 +1,24 @@
+
+ACCEPTANCE TESTING:
+
+To do once:
+1. Download PhantomJS (nt) http://phantomjs.org/download.html
+2. copy phantomjs file to /bin/phantomjs
+
+To test:
+Run in macOS terminal (not from the editor) from the project folder
+$> bash bin/localtest.sh
+
+PHPUNIT TESTING:
+https://pippinsplugins.com/unit-tests-wordpress-plugins-setting-up-testing-suite/
+
+To do once:
+bash bin/install-wp-tests.sh wordpress_test root 'root' localhost latest
+
+Replace root with the username of your database and
+replace 'root' with the database password.
+Also replace “localhost” with the hostname of your database.
+You can find all three of these values in your wp-config.php file.
+
+To test:
+$> phpunit

@@ -1,7 +1,0 @@
-
-To do once:
-1. Download PhantomJS (nt) http://phantomjs.org/download.html
-2. copy phantomjs file to /bin/phantomjs
-
-Run in macOS terminal (not from the editor) from the project folder
-$> bash bin/localtest.sh
