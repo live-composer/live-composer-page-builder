@@ -60,7 +60,7 @@ env:
 
 before_script:
 - |
-  if [ ! "$RUN_WPCEPT" ] ; then
+  if [[ -z "$RUN_WPCEPT" ]] ; then
     echo "!!!!! PHPUNIT TESTS"
   if
 
