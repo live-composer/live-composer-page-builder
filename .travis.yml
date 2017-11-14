@@ -2,17 +2,21 @@
 sudo: false
 
 language: php
-dist: trusty
+# dist: trusty
 
 notifications:
   email:
     on_success: never
     on_failure: change
 
+# Configure caches
 cache:
-  directories:
-  - vendor
-  - "$HOME/.composer/cache"
+  apt: true
+
+# cache:
+#   directories:
+#   - vendor
+#   - "$HOME/.composer/cache"
 
 # 5.6 is required for Codeception.
 php:
@@ -23,6 +27,26 @@ php:
 env:
     - WP_MULTISITE=0
     - WP_MULTISITE=1
+
+matrix:
+    include:
+        - php: hhvm
+          env: WP_MULTISITE=0
+          sudo: required
+          dist: trusty
+          group: edge
+          addons:
+            apt:
+              packages:
+              - mysql-server-5.6
+              - mysql-client-core-5.6
+              - mysql-client-5.6
+        - php: nightly
+          env: WP_MULTISITE=0
+    allow_failures:
+        - php: hhvm
+        - php: nightly
+    fast_finish: true
 
 # matrix:
 #   include:
