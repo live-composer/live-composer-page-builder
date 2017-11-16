@@ -228,20 +228,26 @@
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
 	font-size: 13px;
 	line-height: 2.1em;
-	margin: 16px 0;
+	margin: 20px 0;
 	overflow: auto;
 	padding: 36px 3% 23px 3%;
     position: relative;
 }
 
 .dslc-panel.no-top-margin {
-    margin-top: -20px;
+    margin-top: -21px;
     border-top: none;
 }
 
+.lc-panel-intro .lc-panel-cta {
+    margin-top: 30px;
+}
+
 .lc-panel-cta {
-    margin-top: 3em;
-    margin-bottom: 3em;
+    /* margin-top: 3em; */
+    /* margin-bottom: 3em; */
+    margin-bottom: 0;
+    min-height: 140px;
 }
 
 .lc-align-center {
@@ -319,6 +325,11 @@
     font-weight: 300;
 }
 
+.dslc-panel h3.lc-huge.margin-top-half {
+    margin-top: 20px;
+}
+
+
 .dslc-panel h3 .dashicons{
 	color: #82878c;
    font-size: 170%;
@@ -375,14 +386,33 @@
     font-size: 1.2em;
 }
 
+body .dslc-panel.lc-panel-cta {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
 
-.dslc-panel .lc-description{
-    text-align: center;
+body .dslc-panel.lc-border-top {
+    border-top: 1px solid rgba(211, 211, 211, 0.45);
+}
+
+body .lc-panel-cta .button.button-hero {
+        font-size: 16px;
+}
+
+
+.dslc-panel .lc-description,
+.dslc-panel .lc-feature-description{
+    /* text-align: center; */
     font-size: 1.5em;
     font-weight: 300;
     line-height: 1.4;
     margin-bottom: 2em;
     color: #23282d;
+}
+
+.dslc-panel .lc-feature-description{
+    margin: 0;
+    font-size: 1.4em;
 }
 
 .dslc-panel img {
@@ -401,8 +431,22 @@
     flex-wrap: wrap;
 }
 
+.lc-premium-feature {
+    cursor: pointer;
+}
+
+.lc-premium-feature:hover {
+    box-shadow: 0px 1px 3px 2px rgba(0,0,0,0.1), 0px 1px 23px 2px rgba(0,0,0,0.1);
+}
+
 .lc-premium-feature-screenshot {
     line-height: 0; /* Removes unwanted spacing bellow the image */
+    text-align: center;
+    min-height: 100px;
+}
+
+.lc-premium-feature-screenshot img {
+    max-width: 80px;
 }
 
 .lc-divided-panels {
@@ -418,6 +462,7 @@
 }
 
 .lc-image-column img {
+    margin-top: 20px;
     right: -10px;
     position: relative;
 }
@@ -439,13 +484,18 @@
     margin-right: 10px;
 }
 
-.lc-premium-features > div {
+.lc-premium-features > div,
+.lc-premium-features > a {
     max-width: 190px;
     min-width: 180px;
     background: white;
     border-radius: 4px;
     overflow: hidden;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    transition: all .3s ease-out;
 }
 
 #wpbody-content .lc-premium-feature-description {
@@ -527,8 +577,24 @@
     background-position: 90% bottom;
 }
 
+.lc-panel-socialshare {
+    background-color: #FFFFFF;
+    background-repeat: no-repeat;
+    background-size: 310px;
+    background-position: 90% bottom;
+}
+
 .lc-panel-acf {
     background-color: #26E6B9;
+}
+
+.lc-panel-acf p,
+.lc-panel-acf li{
+    color: rgba( 0, 0, 0, 0.7 )
+}
+
+.dslc-panel.lc-panel-acf li .dashicons {
+    color: rgba( 0, 0, 0, 0.4 )
 }
 
 
@@ -565,6 +631,11 @@
 .dslc-tab-extend .feature-section p {
     margin-right: 0;
     margin-left: 0;
+}
+
+.dslc-tab-extend a[name] {
+    font-size: 0;
+    line-height: 0;
 }
 
 
