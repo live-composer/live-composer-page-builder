@@ -6,7 +6,7 @@
  * Author: Live Composer Team
  * Version: 1.3.8
  * Author URI: https://livecomposerplugin.com
- * License: GPL2
+ * License: GPL3
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: live-composer-page-builder
  * Domain Path: /lang
