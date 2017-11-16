@@ -37,7 +37,7 @@ body .dslca-module-edit-option-text-shadow-single input[type="text"].dslca-modul
 .dslca-module-edit-option-color .wp-color-result,
 .dslca-module-edit-option-box-shadow-single .wp-color-result,
 .dslca-module-edit-option-text-shadow-single .wp-color-result {
-    position: absolute;
+    position: absolute !important;
     top: 53px;
     z-index: 2;
     right: 10px;
@@ -116,5 +116,24 @@ body .dslca-module-edit-option-text-shadow-single input[type="text"].dslca-modul
 	line-height: 27px;
 }
 
+.wp-picker-container .wp-picker-input-wrap.hidden {
+	display: block;
+}
 
+.wp-picker-input-wrap label {
+	width: 100%;
+}
+
+.wp-picker-container .wp-picker-input-wrap.hidden label {
+	width: 100%;
+}
+
+.wp-picker-open + .wp-picker-input-wrap {
+	width: 100%;
+}
+
+.dslca-module-edit-option-box-shadow-single.dslca-color-option .wp-picker-container {
+	display: inline-block;
+	vertical-align: middle;
+}
 
