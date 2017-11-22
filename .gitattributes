@@ -24,7 +24,7 @@ package-lock.json export-ignore
 
 phpcs.xml export-ignore
 phpunit.xml export-ignore
-README.MD export-ignore
+README.md export-ignore
 
 installing-grunt.txt export-ignore
 Gruntfile.js export-ignore

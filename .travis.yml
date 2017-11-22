@@ -62,6 +62,7 @@ before_script:
 
 # BEFORE:
 - |
+  if [[ ! -z "$RUN_WPCEPT" ]] ; then
   if [ -z "$RUN_WPCEPT" ] ; then # if "$RUN_WPCEPT" string is empty
     echo "PREPARE PHPUNIT TESTS"
     export PATH="$HOME/.composer/vendor/bin:$PATH"

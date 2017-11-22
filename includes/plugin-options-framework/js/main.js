@@ -316,6 +316,49 @@ jQuery(document).ready(function(){
 	        jQuery('#tab-for-tab-seo .dslc-panel-content').html('<div class="dslc-notice">You can hide this tab once you have <a href="https://livecomposerplugin.com/add-ons/?utm_source=editing-sreen&utm_medium=tab-seo&utm_campaign=add-ons" target="_blank">any of our premium add-ons</a> installed.</div>');
 	    }
 	});
+
+	jQuery(document).on('click', '.lc-toggle-extension', function (e) {
+		e.preventDefault();
+		$extensionId = e.target.getAttribute('data-id');
+		
+		let parent = jQuery(e.target).closest('.extension');
+	
+		if ( parent[0] !== undefined ) {
+			parent = parent[0];
+		} else {
+			console.error('Can\'t find extension parent for the clicked ellement.')
+			return false;
+		}
+
+		let extensionStatus = parent.getAttribute('data-extension-status');
+		console.log( "extensionStatus:" ); console.log( extensionStatus );
+
+		parent.setAttribute('data-extension-status', 'pending');
+
+		jQuery.ajax({
+			type: "POST",
+			data: {
+				security: dslcajax,
+				action: 'dslc-ajax-toggle-extension',
+				extension: $extensionId
+			},
+			url: ajaxurl,
+		}).done(function (response) {
+			console.log( "response:" ); console.log( response );
+			if ( response ) {
+				// Update DIV attribute with a new status.
+				parent.setAttribute('data-extension-status', response);	
+			} else {
+				// Get back initial status on error
+				parent.setAttribute('data-extension-status', extensionStatus);
+			}
+		}).fail(function (response) {
+			// Get back initial status on error
+			parent.setAttribute('data-extension-status', extensionStatus);
+		})
+
+	});
+
 });
 
 function dslc_clear_cache(e) {

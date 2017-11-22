@@ -791,8 +791,8 @@ display: inline-block;
     margin: 0 0 20px;
 }
 .extension-browser .extension {
-    border: 1px solid #ddd;
-    box-shadow: 0 1px 1px -1px rgba(0, 0, 0, 0.1);
+    /* border: 1px solid #ddd; */
+    box-shadow: 1px 2px 1px 0px rgba(0, 0, 0, 0.1), 0 1px 1px -1px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
     cursor: pointer;
     float: left;
@@ -804,16 +804,69 @@ display: inline-block;
     margin: 0 3% 4% 0;
     width: 30%;
 }
+
 .extension-browser .extension:nth-child(3n) {
     margin-right: 0;
 }
 .extension-browser .extension:hover, .extension-browser .extension:focus {
     cursor: default;
 }
+
+
+.extension-browser .extension[data-extension-status="active"] [data-show-if="active"],
+.extension-browser .extension[data-extension-status="inactive"] [data-show-if="inactive"],
+.extension-browser .extension[data-extension-status="pending"] [data-show-if="pending"],
+.extension-browser .extension[data-extension-status="demo"] [data-show-if="demo"] {
+    display: inline-block;
+}
+
+.extension-browser .extension[data-extension-status="inactive"] [data-show-if="active"],
+.extension-browser .extension[data-extension-status="active"] [data-show-if="inactive"],
+.extension-browser .extension[data-extension-status="inactive"] [data-show-if="pending"],
+.extension-browser .extension[data-extension-status="active"] [data-show-if="pending"],
+.extension-browser .extension[data-extension-status="demo"] [data-show-if="pending"],
+.extension-browser .extension[data-extension-status="demo"] [data-show-if="active"] {
+    display: none;
+}
+
+.extension-browser .extension[data-extension-status="demo"] .extension-actions [data-show-if="inactive"] {
+    display: none;
+}
+
+.extension-browser .extension[data-extension-status="pending"] [data-show-if="active"],
+.extension-browser .extension[data-extension-status="pending"] [data-show-if="inactive"] {
+    display: none;
+}
+
+.lc-toggle-extension .dashicons-update {
+    position: relative;
+    bottom: -3px;
+}
+
+.extension-browser .extension[data-extension-status="pending"] .dashicons-update {
+    -webkit-animation: lcext-loading-spinner 2s linear infinite;
+            animation: lcext-loading-spinner 2s linear infinite;
+}
+
+@-webkit-keyframes lcext-loading-spinner {
+    100% {
+        -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+    }
+}
+
+@keyframes lcext-loading-spinner {
+    100% {
+        -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+    }
+}
+
+
 .extension-browser .extension .extension-name {
     background: rgba(255, 255, 255, 0.65) none repeat scroll 0 0;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1) inset;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     height: 18px;
     margin: 0;
@@ -831,16 +884,26 @@ display: inline-block;
     opacity: 0.5;
     text-transform: uppercase;
     vertical-align: top;
+    letter-spacing: .3px;
 }
 
-.extension-browser .extension .extension-name .price {
-	color: #0073aa;
-    display: inline-block;
+.extension-browser .extension .extension-name .status {
+	color: #C84B29;
+    /* display: inline-block; */
     position: absolute;
-    right: 20px;
+    right: 14px;
+    font-weight: normal;
+
+    background: rgba(250, 250, 250, 0.86);
+    border-radius: 6px;
+    box-shadow: 0 0 10px 5px rgba(250, 250, 250, 0.86);
 }
 
-.extension-browser .extension .extension-name .price .dashicons {
+.extension-browser .extension .extension-name .status[data-show-if="active"] {
+    color: #0073aa;
+}
+
+.extension-browser .extension .extension-name .status .dashicons {
 	opacity: .9;
 }
 
@@ -887,26 +950,32 @@ display: inline-block;
 .extension-browser .extension:hover .extension-screenshot, .extension-browser .extension:focus .extension-screenshot {
     background: #fff none repeat scroll 0 0;
 }
-.extension-browser.rendered .extension:hover .extension-screenshot img, .extension-browser.rendered .extension:focus .extension-screenshot img {
+/* .extension-browser.rendered .extension:hover .extension-screenshot img, .extension-browser.rendered .extension:focus .extension-screenshot img {
     opacity: 0.4;
-}
+} */
 .extension-browser .extension .more-details {
-    background: rgba(0, 0, 0, 0.7) none repeat scroll 0 0;
-    border-radius: 3px;
-    color: #fff;
-    font-size: 15px;
-    font-weight: 600;
-    left: 25%;
+    background: rgba(241, 241, 241, 0.8) none repeat scroll 0 0;
+    color: #565D66;
+    font-size: 14px;
+    font-weight: normal;
+    left: 0;
+    display: flex;
     opacity: 0;
-    padding: 15px 12px;
+    padding: 20px;
+    align-items: center;
     position: absolute;
-    right: 25%;
+    right: 0;
     text-align: center;
+    margin: 0;
     text-decoration: none;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.6);
-    top: 35%;
+    top: 0;
+    bottom: 0px;
     transition: opacity 0.1s ease-in-out 0s;
+    cursor: help;
 }
+
+
+
 .extension-browser .extension:focus {
     border-color: #5b9dd9;
     box-shadow: 0 0 2px rgba(30, 140, 190, 0.8);

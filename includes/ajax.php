@@ -781,3 +781,50 @@ function dslc_ajax_clear_cache() {
 		exit;
 	}
 } add_action( 'wp_ajax_dslc_ajax_clear_cache', 'dslc_ajax_clear_cache' );
+
+/**
+ * Enable/Disable Premium Extension.
+ */
+
+function dslc_ajax_toggle_extension( $atts ) {
+
+	// Allowed to do this?
+	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY_SAVE ) ):
+
+	// The array we'll pass back to the AJAX call.
+	$response = false;
+	$extension_id = false;
+
+	// The composer code.
+	if ( isset( $_POST['extension'] ) ) {
+		$extension_id = sanitize_key( $_POST['extension'] );
+	}
+
+	if ( $extension_id ) {
+		// Send an action with request to toggle extension status.
+		do_action( 'dslc_toggle_extension', $extension_id );
+
+		// Check if status changed?
+		$extensions = array();
+		$extensions = apply_filters( 'dslc_extensions_meta', $extensions );
+
+		foreach ($extensions as $id => $extension) {
+			if ( $id === $extension_id ) {
+				if ( $extension['active'] ) {
+					$response = 'active';
+				} else {
+					$response = 'inactive';
+				}
+			}
+		}
+	}
+
+	// Return response.
+	echo $response;
+
+	// Au revoir.
+	wp_die();
+	// exit;
+
+	endif; // End if is_user_logged_in()...
+} add_action( 'wp_ajax_dslc-ajax-toggle-extension', 'dslc_ajax_toggle_extension' );
