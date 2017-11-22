@@ -754,19 +754,6 @@ function dslc_ajax_hidden_panel() {
 } add_action( 'wp_ajax_dslc-ajax-hidden-panel', 'dslc_ajax_hidden_panel' );
 
 /**
- * Ajax set hidden ( tab seo )
- */
-function dslc_ajax_hidden_tab_seo() {
-
-	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
-
-		update_option( 'dslc_tab_seo_hidden', true );
-
-		exit;
-	}
-} add_action( 'wp_ajax_dslc-ajax-hidden-tab-seo', 'dslc_ajax_hidden_tab_seo' );
-
-/**
  * Ajax Clear Cache (Plugin Settings Tab).
  */
 function dslc_ajax_clear_cache() {
