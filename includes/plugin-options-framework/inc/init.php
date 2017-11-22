@@ -81,36 +81,45 @@ function dslc_plugin_options_display( $tab = '' ) {
 		settings_errors();
 
 		$anchor = sanitize_text_field( @$_GET['anchor'] );
-		$anchor = '' !== $anchor ? $anchor : 'tab-extend';
+		$anchor = '' !== $anchor ? $anchor : 'dslc_extensions';
 
 		?>
 		<a name="dslc-top"></a>
 		<h2 class="nav-tab-wrapper dslc-settigns-tabs" id="dslc-tabs">
-			<a href="#" data-nav-to="tab-extend" class="nav-tab <?php echo 'tab-extend' === $anchor ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Extend', 'live-composer-page-builder' ) ?></a>
+			<!-- <a href="#" data-nav-to="tab-extend" class="nav-tab <?php echo 'tab-extend' === $anchor ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Extend', 'live-composer-page-builder' ) ?></a> -->
 			<a href="#" data-nav-to="tab-settings" class="nav-tab <?php echo 'dslc_settings' === $anchor ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Settings', 'live-composer-page-builder' ) ?></a>
 			<a href="#" data-nav-to="tab-extensions" class="nav-tab <?php echo 'dslc_extensions' === $anchor ? 'nav-tab-active' : ''; ?>"><?php  echo esc_html__( 'Extensions', 'live-composer-page-builder' ) . ' <span class="tag">' . esc_html__( 'New', 'live-composer-page-builder' ) . '</span>'; ?></a>
-			<a href="#" data-nav-to="tab-themes" class="nav-tab <?php echo 'dslc_themes' === $anchor ? 'nav-tab-active' : ''; ?>"><?php  echo esc_html__( 'Themes', 'live-composer-page-builder' ) . ' <span class="tag">' . esc_html__( 'Free', 'live-composer-page-builder' ) . '</span>'; ?></a>
-			<a href="#" data-nav-to="tab-designs" class="nav-tab <?php echo 'dslc_designs' === $anchor ? 'nav-tab-active' : ''; ?>"><?php  echo esc_html__( 'Designs', 'live-composer-page-builder' ) . ' <span class="tag">' . esc_html__( 'New', 'live-composer-page-builder' ) . '</span>'; ?></a>
+			<a href="#" data-nav-to="tab-woo" class="nav-tab <?php echo 'dslc_woo' === $anchor ? 'nav-tab-active' : ''; ?>"><?php  echo esc_html__( 'WooCommerce', 'live-composer-page-builder' ) . ' <span class="tag">' . esc_html__( 'New', 'live-composer-page-builder' ) . '</span>'; ?></a>
+			<!-- <a href="#" data-nav-to="tab-themes" class="nav-tab <?php echo 'dslc_themes' === $anchor ? 'nav-tab-active' : ''; ?>"><?php  echo esc_html__( 'Themes', 'live-composer-page-builder' ) . ' <span class="tag">' . esc_html__( 'Free', 'live-composer-page-builder' ) . '</span>'; ?></a> -->
+			<!-- <a href="#" data-nav-to="tab-designs" class="nav-tab <?php echo 'dslc_designs' === $anchor ? 'nav-tab-active' : ''; ?>"><?php  echo esc_html__( 'Designs', 'live-composer-page-builder' ) . ' <span class="tag">' . esc_html__( 'New', 'live-composer-page-builder' ) . '</span>'; ?></a> -->
 			<a href="#" data-nav-to="tab-docs" class="nav-tab <?php echo 'dslc_docs' === $anchor ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Docs &amp; Support', 'live-composer-page-builder' ) ?></a>
 		</h2>
 
 
 		<div id="lc-settings-tabs">
+				<!-- Extensions tab -->
+				<div class="tab" id="tab-for-tab-extensions" <?php if ( $anchor != 'dslc_settings' ) echo 'style="display:block"'; ; ?>>
+					<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-extensions.php'; ?>
+				</div>
 				<!-- Getting Started Tab -->
+<?php /*
 				<div class="tab" <?php if ( $anchor != 'dslc_settings' ) echo 'style="display:block"'; ; ?> id="tab-for-tab-extend">
 					<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-extend.php'; ?>
 				</div>
+*/ ?>
 				<!-- Settings tab -->
 				<div class="tab" <?php if ( $anchor == 'dslc_settings' ) echo 'style="display:block"'; ; ?>  id="tab-for-tab-settings">
 					<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-settings.php'; ?>
 				</div>
+
+				<!-- Woo tab -->
+				<div class="tab" id="tab-for-tab-woo">
+					<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-woo.php'; ?>
+				</div>
+
 				<!-- Themes tab -->
 				<div class="tab" id="tab-for-tab-themes">
 					<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-themes.php'; ?>
-				</div>
-				<!-- Extensions tab -->
-				<div class="tab" id="tab-for-tab-extensions">
-					<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-extensions.php'; ?>
 				</div>
 				<!-- Designs tab -->
 				<div class="tab" id="tab-for-tab-designs">

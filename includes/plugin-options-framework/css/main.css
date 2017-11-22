@@ -209,7 +209,8 @@
 .dslc-settigns-tabs .nav-tab {
     padding-right: 15px;
     padding-left: 15px;
-    font-size: 18px;
+    font-size: 15px;
+    font-weight: normal;
 }
 
 
@@ -254,10 +255,13 @@
     text-align: center;
 }
 
-.lc-wrap.lc-centered-panels  {
+.lc-wrap.lc-centered-panels {
     max-width: 760px;
     margin-left: auto;
     margin-right: auto;
+}
+.lc-wrap.lc-centered-panels.lc-wider-panel {
+    max-width: 860px;
 }
 
 .dslc-panel.padding-medium{
@@ -457,6 +461,10 @@ body .lc-panel-cta .button.button-hero {
     max-width: 50%;
 }
 
+.lc-panel-third {
+    max-width: 33%;
+}
+
 .lc-image-column {
     padding-left: 30px;
 }
@@ -606,6 +614,14 @@ body .lc-panel-cta .button.button-hero {
     text-align: center;
 }
 
+.lc-text-right {
+    text-align: center;
+}
+
+
+.lc-tab-woo .promo-code {
+    margin-top: 0;
+}
 
 
 /**
@@ -1049,12 +1065,46 @@ display: inline-block;
 }
 
 
+.lc-tab-extensions .dslc-panel {
+    margin-bottom: 30px;
+}
+
+body .lc-tab-extensions .dslc-panel .button.button-hero {
+    font-size: 16px;
+    margin-top: 14px;
+}
+
+.promo-code {
+    margin-top: 20px;
+    font-size: 12px;
+    display: inline-block;
+    opacity: .75;
+}
+
+.promo-code:hover {
+    opacity: 1;
+}
+
+.promo-code strong {
+    padding: 1px 8px;
+    display: inline-block;
+    border: 2px dotted rgba(0, 0, 0, 0.14);
+    border-radius: 6px;
+    margin-right: 2px;
+}
+
+.promo-code:hover strong {
+    color: #C84B29;
+}
+
+
+
 .extension-browser .extension .extension-name {
     background: rgba(255, 255, 255, 0.65) none repeat scroll 0 0;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1) inset;
     font-size: 14px;
     font-weight: 600;
-    height: 18px;
+    /* height: 18px; */
     margin: 0;
     overflow: hidden;
     padding: 15px;
@@ -1097,7 +1147,7 @@ display: inline-block;
     background: rgba(244, 244, 244, 0.7) none repeat scroll 0 0;
     border-left: 1px solid rgba(0, 0, 0, 0.05);
     bottom: 0;
-    height: 38px;
+    height: 47px;
     opacity: 0;
     padding: 9px 10px 0;
     position: absolute;

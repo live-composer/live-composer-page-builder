@@ -5,34 +5,48 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+function dslc_sort_by_rank($a, $b) {
+	$a_rank = 0;
+	$b_rank = 0;
+
+	if ( isset( $a['rank'] ) ) {
+		$a_rank = $a['rank'];
+	}
+
+	if ( isset( $b['rank'] ) ) {
+		$b_rank = $b['rank'];
+	}
+
+	return $a_rank - $b_rank;
+}
+
+$extensions = array();
+$extensions = apply_filters( 'dslc_extensions_meta', $extensions );
+
+$today_day = strtoupper( strftime("%A",time()) );
 
 ?>
-<div class="wrap lc-wrap">
+<div class="wrap lc-wrap lc-centered-panels lc-wider-panel lc-tab-extensions">
 
-	<h2 class="dslc-tab-heading">Extend Live Composer with <a href="https://livecomposerplugin.com/add-ons/?utm_source=wp-admin&utm_medium=extension-tab&utm_campaign=section-title" target="_blank">Free Extensions</a></h2>
+	<!-- <h2 class="dslc-tab-heading">Extend Live Composer with <a href="https://livecomposerplugin.com/add-ons/?utm_source=wp-admin&utm_medium=extension-tab&utm_campaign=section-title" target="_blank">Free Extensions</a></h2> -->
+
+<?php if ( empty( $extensions ) ) : ?>
+	<div class="dslc-panel lc-divided-panels padding-medium">
+		<div class="lc-panel-half">
+			<h3 class="lc-huge margin-top-half"><?php _e( 'Advanced, time-saving features for professional website developers', 'lbmn' ); ?></h3>
+			<p class="lc-larger-text"><?php _e( 'Build feature-reach websites faster with our premium extensions. All add-ons are packed into a single plugin for easy management and updates.' , 'lbmn'); ?></p>
+			<p><a href="#" class="button button-primary button-hero">Buy Now For 20% OFF</a> <br /><span class="promo-code">Promo code: <strong>HAPPY-<?php echo $today_day; ?></strong></span></p>
+		</div>
+		<div class="lc-panel-half lc-image-column">
+			<img alt="<?php _e( 'Additional Premium&nbsp;Modules', 'lbmn' ); ?>" src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/lc-mink-extensions.png">
+		</div>
+	</div>
+<?php endif; ?>
 
 	<div class="extension-browser rendered">
 		<div class="extensions wp-clearfix">
 			<?php
-
-				function dslc_sort_by_rank($a, $b) {
-					$a_rank = 0;
-					$b_rank = 0;
-
-					if ( isset( $a['rank'] ) ) {
-						$a_rank = $a['rank'];
-					}
-
-					if ( isset( $b['rank'] ) ) {
-						$b_rank = $b['rank'];
-					}
-
-					return $a_rank - $b_rank;
-				}
-
-				$extensions = array();
-				$extensions = apply_filters( 'dslc_extensions_meta', $extensions );
-
+				if ( empty( $extensions ) ) :
 				$extensions = array(
 					'acfsupport' => array(
 							'title' => 'ACF Support',
@@ -131,6 +145,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							'demo' => true,
 						),
 					);
+				endif; // If empty.
 
 				// Sort extensions by the rank field. 100 - last / 0 - first.
 				usort( $extensions, 'dslc_sort_by_rank' );
