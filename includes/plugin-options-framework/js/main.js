@@ -291,39 +291,16 @@ jQuery(document).ready(function(){
 
 	}
 
-	jQuery(document).on( 'click', '.dslc-tab-seo-hide', function(e){
-
-	    var hide_panel = jQuery('.dslc-tab-seo-hide').data('can-hide');
-
-	    if ( hide_panel == '1' ) {
-
-	        jQuery.ajax({
-            	type: "POST",
-            	data: {
-            		security: dslcajax,
-            		action: 'dslc-ajax-hidden-tab-seo',
-            	},
-            	url: ajaxurl,
-            });
-
-	        jQuery('.dslc-panel-green').css('display', 'none');
-	        jQuery(".dslc-settigns-tabs [data-nav-to='tab-seo']").css('display', 'none');
-	        jQuery(".dslc-settigns-tabs [data-nav-to='tab-seo']").removeClass( "nav-tab-active" );
-	        jQuery(".dslc-settigns-tabs [data-nav-to='dslc_getting_started']").addClass( "nav-tab-active" );
-	        jQuery('#tab-for-dslc_getting_started').css('display', 'block');
-	    } else {
-	        jQuery('.dslc-panel-seo').addClass('showing-notice');
-	        jQuery('#tab-for-tab-seo .dslc-panel-content').html('<div class="dslc-notice">You can hide this tab once you have <a href="https://livecomposerplugin.com/add-ons/?utm_source=editing-sreen&utm_medium=tab-seo&utm_campaign=add-ons" target="_blank">any of our premium add-ons</a> installed.</div>');
-	    }
-	});
-
+	/**
+	 * Enable/Disable premium extension via AJAX call.
+	 */
 	jQuery(document).on('click', '.lc-toggle-extension', function (e) {
 		e.preventDefault();
 		$extensionId = e.target.getAttribute('data-id');
-		
+
 		let parent = jQuery(e.target).closest('.extension');
-	
-		if ( parent[0] !== undefined ) {
+
+		if (parent[0] !== undefined) {
 			parent = parent[0];
 		} else {
 			console.error('Can\'t find extension parent for the clicked ellement.')
@@ -331,7 +308,6 @@ jQuery(document).ready(function(){
 		}
 
 		let extensionStatus = parent.getAttribute('data-extension-status');
-		console.log( "extensionStatus:" ); console.log( extensionStatus );
 
 		parent.setAttribute('data-extension-status', 'pending');
 
@@ -344,16 +320,16 @@ jQuery(document).ready(function(){
 			},
 			url: ajaxurl,
 		}).done(function (response) {
-			console.log( "response:" ); console.log( response );
-			if ( response ) {
+			console.log("response:"); console.log(response);
+			if (response) {
 				// Update DIV attribute with a new status.
-				parent.setAttribute('data-extension-status', response);	
+				parent.setAttribute('data-extension-status', response);
 			} else {
-				// Get back initial status on error
+				// Get back initial status on error.
 				parent.setAttribute('data-extension-status', extensionStatus);
 			}
 		}).fail(function (response) {
-			// Get back initial status on error
+			// Get back initial status on error.
 			parent.setAttribute('data-extension-status', extensionStatus);
 		})
 

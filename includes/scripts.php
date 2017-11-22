@@ -169,7 +169,7 @@ final class DSLC_Scripts {
 		}
 
 		if ( false !== strpos( $hook, 'dslc_plugin_options' ) ||
-			  false !== strpos( $hook, 'dslc_getting_started' ) ||
+			  false !== strpos( $hook, 'tab-extend' ) ||
 			 'dslc_plugin_options' === get_admin_page_parent() ) {
 
 			$current_screen = 'dslc-options';
