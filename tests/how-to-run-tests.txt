@@ -9,6 +9,10 @@ To test:
 Run in macOS terminal (not from the editor) from the project folder
 $> bash bin/localtest.sh
 
+Some documentation: https://github.com/lucatume/wp-browser
+
+================================================================================
+
 PHPUNIT TESTING:
 https://pippinsplugins.com/unit-tests-wordpress-plugins-setting-up-testing-suite/
 
