@@ -31,21 +31,39 @@ $today_day = strtoupper( strftime( "%A",time() ) );
 	<!-- <h2 class="dslc-tab-heading">Extend Live Composer with <a href="https://livecomposerplugin.com/add-ons/?utm_source=wp-admin&utm_medium=extension-tab&utm_campaign=section-title" target="_blank">Free Extensions</a></h2> -->
 
 <?php 
-// Check if plugin is already installed but not active
-if ( is_plugin_inactive( 'lc-extensions/lc-extensions.php' ) ) : ?>
+// Get list of all plugin (active and inactive).
+$all_plugins = get_plugins();
+
+// ACTIVATE NOTICE: Check if plugin is already installed but not active.
+if ( array_key_exists( 'lc-extensions/lc-extensions.php', $all_plugins ) && is_plugin_inactive( 'lc-extensions/lc-extensions.php' ) ) : ?>
 	<div class="dslc-panel lc-panel-non-active-plugin">
 		<span class="dashicons dashicons-warning" style="color:#D76D50; margin-right:8px;"></span> <?php _e( 'Looks like <strong>Live Composer – Premium Extensions</strong> plugin installed, but not active.', 'lbmn' ); ?>
 		<a href="#" class="button button-primary lc-activate-extensions-plugin" target="_blank">Activate It Now</a>
 	</div>
-<?php endif; ?>
-<?php
-// If there is no extensions, show ad panel.
+<?php endif;
+
+// AD PANEL: If there is no extensions, show ad panel.
 if ( empty( $extensions ) ) : ?>
 	<div class="dslc-panel lc-divided-panels padding-medium">
 		<div class="lc-panel-half">
 			<h3 class="lc-huge margin-top-half"><?php _e( 'Advanced, time-saving features for professional website development', 'lbmn' ); ?></h3>
 			<p class="lc-larger-text"><?php _e( 'Build feature-reach websites faster with our premium extensions. All add-ons are packed into a single plugin for easy management and updates.' , 'lbmn'); ?></p>
 			<p><a href="//livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=extension-tab&utm_campaign=intro-block" class="button button-primary button-hero" target="_blank">Buy Today For 15% OFF</a> <br /><span class="promo-code">Promo code: <strong>HAPPY-<?php echo $today_day; ?></strong></span></p>
+		</div>
+		<div class="lc-panel-half lc-image-column">
+			<img alt="<?php _e( 'Additional Premium&nbsp;Modules', 'lbmn' ); ?>" src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/lc-mink-extensions.png">
+		</div>
+	</div>
+<?php endif;
+
+// LICENSE PANEL: If extension is active.
+if ( $extensions && is_plugin_active( 'lc-extensions/lc-extensions.php' ) ) : ?>
+	<div class="dslc-panel lc-divided-panels padding-medium">
+		<div class="lc-panel-half">
+			<h3 class="lc-huge margin-top-half"><?php _e( 'Please enter your licence to activate the plugin', 'lbmn' ); ?></h3>
+			<p class="lc-larger-text"><?php _e( 'Thanks for buying our plugin, to activate all the features, please enter your licence key bellow:' , 'lbmn'); ?></p>
+			<p class="lc-license-block"><span class="dashicons dashicons-admin-network"></span> <input type="text" class="lc-license-field" placeholder="Your licence key here"/>	
+			<a href="//livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=extension-tab&utm_campaign=intro-block" class="button button-primary button-hero" target="_blank">Activate</a></p>
 		</div>
 		<div class="lc-panel-half lc-image-column">
 			<img alt="<?php _e( 'Additional Premium&nbsp;Modules', 'lbmn' ); ?>" src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/lc-mink-extensions.png">

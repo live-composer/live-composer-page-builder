@@ -1051,6 +1051,21 @@ display: inline-block;
             margin-bottom: -21px;
 }
 
+.lc-license-block .dashicons-admin-network {
+    position: absolute;
+    margin-left: 13px;
+    margin-top: 13px;
+    opacity: .7;
+}
+
+.lc-license-field {
+    display: block;
+    padding: 13px 13px 13px 38px;
+    font-size: 15px;
+    border-radius: 3px;
+    width: 100%;
+}
+
 .lc-panel-non-active-plugin .button {
     position: absolute;
     margin-left: 20px;
