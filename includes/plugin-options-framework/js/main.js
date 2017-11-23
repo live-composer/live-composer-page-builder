@@ -337,6 +337,27 @@ jQuery(document).ready(function(){
 
 });
 
+
+/**
+	 * Activate premium extension plugin.
+	 */
+jQuery(document).on('click', '.lc-activate-extensions-plugin', function (e) {
+	e.preventDefault();
+
+	jQuery(e.target).html('<span class="dashicons dashicons-update"></span>');
+
+	jQuery.ajax({
+		type: "POST",
+		data: {
+			security: dslcajax,
+			action: 'dslc-ajax-activate-extensions-plugin'
+		},
+		url: ajaxurl,
+	}).done(function (response) {
+		location.reload();
+	})
+});
+
 function dslc_clear_cache(e) {
 	e.preventDefault();
 

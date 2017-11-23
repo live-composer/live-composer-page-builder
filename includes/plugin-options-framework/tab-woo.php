@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<p><?php _e( '30 Days Money Back Guarantee' , 'lbmn'); ?></p>
 		</div>
 		<div class="lc-panel-third">
-			<p><a href="#" class="button button-primary button-hero">Buy Now For 20% OFF</a></p>
+			<p><a href="#" class="button button-primary button-hero">Buy Today For 15% OFF</a></p>
 		</div>
 
 		<div class="lc-panel-third lc-text-right">

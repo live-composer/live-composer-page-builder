@@ -1026,6 +1026,9 @@ display: inline-block;
 .extension-browser .extension[data-extension-status="active"] [data-show-if="inactive"],
 .extension-browser .extension[data-extension-status="inactive"] [data-show-if="pending"],
 .extension-browser .extension[data-extension-status="active"] [data-show-if="pending"],
+.extension-browser .extension[data-extension-status="inactive"] [data-show-if="demo"],
+.extension-browser .extension[data-extension-status="active"] [data-show-if="demo"],
+.extension-browser .extension[data-extension-status="pending"] [data-show-if="demo"],
 .extension-browser .extension[data-extension-status="demo"] [data-show-if="pending"],
 .extension-browser .extension[data-extension-status="demo"] [data-show-if="active"] {
     display: none;
@@ -1040,12 +1043,26 @@ display: inline-block;
     display: none;
 }
 
-.lc-toggle-extension .dashicons-update {
+#tab-for-tab-extensions .lc-panel-non-active-plugin {
+    font-size: 15px;
+    padding: 25px;
+        line-height: 20px;
+        background: #f7f7f7;
+            margin-bottom: -21px;
+}
+
+.lc-panel-non-active-plugin .button {
+    position: absolute;
+    margin-left: 20px;
+    margin-top: -4px;
+}
+
+.lc-admin-tab-content .button .dashicons-update {
     position: relative;
     bottom: -3px;
 }
 
-.extension-browser .extension[data-extension-status="pending"] .dashicons-update {
+.lc-admin-tab-content .dashicons-update {
     -webkit-animation: lcext-loading-spinner 2s linear infinite;
             animation: lcext-loading-spinner 2s linear infinite;
 }

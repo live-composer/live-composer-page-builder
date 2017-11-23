@@ -23,19 +23,29 @@ function dslc_sort_by_rank($a, $b) {
 $extensions = array();
 $extensions = apply_filters( 'dslc_extensions_meta', $extensions );
 
-$today_day = strtoupper( strftime("%A",time()) );
+$today_day = strtoupper( strftime( "%A",time() ) );
 
 ?>
-<div class="wrap lc-wrap lc-centered-panels lc-wider-panel lc-tab-extensions">
+<div class="wrap lc-admin-tab-content lc-wrap lc-centered-panels lc-wider-panel lc-tab-extensions">
 
 	<!-- <h2 class="dslc-tab-heading">Extend Live Composer with <a href="https://livecomposerplugin.com/add-ons/?utm_source=wp-admin&utm_medium=extension-tab&utm_campaign=section-title" target="_blank">Free Extensions</a></h2> -->
 
-<?php if ( empty( $extensions ) ) : ?>
+<?php 
+// Check if plugin is already installed but not active
+if ( is_plugin_inactive( 'lc-extensions/lc-extensions.php' ) ) : ?>
+	<div class="dslc-panel lc-panel-non-active-plugin">
+		<span class="dashicons dashicons-warning" style="color:#D76D50; margin-right:8px;"></span> <?php _e( 'Looks like <strong>Live Composer – Premium Extensions</strong> plugin installed, but not active.', 'lbmn' ); ?>
+		<a href="#" class="button button-primary lc-activate-extensions-plugin" target="_blank">Activate It Now</a>
+	</div>
+<?php endif; ?>
+<?php
+// If there is no extensions, show ad panel.
+if ( empty( $extensions ) ) : ?>
 	<div class="dslc-panel lc-divided-panels padding-medium">
 		<div class="lc-panel-half">
-			<h3 class="lc-huge margin-top-half"><?php _e( 'Advanced, time-saving features for professional website developers', 'lbmn' ); ?></h3>
+			<h3 class="lc-huge margin-top-half"><?php _e( 'Advanced, time-saving features for professional website development', 'lbmn' ); ?></h3>
 			<p class="lc-larger-text"><?php _e( 'Build feature-reach websites faster with our premium extensions. All add-ons are packed into a single plugin for easy management and updates.' , 'lbmn'); ?></p>
-			<p><a href="#" class="button button-primary button-hero">Buy Now For 20% OFF</a> <br /><span class="promo-code">Promo code: <strong>HAPPY-<?php echo $today_day; ?></strong></span></p>
+			<p><a href="//livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=extension-tab&utm_campaign=intro-block" class="button button-primary button-hero" target="_blank">Buy Today For 15% OFF</a> <br /><span class="promo-code">Promo code: <strong>HAPPY-<?php echo $today_day; ?></strong></span></p>
 		</div>
 		<div class="lc-panel-half lc-image-column">
 			<img alt="<?php _e( 'Additional Premium&nbsp;Modules', 'lbmn' ); ?>" src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/lc-mink-extensions.png">
@@ -148,7 +158,7 @@ $today_day = strtoupper( strftime("%A",time()) );
 				endif; // If empty.
 
 				// Sort extensions by the rank field. 100 - last / 0 - first.
-				usort( $extensions, 'dslc_sort_by_rank' );
+				uasort( $extensions, 'dslc_sort_by_rank' );
 
 				foreach ( $extensions as $extension_id => $extension ) {
 
@@ -182,11 +192,11 @@ $today_day = strtoupper( strftime("%A",time()) );
 							<div class="extension-actions">
 								<a href="<?php echo $extension['details']; ?>?utm_source=wp-admin&utm_medium=extension-tab&utm_campaign=<?php echo $extension_id; ?>" target="_blank" class="button button-secondary activate">More Details</a>
 
-								<a href="#" target="_blank" class="button button-primary lc-toggle-extension" data-show-if="active" data-id="<?php echo $extension_id; ?>">Deactivate</a>
-								<a href="#" target="_blank" class="button button-primary lc-toggle-extension" data-show-if="inactive" data-id="<?php echo $extension_id; ?>">Activate</a>
-								<a href="#" target="_blank" class="button button-primary lc-toggle-extension" data-show-if="demo" data-id="<?php echo $extension_id; ?>">Buy to activate</a>
+								<a href="#" class="button button-primary lc-toggle-extension" data-show-if="active" data-id="<?php echo $extension_id; ?>">Deactivate</a>
+								<a href="#" class="button button-primary lc-toggle-extension" data-show-if="inactive" data-id="<?php echo $extension_id; ?>">Activate</a>
+								<a href="#" class="button button-primary" data-show-if="pending" onclick="return false;"><span class="dashicons dashicons-update"></span></a>
 
-								<a href="#" target="_blank" class="button button-primary lc-toggle-extension" data-show-if="pending" data-id="<?php echo $extension_id; ?>"><span class="dashicons dashicons-update"></span></a>
+								<a href="//livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=extension-tab&utm_campaign=<?php echo $extension_id; ?>" target="_blank" class="button button-primary" data-show-if="demo">Buy to activate</a>
 							</div>
 						</div>
 					<?php
