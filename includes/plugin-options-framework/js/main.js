@@ -298,18 +298,18 @@ jQuery(document).ready(function(){
 		e.preventDefault();
 		$extensionId = e.target.getAttribute('data-id');
 
-		let parent = jQuery(e.target).closest('.extension');
+		var parentEl = jQuery(e.target).closest('.extension');
 
-		if (parent[0] !== undefined) {
-			parent = parent[0];
+		if (parentEl[0] !== undefined) {
+			parentEl = parentEl[0];
 		} else {
 			console.error('Can\'t find extension parent for the clicked ellement.')
 			return false;
 		}
 
-		let extensionStatus = parent.getAttribute('data-extension-status');
+		var extensionStatus = parentEl.getAttribute('data-extension-status');
 
-		parent.setAttribute('data-extension-status', 'pending');
+		parentEl.setAttribute('data-extension-status', 'pending');
 
 		jQuery.ajax({
 			type: "POST",
@@ -323,14 +323,14 @@ jQuery(document).ready(function(){
 			console.log("response:"); console.log(response);
 			if (response) {
 				// Update DIV attribute with a new status.
-				parent.setAttribute('data-extension-status', response);
+				parentEl.setAttribute('data-extension-status', response);
 			} else {
 				// Get back initial status on error.
-				parent.setAttribute('data-extension-status', extensionStatus);
+				parentEl.setAttribute('data-extension-status', extensionStatus);
 			}
 		}).fail(function (response) {
 			// Get back initial status on error.
-			parent.setAttribute('data-extension-status', extensionStatus);
+			parentEl.setAttribute('data-extension-status', extensionStatus);
 		})
 
 	});

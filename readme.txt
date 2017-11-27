@@ -3,7 +3,7 @@ Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page, page builder plugin, drag-n-drop page builder
 Requires at least: 4.7
 Tested up to: 4.9
-Stable tag: 1.3.8.1
+Stable tag: 1.3.9
 License: GPLv3
 
 Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
@@ -77,6 +77,14 @@ Upcoming Releases:
 
 * [Please, report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
 * [You can download any previous version here](https://github.com/live-composer/live-composer-page-builder/releases)
+
+= 1.3.9 - November 27th 2017 =
+
+= Bug Fixes: =
+* Issue [#836](https://github.com/live-composer/live-composer-page-builder/issues/836): Fixed: PHP 7.1 Compatibility
+
+= Improved: =
+* This update mainly has inner code changes to make it possible to extend Live Composer functionality with module packs. This update is required for latest versions of [Extensions Pack](https://livecomposerplugin.com/downloads/extensions/) and [WooCommerce Integration](https://livecomposerplugin.com/downloads/woocommerce-page-builder/) plugins to work properly.
 
 = 1.3.8.1 - November 16th 2017 =
 

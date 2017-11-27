@@ -72,9 +72,9 @@ var showPopupMessage = function (message, style, delay) {
 jQuery(document).on('click', '.lc-toggle-license', function (e) {
 	e.preventDefault();
 
-	let buttonLabelBackup = jQuery(e.target).html();
-	let actionType = e.target.getAttribute('data-action-type');
-	let lincenseField = jQuery(e.target).closest('.lc-license-block').find('.lc-license-field');
+	var buttonLabelBackup = jQuery(e.target).html();
+	var actionType = e.target.getAttribute('data-action-type');
+	var lincenseField = jQuery(e.target).closest('.lc-license-block').find('.lc-license-field');
 	
 	jQuery(e.target).html('<span class="dashicons dashicons-update"></span>');
 
@@ -89,8 +89,8 @@ jQuery(document).on('click', '.lc-toggle-license', function (e) {
 		return false;
 	}
 
-	let pluginId = lincenseField.getAttribute('data-plugin-id');
-	let licenseKey = lincenseField.value;
+	var pluginId = lincenseField.getAttribute('data-plugin-id');
+	var licenseKey = lincenseField.value;
 
 	jQuery.ajax({
 		type: "POST",
@@ -106,7 +106,7 @@ jQuery(document).on('click', '.lc-toggle-license', function (e) {
 
 		jQuery(e.target).html(buttonLabelBackup);
 
-		let messageStyle = '';
+		var messageStyle = '';
 		if ( response.success === false ) {
 			messageStyle = 'warning';
 		}
