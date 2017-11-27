@@ -122,7 +122,7 @@ if ( $extensions && is_plugin_active( 'lc-extensions/lc-extensions.php' ) ) {
 							'title' => 'CPT Support',
 							'thumbnail' => DS_LIVE_COMPOSER_URL . 'images/extensions/cptsupport/thumbnail.png',
 							'details' => 'https://livecomposerplugin.com/downloads/cpt-support/?utm_source=lcproext&utm_medium=extensions-list&utm_campaign=cpt-support',
-							'description' => 'This extension adds full support for Custom Post Types. You can create a shared LC templates for any CPT or disable page builder completely for any Custom Post Type on your website.',
+							'description' => 'This extension adds full support for Custom Post Types. You can create shared LC templates for any CPT or disable page builder completely for any Custom Post Type on your website.',
 							'rank' => 11,
 							'demo' => true,
 						),
