@@ -48,7 +48,7 @@ if ( empty( $extensions ) ) : ?>
 		<div class="lc-panel-half">
 			<h3 class="lc-huge margin-top-half"><?php _e( 'Advanced, time-saving features for professional website development', 'lbmn' ); ?></h3>
 			<p class="lc-larger-text"><?php _e( 'Build feature-reach websites faster with our premium extensions. All add-ons are packed into a single plugin for easy management and updates.' , 'lbmn'); ?></p>
-			<p><a href="//livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=extension-tab&utm_campaign=intro-block" class="button button-primary button-hero" target="_blank">Buy Today For 15% OFF</a> <br /><span class="promo-code">Promo code: <strong>HAPPY-<?php echo $today_day; ?></strong></span></p>
+			<p><a href="https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=extension-tab&utm_campaign=intro-block" class="button button-primary button-hero" target="_blank">Buy Today For 15% OFF</a> <br /><span class="promo-code">Promo code: <strong>HAPPY-<?php echo $today_day; ?></strong></span></p>
 		</div>
 		<div class="lc-panel-half lc-image-column">
 			<img alt="<?php _e( 'Additional Premium&nbsp;Modules', 'lbmn' ); ?>" src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/lc-mink-extensions.png">
@@ -57,19 +57,29 @@ if ( empty( $extensions ) ) : ?>
 <?php endif;
 
 // LICENSE PANEL: If extension is active.
-if ( $extensions && is_plugin_active( 'lc-extensions/lc-extensions.php' ) ) : ?>
-	<div class="dslc-panel lc-divided-panels padding-medium">
-		<div class="lc-panel-half">
-			<h3 class="lc-huge margin-top-half"><?php _e( 'Please enter your licence to activate the plugin', 'lbmn' ); ?></h3>
-			<p class="lc-larger-text"><?php _e( 'Thanks for buying our plugin, to activate all the features, please enter your licence key bellow:' , 'lbmn'); ?></p>
-			<p class="lc-license-block"><span class="dashicons dashicons-admin-network"></span> <input type="text" class="lc-license-field" placeholder="Your licence key here"/>	
-			<a href="//livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=extension-tab&utm_campaign=intro-block" class="button button-primary button-hero" target="_blank">Activate</a></p>
-		</div>
-		<div class="lc-panel-half lc-image-column">
-			<img alt="<?php _e( 'Additional Premium&nbsp;Modules', 'lbmn' ); ?>" src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/lc-mink-extensions.png">
-		</div>
-	</div>
-<?php endif; ?>
+if ( $extensions && is_plugin_active( 'lc-extensions/lc-extensions.php' ) ) {
+	$license_manager = new LC_License_Manager;
+	$license_status = $license_manager->get_license_status('lc-extensions');
+
+	if ( 'valid' !== $license_status ) {
+		$license_status = 'invalid';
+	}
+
+	echo '<div data-license-status="' . $license_status . '">';
+		// Top license block (shows when issues or no license set).
+		echo '<div data-show-if-license="invalid">';
+			echo $license_manager->render_license_block('lc-extensions');
+		echo '</div>';	
+
+		// Tab heading (shows only when there is no problem with license).
+		echo '<div class="lc-tab-heading" data-show-if-license="valid">';
+		echo '<h1 class="wp-heading-inline">' . __('Premium Extensions', 'lbmn') . ' <span class="title-count theme-count">' . count( $extensions ) . '</span> </h1>';
+		echo '<a href="#lc-license-block" class="button lc-license-status-button"><span class="dashicons dashicons-yes"></span> License is acitve</a>';
+		echo '</div>';
+	echo '</div>';
+
+}
+?>
 
 	<div class="extension-browser rendered">
 		<div class="extensions wp-clearfix">
@@ -79,96 +89,96 @@ if ( $extensions && is_plugin_active( 'lc-extensions/lc-extensions.php' ) ) : ?>
 					'acfsupport' => array(
 							'title' => 'ACF Support',
 							'thumbnail' => DS_LIVE_COMPOSER_URL . 'images/extensions/acfsupport/thumbnail.png',
-							'details' => 'https://livecomposerplugin.com/#',
-							'description' => 'Advanced Custom Fields integration',
+							'details' => 'https://livecomposerplugin.com/downloads/acf-support/?utm_source=lcproext&utm_medium=extensions-list&utm_campaign=acf-support',
+							'description' => 'Output any content from custom fields on pages, posts or templates created with Live Composer page builder.',
 							'rank' => 10,
 							'demo' => true,
 						),
 					'animations' => array(
 							'title' => 'Additinal Animations',
 							'thumbnail' => DS_LIVE_COMPOSER_URL . 'images/extensions/animations/thumbnail.png',
-							'details' => 'https://livecomposerplugin.com/#',
-							'description' => 'Adds additional animations for modules ( Styling > Animation ).',
+							'details' => 'https://livecomposerplugin.com/downloads/additional-animations/?utm_source=lcproext&utm_medium=extensions-list&utm_campaign=aditional-animations',
+							'description' => '47 additional animations for Live Composer modules. Extension adds new options into Styling > Animation > On Load Animation. Animate any module with advanced effects when a page gets loaded.',
 							'rank' => 38,
 							'demo' => true,
 						),
 					'beforeafter' => array(
 							'title' => 'Before/After Image',
 							'thumbnail' => DS_LIVE_COMPOSER_URL . 'images/extensions/beforeafter/thumbnail.png',
-							'details' => 'https://livecomposerplugin.com/#',
-							'description' => 'Before/after image slider module for Live Composer plugin.',
+							'details' => 'https://livecomposerplugin.com/downloads/beforeafter-image-slider-add-on/?utm_source=lcproext&utm_medium=extensions-list&utm_campaign=before-after-slider',
+							'description' => 'The best way to highlight visual differences between two images/photos. Useful for redesign projects and architects.',
 							'rank' => 40,
 							'demo' => true,
 						),
 					'contentwidth' => array(
 							'title' => 'Custom Page Content Width',
 							'thumbnail' => DS_LIVE_COMPOSER_URL . 'images/extensions/contentwidth/thumbnail.png',
-							'details' => 'https://livecomposerplugin.com/#',
-							'description' => 'Allows you to set different content width ( max width ) on per page basis and per post template basis.',
+							'details' => 'https://livecomposerplugin.com/downloads/per-page-content-width-add-on/?utm_source=lcproext&utm_medium=extensions-list&utm_campaign=content-width',
+							'description' => 'Allows different widths of the Live Composer content area to be set on different pages/templates.',
 							'rank' => 48,
 							'demo' => true,
 						),
 					'cptsupport' => array(
 							'title' => 'CPT Support',
 							'thumbnail' => DS_LIVE_COMPOSER_URL . 'images/extensions/cptsupport/thumbnail.png',
-							'details' => 'https://livecomposerplugin.com/#',
-							'description' => 'Templates for CPT.',
+							'details' => 'https://livecomposerplugin.com/downloads/cpt-support/?utm_source=lcproext&utm_medium=extensions-list&utm_campaign=cpt-support',
+							'description' => 'This extension adds full support for Custom Post Types. You can create a shared LC templates for any CPT or disable page builder completely for any Custom Post Type on your website.',
 							'rank' => 11,
 							'demo' => true,
 						),
 					'gallery' => array(
 							'title' => 'Image Gallery Grid',
 							'thumbnail' => DS_LIVE_COMPOSER_URL . 'images/extensions/gallery/thumbnail.png',
-							'details' => 'https://livecomposerplugin.com/',
-							'description' => 'Adds a new module for showing gallery images ( the galleries post type ) in grid/masonry layout. Also works for the project images ( the projects post type ).',
+							'details' => 'https://livecomposerplugin.com/downloads/gallery-images-grid/?utm_source=lcproext&utm_medium=extensions-list&utm_campaign=gallery-module',
+							'description' => 'Display the images from your galleries and projects on any page (as images grid or carousel). The extension adds a new module.',
 							'rank' => 30,
 							'demo' => true,
 						),
 					'googlemaps' => array(
 							'title' => 'Google Maps Module',
 							'thumbnail' => DS_LIVE_COMPOSER_URL . 'images/extensions/googlemaps/thumbnail.png',
-							'details' => 'https://livecomposerplugin.com/downloads/google-maps-add-on/',
-							'description' => '',
+							'details' => 'https://livecomposerplugin.com/downloads/google-maps-add-on/?utm_source=lcproext&utm_medium=extensions-list&utm_campaign=google-maps',
+							'description' => 'Fast and easy way to display a Google map on your Live Composer powered website. The extension adds a new module.',
 							'rank' => 20,
 							'demo' => true,
 						),
 					'lineicons' => array(
 							'title' => 'Linecons Icons',
 							'thumbnail' => DS_LIVE_COMPOSER_URL . 'images/extensions/lineicons/thumbnail.png',
-							'details' => 'https://livecomposerplugin.com/downloads/linecons-icons-add-on/',
-							'description' => 'Additional icons for the icon options in Live Composer.',
+							'details' => 'https://livecomposerplugin.com/downloads/linecons-icons-add-on/?utm_source=lcproext&utm_medium=extensions-list&utm_campaign=lineicons',
+							'description' => 'This add-on adds 48 additional icons that will be available in the icon options for all modules that have icons option.',
 							'rank' => 35,
 							'demo' => true,
 						),
 					'menu' => array(
 							'title' => 'Mega Menu',
 							'thumbnail' => DS_LIVE_COMPOSER_URL . 'images/extensions/menu/thumbnail.png',
-							'details' => 'https://livecomposerplugin.com/#',
-							'description' => 'Adds advanced Mega Menu module.',
+							'details' => 'https://livecomposerplugin.com/downloads/mega-menu/?utm_source=lcproext&utm_medium=extensions-list&utm_campaign=mega-menu',
+							'description' => 'Adds Mega Menu module with advanced and fully customizable design options. Now you can create multicolumn menus with custom icons and responsive mobile menu.',
 							'rank' => 15,
 							'demo' => true,
 						),
 					'prevnextpost' => array(
 							'title' => 'Previous & Next Posts Links',
 							'thumbnail' => DS_LIVE_COMPOSER_URL . 'images/extensions/prevnextpost/thumbnail.png',
-							'details' => 'https://livecomposerplugin.com/#',
-							'description' => 'Adds a new module to be used on single post templates. Shows links to previous and next post ( adjacent to the currently shown one ).',
+							'details' => 'https://livecomposerplugin.com/downloads/previousnext-post-links-add-on/?utm_source=lcproext&utm_medium=extensions-list&utm_campaign=prev-next-links',
+							'description' => 'This add-on for Live Composer is a new module that shows links to previous and next post (adjacent to the currently shown one). It works for the custom post types as well, not just blog posts.',
 							'rank' => 45,
 							'demo' => true,
 						),
 					'sliders' => array(
 							'title' => 'Sliders Integration',
 							'thumbnail' => DS_LIVE_COMPOSER_URL . 'images/extensions/sliders/thumbnail.png',
-							'details' => 'https://livecomposerplugin.com/#',
-							'description' => 'Creates a module for third-party slider plugins.',
+							'details' => 'https://livecomposerplugin.com/downloads/sliders-integration/?utm_source=lcproext&utm_medium=extensions-list&utm_campaign=sliders-integration',
+							'description' => 'Creates modules for third-party slider plugins. Drag and drop slider module on the page instead of dealing with shortcodes.',
 							'rank' => 25,
 							'demo' => true,
 						),
 					'video' => array(
 							'title' => 'Video Embed Module',
 							'thumbnail' => DS_LIVE_COMPOSER_URL . 'images/extensions/video/thumbnail.png',
-							'details' => 'https://livecomposerplugin.com/#',
-							'description' => '',
+							'details' => 'https://livecomposerplugin.com/downloads/video-embed/?utm_source=lcproext&utm_medium=extensions-list&utm_campaign=video-module',
+							'description' => 'Easily embed videos from various sources ( YouTube, Vimeo, Hulu, Vine... ) using drag and drop. The extension adds a new module. No need to mess with shortcodes or iframes to place video on your page.',
 							'rank' => 28,
 							'demo' => true,
 						),
@@ -224,4 +234,25 @@ if ( $extensions && is_plugin_active( 'lc-extensions/lc-extensions.php' ) ) : ?>
 			<!-- <div class="extension add-new-extension"><a href="//livecomposerplugin.com/add-ons/?utm_source=wp-admin&utm_medium=extension-tab&utm_campaign=more-addons" target="_blank"><div class="extension-screenshot"><span></span></div><h2 class="extension-name">More Add-Ons Available</h2></a></div></div> -->
 		</div>
 	</div><?php /* extensions browser */ ?>
+
+<?php
+// LICENSE PANEL: If extension is active.
+if ( $extensions && is_plugin_active( 'lc-extensions/lc-extensions.php' ) ) {
+	$license_manager = new LC_License_Manager;
+	$license_status = $license_manager->get_license_status('lc-extensions');
+
+	if ( 'valid' !== $license_status ) {
+		$license_status = 'invalid';
+	}
+
+	// Bottom license block.
+	echo '<div data-license-status="' . $license_status . '">';
+		echo '<a name="lc-license-block"></a>';
+		// Output license block on the bottom when no issues with license detected.
+		echo '<div data-show-if-license="valid">';
+			echo $license_manager->render_license_block('lc-extensions');
+		echo '</div>';
+	echo '</div>';
+}
+?>
 </div>

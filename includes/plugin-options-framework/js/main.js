@@ -339,8 +339,8 @@ jQuery(document).ready(function(){
 
 
 /**
-	 * Activate premium extension plugin.
-	 */
+ * Activate premium extension plugin.
+ */
 jQuery(document).on('click', '.lc-activate-extensions-plugin', function (e) {
 	e.preventDefault();
 
@@ -357,6 +357,8 @@ jQuery(document).on('click', '.lc-activate-extensions-plugin', function (e) {
 		location.reload();
 	})
 });
+
+
 
 function dslc_clear_cache(e) {
 	e.preventDefault();

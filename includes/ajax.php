@@ -830,36 +830,11 @@ function dslc_ajax_activate_extensions_plugin( $atts ) {
 	$response = false;
 	$extension_id = false;
 
-
 	$result = activate_plugin( 'lc-extensions/lc-extensions.php' );
 	
 	if ( ! is_wp_error( $result ) ) {
 		$response = true;
 	}
-
-	// The composer code.
-	// if ( isset( $_POST['extension'] ) ) {
-	// 	$extension_id = sanitize_key( $_POST['extension'] );
-	// }
-
-	// if ( $extension_id ) {
-	// 	// Send an action with request to toggle extension status.
-	// 	do_action( 'dslc_toggle_extension', $extension_id );
-
-	// 	// Check if status changed?
-	// 	$extensions = array();
-	// 	$extensions = apply_filters( 'dslc_extensions_meta', $extensions );
-
-	// 	foreach ($extensions as $id => $extension) {
-	// 		if ( $id === $extension_id ) {
-	// 			if ( $extension['active'] ) {
-	// 				$response = 'active';
-	// 			} else {
-	// 				$response = 'inactive';
-	// 			}
-	// 		}
-	// 	}
-	// }
 
 	// Return response.
 	echo $response;
@@ -870,3 +845,4 @@ function dslc_ajax_activate_extensions_plugin( $atts ) {
 
 	endif; // End if is_user_logged_in()...
 } add_action( 'wp_ajax_dslc-ajax-activate-extensions-plugin', 'dslc_ajax_activate_extensions_plugin' );
+

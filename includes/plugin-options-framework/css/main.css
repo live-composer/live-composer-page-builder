@@ -1043,6 +1043,48 @@ display: inline-block;
     display: none;
 }
 
+.lc-tab-heading {
+    margin-top: 30px;
+    margin-bottom: 40px;
+    justify-content: space-between;
+}
+
+.lc-tab-heading .lc-license-status-button{
+    margin-top: 10px;
+    float: right;
+}
+
+.lc-tab-heading .lc-license-status-button .dashicons {
+    margin-top: 3px;
+    color: #3ca23c;
+}
+
+.lc-admin-message {
+    position: fixed;
+    z-index: 999;
+    bottom: 0;
+    right: 0;
+    background: rgba(35, 40, 45, 0.93);
+    color: #eee;
+    max-width: 230px;
+    padding: 24px 24px 24px 48px;
+    border-radius: 7px;
+    margin: 12px;
+}
+
+.lc-admin-message .dashicons {
+    position: absolute;
+    left: 18px;
+    color: #9EA3A8;
+}
+
+#lc-settings-tabs .wp-heading-inline {
+    font-size: 27px;
+    line-height: 1;
+    font-weight: 300;
+    margin: 0;
+}
+
 #tab-for-tab-extensions .lc-panel-non-active-plugin {
     font-size: 15px;
     padding: 25px;
@@ -1060,10 +1102,11 @@ display: inline-block;
 
 .lc-license-field {
     display: block;
-    padding: 13px 13px 13px 38px;
+    padding: 13px 10px 13px 38px;
     font-size: 15px;
     border-radius: 3px;
-    width: 100%;
+    max-width: 100%;
+    min-width: 340px;
 }
 
 .lc-panel-non-active-plugin .button {
@@ -1077,9 +1120,28 @@ display: inline-block;
     bottom: -3px;
 }
 
+.lc-admin-tab-content .button.button-hero .dashicons-update {
+    bottom: -12px;
+}
+
 .lc-admin-tab-content .dashicons-update {
     -webkit-animation: lcext-loading-spinner 2s linear infinite;
             animation: lcext-loading-spinner 2s linear infinite;
+}
+
+.lc-panel-license strong {
+    color:#23282D;
+    font-weight: 400;
+}
+
+div[data-license-status="invalid"] div[data-show-if-license="valid"],
+div[data-license-status="valid"] div[data-show-if-license="invalid"] {
+    display: none;
+}
+
+div[data-license-status="valid"] div[data-show-if-license="valid"],
+div[data-license-status="invalid"] div[data-show-if-license="invalid"] {
+    display: flex;
 }
 
 @-webkit-keyframes lcext-loading-spinner {
@@ -1222,8 +1284,8 @@ body .lc-tab-extensions .dslc-panel .button.button-hero {
     opacity: 0.4;
 } */
 .extension-browser .extension .more-details {
-    background: rgba(241, 241, 241, 0.8) none repeat scroll 0 0;
-    color: #565D66;
+    background: rgba(241, 241, 241, 0.9) none repeat scroll 0 0;
+    color: #33322f;
     font-size: 14px;
     font-weight: normal;
     left: 0;
