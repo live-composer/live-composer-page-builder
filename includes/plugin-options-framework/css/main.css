@@ -1728,21 +1728,7 @@ body.folded .extension-overlay .extension-wrap {
     width: 1450px;
 }
 }
-@media only screen and (min-width: 1640px) {
-.extension-browser .extension {
-    margin: 0 3% 3% 0;
-    width: 22.7%;
-}
-.extension-browser .extension .extension-screenshot::after {
-    padding-top: 75%;
-}
-.extension-browser .extension:nth-child(3n) {
-    margin-right: 3%;
-}
-.extension-browser .extension:nth-child(4n) {
-    margin-right: 0;
-}
-}
+
 @media only screen and (max-width: 1120px) {
 .extension-browser .extension {
     margin-right: 0;
