@@ -48,6 +48,7 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 				add_action( 'admin_init', array( $this, 'setup_plugin_updater' ), 10 );
 				// add_action( 'wp_ajax_dslc-ajax-activate-license', array( $this, 'ajax_activate_license' ) );
 				add_action( 'wp_ajax_dslc-ajax-toggle-license', array( $this, 'ajax_toggle_license' ) );
+				add_action( 'wp_ajax_dslc-ajax-activate-plugin', array( $this, 'activate_installed_plugin' ) );
 				add_action( 'current_screen', array( $this, 'initiate_license_check' ), 0 );
 				self::$initiated = true;
 			}
@@ -268,15 +269,17 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 				}
 
 				// Check Nonce.
-				if ( ! wp_verify_nonce( sanitize_key( $_POST['security'] ), 'dslc-ajax-activate-plugin-' . $plugin ) ) {
-					echo false;
-					wp_die( 'You do not have rights!' );
-				}
+				if ( wp_verify_nonce( sanitize_key( $_POST['security'] ), 'dslc-ajax-activate-license-for-plugin-' . $plugin ) ) {
 
-				// Do the job.
-				if ( $plugin && $license ) {
-					$response = array();
-					$response = $this->toggle_license( $plugin, $license, $action );
+					// Do the job.
+					if ( $plugin && $license ) {
+						$response = array();
+						$response = $this->toggle_license( $plugin, $license, $action );
+					}
+
+				} else {
+					$response['message'] = 'Error with WP authentification. Try to reload this page.';
+					$response['success'] = false;
 				}
 
 				// Encode response.
@@ -549,15 +552,15 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 
 			$license_block_variants = array(
 				'invalid' => array(
-					'text_header' => __( 'Please enter your license to&nbsp;activate the&nbsp;plugin', 'lbmn' ),
-					'text_body' => __( 'Thanks for buying our plugin, to activate all the&nbsp;features, please enter your license&nbsp;key bellow (<a href="https://livecomposerplugin.com/your-account/license/" target="_blank">get your lincese key here</a>):', 'lbmn' ),
-					'text_button' => __( 'Activate', 'lbmn' ),
+					'text_header' => __( 'Please enter your license to&nbsp;activate the&nbsp;plugin', 'live-composer-page-builder' ),
+					'text_body' => __( 'Thanks for buying our plugin, to activate all the&nbsp;features, please enter your license&nbsp;key bellow (<a href="https://livecomposerplugin.com/your-account/license/" target="_blank">get your lincese key here</a>):', 'live-composer-page-builder' ),
+					'text_button' => __( 'Activate', 'live-composer-page-builder' ),
 					'button_action' => 'activate',
 				),
 				'valid' => array(
-					'text_header' => __( 'License is active', 'lbmn' ),
-					'text_body' => __( 'Thank you for buying our product. <br />Your license is active and valid. <br />It will expire on ', 'lbmn' ) . '<strong>' . $license_expires . '</strong>',
-					'text_button' => __( 'Deactivate', 'lbmn' ),
+					'text_header' => __( 'License is active', 'live-composer-page-builder' ),
+					'text_body' => __( 'Thank you for buying our product. <br />Your license is active and valid. <br />It will expire on ', 'live-composer-page-builder' ) . '<strong>' . $license_expires . '</strong>',
+					'text_button' => __( 'Deactivate', 'live-composer-page-builder' ),
 					'button_action' => 'deactivate',
 				),
 			);
@@ -579,17 +582,60 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 							<a 	href="#"
 								class="button button-primary button-hero lc-toggle-license"
 								data-action-type="<?php echo $strings['button_action']; ?>"
-								data-action-nonce="<?php echo wp_create_nonce( 'dslc-ajax-activate-plugin-' . $plugin ) ?>"
+								data-action-nonce="<?php echo wp_create_nonce( 'dslc-ajax-activate-license-for-plugin-' . $plugin ) ?>"
 							><?php echo esc_html( $strings['text_button'] ); ?></a>
 							<span class="lc-license-status"></span>
 						</p>
 					</div>
 					<div class="lc-panel-half lc-image-column">
-						<img alt="<?php _e( 'Additional Premium&nbsp;Modules', 'lbmn' ); ?>" src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/lc-mink-extensions.png">
+						<?php if ( 'lc-extensions' === $plugin ) : ?>
+							<img alt="<?php _e( 'Additional Premium Modules', 'live-composer-page-builder' ); ?>" src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/lc-mink-extensions.png">
+						<?php elseif ( 'lc-woo-integration' === $plugin ) : ?>
+							<img alt="<?php _e( 'WooCommerce Integration', 'live-composer-page-builder' ); ?>" src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/lc-extension-woo.png">
+						<?php endif;?>
 					</div>
 				</div>
 			<?php
 			endforeach;
+		}
+
+		/**
+		 * Ajax call for activating license.
+		 */
+		public function activate_installed_plugin( $atts ) {
+			// Allowed to do this?
+			if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY_SAVE ) ):
+
+				// The array we'll pass back to the AJAX call.
+				$response =  false;
+				$plugin = false;
+
+				if ( isset( $_POST['plugin'] ) ) {
+					$plugin = sanitize_key( $_POST['plugin'] );
+				}
+
+				// Check Nonce.
+				if ( wp_verify_nonce( sanitize_key( $_POST['security'] ), 'dslc-ajax-activate-plugin-' . $plugin ) ) {
+
+					$result = activate_plugin( $plugin . '/' . $plugin . '.php' );
+
+					if ( ! is_wp_error( $result ) ) {
+						$response = true;
+					}
+
+				} else {
+					$response['message'] = 'Error with WP authentification. Try to reload this page.';
+					$response['success'] = false;
+				}
+
+				// Return response.
+				echo $response;
+
+				// Au revoir.
+				wp_die();
+				// exit;
+
+			endif; // End if is_user_logged_in()...
 		}
 	}
 

@@ -150,7 +150,8 @@ class LC_Editor_Messages {
 			function_exists( 'sklc_addon_prnep_register_module' ) ||
 			function_exists( 'sklc_ppcw_options' ) ||
 			function_exists( 'lcwoo_plugin_init' ) ||
-			class_exists( 'LC_Before_After_Image' )
+			class_exists( 'LC_Before_After_Image' ) ||
+			class_exists( 'LC_Extensions_Core' )
 		) {
 			return true;
 		} else {

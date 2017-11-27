@@ -102,10 +102,10 @@ function dslc_custom_css( $dslc_code = '' ) {
 	// Filter $lc_width ( for devs ).
 	$lc_width = apply_filters( 'dslc_content_width', $lc_width );
 
-	if ( ! $dslc_code ) {
+	$template_id = false;
+	$code_to_render = array();
 
-		$template_id = false;
-		$code_to_render = array();
+	if ( ! $dslc_code ) {
 
 		global $post;
 

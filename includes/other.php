@@ -28,7 +28,7 @@ function dslc_plugin_action_links( $links ) {
 	array_unshift( $links, $themes_link );
 
 	// Addons link
-	$addons_link = '<a href="https://livecomposerplugin.com/add-ons/?utm_source=wp-admin&utm_medium=plugins-list&utm_campaign=addons_link" target="_blank">Add-Ons</a>';
+	$addons_link = '<a href="https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=plugins-list&utm_campaign=addons_link" target="_blank">Extensions</a>';
 	array_unshift( $links, $addons_link );
 
 	// Support link

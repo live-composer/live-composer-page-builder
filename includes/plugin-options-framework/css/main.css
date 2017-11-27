@@ -555,6 +555,10 @@ body .lc-panel-cta .button.button-hero {
    content: "\f301";
 }
 
+.dslc-panel .dslc-panel-github:before {
+   content: "\f308";
+}
+
 .dslc-panel .dslc-panel-facebook:before {
    content: "\f304";
 }
@@ -1085,12 +1089,12 @@ display: inline-block;
     margin: 0;
 }
 
-#tab-for-tab-extensions .lc-panel-non-active-plugin {
+#wpbody-content .lc-panel-non-active-plugin {
     font-size: 15px;
     padding: 25px;
-        line-height: 20px;
-        background: #f7f7f7;
-            margin-bottom: -21px;
+    line-height: 20px;
+    background: #f7f7f7;
+    margin-bottom: -21px;
 }
 
 .lc-license-block .dashicons-admin-network {
@@ -1163,7 +1167,7 @@ div[data-license-status="invalid"] div[data-show-if-license="invalid"] {
     margin-bottom: 30px;
 }
 
-body .lc-tab-extensions .dslc-panel .button.button-hero {
+body .dslc-panel .lc-license-block .button.button-hero {
     font-size: 16px;
     margin-top: 14px;
 }
@@ -1382,86 +1386,9 @@ body .lc-tab-extensions .dslc-panel .button.button-hero {
     color: inherit;
     text-decoration: none;
 }
-.extension-browser .extension.add-new-extension {
-    border: medium none;
-    box-shadow: none;
-}
-.extension-browser .extension.add-new-extension a {
-    display: block;
-    position: relative;
-    text-decoration: none;
-    z-index: 1;
-}
-.extension-browser .extension.add-new-extension a::after {
-    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-    border: 5px dashed rgba(0, 0, 0, 0.1);
-    bottom: 0;
-    box-sizing: border-box;
-    content: "";
-    display: block;
-    left: 0;
-    padding: 0;
-    position: absolute;
-    right: 0;
-    text-shadow: none;
-    top: 0;
-}
-.extension-browser .extension.add-new-extension span::after {
-    background: rgba(153, 153, 153, 0.1) none repeat scroll 0 0;
-    border-radius: 50%;
-    color: rgb(153, 153, 153);
-    content: "\f106";
-    display: inline-block;
-    font: 74px/115px dashicons;
-    height: 100px;
-    left: 50%;
-    margin-left: -50px;
-    padding: 0;
-    position: absolute;
-    text-align: center;
-    text-indent: -4px;
-    text-shadow: none;
-    top: 30%;
-    vertical-align: middle;
-    width: 100px;
-    z-index: 4;
-}
 
-.extension-browser .extension.add-new-extension.add-new-theme span::after {
-    content: "\f100";
-}
 
-.rtl .extension-browser .extension.add-new-extension span::after {
-    text-indent: 4px;
-}
-.extension-browser .extension.add-new-extension a:hover .extension-screenshot, .extension-browser .extension.add-new-extension a:focus .extension-screenshot {
-    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-}
-.extension-browser .extension.add-new-extension a:hover span::after, .extension-browser .extension.add-new-extension a:focus span::after {
-    background: #fff none repeat scroll 0 0;
-    color: #0073aa;
-}
-.extension-browser .extension.add-new-extension a:hover::after, .extension-browser .extension.add-new-extension a:focus::after {
-    background: #0073aa none repeat scroll 0 0;
-    border-color: transparent;
-    color: #fff;
-    content: "";
-}
-.extension-browser .extension.add-new-extension .extension-name {
-    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-    box-shadow: none;
-    font-weight: 400;
-    margin-top: -18px;
-    padding-bottom: 48px;
-    padding-top: 0;
-    position: relative;
-    text-align: center;
-    top: 0;
-}
-.extension-browser .extension.add-new-extension a:hover .extension-name, .extension-browser .extension.add-new-extension a:focus .extension-name {
-    color: #fff;
-    z-index: 2;
-}
+
 .extension-overlay .extension-backdrop {
     background: rgba(238, 238, 238, 0.9) none repeat scroll 0 0;
     bottom: 0;
@@ -1920,15 +1847,7 @@ body.folded .extension-overlay .extension-wrap, .extension-overlay .extension-wr
     top: 0;
     width: 100%;
 }
-.extension-browser .extension.add-new-extension span::after {
-    font: 60px/90px dashicons;
-    height: 80px;
-    left: 50%;
-    margin-left: -40px;
-    text-indent: 0;
-    top: 30%;
-    width: 80px;
-}
+
 .single-extension .extension-wrap {
     margin: 0 -12px 0 -10px;
     padding: 10px;
@@ -2019,9 +1938,6 @@ body.no-results p.no-extensions {
     display: block;
 }
 body.show-upload-extension p.no-extensions {
-    display: none !important;
-}
-.extension-install-php .add-new-extension {
     display: none !important;
 }
 @media only screen and (max-width: 1120px) {

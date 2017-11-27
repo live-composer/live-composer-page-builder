@@ -988,7 +988,9 @@ function dslc_json_decode( $raw_code, $ignore_migration = false ) {
 
 			// Add a marker indicating that this module
 			// was imported from shortcode format.
-			$decoded['code_version'] = 1;
+			if ( is_array( $decoded ) ) {
+				$decoded['code_version'] = 1;	
+			}
 
 			// Preset is always being stored in base64 format,
 			// so we need to ignore code version parameter as it's not relevant.

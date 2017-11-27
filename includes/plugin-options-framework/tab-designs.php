@@ -59,8 +59,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div>
 			<!-- <div class="extension-update">Update Available</div> -->
 		</div>
-
-		<!-- <div class="extension add-new-extension"><a href="//livecomposerplugin.com/add-ons/?utm_source=wp-admin&utm_medium=designs-tab&utm_campaign=more-designs" target="_blank"><div class="extension-screenshot"><span></span></div><h2 class="extension-name">More Add-Ons Available</h2></a></div></div> -->
 	</div>
 </div><?php /* extensions browser */ ?>
 

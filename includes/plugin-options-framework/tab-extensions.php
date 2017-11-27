@@ -28,7 +28,7 @@ $today_day = strtoupper( strftime( "%A",time() ) );
 ?>
 <div class="wrap lc-admin-tab-content lc-wrap lc-centered-panels lc-wider-panel lc-tab-extensions">
 
-	<!-- <h2 class="dslc-tab-heading">Extend Live Composer with <a href="https://livecomposerplugin.com/add-ons/?utm_source=wp-admin&utm_medium=extension-tab&utm_campaign=section-title" target="_blank">Free Extensions</a></h2> -->
+	<!-- <h2 class="dslc-tab-heading">Extend Live Composer with <a href="https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=extension-tab&utm_campaign=section-title" target="_blank">Free Extensions</a></h2> -->
 
 <?php 
 // Get list of all plugin (active and inactive).
@@ -37,8 +37,8 @@ $all_plugins = get_plugins();
 // ACTIVATE NOTICE: Check if plugin is already installed but not active.
 if ( array_key_exists( 'lc-extensions/lc-extensions.php', $all_plugins ) && is_plugin_inactive( 'lc-extensions/lc-extensions.php' ) ) : ?>
 	<div class="dslc-panel lc-panel-non-active-plugin">
-		<span class="dashicons dashicons-warning" style="color:#D76D50; margin-right:8px;"></span> <?php _e( 'Looks like <strong>Live Composer – Premium Extensions</strong> plugin installed, but not active.', 'lbmn' ); ?>
-		<a href="#" class="button button-primary lc-activate-extensions-plugin" target="_blank">Activate It Now</a>
+		<span class="dashicons dashicons-warning" style="color:#D76D50; margin-right:8px;"></span> <?php _e( 'Looks like <strong>Live Composer – Premium Extensions</strong> plugin installed, but not active.', 'live-composer-page-builder' ); ?>
+		<a href="#" class="button button-primary lc-activate-plugin" data-plugin="lc-extensions" data-action-nonce="<?php echo wp_create_nonce( 'dslc-ajax-activate-plugin-lc-extensions' ) ?>">Activate It Now</a>
 	</div>
 <?php endif;
 
@@ -46,12 +46,12 @@ if ( array_key_exists( 'lc-extensions/lc-extensions.php', $all_plugins ) && is_p
 if ( empty( $extensions ) ) : ?>
 	<div class="dslc-panel lc-divided-panels padding-medium">
 		<div class="lc-panel-half">
-			<h3 class="lc-huge margin-top-half"><?php _e( 'Advanced, time-saving features for professional website development', 'lbmn' ); ?></h3>
-			<p class="lc-larger-text"><?php _e( 'Build feature-reach websites faster with our premium extensions. All add-ons are packed into a single plugin for easy management and updates.' , 'lbmn'); ?></p>
+			<h3 class="lc-huge margin-top-half"><?php _e( 'Advanced, time-saving features for professional website development', 'live-composer-page-builder' ); ?></h3>
+			<p class="lc-larger-text"><?php _e( 'Build feature-reach websites faster with our premium extensions. All add-ons are packed into a single plugin for easy management and updates.' , 'live-composer-page-builder'); ?></p>
 			<p><a href="https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=extension-tab&utm_campaign=intro-block" class="button button-primary button-hero" target="_blank">Buy Today For 15% OFF</a> <br /><span class="promo-code">Promo code: <strong>HAPPY-<?php echo $today_day; ?></strong></span></p>
 		</div>
 		<div class="lc-panel-half lc-image-column">
-			<img alt="<?php _e( 'Additional Premium&nbsp;Modules', 'lbmn' ); ?>" src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/lc-mink-extensions.png">
+			<img alt="<?php _e( 'Additional Premium&nbsp;Modules', 'live-composer-page-builder' ); ?>" src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/lc-mink-extensions.png">
 		</div>
 	</div>
 <?php endif;
@@ -73,7 +73,7 @@ if ( $extensions && is_plugin_active( 'lc-extensions/lc-extensions.php' ) ) {
 
 		// Tab heading (shows only when there is no problem with license).
 		echo '<div class="lc-tab-heading" data-show-if-license="valid">';
-		echo '<h1 class="wp-heading-inline">' . __('Premium Extensions', 'lbmn') . ' <span class="title-count theme-count">' . count( $extensions ) . '</span> </h1>';
+		echo '<h1 class="wp-heading-inline">' . __('Premium Extensions', 'live-composer-page-builder') . ' <span class="title-count theme-count">' . count( $extensions ) . '</span> </h1>';
 		echo '<a href="#lc-license-block" class="button lc-license-status-button"><span class="dashicons dashicons-yes"></span> License is acitve</a>';
 		echo '</div>';
 	echo '</div>';
@@ -230,8 +230,6 @@ if ( $extensions && is_plugin_active( 'lc-extensions/lc-extensions.php' ) ) {
 					<?php
 				}
 			?>
-
-			<!-- <div class="extension add-new-extension"><a href="//livecomposerplugin.com/add-ons/?utm_source=wp-admin&utm_medium=extension-tab&utm_campaign=more-addons" target="_blank"><div class="extension-screenshot"><span></span></div><h2 class="extension-name">More Add-Ons Available</h2></a></div></div> -->
 		</div>
 	</div><?php /* extensions browser */ ?>
 

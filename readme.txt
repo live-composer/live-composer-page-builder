@@ -276,7 +276,7 @@ If have problems with the cache, you can disable the Live Composer caching featu
 * Issue [#623](https://github.com/livecomposer/live-composer-page-builder/issues/623): Issue with INFOBOX module in IE11
 
 = New: =
-* Issue [#638](https://github.com/livecomposer/live-composer-page-builder/issues/638): New SEO tab in the plugin settings to check how much it will cost to promote website in Google for particular keywords  (you can hide this tab if you have/had any of our premium add-ons installed).
+* Issue [#638](https://github.com/livecomposer/live-composer-page-builder/issues/638): New SEO tab in the plugin settings to check how much it will cost to promote website in Google for particular keywords  (you can hide this tab if you have/had any of our premium extensions installed).
 * Issue [#545](https://github.com/livecomposer/live-composer-page-builder/issues/545): Added Arabic, Thai and all other non-English languages available in Google Fonts directory.
 * Issue [#650](https://github.com/livecomposer/live-composer-page-builder/issues/650): Developers now can add info popup for controls in the section settings 
 
@@ -332,7 +332,7 @@ If have problems with the cache, you can disable the Live Composer caching featu
 
 = Bug fixes: =
 
-* Issue [#630](https://github.com/livecomposer/live-composer-page-builder/issues/630): Custom setting panels in WP Admin now render properly settings for add-ons (used by developers who create extensions for Live Composer)
+* Issue [#630](https://github.com/livecomposer/live-composer-page-builder/issues/630): Custom setting panels in WP Admin now render properly settings for extensions (used by developers who create extensions for Live Composer)
 * Issue [#591](https://github.com/livecomposer/live-composer-page-builder/issues/591): Module presets: Heading URL should not be copied in style presets between modules.
 * Issue [#584](https://github.com/livecomposer/live-composer-page-builder/issues/584): Module presets: Problem with styling presets and default values (Social Links Module + Presets)
 * Issue [#621](https://github.com/livecomposer/live-composer-page-builder/issues/621): Module Gallery slider: The "Display the pictures from" feature are limited to few options.

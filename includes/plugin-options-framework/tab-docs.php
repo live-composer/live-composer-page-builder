@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			</div>
 			<div class="dslc-panel-column">
-				<h3><a href="//livecomposer.help/collection/96-extensions-development" target="_blank"><span class="dashicons dashicons-admin-generic"></span> <?php _e( "Developer Documentation", 'live-composer-page-builder' ); ?></a></h3>
+				<h3><a href="//livecomposer.help/collection/96-extensions-development" target="_blank"><span class="dashicons dashicons-admin-generic"></span> <?php _e( "Developer Docs", 'live-composer-page-builder' ); ?></a></h3>
 				<p><?php _e( 'If you\'re a developer who is interested in building custom modules for Live Composer give a check at the developer documentation.', 'live-composer-page-builder' ); ?></p>
 				<?php /*
 				<ul>
@@ -36,10 +36,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 				?>
 			</div>
 			<div class="dslc-panel-column dslc-panel-last">
-				<h3><a href="//livecomposerplugin.com/support/support-request/?utm_source=wp-admin&utm_medium=documentation-block&utm_campaign=free-support-header" target="_blank"><span class="dashicons dashicons-format-chat"></span> <?php _e( "Free Support", 'live-composer-page-builder' ); ?></a></h3>
+				<h3><a href="//livecomposerplugin.com/support/support-request/?utm_source=wp-admin&utm_medium=documentation-block&utm_campaign=free-support-header" target="_blank"><span class="dashicons dashicons-format-chat"></span> <?php _e( "Free &amp; Premium Support", 'live-composer-page-builder' ); ?></a></h3>
 				<p><?php _e( 'If you run into any bugs or issues do let us know.', 'live-composer-page-builder' ); ?></p>
 				<ul>
-					<li><a class="dslc-panel-icon dslc-panel-facebook" href="//www.facebook.com/groups/livecomposer/" traget="_blank"><?php _e( 'Get Support from Other LC Users', 'live-composer-page-builder' ); ?></a></li>
+					<li><a class="dslc-panel-icon dslc-panel-github" href="https://github.com/live-composer/live-composer-page-builder/issues" traget="_blank"><?php _e( 'Report a bug (not support!)', 'live-composer-page-builder' ); ?></a></li>	
+					<li><a class="dslc-panel-icon dslc-panel-facebook" href="//www.facebook.com/groups/livecomposer/" traget="_blank"><?php _e( 'Free advice from other users', 'live-composer-page-builder' ); ?></a></li>
+					<li><a class="dslc-panel-icon dslc-panel-show-work" href="//www.facebook.com/groups/livecomposer/" traget="_blank"><?php _e( 'Premium support (buyers only)', 'live-composer-page-builder' ); ?></a></li>
 				</ul>
 			</div>
 		</div>
