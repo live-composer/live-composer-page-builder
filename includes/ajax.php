@@ -239,7 +239,7 @@ function dslc_ajax_display_module_options( $atts ) {
 		$module_instance = new $module_id();
 
 		// Get the module options.
-		$module_controls = apply_filters( 'dslс_filter_module_control', $module_instance->options() );
+		$module_controls = apply_filters( 'dslc_filter_module_control', $module_instance->options() );
 
 		// New object for options panel.
 		$module_options_panel = new LC_Module_Options_Panel();
