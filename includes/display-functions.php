@@ -732,12 +732,12 @@ function dslc_filter_content( $content ) {
 			</div>';
 		}
 
-		if ( ! empty( $composer_code ) || $template_code ) {
+		if ( ! empty( $composer_code ) || !empty( $template_code ) ) {
 			// If there is LC code to add to the content output.
 			// Turn the LC code into HTML code.
 			$composer_content = dslc_render_content( $composer_code );
 
-		} elseif ( $composer_header || $composer_footer ) {
+		} elseif ( !empty( $composer_header ) || !empty( $composer_footer ) ) {
 			// If there is header or footer LC code to add to the content output.
 			// If editor not active.
 			if ( ! dslc_is_editor_active() ) {
