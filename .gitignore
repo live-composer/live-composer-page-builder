@@ -27,3 +27,6 @@ bin/phantomjs
 # Temporary Test Files
 tests/codeception/_output/*
 tests/codeception/**/_generated
+
+# GitHub Readme
+README.md
