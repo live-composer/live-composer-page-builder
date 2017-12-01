@@ -732,7 +732,7 @@ function dslc_filter_content( $content ) {
 			</div>';
 		}
 
-		if ( $composer_code || $template_code ) {
+		if ( ! empty( $composer_code ) || $template_code ) {
 			// If there is LC code to add to the content output.
 			// Turn the LC code into HTML code.
 			$composer_content = dslc_render_content( $composer_code );
