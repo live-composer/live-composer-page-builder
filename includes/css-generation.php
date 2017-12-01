@@ -549,6 +549,10 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 		$module_settings = dslc_code_migration( $module_settings );
 	}
 
+	// Allow third-party developers to change any module setting before CSS generation.
+	$module_settings = apply_filters('dslc_module_settings_before_cssgen', $module_settings);
+	$module_structure = apply_filters('dslc_module_structure_before_cssgen', $module_structure);
+
 	$css_output = '';
 	global $dslc_googlefonts_array;
 	$regular_fonts = array( 'Georgia', 'Times', 'Arial', 'Lucida Sans Unicode', 'Tahoma', 'Trebuchet MS', 'Verdana', 'Helvetica' );
@@ -574,7 +578,8 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 		$dslc_css_style = '';
 	}
 
-	// Go through array of options.
+	// Go through array of options to compose array of css rules.
+	// Transform module options into css rulles.
 	foreach ( $module_structure as $option_arr ) {
 
 		$option_id = $option_arr['id'];
