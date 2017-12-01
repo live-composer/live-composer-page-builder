@@ -698,3 +698,18 @@ function dslc_hf_get_footer( $post_id = false ) {
 	// Compilation time 1.16 sec. before caching / 0.04 sec after caching.
 	return dslc_hf_get_headerfooter( $post_id, 'footer' );
 }
+
+/**
+ * Redirect non-admins from the header/footer posts.
+ *
+ * @since 1.3.10
+ * @return void
+ */
+function dslc_redirect_from_hf_posts()
+{
+	if ( is_singular( 'dslc_hf' ) && (!is_user_logged_in() || !current_user_can(DS_LIVE_COMPOSER_CAPABILITY)) ) {
+		wp_safe_redirect(get_home_url());
+		exit;
+	}
+}
+add_action('template_redirect', 'dslc_redirect_from_hf_posts');
