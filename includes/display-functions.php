@@ -576,7 +576,7 @@ function dslc_filter_content( $content ) {
 		$curr_id = $template_search->ID;
 	}
 
-	// If post pass protected and pass not supplied return original content
+	// If post pass protected and pass not supplied return original content.
 	if ( post_password_required( $curr_id ) ) {
 		return $content;
 	}
@@ -732,12 +732,12 @@ function dslc_filter_content( $content ) {
 			</div>';
 		}
 
-		if ( ! empty( $composer_code ) || !empty( $template_code ) ) {
+		if ( ! empty( $composer_code ) || ! empty( $template_code ) ) {
 			// If there is LC code to add to the content output.
 			// Turn the LC code into HTML code.
 			$composer_content = dslc_render_content( $composer_code );
 
-		} elseif ( !empty( $composer_header ) || !empty( $composer_footer ) ) {
+		} elseif ( ! empty( $composer_header ) || ! empty( $composer_footer ) ) {
 			// If there is header or footer LC code to add to the content output.
 			// If editor not active.
 			if ( ! dslc_is_editor_active() ) {
@@ -989,7 +989,7 @@ function dslc_json_decode( $raw_code, $ignore_migration = false ) {
 			// Add a marker indicating that this module
 			// was imported from shortcode format.
 			if ( is_array( $decoded ) ) {
-				$decoded['code_version'] = 1;	
+				$decoded['code_version'] = 1;
 			}
 
 			// Preset is always being stored in base64 format,

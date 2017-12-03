@@ -245,6 +245,7 @@ function dslc_custom_css( $dslc_code = '' ) {
 						if ( ! empty( $google_fonts ) ) {
 							$fonts_to_output = array_merge( $fonts_to_output, $google_fonts );
 						}
+
 						$cache->set_cache( $google_fonts, $cache_id, 'fonts' );
 						$dslc_googlefonts_array = array(); // Reset temporary fonts storage.
 					}
@@ -550,8 +551,8 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 	}
 
 	// Allow third-party developers to change any module setting before CSS generation.
-	$module_settings = apply_filters('dslc_module_settings_before_cssgen', $module_settings);
-	$module_structure = apply_filters('dslc_module_structure_before_cssgen', $module_structure);
+	$module_settings = apply_filters( 'dslc_module_settings_before_cssgen', $module_settings );
+	$module_structure = apply_filters( 'dslc_module_structure_before_cssgen', $module_structure );
 
 	$css_output = '';
 	global $dslc_googlefonts_array;

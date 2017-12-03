@@ -149,6 +149,7 @@
 	font-size: 14px;
 }
 
+/* @todo: delete .activecampaign_form? */
 .activecampaign_form input[type=text] {
 	border-color: rgb(220, 221, 221);
 	color: #000;

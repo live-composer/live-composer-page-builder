@@ -14,10 +14,16 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Very simple HTML and CSS caching class.
  */
 class DSLC_Cache {
+	/**
+	 * Properties: init, enabled and cache are defined once
+	 * for the whole session. These properties defined based on data
+	 * from the database and are expensite.
+	 */
+	private static $init = false;
+	private static $enabled = true; // Cache enabled/disabled.
+	private static $cache;
+	private $type = 'html'; // Cache for code type: html (default), css, font.
 
-	private $type; // Cache for code type: html, css.
-	private $cache;
-	private $enabled = true; // True/False – cache enabled/disabled.
 	/**
 	 * Here is the structure of the cache array.
 	 * _transient_lc_cache [
@@ -28,27 +34,34 @@ class DSLC_Cache {
 	 * 	– css
 	 * 	–– md5 hashtag – based on html code for the current css code.
 	 * 	–– md5 hashtag
+	 *
+	 *  – fonts
 	 * ]
 	 */
 
 	function __construct( $cache_type = false ) {
-		if ( 'init' === $cache_type ) {
-			add_action( 'save_post', array( $this, 'on_post_save' ) );
-			add_action( 'added_post_meta', array( $this, 'on_meta_added' ), 10, 4 );
-		} else {
+		if ( ! self::$init ) {
+			$caching_engine_setting = dslc_get_option( 'lc_caching_engine', 'dslc_plugin_options_performance' );
+
+			if ( 'disabled' === $caching_engine_setting ) {
+				self::$enabled = false;
+			} else {
+				// Run these functions only once per session.
+				add_action( 'save_post', array( $this, 'on_post_save' ) );
+				add_action( 'added_post_meta', array( $this, 'on_meta_added' ), 10, 4 );
+
+				// If the transient does not exist, does not have a value,
+				// or has expired, then get_transient will return false.
+				self::$cache = get_transient( 'lc_cache' );
+			}
+
+			// Mark init as completed to not repeat it again.
+			self::$init = true;
+		}
+
+		if ( $cache_type ) {
 			$this->type = $cache_type;
 		}
-
-		// If the transient does not exist, does not have a value,
-		// or has expired, then get_transient will return false.
-		$this->cache = get_transient( 'lc_cache' );
-
-		$caching_engine_setting = dslc_get_option( 'lc_caching_engine', 'dslc_plugin_options_performance' );
-
-		if ( 'disabled' === $caching_engine_setting ) {
-			$this->enabled = false;
-		}
-
 	}
 
 	/**
@@ -62,13 +75,16 @@ class DSLC_Cache {
 		}
 	}
 
+	public function delete_cache() {
+		delete_transient( 'lc_cache' );
+	}
+
 	/**
 	 * Delete cached code (HTML or CSS) on page save.
 	 *
 	 * @return void
 	 */
 	public function on_post_save( $post_id ) {
-
 		/*
 		Remove cached pages or particular post type.
 		💂 Needs more work. Not ready for production.
@@ -82,26 +98,26 @@ class DSLC_Cache {
 		);
 
 		if ( in_array( $post_type, $post_types_reset_cache ) ) {
-			$this->cache = array( 'html', 'css' );
+			self::$cache = array( 'html', 'css' );
 		}
 		*/
 
 		/*
 		 Remove previous version of HTML render from page cache.
-		if ( isset( $this->cache['html'][ $post_id ] ) ) {
-			unset( $this->cache['html'][ $post_id ] );
+		if ( isset( self::$cache['html'][ $post_id ] ) ) {
+			unset( self::$cache['html'][ $post_id ] );
 		}
 
-		if ( isset( $this->cache['css'][ $post_id ] ) ) {
-			unset( $this->cache['css'][ $post_id ] );
+		if ( isset( self::$cache['css'][ $post_id ] ) ) {
+			unset( self::$cache['css'][ $post_id ] );
 		}*/
 
 		/*
-		For now we rest all the cache after any post or page saved.
+		For now we reset all the cached data after any post or page saved.
 		This is temporary solution to have post grids and sliders to show
 		actual information and template designs to updates properly.
 		*/
-		$this->cache = array(
+		self::$cache = array(
 				'html' => array(),
 				'css' => array(),
 				'fonts' => array(),
@@ -115,12 +131,13 @@ class DSLC_Cache {
 	 * @return string/boolean Cached code or false if not found.
 	 */
 	public function get_cache( $identificator = false, $cache_type = false ) {
-		if ( $identificator && $this->cached( $identificator, $cache_type ) ) {
+
+		if ( self::$enabled && $identificator && $this->cached( $identificator, $cache_type ) ) {
 			if ( ! $cache_type ) {
 				$cache_type = $this->type;
 			}
 
-			return $this->cache[ $cache_type ][ $identificator ];
+			return self::$cache[ $cache_type ][ $identificator ];
 		} else {
 			return false;
 		}
@@ -130,12 +147,13 @@ class DSLC_Cache {
 	 * Save cached code (HTML or CSS).
 	 */
 	public function set_cache( $code_to_cache = false, $identificator = false, $cache_type = false ) {
-		if ( $code_to_cache ) {
+		if ( self::$enabled && $code_to_cache ) {
+
 			if ( ! $cache_type ) {
 				$cache_type = $this->type;
 			}
 
-			$this->cache[ $cache_type ][ $identificator ] = $code_to_cache;
+			self::$cache[ $cache_type ][ $identificator ] = $code_to_cache;
 			$this->update_db();
 		}
 	}
@@ -144,7 +162,7 @@ class DSLC_Cache {
 	 * Update code in the database.
 	 */
 	public function update_db() {
-		set_transient( 'lc_cache', $this->cache, 0 );
+		set_transient( 'lc_cache', self::$cache, DAY_IN_SECONDS * 3 ); // max cache live is 3 days.
 	}
 
 	/**
@@ -157,8 +175,8 @@ class DSLC_Cache {
 			$cache_type = $this->type;
 		}
 
-		if ( isset( $this->cache[ $cache_type ] )
-				&& isset( $this->cache[ $cache_type ][ $identificator ] ) ) {
+		if ( self::$enabled && isset( self::$cache[ $cache_type ] )
+				&& isset( self::$cache[ $cache_type ][ $identificator ] ) ) {
 			return true;
 		} else {
 			return false;
@@ -169,8 +187,21 @@ class DSLC_Cache {
 	 * Check if cache enabled.
 	 */
 	public function enabled() {
-		return $this->enabled;
+		return self::$enabled;
 	}
 }
 
-$site_cache = new DSLC_Cache( 'init' );
+// Run cache for page rendering requests only (not cron or ajax);
+if ( ! wp_doing_cron() && ! wp_doing_ajax() ) {
+	$site_cache = new DSLC_Cache();
+}
+
+/**
+ * When our or any other plugin saves the settins it will be redirected
+ * shortly to the options.php. This is when we need to reset cache.
+ */
+add_action( 'load-options.php', 'lbmn_reset_cache_on_settings_save' );
+function lbmn_reset_cache_on_settings_save() {
+	$site_cache = new DSLC_Cache();
+	$site_cache->delete_cache();
+}

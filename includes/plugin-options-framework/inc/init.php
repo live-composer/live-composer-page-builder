@@ -98,7 +98,7 @@ function dslc_plugin_options_display( $tab = '' ) {
 
 		<div id="lc-settings-tabs">
 				<!-- Extensions tab -->
-				<div class="tab" id="tab-for-tab-extensions" <?php if ( $anchor != 'dslc_settings' ) echo 'style="display:block"'; ; ?>>
+				<div class="tab" id="tab-for-tab-extensions" <?php if ('dslc_settings' !== $anchor ) { echo 'style="display:block"'; } ?>>
 					<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-extensions.php'; ?>
 				</div>
 				<!-- Getting Started Tab -->
@@ -108,7 +108,7 @@ function dslc_plugin_options_display( $tab = '' ) {
 				</div>
 */ ?>
 				<!-- Settings tab -->
-				<div class="tab" <?php if ( $anchor == 'dslc_settings' ) echo 'style="display:block"'; ; ?>  id="tab-for-tab-settings">
+				<div class="tab" <?php if ( 'dslc_settings' === $anchor ) { echo 'style="display:block"';} ?>  id="tab-for-tab-settings">
 					<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-settings.php'; ?>
 				</div>
 
@@ -224,8 +224,8 @@ function dslc_plugin_options_init() {
 				$section_id, // Section.
 				$option // Args.
 			);
-		}
-	}
+		}// End foreach().
+	}// End foreach().
 
 } add_action( 'admin_init', 'dslc_plugin_options_init' );
 
@@ -300,34 +300,3 @@ function dslc_plugin_options_input_sanitize( $input ) {
 	}
 
 }
-
-/**
- * Active Campaign
- */
-function dslc_ajax_check_activecampaign() {
-
-	// Check Nonce.
-	if ( ! wp_verify_nonce( $_POST['security']['nonce'], 'dslc-optionspanel-ajax' ) ) {
-		wp_die( 'You do not have rights!' );
-	}
-
-	// Check access permissions.
-	if ( ! current_user_can( 'install_plugins' ) ) {
-		wp_die( 'You do not have rights!' );
-	}
-
-	$email = sanitize_email( $_POST['email'] );
-	$name = sanitize_text_field( $_POST['name'] );
-
-	$dslc_getting_started = array(
-	'email' => $email,
-	'name' => $name,
-	'subscribed' => '1',
-	);
-
-	add_option( 'dslc_user', $dslc_getting_started );
-
-	wp_die();
-
-}
-add_action( 'wp_ajax_dslc_activecampaign', 'dslc_ajax_check_activecampaign' );
