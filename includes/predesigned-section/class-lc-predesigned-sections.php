@@ -231,7 +231,7 @@ class LC_Predesigned_Sections extends LCPS_Base
 				<li class="dropdown">
 					<span title="Options" class="lc-icon-list-item-icon dslc-icon-gear"></span>
 					<ul style="display: none;" class="dropdown-menu">
-						<li><a target="__blank" class="editElement" href="/wp-admin/post.php?post=' . $element['ID'] .'&action=edit">Edit section</a></li>
+						<li><a target="__blank" class="editElement" href="/wp-admin/admin.php?page=livecomposer_editor&page_id=' . $element['ID'] .'">Edit section</a></li>
 						<li><a class="deleteElement" href="#" rel="' . $element['ID'] . '">Delete section</a></li>
 					</ul>
 				</li>
