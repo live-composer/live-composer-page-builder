@@ -81,7 +81,7 @@ class LC_Predesigned_Sections extends LCPS_Base
 	{
 		global $dslc_plugin_options;
 
-		//lcps_sections
+		//lc_desing_sections
 		add_submenu_page(
 			'dslc_plugin_options',
 			'Predesigned Sections',

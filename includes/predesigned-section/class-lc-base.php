@@ -12,8 +12,8 @@ class LCPS_Base
 	const CLASS_NAME = 'LC_Predesigned_Sections';
 
 	// Main post type name
-	const POST_TYPE_NAME = 'lcps_sections';
-	const POST_TAXONOMY_CATEGORY = 'lcps_sections_category';
+	const POST_TYPE_NAME = 'lc_desing_sections';
+	const POST_TAXONOMY_CATEGORY = 'lc_desing_sections_category';
 
 	/**
 	 * Construct
@@ -59,7 +59,7 @@ class LCPS_Base
 				'parent_item_colon'  => '',
 				'menu_name'          => 'Predesigned sections'
 			),
-			'taxonomies'         => array( 'lcps_sections_category' ),
+			'taxonomies'         => array( 'lc_desing_sections_category' ),
 			'public'             => true,
 			'publicly_queryable' => true,
 			'show_ui'            => true,
@@ -73,7 +73,7 @@ class LCPS_Base
 		);
 
 
-		register_post_type( 'lcps_sections', $args );
+		register_post_type( 'lc_desing_sections', $args );
 		self::custom_taxonomy();
 	}
 
@@ -108,7 +108,7 @@ class LCPS_Base
 			'show_in_nav_menus'          => true,
 			'show_tagcloud'              => true,
 		);
-		register_taxonomy( 'lcps_sections_category', array( 'lcps_sections' ), $args );
+		register_taxonomy( 'lc_desing_sections_category', array( 'lc_desing_sections' ), $args );
 	}
 
 	public function css_load()
