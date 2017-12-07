@@ -30,34 +30,6 @@ class LCPS_Base
 		add_action( 'wp_enqueue_scripts', array( $this, 'css_load' ) );
 	}
 
-	// Plugin offline work
-	static public function offline_work()
-	{
-		// Any plugin activation
-		add_action(
-			'activated_plugin',
-			array( self::CLASS_NAME, 'set_plugin_load_last' )
-		);
-
-		// Any plugin deactivation
-		add_action(
-			'deactivated_plugin',
-			array( self::CLASS_NAME, 'set_plugin_load_last' )
-		);
-	}
-
-	// Hook: this plugin deactivation action
-	static public function deactivation()
-	{}
-
-	// Hook: this plugin activation action
-	static public function activation()
-	{}
-
-	// Hook: this plugin uninstall action
-	static public function uninstall()
-	{}
-
 	// Add action to Register new custom post type
 	static public function init_custom_post_type()
 	{
@@ -137,21 +109,6 @@ class LCPS_Base
 			'show_tagcloud'              => true,
 		);
 		register_taxonomy( 'lcps_sections_category', array( 'lcps_sections' ), $args );
-	}
-
-	// Set order load for plugin ( always after Live Composer )
-	static public function set_plugin_load_last()
-	{
-		$wp_path_to_this_file = preg_replace( '/( .* )plugins\/( .* )$/', WP_PLUGIN_DIR . '/$2', __FILE__ );
-		$pluginName = plugin_basename( trim( $wp_path_to_this_file ) );
-		$activePlugins = get_option( 'active_plugins' );
-		$pluginKey = array_search( $pluginName, $activePlugins );
-
-		if ( in_array( $pluginName, $activePlugins ) && end( $activePlugins ) != $pluginName ) {
-			array_splice( $activePlugins, $pluginKey, 1 );
-			array_push( $activePlugins, $pluginName );
-			update_option( 'active_plugins', $activePlugins );
-		}
 	}
 
 	public function css_load()

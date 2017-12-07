@@ -24,29 +24,6 @@ define( 'LCPS_CUSTOM_THEME_XML_IMG_PATH', get_template_directory() . '/predesign
 include_once LCPS_PLUGIN_DIR . 'class-lc-base.php';
 include_once LCPS_PLUGIN_DIR . 'class-lc-predesigned-sections.php';
 
-// Plugin offline work
-LC_Predesigned_Sections::offline_work();
-
-// This plugin activation
-// (register_activation_hook() must be called from the main plugin file)
-register_activation_hook(
-	__FILE__,
-	array( 'LC_Predesigned_Sections', 'activation' )
-);
-
-// This plugin deactivation
-// (register_deactivation_hook() must be called from the main plugin file)
-register_deactivation_hook(
-	__FILE__,
-	array( 'LC_Predesigned_Sections', 'deactivation' )
-);
-
-// This plugin uninstall
-register_uninstall_hook(
-	__FILE__,
-	array( 'LC_Predesigned_Sections', 'uninstall' )
-);
-
 // AJAX: remove ps
 if ( isset( $_POST['delete_ps'] ) ) {
 	add_action( 'plugins_loaded', array('LC_Predesigned_Sections', 'remove_predesigned_section_post'));

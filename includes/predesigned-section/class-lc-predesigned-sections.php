@@ -18,41 +18,6 @@ class LC_Predesigned_Sections extends LCPS_Base
 		add_action( 'wp_footer', array( $this, 'add_panel_html' ) );
 	}
 
-	// Hook: this plugin deactivation action
-	static public function offline_work()
-	{
-		parent::offline_work();
-
-		// Init Predesigned Sections post type
-		self::init_custom_post_type();
-
-		// Add sub PS menu
-		// Must be initialized in offline mode (when lc editor not active)
-		add_action( 'admin_menu', array( 'LC_Predesigned_Sections', 'add_admin_lc_submenu' ) );
-	}
-
-	// Hook: this plugin activation action
-	static public function activation()
-	{
-		parent::activation();
-
-		// Init Predesigned Sections post type
-		self::custom_post_type();
-
-		self::add_predesigned_sections_from_xml();
-	}
-
-	// Hook: this plugin uninstall action
-	static public function uninstall()
-	{
-		parent::uninstall();
-
-		// Init Predesigned Sections post type
-		self::custom_post_type();
-
-		#self::remove_predesigned_sections();
-	}
-
 	// Delete all predesigned sections
 	static public function remove_predesigned_sections()
 	{
@@ -73,6 +38,7 @@ class LC_Predesigned_Sections extends LCPS_Base
 	{
 		return self::remove_predesigned_section( $_POST['delete_ps'] );
 	}
+	
 	// Remove predesigned section (only with right to delete)
 	static public function remove_predesigned_section( $id )
 	{
@@ -115,33 +81,15 @@ class LC_Predesigned_Sections extends LCPS_Base
 	{
 		global $dslc_plugin_options;
 
-		// (!) Add tab to LC menu for PS
-		/*
-		if ( !empty( $dslc_plugin_options ) ) {
-			$dslc_plugin_options[ 'LCPS_plugin_options' ] = array(
-				'options' => array(),
-				'title'   => 'Predesigned Sections',
-			);
-		}
-		*/
-
 		//lcps_sections
 		add_submenu_page(
 			'dslc_plugin_options',
-
 			'Predesigned Sections',
 			'Predesigned Sections',
-
 			'activate_plugins',
 			'edit.php?post_type=' . LCPS_Base::POST_TYPE_NAME,
-
 			null
-			/*array( 'LC_Predesigned_Sections', 'add_admin_lc_submenu_body' )*/
 		);
-	}
-	static public function add_admin_lc_submenu_body()
-	{
-		echo ':)';
 	}
 
 	// (array) Return all posts sections with meta fields

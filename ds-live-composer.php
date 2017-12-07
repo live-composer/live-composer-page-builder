@@ -191,6 +191,10 @@ function dslc_disable_old_plugin() {
 			deactivate_plugins( $lc_lite );
 		}
 	}
+
+	// Predesigned Sections
+	LC_Predesigned_Sections::custom_post_type();
+	LC_Predesigned_Sections::add_predesigned_sections_from_xml();
 }
 register_activation_hook( __FILE__, 'dslc_disable_old_plugin' );
 
