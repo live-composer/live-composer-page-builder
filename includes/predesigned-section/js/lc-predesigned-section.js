@@ -23,7 +23,7 @@ var lcps_drag = {
 var lcps = {
 	// Scroll bottom
 	scrollBottom: function () {
-		jQuery( '#page-builder-frame' ).contents().find( 'html, body' ).animate( { scrollTop: jQuery( document ).height() }, 'slow' );
+		jQuery( '#page-builder-frame' ).contents().find( 'html, body' ).animate( { scrollTop: jQuery( '#page-builder-frame' ).contents().find( '.dslca-add-modules-section' ).offset().top }, 'slow' );
 	},
 
 	getJson: function ( str ) {
@@ -147,6 +147,7 @@ var lcps = {
 
 		// Scroll bottom
 		setTimeout( function() {
+			lcps.panelShow( 0 );
 			lcps.scrollBottom();
 		}, 500 );
 	}
