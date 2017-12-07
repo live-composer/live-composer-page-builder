@@ -38,7 +38,7 @@ class LC_Predesigned_Sections extends LCPS_Base
 	{
 		return self::remove_predesigned_section( $_POST['delete_ps'] );
 	}
-	
+
 	// Remove predesigned section (only with right to delete)
 	static public function remove_predesigned_section( $id )
 	{
@@ -219,6 +219,7 @@ class LC_Predesigned_Sections extends LCPS_Base
 	private function _panel_elements_html( $element )
 	{
 		$result = '';
+		$dslc_code = get_post_custom_values( 'dslc_code', $element['ID'] );
 
 		$result .= '<li class="ps">';
 			if ( !empty( $element['lcps_img'] ) )
@@ -238,7 +239,7 @@ class LC_Predesigned_Sections extends LCPS_Base
 
 			$result .= '<div class="title">' . $element['post_title'] . '</div>';
 
-			$result .= '<div class="shortcode" style="display: none;" >' . $element['post_content'] . '</div>';
+			$result .= '<div class="shortcode" style="display: none;" >' . $dslc_code[0] . '</div>';
 		$result .= '</li>';
 
 		return $result;
