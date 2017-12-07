@@ -63,7 +63,7 @@ class LCPS_Base
 			'public'             => true,
 			'publicly_queryable' => true,
 			'show_ui'            => true,
-			'show_in_menu'       => true,
+			'show_in_menu'       => false,
 			'query_var'          => true,
 			'capability_type'    => 'post',
 			'has_archive'        => true,
