@@ -195,14 +195,14 @@ class LC_Predesigned_Sections extends LCPS_Base
 			// Menu
 			echo '<ul class="menu noselect">';
 			foreach ( $groups as $group_title => $group ) {
-				echo '<li class="noselect" rel="lcps-g-' . str_replace( '"', '', $group_title ) . '" >' . $group_title . '</li>';
+				echo '<li class="noselect" rel="lcps-g-' . str_replace( array(':', '\\', '/', '*', ' '), '', $group_title ) . '" >' . $group_title . '</li>';
 			}
 			echo '</ul>';
 
 			// Elements
 			$count = 0;
 			foreach ( $groups as $group_title => $group ) {
-				echo '<ul class="elements noselect' . ( 0 === $count++ ? ' active' : '' ) . '" id="lcps-g-' . str_replace( '"', '', $group_title ) . '">';
+				echo '<ul class="elements noselect' . ( 0 === $count++ ? ' active' : '' ) . '" id="lcps-g-' . str_replace( array(':', '\\', '/', '*', ' '), '', $group_title ) . '">';
 
 				foreach ( $group as $element ) {
 
