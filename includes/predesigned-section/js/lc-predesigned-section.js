@@ -137,7 +137,7 @@ var lcps = {
 	},
 
 	addSection: function ( el ) {
-		var dslc_modules_section_code = el.find( '.shortcode' ).text();
+		var dslc_modules_section_code = el.find( '.shortcode' ).html();
 
 		if ( !dslc_modules_section_code )
 			return;
