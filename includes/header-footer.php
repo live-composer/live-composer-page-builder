@@ -624,7 +624,8 @@ function dslc_hf_get_headerfooter( $post_id = false, $hf_type = 'header' ) {
 				$cached_html = substr_replace( $cached_html, $editing_parametters, strrpos( $cached_html, 'data-hf' ), 0 );
 			}
 
-			return do_shortcode( $cached_html );
+			// We need double do_shortcode as our module shortcodes can contain encoded 3-rd party shortcodes.
+			return do_shortcode( do_shortcode( $cached_html ) );
 		}
 	}
 
@@ -664,7 +665,8 @@ function dslc_hf_get_headerfooter( $post_id = false, $hf_type = 'header' ) {
 			$cache->set_cache( $rendered_code, $cache_id );
 		}
 		// Add the code to the variable holder.
-		return do_shortcode( $rendered_code );
+		// We need double do_shortcode as our module shortcodes can contain encoded 3-rd party shortcodes.
+		return do_shortcode( do_shortcode( $rendered_code ) );
 
 	} else {
 

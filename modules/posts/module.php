@@ -2889,7 +2889,8 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 										$thumb_url = $thumb_url[0];
 
 										$thumb_alt = get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true );
-										if ( ! $thumb_alt ) { $thumb_alt = '';
+										if ( ! $thumb_alt ) {
+											$thumb_alt = '';
 										}
 
 										$resize_width = false;

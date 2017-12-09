@@ -589,7 +589,8 @@ function dslc_filter_content( $content ) {
 	if ( ! dslc_is_editor_active() && $cache->enabled() && $cache->cached( $cache_id ) ) {
 		// Check if any dynamic content included before caching.
 		$cached_page_html = $cache->get_cache( $cache_id );
-		return do_shortcode( $cached_page_html );
+		// We need double do_shortcode as our module shortcodes can contain encoded 3-rd party shortcodes.
+		return do_shortcode( do_shortcode( $cached_page_html ) );
 	}
 
 	// Global variables.
@@ -746,7 +747,8 @@ function dslc_filter_content( $content ) {
 				$cache->set_cache( $rendered_header_footer, $cache_id );
 
 				// Pass the LC header, regular content and LC footer
-				return do_shortcode( $rendered_header_footer );
+				// We need double do_shortcode as our module shortcodes can contain encoded 3-rd party shortcodes.
+				return do_shortcode( do_shortcode( $rendered_header_footer ) );
 			}
 		} else {
 
@@ -782,7 +784,8 @@ function dslc_filter_content( $content ) {
 			$cache->set_cache( $rendered_page, $cache_id );
 		}
 
-		return do_shortcode( $rendered_page );
+		// We need double do_shortcode as our module shortcodes can contain encoded 3-rd party shortcodes.
+		return do_shortcode( do_shortcode( $rendered_page ) );
 
 	} else {
 		// If LC should not filter the content (full content posts output in the blog/posts modules ).
