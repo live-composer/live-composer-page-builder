@@ -410,7 +410,7 @@ class LC_Control {
 							<span><?php esc_html_e( 'Blur', 'live-composer-page-builder' ); ?></span><input class="dslca-module-edit-option-text-shadow-blur" step="0.1" type="number" value="<?php echo $text_shadow_blur_val; ?>" />
 						</div>
 						<div class="dslca-module-edit-option-text-shadow-single dslca-color-option">
-							<span><?php esc_html_e( 'Color', 'live-composer-page-builder' ); ?></span><input class="dslca-module-edit-option-text-shadow-color" type="text" value="<?php echo $text_shadow_color_val; ?>" />
+							<span><?php esc_html_e( 'Color', 'live-composer-page-builder' ); ?></span><input class="dslca-module-edit-option-text-shadow-color" data-alpha="true" type="text" value="<?php echo $text_shadow_color_val; ?>" />
 						</div>
 
 						<input type="hidden" class="dslca-module-edit-field dslca-module-edit-field-text-shadow" data-alpha="true" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo esc_attr( $this->_curr_value ); ?>" <?php echo $affect_on_change_append ?> />
