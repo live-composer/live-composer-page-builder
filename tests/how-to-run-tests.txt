@@ -1,3 +1,15 @@
+Installing inviroment:
+
+To install composer:
+1. Install composer in the development folder as described here: https://getcomposer.org/download/
+2. Then move it to the /url/local/bin/composer folder with the next command: $> mv composer.phar /usr/local/bin/composer (maybe needs sudo in front)
+3. Now you can run composer with the next command $> composer
+4. Install packages with $> composer install --ignore-platform-reqs
+
+Composer commands:
+– UPDATE $> composer update --ignore-platform-reqs
+
+================================================================================
 
 ACCEPTANCE TESTING:
 
