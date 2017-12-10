@@ -51,3 +51,8 @@
 #post-option-dslc_template_base {
 	display: none;
 }
+
+/* Hide annoying notifications from other plugins on our settings page. */
+.toplevel_page_dslc_plugin_options #wpcontent .wrap .updated {
+	display: none;
+}
