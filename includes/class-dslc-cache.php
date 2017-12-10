@@ -191,8 +191,12 @@ class DSLC_Cache {
 	}
 }
 
-// Run cache for page rendering requests only (not cron or ajax);
-if ( ! wp_doing_cron() && ! wp_doing_ajax() ) {
+/**
+ * Run cache for page rendering requests only (not cron or ajax);
+ * Function wp_doing_cron were introduced recently 4.8,
+ * so we need an aditional check for its existence.
+ */
+if ( ( function_exists( 'wp_doing_cron' ) && ! wp_doing_cron() ) && ! wp_doing_ajax() ) {
 	$site_cache = new DSLC_Cache();
 }
 
