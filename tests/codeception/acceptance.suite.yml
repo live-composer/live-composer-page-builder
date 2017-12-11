@@ -18,7 +18,7 @@ env:
         modules:
             config:
                 WPWebDriver:
-                    url: 'http://127.0.0.1:8888'
+                    url: 'http://127.0.0.1:8888/wp-core'
                     browser: phantomjs
                     port: 4444
                     window_size: 1024x768
