@@ -20,6 +20,7 @@ node_modules
 
 # Composer
 vendor
+composer.lock
 
 # PhantomJS
 bin/phantomjs
