@@ -108,7 +108,7 @@ function dslc_editing_screen_content() {
 		$frame_url = set_url_scheme( add_query_arg( $previewurl_keys, get_permalink( $previewurl_keys['page_id'] ) ) );
 
 		echo '<div id="page-builder-preview-area">';
-		echo '<iframe id="page-builder-frame" src="' . esc_url( $frame_url ) . '"></iframe>';
+		echo '<iframe id="page-builder-frame" name="page-builder-frame" src="' . esc_url( $frame_url ) . '"></iframe>';
 		echo '</div>';
 
 		do_action( 'dslca_editing_screen_preview_after' );

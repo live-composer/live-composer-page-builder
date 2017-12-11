@@ -11,7 +11,7 @@ modules:
               window_size: 1024x768
               adminUsername: 'admin'
               adminPassword: 'admin'
-              adminPath: '/wp-core/wp-admin'
+              adminPath: '/wp-admin'
 
 env:
     travis:

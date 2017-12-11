@@ -21,7 +21,11 @@ To test:
 Run in macOS terminal (not from the editor) from the project folder
 $> bash bin/localtest.sh
 
-Some documentation: https://github.com/lucatume/wp-browser
+Documentation & examples:
+– Some documentation: https://github.com/lucatume/wp-browser
+– Available methods(commadns): https://github.com/lucatume/wp-browser#methods
+– http://codeception.com/docs/modules/PhpBrowser
+– Exapmles: https://github.com/WordPoints/wordpoints/tree/develop/tests/codeception/acceptance
 
 ================================================================================
 
