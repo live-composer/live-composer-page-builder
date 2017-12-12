@@ -127,8 +127,7 @@ install-wordpress() {
 	echo "---------------------- Make CLI Runnable"
 	find /usr/local/bin -maxdepth 1  # list files in current dirrectory
 	chmod +x wp-cli.phar
-	mv wp-cli.phar /usr/local/bin/wp
-	# sudo mv wp-cli.phar /usr/local/bin/wp
+	sudo mv wp-cli.phar /usr/local/bin/wp
 	echo "---------------------- After MV"
 	find /usr/local/bin -maxdepth 1  # list files in current dirrectory
 

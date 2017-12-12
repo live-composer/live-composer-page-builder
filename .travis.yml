@@ -1,5 +1,5 @@
 # Use the new container-based infrastructure (it's faster).
-sudo: false
+# sudo: false
 
 language: php
 # dist: trusty
