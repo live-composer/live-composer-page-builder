@@ -97,25 +97,13 @@ install-wordpress() {
 	find "$WP_CORE_DIR/wp-content/themes" -maxdepth 1  # list files in current dirrectory
 	echo "----------------------"
 
-
-	export PROJECT_DIR = "/home/travis/build/live-composer/live-composer-page-builder"
-	export PROJECT_SLUG = "live-composer-page-builder"
-
-	echo "????? PROJECT_DIR ----------------------"
-	echo "$PROJECT_DIR"
-	find "$PROJECT_DIR" -maxdepth 1  # list files in current dirrectory
-	echo "----------------------"
-	echo "????? PROJECT_SLUG: $PROJECT_SLUG"
+	echo "????? HOME: $HOME"
 
 	# Set up plugin.
-	ln -s "$PROJECT_DIR" "$WP_CORE_DIR"/wp-content/plugins/"$PROJECT_SLUG"
+	ln -s "$TRAVIS_BUILD_DIR" "$WP_CORE_DIR"/wp-content/plugins/live-composer-page-builder
 
-
-	echo "????? TRAVIS_BUILD_DIR ----------------------"
-	echo "$TRAVIS_BUILD_DIR"
-	find "$TRAVIS_BUILD_DIR" -maxdepth 1  # list files in current dirrectory
-	echo "----------------------"
-	echo "????? TRAVIS_REPO_SLUG: $TRAVIS_REPO_SLUG"
+	# $TRAVIS_BUILD_DIR = /home/travis/build/live-composer/live-composer-page-builder
+	# $TRAVIS_REPO_SLUG = live-composer/live-composer-page-builder
 
 
 	echo "????? PLUGINS ----------------------"
@@ -139,7 +127,8 @@ install-wordpress() {
 	echo "---------------------- Make CLI Runnable"
 	find /usr/local/bin -maxdepth 1  # list files in current dirrectory
 	chmod +x wp-cli.phar
-	sudo mv wp-cli.phar /usr/local/bin/wp
+	mv wp-cli.phar /usr/local/bin/wp
+	# sudo mv wp-cli.phar /usr/local/bin/wp
 	echo "---------------------- After MV"
 	find /usr/local/bin -maxdepth 1  # list files in current dirrectory
 
