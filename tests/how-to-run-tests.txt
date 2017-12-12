@@ -27,7 +27,7 @@ Documentation & examples:
 – Some documentation: https://github.com/lucatume/wp-browser
 – Available methods(commadns): https://github.com/lucatume/wp-browser#methods
 – http://codeception.com/docs/modules/PhpBrowser
-– Exapmles: https://github.com/WordPoints/wordpoints/tree/develop/tests/codeception/acceptance
+– Examples: https://github.com/WordPoints/wordpoints/tree/develop/tests/codeception/acceptance
 
 ================================================================================
 
@@ -44,3 +44,10 @@ You can find all three of these values in your wp-config.php file.
 
 To test:
 $> phpunit
+
+
+
+// ============================================================
+
+OTHER RESOURCES:
+WP-CLI commands: https://developer.wordpress.org/cli/commands/

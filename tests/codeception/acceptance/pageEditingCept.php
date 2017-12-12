@@ -1,26 +1,15 @@
 <?php
 
 /**
- * Basic acception tests for Live Composer.
+ * Test page editing workflow in Live Composer.
  *
- * @since 1.0.0
+ * @since 1.3.10
  */
-
-// $lcPluginSlug = 'live-composer-page-builder';
-
 
 $I = new AcceptanceTester( $scenario );
 $I->wantTo( 'Check page creation and editing.' );
-// if ($scenario->running()) {
-    // Logger::log('test');
-// }
-
-// $this->loginAs($this->config['adminUsername'], $this->config['adminPassword']);
-// codecept_debug($I);
-// codecept_debug($scenario);
 
 $I->loginAsAdmin();
-// $I->wait(3); // Don't delete as it will fail without.
 $I->waitForElement('#footer-thankyou', 10);
 
 // Publish new page.
@@ -41,8 +30,7 @@ $I->see( 'Disable Editor');
 $I->switchToIframe( 'page-builder-frame' );
 $I->see( 'Add Modules Row');
 
-// Test BUTTON module import
-
+// Test BUTTON module import:
 // Click import row button.
 $I->click( '.dslca-import-modules-section-hook' );
 
@@ -68,6 +56,15 @@ $I->click('.dslca-prompt-modal-active .dslca-prompt-modal-confirm-hook');
 // Check button rendered on Front-End
 $I->waitForElement('.dslc-module-DSLC_Button', 10); // LC code import takes some time.
 $I->see( 'TEST BUTTON');
+
+
+// if ($scenario->running()) {
+    // Logger::log('test');
+// }
+
+// $this->loginAs($this->config['adminUsername'], $this->config['adminPassword']);
+// codecept_debug($I);
+// codecept_debug($scenario);
 
 
 // EOF

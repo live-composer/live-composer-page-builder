@@ -116,6 +116,9 @@ before_script:
     # Activate Live Composer plugin.
     vendor/bin/wp plugin activate live-composer-page-builder  --path="$WP_CORE_DIR/"
 
+    # Install and Activate Yoast SEO plugin (used in tests).
+    vendor/bin/wp plugin install wordpress-seo --activate  --path="$WP_CORE_DIR/"
+
   fi
 
 script:
