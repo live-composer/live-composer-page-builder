@@ -31,7 +31,15 @@ install-wordpress() {
 	# – Configure WordPress for access through a web server.
 	sed -i "s/'example.org'/'$WP_CEPT_SERVER'/" wp-config.php
 
+	# 1 - Disable default ABSPATH
 	sed -i "s/define( 'ABSPATH'/\/\//" wp-config.php
+
+	# 2 - The next code is missing from wp-config, but required for WP-CLI to run.
+	echo "
+		/** Absolute path to the WordPress directory. */
+		if ( !defined('ABSPATH') )
+			define('ABSPATH', dirname(__FILE__) . '/src/');
+	" >> wp-config.php
 
 	# Set up database.
 	mysql -e 'CREATE DATABASE wordpress_test;' -uroot
@@ -51,13 +59,6 @@ install-wordpress() {
 
 		" >> wp-config.php
 	fi
-
-	# The next code is missing from wp-config, but required for WP-CLI to run.
-	echo "
-		/** Absolute path to the WordPress directory. */
-		if ( !defined('ABSPATH') )
-			define('ABSPATH', dirname(__FILE__) . '/src/');
-	" >> wp-config.php
 
 	# Update the config to actually load WordPress.
 	# Installed wordPress located in /tmp/wordpress/src ($WP_CORE_DIR)
