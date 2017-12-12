@@ -65,7 +65,8 @@ install-wordpress() {
 	# when wp-config.php in /tmp/wordpress
 	echo "require_once(ABSPATH . 'wp-settings.php');" >> wp-config.php
 
-	cat wp-config.php
+	# Output file content in terminal:
+	# cat wp-config.php
 
 	# $WP_CORE_DIR
 	# /tmp/wordpress/src
@@ -106,7 +107,7 @@ install-wordpress() {
 
 	# $HOME = /home/travis
 
-	# Set up plugin.
+	# Copy plugin from the travis buid folder to the WordPress install > plugins.
 	ln -s "$TRAVIS_BUILD_DIR" "$WP_CORE_DIR"/wp-content/plugins/live-composer-page-builder
 
 	# echo "????? THEMES ----------------------"

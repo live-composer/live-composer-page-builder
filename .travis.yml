@@ -113,13 +113,8 @@ before_script:
     # Doing this last gives the webdriver and server time to start up.
     composer install --prefer-source
 
-    # echo "---------------------- Test CLI"
-    # php wp-cli.phar --info
-
-    echo "---------------------- Test CLI command"
-    vendor/bin/wp --info --path="$WP_CORE_DIR/"
+    # Activate Live Composer plugin.
     vendor/bin/wp plugin activate live-composer-page-builder  --path="$WP_CORE_DIR/"
-    # --path=`path/to/wordpress`
 
   fi
 
@@ -141,6 +136,16 @@ script:
       phpcs
     fi
   fi
+
+- |
+  if [[ "$RUN_WPCEPT" == 1 ]] ; then
+    echo "RUN ACCEPTANCE TESTS"
+
+    vendor/bin/wpcept run --steps -v --env travis # --debug -vvv
+    # php ./vendor/bin/codecept run acceptance --steps  && codecept run functional && codecept run # Debug mode: -d  output data with this function: codecept_debug($data)
+
+  fi
+
 # - whereis google-chrome-stable
 # - whereis chromedriver
 #33785
@@ -153,29 +158,7 @@ script:
 # - curl http://127.0.0.1:8080/tmp/wordpress/wp-login.php -S --data status
 
 # /home/travis/build/live-composer/live-composer-page-builder/
-# - php vendor/bin/codecept run acceptance --steps --debug -vvv --env travis
 
-#AFTER:
-- |
-  if [[ "$RUN_WPCEPT" == 1 ]] ; then
-    echo "RUN ACCEPTANCE TESTS"
-    # at this point script is in the /live-composer-page-builder/ folder.
-    # echo "XXXXXXXX ----------------------"
-    # cd ..
-    # find . -maxdepth 1  # list files in current dirrectory
-    # echo "XXXXXXXX ----------------------"
-    # cd ..
-    # find . -maxdepth 1  # list files in current dirrectory
-    # echo "XXXXXXXX ----------------------"
-    # cd ..
-    # find . -maxdepth 1  # list files in current dirrectory
-
-    # curl http://127.0.0.1:8888 -S --data status
-
-    vendor/bin/wpcept run --steps --debug -vvv --env travis # --debug -vvv
-    # php ./vendor/bin/codecept run acceptance --steps  && codecept run functional && codecept run # Debug mode: -d  output data with this function: codecept_debug($data)
-
-  fi
 
 
 addons:

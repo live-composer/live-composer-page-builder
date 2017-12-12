@@ -145,9 +145,10 @@ final class DSLC_Scripts {
 	 * Fires after tinyMCE included
 	 */
 	public static function callback_tinymce() {
-
 		?>
 		<script type="text/javascript">
+			console.log( "window:" ); console.log( window );
+			console.log( "window.parent:" ); console.log( window.parent );
 			window.parent.previewAreaTinyMCELoaded.call(window);
 		</script>
 		<?php
