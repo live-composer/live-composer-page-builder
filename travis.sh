@@ -56,10 +56,21 @@ install-wordpress() {
 	ln -s "$PROJECT_DIR" "$WP_CORE_DIR"/wp-content/plugins/"$PROJECT_SLUG"
 
 	cd "$WP_CORE_DIR"/wp-content/plugins/
-	# echo "PLUGIN DIR ----------------------"
+	echo "PLUGIN DIR ----------------------"
+	echo "$WP_CORE_DIR/wp-content/plugins/"
 	find . -maxdepth 1  # list files in current dirrectory
 
-	wp plugin install akismet --activate
+
+	echo "---------------------- Install CLI"
+	curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+	echo "---------------------- Test CLI"
+	php wp-cli.phar --info
+	echo "---------------------- Make CLI Runnable"
+	chmod +x wp-cli.phar
+	sudo mv wp-cli.phar /usr/local/bin/wp
+	# wp plugin install akismet --activate
+	echo "---------------------- Text CLI command"
+	wp --info
 
 	cd -
 }
