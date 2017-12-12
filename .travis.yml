@@ -150,15 +150,20 @@ script:
 - |
   if [[ "$RUN_WPCEPT" == 1 ]] ; then
     echo "RUN ACCEPTANCE TESTS"
+
+    echo "XXXXXXXX ----------------------"
+    find . -maxdepth 1  # list files in current dirrectory
+
     curl http://127.0.0.1:8888 -S --data status
     vendor/bin/wpcept run --steps --debug -vvv --env travis # --debug -vvv
   fi
 
 
 addons:
-  artifacts:
+  artifacts: # https://docs.travis-ci.com/user/uploading-artifacts/
     s3_region: "us-west-2" # US West (Oregon)
-    debug: true
+    working_dir: "/home/travis/build/live-composer/live-composer-page-builder/tests/codeception/_output/"
+    # debug: true
 
 # addons:
 #   # sauce_connect: # Connecto to Sauce Labs
