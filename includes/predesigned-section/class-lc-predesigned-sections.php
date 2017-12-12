@@ -63,16 +63,21 @@ class LC_Predesigned_Sections extends LCPS_Base
 		require_once 'class-lc-wrx-parser.php';
 		$parser = new LCPS_WRX_parser();
 
-		// XML Parsing
-		if ( file_exists( LCPS_CUSTOM_THEME_XML_FILE ) ) {
-			// PS XML From active Theme
-			$parser->posts = $parser->parse( LCPS_CUSTOM_THEME_XML_FILE );
-			$parser->process_posts();
-		}
-		elseif ( file_exists( LCPS_PLUGIN_XML_FILE ) ) {
-			// PS XML From plugin
-			$parser->posts = $parser->parse( LCPS_PLUGIN_XML_FILE );
-			$parser->process_posts();
+		$files = array(
+			'content.xml',
+			'counter.xml',
+			'features.xml',
+			'pricing-tablets.xml',
+		);
+
+		foreach ( $files as $key => $file ) {
+			$xml_file = LCPS_XML_FILE . $file;
+
+			if ( file_exists( $xml_file ) ) {
+				// PS XML From plugin
+				$parser->posts = $parser->parse( $xml_file );
+				$parser->process_posts();
+			}
 		}
 	}
 
@@ -136,11 +141,11 @@ class LC_Predesigned_Sections extends LCPS_Base
 	}
 
 	// Searching img for current section
-	// possible places: LCPS_PLUGIN_XML_IMG_PATH / LCPS_CUSTOM_THEME_XML_IMG_PATH
-	// possible names: [ID] + '.(jpg|png|gif)' OR [TITLE] + '.(jpg|png|gif)'
 	private function _find_img_for_section( $post )
 	{
 		$result = '';
+		$category_section = get_the_terms( $post['ID'], self::POST_TAXONOMY_CATEGORY );
+		$category_slug = $category_section[0]->slug;
 
 		$_img_types = array( '.jpg', '.png', '.gif' );
 
@@ -151,17 +156,8 @@ class LC_Predesigned_Sections extends LCPS_Base
 
 			// All possible img paths
 			$_paths = array(
-				LCPS_PLUGIN_XML_IMG_URL . $post['ID'] . $type =>
-				LCPS_PLUGIN_XML_IMG_PATH . $post['ID'] . $type,
-
-				LCPS_CUSTOM_THEME_XML_IMG_URL . $post['ID'] . $type =>
-				LCPS_CUSTOM_THEME_XML_IMG_PATH . $post['ID'] . $type,
-
-				LCPS_PLUGIN_XML_IMG_URL . $img_file_name . $type =>
-				LCPS_PLUGIN_XML_IMG_PATH . $img_file_name . $type,
-
-				LCPS_CUSTOM_THEME_XML_IMG_URL . $img_file_name . $type =>
-				LCPS_CUSTOM_THEME_XML_IMG_PATH . $img_file_name . $type,
+				LCPS_XML_IMG_URL . $category_slug . '/' . $img_file_name . $type =>
+				LCPS_XML_IMG_PATH . $category_slug . '/' . $img_file_name . $type,
 			);
 
 			foreach ( $_paths as $_url => $_path ) {

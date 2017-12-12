@@ -9,20 +9,16 @@
 if ( !function_exists( 'add_action' ) )
 	exit();
 
-define( 'LCPS_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-define( 'LCPS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'LCPS_DIR', plugin_dir_path( __FILE__ ) );
+define( 'LCPS_URL', plugin_dir_url( __FILE__ ) );
 
-define( 'LCPS_PLUGIN_XML_FILE', LCPS_PLUGIN_DIR . 'predesigned-sections/predesigned-sections.xml' );
-define( 'LCPS_PLUGIN_XML_IMG_URL', LCPS_PLUGIN_URL . 'predesigned-sections/img/' );
-define( 'LCPS_PLUGIN_XML_IMG_PATH', LCPS_PLUGIN_DIR . 'predesigned-sections/img/' );
-
-define( 'LCPS_CUSTOM_THEME_XML_FILE', get_template_directory() . '/predesigned-sections/predesigned-sections.xml' );
-define( 'LCPS_CUSTOM_THEME_XML_IMG_URL', get_bloginfo('template_directory') . '/predesigned-sections/img/' );
-define( 'LCPS_CUSTOM_THEME_XML_IMG_PATH', get_template_directory() . '/predesigned-sections/img/' );
+define( 'LCPS_XML_FILE', LCPS_DIR . 'desings/sections/' );
+define( 'LCPS_XML_IMG_URL', LCPS_URL . 'desings/images/' );
+define( 'LCPS_XML_IMG_PATH', LCPS_DIR . 'desings/images/' );
 
 // Include main class
-include_once LCPS_PLUGIN_DIR . 'class-lc-base.php';
-include_once LCPS_PLUGIN_DIR . 'class-lc-predesigned-sections.php';
+include_once LCPS_DIR . 'class-lc-base.php';
+include_once LCPS_DIR . 'class-lc-predesigned-sections.php';
 
 // AJAX: remove ps
 if ( isset( $_POST['delete_ps'] ) ) {
