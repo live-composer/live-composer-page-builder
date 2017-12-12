@@ -95,7 +95,8 @@ function dslc_st_template_switch() {
 		}
 	}
 
-} add_action( 'template_redirect', 'dslc_st_template_switch' );
+} add_action( 'template_redirect', 'dslc_st_template_switch', 9999 );
+// ↑ 9999 - Yoast uses 999, we need to overbeat it. See https://github.com/live-composer/live-composer-page-builder/issues/847
 
 /**
  * Add columns to the Templates Listing table.
