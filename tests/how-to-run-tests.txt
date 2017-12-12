@@ -26,7 +26,7 @@ $> bash bin/localtest.sh
 Documentation & examples:
 – Some documentation: https://github.com/lucatume/wp-browser
 – Available methods(commadns): https://github.com/lucatume/wp-browser#methods
-– http://codeception.com/docs/modules/PhpBrowser
+– http://codeception.com/docs/modules/WebDriver
 – Examples: https://github.com/WordPoints/wordpoints/tree/develop/tests/codeception/acceptance
 
 ================================================================================

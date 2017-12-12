@@ -32,17 +32,20 @@ $I->see( 'Publish' ); $I->click( 'Publish' );
 
 // Check default interface elements on the LC editing screen.
 $I->click( 'View post' );
-
+$I->waitForElement('body', 30); // secs
 $I->seeInSource('<title>This is a custom SEO TITLE.</title>');
-$I->seeInSource('<meta name="description" content="This is a custom SEO META DESCRIPTION."/>');
 
-$I->seeInSource('<meta property="og:title" content="This is a custom FACEBOOK TITLE." />');
-$I->seeInSource('<meta property="og:description" content="This is a custom FACEBOOK DESCRIPTION." />');
-$I->seeInSource('<meta property="og:image" content="http://www.seowptheme.com/wp-content/uploads/project-thumb-1-1.png" />');
+// $I->seeInSource('name="description"');
+// $I->seeInSource('content="This is a custom SEO META DESCRIPTION."');
+$I->seeInSource('<meta name="description" content="This is a custom SEO META DESCRIPTION.">');
 
-$I->seeInSource('<meta name="twitter:description" content="This is a custom SEO META DESCRIPTION." />');
-$I->seeInSource('<meta name="twitter:title" content="This is a custom SEO TITLE." />');
-$I->seeInSource('<meta name="twitter:image" content="http://www.seowptheme.com/wp-content/uploads/project-thumb-1-1.png" />');
+$I->seeInSource('<meta property="og:title" content="This is a custom FACEBOOK TITLE.">');
+$I->seeInSource('<meta property="og:description" content="This is a custom FACEBOOK DESCRIPTION.">');
+$I->seeInSource('<meta property="og:image" content="http://www.seowptheme.com/wp-content/uploads/project-thumb-1-1.png">');
+
+$I->seeInSource('<meta name="twitter:description" content="This is a custom SEO META DESCRIPTION.">');
+$I->seeInSource('<meta name="twitter:title" content="This is a custom SEO TITLE.">');
+$I->seeInSource('<meta name="twitter:image" content="http://www.seowptheme.com/wp-content/uploads/project-thumb-1-1.png">');
 
 
 // EOF
