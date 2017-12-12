@@ -141,7 +141,7 @@ script:
   if [[ "$RUN_WPCEPT" == 1 ]] ; then
     echo "RUN ACCEPTANCE TESTS"
 
-    vendor/bin/wpcept run --steps -v --env travis # --debug -vvv
+    vendor/bin/wpcept run --steps --debug -vvv --env travis # --debug -vvv
     # php ./vendor/bin/codecept run acceptance --steps  && codecept run functional && codecept run # Debug mode: -d  output data with this function: codecept_debug($data)
 
   fi
