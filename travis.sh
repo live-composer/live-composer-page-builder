@@ -3,34 +3,43 @@
 # Install WordPress.
 install-wordpress() {
 
-	mkdir -p "$WP_DEVELOP_DIR"
+	mkdir -p "$WP_DEVELOP_DIR" # /tmp/wordpress
 
 	if [[ $WP_VERSION == 'develop' ]]; then
 		WP_VERSION=master
 	fi
 
-	# Clone the WordPress develop repo.
+	# Clone the WordPress develop repo. https://github.com/WordPress/wordpress-develop
 	git clone --depth=1 --branch="$WP_VERSION" git://develop.git.wordpress.org/ "$WP_DEVELOP_DIR"
-
 	# Set up tests config.
 	cd "$WP_DEVELOP_DIR"
-	cp wp-tests-config-sample.php wp-config.php
-	sed -i "s/youremptytestdbnamehere/wordpress_test/" wp-config.php
-	sed -i "s/yourusernamehere/root/" wp-config.php
-	sed -i "s/yourpasswordhere//" wp-config.php
+	# Contains:
+	# ...
+	# ./src
+	# ./tests
+	# ./tools
+	# ./wp-cli.yml
+	# ./wp-config-sample.php
+	# ./wp-tests-config-sample.php
 
-	echo "WP_DEVELOP_DIR DIR ----------------------"
-	echo "$WP_DEVELOP_DIR"
-	find . -maxdepth 1  # list files in current dirrectory
+	cp wp-tests-config-sample.php wp-config.php # duplicate file to have ./wp-config.php
+	# Search & replace:
+	# – Database
+	sed -i "s/youremptytestdbnamehere/wordpress_test/" wp-config.php #DB
+	sed -i "s/yourusernamehere/root/" wp-config.php #user
+	sed -i "s/yourpasswordhere//" wp-config.php #pass
+	# – Configure WordPress for access through a web server.
+	sed -i "s/'example.org'/'$WP_CEPT_SERVER'/" wp-config.php
+
+	echo "????? ----------------------"
+	echo "$WP_DEVELOP_DIR/src"
+	find "$WP_DEVELOP_DIR/src" -maxdepth 1  # list files in current dirrectory
 	echo "----------------------"
 
 	# Set up database.
 	mysql -e 'CREATE DATABASE wordpress_test;' -uroot
 
-	# Configure WordPress for access through a web server.
-	sed -i "s/'example.org'/'$WP_CEPT_SERVER'/" wp-config.php
-
-	# Install.
+	# Install WordPress via PHP unit-test installer.
 	php tests/phpunit/includes/install.php wp-config.php "$WP_MULTISITE"
 
 	# Support multisite.
