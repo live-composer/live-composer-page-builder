@@ -92,26 +92,20 @@ install-wordpress() {
 	ln -s "$WP_CORE_DIR/wp-content/themes/twentyseventeen" "$WP_CORE_DIR/wp-content/themes/default"
 
 
-	echo "????? THEMES ----------------------"
-	echo "$WP_CORE_DIR/wp-content/themes/"
-	find "$WP_CORE_DIR/wp-content/themes" -maxdepth 1  # list files in current dirrectory
-	echo "----------------------"
-
-	echo "????? HOME: $HOME"
+	# $HOME = /home/travis
 
 	# Set up plugin.
 	ln -s "$TRAVIS_BUILD_DIR" "$WP_CORE_DIR"/wp-content/plugins/live-composer-page-builder
 
-	# $TRAVIS_BUILD_DIR = /home/travis/build/live-composer/live-composer-page-builder
-	# $TRAVIS_REPO_SLUG = live-composer/live-composer-page-builder
-
+	# echo "????? THEMES ----------------------"
+	# echo "$WP_CORE_DIR/wp-content/themes/"
+	# find "$WP_CORE_DIR/wp-content/themes" -maxdepth 1  # list files in current dirrectory
+	# echo "----------------------"
 
 	# echo "????? PLUGINS ----------------------"
 	# echo "$WP_CORE_DIR/wp-content/plugins/"
 	# find "$WP_CORE_DIR/wp-content/plugins" -maxdepth 1  # list files in current dirrectory
 	# echo "----------------------"
-
-
 
 	cd -
 }
