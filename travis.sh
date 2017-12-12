@@ -19,6 +19,11 @@ install-wordpress() {
 	sed -i "s/yourusernamehere/root/" wp-config.php
 	sed -i "s/yourpasswordhere//" wp-config.php
 
+	echo "WP_DEVELOP_DIR DIR ----------------------"
+	echo "$WP_DEVELOP_DIR"
+	find . -maxdepth 1  # list files in current dirrectory
+	echo "----------------------"
+
 	# Set up database.
 	mysql -e 'CREATE DATABASE wordpress_test;' -uroot
 
@@ -73,8 +78,11 @@ install-wordpress() {
 	curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 
 	echo "---------------------- Make CLI Runnable"
+	find /usr/local/bin -maxdepth 1  # list files in current dirrectory
 	chmod +x wp-cli.phar
 	sudo mv wp-cli.phar /usr/local/bin/wp
+	echo "---------------------- After MV"
+	find /usr/local/bin -maxdepth 1  # list files in current dirrectory
 
 	echo "---------------------- Test CLI"
 	php wp-cli.phar --info
