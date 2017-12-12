@@ -219,7 +219,7 @@ class LC_Predesigned_Sections extends LCPS_Base
 
 		$result .= '<li class="ps">';
 			if ( !empty( $element['lcps_img'] ) )
-				$result .= '<div class="img-form" data-title="Click to insert on the page"><img src="' . $element['lcps_img'] . '" /></div>';
+				$result .= '<div class="img-form"><div><img src="' . $element['lcps_img'] . '" /><span>Click to insert on the page</span></div></div>';
 
 			// Options menu
 			$result .= '
