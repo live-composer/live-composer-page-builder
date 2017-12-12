@@ -18,7 +18,6 @@ install-wordpress() {
 	sed -i "s/youremptytestdbnamehere/wordpress_test/" wp-config.php
 	sed -i "s/yourusernamehere/root/" wp-config.php
 	sed -i "s/yourpasswordhere//" wp-config.php
-	cd -
 
 	# Set up database.
 	mysql -e 'CREATE DATABASE wordpress_test;' -uroot
@@ -55,6 +54,7 @@ install-wordpress() {
 
 	# Set up plugin.
 	ln -s "$PROJECT_DIR" "$WP_CORE_DIR"/wp-content/plugins/"$PROJECT_SLUG"
+	cd -
 }
 
 # EOF

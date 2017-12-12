@@ -7,7 +7,8 @@ To install composer:
 4. Install packages with $> composer install --ignore-platform-reqs
 
 Composer commands:
-– UPDATE $> composer update --ignore-platform-reqs
+– INSTALL $> composer install --ignore-platform-reqs
+– UPDATE (DON'T USE) $> composer update --ignore-platform-reqs
 
 ================================================================================
 
