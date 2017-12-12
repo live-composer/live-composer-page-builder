@@ -51,13 +51,11 @@ jQuery(document).ready(function($) {
 	 * Try to detect JS errors in preview area.
 	 */
 	jQuery("#page-builder-frame")[0].contentWindow.onerror = function( error, file, line, char ) {
-
 		dslca_generate_error_report ( error, file, line, char );
 	}
 
 	// Put JS error log data in a hidden textarea.
 	dslca_update_report_log();
-
 
  	jQuery('body').addClass('dslca-enabled dslca-drag-not-in-progress');
  	jQuery('.dslca-invisible-overlay').hide();
