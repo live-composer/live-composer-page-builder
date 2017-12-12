@@ -21,7 +21,7 @@ cache:
 # 5.6 is required for Codeception.
 php:
     - 5.6
-    - 7.0
+    # - 7.0
 
 # Run against regular and multisite.
 env:
@@ -151,19 +151,21 @@ script:
   if [[ "$RUN_WPCEPT" == 1 ]] ; then
     echo "RUN ACCEPTANCE TESTS"
     # at this point script is in the /live-composer-page-builder/ folder.
-    echo "XXXXXXXX ----------------------"
-    cd ..
-    find . -maxdepth 1  # list files in current dirrectory
-    echo "XXXXXXXX ----------------------"
-    cd ..
-    find . -maxdepth 1  # list files in current dirrectory
-    echo "XXXXXXXX ----------------------"
-    cd ..
-    find . -maxdepth 1  # list files in current dirrectory
+    # echo "XXXXXXXX ----------------------"
+    # cd ..
+    # find . -maxdepth 1  # list files in current dirrectory
+    # echo "XXXXXXXX ----------------------"
+    # cd ..
+    # find . -maxdepth 1  # list files in current dirrectory
+    # echo "XXXXXXXX ----------------------"
+    # cd ..
+    # find . -maxdepth 1  # list files in current dirrectory
 
+    # curl http://127.0.0.1:8888 -S --data status
 
-    curl http://127.0.0.1:8888 -S --data status
     vendor/bin/wpcept run --steps --debug -vvv --env travis # --debug -vvv
+    # php ./vendor/bin/codecept run acceptance --steps  && codecept run functional && codecept run # Debug mode: -d  output data with this function: codecept_debug($data)
+
   fi
 
 
