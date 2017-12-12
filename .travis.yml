@@ -116,10 +116,9 @@ before_script:
     # echo "---------------------- Test CLI"
     # php wp-cli.phar --info
 
-    # wp plugin install akismet --activate
-    echo "---------------------- Text CLI command"
+    echo "---------------------- Test CLI command"
     vendor/bin/wp --info --path="$WP_CORE_DIR/"
-    vendor/bin/wp install akismet --activate  --path="$WP_CORE_DIR/"
+    vendor/bin/wp plugin activate live-composer-page-builder  --path="$WP_CORE_DIR/"
     # --path=`path/to/wordpress`
 
   fi
