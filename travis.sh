@@ -50,6 +50,13 @@ install-wordpress() {
 		" >> wp-config.php
 	fi
 
+	# The next code is missing from wp-config, but required for WP-CLI to run.
+	echo "
+		/** Absolute path to the WordPress directory. */
+		if ( !defined('ABSPATH') )
+			define('ABSPATH', dirname(__FILE__) . '/src/');
+	" >> wp-config.php
+
 	# Update the config to actually load WordPress.
 	# Installed wordPress located in /tmp/wordpress/src ($WP_CORE_DIR)
 	# when wp-config.php in /tmp/wordpress
