@@ -9,6 +9,8 @@ install-wordpress() {
 		WP_VERSION=master
 	fi
 
+	WP_VERSION=4.9
+
 	# Clone the WordPress develop repo. https://github.com/WordPress/wordpress-develop
 	git clone --depth=1 --branch="$WP_VERSION" git://develop.git.wordpress.org/ "$WP_DEVELOP_DIR"
 	# Set up tests config.
