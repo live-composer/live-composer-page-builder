@@ -65,6 +65,18 @@ install-wordpress() {
 	# /tmp/wordpress/src/wp-blog-header.php
 	# /tmp/wordpress/src/wp-comments-post.php
 	# /tmp/wordpress/src/wp-content
+	# /tmp/wordpress/src/wp-content/themes/
+		# /tmp/wordpress/src/wp-content/themes/index.php
+		# /tmp/wordpress/src/wp-content/themes/twentyeleven
+		# /tmp/wordpress/src/wp-content/themes/twentyfifteen
+		# /tmp/wordpress/src/wp-content/themes/twentyfourteen
+		# /tmp/wordpress/src/wp-content/themes/twentyseventeen
+		# /tmp/wordpress/src/wp-content/themes/twentysixteen
+		# /tmp/wordpress/src/wp-content/themes/twentyten
+		# /tmp/wordpress/src/wp-content/themes/twentythirteen
+		# /tmp/wordpress/src/wp-content/themes/twentytwelve
+		# /tmp/wordpress/src/wp-content/themes/default
+
 	# /tmp/wordpress/src/wp-cron.php
 	# /tmp/wordpress/src/wp-includes
 	# /tmp/wordpress/src/wp-links-opml.php
@@ -79,14 +91,15 @@ install-wordpress() {
 	# Set up default theme.
 	ln -s "$WP_CORE_DIR/wp-content/themes/twentyseventeen" "$WP_CORE_DIR/wp-content/themes/default"
 
+
 	echo "????? THEMES ----------------------"
 	echo "$WP_CORE_DIR/wp-content/themes/"
 	find "$WP_CORE_DIR/wp-content/themes" -maxdepth 1  # list files in current dirrectory
 	echo "----------------------"
 
 
-	export PROJECT_DIR=$(pwd)/src
-	export PROJECT_SLUG=$(basename "$(pwd)" | sed 's/^wp-//')
+	export PROJECT_DIR = "/home/travis/build/live-composer/live-composer-page-builder"
+	export PROJECT_SLUG = "live-composer-page-builder"
 
 	echo "????? PROJECT_DIR ----------------------"
 	echo "$PROJECT_DIR"
@@ -96,6 +109,13 @@ install-wordpress() {
 
 	# Set up plugin.
 	ln -s "$PROJECT_DIR" "$WP_CORE_DIR"/wp-content/plugins/"$PROJECT_SLUG"
+
+
+	echo "????? TRAVIS_BUILD_DIR ----------------------"
+	echo "$TRAVIS_BUILD_DIR"
+	find "$TRAVIS_BUILD_DIR" -maxdepth 1  # list files in current dirrectory
+	echo "----------------------"
+	echo "????? TRAVIS_REPO_SLUG: $TRAVIS_REPO_SLUG"
 
 
 	echo "????? PLUGINS ----------------------"
