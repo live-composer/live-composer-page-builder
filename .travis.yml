@@ -25,8 +25,8 @@ php:
 
 # Run against regular and multisite.
 env:
-    - WP_MULTISITE=0 WP_VERSION=latest
-    - WP_MULTISITE=1 WP_VERSION=latest
+    # - WP_MULTISITE=0 WP_VERSION=latest
+    # - WP_MULTISITE=1 WP_VERSION=latest
     - RUN_WPCEPT=1
 
 # matrix:
@@ -155,6 +155,10 @@ script:
   fi
 
 
+addons:
+  artifacts: true
+    s3_region: "us-west-2" # US West (Oregon)
+    debug: true
 
 # addons:
 #   # sauce_connect: # Connecto to Sauce Labs
