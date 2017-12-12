@@ -54,6 +54,13 @@ install-wordpress() {
 
 	# Set up plugin.
 	ln -s "$PROJECT_DIR" "$WP_CORE_DIR"/wp-content/plugins/"$PROJECT_SLUG"
+
+	cd "$WP_CORE_DIR"/wp-content/plugins/
+	# echo "PLUGIN DIR ----------------------"
+	find . -maxdepth 1  # list files in current dirrectory
+
+	wp plugin install akismet --activate
+
 	cd -
 }
 
