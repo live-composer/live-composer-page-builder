@@ -106,37 +106,12 @@ install-wordpress() {
 	# $TRAVIS_REPO_SLUG = live-composer/live-composer-page-builder
 
 
-	echo "????? PLUGINS ----------------------"
-	echo "$WP_CORE_DIR/wp-content/plugins/"
-	find "$WP_CORE_DIR/wp-content/plugins" -maxdepth 1  # list files in current dirrectory
-	echo "----------------------"
+	# echo "????? PLUGINS ----------------------"
+	# echo "$WP_CORE_DIR/wp-content/plugins/"
+	# find "$WP_CORE_DIR/wp-content/plugins" -maxdepth 1  # list files in current dirrectory
+	# echo "----------------------"
 
 
-	echo "????? /usr/local/bin ----------------------"
-	find /usr/local/bin -maxdepth 1  # list files in current dirrectory
-	echo "----------------------"
-
-
-	echo "---------------------- Install CLI"
-	# mkdir -p $WP_CLI_BIN_DIR
-	# download https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli-nightly.phar $WP_CLI_BIN_DIR/wp
-	# chmod +x $WP_CLI_BIN_DIR/wp
-
-	curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-
-	echo "---------------------- Make CLI Runnable"
-	find /usr/local/bin -maxdepth 1  # list files in current dirrectory
-	chmod +x wp-cli.phar
-	sudo mv wp-cli.phar /usr/local/bin/wp
-	echo "---------------------- After MV"
-	find /usr/local/bin -maxdepth 1  # list files in current dirrectory
-
-	echo "---------------------- Test CLI"
-	php wp-cli.phar --info
-
-	# wp plugin install akismet --activate
-	echo "---------------------- Text CLI command"
-	wp --info
 
 	cd -
 }

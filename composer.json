@@ -6,6 +6,8 @@
 	},
     "require": {
       	"codeception/codeception": "2.1.9",
-      	"lucatume/wp-browser": "1.10.11"
+		"lucatume/wp-browser": "1.10.11",
+		"wp-cli/wp-cli" : "~0.22",
+		"psy/psysh" : "~0.6"
     }
 }

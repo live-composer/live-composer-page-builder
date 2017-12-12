@@ -1,5 +1,5 @@
 # Use the new container-based infrastructure (it's faster).
-# sudo: false
+sudo: false
 
 language: php
 # dist: trusty
@@ -112,6 +112,15 @@ before_script:
     # Install Codeception and WP Browser.
     # Doing this last gives the webdriver and server time to start up.
     composer install --prefer-source
+
+    # echo "---------------------- Test CLI"
+    # php wp-cli.phar --info
+
+    # wp plugin install akismet --activate
+    echo "---------------------- Text CLI command"
+    vendor/bin/wp --info
+     vendor/bin/wp install akismet --activate
+
   fi
 
 script:
