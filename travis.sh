@@ -31,7 +31,7 @@ install-wordpress() {
 	# – Configure WordPress for access through a web server.
 	sed -i "s/'example.org'/'$WP_CEPT_SERVER'/" wp-config.php
 
-	sed -i "s/define( 'ABSPATH'///" wp-config.php
+	sed -i "s/define( 'ABSPATH'/\/\//" wp-config.php
 
 	# Set up database.
 	mysql -e 'CREATE DATABASE wordpress_test;' -uroot
