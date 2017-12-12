@@ -99,8 +99,8 @@ before_script:
     echo "PREPARE ACCEPTANCE TESTS"
     # Define vars.
     export WP_VERSION=master
-    export WP_DEVELOP_DIR=/tmp/wordpress
-    export WP_CORE_DIR=/tmp/wordpress/src
+    export WP_DEVELOP_DIR=/tmp/wordpress # php Unit WP installation scripts
+    export WP_CORE_DIR=/tmp/wordpress/src # installable WordPress folder
     export WP_CEPT_SERVER='127.0.0.1:8888'
     # Install WordPress
     source travis.sh

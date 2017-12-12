@@ -31,11 +31,6 @@ install-wordpress() {
 	# – Configure WordPress for access through a web server.
 	sed -i "s/'example.org'/'$WP_CEPT_SERVER'/" wp-config.php
 
-	echo "????? ----------------------"
-	echo "$WP_DEVELOP_DIR/src"
-	find "$WP_DEVELOP_DIR/src" -maxdepth 1  # list files in current dirrectory
-	echo "----------------------"
-
 	# Set up database.
 	mysql -e 'CREATE DATABASE wordpress_test;' -uroot
 
@@ -56,28 +51,63 @@ install-wordpress() {
 	fi
 
 	# Update the config to actually load WordPress.
+	# Installed wordPress located in /tmp/wordpress/src ($WP_CORE_DIR)
+	# when wp-config.php in /tmp/wordpress
 	echo "require_once(ABSPATH . 'wp-settings.php');" >> wp-config.php
+
+	# $WP_CORE_DIR
+	# /tmp/wordpress/src
+	# /tmp/wordpress/src/index.php
+	# /tmp/wordpress/src/license.txt
+	# /tmp/wordpress/src/readme.html
+	# /tmp/wordpress/src/wp-activate.php
+	# /tmp/wordpress/src/wp-admin
+	# /tmp/wordpress/src/wp-blog-header.php
+	# /tmp/wordpress/src/wp-comments-post.php
+	# /tmp/wordpress/src/wp-content
+	# /tmp/wordpress/src/wp-cron.php
+	# /tmp/wordpress/src/wp-includes
+	# /tmp/wordpress/src/wp-links-opml.php
+	# /tmp/wordpress/src/wp-load.php
+	# /tmp/wordpress/src/wp-login.php
+	# /tmp/wordpress/src/wp-mail.php
+	# /tmp/wordpress/src/wp-settings.php
+	# /tmp/wordpress/src/wp-signup.php
+	# /tmp/wordpress/src/wp-trackback.php
+	# /tmp/wordpress/src/xmlrpc.php
 
 	# Set up default theme.
 	ln -s "$WP_CORE_DIR/wp-content/themes/twentyseventeen" "$WP_CORE_DIR/wp-content/themes/default"
 
+	echo "????? THEMES ----------------------"
+	echo "$WP_CORE_DIR/wp-content/themes/"
+	find "$WP_CORE_DIR/wp-content/themes" -maxdepth 1  # list files in current dirrectory
+	echo "----------------------"
 
 
 	export PROJECT_DIR=$(pwd)/src
 	export PROJECT_SLUG=$(basename "$(pwd)" | sed 's/^wp-//')
 
+	echo "????? PROJECT_DIR ----------------------"
+	echo "$PROJECT_DIR"
+	find "$PROJECT_DIR" -maxdepth 1  # list files in current dirrectory
+	echo "----------------------"
+	echo "????? PROJECT_SLUG: $PROJECT_SLUG"
+
 	# Set up plugin.
 	ln -s "$PROJECT_DIR" "$WP_CORE_DIR"/wp-content/plugins/"$PROJECT_SLUG"
 
-	# /tmp/wordpress/src/wp-content/plugins
-	cd "$WP_CORE_DIR"/wp-content/plugins/
-	echo "PLUGIN DIR ----------------------"
-	echo "$WP_CORE_DIR/wp-content/plugins/"
-	find . -maxdepth 1  # list files in current dirrectory
 
-	cd "$WP_CORE_DIR"/wp-content/plugins/wordpress
-	echo "PLUGIN > WORDPRESS DIR ----------------------"
-	find . -maxdepth 1  # list files in current dirrectory
+	echo "????? PLUGINS ----------------------"
+	echo "$WP_CORE_DIR/wp-content/plugins/"
+	find "$WP_CORE_DIR/wp-content/plugins" -maxdepth 1  # list files in current dirrectory
+	echo "----------------------"
+
+
+	echo "????? /usr/local/bin ----------------------"
+	find /usr/local/bin -maxdepth 1  # list files in current dirrectory
+	echo "----------------------"
+
 
 	echo "---------------------- Install CLI"
 	# mkdir -p $WP_CLI_BIN_DIR
