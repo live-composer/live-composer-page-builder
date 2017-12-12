@@ -55,6 +55,8 @@ install-wordpress() {
 	# when wp-config.php in /tmp/wordpress
 	echo "require_once(ABSPATH . 'wp-settings.php');" >> wp-config.php
 
+	cat wp-config.php
+
 	# $WP_CORE_DIR
 	# /tmp/wordpress/src
 	# /tmp/wordpress/src/index.php
