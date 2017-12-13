@@ -138,7 +138,7 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) && version_compare( PHP_VERSION, '5.3.0
 	include DS_LIVE_COMPOSER_ABS . '/includes/editor-messages.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/class-dslc-cache.php'; // Simple HTML/CSS caching class.
 	include DS_LIVE_COMPOSER_ABS . '/includes/plugin-updates/lc-license-manager.class.php';
-	include DS_LIVE_COMPOSER_ABS . '/includes/predesigned-section/predesigned-section.php';
+	include DS_LIVE_COMPOSER_ABS . '/includes/predesigned-sections/predesigned-section.php';
 
 	$cap_page = dslc_get_option( 'lc_min_capability_page', 'dslc_plugin_options_access_control' );
 	if ( ! $cap_page ) { $cap_page = 'publish_posts';
@@ -191,10 +191,6 @@ function dslc_disable_old_plugin() {
 			deactivate_plugins( $lc_lite );
 		}
 	}
-
-	// Predesigned Sections
-	LC_Predesigned_Sections::custom_post_type();
-	LC_Predesigned_Sections::add_predesigned_sections_from_xml();
 }
 register_activation_hook( __FILE__, 'dslc_disable_old_plugin' );
 
