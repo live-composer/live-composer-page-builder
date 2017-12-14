@@ -147,13 +147,6 @@ final class DSLC_Scripts {
 	public static function callback_tinymce() {
 		?>
 		<script type="text/javascript">
-			console.log( "window:" ); console.log( window );
-
-			console.log( "parent:" ); console.log( window.parent );
-
-			console.log( "window.parent.previewAreaTinyMCELoaded:" );
-			console.log( window.parent.previewAreaTinyMCELoaded );
-
 			window.parent.previewAreaTinyMCELoaded.call(window);
 		</script>
 		<?php
