@@ -137,7 +137,7 @@
 	/**
 	 * Action - Show/Hide Width Options
 	 */
-	LiveComposer.Builder.PreviewAreaDocument.on( 'click', '.dslca-change-width-module-hook', function(e){
+/* 	LiveComposer.Builder.PreviewAreaDocument.on( 'click', '.dslca-change-width-module-hook', function(e){
 
 		e.preventDefault();
 
@@ -157,14 +157,22 @@
 			jQuery(this).hide();
 			// Remove class that puts module on the very top level.
 			$(this).closest('.dslc-module-front').removeClass('dslca-change-width-active');
-	});
-
+	}); */
 	/**
 	 * Hook - Set Module Width
 	 */
 	LiveComposer.Builder.PreviewAreaDocument.on( 'click', '.dslca-change-width-module-options span', function(){
+		if ( ! jQuery(this).hasClass('dslca-action-disabled') ) {
+			var moduleJQ = jQuery(this).closest('.dslc-module-front');
+			var oldSize = moduleJQ.data('dslc-module-size');
+			var newSize = jQuery(this).data('size');
 
-		dslc_module_width_set( jQuery(this).closest('.dslc-module-front'), jQuery(this).data('size') );
+			// Start expensive function only if the value changed.
+			if (  Number(oldSize) !== Number(newSize) ) {
+				dslc_module_width_set( moduleJQ, newSize );
+			}
+		}
+
 	});
 
 	/**
@@ -440,8 +448,8 @@ function dslc_module_width_set( module, new_width ) {
 	// Add new column class and change size "data"
 	module
 		.removeClass('dslc-1-col dslc-2-col dslc-3-col dslc-4-col dslc-5-col dslc-6-col dslc-7-col dslc-8-col dslc-9-col dslc-10-col dslc-11-col dslc-12-col')
-		.addClass(newClass);
-		// .data('dslc-module-size', new_width);
+		.addClass(newClass)
+		.data('dslc-module-size', new_width);
 		//.addClass('dslca-module-being-edited'); – Deprecated
 
 	// Change module size in element attribute

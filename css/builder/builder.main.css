@@ -398,7 +398,7 @@ body a:focus {
 			.dslca-wp-editor-cancel-hook {
 				background: #78ca4f;
 				border-radius: 3px;
-				color: #fff;
+				color: #fff!important;
 				cursor: pointer;
 				display: inline-block;
 				font-size: 13px;
@@ -1503,7 +1503,12 @@ body a:focus {
 	min-height: 30px;
 }
 
-.dslc-module-front.dslca-change-width-active {
+/* .dslc-module-front.dslca-change-width-active {
+	z-index: 999999;
+} */
+
+/* experimental */
+.dslc-module-front:hover {
 	z-index: 999999;
 }
 
@@ -2082,6 +2087,12 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 				left: 25px;
 				z-index: 99999;
 				width: 122px;
+			}
+
+			/* Show popup when parent icon hovered. */
+			.dslca-change-width-module-hook:hover > .dslca-change-width-module-options,
+			.dslca-change-width-modules-area-hook:hover > .dslca-change-width-modules-area-options{
+				display: block;
 			}
 
 			.dslca-change-width-module-options {

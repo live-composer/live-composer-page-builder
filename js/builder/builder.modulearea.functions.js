@@ -117,24 +117,30 @@
 	 * Hook - Set Width of the Module Area
 	 */
 	LiveComposer.Builder.PreviewAreaDocument.on( 'click', '.dslca-change-width-modules-area-options span', function(){
-
 		// Check if action can be fired
 		if ( !actionAvail() ) return false;
 
 		if ( ! jQuery(this).hasClass('dslca-action-disabled') ) {
-			dslc_modules_area_width_set( jQuery(this).closest('.dslc-modules-area'), jQuery(this).data('size') );
+			var moduleAreaJQ = jQuery(this).closest('.dslc-modules-area');
+			var oldSize = moduleAreaJQ.data('size');
+			var newSize = jQuery(this).data('size');
+
+			// Start expensive function only if the value changed.
+			if (  Number(oldSize) !== Number(newSize) ) {
+				dslc_modules_area_width_set( moduleAreaJQ, newSize );
+			}
 		}
 	});
 
 	/**
-	 * Action - Show/Hide Width Options for the Module Area
+	 * Action - Show/Hide Width Options Popup for the Module Area
 	 */
-	LiveComposer.Builder.PreviewAreaDocument.on( 'click', '.dslca-change-width-modules-area-hook', function(e){
+	/* LiveComposer.Builder.PreviewAreaDocument.on( 'click', '.dslca-change-width-modules-area-hook', function(e){
 
 		e.preventDefault();
 
 		// Check if action can be fired
-		if ( !actionAvail() ) return false;
+		if ( ! actionAvail() ) return false;
 
 		if ( ! jQuery(this).hasClass('dslca-action-disabled') ) {
 
@@ -151,20 +157,19 @@
 				jQuery('.dslca-change-width-modules-area-options', this).show();
 			}
 		}
-	});
-
+	}); */
+/* 
 	LiveComposer.Builder.PreviewAreaDocument.on( 'mouseleave', '.dslca-change-width-modules-area-options', function(e){
 
 		// Hide width seleciton panel.
 		jQuery(this).hide();
 	});
-
+ */
 	/**
 	 * Hook - Add Modules Area
 	 * TODO: Where we use it? Delete maybe?
 	 */
 	LiveComposer.Builder.PreviewAreaDocument.on( 'click', '.dslca-add-modules-area-hook', function(e){
-
 		e.preventDefault();
 
 		// Check if action can be fired
@@ -393,7 +398,6 @@ function dslc_modules_area_width_set( area, newWidth ) {
 	LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();
 
 	if ( LiveComposer.Builder.Flags.panelOpened ) {
-
 		return false;
 	}
 
