@@ -1788,39 +1788,36 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 
 		.dslca-add-modules-section-hook,
 		.dslca-import-modules-section-hook {
-			background: #e5855f;
+			background: #e5855f!important;
 			border-radius: 3px;
 			color: #fff!important;
 			cursor: pointer;
 			display: block;
-			font-size: 15px;
+			font-size: 15px!important;
 			float: left;
-			line-height: 1;
+			line-height: 1!important;
 			padding: 14px 0;
-			text-decoration: none;
-			width: 70%;
+			text-decoration: none!important;
+			width: 70%!important;
+			box-shadow: none!important;
 		}
 
 		.dslca-add-modules-section-hook:hover,
 		.dslca-import-modules-section-hook:hover {
-			background: #FF9162;
-			color: #fff;
+			background: #FF9162!important;
+			color: #fff!important;
 		}
 
-			.dslca-add-modules-section .dslca-icon {
+			.dslca-add-modules-section .dslca-icon,
+			.dslca-import-modules-section .dslca-icon {
 				margin-right: 10px;
-				color: rgba( 255, 255, 255, 0.5 );
+				color: rgba( 255, 255, 255, 0.5 )!important;
 			}
 
 		.dslca-import-modules-section-hook {
 			float: right;
-			width: 28%;
+			width: 28%!important;
 		}
-
-			.dslca-import-modules-section .dslca-icon {
-				margin-right: 10px;
-				color: rgba( 255, 255, 255, 0.5 );
-			}
 
 	/* Main */
 
