@@ -1431,6 +1431,12 @@ body a:focus {
 		margin-left: -10px;
 	}
 
+
+.dslca-module-placeholder,
+.dslca-modules-section-placeholder {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
 .dslca-module-placeholder {
 	position: relative;
 	background: #5890e5;
@@ -1450,9 +1456,9 @@ body a:focus {
 			background: #5890e5;
 			border-radius: 3px 3px 0 0;
 			color: #fff;
-			font-family: 'Open Sans', sans-serif;
-			font-style: 12px;
-			font-weight: bold;
+			font-size: 12px;
+			font-weight: 400;
+			letter-spacing: .5px;
 			/* text-transform: uppercase; */
 			display: inline-block;
 			padding: 5px 10px;
@@ -1489,7 +1495,7 @@ body a:focus {
 	 position: absolute;
 
 	 font-size: 15px;
-	 font-family: 'Open Sans', sans-serif;
+	 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
 .dslc-module-front {
@@ -1728,20 +1734,18 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 	.dslc-modules-area-empty .dslca-no-content {
 		display: block;
 	}
-
+/* 
 	.dslca-no-content-primary {
 		color: #5890e5;
 		display: inline-block;
 		background: rgba( 255, 255, 255, 0.75 );
 		font-size: 15px;
-		font-family: 'Open Sans', sans-serif;
 		line-height: 1;
 		margin: 0;
-		/* text-transform: uppercase; */
 		padding: 13px;
 		border-radius: 3px;
 	}
-
+ */
 		.dslca-no-content .dslca-icon {
 			margin-right: 10px;
 		}
@@ -1770,32 +1774,31 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 
 	/* Button */
 
-	.dslca-add-modules-section {
+	div.dslca-add-modules-section {
 		text-align: center;
 		margin-top: 30px;
-		width: 1180px;
+		width: 80%;
+		max-width: 620px;
 		margin-left: auto;
 		margin-right: auto;
-		max-width: 100%;
 		margin-bottom: 180px;
 		overflow: hidden;
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 	}
 
 		.dslca-add-modules-section-hook,
 		.dslca-import-modules-section-hook {
 			background: #e5855f;
-			/*border: 1px solid #d97a54;*/
 			border-radius: 3px;
 			color: #fff!important;
 			cursor: pointer;
 			display: block;
 			font-size: 15px;
-			font-family: 'Open Sans', sans-serif;
 			float: left;
 			line-height: 1;
 			padding: 14px 0;
 			text-decoration: none;
-			width: 80%;
+			width: 70%;
 		}
 
 		.dslca-add-modules-section-hook:hover,
@@ -1811,7 +1814,7 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 
 		.dslca-import-modules-section-hook {
 			float: right;
-			width: 18%;
+			width: 28%;
 		}
 
 			.dslca-import-modules-section .dslca-icon {
@@ -1931,26 +1934,6 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 	.dslca-modules-section-placeholder .dslca-placeholder-help-text-inner {
 		background: #E5855F;
 	}
-
-		.dslca-placeholder-help-text {
-			position: absolute;
-			left: 0;
-			bottom: 0;
-			right: 0;
-			text-align: center;
-		}
-
-			.dslca-placeholder-help-text-inner {
-				background: #5890e5;
-				border-radius: 3px 3px 0 0;
-				color: #fff;
-				font-family: 'Open Sans', sans-serif;
-				font-style: 12px;
-				font-weight: bold;
-				/* text-transform: uppercase; */
-				display: inline-block;
-				padding: 5px 10px;
-			}
 
 
 /**

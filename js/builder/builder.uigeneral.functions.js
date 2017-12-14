@@ -552,8 +552,8 @@ function dslc_drag_and_drop() {
 						jQuery('body').removeClass('dslca-module-drop-in-progress');
 					}, 700 );
 
-					// "Show" no content text
-					jQuery('.dslca-no-content-primary', modulesArea ).css({ opacity : 1 });
+					// "Show" no content text // Not used anymore?
+					// jQuery('.dslca-no-content-primary', modulesArea ).css({ opacity : 1 });
 
 					// "Show" modules area management
 					jQuery('.dslca-modules-area-manage', modulesArea).css ({ visibility : 'visible' });
@@ -579,8 +579,8 @@ function dslc_drag_and_drop() {
 				jQuery(itemEl).find('.dslca-icon').attr('class', '').attr('class', 'dslca-icon dslc-icon-refresh dslc-icon-spin');
 
 
-				// Hide no content text
-				jQuery('.dslca-no-content-primary', modulesArea).css({ opacity : 0 });
+				// Hide no content text // Not used anymore?
+				// jQuery('.dslca-no-content-primary', modulesArea).css({ opacity : 0 });
 
 				// Hide modules area management
 				jQuery('.dslca-modules-area-manage', modulesArea).css ({ visibility : 'hidden' });
