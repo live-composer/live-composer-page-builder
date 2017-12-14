@@ -200,7 +200,10 @@ body a:focus {
 }
 
 .dslca-container {
-	font-family: 'Open Sans', sans-serif;
+	/* font-family: 'Open Sans', sans-serif; */
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	font-size: 13px;
+
 	bottom: 0;
 	color: #fff;
 	left: 0;
@@ -513,7 +516,6 @@ body a:focus {
 				float: left;
 				background: #3b6fbe;
 				color: #fff;
-				font-family: 'Open Sans', sans-serif;
 				font-size: 17px;
 				line-height: 1;
 				padding: 28px 25px;
@@ -610,8 +612,6 @@ body a:focus {
 		.dslca-module {
 			color: #fff;
 			display: inline-block;
-			font-family: font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-			font-size: 15px;
 			font-weight: 400;
 			line-height: 1;
 			padding: 2px 12px 9px 12px;
@@ -1243,7 +1243,6 @@ body a:focus {
 			cursor: pointer;
 			display: block;
 			float: left;
-			font-family: 'Open Sans', sans-serif;
 			font-size: 15px;
 			line-height: 1;
 			padding: 29px 29px 27px 29px;
@@ -1657,8 +1656,6 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 	border-radius: 3px 6px 6px 3px;
 	cursor: pointer;
 	font-size: 13px;
-	font-weight: 400;
-	font-family: 'Open Sans',sans-serif;
 	float: left;
 	line-height: 1;
 	opacity: 0;
@@ -3695,8 +3692,8 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 	cursor: pointer;
 	display: block;
 	font-size: 11px;
-	font-family: 'Roboto', sans-serif;
-	font-weight: 900;
+	font-weight: 600;
+	letter-spacing: .5px;
 	line-height: 1;
 	padding: 11px 12px;
 	text-transform: uppercase;
@@ -3706,7 +3703,7 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 	margin-left: 5px;
 }
 
-/* Use Open Sans here as Roboto is not available at this point */
+/* No custom font available at this point */
 .dslca-activate-composer-hook {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
