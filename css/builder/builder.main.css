@@ -210,9 +210,14 @@ body a:focus {
 	position: fixed;
 	right: 0;
 	z-index: 99999;
-	-webkit-transition: bottom 0.3s;
-	-moz-transition: bottom 0.3s;
-	transition: bottom 0.3s;
+
+	transition: bottom 0.3s, opacity 0.35s;
+
+	opacity: .9;
+}
+
+.dslca-container:hover {
+	opacity: 1;
 }
 
 .dslca-container,
@@ -465,7 +470,10 @@ body a:focus {
 
 	.dslca-sections {
 		/*background: #5890e5;*/
-		background: #4A7AC3;
+		/* background: #4A7AC3;  gut */
+		background: rgba(237, 239, 240, 0.91);
+		box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.05), 0 -1px 4px 0 rgba(39, 40, 45, 0.12);
+
 		box-sizing: border-box;
 	}
 
@@ -514,8 +522,13 @@ body a:focus {
 			.dslca-section-title {
 				display: block;
 				float: left;
-				background: #3b6fbe;
-				color: #fff;
+				/* background: #3b6fbe; gut */
+				background: #fff;
+				/* color: #fff; gut  */
+				color: #555d66;
+
+				border-right: 1px solid #dadfe2;
+
 				font-size: 17px;
 				line-height: 1;
 				padding: 28px 25px;
@@ -543,7 +556,7 @@ body a:focus {
 					}
 
 					.dslca-section-title-filter .dslca-icon {
-						color: rgba( 255, 255, 255, 0.5 );
+						color: #A2A7AB;
 						margin-left: 10px;
 						vertical-align: top;
 					}
@@ -610,12 +623,16 @@ body a:focus {
 	}
 
 		.dslca-module {
-			color: #fff;
+			/* background: #5890e5; gut */
+			background: #fff;
+
+			/* color: #fff;  gut */
+			color: #555d66;
+
 			display: inline-block;
 			font-weight: 400;
 			line-height: 1;
 			padding: 2px 12px 9px 12px;
-			background: #5890e5;
 			margin: 4px 2px;
 			box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15), -1px 1px 0px 0 rgba(255, 255, 255, 0.05) inset;
 			border-radius: 2px;
@@ -708,13 +725,15 @@ body a:focus {
 		}
 
 			.dslca-module .dslca-icon {
-				color: #AECEF9;
+				/* color: #AECEF9; gut */
+				opacity: .6;
+
 				vertical-align: top;
 				font-size: 20px;
 				display: block;
 				line-height: 41px;
 				text-align: center;
-				text-shadow: 0px 1px rgba(0, 0, 0, 0.05);
+				/* text-shadow: 0px 1px rgba(0, 0, 0, 0.05); gut */
 			}
 
 			.dslca-module.ui-draggable-dragging .dslca-icon {
@@ -2330,16 +2349,12 @@ body.rtl .dslca-modules-area-placeholder {
 		}
 
 .dslca-section-scroller-fade {
-	background: -moz-linear-gradient(left,  rgba(88,144,229,0) 0%, rgba(70, 116, 185,1) 100%);
-	background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(88,144,229,0)), color-stop(100%,rgba(70, 116, 185,1)));
-	background: -webkit-linear-gradient(left,  rgba(88,144,229,0) 0%,rgba(70, 116, 185,1) 100%);
-	background: -o-linear-gradient(left,  rgba(88,144,229,0) 0%,rgba(70, 116, 185,1) 100%);
-	background: -ms-linear-gradient(left,  rgba(88,144,229,0) 0%,rgba(70, 116, 185,1) 100%);
-	background: linear-gradient(to right,  rgba(88,144,229,0) 0%,rgba(70, 116, 185,1) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00004799', endColorstr='#5890e5',GradientType=1 );
+	/* background: linear-gradient(to right,  rgba(88,144,229,0) 0%,rgba(70, 116, 185,1) 100%); gut  */
+	background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%,rgb(154, 154, 154) 100%);
+
 	position: absolute;
 	right: 80px;
-	width: 20px;
+	width: 10px;
 	bottom: 0;
 	top: 0;
 	z-index: 1;
@@ -2369,7 +2384,9 @@ body.rtl .dslca-modules-area-placeholder {
 		bottom: 0;
 		text-decoration: none;
 		outline: none!important;
-		background: rgba(0, 0, 0, 0.2);
+		/* background: rgba(0, 0, 0, 0.2); gut */
+		background: #fff;
+
 	}
 
 	.dslca-section-scroller-nav > a:hover {
@@ -2388,7 +2405,7 @@ body.rtl .dslca-modules-area-placeholder {
 
 		.dslca-section-scroller-prev .dslca-icon,
 		.dslca-section-scroller-next .dslca-icon {
-			color: #fff;
+			/* color: #fff; */
 			/*display: block;*/
 			/*text-align: center;*/
 			/*margin-top: 20px;*/
