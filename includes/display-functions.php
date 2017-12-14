@@ -113,11 +113,11 @@ function dslc_display_composer() {
 					</a><!-- .dslca-save-draft-composer -->
 
 					<!-- Hide/Show -->
-					<a href="#" class="dslca-show-composer-hook"><span class="dslca-icon dslc-icon-arrow-up"></span><?php _e( 'Show Editor', 'live-composer-page-builder' ); ?></a>
-					<a href="#" class="dslca-hide-composer-hook"><span class="dslca-icon dslc-icon-arrow-down"></span><?php _e( 'Hide Editor', 'live-composer-page-builder' ); ?></a>
+					<a href="#" class="dslca-show-composer-hook"><span class="dslca-icon dslc-icon-arrow-up"></span><?php _e( 'Show', 'live-composer-page-builder' ); ?></a>
+					<a href="#" class="dslca-hide-composer-hook"><span class="dslca-icon dslc-icon-arrow-down"></span><?php _e( 'Hide', 'live-composer-page-builder' ); ?></a>
 
 					<!-- Disable -->
-					<a href="<?php echo $link; ?>" class="dslca-close-composer-hook"><span class="dslca-icon dslc-icon-remove"></span><?php _e( 'Disable Editor', 'live-composer-page-builder' ); ?></a>
+					<a href="<?php echo $link; ?>" class="dslca-close-composer-hook"><span class="dslca-icon dslc-icon-remove"></span><?php _e( 'Close', 'live-composer-page-builder' ); ?></a>
 
 					<div class="dslc-clear"></div>
 
@@ -345,10 +345,10 @@ function dslc_display_composer() {
 					<div class="dslca-pseudo-actions">
 
 						<!-- Hide/Show -->
-						<a href="#" class="dslca-pseudo-hide-composer-hook"><span class="dslca-icon dslc-icon-arrow-down"></span>Hide Editor</a>
+						<a href="#" class="dslca-pseudo-hide-composer-hook"><span class="dslca-icon dslc-icon-arrow-down"></span>Hide</a>
 
 						<!-- Disable -->
-						<a href="#" class="dslca-pseudo-close-composer-hook"><span class="dslca-icon dslc-icon-remove"></span>Disable Editor</a>
+						<a href="#" class="dslca-pseudo-close-composer-hook"><span class="dslca-icon dslc-icon-remove"></span>Close</a>
 
 						<div class="dslc-clear"></div>
 
@@ -466,11 +466,9 @@ function dslc_display_modules( $page_id ) {
 				$module_non_active = '';
 			}
 
-			?>
-				<div class="dslca-module dslca-scroller-item dslca-origin dslca-origin-<?php echo esc_attr( $dslc_module['origin'] ); ?> <?php if ( isset( $dslc_module['exclude'] ) ) { echo 'dslca-exclude'; } ?> <?php echo $module_non_active; ?>" data-origin="<?php echo esc_attr( $dslc_module['origin'] ); ?>" data-id="<?php echo esc_attr( $dslc_module['id'] ); ?>">
+			?><div class="dslca-module dslca-scroller-item dslca-origin dslca-origin-<?php echo esc_attr( $dslc_module['origin'] ); ?> <?php if ( isset( $dslc_module['exclude'] ) ) { echo 'dslca-exclude'; } ?> <?php echo $module_non_active; ?>" data-origin="<?php echo esc_attr( $dslc_module['origin'] ); ?>" data-id="<?php echo esc_attr( $dslc_module['id'] ); ?>">
 					<span class="dslca-icon dslc-icon-<?php echo esc_attr( $dslc_module['icon'] ); ?>"></span><span class="dslca-module-title"><?php echo esc_html( $dslc_module['title'] ); ?></span>
-				</div><!-- .dslc-module -->
-			<?php
+				</div><?php
 
 		}
 	} else {

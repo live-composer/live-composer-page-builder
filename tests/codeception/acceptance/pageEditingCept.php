@@ -24,7 +24,7 @@ $I->click( 'Edit in Live Composer' );
 $I->see( 'Elements');
 $I->see( 'Info Box');
 $I->see( 'Publish Changes');
-$I->see( 'Disable Editor');
+$I->see( 'Close');
 
 # switch to editing frame.
 $I->switchToIframe( 'page-builder-frame' );
