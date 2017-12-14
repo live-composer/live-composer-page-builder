@@ -158,7 +158,7 @@ jQuery(document).ready(function($){
 
 		dslc_module_options_confirm_changes(function(){
 
-			LiveComposer.Builder.UI.initInlineEditors({withRemove:true});
+			// LiveComposer.Builder.UI.initInlineEditors({withRemove:true});
 			LiveComposer.Builder.UI.unloadOptionsDeps();
 			LiveComposer.Builder.Flags.panelOpened = false;
 
@@ -181,7 +181,7 @@ jQuery(document).ready(function($){
 
 		dslc_module_options_cancel_changes(function(){
 
-			LiveComposer.Builder.UI.initInlineEditors({withRemove:true});
+			// LiveComposer.Builder.UI.initInlineEditors({withRemove:true});
 			LiveComposer.Builder.UI.unloadOptionsDeps();
 			LiveComposer.Builder.Flags.panelOpened = false;
 
@@ -199,17 +199,13 @@ jQuery(document).ready(function($){
 (function() {
 
 	var $ = jQuery;
-
 	var self = LiveComposer.Builder;
-
 	LiveComposer.Builder.Helpers.colorpickers = [];
-
+/*
 	LiveComposer.Builder.UI.initInlineEditors = function(params){
-
 		params = params || {};
 
 		if ( params.withRemove == true ) {
-
 			try {
 				LiveComposer.Builder.PreviewAreaWindow.tinyMCE.remove();
 			} catch(err) {
@@ -235,9 +231,9 @@ jQuery(document).ready(function($){
 					{title: 'Header 6', format: 'h6'},
 			  ],
 			toolbar: 'styleselect | bold italic blockquote | removeformat | bullist numlist '
-		}); /* link unlink */
+		});
 	}
-
+*/
 	/* Destroy instanced of sliders, color pickers and other temporary elements */
 	LiveComposer.Builder.UI.clearUtils = function() {
 

@@ -24,10 +24,14 @@ function dslca_publish_event( eventName, eventData ) {
 /**
  * Scroll editing page to the content page area (skipping header section).
  *
- * Don't user document.ready
+ * Don't use document.ready
  * as we need all styles/images loaded before scrolling.
  */
+/*
+Too slow.
+
 jQuery(window).load(function($) {
+
 	var mainContentBlock = jQuery('#dslc-main');
 	// Condition fixes issues/756.
 	if ( mainContentBlock.length ) {
@@ -39,3 +43,4 @@ jQuery(window).load(function($) {
 		}
 	}
 });
+*/

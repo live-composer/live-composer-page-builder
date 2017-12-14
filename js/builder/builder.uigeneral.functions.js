@@ -72,7 +72,7 @@ window.previewAreaTinyMCELoaded = function(){
 	// Disable WP admin bar in editing mode
 	jQuery('#wpadminbar', LiveComposer.Builder.PreviewAreaDocument).remove();
 
-	LiveComposer.Builder.UI.initInlineEditors();
+	// LiveComposer.Builder.UI.initInlineEditors();
 	dslc_fix_contenteditable();
 
 	var mainDraggable = LiveComposer.Builder.PreviewAreaDocument.find("#dslc-main").eq(0)[0];
@@ -567,7 +567,7 @@ function dslc_drag_and_drop() {
 					// Show publish
 					dslc_show_publish_button();
 
-					LiveComposer.Builder.UI.initInlineEditors();
+					// LiveComposer.Builder.UI.initInlineEditors();
 				});
 
 				// Loading animation

@@ -114,7 +114,6 @@ jQuery(document).ready(function(){
 			},
 			url: ajaxurl,
 		}).done(function (response) {
-			console.log("response:"); console.log(response);
 			if (response) {
 				// Update DIV attribute with a new status.
 				parentEl.setAttribute('data-extension-status', response);

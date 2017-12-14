@@ -38,8 +38,6 @@ jQuery(document).on('click', '.lc-activate-plugin', function (e) {
  */
 var showPopupMessage = function (message, style, delay) {
 
-	console.log('showPopupMessage');
-
 	if (undefined === message) return;
 	if (undefined === style || '' === style) var style = 'normal';
 	if (undefined === delay) var delay = 4000;

@@ -279,7 +279,7 @@
 		}
 	});
 
-	// Editable Content
+	// Editable Contents
 	LiveComposer.Builder.PreviewAreaDocument.on('blur', '.dslca-editable-content', function() {
 
 		if ( ! jQuery('body').hasClass( 'dslca-composer-hidden' ) && jQuery(this).data('type') == 'simple' ) {
@@ -509,7 +509,7 @@ function dslc_module_options_show( moduleID ) {
 	// Hide the publish button
 	dslc_hide_publish_button();
 
-	LiveComposer.Builder.UI.initInlineEditors();
+	// LiveComposer.Builder.UI.initInlineEditors();
 
 	// Set up backup
 	var moduleBackup = jQuery('.dslca-module-options-front', dslcModule).children().clone();
