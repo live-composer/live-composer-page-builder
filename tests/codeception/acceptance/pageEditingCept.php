@@ -23,7 +23,7 @@ $I->click( 'View page' );
 $I->click( 'Edit in Live Composer' );
 $I->see( 'Elements');
 $I->see( 'Info Box');
-$I->see( 'Publish Changes');
+$I->waitForElement( '.dslca-save-composer-helptext', 10); // secs
 $I->see( 'Close');
 
 # switch to editing frame.
@@ -51,7 +51,8 @@ $I->click('Publish Changes');
 $I->waitForElementNotVisible('.dslca-save-composer', 10); // secs
 $I->click('.dslca-close-composer-hook'); // DISABLE EDITOR
 // Click 'Confirm'
-$I->click('.dslca-prompt-modal-active .dslca-prompt-modal-confirm-hook');
+// If Publish Changes clicked before saving > users will see no confirmation popup.
+// $I->click('.dslca-prompt-modal-active .dslca-prompt-modal-confirm-hook');
 
 // Check button rendered on Front-End
 $I->waitForElement('.dslc-module-DSLC_Button', 10); // LC code import takes some time.
