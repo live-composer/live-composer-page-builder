@@ -1540,7 +1540,7 @@ class DSLC_Widgets extends DSLC_Module {
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		// Cache calculated array in WP Object Cache.
-		wp_cache_add( 'dslc_options_' . $this->module_id, $dslc_options ,'dslc_modules' );
+		wp_cache_add( 'dslc_options_' . $this->module_id, $dslc_options, 'dslc_modules' );
 
 		return apply_filters( 'dslc_module_options', $dslc_options, $this->module_id );
 
