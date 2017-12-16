@@ -29,7 +29,7 @@ final class DSLC_Upgrade {
 
 			self::update_1_3();
 		}
-		*/
+		 */
 
 		// Update versions update history with new version.
 		if ( ! in_array( $curr_version, $versions_log ) ) {

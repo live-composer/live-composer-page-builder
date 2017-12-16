@@ -2694,8 +2694,8 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 	}
 
 				/**
-						 * Link or not
-						 */
+				 * Link or not
+				 */
 
 				$link_to_single = true;
 

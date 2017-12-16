@@ -555,17 +555,17 @@ function dslc_filter_content( $content ) {
 	if ( is_search() ) {
 
 		$args = array(
-		    'post_type'  => 'dslc_templates',
-		    'meta_query' => array(
+			'post_type'  => 'dslc_templates',
+			'meta_query' => array(
 				array(
-				    'key'     => 'dslc_template_for',
-				    'value'   => 'search_results',
+					'key'     => 'dslc_template_for',
+					'value'   => 'search_results',
 				),
 				array(
-				    'key'     => 'dslc_template_type',
-				    'value'   => 'default',
+					'key'     => 'dslc_template_type',
+					'value'   => 'default',
 				),
-		    ),
+			),
 		);
 
 		$query = get_posts( $args );

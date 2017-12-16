@@ -900,8 +900,8 @@ class DSLC_Info_Box extends DSLC_Module {
 			),
 
 			/**
-			* Image
-			*/
+			 * Image
+			 */
 
 			 array(
 				'label' => __( 'Image - File', 'live-composer-page-builder' ),

@@ -48,7 +48,7 @@ function dslc_st_template_switch() {
 			include( $return_template );
 
 			// Bye bye
-        	exit();
+			exit();
 
 		}
 
@@ -452,7 +452,7 @@ function dslc_tp_remove_template_from_meta( $template_to_remove, $post_id_to_kee
 
 				// Remove value from the array.
 				if ( ( $key = array_search( $template_to_remove, $dslc_template_for ) ) !== false ) {
-				    unset( $dslc_template_for[ $key ] );
+					unset( $dslc_template_for[ $key ] );
 				}
 
 				// Put back updated value for 'dslc_template_for' custom field.
