@@ -519,4 +519,4 @@ function dslc_filter_textarea( $content ) {
 	return $content;
 }
 
-add_filter( 'dslc_before_render', 'dslc_filter_textarea' );
+add_filter( 'dslc_text_block_render', 'dslc_filter_textarea' );

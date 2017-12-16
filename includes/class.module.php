@@ -2117,9 +2117,9 @@ class DSLC_Module {
 
 			<?php
 				// If Live Composer in editing mode: output <style> block for the current module.
-			if ( DS_LIVE_COMPOSER_ACTIVE && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) : ?>
+			if ( DS_LIVE_COMPOSER_ACTIVE && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) :
 
-				<style type="text/css" id="css-for-dslc-module-<?php echo esc_attr( $options['module_instance_id'] ); ?>"><?php
+				echo '<style type="text/css" id="css-for-dslc-module-' . esc_attr( $options['module_instance_id'] ) . '">';
 
 				$options_arr = $this->options();
 
@@ -2142,7 +2142,9 @@ class DSLC_Module {
 					// echo $dslc_css_style; // <– old method using globals.
 				}
 
-				?></style>
+				echo '</style>';
+
+				?>
 
 				<div class="dslca-module-manage">
 				<span class="dslca-module-manage-line"></span>

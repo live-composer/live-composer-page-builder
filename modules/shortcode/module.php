@@ -21,21 +21,21 @@ class DSLC_Shortcode extends DSLC_Module {
 	 *
 	 * @var string
 	 */
-	var $module_id;
+	public $module_id;
 
 	/**
 	 * Module label to show in the page builder
 	 *
 	 * @var string
 	 */
-	var $module_title;
+	public $module_title;
 
 	/**
 	 * Module icon name (FontAwesome)
 	 *
 	 * @var string
 	 */
-	var $module_icon;
+	public $module_icon;
 
 	/**
 	 * Section in the modules panel that includes this module
@@ -43,7 +43,7 @@ class DSLC_Shortcode extends DSLC_Module {
 	 *
 	 * @var string
 	 */
-	var $module_category;
+	public $module_category;
 
 	/**
 	 * Construct
@@ -2913,7 +2913,7 @@ class DSLC_Shortcode extends DSLC_Module {
 			$output_content = '<div class="dslc-notification dslc-green">' . __( 'Save and refresh the page to display the module safely.', 'live-composer-page-builder' ) . '</div>';
 		}
 
-		echo apply_filters( 'dslc_before_render', $output_content );
+		echo apply_filters( 'dslc_text_block_render', $output_content );
 
 		?>
 

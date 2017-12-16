@@ -39,7 +39,7 @@ class DSLC_Cache {
 	 * ]
 	 */
 
-	function __construct( $cache_type = false ) {
+	function __construct( $cache_type = '' ) {
 		if ( ! self::$init ) {
 			$caching_engine_setting = dslc_get_option( 'lc_caching_engine', 'dslc_plugin_options_performance' );
 

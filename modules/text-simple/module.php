@@ -8,10 +8,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class DSLC_Text_Simple extends DSLC_Module {
 
-	var $module_id;
-	var $module_title;
-	var $module_icon;
-	var $module_category;
+	public $module_id;
+	public $module_title;
+	public $module_icon;
+	public $module_category;
 
 	function __construct() {
 
@@ -5015,7 +5015,7 @@ if ( $dslc_active ) {
 }
 
 				$output_content = stripslashes( $options['content'] );
-				echo apply_filters( 'dslc_before_render', $output_content );
+				echo apply_filters( 'dslc_text_block_render', $output_content );
 
 if ( $dslc_active ) {
 	?></div><!-- .dslca-editable-content --><?php

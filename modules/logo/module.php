@@ -24,21 +24,21 @@ class DSLC_Logo extends DSLC_Module {
 	 *
 	 * @var string
 	 */
-	var $module_id;
+	public $module_id;
 
 	/**
 	 * Module label to show in the page builder
 	 *
 	 * @var string
 	 */
-	var $module_title;
+	public $module_title;
 
 	/**
 	 * Module icon name (FontAwesome)
 	 *
 	 * @var string
 	 */
-	var $module_icon;
+	public $module_icon;
 
 	/**
 	 * Section in the modules panel that includes this module
@@ -46,7 +46,7 @@ class DSLC_Logo extends DSLC_Module {
 	 *
 	 * @var string
 	 */
-	var $module_category;
+	public $module_category;
 
 	/**
 	 * Construct

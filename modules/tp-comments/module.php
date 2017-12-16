@@ -10,10 +10,10 @@ include DS_LIVE_COMPOSER_ABS . '/modules/tp-comments/functions.php';
 
 class DSLC_TP_Comments extends DSLC_Module {
 
-	var $module_id;
-	var $module_title;
-	var $module_icon;
-	var $module_category;
+	public $module_id;
+	public $module_title;
+	public $module_icon;
+	public $module_category;
 
 	function __construct() {
 

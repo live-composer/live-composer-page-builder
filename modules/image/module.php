@@ -8,10 +8,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class DSLC_Image extends DSLC_Module {
 
-	var $module_id;
-	var $module_title;
-	var $module_icon;
-	var $module_category;
+	public $module_id;
+	public $module_title;
+	public $module_icon;
+	public $module_category;
 
 	function __construct() {
 
@@ -894,13 +894,13 @@ class DSLC_Image extends DSLC_Module {
 							<div class="dslca-editable-content" data-id="custom_text" data-type="simple" <?php if ( $dslc_is_admin ) { echo 'contenteditable';} ?>>
 								<?php
 								$output_content = stripslashes( $options['custom_text'] );
-								echo apply_filters( 'dslc_before_render', $output_content );
+								echo apply_filters( 'dslc_text_block_render', $output_content );
 								?>
 							</div>
 						<?php else : ?>
 							<?php
 							$output_content = stripslashes( $options['custom_text'] );
-							echo apply_filters( 'dslc_before_render', $output_content );
+							echo apply_filters( 'dslc_text_block_render', $output_content );
 							?>
 						<?php endif; ?>
 

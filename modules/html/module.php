@@ -8,10 +8,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class DSLC_Html extends DSLC_Module {
 
-	var $module_id;
-	var $module_title;
-	var $module_icon;
-	var $module_category;
+	public $module_id;
+	public $module_title;
+	public $module_icon;
+	public $module_category;
 
 	function __construct() {
 
@@ -3511,7 +3511,7 @@ if ( $render_code ) {
 	$output_content = '<div class="dslc-notification dslc-green">' . __( 'Save and refresh the page to display the module safely.', 'live-composer-page-builder' ) . '</div>';
 }
 
-				echo apply_filters( 'dslc_before_render', $output_content );
+				echo apply_filters( 'dslc_text_block_render', $output_content );
 
 			?></div><?php
 

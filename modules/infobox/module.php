@@ -8,10 +8,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class DSLC_Info_Box extends DSLC_Module {
 
-	var $module_id;
-	var $module_title;
-	var $module_icon;
-	var $module_category;
+	public $module_id;
+	public $module_title;
+	public $module_icon;
+	public $module_category;
 
 	function __construct() {
 
@@ -3017,14 +3017,14 @@ endif; ?>
 										<div class="dslca-editable-content inline-editor" data-type="simple" data-id="content">
 											<?php
 											$output_content = stripslashes( $options['content'] );
-											echo apply_filters( 'dslc_before_render', $output_content );
+											echo apply_filters( 'dslc_text_block_render', $output_content );
 											?>
 										</div><!-- .dslca-editable-content -->
 										<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook"><?php _e( 'Open in WP Editor', 'live-composer-page-builder' ); ?></span></div>
 									<?php else : ?>
 										<?php
 										$output_content = stripslashes( $options['content'] );
-										echo apply_filters( 'dslc_before_render', $output_content );
+										echo apply_filters( 'dslc_text_block_render', $output_content );
 										?>
 									<?php endif; ?>
 								</div><!-- .dslc-info-box-content -->

@@ -26,28 +26,28 @@ class DSLC_Widgets extends DSLC_Module {
 	 *
 	 * @var integer
 	 */
-	var $module_id;
+	public $module_id;
 
 	/**
 	 * Module Title
 	 *
 	 * @var string
 	 */
-	var $module_title;
+	public $module_title;
 
 	/**
 	 * Module Icon
 	 *
 	 * @var string
 	 */
-	var $module_icon;
+	public $module_icon;
 
 	/**
 	 * Module Section in LC UI
 	 *
 	 * @var string
 	 */
-	var $module_category;
+	public $module_category;
 
 	/**
 	 * Class constructor

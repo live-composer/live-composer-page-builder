@@ -8,11 +8,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class DSLC_Accordion extends DSLC_Module {
 
-	var $module_id;
-	var $module_title;
-	var $module_icon;
-	var $module_category;
-	var $handle_like;
+	public $module_id;
+	public $module_title;
+	public $module_icon;
+	public $module_category;
+	public $handle_like;
 
 	function __construct() {
 
@@ -1255,7 +1255,7 @@ class DSLC_Accordion extends DSLC_Module {
 									<div class="dslca-editable-content"<?php if ( $dslc_is_admin ) { echo ' data-exportable-content';} ?>>
 										<?php
 											$accordion_content_output = stripslashes( $accordion_content );
-											echo apply_filters( 'dslc_before_render', $accordion_content_output );
+											echo apply_filters( 'dslc_text_block_render', $accordion_content_output );
 										?>
 									</div>
 									<?php if ( $dslc_is_admin ) : ?>
