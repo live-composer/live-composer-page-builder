@@ -1,3 +1,13 @@
+# Hosts all your test and deployment configuration.
+# https://scrutinizer-ci.com/docs/configuration/build
+build:
+    dependencies:
+        # Runs before inferred commands
+        before:
+            # If Wordpress itself is not a dependency of your project, Scrutinizer will not recognize WP project.
+            - 'composer require --dev johnpbloch/wordpress'
+
+# Allows to customize how your code is analyzed.
 checks:
   php:
     verify_argument_usable_as_reference: false
@@ -12,7 +22,10 @@ checks:
     coding_standard:
         name: WordPress
 
+# Defines which files to analyze.
 filter: {  }
+
+# Defines how your code should generally look like.
 coding_style:
     php:
         indentation:
