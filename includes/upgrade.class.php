@@ -23,6 +23,10 @@ final class DSLC_Upgrade {
 			$versions_log[] = get_option( 'dslc_version', array() );
 		}
 
+		if ( ! in_array( '1.3.10', $versions_log ) ) {
+			self::update_1_3_10();
+		}
+
 		/** Migration usage example
 
 		if ( ! in_array( '1.3', $versions_log ) ) {
@@ -51,4 +55,12 @@ final class DSLC_Upgrade {
 		// Some code on version 1.3.
 		// Update_option( 'dslc_version','1.3' );
 	}*/
+
+	public static function update_1_3_10() {
+
+		// Update upsell messages in the editing interface.
+		$editor_messages = new LC_Editor_Messages();
+		$editor_messages->delete_all_messages();
+		$editor_messages->on_plugin_install();
+	}
 }

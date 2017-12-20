@@ -98,38 +98,40 @@ class LC_Editor_Messages {
 	}
 
 	/**
+	 * Delete all messages
+	 */
+	public function delete_all_messages() {
+
+		update_option( 'dslc_editormessages', array() );
+	}
+
+	/**
 	 * Plugin install
 	 */
 	public function on_plugin_install() {
 		$default_messages = array(
 			'woo-integration' => array(
-				'text' => 'Our WooCommerce integration add-on is almost ready for realese. Price growths with every update. <strong>Buy it today to save 30%!</strong>',
-				'link' => 'https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=editing-sreen&utm_medium=editor-messages&utm_campaign=woo-integration',
+				'text' => '<strong>Yes!</strong> Live Composer now fully supports WooCommerce. <b class="cta">Learn More</b>',
+				'link' => 'https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=editing-screen&utm_medium=editor-messages&utm_campaign=woo-integration',
 				'icon' => 'dslc-icon-shopping-cart',
 				'color' => '',
 			),
 			'all-extensions' => array(
-				'text' => 'Extend the page builder with our official extensions bundle. Save $10 with <strong>10USDOFF</strong> coupon.',
-				'link' => 'https://livecomposerplugin.com/downloads/bundle-buy-all-extensions/?utm_source=editing-sreen&utm_medium=editor-messages&utm_campaign=all-extensions',
-				'icon' => 'dslc-icon-cubes',
+				'text' => '<strong>Did you see it?</strong> Our new extensions pack is huge. ACF + CPT + MegaMenu + 9 more add-ons. <b class="cta">Learn More</b>',
+				'link' => 'https://livecomposerplugin.com/downloads/bundle-buy-all-extensions/?utm_source=editing-screen&utm_medium=editor-messages&utm_campaign=add-ons',
+				'icon' => 'dslc-icon-briefcase',
 				'color' => '',
 			),
-			'779590' => array(
-				'text' => 'Live Composer developers recommend WP Engine for their best-in-class architecture to keep WordPress fast and secure.',
-				'link' => 'http://www.shareasale.com/r.cfm?B=779590&U=871461&M=41388&urllink=',
-				'icon' => 'dslc-icon-codepen ',
+			'peace-1' => array(
+				'text' => 'Peace · Pace · Paix · Paz · Pokój · Мир · Mír · Mier · Frieden · Fred · Vrede <b class="cta">Decrypt It</b>',
+				'link' => 'https://livecomposerplugin.com/peace',
+				'icon' => 'dslc-icon-globe',
 				'color' => '',
 			),
-			'965751' => array(
-				'text' => 'Do you need high-quality website content fast? Get $20 free joining bonus at Contentmart.com USE CODE: <strong>JOIN20</strong>',
-				'link' => 'http://www.shareasale.com/r.cfm?B=965751&U=871461&M=65777&urllink=',
-				'icon' => 'dslc-icon-pencil',
-				'color' => '',
-			),
-			'381388' => array(
-				'text' => 'LinkFool! We build natural links, each month, to help our customers grow their SEO rankings without fear of being banned by the search engines.',
-				'link' => 'http://www.shareasale.com/r.cfm?B=381388&U=871461&M=35654&urllink=',
-				'icon' => 'dslc-icon-link',
+			'peace-2' => array(
+				'text' => 'Barış · Béke · Kedamaian · Hasîtî · Ειρήνη · 和平 · 平和 · שָׁלוֹם · سلام · สันติภาพ · शान्ति <b class="cta">Word Study</b>',
+				'link' => 'https://livecomposerplugin.com/peace',
+				'icon' => 'dslc-icon-child',
 				'color' => '',
 			),
 		);
@@ -188,7 +190,7 @@ class LC_Editor_Messages {
 	 */
 	public function print_messages() {
 	?>
-	    <div class="dslc-editor-messages-section">
+	    <div class="dslc-editor-messages-section-122017">
 	    	<a href="#" class="dslc-editor-messages-title"><?php echo __( 'Live Composer Updates', 'live-composer-page-builder' ); ?></a>
 	    	<a href="#" data-can-hide="<?php echo $this->premium_user; ?>" class="dslc-editor-messages-hide"><span class="dslc-icon dslc-icon-remove"></span><?php echo __( 'Hide this', 'live-composer-page-builder' ); ?></a>
 	    	<ul id="editor-messages">

@@ -73,10 +73,21 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 
 == Changelog ==
 
-Upcoming Releases:
+= Merry Christmas & Happy New Year =
 
-* [Please, report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
-* [You can download any previous version here](https://github.com/live-composer/live-composer-page-builder/releases)
+[Peace](https://livecomposerplugin.com/peace) · [Pace](https://livecomposerplugin.com/peace) · [Paix](https://livecomposerplugin.com/peace) · [Paz](https://livecomposerplugin.com/peace) · [Pokój](https://livecomposerplugin.com/peace) · [Мир](https://livecomposerplugin.com/peace) · [Mír](https://livecomposerplugin.com/peace) · [Mier](https://livecomposerplugin.com/peace) · [Frieden](https://livecomposerplugin.com/peace) · [Fred](https://livecomposerplugin.com/peace) · [Vrede](https://livecomposerplugin.com/peace) · [Barış](https://livecomposerplugin.com/peace) · [Béke](https://livecomposerplugin.com/peace) · [Kedamaian](https://livecomposerplugin.com/peace) · [Hasîtî](https://livecomposerplugin.com/peace) · [Ειρήνη](https://livecomposerplugin.com/peace) · [和平](https://livecomposerplugin.com/peace) · [平和](https://livecomposerplugin.com/peace) · [שָׁלוֹם](https://livecomposerplugin.com/peace) · [سلام](https://livecomposerplugin.com/peace) · [สันติภาพ](https://livecomposerplugin.com/peace) · [शान्ति](https://livecomposerplugin.com/peace)
+
+
+= 1.3.10 - December 20th 2017 =
+
+= FOR OUR PRO USERS: =
+* 🦊 Live Composer now fully supports WooCommerce. [Check out our new extensions for this.](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=update-notice&utm_campaign=woo-integration)
+* 👀 Did you see it? [Our new extensions pack is huge!](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=update-notice&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
+
+= FOUND A BUG? =
+* 🐛 [Please, report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
+* ⌛ [You can download any previous version here](https://github.com/live-composer/live-composer-page-builder/releases)
+
 
 = 1.3.9 - November 27th 2017 =
 

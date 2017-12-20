@@ -3455,7 +3455,7 @@ body.dslca-composer-hidden .dslca-container.active-message-panel {
 	margin-bottom: 0;
 }
 
-body.dslca-composer-hidden .dslc-editor-messages-section {
+body.dslca-composer-hidden .dslc-editor-messages-section-122017 {
 	display: none !important;
 }
 
@@ -4245,7 +4245,7 @@ div#scroller-stopper {
 	margin-bottom: 40px;
 }
 
-.dslc-editor-messages-section {
+.dslc-editor-messages-section-122017 {
 	position: fixed;
 	bottom: 0;
 	width: 100%;
@@ -4287,8 +4287,8 @@ a.dslc-editor-messages-title:hover {
     position: relative;
     padding: 13px 20px 11px 50px !important;
     margin: 0;
-    line-height: 1;
-    font-size: 16px;
+    line-height: 16px;
+    font-size: 14px;
 }
 
 #editor-messages a {
@@ -4303,6 +4303,21 @@ a.dslc-editor-messages-title:hover {
 
 #editor-messages strong {
 	font-weight: 500;
+}
+
+#editor-messages .cta {
+	font-size: 11px;
+	font-weight: 500;
+	background:#5A92E2;
+	color: #fff;
+	text-transform: uppercase;
+	letter-spacing: .5px;
+	display: inline-block;
+	padding: 4px 10px;
+	position: absolute;
+	border-radius: 3px;
+	margin-left: 14px;
+	margin-top: -4px;
 }
 
 #editor-messages .dslc-icon {
