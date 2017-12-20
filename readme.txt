@@ -3,7 +3,7 @@ Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page, page builder plugin, drag-n-drop page builder
 Requires at least: 4.7
 Tested up to: 4.9
-Stable tag: 1.3.9
+Stable tag: 1.3.10
 License: GPLv3
 
 Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
@@ -81,13 +81,27 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 = 1.3.10 - December 20th 2017 =
 
 = FOR OUR PRO USERS: =
-* 🦊 Live Composer now fully supports WooCommerce. [Check out our new extensions for this.](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=update-notice&utm_campaign=woo-integration)
-* 👀 Did you see it? [Our new extensions pack is huge!](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=update-notice&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
+* 🦊 Live Composer now fully supports WooCommerce. [Check out our new extensions for this.](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
+* 👀 Did you see it? [Our new extensions pack is huge!](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
 
 = FOUND A BUG? =
 * 🐛 [Please, report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
 * ⌛ [You can download any previous version here](https://github.com/live-composer/live-composer-page-builder/releases)
 
+In this update we improve compatibility with Yoast SEO plugin, with our premium [WooCommerce Integration](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration), improve the caching engine, add new hooks for 3-rd party developers, and polish some interface elements,
+
+= Bug Fixes: =
+* Issue [#850](https://github.com/live-composer/live-composer-page-builder/issues/850): Broken shortcodes in the posts preview.
+* Issue [#847](https://github.com/live-composer/live-composer-page-builder/issues/847): Yoast Open Graph tags do not show on the posts powered by custom templates.
+* Issue [#846](https://github.com/live-composer/live-composer-page-builder/issues/846): Missing color transparency control for the text shadow block in the Text module.
+* Issue [#844](https://github.com/live-composer/live-composer-page-builder/issues/844): Broken cache engine when premium extensions enabled.
+* Issue [#840](https://github.com/live-composer/live-composer-page-builder/issues/840): Improve compatibility with our premium [WooCommerce Integration](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration).
+
+= Improved: =
+* Some editing iterface elements polished also removed unwated Google font calls.
+* Issue [#839](https://github.com/live-composer/live-composer-page-builder/issues/839): Add filter for display module options (useful for 3-rd party developers).
+* Issue [#838](https://github.com/live-composer/live-composer-page-builder/issues/838): Add action hooks for css-generation.php (useful for 3-rd party developers).
+* Issue [#799](https://github.com/live-composer/live-composer-page-builder/issues/799): Removed direct access to the footer/header templates.
 
 = 1.3.9 - November 27th 2017 =
 
