@@ -23,7 +23,7 @@ final class DSLC_Upgrade {
 			$versions_log[] = get_option( 'dslc_version', array() );
 		}
 
-		if ( ! in_array( '1.3.10', $versions_log ) ) {
+		if ( is_array( $versions_log ) && ! in_array( '1.3.10', $versions_log ) ) {
 			self::update_1_3_10();
 		}
 

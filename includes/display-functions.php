@@ -117,7 +117,7 @@ function dslc_display_composer() {
 					<a href="#" class="dslca-hide-composer-hook"><span class="dslca-icon dslc-icon-arrow-down"></span><?php _e( 'Hide', 'live-composer-page-builder' ); ?></a>
 
 					<!-- Disable -->
-					<a href="<?php echo $link; ?>" class="dslca-close-composer-hook"><span class="dslca-icon dslc-icon-remove"></span><?php _e( 'Close', 'live-composer-page-builder' ); ?></a>
+					<a href="<?php echo esc_attr( $link ); ?>" class="dslca-close-composer-hook"><span class="dslca-icon dslc-icon-remove"></span><?php _e( 'Close', 'live-composer-page-builder' ); ?></a>
 
 					<div class="dslc-clear"></div>
 
