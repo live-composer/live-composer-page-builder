@@ -10,66 +10,66 @@ Front-end page builder for WordPress with drag and drop editing. Build PRO respo
 
 == Description ==
 
-= Create Stunning Websites Visually =
+= 👓 Create Stunning Websites Visually =
 
-[Live Composer](https://livecomposerplugin.com/) is the most innovative website builder for WordPress. Create stunning custom page designs in real-time right on your page. Drag & drop front-end editing is a perfectly intuitive way to create and customize great looking websites.
+[Live Composer page builder](https://livecomposerplugin.com/) is complete and feature-reach website builder for WordPress. In our page builder, you get most of the features for free paying only for [Woo-Commerce support](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration) and [advanced integrations](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) (ACF, CPT, Mega Menus). Create stunning custom page designs in real-time. Drag & drop front-end editing is a perfectly intuitive way to create and customize great looking websites.
 
-Do it yourself with easy content editing in real-time. Save your money on expensive coding and customization services. No tech skills needed. Live Composer is a great tool for web designers, digital marketing specialists, WordPress theme developers and freelance consultants. Create an exceptional landing page, portfolio or fully featured pro website for your client.
+Do it yourself with easy content editing in real-time. Save your money on expensive coding and customization services. No tech skills needed to create professional websites in our page builder. Live Composer is a great tool for web designers, digital marketing specialists, WordPress theme developers and freelance consultants. Learn our page builder once and cut your website building time with every next project. Create an exceptional landing page, portfolio or fully featured pro website for your client.
 
-= Over 50,000 Site Owners Chose Live Composer =
+= 🏆 Over 50,000 Site Owners Chose Live Composer page builder =
 
-You can trust our page builder. It's a proven solution for your business. 100% open source and backed by the experienced team of web developers. We are on the market for more than 2 years. All the major bugs already fixed and new updates released regularly. Every day our developers work on code improvement and new features. Our support is exceptional but still free.
+You can trust our plugin. 100% open source page builder backed by the experienced team of web developers. Our page builder on the market for more than 2 years. All the major bugs already fixed and new updates released regularly. Every day our developers work on code improvements and new features. With a purchase of any [premium extension](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) you also getting access to our exceptional one-to-one support.
 
-= Get Started Without Reading Any Documentation =
+= 📙 Our Page Builder comes with an [extensive documentation](https://livecomposer.help/), but you don't need it =
 
-Site design customization or page layout changes shouldn't be difficult or expensive. Our page builder is easy to use without reading any documentation. You'll be building beautiful custom WordPress site designs in no time. Create multi-media rich pages with very little effort: add new sections, rearrange columns, and add media from the same screen. It's a perfect solution for ALL users. No technical skills required.
+Site design customization or page layout changes shouldn't be difficult or expensive. Our page builder is easy to use without reading [any documentation](https://livecomposer.help/). You'll be building beautiful custom WordPress site designs in no time. Create multi-media rich pages with very little effort: add new sections, rearrange columns, and add media from the same screen. It's a perfect solution for ALL users. No technical skills required.
 
-= Create Custom Page Layouts in Minutes =
+= ⏳ Create Custom Page Layouts in Minutes =
 
-Live Composer is a simple but very powerful [WordPress site builder](https://livecomposerplugin.com/). Customize every little detail on your website or build stunning custom pages from scratch.
+Live Composer page builder is a simple but very powerful [WordPress site builder](https://livecomposerplugin.com/). Customize every little detail on your website or build stunning custom pages from scratch.
 
-= Well Integrated With WordPress =
+= 🎯 Well Integrated With WordPress =
 
 Our page builder works with works with any standard compliant WordPress theme. It's fully compatible with other plugins like Yoast WP SEO or contact form builders. We also have a [marketplace with free and premium themes](https://livecomposerplugin.com/themes/) created especially for Live Composer.
 
-= No Code Left Behind When the Plugin Deactivated =
+= ♻ No Code Left Behind When the Plugin Deactivated =
 
-Unlike other page builders, Live Composer doesn't leave behind horrible amount of shortcodes when the plugin deactivated. It's not a commitment to a single plugin. We don't lock you. It's easy to start using any other page builder without a need to remove all the custom shortcodes before implementing a new solution.
+Unlike other page builders, Live Composer doesn't leave behind the horrible amount of shortcodes when the plugin deactivated. It's not a commitment to a single plugin. We don't lock you. It's easy to start using any other page builder without a need to remove all the custom shortcodes before implementing a new solution.
 
-= 100% Open Source =
+= ⭐ 100% Open Source Page Builder =
 
-Previously a premium plugin, Live Composer page builder is now free fully functional plugin. Actively developed by [professional web developers](https://livecomposerplugin.com/) it has a bright future for years to come.
+Previously a premium plugin, Live Composer page builder is now a free fully functional plugin. Actively developed by [professional web developers](https://livecomposerplugin.com/) it has a bright future for years to come.
 
-= No Coding Skills Required =
+= 🙈 No Coding Skills Required =
 
 Anyone can build pro website with Live Composer page builder. No coding or technical skills required. Our site builder will generate all the code for you.
 
-= Export/Import Sections, Layouts or while Pages =
+= 🌀 Export/Import Sections, Layouts or while Pages =
 
 Export any page section or the whole page. Reuse layout or page design you created.
 
-= Mobile Responsive =
+= 📱 Mobile Responsive Page Builder =
 
-It's easy to create responsive websites in our page builder. You can customize responsive presentation of any page element to make it looks perfect on all mobile devices, ensuring your site is mobile-ready.
+It's easy to create responsive websites in our page builder. You can customize the responsive presentation of any page element to make it looks perfect on all mobile devices, ensuring your site is mobile-ready.
 
 
 == Installation ==
 
-Install and Activate as you would any other plugin
+Install and Activate our page builder from your WordPress admin as any other plugin
 
 == Frequently Asked Questions ==
 
 = How to I activate the page builder on a page? =
 
-When you visit a page you'll see a green "activate editor" button in the bottom right corner, click that and the page will reload in LC mode ( LCPB ).
+When you visit a page you'll see a green "activate editor" button in the bottom right corner, click that and the page will reload with page builder ready to use.
 
 = Why is the "activate editor" button missing from the homepage =
 
-In most of the cases, this is because the homepage is not a real WordPress page, it's custom content generated by the theme's index.php. Publish a new page and set it as the homepage ( WP Admin > Settings > Reading > Front Page ). Now you can use LC on the homepage.
+In most of the cases, this is because the homepage is not a real WordPress page, it's custom content generated by the theme's index.php. Publish a new page and set it as the homepage ( WP Admin > Settings > Reading > Front Page ). Now you can use page builder on the homepage too.
 
 == Screenshots ==
 
-1. Editor activated on a page
+1. Page builder in editing mode
 
 == Changelog ==
 
