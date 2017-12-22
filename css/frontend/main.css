@@ -1191,9 +1191,9 @@ a img.aligncenter { display: block; margin-left: auto; margin-right: auto }
 		overflow: hidden;
 	}
 
-	.dslc-post-filters {
+	/*.dslc-post-filters {
 		float: left;
-	}
+	}*/
 
 }
 
@@ -1226,9 +1226,9 @@ a img.aligncenter { display: block; margin-left: auto; margin-right: auto }
 		overflow: hidden;
 	}
 
-	.dslc-post-filters {
+	/*.dslc-post-filters {
 		float: left;
-	}
+	}*/
 }
 
 /* @hack: IE10+ specific styles only.
@@ -1247,4 +1247,13 @@ a img.aligncenter { display: block; margin-left: auto; margin-right: auto }
 	#dslc-content .dslc-info-box-image-alt-inner {
 		width: 100%;
 	}
+}
+
+/* Fixed NF */
+body #dslc-content .nf-field-container {
+	margin-bottom: 0;
+}
+
+body #dslc-content input:focus {
+    outline: none;
 }
