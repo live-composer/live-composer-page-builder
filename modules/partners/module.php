@@ -1235,6 +1235,20 @@ class DSLC_Partners extends DSLC_Module {
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
+				'label' => __( 'Thumbnail - Padding Horizontal', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_thumbnail_padding_horizontal',
+				'onlypositive' => true, // Value can't be negative.
+				'max' => 600,
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-partner-thumb',
+				'affect_on_change_rule' => 'padding-left,padding-right',
+				'section' => 'responsive',
+				'ext' => 'px',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Main - Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_main_padding_vertical',
 				'onlypositive' => true, // Value can't be negative.
@@ -1385,6 +1399,20 @@ class DSLC_Partners extends DSLC_Module {
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-partner-thumb',
 				'affect_on_change_rule' => 'padding-top,padding-bottom',
+				'section' => 'responsive',
+				'ext' => 'px',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Thumbnail - Padding Horizontal', 'live-composer-page-builder' ),
+				'id' => 'css_res_p_thumbnail_padding_horizontal',
+				'onlypositive' => true, // Value can't be negative.
+				'max' => 600,
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-partner-thumb',
+				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),

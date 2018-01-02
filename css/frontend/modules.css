@@ -1107,17 +1107,17 @@
 				float: right;
 			}
 
-				#dslc-content .dslc-testimonial-author-avatar {
+				#dslc-content .dslc-testimonial-avatar-aside .dslc-testimonial-author-avatar {
 					border: 0 transparent solid;
 					float: left;
 				}
 
 					#dslc-content .dslc-testimonial-author-avatar img {
-						display: block;
+						display: inline-block;
 						height: auto;
 					}
 
-				#dslc-content .dslc-testimonial-author-main {
+				#dslc-content .dslc-testimonial-avatar-aside .dslc-testimonial-author-main {
 					overflow: hidden;
 					float: left;
 				}
@@ -2292,4 +2292,7 @@ body.dslca-enabled .dslc-notification-box-has-timeout {
 	    margin-left: 0 !important; /* https://github.com/live-composer/live-composer-page-builder/issues/555 */
 	}
 
+	body #dslc-content .dslc-partner-thumb {
+		width: 100%;
+	}
 }
