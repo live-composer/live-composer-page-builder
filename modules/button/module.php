@@ -345,7 +345,7 @@ class DSLC_Button extends DSLC_Module {
 				'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
 				'id' => 'css_padding_vertical',
 				'onlypositive' => true, // Value can't be negative.
-				'max' => 600,
+				'max' => 50,
 				'std' => '12',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -359,6 +359,7 @@ class DSLC_Button extends DSLC_Module {
 				'id' => 'css_padding_horizontal',
 				'onlypositive' => true, // Value can't be negative.
 				'std' => '12',
+				'max' => 50,
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-button a',
@@ -437,6 +438,7 @@ class DSLC_Button extends DSLC_Module {
 				'label' => __( 'Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_button_font_size',
 				'onlypositive' => true, // Value can't be negative.
+				'max' => 50,
 				'std' => '11',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -525,6 +527,35 @@ class DSLC_Button extends DSLC_Module {
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-button a',
 				'affect_on_change_rule' => 'font-family',
+				'section' => 'styling',
+				'tab' => __( 'Typography', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Text Transform', 'live-composer-page-builder' ),
+				'id' => 'css_button_text_transform',
+				'std' => 'none',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'None', 'live-composer-page-builder' ),
+						'value' => 'none',
+					),
+					array(
+						'label' => __( 'Capitalize', 'live-composer-page-builder' ),
+						'value' => 'capitalize',
+					),
+					array(
+						'label' => __( 'Uppercase', 'live-composer-page-builder' ),
+						'value' => 'uppercase',
+					),
+					array(
+						'label' => __( 'Lowercase', 'live-composer-page-builder' ),
+						'value' => 'lowercase',
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-button a',
+				'affect_on_change_rule' => 'text-transform',
 				'section' => 'styling',
 				'tab' => __( 'Typography', 'live-composer-page-builder' ),
 			),

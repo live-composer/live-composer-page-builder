@@ -1625,6 +1625,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'label' => __( 'Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_button_font_size',
 				'onlypositive' => true, // Value can't be negative.
+				'max' => 50,
 				'std' => '11',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1692,6 +1693,35 @@ class DSLC_Info_Box extends DSLC_Module {
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-info-box-button a',
 				'affect_on_change_rule' => 'font-family',
+				'section' => 'styling',
+				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Text Transform', 'live-composer-page-builder' ),
+				'id' => 'css_button_text_transform',
+				'std' => 'none',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'None', 'live-composer-page-builder' ),
+						'value' => 'none',
+					),
+					array(
+						'label' => __( 'Capitalize', 'live-composer-page-builder' ),
+						'value' => 'capitalize',
+					),
+					array(
+						'label' => __( 'Uppercase', 'live-composer-page-builder' ),
+						'value' => 'uppercase',
+					),
+					array(
+						'label' => __( 'Lowercase', 'live-composer-page-builder' ),
+						'value' => 'lowercase',
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a',
+				'affect_on_change_rule' => 'text-transform',
 				'section' => 'styling',
 				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
 			),
@@ -1973,6 +2003,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'label' => __( 'Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_button_2_font_size',
 				'onlypositive' => true, // Value can't be negative.
+				'max' => 50,
 				'std' => '11',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -2040,6 +2071,35 @@ class DSLC_Info_Box extends DSLC_Module {
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary',
 				'affect_on_change_rule' => 'font-family',
+				'section' => 'styling',
+				'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Text Transform', 'live-composer-page-builder' ),
+				'id' => 'css_button_2_text_transform',
+				'std' => 'none',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'None', 'live-composer-page-builder' ),
+						'value' => 'none',
+					),
+					array(
+						'label' => __( 'Capitalize', 'live-composer-page-builder' ),
+						'value' => 'capitalize',
+					),
+					array(
+						'label' => __( 'Uppercase', 'live-composer-page-builder' ),
+						'value' => 'uppercase',
+					),
+					array(
+						'label' => __( 'Lowercase', 'live-composer-page-builder' ),
+						'value' => 'lowercase',
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary',
+				'affect_on_change_rule' => 'text-transform',
 				'section' => 'styling',
 				'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
 			),
