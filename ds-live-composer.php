@@ -193,6 +193,16 @@ function dslc_disable_old_plugin() {
 }
 register_activation_hook( __FILE__, 'dslc_disable_old_plugin' );
 
+function dslc_deactivate_plugin() {
+	// Deactivate WooCommerce Integration Plugin.
+	if ( defined( 'LCWOO_INTEGRATION_PLUGIN_VER' ) && version_compare( LCWOO_INTEGRATION_PLUGIN_VER, '1.2.5', '<=' ) ) {
+		$plugins_page_url = admin_url('plugins.php');
+		wp_die( 'Please, deactivate <a href="' . esc_attr( $plugins_page_url ) . '">WooCommerce integration for Live Composer</a> plugin first. <br />Sorry for this inconvenience.' );
+	}
+
+}
+register_deactivation_hook( __FILE__, 'dslc_deactivate_plugin' );
+
 /**
  * Function redirects to the 'Welcome Screen' on plugin activation.
  * Theme developers we have 'dslc_show_welcome_screen' filter for you

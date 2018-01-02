@@ -424,7 +424,8 @@ class DSLC_Separator extends DSLC_Module {
 					<?php if ( $options['style'] == 'invisible' && $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) : ?>
 						<div class="dslca-separator-empty"><span><?php _e( 'TRANSPARENT SEPARATOR', 'live-composer-page-builder' ); ?></span></div>
 					<?php endif; ?>
-				</div><div></div>
+				</div>
+				<div></div>
 			</div><!-- .dslc-separator-wrapper -->
 			<?php
 
