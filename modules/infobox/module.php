@@ -1058,7 +1058,7 @@ class DSLC_Info_Box extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Max Width', 'live-composer-page-builder' ),
-				'id' => 'css_content_width',
+				'id' => 'css_image_alt_width',
 				'std' => '',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -2376,6 +2376,17 @@ class DSLC_Info_Box extends DSLC_Module {
 				'ext' => 'px',
 			),
 			array(
+				'label' => __( 'Icon - Align', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_icon_text_align',
+				'std' => 'inherit',
+				'type' => 'text_align',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-image',
+				'affect_on_change_rule' => 'text-align',
+				'section' => 'responsive',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Title - Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_title_font_size',
 				'onlypositive' => true, // Value can't be negative.
@@ -2738,6 +2749,17 @@ class DSLC_Info_Box extends DSLC_Module {
 				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Icon - Align', 'live-composer-page-builder' ),
+				'id' => 'css_res_p_icon_text_align',
+				'std' => 'inherit',
+				'type' => 'text_align',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-image',
+				'affect_on_change_rule' => 'text-align',
+				'section' => 'responsive',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Title - Font Size', 'live-composer-page-builder' ),
