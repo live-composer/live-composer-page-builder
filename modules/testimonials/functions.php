@@ -18,6 +18,12 @@ $dslc_var_post_options['dslc-testimonials-post-options'] = array(
 			'id' => 'dslc_testimonial_author_pos',
 			'type' => 'text',
 		),
+		array(
+			'label' => 'Logo',
+			'std' => '',
+			'id' => 'dslc_testimonial_logo',
+			'type' => 'file',
+		),
 	),
 );
 
@@ -134,4 +140,3 @@ function dslc_testimonials_module_cpt() {
 	register_taxonomy( 'dslc_testimonials_cats', 'dslc_testimonials', $cats_args );
 
 } add_action( 'init', 'dslc_testimonials_module_cpt' );
-

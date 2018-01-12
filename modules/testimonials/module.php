@@ -255,6 +255,10 @@ class DSLC_Testimonials extends DSLC_Module {
 				'type' => 'checkbox',
 				'choices' => array(
 					array(
+						'label' => __( 'Logo', 'live-composer-page-builder' ),
+						'value' => 'logo',
+					),
+					array(
 						'label' => __( 'Quote', 'live-composer-page-builder' ),
 						'value' => 'quote',
 					),
@@ -630,6 +634,176 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => 'box-shadow',
 				'section' => 'styling',
 				'tab' => __( 'Main', 'live-composer-page-builder' ),
+			),
+
+			/**
+			 * Logo
+			 */
+
+			array(
+				'label' => __( 'Text Align', 'live-composer-page-builder' ),
+				'id' => 'css_logo_text_align',
+				'std' => 'left',
+				'type' => 'text_align',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-testimonial-logo',
+				'affect_on_change_rule' => 'text-align',
+				'section' => 'styling',
+				'tab' => __( 'Logo', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'BG Color', 'live-composer-page-builder' ),
+				'id' => 'css_logo_bg_color',
+				'std' => '',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-testimonial-logo',
+				'affect_on_change_rule' => 'background-color',
+				'section' => 'styling',
+				'tab' => __( 'Logo', 'live-composer-page-builder' ),
+			),
+		    array(
+				'label' => __( 'Border Color', 'live-composer-page-builder' ),
+				'id' => 'css_logo_border_color',
+				'std' => '',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-testimonial-logo',
+				'affect_on_change_rule' => 'border-color',
+				'section' => 'styling',
+				'tab' => __( 'Logo', 'live-composer-page-builder' ),
+			 ),
+			 array(
+				'label' => __( 'Border Width', 'live-composer-page-builder' ),
+				'id' => 'css_logo_border_width',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-testimonial-logo',
+				'affect_on_change_rule' => 'border-width',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Logo', 'live-composer-page-builder' ),
+			 ),
+			 array(
+				'label' => __( 'Borders', 'live-composer-page-builder' ),
+				'id' => 'css_logo_border_trbl',
+				'std' => 'top right bottom left',
+				'type' => 'checkbox',
+				'choices' => array(
+					array(
+						'label' => __( 'Top', 'live-composer-page-builder' ),
+						'value' => 'top',
+					),
+					array(
+						'label' => __( 'Right', 'live-composer-page-builder' ),
+						'value' => 'right',
+					),
+					array(
+						'label' => __( 'Bottom', 'live-composer-page-builder' ),
+						'value' => 'bottom',
+					),
+					array(
+						'label' => __( 'Left', 'live-composer-page-builder' ),
+						'value' => 'left',
+					),
+				  ),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-testimonial-logo',
+				'affect_on_change_rule' => 'border-style',
+				'section' => 'styling',
+				'tab' => __( 'Logo', 'live-composer-page-builder' ),
+			 ),
+			 array(
+				'label' => __( 'Border Radius', 'live-composer-page-builder' ),
+				'id' => 'css_logo_border_radius_top',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-testimonial-logo',
+				'affect_on_change_rule' => 'border-radius',
+				'section' => 'styling',
+				'tab' => __( 'Logo', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			 ),
+			 array(
+				'label' => __( 'Size', 'live-composer-page-builder' ),
+				'id' => 'css_logo_size',
+				'std' => '',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-testimonial-logo img',
+				'affect_on_change_rule' => 'width',
+				'section' => 'styling',
+				'tab' => __( 'Logo', 'live-composer-page-builder' ),
+				'min' => 1,
+				'max' => 100,
+				'ext' => 'px',
+			 ),
+			 array(
+				'label' => __( 'Padding', 'live-composer-page-builder' ),
+				'id' => 'css_logo_padding_group',
+				'type' => 'group',
+				'action' => 'open',
+				'section' => 'styling',
+				'tab' => __( 'Logo', 'live-composer-page-builder' ),
+			 ),
+				array(
+					'label' => __( 'Top', 'live-composer-page-builder' ),
+					'id' => 'css_logo_padding_top',
+					'std' => '0',
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-testimonial-logo',
+					'affect_on_change_rule' => 'padding-top',
+					'section' => 'styling',
+					'tab' => __( 'Logo', 'live-composer-page-builder' ),
+					'ext' => 'px',
+				),
+				array(
+					'label' => __( 'Right', 'live-composer-page-builder' ),
+					'id' => 'css_logo_padding_right',
+					'std' => '0',
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-testimonial-logo',
+					'affect_on_change_rule' => 'padding-right',
+					'section' => 'styling',
+					'tab' => __( 'Logo', 'live-composer-page-builder' ),
+					'ext' => 'px',
+				),
+				array(
+					'label' => __( 'Bottom', 'live-composer-page-builder' ),
+					'id' => 'css_logo_padding_bottom',
+					'std' => '0',
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-testimonial-logo',
+					'affect_on_change_rule' => 'padding-bottom',
+					'section' => 'styling',
+					'tab' => __( 'Logo', 'live-composer-page-builder' ),
+					'ext' => 'px',
+				),
+				array(
+					'label' => __( 'Left', 'live-composer-page-builder' ),
+					'id' => 'css_logo_padding_left',
+					'std' => '0',
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-testimonial-logo',
+					'affect_on_change_rule' => 'padding-left',
+					'section' => 'styling',
+					'tab' => __( 'Logo', 'live-composer-page-builder' ),
+					'ext' => 'px',
+				),
+			array(
+				'id' => 'css_logo_padding_group',
+				'type' => 'group',
+				'action' => 'close',
+				'section' => 'styling',
+				'tab' => __( 'Logo', 'live-composer-page-builder' ),
 			),
 
 			/**
@@ -2232,13 +2406,30 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 
 		<?php if ( $options['author_pos'] == 'inside top' ) { echo $author_output;} ?>
 
+		<?php if ( $post_elements == 'all' || in_array( 'logo', $post_elements ) ) : ?>
+
+			<?php
+				$dslc_testimonial_logo = get_post_meta( get_the_ID(), 'dslc_testimonial_logo', true );
+
+				if ( ! empty( $dslc_testimonial_logo ) ) {
+					$dslc_testimonial_image_src = wp_get_attachment_image_src( $dslc_testimonial_logo, 'full' );
+					?>
+						<div class="dslc-testimonial-logo">
+							<img src="<?php echo $dslc_testimonial_image_src[0]; ?>">
+						</div>
+					<?php
+				}
+			?>
+
+		<?php endif; ?>
+
 		<?php if ( $post_elements == 'all' || in_array( 'quote', $post_elements ) ) : ?>
 
-											<div class="dslc-testimonial-quote">
-												<?php echo get_the_content(); ?>
-											</div><!-- .dslc-testimonial-quote -->
+			<div class="dslc-testimonial-quote">
+				<?php echo get_the_content(); ?>
+			</div><!-- .dslc-testimonial-quote -->
 
-										<?php endif; ?>
+		<?php endif; ?>
 
 		<?php if ( $options['author_pos'] == 'inside bottom' ) { echo $author_output;} ?>
 
