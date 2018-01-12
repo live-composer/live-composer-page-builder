@@ -1149,6 +1149,24 @@ class DSLC_Module {
 				'tab' => 'Carousel Arrows',
 			),
 			array(
+				'label' => 'Position',
+				'id' => 'arrows_position',
+				'std' => 'above',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'Above', 'live-composer-page-builder' ),
+						'value' => 'above',
+					),
+					array(
+						'label' => __( 'Aside', 'live-composer-page-builder' ),
+						'value' => 'aside',
+					),
+				),
+				'section' => 'styling',
+				'tab' => 'Carousel Arrows',
+			),
+			array(
 				'label' => 'BG Color',
 				'id' => 'css_arrows_bg_color',
 				'std' => '#c9c9c9',
@@ -1248,6 +1266,18 @@ class DSLC_Module {
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-carousel-nav',
+				'affect_on_change_rule' => 'margin-top',
+				'section' => 'styling',
+				'tab' => 'Carousel Arrows',
+				'ext' => 'px',
+			),
+			array(
+				'label' => 'Margin Top',
+				'id' => 'css_arrows_margin_top_aside',
+				'std' => '-30',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-carousel-nav-prev.position-aside, .dslc-carousel-nav-next.position-aside',
 				'affect_on_change_rule' => 'margin-top',
 				'section' => 'styling',
 				'tab' => 'Carousel Arrows',

@@ -241,6 +241,22 @@ body.rtl .dslc-last-col {
 				font-weight: normal;
 			}
 
+		.dslc-carousel-nav-prev.position-aside,
+		.dslc-carousel-nav-next.position-aside {
+			position: absolute;
+			top: 50%;
+			margin-top: -30px;
+		}
+
+		.dslc-carousel-nav-prev.position-aside {
+			left: -40px;
+			margin-right: 0;
+		}
+
+		.dslc-carousel-nav-next.position-aside {
+			right: -40px;
+		}
+
 	#dslc-content .dslc-carousel .owl-pagination .owl-page span {
 		margin: 0;
 		filter: Alpha(Opacity=100);/*IE7 fix*/

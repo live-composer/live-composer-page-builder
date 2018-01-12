@@ -2128,15 +2128,14 @@ function dslc_module_testimonials_output( $atts, $content = null ) {
 
 		<!-- Carousel -->
 
-		<?php if ( $show_carousel_arrows ) : ?>
-							<span class="dslc-carousel-nav fr">
-								<span class="dslc-carousel-nav-inner">
-									<a href="#" class="dslc-carousel-nav-prev"><span class="dslc-icon-chevron-left"></span></a>
-									<a href="#" class="dslc-carousel-nav-next"><span class="dslc-icon-chevron-right"></span></a>
-								</span>
-							</span><!-- .carousel-nav -->
-						<?php endif; ?>
-
+		<?php if ( $show_carousel_arrows && ( $options['arrows_position'] == 'above' ) ) : ?>
+				<span class="dslc-carousel-nav fr">
+					<span class="dslc-carousel-nav-inner">
+						<a href="#" class="dslc-carousel-nav-prev"><span class="dslc-icon-chevron-left"></span></a>
+						<a href="#" class="dslc-carousel-nav-next"><span class="dslc-icon-chevron-right"></span></a>
+					</span>
+				</span><!-- .carousel-nav -->
+			<?php endif; ?>
 			</div><!-- .dslc-module-heading -->
 				<?php
 
@@ -2148,7 +2147,11 @@ function dslc_module_testimonials_output( $atts, $content = null ) {
 
 	if ( $dslc_query->have_posts() ) :
 
-		?><div class="<?php echo $container_class; ?>"><?php
+		?><div class="<?php echo $container_class; ?>">
+			<?php if ( $show_carousel_arrows && ( $options['arrows_position'] == 'aside' ) ) : ?>
+				<a href="#" class="dslc-carousel-nav-prev position-aside"><span class="dslc-icon-chevron-left"></span></a>
+			<?php endif; ?>
+			<?php
 
 	?><div class="dslc-posts-inner"><?php
 
@@ -2268,6 +2271,10 @@ if ( $options['type'] == 'carousel' ) :
 		?>
 
 	</div><!-- .dslc-posts-inner -->
+
+	<?php if ( $show_carousel_arrows && ( $options['arrows_position'] == 'aside' ) ) : ?>
+		<a href="#" class="dslc-carousel-nav-next position-aside"><span class="dslc-icon-chevron-right"></span></a>
+	<?php endif; ?>
 
 		</div><!-- .dslc-testimonials -->
 
