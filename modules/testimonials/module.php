@@ -255,6 +255,10 @@ class DSLC_Testimonials extends DSLC_Module {
 				'type' => 'checkbox',
 				'choices' => array(
 					array(
+						'label' => __( 'Icon', 'live-composer-page-builder' ),
+						'value' => 'icon',
+					),
+					array(
 						'label' => __( 'Logo', 'live-composer-page-builder' ),
 						'value' => 'logo',
 					),
@@ -641,8 +645,8 @@ class DSLC_Testimonials extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( 'Text Align', 'live-composer-page-builder' ),
-				'id' => 'css_logo_text_align',
+				'label' => __( 'Align', 'live-composer-page-builder' ),
+				'id' => 'css_logo_align',
 				'std' => 'left',
 				'type' => 'text_align',
 				'refresh_on_change' => false,
@@ -804,6 +808,153 @@ class DSLC_Testimonials extends DSLC_Module {
 				'action' => 'close',
 				'section' => 'styling',
 				'tab' => __( 'Logo', 'live-composer-page-builder' ),
+			),
+
+			/**
+			 * Icon
+			 */
+
+			array(
+				'label' => __( 'Icon', 'live-composer-page-builder' ),
+				'id' => 'icon_id',
+				'std' => 'quote-right',
+				'type' => 'icon',
+				'section' => 'styling',
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Align', 'live-composer-page-builder' ),
+				'id' => 'css_icon_align',
+				'std' => 'left',
+				'type' => 'text_align',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-testimonial-icon',
+				'affect_on_change_rule' => 'text-align',
+				'section' => 'styling',
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'BG Color', 'live-composer-page-builder' ),
+				'id' => 'css_icon_bg_color',
+				'std' => '',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-testimonial-icon',
+				'affect_on_change_rule' => 'background-color',
+				'section' => 'styling',
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Border Color', 'live-composer-page-builder' ),
+				'id' => 'css_icon_border_color',
+				'std' => '',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-testimonial-icon',
+				'affect_on_change_rule' => 'border-color',
+				'section' => 'styling',
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Border Width', 'live-composer-page-builder' ),
+				'id' => 'css_icon_border_width',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-testimonial-icon',
+				'affect_on_change_rule' => 'border-width',
+				'section' => 'styling',
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Borders', 'live-composer-page-builder' ),
+				'id' => 'css_icon_border_trbl',
+				'std' => 'top right bottom left',
+				'type' => 'checkbox',
+				'choices' => array(
+					array(
+						'label' => __( 'Top', 'live-composer-page-builder' ),
+						'value' => 'top',
+					),
+					array(
+						'label' => __( 'Right', 'live-composer-page-builder' ),
+						'value' => 'right',
+					),
+					array(
+						'label' => __( 'Bottom', 'live-composer-page-builder' ),
+						'value' => 'bottom',
+					),
+					array(
+						'label' => __( 'Left', 'live-composer-page-builder' ),
+						'value' => 'left',
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-testimonial-icon',
+				'affect_on_change_rule' => 'border-style',
+				'section' => 'styling',
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Border Radius', 'live-composer-page-builder' ),
+				'id' => 'css_icon_border_radius',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-testimonial-icon',
+				'affect_on_change_rule' => 'border-radius',
+				'section' => 'styling',
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
+				'id' => 'css_icon_margin_bottom',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-testimonial-icon',
+				'affect_on_change_rule' => 'margin-bottom',
+				'section' => 'styling',
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Color', 'live-composer-page-builder' ),
+				'id' => 'css_icon_color',
+				'std' => '#000',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-icon',
+				'affect_on_change_rule' => 'color',
+				'section' => 'styling',
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Size', 'live-composer-page-builder' ),
+				'id' => 'css_icon_size',
+				'std' => '31',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-icon',
+				'affect_on_change_rule' => 'font-size',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Icon Shadow', 'live-composer-page-builder' ),
+				'id' => 'css_icon_text_shadow',
+				'std' => '',
+				'type' => 'text_shadow',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-icon',
+				'affect_on_change_rule' => 'text-shadow',
+				'section' => 'styling',
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
 			),
 
 			/**
@@ -2405,6 +2556,14 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 	<div class="dslc-testimonial-main">
 
 		<?php if ( $options['author_pos'] == 'inside top' ) { echo $author_output;} ?>
+
+		<?php if ( $post_elements == 'all' || in_array( 'icon', $post_elements ) ) : ?>
+
+			<div class="dslc-testimonial-icon">
+				<span class="dslc-icon dslc-icon-<?php echo $options['icon_id']; ?>"></span>
+			</div><!-- .dslc-testimonial-icon -->
+
+		<?php endif; ?>
 
 		<?php if ( $post_elements == 'all' || in_array( 'logo', $post_elements ) ) : ?>
 
