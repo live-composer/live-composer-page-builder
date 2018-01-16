@@ -731,7 +731,7 @@ body a:focus {
 			padding: 16px 15px 5px 15px;
 			min-height: 58px;
 
-			transform: translate(0,0); 
+			transform: translate(0,0);
 			/* fix the bug with wrong position
 			of the horizontal scrolling bar
 			in macOS Chorme */
@@ -1739,7 +1739,7 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 	.dslc-modules-area-empty .dslca-no-content {
 		display: block;
 	}
-/* 
+/*
 	.dslca-no-content-primary {
 		color: #5890e5;
 		display: inline-block;
@@ -1895,6 +1895,7 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 
 	.dslc-modules-section:hover .dslca-modules-section-manage {
 		visibility: visible !important;
+        z-index: 999999;
 	}
 		.dslca-modules-section-manage-inner,
 		.dslca-module-manage-inner {
