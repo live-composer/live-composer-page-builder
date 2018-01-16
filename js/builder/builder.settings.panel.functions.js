@@ -552,7 +552,8 @@ function dslc_module_options_hideshow_tabs() {
 		dslcElQuote = true,
 		dslcElAuthorName = true,
 		dslcElAuthorPos = true,
-		dslcElImage = true;
+		dslcElImage = true,
+		dslcElLogo = true;
 
 
 		// Is heading selected?
@@ -685,6 +686,11 @@ function dslc_module_options_hideshow_tabs() {
 		// Is image enabled?
 		if ( ! jQuery('.dslca-module-edit-field[data-id*="elements"][value="image"]').is(':checked') ) {
 			dslcElImage = false;
+		}
+
+		// Is logo enabled?
+		if ( ! jQuery('.dslca-module-edit-field[data-id*="elements"][value="logo"]').is(':checked') ) {
+			dslcElLogo = false;
 		}
 
 
@@ -839,6 +845,12 @@ function dslc_module_options_hideshow_tabs() {
 			jQuery('.dslca-module-edit-options-tab-hook[data-id="image_styling"]').show();
 		else
 			jQuery('.dslca-module-edit-options-tab-hook[data-id="image_styling"]').hide();
+
+		// Show/Hide Quote
+		if ( dslcElLogo )
+			jQuery('.dslca-module-edit-options-tab-hook[data-id="logo_styling"]').show();
+		else
+			jQuery('.dslca-module-edit-options-tab-hook[data-id="logo_styling"]').hide();
 
 	}
 
