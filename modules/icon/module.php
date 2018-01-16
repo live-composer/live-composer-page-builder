@@ -69,10 +69,44 @@ class DSLC_Icon extends DSLC_Module {
 				),
 			),
 			array(
+				'label' => __( 'Show Icon', 'live-composer-page-builder' ),
+				'id' => 'show_icon',
+				'std' => 'font',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'Font', 'live-composer-page-builder' ),
+						'value' => 'font',
+					),
+					array(
+						'label' => __( 'SVG', 'live-composer-page-builder' ),
+						'value' => 'svg',
+					),
+				),
+				'dependent_controls' => array(
+					'font' => 'icon_id',
+					'svg' => 'html_svg, symbol_definition',
+				),
+			),
+			array(
 				'label' => __( 'Icon', 'live-composer-page-builder' ),
 				'id' => 'icon_id',
 				'std' => 'heart',
 				'type' => 'icon',
+			),
+			array(
+				'label' => __( 'Symbol Definition', 'live-composer-page-builder' ),
+				'id' => 'symbol_definition',
+				'std' => '',
+				'type' => 'textarea',
+				'section' => 'functionality',
+			),
+			array(
+				'label' => __( 'HTML ( SVG )', 'live-composer-page-builder' ),
+				'id' => 'html_svg',
+				'std' => '',
+				'type' => 'textarea',
+				'section' => 'functionality',
 			),
 
 			/**
@@ -441,9 +475,24 @@ class DSLC_Icon extends DSLC_Module {
 
 		?>
 
-			<div class="dslc-micon-module">
-				<span class="dslc-icon dslc-icon-<?php echo $options['icon_id']; ?>"></span>
-			</div><!-- .dslc-micon-module -->
+			<?php if ( 'font' == $options['show_icon'] ) : ?>
+
+				<div class="dslc-micon-module">
+					<span class="dslc-icon dslc-icon-<?php echo $options['icon_id']; ?>"></span>
+				</div><!-- .dslc-micon-module -->
+
+			<?php elseif ( 'svg' == $options['show_icon'] ) : ?>
+
+				<div class="dslc-micon-module">
+					<svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<defs>
+						<?php echo stripslashes( $options['symbol_definition'] ); ?>
+					</defs>
+					</svg>
+					<?php echo stripslashes( $options['html_svg'] ); ?>
+				</div><!-- .dslc-micon-module -->
+
+			<?php endif; ?>
 
 		<?php
 
