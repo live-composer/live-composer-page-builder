@@ -1895,7 +1895,6 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 
 	.dslc-modules-section:hover .dslca-modules-section-manage {
 		visibility: visible !important;
-        z-index: 999999;
 	}
 		.dslca-modules-section-manage-inner,
 		.dslca-module-manage-inner {
