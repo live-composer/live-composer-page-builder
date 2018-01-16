@@ -2033,6 +2033,10 @@ function dslc_module_testimonials_output( $atts, $content = null ) {
 		$show_header = true;
 	}
 
+	if ( $show_carousel_arrows && ( $options['arrows_position'] == 'aside' ) ) {
+		$container_class .= 'dslc-carousel-arrow-aside ';
+	}
+
 		/**
 		 * Carousel Items
 		 */

@@ -1078,8 +1078,14 @@
 
 	#dslc-content .dslc-testimonials {
 		border: 0px solid transparent;
-		position: relative;
 	}
+
+	#dslc-content .dslc-posts.dslc-carousel-arrow-aside {
+		position: relative;
+		width: 90%;
+		margin: 0 auto;
+	}
+
 
 		#dslc-content .dslc-testimonial {
 
@@ -2291,6 +2297,10 @@ body.dslca-enabled .dslc-notification-box-has-timeout {
 
 	.dslc-carousel .dslc-carousel-item {
 	    margin-left: 0 !important; /* https://github.com/live-composer/live-composer-page-builder/issues/555 */
+	}
+
+	#dslc-content .dslc-posts.dslc-carousel-arrow-aside {
+		width: 80%;
 	}
 
 }
