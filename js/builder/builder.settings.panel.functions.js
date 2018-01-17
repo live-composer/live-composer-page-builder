@@ -326,10 +326,36 @@ jQuery(document).ready(function($){
 								checkedCheckbox = $(optElem).is(":checked");
 							}
 
+							var section_tab = jQuery('.dslca-options-filter-hook.dslca-active').data('section');
+
 							if ( optElem.value == opt_val && checkedCheckbox ) {
 
-								opt_wrap.show();
+								if ( opt_wrap.not( ".dependent" ) ) {
+									opt_wrap.addClass('dependent');
+								}
+
+								if ( opt_wrap.hasClass('dep-hide') ) {
+									opt_wrap.removeClass('dep-hide');
+									opt_wrap.addClass('dep-show');
+								} else {
+									opt_wrap.addClass('dep-show');
+								}
+
+								if ( section_tab == opt_wrap.data('section') ) {
+									opt_wrap.show();
+								}
 							} else {
+
+								if ( opt_wrap.not( ".dependent" ) ) {
+									opt_wrap.addClass('dependent');
+								}
+
+								if ( opt_wrap.hasClass('dep-show') ) {
+									opt_wrap.removeClass('dep-show');
+									opt_wrap.addClass('dep-hide');
+								} else {
+									opt_wrap.addClass('dep-hide');
+								}
 
 								opt_wrap.hide();
 							}
@@ -890,6 +916,19 @@ function dslc_module_options_hideshow_tabs() {
 	}
 
 	jQuery('.dslca-module-edit-option[data-id="css_res_p"], .dslca-module-edit-option[data-id="css_res_t"]').css( 'visibility', 'visible' );
+
+
+	if ( jQuery('.dslca-options-filter-hook').hasClass('dslca-active') ) {
+		var section_tab = jQuery('.dslca-options-filter-hook.dslca-active').data('section');
+
+		if ( jQuery('.dslca-module-edit-option[data-section="' + section_tab + '"]').hasClass('dep-show') ) {
+			jQuery('.dslca-module-edit-option.dep-show').show();
+		}
+
+		if ( jQuery('.dslca-module-edit-option[data-section="' + section_tab + '"]').hasClass('dep-hide') ) {
+			jQuery('.dslca-module-edit-option.dep-hide').hide();
+		}
+	}
 }
 
 /**
