@@ -3100,6 +3100,10 @@ function dslc_module_blog_output( $atts, $content = null ) {
 	if ( $show_heading || $show_filters || $show_carousel_arrows ) {
 		$show_header = true;
 	}
+	
+	if ( $show_carousel_arrows && ( $options['arrows_position'] == 'aside' ) ) {
+		$container_class .= 'dslc-carousel-arrow-aside ';
+	}
 
 	/**
 	 * Carousel Items
@@ -3196,7 +3200,7 @@ function dslc_module_blog_output( $atts, $content = null ) {
 
 				<!-- Carousel -->
 
-				<?php if ( $show_carousel_arrows ) : ?>
+				<?php if ( $show_carousel_arrows && ( $options['arrows_position'] == 'above' ) ) : ?>
 						<span class="dslc-carousel-nav fr">
 							<span class="dslc-carousel-nav-inner">
 								<a href="#" class="dslc-carousel-nav-prev"><span class="dslc-icon-chevron-left"></span></a>
@@ -3216,9 +3220,13 @@ function dslc_module_blog_output( $atts, $content = null ) {
 
 	if ( $dslc_query->have_posts() ) {
 
-		?><div class="<?php echo $container_class; ?>"><?php
+		?><div class="<?php echo $container_class; ?>">
+			
+			<?php if ( $show_carousel_arrows && ( $options['arrows_position'] == 'aside' ) ) : ?>
+				<a href="#" class="dslc-carousel-nav-prev position-aside"><span class="dslc-icon-chevron-left"></span></a>
+			<?php endif; ?>
 
-		?><div class="dslc-posts-inner"><?php
+		<div class="dslc-posts-inner"><?php
 
 if ( $options['type'] == 'carousel' ) :
 
@@ -3548,9 +3556,13 @@ if ( $options['type'] == 'carousel' ) :
 
 			endif;
 
-			?></div><!-- .dslc-posts-inner --><?php
+			?></div><!-- .dslc-posts-inner -->
+			
+			<?php if ( $show_carousel_arrows && ( $options['arrows_position'] == 'aside' ) ) : ?>
+				<a href="#" class="dslc-carousel-nav-next position-aside"><span class="dslc-icon-chevron-right"></span></a>
+			<?php endif; ?>
 
-	?></div><!-- .dslc-blog-posts --><?php
+	</div><!-- .dslc-blog-posts --><?php
 
 	} else {
 

@@ -2152,12 +2152,12 @@ function dslc_module_testimonials_output( $atts, $content = null ) {
 	if ( $dslc_query->have_posts() ) :
 
 		?><div class="<?php echo $container_class; ?>">
+			
 			<?php if ( $show_carousel_arrows && ( $options['arrows_position'] == 'aside' ) ) : ?>
 				<a href="#" class="dslc-carousel-nav-prev position-aside"><span class="dslc-icon-chevron-left"></span></a>
 			<?php endif; ?>
-			<?php
-
-	?><div class="dslc-posts-inner"><?php
+			
+	<div class="dslc-posts-inner"><?php
 
 if ( $options['type'] == 'carousel' ) :
 
