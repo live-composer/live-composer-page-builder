@@ -7684,6 +7684,11 @@ msgstr ""
 msgid "Reply to %s."
 msgstr ""
 
+#: ../modules/tp-comments-form/module.php:1366
+#, php-format
+msgid "cancel"
+msgstr ""
+
 #: ../modules/tp-content/module.php:13
 msgid "The Content"
 msgstr ""

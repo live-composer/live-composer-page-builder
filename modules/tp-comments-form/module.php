@@ -1363,7 +1363,7 @@ function dslc_module_comments_form_output( $atts, $content = null ) {
 				global $commenter;
 				comment_form( array(
 					'label_submit' => $txt_submit_comment,
-					'cancel_reply_link' => 'cancel',
+					'cancel_reply_link' => __( 'cancel', 'live-composer-page-builder' ),
 					'comment_notes_before' => '',
 					'comment_notes_after' => '',
 					'title_reply' => $txt_leave_comment,
