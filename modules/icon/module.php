@@ -600,20 +600,14 @@ class DSLC_Icon extends DSLC_Module {
 		/* Module output stars here */
 
 		?>
-
-			<?php if ( 'font' == $options['show_icon'] ) : ?>
-
-				<div class="dslc-micon-module">
-					<span class="dslc-icon dslc-icon-<?php echo $options['icon_id']; ?>"></span>
-				</div><!-- .dslc-micon-module -->
-
-			<?php elseif ( 'svg' == $options['show_icon'] ) : ?>
-
-				<div class="dslc-micon-module">
+			
+			<div class="dslc-micon-module">
+				<?php if ( 'font' == $options['show_icon'] ) : ?>
+					<span class="dslc-icon dslc-icon-<?php echo $options['icon_id']; ?>"></span>	
+				<?php elseif ( 'svg' == $options['show_icon'] ) : ?>
 					<?php echo stripslashes( $options['inline_svg'] ); ?>
-				</div><!-- .dslc-micon-module -->
-
-			<?php endif; ?>
+				<?php endif; ?>
+			</div><!-- .dslc-micon-module -->
 
 		<?php
 
