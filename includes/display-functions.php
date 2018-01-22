@@ -542,38 +542,6 @@ function dslc_filter_content( $content ) {
 	// Get ID of the post in which the content filter fired.
 	$curr_id = get_the_ID();
 
-	if ( is_category() ) {
-		$categories = get_the_category();
-		$curr_id = $categories[0]->cat_ID;
-	}
-
-	if ( is_tag() ) {
-		$tags = get_the_tags();
-		$curr_id = $tags[0]->term_id;
-	}
-
-	if ( is_search() ) {
-
-		$args = array(
-			'post_type'  => 'dslc_templates',
-			'meta_query' => array(
-				array(
-					'key'     => 'dslc_template_for',
-					'value'   => 'search_results',
-				),
-				array(
-					'key'     => 'dslc_template_type',
-					'value'   => 'default',
-				),
-			),
-		);
-
-		$query = get_posts( $args );
-
-		$template_search = $query[0];
-		$curr_id = $template_search->ID;
-	}
-
 	// If post pass protected and pass not supplied return original content.
 	if ( post_password_required( $curr_id ) ) {
 		return $content;
@@ -582,6 +550,17 @@ function dslc_filter_content( $content ) {
 	// Initiate simple html rendering cache.
 	$cache = new DSLC_Cache( 'html' );
 	$cache_id = $curr_id;
+	
+	if ( is_archive() ) {
+		$post_type_slug = get_post_type();
+		$template_id = dslc_get_archive_template_by_pt( $post_type_slug );
+		$cache_id = $template_id;
+	}
+	
+	if ( is_search() ) {
+		$template_id = dslc_get_option( 'search_results', 'dslc_plugin_options_archives' );
+		$cache_id = $template_id;
+	}
 
 	// Check if we have html for this code cached?
 	if ( ! dslc_is_editor_active() && $cache->enabled() && $cache->cached( $cache_id ) ) {
