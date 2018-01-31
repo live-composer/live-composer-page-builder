@@ -326,7 +326,7 @@ jQuery(document).ready(function($){
 								checkedCheckbox = $(optElem).is(":checked");
 							}
 
-							var section_tab = jQuery('.dslca-options-filter-hook.dslca-active').data('section');
+							var section_tab = jQuery('.dslca-module-edit-options-tab-hook.dslca-active').data('id');
 
 							if ( optElem.value == opt_val && checkedCheckbox ) {
 
@@ -341,7 +341,7 @@ jQuery(document).ready(function($){
 									opt_wrap.addClass('dep-show');
 								}
 
-								if ( section_tab == opt_wrap.data('section') ) {
+								if ( section_tab == opt_wrap.data('tab') ) {
 									opt_wrap.show();
 								}
 							} else {
@@ -927,6 +927,24 @@ function dslc_module_options_hideshow_tabs() {
 
 		if ( jQuery('.dslca-module-edit-option[data-section="' + section_tab + '"]').hasClass('dep-hide') ) {
 			jQuery('.dslca-module-edit-option.dep-hide').hide();
+		}
+	}
+	
+	if ( jQuery('.dslca-module-edit-options-tab-hook').hasClass('dslca-active') ) {
+		var data_tab = jQuery('.dslca-module-edit-options-tab-hook.dslca-active').data('id');
+		
+		console.log(data_tab);
+		
+		if ( jQuery('.dslca-module-edit-option[data-tab="' + data_tab + '"]').hasClass('dependent') ) {
+			jQuery('.dslca-module-edit-option.dependent').hide();
+			jQuery('.dslca-module-edit-option[data-tab="' + data_tab + '"].dep-show').show();
+			jQuery('.dslca-module-edit-option[data-tab="' + data_tab + '"].dep-hide').hide();
+			
+			console.log('1');
+		} else {
+			jQuery('.dslca-module-edit-option.dependent').hide();
+			
+			console.log('2');
 		}
 	}
 }
