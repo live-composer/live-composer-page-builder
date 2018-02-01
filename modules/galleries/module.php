@@ -3076,10 +3076,10 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 
 														<div class="dslc-gallery-read-more">
 															<a href="<?php the_permalink(); ?>">
-																<?php if ( 'font' == $options['show_icon'] ) : ?>
-																	<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
-																<?php elseif ( 'svg' == $options['show_icon'] ) : ?>
+																<?php if ( 'svg' == $options['show_icon'] ) : ?>
 																	<?php echo stripslashes( $options['button_inline_svg'] ); ?>
+																<?php else : ?>
+																	<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
 																<?php endif; ?>
 																<?php echo $options['button_text']; ?>
 															</a>
@@ -3151,10 +3151,10 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 
 										<div class="dslc-gallery-read-more">
 											<a href="<?php the_permalink(); ?>">
-												<?php if ( 'font' == $options['show_icon'] ) : ?>
-													<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
-												<?php elseif ( 'svg' == $options['show_icon'] ) : ?>
+												<?php if ( 'svg' == $options['show_icon'] ) : ?>
 													<?php echo stripslashes( $options['button_inline_svg'] ); ?>
+												<?php else : ?>
+													<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
 												<?php endif; ?>
 												<?php echo $options['button_text']; ?>
 											</a>

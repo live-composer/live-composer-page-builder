@@ -566,7 +566,7 @@ class DSLC_Button extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'Icon', 'live-composer-page-builder' ),
 				'dependent_controls' => array(
-					'enabled' => 'icon_pos, button_icon_id, css_icon_color, css_icon_color_hover, css_icon_margin, css_icon_margin_left, show_icon, inline_svg, css_button_icon_size_svg',
+					'enabled' => 'icon_pos, button_icon_id, css_icon_color, css_icon_color_hover, css_icon_margin, css_icon_margin_left, show_icon, button_inline_svg, css_button_icon_size_svg',
 				),
 			),
 			array(
@@ -616,7 +616,7 @@ class DSLC_Button extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Inline SVG', 'live-composer-page-builder' ),
-				'id' => 'inline_svg',
+				'id' => 'button_inline_svg',
 				'std' => '',
 				'type' => 'textarea',
 				'section' => 'styling',
@@ -1177,10 +1177,10 @@ class DSLC_Button extends DSLC_Module {
 					<a href="<?php echo $options['button_url']; ?>" <?php echo $anchor_append;
 					if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?> class="dslc-lightbox-image <?php echo trim( esc_attr( $classes ) ); ?>">
 						<?php if ( $options['button_state'] == 'enabled' && $options['icon_pos'] == 'left' ) : ?>
-							<?php if ( 'font' == $options['show_icon'] ) : ?>
+							<?php if ( 'svg' == $options['show_icon'] ) : ?>
+								<?php echo stripslashes( $options['button_inline_svg'] ); ?>
+							<?php else : ?>
 								<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
-							<?php elseif ( 'svg' == $options['show_icon'] ) : ?>
-								<?php echo stripslashes( $options['inline_svg'] ); ?>
 							<?php endif; ?>
 						<?php endif; ?>
 						<?php if ( $dslc_is_admin ) : ?>
@@ -1189,10 +1189,10 @@ class DSLC_Button extends DSLC_Module {
 							<?php echo stripslashes( $options['button_text'] ); ?>
 						<?php endif; ?>
 						<?php if ( $options['button_state'] == 'enabled' && $options['icon_pos'] == 'right' ) : ?>
-							<?php if ( 'font' == $options['show_icon'] ) : ?>
+							<?php if ( 'svg' == $options['show_icon'] ) : ?>
+								<?php echo stripslashes( $options['button_inline_svg'] ); ?>
+							<?php else : ?>
 								<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
-							<?php elseif ( 'svg' == $options['show_icon'] ) : ?>
-								<?php echo stripslashes( $options['inline_svg'] ); ?>
 							<?php endif; ?>
 						<?php endif; ?>
 					</a>
@@ -1200,10 +1200,10 @@ class DSLC_Button extends DSLC_Module {
 					<a href="<?php echo $options['button_url']; ?>" target="<?php echo $options['button_target']; ?>" <?php echo $anchor_append;
 					if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?> class="<?php echo trim( esc_attr( $classes ) ); ?>">
 						<?php if ( $options['button_state'] == 'enabled' && $options['icon_pos'] == 'left' ) : ?>
-							<?php if ( 'font' == $options['show_icon'] ) : ?>
+							<?php if ( 'svg' == $options['show_icon'] ) : ?>
+								<?php echo stripslashes( $options['button_inline_svg'] ); ?>
+							<?php else : ?>
 								<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
-							<?php elseif ( 'svg' == $options['show_icon'] ) : ?>
-								<?php echo stripslashes( $options['inline_svg'] ); ?>
 							<?php endif; ?>
 						<?php endif; ?>
 						<?php if ( $dslc_is_admin ) : ?>
@@ -1212,10 +1212,10 @@ class DSLC_Button extends DSLC_Module {
 							<?php echo stripslashes( $options['button_text'] ); ?>
 						<?php endif; ?>
 						<?php if ( $options['button_state'] == 'enabled' && $options['icon_pos'] == 'right' ) : ?>
-							<?php if ( 'font' == $options['show_icon'] ) : ?>
+							<?php if ( 'svg' == $options['show_icon'] ) : ?>
+								<?php echo stripslashes( $options['button_inline_svg'] ); ?>
+							<?php else : ?>
 								<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
-							<?php elseif ( 'svg' == $options['show_icon'] ) : ?>
-								<?php echo stripslashes( $options['inline_svg'] ); ?>
 							<?php endif; ?>
 						<?php endif; ?>
 					</a>

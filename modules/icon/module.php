@@ -469,10 +469,10 @@ class DSLC_Icon extends DSLC_Module {
 		?>
 			
 			<div class="dslc-micon-module">
-				<?php if ( 'font' == $options['show_icon'] ) : ?>
-					<span class="dslc-icon dslc-icon-<?php echo $options['icon_id']; ?>"></span>	
-				<?php elseif ( 'svg' == $options['show_icon'] ) : ?>
+				<?php if ( 'svg' == $options['show_icon'] ) : ?>
 					<?php echo stripslashes( $options['inline_svg'] ); ?>
+				<?php else : ?>
+					<span class="dslc-icon dslc-icon-<?php echo $options['icon_id']; ?>"></span>	
 				<?php endif; ?>
 			</div><!-- .dslc-micon-module -->
 

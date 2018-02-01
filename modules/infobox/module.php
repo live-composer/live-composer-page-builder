@@ -3135,10 +3135,10 @@ class DSLC_Info_Box extends DSLC_Module {
 						<div class="dslc-info-box-button dslc-info-box-button-aside">
 							<?php if ( isset( $options['button_link'] ) && ! empty( $options['button_link'] ) ) : ?>
 								<a href="<?php echo $options['button_link']; ?>" target="<?php echo $options['button_target']; ?>" <?php if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?> class="dslc-primary">
-									<?php if ( 'font' == $options['button_show_icon'] ) : ?>
-										<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
-									<?php elseif ( 'svg' == $options['button_show_icon'] ) : ?>
+									<?php if ( 'svg' == $options['button_show_icon'] ) : ?>
 										<?php echo stripslashes( $options['button_inline_svg'] ); ?>
+									<?php else : ?>
+										<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
 									<?php endif; ?>
 									<?php if ( $dslc_is_admin ) : ?>
 										<span class="dslca-editable-content" data-id="button_title" data-type="simple" contenteditable="true"><?php echo $options['button_title']; ?></span>
@@ -3148,10 +3148,10 @@ endif; ?>
 							<?php endif; ?>
 							<?php if ( isset( $options['button_2_link'] ) && ! empty( $options['button_2_link'] ) ) : ?>
 								<a href="<?php echo $options['button_2_link']; ?>" target="<?php echo $options['button_2_target']; ?>" <?php if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?> class="dslc-secondary">
-									<?php if ( 'font' == $options['button_2_show_icon'] ) : ?>
-										<span class="dslc-icon dslc-icon-<?php echo $options['button_2_icon_id']; ?>"></span>	
-									<?php elseif ( 'svg' == $options['button_2_show_icon'] ) : ?>
+									<?php if ( 'svg' == $options['button_2_show_icon'] ) : ?>
 										<?php echo stripslashes( $options['button_2_inline_svg'] ); ?>
+									<?php else : ?>
+										<span class="dslc-icon dslc-icon-<?php echo $options['button_2_icon_id']; ?>"></span>	
 									<?php endif; ?>
 									<?php if ( $dslc_is_admin ) : ?>
 										<span class="dslca-editable-content" data-id="button_2_title" data-type="simple" contenteditable="true"><?php echo $options['button_2_title']; ?></span>
@@ -3167,10 +3167,10 @@ endif; ?>
 						<?php if ( in_array( 'icon', $elements ) ) : ?>
 							<div class="dslc-info-box-image">
 								<div class="dslc-info-box-image-inner">
-									<?php if ( 'font' == $options['show_icon'] ) : ?>
-										<span class="dslc-icon dslc-icon-<?php echo $options['icon_id']; ?>"></span>	
-									<?php elseif ( 'svg' == $options['show_icon'] ) : ?>
+									<?php if ( 'svg' == $options['show_icon']) : ?>
 										<?php echo stripslashes( $options['inline_svg'] ); ?>
+									<?php else : ?>
+										<span class="dslc-icon dslc-icon-<?php echo $options['icon_id']; ?>"></span>	
 									<?php endif; ?>
 									<?php if ( ! empty( $options['icon_link'] ) ) : ?>
 										<a class="dslc-info-box-image-link" href="<?php echo $options['icon_link']; ?>" <?php if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?> target="<?php echo $options['icon_link_target']; ?>"></a>
@@ -3230,10 +3230,10 @@ endif; ?>
 								<div class="dslc-info-box-button">
 									<?php if ( isset( $options['button_link'] ) && ! empty( $options['button_link'] ) ) : ?>
 										<a href="<?php echo $options['button_link']; ?>" <?php if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?> target="<?php echo $options['button_target']; ?>" class="dslc-primary">
-											<?php if ( 'font' == $options['button_show_icon'] ) : ?>
-												<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
-											<?php elseif ( 'svg' == $options['button_show_icon'] ) : ?>
+											<?php if ( 'svg' == $options['button_show_icon'] ) : ?>
 												<?php echo stripslashes( $options['button_inline_svg'] ); ?>
+											<?php else : ?>
+												<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
 											<?php endif; ?>
 											<?php if ( $dslc_is_admin ) : ?>
 												<span class="dslca-editable-content" data-id="button_title" data-type="simple" contenteditable="true"><?php echo $options['button_title']; ?></span>
@@ -3243,10 +3243,10 @@ endif; ?>
 									<?php endif; ?>
 									<?php if ( isset( $options['button_2_link'] ) && ! empty( $options['button_2_link'] ) ) : ?>
 										<a href="<?php echo $options['button_2_link']; ?>" <?php if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?> target="<?php echo $options['button_2_target']; ?>" class="dslc-secondary">
-											<?php if ( 'font' == $options['button_2_show_icon'] ) : ?>
-												<span class="dslc-icon dslc-icon-<?php echo $options['button_2_icon_id']; ?>"></span>	
-											<?php elseif ( 'svg' == $options['button_2_show_icon'] ) : ?>
+											<?php if ( 'svg' == $options['button_2_show_icon'] ) : ?>
 												<?php echo stripslashes( $options['button_2_inline_svg'] ); ?>
+											<?php else : ?>
+												<span class="dslc-icon dslc-icon-<?php echo $options['button_2_icon_id']; ?>"></span>	
 											<?php endif; ?>
 											<?php if ( $dslc_is_admin ) : ?>
 												<span class="dslca-editable-content" data-id="button_2_title" data-type="simple" contenteditable="true"><?php echo $options['button_2_title']; ?></span>
