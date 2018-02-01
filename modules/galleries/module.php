@@ -1828,6 +1828,29 @@ class DSLC_Galleries extends DSLC_Module {
 				'tab' => __( 'Button', 'live-composer-page-builder' ),
 			),
 			array(
+				'label' => __( 'Show Icon', 'live-composer-page-builder' ),
+				'id' => 'show_icon',
+				'std' => 'font',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'Font', 'live-composer-page-builder' ),
+						'value' => 'font',
+					),
+					array(
+						'label' => __( 'SVG', 'live-composer-page-builder' ),
+						'value' => 'svg',
+					),
+				),
+				'dependent_controls' => array(
+					'font' => 'button_icon_id',
+					'svg' => 'button_inline_svg, css_button_icon_size_svg',
+				),
+				'help' => __( 'Select type of icon.', 'live-composer-page-builder' ),
+				'section' => 'styling',
+				'tab' => __( 'Button', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Icon', 'live-composer-page-builder' ),
 				'id' => 'button_icon_id',
 				'std' => '',
@@ -1836,13 +1859,35 @@ class DSLC_Galleries extends DSLC_Module {
 				'tab' => __( 'Button', 'live-composer-page-builder' ),
 			),
 			array(
+				'label' => __( 'Inline SVG', 'live-composer-page-builder' ),
+				'id' => 'button_inline_svg',
+				'std' => '',
+				'type' => 'textarea',
+				'section' => 'functionality',
+				'help' => __( 'Paste your SVG code.', 'live-composer-page-builder' ),
+				'section' => 'styling',
+				'tab' => __( 'Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Size ( SVG )', 'live-composer-page-builder' ),
+				'id' => 'css_button_icon_size_svg',
+				'std' => '11',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-gallery-read-more a svg',
+				'affect_on_change_rule' => 'width, height',
+				'section' => 'styling',
+				'tab' => __( 'Button', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
 				'label' => __( 'Icon - Color', 'live-composer-page-builder' ),
 				'id' => 'css_button_icon_color',
 				'std' => '',
 				'type' => 'color',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-gallery-read-more a .dslc-icon',
-				'affect_on_change_rule' => 'color',
+				'affect_on_change_el' => '.dslc-gallery-read-more a .dslc-icon, .dslc-gallery-read-more a svg',
+				'affect_on_change_rule' => 'color, fill',
 				'section' => 'styling',
 				'tab' => __( 'Button', 'live-composer-page-builder' ),
 			),
@@ -1852,8 +1897,8 @@ class DSLC_Galleries extends DSLC_Module {
 				'std' => '',
 				'type' => 'color',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-gallery-read-more a:hover .dslc-icon',
-				'affect_on_change_rule' => 'color',
+				'affect_on_change_el' => '.dslc-gallery-read-more a:hover .dslc-icon, .dslc-gallery-read-more a:hover svg',
+				'affect_on_change_rule' => 'color, fill',
 				'section' => 'styling',
 				'tab' => __( 'Button', 'live-composer-page-builder' ),
 			),
@@ -1863,7 +1908,7 @@ class DSLC_Galleries extends DSLC_Module {
 				'std' => '5',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-gallery-read-more a .dslc-icon',
+				'affect_on_change_el' => '.dslc-gallery-read-more a .dslc-icon, .dslc-gallery-read-more a svg',
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'styling',
 				'ext' => 'px',
@@ -2123,6 +2168,70 @@ class DSLC_Galleries extends DSLC_Module {
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
+			array(
+				'label' => __( 'Button - Font Size', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_button_font_size',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '11',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-gallery-read-more a',
+				'affect_on_change_rule' => 'font-size',
+				'section' => 'responsive',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Button - Padding Vertical', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_button_padding_vertical',
+				'onlypositive' => true, // Value can't be negative.
+				'max' => 600,
+				'std' => '12',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-gallery-read-more a',
+				'affect_on_change_rule' => 'padding-top,padding-bottom',
+				'section' => 'responsive',
+				'ext' => 'px',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Button - Padding Horizontal', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_button_padding_horizontal',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '12',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-gallery-read-more a',
+				'affect_on_change_rule' => 'padding-left,padding-right',
+				'section' => 'responsive',
+				'ext' => 'px',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Button - Icon - Size ( SVG )', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_button_icon_size_svg',
+				'std' => '11',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-gallery-read-more a svg',
+				'affect_on_change_rule' => 'width, height',
+				'section' => 'responsive',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Button - Icon - Margin Right', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_button_icon_margin',
+				'std' => '5',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-gallery-read-more a .dslc-icon, .dslc-gallery-read-more a svg',
+				'affect_on_change_rule' => 'margin-right',
+				'section' => 'responsive',
+				'ext' => 'px',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
 
 			/**
 			 * Responsive Phone
@@ -2375,6 +2484,70 @@ class DSLC_Galleries extends DSLC_Module {
 				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Button - Font Size', 'live-composer-page-builder' ),
+				'id' => 'css_res_p_button_font_size',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '11',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-gallery-read-more a',
+				'affect_on_change_rule' => 'font-size',
+				'section' => 'responsive',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Button - Padding Vertical', 'live-composer-page-builder' ),
+				'id' => 'css_res_p_button_padding_vertical',
+				'onlypositive' => true, // Value can't be negative.
+				'max' => 600,
+				'std' => '12',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-gallery-read-more a',
+				'affect_on_change_rule' => 'padding-top,padding-bottom',
+				'section' => 'responsive',
+				'ext' => 'px',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Button - Padding Horizontal', 'live-composer-page-builder' ),
+				'id' => 'css_res_p_button_padding_horizontal',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '12',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-gallery-read-more a',
+				'affect_on_change_rule' => 'padding-left,padding-right',
+				'section' => 'responsive',
+				'ext' => 'px',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Button - Icon - Size ( SVG )', 'live-composer-page-builder' ),
+				'id' => 'css_res_p_button_icon_size_svg',
+				'std' => '11',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-gallery-read-more a svg',
+				'affect_on_change_rule' => 'width, height',
+				'section' => 'responsive',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Button - Icon - Margin Right', 'live-composer-page-builder' ),
+				'id' => 'css_res_p_button_icon_margin',
+				'std' => '5',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-gallery-read-more a .dslc-icon, .dslc-gallery-read-more a svg',
+				'affect_on_change_rule' => 'margin-right',
+				'section' => 'responsive',
+				'ext' => 'px',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 
 		);
@@ -2903,8 +3076,10 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 
 														<div class="dslc-gallery-read-more">
 															<a href="<?php the_permalink(); ?>">
-																<?php if ( isset( $options['button_icon_id'] ) && $options['button_icon_id'] != '' ) : ?>
-																	<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
+																<?php if ( 'font' == $options['show_icon'] ) : ?>
+																	<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
+																<?php elseif ( 'svg' == $options['show_icon'] ) : ?>
+																	<?php echo stripslashes( $options['button_inline_svg'] ); ?>
 																<?php endif; ?>
 																<?php echo $options['button_text']; ?>
 															</a>
@@ -2976,8 +3151,10 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 
 										<div class="dslc-gallery-read-more">
 											<a href="<?php the_permalink(); ?>">
-												<?php if ( isset( $options['button_icon_id'] ) && $options['button_icon_id'] != '' ) : ?>
-													<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
+												<?php if ( 'font' == $options['show_icon'] ) : ?>
+													<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
+												<?php elseif ( 'svg' == $options['show_icon'] ) : ?>
+													<?php echo stripslashes( $options['button_inline_svg'] ); ?>
 												<?php endif; ?>
 												<?php echo $options['button_text']; ?>
 											</a>
