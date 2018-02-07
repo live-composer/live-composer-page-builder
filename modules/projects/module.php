@@ -1626,6 +1626,29 @@ class DSLC_Projects extends DSLC_Module {
 				'tab' => __( 'Button', 'live-composer-page-builder' ),
 			),
 			array(
+				'label' => __( 'Show Icon', 'live-composer-page-builder' ),
+				'id' => 'show_icon',
+				'std' => 'font',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'Font', 'live-composer-page-builder' ),
+						'value' => 'font',
+					),
+					array(
+						'label' => __( 'SVG', 'live-composer-page-builder' ),
+						'value' => 'svg',
+					),
+				),
+				'dependent_controls' => array(
+					'font' => 'button_icon_id',
+					'svg' => 'button_inline_svg, css_button_icon_size_svg',
+				),
+				'help' => __( 'Select type of icon.', 'live-composer-page-builder' ),
+				'section' => 'styling',
+				'tab' => __( 'Button', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Icon', 'live-composer-page-builder' ),
 				'id' => 'button_icon_id',
 				'std' => '',
@@ -1634,13 +1657,35 @@ class DSLC_Projects extends DSLC_Module {
 				'tab' => __( 'Button', 'live-composer-page-builder' ),
 			),
 			array(
+				'label' => __( 'Inline SVG', 'live-composer-page-builder' ),
+				'id' => 'button_inline_svg',
+				'std' => '',
+				'type' => 'textarea',
+				'section' => 'functionality',
+				'help' => __( 'Paste your SVG code.', 'live-composer-page-builder' ),
+				'section' => 'styling',
+				'tab' => __( 'Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Size ( SVG )', 'live-composer-page-builder' ),
+				'id' => 'css_button_icon_size_svg',
+				'std' => '11',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-project-read-more a svg',
+				'affect_on_change_rule' => 'width, height',
+				'section' => 'styling',
+				'tab' => __( 'Button', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
 				'label' => __( 'Icon - Color', 'live-composer-page-builder' ),
 				'id' => 'css_button_icon_color',
 				'std' => '',
 				'type' => 'color',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon',
-				'affect_on_change_rule' => 'color',
+				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon, .dslc-project-read-more a svg',
+				'affect_on_change_rule' => 'color, fill',
 				'section' => 'styling',
 				'tab' => __( 'Button', 'live-composer-page-builder' ),
 			),
@@ -1650,7 +1695,7 @@ class DSLC_Projects extends DSLC_Module {
 				'std' => '5',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon',
+				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon, .dslc-project-read-more a svg',
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'styling',
 				'ext' => 'px',
@@ -1927,12 +1972,24 @@ class DSLC_Projects extends DSLC_Module {
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
+				'label' => __( 'Button Icon - Size ( SVG )', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_button_icon_size_svg',
+				'std' => '11',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-project-read-more a svg',
+				'affect_on_change_rule' => 'width, height',
+				'section' => 'responsive',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
 				'label' => __( 'Button Icon - Margin Right', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_button_icon_margin',
 				'std' => '5',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon',
+				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon, .dslc-project-read-more a svg',
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'responsive',
 				'ext' => 'px',
@@ -2209,12 +2266,24 @@ class DSLC_Projects extends DSLC_Module {
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
+				'label' => __( 'Button Icon - Size ( SVG )', 'live-composer-page-builder' ),
+				'id' => 'css_res_p_button_icon_size_svg',
+				'std' => '11',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-project-read-more a svg',
+				'affect_on_change_rule' => 'width, height',
+				'section' => 'responsive',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
 				'label' => __( 'Button Icon - Margin Right', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_button_icon_margin',
 				'std' => '5',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon',
+				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon, .dslc-project-read-more a svg',
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'responsive',
 				'ext' => 'px',
@@ -2737,8 +2806,10 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 
 														<div class="dslc-project-read-more">
 															<a href="<?php echo $the_project_url; ?>" target="<?php echo $the_project_url_target; ?>">
-																<?php if ( isset( $options['button_icon_id'] ) && $options['button_icon_id'] != '' ) : ?>
-																	<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
+																<?php if ( 'svg' == $options['show_icon'] ) : ?>
+																	<?php echo stripslashes( $options['button_inline_svg'] ); ?>
+																<?php else : ?>
+																	<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
 																<?php endif; ?>
 																<?php echo $options['button_text']; ?>
 															</a>
@@ -2822,8 +2893,10 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 
 										<div class="dslc-project-read-more">
 											<a href="<?php echo $the_project_url; ?>" target="<?php echo $the_project_url_target; ?>">
-												<?php if ( isset( $options['button_icon_id'] ) && $options['button_icon_id'] != '' ) : ?>
-													<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
+												<?php if ( 'svg' == $options['show_icon'] ) : ?>
+													<?php echo stripslashes( $options['button_inline_svg'] ); ?>
+												<?php else : ?>
+													<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
 												<?php endif; ?>
 												<?php echo $options['button_text']; ?>
 											</a>

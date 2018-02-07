@@ -69,10 +69,39 @@ class DSLC_Icon extends DSLC_Module {
 				),
 			),
 			array(
+				'label' => __( 'Show Icon', 'live-composer-page-builder' ),
+				'id' => 'show_icon',
+				'std' => 'font',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'Font', 'live-composer-page-builder' ),
+						'value' => 'font',
+					),
+					array(
+						'label' => __( 'SVG', 'live-composer-page-builder' ),
+						'value' => 'svg',
+					),
+				),
+				'dependent_controls' => array(
+					'font' => 'icon_id',
+					'svg' => 'inline_svg',
+				),
+				'help' => __( 'Select type of icon.', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Icon', 'live-composer-page-builder' ),
 				'id' => 'icon_id',
 				'std' => 'heart',
 				'type' => 'icon',
+			),
+			array(
+				'label' => __( 'Inline SVG', 'live-composer-page-builder' ),
+				'id' => 'inline_svg',
+				'std' => '',
+				'type' => 'textarea',
+				'section' => 'functionality',
+				'help' => __( 'Paste your SVG code.', 'live-composer-page-builder' ),
 			),
 
 			/**
@@ -241,8 +270,8 @@ class DSLC_Icon extends DSLC_Module {
 				'std' => '#000',
 				'type' => 'color',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-icon',
-				'affect_on_change_rule' => 'color',
+				'affect_on_change_el' => '.dslc-icon, .dslc-micon-module svg',
+				'affect_on_change_rule' => 'color, fill',
 				'section' => 'styling',
 				'tab' => __( 'Icon', 'live-composer-page-builder' ),
 			),
@@ -252,8 +281,8 @@ class DSLC_Icon extends DSLC_Module {
 				'std' => '#000',
 				'type' => 'color',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-micon-module:hover .dslc-icon',
-				'affect_on_change_rule' => 'color',
+				'affect_on_change_el' => '.dslc-micon-module:hover .dslc-icon, .dslc-micon-module:hover svg',
+				'affect_on_change_rule' => 'color, fill',
 				'section' => 'styling',
 				'tab' => __( 'Icon', 'live-composer-page-builder' ),
 			),
@@ -263,14 +292,14 @@ class DSLC_Icon extends DSLC_Module {
 				'std' => '31',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-icon',
-				'affect_on_change_rule' => 'font-size',
+				'affect_on_change_el' => '.dslc-icon, .dslc-micon-module svg',
+				'affect_on_change_rule' => 'font-size, height, width',
 				'section' => 'styling',
 				'ext' => 'px',
 				'tab' => __( 'Icon', 'live-composer-page-builder' ),
 			),
 			array(
-				'label' => __( 'Icon Shadow', 'live-composer-page-builder' ),
+				'label' => __( 'Icon Shadow ( Font )', 'live-composer-page-builder' ),
 				'id' => 'css_icon_text_shadow',
 				'std' => '',
 				'type' => 'text_shadow',
@@ -327,7 +356,6 @@ class DSLC_Icon extends DSLC_Module {
 				'section' => 'responsive',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'max' => 500,
-
 				'ext' => 'px',
 			),
 			array(
@@ -344,13 +372,13 @@ class DSLC_Icon extends DSLC_Module {
 				'ext' => 'px',
 			),
 			array(
-				'label' => __( 'Size', 'live-composer-page-builder' ),
+				'label' => __( 'Size ( Font )', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_icon_size',
 				'std' => '31',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-icon',
-				'affect_on_change_rule' => 'font-size',
+				'affect_on_change_el' => '.dslc-icon, .dslc-micon-module svg',
+				'affect_on_change_rule' => 'font-size, height, width',
 				'section' => 'responsive',
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
@@ -402,7 +430,6 @@ class DSLC_Icon extends DSLC_Module {
 				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'max' => 500,
-
 				'ext' => 'px',
 			),
 			array(
@@ -419,13 +446,13 @@ class DSLC_Icon extends DSLC_Module {
 				'ext' => 'px',
 			),
 			array(
-				'label' => __( 'Size', 'live-composer-page-builder' ),
+				'label' => __( 'Size ( Font )', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_icon_size',
 				'std' => '31',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-icon',
-				'affect_on_change_rule' => 'font-size',
+				'affect_on_change_el' => '.dslc-icon, .dslc-micon-module svg',
+				'affect_on_change_rule' => 'font-size, height, width',
 				'section' => 'responsive',
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
@@ -462,9 +489,13 @@ class DSLC_Icon extends DSLC_Module {
 		/* Module output stars here */
 
 		?>
-
+			
 			<div class="dslc-micon-module">
-				<span class="dslc-icon dslc-icon-<?php echo $options['icon_id']; ?>"></span>
+				<?php if ( 'svg' == $options['show_icon'] ) : ?>
+					<?php echo stripslashes( $options['inline_svg'] ); ?>
+				<?php else : ?>
+					<span class="dslc-icon dslc-icon-<?php echo $options['icon_id']; ?>"></span>	
+				<?php endif; ?>
 			</div><!-- .dslc-micon-module -->
 
 		<?php
