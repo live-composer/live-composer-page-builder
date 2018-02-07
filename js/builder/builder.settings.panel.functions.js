@@ -69,8 +69,11 @@ jQuery(document).ready(function($){
 
 	/* Initiate all the slider controls on the module options panel. */
 	jQuery('.dslca-container').on('mouseenter', '.dslca-module-edit-option-slider', function() {
-
-		dslc_module_options_numeric( this );
+		
+		// Fixed: https://github.com/live-composer/live-composer-page-builder/issues/740
+		if ( ! jQuery(this).hasClass( 'dslca-module-edit-option-select' ) ) {
+        	dslc_module_options_numeric( this );
+		}
 	});
 
 	/* Initiate all the slider controls on the row options panel. */
