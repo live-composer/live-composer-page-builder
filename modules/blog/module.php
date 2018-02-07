@@ -1204,6 +1204,35 @@ class DSLC_Blog extends DSLC_Module {
 				'tab' => __( 'Meta', 'live-composer-page-builder' ),
 			),
 			array(
+				'label' => __( 'Position', 'live-composer-page-builder' ),
+				'id' => 'meta_position',
+				'std' => 'default',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'Default', 'live-composer-page-builder' ),
+						'value' => 'default',
+					),
+					array(
+						'label' => __( 'Above', 'live-composer-page-builder' ),
+						'value' => 'above',
+					),
+				),
+				'section' => 'styling',
+				'tab' => __( 'Meta', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Text Align', 'live-composer-page-builder' ),
+				'id' => 'css_meta_text_align',
+				'std' => 'center',
+				'type' => 'text_align',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-blog-post-meta',
+				'affect_on_change_rule' => 'text-align',
+				'section' => 'styling',
+				'tab' => __( 'Meta', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Border Color', 'live-composer-page-builder' ),
 				'id' => 'css_meta_border_color',
 				'std' => '#e5e5e5',
@@ -1356,12 +1385,24 @@ class DSLC_Blog extends DSLC_Module {
 				'ext' => 'px',
 			),
 			array(
-				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
+				'label' => __( 'Margin Bottom ( Wrapper )', 'live-composer-page-builder' ),
 				'id' => 'css_meta_margin_bottom',
 				'std' => '16',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-blog-post-meta',
+				'affect_on_change_rule' => 'margin-bottom',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Meta', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
+				'id' => 'css_meta_item_margin_bottom',
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-cpt-post-meta-author, .dslc-cpt-post-meta-date',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'styling',
 				'ext' => 'px',
@@ -3337,13 +3378,13 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 														<div class="dslc-blog-post-meta">
 
 															<?php if ( in_array( 'author', $meta_elements ) ) : ?>
-																<div class="dslc-blog-post-meta-author">
+																<div class="dslc-blog-post-meta-author <?php if ( $options['meta_position'] == 'above' ) { echo 'above'; }  ?>">
 																	<?php _e( 'By', 'live-composer-page-builder' ); ?> <?php the_author_posts_link(); ?>
 																</div><!-- .dslc-blog-post-meta-author -->
 															<?php endif; ?>
 
 															<?php if ( in_array( 'author', $meta_elements ) ) : ?>
-																<div class="dslc-blog-post-meta-date">
+																<div class="dslc-blog-post-meta-date <?php if ( $options['meta_position'] == 'above' ) { echo 'above'; }  ?>">
 																	<?php the_time( get_option( 'date_format' ) ); ?>
 																</div><!-- .dslc-blog-post-meta-date -->
 															<?php endif; ?>
@@ -3432,7 +3473,7 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 										<div class="dslc-blog-post-meta">
 
 											<?php if ( in_array( 'author', $meta_elements ) ) : ?>
-												<div class="dslc-blog-post-meta-author">
+												<div class="dslc-blog-post-meta-author <?php if ( $options['meta_position'] == 'above' ) { echo 'above'; }  ?>">
 													<span class="dslc-blog-post-meta-avatar">
 														<?php echo get_avatar( get_the_author_meta( 'ID' ), 100 ); ?>
 													</span>
@@ -3441,7 +3482,7 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 											<?php endif; ?>
 
 											<?php if ( in_array( 'date', $meta_elements ) ) : ?>
-												<div class="dslc-blog-post-meta-date">
+												<div class="dslc-blog-post-meta-date <?php if ( $options['meta_position'] == 'above' ) { echo 'above'; }  ?>">
 													<?php the_time( get_option( 'date_format' ) ); ?>
 												</div><!-- .dslc-blog-post-meta-date -->
 											<?php endif; ?>

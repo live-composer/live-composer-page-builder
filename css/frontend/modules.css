@@ -88,12 +88,20 @@
 					float: left;
 				}
 
+				#dslc-content .dslc-cpt-post-meta-author.above {
+					float: none;
+				}
+
 					#dslc-content .dslc-cpt-post-meta-author a {
 						text-decoration: none;
 					}
 
 				#dslc-content .dslc-cpt-post-meta-date {
 					float: right;
+				}
+
+				#dslc-content .dslc-cpt-post-meta-date.above {
+					float: none;
 				}
 
 			#dslc-content .dslc-cpt-post-title {
@@ -228,6 +236,10 @@
 					float: left;
 				}
 
+				#dslc-content .dslc-blog-post-meta-author.above {
+					float: none;
+				}
+
 					#dslc-content .dslc-blog-post-meta-avatar {
 						margin-right: 10px;
 						width: 30px;
@@ -247,6 +259,10 @@
 
 				#dslc-content .dslc-blog-post-meta-date {
 					float: right;
+				}
+
+				#dslc-content .dslc-blog-post-meta-date.above {
+					float: none;
 				}
 
 			#dslc-content .dslc-blog-post-title {
