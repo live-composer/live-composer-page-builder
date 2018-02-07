@@ -843,7 +843,8 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 			// Remove border-style property if width isn't set or is set to 0px.
 			// This rule fixes bugs with extra borders on text/shortcode elements.
 			if ( isset( $css_declaration_borders['border-style'] ) && 'none' !== $css_declaration_borders['border-style'] ) {
-				if ( empty( $css_declaration_borders['border-width'] ) || '0px' === $css_declaration_borders['border-width'] ) {
+				
+				if ( ( empty( $css_declaration_borders['border-width'] ) || '0px' === $css_declaration_borders['border-width'] ) && ! isset( $css_declaration_borders['border-bottom-width'] ) ) {
 					unset( $css_declaration_borders['border-style'] );
 				}
 			}
