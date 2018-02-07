@@ -1096,6 +1096,13 @@
 		border: 0px solid transparent;
 	}
 
+	#dslc-content .dslc-posts.dslc-carousel-arrow-aside {
+		position: relative;
+		width: 90%;
+		margin: 0 auto;
+	}
+
+
 		#dslc-content .dslc-testimonial {
 
 		}
@@ -2310,5 +2317,9 @@ body.dslca-enabled .dslc-notification-box-has-timeout {
 
 	body #dslc-content .dslc-partner-thumb {
 		width: 100%;
+	}
+
+	#dslc-content .dslc-posts.dslc-carousel-arrow-aside {
+		width: 80%;
 	}
 }

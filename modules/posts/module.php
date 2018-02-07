@@ -2708,6 +2708,10 @@ function dslc_module_posts_output( $atts, $content = null ) {
 	if ( $show_heading || $show_filters || $show_carousel_arrows ) {
 		$show_header = true;
 	}
+	
+	if ( $show_carousel_arrows && ( $options['arrows_position'] == 'aside' ) ) {
+		$container_class .= 'dslc-carousel-arrow-aside ';
+	}
 
 	/**
 	 * Carousel Items
@@ -2797,23 +2801,25 @@ function dslc_module_posts_output( $atts, $content = null ) {
 					<?php endforeach; ?>
 
 				</div><!-- .dslc-post-filters --><?php
-			} // End if( $show_filters ).
+		} // End if( $show_filters ).
 
-			?>
+		?>
 
-			<!-- Carousel -->
+		<!-- Carousel -->
 
-			<?php if ( $show_carousel_arrows ) : ?>
-				<span class="dslc-carousel-nav fr">
-					<span class="dslc-carousel-nav-inner">
-						<a href="#" class="dslc-carousel-nav-prev"><span class="dslc-icon-chevron-left"></span></a>
-						<a href="#" class="dslc-carousel-nav-next"><span class="dslc-icon-chevron-right"></span></a>
-					</span>
-				</span><!-- .carousel-nav -->
-			<?php endif; ?>
+		<?php if ( $show_carousel_arrows && ( $options['arrows_position'] == 'above' ) ) : ?>
+							<span class="dslc-carousel-nav fr">
+								<span class="dslc-carousel-nav-inner">
+									<a href="#" class="dslc-carousel-nav-prev"><span class="dslc-icon-chevron-left"></span></a>
+									<a href="#" class="dslc-carousel-nav-next"><span class="dslc-icon-chevron-right"></span></a>
+								</span>
+							</span><!-- .carousel-nav -->
+						<?php endif; ?>
 
-		</div><!-- .dslc-module-heading --><?php
-	endif; // if ( $show_header ).
+			</div><!-- .dslc-module-heading -->
+				<?php
+
+			endif;
 
 	/**
 	 * Posts ( output )
@@ -2821,6 +2827,11 @@ function dslc_module_posts_output( $atts, $content = null ) {
 
 	if ( $dslc_query->have_posts() ) { ?>
 		<div class="<?php echo $container_class; ?>">
+			
+			<?php if ( $show_carousel_arrows && ( $options['arrows_position'] == 'aside' ) ) : ?>
+				<a href="#" class="dslc-carousel-nav-prev position-aside"><span class="dslc-icon-chevron-left"></span></a>
+			<?php endif; ?>
+			
 			<div class="dslc-posts-inner"><?php
 
 				if ( $options['type'] == 'carousel' ) : ?>
@@ -3107,6 +3118,11 @@ function dslc_module_posts_output( $atts, $content = null ) {
 					</div><!-- dslc-carousel --><?php
 				endif; ?>
 			</div><!--.dslc-posts-inner -->
+			
+			<?php if ( $show_carousel_arrows && ( $options['arrows_position'] == 'aside' ) ) : ?>
+				<a href="#" class="dslc-carousel-nav-next position-aside"><span class="dslc-icon-chevron-right"></span></a>
+			<?php endif; ?>	
+			
 		</div><!-- .dslc-cpt-posts --><?php
 	} else {
 		if ( $dslc_is_admin ) : ?>
