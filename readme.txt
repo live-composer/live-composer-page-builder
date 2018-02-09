@@ -3,7 +3,7 @@ Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page, page builder plugin, drag-n-drop page builder
 Requires at least: 4.7
 Tested up to: 4.9
-Stable tag: 1.3.10
+Stable tag: 1.3.11
 License: GPLv3
 
 Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
@@ -73,20 +73,33 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 
 == Changelog ==
 
-= Merry Christmas & Happy New Year =
+= FOUND A BUG? =
+* 🐛 [Please, report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
+* ⌛ [You can download any previous version here](https://github.com/live-composer/live-composer-page-builder/releases)
 
-[Peace](https://livecomposerplugin.com/peace) · [Pace](https://livecomposerplugin.com/peace) · [Paix](https://livecomposerplugin.com/peace) · [Paz](https://livecomposerplugin.com/peace) · [Pokój](https://livecomposerplugin.com/peace) · [Мир](https://livecomposerplugin.com/peace) · [Mír](https://livecomposerplugin.com/peace) · [Mier](https://livecomposerplugin.com/peace) · [Frieden](https://livecomposerplugin.com/peace) · [Fred](https://livecomposerplugin.com/peace) · [Vrede](https://livecomposerplugin.com/peace) · [Barış](https://livecomposerplugin.com/peace) · [Béke](https://livecomposerplugin.com/peace) · [Kedamaian](https://livecomposerplugin.com/peace) · [Hasîtî](https://livecomposerplugin.com/peace) · [Ειρήνη](https://livecomposerplugin.com/peace) · [和平](https://livecomposerplugin.com/peace) · [平和](https://livecomposerplugin.com/peace) · [שָׁלוֹם](https://livecomposerplugin.com/peace) · [سلام](https://livecomposerplugin.com/peace) · [สันติภาพ](https://livecomposerplugin.com/peace) · [शान्ति](https://livecomposerplugin.com/peace)
-
-
-= 1.3.10 - December 20th 2017 =
+= 1.3.11 - February 9th 2018 =
 
 = FOR OUR PRO USERS: =
 * 🦊 Live Composer now fully supports WooCommerce. [Check out our new extensions for this.](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
 * 👀 Did you see it? [Our new extensions pack is huge!](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
 
-= FOUND A BUG? =
-* 🐛 [Please, report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
-* ⌛ [You can download any previous version here](https://github.com/live-composer/live-composer-page-builder/releases)
+= Bug Fixes: =
+* Issue [#877](https://github.com/live-composer/live-composer-page-builder/issues/877): The category archive listing issue with the very first post ( Custom Post Type )
+* Issue [#873](https://github.com/live-composer/live-composer-page-builder/issues/873): Show/Hide Dependency
+* Issue [#860](https://github.com/live-composer/live-composer-page-builder/issues/860): A string from the Comment module cannot be translated
+* Issue [#852](https://github.com/live-composer/live-composer-page-builder/issues/852): Module Testimonials: Option 'Row Separator' don't work
+* Issue [#740](https://github.com/live-composer/live-composer-page-builder/issues/740): Broken select control in SLIDER module
+
+= Improved: =
+* Issue [#868](https://github.com/live-composer/live-composer-page-builder/issues/868): Module Testimonials: Add Logo and Icon
+* Issue [#867](https://github.com/live-composer/live-composer-page-builder/issues/867): Add arrows on the sides for modules ( post based )
+
+= New: =
+* Issue [#871](https://github.com/live-composer/live-composer-page-builder/issues/871): Add the ability to add icon SVG
+* Issue [#859](https://github.com/live-composer/live-composer-page-builder/issues/859): New options for modules
+
+
+= 1.3.10 - December 20th 2017 =
 
 In this update we improve compatibility with Yoast SEO plugin, with our premium [WooCommerce Integration](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration), improve the caching engine, add new hooks for 3-rd party developers, and polish some interface elements,
 
