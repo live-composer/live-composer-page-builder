@@ -257,7 +257,8 @@ jQuery( window ).load( function() {
 
 	// Add Predisegned section
 	jQuery(  '#lcps-panel ul.elements li' ).off( 'click' );
-	jQuery(  '#lcps-panel ul.elements li' ).on( 'click', function() {
+	jQuery(  '.lcps-designs .lcps-designs__single' ).on( 'click', function() {
+		console.log('tttt');
 		lcps.addSection( jQuery( this ) );
 	});
 

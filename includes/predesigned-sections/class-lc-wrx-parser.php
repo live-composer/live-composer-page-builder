@@ -1,10 +1,11 @@
 <?php
+
 if ( ! class_exists( 'LCPS_WRX_parser' ) ) {
 	class LCPS_WRX_parser {
 
 		var $processed_posts = array();
 		var $posts = array();
-		var $fetch_attachments = false;
+		var $fetch_attachments = true;
 
 		public function parse( $file ) {
 			// Attempt to use proper XML parsers first
@@ -46,6 +47,75 @@ if ( ! class_exists( 'LCPS_WRX_parser' ) ) {
 				echo __( 'Details are shown above. The importer will now try again with a different parser...' ) . '</p>';
 			}
 		}
+		
+		/**
+		 * Decide what the maximum file size for downloaded attachments is.
+		 * Default is 0 (unlimited), can be filtered via import_attachment_size_limit
+		 *
+		 * @return int Maximum attachment file size to import
+		 */
+		function max_attachment_size() {
+			return apply_filters( 'import_attachment_size_limit', 0 );
+		}
+		
+		/**
+		 * Attempt to download a remote file attachment
+		 *
+		 * @param string $url URL of item to fetch
+		 * @param array $post Attachment details
+		 * @return array|WP_Error Local file location details on success, WP_Error otherwise
+		 */
+		public function fetch_remote_file( $url, $post ) {
+			// extract the file name and extension from the url
+			$file_name = basename( $url );
+
+			// get placeholder file in the upload dir with a unique, sanitized filename
+			$upload = wp_upload_bits( $file_name, 0, '', $post['upload_date'] );
+			if ( $upload['error'] )
+				return new WP_Error( 'upload_dir_error', $upload['error'] );
+
+			// fetch the remote url and write it to the placeholder file
+			$headers = wp_get_http( $url, $upload['file'] );
+
+			// request failed
+			if ( ! $headers ) {
+				@unlink( $upload['file'] );
+				return new WP_Error( 'import_file_error', __('Remote server did not respond', 'wordpress-importer') );
+			}
+
+			// make sure the fetch was successful
+			if ( $headers['response'] != '200' ) {
+				@unlink( $upload['file'] );
+				return new WP_Error( 'import_file_error', sprintf( __('Remote server returned error response %1$d %2$s', 'wordpress-importer'), esc_html($headers['response']), get_status_header_desc($headers['response']) ) );
+			}
+
+			$filesize = filesize( $upload['file'] );
+
+			if ( isset( $headers['content-length'] ) && $filesize != $headers['content-length'] ) {
+				@unlink( $upload['file'] );
+				return new WP_Error( 'import_file_error', __('Remote file is incorrect size', 'wordpress-importer') );
+			}
+
+			if ( 0 == $filesize ) {
+				@unlink( $upload['file'] );
+				return new WP_Error( 'import_file_error', __('Zero size file downloaded', 'wordpress-importer') );
+			}
+
+			$max_size = (int) $this->max_attachment_size();
+			if ( ! empty( $max_size ) && $filesize > $max_size ) {
+				@unlink( $upload['file'] );
+				return new WP_Error( 'import_file_error', sprintf(__('Remote file is too large, limit is %s', 'wordpress-importer'), size_format($max_size) ) );
+			}
+
+			// keep track of the old and new urls so we can substitute them later
+			$this->url_remap[$url] = $upload['url'];
+			$this->url_remap[$post['guid']] = $upload['url']; // r13735, really needed?
+			// keep track of the destination if the remote url is redirected somewhere else
+			if ( isset($headers['x-final-location']) && $headers['x-final-location'] != $url )
+				$this->url_remap[$headers['x-final-location']] = $upload['url'];
+
+			return $upload;
+		}
 
 		/**
 		 * Create new posts based on import information
@@ -56,6 +126,11 @@ if ( ! class_exists( 'LCPS_WRX_parser' ) ) {
 		 * Note that new/updated terms, comments and meta are imported for the last of the above.
 		 */
 		public function process_posts() {
+			
+			if ( ! function_exists( 'post_exists' ) ) {
+			    require_once( ABSPATH . 'wp-admin/includes/post.php' );
+			}
+			
 			$result = apply_filters( 'wp_import_posts', $this->posts );
 			if ( is_array( $result ) && isset( $result['posts'] ) ) {
 				$this->posts = $result['posts'];
@@ -148,21 +223,38 @@ if ( ! class_exists( 'LCPS_WRX_parser' ) ) {
 					$postdata = apply_filters( 'wp_import_post_data_processed', $postdata, $post );
 
 					if ( 'attachment' == $postdata['post_type'] ) {
+						
+						//dimaphperror( $postdata['post_type'] );
+						
 						$remote_url = ! empty( $post['attachment_url'] ) ? $post['attachment_url'] : $post['guid'];
+						
+						//dimaphperror( 	$remote_url );
 
 						// try to use _wp_attached file for upload folder placement to ensure the same location as the export site
 						// e.g. location is 2003/05/image.jpg but the attachment post_date is 2010/09, see media_handle_upload()
 						$postdata['upload_date'] = $post['post_date'];
+						
+						
+						//dimaphperror( $post['postmeta'] );
+						
 						if ( isset( $post['postmeta'] ) ) {
 							foreach ( $post['postmeta'] as $meta ) {
+								
+								dimaphperror( $meta, 'meta' );
 								if ( $meta['key'] == '_wp_attached_file' ) {
-									if ( preg_match( '%^[0-9]{4}/[0-9]{2}%', $meta['value'], $matches ) ) {
-										$postdata['upload_date'] = $matches[0];
-									}
+									//if ( preg_match( '%^[0-9]{4}/[0-9]{2}%', $meta['value'], $matches ) ) {
+										$postdata['upload_date'] = $meta['value'];
+										
+										//dimaphperror( $post['upload_date'], 'upload_date' );
+									//}
 									break;
 								}
 							}
 						}
+						
+						$post_id = $this->process_attachment( $postdata, $remote_url );
+						
+						dimaphperror( $post_id, 'post_id' );
 
 						$comment_post_ID = $post_id = $this->process_attachment( $postdata, $remote_url );
 					} else {
@@ -441,6 +533,8 @@ if ( ! class_exists( 'LCPS_WRX_parser' ) ) {
 			}
 
 			$post['guid'] = $upload['url'];
+			
+			include_once( ABSPATH . 'wp-admin/includes/image.php' );
 
 			// as per wp-admin/includes/upload.php
 			$post_id = wp_insert_attachment( $post, $upload['file'] );

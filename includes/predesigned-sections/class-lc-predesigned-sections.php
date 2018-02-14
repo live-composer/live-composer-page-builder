@@ -36,6 +36,9 @@ if ( ! class_exists( 'LC_Predesigned_Sections' ) ) :
 
 			// Add plugin HTML in page footer.
 			add_action( 'admin_footer', array( $this, 'add_panel_html' ) );
+			
+			//$this->add_predesigned_sections_from_xml();
+			//add_action( 'init', array(  $this, 'add_predesigned_sections_from_xml' ) );
 		}
 
 		/**
@@ -82,6 +85,7 @@ if ( ! class_exists( 'LC_Predesigned_Sections' ) ) :
 		 * Hook: this plugin activation action.
 		 */
 		static public function add_predesigned_sections_from_xml() {
+			
 			// Check count of custom post types in db (if empty add from xml)
 			if ( wp_count_posts( self::POST_TYPE_NAME )->publish > 0 ) {
 				return;
@@ -91,10 +95,12 @@ if ( ! class_exists( 'LC_Predesigned_Sections' ) ) :
 			$parser = new LCPS_WRX_parser();
 
 			$files = array(
-				'content.xml',
-				'counter.xml',
-				'features.xml',
-				'pricing-tablets.xml',
+				//'content.xml',
+				// 'counter.xml',
+				// 'features.xml',
+				// 'pricing-tablets.xml',
+				'test.xml',
+				'test-media.xml',
 			);
 
 			foreach ( $files as $key => $file ) {
@@ -208,6 +214,12 @@ if ( ! class_exists( 'LC_Predesigned_Sections' ) ) :
 			// if ( empty( $groups ) ) {
 			// 	return;
 			// }
+			
+			$dir = plugin_dir_path( __FILE__ );
+			$dir_path = $dir . 'desings/sections/content.xml';
+			$dslc_code = file_get_contents( $dir_path );
+			
+			//dimaphperror( file_get_contents( $dir_path ) );
 
 			$groups = array (
 				'headers' => array (
@@ -217,7 +229,7 @@ if ( ! class_exists( 'LC_Predesigned_Sections' ) ) :
 						'header_1' => array (
 							'set' => 'default/headers',
 							'image' => 'header-1',
-							'file' => 'Somecode',
+							'file' => $dslc_code,
 						),
 						'header_2' => array (
 							'set' => 'default/headers',
@@ -385,8 +397,12 @@ if ( ! class_exists( 'LC_Predesigned_Sections' ) ) :
 					?>
 						<ul class="lcps-designs__category <?php echo esc_attr( $group_key ) ?>">
 							<?php foreach ( $group_category['items'] as $design_key => $design ) : ?>
+								<?php
+								//	dimaphperror( $design );
+								?>
 								<li class="lcps-designs__single">
 									<img src="<?php echo esc_attr( $this->design_lib_url . $design['set'] . '/' . $design['image'] . '.png' ) ?>" alt="" />
+									<span class="shortcode" style="display: none;" ><?php echo $design['file']; ?></span';
 								</li>
 							<?php endforeach; ?>
 						</ul>
@@ -449,7 +465,7 @@ if ( ! class_exists( 'LC_Predesigned_Sections' ) ) :
 				'public'             => true,
 				'publicly_queryable' => true,
 				'show_ui'            => true,
-				'show_in_menu'       => false,
+				'show_in_menu'       => true,
 				'query_var'          => true,
 				'capability_type'    => 'post',
 				'has_archive'        => true,
@@ -501,6 +517,7 @@ if ( ! class_exists( 'LC_Predesigned_Sections' ) ) :
 		 * Load JS and CSS files while LC in editing mode.
 		 */
 		public function enqueue_scripts( $hook ) {
+						
 			// Output only on the LC editing page.
 			if ( 'toplevel_page_livecomposer_editor' != $hook ) {
 				return;
