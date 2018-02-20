@@ -577,9 +577,8 @@ class DSLC_TP_Title extends DSLC_Module {
 			$title = get_the_date( 'F j, Y' );
 		} elseif ( is_post_type_archive() ) {
 			$title = post_type_archive_title( '', false );
-		} elseif ( is_tax() ) {
-			$tax = get_taxonomy( get_queried_object()->taxonomy );
-			$title = $tax->labels->singular_name . ' ' . single_term_title( '', false );
+		} elseif ( class_exists( 'WooCommerce' ) && ( is_product_category() || is_product_tag() ) ) {
+			$title = single_term_title( '', false );
 		} elseif ( is_search() ) {
 			$title = get_the_title( $post_id ) . ' ' . get_search_query();
 		} else {
