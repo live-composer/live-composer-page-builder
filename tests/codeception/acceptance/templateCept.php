@@ -7,7 +7,7 @@
 
 
 $I = new AcceptanceTester( $scenario );
-$I->wantTo( 'Load Page Design.' );
+$I->wantTo( 'Create Template.' );
 $I->loginAsAdmin();
 $I->waitForElement('#footer-thankyou');
 
