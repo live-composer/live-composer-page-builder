@@ -948,18 +948,14 @@ function dslc_module_options_hideshow_tabs() {
 	if ( jQuery('.dslca-module-edit-options-tab-hook').hasClass('dslca-active') ) {
 		var data_tab = jQuery('.dslca-module-edit-options-tab-hook.dslca-active').data('id');
 		
-		console.log(data_tab);
-		
 		if ( jQuery('.dslca-module-edit-option[data-tab="' + data_tab + '"]').hasClass('dependent') ) {
+
 			jQuery('.dslca-module-edit-option.dependent').hide();
 			jQuery('.dslca-module-edit-option[data-tab="' + data_tab + '"].dep-show').show();
 			jQuery('.dslca-module-edit-option[data-tab="' + data_tab + '"].dep-hide').hide();
-			
-			console.log('1');
 		} else {
-			jQuery('.dslca-module-edit-option.dependent').hide();
 			
-			console.log('2');
+			jQuery('.dslca-module-edit-option.dependent').hide();
 		}
 	}
 }

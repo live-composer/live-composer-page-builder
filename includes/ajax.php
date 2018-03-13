@@ -350,11 +350,14 @@ function dslc_ajax_save_composer( $atts ) {
 		header( 'Content-Type: application/json' );
 		echo $response_json;
 
-		// Refresh cache.
+		// Refresh cache ( WP Super Cache ).
 		if ( function_exists( 'wp_cache_post_change' ) ) {
 			$GLOBALS['super_cache_enabled'] = 1;
 			wp_cache_post_change( $post_id );
 		}
+
+		// Delete cache ( Live Composer ).
+		delete_transient( 'lc_cache' );
 
 		// Delete draft code.
 		delete_post_meta( $post_id, 'dslc_code_draft' );
