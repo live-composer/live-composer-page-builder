@@ -3322,12 +3322,12 @@ endif; ?>
 							<?php if ( in_array( 'title', $elements ) ) : ?>
 								<div class="dslc-info-box-title">
 									<?php if ( $dslc_is_admin ) : ?>
-										<h4 class="dslca-editable-content" data-id="title" data-type="simple" <?php if ( $dslc_is_admin ) { echo 'contenteditable';} ?>><?php echo stripslashes( $options['title'] ); ?></h4>
+										<h4 class="dslca-editable-content" data-id="title" data-type="simple" <?php if ( $dslc_is_admin ) { echo 'data-exportable-content';} ?>><?php echo stripslashes( $options['title'] ); ?></h4>
 									<?php else : ?>
 										<?php if ( $options['title_link'] != '' ) : ?>
-											<h4><a href="<?php echo $options['title_link']; ?>" <?php if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?> target="<?php echo $options['title_link_target']; ?>"><?php echo stripslashes( $options['title'] ); ?></a></h4>
+											<h4 <?php if ( $dslc_is_admin ) { echo 'data-exportable-content';} ?>><a href="<?php echo $options['title_link']; ?>" <?php if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?> target="<?php echo $options['title_link_target']; ?>"><?php echo stripslashes( $options['title'] ); ?></a></h4>
 										<?php else : ?>
-											<h4><?php echo stripslashes( $options['title'] ); ?></h4>
+											<h4 <?php if ( $dslc_is_admin ) { echo 'data-exportable-content';} ?>><?php echo stripslashes( $options['title'] ); ?></h4>
 										<?php endif; ?>
 									<?php endif; ?>
 								</div><!-- .dslc-info-box-title -->
@@ -3336,7 +3336,7 @@ endif; ?>
 							<?php if ( in_array( 'content', $elements ) ) : ?>
 								<div class="dslc-info-box-content">
 									<?php if ( $dslc_is_admin ) : ?>
-										<div class="dslca-editable-content inline-editor" data-type="simple" data-id="content">
+										<div class="dslca-editable-content inline-editor" data-type="simple" data-id="content" <?php if ( $dslc_is_admin ) { echo 'data-exportable-content'; } ?>>
 											<?php
 											$output_content = stripslashes( $options['content'] );
 											echo apply_filters( 'dslc_text_block_render', $output_content );
