@@ -2843,9 +2843,15 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 		}
 	}
 
+	if ( $product->is_in_stock() ) {
+		$stock_class = '';
+	} else {
+		$stock_class = ' dslc-product-out-of-stock';
+	}
+
 	?>
 
-	<div class="<?php echo $element_class . $columns_class . $extra_class; ?>" data-cats="<?php echo $post_cats_data; ?>">
+	<div class="<?php echo $element_class . $columns_class . $extra_class . $stock_class; ?>" data-cats="<?php echo $post_cats_data; ?>">
 
 	<?php if ( $post_elements == 'all' || in_array( 'thumbnail', $post_elements ) ) : ?>
 
