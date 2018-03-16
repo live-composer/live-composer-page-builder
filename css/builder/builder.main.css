@@ -1883,7 +1883,7 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 		margin-bottom: 0;
 		padding-right: 0;
 		position: absolute;
-		z-index: 99998; /* Should be less than module control elements */
+		z-index: 999999; /* Fixed: https://github.com/live-composer/live-composer-page-builder/issues/895 */
  		width: 100%;
 		text-align: center;
 	}

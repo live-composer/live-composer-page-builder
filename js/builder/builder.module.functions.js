@@ -135,6 +135,18 @@
 	});
 
 	/**
+	 * Hook - Edit Module On Click ( Display Options Panel ) - Fixed: https://github.com/live-composer/live-composer-page-builder/issues/895
+	 */
+	LiveComposer.Builder.PreviewAreaDocument.on({
+	    mouseenter: function() {
+	        jQuery('.dslca-modules-section-manage', LiveComposer.Builder.PreviewAreaDocument).css("z-index", "99998");
+	    },
+	    mouseleave: function() {
+	        jQuery('.dslca-modules-section-manage', LiveComposer.Builder.PreviewAreaDocument).css("z-index", "999999");
+	    },
+	}, ".dslca-change-width-module-hook");
+
+	/**
 	 * Action - Show/Hide Width Options
 	 */
 /* 	LiveComposer.Builder.PreviewAreaDocument.on( 'click', '.dslca-change-width-module-hook', function(e){
