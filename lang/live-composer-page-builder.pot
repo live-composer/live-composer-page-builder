@@ -1749,6 +1749,30 @@ msgid ""
 "security and user experience)"
 msgstr ""
 
+#: ../includes/post-options-framework/post-options-framework.php:282
+msgid "Blog Posts"
+msgstr ""
+
+#: ../includes/post-options-framework/post-options-framework.php:282
+msgid "Projects"
+msgstr ""
+
+#: ../includes/post-options-framework/post-options-framework.php:282
+msgid "Galleries"
+msgstr ""
+
+#: ../includes/post-options-framework/post-options-framework.php:282
+msgid "Downloads"
+msgstr ""
+
+#: ../includes/post-options-framework/post-options-framework.php:282
+msgid "Staff"
+msgstr ""
+
+#: ../includes/post-options-framework/post-options-framework.php:282
+msgid "Partners"
+msgstr ""
+
 #: ../includes/row-system/inc/options-output.php:69
 msgid "Upload Video"
 msgstr ""
