@@ -845,7 +845,7 @@ function dslc_sanitize_option_val( $data_to_sanitize ) {
 function dslc_deactivate_lc() {
 
 	// Check if popular caching plugins are active.
-	if ( defined( 'W3TC' ) || defined( 'WP_CACHE' ) ) {
+	if ( defined( 'W3TC' ) || defined( 'WPCACHEHOME' ) ) {
 		
 		$caching_engine_setting = dslc_get_option( 'lc_caching_engine', 'dslc_plugin_options_performance' );
 
