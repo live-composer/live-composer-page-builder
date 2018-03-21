@@ -2322,4 +2322,8 @@ body.dslca-enabled .dslc-notification-box-has-timeout {
 	#dslc-content .dslc-posts.dslc-carousel-arrow-aside {
 		width: 80%;
 	}
+
+	#dslc-content .dslc-posts-orientation-horizontal .dslc-post-main {
+		overflow: visible;
+	}
 }
