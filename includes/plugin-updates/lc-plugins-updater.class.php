@@ -132,11 +132,11 @@ class LC_Plugins_Updater {
 			return;
 		}
 
-		if( ! current_user_can( 'update_plugins' ) ) {
+		if ( ! current_user_can( 'update_plugins' ) ) {
 			return;
 		}
 
-		if( ! is_multisite() ) {
+		if ( ! is_multisite() ) {
 			return;
 		}
 
@@ -211,7 +211,7 @@ class LC_Plugins_Updater {
 					'<a target="_blank" class="thickbox" href="' . esc_url( $changelog_link ) . '">',
 					esc_html( $version_info->new_version ),
 					'</a>',
-					'<a href="' . esc_url( wp_nonce_url( self_admin_url( 'update.php?action=upgrade-plugin&plugin=' ) . $this->name, 'upgrade-plugin_' . $this->name ) ) .'">',
+					'<a href="' . esc_url( wp_nonce_url( self_admin_url( 'update.php?action=upgrade-plugin&plugin=' ) . $this->name, 'upgrade-plugin_' . $this->name ) ) . '">',
 					'</a>'
 				);
 			}
@@ -366,9 +366,9 @@ class LC_Plugins_Updater {
 			$request->banners = maybe_unserialize( $request->banners );
 		}
 
-		if( ! empty( $request->sections ) ) {
-			foreach( $request->sections as $key => $section ) {
-				$request->$key = (array) $section;
+		if ( ! empty( $request->sections ) ) {
+			foreach ( $request->sections as $key => $section ) {
+				$request->$key = ( array ) $section;
 			}
 		}
 
@@ -426,9 +426,9 @@ class LC_Plugins_Updater {
 				$version_info = false;
 			}
 
-			if( ! empty( $version_info ) ) {
-				foreach( $version_info->sections as $key => $section ) {
-					$version_info->$key = (array) $section;
+			if ( ! empty( $version_info ) ) {
+				foreach ( $version_info->sections as $key => $section ) {
+					$version_info->$key = ( array ) $section;
 				}
 			}
 
@@ -481,7 +481,7 @@ class LC_Plugins_Updater {
 	 * @return bool
 	 */
 	private function verify_ssl() {
-		return (bool) apply_filters( 'edd_sl_api_request_verify_ssl', true, $this );
+		return ( bool ) apply_filters( 'edd_sl_api_request_verify_ssl', true, $this );
 	}
 
 }

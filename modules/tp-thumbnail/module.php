@@ -352,7 +352,7 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		// Cache calculated array in WP Object Cache.
-		wp_cache_add( 'dslc_options_' . $this->module_id, $dslc_options ,'dslc_modules' );
+		wp_cache_add( 'dslc_options_' . $this->module_id, $dslc_options, 'dslc_modules' );
 
 		return apply_filters( 'dslc_module_options', $dslc_options, $this->module_id );
 
@@ -410,7 +410,7 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 					<img src="<?php echo esc_attr( $res_img ); ?>" />
 				<?php else : ?>
 					<?php echo get_the_post_thumbnail( $post_id, 'full' ); ?>
-				<?php endif;?>
+				<?php endif; ?>
 				</div>
 			<?php else : ?>
 

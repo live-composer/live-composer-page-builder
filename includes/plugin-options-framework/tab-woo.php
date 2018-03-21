@@ -26,7 +26,7 @@ if ( is_plugin_inactive( 'lc-woo-integration/lc-woo-integration.php' ) ) : ?>
 		<div class="lc-text-center">
 			<p class="lc-panel-icon-hero"><span class="dashicons dashicons-cart"></span></p>
 			<h3 class="lc-huge"><?php _e( 'WooCommerce Integration', 'live-composer-page-builder' ); ?></h3>
-			<p class="lc-description"><?php _e( 'Now you can fully customize your WooCommerce website without any coding. Visually adjust designs or create from scratch product&nbsp;pages using our drag &amp; drop builder.' , 'live-composer-page-builder'); ?></p>
+			<p class="lc-description"><?php _e( 'Now you can fully customize your WooCommerce website without any coding. Visually adjust designs or create from scratch product&nbsp;pages using our drag &amp; drop builder.', 'live-composer-page-builder' ); ?></p>
 		</div>
 		<ul class="lc-column-list"  style="padding-left:10%;">
 			<li><span class="dashicons dashicons-yes"></span> +22 Woo Modules</li>
@@ -39,7 +39,7 @@ if ( is_plugin_inactive( 'lc-woo-integration/lc-woo-integration.php' ) ) : ?>
 	</div>
 	<div class="dslc-panel lc-panel-cta lc-divided-panels no-top-margin">
 		<div class="lc-panel-third">
-			<p><?php _e( '30 Days Money Back Guarantee' , 'live-composer-page-builder'); ?></p>
+			<p><?php _e( '30 Days Money Back Guarantee', 'live-composer-page-builder' ); ?></p>
 		</div>
 		<div class="lc-panel-third">
 			<p><a href="https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=woo-tab&utm_campaign=intro-block" class="button button-primary button-hero" target="_blank">Buy Today For 15% OFF</a></p>
@@ -54,7 +54,7 @@ if ( is_plugin_inactive( 'lc-woo-integration/lc-woo-integration.php' ) ) : ?>
 // LICENSE PANEL: If extension is active.
 if ( is_plugin_active( 'lc-woo-integration/lc-woo-integration.php' ) ) {
 	$license_manager = new LC_License_Manager;
-	$license_status = $license_manager->get_license_status('lc-woo-integration');
+	$license_status = $license_manager->get_license_status( 'lc-woo-integration' );
 
 	if ( 'valid' !== $license_status ) {
 		$license_status = 'invalid';
@@ -63,7 +63,7 @@ if ( is_plugin_active( 'lc-woo-integration/lc-woo-integration.php' ) ) {
 	echo '<div data-license-status="' . $license_status . '">';
 		// Top license block (shows when issues or no license set).
 		// echo '<div data-show-if-license="invalid">';
-			echo $license_manager->render_license_block('lc-woo-integration');
+			echo $license_manager->render_license_block( 'lc-woo-integration' );
 		// echo '</div>';	
 
 		// Tab heading (shows only when there is no problem with license).

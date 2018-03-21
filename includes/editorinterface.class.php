@@ -93,7 +93,7 @@ class DSLC_EditorInterface {
 			} else {
 
 				// Output the button.
-				self::the_editor_link( admin_url( 'post-new.php?post_type=dslc_templates&for=' . get_post_type() ) , $string_create_tpl );
+				self::the_editor_link( admin_url( 'post-new.php?post_type=dslc_templates&for=' . get_post_type() ), $string_create_tpl );
 
 			}
 		}
@@ -149,7 +149,7 @@ class DSLC_EditorInterface {
 		} else {
 
 			// Output 'Create Template' button.
-			self::the_editor_link( admin_url( 'post-new.php?post_type=dslc_templates&for=' . $page_data ) , $string_create_tpl );
+			self::the_editor_link( admin_url( 'post-new.php?post_type=dslc_templates&for=' . $page_data ), $string_create_tpl );
 
 		}
 	}

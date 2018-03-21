@@ -98,7 +98,7 @@ function dslc_plugin_options_display( $tab = '' ) {
 
 		<div id="lc-settings-tabs">
 				<!-- Extensions tab -->
-				<div class="tab" id="tab-for-tab-extensions" <?php if ('dslc_settings' !== $anchor ) { echo 'style="display:block"'; } ?>>
+				<div class="tab" id="tab-for-tab-extensions" <?php if ( 'dslc_settings' !== $anchor ) { echo 'style="display:block"'; } ?>>
 					<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-extensions.php'; ?>
 				</div>
 				<!-- Getting Started Tab -->
@@ -108,7 +108,7 @@ function dslc_plugin_options_display( $tab = '' ) {
 				</div>
 */ ?>
 				<!-- Settings tab -->
-				<div class="tab" <?php if ( 'dslc_settings' === $anchor ) { echo 'style="display:block"';} ?>  id="tab-for-tab-settings">
+				<div class="tab" <?php if ( 'dslc_settings' === $anchor ) { echo 'style="display:block"'; } ?>  id="tab-for-tab-settings">
 					<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-settings.php'; ?>
 				</div>
 

@@ -1384,16 +1384,16 @@ class DSLC_Module {
 			 */
 
 			array(
-			    'label' => 'Arrows - Margin Top ( Aside )',
-			    'id' => 'css_res_t_arrows_aside_margin_top',
-			    'std' => '-20',
-			    'type' => 'slider',
-			    'refresh_on_change' => false,
-			    'affect_on_change_el' => '.dslc-carousel-nav-prev.position-aside, .dslc-carousel-nav-next.position-aside',
-			    'affect_on_change_rule' => 'margin-top',
-			    'section' => 'responsive',
-			    'tab' => 'Tablet',
-			    'ext' => 'px',
+				'label' => 'Arrows - Margin Top ( Aside )',
+				'id' => 'css_res_t_arrows_aside_margin_top',
+				'std' => '-20',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-carousel-nav-prev.position-aside, .dslc-carousel-nav-next.position-aside',
+				'affect_on_change_rule' => 'margin-top',
+				'section' => 'responsive',
+				'tab' => 'Tablet',
+				'ext' => 'px',
 			),
 
 			/**
@@ -1401,16 +1401,16 @@ class DSLC_Module {
 			 */
 
 			array(
-			    'label' => 'Arrows - Margin Top ( Aside )',
-			    'id' => 'css_res_p_arrows_aside_margin_top',
-			    'std' => '-20',
-			    'type' => 'slider',
-			    'refresh_on_change' => false,
-			    'affect_on_change_el' => '.dslc-carousel-nav-prev.position-aside, .dslc-carousel-nav-next.position-aside',
-			    'affect_on_change_rule' => 'margin-top',
-			    'section' => 'responsive',
-			    'tab' => 'Phone',
-			    'ext' => 'px',
+				'label' => 'Arrows - Margin Top ( Aside )',
+				'id' => 'css_res_p_arrows_aside_margin_top',
+				'std' => '-20',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-carousel-nav-prev.position-aside, .dslc-carousel-nav-next.position-aside',
+				'affect_on_change_rule' => 'margin-top',
+				'section' => 'responsive',
+				'tab' => 'Phone',
+				'ext' => 'px',
 			),
 		);
 

@@ -38,7 +38,7 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 		/**
 		 * Do all the required job on core object creation.
 		 */
-		function __construct( $plugin_data=false ) {
+		function __construct( $plugin_data = false ) {
 			// Actions that needs to be lunched only once.
 			if ( ! self::$initiated ) {
 				$this->abspath = __DIR__;
@@ -61,9 +61,9 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 		/**
 		 * Load JS/CSS for this module.
 		 */
-		public function load_admin_scripts( $hook ){
+		public function load_admin_scripts( $hook ) {
 			/* If current screen is Live Composer options page */
-			if ( 'toplevel_page_dslc_plugin_options' === $hook) {
+			if ( 'toplevel_page_dslc_plugin_options' === $hook ) {
 				wp_enqueue_script( 'dslc-licensemanager-js-admin', DS_LIVE_COMPOSER_URL . 'includes/plugin-updates/admin-license-manager.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 				// wp_enqueue_style( 'dslc-plugin-options-css-admin', DS_LIVE_COMPOSER_URL . 'includes/plugin-options-framework/css/main' . $min_suffix . '.css', array(), DS_LIVE_COMPOSER_VER );
 			}
@@ -520,7 +520,7 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 			// Update local licende data.
 			$this->set_license_status( $plugin, $license_data->license );
 
-			if ( 'invalid' !== $license_data->license  ) {
+			if ( 'invalid' !== $license_data->license ) {
 				$this->set_license_expires( $plugin, $license_data->expires );
 			} else {
 				$this->set_license_expires( $plugin, false );
@@ -592,7 +592,7 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 							<img alt="<?php _e( 'Additional Premium Modules', 'live-composer-page-builder' ); ?>" src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/lc-mink-extensions.png">
 						<?php elseif ( 'lc-woo-integration' === $plugin ) : ?>
 							<img alt="<?php _e( 'WooCommerce Integration', 'live-composer-page-builder' ); ?>" src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/lc-extension-woo.png">
-						<?php endif;?>
+						<?php endif; ?>
 					</div>
 				</div>
 			<?php

@@ -445,7 +445,7 @@ function dslc_tp_remove_template_from_meta( $template_to_remove, $post_id_to_kee
 	// Set those old defaults to regular templates.
 	if ( $templates ) {
 		foreach ( $templates as $template ) {
-			if ( $template->ID !== $post_id_to_keep  ) {
+			if ( $template->ID !== $post_id_to_keep ) {
 				// Get current value of 'dslc_template_for' custom field.
 				$dslc_template_for = get_post_meta( $template->ID, 'dslc_template_for' );
 				delete_post_meta( $template->ID, 'dslc_template_for' );
