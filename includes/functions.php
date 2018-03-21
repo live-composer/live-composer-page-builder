@@ -842,7 +842,7 @@ function dslc_sanitize_option_val( $data_to_sanitize ) {
 /*
  * Deactivate LC cache if any of popular caching plugins are active.
  */
-function dslc_deactivate_lc() {
+function dslc_deactivate_lc_cache() {
 
 	// Check if popular caching plugins are active.
 	if ( defined( 'W3TC' ) || defined( 'WPCACHEHOME' ) ) {
@@ -858,7 +858,7 @@ function dslc_deactivate_lc() {
 		}
 	}
 }
-add_action( 'admin_init', 'dslc_deactivate_lc' );
+add_action( 'admin_init', 'dslc_deactivate_lc_cache' );
 
 
 /*

@@ -279,7 +279,7 @@ function dslc_editorinterface_post_options( $object, $metabox ) {
 								<?php if ( 'list-heading' !== esc_attr( $choice['value'] ) ): ?>
 
 									<div class="dslca-post-option-field-choice">
-										<input type="checkbox" name="<?php echo esc_attr( $post_option['id'] ); ?>[]" id="<?php echo esc_attr( $post_option['id'] . $key ); ?>" value="<?php echo esc_attr( $choice['value'] ); ?>" <?php if ( in_array(  esc_attr( $choice['value'] ),  $curr_value_array ) ) echo 'checked="checked"'; ?> /> <label for="<?php echo  esc_attr( $post_option['id'] . $key ); ?>"><?php echo  esc_html( __( $choice['label'], 'live-composer-page-builder' ) ); ?></label>
+										<input type="checkbox" name="<?php echo esc_attr( $post_option['id'] ); ?>[]" id="<?php echo esc_attr( $post_option['id'] . $key ); ?>" value="<?php echo esc_attr( $choice['value'] ); ?>" <?php if ( in_array(  esc_attr( $choice['value'] ),  $curr_value_array ) ) echo 'checked="checked"'; ?> /> <label for="<?php echo  esc_attr( $post_option['id'] . $key ); ?>"><?php echo  esc_html( $choice['label'] ); ?></label>
 									</div><!-- .dslca-post-option-field-choice -->
 
 								<?php else: ?>
