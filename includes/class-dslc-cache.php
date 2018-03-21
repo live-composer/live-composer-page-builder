@@ -41,10 +41,22 @@ class DSLC_Cache {
 
 	function __construct( $cache_type = '' ) {
 		if ( ! self::$init ) {
-			$caching_engine_setting = dslc_get_option( 'lc_caching_engine', 'dslc_plugin_options_performance' );
+			$caching_engine_setting = dslc_get_option(
+				'lc_caching_engine',
+				'dslc_plugin_options_performance'
+			);
 
 			if ( 'disabled' === $caching_engine_setting ) {
 				self::$enabled = false;
+			} elseif ( $this->should_disable_cache() && is_user_logged_in() &&
+						current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+				self::$enabled = false;
+				// Disable the caching option in the plugin settings.
+				if ( 'enabled' === $caching_engine_setting ) {
+					$dslc_plugin_options = get_option( 'dslc_plugin_options' );
+					$dslc_plugin_options['lc_caching_engine'] = 'disabled';
+					update_option( 'dslc_plugin_options', $dslc_plugin_options );
+				}
 			} else {
 				// Run these functions only once per session.
 				add_action( 'save_post', array( $this, 'on_post_save' ) );
@@ -73,6 +85,21 @@ class DSLC_Cache {
 		if ( 'dslc_code' === $meta_key ) {
 			$this->on_post_save( $post_id );
 		}
+	}
+
+	/**
+	 * Function indicated that cache should be disabled in website already
+	 * using some of the popular WordPress caching plugins.
+	 *
+	 * @return true/false
+	 */
+	public function should_disable_cache() {
+		$disable_cache = false;
+		if ( defined( 'W3TC' ) || defined( 'WPCACHEHOME' ) ) {
+			$disable_cache = true;
+		}
+
+		return $disable_cache;
 	}
 
 	public function delete_cache() {

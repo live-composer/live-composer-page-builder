@@ -840,28 +840,6 @@ function dslc_sanitize_option_val( $data_to_sanitize ) {
 }
 
 /*
- * Deactivate LC cache if any of popular caching plugins are active.
- */
-function dslc_deactivate_lc_cache() {
-
-	// Check if popular caching plugins are active.
-	if ( defined( 'W3TC' ) || defined( 'WPCACHEHOME' ) ) {
-		
-		$caching_engine_setting = dslc_get_option( 'lc_caching_engine', 'dslc_plugin_options_performance' );
-
-		if ( 'enabled' === $caching_engine_setting ) {
-
-			$dslc_plugin_options = get_option('dslc_plugin_options');
-			$dslc_plugin_options['lc_caching_engine'] = 'disabled';
-
-			update_option( 'dslc_plugin_options', $dslc_plugin_options );
-		}
-	}
-}
-add_action( 'admin_init', 'dslc_deactivate_lc_cache' );
-
-
-/*
 Work in progress.
 
 function dslc_sanitize_option_val ( $data_to_sanitize ) {
