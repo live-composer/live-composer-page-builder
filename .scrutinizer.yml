@@ -23,7 +23,11 @@ checks:
         name: WordPress
 
 # Defines which files to analyze.
-filter: {  }
+filter:
+    excluded_paths:
+     - "tmp/"
+     - "vendor/"
+     - "node_modules/"
 
 # Defines how your code should generally look like.
 coding_style:
