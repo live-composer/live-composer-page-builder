@@ -192,11 +192,12 @@ class DSLC_Cache {
 }
 
 /**
- * Run cache for page rendering requests only (not cron or ajax);
+ * Run cache for page rendering requests only (not cron);
+ * Allow ajax requests only when saving the changes (is set dslc_code).
  * Function wp_doing_cron were introduced recently 4.8,
  * so we need an aditional check for its existence.
  */
-if ( ( function_exists( 'wp_doing_cron' ) && ! wp_doing_cron() ) && ! wp_doing_ajax() ) {
+if ( ( function_exists( 'wp_doing_cron' ) && ! wp_doing_cron() ) && ( ! wp_doing_ajax() || isset( $_POST['dslc_code'] ) ) ) {
 	$site_cache = new DSLC_Cache();
 }
 
