@@ -3,7 +3,7 @@ Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page, page builder plugin, drag-n-drop page builder
 Requires at least: 4.7
 Tested up to: 4.9
-Stable tag: 1.3.11
+Stable tag: 1.3.12
 License: GPLv3
 
 Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
@@ -78,6 +78,19 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 = FOUND A BUG? =
 * 🐛 [Please, report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
 * ⌛ [You can download any previous version here](https://github.com/live-composer/live-composer-page-builder/releases)
+
+= 1.3.12 - March 21th 2018 =
+
+= Bug Fixes: =
+* Issue [#895](https://github.com/live-composer/live-composer-page-builder/issues/895): The row icons cannot be selected when no padding are used
+* Issue [#863](https://github.com/live-composer/live-composer-page-builder/issues/863): Cache not resetting properly
+* Issue [#714](https://github.com/live-composer/live-composer-page-builder/issues/714): WordPress SEO by Yoast don't read the "Info box module"
+
+= Improved: =
+* Issue [#890](https://github.com/live-composer/live-composer-page-builder/issues/890): WooCommerce out of stock products
+* Issue [#889](https://github.com/live-composer/live-composer-page-builder/issues/889): Improve the module 'Title' for Woo
+* Issue [#845](https://github.com/live-composer/live-composer-page-builder/issues/845): Deactivate LC cache if any of popular caching plugins are active
+
 
 = 1.3.11 - February 9th 2018 =
 
