@@ -73,7 +73,7 @@ jQuery(document).on('click', '.lc-toggle-license', function (e) {
 	var buttonLabelBackup = jQuery(e.target).html();
 	var actionType = e.target.getAttribute('data-action-type');
 	var lincenseField = jQuery(e.target).closest('.lc-license-block').find('.lc-license-field');
-	
+
 	jQuery(e.target).html('<span class="dashicons dashicons-update"></span>');
 
 	if ( 'activate' !== actionType && 'deactivate' !== actionType ) {
@@ -108,7 +108,7 @@ jQuery(document).on('click', '.lc-toggle-license', function (e) {
 		if ( response.success === false ) {
 			messageStyle = 'warning';
 		}
-		
+
 		showPopupMessage( response['message'], messageStyle );
 
 		// Softly scroll to the top.

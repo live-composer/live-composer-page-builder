@@ -79,24 +79,25 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 * 🐛 [Please, report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
 * ⌛ [You can download any previous version here](https://github.com/live-composer/live-composer-page-builder/releases)
 
+= FOR OUR PRO USERS: =
+* 🦊 [Check out our WooCommerce Page Builder Extension](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
+* 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
+
+
 = 1.3.12 - March 21th 2018 =
 
 = Bug Fixes: =
-* Issue [#895](https://github.com/live-composer/live-composer-page-builder/issues/895): The row icons cannot be selected when no padding are used
-* Issue [#863](https://github.com/live-composer/live-composer-page-builder/issues/863): Cache not resetting properly
+* Issue [#863](https://github.com/live-composer/live-composer-page-builder/issues/863): Cache not resetting properly preventing for the page to update
+* Issue [#895](https://github.com/live-composer/live-composer-page-builder/issues/895): The section icons cannot be selected when there is no padding set
 * Issue [#714](https://github.com/live-composer/live-composer-page-builder/issues/714): WordPress SEO by Yoast don't read the "Info box module"
 
 = Improved: =
 * Issue [#890](https://github.com/live-composer/live-composer-page-builder/issues/890): WooCommerce out of stock products
-* Issue [#889](https://github.com/live-composer/live-composer-page-builder/issues/889): Improve the module 'Title' for Woo
-* Issue [#845](https://github.com/live-composer/live-composer-page-builder/issues/845): Deactivate LC cache if any of popular caching plugins are active
+* Issue [#889](https://github.com/live-composer/live-composer-page-builder/issues/889): Improve the module 'Title' for WooCommerce
+* Issue [#845](https://github.com/live-composer/live-composer-page-builder/issues/845): Deactivate LC cache if popular caching plugins are active
 
 
 = 1.3.11 - February 9th 2018 =
-
-= FOR OUR PRO USERS: =
-* 🦊 [Check out our WooCommerce Page Builder Extension](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
-* 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
 
 In this update we improve compatibility with Yoast SEO plugin and our premium [WooCommerce Integration](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration). Added a possibility to create your custom SVG icons, and improved design controls for many default modules. Default caching engine works better as well.
 
