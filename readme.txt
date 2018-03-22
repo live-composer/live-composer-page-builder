@@ -84,7 +84,7 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
 
 
-= 1.3.12 - March 21th 2018 =
+= 1.3.12 - March 21st 2018 =
 
 = Bug Fixes: =
 * Issue [#863](https://github.com/live-composer/live-composer-page-builder/issues/863): Cache not resetting properly preventing for the page to update
