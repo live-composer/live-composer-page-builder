@@ -48,6 +48,7 @@ class DSLC_Cache {
 
 			if ( 'disabled' === $caching_engine_setting ) {
 				self::$enabled = false;
+			/*
 			} elseif ( $this->should_disable_cache() && is_user_logged_in() &&
 						current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 				self::$enabled = false;
@@ -57,6 +58,7 @@ class DSLC_Cache {
 					$dslc_plugin_options['lc_caching_engine'] = 'disabled';
 					update_option( 'dslc_plugin_options', $dslc_plugin_options );
 				}
+			 */
 			} else {
 				// Run these functions only once per session.
 				add_action( 'save_post', array( $this, 'on_post_save' ) );
