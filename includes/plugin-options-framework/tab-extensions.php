@@ -30,7 +30,7 @@ $today_day = strtoupper( strftime( "%A",time() ) );
 
 	<!-- <h2 class="dslc-tab-heading">Extend Live Composer with <a href="https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=extension-tab&utm_campaign=section-title" target="_blank">Free Extensions</a></h2> -->
 
-<?php 
+<?php
 // Get list of all plugin (active and inactive).
 $all_plugins = get_plugins();
 
@@ -69,7 +69,7 @@ if ( $extensions && is_plugin_active( 'lc-extensions/lc-extensions.php' ) ) {
 		// Top license block (shows when issues or no license set).
 		echo '<div data-show-if-license="invalid">';
 			echo $license_manager->render_license_block('lc-extensions');
-		echo '</div>';	
+		echo '</div>';
 
 		// Tab heading (shows only when there is no problem with license).
 		echo '<div class="lc-tab-heading" data-show-if-license="valid">';
@@ -211,7 +211,7 @@ if ( $extensions && is_plugin_active( 'lc-extensions/lc-extensions.php' ) ) {
 								<p class="more-details"><?php echo $extension['description']; ?></p>
 							</div>
 
-							<h2 class="extension-name"><?php echo $extension['title']; ?> 
+							<h2 class="extension-name"><?php echo $extension['title']; ?>
 								<span class="status" data-show-if="active"><span class="dashicons dashicons-yes"></span> active</span>
 								<span class="status" data-show-if="inactive"><span class="dashicons dashicons-no-alt"></span> inactive</span>
 								<span class="status" data-show-if="pending"><span class="dashicons dashicons-update"></span></span>

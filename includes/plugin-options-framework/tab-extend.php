@@ -153,7 +153,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="lc-panel-half lc-image-column">
 			<img alt="<?php _e( 'Additional Premium&nbsp;Modules', 'live-composer-page-builder' ); ?>" src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/lc-mink-extensions.png">
 		</div>
-		
+
 		<ul class="lc-column-list">
 			<li><span class="dashicons dashicons-video-alt3"></span> YouTube/Vimeo Video Embed</li>
 			<li><span class="dashicons dashicons-images-alt2"></span> Gallery Images Grid</li>
@@ -219,7 +219,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="lc-panel-half lc-image-column">
 			<img alt="<?php _e( 'Additional Premium&nbsp;Modules', 'live-composer-page-builder' ); ?>" src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/lc-slider.png">
 		</div>
-		
+
 		<ul class="lc-column-list">
 			<li><span class="dashicons dashicons-video-alt3"></span> Video Embed</li>
 			<li><span class="dashicons dashicons-images-alt2"></span> Gallery Images Grid</li>
@@ -277,7 +277,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="lc-panel-half lc-image-column">
 			<img alt="<?php _e( 'Additional Premium&nbsp;Modules', 'live-composer-page-builder' ); ?>" src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/lc-menu.png">
 		</div>
-		
+
 		<ul class="lc-column-list">
 			<li><span class="dashicons dashicons-video-alt3"></span> Video Embed</li>
 			<li><span class="dashicons dashicons-images-alt2"></span> Gallery Images Grid</li>
@@ -305,7 +305,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="lc-panel-half">
 			<h3 class="lc-huge"><?php _e( 'Advanced Ninja Form Integrations ', 'live-composer-page-builder' ); ?></h3>
 			<p class="lc-larger-text"><?php _e( 'Collect PayPal payments or subscribe your visitors to MailChimp using any Ninja Form instance on your website.', 'live-composer-page-builder' ); ?><br /><br /></p>
-			
+
 			<ul class="lc-column-list">
 				<li><span class="dashicons dashicons-video-alt3"></span> Video Embed</li>
 				<li><span class="dashicons dashicons-images-alt2"></span> Gallery Images Grid</li>
@@ -361,7 +361,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="lc-panel-half">
 			<h3 class="lc-huge"><?php _e( 'Social Share Plugin', 'live-composer-page-builder' ); ?></h3>
 			<p class="lc-larger-text"><?php _e( 'Collect PayPal payments or subscribe your visitors to MailChimp using any Ninja Form instance on your website.', 'live-composer-page-builder' ); ?><br /><br /></p>
-			
+
 			<ul class="lc-column-list">
 				<li><span class="dashicons dashicons-video-alt3"></span> Video Embed</li>
 				<li><span class="dashicons dashicons-images-alt2"></span> Gallery Images Grid</li>

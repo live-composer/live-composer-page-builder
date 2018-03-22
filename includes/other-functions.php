@@ -127,7 +127,7 @@ if ( ! class_exists( 'DSLC_Aq_Resize' ) ) {
 
 					$editor = wp_get_image_editor( $img_path );
 
-					if ( is_wp_error( $editor ) || is_wp_error( $editor->resize( $width, $height, $crop ) ) ) {
+					if ( $editor instanceof WP_Error || is_wp_error( $editor->resize( $width, $height, $crop ) ) ) {
 						return $url;
 					}
 

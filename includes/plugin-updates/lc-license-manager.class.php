@@ -336,9 +336,9 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 			$response = wp_remote_post( self::$store_url, array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
 
 			// Make sure the response came back okay.
-			if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
+			if ( $response instanceof WP_Error || 200 !== wp_remote_retrieve_response_code( $response ) ) {
 
-				if ( is_wp_error( $response ) ) {
+				if ( $response instanceof WP_Error ) {
 					$message = $response->get_error_message();
 				} else {
 					$message = __( 'An error occurred, please try again.' );
@@ -511,7 +511,7 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 			);
 
 			// Verify response.
-			if ( is_wp_error( $response ) ) {
+			if ( $response instanceof WP_Error ) {
 				return false;
 			}
 

@@ -352,7 +352,7 @@ class LC_Plugins_Updater {
 		$verify_ssl = $this->verify_ssl();
 		$request    = wp_remote_post( $this->api_url, array( 'timeout' => 15, 'sslverify' => $verify_ssl, 'body' => $api_params ) );
 
-		if ( ! is_wp_error( $request ) ) {
+		if ( ! $request instanceof WP_Error ) {
 			$request = json_decode( wp_remote_retrieve_body( $request ) );
 		}
 
@@ -415,7 +415,7 @@ class LC_Plugins_Updater {
 			$verify_ssl = $this->verify_ssl();
 			$request    = wp_remote_post( $this->api_url, array( 'timeout' => 15, 'sslverify' => $verify_ssl, 'body' => $api_params ) );
 
-			if ( ! is_wp_error( $request ) ) {
+			if ( ! $request instanceof WP_Error ) {
 				$version_info = json_decode( wp_remote_retrieve_body( $request ) );
 			}
 
