@@ -9,8 +9,6 @@ build:
                     - 'composer require --dev johnpbloch/wordpress'
             resources:
                 cpus: 4
-            override:
-                    - php-scrutinizer-run
             project_setup:
                 override: true
             tests:
