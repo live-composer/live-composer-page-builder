@@ -299,4 +299,4 @@ function dslc_remove_yoast_metabox() {
 		remove_meta_box( 'wpseo_meta', $cpt, 'normal' );
 	}
 }
-add_action( 'add_meta_boxes', 'dslc_remove_yoast_metabox',11 );
+add_action( 'add_meta_boxes', 'dslc_remove_yoast_metabox', 11 );

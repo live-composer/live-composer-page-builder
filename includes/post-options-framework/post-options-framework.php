@@ -483,9 +483,9 @@ function dslc_post_add_row_action( $actions, $post ) {
 
 			// If default template for current CPT exists.
 			if ( $template_id ) {
-				$actions = $actions + array( 'edit-in-live-composer' => '<a href="'. $url . '">'. __( 'Edit Template', 'live-composer-page-builder' ) .'</a>' );
+				$actions = $actions + array( 'edit-in-live-composer' => '<a href="' . $url . '">' . __( 'Edit Template', 'live-composer-page-builder' ) . '</a>' );
 			} else {
-				$actions = $actions + array( 'edit-in-live-composer' => '<a href="'. admin_url( 'post-new.php?post_type=dslc_templates' ) . '">'. __( 'Create Template', 'live-composer-page-builder' ) .'</a>' );
+				$actions = $actions + array( 'edit-in-live-composer' => '<a href="' . admin_url( 'post-new.php?post_type=dslc_templates' ) . '">' . __( 'Create Template', 'live-composer-page-builder' ) . '</a>' );
 			}
 
 		// Each post can be edited in the page builder.
@@ -493,7 +493,7 @@ function dslc_post_add_row_action( $actions, $post ) {
 
 			$url = DSLC_EditorInterface::get_editor_link_url( $post->ID );
 
-			$actions = $actions + array( 'edit-in-live-composer' => '<a href="'. $url . '">'. __( 'Open in Page Builder', 'live-composer-page-builder' ) .'</a>' );
+			$actions = $actions + array( 'edit-in-live-composer' => '<a href="' . $url . '">' . __( 'Open in Page Builder', 'live-composer-page-builder' ) . '</a>' );
 		}
 	}
 
@@ -575,7 +575,7 @@ function dslc_notice( $wrapper ) {
 	$url = DSLC_EditorInterface::get_editor_link_url( get_the_ID() );
 
 	if ( is_admin() && is_array( $custom_fields ) && array_key_exists( 'dslc_code', $custom_fields ) ) {
-		$wrapper .= '</textarea><div class="dslc-notice">This page was created in a page builder. <a target="_blank" href="'. $url . '">'.  __( 'Open it in Live Composer', 'live-composer-page-builder' ) .'</a> to make any content or design changes.</div>';
+		$wrapper .= '</textarea><div class="dslc-notice">This page was created in a page builder. <a target="_blank" href="' . $url . '">' . __( 'Open it in Live Composer', 'live-composer-page-builder' ) . '</a> to make any content or design changes.</div>';
 	}
 
 	return $wrapper;
