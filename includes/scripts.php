@@ -90,7 +90,7 @@ final class DSLC_Scripts {
 		 * Load our IE-only stylesheet for all versions of IE:
 		 * <!--[if IE]> ... <![endif]-->
 		 */
-		wp_enqueue_style( 'dslc-css-ie',  DS_LIVE_COMPOSER_URL . 'css/ie.css', array( 'dslc-main-css' ), DS_LIVE_COMPOSER_VER );
+		wp_enqueue_style( 'dslc-css-ie', DS_LIVE_COMPOSER_URL . 'css/ie.css', array( 'dslc-main-css' ), DS_LIVE_COMPOSER_VER );
 		wp_style_add_data( 'dslc-css-ie', 'conditional', 'IE' );
 
 		/**
@@ -163,7 +163,7 @@ final class DSLC_Scripts {
 		/* Check current screen id and set var accordingly */
 		$current_screen = '';
 
-		if ( 'post-new.php' === $hook ||  'post.php' === $hook ) {
+		if ( 'post-new.php' === $hook || 'post.php' === $hook ) {
 			$current_screen = 'post-editing';
 		}
 
