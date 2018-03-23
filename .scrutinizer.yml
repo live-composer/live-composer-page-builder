@@ -8,7 +8,7 @@ build:
                     # If Wordpress itself is not a dependency of your project, Scrutinizer will not recognize WP project.
                     - 'composer require --dev johnpbloch/wordpress'
             resources:
-                cpus: 4
+                cpus: 2
             project_setup:
                 override: true
             tests:
