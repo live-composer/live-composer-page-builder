@@ -46,17 +46,17 @@ class DSLC_Cache {
 				'dslc_plugin_options_performance'
 			);
 
+			/*
+			 * If dslc_plugin_options is an empty needed to add a cache as default ( enabled )
+			 */
+			if ( empty( $caching_engine_setting ) ) {
+				$caching_engine_setting = 'enabled';
+			}
+
 			if ( 'disabled' === $caching_engine_setting ) {
 				self::$enabled = false;
 			} elseif ( $this->should_disable_cache() && is_admin() ) {
 				self::$enabled = false;
-
-				/*
-				 * If dslc_plugin_options is an empty needed to add a cache as default ( enabled )
-				 */
-				if ( empty( $caching_engine_setting ) ) {
-					$caching_engine_setting = 'enabled';
-				}
 
 				// Disable the caching option in the plugin settings.
 				if ( 'enabled' === $caching_engine_setting ) {
