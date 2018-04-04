@@ -46,19 +46,24 @@ class DSLC_Cache {
 				'dslc_plugin_options_performance'
 			);
 
+			/*
+			 * If dslc_plugin_options is an empty needed to add a cache as default ( enabled )
+			 */
+			if ( empty( $caching_engine_setting ) ) {
+				$caching_engine_setting = 'enabled';
+			}
+
 			if ( 'disabled' === $caching_engine_setting ) {
 				self::$enabled = false;
-			/*
-			} elseif ( $this->should_disable_cache() && is_user_logged_in() &&
-						current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+			} elseif ( $this->should_disable_cache() && is_admin() ) {
 				self::$enabled = false;
+
 				// Disable the caching option in the plugin settings.
 				if ( 'enabled' === $caching_engine_setting ) {
 					$dslc_plugin_options = get_option( 'dslc_plugin_options' );
 					$dslc_plugin_options['lc_caching_engine'] = 'disabled';
 					update_option( 'dslc_plugin_options', $dslc_plugin_options );
 				}
-			 */
 			} else {
 				// Run these functions only once per session.
 				add_action( 'save_post', array( $this, 'on_post_save' ) );
