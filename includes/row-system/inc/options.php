@@ -84,6 +84,43 @@ function dslc_row_register_options() {
 		),
 	);
 
+	$dslc_var_row_options['sticky_group_open'] = array(
+		'label' => __( 'Sticky Row', 'live-composer-page-builder' ),
+		'id' => 'sticky_row_open',
+		'type' => 'group',
+		'action' => 'open',
+	);
+
+	$dslc_var_row_options['sticky_row'] = array(
+		'id' => 'sticky_row',
+		'std' => '',
+		'label' => __( 'Sticky', 'live-composer-page-builder' ),
+		'type' => 'checkbox',
+		'choices' => array(
+			array(
+				'label' => 'Enabled',
+				'value' => 'enabled',
+			),
+		),
+	);
+
+/* 	$dslc_var_row_options['sticky_row_padding_vertical'] = array(
+		'id' => 'sticky_row_padding_vertical',
+		'std' => '20',
+		'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
+		'type' => 'slider',
+		'affect_on_change_rule' => 'padding-bottom,padding-top',
+		'ext' => 'px',
+		'max' => 500,
+	); */
+
+	$dslc_var_row_options['sticky_group_close'] = array(
+		'label' => __( 'Sticky Row', 'live-composer-page-builder' ),
+		'id' => 'sticky_row_close',
+		'type' => 'group',
+		'action' => 'close',
+	);
+
 	$dslc_var_row_options['bg_group_open'] = array(
 		'label' => __( 'Background', 'live-composer-page-builder' ),
 		'id' => 'bg_group_open',

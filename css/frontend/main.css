@@ -1128,7 +1128,7 @@ body.dslca-enabled #dslc-content .dslc-post:first-child .dslc-post-thumb .dslc-o
 
 #dslc-content {
 	position: relative;
-	overflow: hidden; /* Fix Issue 272: Slide Left Temporarily Extends Page Width; */
+	/* overflow: hidden; /* Fix Issue 272: Slide Left Temporarily Extends Page Width; */
 }
 
 /**
@@ -1272,4 +1272,10 @@ body #dslc-content .nf-field-container {
 
 body #dslc-content input:focus {
     outline: none;
+}
+
+body:not(.dslca-enabled) .dslc-sticky-row {
+	position: sticky;
+	top: 32px;
+	z-index: 99999;
 }
