@@ -739,7 +739,8 @@ body a:focus {
 
 			.dslca-modules-section-edit-option,
 			.dslca-module-edit-option,
-			.dslca-pseudo-module-edit-option {
+			.dslca-pseudo-module-edit-option,
+			.dslca-section-edit-option {
 				display: table-cell;
 				padding-bottom: 40px;
 				padding-left: 15px;
@@ -749,11 +750,14 @@ body a:focus {
 				position: relative;
 			}
 
-			.dslca-module-control-group {
+			.dslca-module-control-group,
+			.dslca-section-control-group
+			 {
 				padding: 4px;
 			}
 
-			.dslca-module-control-group > .controls-group-inner {
+			.dslca-module-control-group > .controls-group-inner,
+			.dslca-section-control-group > .controls-group-inner {
 				padding-left: 15px;
 				padding-right: 15px;
 				padding-top: 0;
@@ -764,7 +768,8 @@ body a:focus {
 				position: relative;
 			}
 
-			.dslca-module-control-group > .controls-group-inner > .dslca-module-edit-label {
+			.dslca-module-control-group > .controls-group-inner > .dslca-module-edit-label,
+			.dslca-section-control-group > .controls-group-inner > .dslca-section-edit-label {
 				position: absolute;
 				background: rgba(76, 129, 207, 0.4);
 				padding: 6px 11px;
