@@ -102,7 +102,7 @@ class DSLC_Cache {
 	 */
 	public function should_disable_cache() {
 		$disable_cache = false;
-		if ( defined( 'W3TC' ) || defined( 'WPCACHEHOME' ) ) {
+		if ( defined( 'W3TC' ) || defined( 'WPCACHEHOME' ) || class_exists( 'autoptimizeCache' ) ) {
 			$disable_cache = true;
 		}
 
