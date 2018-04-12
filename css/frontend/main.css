@@ -1274,8 +1274,18 @@ body #dslc-content input:focus {
     outline: none;
 }
 
-body:not(.dslca-enabled) .dslc-sticky-row {
-	position: sticky;
+.dslc-sticky-section-fixed {
+	position: fixed;
+	width: 100%;
+	left: 0;
+	top: 0;
+	z-index: 100;
+}
+
+.admin-bar .dslc-modules-section.dslc-sticky-row.dslc-sticky-section-fixed {
 	top: 32px;
-	z-index: 99999;
+}
+
+.dslc-sticky-row {
+	transition: all 0.4s ease;
 }

@@ -1298,15 +1298,15 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1 ) {
 	// Sticky Class.
 	if ( ! empty( $atts['sticky_row'] ) && 'enabled' === trim( $atts['sticky_row'] ) ) {
 		$section_class .= 'dslc-sticky-row';
-		/* $sticky_style   = '<style type="text/css">';
+		$sticky_style   = '<style type="text/css">';
 		$sticky_style  .= '.dslc-sticky-row.dslc-sticky-section-fixed {';
-		$sticky_style  .= 'padding-top:' . $atts['sticky_padding_vertical'] . 'px !important; ';
-		$sticky_style  .= 'padding-bottom:' . $atts['sticky_padding_vertical'] . 'px !important;';
+		$sticky_style  .= 'padding-top: ' . $atts['sticky_row_padding_vertical'] . 'px !important; ';
+		$sticky_style  .= 'padding-bottom: ' . $atts['sticky_row_padding_vertical'] . 'px !important;';
 		$sticky_style  .= '}';
-		$sticky_style  .= '</style>'; */
+		$sticky_style  .= '</style>';
 	} else {
 		$section_class .= '';
-		// $sticky_style = '';
+		$sticky_style = '';
 	}
 
 	// Allow other developers to add classes.
@@ -1371,7 +1371,7 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1 ) {
 
 					. $a_prepend . $content_render . $a_append
 
-					. '</div>';
+					. '</div>' . $sticky_style;
 
 	if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 

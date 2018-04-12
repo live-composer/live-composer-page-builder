@@ -104,15 +104,16 @@ function dslc_row_register_options() {
 		),
 	);
 
-/* 	$dslc_var_row_options['sticky_row_padding_vertical'] = array(
+	$dslc_var_row_options['sticky_row_padding_vertical'] = array(
 		'id' => 'sticky_row_padding_vertical',
 		'std' => '20',
 		'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
 		'type' => 'slider',
 		'affect_on_change_rule' => 'padding-bottom,padding-top',
+		'affect_on_change_el' => '.dslc-sticky-section-fixed',
 		'ext' => 'px',
 		'max' => 500,
-	); */
+	);
 
 	$dslc_var_row_options['sticky_group_close'] = array(
 		'label' => __( 'Sticky Row', 'live-composer-page-builder' ),

@@ -668,8 +668,45 @@ function dslc_social_share( width, height, url ) {
 	return false;
 }
 
+/**
+ * Sticky Row
+ */
+function dslc_sticky_row() {
 
+	var row = jQuery('body .dslc-modules-section');
 
+	if ( row.hasClass('dslc-sticky-row') && ! jQuery('body').hasClass('dslca-enabled') ) {
+
+		var rowSticky = jQuery('body .dslc-modules-section.dslc-sticky-row');
+		var rowStickyPos = rowSticky.offset().top;
+
+		jQuery(rowSticky).wrap('<div class="dslc-modules-section-placeholder"></div>');
+		jQuery('.dslc-modules-section-placeholder').height(jQuery(rowSticky).outerHeight());
+
+		// Account for Admin bar.
+		if ( jQuery( '#wpadminbar' ).length ) {
+			rowStickyPos -= jQuery( '#wpadminbar' ).height();
+		}
+
+		// on scroll
+		jQuery(window).scroll(function() {
+
+			// get scroll position from top of the page
+			var scrollPos = jQuery(window).scrollTop();
+
+			// check if scroll position
+			if (scrollPos >= rowStickyPos) {
+				rowSticky.addClass('dslc-sticky-section-fixed');
+				var rowStickyHeight = jQuery( "body .dslc-modules-section.dslc-sticky-row.dslc-sticky-section-fixed" ).outerHeight();
+				jQuery('.dslc-modules-section-placeholder').height(rowStickyHeight);
+			} else {
+				rowSticky.removeClass('dslc-sticky-section-fixed');
+				jQuery('.dslc-modules-section-placeholder').height(jQuery(rowSticky).outerHeight());
+			}
+
+		});
+	}
+}
 
 jQuery(document).ready(function($){
 
@@ -1130,6 +1167,7 @@ jQuery(document).ready(function($){
 	dslc_masonry();
 	dslc_parallax();
 	dslc_init_lightbox();
+	dslc_sticky_row();
 	// No need to wait for jQuery(window).load.
 	// These functions will check if images loaded by itself.
 });
