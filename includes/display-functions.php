@@ -1299,7 +1299,7 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1 ) {
 	if ( ! empty( $atts['sticky_row'] ) && 'enabled' === trim( $atts['sticky_row'] ) ) {
 		$section_class .= 'dslc-sticky-row';
 		$sticky_style   = '<style type="text/css">';
-		$sticky_style  .= '.dslc-sticky-row.dslc-sticky-section-fixed {';
+		$sticky_style  .= '.dslc-sticky-row[data-section-id="' . $atts['section_instance_id'] . '"].dslc-sticky-section-fixed {';
 		$sticky_style  .= 'padding-top: ' . $atts['sticky_row_padding_vertical'] . 'px !important; ';
 		$sticky_style  .= 'padding-bottom: ' . $atts['sticky_row_padding_vertical'] . 'px !important;';
 		$sticky_style  .= '}';
