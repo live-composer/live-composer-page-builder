@@ -699,7 +699,7 @@ function dslc_sticky_row() {
 			var headers = jQuery(".dslc-sticky-row");
 			var scrollTop = jQuery(this).scrollTop();
 		
-			if ( scrollTop >= rowStickyPos ) {
+			if ( scrollTop >= 0 ) {
 				
 				headers.each(function(index, el) {
 			
