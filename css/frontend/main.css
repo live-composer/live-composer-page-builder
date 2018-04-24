@@ -2,6 +2,7 @@
 
 #dslc-header {
 	position: relative;
+	z-index: 2; /* Menu Pro ( Sub Menu ) */
 }
 
 #dslc-header.dslc-header-pos-absolute {
