@@ -282,6 +282,10 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 					$response['success'] = false;
 				}
 
+				if ( ( true === $response['success'] && defined( 'LC_EXTENSIONS' ) ) && 'valid' === $response['status'] || 'deactivated' === $response['status'] ) {
+					$response['redirect'] = true;
+				}
+
 				// Encode response.
 				$response_json = wp_json_encode( $response );
 

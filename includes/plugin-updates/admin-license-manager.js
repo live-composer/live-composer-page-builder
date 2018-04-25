@@ -102,24 +102,28 @@ jQuery(document).on('click', '.lc-toggle-license', function (e) {
 		url: ajaxurl,
 	}).done(function (response) {
 
-		jQuery(e.target).html(buttonLabelBackup);
-
-		var messageStyle = '';
-		if ( response.success === false ) {
-			messageStyle = 'warning';
-		}
-
-		showPopupMessage( response['message'], messageStyle );
-
-		// Softly scroll to the top.
-		jQuery('html, body').animate({
-			scrollTop: 0
-		}, 700);
-
-		if (response.status === "valid") {
-			jQuery('[data-license-status]').attr('data-license-status', 'valid');
+		if ( response.redirect === true ) {
+			window.location.reload(true);
 		} else {
-			jQuery('[data-license-status]').attr('data-license-status', 'invalid');
+			jQuery(e.target).html(buttonLabelBackup);
+
+			var messageStyle = '';
+			if ( response.success === false ) {
+				messageStyle = 'warning';
+			}
+
+			showPopupMessage( response['message'], messageStyle );
+
+			// Softly scroll to the top.
+			jQuery('html, body').animate({
+				scrollTop: 0
+			}, 700);
+
+			if (response.status === "valid") {
+				jQuery('[data-license-status]').attr('data-license-status', 'valid');
+			} else {
+				jQuery('[data-license-status]').attr('data-license-status', 'invalid');
+			}
 		}
 	})
 
