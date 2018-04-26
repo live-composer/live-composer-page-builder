@@ -104,7 +104,7 @@ function dslc_register_modules() {
 	// Developers can filter list of available modules.
 	$dslc_var_modules = apply_filters( 'dslc_filter_modules', $dslc_var_modules );
 
-} add_action( 'init', 'dslc_register_modules', 1 );
+} add_action( 'wp_loaded', 'dslc_register_modules' );
 
 
 /**
