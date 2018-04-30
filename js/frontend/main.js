@@ -668,8 +668,108 @@ function dslc_social_share( width, height, url ) {
 	return false;
 }
 
+/**
+ * Sticky Row
+ */
+function dslc_sticky_row() {
 
+	var row = jQuery('body .dslc-modules-section');
 
+	if ( row.hasClass('dslc-sticky-row') && ! jQuery('body').hasClass('dslca-enabled') ) {
+
+		var rowSticky = jQuery('body .dslc-modules-section.dslc-sticky-row');
+		var $headers = $(".dslc-sticky-row");
+
+		$headers.each(function(index, el) {
+			var $curHeader = $($headers).eq(index);
+			var curHeight = $curHeader.outerHeight();
+
+			jQuery(el).wrap('<div class="dslc-modules-section-placeholder"></div>').parent().height(jQuery(el).outerHeight());
+		});
+
+		var rowSticky = jQuery('body .dslc-modules-section.dslc-sticky-row');
+		var rowStickyPos = rowSticky.offset().top;
+
+		// Account for Admin bar.
+		if ( jQuery( '#wpadminbar' ).length ) {
+			rowStickyPos -= jQuery( '#wpadminbar' ).height();
+		}
+	
+		jQuery(window).scroll(function() {
+			var headers = jQuery(".dslc-sticky-row");
+			var scrollTop = jQuery(this).scrollTop();
+		
+			if ( scrollTop >= 0 ) {
+				
+				headers.each(function(index, el) {
+			
+					var curHeader = jQuery(headers).eq(index);
+					var curTop = curHeader.offset().top;
+					var curHeight = curHeader.outerHeight();
+
+					// Account for Admin bar.
+					if ( jQuery( '#wpadminbar' ).length ) {
+						curTop -= jQuery( '#wpadminbar' ).height();
+					}
+			
+					// scroll up
+					var isRelative = ( el.isFixed && scrollTop <= el.exTop );
+			
+					// scroll down
+					var isFixed = ( curTop <= scrollTop );
+			
+					var position = "";
+					var top = 0;
+			
+					if ( isRelative ) {
+						// reset
+						positon = "relative";
+						top = 0;
+				
+						el.isFixed = false;
+
+						el.classList.remove("dslc-sticky-section-fixed");
+						jQuery(el).closest('.dslc-modules-section-placeholder').height(jQuery(el).outerHeight());
+					} else if ( isFixed ) {
+						position = "fixed";
+						if ( 0 < index ) {
+							for ( var i = 0; i < index; i++ ) {
+								top += jQuery(headers).eq(i).outerHeight();
+							}
+						}
+						scrollTop += curHeight;
+				
+						if ( ! el.isFixed ) {
+							el.isFixed = true;
+							el.exTop = curTop;
+						}
+
+						// Account for Admin bar.
+						if ( jQuery( '#wpadminbar' ).length ) {
+							top += 32;
+						}
+
+						el.classList.add("dslc-sticky-section-fixed");
+						jQuery(el).closest('.dslc-modules-section-placeholder').height(jQuery(el).outerHeight());
+					}
+			
+					jQuery(el).css({
+						position: position,
+						top: top + "px"
+					});
+				});
+			} else {
+				rowSticky.removeClass('dslc-sticky-section-fixed');
+
+				// reset all
+				headers.css({
+					position: "relative",
+					top: "0px"
+				});
+			}
+		});
+	}
+}
 
 jQuery(document).ready(function($){
 
@@ -1130,6 +1230,7 @@ jQuery(document).ready(function($){
 	dslc_masonry();
 	dslc_parallax();
 	dslc_init_lightbox();
+	dslc_sticky_row();
 	// No need to wait for jQuery(window).load.
 	// These functions will check if images loaded by itself.
 });
