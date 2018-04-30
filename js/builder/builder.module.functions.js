@@ -144,7 +144,7 @@
 	    mouseleave: function() {
 	        jQuery('.dslca-modules-section-manage', LiveComposer.Builder.PreviewAreaDocument).css("z-index", "999999");
 	    },
-	}, ".dslca-change-width-module-hook, .dslc-module-front .dslca-module-manage, .dslca-change-width-modules-area-options");
+	}, ".dslca-change-width-module-hook, .dslc-module-front .dslca-module-manage");
 
 	/**
 	 * Action - Show/Hide Width Options
