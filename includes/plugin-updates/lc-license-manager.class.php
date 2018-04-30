@@ -282,7 +282,8 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 					$response['success'] = false;
 				}
 
-				if ( ( true === $response['success'] && defined( 'LC_EXTENSIONS' ) ) && 'valid' === $response['status'] || 'deactivated' === $response['status'] ) {
+				// Check if active SEOWP theme.
+				if ( ( true === $response['success'] && function_exists( 'lbmn_setup' ) ) && 'valid' === $response['status'] || 'deactivated' === $response['status'] ) {
 					$response['redirect'] = true;
 				}
 
