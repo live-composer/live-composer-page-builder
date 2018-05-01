@@ -3,7 +3,7 @@ Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page, page builder plugin, drag-n-drop page builder
 Requires at least: 4.7
 Tested up to: 4.9
-Stable tag: 1.3.14
+Stable tag: 1.3.15
 License: GPLv3
 
 Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
@@ -82,6 +82,14 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 = FOR OUR PRO USERS: =
 * 🦊 [Check out our WooCommerce Page Builder Extension](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
+
+= 1.3.15 - May 1th 2018 =
+
+= New: =
+* Issue [#908](https://github.com/live-composer/live-composer-page-builder/issues/908): Add the sticky feature to the rows.
+
+= Improved: =
+* Grouping the row settings
 
 = 1.3.14 - April 12th 2018 =
 
