@@ -1275,7 +1275,7 @@ body #dslc-content input:focus {
     outline: none;
 }
 
-.dslc-sticky-row {
+body:not(.dslca-enabled) .dslc-sticky-row {
 	width: 100%;
 	left: 0;
 	z-index: 1;
