@@ -3228,6 +3228,10 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 
 									<?php endif; ?>
 
+	<?php if ( 'above' === $options['avatar_position'] ) : ?>
+		<div class="dslc-testimonial-clearfix"></div>
+	<?php endif; ?>
+
 	<div class="dslc-testimonial-author-main">
 
 <?php if ( $post_elements == 'all' || in_array( 'name', $post_elements ) ) : ?>
