@@ -183,7 +183,34 @@ function dslc_editorinterface_post_options( $object, $metabox ) {
 			// Get current value as array.
 			$curr_value_no_esc = get_post_meta( $object->ID, $post_option['id'] );
 
-			$curr_value  = esc_attr( $post_option['std'] );
+			// New header should be Default if it's the only header
+			if ( 'dslc_hf' === $object->post_type ) {
+
+				$args = array(
+					'post_type'     => 'dslc_hf',
+					'fields'        => 'ids',
+					'post_per_page' => '-1',
+					'meta_query' => array(
+						array(
+							'key'     => 'dslc_hf_for',
+							'value'   => 'header',
+						)
+					)
+				 );
+				$posts = get_posts( $args );
+
+				if ( empty( $posts ) ) {
+					if ( 'dslc_hf_type' === $post_option['id'] ) {
+						$curr_value = esc_attr( 'default' );
+					} else {
+						$curr_value = esc_attr( $post_option['std'] );
+					}
+				} else {
+					$curr_value = esc_attr( $post_option['std'] );
+				}
+			} else {
+				$curr_value = esc_attr( $post_option['std'] );
+			}
 
 			// If there is only one value in array – transform it into the string.
 			if ( 1 === count( $curr_value_no_esc ) && is_string( $curr_value_no_esc[0] ) ) {
