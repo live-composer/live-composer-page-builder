@@ -230,6 +230,7 @@
 				padding: 13px 0;
 				font-size: 11px;
 				line-height: 1;
+				width: 100%;
 			}
 
 				#dslc-content .dslc-blog-post-meta-author {
@@ -263,6 +264,19 @@
 
 				#dslc-content .dslc-blog-post-meta-date.above {
 					float: none;
+				}
+
+				#dslc-content .dslc-blog-post-meta-comment-count {
+					display: inline-block;
+					margin: 0 auto;
+				}
+
+				#dslc-content .dslc-blog-post-meta-comment-count.right {
+					float: right;
+				}
+
+				#dslc-content .dslc-blog-post-meta-comment-count.left {
+					float: left;
 				}
 
 			#dslc-content .dslc-blog-post-title {
