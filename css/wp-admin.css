@@ -56,3 +56,8 @@
 .toplevel_page_dslc_plugin_options #wpcontent .wrap .updated {
 	display: none;
 }
+
+#post-option-dslc_project_staffs a.button,
+#post-option-dslc_project_partners a.button {
+	display: none;
+}
