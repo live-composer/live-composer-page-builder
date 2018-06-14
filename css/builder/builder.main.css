@@ -1885,11 +1885,11 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 		left: 0;
 		right: 0;
 		visibility: hidden;
-		margin-bottom: 0;
 		padding-right: 0;
 		position: absolute;
 		z-index: 999999; /* Fixed: https://github.com/live-composer/live-composer-page-builder/issues/895 */
- 		width: 100%;
+		width: 20%; /* Fixed: https://github.com/live-composer/live-composer-page-builder/issues/912 */
+		margin: 0 auto; 
 		text-align: center;
 	}
 
