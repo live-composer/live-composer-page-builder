@@ -57,6 +57,7 @@ class DSLC_Posts extends DSLC_Module {
 			'dslc_templates',
 			'dslc_hf',
 			'attachment',
+			'dslc_testimonials',
 		);
 
 		// Generate usable array of post types.
