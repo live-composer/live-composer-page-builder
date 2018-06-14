@@ -1199,6 +1199,10 @@ class DSLC_Blog extends DSLC_Module {
 						'label' => __( 'Date', 'live-composer-page-builder' ),
 						'value' => 'date',
 					),
+					array(
+						'label' => __( 'Comment count', 'live-composer-page-builder' ),
+						'value' => 'comment_count',
+					),
 				),
 				'section' => 'styling',
 				'tab' => __( 'Meta', 'live-composer-page-builder' ),
@@ -3564,6 +3568,13 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 												<div class="dslc-blog-post-meta-date <?php if ( $options['meta_position'] == 'above' ) { echo 'above'; }  ?>">
 													<?php the_time( get_option( 'date_format' ) ); ?>
 												</div><!-- .dslc-blog-post-meta-date -->
+											<?php endif; ?>
+
+											<?php if ( in_array( 'comment_count', $meta_elements ) ) : ?>
+												<div class="dslc-blog-post-meta-comment-count <?php if ( $options['meta_position'] !== 'above' ) { if ( ! in_array( 'date', $meta_elements ) && in_array( 'author', $meta_elements ) ) { echo 'right'; } elseif( ! in_array( 'author', $meta_elements ) && in_array( 'date', $meta_elements ) ) { echo 'left'; } } ?>">
+													<span class="dslc-icon dslc-icon-comment-alt"></span>	
+													<?php echo get_comments_number(); ?>
+												</div><!-- .dslc-blog-post-meta-comment-count -->
 											<?php endif; ?>
 
 										</div><!-- .dslc-blog-post-meta -->
