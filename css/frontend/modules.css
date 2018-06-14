@@ -1131,12 +1131,15 @@
 			}
 
 				#dslc-content .dslc-testimonial-avatar-aside .dslc-testimonial-author-avatar {
-					border: 0 transparent solid;
 					float: left;
 				}
 
+					#dslc-content .dslc-testimonial-author-avatar {
+						border: 0 transparent solid;
+					}
+
 					#dslc-content .dslc-testimonial-author-avatar img {
-						display: inline-block;
+						display: block;
 						height: auto;
 					}
 
@@ -1152,6 +1155,14 @@
 					#dslc-content .dslc-testimonial-author-position {
 						line-height: 1.1;
 					}
+
+			#dslc-content .dslc-testimonial-avatar-above .dslc-testimonial-author-avatar {
+				float: right;
+			}
+
+			.dslc-testimonial-clearfix {
+				clear: both;
+			}
 
 
 /**
