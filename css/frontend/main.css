@@ -348,7 +348,7 @@ body.rtl .dslc-last-col {
 }
 
 .dslca-activate-composer-hook.dslca-position-left {
-	right: auto;
+	right: auto !important;
 	left: 5px;
 }
 
