@@ -878,8 +878,19 @@ class DSLC_Image extends DSLC_Module {
 
 				?>
 
+				<?php
+				
+				$parsed = parse_url( $anchor_href );
+				if ( empty( $parsed['scheme'] ) ) {
+					$image_url = '//' . ltrim( $anchor_href, '/' );
+				} else {
+					$image_url = $anchor_href;
+				}
+				
+				?>
+
 				<?php if ( 'none' !== $options['link_type'] ) : ?>
-					<a class="<?php echo esc_attr( $anchor_class ); ?>" href="<?php echo esc_attr( $anchor_href ); ?>" target="<?php echo esc_attr( $anchor_target ); ?>">
+					<a class="<?php echo esc_attr( $anchor_class ); ?>" href="<?php echo esc_attr( $image_url ); ?>" target="<?php echo esc_attr( $anchor_target ); ?>">
 				<?php endif; ?>
 					<img src="<?php echo esc_attr( $the_image ); ?>" alt="<?php echo esc_attr( $options['image_alt'] ); ?>" title="<?php echo esc_attr( $options['image_title'] ); ?>" />
 				<?php if ( 'none' !== $options['link_type'] ) : ?>
