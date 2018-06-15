@@ -3,7 +3,7 @@ Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page, page builder plugin, drag-n-drop page builder
 Requires at least: 4.7
 Tested up to: 4.9
-Stable tag: 1.3.15
+Stable tag: 1.3.16
 License: GPLv3
 
 Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
@@ -82,6 +82,26 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 = FOR OUR PRO USERS: =
 * 🦊 [Check out our WooCommerce Page Builder Extension](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
+
+= 1.3.16 - June 15th 2018 =
+
+= Bug Fixes: =
+* Issue [#926](https://github.com/live-composer/live-composer-page-builder/issues/926): The left position of the Activation editor button
+* Issue [#925](https://github.com/live-composer/live-composer-page-builder/issues/925): Video background issue according to the new autoplay policy
+* Issue [#922](https://github.com/live-composer/live-composer-page-builder/issues/922): The "Load more" button label from pagination cannot be translated
+* Issue [#912](https://github.com/live-composer/live-composer-page-builder/issues/912): The container columns option overlap issue
+* Issue [#929](https://github.com/live-composer/live-composer-page-builder/issues/929): Testimonial avatar issue, a problem with custom posts borders
+
+
+= Improved: =
+* Issue [#930](https://github.com/live-composer/live-composer-page-builder/issues/930): Added ALT and TITLE attributes for images from Infobox modules
+* Issue [#841](https://github.com/live-composer/live-composer-page-builder/issues/841): Image Link field from Image module can use now subdomain paths
+* Issue [#744](https://github.com/live-composer/live-composer-page-builder/issues/744): The testimonials are removed from Post module to avoid the confusion. The Testimonials need to be used with the dedicated module
+* Issue [#913](https://github.com/live-composer/live-composer-page-builder/issues/913): New header should be Default if it's the only header
+
+= New: =
+* Issue [#833](https://github.com/live-composer/live-composer-page-builder/issues/833): Connection between projects and other custom posts (staff and partners)
+* Issue [#829](https://github.com/live-composer/live-composer-page-builder/issues/829): Added comments count in the "Blog module" meta
 
 = 1.3.15 - May 1th 2018 =
 
