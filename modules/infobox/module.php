@@ -999,7 +999,7 @@ class DSLC_Info_Box extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Image - ALT attribute', 'live-composer-page-builder' ),
-				'id' => 'image_alt_2',
+				'id' => 'infobox_image_alt',
 				'std' => '',
 				'type' => 'text',
 				'section' => 'styling',
@@ -1007,7 +1007,7 @@ class DSLC_Info_Box extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Image - TITLE attribute', 'live-composer-page-builder' ),
-				'id' => 'image_title',
+				'id' => 'infobox_image_title',
 				'std' => '',
 				'type' => 'text',
 				'section' => 'styling',
@@ -3325,9 +3325,9 @@ endif; ?>
 							<div class="dslc-info-box-image-alt">
 								<div class="dslc-info-box-image-alt-inner">
 									<?php if ( ! $image_alt_link_url ) : ?>
-										<img src="<?php echo esc_url( $image_alt );?>" alt="<?php echo esc_attr( $options['image_alt_2'] ); ?>" title="<?php echo esc_attr( $options['image_title'] ); ?>">
+										<img src="<?php echo esc_url( $image_alt );?>" alt="<?php echo esc_attr( $options['infobox_image_alt'] ); ?>" title="<?php echo esc_attr( $options['infobox_image_title'] ); ?>">
 									<?php else : ?>
-										<a href="<?php echo esc_url( $image_alt_link_url );?>" <?php if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?>><img src="<?php echo esc_url( $image_alt );?>" alt="<?php echo esc_attr( $options['image_alt_2'] ); ?>" title="<?php echo esc_attr( $options['image_title'] ); ?>"></a>
+										<a href="<?php echo esc_url( $image_alt_link_url );?>" <?php if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?>><img src="<?php echo esc_url( $image_alt );?>" alt="<?php echo esc_attr( $options['infobox_image_alt'] ); ?>" title="<?php echo esc_attr( $options['infobox_image_title'] ); ?>"></a>
 									<?php endif; ?>
 								</div><!-- .dslc-info-box-image-alt-inner -->
 							</div><!-- .dslc-info-box-image-alt -->

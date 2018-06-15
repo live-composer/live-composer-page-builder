@@ -630,6 +630,8 @@ class LC_Control {
 			'button_state',
 			'resize_width',
 			'resize_height',
+			'infobox_image_alt',
+			'infobox_image_title',
 		);
 
 		$controls_without_toggle = apply_filters( 'dslc_controls_without_toggle', $controls_without_toggle );
