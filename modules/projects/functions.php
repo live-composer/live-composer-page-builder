@@ -6,6 +6,54 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/*
+ * All Staff 
+ */
+
+$args = array( 
+	'post_type' => 'dslc_staff',
+	'posts_per_page' => -1,
+	'post_status' => 'publish'
+);
+$staffs = get_posts( $args );
+
+$staffs_choices = array();
+$staffs_choices[] = array(
+	'label' => __( 'Choose Staff', 'live-composer-page-builder' ),
+	'value' => 'not_set',
+);
+
+foreach ( $staffs as $staff ) {
+	$staffs_choices[] = array(
+		'label' => $staff->post_title,
+		'value' => $staff->post_title,
+	);
+}
+
+/*
+ * All Partners 
+ */
+
+$args = array( 
+	'post_type' => 'dslc_partners',
+	'posts_per_page' => -1,
+	'post_status' => 'publish'
+);
+$partners = get_posts( $args );
+
+$partners_choices = array();
+$partners_choices[] = array(
+	'label' => __( 'Choose Partner', 'live-composer-page-builder' ),
+	'value' => 'not_set',
+);
+
+foreach ( $partners as $staff ) {
+	$partners_choices[] = array(
+		'label' => $staff->post_title,
+		'value' => $staff->post_title,
+	);
+}
+
 global $dslc_var_post_options;
 
 $dslc_var_post_options['dslc-projects-post-options'] = array(
@@ -24,6 +72,22 @@ $dslc_var_post_options['dslc-projects-post-options'] = array(
 			'std' => '',
 			'id' => 'dslc_project_images',
 			'type' => 'files',
+		),
+		array(
+			'label' => 'Staff',
+			'descr' => 'Select the staff involved in the project.',
+			'std' => '',
+			'id' => 'dslc_project_staffs',
+			'type' => 'select',
+			'choices' => $staffs_choices,
+		),
+		array(
+			'label' => 'Partners',
+			'descr' => 'Select the client of the project.',
+			'std' => '',
+			'id' => 'dslc_project_partners',
+			'type' => 'select',
+			'choices' => $partners_choices,
 		),
 	),
 );

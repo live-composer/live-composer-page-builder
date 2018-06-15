@@ -346,6 +346,14 @@ class DSLC_Projects extends DSLC_Module {
 						'value' => 'excerpt',
 					),
 					array(
+						'label' => __( 'Staff', 'live-composer-page-builder' ),
+						'value' => 'staff',
+					),
+					array(
+						'label' => __( 'Partner', 'live-composer-page-builder' ),
+						'value' => 'partner',
+					),
+					array(
 						'label' => __( 'Button', 'live-composer-page-builder' ),
 						'value' => 'button',
 					),
@@ -1219,6 +1227,278 @@ class DSLC_Projects extends DSLC_Module {
 			),
 
 			/**
+			 * Staff
+			 */
+
+			array(
+				'label' => __( 'Color', 'live-composer-page-builder' ),
+				'id' => 'css_staff_color',
+				'std' => '#000000',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-project-staff',
+				'affect_on_change_rule' => 'color',
+				'section' => 'styling',
+				'tab' => __( 'Staff', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Font Size', 'live-composer-page-builder' ),
+				'id' => 'css_staff_font_size',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '12',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-project-staff',
+				'affect_on_change_rule' => 'font-size',
+				'section' => 'styling',
+				'tab' => __( 'Staff', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Font Weight', 'live-composer-page-builder' ),
+				'id' => 'css_staff_font_weight',
+				'std' => '400',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => '100 - Thin',
+						'value' => '100',
+					),
+					array(
+						'label' => '200 - Extra Light',
+						'value' => '200',
+					),
+					array(
+						'label' => '300 - Light',
+						'value' => '300',
+					),
+					array(
+						'label' => '400 - Normal',
+						'value' => '400',
+					),
+					array(
+						'label' => '500 - Medium',
+						'value' => '500',
+					),
+					array(
+						'label' => '600 - Semi Bold',
+						'value' => '600',
+					),
+					array(
+						'label' => '700 - Bold',
+						'value' => '700',
+					),
+					array(
+						'label' => '800 - Extra Bold',
+						'value' => '800',
+					),
+					array(
+						'label' => '900 - Black',
+						'value' => '900',
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-project-staff',
+				'affect_on_change_rule' => 'font-weight',
+				'section' => 'styling',
+				'tab' => __( 'Staff', 'live-composer-page-builder' ),
+				'ext' => '',
+			),
+			array(
+				'label' => __( 'Font Family', 'live-composer-page-builder' ),
+				'id' => 'css_staff_font_family',
+				'std' => '',
+				'type' => 'font',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-project-staff',
+				'affect_on_change_rule' => 'font-family',
+				'section' => 'styling',
+				'tab' => __( 'Staff', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Font Style', 'live-composer-page-builder' ),
+				'id' => 'css_staff_font_style',
+				'std' => 'normal',
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-project-staff',
+				'affect_on_change_rule' => 'font-style',
+				'section' => 'styling',
+				'tab' => __( 'Staff', 'live-composer-page-builder' ),
+				'choices' => array(
+					array(
+						'label' => __( 'Normal', 'live-composer-page-builder' ),
+						'value' => 'normal',
+					),
+					array(
+						'label' => __( 'Italic', 'live-composer-page-builder' ),
+						'value' => 'italic',
+					),
+				),
+			),
+			array(
+				'label' => __( 'Line Height', 'live-composer-page-builder' ),
+				'id' => 'css_staff_line_height',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '12',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-project-staff',
+				'affect_on_change_rule' => 'line-height',
+				'section' => 'styling',
+				'tab' => __( 'Staff', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
+				'id' => 'css_staff_margin-bottom',
+				'std' => '10',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-project-staff',
+				'affect_on_change_rule' => 'margin-bottom',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Staff', 'live-composer-page-builder' ),
+			),
+
+			/**
+			 * Partner
+			 */
+
+			array(
+				'label' => __( 'Color', 'live-composer-page-builder' ),
+				'id' => 'css_partner_color',
+				'std' => '#000000',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-project-partner',
+				'affect_on_change_rule' => 'color',
+				'section' => 'styling',
+				'tab' => __( 'Partner', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Font Size', 'live-composer-page-builder' ),
+				'id' => 'css_partner_font_size',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '12',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-project-partner',
+				'affect_on_change_rule' => 'font-size',
+				'section' => 'styling',
+				'tab' => __( 'Partner', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Font Weight', 'live-composer-page-builder' ),
+				'id' => 'css_partner_font_weight',
+				'std' => '400',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => '100 - Thin',
+						'value' => '100',
+					),
+					array(
+						'label' => '200 - Extra Light',
+						'value' => '200',
+					),
+					array(
+						'label' => '300 - Light',
+						'value' => '300',
+					),
+					array(
+						'label' => '400 - Normal',
+						'value' => '400',
+					),
+					array(
+						'label' => '500 - Medium',
+						'value' => '500',
+					),
+					array(
+						'label' => '600 - Semi Bold',
+						'value' => '600',
+					),
+					array(
+						'label' => '700 - Bold',
+						'value' => '700',
+					),
+					array(
+						'label' => '800 - Extra Bold',
+						'value' => '800',
+					),
+					array(
+						'label' => '900 - Black',
+						'value' => '900',
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-project-partner',
+				'affect_on_change_rule' => 'font-weight',
+				'section' => 'styling',
+				'tab' => __( 'Partner', 'live-composer-page-builder' ),
+				'ext' => '',
+			),
+			array(
+				'label' => __( 'Font Family', 'live-composer-page-builder' ),
+				'id' => 'css_partner_font_family',
+				'std' => '',
+				'type' => 'font',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-project-partner',
+				'affect_on_change_rule' => 'font-family',
+				'section' => 'styling',
+				'tab' => __( 'Partner', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Font Style', 'live-composer-page-builder' ),
+				'id' => 'css_partner_font_style',
+				'std' => 'normal',
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-project-partner',
+				'affect_on_change_rule' => 'font-style',
+				'section' => 'styling',
+				'tab' => __( 'Partner', 'live-composer-page-builder' ),
+				'choices' => array(
+					array(
+						'label' => __( 'Normal', 'live-composer-page-builder' ),
+						'value' => 'normal',
+					),
+					array(
+						'label' => __( 'Italic', 'live-composer-page-builder' ),
+						'value' => 'italic',
+					),
+				),
+			),
+			array(
+				'label' => __( 'Line Height', 'live-composer-page-builder' ),
+				'id' => 'css_partner_line_height',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '12',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-project-partner',
+				'affect_on_change_rule' => 'line-height',
+				'section' => 'styling',
+				'tab' => __( 'Partner', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
+				'id' => 'css_partner_margin-bottom',
+				'std' => '10',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-project-partner',
+				'affect_on_change_rule' => 'margin-bottom',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Partner', 'live-composer-page-builder' ),
+			),
+
+			/**
 			 * Excerpt
 			 */
 
@@ -1894,6 +2174,82 @@ class DSLC_Projects extends DSLC_Module {
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
+				'label' => __( 'Staff - Font Size', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_staff_font_size',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '12',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-project-staff',
+				'affect_on_change_rule' => 'font-size',
+				'section' => 'responsive',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Staff - Line Height', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_staff_line_height',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '12',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-project-staff',
+				'affect_on_change_rule' => 'line-height',
+				'section' => 'responsive',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Staff - Margin Bottom', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_staff_margin-bottom',
+				'std' => '10',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-project-staff',
+				'affect_on_change_rule' => 'margin-bottom',
+				'section' => 'responsive',
+				'ext' => 'px',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Partner - Font Size', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_partner_font_size',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '12',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-project-partner',
+				'affect_on_change_rule' => 'font-size',
+				'section' => 'responsive',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Partner - Line Height', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_partner_line_height',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '12',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-project-partner',
+				'affect_on_change_rule' => 'line-height',
+				'section' => 'responsive',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Partner - Margin Bottom', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_partner_margin-bottom',
+				'std' => '10',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-project-partner',
+				'affect_on_change_rule' => 'margin-bottom',
+				'section' => 'responsive',
+				'ext' => 'px',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Excerpt - Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_excerpt_font_size',
 				'onlypositive' => true, // Value can't be negative.
@@ -2182,6 +2538,82 @@ class DSLC_Projects extends DSLC_Module {
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-project-cats',
+				'affect_on_change_rule' => 'margin-bottom',
+				'section' => 'responsive',
+				'ext' => 'px',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Staff - Font Size', 'live-composer-page-builder' ),
+				'id' => 'css_res_p_staff_font_size',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '12',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-project-staff',
+				'affect_on_change_rule' => 'font-size',
+				'section' => 'responsive',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Staff - Line Height', 'live-composer-page-builder' ),
+				'id' => 'css_res_p_staff_line_height',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '12',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-project-staff',
+				'affect_on_change_rule' => 'line-height',
+				'section' => 'responsive',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Staff - Margin Bottom', 'live-composer-page-builder' ),
+				'id' => 'css_res_p_staff_margin-bottom',
+				'std' => '10',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-project-staff',
+				'affect_on_change_rule' => 'margin-bottom',
+				'section' => 'responsive',
+				'ext' => 'px',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Partner - Font Size', 'live-composer-page-builder' ),
+				'id' => 'css_res_p_partner_font_size',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '12',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-project-partner',
+				'affect_on_change_rule' => 'font-size',
+				'section' => 'responsive',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Partner - Line Height', 'live-composer-page-builder' ),
+				'id' => 'css_res_p_partner_line_height',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '12',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-project-partner',
+				'affect_on_change_rule' => 'line-height',
+				'section' => 'responsive',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Partner - Margin Bottom', 'live-composer-page-builder' ),
+				'id' => 'css_res_p_partner_margin-bottom',
+				'std' => '10',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-project-partner',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
@@ -2772,6 +3204,34 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 
 													<?php endif; ?>
 
+													<?php if ( $post_elements == 'all' || in_array( 'staff', $post_elements ) ) : ?>
+
+														<?php $staff = get_post_meta( get_the_ID(), 'dslc_project_staffs', true ); ?>
+
+														<?php if ( ! empty( $staff ) && ( 'not_set' !== $staff )  ) : ?>
+
+															<div class="dslc-project-staff">
+																<?php echo $staff; ?>
+															</div><!-- .dslc-project-staff -->
+
+														<?php endif; ?>
+
+													<?php endif; ?>
+
+													<?php if ( $post_elements == 'all' || in_array( 'partner', $post_elements ) ) : ?>
+
+														<?php $partner = get_post_meta( get_the_ID(), 'dslc_project_partners', true ); ?>
+
+														<?php if ( ! empty( $staff ) && ( 'not_set' !== $partner ) ) : ?>
+
+															<div class="dslc-project-partner">
+																<?php echo $partner; ?>
+															</div><!-- .dslc-project-partner -->
+
+														<?php endif; ?>
+
+													<?php endif; ?>
+
 													<?php if ( $post_elements == 'all' || in_array( 'excerpt', $post_elements ) ) : ?>
 
 														<div class="dslc-project-excerpt">
@@ -2855,6 +3315,34 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 												}
 												?>
 											</div><!-- .dslc-project-cats -->
+										<?php endif; ?>
+
+									<?php endif; ?>
+
+									<?php if ( $post_elements == 'all' || in_array( 'staff', $post_elements ) ) : ?>
+
+										<?php $staff = get_post_meta( get_the_ID(), 'dslc_project_staffs', true ); ?>
+
+										<?php if ( ! empty( $staff ) && ( 'not_set' !== $staff )  ) : ?>
+
+											<div class="dslc-project-staff">
+												<?php echo $staff; ?>
+											</div><!-- .dslc-project-staff -->
+
+										<?php endif; ?>
+
+									<?php endif; ?>
+
+									<?php if ( $post_elements == 'all' || in_array( 'partner', $post_elements ) ) : ?>
+
+										<?php $partner = get_post_meta( get_the_ID(), 'dslc_project_partners', true ); ?>
+
+										<?php if ( ! empty( $staff ) && ( 'not_set' !== $partner ) ) : ?>
+
+											<div class="dslc-project-partner">
+												<?php echo $partner; ?>
+											</div><!-- .dslc-project-partner -->
+
 										<?php endif; ?>
 
 									<?php endif; ?>
