@@ -110,28 +110,22 @@ class LC_Editor_Messages {
 	 */
 	public function on_plugin_install() {
 		$default_messages = array(
+			'stylist' => array(
+				'text'  => '<strong>Need more options?</strong> Free StylstWP plugin allows you to style any site element with 60+ design controls. <b class="cta">FREE DOWNLOAD</b>',
+				'link'  => 'https://livecomposerplugin.com/stylist',
+				'icon'  => 'dslc-icon-paint-brush',
+				'color' => '',
+			),
 			'woo-integration' => array(
-				'text' => '<strong>Yes!</strong> Live Composer now fully supports WooCommerce. <b class="cta">Learn More</b>',
-				'link' => 'https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=editing-screen&utm_medium=editor-messages&utm_campaign=woo-integration',
-				'icon' => 'dslc-icon-shopping-cart',
+				'text'  => '<strong>Yes!</strong> Live Composer now fully supports WooCommerce. <b class="cta">Learn More</b>',
+				'link'  => 'https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=editing-screen&utm_medium=editor-messages&utm_campaign=woo-integration',
+				'icon'  => 'dslc-icon-shopping-cart',
 				'color' => '',
 			),
 			'all-extensions' => array(
-				'text' => '<strong>Did you see it?</strong> Our new extensions pack is huge. ACF + CPT + MegaMenu + 9 more add-ons. <b class="cta">Learn More</b>',
-				'link' => 'https://livecomposerplugin.com/downloads/bundle-buy-all-extensions/?utm_source=editing-screen&utm_medium=editor-messages&utm_campaign=add-ons',
-				'icon' => 'dslc-icon-briefcase',
-				'color' => '',
-			),
-			'peace-1' => array(
-				'text' => 'Peace · Pace · Paix · Paz · Pokój · Мир · Mír · Mier · Frieden · Fred · Vrede <b class="cta">Decrypt It</b>',
-				'link' => 'https://livecomposerplugin.com/peace',
-				'icon' => 'dslc-icon-globe',
-				'color' => '',
-			),
-			'peace-2' => array(
-				'text' => 'Barış · Béke · Kedamaian · Hasîtî · Ειρήνη · 和平 · 平和 · שָׁלוֹם · سلام · สันติภาพ · शान्ति <b class="cta">Word Study</b>',
-				'link' => 'https://livecomposerplugin.com/peace',
-				'icon' => 'dslc-icon-child',
+				'text'  => '<strong>Did you see it?</strong> Our new extensions pack is huge. ACF + CPT + MegaMenu + 9 more add-ons. <b class="cta">Learn More</b>',
+				'link'  => 'https://livecomposerplugin.com/downloads/bundle-buy-all-extensions/?utm_source=editing-screen&utm_medium=editor-messages&utm_campaign=add-ons',
+				'icon'  => 'dslc-icon-briefcase',
 				'color' => '',
 			),
 		);
@@ -189,18 +183,18 @@ class LC_Editor_Messages {
 	 * Display the editor messages
 	 */
 	public function print_messages() {
-	?>
-	    <div class="dslc-editor-messages-section-122017">
-	    	<a href="#" class="dslc-editor-messages-title"><?php echo __( 'Live Composer Updates', 'live-composer-page-builder' ); ?></a>
-	    	<a href="#" data-can-hide="<?php echo $this->premium_user; ?>" class="dslc-editor-messages-hide"><span class="dslc-icon dslc-icon-remove"></span><?php echo __( 'Hide this', 'live-composer-page-builder' ); ?></a>
-	    	<ul id="editor-messages">
-	    		<?php foreach ( $this->messages as $key => $message ) { ?>
+		?>
+		<div class="dslc-editor-messages-section-122017">
+			<a href="#" class="dslc-editor-messages-title"><?php echo __( 'Live Composer Updates', 'live-composer-page-builder' ); ?></a>
+			<a href="#" data-can-hide="<?php echo $this->premium_user; ?>" class="dslc-editor-messages-hide"><span class="dslc-icon dslc-icon-remove"></span>Hide this</a>	
+			<ul id="editor-messages">
+				<?php foreach ( $this->messages as $key => $message ) { ?>
 					<li>
 						<span class="dslc-icon <?php echo $message['icon']; ?>"></span><?php echo $message['text']; ?><a href="<?php echo $message['link']; ?>" target="_blank"></a>
 					</li>
 				<?php } ?>
-	    	</ul>
-	    </div>
-	<?php
+			</ul>
+		</div>
+		<?php
 	}
 }

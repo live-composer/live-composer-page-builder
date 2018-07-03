@@ -1,4 +1,9 @@
 <?php
+/**
+ * Tab Stylist
+ *
+ * @package LiveComposer
+ */
 
 // Prevent direct access to the file.
 if ( ! defined( 'ABSPATH' ) ) {
