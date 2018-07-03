@@ -41,7 +41,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<ul>
 					<li><a class="dslc-panel-icon dslc-panel-github" href="https://github.com/live-composer/live-composer-page-builder/issues" traget="_blank"><?php _e( 'Report a bug (not support!)', 'live-composer-page-builder' ); ?></a></li>	
 					<li><a class="dslc-panel-icon dslc-panel-facebook" href="//www.facebook.com/groups/livecomposer/" traget="_blank"><?php _e( 'Free advice from other users', 'live-composer-page-builder' ); ?></a></li>
-					<li><a class="dslc-panel-icon dslc-panel-show-work" href="//www.facebook.com/groups/livecomposer/" traget="_blank"><?php _e( 'Premium support (buyers only)', 'live-composer-page-builder' ); ?></a></li>
 				</ul>
 			</div>
 		</div>
