@@ -36,11 +36,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 				?>
 			</div>
 			<div class="dslc-panel-column dslc-panel-last">
-				<h3><a href="//livecomposerplugin.com/support/support-request/?utm_source=wp-admin&utm_medium=documentation-block&utm_campaign=free-support-header" target="_blank"><span class="dashicons dashicons-format-chat"></span> <?php _e( "Free &amp; Premium Support", 'live-composer-page-builder' ); ?></a></h3>
+				<h3><a href="//livecomposerplugin.com/support/support-request/?utm_source=wp-admin&utm_medium=documentation-block&utm_campaign=free-support-header" target="_blank"><span class="dashicons dashicons-format-chat"></span> <?php _e( " Support &amp; Community", 'live-composer-page-builder' ); ?></a></h3>
 				<p><?php _e( 'If you run into any bugs or issues do let us know.', 'live-composer-page-builder' ); ?></p>
 				<ul>
 					<li><a class="dslc-panel-icon dslc-panel-github" href="https://github.com/live-composer/live-composer-page-builder/issues" traget="_blank"><?php _e( 'Report a bug (not support!)', 'live-composer-page-builder' ); ?></a></li>	
 					<li><a class="dslc-panel-icon dslc-panel-facebook" href="//www.facebook.com/groups/livecomposer/" traget="_blank"><?php _e( 'Free advice from other users', 'live-composer-page-builder' ); ?></a></li>
+					<li><a class="dslc-panel-icon dslc-panel-show-work" href="//livecomposerplugin.com/support/support-request/?utm_source=wp-admin&utm_medium=documentation-block&utm_campaign=free-support-header" traget="_blank"><?php _e( 'Send a ticket to support', 'live-composer-page-builder' ); ?></a></li>
 				</ul>
 			</div>
 		</div>
