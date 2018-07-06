@@ -6,7 +6,7 @@
  * @since 1.3.10
  */
 
-$I = new AcceptanceTester( $scenario );
+/* $I = new AcceptanceTester( $scenario );
 $I->wantTo( 'To check YoastSEO Open Graph output in Live Composer.' );
 
 $I->loginAsAdmin();
@@ -45,7 +45,7 @@ $I->seeInSource( '<meta property="og:image" content="http://www.seowptheme.com/w
 
 $I->seeInSource( '<meta name="twitter:description" content="This is a custom SEO META DESCRIPTION.">' );
 $I->seeInSource( '<meta name="twitter:title" content="This is a custom SEO TITLE.">' );
-$I->seeInSource( '<meta name="twitter:image" content="http://www.seowptheme.com/wp-content/uploads/project-thumb-1-1.png">' );
+$I->seeInSource( '<meta name="twitter:image" content="http://www.seowptheme.com/wp-content/uploads/project-thumb-1-1.png">' ); */
 
 
 // EOF
