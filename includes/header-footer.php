@@ -228,6 +228,10 @@ function dslc_hf_unique_default( $post_id ) {
 		return;
 	}
 
+	if ( $_POST['dslc_hf_for'] ) { 
+		$dslc_hf_for = sanitize_text_field( $_POST['dslc_hf_for'] );
+	}
+
 	// Get header/footer that are default
 	$args = array(
 		'post_type' => 'dslc_hf',
@@ -236,7 +240,7 @@ function dslc_hf_unique_default( $post_id ) {
 		'meta_query' => array(
 			array(
 				'key' => 'dslc_hf_for',
-				'value' => $_POST['dslc_hf_for'],
+				'value' => $dslc_hf_for,
 				'compare' => '=',
 			),
 			array(
