@@ -211,9 +211,9 @@ function dslc_tp_unique_default( $post_id ) {
 		// Make dslc_template_for an array even if it's string (for easier processing).
 		$dslc_template_for = array();
 		if ( ! is_array( $_POST['dslc_template_for'] ) ) {
-			$dslc_template_for[] = $_POST['dslc_template_for'];
+			$dslc_template_for[] = sanitize_text_field( $_POST['dslc_template_for'] );
 		} else {
-			$dslc_template_for = $_POST['dslc_template_for'];
+			$dslc_template_for = dslc_sanitize_array( $_POST['dslc_template_for'] );
 		}
 
 		// Get templates ( if any ) in same CPT that are default.

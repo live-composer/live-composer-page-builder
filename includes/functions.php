@@ -839,6 +839,22 @@ function dslc_sanitize_option_val( $data_to_sanitize ) {
 	}
 }
 
+function dslc_sanitize_array( $array ) {
+
+	$sanitize_array = array();
+
+	foreach ( $array as $value ) {	
+
+		if ( ! is_array ( $value ) ) {
+
+			// sanitize if value is not an array
+			$sanitize_array[] = sanitize_text_field( $value );
+		}
+	}
+
+	return $sanitize_array;
+}
+
 /*
 Work in progress.
 
