@@ -6,12 +6,13 @@
  * @since 1.3.10
  */
 
-/* $I = new AcceptanceTester( $scenario );
+$I = new AcceptanceTester( $scenario );
 $I->wantTo( 'To check YoastSEO Open Graph output in Live Composer.' );
 
 $I->loginAsAdmin();
 $I->waitForElement( '#footer-thankyou', 10 );
 
+/*
 // Publish new page.
 $I->amOnPage( '/wp-admin/post-new.php' );
 $I->waitForElement( '[name="post_title"]', 30 ); // secs
