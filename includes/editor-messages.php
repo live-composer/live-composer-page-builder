@@ -51,7 +51,11 @@ class LC_Editor_Messages {
 	 * Get all messages
 	 */
 	public function get_messages() {
-		return get_option( 'dslc_editormessages', false );
+		$messages = get_option( 'dslc_editormessages', array() );
+		if ( empty ( $messages ) ) {
+			$messages = array();
+		}
+		return $messages;
 	}
 
 	/**
@@ -111,8 +115,8 @@ class LC_Editor_Messages {
 	public function on_plugin_install() {
 		$default_messages = array(
 			'stylist' => array(
-				'text'  => '<strong>Need more options?</strong> Free StylstWP plugin allows you to style any site element with 60+ design controls. <b class="cta">FREE DOWNLOAD</b>',
-				'link'  => 'https://livecomposerplugin.com/stylist',
+				'text'  => '<strong>Need more options?</strong> StylstWP plugin allows you to style any site element with 60+ design controls. <b class="cta">FREE DOWNLOAD</b>',
+				'link'  => '/wp-admin/plugin-install.php?s=StylistWP&tab=search&type=term',
 				'icon'  => 'dslc-icon-paint-brush',
 				'color' => '',
 			),

@@ -93,7 +93,7 @@ function dslc_plugin_options_display( $tab = '' ) {
 			<!-- <a href="#" data-nav-to="tab-themes" class="nav-tab <?php echo 'dslc_themes' === $anchor ? 'nav-tab-active' : ''; ?>"><?php  echo esc_html__( 'Themes', 'live-composer-page-builder' ) . ' <span class="tag">' . esc_html__( 'Free', 'live-composer-page-builder' ) . '</span>'; ?></a> -->
 			<!-- <a href="#" data-nav-to="tab-designs" class="nav-tab <?php echo 'dslc_designs' === $anchor ? 'nav-tab-active' : ''; ?>"><?php  echo esc_html__( 'Designs', 'live-composer-page-builder' ) . ' <span class="tag">' . esc_html__( 'New', 'live-composer-page-builder' ) . '</span>'; ?></a> -->
 			<a href="#" data-nav-to="tab-docs" class="nav-tab <?php echo 'dslc_docs' === $anchor ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Docs &amp; Support', 'live-composer-page-builder' ) ?></a>
-			<a href="#" data-nav-to="tab-stylist" class="nav-tab <?php echo 'dslc_stylist' === $anchor ? 'nav-tab-active' : ''; ?>"><?php  echo esc_html__( '+60 Design Controls', 'live-composer-page-builder' ) . ' <span class="tag">' . esc_html__( 'New', 'live-composer-page-builder' ) . '</span>'; ?></a>
+			<a href="#" data-nav-to="tab-stylist" class="nav-tab <?php echo 'dslc_stylist' === $anchor ? 'nav-tab-active' : ''; ?>"><?php  echo esc_html__( '+60 Design Controls', 'live-composer-page-builder' ) . ' <span class="tag">' . esc_html__( 'FREE', 'live-composer-page-builder' ) . '</span>'; ?></a>
 		</h2>
 
 

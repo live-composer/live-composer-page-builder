@@ -12,16 +12,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 
-<div class="wrap lc-admin-tab-content lc-wrap lc-centered-panels lc-wider-panel lc-tab-extensions">
+<div class="wrap lc-admin-tab-content lc-wrap lc-centered-panels lc-wider-panel lc-tab-stylist">
 
 	<div class="dslc-panel lc-divided-panels padding-medium">
 		<div class="lc-panel-half">
-			<h3 class="lc-huge margin-top-half"><?php _e( 'Style and website element with +60 extra design controls', 'live-composer-page-builder' ); ?></h3>
-			<p class="lc-larger-text"><?php _e( 'Check out a new free plugin for WordPress allowing you to customize any element on your page with easy to use design panel.', 'live-composer-page-builder' ); ?></p>
-			<p><a href="https://livecomposerplugin.com/stylist" class="button button-primary button-hero" target="_blank">Download Free</a></p>
+			<h3 class="lc-huge margin-top-half">Style any website element with +60 design controls</h3>
+			<p class="lc-larger-text">Do you need more design options? Check out <a href="https://livecomposerplugin.com/stylist" target="_blank">Stylist: styling plugin for WordPress</a>.</p>
+			<ul>
+				<li>Visually customize any element on the page with easy to use design panel.</li>
+				<li>Edit custom CSS with live preview.</li>
+				<li>Works great with any page builder including Gutenberg editor.</li>
+				<li>Advanced responsive mode.</li>
+				<li>+60 extra design options.</li>
+			</ul>
 		</div>
-		<div class="lc-panel-half lc-image-column">
-			<img alt="<?php _e( 'Stylist', 'live-composer-page-builder' ); ?>" src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/stylist.png">
+		<div class="lc-panel-half lc-image-column" style="text-align:center;">
+			<img alt="Stylist" src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/stylist.png">
+			<p><a href="/wp-admin/plugin-install.php?s=StylistWP&tab=search&type=term" class="button button-primary button-hero">FREE DOWNLOAD</a></p>
 		</div>
 	</div>
 
