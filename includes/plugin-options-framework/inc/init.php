@@ -99,7 +99,7 @@ function dslc_plugin_options_display( $tab = '' ) {
 
 		<div id="lc-settings-tabs">
 				<!-- Extensions tab -->
-				<div class="tab" id="tab-for-tab-extensions" <?php if ( 'dslc_settings' !== $anchor ) { echo 'style="display:block"'; } ?>>
+				<div class="tab" id="tab-for-tab-extensions" <?php if ( ( 'dslc_settings' !== $anchor ) && ( 'dslc_woo' !== $anchor ) ) { echo 'style="display:block"'; } ?>>
 					<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-extensions.php'; ?>
 				</div>
 				<!-- Getting Started Tab -->
@@ -114,7 +114,7 @@ function dslc_plugin_options_display( $tab = '' ) {
 				</div>
 
 				<!-- Woo tab -->
-				<div class="tab" id="tab-for-tab-woo">
+				<div class="tab" id="tab-for-tab-woo" <?php if ( 'dslc_woo' === $anchor ) { echo 'style="display:block"'; } ?>>
 					<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-woo.php'; ?>
 				</div>
 

@@ -29,7 +29,13 @@ jQuery(document).on('click', '.lc-activate-plugin', function (e) {
 		},
 		url: ajaxurl,
 	}).done(function (response) {
-		location.reload();
+		// location.reload();
+
+		if ( 'lc-extensions' == pluginToActivate ) {
+			location.reload();
+		} else {
+			location.href = location.href.replace( /[\?#].*|$/, "?page=dslc_plugin_options&anchor=dslc_woo" );
+		}
 	})
 });
 
