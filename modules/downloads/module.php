@@ -1587,6 +1587,20 @@ class DSLC_Downloads extends DSLC_Module {
 				'tab' => __( 'Button', 'live-composer-page-builder' ),
 			),
 			array(
+				'label' => __( 'Margin Top', 'live-composer-page-builder' ),
+				'id' => 'css_button_margin_top',
+				'onlypositive' => true, // Value can't be negative.
+				'max' => 600,
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-download-download',
+				'affect_on_change_rule' => 'margin-top',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Button', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_button_margin_bottom',
 				'std' => '10',
@@ -2011,6 +2025,20 @@ class DSLC_Downloads extends DSLC_Module {
 				'ext' => 'px',
 			),
 			array(
+				'label' => __( 'Button - Margin Top', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_button_margin_top',
+				'onlypositive' => true, // Value can't be negative.
+				'max' => 600,
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-download-download',
+				'affect_on_change_rule' => 'margin-top',
+				'section' => 'responsive',
+				'ext' => 'px',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Button - Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_button_margin_bottom',
 				'std' => '10',
@@ -2304,6 +2332,20 @@ class DSLC_Downloads extends DSLC_Module {
 				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Button - Margin Top', 'live-composer-page-builder' ),
+				'id' => 'css_res_p_button_margin_top',
+				'onlypositive' => true, // Value can't be negative.
+				'max' => 600,
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-download-download',
+				'affect_on_change_rule' => 'margin-top',
+				'section' => 'responsive',
+				'ext' => 'px',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
 				'label' => __( 'Button - Margin Bottom', 'live-composer-page-builder' ),
