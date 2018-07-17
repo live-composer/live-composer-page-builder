@@ -476,6 +476,7 @@ function dslc_ajax_import_template( $atts ) {
 		$template_code = stripslashes( $_POST['dslc_template_code'] );
 
 		$response['output'] = dslc_render_content( $template_code, true );
+		$response['output'] = do_shortcode( $response['output'] ); // Fixed bug with modules of post
 
 		// Encode response.
 		$response_json = wp_json_encode( $response );

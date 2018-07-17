@@ -457,6 +457,10 @@ function dslc_generate_section_code( theModulesSection ) {
 						delete moduleCodeJSON[index];
 					}
 
+					if ( 'content' === index ) {
+						moduleCodeJSON[index] = el.replace(/\\'/g, "'");
+					}
+
 					if ( 'give_new_id' === index ) {
 						delete moduleCodeJSON[index];
 					}
