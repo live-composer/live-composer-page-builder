@@ -687,6 +687,22 @@ class LC_Control {
 			$output .= '<span class="dslca-module-edit-field-ttip-hook"><span class="dslca-icon dslc-icon-info"></span></span>';
 		}
 
+		if ( 'css_load_preset' === $module_control['id'] ) {
+
+			$choise = $module_control['choices'];
+			dimaphperror($choise);
+
+			$curr_value = $this->get_starting_value();
+
+			if ( 'none' == $curr_value || count($choise) === 1 ) {
+				$dslc_delete_preset_hide = ' dslc-delete-preset-hide';
+			} else {
+				$dslc_delete_preset_hide = '';
+			}
+
+			$output .= '<span class="dslc-delete-preset dslc-icon dslc-icon-trash' . $dslc_delete_preset_hide . '"></span>';
+		}
+
 		$output .= '</span>';
 
 		return $output;

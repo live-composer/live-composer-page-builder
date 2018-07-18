@@ -745,6 +745,53 @@ function dslc_ajax_save_preset() {
 } add_action( 'wp_ajax_dslc-ajax-save-preset', 'dslc_ajax_save_preset' );
 
 /**
+ * Delete module styling preset
+ *
+ * @since 1.0
+ */
+function dslc_ajax_delete_preset() {
+
+	// Allowed to do this?
+	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+
+		// The array we'll pass back to the AJAX call.
+		$response = array();
+
+		// Get the preset data.
+		$preset_name = stripslashes( $_POST['dslc_preset_name'] );
+		$module_id = stripslashes( $_POST['dslc_module_id'] );
+
+		if ( ! class_exists( $module_id ) ) {
+
+			header( 'HTTP/1.1 400 Bad Request', true, 400 );
+			die();
+		}
+
+		// Get presets
+		$presets = maybe_unserialize( get_option( 'dslc_presets' ) );
+
+		// Remove the preset.
+		unset( $presets[ $preset_name ] );
+
+		// Save new presets array to db.
+		update_option( 'dslc_presets', maybe_serialize( $presets ) );
+
+		// Generate response.
+		$response['status'] = 'success';
+
+		// Encode response.
+		$response_json = wp_json_encode( $response );
+
+		// Send the response.
+		header( 'Content-Type: application/json' );
+		echo $response_json;
+
+		// Bye bye.
+		exit;
+	}// End if().
+} add_action( 'wp_ajax_dslc-ajax-delete-preset', 'dslc_ajax_delete_preset' );
+
+/**
  * Ajax set hidden ( panel )
  */
 function dslc_ajax_hidden_panel() {

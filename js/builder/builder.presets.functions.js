@@ -75,6 +75,9 @@ jQuery(document).ready(function($){
 
 			// Erase value from the "Save Preset" option
 			$(this).val('');
+
+			// console.log(jQuery(this));
+			jQuery('.dslc-delete-preset').removeClass('dslc-delete-preset-hide');
 		}
 	});
 
@@ -84,5 +87,36 @@ jQuery(document).ready(function($){
 
 	$(document).on( 'change', '.dslca-module-edit-field[name="css_load_preset"]', function(e){
 		$('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).addClass('dslca-preload-preset');
+	});
+
+	/**
+	 * Action - Delete Preset
+	 */
+
+	$(document).on( 'click', '.dslc-delete-preset', function(e){
+
+		// Vars
+		var module = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument),
+		presetName = module.find('.dslca-module-option-front[data-id="css_load_preset"]').val(),
+		moduleID = module.data('dslc-module-id');
+
+		// If preset value not "none"
+		if ( 'none' !== presetName && '' !== presetName ) {
+
+			// AJAX Call to Save Preset
+			jQuery.post(
+
+				DSLCAjax.ajaxurl,
+				{
+					action : 'dslc-ajax-delete-preset',
+					dslc_preset_name : presetName,
+					dslc_module_id : moduleID
+				},
+				function( response ) {
+
+					dslc_module_options_show(moduleID);
+				}
+			);
+		}
 	});
 });

@@ -4401,3 +4401,21 @@ body.section-editing-in-progress.dslc-res-phone .dslc-modules-section:not(.dslca
 	z-index: 1;
 }
 
+/*
+ * Delete preset
+ */
+
+.dslca-module-edit-label .dslc-delete-preset {
+	cursor: pointer;
+	position: absolute;
+	right: 0;
+	opacity: 0.5;
+}
+
+.dslca-module-edit-label .dslc-delete-preset:hover {
+	opacity: 1;
+}
+
+.dslca-module-edit-label .dslc-delete-preset.dslc-delete-preset-hide {
+	display: none;
+}
