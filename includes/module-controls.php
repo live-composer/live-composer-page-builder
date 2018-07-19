@@ -690,7 +690,6 @@ class LC_Control {
 		if ( 'css_load_preset' === $module_control['id'] ) {
 
 			$choise = $module_control['choices'];
-			dimaphperror($choise);
 
 			$curr_value = $this->get_starting_value();
 
