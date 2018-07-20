@@ -3,7 +3,7 @@ Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page, page builder plugin, drag-n-drop page builder
 Requires at least: 4.7
 Tested up to: 4.9
-Stable tag: 1.3.16
+Stable tag: 1.3.17
 License: GPLv3
 
 Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
@@ -82,6 +82,19 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 = FOR OUR PRO USERS: =
 * 🦊 [Check out our WooCommerce Page Builder Extension](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
+
+= 1.3.17 - July 20th 2018 =
+
+= Bug Fixes: =
+* Issue [#885](https://github.com/live-composer/live-composer-page-builder/issues/885): Live Composer code Import and Export.
+* Issue [#901](https://github.com/live-composer/live-composer-page-builder/issues/901): Cache not flushing on ajax save action.
+
+= Improved: =
+* Issue [#938](https://github.com/live-composer/live-composer-page-builder/issues/938): Activation process ( Live Composer Woocommerce Integration ).
+* Issue [#916](https://github.com/live-composer/live-composer-page-builder/issues/916): Margins styles for buttons on the Post module.
+
+= New: =
+* Issue [#882](https://github.com/live-composer/live-composer-page-builder/issues/882): Option to delete the presets from modules.
 
 = 1.3.16 - July 6th 2018 =
 
