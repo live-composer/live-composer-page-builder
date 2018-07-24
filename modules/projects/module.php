@@ -2830,8 +2830,9 @@ class DSLC_Projects extends DSLC_Module {
 	 */
 	function output( $options ) {
 		$options['module_id'] = $this->module_id;
+		$dslc_options = apply_filters( 'dslc_module_options_before_output', $options );
 	?>
-		[dslc_module_projects_output]<?php echo serialize( $options ); ?>[/dslc_module_projects_output]
+		[dslc_module_projects_output]<?php echo serialize( $dslc_options ); ?>[/dslc_module_projects_output]
 	<?php
 
 	}

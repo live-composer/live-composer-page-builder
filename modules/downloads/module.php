@@ -2435,8 +2435,9 @@ class DSLC_Downloads extends DSLC_Module {
 	 * @return void
 	 */
 	function output( $options ) {
+		$dslc_options = apply_filters( 'dslc_module_options_before_output', $options );
 	?>
-		[dslc_module_downloads_output]<?php echo serialize( $options ); ?>[/dslc_module_downloads_output]
+		[dslc_module_downloads_output]<?php echo serialize( $dslc_options ); ?>[/dslc_module_downloads_output]
 	<?php
 
 	}

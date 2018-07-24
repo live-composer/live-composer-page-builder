@@ -2623,7 +2623,8 @@ class DSLC_Posts extends DSLC_Module {
 		// if ( 'disabled' === $options['pagination_type'] )
 		// # code...
 		// }
-		echo '[dslc_module_posts_output]' . serialize( $options ) . '[/dslc_module_posts_output]';
+		$dslc_options = apply_filters( 'dslc_module_options_before_output', $options );
+		echo '[dslc_module_posts_output]' . serialize( $dslc_options ) . '[/dslc_module_posts_output]';
 	}
 }
 

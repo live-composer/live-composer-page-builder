@@ -2581,10 +2581,8 @@ class DSLC_Module {
 		$module_class = implode( ' ', $module_class_arr );
 
 		if ( ! $dslc_active ) {
-
-			// Before Module.
-			$before_module_content = '';
-			echo apply_filters( 'dslc_before_module', $before_module_content, $options );
+			$dslc_module_before = '';
+			echo dslc_decode_shortcodes( apply_filters( 'dslc_module_before_filter', $dslc_module_before, $options ) );
 		}
 
 		?>
@@ -2800,9 +2798,8 @@ class DSLC_Module {
 		<?php
 
 		if ( ! $dslc_active ) {
-			// After Module.
-			$after_module_content = '';
-			echo apply_filters( 'dslc_after_module', $after_module_content, $user_options );
+			$dslc_module_after = '';
+			echo dslc_decode_shortcodes( apply_filters( 'dslc_module_after_filter', $dslc_module_after, $user_options ) );
 		}
 
 		global $dslc_should_filter;
