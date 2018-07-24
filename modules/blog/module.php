@@ -3710,6 +3710,8 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 
 									<?php endif; ?>
 
+									<?php do_action( 'dslc_module_blog_post_main_after', $options ); ?>
+
 								</div><!-- .blog-post-main -->
 
 								<?php if ( $post_elements == 'all' || in_array( 'social', $post_elements ) ) : ?>
