@@ -3621,6 +3621,8 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 
 								<div class="dslc-post-main dslc-blog-post-main">
 
+									<?php do_action( 'dslc_module_blog_post_main_after', $options ); ?>
+
 									<?php if ( $post_elements == 'all' || in_array( 'title', $post_elements ) ) : ?>
 
 										<div class="dslc-blog-post-title">
@@ -3709,8 +3711,6 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 										</div><!-- .dslc-blog-post-read-more -->
 
 									<?php endif; ?>
-
-									<?php do_action( 'dslc_module_blog_post_main_after', $options ); ?>
 
 								</div><!-- .blog-post-main -->
 
