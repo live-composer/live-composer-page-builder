@@ -286,6 +286,24 @@ class DSLC_Posts extends DSLC_Module {
 				'help' => __( 'Apply Page Query – show posts according to the selected tag, category, author or search query.<br /> Ignore Page Query – ignore the page query and list posts as on any other page.', 'live-composer-page-builder' ),
 			),
 
+			array(
+				'label' => __( 'Search by Post Type', 'live-composer-page-builder' ),
+				'id' => 'search_post_type',
+				'std' => 'disabled',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'Enabled', 'live-composer-page-builder' ),
+						'value' => 'enabled',
+					),
+					array(
+						'label' => __( 'Disabled', 'live-composer-page-builder' ),
+						'value' => 'disabled',
+					),
+				),
+				'tab' => 'posts query',
+			),
+
 			/**
 			 * Styling
 			 */
@@ -2772,6 +2790,9 @@ function dslc_module_posts_output( $atts, $content = null ) {
 		$dslc_query = $wp_query;
 
 		if ( isset( $options['amount'] ) ) {
+			if ( ( 'enabled' == $options['search_post_type'] ) && is_search() ) {
+				$dslc_query->set( 'post_type', $post_type[0] );
+			}
 			$dslc_query->set( 'posts_per_page', $options['amount'] );
 			$dslc_query->query( $dslc_query->query_vars );
 		}
