@@ -51,6 +51,10 @@ class DSLC_Posts extends DSLC_Module {
 			'public' => true,
 		), 'objects' );
 		$post_types_choices = array();
+		$post_types_choices[] = array(
+			'label' => __( 'All', 'lc-acf-integration' ),
+			'value' => 'all_posts',
+		);
 
 		// System post types that should not appear in selector.
 		$post_types_to_ignore = array(
@@ -284,24 +288,6 @@ class DSLC_Posts extends DSLC_Module {
 				),
 				'tab' => 'posts query',
 				'help' => __( 'Apply Page Query – show posts according to the selected tag, category, author or search query.<br /> Ignore Page Query – ignore the page query and list posts as on any other page.', 'live-composer-page-builder' ),
-			),
-
-			array(
-				'label' => __( 'Search by Post Type', 'live-composer-page-builder' ),
-				'id' => 'search_post_type',
-				'std' => 'disabled',
-				'type' => 'select',
-				'choices' => array(
-					array(
-						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled',
-					),
-					array(
-						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled',
-					),
-				),
-				'tab' => 'posts query',
 			),
 
 			/**
@@ -2715,6 +2701,33 @@ function dslc_module_posts_output( $atts, $content = null ) {
 		$query_offset = ( $paged - 1 ) * $options['amount'] + $options['offset'];
 	}
 
+	if ( 'all_posts' == $options['post_type'] ) {
+		// Get registered post types.
+		$post_types = get_post_types( array(
+			'public' => true,
+		), 'names' );
+
+		// System post types that should not appear in selector.
+		$post_types_to_ignore = array(
+			'dslc_templates',
+			'dslc_hf',
+			'attachment',
+			'dslc_testimonials',
+		);
+
+		$all_post_types = array();
+
+		foreach ( $post_types as $post_type_id => $post_type ) {
+
+			// Do not output system post-types.
+			if ( ! in_array( $post_type_id, $post_types_to_ignore ) ) {
+				$all_post_types[] = $post_type;
+			}
+		}
+
+		$post_type = $all_post_types;
+	}
+
 	// General args.
 	$args = array(
 		'paged' => $paged,
@@ -2790,7 +2803,7 @@ function dslc_module_posts_output( $atts, $content = null ) {
 		$dslc_query = $wp_query;
 
 		if ( isset( $options['amount'] ) ) {
-			if ( ( 'enabled' == $options['search_post_type'] ) && is_search() ) {
+			if ( ( 'all_posts' !== $post_type[0] ) && is_search() ) {
 				$dslc_query->set( 'post_type', $post_type[0] );
 			}
 			$dslc_query->set( 'posts_per_page', $options['amount'] );
