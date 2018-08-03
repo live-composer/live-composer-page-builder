@@ -83,7 +83,7 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 * 🦊 [Check out our WooCommerce Page Builder Extension](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
 
-= 1.3.17 - July 20th 2018 =
+= 1.3.17 - August 3th 2018 =
 
 = Bug Fixes: =
 * Issue [#885](https://github.com/live-composer/live-composer-page-builder/issues/885): Live Composer code Import and Export.
@@ -92,6 +92,7 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 = Improved: =
 * Issue [#938](https://github.com/live-composer/live-composer-page-builder/issues/938): Activation process ( Live Composer Woocommerce Integration ).
 * Issue [#916](https://github.com/live-composer/live-composer-page-builder/issues/916): Margins styles for buttons on the Post module.
+* Improved the Blog module flexibility for ACF integration
 
 = New: =
 * Issue [#882](https://github.com/live-composer/live-composer-page-builder/issues/882): Option to delete the presets from modules.
