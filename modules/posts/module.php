@@ -2803,8 +2803,8 @@ function dslc_module_posts_output( $atts, $content = null ) {
 		$dslc_query = $wp_query;
 
 		if ( isset( $options['amount'] ) ) {
-			if ( ( 'all_posts' !== $post_type[0] ) && is_search() ) {
-				$dslc_query->set( 'post_type', $post_type[0] );
+			if ( ( 'all_posts' !== $post_type_str ) && is_search() ) {
+				$dslc_query->set( 'post_type', $post_type_str );
 			}
 			$dslc_query->set( 'posts_per_page', $options['amount'] );
 			$dslc_query->query( $dslc_query->query_vars );
