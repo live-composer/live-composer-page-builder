@@ -2032,6 +2032,8 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 
 								<div class="dslc-post-main dslc-partner-main">
 
+									<?php do_action( 'dslc_module_partners_main_after', $options ); ?>
+
 									<?php if ( $post_elements == 'all' || in_array( 'title', $post_elements ) ) : ?>
 
 										<div class="dslc-partner-title">

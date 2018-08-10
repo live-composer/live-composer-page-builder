@@ -3379,6 +3379,8 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 
 								<div class="dslc-post-main dslc-project-main">
 
+									<?php do_action( 'dslc_module_projects_main_after', $options ); ?>
+
 									<?php if ( $post_elements == 'all' || in_array( 'title', $post_elements ) ) : ?>
 
 										<div class="dslc-project-title">
