@@ -1741,10 +1741,10 @@ function dslc_decode_shortcodes( $code, $mode = 'display' ) {
 	$braket_open = '%(%';
 	$braket_close = '%)%';
 
-	// if ( 'storage' === $mode ) {
-	// $braket_open =  '%((%';
-	// $braket_close =  '%))%';
-	// }
+	if ( 'storage' === $mode ) {
+		$braket_open =  '%((%';
+		$braket_close =  '%))%';
+	}
 	$code = str_replace( $braket_open,  '[', $code );
 	$code = str_replace( $braket_close, ']', $code );
 
