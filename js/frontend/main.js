@@ -678,10 +678,10 @@ function dslc_sticky_row() {
 	if ( row.hasClass('dslc-sticky-row') && ! jQuery('body').hasClass('dslca-enabled') ) {
 
 		var rowSticky = jQuery('body .dslc-modules-section.dslc-sticky-row');
-		var $headers = $(".dslc-sticky-row");
+		var $headers = jQuery(".dslc-sticky-row");
 
 		$headers.each(function(index, el) {
-			var $curHeader = $($headers).eq(index);
+			var $curHeader = jQuery($headers).eq(index);
 			var curHeight = $curHeader.outerHeight();
 
 			jQuery(el).wrap('<div class="dslc-modules-section-placeholder"></div>').parent().height(jQuery(el).outerHeight());
