@@ -465,6 +465,24 @@ class DSLC_Partners extends DSLC_Module {
 			 */
 
 			array(
+				'label' => __( 'Link Type', 'live-composer-page-builder' ),
+				'id' => 'link_type',
+				'std' => 'url_same',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'URL', 'live-composer-page-builder' ),
+						'value' => 'url_same',
+					),
+					array(
+						'label' => __( 'Lightbox', 'live-composer-page-builder' ),
+						'value' => 'lightbox',
+					),
+				),
+				'section' => 'styling',
+				'tab' => __( 'Thumbnail', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Align', 'live-composer-page-builder' ),
 				'id' => 'css_thumb_align',
 				'std' => 'left',
@@ -1947,10 +1965,20 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 								<?php if ( has_post_thumbnail() ) : ?>
 
 									<div class="dslc-post-thumb dslc-partner-thumb dslca-post-thumb dslc-on-hover-anim">
+										<?php
+												$anchor_class = '';
+												$anchor_href = $the_partner_url;
+
+												if ( 'lightbox' === $options['link_type'] ) {
+													$anchor_class = 'dslc-lightbox-image';
+													$anchor_href = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full' );
+													$anchor_href = $anchor_href[0];
+												}
+											?>
 
 										<?php if ( $manual_resize ) : ?>
 											<?php if ( $link_to_single ) : ?>
-												<a href="<?php echo $the_partner_url; ?>" target="<?php echo $anchor_target; ?>"><img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true );
+												<a href="<?php echo $anchor_href; ?>" class="<?php echo $anchor_class; ?>" target="<?php echo $anchor_target; ?>"><img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true );
 												echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" /></a>
 											<?php else : ?>
 												<img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true );
@@ -1958,7 +1986,7 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 											<?php endif; ?>
 										<?php else : ?>
 											<?php if ( $link_to_single ) : ?>
-												<a href="<?php echo $the_partner_url; ?>" target="<?php echo $anchor_target; ?>"><?php the_post_thumbnail( 'full' ); ?></a>
+												<a href="<?php echo $anchor_href; ?>" class="<?php echo $anchor_class; ?>" target="<?php echo $anchor_target; ?>"><?php the_post_thumbnail( 'full' ); ?></a>
 											<?php else : ?>
 												<?php the_post_thumbnail( 'full' ); ?>
 											<?php endif; ?>
