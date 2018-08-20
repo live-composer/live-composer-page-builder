@@ -1003,6 +1003,9 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 				$img_class = 'dslc-trigger-lightbox-gallery';
 			}
 
+			$srcset = '';
+			$sizes = '';
+
 			?>
 
 			<div class="dslc-tp-gallery-slider">
@@ -1024,6 +1027,12 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 
 							foreach ( $gallery_images as $gallery_image ) {
 
+								$img_srcset = wp_get_attachment_image_srcset( $gallery_image, 'full' );
+								$img_sizes = wp_get_attachment_image_sizes( $gallery_image, 'full' );
+					
+								$srcset = 'srcset="' . esc_attr( $img_srcset ) . '"';
+								$sizes = 'sizes="' . esc_attr( $img_sizes ) . '"';
+
 								$gallery_image_src = wp_get_attachment_image_src( $gallery_image, 'full' );
 								$gallery_image_src = $gallery_image_src[0];
 
@@ -1031,7 +1040,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 								if ( ! $thumb_alt ) { $thumb_alt = '';
 								}
 
-								?><div class="dslc-slider-item"><img class="<?php echo $img_class; ?>" src="<?php echo $gallery_image_src; ?>" alt="<?php echo $thumb_alt; ?>" /></div><?php
+								?><div class="dslc-slider-item"><img class="<?php echo $img_class; ?>" src="<?php echo $gallery_image_src; ?>" alt="<?php echo $thumb_alt; ?>" <?php echo $srcset; ?> <?php echo $sizes; ?> /></div><?php
 
 							}
 						}

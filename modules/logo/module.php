@@ -658,12 +658,23 @@ class DSLC_Logo extends DSLC_Module {
 					$the_image = dslc_aq_resize( $logo_url, $resize_width, $resize_height, true );
 				}
 
+				$srcset = '';
+				$sizes = '';
+
+				if ( empty( $options['resize_width'] ) || empty( $options['resize_height'] ) ) {
+					$img_srcset = wp_get_attachment_image_srcset( $site_logo_id, 'full' );
+					$img_sizes = wp_get_attachment_image_sizes( $site_logo_id, 'full' );
+
+					$srcset = 'srcset="' . esc_attr( $img_srcset ) . '"';
+					$sizes = 'sizes="' . esc_attr( $img_sizes ) . '"';
+				}
+
 				?>
 
 				<?php if ( ! empty( $options['link_url'] ) ) : ?>
 					<a href="<?php echo $anchor_href; ?>" target="<?php echo $anchor_target; ?>">
 				<?php endif; ?>
-					<img src="<?php echo $the_image ?>" alt="<?php echo $options['logo_alt']; ?>" title="<?php echo $options['logo_title']; ?>" />
+					<img src="<?php echo $the_image ?>" alt="<?php echo $options['logo_alt']; ?>" title="<?php echo $options['logo_title']; ?>" <?php echo $srcset; ?> <?php echo $sizes; ?> />
 				<?php if ( ! empty( $options['link_url'] ) ) : ?>
 					</a>
 				<?php endif; ?>
