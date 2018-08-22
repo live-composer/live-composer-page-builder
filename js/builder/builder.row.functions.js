@@ -201,6 +201,19 @@ function dslc_row_add( callback ) {
 	var newRow = jQuery();
 	var cachedAjaxRequest = browserCacheTmp.getItem( 'cache-dslc-ajax-add-modules-section' );
 
+	// If option 'lc_section_padding_vertical' was update.
+	if ( null !== cachedAjaxRequest ) {
+		var current_value, cache_curent_value;
+
+		current_value = DSLCMainOptions.section_padding_vertical;
+		cache_curent_value = jQuery(cachedAjaxRequest).find('input[data-id="padding"]').val();
+
+		if ( current_value !== cache_curent_value ) {
+			browserCacheTmp.removeItem('cache-dslc-ajax-add-modules-section');
+			cachedAjaxRequest = null;
+		}
+	}
+
 	// If no cache for current Ajax request.
 	if ( null === cachedAjaxRequest ) {
 

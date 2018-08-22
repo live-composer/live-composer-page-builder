@@ -280,6 +280,12 @@ final class DSLC_Scripts {
 			global $dslc_var_icons;
 
 			wp_localize_script( 'dslc-builder-main-js', 'DSLCIcons', $dslc_var_icons );
+
+			$dslc_main_options = array();
+			$section_padding_vertical = dslc_get_option( 'lc_section_padding_vertical', 'dslc_plugin_options' );
+			$dslc_main_options['section_padding_vertical'] = $section_padding_vertical;
+
+			wp_localize_script( 'dslc-builder-main-js', 'DSLCMainOptions', $dslc_main_options );
 		}// End if().
 
 		/* If current screen is standard post editing screen in WP Admin */

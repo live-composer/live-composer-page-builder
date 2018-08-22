@@ -33,6 +33,15 @@ function dslc_plugin_options_add() {
 				'descr' => __( 'Spacing to add on the left and right side of the each row. Used to prevent the content from touching the sides of the window. Default: 4%', 'live-composer-page-builder' ),
 			),
 
+			'lc_section_padding_vertical' => array(
+
+				'section' => 'dslc_plugin_options',
+				 'label' => __( 'Section Paddings <br>(vertical)', 'live-composer-page-builder' ),
+				 'std' => '80',
+				 'type' => 'text',
+				 'descr' => __( 'Spacing to add on the top and bottom side of the each row. Default: 80px', 'live-composer-page-builder' ),
+			 ),
+
 			'lc_force_important_css' => array(
 
 				'section' => 'dslc_plugin_options',
