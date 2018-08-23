@@ -1034,6 +1034,17 @@ class DSLC_Posts extends DSLC_Module {
 			 */
 
 			array(
+				'label' => __( 'Align', 'live-composer-page-builder' ),
+				'id' => 'css_title_button_align',
+				'std' => 'inherit',
+				'type' => 'text_align',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-cpt-post-title',
+				'affect_on_change_rule' => 'text-align',
+				'section' => 'styling',
+				'tab' => __( 'Title', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Color', 'live-composer-page-builder' ),
 				'id' => 'title_color',
 				'std' => '#4d4d4d',
@@ -1427,6 +1438,17 @@ class DSLC_Posts extends DSLC_Module {
 						'value' => 'content',
 					),
 				),
+				'section' => 'styling',
+				'tab' => __( 'Excerpt', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Align', 'live-composer-page-builder' ),
+				'id' => 'css_excerpt_button_align',
+				'std' => 'inherit',
+				'type' => 'text_align',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-cpt-post-excerpt',
+				'affect_on_change_rule' => 'text-align',
 				'section' => 'styling',
 				'tab' => __( 'Excerpt', 'live-composer-page-builder' ),
 			),

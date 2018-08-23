@@ -1028,8 +1028,21 @@ class DSLC_Blog extends DSLC_Module {
 				'tab' => __( 'Main Inner', 'live-composer-page-builder' ),
 			),
 
-			/* Title Options */
+			/**
+			 * Title Options
+			 */
 
+			array(
+				'label' => __( 'Align', 'live-composer-page-builder' ),
+				'id' => 'css_title_button_align',
+				'std' => 'inherit',
+				'type' => 'text_align',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-blog-post-title',
+				'affect_on_change_rule' => 'text-align',
+				'section' => 'styling',
+				'tab' => __( 'Title', 'live-composer-page-builder' ),
+			),
 			array(
 				'label' => __( 'Color', 'live-composer-page-builder' ),
 				'id' => 'title_color',
@@ -1519,6 +1532,17 @@ class DSLC_Blog extends DSLC_Module {
 						'value' => 'content',
 					),
 				),
+				'section' => 'styling',
+				'tab' => __( 'Excerpt', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Align', 'live-composer-page-builder' ),
+				'id' => 'css_excerpt_button_align',
+				'std' => 'inherit',
+				'type' => 'text_align',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-blog-post-excerpt',
+				'affect_on_change_rule' => 'text-align',
 				'section' => 'styling',
 				'tab' => __( 'Excerpt', 'live-composer-page-builder' ),
 			),
