@@ -886,13 +886,25 @@ class DSLC_Image extends DSLC_Module {
 				} else {
 					$image_url = $anchor_href;
 				}
+
+				$srcset = '';
+				$sizes = '';
+
+				if ( empty( $options['resize_width'] ) || empty( $options['resize_height'] ) ) {
+					$img_id = attachment_url_to_postid( $options['image'] );
+					$img_srcset = wp_get_attachment_image_srcset( $img_id, 'full' );
+					$img_sizes = wp_get_attachment_image_sizes( $img_id, 'full' );
+
+					$srcset = 'srcset="' . esc_attr( $img_srcset ) . '"';
+					$sizes = 'sizes="' . esc_attr( $img_sizes ) . '"';
+				}
 				
 				?>
 
 				<?php if ( 'none' !== $options['link_type'] ) : ?>
 					<a class="<?php echo esc_attr( $anchor_class ); ?>" href="<?php echo esc_attr( $image_url ); ?>" target="<?php echo esc_attr( $anchor_target ); ?>">
 				<?php endif; ?>
-					<img src="<?php echo esc_attr( $the_image ); ?>" alt="<?php echo esc_attr( $options['image_alt'] ); ?>" title="<?php echo esc_attr( $options['image_title'] ); ?>" />
+					<img src="<?php echo esc_attr( $the_image ); ?>" alt="<?php echo esc_attr( $options['image_alt'] ); ?>" title="<?php echo esc_attr( $options['image_title'] ); ?>" <?php echo $srcset; ?> <?php echo $sizes; ?> />
 				<?php if ( 'none' !== $options['link_type'] ) : ?>
 					</a>
 				<?php endif; ?>
