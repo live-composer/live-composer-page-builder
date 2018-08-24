@@ -22,6 +22,8 @@ function dslc_row_register_options() {
 
 	global $dslc_var_row_options;
 
+	$section_padding_ver = dslc_get_option( 'lc_section_padding_vertical', 'dslc_plugin_options' );
+
 	$dslc_var_row_options['element_type'] = array(
 		'id' => 'element_type',
 		'std' => 'row',
@@ -419,7 +421,7 @@ function dslc_row_register_options() {
 
 	$dslc_var_row_options['padding'] = array(
 		'id' => 'padding',
-		'std' => '80',
+		'std' => $section_padding_ver,
 		'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
 		'type' => 'slider',
 		'affect_on_change_rule' => 'padding-bottom,padding-top',
