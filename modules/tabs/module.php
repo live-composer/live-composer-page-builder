@@ -3587,7 +3587,13 @@ class DSLC_Tabs extends DSLC_Module {
 								<div class="dslca-editable-content"<?php if ( $dslc_is_admin ) { echo ' data-exportable-content'; } ?>>
 									<?php
 										$tab_content_output = stripslashes( $tab_content );
-										echo apply_filters( 'dslc_text_block_render', $tab_content_output );
+
+										if ( ( strpos( $tab_content_output, '%((%' ) !== false ) &&
+												( strpos( $tab_content_output, '%))%' ) !== false ) ) {
+											echo apply_filters( 'dslc_text_block_render', dslc_decode_shortcodes( $tab_content_output, 'storage' ) );
+										} else {
+											echo apply_filters( 'dslc_text_block_render', $tab_content_output );
+										}
 									?>
 								</div>
 								<?php if ( $dslc_is_admin ) : ?>

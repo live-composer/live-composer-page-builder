@@ -1255,7 +1255,13 @@ class DSLC_Accordion extends DSLC_Module {
 									<div class="dslca-editable-content"<?php if ( $dslc_is_admin ) { echo ' data-exportable-content'; } ?>>
 										<?php
 											$accordion_content_output = stripslashes( $accordion_content );
-											echo apply_filters( 'dslc_text_block_render', $accordion_content_output );
+
+											if ( ( strpos( $accordion_content_output, '%((%' ) !== false ) &&
+													( strpos( $accordion_content_output, '%))%' ) !== false ) ) {
+												echo apply_filters( 'dslc_text_block_render', dslc_decode_shortcodes( $accordion_content_output, 'storage' ) );
+											} else {
+												echo apply_filters( 'dslc_text_block_render', $accordion_content_output );
+											}
 										?>
 									</div>
 									<?php if ( $dslc_is_admin ) : ?>
