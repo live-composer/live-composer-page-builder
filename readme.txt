@@ -3,7 +3,7 @@ Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page, page builder plugin, drag-n-drop page builder
 Requires at least: 4.7
 Tested up to: 4.9
-Stable tag: 1.3.17
+Stable tag: 1.3.18
 License: GPLv3
 
 Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
@@ -82,6 +82,22 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 = FOR OUR PRO USERS: =
 * 🦊 [Check out our WooCommerce Page Builder Extension](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
+
+= 1.3.18 - August 24th 2018 =
+
+= Bug Fixes: =
+* Issue [#935](https://github.com/live-composer/live-composer-page-builder/issues/935): Sticky row does not work with a smooth scrolling plugin.
+* Issue [#942](https://github.com/live-composer/live-composer-page-builder/issues/942): The problematic Woo Product module is removed since we have a full Woocommerce integration extension.
+
+= Improved: =
+* Issue [#721](https://github.com/live-composer/live-composer-page-builder/issues/721): Allow the Excerpts  to have formatting tags.
+* Issue [#945](https://github.com/live-composer/live-composer-page-builder/issues/945): Added separator thickness option on custom posts module for responsive devices.
+* Issue [#942](https://github.com/live-composer/live-composer-page-builder/issues/927): Improvements for Tab and Accordion modules to allow third-party plugins shortcodes usage.
+* Issue [#875](https://github.com/live-composer/live-composer-page-builder/issues/875): Improvements for images on responsive devices.
+
+= New: =
+* Issue [#944](https://github.com/live-composer/live-composer-page-builder/issues/944): Added the Lightbox option for all custom posts listing modules.
+* Issue [#865](https://github.com/live-composer/live-composer-page-builder/issues/965): Added an option to set the default row vertical paddings.
 
 = 1.3.17 - August 3th 2018 =
 
