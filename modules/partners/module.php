@@ -246,6 +246,10 @@ class DSLC_Partners extends DSLC_Module {
 						'label' => __( 'Comment Count', 'live-composer-page-builder' ),
 						'value' => 'comment_count',
 					),
+					array(
+						'label' => __( 'Author', 'live-composer-page-builder' ),
+						'value' => 'author',
+					),
 				),
 			),
 			array(
