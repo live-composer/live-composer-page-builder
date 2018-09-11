@@ -354,6 +354,17 @@ class DSLC_Accordion extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Header', 'live-composer-page-builder' ),
 			),
+			array(
+				'label' => __( 'Icon Color', 'live-composer-page-builder' ),
+				'id' => 'css_header_icon_color',
+				'std' => '#e55f5f',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-accordion-header .dslca-toggle-accordion-hook',
+				'affect_on_change_rule' => 'color',
+				'section' => 'styling',
+				'tab' => __( 'Header', 'live-composer-page-builder' ),
+			),
 
 			/**
 			 * Title
@@ -1248,6 +1259,10 @@ class DSLC_Accordion extends DSLC_Module {
 											<span class="dslca-move-down-accordion-hook"><span class="dslca-icon dslc-icon-arrow-down"></span></span>
 											<span class="dslca-delete-accordion-hook"><span class="dslca-icon dslc-icon-remove"></span></span>
 										</div>
+									<?php else : ?>
+										<div class="dslca-accordion-action-hooks">
+											<span class="dslca-toggle-accordion-hook"><span class="dslca-icon dslc-icon-minus"></span></span>
+										</div>
 									<?php endif; ?>
 								</div>
 
@@ -1286,6 +1301,10 @@ endforeach; ?>
 										<span class="dslca-move-up-accordion-hook"><span class="dslca-icon dslc-icon-arrow-up"></span></span>
 										<span class="dslca-move-down-accordion-hook"><span class="dslca-icon dslc-icon-arrow-down"></span></span>
 										<span class="dslca-delete-accordion-hook"><span class="dslca-icon dslc-icon-remove"></span></span>
+									</div>
+								<?php else : ?>
+									<div class="dslca-accordion-action-hooks">
+										<span class="dslca-toggle-accordion-hook"><span class="dslca-icon dslc-icon-minus"></span></span>
 									</div>
 								<?php endif; ?>
 							</div>

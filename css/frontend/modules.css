@@ -1984,7 +1984,8 @@ body.dslca-enabled .dslc-notification-box-has-timeout {
 			color: #3b6fbe;
 		}
 
-		#dslc-content .dslca-delete-accordion-hook {
+		#dslc-content .dslca-delete-accordion-hook,
+		#dslc-content .dslca-toggle-accordion-hook {
 			color: #E55F5F;
 			cursor: pointer;
 			display: inline-block;
