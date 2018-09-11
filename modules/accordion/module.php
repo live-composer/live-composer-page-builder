@@ -355,8 +355,8 @@ class DSLC_Accordion extends DSLC_Module {
 				'tab' => __( 'Header', 'live-composer-page-builder' ),
 			),
 			array(
-				'label' => __( 'Icon Color', 'live-composer-page-builder' ),
-				'id' => 'css_header_icon_color',
+				'label' => __( 'Toggle Icon Color', 'live-composer-page-builder' ),
+				'id' => 'css_header_toggle_icon_color',
 				'std' => '#e55f5f',
 				'type' => 'color',
 				'refresh_on_change' => false,
@@ -1259,7 +1259,8 @@ class DSLC_Accordion extends DSLC_Module {
 											<span class="dslca-move-down-accordion-hook"><span class="dslca-icon dslc-icon-arrow-down"></span></span>
 											<span class="dslca-delete-accordion-hook"><span class="dslca-icon dslc-icon-remove"></span></span>
 										</div>
-									<?php else : ?>
+									<?php endif; ?>
+									<?php if ( ! $dslc_is_admin ) : ?>
 										<div class="dslca-accordion-action-hooks">
 											<span class="dslca-toggle-accordion-hook"><span class="dslca-icon dslc-icon-minus"></span></span>
 										</div>
