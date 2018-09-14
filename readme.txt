@@ -1,4 +1,4 @@
-=== Page Builder: Live Composer - drag and drop website builder (visual front end site editor) ===
+=== Page Builder: Live Composer  ===
 Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page, page builder plugin, drag-n-drop page builder
 Requires at least: 4.7
@@ -73,7 +73,7 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 
 == Changelog ==
 
-[Peace](https://livecomposerplugin.com/peace) · [Pace](https://livecomposerplugin.com/peace) · [Paix](https://livecomposerplugin.com/peace) · [Paz](https://livecomposerplugin.com/peace) · [Pokój](https://livecomposerplugin.com/peace) · [Мир](https://livecomposerplugin.com/peace) · [Mír](https://livecomposerplugin.com/peace) · [Mier](https://livecomposerplugin.com/peace) · [Frieden](https://livecomposerplugin.com/peace) · [Fred](https://livecomposerplugin.com/peace) · [Vrede](https://livecomposerplugin.com/peace) · [Barış](https://livecomposerplugin.com/peace) · [Béke](https://livecomposerplugin.com/peace) · [Kedamaian](https://livecomposerplugin.com/peace) · [Hasîtî](https://livecomposerplugin.com/peace) · [Ειρήνη](https://livecomposerplugin.com/peace) · [和平](https://livecomposerplugin.com/peace) · [平和](https://livecomposerplugin.com/peace) · [שָׁלוֹם](https://livecomposerplugin.com/peace) · [سلام](https://livecomposerplugin.com/peace) · [สันติภาพ](https://livecomposerplugin.com/peace) · [शान्ति](https://livecomposerplugin.com/peace)
+⭐⭐⭐ NEW PLUGIN: STYLIST – ADDITIONAL STYLING FOR ANY SITE ELEMENT [ https://wordpress.org/plugins/stylist/ ]
 
 = FOUND A BUG? =
 * 🐛 [Please, report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
