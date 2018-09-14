@@ -3802,7 +3802,7 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 
  body.rtl .dslca-module-edit-options-inner,
  body.rtl .dslca-modules-section-edit-options-inner {
-	overflow-x: auto;
+	overflow-x: scroll;
  }
 
  body.rtl .dslca-module-edit-option,
@@ -3813,6 +3813,10 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
  body.rtl .dslca-no-content .dslca-icon {
 	margin-right: 0;
 	margin-left: 10px;
+ }
+
+ body.rtl .dslca-module-edit-options-wrapper {
+	 display: block;
  }
 
 

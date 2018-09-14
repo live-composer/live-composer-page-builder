@@ -536,11 +536,31 @@ function dslc_module_options_tab_filter( dslcTab ) {
 				// Hide the loader
 				jQuery('.dslca-container-loader').hide();
 			});
-		}
+		}	
 	}
 
 	// Scroll horizontally options panel to the left (not ready)
-	// jQuery('.dslca-module-edit-options-wrapper').offset({ left: 20 });
+	if ( jQuery('body').hasClass('rtl') ) {
+		var totalWidthOption = 0;
+		var totalWidthGroup = 0;
+		var totalWidth = 0;
+
+		jQuery('.dslca-module-edit-options-wrapper > .dslca-module-edit-option:visible').each(function(index) {
+			if ( ! jQuery(this).hasClass('dslca-module-edit-option-hidden') && ! jQuery(this).hasClass('dslca-module-control-group') ) {
+				totalWidthOption += parseInt(jQuery(this).outerWidth(), 10);
+			}
+		});
+
+		jQuery('.dslca-module-edit-options-wrapper > .dslca-module-control-group:visible').each(function(index) {
+			totalWidthGroup += parseInt(jQuery(this).outerWidth(), 10);
+		});
+
+		totalWidth = parseInt(totalWidthOption) + parseInt(totalWidthGroup) + 10;
+
+		jQuery('.dslca-module-edit-options-wrapper').css({
+			'width': totalWidth + 'px',
+		});
+	}
 }
 
 /**
