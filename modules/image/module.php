@@ -776,6 +776,8 @@ class DSLC_Image extends DSLC_Module {
 	 */
 	function output( $options ) {
 
+		ob_start();
+		
 		/* Module output starts here */
 
 		global $dslc_active;
@@ -937,5 +939,7 @@ class DSLC_Image extends DSLC_Module {
 		</div>
 		<?php
 
+		return apply_filters('dslc_image_render', ob_get_clean());
+		
 	}
 }
