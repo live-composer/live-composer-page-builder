@@ -404,7 +404,7 @@ function dslc_row_edit( row ) {
 			}
 		} else {
 
-			jQuery(this).val( jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="' + jQuery(this).data('id') + '"]', LiveComposer.Builder.PreviewAreaDocument ).val() );
+			jQuery(this).val( jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="' + jQuery(this).data('id') + '"]', LiveComposer.Builder.PreviewAreaDocument ).val().trim().replace('%(%', '[').replace('%)%', ']') );
 
 			if ( jQuery( this ).hasClass( 'dslca-modules-section-edit-field-colorpicker' ) ) {
 

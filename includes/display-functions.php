@@ -1356,10 +1356,8 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1 ) {
 	$output = '';
 
 	if ( ! $dslc_active ) {
-
-		// Before Section.
-		$before_section_content = '';
-		$output .= apply_filters( 'dslc_before_section', $before_section_content, $atts );
+		$dslc_section_before = '';
+		$output .= dslc_decode_shortcodes( apply_filters( 'dslc_section_before', $dslc_section_before, $atts ) );
 	}
 
 	$output .= '
@@ -1396,10 +1394,8 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1 ) {
 	$output .= '</div>';
 
 	if ( ! $dslc_active ) {
-
-		// After Section.
-		$after_section_content = '';
-		$output .= apply_filters( 'dslc_after_section', $after_section_content, $atts );
+		$dslc_section_after = '';
+		$output .= dslc_decode_shortcodes( apply_filters( 'dslc_section_after', $dslc_section_after, $atts ) );
 	}
 
 	/*

@@ -2876,16 +2876,27 @@ class DSLC_Projects extends DSLC_Module {
 	 */
 	function output( $options ) {
 		$options['module_id'] = $this->module_id;
+		$dslc_options = apply_filters( 'dslc_module_options_before_output', $options );
 	?>
-		[dslc_module_projects_output]<?php echo serialize( $options ); ?>[/dslc_module_projects_output]
+		[dslc_module_projects_output]<?php echo serialize( $dslc_options ); ?>[/dslc_module_projects_output]
 	<?php
 
 	}
 }
 
 function dslc_module_projects_output( $atts, $content = null ) {
+	
 	// Uncode module options passed as serialized content.
-	$options = unserialize( $content );
+	$data = @unserialize( $content );
+
+	if ( $data !== false ) {
+		$options = unserialize( $content );
+	} else {
+		$fixed_data = preg_replace_callback( '!s:(\d+):"(.*?)";!', function( $match ) {      
+			return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
+		}, $content );
+		$options = unserialize( $fixed_data );
+	}
 
 	ob_start();
 

@@ -2686,16 +2686,27 @@ class DSLC_Galleries extends DSLC_Module {
 	 * @return void
 	 */
 	function output( $options ) {
+		$dslc_options = apply_filters( 'dslc_module_options_before_output', $options );
 	?>
-		[dslc_module_galleries_output]<?php echo serialize( $options ); ?>[/dslc_module_galleries_output]
+		[dslc_module_galleries_output]<?php echo serialize( $dslc_options ); ?>[/dslc_module_galleries_output]
 	<?php
 
 	}
 }
 
 function dslc_module_galleries_output( $atts, $content = null ) {
+	
 	// Uncode module options passed as serialized content.
-	$options = unserialize( $content );
+	$data = @unserialize( $content );
+
+	if ( $data !== false ) {
+		$options = unserialize( $content );
+	} else {
+		$fixed_data = preg_replace_callback( '!s:(\d+):"(.*?)";!', function( $match ) {      
+			return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
+		}, $content );
+		$options = unserialize( $fixed_data );
+	}
 
 	ob_start();
 
