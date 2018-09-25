@@ -78,10 +78,6 @@ function dslc_register_modules() {
 	dslc_register_module( 'DSLC_Navigation' );
 	dslc_register_module( 'DSLC_Logo' );
 
-	if ( class_exists( 'RevSliderBase' ) ) {
-		dslc_register_module( 'DSLC_Sliders' );
-	}
-
 	dslc_register_module( 'DSLC_TP_Thumbnail' );
 	dslc_register_module( 'DSLC_TP_Title' );
 	dslc_register_module( 'DSLC_TP_Content' );
