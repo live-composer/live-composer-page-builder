@@ -277,7 +277,13 @@ add_action( 'admin_notices', 'dslc_check_wpsettings_admin_notice' );
 
 function dslc_module_options_func( $module_options ) {
 
-	return array_merge( $module_options, DSLC_Module::common_options() );
+	$other_options = DSLC_Module::common_options();
+	$options = array_merge( $module_options, $other_options['custom_class'] );
+
+	$elements_key = array_search( 'styling', array_column( $options, 'section' ) );
+	array_splice( $options, $elements_key + 1, 0, $other_options['css_custom'] );
+
+	return $options;
 }
 add_filter( 'dslc_module_options', 'dslc_module_options_func', 1 );
 

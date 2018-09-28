@@ -96,23 +96,6 @@ class DSLC_Html extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( 'Enable/Disable Custom CSS', 'live-composer-page-builder' ),
-				'id' => 'css_custom',
-				'std' => 'disabled',
-				'type' => 'select',
-				'choices' => array(
-					array(
-						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled',
-					),
-					array(
-						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled',
-					),
-				),
-				'section' => 'styling',
-			),
-			array(
 				'label' => __( 'BG Color', 'live-composer-page-builder' ),
 				'id' => 'css_main_bg_color',
 				'std' => '',
