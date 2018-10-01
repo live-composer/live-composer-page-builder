@@ -2622,6 +2622,10 @@ class DSLC_Module {
 
 				$options_arr = $this->options();
 
+				if ( isset( $options['css_custom'] ) && $options['css_custom'] == '' ) {
+					$options['css_custom'] = 'enabled';
+				}
+
 				if ( ! isset( $options['css_custom'] ) || 'enabled' === $options['css_custom'] ) {
 
 					// Generate CSS for the module based on the selected options.
