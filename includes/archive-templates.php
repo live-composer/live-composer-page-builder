@@ -42,17 +42,17 @@ function dslc_template_redirects( $template ) {
 
 	} elseif ( is_404() ||
 			( is_archive() && ! $post ) ||
-			( is_search() && ! $post ) ||
 			( is_author() && ! $post ) ) {
 
 		// If 404 page.
 		// If Archive page and no posts to show.
-		// If Search page and no posts to show.
 		// If Author post listing and no posts to show.
 		// ---
 		// Redirect to 404 page if archive posts listing has no posts.
 		$template_custom = dslc_404_template_redirect( $template );
 
+	} elseif ( is_search() && ! $post ) {
+		$template_custom = dslc_page_not_found_template_redirect( $template );
 	}
 
 	// Return custom or default template.
@@ -172,6 +172,26 @@ function dslc_404_template_redirect( $template ) {
 	}
 
 	$not_found_template = DS_LIVE_COMPOSER_ABS . '/templates/dslc-404.php';
+
+	return $not_found_template;
+}
+
+/**
+ * Load custom template for page not found
+ *
+ * @param  String $template  Path to a template to filter.
+ * @return String            Return the a full path to a template file.
+ * @since 1.0
+ */
+function dslc_page_not_found_template_redirect( $template ) {
+
+	$template_id = dslc_get_archive_template_by_pt( 'page_not_found' );
+
+	if ( ! $template_id || 'none' === $template_id ) {
+		return $template;
+	}
+
+	$not_found_template = DS_LIVE_COMPOSER_ABS . '/templates/dslc-page-not-found.php';
 
 	return $not_found_template;
 }

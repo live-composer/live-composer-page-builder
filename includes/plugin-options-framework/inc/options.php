@@ -376,7 +376,7 @@ function dslc_plugin_opts_archives() {
 
 		foreach ( $custom_fields as $custom_field ) {
 			if ( ! empty( $custom_field ) ) {
-				if ( 'author' == $custom_field || 'search_results' == $custom_field || '404_page' == $custom_field || strripos( $custom_field, '_archive' ) ) {
+				if ( 'author' == $custom_field || 'search_results' == $custom_field || '404_page' == $custom_field || 'page_not_found' == $custom_field || strripos( $custom_field, '_archive' ) ) {
 
 					$module_opts_array[ $custom_field ] = array(
 
