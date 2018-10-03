@@ -89,7 +89,7 @@ class DSLC_Logo extends DSLC_Module {
 			array(
 				'label' => __( 'Show On', 'live-composer-page-builder' ),
 				'id' => 'css_show_on',
-				'std' => 'desktop tablet phone',
+				'std' => 'desktop tablet phone sticky',
 				'type' => 'checkbox',
 				'choices' => array(
 					array(
@@ -103,6 +103,10 @@ class DSLC_Logo extends DSLC_Module {
 					array(
 						'label' => __( 'Phone', 'live-composer-page-builder' ),
 						'value' => 'phone',
+					),
+					array(
+						'label' => __( 'Sticky', 'live-composer-page-builder' ),
+						'value' => 'sticky',
 					),
 				),
 			),
