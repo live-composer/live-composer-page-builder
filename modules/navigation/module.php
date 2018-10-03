@@ -6,9 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( dslc_is_module_active( 'DSLC_Navigation' ) ) {
-	include DS_LIVE_COMPOSER_ABS . '/modules/navigation/functions.php';
-}
+include DS_LIVE_COMPOSER_ABS . '/modules/navigation/functions.php';
 
 class DSLC_Navigation extends DSLC_Module {
 
