@@ -205,6 +205,10 @@ class DSLC_Staff extends DSLC_Module {
 						'label' => __( 'Alphabetic', 'live-composer-page-builder' ),
 						'value' => 'title',
 					),
+					array(
+						'label' => __( 'Author', 'live-composer-page-builder' ),
+						'value' => 'author',
+					),
 				),
 			),
 			array(
