@@ -37,6 +37,11 @@ function dslc_template_load( template ) {
 
 			// Call other functions
 			LiveComposer.Builder.PreviewAreaWindow.dslc_carousel();
+
+			// Check init for rows and module areas
+			LiveComposer.Builder.rows_init();
+			LiveComposer.Builder.moduleareas_init();
+
 			dslc_drag_and_drop();
 			dslc_show_publish_button();
 			dslc_generate_code();
