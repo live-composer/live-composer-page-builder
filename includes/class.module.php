@@ -2418,13 +2418,34 @@ class DSLC_Module {
 	public static function common_options() {
 
 		$options = array(
-			array(
-				'label' => 'Custom class',
-				'id' => 'custom_class',
-				'std' => '',
-				'type' => 'text',
-				'section' => 'functionality',
-				'tab' => 'general',
+			'custom_class' => array(
+				array(
+					'label' => 'Custom class',
+					'id' => 'custom_class',
+					'std' => '',
+					'type' => 'text',
+					'section' => 'functionality',
+					'tab' => 'general',
+				),
+			),
+			'css_custom' => array(
+				array(
+					'label' => __( 'Enable/Disable Custom CSS', 'live-composer-page-builder' ),
+					'id' => 'css_custom',
+					'std' => 'enabled',
+					'type' => 'select',
+					'choices' => array(
+						array(
+							'label' => __( 'Enabled', 'live-composer-page-builder' ),
+							'value' => 'enabled',
+						),
+						array(
+							'label' => __( 'Disabled', 'live-composer-page-builder' ),
+							'value' => 'disabled',
+						),
+					),
+					'section' => 'styling',
+				),
 			),
 		);
 
@@ -2598,6 +2619,10 @@ class DSLC_Module {
 				echo '<style type="text/css" id="css-for-dslc-module-' . esc_attr( $options['module_instance_id'] ) . '">';
 
 				$options_arr = $this->options();
+
+				if ( isset( $options['css_custom'] ) && $options['css_custom'] == '' ) {
+					$options['css_custom'] = 'enabled';
+				}
 
 				if ( ! isset( $options['css_custom'] ) || 'enabled' === $options['css_custom'] ) {
 

@@ -82,24 +82,6 @@ class DSLC_Text_Simple extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( 'Enable/Disable Custom CSS', 'live-composer-page-builder' ),
-				'id' => 'css_custom',
-				'std' => 'enabled',
-				'type' => 'select',
-				'choices' => array(
-					array(
-						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled',
-					),
-					array(
-						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled',
-					),
-				),
-				'section' => 'styling',
-			),
-
-			array(
 				'label' => __( 'Minimum Height', 'live-composer-page-builder' ),
 				'id' => 'css_min_height',
 				'onlypositive' => true, // Value can't be negative.
