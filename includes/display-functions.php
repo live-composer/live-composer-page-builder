@@ -575,6 +575,7 @@ function dslc_filter_content( $content ) {
 	global $wp_the_query;
 	global $dslc_post_types;
 	global $post;
+	global $wp_query;
 
 	// Get ID of the post from the main query.
 	if ( isset( $wp_the_query->queried_object_id ) ) {
@@ -663,7 +664,11 @@ function dslc_filter_content( $content ) {
 		if ( is_search() && ! $showing_404_page ) {
 
 			// Get ID of the page set to power the search results page.
-			$template_id = dslc_get_option( 'search_results', 'dslc_plugin_options_archives' );
+			if ( is_search() && ( 0 == $wp_query->found_posts ) ) {
+				$template_id = dslc_get_option( 'page_not_found', 'dslc_plugin_options_archives' );
+			} else {
+				$template_id = dslc_get_option( 'search_results', 'dslc_plugin_options_archives' );
+			}
 
 			// If there is a page that powers it.
 			if ( $template_id ) {

@@ -110,6 +110,11 @@ function dslc_st_init() {
 		'value' => 'author',
 	);
 
+	$template_for[] = array(
+		'label' => __( 'Page Not Found', 'live-composer-page-builder' ),
+		'value' => 'page_not_found',
+	);
+
 	$dslc_var_post_options['dslc-templates-opts'] = array(
 		'title' => 'Template Options',
 		'show_on' => 'dslc_templates',

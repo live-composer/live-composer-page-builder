@@ -131,9 +131,12 @@ function dslc_custom_css( $dslc_code = '' ) {
 
 		if ( is_404() ||
 			( is_archive() && ! $post ) ||
-			( is_search() && ! $post ) ||
 			( is_author() && ! $post ) ) {
 			$template_id = dslc_get_archive_template_by_pt( '404_page' );
+		}
+
+		if ( is_search() && ! $post ) {
+			$template_id = dslc_get_archive_template_by_pt( 'page_not_found' );
 		}
 
 		// Header/Footer.
