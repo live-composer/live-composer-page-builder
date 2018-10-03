@@ -1238,6 +1238,37 @@ jQuery(document).ready(function($){
 		dslc_check_viewport();
 		dslc_check_progress_bar_viewport();
 	});
+
+	/*
+	 * Keep the footer at the bottom of the page.
+	 */ 
+
+	if ( jQuery("#dslc-footer").hasClass("dslc-footer-pos-relative") ) {
+		var pageHeight, footer, footerHeight, content, contentMinHeight;
+
+		pageHeight = jQuery('body').height();
+		footer = jQuery('#dslc-footer');
+		footerHeight = jQuery(footer).height();
+		content = jQuery('#dslc-content');
+		contentMinHeight = '100vh';
+
+		// Account for Admin bar.
+		if ( jQuery( '#wpadminbar' ).length ) {
+			contentMinHeight = '96.7vh';
+		}
+
+		if (pageHeight < jQuery(window).height() - footerHeight) {
+			jQuery(footer).css({
+				'position': 'absolute',
+				'bottom': '0',
+				'width': '100%'
+			});
+			jQuery(content).css({
+				'min-height': contentMinHeight,
+				'padding-bottom': footerHeight + 'px' 
+			});
+		}
+	}
 });
 
 jQuery(document).ready(function($){
