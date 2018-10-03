@@ -650,7 +650,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 			} else { $comments = __( '1 Comment' );
 			}
 
-			$comments_output = '<a href="#dslc-comments">' . $comments . '</a>';
+			$comments_output = '<a href="#comments">' . $comments . '</a>';
 
 		}
 
