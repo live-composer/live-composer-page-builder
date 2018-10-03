@@ -279,6 +279,10 @@
 					float: left;
 				}
 
+				.dslc-blog-post-meta .clearfix {
+					clear: both;
+				}
+
 			#dslc-content .dslc-blog-post-title {
 				margin-bottom: 13px;
 			}

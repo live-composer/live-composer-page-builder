@@ -1234,6 +1234,10 @@ class DSLC_Blog extends DSLC_Module {
 						'label' => __( 'Comment count', 'live-composer-page-builder' ),
 						'value' => 'comment_count',
 					),
+					array(
+						'label' => __( 'Category', 'live-composer-page-builder' ),
+						'value' => 'category',
+					),
 				),
 				'section' => 'styling',
 				'tab' => __( 'Meta', 'live-composer-page-builder' ),
@@ -3755,8 +3759,31 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 												</div><!-- .dslc-blog-post-meta-comment-count -->
 											<?php endif; ?>
 
-										</div><!-- .dslc-blog-post-meta -->
+											<div class="clearfix"></div>
 
+											<div class="meta-category">
+											<?php if ( in_array( 'category', $meta_elements ) ) : ?>
+												<div class="dslc-blog-post-meta-category">
+													<?php
+
+													$post_cats_count = 0;
+													
+													$post_cats = get_the_category( get_the_ID() );
+													if ( ! empty( $post_cats ) ) {
+														foreach ( $post_cats as $post_cat ) {
+															$post_cats_count++;
+															if ( $post_cats_count > 1 ) { echo ', '; }
+															echo $post_cat->name;
+														}
+													}
+
+													?>
+												</div><!-- .dslc-blog-post-meta-category -->
+											<?php endif; ?>
+											</div>
+
+										</div><!-- .dslc-blog-post-meta -->
+										
 									<?php endif; ?>
 
 									<?php if ( $post_elements == 'all' || in_array( 'excerpt', $post_elements ) ) : ?>
