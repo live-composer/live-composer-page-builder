@@ -1052,10 +1052,26 @@ jQuery(document).ready(function($){
 
 		if ( dslcActive.hasClass('dslc-active') ) {
 
+			if ( ! $("body").hasClass('dslca-enabled') ) {
+				if ( dslcActive.find('.dslca-icon').hasClass('dslc-icon-minus') ) {
+					dslcActive.find('.dslca-icon').removeClass('dslc-icon-minus').addClass('dslc-icon-plus');
+				} else {
+					dslcActive.find('.dslca-icon').removeClass('dslc-icon-plus').addClass('dslc-icon-minus');
+				}
+			}
+
 			dslcInactive = dslcActive;
 		} else {
 
 			dslcActive.removeClass('dslc-inactive').addClass('dslc-active');
+
+			if ( ! $("body").hasClass('dslca-enabled') ) {
+				if ( dslcActive.find('.dslca-icon').hasClass('dslc-icon-minus') ) {
+					dslcActive.find('.dslca-icon').removeClass('dslc-icon-minus').addClass('dslc-icon-plus');
+				} else {
+					dslcActive.find('.dslca-icon').removeClass('dslc-icon-plus').addClass('dslc-icon-minus');
+				}
+			}
 		}
 
 		dslcInactive.removeClass('dslc-active').addClass('dslc-inactive');
