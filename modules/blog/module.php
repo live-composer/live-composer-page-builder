@@ -3523,6 +3523,26 @@ if ( $options['type'] == 'carousel' ) :
 
 			endif;
 
+	if ( $options['sticky_posts'] == 'enabled' && ( isset( $options['categories'] ) && $options['categories'] != '' ) ) {
+		$sticky_posts = get_option( 'sticky_posts' );
+
+		if ( ! empty( $sticky_posts ) ) {
+
+			$item = null;
+			foreach( $dslc_query->posts as $key => $post ) {
+				foreach( $sticky_posts as $sticky_post_id ) {
+					if ( $sticky_post_id == $post->ID ) {
+						$sticky_post = $post;
+		
+						unset( $dslc_query->posts[$key] );
+						array_unshift( $dslc_query->posts, $sticky_post);
+						break;
+					}
+				}
+			}
+		}
+	}
+
 while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 	$count += $increment;
 
