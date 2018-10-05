@@ -235,7 +235,7 @@ function dslc_get_template_by_id( $post_id ) {
  * @param  string $post_type_slug  Post type slug.
  * @return string/boolean   Template ID or false if not found
  */
-function dslc_get_archive_template_by_pt( $post_type_slug ) {
+function dslc_get_archive_template_by_pt( $post_type_slug, $post_id = '' ) {
 
 	// WooCommerce ( Woo Shop ) - https://github.com/lumbermandesigns/lc-woo-integration/issues/68.
 	if ( class_exists( 'WooCommerce' ) && function_exists( 'lcwoo_plugin_init' ) ) {
@@ -244,6 +244,32 @@ function dslc_get_archive_template_by_pt( $post_type_slug ) {
 			return $template_id;
 		}
 	}
+
+	// Taxonomy slug
+	if ( ! stristr( $post_type_slug, '_cats' ) ) {
+		if ( 'post' == $post_type_slug ) {
+			$taxonomy_slug = 'category';
+		} else {
+			$taxonomy_slug = $post_type_slug . '_cats';
+		}
+	}
+
+	$templates_taxonomies = get_option( "lc_templates_taxonomies" );
+
+	if ( ! empty( $templates_taxonomies ) && array_key_exists( $taxonomy_slug, $templates_taxonomies ) ) {
+
+		$cats = get_terms( $taxonomy_slug );
+
+		foreach( $cats as $cat ) {
+			$term_id = $cat->term_id;
+
+			if ( array_key_exists( $term_id, $templates_taxonomies[$taxonomy_slug] ) ) {
+				$template_id = $templates_taxonomies[$taxonomy_slug][$term_id];
+				return $template_id;
+			}
+		}
+	}
+	
 
 	// All the archive templates saved in DB with '_archive' suffix.
 	if ( ! stristr( $post_type_slug , '_archive' ) ) {

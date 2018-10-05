@@ -520,3 +520,158 @@ function dslc_filter_textarea( $content ) {
 }
 
 add_filter( 'dslc_text_block_render', 'dslc_filter_textarea' );
+
+
+// Add term page
+function dslc_taxonomy_add_new_meta_field( $taxonomy ) {
+
+	$dslc_template_for = array(
+		'category' => 'post_archive',
+		'dslc_downloads_cats' => 'dslc_downloads_archive',
+		'dslc_galleries_cats' => 'dslc_galleries_archive',
+		'dslc_partners_cats' => 'dslc_partners_archive',
+		'dslc_projects_cats' => 'dslc_projects_archive',
+		'dslc_staff_cats' => 'dslc_staff_archive',
+		//'dslc_testimonials_cats'
+	);
+
+	// Get templates
+	$args = array(
+		'post_type' => 'dslc_templates',
+		'post_status' => 'any',
+		'posts_per_page' => -1,
+		'meta_key' => 'dslc_template_for',
+		'meta_value' => $dslc_template_for[$taxonomy],
+		'orderby' => 'meta_value'
+	);
+
+	$templates = get_posts( $args );
+
+	?>
+	<div class="form-field">
+		<label for="lc_templates_taxonomy[<?php echo $taxonomy; ?>]"><?php _e( 'LC Templates', 'live-composer-page-builder' ); ?></label>
+		<select name="lc_templates_taxonomy[<?php echo $taxonomy; ?>]" id="lc_templates_taxonomy[<?php echo $taxonomy; ?>]">
+			<option value="none">None</option>
+			<?php if ( ! empty( $templates ) ) : ?>
+				<?php foreach ( $templates as $template ) : ?>
+					<?php
+
+					$template_type = get_post_meta( $template->ID, 'dslc_template_type', true );
+
+					if ( 'default' === $template_type ) {
+						$title = 'Default: ' . $template->post_title;
+					} else {
+						$title = $template->post_title;
+					}
+					
+					?>
+					<option value="<?php echo $template->ID; ?>" <?php //if ( $curr_value == $select_option['value'] ) { echo 'selected="selected"';} ?>><?php echo $title; ?></option>
+				<?php endforeach; ?>
+			<?php endif; ?>
+		</select>
+		<p class="description"><?php _e( 'Select your LC template', 'live-composer-page-builder' ); ?></p>
+	</div>
+<?php
+}
+
+// Edit term page
+function dslc_taxonomy_edit_meta_field( $term, $taxonomy ) {
+
+	$dslc_template_for = array(
+		'category' => 'post_archive',
+		'dslc_downloads_cats' => 'dslc_downloads_archive',
+		'dslc_galleries_cats' => 'dslc_galleries_archive',
+		'dslc_partners_cats' => 'dslc_partners_archive',
+		'dslc_projects_cats' => 'dslc_projects_archive',
+		'dslc_staff_cats' => 'dslc_staff_archive',
+		//'dslc_testimonials_cats'
+	);
+
+	// Get templates
+	$args = array(
+		'post_type' => 'dslc_templates',
+		'post_status' => 'any',
+		'posts_per_page' => -1,
+		'meta_key' => 'dslc_template_for',
+		'meta_value' => $dslc_template_for[$taxonomy],
+		'orderby' => 'meta_value'
+	);
+
+	$templates = get_posts( $args );
+ 
+	// retrieve the existing value(s) for this meta field. This returns an array
+	$term_meta = get_option( "lc_templates_taxonomies" );
+	
+	?>
+	<tr class="form-field">
+	<th scope="row" valign="top"><label for="lc_templates_taxonomy[<?php echo $taxonomy; ?>]"><?php _e( 'LC Templates', 'live-composer-page-builder' ); ?></label></th>
+		<td>
+			<select name="lc_templates_taxonomy[<?php echo $taxonomy; ?>]" id="lc_templates_taxonomy[<?php echo $taxonomy; ?>]">
+				<option value="none">None</option>
+				<?php if ( ! empty( $templates ) ) : ?>
+					<?php foreach ( $templates as $template ) : ?>
+						<?php
+
+						$template_type = get_post_meta( $template->ID, 'dslc_template_type', true );
+
+						if ( 'default' === $template_type ) {
+							$title = 'Default: ' . $template->post_title;
+						} else {
+							$title = $template->post_title;
+						}
+
+						$current_template = $template->ID;
+						$template_id = '';
+						$t_id = $term->term_id;
+
+						if ( ! empty( $term_meta ) && array_key_exists( $taxonomy, $term_meta ) ) {
+							if ( array_key_exists( $t_id, $term_meta[$taxonomy] ) ) {
+								$template_id = $term_meta[$taxonomy][$t_id];
+							}
+						}
+						
+						?>
+						<option value="<?php echo $template->ID; ?>" <?php if ( $current_template == $template_id ) { echo 'selected="selected"';} ?>><?php echo $title; ?></option>
+					<?php endforeach; ?>
+				<?php endif; ?>
+			</select>
+			<p class="description"><?php _e( 'Select your LC template', 'live-composer-page-builder' ); ?></p>
+		</td>
+	</tr>
+<?php
+}
+
+// Save extra taxonomy fields callback function.
+function dslc_save_taxonomy_custom_meta( $term_id ) {
+	if ( isset( $_POST['lc_templates_taxonomy'] ) ) {
+		$t_id = $term_id;
+		$term_meta = get_option( "lc_templates_taxonomies" );
+		$cat_keys = array_keys( $_POST['lc_templates_taxonomy'] );
+
+		foreach ( $cat_keys as $key ) {
+			if ( isset ( $_POST['lc_templates_taxonomy'][$key] ) ) {
+				$term_meta[$key][$term_id] = $_POST['lc_templates_taxonomy'][$key];
+			}
+		}
+
+		// Save the option array.
+		update_option( "lc_templates_taxonomies", $term_meta );
+	}
+}
+
+$dslc_category_type_names = array(
+	'category',
+	'dslc_downloads_cats',
+	'dslc_galleries_cats',
+	'dslc_partners_cats',
+	'dslc_projects_cats',
+	'dslc_staff_cats',
+	//'dslc_testimonials_cats'
+);
+
+foreach ( $dslc_category_type_names as $name ) {
+	add_action( "{$name}_edit_form_fields", 'dslc_taxonomy_edit_meta_field', 10, 2 );
+	add_action( "{$name}_add_form_fields", 'dslc_taxonomy_add_new_meta_field', 10, 2 );
+	add_action( "edited_{$name}", 'dslc_save_taxonomy_custom_meta', 10, 2 );  
+	add_action( "create_{$name}", 'dslc_save_taxonomy_custom_meta', 10, 2 );
+ }
