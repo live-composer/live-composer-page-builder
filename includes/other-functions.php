@@ -547,6 +547,27 @@ function dslc_taxonomy_add_new_meta_field( $taxonomy ) {
 
 	$templates = get_posts( $args );
 
+	if ( class_exists( 'LC_TemplatesForCPT' ) ) {
+		if ( 'category' == $taxonomy ) {
+			$taxonomy = 'post';
+		} else {
+			$taxonomy = str_replace( '_cats', '', $taxonomy );
+		}
+
+		$dslc_custom_options = get_option( 'dslc_custom_options_templatesforcpt', '' );
+		$option = 'lc_tpl_for_cpt_' . $taxonomy;
+
+		if ( ! empty( $dslc_custom_options ) ) {
+			if ( array_key_exists( $option, $dslc_custom_options ) ) {
+				$value = $dslc_custom_options[$option];
+
+				if ( 'unique' == $value || 'disabled' == $value ) {
+					return false;
+				}
+			}
+		}
+	}
+
 	?>
 	<div class="form-field">
 		<label for="lc_templates_taxonomy[<?php echo $taxonomy; ?>]"><?php _e( 'LC Templates', 'live-composer-page-builder' ); ?></label>
@@ -601,6 +622,27 @@ function dslc_taxonomy_edit_meta_field( $term, $taxonomy ) {
  
 	// retrieve the existing value(s) for this meta field. This returns an array
 	$term_meta = get_option( "lc_templates_taxonomies" );
+
+	if ( class_exists( 'LC_TemplatesForCPT' ) ) {
+		if ( 'category' == $taxonomy ) {
+			$taxonomy = 'post';
+		} else {
+			$taxonomy = str_replace( '_cats', '', $taxonomy );
+		}
+
+		$dslc_custom_options = get_option( 'dslc_custom_options_templatesforcpt', '' );
+		$option = 'lc_tpl_for_cpt_' . $taxonomy;
+
+		if ( ! empty( $dslc_custom_options ) ) {
+			if ( array_key_exists( $option, $dslc_custom_options ) ) {
+				$value = $dslc_custom_options[$option];
+
+				if ( 'unique' == $value || 'disabled' == $value ) {
+					return false;
+				}
+			}
+		}
+	}
 	
 	?>
 	<tr class="form-field">
