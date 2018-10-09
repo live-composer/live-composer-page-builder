@@ -330,12 +330,12 @@ function dslc_tp_update_archive_templates_option( $post_id ) {
 		 */
 		// Function array_diff depends on the order of arguments,
 		// so we compare twice and then merge result to get what wee need.
-		$options_to_delete_a = array_diff( $this_template_in_options, $dslc_template_for );
+		/* $options_to_delete_a = array_diff( $this_template_in_options, $dslc_template_for );
 		$options_to_delete_b = array_diff( $dslc_template_for, $this_template_in_options );
 		$options_to_delete = array_merge( $options_to_delete_a, $options_to_delete_b );
 		foreach ( $options_to_delete as $option ) {
 			unset( $plugin_options[ $option ] );
-		}
+		} */
 
 		// Sanitize and process.
 		foreach ( $dslc_template_for as $key => $value ) {
@@ -348,12 +348,12 @@ function dslc_tp_update_archive_templates_option( $post_id ) {
 			// put the setting in plugin options table
 			// and make sure we have only one LC template
 			// for this option selected LC templates section.
-			if ( stristr( $value, '_archive' ) || in_array( $value, $option_require_single_template ) ) {
+			/* if ( stristr( $value, '_archive' ) || in_array( $value, $option_require_single_template ) ) {
 				// Put template post ID into plugin options.
 				$plugin_options[ $value ] = $post_id;
 				// Make sure we have only one LC template for this option.
 				dslc_tp_remove_template_from_meta( $value, $post_id );
-			}
+			} */
 		}
 
 		update_option( 'dslc_plugin_options', $plugin_options );

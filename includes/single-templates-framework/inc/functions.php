@@ -250,6 +250,32 @@ function dslc_get_archive_template_by_pt( $post_type_slug ) {
 		}
 	}
 
+	// Taxonomy slug
+	if ( ! stristr( $post_type_slug, '_cats' ) ) {
+		if ( 'post' == $post_type_slug ) {
+			$taxonomy_slug = 'category';
+		} else {
+			$taxonomy_slug = $post_type_slug . '_cats';
+		}
+	}
+
+	$templates_taxonomies = get_option( "lc_templates_taxonomies" );
+
+	if ( ! empty( $templates_taxonomies ) && array_key_exists( $taxonomy_slug, $templates_taxonomies ) ) {
+
+		global $wp_the_query;
+		$curr_id = $wp_the_query->queried_object_id;
+
+		if ( array_key_exists( $curr_id, $templates_taxonomies[$taxonomy_slug] ) ) {
+			$template_id = $templates_taxonomies[$taxonomy_slug][$curr_id];
+
+			if ( 'none' !== $template_id ) {
+				return $template_id;
+			}
+		}
+	}
+	
+
 	// All the archive templates saved in DB with '_archive' suffix.
 	if ( ! stristr( $post_type_slug , '_archive' ) ) {
 		$post_type_slug = $post_type_slug . '_archive';
