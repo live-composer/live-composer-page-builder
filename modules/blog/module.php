@@ -1242,6 +1242,10 @@ class DSLC_Blog extends DSLC_Module {
 						'label' => __( 'Category', 'live-composer-page-builder' ),
 						'value' => 'category',
 					),
+					array(
+						'label' => __( 'Tag', 'live-composer-page-builder' ),
+						'value' => 'tag',
+					),
 				),
 				'section' => 'styling',
 				'tab' => __( 'Meta', 'live-composer-page-builder' ),
@@ -3786,24 +3790,42 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 											<div class="clearfix"></div>
 
 											<div class="meta-category">
-											<?php if ( in_array( 'category', $meta_elements ) ) : ?>
-												<div class="dslc-blog-post-meta-category">
-													<?php
+												<?php if ( in_array( 'category', $meta_elements ) ) : ?>
+													<div class="dslc-blog-post-meta-category">
+														<?php
 
-													$post_cats_count = 0;
-													
-													$post_cats = get_the_category( get_the_ID() );
-													if ( ! empty( $post_cats ) ) {
-														foreach ( $post_cats as $post_cat ) {
-															$post_cats_count++;
-															if ( $post_cats_count > 1 ) { echo ', '; }
-															echo $post_cat->name;
+														$post_cats_count = 0;
+														
+														$post_cats = get_the_category( get_the_ID() );
+														if ( ! empty( $post_cats ) ) {
+															foreach ( $post_cats as $post_cat ) {
+																$post_cats_count++;
+																if ( $post_cats_count > 1 ) { echo ', '; }
+																echo $post_cat->name;
+															}
 														}
-													}
 
-													?>
-												</div><!-- .dslc-blog-post-meta-category -->
-											<?php endif; ?>
+														?>
+													</div><!-- .dslc-blog-post-meta-category -->
+												<?php endif; ?>
+												<?php if ( in_array( 'tag', $meta_elements ) ) : ?>
+													<div class="dslc-blog-post-meta-tag">
+														<?php
+														
+														$post_tags_count = 0;
+														
+														$post_tags = get_the_tags( get_the_ID() );
+														if ( ! empty( $post_tags ) ) {
+															foreach ( $post_tags as $post_cat ) {
+																$post_tags_count++;
+																if ( $post_tags_count > 1 ) { echo ', '; }
+																echo $post_cat->name;
+															}
+														}
+
+														?>
+													</div><!-- .dslc-blog-post-meta-tag -->
+												<?php endif; ?>
 											</div>
 
 										</div><!-- .dslc-blog-post-meta -->
