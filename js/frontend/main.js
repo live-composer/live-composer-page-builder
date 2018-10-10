@@ -68,10 +68,12 @@ function dslc_init_accordion() {
 
 			dslcActive.addClass('dslc-active');
 			dslcInactive.addClass('dslc-inactive');
+			dslcInactive.find('.dslca-icon').removeClass('dslc-icon-minus').addClass('dslc-icon-plus');
 			jQuery('.dslc-accordion-content', dslcInactive).hide();
 		} else {
 
 			dslcAll.addClass('dslc-inactive');
+			dslcAll.find('.dslca-icon').removeClass('dslc-icon-minus').addClass('dslc-icon-plus');
 			jQuery('.dslc-accordion-content', dslcAll).hide();
 		}
 	});
