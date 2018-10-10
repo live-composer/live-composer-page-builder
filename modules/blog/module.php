@@ -3530,19 +3530,30 @@ if ( $options['type'] == 'carousel' ) :
 	if ( $options['sticky_posts'] == 'enabled' && ( isset( $options['categories'] ) && $options['categories'] != '' ) ) {
 		$sticky_posts = get_option( 'sticky_posts' );
 
+		$args = array(
+			'post_type'           => 'post',
+			'post__in'            => $sticky_posts,
+			'posts_per_page'      => 2,
+			'ignore_sticky_posts' => 1
+		);
+		$sticky_query = new WP_Query($args);
+
 		if ( ! empty( $sticky_posts ) ) {
 
 			$item = null;
 			foreach( $dslc_query->posts as $key => $post ) {
-				foreach( $sticky_posts as $sticky_post_id ) {
-					if ( $sticky_post_id == $post->ID ) {
+				foreach( $sticky_query->posts as $key => $sticky_post ) {
+					if ( $sticky_post->ID == $post->ID ) {
 						$sticky_post = $post;
 		
 						unset( $dslc_query->posts[$key] );
 						array_unshift( $dslc_query->posts, $sticky_post);
 						break;
+					} else {
+						array_unshift( $dslc_query->posts, $sticky_post);
 					}
 				}
+				break;
 			}
 		}
 	}
