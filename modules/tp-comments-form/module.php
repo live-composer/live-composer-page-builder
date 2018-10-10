@@ -110,6 +110,12 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				'std' => '',
 				'type' => 'text',
 			),
+			array(
+				'label' => __( '"GDPR" Text', 'live-composer-page-builder' ),
+				'id' => 'txt_gdpr',
+				'std' => '',
+				'type' => 'text',
+			),
 
 			/**
 			 * General
@@ -595,6 +601,121 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 			),
 
 			/**
+			 * Text
+			 */
+
+			array(
+				'label' => __( 'Color', 'live-composer-page-builder' ),
+				'id' => 'css_text_color',
+				'std' => '#4d4d4d',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.comment-form-cookies-consent',
+				'affect_on_change_rule' => 'color',
+				'section' => 'styling',
+				'tab' => __( 'Text', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Font Size', 'live-composer-page-builder' ),
+				'id' => 'css_text_font_size',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '14',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.comment-form-cookies-consent',
+				'affect_on_change_rule' => 'font-size',
+				'section' => 'styling',
+				'tab' => __( 'Text', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Font Weight', 'live-composer-page-builder' ),
+				'id' => 'css_text_font_weight',
+				'std' => '400',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => '100 - Thin',
+						'value' => '100',
+					),
+					array(
+						'label' => '200 - Extra Light',
+						'value' => '200',
+					),
+					array(
+						'label' => '300 - Light',
+						'value' => '300',
+					),
+					array(
+						'label' => '400 - Normal',
+						'value' => '400',
+					),
+					array(
+						'label' => '500 - Medium',
+						'value' => '500',
+					),
+					array(
+						'label' => '600 - Semi Bold',
+						'value' => '600',
+					),
+					array(
+						'label' => '700 - Bold',
+						'value' => '700',
+					),
+					array(
+						'label' => '800 - Extra Bold',
+						'value' => '800',
+					),
+					array(
+						'label' => '900 - Black',
+						'value' => '900',
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.comment-form-cookies-consent',
+				'affect_on_change_rule' => 'font-weight',
+				'section' => 'styling',
+				'tab' => __( 'Text', 'live-composer-page-builder' ),
+				'ext' => '',
+			),
+			array(
+				'label' => __( 'Font Family', 'live-composer-page-builder' ),
+				'id' => 'css_text_font_family',
+				'std' => 'Open Sans',
+				'type' => 'font',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.comment-form-cookies-consent',
+				'affect_on_change_rule' => 'font-family',
+				'section' => 'styling',
+				'tab' => __( 'Text', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Line Height', 'live-composer-page-builder' ),
+				'id' => 'css_text_line_height',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '14',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.comment-form-cookies-consent',
+				'affect_on_change_rule' => 'line-height',
+				'section' => 'styling',
+				'tab' => __( 'Text', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
+				'id' => 'css_text_margin',
+				'std' => '20',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.comment-form-cookies-consent',
+				'affect_on_change_rule' => 'margin-bottom',
+				'section' => 'styling',
+				'tab' => __( 'Text', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+
+			/**
 			 * Submit Button
 			 */
 
@@ -1026,6 +1147,44 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+			array(
+				'label' => __( 'Text - Font Size', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_text_font_size',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '14',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.comment-form-cookies-consent',
+				'affect_on_change_rule' => 'font-size',
+				'section' => 'responsive',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Text - Line Height', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_text_line_height',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '14',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.comment-form-cookies-consent',
+				'affect_on_change_rule' => 'line-height',
+				'section' => 'responsive',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Text - Margin Bottom', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_text_margin',
+				'std' => '20',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.comment-form-cookies-consent',
+				'affect_on_change_rule' => 'margin-bottom',
+				'section' => 'responsive',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
 
 			/**
 			 * Responsive Phone
@@ -1231,6 +1390,44 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+			array(
+				'label' => __( 'Text - Font Size', 'live-composer-page-builder' ),
+				'id' => 'css_res_p_text_font_size',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '14',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.comment-form-cookies-consent',
+				'affect_on_change_rule' => 'font-size',
+				'section' => 'responsive',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Text - Line Height', 'live-composer-page-builder' ),
+				'id' => 'css_res_p_text_line_height',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '14',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.comment-form-cookies-consent',
+				'affect_on_change_rule' => 'line-height',
+				'section' => 'responsive',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Text - Margin Bottom', 'live-composer-page-builder' ),
+				'id' => 'css_res_p_text_margin',
+				'std' => '20',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.comment-form-cookies-consent',
+				'affect_on_change_rule' => 'margin-bottom',
+				'section' => 'responsive',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
 
 		);
 
@@ -1285,6 +1482,7 @@ function dslc_module_comments_form_output( $atts, $content = null ) {
 	$txt_name = __( 'Name', 'live-composer-page-builder' );
 	$txt_email = __( 'Email', 'live-composer-page-builder' );
 	$txt_url = __( 'Website', 'live-composer-page-builder' );
+	$txt_gdpr = __( 'Save my name, email, and website in this browser for the next time I comment.', 'live-composer-page-builder' );
 
 	if ( isset( $options['txt_submit_comment'] ) && $options['txt_submit_comment'] != '' ) {
 		$txt_submit_comment = $options['txt_submit_comment'];
@@ -1308,6 +1506,10 @@ function dslc_module_comments_form_output( $atts, $content = null ) {
 
 	if ( isset( $options['txt_url'] ) && $options['txt_url'] != '' ) {
 		$txt_url = $options['txt_url'];
+	}
+
+	if ( isset( $options['txt_gdpr'] ) && $options['txt_gdpr'] != '' ) {
+		$txt_gdpr = $options['txt_gdpr'];
 	}
 
 	if ( isset( $options['css_inputs_color'] ) && $options['css_inputs_color'] != '' ) {
@@ -1340,10 +1542,11 @@ function dslc_module_comments_form_output( $atts, $content = null ) {
 					<div id="respond" class="comment-respond">
 						<h3 id="reply-title" class="comment-reply-title"><?php echo $txt_leave_comment; ?></h3>
 						<form action="#" method="post" id="commentform" class="comment-form" novalidate="">
-							<div class="comment-form-comment"><textarea id="comment" name="comment"  placeholder="<?php echo $txt_comment; ?>" aria-required="true"></textarea></div>
 							<div class="comment-form-name"><input id="author" name="author" type="text" value="" size="30" placeholder="<?php echo $txt_name; ?> *" aria-required="true"></div>
 							<div class="comment-form-email"><input id="email" name="email" type="text" value="" size="30" placeholder="<?php echo $txt_email; ?> *" aria-required="true"></div>
 							<div class="comment-form-website"><input id="url" name="url" type="text" value="" size="30" placeholder="<?php echo $txt_url; ?>"></div>
+							<div class="comment-form-comment"><textarea id="comment" name="comment"  placeholder="<?php echo $txt_comment; ?>" aria-required="true"></textarea></div>
+							<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes"><label for="wp-comment-cookies-consent"><?php echo $txt_gdpr; ?></label></p>
 
 							<p class="form-submit">
 								<input name="submit" type="submit" id="submit" class="submit" value="<?php echo $txt_submit_comment; ?>">
@@ -1361,6 +1564,9 @@ function dslc_module_comments_form_output( $atts, $content = null ) {
 			<?php else :
 
 				global $commenter;
+				$commenter = wp_get_current_commenter();
+				$consent   = empty( $commenter['comment_author_email'] ) ? '' : ' checked="checked"';
+
 				comment_form( array(
 					'label_submit' => $txt_submit_comment,
 					'cancel_reply_link' => __( 'cancel', 'live-composer-page-builder' ),
@@ -1373,6 +1579,8 @@ function dslc_module_comments_form_output( $atts, $content = null ) {
 						'author' => '<div class="comment-form-name"><input id="author" name="author" type=text value="' . esc_attr( $commenter['comment_author'] ) . '" size="30" placeholder="' . $txt_name . ' *" aria-required="true" /></div>',
 						'email' => '<div class="comment-form-email"><input id="email" name="email" type=text value="' . esc_attr( $commenter['comment_author_email'] ) . '" size="30" placeholder="' . $txt_email . ' *" aria-required="true" /></div>',
 						'url' => '<div class="comment-form-website"><input id="url" name="url" type=text value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30" placeholder="' . $txt_url . '" /></div>',
+						'cookies' => '<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes"' . $consent . ' />' .
+						'<label for="wp-comment-cookies-consent">' . $txt_gdpr . '</label></p>'
 					) ),
 				), $post_id );
 
@@ -1405,3 +1613,23 @@ function dslc_module_comments_form_output( $atts, $content = null ) {
 		return $shortcode_rendered;
 
 } add_shortcode( 'dslc_module_comments_form_output', 'dslc_module_comments_form_output' );
+
+/**
+ * Change HTML comment form
+ * 
+ * @param array $fields Fields.
+ */
+function dslc_change_html_comment_form( $fields ) {
+
+	$comment_field = $fields['comment'];
+	$cookies_field = $fields['cookies'];
+
+	unset( $fields['comment'] );
+	unset( $fields['cookies'] );
+
+	$fields['comment'] = $comment_field;
+	$fields['cookies'] = $cookies_field;
+
+	return $fields;
+}
+add_filter( 'comment_form_fields', 'dslc_change_html_comment_form' );
