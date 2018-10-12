@@ -3527,7 +3527,9 @@ if ( $options['type'] == 'carousel' ) :
 
 			endif;
 
-	if ( $options['sticky_posts'] == 'enabled' && ( isset( $options['categories'] ) && $options['categories'] != '' ) ) {
+	$page_number = $dslc_query->query['paged'];
+
+	if ( $options['sticky_posts'] == 'enabled' && ( isset( $options['categories'] ) && $options['categories'] != '' ) &&  ( 1 == $page_number ) ) {
 		$sticky_posts = get_option( 'sticky_posts' );
 
 		$args = array(
