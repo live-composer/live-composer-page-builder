@@ -68,13 +68,19 @@ function dslc_init_accordion() {
 
 			dslcActive.addClass('dslc-active');
 			dslcInactive.addClass('dslc-inactive');
-			dslcInactive.find('.dslca-icon').removeClass('dslc-icon-minus').addClass('dslc-icon-plus');
 			jQuery('.dslc-accordion-content', dslcInactive).hide();
+
+			if ( ! $("body").hasClass('dslca-enabled') ) {
+				dslcInactive.find('.dslca-icon').removeClass('dslc-icon-minus').addClass('dslc-icon-plus');
+			}
 		} else {
 
 			dslcAll.addClass('dslc-inactive');
-			dslcAll.find('.dslca-icon').removeClass('dslc-icon-minus').addClass('dslc-icon-plus');
 			jQuery('.dslc-accordion-content', dslcAll).hide();
+
+			if ( ! $("body").hasClass('dslca-enabled') ) {
+				dslcAll.find('.dslca-icon').removeClass('dslc-icon-minus').addClass('dslc-icon-plus');
+			}
 		}
 	});
 }
@@ -1072,6 +1078,7 @@ jQuery(document).ready(function($){
 					dslcActive.find('.dslca-icon').removeClass('dslc-icon-minus').addClass('dslc-icon-plus');
 				} else {
 					dslcActive.find('.dslca-icon').removeClass('dslc-icon-plus').addClass('dslc-icon-minus');
+					dslcInactive.find('.dslca-icon').removeClass('dslc-icon-minus').addClass('dslc-icon-plus');
 				}
 			}
 		}
