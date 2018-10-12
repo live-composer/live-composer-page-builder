@@ -714,6 +714,19 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 				'tab' => __( 'Text', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
+			array(
+				'label' => __( 'Checkbox - Margin Right', 'live-composer-page-builder' ),
+				'id' => 'css_text_checkbox_margin_right',
+				'std' => '7',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '#wp-comment-cookies-consent',
+				'affect_on_change_rule' => 'margin-right',
+				'section' => 'styling',
+				'tab' => __( 'Text', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+
 
 			/**
 			 * Submit Button
