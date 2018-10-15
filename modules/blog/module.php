@@ -3527,7 +3527,9 @@ if ( $options['type'] == 'carousel' ) :
 
 			endif;
 
-	$page_number = $dslc_query->query['paged'];
+	// TODO: Sticky
+
+	/* $page_number = $dslc_query->query['paged'];
 
 	if ( $options['sticky_posts'] == 'enabled' && ( isset( $options['categories'] ) && $options['categories'] != '' ) &&  ( 1 == $page_number ) ) {
 		$sticky_posts = get_option( 'sticky_posts' );
@@ -3558,7 +3560,7 @@ if ( $options['type'] == 'carousel' ) :
 				break;
 			}
 		}
-	}
+	} */
 
 while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 	$count += $increment;
