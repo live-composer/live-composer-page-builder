@@ -3,7 +3,7 @@ Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page, page builder plugin, drag-n-drop page builder
 Requires at least: 4.7
 Tested up to: 4.9
-Stable tag: 1.3.18
+Stable tag: 1.3.19
 License: GPLv3
 
 Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
@@ -82,6 +82,30 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 = FOR OUR PRO USERS: =
 * 🦊 [Check out our WooCommerce Page Builder Extension](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
+
+= 1.3.19 - October 16 2018 =
+
+= Bug Fixes: =
+* Issue [#956](https://github.com/live-composer/live-composer-page-builder/issues/956): Meta module comment URL doesn't link to the page comments
+* Issue [#948](https://github.com/live-composer/live-composer-page-builder/issues/948): Multiple CSS issues on RTL
+* Issue [#765](https://github.com/live-composer/live-composer-page-builder/issues/765): The post sticky option is not working when a category is selected
+* Issue [#394](https://github.com/live-composer/live-composer-page-builder/issues/#394): I can't drag and drop modules when I use a Load Page Design
+
+= Improved: =
+* Issue [#947](https://github.com/live-composer/live-composer-page-builder/issues/947): Improvement for the Navigation module disable option
+* Issue [#805](https://github.com/live-composer/live-composer-page-builder/issues/805): Plus and minus expanding icons for accordion module
+* Issue [#739](https://github.com/live-composer/live-composer-page-builder/issues/739): Posts ordering by author
+* Issue [#730](https://github.com/live-composer/live-composer-page-builder/issues/730): Add the category to the blog module meta
+* Issue [#356](https://github.com/live-composer/live-composer-page-builder/issues/356): Keep the footer at the bottom of the page when there is no content
+* Issue [#333](https://github.com/live-composer/live-composer-page-builder/issues/333): Add 'Enable/Disable Custom CSS' for all modules
+* Issue [#955](https://github.com/live-composer/live-composer-page-builder/issues/955): Add lists style on the Info Box content
+* Issue [#954](https://github.com/live-composer/live-composer-page-builder/issues/954): Add tags on the blog meta
+
+
+= New: =
+* Issue [#950](https://github.com/live-composer/live-composer-page-builder/issues/950): "Hide when sticky" option for modules
+* Issue [#405](https://github.com/live-composer/live-composer-page-builder/issues/405): Add template for "Not Found" on search results
+* Issue [#373](https://github.com/live-composer/live-composer-page-builder/issues/373): Add possibility to create template for a particular taxonomy term
 
 = 1.3.18 - August 24th 2018 =
 
