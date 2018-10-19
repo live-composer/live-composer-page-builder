@@ -48,6 +48,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<span class="dashicons dashicons-index-card"></span> <?php _e( 'Post Types', 'live-composer-page-builder' ) ?>
 			</a>
 		</li>
+
+		<?php if ( LC_Extensions_Core::is_extension_active( 'preloader' ) ) : ?>
+			<li class="dslc-submenu-section">
+				<a href="#preloader"  data-nav-to="<?php echo 'tab-1' ?>" class="nav-subtab <?php echo $anchor == 'tab-1' ? 'nav-tab-active' : ''; ?>">
+					<span class="dashicons dashicons-image-filter"></span> <?php _e( 'Preloader', 'live-composer-page-builder' ) ?>
+				</a>
+			</li>
+		<?php endif; ?>
 	</ul>
 
 	<div id="dslc-setings-liquid">
@@ -103,6 +111,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<?php do_settings_sections( 'dslc_plugin_options_cpt_slugs' ); ?>
 					<?php submit_button(); ?>
 			</div>
+
+			<?php if ( LC_Extensions_Core::is_extension_active( 'preloader' ) ) : ?>
+				<a name="preloader"></a>
+				<a href="#dslc-top" class="dslc-scroll-back"><span class="dashicons dashicons-arrow-up-alt"></span> Top</a>
+				<div class="dslc-panel">
+						<?php do_settings_sections( 'dslc_plugin_options_preloader' ); ?>
+						<?php submit_button(); ?>
+				</div>
+			<?php endif; ?>
+
 			<div class="dslc-panel dslc-hide-panel">
 					<?php do_settings_sections( 'dslc_plugin_options_archives' ); ?>
 			</div>
