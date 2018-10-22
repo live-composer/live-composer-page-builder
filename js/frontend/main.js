@@ -1266,7 +1266,8 @@ jQuery(document).ready(function($){
 			contentMinHeight = '96.7vh';
 		}
 
-		if (pageHeight < jQuery(window).height() - footerHeight) {
+		if (pageHeight < jQuery(window).height()) {
+
 			jQuery(footer).css({
 				'position': 'absolute',
 				'bottom': '0',
