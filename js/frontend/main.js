@@ -107,7 +107,18 @@ function dslc_init_lightbox() {
 	});
 
 	jQuery( '.dslc-lightbox-gallery' ).each(function(){
-		jQuery(this).magnificPopup({ delegate : 'a', type:'image', gallery:{ enabled: true } });
+		jQuery(this).magnificPopup({ 
+			delegate : 'a', 
+			type:'image', 
+			gallery:{ 
+				enabled: true 
+			},
+			image: {
+				titleSrc: function(item) {
+					return item.el.attr('title') + '<small>' + item.el.attr('data-caption') +'</small>';
+				}
+			}
+		});
 	});
 }
 
