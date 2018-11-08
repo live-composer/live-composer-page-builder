@@ -49,7 +49,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</a>
 		</li>
 
-		<?php if ( LC_Extensions_Core::is_extension_active( 'preloader' ) ) : ?>
+		<?php if ( class_exists( 'LC_Extensions_Core' ) && LC_Extensions_Core::is_extension_active( 'preloader' ) ) : ?>
 			<li class="dslc-submenu-section">
 				<a href="#preloader"  data-nav-to="<?php echo 'tab-1' ?>" class="nav-subtab <?php echo $anchor == 'tab-1' ? 'nav-tab-active' : ''; ?>">
 					<span class="dashicons dashicons-image-filter"></span> <?php _e( 'Preloader', 'live-composer-page-builder' ) ?>
@@ -112,7 +112,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<?php submit_button(); ?>
 			</div>
 
-			<?php if ( LC_Extensions_Core::is_extension_active( 'preloader' ) ) : ?>
+			<?php if ( class_exists( 'LC_Extensions_Core' ) && LC_Extensions_Core::is_extension_active( 'preloader' ) ) : ?>
 				<a name="preloader"></a>
 				<a href="#dslc-top" class="dslc-scroll-back"><span class="dashicons dashicons-arrow-up-alt"></span> Top</a>
 				<div class="dslc-panel">
