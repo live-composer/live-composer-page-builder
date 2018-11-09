@@ -73,6 +73,7 @@ function dslc_register_modules() {
 	dslc_register_module( 'DSLC_Galleries' );
 	dslc_register_module( 'DSLC_Downloads' );
 	dslc_register_module( 'DSLC_Staff' );
+	dslc_register_module( 'DSLC_Related_Posts' );
 
 	dslc_register_module( 'DSLC_Widgets' );
 	dslc_register_module( 'DSLC_Navigation' );
