@@ -3257,6 +3257,12 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 		}
 	}
 
+	$thumb_alt = get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true );
+	if ( ! $thumb_alt ) { $thumb_alt = ''; }
+
+	$thumb_title = get_the_title( get_post_thumbnail_id() );
+	if ( ! $thumb_title ) { $thumb_title = ''; }
+
 	?>
 
 	<?php ob_start(); ?>
@@ -3265,11 +3271,11 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 
 	<?php if ( $post_elements == 'all' || in_array( 'avatar', $post_elements ) ) : ?>
 
-										<div class="dslc-testimonial-author-avatar">
-											<?php the_post_thumbnail( 'full' ); ?>
-										</div><!-- .dslc-testimonial-author-avatar -->
+		<div class="dslc-testimonial-author-avatar">
+			<?php the_post_thumbnail( 'full', array( 'title' => get_the_title( get_post_thumbnail_id() ) ) ); ?>
+		</div><!-- .dslc-testimonial-author-avatar -->
 
-									<?php endif; ?>
+	<?php endif; ?>
 
 	<?php if ( 'above' === $options['avatar_position'] ) : ?>
 		<div class="dslc-testimonial-clearfix"></div>
@@ -3279,19 +3285,19 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 
 <?php if ( $post_elements == 'all' || in_array( 'name', $post_elements ) ) : ?>
 
-											<div class="dslc-testimonial-author-name">
-												<?php the_title(); ?>
-											</div><!-- .dslc-testimonial-author-name -->
+	<div class="dslc-testimonial-author-name">
+		<?php the_title(); ?>
+	</div><!-- .dslc-testimonial-author-name -->
 
-										<?php endif; ?>
+<?php endif; ?>
 
 <?php if ( $post_elements == 'all' || in_array( 'position', $post_elements ) ) : ?>
 
-											<div class="dslc-testimonial-author-position">
-												<?php echo get_post_meta( get_the_ID(), 'dslc_testimonial_author_pos', true ); ?>
-											</div><!-- .dslc-testimoniala-author-position -->
+	<div class="dslc-testimonial-author-position">
+		<?php echo get_post_meta( get_the_ID(), 'dslc_testimonial_author_pos', true ); ?>
+	</div><!-- .dslc-testimoniala-author-position -->
 
-										<?php endif; ?>
+<?php endif; ?>
 
 	</div><!-- .dslc-testimonial-author-main -->
 
@@ -3327,7 +3333,7 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 					$dslc_testimonial_image_src = wp_get_attachment_image_src( $dslc_testimonial_logo, 'full' );
 					?>
 						<div class="dslc-testimonial-logo">
-							<img src="<?php echo $dslc_testimonial_image_src[0]; ?>">
+							<img src="<?php echo $dslc_testimonial_image_src[0]; ?>" alt="<?php echo $thumb_alt; ?>" title="<?php echo $thumb_title; ?>">
 						</div>
 					<?php
 				}

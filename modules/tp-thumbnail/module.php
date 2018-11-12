@@ -375,6 +375,11 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 		}
 
 		$thumb_url = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
+		$thumb_alt = get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true );
+		if ( ! $thumb_alt ) { $thumb_alt = ''; }
+
+		$thumb_title = get_the_title( get_post_thumbnail_id() );
+		if ( ! $thumb_title ) { $thumb_title = ''; }
 
 		if ( ! $thumb_url && ! dslc_current_user_can( 'save' ) ) {
 			return; // Don't output module if no thumbnail set.
@@ -407,9 +412,9 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				<?php
 				if ( $manual_resize ) : ?>
 					<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); ?>
-					<img src="<?php echo esc_attr( $res_img ); ?>" />
+					<img src="<?php echo esc_attr( $res_img ); ?>" alt="<?php echo $thumb_alt; ?>" title="<?php echo $thumb_title; ?>" />
 				<?php else : ?>
-					<?php echo get_the_post_thumbnail( $post_id, 'full' ); ?>
+					<?php echo get_the_post_thumbnail( $post_id, 'full', array( 'title' => get_the_title( get_post_thumbnail_id() ) ) ); ?>
 				<?php endif; ?>
 				</div>
 			<?php else : ?>
@@ -437,9 +442,9 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				<?php endif; ?>
 					<?php if ( $manual_resize ) : ?>
 						<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true );?>
-						<img src="<?php echo esc_attr( $res_img ); ?>" alt="<?php echo esc_attr( dslc_get_attachment_alt( get_post_thumbnail_id() ) ); ?>" />
+						<img src="<?php echo esc_attr( $res_img ); ?>" alt="<?php echo esc_attr( dslc_get_attachment_alt( get_post_thumbnail_id() ) ); ?>" title="<?php echo $thumb_title; ?>" />
 					<?php else : ?>
-						<?php the_post_thumbnail( 'full' ); ?>
+						<?php the_post_thumbnail( 'full', array( 'title' => get_the_title( get_post_thumbnail_id() ) ) ); ?>
 					<?php endif; ?>
 				<?php if ( isset( $options['lightbox_state'] ) && 'enabled' === $options['lightbox_state'] ) : ?>
 					</a>
