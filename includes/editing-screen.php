@@ -114,10 +114,9 @@ function dslc_editing_screen_content() {
 		do_action( 'dslca_editing_screen_preview_after' );
 	} else {
 
-		// Output error if no page_id for editing provided.
-		echo '<div id="dslc-preview-error"><p>';
-		echo esc_attr__( 'Error: No page id provided.', 'live-composer-page-builder' );
-		echo '</p></div>';
+		// Redirect page URL to home URL if no page_id for editing provided.
+		wp_redirect( home_url() );
+		exit;
 	}
 }
 
