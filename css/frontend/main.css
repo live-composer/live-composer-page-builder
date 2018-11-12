@@ -284,6 +284,10 @@ body.rtl .dslc-last-col {
   		opacity: 1;
 	}
 
+	#dslc-content .dslc-slider-item .dslc-caption {
+		display: block;
+	}
+
 /**
  * Elements
  */

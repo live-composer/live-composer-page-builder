@@ -172,6 +172,22 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 					),
 				),
 			),
+			array(
+				'label' => __( 'Caption', 'live-composer-page-builder' ),
+				'id' => 'caption_state',
+				'std' => 'disabled',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'Enabled', 'live-composer-page-builder' ),
+						'value' => 'enabled',
+					),
+					array(
+						'label' => __( 'Disabled', 'live-composer-page-builder' ),
+						'value' => 'disabled',
+					),
+				),
+			),
 
 			/**
 			 * General Styling
@@ -643,6 +659,161 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 			),
 
 			/**
+			 * Caption
+			 */
+
+			array(
+				'label' => __( 'Color', 'live-composer-page-builder' ),
+				'id' => 'css_caption_color',
+				'std' => '',
+				'type' => 'color',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-caption',
+				'affect_on_change_rule' => 'color',
+				'section' => 'styling',
+				'tab' => __( 'Caption', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Font Size', 'live-composer-page-builder' ),
+				'id' => 'css_caption_font_size',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '25',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-caption',
+				'affect_on_change_rule' => 'font-size',
+				'section' => 'styling',
+				'tab' => __( 'Caption', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Font Weight', 'live-composer-page-builder' ),
+				'id' => 'css_caption_font_weight',
+				'std' => '400',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => '100 - Thin',
+						'value' => '100',
+					),
+					array(
+						'label' => '200 - Extra Light',
+						'value' => '200',
+					),
+					array(
+						'label' => '300 - Light',
+						'value' => '300',
+					),
+					array(
+						'label' => '400 - Normal',
+						'value' => '400',
+					),
+					array(
+						'label' => '500 - Medium',
+						'value' => '500',
+					),
+					array(
+						'label' => '600 - Semi Bold',
+						'value' => '600',
+					),
+					array(
+						'label' => '700 - Bold',
+						'value' => '700',
+					),
+					array(
+						'label' => '800 - Extra Bold',
+						'value' => '800',
+					),
+					array(
+						'label' => '900 - Black',
+						'value' => '900',
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-caption',
+				'affect_on_change_rule' => 'font-weight',
+				'section' => 'styling',
+				'tab' => __( 'Caption', 'live-composer-page-builder' ),
+				'ext' => '',
+			),
+			array(
+				'label' => __( 'Font Family', 'live-composer-page-builder' ),
+				'id' => 'css_caption_font_family',
+				'std' => 'Open Sans',
+				'type' => 'font',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-caption',
+				'affect_on_change_rule' => 'font-family',
+				'section' => 'styling',
+				'tab' => __( 'Caption', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Line Height', 'live-composer-page-builder' ),
+				'id' => 'css_caption_line_height',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '40',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-caption',
+				'affect_on_change_rule' => 'line-height',
+				'section' => 'styling',
+				'tab' => __( 'Caption', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Text Align', 'live-composer-page-builder' ),
+				'id' => 'css_caption_text_align',
+				'std' => 'center',
+				'type' => 'text_align',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-caption',
+				'affect_on_change_rule' => 'text-align',
+				'section' => 'styling',
+				'tab' => __( 'Caption', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Text Transform', 'live-composer-page-builder' ),
+				'id' => 'css_caption_text_transform',
+				'std' => 'none',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'None', 'live-composer-page-builder' ),
+						'value' => 'none',
+					),
+					array(
+						'label' => __( 'Capitalize', 'live-composer-page-builder' ),
+						'value' => 'capitalize',
+					),
+					array(
+						'label' => __( 'Uppercase', 'live-composer-page-builder' ),
+						'value' => 'uppercase',
+					),
+					array(
+						'label' => __( 'Lowercase', 'live-composer-page-builder' ),
+						'value' => 'lowercase',
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-caption',
+				'affect_on_change_rule' => 'text-transform',
+				'section' => 'styling',
+				'tab' => __( 'Caption', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
+				'id' => 'css_caption_margin_bottom',
+				'std' => '15',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-caption',
+				'affect_on_change_rule' => 'margin-bottom',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Caption', 'live-composer-page-builder' ),
+			),
+
+			/**
 			 * Responsive Tablet
 			 */
 
@@ -1018,10 +1189,16 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 
 						<?php
 
+						$caption_state = false;
+
+						if ( $options['caption_state'] == 'enabled' ) {
+							$caption_state = true;
+						}
+
 						if ( $show_placeholder ) {
 
 							for ( $i = 0; $i < 15; $i++ ) {
-								?><div class="dslc-slider-item"><img src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/placeholders/big-placeholder.png" /></div><?php
+								?><div class="dslc-slider-item"><?php if ( $caption_state ) { echo '<span class="dslc-caption">caption</span>'; } ?><img src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/placeholders/big-placeholder.png" /></div><?php
 							}
 						} else {
 
@@ -1042,7 +1219,10 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 								$thumb_title = get_the_title( get_post_thumbnail_id() );
 								if ( ! $thumb_title ) { $thumb_title = ''; }
 
-								?><div class="dslc-slider-item"><img class="<?php echo $img_class; ?>" src="<?php echo $gallery_image_src; ?>" alt="<?php echo $thumb_alt; ?>" title="<?php echo $thumb_title; ?>" <?php echo $srcset; ?> <?php echo $sizes; ?> /></div><?php
+								$thumb_caption = wp_get_attachment_caption( get_post_thumbnail_id() );
+								if ( ! $thumb_caption ) { $thumb_caption = ''; }
+
+								?><div class="dslc-slider-item"><span class="dslc-caption"><?php if ( $caption_state ) { echo $thumb_caption; } ?></span><img class="<?php echo $img_class; ?>" src="<?php echo $gallery_image_src; ?>" alt="<?php echo $thumb_alt; ?>" title="<?php echo $thumb_title; ?>" <?php echo $srcset; ?> <?php echo $sizes; ?> /></div><?php
 
 							}
 						}
