@@ -3616,8 +3616,10 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 									$thumb_url = $thumb_url[0];
 
 									$thumb_alt = get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true );
-									if ( ! $thumb_alt ) { $thumb_alt = '';
-									}
+									if ( ! $thumb_alt ) { $thumb_alt = ''; }
+
+									$thumb_title = get_the_title( get_post_thumbnail_id() );
+									if ( ! $thumb_title ) { $thumb_title = ''; }
 
 									$resize_width = false;
 									$resize_height = false;
@@ -3651,9 +3653,9 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 
 											<?php if ( $manual_resize ) : ?>
 												<a href="<?php echo $anchor_href; ?>" class="<?php echo $anchor_class; ?>"><img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true );
-												echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" /></a>
+												echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" title="<?php echo $thumb_title; ?>" /></a>
 											<?php else : ?>
-												<a href="<?php echo $anchor_href; ?>" class="<?php echo $anchor_class; ?>"><?php the_post_thumbnail( 'full' ); ?></a>
+												<a href="<?php echo $anchor_href; ?>" class="<?php echo $anchor_class; ?>"><?php the_post_thumbnail( 'full', array( 'title' => get_the_title( get_post_thumbnail_id() ) ) ); ?></a>
 											<?php endif; ?>
 										</div><!-- .dslc-blog-post-thumb-inner -->
 
