@@ -3523,13 +3523,9 @@ if ( $options['type'] == 'carousel' ) :
 
 	?><div class="dslc-loader"></div><div class="dslc-carousel" data-stop-on-hover="<?php echo $options['carousel_autoplay_hover']; ?>" data-autoplay="<?php echo $options['carousel_autoplay']; ?>" data-columns="<?php echo $carousel_items; ?>" data-pagination="<?php if ( in_array( 'circles', $carousel_elements ) ) { echo 'true';
 	} else { echo 'false';
-	} ?>" data-slide-speed="<?php echo $options['arrows_slide_speed']; ?>" data-pagination-speed="<?php echo $options['circles_slide_speed']; ?>"><?php
+	} ?>" data-slide-speed="<?php echo $options['arrows_slide_speed']; ?>" data-pagination-speed="<?php echo $options['circles_slide_speed']; ?>"><?php endif;
 
-			endif;
-
-	// TODO: Sticky
-
-	/* $page_number = $dslc_query->query['paged'];
+	$page_number = $dslc_query->query['paged'];
 
 	if ( $options['sticky_posts'] == 'enabled' && ( isset( $options['categories'] ) && $options['categories'] != '' ) &&  ( 1 == $page_number ) ) {
 		$sticky_posts = get_option( 'sticky_posts' );
@@ -3540,27 +3536,24 @@ if ( $options['type'] == 'carousel' ) :
 			'posts_per_page'      => 2,
 			'ignore_sticky_posts' => 1
 		);
+		
 		$sticky_query = new WP_Query($args);
 
 		if ( ! empty( $sticky_posts ) ) {
 
-			$item = null;
-			foreach( $dslc_query->posts as $key => $post ) {
-				foreach( $sticky_query->posts as $key => $sticky_post ) {
+			foreach( $dslc_query->posts as $key_post => $post ) {
+				foreach( $sticky_query->posts as $key_sticky => $sticky_post ) {
+
 					if ( $sticky_post->ID == $post->ID ) {
 						$sticky_post = $post;
 		
-						unset( $dslc_query->posts[$key] );
-						array_unshift( $dslc_query->posts, $sticky_post);
-						break;
-					} else {
+						unset( $dslc_query->posts[$key_post] );
 						array_unshift( $dslc_query->posts, $sticky_post);
 					}
 				}
-				break;
 			}
 		}
-	} */
+	}
 
 while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 	$count += $increment;
