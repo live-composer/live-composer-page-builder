@@ -792,6 +792,10 @@ function dslc_sticky_row() {
 
 jQuery(document).ready(function($){
 
+	// Fix issue - https://github.com/live-composer/live-composer-page-builder/issues/592
+	var viewport = document.querySelector("meta[name=viewport]");
+	viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0');
+
 	dslc_el_anim_hover();
 	dslc_bg_video();
 	dslc_tabs();
