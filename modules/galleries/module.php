@@ -1878,6 +1878,24 @@ class DSLC_Galleries extends DSLC_Module {
 				'tab' => __( 'Button', 'live-composer-page-builder' ),
 			),
 			array(
+				'label' => __( 'Position', 'live-composer-page-builder' ),
+				'id' => 'icon_pos',
+				'std' => 'left',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'Left', 'live-composer-page-builder' ),
+						'value' => 'left',
+					),
+					array(
+						'label' => __( 'Right', 'live-composer-page-builder' ),
+						'value' => 'right',
+					),
+				),
+				'section' => 'styling',
+				'tab' => __( 'Button', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Show Icon', 'live-composer-page-builder' ),
 				'id' => 'show_icon',
 				'std' => 'font',
@@ -1960,6 +1978,18 @@ class DSLC_Galleries extends DSLC_Module {
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-gallery-read-more a .dslc-icon, .dslc-gallery-read-more a svg',
 				'affect_on_change_rule' => 'margin-right',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Icon - Margin Left', 'live-composer-page-builder' ),
+				'id' => 'css_button_icon_margin_left',
+				'std' => '5',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-gallery-read-more a .dslc-icon, .dslc-gallery-read-more a svg',
+				'affect_on_change_rule' => 'margin-left',
 				'section' => 'styling',
 				'ext' => 'px',
 				'tab' => __( 'Button', 'live-composer-page-builder' ),
@@ -3232,12 +3262,21 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 
 														<div class="dslc-gallery-read-more">
 															<a href="<?php the_permalink(); ?>" target="<?php echo $options['button_target']; ?>">
+															<?php if ( $options['icon_pos'] == 'left' ) : ?>
 																<?php if ( 'svg' == $options['show_icon'] ) : ?>
 																	<?php echo stripslashes( $options['button_inline_svg'] ); ?>
 																<?php else : ?>
 																	<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
 																<?php endif; ?>
+															<?php endif; ?>
 																<?php echo $options['button_text']; ?>
+															<?php if ( $options['icon_pos'] == 'right' ) : ?>
+																<?php if ( 'svg' == $options['show_icon'] ) : ?>
+																	<?php echo stripslashes( $options['button_inline_svg'] ); ?>
+																<?php else : ?>
+																	<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
+																<?php endif; ?>
+															<?php endif; ?>
 															</a>
 														</div><!-- .dslc-gallery-read-more -->
 
@@ -3307,12 +3346,21 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 
 										<div class="dslc-gallery-read-more">
 											<a href="<?php the_permalink(); ?>" target="<?php echo $options['button_target']; ?>">
-												<?php if ( 'svg' == $options['show_icon'] ) : ?>
-													<?php echo stripslashes( $options['button_inline_svg'] ); ?>
-												<?php else : ?>
-													<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
+												<?php if ( $options['icon_pos'] == 'left' ) : ?>
+													<?php if ( 'svg' == $options['show_icon'] ) : ?>
+														<?php echo stripslashes( $options['button_inline_svg'] ); ?>
+													<?php else : ?>
+														<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
+													<?php endif; ?>
 												<?php endif; ?>
-												<?php echo $options['button_text']; ?>
+													<?php echo $options['button_text']; ?>
+												<?php if ( $options['icon_pos'] == 'right' ) : ?>
+													<?php if ( 'svg' == $options['show_icon'] ) : ?>
+														<?php echo stripslashes( $options['button_inline_svg'] ); ?>
+													<?php else : ?>
+														<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
+													<?php endif; ?>
+												<?php endif; ?>
 											</a>
 										</div><!-- .dslc-gallery-read-more -->
 
