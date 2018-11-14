@@ -1591,6 +1591,24 @@ class DSLC_Galleries extends DSLC_Module {
 			 */
 
 			array(
+				'label' => __( 'Open in', 'live-composer-page-builder' ),
+				'id' => 'button_target',
+				'std' => '_self',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'Same Tab', 'live-composer-page-builder' ),
+						'value' => '_self',
+					),
+					array(
+						'label' => __( 'New Tab', 'live-composer-page-builder' ),
+						'value' => '_blank',
+					),
+				),
+				'section' => 'styling',
+				'tab' => __( 'Button', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Align', 'live-composer-page-builder' ),
 				'id' => 'css_button_align',
 				'std' => 'inherit',
@@ -3213,7 +3231,7 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 													<?php if ( $post_elements == 'all' || in_array( 'button', $post_elements ) ) : ?>
 
 														<div class="dslc-gallery-read-more">
-															<a href="<?php the_permalink(); ?>">
+															<a href="<?php the_permalink(); ?>" target="<?php echo $options['button_target']; ?>">
 																<?php if ( 'svg' == $options['show_icon'] ) : ?>
 																	<?php echo stripslashes( $options['button_inline_svg'] ); ?>
 																<?php else : ?>
@@ -3288,7 +3306,7 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 									<?php if ( $post_elements == 'all' || in_array( 'button', $post_elements ) ) : ?>
 
 										<div class="dslc-gallery-read-more">
-											<a href="<?php the_permalink(); ?>">
+											<a href="<?php the_permalink(); ?>" target="<?php echo $options['button_target']; ?>">
 												<?php if ( 'svg' == $options['show_icon'] ) : ?>
 													<?php echo stripslashes( $options['button_inline_svg'] ); ?>
 												<?php else : ?>

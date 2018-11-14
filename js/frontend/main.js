@@ -115,7 +115,13 @@ function dslc_init_lightbox() {
 			},
 			image: {
 				titleSrc: function(item) {
-					return item.el.attr('title') + '<small>' + item.el.attr('data-caption') +'</small>';
+					var caption = '';
+
+					if ( typeof item.el.attr('data-caption') !== "undefined" ) {
+						caption = '<small>' + item.el.attr('data-caption') +'</small>';
+					}
+
+					return item.el.attr('title') + caption;
 				}
 			}
 		});
