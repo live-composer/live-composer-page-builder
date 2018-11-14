@@ -211,7 +211,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 					'std' => '',
 					'type' => 'color',
 					'refresh_on_change' => false,
-					'affect_on_change_el' => '.dslc-text-module-content',
+					'affect_on_change_el' => '.dslc-text-module-content:before',
 					'affect_on_change_rule' => 'background-color',
 					'section' => 'styling',
 				),
@@ -221,7 +221,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 					'std' => '',
 					'type' => 'image',
 					'refresh_on_change' => false,
-					'affect_on_change_el' => '.dslc-text-module-content',
+					'affect_on_change_el' => '.dslc-text-module-content:before',
 					'affect_on_change_rule' => 'background-image',
 					'section' => 'styling',
 				),
@@ -249,7 +249,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 						),
 					),
 					'refresh_on_change' => false,
-					'affect_on_change_el' => '.dslc-text-module-content',
+					'affect_on_change_el' => '.dslc-text-module-content:before',
 					'affect_on_change_rule' => 'background-repeat',
 					'section' => 'styling',
 				),
@@ -269,7 +269,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 						),
 					),
 					'refresh_on_change' => false,
-					'affect_on_change_el' => '.dslc-text-module-content',
+					'affect_on_change_el' => '.dslc-text-module-content:before',
 					'affect_on_change_rule' => 'background-attachment',
 					'section' => 'styling',
 				),
@@ -317,7 +317,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 						),
 					),
 					'refresh_on_change' => false,
-					'affect_on_change_el' => '.dslc-text-module-content',
+					'affect_on_change_el' => '.dslc-text-module-content:before',
 					'affect_on_change_rule' => 'background-position',
 					'section' => 'styling',
 				),
@@ -341,8 +341,22 @@ class DSLC_Text_Simple extends DSLC_Module {
 						),
 					),
 					'affect_on_change_rule' => 'background-size',
-					'affect_on_change_el' => '.dslc-text-module-content',
+					'affect_on_change_el' => '.dslc-text-module-content:before',
 					'section' => 'styling',
+				),
+				array(
+					'label' => __( 'Opacity', 'live-composer-page-builder' ),
+					'id' => 'css_main_bg_img_opacity',
+					'onlypositive' => true, // Value can't be negative.
+					'std' => '1',
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-text-module-content:before',
+					'affect_on_change_rule' => 'opacity',
+					'section' => 'styling',
+					'min' => 0,
+					'max' => 1,
+					'increment' => 0.01
 				),
 			array(
 				'id' => 'css_main_bg_group',
@@ -5201,22 +5215,26 @@ class DSLC_Text_Simple extends DSLC_Module {
 		}
 
 		/* Module output starts here */
+		
+		?>
+		
+		<div class="dslc-text-module-content">
+			<?php
 
-		?><div class="dslc-text-module-content"><?php
+			if ( $dslc_active ) {
+				?><div class="dslca-editable-content" data-type="simple" data-id="content"<?php if ( $dslc_is_admin ) { echo ' data-exportable-content';
+				} ?>><?php
+			}
 
-if ( $dslc_active ) {
-	?><div class="dslca-editable-content" data-type="simple" data-id="content"<?php if ( $dslc_is_admin ) { echo ' data-exportable-content';
-	} ?>><?php
-}
+			$output_content = stripslashes( $options['content'] );
+			echo apply_filters( 'dslc_text_block_render', $output_content );
 
-				$output_content = stripslashes( $options['content'] );
-				echo apply_filters( 'dslc_text_block_render', $output_content );
-
-if ( $dslc_active ) {
-	?></div><!-- .dslca-editable-content --><?php
-?><div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook"><?php _e( 'Open in WP Editor', 'live-composer-page-builder' ); ?></span></div><?php
-}
-
-		?></div><?php
+			if ( $dslc_active ) {
+				?></div><!-- .dslca-editable-content --><?php
+			?><div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook"><?php _e( 'Open in WP Editor', 'live-composer-page-builder' ); ?></span></div><?php
+			} ?>
+		</div>
+		
+		<?php
 	}
 }
