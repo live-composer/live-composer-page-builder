@@ -632,6 +632,7 @@ class LC_Control {
 			'resize_height',
 			'infobox_image_alt',
 			'infobox_image_title',
+			'pagination_text',
 		);
 
 		$controls_without_toggle = apply_filters( 'dslc_controls_without_toggle', $controls_without_toggle );

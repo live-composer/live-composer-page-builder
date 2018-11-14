@@ -3970,6 +3970,7 @@ if ( $options['type'] == 'carousel' ) :
 		dslc_post_pagination( array(
 			'pages' => $num_pages,
 			'type' => $options['pagination_type'],
+			'pagination_text' => $options['pagination_text'],
 		) );
 	}
 

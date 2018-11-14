@@ -1612,6 +1612,14 @@ class DSLC_Module {
 		$pagination_options = array(
 
 			array(
+				'label' => __( 'Pagination Text', 'live-composer-page-builder' ),
+				'id' => 'pagination_text',
+				'std' => 'Load More Items',
+				'type' => 'text',
+				'section' => 'styling',
+				'tab' => 'Pagination',
+			),
+			array(
 				'label' => 'Align',
 				'id' => 'css_pag_align',
 				'std' => 'left',

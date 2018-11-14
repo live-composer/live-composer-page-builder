@@ -3448,6 +3448,7 @@ function dslc_module_posts_output( $atts, $content = null ) {
 		dslc_post_pagination( array(
 			'pages' => $num_pages,
 			'type' => $options['pagination_type'],
+			'pagination_text' => $options['pagination_text'],
 		) );
 	}
 

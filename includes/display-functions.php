@@ -1686,9 +1686,9 @@ function dslc_post_pagination( $atts ) {
 
 				if ( $type == 'loadmore' ) {
 					if ( $paged < $pages ) {
-						echo "<li class='dslc-pagination-load-more dslc-active'><a href='" . get_pagenum_link( $paged + 1 ) . "'><span class='dslc-icon dslc-icon-refresh'></span>" . __( 'Load More Items', 'live-composer-page-builder' ) . '</a></li>';
+						echo "<li class='dslc-pagination-load-more dslc-active'><a href='" . get_pagenum_link( $paged + 1 ) . "'><span class='dslc-icon dslc-icon-refresh'></span>" . $atts['pagination_text'] . '</a></li>';
 					} else {
-						echo "<li class='dslc-pagination-load-more dslc-inactive'><a href='#'><span class='dslc-icon dslc-icon-refresh'></span>" . __( 'Load More Items', 'live-composer-page-builder' ) . '</a></li>';
+						echo "<li class='dslc-pagination-load-more dslc-inactive'><a href='#'><span class='dslc-icon dslc-icon-refresh'></span>" . $atts['pagination_text'] . '</a></li>';
 					}
 				}
 
