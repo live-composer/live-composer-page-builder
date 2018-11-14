@@ -2949,6 +2949,17 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'tab' => __( 'Lists', 'live-composer-page-builder' ),
 			),
 			array(
+				'label' => __( 'Text Align', 'live-composer-page-builder' ),
+				'id' => 'css_li_text_align',
+				'std' => 'left',
+				'type' => 'text_align',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-text-module-content ul',
+				'affect_on_change_rule' => 'text-align',
+				'section' => 'styling',
+				'tab' => __( 'Lists', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Text Shadow', 'live-composer-page-builder' ),
 				'id' => 'css_li_text_shadow',
 				'std' => '',
@@ -4418,6 +4429,17 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
 			array(
+				'label' => __( 'List Item - Text Align', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_li_text_align',
+				'std' => 'left',
+				'type' => 'text_align',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-text-module-content ul',
+				'affect_on_change_rule' => 'text-align',
+				'section' => 'responsive',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Blockquote - Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_blockquote_font_size',
 				'onlypositive' => true, // Value can't be negative.
@@ -5048,6 +5070,17 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-left,padding-right',
 				'section' => 'responsive',
 				'ext' => 'px',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'List Item - Text Align', 'live-composer-page-builder' ),
+				'id' => 'css_res_p_li_text_align',
+				'std' => 'left',
+				'type' => 'text_align',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-text-module-content ul',
+				'affect_on_change_rule' => 'text-align',
+				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
