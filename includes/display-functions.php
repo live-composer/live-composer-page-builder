@@ -1104,7 +1104,12 @@ function dslc_module_front( $atts, $settings_raw = null ) {
 
 		// Module output.
 		ob_start();
-			$module_instance->output( $settings );
+			if ( did_action( $module_id . '_output' ) > 0 ) {
+                do_action( $module_id . '_output', $settings, $module_instance, $dslc_active );
+            } else {
+                $module_instance->output( $settings );
+			}
+			
 			$output_body = ob_get_contents();
 		ob_end_clean();
 
