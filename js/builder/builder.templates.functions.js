@@ -21,6 +21,14 @@ function dslc_template_load( template ) {
 	// Vars
 	var dslcModule, dslcModuleID;
 
+	// Template preloader
+	jQuery('#wpcontent').prepend('<div class="lc-template-loader"></div>');
+	
+	var block = '<div class="lc-loader lds-css"><div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>';
+
+	jQuery('.lc-template-loader').prepend(block);
+
+
 	// Ajax call to get template's HTML
 	jQuery.post(
 
@@ -34,6 +42,8 @@ function dslc_template_load( template ) {
 
 			// Apply the template's HTML
 			jQuery('#dslc-main', LiveComposer.Builder.PreviewAreaDocument).html( response.output );
+
+			jQuery('.lc-template-loader').remove();
 
 			// Call other functions
 			LiveComposer.Builder.PreviewAreaWindow.dslc_carousel();
