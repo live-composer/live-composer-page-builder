@@ -1247,9 +1247,9 @@ class DSLC_Accordion extends DSLC_Module {
 
 					<?php if ( is_array( $accordion_contents ) && count( $accordion_contents ) > 0 ) : ?>
 
-						<?php foreach ( $accordion_contents as $accordion_content ) : ?>
+						<?php foreach ( $accordion_contents as $accordion_key => $accordion_content ) : ?>
 
-							<div class="dslc-accordion-item">
+							<div class="dslc-accordion-item" id="accordion-<?php echo $accordion_key; ?>">
 
 								<div class="dslc-accordion-header dslc-accordion-hook">
 									<span class="dslc-accordion-title" <?php if ( $dslc_is_admin ) { echo 'contenteditable data-exportable-content="h3"';} ?>><?php echo stripslashes( $accordion_nav[ $count ] ); ?></span>

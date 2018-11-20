@@ -3547,8 +3547,8 @@ class DSLC_Tabs extends DSLC_Module {
 
 					<?php if ( is_array( $tabs_nav ) ) : ?>
 
-						<?php foreach ( $tabs_nav as $tab_nav ) : ?>
-							<span class="dslc-tabs-nav-hook">
+						<?php foreach ( $tabs_nav as $tab_key => $tab_nav ) : ?>
+							<span class="dslc-tabs-nav-hook" id="<?php echo 'tab-' . $tab_key; ?>">
 								<span class="dslc-tabs-nav-hook-title" <?php if ( $dslc_is_admin ) { echo 'contenteditable'; } ?>><?php echo stripslashes( $tab_nav ); ?></span>
 								<?php if ( $dslc_is_admin ) : ?>
 									<span class="dslca-delete-tab-hook"><span class="dslca-icon dslc-icon-remove"></span></span>
