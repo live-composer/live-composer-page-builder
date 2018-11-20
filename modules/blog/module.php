@@ -218,6 +218,42 @@ class DSLC_Blog extends DSLC_Module {
 				),
 			),
 			array(
+				'label' => __( 'Second Order By', 'live-composer-page-builder' ),
+				'id' => 'second_orderby',
+				'std' => 'none',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'None', 'live-composer-page-builder' ),
+						'value' => 'none',
+					),
+					array(
+						'label' => __( 'Publish Date', 'live-composer-page-builder' ),
+						'value' => 'date',
+					),
+					array(
+						'label' => __( 'Modified Date', 'live-composer-page-builder' ),
+						'value' => 'modified',
+					),
+					array(
+						'label' => __( 'Random', 'live-composer-page-builder' ),
+						'value' => 'rand',
+					),
+					array(
+						'label' => __( 'Alphabetic', 'live-composer-page-builder' ),
+						'value' => 'title',
+					),
+					array(
+						'label' => __( 'Comment Count', 'live-composer-page-builder' ),
+						'value' => 'comment_count',
+					),
+					array(
+						'label' => __( 'Author', 'live-composer-page-builder' ),
+						'value' => 'author',
+					),
+				),
+			),
+			array(
 				'label' => __( 'Order', 'live-composer-page-builder' ),
 				'id' => 'order',
 				'std' => 'DESC',
@@ -3224,13 +3260,19 @@ function dslc_module_blog_output( $atts, $content = null ) {
 	if ( $query_offset > 0 && $paged > 1 ) { $query_offset = ( $paged - 1 ) * $options['amount'] + $options['offset'];
 	}
 
+		$orderby = '';
+
+		if ( ! empty( $options['second_orderby'] ) && ( 'none' !== $options['second_orderby'] ) ) {
+			$orderby = $options['orderby'] . ' ' . $options['second_orderby'];
+		}
+
 		// General args
 		$args = array(
 			'paged' => $paged,
 			'post_type' => 'post',
 			'posts_per_page' => $options['amount'],
 			'order' => $options['order'],
-			'orderby' => $options['orderby'],
+			'orderby' => $orderby,
 		);
 
 		// Add offset
