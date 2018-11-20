@@ -221,4 +221,17 @@ jQuery(document).ready(function(){
 		jQuery('#post-option-dslc_extra_padding').hide();
 	}
 
+	function getUrlVars() {
+		var vars = {};
+		var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+			vars[key] = value;
+		});
+		return vars;
+	}
+
+	if ( getUrlVars()['for'] !== undefined ) {
+		var paramFor = getUrlVars()['for'];
+		jQuery("input[value='" + paramFor + "']").prop('checked', true);
+	}
+
 }); // jQuery(document).ready
