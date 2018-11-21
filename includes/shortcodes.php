@@ -188,3 +188,59 @@ function dslc_sc_category_description( $atts, $content ) {
 	return $category_description;
 
 } add_shortcode( 'dslc_category_description', 'dslc_sc_category_description' );
+
+/**
+ * Add Shortcode:
+ * [dslc_page_title]
+ *
+ * Outputs the curent page title
+ * http://codex.wordpress.org/Function_Reference/the_title
+ */
+function dslc_sc_page_title() {
+	$output = the_title( '', '', false );
+	return $output;
+}
+add_shortcode( 'dslc_page_title', 'dslc_sc_page_title' );
+
+/**
+ * Add Shortcode:
+ * [dslc_authorbio]
+ *
+ * Outputs the curent author bio info
+ * http://codex.wordpress.org/Function_Reference/get_the_author_meta
+ */
+function dslc_sc_authorbio() {
+	$output = get_the_author_meta( 'description' );
+
+	if ( ! $output ) {
+		$output = ' ';
+		// to prevent "Looks like there is no content" message
+		// in the Live Composer
+	}
+
+	return $output;
+}
+add_shortcode( 'dslc_authorbio', 'dslc_sc_authorbio' );
+
+/**
+ * Add Shortcode:
+ * [dslc_commentscount]
+ *
+ * Outputs comments count
+ */
+add_shortcode( 'dslc_commentscount', 'dslc_sc_commentscount' );
+function dslc_sc_commentscount() {
+	$num_comments = get_comments_number(); // get_comments_number returns only a numeric value
+
+	if ( $num_comments == 0 ) {
+		$comments = __( 'No Comments', 'live-composer-page-builder' );
+	} elseif ( $num_comments > 1 ) {
+		$comments = $num_comments . __( ' Comments', 'live-composer-page-builder' );
+	} else {
+		$comments = __( '1 Comment', 'live-composer-page-builder' );
+	}
+
+	$output = $comments;
+
+	return $output;
+}
