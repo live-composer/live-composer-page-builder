@@ -843,7 +843,9 @@ body.rtl .dslc-last-col {
  * Responsive ( User Set )
  */
 
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)  {
+/* https://github.com/live-composer/live-composer-page-builder/issues/505 */
+
+/* @media only screen and (min-device-width : 768px) and (max-device-width : 1024px)  {
 
 	.dslc-modules-section.dslc-init-parallax {
 		background-attachment: scroll !important;
@@ -859,7 +861,7 @@ body.rtl .dslc-last-col {
 		background-position: 0 0 !important;
 	}
 
-}
+} */
 
  /**
   * Animations moved outside of media queries
