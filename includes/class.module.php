@@ -2539,10 +2539,6 @@ class DSLC_Module {
 			if ( ! in_array( 'phone', $show_on, true ) ) {
 				$class_show_on .= 'dslc-hide-on-phone ';
 			}
-
-			if ( ! in_array( 'sticky', $show_on, true ) ) {
-				$class_show_on .= 'dslc-hide-on-sticky ';
-			}
 		}
 
 		/**

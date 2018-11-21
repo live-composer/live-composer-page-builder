@@ -1172,10 +1172,6 @@ a img.aligncenter { display: block; margin-left: auto; margin-right: auto }
 	font-style: italic;
 }
 
-.dslc-sticky-section-fixed .dslc-hide-on-sticky {
-	display: none !important;
-}
-
 /**
  * ----------------------------------------------------------------------
  * Responsive classes and properties
