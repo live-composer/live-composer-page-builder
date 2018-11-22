@@ -23,6 +23,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 function dslc_plugin_action_links( $links ) {
 
+	// Woo integration
+	$woo_integration_link = '<a href="https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=plugins-list&utm_campaign=woo_integration_link" target="_blank">Woo integration</a>';
+	array_unshift( $links, $woo_integration_link );
+
 	// Themes link
 	$themes_link = '<a href="https://livecomposerplugin.com/themes/?utm_source=wp-admin&utm_medium=plugins-list&utm_campaign=themes_link" target="_blank">Themes</a>';
 	array_unshift( $links, $themes_link );
