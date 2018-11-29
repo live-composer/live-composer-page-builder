@@ -240,6 +240,10 @@ if ( $extensions && is_plugin_active( 'lc-extensions/lc-extensions.php' ) ) {
 
 					dimaphperror($extension);
 
+					if ( ! array_key_exists( "title", $extension) ) {
+						continue;
+					}
+
 					$extension_thumbnail = DS_LIVE_COMPOSER_URL . 'images/lc-placeholder.png';
 					if ( isset( $extension['thumbnail'] ) && !empty( $extension['thumbnail'] ) ) {
 						$extension_thumbnail = $extension['thumbnail'];
