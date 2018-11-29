@@ -238,8 +238,6 @@ if ( $extensions && is_plugin_active( 'lc-extensions/lc-extensions.php' ) ) {
 
 				foreach ( $extensions as $extension_id => $extension ) {
 
-					dimaphperror($extension);
-
 					if ( ! array_key_exists( "title", $extension) ) {
 						continue;
 					}
