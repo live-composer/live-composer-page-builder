@@ -182,6 +182,54 @@ if ( $extensions && is_plugin_active( 'lc-extensions/lc-extensions.php' ) ) {
 							'rank' => 28,
 							'demo' => true,
 						),
+					'contact-forms' => array(
+							'title' => 'Contact Forms',
+							'thumbnail' => DS_LIVE_COMPOSER_URL . 'images/extensions/contact-forms/thumbnail.png',
+							'details' => 'https://livecomposerplugin.com/downloads/contact-forms/?utm_source=lcproext&utm_medium=extensions-list&utm_campaign=contact-forms/',
+							'description' => 'Creates modules for third-party contact form plugins. Drag and drop contact form module on the page instead of dealing with shortcodes.',
+							'rank' => 50,
+							'demo' => true,
+						),
+					'restrict-content' => array(
+							'title' => 'Restrict Content',
+							'thumbnail' => DS_LIVE_COMPOSER_URL . 'images/extensions/restrict-content/thumbnail.png',
+							'details' => 'https://livecomposerplugin.com/downloads/restrict-content/?utm_source=lcproext&utm_medium=extensions-list&utm_campaign=restrict-content/',
+							'description' => 'This extension add full support for Restrict Content plugin. Lock away your exclusive content. Give access to valued members.',
+							'rank' => 55,
+							'demo' => true,
+						),
+					'openstreetmap' => array(
+							'title' => 'Open Street Map',
+							'thumbnail' => DS_LIVE_COMPOSER_URL . 'images/extensions/openstreetmap/thumbnail.png',
+							'details' => 'https://livecomposerplugin.com/downloads/open-street-map/?utm_source=lcproext&utm_medium=extensions-list&utm_campaign=open-street-map/',
+							'description' => 'Fast and easy way to display an Open Street Maps map on your Live Composer powered website. The extension adds a new module.',
+							'rank' => 60,
+							'demo' => true,
+						),
+					'preloader' => array(
+							'title' => 'Preloader',
+							'thumbnail' => DS_LIVE_COMPOSER_URL . 'images/extensions/preloader/thumbnail.png',
+							'details' => 'https://livecomposerplugin.com/downloads/preloader/?utm_source=lcproext&utm_medium=extensions-list&utm_campaign=preloader/',
+							'description' => 'Add a responsive preloader to your website, fully customizable, compatible with all major browsers.',
+							'rank' => 65,
+							'demo' => true,
+						),
+					'breadcrumb' => array(
+							'title' => 'Breadcrumb',
+							'thumbnail' => DS_LIVE_COMPOSER_URL . 'images/extensions/breadcrumb/thumbnail.png',
+							'details' => 'https://livecomposerplugin.com/downloads/breadcrumb/?utm_source=lcproext&utm_medium=extensions-list&utm_campaign=breadcrumb/',
+							'description' => 'Display breadcrumb navigation links in your WordPress site with this new module.',
+							'rank' => 70,
+							'demo' => true,
+						),
+					'headroom' => array(
+							'title' => 'Autohide header',
+							'thumbnail' => DS_LIVE_COMPOSER_URL . 'images/extensions/headroom/thumbnail.png',
+							'details' => 'https://livecomposerplugin.com/downloads/autohide-header/?utm_source=lcproext&utm_medium=extensions-list&utm_campaign=autohide-header/',
+							'description' => 'Extend the header functionality with this feature. The header is hidden on page scroll with a smooth animation.',
+							'rank' => 70,
+							'demo' => true,
+						),
 					);
 				endif; // If empty.
 
@@ -189,6 +237,8 @@ if ( $extensions && is_plugin_active( 'lc-extensions/lc-extensions.php' ) ) {
 				uasort( $extensions, 'dslc_sort_by_rank' );
 
 				foreach ( $extensions as $extension_id => $extension ) {
+
+					dimaphperror($extension);
 
 					$extension_thumbnail = DS_LIVE_COMPOSER_URL . 'images/lc-placeholder.png';
 					if ( isset( $extension['thumbnail'] ) && !empty( $extension['thumbnail'] ) ) {
