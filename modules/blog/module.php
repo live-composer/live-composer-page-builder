@@ -901,6 +901,10 @@ class DSLC_Blog extends DSLC_Module {
 						'value' => 'bellow',
 					),
 					array(
+						'label' => __( 'Under Thumbnail', 'live-composer-page-builder' ),
+						'value' => 'under',
+					),
+					array(
 						'label' => __( 'Inside Thumbnail ( hover )', 'live-composer-page-builder' ),
 						'value' => 'inside',
 					),
@@ -3689,68 +3693,68 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 		}
 	}
 
+	/**
+	 * Manual Resize
+	 */
+
+	$manual_resize = false;
+	if ( isset( $options['thumb_resize_height'] ) && ! empty( $options['thumb_resize_height'] ) || isset( $options['thumb_resize_width_manual'] ) && ! empty( $options['thumb_resize_width_manual'] ) ) {
+
+		$manual_resize = true;
+		$thumb_url = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full' );
+		$thumb_url = $thumb_url[0];
+
+		$thumb_alt = get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true );
+		if ( ! $thumb_alt ) { $thumb_alt = ''; }
+
+		$thumb_title = get_the_title( get_post_thumbnail_id() );
+		if ( ! $thumb_title ) { $thumb_title = ''; }
+
+		$resize_width = false;
+		$resize_height = false;
+
+		if ( isset( $options['thumb_resize_width_manual'] ) && ! empty( $options['thumb_resize_width_manual'] ) ) {
+			$resize_width = $options['thumb_resize_width_manual'];
+		}
+
+		if ( isset( $options['thumb_resize_height'] ) && ! empty( $options['thumb_resize_height'] ) ) {
+			$resize_height = $options['thumb_resize_height'];
+		}
+	}
+
 	?>
 
 	<div class="<?php echo $element_class . $columns_class . $extra_class; ?>" data-cats="<?php echo $post_cats_data; ?>">
 
 	<?php if ( $post_elements == 'all' || in_array( 'thumbnail', $post_elements ) ) : ?>
 
-								<?php
-
-									/**
-									 * Manual Resize
-									 */
-
-									$manual_resize = false;
-								if ( isset( $options['thumb_resize_height'] ) && ! empty( $options['thumb_resize_height'] ) || isset( $options['thumb_resize_width_manual'] ) && ! empty( $options['thumb_resize_width_manual'] ) ) {
-
-									$manual_resize = true;
-									$thumb_url = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full' );
-									$thumb_url = $thumb_url[0];
-
-									$thumb_alt = get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true );
-									if ( ! $thumb_alt ) { $thumb_alt = ''; }
-
-									$thumb_title = get_the_title( get_post_thumbnail_id() );
-									if ( ! $thumb_title ) { $thumb_title = ''; }
-
-									$resize_width = false;
-									$resize_height = false;
-
-									if ( isset( $options['thumb_resize_width_manual'] ) && ! empty( $options['thumb_resize_width_manual'] ) ) {
-										$resize_width = $options['thumb_resize_width_manual'];
-									}
-
-									if ( isset( $options['thumb_resize_height'] ) && ! empty( $options['thumb_resize_height'] ) ) {
-										$resize_height = $options['thumb_resize_height'];
-									}
-								}
-
-								?>
-
 								<?php if ( has_post_thumbnail() ) : ?>
 
 									<div class="dslc-blog-post-thumb dslc-post-thumb dslc-on-hover-anim">
 
-										<div class="dslc-blog-post-thumb-inner dslca-post-thumb">
-											<?php
-												$anchor_class = '';
-												$anchor_href = get_permalink();
+										<?php if ( $options['main_location'] !== 'under' ) : ?>
 
-												if ( 'lightbox' === $options['link_type'] ) {
-													$anchor_class = 'dslc-lightbox-image';
-													$anchor_href = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full' );
-													$anchor_href = $anchor_href[0];
-												}
-											?>
+											<div class="dslc-blog-post-thumb-inner dslca-post-thumb">
+												<?php
+													$anchor_class = '';
+													$anchor_href = get_permalink();
 
-											<?php if ( $manual_resize ) : ?>
-												<a href="<?php echo $anchor_href; ?>" class="<?php echo $anchor_class; ?>"><img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true );
-												echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" title="<?php echo $thumb_title; ?>" /></a>
-											<?php else : ?>
-												<a href="<?php echo $anchor_href; ?>" class="<?php echo $anchor_class; ?>"><?php the_post_thumbnail( 'full', array( 'title' => get_the_title( get_post_thumbnail_id() ) ) ); ?></a>
-											<?php endif; ?>
-										</div><!-- .dslc-blog-post-thumb-inner -->
+													if ( 'lightbox' === $options['link_type'] ) {
+														$anchor_class = 'dslc-lightbox-image';
+														$anchor_href = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full' );
+														$anchor_href = $anchor_href[0];
+													}
+												?>
+
+												<?php if ( $manual_resize ) : ?>
+													<a href="<?php echo $anchor_href; ?>" class="<?php echo $anchor_class; ?>"><img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true );
+													echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" title="<?php echo $thumb_title; ?>" /></a>
+												<?php else : ?>
+													<a href="<?php echo $anchor_href; ?>" class="<?php echo $anchor_class; ?>"><?php the_post_thumbnail( 'full', array( 'title' => get_the_title( get_post_thumbnail_id() ) ) ); ?></a>
+												<?php endif; ?>
+											</div><!-- .dslc-blog-post-thumb-inner -->
+
+										<?php endif; ?>
 
 										<?php if ( ( $options['main_location'] == 'inside' || $options['main_location'] == 'inside_visible' ) && ( $post_elements == 'all' || in_array( 'title', $post_elements ) || in_array( 'meta', $post_elements ) || in_array( 'excerpt', $post_elements ) || in_array( 'button', $post_elements ) ) ) : ?>
 
@@ -3851,7 +3855,7 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 
 							<?php endif; ?>
 
-							<?php if ( $options['main_location'] == 'bellow' && ( $post_elements == 'all' || in_array( 'title', $post_elements ) || in_array( 'meta', $post_elements ) || in_array( 'excerpt', $post_elements ) || in_array( 'button', $post_elements ) ) ) : ?>
+							<?php if ( ( $options['main_location'] == 'bellow' || $options['main_location'] == 'under' )  && ( $post_elements == 'all' || in_array( 'title', $post_elements ) || in_array( 'meta', $post_elements ) || in_array( 'excerpt', $post_elements ) || in_array( 'button', $post_elements ) ) ) : ?>
 
 								<div class="dslc-post-main dslc-blog-post-main">
 
@@ -4018,6 +4022,32 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 										<?php endif; ?>
 
 									</div><!-- .dslc-posts-social-share -->
+
+								<?php endif; ?>
+
+								<?php if ( $options['main_location'] == 'under' && in_array( 'thumbnail', $post_elements )  ) : ?>
+								
+									<div class="dslc-blog-post-thumb dslc-post-thumb">
+										<div class="dslc-blog-post-thumb-inner dslca-post-thumb">
+											<?php
+												$anchor_class = '';
+												$anchor_href = get_permalink();
+
+												if ( 'lightbox' === $options['link_type'] ) {
+													$anchor_class = 'dslc-lightbox-image';
+													$anchor_href = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full' );
+													$anchor_href = $anchor_href[0];
+												}
+											?>
+
+											<?php if ( $manual_resize ) : ?>
+												<a href="<?php echo $anchor_href; ?>" class="<?php echo $anchor_class; ?>"><img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true );
+												echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" title="<?php echo $thumb_title; ?>" /></a>
+											<?php else : ?>
+												<a href="<?php echo $anchor_href; ?>" class="<?php echo $anchor_class; ?>"><?php the_post_thumbnail( 'full', array( 'title' => get_the_title( get_post_thumbnail_id() ) ) ); ?></a>
+											<?php endif; ?>
+										</div><!-- .dslc-blog-post-thumb-inner -->
+									</div>
 
 								<?php endif; ?>
 
