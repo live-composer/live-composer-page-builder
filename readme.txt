@@ -3,7 +3,7 @@ Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page, page builder plugin, drag-n-drop page builder
 Requires at least: 4.7
 Tested up to: 4.9
-Stable tag: 1.3.19
+Stable tag: 1.4
 License: GPLv3
 
 Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
@@ -83,13 +83,14 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 * 🦊 [Check out our WooCommerce Page Builder Extension](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
 
-= 1.3.19 - October 16 2018 =
+= 1.4 - November 30th 2018 =
 
 = Bug Fixes: =
 * Issue [#956](https://github.com/live-composer/live-composer-page-builder/issues/956): Meta module comment URL doesn't link to the page comments
 * Issue [#948](https://github.com/live-composer/live-composer-page-builder/issues/948): Multiple CSS issues on RTL
-* Issue [#765](https://github.com/live-composer/live-composer-page-builder/issues/765): The post sticky option is not working when a category is selected
-* Issue [#394](https://github.com/live-composer/live-composer-page-builder/issues/#394): I can't drag and drop modules when I use a Load Page Design
+* Issue [#394](https://github.com/live-composer/live-composer-page-builder/issues/394): I can't drag and drop modules when I use a Load Page Design
+* Issue [#445](https://github.com/live-composer/live-composer-page-builder/issues/445): RTL issue
+* Issue [#248](https://github.com/live-composer/live-composer-page-builder/issues/248): LC editing mode is broken on archive pages without page id
 
 = Improved: =
 * Issue [#947](https://github.com/live-composer/live-composer-page-builder/issues/947): Improvement for the Navigation module disable option
@@ -100,12 +101,24 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 * Issue [#333](https://github.com/live-composer/live-composer-page-builder/issues/333): Add 'Enable/Disable Custom CSS' for all modules
 * Issue [#955](https://github.com/live-composer/live-composer-page-builder/issues/955): Add lists style on the Info Box content
 * Issue [#954](https://github.com/live-composer/live-composer-page-builder/issues/954): Add tags on the blog meta
+* Issue [#958](https://github.com/live-composer/live-composer-page-builder/issues/958): Make the coment form GDPR Compliance
+* Issue [#698](https://github.com/live-composer/live-composer-page-builder/issues/698): Galleries grid button
+* Issue [#590](https://github.com/live-composer/live-composer-page-builder/issues/590): Gallery elements button
+* Issue [#505](https://github.com/live-composer/live-composer-page-builder/issues/505): Improve parallax
+* Issue [#482](https://github.com/live-composer/live-composer-page-builder/issues/482): Change pagination text
+* Issue [#348](https://github.com/live-composer/live-composer-page-builder/issues/348): Make sure all the modules with images has alt tags option
 
 
 = New: =
-* Issue [#950](https://github.com/live-composer/live-composer-page-builder/issues/950): "Hide when sticky" option for modules
 * Issue [#405](https://github.com/live-composer/live-composer-page-builder/issues/405): Add template for "Not Found" on search results
 * Issue [#373](https://github.com/live-composer/live-composer-page-builder/issues/373): Add possibility to create template for a particular taxonomy term
+* Issue [#951](https://github.com/live-composer/live-composer-page-builder/issues/951): Add new filter for module image
+* Issue [#920](https://github.com/live-composer/live-composer-page-builder/issues/920): Add filters to override default module outputs
+* Issue [#599](https://github.com/live-composer/live-composer-page-builder/issues/599): Add opacity control for modle text
+* Issue [#500](https://github.com/live-composer/live-composer-page-builder/issues/500): Add second orderby for module blog
+* Issue [#407](https://github.com/live-composer/live-composer-page-builder/issues/407): Add possibility to filter posts by tag for module blog
+* Issue [#387](https://github.com/live-composer/live-composer-page-builder/issues/387): Add caption for module gallery slider
+* Issue [#384](https://github.com/live-composer/live-composer-page-builder/issues/384): Add preloader for template loading
 
 = 1.3.18 - August 24th 2018 =
 
