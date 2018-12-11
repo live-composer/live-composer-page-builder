@@ -2,7 +2,7 @@
 Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page, page builder plugin, drag-n-drop page builder
 Requires at least: 4.7
-Tested up to: 4.9
+Tested up to: 5.0
 Stable tag: 1.4
 License: GPLv3
 
@@ -83,7 +83,7 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 * 🦊 [Check out our WooCommerce Page Builder Extension](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
 
-= 1.4 - November 30th 2018 =
+= 1.4 - December 11th 2018 =
 
 = Bug Fixes: =
 * Issue [#956](https://github.com/live-composer/live-composer-page-builder/issues/956): Meta module comment URL doesn't link to the page comments
@@ -107,7 +107,6 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 * Issue [#505](https://github.com/live-composer/live-composer-page-builder/issues/505): Improve parallax
 * Issue [#482](https://github.com/live-composer/live-composer-page-builder/issues/482): Change pagination text
 * Issue [#348](https://github.com/live-composer/live-composer-page-builder/issues/348): Make sure all the modules with images has alt tags option
-
 
 = New: =
 * Issue [#405](https://github.com/live-composer/live-composer-page-builder/issues/405): Add template for "Not Found" on search results
