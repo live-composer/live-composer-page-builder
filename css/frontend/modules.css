@@ -1154,6 +1154,7 @@
 
 					#dslc-content .dslc-testimonial-author-avatar {
 						border: 0 transparent solid;
+						float: left;
 					}
 
 					#dslc-content .dslc-testimonial-author-avatar img {
@@ -1161,7 +1162,8 @@
 						height: auto;
 					}
 
-				#dslc-content .dslc-testimonial-avatar-aside .dslc-testimonial-author-main {
+				#dslc-content .dslc-testimonial-avatar-aside .dslc-testimonial-author-main,
+				#dslc-content .dslc-testimonial-author-main {
 					overflow: hidden;
 					float: left;
 				}
