@@ -633,6 +633,7 @@ body a:focus {
 
 		.dslca-module[data-id="DSLC_Separator"],
 		.dslca-module[data-id="DSLC_Notification"],
+		.dslca-module[data-id="DSLC_Sliders"],
 		.dslca-module[data-id="DSLC_Staff"] {
 			margin-right: 14px;
 		}
