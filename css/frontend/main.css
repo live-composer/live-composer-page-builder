@@ -1286,3 +1286,7 @@ body:not(.dslca-enabled) .dslc-sticky-row {
 	left: 0;
 	z-index: 1;
 }
+
+body em {
+	font-style: italic;
+}

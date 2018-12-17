@@ -137,3 +137,6 @@ body .dslca-module-edit-option-text-shadow-single input[type="text"].dslca-modul
 	vertical-align: middle;
 }
 
+body em {
+	font-style: italic;
+}

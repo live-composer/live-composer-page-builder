@@ -2365,3 +2365,7 @@ body.dslca-enabled .dslc-notification-box-has-timeout {
 		overflow: visible;
 	}
 }
+
+body em {
+	font-style: italic;
+}
