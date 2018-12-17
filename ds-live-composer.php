@@ -135,7 +135,7 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) && version_compare( PHP_VERSION, '5.3.0
 	include DS_LIVE_COMPOSER_ABS . '/includes/other.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/options.extension.class.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/upgrade.class.php';
-	include DS_LIVE_COMPOSER_ABS . '/includes/editor-messages.php';
+	// include DS_LIVE_COMPOSER_ABS . '/includes/editor-messages.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/class-dslc-cache.php'; // Simple HTML/CSS caching class.
 	include DS_LIVE_COMPOSER_ABS . '/includes/plugin-updates/lc-license-manager.class.php';
 

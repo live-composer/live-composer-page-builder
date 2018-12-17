@@ -35,9 +35,9 @@ final class DSLC_Upgrade {
 			self::update_1_3_10();
 		} */
 
-		if ( is_array( $versions_log ) && ! in_array( '1.3.16', $versions_log ) ) {
+		/* if ( is_array( $versions_log ) && ! in_array( '1.3.16', $versions_log ) ) {
 			self::update_1_3_16();
-		}
+		} */
 
 		// Update versions update history with new version.
 		if ( ! in_array( $curr_version, $versions_log ) ) {
@@ -65,11 +65,11 @@ final class DSLC_Upgrade {
 	/**
 	 * Update ad bar with version 1.3.16.
 	 */
-	public static function update_1_3_16() {
+	/* public static function update_1_3_16() {
 
 		// Update upsell messages in the editing interface.
 		$editor_messages = new LC_Editor_Messages();
 		$editor_messages->delete_all_messages();
 		$editor_messages->on_plugin_install();
-	}
+	} */
 }
