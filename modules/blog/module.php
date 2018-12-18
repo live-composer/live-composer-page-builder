@@ -3327,7 +3327,23 @@ function dslc_module_blog_output( $atts, $content = null ) {
 		$args['post_status'] = array( 'publish', 'private' );
 	}
 
-	if ( 'categories' == $options['filter_posts_by'] ) {
+	if ( 'tags' == $options['filter_posts_by'] ) {
+
+		// Tags args.
+		if ( isset( $options['tags'] ) && $options['tags'] != '' ) {
+
+			$tags_array = explode( ' ', trim( $options['tags'] ) );
+			
+			$args['tax_query'] = array(
+				array(
+					'taxonomy' => 'post_tag',
+					'field' => 'term_id',
+					'terms' => $tags_array,
+				),
+			);
+		}
+	
+	} else {
 
 		// Category args
 		if ( isset( $options['categories'] ) && $options['categories'] != '' ) {
@@ -3343,22 +3359,6 @@ function dslc_module_blog_output( $atts, $content = null ) {
 				),
 			);
 
-		}
-	
-	} else {
-
-		// Tags args.
-		if ( isset( $options['tags'] ) && $options['tags'] != '' ) {
-
-			$tags_array = explode( ' ', trim( $options['tags'] ) );
-			
-			$args['tax_query'] = array(
-				array(
-					'taxonomy' => 'post_tag',
-					'field' => 'term_id',
-					'terms' => $tags_array,
-				),
-			);
 		}
 	}
 
