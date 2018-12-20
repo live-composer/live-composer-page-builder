@@ -3,7 +3,7 @@ Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page, page builder plugin, drag-n-drop page builder
 Requires at least: 4.7
 Tested up to: 5.0
-Stable tag: 1.4
+Stable tag: 1.4.1
 License: GPLv3
 
 Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
@@ -82,6 +82,15 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 = FOR OUR PRO USERS: =
 * 🦊 [Check out our WooCommerce Page Builder Extension](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
+
+= 1.4.1 - December 20th 2018 =
+
+= Bug Fixes: =
+* Issue [#969](https://github.com/live-composer/live-composer-page-builder/issues/969): Module “Blog” is not filtering posts by category
+* Issue [#965](https://github.com/live-composer/live-composer-page-builder/issues/965): Italics not working in WP Editor
+
+= Improved: =
+* Issue [#966](https://github.com/live-composer/live-composer-page-builder/issues/966): Delete Advertising Bar
 
 = 1.4 - December 11th 2018 =
 
