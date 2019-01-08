@@ -1,0 +1,30 @@
+{
+  "name": "block-pages",
+  "version": "1.0.0",
+  "description": "Gutenberg Live Composer",
+  "main": "block.js",
+  "scripts": {
+    "build": "cross-env BABEL_ENV=default NODE_ENV=production webpack",
+    "dev": "cross-env BABEL_ENV=default webpack --watch"
+  },
+  "author": "Casapciuc Dmitrii",
+  "license": "ISC",
+  "dependencies": {
+    "@wordpress/api-fetch": "^2.2.6",
+    "@wordpress/components": "^7.0.4",
+    "@wordpress/compose": "^3.0.0",
+    "@wordpress/core-data": "^2.0.15",
+    "@wordpress/editor": "^9.0.7",
+    "axios": "^0.18.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "cross-env": "^5.2.0",
+    "webpack": "^4.28.1",
+    "webpack-cli": "^3.1.2"
+  }
+}

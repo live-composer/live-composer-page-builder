@@ -138,6 +138,7 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) && version_compare( PHP_VERSION, '5.3.0
 	// include DS_LIVE_COMPOSER_ABS . '/includes/editor-messages.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/class-dslc-cache.php'; // Simple HTML/CSS caching class.
 	include DS_LIVE_COMPOSER_ABS . '/includes/plugin-updates/lc-license-manager.class.php';
+	// include DS_LIVE_COMPOSER_ABS . '/includes/gutenberg-blocks/init.php';
 
 	$cap_page = dslc_get_option( 'lc_min_capability_page', 'dslc_plugin_options_access_control' );
 	if ( ! $cap_page ) { $cap_page = 'publish_posts';
