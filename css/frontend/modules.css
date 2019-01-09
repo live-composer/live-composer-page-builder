@@ -175,7 +175,7 @@
 		}
 
 			#dslc-content .dslc-blog-post-thumb {
-				margin-bottom: 20px;
+				/*margin-bottom: 20px;*/
 				overflow: hidden;
 				position: relative;
 				line-height: 0;
@@ -1133,7 +1133,7 @@
 			}
 
 			#dslc-content .dslc-testimonial-quote {
-				border-bottom: 0 solid transparent;
+				/*border-bottom: 0 solid transparent;*/
 			}
 
 			#dslc-content .dslc-testimonial-author {
