@@ -70,7 +70,7 @@ function dslc_init_accordion() {
 			dslcInactive.addClass('dslc-inactive');
 			jQuery('.dslc-accordion-content', dslcInactive).hide();
 
-			if ( ! $("body").hasClass('dslca-enabled') ) {
+			if ( ! jQuery("body").hasClass('dslca-enabled') ) {
 				dslcInactive.find('.dslca-icon').removeClass('dslc-icon-minus').addClass('dslc-icon-plus');
 			}
 		} else {
@@ -78,7 +78,7 @@ function dslc_init_accordion() {
 			dslcAll.addClass('dslc-inactive');
 			jQuery('.dslc-accordion-content', dslcAll).hide();
 
-			if ( ! $("body").hasClass('dslca-enabled') ) {
+			if ( ! jQuery("body").hasClass('dslca-enabled') ) {
 				dslcAll.find('.dslca-icon').removeClass('dslc-icon-minus').addClass('dslc-icon-plus');
 			}
 		}
