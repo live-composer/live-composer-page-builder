@@ -1216,10 +1216,10 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 								$thumb_alt = get_post_meta( $gallery_image, '_wp_attachment_image_alt', true );
 								if ( ! $thumb_alt ) { $thumb_alt = ''; }
 
-								$thumb_title = get_the_title( get_post_thumbnail_id() );
+								$thumb_title = get_the_title( $gallery_image );
 								if ( ! $thumb_title ) { $thumb_title = ''; }
 
-								$thumb_caption = wp_get_attachment_caption( get_post_thumbnail_id() );
+								$thumb_caption = wp_get_attachment_caption( $gallery_image );
 								if ( ! $thumb_caption ) { $thumb_caption = ''; }
 
 								?><div class="dslc-slider-item"><span class="dslc-caption"><?php if ( $caption_state ) { echo $thumb_caption; } ?></span><img class="<?php echo $img_class; ?>" src="<?php echo $gallery_image_src; ?>" alt="<?php echo $thumb_alt; ?>" title="<?php echo $thumb_title; ?>" <?php echo $srcset; ?> <?php echo $sizes; ?> /></div><?php
