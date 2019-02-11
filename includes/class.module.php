@@ -2854,7 +2854,7 @@ class DSLC_Module {
 		);
 
 		// Get current presets.
-		$presets = get_option( 'dslc_presets' );
+		$presets = get_option( 'dslc_presets', false );
 		if ( false !== $presets ) {
 			$presets = maybe_unserialize( $presets );
 			foreach ( $presets as $preset ) {
