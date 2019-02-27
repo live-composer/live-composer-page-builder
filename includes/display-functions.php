@@ -28,6 +28,10 @@ function dslc_display_composer() {
 	global $dslc_active;
 
 	$screen = get_current_screen();
+	
+	if ( ! is_object( $screen ) ) {
+		return;
+	}
 
 	if ( $screen->id != 'toplevel_page_livecomposer_editor' ) {
 
