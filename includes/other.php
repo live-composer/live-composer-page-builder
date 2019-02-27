@@ -108,6 +108,10 @@ function dslc_icons_modal() {
 			'toplevel_page_livecomposer_editor',
 			'nav-menus',
 		);
+	
+	if ( ! is_object( $screen ) ) {
+		return;
+	}
 
 	if ( ! in_array( $screen->id, $screens_with_icon_modal, true ) ) {
 		return;
