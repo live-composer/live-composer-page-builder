@@ -70,6 +70,10 @@ function dslc_editing_screen() {
 function dslc_editing_screen_content() {
 
 	$screen = get_current_screen();
+	
+	if ( ! is_object( $screen ) ) {
+		return;
+	}
 
 	// Proceed only if current page is Live Composer editing page in WP Admin
 	// and has access role.
@@ -188,8 +192,12 @@ add_action( 'admin_head', 'dslc_editing_screen_head' );
  */
 function dslc_editing_screen_footer() {
 	$screen = get_current_screen();
+	
+	if ( ! is_object( $screen ) ) {
+		return;
+	}
 
-	if ( 'toplevel_page_livecomposer_editor' !== $screen->id || ! current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+	if ( ! current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) || 'toplevel_page_livecomposer_editor' !== $screen->id ) {
 		return;
 	}
 
@@ -240,6 +248,10 @@ add_action( 'wp_head', 'dslc_preview_area_head' );
  */
 function dslc_editing_screen_title( $title ) {
 	$screen = get_current_screen();
+	
+	if ( ! is_object( $screen ) ) {
+		return;
+	}
 
 	if ( 'toplevel_page_livecomposer_editor' !== $screen->id || ! isset( $_GET['page_id'] ) ) {
 		return $title;
