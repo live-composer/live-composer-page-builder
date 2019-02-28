@@ -880,11 +880,12 @@ class DSLC_Image extends DSLC_Module {
 
 				<?php
 				
+
 				$parsed = parse_url( $anchor_href );
-				if ( empty( $parsed['scheme'] ) ) {
-					$image_url = '//' . ltrim( $anchor_href, '/' );
-				} else {
+				if ( '/' === $anchor_href || ! empty( $parsed['scheme'] ) ) {
 					$image_url = $anchor_href;
+				} else {
+					$image_url = '//' . ltrim( $anchor_href, '/' );
 				}
 
 				$srcset = '';
