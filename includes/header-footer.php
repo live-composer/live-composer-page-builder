@@ -607,9 +607,9 @@ function dslc_hf_get_headerfooter( $post_id = false, $hf_type = 'header' ) {
 
 		// ============================================================
 		if ( 'fixed' === $position ) {
-			$editing_parametters .= ' data-editing-sublabel="' . __( 'To preview FIXED positioning click on "Hide Editor" button.','live-composer-page-builder' ) . '"';
+			$editing_parametters .= ' data-editing-sublabel="' . __( 'To preview FIXED positioning click on [Hide Editor] button.','live-composer-page-builder' ) . '"';
 		} elseif ( 'absolute' === $position ) {
-			$editing_parametters .= ' data-editing-sublabel="' . __( 'To preview ABSOLUTE positioning click on "Hide Editor" button.','live-composer-page-builder' ) . '"';
+			$editing_parametters .= ' data-editing-sublabel="' . __( 'To preview ABSOLUTE positioning click on [Hide Editor] button.','live-composer-page-builder' ) . '"';
 		}
 	}
 
