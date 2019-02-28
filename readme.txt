@@ -83,7 +83,8 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 * 🦊 [Check out our WooCommerce Page Builder Extension](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
 
-= 1.4.2 - February XX 2018 =
+= 1.4.2 - February 28th 2018 =
+* WordPress 5.1 is not compatible with older PHP versions anymore. If you have issues after updating WordPress or our plugin, please ask your hosting to upgrade PHP version or do it yourself via the control panel.
 * Issue [#979](https://github.com/live-composer/live-composer-page-builder/issues/979): Fix php notices related to presets functionality.
 
 = 1.4.1 - January 10th 2018 =
