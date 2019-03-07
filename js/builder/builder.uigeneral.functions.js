@@ -34,7 +34,7 @@ jQuery(document).on( 'click', '.dslca-show-js-error-hook', function(e){
 
 		LiveComposer.Builder.UI.CModalWindow({
 
-			title: '<a href="https://livecomposerplugin.com/support/support-request/" target="_blank"><span class="dslca-icon dslc-icon-comment"></span> &nbsp; Open Support Ticket</a>',
+			title: '<a href="https://livecomposerplugin.com/support/" target="_blank"><span class="dslca-icon dslc-icon-comment"></span> &nbsp; Get Support Info</a>',
 			content: '<span class="dslca-error-report">' + errors_container.value + '</span>',
 		});
 	}
