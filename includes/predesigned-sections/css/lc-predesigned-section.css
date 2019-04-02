@@ -53,14 +53,17 @@
 
 
 .lcps_cat {
-	padding: 8px 12px;
+	padding: 12px 16px;
     display: block;
-    color: #eee;
+	color: #eee;
+	font-family: "Open Sans";
     font-size: 14px;
-    font-weight: 400;
+	font-weight: 600;
+	/* letter-spacing: .5px; */
     line-height: 18px;
 	margin: 0;
 	cursor: pointer;
+	text-transform: capitalize;
 }
 
 .lcps_cat__icon {
@@ -68,15 +71,46 @@
 	margin-right: 10px;
 }
 
+.lcps_cat__icon {
+  display: inline;
+  width: auto;
+  height: auto;
+  line-height: normal;
+  vertical-align: baseline;
+  background-image: none;
+  background-position: 0% 0%;
+  background-repeat: repeat;
+  margin-top: 0;
+
+  font-family: DSLCFontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  -webkit-font-smoothing: antialiased;
+}
+
+
+.lcps_cat__icon::before {
+	content: "\f005";
+}
+
+.lcps_cat__icon.content::before {
+	content: "\f036";
+}
+
+.lcps_cat__icon.features::before {
+	content: "\f0a3";
+}
+
 .lcps_cat:hover,
 .lcps_cat--selected {
 	background-color: #1c1e21;
-    color: #00b9eb;
+    color: #fff;
 }
 
 .lcps_cat:hover .lcps_cat__icon,
 .lcps_cat--selected .lcps_cat__icon {
-	color: #00b9eb;
+	color: #fff;
 }
 
 /* (!) small fix :) - must be behind #lcps-panel */

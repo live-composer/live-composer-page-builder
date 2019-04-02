@@ -156,7 +156,11 @@ var lcps = {
 	},
 
 	addSection: function ( el ) {
+		console.log( "addSection: function :" );
+		console.log( "el:" ); console.log( el );
 		var dslc_modules_section_code = el.find( '.shortcode' ).html();
+
+		console.log( "dslc_modules_section_code:" ); console.log( dslc_modules_section_code );
 
 		if ( !dslc_modules_section_code )
 			return;
@@ -259,6 +263,7 @@ jQuery( window ).load( function() {
 	jQuery(  '#lcps-panel ul.elements li' ).off( 'click' );
 	jQuery(  '.lcps-designs .lcps-designs__single' ).on( 'click', function() {
 		console.log('tttt');
+		console.log( "jQuery( this ):" ); console.log( jQuery( this ) );
 		lcps.addSection( jQuery( this ) );
 	});
 

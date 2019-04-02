@@ -16,10 +16,10 @@ if ( ! class_exists( 'LC_Predesigned_Sections' ) ) :
 	class LC_Predesigned_Sections {
 		protected $version = DS_LIVE_COMPOSER_VER;
 		protected $design_lib_url = 'https://livecomposerplugin.com/designs/';
-	
+
 		// Main post type name.
-		const POST_TYPE_NAME = 'lc_desing_sections';
-		const POST_TAXONOMY_CATEGORY = 'lc_desing_sections_category';
+		const POST_TYPE_NAME = 'lc-designs';
+		const POST_TAXONOMY_CATEGORY = 'lc-designs-category';
 
 		public function __construct() {
 
@@ -30,15 +30,14 @@ if ( ! class_exists( 'LC_Predesigned_Sections' ) ) :
 
 			// Add JavaScript and CSS.
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-
 			// Register new custom post type for sections storage.
-			add_action( 'init', array(  $this, 'custom_post_type' ) );
-
+			add_action( 'init', array( $this, 'custom_post_type' ) );
 			// Add plugin HTML in page footer.
-			add_action( 'admin_footer', array( $this, 'add_panel_html' ) );
-			
-			//$this->add_predesigned_sections_from_xml();
-			//add_action( 'init', array(  $this, 'add_predesigned_sections_from_xml' ) );
+			add_action( 'admin_footer', array( $this, 'render_panel_html' ) );
+			// 
+			add_action( 'admin_footer', array( $this, 'add_predesigned_sections_from_xml' ) );
+
+			add_action( 'admin_menu', array( $this, 'add_admin_lc_submenu' ) );
 		}
 
 		/**
@@ -85,9 +84,11 @@ if ( ! class_exists( 'LC_Predesigned_Sections' ) ) :
 		 * Hook: this plugin activation action.
 		 */
 		static public function add_predesigned_sections_from_xml() {
-			
-			// Check count of custom post types in db (if empty add from xml)
-			if ( wp_count_posts( self::POST_TYPE_NAME )->publish > 0 ) {
+			$sections = wp_count_posts( self::POST_TYPE_NAME );
+			$published_sections = $sections->publish;
+
+			// Already have some sections imported. Stop processing.
+			if ( $published_sections > 0 ) {
 				return;
 			}
 
@@ -95,22 +96,33 @@ if ( ! class_exists( 'LC_Predesigned_Sections' ) ) :
 			$parser = new LCPS_WRX_parser();
 
 			$files = array(
-				//'content.xml',
-				// 'counter.xml',
-				// 'features.xml',
-				// 'pricing-tablets.xml',
-				'test.xml',
-				'test-media.xml',
+				'content.xml',
+				'counter.xml',
+				'features.xml',
+				'pricing-tables.xml',
+				// 'test.xml',
+				// 'test-media.xml',
 			);
+
+			$all_parsed_posts = array();
 
 			foreach ( $files as $key => $file ) {
 				$xml_file = LCPS_XML_FILE . $file;
 
 				if ( file_exists( $xml_file ) ) {
-					// PS XML From plugin
-					$parser->posts = $parser->parse( $xml_file );
-					$parser->process_posts();
+					$parsed_posts = $parser->parse( $xml_file );
+
+					// PS XML From plugin.
+					if ( is_array( $parsed_posts ) && isset( $parsed_posts['posts'] ) ) {
+						$all_parsed_posts = array_merge( $all_parsed_posts, $parsed_posts['posts'] );
+					}
 				}
+			}
+
+			if ( count( $all_parsed_posts ) ) {
+				$all_parsed_posts['posts'] = $all_parsed_posts;
+				$parser->posts = $all_parsed_posts;
+				$parser->process_posts();
 			}
 		}
 
@@ -120,11 +132,11 @@ if ( ! class_exists( 'LC_Predesigned_Sections' ) ) :
 		static public function add_admin_lc_submenu() {
 			global $dslc_plugin_options;
 
-			// lc_desing_sections
+			// lc-designs
 			add_submenu_page(
 				'dslc_plugin_options',
-				'Predesigned Sections',
-				'Predesigned Sections',
+				__( 'Section Designs', 'live-composer-page-builder' ),
+				'Section Designs',
 				'activate_plugins',
 				'edit.php?post_type=' . self::POST_TYPE_NAME,
 				null
@@ -137,12 +149,12 @@ if ( ! class_exists( 'LC_Predesigned_Sections' ) ) :
 		private function get_all_sections() {
 			$result = array();
 
-			$posts = get_posts(array(
+			$posts = get_posts( array(
 				'posts_per_page' => 9999, // Never use -1. It's too slow.s
 				'post_type'      => self::POST_TYPE_NAME,
 				'orderby'        => 'post_title',
 				'order'          => 'ASC',
-			));
+			) );
 
 			// Add meta fields.
 			foreach ( $posts as $post ) {
@@ -169,6 +181,8 @@ if ( ! class_exists( 'LC_Predesigned_Sections' ) ) :
 				foreach ( $tmp['lcps_category'] as $categoryName ) {
 					$result[ $categoryName ][ $tmp['post_title'] ] = $tmp;
 				}
+
+				// $post['dslc_code'] = get_post_meta( $post->ID, 'dslc_code', true );
 			}
 
 			return $result;
@@ -209,18 +223,20 @@ if ( ! class_exists( 'LC_Predesigned_Sections' ) ) :
 		/**
 		 * Main html part.
 		 */
-		public function add_panel_html() {
+		public function render_panel_html() {
 			$groups = $this->get_all_sections();
+
 			// if ( empty( $groups ) ) {
 			// 	return;
 			// }
-			
-			$dir = plugin_dir_path( __FILE__ );
-			$dir_path = $dir . 'desings/sections/content.xml';
-			$dslc_code = file_get_contents( $dir_path );
-			
-			//dimaphperror( file_get_contents( $dir_path ) );
 
+			// $dir = plugin_dir_path( __FILE__ );
+			// $dir_path = $dir . 'desings/sections/content.xml';
+			// $dslc_code = file_get_contents( $dir_path );
+
+
+			// $dslc_code = get_post_custom_values( 'dslc_code', $element['ID'] );
+			/*
 			$groups = array (
 				'headers' => array (
 					'icon'=>'dashicons dashicons-welcome-learn-more',
@@ -360,6 +376,7 @@ if ( ! class_exists( 'LC_Predesigned_Sections' ) ) :
 					)
 				),
 			);
+			*/
 
 			// ( ! ) HTML output:
 			echo '<div id="lcps-panel">';
@@ -367,12 +384,12 @@ if ( ! class_exists( 'LC_Predesigned_Sections' ) ) :
 				echo '<div class="lcps-panel__body">';
 					echo '<ul class="lcps-cats">';
 
-						// Select
+					// Select
 					// 	reset( $groups );
 					// 	$first_key = key( $groups );
 					// 	echo '<div class="groupTitle noselect"><span class="title">' . $first_key . '</span><span class="lc-icon-list-item-icon dslc-icon-caret-down"></span></div>';
 
-					// 	// Menu
+					// Menu
 					// 	echo '<ul class="menu noselect">';
 					// foreach ( $groups as $group_title => $group ) {
 					// 	echo '<li class="noselect" rel="lcps-g-' . str_replace( array( ':', '\\', '/', '*', ' ' ), '', $group_title ) . '" >' . $group_title . '</li>';
@@ -383,7 +400,7 @@ if ( ! class_exists( 'LC_Predesigned_Sections' ) ) :
 						$count = 0;
 						foreach ( $groups as $group_key => $group_category ) {
 							?>
-								<li class="lcps_cat" data-design-category="<?php echo esc_attr( $group_key ); ?>"><span class="lcps_cat__icon <?php echo esc_attr( $group_category['icon'] ); ?>"></span><?php echo esc_attr( $group_category['title'] ); ?></li>
+								<li class="lcps_cat" data-design-category="<?php echo esc_attr( $group_key ); ?>"><span class="lcps_cat__icon <?php echo esc_attr( $group_key ); ?>"></span><?php echo esc_attr( $group_key ); ?></li>
 
 							<?php
 						}
@@ -393,16 +410,13 @@ if ( ! class_exists( 'LC_Predesigned_Sections' ) ) :
 				?>
 				<div class="lcps-designs">
 				<?php
-				foreach ( $groups as $group_key => $group_category ) :
+				foreach ( $groups as $group_key => $group_designs ) :
 					?>
 						<ul class="lcps-designs__category <?php echo esc_attr( $group_key ) ?>">
-							<?php foreach ( $group_category['items'] as $design_key => $design ) : ?>
-								<?php
-								//	dimaphperror( $design );
-								?>
-								<li class="lcps-designs__single">
-									<img src="<?php echo esc_attr( $this->design_lib_url . $design['set'] . '/' . $design['image'] . '.png' ) ?>" alt="" />
-									<span class="shortcode" style="display: none;" ><?php echo $design['file']; ?></span';
+							<?php foreach ( $group_designs as $design_title => $design_data ) : ?>
+								<li class="lcps-designs__single" ondragstart="return false" ondrop="return false" >
+									<img src="<?php echo esc_attr( $design_data['lcps_img'] ) ?>" alt="" title="<?php esc_html_e( 'Click to insert', 'live-composer-page-builder' ) ?>" ondragstart="return false" ondrop="return false" />
+									<span class="shortcode" style="display: none;" ><?php echo get_post_meta( $design_data['ID'], 'dslc_code', true ); ?></span>
 								</li>
 							<?php endforeach; ?>
 						</ul>
@@ -412,60 +426,31 @@ if ( ! class_exists( 'LC_Predesigned_Sections' ) ) :
 			echo '</div>';
 		}
 
-		private function _panel_elements_html( $element ) {
-			$result = '';
-			$dslc_code = get_post_custom_values( 'dslc_code', $element['ID'] );
-
-			$result .= '<li class="ps">';
-			if ( ! empty( $element['lcps_img'] ) ) {
-				$result .= '<div class="img-form"><div><img src="' . $element['lcps_img'] . '" /><span>Click to insert on the page</span></div></div>';
-			}
-
-				// Options menu
-				$result .= '
-				<ul class="options">
-					<li class="dropdown">
-						<span title="Options" class="lc-icon-list-item-icon dslc-icon-gear"></span>
-						<ul style="display: none;" class="dropdown-menu">
-							<li><a target="__blank" class="editElement" href="/wp-admin/admin.php?page=livecomposer_editor&page_id=' . $element['ID'] . '">Edit section</a></li>
-							<li><a class="deleteElement" href="#" rel="' . $element['ID'] . '">Delete section</a></li>
-						</ul>
-					</li>
-				</ul>';
-
-				$result .= '<div class="title">' . $element['post_title'] . '</div>';
-
-				$result .= '<div class="shortcode" style="display: none;" >' . $dslc_code[0] . '</div>';
-			$result .= '</li>';
-
-			return $result;
-		}
-
 		/**
 		 * Register new custom post type to store sections code.
 		 */
 		static public function custom_post_type() {
 			$args = array(
 				'labels'             => array(
-					'name'               => 'Predesigned sections for Live Composer',
-					'singular_name'      => 'Predesigned sections for Live Composer',
-					'add_new'            => __( 'Add New', 'section' ),
-					'add_new_item'       => __( 'Add New Section' ),
-					'edit_item'          => __( 'Edit Section' ),
-					'new_item'           => __( 'New Section' ),
-					'all_items'          => __( 'All Sections' ),
-					'view_item'          => __( 'View Section' ),
-					'search_items'       => __( 'Search Sections' ),
-					'not_found'          => __( 'No sections found' ),
-					'not_found_in_trash' => __( 'No sections found in the Trash' ),
+					'name'               => 'Section Designs',
+					'singular_name'      => 'Section',
+					'add_new'            => __( 'Add New', 'section', 'live-composer-page-builder' ),
+					'add_new_item'       => __( 'Add New Section', 'live-composer-page-builder' ),
+					'edit_item'          => __( 'Edit Section', 'live-composer-page-builder' ),
+					'new_item'           => __( 'New Section', 'live-composer-page-builder' ),
+					'all_items'          => __( 'All Sections', 'live-composer-page-builder' ),
+					'view_item'          => __( 'View Section', 'live-composer-page-builder' ),
+					'search_items'       => __( 'Search Sections', 'live-composer-page-builder' ),
+					'not_found'          => __( 'No sections found', 'live-composer-page-builder' ),
+					'not_found_in_trash' => __( 'No sections found in the Trash', 'live-composer-page-builder' ),
 					'parent_item_colon'  => '',
-					'menu_name'          => 'Predesigned sections',
+					'menu_name'          => 'Section Designs',
 				),
-				'taxonomies'         => array( 'lc_desing_sections_category' ),
+				'taxonomies'         => array( 'lc-designs-category' ),
 				'public'             => true,
 				'publicly_queryable' => true,
 				'show_ui'            => true,
-				'show_in_menu'       => true,
+				'show_in_menu'       => false,
 				'query_var'          => true,
 				'capability_type'    => 'post',
 				'has_archive'        => true,
@@ -474,7 +459,7 @@ if ( ! class_exists( 'LC_Predesigned_Sections' ) ) :
 				'supports'           => array( 'title', 'editor', 'custom-fields' ),
 			);
 
-			register_post_type( 'lc_desing_sections', $args );
+			register_post_type( self::POST_TYPE_NAME, $args );
 			self::custom_taxonomy();
 		}
 
@@ -483,23 +468,23 @@ if ( ! class_exists( 'LC_Predesigned_Sections' ) ) :
 		 */
 		static public function custom_taxonomy() {
 			$labels = array(
-				'name'                       => _x( 'Sections categories', 'Taxonomy General Name', 'text_domain' ),
-				'singular_name'              => _x( 'Sections category', 'Taxonomy Singular Name', 'text_domain' ),
-				'menu_name'                  => __( 'Taxonomy', 'text_domain' ),
-				'all_items'                  => __( 'All Items', 'text_domain' ),
-				'parent_item'                => __( 'Parent Item', 'text_domain' ),
-				'parent_item_colon'          => __( 'Parent Item:', 'text_domain' ),
-				'new_item_name'              => __( 'New Item Name', 'text_domain' ),
-				'add_new_item'               => __( 'Add New Item', 'text_domain' ),
-				'edit_item'                  => __( 'Edit Item', 'text_domain' ),
-				'update_item'                => __( 'Update Item', 'text_domain' ),
-				'view_item'                  => __( 'View Item', 'text_domain' ),
-				'separate_items_with_commas' => __( 'Separate items with commas', 'text_domain' ),
-				'add_or_remove_items'        => __( 'Add or remove items', 'text_domain' ),
-				'choose_from_most_used'      => __( 'Choose from the most used', 'text_domain' ),
-				'popular_items'              => __( 'Popular Items', 'text_domain' ),
-				'search_items'               => __( 'Search Items', 'text_domain' ),
-				'not_found'                  => __( 'Not Found', 'text_domain' ),
+				'name'                       => _x( 'Sections categories', 'Taxonomy General Name', 'live-composer-page-builder' ),
+				'singular_name'              => _x( 'Sections category', 'Taxonomy Singular Name', 'live-composer-page-builder' ),
+				'menu_name'                  => __( 'Taxonomy', 'live-composer-page-builder' ),
+				'all_items'                  => __( 'All Items', 'live-composer-page-builder' ),
+				'parent_item'                => __( 'Parent Item', 'live-composer-page-builder' ),
+				'parent_item_colon'          => __( 'Parent Item:', 'live-composer-page-builder' ),
+				'new_item_name'              => __( 'New Item Name', 'live-composer-page-builder' ),
+				'add_new_item'               => __( 'Add New Item', 'live-composer-page-builder' ),
+				'edit_item'                  => __( 'Edit Item', 'live-composer-page-builder' ),
+				'update_item'                => __( 'Update Item', 'live-composer-page-builder' ),
+				'view_item'                  => __( 'View Item', 'live-composer-page-builder' ),
+				'separate_items_with_commas' => __( 'Separate items with commas', 'live-composer-page-builder' ),
+				'add_or_remove_items'        => __( 'Add or remove items', 'live-composer-page-builder' ),
+				'choose_from_most_used'      => __( 'Choose from the most used', 'live-composer-page-builder' ),
+				'popular_items'              => __( 'Popular Items', 'live-composer-page-builder' ),
+				'search_items'               => __( 'Search Items', 'live-composer-page-builder' ),
+				'not_found'                  => __( 'Not Found', 'live-composer-page-builder' ),
 			);
 			$args = array(
 				'labels'                     => $labels,
@@ -510,14 +495,14 @@ if ( ! class_exists( 'LC_Predesigned_Sections' ) ) :
 				'show_in_nav_menus'          => true,
 				'show_tagcloud'              => true,
 			);
-			register_taxonomy( 'lc_desing_sections_category', array( 'lc_desing_sections' ), $args );
+			register_taxonomy( self::POST_TAXONOMY_CATEGORY, array( self::POST_TYPE_NAME ), $args );
 		}
 
 		/**
 		 * Load JS and CSS files while LC in editing mode.
 		 */
 		public function enqueue_scripts( $hook ) {
-						
+
 			// Output only on the LC editing page.
 			if ( 'toplevel_page_livecomposer_editor' != $hook ) {
 				return;
@@ -526,15 +511,5 @@ if ( ! class_exists( 'LC_Predesigned_Sections' ) ) :
 			wp_enqueue_style( 'lc-predesigned-section-style', plugins_url( '/css/lc-predesigned-section.css' , __FILE__ ), array(), $this->version, 'all' );
 			wp_enqueue_script( 'lc-predesigned-section-script',  plugins_url( '/js/lc-predesigned-section.js', __FILE__ ) ,array( 'jquery', 'hoverIntent' ), $this->version );
 		}
-
-		/**
-		 * Load JS files while LC in editing mode.
-		 */
-		// public function js_load() {
-		// 	// Load CSS only when in LC editing mode.
-		// 	if ( dslc_is_editor_active() ) {
-		// 		wp_enqueue_script( 'lc-predesigned-section-script',  plugins_url( '/js/lc-predesigned-section.js', __FILE__ ) ,array( 'jquery' ), $this->version );
-		// 	}
-		// }
 	}
 endif;

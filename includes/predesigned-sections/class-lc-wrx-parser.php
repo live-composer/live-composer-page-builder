@@ -47,7 +47,7 @@ if ( ! class_exists( 'LCPS_WRX_parser' ) ) {
 				echo __( 'Details are shown above. The importer will now try again with a different parser...' ) . '</p>';
 			}
 		}
-		
+
 		/**
 		 * Decide what the maximum file size for downloaded attachments is.
 		 * Default is 0 (unlimited), can be filtered via import_attachment_size_limit
@@ -57,7 +57,7 @@ if ( ! class_exists( 'LCPS_WRX_parser' ) ) {
 		function max_attachment_size() {
 			return apply_filters( 'import_attachment_size_limit', 0 );
 		}
-		
+
 		/**
 		 * Attempt to download a remote file attachment
 		 *
@@ -126,11 +126,13 @@ if ( ! class_exists( 'LCPS_WRX_parser' ) ) {
 		 * Note that new/updated terms, comments and meta are imported for the last of the above.
 		 */
 		public function process_posts() {
-			
+			error_log ( 'function process_posts' );
+
+
 			if ( ! function_exists( 'post_exists' ) ) {
 			    require_once( ABSPATH . 'wp-admin/includes/post.php' );
 			}
-			
+
 			$result = apply_filters( 'wp_import_posts', $this->posts );
 			if ( is_array( $result ) && isset( $result['posts'] ) ) {
 				$this->posts = $result['posts'];
@@ -223,38 +225,24 @@ if ( ! class_exists( 'LCPS_WRX_parser' ) ) {
 					$postdata = apply_filters( 'wp_import_post_data_processed', $postdata, $post );
 
 					if ( 'attachment' == $postdata['post_type'] ) {
-						
-						//dimaphperror( $postdata['post_type'] );
-						
 						$remote_url = ! empty( $post['attachment_url'] ) ? $post['attachment_url'] : $post['guid'];
-						
-						//dimaphperror( 	$remote_url );
 
 						// try to use _wp_attached file for upload folder placement to ensure the same location as the export site
 						// e.g. location is 2003/05/image.jpg but the attachment post_date is 2010/09, see media_handle_upload()
 						$postdata['upload_date'] = $post['post_date'];
-						
-						
-						//dimaphperror( $post['postmeta'] );
-						
+
 						if ( isset( $post['postmeta'] ) ) {
 							foreach ( $post['postmeta'] as $meta ) {
-								
-								dimaphperror( $meta, 'meta' );
+
 								if ( $meta['key'] == '_wp_attached_file' ) {
 									//if ( preg_match( '%^[0-9]{4}/[0-9]{2}%', $meta['value'], $matches ) ) {
 										$postdata['upload_date'] = $meta['value'];
-										
-										//dimaphperror( $post['upload_date'], 'upload_date' );
 									//}
 									break;
 								}
 							}
 						}
-						
 						$post_id = $this->process_attachment( $postdata, $remote_url );
-						
-						dimaphperror( $post_id, 'post_id' );
 
 						$comment_post_ID = $post_id = $this->process_attachment( $postdata, $remote_url );
 					} else {
@@ -533,7 +521,7 @@ if ( ! class_exists( 'LCPS_WRX_parser' ) ) {
 			}
 
 			$post['guid'] = $upload['url'];
-			
+
 			include_once( ABSPATH . 'wp-admin/includes/image.php' );
 
 			// as per wp-admin/includes/upload.php
