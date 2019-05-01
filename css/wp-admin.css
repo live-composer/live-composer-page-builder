@@ -61,3 +61,22 @@
 #post-option-dslc_project_partners a.button {
 	display: none;
 }
+
+
+/**
+ * Guttenberg UI Integration
+ */
+
+#lc-open-live-composer-button {
+	height: 33px;
+    font-size: 13px;
+	line-height: 32px;
+	margin-left: 12px;
+}
+
+#lc-open-live-composer-button img {
+	width: 17px;
+    vertical-align: middle;
+	margin-right: 4px;
+	margin-top: -3px;
+}

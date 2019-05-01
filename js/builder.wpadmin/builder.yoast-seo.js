@@ -19,8 +19,12 @@ jQuery(document).ready(function(){
 		var lcContent = jQuery('input[value="dslc_content_for_search"]').closest('tr').find('textarea').val();
 
 		// If there is LC content append
-		if ( lcContent !== 'undefined' ) {
+		if ( lcContent !== undefined ) {
+			// Classic Editor: Content available in metabox field.
 			data = data + ' ' + lcContent;
+		} else if ( window.lcAdminData.editorContentHtml !== undefined ) {
+			// Gutenberg: Content available in js variable.
+			data = data + ' ' + window.lcAdminData.editorContentHtml;
 		}
 
 		// Pass it back to Yoast

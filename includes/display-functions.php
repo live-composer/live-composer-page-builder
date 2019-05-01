@@ -28,7 +28,7 @@ function dslc_display_composer() {
 	global $dslc_active;
 
 	$screen = get_current_screen();
-	
+
 	if ( ! is_object( $screen ) ) {
 		return;
 	}
@@ -554,13 +554,13 @@ function dslc_filter_content( $content ) {
 	// Initiate simple html rendering cache.
 	$cache = new DSLC_Cache( 'html' );
 	$cache_id = $curr_id;
-	
+
 	if ( is_archive() ) {
 		$post_type_slug = get_post_type();
 		$template_id = dslc_get_archive_template_by_pt( $post_type_slug );
 		$cache_id = $template_id;
 	}
-	
+
 	if ( is_search() ) {
 		$template_id = dslc_get_option( 'search_results', 'dslc_plugin_options_archives' );
 		$cache_id = $template_id;
@@ -640,7 +640,7 @@ function dslc_filter_content( $content ) {
 		if ( is_archive() && ! $showing_404_page && ! is_author() && ! is_search() ) {
 
 			$post_type_slug = get_post_type();
-			$post_id = $post->ID; 
+			$post_id = $post->ID;
 
 			// Get ID of the page set to power the category of the current post type.
 			$template_id = dslc_get_archive_template_by_pt( $post_type_slug );
@@ -1113,7 +1113,7 @@ function dslc_module_front( $atts, $settings_raw = null ) {
             } else {
                 $module_instance->output( $settings );
 			}
-			
+
 			$output_body = ob_get_contents();
 		ob_end_clean();
 

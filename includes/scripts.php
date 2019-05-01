@@ -31,6 +31,8 @@ final class DSLC_Scripts {
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'dslc_load_fonts' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'dslc_load_scripts_admin' ) );
 		add_action( 'admin_footer', array( __CLASS__, 'dslc_inline_js_plugin_title' ) );
+		// Assets to load in the Gutenberg Block editor.
+		add_action( 'enqueue_block_editor_assets',  array( __CLASS__, 'enqueue_gutenberg_assets' ) );
 	}
 
 	/**
@@ -406,6 +408,49 @@ final class DSLC_Scripts {
 
 		</script>
 	<?php
+	}
+
+	/**
+	 * Assets to load in the Gutenberg Block editor.
+	 *
+	 * @return void
+	 */
+	public static function enqueue_gutenberg_assets() {
+		$id = get_the_ID();
+		$post_type = get_post_type( $id );
+
+		if ( dslc_can_edit_in_lc( $post_type ) &&
+				! dslc_cpt_use_templates( $post_type ) &&
+				$post_type != 'dslc_testimonials' ) {
+
+			// Get editing URL.
+			$url = DSLC_EditorInterface::get_editor_link_url( $id );
+			$js_file = 'js/builder.wpadmin/builder.gutenberg.js';
+			$editor_content_html = get_post_meta(
+				get_the_ID(),
+				'dslc_content_for_search',
+				true
+			);
+
+			$lc_gutenberg_admin_data = [
+				'toolbarIconPath' => DS_LIVE_COMPOSER_URL . 'images/icons/lc-admin-icon-dark.svg',
+				'editButtonText' => __( 'Open in Live Composer', 'live-composer-page-builder' ),
+				'noticeText' => __( 'Edit this page in the front-end page builder →', 'live-composer-page-builder' ),
+				'noticeAction' => __( 'Open in Live Composer', 'live-composer-page-builder' ),
+				'editAction' => $url,
+				'editorContentHtml' => $editor_content_html,
+			];
+
+			wp_enqueue_script(
+				'lc-gutenberg-admin',
+				DS_LIVE_COMPOSER_URL . $js_file,
+				array( 'wp-editor' ),
+				filemtime( DS_LIVE_COMPOSER_ABS . '/' . $js_file ), // Version: filemtime — Gets file modification time.
+				true
+			);
+
+			wp_localize_script( 'lc-gutenberg-admin', 'lcAdminData', $lc_gutenberg_admin_data );
+		}
 	}
 }
 
