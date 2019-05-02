@@ -76,7 +76,6 @@ jQuery(document).ready(function($){
 			// Erase value from the "Save Preset" option
 			$(this).val('');
 
-			// console.log(jQuery(this));
 			jQuery('.dslc-delete-preset').removeClass('dslc-delete-preset-hide');
 		}
 	});

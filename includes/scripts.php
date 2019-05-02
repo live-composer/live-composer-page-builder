@@ -435,7 +435,7 @@ final class DSLC_Scripts {
 			$lc_gutenberg_admin_data = [
 				'toolbarIconPath' => DS_LIVE_COMPOSER_URL . 'images/icons/lc-admin-icon-dark.svg',
 				'editButtonText' => __( 'Open in Live Composer', 'live-composer-page-builder' ),
-				'noticeText' => __( 'Edit this page in the front-end page builder →', 'live-composer-page-builder' ),
+				'noticeText' => __( 'Edit this page in the front-end page builder → ', 'live-composer-page-builder' ),
 				'noticeAction' => __( 'Open in Live Composer', 'live-composer-page-builder' ),
 				'editAction' => $url,
 				'editorContentHtml' => $editor_content_html,

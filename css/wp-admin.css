@@ -80,3 +80,17 @@
 	margin-right: 4px;
 	margin-top: -3px;
 }
+
+/* @todo: remove it after June 2019! It's a temporary fix for bug in Gutenberg */
+.components-notice.is-info .components-notice__action {
+	margin: 0;
+    padding: 0;
+    box-shadow: none;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    outline: none;
+    text-align: left;
+    color: #0073aa;
+    text-decoration: underline;
+}

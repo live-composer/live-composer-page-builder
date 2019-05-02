@@ -5,7 +5,7 @@ modules:
         - WPWebDriver
     config:
           WPWebDriver:
-              url: 'http://lc.testing'
+              url: 'http://lc-dev'
               browser: phantomjs
               port: 4444
               window_size: 1024x768
