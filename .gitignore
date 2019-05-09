@@ -31,3 +31,7 @@ tests/_support/_generated/*
 
 # GitHub Readme
 README.md
+
+# Private data
+.env
+.env.testing
