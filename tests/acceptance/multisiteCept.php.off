@@ -1,0 +1,34 @@
+<?php
+/**
+ * Codeception test suite.
+ */
+class WPFirstCest {
+	/**
+	 * Actions to take before launching the test.
+	 *
+	 * @param AcceptanceTester $I
+	 * @return void
+	 */
+	public function _before( AcceptanceTester $I ) {
+	}
+
+	/**
+	 * Test directives.
+	 *
+	 * @param AcceptanceTester $I
+	 * @return void
+	 */
+	public function tryToTest( AcceptanceTester $I ) {
+		if ( ! getenv( 'WP_MULTISITE' ) ) {
+			$scenario->skip( 'Multisite must be enabled.' );
+		}
+
+		$I = new AcceptanceTester( $scenario );
+		$I->wantTo( 'Visit WordPress network Dashboard' );
+		$I->loginAsAdmin();
+		$I->see( 'Dashboard' );
+		$I->amOnPage( '/wp-admin/network/' );
+		$I->see( 'Network Admin' );
+		$I->see( 'Create a New Site' );
+	}
+}

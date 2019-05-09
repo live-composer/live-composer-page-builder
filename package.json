@@ -17,5 +17,8 @@
     "grunt": "^1.0.4",
     "grunt-contrib-cssmin": "^3.0.0",
     "grunt-contrib-uglify": "^4.0.1"
+  },
+  "dependencies": {
+    "chromedriver": "^74.0.0"
   }
 }

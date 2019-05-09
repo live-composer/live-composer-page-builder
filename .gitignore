@@ -26,8 +26,8 @@ vendor
 bin/phantomjs
 
 # Temporary Test Files
-tests/codeception/_output/*
-tests/codeception/**/_generated
+tests/_output/*
+tests/_support/_generated/*
 
 # GitHub Readme
 README.md
