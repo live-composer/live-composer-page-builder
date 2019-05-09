@@ -613,7 +613,7 @@ function dslc_filter_content( $content ) {
 		// When DS_LIVE_COMPOSER_HF_AUTO = true LC outputs header and footer,
 		// automatically adding div .dslc-content before header
 		// and closing it after the footer.
-		if ( ! defined( 'DS_LIVE_COMPOSER_HF_AUTO' ) || DS_LIVE_COMPOSER_HF_AUTO ) {
+		if ( dslc_is_editor_active() || ! defined( 'DS_LIVE_COMPOSER_HF_AUTO' ) || DS_LIVE_COMPOSER_HF_AUTO ) {
 			$composer_wrapper_before = '<div id="dslc-content" class="dslc-content dslc-clearfix">';
 			$composer_wrapper_after = '</div>';
 		}
