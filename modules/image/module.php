@@ -831,11 +831,8 @@ class DSLC_Image extends DSLC_Module {
 				$the_image = $options['image'];
 
 				if ( empty( $options['image'] ) ) {
-
 					$the_image = $options['image_url'];
-
 				} else {
-
 					if ( ! empty( $options['resize_width'] ) || ! empty( $options['resize_height'] ) ) {
 
 						$resize = true;
@@ -868,7 +865,7 @@ class DSLC_Image extends DSLC_Module {
 
 					if ( strlen( $options['image_title'] ) === 0 ) {
 						$options['image_title'] = $image_title;
-					} elseif ( $options['image_title'] !== $image_title ) {
+					} elseif ( ! empty( $image_id ) && $options['image_title'] !== $image_title ) {
 						$image = array();
 						$image['ID'] = $image_id;
 						$image['post_title'] = $options['image_title'];
@@ -879,7 +876,7 @@ class DSLC_Image extends DSLC_Module {
 				?>
 
 				<?php
-				
+
 
 				$parsed = parse_url( $anchor_href );
 				if ( '/' === $anchor_href || ! empty( $parsed['scheme'] ) ) {
@@ -899,7 +896,7 @@ class DSLC_Image extends DSLC_Module {
 					$srcset = 'srcset="' . esc_attr( $img_srcset ) . '"';
 					$sizes = 'sizes="' . esc_attr( $img_sizes ) . '"';
 				}
-				
+
 				?>
 
 				<?php if ( 'none' !== $options['link_type'] ) : ?>
@@ -927,16 +924,11 @@ class DSLC_Image extends DSLC_Module {
 							echo apply_filters( 'dslc_text_block_render', $output_content );
 							?>
 						<?php endif; ?>
-
 					</div>
-
 				<?php endif; ?>
-
 			<?php endif; ?>
-
 		</div><!-- .dslc-image -->
 		</div>
 		<?php
-
 	}
 }

@@ -69,8 +69,6 @@
 
 		if ( typeof dslcDebug !== 'undefined' && dslcDebug ) console.log( 'dslc_hide_modal' );
 
-		console.log( 'dslc_hide_modal' );
-
 		// Vars
 		var modal = jQuery(modal);
 

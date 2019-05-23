@@ -7,10 +7,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /*
- * All Staff 
+ * All Staff
  */
 
-$args = array( 
+$args = array(
 	'post_type' => 'dslc_staff',
 	'posts_per_page' => -1,
 	'post_status' => 'publish'
@@ -31,10 +31,10 @@ foreach ( $staffs as $staff ) {
 }
 
 /*
- * All Partners 
+ * All Partners
  */
 
-$args = array( 
+$args = array(
 	'post_type' => 'dslc_partners',
 	'posts_per_page' => -1,
 	'post_status' => 'publish'

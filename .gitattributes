@@ -29,4 +29,4 @@ README.md export-ignore
 installing-grunt.txt export-ignore
 Gruntfile.js export-ignore
 
-docs export-ignore
+/docs/ export-ignore

@@ -3,7 +3,7 @@ Contributors: LiveComposer
 Tags: page builder, visual composer, visual editor, visual builder, drag and drop builder, landing page builder, frontend editor, frontend builder, landing pages, landing page, website builder, theme builder, site-builder, layout builder, drag-and-drop, builder, editor, responsive, mobile, layout, front end, frontend, Page Layout, squeeze page, page builder plugin, drag-n-drop page builder
 Requires at least: 4.7
 Tested up to: 5.2
-Stable tag: 1.4.3
+Stable tag: 1.4.4
 License: GPLv3
 
 Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
@@ -82,6 +82,13 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 = FOR OUR PRO USERS: =
 * 🦊 [Check out our WooCommerce Page Builder Extension](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
+
+= 1.4.4 - May 23rd 2019 =
+* 🕷 Bug: WordPress automatically create a page when defining the image title in LC.
+* 🆕 New text shortcode: [dslc_bloghome] – Outputs the blog index page URL ( home_url() ).
+* 🆕 New text shortcode: [dslc_archive_heading] – Heading for the archive pages.
+* 🆕 New text shortcode: [nextpost_url] and [prevpost_url] –  Output an URL to the next previous post the same way as next post link works.
+* 🆕 New text shortcode: [dslc_postpagination] –  Outputs single post pagination.
 
 = 1.4.3 - May 9th 2019 =
 * WordPress 5.1 is not compatible with older PHP versions anymore. If you have issues after updating WordPress or our plugin, please ask your hosting to upgrade PHP version or do it yourself via the control panel.
