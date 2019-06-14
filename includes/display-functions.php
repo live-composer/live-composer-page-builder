@@ -806,8 +806,7 @@ function dslc_postid_is_404_template( $post_id ) {
  *
  * @param bool $update_ids Require module unique id regeneration (on row import).
  */
-function dslc_render_content( $page_code, $update_ids = false ) {
-
+function dslc_render_content( $page_code, $update_ids = false, $is_header_footer = false ) {
 	// Transform JSON or old base64 encoded code into serialized array.
 	$page_code_array = dslc_json_decode( $page_code );
 
@@ -846,7 +845,7 @@ function dslc_render_content( $page_code, $update_ids = false ) {
 				$row_atts['give_new_id'] = 'true';
 			}
 
-			$page_html .= dslc_modules_section_front( $row_atts, $element['content'], 2 );
+			$page_html .= dslc_modules_section_front( $row_atts, $element['content'], 2, $is_header_footer );
 
 		} elseif ( 'module_area' === $element['element_type'] ) {
 
@@ -858,7 +857,7 @@ function dslc_render_content( $page_code, $update_ids = false ) {
 				$modulearea_atts['give_new_id'] = 'true';
 			}
 
-			$page_html .= dslc_modules_area_front( $modulearea_atts, $element['content'], 2 );
+			$page_html .= dslc_modules_area_front( $modulearea_atts, $element['content'], 2, $is_header_footer );
 
 		} elseif ( 'module' === $element['element_type'] ) {
 
@@ -870,8 +869,7 @@ function dslc_render_content( $page_code, $update_ids = false ) {
 				$module_atts['give_new_id'] = 'true';
 			}
 
-			$page_html .= dslc_module_front( $module_atts, $element );
-
+			$page_html .= dslc_module_front( $module_atts, $element, $is_header_footer  );
 		} // End if().
 	} // End foreach().
 
@@ -1002,7 +1000,7 @@ function dslc_json_decode( $raw_code, $ignore_migration = false ) {
  *
  * @since 1.0
  */
-function dslc_module_front( $atts, $settings_raw = null ) {
+function dslc_module_front( $atts, $settings_raw = null, $is_header_footer = false ) {
 
 	global $dslc_active;
 
@@ -1144,7 +1142,7 @@ function dslc_module_front( $atts, $settings_raw = null ) {
  * @return string           Rendered code (Not always! Needs refactoring).
  * @since 1.0
  */
-function dslc_modules_section_front( $atts, $content = null, $version = 1 ) {
+function dslc_modules_section_front( $atts, $content = null, $version = 1, $is_header_footer = false ) {
 
 	global $dslc_active;
 	$section_style = dslc_row_get_style( $atts );
@@ -1168,7 +1166,7 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1 ) {
 			$atts['show_on'] = 'desktop tablet phone';
 	}
 
-	// Unique section ID
+	// Unique section ID.
 	if ( ! isset( $atts['section_instance_id'] ) ) {
 		$atts['section_instance_id'] = dslc_get_new_module_id();
 	}
@@ -1271,8 +1269,8 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1 ) {
 	$a_prepend = '';
 	$a_append = '';
 
-	if ( $dslc_active ) {
-		$a_container_class .= 'dslc-modules-section-empty ';
+	if ( $dslc_active && ! $is_header_footer ) {
+		$a_container_class .= 'dslc-modules-section-empty dslc-modules-section-dnd';
 		$a_prepend = '<div class="dslc-modules-section-inner dslc-clearfix">';
 		$a_append = '</div>';
 	}
@@ -1386,7 +1384,7 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1 ) {
 
 					. '</div>' . $sticky_style;
 
-	if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+	if ( $dslc_active && ! $is_header_footer && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
 		$atts = dslc_encode_shortcodes_in_array( $atts );
 
@@ -1413,16 +1411,6 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1 ) {
 		$output .= dslc_decode_shortcodes( apply_filters( 'dslc_section_after', $dslc_section_after, $atts ) );
 	}
 
-	/*
-	if ( $dslc_active ) {
-		// Return the output.
-		return $output;
-	} else {
-		// Return the output.
-		return do_shortcode( $output );
-	}
-	*/
-
 	return $output; // To make caching work we do shortcodes in dslc_filter_content only.
 
 } add_shortcode( 'dslc_modules_section', 'dslc_modules_section_front' );
@@ -1436,11 +1424,12 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1 ) {
  * @return string           Rendered code (Not always! Needs refactoring).
  * @since 1.0
  */
-function dslc_modules_area_front( $atts, $content = null, $version = 1 ) {
+function dslc_modules_area_front( $atts, $content = null, $version = 1, $is_header_footer = false ) {
 
 	global $dslc_active;
 
 	$pos_class = '';
+	$admin_class = '';
 
 	// Set default module area size.
 	if ( ! isset( $atts['size'] ) ) {
@@ -1457,9 +1446,14 @@ function dslc_modules_area_front( $atts, $content = null, $version = 1 ) {
 			$pos_class = 'dslc-first-col';
 	}
 
-	$output = '<div class="dslc-modules-area dslc-col dslc-' . $atts['size'] . '-col ' . $pos_class . '" data-size="' . $atts['size'] . '">';
 
-	if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+	if ( $dslc_active && ! $is_header_footer ) {
+		$admin_class = ' dslc-modules-area-dnd';
+	}
+
+	$output = '<div class="dslc-modules-area dslc-col dslc-' . $atts['size'] . '-col ' . $pos_class . $admin_class . '" data-size="' . $atts['size'] . '">';
+
+	if ( $dslc_active && ! $is_header_footer && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
 		// Management.
 		$output .= '<div class="dslca-modules-area-manage">
@@ -1613,12 +1607,11 @@ function dslc_render_gfonts( $fonts_array ) {
 		}
 
 		$gfonts_output .= '<link href="//fonts.googleapis.com/css?family=';
-
+		$fonts_array = array_unique( $fonts_array );
 		foreach ( $fonts_array as $key => $font ) {
 			if ( 0 < $key ) {
 				$gfonts_output .= '|';
 			}
-
 			$gfonts_output .= $font;
 		}
 

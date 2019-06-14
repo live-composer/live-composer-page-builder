@@ -57,15 +57,11 @@ function dslc_dynamic_css_hook() {
  *
  * @since 1.0
  */
-function dslc_custom_css( $dslc_code = '' ) {
+function dslc_custom_css() {
 
 	// Allow theme developers to output CSS for non-standard custom post types.
 	$dslc_custom_css_ignore_check = false;
 	$dslc_custom_css_ignore_check = apply_filters( 'dslc_generate_custom_css', $dslc_custom_css_ignore_check );
-
-	if ( $dslc_code ) {
-		$dslc_custom_css_ignore_check = true;
-	}
 
 	if ( ! is_singular() &&
 		 ! is_archive() &&
@@ -78,7 +74,6 @@ function dslc_custom_css( $dslc_code = '' ) {
 		return;
 	}
 
-	global $dslc_active;
 	global $dslc_css_style;
 	global $content_width;
 	global $dslc_post_types;
@@ -89,11 +84,8 @@ function dslc_custom_css( $dslc_code = '' ) {
 	$lc_width = dslc_get_option( 'lc_max_width', 'dslc_plugin_options' );
 
 	if ( empty( $lc_width ) ) {
-
 		$lc_width = $content_width . 'px';
-
 	} else {
-
 		if ( false === strpos( $lc_width, 'px' ) && false === strpos( $lc_width, '%' ) ) {
 			$lc_width = $lc_width . 'px';
 		}
@@ -105,103 +97,95 @@ function dslc_custom_css( $dslc_code = '' ) {
 	$template_id = false;
 	$code_to_render = array();
 
-	if ( ! $dslc_code ) {
+	global $post;
 
-		global $post;
+	// If single, load template?
+	if ( is_singular( $dslc_post_types ) ) {
+		$template_id = dslc_st_get_template_id( get_the_ID() );
+	}
 
-		// If single, load template?
-		if ( is_singular( $dslc_post_types ) ) {
-			$template_id = dslc_st_get_template_id( get_the_ID() );
+	// If archive, load template?
+	if ( is_archive() && $post && ! is_author() && ! is_search() ) {
+		$post_type = get_post_type();
+
+		$template_id = dslc_get_archive_template_by_pt( $post_type );
+	}
+
+	if ( is_author() && $post ) {
+		$template_id = dslc_get_archive_template_by_pt( 'author' );
+	}
+
+	if ( is_search() && $post ) {
+		$template_id = dslc_get_archive_template_by_pt( 'search_results' );
+	}
+
+	if ( is_404() ||
+		( is_archive() && ! $post ) ||
+		( is_author() && ! $post ) ) {
+		$template_id = dslc_get_archive_template_by_pt( '404_page' );
+	}
+
+	if ( is_search() && ! $post ) {
+		$template_id = dslc_get_archive_template_by_pt( 'page_not_found' );
+	}
+
+	// Header/Footer.
+	if ( $template_id ) {
+		$header_footer = dslc_hf_get_ID( $template_id );
+	} elseif ( is_singular( $dslc_post_types ) ) {
+		$template_id = dslc_st_get_template_id( get_the_ID() );
+		$header_footer = dslc_hf_get_ID( $template_id );
+	} else {
+		$header_footer = dslc_hf_get_ID( get_the_ID() );
+	}
+
+	// ============================================================
+	// Extract code to render CSS for.
+	$header_id = false;
+	$footer_id = false;
+
+	// Header.
+	if ( $header_footer['header'] ) {
+		$header_code = get_post_meta( $header_footer['header'], 'dslc_code', true );
+
+		if ( $header_code ) {
+			$code_to_render[ $header_footer['header'] ] = $header_code;
+			$header_id = $header_footer['header'];
 		}
+	}
 
-		// If archive, load template?
-		if ( is_archive() && $post && ! is_author() && ! is_search() ) {
-			$post_type = get_post_type();
+	// Footer.
+	if ( $header_footer['footer'] ) {
+		$footer_code = get_post_meta( $header_footer['footer'], 'dslc_code', true );
 
-			$template_id = dslc_get_archive_template_by_pt( $post_type );
+		if ( $footer_code ) {
+			$code_to_render[ $header_footer['footer'] ] = $footer_code;
+			$footer_id = $header_footer['footer'];
 		}
+	}
 
-		if ( is_author() && $post ) {
-			$template_id = dslc_get_archive_template_by_pt( 'author' );
+	// Template content.
+	if ( $template_id ) {
+		$template_code = get_post_meta( $template_id, 'dslc_code', true );
+
+		if ( $template_code ) {
+			$code_to_render[ $template_id ] = $template_code;
 		}
+	}
 
-		if ( is_search() && $post ) {
-			$template_id = dslc_get_archive_template_by_pt( 'search_results' );
-		}
+	// Post/Page content.
+	$post_id = get_the_ID();
+	$code = get_post_meta( $post_id, 'dslc_code', true );
 
-		if ( is_404() ||
-			( is_archive() && ! $post ) ||
-			( is_author() && ! $post ) ) {
-			$template_id = dslc_get_archive_template_by_pt( '404_page' );
-		}
-
-		if ( is_search() && ! $post ) {
-			$template_id = dslc_get_archive_template_by_pt( 'page_not_found' );
-		}
-
-		// Header/Footer.
-		if ( $template_id ) {
-
-			$header_footer = dslc_hf_get_ID( $template_id );
-
-		} elseif ( is_singular( $dslc_post_types ) ) {
-
-			$template_id = dslc_st_get_template_id( get_the_ID() );
-			$header_footer = dslc_hf_get_ID( $template_id );
-
-		} else {
-
-			$header_footer = dslc_hf_get_ID( get_the_ID() );
-		}
-
-		// ============================================================
-		// Extract code to render CSS for.
-		$header_id = false;
-		$footer_id = false;
-
-		// Header.
-		if ( $header_footer['header'] ) {
-			$header_code = get_post_meta( $header_footer['header'], 'dslc_code', true );
-
-			if ( $header_code ) {
-				$code_to_render[ $header_footer['header'] ] = $header_code;
-				$header_id = $header_footer['header'];
-			}
-		}
-
-		// Footer.
-		if ( $header_footer['footer'] ) {
-			$footer_code = get_post_meta( $header_footer['footer'], 'dslc_code', true );
-
-			if ( $footer_code ) {
-				$code_to_render[ $header_footer['footer'] ] = $footer_code;
-				$footer_id = $header_footer['footer'];
-			}
-		}
-
-		// Template content.
-		if ( $template_id ) {
-			$template_code = get_post_meta( $template_id, 'dslc_code', true );
-
-			if ( $template_code ) {
-				$code_to_render[ $template_id ] = $template_code;
-			}
-		}
-
-		// Post/Page content.
-		$post_id = get_the_ID();
-		$code = get_post_meta( $post_id, 'dslc_code', true );
-
-		if ( $code ) {
-			$code_to_render[ $post_id ] = $code;
-		}
-	} else { // End of ! $dslc_code check.
-
-		$code = $dslc_code;
-	} // End if().
+	if ( $code ) {
+		$code_to_render[ $post_id ] = $code;
+	}
 
 	$fonts_to_output = array();
 
+	if ( 'wp_footer' == current_filter() ) {
+		echo '<div>';  // Required to pass HTML validation.
+	}
 	echo '<style type="text/css">';
 
 	$output_css = false;
@@ -260,7 +244,9 @@ function dslc_custom_css( $dslc_code = '' ) {
 	} // End foreach().
 
 	// Wrapper width.
-	echo '.dslc-modules-section-wrapper, .dslca-add-modules-section { width : ' . $lc_width . '; } ';
+	if ( 'px' !== $lc_width ) {
+		echo '.dslc-modules-section-wrapper, .dslca-add-modules-section { width : ' . $lc_width . '; } ';
+	}
 
 	// Add horizontal padding to the secitons (set in the plugins settings).
 	$section_padding_hor = dslc_get_option( 'lc_section_paddings', 'dslc_plugin_options' );
@@ -277,6 +263,10 @@ function dslc_custom_css( $dslc_code = '' ) {
 	}
 
 	echo '</style>';
+
+	if ( 'wp_footer' == current_filter() ) {
+		echo '</div>'; // Required to pass HTML validation.
+	}
 
 	// Output Google Fonts request link.
 	dslc_render_gfonts( $fonts_to_output );

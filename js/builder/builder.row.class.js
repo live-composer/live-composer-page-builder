@@ -29,7 +29,7 @@ LiveComposer.Builder.Elements.CRow = function(elem) {
 
 	this.sortable = jQuery( sortableContainer ).sortable({
 		connectWith: '.dslc-modules-section-inner',
-		items: ".dslc-modules-area",
+		items: ".dslc-modules-area-dnd",
 		handle: '.dslca-move-modules-area-hook:not(".dslca-action-disabled")',
 		placeholder: 'dslca-modules-area-placeholder',
 		cursorAt: { top: 0, left: 0 },

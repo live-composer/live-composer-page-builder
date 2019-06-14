@@ -2882,27 +2882,21 @@ class DSLC_Shortcode extends DSLC_Module {
 		}
 
 		?>
-
 		<div class="dslc-module-shortcode">
+			<?php
 
-		<?php
+			if ( empty( $options['content'] ) ) {
+				$output_content = '<div class="dslc-notification dslc-red">' . __( 'Please add your shortcode in the module settings.', 'live-composer-page-builder' ) . '</div>';
+			} elseif ( $render_code ) {
+				$output_content = stripslashes( $options['content'] );
+				$output_content = $output_content;
+			} else {
+				$output_content = '<div class="dslc-notification dslc-green">' . __( 'Save and refresh the page to display the module safely.', 'live-composer-page-builder' ) . '</div>';
+			}
 
-		if ( empty( $options['content'] ) ) {
-			$output_content = '<div class="dslc-notification dslc-red">' . __( 'Please add your shortcode in the module settings.', 'live-composer-page-builder' ) . '</div>';
-		} elseif ( $render_code ) {
-			$output_content = stripslashes( $options['content'] );
-			$output_content = $output_content;
-		} else {
-			$output_content = '<div class="dslc-notification dslc-green">' . __( 'Save and refresh the page to display the module safely.', 'live-composer-page-builder' ) . '</div>';
-		}
-
-		echo apply_filters( 'dslc_text_block_render', $output_content );
-
-		?>
-
+			echo apply_filters( 'dslc_text_block_render', $output_content );
+			?>
 		</div>
-
 		<?php
-
 	}
 }

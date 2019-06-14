@@ -988,7 +988,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 
 								$img_srcset = wp_get_attachment_image_srcset( $project_image, 'full' );
 								$img_sizes = wp_get_attachment_image_sizes( $project_image, 'full' );
-					
+
 								$srcset = 'srcset="' . esc_attr( $img_srcset ) . '"';
 								$sizes = 'sizes="' . esc_attr( $img_sizes ) . '"';
 

@@ -655,7 +655,7 @@ function dslc_hf_get_headerfooter( $post_id = false, $hf_type = 'header' ) {
 	if ( $hf_id ) {
 
 		// Render content. Support both old and new version of the page code.
-		$rendered_code = dslc_render_content( get_post_meta( $hf_id, 'dslc_code', true ) );
+		$rendered_code = dslc_render_content( get_post_meta( $hf_id, 'dslc_code', true ), $update_ids = false, $is_header_footer = true );
 
 		// if ( ! empty( $rendered_code ) && ! dslc_is_editor_active() ) {
 		if ( ! empty( $rendered_code ) ) {

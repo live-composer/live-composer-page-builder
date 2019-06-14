@@ -879,7 +879,7 @@ class DSLC_Image extends DSLC_Module {
 
 
 				$parsed = parse_url( $anchor_href );
-				if ( '/' === $anchor_href || ! empty( $parsed['scheme'] ) ) {
+				if ( '/' === $anchor_href || '#' === $anchor_href || ! empty( $parsed['scheme'] ) ) {
 					$image_url = $anchor_href;
 				} else {
 					$image_url = '//' . ltrim( $anchor_href, '/' );
@@ -893,8 +893,13 @@ class DSLC_Image extends DSLC_Module {
 					$img_srcset = wp_get_attachment_image_srcset( $img_id, 'full' );
 					$img_sizes = wp_get_attachment_image_sizes( $img_id, 'full' );
 
-					$srcset = 'srcset="' . esc_attr( $img_srcset ) . '"';
-					$sizes = 'sizes="' . esc_attr( $img_sizes ) . '"';
+					if ( $img_srcset ) {
+						$srcset = 'srcset="' . esc_attr( $img_srcset ) . '"';
+					}
+
+					if ( $img_srcset && $img_sizes ) {
+						$sizes = 'sizes="' . esc_attr( $img_sizes ) . '"';
+					}
 				}
 
 				?>

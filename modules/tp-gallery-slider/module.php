@@ -1206,7 +1206,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 
 								$img_srcset = wp_get_attachment_image_srcset( $gallery_image, 'full' );
 								$img_sizes = wp_get_attachment_image_sizes( $gallery_image, 'full' );
-					
+
 								$srcset = 'srcset="' . esc_attr( $img_srcset ) . '"';
 								$sizes = 'sizes="' . esc_attr( $img_sizes ) . '"';
 

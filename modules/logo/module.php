@@ -665,12 +665,16 @@ class DSLC_Logo extends DSLC_Module {
 					$img_srcset = wp_get_attachment_image_srcset( $site_logo_id, 'full' );
 					$img_sizes = wp_get_attachment_image_sizes( $site_logo_id, 'full' );
 
-					$srcset = 'srcset="' . esc_attr( $img_srcset ) . '"';
-					$sizes = 'sizes="' . esc_attr( $img_sizes ) . '"';
+					if ( $img_srcset ) {
+						$srcset = 'srcset="' . esc_attr( $img_srcset ) . '"';
+					}
+
+					if ( $img_srcset && $img_sizes ) {
+						$sizes = 'sizes="' . esc_attr( $img_sizes ) . '"';
+					}
 				}
 
 				?>
-
 				<?php if ( ! empty( $options['link_url'] ) ) : ?>
 					<a href="<?php echo $anchor_href; ?>" target="<?php echo $anchor_target; ?>">
 				<?php endif; ?>

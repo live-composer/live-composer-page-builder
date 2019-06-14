@@ -9,7 +9,7 @@ LiveComposer.Builder.Elements.CSectionsContainer = function(elem) {
 	var self = this;
 
 	this.sortable = jQuery(elem).sortable({
-		items: ".dslc-modules-section",
+		items: ".dslc-modules-section-dnd",
 		handle: '.dslca-move-modules-section-hook:not(".dslca-action-disabled")',
 		placeholder: 'dslca-modules-section-placeholder',
 		tolerance : 'intersect',

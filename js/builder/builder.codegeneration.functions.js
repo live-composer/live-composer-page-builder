@@ -256,10 +256,8 @@ function dslc_generate_section_code( theModulesSection ) {
 
 	// Update dslc-modules-section-(not)empty classes
 	if ( jQuery('.dslc-modules-area', modulesSection).length ) {
-
 		modulesSection.removeClass('dslc-modules-section-empty').addClass('dslc-modules-section-not-empty');
 	} else {
-
 		modulesSection.removeClass('dslc-modules-section-not-empty').addClass('dslc-modules-section-empty');
 	}
 

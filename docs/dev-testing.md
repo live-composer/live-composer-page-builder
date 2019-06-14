@@ -1,3 +1,7 @@
+To run tests launch:
+$> bash bin/localtest.sh
+
+
 
 Next steps:
 0. Create the databases used by the modules; wp-browser will not do it for you!
@@ -8,7 +12,7 @@ Next steps:
 5. Create your first acceptance tests using codecept g:cest acceptance WPFirst
 6. Write a test in tests/acceptance/WPFirstCest.php
 7. Run tests using: codecept run acceptance
- --- 
+ ---
 
  PREV DOCS:
 

@@ -1284,6 +1284,35 @@ class DSLC_Info_Box extends DSLC_Module {
 				'tab' => __( 'Title', 'live-composer-page-builder' ),
 			),
 			array(
+				'label' => __( 'Text Transform', 'live-composer-page-builder' ),
+				'id' => 'css_title_text_transform',
+				'std' => 'none',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'None', 'live-composer-page-builder' ),
+						'value' => 'none',
+					),
+					array(
+						'label' => __( 'Capitalize', 'live-composer-page-builder' ),
+						'value' => 'capitalize',
+					),
+					array(
+						'label' => __( 'Uppercase', 'live-composer-page-builder' ),
+						'value' => 'uppercase',
+					),
+					array(
+						'label' => __( 'Lowercase', 'live-composer-page-builder' ),
+						'value' => 'lowercase',
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-title h4',
+				'affect_on_change_rule' => 'text-transform',
+				'section' => 'styling',
+				'tab' => __( 'Title', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Letter Spacing', 'live-composer-page-builder' ),
 				'id' => 'css_title_letter_spacing',
 				'max' => 30,

@@ -297,17 +297,14 @@ function dslc_row_get_style( $atts = false ) {
 			// The CSS rules.
 			$rules = false;
 			if ( isset( $row_option['affect_on_change_rule'] ) ) {
-
 				$rules = explode( ',', $row_option['affect_on_change_rule'] );
 			}
 
 			// The CSS value.
 			$value = false;
 			if ( $atts && isset( $atts[ $row_option['id'] ] ) ) {
-
 				$value = $atts[ $row_option['id'] ];
 			} elseif ( isset( $row_option['std'] ) ) {
-
 				$value = $row_option['std'];
 			}
 
@@ -315,56 +312,43 @@ function dslc_row_get_style( $atts = false ) {
 
 			// The CSS value extension.
 			if ( isset( $row_option['ext'] ) ) {
-
 				$value = $value . $row_option['ext'];
 			}
 
 			// Border.
 			if ( 'border' === $row_option['id'] ) {
-
 				$checkbox_arr = explode( ' ', trim( $value ) );
 
 				if ( ! in_array( 'top', $checkbox_arr, true ) ) {
-
 					$style .= 'border-top-style: hidden; ';
 				}
 
 				if ( ! in_array( 'right', $checkbox_arr, true ) ) {
-
 					$style .= 'border-right-style: hidden; ';
 				}
 
 				if ( ! in_array( 'bottom', $checkbox_arr, true ) ) {
-
 					$style .= 'border-bottom-style: hidden; ';
 				}
 
 				if ( ! in_array( 'left', $checkbox_arr, true ) ) {
-
 					$style .= 'border-left-style: hidden; ';
 				}
 			}
 
 			if ( $value && $rules ) {
-
 				foreach ( $rules as $rule ) {
-
 					if ( 'background-image' === $rule ) {
-
 						if ( 'bg_image_thumb' === $row_option['id'] ) {
-
 							if ( 'enabled' === $value ) {
-
 								$value = 'url(' . apply_filters( 'dslc_row_bg_featured_image', wp_get_attachment_url( get_post_thumbnail_id( get_the_ID() ) ) ) . ')';
 							}
 						} else {
-
 							$value = 'url(' . wp_get_attachment_url( $value ) . ')';
 						}
 					}
 
 					if ( ! isset( $row_option['std'] ) || $orig_value !== $row_option['std'] ) {
-
 						$style .= $rule . ':' . $value . ';';
 					}
 				}
@@ -450,10 +434,11 @@ function dslc_row_get_initial_style() {
 					if ( 'background-image' === $rule ) {
 
 						if ( 'bg_image_thumb' === $row_option['id'] ) {
-
 							if ( 'enabled' === $value ) {
 
 								$value = 'url(' . wp_get_attachment_url( get_post_thumbnail_id( get_the_ID() ) ) . ')';
+							} elseif ( 'disabled' === $value ) {
+								$value = 'none';
 							}
 						} else {
 

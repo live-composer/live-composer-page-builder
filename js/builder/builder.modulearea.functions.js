@@ -191,7 +191,7 @@ function dslc_modules_area_add( row ) {
 	// Add class to body so we know it's in progress
 	// jQuery('body', LiveComposer.Builder.PreviewAreaDocument).addClass('dslca-anim-in-progress');
 
-	var output = '<div class="dslc-modules-area dslc-col dslc-12-col dslc-modules-area-empty " data-size="12">'+
+	var output = '<div class="dslc-modules-area dslc-modules-area-dnd dslc-col dslc-12-col dslc-modules-area-empty " data-size="12">'+
 	'<div class="dslca-modules-area-manage"> <div class="dslca-modules-area-manage-inner">'+
 	'<span class="dslca-manage-action dslca-copy-modules-area-hook" title="Duplicate" ><span class="dslca-icon dslc-icon-copy">'+
 	'</span></span> <span class="dslca-manage-action dslca-move-modules-area-hook" title="Drag to move" >'+

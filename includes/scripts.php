@@ -234,7 +234,12 @@ final class DSLC_Scripts {
 
 			// wp_enqueue_script( 'imagesloaded' ); // Need this for Masonry.
 			// wp_enqueue_script( 'jquery-masonry' );
-			wp_enqueue_script( 'dslc-builder-plugins-js', DS_LIVE_COMPOSER_URL . 'js/builder/builder.plugins.js', array( 'jquery', 'wp-color-picker' ), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_script(
+				'dslc-builder-plugins-js',
+				DS_LIVE_COMPOSER_URL . 'js/builder/builder.plugins.js',
+				array( 'jquery', 'wp-color-picker' ),
+				filemtime( DS_LIVE_COMPOSER_ABS . '/js/builder/builder.plugins.js' ) // Version: filemtime — Gets file modification time.
+			);
 
 			self::load_scripts( 'builder', 'dslc-builder-main-js' );
 
@@ -332,29 +337,24 @@ final class DSLC_Scripts {
 	 * @param  array  $exclude_dirs exclude dirs from search.
 	 */
 	public static function load_scripts( $dir = '*', $scriptdeps = '', $exclude_dirs = array() ) {
-
 		/** Load builder files dynamically */
 		$directories = glob( DS_LIVE_COMPOSER_ABS . '/js/' . $dir, GLOB_ONLYDIR );
 
 		foreach ( $directories as $dir ) {
-
 			$files = glob( $dir . '/*.js' );
-
 			foreach ( $files as $file ) {
-
 				$filename = basename( $file );
-
 				$filepath = explode( '/', $file );
 				array_pop( $filepath );
 				$filedir = array_pop( $filepath );
 
 				if ( in_array( $filedir, $exclude_dirs, true ) ) {
-
 					continue;
 				}
 
 				$filehandle = 'dslc-' . str_replace( '.', '-', $filename );
-				wp_enqueue_script( $filehandle, DS_LIVE_COMPOSER_URL . 'js/' . $filedir . '/' . $filename, $scriptdeps, DS_LIVE_COMPOSER_VER, true );
+				$fileversion = filemtime( DS_LIVE_COMPOSER_ABS . '/js/' . $filedir . '/' . $filename ); // Version: filemtime — Gets file modification time.
+				wp_enqueue_script( $filehandle, DS_LIVE_COMPOSER_URL . 'js/' . $filedir . '/' . $filename, $scriptdeps, $fileversion, true );
 			}
 		}
 	}
