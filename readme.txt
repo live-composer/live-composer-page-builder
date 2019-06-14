@@ -59,6 +59,7 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
 
 = 1.4.5 - June 14 2019 =
+* Code clean-up and improvements.
 
 = 1.4.4 - May 23rd 2019 =
 * 🕷 Bug: WordPress automatically create a page when defining the image title in LC.
