@@ -105,7 +105,7 @@ function dslc_custom_css() {
 	}
 
 	// If archive, load template?
-	if ( is_archive() && $post && ! is_author() && ! is_search() ) {
+	if ( is_archive() && $post && ! is_author() && ! is_search() || is_front_page() && ! get_option( 'page_on_front' ) ) {
 		$post_type = get_post_type();
 
 		$template_id = dslc_get_archive_template_by_pt( $post_type );

@@ -555,7 +555,7 @@ function dslc_filter_content( $content ) {
 	$cache = new DSLC_Cache( 'html' );
 	$cache_id = $curr_id;
 
-	if ( is_archive() ) {
+	if ( is_archive() || is_front_page() && ! get_option( 'page_on_front' ) ) {
 		$post_type_slug = get_post_type();
 		$template_id = dslc_get_archive_template_by_pt( $post_type_slug );
 		$cache_id = $template_id;
@@ -593,7 +593,7 @@ function dslc_filter_content( $content ) {
 	// 2) Proceed if in a WordPress loop ( https://codex.wordpress.org/Function_Reference/in_the_loop )
 	// 3) Proceed if global var $dslc_should_filter is true
 	// Irrelevant of the other 3 proceed if archives, search or 404 page.
-	if ( ( $curr_id == $real_id && in_the_loop() && $dslc_should_filter ) || ( is_archive() && $dslc_should_filter ) || is_author() || is_search() || is_404() ) {
+	if ( ( $curr_id == $real_id && in_the_loop() && $dslc_should_filter ) || ( is_archive() && $dslc_should_filter ) || is_author() || is_search() || is_404() || is_front_page() && ! get_option( 'page_on_front' ) ) {
 
 		// Variables that are used throughout the function.
 		$composer_wrapper_before = '';
@@ -637,7 +637,7 @@ function dslc_filter_content( $content ) {
 		$showing_404_page = dslc_postid_is_404_template( $post->ID );
 
 		// If currently showing a category archive page.
-		if ( is_archive() && ! $showing_404_page && ! is_author() && ! is_search() ) {
+		if ( is_archive() && ! $showing_404_page && ! is_author() && ! is_search() || is_front_page() && ! get_option( 'page_on_front' ) ) {
 
 			$post_type_slug = get_post_type();
 			$post_id = $post->ID;

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Table of Contents
  *
@@ -7,8 +6,6 @@
  * dslc_archive_template_init ( Register options )
  * dslc_archive_template_404_fix ( Fixes 404 on pagination caused when regular WP query has no more post )
  */
-
-
 // Prevent direct access to the file.
 if ( ! defined( 'ABSPATH' ) ) {
 	header( 'HTTP/1.0 403 Forbidden' );
@@ -23,7 +20,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 1.0
  */
 function dslc_template_redirects( $template ) {
-
 	global $post;
 
 	$template_custom = '';
@@ -53,6 +49,8 @@ function dslc_template_redirects( $template ) {
 
 	} elseif ( is_search() && ! $post ) {
 		$template_custom = dslc_page_not_found_template_redirect( $template );
+	} elseif ( is_front_page() && ! get_option( 'page_on_front' ) ) {
+		$template_custom = dslc_archive_template_redirect( $template );
 	}
 
 	// Return custom or default template.
