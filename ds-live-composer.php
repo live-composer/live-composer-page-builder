@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: Page Builder: Live Composer - drag and drop website builder (visual front end site editor)
+ * Plugin Name: Page Builder: Live Composer
  * Plugin URI: https://www.livecomposerplugin.com
- * Description: Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.
+ * Description: Page builder for WordPress with drag and drop header/footer editing.
  * Author: Live Composer Team
  * Version: 1.4.6
  * Author URI: https://livecomposerplugin.com
