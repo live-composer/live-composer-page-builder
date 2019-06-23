@@ -201,6 +201,7 @@ function dslc_sc_page_title() {
 	return $output;
 }
 add_shortcode( 'dslc_page_title', 'dslc_sc_page_title' );
+add_shortcode( 'lbmn_pagetitle', 'dslc_sc_page_title' );
 
 
 /**
@@ -211,6 +212,7 @@ add_shortcode( 'dslc_page_title', 'dslc_sc_page_title' );
  * http://codex.wordpress.org/Function_Reference/get_option
  */
 add_shortcode( 'dslc_bloghome', 'dslc_bloghome_shortcode' );
+add_shortcode( 'lbmn_bloghome', 'dslc_bloghome_shortcode' );
 function dslc_bloghome_shortcode() {
 	// Code
 	$output = home_url();
@@ -237,6 +239,7 @@ function dslc_sc_authorbio() {
 	return $output;
 }
 add_shortcode( 'dslc_authorbio', 'dslc_sc_authorbio' );
+add_shortcode( 'lbmn_authorbio', 'dslc_sc_authorbio' );
 
 /**
  * Add Shortcode:
@@ -245,6 +248,7 @@ add_shortcode( 'dslc_authorbio', 'dslc_sc_authorbio' );
  * Outputs comments count
  */
 add_shortcode( 'dslc_commentscount', 'dslc_sc_commentscount' );
+add_shortcode( 'lbmn_commentscount', 'dslc_sc_commentscount' );
 function dslc_sc_commentscount() {
 	$num_comments = get_comments_number(); // get_comments_number returns only a numeric value
 
@@ -268,6 +272,7 @@ function dslc_sc_commentscount() {
  * Outputs archive page headings.
  */
 add_shortcode( 'dslc_archive_heading', 'dslc_archive_heading_shortcode' );
+add_shortcode( 'lbmn_archive_heading', 'dslc_archive_heading_shortcode' );
 function dslc_archive_heading_shortcode() {
 
 	$output = '';
@@ -357,6 +362,7 @@ function dslc_archive_heading_shortcode() {
 
 // [nextpost_url]
 add_shortcode( 'dslc_nextpost_url', 'dslc_nextpost_url_shortcode' );
+add_shortcode( 'lbmn_nextpost_url', 'dslc_nextpost_url_shortcode' );
 function dslc_nextpost_url_shortcode( $atts ) {
 
 	// Attributes
@@ -378,6 +384,7 @@ function dslc_nextpost_url_shortcode( $atts ) {
 
 // [prevpost_url]
 add_shortcode( 'dslc_prevpost_url', 'dslc_prevpost_url_shortcode' );
+add_shortcode( 'lbmn_prevpost_url', 'dslc_prevpost_url_shortcode' );
 function dslc_prevpost_url_shortcode( $atts ) {
 
 	// Attributes
@@ -404,6 +411,7 @@ function dslc_prevpost_url_shortcode( $atts ) {
  * Outputs single post pagination
  */
 add_shortcode( 'dslc_postpagination', 'dslc_postpagination_shortcode' );
+add_shortcode( 'lbmn_postpagination', 'dslc_postpagination_shortcode' );
 function dslc_postpagination_shortcode() {
 	$output = wp_link_pages( array(
 		'before' => '<div class="page-links"><span class="page-links__title">' . __( 'Pages:', 'live-composer-page-builder' ) . '</span><span class="page-numbers">',
