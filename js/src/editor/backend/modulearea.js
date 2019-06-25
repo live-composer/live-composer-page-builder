@@ -11,7 +11,10 @@
  *
  */
 
-'use strict';
+import { dragAndDropInit } from './dragndrop.js';
+import { addSection } from './sections.js';
+import { ModuleArea } from './modulearea.class.js';
+
 
 /**
  * Module Area Actions (Duplicate, Change Width, Delete, ...)
@@ -27,7 +30,7 @@
 
 		jQuery(el).each(function (i,e) {
 
-			new LiveComposer.Builder.Elements.CModuleArea(e);
+			new ModuleArea(e);
 		});
 	}
 
@@ -48,7 +51,7 @@
 	 */
 	if ( ! jQuery( '#dslc-main .dslc-modules-section', LiveComposer.Builder.PreviewAreaDocument).length && ! jQuery( '#dslca-tut-page', LiveComposer.Builder.PreviewAreaDocument).length ) {
 
-		dslc_row_add( init_sortables() );
+		addSection( init_sortables() );
 	} else {
 
 		init_sortables();
@@ -186,7 +189,7 @@
 
 function dslc_modules_area_add( row ) {
 
-	if ( dslcDebug ) console.log( 'dslc_add_modules_area' );
+	if ( window.dslcDebug ) console.log( 'dslc_add_modules_area' );
 
 	// Add class to body so we know it's in progress
 	// jQuery('body', LiveComposer.Builder.PreviewAreaDocument).addClass('dslca-anim-in-progress');
@@ -219,13 +222,13 @@ function dslc_modules_area_add( row ) {
 
 	jQuery(emptyModuleAreas).each(function (i,e) {
 
-		new LiveComposer.Builder.Elements.CModuleArea(e);
+		new ModuleArea(e);
 	});
 
 	// Call other functions
-	dslc_drag_and_drop();
-	dslc_generate_code();
-	dslc_show_publish_button();
+	dragAndDropInit();
+	window.dslc_generate_code();
+	window.dslc_show_publish_button();
 
 	// Remove class from body so we know it's done
 	// jQuery('body', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-anim-in-progress');
@@ -237,7 +240,7 @@ function dslc_modules_area_add( row ) {
 
 function dslc_modules_area_delete( area ) {
 
-	if ( dslcDebug ) console.log( 'dslc_delete_modules_area' );
+	if ( window.dslcDebug ) console.log( 'dslc_delete_modules_area' );
 
 	// Vars
 	var modulesSection = area.closest('.dslc-modules-section').find('.dslc-modules-section-inner'),
@@ -294,8 +297,8 @@ function dslc_modules_area_delete( area ) {
 		area.remove();
 
 		// Call other functions
-		dslc_generate_code();
-		dslc_show_publish_button();
+		window.dslc_generate_code();
+		window.dslc_show_publish_button();
 	}, 900 );
 
 	// Animation
@@ -313,8 +316,8 @@ function dslc_modules_area_delete( area ) {
 		marginBottom : 0
 	}, 300, function(){
 		area.remove();
-		dslc_generate_code();
-		dslc_show_publish_button();
+		window.dslc_generate_code();
+		window.dslc_show_publish_button();
 	});
 }
 
@@ -324,7 +327,7 @@ function dslc_modules_area_delete( area ) {
 
 function dslc_modules_area_copy( area ) {
 
-	if ( dslcDebug ) console.log( 'dslc_copy_modules_area' );
+	if ( window.dslcDebug ) console.log( 'dslc_copy_modules_area' );
 
 	// Vars
 	var dslc_moduleID,
@@ -333,7 +336,7 @@ function dslc_modules_area_copy( area ) {
 	// Copy the area and append to the row
 	var dslc_modulesAreaCloned = area.clone().appendTo(modulesSection);
 
-	new LiveComposer.Builder.Elements.CModuleArea(dslc_modulesAreaCloned[0]);
+	new ModuleArea(dslc_modulesAreaCloned[0]);
 
 	// Trigger mouseleave ( so the actions that show on hover go away )
 	dslc_modulesAreaCloned.find('.dslca-modules-area-manage').trigger('mouseleave');
@@ -359,7 +362,7 @@ function dslc_modules_area_copy( area ) {
 		jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-module-being-edited');
 
 		// Need to call this function to update last column class for the modules.
-		dslc_generate_code();
+		window.dslc_generate_code();
 
 		// Show back new created module
 		dslc_module.animate({
@@ -369,11 +372,11 @@ function dslc_modules_area_copy( area ) {
 	});
 
 	// Call other functions
-	dslc_drag_and_drop();
-	dslc_show_publish_button();
+	dragAndDropInit();
+	window.dslc_show_publish_button();
 
 	// Need to call this function to update last column class for the module areas.
-	dslc_generate_code();
+	window.dslc_generate_code();
 
 
 }
@@ -383,7 +386,7 @@ function dslc_modules_area_copy( area ) {
  */
 function dslc_modules_area_width_set( area, newWidth ) {
 
-	if ( dslcDebug ) console.log( 'dslc_modules_area_width_set' );
+	if ( window.dslcDebug ) console.log( 'dslc_modules_area_width_set' );
 
 	// Generate new class based on width
 	var newClass = 'dslc-' + newWidth + '-col';
@@ -401,8 +404,8 @@ function dslc_modules_area_width_set( area, newWidth ) {
 		return false;
 	}
 
-	dslc_generate_code();
-	dslc_show_publish_button();
+	window.dslc_generate_code();
+	window.dslc_show_publish_button();
 
 }
 
@@ -411,7 +414,7 @@ function dslc_modules_area_width_set( area, newWidth ) {
  *
  * @return void
  */
-LiveComposer.Builder.moduleareas_init = function() {
+export const moduleareasInitJS = () => {
 
 	// Select all the module areas form the main section of the page
 	jQuery( '#dslc-main .dslc-modules-area', LiveComposer.Builder.PreviewAreaDocument ).each( function() {
@@ -420,7 +423,7 @@ LiveComposer.Builder.moduleareas_init = function() {
 		if ( jQuery( this ).data('jsinit') !== 'initialized' ) {
 
 			// Initialize all the module areas without 'jsinit' attribute!
-			new LiveComposer.Builder.Elements.CModuleArea( this );
+			new ModuleArea( this );
 		}
 	} );
 

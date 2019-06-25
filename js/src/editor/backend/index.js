@@ -2,20 +2,22 @@
  * Main builder file
  */
 
-'use strict';
+import { templatesPanelInit } from './builder.templates.js';
+import { fixContenteditable, keypressEvents } from './uigeneral.js';
+import { CSectionsContainer } from './sectionscontainer.class.js';
+import { settingsPanelInit } from './settings.panel.js';
+import { sectionsInit } from './sections.js';
+import { dragAndDropInit } from './dragndrop.js';
+import { codeGenerationInitJS } from './codegeneration.js';
+import { initPreviewAreaScroller } from './scroller.js';
+import { untilsInitJs } from './utils.class.js';
 
-var dslcRegularFontsArray = DSLCFonts.regular;
-var dslcGoogleFontsArray = DSLCFonts.google;
-var dslcAllFontsArray = dslcRegularFontsArray.concat( dslcGoogleFontsArray );
 
-// Set current/default icons set
-var dslcIconsCurrentSet = DSLCIcons.fontawesome;
 var dslcDebug = false;
 // dslcDebug = true;
 
-
 // Global Plugin Object
-var LiveComposer = {
+window.LiveComposer = {
 
     Builder: {
 
@@ -118,3 +120,36 @@ var LiveComposer = {
 		return newModule;
 	}
 }());
+
+/** Wait till tinyMCE loaded */
+window.previewAreaTinyMCELoaded = function(){
+
+	console.log( "window.previewAreaTinyMCELoaded!" );
+
+	LiveComposer.Builder.PreviewAreaWindow = this;
+	LiveComposer.Builder.PreviewAreaDocument = jQuery(this.document);
+
+	// Disable WP admin bar in editing mode
+	jQuery('#wpadminbar', LiveComposer.Builder.PreviewAreaDocument).remove();
+
+	// LiveComposer.Builder.UI.initInlineEditors();
+	fixContenteditable();
+
+	templatesPanelInit();
+	settingsPanelInit();
+
+	sectionsInit();
+
+	var mainDraggable = LiveComposer.Builder.PreviewAreaDocument.find("#dslc-main").eq(0)[0];
+	new CSectionsContainer( mainDraggable );
+
+	jQuery(document).trigger('editorFrameLoaded');
+	dragAndDropInit();
+	codeGenerationInitJS();
+	window.dslc_generate_code();
+
+	// Catch keypress events (from both parent and iframe) to add keyboard support
+	keypressEvents();
+	initPreviewAreaScroller();
+	untilsInitJs();
+};

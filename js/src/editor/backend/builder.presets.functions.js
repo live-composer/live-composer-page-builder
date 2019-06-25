@@ -13,7 +13,7 @@
  */
 function dslc_update_preset() {
 
-	if ( dslcDebug ) console.log( 'dslc_update_preset' );
+	if ( window.dslcDebug ) console.log( 'dslc_update_preset' );
 
 	// Vars
 	var module = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument),

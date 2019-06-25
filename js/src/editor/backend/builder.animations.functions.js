@@ -14,7 +14,7 @@
 
 	function dslc_ui_animations() {
 
-		if ( dslcDebug ) console.log( 'dslc_ui_animations' );
+		if ( window.dslcDebug ) console.log( 'dslc_ui_animations' );
 
 		// Mouse Enter/Leave - Module
 

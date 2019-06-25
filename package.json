@@ -1,8 +1,13 @@
 {
   "name": "live-composer-page-builder",
-  "version": "1.0.9",
+  "version": "1.4.7",
   "description": "Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.",
   "main": "ds-live-composer.php",
+  "scripts": {
+    "test": "bash bin/localtest.sh && exit 1",
+    "watch": "webpack --watch",
+    "build": "webpack"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://livecomposer@github.com/livecomposer/Live-Composer.git"
@@ -14,11 +19,20 @@
   },
   "homepage": "https://github.com/livecomposer/Live-Composer#readme",
   "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "grunt": "^1.0.4",
     "grunt-contrib-cssmin": "^3.0.0",
-    "grunt-contrib-uglify": "^4.0.1"
+    "grunt-contrib-uglify": "^4.0.1",
+    "webpack": "^4.35.0",
+    "webpack-cli": "^3.3.5"
   },
   "dependencies": {
-    "chromedriver": "^74.0.0"
+    "chromedriver": "^74.0.0",
+    "sortablejs": "^1.10.0-rc2"
   }
 }

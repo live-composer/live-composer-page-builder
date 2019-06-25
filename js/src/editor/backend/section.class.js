@@ -1,19 +1,10 @@
 /**
- * Modules row class
+ * Builder section class
  */
 
-'use strict';
-
-/**
- * Builder row class
- */
-
-LiveComposer.Builder.Elements.CRow = function(elem) {
+export const Section = (elem) => {
 
 	var self = this;
-	this.elem = elem;
-
-
 	var sortableContainer = jQuery( elem ).find('.dslc-modules-section-wrapper .dslc-modules-section-inner').eq(0)[0];
 
 	jQuery( elem ).droppable({
@@ -27,7 +18,7 @@ LiveComposer.Builder.Elements.CRow = function(elem) {
 		}
 	});
 
-	this.sortable = jQuery( sortableContainer ).sortable({
+	const sortable = jQuery( sortableContainer ).sortable({
 		connectWith: '.dslc-modules-section-inner',
 		items: ".dslc-modules-area-dnd",
 		handle: '.dslca-move-modules-area-hook:not(".dslca-action-disabled")',
@@ -61,8 +52,8 @@ LiveComposer.Builder.Elements.CRow = function(elem) {
 		},
 		update: function (e, ui) {
 
-			dslc_generate_code();
-			dslc_show_publish_button();
+			window.dslc_generate_code();
+			window.dslc_show_publish_button();
 		},
 		start: function(e, ui){
 

@@ -15,7 +15,7 @@
  */
 function dslc_dm_get_defaults( module ) {
 
-	if ( dslcDebug ) console.log( 'dslc_dm_get_defaults' );
+	if ( window.dslcDebug ) console.log( 'dslc_dm_get_defaults' );
 
 	// The module code value
 	var optionsCode = module.find('.dslca-module-code').val();
@@ -42,7 +42,7 @@ function dslc_dm_get_defaults( module ) {
 /*
 function dslca_draggable_calc_center( dslcArea ) {
 
-	if ( dslcDebug ) console.log( 'dslca_draggable_calc_center' );
+	if ( window.dslcDebug ) console.log( 'dslca_draggable_calc_center' );
 
 	jQuery( ".dslc-modules-section-inner" ).sortable( "option", "cursorAt", { top: dslcArea.outerHeight() / 2, left: dslcArea.outerWidth() / 2 } );
 }
@@ -53,7 +53,7 @@ function dslca_draggable_calc_center( dslcArea ) {
  */
 function dslc_editable_content_gen_code( dslcField ) {
 
-	if ( dslcDebug ) console.log( 'dslc_editable_content_gen_code' );
+	if ( window.dslcDebug ) console.log( 'dslc_editable_content_gen_code' );
 
 	// In some rare cases we have the next error:
 	// TypeError: undefined is not an object (evaluating 'dslcField.html().trim()...')
@@ -75,7 +75,7 @@ function dslc_editable_content_gen_code( dslcField ) {
  */
 function dslc_filter_textarea( dslcOptionValue ) {
 
-	if ( dslcDebug ) console.log( 'dslc_filter_textarea' );
+	if ( window.dslcDebug ) console.log( 'dslc_filter_textarea' );
 
 	// In some rare cases we have the next error:
 	// TypeError: undefined is not an object (evaluating 'dslcField.html().trim()...')
@@ -330,8 +330,8 @@ jQuery(document).ready(function($) {
 
 		if ( ! LiveComposer.Builder.Flags.generate_code_after_row_changed ) return false;
 
-		// dslc_generate_code();
-		// dslc_show_publish_button();
+		// window.dslc_generate_code();
+		// window.dslc_show_publish_button();
 	});
 
 
@@ -350,7 +350,7 @@ jQuery(document).ready(function($) {
 	// Live Preview for Module Settings Change
 	jQuery(document).on( 'change', '.dslca-module-edit-field', function(){
 
-		if ( dslcDebug ) console.log( 'on change event for .dslca-module-edit-field' );
+		if ( window.dslcDebug ) console.log( 'on change event for .dslca-module-edit-field' );
 
 		var dslcOptionValue = '',
 			dslcOptionValueOrig = '',

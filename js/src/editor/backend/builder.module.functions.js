@@ -8,7 +8,6 @@
  * - dslc_module_width_set ( Sets a width to module )
  * - dslc_module_options_show ( Show module options )
  * - dslc_module_options_section_filter ( Filter options section )
- * - dslc_module_options_tab_filter ( Filter options tab )
  * - dslc_module_options_hideshow_tabs ( Hide show tabs based on option choices )
  * - dslc_module_options_confirm_changes ( Confirm changes )
  * - dslc_module_options_cancel_changes ( Cancel changes )
@@ -341,7 +340,7 @@
  */
 function dslc_module_delete( module ) {
 
-	if ( dslcDebug ) console.log( 'dslc_delete_module' );
+	if ( window.dslcDebug ) console.log( 'dslc_delete_module' );
 
 	// Add class to module so we know it's being deleted
 	module.addClass('dslca-module-being-deleted');
@@ -357,8 +356,8 @@ function dslc_module_delete( module ) {
 
 		// Remove module, regenerate code, show publish button
 		module.remove();
-		dslc_generate_code();
-		dslc_show_publish_button();
+		window.dslc_generate_code();
+		window.dslc_show_publish_button();
 
 	}, 1000 );
 
@@ -381,7 +380,7 @@ function dslc_module_delete( module ) {
  */
 function dslc_module_copy( module ) {
 
-	if ( dslcDebug ) console.log( 'dslc_copy_module' );
+	if ( window.dslcDebug ) console.log( 'dslc_copy_module' );
 
 	// Remove being edited class if some module is being edited
 	jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-module-being-edited');
@@ -403,12 +402,12 @@ function dslc_module_copy( module ) {
 
 	// Module fully cloned. Finish the process.
 	// Need to call this function to update last column class for the modules.
-	dslc_generate_code();
+	window.dslc_generate_code();
 
 	// Fade in the module
 	jQuery( module_new ).css({ opacity : 0 }).removeClass('dslca-module-being-edited').animate({ opacity : 1 }, 300);
 
-	dslc_show_publish_button();
+	window.dslc_show_publish_button();
 }
 
 /**
@@ -452,7 +451,7 @@ function dslc_module_new_id( module ) {
  */
 function dslc_module_width_set( module, new_width ) {
 
-	if ( dslcDebug ) console.log( 'dslc_module_width_set' );
+	if ( window.dslcDebug ) console.log( 'dslc_module_width_set' );
 
 	// Generate new column class
 	var newClass = 'dslc-' + new_width + '-col';
@@ -472,8 +471,8 @@ function dslc_module_width_set( module, new_width ) {
 
 	LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();
 
-	dslc_generate_code();
-	dslc_show_publish_button();
+	window.dslc_generate_code();
+	window.dslc_show_publish_button();
 }
 
 /**
@@ -481,7 +480,7 @@ function dslc_module_width_set( module, new_width ) {
  */
 function dslc_module_options_show( moduleID ) {
 
-	if ( dslcDebug ) console.log( 'dslc_module_options_show' );
+	if ( window.dslcDebug ) console.log( 'dslc_module_options_show' );
 
 	// Vars
 	var dslcModule = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument),
@@ -623,7 +622,7 @@ function dslc_module_options_show( moduleID ) {
  */
 function dslc_module_output_default( dslc_module_id, callback ) {
 
-	if ( dslcDebug ) console.log( 'dslc_module_output_default' );
+	if ( window.dslcDebug ) console.log( 'dslc_module_output_default' );
 
 	jQuery.post(
 
@@ -648,7 +647,7 @@ function dslc_module_output_default( dslc_module_id, callback ) {
  */
 function dslc_module_output_altered( callback ) {
 
-	if ( dslcDebug ) console.log( 'dslc_module_output_altered' );
+	if ( window.dslcDebug ) console.log( 'dslc_module_output_altered' );
 
 	callback = typeof callback !== 'undefined' ? callback : false;
 
@@ -708,7 +707,7 @@ function dslc_module_output_altered( callback ) {
 
 			// TODO: Add new postponed action to run after all done
 
-			// dslc_show_publish_button();
+			// window.dslc_show_publish_button();
 			LiveComposer.Builder.PreviewAreaWindow.dslc_carousel();
 
 			LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();
@@ -741,7 +740,7 @@ function dslc_module_output_altered( callback ) {
  */
 function dslc_module_output_reload( dslcModule, callback ) {
 
-	if ( dslcDebug ) console.log( 'dslc_module_output_reload' );
+	if ( window.dslcDebug ) console.log( 'dslc_module_output_reload' );
 
 	callback = typeof callback !== 'undefined' ? callback : false;
 
@@ -789,8 +788,8 @@ function dslc_module_output_reload( dslcModule, callback ) {
 
 			dslcModule.after(response.output).next().addClass('dslca-module-being-edited');
 			dslcModule.remove();
-			dslc_generate_code();
-			dslc_show_publish_button();
+			window.dslc_generate_code();
+			window.dslc_show_publish_button();
 
 			LiveComposer.Builder.PreviewAreaWindow.dslc_carousel();
 			LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();

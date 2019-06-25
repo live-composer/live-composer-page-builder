@@ -1,7 +1,7 @@
 To run tests launch:
 $> bash bin/localtest.sh
 
-
+$> npm run build
 
 Next steps:
 0. Create the databases used by the modules; wp-browser will not do it for you!

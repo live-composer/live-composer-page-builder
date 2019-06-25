@@ -13,7 +13,12 @@
  *
  ***********************************/
 
-'use strict';
+
+
+import { Section } from './section.class.js';
+import { dragAndDropInit } from './dragndrop.js';
+import { moduleareasInitJS } from './modulearea.js';
+import { ModuleArea } from './modulearea.class.js';
 
 ;jQuery(document).on('editorFrameLoaded', function(){
 
@@ -32,7 +37,7 @@
 
 	jQuery(".dslc-modules-section", LiveComposer.Builder.PreviewAreaDocument).each(function(){
 
-		new LiveComposer.Builder.Elements.CRow(this);
+		new Section(this);
 	});
 
 	/**
@@ -153,7 +158,7 @@
 			button.find('.dslca-icon').removeClass('dslc-icon-align-justify').addClass('dslc-icon-spinner dslc-icon-spin');
 
 			// Add a row
-			dslc_row_add( function(){
+			addSection( function(){
 				button.find('.dslca-icon').removeClass('dslc-icon-spinner dslc-icon-spin').addClass('dslc-icon-align-justify');
 			});
 		}
@@ -189,9 +194,9 @@
 /**
  * Row - Add New
  */
-function dslc_row_add( callback ) {
+export const addSection = ( callback ) => {
 
-	if ( dslcDebug ) console.log( 'dslc_row_add' );
+	if ( window.dslcDebug ) console.log( 'dslc_row_add' );
 
 	callback = typeof callback !== 'undefined' ? callback : false;
 
@@ -262,12 +267,12 @@ function dslc_row_after_add( newRowHTML ) {
 	newRow.appendTo(LiveComposer.Builder.PreviewAreaDocument.find("#dslc-main"));
 
 	// Call other functions
-	dslc_drag_and_drop();
-	dslc_generate_code();
-	dslc_show_publish_button();
+	dragAndDropInit();
+	window.dslc_generate_code();
+	window.dslc_show_publish_button();
 
-	new LiveComposer.Builder.Elements.CRow(newRow);
-	new LiveComposer.Builder.Elements.CModuleArea( newRow.find('.dslc-modules-area').eq(0)[0] );
+	new Section(newRow);
+	new ModuleArea( newRow.find('.dslc-modules-area').eq(0)[0] );
 
 	newRow.find('.dslc-modules-area').addClass('dslc-modules-area-empty dslc-last-col');
 
@@ -279,7 +284,7 @@ function dslc_row_after_add( newRowHTML ) {
  */
 function dslc_row_delete( row ) {
 
-	if ( dslcDebug ) console.log( 'dslc_row_delete' );
+	if ( window.dslcDebug ) console.log( 'dslc_row_delete' );
 
 	// If the row is being edited
 	if ( row.find('.dslca-module-being-edited') ) {
@@ -301,8 +306,8 @@ function dslc_row_delete( row ) {
 	row.trigger('mouseleave').remove();
 
 	// Call other functions
-	dslc_generate_code();
-	dslc_show_publish_button();
+	window.dslc_generate_code();
+	window.dslc_show_publish_button();
 }
 
 /**
@@ -310,7 +315,7 @@ function dslc_row_delete( row ) {
  */
 function dslc_row_edit( row ) {
 
-	if ( dslcDebug ) console.log( 'dslc_row_edit' );
+	if ( window.dslcDebug ) console.log( 'dslc_row_edit' );
 
 	// Vars we will use
 	var dslcModulesSectionOpts, dslcVal;
@@ -451,7 +456,7 @@ function dslc_row_edit( row ) {
  */
 function dslc_row_edit_cancel( callback ) {
 
-	if ( dslcDebug ) console.log( 'dslc_row_cancel_changes' );
+	if ( window.dslcDebug ) console.log( 'dslc_row_cancel_changes' );
 
 	callback = typeof callback !== 'undefined' ? callback : false;
 
@@ -468,8 +473,8 @@ function dslc_row_edit_cancel( callback ) {
 	});
 
 	LiveComposer.Builder.Flags.generate_code_after_row_changed = true;
-	dslc_generate_code();
-	dslc_show_publish_button();
+	window.dslc_generate_code();
+	window.dslc_show_publish_button();
 
 	dslc_show_section('.dslca-modules');
 
@@ -500,7 +505,7 @@ function dslc_row_edit_cancel( callback ) {
  */
 function dslc_row_edit_confirm( callback ) {
 
-	if ( dslcDebug ) console.log( 'dslc_confirm_row_changes' );
+	if ( window.dslcDebug ) console.log( 'dslc_confirm_row_changes' );
 
 	callback = typeof callback !== 'undefined' ? callback : false;
 
@@ -523,10 +528,10 @@ function dslc_row_edit_confirm( callback ) {
 	// Remove being edited class
 	jQuery('.dslca-modules-section-being-edited', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-modules-section-being-edited dslca-modules-section-change-made');
 
-	dslc_generate_code();
+	window.dslc_generate_code();
 
 	// Show the publish button
-	dslc_show_publish_button();
+	window.dslc_show_publish_button();
 
 	if ( callback ) { callback(); }
 
@@ -539,7 +544,7 @@ function dslc_row_edit_confirm( callback ) {
  */
 function dslc_row_copy( row ) {
 
-	if ( dslcDebug ) console.log( 'dslc_row_copy' );
+	if ( window.dslcDebug ) console.log( 'dslc_row_copy' );
 
 	// Vars that will be used
 	var dslc_module_id,
@@ -561,7 +566,7 @@ function dslc_row_copy( row ) {
 		this.removeAttribute('data-jsinit'); // (2)
 	});
 
-	new LiveComposer.Builder.Elements.CRow(dslcModulesSectionCloned);
+	new Section(dslcModulesSectionCloned);
 
 	/**
 	 * Re-render modules inside of the new ROW
@@ -586,17 +591,17 @@ function dslc_row_copy( row ) {
 		dslc_module_new_id( dslc_module[0] );
 
 		// Check init for rows and module areas
-		LiveComposer.Builder.rows_init();
-		LiveComposer.Builder.moduleareas_init();
+		sectionsInitJS();
+		moduleareasInitJS();
 
 		// TODO: the next function contains AJAX call. It needs optimization.
-		dslc_generate_code();
+		window.dslc_generate_code();
 
 		/**
 		 * Re-init drag and drop from modules list into modules areas.
 		 * Need this function, so we can drop new modules on the cloned areas.
 		 */
-		dslc_drag_and_drop();
+		dragAndDropInit();
 
 		// Remove "dslca-module-being-edited" class form any element
 		jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-module-being-edited');
@@ -606,7 +611,7 @@ function dslc_row_copy( row ) {
 			opacity : 1
 		}, 300);
 
-		dslc_show_publish_button();
+		window.dslc_show_publish_button();
 	});
 
 	// Generate new ID for the new section.
@@ -622,7 +627,7 @@ function dslc_row_copy( row ) {
  */
 function dslc_section_new_id( section ) {
 
-	if ( dslcDebug ) console.log( 'dslc_section_new_id' );
+	if ( window.dslcDebug ) console.log( 'dslc_section_new_id' );
 
 	var dslc_section_id = LiveComposer.Utils.get_unique_id(); // Generate new section ID.
 
@@ -639,7 +644,7 @@ function dslc_section_new_id( section ) {
  */
 function dslc_row_import( rowCode ) {
 
-	if ( dslcDebug ) console.log( 'dslc_row_import' );
+	if ( window.dslcDebug ) console.log( 'dslc_row_import' );
 
 	// AJAX Call
 	jQuery.post(
@@ -664,13 +669,13 @@ function dslc_row_import( rowCode ) {
 			LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();
 
 			// Check init for rows and module areas
-			LiveComposer.Builder.rows_init();
-			LiveComposer.Builder.moduleareas_init();
+			sectionsInitJS();
+			moduleareasInitJS();
 
-			dslc_drag_and_drop();
-			dslc_generate_code();
+			dragAndDropInit();
+			window.dslc_generate_code();
 
-			dslc_show_publish_button();
+			window.dslc_show_publish_button();
 		}
 	);
 }
@@ -679,17 +684,34 @@ function dslc_row_import( rowCode ) {
  * Deprecated Functions and Fallbacks
  */
 
-function dslc_add_modules_section() { dslc_row_add(); }
+function dslc_add_modules_section() { addSection(); }
 function dslc_delete_modules_section( row  ) { dslc_row_delete( row ); }
 function dslc_edit_modules_section( row ) { dslc_row_edit( row ); }
 function dslc_copy_modules_section( row ) { dslc_row_copy( row ); }
 function dslc_import_modules_section( rowCode ) { dslc_row_import( rowCode ); }
 
 /**
- * Row - Document Ready Actions
+ * Check ROWs initialization
+ *
+ * @return void
  */
+export const sectionsInitJS = () => {
 
-jQuery(document).ready(function($){
+	// Select all the ROWs form the main section of the page
+	jQuery( '#dslc-main .dslc-modules-section', LiveComposer.Builder.PreviewAreaDocument ).each( function() {
+
+		// Check if all the rows have data attribute 'jsinit' set to 'initialized'?
+		if ( jQuery( this ).data('jsinit') !== 'initialized' ) {
+
+			// Initialize all the rows without 'jsinit' attribute!
+			new Section( this );
+		}
+	} );
+
+}
+
+export const sectionsInit = () => {
+	sectionsInitJS();
 
 	/**
 	 * Hook - Confirm Row Changes
@@ -714,24 +736,4 @@ jQuery(document).ready(function($){
 		$('.dslca-row-options-filter-hook.dslca-active').removeClass('dslca-active');
 		LiveComposer.Builder.PreviewAreaWindow.dslc_responsive_classes( true );
 	});
-});
-
-/**
- * Check ROWs initialization
- *
- * @return void
- */
-LiveComposer.Builder.rows_init = function() {
-
-	// Select all the ROWs form the main section of the page
-	jQuery( '#dslc-main .dslc-modules-section', LiveComposer.Builder.PreviewAreaDocument ).each( function() {
-
-		// Check if all the rows have data attribute 'jsinit' set to 'initialized'?
-		if ( jQuery( this ).data('jsinit') !== 'initialized' ) {
-
-			// Initialize all the rows without 'jsinit' attribute!
-			new LiveComposer.Builder.Elements.CRow( this );
-		}
-	} );
-
 }

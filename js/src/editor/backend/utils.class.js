@@ -4,7 +4,7 @@
 
 'use strict';
 
-LiveComposer.Utils = {
+const Utils = {
 	addslashes: function(str)
 	{
 		 str = str.replace(/\\/g, '\\\\');
@@ -216,3 +216,7 @@ LiveComposer.Utils = {
 		LiveComposer.Builder.PreviewAreaWindow.dslca_publish_event( eventName, eventData );
 	}
 };
+
+export const untilsInitJs = () => {
+	window.LiveComposer.Utils = Utils;
+}

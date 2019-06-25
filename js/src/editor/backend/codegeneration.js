@@ -17,13 +17,13 @@
  */
 function dslc_save_composer() {
 
-	if ( dslcDebug ) console.log( 'dslc_save_composer' );
+	if ( window.dslcDebug ) console.log( 'dslc_save_composer' );
 
 	/**
 	 * Before saving code via ajax
 	 * refresh the page source in a hidden #dslca-code
 	 */
-	dslc_generate_code();
+	window.dslc_generate_code();
 
 	// Generate content for search
 	dslca_gen_content_for_search();
@@ -95,7 +95,7 @@ function dslc_save_composer() {
  */
 function dslc_save_draft_composer() {
 
-	if ( dslcDebug ) console.log( 'dslc_save_draft_composer' );
+	if ( window.dslcDebug ) console.log( 'dslc_save_draft_composer' );
 
 	// Vars
 	var composerCode = jQuery('#dslca-code').val(),
@@ -142,8 +142,8 @@ function dslc_save_draft_composer() {
  * CODE GENERATION - Generate LC Data
  * @param section is not required. If no parameter provided function generates
  */
-function dslc_generate_code() {
-	if ( dslcDebug ) console.log( 'dslc_generate_code' );
+window.dslc_generate_code = function() {
+	if ( window.dslcDebug ) console.log( 'dslc_generate_code' );
 
 	// Vars
 	var moduleCode = '',
@@ -232,7 +232,7 @@ function dslc_generate_code() {
  */
 function dslc_generate_section_code( theModulesSection ) {
 
-	if ( dslcDebug ) console.log( 'dslc_generate_section_code' );
+	if ( window.dslcDebug ) console.log( 'dslc_generate_section_code' );
 
 	// Vars
 	var moduleCode = '',
@@ -525,7 +525,7 @@ jQuery(document).ready(function($){
 
 function dslca_gen_content_for_search() {
 
-	if ( dslcDebug ) console.log( 'dslca_gen_content_for_search' );
+	if ( window.dslcDebug ) console.log( 'dslca_gen_content_for_search' );
 
 	// Vars
 	var holder = document.getElementById('dslca-content-for-search');
@@ -568,6 +568,10 @@ function dslca_gen_content_for_search() {
 	// Used to show the publish button for pages made before this feature
 	if ( prevContent !== content ) {
 
-		dslc_show_publish_button();
+		window.dslc_show_publish_button();
 	}
+}
+
+export const codeGenerationInitJS = () => {
+	
 }

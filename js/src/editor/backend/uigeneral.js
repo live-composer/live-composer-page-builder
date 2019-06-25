@@ -8,10 +8,14 @@
  * - dslc_show_section ( Show a specific section )
  * - dslc_generate_filters ( Generate origin filters )
  * - dslc_filter_origin ( Origin filtering for templates/modules listing )
- * - dslc_drag_and_drop ( Initiate drag and drop functionality )
+ * - dragAndDropInit ( Initiate drag and drop functionality )
  ***********************************/
 
 'use strict';
+
+import { elementOptionsTabs } from './settings.panel.js';
+
+import Sortable from 'sortablejs';
 
 /**
  * Try to detect JS errors in WP Admin part.
@@ -61,31 +65,6 @@ jQuery(document).ready(function($) {
  	jQuery('.dslca-invisible-overlay').hide();
  	jQuery('.dslca-section').eq(0).show();
 });
-
-/** Wait till tinyMCE loaded */
-window.previewAreaTinyMCELoaded = function(){
-
-	var self = this;
-	LiveComposer.Builder.PreviewAreaWindow = this;
-	LiveComposer.Builder.PreviewAreaDocument = jQuery(this.document);
-
-	// Disable WP admin bar in editing mode
-	jQuery('#wpadminbar', LiveComposer.Builder.PreviewAreaDocument).remove();
-
-	// LiveComposer.Builder.UI.initInlineEditors();
-	dslc_fix_contenteditable();
-
-	var mainDraggable = LiveComposer.Builder.PreviewAreaDocument.find("#dslc-main").eq(0)[0];
-	new LiveComposer.Builder.Elements.CSectionsContainer( mainDraggable );
-
-	jQuery(document).trigger('editorFrameLoaded');
-	dslc_drag_and_drop();
-	dslc_generate_code();
-
-	// Catch keypress events (from both parent and iframe) to add keyboard support
-	dslc_keypress_events();
-	LiveComposer.Builder.UI.initPreviewAreaScroller();
-};
 
 /**
  * Action - "Currently Editing" scroll on click
@@ -272,7 +251,7 @@ jQuery(document).on( 'click', '.dslca-section-title-filter-options a', function(
 
 function dslc_hide_composer() {
 
-	if ( dslcDebug ) console.log( 'dslc_hide_composer' );
+	if ( window.dslcDebug ) console.log( 'dslc_hide_composer' );
 
 	// Hide "hide" button and show "show" button
 	jQuery('.dslca-hide-composer-hook').hide();
@@ -297,7 +276,7 @@ function dslc_hide_composer() {
 
 function dslc_show_composer() {
 
-	if ( dslcDebug ) console.log( 'dslc_show_composer' );
+	if ( window.dslcDebug ) console.log( 'dslc_show_composer' );
 
 	// Hide the "show" button and show the "hide" button
 	jQuery('.dslca-show-composer-hook').hide();
@@ -319,9 +298,9 @@ function dslc_show_composer() {
  * UI - GENERAL - Show Publish Button
  */
 
-function dslc_show_publish_button() {
+window.dslc_show_publish_button = function() {
 
-	if ( dslcDebug ) console.log( 'dslc_show_publish_button' );
+	if ( window.dslcDebug ) console.log( 'dslc_show_publish_button' );
 
 	jQuery('.dslca-save-composer').show().addClass('dslca-init-animation');
 	jQuery('.dslca-save-draft-composer').show().addClass('dslca-init-animation');
@@ -329,7 +308,7 @@ function dslc_show_publish_button() {
 
 function dslc_hide_publish_button() {
 
-	if ( dslcDebug ) console.log( 'dslc_hide_publish_button' );
+	if ( window.dslcDebug ) console.log( 'dslc_hide_publish_button' );
 
 	jQuery('.dslca-save-composer').hide();
 	jQuery('.dslca-save-draft-composer').hide();
@@ -341,7 +320,7 @@ function dslc_hide_publish_button() {
 
 function dslc_show_section( section ) {
 
-	if ( dslcDebug ) console.log( 'dslc_show_section' );
+	if ( window.dslcDebug ) console.log( 'dslc_show_section' );
 
 	// Add class to body so we know it's in progress
 	// jQuery('body').addClass('dslca-anim-in-progress');
@@ -380,7 +359,7 @@ function dslc_show_section( section ) {
 	}
 
 	// Filter module option tabs
-	dslc_module_options_tab_filter();
+	elementOptionsTabs();
 
 	// Show ( animate ) the container
 	// setTimeout( function() {
@@ -404,7 +383,7 @@ function dslc_show_section( section ) {
 
 function dslc_generate_filters() {
 
-	if ( dslcDebug ) console.log( 'dslc_generate_filters' );
+	if ( window.dslcDebug ) console.log( 'dslc_generate_filters' );
 
 	// Vars
 	var el, filters = [], filtersHTML = '<a html="#" data-origin="">Show All</a>', els = jQuery('.dslca-section:visible .dslca-origin');
@@ -428,7 +407,7 @@ function dslc_generate_filters() {
 
 function dslc_filter_origin( origin, section ) {
 
-	if ( dslcDebug ) console.log( 'dslc_filter_origin' );
+	if ( window.dslcDebug ) console.log( 'dslc_filter_origin' );
 
 	jQuery('.dslca-origin', section).attr('data-display-module', 'false');
 	jQuery('.dslca-origin[data-origin="' + origin + '"]', section).attr('data-display-module', 'true');
@@ -440,233 +419,27 @@ function dslc_filter_origin( origin, section ) {
 	}
 }
 
-
-/**
- * UI - General - Initiate Drag and Drop Functonality
- */
-
-function dslc_drag_and_drop() {
-
-	if ( dslcDebug ) console.log( 'dslc_drag_and_drop' );
-
-	var modulesSection, modulesArea, moduleID, moduleOutput;
-
-	// Drag and Drop for module icons from the list of modules
-	var modules_list = jQuery('.dslca-modules .dslca-section-scroller-content'); // Groups that can hold modules
-	// jQuery(modules_list).each(function (i,e) {
-
-	if( modules_list.length == 0 ) {
-
-		modules_list = [ document.createElement( 'div' ) ];
-	}
-
-	var modules_list_sortable = Sortable.create(modules_list[0], {
-		sort: false, // do not allow sorting inside the list of modules
-		group: { name: 'modules', pull: 'clone', put: false },
-		animation: 150,
-		handle: '.dslca-module',
-		draggable: '.dslca-module',
-		// ghostClass: 'dslca-module-placeholder',
-		chosenClass: 'dslca-module-dragging',
-		scroll: true, // or HTMLElement
-		scrollSensitivity: 150, // px, how near the mouse must be to an edge to start scrolling.
-		scrollSpeed: 15, // px
-
-
-		setData: function (dataTransfer, dragEl) {
-		//dragEl – contains html of the draggable element like:
-		//<div class="dslca-module dslca-scroller-item dslca-origin dslca-origin-General" data-id="DSLC_Button" data-origin="General" draggable="false" style="">
-
-			  // dataTransfer.setData('Text', dragEl.textContent);
-			dataTransfer.setData(LiveComposer.Utils.msieversion() !== false ? 'Text' : 'text/html', dragEl.innerHTML);
-		},
-
-		// dragging started
-		onStart: function (/**Event*/evt) {
-			evt.oldIndex;  // element index within parent
-
-			// jQuery( '.dslc-modules-area' ).sortable( "refreshPositions" );
-			jQuery('body').removeClass('dslca-new-module-drag-not-in-progress').addClass('dslca-new-module-drag-in-progress');
-			jQuery('body', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-new-module-drag-not-in-progress').addClass('dslca-new-module-drag-in-progress');
-			jQuery('#dslc-header').addClass('dslca-header-low-z-index');
-		},
-
-		// dragging ended
-		onEnd: function (/**Event*/evt) {
-			evt.oldIndex;  // element's old index within parent
-			evt.newIndex;  // element's new index within parent
-
-			var itemEl = evt.item;  // dragged HTML
-			evt.preventDefault();
-			// evt.stopPropagation();
-			//return false;
-
-			// Prevent drop into modules listing
-			if(jQuery(itemEl).closest('.dslca-section-scroller-content').length > 0) return false;
-
-			jQuery( '.dslca-options-hovered', LiveComposer.Builder.PreviewAreaDocument ).removeClass('dslca-options-hovered');
-
-			// Vars
-			modulesArea = jQuery(itemEl.parentNode); //jQuery(this);
-			moduleID = itemEl.dataset.id; // get value of data-id attr.
-
-			dslc_generate_code();
-
-			if ( moduleID == 'DSLC_M_A' || jQuery('body').hasClass('dslca-module-drop-in-progress') ||
-				modulesArea.closest('#dslc-header').length || modulesArea.closest('#dslc-footer').length ) {
-
-				// nothing
-
-			} else {
-
-				jQuery('body').addClass('dslca-module-drop-in-progress');
-
-				// Add padding to modules area
-				/*
-				if ( modulesArea.hasClass('dslc-modules-area-not-empty') )
-					modulesArea.animate({ paddingBottom : 50 }, 150);
-				*/
-
-				// TODO: Optimize expensive ajax call in this function!
-				// Load Output
-				dslc_module_output_default( moduleID, function( response ){
-
-					// Append Content
-					moduleOutput = response.output;
-
-					// Remove extra padding from area
-					// modulesArea.css({ paddingBottom : 0 });
-
-					// Add output
-					// TODO: optimize jQuery in the string below
-
-					var dslcJustAdded = LiveComposer.
-										Builder.
-										Helpers.
-										insertModule( moduleOutput, jQuery('.dslca-module', modulesArea) );
-
-
-					setTimeout( function(){
-						LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();
-						jQuery('body').removeClass('dslca-module-drop-in-progress');
-					}, 700 );
-
-					// "Show" no content text // Not used anymore?
-					// jQuery('.dslca-no-content-primary', modulesArea ).css({ opacity : 1 });
-
-					// "Show" modules area management
-					jQuery('.dslca-modules-area-manage', modulesArea).css ({ visibility : 'visible' });
-
-					// Generete
-					LiveComposer.Builder.PreviewAreaWindow.dslc_carousel();
-					LiveComposer.Builder.PreviewAreaWindow.dslc_tabs();
-					LiveComposer.Builder.PreviewAreaWindow.dslc_init_accordion();
-
-					dslc_generate_code();
-					// Show publish
-					dslc_show_publish_button();
-
-					// LiveComposer.Builder.UI.initInlineEditors();
-				});
-
-				// Loading animation
-
-				// Show loader – Not used anymore.
-				// jQuery('.dslca-module-loading', modulesArea).show();
-
-				// Change module icon to the spinning loader.
-				jQuery(itemEl).find('.dslca-icon').attr('class', '').attr('class', 'dslca-icon dslc-icon-refresh dslc-icon-spin');
-
-
-				// Hide no content text // Not used anymore?
-				// jQuery('.dslca-no-content-primary', modulesArea).css({ opacity : 0 });
-
-				// Hide modules area management
-				jQuery('.dslca-modules-area-manage', modulesArea).css ({ visibility : 'hidden' });
-
-				// Animate loading
-				/*
-				var randomLoadingTime = Math.floor(Math.random() * (100 - 50 + 1) + 50) * 100;
-				jQuery('.dslca-module-loading-inner', modulesArea).css({ width : 0 }).animate({
-					width : '100%'
-				}, randomLoadingTime, 'linear' );
-				*/
-			}
-
-			LiveComposer.Builder.UI.stopScroller();
-			jQuery('body').removeClass('dslca-new-module-drag-in-progress').addClass('dslca-new-module-drag-not-in-progress');
-			jQuery('body', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-new-module-drag-in-progress').addClass('dslca-new-module-drag-not-in-progress');
-			jQuery('#dslc-header').removeClass('dslca-header-low-z-index');
-		},
-
-		// Element is dropped into the list from another list
-		onAdd: function (/**Event*/evt) {
-			var itemEl = evt.item;  // dragged HTMLElement
-			evt.from;  // previous list
-			// + indexes from onEnd
-			// evt.preventDefault();
-		},
-
-		// Changed sorting within list
-		onUpdate: function (/**Event*/evt) {
-			var itemEl = evt.item;  // dragged HTMLElement
-			// + indexes from onEnd
-			dslc_show_publish_button();
-			// evt.preventDefault();
-		},
-
-		// Called by any change to the list (add / update / remove)
-		onSort: function (/**Event*/evt) {
-			// same properties as onUpdate
-			evt.preventDefault();
-			// evt.stopPropagation(); return false;
-		},
-
-		// Element is removed from the list into another list
-		onRemove: function (/**Event*/evt) {
-			  // same properties as onUpdate
-		},
-
-		// Attempt to drag a filtered element
-		onFilter: function (/**Event*/evt) {
-			var itemEl = evt.item;  // HTMLElement receiving the `mousedown|tapstart` event.
-		},
-
-		// Event when you move an item in the list or between lists
-		onMove: function (/**Event*/evt) {
-			// Example: http://jsbin.com/tuyafe/1/edit?js,output
-			evt.dragged; // dragged HTMLElement
-			evt.draggedRect; // TextRectangle {left, top, right и bottom}
-			evt.related; // HTMLElement on which have guided
-			evt.relatedRect; // TextRectangle
-			// return false; — for cancel
-			jQuery( evt.to ).addClass('dslca-options-hovered');
-		}
-	});
-}
-
 /**
  * Deprecated Functions and Fallbacks
  */
 
-function dslc_option_changed() { dslc_show_publish_button(); }
-function dslc_module_dragdrop_init() { dslc_drag_and_drop(); }
+function dslc_option_changed() { window.dslc_show_publish_button(); }
 
 
 /**
  * Prevent drag and drop of the modules
  * into the inner content areas of the other modules
  */
-function dslc_fix_contenteditable() {
+export const fixContenteditable = () => {
 
-	LiveComposer.Builder.PreviewAreaDocument.on('dragstart', '.dslca-module, .dslc-module-front, .dslc-modules-area, .dslc-modules-section', function (e) {
+	window.LiveComposer.Builder.PreviewAreaDocument.on('dragstart', '.dslca-module, .dslc-module-front, .dslc-modules-area, .dslc-modules-section', function (e) {
 
-		jQuery('[contenteditable]', LiveComposer.Builder.PreviewAreaDocument).attr('contenteditable', false);
+		jQuery('[contenteditable]', window.LiveComposer.Builder.PreviewAreaDocument).attr('contenteditable', false);
 	});
 
-	LiveComposer.Builder.PreviewAreaDocument.on('dragend mousedown', '.dslca-module, .dslc-module-front, .dslc-modules-area, .dslc-modules-section', function (e) {
+	window.LiveComposer.Builder.PreviewAreaDocument.on('dragend mousedown', '.dslca-module, .dslc-module-front, .dslc-modules-area, .dslc-modules-section', function (e) {
 
-		jQuery('[contenteditable]', LiveComposer.Builder.PreviewAreaDocument).attr('contenteditable', true);
+		jQuery('[contenteditable]', window.LiveComposer.Builder.PreviewAreaDocument).attr('contenteditable', true);
 	});
 }
 
@@ -898,7 +671,7 @@ function dslc_get_control_value ( control_id ) {
  *
  * @return {void}
  */
-function dslc_keypress_events() {
+export const keypressEvents = () => {
 
 	jQuery( [document, LiveComposer.Builder.PreviewAreaWindow.document ] ).unbind('keydown').bind('keydown', function (keydown_event) {
 

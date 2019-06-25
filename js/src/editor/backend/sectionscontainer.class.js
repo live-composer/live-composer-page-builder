@@ -4,11 +4,10 @@
 
 'use strict';
 
-LiveComposer.Builder.Elements.CSectionsContainer = function(elem) {
+export const CSectionsContainer = (elem) => {
 
-	var self = this;
 
-	this.sortable = jQuery(elem).sortable({
+	const sortable = window.jQuery(elem).sortable({
 		items: ".dslc-modules-section-dnd",
 		handle: '.dslca-move-modules-section-hook:not(".dslca-action-disabled")',
 		placeholder: 'dslca-modules-section-placeholder',
@@ -24,7 +23,7 @@ LiveComposer.Builder.Elements.CSectionsContainer = function(elem) {
 		},
 		update: function (e, ui) {
 
-			dslc_show_publish_button();
+			window.dslc_show_publish_button();
 		},
 		start: function(e, ui){
 
@@ -35,7 +34,7 @@ LiveComposer.Builder.Elements.CSectionsContainer = function(elem) {
 		},
 		stop: function(e, ui){
 
-			dslc_generate_code();
+			window.dslc_generate_code();
 
 			LiveComposer.Builder.UI.stopScroller();
 			jQuery('body', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
