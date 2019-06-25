@@ -669,11 +669,11 @@ class DSLC_TP_Meta extends DSLC_Module {
 				<div class="dslc-tp-meta dslc-tp-meta-<?php echo $options['format']; ?>">
 					<ul class="dslc-clearfix">
 
-						<?php if ( in_array( 'date', $tp_elements ) ) : ?>
+						<?php if ( 'all' === $tp_elements || is_array( $tp_elements ) && in_array( 'date', $tp_elements ) ) : ?>
 							<li><?php echo get_the_time( get_option( 'date_format' ), $post_id ); ?></li>
 						<?php endif; ?>
 
-						<?php if ( in_array( 'author', $tp_elements ) ) : ?>
+						<?php if ( 'all' === $tp_elements || is_array( $tp_elements ) && in_array( 'author', $tp_elements ) ) : ?>
 							<?php if ( $show_fake ) : ?>
 								<li>
 									<?php if ( in_array( 'avatar', $tp_elements ) ) : ?>
@@ -695,7 +695,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 							<?php endif; ?>
 						<?php endif; ?>
 
-						<?php if ( in_array( 'category', $tp_elements ) ) : ?>
+						<?php if ( 'all' === $tp_elements || is_array( $tp_elements ) && in_array( 'category', $tp_elements ) ) : ?>
 							<?php if ( $show_fake ) : ?>
 								<li><a href="#"><?php _e( 'Category One', 'live-composer-page-builder' ); ?></a>, <a href="#"><?php _e( 'Category Two', 'live-composer-page-builder' ); ?></a></li>
 							<?php else : ?>
@@ -722,7 +722,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 							<?php endif; ?>
 						<?php endif; ?>
 
-						<?php if ( in_array( 'tags', $tp_elements ) ) : ?>
+						<?php if ( 'all' === $tp_elements || is_array( $tp_elements ) && in_array( 'tags', $tp_elements ) ) : ?>
 							<?php if ( $show_fake ) : ?>
 								<li><a href="#"><?php _e( 'One', 'live-composer-page-builder' ); ?></a>, <a href="#"><?php _e( 'Two', 'live-composer-page-builder' ); ?></a>, <a href="#"><?php _e( 'Three', 'live-composer-page-builder' ); ?></a></li>
 							<?php else : ?>
@@ -749,7 +749,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 							<?php endif; ?>
 						<?php endif; ?>
 
-						<?php if ( in_array( 'comments', $tp_elements ) && ( $comments_output != '' || $show_fake ) ) : ?>
+						<?php if ( 'all' === $tp_elements || is_array( $tp_elements ) && in_array( 'comments', $tp_elements ) && ( $comments_output != '' || $show_fake ) ) : ?>
 							<?php if ( $show_fake ) : ?>
 								<li><?php _e( '10 Comments', 'live-composer-page-builder' ); ?></li>
 							<?php else : ?>
