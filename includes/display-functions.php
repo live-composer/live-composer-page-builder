@@ -1387,16 +1387,37 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1, $is_h
 	if ( $dslc_active && ! $is_header_footer && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
 		$atts = dslc_encode_shortcodes_in_array( $atts );
+		$ui_icons_url = DS_LIVE_COMPOSER_URL . 'css/icons';
 
 		// Management
 		$output .= '
 				<div class="dslca-modules-section-manage">
 					<div class="dslca-modules-section-manage-inner">
-						<span class="dslca-manage-action dslca-edit-modules-section-hook" title="Edit options" ><span class="dslca-icon dslc-icon-cog"></span></span>
-						<span class="dslca-manage-action dslca-copy-modules-section-hook" title="Duplicate" ><span class="dslca-icon dslc-icon-copy"></span></span>
-						<span class="dslca-manage-action dslca-move-modules-section-hook" title="Drag to move" ><span class="dslca-icon dslc-icon-move"></span></span>
-						<span class="dslca-manage-action dslca-export-modules-section-hook" title="Export section code" ><span class="dslca-icon dslc-icon-upload-alt"></span></span>
-						<span class="dslca-manage-action dslca-delete-modules-section-hook" title="Delete" ><span class="dslca-icon dslc-icon-remove"></span></span>
+						<span class="dslca-manage-action dslca-edit-modules-section-hook" title="Edit options" >
+							<svg class="feather">
+								<use xlink:href="' . esc_url( $ui_icons_url ) . '/feather-sprite.svg#sliders"/>
+							</svg>
+						</span>
+						<span class="dslca-manage-action dslca-copy-modules-section-hook" title="Duplicate" >
+							<svg class="feather">
+								<use xlink:href="' . esc_url( $ui_icons_url ) . '/feather-sprite.svg#copy"/>
+							</svg>
+						</span>
+						<span class="dslca-manage-action dslca-move-modules-section-hook" title="Drag to move" >
+							<svg class="feather">
+								<use xlink:href="' . esc_url( $ui_icons_url ) . '/feather-sprite.svg#move"/>
+							</svg>
+						</span>
+						<span class="dslca-manage-action dslca-export-modules-section-hook" title="Export section code" >
+							<svg class="feather">
+								<use xlink:href="' . esc_url( $ui_icons_url ) . '/feather-sprite.svg#download"/>
+							</svg>
+						</span>
+						<span class="dslca-manage-action dslca-delete-modules-section-hook" title="Delete" >
+							<svg class="feather">
+								<use xlink:href="' . esc_url( $ui_icons_url ) . '/feather-sprite.svg#x"/>
+							</svg>
+						</span>
 					</div>
 				</div>
 				<div class="dslca-modules-section-settings">' . dslc_encode_shortcodes( dslc_row_get_options_fields( $atts ) ) . '</div>';
@@ -1427,6 +1448,7 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1, $is_h
 function dslc_modules_area_front( $atts, $content = null, $version = 1, $is_header_footer = false ) {
 
 	global $dslc_active;
+	$ui_icons_url = DS_LIVE_COMPOSER_URL . 'css/icons';
 
 	$pos_class = '';
 	$admin_class = '';
@@ -1459,10 +1481,20 @@ function dslc_modules_area_front( $atts, $content = null, $version = 1, $is_head
 		$output .= '<div class="dslca-modules-area-manage">
 			<span class="dslca-modules-area-manage-line"></span>
 			<div class="dslca-modules-area-manage-inner">
-				<span class="dslca-manage-action dslca-copy-modules-area-hook" title="Duplicate" ><span class="dslca-icon dslc-icon-copy"></span></span>
-				<span class="dslca-manage-action dslca-move-modules-area-hook" title="Drag to move" ><span class="dslca-icon dslc-icon-move"></span></span>
+				<span class="dslca-manage-action dslca-copy-modules-area-hook" title="Duplicate" >
+					<svg class="feather">
+						<use xlink:href="' . esc_url( $ui_icons_url ) . '/feather-sprite.svg#copy"/>
+					</svg>
+				</span>
+				<span class="dslca-manage-action dslca-move-modules-area-hook" title="Drag to move" >
+					<svg class="feather">
+						<use xlink:href="' . esc_url( $ui_icons_url ) . '/feather-sprite.svg#move"/>
+					</svg>
+				</span>
 				<span class="dslca-manage-action dslca-change-width-modules-area-hook" title="Change width" >
-					<span class="dslca-icon dslc-icon-columns"></span>
+					<svg class="feather">
+						<use xlink:href="' . esc_url( $ui_icons_url ) . '/feather-sprite.svg#columns"/>
+					</svg>
 					<div class="dslca-change-width-modules-area-options">';
 		$output .= '<span>' . __( 'Container Width', 'live-composer-page-builder' ) . '</span>';
 		$output .= '<span data-size="1">1/12</span><span data-size="2">2/12</span>
@@ -1473,7 +1505,11 @@ function dslc_modules_area_front( $atts, $content = null, $version = 1, $is_head
 						<span data-size="11">11/12</span><span data-size="12">12/12</span>
 					</div>
 				</span>
-				<span class="dslca-manage-action dslca-delete-modules-area-hook" title="Delete" ><span class="dslca-icon dslc-icon-remove"></span></span>
+				<span class="dslca-manage-action dslca-delete-modules-area-hook" title="Delete" >
+					<svg class="feather">
+						<use xlink:href="' . esc_url( $ui_icons_url ) . '/feather-sprite.svg#x"/>
+					</svg>
+				</span>
 			</div>
 		</div>';
 	}

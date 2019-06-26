@@ -78,12 +78,24 @@ body a:focus {
 	box-shadow: none;
 }
 
+/* https://github.com/feathericons/feather#svg-sprite */
+.feather {
+	width: 24px;
+	height: 24px;
+	stroke: currentColor;
+	stroke-width: 2;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	fill: none;
+}
+
 #dslc-preview-error {
 	text-align: center;
 	padding: 160px 0 0;
 	text-transform: uppercase;
 	letter-spacing: 2px;
 }
+
 
 .dslc-module-heading:before,
 .dslc-module-heading:after,
@@ -1853,29 +1865,41 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 
 	/* Icon element */
 	.dslca-manage-action {
+		display: flex;
+		align-items: center;
+
 		color: #fff;
-		display: inline-block;
+		background-color: #ED7C5F;
+
 		text-decoration: none;
-		font-size: 12px;
+		font-size: 14px;
 		line-height: 15px;
 		text-align: center;
-		padding: 5px 6px;
+		padding: 0 8px;
 		min-width: 20px;
 		margin-right: -2px;
 	}
+
+	.dslca-module-manage-inner .dslca-manage-action {
+		background-color: #5291EE;
+	}
+
+		.dslca-manage-action svg {
+			max-width: 15px;
+		}
 
 		.dslca-icon {
 			vertical-align: middle;
 		}
 
 		.dslca-manage-action:first-child {
-			padding-left: 8px;
-			border-radius: 3px 0 0 3px;
+			padding-left: 12px;
+			border-radius: 3px 0 0 0;
 		}
 
 		.dslca-manage-action:last-child {
-			padding-right: 8px;
-			border-radius: 0 3px 3px 0;
+			padding-right: 12px;
+			border-radius: 0 3px 0 0;
 		}
 
 
@@ -1884,6 +1908,7 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 		bottom: 0;
 		left: 0;
 		right: 0;
+		height: 30px;
 		visibility: hidden;
 		padding-right: 0;
 		position: absolute;
@@ -1903,20 +1928,23 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 	}
 		.dslca-modules-section-manage-inner,
 		.dslca-module-manage-inner {
-			background: #f17c56;
+			display: flex;
+			justify-content: center;
+			vertical-align: middle;
+
+			/* background: #f17c56; */
 			border-radius: 3px;
-			display: inline-block;
 			line-height: 1;
 			position: relative;
 			z-index: 99999;
-			vertical-align: middle;
+			height:30px;
 			opacity: 0;
 			cursor: pointer;
 		}
 
 		.dslca-modules-section-manage-inner {
-			border-top-right-radius: 0;
-			border-top-left-radius: 0;
+			border-bottom-right-radius: 0;
+			border-bottom-left-radius: 0;
 		}
 
 			.dslca-modules-section-manage .dslca-manage-action:hover {
@@ -2008,8 +2036,7 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 	.dslca-modules-area-manage {
 		bottom: 0;
 		position: absolute;
-		left: -24px;
-		/*right: 100%;*/
+		left: -29px;
 		top: 0;
 		margin-right: 0px;
 		text-align: center;
@@ -2027,10 +2054,11 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 	}
 
 		.dslca-modules-area-manage-inner {
-			background: #b2b7bc;
+			display: flex;
+			flex-flow: column;
+			/* background: #b2b7bc; */
 			border-radius: 3px 0 0 3px;
 			border-right-width: 0;
-			display: inline-block;
 			margin-top: 10px;
 			position: relative;
 			z-index: 99999;
@@ -2047,12 +2075,15 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 
 		.dslca-modules-area-manage .dslca-manage-action {
 			color: #fff;
+			background-color: #b2b7bc;;
 			display: block;
 			text-decoration: none;
-			font-size: 12px;
-			line-height: 16px;
+			/* font-size: 12px; */
+			line-height: 1px;
 			text-align: center;
 			margin: 0;
+
+			padding: 1px 7px;
 		}
 
 		.dslca-modules-area-manage-inner .dslca-manage-action:first-child {
@@ -2247,7 +2278,7 @@ body.rtl .dslca-modules-area-placeholder {
 	display: block;
 	position: absolute;
 	left: 50%;
-	margin-left: -47px;
+	margin-left: -77px;
 	top: 0;
 	text-align: center;
 	z-index: 99999;
@@ -2710,7 +2741,7 @@ body.rtl .dslca-modules-area-placeholder {
 
 			#dslc-content .dslca-wysiwyg-actions-edit-hook:hover {
 				background: #5080C9;
-
+				z-index: 99999;
 			}
 
 	body.dslca-enabled .ui-widget-overlay,
