@@ -120,6 +120,18 @@ class DSLC_Image extends DSLC_Module {
 				'type' => 'text',
 			),
 			array(
+				'id' => 'link_nofollow',
+				'std' => '',
+				'type' => 'checkbox',
+				'help' => __( 'Nofollow tells search engines to not follow this specific link', 'live-composer-page-builder' ),
+				'choices' => array(
+					array(
+						'label' => __( 'Nofollow', 'live-composer-page-builder' ),
+						'value' => 'nofollow',
+					),
+				),
+			),
+			array(
 				'label' => __( 'Lightbox Image', 'live-composer-page-builder' ),
 				'id' => 'link_lb_image',
 				'std' => '',
@@ -873,13 +885,8 @@ class DSLC_Image extends DSLC_Module {
 					}
 				}
 
-				?>
-
-				<?php
-
-
 				$parsed = parse_url( $anchor_href );
-				if ( '/' === $anchor_href || '#' === $anchor_href || ! empty( $parsed['scheme'] ) ) {
+				if ( '/' === $anchor_href || '#' === $anchor_href[0] || ! empty( $parsed['scheme'] ) ) {
 					$image_url = $anchor_href;
 				} else {
 					$image_url = '//' . ltrim( $anchor_href, '/' );
@@ -905,7 +912,7 @@ class DSLC_Image extends DSLC_Module {
 				?>
 
 				<?php if ( 'none' !== $options['link_type'] ) : ?>
-					<a class="<?php echo esc_attr( $anchor_class ); ?>" href="<?php echo esc_attr( $image_url ); ?>" target="<?php echo esc_attr( $anchor_target ); ?>">
+					<a class="<?php echo esc_attr( $anchor_class ); ?>" href="<?php echo esc_url( $image_url ); ?>" target="<?php echo esc_attr( $anchor_target ); ?>"  <?php if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?>>
 				<?php endif; ?>
 					<img src="<?php echo esc_attr( $the_image ); ?>" alt="<?php echo esc_attr( $options['image_alt'] ); ?>" title="<?php echo esc_attr( $options['image_title'] ); ?>" <?php echo $srcset; ?> <?php echo $sizes; ?> />
 				<?php if ( 'none' !== $options['link_type'] ) : ?>
