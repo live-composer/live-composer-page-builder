@@ -2877,12 +2877,14 @@ class DSLC_Module {
 		$presets = get_option( 'dslc_presets', false );
 		if ( false !== $presets ) {
 			$presets = maybe_unserialize( $presets );
-			foreach ( $presets as $preset ) {
-				if ( $preset['module'] === $this->module_id ) {
-					$choices[] = array(
-						'label' => $preset['title'],
-						'value' => $preset['id'],
-					);
+			if ( is_array( $presets ) ) {
+				foreach ( $presets as $preset ) {
+					if ( $preset['module'] === $this->module_id ) {
+						$choices[] = array(
+							'label' => $preset['title'],
+							'value' => $preset['id'],
+						);
+					}
 				}
 			}
 		}
