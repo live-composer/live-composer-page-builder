@@ -4,7 +4,5 @@
     "type": "project",
     "license": "GPL v3",
     "require": {},
-    "require-dev": {
-        "lucatume/wp-browser": "^2.2"
-    }
+    "require-dev": {}
 }

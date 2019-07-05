@@ -1,5 +1,20 @@
+To install local development:
+$> ./bin/setup-local-env.sh
+
+http://localhost:8888
+Default username: admin, password: password
+
+For testing:
+$> ./bin/setup-local-env.sh --e2e_tests
+
+http://localhost:8889
+
+
 To run tests launch:
 $> bash bin/localtest.sh
+
+
+
 
 
 
