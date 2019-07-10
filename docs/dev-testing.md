@@ -18,6 +18,9 @@ $> npm run build
 
 
 
+
+
+
 Next steps:
 0. Create the databases used by the modules; wp-browser will not do it for you!
 1. Install and configure WordPress activating the theme and plugins you need to create a database dump in tests/_data/dump.sql
