@@ -2617,7 +2617,7 @@ class DSLC_Module {
 
 		?>
 
-		<div id="dslc-module-<?php echo esc_attr( $options['module_instance_id'] ); ?>" class="<?php echo esc_attr( $module_class ); ?>" data-module-id="<?php echo esc_attr( $options['module_instance_id'] ); ?>" data-dslc-module-id="<?php echo esc_attr( $this->module_id ); ?>" data-dslc-module-size="<?php echo esc_attr( $data_attr_size ); ?>" data-dslc-anim="<?php echo esc_attr( $options['css_anim'] ); ?>" data-dslc-anim-delay="<?php echo esc_attr( $options['css_anim_delay'] ); ?>" data-dslc-anim-duration="<?php echo esc_attr( $options['css_anim_duration'] ); ?>"  data-dslc-anim-easing="<?php echo esc_attr( $options['css_anim_easing'] ); ?>" data-dslc-preset="<?php echo esc_attr( $options['css_load_preset'] ); ?>" <?php echo $title_attr; ?>>
+		<div id="dslc-module-<?php echo esc_attr( $options['module_instance_id'] ); ?>" class="<?php echo esc_attr( $module_class ); ?>" data-module-id="<?php echo esc_attr( $options['module_instance_id'] ); ?>" data-module="<?php echo esc_attr( $this->module_id ); ?>" data-dslc-module-size="<?php echo esc_attr( $data_attr_size ); ?>" data-dslc-anim="<?php echo esc_attr( $options['css_anim'] ); ?>" data-dslc-anim-delay="<?php echo esc_attr( $options['css_anim_delay'] ); ?>" data-dslc-anim-duration="<?php echo esc_attr( $options['css_anim_duration'] ); ?>"  data-dslc-anim-easing="<?php echo esc_attr( $options['css_anim_easing'] ); ?>" data-dslc-preset="<?php echo esc_attr( $options['css_load_preset'] ); ?>" <?php echo $title_attr; ?>>
 
 			<?php do_action( 'dslc_module_before' ); ?>
 
@@ -2659,10 +2659,10 @@ class DSLC_Module {
 				<div class="dslca-module-manage">
 				<span class="dslca-module-manage-line"></span>
 				<div class="dslca-module-manage-inner">
-				<span class="dslca-manage-action dslca-module-manage-hook dslca-module-edit-hook" title="<?php esc_attr_e( 'Edit options', 'live-composer-page-builder' ); ?>"><span class="dslca-icon dslc-icon-cog"></span></span>
-				<span class="dslca-manage-action dslca-module-manage-hook dslca-copy-module-hook" title="<?php esc_attr_e( 'Duplicate', 'live-composer-page-builder' ); ?>"><span class="dslca-icon dslc-icon-copy"></span></span>
+				<span class="dslca-manage-action dslca-module-manage-hook dslca-module-edit-hook" title="<?php esc_attr_e( 'Edit options', 'live-composer-page-builder' ); ?>" data-event="module-edit"><span class="dslca-icon dslc-icon-cog"></span></span>
+				<span class="dslca-manage-action dslca-module-manage-hook" title="<?php esc_attr_e( 'Duplicate', 'live-composer-page-builder' ); ?>" data-event="module-duplicate"><span class="dslca-icon dslc-icon-copy"></span></span>
 				<span class="dslca-manage-action dslca-module-manage-hook dslca-move-module-hook" title="<?php esc_attr_e( 'Drag to move', 'live-composer-page-builder' ); ?>"><span class="dslca-icon dslc-icon-move"></span></span>
-				<span class="dslca-manage-action dslca-module-manage-hook dslca-change-width-module-hook" title="<?php esc_attr_e( 'Change width', 'live-composer-page-builder' ); ?>">
+				<span class="dslca-manage-action dslca-module-manage-hook dslca-change-width-module-hook" title="<?php esc_attr_e( 'Change width', 'live-composer-page-builder' ); ?>" data-event="module-change-width">
 					<span class="dslca-icon dslc-icon-columns"></span>
 					<div class="dslca-change-width-module-options">
 						<span><?php esc_attr_e( 'Element Width', 'live-composer-page-builder' ); ?></span>
@@ -2674,7 +2674,7 @@ class DSLC_Module {
 						<span data-size="11">11/12</span><span data-size="12">12/12</span>
 					</div>
 				</span>
-				<span class="dslca-manage-action dslca-module-manage-hook dslca-delete-module-hook" title="<?php esc_attr_e( 'Delete', 'live-composer-page-builder' ); ?>"><span class="dslca-icon dslc-icon-remove"></span></span>
+				<span class="dslca-manage-action dslca-module-manage-hook dslca-delete-module-hook" title="<?php esc_attr_e( 'Delete', 'live-composer-page-builder' ); ?>" data-event="module-delete"><span class="dslca-icon dslc-icon-remove"></span></span>
 				</div>
 				<?php if ( DS_LIVE_COMPOSER_DEV_MODE ) : ?>
 						<div class="dslca-manage-action dslca-module-manage-inner dslca-dev-mode">

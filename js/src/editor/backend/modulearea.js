@@ -14,6 +14,9 @@
 import { dragAndDropInit } from './dragndrop.js';
 import { addSection } from './sections.js';
 import { ModuleArea } from './modulearea.class.js';
+import { CModalWindow } from './modalwindow.class.js';
+import { showSection } from './uigeneral.js';
+import { getNewModuleId } from "./module.js";
 
 
 /**
@@ -93,7 +96,7 @@ import { ModuleArea } from './modulearea.class.js';
 
 				var self = jQuery(this);
 
-				LiveComposer.Builder.UI.CModalWindow({
+				CModalWindow({
 
 					title: DSLCString.str_del_area_title,
 					content: DSLCString.str_del_area_descr,
@@ -267,7 +270,7 @@ function dslc_modules_area_delete( area ) {
 		jQuery('.dslca-header .dslca-go-to-section-hook', LiveComposer.Builder.PreviewAreaDocument).show();
 
 		// Show the modules listing
-		dslc_show_section('.dslca-modules');
+		showSection('.dslca-modules');
 
 	}
 
@@ -356,7 +359,7 @@ function dslc_modules_area_copy( area ) {
 		var dslc_module = jQuery(this);
 
 		//Generate new ID for the new module and change it in HTML/CSS of the module.
-		dslc_module_new_id( dslc_module[0] );
+		getNewModuleId( dslc_module[0] );
 
 		// Remove "dslca-module-being-edited" class form any element
 		jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-module-being-edited');

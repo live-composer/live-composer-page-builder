@@ -37,9 +37,7 @@ checkSpeed:function(){this.options.duration<this.options.speed+25&&(this.options
 
 
 /**
- * Mutation observer library written by Alexey Petlenko
- *
- * @author Alexey Petlenko(Massique)
+ * Mutation observer library.
  */
 
 ;(function(){

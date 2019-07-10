@@ -4011,7 +4011,7 @@ endif; ?>
 											echo apply_filters( 'dslc_text_block_render', $output_content );
 											?>
 										</div><!-- .dslca-editable-content -->
-										<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook"><?php _e( 'Open in WP Editor', 'live-composer-page-builder' ); ?></span></div>
+										<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook" data-event="wysiwyg-edit"><?php _e( 'Open in WP Editor', 'live-composer-page-builder' ); ?></span></div>
 									<?php else : ?>
 										<?php
 										$output_content = stripslashes( $options['content'] );

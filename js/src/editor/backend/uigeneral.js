@@ -5,15 +5,14 @@
  * - dslc_hide_composer ( Hides the composer elements )
  * - dslc_show_composer ( Shows the composer elements )
  * - dslc_show_publish_button ( Shows the publish button )
- * - dslc_show_section ( Show a specific section )
+ * - dslc_show_section now showSection ( Show a specific section )
  * - dslc_generate_filters ( Generate origin filters )
  * - dslc_filter_origin ( Origin filtering for templates/modules listing )
  * - dragAndDropInit ( Initiate drag and drop functionality )
  ***********************************/
 
-'use strict';
-
 import { elementOptionsTabs } from './settings.panel.js';
+import { CModalWindow } from './modalwindow.class.js';
 
 import Sortable from 'sortablejs';
 
@@ -36,7 +35,7 @@ jQuery(document).on( 'click', '.dslca-show-js-error-hook', function(e){
 
 	if ( ! jQuery('body').hasClass('dslca-saving-in-progress') ) {
 
-		LiveComposer.Builder.UI.CModalWindow({
+		CModalWindow({
 
 			title: '<a href="https://livecomposerplugin.com/support/" target="_blank"><span class="dslca-icon dslc-icon-comment"></span> &nbsp; Get Support Info</a>',
 			content: '<span class="dslca-error-report">' + errors_container.value + '</span>',
@@ -138,7 +137,7 @@ jQuery(document).on( 'click', '.dslca-show-composer-hook', function(e){
 
 jQuery(document).on( 'click', '.dslca-go-to-modules-hook', function(e){
 	e.preventDefault();
-	dslc_show_section( '.dslca-modules' );
+	showSection( '.dslca-modules' );
 });
 
 /**
@@ -156,7 +155,7 @@ jQuery(document).on( 'click', '.dslca-go-to-section-hook', function(e){
 	}
 
 	var sectionTitle = jQuery(this).data('section');
-	dslc_show_section( sectionTitle );
+	showSection( sectionTitle );
 
 	if ( jQuery(this).hasClass('dslca-go-to-section-modules') || jQuery(this).hasClass('dslca-go-to-section-templates')  ) {
 
@@ -176,7 +175,7 @@ jQuery(document).on( 'click', '.dslca-close-composer-hook', function(e){
 
 	if ( ! jQuery('body').hasClass('dslca-saving-in-progress') && jQuery('.dslca-save-composer').is(':visible') ) {
 		// Show warning if changes weren't saved.
-		LiveComposer.Builder.UI.CModalWindow({
+		CModalWindow({
 
 			title: DSLCString.str_exit_title,
 			content: DSLCString.str_exit_descr,
@@ -260,6 +259,7 @@ function dslc_hide_composer() {
 	// Add class to know it's hidden
 	jQuery('body').addClass('dslca-composer-hidden');
 	jQuery('body', LiveComposer.Builder.PreviewAreaDocument).addClass('dslca-composer-hidden');
+	LiveComposer.Builder.Flags.uiHidden = true;
 
 
 	// Hide ( animation ) the main composer area ( at the bottom )
@@ -285,6 +285,7 @@ function dslc_show_composer() {
 	// Remove the class from the body so we know it's not hidden
 	jQuery('body').removeClass('dslca-composer-hidden');
 	jQuery('body', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-composer-hidden');
+	LiveComposer.Builder.Flags.uiHidden = false;
 
 
 	// Show ( animate ) the main composer area ( at the bottom )
@@ -306,9 +307,8 @@ window.dslc_show_publish_button = function() {
 	jQuery('.dslca-save-draft-composer').show().addClass('dslca-init-animation');
 }
 
-function dslc_hide_publish_button() {
-
-	if ( window.dslcDebug ) console.log( 'dslc_hide_publish_button' );
+export const hidePublishButton = () => {
+	if ( window.dslcDebug ) console.log( 'hidePublishButton' );
 
 	jQuery('.dslca-save-composer').hide();
 	jQuery('.dslca-save-draft-composer').hide();
@@ -318,9 +318,8 @@ function dslc_hide_publish_button() {
  * UI - GENERAL - Show Section
  */
 
-function dslc_show_section( section ) {
-
-	if ( window.dslcDebug ) console.log( 'dslc_show_section' );
+export const showSection = ( section ) => {
+	if ( window.dslcDebug ) console.log( 'showSection' );
 
 	// Add class to body so we know it's in progress
 	// jQuery('body').addClass('dslca-anim-in-progress');
@@ -418,12 +417,6 @@ function dslc_filter_origin( origin, section ) {
 		jQuery('.dslca-origin.dslca-exclude', section).attr('data-display-module', 'false')
 	}
 }
-
-/**
- * Deprecated Functions and Fallbacks
- */
-
-function dslc_option_changed() { window.dslc_show_publish_button(); }
 
 
 /**
@@ -555,38 +548,19 @@ jQuery(document).ready(function($){
 	// Disable Toggle If the Control Focused
 	jQuery(document).on( 'mousedown', '.dslca-module-edit-option', function(e){
 
-		var toggle = $('.dslc-control-toggle');
+		var toggle = jQuery('.dslc-control-toggle');
 		if ( ! toggle.is(e.target) // if the target of the click isn't the container...
 		     && toggle.has(e.target).length === 0 ) // ... nor a descendant of the container
 		{
 
 			if ( jQuery(e.target).closest('.dslca-module-edit-option').hasClass('dslca-option-off') ) {
 
-				var control_id = $(e.target).closest('.dslca-module-edit-option').find('.dslca-module-edit-field').data('id');
+				var control_id = jQuery(e.target).closest('.dslca-module-edit-option').find('.dslca-module-edit-field').data('id');
 				dslc_toogle_control (control_id);
 			}
 		}
 	});
-
-/* Reset all styling – not ready
-
-	$(document).on( 'click', '.dslca-clear-styling-button', function(e){
-		e.preventDefault();
-
-
-		$('.dslca-option-with-toggle').each(function(e){
-			// var control_id = $(this).find('.dslca-module-edit-field').data('id');
-			$(this).find('.dslca-module-edit-field').val('').trigger('change');
-		});
-
-		dslc_module_output_altered(); // call module regeneration
-
-	});
-*/
 });
-
-// Very Slow do not use for live editing
-// Only use when you need to disable some of the CSS properties.
 
 function disable_css_rule(selectorCSS, ruleCSS, moduleID) {
 
@@ -630,15 +604,12 @@ function disable_css_rule(selectorCSS, ruleCSS, moduleID) {
 }
 
 function dslc_combine_value_and_extension ( value, extension) {
-
 	if ( '' === value || null === value ) {
-
 		return value;
 	}
 
 	// Check if value do not already include extension
 	if ( value.indexOf(extension) == -1 ) {
-
 		value = value + extension;
 	}
 
@@ -676,7 +647,7 @@ export const keypressEvents = () => {
 	jQuery( [document, LiveComposer.Builder.PreviewAreaWindow.document ] ).unbind('keydown').bind('keydown', function (keydown_event) {
 
 		// Modal window [ESC]/[Enter]
-		dslc_modal_keypress_events(keydown_event);
+		window.dslc_modal_keypress_events(keydown_event);
 
 		// Prevent backspace from navigating back
 		dslc_disable_backspace_navigation(keydown_event);
@@ -738,7 +709,7 @@ function dslc_notice_on_refresh(e) {
 		if ( jQuery('.dslca-save-composer-hook').offsetParent !== null || jQuery('.dslca-module-edit-save').offsetParent !== null ) {
 
 			e.preventDefault();
-			LiveComposer.Builder.UI.CModalWindow({
+			CModalWindow({
 
 				title: DSLCString.str_refresh_title,
 				content: DSLCString.str_refresh_descr,
@@ -816,14 +787,14 @@ function dslca_update_report_log() {
 jQuery(document).on('editorFrameLoaded', function(){
 
 	var $ = jQuery;
-	var headerFooter = $('div[data-hf]', LiveComposer.Builder.PreviewAreaDocument);
+	var headerFooter = jQuery('div[data-hf]', LiveComposer.Builder.PreviewAreaDocument);
 	var overlay = '';
 
 	headerFooter.each(function(index, el) {
-		var linkToEdit = $(el).data('editing-link');
-		var hfType = $(el).data('editing-type');
-		var editingLabel = $(el).data('editing-label');
-		var editingSubLabel = $(el).data('editing-sublabel');
+		var linkToEdit = jQuery(el).data('editing-link');
+		var hfType = jQuery(el).data('editing-type');
+		var editingLabel = jQuery(el).data('editing-label');
+		var editingSubLabel = jQuery(el).data('editing-sublabel');
 
 		overlay += '<div class="dslc-hf-block-overlay"><a target="_blank" href="' + linkToEdit + '" class="dslc-hf-block-overlay-button dslca-link">' + editingLabel + '</a>';
 		if ( editingSubLabel !== undefined ) {

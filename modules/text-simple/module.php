@@ -5213,7 +5213,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 
 			if ( $dslc_active ) {
 				?></div><!-- .dslca-editable-content --><?php
-			?><div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook"><?php _e( 'Open in WP Editor', 'live-composer-page-builder' ); ?></span></div><?php
+			?><div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook" data-event="wysiwyg-edit"><?php _e( 'Open in WP Editor', 'live-composer-page-builder' ); ?></span></div><?php
 			} ?>
 		</div>
 		

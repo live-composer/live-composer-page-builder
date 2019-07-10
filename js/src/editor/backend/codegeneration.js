@@ -5,7 +5,7 @@
  * - dslc_save_composer ( Save the Page Changes )
  * - dslc_save_draft_composer ( Save the changes as draft, not publish )
  * - dslc_generate_code ( Generates Page's LC data )
- * - dslc_generate_section_code ( Generate LC data for a specific row/section )
+ * - generateSectionCode ( Generate LC data for a specific row/section )
  * - dslca_gen_content_for_search ( Generate Readable Content For Search )
  *
  ***********************************/
@@ -198,7 +198,7 @@ window.dslc_generate_code = function() {
 
 		modulesSection = jQuery(this);
 
-		modulesSectionJson = dslc_generate_section_code( modulesSection );
+		modulesSectionJson = generateSectionCode( modulesSection );
 
 		// Update JSON in hidden text area with updated code.
 		modulesSection.find('.dslca-section-code').val( modulesSectionJson );
@@ -230,9 +230,10 @@ window.dslc_generate_code = function() {
  * @param  {jQuery Object} theModulesSection jQuery element for the section to process
  * @return {String}                   			JSON code for the section
  */
-function dslc_generate_section_code( theModulesSection ) {
+// ex. dslc_generate_section_code
+export const generateSectionCode = ( theModulesSection ) => {
 
-	if ( window.dslcDebug ) console.log( 'dslc_generate_section_code' );
+	if ( window.dslcDebug ) console.log( 'generateSectionCode' );
 
 	// Vars
 	var moduleCode = '',
@@ -490,16 +491,17 @@ function dslc_generate_section_code( theModulesSection ) {
 /**
  * CODE GENERATION - Document Ready
  */
-jQuery(document).ready(function($){
+const setEventListeners = () => {
 
 	/**
 	 * Hook - Save Page
 	 */
-	$(document).on( 'click', '.dslca-save-composer-hook', function(e){
+	jQuery(document).on( 'click', '.dslca-save-composer-hook', function(e){
 		e.preventDefault();
 
+		console.log( "dslca-save-composer-hook" );
 		// If some saving action not already in progress
-		if ( ! $('body').hasClass('dslca-module-saving-in-progress') && ! $('body').hasClass('dslca-saving-in-progress') ) {
+		if ( ! jQuery('body').hasClass('dslca-module-saving-in-progress') && ! jQuery('body').hasClass('dslca-saving-in-progress') ) {
 			// Call the function to save
 			dslc_save_composer();
 		}
@@ -508,16 +510,16 @@ jQuery(document).ready(function($){
 	/**
 	 * Hook - Save Draft
 	 */
-	$(document).on( 'click', '.dslca-save-draft-composer-hook', function(e){
+	jQuery(document).on( 'click', '.dslca-save-draft-composer-hook', function(e){
 		e.preventDefault();
 
 		// If some saving action not already in progress
-		if ( ! $('body').hasClass('dslca-module-saving-in-progress') && ! $('body').hasClass('dslca-saving-in-progress') ) {
+		if ( ! jQuery('body').hasClass('dslca-module-saving-in-progress') && ! jQuery('body').hasClass('dslca-saving-in-progress') ) {
 			// Call the function to save
 			dslc_save_draft_composer();
 		}
 	});
-});
+}
 
 /**
 * Other - Generate Readable Content For Search
@@ -572,6 +574,28 @@ function dslca_gen_content_for_search() {
 	}
 }
 
+/**
+ * Other - Generate code of editable content
+ */
+export const editableContentCodeGeneration = ( dslcField ) => {
+
+	if ( window.dslcDebug ) console.log( 'editableContentCodeGeneration' );
+
+	// In some rare cases we have the next error:
+	// TypeError: undefined is not an object (evaluating 'dslcField.html().trim()...')
+	if ( undefined === dslcField ) {
+		return false;
+	}
+
+	var dslcModule, dslcContent, dslcFieldID;
+
+	dslcModule = dslcField.closest('.dslc-module-front');
+	dslcContent = dslcField.html().trim().replace(/<textarea/g, '<lctextarea').replace(/<\/textarea/g, '</lctextarea');
+	dslcFieldID = dslcField.data('id');
+
+	jQuery('.dslca-module-option-front[data-id="' + dslcFieldID + '"]', dslcModule).val( dslcContent );
+}
+
 export const codeGenerationInitJS = () => {
-	
+	setEventListeners();
 }

@@ -4,57 +4,70 @@
 
 'use strict';
 
-export const CSectionsContainer = (elem) => {
+export const CSectionsContainer = class{
+
+	constructor (elem) {
+		this.sortable;
+
+		this.initSortable(elem);
+		this.reactToSortableOnOff();
+	}
 
 
-	const sortable = window.jQuery(elem).sortable({
-		items: ".dslc-modules-section-dnd",
-		handle: '.dslca-move-modules-section-hook:not(".dslca-action-disabled")',
-		placeholder: 'dslca-modules-section-placeholder',
-		tolerance : 'intersect',
-		cursorAt: { bottom: 10 },
-		axis: 'y',
-		scroll: true,
-		scrollSensitivity: 140,
-		scrollSpeed : 5,
-		sort: function() {
+	initSortable(elem) {
+		console.log( "initSortable!!!!!!!!!!!!!!!!" );
+		this.sortable = window.jQuery(elem).sortable({
+			items: ".dslc-modules-section-dnd",
+			handle: '.dslca-move-modules-section-hook:not(".dslca-action-disabled")',
+			placeholder: 'dslca-modules-section-placeholder',
+			tolerance : 'intersect',
+			cursorAt: { bottom: 10 },
+			axis: 'y',
+			scroll: true,
+			scrollSensitivity: 140,
+			scrollSpeed : 5,
+			sort: function() {
 
-			jQuery( this ).removeClass( "ui-state-default" );
-		},
-		update: function (e, ui) {
+				jQuery( this ).removeClass( "ui-state-default" );
+			},
+			update: function (e, ui) {
 
-			window.dslc_show_publish_button();
-		},
-		start: function(e, ui){
+				window.dslc_show_publish_button();
+			},
+			start: function(e, ui){
 
-			jQuery('body').removeClass('dslca-drag-not-in-progress').addClass('dslca-drag-in-progress');
-			jQuery('body', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-drag-not-in-progress').addClass('dslca-drag-in-progress');
-			ui.placeholder.html('<span class="dslca-placeholder-help-text"><span class="dslca-placeholder-help-text-inner">' + DSLCString.str_row_helper_text + '</span></span>');
-			jQuery( '.dslc-content' ).sortable( "refreshPositions" );
-		},
-		stop: function(e, ui){
+				jQuery('body').removeClass('dslca-drag-not-in-progress').addClass('dslca-drag-in-progress');
+				jQuery('body', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-drag-not-in-progress').addClass('dslca-drag-in-progress');
+				ui.placeholder.html('<span class="dslca-placeholder-help-text"><span class="dslca-placeholder-help-text-inner">' + DSLCString.str_row_helper_text + '</span></span>');
+				jQuery( '.dslc-content' ).sortable( "refreshPositions" );
+			},
+			stop: function(e, ui){
 
-			window.dslc_generate_code();
+				window.dslc_generate_code();
 
-			LiveComposer.Builder.UI.stopScroller();
-			jQuery('body', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
-			jQuery('body').removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
-			jQuery('.dslca-anim-opacity-drop').removeClass('dslca-anim-opacity-drop');
-		}
-	});
+				LiveComposer.Builder.UI.stopScroller();
+				jQuery('body', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
+				jQuery('body').removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
+				jQuery('.dslca-anim-opacity-drop').removeClass('dslca-anim-opacity-drop');
+			}
+		});
+	}
 
+	reactToSortableOnOff() {
+		self = this.sortable;
 
-	/** Sort option setter */
-	jQuery(document).on('LC.sortableOff', function(){
-		if ( undefined !== self.sortable.sortable( "instance" ) ) {
-			self.sortable.sortable('option','disabled', true);
-		}
-	});
+		/** Sort option setter */
+		jQuery(document).on('LC.sortableOff', function(){
+			if ( undefined !== self.sortable( "instance" ) ) {
+				self.sortable('option','disabled', true);
+			}
+		});
 
-	jQuery(document).on('LC.sortableOn', function(){
-		if ( undefined !== self.sortable.sortable( "instance" ) ) {
-			self.sortable.sortable('option','disabled', false);
-		}
-	});
+		jQuery(document).on('LC.sortableOn', function(){
+			if ( undefined !== self.sortable( "instance" ) ) {
+				self.sortable('option','disabled', false);
+			}
+		});
+	}
 
 }

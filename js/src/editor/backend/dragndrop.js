@@ -2,6 +2,7 @@
  * UI - General - Initiate Drag and Drop Functonality
  */
 
+import { moduleOutputDefault } from "./module.js";
 import Sortable from 'sortablejs';
 
 export const dragAndDropInit = () => {
@@ -88,7 +89,7 @@ export const dragAndDropInit = () => {
 
 				// TODO: Optimize expensive ajax call in this function!
 				// Load Output
-				dslc_module_output_default( moduleID, function( response ){
+				moduleOutputDefault( moduleID, function( response ){
 
 					// Append Content
 					moduleOutput = response.output;

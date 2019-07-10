@@ -9,11 +9,10 @@
  *
  ***********************************/
 
-'use strict';
-
 import { sectionsInitJS } from './sections.js';
 import { dragAndDropInit } from './dragndrop.js';
 import { moduleareasInitJS } from './modulearea.js';
+import { hideModal } from "./modalwindow.js";
 
 /**
  * TEMPLATES - Load
@@ -96,7 +95,7 @@ function dslc_template_import() {
 			jQuery('.dslca-modal-templates-import .dslca-modal-title').css({ opacity : 1 });
 
 			// Hide the modal
-			dslc_hide_modal( '', '.dslca-modal-templates-import' );
+			hideModal( '', '.dslca-modal-templates-import' );
 
 			// Call other functions
 			LiveComposer.Builder.PreviewAreaWindow.dslc_bg_video();
@@ -127,7 +126,7 @@ function dslc_template_save() {
 		function( response ) {
 
 			// Hide the modal
-			dslc_hide_modal( '', '.dslca-modal-templates-save' );
+			hideModal( '', '.dslca-modal-templates-save' );
 		}
 	);
 }
@@ -187,7 +186,7 @@ function dslc_template_delete( template ) {
 	/**
 	 * Hook - Import Template
 	 */
-	$('.dslca-template-import-form').submit(function(e){
+	jQuery('.dslca-template-import-form').submit(function(e){
 
 		e.preventDefault();
 		dslc_template_import();
@@ -196,7 +195,7 @@ function dslc_template_delete( template ) {
 	/**
 	 * Hook - Save Template
 	 */
-	$('.dslca-template-save-form').submit(function(e){
+	jQuery('.dslca-template-save-form').submit(function(e){
 
 		e.preventDefault();
 		dslc_template_save();
@@ -205,10 +204,10 @@ function dslc_template_delete( template ) {
 	/**
 	 * Hook - Delete Template
 	 */
-	$(document).on( 'click', '.dslca-delete-template-hook', function(e){
+	jQuery(document).on( 'click', '.dslca-delete-template-hook', function(e){
 
 		e.stopPropagation();
-		dslc_template_delete( $(this).data('id') );
+		dslc_template_delete( jQuery(this).data('id') );
 	});
 
 }

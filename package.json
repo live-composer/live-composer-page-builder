@@ -32,6 +32,7 @@
     "webpack-cli": "^3.3.5"
   },
   "dependencies": {
+    "animejs": "^3.0.1",
     "chromedriver": "^74.0.0",
     "sortablejs": "^1.10.0-rc2"
   }

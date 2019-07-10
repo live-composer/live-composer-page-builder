@@ -2,7 +2,7 @@
  * Main builder file
  */
 
-import { templatesPanelInit } from './builder.templates.js';
+import { templatesPanelInit } from './templates.js';
 import { fixContenteditable, keypressEvents } from './uigeneral.js';
 import { CSectionsContainer } from './sectionscontainer.class.js';
 import { settingsPanelInit } from './settings.panel.js';
@@ -11,6 +11,10 @@ import { dragAndDropInit } from './dragndrop.js';
 import { codeGenerationInitJS } from './codegeneration.js';
 import { initPreviewAreaScroller } from './scroller.js';
 import { untilsInitJs } from './utils.class.js';
+import { modalwindowInitJS } from './modalwindow.js';
+import { moduleInitJS } from './module.js';
+import { presetsInit } from "./presets.js";
+import { eventsInit } from './events.js';
 
 
 var dslcDebug = false;
@@ -40,6 +44,8 @@ window.LiveComposer = {
 
 		windowScroller: false,
 		panelOpened: false, // Settings panel opened
+		uiHidden: false, // ex composer-hidden
+		modalOpen: false,
 
 		// Used to prevent multiple code generation when
 		// cancelling row edits
@@ -75,6 +81,12 @@ window.LiveComposer = {
 					self.postponed_actions_queue[index] -= 1;
 				}
 			});
+		},
+
+		// LiveComposer.Builder.Actions.optionsChanged() - if calling from parent.
+		// parent.LiveComposer.Builder.Actions.optionsChanged() - if calling from iframe.
+		optionsChanged: function () {
+			window.dslc_show_publish_button();
 		}
 	}
 
@@ -122,12 +134,12 @@ window.LiveComposer = {
 }());
 
 /** Wait till tinyMCE loaded */
-window.previewAreaTinyMCELoaded = function(){
+window.previewAreaTinyMCELoaded = function( windowObj ){
 
 	console.log( "window.previewAreaTinyMCELoaded!" );
 
-	LiveComposer.Builder.PreviewAreaWindow = this;
-	LiveComposer.Builder.PreviewAreaDocument = jQuery(this.document);
+	LiveComposer.Builder.PreviewAreaWindow = windowObj;
+	LiveComposer.Builder.PreviewAreaDocument = jQuery(windowObj.document);
 
 	// Disable WP admin bar in editing mode
 	jQuery('#wpadminbar', LiveComposer.Builder.PreviewAreaDocument).remove();
@@ -151,5 +163,12 @@ window.previewAreaTinyMCELoaded = function(){
 	// Catch keypress events (from both parent and iframe) to add keyboard support
 	keypressEvents();
 	initPreviewAreaScroller();
+	modalwindowInitJS();
+	moduleInitJS();
 	untilsInitJs();
+	presetsInit();
+	eventsInit();
 };
+
+// Disable the prompt ( are you sure ) on refresh
+window.onbeforeunload = function () { return; };

@@ -102,8 +102,8 @@ final class DSLC_Scripts {
 		wp_enqueue_script( 'imagesloaded' ); // Need this for Masonry.
 		wp_enqueue_script( 'jquery-masonry' );
 
-		wp_enqueue_script( 'dslc-plugins-js', DS_LIVE_COMPOSER_URL . 'js/frontend/plugins.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
-		wp_enqueue_script( 'dslc-main-js', DS_LIVE_COMPOSER_URL . 'js/frontend/main.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER, $in_footer = true );
+		wp_enqueue_script( 'dslc-plugins-js', DS_LIVE_COMPOSER_URL . 'js/dist/client_plugins.min.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+		wp_enqueue_script( 'dslc-main-js', DS_LIVE_COMPOSER_URL . 'js/dist/client_frontend.min.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER, $in_footer = true );
 
 		if ( is_ssl() ) {
 
@@ -121,9 +121,6 @@ final class DSLC_Scripts {
 		 * Live Composer Editing State
 		 */
 		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
-
-			add_action( 'after_wp_tiny_mce', array( __CLASS__, 'callback_tinymce' ) );
-
 			ob_start();
 			wp_editor( '', 'enqueue_tinymce_scripts' );
 			ob_end_clean();
@@ -140,6 +137,7 @@ final class DSLC_Scripts {
 			wp_enqueue_script( 'dslc-load-fonts', '//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js' );
 			wp_enqueue_script( 'dslc-editor-frontend-js', DS_LIVE_COMPOSER_URL . 'js/dist/editor_frontend.min.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 
+			add_action( 'after_wp_tiny_mce', array( __CLASS__, 'callback_tinymce' ) );
 		}
 	}
 
@@ -149,7 +147,7 @@ final class DSLC_Scripts {
 	public static function callback_tinymce() {
 		?>
 		<script type="text/javascript">
-			window.parent.previewAreaTinyMCELoaded.call(window);
+			window.parent.previewAreaTinyMCELoaded(window);
 		</script>
 		<?php
 	}
