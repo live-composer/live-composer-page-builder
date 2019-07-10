@@ -798,14 +798,14 @@ class DSLC_Notification extends DSLC_Module {
 			?>
 
 			<div class="<?php echo $classes; ?>" data-notification-timeout="<?php echo $options['notification_timeout']; ?>">
-				<div class="dslc-notification-box-content  dslca-editable-content" data-id="content"<?php if ( $dslc_is_admin ) { echo ' data-exportable-content';} ?>>
+				<div class="dslc-notification-box-content  dslca-editable-content" data-id="content"<?php if ( $dslc_is_admin ) { echo ' data-exportable-content';} ?> data-edit-id="0">
 					<?php
 						$output_content = stripslashes( $options['content'] );
 						echo $output_content;
 					?>
 				</div>
 				<?php if ( $dslc_active ) : ?>
-					<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook" data-event="wysiwyg-edit"><?php _e( 'Open in WP Editor', 'live-composer-page-builder' ); ?></span></div>
+					<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook" data-event="wysiwyg-edit" data-id-to-edit="0"><?php _e( 'Open in WP Editor', 'live-composer-page-builder' ); ?></span></div>
 				<?php endif; ?>
 				<span class="dslc-notification-box-close"><span class="dslc-icon dslc-icon-remove"></span></span>
 			</div><!-- .dslc-notification-box -->

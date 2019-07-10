@@ -4005,13 +4005,13 @@ endif; ?>
 							<?php if ( in_array( 'content', $elements ) ) : ?>
 								<div class="dslc-info-box-content">
 									<?php if ( $dslc_is_admin ) : ?>
-										<div class="dslca-editable-content inline-editor" data-type="simple" data-id="content" <?php if ( $dslc_is_admin ) { echo 'data-exportable-content'; } ?>>
+										<div class="dslca-editable-content inline-editor" data-type="simple" data-id="content" <?php if ( $dslc_is_admin ) { echo 'data-exportable-content'; } ?> data-edit-id="0">
 											<?php
 											$output_content = stripslashes( $options['content'] );
 											echo apply_filters( 'dslc_text_block_render', $output_content );
 											?>
 										</div><!-- .dslca-editable-content -->
-										<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook" data-event="wysiwyg-edit"><?php _e( 'Open in WP Editor', 'live-composer-page-builder' ); ?></span></div>
+										<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook" data-event="wysiwyg-edit" data-id-to-edit="0"><?php _e( 'Open in WP Editor', 'live-composer-page-builder' ); ?></span></div>
 									<?php else : ?>
 										<?php
 										$output_content = stripslashes( $options['content'] );

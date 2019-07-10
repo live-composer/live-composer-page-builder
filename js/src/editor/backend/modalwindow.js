@@ -352,7 +352,6 @@ document.addEventListener( 'modalWysiwygConfirm', function ( customEvent ) {
 	console.log( "tinymce:" ); console.log( tinymce );
 	if( typeof tinymce != "undefined" ) {
 		if ( jQuery('#wp-dslcawpeditor-wrap').hasClass('tmce-active') ) {
-
 			var editor = tinymce.get( 'dslcawpeditor' );
 			var content = editor.getContent();
 		} else {
@@ -366,12 +365,12 @@ document.addEventListener( 'modalWysiwygConfirm', function ( customEvent ) {
 
 		if ( module.hasClass('dslc-module-handle-like-accordion') ) {
 			jQuery('.dslca-wysiwyg-active', LiveComposer.Builder.PreviewAreaDocument ).siblings('.dslca-editable-content').html( content );
-			// jQuery('.dslca-wysiwyg-active', LiveComposer.Builder.PreviewAreaDocument ).siblings('.dslca-accordion-plain-content').val( content );
+			jQuery('.dslca-wysiwyg-active', LiveComposer.Builder.PreviewAreaDocument ).siblings('.dslca-accordion-plain-content').val( content );
 			var dslcAccordion = module.find('.dslc-accordion');
 			LiveComposer.Builder.PreviewAreaWindow.dslc_accordion_generate_code( dslcAccordion );
 		} else if ( module.hasClass('dslc-module-handle-like-tabs') ) {
 			jQuery('.dslca-wysiwyg-active', LiveComposer.Builder.PreviewAreaDocument ).siblings('.dslca-editable-content').html( content );
-			// jQuery('.dslca-wysiwyg-active', LiveComposer.Builder.PreviewAreaDocument ).siblings('.dslca-tab-plain-content').val( content );
+			jQuery('.dslca-wysiwyg-active', LiveComposer.Builder.PreviewAreaDocument ).siblings('.dslca-tab-plain-content').val( content );
 			var dslcTabs = module.find('.dslc-tabs');
 			LiveComposer.Builder.PreviewAreaWindow.dslc_tabs_generate_code( dslcTabs );
 		}

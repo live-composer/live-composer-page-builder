@@ -209,7 +209,6 @@ document.addEventListener('wysiwygEdit', function ( customEvent ) {
 	// const editableEl = elClicked.querySelector('.dslca-editable-content');
 	const idToEdit = elClicked.dataset.idToEdit;
 	console.log( "idToEdit:" ); console.log( idToEdit );
-	// data-id-to-edit=
 
 	const editableEl = currentModuleEl.querySelector('[data-edit-id="' + idToEdit + '"]');
 	let content = editableEl.value;
@@ -217,6 +216,9 @@ document.addEventListener('wysiwygEdit', function ( customEvent ) {
 	console.log( "content:" ); console.log( content );
 	// var module = editable.closest('.dslc-module-front');
 
+	if ( undefined === content ) {
+		content = '';
+	}
 	console.log( "currentModuleEl:" ); console.log( currentModuleEl );
 	if ( content.trim().length ) {
 		// Extract Content for current tab/accordion:

@@ -869,17 +869,17 @@ jQuery(document).ready(function($){
 	});
 
 	/**
-	 * Tabs
+	 * Tabs – Add new Tab
 	 */
 	jQuery(document).on( 'click', '.dslca-add-new-tab-hook', function(){
 
 		var dslcTabs = jQuery(this).closest('.dslc-tabs'),
 		dslcTabsNavLast = jQuery('.dslc-tabs-nav .dslc-tabs-nav-hook:last', dslcTabs),
-		dslcTabsContent = jQuery('.dslc-tabs-content', dslcTabs),
-		dslcTabContentLast = jQuery('.dslc-tabs-tab-content:last', dslcTabs);
+		dslcTabContentLast = jQuery('.dslc-tabs-tab-content:last', dslcTabs),
+		numberOfTabs = jQuery('.dslc-tabs-nav .dslc-tabs-nav-hook', dslcTabs).length;
 
 		dslcTabsNavLast.after('<span class="dslc-tabs-nav-hook"><span class="dslc-tabs-nav-hook-title" contenteditable="true">Click to edit title</span><span class="dslca-delete-tab-hook"><span class="dslca-icon dslc-icon-remove"></span></span></span>');
-		dslcTabContentLast.after('<div class="dslc-tabs-tab-content"><div class="dslca-editable-content">This is just placeholder text.</div><textarea class="dslca-tab-plain-content">This is just placeholder text.</textarea><div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook" data-event="wysiwyg-edit">Open in WP Editor</span></div></div>');
+		dslcTabContentLast.after('<div class="dslc-tabs-tab-content"><div class="dslca-editable-content" data-edit-id="' + numberOfTabs +'">This is just placeholder text.</div><textarea class="dslca-tab-plain-content">This is just placeholder text.</textarea><div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook" data-event="wysiwyg-edit" data-id-to-edit="' + numberOfTabs +'">Open in WP Editor</span></div></div>');
 
 		jQuery('.dslc-tabs-nav-hook:last', dslcTabs).click();
 
@@ -1122,9 +1122,10 @@ jQuery(document).ready(function($){
 		var dslcAccordion = jQuery(this).closest('.dslc-accordion'),
 		dslcAccordionLast = jQuery('.dslc-accordion-item:last', dslcAccordion),
 		dslcAccordionNew = dslcAccordionLast.clone().insertAfter(dslcAccordionLast);
+		numberOfTabs = jQuery('.dslc-accordion-item', dslcAccordion).length;
 
 		jQuery('.dslc-accordion-title', dslcAccordionNew).html('CLICK TO EDIT');
-		jQuery('.dslc-accordion-content', dslcAccordionNew).html('<div class="dslca-editable-content">Placeholder content, click to edit. Lorem ipsum dolor sit amet, consectetur tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div><textarea class="dslca-accordion-plain-content"></textarea><div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook" data-event="wysiwyg-edit">Edit Content</span></div>');
+		jQuery('.dslc-accordion-content', dslcAccordionNew).html('<div class="dslca-editable-content" data-edit-id="' + numberOfTabs +'">Placeholder content, click to edit. Lorem ipsum dolor sit amet, consectetur tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div><textarea class="dslca-accordion-plain-content"></textarea><div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook" data-event="wysiwyg-edit" data-id-to-edit="' + numberOfTabs +'">Edit Content</span></div>');
 		jQuery('.dslc-accordion-hook', dslcAccordionNew).click();
 
 		dslc_accordion_generate_code( dslcAccordion );

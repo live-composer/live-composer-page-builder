@@ -3580,7 +3580,7 @@ class DSLC_Tabs extends DSLC_Module {
 
 					<?php if ( is_array( $tabs_content ) ) : $count = 0; ?>
 
-						<?php foreach ( $tabs_content as $tab_content ) : ?>
+						<?php foreach ( $tabs_content as $tab_key => $tab_content ) : ?>
 
 							<div class="dslc-tabs-tab-content">
 								<h4 class="dslc-tabs-nav-hook"<?php if ( $dslc_is_admin ) { echo ' data-exportable-content="h3"'; } ?>><?php echo $tabs_nav[ $count ]; ?></h4>
@@ -3597,8 +3597,8 @@ class DSLC_Tabs extends DSLC_Module {
 									?>
 								</div>
 								<?php if ( $dslc_is_admin ) : ?>
-									<textarea class="dslca-tab-plain-content"><?php echo dslc_encode_protected_shortcodes( stripslashes( $tab_content ) ); ?></textarea>
-									<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook" data-event="wysiwyg-edit"><?php _e( 'Open in WP Editor', 'live-composer-page-builder' ); ?></span></div>
+									<textarea class="dslca-tab-plain-content" data-edit-id="<?php echo esc_attr( $tab_key ) ?>"><?php echo dslc_encode_protected_shortcodes( stripslashes( $tab_content ) ); ?></textarea>
+									<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook" data-event="wysiwyg-edit" data-id-to-edit="<?php echo esc_attr( $tab_key ) ?>"><?php _e( 'Open in WP Editor', 'live-composer-page-builder' ); ?></span></div>
 								<?php endif; ?>
 							</div><!-- .dslc-tabs-tab-content -->
 
@@ -3613,8 +3613,8 @@ endforeach; ?>
 								<?php _e( 'This is just placeholder text.', 'live-composer-page-builder' ); ?>
 							</div>
 							<?php if ( $dslc_is_admin ) : ?>
-								<textarea class="dslca-tab-plain-content"><?php _e( 'This is just placeholder text.', 'live-composer-page-builder' ); ?></textarea>
-								<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook" data-event="wysiwyg-edit"><?php _e( 'Open in WP Editor', 'live-composer-page-builder' ); ?></span></div>
+								<textarea class="dslca-tab-plain-content" data-edit-id="0"><?php _e( 'This is just placeholder text.', 'live-composer-page-builder' ); ?></textarea>
+								<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook" data-event="wysiwyg-edit" data-id-to-edit="0"><?php _e( 'Open in WP Editor', 'live-composer-page-builder' ); ?></span></div>
 							<?php endif; ?>
 						</div><!-- .dslc-tabs-tab-content -->
 

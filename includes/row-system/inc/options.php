@@ -86,6 +86,78 @@ function dslc_row_register_options() {
 		),
 	);
 
+	// ============================================================
+
+	$dslc_var_row_options['margin_group_open'] = array(
+		'label' => __( 'Margin', 'live-composer-page-builder' ),
+		'id' => 'bg_group_open',
+		'type' => 'group',
+		'action' => 'open',
+	);
+
+		$dslc_var_row_options['margin_h'] = array(
+			'id' => 'margin_h',
+			'std' => '0',
+			'label' => __( 'Margin Horizontal', 'live-composer-page-builder' ),
+			'type' => 'slider',
+			'affect_on_change_rule' => 'margin-left,margin-right',
+			'ext' => '%',
+			'max' => 90,
+		);
+
+		$dslc_var_row_options['margin_b'] = array(
+			'id' => 'margin_b',
+			'std' => '0',
+			'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
+			'type' => 'slider',
+			'affect_on_change_rule' => 'margin-bottom',
+			'ext' => 'px',
+			'max' => 500,
+		);
+
+	$dslc_var_row_options['margin_group_close'] = array(
+		'label' => __( 'Margin', 'live-composer-page-builder' ),
+		'id' => 'bg_group_close',
+		'type' => 'group',
+		'action' => 'close',
+	);
+
+	$dslc_var_row_options['padding_group_open'] = array(
+		'label' => __( 'Padding', 'live-composer-page-builder' ),
+		'id' => 'bg_group_open',
+		'type' => 'group',
+		'action' => 'open',
+	);
+
+		$dslc_var_row_options['padding'] = array(
+			'id' => 'padding',
+			'std' => $section_padding_ver,
+			'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
+			'type' => 'slider',
+			'affect_on_change_rule' => 'padding-bottom,padding-top',
+			'ext' => 'px',
+			'max' => 500,
+		);
+
+		$dslc_var_row_options['padding_h'] = array(
+			'id' => 'padding_h',
+			'std' => '0',
+			'label' => __( 'Padding Horizontal', 'live-composer-page-builder' ),
+			'type' => 'slider',
+			'affect_on_change_rule' => 'padding-left,padding-right',
+			'ext' => '%',
+			'max' => 90,
+		);
+
+	$dslc_var_row_options['padding_group_close'] = array(
+		'label' => __( 'Padding', 'live-composer-page-builder' ),
+		'id' => 'bg_group_close',
+		'type' => 'group',
+		'action' => 'close',
+	);
+
+	// ============================================================
+
 	$dslc_var_row_options['bg_group_open'] = array(
 		'label' => __( 'Background', 'live-composer-page-builder' ),
 		'id' => 'bg_group_open',
@@ -382,73 +454,7 @@ function dslc_row_register_options() {
 		'action' => 'close',
 	);
 
-	$dslc_var_row_options['margin_group_open'] = array(
-		'label' => __( 'Margin', 'live-composer-page-builder' ),
-		'id' => 'bg_group_open',
-		'type' => 'group',
-		'action' => 'open',
-	);
-
-	$dslc_var_row_options['margin_h'] = array(
-		'id' => 'margin_h',
-		'std' => '0',
-		'label' => __( 'Margin Horizontal', 'live-composer-page-builder' ),
-		'type' => 'slider',
-		'affect_on_change_rule' => 'margin-left,margin-right',
-		'ext' => '%',
-		'max' => 90,
-	);
-
-	$dslc_var_row_options['margin_b'] = array(
-		'id' => 'margin_b',
-		'std' => '0',
-		'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
-		'type' => 'slider',
-		'affect_on_change_rule' => 'margin-bottom',
-		'ext' => 'px',
-		'max' => 500,
-	);
-
-	$dslc_var_row_options['margin_group_close'] = array(
-		'label' => __( 'Margin', 'live-composer-page-builder' ),
-		'id' => 'bg_group_close',
-		'type' => 'group',
-		'action' => 'close',
-	);
-
-	$dslc_var_row_options['padding_group_open'] = array(
-		'label' => __( 'Padding', 'live-composer-page-builder' ),
-		'id' => 'bg_group_open',
-		'type' => 'group',
-		'action' => 'open',
-	);
-
-	$dslc_var_row_options['padding'] = array(
-		'id' => 'padding',
-		'std' => $section_padding_ver,
-		'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
-		'type' => 'slider',
-		'affect_on_change_rule' => 'padding-bottom,padding-top',
-		'ext' => 'px',
-		'max' => 500,
-	);
-
-	$dslc_var_row_options['padding_h'] = array(
-		'id' => 'padding_h',
-		'std' => '0',
-		'label' => __( 'Padding Horizontal', 'live-composer-page-builder' ),
-		'type' => 'slider',
-		'affect_on_change_rule' => 'padding-left,padding-right',
-		'ext' => '%',
-		'max' => 90,
-	);
-
-	$dslc_var_row_options['padding_group_close'] = array(
-		'label' => __( 'Padding', 'live-composer-page-builder' ),
-		'id' => 'bg_group_close',
-		'type' => 'group',
-		'action' => 'close',
-	);
+	// ============================================================
 
 	$dslc_var_row_options['custom_class'] = array(
 		'id' => 'custom_class',

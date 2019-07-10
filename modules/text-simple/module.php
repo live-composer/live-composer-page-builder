@@ -5197,15 +5197,15 @@ class DSLC_Text_Simple extends DSLC_Module {
 		}
 
 		/* Module output starts here */
-		
+
 		?>
-		
+
 		<div class="dslc-text-module-content">
 			<?php
 
 			if ( $dslc_active ) {
 				?><div class="dslca-editable-content" data-type="simple" data-id="content"<?php if ( $dslc_is_admin ) { echo ' data-exportable-content';
-				} ?>><?php
+				} ?> data-edit-id="0"><?php
 			}
 
 			$output_content = stripslashes( $options['content'] );
@@ -5213,10 +5213,10 @@ class DSLC_Text_Simple extends DSLC_Module {
 
 			if ( $dslc_active ) {
 				?></div><!-- .dslca-editable-content --><?php
-			?><div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook" data-event="wysiwyg-edit"><?php _e( 'Open in WP Editor', 'live-composer-page-builder' ); ?></span></div><?php
+			?><div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook" data-event="wysiwyg-edit" data-id-to-edit="0"><?php _e( 'Open in WP Editor', 'live-composer-page-builder' ); ?></span></div><?php
 			} ?>
 		</div>
-		
+
 		<?php
 	}
 }
