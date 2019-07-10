@@ -102,8 +102,8 @@ final class DSLC_Scripts {
 		wp_enqueue_script( 'imagesloaded' ); // Need this for Masonry.
 		wp_enqueue_script( 'jquery-masonry' );
 
-		wp_enqueue_script( 'dslc-plugins-js', DS_LIVE_COMPOSER_URL . 'js/frontend/plugins.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
-		wp_enqueue_script( 'dslc-main-js', DS_LIVE_COMPOSER_URL . 'js/frontend/main.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER, $in_footer = true );
+		wp_enqueue_script( 'dslc-plugins-js', DS_LIVE_COMPOSER_URL . 'js/dist/client_plugins.min.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+		wp_enqueue_script( 'dslc-main-js', DS_LIVE_COMPOSER_URL . 'js/dist/client_frontend.min.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER, $in_footer = true );
 
 		if ( is_ssl() ) {
 
@@ -121,9 +121,6 @@ final class DSLC_Scripts {
 		 * Live Composer Editing State
 		 */
 		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
-
-			add_action( 'after_wp_tiny_mce', array( __CLASS__, 'callback_tinymce' ) );
-
 			ob_start();
 			wp_editor( '', 'enqueue_tinymce_scripts' );
 			ob_end_clean();
@@ -138,8 +135,9 @@ final class DSLC_Scripts {
 			 * JavaScript
 			 */
 			wp_enqueue_script( 'dslc-load-fonts', '//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js' );
-			wp_enqueue_script( 'dslc-iframe-main-js', DS_LIVE_COMPOSER_URL . 'js/builder.frontend/builder.frontend.main.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_script( 'dslc-editor-frontend-js', DS_LIVE_COMPOSER_URL . 'js/dist/editor_frontend.min.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 
+			add_action( 'after_wp_tiny_mce', array( __CLASS__, 'callback_tinymce' ) );
 		}
 	}
 
@@ -149,7 +147,7 @@ final class DSLC_Scripts {
 	public static function callback_tinymce() {
 		?>
 		<script type="text/javascript">
-			window.parent.previewAreaTinyMCELoaded.call(window);
+			window.parent.previewAreaTinyMCELoaded(window);
 		</script>
 		<?php
 	}
@@ -235,18 +233,25 @@ final class DSLC_Scripts {
 			// wp_enqueue_script( 'imagesloaded' ); // Need this for Masonry.
 			// wp_enqueue_script( 'jquery-masonry' );
 			wp_enqueue_script(
-				'dslc-builder-plugins-js',
-				DS_LIVE_COMPOSER_URL . 'js/builder/builder.plugins.js',
+				'dslc-editor-plugins-js',
+				DS_LIVE_COMPOSER_URL . 'js/dist/editor_plugins.min.js',
 				array( 'jquery', 'wp-color-picker' ),
-				filemtime( DS_LIVE_COMPOSER_ABS . '/js/builder/builder.plugins.js' ) // Version: filemtime — Gets file modification time.
+				filemtime( DS_LIVE_COMPOSER_ABS . '/js/dist/editor_plugins.min.js' ) // Version: filemtime — Gets file modification time.
 			);
 
-			self::load_scripts( 'builder', 'dslc-builder-main-js' );
+			wp_enqueue_script(
+				'dslc-editor-backend-js',
+				DS_LIVE_COMPOSER_URL . 'js/dist/editor_backend.min.js',
+				array( 'jquery', 'wp-color-picker' ),
+				filemtime( DS_LIVE_COMPOSER_ABS . '/js/dist/editor_backend.min.js' ) // Version: filemtime — Gets file modification time.
+			);
 
-			wp_localize_script( 'dslc-builder-main-js', 'DSLCAjax', array(
+			// self::load_scripts( 'builder', 'dslc-editor-backend-js' );
+
+			wp_localize_script( 'dslc-editor-backend-js', 'DSLCAjax', array(
 				'ajaxurl' => admin_url( 'admin-ajax.php', $protocol ),
 			) );
-			wp_localize_script( 'dslc-builder-main-js', 'DSLCSiteData', array(
+			wp_localize_script( 'dslc-editor-backend-js', 'DSLCSiteData', array(
 				'siteurl' => get_option( 'siteurl' ),
 			) );
 
@@ -280,19 +285,19 @@ final class DSLC_Scripts {
 
 			global $dslc_available_fonts;
 
-			wp_localize_script( 'dslc-builder-main-js', 'DSLCString', $translation_array );
-			wp_localize_script( 'dslc-builder-main-js', 'DSLCFonts', $dslc_available_fonts );
+			wp_localize_script( 'dslc-editor-backend-js', 'DSLCString', $translation_array );
+			wp_localize_script( 'dslc-editor-backend-js', 'DSLCFonts', $dslc_available_fonts );
 
 			// Array of icons available to be used.
 			global $dslc_var_icons;
 
-			wp_localize_script( 'dslc-builder-main-js', 'DSLCIcons', $dslc_var_icons );
+			wp_localize_script( 'dslc-editor-backend-js', 'DSLCIcons', $dslc_var_icons );
 
 			$dslc_main_options = array();
 			$section_padding_vertical = dslc_get_option( 'lc_section_padding_vertical', 'dslc_plugin_options' );
 			$dslc_main_options['section_padding_vertical'] = $section_padding_vertical;
 
-			wp_localize_script( 'dslc-builder-main-js', 'DSLCMainOptions', $dslc_main_options );
+			wp_localize_script( 'dslc-editor-backend-js', 'DSLCMainOptions', $dslc_main_options );
 		}// End if().
 
 		/* If current screen is standard post editing screen in WP Admin */

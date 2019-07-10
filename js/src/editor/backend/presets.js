@@ -11,15 +11,15 @@
 /**
  * Module Presets - Update
  */
-function dslc_update_preset() {
+export const updatePreset = () => {
 
-	if ( dslcDebug ) console.log( 'dslc_update_preset' );
+	if ( window.dslcDebug ) console.log( 'updatePreset' );
 
 	// Vars
 	var module = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument),
 	presetName = module.find('.dslca-module-option-front[data-id="css_load_preset"]').val(),
 	presetCode = module.find('.dslca-module-code').val(),
-	moduleID = module.data('dslc-module-id');
+	moduleID = module.data('module');
 
 	// If preset value not "none"
 	if ( 'none' !== presetName && '' !== presetName ) {
@@ -39,7 +39,7 @@ function dslc_update_preset() {
 				if ( response.preset_setting == 'enabled' ) {
 
 					// Reload all modules with the same preset
-					jQuery('.dslc-module-front:not(#' + module.attr('id') + ')[data-dslc-module-id="' + module.data('dslc-module-id') +
+					jQuery('.dslc-module-front:not(#' + module.attr('id') + ')[data-module="' + module.data('module') +
 						'"][data-dslc-preset="' + module.data('dslc-preset') + '"]', LiveComposer.Builder.PreviewAreaDocument ).each(function(){
 						dslc_module_output_reload( jQuery(this) );
 					});
@@ -58,23 +58,23 @@ jQuery(document).ready(function($){
 	 * Action - Save preset
 	 */
 
-	$(document).on( 'keypress', '.dslca-module-edit-field[name="css_save_preset"]', function(e){
+	jQuery(document).on( 'keypress', '.dslca-module-edit-field[name="css_save_preset"]', function(e){
 
 		// Enter Key Pressed
 		if ( e.which == 13 ) {
 
 			// Vars
-			var presetName = $(this).val(),
+			var presetName = jQuery(this).val(),
 			presetID = presetName.toLowerCase().replace(/\s/g, '-');
 
 			// Add class to body that a new preset is added
-			$('body').addClass('dslca-new-preset-added');
+			jQuery('body').addClass('dslca-new-preset-added');
 
 			// Append the new preset to the "Load Preset" option and trigger change
-			$('.dslca-module-edit-field[name="css_load_preset"]').append('<option value="' + presetID + '">' + presetID + '</option>').val( presetID ).trigger('change');
+			jQuery('.dslca-module-edit-field[name="css_load_preset"]').append('<option value="' + presetID + '">' + presetID + '</option>').val( presetID ).trigger('change');
 
 			// Erase value from the "Save Preset" option
-			$(this).val('');
+			jQuery(this).val('');
 
 			jQuery('.dslc-delete-preset').removeClass('dslc-delete-preset-hide');
 		}
@@ -84,20 +84,20 @@ jQuery(document).ready(function($){
 	 * Action - Preset value changed
 	 */
 
-	$(document).on( 'change', '.dslca-module-edit-field[name="css_load_preset"]', function(e){
-		$('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).addClass('dslca-preload-preset');
+	jQuery(document).on( 'change', '.dslca-module-edit-field[name="css_load_preset"]', function(e){
+		jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).addClass('dslca-preload-preset');
 	});
 
 	/**
 	 * Action - Delete Preset
 	 */
 
-	$(document).on( 'click', '.dslc-delete-preset', function(e){
+	jQuery(document).on( 'click', '.dslc-delete-preset', function(e){
 
 		// Vars
 		var module = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument),
 		presetName = module.find('.dslca-module-option-front[data-id="css_load_preset"]').val(),
-		moduleID = module.data('dslc-module-id');
+		moduleID = module.data('module');
 
 		// If preset value not "none"
 		if ( 'none' !== presetName && '' !== presetName ) {
@@ -119,3 +119,8 @@ jQuery(document).ready(function($){
 		}
 	});
 });
+
+
+export const presetsInit = () => {
+
+}

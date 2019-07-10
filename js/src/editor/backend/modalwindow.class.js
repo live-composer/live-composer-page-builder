@@ -2,7 +2,6 @@
  * Modal Window Class file
  */
 
-'use strict';
 /**
  * Shows modal window
  *
@@ -15,9 +14,9 @@
  * @params.confirm_title {string} - modal window confirm title
  * @params.ok_title {string} - modal window OK title
  */
-LiveComposer.Builder.UI.CModalWindow = function(params) {
+export const CModalWindow = function(params) {
 
-    if(typeof params != 'object' || this.instancesExists === true) return false;
+    if( typeof params != 'object' || LiveComposer.Builder.Flags.modalOpen === true ) return false;
 
     var self = this;
 
@@ -65,7 +64,7 @@ LiveComposer.Builder.UI.CModalWindow = function(params) {
             function()
             {
                 params.confirm();
-                self.instancesExists = false;
+                LiveComposer.Builder.Flags.modalOpen = false;
                 jQuery(this).remove();
                 // – moved here as it prevent some JS to get value on time
             }
@@ -91,7 +90,7 @@ LiveComposer.Builder.UI.CModalWindow = function(params) {
             function()
             {
                 jQuery(this).remove();
-                self.instancesExists = false;
+                LiveComposer.Builder.Flags.modalOpen = false;
                 params.cancel();
             }
         );
@@ -111,5 +110,5 @@ LiveComposer.Builder.UI.CModalWindow = function(params) {
         top: '50%'
     }, 400);
 
-    this.instancesExists = true;
+    LiveComposer.Builder.Flags.modalOpen = true;
 }

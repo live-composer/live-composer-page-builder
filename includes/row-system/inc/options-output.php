@@ -132,7 +132,7 @@ function dslc_row_display_options() {
 						$style = ' style="background: ' . $curr_value . ';"';
 					}?>
 
-					<input type="text" class="dslca-modules-section-edit-field dslca-module-edit-field-colorpicker" data-alpha="true" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" />
+					<input type="text" class="dslca-modules-section-edit-field dslca-module-edit-field-colorpicker" data-alpha="true" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>"  data-affect-on-change-el="<?php echo esc_attr( '.dslca-modules-section-being-edited' ); ?>" data-affect-on-change-rule="<?php echo esc_attr( $css_rule_output ); ?>" />
 
 				<?php elseif ( 'image' === $row_option['type'] ) : ?>
 

@@ -3598,7 +3598,7 @@ class DSLC_Tabs extends DSLC_Module {
 								</div>
 								<?php if ( $dslc_is_admin ) : ?>
 									<textarea class="dslca-tab-plain-content"><?php echo dslc_encode_protected_shortcodes( stripslashes( $tab_content ) ); ?></textarea>
-									<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook"><?php _e( 'Open in WP Editor', 'live-composer-page-builder' ); ?></span></div>
+									<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook" data-event="wysiwyg-edit"><?php _e( 'Open in WP Editor', 'live-composer-page-builder' ); ?></span></div>
 								<?php endif; ?>
 							</div><!-- .dslc-tabs-tab-content -->
 
@@ -3614,7 +3614,7 @@ endforeach; ?>
 							</div>
 							<?php if ( $dslc_is_admin ) : ?>
 								<textarea class="dslca-tab-plain-content"><?php _e( 'This is just placeholder text.', 'live-composer-page-builder' ); ?></textarea>
-								<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook"><?php _e( 'Open in WP Editor', 'live-composer-page-builder' ); ?></span></div>
+								<div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook" data-event="wysiwyg-edit"><?php _e( 'Open in WP Editor', 'live-composer-page-builder' ); ?></span></div>
 							<?php endif; ?>
 						</div><!-- .dslc-tabs-tab-content -->
 

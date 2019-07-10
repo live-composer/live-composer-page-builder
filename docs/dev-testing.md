@@ -13,7 +13,7 @@ http://localhost:8889
 To run tests launch:
 $> bash bin/localtest.sh
 
-
+$> npm run build
 
 
 

@@ -2617,7 +2617,7 @@ class DSLC_Module {
 
 		?>
 
-		<div id="dslc-module-<?php echo esc_attr( $options['module_instance_id'] ); ?>" class="<?php echo esc_attr( $module_class ); ?>" data-module-id="<?php echo esc_attr( $options['module_instance_id'] ); ?>" data-dslc-module-id="<?php echo esc_attr( $this->module_id ); ?>" data-dslc-module-size="<?php echo esc_attr( $data_attr_size ); ?>" data-dslc-anim="<?php echo esc_attr( $options['css_anim'] ); ?>" data-dslc-anim-delay="<?php echo esc_attr( $options['css_anim_delay'] ); ?>" data-dslc-anim-duration="<?php echo esc_attr( $options['css_anim_duration'] ); ?>"  data-dslc-anim-easing="<?php echo esc_attr( $options['css_anim_easing'] ); ?>" data-dslc-preset="<?php echo esc_attr( $options['css_load_preset'] ); ?>" <?php echo $title_attr; ?>>
+		<div id="dslc-module-<?php echo esc_attr( $options['module_instance_id'] ); ?>" class="<?php echo esc_attr( $module_class ); ?>" data-module-id="<?php echo esc_attr( $options['module_instance_id'] ); ?>" data-module="<?php echo esc_attr( $this->module_id ); ?>" data-dslc-module-size="<?php echo esc_attr( $data_attr_size ); ?>" data-dslc-anim="<?php echo esc_attr( $options['css_anim'] ); ?>" data-dslc-anim-delay="<?php echo esc_attr( $options['css_anim_delay'] ); ?>" data-dslc-anim-duration="<?php echo esc_attr( $options['css_anim_duration'] ); ?>"  data-dslc-anim-easing="<?php echo esc_attr( $options['css_anim_easing'] ); ?>" data-dslc-preset="<?php echo esc_attr( $options['css_load_preset'] ); ?>" <?php echo $title_attr; ?>>
 
 			<?php do_action( 'dslc_module_before' ); ?>
 
@@ -2660,12 +2660,12 @@ class DSLC_Module {
 				<div class="dslca-module-manage">
 				<span class="dslca-module-manage-line"></span>
 				<div class="dslca-module-manage-inner">
-				<span class="dslca-manage-action dslca-module-manage-hook dslca-module-edit-hook" title="<?php esc_attr_e( 'Edit options', 'live-composer-page-builder' ); ?>">
+				<span class="dslca-manage-action dslca-module-manage-hook dslca-module-edit-hook" title="<?php esc_attr_e( 'Edit options', 'live-composer-page-builder' ); ?>" data-event="module-edit">
 					<svg class="feather">
 						<use xlink:href="<?php echo esc_url( $ui_icons_url ); ?>/feather-sprite.svg#sliders"/>
 					</svg>
 				</span>
-				<span class="dslca-manage-action dslca-module-manage-hook dslca-copy-module-hook" title="<?php esc_attr_e( 'Duplicate', 'live-composer-page-builder' ); ?>">
+				<span class="dslca-manage-action dslca-module-manage-hook dslca-copy-module-hook" title="<?php esc_attr_e( 'Duplicate', 'live-composer-page-builder' ); ?>" data-event="module-duplicate">
 					<svg class="feather">
 						<use xlink:href="<?php echo esc_url( $ui_icons_url ); ?>/feather-sprite.svg#copy"/>
 					</svg>
@@ -2675,7 +2675,7 @@ class DSLC_Module {
 						<use xlink:href="<?php echo esc_url( $ui_icons_url ); ?>/feather-sprite.svg#move"/>
 					</svg>
 				</span>
-				<span class="dslca-manage-action dslca-module-manage-hook dslca-change-width-module-hook" title="<?php esc_attr_e( 'Change width', 'live-composer-page-builder' ); ?>">
+				<span class="dslca-manage-action dslca-module-manage-hook dslca-change-width-module-hook" title="<?php esc_attr_e( 'Change width', 'live-composer-page-builder' ); ?>" data-event="module-change-width">
 					<svg class="feather">
 						<use xlink:href="<?php echo esc_url( $ui_icons_url ); ?>/feather-sprite.svg#columns"/>
 					</svg>
@@ -2689,7 +2689,7 @@ class DSLC_Module {
 						<span data-size="11">11/12</span><span data-size="12">12/12</span>
 					</div>
 				</span>
-				<span class="dslca-manage-action dslca-module-manage-hook dslca-delete-module-hook" title="<?php esc_attr_e( 'Delete', 'live-composer-page-builder' ); ?>">
+				<span class="dslca-manage-action dslca-module-manage-hook dslca-delete-module-hook" title="<?php esc_attr_e( 'Delete', 'live-composer-page-builder' ); ?>"  data-event="module-delete">
 					<svg class="feather">
 						<use xlink:href="<?php echo esc_url( $ui_icons_url ); ?>/feather-sprite.svg#x"/>
 					</svg>

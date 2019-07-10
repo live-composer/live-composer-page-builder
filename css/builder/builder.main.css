@@ -1878,6 +1878,17 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 		padding: 0 8px;
 		min-width: 20px;
 		margin-right: -2px;
+		position: relative;
+	}
+
+	.dslca-manage-action:before {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 0;
+		display: block;
+		bottom: 0;
+		right: 0;
 	}
 
 	.dslca-module-manage-inner .dslca-manage-action {
@@ -3487,14 +3498,6 @@ body.dslca-composer-hidden .dslc-hf-block-overlay {
 	display: none !important;
 }
 
-body.dslca-composer-hidden .dslca-container.active-message-panel {
-	margin-bottom: 0;
-}
-
-body.dslca-composer-hidden .dslc-editor-messages-section-122017 {
-	display: none !important;
-}
-
 .dslca-loading {
 	position: absolute;
 	top: 15px;
@@ -4275,128 +4278,6 @@ div#scroller-stopper {
 .mce-tinymce .mce-btn button:hover {
 	background: #e3e3e3 !important;
     border-color: #ccc !important;
-}
-
-/**
- * Display the editor messages
- */
-
-.dslca-container.active-message-panel {
-	margin-bottom: 40px;
-}
-
-.dslc-editor-messages-section-122017 {
-	position: fixed;
-	bottom: 0;
-	width: 100%;
-	height: 40px;
-	font-family: 'Open Sans', sans-serif;
-	color: #fff;
-	font-weight: 100;
-	background: #404a58;
-	display: none;
-}
-
-.dslc-editor-messages-title {
-    float: left;
-    background: #303030;
-    color: #fff;
-    font-size: 14px;
-    line-height: 22px;
-    text-transform: uppercase;
-    padding: 12px 17px;
-    text-align: center;
-    display: block;
-    letter-spacing: 1px;
-}
-
-a.dslc-editor-messages-title:hover {
-	color: #fff;
-}
-
-#editor-messages {
-    font-size: 14px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    margin: 0 !important;
-    padding: 0 !important;
-    opacity: 0;
-}
-
-#editor-messages li {
-    position: relative;
-    padding: 13px 20px 11px 50px !important;
-    margin: 0;
-    line-height: 16px;
-    font-size: 14px;
-}
-
-#editor-messages a {
-    text-decoration: none;
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-}
-
-#editor-messages strong {
-	font-weight: 500;
-}
-
-#editor-messages .cta {
-	font-size: 11px;
-	font-weight: 500;
-	background:#5A92E2;
-	color: #fff;
-	text-transform: uppercase;
-	letter-spacing: .5px;
-	display: inline-block;
-	padding: 4px 10px;
-	position: absolute;
-	border-radius: 3px;
-	margin-left: 14px;
-	margin-top: -4px;
-}
-
-#editor-messages .dslc-icon {
-    font-size: 19px;
-    margin-right: 10px;
-    position: absolute;
-    left: 20px;
-    top: 12px;
-}
-
-#editor-messages .dslc-notice {
-    background: #d90a0a;
-    margin: 0;
-    padding: 12px 17px;
-    font-size: 16px;
-}
-
-#editor-messages .dslc-notice a {
-	position: relative;
-	color: #fff;
-}
-
-.dslc-editor-messages-hide {
-	float: right;
-    padding: 12px 17px;
-    background: #283546;
-    font-size: 14px;
-    text-align: center;
-    display: block;
-    color: #fff;
-}
-
-.dslc-editor-messages-hide .dslc-icon {
-	font-size: 17px;
-	margin-right: 10px;
-}
-
-a.dslc-editor-messages-hide:hover {
-    color: #fff;
 }
 
 .dslca-enabled.dslc-res-tablet .dslc-modules-section:hover, .dslca-enabled.dslc-res-phone .dslc-modules-section:hover {

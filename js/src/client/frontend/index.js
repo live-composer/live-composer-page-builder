@@ -18,13 +18,21 @@
  * - dslc_social_share
  */
 
+
+const openModuleForEditing = ( moduleEl ) => {
+	console.log( "openModuleForEditing:" ); console.log( moduleEl );
+	if ( ! jQuery(moduleEl).closest('.dslc-module-front').hasClass('dslca-module-being-edited') ) {
+
+		jQuery(moduleEl).closest('.dslc-module-front').find('.dslca-module-edit-hook').trigger('click');
+	}
+}
+
 /**
  * Responsive Classes
  *
  * We use it only in Responsive preview panel and for compatibility.
  */
-
-function dslc_responsive_classes( force ) {
+window.dslc_responsive_classes = ( force ) => {
 
 	if ( force === undefined) force = false;
 
@@ -54,7 +62,7 @@ function dslc_responsive_classes( force ) {
 /**
  * Init Accordion
  */
-function dslc_init_accordion() {
+window.dslc_init_accordion = () => {
 
 	jQuery('.dslc-accordion').each(function(){
 
@@ -88,7 +96,7 @@ function dslc_init_accordion() {
 /**
  * Init Lightbox
  */
-function dslc_init_lightbox() {
+window.dslc_init_lightbox = () => {
 
 	var type;
 
@@ -107,11 +115,11 @@ function dslc_init_lightbox() {
 	});
 
 	jQuery( '.dslc-lightbox-gallery' ).each(function(){
-		jQuery(this).magnificPopup({ 
-			delegate : 'a', 
-			type:'image', 
-			gallery:{ 
-				enabled: true 
+		jQuery(this).magnificPopup({
+			delegate : 'a',
+			type:'image',
+			gallery:{
+				enabled: true
 			},
 			image: {
 				titleSrc: function(item) {
@@ -131,7 +139,7 @@ function dslc_init_lightbox() {
 /**
  * Init carousels
  */
-function dslc_carousel() {
+window.dslc_carousel = () => {
 
 	// Loop through each carousel
 	jQuery( '.dslc-carousel, .dslc-slider' ).each( function(el) {
@@ -274,7 +282,7 @@ function dslc_carousel() {
 /**
  * Fix responsivness of carousel
  */
-function dslc_carousel_responsive() {
+window.dslc_carousel_responsive = () => {
 
 	// Loop through each carousel
 	jQuery( '.dslc-carousel' ).each( function() {
@@ -307,7 +315,7 @@ function dslc_carousel_responsive() {
 /**
  * Initiate Video
  */
-function dslc_bg_video() {
+window.dslc_bg_video = () => {
 
 	jQuery('.dslc-bg-video').each(function(){
 
@@ -334,7 +342,7 @@ function dslc_bg_video() {
 /**
  * Initiate Parallax
  */
-function dslc_parallax() {
+window.dslc_parallax = () => {
 
 	jQuery('.dslc-init-parallax').each(function(){
 		var $paralaxEl = jQuery(this);
@@ -365,7 +373,7 @@ function dslc_parallax() {
 /**
  * Initiate Masonry
  */
-function dslc_masonry( dslcWrapper, dslcAnimate ) {
+window.dslc_masonry = ( dslcWrapper, dslcAnimate ) => {
 
 	dslcWrapper = typeof dslcWrapper !== 'undefined' ? dslcWrapper : jQuery('body');
 	dslcAnimate = typeof dslcAnimate !== 'undefined' ? dslcAnimate : false;
@@ -432,7 +440,7 @@ function dslc_masonry( dslcWrapper, dslcAnimate ) {
 /**
  * Generate Tabs Code
  */
-function dslc_tabs_generate_code( dslcTabs ) {
+window.dslc_tabs_generate_code = ( dslcTabs ) => {
 
 	var dslcTabsContainer = dslcTabs.closest('.dslc-module-front');
 
@@ -474,13 +482,15 @@ function dslc_tabs_generate_code( dslcTabs ) {
 	jQuery('.dslca-module-option-front[data-id="tabs_nav"]', dslcTabsContainer).val( dslcTabsNavVal );
 	jQuery('.dslca-module-option-front[data-id="tabs_content"]', dslcTabsContainer).val( dslcTabsContentVal );
 
-	parent.dslc_option_changed();
+	parent.LiveComposer.Builder.Actions.optionsChanged();
 }
 
 /**
  * Generate Code for the New Accordion Tab
  */
-function dslc_accordion_generate_code( dslcAccordion ) {
+window.dslc_accordion_generate_code = ( dslcAccordion ) => {
+
+	console.log( "dslc_accordion_generate_code!" );
 
 	var dslcModule = dslcAccordion.closest('.dslc-module-front'),
 	dslcAccordionCount = 0,
@@ -506,13 +516,13 @@ function dslc_accordion_generate_code( dslcAccordion ) {
 	jQuery('.dslca-module-option-front[data-id="accordion_nav"]', dslcModule).val( dslcAccordionTitleVal );
 	jQuery('.dslca-module-option-front[data-id="accordion_content"]', dslcModule).val( dslcAccordionContentVal );
 
-	parent.dslc_option_changed();
+	parent.LiveComposer.Builder.Actions.optionsChanged();
 }
 
 /**
  * Initiate Tabs
  */
-function dslc_tabs() {
+window.dslc_tabs = () => {
 
 	var dslcTabs, dslcTabsNav, dslcTabsContent, dslcTabContent;
 
@@ -532,7 +542,7 @@ function dslc_tabs() {
  * Increment download count
  */
 
-function dslc_download_count_increment( post_id ) {
+window.dslc_download_count_increment = ( post_id ) => {
 
 	jQuery.post(
 
@@ -548,7 +558,7 @@ function dslc_download_count_increment( post_id ) {
 /**
  * Check if element in viewport
  */
-function dslc_check_viewport() {
+window.dslc_check_viewport = () => {
 
 	var isIE = /*@cc_on!@*/false || !!document.documentMode;
 
@@ -599,7 +609,7 @@ function dslc_check_viewport() {
 /**
  * Animation of elements on hover ( posts modules )
  */
-function dslc_el_anim_hover() {
+window.dslc_el_anim_hover = () => {
 
 	jQuery('.dslc-on-hover-anim-target').each(function(){
 
@@ -617,7 +627,7 @@ function dslc_el_anim_hover() {
 /**
  * Progress Bar - Check viewport and animate
  */
-function dslc_check_progress_bar_viewport() {
+window.dslc_check_progress_bar_viewport = () => {
 
 	jQuery('.dslc-progress-bar-animated:in-viewport:not(.dslc-progress-bar-in-viewport)').each(function(){
 
@@ -635,7 +645,7 @@ function dslc_check_progress_bar_viewport() {
 /**
  * Validate Comment Form
  */
-function dslc_validate_comment_form( commentForm ) {
+window.dslc_validate_comment_form = ( commentForm ) => {
 
 	var commentName = commentForm.find('#author'),
 	commentEmail = commentForm.find('#email'),
@@ -679,7 +689,7 @@ function dslc_validate_comment_form( commentForm ) {
 /**
  * Social Sharing
  */
-function dslc_social_share( width, height, url ) {
+window.dslc_social_share = ( width, height, url ) => {
 
 	var leftPosition, topPosition, u, t;
 	//Allow for borders.
@@ -696,7 +706,7 @@ function dslc_social_share( width, height, url ) {
 /**
  * Sticky Row
  */
-function dslc_sticky_row() {
+window.dslc_sticky_row = () => {
 
 	var row = jQuery('body .dslc-modules-section');
 
@@ -719,15 +729,15 @@ function dslc_sticky_row() {
 		if ( jQuery( '#wpadminbar' ).length ) {
 			rowStickyPos -= jQuery( '#wpadminbar' ).height();
 		}
-	
+
 		jQuery(window).scroll(function() {
 			var headers = jQuery(".dslc-sticky-row");
 			var scrollTop = jQuery(this).scrollTop();
-		
+
 			if ( scrollTop >= 0 ) {
-				
+
 				headers.each(function(index, el) {
-			
+
 					var curHeader = jQuery(headers).eq(index);
 					var curTop = curHeader.offset().top;
 					var curHeight = curHeader.outerHeight();
@@ -736,21 +746,21 @@ function dslc_sticky_row() {
 					if ( jQuery( '#wpadminbar' ).length ) {
 						curTop -= jQuery( '#wpadminbar' ).height();
 					}
-			
+
 					// scroll up
 					var isRelative = ( el.isFixed && scrollTop <= el.exTop );
-			
+
 					// scroll down
 					var isFixed = ( curTop <= scrollTop );
-			
+
 					var position = "";
 					var top = 0;
-			
+
 					if ( isRelative ) {
 						// reset
 						positon = "relative";
 						top = 0;
-				
+
 						el.isFixed = false;
 
 						el.classList.remove("dslc-sticky-section-fixed");
@@ -763,7 +773,7 @@ function dslc_sticky_row() {
 							}
 						}
 						scrollTop += curHeight;
-				
+
 						if ( ! el.isFixed ) {
 							el.isFixed = true;
 							el.exTop = curTop;
@@ -777,7 +787,7 @@ function dslc_sticky_row() {
 						el.classList.add("dslc-sticky-section-fixed");
 						jQuery(el).closest('.dslc-modules-section-placeholder').height(jQuery(el).outerHeight());
 					}
-			
+
 					jQuery(el).css({
 						position: position,
 						top: top + "px"
@@ -807,14 +817,14 @@ jQuery(document).ready(function($){
 	dslc_tabs();
 
 	// Load More Posts
-	$(document).on( 'click', '.dslc-pagination-load-more a', function(e){
+	jQuery(document).on( 'click', '.dslc-pagination-load-more a', function(e){
 
 		e.preventDefault();
 
-		if ( $(this).parent().hasClass('dslc-active') ) {
+		if ( jQuery(this).parent().hasClass('dslc-active') ) {
 
-			var _this = $(this),
-			module = $(this).closest('.dslc-module-front'),
+			var _this = jQuery(this),
+			module = jQuery(this).closest('.dslc-module-front'),
 			pagination = module.find('.dslc-pagination'),
 			postsContainer = module.find('.dslc-posts-inner'),
 			moduleID = module.attr('id'),
@@ -844,7 +854,7 @@ jQuery(document).ready(function($){
 	});
 
 	// Comment Form Validation
-	$('.dslc-tp-comment-form form').submit(function(e){
+	jQuery('.dslc-tp-comment-form form').submit(function(e){
 
 		if ( ! dslc_validate_comment_form( jQuery(this) ) ) {
 			e.preventDefault();
@@ -855,7 +865,7 @@ jQuery(document).ready(function($){
 	 * Mobile Nav
 	 */
 	jQuery('.dslc-mobile-navigation select').change(function() {
-		window.location = $(this).val();
+		window.location = jQuery(this).val();
 	});
 
 	/**
@@ -869,16 +879,13 @@ jQuery(document).ready(function($){
 		dslcTabContentLast = jQuery('.dslc-tabs-tab-content:last', dslcTabs);
 
 		dslcTabsNavLast.after('<span class="dslc-tabs-nav-hook"><span class="dslc-tabs-nav-hook-title" contenteditable="true">Click to edit title</span><span class="dslca-delete-tab-hook"><span class="dslca-icon dslc-icon-remove"></span></span></span>');
-		dslcTabContentLast.after('<div class="dslc-tabs-tab-content"><div class="dslca-editable-content">This is just placeholder text.</div><textarea class="dslca-tab-plain-content">This is just placeholder text.</textarea><div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook">Open in WP Editor</span></div></div>');
+		dslcTabContentLast.after('<div class="dslc-tabs-tab-content"><div class="dslca-editable-content">This is just placeholder text.</div><textarea class="dslca-tab-plain-content">This is just placeholder text.</textarea><div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook" data-event="wysiwyg-edit">Open in WP Editor</span></div></div>');
 
 		jQuery('.dslc-tabs-nav-hook:last', dslcTabs).click();
 
 		dslc_tabs_generate_code( dslcTabs );
 
-		if ( ! jQuery(this).closest('.dslc-module-front').hasClass('dslca-module-being-edited') ) {
-
-			jQuery(this).closest('.dslc-module-front').find('.dslca-module-edit-hook').trigger('click');
-		}
+		openModuleForEditing( this[0] );
 	});
 
 	jQuery(document).on( 'click', '.dslca-delete-tab-hook', function(e){
@@ -953,33 +960,33 @@ jQuery(document).ready(function($){
 	});
 
 	// Close Notification
-	$(document).on( 'click', '.dslc-notification-close', function(e){
+	jQuery(document).on( 'click', '.dslc-notification-close', function(e){
 
-		$(this).closest('.dslc-notification').slideUp(200, function(){
+		jQuery(this).closest('.dslc-notification').slideUp(200, function(){
 
-			$(this).remove();
+			jQuery(this).remove();
 		});
 	});
 
 	/**
 	 * Filter
 	 */
-	$(document).on( 'click', '.dslc-post-filter', function(){
+	jQuery(document).on( 'click', '.dslc-post-filter', function(){
 
 		// Get info.
-		var selectedFilterEl = $(this);
+		var selectedFilterEl = jQuery(this);
 		var dslcContainer    = selectedFilterEl.closest('.dslc-module-front').find('.dslc-posts');
 		var dslcWrapper      = selectedFilterEl.closest('.dslc-module-front');
 
 		// Filter posts according to selected filter.
 		var dslcCat = selectedFilterEl.data('filter-id');
-		var dslcFilterPosts    = $(); // Empty jQuery object.
-		var dslcNotFilterPosts = $();
+		var dslcFilterPosts    = jQuery(); // Empty jQuery object.
+		var dslcNotFilterPosts = jQuery();
 
 		if ( dslcCat === 'show-all' ) {
 
 			dslcFilterPosts    = dslcContainer.closest('.dslc-module-front').find('.dslc-post');
-			dslcNotFilterPosts = $(); // Empty jQuery object.
+			dslcNotFilterPosts = jQuery(); // Empty jQuery object.
 
 		} else {
 
@@ -1012,17 +1019,17 @@ jQuery(document).ready(function($){
 	/**
 	 * Download Count Hook
 	 */
-	$(document).on( 'click', '.dslc-download-count-hook', function(e) {
+	jQuery(document).on( 'click', '.dslc-download-count-hook', function(e) {
 
-		dslc_download_count_increment( $(this).data('post-id') );
+		dslc_download_count_increment( jQuery(this).data('post-id') );
 	});
 
 	/**
 	 * Notification Close
 	 */
-	$('.dslc-notification-box-has-timeout').each(function(){
+	jQuery('.dslc-notification-box-has-timeout').each(function(){
 
-		var nBox = $(this);
+		var nBox = jQuery(this);
 		nTimeout = 'none',
 		moduleID = nBox.closest('.dslc-module-front').data('module-id'),
 		cookieID = 'nBox' + moduleID;
@@ -1036,9 +1043,9 @@ jQuery(document).ready(function($){
 		}
 	});
 
-	$(document).on( 'click', '.dslc-notification-box-close', function() {
+	jQuery(document).on( 'click', '.dslc-notification-box-close', function() {
 
-		var nBox = $(this).closest('.dslc-notification-box'),
+		var nBox = jQuery(this).closest('.dslc-notification-box'),
 		nTimeout = 'none',
 		moduleID = nBox.closest('.dslc-module-front').data('module-id'),
 		cookieID = 'nBox' + moduleID;
@@ -1060,7 +1067,7 @@ jQuery(document).ready(function($){
 			opacity : 0
 		}, 400, function(){
 
-			$(this).remove();
+			jQuery(this).remove();
 		});
 	});
 
@@ -1074,14 +1081,14 @@ jQuery(document).ready(function($){
 	 */
 	dslc_init_accordion();
 
-	$(document).on( 'click', '.dslc-accordion-hook', function(){
+	jQuery(document).on( 'click', '.dslc-accordion-hook', function(){
 
-		var dslcActive = $(this).closest('.dslc-accordion-item'),
+		var dslcActive = jQuery(this).closest('.dslc-accordion-item'),
 		dslcInactive = dslcActive.siblings('.dslc-accordion-item');
 
 		if ( dslcActive.hasClass('dslc-active') ) {
 
-			if ( ! $("body").hasClass('dslca-enabled') ) {
+			if ( ! jQuery("body").hasClass('dslca-enabled') ) {
 				if ( dslcActive.find('.dslca-icon').hasClass('dslc-icon-minus') ) {
 					dslcActive.find('.dslca-icon').removeClass('dslc-icon-minus').addClass('dslc-icon-plus');
 				} else {
@@ -1094,7 +1101,7 @@ jQuery(document).ready(function($){
 
 			dslcActive.removeClass('dslc-inactive').addClass('dslc-active');
 
-			if ( ! $("body").hasClass('dslca-enabled') ) {
+			if ( ! jQuery("body").hasClass('dslca-enabled') ) {
 				if ( dslcActive.find('.dslca-icon').hasClass('dslc-icon-minus') ) {
 					dslcActive.find('.dslca-icon').removeClass('dslc-icon-minus').addClass('dslc-icon-plus');
 				} else {
@@ -1106,8 +1113,8 @@ jQuery(document).ready(function($){
 
 		dslcInactive.removeClass('dslc-active').addClass('dslc-inactive');
 
-		$('.dslc-accordion-content', dslcActive).slideDown(300);
-		$('.dslc-accordion-content', dslcInactive).slideUp(300);
+		jQuery('.dslc-accordion-content', dslcActive).slideDown(300);
+		jQuery('.dslc-accordion-content', dslcInactive).slideUp(300);
 	});
 
 	jQuery(document).on( 'click', '.dslca-add-accordion-hook', function(){
@@ -1117,7 +1124,7 @@ jQuery(document).ready(function($){
 		dslcAccordionNew = dslcAccordionLast.clone().insertAfter(dslcAccordionLast);
 
 		jQuery('.dslc-accordion-title', dslcAccordionNew).html('CLICK TO EDIT');
-		jQuery('.dslc-accordion-content', dslcAccordionNew).html('<div class="dslca-editable-content">Placeholder content, click to edit. Lorem ipsum dolor sit amet, consectetur tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div><textarea class="dslca-accordion-plain-content"></textarea><div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook">Edit Content</span></div>');
+		jQuery('.dslc-accordion-content', dslcAccordionNew).html('<div class="dslca-editable-content">Placeholder content, click to edit. Lorem ipsum dolor sit amet, consectetur tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div><textarea class="dslca-accordion-plain-content"></textarea><div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook" data-event="wysiwyg-edit">Edit Content</span></div>');
 		jQuery('.dslc-accordion-hook', dslcAccordionNew).click();
 
 		dslc_accordion_generate_code( dslcAccordion );
@@ -1191,7 +1198,7 @@ jQuery(document).ready(function($){
 		}
 	});
 
-	$(document).on( 'click', '.dslc-trigger-lightbox-gallery', function(e){
+	jQuery(document).on( 'click', '.dslc-trigger-lightbox-gallery', function(e){
 
 		e.preventDefault();
 
@@ -1222,16 +1229,16 @@ jQuery(document).ready(function($){
 	/**
 	 * Navigation Module
 	 */
-/* Disabled in favour of CSS hover.
-	$( '.dslc-navigation li' ).mouseenter(function(){
+	/* Disabled in favour of CSS hover.
+	jQuery( '.dslc-navigation li' ).mouseenter(function(){
 
-		var subnav = $(this).children('ul');
+		var subnav = jQuery(this).children('ul');
 
 		if ( subnav.length ) {
 
-			if ( $(this).closest('.dslc-navigation').hasClass('dslc-navigation-sub-position-center') ) {
+			if ( jQuery(this).closest('.dslc-navigation').hasClass('dslc-navigation-sub-position-center') ) {
 
-				var parentWidth = $(this).closest('li').width(),
+				var parentWidth = jQuery(this).closest('li').width(),
 				subnavWidth = subnav.outerWidth(),
 				offsetToCenter = parseInt( parentWidth ) / 2 - parseInt( subnavWidth ) / 2 + 'px';
 
@@ -1243,27 +1250,27 @@ jQuery(document).ready(function($){
 
 			var elOffsetLeft = subnav.offset().left;
 			var elWidth = subnav.outerWidth();
-			var docWidth = $('body').width();
+			var docWidth = jQuery('body').width();
 
 			if ( docWidth < ( elOffsetLeft + elWidth ) ) {
 				subnav.addClass('dslc-navigation-invert-subnav');
 			}
 
 			// Show child menu
-			$(this).children('ul').stop().animate({ opacity : 1 }, 300 );
+			jQuery(this).children('ul').stop().animate({ opacity : 1 }, 300 );
 		}
 	}).mouseleave(function(){
 
-		$(this).children('ul').stop().animate({ opacity : 0 }, 300, function(){
+		jQuery(this).children('ul').stop().animate({ opacity : 0 }, 300, function(){
 
-			$(this).css({ 'display' : 'none' }).children('ul').removeClass('dslc-navigation-invert-subnav');
+			jQuery(this).css({ 'display' : 'none' }).children('ul').removeClass('dslc-navigation-invert-subnav');
 		});
 	});
-*/
+	*/
 	dslc_check_viewport();
 	dslc_check_progress_bar_viewport();
 
-	$(document).on( 'scroll', function(){
+	jQuery(document).on( 'scroll', function(){
 
 		dslc_check_viewport();
 		dslc_check_progress_bar_viewport();
@@ -1271,7 +1278,7 @@ jQuery(document).ready(function($){
 
 	/*
 	 * Keep the footer at the bottom of the page.
-	 */ 
+	 */
 
 	if ( jQuery("#dslc-footer").hasClass("dslc-footer-pos-relative") ) {
 		var pageHeight, footer, footerHeight, content, contentMinHeight;
@@ -1296,19 +1303,24 @@ jQuery(document).ready(function($){
 			});
 			jQuery(content).css({
 				'min-height': contentMinHeight,
-				'padding-bottom': footerHeight + 'px' 
+				'padding-bottom': footerHeight + 'px'
 			});
 		}
 	}
 });
 
 jQuery(document).ready(function($){
+
+	console.log( "fontend document ready!!!!!!!!!!" );
 	dslc_responsive_classes();
 	dslc_carousel();
 	dslc_masonry();
 	dslc_parallax();
 	dslc_init_lightbox();
 	dslc_sticky_row();
+
+
+	console.log( "window:" ); console.log( window );
 	// No need to wait for jQuery(window).load.
 	// These functions will check if images loaded by itself.
 });

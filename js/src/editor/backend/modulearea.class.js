@@ -4,7 +4,9 @@
 
 'use strict';
 
-LiveComposer.Builder.Elements.CModuleArea = function(elem) {
+import Sortable from 'sortablejs';
+
+export const ModuleArea = function(elem) {
 
 	var self = this;
 	this.section = jQuery(elem).closest('.dslc-modules-section');
@@ -62,7 +64,7 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 
 			evt.preventDefault();
 
-			dslc_generate_code();
+			window.dslc_generate_code();
 			LiveComposer.Builder.UI.stopScroller();
 			jQuery('body').removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
 			jQuery('body', LiveComposer.Builder.PreviewAreaWindow.document).removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
@@ -93,7 +95,7 @@ LiveComposer.Builder.Elements.CModuleArea = function(elem) {
 			// evt.preventDefault();
 			// evt.stopPropagation(); return false;
 
-			dslc_show_publish_button();
+			window.dslc_show_publish_button();
 		},
 
 		// Called by any change to the list (add / update / remove)

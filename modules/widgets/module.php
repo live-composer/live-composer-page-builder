@@ -1582,7 +1582,7 @@ class DSLC_Widgets extends DSLC_Module {
 					} else {
 
 						if ( $dslc_is_admin ) :
-							?><div class="dslc-notification dslc-red"><?php esc_html_e( 'Click the cog icon on the right of this box to choose which sidebar to show.', 'live-composer-page-builder' ); ?> <span class="dslca-module-edit-hook dslc-icon dslc-icon-cog"></span></span></div><?php
+							?><div class="dslc-notification dslc-red"><?php esc_html_e( 'Click the cog icon on the right of this box to choose which sidebar to show.', 'live-composer-page-builder' ); ?> <span class="dslca-module-edit-hook dslc-icon dslc-icon-cog" data-event="module-edit"></span></span></div><?php
 						endif;
 
 					}
