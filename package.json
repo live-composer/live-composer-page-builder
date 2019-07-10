@@ -4,7 +4,8 @@
   "description": "Front-end page builder for WordPress with drag and drop editing. Build PRO responsive websites and landing pages. Visually customize any page element.",
   "main": "ds-live-composer.php",
   "scripts": {
-    "test": "bash bin/localtest.sh && exit 1",
+    "test-e2e": "jest --config tests/e2e-tests/jest.config.js",
+    "test-e2e:watch": "npm run test-e2e -- --watch",
     "watch": "webpack --watch",
     "build": "webpack"
   },
@@ -32,17 +33,13 @@
     "jest": "^24.8.0",
     "jest-puppeteer": "^4.2.0",
     "puppeteer": "^1.18.1",
-    "webpack": "^4.35.0",
+    "webpack": "^4.35.3",
     "webpack-cli": "^3.3.5"
   },
   "dependencies": {
     "@wordpress/e2e-test-utils": "^2.1.0",
-    "chromedriver": "^74.0.0",
     "animejs": "^3.0.1",
-    "sortablejs": "^1.10.0-rc2"
-  },
-  "scripts": {
-    "test-e2e": "jest --config tests/e2e-tests/jest.config.js",
-    "test-e2e:watch": "npm run test-e2e -- --watch"
+    "chromedriver": "^74.0.0",
+    "sortablejs": "^1.10.0-rc3"
   }
 }
