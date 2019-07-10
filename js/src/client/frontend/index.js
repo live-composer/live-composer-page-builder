@@ -20,9 +20,7 @@
 
 
 const openModuleForEditing = ( moduleEl ) => {
-	console.log( "openModuleForEditing:" ); console.log( moduleEl );
 	if ( ! jQuery(moduleEl).closest('.dslc-module-front').hasClass('dslca-module-being-edited') ) {
-
 		jQuery(moduleEl).closest('.dslc-module-front').find('.dslca-module-edit-hook').trigger('click');
 	}
 }
@@ -489,24 +487,18 @@ window.dslc_tabs_generate_code = ( dslcTabs ) => {
  * Generate Code for the New Accordion Tab
  */
 window.dslc_accordion_generate_code = ( dslcAccordion ) => {
-
-	console.log( "dslc_accordion_generate_code!" );
-
 	var dslcModule = dslcAccordion.closest('.dslc-module-front'),
 	dslcAccordionCount = 0,
 	dslcAccordionTitleVal = '',
 	dslcAccordionContentVal = '';
 
 	jQuery( '.dslc-accordion-item', dslcAccordion ).each(function(){
-
 		dslcAccordionCount++;
-
 		if ( dslcAccordionCount > 1 ) {
 
 			dslcAccordionTitleVal += ' (dslc_sep) ';
 			dslcAccordionContentVal += ' (dslc_sep) ';
 		}
-
 		dslcAccordionTitleVal += jQuery(this).find('.dslc-accordion-title').text();
 		dslcAccordionContentVal += jQuery(this).find('.dslc-accordion-content').find('.dslca-accordion-plain-content').val();
 	});
@@ -1311,8 +1303,6 @@ jQuery(document).ready(function($){
 });
 
 jQuery(document).ready(function($){
-
-	console.log( "fontend document ready!!!!!!!!!!" );
 	dslc_responsive_classes();
 	dslc_carousel();
 	dslc_masonry();
@@ -1320,8 +1310,6 @@ jQuery(document).ready(function($){
 	dslc_init_lightbox();
 	dslc_sticky_row();
 
-
-	console.log( "window:" ); console.log( window );
 	// No need to wait for jQuery(window).load.
 	// These functions will check if images loaded by itself.
 });

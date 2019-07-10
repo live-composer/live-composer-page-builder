@@ -135,9 +135,6 @@ window.LiveComposer = {
 
 /** Wait till tinyMCE loaded */
 window.previewAreaTinyMCELoaded = function( windowObj ){
-
-	console.log( "window.previewAreaTinyMCELoaded!" );
-
 	LiveComposer.Builder.PreviewAreaWindow = windowObj;
 	LiveComposer.Builder.PreviewAreaDocument = jQuery(windowObj.document);
 

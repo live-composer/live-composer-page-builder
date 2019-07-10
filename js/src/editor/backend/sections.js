@@ -40,7 +40,6 @@ const sectionsEventsInit = () => {
 	}
 
 	jQuery(".dslc-modules-section", LiveComposer.Builder.PreviewAreaDocument).each(function(){
-		console.log( "each section 🎷" );
 		new Section(this);
 	});
 
@@ -113,11 +112,9 @@ const sectionsEventsInit = () => {
 		if ( !actionAvail() ) return false;
 
 		if ( ! jQuery(this).hasClass('dslca-action-disabled') ) {
-
 			jQuery('.dslca-prompt-modal-cancel-hook').hide();
 			jQuery('.dslca-prompt-modal-confirm-hook').html('<span class="dslc-icon dslc-icon-ok"></span>' + DSLCString.str_ok);
 
-			console.log( "CModalWindow>>>>>>>>>>>>" );
 			CModalWindow({
 				title: DSLCString.str_export_row_title,
 				content: DSLCString.str_export_row_descr + '<br><br><textarea>' + '[' + generateSectionCode( jQuery(this).closest('.dslc-modules-section') ) + ']' + '</textarea></span>'

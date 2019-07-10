@@ -6,9 +6,6 @@ import { moduleOutputDefault } from "./module.js";
 import Sortable from 'sortablejs';
 
 export const dragAndDropInit = () => {
-
-	if ( window.dslcDebug ) console.log( 'dslc_drag_and_drop' );
-
 	var modulesSection, modulesArea, moduleID, moduleOutput;
 
 	// Drag and Drop for module icons from the list of modules

@@ -208,18 +208,20 @@ document.addEventListener('wysiwygEdit', function ( customEvent ) {
 
 	// const editableEl = elClicked.querySelector('.dslca-editable-content');
 	const idToEdit = elClicked.dataset.idToEdit;
-	console.log( "idToEdit:" ); console.log( idToEdit );
 
 	const editableEl = currentModuleEl.querySelector('[data-edit-id="' + idToEdit + '"]');
-	let content = editableEl.value;
-	console.log( "editableEl:" ); console.log( editableEl );
-	console.log( "content:" ); console.log( content );
-	// var module = editable.closest('.dslc-module-front');
+	let content = '';
+
+	if ( 'TEXTAREA'=== editableEl.tagName || 'INPUT'=== editableEl.tagName ) {
+		content = editableEl.value;
+	} else {
+		content = editableEl.innerHTML;
+	}
 
 	if ( undefined === content ) {
 		content = '';
 	}
-	console.log( "currentModuleEl:" ); console.log( currentModuleEl );
+
 	if ( content.trim().length ) {
 		// Extract Content for current tab/accordion:
 		/* if ( currentModuleEl.classList.contains('dslc-module-handle-like-accordion') || currentModuleEl.classList.contains('dslc-module-handle-like-tabs') ) {
@@ -242,6 +244,8 @@ document.addEventListener('wysiwygEdit', function ( customEvent ) {
 		content = content.replace(/%\}%/g, ']');
 	}
 
+	content = content.trim();
+
 	// Fill TinyMCE editor with extracted above content.
 	if ( typeof tinymce != 'undefined' ) {
 		var editor = tinymce.get( 'dslcawpeditor' );
@@ -252,12 +256,11 @@ document.addEventListener('wysiwygEdit', function ( customEvent ) {
 			document.getElementById('dslcawpeditor').value = content;
 		}
 
-		/* if ( ! currentModuleEl.classList.contains('dslca-module-being-edited') ) {
-			currentModuleEl.querySelector('.dslca-module-edit-hook').trigger('click');
-		} */
+		if ( ! currentModuleEl.classList.contains('dslca-module-being-edited') ) {
+			currentModuleEl.querySelector('.dslca-module-edit-hook').click();
+		}
 
 		jQuery('.dslca-wp-editor').show();
-		console.log( "🛑editableEl:" ); console.log( editableEl );
 		editableEl.classList.add('dslca-wysiwyg-active');
 		jQuery('#dslcawpeditor_ifr, #dslcawpeditor').css({ height : jQuery('.dslca-wp-editor').height() - 300 });
 	} else {
@@ -271,8 +274,6 @@ const editableContentTextEvents = () => {
 	// Preview iframe events.
 	/* LiveComposer.Builder.PreviewAreaWindow.document.addEventListener('blur', function (event) {
 		// event.preventDefault();
-		console.log( "TYPE blur - event.target:" ); console.log( event.target );
-
 		if ( event.target.matches( '[data-event="module-edit"]' ) ) {
 
 		}
@@ -280,8 +281,6 @@ const editableContentTextEvents = () => {
  */
 /* 	LiveComposer.Builder.PreviewAreaWindow.document.addEventListener('keyup', function (event) {
 		// event.preventDefault();
-		console.log( "TYPE keyup - event.target:" ); console.log( event.target );
-
 		if ( event.target.matches( '[data-event="module-edit"]' ) ) {
 
 		}
@@ -289,20 +288,16 @@ const editableContentTextEvents = () => {
  */
 	LiveComposer.Builder.PreviewAreaDocument.on('blur', '.dslca-editable-content', function() {
 		if ( ! LiveComposer.Builder.Flags.uiHidden && jQuery(this).data('type') == 'simple' ) {
-
 			editableContentCodeGeneration( jQuery(this) );
 		}
 	}).on( 'paste', '.dslca-editable-content:not(.inline-editor)', function(){
 		if ( ! LiveComposer.Builder.Flags.uiHidden  && jQuery(this).data('type') == 'simple' ) {
-
 			var dslcRealInput = jQuery(this);
 
 			setTimeout(function(){
-
 				if ( dslcRealInput.data('type') == 'simple' ) {
 					dslcRealInput.html( dslcRealInput.text() );
 				}
-
 				editableContentCodeGeneration( dslcRealInput );
 			}, 100);
 		}
@@ -405,21 +400,21 @@ function moduleDuplicate( module ) {
  * @param DOM module Module that needs ID updated (new ID).
  * @return void
  */
-export const getNewModuleId = ( module ) => {
+export const getNewModuleId = ( moduleEl ) => {
 
 	// Vars
 	var dslc_module_id = LiveComposer.Utils.get_unique_id(); // Generate new module ID.
-	var dslc_module_id_original = module.getAttribute( 'id' ); // Original Module ID.
+	var dslc_module_id_original = moduleEl.getAttribute( 'id' ); // Original Module ID.
 
 	// Update module ID in data attribute
-	module.setAttribute( 'data-module-id', dslc_module_id );
+	moduleEl.setAttribute( 'data-module-id', dslc_module_id );
 	// Update module ID in id attribute of element
-	module.setAttribute( 'id', 'dslc-module-' + dslc_module_id );
+	moduleEl.setAttribute( 'id', 'dslc-module-' + dslc_module_id );
 
 	/**
 	 * Search/Replace module id in the inline CSS
 	 */
-	var inline_css_el = module.getElementsByTagName( 'style' )[0];
+	var inline_css_el = moduleEl.getElementsByTagName( 'style' )[0];
 	var inline_css_code = inline_css_el.textContent;
 	// Update id attribute for <style> element with new value
 	inline_css_el.setAttribute( 'id', '#css-for-dslc-module-' + dslc_module_id );
@@ -430,7 +425,7 @@ export const getNewModuleId = ( module ) => {
 
 
 	// Update module ID in raw base64 code (dslc_code) of the module
-	LiveComposer.Utils.update_module_property_raw( module, 'module_instance_id', dslc_module_id );
+	LiveComposer.Utils.update_module_property_raw( moduleEl, 'module_instance_id', dslc_module_id );
 }
 
 /**
@@ -835,5 +830,4 @@ function dslc_reload_module( moduleID, callback ) { dslc_module_output_reload( m
 export const moduleInitJS = () => {
 	adjustZindex();
 	editableContentTextEvents();
-	console.log('module.js > moduleInitJS');
 }

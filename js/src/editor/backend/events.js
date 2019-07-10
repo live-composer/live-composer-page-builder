@@ -3,12 +3,8 @@
  */
 
 export const eventsInit = () =>{
-	console.log( "eventsInit:" );
 	// Parent page events.
 	document.addEventListener('click', function (event) {
-
-		console.log( "PARENT event.target:" ); console.log( event.target );
-
 		if ( event.target.matches( '[data-event="modal-wysiwyg-cancel"]' ) ) {
 			// Create a new "Modal Cancel" event
 			const modalWysiwygCancel = new CustomEvent('modalWysiwygCancel', { detail: event.target });
@@ -25,7 +21,6 @@ export const eventsInit = () =>{
 	// Preview iframe events.
 	LiveComposer.Builder.PreviewAreaWindow.document.addEventListener('click', function (event) {
 		event.preventDefault();
-		console.log( "iFRAME event.target:" ); console.log( event.target );
 
 		if ( event.target.matches( '[data-event="module-edit"]' ) ) {
 			// Create a new "Open Module Editing" event

@@ -344,12 +344,8 @@ document.addEventListener( 'modalWysiwygCancel', function ( customEvent ) {
  * Confirm changes in standard WP Editor (TinyMCE) WYSIWYG
  */
 document.addEventListener( 'modalWysiwygConfirm', function ( customEvent ) {
-
-	console.log( "modalWysiwygConfirm!" );
 	var module = jQuery('.dslca-wysiwyg-active', LiveComposer.Builder.PreviewAreaDocument ).closest('.dslc-module-front');
 
-	console.log( "module:" ); console.log( module );
-	console.log( "tinymce:" ); console.log( tinymce );
 	if( typeof tinymce != "undefined" ) {
 		if ( jQuery('#wp-dslcawpeditor-wrap').hasClass('tmce-active') ) {
 			var editor = tinymce.get( 'dslcawpeditor' );
@@ -358,8 +354,7 @@ document.addEventListener( 'modalWysiwygConfirm', function ( customEvent ) {
 			var content = jQuery('#dslcawpeditor').val();
 		}
 
-		console.log( "content:" ); console.log( content );
-
+		content = content.trim();
 		jQuery('.dslca-wp-editor').hide();
 		jQuery('.dslca-wysiwyg-active', LiveComposer.Builder.PreviewAreaDocument ).html( content );
 

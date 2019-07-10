@@ -16,9 +16,7 @@
  * CODE GENERATION - Save Page Changes
  */
 function dslc_save_composer() {
-
 	if ( window.dslcDebug ) console.log( 'dslc_save_composer' );
-
 	/**
 	 * Before saving code via ajax
 	 * refresh the page source in a hidden #dslca-code
@@ -498,8 +496,6 @@ const setEventListeners = () => {
 	 */
 	jQuery(document).on( 'click', '.dslca-save-composer-hook', function(e){
 		e.preventDefault();
-
-		console.log( "dslca-save-composer-hook" );
 		// If some saving action not already in progress
 		if ( ! jQuery('body').hasClass('dslca-module-saving-in-progress') && ! jQuery('body').hasClass('dslca-saving-in-progress') ) {
 			// Call the function to save
@@ -578,7 +574,6 @@ function dslca_gen_content_for_search() {
  * Other - Generate code of editable content
  */
 export const editableContentCodeGeneration = ( dslcField ) => {
-
 	if ( window.dslcDebug ) console.log( 'editableContentCodeGeneration' );
 
 	// In some rare cases we have the next error:
@@ -587,13 +582,15 @@ export const editableContentCodeGeneration = ( dslcField ) => {
 		return false;
 	}
 
-	var dslcModule, dslcContent, dslcFieldID;
+	const dslcModule = dslcField.closest('.dslc-module-front');
+	const moduleEl = dslcModule[0];
+	const dslcContent = dslcField.html().trim().replace(/<textarea/g, '<lctextarea').replace(/<\/textarea/g, '</lctextarea');
+	const dslcFieldID = dslcField.data('id');
 
-	dslcModule = dslcField.closest('.dslc-module-front');
-	dslcContent = dslcField.html().trim().replace(/<textarea/g, '<lctextarea').replace(/<\/textarea/g, '</lctextarea');
-	dslcFieldID = dslcField.data('id');
-
-	jQuery('.dslca-module-option-front[data-id="' + dslcFieldID + '"]', dslcModule).val( dslcContent );
+	// Update module ID in raw base64 code (dslc_code) of the module
+	LiveComposer.Utils.update_module_property_raw( moduleEl, dslcFieldID, dslcContent );
+	// dslcFieldID = 'content'
+	// jQuery('.dslca-module-option-front[data-id="' + dslcFieldID + '"]', dslcModule).val( dslcContent );
 }
 
 export const codeGenerationInitJS = () => {

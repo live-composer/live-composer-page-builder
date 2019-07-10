@@ -127,7 +127,6 @@ const Utils = {
 	 * @return {void}
 	 */
 	update_module_property_raw: function (module, property_name, property_value ) {
-
 		// Hidden textarea element with raw base64 code of the module
 		// <textarea class="dslca-module-code">YTo2On....iOjE7fQ==</textarea>
 		var module_code_container = module.getElementsByClassName('dslca-module-code')[0];

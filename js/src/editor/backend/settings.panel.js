@@ -459,9 +459,7 @@ const onModuleOptionsChange = () => {
 		// Active only for dropdowns and checkboxes.
 		if ( dslcOptionWrap.hasClass('dslca-module-edit-option-select') ||
 		dslcOptionWrap.hasClass('dslca-module-edit-option-checkbox') ) {
-
 			dslc_module_options_hideshow_tabs();
-
 		}
 
 		/**
@@ -470,39 +468,26 @@ const onModuleOptionsChange = () => {
 		 * Refresh module HTML from the server on every field value change
 		 */
 		if ( jQuery(this).closest('.dslca-module-edit-option').data('refresh-on-change') == 'active' ) {
-
 			/**
 			 * Get the new value
 			 */
-
 			if ( dslcOptionWrap.find('.dslca-module-edit-option-checkbox-wrapper').length ) {
-
 				var dslcOptionChoices = jQuery('input[type="checkbox"]', dslcOptionWrap);
-
 				dslcOptionChoices.each(function(){
-
 					if ( jQuery(this).prop('checked') ) {
-
 						dslcOptionValue = dslcOptionValue + jQuery(this).val() + ' ';
 					}
-
 				});
-
 			} else if ( dslcOption.hasClass('dslca-module-edit-option-radio') ) {
-
 				var dslcOptionValue = jQuery('.dslca-module-edit-field:checked', dslcOption).val();
 			} else {
-
 				var dslcOptionValue = dslcOption.val();
-
 				// Post Grid > Thumbnail: Orientation change.
 				// Need to change thumbnail width to get it work as expected
 				if ( dslcOptionID == 'orientation' && dslcOptionValue == 'horizontal' ) {
-
 					var dslcSliderEl = jQuery('.dslca-module-edit-option-thumb_width .dslca-module-edit-field');
 					dslcSliderEl.val('40').trigger('change');
 				} else if ( dslcOptionID == 'orientation' && dslcOptionValue == 'vertical' ) {
-
 					var dslcSliderEl = jQuery('.dslca-module-edit-option-thumb_width .dslca-module-edit-field');
 					dslcSliderEl.val('100').trigger('change');
 				}
@@ -517,7 +502,6 @@ const onModuleOptionsChange = () => {
 			}
 
 			jQuery( '.dslca-module-options-front textarea[data-id="' + dslcOptionID + '"]', dslcModule ).val(dslcOptionValue);
-
 			jQuery('.dslca-container-loader').show();
 
 			moduleOutputAltered( function(){
@@ -742,7 +726,6 @@ const onModuleOptionsChange = () => {
 const onSectionOptionsChange = () => {
 	// ROW styling option changes
 	jQuery(document).on( 'change', '.dslca-modules-section-edit-field', function() {
-		console.log( "ROW OPTION CHANGED 🐞" );
 		var dslcField, dslcFieldID, dslcEl, dslcModulesSection, dslcVal, dslcValReal, dslcValExt, dslcRule, dslcSetting, dslcTargetEl, dslcImgURL;
 
 		dslcField = jQuery(this);
@@ -779,7 +762,6 @@ const onSectionOptionsChange = () => {
 			dslcEl.removeClass('dslc-init-parallax');
 		}
 
-		console.log( "dslcFieldID:" ); console.log( dslcFieldID );
 		if ( dslcFieldID == 'border-top' ||
 			dslcFieldID == 'border-right' ||
 			dslcFieldID == 'border-bottom' ||
@@ -2217,9 +2199,6 @@ function dslc_module_options_color( field ) {
 			mode: 'hsl',
 			palettes: dslcColorPallete,
 			change: function(event, ui) {
-
-				console.log( "wpColorPicker > change" );
-
 				// @todo: get the code below into a separate function!
 				// The option field
 				dslcColorField = input;
@@ -2243,9 +2222,6 @@ function dslc_module_options_color( field ) {
 				dslcAffectOnChangeEl = dslcColorField.data('affect-on-change-el');
 				dslcAffectOnChangeRule = dslcColorField.data('affect-on-change-rule');
 
-				console.log( "dslcColorField:" ); console.log( dslcColorField );
-
-				console.log( "dslcAffectOnChangeEl:" ); console.log( dslcAffectOnChangeEl );
 				// ROWs doesn't have 'dslcAffectOnChangeEl' defined
 				if ( null != dslcAffectOnChangeEl && '.dslca-modules-section-being-edited' !== dslcAffectOnChangeEl ) {
 					jQuery( dslcAffectOnChangeEl , window.LiveComposer.Builder.PreviewAreaDocument.find('.dslca-module-being-edited') ).css( dslcAffectOnChangeRule , dslcColorFieldVal );
@@ -2316,8 +2292,6 @@ function dslc_module_options_color( field ) {
  * MODULES SETTINGS PANEL - Numeric Option Type
  */
 function dslc_module_options_numeric( fieldWrapper ) {
-	console.log( 'dslc_module_options_numeric' )
-
 	if ( window.dslcDebug ) console.log( 'dslc_module_options_numeric' );
 
 	var query = fieldWrapper; // || '.dslca-module-edit-option-slider';
@@ -2402,15 +2376,11 @@ function dslc_module_options_numeric( fieldWrapper ) {
 			value: sliderInput.val(),
 
 			slide: function(event, ui) {
-				console.log( "slide" );
-
 				sliderInput.val( ui.value + sliderExt );
 				sliderInput.trigger('change');
 			},
 
 			change: function(event, ui) {
-				console.log( "change" );
-
 				/**
 				 * If the current slider value gets to the max or min,
 				 * we reset the slider (destroy/call again) so script above

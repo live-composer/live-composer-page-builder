@@ -15,7 +15,6 @@ export const CSectionsContainer = class{
 
 
 	initSortable(elem) {
-		console.log( "initSortable!!!!!!!!!!!!!!!!" );
 		this.sortable = window.jQuery(elem).sortable({
 			items: ".dslc-modules-section-dnd",
 			handle: '.dslca-move-modules-section-hook:not(".dslca-action-disabled")',
