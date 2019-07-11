@@ -172,6 +172,35 @@ class DSLC_Button extends DSLC_Module {
 					'section' => 'styling',
 				),
 
+				array(
+					'label' => __( 'Style', 'live-composer-page-builder' ),
+					'id' => 'css_bg_style',
+					'std' => 'none',
+					'type' => 'select',
+					'choices' => array(
+						array(
+							'label' => __( 'None', 'live-composer-page-builder' ),
+							'value' => 'none',
+						),
+						array(
+							'label' => __( 'Gradient > Light > Top-right', 'live-composer-page-builder' ),
+							'value' => 'gradient-light-top-right',
+						),
+						array(
+							'label' => __( 'Uppercase', 'live-composer-page-builder' ),
+							'value' => 'uppercase',
+						),
+						array(
+							'label' => __( 'Lowercase', 'live-composer-page-builder' ),
+							'value' => 'lowercase',
+						),
+					),
+					'refresh_on_change' => true,
+					// 'affect_on_change_el' => '.dslc-button a',
+					// 'affect_on_change_rule' => 'text-transform',
+					'section' => 'styling',
+				),
+
 			array(
 				'id' => 'css_bg_group',
 				'type' => 'group',
@@ -1211,6 +1240,11 @@ class DSLC_Button extends DSLC_Module {
 		}
 
 		$classes = $options['button_class'] . ' ' . $options['custom_class'];
+
+
+		if ( isset( $options['css_bg_style'] ) && $options['css_bg_style'] !== 'none' ) {
+			$classes = $classes . ' ' . $options['css_bg_style'];
+		}
 
 			?>
 
