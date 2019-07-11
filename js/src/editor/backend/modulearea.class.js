@@ -1,10 +1,8 @@
 /**
  * DSLC_ModuleArea class
  */
-
-'use strict';
-
 import Sortable from 'sortablejs';
+import { modulesAreaAdd } from "./modulearea.js";
 
 export const ModuleArea = function(elem) {
 
@@ -79,7 +77,7 @@ export const ModuleArea = function(elem) {
 			// If container/column/modules area droped.
 			if ( jQuery(itemEl).data('id') == 'DSLC_M_A' ) {
 
-				dslc_modules_area_add( jQuery(self.section).find('.dslc-modules-section-wrapper .dslc-modules-section-inner') );
+				modulesAreaAdd( jQuery(self.section).find('.dslc-modules-section-wrapper .dslc-modules-section-inner') );
 				itemEl.remove();
 			}
 

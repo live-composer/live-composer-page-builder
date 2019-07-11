@@ -476,6 +476,9 @@ body.rtl .dslc-last-col {
 /* Module ghost when dropped on the page. */
 .dslca-module {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	font-size: 13px;
+	font-weight: 400;
+    line-height: 1;
 }
 
 /**

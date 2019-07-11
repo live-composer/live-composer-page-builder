@@ -204,7 +204,7 @@ export const addSection = ( callback ) => {
 	var browserCacheTmp = sessionStorage;
 
 	var newRow = jQuery();
-	var cachedAjaxRequest = browserCacheTmp.getItem( 'cache-dslc-ajax-add-modules-section' );
+	var cachedAjaxRequest = browserCacheTmp.getItem( 'cache-dslc-ajax-add-modules-section-v2' );
 
 	// If option 'lc_section_padding_vertical' was update.
 	if ( null !== cachedAjaxRequest ) {
@@ -214,7 +214,7 @@ export const addSection = ( callback ) => {
 		cache_curent_value = jQuery(cachedAjaxRequest).find('input[data-id="padding"]').val();
 
 		if ( current_value !== cache_curent_value ) {
-			browserCacheTmp.removeItem('cache-dslc-ajax-add-modules-section');
+			browserCacheTmp.removeItem('cache-dslc-ajax-add-modules-section-v2');
 			cachedAjaxRequest = null;
 		}
 	}
@@ -233,7 +233,7 @@ export const addSection = ( callback ) => {
 			function( response ) {
 
 				// newRow = jQuery(response.output);
-				browserCacheTmp.setItem( 'cache-dslc-ajax-add-modules-section', response.output );
+				browserCacheTmp.setItem( 'cache-dslc-ajax-add-modules-section-v2', response.output );
 
 				newRow = dslc_row_after_add( response.output );
 

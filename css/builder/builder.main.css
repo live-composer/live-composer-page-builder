@@ -1488,8 +1488,8 @@ body a:focus {
 
 .dslc-modules-area.dslc-modules-area-empty {
 	margin-bottom: 20px;
-	min-height: 120px;
-	box-shadow: 0 0 0 2px rgba(173, 175, 179, 0.4) inset;
+	min-height: 138px;
+	box-shadow: 0 0 0 2px rgba(173, 175, 179, 0.4);
 
 	text-align: center;
 	vertical-align: middle;
@@ -2736,7 +2736,7 @@ body.rtl .dslca-modules-area-placeholder {
 			}
 
 			#dslc-content .dslca-wysiwyg-actions-edit-hook {
-				background: #5890e5;
+				background: #5593EB;
 				color: #fff;
 				cursor: pointer;
 				display: block;

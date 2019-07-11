@@ -110,12 +110,10 @@ function dslc_template_import() {
  * TEMPLATES - SAVE
  */
 function dslc_template_save() {
-
 	if ( window.dslcDebug ) console.log( 'dslc_save_template' );
 
 	// AJAX call to save the template
 	jQuery.post(
-
 		DSLCAjax.ajaxurl,
 		{
 			action : 'dslc-ajax-save-template',
@@ -124,7 +122,6 @@ function dslc_template_save() {
 			dslc_template_title : jQuery('#dslca-save-template-title').val()
 		},
 		function( response ) {
-
 			// Hide the modal
 			hideModal( '', '.dslca-modal-templates-save' );
 		}
@@ -187,7 +184,6 @@ function dslc_template_delete( template ) {
 	 * Hook - Import Template
 	 */
 	jQuery('.dslca-template-import-form').submit(function(e){
-
 		e.preventDefault();
 		dslc_template_import();
 	});
@@ -196,7 +192,6 @@ function dslc_template_delete( template ) {
 	 * Hook - Save Template
 	 */
 	jQuery('.dslca-template-save-form').submit(function(e){
-
 		e.preventDefault();
 		dslc_template_save();
 	});

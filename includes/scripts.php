@@ -253,6 +253,7 @@ final class DSLC_Scripts {
 			) );
 			wp_localize_script( 'dslc-editor-backend-js', 'DSLCSiteData', array(
 				'siteurl' => get_option( 'siteurl' ),
+				'editorUrl' => DS_LIVE_COMPOSER_URL
 			) );
 
 			$translation_array = array(

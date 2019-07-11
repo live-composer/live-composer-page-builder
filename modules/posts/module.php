@@ -2705,14 +2705,14 @@ class DSLC_Posts extends DSLC_Module {
 }
 
 function dslc_module_posts_output( $atts, $content = null ) {
-	
+
 	// Uncode module options passed as serialized content.
 	$data = @unserialize( $content );
 
 	if ( $data !== false ) {
 		$options = unserialize( $content );
 	} else {
-		$fixed_data = preg_replace_callback( '!s:(\d+):"(.*?)";!', function( $match ) {      
+		$fixed_data = preg_replace_callback( '!s:(\d+):"(.*?)";!', function( $match ) {
 			return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
 		}, $content );
 		$options = unserialize( $fixed_data );
@@ -2979,7 +2979,7 @@ function dslc_module_posts_output( $atts, $content = null ) {
 	if ( $show_heading || $show_filters || $show_carousel_arrows ) {
 		$show_header = true;
 	}
-	
+
 	if ( $show_carousel_arrows && ( $options['arrows_position'] == 'aside' ) ) {
 		$container_class .= 'dslc-carousel-arrow-aside ';
 	}
@@ -3098,11 +3098,11 @@ function dslc_module_posts_output( $atts, $content = null ) {
 
 	if ( $dslc_query->have_posts() ) { ?>
 		<div class="<?php echo $container_class; ?>">
-			
+
 			<?php if ( $show_carousel_arrows && ( $options['arrows_position'] == 'aside' ) ) : ?>
 				<a href="#" class="dslc-carousel-nav-prev position-aside"><span class="dslc-icon-chevron-left"></span></a>
 			<?php endif; ?>
-			
+
 			<div class="dslc-posts-inner"><?php
 
 				if ( $options['type'] == 'carousel' ) : ?>
@@ -3254,7 +3254,7 @@ function dslc_module_posts_output( $atts, $content = null ) {
 															<?php if ( 'svg' == $options['show_icon'] ) : ?>
 																<?php echo stripslashes( $options['button_inline_svg'] ); ?>
 															<?php else : ?>
-																<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
+																<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 															<?php endif; ?>
 															<?php echo $options['button_text']; ?>
 														</a>
@@ -3294,7 +3294,7 @@ function dslc_module_posts_output( $atts, $content = null ) {
 															<?php if ( 'svg' == $options['show_icon'] ) : ?>
 																<?php echo stripslashes( $options['button_inline_svg'] ); ?>
 															<?php else : ?>
-																<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
+																<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 															<?php endif; ?>
 															<?php echo $options['button_text']; ?>
 														</a>
@@ -3368,7 +3368,7 @@ function dslc_module_posts_output( $atts, $content = null ) {
 													<?php if ( 'svg' == $options['show_icon'] ) : ?>
 														<?php echo stripslashes( $options['button_inline_svg'] ); ?>
 													<?php else : ?>
-														<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
+														<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 													<?php endif; ?>
 													<?php echo $options['button_text']; ?>
 												</a>
@@ -3399,7 +3399,7 @@ function dslc_module_posts_output( $atts, $content = null ) {
 											<?php if ( 'svg' == $options['show_icon'] ) : ?>
 												<?php echo stripslashes( $options['button_inline_svg'] ); ?>
 											<?php else : ?>
-												<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
+												<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 											<?php endif; ?>
 											<?php echo $options['button_text']; ?>
 										</a>
@@ -3424,11 +3424,11 @@ function dslc_module_posts_output( $atts, $content = null ) {
 					</div><!-- dslc-carousel --><?php
 				endif; ?>
 			</div><!--.dslc-posts-inner -->
-			
+
 			<?php if ( $show_carousel_arrows && ( $options['arrows_position'] == 'aside' ) ) : ?>
 				<a href="#" class="dslc-carousel-nav-next position-aside"><span class="dslc-icon-chevron-right"></span></a>
-			<?php endif; ?>	
-			
+			<?php endif; ?>
+
 		</div><!-- .dslc-cpt-posts --><?php
 	} else {
 		if ( $dslc_is_admin ) : ?>

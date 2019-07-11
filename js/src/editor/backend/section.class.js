@@ -1,6 +1,7 @@
 /**
  * Builder section class
  */
+import { modulesAreaAdd } from "./modulearea.js";
 
 export const Section = class{
 
@@ -24,7 +25,7 @@ export const Section = class{
 				var modulesSection = jQuery(this).find('.dslc-modules-section-inner');
 				var moduleID = ui.draggable.data( 'id' );
 				if ( moduleID == 'DSLC_M_A' ) {
-					dslc_modules_area_add( modulesSection );
+					modulesAreaAdd( modulesSection );
 				}
 			}
 		});
@@ -62,7 +63,7 @@ export const Section = class{
 			},
 			remove: function() {
 
-				(jQuery(self.elem).find('.dslc-modules-area').length == 0) && dslc_modules_area_add(jQuery(sortableContainer));
+				(jQuery(self.elem).find('.dslc-modules-area').length == 0) && modulesAreaAdd(jQuery(sortableContainer));
 			},
 			update: function (e, ui) {
 

@@ -209,13 +209,11 @@ function dslc_display_composer() {
 						<a href="#" class="dslca-open-modal-hook" data-modal=".dslca-modal-templates-export"><span class="dslca-icon dslc-icon-upload-alt"></span><?php _e( 'Export Page Code', 'live-composer-page-builder' ); ?></a>
 
 						<div class="dslca-modal dslca-modal-templates-save">
-
 							<form class="dslca-template-save-form">
 								<input type="text" id="dslca-save-template-title" placeholder="<?php _e( 'Name of the template', 'live-composer-page-builder' ); ?>">
 								<div class="dslca-submit"><?php _e( 'Save', 'live-composer-page-builder' ); ?></div>
 								<div class="dslca-cancel dslca-close-modal-hook" data-modal=".dslca-modal-templates-save"><?php _e( 'Cancel', 'live-composer-page-builder' ); ?></div>
 							</form>
-
 						</div><!-- .dslca-modal -->
 
 						<div class="dslca-modal dslca-modal-templates-export">

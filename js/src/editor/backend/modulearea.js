@@ -181,7 +181,7 @@ import { getNewModuleId } from "./module.js";
 		// Check if action can be fired
 		if ( !actionAvail() ) return false;
 
-		dslc_modules_area_add( jQuery(this).closest('.dslc-modules-section').find('.dslc-modules-section-inner') );
+		modulesAreaAdd( jQuery(this).closest('.dslc-modules-section').find('.dslc-modules-section-inner') );
 	});
 
 });
@@ -190,27 +190,50 @@ import { getNewModuleId } from "./module.js";
  * AREAS - Add New
  */
 
-function dslc_modules_area_add( row ) {
+// ex. dslc_modules_area_add
+export const modulesAreaAdd = ( row ) => {
 
-	if ( window.dslcDebug ) console.log( 'dslc_add_modules_area' );
+	if ( window.dslcDebug ) console.log( 'modulesAreaAdd' );
 
 	// Add class to body so we know it's in progress
 	// jQuery('body', LiveComposer.Builder.PreviewAreaDocument).addClass('dslca-anim-in-progress');
 
-	var output = '<div class="dslc-modules-area dslc-modules-area-dnd dslc-col dslc-12-col dslc-modules-area-empty " data-size="12">'+
-	'<div class="dslca-modules-area-manage"> <div class="dslca-modules-area-manage-inner">'+
-	'<span class="dslca-manage-action dslca-copy-modules-area-hook" title="Duplicate" ><span class="dslca-icon dslc-icon-copy">'+
-	'</span></span> <span class="dslca-manage-action dslca-move-modules-area-hook" title="Drag to move" >'+
-	'<span class="dslca-icon dslc-icon-move"></span></span>'+
-	'<span class="dslca-manage-action dslca-change-width-modules-area-hook" title="Change width" >'+
-	'<span class="dslca-icon dslc-icon-columns"></span> <div class="dslca-change-width-modules-area-options">'+
-	'<span>Container Width</span><span data-size="1">1/12</span><span data-size="2">2/12</span>'+
-	'<span data-size="3">3/12</span><span data-size="4">4/12</span> <span data-size="5">5/12</span><span data-size="6">6/12</span>'+
-	'<span data-size="7">7/12</span><span data-size="8">8/12</span> <span data-size="9">9/12</span><span data-size="10">10/12</span>'+
-	'<span data-size="11">11/12</span><span data-size="12">12/12</span> </div> </span>'+
-	'<span class="dslca-manage-action dslca-delete-modules-area-hook" title="Delete" ><span class="dslca-icon dslc-icon-remove"></span></span> </div> </div>'+
-	'</div>';
-
+	const uiIconsUrl = window.DSLCSiteData.editorUrl + 'css/icons';
+	var output = `<div class="dslc-modules-area dslc-col dslc-12-col dslc-modules-area-dnd dslc-modules-area-empty dslc-last-col" data-size="12">
+		<div class="dslca-modules-area-manage">
+			<span class="dslca-modules-area-manage-line"></span>
+			<div class="dslca-modules-area-manage-inner">
+				<span class="dslca-manage-action dslca-copy-modules-area-hook" title="Duplicate">
+					<svg class="feather">
+						<use xlink:href="` + uiIconsUrl +`/feather-sprite.svg#copy"></use>
+					</svg>
+				</span>
+				<span class="dslca-manage-action dslca-move-modules-area-hook" title="Drag to move">
+					<svg class="feather">
+						<use xlink:href="` + uiIconsUrl +`/feather-sprite.svg#move"></use>
+					</svg>
+				</span>
+				<span class="dslca-manage-action dslca-change-width-modules-area-hook" title="Change width">
+					<svg class="feather">
+						<use xlink:href="` + uiIconsUrl +`/feather-sprite.svg#columns"></use>
+					</svg>
+					<div class="dslca-change-width-modules-area-options"><span>Container Width</span><span data-size="1">1/12</span><span data-size="2">2/12</span>
+						<span data-size="3">3/12</span><span data-size="4">4/12</span>
+						<span data-size="5">5/12</span><span data-size="6">6/12</span>
+						<span data-size="7">7/12</span><span data-size="8">8/12</span>
+						<span data-size="9">9/12</span><span data-size="10">10/12</span>
+						<span data-size="11">11/12</span><span data-size="12">12/12</span>
+					</div>
+				</span>
+				<span class="dslca-manage-action dslca-delete-modules-area-hook" title="Delete">
+					<svg class="feather">
+						<use xlink:href="` + uiIconsUrl +`/feather-sprite.svg#x"></use>
+					</svg>
+				</span>
+			</div>
+		</div>
+		<!-- .dslc-module -->
+	</div>`;
 
 	// Append new area and animate
 	jQuery( output ).appendTo( row ).css({ height : 0 }).animate({
@@ -281,7 +304,7 @@ function dslc_modules_area_delete( area ) {
 		if ( dslcDeleteSectionToo ) {
 
 			var parentSectionContainer = area.closest('.dslc-modules-section-inner');
-			// dslc_modules_area_add( modulesSection );
+			// modulesAreaAdd( modulesSection );
 
 			// Don't delete latest module area in the latest section on the page
 			if (2 <= area.closest('#dslc-main').find('.dslc-modules-section').length ) {
@@ -292,7 +315,7 @@ function dslc_modules_area_delete( area ) {
 				// Remove the area
 				area.remove();
 				// Create new empty area in current module section
-				dslc_modules_area_add( modulesSection );
+				modulesAreaAdd( modulesSection );
 			}
 		}
 
@@ -435,7 +458,5 @@ export const moduleareasInitJS = () => {
 /**
  * Deprecated Functions and Fallbacks
  */
-
-function dslc_add_modules_area( row ) { dslc_modules_area_add( row ); }
 function dslc_delete_modules_area( area ) { dslc_modules_area_delete( area ); }
 function dslc_copy_modules_area( area ) { dslc_modules_area_copy( area ); }

@@ -5,7 +5,7 @@ module.exports = {
 	entry: {
 		editor_backend: './js/src/editor/backend/index.js',
 		editor_frontend: './js/src/editor/frontend/index.js',
-		editor_plugins: './js/src/editor/plugins/index.js',
+
 		client_backend: './js/src/client/backend/index.js',
 		client_frontend: './js/src/client/frontend/index.js'
 	},
@@ -13,7 +13,7 @@ module.exports = {
 		filename: '[name].min.js',
 		path: path.resolve(__dirname, './js/dist')
 	},
-	devtool: 'inline-source-map',
+	devtool: 'cheap-source-map',
 	module: {
 		rules: [
 			{

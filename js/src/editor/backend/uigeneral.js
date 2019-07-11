@@ -193,9 +193,7 @@ jQuery(document).on( 'click', '.dslca-close-composer-hook', function(e){
  */
 
 jQuery(document).on( 'click', '.dslca-submit', function(){
-
 	jQuery(this).closest('form').submit();
-
 });
 
 /**
@@ -228,10 +226,8 @@ jQuery(document).on( 'click', '.dslca-section-title-filter-options a', function(
 	var section = jQuery(this).closest('.dslca-section');
 
 	if ( section.hasClass('dslca-templates-load') ) {
-
 		jQuery('.dslca-section-title-filter-curr', section).text( jQuery(this).text());
 	} else {
-
 		jQuery('.dslca-section-title-filter-curr', section).text( jQuery(this).text());
 	}
 
