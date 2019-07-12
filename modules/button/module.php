@@ -173,8 +173,8 @@ class DSLC_Button extends DSLC_Module {
 				),
 
 				array(
-					'label' => __( 'Style', 'live-composer-page-builder' ),
-					'id' => 'css_bg_style',
+					'label' => __( 'Effect', 'live-composer-page-builder' ),
+					'id' => 'css_bg_effect',
 					'std' => 'none',
 					'type' => 'select',
 					'choices' => array(
@@ -183,21 +183,96 @@ class DSLC_Button extends DSLC_Module {
 							'value' => 'none',
 						),
 						array(
-							'label' => __( 'Gradient > Light > Top-right', 'live-composer-page-builder' ),
-							'value' => 'gradient-light-top-right',
-						),
-						array(
-							'label' => __( 'Uppercase', 'live-composer-page-builder' ),
-							'value' => 'uppercase',
-						),
-						array(
-							'label' => __( 'Lowercase', 'live-composer-page-builder' ),
-							'value' => 'lowercase',
+							'label' => __( 'Gradient', 'live-composer-page-builder' ),
+							'value' => 'gradient',
 						),
 					),
 					'refresh_on_change' => true,
 					// 'affect_on_change_el' => '.dslc-button a',
 					// 'affect_on_change_rule' => 'text-transform',
+					'section' => 'styling',
+					'dependent_controls' => array(
+						'gradient' => 'css_bg_effect_direction, css_bg_effect_color, css_bg_effect_intensity',
+					),
+				),
+
+				array(
+					'label' => __( 'Color Mode', 'live-composer-page-builder' ),
+					'id' => 'css_bg_effect_color',
+					'std' => 'lighten',
+					'type' => 'select',
+					'choices' => array(
+						array(
+							'label' => __( 'Lighten', 'live-composer-page-builder' ),
+							'value' => 'lighten',
+						),
+						array(
+							'label' => __( 'Darken', 'live-composer-page-builder' ),
+							'value' => 'darken',
+						),
+					),
+					'refresh_on_change' => true,
+					// 'affect_on_change_el' => '.dslc-button a',
+					// 'affect_on_change_rule' => 'text-transform',
+					'section' => 'styling',
+				),
+
+				array(
+					'label' => __( 'Direction', 'live-composer-page-builder' ),
+					'id' => 'css_bg_effect_direction',
+					'std' => 'top-right',
+					'type' => 'select',
+					'choices' => array(
+						array(
+							'label' => '⬆️',
+							'value' => 'top',
+						),
+						array(
+							'label' => '↗️',
+							'value' => 'top-right',
+						),
+						array(
+							'label' => '➡️',
+							'value' => 'right',
+						),
+						array(
+							'label' => '↘️',
+							'value' => 'bottom-right',
+						),
+						array(
+							'label' => '⬇️',
+							'value' => 'bottom',
+						),
+						array(
+							'label' => '↙️',
+							'value' => 'bottom-left',
+						),
+						array(
+							'label' => '⬅️',
+							'value' => 'left',
+						),
+						array(
+							'label' => '↖️',
+							'value' => 'top-left',
+						),
+					),
+					'refresh_on_change' => true,
+					// 'affect_on_change_el' => '.dslc-button a',
+					// 'affect_on_change_rule' => 'text-transform',
+					'section' => 'styling',
+				),
+
+				array(
+					'label' => __( 'Intensity', 'live-composer-page-builder' ),
+					'id' => 'css_bg_effect_intensity',
+					'onlypositive' => true, // Value can't be negative.
+					'max' => 1,
+					'std' => 1,
+					'increment' => 0.05,
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-button a:before',
+					'affect_on_change_rule' => 'opacity',
 					'section' => 'styling',
 				),
 
@@ -1242,8 +1317,28 @@ class DSLC_Button extends DSLC_Module {
 		$classes = $options['button_class'] . ' ' . $options['custom_class'];
 
 
-		if ( isset( $options['css_bg_style'] ) && $options['css_bg_style'] !== 'none' ) {
-			$classes = $classes . ' ' . $options['css_bg_style'];
+		if ( isset( $options['css_bg_effect'] ) && $options['css_bg_effect'] !== 'none' ) {
+			$effect_class = '';
+
+			if ( 'gradient' === $options['css_bg_effect'] ) {
+				$effect_class = 'gradient-';
+				$css_bg_effect_color = '';
+				if ( empty( $options['css_bg_effect_color'] ) ) {
+					$css_bg_effect_color = 'lighten';
+				} else {
+					$css_bg_effect_color =  $options['css_bg_effect_color'];
+				}
+				$effect_class .= $css_bg_effect_color . '-';
+
+				$css_bg_effect_direction = '';
+				if ( empty( $options['css_bg_effect_direction'] ) ) {
+					$css_bg_effect_direction = 'top-right';
+				} else {
+					$css_bg_effect_direction =  $options['css_bg_effect_direction'];
+				}
+				$effect_class .= $css_bg_effect_direction;
+			}
+			$classes = $classes . ' ' . $effect_class;
 		}
 
 			?>
@@ -1262,7 +1357,7 @@ class DSLC_Button extends DSLC_Module {
 						<?php if ( $dslc_is_admin ) : ?>
 							<span class="dslca-editable-content" data-id="button_text"  data-type="simple" contenteditable="true"><?php echo stripslashes( $options['button_text'] ); ?></span>
 						<?php else : ?>
-							<?php echo stripslashes( $options['button_text'] ); ?>
+							<span><?php echo stripslashes( $options['button_text'] ); ?></span>
 						<?php endif; ?>
 						<?php if ( $options['button_state'] == 'enabled' && $options['icon_pos'] == 'right' ) : ?>
 							<?php if ( 'svg' == $options['show_icon'] ) : ?>
@@ -1285,7 +1380,7 @@ class DSLC_Button extends DSLC_Module {
 						<?php if ( $dslc_is_admin ) : ?>
 							<span class="dslca-editable-content" data-id="button_text"  data-type="simple" contenteditable="true"><?php echo stripslashes( $options['button_text'] ); ?></span>
 						<?php else : ?>
-							<?php echo stripslashes( $options['button_text'] ); ?>
+							<span><?php echo stripslashes( $options['button_text'] ); ?></span>
 						<?php endif; ?>
 						<?php if ( $options['button_state'] == 'enabled' && $options['icon_pos'] == 'right' ) : ?>
 							<?php if ( 'svg' == $options['show_icon'] ) : ?>

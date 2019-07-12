@@ -84,9 +84,8 @@ final class DSLC_Scripts {
 		/**
 		 * CSS
 		 */
-		wp_enqueue_style( 'dslc-main-css', DS_LIVE_COMPOSER_URL . 'css/frontend/main.css', array(), DS_LIVE_COMPOSER_VER );
-		wp_enqueue_style( 'dslc-modules-css', DS_LIVE_COMPOSER_URL . 'css/frontend/modules.css', array(), DS_LIVE_COMPOSER_VER );
-		wp_enqueue_style( 'dslc-plugins-css', DS_LIVE_COMPOSER_URL . 'css/frontend/plugins.css', array(), DS_LIVE_COMPOSER_VER );
+		wp_enqueue_style( 'dslc-plugins-css', 	DS_LIVE_COMPOSER_URL . 'css/dist/frontend.plugins.min.css', array(), DS_LIVE_COMPOSER_VER );
+		wp_enqueue_style( 'dslc-frontend-css', 	DS_LIVE_COMPOSER_URL . 'css/dist/frontend.min.css', array(), DS_LIVE_COMPOSER_VER );
 
 		/**
 		 * Load our IE-only stylesheet for all versions of IE:
@@ -102,8 +101,8 @@ final class DSLC_Scripts {
 		wp_enqueue_script( 'imagesloaded' ); // Need this for Masonry.
 		wp_enqueue_script( 'jquery-masonry' );
 
-		wp_enqueue_script( 'dslc-plugins-js', DS_LIVE_COMPOSER_URL . 'js/dist/client_plugins.min.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER );
-		wp_enqueue_script( 'dslc-main-js', DS_LIVE_COMPOSER_URL . 'js/dist/client_frontend.min.js', array( 'jquery' ), DS_LIVE_COMPOSER_VER, $in_footer = true );
+		wp_enqueue_script( 'dslc-plugins-js',	DS_LIVE_COMPOSER_URL . 'js/dist/client_plugins.min.js',		array( 'jquery' ), DS_LIVE_COMPOSER_VER );
+		wp_enqueue_script( 'dslc-main-js',		DS_LIVE_COMPOSER_URL . 'js/dist/client_frontend.min.js',	array( 'jquery' ), DS_LIVE_COMPOSER_VER, $in_footer = true );
 
 		if ( is_ssl() ) {
 
@@ -128,8 +127,8 @@ final class DSLC_Scripts {
 			/**
 			 * CSS
 			 */
-			wp_enqueue_style( 'dslc-builder-main-css', DS_LIVE_COMPOSER_URL . 'css/builder/builder.main.css', array(), DS_LIVE_COMPOSER_VER );
-			wp_enqueue_style( 'dslc-builder-plugins-css', DS_LIVE_COMPOSER_URL . 'css/builder/builder.plugins.css', array(), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_style( 'dslc-builder-main-css', 		DS_LIVE_COMPOSER_URL . 'css/dist/builder.min.css', 			array(), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_style( 'dslc-builder-plugins-css',	DS_LIVE_COMPOSER_URL . 'css/dist/builder.plugins.min.css', 	array(), DS_LIVE_COMPOSER_VER );
 
 			/**
 			 * JavaScript
@@ -209,9 +208,9 @@ final class DSLC_Scripts {
 			 * CSS
 			 */
 
-			wp_enqueue_style( 'dslc-builder-main-css', DS_LIVE_COMPOSER_URL . 'css/builder/builder.main.css', array(), DS_LIVE_COMPOSER_VER );
-			wp_enqueue_style( 'dslc-builder-plugins-css', DS_LIVE_COMPOSER_URL . 'css/builder/builder.plugins.css', array(), DS_LIVE_COMPOSER_VER );
-			wp_enqueue_style( 'dslc-font-awesome', DS_LIVE_COMPOSER_URL . 'css/font-awesome' . $min_suffix . '.css', array(), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_style( 'dslc-builder-main-css', 		DS_LIVE_COMPOSER_URL . 'css/dist/builder.min.css', 			array(), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_style( 'dslc-builder-plugins-css', 	DS_LIVE_COMPOSER_URL . 'css/dist/builder.plugins.min.css', 	array(), DS_LIVE_COMPOSER_VER );
+			wp_enqueue_style( 'dslc-font-awesome',			DS_LIVE_COMPOSER_URL . 'css/font-awesome.min.css', 			array(), DS_LIVE_COMPOSER_VER );
 
 			/**
 			 * JavaScript

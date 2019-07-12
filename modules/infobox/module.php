@@ -697,7 +697,7 @@ class DSLC_Info_Box extends DSLC_Module {
 			/**
 			 * Icon
 			 */
-			 
+
 			array(
 				'label' => __( 'Position', 'live-composer-page-builder' ),
 				'id' => 'icon_position',
@@ -2068,27 +2068,154 @@ class DSLC_Info_Box extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( 'BG Color', 'live-composer-page-builder' ),
-				'id' => 'css_button_bg_color',
-				'std' => '#5890e5',
-				'type' => 'color',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-info-box-button a',
-				'affect_on_change_rule' => 'background-color',
+				'label' => __( 'Background', 'live-composer-page-builder' ),
+				'id' => 'css_bg_group',
+				'type' => 'group',
+				'action' => 'open',
 				'section' => 'styling',
 				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
 			),
+				array(
+					'label' => __( 'Color', 'live-composer-page-builder' ),
+					'id' => 'css_button_bg_color',
+					'std' => '#5890e5',
+					'type' => 'color',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-info-box-button a',
+					'affect_on_change_rule' => 'background-color',
+					'section' => 'styling',
+					'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
+				),
+				array(
+					'label' => __( 'Color - Hover', 'live-composer-page-builder' ),
+					'id' => 'css_button_bg_color_hover',
+					'std' => '#3e73c2',
+					'type' => 'color',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-info-box-button a:hover',
+					'affect_on_change_rule' => 'background-color',
+					'section' => 'styling',
+					'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'label' => __( 'Effect', 'live-composer-page-builder' ),
+					'id' => 'css_button_bg_effect',
+					'std' => 'none',
+					'type' => 'select',
+					'choices' => array(
+						array(
+							'label' => __( 'None', 'live-composer-page-builder' ),
+							'value' => 'none',
+						),
+						array(
+							'label' => __( 'Gradient', 'live-composer-page-builder' ),
+							'value' => 'gradient',
+						),
+					),
+					'refresh_on_change' => true,
+					// 'affect_on_change_el' => '.dslc-button a',
+					// 'affect_on_change_rule' => 'text-transform',
+					'section' => 'styling',
+					'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
+					'dependent_controls' => array(
+						'gradient' => 'css_button_bg_effect_direction, css_button_bg_effect_color, css_button_bg_effect_intensity',
+					),
+				),
+
+				array(
+					'label' => __( 'Color Mode', 'live-composer-page-builder' ),
+					'id' => 'css_button_bg_effect_color',
+					'std' => 'lighten',
+					'type' => 'select',
+					'choices' => array(
+						array(
+							'label' => __( 'Lighten', 'live-composer-page-builder' ),
+							'value' => 'lighten',
+						),
+						array(
+							'label' => __( 'Darken', 'live-composer-page-builder' ),
+							'value' => 'darken',
+						),
+					),
+					'refresh_on_change' => true,
+					// 'affect_on_change_el' => '.dslc-button a',
+					// 'affect_on_change_rule' => 'text-transform',
+					'section' => 'styling',
+					'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'label' => __( 'Direction', 'live-composer-page-builder' ),
+					'id' => 'css_button_bg_effect_direction',
+					'std' => 'top-right',
+					'type' => 'select',
+					'choices' => array(
+						array(
+							'label' => '⬆️',
+							'value' => 'top',
+						),
+						array(
+							'label' => '↗️',
+							'value' => 'top-right',
+						),
+						array(
+							'label' => '➡️',
+							'value' => 'right',
+						),
+						array(
+							'label' => '↘️',
+							'value' => 'bottom-right',
+						),
+						array(
+							'label' => '⬇️',
+							'value' => 'bottom',
+						),
+						array(
+							'label' => '↙️',
+							'value' => 'bottom-left',
+						),
+						array(
+							'label' => '⬅️',
+							'value' => 'left',
+						),
+						array(
+							'label' => '↖️',
+							'value' => 'top-left',
+						),
+					),
+					'refresh_on_change' => true,
+					// 'affect_on_change_el' => '.dslc-button a',
+					// 'affect_on_change_rule' => 'text-transform',
+					'section' => 'styling',
+					'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'label' => __( 'Intensity', 'live-composer-page-builder' ),
+					'id' => 'css_button_bg_effect_intensity',
+					'onlypositive' => true, // Value can't be negative.
+					'max' => 1,
+					'std' => 1,
+					'increment' => 0.05,
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-info-box-button a:before',
+					'affect_on_change_rule' => 'opacity',
+					'section' => 'styling',
+					'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
+				),
+
 			array(
-				'label' => __( 'BG Color - Hover', 'live-composer-page-builder' ),
-				'id' => 'css_button_bg_color_hover',
-				'std' => '#3e73c2',
-				'type' => 'color',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-info-box-button a:hover',
-				'affect_on_change_rule' => 'background-color',
+				'id' => 'css_bg_group',
+				'type' => 'group',
+				'action' => 'close',
 				'section' => 'styling',
 				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
 			),
+
+
+
 			array(
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_button_border_width',
@@ -2490,27 +2617,153 @@ class DSLC_Info_Box extends DSLC_Module {
 			 */
 
 			array(
-				'label' => __( 'BG Color', 'live-composer-page-builder' ),
-				'id' => 'css_button_2_bg_color',
-				'std' => '#5890e5',
-				'type' => 'color',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary',
-				'affect_on_change_rule' => 'background-color',
+				'label' => __( 'Background', 'live-composer-page-builder' ),
+				'id' => 'css_bg_group',
+				'type' => 'group',
+				'action' => 'open',
 				'section' => 'styling',
 				'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
 			),
+				array(
+					'label' => __( 'Color', 'live-composer-page-builder' ),
+					'id' => 'css_button_2_bg_color',
+					'std' => '#5890e5',
+					'type' => 'color',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary',
+					'affect_on_change_rule' => 'background-color',
+					'section' => 'styling',
+					'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
+				),
+				array(
+					'label' => __( 'Color - Hover', 'live-composer-page-builder' ),
+					'id' => 'css_button_2_bg_color_hover',
+					'std' => '#3e73c2',
+					'type' => 'color',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary:hover',
+					'affect_on_change_rule' => 'background-color',
+					'section' => 'styling',
+					'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'label' => __( 'Effect', 'live-composer-page-builder' ),
+					'id' => 'css_button2_bg_effect',
+					'std' => 'none',
+					'type' => 'select',
+					'choices' => array(
+						array(
+							'label' => __( 'None', 'live-composer-page-builder' ),
+							'value' => 'none',
+						),
+						array(
+							'label' => __( 'Gradient', 'live-composer-page-builder' ),
+							'value' => 'gradient',
+						),
+					),
+					'refresh_on_change' => true,
+					// 'affect_on_change_el' => '.dslc-button a',
+					// 'affect_on_change_rule' => 'text-transform',
+					'section' => 'styling',
+					'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
+					'dependent_controls' => array(
+						'gradient' => 'css_button2_bg_effect_direction, css_button2_bg_effect_color, css_button2_bg_effect_intensity',
+					),
+				),
+
+				array(
+					'label' => __( 'Color Mode', 'live-composer-page-builder' ),
+					'id' => 'css_button2_bg_effect_color',
+					'std' => 'lighten',
+					'type' => 'select',
+					'choices' => array(
+						array(
+							'label' => __( 'Lighten', 'live-composer-page-builder' ),
+							'value' => 'lighten',
+						),
+						array(
+							'label' => __( 'Darken', 'live-composer-page-builder' ),
+							'value' => 'darken',
+						),
+					),
+					'refresh_on_change' => true,
+					// 'affect_on_change_el' => '.dslc-button a',
+					// 'affect_on_change_rule' => 'text-transform',
+					'section' => 'styling',
+					'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'label' => __( 'Direction', 'live-composer-page-builder' ),
+					'id' => 'css_button2_bg_effect_direction',
+					'std' => 'top-right',
+					'type' => 'select',
+					'choices' => array(
+						array(
+							'label' => '⬆️',
+							'value' => 'top',
+						),
+						array(
+							'label' => '↗️',
+							'value' => 'top-right',
+						),
+						array(
+							'label' => '➡️',
+							'value' => 'right',
+						),
+						array(
+							'label' => '↘️',
+							'value' => 'bottom-right',
+						),
+						array(
+							'label' => '⬇️',
+							'value' => 'bottom',
+						),
+						array(
+							'label' => '↙️',
+							'value' => 'bottom-left',
+						),
+						array(
+							'label' => '⬅️',
+							'value' => 'left',
+						),
+						array(
+							'label' => '↖️',
+							'value' => 'top-left',
+						),
+					),
+					'refresh_on_change' => true,
+					// 'affect_on_change_el' => '.dslc-button a',
+					// 'affect_on_change_rule' => 'text-transform',
+					'section' => 'styling',
+					'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'label' => __( 'Intensity', 'live-composer-page-builder' ),
+					'id' => 'css_button2_bg_effect_intensity',
+					'onlypositive' => true, // Value can't be negative.
+					'max' => 1,
+					'std' => 1,
+					'increment' => 0.05,
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary:before',
+					'affect_on_change_rule' => 'opacity',
+					'section' => 'styling',
+					'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
+				),
+
 			array(
-				'label' => __( 'BG Color - Hover', 'live-composer-page-builder' ),
-				'id' => 'css_button_2_bg_color_hover',
-				'std' => '#3e73c2',
-				'type' => 'color',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary:hover',
-				'affect_on_change_rule' => 'background-color',
+				'id' => 'css_bg_group',
+				'type' => 'group',
+				'action' => 'close',
 				'section' => 'styling',
 				'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
 			),
+
+
 			array(
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_button_2_border_width',
@@ -3920,6 +4173,58 @@ class DSLC_Info_Box extends DSLC_Module {
 		$image_alt = $options['image_alt'];
 		$image_alt_link_url = $options['image_alt_link_url'];
 
+
+		$button_classes = '';
+		if ( isset( $options['css_button_bg_effect'] ) && $options['css_button_bg_effect'] !== 'none' ) {
+			$button_effect_class = '';
+
+			if ( 'gradient' === $options['css_button_bg_effect'] ) {
+				$button_effect_class = 'gradient-';
+				$css_button_bg_effect_color = '';
+				if ( empty( $options['css_button_bg_effect_color'] ) ) {
+					$css_button_bg_effect_color = 'lighten';
+				} else {
+					$css_button_bg_effect_color =  $options['css_button_bg_effect_color'];
+				}
+				$button_effect_class .= $css_button_bg_effect_color . '-';
+
+				$css_button_bg_effect_direction = '';
+				if ( empty( $options['css_button_bg_effect_direction'] ) ) {
+					$css_button_bg_effect_direction = 'top-right';
+				} else {
+					$css_button_bg_effect_direction =  $options['css_button_bg_effect_direction'];
+				}
+				$button_effect_class .= $css_button_bg_effect_direction;
+			}
+			$button_classes = $button_effect_class;
+		}
+
+		$button2_classes = '';
+		if ( isset( $options['css_button2_bg_effect'] ) && $options['css_button2_bg_effect'] !== 'none' ) {
+			$button2_effect_class = '';
+
+			if ( 'gradient' === $options['css_button2_bg_effect'] ) {
+				$button2_effect_class = 'gradient-';
+				$css_button2_bg_effect_color = '';
+				if ( empty( $options['css_button2_bg_effect_color'] ) ) {
+					$css_button2_bg_effect_color = 'lighten';
+				} else {
+					$css_button2_bg_effect_color =  $options['css_button2_bg_effect_color'];
+				}
+				$button2_effect_class .= $css_button2_bg_effect_color . '-';
+
+				$css_button2_bg_effect_direction = '';
+				if ( empty( $options['css_button2_bg_effect_direction'] ) ) {
+					$css_button2_bg_effect_direction = 'top-right';
+				} else {
+					$css_button2_bg_effect_direction =  $options['css_button2_bg_effect_direction'];
+				}
+				$button2_effect_class .= $css_button2_bg_effect_direction;
+			}
+			$button2_classes = $button2_effect_class;
+		}
+
+
 		?>
 
 			<div class="dslc-info-box dslc-info-box-icon-pos-<?php echo $options['icon_position']; ?> dslc-info-box-image-pos-<?php echo $options['image_position']; ?>">
@@ -3929,11 +4234,11 @@ class DSLC_Info_Box extends DSLC_Module {
 					<?php if ( $options['button_pos'] == 'aside' && in_array( 'button', $elements ) ) : ?>
 						<div class="dslc-info-box-button dslc-info-box-button-aside">
 							<?php if ( isset( $options['button_link'] ) && ! empty( $options['button_link'] ) ) : ?>
-								<a href="<?php echo $options['button_link']; ?>" target="<?php echo $options['button_target']; ?>" <?php if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?> class="dslc-primary">
+								<a href="<?php echo $options['button_link']; ?>" target="<?php echo $options['button_target']; ?>" <?php if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?> class="dslc-primary <?php echo $button_classes; ?>">
 									<?php if ( 'svg' == $options['button_show_icon'] ) : ?>
 										<?php echo stripslashes( $options['button_inline_svg'] ); ?>
 									<?php else : ?>
-										<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
+										<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 									<?php endif; ?>
 									<?php if ( $dslc_is_admin ) : ?>
 										<span class="dslca-editable-content" data-id="button_title" data-type="simple" contenteditable="true"><?php echo $options['button_title']; ?></span>
@@ -3942,11 +4247,11 @@ endif; ?>
 								</a>
 							<?php endif; ?>
 							<?php if ( isset( $options['button_2_link'] ) && ! empty( $options['button_2_link'] ) ) : ?>
-								<a href="<?php echo $options['button_2_link']; ?>" target="<?php echo $options['button_2_target']; ?>" <?php if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?> class="dslc-secondary">
+								<a href="<?php echo $options['button_2_link']; ?>" target="<?php echo $options['button_2_target']; ?>" <?php if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?> class="dslc-secondary <?php echo $button2_classes; ?>">
 									<?php if ( 'svg' == $options['button_2_show_icon'] ) : ?>
 										<?php echo stripslashes( $options['button_2_inline_svg'] ); ?>
 									<?php else : ?>
-										<span class="dslc-icon dslc-icon-<?php echo $options['button_2_icon_id']; ?>"></span>	
+										<span class="dslc-icon dslc-icon-<?php echo $options['button_2_icon_id']; ?>"></span>
 									<?php endif; ?>
 									<?php if ( $dslc_is_admin ) : ?>
 										<span class="dslca-editable-content" data-id="button_2_title" data-type="simple" contenteditable="true"><?php echo $options['button_2_title']; ?></span>
@@ -3965,7 +4270,7 @@ endif; ?>
 									<?php if ( 'svg' == $options['show_icon']) : ?>
 										<?php echo stripslashes( $options['inline_svg'] ); ?>
 									<?php else : ?>
-										<span class="dslc-icon dslc-icon-<?php echo $options['icon_id']; ?>"></span>	
+										<span class="dslc-icon dslc-icon-<?php echo $options['icon_id']; ?>"></span>
 									<?php endif; ?>
 									<?php if ( ! empty( $options['icon_link'] ) ) : ?>
 										<a class="dslc-info-box-image-link" href="<?php echo $options['icon_link']; ?>" <?php if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?> target="<?php echo $options['icon_link_target']; ?>"></a>
@@ -4024,11 +4329,11 @@ endif; ?>
 							<?php if ( $options['button_pos'] == 'bellow' && in_array( 'button', $elements ) ) : ?>
 								<div class="dslc-info-box-button">
 									<?php if ( isset( $options['button_link'] ) && ! empty( $options['button_link'] ) ) : ?>
-										<a href="<?php echo $options['button_link']; ?>" <?php if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?> target="<?php echo $options['button_target']; ?>" class="dslc-primary">
+										<a href="<?php echo $options['button_link']; ?>" <?php if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?> target="<?php echo $options['button_target']; ?>" class="dslc-primary <?php echo $button_classes; ?>">
 											<?php if ( 'svg' == $options['button_show_icon'] ) : ?>
 												<?php echo stripslashes( $options['button_inline_svg'] ); ?>
 											<?php else : ?>
-												<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
+												<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 											<?php endif; ?>
 											<?php if ( $dslc_is_admin ) : ?>
 												<span class="dslca-editable-content" data-id="button_title" data-type="simple" contenteditable="true"><?php echo $options['button_title']; ?></span>
@@ -4037,11 +4342,11 @@ endif; ?>
 										</a>
 									<?php endif; ?>
 									<?php if ( isset( $options['button_2_link'] ) && ! empty( $options['button_2_link'] ) ) : ?>
-										<a href="<?php echo $options['button_2_link']; ?>" <?php if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?> target="<?php echo $options['button_2_target']; ?>" class="dslc-secondary">
+										<a href="<?php echo $options['button_2_link']; ?>" <?php if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?> target="<?php echo $options['button_2_target']; ?>" class="dslc-secondary <?php echo $button2_classes; ?>">
 											<?php if ( 'svg' == $options['button_2_show_icon'] ) : ?>
 												<?php echo stripslashes( $options['button_2_inline_svg'] ); ?>
 											<?php else : ?>
-												<span class="dslc-icon dslc-icon-<?php echo $options['button_2_icon_id']; ?>"></span>	
+												<span class="dslc-icon dslc-icon-<?php echo $options['button_2_icon_id']; ?>"></span>
 											<?php endif; ?>
 											<?php if ( $dslc_is_admin ) : ?>
 												<span class="dslca-editable-content" data-id="button_2_title" data-type="simple" contenteditable="true"><?php echo $options['button_2_title']; ?></span>

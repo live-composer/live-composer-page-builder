@@ -18,7 +18,6 @@
  * - dslc_social_share
  */
 
-
 const openModuleForEditing = ( moduleEl ) => {
 	if ( ! jQuery(moduleEl).closest('.dslc-module-front').hasClass('dslca-module-being-edited') ) {
 		jQuery(moduleEl).closest('.dslc-module-front').find('.dslca-module-edit-hook').trigger('click');

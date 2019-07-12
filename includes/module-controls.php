@@ -633,6 +633,10 @@ class LC_Control {
 			'infobox_image_alt',
 			'infobox_image_title',
 			'pagination_text',
+			'css_bg_effect',
+			'css_bg_effect_direction',
+			'css_bg_effect_color',
+			'css_bg_effect_intensity',
 		);
 
 		$controls_without_toggle = apply_filters( 'dslc_controls_without_toggle', $controls_without_toggle );

@@ -1866,6 +1866,7 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 	.dslca-manage-action {
 		display: flex;
 		align-items: center;
+		justify-content: center;
 
 		color: #fff;
 		background-color: #ED7C5F;
@@ -1874,8 +1875,8 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 		font-size: 14px;
 		line-height: 15px;
 		text-align: center;
-		padding: 0 8px;
-		min-width: 20px;
+		/* padding: 0 8px; */
+		min-width: 30px;
 		margin-right: -2px;
 		position: relative;
 	}
@@ -1903,12 +1904,12 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 		}
 
 		.dslca-manage-action:first-child {
-			padding-left: 12px;
+			/* padding-left: 12px; */
 			border-radius: 3px 0 0 0;
 		}
 
 		.dslca-manage-action:last-child {
-			padding-right: 12px;
+			/* padding-right: 12px; */
 			border-radius: 0 3px 0 0;
 		}
 

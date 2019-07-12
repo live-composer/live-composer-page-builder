@@ -274,7 +274,6 @@ export const settingsPanelInit = () => {
 	window.LiveComposer.Builder.Helpers.depsHandlers = [];
 
 	window.LiveComposer.Builder.UI.loadOptionsDeps = function() {
-
 		var self = this;
 
 		jQuery(".dslca-module-edit-option").each(function(){
@@ -283,50 +282,38 @@ export const settingsPanelInit = () => {
 			var parsed = true;
 
 			try {
-
 				var dep = JSON.parse( LiveComposer.Utils.b64_to_utf8( jQuery(this).data('dep') ) );
-
 			} catch(e){
-
 				parsed = false;
 			}
 
 			if ( parsed ) {
-
 				var handler = function(){
-
 					var optElem = this;
 					var localDep = {};
 
 					if ( ( optElem.type == 'radio' || optElem.type == 'checkbox' ) && dep[ optElem.value ] == undefined ) {
-
 						return false;
 					}
 
 					if ( optElem.type == 'checkbox' && dep[ optElem.value ] != undefined ) {
-
 						localDep[ optElem.value ] = dep[ optElem.value ];
 					} else {
-
 						localDep = dep;
 					}
 
 					Object.keys(localDep).forEach(function(opt_val){
-
 						localDep[ opt_val ].split(',').forEach(function(item){
-
 							var opt_wrap = jQuery(".dslca-module-edit-option-" + item.trim()).closest('.dslca-module-edit-option');
 							var checkedCheckbox = true;
 
 							if ( optElem.type == 'radio' || optElem.type == 'checkbox' ) {
-
 								checkedCheckbox = jQuery(optElem).is(":checked");
 							}
 
 							var section_tab = jQuery('.dslca-module-edit-options-tab-hook.dslca-active').data('id');
 
 							if ( optElem.value == opt_val && checkedCheckbox ) {
-
 								if ( opt_wrap.not( ".dependent" ) ) {
 									opt_wrap.addClass('dependent');
 								}
@@ -342,7 +329,6 @@ export const settingsPanelInit = () => {
 									opt_wrap.show();
 								}
 							} else {
-
 								if ( opt_wrap.not( ".dependent" ) ) {
 									opt_wrap.addClass('dependent');
 								}
@@ -360,7 +346,7 @@ export const settingsPanelInit = () => {
 					});
 				}
 
-				jQuery(document).on('change dslc-init-deps', '.dslca-module-edit-option *[data-id="' + jQuery(this).data('id') + '"]', handler);
+				jQuery(document).on('change dslc-init-deps', '.dslca-module-edit-option > *[data-id="' + jQuery(this).data('id') + '"]', handler);
 				window.LiveComposer.Builder.Helpers.depsHandlers.push( handler );
 			}
 		});
