@@ -62,6 +62,7 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 * Improved compatibility with Yoast for blog posts.
 * Updated icon set to the latest version of Fontawesome (1st generation).
 * Major JavaScript code configuration upgrades. Now plugin uses ES6 version of Javascript. This opens a way for further plugin improvements with the latest JS libraries and frameworks.
+* [Please, report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
 
 = 1.4.7 - June 22 2019 =
 * Improved compatibility with custom 3-rd party theme shortcodes.
