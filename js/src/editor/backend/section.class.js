@@ -44,11 +44,9 @@ export const Section = class{
 			scrollSensitivity: 100,
 			scrollSpeed : 15,
 			sort: function() {
-
 				jQuery( this ).removeClass( "ui-state-default" );
 			},
 			over: function (e, ui) {
-
 				var dslcSection = ui.placeholder.closest('.dslc-modules-section');
 
 				jQuery(dslcSection).removeClass('dslc-modules-section-empty').addClass('dslc-modules-section-not-empty');
@@ -62,11 +60,9 @@ export const Section = class{
 				});
 			},
 			remove: function() {
-
-				(jQuery(self.elem).find('.dslc-modules-area').length == 0) && modulesAreaAdd(jQuery(sortableContainer));
+				( jQuery( self.elem ).find('.dslc-modules-area').length == 0 ) && modulesAreaAdd( jQuery( this.sortableContainer ) );
 			},
 			update: function (e, ui) {
-
 				window.dslc_generate_code();
 				window.dslc_show_publish_button();
 			},

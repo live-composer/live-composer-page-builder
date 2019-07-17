@@ -3,7 +3,7 @@ Contributors: LiveComposer
 Tags: page builder, landing page builder, frontend page builder, drag and drop page builder, website builder
 Requires at least: 4.7
 Tested up to: 5.2
-Stable tag: 1.4.9
+Stable tag: 1.4.10
 License: GPLv3
 
 Page builder for WordPress with drag and drop header/footer editing, responsive settings, and animations. Compatible with Gutenberg block editor.
@@ -58,11 +58,14 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 * 🦊 [Check out our WooCommerce Page Builder Extension](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
 
+= 1.4.10 - July 17 2019 =
+* [4 minor bugs fixed](https://github.com/live-composer/live-composer-page-builder/issues?q=is%3Aclosed+milestone%3A1.4.10)
+* [Please, report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
+
 = 1.4.9 - July 12 2019 =
 * Improved compatibility with Yoast for blog posts.
 * Updated icon set to the latest version of Fontawesome (1st generation).
 * Major JavaScript code configuration upgrades. Now plugin uses ES6 version of Javascript. This opens a way for further plugin improvements with the latest JS libraries and frameworks.
-* [Please, report any bugs on GitHub](https://github.com/livecomposer/live-composer-page-builder/issues/)
 
 = 1.4.7 - June 22 2019 =
 * Improved compatibility with custom 3-rd party theme shortcodes.

@@ -88,13 +88,6 @@ final class DSLC_Scripts {
 		wp_enqueue_style( 'dslc-frontend-css', 	DS_LIVE_COMPOSER_URL . 'css/dist/frontend.min.css', array(), DS_LIVE_COMPOSER_VER );
 
 		/**
-		 * Load our IE-only stylesheet for all versions of IE:
-		 * <!--[if IE]> ... <![endif]-->
-		 */
-		wp_enqueue_style( 'dslc-css-ie', DS_LIVE_COMPOSER_URL . 'css/ie.css', array( 'dslc-main-css' ), DS_LIVE_COMPOSER_VER );
-		wp_style_add_data( 'dslc-css-ie', 'conditional', 'IE' );
-
-		/**
 		 * JavaScript
 		 */
 		wp_enqueue_script( 'wp-mediaelement' ); // Used for playing videos.

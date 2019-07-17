@@ -2040,6 +2040,12 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 		opacity: 0.5;
 	}
 
+	.dslc-modules-section.dslc-full:hover .dslc-modules-area:hover .dslca-modules-area-manage {
+		z-index: 9999999;
+		/* https://github.com/live-composer/live-composer-page-builder/issues/977 */
+	}
+
+
 	.dslc-modules-area .dslca-modules-area-manage:hover {
 		opacity: 1;
 	}
@@ -2290,16 +2296,15 @@ body.rtl .dslca-modules-area-placeholder {
 	position: absolute;
 	left: 50%;
 	margin-left: -77px;
-	/* top: 0; */
 	top: -30px;
 	text-align: center;
 	z-index: 99999;
 	line-height: 1;
 }
 
-/*.dslca-module-manage.dslca-module-manage-change-width-active {
-	z-index: 100000;
-}*/
+	#dslc-main > .dslc-modules-section:nth-child(1) > .dslc-modules-section-wrapper > .dslc-modules-section-inner > .dslc-modules-area > .dslc-module-front .dslca-module-manage {
+		top: 0;
+	}
 
 	.dslca-module-manage-inner {
 		background: #5890e5;

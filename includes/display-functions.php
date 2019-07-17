@@ -1181,7 +1181,7 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1, $is_h
 
 	// Full/Wrapped.
 	if ( isset( $atts['type'] ) && ! empty( $atts['type'] ) && $atts['type'] == 'full' ) {
-			$section_class .= 'dslc-full ';
+			$section_class .= ' dslc-full ';
 	}
 
 	// Parallax.

@@ -4242,8 +4242,11 @@ class DSLC_Info_Box extends DSLC_Module {
 									<?php endif; ?>
 									<?php if ( $dslc_is_admin ) : ?>
 										<span class="dslca-editable-content" data-id="button_title" data-type="simple" contenteditable="true"><?php echo $options['button_title']; ?></span>
-									<?php else : echo $options['button_title'];
-endif; ?>
+									<?php else : ?>
+										<span>
+											<?php echo $options['button_title'];?>
+										</span>
+									<?php endif; ?>
 								</a>
 							<?php endif; ?>
 							<?php if ( isset( $options['button_2_link'] ) && ! empty( $options['button_2_link'] ) ) : ?>
@@ -4255,7 +4258,11 @@ endif; ?>
 									<?php endif; ?>
 									<?php if ( $dslc_is_admin ) : ?>
 										<span class="dslca-editable-content" data-id="button_2_title" data-type="simple" contenteditable="true"><?php echo $options['button_2_title']; ?></span>
-									<?php else : echo $options['button_2_title'];
+									<?php else : ?>
+										<span>
+											<?php echo $options['button_2_title'];?>
+										</span>
+									<?php endif; ?>
 endif; ?>
 								</a>
 							<?php endif; ?>
@@ -4337,8 +4344,11 @@ endif; ?>
 											<?php endif; ?>
 											<?php if ( $dslc_is_admin ) : ?>
 												<span class="dslca-editable-content" data-id="button_title" data-type="simple" contenteditable="true"><?php echo $options['button_title']; ?></span>
-											<?php else : echo $options['button_title'];
-endif; ?>
+											<?php else : ?>
+												<span>
+													<?php echo $options['button_title'];?>
+												</span>
+											<?php endif; ?>
 										</a>
 									<?php endif; ?>
 									<?php if ( isset( $options['button_2_link'] ) && ! empty( $options['button_2_link'] ) ) : ?>
@@ -4350,8 +4360,11 @@ endif; ?>
 											<?php endif; ?>
 											<?php if ( $dslc_is_admin ) : ?>
 												<span class="dslca-editable-content" data-id="button_2_title" data-type="simple" contenteditable="true"><?php echo $options['button_2_title']; ?></span>
-											<?php else : echo $options['button_2_title'];
-endif; ?>
+											<?php else : ?>
+												<span>
+													<?php echo $options['button_2_title'];?>
+												</span>
+											<?php endif; ?>
 										</a>
 									<?php endif; ?>
 								</div><!-- .dslc-info-box-button -->

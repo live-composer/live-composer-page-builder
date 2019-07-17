@@ -1,4 +1,3 @@
-
 # Items to ignore when downloading a zip
 
 .gitattributes export-ignore
@@ -13,7 +12,11 @@ travis.sh export-ignore
 /vendor/ export-ignore
 /tests/ export-ignore
 
+docker-compose.yml export-ignore
 codeception.dist.yml export-ignore
+
+jest-puppeteer.config.js export-ignore
+webpack.config.js export-ignore
 
 composer.json export-ignore
 composer.json.comments export-ignore

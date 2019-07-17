@@ -4,4 +4,4 @@ module.exports = {
 		slowMo: 20,
 	},
 	browserContext: 'default',
-  }
+}
