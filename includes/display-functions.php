@@ -1268,14 +1268,14 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1, $is_h
 	$a_append = '';
 
 	if ( $dslc_active && ! $is_header_footer ) {
-		$a_container_class .= 'dslc-modules-section-empty dslc-modules-section-dnd';
+		$a_container_class .= ' dslc-modules-section-empty dslc-modules-section-dnd ';
 		$a_prepend = '<div class="dslc-modules-section-inner dslc-clearfix">';
 		$a_append = '</div>';
 	}
 
 	// Columns spacing
 	if ( $atts['columns_spacing'] == 'nospacing' ) {
-		$section_class .= 'dslc-no-columns-spacing ';
+		$section_class .= ' dslc-no-columns-spacing ';
 	}
 
 	// Custom Class.
@@ -1295,20 +1295,20 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1, $is_h
 	$show_on = explode( ' ', trim( $atts['show_on'] ) );
 
 	if ( ! in_array( 'desktop', $show_on, true ) ) {
-		$section_class .= 'dslc-hide-on-desktop ';
+		$section_class .= ' dslc-hide-on-desktop ';
 	}
 
 	if ( ! in_array( 'tablet', $show_on, true ) ) {
-		$section_class .= 'dslc-hide-on-tablet ';
+		$section_class .= ' dslc-hide-on-tablet ';
 	}
 
 	if ( ! in_array( 'phone', $show_on, true ) ) {
-		$section_class .= 'dslc-hide-on-phone ';
+		$section_class .= ' dslc-hide-on-phone ';
 	}
 
 	// Sticky Class.
 	if ( ! empty( $atts['sticky_row'] ) && 'enabled' === trim( $atts['sticky_row'] ) ) {
-		$section_class .= 'dslc-sticky-row';
+		$section_class .= ' dslc-sticky-row ';
 		$sticky_style   = '<style type="text/css">';
 		$sticky_style  .= '.dslc-sticky-row[data-section-id="' . $atts['section_instance_id'] . '"].dslc-sticky-section-fixed {';
 		$sticky_style  .= 'padding-top: ' . $atts['sticky_row_padding_vertical'] . 'px !important; ';
@@ -1373,13 +1373,9 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1, $is_h
 
 	$output .= '
 		<div ' . $section_id_output . ' class="dslc-modules-section ' . $a_container_class . $parallax_class . $section_class . $extra_classes . '" style="' . dslc_row_get_style( $atts ) . '" data-section-id="' . $atts['section_instance_id'] . '">
-
 				' . $bg_video . '
-
 				<div class="dslc-modules-section-wrapper dslc-clearfix">'
-
 					. $a_prepend . $content_render . $a_append
-
 					. '</div>' . $sticky_style;
 
 	if ( $dslc_active && ! $is_header_footer && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {

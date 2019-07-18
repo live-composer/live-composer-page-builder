@@ -693,14 +693,19 @@ body a:focus {
 		}*/
 
 		/* Sortable module */
-		.dslc-module-front.dslca-module-ghost {
-			background: rgba(229, 163, 88, 0.28);
+		.dslc-module-front.dslca-module-ghost,
+		.dslc-modules-section-dnd.dslca-sections-ghost {
+			background: rgba(229, 163, 88, 0.4)!important;
 		}
 
 		div.dslca-module.dslca-module-dragging *,
 		div.dslca-module.dslca-module-dragging,
 		div.dslca-module.dslca-module-dragging:hover,
-		div.dslca-module.dslca-module-dragging:hover *{
+		div.dslca-module.dslca-module-dragging:hover *,
+		div.dslca-sections-dragging *,
+		div.dslca-sections-dragging,
+		div.dslca-sections-dragging:hover *,
+		div.dslca-sections-dragging:hover {
 			cursor: grabbing;
 			cursor: -webkit-grabbing;
 		}
@@ -1552,11 +1557,11 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 }
 
 .dslc-modules-area:hover {
-	box-shadow: 0 0 0 2px rgba(173, 175, 179, 0.4);
+	box-shadow: 0 0 0 2px rgba(173, 175, 179, 1) inset;
 }
 
 .dslc-modules-area:hover .dslc-module-front:hover {
-	box-shadow: 0 0 0 2px rgb(79, 143, 241);
+	box-shadow: 0 0 0 2px rgb(79, 143, 241) inset;
 }
 
 /**
@@ -1847,7 +1852,7 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 	}
 
 	.dslc-modules-section:hover {
-		box-shadow: 0 0 0 2px #EF7C5B;
+		box-shadow: 0 0 0 2px #EF7C5B inset;
 	}
 
 	.dslc-modules-section.dslca-change-width-active {
@@ -2053,7 +2058,7 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 	.dslca-modules-area-manage {
 		bottom: 0;
 		position: absolute;
-		left: -29px;
+		left: -28px;
 		top: 0;
 		margin-right: 0px;
 		text-align: center;
@@ -2112,7 +2117,7 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 
 		.dslca-modules-area-manage .dslca-manage-action:last-child {
 			padding-bottom: 6px;
-			border-radius: 0 0 0 3px;
+			border-radius: 0 0 3px 3px;
 		}
 
 		#dslc-content .dslca-modules-area-manage .dslca-manage-action:hover {
@@ -2296,7 +2301,7 @@ body.rtl .dslca-modules-area-placeholder {
 	position: absolute;
 	left: 50%;
 	margin-left: -77px;
-	top: -30px;
+	top: 0;
 	text-align: center;
 	z-index: 99999;
 	line-height: 1;
@@ -2322,12 +2327,12 @@ body.rtl .dslca-modules-area-placeholder {
 
 	#dslc-content .dslca-module-manage .dslca-module-manage-hook:first-child {
 		margin-top: 0;
-		border-radius: 3px 0 0 0;
+		border-radius: 0 0 0 3px;
 	}
 
 	#dslc-content .dslca-module-manage .dslca-module-manage-hook:last-child {
 		margin-right: 0 !important;
-		border-radius: 0 3px 0 0;
+		border-radius: 0 0 3px 0;
 	}
 
 	#dslc-content .dslca-module-manage .dslca-module-manage-hook:hover {

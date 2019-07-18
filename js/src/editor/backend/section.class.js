@@ -101,15 +101,15 @@ export const Section = class{
 
 		/** Sort option setter */
 		jQuery(document).on('LC.sortableOff', function(){
-			if ( undefined !== self.sortable( "instance" ) ) {
+			/* if ( undefined !== self.sortable( "instance" ) ) {
 				self.sortable('option','disabled', true);
-			}
+			} */
 		});
 
 		jQuery(document).on('LC.sortableOn', function(){
-			if ( undefined !== self.sortable( "instance" ) ) {
+			/* if ( undefined !== self.sortable( "instance" ) ) {
 				self.sortable('option','disabled', false);
-			}
+			} */
 		});
 	}
 }
