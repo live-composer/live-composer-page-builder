@@ -708,7 +708,7 @@ function dslc_filter_content( $content ) {
 			$composer_prepend = '';
 		}
 
-		// If editor is currently active generate the LC elements and store them in composer_append var
+		// If editor is currently active generate the LC elements and store them in composer_append var.
 		if ( dslc_is_editor_active( 'access' ) ) {
 
 			// The "Add modules row" and "Import" buttons
@@ -716,6 +716,13 @@ function dslc_filter_content( $content ) {
 				<a href="#" class="dslca-add-modules-section-hook"><span class="dslca-icon dslc-icon-align-justify"></span>' . __( 'Add Modules Row', 'live-composer-page-builder' ) . '</a>
 				<a href="#" class="dslca-import-modules-section-hook"><span class="dslca-icon dslc-icon-download-alt"></span>' . __( 'Import', 'live-composer-page-builder' ) . '</a>
 			</div>';
+		}
+
+		// If editor is currently active generate add section dividers svg code.
+		if ( dslc_is_editor_active( 'access' ) ) {
+
+			// The "Add modules row" and "Import" buttons
+			$composer_append .= '<div id="dslc-section-dividers">' . dslc_section_dividers( 'all', '', 'code' ) . '</div>';
 		}
 
 		if ( ! empty( $composer_code ) || ! empty( $template_code ) ) {
@@ -1132,6 +1139,184 @@ function dslc_module_front( $atts, $settings_raw = null, $is_header_footer = fal
 } add_shortcode( 'dslc_module', 'dslc_module_front' );
 
 /**
+ * Return section divider SVG by id
+ *
+ * @param boolean $id Section design id to return. Returns all if false.
+ * @return string Svg code of the selected section or all the svgs.
+ */
+function dslc_section_dividers( $id = 'all', $css = '', $return = 'code' ) {
+
+	$result = '';
+	$sections = array(
+		'skewed' => array(
+			'title' => __( 'Skewed', 'live-composer-page-builder' ),
+			'code' => '
+				<svg id="skewed" style="' . esc_attr( $css ) . '" preserveAspectRatio="none" viewBox="0 0 1442 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<polygon class="divider-color"  points="0 0 1442 0 0 100"></polygon>
+				</svg>',
+		),
+		'arched' => array(
+			'title' => __( 'Arched', 'live-composer-page-builder' ),
+			'code' => '
+				<svg id="arched" style="' . esc_attr( $css ) . '" preserveAspectRatio="none" viewBox="0 0 1442 144" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<path class="divider-color" d="M1442,14.287108 L682.266,129.122 C621.756612,138.267588 517.026832,143.977138 423.629338,144 L422.504016,144 C396.685569,143.99367 371.751899,143.551232 348.88,142.625 L0,128.495459 L0,0 L1442,0 L1442,14.287108 Z" id="Combined-Shape"></path>
+				</svg>',
+		),
+		'peak-side-rounded' => array(
+			'title' => __( 'Peak - On Side - Rounded', 'live-composer-page-builder' ),
+			'code' => '
+				<svg id="peak-side-rounded" style="' . esc_attr( $css ) . '" preserveAspectRatio="none" viewBox="0 0 1442 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<path class="divider-color" d="M1442,100 L1407.63747,22.8666801 C1394.82277,-2.41135586 1381.02633,1.68477383 1339.28857,3.92432484 L0,97.3935408 L0,0 L1442,0 L1442,100 Z" id="Combined-Shape"></path>
+				</svg>',
+		),
+		'peak-side-soft' => array(
+			'title' => __( 'Peak - On Side - Soft', 'live-composer-page-builder' ),
+			'code' => '
+				<svg id="peak-side-soft" style="' . esc_attr( $css ) . '" preserveAspectRatio="none" viewBox="0 0 1442 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<path class="divider-color" d="M1442,54.4971462 L1129.36334,5.53930283 C1105.12667,1.74392233 1080.51397,0.956939149 1056.08435,3.19622996 L0,100 L0,0 L1442,0 L1442,54.4971462 Z" id="Combined-Shape"></path>
+				</svg>',
+		),
+		'peak-side' => array(
+			'title' => __( 'Peak - On Side', 'live-composer-page-builder' ),
+			'code' => '
+				<svg id="peak-side" style="' . esc_attr( $css ) . '" preserveAspectRatio="none" viewBox="0 0 1442 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<path class="divider-color" d="M1442,43.5779721 C1231.27873,18.8205998 1113.46252,6.44191365 1088.55136,6.44191365 C1044.1269,6.44191365 681.276445,37.2946093 3.86535248e-12,99.0000005 L0,0.894641095 L1442,0.894641095 L1442,43.5779721 Z" id="Combined-Shape-Copy-8"></path>
+				</svg>',
+		),
+		'peak-center-sharp' => array(
+			'title' => __( 'Peak - Center', 'live-composer-page-builder' ),
+			'code' => '
+				<svg id="peak-center-sharp" style="' . esc_attr( $css ) . '" preserveAspectRatio="none" viewBox="0 0 1442 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<path class="divider-color" d="M1442,100.777057 L720.647978,17.0144305 L-5.68434189e-14,100.695305 L0,0.777057299 L1442,0.777057299 L1442,100.777057 Z"></path>
+				</svg>',
+		),
+		'peak-center-soft' => array(
+			'title' => __( 'Peak - Center - Soft', 'live-composer-page-builder' ),
+			'code' => '
+				<svg id="peak-center-soft" style="' . esc_attr( $css ) . '" preserveAspectRatio="none" viewBox="0 0 1442 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<path class="divider-color" d="M1437.37922,100.277057 L823.4576,26.0907362 C785.104953,21.2174623 750.835079,18.7808253 720.647978,18.7808253 C690.460878,18.7808253 657.029922,21.1301388 620.355113,25.8287658 L4.0317179,100.277057 L0,100.277057 L0,0.277057299 L1442,0.277057299 L1442,100.277057 L1437.37922,100.277057 Z"></path>
+				</svg>',
+		),
+		'hill-side-soft' => array(
+			'title' => __( 'Hill - Side - Soft', 'live-composer-page-builder' ),
+			'code' => '
+				<svg id="hill-side-soft" style="' . esc_attr( $css ) . '" preserveAspectRatio="none" viewBox="0 0 1442 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<path class="divider-color" d="M1442,33.8142136 C1280.56278,15.0410066 1162.74657,5.65440317 1088.55136,5.65440317 C935.145886,5.65440317 572.295431,37.1029354 3.86535248e-12,100 L0,0 L1442,0 L1442,33.8142136 Z"></path>
+				</svg>',
+		),
+		'hill-side-round' => array(
+			'title' => __( 'Hill - Side - Round', 'live-composer-page-builder' ),
+			'code' => '
+				<svg id="hill-side-round" style="' . esc_attr( $css ) . '" preserveAspectRatio="none" viewBox="0 0 1442 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<path class="divider-color" d="M1442,34.6187945 C1315.02765,14.2772114 1160.84924,2.89696087 977.282647,2.89696087 C645.766901,2.89696087 281.275997,40.0139604 0,100 L0,0 L1442,0 L1442,34.6187945 Z"></path>
+				</svg>',
+		),
+		'hill-center-round' => array(
+			'title' => __( 'Hill - Center - Round', 'live-composer-page-builder' ),
+			'code' => '
+				<svg id="hill-center-round" style="' . esc_attr( $css ) . '" preserveAspectRatio="none" viewBox="0 0 1442 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<path class="divider-color" d="M1442,99.9999995 C1241.28259,39.8431566 991.38636,4.17007947 720.5,4.17007947 C450.063321,4.17007947 200.547143,39.7248178 -5.68434189e-14,99.7006146 L0,-5.37426331e-07 L1442,-5.37426331e-07 L1442,99.9999995 Z"></path>
+				</svg>',
+		),
+		'wave' => array(
+			'title' => __( 'Wave', 'live-composer-page-builder' ),
+			'code' => '
+				<svg id="wave" style="' . esc_attr( $css ) . '" preserveAspectRatio="none" viewBox="0 0 1442 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<path class="divider-color" d="M1442,68.0981233 C1208.93089,-11.3822297 920.961252,-17.4990636 578.091093,49.7476217 C332.207693,97.9724181 139.510662,81.7891119 0,1.19770302 L0,5.37426445e-07 L1442,5.37426445e-07 L1442,68.0981223 Z"></path>
+				</svg>',
+		),
+		'deepening' => array(
+			'title' => __( 'Deeping', 'live-composer-page-builder' ),
+			'code' => '
+				<svg id="deepening" style="' . esc_attr( $css ) . '" preserveAspectRatio="none" viewBox="0 0 1442 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<path class="divider-color" d="M1442,2.03149588 C1200.33333,4.31314746 914.749946,31.7033182 585.249837,84.202008 C353.733926,121.089043 158.650643,93.3798956 -1.21069334e-05,1.07456613 L-8.52651283e-14,5.37426445e-07 L1442,5.37426445e-07 L1442,2.03149588 Z"></path>
+				</svg>',
+		),
+	);
+
+	if ( 'all' === $id ) {
+		if ( 'code' === $return ) {
+			$sections_code = array();
+			foreach ( $sections as $id => $section) {
+				$sections_code[] = $section['code'];
+			}
+			$result = implode( ' ', $sections_code ); // Return all the sections code if no id set.
+
+		} elseif ( 'title' === $return ) {
+			$section_titles = array();
+			foreach ( $sections as $id => $section) {
+				$section_titles[ $id ] = $section['title'];
+			}
+
+			$result = $section_titles; // Return all the section ids and titles.
+		} else {
+			$result = $sections;
+		}
+	} elseif ( ! empty( $id ) && array_key_exists( $id, $sections ) ) {
+		if ( 'code' === $return ) {
+			$result = $sections[ $id ]['code'];
+		} elseif ( 'title' === $return ) {
+			$result = $sections[ $id ]['title'];
+		} else {
+			$result = $sections[ $id ];
+		}
+	} else {
+		$result = '';
+	}
+
+	return $result;
+}
+
+function dslc_divider_css( $atts, $pos = 'top' ) {
+	$styles = '';
+
+	// CSS for SVG fill color.
+	$color_id = 'section_divider_' . $pos . '_color';
+
+	if ( ! empty( $atts[ $color_id ] ) ) {
+		$styles .= 'fill:' . esc_attr( $atts[ $color_id ] ) . ';';
+	}
+
+	// CSS for SVG height.
+	$height_id = 'section_divider_' . $pos . '_height';
+
+	if ( ! empty( $atts[ $height_id ] ) ) {
+		$styles .= 'height:' . esc_attr( $atts[ $height_id ] ) . ';';
+	}
+
+	return $styles;
+
+
+}
+
+function dslc_render_divider( $atts, $pos = 'top' ) {
+	$id = 'section_divider_' . $pos . '_style';
+	$flip_id = 'section_divider_' . $pos . '_flip';
+
+	if ( dslc_is_editor_active() || ! empty( $atts[ $id ] ) && 'none' !== trim( $atts[ $id ] ) ) {
+		$divider_style = trim( $atts[ $id ] );
+		$css_classes = '';
+		if ( ! empty( $atts[ $flip_id ] ) ) { 
+			if ( 'horizontally' === trim( $atts[ $flip_id ] ) ) {
+				$css_classes .= ' dslc-flip-hor';
+			} elseif ( 'vertically' === trim( $atts[ $flip_id ] ) ) {
+				$css_classes .= ' dslc-flip-vert';
+			}
+		}
+		$output =
+			'<div class="dslc-section-divider' . esc_attr( $css_classes ) . '"
+					data-divider-pos="' . esc_attr( $pos ) .  '"
+					data-divider-style="' . esc_attr( $divider_style ) . '">' .
+				dslc_section_dividers( esc_attr( $divider_style ), dslc_divider_css( $atts, $pos ) ) .
+			'</div>';
+
+		return $output;
+	}
+
+	return '';
+}
+
+/**
  * HTML output for the sections.
  *
  * @param  array   $atts    Module settings as array.
@@ -1320,6 +1505,20 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1, $is_h
 		$sticky_style = '';
 	}
 
+	// ============================================================
+	// Section dividers.
+	if ( ! isset( $atts['section_divider_top_style'] ) ) {
+		$atts['section_divider_top_style'] = '';
+	}
+
+	$section_divider_top = dslc_render_divider( $atts, 'top' );
+
+	if ( ! isset( $atts['section_divider_bottom_style'] ) ) {
+		$atts['section_divider_bottom_style'] = '';
+	}
+
+	$section_divider_bottom = dslc_render_divider( $atts, 'bottom' );
+
 	// Allow other developers to add classes.
 	$filter_classes = array();
 	$filter_classes = apply_filters( 'dslc_row_class', $filter_classes, $atts );
@@ -1374,6 +1573,7 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1, $is_h
 	$output .= '
 		<div ' . $section_id_output . ' class="dslc-modules-section ' . $a_container_class . $parallax_class . $section_class . $extra_classes . '" style="' . dslc_row_get_style( $atts ) . '" data-section-id="' . $atts['section_instance_id'] . '">
 				' . $bg_video . '
+				' . $section_divider_top  . '
 				<div class="dslc-modules-section-wrapper dslc-clearfix">'
 					. $a_prepend . $content_render . $a_append
 					. '</div>' . $sticky_style;
@@ -1419,7 +1619,7 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1, $is_h
 		$output .= '<textarea class="dslca-section-code">' . json_encode( $atts ) . '</textarea>';
 	}
 
-	$output .= '</div>';
+	$output .= $section_divider_bottom . '</div>';
 
 	if ( ! $dslc_active ) {
 		$dslc_section_after = '';

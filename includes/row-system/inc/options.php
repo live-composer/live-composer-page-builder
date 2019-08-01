@@ -454,6 +454,143 @@ function dslc_row_register_options() {
 		'action' => 'close',
 	);
 
+	/* -------------------------------------------------------- */
+
+	$dividers = dslc_section_dividers( 'all', '', 'title' );
+	$divider_options = array(
+		array(
+			'label' => __( 'Disabled', 'live-composer-page-builder' ),
+			'value' => 'none',
+		),
+	);
+
+	foreach ( $dividers as $key => $value) {
+		$divider_options[] = array(
+			'label' => $value,
+			'value' => $key,
+		);
+	}
+
+	$dslc_var_row_options['section_divider_top_group_open'] = array(
+		'label' => __( 'Section Divider – Top', 'live-composer-page-builder' ),
+		'id' => 'section_divider_top_open',
+		'type' => 'group',
+		'action' => 'open',
+	);
+
+		$dslc_var_row_options['section_divider_top_style'] = array(
+			'id' => 'section_divider_top_style',
+			'std' => 'none',
+			'label' => __( 'Style', 'live-composer-page-builder' ),
+			'type' => 'select',
+			'choices' => $divider_options,
+		);
+
+		$dslc_var_row_options['section_divider_top_color'] = array(
+			'id' => 'section_divider_top_color',
+			'std' => '',
+			'label' => __( 'Color', 'live-composer-page-builder' ),
+			'type' => 'color',
+			'affect_on_change_rule' => 'fill',
+			'affect_on_change_el' => '.dslc-section-divider[data-divider-pos="top"] .divider-color',
+		);
+
+		$dslc_var_row_options['section_divider_top_flip'] = array(
+			'id' => 'section_divider_top_flip',
+			'std' => '',
+			'label' => __( 'Flip', 'live-composer-page-builder' ),
+			'type' => 'checkbox',
+			'choices' => array(
+				array(
+					'label' => 'Horizontally',
+					'value' => 'horizontally',
+				),
+				array(
+					'label' => 'Vertically',
+					'value' => 'vertically',
+				),
+			),
+		);
+
+		$dslc_var_row_options['section_divider_top_height'] = array(
+			'id' => 'section_divider_top_height',
+			'std' => '100',
+			'label' => __( 'Height', 'live-composer-page-builder' ),
+			'type' => 'slider',
+			'affect_on_change_rule' => 'height',
+			'affect_on_change_el' => '.dslc-section-divider[data-divider-pos="top"] svg',
+			'ext' => 'px',
+			'max' => 600,
+		);
+
+	$dslc_var_row_options['section_divider_top_group_close'] = array(
+		'label' => __( 'Sticky Row', 'live-composer-page-builder' ),
+		'id' => 'section_divider_top_close',
+		'type' => 'group',
+		'action' => 'close',
+	);
+
+	/* -------------------------------------------------------- */
+
+	$dslc_var_row_options['section_divider_bottom_group_open'] = array(
+		'label' => __( 'Section Divider – Bottom', 'live-composer-page-builder' ),
+		'id' => 'section_divider_bottom_open',
+		'type' => 'group',
+		'action' => 'open',
+	);
+
+		$dslc_var_row_options['section_divider_bottom_style'] = array(
+			'id' => 'section_divider_bottom_style',
+			'std' => 'none',
+			'label' => __( 'Style', 'live-composer-page-builder' ),
+			'type' => 'select',
+			'choices' => $divider_options,
+		);
+
+		$dslc_var_row_options['section_divider_bottom_color'] = array(
+			'id' => 'section_divider_bottom_color',
+			'std' => '',
+			'label' => __( 'Color', 'live-composer-page-builder' ),
+			'type' => 'color',
+			'affect_on_change_rule' => 'fill',
+			'affect_on_change_el' => '.dslc-section-divider[data-divider-pos="bottom"] .divider-color',
+		);
+
+		$dslc_var_row_options['section_divider_bottom_flip'] = array(
+			'id' => 'section_divider_bottom_flip',
+			'std' => '',
+			'label' => __( 'Flip', 'live-composer-page-builder' ),
+			'type' => 'checkbox',
+			'choices' => array(
+				array(
+					'label' => 'Horizontally',
+					'value' => 'horizontally',
+				),
+				array(
+					'label' => 'Vertically',
+					'value' => 'vertically',
+				),
+			),
+		);
+
+		$dslc_var_row_options['section_divider_bottom_height'] = array(
+			'id' => 'section_divider_bottom_height',
+			'std' => '100',
+			'label' => __( 'Height', 'live-composer-page-builder' ),
+			'type' => 'slider',
+			'affect_on_change_rule' => 'height',
+			'affect_on_change_el' => '.dslc-section-divider[data-divider-pos="bottom"] svg',
+			'ext' => 'px',
+			'max' => 600,
+		);
+
+	$dslc_var_row_options['section_divider_bottom_group_close'] = array(
+		'label' => __( 'Sticky Row', 'live-composer-page-builder' ),
+		'id' => 'section_divider_bottom_close',
+		'type' => 'group',
+		'action' => 'close',
+	);
+
 	// ============================================================
 
 	$dslc_var_row_options['custom_class'] = array(

@@ -284,7 +284,6 @@ function dslc_row_get_style( $atts = false ) {
 
 	// If empty return?
 	if ( empty( $dslc_var_row_options ) ) {
-
 		return;
 	}
 

@@ -71,8 +71,10 @@ body.dslca-enabled:not(.dslca-composer-hidden) #dslc-header.dslc-header-pos-abso
 }
 
 .dslc-modules-section-wrapper {
+	position: relative;
 	max-width: 100%;
 	margin: 0 auto;
+	z-index: 3;
 }
 
 	.dslc-modules-section.dslc-full .dslc-modules-section-wrapper {
@@ -756,6 +758,7 @@ body.rtl .dslc-last-col {
 #dslc-content .dslc-bg-video {
 	background: transparent;
 	position: absolute;
+	z-index: 1;
 	left: 0;
 	right: 0;
 	bottom: 0;
@@ -3830,4 +3833,45 @@ body em {
 .gradient-darken-top-left:before {
     background-image: linear-gradient(340deg, rgba(0,0,0,0), rgba(0,0,0,1));
 
+}
+
+
+/**
+ * SECTION DIVIDERS
+ */
+
+#dslc-section-dividers {
+	display: none;
+}
+
+.dslc-section-divider {
+	position: absolute;
+	z-index: 2;
+    left: 0;
+    right: 0;
+	top: 0;
+	line-height: 0;
+
+	svg {
+		width: 100%;
+		fill:#eaeaea;
+	}
+
+	&[data-divider-pos="bottom"] {
+		top: auto;
+		bottom: 0;
+		transform: scaleY(-1); /* Flip. */
+
+		&.dslc-flip-vert {
+			transform: scaleY(1); /* Flip. */
+		}
+	}
+
+	&.dslc-flip-hor svg {
+		transform: scaleX(-1); /* Flip. */
+	}
+
+	&.dslc-flip-vert {
+		transform: scaleY(-1); /* Flip. */
+	}
 }

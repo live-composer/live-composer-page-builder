@@ -854,6 +854,37 @@ const onSectionOptionsChange = () => {
 
 			}
 
+			// Section divider flip.
+			if ( dslcField.data('id') == 'section_divider_bottom_flip' ) {
+				if ( dslcValReal.indexOf( 'horizontally' ) === -1 ) {
+					jQuery('.dslc-section-divider[data-divider-pos="bottom"]', dslcEl).removeClass('dslc-flip-hor');
+				} else {
+					jQuery('.dslc-section-divider[data-divider-pos="bottom"]', dslcEl).addClass('dslc-flip-hor');
+				}
+
+				if ( dslcValReal.indexOf( 'vertically' ) === -1 ) {
+					jQuery('.dslc-section-divider[data-divider-pos="bottom"]', dslcEl).removeClass('dslc-flip-vert');
+				} else {
+					jQuery('.dslc-section-divider[data-divider-pos="bottom"]', dslcEl).addClass('dslc-flip-vert');
+				}
+
+			}
+
+			if ( dslcField.data('id') == 'section_divider_top_flip' ) {
+				if ( dslcValReal.indexOf( 'horizontally' ) === -1 ) {
+					jQuery('.dslc-section-divider[data-divider-pos="top"]', dslcEl).removeClass('dslc-flip-hor');
+				} else {
+					jQuery('.dslc-section-divider[data-divider-pos="top"]', dslcEl).addClass('dslc-flip-hor');
+				}
+
+				if ( dslcValReal.indexOf( 'vertically' ) === -1 ) {
+					jQuery('.dslc-section-divider[data-divider-pos="top"]', dslcEl).removeClass('dslc-flip-vert');
+				} else {
+					jQuery('.dslc-section-divider[data-divider-pos="top"]', dslcEl).addClass('dslc-flip-vert');
+				}
+
+			}
+
 		} else if ( dslcFieldID == 'bg_image_attachment' && dslcVal == 'parallax' ) {
 			dslcEl.addClass( 'dslc-init-parallax' );
 			LiveComposer.Builder.PreviewAreaWindow.dslc_parallax();
@@ -890,6 +921,20 @@ const onSectionOptionsChange = () => {
 				LiveComposer.Builder.PreviewAreaWindow.dslc_bg_video();
 			}
 
+		} else if ( dslcFieldID == 'section_divider_top_style' || dslcFieldID == 'section_divider_bottom_style' ) {
+			let dividerPosition = 'top';
+			if ( dslcFieldID == 'section_divider_bottom_style' ) {
+				dividerPosition = 'bottom';
+			}
+			// Remove previous divider SVG.
+			jQuery( '.dslc-section-divider[data-divider-pos="' + dividerPosition + '"]', dslcEl ).html('');
+
+			if ( dslcVal && dslcVal.length ) {
+				const divider = jQuery('#dslc-section-dividers', LiveComposer.Builder.PreviewAreaWindow.document).find( 'svg#' + dslcVal );
+				// Insert new divider SVG.
+				jQuery( '.dslc-section-divider[data-divider-pos="' + dividerPosition + '"]', dslcEl ).html( divider[0] );
+
+			}
 		} else if ( dslcFieldID == 'bg_image_thumb' ) {
 
 			if ( dslcValReal == 'enabled' ) {
