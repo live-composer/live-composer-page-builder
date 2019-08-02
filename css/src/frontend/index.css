@@ -3846,20 +3846,24 @@ body em {
 
 .dslc-section-divider {
 	position: absolute;
-	// z-index: 2;
     left: 0;
     right: 0;
-	top: 0;
+	top: -1px;
 	line-height: 0;
+	overflow: hidden;
 
 	svg {
-		width: 100%;
-		fill:#eaeaea;
+		display: block;
+		position: relative;
+		left: 50%;
+		transform: translateX(-50%);
+		width: calc(100% + 2px);
+		fill:#eaeaea; // default color.
 	}
 
 	&[data-divider-pos="bottom"] {
 		top: auto;
-		bottom: 0;
+		bottom: -1px;
 		transform: scaleY(-1); /* Flip. */
 
 		&.dslc-flip-vert {
