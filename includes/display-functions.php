@@ -1163,24 +1163,45 @@ function dslc_section_dividers( $id = 'all', $css = '', $return = 'code' ) {
 				</svg>',
 		),
 		'peak-side-rounded' => array(
-			'title' => __( 'Peak - On Side - Rounded', 'live-composer-page-builder' ),
+			'title' => __( 'Peak - Rounded', 'live-composer-page-builder' ),
 			'code' => '
 				<svg id="peak-side-rounded" style="' . esc_attr( $css ) . '" preserveAspectRatio="none" viewBox="0 0 1442 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 					<path class="divider-color" d="M1442,100 L1407.63747,22.8666801 C1394.82277,-2.41135586 1381.02633,1.68477383 1339.28857,3.92432484 L0,97.3935408 L0,0 L1442,0 L1442,100 Z" id="Combined-Shape"></path>
 				</svg>',
 		),
+		'peak-side-rounded-off' => array(
+			'title' => __( 'Peak - Rounded', 'live-composer-page-builder' ) . ' [-]',
+			'code' => '
+				<svg id="peak-side-rounded-off" style="' . esc_attr( $css ) . '" preserveAspectRatio="none" viewBox="0 0 1442 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+				<path class="divider-color" d="M1442,100.222604 L0,100.222604 L0,97.5568966 L1339.28857,1.96300711 C1381.02633,-0.327451731 1394.82277,-4.51669164 1407.63747,21.3359461 L1442,100.222604 Z" transform="translate(721.000000, 50.222604) scale(1, -1) translate(-721.000000, -50.222604) "></path>
+				</svg>',
+		),
 		'peak-side-soft' => array(
-			'title' => __( 'Peak - On Side - Soft', 'live-composer-page-builder' ),
+			'title' => __( 'Peak - Soft', 'live-composer-page-builder' ),
 			'code' => '
 				<svg id="peak-side-soft" style="' . esc_attr( $css ) . '" preserveAspectRatio="none" viewBox="0 0 1442 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 					<path class="divider-color" d="M1442,54.4971462 L1129.36334,5.53930283 C1105.12667,1.74392233 1080.51397,0.956939149 1056.08435,3.19622996 L0,100 L0,0 L1442,0 L1442,54.4971462 Z" id="Combined-Shape"></path>
 				</svg>',
 		),
+		'peak-side-soft-off' => array(
+			'title' => __( 'Peak - Soft', 'live-composer-page-builder' ) . ' [-]',
+			'code' => '
+				<svg id="peak-side-soft-off" style="' . esc_attr( $css ) . '" preserveAspectRatio="none" viewBox="0 0 1442 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<path class="divider-color" d="M1442,54.5435639 L1442,100.952601 L0,100.952601 L1055.35961,2.28875123 C1080.26675,-0.0397770017 1105.36801,0.778313477 1130.07068,4.72370515 L1442,54.5435639 Z" id="peak-side-soft-off" transform="translate(721.000000, 50.952601) scale(1, -1) translate(-721.000000, -50.952601) "></path>
+				</svg>',
+		),
 		'peak-side' => array(
-			'title' => __( 'Peak - On Side', 'live-composer-page-builder' ),
+			'title' => __( 'Peak', 'live-composer-page-builder' ),
 			'code' => '
 				<svg id="peak-side" style="' . esc_attr( $css ) . '" preserveAspectRatio="none" viewBox="0 0 1442 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 					<path class="divider-color" d="M1442,43.5779721 C1231.27873,18.8205998 1113.46252,6.44191365 1088.55136,6.44191365 C1044.1269,6.44191365 681.276445,37.2946093 3.86535248e-12,99.0000005 L0,0.894641095 L1442,0.894641095 L1442,43.5779721 Z" id="Combined-Shape-Copy-8"></path>
+				</svg>',
+		),
+		'peak-side-off' => array(
+			'title' => __( 'Peak', 'live-composer-page-builder' ) . ' [-]',
+			'code' => '
+				<svg id="peak-side-off" style="' . esc_attr( $css ) . '" preserveAspectRatio="none" viewBox="0 0 1442 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<path class="divider-color" d="M1442,39.8643569 L1442,100.547273 L0,100.547273 L0,98.5413585 C681.276445,33.2119679 1044.1269,0.547272552 1088.55136,0.547272552 C1113.46252,0.547272552 1231.27873,13.6529673 1442,39.8643569 Z" id="peak-side-off" transform="translate(721.000000, 50.547273) scale(1, -1) translate(-721.000000, -50.547273) "></path>
 				</svg>',
 		),
 		'peak-center-sharp' => array(
@@ -1190,6 +1211,13 @@ function dslc_section_dividers( $id = 'all', $css = '', $return = 'code' ) {
 					<path class="divider-color" d="M1442,100.777057 L720.647978,17.0144305 L-5.68434189e-14,100.695305 L0,0.777057299 L1442,0.777057299 L1442,100.777057 Z"></path>
 				</svg>',
 		),
+		'peak-center-sharp-off' => array(
+			'title' => __( 'Peak - Center', 'live-composer-page-builder' ) . ' [-]',
+			'code' => '
+				<svg id="peak-center-sharp-off" style="' . esc_attr( $css ) . '" preserveAspectRatio="none" viewBox="0 0 1442 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<path class="divider-color" d="M1442,100.237373 L0,100.237373 L0,100.139773 L720.647978,0.237373199 L1442,100.237373 Z" id="peak-center-sharp-off" transform="translate(721.000000, 50.237373) scale(1, -1) translate(-721.000000, -50.237373) "></path>
+				</svg>',
+		),
 		'peak-center-soft' => array(
 			'title' => __( 'Peak - Center - Soft', 'live-composer-page-builder' ),
 			'code' => '
@@ -1197,18 +1225,39 @@ function dslc_section_dividers( $id = 'all', $css = '', $return = 'code' ) {
 					<path class="divider-color" d="M1437.37922,100.277057 L823.4576,26.0907362 C785.104953,21.2174623 750.835079,18.7808253 720.647978,18.7808253 C690.460878,18.7808253 657.029922,21.1301388 620.355113,25.8287658 L4.0317179,100.277057 L0,100.277057 L0,0.277057299 L1442,0.277057299 L1442,100.277057 L1437.37922,100.277057 Z"></path>
 				</svg>',
 		),
+		'peak-center-soft-off' => array(
+			'title' => __( 'Peak - Center - Soft', 'live-composer-page-builder' ) . '[-]',
+			'code' => '
+				<svg id="peak-center-soft-off" style="' . esc_attr( $css ) . '" preserveAspectRatio="none" viewBox="0 0 1442 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<path class="divider-color" d="M1433.37922,100.503768 L0.031717897,100.503768 L616.355113,9.15194761 C653.029922,3.38649457 686.460878,0.50376805 716.647978,0.50376805 C746.835079,0.50376805 781.104953,3.49364485 819.4576,9.47339846 L1433.37922,100.503768 Z" id="peak-center-soft-off" transform="translate(716.705471, 50.503768) scale(1, -1) translate(-716.705471, -50.503768) "></path>
+				</svg>',
+		),
 		'hill-side-soft' => array(
-			'title' => __( 'Hill - Side - Soft', 'live-composer-page-builder' ),
+			'title' => __( 'Hill - Soft', 'live-composer-page-builder' ),
 			'code' => '
 				<svg id="hill-side-soft" style="' . esc_attr( $css ) . '" preserveAspectRatio="none" viewBox="0 0 1442 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 					<path class="divider-color" d="M1442,33.8142136 C1280.56278,15.0410066 1162.74657,5.65440317 1088.55136,5.65440317 C935.145886,5.65440317 572.295431,37.1029354 3.86535248e-12,100 L0,0 L1442,0 L1442,33.8142136 Z"></path>
 				</svg>',
 		),
+		'hill-side-soft-off' => array(
+			'title' => __( 'Hill - Soft', 'live-composer-page-builder' ) . '[-]',
+			'code' => '
+				<svg id="hill-side-soft-off" style="' . esc_attr( $css ) . '" preserveAspectRatio="none" viewBox="0 0 1442 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<path class="divider-color" d="M1442,30.5019121 L1442,100.654403 L0,100.654403 C572.295431,33.9877365 935.145886,0.654403168 1088.55136,0.654403168 C1162.74657,0.654403168 1280.56278,10.6035728 1442,30.5019121 Z" id="hill-side-soft-off" transform="translate(721.000000, 50.654403) scale(1, -1) translate(-721.000000, -50.654403) "></path>
+				</svg>',
+		),
 		'hill-side-round' => array(
-			'title' => __( 'Hill - Side - Round', 'live-composer-page-builder' ),
+			'title' => __( 'Hill - Round', 'live-composer-page-builder' ),
 			'code' => '
 				<svg id="hill-side-round" style="' . esc_attr( $css ) . '" preserveAspectRatio="none" viewBox="0 0 1442 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 					<path class="divider-color" d="M1442,34.6187945 C1315.02765,14.2772114 1160.84924,2.89696087 977.282647,2.89696087 C645.766901,2.89696087 281.275997,40.0139604 0,100 L0,0 L1442,0 L1442,34.6187945 Z"></path>
+				</svg>',
+		),
+		'hill-side-round-off' => array(
+			'title' => __( 'Hill - Round', 'live-composer-page-builder' ) . '[-]',
+			'code' => '
+				<svg id="hill-side-round-off" style="' . esc_attr( $css ) . '" preserveAspectRatio="none" viewBox="0 0 1442 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<path class="divider-color" d="M1442,33.5651801 L1442,100.896961 L0,100.896961 C281.275997,39.1213047 645.766901,0.896960872 977.282647,0.896960872 C1160.84924,0.896960872 1315.02765,12.6167284 1442,33.5651801 Z" id="hill-side-round-off" transform="translate(721.000000, 50.896961) scale(1, -1) translate(-721.000000, -50.896961) "></path>
 				</svg>',
 		),
 		'hill-center-round' => array(
@@ -1218,6 +1267,13 @@ function dslc_section_dividers( $id = 'all', $css = '', $return = 'code' ) {
 					<path class="divider-color" d="M1442,99.9999995 C1241.28259,39.8431566 991.38636,4.17007947 720.5,4.17007947 C450.063321,4.17007947 200.547143,39.7248178 -5.68434189e-14,99.7006146 L0,-5.37426331e-07 L1442,-5.37426331e-07 L1442,99.9999995 Z"></path>
 				</svg>',
 		),
+		'hill-center-round-off' => array(
+			'title' => __( 'Hill - Center - Round', 'live-composer-page-builder' ) . '[-]',
+			'code' => '
+				<svg id="hill-center-round-off" style="' . esc_attr( $css ) . '" preserveAspectRatio="none" viewBox="0 0 1442 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<path class="divider-color" d="M1442,100.17008 L0,100.17008 L0,99.8576673 C200.547143,37.271998 450.063321,0.17008001 720.5,0.17008001 C991.38636,0.17008001 1241.28259,37.3954863 1442,100.17008 Z" id="hill-center-round-off" transform="translate(721.000000, 50.170080) scale(1, -1) translate(-721.000000, -50.170080) "></path>
+				</svg>',
+		),
 		'wave' => array(
 			'title' => __( 'Wave', 'live-composer-page-builder' ),
 			'code' => '
@@ -1225,11 +1281,25 @@ function dslc_section_dividers( $id = 'all', $css = '', $return = 'code' ) {
 					<path class="divider-color" d="M1442,68.0981233 C1208.93089,-11.3822297 920.961252,-17.4990636 578.091093,49.7476217 C332.207693,97.9724181 139.510662,81.7891119 0,1.19770302 L0,5.37426445e-07 L1442,5.37426445e-07 L1442,68.0981223 Z"></path>
 				</svg>',
 		),
+		'wave-off' => array(
+			'title' => __( 'Wave', 'live-composer-page-builder' ) . '[-]',
+			'code' => '
+				<svg id="wave-off" style="' . esc_attr( $css ) . '" preserveAspectRatio="none" viewBox="0 0 1442 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<path class="divider-color" d="M1442,100.114928 L1442,101 C1441.26026,100.704161 1440.51992,100.409129 1439.77899,100.114904 L0,100.114928 L0,32.3561645 C135.2357,99.751738 316.345496,110.920533 543.329388,65.8625497 C903.44127,-5.62232566 1202.2578,5.79512581 1439.77899,100.114904 L1442,100.114928 Z M1442,0.114927948 L0,0.114927948 L1442,0.114928486 Z" id="wave-off" transform="translate(721.000000, 50.557464) scale(1, -1) translate(-721.000000, -50.557464) "></path>
+				</svg>',
+		),
 		'deepening' => array(
 			'title' => __( 'Deeping', 'live-composer-page-builder' ),
 			'code' => '
 				<svg id="deepening" style="' . esc_attr( $css ) . '" preserveAspectRatio="none" viewBox="0 0 1442 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 					<path class="divider-color" d="M1442,2.03149588 C1200.33333,4.31314746 914.749946,31.7033182 585.249837,84.202008 C353.733926,121.089043 158.650643,93.3798956 -1.21069334e-05,1.07456613 L-8.52651283e-14,5.37426445e-07 L1442,5.37426445e-07 L1442,2.03149588 Z"></path>
+				</svg>',
+		),
+		'deepening-off' => array(
+			'title' => __( 'Deeping', 'live-composer-page-builder' ) . '[-]',
+			'code' => '
+				<svg id="deepening-off" style="' . esc_attr( $css ) . '" preserveAspectRatio="none" viewBox="0 0 1442 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<path class="divider-color" d="M394.85237,100 L-1,100 L-1,0 L-1,1.07456559 C157.650655,93.379895 352.733938,121.089042 584.249849,84.2020074 C913.749958,31.7033176 1199.33335,4.31314693 1441.00001,2.03149535 L1441.00001,0 L-0.999987893,0 L1441,0 L-0.999987893,0 L1441,0 L1441,100 L-1,100 L-1,0 L-1,1.07456559 C112.35263,67.0248254 244.303421,99.9999702 394.85237,100 Z" id="deepening-off" transform="translate(720.000006, 50.000000) scale(1, -1) translate(-720.000006, -50.000000) "></path>
 				</svg>',
 		),
 	);
@@ -1281,7 +1351,7 @@ function dslc_divider_css( $atts, $pos = 'top' ) {
 	$height_id = 'section_divider_' . $pos . '_height';
 
 	if ( ! empty( $atts[ $height_id ] ) ) {
-		$styles .= 'height:' . esc_attr( $atts[ $height_id ] ) . ';';
+		$styles .= ' height:' . esc_attr( $atts[ $height_id ] ) . 'px;';
 	}
 
 	return $styles;

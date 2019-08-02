@@ -927,13 +927,16 @@ const onSectionOptionsChange = () => {
 				dividerPosition = 'bottom';
 			}
 			// Remove previous divider SVG.
+			let inlineStyles = jQuery( '.dslc-section-divider[data-divider-pos="' + dividerPosition + '"] svg', dslcEl ).attr('style');
 			jQuery( '.dslc-section-divider[data-divider-pos="' + dividerPosition + '"]', dslcEl ).html('');
 
 			if ( dslcVal && dslcVal.length ) {
-				const divider = jQuery('#dslc-section-dividers', LiveComposer.Builder.PreviewAreaWindow.document).find( 'svg#' + dslcVal );
+				const divider = jQuery('#dslc-section-dividers', LiveComposer.Builder.PreviewAreaWindow.document).find( 'svg#' + dslcVal ).clone();
 				// Insert new divider SVG.
 				jQuery( '.dslc-section-divider[data-divider-pos="' + dividerPosition + '"]', dslcEl ).html( divider[0] );
-
+				if ( undefined !== inlineStyles ) {
+					jQuery( '.dslc-section-divider[data-divider-pos="' + dividerPosition + '"] svg', dslcEl ).attr('style', inlineStyles);
+				}
 			}
 		} else if ( dslcFieldID == 'bg_image_thumb' ) {
 

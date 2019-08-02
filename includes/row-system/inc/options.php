@@ -492,7 +492,7 @@ function dslc_row_register_options() {
 			'label' => __( 'Color', 'live-composer-page-builder' ),
 			'type' => 'color',
 			'affect_on_change_rule' => 'fill',
-			'affect_on_change_el' => '.dslc-section-divider[data-divider-pos="top"] .divider-color',
+			'affect_on_change_el' => '.dslc-section-divider[data-divider-pos="top"] svg',
 		);
 
 		$dslc_var_row_options['section_divider_top_flip'] = array(
@@ -553,7 +553,7 @@ function dslc_row_register_options() {
 			'label' => __( 'Color', 'live-composer-page-builder' ),
 			'type' => 'color',
 			'affect_on_change_rule' => 'fill',
-			'affect_on_change_el' => '.dslc-section-divider[data-divider-pos="bottom"] .divider-color',
+			'affect_on_change_el' => '.dslc-section-divider[data-divider-pos="bottom"] svg',
 		);
 
 		$dslc_var_row_options['section_divider_bottom_flip'] = array(
