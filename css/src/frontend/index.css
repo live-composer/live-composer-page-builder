@@ -74,7 +74,7 @@ body.dslca-enabled:not(.dslca-composer-hidden) #dslc-header.dslc-header-pos-abso
 	position: relative;
 	max-width: 100%;
 	margin: 0 auto;
-	z-index: 3;
+	// z-index: 3;
 }
 
 	.dslc-modules-section.dslc-full .dslc-modules-section-wrapper {
@@ -3846,7 +3846,7 @@ body em {
 
 .dslc-section-divider {
 	position: absolute;
-	z-index: 2;
+	// z-index: 2;
     left: 0;
     right: 0;
 	top: 0;
