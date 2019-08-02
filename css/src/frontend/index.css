@@ -3855,8 +3855,7 @@ body em {
 	svg {
 		display: block;
 		position: relative;
-		left: 50%;
-		transform: translateX(-50%);
+		left: -1px;
 		width: calc(100% + 2px);
 		fill:#eaeaea; // default color.
 	}
