@@ -1300,9 +1300,9 @@ class DSLC_Button extends DSLC_Module {
 		global $dslc_active;
 
 		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
-					$dslc_is_admin = true;
+			$dslc_is_admin = true;
 		} else {
-					$dslc_is_admin = false;
+			$dslc_is_admin = false;
 		}
 
 		/* Module output starts here */
@@ -1310,12 +1310,10 @@ class DSLC_Button extends DSLC_Module {
 		$anchor_append = '';
 
 		if ( isset( $options['button_onclick'] ) && $options['button_onclick'] !== '' ) {
-
 			$anchor_append = ' onClick="' . stripslashes( $options['button_onclick'] ) . '"';
 		}
 
 		$classes = $options['button_class'] . ' ' . $options['custom_class'];
-
 
 		if ( isset( $options['css_bg_effect'] ) && $options['css_bg_effect'] !== 'none' ) {
 			$effect_class = '';

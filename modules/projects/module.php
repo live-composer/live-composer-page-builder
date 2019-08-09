@@ -351,6 +351,7 @@ class DSLC_Projects extends DSLC_Module {
 					),
 					array(
 						'label' => __( 'Staff', 'live-composer-page-builder' ),
+						'label' => __( 'Staff', 'live-composer-page-builder' ),
 						'value' => 'staff',
 					),
 					array(

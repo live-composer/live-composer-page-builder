@@ -106,9 +106,9 @@ function dslc_icons_modal() {
 	$screen = get_current_screen();
 	$screens_with_icon_modal = array(
 			'toplevel_page_livecomposer_editor',
-			'nav-menus',
+			'nav-menus', // used by premium mega menu extension.
 		);
-	
+
 	if ( ! is_object( $screen ) ) {
 		return;
 	}
@@ -119,7 +119,7 @@ function dslc_icons_modal() {
 
 	if ( current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
-		// output list of icons
+		// Output list of icons.
 			echo '<div class="dslca-modal-icons dslca-modal dslc-list-icons" style="display:none;">';
 				echo '<ul class="dslc-icons-grid">';
 		foreach ( $dslc_var_icons as $key => $value ) {

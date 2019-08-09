@@ -758,7 +758,6 @@ body.rtl .dslc-last-col {
 #dslc-content .dslc-bg-video {
 	background: transparent;
 	position: absolute;
-	z-index: 1;
 	left: 0;
 	right: 0;
 	bottom: 0;
@@ -3241,13 +3240,16 @@ body.dslca-enabled .dslc-notification-box-has-timeout {
 
 		#dslc-content .dslc-accordion-header {
 			border: 0 solid transparent;
-			display: block;
 			font-size: 11px;
 			/*font-family: '';*/
 			font-weight: bold;
 			font-size: 11px;
 			line-height: 1;
 			position: relative;
+
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
 		}
 
 			#dslc-content .dslc-accordion-title {
@@ -3295,9 +3297,10 @@ body.dslca-enabled .dslc-notification-box-has-timeout {
 	}
 
 	#dslc-content .dslca-accordion-action-hooks {
-		position: absolute;
-		right: 14px;
-		top: 14px;
+		// position: absolute;
+		// right: 14px;
+		// top: 14px;
+		line-height: 0;
 	}
 
 		#dslc-content .dslca-move-up-accordion-hook,

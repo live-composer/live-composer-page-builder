@@ -1592,7 +1592,6 @@ class DSLC_Partners extends DSLC_Module {
 }
 
 function dslc_module_partners_output( $atts, $content = null ) {
-	
 
 	// Uncode module options passed as serialized content.
 	$data = @unserialize( $content );
@@ -1600,7 +1599,7 @@ function dslc_module_partners_output( $atts, $content = null ) {
 	if ( $data !== false ) {
 		$options = unserialize( $content );
 	} else {
-		$fixed_data = preg_replace_callback( '!s:(\d+):"(.*?)";!', function( $match ) {      
+		$fixed_data = preg_replace_callback( '!s:(\d+):"(.*?)";!', function( $match ) {
 			return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
 		}, $content );
 		$options = unserialize( $fixed_data );
@@ -1617,32 +1616,39 @@ function dslc_module_partners_output( $atts, $content = null ) {
 
 	/* Module output stars here */
 
-	if ( ! isset( $options['excerpt_length'] ) ) { $options['excerpt_length'] = 20;
+	if ( ! isset( $options['excerpt_length'] ) ) {
+		$options['excerpt_length'] = 20;
 	}
-	if ( ! isset( $options['type'] ) ) { $options['type'] = 'grid';
-	}
-
-	if ( is_front_page() ) { $paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1;
-	} else { $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1; }
-
-		// Fix for pagination from other modules affecting this one when pag disabled
-	if ( $options['pagination_type'] == 'disabled' ) { $paged = 1;
+	if ( ! isset( $options['type'] ) ) {
+		$options['type'] = 'grid';
 	}
 
-		// Fix for offset braking pagination
-		$query_offset = $options['offset'];
-	if ( $query_offset > 0 && $paged > 1 ) { $query_offset = ( $paged - 1 ) * $options['amount'] + $options['offset'];
+	if ( is_front_page() ) {
+		$paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1;
+	} else {
+		$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 	}
 
-		$args = array(
-			'paged' => $paged,
-			'post_type' => 'dslc_partners',
-			'posts_per_page' => $options['amount'],
-			'order' => $options['order'],
-			'orderby' => $options['orderby'],
-		);
+	// Fix for pagination from other modules affecting this one when pag disabled
+	if ( $options['pagination_type'] == 'disabled' ) {
+		$paged = 1;
+	}
 
-		// Add offset
+	// Fix for offset braking pagination.
+	$query_offset = $options['offset'];
+	if ( $query_offset > 0 && $paged > 1 ) {
+		$query_offset = ( $paged - 1 ) * $options['amount'] + $options['offset'];
+	}
+
+	$args = array(
+		'paged' => $paged,
+		'post_type' => 'dslc_partners',
+		'posts_per_page' => $options['amount'],
+		'order' => $options['order'],
+		'orderby' => $options['orderby'],
+	);
+
+	// Add offset.
 	if ( $query_offset > 0 ) {
 		$args['offset'] = $query_offset;
 	}
@@ -1666,26 +1672,26 @@ function dslc_module_partners_output( $atts, $content = null ) {
 
 	}
 
-		// Exlcude and Include arrays
-		$exclude = array();
-		$include = array();
+	// Exlcude and Include arrays.
+	$exclude = array();
+	$include = array();
 
-		// Exclude current post
+	// Exclude current post.
 	if ( is_singular( get_post_type() ) ) {
 		$exclude[] = get_the_ID();
 	}
 
-		// Exclude posts ( option )
+	// Exclude posts ( option ).
 	if ( $options['query_post_not_in'] ) {
 		$exclude = array_merge( $exclude, explode( ' ', $options['query_post_not_in'] ) );
 	}
 
-		// Include posts ( option )
+	// Include posts ( option ).
 	if ( $options['query_post_in'] ) {
 		$include = array_merge( $include, explode( ' ', $options['query_post_in'] ) );
 	}
 
-		// Include query parameter
+	// Include query parameter.
 	if ( ! empty( $include ) ) {
 		$args['post__in'] = $include;
 	}
@@ -1695,12 +1701,12 @@ function dslc_module_partners_output( $atts, $content = null ) {
 		$args['post__not_in'] = $exclude;
 	}
 
-		// No paging
+	// No paging.
 	if ( $options['pagination_type'] == 'disabled' ) {
 		$args['no_found_rows'] = true;
 	}
 
-		// Do the query
+	// Do the query.
 	if ( is_category() || is_tax() || is_search() ) {
 		global $wp_query;
 		$dslc_query = $wp_query;
@@ -1785,7 +1791,7 @@ function dslc_module_partners_output( $atts, $content = null ) {
 	if ( $show_heading || $show_filters || $show_carousel_arrows ) {
 		$show_header = true;
 	}
-	
+
 	if ( $show_carousel_arrows && ( $options['arrows_position'] == 'aside' ) ) {
 		$container_class .= 'dslc-carousel-arrow-aside ';
 	}
@@ -1906,7 +1912,7 @@ function dslc_module_partners_output( $atts, $content = null ) {
 	if ( $dslc_query->have_posts() ) :
 
 		?><div class="<?php echo $container_class; ?>">
-			
+
 			<?php if ( $show_carousel_arrows && ( $options['arrows_position'] == 'aside' ) ) : ?>
 				<a href="#" class="dslc-carousel-nav-prev position-aside"><span class="dslc-icon-chevron-left"></span></a>
 			<?php endif; ?>
@@ -2175,7 +2181,7 @@ if ( $options['type'] == 'carousel' ) :
 			?>
 
 			</div><!-- .dslc-posts-inner -->
-			
+
 			<?php if ( $show_carousel_arrows && ( $options['arrows_position'] == 'aside' ) ) : ?>
 				<a href="#" class="dslc-carousel-nav-next position-aside"><span class="dslc-icon-chevron-right"></span></a>
 			<?php endif; ?>
@@ -2194,17 +2200,17 @@ if ( $options['type'] == 'carousel' ) :
 		 * Pagination
 		 */
 
-if ( isset( $options['pagination_type'] ) && $options['pagination_type'] != 'disabled' ) {
-	$num_pages = $dslc_query->max_num_pages;
-	if ( $options['offset'] > 0 ) {
-		$num_pages = ceil( ( $dslc_query->found_posts - $options['offset'] ) / $options['amount'] );
-	}
-	dslc_post_pagination( array(
-		'pages' => $num_pages,
-		'type' => $options['pagination_type'],
-		'pagination_text' => $options['pagination_text'],
-	) );
-}
+		if ( isset( $options['pagination_type'] ) && $options['pagination_type'] != 'disabled' ) {
+			$num_pages = $dslc_query->max_num_pages;
+			if ( $options['offset'] > 0 ) {
+				$num_pages = ceil( ( $dslc_query->found_posts - $options['offset'] ) / $options['amount'] );
+			}
+			dslc_post_pagination( array(
+				'pages' => $num_pages,
+				'type' => $options['pagination_type'],
+				'pagination_text' => $options['pagination_text'],
+			) );
+		}
 
 		wp_reset_postdata();
 

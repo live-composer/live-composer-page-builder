@@ -3,7 +3,7 @@ Contributors: LiveComposer
 Tags: page builder, landing page builder, frontend page builder, drag and drop page builder, website builder
 Requires at least: 4.7
 Tested up to: 5.2
-Stable tag: 1.5
+Stable tag: 1.5.1
 License: GPLv3
 
 Page builder for WordPress with drag and drop header/footer editing, responsive settings, and animations. Compatible with Gutenberg block editor.
@@ -58,8 +58,8 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 * 🦊 [Check out our WooCommerce Page Builder Extension](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
 
-= 1.5 - Aug 1 2019 =
-* 🆕 New feature: section dividers. Flexible, vector-based shapes to decorate any row.
+= 1.5.1 - Aug 9 2019 =
+* 🆕 New feature: [section dividers](https://livecomposerplugin.com/section-dividers/). Flexible, [vector-based shapes](https://livecomposerplugin.com/section-dividers/) to decorate any row.
 * Updated section drag and drop functionality.
 
 = 1.4.10 - July 17 2019 =
