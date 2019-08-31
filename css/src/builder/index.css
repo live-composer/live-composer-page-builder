@@ -160,7 +160,7 @@ body a:focus {
 	border: 0;
 	color: #fff;
 	padding: 7px 10px;
-	font-family: 'Open Sans', sans-serif;
+	/* font-family: 'Open Sans', sans-serif; */
 	font-size: 12px;
 	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
 	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
@@ -314,7 +314,7 @@ body a:focus {
 			padding: 6px 10px;
 			border-radius: 3px;
 			font-weight: 400;
-			font-family: 'Open Sans', sans-serif;
+			/* font-family: 'Open Sans', sans-serif; */
 			font-size: 10px;
 			line-height: 1;
 			display: none;
@@ -344,7 +344,7 @@ body a:focus {
 			display: block;
 			float: left;
 			font-size: 13px;
-			font-family: 'Open Sans', sans-serif;
+			/* font-family: 'Open Sans', sans-serif; */
 			font-weight: 600;
 			line-height: 1;
 			padding: 13px 15px;
@@ -414,7 +414,7 @@ body a:focus {
 				cursor: pointer;
 				display: inline-block;
 				font-size: 13px;
-				font-family: 'Open Sans', sans-serif;
+				/* font-family: 'Open Sans', sans-serif; */
 				font-weight: 600;
 				line-height: 1;
 				padding: 10px 12px;
@@ -844,7 +844,7 @@ body a:focus {
 				.dslca-modules-section-edit-label {
 					color: #fff;
 					display: block;
-					font-family: 'Open Sans', sans-serif;
+					/* font-family: 'Open Sans', sans-serif; */
 					font-weight: 400;
 					font-size: 13px;
 					line-height: 1;
@@ -913,7 +913,7 @@ body a:focus {
 						left: 11px;
 						top: 0;
 						line-height: 32px;
-						font-family: "Open Sans", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+						/* font-family: "Open Sans", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; */
 						font-size: 13px;
 					}
 
@@ -943,7 +943,7 @@ body a:focus {
 							cursor: pointer;
 							font-size: 13px;
 							font-weight: 400;
-							font-family: 'Open Sans', sans-serif;
+							/* font-family: 'Open Sans', sans-serif; */
 						}
 
 							.dslca-module-edit-option-checkbox-hook .dslca-icon {
@@ -970,7 +970,7 @@ body a:focus {
 						display: inline-block;
 						font-size: 12px;
 						font-weight: 400;
-						font-family: 'Open Sans', sans-serif;
+						/* font-family: 'Open Sans', sans-serif; */
 					}
 
 			/**
@@ -1118,7 +1118,7 @@ body a:focus {
 				color: #fff;
 				cursor: pointer;
 
-				font-family: 'Open Sans', sans-serif;
+				/* font-family: 'Open Sans', sans-serif; */
 				font-size: 12px;
 				font-weight: 600;
 				letter-spacing: 0.5px;
@@ -1237,7 +1237,7 @@ body a:focus {
 							cursor: pointer;
 							font-size: 12px;
 							font-weight: 400;
-							font-family: 'Open Sans', sans-serif;
+							/* font-family: 'Open Sans', sans-serif; */
 						}
 
 							.dslca-modules-section-edit-option-checkbox-hook .dslca-icon {
@@ -1398,7 +1398,7 @@ body a:focus {
 	color: #fff;
 	cursor: pointer;
 	display: inline-block;
-	font-family: 'Open Sans', sans-serif;
+	/* font-family: 'Open Sans', sans-serif; */
 	font-size: 14px;
 	font-weight: bold;
 	line-height: 34px;
@@ -1413,7 +1413,7 @@ body a:focus {
 	color: #fff;
 	cursor: pointer;
 	display: inline-block;
-	font-family: 'Open Sans', sans-serif;
+	/* font-family: 'Open Sans', sans-serif; */
 	font-size: 14px;
 	font-weight: bold;
 	line-height: 34px;
@@ -1427,7 +1427,7 @@ body a:focus {
 	color: #fff;
 	cursor: pointer;
 	display: inline-block;
-	font-family: 'Open Sans', sans-serif;
+	/* font-family: 'Open Sans', sans-serif; */
 	font-size: 14px;
 	font-weight: bold;
 	line-height: 34px;
@@ -2002,7 +2002,7 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 		cursor: pointer;
 		display: inline-block;
 		font-size: 11px;
-		font-family: 'Open Sans', sans-serif;
+		/* font-family: 'Open Sans', sans-serif; */
 		font-weight: bold;
 		line-height: 1;
 		margin-right: 7px;
@@ -2207,7 +2207,7 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 					background: #4785db;
 					border-radius: 3px;
 					display: inline-block;
-					font-family: 'Open Sans', sans-serif;
+					/* font-family: 'Open Sans', sans-serif; */
 					font-size: 13px;
 					font-weight: 400;
 					line-height: 24px;
@@ -2598,7 +2598,7 @@ body.rtl .dslca-modules-area-placeholder {
 						.dslca-prompt-modal-title {
 							color: #424242;
 							display: block;
-							font-family: 'Open Sans', sans-serif;
+							/* font-family: 'Open Sans', sans-serif; */
 							font-size: 16px;
 							font-weight: bold;
 							line-height: 1;
@@ -2608,7 +2608,7 @@ body.rtl .dslca-modules-area-placeholder {
 						.dslca-prompt-modal-descr {
 							color: #8a8a8a;
 							display: block;
-							font-family: 'Open Sans', sans-serif;
+							/* font-family: 'Open Sans', sans-serif; */
 							font-size: 13px;
 							font-weight: normal;
 							line-height: 22px;
@@ -2710,7 +2710,7 @@ body.rtl .dslca-modules-area-placeholder {
 			cursor: pointer;
 			display: inline-block;
 			font-size: 12px;
-			font-family: 'Open Sans', sans-serif;
+			/* font-family: 'Open Sans', sans-serif; */
 			font-weight: bold;
 			line-height: 1;
 			padding: 13px 10px;
@@ -2726,7 +2726,7 @@ body.rtl .dslca-modules-area-placeholder {
 			cursor: pointer;
 			display: inline-block;
 			font-size: 12px;
-			font-family: 'Open Sans', sans-serif;
+			/* font-family: 'Open Sans', sans-serif; */
 			font-weight: bold;
 			line-height: 1;
 			padding: 13px 10px;
@@ -2752,7 +2752,7 @@ body.rtl .dslca-modules-area-placeholder {
 				cursor: pointer;
 				display: block;
 				font-size: 12px;
-				font-family: 'Open Sans', sans-serif;
+				/* font-family: 'Open Sans', sans-serif; */
 				line-height: 1;
 				font-weight: bold;
 				position: relative;
@@ -3169,7 +3169,7 @@ span.dslca-manage-action:hover * {
 		border-radius: 3px;
 		color: #a0a0a0;
 		display: inline-block;
-		font-family: "Open Sans",sans-serif;
+		/* font-family: "Open Sans",sans-serif; */
 		font-size: 10px;
 		line-height: 1;
 		padding: 3px 6px;
@@ -3259,7 +3259,7 @@ span.dslca-manage-action:hover * {
 			border-radius: 3px;
 			color: #707070;
 			font-size: 14px;
-			font-family: 'Open Sans', sans-serif;
+			/* font-family: 'Open Sans', sans-serif; */
 			font-weight: 400;
 			line-height: 1.5;
 			padding: 35px 25px;
@@ -3282,7 +3282,7 @@ span.dslca-manage-action:hover * {
 				color: #fff;
 				display: inline-block;
 				font-size: 14px;
-				font-family: 'Open Sans', sans-serif;
+				/* font-family: 'Open Sans', sans-serif; */
 				font-weight: bold;
 				line-height: 1;
 				padding: 13px 15px;
@@ -3416,7 +3416,7 @@ span.dslca-manage-action:hover * {
 	cursor: pointer!important;
 	display: inline-block;
 	font-size: 12px;
-	font-family: 'Open Sans', sans-serif;
+	/* font-family: 'Open Sans', sans-serif; */
 	font-weight: 400;
 	padding: 9px 12px;
 	line-height: 1;
@@ -4030,7 +4030,7 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 	.dslca-modal-icons .icon-item_name {
 		opacity: .35;
 		display: inline-block;
-		font-family: 'Open Sans', sans-serif;
+		/* font-family: 'Open Sans', sans-serif; */
 		font-size: 12px;
 		line-height: 1.25;
 		padding: 5px 8px 12px;
@@ -4041,7 +4041,7 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 		padding: 30px;
 		text-align: center;
 		letter-spacing: 6px;
-		font-family: 'Open Sans', sans-serif;
+		/* font-family: 'Open Sans', sans-serif; */
 		font-size: 16px;
 		font-weight: 300;
 		line-height: 1.25;
