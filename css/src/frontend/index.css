@@ -86,6 +86,11 @@ body.dslca-enabled:not(.dslca-composer-hidden) #dslc-header.dslc-header-pos-abso
 	/*z-index: 0; – Breaks module width change popup */
 }
 
+.dslc-icon {
+	text-align: center;
+	vertical-align: middle;
+}
+
 /**
  * Grid System
  */
