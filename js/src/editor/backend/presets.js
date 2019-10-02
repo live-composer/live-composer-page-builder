@@ -19,7 +19,7 @@ export const updatePreset = () => {
 	var module = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument),
 	presetName = module.find('.dslca-module-option-front[data-id="css_load_preset"]').val(),
 	// presetCode = module.find('.dslca-module-code').val(), - don't use. Creating bugs.
-	presetCode = module.find('.dslca-module-code').innerHtml,
+	presetCode = module.find('.dslca-module-code').innerText,
 	moduleID = module.data('module');
 
 	// If preset value not "none"

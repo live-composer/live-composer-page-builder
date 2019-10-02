@@ -119,7 +119,7 @@ document.addEventListener('copyModuleStyles', function (customEvent) {
 	const currentModuleEl = elClicked.closest('.dslc-module-front');
 
 	// Get module code.
-	let currentModuleCode = currentModuleEl.querySelector( '.dslca-module-code').innerHTML;
+	let currentModuleCode = currentModuleEl.querySelector( '.dslca-module-code').innerText;
 	// Save coppied styles in local storage (real buffer isn't supported by all the browsers).
 	localStorage.setItem( 'lcCopyPasteStorage', currentModuleCode );
 });
@@ -901,7 +901,7 @@ function dslc_dm_get_defaults( module ) {
 
 	// The module code value
 	// var optionsCode = module.find('.dslca-module-code').val(); – Don't use. Causes bugs!
-	var optionsCode = module.find('.dslca-module-code').innerHTML;
+	var optionsCode = module.find('.dslca-module-code').innerText;
 
 	// Ajax call to get the plain PHP code
 	jQuery.post(
