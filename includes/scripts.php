@@ -97,17 +97,10 @@ final class DSLC_Scripts {
 		wp_enqueue_script( 'dslc-plugins-js',	DS_LIVE_COMPOSER_URL . 'js/dist/client_plugins.min.js',		array( 'jquery' ), DS_LIVE_COMPOSER_VER );
 		wp_enqueue_script( 'dslc-main-js',		DS_LIVE_COMPOSER_URL . 'js/dist/client_frontend.min.js',	array( 'jquery' ), DS_LIVE_COMPOSER_VER, $in_footer = true );
 
-		if ( is_ssl() ) {
 
-			wp_localize_script( 'dslc-main-js', 'DSLCAjax', array(
-				'ajaxurl' => admin_url( 'admin-ajax.php', 'https' ),
-			) );
-		} else {
-
-			wp_localize_script( 'dslc-main-js', 'DSLCAjax', array(
-				'ajaxurl' => admin_url( 'admin-ajax.php', 'http' ),
-			) );
-		}
+		wp_localize_script( 'dslc-main-js', 'DSLCAjax', array(
+			'ajaxurl' => admin_url( 'admin-ajax.php' ),
+		) );
 
 		/**
 		 * Live Composer Editing State
@@ -179,13 +172,6 @@ final class DSLC_Scripts {
 			$min_suffix = '.min';
 		}
 
-		// What protocol to use.
-		$protocol = 'http';
-
-		if ( is_ssl() ) {
-			$protocol = 'https';
-		}
-
 		/* If current screen is Live Composer editing screen */
 		if ( 'dslc-editing-screen' === $current_screen && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
@@ -241,7 +227,7 @@ final class DSLC_Scripts {
 			// self::load_scripts( 'builder', 'dslc-editor-backend-js' );
 
 			wp_localize_script( 'dslc-editor-backend-js', 'DSLCAjax', array(
-				'ajaxurl' => admin_url( 'admin-ajax.php', $protocol ),
+				'ajaxurl' => admin_url( 'admin-ajax.php' ),
 			) );
 			wp_localize_script( 'dslc-editor-backend-js', 'DSLCSiteData', array(
 				'siteurl' => get_option( 'siteurl' ),

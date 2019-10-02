@@ -32,7 +32,6 @@ import { hidePublishButton, showSection } from './uigeneral.js';
 import anime from 'animejs';
 import { editableContentCodeGeneration } from "./codegeneration.js";
 
-
 var actionAvail = function() {
 
 	if ( LiveComposer.Builder.Flags.panelOpened ) {
@@ -110,6 +109,106 @@ document.addEventListener('moduleEdit', function (customEvent) {
 	dslc_module_options_show( currentModuleId );
 	// Cover up other modules with semi transp cover
 	LiveComposer.Builder.PreviewAreaWindow.document.body.classList.add('module-editing-in-progress');
+});
+
+/**
+ * Hook - Copy Module Styles On Click
+ */
+document.addEventListener('copyModuleStyles', function (customEvent) {
+	const elClicked = customEvent.detail;  // customEvent.detail - is element being clicked passed as additional data in the event.
+	const currentModuleEl = elClicked.closest('.dslc-module-front');
+
+	// Get module code.
+	let currentModuleCode = currentModuleEl.querySelector( '.dslca-module-code').innerHTML;
+	// Save coppied styles in local storage (real buffer isn't supported by all the browsers).
+	localStorage.setItem( 'lcCopyPasteStorage', currentModuleCode );
+});
+
+/**
+ * Hook - Paste Module Styles On Click
+ */
+document.addEventListener('pasteModuleStyles', function (customEvent) {
+	const elClicked = customEvent.detail;  // customEvent.detail - is element being clicked passed as additional data in the event.
+	const currentModuleEl = elClicked.closest('.dslc-module-front');
+	const dslcModule = jQuery( currentModuleEl );
+	// Extract paste value from the local storage.
+	const pasteModuleCode = localStorage.getItem( 'lcCopyPasteStorage' );
+	let pasteModuleProperies = false;
+	if ( pasteModuleCode ) {
+		try {
+			pasteModuleProperies = JSON.parse( pasteModuleCode );
+		} catch(e) {
+			console.log( "Can't parse copy/paste string into JSON:" );
+			console.log( e );
+		}
+	}
+
+	if ( pasteModuleProperies ) {
+		// Does module id from paste data match with current block?
+		if ( pasteModuleProperies.module_id === currentModuleEl.dataset.module ) {
+			const currentModuleCodeContainer = currentModuleEl.querySelector('.dslca-module-code');
+			const currentModuleCode = currentModuleCodeContainer.innerHTML;
+			let currentModuleProperties = false;
+			try {
+				currentModuleProperties = JSON.parse( currentModuleCode );
+			} catch(e) {
+				console.log( "Can't parse current module code into JSON:" );
+				console.log( e );
+			}
+
+			if ( currentModuleProperties ) {
+				let modulePropertiesChanged = false;
+				for (let propertyId in pasteModuleProperies) {
+					// Override all styling properties with the ones from pasted styles.
+					if ( propertyId.includes( 'css_' ) ) {
+						// console.log(  propertyId +  " : "  + JSON.parse(JSON.stringify( currentModuleProperties[ propertyId ] )) + " > " + JSON.parse(JSON.stringify( pasteModuleProperies[ propertyId ] )) );
+						currentModuleProperties[ propertyId ] = pasteModuleProperies[ propertyId ];
+						modulePropertiesChanged = true;
+					}
+				}
+
+				if ( modulePropertiesChanged ) {
+					// Prepare and call AJAX module redraw request.
+					currentModuleProperties['action'] = 'dslc-ajax-add-module';
+					currentModuleProperties['dslc'] = 'active';
+					currentModuleProperties['dslc_module_id'] = currentModuleProperties.module_id;
+					currentModuleProperties['dslc_module_instance_id'] = currentModuleProperties.module_instance_id;
+					currentModuleProperties['dslc_post_id'] = currentModuleProperties.post_id;
+
+					if ( dslcModule.hasClass('dslca-preload-preset') )
+						currentModuleProperties['dslc_preload_preset'] = 'enabled';
+					else
+						currentModuleProperties['dslc_preload_preset'] = 'disabled';
+
+					dslcModule.removeClass('dslca-preload-preset');
+					currentModuleProperties.dslc_url_vars = LiveComposer.Utils.get_page_params();
+
+					/**
+					 * Call AJAX for module redraw
+					 */
+					jQuery.post(
+						DSLCAjax.ajaxurl, currentModuleProperties,
+						function( response ) {
+							if ( response ) {
+								dslcModule.after(response.output).next().addClass('dslca-module-being-edited');
+								dslcModule.remove();
+								window.dslc_generate_code();
+								window.dslc_show_publish_button();
+
+								LiveComposer.Builder.PreviewAreaWindow.dslc_carousel();
+								LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();
+
+								LiveComposer.Builder.PreviewAreaWindow.dslc_tabs();
+								LiveComposer.Builder.PreviewAreaWindow.dslc_init_accordion();
+
+								jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-module-being-edited');
+							}
+						}
+					);
+				}
+			}
+		}
+	}
 });
 
 /**
@@ -801,7 +900,8 @@ function dslc_dm_get_defaults( module ) {
 	if ( window.dslcDebug ) console.log( 'dslc_dm_get_defaults' );
 
 	// The module code value
-	var optionsCode = module.find('.dslca-module-code').val();
+	// var optionsCode = module.find('.dslca-module-code').val(); – Don't use. Causes bugs!
+	var optionsCode = module.find('.dslca-module-code').innerHTML;
 
 	// Ajax call to get the plain PHP code
 	jQuery.post(

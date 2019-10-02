@@ -1865,6 +1865,20 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 	/* Manage */
 
 
+	/* Special class to show/hide UI elements when CMD button pressed */
+	body .dslca-cmd {
+		display: none;
+	}
+
+	body.key-press-cmd .dslca-cmd-hide {
+		display: none;
+	}
+
+	body.key-press-cmd  .dslca-cmd,
+	body.key-press-cmd  .dslca-cmd.dslca-manage-action{
+		display: flex;
+	}
+
 	/* Icons block styling */
 
 	/* Icon element */
