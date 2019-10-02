@@ -147,7 +147,7 @@ document.addEventListener('pasteModuleStyles', function (customEvent) {
 		// Does module id from paste data match with current block?
 		if ( pasteModuleProperies.module_id === currentModuleEl.dataset.module ) {
 			const currentModuleCodeContainer = currentModuleEl.querySelector('.dslca-module-code');
-			const currentModuleCode = currentModuleCodeContainer.innerHTML;
+			const currentModuleCode = currentModuleCodeContainer.innerText;
 			let currentModuleProperties = false;
 			try {
 				currentModuleProperties = JSON.parse( currentModuleCode );

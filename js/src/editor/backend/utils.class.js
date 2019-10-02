@@ -144,11 +144,11 @@ const Utils = {
 
 		// Update raw code
 		module_code_container.value = module_code;
-		module_code_container.innerHTML = module_code; // See comment block below
+		module_code_container.innerText = module_code; // See comment block below
 
 		// Change the property in hidden textarea as well
 		property_container.value = property_value;
-		property_container.innerHTML  = property_value; // See comment block below
+		property_container.innerText  = property_value; // See comment block below
 
 		/**
 		 * FireFox will not duplicate textarea value properly using .cloneNode(true)
@@ -184,7 +184,7 @@ const Utils = {
 
 		// Update raw code
 		section_code_container.value = section_code;
-		section_code_container.innerHTML = section_code; // See comment block below
+		section_code_container.innerText = section_code; // See comment block below
 
 		// Change the property in hidden textarea as well
 		property_container.setAttribute( 'value', property_value );
