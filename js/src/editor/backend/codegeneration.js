@@ -434,8 +434,9 @@ export const generateSectionCode = ( theModulesSection ) => {
 
 			try {
 				// Get module's LC data
-				moduleCode = dslc_module[0].querySelector('.dslca-module-code').value;
-
+				// moduleCode = dslc_module[0].querySelector('.dslca-module-code').value; – Don't use. Creating bugs!
+				// moduleCode = dslc_module[0].querySelector('.dslca-module-code').innerHTML;
+				moduleCode = dslc_module[0].querySelector('.dslca-module-code').innerText;
 			} catch(err) {
 				console.info( 'No DSLC code found in module: ' + dslc_module[0].getAttribute('id') );
 			}
@@ -464,7 +465,8 @@ export const generateSectionCode = ( theModulesSection ) => {
 				});
 
 				// Put optimized code back into the hidden textarea.
-				dslc_module[0].querySelector('.dslca-module-code').value = JSON.stringify(moduleCodeJSON);
+				// dslc_module[0].querySelector('.dslca-module-code').value = JSON.stringify(moduleCodeJSON); - Don't use. Creating bugs!
+				dslc_module[0].querySelector('.dslca-module-code').innerText = JSON.stringify(moduleCodeJSON);
 
 				// Add the module JSON as array item
 				moduleAreaJSON['content'].push( moduleCodeJSON );
