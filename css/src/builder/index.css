@@ -854,6 +854,16 @@ body a:focus {
 					position: relative;
 				}
 
+				.dslca-module-edit-label .dslca-option-breakpoint{
+					background: none;
+					box-shadow: none;
+					border: none;
+					height: auto;
+					min-height: 0;
+					line-height: 1;
+					padding: 0;
+				}
+
 				.dslca-module-edit-field {
 
 				}

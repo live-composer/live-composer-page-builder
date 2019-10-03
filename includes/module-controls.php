@@ -670,14 +670,26 @@ class LC_Control {
 	}
 
 	private function get_label() {
-
 		$module_control = $this->_module_control;
+
+		// Set 'Option Label' value.
+		$option_label = '';
+		if ( isset( $module_control['label'] ) ) {
+			$option_label = esc_html( $module_control['label'] );
+		}
+
+		// https://getbootstrap.com/docs/4.3/layout/overview/#responsive-breakpoints
 		$output = '';
 		$output .= '<span class="dslca-module-edit-label">';
+		$output .= '<select class="dslca-option-breakpoint">';
 
-		if ( isset( $module_control['label'] ) ) {
-			$output .= esc_html( $module_control['label'] );
-		}
+		$output .= '	<option value="xs+">' . $option_label . '</option>';
+		$output .= '	<option value="sm+">' . $option_label . ' ∙ sm+</option>';
+		$output .= '	<option value="md+">' . $option_label . ' ∙ md+</option>';
+		$output .= '	<option value="lg+">' . $option_label . ' ∙ lg+</option>';
+		$output .= '	<option value="xl+">' . $option_label . ' ∙ xl+</option>';
+
+		$output .= '</select>';
 
 		/**
 		 * Display styling control toggle [On/Off]
