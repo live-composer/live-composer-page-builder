@@ -1131,6 +1131,11 @@ export const resetResponsiveOptions = () => {
 		activeSettings.forEach( ( element )=> {
 			const optionId =  element.querySelector( '.dslca-module-edit-field' ).dataset.id;
 
+			// Don't want to reset value of the breakpoint enabler.
+			if ( 'css_res_t' === optionId || 'css_res_p' === optionId ) {
+				return;
+			}
+
 			var control         = jQuery('.dslca-module-edit-option-' + optionId );
 			var control_storage = control.find('.dslca-module-edit-field');
 
