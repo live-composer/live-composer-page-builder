@@ -121,8 +121,6 @@ jQuery(document).ready(function($){
 		var dslcPrev = jQuery('.dslca-options-filter-hook.dslca-active').data('section');
 		var currentSection = jQuery(this).data('section');
 
-		console.log( "currentSection:" ); console.log( currentSection );
-
 		jQuery('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
 		jQuery(this).addClass('dslca-active');
 
