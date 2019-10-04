@@ -1113,8 +1113,14 @@ body a:focus {
 			/*padding-right: 100px;*/
 		}
 
+			/* Show reset responsive settings button only in Responsive tab */
+			.dslca-container:not([data-current-section=responsive]) .dslca-clear-responsive-options {
+				display: none;
+			}
+
 			.dslca-module-edit-options-tab-hook,
-			.dslca-pseudo-module-edit-options-tab-hook {
+			.dslca-pseudo-module-edit-options-tab-hook,
+			.dslca-clear-responsive-options {
 				color: #fff;
 				cursor: pointer;
 
@@ -1137,13 +1143,15 @@ body a:focus {
 			}
 
 			.dslca-module-edit-options-tab-hook:hover,
-			.dslca-pseudo-module-edit-options-tab-hook:hover {
+			.dslca-pseudo-module-edit-options-tab-hook:hover,
+			.dslca-clear-responsive-options:hover {
 				background: rgba(169, 239, 255, 0.17);
 				color: #fff;
 			}
 
 			.dslca-module-edit-options-tab-hook[data-id="animation_styling"],
-			.dslca-module-edit-options-tab-hook[data-id="presets_styling"] {
+			.dslca-module-edit-options-tab-hook[data-id="presets_styling"],
+			.dslca-clear-responsive-options {
 				float: right;
 			}
 
