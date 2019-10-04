@@ -104,6 +104,14 @@ jQuery(document).ready(function($){
 	});
 
 	/**
+	 * Hook - Reset Responsive Settings
+	 */
+	 jQuery(document).on( 'click', '.dslca-clear-responsive-options', function(e){
+		e.preventDefault();
+		resetResponsiveOptions();
+	});
+
+	/**
 	 * Hook - Option Section Switch
 	 */
 	jQuery(document).on( 'click', '.dslca-options-filter-hook', function(e){
@@ -113,9 +121,13 @@ jQuery(document).ready(function($){
 		var dslcPrev = jQuery('.dslca-options-filter-hook.dslca-active').data('section');
 		var currentSection = jQuery(this).data('section');
 
+		console.log( "currentSection:" ); console.log( currentSection );
+
 		jQuery('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
 		jQuery(this).addClass('dslca-active');
 
+		jQuery('.dslca-container-loader')
+		document.querySelector( '.dslca-container' ).dataset.currentSection = currentSection;
 
 		dslc_module_options_section_filter( currentSection );
 
@@ -483,8 +495,12 @@ const onModuleOptionsChange = () => {
 			 * Change old value with new value
 			 */
 
-			if ( undefined !== dslcOptionValue ) {
+			if ( undefined !== dslcOptionValue && null !== dslcOptionValue ) {
 				dslcOptionValue = dslcOptionValue.trim().replace(/<textarea/g, '<lctextarea').replace(/<\/textarea/g, '</lctextarea');
+			}
+
+			if ( null === dslcOptionValue ) {
+				dslcOptionValue = '';
 			}
 
 			jQuery( '.dslca-module-options-front textarea[data-id="' + dslcOptionID + '"]', dslcModule ).val(dslcOptionValue);
@@ -1105,6 +1121,83 @@ function dslc_module_options_section_filter( sectionID ) {
 	// Recall module options tab
 	elementOptionsTabs();
 }
+
+export const resetResponsiveOptions = () => {
+	// Get active tab (Tablet/Phone)
+	const currentTab = document.querySelector('.dslca-module-edit-options-tab-hook.dslca-active').dataset.id;
+
+	if ( 'tablet_responsive' === currentTab || 'phone_responsive' === currentTab ) {
+		// Hide/Show options
+		const activeSettings =  document.querySelectorAll('.dslca-module-edit-option[data-tab="' + currentTab + '"]');
+
+		activeSettings.forEach( ( element )=> {
+			const optionId =  element.querySelector( '.dslca-module-edit-field' ).dataset.id;
+
+			var control         = jQuery('.dslca-module-edit-option-' + optionId );
+			var control_storage = control.find('.dslca-module-edit-field');
+
+			/* // Get the element we are editing
+			var module = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument);
+
+			// Get the element id
+			var module_id = module[0].id;
+
+			var responsive_prefix = '';
+
+			if ( 'tablet_responsive' === control.data('tab') ) {
+				responsive_prefix = 'body.dslc-res-tablet ';
+			} else if ( 'phone_responsive' === control.data('tab') ) {
+				responsive_prefix = 'body.dslc-res-phone ';
+			}
+
+			var affect_on_change_el = control_storage.data('affect-on-change-el');
+
+			if ( affect_on_change_el === undefined) return;
+
+			var affect_on_change_elmts = affect_on_change_el.split( ',' );
+
+			affect_on_change_el = '';
+
+			// Loop through elements (useful when there are multiple elements)
+			for ( var i = 0; i < affect_on_change_elmts.length; i++ ) {
+
+				if ( i > 0 ) {
+
+					affect_on_change_el += ', ';
+				}
+
+				affect_on_change_el += responsive_prefix + '#' + module_id + ' ' + affect_on_change_elmts[i];
+			}
+
+			var affect_on_change_rule  = control_storage.data('affect-on-change-rule').replace(/ /g,'');
+			var affect_on_change_rules = affect_on_change_rule.split( ',' );
+
+			var control_value;
+			var control_data_ext = control_storage.data('ext');
+
+
+			// Disable
+
+			control_value = dslc_get_control_value(control_id);
+			// Temporary backup the current value as data attribute
+			control_storage.data( 'val-bckp', control_value );
+
+			// Loop through rules (useful when there are multiple rules)
+			for ( var i = 0; i < affect_on_change_rules.length; i++ ) {
+
+				// remove css rule in element inline style
+				jQuery( affect_on_change_el, LiveComposer.Builder.PreviewAreaDocument ).css( affect_on_change_rules[i] , '' );
+				// remove css rule in css block
+				disable_css_rule ( affect_on_change_el, affect_on_change_rules[i], module_id);
+				// PROBLEM do not work with multiply rules ex.: .dslc-text-module-content,.dslc-text-module-content p
+			}
+ */
+			control_storage.val('').trigger('change');
+		} )
+	}
+}
+
+
 
 /**
  * MODULES SETTINGS PANEL - Show module options tab

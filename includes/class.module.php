@@ -2523,7 +2523,7 @@ class DSLC_Module {
 		 */
 
 		$class_show_on = '';
-		
+
 		// Add visibility classes but only is this setting set or it's not set to false (boolean).
 		if ( isset( $options['css_show_on'] ) && $options['css_show_on'] !== false ) {
 

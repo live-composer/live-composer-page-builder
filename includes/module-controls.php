@@ -47,7 +47,13 @@ class LC_Module_Options_Panel {
 		$tabs_render = '';
 
 		foreach ( $this->get_tabs() as $tab ) {
-			$tabs_render .= '<a href="#" class="dslca-module-edit-options-tab-hook" data-section="' . $tab['section'] . '" data-id="' . $tab['id'] . '">' . $tab['title'] . '</a>';
+			$tabs_render .= '<a href="#" class="dslca-module-edit-options-tab-hook" data-section="' . $tab['section'] . '" data-id="' . $tab['id'] . '">' . $tab['title'] . $trash_icon . '</a>';
+
+			// Add special trash icon to clearn all the settings at once
+			// for Responsive tabs.
+			if ( 'phone_responsive' === $tab['id'] ) {
+				$tabs_render .= '<a href="#" class="dslca-clear-responsive-options" title="' . esc_attr( __('Reset responsive options', 'live-composer-page-builder' ) ) . '" ><span class="dslca-icon dslc-icon-trash"></span></a>';
+			}
 		}
 		return $tabs_render;
 	}
