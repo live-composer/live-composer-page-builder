@@ -375,6 +375,7 @@ body.rtl .dslc-last-col {
 .dslc-valign-middle,
 .dslc-valign-bottom {
 	display: flex;
+	flex-wrap: wrap;
 }
 
 .dslc-valign-top {
