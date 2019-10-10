@@ -1732,12 +1732,18 @@ function dslc_modules_area_front( $atts, $content = null, $version = 1, $is_head
 			$pos_class = 'dslc-first-col';
 	}
 
-
 	if ( $dslc_active && ! $is_header_footer ) {
 		$admin_class = ' dslc-modules-area-dnd';
 	}
 
-	$output = '<div class="dslc-modules-area dslc-col dslc-' . $atts['size'] . '-col ' . $pos_class . $admin_class . '" data-size="' . $atts['size'] . '">';
+	$valign_class = '';
+	if ( isset( $atts['valign'] ) ) {
+		$valign_class = ' dslc-valign-' . $atts['valign'] . ' ';
+	} else {
+		$atts['valign'] = '';
+	}
+
+	$output = '<div class="dslc-modules-area dslc-col dslc-' . $atts['size'] . '-col ' . $pos_class . $valign_class . $admin_class . '" data-size="' . $atts['size'] . '" data-valign="' . $atts['valign'] . '">';
 
 	if ( $dslc_active && ! $is_header_footer && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
@@ -1759,14 +1765,25 @@ function dslc_modules_area_front( $atts, $content = null, $version = 1, $is_head
 					<svg class="feather">
 						<use xlink:href="' . esc_url( $ui_icons_url ) . '/feather-sprite.svg#columns"/>
 					</svg>
-					<div class="dslca-change-width-modules-area-options">';
-		$output .= '<span>' . __( 'Container Width', 'live-composer-page-builder' ) . '</span>';
-		$output .= '<span data-size="1">1/12</span><span data-size="2">2/12</span>
+					<div class="dslca-change-width-modules-area-options">
+						<span>' . __( 'Container Width', 'live-composer-page-builder' ) . '</span>
+						<span data-size="1">1/12</span><span data-size="2">2/12</span>
 						<span data-size="3">3/12</span><span data-size="4">4/12</span>
 						<span data-size="5">5/12</span><span data-size="6">6/12</span>
 						<span data-size="7">7/12</span><span data-size="8">8/12</span>
 						<span data-size="9">9/12</span><span data-size="10">10/12</span>
 						<span data-size="11">11/12</span><span data-size="12">12/12</span>
+					</div>
+				</span>
+				<span class="dslca-manage-action dslca-change-vertial-align-module-area-hook" title="Change vertical align" >
+					<svg class="feather">
+						<use xlink:href="' . esc_url( $ui_icons_url ) . '/feather-sprite.svg#git-commit"/>
+					</svg>
+					<div class="dslca-change-vertial-align-module-area-options">
+						<span>' . __( 'Vertical Align', 'live-composer-page-builder' ) . '</span>
+						<span data-valign="top" class="dslc-popup-option">⬆️ Top</span>
+						<span data-valign="middle" class="dslc-popup-option">↕️ Middle</span>
+						<span data-valign="bottom" class="dslc-popup-option">⬇️ Bottom</span>
 					</div>
 				</span>
 				<span class="dslca-manage-action dslca-delete-modules-area-hook" title="Delete" >

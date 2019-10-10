@@ -369,6 +369,26 @@ body.rtl .dslc-last-col {
 }
 
 
+/* Vertical Align */
+
+.dslc-valign-top,
+.dslc-valign-middle,
+.dslc-valign-bottom {
+	display: flex;
+}
+
+.dslc-valign-top {
+	align-items: flex-start;
+}
+
+.dslc-valign-middle {
+	align-items: center;
+}
+
+.dslc-valign-bottom {
+	align-items: flex-end;
+}
+
 
 
 
@@ -3886,3 +3906,4 @@ body em {
 		transform: scaleY(-1); /* Flip. */
 	}
 }
+

@@ -305,14 +305,13 @@ export const generateSectionCode = ( theModulesSection ) => {
 	jQuery('.dslc-modules-area', modulesSection).each(function(){
 
 		// Reset width counter for modules
-		currPerRow = 0;
-
-		// Vars
-		modulesArea = jQuery(this);
-		modulesAreaSize = parseInt( modulesArea.data('size') );
-		modulesAreaLastState = 'no';
+		var currPerRow = 0,
+		// Other Vars
+		modulesArea = jQuery(this),
+		modulesAreaSize = parseInt( modulesArea.data('size') ),
+		modulesAreaVAlign = modulesArea.data('valign'),
+		modulesAreaLastState = 'no',
 		modulesAreaFirstState = 'no';
-
 		// Increment area column counter
 		currPerRowA += modulesAreaSize;
 
@@ -358,10 +357,7 @@ export const generateSectionCode = ( theModulesSection ) => {
 		// Open the modules area ( area ) shortcode
 		// composerCode = composerCode + '[dslc_modules_area last="' + modulesAreaLastState + '" first="' + modulesAreaFirstState + '" size="' + modulesAreaSize + '"] ';
 
-		var moduleAreaJSON = '{"element_type":"module_area","last":"' + modulesAreaLastState + '","first":"' + modulesAreaFirstState + '","size":"' + modulesAreaSize + '"}';
-
-		// pageCodeInJson = pageCodeInJson +  moduleAreaJSON + ',';
-
+		var moduleAreaJSON = '{"element_type":"module_area","last":"' + modulesAreaLastState + '","first":"' + modulesAreaFirstState + '","size":"' + modulesAreaSize + '","valign":"' + modulesAreaVAlign + '"}';
 		moduleAreaJSON = JSON.parse( moduleAreaJSON );
 
 		// Delete attribute 'give_new_id'.

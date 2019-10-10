@@ -212,7 +212,6 @@ body a:focus {
 }
 
 .dslca-container {
-	/* font-family: 'Open Sans', sans-serif; */
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 	font-size: 13px;
 
@@ -2128,6 +2127,8 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 			margin: 0;
 
 			padding: 1px 7px;
+
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 		}
 
 		.dslca-modules-area-manage-inner .dslca-manage-action:first-child {
@@ -2156,7 +2157,8 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 			}
 
 			.dslca-change-width-modules-area-options,
-			.dslca-change-width-module-options {
+			.dslca-change-width-module-options,
+			.dslca-change-vertial-align-module-area-options {
 				background: #fff;
 				border: 1px solid #d9dcdf;
 				border-radius: 3px;
@@ -2169,9 +2171,15 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 				width: 122px;
 			}
 
+			.dslca-change-vertial-align-module-area-options {
+				padding: 12px;
+				padding-top: 18px;
+			}
+
 			/* Show popup when parent icon hovered. */
 			.dslca-change-width-module-hook:hover > .dslca-change-width-module-options,
-			.dslca-change-width-modules-area-hook:hover > .dslca-change-width-modules-area-options{
+			.dslca-change-width-modules-area-hook:hover > .dslca-change-width-modules-area-options,
+			.dslca-change-vertial-align-module-area-hook:hover > .dslca-change-vertial-align-module-area-options {
 				display: block;
 			}
 
@@ -2245,7 +2253,8 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 				}
 
 				.dslca-change-width-modules-area-options span:first-child,
-				.dslca-change-width-module-options span:first-child {
+				.dslca-change-width-module-options span:first-child,
+				.dslca-change-vertial-align-module-area-options span:first-child {
 					background: none;
 					color: #5e636a;
 					display: inline-block;
@@ -2253,6 +2262,10 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 					margin-bottom: 5px;
 					max-width: none;
 					width: auto;
+				}
+
+				.dslca-change-vertial-align-module-area-options span:first-child {
+					margin-bottom: 16px;
 				}
 
 				/* Highlight current width selection */
@@ -2284,6 +2297,21 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 				.dslc-module-front.dslc-12-col .dslca-change-width-module-options span[data-size="12"] {
 					background: #3B6FBE;
 					box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.28) inset;
+					cursor: default;
+				}
+
+				.dslc-popup-option {
+					display: block;
+					width: 100%;
+
+					background: #4785db;
+					border-radius: 3px;
+					font-size: 13px;
+					font-weight: 400;
+					line-height: 24px;
+					margin: 1px;
+					text-align: left;
+
 					cursor: default;
 				}
 

@@ -139,6 +139,42 @@ import { getNewModuleId } from "./module.js";
 	});
 
 	/**
+	 * Hook - Set Vertical Align of the Module Area
+	 */
+	 LiveComposer.Builder.PreviewAreaDocument.on( 'click', '.dslca-change-vertial-align-module-area-hook span', function(){
+		var moduleAreaJQ = jQuery(this).closest('.dslc-modules-area');
+		var newSetting = jQuery(this).data('valign');
+		dslc_modules_area_vertical_align_set( moduleAreaJQ, newSetting );
+	});
+
+	/**
+	* AREAS - Set Width
+	*/
+	function dslc_modules_area_vertical_align_set( areaJQ, newSetting ) {
+		if ( window.dslcDebug ) console.log( 'dslc_modules_area_vertical_align_set' );
+
+		// Generate new class based on align option.
+		var newClass = 'dslc-valign-' + newSetting;
+
+		// Remove previously set align classes,
+		// add new class and set the data-valign attr for storing data.
+		areaJQ
+			.removeClass('dslc-valign-top dslc-valign-middle dslc-valign-bottom')
+			.addClass(newClass)
+			.data('valign', newSetting);
+
+		// Call other functions
+		LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();
+
+		if ( LiveComposer.Builder.Flags.panelOpened ) {
+			return false;
+		}
+
+		window.dslc_generate_code();
+		window.dslc_show_publish_button();
+	}
+
+	/**
 	 * Action - Show/Hide Width Options Popup for the Module Area
 	 */
 	/* LiveComposer.Builder.PreviewAreaDocument.on( 'click', '.dslca-change-width-modules-area-hook', function(e){
@@ -225,6 +261,17 @@ export const modulesAreaAdd = ( row ) => {
 						<span data-size="11">11/12</span><span data-size="12">12/12</span>
 					</div>
 				</span>
+				<span class="dslca-manage-action dslca-change-vertial-align-module-area-hook" title="Change vertical align" >
+					<svg class="feather">
+						<use xlink:href="` + uiIconsUrl +`/feather-sprite.svg#git-commit"/>
+					</svg>
+					<div class="dslca-change-vertial-align-module-area-options">
+						<span>Vertical Align</span>
+						<span data-valign="top" class="dslc-popup-option">⬆️ Top</span>
+						<span data-valign="middle" class="dslc-popup-option">↕️ Middle</span>
+						<span data-valign="bottom" class="dslc-popup-option">⬇️ Bottom</span>
+					</div>
+				</span>
 				<span class="dslca-manage-action dslca-delete-modules-area-hook" title="Delete">
 					<svg class="feather">
 						<use xlink:href="` + uiIconsUrl +`/feather-sprite.svg#x"></use>
@@ -247,7 +294,6 @@ export const modulesAreaAdd = ( row ) => {
 	var emptyModuleAreas = jQuery('.dslc-modules-area-empty', LiveComposer.Builder.PreviewAreaDocument);
 
 	jQuery(emptyModuleAreas).each(function (i,e) {
-
 		new ModuleArea(e);
 	});
 
