@@ -167,6 +167,16 @@ document.addEventListener('pasteModuleStyles', function (customEvent) {
 					}
 				}
 
+				for (let propertyId in currentModuleProperties) {
+					// If property is missing in pasted data make it empty.
+					if ( propertyId.includes( 'css_' ) ) {
+						// console.log(  propertyId +  " : "  + JSON.parse(JSON.stringify( currentModuleProperties[ propertyId ] )) + " > " + JSON.parse(JSON.stringify( pasteModuleProperies[ propertyId ] )) );
+						currentModuleProperties[ propertyId ] !== pasteModuleProperies[ propertyId ];
+						currentModuleProperties[ propertyId ] = '';
+						modulePropertiesChanged = true;
+					}
+				}
+
 				if ( modulePropertiesChanged ) {
 					// Prepare and call AJAX module redraw request.
 					currentModuleProperties['action'] = 'dslc-ajax-add-module';
