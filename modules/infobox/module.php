@@ -3282,7 +3282,7 @@ class DSLC_Info_Box extends DSLC_Module {
 			),
 
 			array(
-				'label' => __( 'Icon Maring', 'live-composer-page-builder' ),
+				'label' => __( 'Icon Margin', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_icon_margin_group',
 				'type' => 'group',
 				'action' => 'open',
