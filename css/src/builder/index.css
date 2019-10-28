@@ -2357,9 +2357,17 @@ body.rtl .dslca-modules-area-placeholder {
 	line-height: 1;
 }
 
-	#dslc-main > .dslc-modules-section:nth-child(1) > .dslc-modules-section-wrapper > .dslc-modules-section-inner > .dslc-modules-area > .dslc-module-front .dslca-module-manage {
-		top: 0;
+#dslc-content .dslc-small-height-module .dslca-module-manage {
+	top: -28px;
+
+	.dslca-module-manage-hook:first-child {
+		border-radius: 3px 0 0 3px;
 	}
+
+	.dslca-module-manage-hook:last-child {
+		border-radius: 0 3px 3px 0;
+	}
+}
 
 	.dslca-module-manage-inner {
 		background: #5890e5;

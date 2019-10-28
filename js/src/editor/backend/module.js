@@ -228,10 +228,23 @@ document.addEventListener('pasteModuleStyles', function (customEvent) {
 
 const adjustZindex = () => {
 	LiveComposer.Builder.PreviewAreaDocument.on( {
-		mouseenter: function() {
+		mouseenter: function(e) {
+			// Adjust z-index.
 			jQuery('.dslca-modules-section-manage', LiveComposer.Builder.PreviewAreaDocument).css("z-index", "99998");
+
+			// Adjust module editing controls for too small elements.
+			const moduleEl = e.target.closest("[data-module-id]");
+			const elementHeight = moduleEl.offsetHeight;
+			const elementWidth = moduleEl.offsetWidth;
+
+			if ( elementHeight < 60 && elementWidth < 300 ) {
+				moduleEl.classList.add('dslc-small-height-module');
+			} else {
+				moduleEl.classList.remove('dslc-small-height-module');
+			}
+
 		},
-		mouseleave: function() {
+		mouseleave: function(e) {
 			jQuery('.dslca-modules-section-manage', LiveComposer.Builder.PreviewAreaDocument).css("z-index", "999999");
 		},
 	}, '.dslca-change-width-module-hook, .dslc-module-front .dslca-module-manage');
@@ -533,7 +546,6 @@ export const getNewModuleId = ( moduleEl ) => {
 	// Put CSS code back into <style> element
 	inline_css_el.textContent = inline_css_code;
 
-
 	// Update module ID in raw base64 code (dslc_code) of the module
 	LiveComposer.Utils.update_module_property_raw( moduleEl, 'module_instance_id', dslc_module_id );
 }
@@ -732,7 +744,6 @@ export const moduleOutputDefault = ( dslc_module_id, callback ) => {
 			dslc_new_module: true
 		},
 		function( response ) {
-
 			callback(response);
 		}
 	);
