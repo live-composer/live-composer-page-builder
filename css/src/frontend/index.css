@@ -3908,3 +3908,21 @@ body em {
 	}
 }
 
+
+/**
+ * Responsive fixes for various modules.
+ */
+
+ /* Smartphone */
+@media only screen and ( max-width: 767px ) {
+
+	/* Project Thumbs */
+	#dslc-content .dslc-post-thumb{
+		width: 100%;
+	}
+
+	#dslc-content .dslc-project-thumb {
+		float: none;
+		margin-right: 0;
+	}
+}
