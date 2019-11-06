@@ -86,6 +86,11 @@ body.dslca-enabled:not(.dslca-composer-hidden) #dslc-header.dslc-header-pos-abso
 	/*z-index: 0; – Breaks module width change popup */
 }
 
+.dslc-icon {
+	text-align: center;
+	vertical-align: middle;
+}
+
 /**
  * Grid System
  */
@@ -363,6 +368,27 @@ body.rtl .dslc-last-col {
 	margin-right: 5px;
 }
 
+
+/* Vertical Align */
+
+.dslc-valign-top,
+.dslc-valign-middle,
+.dslc-valign-bottom {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.dslc-valign-top {
+	align-items: flex-start;
+}
+
+.dslc-valign-middle {
+	align-items: center;
+}
+
+.dslc-valign-bottom {
+	align-items: flex-end;
+}
 
 
 
@@ -3879,5 +3905,24 @@ body em {
 
 	&.dslc-flip-vert {
 		transform: scaleY(-1); /* Flip. */
+	}
+}
+
+
+/**
+ * Responsive fixes for various modules.
+ */
+
+ /* Smartphone */
+@media only screen and ( max-width: 767px ) {
+
+	/* Project Thumbs */
+	#dslc-content div.dslc-post-thumb{
+		width: 100%;
+	}
+
+	#dslc-content div.dslc-project-thumb {
+		float: none;
+		margin-right: 0;
 	}
 }

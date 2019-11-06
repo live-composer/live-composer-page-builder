@@ -627,9 +627,9 @@ class DSLC_Logo extends DSLC_Module {
 		<div class="dslc-logo">
 
 			<?php if ( ! has_custom_logo() ) : ?>
-
-				<div class="dslc-notification dslc-red"><?php _e( 'No logo has been set yet. Please add your logo here: WP Admin -> Appearance -> Customize -> Site Identity -> Logo.', 'live-composer-page-builder' ); ?></div>
-
+				<?php if ( $dslc_is_admin ) : ?>
+					<div class="dslc-notification dslc-red"><?php _e( 'No logo has been set yet. Please add your logo here: WP Admin -> Appearance -> Customize -> Site Identity -> Logo.', 'live-composer-page-builder' ); ?></div>
+				<?php endif; ?>
 			<?php else : ?>
 
 				<?php

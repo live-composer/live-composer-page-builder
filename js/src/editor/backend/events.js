@@ -52,5 +52,17 @@ export const eventsInit = () =>{
 			document.dispatchEvent( wysiwygEdit );
 		}
 
+		if ( event.target.matches( '[data-event="module-style-copy"]' ) ) {
+			// Create a new "Copy Modyle Style" event
+			const copyStyles = new CustomEvent('copyModuleStyles', { detail: event.target });
+			document.dispatchEvent( copyStyles );
+		}
+
+		if ( event.target.matches( '[data-event="module-style-paste"]' ) ) {
+			// Create a new "Paste Modyle Style" event
+			const pasteStyles = new CustomEvent('pasteModuleStyles', { detail: event.target });
+			document.dispatchEvent( pasteStyles );
+		}
+
 	}, false);
 }

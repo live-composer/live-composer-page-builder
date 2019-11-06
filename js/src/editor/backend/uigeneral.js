@@ -641,18 +641,24 @@ function dslc_get_control_value ( control_id ) {
 export const keypressEvents = () => {
 
 	jQuery( [document, LiveComposer.Builder.PreviewAreaWindow.document ] ).unbind('keydown').bind('keydown', function (keydown_event) {
-
 		// Modal window [ESC]/[Enter]
-		window.dslc_modal_keypress_events(keydown_event);
+		window.dslc_modal_keypress_events( keydown_event );
 
 		// Prevent backspace from navigating back
-		dslc_disable_backspace_navigation(keydown_event);
+		dslc_disable_backspace_navigation( keydown_event );
 
 		// Prompt Modal on F5
-		dslc_notice_on_refresh(keydown_event);
+		dslc_notice_on_refresh( keydown_event );
 
 		// Save Page
-		dslc_save_page(keydown_event);
+		dslc_save_page( keydown_event );
+
+		// CMD button press event.
+		dslc_cmd_press( keydown_event );
+	});
+
+	jQuery( [document, LiveComposer.Builder.PreviewAreaWindow.document ] ).unbind('keyup').bind('keyup', function (keyup_event) {
+		dslc_cmd_unpress( keyup_event );
 	});
 }
 
@@ -733,6 +739,24 @@ function dslc_save_page(e) {
 	        e.preventDefault();
 	        return false;
 	    }
+    }
+}
+
+/**
+ * If Command key is pressed.
+ */
+function dslc_cmd_press( e ) {
+    if ( e.metaKey || e.ctrlKey ) {
+		LiveComposer.Builder.PreviewAreaWindow.document.querySelector('body').classList.add( 'key-press-cmd' );
+    }
+}
+
+/**
+ * If Command key is released.
+ */
+function dslc_cmd_unpress( e ) {
+    if ( e.key === "Meta" ) {
+		LiveComposer.Builder.PreviewAreaWindow.document.querySelector('body').classList.remove( 'key-press-cmd' );
     }
 }
 

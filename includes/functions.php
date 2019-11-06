@@ -532,7 +532,15 @@ function dslc_get_code( $postID = false, $draft = true ) {
 	} else {
 
 		// Load regular ( current ) LC code.
-		$code = get_post_meta( $postID, 'dslc_code', true );
+		$code_set = get_post_meta( $postID, 'dslc_code' );
+
+		// For some reason, sometimes the actual code get stored
+		// under the second item in the array.
+		foreach ($code_set as $value) {
+			if ( ! empty( $value ) ) {
+				$code = $value;
+			}
+		}
 
 	}
 

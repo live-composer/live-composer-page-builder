@@ -327,15 +327,14 @@ function dslc_ajax_save_composer( $atts ) {
 		 * so we need stripslashes in the code below.
 		 */
 		// $serialized_composer_code = json_decode( stripslashes( $composer_code ), true );
-		$serialized_composer_code = stripslashes( $composer_code );
+		$serialized_composer_code = trim( stripslashes( $composer_code ) );
 
 		/**
 		 * Function: wp_slash
 		 * By default WordPress deeply strips all the slashes when saves metadata.
-		 * wp_slash compensate this effect by adding extra level of slahsed.
+		 * wp_slash compensate this effect by adding extra level of slahses.
 		 * See http://wordpress.stackexchange.com/a/129155.
 		 */
-
 		// Add/update the post/page with the composer code.
 		if ( update_post_meta( $post_id, 'dslc_code', wp_slash( $serialized_composer_code ) ) ) {
 			$response['status'] = 'success';

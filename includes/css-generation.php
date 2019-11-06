@@ -821,7 +821,6 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 			$output_border_declaration = false;
 
 			if ( isset( $css_declaration_borders['border-width'] ) ) {
-
 				$border_width = $css_declaration_borders['border-width'];
 				if ( ! empty( $border_width ) && '0px' !== $border_width ) {
 					$output_border_declaration = true;
@@ -836,7 +835,6 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 			// Remove border-style property if width isn't set or is set to 0px.
 			// This rule fixes bugs with extra borders on text/shortcode elements.
 			if ( isset( $css_declaration_borders['border-style'] ) && 'none' !== $css_declaration_borders['border-style'] ) {
-				
 				if ( ( empty( $css_declaration_borders['border-width'] ) || '0px' === $css_declaration_borders['border-width'] ) && ! isset( $css_declaration_borders['border-bottom-width'] ) ) {
 					unset( $css_declaration_borders['border-style'] );
 				}
@@ -847,23 +845,15 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 			// – CSS rules are for :hover or active state
 			// – CSS rules are for inactive state or current item ( Module Navigation )
 			// Otherwise it breaks live preview for border properties.
-			if ( $dslc_active || stristr( $css_selector, ':hover' ) ||
+			if ( $dslc_active ||
+					stristr( $css_selector, ':hover' ) ||
+					stristr( $css_selector, ':focus' ) ||
+					stristr( $css_selector, ' input' ) ||
 					stristr( $css_selector, '.dslc-active' ) ||
 					stristr( $css_selector, '.dslc-inactive' ) ||
 					stristr( $css_selector, '.current-menu-item' ) ) {
 				$output_border_declaration = true;
 			}
-
-			/*
-			if ( $output_border_declaration && isset( $css_declaration_borders['border-style'] )  ) {
-				$border_style = $css_declaration_borders['border-style'];
-				if ( ! empty( $border_style ) ) {
-					$output_border_declaration = true;
-				} else {
-					$output_border_declaration = false;
-				}
-			}
-			*/
 
 			if ( $output_border_declaration ) {
 				$css_declaration = array_merge( $css_declaration, $css_declaration_borders );

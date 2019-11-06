@@ -305,14 +305,13 @@ export const generateSectionCode = ( theModulesSection ) => {
 	jQuery('.dslc-modules-area', modulesSection).each(function(){
 
 		// Reset width counter for modules
-		currPerRow = 0;
-
-		// Vars
-		modulesArea = jQuery(this);
-		modulesAreaSize = parseInt( modulesArea.data('size') );
-		modulesAreaLastState = 'no';
+		var currPerRow = 0,
+		// Other Vars
+		modulesArea = jQuery(this),
+		modulesAreaSize = parseInt( modulesArea.data('size') ),
+		modulesAreaVAlign = modulesArea.data('valign'),
+		modulesAreaLastState = 'no',
 		modulesAreaFirstState = 'no';
-
 		// Increment area column counter
 		currPerRowA += modulesAreaSize;
 
@@ -358,10 +357,7 @@ export const generateSectionCode = ( theModulesSection ) => {
 		// Open the modules area ( area ) shortcode
 		// composerCode = composerCode + '[dslc_modules_area last="' + modulesAreaLastState + '" first="' + modulesAreaFirstState + '" size="' + modulesAreaSize + '"] ';
 
-		var moduleAreaJSON = '{"element_type":"module_area","last":"' + modulesAreaLastState + '","first":"' + modulesAreaFirstState + '","size":"' + modulesAreaSize + '"}';
-
-		// pageCodeInJson = pageCodeInJson +  moduleAreaJSON + ',';
-
+		var moduleAreaJSON = '{"element_type":"module_area","last":"' + modulesAreaLastState + '","first":"' + modulesAreaFirstState + '","size":"' + modulesAreaSize + '","valign":"' + modulesAreaVAlign + '"}';
 		moduleAreaJSON = JSON.parse( moduleAreaJSON );
 
 		// Delete attribute 'give_new_id'.
@@ -434,8 +430,9 @@ export const generateSectionCode = ( theModulesSection ) => {
 
 			try {
 				// Get module's LC data
-				moduleCode = dslc_module[0].querySelector('.dslca-module-code').value;
-
+				// moduleCode = dslc_module[0].querySelector('.dslca-module-code').value; – Don't use. Creating bugs!
+				// moduleCode = dslc_module[0].querySelector('.dslca-module-code').innerHTML;
+				moduleCode = dslc_module[0].querySelector('.dslca-module-code').innerText;
 			} catch(err) {
 				console.info( 'No DSLC code found in module: ' + dslc_module[0].getAttribute('id') );
 			}
@@ -464,7 +461,8 @@ export const generateSectionCode = ( theModulesSection ) => {
 				});
 
 				// Put optimized code back into the hidden textarea.
-				dslc_module[0].querySelector('.dslca-module-code').value = JSON.stringify(moduleCodeJSON);
+				// dslc_module[0].querySelector('.dslca-module-code').value = JSON.stringify(moduleCodeJSON); - Don't use. Creating bugs!
+				dslc_module[0].querySelector('.dslca-module-code').innerText = JSON.stringify(moduleCodeJSON);
 
 				// Add the module JSON as array item
 				moduleAreaJSON['content'].push( moduleCodeJSON );

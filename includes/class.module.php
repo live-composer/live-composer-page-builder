@@ -2523,7 +2523,7 @@ class DSLC_Module {
 		 */
 
 		$class_show_on = '';
-		
+
 		// Add visibility classes but only is this setting set or it's not set to false (boolean).
 		if ( isset( $options['css_show_on'] ) && $options['css_show_on'] !== false ) {
 
@@ -2665,17 +2665,28 @@ class DSLC_Module {
 						<use xlink:href="<?php echo esc_url( $ui_icons_url ); ?>/feather-sprite.svg#sliders"/>
 					</svg>
 				</span>
-				<span class="dslca-manage-action dslca-module-manage-hook dslca-copy-module-hook" title="<?php esc_attr_e( 'Duplicate', 'live-composer-page-builder' ); ?>" data-event="module-duplicate">
+				<span class="dslca-manage-action dslca-module-manage-hook dslca-module-edit-hook dslca-cmd" title="<?php esc_attr_e( 'Copy Styles', 'live-composer-page-builder' ); ?>" data-event="module-style-copy">
+					<svg class="feather">
+						<use xlink:href="<?php echo esc_url( $ui_icons_url ); ?>/feather-sprite.svg#share"/>
+					</svg>
+				</span>
+				<span class="dslca-manage-action dslca-module-manage-hook dslca-module-edit-hook dslca-cmd" title="<?php esc_attr_e( 'Paste Styles', 'live-composer-page-builder' ); ?>" data-event="module-style-paste">
+					<svg class="feather">
+						<use xlink:href="<?php echo esc_url( $ui_icons_url ); ?>/feather-sprite.svg#download"/>
+					</svg>
+				</span>
+
+				<span class="dslca-manage-action dslca-module-manage-hook dslca-copy-module-hook dslca-cmd-hide" title="<?php esc_attr_e( 'Duplicate', 'live-composer-page-builder' ); ?>" data-event="module-duplicate">
 					<svg class="feather">
 						<use xlink:href="<?php echo esc_url( $ui_icons_url ); ?>/feather-sprite.svg#copy"/>
 					</svg>
 				</span>
-				<span class="dslca-manage-action dslca-module-manage-hook dslca-move-module-hook" title="<?php esc_attr_e( 'Drag to move', 'live-composer-page-builder' ); ?>">
+				<span class="dslca-manage-action dslca-module-manage-hook dslca-move-module-hook dslca-cmd-hide" title="<?php esc_attr_e( 'Drag to move', 'live-composer-page-builder' ); ?>">
 					<svg class="feather">
 						<use xlink:href="<?php echo esc_url( $ui_icons_url ); ?>/feather-sprite.svg#move"/>
 					</svg>
 				</span>
-				<span class="dslca-manage-action dslca-module-manage-hook dslca-change-width-module-hook" title="<?php esc_attr_e( 'Change width', 'live-composer-page-builder' ); ?>" data-event="module-change-width">
+				<span class="dslca-manage-action dslca-module-manage-hook dslca-change-width-module-hook dslca-cmd-hide" title="<?php esc_attr_e( 'Change width', 'live-composer-page-builder' ); ?>" data-event="module-change-width">
 					<svg class="feather">
 						<use xlink:href="<?php echo esc_url( $ui_icons_url ); ?>/feather-sprite.svg#columns"/>
 					</svg>
@@ -2689,7 +2700,7 @@ class DSLC_Module {
 						<span data-size="11">11/12</span><span data-size="12">12/12</span>
 					</div>
 				</span>
-				<span class="dslca-manage-action dslca-module-manage-hook dslca-delete-module-hook" title="<?php esc_attr_e( 'Delete', 'live-composer-page-builder' ); ?>"  data-event="module-delete">
+				<span class="dslca-manage-action dslca-module-manage-hook dslca-delete-module-hook dslca-cmd-hide" title="<?php esc_attr_e( 'Delete', 'live-composer-page-builder' ); ?>"  data-event="module-delete">
 					<svg class="feather">
 						<use xlink:href="<?php echo esc_url( $ui_icons_url ); ?>/feather-sprite.svg#x"/>
 					</svg>

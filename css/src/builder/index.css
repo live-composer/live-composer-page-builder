@@ -160,7 +160,7 @@ body a:focus {
 	border: 0;
 	color: #fff;
 	padding: 7px 10px;
-	font-family: 'Open Sans', sans-serif;
+	/* font-family: 'Open Sans', sans-serif; */
 	font-size: 12px;
 	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
 	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
@@ -212,7 +212,6 @@ body a:focus {
 }
 
 .dslca-container {
-	/* font-family: 'Open Sans', sans-serif; */
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 	font-size: 13px;
 
@@ -314,7 +313,7 @@ body a:focus {
 			padding: 6px 10px;
 			border-radius: 3px;
 			font-weight: 400;
-			font-family: 'Open Sans', sans-serif;
+			/* font-family: 'Open Sans', sans-serif; */
 			font-size: 10px;
 			line-height: 1;
 			display: none;
@@ -344,7 +343,7 @@ body a:focus {
 			display: block;
 			float: left;
 			font-size: 13px;
-			font-family: 'Open Sans', sans-serif;
+			/* font-family: 'Open Sans', sans-serif; */
 			font-weight: 600;
 			line-height: 1;
 			padding: 13px 15px;
@@ -414,7 +413,7 @@ body a:focus {
 				cursor: pointer;
 				display: inline-block;
 				font-size: 13px;
-				font-family: 'Open Sans', sans-serif;
+				/* font-family: 'Open Sans', sans-serif; */
 				font-weight: 600;
 				line-height: 1;
 				padding: 10px 12px;
@@ -844,7 +843,7 @@ body a:focus {
 				.dslca-modules-section-edit-label {
 					color: #fff;
 					display: block;
-					font-family: 'Open Sans', sans-serif;
+					/* font-family: 'Open Sans', sans-serif; */
 					font-weight: 400;
 					font-size: 13px;
 					line-height: 1;
@@ -913,7 +912,7 @@ body a:focus {
 						left: 11px;
 						top: 0;
 						line-height: 32px;
-						font-family: "Open Sans", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+						/* font-family: "Open Sans", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; */
 						font-size: 13px;
 					}
 
@@ -943,7 +942,7 @@ body a:focus {
 							cursor: pointer;
 							font-size: 13px;
 							font-weight: 400;
-							font-family: 'Open Sans', sans-serif;
+							/* font-family: 'Open Sans', sans-serif; */
 						}
 
 							.dslca-module-edit-option-checkbox-hook .dslca-icon {
@@ -970,7 +969,7 @@ body a:focus {
 						display: inline-block;
 						font-size: 12px;
 						font-weight: 400;
-						font-family: 'Open Sans', sans-serif;
+						/* font-family: 'Open Sans', sans-serif; */
 					}
 
 			/**
@@ -1113,12 +1112,18 @@ body a:focus {
 			/*padding-right: 100px;*/
 		}
 
+			/* Show reset responsive settings button only in Responsive tab */
+			.dslca-container:not([data-current-section=responsive]) .dslca-clear-responsive-options {
+				display: none;
+			}
+
 			.dslca-module-edit-options-tab-hook,
-			.dslca-pseudo-module-edit-options-tab-hook {
+			.dslca-pseudo-module-edit-options-tab-hook,
+			.dslca-clear-responsive-options {
 				color: #fff;
 				cursor: pointer;
 
-				font-family: 'Open Sans', sans-serif;
+				/* font-family: 'Open Sans', sans-serif; */
 				font-size: 12px;
 				font-weight: 600;
 				letter-spacing: 0.5px;
@@ -1137,13 +1142,15 @@ body a:focus {
 			}
 
 			.dslca-module-edit-options-tab-hook:hover,
-			.dslca-pseudo-module-edit-options-tab-hook:hover {
+			.dslca-pseudo-module-edit-options-tab-hook:hover,
+			.dslca-clear-responsive-options:hover {
 				background: rgba(169, 239, 255, 0.17);
 				color: #fff;
 			}
 
 			.dslca-module-edit-options-tab-hook[data-id="animation_styling"],
-			.dslca-module-edit-options-tab-hook[data-id="presets_styling"] {
+			.dslca-module-edit-options-tab-hook[data-id="presets_styling"],
+			.dslca-clear-responsive-options {
 				float: right;
 			}
 
@@ -1237,7 +1244,7 @@ body a:focus {
 							cursor: pointer;
 							font-size: 12px;
 							font-weight: 400;
-							font-family: 'Open Sans', sans-serif;
+							/* font-family: 'Open Sans', sans-serif; */
 						}
 
 							.dslca-modules-section-edit-option-checkbox-hook .dslca-icon {
@@ -1398,7 +1405,7 @@ body a:focus {
 	color: #fff;
 	cursor: pointer;
 	display: inline-block;
-	font-family: 'Open Sans', sans-serif;
+	/* font-family: 'Open Sans', sans-serif; */
 	font-size: 14px;
 	font-weight: bold;
 	line-height: 34px;
@@ -1413,7 +1420,7 @@ body a:focus {
 	color: #fff;
 	cursor: pointer;
 	display: inline-block;
-	font-family: 'Open Sans', sans-serif;
+	/* font-family: 'Open Sans', sans-serif; */
 	font-size: 14px;
 	font-weight: bold;
 	line-height: 34px;
@@ -1427,7 +1434,7 @@ body a:focus {
 	color: #fff;
 	cursor: pointer;
 	display: inline-block;
-	font-family: 'Open Sans', sans-serif;
+	/* font-family: 'Open Sans', sans-serif; */
 	font-size: 14px;
 	font-weight: bold;
 	line-height: 34px;
@@ -1865,6 +1872,20 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 	/* Manage */
 
 
+	/* Special class to show/hide UI elements when CMD button pressed */
+	body .dslca-cmd {
+		display: none;
+	}
+
+	body.key-press-cmd .dslca-cmd-hide {
+		display: none;
+	}
+
+	body.key-press-cmd  .dslca-cmd,
+	body.key-press-cmd  .dslca-cmd.dslca-manage-action{
+		display: flex;
+	}
+
 	/* Icons block styling */
 
 	/* Icon element */
@@ -2002,7 +2023,7 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 		cursor: pointer;
 		display: inline-block;
 		font-size: 11px;
-		font-family: 'Open Sans', sans-serif;
+		/* font-family: 'Open Sans', sans-serif; */
 		font-weight: bold;
 		line-height: 1;
 		margin-right: 7px;
@@ -2106,6 +2127,8 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 			margin: 0;
 
 			padding: 1px 7px;
+
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 		}
 
 		.dslca-modules-area-manage-inner .dslca-manage-action:first-child {
@@ -2134,7 +2157,8 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 			}
 
 			.dslca-change-width-modules-area-options,
-			.dslca-change-width-module-options {
+			.dslca-change-width-module-options,
+			.dslca-change-vertial-align-module-area-options {
 				background: #fff;
 				border: 1px solid #d9dcdf;
 				border-radius: 3px;
@@ -2147,9 +2171,15 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 				width: 122px;
 			}
 
+			.dslca-change-vertial-align-module-area-options {
+				padding: 12px;
+				padding-top: 18px;
+			}
+
 			/* Show popup when parent icon hovered. */
 			.dslca-change-width-module-hook:hover > .dslca-change-width-module-options,
-			.dslca-change-width-modules-area-hook:hover > .dslca-change-width-modules-area-options{
+			.dslca-change-width-modules-area-hook:hover > .dslca-change-width-modules-area-options,
+			.dslca-change-vertial-align-module-area-hook:hover > .dslca-change-vertial-align-module-area-options {
 				display: block;
 			}
 
@@ -2207,7 +2237,7 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 					background: #4785db;
 					border-radius: 3px;
 					display: inline-block;
-					font-family: 'Open Sans', sans-serif;
+					/* font-family: 'Open Sans', sans-serif; */
 					font-size: 13px;
 					font-weight: 400;
 					line-height: 24px;
@@ -2223,7 +2253,8 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 				}
 
 				.dslca-change-width-modules-area-options span:first-child,
-				.dslca-change-width-module-options span:first-child {
+				.dslca-change-width-module-options span:first-child,
+				.dslca-change-vertial-align-module-area-options span:first-child {
 					background: none;
 					color: #5e636a;
 					display: inline-block;
@@ -2231,6 +2262,10 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 					margin-bottom: 5px;
 					max-width: none;
 					width: auto;
+				}
+
+				.dslca-change-vertial-align-module-area-options span:first-child {
+					margin-bottom: 16px;
 				}
 
 				/* Highlight current width selection */
@@ -2262,6 +2297,21 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 				.dslc-module-front.dslc-12-col .dslca-change-width-module-options span[data-size="12"] {
 					background: #3B6FBE;
 					box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.28) inset;
+					cursor: default;
+				}
+
+				.dslc-popup-option {
+					display: block;
+					width: 100%;
+
+					background: #4785db;
+					border-radius: 3px;
+					font-size: 13px;
+					font-weight: 400;
+					line-height: 24px;
+					margin: 1px;
+					text-align: left;
+
 					cursor: default;
 				}
 
@@ -2307,9 +2357,17 @@ body.rtl .dslca-modules-area-placeholder {
 	line-height: 1;
 }
 
-	#dslc-main > .dslc-modules-section:nth-child(1) > .dslc-modules-section-wrapper > .dslc-modules-section-inner > .dslc-modules-area > .dslc-module-front .dslca-module-manage {
-		top: 0;
+#dslc-content .dslc-small-height-module .dslca-module-manage {
+	top: -28px;
+
+	.dslca-module-manage-hook:first-child {
+		border-radius: 3px 0 0 3px;
 	}
+
+	.dslca-module-manage-hook:last-child {
+		border-radius: 0 3px 3px 0;
+	}
+}
 
 	.dslca-module-manage-inner {
 		background: #5890e5;
@@ -2598,7 +2656,7 @@ body.rtl .dslca-modules-area-placeholder {
 						.dslca-prompt-modal-title {
 							color: #424242;
 							display: block;
-							font-family: 'Open Sans', sans-serif;
+							/* font-family: 'Open Sans', sans-serif; */
 							font-size: 16px;
 							font-weight: bold;
 							line-height: 1;
@@ -2608,7 +2666,7 @@ body.rtl .dslca-modules-area-placeholder {
 						.dslca-prompt-modal-descr {
 							color: #8a8a8a;
 							display: block;
-							font-family: 'Open Sans', sans-serif;
+							/* font-family: 'Open Sans', sans-serif; */
 							font-size: 13px;
 							font-weight: normal;
 							line-height: 22px;
@@ -2710,7 +2768,7 @@ body.rtl .dslca-modules-area-placeholder {
 			cursor: pointer;
 			display: inline-block;
 			font-size: 12px;
-			font-family: 'Open Sans', sans-serif;
+			/* font-family: 'Open Sans', sans-serif; */
 			font-weight: bold;
 			line-height: 1;
 			padding: 13px 10px;
@@ -2726,7 +2784,7 @@ body.rtl .dslca-modules-area-placeholder {
 			cursor: pointer;
 			display: inline-block;
 			font-size: 12px;
-			font-family: 'Open Sans', sans-serif;
+			/* font-family: 'Open Sans', sans-serif; */
 			font-weight: bold;
 			line-height: 1;
 			padding: 13px 10px;
@@ -2752,7 +2810,7 @@ body.rtl .dslca-modules-area-placeholder {
 				cursor: pointer;
 				display: block;
 				font-size: 12px;
-				font-family: 'Open Sans', sans-serif;
+				/* font-family: 'Open Sans', sans-serif; */
 				line-height: 1;
 				font-weight: bold;
 				position: relative;
@@ -3169,7 +3227,7 @@ span.dslca-manage-action:hover * {
 		border-radius: 3px;
 		color: #a0a0a0;
 		display: inline-block;
-		font-family: "Open Sans",sans-serif;
+		/* font-family: "Open Sans",sans-serif; */
 		font-size: 10px;
 		line-height: 1;
 		padding: 3px 6px;
@@ -3259,7 +3317,7 @@ span.dslca-manage-action:hover * {
 			border-radius: 3px;
 			color: #707070;
 			font-size: 14px;
-			font-family: 'Open Sans', sans-serif;
+			/* font-family: 'Open Sans', sans-serif; */
 			font-weight: 400;
 			line-height: 1.5;
 			padding: 35px 25px;
@@ -3282,7 +3340,7 @@ span.dslca-manage-action:hover * {
 				color: #fff;
 				display: inline-block;
 				font-size: 14px;
-				font-family: 'Open Sans', sans-serif;
+				/* font-family: 'Open Sans', sans-serif; */
 				font-weight: bold;
 				line-height: 1;
 				padding: 13px 15px;
@@ -3416,7 +3474,7 @@ span.dslca-manage-action:hover * {
 	cursor: pointer!important;
 	display: inline-block;
 	font-size: 12px;
-	font-family: 'Open Sans', sans-serif;
+	/* font-family: 'Open Sans', sans-serif; */
 	font-weight: 400;
 	padding: 9px 12px;
 	line-height: 1;
@@ -4030,7 +4088,7 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 	.dslca-modal-icons .icon-item_name {
 		opacity: .35;
 		display: inline-block;
-		font-family: 'Open Sans', sans-serif;
+		/* font-family: 'Open Sans', sans-serif; */
 		font-size: 12px;
 		line-height: 1.25;
 		padding: 5px 8px 12px;
@@ -4041,7 +4099,7 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 		padding: 30px;
 		text-align: center;
 		letter-spacing: 6px;
-		font-family: 'Open Sans', sans-serif;
+		/* font-family: 'Open Sans', sans-serif; */
 		font-size: 16px;
 		font-weight: 300;
 		line-height: 1.25;
