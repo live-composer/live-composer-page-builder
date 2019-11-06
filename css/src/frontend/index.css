@@ -3917,11 +3917,11 @@ body em {
 @media only screen and ( max-width: 767px ) {
 
 	/* Project Thumbs */
-	#dslc-content .dslc-post-thumb{
+	#dslc-content div.dslc-post-thumb{
 		width: 100%;
 	}
 
-	#dslc-content .dslc-project-thumb {
+	#dslc-content div.dslc-project-thumb {
 		float: none;
 		margin-right: 0;
 	}
