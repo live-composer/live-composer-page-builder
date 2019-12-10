@@ -18,12 +18,6 @@
  * - dslc_social_share
  */
 
-const openModuleForEditing = ( moduleEl ) => {
-	if ( ! jQuery(moduleEl).closest('.dslc-module-front').hasClass('dslca-module-being-edited') ) {
-		jQuery(moduleEl).closest('.dslc-module-front').find('.dslca-module-edit-hook').trigger('click');
-	}
-}
-
 /**
  * Responsive Classes
  *
@@ -438,7 +432,6 @@ window.dslc_masonry = ( dslcWrapper, dslcAnimate ) => {
  * Generate Tabs Code
  */
 window.dslc_tabs_generate_code = ( dslcTabs ) => {
-
 	var dslcTabsContainer = dslcTabs.closest('.dslc-module-front');
 
 	dslcTabsNav = jQuery('.dslc-tabs-nav', dslcTabs);
@@ -478,7 +471,6 @@ window.dslc_tabs_generate_code = ( dslcTabs ) => {
 
 	jQuery('.dslca-module-option-front[data-id="tabs_nav"]', dslcTabsContainer).val( dslcTabsNavVal );
 	jQuery('.dslca-module-option-front[data-id="tabs_content"]', dslcTabsContainer).val( dslcTabsContentVal );
-
 	parent.LiveComposer.Builder.Actions.optionsChanged();
 }
 
@@ -510,11 +502,94 @@ window.dslc_accordion_generate_code = ( dslcAccordion ) => {
 	parent.LiveComposer.Builder.Actions.optionsChanged();
 }
 
+function dslc_on_tab_add( event ) {
+
+	var dslcTabs = jQuery(event.target).closest('.dslc-tabs'),
+	dslcTabsNavLast = jQuery('.dslc-tabs-nav .dslc-tabs-nav-hook:last', dslcTabs),
+	dslcTabContentLast = jQuery('.dslc-tabs-tab-content:last', dslcTabs),
+	numberOfTabs = jQuery('.dslc-tabs-nav .dslc-tabs-nav-hook', dslcTabs).length;
+
+	dslcTabsNavLast.after('<span class="dslc-tabs-nav-hook"><span class="dslc-tabs-nav-hook-title" contenteditable="true">Click to edit title</span><span class="dslca-delete-tab-hook"><span class="dslca-icon dslc-icon-remove"></span></span></span>');
+	dslcTabContentLast.after('<div class="dslc-tabs-tab-content"><div class="dslca-editable-content" data-edit-id="' + numberOfTabs +'" data-id="' + numberOfTabs +'">This is just placeholder text.</div><textarea class="dslca-tab-plain-content" data-edit-id="' + numberOfTabs +'" data-id="' + numberOfTabs +'">This is just placeholder text.</textarea><div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook" data-event="wysiwyg-edit" data-id-to-edit="' + numberOfTabs +'">Open in WP Editor</span></div></div>');
+
+	jQuery('.dslc-tabs-nav-hook:last', dslcTabs).click();
+
+	dslc_tabs_generate_code( dslcTabs );
+
+	// openModuleForEditing( this[0] );
+	if ( ! jQuery(dslcTabs[0]).closest('.dslc-module-front').hasClass('dslca-module-being-edited') ) {
+		jQuery(dslcTabs[0]).closest('.dslc-module-front').find('.dslca-module-edit-hook').trigger('click');
+	}
+
+	// dslc_tabs()
+}
+
+function dslc_on_tab_delete( event ) {
+
+	console.log ( 'dslc_on_tab_delete' );
+
+	var dslcTabs = jQuery(event.target).closest('.dslc-tabs');
+	var dslcTabHook = jQuery(event.target).closest('.dslc-tabs-nav-hook');
+	var dslcTabIndex = dslcTabHook.index();
+	var dslcTabContent = jQuery('.dslc-tabs-tab-content', dslcTabs).eq( dslcTabIndex );
+
+	if ( jQuery( '.dslc-tabs-nav .dslc-tabs-nav-hook', dslcTabs ).length > 1 ) {
+
+		dslcTabHook.remove();
+		dslcTabContent.remove();
+
+		if ( ! jQuery( '.dslc-tabs-tab-content.dslc-active', dslcTabs ).length ) {
+			jQuery( '.dslc-tabs-nav-hook:first', dslcTabs ).trigger('click');
+		}
+
+		dslc_tabs_generate_code( dslcTabs );
+	}
+
+	// openModuleForEditing( this[0] );
+	// Otherwise won't save changes.
+	if ( ! jQuery(dslcTabs[0]).closest('.dslc-module-front').hasClass('dslca-module-being-edited') ) {
+		jQuery(dslcTabs[0]).closest('.dslc-module-front').find('.dslca-module-edit-hook').trigger('click');
+	}
+
+	event.stopPropagation()
+}
+
+
+function dslc_on_tab_nav( event ) {
+	dslcTabs = jQuery(event.target).closest('.dslc-tabs');
+	dslcTabsNav = jQuery('.dslc-tabs-nav', dslcTabs);
+	dslcTabsContent = jQuery('.dslc-tabs-content', dslcTabs);
+	dslcTabContent = jQuery('.dslc-tabs-tab-content', dslcTabs);
+	dslcTabIndex = jQuery(event.currentTarget).index();
+
+	// Tabs nav
+	jQuery('.dslc-tabs-nav-hook.dslc-active', dslcTabs).removeClass('dslc-active');
+	jQuery(event.currentTarget).addClass('dslc-active');
+
+	// Tabs content
+
+	if ( jQuery( '.dslc-tabs-tab-content.dslc-active', dslcTabs ).length ) {
+		jQuery('.dslc-tabs-tab-content.dslc-active', dslcTabs).animate({
+			opacity : 0
+		}, 250, function(){
+			jQuery(this).removeClass('dslc-active');
+			dslcTabContent.eq(dslcTabIndex).css({ opacity : 0 }).addClass('dslc-active').show().animate({
+				opacity : 1
+			}, 250);
+		});
+	} else {
+		dslcTabContent.eq(dslcTabIndex).css({ opacity : 0 }).addClass('dslc-active').show().animate({
+			opacity : 1
+		}, 250);
+	}
+
+	// event.stopPropagation()
+}
+
 /**
  * Initiate Tabs
  */
 window.dslc_tabs = () => {
-
 	var dslcTabs, dslcTabsNav, dslcTabsContent, dslcTabContent;
 
 	jQuery('.dslc-tabs').each(function(){
@@ -526,9 +601,29 @@ window.dslc_tabs = () => {
 
 		dslcTabContent.eq(0).addClass('dslc-active');
 		jQuery('.dslc-tabs-nav-hook', dslcTabsNav ).eq(0).addClass('dslc-active');
+
+		
 	});
 }
 
+// $(staticAncestors).on(eventName, dynamicChild, function() {
+// jQuery(document).ready(function($) {
+		/**
+		* Tabs – Tabs editing controls
+		*/
+		jQuery(document).on( 'click', '.dslca-add-new-tab-hook', (event) => dslc_on_tab_add(event));
+		jQuery(document).on( 'click', '.dslca-delete-tab-hook', (event) => dslc_on_tab_delete(event));
+		jQuery(document).on( 'click', '.dslc-tabs-nav-hook', (event) => dslc_on_tab_nav( event ));
+
+		jQuery(document).on('blur paste', '.dslc-tabs-nav-hook-title[contenteditable], .dslc-tabs-tab-content[contenteditable]', function(event) {
+			dslc_tabs_generate_code( jQuery(this).closest('.dslc-tabs') );
+		}).on('focus', '.dslc-tabs-nav-hook-title[contenteditable], .dslc-tabs-tab-content[contenteditable]', function(event) {
+			if ( ! jQuery(this).closest('.dslc-module-front').hasClass('dslca-module-being-edited') ) {
+				jQuery(this).closest('.dslc-module-front').find('.dslca-module-edit-hook').trigger('click');
+			}
+		});
+
+// });
 /**
  * Increment download count
  */
@@ -857,97 +952,6 @@ jQuery(document).ready(function($){
 	 */
 	jQuery('.dslc-mobile-navigation select').change(function() {
 		window.location = jQuery(this).val();
-	});
-
-	/**
-	 * Tabs – Add new Tab
-	 */
-	jQuery(document).on( 'click', '.dslca-add-new-tab-hook', function(){
-
-		var dslcTabs = jQuery(this).closest('.dslc-tabs'),
-		dslcTabsNavLast = jQuery('.dslc-tabs-nav .dslc-tabs-nav-hook:last', dslcTabs),
-		dslcTabContentLast = jQuery('.dslc-tabs-tab-content:last', dslcTabs),
-		numberOfTabs = jQuery('.dslc-tabs-nav .dslc-tabs-nav-hook', dslcTabs).length;
-
-		dslcTabsNavLast.after('<span class="dslc-tabs-nav-hook"><span class="dslc-tabs-nav-hook-title" contenteditable="true">Click to edit title</span><span class="dslca-delete-tab-hook"><span class="dslca-icon dslc-icon-remove"></span></span></span>');
-		dslcTabContentLast.after('<div class="dslc-tabs-tab-content"><div class="dslca-editable-content" data-edit-id="' + numberOfTabs +'">This is just placeholder text.</div><textarea class="dslca-tab-plain-content">This is just placeholder text.</textarea><div class="dslca-wysiwyg-actions-edit"><span class="dslca-wysiwyg-actions-edit-hook" data-event="wysiwyg-edit" data-id-to-edit="' + numberOfTabs +'">Open in WP Editor</span></div></div>');
-
-		jQuery('.dslc-tabs-nav-hook:last', dslcTabs).click();
-
-		dslc_tabs_generate_code( dslcTabs );
-
-		openModuleForEditing( this[0] );
-	});
-
-	jQuery(document).on( 'click', '.dslca-delete-tab-hook', function(e){
-
-		var dslcTabs = jQuery(this).closest('.dslc-tabs');
-		var dslcTabHook = jQuery(this).closest('.dslc-tabs-nav-hook');
-		var dslcTabIndex = dslcTabHook.index();
-		var dslcTabContent = jQuery('.dslc-tabs-tab-content', dslcTabs).eq( dslcTabIndex );
-
-		if ( jQuery( '.dslc-tabs-nav-hook', dslcTabs ).length > 1 ) {
-
-			dslcTabHook.remove();
-			dslcTabContent.remove();
-
-			if ( ! jQuery( '.dslc-tabs-tab-content.dslc-active', dslcTabs ).length ) {
-				jQuery( '.dslc-tabs-nav-hook:first', dslcTabs ).trigger('click');
-			}
-
-			dslc_tabs_generate_code( dslcTabs );
-		} else {
-
-			alert( 'You can not delete the last remaining tab' );
-		}
-
-		e.stopPropagation()
-	});
-
-	jQuery(document).on( 'click', '.dslc-tabs-nav-hook', function(e){
-
-		if ( ! jQuery(this).hasClass('dslc-active') ) {
-
-			dslcTabs = jQuery(this).closest('.dslc-tabs');
-			dslcTabsNav = jQuery('.dslc-tabs-nav', dslcTabs);
-			dslcTabsContent = jQuery('.dslc-tabs-content', dslcTabs);
-			dslcTabContent = jQuery('.dslc-tabs-tab-content', dslcTabs);
-			dslcTabIndex = jQuery(this).index();
-
-			// Tabs nav
-			jQuery('.dslc-tabs-nav-hook.dslc-active', dslcTabs).removeClass('dslc-active');
-			jQuery(this).addClass('dslc-active');
-
-			// Tabs content
-
-			if ( jQuery( '.dslc-tabs-tab-content.dslc-active', dslcTabs ).length ) {
-
-				jQuery('.dslc-tabs-tab-content.dslc-active', dslcTabs).animate({
-					opacity : 0
-				}, 250, function(){
-
-					jQuery(this).removeClass('dslc-active');
-					dslcTabContent.eq(dslcTabIndex).css({ opacity : 0 }).addClass('dslc-active').show().animate({
-						opacity : 1
-					}, 250);
-				});
-			} else {
-
-				dslcTabContent.eq(dslcTabIndex).css({ opacity : 0 }).addClass('dslc-active').show().animate({
-					opacity : 1
-				}, 250);
-			}
-		}
-	});
-
-	jQuery(document).on('blur paste', '.dslc-tabs-nav-hook-title[contenteditable], .dslc-tabs-tab-content[contenteditable]', function() {
-
-		dslc_tabs_generate_code( jQuery(this).closest('.dslc-tabs') );
-	}).on('focus', '.dslc-tabs-nav-hook-title[contenteditable], .dslc-tabs-tab-content[contenteditable]', function() {
-
-		if ( ! jQuery(this).closest('.dslc-module-front').hasClass('dslca-module-being-edited') ) {
-			jQuery(this).closest('.dslc-module-front').find('.dslca-module-edit-hook').trigger('click');
-		}
 	});
 
 	// Close Notification

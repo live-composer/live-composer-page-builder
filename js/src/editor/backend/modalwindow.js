@@ -368,9 +368,11 @@ document.addEventListener( 'modalWysiwygConfirm', function ( customEvent ) {
 			jQuery('.dslca-wysiwyg-active', LiveComposer.Builder.PreviewAreaDocument ).siblings('.dslca-tab-plain-content').val( content );
 			var dslcTabs = module.find('.dslc-tabs');
 			LiveComposer.Builder.PreviewAreaWindow.dslc_tabs_generate_code( dslcTabs );
+		} else {
+			// The next function is not compatible for Tab and Accordions.
+			editableContentCodeGeneration( jQuery('.dslca-wysiwyg-active', LiveComposer.Builder.PreviewAreaDocument ) );
 		}
 
-		editableContentCodeGeneration( jQuery('.dslca-wysiwyg-active', LiveComposer.Builder.PreviewAreaDocument ) );
 		jQuery('.dslca-wysiwyg-active', LiveComposer.Builder.PreviewAreaDocument ).removeClass('dslca-wysiwyg-active');
 	} else {
 		console.info( 'Live Composer: TinyMCE is undefined.' );

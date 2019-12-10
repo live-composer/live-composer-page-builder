@@ -2665,12 +2665,12 @@ class DSLC_Module {
 						<use xlink:href="<?php echo esc_url( $ui_icons_url ); ?>/feather-sprite.svg#sliders"/>
 					</svg>
 				</span>
-				<span class="dslca-manage-action dslca-module-manage-hook dslca-module-edit-hook dslca-cmd" title="<?php esc_attr_e( 'Copy Styles', 'live-composer-page-builder' ); ?>" data-event="module-style-copy">
+				<span class="dslca-manage-action dslca-module-manage-hook dslca-cmd" title="<?php esc_attr_e( 'Copy Styles', 'live-composer-page-builder' ); ?>" data-event="module-style-copy">
 					<svg class="feather">
 						<use xlink:href="<?php echo esc_url( $ui_icons_url ); ?>/feather-sprite.svg#share"/>
 					</svg>
 				</span>
-				<span class="dslca-manage-action dslca-module-manage-hook dslca-module-edit-hook dslca-cmd" title="<?php esc_attr_e( 'Paste Styles', 'live-composer-page-builder' ); ?>" data-event="module-style-paste">
+				<span class="dslca-manage-action dslca-module-manage-hook dslca-cmd" title="<?php esc_attr_e( 'Paste Styles', 'live-composer-page-builder' ); ?>" data-event="module-style-paste">
 					<svg class="feather">
 						<use xlink:href="<?php echo esc_url( $ui_icons_url ); ?>/feather-sprite.svg#download"/>
 					</svg>

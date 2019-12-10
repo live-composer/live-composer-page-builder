@@ -1799,7 +1799,6 @@ function dslc_module_options_cancel_changes( callback ) {
 
 	// Reload module
 	moduleOutputAltered( function(){
-
 		window.dslc_generate_code();
 
 		jQuery('.dslca-module-being-edited', window.LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-module-being-edited');
