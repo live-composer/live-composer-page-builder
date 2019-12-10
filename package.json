@@ -20,26 +20,26 @@
   },
   "homepage": "https://github.com/livecomposer/Live-Composer#readme",
   "devDependencies": {
-    "@babel/core": "^7.5.5",
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
-    "@babel/plugin-transform-runtime": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
-    "@wordpress/e2e-test-utils": "^2.1.0",
-    "babel-jest": "^24.8.0",
+    "@babel/core": "^7.7.5",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-transform-runtime": "^7.7.6",
+    "@babel/preset-env": "^7.7.6",
+    "@wordpress/e2e-test-utils": "^2.4.3",
+    "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "chromedriver": "^74.0.0",
-    "copy-webpack-plugin": "^5.0.3",
-    "jest": "^24.8.0",
+    "copy-webpack-plugin": "^5.1.0",
+    "jest": "^24.9.0",
     "jest-puppeteer": "^4.3.0",
     "mini-css-extract-plugin": "^0.7.0",
-    "node-sass": "^4.12.0",
-    "puppeteer": "^1.18.1",
-    "webpack": "^4.36.1",
-    "webpack-cli": "^3.3.6"
+    "node-sass": "^4.13.0",
+    "puppeteer": "^1.20.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "animejs": "^3.0.1",
-    "sortablejs": "^1.10.0-rc3"
+    "animejs": "^3.1.0",
+    "sortablejs": "^1.10.1"
   }
 }

@@ -47,7 +47,7 @@ class LC_Module_Options_Panel {
 		$tabs_render = '';
 
 		foreach ( $this->get_tabs() as $tab ) {
-			$tabs_render .= '<a href="#" class="dslca-module-edit-options-tab-hook" data-section="' . $tab['section'] . '" data-id="' . $tab['id'] . '">' . $tab['title'] . $trash_icon . '</a>';
+			$tabs_render .= '<a href="#" class="dslca-module-edit-options-tab-hook" data-section="' . $tab['section'] . '" data-id="' . $tab['id'] . '">' . $tab['title'] . '</a>';
 
 			// Add special trash icon to clearn all the settings at once
 			// for Responsive tabs.

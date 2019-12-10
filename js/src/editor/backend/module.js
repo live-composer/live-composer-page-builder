@@ -93,14 +93,13 @@ document.addEventListener('moduleEdit', function (customEvent) {
 	const elEditing = LiveComposer.Builder.PreviewAreaWindow.document.querySelector('.dslca-module-being-edited');
 	const row_edited = jQuery('.dslca-modules-section-being-edited', LiveComposer.Builder.PreviewAreaDocument).length;
 
-	/// If settings panel opened - do not proceed.
+	// If settings panel opened - do not proceed.
 	if ( LiveComposer.Builder.Flags.uiHidden || ( null !== elEditing && elEditing.length > 0 ) || row_edited > 0 ) {
 		if ( elEditing != currentModuleEl ) {
 			LiveComposer.Builder.UI.shakePanelConfirmButton();
 		}
 		return false;
 	}
-
 	unmarkModulesBeingEdited();
 
 	// Add the "being edited" class to current module
@@ -161,7 +160,6 @@ document.addEventListener('pasteModuleStyles', function (customEvent) {
 				for (let propertyId in pasteModuleProperies) {
 					// Override all styling properties with the ones from pasted styles.
 					if ( propertyId.includes( 'css_' ) ) {
-						// console.log(  propertyId +  " : "  + JSON.parse(JSON.stringify( currentModuleProperties[ propertyId ] )) + " > " + JSON.parse(JSON.stringify( pasteModuleProperies[ propertyId ] )) );
 						currentModuleProperties[ propertyId ] = pasteModuleProperies[ propertyId ];
 						modulePropertiesChanged = true;
 					}
@@ -170,7 +168,6 @@ document.addEventListener('pasteModuleStyles', function (customEvent) {
 				for (let propertyId in currentModuleProperties) {
 					// If property is missing in pasted data make it empty.
 					if ( propertyId.includes( 'css_' ) ) {
-						// console.log(  propertyId +  " : "  + JSON.parse(JSON.stringify( currentModuleProperties[ propertyId ] )) + " > " + JSON.parse(JSON.stringify( pasteModuleProperies[ propertyId ] )) );
 						if ( currentModuleProperties[ propertyId ] !== pasteModuleProperies[ propertyId ] ) {
 							currentModuleProperties[ propertyId ] = '';
 						}
@@ -755,7 +752,6 @@ export const moduleOutputDefault = ( dslc_module_id, callback ) => {
 export const moduleOutputAltered = ( callback ) => {
 
 	if ( window.dslcDebug ) console.log( 'moduleOutputAltered' );
-
 	callback = typeof callback !== 'undefined' ? callback : false;
 
 	var dslcModule = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument),
@@ -848,7 +844,6 @@ export const moduleOutputAltered = ( callback ) => {
 function dslc_module_output_reload( dslcModule, callback ) {
 
 	if ( window.dslcDebug ) console.log( 'dslc_module_output_reload' );
-
 	callback = typeof callback !== 'undefined' ? callback : false;
 
 	var dslc_module_id = dslcModule.data('module'),
