@@ -1126,10 +1126,11 @@ display: inline-block;
     opacity: .7;
 }
 
-.lc-license-field {
+input[type="text"].lc-license-field {
     display: block;
-    padding: 13px 10px 13px 38px;
+    padding: 17px 10px 17px 38px;
     font-size: 15px;
+    line-height: 1;
     border-radius: 3px;
     max-width: 100%;
     min-width: 340px;
