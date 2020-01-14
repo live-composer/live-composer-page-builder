@@ -19,7 +19,7 @@ var dslcIconsCurrentSet = window.DSLCIcons.fontawesome;
 
 jQuery(document).ready(function($){
 	dslc_module_options_tooltip();
-	dslc_module_options_font();
+	window.dslc_module_options_font();
 	dslc_module_options_icon();
 	dslc_module_options_icon_returnid()
 	dslc_module_options_text_align();
@@ -510,7 +510,7 @@ const onModuleOptionsChange = () => {
 
 				if ( dslcOptionID == 'css_load_preset' && ! jQuery('body').hasClass('dslca-new-preset-added') ) {
 
-					dslc_module_options_show( dslcModuleID );
+					window.dslc_module_options_show( dslcModuleID );
 					jQuery('.dslca-container-loader').hide();
 				} else {
 
@@ -1921,11 +1921,10 @@ function dslc_module_options_tooltip() {
 /**
  * MODULES SETTINGS PANEL - Font option type
  */
-function dslc_module_options_font() {
-
+window.dslc_module_options_font = function () {
 	// Next Font
-	jQuery(document).on( 'click', '.dslca-module-edit-field-font-next',  function(e){
-
+	jQuery(document).off( 'click', '.dslca-module-edit-field-font-next' ).on( 'click', '.dslca-module-edit-field-font-next', nextFont );
+	function nextFont(e){
 		e.preventDefault();
 
 		if ( ! jQuery(this).hasClass('dslca-font-loading') && ! jQuery(this).siblings('.dslca-font-loading').length ) {
@@ -1941,10 +1940,11 @@ function dslc_module_options_font() {
 
 			jQuery(this).addClass('dslca-font-loading').find('.dslca-icon').removeClass('dslc-icon-chevron-right').addClass('dslc-icon-refresh dslc-icon-spin');
 		}
-	});
+	};
 
 	// Previous Font
-	jQuery(document).on( 'click', '.dslca-module-edit-field-font-prev',  function(e){
+	jQuery(document).off( 'click', '.dslca-module-edit-field-font-prev' ).on( 'click', '.dslca-module-edit-field-font-prev', prevFont );
+	function prevFont(e){
 
 		e.preventDefault();
 
@@ -1966,20 +1966,29 @@ function dslc_module_options_font() {
 
 			jQuery(this).addClass('dslca-font-loading').find('.dslca-icon').removeClass('dslc-icon-chevron-left').addClass('dslc-icon-refresh dslc-icon-spin');
 		}
-	});
+	};
 
+	jQuery(document).off( 'blur', '.dslca-module-edit-field-font' ).on( 'blur', '.dslca-module-edit-field-font', onFieldBlur );
+	function onFieldBlur(e) {
+		var dslcOption = jQuery(this).closest('.dslca-module-edit-option');
+		jQuery('.dslca-module-edit-field-font-suggest', dslcOption).hide();
+	}
+
+	jQuery(document).off( 'keyup', '.dslca-module-edit-field-font' ).on( 'keyup', '.dslca-module-edit-field-font', onKeyUp );
 	// Keyup ( left arrow, right arrow, else )
-	jQuery(document).on( 'keyup', '.dslca-module-edit-field-font', function(e) {
-
+	function onKeyUp(e) {
+		console.log( "1 e.which:" ); console.log( e.which );
 		var dslcField, dslcOption, dslcVal, dslcMatchingFont = false, dslcFont;
 
 		dslcField = jQuery(this);
 		dslcOption = dslcField.closest('.dslca-module-edit-option');
 
+		// Arrow Up.
 		if ( e.which == 38 ) {
 			jQuery('.dslca-module-edit-field-font-prev', dslcOption).click();
 		}
 
+		// Arrow Down.
 		if ( e.which == 40 ) {
 			jQuery('.dslca-module-edit-field-font-next', dslcOption).click();
 		}
@@ -1994,23 +2003,17 @@ function dslc_module_options_font() {
 			var i = 0;
 
 			do {
-
 				if (re.test(dslcAllFontsArray[i])) {
-
 					if ( ! dslcMatchingFont ) {
-
 						var dslcMatchingFont = dslcAllFontsArray[i];
 					}
 				}
-
 			i++; } while (i < dslcFontsAmount);
 
 			if ( ! dslcMatchingFont ) {
-
 				dslcFont = dslcVal;
 				jQuery('.dslca-module-edit-field-font-suggest', dslcOption).hide();
-			} else {
-
+			} else if ( dslcVal !== dslcMatchingFont ) {
 				dslcFont = dslcMatchingFont;
 				jQuery('.dslca-module-edit-field-font-suggest', dslcOption).show();
 			}
@@ -2018,29 +2021,29 @@ function dslc_module_options_font() {
 			jQuery('.dslca-module-edit-field-font-suggest', dslcOption).text( dslcFont );
 
 			if ( dslcFont.length ){
-
 				dslcField.val( dslcFont.substring( 0 , dslcField.val().length ) );
 			}
 		}
-	});
+	};
 
-	// Key press ( enter )
-	jQuery(document).on( 'keypress', '.dslca-module-edit-field-font', function(e) {
-
-		if ( e.which == 13 ) {
-
-			e.preventDefault();
-
+	jQuery(document).off( 'keydown', '.dslca-module-edit-field-font' ).on( 'keydown', '.dslca-module-edit-field-font', onPushEnter );
+	// Key press ( enter = 13 and tab = 9 )
+	function onPushEnter(e) {
+		console.log( "2 e.which:" ); console.log( e.which );
+		if ( e.which == 13 || e.which == 9 ) {
 			var dslcField, dslcOption, dslcVal, dslcMatchingFont, dslcFont;
 
 			dslcField = jQuery(this);
 			dslcOption = dslcField.closest('.dslca-module-edit-option');
 
-			jQuery(this).val( jQuery('.dslca-module-edit-field-font-suggest', dslcOption).text() ).trigger('change');
+			var suggestedFont = jQuery('.dslca-module-edit-field-font-suggest', dslcOption).text();
 
-			jQuery('.dslca-module-edit-field-font-suggest', dslcOption).text('');
+			if ( suggestedFont.length ) {
+				jQuery(this).val( jQuery('.dslca-module-edit-field-font-suggest', dslcOption).text() ).trigger('change');
+				jQuery('.dslca-module-edit-field-font-suggest', dslcOption).text('');
+			}
 		}
-	});
+	};
 }
 
 /*

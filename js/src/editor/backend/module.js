@@ -105,7 +105,7 @@ document.addEventListener('moduleEdit', function (customEvent) {
 	// Add the "being edited" class to current module
 	currentModuleEl.classList.add('dslca-module-being-edited');
 	// Call the function to display options
-	dslc_module_options_show( currentModuleId );
+	window.dslc_module_options_show( currentModuleId );
 	// Cover up other modules with semi transp cover
 	LiveComposer.Builder.PreviewAreaWindow.document.body.classList.add('module-editing-in-progress');
 });
@@ -579,7 +579,7 @@ function dslc_module_width_set( moduleEl, new_width ) {
 /**
  * MODULES - Show module options
  */
-function dslc_module_options_show( moduleID ) {
+window.dslc_module_options_show = function( moduleID ) {
 
 	if ( window.dslcDebug ) console.log( 'dslc_module_options_show' );
 
@@ -719,7 +719,10 @@ function dslc_module_options_show( moduleID ) {
 
 			LiveComposer.Builder.UI.loadOptionsDeps();
 		}
-	);
+	).done(function() {
+		// Attach evenets to the Font family selection fields.
+		window.dslc_module_options_font();
+	});
 }
 
 /**
@@ -841,7 +844,7 @@ export const moduleOutputAltered = ( callback ) => {
 /**
  * MODULES - Reload a specific module
  */
-function dslc_module_output_reload( dslcModule, callback ) {
+window.dslc_module_output_reload = function ( dslcModule, callback ) {
 
 	if ( window.dslcDebug ) console.log( 'dslc_module_output_reload' );
 	callback = typeof callback !== 'undefined' ? callback : false;
@@ -940,9 +943,9 @@ function dslc_dm_get_defaults( module ) {
  * Deprecated Functions and Fallbacks
  */
 function dslc_copy_module( module ) { moduleDuplicate( module ); }
-function dslc_display_module_options( moduleID ) { dslc_module_options_show( moduleID ); }
+function dslc_display_module_options( moduleID ) { window.dslc_module_options_show( moduleID ); }
 function dslc_preview_change( callback ) { moduleOutputAltered( callback ); }
-function dslc_reload_module( moduleID, callback ) { dslc_module_output_reload( moduleID, callback ); }
+function dslc_reload_module( moduleID, callback ) { window.dslc_module_output_reload( moduleID, callback ); }
 
 export const moduleInitJS = () => {
 	adjustZindex();
