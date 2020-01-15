@@ -295,8 +295,7 @@ function dslc_tp_update_archive_templates_option( $post_id ) {
 			$dslc_template_for = $_POST['dslc_template_for'];
 		}*/
 
-		$dslc_metadata = get_post_meta( $post_id, 'dslc_template_for' );
-		$dslc_template_for = $dslc_metadata;
+		$dslc_template_for = get_post_meta( $post_id, 'dslc_template_for' );
 
 		// List of options that should have single template only (no alternative designs).
 		// Like: Search results, 404 page, Author listing, Archive pages, etc.
@@ -348,12 +347,12 @@ function dslc_tp_update_archive_templates_option( $post_id ) {
 			// put the setting in plugin options table
 			// and make sure we have only one LC template
 			// for this option selected LC templates section.
-			/* if ( stristr( $value, '_archive' ) || in_array( $value, $option_require_single_template ) ) {
+			if ( stristr( $value, '_archive' ) || in_array( $value, $option_require_single_template ) ) {
 				// Put template post ID into plugin options.
 				$plugin_options[ $value ] = $post_id;
 				// Make sure we have only one LC template for this option.
 				dslc_tp_remove_template_from_meta( $value, $post_id );
-			} */
+			}
 		}
 
 		update_option( 'dslc_plugin_options', $plugin_options );
