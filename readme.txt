@@ -3,28 +3,28 @@ Contributors: LiveComposer
 Tags: page builder, landing page builder, frontend page builder, drag and drop page builder, website builder
 Requires at least: 4.7
 Tested up to: 5.3
-Stable tag: 1.5.4
+Stable tag: 1.5.5
 License: GPLv3
 
 Page builder for WordPress with drag and drop header/footer editing, responsive settings, and animations. Compatible with Gutenberg block editor.
 
 == Description ==
 
-= 👓 Create Stunning Websites Visually =
+## 👓 Create Stunning Websites Visually
 
 [Live Composer page builder](https://livecomposerplugin.com/) is a complete and feature-reach website builder for WordPress. In our page builder, you get most of the features for free paying only for [Woo-Commerce support](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration) and [advanced integrations](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) (ACF, CPT, Mega Menus). Create stunning custom page designs in real-time. Drag & drop front-end editing is an entirely intuitive way to create and customize great looking websites.
 
 Do it yourself with easy content editing in real-time. Save your money on expensive coding and customization services. No tech skills needed to create professional websites in our page builder. Live Composer is an excellent tool for web designers, digital marketing specialists, WordPress theme developers, and freelance consultants. Learn our page builder once and cut your website building time with every next project. Create an exceptional landing page, portfolio, or fully featured pro website for your client.
 
-= 🏆 Over 50,000 Site Owners Chose Live Composer page builder =
+## 🏆 Over 50,000 Site Owners Chose Live Composer page builder
 
 You can trust our plugin. 100% open source page builder backed by the experienced team of web developers. Our page builder on the market for 5 years. All significant bugs already fixed and new updates released regularly. Every day our developers work on code improvements and new features. With a purchase of any [premium extension](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons), you also getting access to our exceptional one-to-one support.
 
-= 📱 Mobile Responsive Page Builder =
+## 📱 Mobile Responsive Page Builder
 
 It's easy to create responsive websites in our page builder. You can customize the responsive presentation of any page element to make it looks perfect on all mobile devices, ensuring your site is mobile-ready.
 
-= Gutenberg Compatible =
+## Gutenberg Compatible
 
 Out page builder does not affect your Gutenberg plugin usage and can work alongside with new WordPress block editor.
 
@@ -57,6 +57,11 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 = FOR OUR PRO USERS: =
 * 🦊 [Check out our WooCommerce Page Builder Extension](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
+
+= 1.5.5 - Jan 14 2020 =
+* 🕷 Fixed flickering sections in the header on mobile
+* 🕷 Fixed unresponsive font family selector
+* 🕷 Fixed visual appearance of the license field
 
 = 1.5.4 - Dec 10 2019 =
 * 🕷 Fix bugs with Tabs and Accordions editing.
