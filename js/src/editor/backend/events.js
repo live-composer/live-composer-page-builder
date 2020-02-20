@@ -20,7 +20,14 @@ export const eventsInit = () =>{
 
 	// Preview iframe events.
 	LiveComposer.Builder.PreviewAreaWindow.document.addEventListener('click', function (event) {
-		event.preventDefault();
+		// Disable default action/event,
+		// but only if the link clicked doesn't have '.dslca-link' class.
+		if ( ! event.target.matches('.dslca-link') ) {
+			// By default all the default click events disabled on LC editing mode.
+			// .dslca-link class used to enable default browser behaviour.
+			// (ex. open header/footer for editing in new tab).
+			event.preventDefault();
+		}
 
 		if ( event.target.matches( '[data-event="module-edit"]' ) ) {
 			// Create a new "Open Module Editing" event
