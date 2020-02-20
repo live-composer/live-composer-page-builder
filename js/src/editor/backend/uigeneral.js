@@ -796,9 +796,11 @@ function dslca_update_report_log() {
 	var error_report = localStorage.getItem('js_errors_report');
 
 	if ( null !== error_report ) {
-		errors_container.value = error_report;
-		localStorage.removeItem('js_errors_report');
-		document.querySelector( '.dslca-show-js-error-hook' ).setAttribute('style','visibility:visible');
+		if ( error_report.includes('lc-extensions') || error_report.includes('page-builder') ) {
+			errors_container.value = error_report;
+			localStorage.removeItem('js_errors_report');
+			document.querySelector( '.dslca-show-js-error-hook' ).setAttribute('style','visibility:visible');
+		}
 	}
 }
 
