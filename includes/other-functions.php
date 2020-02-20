@@ -171,8 +171,8 @@ if ( ! class_exists( 'DSLC_Aq_Resize' ) ) {
 
 			// Here is the point we allow to use larger image size than the original one.
 			$aspect_ratio = $orig_w / $orig_h;
-			$new_w = $dest_w;
-			$new_h = $dest_h;
+			$new_w = intval( $dest_w );
+			$new_h = intval( $dest_h );
 
 			if ( ! $new_w ) {
 				$new_w = intval( $new_h * $aspect_ratio );
