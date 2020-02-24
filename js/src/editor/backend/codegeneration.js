@@ -219,6 +219,12 @@ window.dslc_generate_code = function() {
 	jQuery('#dslca-code').val(pageCodeInJson);
 
 	jQuery('#dslca-export-code').val(pageCodeInJson);
+
+	// Create a new "Code Updated" event
+	// I'm not sure if we really need to pass source code as event details.
+	// Seems like overkill.
+	const pageCodeUpdated = new CustomEvent('pageCodeUpdated', /* { detail: pageCodeInJson } */);
+	document.dispatchEvent( pageCodeUpdated );
 }
 
 
