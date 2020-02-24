@@ -655,8 +655,12 @@ export const keypressEvents = () => {
 
 		// CMD button press event.
 		dslc_cmd_press( keydown_event );
+
+		// Events to run when any button preset.
+		dslc_keydown( keydown_event );
 	});
 
+	// Key UP events.
 	jQuery( [document, LiveComposer.Builder.PreviewAreaWindow.document ] ).unbind('keyup').bind('keyup', function (keyup_event) {
 		dslc_cmd_unpress( keyup_event );
 	});
@@ -742,11 +746,26 @@ function dslc_save_page(e) {
     }
 }
 
+
+/**
+ * If any key is pressed.
+ */
+function dslc_keydown( e ) {
+	console.log( "dslc_keydown:" );
+    if ( LiveComposer.Builder.UI.cmdMode ) {
+		if ( ! e.metaKey && ! e.ctrlKey ) {
+		LiveComposer.Builder.UI.cmdMode = false;
+		LiveComposer.Builder.PreviewAreaWindow.document.querySelector('body').classList.remove( 'key-press-cmd' );
+		}
+    }
+}
+
 /**
  * If Command key is pressed.
  */
 function dslc_cmd_press( e ) {
     if ( e.metaKey || e.ctrlKey ) {
+		LiveComposer.Builder.UI.cmdMode = true;
 		LiveComposer.Builder.PreviewAreaWindow.document.querySelector('body').classList.add( 'key-press-cmd' );
     }
 }
@@ -756,6 +775,7 @@ function dslc_cmd_press( e ) {
  */
 function dslc_cmd_unpress( e ) {
     if ( e.key === "Meta" ) {
+		LiveComposer.Builder.UI.cmdMode = false;
 		LiveComposer.Builder.PreviewAreaWindow.document.querySelector('body').classList.remove( 'key-press-cmd' );
     }
 }

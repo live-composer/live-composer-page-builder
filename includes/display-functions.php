@@ -84,8 +84,8 @@ function dslc_display_composer() {
 
 					<!-- Module Options Actions -->
 					<div class="dslca-module-edit-actions">
-						<a href="#" class="dslca-module-edit-save"><?php esc_attr_e( 'Confirm', 'live-composer-page-builder' ); ?></a>
-						<a href="#" class="dslca-module-edit-cancel"><?php esc_attr_e( 'Cancel', 'live-composer-page-builder' ); ?></a>
+						<a href="#" class="dslca-module-edit-save" data-event="module-confirm"><?php esc_attr_e( 'Confirm', 'live-composer-page-builder' ); ?></a>
+						<a href="#" class="dslca-module-edit-cancel" data-event="module-cancel"><?php esc_attr_e( 'Cancel', 'live-composer-page-builder' ); ?></a>
 					</div><!-- .dslca-module-edit-actions -->
 
 					<!-- Row Options Filters -->

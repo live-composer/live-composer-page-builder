@@ -16,6 +16,18 @@ export const eventsInit = () =>{
 			const modalWysiwygConfirm = new CustomEvent('modalWysiwygConfirm', { detail: event.target });
 			document.dispatchEvent( modalWysiwygConfirm );
 		}
+
+		if ( event.target.matches( '[data-event="module-confirm"]' ) ) {
+			// Create "Module Confirm" event
+			const moduleConfirm = new CustomEvent('moduleConfirm', { detail: event.target });
+			document.dispatchEvent( moduleConfirm );
+		}
+
+		if ( event.target.matches( '[data-event="module-cancel"]' ) ) {
+			// Create "Module Cancel" event
+			const moduleCancel = new CustomEvent('moduleCancel', { detail: event.target });
+			document.dispatchEvent( moduleCancel );
+		}
 	}, false);
 
 	// Preview iframe events.
@@ -60,13 +72,13 @@ export const eventsInit = () =>{
 		}
 
 		if ( event.target.matches( '[data-event="module-style-copy"]' ) ) {
-			// Create a new "Copy Modyle Style" event
+			// Create a new "Copy Module Style" event
 			const copyStyles = new CustomEvent('copyModuleStyles', { detail: event.target });
 			document.dispatchEvent( copyStyles );
 		}
 
 		if ( event.target.matches( '[data-event="module-style-paste"]' ) ) {
-			// Create a new "Paste Modyle Style" event
+			// Create a new "Paste Module Style" event
 			const pasteStyles = new CustomEvent('pasteModuleStyles', { detail: event.target });
 			document.dispatchEvent( pasteStyles );
 		}
