@@ -1977,7 +1977,6 @@ window.dslc_module_options_font = function () {
 	jQuery(document).off( 'keyup', '.dslca-module-edit-field-font' ).on( 'keyup', '.dslca-module-edit-field-font', onKeyUp );
 	// Keyup ( left arrow, right arrow, else )
 	function onKeyUp(e) {
-		console.log( "1 e.which:" ); console.log( e.which );
 		var dslcField, dslcOption, dslcVal, dslcMatchingFont = false, dslcFont;
 
 		dslcField = jQuery(this);
@@ -2029,7 +2028,6 @@ window.dslc_module_options_font = function () {
 	jQuery(document).off( 'keydown', '.dslca-module-edit-field-font' ).on( 'keydown', '.dslca-module-edit-field-font', onPushEnter );
 	// Key press ( enter = 13 and tab = 9 )
 	function onPushEnter(e) {
-		console.log( "2 e.which:" ); console.log( e.which );
 		if ( e.which == 13 || e.which == 9 ) {
 			var dslcField, dslcOption, dslcVal, dslcMatchingFont, dslcFont;
 
