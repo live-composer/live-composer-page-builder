@@ -525,9 +525,6 @@ function dslc_on_tab_add( event ) {
 }
 
 function dslc_on_tab_delete( event ) {
-
-	console.log ( 'dslc_on_tab_delete' );
-
 	var dslcTabs = jQuery(event.target).closest('.dslc-tabs');
 	var dslcTabHook = jQuery(event.target).closest('.dslc-tabs-nav-hook');
 	var dslcTabIndex = dslcTabHook.index();

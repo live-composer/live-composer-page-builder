@@ -3906,6 +3906,7 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
  body.rtl .dslca-module-edit-options-inner,
  body.rtl .dslca-modules-section-edit-options-inner {
 	overflow-x: scroll;
+	overscroll-behavior-x: none;
  }
 
  body.rtl .dslca-module-edit-option,
@@ -3933,6 +3934,7 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 	.dslca-modules-section-edit-options-inner,
 	.dslca-module-edit-options-inner {
 		overflow-x: scroll;
+		overscroll-behavior-x: none;
 		padding-top: 4px;
 	}
 

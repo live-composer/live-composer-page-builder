@@ -12,9 +12,7 @@
  * Module Presets - Update
  */
 export const updatePreset = () => {
-
 	if ( window.dslcDebug ) console.log( 'updatePreset' );
-
 	// Vars
 	var module = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument),
 	presetName = module.find('.dslca-module-option-front[data-id="css_load_preset"]').val(),

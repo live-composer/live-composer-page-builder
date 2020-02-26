@@ -751,7 +751,6 @@ function dslc_save_page(e) {
  * If any key is pressed.
  */
 function dslc_keydown( e ) {
-	console.log( "dslc_keydown:" );
     if ( LiveComposer.Builder.UI.cmdMode ) {
 		if ( ! e.metaKey && ! e.ctrlKey ) {
 		LiveComposer.Builder.UI.cmdMode = false;

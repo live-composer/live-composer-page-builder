@@ -30,7 +30,7 @@ export const eventsInit = () =>{
 		}
 	}, false);
 
-	// Preview iframe events.
+	// Preview iframe events: click.
 	LiveComposer.Builder.PreviewAreaWindow.document.addEventListener('click', function (event) {
 		// Disable default action/event,
 		// but only if the link clicked doesn't have '.dslca-link' class.
@@ -83,5 +83,15 @@ export const eventsInit = () =>{
 			document.dispatchEvent( pasteStyles );
 		}
 
+	}, false);
+
+	// Preview iframe events: focusout.
+	LiveComposer.Builder.PreviewAreaWindow.document.addEventListener('focusout', function (event) {
+		// This event gets dispatched when the contenteditable element loses focus.
+		// Useful when you need to save data when element text edited.
+		if ( event.target.matches( '[contenteditable="true"]' ) ) {
+			const contentEditableFocusOut = new CustomEvent('contentEditableFocusOut', { detail: event.target });
+			document.dispatchEvent( contentEditableFocusOut );
+		}
 	}, false);
 }
