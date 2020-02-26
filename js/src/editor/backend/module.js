@@ -432,6 +432,13 @@ const editableContentTextEvents = () => {
 	});
 }
 
+/**
+ * Hook - On contenteditable focusout.
+ */
+document.addEventListener('contentEditableFocusOut', function (customEvent) {
+	window.dslc_show_publish_button();
+});
+
 
 
 /**
