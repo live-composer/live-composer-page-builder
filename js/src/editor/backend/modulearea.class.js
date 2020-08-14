@@ -11,20 +11,20 @@ export const ModuleArea = function(elem) {
 	this.elem = elem;
 
 	/** Set observer to change elems class */
-	this.observer = new mqMutationObserver(elem, function(){
+	// this.observer = new mqMutationObserver(elem, function(){
 
-		var classList = self.elem.classList;
+	// 	var classList = self.elem.classList;
 
-		if (elem.querySelectorAll('.dslc-module-front').length == 0) {
+	// 	if (elem.querySelectorAll('.dslc-module-front').length == 0) {
 
-			classList.add('dslc-modules-area-empty');
-			classList.remove('dslc-modules-area-not-empty');
-		} else {
+	// 		classList.add('dslc-modules-area-empty');
+	// 		classList.remove('dslc-modules-area-not-empty');
+	// 	} else {
 
-			classList.remove('dslc-modules-area-empty');
-			classList.add('dslc-modules-area-not-empty');
-		}
-	}, {childList: true});
+	// 		classList.remove('dslc-modules-area-empty');
+	// 		classList.add('dslc-modules-area-not-empty');
+	// 	}
+	// }, {childList: true});
 
 	/**
 	 * Make MODULES inside the Modules Area draggable/sortable
