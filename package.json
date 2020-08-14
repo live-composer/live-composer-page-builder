@@ -33,10 +33,10 @@
     "jest": "^24.9.0",
     "jest-puppeteer": "^4.4.0",
     "mini-css-extract-plugin": "^0.7.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^4.14.1",
     "puppeteer": "^1.20.0",
-    "webpack": "^4.41.6",
-    "webpack-cli": "^3.3.11"
+    "webpack": "4.44.1",
+    "webpack-cli": "3.3.12"
   },
   "dependencies": {
     "animejs": "^3.1.0",
