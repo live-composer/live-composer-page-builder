@@ -208,6 +208,22 @@ final class DSLC_Scripts {
 			// Color picker.
 			wp_enqueue_style( 'wp-color-picker' );
 
+			global $wp_scripts;
+
+			// if localization doesnt already exist on the color picker, then add it
+			if( !array_key_exists("data", $wp_scripts->registered["wp-color-picker"]->extra) ) {
+				$wp_scripts->localize('wp-color-picker',
+					'wpColorPickerL10n',
+					array(
+						'clear'            => __( 'Clear' ),
+						'clearAriaLabel'   => __( 'Clear color' ),
+						'defaultString'    => __( 'Default' ),
+						'defaultAriaLabel' => __( 'Select default color' ),
+						'pick'             => __( 'Select Color' ),
+						'defaultLabel'     => __( 'Color value' ),
+					));
+			}
+
 			// wp_enqueue_script( 'imagesloaded' ); // Need this for Masonry.
 			// wp_enqueue_script( 'jquery-masonry' );
 			wp_enqueue_script(
