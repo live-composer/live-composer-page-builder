@@ -571,6 +571,8 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 			);
 			// deactivated
 
+			$license_block_variants = apply_filters("dslc_license_block_variants", $license_block_variants);
+
 			foreach ( $license_block_variants as $staus => $strings ) : ?>
 				<div class="dslc-panel lc-panel-license lc-divided-panels padding-medium" data-show-if-license="<?php echo $staus; ?>">
 					<div class="lc-panel-half">
