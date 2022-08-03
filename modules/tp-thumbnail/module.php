@@ -385,7 +385,9 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 			return; // Don't output module if no thumbnail set.
 		}
 
-		$thumb_url = $thumb_url[0];
+		if( isset( $thumb_url[0] ) ){
+			$thumb_url = $thumb_url[0];
+		}
 
 		/* Module output starts here */
 
