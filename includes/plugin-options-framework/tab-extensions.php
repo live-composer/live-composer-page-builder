@@ -23,7 +23,7 @@ function dslc_sort_by_rank($a, $b) {
 $extensions = array();
 $extensions = apply_filters( 'dslc_extensions_meta', $extensions );
 
-$today_day = strtoupper( strftime( "%A",time() ) );
+$today_day = strtoupper( date('l',time()) );
 
 ?>
 <div class="wrap lc-admin-tab-content lc-wrap lc-centered-panels lc-wider-panel lc-tab-extensions">
