@@ -58,6 +58,14 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 * 🦊 [Check out our WooCommerce Page Builder Extension](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
 
+= 1.5.20 - Aug 05 2022 =
+* Removing stylist tab
+* Thumbail not showing
+* Second time add new row issue (json issue)
+* Adding filter for license copy
+* 🕷 Fix error : strftime function deprecated issue
+* 🕷 Fix error : title and show_on key not found issue
+
 = 1.5.9 - Nov 10 2020 =
 * 🕷 Fix error: wpColorPickerL10n is not defined on WordPress 5.5.1
 
