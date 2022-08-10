@@ -183,7 +183,9 @@ class DSLC_Cache {
 	public function set_cache( $code_to_cache = false, $identificator = false, $cache_type = false ) {
 		if ( self::$enabled && $code_to_cache ) {
 
-			if ( !isset( $cache_type ) ) {
+			if(!is_array(self::$cache)) self::$cache = [];
+
+			if ( ! $cache_type ) {
 				$cache_type = $this->type;
 			}
 
