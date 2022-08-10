@@ -1098,7 +1098,9 @@ function dslc_module_front( $atts, $settings_raw = null, $is_header_footer = fal
 
 					$dslc_var_image_option_bckp[ $option['id'] ] = $settings[ $option['id'] ];
 					$image_info = wp_get_attachment_image_src( $settings[ $option['id'] ], 'full' );
-					$settings[ $option['id'] ] = $image_info[0];
+					if( isset( $image_info[0] ) ){
+						$settings[ $option['id'] ] = $image_info[0];
+					}
 				}
 			}
 		}
