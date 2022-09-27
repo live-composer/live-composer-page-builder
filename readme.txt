@@ -2,7 +2,7 @@
 Contributors: LiveComposer
 Tags: page builder, landing page builder, frontend page builder, drag and drop page builder, website builder
 Requires at least: 4.7
-Tested up to: 5.5
+Tested up to: 6.0.2
 Stable tag: 1.5.21
 License: GPLv3
 
