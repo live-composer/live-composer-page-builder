@@ -26,17 +26,17 @@
     "@babel/preset-env": "^7.8.4",
     "@wordpress/e2e-test-utils": "^2.4.3",
     "babel-jest": "^24.9.0",
-    "babel-loader": "^8.0.6",
+    "babel-loader": "^8.3.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "chromedriver": "^74.0.0",
     "copy-webpack-plugin": "6.0.3",
     "jest": "^24.9.0",
     "jest-puppeteer": "^4.4.0",
-    "mini-css-extract-plugin": "^0.7.0",
+    "mini-css-extract-plugin": "^2.7.2",
     "node-sass": "^4.14.1",
     "puppeteer": "^1.20.0",
-    "webpack": "4.44.1",
-    "webpack-cli": "3.3.12"
+    "webpack": "5.75.0",
+    "webpack-cli": "5.0.1"
   },
   "dependencies": {
     "animejs": "^3.1.0",
