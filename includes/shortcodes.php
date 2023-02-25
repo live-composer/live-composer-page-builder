@@ -29,14 +29,17 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return string HTML notification
  */
 function dslc_sc_notification( $atts, $content ) {
-    // Attributes
-    $args = shortcode_atts( 
-        array(
-            'color' => 'default',
-        ), $atts);
-    $color = esc_attr( $args['color']);
-    // Return notification HTML
-    return '<div class="dslc-notification dslc-' . $color . '">' . $content . '<span class="dslc-notification-close"><span class="dslc-icon dslc-icon-remove-sign"></span></span></div>';
+	// Attributes
+	$args = shortcode_atts(
+		array(
+			'color' => 'default',
+		),
+		$atts
+	);
+	$color = sanitize_key(esc_attr($args['color']));
+
+	// Return notification HTML
+	return '<div class="dslc-notification dslc-' . $color . '">' . $content . '<span class="dslc-notification-close"><span class="dslc-icon dslc-icon-remove-sign"></span></span></div>';
 } add_shortcode( 'dslc_notification', 'dslc_sc_notification' );
 
 /**
@@ -52,10 +55,15 @@ function dslc_sc_notification( $atts, $content ) {
 function dslc_sc_get_custom_field( $atts, $content ) {
 
 	// Attributes
-	extract( shortcode_atts( array(
-		'id' => false,
-		'post_id' => false,
-	), $atts ) );
+	$args = shortcode_atts(
+		array(
+			'id' => false,
+			'post_id' => false,
+		),
+		$atts
+	);
+	$id = sanitize_key(esc_attr($args['id']));
+	$post_id = sanitize_key(esc_attr($args['post_id']));
 
 	// If no custom field ID return error message
 	if ( ! $id ) {
@@ -92,7 +100,7 @@ function dslc_sc_get_custom_field( $atts, $content ) {
 function dslc_sc_site_url( $atts, $content ) {
 
 	// Return site URL
-	return site_url();
+	return sanitize_url(esc_url(site_url()));
 
 } add_shortcode( 'dslc_site_url', 'dslc_sc_site_url' );
 
@@ -109,9 +117,13 @@ function dslc_sc_site_url( $atts, $content ) {
 function dslc_sc_icon( $atts, $content ) {
 
 	// Attributes
-	extract( shortcode_atts( array(
-		'id' => false,
-	), $atts ) );
+	$args = shortcode_atts(
+		array(
+			'id' => false,
+		),
+		$atts
+	);
+	$id = sanitize_key(esc_attr($args['id']));
 
 	// If no ID return empty
 	if ( ! $id ) {
@@ -136,12 +148,20 @@ function dslc_sc_icon( $atts, $content ) {
 function dslc_sc_user_avatar( $atts, $content ) {
 
 	// Attributes
-	extract( shortcode_atts( array(
-		'user' => false,
-		'size' => 100,
-		'url' => false,
-		'target' => '_self',
-	), $atts ) );
+	$args = shortcode_atts(
+		array(
+			'user' => false,
+			'size' => 100,
+			'url' => false,
+			'target' => '_self',
+		),$atts);
+
+	$user = sanitize_key(esc_attr($args['user']));
+	$size = sanitize_key(esc_attr($args['size']));
+
+	$url = sanitize_key(esc_attr($args['url']));
+
+	$target = sanitize_key(esc_attr($args['target']));
 
 	// If URL not supplied return avatar HTML without link
 	if ( ! $url ) {
@@ -166,9 +186,11 @@ function dslc_sc_user_avatar( $atts, $content ) {
 function dslc_sc_category_description( $atts, $content ) {
 
 	// Attributes
-	extract( shortcode_atts( array(
-		'category_ID' => false,
-	), $atts ) );
+	$args = shortcode_atts(
+		array(
+			'category_ID' => false,
+		),$atts);
+	$category_ID = sanitize_key(esc_attr($args['category_ID']));
 
 	// If category ID not supplied, get current category
 	if ( ! $category_ID ) {
@@ -197,7 +219,7 @@ function dslc_sc_category_description( $atts, $content ) {
  */
 function dslc_sc_page_title() {
 	$output = the_title( '', '', false );
-	return $output;
+	return sanitize_key($output);
 }
 add_shortcode( 'dslc_page_title', 'dslc_sc_page_title' );
 add_shortcode( 'lbmn_pagetitle', 'dslc_sc_page_title' );
@@ -214,7 +236,7 @@ add_shortcode( 'dslc_bloghome', 'dslc_bloghome_shortcode' );
 add_shortcode( 'lbmn_bloghome', 'dslc_bloghome_shortcode' );
 function dslc_bloghome_shortcode() {
 	// Code
-	$output = home_url();
+	$output =sanitize_url(esc_url(home_url()));
 
 	return $output;
 }
@@ -235,7 +257,7 @@ function dslc_sc_authorbio() {
 		// in the Live Composer
 	}
 
-	return $output;
+	return sanitize_key($output);
 }
 add_shortcode( 'dslc_authorbio', 'dslc_sc_authorbio' );
 add_shortcode( 'lbmn_authorbio', 'dslc_sc_authorbio' );
@@ -261,7 +283,7 @@ function dslc_sc_commentscount() {
 
 	$output = $comments;
 
-	return $output;
+	return sanitize_key($output);
 }
 
 /**
@@ -348,7 +370,7 @@ function dslc_archive_heading_shortcode() {
 
 	endif;
 
-	return $output;
+	return sanitize_key($output);
 }
 
 /**
@@ -365,14 +387,20 @@ add_shortcode( 'lbmn_nextpost_url', 'dslc_nextpost_url_shortcode' );
 function dslc_nextpost_url_shortcode( $atts ) {
 
 	// Attributes
-	extract( shortcode_atts( array(
+		$args = shortcode_atts(
+		array(
 			'previous'            => false,
 			// Whether to retrieve previous or next post.
 			'in_same_cat'         => false,
 			// Whether post should be in same category. Whether post should be in same category.
 			'excluded_categories' => '',
 			// Excluded categories IDs.
-		), $atts ) );
+		),
+		$atts
+	);
+	$previous = sanitize_key(esc_attr($args['previous']));
+	$in_same_cat = sanitize_key(esc_attr($args['in_same_cat']));
+	$excluded_categories = sanitize_key(esc_attr($args['excluded_categories']));
 
 	// Code
 	$output = get_permalink( get_adjacent_post( $in_same_cat, $excluded_categories, $previous ) );
@@ -387,14 +415,20 @@ add_shortcode( 'lbmn_prevpost_url', 'dslc_prevpost_url_shortcode' );
 function dslc_prevpost_url_shortcode( $atts ) {
 
 	// Attributes
-	extract( shortcode_atts( array(
-			'previous'            => true,
+		$args = shortcode_atts(
+		array(
+			'previous'            => false,
 			// Whether to retrieve previous or next post.
 			'in_same_cat'         => false,
 			// Whether post should be in same category. Whether post should be in same category.
 			'excluded_categories' => '',
 			// Excluded categories IDs.
-		), $atts ) );
+		),
+		$atts
+	);
+	$previous = sanitize_key(esc_attr($args['previous']));
+	$in_same_cat = sanitize_key(esc_attr($args['in_same_cat']));
+	$excluded_categories = sanitize_key(esc_attr($args['excluded_categories']));
 
 	// Code
 	$output = get_permalink( get_adjacent_post( $in_same_cat, $excluded_categories, $previous ) );
@@ -424,5 +458,5 @@ function dslc_postpagination_shortcode() {
 		// in the Live Composer
 	}
 
-	return $output;
+	return sanitize_key($output);
 }
