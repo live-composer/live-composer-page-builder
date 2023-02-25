@@ -29,15 +29,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return string HTML notification
  */
 function dslc_sc_notification( $atts, $content ) {
-
-	// Attributes
-	extract( shortcode_atts( array(
-		'color' => 'default',
-	), $atts ) );
-
-	// Return notifaction HTML
-	return '<div class="dslc-notification dslc-' . $color . '">' . $content . '<span class="dslc-notification-close"><span class="dslc-icon dslc-icon-remove-sign"></span></span></div>';
-
+    // Attributes
+    $args = shortcode_atts( 
+        array(
+            'color' => 'default',
+        ), $atts);
+    $color = esc_attr( $args['color']);
+    // Return notification HTML
+    return '<div class="dslc-notification dslc-' . $color . '">' . $content . '<span class="dslc-notification-close"><span class="dslc-icon dslc-icon-remove-sign"></span></span></div>';
 } add_shortcode( 'dslc_notification', 'dslc_sc_notification' );
 
 /**
