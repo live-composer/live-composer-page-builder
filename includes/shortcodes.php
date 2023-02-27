@@ -29,15 +29,17 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return string HTML notification
  */
 function dslc_sc_notification( $atts, $content ) {
-
 	// Attributes
-	extract( shortcode_atts( array(
-		'color' => 'default',
-	), $atts ) );
+	$args = shortcode_atts(
+		array(
+			'color' => 'default',
+		),
+		$atts
+	);
+	$color = sanitize_key(esc_attr($args['color']));
 
-	// Return notifaction HTML
+	// Return notification HTML
 	return '<div class="dslc-notification dslc-' . $color . '">' . $content . '<span class="dslc-notification-close"><span class="dslc-icon dslc-icon-remove-sign"></span></span></div>';
-
 } add_shortcode( 'dslc_notification', 'dslc_sc_notification' );
 
 /**
@@ -53,14 +55,23 @@ function dslc_sc_notification( $atts, $content ) {
 function dslc_sc_get_custom_field( $atts, $content ) {
 
 	// Attributes
-	extract( shortcode_atts( array(
-		'id' => false,
-		'post_id' => false,
-	), $atts ) );
+	$args = shortcode_atts(
+		array(
+			'id' => false,
+			'post_id' => false,
+		),
+		$atts
+	);
 
+	$id = $args['id'];
 	// If no custom field ID return error message
 	if ( ! $id ) {
 		return 'Custom field ID not supplied ( "id" parameter ).';
+	}
+	$id = sanitize_key(esc_attr($args['id']));
+	$post_id = $args['post_id'];
+	if ($post_id) {
+		$post_id = sanitize_key(esc_attr($args['post_id']));
 	}
 
 	// If no post ID but in the loop, get current ID
@@ -110,15 +121,19 @@ function dslc_sc_site_url( $atts, $content ) {
 function dslc_sc_icon( $atts, $content ) {
 
 	// Attributes
-	extract( shortcode_atts( array(
-		'id' => false,
-	), $atts ) );
+	$args = shortcode_atts(
+		array(
+			'id' => false,
+		),
+		$atts
+	);
 
+	$id = $args['id'];
 	// If no ID return empty
 	if ( ! $id ) {
 		return '';
 	}
-
+	$id = sanitize_key(esc_attr($args['id']));
 	// Return Icon HTML
 	return '<span class="dslc-icon dslc-icon-' . $id . ' dslc-icon-sc"></span>';
 
@@ -137,18 +152,25 @@ function dslc_sc_icon( $atts, $content ) {
 function dslc_sc_user_avatar( $atts, $content ) {
 
 	// Attributes
-	extract( shortcode_atts( array(
-		'user' => false,
-		'size' => 100,
-		'url' => false,
-		'target' => '_self',
-	), $atts ) );
+	$args = shortcode_atts(
+		array(
+			'user' => false,
+			'size' => 100,
+			'url' => false,
+			'target' => '_self',
+		),$atts);
+
+	$size = (int)$args['size'];
+	$user = (bool)$args['user'];
+	$url = $args['url'];
 
 	// If URL not supplied return avatar HTML without link
 	if ( ! $url ) {
 		return '<span class="dslc-sc-user-avatar">' . get_avatar( get_current_user_id(), $size ) . '</span>';
 		// If URL supplied wrap the avatar HTML in a link
 	} else {
+		$url = sanitize_url(esc_url($args['url']));
+		$target = sanitize_key(esc_attr($args['target']));
 		return '<a href="' . $url . '" target="' . $target . '"><span class="dslc-sc-user-avatar">' . get_avatar( get_current_user_id(), $size ) . '</span></a>';
 	}
 
@@ -167,17 +189,22 @@ function dslc_sc_user_avatar( $atts, $content ) {
 function dslc_sc_category_description( $atts, $content ) {
 
 	// Attributes
-	extract( shortcode_atts( array(
-		'category_ID' => false,
-	), $atts ) );
+	$args = shortcode_atts(
+		array(
+			'id' => false,
+		),$atts);
+	
+     $category_Id =$args['id'];
 
 	// If category ID not supplied, get current category
-	if ( ! $category_ID ) {
-		$category_ID = get_query_var( 'cat' );
+	if ( ! $category_Id ) {
+		$category_Id = get_query_var( 'cat' );
 	}
 
+	$category_Id = sanitize_key(esc_attr($args['id']));
+	
 	// Get category description
-	$category_description = category_description( $category_ID );
+	$category_description = category_description( $category_Id );
 
 	// Placeholder description
 	if ( ! is_category() && empty( $category_description ) && dslc_is_editor_active( 'access' ) ) {
@@ -215,7 +242,7 @@ add_shortcode( 'dslc_bloghome', 'dslc_bloghome_shortcode' );
 add_shortcode( 'lbmn_bloghome', 'dslc_bloghome_shortcode' );
 function dslc_bloghome_shortcode() {
 	// Code
-	$output = home_url();
+	$output =sanitize_url(esc_url(home_url()));
 
 	return $output;
 }
@@ -366,14 +393,20 @@ add_shortcode( 'lbmn_nextpost_url', 'dslc_nextpost_url_shortcode' );
 function dslc_nextpost_url_shortcode( $atts ) {
 
 	// Attributes
-	extract( shortcode_atts( array(
+		$args = shortcode_atts(
+		array(
 			'previous'            => false,
 			// Whether to retrieve previous or next post.
 			'in_same_cat'         => false,
 			// Whether post should be in same category. Whether post should be in same category.
 			'excluded_categories' => '',
 			// Excluded categories IDs.
-		), $atts ) );
+		),
+		$atts
+	);
+	$previous = (bool)$args['previous'];
+	$in_same_cat = (bool)$args['in_same_cat'];
+	$excluded_categories = sanitize_key(esc_attr($args['excluded_categories']));
 
 	// Code
 	$output = get_permalink( get_adjacent_post( $in_same_cat, $excluded_categories, $previous ) );
@@ -388,14 +421,20 @@ add_shortcode( 'lbmn_prevpost_url', 'dslc_prevpost_url_shortcode' );
 function dslc_prevpost_url_shortcode( $atts ) {
 
 	// Attributes
-	extract( shortcode_atts( array(
+		$args = shortcode_atts(
+		array(
 			'previous'            => true,
 			// Whether to retrieve previous or next post.
 			'in_same_cat'         => false,
 			// Whether post should be in same category. Whether post should be in same category.
 			'excluded_categories' => '',
 			// Excluded categories IDs.
-		), $atts ) );
+		),
+		$atts
+	);
+	$previous = (bool)$args['previous'];
+	$in_same_cat = (bool)$args['in_same_cat'];
+	$excluded_categories = sanitize_key(esc_attr($args['excluded_categories']));
 
 	// Code
 	$output = get_permalink( get_adjacent_post( $in_same_cat, $excluded_categories, $previous ) );
