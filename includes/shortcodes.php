@@ -62,7 +62,8 @@ function dslc_sc_get_custom_field( $atts, $content ) {
 		),
 		$atts
 	);
-	
+
+	$id = $args['id'];
 	// If no custom field ID return error message
 	if ( ! $id ) {
 		return 'Custom field ID not supplied ( "id" parameter ).';
@@ -127,6 +128,7 @@ function dslc_sc_icon( $atts, $content ) {
 		$atts
 	);
 
+	$id = $args['id'];
 	// If no ID return empty
 	if ( ! $id ) {
 		return '';
@@ -159,8 +161,8 @@ function dslc_sc_user_avatar( $atts, $content ) {
 		),$atts);
 
 	$size = (int)$args['size'];
-
-	$user = (boolean)$args['user'];
+	$user = (bool)$args['user'];
+	$url = $args['url'];
 
 	// If URL not supplied return avatar HTML without link
 	if ( ! $url ) {
@@ -189,19 +191,20 @@ function dslc_sc_category_description( $atts, $content ) {
 	// Attributes
 	$args = shortcode_atts(
 		array(
-			'category_ID' => false,
+			'id' => false,
 		),$atts);
 	
+     $category_Id =$args['id'];
 
 	// If category ID not supplied, get current category
-	if ( ! $category_ID ) {
-		$category_ID = get_query_var( 'cat' );
+	if ( ! $category_Id ) {
+		$category_Id = get_query_var( 'cat' );
 	}
 
-	$category_ID = sanitize_key(esc_attr($args['category_ID']));
-
+	$category_Id = sanitize_key(esc_attr($args['id']));
+	
 	// Get category description
-	$category_description = category_description( $category_ID );
+	$category_description = category_description( $category_Id );
 
 	// Placeholder description
 	if ( ! is_category() && empty( $category_description ) && dslc_is_editor_active( 'access' ) ) {
