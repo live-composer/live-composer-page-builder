@@ -532,16 +532,21 @@ function dslc_get_code( $postID = false, $draft = true ) {
 	} else {
 
 		// Load regular ( current ) LC code.
+		
+		$lc_disable_live_composer = dslc_get_option( 'lc_disable_live_composer', 'dslc_plugin_options' );
+		
+		if ( 'enabled' === $lc_disable_live_composer || empty($lc_disable_live_composer) ) {
 		$code_set = get_post_meta( $postID, 'dslc_code' );
-
+		}
 		// For some reason, sometimes the actual code get stored
 		// under the second item in the array.
-		foreach ($code_set as $value) {
-			if ( ! empty( $value ) ) {
-				$code = $value;
+		if(!empty($code_set)){
+			foreach ($code_set as $value) {
+				if ( ! empty( $value ) ) {
+					$code = $value;
+				}
 			}
 		}
-
 	}
 
 	// Pass it back.
@@ -861,6 +866,23 @@ function dslc_sanitize_array( $array ) {
 	}
 
 	return $sanitize_array;
+}
+
+function write_log($message)
+{
+	// if (is_array($message)) {
+	// 	$message = json_encode($message);
+	// }
+	// $file = fopen(get_stylesheet_directory() . "/custom_logs_" . date('Y-m-d') . ".log", "a");
+	// fwrite($file, "\n" . date('Y-m-d h:i:s') . " :: " . $message);
+	// fclose($file);
+}
+
+function logMessage($logMessge)
+{
+	// `if (true) {
+	// 	write_log($logMessge);
+	// }`
 }
 
 /*
