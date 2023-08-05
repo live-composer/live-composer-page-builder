@@ -390,6 +390,7 @@ function dslc_body_class( $classes ) {
 		$classes[] = 'dslc-enabled';
 	}
 	
+	
 	if ( $has_lc_header_footer ) {
 		$classes[] = 'dslc-page-has-hf';
 	}
