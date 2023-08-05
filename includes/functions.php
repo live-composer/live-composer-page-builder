@@ -383,6 +383,13 @@ function dslc_body_class( $classes ) {
 		$classes[] = 'dslc-page-has-content';
 	}
 
+	$lc_disable_live_composer = dslc_get_option( 'lc_disable_live_composer', 'dslc_plugin_options' );
+	if($lc_disable_live_composer == "disabled"){
+		$classes[] = 'dslc-disbaled';
+	}else{
+		$classes[] = 'dslc-enabled';
+	}
+	
 	if ( $has_lc_header_footer ) {
 		$classes[] = 'dslc-page-has-hf';
 	}
