@@ -876,22 +876,6 @@ function dslc_sanitize_array( $array ) {
 	return $sanitize_array;
 }
 
-function write_log($message)
-{
-	// if (is_array($message)) {
-	// 	$message = json_encode($message);
-	// }
-	// $file = fopen(get_stylesheet_directory() . "/custom_logs_" . date('Y-m-d') . ".log", "a");
-	// fwrite($file, "\n" . date('Y-m-d h:i:s') . " :: " . $message);
-	// fclose($file);
-}
-
-function logMessage($logMessge)
-{
-	// `if (true) {
-	// 	write_log($logMessge);
-	// }`
-}
 
 /*
 Work in progress.
