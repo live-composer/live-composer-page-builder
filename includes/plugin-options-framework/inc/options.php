@@ -63,7 +63,7 @@ function dslc_plugin_options_add() {
 			'lc_disable_live_composer' => array(
 
 				'section' => 'dslc_plugin_options',
-				'label' => __( 'Elementor Templates', 'live-composer-page-builder' ),
+				'label' => __( 'Rendered pages with live composer', 'live-composer-page-builder' ),
 				'std' => 'enabled',
 				'type' => 'select',
 				'descr' => __( 'When this option is enable, All the page will be rendered through the live composer.', 'live-composer-page-builder' ),
