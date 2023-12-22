@@ -383,6 +383,14 @@ function dslc_body_class( $classes ) {
 		$classes[] = 'dslc-page-has-content';
 	}
 
+	$lc_disable_live_composer = dslc_get_option( 'lc_disable_live_composer', 'dslc_plugin_options' );
+	if($lc_disable_live_composer == "disabled"){
+		$classes[] = 'dslc-disbaled';
+	}else{
+		$classes[] = 'dslc-enabled';
+	}
+	
+	
 	if ( $has_lc_header_footer ) {
 		$classes[] = 'dslc-page-has-hf';
 	}
@@ -532,16 +540,21 @@ function dslc_get_code( $postID = false, $draft = true ) {
 	} else {
 
 		// Load regular ( current ) LC code.
+		
+		$lc_disable_live_composer = dslc_get_option( 'lc_disable_live_composer', 'dslc_plugin_options' );
+		
+		if ( 'enabled' === $lc_disable_live_composer || empty($lc_disable_live_composer) ) {
 		$code_set = get_post_meta( $postID, 'dslc_code' );
-
+		}
 		// For some reason, sometimes the actual code get stored
 		// under the second item in the array.
-		foreach ($code_set as $value) {
-			if ( ! empty( $value ) ) {
-				$code = $value;
+		if(!empty($code_set)){
+			foreach ($code_set as $value) {
+				if ( ! empty( $value ) ) {
+					$code = $value;
+				}
 			}
 		}
-
 	}
 
 	// Pass it back.
@@ -862,6 +875,7 @@ function dslc_sanitize_array( $array ) {
 
 	return $sanitize_array;
 }
+
 
 /*
 Work in progress.
