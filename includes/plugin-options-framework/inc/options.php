@@ -64,9 +64,9 @@ function dslc_plugin_options_add() {
 
 				'section' => 'dslc_plugin_options',
 				'label' => __( 'Render pages with Live Composer', 'live-composer-page-builder' ),
-				'std' => 'disabled',
+				'std' => 'enabled',
 				'type' => 'select',
-				'descr' => __( 'When this option is enabled, all the pages will be rendered through the live Composer.', 'live-composer-page-builder' ),
+				'descr' => __( 'When this option is enabled, all the pages will be rendered through the Live Composer.', 'live-composer-page-builder' ),
 				'choices' => array(
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
