@@ -773,6 +773,12 @@ function dslc_filter_content( $content ) {
 		$rendered_page = $dslc_content_before . $composer_wrapper_before . do_action( 'dslc_output_prepend' ) . $composer_header . '<div id="dslc-main">' . $composer_prepend . $composer_content . '</div>' . $composer_append . $composer_footer . do_action( 'dslc_output_append' ) . $composer_wrapper_after . $dslc_content_after;
 
 		if ( ! dslc_is_editor_active() && ! is_singular( 'dslc_hf' ) ) {
+			wp_update_post(
+				array(
+					'ID'            => $cache_id,
+					'post_content'   => $rendered_page
+				)
+			);
 			$cache->set_cache( $rendered_page, $cache_id );
 		}
 
@@ -1641,7 +1647,9 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1, $is_h
 		$dslc_section_before = '';
 		$output .= dslc_decode_shortcodes( apply_filters( 'dslc_section_before', $dslc_section_before, $atts ) );
 	}
-
+	if(isset($atts['bg_video']) && !empty($atts['bg_video'])){
+		$atts['bg_video'] = sanitize_key(esc_attr($atts['bg_video']));
+	}
 	$output .= '
 		<div ' . $section_id_output . ' class="dslc-modules-section ' . $a_container_class . $parallax_class . $section_class . $extra_classes . '" style="' . dslc_row_get_style( $atts ) . '" data-section-id="' . $atts['section_instance_id'] . '">
 				' . $bg_video . '

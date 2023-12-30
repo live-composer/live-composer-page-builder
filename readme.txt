@@ -2,8 +2,8 @@
 Contributors: LiveComposer
 Tags: page builder, landing page builder, frontend page builder, drag and drop page builder, website builder
 Requires at least: 4.7
-Tested up to: 6.1.1
-Stable tag: 1.5.23
+Tested up to: 6.4.2
+Stable tag: 1.5.26
 License: GPLv3
 
 Page builder for WordPress with drag and drop header/footer editing, responsive settings, and animations. Compatible with Gutenberg block editor.

@@ -60,6 +60,24 @@ function dslc_plugin_options_add() {
 					),
 				),
 			),
+			'lc_disable_live_composer' => array(
+
+				'section' => 'dslc_plugin_options',
+				'label' => __( 'Render pages with Live Composer', 'live-composer-page-builder' ),
+				'std' => 'enabled',
+				'type' => 'select',
+				'descr' => __( 'When this option is enabled, all the pages will be rendered through the Live Composer.', 'live-composer-page-builder' ),
+				'choices' => array(
+					array(
+						'label' => __( 'Enabled', 'live-composer-page-builder' ),
+						'value' => 'enabled',
+					),
+					array(
+						'label' => __( 'Disabled', 'live-composer-page-builder' ),
+						'value' => 'disabled',
+					),
+				),
+			),
 
 			'lc_css_position' => array(
 
