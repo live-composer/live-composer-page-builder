@@ -786,7 +786,7 @@ function dslc_filter_content( $content ) {
 		}
 
 		// We need double do_shortcode as our module shortcodes can contain encoded 3-rd party shortcodes.
-		return doshortcode( do_shortcode( $rendered_page ) );
+		return do_shortcode( do_shortcode( $rendered_page ) );
 
 	} else {
 		// If LC should not filter the content (full content posts output in the blog/posts modules ).
