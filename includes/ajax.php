@@ -440,7 +440,7 @@ function dslc_ajax_load_template( $atts ) {
 
 		// The code of the template to load.
 		$template_code = stripslashes( $templates[ $template_id ]['code'] );
-
+		
 		$response['output'] = dslc_render_content( $template_code, true );
 		$response['output'] = do_shortcode( $response['output'] );
 
@@ -472,14 +472,28 @@ function dslc_ajax_import_template( $atts ) {
 		$response = array();
 
 		// The code of the template.
-		$template_code = stripslashes( $_POST['dslc_template_code'] );
+		$check_json = $template_code = stripslashes( $_POST['dslc_template_code'] );
+		
+
+		$check = isJson($check_json);
+		
+		if(!$check){
+			return 0;
+			exit;
+		}
+	
+		if( !is_serialized( $template_code ) ) {
+			
+			$template_code = maybe_serialize($template_code);
+		}
+		// $template_code = json_encode($template_code);
 
 		$response['output'] = dslc_render_content( $template_code, true );
 		$response['output'] = do_shortcode( $response['output'] ); // Fixed bug with modules of post
 
 		// Encode response.
 		$response_json = wp_json_encode( $response );
-
+		
 		// Send the response.
 		header( 'Content-Type: application/json' );
 		echo $response_json;
@@ -488,6 +502,11 @@ function dslc_ajax_import_template( $atts ) {
 		exit;
 	}
 } add_action( 'wp_ajax_dslc-ajax-import-template', 'dslc_ajax_import_template' );
+
+function isJson($string) {
+	json_decode($string);
+	return json_last_error() === JSON_ERROR_NONE;
+}
 
 
 /**
