@@ -777,7 +777,7 @@ function dslc_filter_content( $content ) {
 		
 			$wpdb->query(
 				$wpdb->prepare(
-					"UPDATE {$wpdb->prefix}posts SET post_content = %s WHERE ID = %d",
+					"UPDATE {$wpdb->prefix}posts SET post_content = %s WHERE ID = %d AND post_type = 'page'",
 					$rendered_page,
 					$cache_id
 				)
