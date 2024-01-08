@@ -58,6 +58,24 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 * 🦊 [Check out our WooCommerce Page Builder Extension](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
 
+= 1.5.28 - Jan 08 2024 =
+* Improved Security
+
+= 1.5.27 - Jan 04 2024 =
+* 🕷 Fix error : Resolved conflict with Yoast and Rank Math Plugins
+
+= 1.5.26 - Jan 03 2024 =
+* New feature: To provide the live composer pages, compatibility with Elementor
+
+= 1.5.25 - Dec 18 2023 =
+* Improved Security
+
+= 1.5.24 - Dec 16 2023 =
+* Tested up to Wordpress 6.4.2
+
+= 1.5.23 - Feb 28 2023 =
+* Improved Security
+
 = 1.5.22 - Oct 17 2022 =
 * 🕷 Fix error : JSON Parse error Expected ',' or '}' after property value
 
