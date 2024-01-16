@@ -58,6 +58,9 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 * 🦊 [Check out our WooCommerce Page Builder Extension](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
 
+= 1.5.29 - Jan 17 2024 =
+* Security improvement
+
 = 1.5.28 - Jan 08 2024 =
 * Improved Security
 
