@@ -472,23 +472,11 @@ function dslc_ajax_import_template( $atts ) {
 		$response = array();
 
 		// The code of the template.
-		$check_json = $template_code = stripslashes( $_POST['dslc_template_code'] );
-		
-
-		$check = isJson($check_json);
-		
-		if(!$check){
-			return 0;
-			exit;
-		}
-	
-		if( !is_serialized( $template_code ) ) {
-			
-			$template_code = maybe_serialize($template_code);
-		}
-		// $template_code = json_encode($template_code);
+		$template_code = stripslashes( $_POST['dslc_template_code'] );
+		$template_code = maybe_serialize($template_code);
 
 		$response['output'] = dslc_render_content( $template_code, true );
+		
 		$response['output'] = do_shortcode( $response['output'] ); // Fixed bug with modules of post
 
 		// Encode response.
@@ -502,12 +490,6 @@ function dslc_ajax_import_template( $atts ) {
 		exit;
 	}
 } add_action( 'wp_ajax_dslc-ajax-import-template', 'dslc_ajax_import_template' );
-
-function isJson($string) {
-	json_decode($string);
-	return json_last_error() === JSON_ERROR_NONE;
-}
-
 
 /**
  * Save a custom template
@@ -544,7 +526,7 @@ function dslc_ajax_save_template( $atts ) {
 		$templates[ $template_id ] = array(
 			'title' => $template_title,
 			'id' => $template_id,
-			'code' => $template_code,
+			'code' => maybe_serialize($template_code),
 			'section' => 'user',
 		);
 
@@ -623,6 +605,8 @@ function dslc_ajax_import_modules_section( $atts ) {
 
 		// The code of the modules section.
 		$code_to_import = stripslashes( $_POST['dslc_modules_section_code'] );
+
+		$code_to_import = maybe_serialize($code_to_import);
 
 		$response['output'] = dslc_render_content( $code_to_import, true );
 		$response['output'] = do_shortcode( $response['output'] );
