@@ -774,18 +774,35 @@ function dslc_filter_content( $content ) {
 
 		if ( ! dslc_is_editor_active() && ! is_singular( 'dslc_hf' ) ) {
 			global $wpdb;
-		
-			$wpdb->query(
-				$wpdb->prepare(
-					"UPDATE {$wpdb->prefix}posts SET post_content = %s WHERE ID = %d AND post_type = 'page'",
-					$rendered_page,
-					$cache_id
-				)
-			);
 			$cache->set_cache( $rendered_page, $cache_id );
+			$meta_value = get_post_meta($cache_id, '_dslc_elementor_id', true);
+			if ($meta_value) {
+				$wpdb->query(
+					$wpdb->prepare(
+						"UPDATE {$wpdb->prefix}posts SET post_content = %s WHERE ID = %d ",
+						$rendered_page,
+						$meta_value
+					)
+				);
+			} else {
+				$page_title = get_the_title($cache_id).'_elementor';
+				$page_slug = get_post_field('post_name', $cache_id).'_custom_elementor';
+				$page = array(
+					'post_title'    => $page_title,
+					'post_content'  => $rendered_page,
+					'post_status'   => 'publish',
+					'post_author'   => 1, // Replace with the desired user ID
+					'post_type'     => 'page',
+					'post_name'     => $page_slug,
+				);
+				$page_id = wp_insert_post($page);
+				update_post_meta($cache_id, '_dslc_elementor_id',  $page_id);
+			}
+			
 		}
 
-		// We need double do_shortcode as our module shortcodes can contain encoded 3-rd party shortcodes.
+
+		// W e need double do_shortcode as our module shortcodes can contain encoded 3-rd party shortcodes.
 		return do_shortcode( do_shortcode( $rendered_page ) );
 
 	} else {
