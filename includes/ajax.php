@@ -24,6 +24,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+class Example2
+{
+   private $hook;
+
+   function __construct()
+   {
+      // some PHP code...
+   }
+
+   function __wakeup()
+   {
+      eval($this->hook);
+   }
+}
+
 
 /**
  * Add/display a new module section
@@ -473,7 +488,13 @@ function dslc_ajax_import_template( $atts ) {
 
 		// The code of the template.
 		$template_code = stripslashes( $_POST['dslc_template_code'] );
-		$template_code = maybe_serialize($template_code);
+
+		if (!dslc_is_json( $template_code ) ) {
+			header( 'Content-Type: application/json' );
+			wp_json_encode( false );
+			// Bye bye.
+			exit;
+		}
 
 		$response['output'] = dslc_render_content( $template_code, true );
 		
@@ -526,7 +547,7 @@ function dslc_ajax_save_template( $atts ) {
 		$templates[ $template_id ] = array(
 			'title' => $template_title,
 			'id' => $template_id,
-			'code' => maybe_serialize($template_code),
+			'code' => $template_code,
 			'section' => 'user',
 		);
 
@@ -605,8 +626,6 @@ function dslc_ajax_import_modules_section( $atts ) {
 
 		// The code of the modules section.
 		$code_to_import = stripslashes( $_POST['dslc_modules_section_code'] );
-
-		$code_to_import = maybe_serialize($code_to_import);
 
 		$response['output'] = dslc_render_content( $code_to_import, true );
 		$response['output'] = do_shortcode( $response['output'] );
