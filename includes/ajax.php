@@ -490,9 +490,7 @@ function dslc_ajax_import_template( $atts ) {
 		$template_code = stripslashes( $_POST['dslc_template_code'] );
 
 		if (!dslc_is_json( $template_code ) ) {
-			header( 'Content-Type: application/json' );
-			wp_json_encode( false );
-			// Bye bye.
+			return 0;
 			exit;
 		}
 
@@ -626,7 +624,10 @@ function dslc_ajax_import_modules_section( $atts ) {
 
 		// The code of the modules section.
 		$code_to_import = stripslashes( $_POST['dslc_modules_section_code'] );
-
+		if (!dslc_is_json($code_to_import) ) {
+			return 0;
+			exit;
+		}
 		$response['output'] = dslc_render_content( $code_to_import, true );
 		$response['output'] = do_shortcode( $response['output'] );
 

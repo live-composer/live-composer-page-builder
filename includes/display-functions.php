@@ -942,7 +942,13 @@ function dslc_editor_code() {
  * @return Bool           True if JSON, false otherwise.
  */
 function dslc_is_json( $string ) {
-	json_decode( $string );
+
+	try {
+		json_decode( $string );
+	} catch (\Throwable $th) {
+		return false;
+	}
+
 	return ( function_exists( 'json_last_error' ) && json_last_error() == JSON_ERROR_NONE );
 }
 
@@ -1009,8 +1015,10 @@ function dslc_json_decode( $raw_code, $ignore_migration = false ) {
 			// Decode JSON.
 			$decoded = json_decode( $raw_code, true );
 		} // End if().
-		
+
 	}
+
+
 	return $decoded;
 }
 
