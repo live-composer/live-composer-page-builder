@@ -963,8 +963,7 @@ function dslc_json_decode( $raw_code, $ignore_migration = false ) {
 	$decoded = false;
 
 	if (dslc_is_json( $raw_code ) ) {
-	// if (false ) {
-			$decoded = json_decode( $raw_code, true );
+		$decoded = json_decode( $raw_code, true );
 	}
 	else{
 		// $raw_code = maybe_unserialize( stripslashes($raw_code) );
