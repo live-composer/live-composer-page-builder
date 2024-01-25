@@ -23,6 +23,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	header( 'HTTP/1.0 403 Forbidden' );
 	exit;
 }
+
+
 /**
  * Add/display a new module section
  *
@@ -471,11 +473,7 @@ function dslc_ajax_import_template( $atts ) {
 
 		// The code of the template.
 		$template_code = stripslashes( $_POST['dslc_template_code'] );
-
-		if (!dslc_is_json( $template_code ) ) {
-			return 0;
-			exit;
-		}
+		$template_code = maybe_serialize($template_code);
 
 		$response['output'] = dslc_render_content( $template_code, true );
 		
@@ -514,11 +512,6 @@ function dslc_ajax_save_template( $atts ) {
 		$template_id = strtolower( str_replace( ' ', '-', $template_title ) );
 		$template_code = stripslashes( $_POST['dslc_template_code'] );
 
-		if (!dslc_is_json($template_code) ) {
-			return 0;
-			exit;
-		}
-		
 		// Get current templates.
 		$templates = get_option( 'dslc_templates' );
 
@@ -533,7 +526,7 @@ function dslc_ajax_save_template( $atts ) {
 		$templates[ $template_id ] = array(
 			'title' => $template_title,
 			'id' => $template_id,
-			'code' => $template_code,
+			'code' => maybe_serialize($template_code),
 			'section' => 'user',
 		);
 
@@ -612,10 +605,9 @@ function dslc_ajax_import_modules_section( $atts ) {
 
 		// The code of the modules section.
 		$code_to_import = stripslashes( $_POST['dslc_modules_section_code'] );
-		if (!dslc_is_json($code_to_import) ) {
-			return 0;
-			exit;
-		}
+
+		$code_to_import = maybe_serialize($code_to_import);
+
 		$response['output'] = dslc_render_content( $code_to_import, true );
 		$response['output'] = do_shortcode( $response['output'] );
 
