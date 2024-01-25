@@ -514,6 +514,11 @@ function dslc_ajax_save_template( $atts ) {
 		$template_id = strtolower( str_replace( ' ', '-', $template_title ) );
 		$template_code = stripslashes( $_POST['dslc_template_code'] );
 
+		if (!dslc_is_json($template_code) ) {
+			return 0;
+			exit;
+		}
+		
 		// Get current templates.
 		$templates = get_option( 'dslc_templates' );
 
