@@ -773,36 +773,12 @@ function dslc_filter_content( $content ) {
 		$rendered_page = $dslc_content_before . $composer_wrapper_before . do_action( 'dslc_output_prepend' ) . $composer_header . '<div id="dslc-main">' . $composer_prepend . $composer_content . '</div>' . $composer_append . $composer_footer . do_action( 'dslc_output_append' ) . $composer_wrapper_after . $dslc_content_after;
 
 		if ( ! dslc_is_editor_active() && ! is_singular( 'dslc_hf' ) ) {
-			global $wpdb;
+			
 			$cache->set_cache( $rendered_page, $cache_id );
-			$meta_value = get_post_meta($cache_id, '_dslc_elementor_id', true);
-			if ($meta_value) {
-				$wpdb->query(
-					$wpdb->prepare(
-						"UPDATE {$wpdb->prefix}posts SET post_content = %s WHERE ID = %d ",
-						$rendered_page,
-						$meta_value
-					)
-				);
-			} else {
-				$page_title = get_the_title($cache_id).'_elementor';
-				$page_slug = get_post_field('post_name', $cache_id).'_custom_elementor';
-				$page = array(
-					'post_title'    => $page_title,
-					'post_content'  => $rendered_page,
-					'post_status'   => 'publish',
-					'post_author'   => 1, // Replace with the desired user ID
-					'post_type'     => 'page',
-					'post_name'     => $page_slug,
-				);
-				$page_id = wp_insert_post($page);
-				update_post_meta($cache_id, '_dslc_elementor_id',  $page_id);
-			}
 			
 		}
 
-
-		// W e need double do_shortcode as our module shortcodes can contain encoded 3-rd party shortcodes.
+		// We need double do_shortcode as our module shortcodes can contain encoded 3-rd party shortcodes.
 		return do_shortcode( do_shortcode( $rendered_page ) );
 
 	} else {
@@ -812,6 +788,7 @@ function dslc_filter_content( $content ) {
 	} // End if().
 
 } add_filter( 'the_content', 'dslc_filter_content', 101 );
+
 
 
 /**
@@ -972,14 +949,20 @@ function dslc_is_json( $string ) {
  */
 function dslc_json_decode( $raw_code, $ignore_migration = false ) {
 	$decoded = false;
-
-	// $raw_code = maybe_unserialize( stripslashes($raw_code) );
-	$raw_code = maybe_unserialize( $raw_code );
-
-	// Array already provided. Do nothing.
-	if ( is_array( $raw_code ) ) {
-		return $raw_code;
+    
+	if (!is_array($raw_code) && dslc_is_json( $raw_code ) ) {
+	    $decoded = json_decode( $raw_code, true );
+	  
 	}
+	else{
+	   
+	    // $raw_code = maybe_unserialize( stripslashes($raw_code) );
+		$raw_code = maybe_unserialize( $raw_code );
+
+		// Array already provided. Do nothing.
+		if ( is_array( $raw_code ) ) {
+			return $raw_code;
+		}
 
 	// Is it JSON?
 	if ( ! dslc_is_json( $raw_code ) ) {
