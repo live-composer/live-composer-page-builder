@@ -936,7 +936,13 @@ function dslc_editor_code() {
  * @return Bool           True if JSON, false otherwise.
  */
 function dslc_is_json( $string ) {
-	json_decode( $string );
+    	
+	try {
+		json_decode( $string );
+	} catch (\Throwable $th) {
+		return false;
+	}
+
 	return ( function_exists( 'json_last_error' ) && json_last_error() == JSON_ERROR_NONE );
 }
 
@@ -964,47 +970,50 @@ function dslc_json_decode( $raw_code, $ignore_migration = false ) {
 			return $raw_code;
 		}
 
-	// Is it JSON?
-	if ( ! dslc_is_json( $raw_code ) ) {
-		// If it's not JSON then:
-		// 1. it's old code of the module settings serialized + base64.
-		// 2. it's old code containing both shortocodes + base64.
-		/**
-		 * Is it's valid base64?
-		 *
-		 * Function base64_decode returns FALSE if input contains
-		 * character from outside the base64 alphabet.
-		 */
-
-		$decoded_base64 = base64_decode( $raw_code );
-
-		// Base64 successfull?
-		if ( ! $decoded_base64 ) {
-			// 2. it's old code containing both shortocodes + base64
-			// We can do nothing with it, so return FALSE.
-			return false;
-		} else {
+		// Is it JSON?
+		if ( ! dslc_is_json( $raw_code ) ) {
+			// If it's not JSON then:
 			// 1. it's old code of the module settings serialized + base64.
-			// Get array out of it.
-			$decoded = maybe_unserialize( $decoded_base64 );
+			// 2. it's old code containing both shortocodes + base64.
+			/**
+			 * Is it's valid base64?
+			 *
+			 * Function base64_decode returns FALSE if input contains
+			 * character from outside the base64 alphabet.
+			 */
 
-			// Add a marker indicating that this module
-			// was imported from shortcode format.
-			if ( is_array( $decoded ) ) {
-				$decoded['code_version'] = 1;
+			$decoded_base64 = base64_decode( $raw_code );
+
+			// Base64 successfull?
+			if ( ! $decoded_base64 ) {
+				// 2. it's old code containing both shortocodes + base64
+				// We can do nothing with it, so return FALSE.
+				return false;
+			} else {
+				// 1. it's old code of the module settings serialized + base64.
+				// Get array out of it.
+				$decoded = maybe_unserialize( $decoded_base64 );
+
+				// Add a marker indicating that this module
+				// was imported from shortcode format.
+				if ( is_array( $decoded ) ) {
+					$decoded['code_version'] = 1;
+				}
+
+				// Preset is always being stored in base64 format,
+				// so we need to ignore code version parameter as it's not relevant.
+				if ( $ignore_migration ) {
+					unset( $decoded['code_version'] );
+				}
 			}
+		} else {
+			// Decode JSON.
+			$decoded = json_decode( $raw_code, true );
+		} // End if().
 
-			// Preset is always being stored in base64 format,
-			// so we need to ignore code version parameter as it's not relevant.
-			if ( $ignore_migration ) {
-				unset( $decoded['code_version'] );
-			}
-		}
-	} else {
-		// Decode JSON.
-		$decoded = json_decode( $raw_code, true );
-	} // End if().
+	}
 
+	
 	return $decoded;
 }
 
@@ -2095,5 +2104,4 @@ function dslc_encode_shortcodes_in_array( $atts ) {
 	}
 
 	return $atts;
-}
 }
