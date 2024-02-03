@@ -2096,3 +2096,4 @@ function dslc_encode_shortcodes_in_array( $atts ) {
 
 	return $atts;
 }
+}
