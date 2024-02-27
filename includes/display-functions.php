@@ -990,7 +990,7 @@ function dslc_json_decode( $raw_code, $ignore_migration = false ) {
 			} else {
 				// 1. it's old code of the module settings serialized + base64.
 				// Get array out of it.
-				$decoded = maybe_unserialize( maybe_serialize($decoded_base64) );
+				$decoded = maybe_unserialize( $decoded_base64 );
 
 				// Add a marker indicating that this module
 				// was imported from shortcode format.
