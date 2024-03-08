@@ -117,6 +117,7 @@ function dslc_template_save() {
 		DSLCAjax.ajaxurl,
 		{
 			action : 'dslc-ajax-save-template',
+			_wpnonce : DSLCAjax._wpnonce,
 			dslc : 'active',
 			dslc_template_code : jQuery('#dslca-code').val(),
 			dslc_template_title : jQuery('#dslca-save-template-title').val()
