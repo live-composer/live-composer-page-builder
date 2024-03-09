@@ -228,6 +228,7 @@ export const addSection = ( callback ) => {
 			DSLCAjax.ajaxurl,
 			{
 				action : 'dslc-ajax-add-modules-section',
+				_wpnonce : DSLCAjax._wpnonce,s
 				dslc : 'active'
 			},
 			function( response ) {
