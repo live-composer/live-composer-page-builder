@@ -836,7 +836,7 @@ function dslc_ajax_clear_cache() {
 function dslc_ajax_toggle_extension( $atts ) {
 
 	// Allowed to do this?
-	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY_SAVE ) && wp_verify_nonce($_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce' )):
+	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY_SAVE ) && wp_verify_nonce($_REQUEST['security']['nonce'], 'dslc-optionspanel-ajax' )):
 
 	// The array we'll pass back to the AJAX call.
 	$response = false;
