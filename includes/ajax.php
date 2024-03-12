@@ -605,7 +605,7 @@ function dslc_ajax_delete_template( $atts ) {
 function dslc_ajax_import_modules_section( $atts ) {
 
 	// Allowed to do this?
-	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY_SAVE ) && wp_verify_nonce($_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce' )) {
+	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) && wp_verify_nonce($_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce' )) {
 		// The array we'll pass back to the AJAX call.
 		$response = array();
 
