@@ -59,8 +59,8 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
 
 
-= 1.5.36 - Mar 12 2024 =
-* Security improvement
+= 1.5.36 - Mar 13 2024 =
+* Fixes related to Cross Site Request Forgery (CSRF)
 
 = 1.5.35 - Feb 27 2024 =
 * Security improvement
