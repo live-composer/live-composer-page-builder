@@ -29,7 +29,6 @@ export const updatePreset = () => {
 			DSLCAjax.ajaxurl,
 			{
 				action : 'dslc-ajax-save-preset',
-				_wpnonce : DSLCAjax._wpnonce,
 				dslc_preset_name : presetName,
 				dslc_preset_code : presetCode,
 				dslc_module_id : moduleID
@@ -108,7 +107,6 @@ jQuery(document).ready(function($){
 				DSLCAjax.ajaxurl,
 				{
 					action : 'dslc-ajax-delete-preset',
-					_wpnonce : DSLCAjax._wpnonce,
 					dslc_preset_name : presetName,
 					dslc_module_id : moduleID
 				},

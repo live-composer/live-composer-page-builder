@@ -38,7 +38,6 @@ const loadTemplateById = ( template ) => {
 		DSLCAjax.ajaxurl,
 		{
 			action : 'dslc-ajax-load-template',
-			_wpnonce : DSLCAjax._wpnonce,
 			dslc : 'active',
 			dslc_template_id : template
 		},
@@ -83,7 +82,6 @@ function dslc_template_import() {
 		DSLCAjax.ajaxurl,
 		{
 			action : 'dslc-ajax-import-template',
-			_wpnonce : DSLCAjax._wpnonce,
 			dslc : 'active',
 			dslc_template_code : jQuery('#dslca-import-code').val()
 		},
@@ -119,7 +117,6 @@ function dslc_template_save() {
 		DSLCAjax.ajaxurl,
 		{
 			action : 'dslc-ajax-save-template',
-			_wpnonce : DSLCAjax._wpnonce,
 			dslc : 'active',
 			dslc_template_code : jQuery('#dslca-code').val(),
 			dslc_template_title : jQuery('#dslca-save-template-title').val()
@@ -144,7 +141,6 @@ function dslc_template_delete( template ) {
 		DSLCAjax.ajaxurl,
 		{
 			action : 'dslc-ajax-delete-template',
-			_wpnonce : DSLCAjax._wpnonce,
 			dslc : 'active',
 			dslc_template_id : template
 		},
