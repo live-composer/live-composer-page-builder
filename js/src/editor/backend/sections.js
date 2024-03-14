@@ -228,7 +228,6 @@ export const addSection = ( callback ) => {
 			DSLCAjax.ajaxurl,
 			{
 				action : 'dslc-ajax-add-modules-section',
-				_wpnonce : DSLCAjax._wpnonce,s
 				dslc : 'active'
 			},
 			function( response ) {
@@ -653,7 +652,6 @@ function dslc_row_import( rowCode ) {
 		DSLCAjax.ajaxurl,
 		{
 			action : 'dslc-ajax-import-modules-section',
-			_wpnonce : DSLCAjax._wpnonce,
 			dslc : 'active',
 			dslc_modules_section_code : rowCode
 		},

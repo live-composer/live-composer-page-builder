@@ -605,7 +605,6 @@ window.dslc_module_options_show = function( moduleID ) {
 	// Settings array for the Ajax call
 	var dslcSettings = {};
 	dslcSettings['action'] = 'dslc-ajax-display-module-options';
-	_wpnonce : DSLCAjax._wpnonce,
 	dslcSettings['dslc'] = 'active';
 	dslcSettings['dslc_module_id'] = moduleID;
 	dslcSettings['dslc_post_id'] = jQuery('.dslca-container').data('data-post-id');
@@ -745,7 +744,6 @@ export const moduleOutputDefault = ( dslc_module_id, callback ) => {
 		DSLCAjax.ajaxurl,
 		{
 			action : 'dslc-ajax-add-module',
-			_wpnonce : DSLCAjax._wpnonce,
 			dslc : 'active',
 			dslc_module_id : dslc_module_id, // ex. DSLC_Button
 			dslc_post_id : jQuery('.dslca-container').data('post-id'),
@@ -937,7 +935,6 @@ function dslc_dm_get_defaults( module ) {
 		DSLCAjax.ajaxurl,
 		{
 			action : 'dslc-ajax-dm-module-defaults',
-			_wpnonce : DSLCAjax._wpnonce,
 			dslc : 'active',
 			dslc_modules_options : optionsCode
 		},
