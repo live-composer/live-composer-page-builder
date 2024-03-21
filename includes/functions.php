@@ -1024,3 +1024,17 @@ function dslc_sanitize_option_val ( $data_to_sanitize ) {
 	// return $value;
 }
 */
+
+
+/**
+ * Generic function
+ *
+ * Remove JavaScript code from HTML
+ *
+ * @since 1.0
+ */
+function dslc_sanitize_html($html) {
+	 $html = preg_replace('/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/', '', $html);
+	 // Return sanitized HTML
+	 return $html;
+}
