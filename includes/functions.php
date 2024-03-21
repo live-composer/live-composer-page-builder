@@ -1034,7 +1034,11 @@ function dslc_sanitize_option_val ( $data_to_sanitize ) {
  * @since 1.0
  */
 function dslc_sanitize_html($html) {
-	 $html = preg_replace('/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/', '', $html);
-	 // Return sanitized HTML
-	 return $html;
+	try {
+		$html = preg_replace('/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/', '', $html);
+		return $html;
+	} catch (\Throwable $th) {
+		return $html;
+	}
+	
 }
