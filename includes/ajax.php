@@ -89,6 +89,10 @@ function dslc_ajax_add_module( $atts ) {
 			die();
 		}
 
+		if (isset($_POST['content']) && !empty($_POST['content']) && !current_user_can( 'manage_options' )) {
+			$_POST['content'] = dslc_sanitize_html($_POST['content']);
+		}
+		
 		$post_id = intval( $_POST['dslc_post_id'] );
 
 		if ( isset( $_POST['dslc_preload_preset'] ) && 'enabled' === $_POST['dslc_preload_preset'] ) {
