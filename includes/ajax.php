@@ -88,9 +88,17 @@ function dslc_ajax_add_module( $atts ) {
 			header( 'HTTP/1.1 400 Bad Request', true, 400 );
 			die();
 		}
-
-		if (isset($_POST['content']) && !empty($_POST['content']) && !current_user_can( 'manage_options' )) {
-			$_POST['content'] = dslc_sanitize_html($_POST['content']);
+	
+		$fields_to_sanitize = ['content', 'tabs_content', 'accordion_content'];
+		 
+		foreach ($fields_to_sanitize as $field) {
+		
+			if (isset($_POST[$field]) && !empty($_POST[$field]) && !current_user_can('manage_options')) {
+		
+				$_POST[$field] = dslc_sanitize_html($_POST[$field]);
+		
+			}
+		
 		}
 
 		
