@@ -92,6 +92,12 @@ function dslc_ajax_add_module( $atts ) {
 		if (isset($_POST['content']) && !empty($_POST['content']) && !current_user_can( 'manage_options' )) {
 			$_POST['content'] = dslc_sanitize_html($_POST['content']);
 		}
+
+		
+		if (isset($_POST['tabs_content']) && !empty($_POST['tabs_content']) && !current_user_can( 'manage_options' )) {
+			$_POST['tabs_content'] = dslc_sanitize_html($_POST['tabs_content']);
+		}
+
 		
 		$post_id = intval( $_POST['dslc_post_id'] );
 
