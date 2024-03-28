@@ -59,7 +59,7 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
 
 = 1.5.41 - Mar 28 2024 =
-* Compatibility with wordpress 6.5 tested
+* Compatibility testing with Wordpress 6.5 
 
 = 1.5.40 - Mar 27 2024 =
 * Twitter icon replaced with X
