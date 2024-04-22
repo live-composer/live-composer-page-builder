@@ -1492,17 +1492,74 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1, $is_h
 		$atts['bg_video'] = str_replace( '.mp4', '', $atts['bg_video'] );
 		$atts['bg_video'] = str_replace( '.webm', '', $atts['bg_video'] );
 
-		// The HTML.
-		$bg_video = '
-		<div class="dslc-bg-video">
+		
+		$current_site_url = home_url();
+        
+        // Get the URL to check
+        $url_to_check = $atts['bg_video'];
+        
+        // Parse the URLs to get their host/domain
+        $current_site_host = parse_url($current_site_url, PHP_URL_HOST);
+        $url_to_check_host = parse_url($url_to_check, PHP_URL_HOST);
+        
+        // Check if the hosts are the same
+        if ($current_site_host === $url_to_check_host) {
+//             		$atts['bg_video'] = str_replace( '.mp4', '', $atts['bg_video'] );
+// 		$atts['bg_video'] = str_replace( '.webm', '', $atts['bg_video'] );
+        $bg_video = '
+           
+            		<div class="dslc-bg-video">
 			<div class="dslc-bg-video-inner">
-				<video muted="muted">
-					<source type="video/mp4" src="' . $atts['bg_video'] . '.mp4" />
-					<source type="video/webm" src="' . $atts['bg_video'] . '.webm" />
-				</video>
-			</div>
+	
+		
+        
+        <video autoplay loop muted playsinline id="video-background">
+    <source src="'.$atts['bg_video'].'" type="video/mp4">
+    	<source type="video/webm" src="' . $atts['bg_video'] . '.webm" />
+</video>
+            	</div>
 			<div class="dslc-bg-video-overlay" style="' . $overlay_style . '"></div>
-		</div>';
+		</div>
+       
+        ';
+//        
+
+        } else {
+            		$atts['bg_video'] = 'https://www.youtube.com/watch?v=3GsmXHPCo_w';
+            
+            	// The HTML.
+            		$bg_video = '
+            	<div class="dslc-bg-video">
+            		<div class="dslc-bg-video-inner">
+            	                <div class="hp-hero" style="backgroundz-index: 0;   "></div>
+            		</div>
+            		<div class="dslc-bg-video-overlay" style="' . $overlay_style . '"></div>
+            	</div>
+            	
+            	
+                <div class="bgndVideo player mb_YTPlayer isMuted" data-property="{videoURL:\'' . $atts['bg_video'] . '\',containment:\'.hp-hero\',autoPlay:true,mobileFallbackImage:\'https://demo.flawlessthemes.com/hotelinn-pro2/wp-content/uploads/2021/04/la-pota-4096087_1280.jpg\' ,showControls:false, mute:true, startAt:0, opacity:1}"></div>
+            
+            	
+            <script src="https://code.jquery.com/jquery-3.6.0.miny.js"></script>
+            
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mb.YTPlayer/3.3.9/jquery.mb.YTPlayer.js" integrity="sha512-QEsEUG6vCJ4YMCLGNXn9zScVK2FYKyMSntIS5s3P8h1c5kz5320OE5nij835WZqfTt3JrfyyoOTm0JhVWoqJPA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <script>
+            jQuery(document).ready(function(){
+            jQuery(".bgndVideo").YTPlayer();
+            });
+            </script>
+            <style>
+            .hp-hero {
+            position: initial !important;
+            }
+            </style>
+            	
+            	';
+
+        }
+		
+
+
 
 	}
 
