@@ -1488,9 +1488,7 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1, $is_h
 					$atts['bg_video'] = wp_get_attachment_url( $atts['bg_video'] );
 		}
 
-		// Remove the file type extension.
-		$atts['bg_video'] = str_replace( '.mp4', '', $atts['bg_video'] );
-		$atts['bg_video'] = str_replace( '.webm', '', $atts['bg_video'] );
+		
 
 		
 		$current_site_url = home_url();
