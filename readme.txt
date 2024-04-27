@@ -61,7 +61,6 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 = 1.5.42 - Apr 27 2024 =
 * Bug fixed: Background video rendering issue in iPhone
 
-
 = 1.5.41 - Mar 28 2024 =
 * Compatibility testing with Wordpress 6.5 
 
