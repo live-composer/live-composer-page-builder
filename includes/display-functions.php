@@ -961,7 +961,7 @@ function dslc_json_decode( $raw_code, $ignore_migration = false ) {
 	  
 	}
 	else{
-		$raw_code = maybe_unserialize( maybe_serialize($raw_code) );
+		$raw_code = unserialize( maybe_serialize($raw_code) ,['allowed_classes' => false]);
 
 		// Array already provided. Do nothing.
 		if ( is_array( $raw_code ) ) {
@@ -990,8 +990,8 @@ function dslc_json_decode( $raw_code, $ignore_migration = false ) {
 			} else {
 				// 1. it's old code of the module settings serialized + base64.
 				// Get array out of it.
-				$decoded = maybe_unserialize( $decoded_base64 );
-
+				$decoded = unserialize( $decoded_base64,['allowed_classes' => false] );
+				
 				// Add a marker indicating that this module
 				// was imported from shortcode format.
 				if ( is_array( $decoded ) ) {
@@ -1465,12 +1465,12 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1, $is_h
 
 	// Overlay Color.
 	if ( isset( $atts['bg_video_overlay_color'] ) && ! empty( $atts['bg_video_overlay_color'] ) ) {
-			$overlay_style .= 'background-color:' . $atts['bg_video_overlay_color'] . '; ';
+			$overlay_style .= 'background-color:' . esc_attr($atts['bg_video_overlay_color']) . '; ';
 	}
 
 	// Overlay Opacity.
 	if ( isset( $atts['bg_video_overlay_opacity'] ) && ! empty( $atts['bg_video_overlay_opacity'] ) ) {
-			$overlay_style .= 'opacity:' . $atts['bg_video_overlay_opacity'] . '; ';
+			$overlay_style .= 'opacity:' . esc_attr($atts['bg_video_overlay_opacity']) . '; ';
 	}
 
 	/**
@@ -1813,12 +1813,12 @@ function dslc_modules_area_front( $atts, $content = null, $version = 1, $is_head
 
 	$valign_class = '';
 	if ( isset( $atts['valign'] ) ) {
-		$valign_class = ' dslc-valign-' . $atts['valign'] . ' ';
+		$valign_class = ' dslc-valign-' . esc_attr($atts['valign']) . ' ';
 	} else {
 		$atts['valign'] = '';
 	}
 
-	$output = '<div class="dslc-modules-area dslc-col dslc-' . $atts['size'] . '-col ' . $pos_class . $valign_class . $admin_class . '" data-size="' . $atts['size'] . '" data-valign="' . $atts['valign'] . '">';
+	$output = '<div class="dslc-modules-area dslc-col dslc-' . $atts['size'] . '-col ' . $pos_class . $valign_class . $admin_class . '" data-size="' . $atts['size'] . '" data-valign="' . esc_attr($atts['valign']) . '">';
 
 	if ( $dslc_active && ! $is_header_footer && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
