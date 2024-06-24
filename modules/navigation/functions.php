@@ -66,11 +66,11 @@ function dslc_nav_render_menu( $atts, $content = null ) {
 	$menu_class = 'menu';
 
 	if ( isset( $atts['theme_location'] ) ) {
-		$theme_location = $atts['theme_location'];
+		$theme_location = esc_attr($atts['theme_location']);
 	}
 
 	if ( isset( $atts['menu_class'] ) ) {
-		$menu_class = $atts['menu_class'];
+		$menu_class = esc_attr($atts['menu_class']);
 	}
 
 	ob_start();
@@ -94,7 +94,7 @@ function dslc_nav_render_mobile_menu( $atts, $content = null ) {
 	$theme_location = '';
 
 	if ( isset( $atts['theme_location'] ) ) {
-		$theme_location = $atts['theme_location'];
+		$theme_location = esc_attr($atts['theme_location']);
 	}
 
 	ob_start();
