@@ -1522,9 +1522,7 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1, $is_h
         ';
 //        
 
-        } else {
-            		$atts['bg_video'] = 'https://www.youtube.com/watch?v=3GsmXHPCo_w';
-            
+        } else {            
             	// The HTML.
             		$bg_video = '
             	<div class="dslc-bg-video">

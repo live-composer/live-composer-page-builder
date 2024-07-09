@@ -1038,7 +1038,7 @@ function dslc_sanitize_html($html) {
 		$html = preg_replace('/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>|&lt;script\b[^&]*(?:(?!&lt;\/script&gt;)&[^&]*)*&lt;\/script&gt;/', '', $html);
 		return $html;
 	} catch (\Throwable $th) {
-		return $html;
+		return 'error';
 	}
 	
 }

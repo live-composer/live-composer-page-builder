@@ -445,7 +445,7 @@ const onModuleOptionsChange = () => {
 			dslcOptionWrap = dslcOption.closest('.dslca-module-edit-option'),
 			dslcModule = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument),
 			dslcModuleID = dslcModule.data('module'),
-			dslcModuleOptions = jQuery( '.dslca-module-options-front textarea', dslcModule );
+			dslcModuleOptions = jQuery.find( '.dslca-module-options-front textarea', dslcModule );
 
 		// Add changed class
 		dslcModule.addClass('dslca-module-change-made');
@@ -747,7 +747,7 @@ const onSectionOptionsChange = () => {
 			if ( dslcVal && dslcVal.length ) {
 
 				// dslcVal = dslcField.data('dslca-img-url');
-				dslcVal = jQuery('.dslca-modules-section-settings input[data-id="dslca-img-url"]', dslcEl ).val();
+				dslcVal = jQuery.find('.dslca-modules-section-settings input[data-id="dslca-img-url"]', dslcEl ).val();
 			}
 		}
 
@@ -931,7 +931,7 @@ const onSectionOptionsChange = () => {
 				var dslcVideoVal = dslcVal;
 				dslcVideoVal = dslcVideoVal.replace( '.webm', '' );
 				dslcVideoVal = dslcVideoVal.replace( '.mp4', '' );
-				jQuery('.dslc-bg-video-inner', dslcEl).html('<video><source type="video/mp4" src="' + dslcVideoVal + '.mp4" /><source type="video/webm" src="' + dslcVideoVal + '.webm" /></video>');
+				jQuery.find('.dslc-bg-video-inner', dslcEl).text('<video><source type="video/mp4" src="' + dslcVideoVal + '.mp4" /><source type="video/webm" src="' + dslcVideoVal + '.webm" /></video>');
 				LiveComposer.Builder.PreviewAreaWindow.dslc_bg_video();
 			}
 

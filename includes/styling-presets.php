@@ -65,12 +65,15 @@ function dslc_presets_load( $settings ) {
 				if ( isset( $preset_settings[ $key ] ) ) {
 					$settings[ $key ] = $preset_settings[ $key ];
 					unset( $preset_settings_stripped[ $key ] );
-				}
+				}	
 			}
 
 			// Fill in the blanks.
-			foreach ( $preset_settings_stripped as $key => $value ) {
-				$settings[ $key ] = $value;
+			if(is_array($preset_settings_stripped))
+			{
+				foreach ( $preset_settings_stripped as $key => $value ) {
+					$settings[ $key ] = $value;
+				}
 			}
 		}
 	}// End if().
