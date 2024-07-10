@@ -475,7 +475,7 @@ const onModuleOptionsChange = () => {
 					}
 				});
 			} else if ( dslcOption.hasClass('dslca-module-edit-option-radio') ) {
-				var dslcOptionValue = jQuery('.dslca-module-edit-field:checked', dslcOption).val();
+				var dslcOptionValue = jQuery.find('.dslca-module-edit-field:checked', dslcOption).val();
 			} else {
 				var dslcOptionValue = dslcOption.val();
 				// Post Grid > Thumbnail: Orientation change.
