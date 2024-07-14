@@ -1098,7 +1098,7 @@ function dslc_module_front( $atts, $settings_raw = null, $is_header_footer = fal
 		// 🔖 RAW CODE CLEANUP
 		foreach ( $module_struct as $option ) {
 			// Fix 'Undefined index' notices.
-			if ( ! isset( $settings[ $option['id'] ] ) ) {
+			if ( isset( $option['id'] ) && ! isset( $settings[ $option['id'] ] ) ) {
 				$settings[ $option['id'] ] = false;
 			}
 		}
@@ -1109,7 +1109,7 @@ function dslc_module_front( $atts, $settings_raw = null, $is_header_footer = fal
 		// Transform image ID to URL
 		foreach ( $module_struct as $option ) {
 
-			if ( 'image' === $option['type'] ) {
+			if ( isset( $option['type'] ) && 'image' === $option['type'] ) {
 				if ( isset( $settings[ $option['id'] ] ) && ! empty( $settings[ $option['id'] ] ) && is_numeric( $settings[ $option['id'] ] ) ) {
 
 					$dslc_var_image_option_bckp[ $option['id'] ] = $settings[ $option['id'] ];
