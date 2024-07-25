@@ -8,7 +8,7 @@ License: GPLv3
 
 Page builder for WordPress with drag and drop header/footer editing, responsive settings, and animations. Compatible with Gutenberg block editor.
 
-[![Live Composer - Quick Introduction]](https://www.youtube.com/watch?v=eyW1iRP1L2s)
+[Live Composer - Quick Introduction](https://www.youtube.com/watch?v=eyW1iRP1L2s)
 
 == Description ==
 
