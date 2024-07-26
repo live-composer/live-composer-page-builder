@@ -3,34 +3,42 @@ Contributors: LiveComposer
 Tags: page builder, landing page builder, frontend page builder, drag and drop page builder, website builder
 Requires at least: 4.7
 Tested up to: 6.6
-Stable tag: 1.5.45
+Stable tag: 1.5.46
 License: GPLv3
 
 Page builder for WordPress with drag and drop header/footer editing, responsive settings, and animations. Compatible with Gutenberg block editor.
 
 == Description ==
 
-## Open Source WordPress Website Builder
+https://www.youtube.com/watch?v=eyW1iRP1L2s
 
-Join 40,000+ Others Creating with Live Composer. Unlock the Power of Open Source with Our WordPress Website Builder!
+= Open Source WordPress Website Builder =
+
+Join 60,000+ Others Creating with Live Composer. Unlock the Power of Open Source with Our WordPress Website Builder!
 Are you looking to create stunning websites without the hassle of coding? Look no further! Our Open Source WordPress Website Builder is here to revolutionize your website creation experience.
 
-## Why Choose Our Open Source WordPress Website Builder?
+= Why Choose Our Open Source WordPress Website Builder? =
 
-= Freedom: = With open-source software, you can customize and modify your website to suit your unique needs perfectly.
-= Flexibility: = Our builder offers a wide range of themes, plugins, and customization options, allowing you to effortlessly create a website that reflects your brand identity.
-= Community Support: = Join a vibrant community of developers and users passionate about WordPress. Get help, share ideas, and collaborate to build excellent websites.
-= Cost-Effective: = Say goodbye to expensive website development costs. Our open-source solution is cost-effective, making professional website creation accessible to everyone.
+- **Freedom:** With open-source software, you can customize and modify your website to suit your unique needs perfectly.
+- **Flexibility:** Our builder offers a wide range of themes, plugins, and customization options, allowing you to effortlessly create a website that reflects your brand identity.
+- **Community Support:** Join the [Github community](https://github.com/live-composer/live-composer-page-builder) of developers and users who are passionate about WordPress. Get help, share ideas, and collaborate to build excellent websites.
+- **Cost-Effective:** Say goodbye to expensive website development costs. Our open-source solution is cost-effective, making professional website creation accessible to everyone.
 
-## Key Features:
+**Key Features:**
 
-* User-Friendly Interface: No coding skills? No problem! Our intuitive interface makes website building a breeze for beginners and experts alike.,* Flexible Theme: Build a custom website from scratch with a lightweight, fast-working theme.,*Powerful Premium Extensions: Enhance your website's functionality with extensions, such as Breadcrumbs, WooCommerce integration, and content restriction.,*Mobile Responsiveness: Ensure your website looks great on any device with built-in mobile responsiveness ,* SEO-Friendly: Boost your website's visibility on search engines with popular compatible SEO plugins like Rankmath, Yoast SEO, and All-in-one SEO.
+- **User-Friendly Interface:** No coding skills? No problem! Our intuitive interface makes website building a breeze for beginners and experts alike.
+- **Flexible Theme:** Build a custom website from scratch with a lightweight, fast-working theme.
+- **Powerful Premium Extensions:** Enhance your website's functionality with extensions, such as Breadcrumbs, WooCommerce integration, and content restriction.
+- **Mobile Responsiveness:** Ensure your website looks great on any device with built-in mobile responsiveness.
+- **SEO-Friendly:** Boost your website's visibility on search engines with popular compatible SEO plugins like Rankmath, Yoast SEO, and All-in-one SEO.
 
-## Drag and Drop Page Builder
+Get all features with [Live Composer Premium](https://livecomposerplugin.com/)
+
+= Drag and Drop Page Builder =
 
 Say goodbye to coding constraints and hello to boundless creativity. With our WordPress website builder, crafting distinctive designs is effortless. Whether you're an experienced designer or just starting, our intuitive platform enables you to add and edit content precisely and efficiently. Enjoy the excitement of real-time editing, where every change appears instantly. Step into a world where your imagination has no boundaries, and unleash your creativity with our powerful builder.
 
-## Build Powerful Sites With Premium Extensions
+= Build Powerful Sites With Premium Extensions =
 
 Our core WordPress website builder is your gateway to limitless design possibilities and won't cost you a penny. But if you're craving that extra flair, we've covered you with a range of powerful premium extensions. Elevate your designs and take your website to the next level with our premium offerings. Why settle for the ordinary when you can get fancy?
 
@@ -41,33 +49,37 @@ With our page builder, creating responsive websites is simple. You can customize
 ## Multiple Language and RTL Support
 
 Live Composer supports multiple languages and typographies, including RTL. It offers editor translations in over 63 languages and is compatible with WPML, Polylang, TranslatePress, Weglot, and more.
-Advanced, time-saving features to get your site-building skills to the next level
+**Advanced, time-saving features to get your site-building skills to the next level**
 Premium extensions bundle includes:
-1.Restrict Content: The Restrict Content Pro plugin (premium license needed) allows you to control members' access to site areas.
-2.Contact Forms: Integrate contact forms easily with drag-and-drop modules.
-3.Preloader: Customize a responsive preloader for smooth website transitions.
-4.Video Embedding: Embed videos effortlessly from YouTube, Vimeo, and more.
-5.Breadcrumbs: Enhance navigation with dynamic, clickable breadcrumbs.
-6.ACF Support: Display custom fields on pages, posts, or templates.
-7.CPT Support: Support Custom Post Types with shared templates.
-8.Mega Menu: Create customizable multicolumn and responsive menus.
-9.3rd-Party Sliders: Integrate sliders with drag-and-drop modules.
-10.Gallery Images Grid: Showcase images in grids or carousels.
-11.Google Maps: Add Google Maps with a dedicated module.
-12.Animations: Add 47 new on-load animation effects.
-13.Linecons Icons: Access 48 new design icons.
-14.Post Links: Display previous/next post links for navigation.
-15.Content Width: Customize content widths per page.
-16.Before/After Slider: Highlight image differences effectively.
+1. **[Restrict Content](https://livecomposerplugin.com/downloads/restrict-content/)**: The Restrict Content Pro plugin (premium license needed) allows you to control members' access to site areas.
+2. **[Contact Forms](https://livecomposerplugin.com/downloads/contact-forms/)**: Integrate contact forms easily with drag-and-drop modules.
+3. **[Preloader](https://livecomposerplugin.com/downloads/preloader-copy/)**: Customize a responsive preloader for smooth website transitions.
+4. **[Video Embedding](https://livecomposerplugin.com/downloads/video//)**: Embed videos effortlessly from YouTube, Vimeo, and more.
+5. **[Breadcrumbs](https://livecomposerplugin.com/downloads/breadcrumbs/)**: Enhance navigation with dynamic, clickable breadcrumbs.
+6. **[ACF Support](https://livecomposerplugin.com/downloads/acf-support/)**: Display custom fields on pages, posts, or templates.
+7. **[CPT Support](https://livecomposerplugin.com/downloads/cpt-support/)**: Support Custom Post Types with shared templates.
+8. **[Mega Menu](https://livecomposerplugin.com/downloads/mega-menu/)**: Create customizable multicolumn and responsive menus.
+9. **[3rd-Party Sliders](https://livecomposerplugin.com/downloads/sliders-integration/)**: Integrate sliders with drag-and-drop modules.
+10. **[Gallery Images Grid](https://livecomposerplugin.com/downloads/gallery-images-grid/)**: Showcase images in grids or carousels.
+11. **[Google Maps](https://livecomposerplugin.com/downloads/google-maps-add-on/)**: Add Google Maps with a dedicated module.
+12. **[Animations](https://livecomposerplugin.com/downloads/additional-animations/)**: Add 47 new on-load animation effects.
+13. **[Linecons Icons](https://livecomposerplugin.com/downloads/linecons-icons-add-on/)**: Access 48 new design icons.
+14. **[Post Links](https://livecomposerplugin.com/downloads/previousnext-post-links-add-on/)**: Display previous/next post links for navigation.
+15. **[Content Width](https://livecomposerplugin.com/downloads/per-page-content-width-add-on/)**: Customize content widths per page.
+16. **[Before/After Slider](https://livecomposerplugin.com/downloads/beforeafter-image-slider-add-on/)**: Highlight image differences effectively.
 
-## Get Creative With Your WooCommerce Store
+Build your website and page using [Live Composer Premium!](https://livecomposerplugin.com/)
+
+= Get Creative With Your WooCommerce Store =
 
 Finally, using our drag-and-drop page builder, you can build a custom WooCommerce website from scratch. You should gradually improve your product and checkout page designs to maximize conversions. Now, you don’t need to ask a developer to make changes. Based on your analytics, improve your designs every week. Save time and money with our drag-and-drop page builder for WooCommerce.
+
 With this premium extension, you can create the following e-commerce website pages and sections:
-Product Page (Fully customizable)
-Products Listings Grid (Fully customizable)
-Checkout and Cart Pages (Fully customizable)
-Buyer’s Account (Fully customizable) 
+
+        - Product Page (Fully customizable)
+        - Products Listings Grid (Fully customizable)
+        - Checkout and Cart Pages (Fully customizable)
+        - Buyer’s Account (Fully customizable)
 
 ## Master Your Online Presence with Live Composer Builder
 
@@ -79,7 +91,7 @@ Say goodbye to the hassle of internal optimization problems. Our site builder is
 
 ## Unleash Your Business's Visual Identity
 
-Creating a custom website for your business has never been easier. Forget about expensive and time-consuming projects. With our visual page composer, you can effortlessly build your company's online presence while saving time and money. Enjoy the satisfaction of designing your website from scratch, even on a tight budget.
+Creating a custom website for your business has always been challenging. Forget about expensive and time-consuming projects. With our visual page composer, you can effortlessly build your company's online presence while saving time and money. Enjoy the satisfaction of designing your website from scratch, even on a tight budget.
 
 ## Freedom for Web Designers
 
@@ -96,10 +108,6 @@ Are you looking for a quick and customizable way to display your portfolio or ca
 ## Gutenberg Compatible
 
 Our page builder seamlessly integrates with the Gutenberg plugin, allowing you to use it alongside the new WordPress block editor without any issues.
-
-== Installation ==
-
-Install and Activate our page builder from your WordPress admin like any other plugin
 
 == Frequently Asked Questions ==
 
@@ -125,7 +133,7 @@ While some page builders may add additional code and scripts to your website, le
 
 = Can I switch to Live Composer Page Builder without losing my content? =
 
-Switching to Live Composer Page Builder can sometimes result in formatting issues or needing to reconfigure layouts. However, Live Composer offers options to migrate content from other builders, although this may require manual adjustments.
+Live Composer Page Builder can sometimes cause formatting issues or require reconfiguring layouts. However, Live Composer offers options to migrate content from other builders, although this may require manual adjustments.
 
 = Is Live Composer Page Builder SEO-friendly? =
 
@@ -179,10 +187,6 @@ Regular updates ensure compatibility with the latest version of WordPress and se
 
 If you're migrating from another page builder, compatibility for content transfer is essential. Live Composer Page Builder offers tools or plugins to assist with content migration, or manual transfer may be required. Consider the ease of transition before making a decision.
 
-= Why is the "activate editor" button missing from the homepage =
-
-In most of the cases, this is because the homepage is not a real WordPress page, it's custom content generated by the theme's index.php. Publish a new page and set it as the homepage ( WP Admin > Settings > Reading > Front Page ). Now you can use a page builder on the homepage too.
-
 == Screenshots ==
 
 1. The page builder in editing mode
@@ -198,6 +202,9 @@ In most of the cases, this is because the homepage is not a real WordPress page,
 = FOR OUR PRO USERS: =
 * 🦊 [Check out our WooCommerce Page Builder Extension](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
+
+= 1.5.46 - July 26 2024 =
+* Improved Documentation
 
 = 1.5.45 - July 20 2024 =
 * Security fixes
