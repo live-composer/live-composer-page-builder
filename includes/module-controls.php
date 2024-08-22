@@ -207,10 +207,16 @@ class LC_Control {
 
 				<?php elseif ( 'radio' === $module_control['type'] ) : ?>
 
+					<?php
+
+					$curr_value = $this->get_starting_value();
+
+					?>
+
 					<div class="dslca-module-edit-option-radio-wrapper">
 						<?php foreach ( $module_control['choices'] as  $checkbox_option ) : ?>
 							<div class="dslca-module-edit-option-radio-single">
-								<input type="radio" class="dslca-module-edit-field" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" name="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo $checkbox_option['value']; ?>" /> <?php echo $checkbox_option['label']; ?><br>
+								<input type="radio" class="dslca-module-edit-field" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" name="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo $checkbox_option['value']; ?>" <?php if ( $curr_value == $checkbox_option['value'] ) { echo 'checked="checked"';} ?> /> <?php echo $checkbox_option['label']; ?><br>
 							</div><!-- .dslca-module-edit-option-radio-single -->
 						<?php endforeach; ?>
 					</div><!-- .dslca-module-edit-option-radio-wrapper -->
