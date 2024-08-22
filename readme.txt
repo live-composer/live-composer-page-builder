@@ -3,7 +3,7 @@ Contributors: LiveComposer
 Tags: page builder, landing page builder, frontend page builder, drag and drop page builder, website builder
 Requires at least: 4.7
 Tested up to: 6.6
-Stable tag: 1.5.46
+Stable tag: 1.5.47
 License: GPLv3
 
 Page builder for WordPress with drag and drop header/footer editing, responsive settings, and animations. Compatible with Gutenberg block editor.
@@ -81,7 +81,7 @@ With this premium extension, you can create the following e-commerce website pag
         - Checkout and Cart Pages (Fully customizable)
         - Buyer’s Account (Fully customizable)
 
-## Master Your Online Presence with Live Composer Builder
+= Master Your Online Presence with Live Composer Builder =
 
 In the fast-moving world of online marketing, every moment counts. Live Composer is your must-have tool, offering an easy-to-use WordPress website builder made for online marketers like you. With Live Composer, you can quickly create and test eye-catching web and landing pages for your promotional campaigns, keeping you ahead in the digital game.
 
@@ -202,6 +202,9 @@ If you're migrating from another page builder, compatibility for content transfe
 = FOR OUR PRO USERS: =
 * 🦊 [Check out our WooCommerce Page Builder Extension](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
+
+= 1.5.47 - August 22 2024 =
+* Improved Documentation
 
 = 1.5.46 - July 26 2024 =
 * Improved Documentation
