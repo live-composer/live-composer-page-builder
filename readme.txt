@@ -203,7 +203,7 @@ If you're migrating from another page builder, compatibility for content transfe
 * 🦊 [Check out our WooCommerce Page Builder Extension](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
 
-= 1.5.48 - October 11 2024 =
+= 1.5.48 - October 4 2024 =
 * Fixed Depandabot security issues.
 
 = 1.5.47 - August 22 2024 =
