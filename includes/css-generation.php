@@ -400,7 +400,7 @@ function dslc_module_gen_css( $atts, $settings_raw ) {
 
 		foreach ( $options_arr as $option_arr ) {
 
-			if ( 'image' === $option_arr['type'] ) {
+			if ( isset( $option_arr['type'] ) && 'image' === $option_arr['type'] ) {
 				if ( isset( $settings[ $option_arr['id'] ] ) && ! empty( $settings[ $option_arr['id'] ] ) && is_numeric( $settings[ $option_arr['id'] ] ) ) {
 					$dslc_var_image_option_bckp[ $option_arr['id'] ] = $settings[ $option_arr['id'] ];
 					$image_info = wp_get_attachment_image_src( $settings[ $option_arr['id'] ], 'full' );
@@ -409,7 +409,7 @@ function dslc_module_gen_css( $atts, $settings_raw ) {
 			}
 
 			// Fix css_custom value ( issue when default changed programmatically ).
-			if ( 'css_custom' === $option_arr['id'] && 'DSLC_Text_Simple' === $module_id && ! isset( $settings['css_custom'] ) ) {
+			if ( isset( $option_arr['id'] ) && 'css_custom' === $option_arr['id'] && 'DSLC_Text_Simple' === $module_id && ! isset( $settings['css_custom'] ) ) {
 				$settings['css_custom'] = $option_arr['std'];
 			}
 		}
@@ -576,7 +576,7 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 	// Transform module options into css rulles.
 	foreach ( $module_structure as $option_arr ) {
 
-		$option_id = $option_arr['id'];
+		$option_id = isset( $option_arr['id'] ) ? $option_arr['id'] : null;
 
 		// 🔖 RAW CODE CLEANUP
 		// if ( isset( $module_settings[ $option_id ] ) && ! empty( $module_settings[ $option_id ] )  ) {
