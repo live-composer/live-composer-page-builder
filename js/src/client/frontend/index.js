@@ -97,10 +97,16 @@ window.dslc_init_lightbox = () => {
 		type = 'image';
 
 		// Check if video
-		if ( jQuery(this).attr('href').indexOf('youtube.com') >= 0 || jQuery(this).attr('href').indexOf('vimeo.com') >= 0 ) {
+		const url = jQuery(this).attr('href');
+		const parsedUrl = new URL(url);
+		if ( parsedUrl.hostname === 'vimeo.com' || parsedUrl.hostname === 'vimeo.com') {
 
 			type = 'iframe';
 		}
+		// if ( jQuery(this).attr('href').indexOf('youtube.com') >= 0 || jQuery(this).attr('href').indexOf('vimeo.com') >= 0 ) {
+
+		// 	type = 'iframe';
+		// }
 
 		jQuery(this).magnificPopup({ type: type });
 	});

@@ -49,7 +49,7 @@ function dslc_access_control_init() {
 
 				'section' => 'dslc_plugin_options_access_control',
 				'label' => __( 'Front-End Editor', 'live-composer-page-builder' ),
-				'std' => 'publish_posts',
+				'std' => 'manage_options',
 				'type' => 'select',
 				'descr' => __( 'Who can use Live Composer in the front-end? This will also affect who can manage post templates.', 'live-composer-page-builder' ),
 				'choices' => $capability_opts
@@ -59,7 +59,7 @@ function dslc_access_control_init() {
 
 				'section' => 'dslc_plugin_options_access_control',
 				'label' => __( 'Projects Management', 'live-composer-page-builder' ),
-				'std' => 'publish_posts',
+				'std' => 'manage_options',
 				'type' => 'select',
 				'descr' => __( 'Who can manage projects ( add, edit, trash... )?', 'live-composer-page-builder' ),
 				'choices' => $capability_opts
@@ -69,7 +69,7 @@ function dslc_access_control_init() {
 
 				'section' => 'dslc_plugin_options_access_control',
 				'label' => __( 'Galleries Management', 'live-composer-page-builder' ),
-				'std' => 'publish_posts',
+				'std' => 'manage_options',
 				'type' => 'select',
 				'descr' => __( 'Who can manage galleries ( add, edit, trash... )?', 'live-composer-page-builder' ),
 				'choices' => $capability_opts
@@ -79,7 +79,7 @@ function dslc_access_control_init() {
 
 				'section' => 'dslc_plugin_options_access_control',
 				'label' => __( 'Staff Management', 'live-composer-page-builder' ),
-				'std' => 'publish_posts',
+				'std' => 'manage_options',
 				'type' => 'select',
 				'descr' => __( 'Who can manage staff ( add, edit, trash... )?', 'live-composer-page-builder' ),
 				'choices' => $capability_opts
@@ -89,7 +89,7 @@ function dslc_access_control_init() {
 
 				'section' => 'dslc_plugin_options_access_control',
 				'label' => __( 'Downloads Management', 'live-composer-page-builder' ),
-				'std' => 'publish_posts',
+				'std' => 'manage_options',
 				'type' => 'select',
 				'descr' => __( 'Who can manage downloads ( add, edit, trash... )?', 'live-composer-page-builder' ),
 				'choices' => $capability_opts
@@ -99,7 +99,7 @@ function dslc_access_control_init() {
 
 				'section' => 'dslc_plugin_options_access_control',
 				'label' => __( 'Testimonials Management', 'live-composer-page-builder' ),
-				'std' => 'publish_posts',
+				'std' => 'manage_options',
 				'type' => 'select',
 				'descr' => __( 'Who can manage testimonials ( add, edit, trash... )?', 'live-composer-page-builder' ),
 				'choices' => $capability_opts
@@ -109,7 +109,7 @@ function dslc_access_control_init() {
 
 				'section' => 'dslc_plugin_options_access_control',
 				'label' => __( 'Partners Management', 'live-composer-page-builder' ),
-				'std' => 'publish_posts',
+				'std' => 'manage_options',
 				'type' => 'select',
 				'descr' => __( 'Who can manage partners ( add, edit, trash... )?', 'live-composer-page-builder' ),
 				'choices' => $capability_opts
