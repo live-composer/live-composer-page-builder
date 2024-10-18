@@ -204,7 +204,7 @@ If you're migrating from another page builder, compatibility for content transfe
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
 
 = 1.5.49 - October 19 2024 =
-* Bug fixed: Fixed warnings and exception handling.
+* Fixed warnings and exception handling.
 
 = 1.5.48 - October 4 2024 =
 * Fixed Depandabot security issues.
