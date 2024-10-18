@@ -961,8 +961,11 @@ function dslc_json_decode( $raw_code, $ignore_migration = false ) {
 	  
 	}
 	else{
-		$raw_code = unserialize( maybe_serialize($raw_code) ,['allowed_classes' => false]);
-
+		if(is_serialized($raw_code))
+		{
+			$raw_code = unserialize($raw_code,['allowed_classes' => false]);
+			// $raw_code = unserialize( maybe_serialize($raw_code));
+		}
 		// Array already provided. Do nothing.
 		if ( is_array( $raw_code ) ) {
 			return $raw_code;
@@ -990,7 +993,12 @@ function dslc_json_decode( $raw_code, $ignore_migration = false ) {
 			} else {
 				// 1. it's old code of the module settings serialized + base64.
 				// Get array out of it.
-				$decoded = unserialize( $decoded_base64,['allowed_classes' => false] );
+				// $decoded = unserialize( $decoded_base64,['allowed_classes' => false] );
+				if(is_serialized($decoded_base64))
+				{
+					$decoded = unserialize( $decoded_base64,['allowed_classes' => false] );
+				}
+				// $decoded = unserialize( $decoded_base64);
 				
 				// Add a marker indicating that this module
 				// was imported from shortcode format.
