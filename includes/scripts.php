@@ -244,6 +244,7 @@ final class DSLC_Scripts {
 
 			wp_localize_script( 'dslc-editor-backend-js', 'DSLCAjax', array(
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
+				'_wpnonce' => wp_create_nonce( 'dslc-ajax-wpnonce' ),
 			) );
 			wp_localize_script( 'dslc-editor-backend-js', 'DSLCSiteData', array(
 				'siteurl' => get_option( 'siteurl' ),

@@ -636,7 +636,10 @@ class DSLC_Logo extends DSLC_Module {
 
 				$site_logo_id = get_theme_mod( 'custom_logo' );
 				$site_logo = wp_get_attachment_image_src( $site_logo_id, 'full' );
-				$logo_url = $site_logo['0'];
+				$logo_url = ['0'];
+				if( isset( $site_logo['0'] ) ){
+					$logo_url = $site_logo['0'];
+				}
 
 				$resize = false;
 				$the_image = $logo_url;

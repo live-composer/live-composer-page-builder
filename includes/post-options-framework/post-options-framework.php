@@ -148,14 +148,17 @@ function dslc_add_post_options() {
 			} else {
 
 				// Add meta box to post type.
-				add_meta_box(
-					$dslc_post_option_key,
-					$dslc_post_option['title'],
-					'dslc_editorinterface_post_options',
-					$dslc_post_option['show_on'],
-					$dslc_post_option['context'],
-					'high'
-				);
+				if( !empty( $dslc_post_option['title'] && $dslc_post_option['show_on']  ) ) {
+					add_meta_box(
+						$dslc_post_option_key,
+						$dslc_post_option['title'],
+						'dslc_editorinterface_post_options',
+						$dslc_post_option['show_on'],
+						$dslc_post_option['context'],
+						'high'
+					);
+				}
+
 			}
 		}
 	}

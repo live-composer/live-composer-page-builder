@@ -773,7 +773,9 @@ function dslc_filter_content( $content ) {
 		$rendered_page = $dslc_content_before . $composer_wrapper_before . do_action( 'dslc_output_prepend' ) . $composer_header . '<div id="dslc-main">' . $composer_prepend . $composer_content . '</div>' . $composer_append . $composer_footer . do_action( 'dslc_output_append' ) . $composer_wrapper_after . $dslc_content_after;
 
 		if ( ! dslc_is_editor_active() && ! is_singular( 'dslc_hf' ) ) {
+			
 			$cache->set_cache( $rendered_page, $cache_id );
+			
 		}
 
 		// We need double do_shortcode as our module shortcodes can contain encoded 3-rd party shortcodes.
@@ -786,6 +788,7 @@ function dslc_filter_content( $content ) {
 	} // End if().
 
 } add_filter( 'the_content', 'dslc_filter_content', 101 );
+
 
 
 /**
@@ -933,7 +936,13 @@ function dslc_editor_code() {
  * @return Bool           True if JSON, false otherwise.
  */
 function dslc_is_json( $string ) {
-	json_decode( $string );
+    	
+	try {
+		json_decode( $string );
+	} catch (\Throwable $th) {
+		return false;
+	}
+
 	return ( function_exists( 'json_last_error' ) && json_last_error() == JSON_ERROR_NONE );
 }
 
@@ -946,56 +955,71 @@ function dslc_is_json( $string ) {
  */
 function dslc_json_decode( $raw_code, $ignore_migration = false ) {
 	$decoded = false;
+    
+	if (!is_array($raw_code) && dslc_is_json( $raw_code ) ) {
+	    $decoded = json_decode( $raw_code, true );
+	  
+	}
+	else{
+		if(is_serialized($raw_code))
+		{
+			$raw_code = unserialize($raw_code,['allowed_classes' => false]);
+			// $raw_code = unserialize( maybe_serialize($raw_code));
+		}
+		// Array already provided. Do nothing.
+		if ( is_array( $raw_code ) ) {
+			return $raw_code;
+		}
 
-	// $raw_code = maybe_unserialize( stripslashes($raw_code) );
-	$raw_code = maybe_unserialize( $raw_code );
+		// Is it JSON?
+		if ( ! dslc_is_json( $raw_code ) ) {
+			// If it's not JSON then:
+			// 1. it's old code of the module settings serialized + base64.
+			// 2. it's old code containing both shortocodes + base64.
+			/**
+			 * Is it's valid base64?
+			 *
+			 * Function base64_decode returns FALSE if input contains
+			 * character from outside the base64 alphabet.
+			 */
 
-	// Array already provided. Do nothing.
-	if ( is_array( $raw_code ) ) {
-		return $raw_code;
+			$decoded_base64 = base64_decode( $raw_code );
+
+			// Base64 successfull?
+			if ( ! $decoded_base64 ) {
+				// 2. it's old code containing both shortocodes + base64
+				// We can do nothing with it, so return FALSE.
+				return false;
+			} else {
+				// 1. it's old code of the module settings serialized + base64.
+				// Get array out of it.
+				// $decoded = unserialize( $decoded_base64,['allowed_classes' => false] );
+				if(is_serialized($decoded_base64))
+				{
+					$decoded = unserialize( $decoded_base64,['allowed_classes' => false] );
+				}
+				// $decoded = unserialize( $decoded_base64);
+				
+				// Add a marker indicating that this module
+				// was imported from shortcode format.
+				if ( is_array( $decoded ) ) {
+					$decoded['code_version'] = 1;
+				}
+
+				// Preset is always being stored in base64 format,
+				// so we need to ignore code version parameter as it's not relevant.
+				if ( $ignore_migration ) {
+					unset( $decoded['code_version'] );
+				}
+			}
+		} else {
+			// Decode JSON.
+			$decoded = json_decode( $raw_code, true );
+		} // End if().
+
 	}
 
-	// Is it JSON?
-	if ( ! dslc_is_json( $raw_code ) ) {
-		// If it's not JSON then:
-		// 1. it's old code of the module settings serialized + base64.
-		// 2. it's old code containing both shortocodes + base64.
-		/**
-		 * Is it's valid base64?
-		 *
-		 * Function base64_decode returns FALSE if input contains
-		 * character from outside the base64 alphabet.
-		 */
-
-		$decoded_base64 = base64_decode( $raw_code );
-
-		// Base64 successfull?
-		if ( ! $decoded_base64 ) {
-			// 2. it's old code containing both shortocodes + base64
-			// We can do nothing with it, so return FALSE.
-			return false;
-		} else {
-			// 1. it's old code of the module settings serialized + base64.
-			// Get array out of it.
-			$decoded = maybe_unserialize( $decoded_base64 );
-
-			// Add a marker indicating that this module
-			// was imported from shortcode format.
-			if ( is_array( $decoded ) ) {
-				$decoded['code_version'] = 1;
-			}
-
-			// Preset is always being stored in base64 format,
-			// so we need to ignore code version parameter as it's not relevant.
-			if ( $ignore_migration ) {
-				unset( $decoded['code_version'] );
-			}
-		}
-	} else {
-		// Decode JSON.
-		$decoded = json_decode( $raw_code, true );
-	} // End if().
-
+	
 	return $decoded;
 }
 
@@ -1082,7 +1106,7 @@ function dslc_module_front( $atts, $settings_raw = null, $is_header_footer = fal
 		// 🔖 RAW CODE CLEANUP
 		foreach ( $module_struct as $option ) {
 			// Fix 'Undefined index' notices.
-			if ( ! isset( $settings[ $option['id'] ] ) ) {
+			if ( isset( $option['id'] ) && ! isset( $settings[ $option['id'] ] ) ) {
 				$settings[ $option['id'] ] = false;
 			}
 		}
@@ -1093,12 +1117,14 @@ function dslc_module_front( $atts, $settings_raw = null, $is_header_footer = fal
 		// Transform image ID to URL
 		foreach ( $module_struct as $option ) {
 
-			if ( 'image' === $option['type'] ) {
+			if ( isset( $option['type'] ) && 'image' === $option['type'] ) {
 				if ( isset( $settings[ $option['id'] ] ) && ! empty( $settings[ $option['id'] ] ) && is_numeric( $settings[ $option['id'] ] ) ) {
 
 					$dslc_var_image_option_bckp[ $option['id'] ] = $settings[ $option['id'] ];
 					$image_info = wp_get_attachment_image_src( $settings[ $option['id'] ], 'full' );
-					$settings[ $option['id'] ] = $image_info[0];
+					if( isset( $image_info[0] ) ){
+						$settings[ $option['id'] ] = $image_info[0];
+					}
 				}
 			}
 		}
@@ -1447,12 +1473,12 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1, $is_h
 
 	// Overlay Color.
 	if ( isset( $atts['bg_video_overlay_color'] ) && ! empty( $atts['bg_video_overlay_color'] ) ) {
-			$overlay_style .= 'background-color:' . $atts['bg_video_overlay_color'] . '; ';
+			$overlay_style .= 'background-color:' . esc_attr($atts['bg_video_overlay_color']) . '; ';
 	}
 
 	// Overlay Opacity.
 	if ( isset( $atts['bg_video_overlay_opacity'] ) && ! empty( $atts['bg_video_overlay_opacity'] ) ) {
-			$overlay_style .= 'opacity:' . $atts['bg_video_overlay_opacity'] . '; ';
+			$overlay_style .= 'opacity:' . esc_attr($atts['bg_video_overlay_opacity']) . '; ';
 	}
 
 	/**
@@ -1470,21 +1496,74 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1, $is_h
 					$atts['bg_video'] = wp_get_attachment_url( $atts['bg_video'] );
 		}
 
-		// Remove the file type extension.
-		$atts['bg_video'] = str_replace( '.mp4', '', $atts['bg_video'] );
-		$atts['bg_video'] = str_replace( '.webm', '', $atts['bg_video'] );
+		
 
-		// The HTML.
-		$bg_video = '
-		<div class="dslc-bg-video">
+		
+		$current_site_url = home_url();
+        
+        // Get the URL to check
+        $url_to_check = $atts['bg_video'];
+        
+        // Parse the URLs to get their host/domain
+        $current_site_host = parse_url($current_site_url, PHP_URL_HOST);
+        $url_to_check_host = parse_url($url_to_check, PHP_URL_HOST);
+        
+        // Check if the hosts are the same
+        if ($current_site_host === $url_to_check_host) {
+//             		$atts['bg_video'] = str_replace( '.mp4', '', $atts['bg_video'] );
+// 		$atts['bg_video'] = str_replace( '.webm', '', $atts['bg_video'] );
+        $bg_video = '
+           
+            		<div class="dslc-bg-video">
 			<div class="dslc-bg-video-inner">
-				<video muted="muted">
-					<source type="video/mp4" src="' . $atts['bg_video'] . '.mp4" />
-					<source type="video/webm" src="' . $atts['bg_video'] . '.webm" />
-				</video>
-			</div>
+	
+		
+        
+        <video autoplay loop muted playsinline id="video-background">
+    <source src="'.$atts['bg_video'].'" type="video/mp4">
+    	<source type="video/webm" src="' . $atts['bg_video'] . '.webm" />
+</video>
+            	</div>
 			<div class="dslc-bg-video-overlay" style="' . $overlay_style . '"></div>
-		</div>';
+		</div>
+       
+        ';
+//        
+
+        } else {            
+            	// The HTML.
+            		$bg_video = '
+            	<div class="dslc-bg-video">
+            		<div class="dslc-bg-video-inner">
+            	                <div class="hp-hero" style="backgroundz-index: 0;   "></div>
+            		</div>
+            		<div class="dslc-bg-video-overlay" style="' . $overlay_style . '"></div>
+            	</div>
+            	
+            	
+                <div class="bgndVideo player mb_YTPlayer isMuted" data-property="{videoURL:\'' . $atts['bg_video'] . '\',containment:\'.hp-hero\',autoPlay:true,mobileFallbackImage:\'https://demo.flawlessthemes.com/hotelinn-pro2/wp-content/uploads/2021/04/la-pota-4096087_1280.jpg\' ,showControls:false, mute:true, startAt:0, opacity:1}"></div>
+            
+            	
+            <script src="https://code.jquery.com/jquery-3.6.0.miny.js"></script>
+            
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mb.YTPlayer/3.3.9/jquery.mb.YTPlayer.js" integrity="sha512-QEsEUG6vCJ4YMCLGNXn9zScVK2FYKyMSntIS5s3P8h1c5kz5320OE5nij835WZqfTt3JrfyyoOTm0JhVWoqJPA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <script>
+            jQuery(document).ready(function(){
+            jQuery(".bgndVideo").YTPlayer();
+            });
+            </script>
+            <style>
+            .hp-hero {
+            position: initial !important;
+            }
+            </style>
+            	
+            	';
+
+        }
+		
+
+
 
 	}
 
@@ -1639,7 +1718,9 @@ function dslc_modules_section_front( $atts, $content = null, $version = 1, $is_h
 		$dslc_section_before = '';
 		$output .= dslc_decode_shortcodes( apply_filters( 'dslc_section_before', $dslc_section_before, $atts ) );
 	}
-
+	if(isset($atts['bg_video']) && !empty($atts['bg_video'])){
+		$atts['bg_video'] = sanitize_key(esc_attr($atts['bg_video']));
+	}
 	$output .= '
 		<div ' . $section_id_output . ' class="dslc-modules-section ' . $a_container_class . $parallax_class . $section_class . $extra_classes . '" style="' . dslc_row_get_style( $atts ) . '" data-section-id="' . $atts['section_instance_id'] . '">
 				' . $bg_video . '
@@ -1738,12 +1819,12 @@ function dslc_modules_area_front( $atts, $content = null, $version = 1, $is_head
 
 	$valign_class = '';
 	if ( isset( $atts['valign'] ) ) {
-		$valign_class = ' dslc-valign-' . $atts['valign'] . ' ';
+		$valign_class = ' dslc-valign-' . esc_attr($atts['valign']) . ' ';
 	} else {
 		$atts['valign'] = '';
 	}
 
-	$output = '<div class="dslc-modules-area dslc-col dslc-' . $atts['size'] . '-col ' . $pos_class . $valign_class . $admin_class . '" data-size="' . $atts['size'] . '" data-valign="' . $atts['valign'] . '">';
+	$output = '<div class="dslc-modules-area dslc-col dslc-' . $atts['size'] . '-col ' . $pos_class . $valign_class . $admin_class . '" data-size="' . $atts['size'] . '" data-valign="' . esc_attr($atts['valign']) . '">';
 
 	if ( $dslc_active && ! $is_header_footer && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 

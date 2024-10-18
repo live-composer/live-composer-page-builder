@@ -44,6 +44,7 @@ function dslc_save_composer() {
 		url: DSLCAjax.ajaxurl,
 		data: {
 			action : 'dslc-ajax-save-composer',
+			_wpnonce : DSLCAjax._wpnonce,
 			dslc : 'active',
 			dslc_post_id : postID,
 			dslc_code : composerCode,
@@ -111,6 +112,7 @@ function dslc_save_draft_composer() {
 		DSLCAjax.ajaxurl,
 		{
 			action : 'dslc-ajax-save-draft-composer',
+			_wpnonce : DSLCAjax._wpnonce,
 			dslc : 'active',
 			dslc_post_id : postID,
 			dslc_code : composerCode,
