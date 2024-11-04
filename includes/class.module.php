@@ -2774,7 +2774,7 @@ class DSLC_Module {
 					}
 
 					// Sanitize User Option Values.
-					if ( $uid ) {
+					if ( $uid !==false) {
 						$option_satinitize_data = array(
 							'value' => $uid,
 							'id' => $id,
@@ -2808,7 +2808,7 @@ class DSLC_Module {
 					$options_ids[] = $option['id'];
 
 					// Set the setting value.
-					if ( $uid ) {
+					if ( $uid !==false ) {
 						$option_value = $uid;
 					} else {
 						$option_value = '';
