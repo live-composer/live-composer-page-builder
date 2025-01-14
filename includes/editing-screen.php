@@ -102,10 +102,19 @@ function dslc_editing_screen_content() {
 	}
 
 	// Set 'dslc' key – indicating that Live Composer editing mode is active.
-	$previewurl_keys['dslc'] = '';
+	$previewurl_keys['dslc'] = ''; 
 
-	// Output iframe with page being edited.
+	// Output iframe with page being edited. 
 	if ( $preview_output ) {
+		// Check meta content for current Page
+		$post_id = $previewurl_keys['page_id'] ?? $previewurl_keys['preview_id'];
+		$dslc_code = get_post_meta( $post_id, 'dslc_code', true );
+		// If there is no LC content, store old post_content
+		if ( !$dslc_code ) {
+			$content_post = get_post( $post_id);
+			$content = $content_post->post_content;
+			add_post_meta( $post_id, 'dslc_original_post_content',$content , true);
+		}
 
 		do_action( 'dslca_editing_screen_preview_before' );
 
