@@ -14,6 +14,15 @@
  * @params.confirm_title {string} - modal window confirm title
  * @params.ok_title {string} - modal window OK title
  */
+const escapeHtml = (unsafe) => {
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+};
+
 export const CModalWindow = function(params) {
 
     if( typeof params != 'object' || LiveComposer.Builder.Flags.modalOpen === true ) return false;
@@ -23,8 +32,8 @@ export const CModalWindow = function(params) {
     // Show Modal Window
     var modalWindowWrap = '<div class="dslca-prompt-modal dslca-prompt-modal-active">' +
     '<div class="dslca-prompt-modal-content"><div class="dslca-prompt-modal-msg">' +
-     '<span class="dslca-prompt-modal-title">' + params.title + '</span>' +
-      '<span class="dslca-prompt-modal-descr">' + params.content + '</span></div>';
+     '<span class="dslca-prompt-modal-title">' + escapeHtml(params.title) + '</span>' +
+      '<span class="dslca-prompt-modal-descr">' + escapeHtml(params.content) + '</span></div>';
 
       var modalWindowActions = '';
 
@@ -32,13 +41,13 @@ export const CModalWindow = function(params) {
 
         modalWindowActions = '<div class="dslca-prompt-modal-actions">' +
         '<a href="#" class="dslca-prompt-modal-confirm-hook"><span class="dslc-icon dslc-icon-ok">' +
-        '</span>' + (params.confirm_title ? params.confirm_title : 'Confirm') + '</a><span class="dslca-prompt-modal-cancel-hook"><span class="dslc-icon dslc-icon-remove">' +
-        '</span>' + (params.cancel_title ? params.cancel_title : 'Cancel') +'</span></div>';
+        '</span>' + (params.confirm_title ? escapeHtml(params.confirm_title) : 'Confirm') + '</a><span class="dslca-prompt-modal-cancel-hook"><span class="dslc-icon dslc-icon-remove">' +
+        '</span>' + (params.cancel_title ? escapeHtml(params.cancel_title) : 'Cancel') +'</span></div>';
     } else {
 
         modalWindowActions = '<div class="dslca-prompt-modal-actions">' +
         '<a href="#" class="dslca-prompt-modal-confirm-hook"><span class="dslc-icon dslc-icon-ok">' +
-        '</span>' + (params.ok_title ? params.ok_title : 'OK') + '</a></div>';
+        '</span>' + (params.ok_title ? escapeHtml(params.ok_title) : 'OK') + '</a></div>';
     }
 
     modalWindowWrap += modalWindowActions + '</div>';
