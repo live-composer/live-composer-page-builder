@@ -71,8 +71,7 @@ jQuery(document).ready(function($){
 			jQuery('body').addClass('dslca-new-preset-added');
 
 			// Append the new preset to the "Load Preset" option and trigger change
-			var newOption = jQuery('<option></option>').val(presetID).text(presetID);
-			jQuery('.dslca-module-edit-field[name="css_load_preset"]').append(newOption).val(presetID).trigger('change');
+			jQuery('.dslca-module-edit-field[name="css_load_preset"]').append('<option value="' + presetID + '">' + presetID + '</option>').val( presetID ).trigger('change');
 
 			// Erase value from the "Save Preset" option
 			jQuery(this).val('');

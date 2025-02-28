@@ -20,12 +20,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<div class="dslc-panel-column-container">
 			<div class="dslc-panel-column">
-				<h3><a href="https://support.livecomposerplugin.com/hc/985731792/category/38" target="_blank"><span class="dashicons dashicons-editor-help"></span> <?php _e( 'User Documentation', 'live-composer-page-builder' ); ?></a></h3>
+				<h3><a href="//livecomposer.help/" target="_blank"><span class="dashicons dashicons-editor-help"></span> <?php _e( 'User Documentation', 'live-composer-page-builder' ); ?></a></h3>
 				<p><?php _e( 'The usage documentation is available online. We have great search functionality and add new articles weekly.', 'live-composer-page-builder' ); ?></p>
 
 			</div>
 			<div class="dslc-panel-column">
-				<h3><a href="https://support.livecomposerplugin.com/hc/985731792/category/37" target="_blank"><span class="dashicons dashicons-admin-generic"></span> <?php _e( "Developer Docs", 'live-composer-page-builder' ); ?></a></h3>
+				<h3><a href="//livecomposer.help/collection/96-extensions-development" target="_blank"><span class="dashicons dashicons-admin-generic"></span> <?php _e( "Developer Docs", 'live-composer-page-builder' ); ?></a></h3>
 				<p><?php _e( 'If you\'re a developer who is interested in building custom modules for Live Composer give a check at the developer documentation.', 'live-composer-page-builder' ); ?></p>
 				<?php /*
 				<ul>
