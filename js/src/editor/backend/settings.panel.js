@@ -2,7 +2,6 @@
  * Builder settings panel functions providing work with modules
  */
 import { showSection } from './uigeneral.js';
-import DOMPurify from 'dompurify';
 import { moduleOutputAltered } from './module.js';
 import { updatePreset } from "./presets.js";
 import { hideModal } from "./modalwindow.js";
@@ -408,14 +407,14 @@ export const settingsPanelInit = () => {
 		if ( window.LiveComposer.Builder.PreviewAreaDocument[0].getElementById(id) == null ) {
 
 			var styleTag = document.createElement('style');
-			styleTag.innerHTML = DOMPurify.sanitize(params.styleContent);
+			styleTag.innerHTML = params.styleContent;
 			styleTag.id = id;
 			styleTag.className = "temp-styles-for-module";
 
 			window.LiveComposer.Builder.PreviewAreaDocument[0].body.appendChild(styleTag);
 		} else {
 
-			window.LiveComposer.Builder.PreviewAreaDocument[0].getElementById(id).innerHTML = DOMPurify.sanitize(params.styleContent);
+			window.LiveComposer.Builder.PreviewAreaDocument[0].getElementById(id).innerHTML = params.styleContent;
 		}
 	}
 

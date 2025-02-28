@@ -4758,10 +4758,8 @@ class DSLC_TP_Content extends DSLC_Module {
 
 		/* Module output starts here */
 
-			// $content_post = get_post( $post_id );
-			// $content = $content_post->post_content;
-			$content_post = get_post_meta( $post_id, 'dslc_original_post_content',$content , true);
-			$content = $content_post[0];
+			$content_post = get_post( $post_id );
+			$content = $content_post->post_content;
 
 		if ( get_post_type( $post_id ) == 'dslc_templates' ) {
 			$content = '<h1>This Is An Example Of A Heading 1</h1>
@@ -4792,11 +4790,11 @@ class DSLC_TP_Content extends DSLC_Module {
 				do_action( 'dslc_content_module_before_content', $post_id, $options );
 
 				// Output content
-// if ( is_singular() && get_post_type( $post_id ) != 'dslc_templates' ) {
-// 	the_content();
-// } else {
+if ( is_singular() && get_post_type( $post_id ) != 'dslc_templates' ) {
+	the_content();
+} else {
 	echo $content;
-// }
+}
 
 				do_action( 'dslc_content_module_after_content', $post_id, $options );
 
