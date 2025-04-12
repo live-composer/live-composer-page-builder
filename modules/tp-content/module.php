@@ -4758,8 +4758,10 @@ class DSLC_TP_Content extends DSLC_Module {
 
 		/* Module output starts here */
 
-			$content_post = get_post( $post_id );
-			$content = $content_post->post_content;
+			// $content_post = get_post( $post_id );
+			// $content = $content_post->post_content;
+			$content_post = get_post_meta( $post_id, 'dslc_original_post_content', true);
+			$content = $content_post ? $content_post : '';
 
 		if ( get_post_type( $post_id ) == 'dslc_templates' ) {
 			$content = '<h1>This Is An Example Of A Heading 1</h1>

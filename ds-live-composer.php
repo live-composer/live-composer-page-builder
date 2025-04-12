@@ -4,7 +4,7 @@
  * Plugin URI: https://www.livecomposerplugin.com
  * Description: Page builder for WordPress with drag and drop header/footer editing.
  * Author: Live Composer Team
- * Version: 1.5.52
+ * Version: 1.5.53
  * Author URI: https://livecomposerplugin.com
  * License: GPL3
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -41,7 +41,7 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) && version_compare( PHP_VERSION, '5.3.0
 	 * Constants
 	 */
 
-	define( 'DS_LIVE_COMPOSER_VER', '1.5.52' );
+	define( 'DS_LIVE_COMPOSER_VER', '1.5.53' );
 
 	define( 'DS_LIVE_COMPOSER_SHORTNAME', __( 'Live Composer', 'live-composer-page-builder' ) );
 	define( 'DS_LIVE_COMPOSER_BASENAME', plugin_basename( __FILE__ ) );
@@ -137,6 +137,7 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) && version_compare( PHP_VERSION, '5.3.0
 	include DS_LIVE_COMPOSER_ABS . '/includes/upgrade.class.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/class-dslc-cache.php'; // Simple HTML/CSS caching class.
 	include DS_LIVE_COMPOSER_ABS . '/includes/plugin-updates/lc-license-manager.class.php';
+	include DS_LIVE_COMPOSER_ABS . '/includes/wpml_compatblity.php';
 
 	$cap_page = dslc_get_option( 'lc_min_capability_page', 'dslc_plugin_options_access_control' );
 	if ( ! $cap_page ) { $cap_page = 'publish_posts';

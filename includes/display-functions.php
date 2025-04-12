@@ -773,7 +773,15 @@ function dslc_filter_content( $content ) {
 		$rendered_page = $dslc_content_before . $composer_wrapper_before . do_action( 'dslc_output_prepend' ) . $composer_header . '<div id="dslc-main">' . $composer_prepend . $composer_content . '</div>' . $composer_append . $composer_footer . do_action( 'dslc_output_append' ) . $composer_wrapper_after . $dslc_content_after;
 
 		if ( ! dslc_is_editor_active() && ! is_singular( 'dslc_hf' ) ) {
-			
+			global $wpdb;
+		
+			// $wpdb->query(
+			// 	$wpdb->prepare(
+			// 		"UPDATE {$wpdb->prefix}posts SET post_content = %s WHERE ID = %d AND post_type = 'page'",
+			// 		$rendered_page,
+			// 		$cache_id
+			// 	)
+			// );
 			$cache->set_cache( $rendered_page, $cache_id );
 			
 		}
