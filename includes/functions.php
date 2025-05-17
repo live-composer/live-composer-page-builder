@@ -66,6 +66,7 @@ function dslc_register_modules() {
 
 	dslc_register_module( 'DSLC_Blog' );
 	dslc_register_module( 'DSLC_Posts' );
+	dslc_register_module( 'DSLC_Loops' );
 	dslc_register_module( 'DSLC_Projects' );
 	// dslc_register_module( 'DSLC_WooCommerce_Products' );
 	dslc_register_module( 'DSLC_Testimonials' );

@@ -145,6 +145,8 @@ function dslc_templates_col_content( $column_name, $post_ID ) {
 				$post_types[$key] = __('Downloads Archive', 'live-composer-page-builder' );
 			} elseif ( 'dslc_galleries_archive' === $value) {
 				$post_types[$key] = __('Galleries Archive', 'live-composer-page-builder' );
+			} elseif ( 'dslc_post_loop' === $value) {
+				$post_types[$key] = __('DSLC Post Loop', 'live-composer-page-builder' );
 			} elseif ( ! is_string( $value ) ) {
 				unset( $post_types[$key] );
 			}

@@ -387,10 +387,6 @@ function dslc_ajax_save_composer( $atts ) {
 		}
 
 		// ########## WPML Translation compatible flow starts ##########
-			// $code = get_post_meta( $post_id, 'dslc_code', true );
-			// $content_for_translation = dslc_convert_to_translation_array(json_decode($code));
-
-			// update_post_meta( $post_id, 'dslc_content_for_translation', $content_for_translation);
 			// Added hook for post save action to trigger custom functions.
 			do_action( 'dslc_save_post', $post_id);
 

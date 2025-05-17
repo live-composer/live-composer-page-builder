@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<wpml-config>
+  <custom-types>
+    <custom-type translate="1">dslc_projects</custom-type>
+    <custom-type translate="1">dslc_staff</custom-type>
+    <custom-type translate="1">dslc_testimonials</custom-type>
+    <custom-type translate="1">dslc_hf</custom-type>
+    <custom-type translate="1">dslc_templates</custom-type>
+    <custom-type translate="1">dslc_partners</custom-type>
+    <custom-type translate="1">dslc_downloads</custom-type>
+    <custom-type translate="1">dslc_galleries</custom-type>
+  </custom-types>
+  
+  <custom-fields>
+    <custom-field action="translate">dslc_content_for_search</custom-field>
+    <custom-field action="translate">dslc_content_for_translation</custom-field>
+    <custom-field action="translate">dslc_original_post_content</custom-field>
+    <custom-field action="translate">dslc_staff_position</custom-field>
+    <custom-field action="translate">dslc_testimonial_author_pos</custom-field>
+  </custom-fields>
+</wpml-config>

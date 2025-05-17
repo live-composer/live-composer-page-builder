@@ -10,6 +10,7 @@
  * dslc_get_attachment_alt ( Returnt he ALT attribute for an attachment )
  */
 
+
 // Prevent direct access to the file.
 if ( ! defined( 'ABSPATH' ) ) {
 	header( 'HTTP/1.0 403 Forbidden' );
