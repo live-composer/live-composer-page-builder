@@ -207,7 +207,7 @@ function dslc_display_composer()
 					<div class="dslca-section-title">
 						<div class="dslca-section-title-filter">
 							<span class="dslca-section-title-filter-curr"><?php _e('Elements', 'live-composer-page-builder'); ?></span>
-							<span class="dslca-icon dslc-icon-angle-up"></span>
+							<span class="dslca-icon dslc-icon-angle-down"></span>
 							<div class="dslca-section-title-filter-options"></div>
 						</div><!-- .dslca-section-title-filter -->
 					</div><!-- .dslca-section-title -->
@@ -333,12 +333,12 @@ function dslc_display_composer()
 
 				<div class="dslca-section dslca-templates-load dslc-clearfix">
 
-					<a href="#" class="dslca-go-to-section-hook dslca-section-back" data-section=".dslca-templates"><span class="dslca-icon dslc-icon-reply"></span></a>
+					<a href="#" class="dslca-go-to-section-hook dslca-section-back" data-section=".dslca-templates"><span class="dslca-icon dslc-icon-reply"></span> <span>Back</span></a>
 
 					<div class="dslca-section-title">
 						<div class="dslca-section-title-filter">
 							<span class="dslca-section-title-filter-curr"><?php _e('All Templates', 'live-composer-page-builder'); ?></span>
-							<span class="dslca-icon dslc-icon-angle-up"></span>
+							<span class="dslca-icon dslc-icon-angle-down"></span>
 							<div class="dslca-section-title-filter-options"></div>
 						</div><!-- .dslca-section-title-filter -->
 					</div><!-- .dslca-section-title -->
@@ -351,10 +351,11 @@ function dslc_display_composer()
 						</div>
 					</div>
 
-					<div class="dslca-section-scroller-nav">
+					<!-- <div class="dslca-section-scroller-nav">
 						<a href="#" class="dslca-section-scroller-prev"><span class="dslca-icon dslc-icon-angle-left"></span></a>
 						<a href="#" class="dslca-section-scroller-next"><span class="dslca-icon dslc-icon-angle-right"></span></a>
-					</div><!-- .dslca-section-scroller -->
+					</div> -->
+					<!-- .dslca-section-scroller -->
 
 				</div><!-- .dslca-templates-load -->
 
