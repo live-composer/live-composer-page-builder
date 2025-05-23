@@ -109,9 +109,29 @@ class DSLC_Loops extends DSLC_Module {
 			),
 
 			array(
+				'label' => __( 'Type', 'live-composer-page-builder' ),
+				'id' => 'type',
+				'std' => 'grid',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'Grid', 'live-composer-page-builder' ),
+						'value' => 'grid',
+					),
+					array(
+						'label' => __( 'Masonry Grid', 'live-composer-page-builder' ),
+						'value' => 'masonry',
+					),
+					array(
+						'label' => __( 'Carousel', 'live-composer-page-builder' ),
+						'value' => 'carousel',
+					),
+				),
+			),
+			array(
 				'label' => __( 'Select Template', 'live-composer-page-builder' ),
 				'id' => 'template_id',
-				'std' => '',
+				'std' => $this->get_loop_templates_list()[0]['value'] ? $this->get_loop_templates_list()[0]['value'] : '',
 				'type' => 'select',
 				'choices' =>$this->get_loop_templates_list(),
 			),
@@ -2820,7 +2840,6 @@ class DSLC_Loops extends DSLC_Module {
 }
 
 function dslc_module_loops_output( $atts, $content = null ) {
-
 	// Uncode module options passed as serialized content.
 	$data = @unserialize( $content );
 
@@ -2907,8 +2926,10 @@ function dslc_module_loops_output( $atts, $content = null ) {
 
 		// System post types that should not appear in selector.
 		$post_types_to_ignore = array(
+			'dslc_templates',
 			'dslc_hf',
 			'attachment',
+			'dslc_testimonials',
 		);
 
 		$all_post_types = array();
@@ -3052,7 +3073,20 @@ function dslc_module_loops_output( $atts, $content = null ) {
 	 */
 
 	// Posts container.
-	$container_class = 'dslc-posts dslc-cpt-posts dslc-clearfix dslc-posts-orientation-' . $options['orientation'] . ' ';
+	$container_class = 'dslc-posts dslc-cpt-posts dslc-clearfix dslc-cpt-posts-type-' . $options['type'] . ' dslc-posts-orientation-' . $options['orientation'] . ' ';
+	if ( $options['type'] == 'masonry' ) {
+		$container_class .= 'dslc-init-masonry ';
+	} elseif ( $options['type'] == 'grid' ) {
+		$container_class .= 'dslc-init-grid ';
+	}
+
+	// Post
+	$element_class = 'dslc-post dslc-cpt-post ';
+	if ( $options['type'] == 'masonry' ) {
+		$element_class .= 'dslc-masonry-item ';
+	} elseif ( $options['type'] == 'carousel' ) {
+		$element_class .= 'dslc-carousel-item ';
+	}
 
 	/**
 	 * What is shown
@@ -3061,15 +3095,32 @@ function dslc_module_loops_output( $atts, $content = null ) {
 	$show_header = false;
 	$show_heading = false;
 	$show_filters = false;
+	$show_carousel_arrows = false;
 	$show_view_all_link = false;
 
 	if ( in_array( 'main_heading', $elements, true ) ) {
 		$show_heading = true;
 	}
 
-	if ( $show_heading || $show_filters ) {
+	if ( ( 'all' === $elements || in_array( 'filters', $elements, true ) ) && 'carousel' !== $options['type'] ) {
+		$show_filters = true;
+	}
+
+	if ( 'carousel' === $options['type'] && in_array( 'arrows', $carousel_elements, true ) ) {
+		$show_carousel_arrows = true;
+	}
+
+	if ( $show_heading || $show_filters || $show_carousel_arrows ) {
 		$show_header = true;
 	}
+
+	if ( $show_carousel_arrows && ( $options['arrows_position'] == 'aside' ) ) {
+		$container_class .= 'dslc-carousel-arrow-aside ';
+	}
+
+	/**
+	 * Carousel Items
+	 */
 
 	switch ( $options['columns'] ) {
 		case 12 :
@@ -3159,6 +3210,17 @@ function dslc_module_loops_output( $atts, $content = null ) {
 
 		?>
 
+		<!-- Carousel -->
+
+		<?php if ( $show_carousel_arrows && ( $options['arrows_position'] == 'above' ) ) : ?>
+							<span class="dslc-carousel-nav fr">
+								<span class="dslc-carousel-nav-inner">
+									<a href="#" class="dslc-carousel-nav-prev"><span class="dslc-icon-chevron-left"></span></a>
+									<a href="#" class="dslc-carousel-nav-next"><span class="dslc-icon-chevron-right"></span></a>
+								</span>
+							</span><!-- .carousel-nav -->
+						<?php endif; ?>
+
 			</div><!-- .dslc-module-heading -->
 				<?php
 
@@ -3171,14 +3233,35 @@ function dslc_module_loops_output( $atts, $content = null ) {
 	if ( $dslc_query->have_posts() ) { ?>
 		<div class="<?php echo $container_class; ?>">
 
+			<?php if ( $show_carousel_arrows && ( $options['arrows_position'] == 'aside' ) ) : ?>
+				<a href="#" class="dslc-carousel-nav-prev position-aside"><span class="dslc-icon-chevron-left"></span></a>
+			<?php endif; ?>
+
 			<div class="dslc-posts-inner"><?php
+
+				if ( $options['type'] == 'carousel' ) : ?>
+					<div class="dslc-loader"></div>
+					<div class="dslc-carousel"
+						data-stop-on-hover="<?php echo $options['carousel_autoplay_hover']; ?>"
+						data-autoplay="<?php echo $options['carousel_autoplay']; ?>"
+						data-columns="<?php echo $carousel_items; ?>"
+						data-pagination="<?php
+							if ( in_array( 'circles', $carousel_elements ) ) {
+								echo 'true';
+							} else {
+								echo 'false';
+							} ?>"
+						data-slide-speed="<?php echo $options['arrows_slide_speed']; ?>"
+						data-pagination-speed="<?php echo $options['circles_slide_speed']; ?>"><?php
+				endif; // End if carousel.
 
 				while ( $dslc_query->have_posts() ) :
 					$dslc_query->the_post();
 					$count += $increment;
 					$real_count++;
-					$composer_code = dslc_get_code(85);
-					print_r(dslc_render_content($composer_code));
+					// $composer_code = dslc_get_code(60809);
+					$composer_code = dslc_get_code($options['template_id']);
+					// print_r(dslc_render_content($composer_code));
 
 					if ( $count == $max_count ) {
 						$count = 0;
@@ -3187,6 +3270,10 @@ function dslc_module_loops_output( $atts, $content = null ) {
 						$extra_class = ' dslc-first-col';
 					} else {
 						$extra_class = '';
+					}
+
+					if ( ! has_post_thumbnail() ) {
+						$extra_class .= ' dslc-post-no-thumb';
 					}
 
 					$post_cats_data = '';
@@ -3199,11 +3286,42 @@ function dslc_module_loops_output( $atts, $content = null ) {
 						}
 					} ?>
 
-					<?php
+					<div class="<?php echo $element_class . $columns_class . $extra_class; ?>" data-cats="<?php echo $post_cats_data; ?>">
+						<?php
+						if ( !dslc_is_editor_active( 'access' ) )
+						{
+							$rendered_code = dslc_render_content( $composer_code );
+							$rendered_code = dslc_decode_shortcodes( $rendered_code );
+							
+							// Add the code to the variable holder.
+							// We need double do_shortcode as our module shortcodes can contain encoded 3-rd party shortcodes.
+
+							echo do_shortcode( do_shortcode( $rendered_code ) );
+							// echo dslc_render_content($composer_code);
+						}
+						else
+						{
+							echo 'loop template design box';
+						}
+						?>
+
+					</div><!-- .dslc-cpt-post --><?php
+
+					// Row Separator
+					if ( $options['type'] == 'grid' && $count == 0 && $real_count != $dslc_query->found_posts && $real_count != $options['amount'] && $options['separator_enabled'] == 'enabled' ) {
+						echo '<div class="dslc-post-separator"></div>';
+					}
 
 				endwhile; // End while have_posts.
-				?>
+
+				if ( $options['type'] == 'carousel' ) : ?>
+					</div><!-- dslc-carousel --><?php
+				endif; ?>
 			</div><!--.dslc-posts-inner -->
+
+			<?php if ( $show_carousel_arrows && ( $options['arrows_position'] == 'aside' ) ) : ?>
+				<a href="#" class="dslc-carousel-nav-next position-aside"><span class="dslc-icon-chevron-right"></span></a>
+			<?php endif; ?>
 
 		</div><!-- .dslc-cpt-posts --><?php
 	} else {
