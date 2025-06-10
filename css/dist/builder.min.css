@@ -2427,7 +2427,7 @@ body.dslca-enabled .mce_fullscreen {
   animation-name: dslcBounceIn;
   animation-duration: 0.6s;
   -webkit-animation-duration: 0.6s;
-  background: #479cff;
+  background: #0050a5;
 }
 .dslc-editable-content:focus,
 .dslc-editable-content.dslc-pen {

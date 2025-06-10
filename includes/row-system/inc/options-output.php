@@ -95,7 +95,7 @@ function dslc_row_display_options() {
 			<?php if ( 'open' === $row_option['action'] ) : ?>
 				<div class="dslca-section-control-group dslca-section-edit-option">
 				<div class="controls-group-inner">
-				<span class="dslca-section-edit-label"><?php echo $row_option['label'] ?></span>
+				<label class="dslca-section-edit-label"><?php echo $row_option['label'] ?></label>
 			<?php endif; ?>
 
 		<?php else : ?>
@@ -104,18 +104,18 @@ function dslc_row_display_options() {
 
 				<?php if ( isset( $row_option['help'] ) ) : ?>
 					<div class="dslca-module-edit-field-ttip-content"><?php echo $row_option['help']; ?></div>
-					<span class="dslca-module-edit-label"><?php echo esc_html( $row_option['label'] ); echo dslc_get_section_help(); ?></span>
+					<label class="dslca-module-edit-label" for="margin"><?php echo esc_html( $row_option['label'] ); echo dslc_get_section_help(); ?></label>
 				<?php else : ?>
-					<span class="dslca-module-edit-label"><?php echo esc_html( $row_option['label'] ); ?></span>
+					<label class="dslca-module-edit-label" for="margin"><?php echo esc_html( $row_option['label'] ); ?></label>
 				<?php endif; ?>
 
 				<?php if ( 'text' === $row_option['type'] ) : ?>
 
-					<input type="text" class="dslca-modules-section-edit-field" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" />
+					<input type="text" class="dslca-modules-section-edit-field"  data-id="<?php echo esc_attr( $row_option['id'] ); ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" />
 
 				<?php elseif ( 'select' === $row_option['type'] ) : ?>
 
-					<select type="text" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-select" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" >
+					<select aria-label="Layout Type" type="text" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-select" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" data-id="type" >
 						<?php foreach ( $row_option['choices'] as $choice ) : ?>
 							<option value="<?php echo esc_attr( $choice['value'] ); ?>"><?php echo esc_attr( $choice['label'] ); ?></option>
 						<?php endforeach; ?>
@@ -156,7 +156,7 @@ function dslc_row_display_options() {
 						$curr_value = $row_option['std'];
 
 					?>
-					<input type="number" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-slider-numeric" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" value="<?php echo $curr_value; ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" data-min="<?php echo $slider_min; ?>" data-max="<?php echo $slider_max; ?>" data-ext="<?php echo $ext; ?>" data-increment="<?php echo esc_attr( $row_option['increment'] ); ?>" data-ext="<?php echo esc_attr( $row_option['ext'] ); ?>"/>
+					<input type="number" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-slider-numeric" id="margin" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" value="<?php echo $curr_value; ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" data-min="<?php echo $slider_min; ?>" data-max="<?php echo $slider_max; ?>" data-ext="<?php echo $ext; ?>" data-increment="<?php echo esc_attr( $row_option['increment'] ); ?>" data-ext="<?php echo esc_attr( $row_option['ext'] ); ?>"/>
 
 				<?php elseif ( 'border_checkbox' === $row_option['type'] ) : ?>
 
@@ -184,8 +184,8 @@ function dslc_row_display_options() {
 					<div class="dslca-modules-section-edit-option-checkbox-wrapper">
 						<?php foreach ( $row_option['choices'] as $choices ) : ?>
 							<div class="dslca-modules-section-edit-option-checkbox-single">
-								<span class="dslca-modules-section-edit-option-checkbox-hook"><span class="dslca-icon dslc-icon-check-empty"></span><?php echo esc_attr( $choices['label'] ); ?></span>
-								<input type="checkbox" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-checkbox" data-val="<?php echo esc_attr( $choices['value'] ); ?>" data-id="<?php echo esc_attr( $row_option['id'] ); ?>">
+								<span class="dslca-modules-section-edit-option-checkbox-hook" for="<?php echo $checkbox_id; ?>" ><span class="dslca-icon dslc-icon-check-empty"></span><?php echo esc_attr( $choices['label'] ); ?></span>
+								<input type="checkbox" id="<?php echo $checkbox_id; ?>" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-checkbox" data-val="<?php echo esc_attr( $choices['value'] ); ?>" data-id="<?php echo esc_attr( $row_option['id'] ); ?>">
 							</div>
 						<?php endforeach; ?>
 					</div>

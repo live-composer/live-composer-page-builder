@@ -194,14 +194,31 @@ class LC_Control {
 
 					<div class="dslca-module-edit-option-checkbox-wrapper">
 
-						<?php foreach ( $module_control['choices'] as  $checkbox_option ) : ?>
-							<div class="dslca-module-edit-option-checkbox-single">
-								<span class="dslca-module-edit-option-checkbox-hook"><span class="dslca-icon <?php if ( in_array( $checkbox_option['value'], $curr_value ) ) { echo 'dslc-icon-check';
-} else { echo 'dslc-icon-check-empty';
-} ?>"></span><?php echo $checkbox_option['label']; ?></span>
-								<input type="checkbox" class="dslca-module-edit-field dslca-module-edit-field-checkbox" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" name="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo $checkbox_option['value']; ?>" <?php if ( in_array( $checkbox_option['value'], $curr_value ) ) { echo 'checked="checked"';} ?> <?php echo $affect_on_change_append ?> />
-							</div><!-- .dslca-module-edit-option-checkbox-single -->
-						<?php endforeach; ?>
+					<?php foreach ( $module_control['choices'] as $checkbox_option ) :
+    $unique_id = 'device-response-' . sanitize_title( $checkbox_option['value'] );
+?>
+    <div class="dslca-module-edit-option-checkbox-single">
+        <input 
+            type="checkbox"
+            id="<?php echo esc_attr( $unique_id ); ?>"
+            class="dslca-module-edit-field dslca-module-edit-field-checkbox"
+            data-id="<?php echo esc_attr( $module_control['id'] ); ?>"
+            name="<?php echo esc_attr( $module_control['id'] ); ?>"
+            value="<?php echo esc_attr( $checkbox_option['value'] ); ?>"
+            <?php checked( in_array( $checkbox_option['value'], $curr_value ) ); ?>
+            <?php echo $affect_on_change_append; ?>
+        />
+        
+        <label for="<?php echo esc_attr( $unique_id ); ?>" class="dslca-module-edit-option-checkbox-hook">
+            <span 
+                class="dslca-icon <?php echo in_array( $checkbox_option['value'], $curr_value ) ? 'dslc-icon-check' : 'dslc-icon-check-empty'; ?>" 
+                aria-hidden="true">
+            </span>
+            <?php echo esc_html( $checkbox_option['label'] ); ?>
+        </label>
+    </div>
+<?php endforeach; ?>
+
 
 					</div><!-- .dslca-module-edit-option-checkbox-wrapper -->
 
@@ -685,7 +702,7 @@ class LC_Control {
 
 		$module_control = $this->_module_control;
 		$output = '';
-		$output .= '<span class="dslca-module-edit-label">';
+		$output .= '<label class="dslca-module-edit-label">';
 
 		if ( isset( $module_control['label'] ) ) {
 			$output .= esc_html( $module_control['label'] );
@@ -723,7 +740,7 @@ class LC_Control {
 			$output .= '<span class="dslc-delete-preset dslc-icon dslc-icon-trash' . $dslc_delete_preset_hide . '"></span>';
 		}
 
-		$output .= '</span>';
+		$output .= '</label>';
 
 		return $output;
 	}

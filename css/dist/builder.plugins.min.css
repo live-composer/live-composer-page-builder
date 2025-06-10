@@ -108,7 +108,6 @@ html {
 	/* display: flex; */
 	flex-direction: column;
 	align-content: space-between;
-	align-content: space-between;
 	}
   .dslca-disable-selection {
 	-ms-user-select: none !important;
@@ -147,14 +146,14 @@ html {
 	width: 100%;
 	border: 1px solid #ffffff99;
 	margin-left: 2%;
-	margin: 7px 0 5px 0px;
+	margin: 4px 0 5px 0px;
 	}
 
 	.dslca-go-to-section-hook {
     padding: 11px;
     position: relative;
     /* margin: 8px; */
-    color: #ffffffa3;
+    color: #ffffff;
 }	
 	.dslca-go-to-section-hook span {}	
 	.dslca-go-to-section-hook span:before {}	
@@ -325,7 +324,7 @@ html {
   .dslca-header .dslca-options-filter-hook.dslca-active,
   .dslca-header .dslca-row-options-filter-hook.dslca-active,
   .dslca-pseudo-header .dslca-pseudo-options-filter-hook.dslca-active {
-	background: #5890e5;
+	background: #0050a5;
   }
   .dslca-header .dslca-go-to-section-templates.dslca-active {
 	border-top-color: #bf7671;
@@ -352,7 +351,7 @@ html {
   .dslca-row-edit-cancel,
   .dslca-wp-editor-save-hook,
   .dslca-wp-editor-cancel-hook {
-	background: #479cff;
+	background: #006add;
 	border-radius: 3px;
 	color: #fff !important;
 	cursor: pointer;
@@ -424,7 +423,7 @@ html {
   .dslca-section.dslca-module-edit,
   .dslca-pseudo-section,
   .dslca-section.dslca-modules-section-edit {
-	background: #5890e5;
+	background: #0050a5;
   }
   .dslca-section.dslca-templates {
 	background: #1f203f;
@@ -456,7 +455,7 @@ html {
     align-items: center;
   }
   .dslca-section-back:hover {
-	background: #5890e5;
+	background: #0050a5;
 	color: #fff;
   }
   .dslca-section-title {
@@ -468,6 +467,8 @@ html {
 	line-height: 1;
 	padding: 14px 14px;
 	border-bottom: 1px solid #eeeeee66;
+	font-size: 16px;
+	font-weight: 700;
 	}
   .dslca-section-title:hover,
   .dslca-section-title:hover * {
@@ -491,7 +492,7 @@ html {
 	margin-left: 121px;
 	}
   .dslca-section-title-filter-options {
-	background: #5890e5;
+	background: #0050a5;
 	border-radius: 3px 3px 0 0;
 	top: 31px;
 	display: none;
@@ -514,7 +515,7 @@ html {
 	font-weight: 700;
 	}
   .dslca-section-title-filter-options a:hover {
-	background: #5890e5;
+	background: #0050a5;
   }
   .dslca-section.dslca-templates-load .dslca-section-title-filter-options {
 	background: #ca564f;
@@ -522,7 +523,7 @@ html {
   .dslca-section.dslca-templates-load
 	.dslca-section-title-filter-options
 	a:hover {
-	background: #5890e5;
+	background: #0050a5;
   }
   .dslca-sections .dslca-exclude {
 	display: none;
@@ -1086,6 +1087,8 @@ html {
 	font-size: 15px;
 	line-height: 1;
 	padding: 19px 29px;
+	/* font-size: 16px; */
+	font-weight: 500;
 	}
   .dslca-templates .dslca-go-to-section-hook:hover,
   .dslca-templates .dslca-open-modal-hook:hover,
@@ -1095,11 +1098,11 @@ html {
 	}
   .dslca-templates .dslca-go-to-section-hook .dslca-icon,
   .dslca-templates .dslca-open-modal-hook .dslca-icon {
-	color: rgba(255, 255, 255, 0.5);
+	color: rgb(255 255 255);
 	margin-right: 9px;
 	vertical-align: top;
 	line-height: 14px;
-  }
+	}
   .dslca-templates-load {
 	border-top: 1px solid #d8827d;
   }
@@ -1185,7 +1188,7 @@ html {
 	margin-right: 2%;
 	}
   .dslca-submit-secondary {
-	background: #5890e5;
+	background: #0050a5;
 	border-radius: 3px;
 	color: #fff;
 	cursor: pointer;
@@ -1215,7 +1218,7 @@ html {
 	right: 0;
 	bottom: 0;
 	background: rgba(255, 255, 255, 0.8);
-	color: #5890e5;
+	color: #0050a5;
   }
   .dslca-module-reloading .dslca-icon {
 	font-size: 20px;
@@ -1231,7 +1234,7 @@ html {
   }
   .dslca-module-placeholder {
 	position: relative;
-	background: #5890e5;
+	background: #0050a5;
 	height: 40px;
 	float: left;
   }
@@ -1243,7 +1246,7 @@ html {
 	text-align: center;
   }
   .dslca-placeholder-help-text-inner {
-	background: #5890e5;
+	background: #0050a5;
 	border-radius: 3px 3px 0 0;
 	color: #fff;
 	font-size: 12px;
@@ -1337,7 +1340,7 @@ html {
 	outline: none !important;
   }
   .dslc-module-front.ui-sortable-helper {
-	background: #5890e5;
+	background: #0050a5;
 	border-radius: 3px;
 	height: 0 !important;
 	width: 0 !important;
@@ -1435,7 +1438,7 @@ html {
   .dslca-no-content {
 	position: absolute;
 	display: none;
-	border: 2px dashed #5890e5;
+	border: 2px dashed #0050a5;
 	padding: 35px 10px;
 	width: 100%;
 	text-align: center;
@@ -1475,7 +1478,7 @@ html {
   }
   .dslca-add-modules-section-hook,
   .dslca-import-modules-section-hook {
-	background: #e5855f !important;
+	background: #0050a5 !important;
 	border-radius: 3px;
 	color: #fff !important;
 	cursor: pointer;
@@ -1487,17 +1490,17 @@ html {
 	text-decoration: none !important;
 	width: 70% !important;
 	box-shadow: none !important;
-  }
+	}
   .dslca-add-modules-section-hook:hover,
   .dslca-import-modules-section-hook:hover {
-	background: #ff9162 !important;
+	background: #0564cb !important;
 	color: #fff !important;
-  }
+	}
   .dslca-add-modules-section .dslca-icon,
   .dslca-import-modules-section .dslca-icon {
 	margin-right: 10px;
-	color: rgba(255, 255, 255, 0.5) !important;
-  }
+	color: rgb(255 255 255) !important;
+	}
   .dslca-import-modules-section-hook {
 	float: right;
 	width: 28% !important;
@@ -1908,7 +1911,7 @@ html {
   }
   .dslca-modules-area-placeholder {
 	position: relative;
-	background: #5890e5;
+	background: #0050a5;
 	height: 2px;
 	margin: 10px;
 	float: left;
@@ -1942,7 +1945,7 @@ html {
 	border-radius: 0 3px 3px 0;
   }
   .dslca-module-manage-inner {
-	background: #5890e5;
+	background: #0050a5;
   }
   .dslca-module-manage-inner.dslca-dev-mode {
 	background: #444;
@@ -2030,7 +2033,7 @@ html {
 }
 
 .dslca-section-scroller-content::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: #cccccc;
 }
 
 
@@ -2057,7 +2060,7 @@ html {
 	background: -o-linear-gradient(left, rgba(88, 144, 229, 0) 0%, #4674b9 100%);
 	background: -ms-linear-gradient(left, rgba(88, 144, 229, 0) 0%, #4674b9 100%);
 	background: linear-gradient(to right, rgba(88, 144, 229, 0) 0%, #4674b9 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00004799', endColorstr='#5890e5',GradientType=1 );
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00004799', endColorstr='#0050a5',GradientType=1 );
 	/* position: absolute; */
 	right: 80px;
 	width: 20px;
@@ -2753,7 +2756,7 @@ html {
   .dslca-module-edit-field-icon-ttip-hook,
   .dslca-module-edit-field-ttip-hook {
 	background: #3b6fbe;
-	color: #5890e5;
+	color: #0050a5;
 	cursor: pointer;
 	border-radius: 50%;
 	position: relative;
@@ -2791,7 +2794,7 @@ html {
   }
   .dslca-module-edit-field-icon-ttip a,
   .dslca-module-edit-field-ttip a {
-	color: #5890e5;
+	color: #0050a5;
 	font-weight: bold;
 	text-decoration: none;
   }
@@ -2844,10 +2847,10 @@ html {
   .dslca-module-edit-field-image-add-hook,
   .dslca-module-edit-field-image-remove-hook,
   .dslca-module-edit-field-button-hook {
-	background: #3b6fbe;
+	background: #0050a5;
 	border: 1px solid #3565ad;
 	border-radius: 3px;
-	color: #a0c0f0;
+	color: #ffffff;
 	cursor: pointer !important;
 	display: inline-block;
 	font-size: 12px;
@@ -3337,9 +3340,9 @@ html {
 	cursor: pointer;
   }
   .dslca-modal-icons .icon-item:active {
-	-webkit-box-shadow: 0 1px 5px 0px #5890e5 inset;
-	-moz-box-shadow: 0 1px 5px 0px #5890e5 inset;
-	box-shadow: 0 1px 5px 0px #5890e5 inset;
+	-webkit-box-shadow: 0 1px 5px 0px #0050a5 inset;
+	-moz-box-shadow: 0 1px 5px 0px #0050a5 inset;
+	box-shadow: 0 1px 5px 0px #0050a5 inset;
   }
   .dslca-modal-icons .icon-item_icon {
 	display: inline-block;
@@ -3944,7 +3947,7 @@ flex-wrap: wrap;
 	}
 
 	.dslca-tab.dslca-active {
-	background: #5890e5;
+	background: #0050a5;
 	opacity: 1;
 	}
 
@@ -4058,4 +4061,12 @@ a.dslca-module-edit-options-tab-hook[data-id="submenu_block_styling"]:before, a.
     /* width: 2px; */
 }
 
-.mce-container iframe, .wp-editor-container textarea.wp-editor-area {height: 56vh !important; max-height: 54vh !important;} {
+.mce-container iframe, .wp-editor-container textarea.wp-editor-area {height: 56vh !important; max-height: 54vh !important;} 
+
+#wave_sidebar_container { right: 0px !important; left: auto !important;}
+.search_module {}
+.search_module label {
+    font-weight: 600;
+    margin-top: 10px;
+    display: block;
+}

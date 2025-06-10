@@ -212,9 +212,11 @@ function dslc_display_composer()
 						</div><!-- .dslca-section-title-filter -->
 					</div><!-- .dslca-section-title -->
 					
+					<div class="search_module">
 					<label for="search-module">Search Module</label>
-					<input type="text" class="dslca-search-modules"  id="search-module" placeholder="<?php esc_attr_e('Search Modules', 'live-composer-page-builder'); ?>" />
-			      
+					<input type="text" class="dslca-search-modules"  id="search-module"  />
+					</div>
+
 					<div class="dslca-section-scroller">
 						<div class="dslca-section-scroller-inner">
 							<div class="dslca-section-scroller-content">
