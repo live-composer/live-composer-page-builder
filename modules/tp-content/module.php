@@ -4758,30 +4758,32 @@ class DSLC_TP_Content extends DSLC_Module {
 
 		/* Module output starts here */
 
-			$content_post = get_post( $post_id );
-			$content = $content_post->post_content;
+			// $content_post = get_post( $post_id );
+			// $content = $content_post->post_content;
+			$content_post = get_post_meta( $post_id, 'dslc_original_post_content', true);
+			$content = $content_post ? $content_post : '';
 
 		if ( get_post_type( $post_id ) == 'dslc_templates' ) {
 			$content = '<h1>This Is An Example Of A Heading 1</h1>
-<h2>This Is An Example Of A Heading 2</h2>
-<h3>This Is An Example Of A Heading 3</h3>
-<h4>This Is An Example Of A Heading 4</h4>
-<h5>This Is An Example Of A Heading 5</h5>
-<h6>This Is An Example Of A Heading 6</h6>
-<p>This is a paragraph. Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-<ul>
-<li>Unordered List item</li>
-<li>Unordered List item</li>
-<li>Unordered List item</li>
-<li>Unordered List item</li>
-</ul>
-<ol>
-<li>Ordered List item</li>
-<li>Ordered List item</li>
-<li>Ordered List item</li>
-<li>Ordered List item</li>
-</ol>
-<blockquote>This is a blockquote. Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</blockquote>';
+						<h2>This Is An Example Of A Heading 2</h2>
+						<h3>This Is An Example Of A Heading 3</h3>
+						<h4>This Is An Example Of A Heading 4</h4>
+						<h5>This Is An Example Of A Heading 5</h5>
+						<h6>This Is An Example Of A Heading 6</h6>
+						<p>This is a paragraph. Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+						<ul>
+						<li>Unordered List item</li>
+						<li>Unordered List item</li>
+						<li>Unordered List item</li>
+						<li>Unordered List item</li>
+						</ul>
+						<ol>
+						<li>Ordered List item</li>
+						<li>Ordered List item</li>
+						<li>Ordered List item</li>
+						<li>Ordered List item</li>
+						</ol>
+						<blockquote>This is a blockquote. Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</blockquote>';
 		}
 
 			?><div class="dslc-tp-content"><?php
@@ -4790,11 +4792,11 @@ class DSLC_TP_Content extends DSLC_Module {
 				do_action( 'dslc_content_module_before_content', $post_id, $options );
 
 				// Output content
-if ( is_singular() && get_post_type( $post_id ) != 'dslc_templates' ) {
-	the_content();
-} else {
-	echo $content;
-}
+			if ( is_singular() && get_post_type( $post_id ) != 'dslc_templates' && get_post_type( $post_id ) != 'page' ) {
+				the_content();
+			} else {
+				echo $content;
+			}
 
 				do_action( 'dslc_content_module_after_content', $post_id, $options );
 
