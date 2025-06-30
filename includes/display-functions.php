@@ -774,6 +774,16 @@ function dslc_filter_content( $content ) {
 
 		if ( ! dslc_is_editor_active() && ! is_singular( 'dslc_hf' ) ) {
 			
+			global $wpdb;
+		
+			$wpdb->query(
+				$wpdb->prepare(
+					"UPDATE {$wpdb->prefix}posts SET post_content = %s WHERE ID = %d AND post_type = 'page'",
+					$rendered_page,
+					$cache_id
+				)
+			);
+
 			$cache->set_cache( $rendered_page, $cache_id );
 			
 		}
