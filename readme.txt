@@ -203,6 +203,11 @@ If you're migrating from another page builder, compatibility for content transfe
 * 🦊 [Check out our WooCommerce Page Builder Extension](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
 
+= 1.5.53 - June 30 2025 =
+* Updated support and documentation links.
+* Compatibility with Rank Math plugin.
+
+
 = 1.5.52 - Feb 28 2025 =
 * Reverted changes from Release 1.5.51
 
