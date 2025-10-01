@@ -1,13 +1,16 @@
 version: '3.1'
 
 services:
-
   mysql:
     image: mysql:5.7
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: example
       MYSQL_DATABASE: wordpress_test
+      MYSQL_USER: example        # Set user for MySQL
+      MYSQL_PASSWORD: example    # Set password for MySQL user
+    volumes:
+      - mysql_data:/var/lib/mysql # Persist MySQL data
 
   wordpress:
     image: wordpress:php7.1
@@ -16,6 +19,8 @@ services:
       - 8888:80
     environment:
       WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_NAME: wordpress_test
+      WORDPRESS_DB_USER: example
       WORDPRESS_DB_PASSWORD: example
       ABSPATH: /usr/src/wordpress/
       WORDPRESS_DEBUG: 1
@@ -30,7 +35,7 @@ services:
   cli:
     image: wordpress:cli
     restart: always
-    user: xfs
+    user: www-data # Use the default www-data user for WordPress container
     volumes:
       - wordpress_data:/var/www/html
       - .:/var/www/html/wp-content/plugins/live-composer-page-builder
@@ -63,6 +68,7 @@ services:
     environment:
       WORDPRESS_DB_HOST: mysql
       WORDPRESS_DB_NAME: wordpress_e2e_tests
+      WORDPRESS_DB_USER: example
       WORDPRESS_DB_PASSWORD: example
       ABSPATH: /usr/src/wordpress/
       WORDPRESS_DEBUG: 1
@@ -77,7 +83,7 @@ services:
   cli_e2e_tests:
     image: wordpress:cli
     restart: always
-    user: xfs
+    user: www-data
     volumes:
       - wordpress_e2e_tests_data:/var/www/html
       - .:/var/www/html/wp-content/plugins/live-composer-page-builder
@@ -89,3 +95,4 @@ volumes:
   testsuite:
   wordpress_data:
   wordpress_e2e_tests_data:
+  mysql_data: # Persistent volume for MySQL

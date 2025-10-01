@@ -7,7 +7,7 @@
     "test-e2e": "jest --config tests/e2e-tests/jest.config.js",
     "test-e2e:watch": "npm run test-e2e -- --watch",
     "watch": "webpack --watch",
-    "build": "webpack --env.production"
+    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",
