@@ -134,30 +134,81 @@ function dslc_display_composer()
 
 
 			<script>
+				// Grab the popup, header, and dynamically create a resize handle
 				const popup = document.getElementById("lc_popup");
 				const header = document.getElementById("lc_popupHeader");
+				const resizeHandle = document.createElement("div");
+				resizeHandle.classList.add("resize-handle");  // Add class for styling
+				popup.appendChild(resizeHandle);  // Append to the popup
 
 				let offsetX = 0,
 					offsetY = 0,
-					isDown = false;
+					isDown = false,
+					isResizing = false;
 
+				// Draggable functionality with boundary checks
 				header.addEventListener("mousedown", (e) => {
-					isDown = true;
-					offsetX = e.clientX - popup.offsetLeft;
-					offsetY = e.clientY - popup.offsetTop;
-					document.body.style.userSelect = 'none';
+					if (e.target !== resizeHandle) {  // Avoid dragging if the resize handle is clicked
+						isDown = true;
+						offsetX = e.clientX - popup.offsetLeft;
+						offsetY = e.clientY - popup.offsetTop;
+						document.body.style.userSelect = 'none';
+					}
 				});
 
+				// Mouseup event to stop dragging or resizing
 				document.addEventListener("mouseup", () => {
 					isDown = false;
-					document.body.style.userSelect = 'auto';
+					isResizing = false;  // Stop resizing when mouse is released
+					document.body.style.userSelect = 'auto';  // Allow text selection again
 				});
 
+				// Mousemove event to drag or resize the popup with boundary checks
 				document.addEventListener("mousemove", (e) => {
 					if (isDown) {
-						popup.style.left = (e.clientX - offsetX) + "px";
-						popup.style.top = (e.clientY - offsetY) + "px";
+						// Calculate the new position
+						let newLeft = e.clientX - offsetX;
+						let newTop = e.clientY - offsetY;
+
+						// Get the browser window's width and height
+						const windowWidth = window.innerWidth;
+						const windowHeight = window.innerHeight;
+
+						// Ensure the popup stays inside the visible window (left, right, top, bottom)
+						if (newLeft < 0) {
+							newLeft = 0; // Prevent moving left outside the window
+						}
+						if (newTop < 0) {
+							newTop = 0; // Prevent moving above the visible area (behind the address bar)
+						}
+						if (newLeft + popup.offsetWidth > windowWidth) {
+							newLeft = windowWidth - popup.offsetWidth; // Prevent moving right outside the window
+						}
+						if (newTop + popup.offsetHeight > windowHeight) {
+							newTop = windowHeight - popup.offsetHeight; // Prevent moving below the window
+						}
+
+						// Apply the calculated position
+						popup.style.left = newLeft + "px";
+						popup.style.top = newTop + "px";
 					}
+
+					if (isResizing) { // Only resize if the mouse is down on the resize handle
+						const newWidth = e.clientX - popup.offsetLeft;
+						const newHeight = e.clientY - popup.offsetTop;
+
+						// Update popup size dynamically
+						popup.style.width = Math.max(newWidth, 200) + "px";  // Ensure it doesn't get too small
+						popup.style.height = Math.max(newHeight, 150) + "px";  // Set min height for popup
+					}
+				});
+
+				// Resizing functionality when clicking the resize handle
+				resizeHandle.addEventListener("mousedown", (e) => {
+					isResizing = true;
+					offsetX = e.clientX - popup.offsetLeft;
+					offsetY = e.clientY - popup.offsetTop;
+					document.body.style.userSelect = 'none';  // Disable text selection during resize
 				});
 			</script>
 

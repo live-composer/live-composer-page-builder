@@ -3708,66 +3708,66 @@ html {
   
 
 
-  #lc_popup, #lc_popup2  {
-	position: fixed;
-	right: 30px;
-	width: 440px;
-	/* background-color: white; */
-	/* border: 1px solid #ccc; */
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	z-index: 1000;
-	border-radius: 8px;
-	background: #0d0e1e;
-	top: 175px;
-	}
+  /* Popup Container */
+#lc_popup, #lc_popup2 {
+    position: fixed;
+    right: 30px;
+    width: 440px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    border-radius: 8px;
+    background: #0d0e1e;
+    top: 175px;
+    display: none; /* Ensure it starts hidden */
+}
 
-  #lc_popupHeader, #lc_popupHeader2 {
-	padding: 18px 23px;
-	background-color: #006add;
-	color: white;
-	cursor: move;
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
-	width: 100%;
-	font-size: 19px;
-	min-height: 54px;
-	}
+/* Header Styling */
+#lc_popupHeader, #lc_popupHeader2 {
+    padding: 18px 23px;
+    background-color: #006add;
+    color: white;
+    cursor: move;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width: 100%;
+    font-size: 19px;
+    min-height: 54px;
+}
 
-  #lc_popupContent {
-	padding: 0px 0 0 0;
-	width: 100%;
-	}
+/* Close Button */
+#lc_closeBtn {
+    float: right;
+    cursor: pointer;
+    font-weight: bold;
+    position: absolute;
+    top: 1px;
+    right: 25px;
+    width: 15px;
+    font-size: 26px;
+}
 
-  #lc_closeBtn {
-	float: right;
-	cursor: pointer;
-	font-weight: bold;
-	position: absolute;
-	top: 1px;
-	right: 25px;
-	width: 15px;
-	font-size: 26px;
-	}
-	#lc_closeBtn:hover {}
-	#lc_closeBtn.dslca-module-edit-cancel, #lc_closeBtn.dslca-row-edit-cancel {
-		background: none;
-	}
+/* Resize Handle (for resizing) */
+.resize-handle {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: #ccc;
+    cursor: se-resize;
+    bottom: 0;
+    right: 0;
+}
 
-  .lc_popupContent .dslca-header {
+/* Popup Content */
+#lc_popupContent {
+    padding: 0px 0 0 0;
+    width: 100%;
+}
+
+.lc_popupContent .dslca-header {
     position: relative;
     border: 0;
     display: flex;
     bottom: 0;
-}
-
-.lc_popupContent .dslca-module-edit-option {
-    padding: 4px 0 0 0;
-    width: 100%;
-    margin-top: 5px;
-}
-
-.lc_popupContent .dslca-module-control-group input[type="number"] {
-    width: 100%;
 }
 
 .lc_popupContent .dslca-module-edit-form {
@@ -3775,6 +3775,7 @@ html {
     padding: 12px;
 }
 
+/* Optional Form Styles */
 .lc_popupContent .dslca-module-edit-form .dslca-module-edit-options {
     width: 100%;
 }
@@ -3787,18 +3788,6 @@ html {
     margin-bottom: 15px;
 }
 
-.lc_popupContent .dslca-module-edit-form .dslca-module-edit-options .dslca-module-edit-options-inner .dslca-module-edit-options-wrapper {
-	
-display: flex;
-	
-overflow: hidden;
-	
-width: 100%;
-	
-flex-direction: column;
-	
-flex-wrap: wrap;
-}
 
 
 .dslca-module-edit-actions {
