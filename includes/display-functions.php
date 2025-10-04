@@ -100,10 +100,19 @@ function dslc_display_composer()
 
 
 
-
+			<div id="dslc-drag-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; display: none;"></div>
 
 			<!-- Module Pop Up -->
 			<div id="lc_popup" class="lc-pop-build" style="display: none;">
+				<div class="resize-handle top-left" data-direction="tl"></div>
+				<div class="resize-handle top-right" data-direction="tr"></div>
+				<div class="resize-handle bottom-left" data-direction="bl"></div>
+				<div class="resize-handle bottom-right" data-direction="br"></div>
+				
+				<div class="resize-handle top" data-direction="t"></div>
+				<div class="resize-handle bottom" data-direction="b"></div>
+				<div class="resize-handle left" data-direction="l"></div>
+				<div class="resize-handle right" data-direction="r"></div>
 				<div id="lc_popupHeader">
 					<span class="dslca-currently-editing"><strong></strong></span>
 					<span id="lc_closeBtn" class="dslca-module-edit-cancel">&times;</span>
@@ -131,84 +140,166 @@ function dslc_display_composer()
 				</div>
 			</div>
 			<!-- Module Pop Up -->
-
-
 			<script>
-				// Grab the popup, header, and dynamically create a resize handle
 				const popup = document.getElementById("lc_popup");
+				const closeBtn = document.getElementById("lc_closeBtn"); // Kept for the mousedown check
 				const header = document.getElementById("lc_popupHeader");
-				const resizeHandle = document.createElement("div");
-				resizeHandle.classList.add("resize-handle");  // Add class for styling
-				popup.appendChild(resizeHandle);  // Append to the popup
+				const dragOverlay = document.getElementById("dslc-drag-overlay");
+				const VISIBLE_HEADER_WIDTH = 50; 
+				const MIN_WIDTH = 300;
+				const MIN_HEIGHT = 200;
 
+				// Drag variables
 				let offsetX = 0,
 					offsetY = 0,
-					isDown = false,
-					isResizing = false;
-
-				// Draggable functionality with boundary checks
-				header.addEventListener("mousedown", (e) => {
-					if (e.target !== resizeHandle) {  // Avoid dragging if the resize handle is clicked
-						isDown = true;
-						offsetX = e.clientX - popup.offsetLeft;
-						offsetY = e.clientY - popup.offsetTop;
-						document.body.style.userSelect = 'none';
-					}
-				});
-
-				// Mouseup event to stop dragging or resizing
-				document.addEventListener("mouseup", () => {
 					isDown = false;
-					isResizing = false;  // Stop resizing when mouse is released
-					document.body.style.userSelect = 'auto';  // Allow text selection again
-				});
+					
+				// Resize variables
+				let isResizing = false;
+				let resizeDirection = null;
 
-				// Mousemove event to drag or resize the popup with boundary checks
-				document.addEventListener("mousemove", (e) => {
-					if (isDown) {
-						// Calculate the new position
-						let newLeft = e.clientX - offsetX;
-						let newTop = e.clientY - offsetY;
 
-						// Get the browser window's width and height
-						const windowWidth = window.innerWidth;
-						const windowHeight = window.innerHeight;
-
-						// Ensure the popup stays inside the visible window (left, right, top, bottom)
-						if (newLeft < 0) {
-							newLeft = 0; // Prevent moving left outside the window
-						}
-						if (newTop < 0) {
-							newTop = 0; // Prevent moving above the visible area (behind the address bar)
-						}
-						if (newLeft + popup.offsetWidth > windowWidth) {
-							newLeft = windowWidth - popup.offsetWidth; // Prevent moving right outside the window
-						}
-						if (newTop + popup.offsetHeight > windowHeight) {
-							newTop = windowHeight - popup.offsetHeight; // Prevent moving below the window
-						}
-
-						// Apply the calculated position
-						popup.style.left = newLeft + "px";
-						popup.style.top = newTop + "px";
+				// --- FUNCTION TO CENTER POPUP ---
+				function centerPopup() {
+					if (popup.style.display !== 'block') {
+						popup.style.display = 'block'; // Ensure visibility for dimension calculation
 					}
+					popup.style.position = 'absolute';
 
-					if (isResizing) { // Only resize if the mouse is down on the resize handle
-						const newWidth = e.clientX - popup.offsetLeft;
-						const newHeight = e.clientY - popup.offsetTop;
+					const viewportWidth = window.innerWidth;
+					const viewportHeight = window.innerHeight;
+					const popupWidth = popup.offsetWidth;
+					const popupHeight = popup.offsetHeight;
 
-						// Update popup size dynamically
-						popup.style.width = Math.max(newWidth, 200) + "px";  // Ensure it doesn't get too small
-						popup.style.height = Math.max(newHeight, 150) + "px";  // Set min height for popup
+					const centerX = (viewportWidth - popupWidth) / 2;
+					const centerY = (viewportHeight - popupHeight) / 2;
+
+					// Apply position
+					popup.style.left = Math.max(0, centerX) + 'px';
+					popup.style.top = Math.max(0, centerY) + 'px';
+				}
+
+				// You should call centerPopup() whenever the popup is opened.
+
+				// --- MOUSE DOWN (Drag Initiation) ---
+				header.addEventListener("mousedown", (e) => {
+					// ... (existing drag logic) ...
+					if (e.target === closeBtn || closeBtn.contains(e.target)) {
+						return; 
 					}
-				});
+					
+					e.preventDefault();
+					isDown = true;
+					dragOverlay.style.display = 'block';
 
-				// Resizing functionality when clicking the resize handle
-				resizeHandle.addEventListener("mousedown", (e) => {
-					isResizing = true;
 					offsetX = e.clientX - popup.offsetLeft;
 					offsetY = e.clientY - popup.offsetTop;
-					document.body.style.userSelect = 'none';  // Disable text selection during resize
+
+					document.body.style.userSelect = 'none';
+					popup.style.position = 'absolute';
+				});
+				
+				// --- MOUSE DOWN on Handle (Start Resize) ---
+				document.querySelectorAll('.resize-handle').forEach(handle => {
+					handle.addEventListener('mousedown', (e) => {
+						e.preventDefault();
+						e.stopPropagation(); 
+						
+						isResizing = true;
+						resizeDirection = e.target.getAttribute('data-direction');
+						dragOverlay.style.display = 'block'; 
+						document.body.style.userSelect = 'none';
+						
+						// Store initial mouse position and popup state for accurate resizing
+						offsetX = e.clientX;
+						offsetY = e.clientY;
+						
+						popup.initialWidth = popup.offsetWidth;
+						popup.initialHeight = popup.offsetHeight;
+						popup.initialLeft = popup.offsetLeft;
+						popup.initialTop = popup.offsetTop;
+					});
+				});
+
+				// --- MOUSE UP (End Drag/Resize) ---
+				document.addEventListener("mouseup", () => {
+					if (isDown || isResizing) {
+						dragOverlay.style.display = 'none'; 
+					}
+					isDown = false;
+					isResizing = false;
+					resizeDirection = null;
+					document.body.style.userSelect = 'auto';
+				});
+
+				// --- MOUSE MOVE (Combined Logic) ---
+				document.addEventListener("mousemove", (e) => {
+					if (isDown && !isResizing) { 
+						// --- DRAG LOGIC ---
+						let newX = e.clientX - offsetX;
+						let newY = e.clientY - offsetY;
+
+						const viewportWidth = window.innerWidth;
+						const viewportHeight = window.innerHeight;
+						const popupWidth = popup.offsetWidth;
+						
+						const minX = -(popupWidth - VISIBLE_HEADER_WIDTH);
+						const maxX = viewportWidth - VISIBLE_HEADER_WIDTH; 
+						const minY = 0;
+						const maxY = viewportHeight - header.offsetHeight; 
+
+						// Apply constraints
+						newX = Math.max(minX, Math.min(maxX, newX));
+						newY = Math.max(minY, Math.min(maxY, newY));
+						
+						// Apply new position
+						popup.style.left = newX + "px";
+						popup.style.top = newY + "px";
+
+					} else if (isResizing) {
+						// --- RESIZE LOGIC ---
+						const dx = e.clientX - offsetX;
+						const dy = e.clientY - offsetY;
+						
+						let newWidth = popup.initialWidth;
+						let newHeight = popup.initialHeight;
+						let newLeft = popup.initialLeft;
+						let newTop = popup.initialTop;
+
+						const direction = resizeDirection;
+
+						// Vertical Resizing (Top/Bottom)
+						if (direction.includes('t')) { 
+							newHeight = popup.initialHeight - dy;
+							newTop = popup.initialTop + dy;
+
+							if (newHeight < MIN_HEIGHT) {
+								newHeight = MIN_HEIGHT;
+								newTop = popup.initialTop + popup.initialHeight - MIN_HEIGHT; 
+							}
+						} else if (direction.includes('b')) { 
+							newHeight = Math.max(MIN_HEIGHT, popup.initialHeight + dy);
+						}
+
+						// Horizontal Resizing (Left/Right)
+						if (direction.includes('l')) { 
+							newWidth = popup.initialWidth - dx;
+							newLeft = popup.initialLeft + dx;
+							
+							if (newWidth < MIN_WIDTH) {
+								newWidth = MIN_WIDTH;
+								newLeft = popup.initialLeft + popup.initialWidth - MIN_WIDTH;
+							}
+						} else if (direction.includes('r')) { 
+							newWidth = Math.max(MIN_WIDTH, popup.initialWidth + dx);
+						}
+
+						// Apply Changes
+						popup.style.width = newWidth + 'px';
+						popup.style.height = newHeight + 'px';
+						popup.style.left = newLeft + 'px';
+						popup.style.top = newTop + 'px';
+					}
 				});
 			</script>
 
@@ -262,10 +353,10 @@ function dslc_display_composer()
 							<div class="dslca-section-title-filter-options"></div>
 						</div><!-- .dslca-section-title-filter -->
 					</div><!-- .dslca-section-title -->
-					
+
 					<div class="search_module">
-					<label for="search-module">Search Module</label>
-					<input type="text" class="dslca-search-modules"  id="search-module"  />
+						<label for="search-module">Search Module</label>
+						<input type="text" class="dslca-search-modules" id="search-module" />
 					</div>
 
 					<div class="dslca-section-scroller">
@@ -304,7 +395,7 @@ function dslc_display_composer()
 				<div id="lc_popup2" class="lc-pop-build dslca-section dslca-modules-section-edit" style="display: none;">
 					<div id="lc_popupHeader2">
 						<span class="dslca-currently-editing"><strong></strong></span>
-						<span id="lc_closeBtn" class="dslca-row-edit-cancel">&times;</span>
+						<span id="lc_closeBtn2" class="dslca-row-edit-cancel">&times;</span>
 					</div>
 
 					<div id="lc_popupContent" class="lc_popupContent">
@@ -376,11 +467,11 @@ function dslc_display_composer()
 					<a href="#" class="dslca-open-modal-hook" data-modal=".dslca-modal-templates-import"><span class="dslca-icon dslc-icon-download-alt"></span><?php _e('Import Page Code', 'live-composer-page-builder'); ?></a>
 					<a href="#" class="dslca-open-modal-hook" data-modal=".dslca-modal-templates-export"><span class="dslca-icon dslc-icon-upload-alt"></span><?php _e('Export Page Code', 'live-composer-page-builder'); ?></a>
 
-				
 
-					
 
-					
+
+
+
 
 				</div><!-- .dslca-section-templates -->
 
@@ -465,46 +556,46 @@ function dslc_display_composer()
 
 
 		<div class="dslca-modal dslca-modal-templates-save">
-					<h3>Save Page Design</h3>
-						<form class="dslca-template-save-form">
-							<input type="text" id="dslca-save-template-title" placeholder="<?php _e('Name of the template', 'live-composer-page-builder'); ?>">
-							<div class="dslca-submit"><?php _e('Save', 'live-composer-page-builder'); ?></div>
-							<div class="dslca-cancel dslca-close-modal-hook" data-modal=".dslca-modal-templates-save"><?php _e('Cancel', 'live-composer-page-builder'); ?></div>
-						</form>
+			<h3>Save Page Design</h3>
+			<form class="dslca-template-save-form">
+				<input type="text" id="dslca-save-template-title" placeholder="<?php _e('Name of the template', 'live-composer-page-builder'); ?>">
+				<div class="dslca-submit"><?php _e('Save', 'live-composer-page-builder'); ?></div>
+				<div class="dslca-cancel dslca-close-modal-hook" data-modal=".dslca-modal-templates-save"><?php _e('Cancel', 'live-composer-page-builder'); ?></div>
+			</form>
 		</div><!-- .dslca-modal -->
 
 
 		<div class="dslca-modal dslca-modal-templates-import">
-						<h3>Import Page Design</h3>
-						<form class="dslca-template-import-form">
-							<textarea id="dslca-import-code" placeholder="<?php _e('Enter the exported code heree', 'live-composer-page-builder'); ?>"></textarea>
-							<div class="dslca-submit">
-								<div class="dslca-modal-title"><?php _e('Import', 'live-composer-page-builder'); ?></div>
-								<div class="dslca-loading followingBallsGWrap">
-									<div class="followingBallsG_1 followingBallsG"></div>
-									<div class="followingBallsG_2 followingBallsG"></div>
-									<div class="followingBallsG_3 followingBallsG"></div>
-									<div class="followingBallsG_4 followingBallsG"></div>
-								</div>
-							</div>
-							<span class="dslca-cancel dslca-close-modal-hook" data-modal=".dslca-modal-templates-import"><?php _e('Cancel', 'live-composer-page-builder'); ?></span>
-						</form>
+			<h3>Import Page Design</h3>
+			<form class="dslca-template-import-form">
+				<textarea id="dslca-import-code" placeholder="<?php _e('Enter the exported code heree', 'live-composer-page-builder'); ?>"></textarea>
+				<div class="dslca-submit">
+					<div class="dslca-modal-title"><?php _e('Import', 'live-composer-page-builder'); ?></div>
+					<div class="dslca-loading followingBallsGWrap">
+						<div class="followingBallsG_1 followingBallsG"></div>
+						<div class="followingBallsG_2 followingBallsG"></div>
+						<div class="followingBallsG_3 followingBallsG"></div>
+						<div class="followingBallsG_4 followingBallsG"></div>
+					</div>
+				</div>
+				<span class="dslca-cancel dslca-close-modal-hook" data-modal=".dslca-modal-templates-import"><?php _e('Cancel', 'live-composer-page-builder'); ?></span>
+			</form>
 
-					</div><!-- .dslca-modal -->
+		</div><!-- .dslca-modal -->
 
-					<div class="dslca-modal dslca-modal-templates-export">
-					<h3>Export Page Design</h3>
-						<form class="dslca-template-export-form">
-							<textarea id="dslca-export-code"></textarea>
-							<span class="dslca-cancel dslca-close-modal-hook" data-modal=".dslca-modal-templates-export"><?php _e('Close', 'live-composer-page-builder'); ?></span>
-						</form>
+		<div class="dslca-modal dslca-modal-templates-export">
+			<h3>Export Page Design</h3>
+			<form class="dslca-template-export-form">
+				<textarea id="dslca-export-code"></textarea>
+				<span class="dslca-cancel dslca-close-modal-hook" data-modal=".dslca-modal-templates-export"><?php _e('Close', 'live-composer-page-builder'); ?></span>
+			</form>
 
-					</div><!-- .dslca-modal -->
-
-
+		</div><!-- .dslca-modal -->
 
 
-					
+
+
+
 		<div class="dslca-invisible-overlay"></div>
 		<div id="scroller-stopper"></div>
 		<script id="pseudo-panel" type="template" style="display:none !important">
@@ -672,7 +763,7 @@ function dslc_display_modules($page_id)
 						<?php endif; ?>
 					</a><!-- .dslc-template -->
 
-	<?php
+			<?php
 						}
 					}
 				} else {
@@ -764,15 +855,57 @@ function dslc_display_modules($page_id)
 				if (dslc_is_editor_active() || ! defined('DS_LIVE_COMPOSER_HF_AUTO') || DS_LIVE_COMPOSER_HF_AUTO) {
 					$composer_wrapper_before = '<div id="dslc-content" class="dslc-content dslc-clearfix">';
 					ob_start();
-					?>
-						<div>
-							top bar content
+						?>
+						<div class="topbar_icon_customs">
+							<?php
+								global $post;
+								// Get current page title
+								$page_title = isset($post->ID) ? get_the_title($post->ID) : '';
+							?>
+							<div class="left page-title">
+								<svg data-wf-icon="PageDefaultIcon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path fill-rule="evenodd" clip-rule="evenodd" d="M3 3C3 2.44772 3.44772 2 4 2H8.70711L13 6.29289V13C13 13.5523 12.5523 14 12 14H4C3.44772 14 3 13.5523 3 13V3ZM8.29289 3H4V13H12V6.70711L8.29289 3Z" fill="currentColor"></path>
+								</svg> <?php echo esc_html($page_title); ?>
+							</div>
+							<div class="center_devise">
+								<ul>
+									<li><svg data-wf-icon="DesktopStarBreakpointIcon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path fill-rule="evenodd" clip-rule="evenodd" d="M12 5.36602L10.1519 6.43301L9.65192 5.56699L11.5 4.5L9.65193 3.43301L10.1519 2.56699L12 3.63397V1.5H13V3.63397L14.8481 2.56699L15.3481 3.43301L13.5 4.5L15.3481 5.56699L14.8481 6.43301L13 5.36602V7.5H12V5.36602ZM3 4H8V5H3V12H13V9H14V12H16V13H0V12H2V5C2 4.44772 2.44772 4 3 4Z" fill="currentColor"></path>
+										</svg></li>
+									<li><svg data-wf-icon="TabletPortraitBreakpointIcon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path fill-rule="evenodd" clip-rule="evenodd" d="M4 3H12V13H4V3ZM3 3C3 2.44772 3.44772 2 4 2H12C12.5523 2 13 2.44772 13 3V13C13 13.5523 12.5523 14 12 14H4C3.44772 14 3 13.5523 3 13V3ZM9.5 11H6.5V12H9.5V11Z" fill="currentColor"></path>
+										</svg></li>
+									<li><svg data-wf-icon="MobileBreakpointIcon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M7 12H9V11H7V12Z" fill="currentColor"></path>
+											<path fill-rule="evenodd" clip-rule="evenodd" d="M4 4C4 2.89543 4.89543 2 6 2H10C11.1046 2 12 2.89543 12 4V12C12 13.1046 11.1046 14 10 14H6C4.89543 14 4 13.1046 4 12V4ZM6 3H10C10.5523 3 11 3.44772 11 4V12C11 12.5523 10.5523 13 10 13H6C5.44772 13 5 12.5523 5 12V4C5 3.44772 5.44772 3 6 3Z" fill="currentColor"></path>
+										</svg></li>
+								</ul>
+							</div>
+							<?php
+								global $post;
+
+								// Ensure we have a post object
+								if (isset($post->ID)) {
+									// Get the live URL of the page/post
+									$lc_link = get_permalink($post->ID);
+								}
+							?>
+							<div class="preview_screen">
+								<?php if (! empty($lc_link)) : ?>
+									<a href="<?php echo esc_url($lc_link); ?>" target="_blank">
+										<img class="previewimg" src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/icons/view.svg" alt="Preview" />
+									</a>
+								<?php endif; ?>
+							</div>
+
 						</div>
+
 					<?php
 					$composer_top_bar = ob_get_clean();
 					$composer_wrapper_after = '</div>';
 				}
 
+				
 				// Get LC code of the current post.
 				$composer_code = dslc_get_code($curr_id);
 
@@ -891,7 +1024,7 @@ function dslc_display_modules($page_id)
 				} elseif (! empty($composer_header) || ! empty($composer_footer)) {
 					// If there is header or footer LC code to add to the content output.
 					// If editor not active.
-					if (! dslc_is_editor_active()) { 
+					if (! dslc_is_editor_active()) {
 
 						$rendered_header_footer = $composer_wrapper_before . $composer_top_bar . $composer_header . '<div id="dslc-theme-content"><div id="dslc-theme-content-inner">' . $content . '</div></div>' . $composer_footer . $composer_wrapper_after;
 						$cache->set_cache($rendered_header_footer, $cache_id);

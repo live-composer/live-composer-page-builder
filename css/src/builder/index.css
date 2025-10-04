@@ -4600,7 +4600,8 @@ body em {
     border-radius: 8px;
     background: #0d0e1e;
     top: 175px;
-    display: none; /* Ensure it starts hidden */
+    display: none;
+	z-index: 10000 !important;
 }
 
 /* Header Styling */
@@ -4620,7 +4621,7 @@ body em {
     width: 100%;
 }
 /* Close Button */
-#lc_closeBtn {
+#lc_closeBtn, #lc_closeBtn2 {
     float: right;
     cursor: pointer;
     font-weight: bold;
@@ -4630,19 +4631,44 @@ body em {
     width: 15px;
     font-size: 26px;
 }
-#lc_closeBtn.dslca-module-edit-cancel, #lc_closeBtn.dslca-row-edit-cancel {
+#lc_closeBtn.dslca-module-edit-cancel, #lc_closeBtn2.dslca-row-edit-cancel {
 	background: none;
 }
 
 /* Resize Handle (for resizing) */
 .resize-handle {
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    background: #ccc;
-    cursor: se-resize;
-    bottom: 0;
-    right: 0;
+	position: absolute;
+	background: transparent !important; /* Invisible, but functional area */
+	z-index: 10001; /* Above popup content */
+}
+
+/* Corner Handles (Larger area for easier clicking) */
+.resize-handle.top-left, .resize-handle.top-right,
+.resize-handle.bottom-left, .resize-handle.bottom-right {
+	width: 12px;
+	height: 12px;
+}
+.resize-handle.top-left { top: -6px; left: -6px; cursor: nwse-resize; }
+.resize-handle.top-right { top: -6px; right: -6px; cursor: nesw-resize; }
+.resize-handle.bottom-left { bottom: -6px; left: -6px; cursor: nesw-resize; }
+.resize-handle.bottom-right { bottom: -6px; right: -6px; cursor: nwse-resize; }
+
+/* Side Handles */
+.resize-handle.top { top: -4px; left: 10px; right: 10px; height: 8px; cursor: ns-resize; }
+.resize-handle.bottom { bottom: -4px; left: 10px; right: 10px; height: 8px; cursor: ns-resize; }
+.resize-handle.left { left: -4px; top: 10px; bottom: 10px; width: 8px; cursor: ew-resize; }
+.resize-handle.right { right: -4px; top: 10px; bottom: 10px; width: 8px; cursor: ew-resize; }
+
+#dslc-drag-overlay {
+	position: fixed; 
+	top: 0; 
+	left: 0; 
+	width: 100%; 
+	height: 100%; 
+	z-index: 9999; 
+	display: none;
+	/* Optional: Make it completely transparent so the user doesn't see it */
+	background: transparent; 
 }
 
 /* Popup Content */
@@ -4688,3 +4714,86 @@ body em {
     overflow-y: scroll;
     margin-bottom: 15px;
 }
+
+/* Topbar for responsive icons Start 
+-------------------------------------------------------------------------------*/
+
+.topbar_icon_customs {
+	background: #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:5px 10px;
+    position: fixed;
+    top: 0;
+    z-index: 9999999999999999;
+    width: 100%;
+}
+
+.topbar_icon_customs .page-title {
+  color: #ffffff;
+  width: 30%;
+  font-size: 13px;
+  display: flex;
+  align-content: center;
+}
+.topbar_icon_customs .page-title svg {
+    width: 25px;
+    height: 21px;
+    display: flex;
+    align-content: center;
+    margin-top: 2px;
+}
+
+.topbar_icon_customs img {
+	width: 22px;
+	cursor:pointer;
+}
+
+.topbar_icon_customs svg {
+	width: 22px;
+	cursor:pointer;
+}
+.topbar_icon_customs .center_devise {
+	display: flex;
+    align-items: center;
+	gap: 20px;
+}
+.topbar_icon_customs .center_devise ul {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.topbar_icon_customs .center_devise li {
+	list-style:none;
+}
+.topbar_icon_customs .center_devise ul { display: flex; margin: 0px; padding: 0; }
+.topbar_icon_customs .center_devise ul li {list-style: none;display: flex;}
+.topbar_icon_customs .center_devise ul li a {}
+.topbar_icon_customs .center_devise ul li svg {
+    font-size: 25px;
+    width: 46px;
+    height: 25px;
+    color: #ffffff;
+}
+
+.topbar_icon_customs .center_devise ul li .currentColor { color: #ffffff;}
+.topbar_icon_customs .preview_screen {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 30%;
+  justify-content: flex-end;
+  align-content: center;
+}
+.topbar_icon_customs .preview_screen a {
+    display: flex;
+}
+.topbar_icon_customs .preview_screen img {
+  width: 22px;
+	cursor:pointer;
+}
+
+/* Topbar for responsive icons End 
+-------------------------------------------------------------------------------*/
