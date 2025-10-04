@@ -538,8 +538,9 @@ body.rtl .dslc-last-col {
 	}
 
 .dslc-notification.dslc-red {
-	background: #f65757;
-	border-color: #e43737;
+	background: #0d0e1e;
+  	border-color: #0d0e1e;
+
 	color: #fff;
 	text-shadow: 0 1px 1px rgba(0,0,0,.14);
 }

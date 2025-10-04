@@ -511,39 +511,38 @@ function dslc_display_composer()
 			<div class="dslca-pseudo-popup">
 				<!-- Skeleton Body -->
 				<div class="dslca-pseudo-popup-body">
-				<div class="dslca-skeleton-grid">
+					<div class="dslca-skeleton-grid">
 
-					<!-- 2-column loading layout -->
-					<div class="dslca-skeleton-item">
-						<span class="skeleton-label">&nbsp;</span>
-						<div class="skeleton-field">&nbsp;</div>
-					</div>
-					<div class="dslca-skeleton-item">
-						<span class="skeleton-label">&nbsp;</span>
-						<div class="skeleton-field">&nbsp;</div>
-					</div>
-					<div class="dslca-skeleton-item">
-						<span class="skeleton-label">&nbsp;</span>
-						<div class="skeleton-field">&nbsp;</div>
-					</div>
-					<div class="dslca-skeleton-item">
-						<span class="skeleton-label">&nbsp;</span>
-						<div class="skeleton-field">&nbsp;</div>
-					</div>
-					<div class="dslca-skeleton-item">
-						<span class="skeleton-label">&nbsp;</span>
-						<div class="skeleton-field">&nbsp;</div>
-					</div>
-					<div class="dslca-skeleton-item">
-						<span class="skeleton-label">&nbsp;</span>
-						<div class="skeleton-field">&nbsp;</div>
-					</div>
+						<!-- 2-column loading layout -->
+						<div class="dslca-skeleton-item">
+							<span class="skeleton-label">&nbsp;</span>
+							<div class="skeleton-field">&nbsp;</div>
+						</div>
+						<div class="dslca-skeleton-item">
+							<span class="skeleton-label">&nbsp;</span>
+							<div class="skeleton-field">&nbsp;</div>
+						</div>
+						<div class="dslca-skeleton-item">
+							<span class="skeleton-label">&nbsp;</span>
+							<div class="skeleton-field">&nbsp;</div>
+						</div>
+						<div class="dslca-skeleton-item">
+							<span class="skeleton-label">&nbsp;</span>
+							<div class="skeleton-field">&nbsp;</div>
+						</div>
+						<div class="dslca-skeleton-item">
+							<span class="skeleton-label">&nbsp;</span>
+							<div class="skeleton-field">&nbsp;</div>
+						</div>
+						<div class="dslca-skeleton-item">
+							<span class="skeleton-label">&nbsp;</span>
+							<div class="skeleton-field">&nbsp;</div>
+						</div>
 
+					</div>
 				</div>
-				</div>
-
 			</div>
-			</script>
+		</script>
 	<?php
 
 	// Output editor messages.
@@ -745,6 +744,7 @@ function dslc_display_modules($page_id)
 
 				// Variables that are used throughout the function.
 				$composer_wrapper_before = '';
+				$composer_top_bar = '';
 				$composer_wrapper_after = '';
 				$composer_header_append = ''; // HTML to output after LC header HTML.
 				$composer_footer_append = ''; // HTML to otuput after LC footer HTML.
@@ -763,6 +763,13 @@ function dslc_display_modules($page_id)
 				// and closing it after the footer.
 				if (dslc_is_editor_active() || ! defined('DS_LIVE_COMPOSER_HF_AUTO') || DS_LIVE_COMPOSER_HF_AUTO) {
 					$composer_wrapper_before = '<div id="dslc-content" class="dslc-content dslc-clearfix">';
+					ob_start();
+					?>
+						<div>
+							top bar content
+						</div>
+					<?php
+					$composer_top_bar = ob_get_clean();
 					$composer_wrapper_after = '</div>';
 				}
 
@@ -884,9 +891,9 @@ function dslc_display_modules($page_id)
 				} elseif (! empty($composer_header) || ! empty($composer_footer)) {
 					// If there is header or footer LC code to add to the content output.
 					// If editor not active.
-					if (! dslc_is_editor_active()) {
+					if (! dslc_is_editor_active()) { 
 
-						$rendered_header_footer = $composer_wrapper_before . $composer_header . '<div id="dslc-theme-content"><div id="dslc-theme-content-inner">' . $content . '</div></div>' . $composer_footer . $composer_wrapper_after;
+						$rendered_header_footer = $composer_wrapper_before . $composer_top_bar . $composer_header . '<div id="dslc-theme-content"><div id="dslc-theme-content-inner">' . $content . '</div></div>' . $composer_footer . $composer_wrapper_after;
 						$cache->set_cache($rendered_header_footer, $cache_id);
 
 						// Pass the LC header, regular content and LC footer
@@ -921,7 +928,7 @@ function dslc_display_modules($page_id)
 				// After Content.
 				$content_after = '';
 				$dslc_content_after = apply_filters('dslc_content_after', $content_after);
-				$rendered_page = $dslc_content_before . $composer_wrapper_before . do_action('dslc_output_prepend') . $composer_header . '<div id="dslc-main">' . $composer_prepend . $composer_content . '</div>' . $composer_append . $composer_footer . do_action('dslc_output_append') . $composer_wrapper_after . $dslc_content_after;
+				$rendered_page = $dslc_content_before . $composer_wrapper_before . $composer_top_bar . do_action('dslc_output_prepend') . $composer_header . '<div id="dslc-main">' . $composer_prepend . $composer_content . '</div>' . $composer_append . $composer_footer . do_action('dslc_output_append') . $composer_wrapper_after . $dslc_content_after;
 
 				if (! dslc_is_editor_active() && ! is_singular('dslc_hf')) {
 					global $wpdb;

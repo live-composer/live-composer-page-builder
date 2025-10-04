@@ -1,7 +1,7 @@
 
 /*********************************
  *
- * = UI - SCROLLER =
+ * = UI - SCROLLER = (currently i have removed it from calling if gets issue will add again)
  *
  ***********************************/
 

@@ -7,6 +7,7 @@
  * - dslc_show_publish_button ( Shows the publish button )
  * - dslc_show_section now showSection ( Show a specific section )
  * - dslc_generate_filters ( Generate origin filters )
+ * - dslca-search-modules ( Search Modules )
  * - dslc_filter_origin ( Origin filtering for templates/modules listing )
  * - dragAndDropInit ( Initiate drag and drop functionality )
  ***********************************/
@@ -212,6 +213,53 @@ jQuery(document).on( 'click', '.dslca-section-title', function(e){
 		jQuery('.dslca-section-title-filter-options').slideToggle(300);
 	}
 });
+/**
+ * Hook - Search Modules
+ */
+
+jQuery(document).on( 'input', '.dslca-search-modules', function(e){
+
+	var searchValue = jQuery(this).val().toLowerCase();
+	var modules = jQuery('.dslca-sections .dslca-modules .dslca-section-scroller .dslca-section-scroller-inner .dslca-section-scroller-content');
+	var filterValue = jQuery(".dslca-sections .dslca-modules .dslca-section-title .dslca-section-title-filter-curr").text();
+	if(filterValue == "Elements" || filterValue == "Show All")
+	{
+		if(searchValue == "")
+		{
+		jQuery(".dslca-origin", modules).attr("data-display-module", "true");  
+		}
+		else
+		{
+		jQuery(".dslca-origin", modules).attr("data-display-module", "false");
+		modules.children().each(function () {
+			var title = jQuery(this).children(".dslca-module-title").text().toLowerCase();
+			if (title.includes(searchValue))
+			{
+			this.dataset.displayModule = "true";
+			}
+		});
+		}
+	}
+	else
+	{
+		if(searchValue == "")
+		{
+			jQuery('.dslca-origin[data-origin="' + filterValue + '"]', modules).attr("data-display-module", "true");  
+		}
+		else
+		{
+			jQuery('.dslca-origin', modules).attr("data-display-module", "false");
+			modules.children().each(function () {
+			var title = jQuery(this).children(".dslca-module-title").text().toLowerCase();
+			if (title.includes(searchValue) && jQuery(this).attr("data-origin") == filterValue)
+			{
+				this.dataset.displayModule = "true";
+			}
+			});
+		}
+	}
+
+});
 
 /**
  * Hook - Apply Filter Origin
@@ -224,6 +272,8 @@ jQuery(document).on( 'click', '.dslca-section-title-filter-options a', function(
 
 	var origin = jQuery(this).data('origin');
 	var section = jQuery(this).closest('.dslca-section');
+	// blank search field on filter change
+	jQuery('.dslca-search-modules').val("");
 
 	if ( section.hasClass('dslca-templates-load') ) {
 		jQuery('.dslca-section-title-filter-curr', section).text( jQuery(this).text());
@@ -231,7 +281,8 @@ jQuery(document).on( 'click', '.dslca-section-title-filter-options a', function(
 		jQuery('.dslca-section-title-filter-curr', section).text( jQuery(this).text());
 	}
 
-	jQuery('.dslca-section-scroller-inner').css({ left : 0 });
+	// jQuery('.dslca-section-scroller-inner').css({ left : 0 });
+	jQuery(this).parent().siblings('.dslca-icon').toggleClass('dslc-icon-angle-up dslc-icon-angle-down');
 
 	dslc_filter_origin( origin, section );
 
@@ -328,7 +379,20 @@ export const showSection = ( section ) => {
 	jQuery('.dslca-container').css({ bottom: -500 });
 
 	// Hide all sections and show specific section
-	jQuery('.dslca-section').hide();
+	// jQuery('.dslca-section').hide();
+	if (section !== ".dslca-module-edit" && section !== ".dslca-modules-section-edit") {
+		jQuery(".dslca-section").hide();
+	}
+
+	// 2. If 'e' is equal to ".dslca-modules", perform two actions related to activation classes.
+	if (section === ".dslca-modules") {
+		// Remove active class from the templates button
+		jQuery(".dslca-go-to-section-templates").removeClass("dslca-active");
+
+		// Add active class to the modules button
+		jQuery(".dslca-go-to-section-modules").addClass("dslca-active");
+	}
+	
 	jQuery(section).show();
 
 	// Change "currently editing"
@@ -392,7 +456,7 @@ function dslc_generate_filters() {
 			filtersHTML += '<a href="#" data-origin="' + el.data('origin') + '">' + el.data('origin') + '</a>';
 		}
 	});
-
+	jQuery('.dslca-section-title-filter .dslca-icon').toggleClass('dslc-icon-angle-up dslc-icon-angle-down');
 	jQuery('.dslca-section:visible .dslca-section-title-filter-options').html( filtersHTML ).css( 'background', jQuery('.dslca-section:visible').data('bg') );
 }
 

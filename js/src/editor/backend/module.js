@@ -600,12 +600,18 @@ window.dslc_module_options_show = function( moduleID ) {
 	dslcDefaultSection = jQuery('.dslca-header').data('default-section'),
 	pseudoPanel = jQuery(jQuery('#pseudo-panel').html());
 
+	jQuery(".dslca-module-edit-options-inner").html("");
+	jQuery(".dslca-module-edit-options-tabs").html("");
+	jQuery(".dslca-header .dslca-options-filter-hook").show();
+	jQuery("#lc_popupContent .dslca-header").after(pseudoPanel.html());
+
+
 	jQuery("#wpwrap").append(pseudoPanel);
 
 	// Settings array for the Ajax call
 	var dslcSettings = {};
 	dslcSettings['action'] = 'dslc-ajax-display-module-options';
-	_wpnonce : DSLCAjax._wpnonce,
+	dslcSettings['_wpnonce'] = DSLCAjax._wpnonce;
 	dslcSettings['dslc'] = 'active';
 	dslcSettings['dslc_module_id'] = moduleID;
 	dslcSettings['dslc_post_id'] = jQuery('.dslca-container').data('data-post-id');
@@ -650,6 +656,7 @@ window.dslc_module_options_show = function( moduleID ) {
 	LiveComposer.Builder.Flags.panelOpened = true;
 
 	// Show pseudo settings panel
+	jQuery("#lc_popup").show();
 	pseudoPanel.show();
 	pseudoPanel.addClass('show');
 
@@ -660,6 +667,7 @@ window.dslc_module_options_show = function( moduleID ) {
 		function( response ) {
 
 			// Hide pseudo panel
+			jQuery("#lc_popupContent .dslca-header").next('.dslca-pseudo-popup-body').remove();
 			pseudoPanel.remove();
 
 			// Show edit section
@@ -720,7 +728,7 @@ window.dslc_module_options_show = function( moduleID ) {
 			jQuery('.dslca-wp-editor-actions').show();
 
 			// Hide the section hooks
-			jQuery('.dslca-header .dslca-go-to-section-hook').hide();
+			// jQuery('.dslca-header .dslca-go-to-section-hook').hide();
 
 			// Hide the row save/cancel actions
 			jQuery('.dslca-row-edit-actions').hide();
@@ -739,7 +747,6 @@ window.dslc_module_options_show = function( moduleID ) {
 export const moduleOutputDefault = ( dslc_module_id, callback ) => {
 
 	if ( window.dslcDebug ) console.log( 'moduleOutputDefault' );
-
 	jQuery.post(
 
 		DSLCAjax.ajaxurl,
@@ -776,8 +783,8 @@ export const moduleOutputAltered = ( callback ) => {
 	 */
 
 	var dslcSettings = {};
-
 	dslcSettings['action'] = 'dslc-ajax-add-module';
+	dslcSettings['_wpnonce'] = DSLCAjax._wpnonce;
 	dslcSettings['dslc'] = 'active';
 	dslcSettings['dslc_module_id'] = dslc_module_id;
 	dslcSettings['dslc_module_instance_id'] = dslcModuleInstanceID;

@@ -138,6 +138,7 @@ body a:focus {
 	margin: 0;
 	border: none;
 	outline: 0;
+	width : 240px;
 }
 
 .dslca-disable-selection {
@@ -219,11 +220,13 @@ body a:focus {
 	color: #fff;
 	left: 0;
 	position: fixed;
-	right: 0;
+	/* right: 0; */
+	display: flex;
 	z-index: 99999;
 	-webkit-transition: bottom 0.3s;
 	-moz-transition: bottom 0.3s;
 	transition: bottom 0.3s;
+	height: 100vh;
 }
 
 .dslca-container,
@@ -434,7 +437,7 @@ body a:focus {
 			.dslca-wp-editor-save-hook:hover,
 			.dslca-prompt-modal-confirm-hook:hover,
 			.dslca-pseudo-module-edit-save:hover {
-				background: #91dc1e;
+				background: #3383df;
 				color: #fff;
 			}
 
@@ -640,13 +643,14 @@ body a:focus {
 			 */
 			z-index: 1;
 			position: relative;
+			width: 48%;
 		}
 
 		.dslca-module[data-id="DSLC_Separator"],
 		.dslca-module[data-id="DSLC_Notification"],
 		.dslca-module[data-id="DSLC_Sliders"],
 		.dslca-module[data-id="DSLC_Staff"] {
-			margin-right: 14px;
+			/* margin-right: 14px; */
 		}
 
 		.dslca-module[data-id="DSLC_M_A"] {
@@ -745,7 +749,7 @@ body a:focus {
 		.dslca-module-edit-options,
 		.dslca-pseudo-module-edit-options {
 			padding: 16px 15px 5px 15px;
-			min-height: 58px;
+			/* min-height: 58px; */
 
 			transform: translate(0,0);
 			/* fix the bug with wrong position
@@ -757,7 +761,7 @@ body a:focus {
 			.dslca-module-edit-option,
 			.dslca-pseudo-module-edit-option,
 			.dslca-section-edit-option {
-				display: table-cell;
+				/* display: table-cell; */
 				padding-bottom: 40px;
 				padding-left: 15px;
 				padding-right: 15px;
@@ -786,16 +790,16 @@ body a:focus {
 
 			.dslca-module-control-group > .controls-group-inner > .dslca-module-edit-label,
 			.dslca-section-control-group > .controls-group-inner > .dslca-section-edit-label {
-				position: absolute;
-				background: rgba(76, 129, 207, 0.4);
-				padding: 6px 11px;
+				/* position: absolute; */
+				/* background: rgba(76, 129, 207, 0.4); */
+				/* padding: 6px 11px; */
 				left: 0;
-				border-radius: 2px 2px 0 0;
-				width: 100%;
-				text-transform: uppercase;
-				letter-spacing: 1px;
-				font-size: 75%;
-				border-bottom: 1px solid #4C81CF;
+				/* border-radius: 2px 2px 0 0; */
+				/* width: 100%; */
+				/* text-transform: uppercase; */
+				/* letter-spacing: 1px; */
+				/* font-size: 75%; */
+				/* border-bottom: 1px solid #4C81CF; */
 			}
 
 			.dslca-module-control-group > .controls-group-inner > .dslca-module-edit-label .dslc-control-toggle {
@@ -2414,26 +2418,34 @@ body.rtl .dslca-modules-area-placeholder {
 
 .dslca-section-scroller {
 	position: relative;
-	height: 74px;
-	margin-right: 80px;
+	height: 93vh;
+	/* margin-right: 80px; */
 	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	/* width: 350px; */
+	flex-wrap: wrap;
+
 }
 
 	.dslca-section-scroller-inner {
-		position: absolute;
+		/* position: absolute; */
 		top: 0;
 		left: 0;
 		bottom: 0;
-		width: 999999px;
-		text-align: left;
-		-webkit-transition: left 0.3s ease-in-out;
+		/* width: 999999px; */
+		/* text-align: left; */
+		/* -webkit-transition: left 0.3s ease-in-out; */
 		-moz-transition: left 0.3s ease-in-out;
-		transition: left 0.3s ease-in-out;
+		/* transition: left 0.3s ease-in-out; */
 	}
 
 		.dslca-section-scroller-content {
-			display: inline-block;
-			padding-right: 80px;
+			/* display: inline-block; */
+			/* padding-right: 80px; */
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
 		}
 
 .dslca-section-scroller-fade {
@@ -2444,7 +2456,7 @@ body.rtl .dslca-modules-area-placeholder {
 	background: -ms-linear-gradient(left,  rgba(88,144,229,0) 0%,rgba(70, 116, 185,1) 100%);
 	background: linear-gradient(to right,  rgba(88,144,229,0) 0%,rgba(70, 116, 185,1) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00004799', endColorstr='#5890e5',GradientType=1 );
-	position: absolute;
+	position: relative;
 	right: 80px;
 	width: 20px;
 	bottom: 0;
@@ -2453,7 +2465,7 @@ body.rtl .dslca-modules-area-placeholder {
 }
 
 .dslca-section-scroller-nav {
-	position: absolute;
+	position: relative;
 	right: 0;
 	top: 0;
 	bottom: 0;
@@ -3110,7 +3122,7 @@ body.rtl .dslca-modules-area-placeholder {
 	animation-name: dslcBounceIn;
 	animation-duration:0.6s;
 	-webkit-animation-duration:0.6s;
-
+	background: #0050a5;
 }
 
 .dslca-anim-opacity-drop {
@@ -3251,13 +3263,13 @@ span.dslca-manage-action:hover * {
 }
 
 	.dslca-wp-editor-inner {
-		background: #fff;
-		position: fixed;
+		/* background: #fff; */
+		/* position: fixed; */
 		top: 30px;
 		left: 30px;
 		right: 30px;
 		bottom: 30px;
-		padding: 50px;
+		/* padding: 50px; */
 	}
 
 	.dslca-wp-editor-notification {
@@ -4565,4 +4577,114 @@ body.section-editing-in-progress.dslc-res-phone .dslc-modules-section:not(.dslca
 
 body em {
 	font-style: italic;
+}
+.dslca-search-modules{
+  float: left;
+  padding: 11px 10px !important;
+  font-size: 13px !important;
+  line-height: 1 !important;
+  color: #fff !important;
+  width: 97% !important;
+}
+.dslca-search-modules::placeholder {
+  color: #F9F6EE !important;
+  opacity: 1 !important;
+}
+  /* Popup Container */
+#lc_popup, #lc_popup2 {
+    position: fixed;
+    right: 30px;
+    width: 440px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    border-radius: 8px;
+    background: #0d0e1e;
+    top: 175px;
+    display: none; /* Ensure it starts hidden */
+}
+
+/* Header Styling */
+#lc_popupHeader, #lc_popupHeader2 {
+    padding: 18px 23px;
+    background-color: #006add;
+    color: white;
+    cursor: move;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width: 100%;
+    font-size: 19px;
+    min-height: 54px;
+}
+#lc_popupContent {
+    padding: 0px 0 0 0;
+    width: 100%;
+}
+/* Close Button */
+#lc_closeBtn {
+    float: right;
+    cursor: pointer;
+    font-weight: bold;
+    position: absolute;
+    top: 1px;
+    right: 25px;
+    width: 15px;
+    font-size: 26px;
+}
+#lc_closeBtn.dslca-module-edit-cancel, #lc_closeBtn.dslca-row-edit-cancel {
+	background: none;
+}
+
+/* Resize Handle (for resizing) */
+.resize-handle {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: #ccc;
+    cursor: se-resize;
+    bottom: 0;
+    right: 0;
+}
+
+/* Popup Content */
+
+.lc_popupContent .dslca-header {
+    position: relative;
+    border: 0;
+    display: flex;
+    bottom: 0;
+}
+
+.lc_popupContent .dslca-module-edit-option {
+    padding: 4px 0 0 0;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.lc_popupContent .dslca-module-control-group input[type="number"] {
+    width: 100%;
+}
+.lc_popupContent .dslca-module-edit-form .dslca-module-edit-options .dslca-module-edit-options-inner .dslca-module-edit-options-wrapper {
+	display: flex;
+	overflow: hidden;
+	width: 100%;
+	flex-direction: column;	
+	flex-wrap: wrap;
+}
+
+.lc_popupContent .dslca-module-edit-form {
+    width: 100%;
+    padding: 12px;
+}
+
+/* Optional Form Styles */
+.lc_popupContent .dslca-module-edit-form .dslca-module-edit-options {
+    width: 100%;
+}
+
+.lc_popupContent .dslca-module-edit-form .dslca-module-edit-options .dslca-module-edit-options-inner {
+    overflow: hidden;
+    width: 100%;
+    max-height: 50vh;
+    overflow-y: scroll;
+    margin-bottom: 15px;
 }
