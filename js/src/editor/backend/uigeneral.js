@@ -14,6 +14,7 @@
 
 import { elementOptionsTabs } from './settings.panel.js';
 import { CModalWindow } from './modalwindow.class.js';
+import { dslc_save_composer } from './codegeneration.js';
 
 import Sortable from 'sortablejs';
 
@@ -802,9 +803,9 @@ function dslc_notice_on_refresh(e) {
 function dslc_save_page(e) {
 
     if ( e.which == 83 && ( e.metaKey || e.ctrlKey )  ) {
+		e.preventDefault();
     	if ( jQuery('.dslca-save-composer-hook').css('display') == 'block' ) {
 	        dslc_save_composer();
-	        e.preventDefault();
 	        return false;
 	    }
     }
