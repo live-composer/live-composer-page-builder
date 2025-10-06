@@ -552,8 +552,8 @@ function dslc_row_copy( row ) {
 	dslcModulesSectionCloned,
 	dslcModule;
 
-	// Clone the row
-	dslcModulesSectionCloned = row.clone().appendTo( jQuery('#dslc-main', LiveComposer.Builder.PreviewAreaDocument ) );
+	// Clone the row and insert it immediately AFTER the original 'row' element.
+    dslcModulesSectionCloned = row.clone().insertAfter(row); 
 
 	// Mark new ROW as NON initialized
 	dslcModulesSectionCloned[0].removeAttribute('data-jsinit');

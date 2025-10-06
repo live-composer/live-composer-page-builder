@@ -484,15 +484,15 @@ function moduleDuplicate( module ) {
 	// Duplicate the module and append it to the same area
 	var module_new = module.cloneNode(true);
 
-	jQuery( module_new ).appendTo( module.closest( '.dslc-modules-area' ) ).css({
-		'-webkit-animation-name' : 'none',
-		'-moz-animation-name' : 'none',
-		'animation-name' : 'none',
-		'animation-duration' : '0',
-		'-webkit-animation-duration' : '0',
-		opacity : 0,
-		top: -50
-	}).addClass('dslca-module-being-edited');
+	jQuery( module_new ).insertAfter( module ).css({
+        '-webkit-animation-name' : 'none',
+        '-moz-animation-name' : 'none',
+        'animation-name' : 'none',
+        'animation-duration' : '0',
+        '-webkit-animation-duration' : '0',
+        opacity : 0,
+        top: -50
+    }).addClass('dslca-module-being-edited');
 
 	// Generate new ID for the new module and change it in HTML/CSS of the module.
 	getNewModuleId( module_new );
