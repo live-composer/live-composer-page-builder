@@ -9,7 +9,7 @@ import { settingsPanelInit } from './settings.panel.js';
 import { sectionsInit } from './sections.js';
 import { dragAndDropInit } from './dragndrop.js';
 import { codeGenerationInitJS } from './codegeneration.js';
-// import { initPreviewAreaScroller } from './scroller.js';
+import { initPreviewAreaScroller } from './scroller.js';
 import { untilsInitJs } from './utils.class.js';
 import { modalwindowInitJS } from './modalwindow.js';
 import { moduleInitJS } from './module.js';
@@ -159,7 +159,7 @@ window.previewAreaTinyMCELoaded = function( windowObj ){
 
 	// Catch keypress events (from both parent and iframe) to add keyboard support
 	keypressEvents();
-	// initPreviewAreaScroller();
+	initPreviewAreaScroller();
 	modalwindowInitJS();
 	moduleInitJS();
 	untilsInitJs();
