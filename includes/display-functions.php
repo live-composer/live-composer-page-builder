@@ -140,171 +140,6 @@ function dslc_display_composer()
 				</div>
 			</div>
 			<!-- Module Pop Up -->
-			<script>
-				const popup = document.getElementById("lc_popup");
-				const closeBtn = document.getElementById("lc_closeBtn"); // Kept for the mousedown check
-				const header = document.getElementById("lc_popupHeader");
-				const dragOverlay = document.getElementById("dslc-drag-overlay");
-				const VISIBLE_HEADER_WIDTH = 50; 
-				const MIN_WIDTH = 300;
-				const MIN_HEIGHT = 200;
-
-				// Drag variables
-				let offsetX = 0,
-					offsetY = 0,
-					isDown = false;
-					
-				// Resize variables
-				let isResizing = false;
-				let resizeDirection = null;
-
-
-				// --- FUNCTION TO CENTER POPUP ---
-				function centerPopup() {
-					if (popup.style.display !== 'block') {
-						popup.style.display = 'block'; // Ensure visibility for dimension calculation
-					}
-					popup.style.position = 'absolute';
-
-					const viewportWidth = window.innerWidth;
-					const viewportHeight = window.innerHeight;
-					const popupWidth = popup.offsetWidth;
-					const popupHeight = popup.offsetHeight;
-
-					const centerX = (viewportWidth - popupWidth) / 2;
-					const centerY = (viewportHeight - popupHeight) / 2;
-
-					// Apply position
-					popup.style.left = Math.max(0, centerX) + 'px';
-					popup.style.top = Math.max(0, centerY) + 'px';
-				}
-
-				// You should call centerPopup() whenever the popup is opened.
-
-				// --- MOUSE DOWN (Drag Initiation) ---
-				header.addEventListener("mousedown", (e) => {
-					// ... (existing drag logic) ...
-					if (e.target === closeBtn || closeBtn.contains(e.target)) {
-						return; 
-					}
-					
-					e.preventDefault();
-					isDown = true;
-					dragOverlay.style.display = 'block';
-
-					offsetX = e.clientX - popup.offsetLeft;
-					offsetY = e.clientY - popup.offsetTop;
-
-					document.body.style.userSelect = 'none';
-					popup.style.position = 'absolute';
-				});
-				
-				// --- MOUSE DOWN on Handle (Start Resize) ---
-				document.querySelectorAll('.resize-handle').forEach(handle => {
-					handle.addEventListener('mousedown', (e) => {
-						e.preventDefault();
-						e.stopPropagation(); 
-						
-						isResizing = true;
-						resizeDirection = e.target.getAttribute('data-direction');
-						dragOverlay.style.display = 'block'; 
-						document.body.style.userSelect = 'none';
-						
-						// Store initial mouse position and popup state for accurate resizing
-						offsetX = e.clientX;
-						offsetY = e.clientY;
-						
-						popup.initialWidth = popup.offsetWidth;
-						popup.initialHeight = popup.offsetHeight;
-						popup.initialLeft = popup.offsetLeft;
-						popup.initialTop = popup.offsetTop;
-					});
-				});
-
-				// --- MOUSE UP (End Drag/Resize) ---
-				document.addEventListener("mouseup", () => {
-					if (isDown || isResizing) {
-						dragOverlay.style.display = 'none'; 
-					}
-					isDown = false;
-					isResizing = false;
-					resizeDirection = null;
-					document.body.style.userSelect = 'auto';
-				});
-
-				// --- MOUSE MOVE (Combined Logic) ---
-				document.addEventListener("mousemove", (e) => {
-					if (isDown && !isResizing) { 
-						// --- DRAG LOGIC ---
-						let newX = e.clientX - offsetX;
-						let newY = e.clientY - offsetY;
-
-						const viewportWidth = window.innerWidth;
-						const viewportHeight = window.innerHeight;
-						const popupWidth = popup.offsetWidth;
-						
-						const minX = -(popupWidth - VISIBLE_HEADER_WIDTH);
-						const maxX = viewportWidth - VISIBLE_HEADER_WIDTH; 
-						const minY = 0;
-						const maxY = viewportHeight - header.offsetHeight; 
-
-						// Apply constraints
-						newX = Math.max(minX, Math.min(maxX, newX));
-						newY = Math.max(minY, Math.min(maxY, newY));
-						
-						// Apply new position
-						popup.style.left = newX + "px";
-						popup.style.top = newY + "px";
-
-					} else if (isResizing) {
-						// --- RESIZE LOGIC ---
-						const dx = e.clientX - offsetX;
-						const dy = e.clientY - offsetY;
-						
-						let newWidth = popup.initialWidth;
-						let newHeight = popup.initialHeight;
-						let newLeft = popup.initialLeft;
-						let newTop = popup.initialTop;
-
-						const direction = resizeDirection;
-
-						// Vertical Resizing (Top/Bottom)
-						if (direction.includes('t')) { 
-							newHeight = popup.initialHeight - dy;
-							newTop = popup.initialTop + dy;
-
-							if (newHeight < MIN_HEIGHT) {
-								newHeight = MIN_HEIGHT;
-								newTop = popup.initialTop + popup.initialHeight - MIN_HEIGHT; 
-							}
-						} else if (direction.includes('b')) { 
-							newHeight = Math.max(MIN_HEIGHT, popup.initialHeight + dy);
-						}
-
-						// Horizontal Resizing (Left/Right)
-						if (direction.includes('l')) { 
-							newWidth = popup.initialWidth - dx;
-							newLeft = popup.initialLeft + dx;
-							
-							if (newWidth < MIN_WIDTH) {
-								newWidth = MIN_WIDTH;
-								newLeft = popup.initialLeft + popup.initialWidth - MIN_WIDTH;
-							}
-						} else if (direction.includes('r')) { 
-							newWidth = Math.max(MIN_WIDTH, popup.initialWidth + dx);
-						}
-
-						// Apply Changes
-						popup.style.width = newWidth + 'px';
-						popup.style.height = newHeight + 'px';
-						popup.style.left = newLeft + 'px';
-						popup.style.top = newTop + 'px';
-					}
-				});
-			</script>
-
-
-
 
 			<div class="dslca-save-bar">
 				<div class="dslca-actions">
@@ -393,6 +228,15 @@ function dslc_display_composer()
 
 				<!-- Row Pop Up -->
 				<div id="lc_popup2" class="lc-pop-build dslca-section dslca-modules-section-edit" style="display: none;">
+					<div class="resize-handle top-left" data-direction="tl"></div>
+					<div class="resize-handle top-right" data-direction="tr"></div>
+					<div class="resize-handle bottom-left" data-direction="bl"></div>
+					<div class="resize-handle bottom-right" data-direction="br"></div>
+					
+					<div class="resize-handle top" data-direction="t"></div>
+					<div class="resize-handle bottom" data-direction="b"></div>
+					<div class="resize-handle left" data-direction="l"></div>
+					<div class="resize-handle right" data-direction="r"></div>
 					<div id="lc_popupHeader2">
 						<span class="dslca-currently-editing"><strong></strong></span>
 						<span id="lc_closeBtn2" class="dslca-row-edit-cancel">&times;</span>

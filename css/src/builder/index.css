@@ -4602,6 +4602,7 @@ body em {
     top: 175px;
     display: none;
 	z-index: 10000 !important;
+	overflow: hidden;
 }
 
 /* Header Styling */

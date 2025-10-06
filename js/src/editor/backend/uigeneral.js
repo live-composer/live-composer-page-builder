@@ -15,6 +15,7 @@
 import { elementOptionsTabs } from './settings.panel.js';
 import { CModalWindow } from './modalwindow.class.js';
 import { dslc_save_composer } from './codegeneration.js';
+import { makePopupDraggableAndResizable } from './popup-drag-resize.js'; 
 
 import Sortable from 'sortablejs';
 
@@ -407,7 +408,7 @@ export const showSection = ( section ) => {
 
 		jQuery('.dslca-currently-editing')
 			.show()
-			.css( 'background-color', '#e5855f' )
+			.css( 'background-color', '#006add' )
 				.find('strong')
 				.text( 'Row' );
 	} else {
@@ -913,5 +914,20 @@ jQuery(document).on('editorFrameLoaded', function(){
 
 		el.append( htmlObject );
 	});
+
+});
+
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+
+    const closeBtn1 = document.getElementById("lc_closeBtn");
+    const closeBtn2 = document.getElementById("lc_closeBtn2");
+	const dragOverlay = document.getElementById("dslc-drag-overlay");
+
+    // Initialize Module Popup (lc_popup)
+    makePopupDraggableAndResizable('lc_popup', 'lc_popupHeader', dragOverlay, closeBtn1);
+    
+    // Initialize Row Popup (lc_popup2)
+    makePopupDraggableAndResizable('lc_popup2', 'lc_popupHeader2', dragOverlay, closeBtn2);
 
 });
