@@ -108,7 +108,7 @@ function dslc_display_composer()
 				<div class="resize-handle top-right" data-direction="tr"></div>
 				<div class="resize-handle bottom-left" data-direction="bl"></div>
 				<div class="resize-handle bottom-right" data-direction="br"></div>
-				
+
 				<div class="resize-handle top" data-direction="t"></div>
 				<div class="resize-handle bottom" data-direction="b"></div>
 				<div class="resize-handle left" data-direction="l"></div>
@@ -168,11 +168,6 @@ function dslc_display_composer()
 
 				</div><!-- .dslca-actions -->
 			</div><!-- .dslca-actions -->
-
-
-
-
-
 			<div class="dslca-sections">
 				<!-- Tabs -->
 				<div class="dslcs-main-tabs">
@@ -211,6 +206,61 @@ function dslc_display_composer()
 					<!-- .dslca-section-scroller -->
 
 				</div><!-- .dslca-modules -->
+				<div class="topbar_icon_customs">
+					<?php
+					$post_id = $_GET['page_id'];
+					// Get current page title
+					$page_title = isset($post_id) ? get_the_title($post_id) : '';
+					?>
+					<div class="left page-title">
+						<svg data-wf-icon="PageDefaultIcon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path fill-rule="evenodd" clip-rule="evenodd" d="M3 3C3 2.44772 3.44772 2 4 2H8.70711L13 6.29289V13C13 13.5523 12.5523 14 12 14H4C3.44772 14 3 13.5523 3 13V3ZM8.29289 3H4V13H12V6.70711L8.29289 3Z" fill="currentColor"></path>
+						</svg> <?php echo esc_html($page_title); ?>
+					</div>
+					<div class="center_devise">
+						<ul>
+							<li>
+								<a href="#" class="dslca-module-edit-options-tab-hook dslca-active" data-section="responsive" data-id="desktop_responsive" style="">
+									<svg data-wf-icon="DesktopStarBreakpointIcon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd" clip-rule="evenodd" d="M12 5.36602L10.1519 6.43301L9.65192 5.56699L11.5 4.5L9.65193 3.43301L10.1519 2.56699L12 3.63397V1.5H13V3.63397L14.8481 2.56699L15.3481 3.43301L13.5 4.5L15.3481 5.56699L14.8481 6.43301L13 5.36602V7.5H12V5.36602ZM3 4H8V5H3V12H13V9H14V12H16V13H0V12H2V5C2 4.44772 2.44772 4 3 4Z" fill="currentColor"></path>
+									</svg>
+								</a>
+							</li>
+							<li>
+								<a href="#" class="dslca-module-edit-options-tab-hook" data-section="responsive" data-id="tablet_responsive" style="">
+									<svg data-wf-icon="TabletPortraitBreakpointIcon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd" clip-rule="evenodd" d="M4 3H12V13H4V3ZM3 3C3 2.44772 3.44772 2 4 2H12C12.5523 2 13 2.44772 13 3V13C13 13.5523 12.5523 14 12 14H4C3.44772 14 3 13.5523 3 13V3ZM9.5 11H6.5V12H9.5V11Z" fill="currentColor"></path>
+									</svg>
+								</a>
+							</li>
+							<li>
+								<a href="#" class="dslca-module-edit-options-tab-hook" data-section="responsive" data-id="phone_responsive" style="">
+									<svg data-wf-icon="MobileBreakpointIcon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M7 12H9V11H7V12Z" fill="currentColor"></path>
+										<path fill-rule="evenodd" clip-rule="evenodd" d="M4 4C4 2.89543 4.89543 2 6 2H10C11.1046 2 12 2.89543 12 4V12C12 13.1046 11.1046 14 10 14H6C4.89543 14 4 13.1046 4 12V4ZM6 3H10C10.5523 3 11 3.44772 11 4V12C11 12.5523 10.5523 13 10 13H6C5.44772 13 5 12.5523 5 12V4C5 3.44772 5.44772 3 6 3Z" fill="currentColor"></path>
+									</svg>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<?php
+					global $post;
+
+					// Ensure we have a post object
+					if (isset($post_id)) {
+						// Get the live URL of the page/post
+						$lc_link = get_permalink($post_id);
+					}
+					?>
+					<div class="preview_screen">
+						<?php if (! empty($lc_link)) : ?>
+							<a href="<?php echo esc_url($lc_link); ?>" target="_blank">
+								<img class="previewimg" src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/icons/view.svg" alt="Preview" />
+							</a>
+						<?php endif; ?>
+					</div>
+
+				</div>
 
 				<!-- Module Edit -->
 
@@ -232,7 +282,7 @@ function dslc_display_composer()
 					<div class="resize-handle top-right" data-direction="tr"></div>
 					<div class="resize-handle bottom-left" data-direction="bl"></div>
 					<div class="resize-handle bottom-right" data-direction="br"></div>
-					
+
 					<div class="resize-handle top" data-direction="t"></div>
 					<div class="resize-handle bottom" data-direction="b"></div>
 					<div class="resize-handle left" data-direction="l"></div>
@@ -242,7 +292,7 @@ function dslc_display_composer()
 						<span id="lc_closeBtn2" class="dslca-row-edit-cancel">&times;</span>
 					</div>
 
-					<div id="lc_popupContent" class="lc_popupContent">
+					<div id="lc_popupContent2" class="lc_popupContent">
 						<form class="dslca-modules-section-edit-form">
 							<div class="dslca-modules-section-edit-options dslc-clearfix">
 								<div class="dslca-modules-section-edit-options-inner">
@@ -262,39 +312,6 @@ function dslc_display_composer()
 					</div><!-- .dslca-row-edit-actions -->
 				</div>
 				<!-- Row Pop Up -->
-
-
-
-				<script>
-					const popup2 = document.getElementById("lc_popup2");
-					const header2 = document.getElementById("lc_popupHeader2");
-
-					let offsetX2 = 0,
-						offsetY2 = 0,
-						isDown2 = false;
-
-					header2.addEventListener("mousedown", (e) => {
-						isDown2 = true;
-						offsetX2 = e.clientX - popup2.offsetLeft;
-						offsetY2 = e.clientY - popup2.offsetTop;
-						document.body.style.userSelect = 'none';
-					});
-
-					document.addEventListener("mouseup", () => {
-						isDown2 = false;
-						document.body.style.userSelect = 'auto';
-					});
-
-					document.addEventListener("mousemove", (e) => {
-						if (isDown2) {
-							popup2.style.left = (e.clientX - offsetX2) + "px";
-							popup2.style.top = (e.clientY - offsetY2) + "px";
-						}
-					});
-				</script>
-
-
-
 
 
 
@@ -607,7 +624,7 @@ function dslc_display_modules($page_id)
 						<?php endif; ?>
 					</a><!-- .dslc-template -->
 
-			<?php
+	<?php
 						}
 					}
 				} else {
@@ -679,7 +696,6 @@ function dslc_display_modules($page_id)
 
 				// Variables that are used throughout the function.
 				$composer_wrapper_before = '';
-				$composer_top_bar = '';
 				$composer_wrapper_after = '';
 				$composer_header_append = ''; // HTML to output after LC header HTML.
 				$composer_footer_append = ''; // HTML to otuput after LC footer HTML.
@@ -698,58 +714,10 @@ function dslc_display_modules($page_id)
 				// and closing it after the footer.
 				if (dslc_is_editor_active() || ! defined('DS_LIVE_COMPOSER_HF_AUTO') || DS_LIVE_COMPOSER_HF_AUTO) {
 					$composer_wrapper_before = '<div id="dslc-content" class="dslc-content dslc-clearfix">';
-					ob_start();
-						?>
-						<div class="topbar_icon_customs">
-							<?php
-								global $post;
-								// Get current page title
-								$page_title = isset($post->ID) ? get_the_title($post->ID) : '';
-							?>
-							<div class="left page-title">
-								<svg data-wf-icon="PageDefaultIcon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path fill-rule="evenodd" clip-rule="evenodd" d="M3 3C3 2.44772 3.44772 2 4 2H8.70711L13 6.29289V13C13 13.5523 12.5523 14 12 14H4C3.44772 14 3 13.5523 3 13V3ZM8.29289 3H4V13H12V6.70711L8.29289 3Z" fill="currentColor"></path>
-								</svg> <?php echo esc_html($page_title); ?>
-							</div>
-							<div class="center_devise">
-								<ul>
-									<li><svg data-wf-icon="DesktopStarBreakpointIcon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-											<path fill-rule="evenodd" clip-rule="evenodd" d="M12 5.36602L10.1519 6.43301L9.65192 5.56699L11.5 4.5L9.65193 3.43301L10.1519 2.56699L12 3.63397V1.5H13V3.63397L14.8481 2.56699L15.3481 3.43301L13.5 4.5L15.3481 5.56699L14.8481 6.43301L13 5.36602V7.5H12V5.36602ZM3 4H8V5H3V12H13V9H14V12H16V13H0V12H2V5C2 4.44772 2.44772 4 3 4Z" fill="currentColor"></path>
-										</svg></li>
-									<li><svg data-wf-icon="TabletPortraitBreakpointIcon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-											<path fill-rule="evenodd" clip-rule="evenodd" d="M4 3H12V13H4V3ZM3 3C3 2.44772 3.44772 2 4 2H12C12.5523 2 13 2.44772 13 3V13C13 13.5523 12.5523 14 12 14H4C3.44772 14 3 13.5523 3 13V3ZM9.5 11H6.5V12H9.5V11Z" fill="currentColor"></path>
-										</svg></li>
-									<li><svg data-wf-icon="MobileBreakpointIcon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-											<path d="M7 12H9V11H7V12Z" fill="currentColor"></path>
-											<path fill-rule="evenodd" clip-rule="evenodd" d="M4 4C4 2.89543 4.89543 2 6 2H10C11.1046 2 12 2.89543 12 4V12C12 13.1046 11.1046 14 10 14H6C4.89543 14 4 13.1046 4 12V4ZM6 3H10C10.5523 3 11 3.44772 11 4V12C11 12.5523 10.5523 13 10 13H6C5.44772 13 5 12.5523 5 12V4C5 3.44772 5.44772 3 6 3Z" fill="currentColor"></path>
-										</svg></li>
-								</ul>
-							</div>
-							<?php
-								global $post;
-
-								// Ensure we have a post object
-								if (isset($post->ID)) {
-									// Get the live URL of the page/post
-									$lc_link = get_permalink($post->ID);
-								}
-							?>
-							<div class="preview_screen">
-								<?php if (! empty($lc_link)) : ?>
-									<a href="<?php echo esc_url($lc_link); ?>" target="_blank">
-										<img class="previewimg" src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/icons/view.svg" alt="Preview" />
-									</a>
-								<?php endif; ?>
-							</div>
-
-						</div>
-
-					<?php
-					$composer_top_bar = ob_get_clean();
 					$composer_wrapper_after = '</div>';
 				}
 
-				
+
 				// Get LC code of the current post.
 				$composer_code = dslc_get_code($curr_id);
 
@@ -870,7 +838,7 @@ function dslc_display_modules($page_id)
 					// If editor not active.
 					if (! dslc_is_editor_active()) {
 
-						$rendered_header_footer = $composer_wrapper_before . $composer_top_bar . $composer_header . '<div id="dslc-theme-content"><div id="dslc-theme-content-inner">' . $content . '</div></div>' . $composer_footer . $composer_wrapper_after;
+						$rendered_header_footer = $composer_wrapper_before . $composer_header . '<div id="dslc-theme-content"><div id="dslc-theme-content-inner">' . $content . '</div></div>' . $composer_footer . $composer_wrapper_after;
 						$cache->set_cache($rendered_header_footer, $cache_id);
 
 						// Pass the LC header, regular content and LC footer
@@ -905,7 +873,7 @@ function dslc_display_modules($page_id)
 				// After Content.
 				$content_after = '';
 				$dslc_content_after = apply_filters('dslc_content_after', $content_after);
-				$rendered_page = $dslc_content_before . $composer_wrapper_before . $composer_top_bar . do_action('dslc_output_prepend') . $composer_header . '<div id="dslc-main">' . $composer_prepend . $composer_content . '</div>' . $composer_append . $composer_footer . do_action('dslc_output_append') . $composer_wrapper_after . $dslc_content_after;
+				$rendered_page = $dslc_content_before . $composer_wrapper_before .  do_action('dslc_output_prepend') . $composer_header . '<div id="dslc-main">' . $composer_prepend . $composer_content . '</div>' . $composer_append . $composer_footer . do_action('dslc_output_append') . $composer_wrapper_after . $dslc_content_after;
 
 				if (! dslc_is_editor_active() && ! is_singular('dslc_hf')) {
 					global $wpdb;
@@ -1987,12 +1955,18 @@ function dslc_display_modules($page_id)
 					</svg>
 					<div class="dslca-change-width-modules-area-options">
 						<span>' . __('Container Width', 'live-composer-page-builder') . '</span>
-						<span data-size="1">1/12</span><span data-size="2">2/12</span>
-						<span data-size="3">3/12</span><span data-size="4">4/12</span>
-						<span data-size="5">5/12</span><span data-size="6">6/12</span>
-						<span data-size="7">7/12</span><span data-size="8">8/12</span>
-						<span data-size="9">9/12</span><span data-size="10">10/12</span>
-						<span data-size="11">11/12</span><span data-size="12">12/12</span>
+						<span data-size="1"><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/first-column.webp" alt="Preview" /></span>
+						<span data-size="2"><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/second-column.webp" alt="Preview" /></span>
+						<span data-size="3"><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/third-column.webp" alt="Preview" /></span>
+						<span data-size="4"><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/fourth-column.webp" alt="Preview" /></span>
+						<span data-size="5"><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/fifth-column.webp" alt="Preview" /></span>
+						<span data-size="6"><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/sixth-column.webp" alt="Preview" /></span>
+						<span data-size="7"><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/seventh-column.webp" alt="Preview" /></span>
+						<span data-size="8"><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/eighth-column.webp" alt="Preview" /></span>
+						<span data-size="9"><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/ninth-column.webp" alt="Preview" /></span>
+						<span data-size="10"><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/tenth-column.webp" alt="Preview" /></span>
+						<span data-size="11"><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/eleventh-column.webp" alt="Preview" /></span>
+						<span data-size="12"><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/twelfth-column.webp" alt="Preview" /></span>
 					</div>
 				</span>
 				<span class="dslca-manage-action dslca-change-vertial-align-module-area-hook" title="Change vertical align" >

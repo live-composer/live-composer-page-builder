@@ -2174,6 +2174,27 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 				z-index: 99999;
 				width: 122px;
 			}
+			.dslca-change-width-modules-area-hook .dslca-change-width-modules-area-options {
+				width:385px !important;
+			}
+			.dslca-change-width-modules-area-hook .dslca-change-width-modules-area-options span:first-child {
+				width: 100%;
+				text-align: left;
+			}
+			.dslca-change-width-modules-area-hook .dslca-change-width-modules-area-options span {
+				width:115px;
+				max-width:115px;
+				line-height: 12px;
+				background: #ffffff;
+			}
+			.dslca-change-width-modules-area-hook .dslca-change-width-modules-area-options span img {
+				opacity:.4;
+				transition:.2s all ease;
+			}
+			.dslca-change-width-modules-area-hook .dslca-change-width-modules-area-options span img:hover {
+				opacity:1;
+			}
+
 
 			.dslca-change-vertial-align-module-area-options {
 				padding: 12px;
@@ -2238,7 +2259,7 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 
 				.dslca-change-width-modules-area-options span,
 				.dslca-change-width-module-options span {
-					background: #4785db;
+					/* background: #4785db; */
 					border-radius: 3px;
 					display: inline-block;
 					/* font-family: 'Open Sans', sans-serif; */
@@ -2299,10 +2320,37 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 				.dslc-module-front.dslc-10-col .dslca-change-width-module-options span[data-size="10"],
 				.dslc-module-front.dslc-11-col .dslca-change-width-module-options span[data-size="11"],
 				.dslc-module-front.dslc-12-col .dslca-change-width-module-options span[data-size="12"] {
-					background: #3B6FBE;
+					background: #ffffff;
 					box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.28) inset;
 					cursor: default;
 				}
+				.dslc-modules-area.dslc-1-col .dslca-change-width-modules-area-options span[data-size="1"] img,
+				.dslc-modules-area.dslc-2-col .dslca-change-width-modules-area-options span[data-size="2"] img,
+				.dslc-modules-area.dslc-3-col .dslca-change-width-modules-area-options span[data-size="3"] img,
+				.dslc-modules-area.dslc-4-col .dslca-change-width-modules-area-options span[data-size="4"] img,
+				.dslc-modules-area.dslc-5-col .dslca-change-width-modules-area-options span[data-size="5"] img,
+				.dslc-modules-area.dslc-6-col .dslca-change-width-modules-area-options span[data-size="6"] img,
+				.dslc-modules-area.dslc-7-col .dslca-change-width-modules-area-options span[data-size="7"] img,
+				.dslc-modules-area.dslc-8-col .dslca-change-width-modules-area-options span[data-size="8"] img,
+				.dslc-modules-area.dslc-9-col .dslca-change-width-modules-area-options span[data-size="9"] img,
+				.dslc-modules-area.dslc-10-col .dslca-change-width-modules-area-options span[data-size="10"] img,
+				.dslc-modules-area.dslc-11-col .dslca-change-width-modules-area-options span[data-size="11"] img,
+				.dslc-modules-area.dslc-12-col .dslca-change-width-modules-area-options span[data-size="12"] img,
+				.dslc-module-front.dslc-1-col .dslca-change-width-module-options span[data-size="1"] img,
+				.dslc-module-front.dslc-2-col .dslca-change-width-module-options span[data-size="2"] img,
+				.dslc-module-front.dslc-3-col .dslca-change-width-module-options span[data-size="3"] img,
+				.dslc-module-front.dslc-4-col .dslca-change-width-module-options span[data-size="4"] img,
+				.dslc-module-front.dslc-5-col .dslca-change-width-module-options span[data-size="5"] img,
+				.dslc-module-front.dslc-6-col .dslca-change-width-module-options span[data-size="6"] img,
+				.dslc-module-front.dslc-7-col .dslca-change-width-module-options span[data-size="7"] img,
+				.dslc-module-front.dslc-8-col .dslca-change-width-module-options span[data-size="8"] img,
+				.dslc-module-front.dslc-9-col .dslca-change-width-module-options span[data-size="9"] img,
+				.dslc-module-front.dslc-10-col .dslca-change-width-module-options span[data-size="10"] img,
+				.dslc-module-front.dslc-11-col .dslca-change-width-module-options span[data-size="11"] img,
+				.dslc-module-front.dslc-12-col .dslca-change-width-module-options span[data-size="12"] img {
+					opacity:1;
+				}
+
 
 				.dslc-popup-option {
 					display: block;
@@ -4617,7 +4665,7 @@ body em {
     font-size: 19px;
     min-height: 54px;
 }
-#lc_popupContent {
+.lc_popupContent {
     padding: 0px 0 0 0;
     width: 100%;
 }
@@ -4720,15 +4768,16 @@ body em {
 -------------------------------------------------------------------------------*/
 
 .topbar_icon_customs {
-	background: #000;
+	background: #0d0e1e;
     display: flex;
+	flex-direction: row !important;
     justify-content: space-between;
     align-items: center;
-    padding:5px 10px;
+    padding: 0px 10px !important;
     position: fixed;
     top: 0;
-    z-index: 9999999999999999;
-    width: 100%;
+	right: 0px;
+    width: calc(100% - 240px);
 }
 
 .topbar_icon_customs .page-title {
@@ -4736,7 +4785,8 @@ body em {
   width: 30%;
   font-size: 13px;
   display: flex;
-  align-content: center;
+  flex-direction: row;
+  align-items: center;
 }
 .topbar_icon_customs .page-title svg {
     width: 25px;
@@ -4763,6 +4813,7 @@ body em {
 .topbar_icon_customs .center_devise ul {
     margin: 0;
     display: flex;
+	flex-direction: row;
     justify-content: center;
     align-items: center;
 }
@@ -4782,7 +4833,7 @@ body em {
 .topbar_icon_customs .center_devise ul li .currentColor { color: #ffffff;}
 .topbar_icon_customs .preview_screen {
   display: flex;
-  align-items: center;
+  align-items: end;
   gap: 20px;
   width: 30%;
   justify-content: flex-end;
@@ -4790,10 +4841,11 @@ body em {
 }
 .topbar_icon_customs .preview_screen a {
     display: flex;
+	width: auto;
 }
 .topbar_icon_customs .preview_screen img {
   width: 22px;
-	cursor:pointer;
+  cursor:pointer;
 }
 
 /* Topbar for responsive icons End 

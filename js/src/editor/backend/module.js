@@ -603,7 +603,7 @@ window.dslc_module_options_show = function( moduleID ) {
 	jQuery(".dslca-module-edit-options-inner").html("");
 	jQuery(".dslca-module-edit-options-tabs").html("");
 	jQuery(".dslca-header .dslca-options-filter-hook").show();
-	jQuery("#lc_popupContent .dslca-header").after(pseudoPanel.html());
+	jQuery(".lc_popupContent .dslca-header").after(pseudoPanel.html());
 
 
 	jQuery("#wpwrap").append(pseudoPanel);
@@ -667,7 +667,7 @@ window.dslc_module_options_show = function( moduleID ) {
 		function( response ) {
 
 			// Hide pseudo panel
-			jQuery("#lc_popupContent .dslca-header").next('.dslca-pseudo-popup-body').remove();
+			jQuery(".lc_popupContent .dslca-header").next('.dslca-pseudo-popup-body').remove();
 			pseudoPanel.remove();
 
 			// Show edit section
