@@ -1,33 +1,30 @@
 {
-	"presets": [
-		[ "@babel/preset-env", {
-			"targets": {
-				"browsers": [
-					"last 2 Chrome versions",
-					"last 2 Firefox versions",
-					"last 2 Safari versions",
-					"last 2 iOS versions",
-					"last 1 Android version",
-					"last 1 ChromeAndroid version",
-					"last 1 Edge version"
-				]
-			}
-		} ]
-	],
-	"plugins": [
-		[
-			"@babel/transform-runtime",
-			{
-			  "helpers": false,
-			  "regenerator": true
-			}
-		],
-		[
-			"transform-object-rest-spread",
-			{
-			  "useBuiltIns": true
-			}
-		],
-		["@babel/plugin-proposal-class-properties"],
-	]
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "browsers": [
+            "last 2 Chrome versions",
+            "last 2 Firefox versions",
+            "last 2 Safari versions",
+            "last 2 iOS versions",
+            "last 1 Android version",
+            "last 1 ChromeAndroid version",
+            "last 1 Edge version"
+          ]
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "helpers": false,
+        "regenerator": true
+      }
+    ],
+    "@babel/plugin-transform-class-properties"
+  ]
 }
