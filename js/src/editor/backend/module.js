@@ -29,7 +29,7 @@
 
 import { CModalWindow } from './modalwindow.class.js';
 import { hidePublishButton, showSection } from './uigeneral.js';
-import anime from 'animejs';
+import * as anime from 'animejs';
 import { editableContentCodeGeneration } from "./codegeneration.js";
 
 var actionAvail = function() {
@@ -178,6 +178,7 @@ document.addEventListener('pasteModuleStyles', function (customEvent) {
 				if ( modulePropertiesChanged ) {
 					// Prepare and call AJAX module redraw request.
 					currentModuleProperties['action'] = 'dslc-ajax-add-module';
+					currentModuleProperties['_wpnonce'] = DSLCAjax._wpnonce;
 					currentModuleProperties['dslc'] = 'active';
 					currentModuleProperties['dslc_module_id'] = currentModuleProperties.module_id;
 					currentModuleProperties['dslc_module_instance_id'] = currentModuleProperties.module_instance_id;
@@ -605,7 +606,7 @@ window.dslc_module_options_show = function( moduleID ) {
 	// Settings array for the Ajax call
 	var dslcSettings = {};
 	dslcSettings['action'] = 'dslc-ajax-display-module-options';
-	_wpnonce : DSLCAjax._wpnonce,
+	dslcSettings['_wpnonce'] = DSLCAjax._wpnonce,
 	dslcSettings['dslc'] = 'active';
 	dslcSettings['dslc_module_id'] = moduleID;
 	dslcSettings['dslc_post_id'] = jQuery('.dslca-container').data('data-post-id');
@@ -778,6 +779,7 @@ export const moduleOutputAltered = ( callback ) => {
 	var dslcSettings = {};
 
 	dslcSettings['action'] = 'dslc-ajax-add-module';
+	dslcSettings['_wpnonce'] = DSLCAjax._wpnonce;
 	dslcSettings['dslc'] = 'active';
 	dslcSettings['dslc_module_id'] = dslc_module_id;
 	dslcSettings['dslc_module_instance_id'] = dslcModuleInstanceID;
@@ -869,6 +871,7 @@ window.dslc_module_output_reload = function ( dslcModule, callback ) {
 	var dslcSettings = {};
 
 	dslcSettings['action'] = 'dslc-ajax-add-module';
+	dslcSettings['_wpnonce'] = DSLCAjax._wpnonce;
 	dslcSettings['dslc'] = 'active';
 	dslcSettings['dslc_module_id'] = dslc_module_id;
 	dslcSettings['dslc_module_instance_id'] = dslcModuleInstanceID;
