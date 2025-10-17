@@ -138,6 +138,7 @@ body a:focus {
 	margin: 0;
 	border: none;
 	outline: 0;
+	width : 240px;
 }
 
 .dslca-disable-selection {
@@ -219,11 +220,13 @@ body a:focus {
 	color: #fff;
 	left: 0;
 	position: fixed;
-	right: 0;
+	/* right: 0; */
+	display: flex;
 	z-index: 99999;
 	-webkit-transition: bottom 0.3s;
 	-moz-transition: bottom 0.3s;
 	transition: bottom 0.3s;
+	height: 100vh;
 }
 
 .dslca-container,
@@ -434,7 +437,7 @@ body a:focus {
 			.dslca-wp-editor-save-hook:hover,
 			.dslca-prompt-modal-confirm-hook:hover,
 			.dslca-pseudo-module-edit-save:hover {
-				background: #91dc1e;
+				background: #3383df;
 				color: #fff;
 			}
 
@@ -640,13 +643,14 @@ body a:focus {
 			 */
 			z-index: 1;
 			position: relative;
+			width: 48%;
 		}
 
 		.dslca-module[data-id="DSLC_Separator"],
 		.dslca-module[data-id="DSLC_Notification"],
 		.dslca-module[data-id="DSLC_Sliders"],
 		.dslca-module[data-id="DSLC_Staff"] {
-			margin-right: 14px;
+			/* margin-right: 14px; */
 		}
 
 		.dslca-module[data-id="DSLC_M_A"] {
@@ -745,7 +749,7 @@ body a:focus {
 		.dslca-module-edit-options,
 		.dslca-pseudo-module-edit-options {
 			padding: 16px 15px 5px 15px;
-			min-height: 58px;
+			/* min-height: 58px; */
 
 			transform: translate(0,0);
 			/* fix the bug with wrong position
@@ -757,7 +761,7 @@ body a:focus {
 			.dslca-module-edit-option,
 			.dslca-pseudo-module-edit-option,
 			.dslca-section-edit-option {
-				display: table-cell;
+				/* display: table-cell; */
 				padding-bottom: 40px;
 				padding-left: 15px;
 				padding-right: 15px;
@@ -786,16 +790,16 @@ body a:focus {
 
 			.dslca-module-control-group > .controls-group-inner > .dslca-module-edit-label,
 			.dslca-section-control-group > .controls-group-inner > .dslca-section-edit-label {
-				position: absolute;
-				background: rgba(76, 129, 207, 0.4);
-				padding: 6px 11px;
+				/* position: absolute; */
+				/* background: rgba(76, 129, 207, 0.4); */
+				/* padding: 6px 11px; */
 				left: 0;
-				border-radius: 2px 2px 0 0;
-				width: 100%;
-				text-transform: uppercase;
-				letter-spacing: 1px;
-				font-size: 75%;
-				border-bottom: 1px solid #4C81CF;
+				/* border-radius: 2px 2px 0 0; */
+				/* width: 100%; */
+				/* text-transform: uppercase; */
+				/* letter-spacing: 1px; */
+				/* font-size: 75%; */
+				/* border-bottom: 1px solid #4C81CF; */
 			}
 
 			.dslca-module-control-group > .controls-group-inner > .dslca-module-edit-label .dslc-control-toggle {
@@ -2170,6 +2174,27 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 				z-index: 99999;
 				width: 122px;
 			}
+			.dslca-change-width-modules-area-hook .dslca-change-width-modules-area-options {
+				width:385px !important;
+			}
+			.dslca-change-width-modules-area-hook .dslca-change-width-modules-area-options span:first-child {
+				width: 100%;
+				text-align: left;
+			}
+			.dslca-change-width-modules-area-hook .dslca-change-width-modules-area-options span {
+				width:115px;
+				max-width:115px;
+				line-height: 12px;
+				background: #ffffff;
+			}
+			.dslca-change-width-modules-area-hook .dslca-change-width-modules-area-options span img {
+				opacity:.4;
+				transition:.2s all ease;
+			}
+			.dslca-change-width-modules-area-hook .dslca-change-width-modules-area-options span img:hover {
+				opacity:1;
+			}
+
 
 			.dslca-change-vertial-align-module-area-options {
 				padding: 12px;
@@ -2234,7 +2259,7 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 
 				.dslca-change-width-modules-area-options span,
 				.dslca-change-width-module-options span {
-					background: #4785db;
+					/* background: #4785db; */
 					border-radius: 3px;
 					display: inline-block;
 					/* font-family: 'Open Sans', sans-serif; */
@@ -2295,10 +2320,37 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 				.dslc-module-front.dslc-10-col .dslca-change-width-module-options span[data-size="10"],
 				.dslc-module-front.dslc-11-col .dslca-change-width-module-options span[data-size="11"],
 				.dslc-module-front.dslc-12-col .dslca-change-width-module-options span[data-size="12"] {
-					background: #3B6FBE;
+					background: #ffffff;
 					box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.28) inset;
 					cursor: default;
 				}
+				.dslc-modules-area.dslc-1-col .dslca-change-width-modules-area-options span[data-size="1"] img,
+				.dslc-modules-area.dslc-2-col .dslca-change-width-modules-area-options span[data-size="2"] img,
+				.dslc-modules-area.dslc-3-col .dslca-change-width-modules-area-options span[data-size="3"] img,
+				.dslc-modules-area.dslc-4-col .dslca-change-width-modules-area-options span[data-size="4"] img,
+				.dslc-modules-area.dslc-5-col .dslca-change-width-modules-area-options span[data-size="5"] img,
+				.dslc-modules-area.dslc-6-col .dslca-change-width-modules-area-options span[data-size="6"] img,
+				.dslc-modules-area.dslc-7-col .dslca-change-width-modules-area-options span[data-size="7"] img,
+				.dslc-modules-area.dslc-8-col .dslca-change-width-modules-area-options span[data-size="8"] img,
+				.dslc-modules-area.dslc-9-col .dslca-change-width-modules-area-options span[data-size="9"] img,
+				.dslc-modules-area.dslc-10-col .dslca-change-width-modules-area-options span[data-size="10"] img,
+				.dslc-modules-area.dslc-11-col .dslca-change-width-modules-area-options span[data-size="11"] img,
+				.dslc-modules-area.dslc-12-col .dslca-change-width-modules-area-options span[data-size="12"] img,
+				.dslc-module-front.dslc-1-col .dslca-change-width-module-options span[data-size="1"] img,
+				.dslc-module-front.dslc-2-col .dslca-change-width-module-options span[data-size="2"] img,
+				.dslc-module-front.dslc-3-col .dslca-change-width-module-options span[data-size="3"] img,
+				.dslc-module-front.dslc-4-col .dslca-change-width-module-options span[data-size="4"] img,
+				.dslc-module-front.dslc-5-col .dslca-change-width-module-options span[data-size="5"] img,
+				.dslc-module-front.dslc-6-col .dslca-change-width-module-options span[data-size="6"] img,
+				.dslc-module-front.dslc-7-col .dslca-change-width-module-options span[data-size="7"] img,
+				.dslc-module-front.dslc-8-col .dslca-change-width-module-options span[data-size="8"] img,
+				.dslc-module-front.dslc-9-col .dslca-change-width-module-options span[data-size="9"] img,
+				.dslc-module-front.dslc-10-col .dslca-change-width-module-options span[data-size="10"] img,
+				.dslc-module-front.dslc-11-col .dslca-change-width-module-options span[data-size="11"] img,
+				.dslc-module-front.dslc-12-col .dslca-change-width-module-options span[data-size="12"] img {
+					opacity:1;
+				}
+
 
 				.dslc-popup-option {
 					display: block;
@@ -2414,26 +2466,34 @@ body.rtl .dslca-modules-area-placeholder {
 
 .dslca-section-scroller {
 	position: relative;
-	height: 74px;
-	margin-right: 80px;
+	height: 93vh;
+	/* margin-right: 80px; */
 	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	/* width: 350px; */
+	flex-wrap: wrap;
+
 }
 
 	.dslca-section-scroller-inner {
-		position: absolute;
+		/* position: absolute; */
 		top: 0;
 		left: 0;
 		bottom: 0;
-		width: 999999px;
-		text-align: left;
-		-webkit-transition: left 0.3s ease-in-out;
+		/* width: 999999px; */
+		/* text-align: left; */
+		/* -webkit-transition: left 0.3s ease-in-out; */
 		-moz-transition: left 0.3s ease-in-out;
-		transition: left 0.3s ease-in-out;
+		/* transition: left 0.3s ease-in-out; */
 	}
 
 		.dslca-section-scroller-content {
-			display: inline-block;
-			padding-right: 80px;
+			/* display: inline-block; */
+			/* padding-right: 80px; */
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
 		}
 
 .dslca-section-scroller-fade {
@@ -2444,7 +2504,7 @@ body.rtl .dslca-modules-area-placeholder {
 	background: -ms-linear-gradient(left,  rgba(88,144,229,0) 0%,rgba(70, 116, 185,1) 100%);
 	background: linear-gradient(to right,  rgba(88,144,229,0) 0%,rgba(70, 116, 185,1) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00004799', endColorstr='#5890e5',GradientType=1 );
-	position: absolute;
+	position: relative;
 	right: 80px;
 	width: 20px;
 	bottom: 0;
@@ -2453,7 +2513,7 @@ body.rtl .dslca-modules-area-placeholder {
 }
 
 .dslca-section-scroller-nav {
-	position: absolute;
+	position: relative;
 	right: 0;
 	top: 0;
 	bottom: 0;
@@ -3110,7 +3170,7 @@ body.rtl .dslca-modules-area-placeholder {
 	animation-name: dslcBounceIn;
 	animation-duration:0.6s;
 	-webkit-animation-duration:0.6s;
-
+	background: #0050a5;
 }
 
 .dslca-anim-opacity-drop {
@@ -3251,13 +3311,13 @@ span.dslca-manage-action:hover * {
 }
 
 	.dslca-wp-editor-inner {
-		background: #fff;
-		position: fixed;
+		/* background: #fff; */
+		/* position: fixed; */
 		top: 30px;
 		left: 30px;
 		right: 30px;
 		bottom: 30px;
-		padding: 50px;
+		/* padding: 50px; */
 	}
 
 	.dslca-wp-editor-notification {
@@ -4566,3 +4626,250 @@ body.section-editing-in-progress.dslc-res-phone .dslc-modules-section:not(.dslca
 body em {
 	font-style: italic;
 }
+.dslca-search-modules{
+  float: left;
+  padding: 11px 10px !important;
+  font-size: 13px !important;
+  line-height: 1 !important;
+  color: #fff !important;
+  width: 97% !important;
+}
+.dslca-search-modules::placeholder {
+  color: #F9F6EE !important;
+  opacity: 1 !important;
+}
+  /* Popup Container */
+#lc_popup, #lc_popup2 {
+    position: fixed;
+    right: 30px;
+    width: 440px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    border-radius: 8px;
+    background: #0d0e1e;
+    top: 175px;
+    display: none;
+	z-index: 10000 !important;
+	overflow: hidden;
+}
+
+/* Header Styling */
+#lc_popupHeader, #lc_popupHeader2 {
+    padding: 18px 23px;
+    background-color: #006add;
+    color: white;
+    cursor: move;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width: 100%;
+    font-size: 19px;
+    min-height: 54px;
+}
+.lc_popupContent {
+    padding: 0px 0 0 0;
+    width: 100% !important;
+}
+/* Close Button */
+#lc_closeBtn, #lc_closeBtn2 {
+    float: right;
+    cursor: pointer;
+    font-weight: bold;
+    position: absolute;
+    top: 1px;
+    right: 25px;
+    width: 15px;
+    font-size: 26px;
+}
+#lc_closeBtn.dslca-module-edit-cancel, #lc_closeBtn2.dslca-row-edit-cancel {
+	background: none;
+}
+
+/* Resize Handle (for resizing) */
+.resize-handle {
+	position: absolute;
+	background: transparent !important; /* Invisible, but functional area */
+	z-index: 10001; /* Above popup content */
+}
+
+/* Corner Handles (Larger area for easier clicking) */
+.resize-handle.top-left, .resize-handle.top-right,
+.resize-handle.bottom-left, .resize-handle.bottom-right {
+	width: 12px;
+	height: 12px;
+}
+.resize-handle.top-left { top: -6px; left: -6px; cursor: nwse-resize; }
+.resize-handle.top-right { top: -6px; right: -6px; cursor: nesw-resize; }
+.resize-handle.bottom-left { bottom: -6px; left: -6px; cursor: nesw-resize; }
+.resize-handle.bottom-right { bottom: -6px; right: -6px; cursor: nwse-resize; }
+
+/* Side Handles */
+.resize-handle.top { top: -4px; left: 10px; right: 10px; height: 8px; cursor: ns-resize; }
+.resize-handle.bottom { bottom: -4px; left: 10px; right: 10px; height: 8px; cursor: ns-resize; }
+.resize-handle.left { left: -4px; top: 10px; bottom: 10px; width: 8px; cursor: ew-resize; }
+.resize-handle.right { right: -4px; top: 10px; bottom: 10px; width: 8px; cursor: ew-resize; }
+
+#dslc-drag-overlay {
+	position: fixed; 
+	top: 0; 
+	left: 0; 
+	width: 100%; 
+	height: 100%; 
+	z-index: 9999; 
+	display: none;
+	/* Optional: Make it completely transparent so the user doesn't see it */
+	background: transparent; 
+}
+
+/* Popup Content */
+
+.lc_popupContent .dslca-header {
+    position: relative;
+    border: 0;
+    display: flex;
+    bottom: 0;
+}
+
+.lc_popupContent .dslca-module-edit-option {
+    padding: 4px 0 0 0;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.lc_popupContent .dslca-module-control-group input[type="number"] {
+    width: 100%;
+}
+.lc_popupContent .dslca-module-edit-form .dslca-module-edit-options .dslca-module-edit-options-inner .dslca-module-edit-options-wrapper {
+	display: flex;
+	overflow: hidden;
+	width: 100%;
+	flex-direction: column;	
+	flex-wrap: wrap;
+}
+
+.lc_popupContent .dslca-module-edit-form {
+    width: 100%;
+    padding: 12px;
+}
+
+/* Optional Form Styles */
+.lc_popupContent .dslca-module-edit-form .dslca-module-edit-options {
+    width: 100%;
+}
+
+.lc_popupContent .dslca-module-edit-form .dslca-module-edit-options .dslca-module-edit-options-inner {
+    overflow: hidden;
+    width: 100%;
+    max-height: 50vh;
+    overflow-y: scroll;
+    margin-bottom: 15px;
+}
+
+/* Topbar for responsive icons Start 
+-------------------------------------------------------------------------------*/
+
+.topbar_icon_customs {
+	background: #0d0e1e;
+    display: flex;
+	flex-direction: row !important;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 10px !important;
+    position: fixed;
+    top: 0;
+	right: 0px;
+    width: calc(100% - 240px);
+}
+
+.topbar_icon_customs .page-title {
+  color: #ffffff;
+  width: 30%;
+  font-size: 13px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.topbar_icon_customs .page-title svg {
+    width: 25px;
+    height: 21px;
+    display: flex;
+    align-content: center;
+    margin-top: 2px;
+}
+
+.topbar_icon_customs img {
+	width: 22px;
+	cursor:pointer;
+}
+
+.topbar_icon_customs svg {
+	width: 22px;
+	cursor:pointer;
+}
+.topbar_icon_customs .center_devise {
+	display: flex;
+    align-items: center;
+	gap: 20px;
+}
+.topbar_icon_customs .center_devise ul {
+    margin: 0;
+    display: flex;
+	flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.topbar_icon_customs .center_devise li {
+	list-style:none;
+}
+.topbar_icon_customs .center_devise ul { display: flex; margin: 0px; padding: 0; }
+.topbar_icon_customs .center_devise ul li {list-style: none;display: flex;}
+.topbar_icon_customs .center_devise ul li a {}
+.topbar_icon_customs .center_devise ul li svg {
+    font-size: 25px;
+    width: 46px;
+    height: 25px;
+    color: #ffffff;
+}
+
+.topbar_icon_customs .center_devise ul li .currentColor { color: #ffffff;}
+.topbar_icon_customs .preview_screen {
+  display: flex;
+  align-items: end;
+  gap: 20px;
+  width: 30%;
+  justify-content: flex-end;
+  align-content: center;
+}
+.topbar_icon_customs .preview_screen a {
+    display: flex;
+	width: auto;
+}
+.topbar_icon_customs .preview_screen img {
+  width: 22px;
+  cursor:pointer;
+}
+.dslca-device-responsive-tab-hook{
+	color: #fff;
+	cursor: pointer;
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+	width: auto;
+	padding: 6px 10px !important;
+	border-radius: 3px;
+	text-align: center;
+}
+
+.dslca-device-responsive-tab-hook.dslca-active,
+.dslca-device-responsive-tab-hook.dslca-active:hover {
+	background: rgb(88, 144, 229);
+	box-shadow: -1px 1px 1px 0 rgba(0, 0, 0, 0.22) inset;
+}
+
+.dslca-device-responsive-tab-hook:hover{
+	background: rgba(169, 239, 255, 0.17);
+	color: #fff;
+}
+
+/* Topbar for responsive icons End 
+-------------------------------------------------------------------------------*/

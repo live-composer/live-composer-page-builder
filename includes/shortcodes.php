@@ -9,6 +9,7 @@
  * dslc_sc_icon ( Icon Shortcode )
  * dslc_sc_user_avatar ( User Avatar Shortcode )
  * dslc_sc_category_description ( Category Description Shortcode )
+ * dslc_template_shortcode ( Render template Shortcode )
  */
 
 // Prevent direct access to the file.
@@ -466,3 +467,102 @@ function dslc_postpagination_shortcode() {
 
 	return $output;
 }
+add_shortcode( 'dslc_template', 'dslc_template_shortcode' );
+add_shortcode( 'lbmn_template', 'dslc_template_shortcode' );
+
+function dslc_template_shortcode( $atts ) {
+    try {
+        $atts = shortcode_atts(
+            array(
+                'id' => '',  // The ID of the template
+            ), 
+            $atts, 
+            'dslc_template'
+        );
+
+        // Ensure we have a valid ID
+        $template_id = intval( $atts['id'] );
+        if ( empty( $template_id ) ) {
+            return 'Template not found';
+        }
+
+        // Get the template post object by ID
+        $template_post = get_post( $template_id );
+
+        if ( ! $template_post || $template_post->post_type != 'dslc_templates' ) {
+            return 'Invalid template';
+        }
+		
+		$composer_code = dslc_get_code($template_id);
+		$rendered_code = dslc_render_content( $composer_code );
+		$rendered_code = dslc_decode_shortcodes( $rendered_code );
+		if ( !dslc_is_editor_active( 'access' ) )
+		{
+			ob_start();
+			echo do_shortcode( do_shortcode( $rendered_code ) );
+			$template_content = ob_get_contents();
+			ob_end_clean();
+		}
+		else
+		{
+			$template_content = "Template";
+		}
+
+		// ob_start();
+		// echo do_shortcode( do_shortcode( $rendered_code ) );
+		// $template_content = ob_get_contents();
+		// ob_end_clean();
+
+        return $template_content;
+
+    } catch (Exception $e) {
+        error_log('Shortcode Error: ' . $e->getMessage());
+        return 'An error occurred while loading the template.';
+    }
+}
+// function dslc_template_shortcode( $atts ) {
+//     try {
+//         $atts = shortcode_atts(
+//             array(
+//                 'id' => '',  // The ID of the template
+//             ), 
+//             $atts, 
+//             'dslc_template'
+//         );
+
+//         $template_id = intval( $atts['id'] );
+        
+//         // --- CRITICAL CHECK: BYPASS RENDERING IF EDITOR IS ACTIVE ---
+//         // This ensures the editor's DOM is not polluted, preventing the crash and duplication.
+//         if ( function_exists( 'dslc_is_editor_active' ) && dslc_is_editor_active( 'access' ) ) {
+//             // Return the raw shortcode text. The parent module (DSLC_Shortcode) 
+//             // already handles how to display the shortcode placeholder or error message.
+//             return '[dslc_template id="' . esc_attr($template_id) . '"]';
+//         }
+
+//         // --- FRONT-END RENDERING ---
+//         if ( empty( $template_id ) ) {
+//             return '';
+//         }
+
+//         $composer_code = dslc_get_code($template_id);
+        
+//         // Render content: Set both flags to FALSE to get clean front-end HTML.
+//         $rendered_code = dslc_render_content( $composer_code, false, false );
+        
+//         // Decode and fully process shortcodes
+//         $rendered_code = dslc_decode_shortcodes( $rendered_code );
+
+//         ob_start();
+//         // The core shortcodes are now decoded, run them twice (standard LC practice)
+//         echo do_shortcode( do_shortcode( $rendered_code ) );
+//         $template_content = ob_get_clean();
+
+//         return $template_content;
+
+//     } catch (Exception $e) {
+//         error_log('Shortcode Error: ' . $e->getMessage());
+//         // Return an empty string on the front-end to avoid breaking the layout
+//         return '';
+//     }
+// }

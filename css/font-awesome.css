@@ -388,8 +388,72 @@ a .dslc-icon-flip-vertical:before {
 .dslc-icon-th-list:before {
   content: "\f00b";
 }
-.dslc-icon-ok:before,
+/* .dslc-icon-check {
+    position: relative;
+    display: inline-block !important;
+    cursor: pointer;    
+    top: 4px;
+    width: 40px !important;
+    height: 20px !important;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
 .dslc-icon-check:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2.3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+  transform: translateX(20px);
+} */
+ /* Base toggle styles (for both checked and unchecked states) */
+.dslc-icon-check-empty,
+.dslc-icon-check {
+  position: relative;
+  display: inline-block !important;
+  cursor: pointer;
+  top: 2px;
+  width: 20px !important;
+  height: 10px !important;
+  background-color: #0d0e1e;
+  transition: .4s ease; 
+  border-radius: 34px;
+}
+.dslc-icon-check{
+  background-color: #fff;
+}
+/* Circle knob (slider part) */
+.dslc-icon-check-empty:before,
+.dslc-icon-check:before {
+  position: absolute;
+  content: "" !important;
+  height: 8px;
+  width: 8px;
+  /* left: 2px; */
+  top: 1.15px;
+  background-color: #fff;
+  transition: .4s ease;
+  border-radius: 50%;
+}
+
+/* When the checkbox is checked (move the knob to the right) */
+.dslc-icon-check:before {
+  transform: translateX(10px);
+  background-color: #006add;  /* Moves the knob to the right */
+}
+
+/* The label (text) next to the icon */
+/* .dslca-module-edit-option-checkbox-hook span {
+  margin-left: 10px;
+  font-size: 14px;
+  color: #333;
+} */
+.dslc-icon-ok:before{
   content: "\f00c";
 }
 .dslc-icon-remove:before,
@@ -835,7 +899,29 @@ a .dslc-icon-flip-vertical:before {
 .dslc-icon-phone:before {
   content: "\f095";
 }
-.dslc-icon-check-empty:before,
+/* .dslc-icon-check-empty{
+  position: relative;
+  display: inline-block !important;
+  cursor: pointer;
+  top: 4px;
+  width: 40px !important;
+  height: 20px !important;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+}
+.dslc-icon-check-empty:before{
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2.3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+} */
+
 .dslc-icon-square-o:before {
   content: "\f096";
 }

@@ -7,12 +7,15 @@
  * - dslc_show_publish_button ( Shows the publish button )
  * - dslc_show_section now showSection ( Show a specific section )
  * - dslc_generate_filters ( Generate origin filters )
+ * - dslca-search-modules ( Search Modules )
  * - dslc_filter_origin ( Origin filtering for templates/modules listing )
  * - dragAndDropInit ( Initiate drag and drop functionality )
  ***********************************/
 
 import { elementOptionsTabs } from './settings.panel.js';
 import { CModalWindow } from './modalwindow.class.js';
+import { dslc_save_composer } from './codegeneration.js';
+import { makePopupDraggableAndResizable } from './popup-drag-resize.js'; 
 
 import Sortable from 'sortablejs';
 
@@ -212,6 +215,53 @@ jQuery(document).on( 'click', '.dslca-section-title', function(e){
 		jQuery('.dslca-section-title-filter-options').slideToggle(300);
 	}
 });
+/**
+ * Hook - Search Modules
+ */
+
+jQuery(document).on( 'input', '.dslca-search-modules', function(e){
+
+	var searchValue = jQuery(this).val().toLowerCase();
+	var modules = jQuery('.dslca-sections .dslca-modules .dslca-section-scroller .dslca-section-scroller-inner .dslca-section-scroller-content');
+	var filterValue = jQuery(".dslca-sections .dslca-modules .dslca-section-title .dslca-section-title-filter-curr").text();
+	if(filterValue == "Elements" || filterValue == "Show All")
+	{
+		if(searchValue == "")
+		{
+		jQuery(".dslca-origin", modules).attr("data-display-module", "true");  
+		}
+		else
+		{
+		jQuery(".dslca-origin", modules).attr("data-display-module", "false");
+		modules.children().each(function () {
+			var title = jQuery(this).children(".dslca-module-title").text().toLowerCase();
+			if (title.includes(searchValue))
+			{
+			this.dataset.displayModule = "true";
+			}
+		});
+		}
+	}
+	else
+	{
+		if(searchValue == "")
+		{
+			jQuery('.dslca-origin[data-origin="' + filterValue + '"]', modules).attr("data-display-module", "true");  
+		}
+		else
+		{
+			jQuery('.dslca-origin', modules).attr("data-display-module", "false");
+			modules.children().each(function () {
+			var title = jQuery(this).children(".dslca-module-title").text().toLowerCase();
+			if (title.includes(searchValue) && jQuery(this).attr("data-origin") == filterValue)
+			{
+				this.dataset.displayModule = "true";
+			}
+			});
+		}
+	}
+
+});
 
 /**
  * Hook - Apply Filter Origin
@@ -224,6 +274,8 @@ jQuery(document).on( 'click', '.dslca-section-title-filter-options a', function(
 
 	var origin = jQuery(this).data('origin');
 	var section = jQuery(this).closest('.dslca-section');
+	// blank search field on filter change
+	jQuery('.dslca-search-modules').val("");
 
 	if ( section.hasClass('dslca-templates-load') ) {
 		jQuery('.dslca-section-title-filter-curr', section).text( jQuery(this).text());
@@ -231,7 +283,8 @@ jQuery(document).on( 'click', '.dslca-section-title-filter-options a', function(
 		jQuery('.dslca-section-title-filter-curr', section).text( jQuery(this).text());
 	}
 
-	jQuery('.dslca-section-scroller-inner').css({ left : 0 });
+	// jQuery('.dslca-section-scroller-inner').css({ left : 0 });
+	jQuery(this).parent().siblings('.dslca-icon').toggleClass('dslc-icon-angle-up dslc-icon-angle-down');
 
 	dslc_filter_origin( origin, section );
 
@@ -328,7 +381,20 @@ export const showSection = ( section ) => {
 	jQuery('.dslca-container').css({ bottom: -500 });
 
 	// Hide all sections and show specific section
-	jQuery('.dslca-section').hide();
+	// jQuery('.dslca-section').hide();
+	if (section !== ".dslca-module-edit" && section !== ".dslca-modules-section-edit") {
+		jQuery(".dslca-section").hide();
+	}
+
+	// 2. If 'e' is equal to ".dslca-modules", perform two actions related to activation classes.
+	if (section === ".dslca-modules") {
+		// Remove active class from the templates button
+		jQuery(".dslca-go-to-section-templates").removeClass("dslca-active");
+
+		// Add active class to the modules button
+		jQuery(".dslca-go-to-section-modules").addClass("dslca-active");
+	}
+	
 	jQuery(section).show();
 
 	// Change "currently editing"
@@ -342,7 +408,7 @@ export const showSection = ( section ) => {
 
 		jQuery('.dslca-currently-editing')
 			.show()
-			.css( 'background-color', '#e5855f' )
+			.css( 'background-color', '#006add' )
 				.find('strong')
 				.text( 'Row' );
 	} else {
@@ -392,7 +458,7 @@ function dslc_generate_filters() {
 			filtersHTML += '<a href="#" data-origin="' + el.data('origin') + '">' + el.data('origin') + '</a>';
 		}
 	});
-
+	jQuery('.dslca-section-title-filter .dslca-icon').toggleClass('dslc-icon-angle-up dslc-icon-angle-down');
 	jQuery('.dslca-section:visible .dslca-section-title-filter-options').html( filtersHTML ).css( 'background', jQuery('.dslca-section:visible').data('bg') );
 }
 
@@ -849,4 +915,114 @@ jQuery(document).on('editorFrameLoaded', function(){
 		el.append( htmlObject );
 	});
 
+});
+
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+
+    const closeBtn1 = document.getElementById("lc_closeBtn");
+    const closeBtn2 = document.getElementById("lc_closeBtn2");
+	const dragOverlay = document.getElementById("dslc-drag-overlay");
+
+    // Initialize Module Popup (lc_popup)
+    makePopupDraggableAndResizable('lc_popup', 'lc_popupHeader', dragOverlay, closeBtn1);
+    
+    // Initialize Row Popup (lc_popup2)
+    makePopupDraggableAndResizable('lc_popup2', 'lc_popupHeader2', dragOverlay, closeBtn2);
+
+});
+// Function to add/remove opacity rules based on body class
+function adjustOpacityBasedOnBodyClass() {
+	var bodyClass = jQuery('body').attr('class'); // Get all body classes
+
+	// Check if the body contains specific responsive classes
+	var isPhone = bodyClass.includes('dslc-res-phone');
+	var isTablet = bodyClass.includes('dslc-res-tablet');
+	var isDesktop = !(isPhone || isTablet); // If it's not phone or tablet, it's desktop
+
+	// Find the iframe element (assuming there's only one iframe or you can select a specific one)
+	var iframe = jQuery('iframe'); // Adjust the selector if needed
+	
+	// Ensure iframe is loaded and accessible
+	if (iframe.length > 0) {
+		var iframeDocument = iframe[0].contentDocument || iframe[0].contentWindow.document;
+
+		if (iframeDocument) {
+			// Remove any existing style block inside the iframe
+			jQuery(iframeDocument).find('style#responsive-opacity').remove();
+
+			// Create a new <style> tag for our dynamic CSS
+			var style = '<style id="responsive-opacity">';
+
+			// Add the CSS rules for opacity adjustments based on device type
+			if (isPhone) {
+				style += '.dslc-hide-on-phone { opacity: 0.5 !important; }';
+			}
+			if (isTablet) {
+				style += '.dslc-hide-on-tablet { opacity: 0.5 !important; }';
+			}
+			if (isDesktop) {
+				style += '.dslc-hide-on-desktop { opacity: 0.5 !important; }';
+			}
+
+			// Close the style tag
+			style += '</style>';
+
+			// Append the new style tag to the iframe's head section
+			jQuery(iframeDocument).find('head').append(style);
+		}
+	}
+}
+
+// Observe changes in the body class using MutationObserver
+function observeBodyClassChanges() { 
+	if (!document.body) return;  // Ensure body exists
+
+	var observer = new MutationObserver(function(mutations) {
+		mutations.forEach(function(mutation) {
+			if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+				adjustOpacityBasedOnBodyClass(); // Update opacity based on body class change
+			}
+		});
+	});
+
+	// Observe class changes on the body element
+	observer.observe(document.body, {
+		attributes: true, // Watch for attribute changes
+		attributeFilter: ['class'] // Only watch the 'class' attribute
+	});
+}
+jQuery(document).ready(function() {
+    // Start observing class changes once the DOM is ready
+    observeBodyClassChanges();
+    
+    // Also adjust opacity on initial load
+    adjustOpacityBasedOnBodyClass();
+});
+jQuery(document).ready(function($) {
+    // When any of the links are clicked
+    $('.dslca-device-responsive-tab-hook').click(function(e) {
+        e.preventDefault(); // Prevent default link behavior (optional)
+
+        // Remove the 'dslca-active' class from all the links
+        $('.dslca-device-responsive-tab-hook').removeClass('dslca-active');
+        
+        // Add the 'dslca-active' class to the clicked link
+        $(this).addClass('dslca-active');
+        
+        // Get the 'data-id' attribute of the clicked link
+        var deviceType = $(this).data('id');
+
+        // Remove both 'dslc-res-tablet' and 'dslc-res-phone' classes from the body
+        $('body').removeClass('dslc-res-tablet dslc-res-phone');
+
+        // Check device type and add corresponding class
+        if (deviceType === 'tablet_responsive') {
+            $('body').addClass('dslc-res-tablet'); // Add class for tablet
+        } else if (deviceType === 'phone_responsive') {
+            $('body').addClass('dslc-res-phone'); // Add class for phone
+        }
+		observeBodyClassChanges();
+		adjustOpacityBasedOnBodyClass();
+    });
 });

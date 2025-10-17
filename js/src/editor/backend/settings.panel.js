@@ -984,7 +984,10 @@ const onSectionOptionsChange = () => {
 
 			// Loop through rules (useful when there are multiple rules)
 			for ( var i = 0; i < dslcRule.length; i++ ) {
-				dslcTargetEl.css(dslcRule[i], dslcValToApply);
+				// dslcTargetEl.css(dslcRule[i], dslcValToApply);
+				if (dslcRule[i].trim() !== "" && dslcValToApply !== undefined && dslcValToApply !== null && dslcValToApply !== "") {
+      				dslcTargetEl.css(dslcRule[i], dslcValToApply);
+                }
 			}
 		}
 
@@ -1763,6 +1766,8 @@ function dslc_module_options_confirm_changes( callback ) {
 		});
 	}
 
+		// hide module settings popup
+	jQuery("#lc_popup").hide();
 	// Show modules listing
 	showSection('.dslca-modules');
 
@@ -1812,6 +1817,8 @@ function dslc_module_options_cancel_changes( callback ) {
 		if ( callback ) { callback(); }
 	});
 
+	// Hide module settings popup
+	jQuery("#lc_popup").hide();
 	// Show modules listing
 	showSection('.dslca-modules');
 
@@ -2182,11 +2189,11 @@ function dslc_module_options_checkbox() {
 		var checkFake = jQuery(this);
 		var checkReal = checkFake.siblings('input[type="checkbox"]');
 
-		if ( checkReal.prop('checked') ) {
-			checkReal.prop('checked', false);
+		if ( checkReal.attr('checked') ) {
+			checkReal.attr('checked', false);
 			checkFake.find('.dslca-icon').removeClass('dslc-icon-check').addClass('dslc-icon-check-empty');
 		} else {
-			checkReal.prop('checked', true);
+			checkReal.attr('checked', true);
 			checkFake.find('.dslca-icon').removeClass('dslc-icon-check-empty').addClass('dslc-icon-check');
 		}
 

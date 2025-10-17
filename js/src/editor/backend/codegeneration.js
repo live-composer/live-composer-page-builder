@@ -15,7 +15,7 @@
 /**
  * CODE GENERATION - Save Page Changes
  */
-function dslc_save_composer() {
+export function dslc_save_composer() {
 	if ( window.dslcDebug ) console.log( 'dslc_save_composer' );
 	/**
 	 * Before saving code via ajax
@@ -92,7 +92,7 @@ function dslc_save_composer() {
 /**
  * CODE GENERATION - Save Draft
  */
-function dslc_save_draft_composer() {
+export function dslc_save_draft_composer() {
 
 	if ( window.dslcDebug ) console.log( 'dslc_save_draft_composer' );
 

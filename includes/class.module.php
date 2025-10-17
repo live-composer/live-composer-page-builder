@@ -2692,12 +2692,18 @@ class DSLC_Module {
 					</svg>
 					<div class="dslca-change-width-module-options">
 						<span><?php esc_attr_e( 'Element Width', 'live-composer-page-builder' ); ?></span>
-						<span data-size="1">1/12</span><span data-size="2">2/12</span>
-						<span data-size="3">3/12</span><span data-size="4">4/12</span>
-						<span data-size="5">5/12</span><span data-size="6">6/12</span>
-						<span data-size="7">7/12</span><span data-size="8">8/12</span>
-						<span data-size="9">9/12</span><span data-size="10">10/12</span>
-						<span data-size="11">11/12</span><span data-size="12">12/12</span>
+						<span data-size="1"><img class="previewimg" src="<?php echo DS_LIVE_COMPOSER_URL ?>/images/icons/first-column.webp" alt="Preview" /></span>
+						<span data-size="2"><img class="previewimg" src="<?php echo DS_LIVE_COMPOSER_URL ?>/images/icons/second-column.webp" alt="Preview" /></span>
+						<span data-size="3"><img class="previewimg" src="<?php echo DS_LIVE_COMPOSER_URL ?>/images/icons/third-column.webp" alt="Preview" /></span>
+						<span data-size="4"><img class="previewimg" src="<?php echo DS_LIVE_COMPOSER_URL ?>/images/icons/fourth-column.webp" alt="Preview" /></span>
+						<span data-size="5"><img class="previewimg" src="<?php echo DS_LIVE_COMPOSER_URL ?>/images/icons/fifth-column.webp" alt="Preview" /></span>
+						<span data-size="6"><img class="previewimg" src="<?php echo DS_LIVE_COMPOSER_URL ?>/images/icons/sixth-column.webp" alt="Preview" /></span>
+						<span data-size="7"><img class="previewimg" src="<?php echo DS_LIVE_COMPOSER_URL ?>/images/icons/seventh-column.webp" alt="Preview" /></span>
+						<span data-size="8"><img class="previewimg" src="<?php echo DS_LIVE_COMPOSER_URL ?>/images/icons/eighth-column.webp" alt="Preview" /></span>
+						<span data-size="9"><img class="previewimg" src="<?php echo DS_LIVE_COMPOSER_URL ?>/images/icons/ninth-column.webp" alt="Preview" /></span>
+						<span data-size="10"><img class="previewimg" src="<?php echo DS_LIVE_COMPOSER_URL ?>/images/icons/tenth-column.webp" alt="Preview" /></span>
+						<span data-size="11"><img class="previewimg" src="<?php echo DS_LIVE_COMPOSER_URL ?>/images/icons/eleventh-column.webp" alt="Preview" /></span>
+						<span data-size="12"><img class="previewimg" src="<?php echo DS_LIVE_COMPOSER_URL ?>/images/icons/twelfth-column.webp" alt="Preview" /></span>
 					</div>
 				</span>
 				<span class="dslca-manage-action dslca-module-manage-hook dslca-delete-module-hook dslca-cmd-hide" title="<?php esc_attr_e( 'Delete', 'live-composer-page-builder' ); ?>"  data-event="module-delete">
