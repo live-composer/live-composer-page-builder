@@ -34,9 +34,10 @@ module.exports = (env = {}) => {
     plugins: [
       new CopyWebpackPlugin({
         patterns: [
+          // 1. FRONTEND CORE CSS: Target the single file (Fixed the directory-to-file bug)
           {
-            from: './css/src/frontend/',
-            to: '../../css/dist/frontend.min.css', // relative to ./js/dist/
+            from: './css/src/frontend/index.css', 
+            to: '../../css/dist/frontend.min.css', 
             async transform(content, filepath) {
               const result = await sassRender({
                 file: filepath,
@@ -46,9 +47,41 @@ module.exports = (env = {}) => {
               return result.css.toString();
             },
           },
+          
+          // 2. FRONTEND PLUGINS CSS: Added to compile frontend plugin styles.
+          // NOTE: If this file does not exist, you must create an empty file named plugins.css in the source folder.
           {
-            from: './css/src/builder/',
-            to: '../../css/dist/builder.min.css', // relative to ./js/dist/
+            from: './css/src/frontend/plugins.css', 
+            to: '../../css/dist/frontend.plugins.min.css',
+            async transform(content, filepath) {
+              const result = await sassRender({
+                file: filepath,
+                outputStyle: 'compressed',
+                sourceMapEmbed: !env.production,
+              });
+              return result.css.toString();
+            },
+          },
+
+          // 3. BUILDER CORE CSS: Target the single file (Fixed the directory-to-file bug)
+          {
+            from: './css/src/builder/index.css', 
+            to: '../../css/dist/builder.min.css', 
+            async transform(content, filepath) {
+              const result = await sassRender({
+                file: filepath,
+                outputStyle: 'compressed',
+                sourceMapEmbed: !env.production,
+              });
+              return result.css.toString();
+            },
+          },
+          
+          // 4. BUILDER PLUGINS CSS: Added to compile builder plugin styles.
+          // NOTE: If this file does not exist, you must create an empty file named plugins.css in the source folder.
+          {
+            from: './css/src/builder/plugins.css', 
+            to: '../../css/dist/builder.plugins.min.css',
             async transform(content, filepath) {
               const result = await sassRender({
                 file: filepath,
