@@ -355,8 +355,14 @@ function dslc_row_edit( row ) {
 		if ( 'type' === jQuery(this).data('id') ) {
 
 			if ( '' === jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="type"]', LiveComposer.Builder.PreviewAreaDocument).val() ||
+				  'wrapper' === jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="type"]', LiveComposer.Builder.PreviewAreaDocument).val() ||
 				  'wrapped' === jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="type"]', LiveComposer.Builder.PreviewAreaDocument).val() ) {
 				jQuery('select[data-id="type"]').val('wrapper').change();
+				jQuery(this).parent().siblings('div[data-id="module_section_width"]').show();
+				jQuery(this).parent().siblings('div[data-id="module_section_width"]').children('input[data-id="module_section_width"]').val(jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="module_section_width"]', LiveComposer.Builder.PreviewAreaDocument).data('def')).trigger('change');
+			}
+			else{
+				jQuery(this).parent().siblings('div[data-id="module_section_width"]').hide();
 			}
 		}
 

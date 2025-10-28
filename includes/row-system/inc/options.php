@@ -68,6 +68,16 @@ function dslc_row_register_options() {
 			),
 		),
 	);
+	$dslc_var_row_options['module_section_width'] = array(
+		'id' => 'module_section_width',
+		'std' => '',
+		'label' => __( 'Width', 'live-composer-page-builder' ),
+		'type' => 'slider',
+		'affect_on_change_rule' => 'width',
+		'ext' => 'px',
+		'min' => 600,
+		'max' => 2000,
+	);
 
 	$dslc_var_row_options['columns_spacing'] = array(
 		'id' => 'columns_spacing',

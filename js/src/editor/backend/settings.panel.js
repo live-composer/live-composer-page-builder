@@ -905,8 +905,11 @@ const onSectionOptionsChange = () => {
 		} else if ( dslcFieldID == 'type' ) {
 			if ( dslcVal == 'full' ) {
 				dslcEl.addClass('dslc-full');
+				dslcField.parent().siblings('div[data-id="module_section_width"]').hide();
+				dslcEl.css('width', '100%');
 			} else {
 				dslcEl.removeClass('dslc-full');
+				dslcField.parent().siblings('div[data-id="module_section_width"]').show();
 			}
 			LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();
 		} else if ( dslcFieldID == 'columns_spacing' ) {

@@ -346,6 +346,13 @@ function dslc_row_get_style( $atts = false ) {
 							$value = 'url(' . wp_get_attachment_url( $value ) . ')';
 						}
 					}
+					if ('width' === $rule) {
+						if ('module_section_width' === $row_option['id']) {
+							if (empty($atts['type']) || $atts['type'] === 'full') {
+								$value = '';
+							}
+						}
+					}
 
 					if ( ! isset( $row_option['std'] ) || $orig_value !== $row_option['std'] ) {
 						$style .= $rule . ':' . $value . ';';
