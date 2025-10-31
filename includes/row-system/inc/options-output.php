@@ -243,6 +243,48 @@ function dslc_row_get_options_fields( $atts = false ) {
 
 					$output .= '<input type="text" data-id="' . $row_option['id'] . '" value="' . $row_option['std'] . '" data-def="' . $row_option['std'] . '">';
 				}
+				// Populate margin left (from old horizontal margin)
+				if ( isset( $atts[ $row_option['id'] ] ) && $atts[ $row_option['id'] ] = "css_margin_left" && !empty($row_option['std']) ) {
+					if(isset($atts['margin_h']) && !empty($atts['margin_h'])){
+						$row_option['std']  = $atts['margin_h'];
+					}
+				}
+				// Populate margin right (from old horizontal margin)
+				if ( isset( $atts[ $row_option['id'] ] ) && $atts[ $row_option['id'] ] = "css_margin_right" && !empty($row_option['std']) ) {
+					if(isset($atts['margin_h']) && !empty($atts['margin_h'])){
+						$row_option['std']  = $atts['margin_h'];
+					}
+				}
+				// Populate margin bottom (from old bottom margin)
+				if ( isset( $atts[ $row_option['id'] ] ) && $atts[ $row_option['id'] ] = "css_margin_bottom" && !empty($row_option['std']) ) {
+					if(isset($atts['margin_b']) && !empty($atts['margin_b'])){
+						$row_option['std']  = $atts['margin_b'];
+					}
+				}
+				// Populate padding top (from old vertical padding)
+				if ( isset( $atts[ $row_option['id'] ] ) && $atts[ $row_option['id'] ] = "css_padding_top" && !empty($row_option['std']) ) {
+					if(isset($atts['padding']) && !empty($atts['padding'])){
+						$row_option['std']  = $atts['padding'];
+					}
+				}
+				// Populate padding bottom (from old vertical padding)
+				if ( isset( $atts[ $row_option['id'] ] ) && $atts[ $row_option['id'] ] = "css_padding_bottom" && !empty($row_option['std']) ) {
+					if(isset($atts['padding']) && !empty($atts['padding'])){
+						$row_option['std']  = $atts['padding'];
+					}
+				}
+				// Populate padding left (from old horizontal padding)
+				if ( isset( $atts[ $row_option['id'] ] ) && $atts[ $row_option['id'] ] = "css_padding_left" && !empty($row_option['std']) ) {
+					if(isset($atts['padding_h']) && !empty($atts['padding_h'])){
+						$row_option['std']  = $atts['padding_h'];
+					}
+				}
+				// Populate padding right (from old horizontal padding)
+				if ( isset( $atts[ $row_option['id'] ] ) && $atts[ $row_option['id'] ] = "css_padding_right" && !empty($row_option['std']) ) {
+					if(isset($atts['padding_h']) && !empty($atts['padding_h'])){
+						$row_option['std']  = $atts['padding_h'];
+					}
+				}
 			}
 		}
 	} else { // If it's a new ROW?
