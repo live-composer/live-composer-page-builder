@@ -69,6 +69,24 @@ class DSLC_TP_Title extends DSLC_Module {
 				),
 			),
 			array(
+				'label' => __( 'Enable/Disable Post Link', 'live-composer-page-builder' ),
+				'id' => 'link_post',
+				'std' => 'disabled',
+				'type' => 'select',
+				'choices' => array(
+					array( 
+						'label' => __( 'Enabled', 'live-composer-page-builder' ),
+						'value' => 'enabled',
+					),
+					array(
+						'label' => __( 'Disabled', 'live-composer-page-builder' ),
+						'value' => 'disabled',
+					),
+				),
+				'section' => 'functionality',
+				'tab' => 'general',
+			),
+			array(
 				'label' => __( 'BG Color', 'live-composer-page-builder' ),
 				'id' => 'css_bg_color',
 				'std' => '',
@@ -553,44 +571,56 @@ class DSLC_TP_Title extends DSLC_Module {
 	 */
 	function output( $options ) {
 
-		global $dslc_active;
+	global $dslc_active;
 
-		$post_id = $options['post_id'];
+	$post_id = $options['post_id'];
 
-		if ( is_singular() ) {
-			$post_id = get_the_ID();
-		}
-
-		/* Module output starts here */
-
-		if ( is_category() ) {
-			$title = single_cat_title( '', false );
-		} elseif ( is_tag() ) {
-			$title = single_tag_title( '', false );
-		} elseif ( is_author() ) {
-			$title = get_the_author();
-		} elseif ( is_year() ) {
-			$title = get_the_date( 'Y' );
-		} elseif ( is_month() ) {
-			$title = get_the_date( 'F Y' );
-		} elseif ( is_day() ) {
-			$title = get_the_date( 'F j, Y' );
-		} elseif ( is_post_type_archive() ) {
-			$title = post_type_archive_title( '', false );
-		} elseif ( class_exists( 'WooCommerce' ) && ( is_product_category() || is_product_tag() ) ) {
-			$title = single_term_title( '', false );
-		} elseif ( is_search() ) {
-			$title = get_the_title( $post_id ) . ' ' . get_search_query();
-		} else {
-			$title = get_the_title( $post_id );
-		}
-
-			?>
-
-				<div class="dslc-tp-title"><h1><?php echo $title; ?></h1></div>
-
-			<?php
-
+	if ( is_singular() ) {
+		$post_id = get_the_ID();
 	}
+
+	/* Module output starts here */
+
+	if ( is_category() ) {
+		$title = single_cat_title( '', false );
+		$link  = get_category_link( get_queried_object_id() );
+	} elseif ( is_tag() ) {
+		$title = single_tag_title( '', false );
+		$link  = get_tag_link( get_queried_object_id() );
+	} elseif ( is_author() ) {
+		$title = get_the_author();
+		$link  = get_author_posts_url( get_the_author_meta( 'ID' ) );
+	} elseif ( is_year() || is_month() || is_day() ) {
+		$title = get_the_date();
+		$link  = get_day_link( get_the_date( 'Y' ), get_the_date( 'm' ), get_the_date( 'd' ) );
+	} elseif ( is_post_type_archive() ) {
+		$title = post_type_archive_title( '', false );
+		$link  = get_post_type_archive_link( get_post_type() );
+	} elseif ( class_exists( 'WooCommerce' ) && ( is_product_category() || is_product_tag() ) ) {
+		$title = single_term_title( '', false );
+		$link  = get_term_link( get_queried_object_id() );
+	} elseif ( is_search() ) {
+		$title = get_the_title( $post_id ) . ' ' . get_search_query();
+		$link  = get_permalink( $post_id );
+	} else {
+		$title = get_the_title( $post_id );
+		$link  = get_permalink( $post_id );
+	}
+
+	?>
+
+	<div class="dslc-tp-title">
+		<?php
+		if ( ! isset( $options['link_post'] ) || 'enabled' === $options['link_post'] ){
+		?>
+			<h1><a href="<?php echo esc_url( $link ); ?>"><?php echo esc_html( $title ); ?></a></h1>
+		<?php } else { ?>
+			<div class="dslc-tp-title"><h1><?php echo $title; ?></h1></div>
+		<?php } ?>
+	</div>
+
+	<?php
+}
+
 
 }

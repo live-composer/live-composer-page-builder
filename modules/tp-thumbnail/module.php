@@ -69,6 +69,24 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				),
 			),
 			array(
+				'label' => __( 'Enable/Disable Post Link', 'live-composer-page-builder' ),
+				'id' => 'link_post',
+				'std' => 'disabled',
+				'type' => 'select',
+				'choices' => array(
+					array( 
+						'label' => __( 'Enabled', 'live-composer-page-builder' ),
+						'value' => 'enabled',
+					),
+					array(
+						'label' => __( 'Disabled', 'live-composer-page-builder' ),
+						'value' => 'disabled',
+					),
+				),
+				'section' => 'functionality',
+				'tab' => 'general',
+			),
+			array(
 				'label' => __( 'Align', 'live-composer-page-builder' ),
 				'id' => 'css_align',
 				'std' => 'left',
@@ -374,6 +392,9 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 			$post_id = get_the_ID();
 		}
 
+		// Enable/disable thumbnail link
+		$enable_link = ( isset( $options['link_post'] ) && 'enabled' === $options['link_post'] );
+
 		$thumb_url = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
 		$thumb_alt = get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true );
 		if ( ! $thumb_alt ) { $thumb_alt = ''; }
@@ -411,13 +432,15 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 
 			if ( has_post_thumbnail( $post_id ) ) : ?>
 				<div class="dslc-tp-thumbnail">
-				<?php
-				if ( $manual_resize ) : ?>
+					<?php if ( $enable_link ) : ?><a href="<?php echo esc_url( get_permalink( $post_id ) ); ?>"><?php endif; ?>
+					
+					<?php if ( $manual_resize ) : ?>
 					<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); ?>
 					<img src="<?php echo esc_attr( $res_img ); ?>" alt="<?php echo $thumb_alt; ?>" title="<?php echo $thumb_title; ?>" />
 				<?php else : ?>
 					<?php echo get_the_post_thumbnail( $post_id, 'full', array( 'title' => get_the_title( get_post_thumbnail_id() ) ) ); ?>
 				<?php endif; ?>
+					<?php if ( $enable_link ) : ?></a><?php endif; ?>
 				</div>
 			<?php else : ?>
 
@@ -432,7 +455,12 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				}
 
 				$placeholder_inline_style .= '"'; ?>
-				<div class="dslc-tp-thumbnail dslc-tp-thumbnail-fake"><img src="<?php echo esc_attr( DS_LIVE_COMPOSER_URL ); ?>/images/placeholders/tpl-thumb-placeholder.png" <?php echo $placeholder_inline_style; ?> /></div>
+				<div class="dslc-tp-thumbnail dslc-tp-thumbnail-fake">
+					<?php if ( $enable_link ) : ?><a href="<?php echo esc_url( get_permalink( $post_id ) ); ?>"><?php endif; ?>
+					<img src="<?php echo esc_attr( DS_LIVE_COMPOSER_URL ); ?>/images/placeholders/tpl-thumb-placeholder.png" <?php echo $placeholder_inline_style; ?> />
+					<?php if ( $enable_link ) : ?></a><?php endif; ?>
+				</div>
+
 			<?php endif; ?>
 
 		<?php else : ?>
@@ -441,14 +469,22 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				<?php if ( isset( $options['lightbox_state'] ) && 'enabled' === $options['lightbox_state'] ) : ?>
 					<?php $thumb = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'full' ); ?>
 					<a href="<?php echo esc_attr( $thumb[0] ); ?>" class="dslc-lightbox-image">
+				<?php elseif ( $enable_link ) : ?>
+					<a href="<?php echo esc_url( get_permalink( $post_id ) ); ?>">
 				<?php endif; ?>
-					<?php if ( $manual_resize ) : ?>
-						<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true );?>
-						<img src="<?php echo esc_attr( $res_img ); ?>" alt="<?php echo esc_attr( dslc_get_attachment_alt( get_post_thumbnail_id() ) ); ?>" title="<?php echo $thumb_title; ?>" />
-					<?php else : ?>
-						<?php the_post_thumbnail( 'full', array( 'title' => get_the_title( get_post_thumbnail_id() ) ) ); ?>
-					<?php endif; ?>
-				<?php if ( isset( $options['lightbox_state'] ) && 'enabled' === $options['lightbox_state'] ) : ?>
+
+				<?php if ( $manual_resize ) : ?>
+					<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); ?>
+					<img src="<?php echo esc_attr( $res_img ); ?>" alt="<?php echo esc_attr( dslc_get_attachment_alt( get_post_thumbnail_id() ) ); ?>" title="<?php echo esc_attr( $thumb_title ); ?>" />
+				<?php else : ?>
+					<?php the_post_thumbnail( 'full', array( 'title' => $thumb_title ) ); ?>
+				<?php endif; ?>
+
+				<?php
+				// Close link tags properly (lightbox or normal link)
+				if ( isset( $options['lightbox_state'] ) && 'enabled' === $options['lightbox_state'] ) : ?>
+					</a>
+				<?php elseif ( $enable_link ) : ?>
 					</a>
 				<?php endif; ?>
 			</div>
