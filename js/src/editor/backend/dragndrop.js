@@ -6,6 +6,9 @@ import { moduleOutputDefault } from "./module.js";
 import Sortable from 'sortablejs';
 
 export const dragAndDropInit = () => {
+
+	if ( window.dslcDebug ) console.log( 'dslc_drag_and_drop' );
+	
 	var modulesSection, modulesArea, moduleID, moduleOutput;
 
 	// Drag and Drop for module icons from the list of modules
@@ -122,6 +125,7 @@ export const dragAndDropInit = () => {
 					window.dslc_generate_code();
 					// Show publish
 					window.dslc_show_publish_button();
+					parent.LiveComposer.Builder.Actions.saveState();
 
 					// LiveComposer.Builder.UI.initInlineEditors();
 				});
@@ -169,6 +173,7 @@ export const dragAndDropInit = () => {
 			var itemEl = evt.item;  // dragged HTMLElement
 			// + indexes from onEnd
 			window.dslc_show_publish_button();
+			parent.LiveComposer.Builder.Actions.saveState();
 			// evt.preventDefault();
 		},
 

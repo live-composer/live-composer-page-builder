@@ -1786,6 +1786,7 @@ function dslc_module_options_confirm_changes( callback ) {
 	// window.dslc_generate_code();
 	// Show the publish button
 	window.dslc_show_publish_button();
+	parent.LiveComposer.Builder.Actions.saveState();
 }
 
 /**

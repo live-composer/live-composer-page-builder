@@ -724,6 +724,30 @@ export const keypressEvents = () => {
 
 		// Events to run when any button preset.
 		dslc_keydown( keydown_event );
+		// ----------------------------------------------------
+        // ** NEW: UNDO (Ctrl/Cmd + Z) & REDO (Ctrl/Cmd + Y/Shift+Z) **
+        // ----------------------------------------------------
+        if ( (keydown_event.metaKey || keydown_event.ctrlKey) ) {
+            // UNDO: Ctrl/Cmd + Z
+            if ( keydown_event.which === 90 && ! keydown_event.shiftKey ) { // 90 is key code for Z
+                keydown_event.preventDefault();
+                if (typeof LiveComposer.Builder.Actions.undo === 'function') {
+                    LiveComposer.Builder.Actions.undo();
+                }
+                return false;
+            }
+            // REDO: Ctrl/Cmd + Y (89) or Ctrl/Cmd + Shift + Z
+            if ( keydown_event.which === 89 || (keydown_event.which === 90 && keydown_event.shiftKey) ) {
+                keydown_event.preventDefault();
+                if (typeof LiveComposer.Builder.Actions.redo === 'function') {
+                    LiveComposer.Builder.Actions.redo();
+                }
+                return false;
+            }
+        }
+        // ----------------------------------------------------
+        // ** END NEW CODE **
+        // ----------------------------------------------------
 	});
 
 	// Key UP events.

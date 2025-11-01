@@ -203,6 +203,7 @@ document.addEventListener('pasteModuleStyles', function (customEvent) {
 								dslcModule.remove();
 								window.dslc_generate_code();
 								window.dslc_show_publish_button();
+								parent.LiveComposer.Builder.Actions.saveState();
 
 								LiveComposer.Builder.PreviewAreaWindow.dslc_carousel();
 								LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();
@@ -461,7 +462,7 @@ function dslc_module_delete( module ) {
 			// Remove module, regenerate code, show publish button
 			module.parentNode.removeChild( module );
 			window.dslc_generate_code();
-			window.dslc_show_publish_button();
+			parent.LiveComposer.Builder.Actions.saveState();
 		}
 	  });
 }
@@ -516,6 +517,7 @@ function moduleDuplicate( module ) {
 	});
 
 	window.dslc_show_publish_button();
+	parent.LiveComposer.Builder.Actions.saveState();
 }
 
 /**
@@ -913,6 +915,7 @@ window.dslc_module_output_reload = function ( dslcModule, callback ) {
 			dslcModule.remove();
 			window.dslc_generate_code();
 			window.dslc_show_publish_button();
+			parent.LiveComposer.Builder.Actions.saveState();
 
 			LiveComposer.Builder.PreviewAreaWindow.dslc_carousel();
 			LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();

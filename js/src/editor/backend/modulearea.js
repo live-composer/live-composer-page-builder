@@ -25,7 +25,7 @@ import { getNewModuleId } from "./module.js";
  * Attach these actions once the editing iFrame loaded.
  */
 
-;jQuery(document).on('editorFrameLoaded', function(){
+jQuery(document).on('editorFrameLoaded', function(){
 
 	function init_sortables() {
 
@@ -55,6 +55,7 @@ import { getNewModuleId } from "./module.js";
 	if ( ! jQuery( '#dslc-main .dslc-modules-section', LiveComposer.Builder.PreviewAreaDocument).length && ! jQuery( '#dslca-tut-page', LiveComposer.Builder.PreviewAreaDocument).length ) {
 
 		addSection( init_sortables() );
+		parent.LiveComposer.Builder.Actions.saveState();
 	} else {
 
 		init_sortables();
@@ -172,6 +173,7 @@ import { getNewModuleId } from "./module.js";
 
 		window.dslc_generate_code();
 		window.dslc_show_publish_button();
+		parent.LiveComposer.Builder.Actions.saveState();
 	}
 
 	/**
@@ -301,7 +303,7 @@ export const modulesAreaAdd = ( row ) => {
 	dragAndDropInit();
 	window.dslc_generate_code();
 	window.dslc_show_publish_button();
-
+	parent.LiveComposer.Builder.Actions.saveState();
 	// Remove class from body so we know it's done
 	// jQuery('body', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-anim-in-progress');
 }
@@ -371,6 +373,7 @@ function dslc_modules_area_delete( area ) {
 		// Call other functions
 		window.dslc_generate_code();
 		window.dslc_show_publish_button();
+		parent.LiveComposer.Builder.Actions.saveState();
 	}, 900 );
 
 	// Animation
@@ -390,6 +393,7 @@ function dslc_modules_area_delete( area ) {
 		area.remove();
 		window.dslc_generate_code();
 		window.dslc_show_publish_button();
+		parent.LiveComposer.Builder.Actions.saveState();
 	});
 }
 
@@ -446,10 +450,10 @@ function dslc_modules_area_copy( area ) {
 	// Call other functions
 	dragAndDropInit();
 	window.dslc_show_publish_button();
+	parent.LiveComposer.Builder.Actions.saveState();
 
 	// Need to call this function to update last column class for the module areas.
 	window.dslc_generate_code();
-
 
 }
 
@@ -478,6 +482,7 @@ function dslc_modules_area_width_set( area, newWidth ) {
 
 	window.dslc_generate_code();
 	window.dslc_show_publish_button();
+	parent.LiveComposer.Builder.Actions.saveState();
 
 }
 

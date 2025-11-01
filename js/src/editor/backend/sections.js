@@ -271,6 +271,7 @@ function dslc_row_after_add( newRowHTML ) {
 	dragAndDropInit();
 	window.dslc_generate_code();
 	window.dslc_show_publish_button();
+	parent.LiveComposer.Builder.Actions.saveState();
 
 	new Section(newRow);
 	new ModuleArea( newRow.find('.dslc-modules-area').eq(0)[0] );
@@ -309,6 +310,7 @@ function dslc_row_delete( row ) {
 	// Call other functions
 	window.dslc_generate_code();
 	window.dslc_show_publish_button();
+	parent.LiveComposer.Builder.Actions.saveState(); 
 }
 
 /**
@@ -539,6 +541,7 @@ function dslc_row_edit_confirm( callback ) {
 
 	// Show the publish button
 	window.dslc_show_publish_button();
+	parent.LiveComposer.Builder.Actions.saveState();
 
 	if ( callback ) { callback(); }
 
@@ -619,6 +622,7 @@ function dslc_row_copy( row ) {
 		}, 300);
 
 		window.dslc_show_publish_button();
+		parent.LiveComposer.Builder.Actions.saveState();
 	});
 
 	// Generate new ID for the new section.
@@ -684,6 +688,7 @@ function dslc_row_import( rowCode ) {
 			window.dslc_generate_code();
 
 			window.dslc_show_publish_button();
+			parent.LiveComposer.Builder.Actions.saveState();
 		}
 	);
 }

@@ -94,6 +94,7 @@ export const ModuleArea = function(elem) {
 			// evt.stopPropagation(); return false;
 
 			window.dslc_show_publish_button();
+			parent.LiveComposer.Builder.Actions.saveState();
 		},
 
 		// Called by any change to the list (add / update / remove)

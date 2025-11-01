@@ -58,6 +58,7 @@ const loadTemplateById = ( template ) => {
 
 			dragAndDropInit();
 			window.dslc_show_publish_button();
+			parent.LiveComposer.Builder.Actions.saveState();
 			window.dslc_generate_code();
 		}
 	);
@@ -103,6 +104,7 @@ function dslc_template_import() {
 			LiveComposer.Builder.PreviewAreaWindow.dslc_bg_video();
 			dragAndDropInit();
 			window.dslc_show_publish_button();
+			parent.LiveComposer.Builder.Actions.saveState();
 			window.dslc_generate_code();
 		}
 	);
