@@ -144,6 +144,7 @@ export const dragAndDropInit = () => {
 
 				// Hide modules area management
 				jQuery('.dslca-modules-area-manage', modulesArea).css ({ visibility : 'hidden' });
+				// parent.LiveComposer.Builder.Actions.saveState();
 
 				// Animate loading
 				/*

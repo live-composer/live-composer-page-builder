@@ -622,11 +622,11 @@ function dslc_row_copy( row ) {
 		}, 300);
 
 		window.dslc_show_publish_button();
-		parent.LiveComposer.Builder.Actions.saveState();
 	});
-
+	
 	// Generate new ID for the new section.
 	dslc_section_new_id( dslcModulesSectionCloned[0] );
+	parent.LiveComposer.Builder.Actions.saveState();
 }
 
 /**

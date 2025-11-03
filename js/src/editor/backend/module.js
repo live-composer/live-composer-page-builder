@@ -203,15 +203,15 @@ document.addEventListener('pasteModuleStyles', function (customEvent) {
 								dslcModule.remove();
 								window.dslc_generate_code();
 								window.dslc_show_publish_button();
-								parent.LiveComposer.Builder.Actions.saveState();
-
+								
 								LiveComposer.Builder.PreviewAreaWindow.dslc_carousel();
 								LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();
-
+								
 								LiveComposer.Builder.PreviewAreaWindow.dslc_tabs();
 								LiveComposer.Builder.PreviewAreaWindow.dslc_init_accordion();
-
+								
 								jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-module-being-edited');
+								parent.LiveComposer.Builder.Actions.saveState();
 							}
 						}
 					);
@@ -582,6 +582,7 @@ function dslc_module_width_set( moduleEl, new_width ) {
 
 	window.dslc_generate_code();
 	window.dslc_show_publish_button();
+	parent.LiveComposer.Builder.Actions.saveState();
 }
 
 /**
@@ -915,7 +916,6 @@ window.dslc_module_output_reload = function ( dslcModule, callback ) {
 			dslcModule.remove();
 			window.dslc_generate_code();
 			window.dslc_show_publish_button();
-			parent.LiveComposer.Builder.Actions.saveState();
 
 			LiveComposer.Builder.PreviewAreaWindow.dslc_carousel();
 			LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();

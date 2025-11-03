@@ -172,12 +172,13 @@ jQuery(document).ready(function($){
 			window.LiveComposer.Builder.Flags.panelOpened = false;
 
 			jQuery("body", window.LiveComposer.Builder.PreviewAreaDocument).removeClass('module-editing-in-progress');
-
+			
 		});
-
+		
 		jQuery('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
-
+		
 		dslc_disable_responsive_view();
+		parent.LiveComposer.Builder.Actions.saveState();
 
 	});
 
@@ -1786,7 +1787,7 @@ function dslc_module_options_confirm_changes( callback ) {
 	// window.dslc_generate_code();
 	// Show the publish button
 	window.dslc_show_publish_button();
-	parent.LiveComposer.Builder.Actions.saveState();
+	// parent.LiveComposer.Builder.Actions.saveState();
 }
 
 /**
