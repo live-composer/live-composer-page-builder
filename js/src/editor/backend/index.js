@@ -38,7 +38,7 @@ window.LiveComposer = {
         History: {
             undoStack: [],
             redoStack: [],
-            maxHistory: 10 // Limit the history stack size
+            maxHistory: 5 // Limit the history stack size
         }
     },
     Production: {

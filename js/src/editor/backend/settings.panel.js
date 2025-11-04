@@ -172,13 +172,13 @@ jQuery(document).ready(function($){
 			window.LiveComposer.Builder.Flags.panelOpened = false;
 
 			jQuery("body", window.LiveComposer.Builder.PreviewAreaDocument).removeClass('module-editing-in-progress');
-			
+			parent.LiveComposer.Builder.Actions.saveState();
 		});
 		
 		jQuery('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
 		
 		dslc_disable_responsive_view();
-		parent.LiveComposer.Builder.Actions.saveState();
+		// parent.LiveComposer.Builder.Actions.saveState();
 
 	});
 
@@ -748,7 +748,8 @@ const onSectionOptionsChange = () => {
 			if ( dslcVal && dslcVal.length ) {
 
 				// dslcVal = dslcField.data('dslca-img-url');
-				dslcVal = jQuery.find('.dslca-modules-section-settings input[data-id="dslca-img-url"]', dslcEl ).val();
+				// dslcVal = jQuery.find('.dslca-modules-section-settings input[data-id="dslca-img-url"]', dslcEl ).val();
+				dslcVal = jQuery( '.dslca-modules-section-settings input[data-id="dslca-img-url"]', dslcEl ).val();
 			}
 		}
 
