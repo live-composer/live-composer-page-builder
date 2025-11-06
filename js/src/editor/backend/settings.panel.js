@@ -2504,13 +2504,13 @@ function dslc_module_options_numeric( fieldWrapper ) {
 		 * This way slider has no fixed top or bottom limit one one hand
 		 * and works precise enough for both small and big values.
 		 */
-		if ( currentVal >= max ) {
-			max = currentVal * 2;
-		}
+		// if ( currentVal >= max ) {
+		// 	max = currentVal * 2;
+		// }
 
-		if ( ! onlypositive && currentVal <= min ) {
-			min = currentVal * 2;
-		}
+		// if ( ! onlypositive && currentVal <= min ) {
+		// 	min = currentVal * 2;
+		// }
 
 		sliderControl.slider({
 			min : min,
