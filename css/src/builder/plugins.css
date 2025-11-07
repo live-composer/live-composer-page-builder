@@ -2632,6 +2632,16 @@ span.dslca-manage-action:hover * {
 .dslca-container .dslca-modules-section-edit-option-slider {
   position: relative;
 }
+
+.controls-group-margin .dslca-modules-section-edit-option { width: 48% !important; display: inline-block;}
+.controls-group-padding .dslca-modules-section-edit-option { width: 48% !important; display: inline-block;}
+
+.controls-group-margin .dslca-modules-section-edit-option .dslca-module-edit-field-slider,
+.controls-group-padding .dslca-modules-section-edit-option .dslca-module-edit-field-slider, 
+.dslca-module-edit-field-slider { width:calc(100% - 7px)!important; left:7px !important; }
+
+
+
 .dslca-modules-edit-field-slider {
   display: none;
 }
@@ -4287,6 +4297,63 @@ a.dslca-module-edit-options-tab-hook[data-id="mobile_menu_styling"]:before {
   background: rgba(169, 239, 255, 0.17);
   color: #fff;
 }
+
+input[type="number"] {
+  -webkit-appearance: number-input;
+  -moz-appearance: number-input;
+  appearance: number-input;
+}
+
+/* Restore default spinner visibility */
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+  opacity: 1 !important;
+  display: inline !important;
+  -webkit-appearance: inner-spin-button !important;
+  margin: 0;
+}
+
+.wp-picker-container .iris-border .iris-picker-inner {
+  top: 41px!important;
+  right: 10px!important;
+  left: 10px!important;
+  bottom: 10px!important;
+}
+
+.wp-picker-container .dslca-colorpicker-apply{
+left: 10px!important;
+top: 5px!important;
+position: absolute!important;
+width: 93%!important;
+display: block!important;
+height: 28px!important;
+}
+
+.wp-picker-container .iris-picker {
+
+  height: 209.125px !important;
+  padding-bottom: 16.9612px !important;
+  padding-top: 34px !important;
+}
+
+.wp-picker-container .wp-picker-input-wrap label { width:  116px!important;}
+.wp-picker-container .wp-picker-input-wrap label input { width: 100% !important; min-width: 100px !important;}
+.wp-picker-container .iris-picker .iris-square {height: 176.125px !important;}
+.wp-picker-container .iris-picker .iris-strip {height: 208.086px !important;}
+.wp-picker-container .wp-color-result .color-alpha { height: 28px !important;}
+
+.wp-picker-container .wp-color-result { width: 164px !important;}
+
+.wp-picker-container .wp-color-result-text { width: 170px !important;}
+
+.wp-picker-container { width: 280px !important;}
+.wp-picker-container .wp-picker-open+.wp-picker-input-wrap {
+  display: inline-block!important;
+  vertical-align: top!important;
+  width: 100% !important;
+}
+
+.wp-picker-container .button.wp-picker-clear {width: 150px !important;}
 
 /* Topbar for responsive icons End 
 -------------------------------------------------------------------------------*/

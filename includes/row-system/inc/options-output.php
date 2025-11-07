@@ -94,7 +94,15 @@ function dslc_row_display_options() {
 
 			<?php if ( 'open' === $row_option['action'] ) : ?>
 				<div class="dslca-section-control-group dslca-section-edit-option">
-				<div class="controls-group-inner">
+					<?php 
+					$wrapper_class = '';
+					if(strtolower($row_option['label']) == 'margin'){
+						$wrapper_class = 'controls-group-margin';
+					}else if(strtolower($row_option['label']) == 'padding'){
+						$wrapper_class = 'controls-group-padding';
+					}
+					?>
+				<div class="controls-group-inner <?php echo $wrapper_class ?>">
 				<span class="dslca-section-edit-label"><?php echo $row_option['label'] ?></span>
 			<?php endif; ?>
 

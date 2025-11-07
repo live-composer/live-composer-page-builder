@@ -14,18 +14,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</a>
 		</li>
 		<li class="dslc-submenu-section">
-			<a href="#performance"  data-nav-to="<?php echo 'tab-1' ?>" class="nav-subtab <?php echo $anchor == 'tab-1' ? 'nav-tab-active' : ''; ?>">
-				<span class="dashicons dashicons-dashboard"></span> <?php _e( 'Performance', 'live-composer-page-builder' ) ?>
-			</a>
-		</li>
-		<li class="dslc-submenu-section">
-			<a href="#other"  data-nav-to="<?php echo 'tab-1' ?>" class="nav-subtab <?php echo $anchor == 'tab-1' ? 'nav-tab-active' : ''; ?>">
-				<span class="dashicons dashicons-admin-tools"></span> <?php _e( 'Other', 'live-composer-page-builder' ) ?>
-			</a>
-		</li>
-		<li class="dslc-submenu-section">
 			<a href="#navigation"  data-nav-to="<?php echo 'tab-1' ?>" class="nav-subtab <?php echo $anchor == 'tab-1' ? 'nav-tab-active' : ''; ?>">
 				<span class="dashicons dashicons-menu"></span> <?php _e( 'Navigation Module', 'live-composer-page-builder' ) ?>
+			</a>
+		</li>
+		<li class="dslc-submenu-section">
+			<a href="#features-control"  data-nav-to="<?php echo 'tab-1' ?>" class="nav-subtab <?php echo $anchor == 'tab-1' ? 'nav-tab-active' : ''; ?>">
+				<span class="dashicons dashicons-forms"></span> <?php _e( 'Features Control', 'live-composer-page-builder' ) ?>
+			</a>
+		</li>
+		<li class="dslc-submenu-section">
+			<a href="#cpt-slugs"  data-nav-to="<?php echo 'tab-1' ?>" class="nav-subtab <?php echo $anchor == 'tab-1' ? 'nav-tab-active' : ''; ?>">
+				<span class="dashicons dashicons-index-card"></span> <?php _e( 'Post Types', 'live-composer-page-builder' ) ?>
 			</a>
 		</li>
 		<li class="dslc-submenu-section">
@@ -39,13 +39,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</a>
 		</li>
 		<li class="dslc-submenu-section">
-			<a href="#features-control"  data-nav-to="<?php echo 'tab-1' ?>" class="nav-subtab <?php echo $anchor == 'tab-1' ? 'nav-tab-active' : ''; ?>">
-				<span class="dashicons dashicons-forms"></span> <?php _e( 'Features Control', 'live-composer-page-builder' ) ?>
+			<a href="#performance"  data-nav-to="<?php echo 'tab-1' ?>" class="nav-subtab <?php echo $anchor == 'tab-1' ? 'nav-tab-active' : ''; ?>">
+				<span class="dashicons dashicons-dashboard"></span> <?php _e( 'Performance', 'live-composer-page-builder' ) ?>
 			</a>
 		</li>
 		<li class="dslc-submenu-section">
-			<a href="#cpt-slugs"  data-nav-to="<?php echo 'tab-1' ?>" class="nav-subtab <?php echo $anchor == 'tab-1' ? 'nav-tab-active' : ''; ?>">
-				<span class="dashicons dashicons-index-card"></span> <?php _e( 'Post Types', 'live-composer-page-builder' ) ?>
+			<a href="#other"  data-nav-to="<?php echo 'tab-1' ?>" class="nav-subtab <?php echo $anchor == 'tab-1' ? 'nav-tab-active' : ''; ?>">
+				<span class="dashicons dashicons-admin-tools"></span> <?php _e( 'Other', 'live-composer-page-builder' ) ?>
 			</a>
 		</li>
 
@@ -69,22 +69,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<?php do_settings_sections( 'dslc_plugin_options' ); ?>
 					<?php submit_button(); ?>
 			</div>
-			<a name="performance"></a>
-			<a href="#dslc-top" class="dslc-scroll-back"><span class="dashicons dashicons-arrow-up-alt"></span> Top</a>
-			<div class="dslc-panel">
-					<?php do_settings_sections( 'dslc_plugin_options_performance' ); ?>
-					<?php submit_button(); ?>
-			</div>
-			<a name="other"></a>
-			<a href="#dslc-top" class="dslc-scroll-back"><span class="dashicons dashicons-arrow-up-alt"></span> Top</a>
-			<div class="dslc-panel">
-					<?php do_settings_sections( 'dslc_plugin_options_other' ); ?>
-					<?php submit_button(); ?>
-			</div>
 			<a name="navigation"></a>
 			<a href="#dslc-top" class="dslc-scroll-back"><span class="dashicons dashicons-arrow-up-alt"></span> Top</a>
 			<div class="dslc-panel">
 					<?php do_settings_sections( 'dslc_plugin_options_navigation_m' ); ?>
+					<?php submit_button(); ?>
+			</div>
+			<a name="features-control"></a>
+			<a href="#dslc-top" class="dslc-scroll-back"><span class="dashicons dashicons-arrow-up-alt"></span> Top</a>
+			<div class="dslc-panel">
+					<?php do_settings_sections( 'dslc_plugin_options_features' ); ?>
+					<?php submit_button(); ?>
+			</div>
+			<a name="cpt-slugs"></a>
+			<a href="#dslc-top" class="dslc-scroll-back"><span class="dashicons dashicons-arrow-up-alt"></span> Top</a>
+			<div class="dslc-panel">
+					<?php do_settings_sections( 'dslc_plugin_options_cpt_slugs' ); ?>
 					<?php submit_button(); ?>
 			</div>
 			<a name="widgets"></a>
@@ -99,16 +99,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<?php do_settings_sections( 'dslc_plugin_options_access_control' ); ?>
 					<?php submit_button(); ?>
 			</div>
-			<a name="features-control"></a>
+			<a name="performance"></a>
 			<a href="#dslc-top" class="dslc-scroll-back"><span class="dashicons dashicons-arrow-up-alt"></span> Top</a>
 			<div class="dslc-panel">
-					<?php do_settings_sections( 'dslc_plugin_options_features' ); ?>
+					<?php do_settings_sections( 'dslc_plugin_options_performance' ); ?>
 					<?php submit_button(); ?>
 			</div>
-			<a name="cpt-slugs"></a>
+			<a name="other"></a>
 			<a href="#dslc-top" class="dslc-scroll-back"><span class="dashicons dashicons-arrow-up-alt"></span> Top</a>
 			<div class="dslc-panel">
-					<?php do_settings_sections( 'dslc_plugin_options_cpt_slugs' ); ?>
+					<?php do_settings_sections( 'dslc_plugin_options_other' ); ?>
 					<?php submit_button(); ?>
 			</div>
 
