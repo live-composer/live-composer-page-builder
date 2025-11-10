@@ -203,6 +203,84 @@ jQuery(document).ready(function($){
 
 		dslc_disable_responsive_view();
 	});
+	/**
+	 *  Hook - change unit ("px","%") 
+	 */
+
+	// Target the specific unit selector fields
+	const unitSelectors = jQuery(
+		'.dslca-modules-section-edit-field-select[data-id="module_section_width_unit"], ' + 
+		'.dslca-modules-section-edit-field-select[data-id="padding_unit"], ' +
+		'.dslca-modules-section-edit-field-select[data-id="margin_unit"]'
+	);
+
+	unitSelectors.on('change', function() {
+		const changedSelector = jQuery(this);
+		const dataId = changedSelector.data('id');
+		const selectedUnit = changedSelector.val();
+
+		let targetInputsSelector = '';
+
+		// Determine the selector for the associated numeric inputs
+		if (dataId === 'module_section_width_unit') {
+			// Target only the single width input
+			targetInputsSelector = 'input[data-id="module_section_width"]';
+		} else if (dataId === 'padding_unit') {
+			// Target all padding inputs (top, right, bottom, left)
+			targetInputsSelector = 'input[data-id^="css_padding_"]';
+		} else if (dataId === 'margin_unit') {
+			// Target all margin inputs (top, right, bottom, left)
+			targetInputsSelector = 'input[data-id^="css_margin_"]';
+		}
+
+		// Find and update the data-ext attribute on the target inputs
+		if (targetInputsSelector) {
+			// Find all relevant inputs within the entire form/popup context
+			const numericInputs = jQuery(targetInputsSelector);
+
+			numericInputs.each(function() {
+				const inputEl = jQuery(this);
+				
+				// 2. Get original min/max from data attributes (assuming they exist on all inputs)
+				// Store original values if not already done (for switching back from %)
+				if (inputEl.data('original-min') === undefined) {
+					inputEl.data('original-min', parseFloat(inputEl.attr('data-min')) || 0);
+					inputEl.data('original-max', parseFloat(inputEl.attr('data-max')) || 2000);
+				}
+				
+				const originalMin = inputEl.data('original-min');
+				const originalMax = inputEl.data('original-max');
+
+				// 3. Update data-ext (for persistence/display)
+				inputEl.attr('data-ext', selectedUnit).data('ext', selectedUnit);
+
+				// 4. Adjust min and max based on selected unit
+				if (selectedUnit === '%') {
+					inputEl.attr('min', -100).attr('max', 100);
+				} else {
+					// Revert to original min/max (which should be in px)
+					inputEl.attr('min', originalMin).attr('max', originalMax);
+				}
+
+				// 5. Clamp the current value if it’s out of range
+				let currentVal = parseFloat(inputEl.val()) || 0;
+				const min = parseFloat(inputEl.attr('min'));
+				const max = parseFloat(inputEl.attr('max'));
+				
+				if (currentVal < min) {
+					currentVal = min;
+				} else if (currentVal > max) {
+					currentVal = max;
+				}
+				
+				// Update the input field value
+				inputEl.val(currentVal);
+
+				// 6. Trigger Live Composer change event to update preview/hidden settings
+				inputEl.trigger('change');
+			});
+		}
+	});
 });
 
 /* Editor scripts */
@@ -2479,9 +2557,10 @@ function dslc_module_options_numeric( fieldWrapper ) {
 		currentVal    = parseFloat( sliderInput.val() ),
 
 		// Max value. By default max is 100.
-		max = parseFloat( sliderInput.data('max') ),
+		max = parseFloat( sliderInput.attr('max') ?? sliderInput.data('max') ),
+		
 		// Min value. By default min is 0.
-		min = parseFloat( sliderInput.data('min') ),
+		min = parseFloat( sliderInput.attr('min') ?? sliderInput.data('min') ),
 		// Increment value. By default increment is 1.
 		inc = parseFloat( sliderInput.data('increment') ),
 		// Backup values.

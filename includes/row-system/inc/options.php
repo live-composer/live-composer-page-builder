@@ -68,6 +68,22 @@ function dslc_row_register_options() {
 			),
 		),
 	);
+	$dslc_var_row_options['module_section_width_unit'] = array(
+		'id' => 'module_section_width_unit',
+		'std' => '',
+		'label' => __( 'Width Unit', 'live-composer-page-builder' ),
+		'type' => 'select',
+		'choices' => array(
+			array(
+				'label' => 'px',
+				'value' => 'px',
+			),
+			array(
+				'label' => '%',
+				'value' => '%',
+			),
+		),
+	);
 	$dslc_var_row_options['module_section_width'] = array(
 		'id' => 'module_section_width',
 		'std' => '',
@@ -75,7 +91,7 @@ function dslc_row_register_options() {
 		'type' => 'slider',
 		'affect_on_change_rule' => 'width',
 		'ext' => 'px',
-		'min' => 600,
+		'min' => -2000,
 		'max' => 2000,
 	);
 
@@ -103,6 +119,22 @@ function dslc_row_register_options() {
 		'id' => 'bg_group_open',
 		'type' => 'group',
 		'action' => 'open',
+	);
+	$dslc_var_row_options['margin_unit'] = array(
+		'id' => 'margin_unit',
+		'std' => '',
+		'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
+		'type' => 'select',
+		'choices' => array(
+			array(
+				'label' => 'px',
+				'value' => 'px',
+			),
+			array(
+				'label' => '%',
+				'value' => '%',
+			),
+		),
 	);
 	$dslc_var_row_options['margin_top'] = array(
 		'label' => __( 'Top', 'live-composer-page-builder' ),
@@ -161,11 +193,27 @@ function dslc_row_register_options() {
 		'type' => 'group',
 		'action' => 'open',
 	);
+	$dslc_var_row_options['padding_unit'] = array(
+		'id' => 'padding_unit',
+		'std' => '',
+		'label' => __( 'Padding Unit', 'live-composer-page-builder' ),
+		'type' => 'select',
+		'choices' => array(
+			array(
+				'label' => 'px',
+				'value' => 'px',
+			),
+			array(
+				'label' => '%',
+				'value' => '%',
+			),
+		),
+	);
 	$dslc_var_row_options['padding_top'] = array(
 		'label' => __( 'Top', 'live-composer-page-builder' ),
 		'id' => 'css_padding_top',
 		'max' => 600,
-		'std' => $section_padding_ver,
+		'std' => '',
 		'type' => 'slider',
 		'refresh_on_change' => false,
 		'affect_on_change_rule' => 'padding-top',
@@ -182,7 +230,7 @@ function dslc_row_register_options() {
 	);
 	$dslc_var_row_options['padding_bottom'] = array(
 		'label' => __( 'Bottom', 'live-composer-page-builder' ),
-		'id' => $section_padding_ver,
+		'id' => 'css_padding_bottom',
 		'max' => 600,
 		'std' => '0',
 		'type' => 'slider',
