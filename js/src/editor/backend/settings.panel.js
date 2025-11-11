@@ -219,64 +219,69 @@ jQuery(document).ready(function($){
 		const dataId = changedSelector.data('id');
 		const selectedUnit = changedSelector.val();
 
+		// Define the local search context: the nearest options form
+		const $localContext = changedSelector.closest('.dslca-modules-section-edit-form');
 		let targetInputsSelector = '';
 
-		// Determine the selector for the associated numeric inputs
+		// --- Determine Target Inputs ---
 		if (dataId === 'module_section_width_unit') {
-			// Target only the single width input
 			targetInputsSelector = 'input[data-id="module_section_width"]';
 		} else if (dataId === 'padding_unit') {
-			// Target all padding inputs (top, right, bottom, left)
 			targetInputsSelector = 'input[data-id^="css_padding_"]';
 		} else if (dataId === 'margin_unit') {
-			// Target all margin inputs (top, right, bottom, left)
 			targetInputsSelector = 'input[data-id^="css_margin_"]';
 		}
 
-		// Find and update the data-ext attribute on the target inputs
 		if (targetInputsSelector) {
-			// Find all relevant inputs within the entire form/popup context
-			const numericInputs = jQuery(targetInputsSelector);
+			// Find all affected numeric inputs within the active form
+			const numericInputs = $localContext.find(targetInputsSelector);
 
 			numericInputs.each(function() {
 				const inputEl = jQuery(this);
 				
-				// 2. Get original min/max from data attributes (assuming they exist on all inputs)
-				// Store original values if not already done (for switching back from %)
-				if (inputEl.data('original-min') === undefined) {
-					inputEl.data('original-min', parseFloat(inputEl.attr('data-min')) || 0);
-					inputEl.data('original-max', parseFloat(inputEl.attr('data-max')) || 2000);
-				}
-				
-				const originalMin = inputEl.data('original-min');
-				const originalMax = inputEl.data('original-max');
+				// --- 1. Define Ranges ---
+				// Read the original PX range from the existing HTML attributes
+				const defaultPxMin = parseFloat(inputEl.attr('data-min')) || 0;
+				const defaultPxMax = parseFloat(inputEl.attr('data-max')) || 2000;
 
-				// 3. Update data-ext (for persistence/display)
-				inputEl.attr('data-ext', selectedUnit).data('ext', selectedUnit);
+				let newMin, newMax;
 
-				// 4. Adjust min and max based on selected unit
 				if (selectedUnit === '%') {
-					inputEl.attr('min', -100).attr('max', 100);
+					newMin = 0;   // Custom percentage min
+					newMax = 100; // Custom percentage max
 				} else {
-					// Revert to original min/max (which should be in px)
-					inputEl.attr('min', originalMin).attr('max', originalMax);
+					newMin = defaultPxMin;
+					newMax = defaultPxMax;
 				}
 
-				// 5. Clamp the current value if it’s out of range
-				let currentVal = parseFloat(inputEl.val()) || 0;
-				const min = parseFloat(inputEl.attr('min'));
-				const max = parseFloat(inputEl.attr('max'));
+				// --- 2. Update Data and Attributes ---
+				inputEl.attr('data-ext', selectedUnit).data('ext', selectedUnit);
+				inputEl.attr('min', newMin).attr('max', newMax);
+
+				// --- 3. Prevent 0px Bug and Clamp Value ---
+				const rawVal = inputEl.val();
 				
-				if (currentVal < min) {
-					currentVal = min;
-				} else if (currentVal > max) {
-					currentVal = max;
+				if (rawVal === '' || rawVal === null) {
+					// If the input is empty, skip clamping and value setting. 
+					// This ensures the input remains empty and prevents '0px' CSS application.
+					inputEl.trigger('change');
+					return true; // continue to next element in .each()
 				}
 				
-				// Update the input field value
+				// If the input has a value, parse and clamp it
+				let currentVal = parseFloat(rawVal);
+				
+				if (currentVal < newMin) {
+					currentVal = newMin;
+				} else if (currentVal > newMax) {
+					currentVal = newMax;
+				}
+				
+				// Write the clamped/validated value back
 				inputEl.val(currentVal);
 
-				// 6. Trigger Live Composer change event to update preview/hidden settings
+				// --- 4. Trigger Live Update ---
+				// Trigger change event to update the linked hidden option and the live preview CSS.
 				inputEl.trigger('change');
 			});
 		}
