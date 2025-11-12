@@ -158,7 +158,8 @@ function dslc_editing_screen_head() {
 	<style>
 		#wpcontent, #wpbody, #wpbody-content, #page-builder-frame, #page-builder-preview-area {
 		   height: 100%;
-		   top: 42px;
+		   top: 0;
+		   /* top: 42px; */
 		   right: 0;
 		   position: fixed;
 		   width: calc(100% - 240px);

@@ -18,7 +18,7 @@ import { eventsInit } from './events.js';
 
 
 var dslcDebug = false;
-// window.dslcDebug = true;
+window.dslcDebug = true;
 
 // Global Plugin Object
 window.LiveComposer = {
@@ -281,6 +281,8 @@ window.previewAreaTinyMCELoaded = function( windowObj ){
     dragAndDropInit();
     codeGenerationInitJS();
     window.dslc_generate_code();
+    clearInterval(LiveComposer.Builder.Flags.windowScroller);
+    LiveComposer.Builder.Flags.windowScroller = false;
 
     // ------------------------------------------------------------------
     // ** IMPORTANT: Initial state capture after editor is fully loaded **

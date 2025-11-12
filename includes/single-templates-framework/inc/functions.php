@@ -114,10 +114,6 @@ function dslc_st_init() {
 		'label' => __( 'Page Not Found', 'live-composer-page-builder' ),
 		'value' => 'page_not_found',
 	);
-	$template_for[] = array(
-		'label' => __( 'DSLC Post Loop', 'live-composer-page-builder' ),
-		'value' => 'dslc_post_loop',
-	);
 
 	$dslc_var_post_options['dslc-templates-opts'] = array(
 		'title' => 'Template Options',

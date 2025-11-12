@@ -105,7 +105,6 @@ function dslc_templates_col_title( $defaults ) {
 
 	unset( $defaults['date'] );
 	$defaults['dslc_templates_col_cpt'] = 'Post Type';
-	$defaults['dslc_templates_col_shortcode'] = 'Shortcode';
 	$defaults['dslc_templates_col_default'] = '&nbsp;';
 	return $defaults;
 
@@ -147,8 +146,6 @@ function dslc_templates_col_content( $column_name, $post_ID ) {
 				$post_types[$key] = __('Downloads Archive', 'live-composer-page-builder' );
 			} elseif ( 'dslc_galleries_archive' === $value) {
 				$post_types[$key] = __('Galleries Archive', 'live-composer-page-builder' );
-			} elseif ( 'dslc_post_loop' === $value) {
-				$post_types[$key] = __('DSLC Post Loop', 'live-composer-page-builder' );
 			} elseif ( ! is_string( $value ) ) {
 				unset( $post_types[$key] );
 			}
@@ -162,26 +159,6 @@ function dslc_templates_col_content( $column_name, $post_ID ) {
 			echo $cpt_col_val;
 		}
 	}
-	// Display the dynamic shortcode in the new column.
-    if ( $column_name == 'dslc_templates_col_shortcode' ) {	
-        $shortcode = '[dslc_template id="' . $post_ID . '"]'; // Example shortcode for the template.
-        echo '<input type="text" value="' . esc_attr( $shortcode ) . '" readonly onclick="this.select();"> 
-      <a class="button button-small" onclick="copyToClipboard(\'' . esc_js( $shortcode ) . '\')">Copy</a>';
-
-		echo '
-		<script>
-			function copyToClipboard(text) {
-				var dummy = document.createElement("textarea");
-				document.body.appendChild(dummy);
-				dummy.value = text;
-				dummy.select();
-				document.execCommand("copy");
-				document.body.removeChild(dummy);
-				alert("Shortcode copied to clipboard!");
-			}
-		</script>';
-		
-    }
 
 	if ( $column_name == 'dslc_templates_col_default' ) {
 		if ( get_post_meta( $post_ID, 'dslc_template_type', true ) == 'default' )
