@@ -164,15 +164,23 @@ body a:focus {
 }
 .dslca-container select,
 .dslca-modules-section-edit-option select {
-  line-height: 12px;
-  padding: 14px 10px;
-  min-height: 32px;
+  line-height: 2;
+  /* padding: 14px 10px; */
+  min-height: 30px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   cursor: pointer;
   background: url(../../images/dropdown-arrow.png) 90% 55%/7px no-repeat #6c9fed;
   margin-top: 6px;
+}
+.dslca-container select option,
+.dslca-modules-section-edit-option select option,
+.dslca-container select:hover,
+.dslca-modules-section-edit-option select:hover,
+.dslca-container select:focus,
+.dslca-modules-section-edit-option select:focus{
+  color: #fff;
 }
 .dslca-modules-section-edit-option-select .dslca-icon,
 .dslca-module-edit-option-select .dslca-icon {
@@ -2018,7 +2026,7 @@ body.rtl .dslca-modules-area-placeholder {
 }
 .dslca-section-scroller {
   position: relative;
-  height: 93vh;
+  height: calc(100vh - 165px);
   /* margin-right: 80px; */
   /* overflow: hidden; */
   display: flex;
@@ -2046,7 +2054,7 @@ body.rtl .dslca-modules-area-placeholder {
   flex-wrap: wrap;
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 87vh;
+  max-height: calc(100vh - 165px);
 
   /* Smooth scroll effect */
   scroll-behavior: smooth;
@@ -2638,7 +2646,7 @@ span.dslca-manage-action:hover * {
 
 .controls-group-margin .dslca-modules-section-edit-option .dslca-module-edit-field-slider,
 .controls-group-padding .dslca-modules-section-edit-option .dslca-module-edit-field-slider, 
-.dslca-module-edit-field-slider { width:calc(100% - 7px)!important; left:7px !important; }
+.dslca-module-edit-field-slider { width:calc(100% - 15px)!important; left:7px !important; }
 
 
 

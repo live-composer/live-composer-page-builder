@@ -2174,24 +2174,30 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 				z-index: 99999;
 				width: 122px;
 			}
-			.dslca-change-width-modules-area-hook .dslca-change-width-modules-area-options {
+			.dslca-change-width-modules-area-hook .dslca-change-width-modules-area-options,
+			.dslca-change-width-module-hook .dslca-change-width-module-options{
 				width:385px !important;
-			}
-			.dslca-change-width-modules-area-hook .dslca-change-width-modules-area-options span:first-child {
+			} 
+			.dslca-change-width-modules-area-hook .dslca-change-width-modules-area-options span:first-child, 
+			.dslca-change-width-module-hook .dslca-change-width-module-options span:first-child{
 				width: 100%;
 				text-align: left;
 			}
-			.dslca-change-width-modules-area-hook .dslca-change-width-modules-area-options span {
+			.dslca-change-width-modules-area-hook .dslca-change-width-modules-area-options span, 
+			.dslca-change-width-module-hook .dslca-change-width-module-options span {
 				width:115px;
 				max-width:115px;
 				line-height: 12px;
 				background: #ffffff;
 			}
-			.dslca-change-width-modules-area-hook .dslca-change-width-modules-area-options span img {
+			.dslca-change-width-modules-area-hook .dslca-change-width-modules-area-options span img, 
+			.dslca-change-width-module-hook .dslca-change-width-module-options span img {
 				opacity:.4;
 				transition:.2s all ease;
+				transform: scale(1);
 			}
-			.dslca-change-width-modules-area-hook .dslca-change-width-modules-area-options span img:hover {
+			.dslca-change-width-modules-area-hook .dslca-change-width-modules-area-options span img:hover, 
+			.dslca-change-width-module-hook .dslca-change-width-module-options span img:hover {
 				opacity:1;
 			}
 
@@ -2211,10 +2217,11 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 			.dslca-change-width-module-options {
 				top: 24px;
 				left: 0;
+				transform: translateX(-50%);
 				border-top-right-radius: 0;
 				border-top-left-radius: 0;
 				border-top: none;
-				padding-bottom: 18px;
+				padding-bottom: 7px !important;
 			}
 
 			.dslca-change-width-modules-area-options:after,
@@ -4212,8 +4219,11 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 		background: #61666A;
 	}
 
-	#page-builder-preview-area.ui-resizable-resizing .ui-resizable-e {
+	#page-builder-preview-area.ui-resizable-resizing .ui-resizable-e{
 	   width: 100%;
+	}
+	.dslca-module-area-edit-field-numeric-wrap {
+	   width: 100% !important;
 	}
 
 	#page-builder-preview-area .ui-resizable-e {

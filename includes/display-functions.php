@@ -204,61 +204,6 @@ function dslc_display_composer() {
 					<!-- .dslca-section-scroller -->
 
 				</div><!-- .dslca-modules -->
-				<div class="topbar_icon_customs">
-					<?php
-					$post_id = $_GET['page_id'];
-					// Get current page title
-					$page_title = isset($post_id) ? get_the_title($post_id) : '';
-					?>
-					<div class="left page-title">
-						<svg data-wf-icon="PageDefaultIcon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path fill-rule="evenodd" clip-rule="evenodd" d="M3 3C3 2.44772 3.44772 2 4 2H8.70711L13 6.29289V13C13 13.5523 12.5523 14 12 14H4C3.44772 14 3 13.5523 3 13V3ZM8.29289 3H4V13H12V6.70711L8.29289 3Z" fill="currentColor"></path>
-						</svg> <?php echo esc_html($page_title); ?>
-					</div>
-					<div class="center_devise">
-						<ul>
-							<li>
-								<a href="#" class="dslca-device-responsive-tab-hook dslca-active" data-id="desktop_responsive">
-									<svg data-wf-icon="DesktopStarBreakpointIcon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-										<path fill-rule="evenodd" clip-rule="evenodd" d="M12 5.36602L10.1519 6.43301L9.65192 5.56699L11.5 4.5L9.65193 3.43301L10.1519 2.56699L12 3.63397V1.5H13V3.63397L14.8481 2.56699L15.3481 3.43301L13.5 4.5L15.3481 5.56699L14.8481 6.43301L13 5.36602V7.5H12V5.36602ZM3 4H8V5H3V12H13V9H14V12H16V13H0V12H2V5C2 4.44772 2.44772 4 3 4Z" fill="currentColor"></path>
-									</svg>
-								</a>
-							</li>
-							<li>
-								<a href="#" class="dslca-device-responsive-tab-hook" data-id="tablet_responsive">
-									<svg data-wf-icon="TabletPortraitBreakpointIcon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-										<path fill-rule="evenodd" clip-rule="evenodd" d="M4 3H12V13H4V3ZM3 3C3 2.44772 3.44772 2 4 2H12C12.5523 2 13 2.44772 13 3V13C13 13.5523 12.5523 14 12 14H4C3.44772 14 3 13.5523 3 13V3ZM9.5 11H6.5V12H9.5V11Z" fill="currentColor"></path>
-									</svg>
-								</a>
-							</li>
-							<li>
-								<a href="#" class="dslca-device-responsive-tab-hook" data-id="phone_responsive">
-									<svg data-wf-icon="MobileBreakpointIcon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-										<path d="M7 12H9V11H7V12Z" fill="currentColor"></path>
-										<path fill-rule="evenodd" clip-rule="evenodd" d="M4 4C4 2.89543 4.89543 2 6 2H10C11.1046 2 12 2.89543 12 4V12C12 13.1046 11.1046 14 10 14H6C4.89543 14 4 13.1046 4 12V4ZM6 3H10C10.5523 3 11 3.44772 11 4V12C11 12.5523 10.5523 13 10 13H6C5.44772 13 5 12.5523 5 12V4C5 3.44772 5.44772 3 6 3Z" fill="currentColor"></path>
-									</svg>
-								</a>
-							</li>
-						</ul>
-					</div>
-					<?php
-					global $post;
-
-					// Ensure we have a post object
-					if (isset($post_id)) {
-						// Get the live URL of the page/post
-						$lc_link = get_permalink($post_id);
-					}
-					?>
-					<div class="preview_screen">
-						<?php if (! empty($lc_link)) : ?>
-							<a href="<?php echo esc_url($lc_link); ?>" target="_blank">
-								<img class="previewimg" src="<?php echo DS_LIVE_COMPOSER_URL; ?>/images/icons/view.svg" alt="Preview" />
-							</a>
-						<?php endif; ?>
-					</div>
-
-				</div>
 
 				<!-- Module Edit -->
 				<!-- .dslca-module-edit -->
