@@ -122,6 +122,49 @@ class LC_Control {
 		$ext = ' ';
 		if ( isset( $module_control['ext'] ) ) {
 			$ext = $module_control['ext'];
+			
+			/**
+			 * START GENERALIZED DYNAMIC UNIT LOGIC
+			 * Applies to all controls containing _padding, _margin, _width, or _height.
+			 * Assumes Unit Selector IDs are prefixed with 'css_' (e.g., css_padding_unit).
+			 */
+
+			$control_id = $module_control['id'];
+			$unit_value = '';
+			
+			// Define all directional/dimensional suffixes that must be stripped.
+			$directional_suffixes = ['_top', '_right', '_bottom', '_left', '_width', '_height'];
+			
+			// Define the core CSS properties that indicate a dynamic unit is required.
+			$dynamic_unit_types = ['_padding', '_margin', '_width']; 
+			
+			$is_dynamic_unit_control = false;
+			foreach ($dynamic_unit_types as $type) {
+				if (str_contains($control_id, $type)) {
+					$is_dynamic_unit_control = true;
+					break;
+				}
+			}
+
+			if ($is_dynamic_unit_control) {
+
+				// Step 1: Normalize the ID by removing directional/dimensional suffixes.
+				// Example: 'css_header_margin_bottom' -> 'css_header_margin'
+				$normalized_id = str_replace($directional_suffixes, '', $control_id);
+
+				// Step 2: Predict the full Unit Selector ID by appending '_unit'.
+				// Example: 'css_header_margin' -> 'css_header_margin_unit'
+				$resolved_unit_id = $normalized_id . '_unit';				
+
+				// Step 3: Retrieve the unit value from the request using the predicted ID.
+				if ( ! empty( $resolved_unit_id ) ) {
+					$unit_value = $this->get_any_control_value( $resolved_unit_id );
+				}
+				// Step 4: Assign the found value to $ext if it's not empty.
+				if ( ! empty( $unit_value ) ) {
+					$ext = $unit_value;
+				}
+			}
 		}
 
 		$affect_on_change_append = '';
@@ -292,8 +335,10 @@ class LC_Control {
 							data-max="<?php echo esc_attr( $slider_max ); ?>"
 							data-increment="<?php echo esc_attr( $slider_increment ); ?>"
 							data-onlypositive="<?php echo esc_attr( $onlypositive ); ?>"
-							data-ext="<?php echo esc_attr( $ext ); ?>" <?php echo $affect_on_change_append; ?> />
-						<span class="dslca-module-edit-field-numeric-ext"><?php echo $module_control['ext']; ?></span>
+							data-ext="<?php echo esc_attr( $ext ); ?>" <?php echo $affect_on_change_append; ?> 
+							min="<?php echo ( $ext == '%' ? '0' : esc_attr( $slider_min ) ); ?>" 
+							max="<?php echo ( $ext == '%' ? '100' : esc_attr( $slider_max ) ); ?>" />
+						<span class="dslca-module-edit-field-numeric-ext"><?php echo esc_attr( $ext ); ?></span>
 
 					</div>
 
@@ -487,6 +532,19 @@ class LC_Control {
 		} else {
 			return false;
 		}
+	}
+	/**
+	 * Helper function to retrieve a value for any control ID from the request.
+	 *
+	 * @param  string $control_id The ID of the control (e.g., 'padding_unit').
+	 * @return string The value of the control, or an empty string if not found.
+	 */
+	private function get_any_control_value( $control_id ) {
+		if ( isset( $_POST[ $control_id ] ) ) {
+			// Sanitize before returning
+			return esc_attr( $_POST[ $control_id ] );
+		}
+		return '';
 	}
 
 	private function get_starting_value() {

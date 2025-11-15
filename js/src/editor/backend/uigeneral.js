@@ -908,6 +908,7 @@ function dslca_update_report_log() {
 		if ( error_report.includes('lc-extensions') || error_report.includes('page-builder') ) {
 			errors_container.value = error_report;
 			localStorage.removeItem('js_errors_report');
+			document.querySelector( '.dslca-show-js-error-container' ).show();
 			document.querySelector( '.dslca-show-js-error-hook' ).setAttribute('style','visibility:visible');
 		}
 	}

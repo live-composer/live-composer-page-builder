@@ -496,12 +496,20 @@ body a:focus {
   cursor: pointer;
   font-size: 16px;
   font-weight: 700;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: auto;
 }
 .dslca-section-title-filter .dslca-icon {
   color: rgb(255 255 255 / 80%);
   margin-left: 10px;
   vertical-align: top;
-  margin-left: 121px;
+  /* margin-left: 121px; */
+}
+.search_module {
+  margin: 0 auto;
+  width: 98%;
 }
 .dslca-section-title-filter-options {
   background: #0050a5;
@@ -588,8 +596,8 @@ body a:focus {
   /* margin-right: 14px; */
 }
 .dslca-module[data-id="DSLC_M_A"] {
-  margin-left: 5px;
-  margin-right: 6px;
+  margin-left: 2px;
+  margin-right: 2px;
   background: #b2b7bc;
   box-shadow: none;
   width: 100%;
@@ -822,7 +830,13 @@ div.dslca-sections-dragging:hover {
   display: table-cell;
   padding-right: 5px;
   position: relative;
-  width: 77%;
+  width: 80.2%;
+}
+.dslca-module-edit-field-font-wrapper input{
+  margin: 0px !important;
+}
+.controls-group-inner .dslca-module-edit-option-font{
+  margin-bottom: 5px;
 }
 .dslca-module-edit-field-font,
 .dslca-module-edit-field-icon {
@@ -917,12 +931,20 @@ div.dslca-sections-dragging:hover {
   background: #3b6fbe;
   border-radius: 4px;
   border: 1px solid #3565ad;
-  padding: 2px 10px;
+  padding: 10px;
   font-size: 0;
   display: flex;
   flex-wrap: wrap;
+  /* align-items: center; */
+  column-gap: 10px;
   width: 100%;
   flex-direction: row;
+}
+.dslca-module-edit-option-box-shadow-wrapper input:not([type="checkbox"]),
+.dslca-module-edit-option-box-shadow-wrapper input:not([type="radio"]),
+.dslca-module-edit-option-text-shadow-wrapper input:not([type="checkbox"]),
+.dslca-module-edit-option-text-shadow-wrapper input:not([type="radio"]){
+  min-width: 60px !important;
 }
 .dslca-module-edit-option-box-shadow-single,
 .dslca-module-edit-option-text-shadow-single {
@@ -931,12 +953,15 @@ div.dslca-sections-dragging:hover {
   line-height: 1;
   vertical-align: middle;
   white-space: nowrap;
-  padding-left: 6px;
+  padding-right: 6px;
   position: relative;
 }
-.dslca-module-edit-option-box-shadow-single:first-child,
-.dslca-module-edit-option-text-shadow-single:first-child {
-  padding-left: 0;
+.dslca-module-edit-option-box-shadow-single{
+  padding-left: 0px;
+}
+.dslca-module-edit-option-box-shadow-single:last-child,
+.dslca-module-edit-option-text-shadow-single:last-child {
+  padding-right: 0;
 }
 .dslca-module-edit-option-box-shadow-single span,
 .dslca-module-edit-option-text-shadow-single span {
@@ -1144,7 +1169,8 @@ div.dslca-sections-dragging:hover {
 }
 .dslca-templates .dslca-go-to-section-hook:hover,
 .dslca-templates .dslca-open-modal-hook:hover,
-.dslca-template:hover {
+.dslca-template:hover,
+.dslcs-main-tabs a:hover {
   background: #007bff4f;
   color: #fff;
 }
@@ -1615,7 +1641,8 @@ body.key-press-cmd .dslca-cmd.dslca-manage-action {
   border-radius: 0 3px 0 0;
 }
 .dslca-modules-section-manage {
-  bottom: 0;
+  bottom: auto;
+  top: -30px;
   left: 0;
   right: 0;
   height: 30px;
@@ -2222,7 +2249,7 @@ body.rtl .dslca-modules-area-placeholder {
 .dslca-prompt-modal-title {
   color: #424242;
   display: block;
-  font-family: "Lato";
+  /* font-family: "Lato"; */
   font-size: 16px;
   font-weight: bold;
   line-height: 1;
@@ -2231,7 +2258,7 @@ body.rtl .dslca-modules-area-placeholder {
 .dslca-prompt-modal-descr {
   color: #8a8a8a;
   display: block;
-  font-family: "Lato";
+  /* font-family: "Lato"; */
   font-size: 13px;
   font-weight: normal;
   line-height: 22px;
@@ -3770,7 +3797,7 @@ body em {
 #lc_popup2 {
   position: fixed;
   right: 30px;
-  width: 440px;
+  width: 460px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   border-radius: 8px;
@@ -3925,7 +3952,9 @@ body em {
 .lc_popupContent
   .dslca-module-edit-form
   .dslca-module-edit-options
-  .dslca-module-edit-options-tabs {
+  .dslca-module-edit-options-tabs,
+  .dslca-module-edit-option-post_elements
+  .dslca-module-edit-option-checkbox-wrapper {
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -3940,7 +3969,10 @@ body em {
   scrollbar-color: #8d93a5 transparent;
   padding-bottom: 8px;
 }
-
+.dslca-module-edit-option-post_elements .dslca-module-edit-option-checkbox-wrapper{
+  scrollbar-color: #ffffff transparent;
+  background: #3b6fbe !important;
+}
 .dslca-modules-section-edit-form {
   width: 100%;
   padding: 12px;
@@ -4136,9 +4168,10 @@ body em {
   width: 100%;
 }
 .controls-group-inner .dslca-module-edit-option-font .dslca-options-iconbutton {
-  width: 45px !important;
+  width: 40px !important;
   height: 20px !important;
   padding: 0px !important;
+  line-height: 38px;
 }
 .dslca-module-edit-option-box-shadow-single:first-child {
   /* padding-left: 0; */
@@ -4149,7 +4182,52 @@ body em {
 
 .dslca-module-edit-options .wp-picker-container {
 }
-
+.wp-picker-container .wp-color-result.button .wp-color-result-text{
+  width: auto;
+  margin-right: 0px;
+}
+.wp-picker-container .wp-color-result.button .color-alpha,
+.wp-picker-container .wp-color-result.button .wp-color-result-text{
+  height: 30px !important;
+}
+.wp-picker-container .iris-picker{
+  margin-bottom: 35px;
+}
+.wp-picker-container, .wp-color-result.button{
+  width: 191.5px;
+}
+.dslca-module-edit-option-box-shadow-wrapper .wp-picker-container,
+.dslca-module-edit-option-box-shadow-wrapper .wp-color-result.button{
+  /* width: auto !; */
+}
+.wp-picker-container .wp-picker-input-wrap{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.dslca-colorpicker-apply {
+	background: #f1f1f1;
+	border-radius: 0 0 3px 3px;
+	color: #444;
+	cursor: pointer;
+	font-size: 13px;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	font-weight: 600;
+	line-height: 1;
+	padding: 10px 0;
+	text-decoration: none;
+	z-index: 1;
+	position: absolute;
+	bottom: -36px;
+	left: -1px;
+	width: 100%;
+	display: block;
+	border: 1px solid #FFFFFF;
+}
+.dslca-modules-section-edit-option-select:has(select[data-id="margin_unit"]),
+.dslca-modules-section-edit-option-select:has(select[data-id="padding_unit"]){
+  width: 100% !important;
+}
 .dslc-res-tablet #page-builder-frame,
 .dslc-res-phone #page-builder-frame {
   width: 100% !important;

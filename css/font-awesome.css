@@ -435,7 +435,7 @@ a .dslc-icon-flip-vertical:before {
   height: 8px;
   width: 8px;
   left: 1px;
-  top: 1.15px;
+  top: 1px;
   background-color: #fff;
   transition: .4s ease;
   border-radius: 50%;

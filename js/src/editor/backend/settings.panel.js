@@ -208,84 +208,74 @@ jQuery(document).ready(function($){
 	 */
 
 	// Target the specific unit selector fields
-	const unitSelectors = jQuery(
-		'.dslca-modules-section-edit-field-select[data-id="module_section_width_unit"], ' + 
-		'.dslca-modules-section-edit-field-select[data-id="padding_unit"], ' +
-		'.dslca-modules-section-edit-field-select[data-id="margin_unit"]'
-	);
+	const unitSelectors = jQuery('select.dslca-modules-section-edit-field-select[data-id$="_unit"]');
 
-	unitSelectors.on('change', function() {
-		const changedSelector = jQuery(this);
-		const dataId = changedSelector.data('id');
-		const selectedUnit = changedSelector.val();
+    unitSelectors.on('change', function() {
+        const changedSelector = jQuery(this);
+        const dataId = changedSelector.data('id');
+        const selectedUnit = changedSelector.val();
+        
+        // Step 1: Determine the target prefix for affected dimensional sliders.
+        // This turns "css_header_padding_unit" into "css_header_padding".
+        const targetInputsPrefix = dataId.replace('_unit', '');
 
-		// Define the local search context: the nearest options form
-		const $localContext = changedSelector.closest('.dslca-modules-section-edit-form');
-		let targetInputsSelector = '';
+        // Define the search scope: the nearest options form container.
+        const $localContext = changedSelector.closest('.dslca-modules-section-edit-form'); 
+        
+        if (targetInputsPrefix && $localContext.length) {
+            
+            // Step 2: Find all affected numeric inputs within the context 
+            // that use the specific numeric class AND start with the calculated prefix.
+            const targetSelector = `input.dslca-modules-section-edit-field-slider-numeric[data-id^="${targetInputsPrefix}"]`;
+            const numericInputs = $localContext.find(targetSelector);
 
-		// --- Determine Target Inputs ---
-		if (dataId === 'module_section_width_unit') {
-			targetInputsSelector = 'input[data-id="module_section_width"]';
-		} else if (dataId === 'padding_unit') {
-			targetInputsSelector = 'input[data-id^="css_padding_"]';
-		} else if (dataId === 'margin_unit') {
-			targetInputsSelector = 'input[data-id^="css_margin_"]';
-		}
+            numericInputs.each(function() {
+                const inputEl = jQuery(this);
+                const defaultPxMin = parseFloat(inputEl.attr('data-min')) || 0;
+                const defaultPxMax = parseFloat(inputEl.attr('data-max')) || 2000;
 
-		if (targetInputsSelector) {
-			// Find all affected numeric inputs within the active form
-			const numericInputs = $localContext.find(targetInputsSelector);
+                let newMin, newMax;
 
-			numericInputs.each(function() {
-				const inputEl = jQuery(this);
-				
-				// --- 1. Define Ranges ---
-				// Read the original PX range from the existing HTML attributes
-				const defaultPxMin = parseFloat(inputEl.attr('data-min')) || 0;
-				const defaultPxMax = parseFloat(inputEl.attr('data-max')) || 2000;
+                if (selectedUnit === '%') {
+                    newMin = 0;  
+                    newMax = 100; 
+                } else {
+                    newMin = defaultPxMin;
+                    newMax = defaultPxMax;
+                }
 
-				let newMin, newMax;
+                // 2. Update Data Attributes and UI Label
+                inputEl.attr('data-ext', selectedUnit).data('ext', selectedUnit);
+                inputEl.attr('min', newMin).attr('max', newMax);
+                
+                inputEl.closest('.dslca-module-area-edit-field-numeric-wrap')
+                       .find('.dslca-module-area-edit-field-numeric-ext, .dslca-modules-section-edit-field-numeric-ext')
+                       .text(selectedUnit);
 
-				if (selectedUnit === '%') {
-					newMin = 0;   // Custom percentage min
-					newMax = 100; // Custom percentage max
-				} else {
-					newMin = defaultPxMin;
-					newMax = defaultPxMax;
-				}
 
-				// --- 2. Update Data and Attributes ---
-				inputEl.attr('data-ext', selectedUnit).data('ext', selectedUnit);
-				inputEl.attr('min', newMin).attr('max', newMax);
-
-				// --- 3. Prevent 0px Bug and Clamp Value ---
-				const rawVal = inputEl.val();
-				
-				if (rawVal === '' || rawVal === null) {
-					// If the input is empty, skip clamping and value setting. 
-					// This ensures the input remains empty and prevents '0px' CSS application.
-					inputEl.trigger('change');
-					return true; // continue to next element in .each()
-				}
-				
-				// If the input has a value, parse and clamp it
-				let currentVal = parseFloat(rawVal);
-				
-				if (currentVal < newMin) {
-					currentVal = newMin;
-				} else if (currentVal > newMax) {
-					currentVal = newMax;
-				}
-				
-				// Write the clamped/validated value back
-				inputEl.val(currentVal);
-
-				// --- 4. Trigger Live Update ---
-				// Trigger change event to update the linked hidden option and the live preview CSS.
-				inputEl.trigger('change');
-			});
-		}
-	});
+                const rawVal = inputEl.val();
+                
+                if (rawVal === '' || rawVal === null) {
+                    inputEl.trigger('change');
+                    return true;
+                }
+                
+                let currentVal = parseFloat(rawVal);
+                
+                if (currentVal < newMin) {
+                    currentVal = newMin;
+                } else if (currentVal > newMax) {
+                    currentVal = newMax;
+                }
+                
+                inputEl.val(currentVal).trigger('change');
+                
+                if (inputEl.hasClass('slider-initiated')) {
+                     inputEl.trigger('slider_update'); 
+                }
+            });
+        }
+    });
 });
 
 /* Editor scripts */
@@ -533,6 +523,81 @@ const onModuleOptionsChange = () => {
 
 		// Add changed class
 		dslcModule.addClass('dslca-module-change-made');
+
+		// Check if the changed option is a UNIT SELECTOR by checking for the '_unit' suffix.
+		if (dslcOptionID.includes('_unit')) { 
+			
+			// Step 1: Determine the target prefix (e.g., 'css_header_padding').
+			const targetInputsPrefix = dslcOptionID.replace('_unit', '');
+			const selectedUnit = dslcOption.val();
+			
+			// --- NEW SCOPE LOGIC ---
+			
+			// A. Find the specific 'data-tab' ID of the option being changed.
+			// We look up to the nearest parent that contains the 'data-tab' attribute.
+			const tabId = dslcOption.closest('[data-tab]').attr('data-tab');
+			
+			// B. The search scope is the entire form/container.
+			const $formContainer = dslcOption.closest('form'); 
+
+			if (targetInputsPrefix && $formContainer.length && tabId) {
+				
+				// C. Construct a highly specific selector:
+				// 1. Target the option wrapper for the current tab: .dslca-module-edit-option[data-tab="header_styling"]
+				// 2. Filter inputs by the calculated prefix: input[data-id^="css_header_padding"]
+				const selector = `.dslca-module-edit-option[data-tab="${tabId}"] input.dslca-module-edit-field-numeric[data-id^="${targetInputsPrefix}"]`;
+				
+				const numericInputs = $formContainer.find(selector);
+
+				numericInputs.each(function() {
+					const inputEl = jQuery(this);
+					const rawVal = inputEl.val();
+
+					// 2. Define Ranges and Current Value
+					const defaultPxMin = parseFloat(inputEl.attr('data-min')) || 0;
+					const defaultPxMax = parseFloat(inputEl.attr('data-max')) || 2000;
+
+					let newMin, newMax;
+
+					// If switching to %, clamp the slider range to 0-100.
+					if (selectedUnit === '%') {
+						newMin = 0;  
+						newMax = 100; 
+					} else {
+						// Otherwise (px, em, rem), use the slider's defined range.
+						newMin = defaultPxMin;
+						newMax = defaultPxMax;
+					}
+
+					// 3. Update Data and Attributes (UI and Data Model)
+					inputEl.attr('data-ext', selectedUnit).data('ext', selectedUnit);
+					inputEl.attr('min', newMin).attr('max', newMax);
+					inputEl.siblings('.dslca-module-edit-field-numeric-ext').text(selectedUnit);
+
+					// 4. Clamp and Update Value (Only if a value exists)
+					if (rawVal === '' || rawVal === null) {
+						inputEl.trigger('change');
+						return true; // continue
+					}
+					
+					let currentVal = parseFloat(rawVal);
+					
+					// Clamp the value to the new range
+					if (currentVal < newMin) {
+						currentVal = newMin;
+					} else if (currentVal > newMax) {
+						currentVal = newMax;
+					}
+					
+					// 5. Trigger Live Update
+					inputEl.val(currentVal).trigger('change');
+					
+					if (inputEl.hasClass('slider-initiated')) {
+						inputEl.trigger('slider_update'); 
+					}
+				});
+			}
+		}
 
 		// Hide/Show tabs in the module options panel.
 		// Required to show/hide particular options tabs based on the current selection.
@@ -990,11 +1055,13 @@ const onSectionOptionsChange = () => {
 		} else if ( dslcFieldID == 'type' ) {
 			if ( dslcVal == 'full' ) {
 				dslcEl.addClass('dslc-full');
-				dslcField.parent().siblings('div[data-id="module_section_width"]').hide();
+				dslcField.parent().siblings('div[data-id="css_module_section_width_unit"]').hide();
+				dslcField.parent().siblings('div[data-id="css_module_section_width"]').hide();
 				dslcEl.css('width', '100%');
 			} else {
 				dslcEl.removeClass('dslc-full');
-				dslcField.parent().siblings('div[data-id="module_section_width"]').show();
+				dslcField.parent().siblings('div[data-id="css_module_section_width_unit"]').show();
+				dslcField.parent().siblings('div[data-id="css_module_section_width"]').show();
 			}
 			LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();
 		} else if ( dslcFieldID == 'columns_spacing' ) {

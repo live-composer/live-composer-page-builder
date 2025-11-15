@@ -59,10 +59,10 @@ export const eventsInit = () =>{
 			document.dispatchEvent( moduleDelete );
 		}
 
-		if ( event.target.matches( '.dslca-change-width-module-options [data-size]' ) ) {
-			// Create a new "Change Module Width" event
-			const moduleChangeWidth = new CustomEvent('moduleChangeWidth', { detail: event.target });
-			document.dispatchEvent( moduleChangeWidth );
+		const sizeEl = event.target.closest('.dslca-change-width-module-options [data-size]');
+		if ( sizeEl ) {
+			const moduleChangeWidth = new CustomEvent('moduleChangeWidth', { detail: sizeEl });
+			document.dispatchEvent(moduleChangeWidth);
 		}
 
 		if ( event.target.matches( '[data-event="wysiwyg-edit"]' ) ) {

@@ -606,6 +606,13 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 				$ext = ' ';
 				if ( isset( $option_arr['ext'] ) ) {
 					$ext = $option_arr['ext'];
+					
+					// If the control is a dimensional slider (margin, padding, width), 
+					// resolve the unit dynamically from the saved settings using the helper.
+					$ext = lc_get_dynamic_unit( $option_id, $module_settings, $ext );
+					
+					// --- END DYNAMIC UNIT RESOLUTION ---
+
 				}
 
 				// Prepend.
@@ -896,4 +903,44 @@ function dslc_helper_is_border_radius( $property_name ) {
 	} else {
 		return false;
 	}
+}
+/**
+ * Resolves the unit (px, %, em) for a dimensional CSS property
+ * by looking up the value of its associated unit selector control.
+ *
+ * This logic predicts the unit selector ID (e.g., 'css_padding_unit') 
+ * from the dimensional slider ID (e.g., 'css_padding_top').
+ *
+ * @param string $dimensional_control_id The ID of the dimensional control (e.g., 'css_padding_top').
+ * @param array $module_settings All saved settings for the current module.
+ * @param string $default_unit The static default unit to use as a fallback (usually 'px').
+ * @return string The resolved unit.
+ */
+function lc_get_dynamic_unit( $dimensional_control_id, $module_settings, $default_unit ) {
+
+    // Define the dimensional suffixes that need to be stripped.
+    $dimensional_suffixes = ['_top', '_right', '_bottom', '_left', '_width', '_height'];
+    
+    // Check if the ID contains a dimensional property we manage.
+    if ( ! str_contains( $dimensional_control_id, '_padding' ) && 
+         ! str_contains( $dimensional_control_id, '_margin' ) && 
+         ! str_contains( $dimensional_control_id, '_height' ) && 
+         ! str_contains( $dimensional_control_id, '_width' ) ) {
+        
+        return $default_unit;
+    }
+
+    // 1. Normalize the ID (strip direction)
+    // E.g., 'css_header_margin_bottom' becomes 'css_header_margin'
+    $normalized_id = str_replace( $dimensional_suffixes, '', $dimensional_control_id );
+
+    // 2. Predict the Unit Selector ID by appending '_unit'
+    // E.g., 'css_header_margin' becomes 'css_header_margin_unit'
+    $unit_selector_id = $normalized_id . '_unit';
+
+    // 3. Look up the value in the saved settings
+    if ( isset( $module_settings[ $unit_selector_id ] ) && ! empty( $module_settings[ $unit_selector_id ] ) ) {
+        return $module_settings[ $unit_selector_id ];
+    }
+    return $default_unit;
 }

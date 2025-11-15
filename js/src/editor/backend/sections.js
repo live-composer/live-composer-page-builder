@@ -360,11 +360,13 @@ function dslc_row_edit( row ) {
 				  'wrapper' === jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="type"]', LiveComposer.Builder.PreviewAreaDocument).val() ||
 				  'wrapped' === jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="type"]', LiveComposer.Builder.PreviewAreaDocument).val() ) {
 				jQuery('select[data-id="type"]').val('wrapper').change();
-				jQuery(this).parent().siblings('div[data-id="module_section_width"]').show();
-				jQuery(this).parent().siblings('div[data-id="module_section_width"]').children('input[data-id="module_section_width"]').val(jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="module_section_width"]', LiveComposer.Builder.PreviewAreaDocument).data('def')).trigger('change');
+				jQuery(this).parent().siblings('div[data-id="css_module_section_width_unit"]').show();
+				jQuery(this).parent().siblings('div[data-id="css_module_section_width"]').show();
+				jQuery(this).parent().siblings('div[data-id="css_module_section_width"]').children('input[data-id="css_module_section_width"]').val(jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="css_module_section_width"]', LiveComposer.Builder.PreviewAreaDocument).data('def')).trigger('change');
 			}
 			else{
-				jQuery(this).parent().siblings('div[data-id="module_section_width"]').hide();
+				jQuery(this).parent().siblings('div[data-id="css_module_section_width_unit"]').hide();
+				jQuery(this).parent().siblings('div[data-id="css_module_section_width"]').hide();
 			}
 		}
 

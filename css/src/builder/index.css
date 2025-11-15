@@ -935,6 +935,18 @@ body a:focus {
 					border-radius: 3px;
 					border: 1px solid #3565ad;
 					padding: 0 10px;
+					display: flex;
+					flex-direction: row;
+					width: 100%;
+					margin-bottom: 15px;
+					justify-content: flex-start;
+					flex-wrap: nowrap;
+					overflow-x: auto;
+					align-items: stretch;
+					scroll-behavior: smooth;
+					padding-right: 1px;
+					scrollbar-color: #ffffff #ffffff00;
+					padding-bottom: 8px;
 				}
 
 					.dslca-module-edit-option-checkbox-single {
@@ -2220,7 +2232,7 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 				transform: translateX(-50%);
 				border-top-right-radius: 0;
 				border-top-left-radius: 0;
-				border-top: none;
+				/* border-top: none; */
 				padding-bottom: 7px !important;
 			}
 
@@ -2655,7 +2667,7 @@ body.rtl .dslca-modules-area-placeholder {
 			.dslca-prompt-modal-title {
 				color: #424242;
 				display: block;
-				font-family: "Lato";
+				/* font-family: "Lato"; */
 				font-size: 16px;
 				font-weight: bold;
 				line-height: 1;
@@ -2665,7 +2677,7 @@ body.rtl .dslca-modules-area-placeholder {
 			.dslca-prompt-modal-descr {
 				color: #8a8a8a;
 				display: block;
-				font-family: "Lato";
+				/* font-family: "Lato"; */
 				font-size: 13px;
 				font-weight: normal;
 				line-height: 22px;
@@ -4754,6 +4766,7 @@ body em {
 	width: 100%;
 	flex-direction: column;	
 	flex-wrap: wrap;
+	padding-bottom: 15px;
 }
 
 .lc_popupContent .dslca-module-edit-form {
@@ -4771,5 +4784,5 @@ body em {
     width: 100%;
     max-height: 50vh;
     overflow-y: scroll;
-    margin-bottom: 15px;
+    margin-bottom: 0px;
 }

@@ -68,8 +68,8 @@ function dslc_row_register_options() {
 			),
 		),
 	);
-	$dslc_var_row_options['module_section_width_unit'] = array(
-		'id' => 'module_section_width_unit',
+	$dslc_var_row_options['css_module_section_width_unit'] = array(
+		'id' => 'css_module_section_width_unit',
 		'std' => '',
 		'label' => __( 'Width Unit', 'live-composer-page-builder' ),
 		'type' => 'select',
@@ -84,8 +84,8 @@ function dslc_row_register_options() {
 			),
 		),
 	);
-	$dslc_var_row_options['module_section_width'] = array(
-		'id' => 'module_section_width',
+	$dslc_var_row_options['css_module_section_width'] = array(
+		'id' => 'css_module_section_width',
 		'std' => '',
 		'label' => __( 'Width', 'live-composer-page-builder' ),
 		'type' => 'slider',
@@ -120,8 +120,8 @@ function dslc_row_register_options() {
 		'type' => 'group',
 		'action' => 'open',
 	);
-	$dslc_var_row_options['margin_unit'] = array(
-		'id' => 'margin_unit',
+	$dslc_var_row_options['css_margin_unit'] = array(
+		'id' => 'css_margin_unit',
 		'std' => '',
 		'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
 		'type' => 'select',
@@ -136,7 +136,7 @@ function dslc_row_register_options() {
 			),
 		),
 	);
-	$dslc_var_row_options['margin_top'] = array(
+	$dslc_var_row_options['css_margin_top'] = array(
 		'label' => __( 'Top', 'live-composer-page-builder' ),
 		'id' => 'css_margin_top',
 		'std' => '0',
@@ -147,18 +147,7 @@ function dslc_row_register_options() {
 		'min' => -250,
 		'max' => 250,
 	);
-	$dslc_var_row_options['margin_right'] = array(
-		'label' => __( 'Right', 'live-composer-page-builder' ),
-		'id' => 'css_margin_right',
-		'std' => '0',
-		'type' => 'slider',
-		'refresh_on_change' => false,
-		'affect_on_change_rule' => 'margin-right',
-		'ext' => 'px',
-		'min' => -250,
-		'max' => 250,
-	);
-	$dslc_var_row_options['margin_bottom'] = array(
+	$dslc_var_row_options['css_margin_bottom'] = array(
 		'label' => __( 'Bottom', 'live-composer-page-builder' ),
 		'id' => 'css_margin_bottom',
 		'std' => '0',
@@ -169,13 +158,24 @@ function dslc_row_register_options() {
 		'min' => -250,
 		'max' => 250,
 	);
-	$dslc_var_row_options['margin_left'] = array(
+	$dslc_var_row_options['css_margin_left'] = array(
 		'label' => __( 'Left', 'live-composer-page-builder' ),
 		'id' => 'css_margin_left',
 		'std' => '0',
 		'type' => 'slider',
 		'refresh_on_change' => false,
 		'affect_on_change_rule' => 'margin-left',
+		'ext' => 'px',
+		'min' => -250,
+		'max' => 250,
+	);
+	$dslc_var_row_options['css_margin_right'] = array(
+		'label' => __( 'Right', 'live-composer-page-builder' ),
+		'id' => 'css_margin_right',
+		'std' => '0',
+		'type' => 'slider',
+		'refresh_on_change' => false,
+		'affect_on_change_rule' => 'margin-right',
 		'ext' => 'px',
 		'min' => -250,
 		'max' => 250,
@@ -193,8 +193,8 @@ function dslc_row_register_options() {
 		'type' => 'group',
 		'action' => 'open',
 	);
-	$dslc_var_row_options['padding_unit'] = array(
-		'id' => 'padding_unit',
+	$dslc_var_row_options['css_padding_unit'] = array(
+		'id' => 'css_padding_unit',
 		'std' => '',
 		'label' => __( 'Padding Unit', 'live-composer-page-builder' ),
 		'type' => 'select',
@@ -209,7 +209,7 @@ function dslc_row_register_options() {
 			),
 		),
 	);
-	$dslc_var_row_options['padding_top'] = array(
+	$dslc_var_row_options['css_padding_top'] = array(
 		'label' => __( 'Top', 'live-composer-page-builder' ),
 		'id' => 'css_padding_top',
 		'max' => 600,
@@ -219,16 +219,7 @@ function dslc_row_register_options() {
 		'affect_on_change_rule' => 'padding-top',
 		'ext' => 'px',
 	);
-	$dslc_var_row_options['padding_right'] = array(
-		'label' => __( 'Right', 'live-composer-page-builder' ),
-		'id' => 'css_padding_right',
-		'std' => '0',
-		'type' => 'slider',
-		'refresh_on_change' => false,
-		'affect_on_change_rule' => 'padding-right',
-		'ext' => 'px',
-	);
-	$dslc_var_row_options['padding_bottom'] = array(
+	$dslc_var_row_options['css_padding_bottom'] = array(
 		'label' => __( 'Bottom', 'live-composer-page-builder' ),
 		'id' => 'css_padding_bottom',
 		'max' => 600,
@@ -238,13 +229,22 @@ function dslc_row_register_options() {
 		'affect_on_change_rule' => 'padding-bottom',
 		'ext' => 'px',
 	);
-	$dslc_var_row_options['padding_left'] = array(
+	$dslc_var_row_options['css_padding_left'] = array(
 		'label' => __( 'Left', 'live-composer-page-builder' ),
 		'id' => 'css_padding_left',
 		'std' => '0',
 		'type' => 'slider',
 		'refresh_on_change' => false,
 		'affect_on_change_rule' => 'padding-left',
+		'ext' => 'px',
+	);
+	$dslc_var_row_options['css_padding_right'] = array(
+		'label' => __( 'Right', 'live-composer-page-builder' ),
+		'id' => 'css_padding_right',
+		'std' => '0',
+		'type' => 'slider',
+		'refresh_on_change' => false,
+		'affect_on_change_rule' => 'padding-right',
 		'ext' => 'px',
 	);
 
