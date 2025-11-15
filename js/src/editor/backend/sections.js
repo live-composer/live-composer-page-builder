@@ -369,6 +369,54 @@ function dslc_row_edit( row ) {
 				jQuery(this).parent().siblings('div[data-id="css_module_section_width"]').hide();
 			}
 		}
+		if (jQuery(this).data('id') == 'css_module_section_width_unit') {
+			let width_unit = jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="css_module_section_width_unit"]', LiveComposer.Builder.PreviewAreaDocument).val();
+			let targetEle = jQuery('.dslca-modules-section-edit-option[data-id="css_module_section_width"] input[data-id="css_module_section_width"]');
+			
+			let html_min = '';
+			let html_max = '';
+			
+			if (width_unit == '%') {
+				html_min = 0;
+				html_max = 100;
+			} else {
+				html_min = targetEle.data('min');
+				html_max = targetEle.data('max');
+			}
+			targetEle.attr('data-ext', width_unit).attr('min', html_min).attr('max', html_max);			
+		}
+		if (jQuery(this).data('id') == 'css_margin_unit') {
+			let width_unit = jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="css_margin_unit"]', LiveComposer.Builder.PreviewAreaDocument).val();
+			let targetEle = jQuery('.dslca-modules-section-edit-option[data-id^="css_margin_"] input[data-id^="css_margin_"]');
+			
+			let html_min = '';
+			let html_max = '';
+			
+			if (width_unit == '%') {
+				html_min = 0;
+				html_max = 100;
+			} else {
+				html_min = targetEle.data('min');
+				html_max = targetEle.data('max');
+			}
+			targetEle.attr('data-ext', width_unit).attr('min', html_min).attr('max', html_max);			
+		}
+		if (jQuery(this).data('id') == 'css_padding_unit') {
+			let width_unit = jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="css_padding_unit"]', LiveComposer.Builder.PreviewAreaDocument).val();
+			let targetEle = jQuery('.dslca-modules-section-edit-option[data-id^="css_padding_"] input[data-id^="css_padding_"]');
+			
+			let html_min = '';
+			let html_max = '';
+			
+			if (width_unit == '%') {
+				html_min = 0;
+				html_max = 100;
+			} else {
+				html_min = targetEle.data('min');
+				html_max = targetEle.data('max');
+			}
+			targetEle.attr('data-ext', width_unit).attr('min', html_min).attr('max', html_max);			
+		}
 
 		if ( jQuery(this).data('id') == 'border-top' ) {
 

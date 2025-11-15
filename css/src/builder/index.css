@@ -241,12 +241,15 @@ body a:focus {
 }
 
 /* Error status button */
+.dslca-show-js-error-container{
+	display: none !important;
+}
 .dslca-show-js-error-hook {
 	padding: 10px;
 	bottom: -1px;
-	display: inline-block;
+	display: none;
 	color: rgba(199, 199, 199, 0.64)!important;
-	visibility: hidden;
+	/* visibility: hidden; */
 	float: left;
 }
 

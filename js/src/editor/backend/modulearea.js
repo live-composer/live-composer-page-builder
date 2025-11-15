@@ -255,12 +255,20 @@ export const modulesAreaAdd = ( row ) => {
 					<svg class="feather">
 						<use xlink:href="` + uiIconsUrl +`/feather-sprite.svg#columns"></use>
 					</svg>
-					<div class="dslca-change-width-modules-area-options"><span>Container Width</span><span data-size="1">1/12</span><span data-size="2">2/12</span>
-						<span data-size="3">3/12</span><span data-size="4">4/12</span>
-						<span data-size="5">5/12</span><span data-size="6">6/12</span>
-						<span data-size="7">7/12</span><span data-size="8">8/12</span>
-						<span data-size="9">9/12</span><span data-size="10">10/12</span>
-						<span data-size="11">11/12</span><span data-size="12">12/12</span>
+					<div class="dslca-change-width-modules-area-options">
+						<span>Container Width</span>
+						<span data-size="1"><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/first-column.webp" alt="Preview" /></span>
+						<span data-size="2"><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/second-column.webp" alt="Preview" /></span>
+						<span data-size="3"><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/third-column.webp" alt="Preview" /></span>
+						<span data-size="4"><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/fourth-column.webp" alt="Preview" /></span>
+						<span data-size="5"><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/fifth-column.webp" alt="Preview" /></span>
+						<span data-size="6"><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/sixth-column.webp" alt="Preview" /></span>
+						<span data-size="7"><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/seventh-column.webp" alt="Preview" /></span>
+						<span data-size="8"><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/eighth-column.webp" alt="Preview" /></span>
+						<span data-size="9"><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/ninth-column.webp" alt="Preview" /></span>
+						<span data-size="10"><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/tenth-column.webp" alt="Preview" /></span>
+						<span data-size="11"><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/eleventh-column.webp" alt="Preview" /></span>
+						<span data-size="12"><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/twelfth-column.webp" alt="Preview" /></span>
 					</div>
 				</span>
 				<span class="dslca-manage-action dslca-change-vertial-align-module-area-hook" title="Change vertical align" >

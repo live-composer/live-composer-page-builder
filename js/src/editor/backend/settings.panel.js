@@ -1397,7 +1397,7 @@ export const elementOptionsTabs = ( dslcTab ) => {
 		dslc_module_options_hideshow_tabs();
 
 		// If only one tab hide the tabs container
-		if ( jQuery('.dslca-module-edit-options-tab-hook:visible').length < 2 ) {
+		if ( jQuery('.dslca-module-edit-options-tab-hook:visible').length < 1 ) {
 
 			jQuery('.dslca-module-edit-options-tabs').hide();
 		} else {
