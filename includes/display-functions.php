@@ -102,7 +102,7 @@ function dslc_display_composer() {
 
 			<!-- Module Pop Up -->
 			<div id="lc_popup" class="lc-pop-build" style="display: none;">
-				<div class="resize-handle top-left" data-direction="tl"></div>
+				<!-- <div class="resize-handle top-left" data-direction="tl"></div>
 				<div class="resize-handle top-right" data-direction="tr"></div>
 				<div class="resize-handle bottom-left" data-direction="bl"></div>
 				<div class="resize-handle bottom-right" data-direction="br"></div>
@@ -110,12 +110,14 @@ function dslc_display_composer() {
 				<div class="resize-handle top" data-direction="t"></div>
 				<div class="resize-handle bottom" data-direction="b"></div>
 				<div class="resize-handle left" data-direction="l"></div>
-				<div class="resize-handle right" data-direction="r"></div>
+				<div class="resize-handle right" data-direction="r"></div> -->
 				<div id="lc_popupHeader">
 					<span class="dslca-currently-editing"><strong></strong></span>
+					<span id="lc_popup_minimize" class="lc_popup_minimize show">-</span>
+                    <span id="lc_popup_maximize" class="lc_popup_maximize hide">+</span>
 					<span id="lc_closeBtn" class="dslca-module-edit-cancel">&times;</span>
 				</div>
-				<div id="lc_popupContent" class="lc_popupContent">
+				<div id="lc_popupContent" class="lc_popupContent show">
 					<div class="dslca-header dslc-clearfix" data-default-section="<?php echo $default_section; ?>">
 						<!-- Module Option filters -->
 						<span class="dslca-options-filter-hook" data-section="functionality"><span class="dslca-icon dslc-icon-cog"></span> <?php esc_attr_e('Functionality', 'live-composer-page-builder'); ?></span>
@@ -216,21 +218,23 @@ function dslc_display_composer() {
 
 				<!-- Row Pop Up -->
 				<div id="lc_popup2" class="lc-pop-build dslca-section dslca-modules-section-edit" style="display: none;">
-					<div class="resize-handle top-left" data-direction="tl"></div>
+					<!-- <div class="resize-handle top-left" data-direction="tl"></div>
 					<div class="resize-handle top-right" data-direction="tr"></div>
 					<div class="resize-handle bottom-left" data-direction="bl"></div>
-					<div class="resize-handle bottom-right" data-direction="br"></div>
-
+					<div class="resize-handle bottom-right" data-direction="br"></div> -->
+<!-- 
 					<div class="resize-handle top" data-direction="t"></div>
 					<div class="resize-handle bottom" data-direction="b"></div>
 					<div class="resize-handle left" data-direction="l"></div>
-					<div class="resize-handle right" data-direction="r"></div>
+					<div class="resize-handle right" data-direction="r"></div> -->
 					<div id="lc_popupHeader2">
 						<span class="dslca-currently-editing"><strong></strong></span>
+						<span id="lc_popup_minimize2" class="lc_popup_minimize show">-</span>
+                        <span id="lc_popup_maximize2" class="lc_popup_maximize hide">+</span>
 						<span id="lc_closeBtn2" class="dslca-row-edit-cancel">&times;</span>
 					</div>
 
-					<div id="lc_popupContent2" class="lc_popupContent">
+					<div id="lc_popupContent2" class="lc_popupContent show">
 						<form class="dslca-modules-section-edit-form">
 							<div class="dslca-modules-section-edit-options dslc-clearfix">
 								<div class="dslca-modules-section-edit-options-inner">
@@ -242,12 +246,12 @@ function dslc_display_composer() {
 								</div><!-- .dslca-modules-section-edit-options-inner -->
 							</div><!-- .dslca-modules-section-edit-options -->
 						</form><!-- .dslca-modules-section-edit-form -->
+						<div class="dslca-row-edit-actions dslca-module-edit-actions">
+							<span class="dslca-row-edit-save"><?php _e('Confirm', 'live-composer-page-builder'); ?></span>
+							<span class="dslca-row-edit-cancel"><?php _e('Cancel', 'live-composer-page-builder'); ?></span>
+						</div><!-- .dslca-row-edit-actions -->
 					</div>
 
-					<div class="dslca-row-edit-actions dslca-module-edit-actions">
-						<span class="dslca-row-edit-save"><?php _e('Confirm', 'live-composer-page-builder'); ?></span>
-						<span class="dslca-row-edit-cancel"><?php _e('Cancel', 'live-composer-page-builder'); ?></span>
-					</div><!-- .dslca-row-edit-actions -->
 				</div>
 				<!-- Row Pop Up -->
 
@@ -921,6 +925,9 @@ function dslc_display_modules($page_id)
 						$module_atts['give_new_id'] = 'true';
 					}
 
+					// set margin and padding properties saparately
+					$element = dslc_process_consolidated_css_values($element);
+
 					$page_html .= dslc_module_front($module_atts, $element, $is_header_footer);
 				} // End if().
 			} // End foreach().
@@ -1466,8 +1473,7 @@ function dslc_display_modules($page_id)
 		 * @since 1.0
 		 */
 		function dslc_modules_section_front($atts, $content = null, $version = 1, $is_header_footer = false)
-		{
-
+		{			
 			global $dslc_active;
 			$section_style = dslc_row_get_style($atts);
 			$section_class = '';
@@ -1526,6 +1532,44 @@ function dslc_display_modules($page_id)
 				$overlay_style .= 'opacity:' . esc_attr($atts['bg_video_overlay_opacity']) . '; ';
 			}
 
+			// setting up margin and padding options for top, bottom, left and right (migration from vertical and horizontal)
+			if(empty($atts['css_padding_top']) && isset($atts['padding']))
+			{
+				$atts['css_padding_top'] = $atts['padding'];
+			}
+			if(empty($atts['css_padding_bottom']) && isset($atts['padding']))
+			{
+				$atts['css_padding_bottom'] = $atts['padding'];
+			}
+			if(empty($atts['css_padding_left']) && isset($atts['padding_h']))
+			{
+				$atts['css_padding_left'] = $atts['padding_h'];
+			}
+			if(empty($atts['css_padding_right']) && isset($atts['padding']))
+			{
+				$atts['css_padding_right'] = $atts['padding_h'];
+			}
+
+			// migrate margin
+			if(empty($atts['css_margin_bottom']) && isset($atts['margin_b']))
+			{
+				$atts['css_margin_bottom'] = $atts['margin_b'];
+			}
+			if(empty($atts['css_margin_left']) && isset($atts['margin_h']))
+			{
+				$atts['css_margin_left'] = $atts['margin_h'];
+			}
+			if(empty($atts['css_margin_right']) && isset($atts['margin_h']))
+			{
+				$atts['css_margin_right'] = $atts['margin_h'];
+			}
+
+			// unset row's old padding and margin values
+			unset($atts['padding']);
+			unset($atts['padding_h']);
+			unset($atts['margin_h']);
+			unset($atts['margin_b']);
+			
 			/**
 			 * BG Video
 			 */
@@ -2166,103 +2210,161 @@ function dslc_display_modules($page_id)
 			<?php endif; ?>
 
 		</div><!-- .dslc-pagination --><?php
-									} // End if().
-								}
+	} // End if().
+}
 
-								/**
-								 * Disable shortcode rendering for the string provided by replacing
-								 * all WordPress shortcode brackets as follow: [ -> %(%  |  ] -> %)%.
-								 *
-								 * @param  string $code String with code to filter.
-								 * @return string       Filtered code.
-								 */
-								function dslc_encode_shortcodes($code)
-								{
-									$braket_open = '%(%';
-									$braket_close = '%)%';
+/**
+	* Disable shortcode rendering for the string provided by replacing
+	* all WordPress shortcode brackets as follow: [ -> %(%  |  ] -> %)%.
+	*
+	* @param  string $code String with code to filter.
+	* @return string       Filtered code.
+	*/
+function dslc_encode_shortcodes($code)
+{
+	$braket_open = '%(%';
+	$braket_close = '%)%';
 
-									// if ( 'storage' === $mode ) {
-									// $braket_open =  '%((%';
-									// $braket_close =  '%))%';
-									// }
-									$code = str_replace('[',   $braket_open,  $code);
-									$code = str_replace('%{%', $braket_open,  $code);
-									$code = str_replace(']',   $braket_close, $code);
-									$code = str_replace('%}%', $braket_close, $code);
+	// if ( 'storage' === $mode ) {
+	// $braket_open =  '%((%';
+	// $braket_close =  '%))%';
+	// }
+	$code = str_replace('[',   $braket_open,  $code);
+	$code = str_replace('%{%', $braket_open,  $code);
+	$code = str_replace(']',   $braket_close, $code);
+	$code = str_replace('%}%', $braket_close, $code);
 
-									return $code;
-								}
+	return $code;
+}
 
-								function dslc_encode_protected_shortcodes($code)
-								{
+function dslc_encode_protected_shortcodes($code)
+{
 
-									$braket_open = '%((%';
-									$braket_close = '%))%';
+	$braket_open = '%((%';
+	$braket_close = '%))%';
 
-									$code = str_replace('[',   $braket_open,  $code);
-									$code = str_replace('%(%', $braket_open,  $code);
-									$code = str_replace(']',   $braket_close, $code);
-									$code = str_replace('%)%', $braket_close, $code);
+	$code = str_replace('[',   $braket_open,  $code);
+	$code = str_replace('%(%', $braket_open,  $code);
+	$code = str_replace(']',   $braket_close, $code);
+	$code = str_replace('%)%', $braket_close, $code);
 
-									return $code;
-								}
+	return $code;
+}
 
-								function dslc_decode_shortcodes($code, $mode = 'display')
-								{
-									$braket_open = '%(%';
-									$braket_close = '%)%';
+function dslc_decode_shortcodes($code, $mode = 'display')
+{
+	$braket_open = '%(%';
+	$braket_close = '%)%';
 
-									if ('storage' === $mode) {
-										$braket_open =  '%((%';
-										$braket_close =  '%))%';
-									}
-									$code = str_replace($braket_open,  '[', $code);
-									$code = str_replace($braket_close, ']', $code);
+	if ('storage' === $mode) {
+		$braket_open =  '%((%';
+		$braket_close =  '%))%';
+	}
+	$code = str_replace($braket_open,  '[', $code);
+	$code = str_replace($braket_close, ']', $code);
 
-									return $code;
-								}
+	return $code;
+}
 
-								function dslc_encode_shortcodes_in_array($atts)
-								{
-									if (is_array($atts)) {
-										foreach ($atts as $key => $value) {
-											$atts[$key] = dslc_encode_shortcodes_in_array($value);
-										}
-									} else {
-										return dslc_encode_shortcodes($atts);
-									}
+function dslc_encode_shortcodes_in_array($atts)
+{
+	if (is_array($atts)) {
+		foreach ($atts as $key => $value) {
+			$atts[$key] = dslc_encode_shortcodes_in_array($value);
+		}
+	} else {
+		return dslc_encode_shortcodes($atts);
+	}
 
-									return $atts;
-								}
+	return $atts;
+}
 
 
-								add_action('admin_bar_menu', 'add_live_composer_link_to_admin_bar', 999);
+add_action('admin_bar_menu', 'add_live_composer_link_to_admin_bar', 999);
 
-								function add_live_composer_link_to_admin_bar($wp_admin_bar)
-								{
-									if (!is_admin() && is_singular('page') && current_user_can('edit_pages')) {
-										global $post;
+function add_live_composer_link_to_admin_bar($wp_admin_bar)
+{
+	if (!is_admin() && is_singular('page') && current_user_can('edit_pages')) {
+		global $post;
 
-										if (!isset($post)) return;
+		if (!isset($post)) return;
 
-										// Construct Live Composer backend editor link
-										$lc_link = add_query_arg([
-											'page' => 'livecomposer_editor',
-											'page_id' => $post->ID
-										], admin_url('admin.php'));
+		// Construct Live Composer backend editor link
+		$lc_link = add_query_arg([
+			'page' => 'livecomposer_editor',
+			'page_id' => $post->ID
+		], admin_url('admin.php'));
 
-										// Optional dynamic class position
-										$activate_button_position = 'left';
+		// Optional dynamic class position
+		$activate_button_position = 'left';
 
-										// Add the Live Composer link to admin bar
-										$wp_admin_bar->add_node([
-											'id'    => 'edit-with-live-composer',
-											'title' => '<span style="background-color: #2271b1; color: #fff; padding: 3px 8px; border-radius: 3px;">Edit with Live Composer</span>',
-											'href'  => esc_url($lc_link),
-											'meta'  => [
-												'class' => 'dslca-position-' . esc_attr($activate_button_position),
-												'title' => 'Edit this page using Live Composer',
-											]
-										]);
-									}
-								}
+		// Add the Live Composer link to admin bar
+		$wp_admin_bar->add_node([
+			'id'    => 'edit-with-live-composer',
+			'title' => '<span style="background-color: #2271b1; color: #fff; padding: 3px 8px; border-radius: 3px;">Edit with Live Composer</span>',
+			'href'  => esc_url($lc_link),
+			'meta'  => [
+				'class' => 'dslca-position-' . esc_attr($activate_button_position),
+				'title' => 'Edit this page using Live Composer',
+			]
+		]);
+	}
+}
+
+function dslc_process_consolidated_css_values( $settings ) {
+    
+    // Define patterns for consolidated fields and their targets
+    $patterns = [
+        'padding_vertical' => ['css_padding_top', 'css_padding_bottom'],
+        'padding_horizontal' => ['css_padding_left', 'css_padding_right'],
+        'margin_vertical' => ['css_margin_top', 'css_margin_bottom'],
+        'margin_horizontal' => ['css_margin_left', 'css_margin_right'],
+    ];
+
+    $keys_to_unset = [];
+
+    // --- PHASE 1: SPLIT AND COLLECT KEYS ---
+    foreach ( $settings as $key => $value ) {
+        
+        // We only care about non-empty values
+        if ( empty( $value ) && $value !== '0' ) continue;
+
+        // Check for general padding/margin vertical/horizontal fields
+        if ( str_contains( $key, '_vertical' ) || str_contains( $key, '_horizontal' ) ) {
+            
+            // Normalize the key by stripping common prefixes (e.g., 'css_header_padding_vertical' -> 'padding_vertical')
+            $type = str_replace( 
+                array('css_', '_header', '_title', '_content', '_res_t', '_res_p'), 
+                '', 
+                $key 
+            );
+            $type = ltrim($type, '_');
+            
+            
+            if ( isset( $patterns[ $type ] ) ) {
+                
+                $targets = $patterns[ $type ];
+                
+                // Assign the consolidated value to all target directional fields
+                foreach ( $targets as $target_key ) {
+                    // Only overwrite the directional field if it is currently empty, 
+                    // ensuring manual granular controls take precedence.
+                    if ( empty( $settings[ $target_key ] ) || $settings[ $target_key ] === '0' ) {
+                        $settings[ $target_key ] = $value;
+                    }
+                }
+                
+                // Collect the source key for unsetting in Phase 2
+                $keys_to_unset[] = $key;
+            }
+        }
+    }
+
+    // --- PHASE 2: CLEANUP ---
+    // Remove the source consolidated keys from the settings array
+    foreach ($keys_to_unset as $key) {
+        unset($settings[$key]);
+    }
+
+    return $settings;
+}

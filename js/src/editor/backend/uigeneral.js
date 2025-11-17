@@ -938,7 +938,7 @@ jQuery(document).on('editorFrameLoaded', function(){
 		htmlObject.innerHTML = overlay;
 
 		el.append( htmlObject );
-	});
+	}); 
 
 });
 
@@ -954,5 +954,56 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initialize Row Popup (lc_popup2)
     makePopupDraggableAndResizable('lc_popup2', 'lc_popupHeader2', dragOverlay, closeBtn2);
-
+	const popup = document.getElementById('lc_popupContent');
+    const btnMin = document.getElementById('lc_popup_minimize');
+    const btnMax = document.getElementById('lc_popup_maximize');
+ 
+    // Hide popup
+    btnMin.addEventListener('click', function() {
+        popup.classList.remove('show');
+ 
+        btnMin.classList.remove('show');
+        btnMin.classList.add('hide');
+ 
+        btnMax.classList.remove('hide');
+        btnMax.classList.add('show');
+    });
+ 
+    // Show popup
+    btnMax.addEventListener('click', function() {
+        popup.classList.add('show');
+ 
+        btnMax.classList.remove('show');
+        btnMax.classList.add('hide');
+ 
+        btnMin.classList.remove('hide');
+        btnMin.classList.add('show');
+    });
+ 
+    const popup2 = document.getElementById('lc_popupContent2');
+    const btnMin2 = document.getElementById('lc_popup_minimize2');
+    const btnMax2 = document.getElementById('lc_popup_maximize2');
+ 
+    // Hide popup
+    btnMin2.addEventListener('click', function() {
+        popup2.classList.remove('show');
+ 
+        btnMin2.classList.remove('show');
+        btnMin2.classList.add('hide');
+ 
+        btnMax2.classList.remove('hide');
+        btnMax2.classList.add('show');
+    });
+ 
+    // Show popup
+    btnMax2.addEventListener('click', function() {
+        popup2.classList.add('show');
+ 
+        btnMax2.classList.remove('show');
+        btnMax2.classList.add('hide');
+ 
+        btnMin2.classList.remove('hide');
+        btnMin2.classList.add('show');
+    });
+ 
 });

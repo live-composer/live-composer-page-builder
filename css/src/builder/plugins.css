@@ -171,7 +171,7 @@ body a:focus {
   -moz-appearance: none;
   appearance: none;
   cursor: pointer;
-  background: url(../../images/dropdown-arrow.png) 90% 55%/7px no-repeat #6c9fed;
+  background: url(../../images/dropdown-arrow.png) 97% 55%/7px no-repeat #6c9fed;
   margin-top: 6px;
 }
 .dslca-container select option,
@@ -3885,7 +3885,7 @@ body em {
   flex-direction: row;
 }
 .dslca-module-edit-actions a {
-  width: 42%;
+  width: 45%;
   text-align: center;
   font-size: 16px;
 }
@@ -4224,9 +4224,11 @@ body em {
 	display: block;
 	border: 1px solid #FFFFFF;
 }
-.dslca-modules-section-edit-option-select:has(select[data-id="margin_unit"]),
-.dslca-modules-section-edit-option-select:has(select[data-id="padding_unit"]){
-  width: 100% !important;
+.dslca-modules-section-edit-option-select[data-id$="padding_unit"],
+.dslca-modules-section-edit-option-select[data-id$="margin_unit"],
+.dslca-module-edit-option-select[data-id$="padding_unit"],
+.dslca-module-edit-option-select[data-id$="margin_unit"] {
+    width: 100% !important;
 }
 .dslc-res-tablet #page-builder-frame,
 .dslc-res-phone #page-builder-frame {

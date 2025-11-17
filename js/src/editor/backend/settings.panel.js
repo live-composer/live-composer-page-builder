@@ -1397,7 +1397,7 @@ export const elementOptionsTabs = ( dslcTab ) => {
 		dslc_module_options_hideshow_tabs();
 
 		// If only one tab hide the tabs container
-		if ( jQuery('.dslca-module-edit-options-tab-hook:visible').length < 1 ) {
+		if ( jQuery('.dslca-module-edit-options-tab-hook:visible').length < 2 ) {
 
 			jQuery('.dslca-module-edit-options-tabs').hide();
 		} else {
@@ -1875,6 +1875,31 @@ function dslc_module_options_hideshow_tabs() {
 			jQuery('.dslca-module-edit-option.dependent').hide();
 		}
 	}
+	
+/* FORCE HIDE TAB BAR WHEN FUNCTIONALITY IS ACTIVE */
+function hideFunctionalityTabs() {
+    var isFunctionality = jQuery('.dslca-options-filter-hook[data-section="functionality"]').hasClass('dslca-active');
+
+    if (isFunctionality) {
+        var wrap = jQuery('.dslca-module-edit-options-tabs');
+        
+        // Hide the entire tab bar
+        wrap.css('display', 'none');
+
+        // Hide all tabs inside it
+        wrap.find('.dslca-module-edit-options-tab-hook').css('display', 'none');
+
+        // Remove active class if added
+        wrap.find('.dslca-module-edit-options-tab-hook').removeClass('dslca-active');
+    }
+}
+
+// Run on load
+hideFunctionalityTabs();
+
+// Keep hiding even when builder JS updates DOM
+var obs = new MutationObserver(hideFunctionalityTabs);
+obs.observe(document.body, { childList: true, subtree: true, attributes: true });
 }
 
 /**
@@ -2419,167 +2444,163 @@ function dslc_module_options_text_shadow() {
 /**
  * MODULES SETTINGS PANEL - Color Option Type
  */
-function dslc_module_options_color( field ) {
+function dslc_module_options_color(field) {
 
-	if ( window.dslcDebug ) console.log( 'dslc_module_options_color' );
+	if (window.dslcDebug) console.log('dslc_module_options_color');
 
 	var dslcColorField,
-	dslcAffectOnChangeEl,
-	dslcAffectOnChangeRule,
-	dslcColorFieldVal,
-	dslcModule,
-	dslcOptionID,
-	dslcCurrColor;
-
-	/**
-	 * Color Pallete.
-	 *
-	 * Last three selected colors get stored in the local storage
-	 * of the browser under the key 'dslcColors-example.com'.
-	 *
-	 * Beside latest three custom colors, color palette includes
-	 * three predefined/fixed colors: white, black and transparent.
-	 */
+		dslcAffectOnChangeEl,
+		dslcAffectOnChangeRule,
+		dslcColorFieldVal,
+		dslcModule,
+		dslcOptionID,
+		dslcCurrColor;
 
 	var dslcColorPallete = [],
-	currStorage,
-	index;
+		currStorage,
+		index;
 
-	var palleteCurrentDommain = 'dslcColors-' + document.domain
+	var palleteCurrentDommain = 'dslcColors-' + document.domain;
 
-	// Get three recent colors from the local storage.
-	if ( undefined !== localStorage[ palleteCurrentDommain ] ) {
-		currStorage = JSON.parse( localStorage[ palleteCurrentDommain ] );
+	// Load recent colors
+	if (undefined !== localStorage[palleteCurrentDommain]) {
+		currStorage = JSON.parse(localStorage[palleteCurrentDommain]);
 		dslcColorPallete = currStorage;
 	}
 
-	// Set default colors if not enough custom colors. Should be six.
-	if ( 1 > dslcColorPallete.length ) {
-		dslcColorPallete.push( '#78b' );
-	}
+	if (1 > dslcColorPallete.length) dslcColorPallete.push('#78b');
+	if (2 > dslcColorPallete.length) dslcColorPallete.push('#ab0');
+	if (3 > dslcColorPallete.length) dslcColorPallete.push('#de3');
 
-	if ( 2 > dslcColorPallete.length ) {
-		dslcColorPallete.push( '#ab0' );
-	}
-
-	if ( 3 > dslcColorPallete.length ) {
-		dslcColorPallete.push( '#de3' );
-	}
-
-	// Add the next "fixed" colors to the end of the pallete.
-	dslcColorPallete.push( '#fff' );
-	dslcColorPallete.push( '#000' );
-	dslcColorPallete.push( 'rgba(0,0,0,0)' );
+	dslcColorPallete.push('#fff');
+	dslcColorPallete.push('#000');
+	dslcColorPallete.push('rgba(0,0,0,0)');
 
 	var query = field;
 
-	// For each color picker input field.
-	jQuery(query).each( function(){
+	jQuery(query).each(function () {
 
-		// Set setting the conotrol wrapper.
 		var wrapper = jQuery(this).closest('.dslca-color-option');
 		var input = jQuery(this);
 
-		dslcCurrColor = jQuery(this).val();
+        dslcCurrColor = jQuery(this).val();
 
-		/**
-		 * Init standard WP color pickers (Iris).
-		 *
-		 * See: http://automattic.github.io/Iris/
-		 * See: https://github.com/23r9i0/wp-color-picker-alpha
-		 */
+		// INIT WP COLOR PICKER
 		input.wpColorPicker({
 			mode: 'hsl',
 			palettes: dslcColorPallete,
-			change: function(event, ui) {
-				// @todo: get the code below into a separate function!
-				// The option field
+			change: function (event, ui) {
+
 				dslcColorField = input;
 
 				var color = input.wpColorPicker('color');
+				dslcColorFieldVal = color == null ? '' : color;
 
-				// The new color
-				if ( color == null ) {
-					dslcColorFieldVal = '';
-				} else {
-					dslcColorFieldVal = color;
-				}
+				// Update value
+				dslcColorField.val(dslcColorFieldVal).trigger('change');
 
-				// Change current value of option
-				dslcColorField.val( dslcColorFieldVal ).trigger('change');
-
-				// Change input field background.
+				// Update background
 				dslcColorField.css('background', dslcColorFieldVal);
 
-				// Live change
+				// Live update
 				dslcAffectOnChangeEl = dslcColorField.data('affect-on-change-el');
 				dslcAffectOnChangeRule = dslcColorField.data('affect-on-change-rule');
 
-				// ROWs doesn't have 'dslcAffectOnChangeEl' defined
-				if ( null != dslcAffectOnChangeEl && '.dslca-modules-section-being-edited' !== dslcAffectOnChangeEl ) {
-					jQuery( dslcAffectOnChangeEl , window.LiveComposer.Builder.PreviewAreaDocument.find('.dslca-module-being-edited') ).css( dslcAffectOnChangeRule , dslcColorFieldVal );
+				if (dslcAffectOnChangeEl && dslcAffectOnChangeEl !== '.dslca-modules-section-being-edited') {
+					jQuery(
+						dslcAffectOnChangeEl,
+						window.LiveComposer.Builder.PreviewAreaDocument.find('.dslca-module-being-edited')
+					).css(dslcAffectOnChangeRule, dslcColorFieldVal);
 				}
-				// Update option
+
+				// Update option in module
 				dslcModule = jQuery('.dslca-module-being-edited', window.LiveComposer.Builder.PreviewAreaDocument);
 				dslcOptionID = dslcColorField.data('id');
-				jQuery('.dslca-module-option-front[data-id="' + dslcOptionID + '"]', dslcModule).val( dslcColorFieldVal );
+				jQuery('.dslca-module-option-front[data-id="' + dslcOptionID + '"]', dslcModule).val(dslcColorFieldVal);
 
-				// Add changed class
 				dslcModule.addClass('dslca-module-change-made');
 			}
 		});
 
+		// ADD APPLY BUTTON
 		var colorPickerPopup = wrapper.find('.wp-picker-holder .iris-picker');
 		colorPickerPopup.append('<button type="button" class="dslca-colorpicker-apply">Apply</button>');
 
 		var apply = wrapper.find('.dslca-colorpicker-apply');
 
-		input.wpColorPicker( 'open' );
+		input.wpColorPicker('open');
 
-		// If [APPLY] button clicked...
-		jQuery(apply).on('click', function() {
+		// APPLY LOGIC
+		jQuery(apply).on('click', function () {
 
-			// If new color is not one of the "fixed" colors...
-			if ( '#fff' !== dslcColorFieldVal &&
-				  '#ffffff' !== dslcColorFieldVal &&
-				  '#000' !== dslcColorFieldVal &&
-				  '#000000' !== dslcColorFieldVal &&
-				  'rgba(0,0,0,0)' !== dslcColorFieldVal ) {
-
-				// Update pallete colors in the local storage.
-				if ( undefined === localStorage[ palleteCurrentDommain ] ) {
-
-					// Create new record if no local storage found.
-					var newStorage = [ dslcColorFieldVal ];
-					localStorage[ palleteCurrentDommain ] = JSON.stringify(newStorage);
-
+			if (
+				dslcColorFieldVal !== '#fff' &&
+				dslcColorFieldVal !== '#ffffff' &&
+				dslcColorFieldVal !== '#000' &&
+				dslcColorFieldVal !== '#000000' &&
+				dslcColorFieldVal !== 'rgba(0,0,0,0)'
+			) {
+				if (undefined === localStorage[palleteCurrentDommain]) {
+					var newStorage = [dslcColorFieldVal];
+					localStorage[palleteCurrentDommain] = JSON.stringify(newStorage);
 				} else {
+					var newStorage = JSON.parse(localStorage[palleteCurrentDommain]);
 
-					// Update existing record in the local storage.
-					var newStorage = JSON.parse( localStorage[ palleteCurrentDommain ] );
-
-					if ( newStorage.indexOf( dslcColorFieldVal ) == -1 ) {
-
-						// Add new color to the head of the pallete array.
-						newStorage.unshift( dslcColorFieldVal );
-
-						if ( 3 < newStorage.length ) {
-							// Remove the last color from the pallete.
-							newStorage.pop();
-						}
+					if (newStorage.indexOf(dslcColorFieldVal) == -1) {
+						newStorage.unshift(dslcColorFieldVal);
+						if (newStorage.length > 3) newStorage.pop();
 					}
-
-					localStorage[ palleteCurrentDommain ] = JSON.stringify(newStorage);
+					localStorage[palleteCurrentDommain] = JSON.stringify(newStorage);
 				}
 			}
 
-			input.wpColorPicker( 'close' );
+			// input.wpColorPicker('close');
 		});
+		//  *  CLEAR BUTTON SUPPORT
+		 
+		var clearBtn = wrapper.find('.wp-picker-clear');
 
-		// Save this element to destroy on panel closed.
-		window.LiveComposer.Builder.Helpers.colorpickers.push( jQuery(this) );
+		jQuery(clearBtn).on('click', function () {
+
+			dslcColorFieldVal = '';
+
+			// Clear input
+			input.val('').trigger('change');
+
+			// Remove color preview
+			input.css('background', '');
+
+			// Live preview clear
+			const el = input.data('affect-on-change-el');
+			const rule = input.data('affect-on-change-rule');
+
+			if (el && el !== '.dslca-modules-section-being-edited') {
+				jQuery(
+					el,
+					window.LiveComposer.Builder.PreviewAreaDocument.find('.dslca-module-being-edited')
+				).css(rule, '');
+			}
+
+			// Update module option
+			var module = jQuery('.dslca-module-being-edited', window.LiveComposer.Builder.PreviewAreaDocument);
+			var optionID = input.data('id');
+
+			jQuery('.dslca-module-option-front[data-id="' + optionID + '"]', module).val('');
+
+			// Mark as changed
+			module.addClass('dslca-module-change-made');
+
+			// Close color picker
+			// input.wpColorPicker('close');
+		});
+		/** --------------------------------------------- */
+
+
+		// Save this element to destroy later
+		window.LiveComposer.Builder.Helpers.colorpickers.push(jQuery(this));
 	});
 }
+
 
 /**
  * MODULES SETTINGS PANEL - Numeric Option Type

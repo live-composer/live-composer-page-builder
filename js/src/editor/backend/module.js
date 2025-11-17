@@ -462,6 +462,7 @@ function dslc_module_delete( module ) {
 			// Remove module, regenerate code, show publish button
 			module.parentNode.removeChild( module );
 			window.dslc_generate_code();
+			window.dslc_show_publish_button();
 			parent.LiveComposer.Builder.Actions.saveState();
 		}
 	  });

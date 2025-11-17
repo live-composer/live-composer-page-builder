@@ -242,7 +242,7 @@ body a:focus {
 
 /* Error status button */
 .dslca-show-js-error-container{
-	display: none !important;
+	display: none;
 }
 .dslca-show-js-error-hook {
 	padding: 10px;
@@ -829,6 +829,7 @@ body a:focus {
 					border-radius: 3px;
 					width: 100%;
 					min-width: 140px;
+					max-width: 100%;
 					height: auto;
 				}
 
@@ -1218,6 +1219,7 @@ body a:focus {
 					background-color: #6c9fed;
 					border: 1px solid #447bce;
 					width: 100%;
+					max-width: 100%;
 					height: auto;
 				}
 
@@ -3169,7 +3171,7 @@ body.rtl .dslca-modules-area-placeholder {
 
 }
 
-@-webkit-keyframes "dslcRotate" {
+@-webkit-keyframes dslcRotate {
 
 	0% {
 		-webkit-transform: rotate(0deg);
@@ -3193,6 +3195,9 @@ body.rtl .dslca-modules-area-placeholder {
 	animation-duration:0.6s;
 	-webkit-animation-duration:0.6s;
 	background: #0050a5;
+}
+.dslc-modules-area.dslca-init-animation {
+	background: transparent;
 }
 
 .dslca-anim-opacity-drop {
@@ -4694,6 +4699,37 @@ body em {
     padding: 0px 0 0 0;
     width: 100% !important;
 }
+.lc_popup_minimize, 
+.lc_popup_maximize{
+	cursor: pointer !important;
+    font-weight: bold;
+    position: absolute;
+    top: 16px;
+    right: 55px;
+    width: auto !important;
+    font-size: 26px;
+}
+#lc_popupContent,
+#lc_popup_minimize.hide,
+#lc_popup_maximize.hide,
+#lc_popupContent2,
+#lc_popup_minimize2.hide,
+#lc_popup_maximize2.hide {
+  display: none;
+  opacity: 0;
+  transition: all .3s ease;
+}
+
+#lc_popupContent.show,
+#lc_popup_minimize.show,
+#lc_popup_maximize.show,
+#lc_popupContent2.show,
+#lc_popup_minimize2.show,
+#lc_popup_maximize2.show{
+  display: block;
+  opacity: 1;
+}
+
 /* Close Button */
 #lc_closeBtn, #lc_closeBtn2 {
     float: right;

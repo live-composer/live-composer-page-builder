@@ -232,3 +232,17 @@ function lc_welcome( $plugin ) {
 
 }
 add_action( 'activated_plugin', 'lc_welcome' );
+
+function write_log($message)
+{
+    if (is_array($message)) {
+        $message = json_encode($message);
+    }
+    $directory_path = plugin_dir_path(__FILE__) . 'logs';
+    if (!file_exists($directory_path)) {
+        mkdir($directory_path );
+    }
+    $file = fopen($directory_path . "/custom_log" . date('Y-m-d') . ".log", "a");
+    fwrite($file, "\n" . date('Y-m-d h:i:s') . " :: " . $message);
+    fclose($file);
+}
