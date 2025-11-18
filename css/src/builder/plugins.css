@@ -889,11 +889,18 @@ div.dslca-sections-dragging:hover {
   background: #3b6fbe;
   border-radius: 3px;
   border: 1px solid #3565ad;
-  padding: 0 10px;
+  padding: 5px;
+  padding-top: 2px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 15px;
+  width: 100%;
 }
 .dslca-module-edit-option-checkbox-single {
   padding: 6px 8px;
   display: table-cell;
+  width: auto;
 }
 .dslca-module-edit-option-checkbox-hook {
   cursor: pointer;
@@ -2210,6 +2217,7 @@ body.rtl .dslca-modules-area-placeholder {
   border-width: 7px;
   left: 50%;
   margin-left: -7px;
+  display: none;
 }
 .dslca-prompt-modal-msg textarea {
   width: 100%;
@@ -2671,16 +2679,16 @@ span.dslca-manage-action:hover * {
 .controls-group-margin .dslca-modules-section-edit-option { width: 48% !important; display: inline-block;}
 .controls-group-padding .dslca-modules-section-edit-option { width: 48% !important; display: inline-block;}
 
-.controls-group-margin .dslca-modules-section-edit-option .dslca-module-edit-field-slider,
+/* .controls-group-margin .dslca-modules-section-edit-option .dslca-module-edit-field-slider,
 .controls-group-padding .dslca-modules-section-edit-option .dslca-module-edit-field-slider, 
-.dslca-module-edit-field-slider { width:calc(100% - 15px)!important; left:7px !important; }
+.dslca-module-edit-field-slider { width:calc(100% - 15px)!important; left:7px !important; } */
 
 
 
 .dslca-modules-edit-field-slider {
   display: none;
 }
-.dslca-container .dslca-module-edit-field-slider,
+/* .dslca-container .dslca-module-edit-field-slider,
 .dslca-container .dslca-modules-section-edit-field-slider {
   background: #6c9fed;
   border-radius: 5px;
@@ -2701,7 +2709,7 @@ span.dslca-manage-action:hover * {
   height: 15px;
   margin-left: -7px;
   cursor: ew-resize;
-}
+} */
 .dslca-module-edit-field-numeric-wrap,
 .dslca-modules-section-edit-field-numeric-wrap {
   position: relative;
@@ -3796,13 +3804,13 @@ body em {
 #lc_popup,
 #lc_popup2 {
   position: fixed;
-  right: 30px;
+  top: 175px;
+  left: 630px;
   width: 460px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   border-radius: 8px;
   background: #0d0e1e;
-  top: 175px;
   display: none; /* Ensure it starts hidden */
 }
 
@@ -3952,9 +3960,7 @@ body em {
 .lc_popupContent
   .dslca-module-edit-form
   .dslca-module-edit-options
-  .dslca-module-edit-options-tabs,
-  .dslca-module-edit-option-post_elements
-  .dslca-module-edit-option-checkbox-wrapper {
+  .dslca-module-edit-options-tabs{
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -4261,8 +4267,6 @@ a.dslca-module-edit-options-tab-hook[data-id="mobile_menu_styling"]:before {
 #wave_sidebar_container {
   right: 0px !important;
   left: auto !important;
-}
-.search_module {
 }
 .search_module label {
   font-weight: 600;

@@ -370,6 +370,26 @@ class DSLC_Social extends DSLC_Module {
 				'action' => 'open',
 				'section' => 'styling',
 			),
+			array(
+				'id' => 'css_padding_unit',
+				'std' => '',
+				'label' => __( 'Padding Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
 				array(
 					'label' => __( 'Left', 'live-composer-page-builder' ),
 					'id' => 'css_padding_left',
@@ -715,6 +735,27 @@ class DSLC_Social extends DSLC_Module {
 				'section' => 'responsive',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+			array(
+				'id' => 'css_res_t_padding_unit',
+				'std' => '',
+				'label' => __( 'Padding Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
 				array(
 					'label' => __( 'Left', 'live-composer-page-builder' ),
 					'id' => 'css_res_t_padding_left',
@@ -861,6 +902,28 @@ class DSLC_Social extends DSLC_Module {
 				'type' => 'group',
 				'action' => 'open',
 				'section' => 'responsive',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+			
+			array(
+				'id' => 'css_res_p_padding_unit',
+				'std' => '',
+				'label' => __( 'Padding Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 				array(

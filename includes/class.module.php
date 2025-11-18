@@ -2428,7 +2428,7 @@ class DSLC_Module {
 		$options = array(
 			'custom_class' => array(
 				array(
-					'label' => 'Custom class',
+					'label' => 'Custom Class',
 					'id' => 'custom_class',
 					'std' => '',
 					'type' => 'text',

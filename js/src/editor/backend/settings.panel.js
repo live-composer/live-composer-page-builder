@@ -72,21 +72,6 @@ jQuery(document).ready(function($){
 		});
 	});
 
-	/* Initiate all the slider controls on the module options panel. */
-	jQuery('.dslca-container').on('mouseenter', '.dslca-module-edit-option-slider', function() {
-
-		// Fixed: https://github.com/live-composer/live-composer-page-builder/issues/740
-		if ( ! jQuery(this).hasClass( 'dslca-module-edit-option-select' ) ) {
-        	dslc_module_options_numeric( this );
-		}
-	});
-
-	/* Initiate all the slider controls on the row options panel. */
-	jQuery('.dslca-container').on('mouseenter', '.dslca-modules-section-edit-option-slider', function() {
-
-		dslc_module_options_numeric( this );
-	});
-
 	/**
 	 * Hook - Submit
 	 */
@@ -2614,10 +2599,10 @@ function dslc_module_options_numeric( fieldWrapper ) {
 
 		var controlWrapper = jQuery(this);
 
-		/* Create an empty div to be uses by jQuery as the slider container. */
-		if ( 0 === jQuery('.dslca-module-edit-field-slider', controlWrapper).length ) {
-			controlWrapper.append('<div class="dslca-module-edit-field-slider"></div>');
-		}
+		// /* Create an empty div to be uses by jQuery as the slider container. */
+		// if ( 0 === jQuery('.dslca-module-edit-field-slider', controlWrapper).length ) {
+		// 	controlWrapper.append('<div class="dslca-module-edit-field-slider"></div>');
+		// }
 
 		var workingWithModule = true;
 
@@ -2667,71 +2652,7 @@ function dslc_module_options_numeric( fieldWrapper ) {
 
 		if ( undefined !== sliderInput.data('onlypositive') && 1 === sliderInput.data('onlypositive')  ) {
 			onlypositive = true;
-		}
-
-		/**
-		 * If the current slider value gets to the max or min,
-		 * we set new 'wider' max/min values.
-		 *
-		 * This way slider has no fixed top or bottom limit one one hand
-		 * and works precise enough for both small and big values.
-		 */
-		// if ( currentVal >= max ) {
-		// 	max = currentVal * 2;
-		// }
-
-		// if ( ! onlypositive && currentVal <= min ) {
-		// 	min = currentVal * 2;
-		// }
-
-		sliderControl.slider({
-			min : min,
-			max : max,
-			step: inc,
-			value: sliderInput.val(),
-
-			slide: function(event, ui) {
-				sliderInput.val( ui.value + sliderExt );
-				sliderInput.trigger('change');
-			},
-
-			change: function(event, ui) {
-				/**
-				 * If the current slider value gets to the max or min,
-				 * we reset the slider (destroy/call again) so script above
-				 * set new bigger max/min values.
-				 *
-				 * This way slider has no top or bottom limit one one hand
-				 * and precise enough for both small and big values.
-				 */
-				if ( ui.value >= max || ui.value <= min ) {
-					sliderControl.slider( "destroy" );
-					dslc_module_options_numeric( controlWrapper );
-				}
-			},
-			/*
-			stop: function( event, ui ) {
-			},
-			start: function( event, ui ) {
-			}
-			*/
-		});
-
-		/**
-		 * Once the slider initiated, show it in HTML.
-		 * Slider control is hidden by default. We show it on hover only.
-		 */
-		sliderControl.show();
-
-		/* On mouse leave: Remove empty DIV and destroy the slider. */
-		jQuery(controlWrapper).on('mouseleave', function() {
-
-			if ( undefined !== sliderControl.slider( 'instance' ) ) {
-				jQuery(sliderControl).slider( 'destroy' );
-			}
-
-			sliderControl.remove();
-		});
+		}		
 
 
 		if( sliderInput[0].classList.contains('slider-initiated') ) return;
@@ -2780,10 +2701,43 @@ function dslc_module_options_numeric( fieldWrapper ) {
 		// sliderInput.unbind('change');
 		sliderInput.on('change', function(e){
 
-			if ( onlypositive && this.value < 0 ) {
-				this.value = 0;
+			var val = parseFloat(this.value) || 0;
+
+			// Detect extension (px, %, etc.)
+			var ext = sliderInput.data('ext');
+
+			let min, max;
+
+			if (ext === '%') {
+				// For percentage, restrict to -100..100
+				min = -100;
+				max = 100;
+			} else if (ext === 'px') {
+				// For px, use data-min and data-max
+				min = parseFloat(sliderInput.data('min'));
+				max = parseFloat(sliderInput.data('max'));
+			} else {
+				// Fallback (optional)
+				min = parseFloat(sliderInput.attr('min') ?? sliderInput.data('min'));
+				max = parseFloat(sliderInput.attr('max') ?? sliderInput.data('max'));
 			}
 
+			// Only positive rule
+			if (onlypositive && val < 0) {
+				val = 0;
+			}
+
+			// Apply min / max restriction
+			if (!isNaN(min) && val < min) {
+				val = min;
+			}
+
+			if (!isNaN(max) && val > max) {
+				val = max;
+			}
+
+			// Write corrected value back
+			this.value = val;
 			var containerWrapper;
 
 			if ( workingWithModule ) {
@@ -2796,10 +2750,10 @@ function dslc_module_options_numeric( fieldWrapper ) {
 			 * Move the slider needle to reflect the value changes
 			 * made via direct input of via keyboard arrow keys.
 			 */
-			var currentSliderInstance = containerWrapper.find('.dslca-module-edit-field-slider');
-			if ( undefined !== currentSliderInstance.slider( 'instance' ) ) {
-				currentSliderInstance.slider( 'value', this.value );
-			}
+			// var currentSliderInstance = containerWrapper.find('.dslca-module-edit-field-slider');
+			// if ( undefined !== currentSliderInstance.slider( 'instance' ) ) {
+			// 	currentSliderInstance.slider( 'value', this.value );
+			// }
 
 			if ( workingWithModule ) {
 				// Add changed class to the module.
