@@ -223,42 +223,6 @@ body a:focus {
 .dslca-module-manage *::before {
   box-sizing: border-box;
 }
-.dslca-show-js-error-hook {
-  padding: 10px;
-  bottom: -1px;
-  display: none;
-  color: rgba(199, 199, 199, 0.64) !important;
-  /* visibility: hidden; */
-  float: left;
-}
-.dslca-show-js-error-hook:hover {
-  color: #ff4040;
-}
-.dslca-show-js-error-hook .dslca-icon {
-  color: #ff4040;
-  margin-right: 5px;
-  margin-left: 8px;
-}
-#dslca-js-errors-report {
-  display: none;
-}
-.dslca-error-report {
-  display: block;
-  overflow: scroll;
-  text-align: left;
-  white-space: nowrap;
-  font-size: 12px;
-  max-height: 120px;
-  -webkit-touch-callout: text;
-  -webkit-user-select: text;
-  -khtml-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
-  user-select: text;
-}
-.dslca-error-report:hover {
-  cursor: text;
-}
 .dslca-editable-content > p:only-child {
   margin-bottom: 0 !important;
 }
@@ -344,6 +308,45 @@ body a:focus {
 }
 .dslca-header .dslca-go-to-section-hook .dslca-icon {
   font-weight: normal;
+}
+.dslca-show-js-error-container{
+	display: none;
+}
+.dslca-show-js-error-hook {
+  padding: 10px;
+  bottom: -1px;
+  display: none;
+  color: rgba(199, 199, 199, 0.64) !important;
+  /* visibility: hidden; */
+  float: left;
+}
+.dslca-show-js-error-hook:hover {
+  color: #ff4040;
+}
+.dslca-show-js-error-hook .dslca-icon {
+  color: #ff4040;
+  margin-right: 5px;
+  margin-left: 8px;
+}
+#dslca-js-errors-report {
+  display: none;
+}
+.dslca-error-report {
+  display: block;
+  overflow: scroll;
+  text-align: left;
+  white-space: nowrap;
+  font-size: 12px;
+  max-height: 120px;
+  -webkit-touch-callout: text;
+  -webkit-user-select: text;
+  -khtml-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+.dslca-error-report:hover {
+  cursor: text;
 }
 .dslca-module-edit-actions,
 .dslca-row-edit-actions,

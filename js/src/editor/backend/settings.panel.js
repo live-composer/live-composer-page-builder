@@ -216,13 +216,13 @@ jQuery(document).ready(function($){
 
             numericInputs.each(function() {
                 const inputEl = jQuery(this);
-                const defaultPxMin = parseFloat(inputEl.attr('data-min')) || 0;
+                const defaultPxMin = parseFloat(inputEl.attr('data-min')) || -2000;
                 const defaultPxMax = parseFloat(inputEl.attr('data-max')) || 2000;
 
                 let newMin, newMax;
 
                 if (selectedUnit === '%') {
-                    newMin = 0;  
+                    newMin = -100;  
                     newMax = 100; 
                 } else {
                     newMin = defaultPxMin;
@@ -539,7 +539,7 @@ const onModuleOptionsChange = () => {
 					const rawVal = inputEl.val();
 
 					// 2. Define Ranges and Current Value
-					const defaultPxMin = parseFloat(inputEl.attr('data-min')) || 0;
+					const defaultPxMin = parseFloat(inputEl.attr('data-min')) || -2000;
 					const defaultPxMax = parseFloat(inputEl.attr('data-max')) || 2000;
 
 					let newMin, newMax;

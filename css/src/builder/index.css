@@ -240,6 +240,112 @@ body a:focus {
 	box-sizing: border-box;
 }
 
+/**
+ * Disable margin bottom for paragraphs in the text inside inline editor.
+ * WordPress clean-out <p> tags if there is only one paragraph in the block.
+ * This creates unwanted difference between front-end and editing-mode.
+ */
+.dslca-editable-content > p:only-child {
+	margin-bottom: 0!important;
+}
+
+/**
+	* Header
+	*/
+
+.dslca-header {
+	position: absolute;
+	/*z-index: 100; - breaks color picker*/
+	/* keep LC styling panel Confirm/Cancel buttons on the top */
+	min-height: 38px;
+	bottom: 100%;
+	left: 0;
+}
+
+.dslca-header .dslca-currently-editing {
+	display: block;
+	position: absolute;
+	bottom: 45px;
+	left: 5px;
+	background-color: rgba(71, 70, 70, 0.49);
+	color: rgba( 255, 255, 255, 0.5 );
+	padding: 6px 10px;
+	border-radius: 3px;
+	font-weight: 400;
+	/* font-family: 'Open Sans', sans-serif; */
+	font-size: 10px;
+	line-height: 1;
+	display: none;
+	white-space: nowrap;
+	letter-spacing: 0.4px;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+
+	.dslca-header .dslca-currently-editing .dslca-icon {
+		margin-right: 5px;
+	}
+
+	.dslca-header .dslca-currently-editing strong {
+		color: #fff;
+	}
+
+.dslca-header .dslca-go-to-section-hook,
+.dslca-header .dslca-options-filter-hook,
+.dslca-header .dslca-row-options-filter-hook,
+.dslca-pseudo-header .dslca-pseudo-options-filter-hook {
+	bottom: 0;
+	background: #313131;
+	border-radius: 3px 3px 0 0;
+	color: #adadad;
+	cursor: pointer;
+	display: block;
+	float: left;
+	font-size: 13px;
+	/* font-family: 'Open Sans', sans-serif; */
+	font-weight: 600;
+	line-height: 1;
+	padding: 13px 15px;
+	position: relative;
+}
+
+.dslca-header .dslca-options-filter-hook,
+.dslca-pseudo-options-filter-hook,
+.dslca-header .dslca-row-pseudo-options-filter-hook {
+	display: none;
+	margin-right: 3px;
+}
+
+.dslca-header .dslca-go-to-section-hook.dslca-active,
+.dslca-header .dslca-options-filter-hook.dslca-active,
+.dslca-header .dslca-row-options-filter-hook.dslca-active,
+.dslca-pseudo-header .dslca-pseudo-options-filter-hook.dslca-active {
+	border-top-color: #4777c2;
+	background: #3b6fbe;
+	color: #fff;
+	cursor: default;
+}
+
+.dslca-header .dslca-options-filter-hook .dslca-icon,
+.dslca-header .dslca-row-options-filter-hook .dslca-icon,
+.dslca-pseudo-header .dslca-pseudo-options-filter-hook .dslca-icon {
+	margin-right: 4px;
+}
+
+.dslca-header .dslca-options-filter-hook.dslca-active,
+.dslca-header .dslca-row-options-filter-hook.dslca-active,
+.dslca-pseudo-header .dslca-pseudo-options-filter-hook.dslca-active {
+	background: #5890e5;
+}
+
+.dslca-header .dslca-go-to-section-templates.dslca-active {
+	border-top-color: #bf7671;
+	background: #a94640;
+}
+
+.dslca-header .dslca-go-to-section-hook .dslca-icon {
+	font-weight: normal;
+}
 /* Error status button */
 .dslca-show-js-error-container{
 	display: none;
@@ -286,113 +392,6 @@ body a:focus {
 .dslca-error-report:hover {
 	cursor: text;
 }
-
-/**
- * Disable margin bottom for paragraphs in the text inside inline editor.
- * WordPress clean-out <p> tags if there is only one paragraph in the block.
- * This creates unwanted difference between front-end and editing-mode.
- */
-.dslca-editable-content > p:only-child {
-	margin-bottom: 0!important;
-}
-
-	/**
-	 * Header
-	 */
-
-	.dslca-header {
-		position: absolute;
-		/*z-index: 100; - breaks color picker*/
-		/* keep LC styling panel Confirm/Cancel buttons on the top */
-		min-height: 38px;
-		bottom: 100%;
-		left: 0;
-	}
-
-		.dslca-header .dslca-currently-editing {
-			display: block;
-			position: absolute;
-			bottom: 45px;
-			left: 5px;
-			background-color: rgba(71, 70, 70, 0.49);
-			color: rgba( 255, 255, 255, 0.5 );
-			padding: 6px 10px;
-			border-radius: 3px;
-			font-weight: 400;
-			/* font-family: 'Open Sans', sans-serif; */
-			font-size: 10px;
-			line-height: 1;
-			display: none;
-			white-space: nowrap;
-			letter-spacing: 0.4px;
-			text-transform: uppercase;
-			cursor: pointer;
-		}
-
-			.dslca-header .dslca-currently-editing .dslca-icon {
-				margin-right: 5px;
-			}
-
-			.dslca-header .dslca-currently-editing strong {
-				color: #fff;
-			}
-
-		.dslca-header .dslca-go-to-section-hook,
-		.dslca-header .dslca-options-filter-hook,
-		.dslca-header .dslca-row-options-filter-hook,
-		.dslca-pseudo-header .dslca-pseudo-options-filter-hook {
-			bottom: 0;
-			background: #313131;
-			border-radius: 3px 3px 0 0;
-			color: #adadad;
-			cursor: pointer;
-			display: block;
-			float: left;
-			font-size: 13px;
-			/* font-family: 'Open Sans', sans-serif; */
-			font-weight: 600;
-			line-height: 1;
-			padding: 13px 15px;
-			position: relative;
-		}
-
-		.dslca-header .dslca-options-filter-hook,
-		.dslca-pseudo-options-filter-hook,
-		.dslca-header .dslca-row-pseudo-options-filter-hook {
-			display: none;
-			margin-right: 3px;
-		}
-
-		.dslca-header .dslca-go-to-section-hook.dslca-active,
-		.dslca-header .dslca-options-filter-hook.dslca-active,
-		.dslca-header .dslca-row-options-filter-hook.dslca-active,
-		.dslca-pseudo-header .dslca-pseudo-options-filter-hook.dslca-active {
-			border-top-color: #4777c2;
-			background: #3b6fbe;
-			color: #fff;
-			cursor: default;
-		}
-
-		.dslca-header .dslca-options-filter-hook .dslca-icon,
-		.dslca-header .dslca-row-options-filter-hook .dslca-icon,
-		.dslca-pseudo-header .dslca-pseudo-options-filter-hook .dslca-icon {
-			margin-right: 4px;
-		}
-
-		.dslca-header .dslca-options-filter-hook.dslca-active,
-		.dslca-header .dslca-row-options-filter-hook.dslca-active,
-		.dslca-pseudo-header .dslca-pseudo-options-filter-hook.dslca-active {
-			background: #5890e5;
-		}
-
-		.dslca-header .dslca-go-to-section-templates.dslca-active {
-			border-top-color: #bf7671;
-			background: #a94640;
-		}
-
-			.dslca-header .dslca-go-to-section-hook .dslca-icon {
-				font-weight: normal;
-			}
 
 		.dslca-module-edit-actions,
 		.dslca-row-edit-actions,
