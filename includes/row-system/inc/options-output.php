@@ -165,6 +165,7 @@ function dslc_row_display_options() {
 
 						$margin_properties = ['css_margin_top', 'css_margin_right', 'css_margin_bottom', 'css_margin_left'];
 						$padding_properties = ['css_padding_top', 'css_padding_right', 'css_padding_bottom', 'css_padding_left'];
+						$sticky_row_padding_properties = ['sticky_row_padding_top', 'sticky_row_padding_bottom', 'sticky_row_padding_left', 'sticky_row_padding_right'];
 						
 						if($row_option['id'] == 'css_module_section_width')
 						{
@@ -175,6 +176,9 @@ function dslc_row_display_options() {
 						}else if (in_array($row_option['id'], $padding_properties))
 						{	
 							$ext = (isset($dslc_var_row_options['css_padding_unit']['std']) && !empty($dslc_var_row_options['css_padding_unit']['std'])) ? $dslc_var_row_options['css_padding_unit']['std'] : $ext;
+						}else if (in_array($row_option['id'], $sticky_row_padding_properties))
+						{	
+							$ext = (isset($dslc_var_row_options['sticky_row_padding_unit']['std']) && !empty($dslc_var_row_options['sticky_row_padding_unit']['std'])) ? $dslc_var_row_options['sticky_row_padding_unit']['std'] : $ext;
 						}
 
 					?>

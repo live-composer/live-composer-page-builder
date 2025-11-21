@@ -134,7 +134,7 @@ function dslc_display_composer() {
 					</form>
 
 					<div class="dslca-module-edit-actions">
-						<a href="#" class="dslca-module-edit-save" data-event="module-confirm"><?php esc_attr_e('Confirm', 'live-composer-page-builder'); ?></a>
+						<a href="#" class="dslca-module-edit-save" data-event="module-confirm"><?php esc_attr_e('Save', 'live-composer-page-builder'); ?></a>
 						<a href="#" class="dslca-module-edit-cancel" data-event="module-cancel"><?php esc_attr_e('Cancel', 'live-composer-page-builder'); ?></a>
 					</div><!-- .dslca-module-edit-actions -->
 				</div>
@@ -247,7 +247,7 @@ function dslc_display_composer() {
 							</div><!-- .dslca-modules-section-edit-options -->
 						</form><!-- .dslca-modules-section-edit-form -->
 						<div class="dslca-row-edit-actions dslca-module-edit-actions">
-							<span class="dslca-row-edit-save"><?php _e('Confirm', 'live-composer-page-builder'); ?></span>
+							<span class="dslca-row-edit-save"><?php _e('Save', 'live-composer-page-builder'); ?></span>
 							<span class="dslca-row-edit-cancel"><?php _e('Cancel', 'live-composer-page-builder'); ?></span>
 						</div><!-- .dslca-row-edit-actions -->
 					</div>
@@ -1532,43 +1532,98 @@ function dslc_display_modules($page_id)
 				$overlay_style .= 'opacity:' . esc_attr($atts['bg_video_overlay_opacity']) . '; ';
 			}
 
-			// setting up margin and padding options for top, bottom, left and right (migration from vertical and horizontal)
-			if(empty($atts['css_padding_top']) && isset($atts['padding']))
-			{
-				$atts['css_padding_top'] = $atts['padding'];
+			// 1. PADDING MIGRATION: Migrating from old 'padding' (vertical) and 'padding_h' (horizontal)
+    
+			// Migrate Padding Top/Bottom from 'padding'
+			$used_padding = false;
+			if (isset($atts['padding']) && $atts['padding'] !== '') {
+				if (empty($atts['css_padding_top'])) {
+					$atts['css_padding_top'] = $atts['padding'];
+					$used_padding = true;
+				}
+				if (empty($atts['css_padding_bottom'])) {
+					$atts['css_padding_bottom'] = $atts['padding'];
+					$used_padding = true;
+				}
 			}
-			if(empty($atts['css_padding_bottom']) && isset($atts['padding']))
-			{
-				$atts['css_padding_bottom'] = $atts['padding'];
+			
+			// Migrate Padding Left/Right from 'padding_h'
+			$used_padding_h = false;
+			if (isset($atts['padding_h']) && $atts['padding_h'] !== '') {
+				if (empty($atts['css_padding_left'])) {
+					$atts['css_padding_left'] = $atts['padding_h'];
+					$used_padding_h = true;
+				}
+				if (empty($atts['css_padding_right'])) {
+					$atts['css_padding_right'] = $atts['padding_h'];
+					$used_padding_h = true;
+				}
 			}
-			if(empty($atts['css_padding_left']) && isset($atts['padding_h']))
-			{
-				$atts['css_padding_left'] = $atts['padding_h'];
-			}
-			if(empty($atts['css_padding_right']) && isset($atts['padding']))
-			{
-				$atts['css_padding_right'] = $atts['padding_h'];
-			}
+			
+			// 2. MARGIN MIGRATION: Migrating from old 'margin_b' (bottom) and 'margin_h' (horizontal/top)
 
-			// migrate margin
-			if(empty($atts['css_margin_bottom']) && isset($atts['margin_b']))
-			{
+			// Migrate Margin Bottom from 'margin_b'
+			$used_margin_b = false;
+			if (empty($atts['css_margin_bottom']) && isset($atts['margin_b']) && $atts['margin_b'] !== '') {
 				$atts['css_margin_bottom'] = $atts['margin_b'];
+				$used_margin_b = true;
 			}
-			if(empty($atts['css_margin_left']) && isset($atts['margin_h']))
-			{
-				$atts['css_margin_left'] = $atts['margin_h'];
+			
+			// Migrate Margin Left/Right/Top from 'margin_h'
+			$used_margin_h = false;
+			if (isset($atts['margin_h']) && $atts['margin_h'] !== '') {
+				if (empty($atts['css_margin_left'])) {
+					$atts['css_margin_left'] = $atts['margin_h'];
+					$used_margin_h = true;
+				}
+				if (empty($atts['css_margin_right'])) {
+					$atts['css_margin_right'] = $atts['margin_h'];
+					$used_margin_h = true;
+				}
+				if (empty($atts['css_margin_top'])) { // Assuming margin_h also applied to top if nothing else was set
+					$atts['css_margin_top'] = $atts['margin_h'];
+					$used_margin_h = true;
+				}
 			}
-			if(empty($atts['css_margin_right']) && isset($atts['margin_h']))
-			{
-				$atts['css_margin_right'] = $atts['margin_h'];
+			
+			// 3. CLEANUP: Only unset the old fields if their values were successfully used/migrated.
+			if ($used_padding) {
+				unset($atts['padding']);
+			}
+			if ($used_padding_h) {
+				unset($atts['padding_h']);
+			}
+			if ($used_margin_b) {
+				unset($atts['margin_b']);
+			}
+			if ($used_margin_h) {
+				unset($atts['margin_h']);
+			}
+			
+			// STICKY ROW PADDING MIGRATION
+			$sticky_vertical_value = null;
+			if (isset($atts['sticky_row_padding_vertical'])) {
+				$sticky_vertical_value = $atts['sticky_row_padding_vertical'];
 			}
 
-			// unset row's old padding and margin values
-			unset($atts['padding']);
-			unset($atts['padding_h']);
-			unset($atts['margin_h']);
-			unset($atts['margin_b']);
+			if ($sticky_vertical_value !== null) {
+				// Migrate Top/Bottom from sticky_row_padding_vertical
+				if (empty($atts['sticky_row_padding_top'])) {
+					$atts['sticky_row_padding_top'] = $sticky_vertical_value;
+				}
+				if (empty($atts['sticky_row_padding_bottom'])) {
+					$atts['sticky_row_padding_bottom'] = $sticky_vertical_value;
+				}
+				if (empty($atts['sticky_row_padding_left'])) {
+					$atts['sticky_row_padding_left'] = '0';
+				}
+				if (empty($atts['sticky_row_padding_right'])) {
+					$atts['sticky_row_padding_right'] = '0';
+				}
+				
+				// Unset the old vertical field
+				unset($atts['sticky_row_padding_vertical']);
+			}
 			
 			/**
 			 * BG Video
@@ -1932,20 +1987,20 @@ function dslc_display_modules($page_id)
 						<use xlink:href="' . esc_url($ui_icons_url) . '/feather-sprite.svg#columns"/>
 					</svg>
 					<div class="dslca-change-width-modules-area-options">
-						<span>' . __('Container Width', 'live-composer-page-builder') . '</span>
-						<span data-size="1"><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/first-column.webp" alt="Preview" /></span>
-						<span data-size="2"><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/second-column.webp" alt="Preview" /></span>
-						<span data-size="3"><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/third-column.webp" alt="Preview" /></span>
-						<span data-size="4"><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/fourth-column.webp" alt="Preview" /></span>
-						<span data-size="5"><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/fifth-column.webp" alt="Preview" /></span>
-						<span data-size="6"><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/sixth-column.webp" alt="Preview" /></span>
-						<span data-size="7"><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/seventh-column.webp" alt="Preview" /></span>
-						<span data-size="8"><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/eighth-column.webp" alt="Preview" /></span>
-						<span data-size="9"><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/ninth-column.webp" alt="Preview" /></span>
-						<span data-size="10"><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/tenth-column.webp" alt="Preview" /></span>
-						<span data-size="11"><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/eleventh-column.webp" alt="Preview" /></span>
-						<span data-size="12"><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/twelfth-column.webp" alt="Preview" /></span>
-					</div>
+                        <span>' . __('Container Width', 'live-composer-page-builder') . '</span>
+                        <span data-size="1"><small class="lc_content_width_ratio">1/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/first-column.webp" alt="Preview" /></span>
+                        <span data-size="2"><small class="lc_content_width_ratio">2/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/second-column.webp" alt="Preview" /></span>
+                        <span data-size="3"><small class="lc_content_width_ratio">3/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/third-column.webp" alt="Preview" /></span>
+                        <span data-size="4"><small class="lc_content_width_ratio">4/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/fourth-column.webp" alt="Preview" /></span>
+                        <span data-size="5"><small class="lc_content_width_ratio">5/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/fifth-column.webp" alt="Preview" /></span>
+                        <span data-size="6"><small class="lc_content_width_ratio">6/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/sixth-column.webp" alt="Preview" /></span>
+                        <span data-size="7"><small class="lc_content_width_ratio">7/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/seventh-column.webp" alt="Preview" /></span>
+                        <span data-size="8"><small class="lc_content_width_ratio">8/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/eighth-column.webp" alt="Preview" /></span>
+                        <span data-size="9"><small class="lc_content_width_ratio">9/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/ninth-column.webp" alt="Preview" /></span>
+                        <span data-size="10"><small class="lc_content_width_ratio">10/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/tenth-column.webp" alt="Preview" /></span>
+                        <span data-size="11"><small class="lc_content_width_ratio">11/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/eleventh-column.webp" alt="Preview" /></span>
+                        <span data-size="12"><small class="lc_content_width_ratio">12/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/twelfth-column.webp" alt="Preview" /></span>
+                    </div>
 				</span>
 				<span class="dslca-manage-action dslca-change-vertial-align-module-area-hook" title="Change vertical align" >
 					<svg class="feather">

@@ -377,7 +377,7 @@ function dslc_row_edit( row ) {
 			let html_max = '';
 			
 			if (width_unit == '%') {
-				html_min = 0;
+				html_min = -100;
 				html_max = 100;
 			} else {
 				html_min = targetEle.data('min');
@@ -393,7 +393,7 @@ function dslc_row_edit( row ) {
 			let html_max = '';
 			
 			if (width_unit == '%') {
-				html_min = 0;
+				html_min = -100;
 				html_max = 100;
 			} else {
 				html_min = targetEle.data('min');
@@ -409,7 +409,7 @@ function dslc_row_edit( row ) {
 			let html_max = '';
 			
 			if (width_unit == '%') {
-				html_min = 0;
+				html_min = -100;
 				html_max = 100;
 			} else {
 				html_min = targetEle.data('min');

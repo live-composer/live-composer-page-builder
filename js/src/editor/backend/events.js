@@ -94,4 +94,34 @@ export const eventsInit = () =>{
 			document.dispatchEvent( contentEditableFocusOut );
 		}
 	}, false);
+	
+	// Row and Modules Input Validation Logic
+	document.addEventListener("input", function (e) {
+		// Check if the input that triggered the event matches our selector
+		if (e.target.matches('.dslca-modules-section-edit-field-slider-numeric, .dslca-module-edit-field-numeric')) {
+			const input = e.target;
+			let value = parseFloat(input.value);
+
+			// Priority: attribute min/max → data-min/data-max
+			let min = input.getAttribute("min");
+			let max = input.getAttribute("max");
+
+			// fallback to data-min/max if min/max not present
+			if (min === null) min = input.dataset.min;
+			if (max === null) max = input.dataset.max;
+
+			min = parseFloat(min);
+			max = parseFloat(max);
+
+			// Validation logic
+			if (!isNaN(min) && value < min) {
+				input.value = min;
+			} 
+			else if (!isNaN(max) && value > max) {
+				input.value = max;
+			}
+			input.dispatchEvent('change');
+
+		}
+	});
 }

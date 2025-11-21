@@ -745,7 +745,7 @@ class LC_Control {
 		/**
 		 * Display styling control toggle [On/Off]
 		 */
-		if ( ! in_array( $module_control['id'], $controls_without_toggle, true ) && in_array( $section, $sections_with_toggle, true ) && ! stristr( $module_control['id'], 'css_res_' ) ) {
+		if ( ! in_array( $module_control['id'], $controls_without_toggle, true ) && in_array( $section, $sections_with_toggle, true ) && ! stristr( $module_control['id'], 'css_res_' ) && ! str_ends_with( $module_control['id'], '_unit' )) {
 			$control_with_toggle = 'dslca-option-with-toggle';
 
 			if ( '' === stripslashes( $curr_value ) ) {

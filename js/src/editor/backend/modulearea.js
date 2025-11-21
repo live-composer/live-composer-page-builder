@@ -256,20 +256,20 @@ export const modulesAreaAdd = ( row ) => {
 						<use xlink:href="` + uiIconsUrl +`/feather-sprite.svg#columns"></use>
 					</svg>
 					<div class="dslca-change-width-modules-area-options">
-						<span>Container Width</span>
-						<span data-size="1"><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/first-column.webp" alt="Preview" /></span>
-						<span data-size="2"><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/second-column.webp" alt="Preview" /></span>
-						<span data-size="3"><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/third-column.webp" alt="Preview" /></span>
-						<span data-size="4"><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/fourth-column.webp" alt="Preview" /></span>
-						<span data-size="5"><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/fifth-column.webp" alt="Preview" /></span>
-						<span data-size="6"><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/sixth-column.webp" alt="Preview" /></span>
-						<span data-size="7"><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/seventh-column.webp" alt="Preview" /></span>
-						<span data-size="8"><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/eighth-column.webp" alt="Preview" /></span>
-						<span data-size="9"><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/ninth-column.webp" alt="Preview" /></span>
-						<span data-size="10"><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/tenth-column.webp" alt="Preview" /></span>
-						<span data-size="11"><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/eleventh-column.webp" alt="Preview" /></span>
-						<span data-size="12"><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/twelfth-column.webp" alt="Preview" /></span>
-					</div>
+                        <span>Container Width</span>
+                        <span data-size="1"><small class="lc_content_width_ratio">1/12</small><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/first-column.webp" alt="Preview" /></span>
+                        <span data-size="2"><small class="lc_content_width_ratio">2/12</small><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/second-column.webp" alt="Preview" /></span>
+                        <span data-size="3"><small class="lc_content_width_ratio">3/12</small><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/third-column.webp" alt="Preview" /></span>
+                        <span data-size="4"><small class="lc_content_width_ratio">4/12</small><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/fourth-column.webp" alt="Preview" /></span>
+                        <span data-size="5"><small class="lc_content_width_ratio">5/12</small><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/fifth-column.webp" alt="Preview" /></span>
+                        <span data-size="6"><small class="lc_content_width_ratio">6/12</small><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/sixth-column.webp" alt="Preview" /></span>
+                        <span data-size="7"><small class="lc_content_width_ratio">7/12</small><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/seventh-column.webp" alt="Preview" /></span>
+                        <span data-size="8"><small class="lc_content_width_ratio">8/12</small><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/eighth-column.webp" alt="Preview" /></span>
+                        <span data-size="9"><small class="lc_content_width_ratio">9/12</small><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/ninth-column.webp" alt="Preview" /></span>
+                        <span data-size="10"><small class="lc_content_width_ratio">10/12</small><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/tenth-column.webp" alt="Preview" /></span>
+                        <span data-size="11"><small class="lc_content_width_ratio">11/12</small><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/eleventh-column.webp" alt="Preview" /></span>
+                        <span data-size="12"><small class="lc_content_width_ratio">12/12</small><img class="previewimg" src="`+ window.DSLCSiteData.editorUrl +`/images/icons/twelfth-column.webp" alt="Preview" /></span>
+                    </div>
 				</span>
 				<span class="dslca-manage-action dslca-change-vertial-align-module-area-hook" title="Change vertical align" >
 					<svg class="feather">

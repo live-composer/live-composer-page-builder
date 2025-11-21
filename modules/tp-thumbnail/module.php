@@ -120,7 +120,8 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				'label' => __( 'Border Width', 'live-composer-page-builder' ),
 				'id' => 'css_border_width',
 				'onlypositive' => true, // Value can't be negative.
-				'max' => 10,
+				'min' => -2000,
+				'max' => 2000,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -162,6 +163,8 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				'id' => 'css_border_radius_top',
 				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
+				'min' => -2000,
+				'max' => 2000,
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-tp-thumbnail',
@@ -174,6 +177,8 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				'id' => 'css_border_radius_bottom',
 				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
+				'min' => -2000,
+				'max' => 2000,
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-tp-thumbnail',
@@ -199,8 +204,52 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				'section' => 'styling',
 			),
 			array(
-				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
+				'label' => __( 'Margin', 'live-composer-page-builder' ),
+				'id' => 'css_margin_group',
+				'type' => 'group',
+				'action' => 'open',
+				'section' => 'styling',
+			),
+			array(
+				'id' => 'css_margin_unit',
+				'std' => 'px',
+				'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+			array(
+				'label' => __( 'Top', 'live-composer-page-builder' ),
+				'id' => 'css_margin_top',
+				'onlypositive' => true, // Value can't be negative.
+				'min' => -2000,
+				'max' => 2000,
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-tp-thumbnail',
+				'affect_on_change_rule' => 'margin-top',
+				'section' => 'styling',
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_margin_bottom',
+				'onlypositive' => true, // Value can't be negative.
+				'min' => -2000,
+				'max' => 2000,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -210,10 +259,46 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				'ext' => 'px',
 			),
 			array(
+				'label' => __( 'Left', 'live-composer-page-builder' ),
+				'id' => 'css_margin_left',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '0',
+				'min' => -2000,
+				'max' => 2000,
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-tp-thumbnail',
+				'affect_on_change_rule' => 'margin-left',
+				'section' => 'styling',
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Right', 'live-composer-page-builder' ),
+				'id' => 'css_margin_right',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '0',
+				'min' => -2000,
+				'max' => 2000,
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-tp-thumbnail',
+				'affect_on_change_rule' => 'margin-right',
+				'section' => 'styling',
+				'ext' => 'px',
+			),
+			array(
+				'id' => 'css_margin_group',
+				'type' => 'group',
+				'action' => 'close',
+				'section' => 'styling',
+			),
+			array(
 				'label' => __( 'Minimum Height', 'live-composer-page-builder' ),
 				'id' => 'css_min_height',
 				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
+				'min' => -2000,
+				'max' => 2000,
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-tp-thumbnail',
@@ -231,7 +316,7 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 			),
 			array(
 				'id' => 'css_padding_unit',
-				'std' => '',
+				'std' => 'px',
 				'label' => __( 'Padding Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
@@ -253,7 +338,8 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_padding_top',
 				'onlypositive' => true, // Value can't be negative.
-				'max' => 600,
+				'min' => -2000,
+				'max' => 2000,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -266,7 +352,8 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_padding_bottom',
 				'onlypositive' => true, // Value can't be negative.
-				'max' => 600,
+				'min' => -2000,
+				'max' => 2000,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -280,6 +367,8 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				'id' => 'css_padding_left',
 				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
+				'min' => -2000,
+				'max' => 2000,
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-tp-thumbnail',
@@ -292,6 +381,8 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				'id' => 'css_padding_right',
 				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
+				'min' => -2000,
+				'max' => 2000,
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-tp-thumbnail',
@@ -353,7 +444,7 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 			),
 			array(
 				'id' => 'css_res_t_padding_unit',
-				'std' => '',
+				'std' => 'px',
 				'label' => __( 'Padding Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
@@ -376,7 +467,8 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_padding_top',
 				'onlypositive' => true, // Value can't be negative.
-				'max' => 600,
+				'min' => -2000,
+				'max' => 2000,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -390,7 +482,8 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_padding_bottom',
 				'onlypositive' => true, // Value can't be negative.
-				'max' => 600,
+				'min' => -2000,
+				'max' => 2000,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -405,6 +498,8 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				'id' => 'css_res_t_padding_left',
 				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
+				'min' => -2000,
+				'max' => 2000,
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-tp-thumbnail',
@@ -418,6 +513,8 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				'id' => 'css_res_t_padding_right',
 				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
+				'min' => -2000,
+				'max' => 2000,
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-tp-thumbnail',
@@ -466,7 +563,7 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 			),
 			array(
 				'id' => 'css_res_p_padding_unit',
-				'std' => '',
+				'std' => 'px',
 				'label' => __( 'Padding Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
@@ -489,7 +586,8 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_padding_top',
 				'onlypositive' => true, // Value can't be negative.
-				'max' => 600,
+				'min' => -2000,
+				'max' => 2000,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -503,7 +601,8 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_padding_bottom',
 				'onlypositive' => true, // Value can't be negative.
-				'max' => 600,
+				'min' => -2000,
+				'max' => 2000,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -518,6 +617,8 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				'id' => 'css_res_p_padding_left',
 				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
+				'min' => -2000,
+				'max' => 2000,
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-tp-thumbnail',
@@ -531,6 +632,8 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 				'id' => 'css_res_p_padding_right',
 				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
+				'min' => -2000,
+				'max' => 2000,
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-tp-thumbnail',

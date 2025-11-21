@@ -546,7 +546,7 @@ const onModuleOptionsChange = () => {
 
 					// If switching to %, clamp the slider range to 0-100.
 					if (selectedUnit === '%') {
-						newMin = 0;  
+						newMin = -100;  
 						newMax = 100; 
 					} else {
 						// Otherwise (px, em, rem), use the slider's defined range.
@@ -2761,6 +2761,9 @@ function dslc_module_options_numeric( fieldWrapper ) {
 				module.addClass('dslca-module-change-made');
 			}
 		});
+		// sliderInput.on('input', function() {
+		// 	sliderInput.trigger('change');
+		// });
 
 		return false;
 	}); // .each

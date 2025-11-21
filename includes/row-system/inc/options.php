@@ -471,13 +471,58 @@ function dslc_row_register_options() {
 			),
 		),
 	);
-
-	$dslc_var_row_options['sticky_row_padding_vertical'] = array(
-		'id' => 'sticky_row_padding_vertical',
+	$dslc_var_row_options['sticky_row_padding_unit'] = array(
+		'id' => 'sticky_row_padding_unit',
+		'std' => 'px',
+		'label' => __( 'Unit', 'live-composer-page-builder' ),
+		'type' => 'select',
+		'choices' => array(
+			array(
+				'label' => 'px',
+				'value' => 'px',
+			),
+			array(
+				'label' => '%',
+				'value' => '%',
+			),
+		),
+	);
+	$dslc_var_row_options['sticky_row_padding_top'] = array(
+		'id' => 'sticky_row_padding_top',
 		'std' => '20',
-		'label' => __( 'Padding Vertical', 'live-composer-page-builder' ),
+		'label' => __( 'Top', 'live-composer-page-builder' ),
 		'type' => 'slider',
-		'affect_on_change_rule' => 'padding-bottom,padding-top',
+		'affect_on_change_rule' => 'padding-top',
+		'affect_on_change_el' => '.dslc-sticky-section-fixed',
+		'ext' => 'px',
+		'max' => 500,
+	);
+	$dslc_var_row_options['sticky_row_padding_bottom'] = array(
+		'id' => 'sticky_row_padding_bottom',
+		'std' => '20',
+		'label' => __( 'Bottom', 'live-composer-page-builder' ),
+		'type' => 'slider',
+		'affect_on_change_rule' => 'padding-bottom',
+		'affect_on_change_el' => '.dslc-sticky-section-fixed',
+		'ext' => 'px',
+		'max' => 500,
+	);
+	$dslc_var_row_options['sticky_row_padding_left'] = array(
+		'id' => 'sticky_row_padding_left',
+		'std' => '20',
+		'label' => __( 'Left', 'live-composer-page-builder' ),
+		'type' => 'slider',
+		'affect_on_change_rule' => 'padding-left',
+		'affect_on_change_el' => '.dslc-sticky-section-fixed',
+		'ext' => 'px',
+		'max' => 500,
+	);
+	$dslc_var_row_options['sticky_row_padding_right'] = array(
+		'id' => 'sticky_row_padding_right',
+		'std' => '20',
+		'label' => __( 'Right', 'live-composer-page-builder' ),
+		'type' => 'slider',
+		'affect_on_change_rule' => 'padding-right',
 		'affect_on_change_el' => '.dslc-sticky-section-fixed',
 		'ext' => 'px',
 		'max' => 500,
