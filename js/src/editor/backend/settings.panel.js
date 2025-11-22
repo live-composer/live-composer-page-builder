@@ -2355,16 +2355,23 @@ function dslc_module_options_checkbox() {
 		var checkFake = jQuery(this);
 		var checkReal = checkFake.siblings('input[type="checkbox"]');
 
-		if ( checkReal.attr('checked') ) {
-			checkReal.attr('checked', false);
-			checkFake.find('.dslca-icon').removeClass('dslc-icon-check').addClass('dslc-icon-check-empty');
-		} else {
-			checkReal.attr('checked', true);
-			checkFake.find('.dslca-icon').removeClass('dslc-icon-check-empty').addClass('dslc-icon-check');
-		}
+        // Use prop() instead of attr()
+        var isChecked = checkReal.prop('checked');
 
-		checkReal.change();
-	});
+        if (isChecked) {
+            checkReal.prop('checked', false);
+            checkFake.find('.dslca-icon')
+                .removeClass('dslc-icon-check')
+                .addClass('dslc-icon-check-empty');
+        } else {
+            checkReal.prop('checked', true);
+            checkFake.find('.dslca-icon')
+                .removeClass('dslc-icon-check-empty')
+                .addClass('dslc-icon-check');
+        }
+
+        checkReal.trigger('change');
+    });
 }
 
 /**

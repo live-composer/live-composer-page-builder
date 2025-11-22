@@ -444,11 +444,13 @@ body a:focus {
 				color: #fff;
 			}
 			.dslca-row-edit-save,
-			.dslca-module-edit-save{
+			.dslca-module-edit-save, 
+			.dslca-wp-editor-save-hook{
 				background-color: #54c13f !important;
 			}
 			.dslca-row-edit-save:hover,
-			.dslca-module-edit-save:hover{
+			.dslca-module-edit-save:hover,
+			.dslca-wp-editor-save-hook:hover{
 				background-color: #40d71f !important;
 			}
 			.dslca-module-edit-cancel:hover,
