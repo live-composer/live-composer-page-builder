@@ -144,8 +144,8 @@ function dslc_row_register_options() {
 		'refresh_on_change' => false,
 		'affect_on_change_rule' => 'margin-top',
 		'ext' => 'px',
-		'min' => -250,
-		'max' => 250,
+		'min' => -2000,
+		'max' => 2000,
 	);
 	$dslc_var_row_options['css_margin_bottom'] = array(
 		'label' => __( 'Bottom', 'live-composer-page-builder' ),
@@ -155,8 +155,8 @@ function dslc_row_register_options() {
 		'refresh_on_change' => false,
 		'affect_on_change_rule' => 'margin-bottom',
 		'ext' => 'px',
-		'min' => -250,
-		'max' => 250,
+		'min' => -2000,
+		'max' => 2000,
 	);
 	$dslc_var_row_options['css_margin_left'] = array(
 		'label' => __( 'Left', 'live-composer-page-builder' ),
@@ -166,8 +166,8 @@ function dslc_row_register_options() {
 		'refresh_on_change' => false,
 		'affect_on_change_rule' => 'margin-left',
 		'ext' => 'px',
-		'min' => -250,
-		'max' => 250,
+		'min' => -2000,
+		'max' => 2000,
 	);
 	$dslc_var_row_options['css_margin_right'] = array(
 		'label' => __( 'Right', 'live-composer-page-builder' ),
@@ -177,8 +177,8 @@ function dslc_row_register_options() {
 		'refresh_on_change' => false,
 		'affect_on_change_rule' => 'margin-right',
 		'ext' => 'px',
-		'min' => -250,
-		'max' => 250,
+		'min' => -2000,
+		'max' => 2000,
 	);
 	$dslc_var_row_options['margin_group_close'] = array(
 		'label' => __( 'Margin', 'live-composer-page-builder' ),
@@ -212,7 +212,8 @@ function dslc_row_register_options() {
 	$dslc_var_row_options['css_padding_top'] = array(
 		'label' => __( 'Top', 'live-composer-page-builder' ),
 		'id' => 'css_padding_top',
-		'max' => 600,
+		'min' => -2000,
+		'max' => 2000,
 		'std' => $section_padding_ver,
 		'type' => 'slider',
 		'refresh_on_change' => false,
@@ -222,7 +223,8 @@ function dslc_row_register_options() {
 	$dslc_var_row_options['css_padding_bottom'] = array(
 		'label' => __( 'Bottom', 'live-composer-page-builder' ),
 		'id' => 'css_padding_bottom',
-		'max' => 600,
+		'min' => -2000,
+		'max' => 2000,
 		'std' => $section_padding_ver,
 		'type' => 'slider',
 		'refresh_on_change' => false,
@@ -232,6 +234,8 @@ function dslc_row_register_options() {
 	$dslc_var_row_options['css_padding_left'] = array(
 		'label' => __( 'Left', 'live-composer-page-builder' ),
 		'id' => 'css_padding_left',
+		'min' => -2000,
+		'max' => 2000,
 		'std' => '0',
 		'type' => 'slider',
 		'refresh_on_change' => false,
@@ -241,6 +245,8 @@ function dslc_row_register_options() {
 	$dslc_var_row_options['css_padding_right'] = array(
 		'label' => __( 'Right', 'live-composer-page-builder' ),
 		'id' => 'css_padding_right',
+		'min' => -2000,
+		'max' => 2000,
 		'std' => '0',
 		'type' => 'slider',
 		'refresh_on_change' => false,

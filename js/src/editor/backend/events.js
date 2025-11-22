@@ -120,8 +120,7 @@ export const eventsInit = () =>{
 			else if (!isNaN(max) && value > max) {
 				input.value = max;
 			}
-			input.dispatchEvent('change');
-
+			input.dispatchEvent(new Event('change', { bubbles: true }));
 		}
 	});
 }

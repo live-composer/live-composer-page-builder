@@ -547,6 +547,11 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 	$module_settings = apply_filters( 'dslc_module_settings_before_cssgen', $module_settings );
 	$module_structure = apply_filters( 'dslc_module_structure_before_cssgen', $module_structure );
 
+	// --- FIX: Execute Consolidated Value Migration HERE ---
+    // This is the critical step that migrate old vertical and horizontal margin and padding values into new seperate values
+    // the main loop below to find them when iterating over $module_structure.
+	$module_settings = dslc_process_consolidated_css_values( $module_settings );
+
 	$css_output = '';
 	global $dslc_googlefonts_array;
 	$regular_fonts = array( 'Georgia', 'Times', 'Arial', 'Lucida Sans Unicode', 'Tahoma', 'Trebuchet MS', 'Verdana', 'Helvetica' );
