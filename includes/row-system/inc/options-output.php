@@ -163,27 +163,9 @@ function dslc_row_display_options() {
 						$ext = $row_option['ext'];
 						$curr_value = $row_option['std'];
 
-						$margin_properties = ['css_margin_top', 'css_margin_right', 'css_margin_bottom', 'css_margin_left'];
-						$padding_properties = ['css_padding_top', 'css_padding_right', 'css_padding_bottom', 'css_padding_left'];
-						$sticky_row_padding_properties = ['sticky_row_padding_top', 'sticky_row_padding_bottom', 'sticky_row_padding_left', 'sticky_row_padding_right'];
-						
-						if($row_option['id'] == 'css_module_section_width')
-						{
-							$ext = (isset($dslc_var_row_options['css_module_section_width_unit']['std']) && !empty($dslc_var_row_options['css_module_section_width_unit']['std'])) ? $dslc_var_row_options['css_module_section_width_unit']['std'] : $ext;
-						}else if (in_array($row_option['id'], $margin_properties))
-						{								
-							$ext = (isset($dslc_var_row_options['css_margin_unit']['std']) && !empty($dslc_var_row_options['css_margin_unit']['std'])) ? $dslc_var_row_options['css_margin_unit']['std'] : $ext;
-						}else if (in_array($row_option['id'], $padding_properties))
-						{	
-							$ext = (isset($dslc_var_row_options['css_padding_unit']['std']) && !empty($dslc_var_row_options['css_padding_unit']['std'])) ? $dslc_var_row_options['css_padding_unit']['std'] : $ext;
-						}else if (in_array($row_option['id'], $sticky_row_padding_properties))
-						{	
-							$ext = (isset($dslc_var_row_options['sticky_row_padding_unit']['std']) && !empty($dslc_var_row_options['sticky_row_padding_unit']['std'])) ? $dslc_var_row_options['sticky_row_padding_unit']['std'] : $ext;
-						}
-
 					?>
 					<div class="dslca-module-area-edit-field-numeric-wrap">
-						<input type="number" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-slider-numeric" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" value="<?php echo $curr_value; ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" data-min="<?php echo $slider_min; ?>" data-max="<?php echo $slider_max; ?>" data-ext="<?php echo $ext; ?>" data-increment="<?php echo esc_attr( $row_option['increment'] ); ?>" min="<?php echo ( $ext == '%' ? '0' : esc_attr( $slider_min ) ); ?>" max="<?php echo ( $ext == '%' ? '100' : esc_attr( $slider_max ) ); ?>"  />
+						<input type="number" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-slider-numeric" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" value="<?php echo $curr_value; ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" data-min="<?php echo $slider_min; ?>" data-max="<?php echo $slider_max; ?>" data-ext="<?php echo $ext; ?>" data-increment="<?php echo esc_attr( $row_option['increment'] ); ?>" data-ext="<?php echo esc_attr( $row_option['ext'] ); ?>"/>
 					</div>
 
 				<?php elseif ( 'border_checkbox' === $row_option['type'] ) : ?>
@@ -340,21 +322,10 @@ function dslc_row_get_style( $atts = false ) {
 			// The CSS value extension.
 			if ( isset( $row_option['ext'] ) ) {
 				$ext = $row_option['ext'];
-				// Added flow for dynamic ext.
-				$margin_properties = ['css_margin_top', 'css_margin_right', 'css_margin_bottom', 'css_margin_left'];
-				$padding_properties = ['css_padding_top', 'css_padding_right', 'css_padding_bottom', 'css_padding_left'];
 
 				if($row_option['id'] == 'css_module_section_width')
 				{
 					$ext = (isset($atts['css_module_section_width_unit']) && !empty($atts['css_module_section_width_unit'])) ? $atts['css_module_section_width_unit'] : $ext;
-				}			
-				if (in_array($row_option['id'], $margin_properties))
-				{								
-					$ext = (isset($atts['css_margin_unit']) && !empty($atts['css_margin_unit'])) ? $atts['css_margin_unit'] : $ext;
-				}
-				if (in_array($row_option['id'], $padding_properties))
-				{	
-					$ext = (isset($atts['css_padding_unit']) && !empty($atts['css_padding_unit'])) ? $atts['css_padding_unit'] : $ext;
 				}
 
 				$value = $value . $ext;
