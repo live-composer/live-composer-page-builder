@@ -201,7 +201,7 @@ jQuery(document).ready(function($){
         const selectedUnit = changedSelector.val();
         
         // Step 1: Determine the target prefix for affected dimensional sliders.
-        // This turns "css_header_padding_unit" into "css_header_padding".
+        // This turns "css_header_width_unit" into "css_header_width".
         const targetInputsPrefix = dataId.replace('_unit', '');
 
         // Define the search scope: the nearest options form container.
@@ -512,7 +512,7 @@ const onModuleOptionsChange = () => {
 		// Check if the changed option is a UNIT SELECTOR by checking for the '_unit' suffix.
 		if (dslcOptionID.includes('_unit')) { 
 			
-			// Step 1: Determine the target prefix (e.g., 'css_header_padding').
+			// Step 1: Determine the target prefix (e.g., 'css_header_width').
 			const targetInputsPrefix = dslcOptionID.replace('_unit', '');
 			const selectedUnit = dslcOption.val();
 			
@@ -529,7 +529,7 @@ const onModuleOptionsChange = () => {
 				
 				// C. Construct a highly specific selector:
 				// 1. Target the option wrapper for the current tab: .dslca-module-edit-option[data-tab="header_styling"]
-				// 2. Filter inputs by the calculated prefix: input[data-id^="css_header_padding"]
+				// 2. Filter inputs by the calculated prefix: input[data-id^="css_header_width"]
 				const selector = `.dslca-module-edit-option[data-tab="${tabId}"] input.dslca-module-edit-field-numeric[data-id^="${targetInputsPrefix}"]`;
 				
 				const numericInputs = $formContainer.find(selector);
@@ -1126,6 +1126,7 @@ const onSectionOptionsChange = () => {
 			for ( var i = 0; i < dslcRule.length; i++ ) {
 				// dslcTargetEl.css(dslcRule[i], dslcValToApply);
 				if (dslcRule[i].trim() !== "" && dslcValToApply !== undefined && dslcValToApply !== null && dslcValToApply !== "") {
+					console.log(dslcRule[i], dslcValToApply);
       				dslcTargetEl.css(dslcRule[i], dslcValToApply);
                 }
 			}
