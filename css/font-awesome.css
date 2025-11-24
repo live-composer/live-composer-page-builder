@@ -447,6 +447,31 @@ a .dslc-icon-flip-vertical:before {
   background-color: #006add;  /* Moves the knob to the right */
 }
 
+/* Remove slider styles inside .dslca-module */
+.dslca-section-scroller .dslca-scroller-item .dslc-icon-check,
+.dslca-section-scroller .dslca-scroller-item .dslc-icon-check-empty {
+  all: unset !important;
+  font-family: "FontAwesome" !important;
+  display: block !important;
+  font-size: 20px !important;
+  line-height: 41px !important;
+}
+
+/* Apply your icon override */
+.dslca-section-scroller .dslca-scroller-item .dslc-icon-ok:before,
+.dslca-section-scroller .dslca-scroller-item .dslc-icon-check:before {
+  content: "\f00c" !important; /* FontAwesome check icon */
+  position: unset !important;
+  background: none !important;
+  color : #ffc4f1 !important;
+  transform: none !important;
+  width: auto !important;
+  height: auto !important;
+}
+.div.dslca-module:hover .dslc-icon-ok,
+.div.dslca-module:hover .dslc-icon-check {
+  color : #ffffff !important;
+}
 /* The label (text) next to the icon */
 /* .dslca-module-edit-option-checkbox-hook span {
   margin-left: 10px;

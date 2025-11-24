@@ -4223,6 +4223,10 @@ body em {
   flex-direction: row;
   width: 100%;
 }
+.wp-picker-container .hidden {
+	display: none;
+}
+
 .dslca-colorpicker-apply {
 	background: #f1f1f1;
 	border-radius: 0 0 3px 3px;

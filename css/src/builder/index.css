@@ -354,17 +354,18 @@ body a:focus {
 	padding: 10px;
 	bottom: -1px;
 	display: none;
-	color: rgba(199, 199, 199, 0.64)!important;
+	color: rgb(255, 255, 255)!important;
 	/* visibility: hidden; */
 	float: left;
+	background: #ff4040;
 }
 
 .dslca-show-js-error-hook:hover {
-	color: #ff4040;
+	color: #ffffff;
 }
 
 .dslca-show-js-error-hook  .dslca-icon {
-	color: #ff4040;
+	color: #ffffff;
 	margin-right: 5px;
 	margin-left: 8px;
 }
