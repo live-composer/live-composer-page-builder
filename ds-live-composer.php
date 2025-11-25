@@ -4,7 +4,7 @@
  * Plugin URI: https://www.livecomposerplugin.com
  * Description: Page builder for WordPress with drag and drop header/footer editing.
  * Author: Live Composer Team
- * Version: 1.5.53
+ * Version: 2.0
  * Author URI: https://livecomposerplugin.com
  * License: GPL3
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -41,7 +41,7 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) && version_compare( PHP_VERSION, '5.3.0
 	 * Constants
 	 */
 
-	define( 'DS_LIVE_COMPOSER_VER', '1.5.53' );
+	define( 'DS_LIVE_COMPOSER_VER', '2.0' );
 
 	define( 'DS_LIVE_COMPOSER_SHORTNAME', __( 'Live Composer', 'live-composer-page-builder' ) );
 	define( 'DS_LIVE_COMPOSER_BASENAME', plugin_basename( __FILE__ ) );
@@ -194,7 +194,7 @@ register_activation_hook( __FILE__, 'dslc_disable_old_plugin' );
 
 function dslc_deactivate_plugin() {
 	// Deactivate WooCommerce Integration Plugin.
-	if ( defined( 'LCWOO_INTEGRATION_PLUGIN_VER' ) && version_compare( LCWOO_INTEGRATION_PLUGIN_VER, '1.2.5', '<=' ) ) {
+	if ( defined( 'LCWOO_INTEGRATION_PLUGIN_VER' ) && version_compare( LCWOO_INTEGRATION_PLUGIN_VER, '2.0', '<=' ) ) {
 		$plugins_page_url = admin_url('plugins.php');
 		wp_die( 'Please, deactivate <a href="' . esc_attr( $plugins_page_url ) . '">WooCommerce integration for Live Composer</a> plugin first. <br />Sorry for this inconvenience.' );
 	}

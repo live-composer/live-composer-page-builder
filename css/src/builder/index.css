@@ -4883,3 +4883,7 @@ body em {
     overflow-y: scroll;
     margin-bottom: 0px;
 }
+
+.wp-picker-container input[type=text].wp-color-picker{
+    text-shadow: 1px 1px 0px #000;
+}
