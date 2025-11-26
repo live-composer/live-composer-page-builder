@@ -924,13 +924,11 @@ function dslc_helper_is_border_radius( $property_name ) {
 function lc_get_dynamic_unit( $dimensional_control_id, $module_settings, $default_unit ) {
 
     // Define the dimensional suffixes that need to be stripped.
-    $dimensional_suffixes = ['_top', '_right', '_bottom', '_left', '_width', '_height'];
+    $dimensional_suffixes = ['_top', '_right', '_bottom', '_left'];
     
     // Check if the ID contains a dimensional property we manage.
     if ( ! str_contains( $dimensional_control_id, '_padding' ) && 
-         ! str_contains( $dimensional_control_id, '_margin' ) && 
-         ! str_contains( $dimensional_control_id, '_height' ) && 
-         ! str_contains( $dimensional_control_id, '_width' ) ) {
+         ! str_contains( $dimensional_control_id, '_margin' )) {
         
         return $default_unit;
     }

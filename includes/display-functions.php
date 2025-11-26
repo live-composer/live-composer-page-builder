@@ -970,7 +970,7 @@ function dslc_display_modules($page_id)
 				<?php _e('Module settings are being loaded. Save/Cancel actions will appear shortly.', 'live-composer-page-builder'); ?>
 			</div><!-- .dslca-wp-editor-notification -->
 			<div class="dslca-wp-editor-actions">
-				<span class="dslca-wp-editor-save-hook" data-event="modal-wysiwyg-confirm"><?php _e('Confirm', 'live-composer-page-builder'); ?></span>
+				<span class="dslca-wp-editor-save-hook" data-event="modal-wysiwyg-confirm"><?php _e('Save', 'live-composer-page-builder'); ?></span>
 				<span class="dslca-wp-editor-cancel-hook" data-event="modal-wysiwyg-cancel"><?php _e('Cancel', 'live-composer-page-builder'); ?></span>
 			</div>
 		</div>

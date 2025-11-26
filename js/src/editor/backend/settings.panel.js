@@ -2524,31 +2524,40 @@ function dslc_module_options_color(field) {
 		input.wpColorPicker('open');
 
 		// APPLY LOGIC
-		jQuery(apply).on('click', function () {
+		jQuery(apply).on("click", function () {
+      // If new color is not one of the "fixed" colors...
+      if (
+        "#fff" !== dslcColorFieldVal &&
+        "#ffffff" !== dslcColorFieldVal &&
+        "#000" !== dslcColorFieldVal &&
+        "#000000" !== dslcColorFieldVal &&
+        "rgba(0,0,0,0)" !== dslcColorFieldVal
+      ) {
+        // Update pallete colors in the local storage.
+        if (undefined === localStorage[palleteCurrentDommain]) {
+          // Create new record if no local storage found.
+          var newStorage = [dslcColorFieldVal];
+          localStorage[palleteCurrentDommain] = JSON.stringify(newStorage);
+        } else {
+          // Update existing record in the local storage.
+          var newStorage = JSON.parse(localStorage[palleteCurrentDommain]);
 
-			if (
-				dslcColorFieldVal !== '#fff' &&
-				dslcColorFieldVal !== '#ffffff' &&
-				dslcColorFieldVal !== '#000' &&
-				dslcColorFieldVal !== '#000000' &&
-				dslcColorFieldVal !== 'rgba(0,0,0,0)'
-			) {
-				if (undefined === localStorage[palleteCurrentDommain]) {
-					var newStorage = [dslcColorFieldVal];
-					localStorage[palleteCurrentDommain] = JSON.stringify(newStorage);
-				} else {
-					var newStorage = JSON.parse(localStorage[palleteCurrentDommain]);
+          if (newStorage.indexOf(dslcColorFieldVal) == -1) {
+            // Add new color to the head of the pallete array.
+            newStorage.unshift(dslcColorFieldVal);
 
-					if (newStorage.indexOf(dslcColorFieldVal) == -1) {
-						newStorage.unshift(dslcColorFieldVal);
-						if (newStorage.length > 3) newStorage.pop();
-					}
-					localStorage[palleteCurrentDommain] = JSON.stringify(newStorage);
-				}
-			}
+            if (3 < newStorage.length) {
+              // Remove the last color from the pallete.
+              newStorage.pop();
+            }
+          }
 
-			// input.wpColorPicker('close');
-		});
+          localStorage[palleteCurrentDommain] = JSON.stringify(newStorage);
+        }
+      }
+
+      input.wpColorPicker("close");
+    });
 		//  *  CLEAR BUTTON SUPPORT
 		 
 		var clearBtn = wrapper.find('.wp-picker-clear');

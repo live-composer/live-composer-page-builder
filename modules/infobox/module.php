@@ -7549,7 +7549,6 @@ class DSLC_Info_Box extends DSLC_Module {
 											<?php echo $options['button_2_title'];?>
 										</span>
 									<?php endif; ?>
-endif; ?>
 								</a>
 							<?php endif; ?>
 						</div><!-- .dslc-info-box-button -->
