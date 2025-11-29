@@ -2274,62 +2274,41 @@ function add_live_composer_link_to_admin_bar($wp_admin_bar)
 }
 
 function dslc_process_consolidated_css_values( $settings ) {
-    
-    $keys_to_unset = [];
+    // Define mappings for consolidated → separate directional keys
     $patterns = [
-        '_vertical' => ['_top', '_bottom'],
+        '_vertical'   => ['_top', '_bottom'],
         '_horizontal' => ['_left', '_right'],
     ];
 
-    // --- PHASE 1: SPLIT AND COLLECT KEYS FOR UNSETTING ---
+    // Loop through all settings
     foreach ( $settings as $key => $value ) {
-        
-        // We only proceed if the source value is meaningful (not truly empty/null, but '0' is allowed)
-        if ( empty( $value ) && $value !== '0' && $value !== 0 ) continue;
 
-        $directional_suffix = null;
-
-        // 1. Check for the directional suffix in the key (e.g., '_vertical' or '_horizontal')
-        if (str_ends_with($key, '_vertical')) {
-            $directional_suffix = '_vertical';
-            $target_directions = $patterns['_vertical'];
-        } elseif (str_ends_with($key, '_horizontal')) {
-            $directional_suffix = '_horizontal';
-            $target_directions = $patterns['_horizontal'];
+        // Ignore empty values unless it's zero
+        if ( empty($value) && $value !== '0' && $value !== 0 ) {
+            continue;
         }
 
-        if ($directional_suffix) {
-            
-            $migration_occurred = false;
-            
-            // 2. Perform Surgical Replacement
-            foreach ( $target_directions as $new_suffix ) {
-                
-                // Construct the new granular key name by replacing the directional suffix
-                // Example: 'css_res_ph_main_padding_horizontal' becomes 'css_res_ph_main_padding_left'
-                $target_key = str_replace($directional_suffix, $new_suffix, $key);
-                
-                // 3. Check if the target field is currently empty (migration required)
-                // If the target key is NOT set, OR if it's set but empty/zero, we migrate.
-                $target_is_empty = ( ! isset($settings[$target_key]) || $settings[$target_key] === '' || $settings[$target_key] === '0' || $settings[$target_key] === 0 );
-                
-                if ($target_is_empty) {
-                    $settings[ $target_key ] = $value;
-                    $migration_occurred = true;
+        // Detect consolidated vertical/horizontal key
+        foreach ( $patterns as $suffix => $targets ) {
+
+            if ( str_ends_with($key, $suffix) ) {
+
+                // Example: padding_vertical → padding_top, padding_bottom
+                foreach ( $targets as $new_suffix ) {
+
+                    $new_key = str_replace($suffix, $new_suffix, $key);
+
+                    // ALWAYS migrate (override), because consolidated is the "source of truth"
+                    $settings[$new_key] = $value;
                 }
-            }
-            
-            // 4. Collect the source key for unsetting only if migration happened
-            if ($migration_occurred) {
-                $keys_to_unset[] = $key;
+
+                // Remove the consolidated key
+                unset($settings[$key]);
+
+                // No need to check other patterns for this key
+                break;
             }
         }
-    }
-
-    // --- PHASE 2: CLEANUP ---
-    // Remove the source consolidated keys from the settings array
-    foreach ($keys_to_unset as $key) {
-        unset($settings[$key]);
     }
 
     return $settings;

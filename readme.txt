@@ -203,7 +203,7 @@ If you're migrating from another page builder, compatibility for content transfe
 * 🦊 [Check out our WooCommerce Page Builder Extension](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
 
-= 2.0 - November 27 2025 =
+= 2.0 - November 29 2025 =
 
 **Enhancements/Improvements**
 * Relocated the modules and template list from the bottom panel to a new left sidebar for improved UI/UX.
