@@ -1,8 +1,8 @@
 === Live Composer - Free WordPress Website Builder  ===
 Contributors: LiveComposer
 Tags: page builder, landing page builder, frontend page builder, drag and drop page builder, website builder
-Requires at least: 4.7
-Tested up to: 6.7
+Requires at least: 7.4
+Tested up to: 6.8.3
 Stable tag: 2.0
 License: GPLv3
 
