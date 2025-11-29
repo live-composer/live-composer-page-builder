@@ -1446,6 +1446,11 @@ msgstr ""
 #: includes/scripts.php:247
 msgid "Confirm"
 msgstr ""
+#: includes/display-functions.php:83 includes/display-functions.php:95
+#: includes/display-functions.php:305 includes/display-functions.php:906
+#: includes/scripts.php:247
+msgid "Save"
+msgstr ""
 
 #: modules/navigation/module.php:253 includes/row-system/inc/options.php:275
 msgid "Contain"
@@ -6002,6 +6007,12 @@ msgstr ""
 #: includes/scripts.php:265 includes/scripts.php:267
 msgid ""
 "You need to either <strong>confirm</strong> or <strong>cancel</strong> those "
+"changes before continuing."
+msgstr ""
+
+#: includes/scripts.php:265 includes/scripts.php:267
+msgid ""
+"You need to either <strong>save</strong> or <strong>cancel</strong> those "
 "changes before continuing."
 msgstr ""
 

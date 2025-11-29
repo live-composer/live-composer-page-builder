@@ -1,95 +1,98 @@
 const path = require('path');
-const sass = require( 'node-sass' );
+const sass = require('sass');  // Dart Sass
+const util = require('util');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-module.exports = ( env = {} ) => {
-	return {
-		mode: (() => {
-			if ( env.production ) return 'production'
-			else return 'development'
-		})(),
-		devtool: 'cheap-source-map',
-		entry: {
-			editor_backend: './js/src/editor/backend/index.js',
-			editor_frontend: './js/src/editor/frontend/index.js',
+const sassRender = util.promisify(sass.render);
 
-			client_backend: './js/src/client/backend/index.js',
-			client_frontend: './js/src/client/frontend/index.js'
-		},
-		output: {
-			filename: '[name].min.js',
-			path: path.resolve(__dirname, './js/dist')
-		},
-		module: {
-			rules: [
-				{
-					test: /\.(js|jsx)$/,
-					exclude: /(node_modules|bower_components)/,
-					use: {
-						loader: 'babel-loader',
-						options: {
-							// This is a feature of `babel-loader` for webpack (not Babel itself).
-							// It enables caching results in ./node_modules/.cache/babel-loader/
-							// directory for faster rebuilds.
-							cacheDirectory: true,
-						},
-					},
-				},
-			],
-		},
+module.exports = (env = {}) => {
+  return {
+    mode: env.production ? 'production' : 'development',
+    devtool: 'cheap-source-map',
+    entry: {
+      editor_backend: './js/src/editor/backend/index.js',
+      editor_frontend: './js/src/editor/frontend/index.js',
+      client_backend: './js/src/client/backend/index.js',
+      client_frontend: './js/src/client/frontend/index.js',
+    },
+    output: {
+      filename: '[name].min.js',
+      path: path.resolve(__dirname, './js/dist'),
+    },
+    module: {
+      rules: [
+        {
+          test: /\.scss$/,  // or /\.sass$/ or /\.css$/ depending on your files
+          use: [
+            'style-loader',  // inject CSS to DOM
+            'css-loader',    // translate CSS into CommonJS
+            'sass-loader',   // compile Sass to CSS
+          ],
+        },
+      ],
+    },
+    plugins: [
+      new CopyWebpackPlugin({
+        patterns: [
+          // 1. FRONTEND CORE CSS: Target the single file (Fixed the directory-to-file bug)
+          {
+            from: './css/src/frontend/index.css', 
+            to: '../../css/dist/frontend.min.css', 
+            async transform(content, filepath) {
+              const result = await sassRender({
+                file: filepath,
+                outputStyle: 'compressed',
+                sourceMapEmbed: !env.production,
+              });
+              return result.css.toString();
+            },
+          },
+          
+          // 2. FRONTEND PLUGINS CSS: Added to compile frontend plugin styles.
+          // NOTE: If this file does not exist, you must create an empty file named plugins.css in the source folder.
+          {
+            from: './css/src/frontend/plugins.css', 
+            to: '../../css/dist/frontend.plugins.min.css',
+            async transform(content, filepath) {
+              const result = await sassRender({
+                file: filepath,
+                outputStyle: 'compressed',
+                sourceMapEmbed: !env.production,
+              });
+              return result.css.toString();
+            },
+          },
 
-		plugins: [
-			new CopyWebpackPlugin([
-				{
-					from: './css/src/frontend/',
-					to: '../../css/dist/frontend.min.css', // relative to ./js/dist/
-
-					transform: ( content, path ) => {
-						// CopyWebpackPlugin - simply copies files over.
-						// transform - perform actions over files while copping.
-
-						// 1. Compile SCSS into CSS with https://github.com/sass/node-sass
-						const result = sass.renderSync({
-							file: path,
-							outputStyle: 'compressed',
-							sourceMapEmbed: (() => {
-								if ( env.production ) return false
-								else return true
-							})(),
-						  });
-
-						// 2. Prepare result:
-						const css = result.css.toString();
-						return css;
-					},
-				}
-			]),
-
-			new CopyWebpackPlugin([
-				{
-					from: './css/src/builder/',
-					to: '../../css/dist/builder.min.css', // relative to ./js/dist/
-
-					transform: ( content, path ) => {
-						// CopyWebpackPlugin - simply copies files over.
-						// transform - perform actions over files while copping.
-
-						// 1. Compile SCSS into CSS with https://github.com/sass/node-sass
-						const result = sass.renderSync({
-							file: path,
-							outputStyle: 'compressed',
-							sourceMapEmbed: (() => {
-								if ( env.production ) return false
-								else return true
-							})(),
-						  });
-
-						// 2. Prepare result:
-						const css = result.css.toString();
-						return css;
-					},
-				}
-			]),
-		]
-	};
+          // 3. BUILDER CORE CSS: Target the single file (Fixed the directory-to-file bug)
+          {
+            from: './css/src/builder/index.css', 
+            to: '../../css/dist/builder.min.css', 
+            async transform(content, filepath) {
+              const result = await sassRender({
+                file: filepath,
+                outputStyle: 'compressed',
+                sourceMapEmbed: !env.production,
+              });
+              return result.css.toString();
+            },
+          },
+          
+          // 4. BUILDER PLUGINS CSS: Added to compile builder plugin styles.
+          // NOTE: If this file does not exist, you must create an empty file named plugins.css in the source folder.
+          {
+            from: './css/src/builder/plugins.css', 
+            to: '../../css/dist/builder.plugins.min.css',
+            async transform(content, filepath) {
+              const result = await sassRender({
+                file: filepath,
+                outputStyle: 'compressed',
+                sourceMapEmbed: !env.production,
+              });
+              return result.css.toString();
+            },
+          },
+        ],
+      }),
+    ],
+  };
 };

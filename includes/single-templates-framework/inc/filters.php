@@ -134,7 +134,8 @@ function dslc_templates_col_content( $column_name, $post_ID ) {
 				$post_types[$key] = __('Downloads', 'live-composer-page-builder' );
 			} elseif ( 'dslc_galleries' === $value) {
 				$post_types[$key] = __('Galleries', 'live-composer-page-builder' );
-
+			} elseif ( 'post_archive' === $value) {
+				$post_types[$key] = __('Post Archive', 'live-composer-page-builder' );
 			} elseif ( 'dslc_projects_archive' === $value) {
 				$post_types[$key] = __('Projects Archive', 'live-composer-page-builder' );
 			} elseif ( 'dslc_staff_archive' === $value) {
@@ -149,7 +150,7 @@ function dslc_templates_col_content( $column_name, $post_ID ) {
 				unset( $post_types[$key] );
 			}
 		}
-
+		sort($post_types);
 		$cpt_col_val = '<ul><li> – ';
 		$cpt_col_val .= implode('</li><li> – ', $post_types);
 		$cpt_col_val .= '</li></ul>';

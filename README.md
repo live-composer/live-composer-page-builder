@@ -6,15 +6,13 @@ http://livecomposerplugin.com
 
 [![Download the latest verison](https://img.shields.io/badge/Latest%20Version-Download-%234CC597.svg)](http://downloads.wordpress.org/plugin/live-composer-page-builder.latest-stable.zip) [![GitHub license](https://img.shields.io/badge/license-GPLv2-blue.svg)](https://raw.githubusercontent.com/livecomposer/Live-Composer/master/LICENSE) ![WordPress Tested](https://img.shields.io/badge/wordpress-plugin-green.svg)
 
-**Lead Developer:** [Lumberman Designs Team](https://github.com/lumbermandesigns)
-
-**Original Plugin Idea and Development:** [Slobodan Kustrimovic](https://github.com/WPCanyon)
+**Developed and Maintained By:** [Live Composer Team](https://livecomposerplugin.com/)
 
 ## Description
 
 Live Composer is a front-end WordPress page builder plugin. Front-end means you build the page directly on the page, not in the admin panel, which allows you to see exactly how the page will look like as you build it, with live feedback on every change you make.
 
-[![Live Composer Video Review](http://cl.ly/2K0g0D0w1K0o/lc-demo-video.png)](https://youtu.be/geY-qCoOggo)
+[![Live Composer Video Review](http://cl.ly/2K0g0D0w1K0o/lc-demo-video.png)](https://livecomposerplugin.com/wp-content/uploads/2025/11/Live-composser-demo-video.mp4)
 
 Make sure you try the [interactive tutorial](http://livecomposerplugin.com/playground/tutorial-chapter-one/?dslc=active) to get familiar with how it works.
 

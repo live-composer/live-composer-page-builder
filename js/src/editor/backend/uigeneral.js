@@ -7,12 +7,15 @@
  * - dslc_show_publish_button ( Shows the publish button )
  * - dslc_show_section now showSection ( Show a specific section )
  * - dslc_generate_filters ( Generate origin filters )
+ * - dslca-search-modules ( Search Modules )
  * - dslc_filter_origin ( Origin filtering for templates/modules listing )
  * - dragAndDropInit ( Initiate drag and drop functionality )
  ***********************************/
 
 import { elementOptionsTabs } from './settings.panel.js';
 import { CModalWindow } from './modalwindow.class.js';
+import { dslc_save_composer } from './codegeneration.js';
+import { makePopupDraggableAndResizable } from './popup-drag-resize.js'; 
 
 import Sortable from 'sortablejs';
 
@@ -212,6 +215,53 @@ jQuery(document).on( 'click', '.dslca-section-title', function(e){
 		jQuery('.dslca-section-title-filter-options').slideToggle(300);
 	}
 });
+/**
+ * Hook - Search Modules
+ */
+
+jQuery(document).on( 'input', '.dslca-search-modules', function(e){
+
+	var searchValue = jQuery(this).val().toLowerCase();
+	var modules = jQuery('.dslca-sections .dslca-modules .dslca-section-scroller .dslca-section-scroller-inner .dslca-section-scroller-content');
+	var filterValue = jQuery(".dslca-sections .dslca-modules .dslca-section-title .dslca-section-title-filter-curr").text();
+	if(filterValue == "Elements" || filterValue == "Show All")
+	{
+		if(searchValue == "")
+		{
+		jQuery(".dslca-origin", modules).attr("data-display-module", "true");  
+		}
+		else
+		{
+		jQuery(".dslca-origin", modules).attr("data-display-module", "false");
+		modules.children().each(function () {
+			var title = jQuery(this).children(".dslca-module-title").text().toLowerCase();
+			if (title.includes(searchValue))
+			{
+			this.dataset.displayModule = "true";
+			}
+		});
+		}
+	}
+	else
+	{
+		if(searchValue == "")
+		{
+			jQuery('.dslca-origin[data-origin="' + filterValue + '"]', modules).attr("data-display-module", "true");  
+		}
+		else
+		{
+			jQuery('.dslca-origin', modules).attr("data-display-module", "false");
+			modules.children().each(function () {
+			var title = jQuery(this).children(".dslca-module-title").text().toLowerCase();
+			if (title.includes(searchValue) && jQuery(this).attr("data-origin") == filterValue)
+			{
+				this.dataset.displayModule = "true";
+			}
+			});
+		}
+	}
+
+});
 
 /**
  * Hook - Apply Filter Origin
@@ -224,6 +274,8 @@ jQuery(document).on( 'click', '.dslca-section-title-filter-options a', function(
 
 	var origin = jQuery(this).data('origin');
 	var section = jQuery(this).closest('.dslca-section');
+	// blank search field on filter change
+	jQuery('.dslca-search-modules').val("");
 
 	if ( section.hasClass('dslca-templates-load') ) {
 		jQuery('.dslca-section-title-filter-curr', section).text( jQuery(this).text());
@@ -231,7 +283,8 @@ jQuery(document).on( 'click', '.dslca-section-title-filter-options a', function(
 		jQuery('.dslca-section-title-filter-curr', section).text( jQuery(this).text());
 	}
 
-	jQuery('.dslca-section-scroller-inner').css({ left : 0 });
+	// jQuery('.dslca-section-scroller-inner').css({ left : 0 });
+	jQuery(this).parent().siblings('.dslca-icon').toggleClass('dslc-icon-angle-up dslc-icon-angle-down');
 
 	dslc_filter_origin( origin, section );
 
@@ -328,7 +381,20 @@ export const showSection = ( section ) => {
 	jQuery('.dslca-container').css({ bottom: -500 });
 
 	// Hide all sections and show specific section
-	jQuery('.dslca-section').hide();
+	// jQuery('.dslca-section').hide();
+	if (section !== ".dslca-module-edit" && section !== ".dslca-modules-section-edit") {
+		jQuery(".dslca-section").hide();
+	}
+
+	// 2. If 'e' is equal to ".dslca-modules", perform two actions related to activation classes.
+	if (section === ".dslca-modules") {
+		// Remove active class from the templates button
+		jQuery(".dslca-go-to-section-templates").removeClass("dslca-active");
+
+		// Add active class to the modules button
+		jQuery(".dslca-go-to-section-modules").addClass("dslca-active");
+	}
+	
 	jQuery(section).show();
 
 	// Change "currently editing"
@@ -342,7 +408,7 @@ export const showSection = ( section ) => {
 
 		jQuery('.dslca-currently-editing')
 			.show()
-			.css( 'background-color', '#e5855f' )
+			.css( 'background-color', '#006add' )
 				.find('strong')
 				.text( 'Row' );
 	} else {
@@ -392,7 +458,7 @@ function dslc_generate_filters() {
 			filtersHTML += '<a href="#" data-origin="' + el.data('origin') + '">' + el.data('origin') + '</a>';
 		}
 	});
-
+	jQuery('.dslca-section-title-filter .dslca-icon').toggleClass('dslc-icon-angle-up dslc-icon-angle-down');
 	jQuery('.dslca-section:visible .dslca-section-title-filter-options').html( filtersHTML ).css( 'background', jQuery('.dslca-section:visible').data('bg') );
 }
 
@@ -658,6 +724,30 @@ export const keypressEvents = () => {
 
 		// Events to run when any button preset.
 		dslc_keydown( keydown_event );
+		// ----------------------------------------------------
+        // ** NEW: UNDO (Ctrl/Cmd + Z) & REDO (Ctrl/Cmd + Y/Shift+Z) **
+        // ----------------------------------------------------
+        if ( (keydown_event.metaKey || keydown_event.ctrlKey) ) {
+            // UNDO: Ctrl/Cmd + Z
+            if ( keydown_event.which === 90 && ! keydown_event.shiftKey ) { // 90 is key code for Z
+                keydown_event.preventDefault();
+                if (typeof LiveComposer.Builder.Actions.undo === 'function') {
+                    LiveComposer.Builder.Actions.undo();
+                }
+                return false;
+            }
+            // REDO: Ctrl/Cmd + Y (89) or Ctrl/Cmd + Shift + Z
+            if ( keydown_event.which === 89 || (keydown_event.which === 90 && keydown_event.shiftKey) ) {
+                keydown_event.preventDefault();
+                if (typeof LiveComposer.Builder.Actions.redo === 'function') {
+                    LiveComposer.Builder.Actions.redo();
+                }
+                return false;
+            }
+        }
+        // ----------------------------------------------------
+        // ** END NEW CODE **
+        // ----------------------------------------------------
 	});
 
 	// Key UP events.
@@ -818,7 +908,8 @@ function dslca_update_report_log() {
 		if ( error_report.includes('lc-extensions') || error_report.includes('page-builder') ) {
 			errors_container.value = error_report;
 			localStorage.removeItem('js_errors_report');
-			document.querySelector( '.dslca-show-js-error-hook' ).setAttribute('style','visibility:visible');
+			document.querySelector( '.dslca-show-js-error-container' ).style.display = 'block';			
+			document.querySelector('.dslca-show-js-error-hook').style.display = 'block';
 		}
 	}
 }
@@ -847,6 +938,72 @@ jQuery(document).on('editorFrameLoaded', function(){
 		htmlObject.innerHTML = overlay;
 
 		el.append( htmlObject );
-	});
+	}); 
 
+});
+
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+
+    const closeBtn1 = document.getElementById("lc_closeBtn");
+    const closeBtn2 = document.getElementById("lc_closeBtn2");
+	const dragOverlay = document.getElementById("dslc-drag-overlay");
+
+    // Initialize Module Popup (lc_popup)
+    makePopupDraggableAndResizable('lc_popup', 'lc_popupHeader', dragOverlay, closeBtn1);
+    
+    // Initialize Row Popup (lc_popup2)
+    makePopupDraggableAndResizable('lc_popup2', 'lc_popupHeader2', dragOverlay, closeBtn2);
+	const popup = document.getElementById('lc_popupContent');
+    const btnMin = document.getElementById('lc_popup_minimize');
+    const btnMax = document.getElementById('lc_popup_maximize');
+ 
+    // Hide popup
+    btnMin.addEventListener('click', function() {
+        popup.classList.remove('show');
+ 
+        btnMin.classList.remove('show');
+        btnMin.classList.add('hide');
+ 
+        btnMax.classList.remove('hide');
+        btnMax.classList.add('show');
+    });
+ 
+    // Show popup
+    btnMax.addEventListener('click', function() {
+        popup.classList.add('show');
+ 
+        btnMax.classList.remove('show');
+        btnMax.classList.add('hide');
+ 
+        btnMin.classList.remove('hide');
+        btnMin.classList.add('show');
+    });
+ 
+    const popup2 = document.getElementById('lc_popupContent2');
+    const btnMin2 = document.getElementById('lc_popup_minimize2');
+    const btnMax2 = document.getElementById('lc_popup_maximize2');
+ 
+    // Hide popup
+    btnMin2.addEventListener('click', function() {
+        popup2.classList.remove('show');
+ 
+        btnMin2.classList.remove('show');
+        btnMin2.classList.add('hide');
+ 
+        btnMax2.classList.remove('hide');
+        btnMax2.classList.add('show');
+    });
+ 
+    // Show popup
+    btnMax2.addEventListener('click', function() {
+        popup2.classList.add('show');
+ 
+        btnMax2.classList.remove('show');
+        btnMax2.classList.add('hide');
+ 
+        btnMin2.classList.remove('hide');
+        btnMin2.classList.add('show');
+    });
+ 
 });

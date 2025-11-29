@@ -59,10 +59,10 @@ export const eventsInit = () =>{
 			document.dispatchEvent( moduleDelete );
 		}
 
-		if ( event.target.matches( '.dslca-change-width-module-options [data-size]' ) ) {
-			// Create a new "Change Module Width" event
-			const moduleChangeWidth = new CustomEvent('moduleChangeWidth', { detail: event.target });
-			document.dispatchEvent( moduleChangeWidth );
+		const sizeEl = event.target.closest('.dslca-change-width-module-options [data-size]');
+		if ( sizeEl ) {
+			const moduleChangeWidth = new CustomEvent('moduleChangeWidth', { detail: sizeEl });
+			document.dispatchEvent(moduleChangeWidth);
 		}
 
 		if ( event.target.matches( '[data-event="wysiwyg-edit"]' ) ) {
@@ -94,4 +94,33 @@ export const eventsInit = () =>{
 			document.dispatchEvent( contentEditableFocusOut );
 		}
 	}, false);
+	
+	// Row and Modules Input Validation Logic
+	document.addEventListener("input", function (e) {
+		// Check if the input that triggered the event matches our selector
+		if (e.target.matches('.dslca-modules-section-edit-field-slider-numeric, .dslca-module-edit-field-numeric')) {
+			const input = e.target;
+			let value = parseFloat(input.value);
+
+			// Priority: attribute min/max → data-min/data-max
+			let min = input.getAttribute("min");
+			let max = input.getAttribute("max");
+
+			// fallback to data-min/max if min/max not present
+			if (min === null) min = input.dataset.min;
+			if (max === null) max = input.dataset.max;
+
+			min = parseFloat(min);
+			max = parseFloat(max);
+
+			// Validation logic
+			if (!isNaN(min) && value < min) {
+				input.value = min;
+			} 
+			else if (!isNaN(max) && value > max) {
+				input.value = max;
+			}
+			input.dispatchEvent(new Event('change', { bubbles: true }));
+		}
+	});
 }

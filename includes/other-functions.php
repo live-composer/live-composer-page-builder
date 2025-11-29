@@ -717,3 +717,18 @@ foreach ( $dslc_category_type_names as $name ) {
 	add_action( "edited_{$name}", 'dslc_save_taxonomy_custom_meta', 10, 2 );  
 	add_action( "create_{$name}", 'dslc_save_taxonomy_custom_meta', 10, 2 );
  }
+
+// Disable smart (curly) quotes so JSON formatting isn't broken
+function disable_smart_quotes_for_json_fix() {
+    // Remove automatic texturizing (smart quotes, dashes, etc.)
+    remove_filter('the_content', 'wptexturize');
+    remove_filter('the_title', 'wptexturize');
+    remove_filter('the_excerpt', 'wptexturize');
+    remove_filter('widget_text_content', 'wptexturize');
+    remove_filter('term_description', 'wptexturize');
+    remove_filter('comment_text', 'wptexturize');
+
+    // Make sure texturizing never runs
+    add_filter('run_wptexturize', '__return_false');
+}
+add_action('init', 'disable_smart_quotes_for_json_fix');

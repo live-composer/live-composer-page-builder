@@ -46,12 +46,20 @@ function dslc_add_lc_settings_page() {
 		$icon_svg,
 		'99.99'
 	);
+	add_submenu_page(
+		'dslc_plugin_options',                     // Parent slug
+		__( 'Live Composer', 'live-composer-page-builder' ), // Page title
+		__( 'Live Composer', 'live-composer-page-builder' ),      // Menu title
+		'manage_options',                          // Capability
+		'dslc_plugin_options',                     // Menu slug (same as parent)
+		'dslc_plugin_options_display'              // Callback
+	);
 
 	// Custom options extension.
 	global $dslc_options_extender;
 	$dslc_options_extender->construct_panels();
 
-} add_action( 'admin_menu', 'dslc_add_lc_settings_page' );
+} add_action( 'admin_menu', 'dslc_add_lc_settings_page',5 );
 
 
 /**

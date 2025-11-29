@@ -314,3 +314,89 @@ function dslc_remove_yoast_metabox() {
 	}
 }
 add_action( 'add_meta_boxes', 'dslc_remove_yoast_metabox', 11 );
+
+
+/**
+ * Show notice if LC Extensions or LC Woo Integration plugin version is < 2.0
+ * These add-ons MUST be updated for Live Composer to work correctly.
+ */
+function dslc_required_addons_update_notice() {
+
+    $ext_plugin = 'lc-extensions/lc-extensions.php';
+    $woo_plugin = 'lc-woo-integration/lc-woo-integration.php';
+
+    if ( ! function_exists( 'get_plugin_data' ) ) {
+        require_once ABSPATH . 'wp-admin/includes/plugin.php';
+    }
+
+    $screen = get_current_screen();
+    $current_parent_base = $screen->parent_base;
+
+    $notice_id = 'dslc_addons_update_required';
+    $notice_dismissed = dslc_notice_dismissed( $notice_id );
+    $notice_nonce = dslc_generate_notice_nonce( $notice_id );
+
+    $display_notice = false;
+    $issues = [];
+
+    // Check LC Extensions
+    if ( is_plugin_active( $ext_plugin ) ) {
+        $data = get_plugin_data( WP_PLUGIN_DIR . '/' . $ext_plugin );
+        if ( version_compare( $data['Version'], '2.0', '<' ) ) {
+            $display_notice = true;
+            $issues[] = 'Update <strong>LC Extensions</strong> plugin to version 2.0 or higher.';
+        }
+    }
+
+    // Check LC Woo Integration
+    if ( is_plugin_active( $woo_plugin ) ) {
+        $data = get_plugin_data( WP_PLUGIN_DIR . '/' . $woo_plugin );
+        if ( version_compare( $data['Version'], '2.0', '<' ) ) {
+            $display_notice = true;
+            $issues[] = 'Update <strong>LC Woo Integration</strong> plugin to version 2.0 or higher.';
+        }
+    }
+
+    // Stop if dismissed or no issues
+    if ( ! $display_notice || $notice_dismissed ) {
+        return;
+    }
+
+    ?>
+    <div class="notice dslc-notice notice-error is-dismissible"
+        id="<?php echo $notice_id; ?>"
+        data-nonce="<?php echo $notice_nonce; ?>">
+
+        <?php if ( $current_parent_base !== 'dslc_plugin_options' ) : ?>
+
+            <p>
+                <strong>Live Composer:</strong> Some required add-ons are outdated.
+                <br>To ensure full compatibility, <strong>please update them immediately.</strong>
+            </p>
+
+            <ul style="padding-left: 25px;">
+                <?php foreach ( $issues as $msg ) : ?>
+                    <li type="disc"><?php echo wp_kses_post( $msg ); ?></li>
+                <?php endforeach; ?>
+            </ul>
+
+            <p><a href="<?php echo admin_url( 'plugins.php' ); ?>">Go to Plugins page to update.</a></p>
+
+        <?php else : ?>
+
+            <p>
+                <strong>Live Composer Add-ons:</strong> The following plugins need updates to work correctly:
+            </p>
+
+            <ul style="padding-left: 25px;">
+                <?php foreach ( $issues as $msg ) : ?>
+                    <li type="disc"><?php echo wp_kses_post( $msg ); ?></li>
+                <?php endforeach; ?>
+            </ul>
+
+        <?php endif; ?>
+
+    </div>
+    <?php
+}
+add_action( 'admin_notices', 'dslc_required_addons_update_notice' );

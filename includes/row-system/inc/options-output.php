@@ -94,7 +94,15 @@ function dslc_row_display_options() {
 
 			<?php if ( 'open' === $row_option['action'] ) : ?>
 				<div class="dslca-section-control-group dslca-section-edit-option">
-				<div class="controls-group-inner">
+					<?php 
+					$wrapper_class = '';
+					if(strtolower($row_option['label']) == 'margin'){
+						$wrapper_class = 'controls-group-margin';
+					}else if(strtolower($row_option['label']) == 'padding'){
+						$wrapper_class = 'controls-group-padding';
+					}
+					?>
+				<div class="controls-group-inner <?php echo $wrapper_class ?>">
 				<span class="dslca-section-edit-label"><?php echo $row_option['label'] ?></span>
 			<?php endif; ?>
 
@@ -156,7 +164,9 @@ function dslc_row_display_options() {
 						$curr_value = $row_option['std'];
 
 					?>
-					<input type="number" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-slider-numeric" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" value="<?php echo $curr_value; ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" data-min="<?php echo $slider_min; ?>" data-max="<?php echo $slider_max; ?>" data-ext="<?php echo $ext; ?>" data-increment="<?php echo esc_attr( $row_option['increment'] ); ?>" data-ext="<?php echo esc_attr( $row_option['ext'] ); ?>"/>
+					<div class="dslca-module-area-edit-field-numeric-wrap">
+						<input type="number" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-slider-numeric" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" value="<?php echo $curr_value; ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" data-min="<?php echo $slider_min; ?>" data-max="<?php echo $slider_max; ?>" data-ext="<?php echo $ext; ?>" data-increment="<?php echo esc_attr( $row_option['increment'] ); ?>" data-ext="<?php echo esc_attr( $row_option['ext'] ); ?>"/>
+					</div>
 
 				<?php elseif ( 'border_checkbox' === $row_option['type'] ) : ?>
 
@@ -278,7 +288,7 @@ function dslc_row_get_options_fields( $atts = false ) {
  * @return string      CSS styles for the ROW.
  */
 function dslc_row_get_style( $atts = false ) {
-
+	
 	global $dslc_var_row_options;
 	$style = '';
 
@@ -311,7 +321,14 @@ function dslc_row_get_style( $atts = false ) {
 
 			// The CSS value extension.
 			if ( isset( $row_option['ext'] ) ) {
-				$value = $value . $row_option['ext'];
+				$ext = $row_option['ext'];
+
+				if($row_option['id'] == 'css_module_section_width')
+				{
+					$ext = (isset($atts['css_module_section_width_unit']) && !empty($atts['css_module_section_width_unit'])) ? $atts['css_module_section_width_unit'] : $ext;
+				}
+
+				$value = $value . $ext;
 			}
 
 			// Border.
@@ -344,6 +361,13 @@ function dslc_row_get_style( $atts = false ) {
 							}
 						} else {
 							$value = 'url(' . wp_get_attachment_url( $value ) . ')';
+						}
+					}
+					if ('width' === $rule) {
+						if ('module_section_width' === $row_option['id']) {
+							if (empty($atts['type']) || $atts['type'] === 'full') {
+								$value = '';
+							}
 						}
 					}
 

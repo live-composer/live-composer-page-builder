@@ -29,7 +29,7 @@
 
 import { CModalWindow } from './modalwindow.class.js';
 import { hidePublishButton, showSection } from './uigeneral.js';
-import anime from 'animejs';
+import { animate } from 'animejs';
 import { editableContentCodeGeneration } from "./codegeneration.js";
 
 var actionAvail = function() {
@@ -178,6 +178,7 @@ document.addEventListener('pasteModuleStyles', function (customEvent) {
 				if ( modulePropertiesChanged ) {
 					// Prepare and call AJAX module redraw request.
 					currentModuleProperties['action'] = 'dslc-ajax-add-module';
+					currentModuleProperties['_wpnonce'] = DSLCAjax._wpnonce;
 					currentModuleProperties['dslc'] = 'active';
 					currentModuleProperties['dslc_module_id'] = currentModuleProperties.module_id;
 					currentModuleProperties['dslc_module_instance_id'] = currentModuleProperties.module_instance_id;
@@ -202,14 +203,15 @@ document.addEventListener('pasteModuleStyles', function (customEvent) {
 								dslcModule.remove();
 								window.dslc_generate_code();
 								window.dslc_show_publish_button();
-
+								
 								LiveComposer.Builder.PreviewAreaWindow.dslc_carousel();
 								LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();
-
+								
 								LiveComposer.Builder.PreviewAreaWindow.dslc_tabs();
 								LiveComposer.Builder.PreviewAreaWindow.dslc_init_accordion();
-
+								
 								jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-module-being-edited');
+								parent.LiveComposer.Builder.Actions.saveState();
 							}
 						}
 					);
@@ -449,9 +451,8 @@ function dslc_module_delete( module ) {
 	if ( window.dslcDebug ) console.log( 'dslc_delete_module' );
 	showSection( '.dslca-modules' );
 
-	anime({
-		targets: module,
-		easing: 'easeOutExpo',
+	animate(module,{
+		ease: 'easeOutExpo',
 		scale: 0,
 		opacity: 0,
 		duration: 350,
@@ -462,6 +463,7 @@ function dslc_module_delete( module ) {
 			module.parentNode.removeChild( module );
 			window.dslc_generate_code();
 			window.dslc_show_publish_button();
+			parent.LiveComposer.Builder.Actions.saveState();
 		}
 	  });
 }
@@ -484,15 +486,15 @@ function moduleDuplicate( module ) {
 	// Duplicate the module and append it to the same area
 	var module_new = module.cloneNode(true);
 
-	jQuery( module_new ).appendTo( module.closest( '.dslc-modules-area' ) ).css({
-		'-webkit-animation-name' : 'none',
-		'-moz-animation-name' : 'none',
-		'animation-name' : 'none',
-		'animation-duration' : '0',
-		'-webkit-animation-duration' : '0',
-		opacity : 0,
-		top: -50
-	}).addClass('dslca-module-being-edited');
+	jQuery( module_new ).insertAfter( module ).css({
+        '-webkit-animation-name' : 'none',
+        '-moz-animation-name' : 'none',
+        'animation-name' : 'none',
+        'animation-duration' : '0',
+        '-webkit-animation-duration' : '0',
+        opacity : 0,
+        top: -50
+    }).addClass('dslca-module-being-edited');
 
 	// Generate new ID for the new module and change it in HTML/CSS of the module.
 	getNewModuleId( module_new );
@@ -502,9 +504,8 @@ function moduleDuplicate( module ) {
 	window.dslc_generate_code();
 
 	// Fade in the module
-	anime({
-		targets: module_new,
-		easing: 'easeOutExpo',
+	animate(module_new,{
+		ease: 'easeOutExpo',
 		// scale: 0,
 		top: 0,
 		opacity: 1,
@@ -517,6 +518,7 @@ function moduleDuplicate( module ) {
 	});
 
 	window.dslc_show_publish_button();
+	parent.LiveComposer.Builder.Actions.saveState();
 }
 
 /**
@@ -581,6 +583,7 @@ function dslc_module_width_set( moduleEl, new_width ) {
 
 	window.dslc_generate_code();
 	window.dslc_show_publish_button();
+	parent.LiveComposer.Builder.Actions.saveState();
 }
 
 /**
@@ -600,12 +603,18 @@ window.dslc_module_options_show = function( moduleID ) {
 	dslcDefaultSection = jQuery('.dslca-header').data('default-section'),
 	pseudoPanel = jQuery(jQuery('#pseudo-panel').html());
 
+	jQuery(".dslca-module-edit-options-inner").html("");
+	jQuery(".dslca-module-edit-options-tabs").html("");
+	jQuery(".dslca-header .dslca-options-filter-hook").show();
+	jQuery(".lc_popupContent .dslca-header").after(pseudoPanel.html());
+
+
 	jQuery("#wpwrap").append(pseudoPanel);
 
 	// Settings array for the Ajax call
 	var dslcSettings = {};
 	dslcSettings['action'] = 'dslc-ajax-display-module-options';
-	_wpnonce : DSLCAjax._wpnonce,
+	dslcSettings['_wpnonce'] = DSLCAjax._wpnonce;
 	dslcSettings['dslc'] = 'active';
 	dslcSettings['dslc_module_id'] = moduleID;
 	dslcSettings['dslc_post_id'] = jQuery('.dslca-container').data('data-post-id');
@@ -650,6 +659,7 @@ window.dslc_module_options_show = function( moduleID ) {
 	LiveComposer.Builder.Flags.panelOpened = true;
 
 	// Show pseudo settings panel
+	jQuery("#lc_popup").show();
 	pseudoPanel.show();
 	pseudoPanel.addClass('show');
 
@@ -660,6 +670,7 @@ window.dslc_module_options_show = function( moduleID ) {
 		function( response ) {
 
 			// Hide pseudo panel
+			jQuery(".lc_popupContent .dslca-header").next('.dslca-pseudo-popup-body').remove();
 			pseudoPanel.remove();
 
 			// Show edit section
@@ -720,7 +731,7 @@ window.dslc_module_options_show = function( moduleID ) {
 			jQuery('.dslca-wp-editor-actions').show();
 
 			// Hide the section hooks
-			jQuery('.dslca-header .dslca-go-to-section-hook').hide();
+			// jQuery('.dslca-header .dslca-go-to-section-hook').hide();
 
 			// Hide the row save/cancel actions
 			jQuery('.dslca-row-edit-actions').hide();
@@ -778,6 +789,7 @@ export const moduleOutputAltered = ( callback ) => {
 	var dslcSettings = {};
 
 	dslcSettings['action'] = 'dslc-ajax-add-module';
+	dslcSettings['_wpnonce'] = DSLCAjax._wpnonce;
 	dslcSettings['dslc'] = 'active';
 	dslcSettings['dslc_module_id'] = dslc_module_id;
 	dslcSettings['dslc_module_instance_id'] = dslcModuleInstanceID;
@@ -869,6 +881,7 @@ window.dslc_module_output_reload = function ( dslcModule, callback ) {
 	var dslcSettings = {};
 
 	dslcSettings['action'] = 'dslc-ajax-add-module';
+	dslcSettings['_wpnonce'] = DSLCAjax._wpnonce;
 	dslcSettings['dslc'] = 'active';
 	dslcSettings['dslc_module_id'] = dslc_module_id;
 	dslcSettings['dslc_module_instance_id'] = dslcModuleInstanceID;

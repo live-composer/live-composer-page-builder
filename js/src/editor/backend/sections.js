@@ -271,6 +271,7 @@ function dslc_row_after_add( newRowHTML ) {
 	dragAndDropInit();
 	window.dslc_generate_code();
 	window.dslc_show_publish_button();
+	parent.LiveComposer.Builder.Actions.saveState();
 
 	new Section(newRow);
 	new ModuleArea( newRow.find('.dslc-modules-area').eq(0)[0] );
@@ -309,6 +310,7 @@ function dslc_row_delete( row ) {
 	// Call other functions
 	window.dslc_generate_code();
 	window.dslc_show_publish_button();
+	parent.LiveComposer.Builder.Actions.saveState(); 
 }
 
 /**
@@ -355,9 +357,33 @@ function dslc_row_edit( row ) {
 		if ( 'type' === jQuery(this).data('id') ) {
 
 			if ( '' === jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="type"]', LiveComposer.Builder.PreviewAreaDocument).val() ||
+				  'wrapper' === jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="type"]', LiveComposer.Builder.PreviewAreaDocument).val() ||
 				  'wrapped' === jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="type"]', LiveComposer.Builder.PreviewAreaDocument).val() ) {
 				jQuery('select[data-id="type"]').val('wrapper').change();
+				jQuery(this).parent().siblings('div[data-id="css_module_section_width_unit"]').show();
+				jQuery(this).parent().siblings('div[data-id="css_module_section_width"]').show();
+				jQuery(this).parent().siblings('div[data-id="css_module_section_width"]').children('input[data-id="css_module_section_width"]').val(jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="css_module_section_width"]', LiveComposer.Builder.PreviewAreaDocument).data('def')).trigger('change');
 			}
+			else{
+				jQuery(this).parent().siblings('div[data-id="css_module_section_width_unit"]').hide();
+				jQuery(this).parent().siblings('div[data-id="css_module_section_width"]').hide();
+			}
+		}
+		if (jQuery(this).data('id') == 'css_module_section_width_unit') {
+			let width_unit = jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="css_module_section_width_unit"]', LiveComposer.Builder.PreviewAreaDocument).val();
+			let targetEle = jQuery('.dslca-modules-section-edit-option[data-id="css_module_section_width"] input[data-id="css_module_section_width"]');
+			
+			let html_min = '';
+			let html_max = '';
+			
+			if (width_unit == '%') {
+				html_min = -100;
+				html_max = 100;
+			} else {
+				html_min = targetEle.data('min');
+				html_max = targetEle.data('max');
+			}
+			targetEle.attr('data-ext', width_unit).attr('min', html_min).attr('max', html_max);			
 		}
 
 		if ( jQuery(this).data('id') == 'border-top' ) {
@@ -533,6 +559,7 @@ function dslc_row_edit_confirm( callback ) {
 
 	// Show the publish button
 	window.dslc_show_publish_button();
+	parent.LiveComposer.Builder.Actions.saveState();
 
 	if ( callback ) { callback(); }
 
@@ -552,8 +579,8 @@ function dslc_row_copy( row ) {
 	dslcModulesSectionCloned,
 	dslcModule;
 
-	// Clone the row
-	dslcModulesSectionCloned = row.clone().appendTo( jQuery('#dslc-main', LiveComposer.Builder.PreviewAreaDocument ) );
+	// Clone the row and insert it immediately AFTER the original 'row' element.
+    dslcModulesSectionCloned = row.clone().insertAfter(row); 
 
 	// Mark new ROW as NON initialized
 	dslcModulesSectionCloned[0].removeAttribute('data-jsinit');
@@ -614,9 +641,10 @@ function dslc_row_copy( row ) {
 
 		window.dslc_show_publish_button();
 	});
-
+	
 	// Generate new ID for the new section.
 	dslc_section_new_id( dslcModulesSectionCloned[0] );
+	parent.LiveComposer.Builder.Actions.saveState();
 }
 
 /**
@@ -678,6 +706,7 @@ function dslc_row_import( rowCode ) {
 			window.dslc_generate_code();
 
 			window.dslc_show_publish_button();
+			parent.LiveComposer.Builder.Actions.saveState();
 		}
 	);
 }

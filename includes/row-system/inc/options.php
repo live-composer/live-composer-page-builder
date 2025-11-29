@@ -68,6 +68,32 @@ function dslc_row_register_options() {
 			),
 		),
 	);
+	$dslc_var_row_options['css_module_section_width_unit'] = array(
+		'id' => 'css_module_section_width_unit',
+		'std' => 'px',
+		'label' => __( 'Width Unit', 'live-composer-page-builder' ),
+		'type' => 'select',
+		'choices' => array(
+			array(
+				'label' => 'px',
+				'value' => 'px',
+			),
+			array(
+				'label' => '%',
+				'value' => '%',
+			),
+		),
+	);
+	$dslc_var_row_options['css_module_section_width'] = array(
+		'id' => 'css_module_section_width',
+		'std' => '',
+		'label' => __( 'Width', 'live-composer-page-builder' ),
+		'type' => 'slider',
+		'affect_on_change_rule' => 'width',
+		'ext' => 'px',
+		'min' => -2000,
+		'max' => 2000,
+	);
 
 	$dslc_var_row_options['columns_spacing'] = array(
 		'id' => 'columns_spacing',

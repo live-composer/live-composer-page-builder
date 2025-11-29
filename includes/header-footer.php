@@ -67,7 +67,7 @@ function dslc_hf_init() {
 			'delete_post' => $capability,
 			'read_post' => $capability,
 		),
-		'show_in_menu' => 'themes.php',
+		'show_in_menu' => 'dslc_plugin_options',
 	) );
 
 	/**

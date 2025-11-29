@@ -74,7 +74,7 @@ body.dslca-enabled:not(.dslca-composer-hidden) #dslc-header.dslc-header-pos-abso
 	position: relative;
 	max-width: 100%;
 	margin: 0 auto;
-	// z-index: 3;
+	/* z-index: 3; */
 }
 
 	.dslc-modules-section.dslc-full .dslc-modules-section-wrapper {
@@ -538,8 +538,9 @@ body.rtl .dslc-last-col {
 	}
 
 .dslc-notification.dslc-red {
-	background: #f65757;
-	border-color: #e43737;
+	background: #0d0e1e;
+  	border-color: #0d0e1e;
+
 	color: #fff;
 	text-shadow: 0 1px 1px rgba(0,0,0,.14);
 }
@@ -1322,16 +1323,18 @@ body em {
 	font-style: italic;
 }
 
-$font-stack: Helvetica, sans-serif;
-$primary-color: #333;
- 
-.test {
-  font: 100% $font-stack;
-  color: $primary-color;
+:root {
+  --font-stack: Helvetica, sans-serif;
+  --primary-color: #333;
 }
 
-// ============================================================
-// Modules CSS
+.test {
+  font: 100% var(--font-stack);
+  color: var(--primary-color);
+}
+
+/* ============================================================ */
+/* Modules CSS */
 
 
 .dslc-module-front a {
@@ -3323,9 +3326,9 @@ body.dslca-enabled .dslc-notification-box-has-timeout {
 	}
 
 	#dslc-content .dslca-accordion-action-hooks {
-		// position: absolute;
-		// right: 14px;
-		// top: 14px;
+		/* position: absolute;
+		right: 14px;
+		top: 14px; */
 		line-height: 0;
 	}
 
@@ -3713,8 +3716,8 @@ body em {
 	font-style: italic;
 }
 
-// ============================================================
-// Gradient Styles
+/* ============================================================ */
+/* Gradient Styles */
 
 .gradient-lighten-top-right,
 .gradient-darken-top-right,
@@ -3822,7 +3825,7 @@ body em {
 
 }
 
-// ============================================================
+ /* ============================================================ */
 
 .gradient-darken-top:before {
     background-image: linear-gradient(0deg, rgba(0,0,0,0), rgba(0,0,0,1));
@@ -3886,7 +3889,7 @@ body em {
 		position: relative;
 		left: -1px;
 		width: calc(100% + 2px);
-		fill:#eaeaea; // default color.
+		fill:#eaeaea; /* default color.*/
 	}
 
 	&[data-divider-pos="bottom"] {

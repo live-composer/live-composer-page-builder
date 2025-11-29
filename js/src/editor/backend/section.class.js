@@ -65,6 +65,7 @@ export const Section = class{
 			update: function (e, ui) {
 				window.dslc_generate_code();
 				window.dslc_show_publish_button();
+				parent.LiveComposer.Builder.Actions.saveState();
 			},
 			start: function(e, ui){
 

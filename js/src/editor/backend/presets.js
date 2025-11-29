@@ -115,6 +115,7 @@ jQuery(document).ready(function($){
 				function( response ) {
 
 					window.dslc_module_options_show(moduleID);
+					parent.LiveComposer.Builder.Actions.saveState();
 				}
 			);
 		}

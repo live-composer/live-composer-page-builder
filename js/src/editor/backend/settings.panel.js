@@ -72,21 +72,6 @@ jQuery(document).ready(function($){
 		});
 	});
 
-	/* Initiate all the slider controls on the module options panel. */
-	jQuery('.dslca-container').on('mouseenter', '.dslca-module-edit-option-slider', function() {
-
-		// Fixed: https://github.com/live-composer/live-composer-page-builder/issues/740
-		if ( ! jQuery(this).hasClass( 'dslca-module-edit-option-select' ) ) {
-        	dslc_module_options_numeric( this );
-		}
-	});
-
-	/* Initiate all the slider controls on the row options panel. */
-	jQuery('.dslca-container').on('mouseenter', '.dslca-modules-section-edit-option-slider', function() {
-
-		dslc_module_options_numeric( this );
-	});
-
 	/**
 	 * Hook - Submit
 	 */
@@ -172,12 +157,13 @@ jQuery(document).ready(function($){
 			window.LiveComposer.Builder.Flags.panelOpened = false;
 
 			jQuery("body", window.LiveComposer.Builder.PreviewAreaDocument).removeClass('module-editing-in-progress');
-
+			parent.LiveComposer.Builder.Actions.saveState();
 		});
-
+		
 		jQuery('.dslca-options-filter-hook.dslca-active').removeClass('dslca-active');
-
+		
 		dslc_disable_responsive_view();
+		// parent.LiveComposer.Builder.Actions.saveState();
 
 	});
 
@@ -202,6 +188,79 @@ jQuery(document).ready(function($){
 
 		dslc_disable_responsive_view();
 	});
+	/**
+	 *  Hook - change unit ("px","%") 
+	 */
+
+	// Target the specific unit selector fields
+	const unitSelectors = jQuery('select.dslca-modules-section-edit-field-select[data-id$="_unit"]');
+
+    unitSelectors.on('change', function() {
+        const changedSelector = jQuery(this);
+        const dataId = changedSelector.data('id');
+        const selectedUnit = changedSelector.val();
+        
+        // Step 1: Determine the target prefix for affected dimensional sliders.
+        // This turns "css_header_width_unit" into "css_header_width".
+        const targetInputsPrefix = dataId.replace('_unit', '');
+
+        // Define the search scope: the nearest options form container.
+        const $localContext = changedSelector.closest('.dslca-modules-section-edit-form'); 
+        
+        if (targetInputsPrefix && $localContext.length) {
+            
+            // Step 2: Find all affected numeric inputs within the context 
+            // that use the specific numeric class AND start with the calculated prefix.
+            const targetSelector = `input.dslca-modules-section-edit-field-slider-numeric[data-id^="${targetInputsPrefix}"]`;
+            const numericInputs = $localContext.find(targetSelector);
+
+            numericInputs.each(function() {
+                const inputEl = jQuery(this);
+                const defaultPxMin = parseFloat(inputEl.attr('data-min')) || -2000;
+                const defaultPxMax = parseFloat(inputEl.attr('data-max')) || 2000;
+
+                let newMin, newMax;
+
+                if (selectedUnit === '%') {
+                    newMin = -100;  
+                    newMax = 100; 
+                } else {
+                    newMin = defaultPxMin;
+                    newMax = defaultPxMax;
+                }
+
+                // 2. Update Data Attributes and UI Label
+                inputEl.attr('data-ext', selectedUnit).data('ext', selectedUnit);
+                inputEl.attr('min', newMin).attr('max', newMax);
+                
+                inputEl.closest('.dslca-module-area-edit-field-numeric-wrap')
+                       .find('.dslca-module-area-edit-field-numeric-ext, .dslca-modules-section-edit-field-numeric-ext')
+                       .text(selectedUnit);
+
+
+                const rawVal = inputEl.val();
+                
+                if (rawVal === '' || rawVal === null) {
+                    inputEl.trigger('change');
+                    return true;
+                }
+                
+                let currentVal = parseFloat(rawVal);
+                
+                if (currentVal < newMin) {
+                    currentVal = newMin;
+                } else if (currentVal > newMax) {
+                    currentVal = newMax;
+                }
+                
+                inputEl.val(currentVal).trigger('change');
+                
+                if (inputEl.hasClass('slider-initiated')) {
+                     inputEl.trigger('slider_update'); 
+                }
+            });
+        }
+    });
 });
 
 /* Editor scripts */
@@ -449,6 +508,81 @@ const onModuleOptionsChange = () => {
 
 		// Add changed class
 		dslcModule.addClass('dslca-module-change-made');
+
+		// Check if the changed option is a UNIT SELECTOR by checking for the '_unit' suffix.
+		if (dslcOptionID.includes('_unit')) { 
+			
+			// Step 1: Determine the target prefix (e.g., 'css_header_width').
+			const targetInputsPrefix = dslcOptionID.replace('_unit', '');
+			const selectedUnit = dslcOption.val();
+			
+			// --- NEW SCOPE LOGIC ---
+			
+			// A. Find the specific 'data-tab' ID of the option being changed.
+			// We look up to the nearest parent that contains the 'data-tab' attribute.
+			const tabId = dslcOption.closest('[data-tab]').attr('data-tab');
+			
+			// B. The search scope is the entire form/container.
+			const $formContainer = dslcOption.closest('form'); 
+
+			if (targetInputsPrefix && $formContainer.length && tabId) {
+				
+				// C. Construct a highly specific selector:
+				// 1. Target the option wrapper for the current tab: .dslca-module-edit-option[data-tab="header_styling"]
+				// 2. Filter inputs by the calculated prefix: input[data-id^="css_header_width"]
+				const selector = `.dslca-module-edit-option[data-tab="${tabId}"] input.dslca-module-edit-field-numeric[data-id^="${targetInputsPrefix}"]`;
+				
+				const numericInputs = $formContainer.find(selector);
+
+				numericInputs.each(function() {
+					const inputEl = jQuery(this);
+					const rawVal = inputEl.val();
+
+					// 2. Define Ranges and Current Value
+					const defaultPxMin = parseFloat(inputEl.attr('data-min')) || -2000;
+					const defaultPxMax = parseFloat(inputEl.attr('data-max')) || 2000;
+
+					let newMin, newMax;
+
+					// If switching to %, clamp the slider range to 0-100.
+					if (selectedUnit === '%') {
+						newMin = -100;  
+						newMax = 100; 
+					} else {
+						// Otherwise (px, em, rem), use the slider's defined range.
+						newMin = defaultPxMin;
+						newMax = defaultPxMax;
+					}
+
+					// 3. Update Data and Attributes (UI and Data Model)
+					inputEl.attr('data-ext', selectedUnit).data('ext', selectedUnit);
+					inputEl.attr('min', newMin).attr('max', newMax);
+					inputEl.siblings('.dslca-module-edit-field-numeric-ext').text(selectedUnit);
+
+					// 4. Clamp and Update Value (Only if a value exists)
+					if (rawVal === '' || rawVal === null) {
+						inputEl.trigger('change');
+						return true; // continue
+					}
+					
+					let currentVal = parseFloat(rawVal);
+					
+					// Clamp the value to the new range
+					if (currentVal < newMin) {
+						currentVal = newMin;
+					} else if (currentVal > newMax) {
+						currentVal = newMax;
+					}
+					
+					// 5. Trigger Live Update
+					inputEl.val(currentVal).trigger('change');
+					
+					if (inputEl.hasClass('slider-initiated')) {
+						inputEl.trigger('slider_update'); 
+					}
+				});
+			}
+		}
 
 		// Hide/Show tabs in the module options panel.
 		// Required to show/hide particular options tabs based on the current selection.
@@ -747,7 +881,8 @@ const onSectionOptionsChange = () => {
 			if ( dslcVal && dslcVal.length ) {
 
 				// dslcVal = dslcField.data('dslca-img-url');
-				dslcVal = jQuery.find('.dslca-modules-section-settings input[data-id="dslca-img-url"]', dslcEl ).val();
+				// dslcVal = jQuery.find('.dslca-modules-section-settings input[data-id="dslca-img-url"]', dslcEl ).val();
+				dslcVal = jQuery( '.dslca-modules-section-settings input[data-id="dslca-img-url"]', dslcEl ).val();
 			}
 		}
 
@@ -905,8 +1040,13 @@ const onSectionOptionsChange = () => {
 		} else if ( dslcFieldID == 'type' ) {
 			if ( dslcVal == 'full' ) {
 				dslcEl.addClass('dslc-full');
+				dslcField.parent().siblings('div[data-id="css_module_section_width_unit"]').hide();
+				dslcField.parent().siblings('div[data-id="css_module_section_width"]').hide();
+				dslcEl.css('width', '100%');
 			} else {
 				dslcEl.removeClass('dslc-full');
+				dslcField.parent().siblings('div[data-id="css_module_section_width_unit"]').show();
+				dslcField.parent().siblings('div[data-id="css_module_section_width"]').show();
 			}
 			LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();
 		} else if ( dslcFieldID == 'columns_spacing' ) {
@@ -984,7 +1124,11 @@ const onSectionOptionsChange = () => {
 
 			// Loop through rules (useful when there are multiple rules)
 			for ( var i = 0; i < dslcRule.length; i++ ) {
-				dslcTargetEl.css(dslcRule[i], dslcValToApply);
+				// dslcTargetEl.css(dslcRule[i], dslcValToApply);
+				if (dslcRule[i].trim() !== "" && dslcValToApply !== undefined && dslcValToApply !== null && dslcValToApply !== "") {
+					console.log(dslcRule[i], dslcValToApply);
+      				dslcTargetEl.css(dslcRule[i], dslcValToApply);
+                }
 			}
 		}
 
@@ -1717,6 +1861,31 @@ function dslc_module_options_hideshow_tabs() {
 			jQuery('.dslca-module-edit-option.dependent').hide();
 		}
 	}
+	
+/* FORCE HIDE TAB BAR WHEN FUNCTIONALITY IS ACTIVE */
+function hideFunctionalityTabs() {
+    var isFunctionality = jQuery('.dslca-options-filter-hook[data-section="functionality"]').hasClass('dslca-active');
+
+    if (isFunctionality) {
+        var wrap = jQuery('.dslca-module-edit-options-tabs');
+        
+        // Hide the entire tab bar
+        wrap.css('display', 'none');
+
+        // Hide all tabs inside it
+        wrap.find('.dslca-module-edit-options-tab-hook').css('display', 'none');
+
+        // Remove active class if added
+        wrap.find('.dslca-module-edit-options-tab-hook').removeClass('dslca-active');
+    }
+}
+
+// Run on load
+hideFunctionalityTabs();
+
+// Keep hiding even when builder JS updates DOM
+var obs = new MutationObserver(hideFunctionalityTabs);
+obs.observe(document.body, { childList: true, subtree: true, attributes: true });
 }
 
 /**
@@ -1763,6 +1932,8 @@ function dslc_module_options_confirm_changes( callback ) {
 		});
 	}
 
+		// hide module settings popup
+	jQuery("#lc_popup").hide();
 	// Show modules listing
 	showSection('.dslca-modules');
 
@@ -1778,6 +1949,7 @@ function dslc_module_options_confirm_changes( callback ) {
 	// window.dslc_generate_code();
 	// Show the publish button
 	window.dslc_show_publish_button();
+	// parent.LiveComposer.Builder.Actions.saveState();
 }
 
 /**
@@ -1812,6 +1984,8 @@ function dslc_module_options_cancel_changes( callback ) {
 		if ( callback ) { callback(); }
 	});
 
+	// Hide module settings popup
+	jQuery("#lc_popup").hide();
 	// Show modules listing
 	showSection('.dslca-modules');
 
@@ -2182,16 +2356,23 @@ function dslc_module_options_checkbox() {
 		var checkFake = jQuery(this);
 		var checkReal = checkFake.siblings('input[type="checkbox"]');
 
-		if ( checkReal.prop('checked') ) {
-			checkReal.prop('checked', false);
-			checkFake.find('.dslca-icon').removeClass('dslc-icon-check').addClass('dslc-icon-check-empty');
-		} else {
-			checkReal.prop('checked', true);
-			checkFake.find('.dslca-icon').removeClass('dslc-icon-check-empty').addClass('dslc-icon-check');
-		}
+        // Use prop() instead of attr()
+        var isChecked = checkReal.prop('checked');
 
-		checkReal.change();
-	});
+        if (isChecked) {
+            checkReal.prop('checked', false);
+            checkFake.find('.dslca-icon')
+                .removeClass('dslc-icon-check')
+                .addClass('dslc-icon-check-empty');
+        } else {
+            checkReal.prop('checked', true);
+            checkFake.find('.dslca-icon')
+                .removeClass('dslc-icon-check-empty')
+                .addClass('dslc-icon-check');
+        }
+
+        checkReal.trigger('change');
+    });
 }
 
 /**
@@ -2256,167 +2437,172 @@ function dslc_module_options_text_shadow() {
 /**
  * MODULES SETTINGS PANEL - Color Option Type
  */
-function dslc_module_options_color( field ) {
+function dslc_module_options_color(field) {
 
-	if ( window.dslcDebug ) console.log( 'dslc_module_options_color' );
+	if (window.dslcDebug) console.log('dslc_module_options_color');
 
 	var dslcColorField,
-	dslcAffectOnChangeEl,
-	dslcAffectOnChangeRule,
-	dslcColorFieldVal,
-	dslcModule,
-	dslcOptionID,
-	dslcCurrColor;
-
-	/**
-	 * Color Pallete.
-	 *
-	 * Last three selected colors get stored in the local storage
-	 * of the browser under the key 'dslcColors-example.com'.
-	 *
-	 * Beside latest three custom colors, color palette includes
-	 * three predefined/fixed colors: white, black and transparent.
-	 */
+		dslcAffectOnChangeEl,
+		dslcAffectOnChangeRule,
+		dslcColorFieldVal,
+		dslcModule,
+		dslcOptionID,
+		dslcCurrColor;
 
 	var dslcColorPallete = [],
-	currStorage,
-	index;
+		currStorage,
+		index;
 
-	var palleteCurrentDommain = 'dslcColors-' + document.domain
+	var palleteCurrentDommain = 'dslcColors-' + document.domain;
 
-	// Get three recent colors from the local storage.
-	if ( undefined !== localStorage[ palleteCurrentDommain ] ) {
-		currStorage = JSON.parse( localStorage[ palleteCurrentDommain ] );
+	// Load recent colors
+	if (undefined !== localStorage[palleteCurrentDommain]) {
+		currStorage = JSON.parse(localStorage[palleteCurrentDommain]);
 		dslcColorPallete = currStorage;
 	}
 
-	// Set default colors if not enough custom colors. Should be six.
-	if ( 1 > dslcColorPallete.length ) {
-		dslcColorPallete.push( '#78b' );
-	}
+	if (1 > dslcColorPallete.length) dslcColorPallete.push('#78b');
+	if (2 > dslcColorPallete.length) dslcColorPallete.push('#ab0');
+	if (3 > dslcColorPallete.length) dslcColorPallete.push('#de3');
 
-	if ( 2 > dslcColorPallete.length ) {
-		dslcColorPallete.push( '#ab0' );
-	}
-
-	if ( 3 > dslcColorPallete.length ) {
-		dslcColorPallete.push( '#de3' );
-	}
-
-	// Add the next "fixed" colors to the end of the pallete.
-	dslcColorPallete.push( '#fff' );
-	dslcColorPallete.push( '#000' );
-	dslcColorPallete.push( 'rgba(0,0,0,0)' );
+	dslcColorPallete.push('#fff');
+	dslcColorPallete.push('#000');
+	dslcColorPallete.push('rgba(0,0,0,0)');
 
 	var query = field;
 
-	// For each color picker input field.
-	jQuery(query).each( function(){
+	jQuery(query).each(function () {
 
-		// Set setting the conotrol wrapper.
 		var wrapper = jQuery(this).closest('.dslca-color-option');
 		var input = jQuery(this);
 
-		dslcCurrColor = jQuery(this).val();
+        dslcCurrColor = jQuery(this).val();
 
-		/**
-		 * Init standard WP color pickers (Iris).
-		 *
-		 * See: http://automattic.github.io/Iris/
-		 * See: https://github.com/23r9i0/wp-color-picker-alpha
-		 */
+		// INIT WP COLOR PICKER
 		input.wpColorPicker({
 			mode: 'hsl',
 			palettes: dslcColorPallete,
-			change: function(event, ui) {
-				// @todo: get the code below into a separate function!
-				// The option field
+			change: function (event, ui) {
+
 				dslcColorField = input;
 
 				var color = input.wpColorPicker('color');
+				dslcColorFieldVal = color == null ? '' : color;
 
-				// The new color
-				if ( color == null ) {
-					dslcColorFieldVal = '';
-				} else {
-					dslcColorFieldVal = color;
-				}
+				// Update value
+				dslcColorField.val(dslcColorFieldVal).trigger('change');
 
-				// Change current value of option
-				dslcColorField.val( dslcColorFieldVal ).trigger('change');
-
-				// Change input field background.
+				// Update background
 				dslcColorField.css('background', dslcColorFieldVal);
 
-				// Live change
+				// Live update
 				dslcAffectOnChangeEl = dslcColorField.data('affect-on-change-el');
 				dslcAffectOnChangeRule = dslcColorField.data('affect-on-change-rule');
 
-				// ROWs doesn't have 'dslcAffectOnChangeEl' defined
-				if ( null != dslcAffectOnChangeEl && '.dslca-modules-section-being-edited' !== dslcAffectOnChangeEl ) {
-					jQuery( dslcAffectOnChangeEl , window.LiveComposer.Builder.PreviewAreaDocument.find('.dslca-module-being-edited') ).css( dslcAffectOnChangeRule , dslcColorFieldVal );
+				if (dslcAffectOnChangeEl && dslcAffectOnChangeEl !== '.dslca-modules-section-being-edited') {
+					jQuery(
+						dslcAffectOnChangeEl,
+						window.LiveComposer.Builder.PreviewAreaDocument.find('.dslca-module-being-edited')
+					).css(dslcAffectOnChangeRule, dslcColorFieldVal);
 				}
-				// Update option
+
+				// Update option in module
 				dslcModule = jQuery('.dslca-module-being-edited', window.LiveComposer.Builder.PreviewAreaDocument);
 				dslcOptionID = dslcColorField.data('id');
-				jQuery('.dslca-module-option-front[data-id="' + dslcOptionID + '"]', dslcModule).val( dslcColorFieldVal );
+				jQuery('.dslca-module-option-front[data-id="' + dslcOptionID + '"]', dslcModule).val(dslcColorFieldVal);
 
-				// Add changed class
 				dslcModule.addClass('dslca-module-change-made');
 			}
 		});
 
+		// ADD APPLY BUTTON
 		var colorPickerPopup = wrapper.find('.wp-picker-holder .iris-picker');
 		colorPickerPopup.append('<button type="button" class="dslca-colorpicker-apply">Apply</button>');
 
 		var apply = wrapper.find('.dslca-colorpicker-apply');
 
-		input.wpColorPicker( 'open' );
+		input.wpColorPicker('open');
 
-		// If [APPLY] button clicked...
-		jQuery(apply).on('click', function() {
+		// APPLY LOGIC
+		jQuery(apply).on("click", function () {
+      // If new color is not one of the "fixed" colors...
+      if (
+        "#fff" !== dslcColorFieldVal &&
+        "#ffffff" !== dslcColorFieldVal &&
+        "#000" !== dslcColorFieldVal &&
+        "#000000" !== dslcColorFieldVal &&
+        "rgba(0,0,0,0)" !== dslcColorFieldVal
+      ) {
+        // Update pallete colors in the local storage.
+        if (undefined === localStorage[palleteCurrentDommain]) {
+          // Create new record if no local storage found.
+          var newStorage = [dslcColorFieldVal];
+          localStorage[palleteCurrentDommain] = JSON.stringify(newStorage);
+        } else {
+          // Update existing record in the local storage.
+          var newStorage = JSON.parse(localStorage[palleteCurrentDommain]);
 
-			// If new color is not one of the "fixed" colors...
-			if ( '#fff' !== dslcColorFieldVal &&
-				  '#ffffff' !== dslcColorFieldVal &&
-				  '#000' !== dslcColorFieldVal &&
-				  '#000000' !== dslcColorFieldVal &&
-				  'rgba(0,0,0,0)' !== dslcColorFieldVal ) {
+          if (newStorage.indexOf(dslcColorFieldVal) == -1) {
+            // Add new color to the head of the pallete array.
+            newStorage.unshift(dslcColorFieldVal);
 
-				// Update pallete colors in the local storage.
-				if ( undefined === localStorage[ palleteCurrentDommain ] ) {
+            if (3 < newStorage.length) {
+              // Remove the last color from the pallete.
+              newStorage.pop();
+            }
+          }
 
-					// Create new record if no local storage found.
-					var newStorage = [ dslcColorFieldVal ];
-					localStorage[ palleteCurrentDommain ] = JSON.stringify(newStorage);
+          localStorage[palleteCurrentDommain] = JSON.stringify(newStorage);
+        }
+      }
 
-				} else {
+      input.wpColorPicker("close");
+    });
+		//  *  CLEAR BUTTON SUPPORT
+		 
+		var clearBtn = wrapper.find('.wp-picker-clear');
 
-					// Update existing record in the local storage.
-					var newStorage = JSON.parse( localStorage[ palleteCurrentDommain ] );
+		jQuery(clearBtn).on('click', function () {
 
-					if ( newStorage.indexOf( dslcColorFieldVal ) == -1 ) {
+			dslcColorFieldVal = '';
 
-						// Add new color to the head of the pallete array.
-						newStorage.unshift( dslcColorFieldVal );
+			// Clear input
+			input.val('').trigger('change');
 
-						if ( 3 < newStorage.length ) {
-							// Remove the last color from the pallete.
-							newStorage.pop();
-						}
-					}
+			// Remove color preview
+			input.css('background', '');
 
-					localStorage[ palleteCurrentDommain ] = JSON.stringify(newStorage);
-				}
+			// Live preview clear
+			const el = input.data('affect-on-change-el');
+			const rule = input.data('affect-on-change-rule');
+
+			if (el && el !== '.dslca-modules-section-being-edited') {
+				jQuery(
+					el,
+					window.LiveComposer.Builder.PreviewAreaDocument.find('.dslca-module-being-edited')
+				).css(rule, '');
 			}
 
-			input.wpColorPicker( 'close' );
-		});
+			// Update module option
+			var module = jQuery('.dslca-module-being-edited', window.LiveComposer.Builder.PreviewAreaDocument);
+			var optionID = input.data('id');
 
-		// Save this element to destroy on panel closed.
-		window.LiveComposer.Builder.Helpers.colorpickers.push( jQuery(this) );
+			jQuery('.dslca-module-option-front[data-id="' + optionID + '"]', module).val('');
+
+			// Mark as changed
+			module.addClass('dslca-module-change-made');
+
+			// Close color picker
+			// input.wpColorPicker('close');
+		});
+		/** --------------------------------------------- */
+
+
+		// Save this element to destroy later
+		window.LiveComposer.Builder.Helpers.colorpickers.push(jQuery(this));
 	});
 }
+
 
 /**
  * MODULES SETTINGS PANEL - Numeric Option Type
@@ -2430,10 +2616,10 @@ function dslc_module_options_numeric( fieldWrapper ) {
 
 		var controlWrapper = jQuery(this);
 
-		/* Create an empty div to be uses by jQuery as the slider container. */
-		if ( 0 === jQuery('.dslca-module-edit-field-slider', controlWrapper).length ) {
-			controlWrapper.append('<div class="dslca-module-edit-field-slider"></div>');
-		}
+		// /* Create an empty div to be uses by jQuery as the slider container. */
+		// if ( 0 === jQuery('.dslca-module-edit-field-slider', controlWrapper).length ) {
+		// 	controlWrapper.append('<div class="dslca-module-edit-field-slider"></div>');
+		// }
 
 		var workingWithModule = true;
 
@@ -2466,9 +2652,10 @@ function dslc_module_options_numeric( fieldWrapper ) {
 		currentVal    = parseFloat( sliderInput.val() ),
 
 		// Max value. By default max is 100.
-		max = parseFloat( sliderInput.data('max') ),
+		max = parseFloat( sliderInput.attr('max') ?? sliderInput.data('max') ),
+		
 		// Min value. By default min is 0.
-		min = parseFloat( sliderInput.data('min') ),
+		min = parseFloat( sliderInput.attr('min') ?? sliderInput.data('min') ),
 		// Increment value. By default increment is 1.
 		inc = parseFloat( sliderInput.data('increment') ),
 		// Backup values.
@@ -2482,71 +2669,7 @@ function dslc_module_options_numeric( fieldWrapper ) {
 
 		if ( undefined !== sliderInput.data('onlypositive') && 1 === sliderInput.data('onlypositive')  ) {
 			onlypositive = true;
-		}
-
-		/**
-		 * If the current slider value gets to the max or min,
-		 * we set new 'wider' max/min values.
-		 *
-		 * This way slider has no fixed top or bottom limit one one hand
-		 * and works precise enough for both small and big values.
-		 */
-		if ( currentVal >= max ) {
-			max = currentVal * 2;
-		}
-
-		if ( ! onlypositive && currentVal <= min ) {
-			min = currentVal * 2;
-		}
-
-		sliderControl.slider({
-			min : min,
-			max : max,
-			step: inc,
-			value: sliderInput.val(),
-
-			slide: function(event, ui) {
-				sliderInput.val( ui.value + sliderExt );
-				sliderInput.trigger('change');
-			},
-
-			change: function(event, ui) {
-				/**
-				 * If the current slider value gets to the max or min,
-				 * we reset the slider (destroy/call again) so script above
-				 * set new bigger max/min values.
-				 *
-				 * This way slider has no top or bottom limit one one hand
-				 * and precise enough for both small and big values.
-				 */
-				if ( ui.value >= max || ui.value <= min ) {
-					sliderControl.slider( "destroy" );
-					dslc_module_options_numeric( controlWrapper );
-				}
-			},
-			/*
-			stop: function( event, ui ) {
-			},
-			start: function( event, ui ) {
-			}
-			*/
-		});
-
-		/**
-		 * Once the slider initiated, show it in HTML.
-		 * Slider control is hidden by default. We show it on hover only.
-		 */
-		sliderControl.show();
-
-		/* On mouse leave: Remove empty DIV and destroy the slider. */
-		jQuery(controlWrapper).on('mouseleave', function() {
-
-			if ( undefined !== sliderControl.slider( 'instance' ) ) {
-				jQuery(sliderControl).slider( 'destroy' );
-			}
-
-			sliderControl.remove();
-		});
+		}		
 
 
 		if( sliderInput[0].classList.contains('slider-initiated') ) return;
@@ -2595,10 +2718,43 @@ function dslc_module_options_numeric( fieldWrapper ) {
 		// sliderInput.unbind('change');
 		sliderInput.on('change', function(e){
 
-			if ( onlypositive && this.value < 0 ) {
-				this.value = 0;
+			var val = parseFloat(this.value) || 0;
+
+			// Detect extension (px, %, etc.)
+			var ext = sliderInput.data('ext');
+
+			let min, max;
+
+			if (ext === '%') {
+				// For percentage, restrict to -100..100
+				min = -100;
+				max = 100;
+			} else if (ext === 'px') {
+				// For px, use data-min and data-max
+				min = parseFloat(sliderInput.data('min'));
+				max = parseFloat(sliderInput.data('max'));
+			} else {
+				// Fallback (optional)
+				min = parseFloat(sliderInput.attr('min') ?? sliderInput.data('min'));
+				max = parseFloat(sliderInput.attr('max') ?? sliderInput.data('max'));
 			}
 
+			// Only positive rule
+			if (onlypositive && val < 0) {
+				val = 0;
+			}
+
+			// Apply min / max restriction
+			if (!isNaN(min) && val < min) {
+				val = min;
+			}
+
+			if (!isNaN(max) && val > max) {
+				val = max;
+			}
+
+			// Write corrected value back
+			this.value = val;
 			var containerWrapper;
 
 			if ( workingWithModule ) {
@@ -2611,10 +2767,10 @@ function dslc_module_options_numeric( fieldWrapper ) {
 			 * Move the slider needle to reflect the value changes
 			 * made via direct input of via keyboard arrow keys.
 			 */
-			var currentSliderInstance = containerWrapper.find('.dslca-module-edit-field-slider');
-			if ( undefined !== currentSliderInstance.slider( 'instance' ) ) {
-				currentSliderInstance.slider( 'value', this.value );
-			}
+			// var currentSliderInstance = containerWrapper.find('.dslca-module-edit-field-slider');
+			// if ( undefined !== currentSliderInstance.slider( 'instance' ) ) {
+			// 	currentSliderInstance.slider( 'value', this.value );
+			// }
 
 			if ( workingWithModule ) {
 				// Add changed class to the module.
@@ -2622,6 +2778,9 @@ function dslc_module_options_numeric( fieldWrapper ) {
 				module.addClass('dslca-module-change-made');
 			}
 		});
+		// sliderInput.on('input', function() {
+		// 	sliderInput.trigger('change');
+		// });
 
 		return false;
 	}); // .each

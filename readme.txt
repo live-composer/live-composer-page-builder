@@ -1,9 +1,9 @@
 === Live Composer - Free WordPress Website Builder  ===
 Contributors: LiveComposer
 Tags: page builder, landing page builder, frontend page builder, drag and drop page builder, website builder
-Requires at least: 4.7
-Tested up to: 6.7
-Stable tag: 1.5.52
+Requires at least: 7.4
+Tested up to: 6.8.3
+Stable tag: 2.0
 License: GPLv3
 
 Page builder for WordPress with drag and drop header/footer editing, responsive settings, and animations. Compatible with Gutenberg block editor.
@@ -202,6 +202,21 @@ If you're migrating from another page builder, compatibility for content transfe
 = FOR OUR PRO USERS: =
 * 🦊 [Check out our WooCommerce Page Builder Extension](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
+
+= 2.0 - November 29 2025 =
+
+**Enhancements/Improvements**
+* Relocated the modules and template list from the bottom panel to a new left sidebar for improved UI/UX.
+* Added a new search feature in the left sidebar for faster module discovery.
+* Enhanced the module editing workflow by introducing a popup-based module settings panel with drag-and-drop support.
+ Improved duplication behavior — modules, containers, and entire rows now duplicate directly beneath the original item, ensuring a more intuitive editing flow.
+* Added new Undo/Redo functionality for improved editing control.
+* Introduced separate margin and padding controls for top, right, bottom, and left, with a unified unit selector (px, %).
+* Added width customization options to the Row module with support for px and % units.
+* Reorganized and reassigned Live Composer menu items to create a more intuitive navigation structure.
+* Updated Post Title and Post Thumbnail modules with optional post-linking, allowing users to click and navigate to the associated post.
+* Redesigned the container width and module width option interfaces for clearer control and improved usability.
+* Fixed an issue where the CTRL + S keyboard shortcut was not triggering the save action.
 
 = 1.5.53 - June 30 2025 =
 * Updated support and documentation links.

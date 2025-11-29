@@ -47,7 +47,7 @@ function dslc_st_init() {
 			'delete_post' => $capability,
 			'read_post' => $capability,
 		),
-		'show_in_menu' => 'themes.php',
+		'show_in_menu' => 'dslc_plugin_options',
 	) );
 
 	global $dslc_var_post_options;
