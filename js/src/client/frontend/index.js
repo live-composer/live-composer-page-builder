@@ -91,25 +91,42 @@ window.dslc_init_lightbox = () => {
 
 	var type;
 
-	jQuery( '.dslc-lightbox-image' ).each(function(){
+	jQuery('.dslc-lightbox-image').each(function(){
 
-		// Default type
-		type = 'image';
+        // Default type
+        type = 'image';
 
-		// Check if video
-		const url = jQuery(this).attr('href');
-		const parsedUrl = new URL(url);
-		if ( parsedUrl.hostname === 'vimeo.com' || parsedUrl.hostname === 'vimeo.com') {
+        // Detect iframe (vimeo)
+        const url = jQuery(this).attr('href');
+        const parsedUrl = new URL(url);
+        if (parsedUrl.hostname === 'vimeo.com') {
+            type = 'iframe';
+        }
 
-			type = 'iframe';
-		}
-		// if ( jQuery(this).attr('href').indexOf('youtube.com') >= 0 || jQuery(this).attr('href').indexOf('vimeo.com') >= 0 ) {
+        jQuery(this).magnificPopup({
+            type: type,
+            image: {
+                titleSrc: function(item) {
 
-		// 	type = 'iframe';
-		// }
+                    var caption = '';
+                    var dataCaption = item.el.attr('data-caption');
+                    var titleAttr = item.el.attr('title');
 
-		jQuery(this).magnificPopup({ type: type });
-	});
+                    if (typeof dataCaption !== "undefined") {
+                        caption = jQuery('<small></small>')
+                            .text(dataCaption)
+                            .prop('outerHTML');
+                    }
+
+                    var title = jQuery('<span></span>')
+                        .text(titleAttr)
+                        .prop('outerHTML');
+
+                    return title + caption;
+                }
+            }
+        });
+    });
 
 	jQuery( '.dslc-lightbox-gallery' ).each(function(){
 		jQuery(this).magnificPopup({
@@ -121,12 +138,11 @@ window.dslc_init_lightbox = () => {
 			image: {
 				titleSrc: function(item) {
 					var caption = '';
-
 					if ( typeof item.el.attr('data-caption') !== "undefined" ) {
-						caption = '<small>' + item.el.attr('data-caption') +'</small>';
+						caption = jQuery('<small></small>').text(item.el.attr('data-caption'))[0].outerHTML;
 					}
-
-					return item.el.attr('title') + caption;
+					var title = jQuery('<span></span>').text(item.el.attr('title')).html();
+					return title + caption;
 				}
 			}
 		});
@@ -920,6 +936,18 @@ jQuery(document).ready(function($){
 			moduleID = module.attr('id'),
 			pagLink = _this.attr('href'),
 			tempHolder = module.find('.dslc-load-more-temp');
+
+			// Validate same-origin
+			try {
+				var linkUrl = new URL(pagLink, window.location.href);
+				if (linkUrl.origin !== window.location.origin) {
+					console.error('Cross-origin not allowed');
+					return;
+				}
+			} catch(e) {
+				console.error('Invalid URL');
+				return;
+			}
 
 			_this.find('.dslc-icon').addClass('dslc-icon-spin');
 
