@@ -5612,23 +5612,54 @@ class DSLC_Posts extends DSLC_Module {
 		// # code...
 		// }
 		$dslc_options = apply_filters( 'dslc_module_options_before_output', $options );
-		echo '[dslc_module_posts_output]' . serialize( $dslc_options ) . '[/dslc_module_posts_output]';
+		echo '[dslc_module_posts_output]' . json_encode( $dslc_options ) . '[/dslc_module_posts_output]';
 	}
 }
 
 function dslc_module_posts_output( $atts, $content = null ) {
 
-	// Uncode module options passed as serialized content.
-	$data = @unserialize( $content );
+	// 1. Try JSON DECODING (New, secure format)
+    $options = json_decode( $content, true );
 
-	if ( $data !== false ) {
-		$options = unserialize( $content );
-	} else {
-		$fixed_data = preg_replace_callback( '!s:(\d+):"(.*?)";!', function( $match ) {
-			return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-		}, $content );
-		$options = unserialize( $fixed_data );
-	}
+    // 2. Fallback to PHP unserialize if JSON fails
+    // This handles all existing content saved in the serialized format.
+    if ( ! is_array( $options ) ) {
+
+        // Define the secure unserialize arguments based on PHP version.
+        $unserialize_args = ( version_compare( PHP_VERSION, '7.0.0', '>=' ) )
+            ? array( 'allowed_classes' => false ) // Secure on PHP 7.0+
+            : null; // Allows object injection on older PHP, but this is the necessary trade-off for legacy data loading.
+                    // For maximum security, you should deprecate support for PHP < 7.0.
+
+        // Try standard unserialize with object injection blocked
+        $options = @unserialize( $content, $unserialize_args );
+
+        // Fallback for broken serialization string length (from original code)
+        if ( $options === false ) {
+            $fixed_data = preg_replace_callback( '!s:(\d+):"(.*?)";!', function( $match ) {
+                return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
+            }, $content );
+            // Try to unserialize the fixed string, still blocking objects
+            $options = @unserialize( $fixed_data, $unserialize_args );
+        }
+    }
+
+    // 3. Final Validation
+    if ( ! is_array( $options ) ) {
+        // Data is invalid or failed to deserialize securely.
+        return '';
+    }
+    
+    // Optional: Validate that required keys exist (as suggested in the third developer solution)
+    $required_keys = array( 'post_type', 'amount', 'pagination_type' );
+    foreach ( $required_keys as $key ) {
+        if ( ! isset( $options[ $key ] ) ) {
+            return '';
+        }
+    }
+    
+    // Use the now-validated $options array for the rest of the module logic
+    $opts = $options;
 
 	ob_start();
 
