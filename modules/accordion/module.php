@@ -605,7 +605,7 @@ class DSLC_Accordion extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
-				'id' => 'css_header_padding_top',
+				'id' => 'css_header_padding_bottom',
 				'onlypositive' => true, // Value can't be negative.
 				'min' => -2000,
 				'max' => 2000,

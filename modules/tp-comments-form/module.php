@@ -1003,7 +1003,7 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 
 			array(
 				'label' => __( 'Color', 'live-composer-page-builder' ),
-				'id' => 'css_text_color',
+				'id' => 'css_text_color_text',
 				'std' => '#4d4d4d',
 				'type' => 'color',
 				'refresh_on_change' => false,

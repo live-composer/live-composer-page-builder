@@ -202,14 +202,14 @@ class DSLC_Html extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Padding', 'live-composer-page-builder' ),
-				'id' => 'css_main_padding_group',
+				'id' => 'css_padding_group',
 				'type' => 'group',
 				'action' => 'open',
 				'section' => 'styling',
 				'tab' => __( 'General', 'live-composer-page-builder' ),
 			),
 			array(
-				'id' => 'css_main_padding_unit',
+				'id' => 'css_padding_unit',
 				'std' => 'px',
 				'label' => __( 'Padding Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
@@ -231,7 +231,7 @@ class DSLC_Html extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
-				'id' => 'css_main_padding_top',
+				'id' => 'css_padding_top',
 				'onlypositive' => true, // Value can't be negative.
 				'min' => -2000,
 				'max' => 2000,
@@ -246,7 +246,7 @@ class DSLC_Html extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
-				'id' => 'css_main_padding_bottom',
+				'id' => 'css_padding_bottom',
 				'onlypositive' => true, // Value can't be negative.
 				'min' => -2000,
 				'max' => 2000,
@@ -261,7 +261,7 @@ class DSLC_Html extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
-				'id' => 'css_main_padding_left',
+				'id' => 'css_padding_left',
 				'onlypositive' => true, // Value can't be negative.
 				'std' => '15',
 				'min' => -2000,
@@ -276,7 +276,7 @@ class DSLC_Html extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
-				'id' => 'css_main_padding_right',
+				'id' => 'css_padding_right',
 				'onlypositive' => true, // Value can't be negative.
 				'std' => '15',
 				'min' => -2000,
@@ -290,7 +290,7 @@ class DSLC_Html extends DSLC_Module {
 				'tab' => __( 'General', 'live-composer-page-builder' ),
 			),
 			array(
-				'id' => 'css_main_padding_group',
+				'id' => 'css_padding_group',
 				'type' => 'group',
 				'action' => 'close',
 				'section' => 'styling',
@@ -2813,7 +2813,7 @@ class DSLC_Html extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
-				'id' => 'css_lists_padding_top',
+				'id' => 'css_lists_padding_bottom',
 				'onlypositive' => true, // Value can't be negative.
 				'min' => -2000,
 				'max' => 2000,
@@ -3288,7 +3288,7 @@ class DSLC_Html extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
-				'id' => 'css_inputs_padding_top',
+				'id' => 'css_inputs_padding_bottom',
 				'onlypositive' => true, // Value can't be negative.
 				'min' => -2000,
 				'max' => 2000,
@@ -3821,7 +3821,7 @@ class DSLC_Html extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
-				'id' => 'css_blockquote_padding_top',
+				'id' => 'css_blockquote_padding_bottom',
 				'onlypositive' => true, // Value can't be negative.
 				'min' => -2000,
 				'max' => 2000,
@@ -4205,7 +4205,7 @@ class DSLC_Html extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
-				'id' => 'css_button_padding_top',
+				'id' => 'css_button_padding_bottom',
 				'onlypositive' => true, // Value can't be negative.
 				'min' => -2000,
 				'max' => 2000,
@@ -4454,7 +4454,7 @@ class DSLC_Html extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
-				'id' => 'css_res_t_main_padding_top',
+				'id' => 'css_res_t_main_padding_bottom',
 				'onlypositive' => true, // Value can't be negative.
 				'min' => -2000,
 				'max' => 2000,
@@ -5570,7 +5570,7 @@ class DSLC_Html extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
-				'id' => 'css_res_t_inputs_padding_top',
+				'id' => 'css_res_t_inputs_padding_bottom',
 				'onlypositive' => true, // Value can't be negative.
 				'min' => -2000,
 				'max' => 2000,
@@ -5712,7 +5712,7 @@ class DSLC_Html extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
-				'id' => 'css_res_t_button_padding_top',
+				'id' => 'css_res_t_button_padding_bottom',
 				'onlypositive' => true, // Value can't be negative.
 				'min' => -2000,
 				'max' => 2000,
@@ -5928,7 +5928,7 @@ class DSLC_Html extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
-				'id' => 'css_res_ph_main_padding_top',
+				'id' => 'css_res_ph_main_padding_bottom',
 				'onlypositive' => true, // Value can't be negative.
 				'min' => -2000,
 				'max' => 2000,
@@ -6911,7 +6911,7 @@ class DSLC_Html extends DSLC_Module {
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
-				'id' => 'css_res_t_inputs_margin_unit',
+				'id' => 'css_res_p_inputs_margin_unit',
 				'std' => 'px',
 				'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
@@ -6933,7 +6933,7 @@ class DSLC_Html extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
-				'id' => 'css_res_t_inputs_margin_top',
+				'id' => 'css_res_p_inputs_margin_top',
 				'onlypositive' => true, // Value can't be negative.
 				'min' => -2000,
 				'max' => 2000,
@@ -6948,7 +6948,7 @@ class DSLC_Html extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
-				'id' => 'css_res_t_inputs_margin_bottom',
+				'id' => 'css_res_p_inputs_margin_bottom',
 				'onlypositive' => true, // Value can't be negative.
 				'min' => -2000,
 				'max' => 2000,
@@ -6963,7 +6963,7 @@ class DSLC_Html extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
-				'id' => 'css_res_t_inputs_margin_left',
+				'id' => 'css_res_p_inputs_margin_left',
 				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'min' => -2000,
@@ -6978,7 +6978,7 @@ class DSLC_Html extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
-				'id' => 'css_res_t_inputs_margin_right',
+				'id' => 'css_res_p_inputs_margin_right',
 				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'min' => -2000,
@@ -7044,7 +7044,7 @@ class DSLC_Html extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_inputs_padding_top',
+				'id' => 'css_res_p_inputs_padding_bottom',
 				'onlypositive' => true, // Value can't be negative.
 				'min' => -2000,
 				'max' => 2000,
@@ -7188,7 +7188,7 @@ class DSLC_Html extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_button_padding_top',
+				'id' => 'css_res_p_button_padding_bottom',
 				'onlypositive' => true, // Value can't be negative.
 				'min' => -2000,
 				'max' => 2000,

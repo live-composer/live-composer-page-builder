@@ -105,7 +105,7 @@ class DSLC_Partners extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Open link in', 'live-composer-page-builder' ),
-				'id' => 'link_type',
+				'id' => 'open_link_type',
 				'std' => 'url_same',
 				'type' => 'select',
 				'choices' => array(

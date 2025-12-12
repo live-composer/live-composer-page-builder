@@ -5656,7 +5656,7 @@ class DSLC_Tabs extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_nav_padding_top',
+				'id' => 'css_res_p_nav_padding_bottom',
 				'onlypositive' => true, // Value can't be negative.
 				'min' => -2000,
 				'max' => 2000,

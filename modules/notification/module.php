@@ -739,7 +739,7 @@ class DSLC_Notification extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Icon - Color - Hover', 'live-composer-page-builder' ),
-				'id' => 'css_close_icon_color',
+				'id' => 'css_close_icon_color_hover',
 				'std' => '#f65757',
 				'type' => 'color',
 				'refresh_on_change' => false,
