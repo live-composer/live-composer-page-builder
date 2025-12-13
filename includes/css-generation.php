@@ -927,11 +927,12 @@ function lc_get_dynamic_unit( $dimensional_control_id, $module_settings, $defaul
     $dimensional_suffixes = ['_top', '_right', '_bottom', '_left'];
     
     // Check if the ID contains a dimensional property we manage.
-    if ( ! str_contains( $dimensional_control_id, '_padding' ) && 
-         ! str_contains( $dimensional_control_id, '_margin' )) {
-        
-        return $default_unit;
-    }
+	if (
+		strpos( $dimensional_control_id, '_padding' ) === false &&
+		strpos( $dimensional_control_id, '_margin' ) === false
+	) {
+		return $default_unit;
+	}
 
     // 1. Normalize the ID (strip direction)
     // E.g., 'css_header_margin_bottom' becomes 'css_header_margin'

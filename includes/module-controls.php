@@ -140,7 +140,7 @@ class LC_Control {
 			
 			$is_dynamic_unit_control = false;
 			foreach ($dynamic_unit_types as $type) {
-				if (str_contains($control_id, $type)) {
+				if ($type !== '' && strpos($control_id, $type) !== false) {
 					$is_dynamic_unit_control = true;
 					break;
 				}
