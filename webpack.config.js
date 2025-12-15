@@ -91,6 +91,20 @@ module.exports = (env = {}) => {
               return result.css.toString();
             },
           },
+          // 4. BUILDER PLUGINS CSS: Added to compile builder plugin styles.
+          // NOTE: If this file does not exist, you must create an empty file named font-awesome.css in the source folder.
+          {
+            from: './css/font-awesome.css', 
+            to: '../../css/font-awesome.min.css',
+            async transform(content, filepath) {
+              const result = await sassRender({
+                file: filepath,
+                outputStyle: 'compressed',
+                sourceMapEmbed: !env.production,
+              });
+              return result.css.toString();
+            },
+          },
         ],
       }),
     ],

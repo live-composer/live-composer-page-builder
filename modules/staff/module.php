@@ -4189,7 +4189,7 @@ class DSLC_Staff extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_position_padding_top',
+				'id' => 'css_res_p_position_padding_bottom',
 				'onlypositive' => true, // Value can't be negative.
 				'min' => -2000,
 				'max' => 2000,

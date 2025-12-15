@@ -472,6 +472,9 @@ a .dslc-icon-flip-vertical:before {
 .div.dslca-module:hover .dslc-icon-check {
   color : #ffffff !important;
 }
+.dslc-module-front .dslc-icon-check{
+  display: none !important;
+}
 /* The label (text) next to the icon */
 /* .dslca-module-edit-option-checkbox-hook span {
   margin-left: 10px;

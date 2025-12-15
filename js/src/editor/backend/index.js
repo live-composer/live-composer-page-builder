@@ -18,7 +18,7 @@ import { eventsInit } from './events.js';
 
 
 var dslcDebug = false;
-window.dslcDebug = true;
+// window.dslcDebug = true;
 
 // Global Plugin Object
 window.LiveComposer = {

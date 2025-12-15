@@ -2063,14 +2063,14 @@ class DSLC_Progress_Bars extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Bar - Margin', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_label_margin_group',
+				'id' => 'css_res_p_loader_margin_group',
 				'type' => 'group',
 				'action' => 'open',
 				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
-				'id' => 'css_res_p_label_margin_unit',
+				'id' => 'css_res_p_loader_margin_unit',
 				'std' => 'px',
 				'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
@@ -2092,7 +2092,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_label_margin_top',
+				'id' => 'css_res_p_loader_margin_top',
 				'onlypositive' => true, // Value can't be negative.
 				'min' => -2000,
 				'max' => 2000,
@@ -2107,7 +2107,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_label_margin_bottom',
+				'id' => 'css_res_p_loader_margin_bottom',
 				'onlypositive' => true, // Value can't be negative.
 				'min' => -2000,
 				'max' => 2000,
@@ -2122,7 +2122,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_label_margin_left',
+				'id' => 'css_res_p_loader_margin_left',
 				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'min' => -2000,
@@ -2137,7 +2137,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_label_margin_right',
+				'id' => 'css_res_p_loader_margin_right',
 				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'min' => -2000,
@@ -2151,7 +2151,7 @@ class DSLC_Progress_Bars extends DSLC_Module {
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
 			array(
-				'id' => 'css_res_p_label_margin_group',
+				'id' => 'css_res_p_loader_margin_group',
 				'type' => 'group',
 				'action' => 'close',
 				'section' => 'responsive',
