@@ -206,8 +206,8 @@ If you're migrating from another page builder, compatibility for content transfe
 
 = 2.0.3 - December 15 2025 =
 * Security improvement
-* Fixed minor issues related to Margin and Padding properties in the Module
-
+* Fixed minor bugs related to module properties
+* Compatibility testing with WordPress 6.9
 
 = 2.0.2 - December 05 2025 =
 * Fixed minor issues related to Margin and Padding properties in the Module
@@ -270,7 +270,7 @@ If you're migrating from another page builder, compatibility for content transfe
 * Bug fixed: Background video rendering issue in iPhone
 
 = 1.5.41 - Mar 28 2024 =
-* Compatibility testing with Wordpress 6.5 
+* Compatibility testing with WordPress 6.5 
 
 = 1.5.40 - Mar 27 2024 =
 * Twitter icon replaced with X
@@ -321,7 +321,7 @@ If you're migrating from another page builder, compatibility for content transfe
 * Improved Security
 
 = 1.5.24 - Dec 16 2023 =
-* Tested up to Wordpress 6.4.2
+* Tested up to WordPress 6.4.2
 
 = 1.5.23 - Feb 28 2023 =
 * Improved Security
