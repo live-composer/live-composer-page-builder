@@ -2274,13 +2274,33 @@ function add_live_composer_link_to_admin_bar($wp_admin_bar)
 }
 
 function dslc_process_consolidated_css_values( $settings ) {
-    // Define mappings for consolidated → separate directional keys
+
+    // This condition will run for DSLC_Text_Simple only to handle old vertical and horizontal padding
+    if (isset($settings['module_id']) && $settings['module_id'] === 'DSLC_Text_Simple') 
+	{
+        // Vertical padding → old top/bottom
+        if ( isset($settings['css_main_padding_vertical']) ) 
+		{
+			$settings['css_old_padding_top'] = $settings['css_main_padding_vertical'];
+			$settings['css_old_padding_bottom'] = $settings['css_main_padding_vertical'];
+        }
+
+        // Horizontal padding → old left/right
+        if ( isset($settings['css_main_padding_horizontal']) ) 
+		{ 
+			$settings['css_old_padding_left'] = $settings['css_main_padding_horizontal'];
+			$settings['css_old_padding_right'] = $settings['css_main_padding_horizontal'];
+        }
+		// unset these keys after migration to clean up
+		unset($settings['css_main_padding_vertical']);
+		unset($settings['css_main_padding_horizontal']);
+    }
+
     $patterns = [
         '_vertical'   => ['_top', '_bottom'],
         '_horizontal' => ['_left', '_right'],
     ];
 
-    // Loop through all settings
     foreach ( $settings as $key => $value ) {
 
         // Ignore empty values unless it's zero
@@ -2288,24 +2308,18 @@ function dslc_process_consolidated_css_values( $settings ) {
             continue;
         }
 
-        // Detect consolidated vertical/horizontal key
         foreach ( $patterns as $suffix => $targets ) {
 
             if ( str_ends_with($key, $suffix) ) {
 
-                // Example: padding_vertical → padding_top, padding_bottom
                 foreach ( $targets as $new_suffix ) {
-
                     $new_key = str_replace($suffix, $new_suffix, $key);
 
-                    // ALWAYS migrate (override), because consolidated is the "source of truth"
+                    // Consolidated value remains source of truth
                     $settings[$new_key] = $value;
                 }
 
-                // Remove the consolidated key
                 unset($settings[$key]);
-
-                // No need to check other patterns for this key
                 break;
             }
         }

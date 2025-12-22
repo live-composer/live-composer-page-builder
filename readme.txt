@@ -2,15 +2,15 @@
 Contributors: LiveComposer
 Tags: page builder, landing page builder, frontend page builder, drag and drop page builder, website builder
 Requires at least: 7.4
-Tested up to: 6.8.3
-Stable tag: 2.0.5
+Tested up to: 6.9
+Stable tag: 2.0.6
 License: GPLv3
 
 Page builder for WordPress with drag and drop header/footer editing, responsive settings, and animations. Compatible with Gutenberg block editor.
 
 == Description ==
 
-https://livecomposerplugin.com/wp-content/uploads/2025/11/Live-composser-demo-video.mp4
+https://www.youtube.com/watch?v=aVx1yGMdxKY
 
 
 = Open Source WordPress Website Builder =

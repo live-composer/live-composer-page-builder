@@ -185,13 +185,13 @@ class DSLC_Text_Simple extends DSLC_Module {
 
 			array(
 				'label' => __( 'Padding', 'live-composer-page-builder' ),
-				'id' => 'css_padding_group',
+				'id' => 'css_old_padding_group',
 				'type' => 'group',
 				'action' => 'open',
 				'section' => 'styling',
 			),
 			array(
-				'id' => 'css_padding_unit',
+				'id' => 'css_old_padding_unit',
 				'std' => 'px',
 				'label' => __( 'Padding Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
@@ -212,7 +212,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
-				'id' => 'css_padding_top',
+				'id' => 'css_old_padding_top', 
 				'onlypositive' => true, // Value can't be negative.
 				'min' => -2000,
 				'max' => 2000,
@@ -226,7 +226,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
-				'id' => 'css_padding_bottom',
+				'id' => 'css_old_padding_bottom',
 				'onlypositive' => true, // Value can't be negative.
 				'min' => -2000,
 				'max' => 2000,
@@ -240,7 +240,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
-				'id' => 'css_padding_left',
+				'id' => 'css_old_padding_left',
 				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'min' => -2000,
@@ -254,7 +254,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 			),
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
-				'id' => 'css_padding_right',
+				'id' => 'css_old_padding_right',
 				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'min' => -2000,
@@ -267,7 +267,7 @@ class DSLC_Text_Simple extends DSLC_Module {
 				'ext' => 'px',
 			),
 			array(
-				'id' => 'css_padding_group',
+				'id' => 'css_old_padding_group',
 				'type' => 'group',
 				'action' => 'close',
 				'section' => 'styling',
