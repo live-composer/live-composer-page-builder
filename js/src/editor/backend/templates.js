@@ -59,6 +59,7 @@ const loadTemplateById = ( template ) => {
 			dragAndDropInit();
 			window.dslc_show_publish_button();
 			window.dslc_generate_code();
+			LiveComposer.Builder.History.unlock();
 			parent.LiveComposer.Builder.Actions.saveState();
 		}
 	);
@@ -105,6 +106,7 @@ function dslc_template_import() {
 			dragAndDropInit();
 			window.dslc_show_publish_button();
 			window.dslc_generate_code();
+			LiveComposer.Builder.History.unlock();
 			parent.LiveComposer.Builder.Actions.saveState();
 		}
 	);
@@ -155,6 +157,7 @@ function dslc_template_delete( template ) {
 			// Remove template from the template listing
 			jQuery('.dslca-template[data-id="' + template + '"]').fadeOut(200, function(){
 				jQuery(this).remove();
+				LiveComposer.Builder.History.unlock();
 				parent.LiveComposer.Builder.Actions.saveState();
 			});
 		}

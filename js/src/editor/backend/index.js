@@ -15,6 +15,7 @@ import { modalwindowInitJS } from './modalwindow.js';
 import { moduleInitJS } from './module.js';
 import { presetsInit } from "./presets.js";
 import { eventsInit } from './events.js';
+import {init_sortables} from './modulearea.js'
 
 
 var dslcDebug = false;
@@ -58,7 +59,10 @@ window.LiveComposer = {
 
         // Used to prevent multiple code generation when
         // cancelling row edits or applying historical states
-        generate_code_after_row_changed: true
+        generate_code_after_row_changed: true,
+        
+        // Undo/Redo lock (false = enabled)
+        historyLocked: false
     };
 
     LiveComposer.Builder.Actions = {
@@ -106,7 +110,13 @@ window.LiveComposer = {
          * 💾 Captures the current state of the page content and saves it to the undoStack.
          */
         saveState: function() {
-			console.log('Saving the state');
+            
+            if (LiveComposer.Builder.History.isLocked()) {
+                return;
+            }
+
+            if ( window.dslcDebug ) console.log( 'Saving the state' );
+
             var history = LiveComposer.Builder.History;
 
             // Capture the current HTML of the main content area
@@ -137,6 +147,11 @@ window.LiveComposer = {
          * @param {string} stateHTML - The saved HTML content.
          */
         applyState: function(stateHTML) {
+            if ( window.dslcDebug ) console.log( 'History state applied' );
+
+            // Prevent recursive history
+            LiveComposer.Builder.History.lock();
+
 			var mainContainer = LiveComposer.Builder.PreviewAreaDocument.find("#dslc-main").eq(0);
 
 			// ... (Flags set to false here) ...
@@ -167,13 +182,20 @@ window.LiveComposer = {
 			// 4. Trigger the final code generation and UI update
 			window.dslc_generate_code();
 			LiveComposer.Builder.Actions.optionsChanged();
+            init_sortables();   
+            // Re-enable history
+            LiveComposer.Builder.History.unlock();
 		},
 
         /**
          * ⏪ Reverts to the previous page state.
          */
 		undo: function() {
-			console.log('undo is called');
+            
+            if (LiveComposer.Builder.History.isLocked()) {
+                return;
+            }
+            if ( window.dslcDebug ) console.log( 'undo is called' );
             var history = LiveComposer.Builder.History;
 
             // Need at least two states: the current state and the previous state to revert to.
@@ -197,7 +219,11 @@ window.LiveComposer = {
          * ⏩ Re-applies the next state after an undo operation.
          */
         redo: function() {
-			console.log('redo is called');
+            
+            if (LiveComposer.Builder.History.isLocked()) {
+                return;
+            }
+            if ( window.dslcDebug ) console.log( 'redo is called' );
             var history = LiveComposer.Builder.History;
 
             if (history.redoStack.length === 0) {
@@ -256,6 +282,22 @@ window.LiveComposer = {
 
         return newModule;
     }
+
+    // Undo/Redu Lock/Unlock helper functions
+    LiveComposer.Builder.History.lock = function () {
+        if ( window.dslcDebug ) console.log( 'History is locked' );
+        LiveComposer.Builder.Flags.historyLocked = true;
+    };
+
+    LiveComposer.Builder.History.unlock = function () {
+        if ( window.dslcDebug ) console.log( 'History is Unlocked' );
+        LiveComposer.Builder.Flags.historyLocked = false;
+    };
+
+    LiveComposer.Builder.History.isLocked = function () {
+        if ( window.dslcDebug ) console.log( 'check History Locked' );
+        return LiveComposer.Builder.Flags.historyLocked === true;
+    };
 }());
 
 /** Wait till tinyMCE loaded */
@@ -287,6 +329,7 @@ window.previewAreaTinyMCELoaded = function( windowObj ){
     // ------------------------------------------------------------------
     // ** IMPORTANT: Initial state capture after editor is fully loaded **
     // ------------------------------------------------------------------
+    LiveComposer.Builder.History.unlock();
     LiveComposer.Builder.Actions.saveState();
 
     // Catch keypress events (from both parent and iframe) to add keyboard support
