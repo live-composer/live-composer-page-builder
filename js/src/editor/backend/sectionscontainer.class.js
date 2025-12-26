@@ -81,6 +81,7 @@ export const CSectionsContainer = class{
 				// evt.stopPropagation(); return false;
 
 				window.dslc_show_publish_button();
+				LiveComposer.Builder.History.unlock();
 				parent.LiveComposer.Builder.Actions.saveState();
 			},
 

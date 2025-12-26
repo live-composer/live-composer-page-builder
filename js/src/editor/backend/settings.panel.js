@@ -157,6 +157,7 @@ jQuery(document).ready(function($){
 			window.LiveComposer.Builder.Flags.panelOpened = false;
 
 			jQuery("body", window.LiveComposer.Builder.PreviewAreaDocument).removeClass('module-editing-in-progress');
+			LiveComposer.Builder.History.unlock();
 			parent.LiveComposer.Builder.Actions.saveState();
 		});
 		
@@ -1948,6 +1949,7 @@ function dslc_module_options_confirm_changes( callback ) {
 
 	// window.dslc_generate_code();
 	// Show the publish button
+	LiveComposer.Builder.History.unlock();
 	window.dslc_show_publish_button();
 	// parent.LiveComposer.Builder.Actions.saveState();
 }
@@ -1997,7 +1999,8 @@ function dslc_module_options_cancel_changes( callback ) {
 
 	// Show the section hooks
 	jQuery('.dslca-header .dslca-go-to-section-hook').show();
-
+	
+	LiveComposer.Builder.History.unlock();
 	// Show the publish button
 	window.dslc_show_publish_button();
 

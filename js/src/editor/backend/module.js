@@ -211,6 +211,7 @@ document.addEventListener('pasteModuleStyles', function (customEvent) {
 								LiveComposer.Builder.PreviewAreaWindow.dslc_init_accordion();
 								
 								jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-module-being-edited');
+								LiveComposer.Builder.History.unlock();
 								parent.LiveComposer.Builder.Actions.saveState();
 							}
 						}
@@ -463,6 +464,7 @@ function dslc_module_delete( module ) {
 			module.parentNode.removeChild( module );
 			window.dslc_generate_code();
 			window.dslc_show_publish_button();
+			LiveComposer.Builder.History.unlock();
 			parent.LiveComposer.Builder.Actions.saveState();
 		}
 	  });
@@ -518,6 +520,7 @@ function moduleDuplicate( module ) {
 	});
 
 	window.dslc_show_publish_button();
+	LiveComposer.Builder.History.unlock();
 	parent.LiveComposer.Builder.Actions.saveState();
 }
 
@@ -583,6 +586,7 @@ function dslc_module_width_set( moduleEl, new_width ) {
 
 	window.dslc_generate_code();
 	window.dslc_show_publish_button();
+	LiveComposer.Builder.History.unlock();
 	parent.LiveComposer.Builder.Actions.saveState();
 }
 
@@ -648,6 +652,7 @@ window.dslc_module_options_show = function( moduleID ) {
 	jQuery('.dslca-wp-editor-notification').show();
 
 	// Hide the publish button
+	LiveComposer.Builder.History.lock();
 	hidePublishButton();
 
 	// LiveComposer.Builder.UI.initInlineEditors();
@@ -916,6 +921,7 @@ window.dslc_module_output_reload = function ( dslcModule, callback ) {
 			dslcModule.after(response.output).next().addClass('dslca-module-being-edited');
 			dslcModule.remove();
 			window.dslc_generate_code();
+			LiveComposer.Builder.History.unlock();
 			window.dslc_show_publish_button();
 
 			LiveComposer.Builder.PreviewAreaWindow.dslc_carousel();

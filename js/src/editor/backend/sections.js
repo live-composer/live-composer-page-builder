@@ -271,6 +271,7 @@ function dslc_row_after_add( newRowHTML ) {
 	dragAndDropInit();
 	window.dslc_generate_code();
 	window.dslc_show_publish_button();
+	LiveComposer.Builder.History.unlock();
 	parent.LiveComposer.Builder.Actions.saveState();
 
 	new Section(newRow);
@@ -310,6 +311,7 @@ function dslc_row_delete( row ) {
 	// Call other functions
 	window.dslc_generate_code();
 	window.dslc_show_publish_button();
+	LiveComposer.Builder.History.unlock();
 	parent.LiveComposer.Builder.Actions.saveState(); 
 }
 
@@ -475,6 +477,7 @@ function dslc_row_edit( row ) {
 	LiveComposer.Builder.Flags.panelOpened = true;
 
 	// Hide the publish button
+	LiveComposer.Builder.History.lock();
 	hidePublishButton();
 }
 
@@ -501,6 +504,7 @@ function dslc_row_edit_cancel( callback ) {
 
 	LiveComposer.Builder.Flags.generate_code_after_row_changed = true;
 	window.dslc_generate_code();
+	LiveComposer.Builder.History.unlock();
 	window.dslc_show_publish_button();
 
 	showSection('.dslca-modules');
@@ -559,6 +563,7 @@ function dslc_row_edit_confirm( callback ) {
 
 	// Show the publish button
 	window.dslc_show_publish_button();
+	LiveComposer.Builder.History.unlock();
 	parent.LiveComposer.Builder.Actions.saveState();
 
 	if ( callback ) { callback(); }
@@ -644,6 +649,7 @@ function dslc_row_copy( row ) {
 	
 	// Generate new ID for the new section.
 	dslc_section_new_id( dslcModulesSectionCloned[0] );
+	LiveComposer.Builder.History.unlock();
 	parent.LiveComposer.Builder.Actions.saveState();
 }
 
@@ -706,6 +712,7 @@ function dslc_row_import( rowCode ) {
 			window.dslc_generate_code();
 
 			window.dslc_show_publish_button();
+			LiveComposer.Builder.History.unlock();
 			parent.LiveComposer.Builder.Actions.saveState();
 		}
 	);

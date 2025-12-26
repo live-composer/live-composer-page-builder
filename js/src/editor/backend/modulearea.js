@@ -25,18 +25,15 @@ import { getNewModuleId } from "./module.js";
  * Attach these actions once the editing iFrame loaded.
  */
 
+export function init_sortables() {
+    var el = jQuery('.dslc-modules-area', LiveComposer.Builder.PreviewAreaDocument); // Groups that can hold modules
+
+    jQuery(el).each(function (i, e) {
+        new ModuleArea(e);
+    });
+}
+
 jQuery(document).on('editorFrameLoaded', function(){
-
-	function init_sortables() {
-
-		var el = jQuery('.dslc-modules-area', LiveComposer.Builder.PreviewAreaDocument); // Groups that can hold modules
-
-		jQuery(el).each(function (i,e) {
-
-			new ModuleArea(e);
-		});
-	}
-
 
 	var actionAvail = function() {
 
@@ -55,6 +52,7 @@ jQuery(document).on('editorFrameLoaded', function(){
 	if ( ! jQuery( '#dslc-main .dslc-modules-section', LiveComposer.Builder.PreviewAreaDocument).length && ! jQuery( '#dslca-tut-page', LiveComposer.Builder.PreviewAreaDocument).length ) {
 
 		addSection( init_sortables() );
+		LiveComposer.Builder.History.unlock();
 		parent.LiveComposer.Builder.Actions.saveState();
 	} else {
 
@@ -173,6 +171,7 @@ jQuery(document).on('editorFrameLoaded', function(){
 
 		window.dslc_generate_code();
 		window.dslc_show_publish_button();
+		LiveComposer.Builder.History.unlock();
 		parent.LiveComposer.Builder.Actions.saveState();
 	}
 
@@ -311,6 +310,7 @@ export const modulesAreaAdd = ( row ) => {
 	dragAndDropInit();
 	window.dslc_generate_code();
 	window.dslc_show_publish_button();
+	LiveComposer.Builder.History.unlock();
 	parent.LiveComposer.Builder.Actions.saveState();
 	// Remove class from body so we know it's done
 	// jQuery('body', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-anim-in-progress');
@@ -381,6 +381,7 @@ function dslc_modules_area_delete( area ) {
 		// Call other functions
 		window.dslc_generate_code();
 		window.dslc_show_publish_button();
+		LiveComposer.Builder.History.unlock();
 		parent.LiveComposer.Builder.Actions.saveState();
 	}, 900 );
 
@@ -401,6 +402,7 @@ function dslc_modules_area_delete( area ) {
 		area.remove();
 		window.dslc_generate_code();
 		window.dslc_show_publish_button();
+		LiveComposer.Builder.History.unlock();
 		parent.LiveComposer.Builder.Actions.saveState();
 	});
 }
@@ -458,6 +460,7 @@ function dslc_modules_area_copy( area ) {
 	// Call other functions
 	dragAndDropInit();
 	window.dslc_show_publish_button();
+	LiveComposer.Builder.History.unlock();
 	parent.LiveComposer.Builder.Actions.saveState();
 
 	// Need to call this function to update last column class for the module areas.
@@ -490,6 +493,7 @@ function dslc_modules_area_width_set( area, newWidth ) {
 
 	window.dslc_generate_code();
 	window.dslc_show_publish_button();
+	LiveComposer.Builder.History.unlock();
 	parent.LiveComposer.Builder.Actions.saveState();
 
 }
