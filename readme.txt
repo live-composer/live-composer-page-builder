@@ -10,7 +10,7 @@ Page builder for WordPress with drag and drop header/footer editing, responsive 
 
 == Description ==
 
-https://www.youtube.com/watch?v=aVx1yGMdxKY
+https://livecomposerplugin.com/wp-content/uploads/2025/11/Live-composser-demo-video.mp4
 
 
 = Open Source WordPress Website Builder =
