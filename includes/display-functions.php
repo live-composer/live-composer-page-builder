@@ -356,7 +356,15 @@ function dslc_display_composer() {
 			<h3>Save Page Design</h3>
 			<form class="dslca-template-save-form">
 				<input type="text" id="dslca-save-template-title" placeholder="<?php _e('Name of the template', 'live-composer-page-builder'); ?>">
-				<div class="dslca-submit"><?php _e('Save', 'live-composer-page-builder'); ?></div>
+				<div class="dslca-submit">
+					<div class="dslca-modal-title"><?php _e('Save', 'live-composer-page-builder'); ?></div>
+					<div class="dslca-loading followingBallsGWrap">
+						<div class="followingBallsG_1 followingBallsG"></div>
+						<div class="followingBallsG_2 followingBallsG"></div>
+						<div class="followingBallsG_3 followingBallsG"></div>
+						<div class="followingBallsG_4 followingBallsG"></div>
+					</div>
+				</div>
 				<div class="dslca-cancel dslca-close-modal-hook" data-modal=".dslca-modal-templates-save"><?php _e('Cancel', 'live-composer-page-builder'); ?></div>
 			</form>
 		</div><!-- .dslca-modal -->
