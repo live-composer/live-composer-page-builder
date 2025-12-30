@@ -1483,9 +1483,16 @@ function dslc_display_modules($page_id)
 		function dslc_modules_section_front($atts, $content = null, $version = 1, $is_header_footer = false)
 		{			
 			global $dslc_active;
+			static $is_first_row = true;
 			$section_style = dslc_row_get_style($atts);
 			$section_class = '';
 			$overlay_style = '';
+			
+			// Added class for top most row to show row edit options
+			if (dslc_is_editor_active() && $is_first_row) {
+				$section_class .= ' dslc-first-row ';
+				$is_first_row = false;
+			}
 
 			$atts['element_type'] = 'row';
 

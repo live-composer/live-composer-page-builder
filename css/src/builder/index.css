@@ -1987,6 +1987,13 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 		text-align: center;
 	}
 
+	.dslc-first-row {
+		transition: margin-top 0.3s ease;
+	}
+	.dslc-first-row:hover {
+		margin-top: 30px;
+	}
+
 	.dslca-modules-section-manage:hover {
 	    z-index: 100000;
 	}

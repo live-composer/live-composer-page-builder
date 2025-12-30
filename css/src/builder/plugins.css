@@ -1668,6 +1668,12 @@ body.key-press-cmd .dslca-cmd.dslca-manage-action {
   margin: 0 auto;
   text-align: center;
 }
+.dslc-first-row {
+    transition: margin-top 0.3s ease;
+}
+.dslc-first-row:hover {
+  margin-top: 30px;
+}
 .dslca-modules-section-manage:hover {
   z-index: 100000;
 }

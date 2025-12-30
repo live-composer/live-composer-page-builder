@@ -57,6 +57,8 @@ jQuery(document).on('editorFrameLoaded', function(){
 	} else {
 
 		init_sortables();
+		LiveComposer.Builder.History.unlock();
+		parent.LiveComposer.Builder.Actions.saveState();
 	}
 
 	/**
