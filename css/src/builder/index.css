@@ -3894,10 +3894,12 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 	display: none !important;
 }
 
+.dslca-template.dslca-origin[data-display-module="true"],
 .dslca-module.dslca-origin[data-display-module="true"] {
 	display: inline-block;
 }
 
+.dslca-template.dslca-origin[data-display-module="false"],
 .dslca-module.dslca-origin[data-display-module="false"] {
 	display: none;
 }
