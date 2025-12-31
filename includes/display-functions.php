@@ -2291,7 +2291,7 @@ function add_live_composer_link_to_admin_bar($wp_admin_bar)
 function dslc_process_consolidated_css_values( $settings ) {
 
     // This condition will run for DSLC_Text_Simple only to handle old vertical and horizontal padding
-    if (isset($settings['module_id']) && $settings['module_id'] === 'DSLC_Text_Simple') 
+    if (isset($settings['module_id']) && ($settings['module_id'] === 'DSLC_Text_Simple' || $settings['module_id'] === 'DSLC_Html')) 
 	{
         // Vertical padding → old top/bottom
         if ( isset($settings['css_main_padding_vertical']) ) 
