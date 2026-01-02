@@ -1489,9 +1489,34 @@ function dslc_display_modules($page_id)
 			$overlay_style = '';
 			
 			// Added class for top most row to show row edit options
-			if (dslc_is_editor_active() && $is_first_row) {
-				$section_class .= ' dslc-first-row ';
-				$is_first_row = false;
+			// 1. Get ID even during AJAX or Loops
+			$current_page_id = get_queried_object_id();
+			if ( ! $current_page_id && isset( $_REQUEST['post_id'] ) ) {
+				$current_page_id = intval( $_REQUEST['post_id'] );
+			}
+
+			// 2. Determine Header Status
+			$has_lc_header = false;
+			if ( $current_page_id > 0 ) {
+				$header_footer = dslc_hf_get_ID( $current_page_id );
+				if ( ! empty( $header_footer['header'] ) ) {
+					$has_lc_header = true;
+				}
+			}
+
+			/**
+			 * 3. Add the Class
+			 * We add ! $is_header_footer to ensure we aren't tagging the 
+			 * first row of a footer template.
+			 */
+			if ( dslc_is_editor_active() && $is_first_row && ! $has_lc_header) {
+				
+				// Check if we are actually in the main page content, 
+				// not a nested project loop.
+				if ( $current_page_id > 0 ) {
+					$section_class .= ' dslc-first-row ';
+					$is_first_row = false;
+				}
 			}
 
 			$atts['element_type'] = 'row';

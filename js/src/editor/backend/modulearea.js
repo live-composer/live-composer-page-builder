@@ -17,6 +17,7 @@ import { ModuleArea } from './modulearea.class.js';
 import { CModalWindow } from './modalwindow.class.js';
 import { showSection } from './uigeneral.js';
 import { getNewModuleId } from "./module.js";
+import { dslc_row_delete } from "./sections.js";
 
 
 /**
