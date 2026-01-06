@@ -4,7 +4,7 @@
  * Plugin URI: https://www.livecomposerplugin.com
  * Description: Page builder for WordPress with drag and drop header/footer editing.
  * Author: Live Composer Team
- * Version: 2.0.6
+ * Version: 2.0.7
  * Author URI: https://livecomposerplugin.com
  * License: GPL3
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -41,7 +41,7 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) && version_compare( PHP_VERSION, '5.3.0
 	 * Constants
 	 */
 
-	define( 'DS_LIVE_COMPOSER_VER', '2.0.6' );
+	define( 'DS_LIVE_COMPOSER_VER', '2.0.7' );
 
 	define( 'DS_LIVE_COMPOSER_SHORTNAME', __( 'Live Composer', 'live-composer-page-builder' ) );
 	define( 'DS_LIVE_COMPOSER_BASENAME', plugin_basename( __FILE__ ) );
@@ -231,3 +231,17 @@ function lc_welcome( $plugin ) {
 
 }
 add_action( 'activated_plugin', 'lc_welcome' );
+
+function write_log($message)
+{
+    if (is_array($message)) {
+        $message = json_encode($message);
+    }
+    $directory_path = plugin_dir_path(__FILE__) . 'logs';
+    if (!file_exists($directory_path)) {
+        mkdir($directory_path );
+    }
+    $file = fopen($directory_path . "/custom_log" . date('Y-m-d') . ".log", "a");
+    fwrite($file, "\n" . date('Y-m-d h:i:s') . " :: " . $message);
+    fclose($file);
+}
