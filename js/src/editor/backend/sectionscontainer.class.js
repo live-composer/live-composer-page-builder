@@ -53,6 +53,8 @@ export const CSectionsContainer = class{
 				jQuery('body', LiveComposer.Builder.PreviewAreaWindow.document).removeClass('dslca-drag-in-progress').addClass('dslca-drag-not-in-progress');
 
 				jQuery('.dslca-anim-opacity-drop').removeClass('dslca-anim-opacity-drop');
+
+				window.dispatchEvent(new Event('dslc-rows-reordered'));
 			},
 
 			// Element is dropped into the list from another list

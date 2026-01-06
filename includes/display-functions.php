@@ -356,7 +356,15 @@ function dslc_display_composer() {
 			<h3>Save Page Design</h3>
 			<form class="dslca-template-save-form">
 				<input type="text" id="dslca-save-template-title" placeholder="<?php _e('Name of the template', 'live-composer-page-builder'); ?>">
-				<div class="dslca-submit"><?php _e('Save', 'live-composer-page-builder'); ?></div>
+				<div class="dslca-submit">
+					<div class="dslca-modal-title"><?php _e('Save', 'live-composer-page-builder'); ?></div>
+					<div class="dslca-loading followingBallsGWrap">
+						<div class="followingBallsG_1 followingBallsG"></div>
+						<div class="followingBallsG_2 followingBallsG"></div>
+						<div class="followingBallsG_3 followingBallsG"></div>
+						<div class="followingBallsG_4 followingBallsG"></div>
+					</div>
+				</div>
 				<div class="dslca-cancel dslca-close-modal-hook" data-modal=".dslca-modal-templates-save"><?php _e('Cancel', 'live-composer-page-builder'); ?></div>
 			</form>
 		</div><!-- .dslca-modal -->
@@ -1475,9 +1483,41 @@ function dslc_display_modules($page_id)
 		function dslc_modules_section_front($atts, $content = null, $version = 1, $is_header_footer = false)
 		{			
 			global $dslc_active;
+			static $is_first_row = true;
 			$section_style = dslc_row_get_style($atts);
 			$section_class = '';
 			$overlay_style = '';
+			
+			// Added class for top most row to show row edit options
+			// 1. Get ID even during AJAX or Loops
+			$current_page_id = get_queried_object_id();
+			if ( ! $current_page_id && isset( $_REQUEST['post_id'] ) ) {
+				$current_page_id = intval( $_REQUEST['post_id'] );
+			}
+
+			// 2. Determine Header Status
+			$has_lc_header = false;
+			if ( $current_page_id > 0 ) {
+				$header_footer = dslc_hf_get_ID( $current_page_id );
+				if ( ! empty( $header_footer['header'] ) ) {
+					$has_lc_header = true;
+				}
+			}
+
+			/**
+			 * 3. Add the Class
+			 * We add ! $is_header_footer to ensure we aren't tagging the 
+			 * first row of a footer template.
+			 */
+			if ( dslc_is_editor_active() && $is_first_row && ! $has_lc_header) {
+				
+				// Check if we are actually in the main page content, 
+				// not a nested project loop.
+				if ( $current_page_id > 0 ) {
+					$section_class .= ' dslc-first-row ';
+					$is_first_row = false;
+				}
+			}
 
 			$atts['element_type'] = 'row';
 
@@ -2276,7 +2316,7 @@ function add_live_composer_link_to_admin_bar($wp_admin_bar)
 function dslc_process_consolidated_css_values( $settings ) {
 
     // This condition will run for DSLC_Text_Simple only to handle old vertical and horizontal padding
-    if (isset($settings['module_id']) && $settings['module_id'] === 'DSLC_Text_Simple') 
+    if (isset($settings['module_id']) && ($settings['module_id'] === 'DSLC_Text_Simple' || $settings['module_id'] === 'DSLC_Html')) 
 	{
         // Vertical padding → old top/bottom
         if ( isset($settings['css_main_padding_vertical']) ) 

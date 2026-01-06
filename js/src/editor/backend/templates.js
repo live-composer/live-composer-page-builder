@@ -118,6 +118,9 @@ function dslc_template_import() {
 function dslc_template_save() {
 	if ( window.dslcDebug ) console.log( 'dslc_save_template' );
 
+	jQuery('.dslca-modal-templates-save .dslca-modal-title').css({ opacity : 0 });
+	jQuery('.dslca-modal-templates-save .dslca-loading').show();
+
 	// AJAX call to save the template
 	jQuery.post(
 		DSLCAjax.ajaxurl,
@@ -129,6 +132,8 @@ function dslc_template_save() {
 			dslc_template_title : jQuery('#dslca-save-template-title').val()
 		},
 		function( response ) {
+			jQuery('.dslca-modal-templates-save .dslca-loading').hide();
+			jQuery('.dslca-modal-templates-save .dslca-modal-title').css({ opacity : 1 });
 			// Hide the modal
 			hideModal( '', '.dslca-modal-templates-save' );
 		}

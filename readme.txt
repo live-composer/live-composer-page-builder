@@ -3,7 +3,7 @@ Contributors: LiveComposer
 Tags: page builder, landing page builder, frontend page builder, drag and drop page builder, website builder
 Requires at least: 7.4
 Tested up to: 6.9
-Stable tag: 2.0.6
+Stable tag: 2.0.7
 License: GPLv3
 
 Page builder for WordPress with drag and drop header/footer editing, responsive settings, and animations. Compatible with Gutenberg block editor.
@@ -203,6 +203,11 @@ If you're migrating from another page builder, compatibility for content transfe
 = FOR OUR PRO USERS: =
 * 🦊 [Check out our WooCommerce Page Builder Extension](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
+
+= 2.0.7 - January 06 2026 =
+* Fixed minor issues related to Padding properties in the HTML Module
+* Fixed load page design functionality.
+* Fixed an issue where top-row editing options were not visible.
 
 = 2.0.6 - December 26 2025 =
 * Fixed minor issues related to Margin and Padding properties in the Text Area Module

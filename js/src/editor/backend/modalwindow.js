@@ -8,6 +8,7 @@
  *
  ***********************************/
 import { editableContentCodeGeneration } from "./codegeneration.js";
+import { dslc_row_delete } from "./sections.js";
 
 /**
  * MODAL - Show
