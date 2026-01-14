@@ -390,6 +390,58 @@ body.rtl .dslc-last-col {
 	align-items: flex-end;
 }
 
+/* Vertical Align for Row */
+
+.dslc-valign-top .dslc-modules-section-inner,
+.dslc-valign-top .dslc-modules-section-wrapper,
+.dslc-valign-middle .dslc-modules-section-inner,
+.dslc-valign-middle .dslc-modules-section-wrapper,
+.dslc-valign-bottom .dslc-modules-section-inner,
+.dslc-valign-bottom .dslc-modules-section-wrapper{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.dslc-valign-top .dslc-modules-section-inner,
+.dslc-valign-top .dslc-modules-section-wrapper{
+	align-items: flex-start;
+}
+
+.dslc-valign-middle .dslc-modules-section-inner,
+.dslc-valign-middle .dslc-modules-section-wrapper{
+	align-items: center;
+}
+
+.dslc-valign-bottom .dslc-modules-section-inner,
+.dslc-valign-bottom .dslc-modules-section-wrapper{
+	align-items: flex-end;
+}
+/* Horizontal Align for Row */
+
+.dslc-halign-start .dslc-modules-section-inner,
+.dslc-halign-start .dslc-modules-section-wrapper,
+.dslc-halign-center .dslc-modules-section-inner,
+.dslc-halign-center .dslc-modules-section-wrapper,
+.dslc-halign-end .dslc-modules-section-inner,
+.dslc-halign-end .dslc-modules-section-wrapper{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.dslc-halign-start .dslc-modules-section-inner,
+.dslc-halign-start .dslc-modules-section-wrapper{
+	justify-content: flex-start;
+}
+
+.dslc-halign-center .dslc-modules-section-inner,
+.dslc-halign-center .dslc-modules-section-wrapper{
+	justify-content: center;
+}
+
+.dslc-halign-end .dslc-modules-section-inner,
+.dslc-halign-end .dslc-modules-section-wrapper{
+	justify-content: flex-end;
+}
 
 
 

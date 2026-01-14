@@ -1107,6 +1107,16 @@ const onSectionOptionsChange = () => {
 
 				dslcTargetEl.css(dslcRule, 'none' );
 			}
+		} else if ( dslcFieldID == 'valign' ) {	
+			var newClass = 'dslc-valign-' + dslcValReal;
+			dslcEl
+			.removeClass('dslc-valign-top dslc-valign-middle dslc-valign-bottom')
+			.addClass(newClass)
+		}else if ( dslcFieldID == 'halign' ) {	
+			var newClass = 'dslc-halign-' + dslcValReal;
+			dslcEl
+			.removeClass('dslc-halign-start dslc-halign-center dslc-halign-end')
+			.addClass(newClass)
 		} else {
 
 			if ( dslcField.data('css-element') ) {
