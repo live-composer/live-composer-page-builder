@@ -1571,6 +1571,18 @@ function dslc_display_modules($page_id)
 			if (isset($atts['bg_video_overlay_opacity']) && ! empty($atts['bg_video_overlay_opacity'])) {
 				$overlay_style .= 'opacity:' . esc_attr($atts['bg_video_overlay_opacity']) . '; ';
 			}
+			$valign_class = '';
+			if (isset($atts['valign'])) {
+				$valign_class = ' dslc-valign-' . esc_attr($atts['valign']) . ' ';
+			} else {
+				$atts['valign'] = '';
+			}
+			$halign_class = '';
+			if (isset($atts['halign'])) {
+				$halign_class = ' dslc-halign-' . esc_attr($atts['halign']) . ' ';
+			} else {
+				$atts['halign'] = '';
+			}
 
 			/**
 			 * BG Video
@@ -1807,7 +1819,7 @@ function dslc_display_modules($page_id)
 				$atts['bg_video'] = sanitize_key(esc_attr($atts['bg_video']));
 			}
 			$output .= '
-		<div ' . $section_id_output . ' class="dslc-modules-section ' . $a_container_class . $parallax_class . $section_class . $extra_classes . '" style="' . dslc_row_get_style($atts) . '" data-section-id="' . $atts['section_instance_id'] . '">
+		<div ' . $section_id_output . ' class="dslc-modules-section ' . $valign_class . $halign_class . $a_container_class . $parallax_class . $section_class . $extra_classes . '" style="' . dslc_row_get_style($atts) . '" data-section-id="' . $atts['section_instance_id'] . '">
 				' . $bg_video . '
 				' . $section_divider_top . $section_divider_bottom . '
 				<div class="dslc-modules-section-wrapper dslc-clearfix">'

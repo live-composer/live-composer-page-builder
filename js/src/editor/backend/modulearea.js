@@ -163,7 +163,8 @@ jQuery(document).on('editorFrameLoaded', function(){
 		areaJQ
 			.removeClass('dslc-valign-top dslc-valign-middle dslc-valign-bottom')
 			.addClass(newClass)
-			.data('valign', newSetting);
+			.data('valign', newSetting)
+			.attr('data-valign', newSetting);
 
 		// Call other functions
 		LiveComposer.Builder.PreviewAreaWindow.dslc_masonry();

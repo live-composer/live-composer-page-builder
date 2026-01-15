@@ -1107,6 +1107,16 @@ const onSectionOptionsChange = () => {
 
 				dslcTargetEl.css(dslcRule, 'none' );
 			}
+		} else if ( dslcFieldID == 'valign' ) {	
+			var newClass = 'dslc-valign-' + dslcValReal;
+			dslcEl
+			.removeClass('dslc-valign-top dslc-valign-middle dslc-valign-bottom')
+			.addClass(newClass)
+		}else if ( dslcFieldID == 'halign' ) {	
+			var newClass = 'dslc-halign-' + dslcValReal;
+			dslcEl
+			.removeClass('dslc-halign-start dslc-halign-center dslc-halign-end')
+			.addClass(newClass)
 		} else {
 
 			if ( dslcField.data('css-element') ) {
@@ -1384,7 +1394,7 @@ export const elementOptionsTabs = ( dslcTab ) => {
 		dslc_module_options_hideshow_tabs();
 
 		// If only one tab hide the tabs container
-		if ( jQuery('.dslca-module-edit-options-tab-hook:visible').length < 2 ) {
+		if ( jQuery('.dslca-module-edit-options-tab-hook:visible').length <= 1  ) {
 
 			jQuery('.dslca-module-edit-options-tabs').hide();
 		} else {
@@ -1863,30 +1873,6 @@ function dslc_module_options_hideshow_tabs() {
 		}
 	}
 	
-/* FORCE HIDE TAB BAR WHEN FUNCTIONALITY IS ACTIVE */
-function hideFunctionalityTabs() {
-    var isFunctionality = jQuery('.dslca-options-filter-hook[data-section="functionality"]').hasClass('dslca-active');
-
-    if (isFunctionality) {
-        var wrap = jQuery('.dslca-module-edit-options-tabs');
-        
-        // Hide the entire tab bar
-        wrap.css('display', 'none');
-
-        // Hide all tabs inside it
-        wrap.find('.dslca-module-edit-options-tab-hook').css('display', 'none');
-
-        // Remove active class if added
-        wrap.find('.dslca-module-edit-options-tab-hook').removeClass('dslca-active');
-    }
-}
-
-// Run on load
-hideFunctionalityTabs();
-
-// Keep hiding even when builder JS updates DOM
-var obs = new MutationObserver(hideFunctionalityTabs);
-obs.observe(document.body, { childList: true, subtree: true, attributes: true });
 }
 
 /**
