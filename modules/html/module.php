@@ -3277,7 +3277,7 @@ class DSLC_Html extends DSLC_Module {
 				'onlypositive' => true, // Value can't be negative.
 				'min' => -2000,
 				'max' => 2000,
-				'std' => '0',
+				'std' => '10',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => 'input[type=text],input[type=password],input[type=number],input[type=email],input[type=tel],textarea,select',
@@ -3292,7 +3292,7 @@ class DSLC_Html extends DSLC_Module {
 				'onlypositive' => true, // Value can't be negative.
 				'min' => -2000,
 				'max' => 2000,
-				'std' => '0',
+				'std' => '10',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => 'input[type=text],input[type=password],input[type=number],input[type=email],input[type=tel],textarea,select',
@@ -3305,7 +3305,7 @@ class DSLC_Html extends DSLC_Module {
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_inputs_padding_left',
 				'onlypositive' => true, // Value can't be negative.
-				'std' => '0',
+				'std' => '15',
 				'min' => -2000,
 				'max' => 2000,
 				'type' => 'slider',
@@ -3320,7 +3320,7 @@ class DSLC_Html extends DSLC_Module {
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_inputs_padding_right',
 				'onlypositive' => true, // Value can't be negative.
-				'std' => '0',
+				'std' => '15',
 				'min' => -2000,
 				'max' => 2000,
 				'type' => 'slider',
@@ -4194,7 +4194,7 @@ class DSLC_Html extends DSLC_Module {
 				'onlypositive' => true, // Value can't be negative.
 				'min' => -2000,
 				'max' => 2000,
-				'std' => '0',
+				'std' => '10',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => 'input[type=submit], input[type=button], button',
@@ -4209,7 +4209,7 @@ class DSLC_Html extends DSLC_Module {
 				'onlypositive' => true, // Value can't be negative.
 				'min' => -2000,
 				'max' => 2000,
-				'std' => '0',
+				'std' => '10',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => 'input[type=submit], input[type=button], button',
@@ -4222,7 +4222,7 @@ class DSLC_Html extends DSLC_Module {
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_button_padding_left',
 				'onlypositive' => true, // Value can't be negative.
-				'std' => '0',
+				'std' => '15',
 				'min' => -2000,
 				'max' => 2000,
 				'type' => 'slider',
@@ -4237,7 +4237,7 @@ class DSLC_Html extends DSLC_Module {
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_button_padding_right',
 				'onlypositive' => true, // Value can't be negative.
-				'std' => '0',
+				'std' => '15',
 				'min' => -2000,
 				'max' => 2000,
 				'type' => 'slider',
