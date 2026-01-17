@@ -1588,6 +1588,16 @@ div.dslca-add-modules-section {
   background: #0564cb !important;
   color: #fff !important;
 }
+.dslca-modules-section-add .dslca-add-modules-section-hook{
+  background: #e5855f!important;
+  width: 0px !important;
+}
+
+.dslca-modules-section-add .dslca-add-modules-section-hook:hover
+{
+  background: #FF9162!important;
+  color: #fff!important;
+}
 .dslca-add-modules-section .dslca-icon,
 .dslca-import-modules-section .dslca-icon {
   margin-right: 10px;
@@ -1668,6 +1678,19 @@ body.key-press-cmd .dslca-cmd.dslca-manage-action {
   margin: 0 auto;
   text-align: center;
 }
+.dslca-modules-section-add {
+  bottom: -14px;
+  left: 0;
+  right: 0;
+  height: 30px;
+  visibility: hidden;
+  padding-right: 0;
+  position: absolute;
+  z-index: 999999;
+  width: 20%;
+  margin: 0 auto;
+  text-align: center;
+}
 .dslc-first-row {
     transition: margin-top 0.3s ease;
 }
@@ -1677,7 +1700,8 @@ body.key-press-cmd .dslca-cmd.dslca-manage-action {
 .dslca-modules-section-manage:hover {
   z-index: 100000;
 }
-.dslc-modules-section:hover .dslca-modules-section-manage {
+.dslc-modules-section:hover .dslca-modules-section-manage,
+.dslc-modules-section:hover .dslca-modules-section-add {
   visibility: visible !important;
 }
 .dslca-modules-section-manage-inner,

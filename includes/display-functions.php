@@ -1862,6 +1862,16 @@ function dslc_display_modules($page_id)
 						</span>
 					</div>
 				</div>
+				<div class="dslca-modules-section-add">
+					<div class="dslca-modules-section-manage-inner">
+						<span class="dslca-manage-action dslca-add-modules-section-hook" title="Add Modules Row" >
+							<svg class="feather">
+								<use xlink:href="' . esc_url($ui_icons_url) . '/feather-sprite.svg#plus"/>
+							</svg>
+						</span>
+					</div>
+				</span>
+				</div>
 				<div class="dslca-modules-section-settings">' . dslc_encode_shortcodes(dslc_row_get_options_fields($atts)) . '</div>';
 
 				$output .= '<textarea class="dslca-section-code">' . json_encode($atts) . '</textarea>';
