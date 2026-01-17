@@ -111,6 +111,61 @@ function dslc_row_register_options() {
 			),
 		),
 	);
+	$dslc_var_row_options['alignment_group_open'] = array(
+		'label' => __( 'Alignment', 'live-composer-page-builder' ),
+		'id' => 'alignment_group_open',
+		'type' => 'group',
+		'action' => 'open',
+	);
+
+	$dslc_var_row_options['valign'] = array(
+		'id' => 'valign',
+		'std' => 'top',
+		'label' => __( 'Vertical Alignment', 'live-composer-page-builder' ),
+		'type' => 'select',
+		'choices' => array(
+			array(
+				'label' => __( 'Top', 'live-composer-page-builder' ),
+				'value' => 'top',
+			),
+			array(
+				'label' => __( 'Middle', 'live-composer-page-builder' ),
+				'value' => 'middle',
+			),
+			array(
+				'label' => __( 'Bottom', 'live-composer-page-builder' ),
+				'value' => 'bottom',
+			),
+		),
+	);
+
+	$dslc_var_row_options['halign'] = array(
+		'id' => 'halign',
+		'std' => 'left',
+		'label' => __( 'Horizontal Alignment', 'live-composer-page-builder' ),
+		'type' => 'select',
+		'choices' => array(
+			array(
+				'label' => __( 'Left', 'live-composer-page-builder' ),
+				'value' => 'start',
+			),
+			array(
+				'label' => __( 'Center', 'live-composer-page-builder' ),
+				'value' => 'center',
+			),
+			array(
+				'label' => __( 'Right', 'live-composer-page-builder' ),
+				'value' => 'end',
+			),
+		),
+	);
+
+	$dslc_var_row_options['alignment_group_close'] = array(
+		'label' => __( 'Alignment', 'live-composer-page-builder' ),
+		'id' => 'alignment_group_close',
+		'type' => 'group',
+		'action' => 'close',
+	);
 
 	// ============================================================
 
