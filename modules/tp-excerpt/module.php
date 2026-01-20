@@ -1009,7 +1009,7 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 		} else { $the_excerpt = false;
 		}
 
-		if ( is_singular() && get_post_type() !== 'dslc_templates' && has_excerpt() ) {
+		if ( is_singular() && get_post_type() !== 'dslc_templates' && get_post_type() !== 'dslc_template_parts' && has_excerpt() ) {
 			$post_id = get_the_ID();
 			$post = get_post( $post_id );
 			$the_excerpt = apply_filters( 'get_the_excerpt', $post->post_excerpt );

@@ -3248,7 +3248,7 @@ function dslc_module_comments_form_output( $atts, $content = null ) {
 	$post_id = $options['post_id'];
 	$show_fake = true;
 
-	if ( is_singular() && get_post_type() !== 'dslc_templates' && ! $dslc_active ) {
+	if ( is_singular() && get_post_type() !== 'dslc_templates' && get_post_type() !== 'dslc_template_parts' && ! $dslc_active ) {
 
 		$post_id = get_the_ID();
 		$show_fake = false;
@@ -3315,7 +3315,7 @@ function dslc_module_comments_form_output( $atts, $content = null ) {
 
 				?>
 
-				<?php if ( get_post_type( $page_id ) === 'dslc_templates' || comments_open( $page_id ) ) { ?>
+				<?php if ( get_post_type( $page_id ) === 'dslc_templates' || get_post_type( $page_id ) === 'dslc_template_parts' || comments_open( $page_id ) ) { ?>
 
 					<div id="respond" class="comment-respond">
 						<h3 id="reply-title" class="comment-reply-title"><?php echo $txt_leave_comment; ?></h3>

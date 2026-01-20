@@ -1019,7 +1019,7 @@ class DSLC_TP_Meta extends DSLC_Module {
 			$show_fake = false;
 		}
 
-		if ( get_post_type( $post_id ) == 'dslc_templates' ) {
+		if ( get_post_type( $post_id ) == 'dslc_templates' || get_post_type( $post_id ) == 'dslc_template_parts' ) {
 			$show_fake = true;
 		}
 

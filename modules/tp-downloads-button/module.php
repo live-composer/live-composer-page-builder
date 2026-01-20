@@ -1351,7 +1351,7 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 		if ( is_singular() ) {
 			$post_id = get_the_ID();
 			$show_fake = false;
-			if ( get_post_type( $post_id ) == 'dslc_templates' ) {
+			if ( get_post_type( $post_id ) == 'dslc_templates' || get_post_type( $post_id ) == 'dslc_template_parts' ) {
 				$show_fake = true;
 			} else {
 				if ( get_post_meta( $post_id, 'dslc_download_file', true ) ) {

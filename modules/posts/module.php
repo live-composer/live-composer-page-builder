@@ -59,6 +59,7 @@ class DSLC_Posts extends DSLC_Module {
 		// System post types that should not appear in selector.
 		$post_types_to_ignore = array(
 			'dslc_templates',
+			'dslc_template_parts',
 			'dslc_hf',
 			'attachment',
 			'dslc_testimonials',
@@ -5736,6 +5737,7 @@ function dslc_module_posts_output( $atts, $content = null ) {
 		// System post types that should not appear in selector.
 		$post_types_to_ignore = array(
 			'dslc_templates',
+			'dslc_template_parts',
 			'dslc_hf',
 			'attachment',
 			'dslc_testimonials',
