@@ -206,6 +206,12 @@ If you're migrating from another page builder, compatibility for content transfe
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
 
 = 2.0.9 - January 21 2026 =
+* Fixed issues related to page design loading.
+* Fixed minor UI issues in the color picker.
+* Added a Loops module for rendering post loops with custom designs.
+* Added support for inserting rows between existing rows.
+* Reduced module and row opacity when hidden for specific device types to visually indicate responsive visibility.
+* Added Undo and Redo action icons.
 
 = 2.0.8 - January 17 2026 =
 * Fixed minor issues related to padding properties in the HTML module
