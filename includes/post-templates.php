@@ -71,7 +71,7 @@ function dslc_can_edit_in_lc( $post_data ) {
 		if ( array_key_exists( $post_type, $dslc_var_templates_pt ) ||
 				array_key_exists( $post_type, $dslc_enabled_cpt ) ) {
 			$can_edit = true;
-		} elseif ( 'dslc_hf' === $post_type || 'dslc_templates' === $post_type ) {
+		} elseif ( 'dslc_hf' === $post_type || 'dslc_templates' === $post_type || 'dslc_template_parts' === $post_type ) {
 			// Make header/footer and templates as editable.
 			$can_edit = true;
 		}
@@ -96,4 +96,18 @@ function dslc_cpt_use_templates( $post_type ) {
 	$use_templates = apply_filters( 'dslc_cpt_use_templates', $use_templates, $post_type );
 
 	return $use_templates;
+}
+/**
+ * Force Live Composer to allow editing for 'dslc_template_parts'
+ * This overrides any other plugin logic that might be blocking it.
+ */
+add_filter( 'dslc_can_edit_in_lc', 'force_lc_edit_for_template_parts', 999, 2 );
+
+function force_lc_edit_for_template_parts( $can_edit, $post_type ) {
+    
+    if ( 'dslc_template_parts' === $post_type ) {
+        return true;
+    }
+
+    return $can_edit;
 }

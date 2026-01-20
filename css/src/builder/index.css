@@ -4907,6 +4907,6 @@ body em {
 .wp-picker-container input[type=text].wp-color-picker{
     text-shadow: 1px 1px 0px #000;
 }
-.dslca-module-edit-option-color + .dslca-module-edit-option-color .wp-picker-holder{
-	margin-left: -65px;
+.controls-group-inner .dslca-module-edit-option-color + .dslca-module-edit-option-color .wp-picker-holder{
+    margin-left: -65px;
 }

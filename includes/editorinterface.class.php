@@ -70,7 +70,7 @@ class DSLC_EditorInterface {
 		$preview_id        = '';
 
 		// If on a LC template post preview.
-		if ( 'dslc_templates' === get_post_type() ) {
+		if ( 'dslc_templates' === get_post_type() || 'dslc_template_parts' === get_post_type()) {
 
 			self::the_editor_link( self::get_editor_link_url( get_the_ID() ), $string_edit_tpl );
 

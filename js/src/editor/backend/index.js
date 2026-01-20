@@ -39,7 +39,7 @@ window.LiveComposer = {
         History: {
             undoStack: [],
             redoStack: [],
-            maxHistory: 5 // Limit the history stack size
+            maxHistory: 6 // Limit the history stack size
         }
     },
     Production: {
@@ -107,7 +107,7 @@ window.LiveComposer = {
         // ----------------------------------------------------
 
         /**
-         * 💾 Captures the current state of the page content and saves it to the undoStack.
+         * Captures the current state of the page content and saves it to the undoStack.
          */
         saveState: function() {
             
@@ -137,13 +137,11 @@ window.LiveComposer = {
 
             // 3. Any new action clears the redo stack
             history.redoStack = [];
-
-            // TODO: Optional: Call a function to visually update Undo/Redo buttons
-            // LiveComposer.Builder.Actions.updateUndoRedoUI();
+            LiveComposer.Builder.Actions.updateUndoRedoUI();
         },
 
         /**
-         * 🔄 Applies a historical HTML state to the editor content area.
+         * Applies a historical HTML state to the editor content area.
          * @param {string} stateHTML - The saved HTML content.
          */
         applyState: function(stateHTML) {
@@ -188,7 +186,7 @@ window.LiveComposer = {
 		},
 
         /**
-         * ⏪ Reverts to the previous page state.
+         * Reverts to the previous page state.
          */
 		undo: function() {
             
@@ -211,12 +209,12 @@ window.LiveComposer = {
             var previousState = history.undoStack[history.undoStack.length - 1];
             LiveComposer.Builder.Actions.applyState(previousState);
 
-            // TODO: Optional: Update UI
-            // LiveComposer.Builder.Actions.updateUndoRedoUI();
+            // Update UI
+            LiveComposer.Builder.Actions.updateUndoRedoUI();
         },
 
         /**
-         * ⏩ Re-applies the next state after an undo operation.
+         * Re-applies the next state after an undo operation.
          */
         redo: function() {
             
@@ -239,8 +237,36 @@ window.LiveComposer = {
             // 3. Push the applied state back onto the undo stack
             history.undoStack.push(futureState);
 
-            // TODO: Optional: Update UI
-            // LiveComposer.Builder.Actions.updateUndoRedoUI();
+            // Update UI
+            LiveComposer.Builder.Actions.updateUndoRedoUI();
+        },
+        /**
+         * Updates the Undo/Redo button counts and visual state
+         */
+        updateUndoRedoUI: function() {
+            var history = LiveComposer.Builder.History;
+            
+            // Calculate steps (Total items - 1 reference state)
+            var totalStates = history.undoStack.length;
+            var undoStepsAvailable = totalStates > 1 ? totalStates - 1 : 0;
+            var redoStepsAvailable = history.redoStack.length;
+
+            // Update the numbers in your spans
+            jQuery('#dslca-undo-count').text(undoStepsAvailable);
+            jQuery('#dslca-redo-count').text(redoStepsAvailable);
+
+            // Toggle the 'disable' class based on availability
+            if (undoStepsAvailable > 0) {
+                jQuery('.dslca-history-undo').removeClass('disable');
+            } else {
+                jQuery('.dslca-history-undo').addClass('disable');
+            }
+
+            if (redoStepsAvailable > 0) {
+                jQuery('.dslca-history-redo').removeClass('disable');
+            } else {
+                jQuery('.dslca-history-redo').addClass('disable');
+            }
         }
     }
 
@@ -325,12 +351,6 @@ window.previewAreaTinyMCELoaded = function( windowObj ){
     window.dslc_generate_code();
     clearInterval(LiveComposer.Builder.Flags.windowScroller);
     LiveComposer.Builder.Flags.windowScroller = false;
-
-    // ------------------------------------------------------------------
-    // ** IMPORTANT: Initial state capture after editor is fully loaded **
-    // ------------------------------------------------------------------
-    LiveComposer.Builder.History.unlock();
-    LiveComposer.Builder.Actions.saveState();
 
     // Catch keypress events (from both parent and iframe) to add keyboard support
     keypressEvents();

@@ -93,6 +93,7 @@ function dslc_register_modules() {
 	dslc_register_module( 'DSLC_TP_Comments' );
 	dslc_register_module( 'DSLC_TP_Comments_Form' );
 	dslc_register_module( 'DSLC_TP_Staff_Social' );
+	dslc_register_module( 'DSLC_Loops' );
 
 	// Hook to register custom modules.
 	do_action( 'dslc_hook_register_modules' );

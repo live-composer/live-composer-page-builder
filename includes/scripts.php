@@ -391,6 +391,7 @@ final class DSLC_Scripts {
 
 				var target_menu_items = '';
 				target_menu_items += '#adminmenu a[href="edit.php?post_type=dslc_templates"],';
+				target_menu_items += '#adminmenu a[href="edit.php?post_type=dslc_template_parts"],';
 				target_menu_items += '#adminmenu a[href="edit.php?post_type=dslc_hf"],';
 				target_menu_items += '#adminmenu a[href="edit.php?post_type=dslc_testimonials"].menu-top,';
 				target_menu_items += '#adminmenu a[href="edit.php?post_type=dslc_staff"].menu-top,';
