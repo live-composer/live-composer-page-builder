@@ -619,38 +619,57 @@ export const codeGenerationInitJS = () => {
 /**
  * Progress Bar function 
  */
+let creepInterval;
+
 export function updateProgress(percent) {
-    // Get all instances of loaders and bars
     const bars = document.getElementsByClassName('dslca-progress-bar');
     const containers = document.getElementsByClassName('dslca-container-loader');
     
-    // If no loaders are found, exit
     if (containers.length === 0) return;
 
-    // 1. Loop through all containers to show/hide them
+    clearInterval(creepInterval);
+
+    // Show/Display the containers
     for (let i = 0; i < containers.length; i++) {
-        if (percent > 0) {
+        if (percent > 0 && percent < 100) {
             containers[i].style.display = 'block';
             // Use a small timeout for the opacity transition to trigger correctly
             setTimeout(() => { containers[i].style.opacity = '1'; }, 10);
         }
-
-        if (percent >= 100) {
-            containers[i].style.opacity = '0';
-            setTimeout(() => {
-                containers[i].style.display = 'none';
-            }, 600); // Match your CSS transition time
-        }
     }
 
-    // 2. Loop through all bars to update width
-    for (let j = 0; j < bars.length; j++) {
-        bars[j].style.width = percent + '%';
-        
-        if (percent >= 100) {
-            setTimeout(() => {
-                bars[j].style.width = '0%';
-            }, 1000); // Reset width after it has faded out
+    const updateWidth = (w) => {
+        for (let j = 0; j < bars.length; j++) {
+            bars[j].style.width = w + '%';
         }
+    };
+
+    updateWidth(percent);
+
+    // If we are between 1% and 94%, start a slow increment so it looks active
+    if (percent > 0 && percent < 95) {
+        let currentPercent = percent;
+        creepInterval = setInterval(() => {
+            if (currentPercent < 95) {
+                currentPercent += 0.1; 
+                updateWidth(currentPercent);
+            }
+        }, 200);
+    }
+
+    if (percent >= 100) {
+        updateWidth(100);
+
+        setTimeout(() => {
+            for (let i = 0; i < containers.length; i++) {
+                containers[i].style.opacity = '0';
+                
+                setTimeout(() => {
+                    containers[i].style.display = 'none';
+                    // Reset for the next call
+                    updateWidth(0);
+                }, 400); // Wait for opacity fade
+            }
+        }, 500);
     }
 }
