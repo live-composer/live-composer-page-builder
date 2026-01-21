@@ -300,3 +300,69 @@ function dslc_get_archive_template_by_pt( $post_type_slug ) {
 
 	return $template_id;
 }
+
+function dslc_template_parts_init() {
+
+	$capability = dslc_get_option( 'lc_min_capability_page', 'dslc_plugin_options_access_control' );
+	if ( ! $capability ) { $capability = 'publish_posts'; }
+
+	register_post_type( 'dslc_template_parts', array(
+		'menu_icon' => 'dashicons-admin-page',
+		'labels' => array(
+			'name' => __( 'Template Parts', 'live-composer-page-builder' ),
+			'menu_name' => __( 'Section Templates', 'live-composer-page-builder' ),
+			'singular_name' => __( 'Template Part', 'live-composer-page-builder' ),
+			'add_new' => __( 'Add Template Part', 'live-composer-page-builder' ),
+			'add_new_item' => __( 'Add Template Part', 'live-composer-page-builder' ),
+			'edit' => __( 'Edit', 'live-composer-page-builder' ),
+			'edit_item' => __( 'Edit Template Part', 'live-composer-page-builder' ),
+			'new_item' => __( 'New Template Part', 'live-composer-page-builder' ),
+			'view' => __( 'View Template Parts', 'live-composer-page-builder' ),
+			'view_item' => __( 'View Template Part', 'live-composer-page-builder' ),
+			'search_items' => __( 'Search Template Parts', 'live-composer-page-builder' ),
+			'not_found' => __( 'No Template Parts found', 'live-composer-page-builder' ),
+			'not_found_in_trash' => __( 'No Template Parts found in Trash', 'live-composer-page-builder' ),
+			'parent' => __( 'Parent Template', 'live-composer-page-builder' ),
+		),
+		'public' => true,
+		'exclude_from_search' => true, // 404 page is broken with this parameter.
+		'publicly_queryable' => true,
+		'supports' => array( 'title', 'custom-fields', 'thumbnail' ),
+		'capabilities' => array(
+			'publish_posts' => $capability,
+			'edit_posts' => $capability,
+			'edit_others_posts' => $capability,
+			'delete_posts' => $capability,
+			'delete_others_posts' => $capability,
+			'read_private_posts' => $capability,
+			'edit_post' => $capability,
+			'delete_post' => $capability,
+			'read_post' => $capability,
+		),
+		'show_in_menu' => 'dslc_plugin_options',
+	) );
+
+	global $dslc_var_post_options;	
+
+	$template_for = array();
+
+	$template_for[] = array(
+		'label' => __( 'DSLC Post Loop', 'live-composer-page-builder' ),
+		'value' => 'dslc_post_loop',
+	);
+
+	$dslc_var_post_options['dslc-templates-parts-opts'] = array(
+		'title' => 'Template Options',
+		'show_on' => 'dslc_template_parts',
+		'options' => array(
+			array(
+				'label' => __( 'Use this template for', 'live-composer-page-builder' ),				
+				'std' => '',
+				'id' => 'dslc_template_part_for',
+				'type' => 'checkbox',
+				'choices' => $template_for,
+			),
+		),
+	);
+
+} add_action( 'init', 'dslc_template_parts_init', 90 );

@@ -717,7 +717,7 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 			}
 		}
 
-		if ( 'dslc_templates' === get_post_type( $post_id ) || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) :
+		if ( 'dslc_templates' === get_post_type( $post_id ) || 'dslc_template_parts' === get_post_type( $post_id ) || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) :
 
 			if ( has_post_thumbnail( $post_id ) ) : ?>
 				<div class="dslc-tp-thumbnail">

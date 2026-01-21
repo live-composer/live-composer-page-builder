@@ -111,6 +111,9 @@ function dslc_display_composer() {
 				<div class="resize-handle bottom" data-direction="b"></div>
 				<div class="resize-handle left" data-direction="l"></div>
 				<div class="resize-handle right" data-direction="r"></div> -->
+				<div class="dslca-container-loader">
+					<div class="dslca-progress-bar"></div>
+				</div>
 				<div id="lc_popupHeader">
 					<span class="dslca-currently-editing"><strong></strong></span>
 					<span id="lc_popup_minimize" class="lc_popup_minimize show">-</span>
@@ -143,6 +146,28 @@ function dslc_display_composer() {
 
 			<div class="dslca-save-bar">
 				<div class="dslca-actions">
+					<!-- <div class="dslca-history-actions">
+						<a href="#" class="dslca-history-undo dslca-history-btn" title="Undo (Ctrl+Z)">
+							<span class="dslca-icon dslc-icon-reply"></span>
+							<span class="dslca-history-count" id="dslca-undo-count">0</span>
+						</a>
+						<a href="#" class="dslca-history-redo dslca-history-btn" title="Redo (Ctrl+Y)">
+							<span class="dslca-icon dslc-icon-forward"></span>
+							<span class="dslca-history-count" id="dslca-redo-count">0</span>
+						</a>
+					</div> -->
+					<a href="javascript:void(0)" class="dslca-undo-redo dslca-history-undo" title="Undo">
+                        <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.75 2a.75.75 0 0 1 .743.648l.007.102v5.69l4.574-4.56a6.41 6.41 0 0 1 8.879-.179l.185.179a6.41 6.41 0 0 1 0 9.064l-8.845 8.84a.75.75 0 0 1-1.06-1.062l8.845-8.839a4.91 4.91 0 0 0-6.766-7.11l-.178.168L6.562 9.5h5.688a.75.75 0 0 1 .743.648l.007.102a.75.75 0 0 1-.648.743L12.25 11h-7.5a.75.75 0 0 1-.743-.648L4 10.25v-7.5A.75.75 0 0 1 4.75 2" fill="#ffffff" />
+                        </svg>
+                        <span class="dslca-history-count" id="dslca-undo-count">0</span>
+                    </a>
+                    <a href="javascript:void(0)" class="dslca-undo-redo disable dslca-history-redo" title="Redo">
+                        <svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" transform="scale(-1 1)">
+                            <path d="M35.795 9.84c-4.174-4.602-11.303-4.505-15.855.67l-.017.02-8.559 8.958h12.38a1.25 1.25 0 0 1 0 2.5H8.199c-.69 0-1.25-.56-1.25-1.25V5.268a1.25 1.25 0 0 1 2.5 0v12.606l8.63-9.035c5.45-6.174 14.308-6.478 19.568-.679 5.24 5.778 3.622 13.316-.014 17.195l-.01.01-8.979 9.173-.005.005-8.75 8.837-.004.004-.25.25a1.25 1.25 0 0 1-1.769-1.767l.247-.246.004-.005 8.74-8.827.006-.005 8.955-9.148c2.918-3.124 4.172-9.17-.023-13.796" fill="#ffffff" />
+                        </svg>
+                        <span class="dslca-history-count" id="dslca-redo-count">0</span>
+                    </a>
 
 					<!-- Save Composer -->
 					<a href="#" class="dslca-save-composer dslca-save-composer-hook">
@@ -227,6 +252,9 @@ function dslc_display_composer() {
 					<div class="resize-handle bottom" data-direction="b"></div>
 					<div class="resize-handle left" data-direction="l"></div>
 					<div class="resize-handle right" data-direction="r"></div> -->
+					<div class="dslca-container-loader">
+						<div class="dslca-progress-bar"></div>
+					</div>
 					<div id="lc_popupHeader2">
 						<span class="dslca-currently-editing"><strong></strong></span>
 						<span id="lc_popup_minimize2" class="lc_popup_minimize show">-</span>
@@ -308,15 +336,19 @@ function dslc_display_composer() {
 			<textarea id="dslca-code"></textarea>
 			<textarea id="dslca-content-for-search"></textarea>
 			<textarea id="dslca-js-errors-report"></textarea>
-
+			<!-- Loading -->
 			<div class="dslca-container-loader">
+				<div class="dslca-progress-bar"></div>
+			</div>
+
+			<!-- <div class="dslca-container-loader">
 				<div class="dslca-container-loader-inner followingBallsGWrap">
 					<div class="followingBallsG_1 followingBallsG"></div>
 					<div class="followingBallsG_2 followingBallsG"></div>
 					<div class="followingBallsG_3 followingBallsG"></div>
 					<div class="followingBallsG_4 followingBallsG"></div>
 				</div>
-			</div>
+			</div> -->
 
 		</div><!-- .dscla-container -->
 
@@ -1861,6 +1893,16 @@ function dslc_display_modules($page_id)
 							</svg>
 						</span>
 					</div>
+				</div>
+				<div class="dslca-modules-section-add">
+					<div class="dslca-modules-section-manage-inner">
+						<span class="dslca-manage-action dslca-add-modules-section-hook" title="Add Modules Row" >
+							<svg class="feather">
+								<use xlink:href="' . esc_url($ui_icons_url) . '/feather-sprite.svg#plus"/>
+							</svg>
+						</span>
+					</div>
+				</span>
 				</div>
 				<div class="dslca-modules-section-settings">' . dslc_encode_shortcodes(dslc_row_get_options_fields($atts)) . '</div>';
 

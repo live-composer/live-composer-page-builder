@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class DSLC_Posts extends DSLC_Module {
+class DSLC_Loops extends DSLC_Module {
 
 	public $module_id;
 	public $module_title;
@@ -15,8 +15,8 @@ class DSLC_Posts extends DSLC_Module {
 
 	function __construct() {
 
-		$this->module_id = 'DSLC_Posts';
-		$this->module_title = __( 'Posts', 'live-composer-page-builder' );
+		$this->module_id = 'DSLC_Loops';
+		$this->module_title = __( 'Loops', 'live-composer-page-builder' );
 		$this->module_icon = 'th-large';
 		$this->module_category = 'Post-Based';
 
@@ -129,6 +129,14 @@ class DSLC_Posts extends DSLC_Module {
 					),
 				),
 			),
+			array(
+				'label' => __( 'Select Template', 'live-composer-page-builder' ),
+				'id' => 'template_id',
+				'std' => $this->get_loop_templates_list()[0]['value'] ? $this->get_loop_templates_list()[0]['value'] : '',
+				'type' => 'select',
+				'choices' =>$this->get_loop_templates_list(),
+			),
+
 			array(
 				'label' => __( 'Posts Per Row', 'live-composer-page-builder' ),
 				'id' => 'columns',
@@ -5598,6 +5606,36 @@ class DSLC_Posts extends DSLC_Module {
 		return apply_filters( 'dslc_module_options', $dslc_options, $this->module_id );
 
 	}
+	/**
+	 * Module Get Loop Temlates List.
+	 *
+	 * @param  array $options Module options to fill the module template.
+	 * @return void
+	 */
+	function get_loop_templates_list() {
+		$args = array(
+			'post_type'  => 'dslc_template_parts',
+			'meta_key'   => 'dslc_template_part_for',
+			'meta_value' => 'dslc_post_loop',
+			'posts_per_page' => -1,
+		);
+
+		$query = new WP_Query( $args );
+		$templates = array();
+
+		if ( $query->have_posts() ) {
+			while ( $query->have_posts() ) {
+				$query->the_post();
+				$templates[] = array(
+					'label' => get_the_title(),
+					'value' => get_the_ID(),
+				);
+			}
+		}
+
+		wp_reset_postdata();
+		return $templates;
+	}
 
 	/**
 	 * Module HTML output.
@@ -5613,11 +5651,11 @@ class DSLC_Posts extends DSLC_Module {
 		// # code...
 		// }
 		$dslc_options = apply_filters( 'dslc_module_options_before_output', $options );
-		echo '[dslc_module_posts_output]' . json_encode( $dslc_options ) . '[/dslc_module_posts_output]';
+		echo '[dslc_module_loops_output]' . serialize( $dslc_options ) . '[/dslc_module_loops_output]';
 	}
 }
 
-function dslc_module_posts_output( $atts, $content = null ) {
+function dslc_module_loops_output( $atts, $content = null ) {
 
 	// 1. Try JSON DECODING (New, secure format)
     $options = json_decode( $content, true );
@@ -5884,7 +5922,7 @@ function dslc_module_posts_output( $atts, $content = null ) {
 	 */
 
 	// Posts container.
-	$container_class = 'dslc-posts dslc-cpt-posts dslc-clearfix dslc-cpt-posts-type-' . $options['type'] . ' dslc-posts-orientation-' . $options['orientation'] . ' ';
+	$container_class = 'custom-template-container dslc-posts dslc-cpt-posts dslc-clearfix dslc-cpt-posts-type-' . $options['type'] . ' dslc-posts-orientation-' . $options['orientation'] . ' ';
 	if ( $options['type'] == 'masonry' ) {
 		$container_class .= 'dslc-init-masonry ';
 	} elseif ( $options['type'] == 'grid' ) {
@@ -6041,7 +6079,9 @@ function dslc_module_posts_output( $atts, $content = null ) {
 	 * Posts ( output )
 	 */
 
-	if ( $dslc_query->have_posts() ) { ?>
+	if ( $dslc_query->have_posts() ) { 
+		$edit_link = DSLC_EditorInterface::get_editor_link_url( $options['template_id'] );
+		?>
 		<div class="<?php echo $container_class; ?>">
 
 			<?php if ( $show_carousel_arrows && ( $options['arrows_position'] == 'aside' ) ) : ?>
@@ -6049,6 +6089,16 @@ function dslc_module_posts_output( $atts, $content = null ) {
 			<?php endif; ?>
 
 			<div class="dslc-posts-inner"><?php
+			if ( dslc_is_editor_active( 'access' ) ) : ?>
+				<div class="dslc-loop-template-shield" style="position: relative;">
+					<div class="dslc-header dslc-is-global-post" 
+						data-hf="header" 
+						data-editing-link="<?php echo esc_url( $edit_link ); ?>" 
+						data-editing-label="<?php _e( 'Edit Loop Template', 'live-composer-page-builder' ); ?>"
+						style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 999; cursor: pointer;">
+					</div>
+					<div class="dslc-template-preview-content dslc-clearfix" style="pointer-events: none;">
+			<?php endif;
 
 				if ( $options['type'] == 'carousel' ) : ?>
 					<div class="dslc-loader"></div>
@@ -6058,7 +6108,7 @@ function dslc_module_posts_output( $atts, $content = null ) {
 						data-columns="<?php echo $carousel_items; ?>"
 						data-pagination="<?php
 							if ( in_array( 'circles', $carousel_elements ) ) {
-								echo 'true';
+								echo 'true'; 
 							} else {
 								echo 'false';
 							} ?>"
@@ -6070,6 +6120,8 @@ function dslc_module_posts_output( $atts, $content = null ) {
 					$dslc_query->the_post();
 					$count += $increment;
 					$real_count++;
+					
+					$composer_code = dslc_get_code($options['template_id']);
 
 					if ( $count == $max_count ) {
 						$count = 0;
@@ -6086,7 +6138,7 @@ function dslc_module_posts_output( $atts, $content = null ) {
 
 					$post_cats_data = '';
 					if ( isset( $taxonomy_name ) ) {
-								$post_cats = get_the_terms( get_the_ID(), $taxonomy_name );
+						$post_cats = get_the_terms( get_the_ID(), $taxonomy_name );
 						if ( ! empty( $post_cats ) ) {
 							foreach ( $post_cats as $post_cat ) {
 								$post_cats_data .= $post_cat->slug . ' ';
@@ -6095,266 +6147,32 @@ function dslc_module_posts_output( $atts, $content = null ) {
 					} ?>
 
 					<div class="<?php echo $element_class . $columns_class . $extra_class; ?>" data-cats="<?php echo $post_cats_data; ?>">
-						<?php if ( $post_elements == 'all' || in_array( 'thumbnail', $post_elements ) ) : ?>
-							<?php
-							/**
-							 * Manual Resize
-							 */
+                        <?php
+						if ( !dslc_is_editor_active( 'access' ) )
+						{
 
-							$manual_resize = false;
+                            // Render internal content
+                            // global $dslc_active;
+							
+                            // $original_dslc_active = $dslc_active; // Store current state
+                            // $dslc_active = false; // Disable editor for inner modules
 
-							if ( isset( $options['thumb_resize_height'] ) && ! empty( $options['thumb_resize_height'] ) || isset( $options['thumb_resize_width_manual'] ) && ! empty( $options['thumb_resize_width_manual'] ) ) {
+                            // Render as "is_header_footer" (3rd param true) to isolate IDs
+                            $rendered_code = dslc_render_content( $composer_code);
+                            $rendered_code = dslc_decode_shortcodes( $rendered_code );
+                            
+                            // Remove internal edit icons/pencils via class swap
+                            // $rendered_code = str_replace( 'dslc-modules-section', 'dslc-module-section-view-only', $rendered_code );
 
-								$manual_resize = true;
-								$thumb_url = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full' );
-								$thumb_url = $thumb_url[0];
+                            echo do_shortcode( do_shortcode( $rendered_code ) );
 
-								$thumb_alt = get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true );
-								if ( ! $thumb_alt ) {
-									$thumb_alt = '';
-								}
-
-								$thumb_title = get_the_title( get_post_thumbnail_id() );
-								if ( ! $thumb_title ) { $thumb_title = ''; }
-
-								$resize_width = false;
-								$resize_height = false;
-
-								if ( isset( $options['thumb_resize_width_manual'] ) && ! empty( $options['thumb_resize_width_manual'] ) ) {
-									$resize_width = $options['thumb_resize_width_manual'];
-								}
-
-								if ( isset( $options['thumb_resize_height'] ) && ! empty( $options['thumb_resize_height'] ) ) {
-									$resize_height = $options['thumb_resize_height'];
-								}
-							}
-							?>
-							<?php if ( has_post_thumbnail() ) : ?>
-
-								<div class="dslc-post-thumb dslc-cpt-post-thumb dslc-on-hover-anim">
-
-									<div class="dslc-cpt-post-thumb-inner dslca-post-thumb">
-										<?php
-											$anchor_class = '';
-											$anchor_href = get_permalink();
-
-											if ( 'lightbox' === $options['link_type'] ) {
-												$anchor_class = 'dslc-lightbox-image';
-												$anchor_href = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full' );
-												$anchor_href = $anchor_href[0];
-											}
-										?>
-
-										<?php if ( $manual_resize ) : ?>
-											<a href="<?php echo $anchor_href; ?>" class="<?php echo $anchor_class; ?>"><img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true );
-											echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" title="<?php echo $thumb_title; ?>" /></a>
-										<?php else : ?>
-											<a href="<?php echo $anchor_href; ?>" class="<?php echo $anchor_class; ?>"><?php the_post_thumbnail( 'full', array( 'title' => get_the_title( get_post_thumbnail_id() ) ) ); ?></a>
-										<?php endif; ?>
-									</div><!-- .dslc-cpt-post-thumb-inner -->
-
-									<?php if ( ( $options['main_location'] == 'inside' || $options['main_location'] == 'inside_visible' ) && ( $post_elements == 'all' || in_array( 'title', $post_elements ) || in_array( 'meta', $post_elements ) || in_array( 'excerpt', $post_elements ) || in_array( 'button', $post_elements ) ) ) : ?>
-
-										<div class="dslc-post-main dslc-cpt-post-main dslc-init-<?php echo $options['main_position']; ?> <?php if ( $options['main_location'] == 'inside_visible' ) { echo 'dslc-cpt-post-main-visible';} ?> dslc-on-hover-anim-target dslc-anim-<?php echo $options['css_anim_hover']; ?>" data-dslc-anim="<?php echo $options['css_anim_hover'] ?>" data-dslc-anim-speed="<?php echo $options['css_anim_speed']; ?>">
-
-											<div class="dslc-cpt-post-main-inner dslc-init-target">
-
-												<?php if ( $post_elements == 'all' || in_array( 'title', $post_elements ) ) : ?>
-
-													<div class="dslc-cpt-post-title">
-														<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-													</div><!-- .dslc-cpt-post-title -->
-
-												<?php endif; ?>
-
-												<?php if ( $post_elements == 'all' || in_array( 'meta', $post_elements ) ) : ?>
-
-													<?php
-														// Meta Elements
-														$meta_elements = $options['meta_elements'];
-														$meta_elements = explode( ' ', trim( $meta_elements ) );
-													?>
-
-													<div class="dslc-cpt-post-meta">
-
-														<?php if ( in_array( 'author', $meta_elements ) ) : ?>
-															<div class="dslc-cpt-post-meta-author">
-																<?php _e( 'By', 'live-composer-page-builder' ); ?> <?php the_author_posts_link(); ?>
-															</div><!-- .dslc-cpt-post-meta-author -->
-														<?php endif; ?>
-
-														<?php if ( in_array( 'date', $meta_elements ) ) : ?>
-															<div class="dslc-cpt-post-meta-date">
-																<?php the_time( get_option( 'date_format' ) ); ?>
-															</div><!-- .dslc-cpt-post-meta-date -->
-														<?php endif; ?>
-
-													</div><!-- .dslc-cpt-post-meta -->
-
-												<?php endif; ?>
-
-												<?php if ( $post_elements == 'all' || in_array( 'excerpt', $post_elements ) ) : ?>
-													<div class="dslc-cpt-post-read-more">
-														<a href="<?php the_permalink(); ?>">
-															<?php if ( 'svg' == $options['show_icon'] ) : ?>
-																<?php echo stripslashes( $options['button_inline_svg'] ); ?>
-															<?php else : ?>
-																<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
-															<?php endif; ?>
-															<?php echo $options['button_text']; ?>
-														</a>
-													</div><!-- .dslc-cpt-post-read-more -->
-													<div class="dslc-cpt-post-excerpt">
-														<?php if ( $options['excerpt_or_content'] == 'content' ) : ?>
-															<?php
-															if ( $options['excerpt_length'] > 0 ) {
-																echo wp_trim_words( get_the_content(), $options['excerpt_length'] );
-															} else {
-																echo get_the_content();
-															}
-														?>
-														<?php else : ?>
-															<?php
-															if ( $options['excerpt_length'] > 0 ) {
-																if ( has_excerpt() ) {
-																	echo wp_trim_words( get_the_excerpt(), $options['excerpt_length'] );
-																} else { echo wp_trim_words( get_the_content(), $options['excerpt_length'] );
-																}
-															} else {
-																if ( has_excerpt() ) {
-																	echo get_the_excerpt();
-																} else { echo get_the_content();
-																}
-															}
-															?>
-														<?php endif; ?>
-													</div><!-- .dslc-cpt-post-excerpt -->
-
-												<?php endif; ?>
-
-												<?php if ( $post_elements == 'all' || in_array( 'button', $post_elements ) ) : ?>
-
-													<div class="dslc-cpt-post-read-more">
-														<a href="<?php the_permalink(); ?>">
-															<?php if ( 'svg' == $options['show_icon'] ) : ?>
-																<?php echo stripslashes( $options['button_inline_svg'] ); ?>
-															<?php else : ?>
-																<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
-															<?php endif; ?>
-															<?php echo $options['button_text']; ?>
-														</a>
-													</div><!-- .dslc-cpt-post-read-more -->
-
-												<?php endif; ?>
-
-											</div><!-- .dslc-cpt-post-main-inner -->
-
-											<a href="<?php the_permalink(); ?>" class="dslc-post-main-inner-link-cover"></a>
-
-										</div><!-- .dslc-cpt-post-main -->
-
-									<?php endif; ?>
-
-								</div><!-- .dslc-cpt-post-thumb -->
-
-							<?php endif; ?>
-						<?php endif; ?>
-
-						<?php if ( $options['main_location'] == 'bellow' && ( $post_elements == 'all' || in_array( 'title', $post_elements ) || in_array( 'meta', $post_elements ) || in_array( 'excerpt', $post_elements ) || in_array( 'button', $post_elements ) ) ) : ?>
-
-							<div class="dslc-post-main dslc-cpt-post-main">
-
-								<?php if ( $post_elements == 'all' || in_array( 'title', $post_elements ) ) : ?>
-
-									<div class="dslc-cpt-post-title">
-										<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-									</div><!-- .dslc-cpt-post-title -->
-
-								<?php endif; ?>
-
-								<?php if ( $post_elements == 'all' || in_array( 'meta', $post_elements ) ) : ?>
-
-									<?php
-										// Meta Elements
-										$meta_elements = $options['meta_elements'];
-										$meta_elements = explode( ' ', trim( $meta_elements ) );
-									?>
-
-									<div class="dslc-cpt-post-meta">
-
-										<?php if ( in_array( 'author', $meta_elements ) ) : ?>
-											<div class="dslc-cpt-post-meta-author">
-												<?php _e( 'By', 'live-composer-page-builder' ); ?> <?php the_author_posts_link(); ?>
-											</div><!-- .dslc-cpt-post-meta-author -->
-										<?php endif; ?>
-
-										<?php if ( in_array( 'date', $meta_elements ) ) : ?>
-											<div class="dslc-cpt-post-meta-date">
-												<?php the_time( get_option( 'date_format' ) ); ?>
-											</div><!-- .dslc-cpt-post-meta-date -->
-										<?php endif; ?>
-
-									</div><!-- .dslc-cpt-post-meta -->
-
-								<?php endif; ?>
-
-								<?php if ( $post_elements == 'all' || in_array( 'excerpt', $post_elements ) ) : ?>
-									<div class="dslc-cpt-post-excerpt">
-										<?php if ( $options['excerpt_or_content'] == 'content' ) : ?>
-											<?php
-											if ( $options['excerpt_length'] > 0 ) {
-												echo wp_trim_words( get_the_content(), $options['excerpt_length'] );
-											} else {
-												echo get_the_content();
-											}
-											?>
-											<div class="dslc-cpt-post-read-more">
-												<a href="<?php the_permalink(); ?>">
-													<?php if ( 'svg' == $options['show_icon'] ) : ?>
-														<?php echo stripslashes( $options['button_inline_svg'] ); ?>
-													<?php else : ?>
-														<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
-													<?php endif; ?>
-													<?php echo $options['button_text']; ?>
-												</a>
-											</div><!-- .dslc-cpt-post-read-more -->
-										<?php else : ?>
-											<?php
-											if ( $options['excerpt_length'] > 0 ) {
-												if ( has_excerpt() ) {
-													echo wp_trim_words( get_the_excerpt(), $options['excerpt_length'] );
-												} else { echo wp_trim_words( get_the_content(), $options['excerpt_length'] );
-												}
-											} else {
-												if ( has_excerpt() ) {
-													echo get_the_excerpt();
-												} else { echo get_the_content();
-												}
-											}
-											?>
-										<?php endif; ?>
-									</div><!-- .dslc-cpt-post-excerpt -->
-
-								<?php endif; ?>
-
-								<?php if ( $post_elements == 'all' || in_array( 'button', $post_elements ) ) : ?>
-
-									<div class="dslc-cpt-post-read-more">
-										<a href="<?php the_permalink(); ?>">
-											<?php if ( 'svg' == $options['show_icon'] ) : ?>
-												<?php echo stripslashes( $options['button_inline_svg'] ); ?>
-											<?php else : ?>
-												<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
-											<?php endif; ?>
-											<?php echo $options['button_text']; ?>
-										</a>
-									</div><!-- .dslc-cpt-post-read-more -->
-
-								<?php endif; ?>
-
-							</div><!-- .dslc-cpt-post-main -->
-
-						<?php endif; ?>
+                            // $dslc_active = $original_dslc_active; // Restore state
+						}
+						else
+						{
+							echo 'loop template design box';
+						}
+						?>
 
 					</div><!-- .dslc-cpt-post --><?php
 
@@ -6367,7 +6185,12 @@ function dslc_module_posts_output( $atts, $content = null ) {
 
 				if ( $options['type'] == 'carousel' ) : ?>
 					</div><!-- dslc-carousel --><?php
-				endif; ?>
+				endif;
+
+				if ( dslc_is_editor_active( 'access' ) ) : ?>
+				</div> 
+				</div> 
+			<?php endif; ?>
 			</div><!--.dslc-posts-inner -->
 
 			<?php if ( $show_carousel_arrows && ( $options['arrows_position'] == 'aside' ) ) : ?>
@@ -6404,4 +6227,4 @@ function dslc_module_posts_output( $atts, $content = null ) {
 
 	return $shortcode_rendered;
 
-} add_shortcode( 'dslc_module_posts_output', 'dslc_module_posts_output' );
+} add_shortcode( 'dslc_module_loops_output', 'dslc_module_loops_output' );

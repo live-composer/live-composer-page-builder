@@ -5,6 +5,7 @@ import { showSection } from './uigeneral.js';
 import { moduleOutputAltered } from './module.js';
 import { updatePreset } from "./presets.js";
 import { hideModal } from "./modalwindow.js";
+import { updateProgress } from "./codegeneration.js";
 
 var dslcRegularFontsArray = window.DSLCFonts.regular;
 var dslcGoogleFontsArray = window.DSLCFonts.google;
@@ -117,7 +118,7 @@ jQuery(document).ready(function($){
 		// If previous was responsive reload module
 		if ( dslcPrev == 'responsive' ) {
 			// Show the loader
-			jQuery('.dslca-container-loader').show();
+			updateProgress(20);
 
 			// Reset the responsive classes
 			window.LiveComposer.Builder.PreviewAreaWindow.dslc_responsive_classes();
@@ -125,7 +126,7 @@ jQuery(document).ready(function($){
 			// Reload Module
 			moduleOutputAltered(function(){
 				// Hide the loader
-				jQuery('.dslca-container-loader').hide();
+				updateProgress(100);
 			});
 
 			/**
@@ -637,19 +638,20 @@ const onModuleOptionsChange = () => {
 			}
 
 			jQuery( '.dslca-module-options-front textarea[data-id="' + dslcOptionID + '"]', dslcModule ).val(dslcOptionValue);
-			jQuery('.dslca-container-loader').show();
+			updateProgress(30);
 
 			moduleOutputAltered( function(){
+				updateProgress(60);
 
 				jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).addClass('dslca-module-change-made');
 
 				if ( dslcOptionID == 'css_load_preset' && ! jQuery('body').hasClass('dslca-new-preset-added') ) {
 
 					window.dslc_module_options_show( dslcModuleID );
-					jQuery('.dslca-container-loader').hide();
+					updateProgress(100);
 				} else {
 
-					jQuery('.dslca-container-loader').hide();
+					updateProgress(100);
 				}
 
 				jQuery('body').removeClass('dslca-new-preset-added');
@@ -1428,13 +1430,13 @@ export const elementOptionsTabs = ( dslcTab ) => {
 		if ( dslcTabID == DSLCString.str_res_tablet.toLowerCase() + '_responsive' || dslcTabID == DSLCString.str_res_phone.toLowerCase() + '_responsive' ) {
 
 			// Show the loader
-			jQuery('.dslca-container-loader').show();
+			updateProgress(40);
 
 			// Reload Module
 			moduleOutputAltered(function(){
 
 				// Hide the loader
-				jQuery('.dslca-container-loader').hide();
+				updateProgress(100);
 			});
 		}
 	}

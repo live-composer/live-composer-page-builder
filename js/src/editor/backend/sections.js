@@ -174,15 +174,17 @@ const sectionsEventsInit = () => {
 
         var button = jQuery(this);
 
-        if ( ! jQuery(this).hasClass('dslca-action-disabled') ) {
+        var parentRow = button.closest('.dslc-modules-section');
+
+        if ( ! button.hasClass('dslca-action-disabled') ) {
 
             // Add a loading animation
             button.find('.dslca-icon').removeClass('dslc-icon-align-justify').addClass('dslc-icon-spinner dslc-icon-spin');
 
-            // Add a row
+            // Pass the parentRow as the second argument to addSection
             addSection( function(){
                 button.find('.dslca-icon').removeClass('dslc-icon-spinner dslc-icon-spin').addClass('dslc-icon-align-justify');
-            });
+            }, parentRow ); 
         }
     });
 
@@ -216,7 +218,7 @@ const sectionsEventsInit = () => {
 /**
  * Row - Add New
  */
-export const addSection = ( callback ) => {
+export const addSection = ( callback, targetRow = false ) => {
 
     if ( window.dslcDebug ) console.log( 'dslc_row_add' );
 
@@ -262,7 +264,8 @@ export const addSection = ( callback ) => {
                 // newRow = jQuery(response.output);
                 browserCacheTmp.setItem( 'cache-dslc-ajax-add-modules-section-v2', response.output );
 
-                newRow = dslc_row_after_add( response.output );
+                // Pass the targetRow to the rendering helper
+                newRow = dslc_row_after_add( response.output, targetRow );
 
                 if ( callback ) { callback(); }
                 return defer;
@@ -273,7 +276,7 @@ export const addSection = ( callback ) => {
         // There is cached version of AJAX request.
         // newRow = jQuery(cachedAjaxRequest);
 
-        newRow = dslc_row_after_add( cachedAjaxRequest );
+        newRow = dslc_row_after_add( cachedAjaxRequest, targetRow );
 
         if ( callback ) { callback(); }
         return defer;
@@ -286,12 +289,19 @@ export const addSection = ( callback ) => {
  * @param  {String} newRowHTML HTML code of the new row.
  * @return {jQuery}            New ROW jQuery object.
  */
-function dslc_row_after_add( newRowHTML ) {
+function dslc_row_after_add( newRowHTML, targetRow = false ) {
 
     var newRow = jQuery(newRowHTML);
 
-    // Append new row
-    newRow.appendTo(LiveComposer.Builder.PreviewAreaDocument.find("#dslc-main"));
+    /**
+     * If targetRow exists (clicked from within a section), use insertAfter.
+     * Otherwise, append to the bottom of #dslc-main.
+     */
+    if ( targetRow && targetRow.length > 0 ) {
+        newRow.insertAfter( targetRow );
+    } else {
+        newRow.appendTo(LiveComposer.Builder.PreviewAreaDocument.find("#dslc-main"));
+    }
 
     // Update first row class
     refreshFirstRowClass();

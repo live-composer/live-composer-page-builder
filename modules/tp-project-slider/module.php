@@ -2098,7 +2098,7 @@ class DSLC_TP_Project_Slider extends DSLC_Module {
 		$show_placeholder = true;
 		$show_real = false;
 
-		if ( is_singular() && get_post_type() !== 'dslc_templates' ) {
+		if ( is_singular() && get_post_type() !== 'dslc_templates' && get_post_type() !== 'dslc_template_parts' ) {
 
 			$project_images = get_post_meta( get_the_ID(), 'dslc_project_images', true );
 			if ( $project_images ) {

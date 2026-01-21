@@ -2388,7 +2388,7 @@ class DSLC_TP_Gallery_Slider extends DSLC_Module {
 		$show_placeholder = true;
 		$show_real = false;
 
-		if ( is_singular() && get_post_type() !== 'dslc_templates' ) {
+		if ( is_singular() && get_post_type() !== 'dslc_templates' && get_post_type() !== 'dslc_template_parts' ) {
 
 			if ( intval( $options['gallery_post_id'] ) > 0 ) {
 

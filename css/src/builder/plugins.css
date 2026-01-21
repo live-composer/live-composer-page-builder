@@ -1588,6 +1588,16 @@ div.dslca-add-modules-section {
   background: #0564cb !important;
   color: #fff !important;
 }
+.dslca-modules-section-add .dslca-add-modules-section-hook{
+  background: #e5855f!important;
+  width: 0px !important;
+}
+
+.dslca-modules-section-add .dslca-add-modules-section-hook:hover
+{
+  background: #FF9162!important;
+  color: #fff!important;
+}
 .dslca-add-modules-section .dslca-icon,
 .dslca-import-modules-section .dslca-icon {
   margin-right: 10px;
@@ -1668,6 +1678,19 @@ body.key-press-cmd .dslca-cmd.dslca-manage-action {
   margin: 0 auto;
   text-align: center;
 }
+.dslca-modules-section-add {
+  bottom: -14px;
+  left: 0;
+  right: 0;
+  height: 30px;
+  visibility: hidden;
+  padding-right: 0;
+  position: absolute;
+  z-index: 999999;
+  width: 20%;
+  margin: 0 auto;
+  text-align: center;
+}
 .dslc-first-row {
     transition: margin-top 0.3s ease;
 }
@@ -1677,7 +1700,8 @@ body.key-press-cmd .dslca-cmd.dslca-manage-action {
 .dslca-modules-section-manage:hover {
   z-index: 100000;
 }
-.dslc-modules-section:hover .dslca-modules-section-manage {
+.dslc-modules-section:hover .dslca-modules-section-manage,
+.dslc-modules-section:hover .dslca-modules-section-add {
   visibility: visible !important;
 }
 .dslca-modules-section-manage-inner,
@@ -3194,6 +3218,12 @@ body.dslca-composer-hidden .dslc-hf-block-overlay {
   top: 10px;
   left: 15px;
 }
+.dslca-container .dslca-container-loader{
+  top: 0;
+}
+.lc-pop-build .dslca-container-loader{
+  top: 54px;
+}
 body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Excerpt"],
 body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Meta"],
 body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Downloads_Button"],
@@ -4343,3 +4373,120 @@ a.dslca-module-edit-options-tab-hook[data-id="mobile_menu_styling"]:before {
   animation: fade-in 300ms ease;
   z-index: 1;
 } */
+
+/**
+ * Show On / Hide On (media queries)
+ */
+
+/* Desktop */
+@media only screen and (min-width : 1025px) {
+
+	#dslc-main .dslc-modules-section.dslc-hide-on-desktop > *:not(.dslca-modules-section-manage):not(.dslca-modules-section-add) {
+      opacity: 0.4;
+  }
+    #dslc-main .dslc-module-front.dslc-hide-on-desktop > *:not(.dslca-module-manage) {
+      opacity: 0.4;
+  }
+}
+
+/* Tablet */
+@media only screen and (min-width : 768px) and (max-width : 1024px)  {
+  #dslc-main .dslc-modules-section.dslc-hide-on-tablet > *:not(.dslca-modules-section-manage):not(.dslca-modules-section-add) {
+      opacity: 0.4;
+  }
+    #dslc-main .dslc-module-front.dslc-hide-on-tablet > *:not(.dslca-module-manage) {
+      opacity: 0.4;
+  }
+
+}
+
+/* Smartphone */
+@media only screen and ( max-width: 767px ) {
+  #dslc-main .dslc-modules-section.dslc-hide-on-phone > *:not(.dslca-modules-section-manage):not(.dslca-modules-section-add) {
+      opacity: 0.4;
+  }
+    #dslc-main .dslc-module-front.dslc-hide-on-phone > *:not(.dslca-module-manage) {
+      opacity: 0.4;
+  }
+}
+.dslca-container-loader {
+    position: absolute;
+    top: 54px;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: #b5b6b1;
+    z-index: 9999;
+    opacity: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease;
+    display: none;
+}
+
+.dslca-progress-bar {
+    width: 0%;
+    height: 100%;
+    background: #e10000;
+    position: relative;
+    transition: width 0.4s cubic-bezier(0.1, 0.05, 0.4, 1); 
+    box-shadow: 0 0 10px rgba(225, 0, 0, 0.5);
+}
+
+.dslca-progress-bar::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    animation: dslc_shimmer 1.5s infinite;
+}
+
+@keyframes dslc_shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.dslca-undo-redo {
+  border-radius: 3px;
+  font-size: 14px;
+  line-height: 1;
+  padding: 10px 12px;
+  width: auto;
+  background: #0050a5;
+  margin-right: 6px;
+  position: relative;
+  min-width: 75px;
+  overflow: hidden;
+}
+.dslca-container .dslca-close-composer-hook{
+  margin-left: 0px;
+}
+.dslca-undo-redo svg{
+  height: 15px;
+  width: 15px;
+  min-width: 15px;
+  fill: #fff;
+}
+.dslca-undo-redo:not(.disable):hover{
+  background-color: #5da937;
+}
+.dslca-undo-redo .dslca-history-count{
+  padding: 10px 12px;
+  width: auto;
+  background: #5da937;
+  color: #fff;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  height: 100%;
+}
+.dslca-undo-redo.disable{
+  opacity: .7;cursor: no-drop;
+}
