@@ -1010,12 +1010,22 @@ class DSLC_TP_Meta extends DSLC_Module {
 	function output( $options ) {
 
 		global $dslc_active;
+		global $post;
 
-		$post_id = $options['post_id'];
+		$post_id   = isset( $options['post_id'] ) ? (int) $options['post_id'] : 0;
 		$show_fake = true;
 
-		if ( is_singular() ) {
-			$post_id = get_the_ID();
+		if (
+			isset( $post )
+			&& is_object( $post )
+			&& isset( $post->ID )
+			&& ! in_array(
+				get_post_type( $post->ID ),
+				array( 'dslc_templates', 'dslc_template_parts' ),
+				true
+			)
+		) {
+			$post_id   = (int) $post->ID;
 			$show_fake = false;
 		}
 

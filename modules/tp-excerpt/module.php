@@ -996,30 +996,49 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 	function output( $options ) {
 
 		global $dslc_active;
+		global $post;
 
-		$post_id = $options['post_id'];
+		$post_id = isset( $options['post_id'] ) ? (int) $options['post_id'] : 0;
+
+		if (
+			isset( $post )
+			&& is_object( $post )
+			&& isset( $post->ID )
+			&& ! in_array(
+				get_post_type( $post->ID ),
+				array( 'dslc_templates', 'dslc_template_parts' ),
+				true
+			)
+		) {
+			$post_id = (int) $post->ID;
+		}
 
 		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 			$dslc_is_admin = true;
-		} else { $dslc_is_admin = false;
+		} else {$dslc_is_admin = false;
 		}
 
 		if ( $dslc_is_admin ) {
 			$the_excerpt = __( 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'live-composer-page-builder' );
-		} else { $the_excerpt = false;
+		} else {$the_excerpt = false;
 		}
 
-		if ( is_singular() && get_post_type() !== 'dslc_templates' && get_post_type() !== 'dslc_template_parts' && has_excerpt() ) {
-			$post_id = get_the_ID();
-			$post = get_post( $post_id );
-			$the_excerpt = apply_filters( 'get_the_excerpt', $post->post_excerpt );
+		if (
+			has_excerpt( $post_id )
+			&& get_post_type( $post_id ) !== 'dslc_templates'
+			&& get_post_type( $post_id ) !== 'dslc_template_parts'
+		) {
+			$post_obj = get_post( $post_id );
+			if ( $post_obj ) {
+				$the_excerpt = apply_filters( 'get_the_excerpt', $post_obj->post_excerpt );
+			}
 		}
 
 		/* Module output starts here */
 
 		if ( $the_excerpt ) :
 			?><div class="dslc-tp-excerpt"><?php echo $the_excerpt; ?></div><?php
-			endif;
+		endif;
 
 	}
 

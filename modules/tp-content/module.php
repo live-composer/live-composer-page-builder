@@ -8428,17 +8428,23 @@ class DSLC_TP_Content extends DSLC_Module {
 	function output( $options ) {
 
 		global $dslc_active;
+		global $post;
 
-		$post_id = $options['post_id'];
+		$post_id = isset( $options['post_id'] ) ? (int) $options['post_id'] : 0;
 
-		if ( is_singular() ) {
-			$post_id = get_the_ID();
+		if (
+			isset( $post )
+			&& is_object( $post )
+			&& isset( $post->ID )
+			&& ! in_array(
+				get_post_type( $post->ID ),
+				array( 'dslc_templates', 'dslc_template_parts' ),
+				true
+			)
+		) {
+			$post_id = (int) $post->ID;
 		}
 
-		/* Module output starts here */
-
-			// $content_post = get_post( $post_id );
-			// $content = $content_post->post_content;
 			$content_post = get_post_meta( $post_id, 'dslc_original_post_content', true);
 			$content = $content_post ? $content_post : '';
 
@@ -8451,36 +8457,40 @@ class DSLC_TP_Content extends DSLC_Module {
 						<h6>This Is An Example Of A Heading 6</h6>
 						<p>This is a paragraph. Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 						<ul>
-						<li>Unordered List item</li>
-						<li>Unordered List item</li>
-						<li>Unordered List item</li>
-						<li>Unordered List item</li>
+							<li>Unordered List item</li>
+							<li>Unordered List item</li>
+							<li>Unordered List item</li>
+							<li>Unordered List item</li>
 						</ul>
 						<ol>
-						<li>Ordered List item</li>
-						<li>Ordered List item</li>
-						<li>Ordered List item</li>
-						<li>Ordered List item</li>
+							<li>Ordered List item</li>
+							<li>Ordered List item</li>
+							<li>Ordered List item</li>
+							<li>Ordered List item</li>
 						</ol>
 						<blockquote>This is a blockquote. Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</blockquote>';
 		}
+		?>
+		<div class="dslc-tp-content">
+			<?php
+			do_action( 'dslc_content_module_before_content', $post_id, $options );
 
-			?><div class="dslc-tp-content"><?php
-
-				// Output before content
-				do_action( 'dslc_content_module_before_content', $post_id, $options );
-
-				// Output content
-			if ( is_singular() && get_post_type( $post_id ) != 'dslc_templates' && get_post_type( $post_id ) != 'dslc_template_parts' && get_post_type( $post_id ) != 'page' ) {
+			if (
+				get_post_type( $post_id ) !== 'dslc_templates'
+				&& get_post_type( $post_id ) !== 'dslc_template_parts'
+				&& get_post_type( $post_id ) !== 'page'
+			) {
+				setup_postdata( get_post( $post_id ) );
 				the_content();
+				wp_reset_postdata();
 			} else {
 				echo $content;
 			}
 
-				do_action( 'dslc_content_module_after_content', $post_id, $options );
-
-			?></div><?php
-
+			do_action( 'dslc_content_module_after_content', $post_id, $options );
+			?>
+		</div>
+		<?php
 	}
 
 }
