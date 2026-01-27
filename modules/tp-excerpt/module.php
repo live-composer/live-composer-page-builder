@@ -73,6 +73,7 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 				'id' => 'enable_post_content',
 				'std' => 'disabled',
 				'type' => 'select',
+				'help' => __( 'Applies only when no manual excerpt is set.', 'live-composer-page-builder' ),
 				'choices' => array(
 					array(
 						'label' => __( 'Enabled', 'live-composer-page-builder' ),
