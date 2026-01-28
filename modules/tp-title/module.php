@@ -1043,34 +1043,46 @@ class DSLC_TP_Title extends DSLC_Module {
 	function output( $options ) {
 
 	global $dslc_active;
+	global $post;
 
-	$post_id = $options['post_id'];
+	$post_id = isset( $options['post_id'] ) ? (int) $options['post_id'] : 0;
 
-	if ( is_singular() ) {
-		$post_id = get_the_ID();
+	$is_loop_item = (
+		isset( $post )
+		&& is_object( $post )
+		&& isset( $post->ID )
+		&& ! in_array(
+			get_post_type( $post->ID ),
+			array( 'dslc_templates', 'dslc_template_parts' ),
+			true
+		)
+	);
+	
+	if ( $is_loop_item ) {
+		$post_id = (int) $post->ID;
 	}
 
 	/* Module output starts here */
 
-	if ( is_category() ) {
+	if ( is_category() && ! $is_loop_item ) {
 		$title = single_cat_title( '', false );
 		$link  = get_category_link( get_queried_object_id() );
-	} elseif ( is_tag() ) {
+	} elseif ( is_tag() && ! $is_loop_item ) {
 		$title = single_tag_title( '', false );
 		$link  = get_tag_link( get_queried_object_id() );
-	} elseif ( is_author() ) {
+	} elseif ( is_author() && ! $is_loop_item ) {
 		$title = get_the_author();
 		$link  = get_author_posts_url( get_the_author_meta( 'ID' ) );
-	} elseif ( is_year() || is_month() || is_day() ) {
+	} elseif (( is_year() || is_month() || is_day() ) && ! $is_loop_item ) {
 		$title = get_the_date();
 		$link  = get_day_link( get_the_date( 'Y' ), get_the_date( 'm' ), get_the_date( 'd' ) );
-	} elseif ( is_post_type_archive() ) {
+	} elseif ( is_post_type_archive() && ! $is_loop_item ) {
 		$title = post_type_archive_title( '', false );
 		$link  = get_post_type_archive_link( get_post_type() );
-	} elseif ( class_exists( 'WooCommerce' ) && ( is_product_category() || is_product_tag() ) ) {
+	} elseif ( class_exists( 'WooCommerce' ) && ( is_product_category() || is_product_tag() ) && ! $is_loop_item ) {
 		$title = single_term_title( '', false );
 		$link  = get_term_link( get_queried_object_id() );
-	} elseif ( is_search() ) {
+	} elseif ( is_search() && ! $is_loop_item ) {
 		$title = get_the_title( $post_id ) . ' ' . get_search_query();
 		$link  = get_permalink( $post_id );
 	} else {

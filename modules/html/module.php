@@ -2897,7 +2897,7 @@ class DSLC_Html extends DSLC_Module {
 				'std' => '',
 				'type' => 'color',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => 'input[type=text]:hover, input[type=password]:hober, input[type=number]:hover, input[type=email]:hover, input[type=tel]:hover, textarea:hover, select:hover',
+				'affect_on_change_el' => 'input[type=text]:hover, input[type=password]:hover, input[type=number]:hover, input[type=email]:hover, input[type=tel]:hover, textarea:hover, select:hover',
 				'affect_on_change_rule' => 'background-color',
 				'section' => 'styling',
 				'tab' => __( 'Inputs', 'live-composer-page-builder' ),

@@ -310,7 +310,7 @@ function dslc_template_parts_init() {
 		'menu_icon' => 'dashicons-admin-page',
 		'labels' => array(
 			'name' => __( 'Template Parts', 'live-composer-page-builder' ),
-			'menu_name' => __( 'Section Templates', 'live-composer-page-builder' ),
+			'menu_name' => __( 'Design Sections', 'live-composer-page-builder' ),
 			'singular_name' => __( 'Template Part', 'live-composer-page-builder' ),
 			'add_new' => __( 'Add Template Part', 'live-composer-page-builder' ),
 			'add_new_item' => __( 'Add Template Part', 'live-composer-page-builder' ),
