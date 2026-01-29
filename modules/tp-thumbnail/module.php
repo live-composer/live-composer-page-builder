@@ -675,17 +675,10 @@ class DSLC_TP_Thumbnail extends DSLC_Module {
 
 		global $dslc_active;
 
-		global $post;
-		
-		$post_id = isset( $options['post_id'] ) ? (int) $options['post_id'] : 0;
+		$post_id = $options['post_id'];
 
-		if (
-			isset( $post )
-			&& is_object( $post )
-			&& isset( $post->ID )
-			&& ! in_array( get_post_type( $post->ID ), array( 'dslc_templates', 'dslc_template_parts' ), true )
-		) {
-			$post_id = (int) $post->ID;
+		if ( is_singular() ) {
+			$post_id = get_the_ID();
 		}
 
 		// Enable/disable thumbnail link
