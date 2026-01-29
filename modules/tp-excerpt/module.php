@@ -69,35 +69,6 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 				),
 			),
 			array(
-				'label' => __( 'Use Post Content When No Excerpt', 'live-composer-page-builder' ),
-				'id' => 'enable_post_content',
-				'std' => 'disabled',
-				'type' => 'select',
-				'help' => __( 'Applies only when no manual excerpt is set.', 'live-composer-page-builder' ),
-				'choices' => array(
-					array(
-						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled',
-					),
-					array(
-						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled',
-					),
-				),
-			),
-			array(
-				'label' => __( 'Content Preview Length (Words)', 'live-composer-page-builder' ),
-				'id' => 'content_word_limit',
-				'onlypositive' => true,
-				'min' => -2000,
-				'max' => 2000,
-				'std' => '30',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '',
-				'affect_on_change_rule' => '',
-			),
-			array(
 				'label' => __( 'BG Color', 'live-composer-page-builder' ),
 				'id' => 'css_bg_color',
 				'std' => '',
@@ -1024,94 +995,32 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 	 */
 	function output( $options ) {
 
-	global $dslc_active;
-	global $post;
+		global $dslc_active;
 
-	$post_id = isset( $options['post_id'] ) ? (int) $options['post_id'] : 0;
+		$post_id = $options['post_id'];
 
-	if (
-		isset( $post )
-		&& is_object( $post )
-		&& isset( $post->ID )
-	) {
-		$post_id = (int) $post->ID;
-	}
-
-	$post_type = get_post_type( $post_id );
-
-	$is_template = in_array(
-		$post_type,
-		array( 'dslc_templates', 'dslc_template_parts' ),
-		true
-	);
-	
-	if ( $is_template ) {
-
-		$the_excerpt = '
-			<p>
-				This is an example excerpt text. It gives a short preview of how
-				the excerpt will look when displayed on the site. You can style
-				this text while designing your template.
-			</p>
-		';
-
-	}
-	else{
-		
-		$the_excerpt = false;
-		$use_content_fallback = (
-			isset( $options['enable_post_content'] )
-			&& $options['enable_post_content'] === 'enabled'
-		);
-
-		$word_limit = isset( $options['content_word_limit'] ) && (int) $options['content_word_limit'] > 0
-			? (int) $options['content_word_limit']
-			: 30;
-
-		if ( has_excerpt( $post_id ) ) {
-
-			$post_obj = get_post( $post_id );
-			if ( $post_obj ) {
-				$the_excerpt = apply_filters( 'get_the_excerpt', $post_obj->post_excerpt );
-			}
-
-		// Fallback to content if enabled
-		} elseif ( $use_content_fallback ) {
-
-			$post_obj = get_post( $post_id );
-			if ( $post_obj && ! empty( $post_obj->post_content ) ) {
-
-				$clean_content = wp_strip_all_tags(
-					strip_shortcodes( $post_obj->post_content )
-				);
-
-				$clean_content = trim( preg_replace( '/\s+/', ' ', $clean_content ) );
-
-				$the_excerpt = wp_trim_words(
-					$clean_content,
-					$word_limit,
-					'...'
-				);
-			}
+		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+			$dslc_is_admin = true;
+		} else { $dslc_is_admin = false;
 		}
+
+		if ( $dslc_is_admin ) {
+			$the_excerpt = __( 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'live-composer-page-builder' );
+		} else { $the_excerpt = false;
+		}
+
+		if ( is_singular() && get_post_type() !== 'dslc_templates' && get_post_type() !== 'dslc_template_parts' && has_excerpt() ) {
+			$post_id = get_the_ID();
+			$post = get_post( $post_id );
+			$the_excerpt = apply_filters( 'get_the_excerpt', $post->post_excerpt );
+		}
+
+		/* Module output starts here */
+
+		if ( $the_excerpt ) :
+			?><div class="dslc-tp-excerpt"><?php echo $the_excerpt; ?></div><?php
+			endif;
+
 	}
-
-	/* Module output starts here */
-
-	if ( $the_excerpt ) :
-		?>
-		<div class="dslc-tp-excerpt">
-			<?php
-			if ( $is_template ) {
-				echo $the_excerpt;
-			} else {
-				echo esc_html( $the_excerpt );
-			}
-			?>
-		</div>
-		<?php
-	endif;
-}
-
 
 }

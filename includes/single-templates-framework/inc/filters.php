@@ -485,36 +485,14 @@ function dslc_refresh_template_ids() {
  * 1. Define the Columns for Template Parts Table
  */
 function dslc_template_parts_columns( $columns ) {
-        
+    
+    // We define a new array to control the exact order
     $new_columns = array(
         'cb'        => '<input type="checkbox" />', // The checkbox for bulk actions
         'title'     => __( 'Title', 'live-composer-page-builder' ),
-        'type' => __( 'Type', 'live-composer-page-builder' ),
         'date'      => __( 'Date', 'live-composer-page-builder' ),
     );
 
     return $new_columns;
 }
 add_filter( 'manage_dslc_template_parts_posts_columns', 'dslc_template_parts_columns' );
-
-function dslc_template_parts_columns_content( $column, $post_id ) {
-    
-    if ( 'type' === $column ) {
-
-        // Get checkbox meta
-        $template_for = get_post_meta( $post_id, 'dslc_template_part_for', true );
-
-        if ( ! empty( $template_for ) ) {
-            echo '<strong>Loop</strong>';
-        } else {
-            echo '<strong>Section</strong>';
-        }
-    }
-}
-add_action( 'manage_dslc_template_parts_posts_custom_column', 'dslc_template_parts_columns_content', 10, 2 );
-
-function dslc_template_parts_sortable_columns( $columns ) {
-    $columns['type'] = 'type';
-    return $columns;
-}
-add_filter( 'manage_edit-dslc_template_parts_sortable_columns', 'dslc_template_parts_sortable_columns' );

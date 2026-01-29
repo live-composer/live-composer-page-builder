@@ -1339,12 +1339,14 @@ class DSLC_TP_Downloads_Button extends DSLC_Module {
 	 */
 	function output( $options ) {
 
-	global $dslc_active;
+		global $dslc_active;
 
-	$dslc_is_admin = $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY );
+		if ( $dslc_active && is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
+			$dslc_is_admin = true;
+		} else { $dslc_is_admin = false;
+		}
 
-	$show_fake = true;
-	$download_link = false;
+		$show_fake = true;
 
 		if ( is_singular() ) {
 			$post_id = get_the_ID();
