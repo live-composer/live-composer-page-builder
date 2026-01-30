@@ -3737,12 +3737,22 @@ function dslc_module_comments_output( $atts, $content = null ) {
 	ob_start();
 
 	global $dslc_active;
+	global $post;
 
-	$post_id = $options['post_id'];
+	$post_id   = isset( $options['post_id'] ) ? (int) $options['post_id'] : 0;
 	$show_fake = true;
 
-	if ( is_singular() && get_post_type() !== 'dslc_templates' && get_post_type() !== 'dslc_template_parts' ) {
-		$post_id = get_the_ID();
+	if (
+		isset( $post )
+		&& is_object( $post )
+		&& isset( $post->ID )
+		&& ! in_array(
+			get_post_type( $post->ID ),
+			array( 'dslc_templates', 'dslc_template_parts' ),
+			true
+		)
+	) {
+		$post_id   = (int) $post->ID;
 		$show_fake = false;
 	}
 

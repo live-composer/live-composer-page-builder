@@ -1874,6 +1874,14 @@ function dslc_module_options_hideshow_tabs() {
 			jQuery('.dslca-module-edit-option.dependent').hide();
 		}
 	}
+	// Show hide the content limit input
+	if ( jQuery('.dslca-module-edit-field[data-id="enable_post_content"]').val() == 'disabled' ) {
+		jQuery('.dslca-module-edit-option-slider[data-id="content_word_limit"]').hide()
+	}
+	else
+	{
+		jQuery('.dslca-module-edit-option-slider[data-id="content_word_limit"]').show()
+	}
 	
 }
 

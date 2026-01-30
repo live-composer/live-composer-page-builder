@@ -4490,3 +4490,97 @@ a.dslca-module-edit-options-tab-hook[data-id="mobile_menu_styling"]:before {
 .dslca-undo-redo.disable{
   opacity: .7;cursor: no-drop;
 }
+
+/* Template Part Preview Wrapper */
+.dslc-template-part-preview-wrapper { 
+    position: relative; 
+    width: 100%; 
+    display: block; 
+    clear: both;
+    min-height: 100px;
+}
+
+/* Clearfix for floated grid items */
+.dslc-template-part-preview-wrapper:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Neutralized Structure Classes */
+.dslc-section-tp-view { position: relative; width: 100%; display: block; clear: both; }
+.dslc-area-tp-view { float: left; box-sizing: border-box; min-height: 1px; }
+.dslc-module-tp-view { display: block; position: relative; opacity: 1 !important; }
+
+/* Hide nested management UI */
+.dslc-template-part-preview-wrapper .dslca-module-manage, 
+.dslc-template-part-preview-wrapper .dslca-modules-section-manage,
+.dslc-template-part-preview-wrapper .dslca-modules-area-manage, 
+.dslc-template-part-preview-wrapper .dslca-wysiwyg-actions-edit { 
+    display: none !important; 
+}
+
+/* Centered Interactive Overlay */
+.dslc-tp-preview-overlay {
+    position: absolute; 
+    top: 0; left: 0; right: 0; bottom: 0; 
+    z-index: 999;
+    background: rgba(88, 144, 229, 0); 
+    transition: background 0.3s ease;
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    cursor: pointer;
+}
+
+.dslc-template-part-preview-wrapper:hover .dslc-tp-preview-overlay {
+    background: rgba(88, 144, 229, 0.05); 
+    border: 1px dashed #5890e5;
+}
+
+/* Overlay Button Styling */
+.dslc-tp-preview-btn {
+    display: none; 
+    background: #5890e5; 
+    color: #fff !important;
+    padding: 10px 20px; 
+    border-radius: 4px; 
+    font-size: 12px;
+    text-transform: uppercase; 
+    font-weight: 700; 
+    letter-spacing: 1px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.dslc-template-part-preview-wrapper:hover .dslc-tp-preview-btn { 
+    display: inline-block; 
+}
+/* Template parts placeholder */
+.dslc-template-part-placeholder {
+    padding: 40px;
+    border: 2px dashed #d0d0d0;
+    background: #f9f9f9;
+    text-align: center;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+.dslc-template-part-placeholder-icon {
+    font-size: 32px;
+    color: #5890e5;
+    margin-bottom: 10px;
+    display: block;
+}
+.dslc-template-part-placeholder-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #444;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    display: block;
+}
+.dslc-template-part-placeholder-descr {
+    font-size: 12px;
+    color: #888;
+    font-style: italic;
+}

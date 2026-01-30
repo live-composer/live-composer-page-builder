@@ -197,6 +197,11 @@ window.dslc_generate_code = function() {
 	jQuery('#dslc-main .dslc-modules-section', LiveComposer.Builder.PreviewAreaDocument).each(function(){
 
 		modulesSection = jQuery(this);
+		/** * NEW: Skip if this row is part of a template part preview 
+     	*/
+		if ( modulesSection.closest('.dslc-template-preview-content').length > 0 ) {
+			return; // Skip this iteration
+		}
 
 		modulesSectionJson = generateSectionCode( modulesSection );
 
@@ -383,6 +388,11 @@ export const generateSectionCode = ( theModulesSection ) => {
 		jQuery('.dslc-module-front', modulesArea).each(function(){
 
 			var dslc_module = jQuery(this);
+			/** * NEW: Skip if this module is part of a template part preview 
+			 */
+			if ( dslc_module.closest('.dslc-template-preview-content').length > 0 ) {
+				return; // Skip this iteration
+			}
 
 			// Vars
 			module_size = parseInt( dslc_module[0].getAttribute('data-dslc-module-size') );

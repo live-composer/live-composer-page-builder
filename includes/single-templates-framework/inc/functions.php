@@ -310,7 +310,7 @@ function dslc_template_parts_init() {
 		'menu_icon' => 'dashicons-admin-page',
 		'labels' => array(
 			'name' => __( 'Template Parts', 'live-composer-page-builder' ),
-			'menu_name' => __( 'Section Templates', 'live-composer-page-builder' ),
+			'menu_name' => __( 'Design Sections', 'live-composer-page-builder' ),
 			'singular_name' => __( 'Template Part', 'live-composer-page-builder' ),
 			'add_new' => __( 'Add Template Part', 'live-composer-page-builder' ),
 			'add_new_item' => __( 'Add Template Part', 'live-composer-page-builder' ),
@@ -342,27 +342,32 @@ function dslc_template_parts_init() {
 		'show_in_menu' => 'dslc_plugin_options',
 	) );
 
-	global $dslc_var_post_options;	
+	global $dslc_var_post_options;  
 
-	$template_for = array();
+    // Define the options for the template type
+    $template_for = array(
+        array(
+            'label' => __( 'Section Template (Static)', 'live-composer-page-builder' ),
+            'value' => 'section',
+        ),
+        array(
+            'label' => __( 'DSLC Post Loop (Repeated)', 'live-composer-page-builder' ),
+            'value' => 'dslc_post_loop',
+        ),
+    );
 
-	$template_for[] = array(
-		'label' => __( 'DSLC Post Loop', 'live-composer-page-builder' ),
-		'value' => 'dslc_post_loop',
-	);
-
-	$dslc_var_post_options['dslc-templates-parts-opts'] = array(
-		'title' => 'Template Options',
-		'show_on' => 'dslc_template_parts',
-		'options' => array(
-			array(
-				'label' => __( 'Use this template for', 'live-composer-page-builder' ),				
-				'std' => '',
-				'id' => 'dslc_template_part_for',
-				'type' => 'checkbox',
-				'choices' => $template_for,
-			),
-		),
-	);
+    $dslc_var_post_options['dslc-templates-parts-opts'] = array(
+        'title' => 'Template Options',
+        'show_on' => 'dslc_template_parts',
+        'options' => array(
+            array(
+                'label' => __( 'Use this template for', 'live-composer-page-builder' ),
+                'std' => 'section',
+                'id' => 'dslc_template_part_for',
+                'type' => 'radio',
+                'choices' => $template_for,
+            ),
+        ),
+    );
 
 } add_action( 'init', 'dslc_template_parts_init', 90 );
