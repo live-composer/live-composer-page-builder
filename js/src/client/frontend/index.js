@@ -1338,6 +1338,7 @@ jQuery(document).ready(function($){
 });
 
 jQuery(document).ready(function($){
+	console.log('document reload with sticky row');
 	dslc_responsive_classes();
 	dslc_carousel();
 	dslc_masonry();

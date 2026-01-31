@@ -915,9 +915,29 @@
 		$is_editor = ( dslc_is_editor_active( 'access' ) || ( isset( $_REQUEST['dslc'] ) && $_REQUEST['dslc'] === 'active' ) );
 
 		if ( ! $is_editor ) {
+			
+			// --- STICKY LOGIC START ---
+			
+			$wrapper_classes = array( 'dslc-section-template-render', 'dslc-modules-section' );
+			$is_sticky = ( isset( $options['sticky_section'] ) && $options['sticky_section'] === 'enabled' );
+			$instance_id = isset( $options['module_instance_id'] ) ? $options['module_instance_id'] : dslc_get_new_module_id();
+
+			// If sticky is enabled, add the class that index.js looks for
+			if ( $is_sticky ) {
+				$wrapper_classes[] = 'dslc-sticky-row';
+			}
+
+			$class_string = implode( ' ', $wrapper_classes );
+
 			// FRONT-END: Standard render
 			$rendered_code = dslc_render_content( dslc_get_code( $options['template_id'] ), false, true );
-			return '<div class="dslc-section-template-render">' . do_shortcode( dslc_decode_shortcodes( $rendered_code ) ) . '</div>';
+			$output = do_shortcode( dslc_decode_shortcodes( $rendered_code ) );
+
+			// Wrap in the same structure as a Row Section
+			return '<div class="' . esc_attr( $class_string ) . '" data-section-id="' . esc_attr( $instance_id ) . '">' . $output . '</div>';
+			
+			// --- STICKY LOGIC END ---
+
 		} else {
 			// EDITOR: Use the master helper with overlay enabled
 			return dslc_render_template_part_preview( $options['template_id'], __( 'Edit Section Template', 'live-composer' ), true );
