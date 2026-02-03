@@ -1076,8 +1076,8 @@ function dslc_render_template_part_preview( $template_id, $label = 'Edit Templat
     
     if ( $with_overlay ) : ?>
         <div class="dslc-template-part-preview-wrapper">
-            <div class="dslc-tp-preview-overlay" onclick="window.open('<?php echo esc_url( $edit_link ); ?>', '_blank');">
-                <span class="dslc-tp-preview-btn"><?php echo esc_html( $label ); ?></span>
+            <div class="dslc-tp-preview-overlay" >
+                <span class="dslc-tp-preview-btn" onclick="window.open('<?php echo esc_url( $edit_link ); ?>', '_blank');"><?php echo esc_html( $label ); ?></span>
             </div>
             <div class="dslc-tp-preview-content dslc-clearfix" style="pointer-events: none;">
                 <?php echo do_shortcode( dslc_decode_shortcodes( $rendered_code ) ); ?>

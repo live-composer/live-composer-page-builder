@@ -5921,8 +5921,8 @@ function dslc_module_loops_output( $atts, $content = null ) {
 				// IF EDITOR: Start the single wrapper for the entire grid
 				if ( $is_editor ) : ?>
 					<div class="dslc-template-part-preview-wrapper" style="position: relative; width: 100%;">
-						<div class="dslc-tp-preview-overlay" onclick="window.open('<?php echo esc_url( $edit_link ); ?>', '_blank');">
-							<span class="dslc-tp-preview-btn"><?php _e( 'Edit Loop Template', 'live-composer' ); ?></span>
+						<div class="dslc-tp-preview-overlay" >
+							<span class="dslc-tp-preview-btn" onclick="window.open('<?php echo esc_url( $edit_link ); ?>', '_blank');"><?php _e( 'Edit Loop Template', 'live-composer' ); ?></span>
 						</div>
 				<?php endif;
 

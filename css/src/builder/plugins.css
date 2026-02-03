@@ -4530,7 +4530,7 @@ a.dslca-module-edit-options-tab-hook[data-id="mobile_menu_styling"]:before {
     display: flex; 
     align-items: center; 
     justify-content: center; 
-    cursor: pointer;
+    cursor: default !important;
 }
 
 .dslc-template-part-preview-wrapper:hover .dslc-tp-preview-overlay {

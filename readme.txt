@@ -206,7 +206,11 @@ If you're migrating from another page builder, compatibility for content transfe
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
 
 = 2.1.3 - Febuary 04 2026 =
-
+* Added a Section module for rendering custom section designs.
+* Added a Link module for posts linking.
+* Improved the Excerpt module: added option to show post content when no excerpt is available, with configurable word limit.
+* Enhanced Loops module functionality.
+* Fixed minor issues and bugs in modules.
 
 = 2.1.2 - January 29 2026 =
 * Reverted changes from Release 2.1.0
