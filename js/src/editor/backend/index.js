@@ -19,7 +19,7 @@ import {init_sortables} from './modulearea.js'
 
 
 var dslcDebug = false;
-// window.dslcDebug = true;
+window.dslcDebug = true;
 
 // Global Plugin Object
 window.LiveComposer = {

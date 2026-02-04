@@ -342,18 +342,18 @@ function dslc_required_addons_update_notice() {
     // Check LC Extensions
     if ( is_plugin_active( $ext_plugin ) ) {
         $data = get_plugin_data( WP_PLUGIN_DIR . '/' . $ext_plugin );
-        if ( version_compare( $data['Version'], '2.0', '<' ) ) {
+        if ( version_compare( $data['Version'], '2.0.2', '<' ) ) {
             $display_notice = true;
-            $issues[] = 'Update <strong>LC Extensions</strong> plugin to version 2.0 or higher.';
+            $issues[] = 'Update <strong>LC Extensions</strong> plugin to version 2.0.2 or higher.';
         }
     }
 
     // Check LC Woo Integration
     if ( is_plugin_active( $woo_plugin ) ) {
         $data = get_plugin_data( WP_PLUGIN_DIR . '/' . $woo_plugin );
-        if ( version_compare( $data['Version'], '2.0', '<' ) ) {
+        if ( version_compare( $data['Version'], '2.0.2', '<' ) ) {
             $display_notice = true;
-            $issues[] = 'Update <strong>LC Woo Integration</strong> plugin to version 2.0 or higher.';
+            $issues[] = 'Update <strong>LC Woo Integration</strong> plugin to version 2.0.2 or higher.';
         }
     }
 

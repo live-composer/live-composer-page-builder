@@ -130,11 +130,11 @@ class DSLC_Loops extends DSLC_Module {
 				),
 			),
 			array(
-				'label' => __( 'Select Template', 'live-composer-page-builder' ),
+				'label' => __('Select Template', 'live-composer-page-builder'),
 				'id' => 'template_id',
-				'std' => $this->get_loop_templates_list()[0]['value'] ? $this->get_loop_templates_list()[0]['value'] : '',
+				'std' => '',
 				'type' => 'select',
-				'choices' =>$this->get_loop_templates_list(),
+				'choices' => $this->get_loop_templates_list(),
 			),
 
 			array(
@@ -5612,25 +5612,44 @@ class DSLC_Loops extends DSLC_Module {
 	 * @param  array $options Module options to fill the module template.
 	 * @return void
 	 */
-	function get_loop_templates_list() {
+	function get_loop_templates_list()
+	{
 		$args = array(
-			'post_type'  => 'dslc_template_parts',
-			'meta_key'   => 'dslc_template_part_for',
-			'meta_value' => 'dslc_post_loop',
+			'post_type'      => 'dslc_template_parts',
 			'posts_per_page' => -1,
+			'meta_query'     => array(
+				array(
+					'key'     => 'dslc_template_part_for',
+					'value'   => 'dslc_post_loop',
+					'compare' => '=',
+				),
+			),
 		);
 
-		$query = new WP_Query( $args );
+		$query = new WP_Query($args);
 		$templates = array();
 
-		if ( $query->have_posts() ) {
-			while ( $query->have_posts() ) {
+		if ($query->have_posts()) {
+			
+			// Templates exist: Add "Select" prompt first
+			$templates[] = array(
+				'label' => __( '-- Select a Loop Template --', 'live-composer-page-builder' ),
+				'value' => '',
+			);
+
+			while ($query->have_posts()) {
 				$query->the_post();
 				$templates[] = array(
 					'label' => get_the_title(),
 					'value' => get_the_ID(),
 				);
 			}
+		} else {
+			// No templates exist
+			$templates[] = array(
+				'label' => __( 'No templates found to select', 'live-composer-page-builder' ),
+				'value' => '',
+			);
 		}
 
 		wp_reset_postdata();
@@ -5658,52 +5677,51 @@ class DSLC_Loops extends DSLC_Module {
 function dslc_module_loops_output( $atts, $content = null ) {
 
 	// 1. Try JSON DECODING (New, secure format)
-    $options = json_decode( $content, true );
+	$options = json_decode( $content, true );
 
-    // 2. Fallback to PHP unserialize if JSON fails
-    // This handles all existing content saved in the serialized format.
-    if ( ! is_array( $options ) ) {
+	// 2. Fallback to PHP unserialize if JSON fails
+	if ( ! is_array( $options ) ) {
 
-        // Define the secure unserialize arguments based on PHP version.
-        $unserialize_args = ( version_compare( PHP_VERSION, '7.0.0', '>=' ) )
-            ? array( 'allowed_classes' => false ) // Secure on PHP 7.0+
-            : null; // Allows object injection on older PHP, but this is the necessary trade-off for legacy data loading.
-                    // For maximum security, you should deprecate support for PHP < 7.0.
+		$unserialize_args = ( version_compare( PHP_VERSION, '7.0.0', '>=' ) )
+			? array( 'allowed_classes' => false ) 
+			: null;
 
-        // Try standard unserialize with object injection blocked
-        $options = @unserialize( $content, $unserialize_args );
+		$options = @unserialize( $content, $unserialize_args );
 
-        // Fallback for broken serialization string length (from original code)
-        if ( $options === false ) {
-            $fixed_data = preg_replace_callback( '!s:(\d+):"(.*?)";!', function( $match ) {
-                return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-            }, $content );
-            // Try to unserialize the fixed string, still blocking objects
-            $options = @unserialize( $fixed_data, $unserialize_args );
-        }
-    }
+		if ( $options === false ) {
+			$fixed_data = preg_replace_callback( '!s:(\d+):"(.*?)";!', function( $match ) {
+				return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
+			}, $content );
+			$options = @unserialize( $fixed_data, $unserialize_args );
+		}
+	}
 
-    // 3. Final Validation
-    if ( ! is_array( $options ) ) {
-        // Data is invalid or failed to deserialize securely.
-        return '';
-    }
-    
-    // Optional: Validate that required keys exist (as suggested in the third developer solution)
-    $required_keys = array( 'post_type', 'amount', 'pagination_type' );
-    foreach ( $required_keys as $key ) {
-        if ( ! isset( $options[ $key ] ) ) {
-            return '';
-        }
-    }
-    
-    // Use the now-validated $options array for the rest of the module logic
-    $opts = $options;
+	// 3. Final Validation
+	if ( ! is_array( $options ) ) {
+		return '';
+	}
+	
+	$required_keys = array( 'post_type', 'amount', 'pagination_type' );
+	foreach ( $required_keys as $key ) {
+		if ( ! isset( $options[ $key ] ) ) {
+			return '';
+		}
+	}
+
+    $template_id = isset( $options['template_id'] ) ? $options['template_id'] : '';
+
+	// If ID is empty OR template is no longer valid/available
+	if ( ! $template_id || ! dslc_is_template_available( $template_id, 'dslc_post_loop' ) ) {
+		if ( dslc_is_editor_active( 'access' ) || ( isset( $_REQUEST['dslc'] ) && $_REQUEST['dslc'] === 'active' ) ) {
+			return dslc_render_template_placeholder( 'Loop' );
+		}
+		return '';
+	}
+	$opts = $options;
 
 	ob_start();
 
 	if ( is_feed() ) {
-		// Prevent category/tag feeds to stuck in an infinite loop.
 		return false;
 	}
 
@@ -5715,12 +5733,9 @@ function dslc_module_loops_output( $atts, $content = null ) {
 		$dslc_is_admin = false;
 	}
 
-		// Fix slashes on apostrophes.
 	if ( isset( $options['button_text'] ) ) {
 		$options['button_text'] = stripslashes( $options['button_text'] );
 	}
-
-		/* CUSTOM START */
 
 	if ( ! isset( $options['excerpt_length'] ) ) {
 		$options['excerpt_length'] = 20;
@@ -5729,72 +5744,45 @@ function dslc_module_loops_output( $atts, $content = null ) {
 		$post_type = array();
 
 	if ( isset( $options['post_type'] ) ) {
-
 		$post_type_str = trim( $options['post_type'] );
-
 		if ( stristr( $post_type_str , ' ' ) ) {
-
-			// Many post types selected.
 			$post_type = explode( ' ', trim( $options['post_type'] ) );
-
 		} else {
-
-			// Single post type selected
 			$post_type[] = $post_type_str;
 		}
 	}
 
 	/**
-	 * Query
+	 * Query Logic
 	 */
 
-	// Fix for pagination.
 	if ( is_front_page() ) {
 		$paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1;
 	} else {
 		$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 	}
 
-	// Fix for pagination from other modules affecting this one when pag disabled.
 	if ( 'disabled' === $options['pagination_type'] ) {
 		$paged = 1;
 	}
 
-	// Fix for offset braking pagination.
 	$query_offset = $options['offset'];
 	if ( $query_offset > 0 && $paged > 1 ) {
 		$query_offset = ( $paged - 1 ) * $options['amount'] + $options['offset'];
 	}
 
 	if ( 'all_posts' == $options['post_type'] ) {
-		// Get registered post types.
-		$post_types = get_post_types( array(
-			'public' => true,
-		), 'names' );
-
-		// System post types that should not appear in selector.
-		$post_types_to_ignore = array(
-			'dslc_templates',
-			'dslc_template_parts',
-			'dslc_hf',
-			'attachment',
-			'dslc_testimonials',
-		);
-
+		$post_types = get_post_types( array( 'public' => true ), 'names' );
+		$post_types_to_ignore = array( 'dslc_templates', 'dslc_template_parts', 'dslc_hf', 'attachment', 'dslc_testimonials' );
 		$all_post_types = array();
-
 		foreach ( $post_types as $post_type_id => $post_type ) {
-
-			// Do not output system post-types.
 			if ( ! in_array( $post_type_id, $post_types_to_ignore ) ) {
 				$all_post_types[] = $post_type;
 			}
 		}
-
 		$post_type = $all_post_types;
 	}
 
-	// General args.
 	$args = array(
 		'paged' => $paged,
 		'post_type' => $post_type,
@@ -5803,75 +5791,35 @@ function dslc_module_loops_output( $atts, $content = null ) {
 		'orderby' => $options['orderby'],
 	);
 
-	// Add offset.
-	if ( $query_offset > 0 ) {
-		$args['offset'] = $query_offset;
-	}
+	if ( $query_offset > 0 ) { $args['offset'] = $query_offset; }
+	if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) { $args['post_status'] = array( 'publish', 'private' ); }
 
-	if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-		$args['post_status'] = array( 'publish', 'private' );
-	}
-
-	// Category args.
 	if ( isset( $options['categories'] ) && '' !== $options['categories'] ) {
 		$cats_array = explode( ' ', $options['categories'] );
 		$args['category__in'] = $cats_array;
 	}
 
-	// Exlcude and Include arrays.
 	$exclude = array();
 	$include = array();
+	if ( is_singular( get_post_type() ) ) { $exclude[] = get_the_ID(); }
+	if ( $options['query_post_not_in'] ) { $exclude = array_merge( $exclude, explode( ' ', $options['query_post_not_in'] ) ); }
+	if ( $options['query_post_in'] ) { $include = array_merge( $include, explode( ' ', $options['query_post_in'] ) ); }
+	if ( ! empty( $include ) ) { $args['post__in'] = $include; }
+	if ( ! empty( $exclude ) ) { $args['post__not_in'] = $exclude; }
 
-	// Exclude current post.
-	if ( is_singular( get_post_type() ) ) {
-		$exclude[] = get_the_ID();
-	}
-
-	// Exclude posts ( option ).
-	if ( $options['query_post_not_in'] ) {
-		$exclude = array_merge( $exclude, explode( ' ', $options['query_post_not_in'] ) );
-	}
-
-	// Include posts ( option ).
-	if ( $options['query_post_in'] ) {
-		$include = array_merge( $include, explode( ' ', $options['query_post_in'] ) );
-	}
-
-	// Include query parameter.
-	if ( ! empty( $include ) ) {
-		$args['post__in'] = $include;
-	}
-
-	// Exclude query parameter.
-	if ( ! empty( $exclude ) ) {
-		$args['post__not_in'] = $exclude;
-	}
-
-	// Author archive page.
 	if ( is_author() && 'enabled' === $options['query_alter'] ) {
 		global $authordata;
 		$args['author__in'] = array( $authordata->data->ID );
 	}
 
-	// No paging.
-	if ( 'disabled' === $options['pagination_type'] ) {
-		$args['no_found_rows'] = true;
-	}
+	if ( 'disabled' === $options['pagination_type'] ) { $args['no_found_rows'] = true; }
+	if ( 'disabled' === $options['sticky_posts'] ) { $args['ignore_sticky_posts'] = true; }
 
-	// Sticky Posts.
-	if ( 'disabled' === $options['sticky_posts'] ) {
-		$args['ignore_sticky_posts'] = true;
-	}
-
-	// Do the query.
 	if ( ( is_category() || is_tag() || is_tax() || is_search() || is_date() ) && 'enabled' === $options['query_alter'] ) {
 		global $wp_query;
 		$dslc_query = $wp_query;
-
 		if ( isset( $options['amount'] ) ) {
-			if ( ( 'all_posts' !== $post_type_str ) && is_search() ) {
-				$dslc_query->set( 'post_type', $post_type_str );
-			}
+			if ( ( 'all_posts' !== $post_type_str ) && is_search() ) { $dslc_query->set( 'post_type', $post_type_str ); }
 			$dslc_query->set( 'posts_per_page', $options['amount'] );
 			$dslc_query->query( $dslc_query->query_vars );
 		}
@@ -5880,7 +5828,7 @@ function dslc_module_loops_output( $atts, $content = null ) {
 	}
 
 	/**
-	 * Unnamed
+	 * Display Settings
 	 */
 
 	$columns_class = 'dslc-col dslc-' . $options['columns'] . '-col ';
@@ -5889,342 +5837,158 @@ function dslc_module_loops_output( $atts, $content = null ) {
 	$increment = $options['columns'];
 	$max_count = 12;
 
-	/**
-	 * Elements to show
-	 */
+	$elements = ! empty( $options['elements'] ) ? explode( ' ', trim( $options['elements'] ) ) : array();
 
-	// Main Elements
-	$elements = $options['elements'];
-	if ( ! empty( $elements ) ) {
-		$elements = explode( ' ', trim( $elements ) );
-	} else {
-		$elements = array();
-	}
-
-	// Post Elements
-	$post_elements = $options['post_elements'];
-	if ( ! empty( $post_elements ) ) {
-		$post_elements = explode( ' ', trim( $post_elements ) );
-	} else {
-		$post_elements = 'all';
-	}
-
-	// Carousel Elements
-	$carousel_elements = $options['carousel_elements'];
-	if ( ! empty( $carousel_elements ) ) {
-		$carousel_elements = explode( ' ', trim( $carousel_elements ) );
-	} else {
-		$carousel_elements = array();
-	}
-
-	/**
-	 * Classes generation
-	 */
-
-	// Posts container.
 	$container_class = 'custom-template-container dslc-posts dslc-cpt-posts dslc-clearfix dslc-cpt-posts-type-' . $options['type'] . ' dslc-posts-orientation-' . $options['orientation'] . ' ';
-	if ( $options['type'] == 'masonry' ) {
-		$container_class .= 'dslc-init-masonry ';
-	} elseif ( $options['type'] == 'grid' ) {
-		$container_class .= 'dslc-init-grid ';
-	}
+	if ( $options['type'] == 'masonry' ) { $container_class .= 'dslc-init-masonry '; } 
+	elseif ( $options['type'] == 'grid' ) { $container_class .= 'dslc-init-grid '; }
 
-	// Post
 	$element_class = 'dslc-post dslc-cpt-post ';
-	if ( $options['type'] == 'masonry' ) {
-		$element_class .= 'dslc-masonry-item ';
-	} elseif ( $options['type'] == 'carousel' ) {
-		$element_class .= 'dslc-carousel-item ';
-	}
-
-	/**
-	 * What is shown
-	 */
+	if ( $options['type'] == 'masonry' ) { $element_class .= 'dslc-masonry-item '; } 
+	elseif ( $options['type'] == 'carousel' ) { $element_class .= 'dslc-carousel-item '; }
 
 	$show_header = false;
-	$show_heading = false;
-	$show_filters = false;
-	$show_carousel_arrows = false;
-	$show_view_all_link = false;
+	$show_heading = in_array( 'main_heading', $elements, true );
+	$show_filters = ( 'all' === $elements || in_array( 'filters', $elements, true ) ) && 'carousel' !== $options['type'];
+	$show_carousel_arrows = 'carousel' === $options['type'] && in_array( 'arrows', (array)$options['carousel_elements'], true );
 
-	if ( in_array( 'main_heading', $elements, true ) ) {
-		$show_heading = true;
-	}
-
-	if ( ( 'all' === $elements || in_array( 'filters', $elements, true ) ) && 'carousel' !== $options['type'] ) {
-		$show_filters = true;
-	}
-
-	if ( 'carousel' === $options['type'] && in_array( 'arrows', $carousel_elements, true ) ) {
-		$show_carousel_arrows = true;
-	}
-
-	if ( $show_heading || $show_filters || $show_carousel_arrows ) {
-		$show_header = true;
-	}
-
-	if ( $show_carousel_arrows && ( $options['arrows_position'] == 'aside' ) ) {
-		$container_class .= 'dslc-carousel-arrow-aside ';
-	}
+	if ( $show_heading || $show_filters || $show_carousel_arrows ) { $show_header = true; }
+	if ( $show_carousel_arrows && ( $options['arrows_position'] == 'aside' ) ) { $container_class .= 'dslc-carousel-arrow-aside '; }
 
 	/**
-	 * Carousel Items
-	 */
-
-	switch ( $options['columns'] ) {
-		case 12 :
-			$carousel_items = 1;
-			break;
-		case 6 :
-			$carousel_items = 2;
-			break;
-		case 4 :
-			$carousel_items = 3;
-			break;
-		case 3 :
-			$carousel_items = 4;
-			break;
-		case 2 :
-			$carousel_items = 6;
-			break;
-		default:
-			$carousel_items = 6;
-			break;
-	}
-
-	/**
-	 * Heading ( output )
+	 * Heading Output
 	 */
 
 	if ( $show_header ) : ?>
 		<div class="dslc-module-heading">
-
-			<!-- Heading -->
 			<?php if ( $show_heading ) : ?>
 				<div class="dslc-post-heading">
-
 					<h2 class="dslca-editable-content" data-id="main_heading_title" data-type="simple" <?php if ( $dslc_is_admin ) { echo 'contenteditable';} ?> ><?php echo stripslashes( $options['main_heading_title'] ); ?></h2>
-
-					<!-- View all -->
-
 					<?php if ( isset( $options['view_all_link'] ) && $options['view_all_link'] !== '' ) : ?>
-
 						<span class="dslc-module-heading-view-all"><a href="<?php echo $options['view_all_link']; ?>" class="dslca-editable-content" data-id="main_heading_link_title" data-type="simple" <?php if ( $dslc_is_admin ) { echo 'contenteditable';} ?> ><?php echo $options['main_heading_link_title']; ?></a></span>
-
 					<?php endif; ?>
-
 				</div>
 			<?php endif; ?>
 
-			<!-- Filters -->
 			<?php
 			$taxonomy_name = '';
 			if ( $show_filters ) {
-
 				$cats_array = array();
 				$cats_count = 0;
-
 				if ( $dslc_query->have_posts() ) {
 					while ( $dslc_query->have_posts() ) {
 						$dslc_query->the_post();
 						$cats_count++;
-
 						if ( $cats_count == 1 ) {
 							$post_type_taxonomies = get_object_taxonomies( get_post_type(), 'objects' );
-							foreach ( $post_type_taxonomies as $taxonomy ) {
-								if ( $taxonomy->hierarchical == true ) {
-									$taxonomy_name = $taxonomy->name;
-								}
-							}
+							foreach ( $post_type_taxonomies as $taxonomy ) { if ( $taxonomy->hierarchical == true ) { $taxonomy_name = $taxonomy->name; } }
 						}
-
 						$post_cats = get_the_terms( get_the_ID(), $taxonomy_name );
-						if ( ! empty( $post_cats ) ) {
-							foreach ( $post_cats as $post_cat ) {
-								$cats_array[ $post_cat->slug ] = $post_cat->name;
-							}
-						}
+						if ( ! empty( $post_cats ) ) { foreach ( $post_cats as $post_cat ) { $cats_array[ $post_cat->slug ] = $post_cat->name; } }
 					}
 				}
 			?>
 				<div class="dslc-post-filters">
 					<span class="dslc-post-filter dslc-active dslca-editable-content" data-filter-id="show-all" <?php if ( $dslc_is_admin ) { echo 'data-id="main_filter_title_all" data-type="simple" contenteditable '; } ?>><?php echo $options['main_filter_title_all']; ?></span>
-
 					<?php foreach ( $cats_array as $cat_slug => $cat_name ) : ?>
 						<span class="dslc-post-filter dslc-inactive" data-filter-id="<?php echo $cat_slug; ?>"><?php echo $cat_name; ?></span>
 					<?php endforeach; ?>
+				</div><?php
+			} ?>
 
-				</div><!-- .dslc-post-filters --><?php
-		} // End if( $show_filters ).
-
-		?>
-
-		<!-- Carousel -->
-
-		<?php if ( $show_carousel_arrows && ( $options['arrows_position'] == 'above' ) ) : ?>
-							<span class="dslc-carousel-nav fr">
-								<span class="dslc-carousel-nav-inner">
-									<a href="#" class="dslc-carousel-nav-prev"><span class="dslc-icon-chevron-left"></span></a>
-									<a href="#" class="dslc-carousel-nav-next"><span class="dslc-icon-chevron-right"></span></a>
-								</span>
-							</span><!-- .carousel-nav -->
-						<?php endif; ?>
-
-			</div><!-- .dslc-module-heading -->
-				<?php
-
-			endif;
+			<?php if ( $show_carousel_arrows && ( $options['arrows_position'] == 'above' ) ) : ?>
+				<span class="dslc-carousel-nav fr"><span class="dslc-carousel-nav-inner"><a href="#" class="dslc-carousel-nav-prev"><span class="dslc-icon-chevron-left"></span></a><a href="#" class="dslc-carousel-nav-next"><span class="dslc-icon-chevron-right"></span></a></span></span>
+			<?php endif; ?>
+		</div>
+	<?php endif;
 
 	/**
-	 * Posts ( output )
+	 * Posts Output
 	 */
 
 	if ( $dslc_query->have_posts() ) { 
+		$is_editor = ( dslc_is_editor_active( 'access' ) || ( isset( $_REQUEST['dslc'] ) && $_REQUEST['dslc'] === 'active' ) );
 		$edit_link = DSLC_EditorInterface::get_editor_link_url( $options['template_id'] );
 		?>
-		<div class="<?php echo $container_class; ?>">
+		<div class="<?php echo esc_attr($container_class); ?>">
 
 			<?php if ( $show_carousel_arrows && ( $options['arrows_position'] == 'aside' ) ) : ?>
 				<a href="#" class="dslc-carousel-nav-prev position-aside"><span class="dslc-icon-chevron-left"></span></a>
 			<?php endif; ?>
 
 			<div class="dslc-posts-inner"><?php
-			if ( dslc_is_editor_active( 'access' ) ) : ?>
-				<div class="dslc-loop-template-shield" style="position: relative;">
-					<div class="dslc-header dslc-is-global-post" 
-						data-hf="header" 
-						data-editing-link="<?php echo esc_url( $edit_link ); ?>" 
-						data-editing-label="<?php _e( 'Edit Loop Template', 'live-composer-page-builder' ); ?>"
-						style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 999; cursor: pointer;">
-					</div>
-					<div class="dslc-template-preview-content dslc-clearfix" style="pointer-events: none;">
-			<?php endif;
+
+				// IF EDITOR: Start the single wrapper for the entire grid
+				if ( $is_editor ) : ?>
+					<div class="dslc-template-part-preview-wrapper" style="position: relative; width: 100%;">
+						<div class="dslc-tp-preview-overlay" >
+							<span class="dslc-tp-preview-btn" onclick="window.open('<?php echo esc_url( $edit_link ); ?>', '_blank');"><?php _e( 'Edit Loop Template', 'live-composer' ); ?></span>
+						</div>
+				<?php endif;
 
 				if ( $options['type'] == 'carousel' ) : ?>
 					<div class="dslc-loader"></div>
-					<div class="dslc-carousel"
-						data-stop-on-hover="<?php echo $options['carousel_autoplay_hover']; ?>"
-						data-autoplay="<?php echo $options['carousel_autoplay']; ?>"
-						data-columns="<?php echo $carousel_items; ?>"
-						data-pagination="<?php
-							if ( in_array( 'circles', $carousel_elements ) ) {
-								echo 'true'; 
-							} else {
-								echo 'false';
-							} ?>"
-						data-slide-speed="<?php echo $options['arrows_slide_speed']; ?>"
-						data-pagination-speed="<?php echo $options['circles_slide_speed']; ?>"><?php
-				endif; // End if carousel.
+					<div class="dslc-carousel" data-stop-on-hover="<?php echo $options['carousel_autoplay_hover']; ?>" data-autoplay="<?php echo $options['carousel_autoplay']; ?>" data-columns="4" data-pagination="true" data-slide-speed="600" data-pagination-speed="800"><?php
+				endif;
 
 				while ( $dslc_query->have_posts() ) :
 					$dslc_query->the_post();
 					$count += $increment;
 					$real_count++;
 					
-					$composer_code = dslc_get_code($options['template_id']);
-
-					if ( $count == $max_count ) {
-						$count = 0;
-						$extra_class = ' dslc-last-col';
-					} elseif ( $count == $increment ) {
-						$extra_class = ' dslc-first-col';
-					} else {
-						$extra_class = '';
-					}
-
-					if ( ! has_post_thumbnail() ) {
-						$extra_class .= ' dslc-post-no-thumb';
-					}
+					if ( $count == $max_count ) { $count = 0; $extra_class = ' dslc-last-col'; } 
+					elseif ( $count == $increment ) { $extra_class = ' dslc-first-col'; } 
+					else { $extra_class = ''; }
 
 					$post_cats_data = '';
 					if ( isset( $taxonomy_name ) ) {
 						$post_cats = get_the_terms( get_the_ID(), $taxonomy_name );
-						if ( ! empty( $post_cats ) ) {
-							foreach ( $post_cats as $post_cat ) {
-								$post_cats_data .= $post_cat->slug . ' ';
-							}
-						}
+						if ( ! empty( $post_cats ) ) { foreach ( $post_cats as $post_cat ) { $post_cats_data .= $post_cat->slug . ' '; } }
 					} ?>
 
 					<div class="<?php echo $element_class . $columns_class . $extra_class; ?>" data-cats="<?php echo $post_cats_data; ?>">
-                        <?php
-						if ( !dslc_is_editor_active( 'access' ) )
-						{
-
-                            // Render internal content
-                            // global $dslc_active;
-							
-                            // $original_dslc_active = $dslc_active; // Store current state
-                            // $dslc_active = false; // Disable editor for inner modules
-
-                            // Render as "is_header_footer" (3rd param true) to isolate IDs
-                            $rendered_code = dslc_render_content( $composer_code);
-                            $rendered_code = dslc_decode_shortcodes( $rendered_code );
-                            
-                            // Remove internal edit icons/pencils via class swap
-                            // $rendered_code = str_replace( 'dslc-modules-section', 'dslc-module-section-view-only', $rendered_code );
-
-                            echo do_shortcode( do_shortcode( $rendered_code ) );
-
-                            // $dslc_active = $original_dslc_active; // Restore state
-						}
-						else
-						{
-							echo 'loop template design box';
-						}
+						<?php
+							if ( $is_editor ) :
+								// EDITOR: Silent Ghosting (No individual overlay)
+								echo dslc_render_template_part_preview( $options['template_id'], '', false );
+							else :
+								// FRONT-END: Normal render
+								$rendered_code = dslc_render_content( dslc_get_code($options['template_id']), false, true );
+								echo do_shortcode( dslc_decode_shortcodes( $rendered_code ) );
+							endif;
 						?>
+					</div><?php
 
-					</div><!-- .dslc-cpt-post --><?php
-
-					// Row Separator
-					if ( $options['type'] == 'grid' && $count == 0 && $real_count != $dslc_query->found_posts && $real_count != $options['amount'] && $options['separator_enabled'] == 'enabled' ) {
+					if ( ! $is_editor && $options['type'] == 'grid' && $count == 0 && $real_count != $dslc_query->found_posts && $real_count != $options['amount'] && $options['separator_enabled'] == 'enabled' ) {
 						echo '<div class="dslc-post-separator"></div>';
 					}
 
-				endwhile; // End while have_posts.
+				endwhile;
 
-				if ( $options['type'] == 'carousel' ) : ?>
-					</div><!-- dslc-carousel --><?php
-				endif;
-
-				if ( dslc_is_editor_active( 'access' ) ) : ?>
-				</div> 
-				</div> 
-			<?php endif; ?>
-			</div><!--.dslc-posts-inner -->
+				if ( $options['type'] == 'carousel' ) echo '</div>';
+				if ( $is_editor ) echo '</div>'; // Close single editor wrapper
+				?>
+			</div>
 
 			<?php if ( $show_carousel_arrows && ( $options['arrows_position'] == 'aside' ) ) : ?>
 				<a href="#" class="dslc-carousel-nav-next position-aside"><span class="dslc-icon-chevron-right"></span></a>
 			<?php endif; ?>
 
-		</div><!-- .dslc-cpt-posts --><?php
+		</div><?php
 	} else {
 		if ( $dslc_is_admin ) : ?>
-			<div class="dslc-notification dslc-red"><?php _e( 'You do not have any posts of that post type at the moment.', 'live-composer-page-builder' ); ?> <span class="dslca-refresh-module-hook dslc-icon dslc-icon-refresh"></span></span></div><?php
+			<div class="dslc-notification dslc-red"><?php _e( 'You do not have any posts.', 'live-composer' ); ?> <span class="dslca-refresh-module-hook dslc-icon dslc-icon-refresh"></span></div><?php
 		endif;
-	} // End if().
-
-	/**
-	 * Pagination
-	 */
-
-	if ( isset( $options['pagination_type'] ) && $options['pagination_type'] != 'disabled' ) {
-		$num_pages = $dslc_query->max_num_pages;
-		if ( $options['offset'] > 0 ) {
-			$num_pages = ceil( ( $dslc_query->found_posts - $options['offset'] ) / $options['amount'] );
-		}
-		dslc_post_pagination( array(
-			'pages' => $num_pages,
-			'type' => $options['pagination_type'],
-			'pagination_text' => $options['pagination_text'],
-		) );
 	}
 
-		wp_reset_postdata();
+	if ( ! $is_editor && isset( $options['pagination_type'] ) && $options['pagination_type'] != 'disabled' ) {
+		$num_pages = $dslc_query->max_num_pages;
+		if ( $options['offset'] > 0 ) { $num_pages = ceil( ( $dslc_query->found_posts - $options['offset'] ) / $options['amount'] ); }
+		dslc_post_pagination( array( 'pages' => $num_pages, 'type' => $options['pagination_type'], 'pagination_text' => $options['pagination_text'], ) );
+	}
 
+	wp_reset_postdata();
 	$shortcode_rendered = ob_get_contents();
 	ob_end_clean();
-
 	return $shortcode_rendered;
-
 } add_shortcode( 'dslc_module_loops_output', 'dslc_module_loops_output' );

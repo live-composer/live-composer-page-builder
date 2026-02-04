@@ -94,6 +94,8 @@ function dslc_register_modules() {
 	dslc_register_module( 'DSLC_TP_Comments_Form' );
 	dslc_register_module( 'DSLC_TP_Staff_Social' );
 	dslc_register_module( 'DSLC_Loops' );
+	dslc_register_module( 'DSLC_Section' );
+	dslc_register_module( 'DSLC_TP_Link' );
 
 	// Hook to register custom modules.
 	do_action( 'dslc_hook_register_modules' );
@@ -1042,4 +1044,91 @@ function dslc_sanitize_html($html) {
 		return 'error';
 	}
 	
+}
+
+
+/**
+ * Renders a Template Part in "Preview Mode" for the editor.
+ * Ensures nested modules are not saveable and management UI is hidden.
+ *
+ * @param int $template_id The ID of the dslc_template_parts post.
+ * @param string $label The text to show on the hover overlay.
+ * @return string Sanitized HTML for editor output.
+ */
+function dslc_render_template_part_preview( $template_id, $label = 'Edit Template', $with_overlay = true ) {
+    if ( ! $template_id ) return '';
+
+    $composer_code = dslc_get_code( $template_id );
+    $edit_link = DSLC_EditorInterface::get_editor_link_url( $template_id );
+    
+    // 1. Isolated Render
+    $rendered_code = dslc_render_content( $composer_code, false, true );
+
+    // 2. Class Neutralization
+    $search  = array( 'dslc-modules-section', 'dslc-modules-area', 'dslc-module-front' );
+    $replace = array( 'dslc-section-tp-view', 'dslc-area-tp-view', 'dslc-module-tp-view' );
+    $rendered_code = str_replace( $search, $replace, $rendered_code );
+
+    // 3. Metadata Stripping
+    $rendered_code = preg_replace('/<(div|textarea)[^>]*(dslca-module-options-front|dslca-module-code)[^>]*>.*?<\/\1>/s', '', $rendered_code );
+
+    ob_start(); 
+    
+    if ( $with_overlay ) : ?>
+        <div class="dslc-template-part-preview-wrapper">
+            <div class="dslc-tp-preview-overlay" >
+                <span class="dslc-tp-preview-btn" onclick="window.open('<?php echo esc_url( $edit_link ); ?>', '_blank');"><?php echo esc_html( $label ); ?></span>
+            </div>
+            <div class="dslc-tp-preview-content dslc-clearfix" style="pointer-events: none;">
+                <?php echo do_shortcode( dslc_decode_shortcodes( $rendered_code ) ); ?>
+            </div>
+        </div>
+    <?php else : ?>
+        <div class="dslc-tp-preview-content dslc-clearfix" style="pointer-events: none;">
+            <?php echo do_shortcode( dslc_decode_shortcodes( $rendered_code ) ); ?>
+        </div>
+    <?php endif;
+
+    return ob_get_clean();
+}
+/**
+ * Renders a placeholder notice when a template is missing, deleted, or invalid.
+ * * @param string $module_name The name of the module (Section or Loop).
+ * @return string HTML for the placeholder box.
+ */
+function dslc_render_template_placeholder( $module_label = 'Template' ) {
+	ob_start(); ?>
+	<div class="dslc-template-part-placeholder">
+		<span class="dslc-template-part-placeholder-icon dslc-icon-ext-layers"></span>
+		<span class="dslc-template-part-placeholder-title">
+			<?php echo sprintf( __( 'Select %s Template', 'live-composer' ), $module_label ); ?>
+		</span>
+		<span class="dslc-template-part-placeholder-descr">
+			<?php _e( 'Choose a template from the module options to display content. If you previously selected one, it may have been deleted or its usage type has changed.', 'live-composer' ); ?>
+		</span>
+	</div>
+	<?php
+	return ob_get_clean();
+}
+/**
+ * Validates if a template ID matches the required usage type.
+ * * @param int    $template_id   The ID to check.
+ * @param string $required_type 'section' or 'dslc_post_loop'.
+ * @return bool  True if valid, false otherwise.
+ */
+function dslc_is_template_available( $template_id, $required_type = 'section' ) {
+	if ( ! $template_id ) return false;
+
+	// 1. Check if the post actually exists and is not trashed
+	if ( get_post_status( $template_id ) !== 'publish' ) {
+		return false;
+	}
+
+	// 2. Check the usage type
+	$actual_type = get_post_meta( $template_id, 'dslc_template_part_for', true );
+	
+	// Handle legacy/default
+	if ( empty( $actual_type ) ) { $actual_type = 'section'; }
+
+	return ( $actual_type === $required_type );
 }
