@@ -199,10 +199,11 @@ const sectionsEventsInit = () => {
         var self = this;
 
         var module_edited = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).length;
+        var module_area_edited = jQuery('.dslca-module-area-being-edited', LiveComposer.Builder.PreviewAreaDocument).length;
         var row_edited = jQuery('.dslca-modules-section-being-edited', LiveComposer.Builder.PreviewAreaDocument).length;
 
         /// If settings panel opened - finish func
-        if ( LiveComposer.Builder.Flags.uiHidden || module_edited > 0 || row_edited > 0 ) return false;
+        if ( LiveComposer.Builder.Flags.uiHidden || module_edited > 0 || module_area_edited > 0 || row_edited > 0 ) return false;
 
         // If not disabled ( disabling used for tutorial )
         if ( ! jQuery(this).hasClass('dslca-action-disabled') ) {

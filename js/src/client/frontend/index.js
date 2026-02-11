@@ -30,7 +30,12 @@ window.dslc_responsive_classes = ( force ) => {
 	var windowWidth = jQuery(window).width();
 	var body = jQuery('body');
 
-	if ( force == true || ( ! body.hasClass('dslc-res-disabled') && ! jQuery('.dslca-module-edit-options-tab-hook.dslca-active[data-section="responsive"]').length ) ) {
+	const hasActiveResponsiveTab = jQuery(
+		'.dslca-module-edit-options-tab-hook.dslca-active[data-section="responsive"], ' +
+		'.dslca-modules-area-edit-options-tab-hook.dslca-active[data-section="responsive"]'
+	).length > 0;
+
+	if ( force === true || ( ! body.hasClass('dslc-res-disabled') && ! hasActiveResponsiveTab )	) {
 
 		body.removeClass( 'dslc-res-phone dslc-res-tablet dslc-res-smaller-monitor dslc-res-big' );
 
@@ -1338,7 +1343,6 @@ jQuery(document).ready(function($){
 });
 
 jQuery(document).ready(function($){
-	console.log('document reload with sticky row');
 	dslc_responsive_classes();
 	dslc_carousel();
 	dslc_masonry();

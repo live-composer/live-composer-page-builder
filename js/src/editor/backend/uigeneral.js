@@ -12,7 +12,7 @@
  * - dragAndDropInit ( Initiate drag and drop functionality )
  ***********************************/
 
-import { elementOptionsTabs } from './settings.panel.js';
+import { elementOptionsTabs, modulesAreaOptionsTabs } from './settings.panel.js';
 import { CModalWindow } from './modalwindow.class.js';
 import { dslc_save_composer } from './codegeneration.js';
 import { makePopupDraggableAndResizable } from './popup-drag-resize.js'; 
@@ -382,8 +382,9 @@ export const showSection = ( section ) => {
 
 	// Hide all sections and show specific section
 	// jQuery('.dslca-section').hide();
-	if (section !== ".dslca-module-edit" && section !== ".dslca-modules-section-edit") {
+	if (section !== ".dslca-module-edit" && section !== ".dslca-modules-section-edit" && section !== ".dslca-modules-area-edit") {
 		jQuery(".dslca-section").hide();
+		jQuery(".dslca-modules-area").hide();
 	}
 
 	// 2. If 'e' is equal to ".dslca-modules", perform two actions related to activation classes.
@@ -411,7 +412,15 @@ export const showSection = ( section ) => {
 			.css( 'background-color', '#006add' )
 				.find('strong')
 				.text( 'Row' );
-	} else {
+	}else if ( section == '.dslca-modules-area-edit' ) {
+
+		jQuery('.dslca-currently-editing')
+			.show()
+			.css( 'background-color', '#006add' )
+				.find('strong')
+				.text( 'Modules Area Container' );
+	} 
+	else {
 
 		jQuery('.dslca-currently-editing')
 			.hide()
@@ -419,8 +428,13 @@ export const showSection = ( section ) => {
 				.text('');
 	}
 
-	// Filter module option tabs
-	elementOptionsTabs();
+	if ( section == '.dslca-modules-area-edit' )
+	{
+		modulesAreaOptionsTabs();
+	}else {
+		// Filter module option tabs
+		elementOptionsTabs();
+	}
 
 	// Show ( animate ) the container
 	// setTimeout( function() {
@@ -947,6 +961,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const closeBtn1 = document.getElementById("lc_closeBtn");
     const closeBtn2 = document.getElementById("lc_closeBtn2");
+    const closeBtn3 = document.getElementById("lc_closeBtn3");
 	const dragOverlay = document.getElementById("dslc-drag-overlay");
 
     // Initialize Module Popup (lc_popup)
@@ -954,6 +969,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initialize Row Popup (lc_popup2)
     makePopupDraggableAndResizable('lc_popup2', 'lc_popupHeader2', dragOverlay, closeBtn2);
+    // Initialize module area Popup (lc_popup3)
+    makePopupDraggableAndResizable('lc_popup3', 'lc_popupHeader3', dragOverlay, closeBtn3);
 	const popup = document.getElementById('lc_popupContent');
     const btnMin = document.getElementById('lc_popup_minimize');
     const btnMax = document.getElementById('lc_popup_maximize');
@@ -1004,6 +1021,32 @@ document.addEventListener('DOMContentLoaded', () => {
  
         btnMin2.classList.remove('hide');
         btnMin2.classList.add('show');
+    });
+
+    const popup3 = document.getElementById('lc_popupContent3');
+    const btnMin3 = document.getElementById('lc_popup_minimize3');
+    const btnMax3 = document.getElementById('lc_popup_maximize3');
+ 
+    // Hide popup
+    btnMin3.addEventListener('click', function() {
+        popup3.classList.remove('show');
+ 
+        btnMin3.classList.remove('show');
+        btnMin3.classList.add('hide');
+ 
+        btnMax3.classList.remove('hide');
+        btnMax3.classList.add('show');
+    });
+ 
+    // Show popup
+    btnMax3.addEventListener('click', function() {
+        popup3.classList.add('show');
+ 
+        btnMax3.classList.remove('show');
+        btnMax3.classList.add('hide');
+ 
+        btnMin3.classList.remove('hide');
+        btnMin3.classList.add('show');
     });
  
 });

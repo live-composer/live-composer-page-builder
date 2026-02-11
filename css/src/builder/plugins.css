@@ -262,6 +262,7 @@ body a:focus {
 }
 .dslca-header .dslca-go-to-section-hook,
 .dslca-header .dslca-options-filter-hook,
+.dslca-header .dslca-modules-area-options-filter-hook,
 .dslca-header .dslca-row-options-filter-hook,
 .dslca-pseudo-header .dslca-pseudo-options-filter-hook {
   bottom: 0;
@@ -278,6 +279,7 @@ body a:focus {
   position: relative;
 }
 .dslca-header .dslca-options-filter-hook,
+.dslca-header .dslca-modules-area-options-filter-hook,
 .dslca-pseudo-options-filter-hook,
 .dslca-header .dslca-row-pseudo-options-filter-hook {
   display: none;
@@ -285,6 +287,7 @@ body a:focus {
 }
 .dslca-header .dslca-go-to-section-hook.dslca-active,
 .dslca-header .dslca-options-filter-hook.dslca-active,
+.dslca-header .dslca-modules-area-options-filter-hook.dslca-active,
 .dslca-header .dslca-row-options-filter-hook.dslca-active,
 .dslca-pseudo-header .dslca-pseudo-options-filter-hook.dslca-active {
   border-top-color: #4777c2;
@@ -293,11 +296,13 @@ body a:focus {
   cursor: default;
 }
 .dslca-header .dslca-options-filter-hook .dslca-icon,
+.dslca-header .dslca-modules-area-options-filter-hook .dslca-icon,
 .dslca-header .dslca-row-options-filter-hook .dslca-icon,
 .dslca-pseudo-header .dslca-pseudo-options-filter-hook .dslca-icon {
   margin-right: 4px;
 }
 .dslca-header .dslca-options-filter-hook.dslca-active,
+.dslca-header .dslca-modules-area-options-filter-hook.dslca-active,
 .dslca-header .dslca-row-options-filter-hook.dslca-active,
 .dslca-pseudo-header .dslca-pseudo-options-filter-hook.dslca-active {
   background: #0050a5;
@@ -350,6 +355,7 @@ body a:focus {
 }
 .dslca-module-edit-actions,
 .dslca-row-edit-actions,
+.dslca-modules-area-edit-actions,
 .dslca-pseudo-module-edit-actions {
   display: none;
   float: left;
@@ -360,9 +366,11 @@ body a:focus {
 .dslca-module-edit-save,
 .dslca-pseudo-module-edit-save,
 .dslca-row-edit-save,
+.dslca-modules-area-edit-save,
 .dslca-module-edit-cancel,
 .dslca-pseudo-module-edit-cancel,
 .dslca-row-edit-cancel,
+.dslca-modules-area-edit-cancel,
 .dslca-wp-editor-save-hook,
 .dslca-wp-editor-cancel-hook {
   background: #006add;
@@ -378,11 +386,15 @@ body a:focus {
   text-decoration: none;
   width: calc(50% - 20px);
 }
+.dslca-modules-area-edit-save{
+  background: #78ca4f;
+}
 .dslca-wp-editor-actions span{
   width: calc(49% - 36.5px);
 }
 .dslca-module-edit-cancel,
 .dslca-row-edit-cancel,
+.dslca-modules-area-edit-cancel,
 .dslca-wp-editor-cancel-hook,
 .dslca-prompt-modal-cancel-hook,
 .dslca-pseudo-module-edit-cancel {
@@ -399,6 +411,7 @@ body a:focus {
 }
 .dslca-module-edit-cancel:hover,
 .dslca-row-edit-cancel:hover,
+.dslca-modules-area-edit-cancel:hover,
 .dslca-wp-editor-cancel-hook:hover,
 .dslca-prompt-modal-cancel-hook:hover,
 .dslca-pseudo-module-edit-cancel:hover {
@@ -727,6 +740,7 @@ div.dslca-sections-dragging:hover {
   transform: translate(0, 0);
 }
 .dslca-modules-section-edit-option,
+.dslca-modules-area-edit-option,
 .dslca-module-edit-option,
 .dslca-pseudo-module-edit-option,
 .dslca-section-edit-option {
@@ -744,6 +758,8 @@ div.dslca-sections-dragging:hover {
   padding: 0px;
 }
 .dslca-module-control-group > .controls-group-inner,
+.dslca-modules-area-control-group > .controls-group-inner,
+.dslca-area-control-group > .controls-group-inner,
 .dslca-section-control-group > .controls-group-inner {
   padding-left: 0px;
   padding-right: 0px;
@@ -756,6 +772,7 @@ div.dslca-sections-dragging:hover {
   width: 100%;
 }
 .dslca-module-control-group > .controls-group-inner > .dslca-module-edit-label,
+.dslca-modules-area-control-group > .controls-group-inner > .dslca-modules-area-edit-label,
 .dslca-section-control-group
   > .controls-group-inner
   > .dslca-section-edit-label {
@@ -777,12 +794,27 @@ div.dslca-sections-dragging:hover {
 .dslca-module-control-group
   > .controls-group-inner
   > .dslca-module-edit-label
+  .dslc-control-toggle,
+  .dslca-modules-area-control-group
+  > .controls-group-inner
+  > .dslca-modules-area-edit-label
   .dslc-control-toggle {
   display: none;
 }
 .dslca-module-edit-option-hidden {
   display: none !important;
 }
+.dslca-modules-area-edit-option input[type="text"],
+.dslca-modules-area-edit-option input[type="email"],
+.dslca-modules-area-edit-option input[type="number"],
+.dslca-modules-area-edit-option textarea,
+.dslca-modules-area-edit-option select,
+.dslca-modules-area-edit-option input[type="text"]:focus,
+.dslca-modules-area-edit-option input[type="email"]:focus,
+.dslca-modules-area-edit-option input[type="number"]:focus,
+.dslca-modules-area-edit-option textarea:focus,
+.dslca-modules-area-edit-option select:focus,
+.dslca-pseudo-modules-area-edit-field,
 .dslca-module-edit-option input[type="text"],
 .dslca-module-edit-option input[type="email"],
 .dslca-module-edit-option input[type="number"],
@@ -815,7 +847,8 @@ div.dslca-sections-dragging:hover {
 }
 .dslca-module-edit-label,
 .dslca-pseudo-module-edit-label,
-.dslca-modules-section-edit-label {
+.dslca-modules-section-edit-label,
+.dslca-modules-area-edit-label {
   color: #fff;
   display: block;
   font-weight: 600;
@@ -1057,7 +1090,9 @@ div.dslca-sections-dragging:hover {
   display: none;
 }
 .dslca-module-edit-options-tab-hook,
+.dslca-modules-area-edit-options-tab-hook,
 .dslca-pseudo-module-edit-options-tab-hook,
+.dslca-modules-area-clear-responsive-options,
 .dslca-clear-responsive-options {
   color: #fff;
   cursor: pointer;
@@ -1074,18 +1109,25 @@ div.dslca-sections-dragging:hover {
   white-space: nowrap;
 }
 .dslca-module-edit-options-tab-hook.dslca-active,
-.dslca-module-edit-options-tab-hook.dslca-active:hover {
+.dslca-module-edit-options-tab-hook.dslca-active:hover,
+.dslca-modules-area-edit-options-tab-hook.dslca-active,
+.dslca-modules-area-edit-options-tab-hook.dslca-active:hover {
   background: rgb(88 144 229);
   box-shadow: -1px 1px 1px 0 rgba(0, 0, 0, 0.22) inset;
 }
 .dslca-module-edit-options-tab-hook:hover,
+.dslca-modules-area-edit-options-tab-hook:hover,
 .dslca-pseudo-module-edit-options-tab-hook:hover,
+.dslca-modules-area-clear-responsive-options,
 .dslca-clear-responsive-options:hover {
   background: rgba(169, 239, 255, 0.17);
   color: #fff;
 }
 .dslca-module-edit-options-tab-hook[data-id="animation_styling"],
 .dslca-module-edit-options-tab-hook[data-id="presets_styling"],
+.dslca-modules-area-edit-options-tab-hook[data-id="animation_styling"],
+.dslca-modules-area-edit-options-tab-hook[data-id="presets_styling"],
+.dslca-modules-area-clear-responsive-options,
 .dslca-clear-responsive-options {
   float: right;
 }
@@ -1132,34 +1174,41 @@ div.dslca-sections-dragging:hover {
 .dslca-modules-section-edit-option-textarea {
   width: 500px;
 }
-.dslca-modules-section-edit-option-checkbox {
+.dslca-modules-section-edit-option-checkbox,
+.dslca-modules-area-edit-option-checkbox {
   width: auto;
 }
-.dslca-modules-section-edit-option-checkbox input[type="checkbox"] {
+.dslca-modules-section-edit-option-checkbox input[type="checkbox"],
+.dslca-modules-area-edit-option-checkbox input[type="checkbox"] {
   display: none;
 }
-.dslca-modules-section-edit-option-checkbox-wrapper {
+.dslca-modules-section-edit-option-checkbox-wrapper,
+.dslca-modules-area-edit-option-checkbox-wrapper {
   background: #3b6fbe;
   border-radius: 4px;
   border: 1px solid #3565ad;
   padding: 0 10px;
   width: auto;
 }
-.dslca-modules-section-edit-option-checkbox-single {
+.dslca-modules-section-edit-option-checkbox-single,
+.dslca-modules-area-edit-option-checkbox-single {
   margin: 6px;
   display: table-cell;
   white-space: nowrap;
   padding: 8px;
 }
-.dslca-modules-section-edit-option-checkbox-hook {
+.dslca-modules-section-edit-option-checkbox-hook,
+.dslca-modules-area-edit-option-checkbox-hook {
   cursor: pointer;
   font-size: 12px;
   font-weight: 400;
 }
-.dslca-modules-section-edit-option-checkbox-hook .dslca-icon {
+.dslca-modules-section-edit-option-checkbox-hook .dslca-icon,
+.dslca-modules-area-edit-option-checkbox-hook .dslca-icon {
   margin-right: 10px;
 }
-.dslca-modules-section-settings {
+.dslca-modules-section-settings,
+.dslca-modules-area-settings {
   display: none;
 }
 .dslca-templates {
@@ -2387,6 +2436,7 @@ body.rtl .dslca-modules-area-placeholder {
 #dslca-code,
 #dslca-content-for-search,
 .dslca-module-code,
+.dslca-modules-area-code,
 .dslca-section-code {
   display: none !important;
 }
@@ -3342,7 +3392,8 @@ body.rtl .dslca-module .dslca-icon {
   margin-right: 0;
   margin-left: 11px;
 }
-body.rtl .dslca-header .dslca-options-filter-hook .dslca-icon {
+body.rtl .dslca-header .dslca-options-filter-hook .dslca-icon,
+body.rtl .dslca-header .dslca-modules-area-options-filter-hook .dslca-icon {
   margin-right: 0;
   margin-left: 4px;
 }
@@ -3852,7 +3903,8 @@ body em {
 
 /* Popup Container */
 #lc_popup,
-#lc_popup2 {
+#lc_popup2,
+#lc_popup3 {
   position: fixed;
   top: 175px;
   left: 630px;
@@ -3866,7 +3918,8 @@ body em {
 
 /* Header Styling */
 #lc_popupHeader,
-#lc_popupHeader2 {
+#lc_popupHeader2,
+#lc_popupHeader3 {
   padding: 18px 23px;
   background-color: #006add;
   color: white;
@@ -3903,7 +3956,8 @@ body em {
 
 /* Popup Content */
 #lc_popupContent,
-#lc_popupContent2 {
+#lc_popupContent2,
+#lc_popupContent3 {
   padding: 0px 0 0 0;
   width: 100% !important;
 }
@@ -3915,20 +3969,26 @@ body em {
   bottom: 0;
 }
 
-.lc_popupContent .dslca-module-edit-form {
+.lc_popupContent .dslca-module-edit-form,
+.lc_popupContent .dslca-modules-area-edit-form {
   width: 100% !important;
   padding: 12px;
 }
 
 /* Optional Form Styles */
-.lc_popupContent .dslca-module-edit-form .dslca-module-edit-options {
+.lc_popupContent .dslca-module-edit-form .dslca-module-edit-options,
+.lc_popupContent .dslca-modules-area-edit-form .dslca-modules-area-edit-options {
   width: 100%;
 }
 
 .lc_popupContent
   .dslca-module-edit-form
   .dslca-module-edit-options
-  .dslca-module-edit-options-inner {
+  .dslca-module-edit-options-inner,
+  .lc_popupContent3
+  .dslca-modules-area-edit-form
+  .dslca-modules-area-edit-options
+  .dslca-modules-area-edit-options-inner {
   overflow: hidden;
   width: 100%;
   max-height: 50vh;
@@ -3936,13 +3996,15 @@ body em {
   margin-bottom: 15px;
 }
 
-.dslca-module-edit-actions {
+.dslca-module-edit-actions,
+.dslca-modules-area-edit-actions {
   margin-bottom: 16px;
   width: 100%;
   display: flex !important;
   flex-direction: row;
 }
-.dslca-module-edit-actions a {
+.dslca-module-edit-actions a,
+.dslca-modules-area-edit-actions a {
   width: 45%;
   text-align: center;
   font-size: 16px;
@@ -3951,13 +4013,8 @@ body em {
 .lc_popupContent
   .dslca-module-edit-form
   .dslca-module-edit-options
-  .dslca-module-edit-options-inner {
-}
-
-.lc_popupContent
-  .dslca-module-edit-form
-  .dslca-module-edit-options
-  .dslca-module-edit-options-inner {
+  .dslca-module-edit-options-inner,
+  .lc_popupContent .dslca-modules-area-edit-form .dslca-modules-area-edit-options .dslca-modules-area-edit-options-inner {
   scroll-behavior: smooth;
   background: #97979700 !important; /* Transparent scrollbar base */
   padding-right: 1px;
@@ -3979,7 +4036,11 @@ body em {
 .lc_popupContent
   .dslca-module-edit-form
   .dslca-module-edit-options
-  .dslca-module-edit-options-inner::-webkit-scrollbar {
+  .dslca-module-edit-options-inner::-webkit-scrollbar,
+  .lc_popupContent
+  .dslca-modules-area-edit-form
+  .dslca-modules-area-edit-options
+  .dslca-modules-area-edit-options-inner::-webkit-scrollbar {
   width: 8px;
   background-color: #000;
 }
@@ -4064,7 +4125,12 @@ body em {
   .dslca-modules-section-edit-options
   .dslca-modules-section-edit-options-inner
   .dslca-modules-section-edit-options-wrapper
-  .dslca-modules-section-edit-option {
+  .dslca-modules-section-edit-option,
+  .dslca-modules-area-edit-form
+  .dslca-modules-area-edit-options
+  .dslca-modules-area-edit-options-inner
+  .dslca-modules-area-edit-options-wrapper
+  .dslca-modules-area-edit-option {
   padding: 0 0 15px 0;
   width: 100%;
 }
@@ -4217,6 +4283,7 @@ body em {
   flex-wrap: wrap;
   justify-content: space-between;
 }
+.controls-group-inner .dslca-modules-area-edit-option,
 .controls-group-inner .dslca-module-edit-option {
   width: 48%;
 }
@@ -4224,6 +4291,7 @@ body em {
 .controls-group-inner .dslca-module-edit-option-font {
   width: 100%;
 }
+.controls-group-inner .dslca-modules-area-edit-option-font .dslca-options-iconbutton,
 .controls-group-inner .dslca-module-edit-option-font .dslca-options-iconbutton {
   width: 40px !important;
   height: 20px !important;
@@ -4294,9 +4362,23 @@ body em {
 }
 .dslca-modules-section-edit-option-select[data-id$="padding_unit"],
 .dslca-modules-section-edit-option-select[data-id$="margin_unit"],
+.dslca-modules-area-edit-option-select[data-id$="padding_unit"],
+.dslca-modules-area-edit-option-select[data-id$="margin_unit"],
 .dslca-module-edit-option-select[data-id$="padding_unit"],
 .dslca-module-edit-option-select[data-id$="margin_unit"] {
     width: 100% !important;
+}
+
+.controls-group-inner .dslca-modules-area-edit-option[data-id$="padding_top"],
+.controls-group-inner .dslca-modules-area-edit-option[data-id$="padding_bottom"],
+.controls-group-inner .dslca-modules-area-edit-option[data-id$="padding_left"],
+.controls-group-inner .dslca-modules-area-edit-option[data-id$="padding_right"],
+.controls-group-inner .dslca-modules-area-edit-option[data-id$="margin_top"],
+.controls-group-inner .dslca-modules-area-edit-option[data-id$="margin_bottom"],
+.controls-group-inner .dslca-modules-area-edit-option[data-id$="margin_left"],
+.controls-group-inner .dslca-modules-area-edit-option[data-id$="margin_right"]
+{
+    width: 48% !important;
 }
 .dslc-res-tablet #page-builder-frame,
 .dslc-res-phone #page-builder-frame {
@@ -4308,7 +4390,10 @@ body em {
 
 a.dslca-module-edit-options-tab-hook[data-id="submenu_block_styling"]:before,
 a.dslca-module-edit-options-tab-hook[data-id="submenu_columns_styling"]:before,
-a.dslca-module-edit-options-tab-hook[data-id="mobile_menu_styling"]:before {
+a.dslca-module-edit-options-tab-hook[data-id="mobile_menu_styling"]:before,
+a.dslca-modules-area-edit-options-tab-hook[data-id="submenu_block_styling"]:before,
+a.dslca-modules-area-edit-options-tab-hook[data-id="submenu_columns_styling"]:before,
+a.dslca-modules-area-edit-options-tab-hook[data-id="mobile_menu_styling"]:before {
   display: none;
   /* position: relative; */
   /* content: ''; */
@@ -4384,6 +4469,9 @@ a.dslca-module-edit-options-tab-hook[data-id="mobile_menu_styling"]:before {
 	#dslc-main .dslc-modules-section.dslc-hide-on-desktop > *:not(.dslca-modules-section-manage):not(.dslca-modules-section-add) {
       opacity: 0.4;
   }
+	#dslc-main .dslc-modules-area.dslc-hide-on-desktop > *:not(.dslca-modules-area-manage):not(.dslca-modules-area-add) {
+      opacity: 0.4;
+  }
     #dslc-main .dslc-module-front.dslc-hide-on-desktop > *:not(.dslca-module-manage) {
       opacity: 0.4;
   }
@@ -4392,6 +4480,9 @@ a.dslca-module-edit-options-tab-hook[data-id="mobile_menu_styling"]:before {
 /* Tablet */
 @media only screen and (min-width : 768px) and (max-width : 1024px)  {
   #dslc-main .dslc-modules-section.dslc-hide-on-tablet > *:not(.dslca-modules-section-manage):not(.dslca-modules-section-add) {
+      opacity: 0.4;
+  }
+  #dslc-main .dslc-modules-area.dslc-hide-on-tablet > *:not(.dslca-modules-area-manage):not(.dslca-modules-area-add) {
       opacity: 0.4;
   }
     #dslc-main .dslc-module-front.dslc-hide-on-tablet > *:not(.dslca-module-manage) {
@@ -4403,6 +4494,9 @@ a.dslca-module-edit-options-tab-hook[data-id="mobile_menu_styling"]:before {
 /* Smartphone */
 @media only screen and ( max-width: 767px ) {
   #dslc-main .dslc-modules-section.dslc-hide-on-phone > *:not(.dslca-modules-section-manage):not(.dslca-modules-section-add) {
+      opacity: 0.4;
+  }
+  #dslc-main .dslc-modules-area.dslc-hide-on-phone > *:not(.dslca-modules-area-manage):not(.dslca-modules-area-add) {
       opacity: 0.4;
   }
     #dslc-main .dslc-module-front.dslc-hide-on-phone > *:not(.dslca-module-manage) {

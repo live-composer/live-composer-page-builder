@@ -9,6 +9,7 @@
  * - dslc_module_options_show ( Show module options )
  * - dslc_module_options_section_filter ( Filter options section )
  * - dslc_module_options_hideshow_tabs ( Hide show tabs based on option choices )
+ * - dslc_modules_area_options_hideshow_tabs ( Hide show tabs based on option choices )
  * - dslc_module_options_confirm_changes ( Confirm changes )
  * - dslc_module_options_cancel_changes ( Cancel changes )
  * - dslc_module_options_tooltip ( Helper tooltips for options )
@@ -91,10 +92,11 @@ document.addEventListener('moduleEdit', function (customEvent) {
 	const currentModuleId = currentModuleEl.dataset.module;
 
 	const elEditing = LiveComposer.Builder.PreviewAreaWindow.document.querySelector('.dslca-module-being-edited');
+	const moduleAreaEditing = LiveComposer.Builder.PreviewAreaWindow.document.querySelector('.dslca-module-being-edited');
 	const row_edited = jQuery('.dslca-modules-section-being-edited', LiveComposer.Builder.PreviewAreaDocument).length;
 
 	// If settings panel opened - do not proceed.
-	if ( LiveComposer.Builder.Flags.uiHidden || ( null !== elEditing && elEditing.length > 0 ) || row_edited > 0 ) {
+	if ( LiveComposer.Builder.Flags.uiHidden || ( null !== elEditing && elEditing.length > 0 ) || row_edited > 0 || moduleAreaEditing > 0 ) {
 		if ( elEditing != currentModuleEl ) {
 			LiveComposer.Builder.UI.shakePanelConfirmButton();
 		}

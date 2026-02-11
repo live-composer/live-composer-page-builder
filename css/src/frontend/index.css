@@ -389,6 +389,26 @@ body.rtl .dslc-last-col {
 .dslc-valign-bottom {
 	align-items: flex-end;
 }
+/* Horizontal Align */
+
+.dslc-halign-start,
+.dslc-halign-center,
+.dslc-halign-end{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.dslc-halign-start {
+	align-items: flex-start;
+}
+
+.dslc-halign-center {
+	justify-content: center;
+}
+
+.dslc-halign-end {
+	justify-content: flex-end;
+}
 
 /* Vertical Align for Row */
 
@@ -404,7 +424,7 @@ body.rtl .dslc-last-col {
 
 .dslc-valign-top .dslc-modules-section-inner,
 .dslc-valign-top .dslc-modules-section-wrapper{
-	align-items: flex-start;
+	justify-content: flex-start;
 }
 
 .dslc-valign-middle .dslc-modules-section-inner,
