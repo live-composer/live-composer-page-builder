@@ -192,6 +192,38 @@ const Utils = {
 	},
 
 	/**
+	 * Update modules area option in raw JSON code (dslc_code) of the section
+	 *
+	 * @param  {DOM element} Modules Area    `section Element
+	 * @param  {string} property_name  Name of the option we change
+	 * @param  {string} property_value Value of the option we change
+	 * @return {void}
+	 */
+	update_modules_area_property_raw: function (section, property_name, property_value ) {
+		// Hidden textarea element with raw base64 code of the roq
+		var modules_area_code_container = section.getElementsByClassName('dslca-modules-area-code')[0];
+
+		// Hidden input element with value of this particular setting
+		// <input data-id="property_name">property_value</textarea>
+		var property_container = section.querySelector( '.dslca-modules-area-settings input[data-id="' + property_name + '"]' );
+
+		// Get module raw code
+		var modules_area_code = modules_area_code_container.value;
+
+		modules_area_code = JSON.parse( modules_area_code );
+		modules_area_code[property_name] = property_value;
+		modules_area_code = JSON.stringify( modules_area_code );
+
+		// Update raw code
+		modules_area_code_container.value = modules_area_code;
+		modules_area_code_container.innerText = modules_area_code; // See comment block below
+
+		// Change the property in hidden textarea as well
+		property_container.setAttribute( 'value', property_value );
+		property_container.setAttribute( 'data-def', property_value );
+	},
+
+	/**
 	 * Provide custom events publish.
 	 * Also echoes all the custom events in the preview iframe as well.
 	 *

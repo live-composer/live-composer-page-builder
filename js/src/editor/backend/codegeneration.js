@@ -261,8 +261,11 @@ export const generateSectionCode = ( theModulesSection ) => {
 	modulesAreaFirstState,
 	modulesSection,
 	modulesSectionAtts = '',
+	modulesAreaAtts = '',
 	modulesSectionJsonString = '',
-	modulesSectionJson;
+	modulesSectionJson,
+	modulesAreaJsonString = '',
+	moduleAreaJSON;
 
 	modulesSection = theModulesSection;
 
@@ -322,7 +325,7 @@ export const generateSectionCode = ( theModulesSection ) => {
 		// Other Vars
 		modulesArea = jQuery(this),
 		modulesAreaSize = parseInt( modulesArea.data('size') ),
-		modulesAreaVAlign = modulesArea.data('valign'),
+		// modulesAreaVAlign = modulesArea.data('valign'),
 		modulesAreaLastState = 'no',
 		modulesAreaFirstState = 'no';
 		// Increment area column counter
@@ -370,8 +373,33 @@ export const generateSectionCode = ( theModulesSection ) => {
 		// Open the modules area ( area ) shortcode
 		// composerCode = composerCode + '[dslc_modules_area last="' + modulesAreaLastState + '" first="' + modulesAreaFirstState + '" size="' + modulesAreaSize + '"] ';
 
-		var moduleAreaJSON = '{"element_type":"module_area","last":"' + modulesAreaLastState + '","first":"' + modulesAreaFirstState + '","size":"' + modulesAreaSize + '","valign":"' + modulesAreaVAlign + '"}';
-		moduleAreaJSON = JSON.parse( moduleAreaJSON );
+		// var moduleAreaJSON = '{"element_type":"module_area","last":"' + modulesAreaLastState + '","first":"' + modulesAreaFirstState + '","size":"' + modulesAreaSize + '","valign":"' + modulesAreaVAlign + '"}';
+		// moduleAreaJSON = JSON.parse( moduleAreaJSON );
+		// Get current JSON.
+		modulesAreaJsonString = modulesArea.find('.dslca-modules-area-code').val();
+		moduleAreaJSON = JSON.parse(modulesAreaJsonString);
+
+		// moduleAreaJSON['element_type'] = "module_area";
+		moduleAreaJSON['last'] = modulesAreaLastState;
+		moduleAreaJSON['first'] = modulesAreaFirstState;
+		moduleAreaJSON['size'] = String(modulesAreaSize);
+		// moduleAreaJSON['valign'] = modulesAreaVAlign;
+
+		// Generate attributes for the Modules Area shortcode
+		modulesAreaAtts = '';
+
+		jQuery('.dslca-modules-area-settings input', modulesArea).each(function(){
+			
+			var currentInput = jQuery(this);
+			var currentAttrKey = currentInput.data('id');
+			var currentAttrVal = currentInput.val();
+
+			// Update hidden text fields with row attributes.
+			modulesAreaAtts = modulesAreaAtts + currentAttrKey + '="' + currentAttrVal + '" ';
+
+			// Update JSON object.
+			moduleAreaJSON[currentAttrKey] = currentAttrVal;
+		});
 
 		// Delete attribute 'give_new_id'.
 		// It supposed to be used only once and by this time it was already applied.

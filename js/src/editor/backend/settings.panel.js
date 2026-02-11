@@ -32,6 +32,7 @@ jQuery(document).ready(function($){
 	var dslca_options_with_colorpicker = '';
 	dslca_options_with_colorpicker += '.dslca-module-edit-field-colorpicker';
 	dslca_options_with_colorpicker += ', .dslca-modules-section-edit-field-colorpicker';
+	dslca_options_with_colorpicker += ', .dslca-modules-area-edit-field-colorpicker';
 	dslca_options_with_colorpicker += ', .dslca-module-edit-option-box-shadow-color';
 	dslca_options_with_colorpicker += ', .dslca-module-edit-option-text-shadow-color';
 
@@ -88,13 +89,27 @@ jQuery(document).ready(function($){
 		e.preventDefault();
 		elementOptionsTabs( jQuery(this) );
 	});
+	/**
+	 * Hook - Modules area Tab Switch
+	 */
+	jQuery(document).on( 'click', '.dslca-modules-area-edit-options-tab-hook', function(e){
+		e.preventDefault();
+		modulesAreaOptionsTabs( jQuery(this) );
+	});
 
 	/**
-	 * Hook - Reset Responsive Settings
+	 * Hook - Reset Module Responsive Settings 
 	 */
 	 jQuery(document).on( 'click', '.dslca-clear-responsive-options', function(e){
 		e.preventDefault();
 		resetResponsiveOptions();
+	});
+	/**
+	 * Hook - Reset Module Area Responsive Settings
+	 */
+	 jQuery(document).on( 'click', '.dslca-modules-area-clear-responsive-options', function(e){
+		e.preventDefault();
+		resetModulesAreaResponsiveOptions();
 	});
 
 	/**
@@ -135,6 +150,33 @@ jQuery(document).ready(function($){
 			 */
 			jQuery('#page-builder-preview-area').resizable('destroy').attr('style','');
 		}
+
+		/**
+		 * Make the preview area resizable
+		 * when entering Responsive view.
+		 */
+		if ( currentSection == 'responsive' ) {
+			jQuery('#page-builder-preview-area').resizable();
+		}
+	});
+
+	/**
+	 * Hook - Modules Area Option Section Switch
+	 */
+	jQuery(document).on( 'click', '.dslca-modules-area-options-filter-hook', function(e){
+
+		e.preventDefault();
+
+		var dslcPrev = jQuery('.dslca-modules-area-options-filter-hook.dslca-active').data('section');
+		var currentSection = jQuery(this).data('section');
+
+		jQuery('.dslca-modules-area-options-filter-hook.dslca-active').removeClass('dslca-active');
+		jQuery(this).addClass('dslca-active');
+
+		jQuery('.dslca-container-loader')
+		document.querySelector( '.dslca-container' ).dataset.currentSection = currentSection;
+
+		dslc_modules_area_options_section_filter( currentSection );
 
 		/**
 		 * Make the preview area resizable
@@ -195,74 +237,70 @@ jQuery(document).ready(function($){
 	 */
 
 	// Target the specific unit selector fields
-	const unitSelectors = jQuery('select.dslca-modules-section-edit-field-select[data-id$="_unit"]');
+	const unitSelectors = jQuery(
+	'select.dslca-modules-section-edit-field-select[data-id$="_unit"], ' +
+	'select.dslca-modules-area-edit-field-select[data-id$="_unit"]'
+	);
 
-    unitSelectors.on('change', function() {
-        const changedSelector = jQuery(this);
-        const dataId = changedSelector.data('id');
-        const selectedUnit = changedSelector.val();
-        
-        // Step 1: Determine the target prefix for affected dimensional sliders.
-        // This turns "css_header_width_unit" into "css_header_width".
-        const targetInputsPrefix = dataId.replace('_unit', '');
+	unitSelectors.on('change', function () {
+		const changedSelector = jQuery(this);
+		const dataId = changedSelector.data('id');
+		const selectedUnit = changedSelector.val();
 
-        // Define the search scope: the nearest options form container.
-        const $localContext = changedSelector.closest('.dslca-modules-section-edit-form'); 
-        
-        if (targetInputsPrefix && $localContext.length) {
-            
-            // Step 2: Find all affected numeric inputs within the context 
-            // that use the specific numeric class AND start with the calculated prefix.
-            const targetSelector = `input.dslca-modules-section-edit-field-slider-numeric[data-id^="${targetInputsPrefix}"]`;
-            const numericInputs = $localContext.find(targetSelector);
+		const targetInputsPrefix = dataId.replace('_unit', '');
 
-            numericInputs.each(function() {
-                const inputEl = jQuery(this);
-                const defaultPxMin = parseFloat(inputEl.attr('data-min')) || -2000;
-                const defaultPxMax = parseFloat(inputEl.attr('data-max')) || 2000;
+		const isModuleArea = changedSelector.hasClass('dslca-modules-area-edit-field-select');
 
-                let newMin, newMax;
+		const $localContext = changedSelector.closest(
+			isModuleArea
+				? '.dslca-modules-area-edit-form'
+				: '.dslca-modules-section-edit-form'
+		);
 
-                if (selectedUnit === '%') {
-                    newMin = -100;  
-                    newMax = 100; 
-                } else {
-                    newMin = defaultPxMin;
-                    newMax = defaultPxMax;
-                }
+		if (!targetInputsPrefix || !$localContext.length) return;
 
-                // 2. Update Data Attributes and UI Label
-                inputEl.attr('data-ext', selectedUnit).data('ext', selectedUnit);
-                inputEl.attr('min', newMin).attr('max', newMax);
-                
-                inputEl.closest('.dslca-module-area-edit-field-numeric-wrap')
-                       .find('.dslca-module-area-edit-field-numeric-ext, .dslca-modules-section-edit-field-numeric-ext')
-                       .text(selectedUnit);
+		const targetSelector = isModuleArea
+			? `input.dslca-modules-area-edit-field-slider-numeric[data-id^="${targetInputsPrefix}"]`
+			: `input.dslca-modules-section-edit-field-slider-numeric[data-id^="${targetInputsPrefix}"]`;
 
+		const numericInputs = $localContext.find(targetSelector);
 
-                const rawVal = inputEl.val();
-                
-                if (rawVal === '' || rawVal === null) {
-                    inputEl.trigger('change');
-                    return true;
-                }
-                
-                let currentVal = parseFloat(rawVal);
-                
-                if (currentVal < newMin) {
-                    currentVal = newMin;
-                } else if (currentVal > newMax) {
-                    currentVal = newMax;
-                }
-                
-                inputEl.val(currentVal).trigger('change');
-                
-                if (inputEl.hasClass('slider-initiated')) {
-                     inputEl.trigger('slider_update'); 
-                }
-            });
-        }
-    });
+		numericInputs.each(function () {
+			const inputEl = jQuery(this);
+
+			const defaultPxMin = parseFloat(inputEl.attr('data-min')) || -2000;
+			const defaultPxMax = parseFloat(inputEl.attr('data-max')) || 2000;
+
+			const newMin = selectedUnit === '%' ? -100 : defaultPxMin;
+			const newMax = selectedUnit === '%' ? 100 : defaultPxMax;
+
+			inputEl
+				.attr('data-ext', selectedUnit)
+				.data('ext', selectedUnit)
+				.attr('min', newMin)
+				.attr('max', newMax);
+
+			inputEl.closest('.dslca-module-area-edit-field-numeric-wrap')
+				.find('.dslca-module-area-edit-field-numeric-ext, .dslca-modules-section-edit-field-numeric-ext, .dslca-modules-area-edit-field-numeric-ext')
+				.text(selectedUnit);
+
+			const rawVal = inputEl.val();
+			if (rawVal === '' || rawVal === null) {
+				inputEl.trigger('change');
+				return;
+			}
+
+			let currentVal = parseFloat(rawVal);
+			currentVal = Math.min(Math.max(currentVal, newMin), newMax);
+
+			inputEl.val(currentVal).trigger('change');
+
+			if (inputEl.hasClass('slider-initiated')) {
+				inputEl.trigger('slider_update');
+			}
+		});
+	});
+
 });
 
 /* Editor scripts */
@@ -328,7 +366,7 @@ export const settingsPanelInit = () => {
 			self.Helpers.colorpickers.forEach(function(item){
 				// Do not delete color picker instance from row settings panel,
 				// as it stays on page and not get loaded via Ajax.
-				if ( ! jQuery(item).hasClass('dslca-modules-section-edit-field') ) {
+				if ( ! jQuery(item).hasClass('dslca-modules-section-edit-field') && ! jQuery(item).hasClass('dslca-modules-area-edit-field') ) {
 					// Destroy color picker instance.
 					jQuery(item).remove();
 				}
@@ -347,7 +385,7 @@ export const settingsPanelInit = () => {
 	window.LiveComposer.Builder.UI.loadOptionsDeps = function() {
 		var self = this;
 
-		jQuery(".dslca-module-edit-option").each(function(){
+		jQuery(".dslca-module-edit-option, .dslca-modules-area-edit-option").each(function(){
 
 			var elem = this;
 			var parsed = true;
@@ -375,14 +413,14 @@ export const settingsPanelInit = () => {
 
 					Object.keys(localDep).forEach(function(opt_val){
 						localDep[ opt_val ].split(',').forEach(function(item){
-							var opt_wrap = jQuery(".dslca-module-edit-option-" + item.trim()).closest('.dslca-module-edit-option');
+							var opt_wrap = jQuery(".dslca-module-edit-option-" + item.trim() + ", .dslca-modules-area-edit-option-" + item.trim()).closest('.dslca-module-edit-option, .dslca-modules-area-edit-option');
 							var checkedCheckbox = true;
 
 							if ( optElem.type == 'radio' || optElem.type == 'checkbox' ) {
 								checkedCheckbox = jQuery(optElem).is(":checked");
 							}
 
-							var section_tab = jQuery('.dslca-module-edit-options-tab-hook.dslca-active').data('id');
+							var section_tab = jQuery('.dslca-module-edit-options-tab-hook.dslca-active, .dslca-modules-area-edit-options-tab-hook.dslca-active').data('id');
 
 							if ( optElem.value == opt_val && checkedCheckbox ) {
 								if ( opt_wrap.not( ".dependent" ) ) {
@@ -417,12 +455,12 @@ export const settingsPanelInit = () => {
 					});
 				}
 
-				jQuery(document).on('change dslc-init-deps', '.dslca-module-edit-option > *[data-id="' + jQuery(this).data('id') + '"]', handler);
+				jQuery(document).on('change dslc-init-deps', '.dslca-module-edit-option > *[data-id], .dslca-modules-area-edit-option > *[data-id]', handler);
 				window.LiveComposer.Builder.Helpers.depsHandlers.push( handler );
 			}
 		});
 
-		jQuery(".dslca-module-edit-option input, .dslca-module-edit-option select").trigger('dslc-init-deps');
+		jQuery(".dslca-module-edit-option input, .dslca-module-edit-option select, .dslca-modules-area-edit-option input, .dslca-modules-area-edit-option select").trigger('dslc-init-deps');
 	}
 
 	window.LiveComposer.Builder.UI.unloadOptionsDeps = function() {
@@ -450,11 +488,11 @@ export const settingsPanelInit = () => {
 
 		var resp_prefix = '', resp_postfix = '';
 
-		if ( params.context.closest(".dslca-module-edit-option").data('tab') == 'tablet_responsive' ) {
+		if ( params.context.closest(".dslca-module-edit-option, .dslca-modules-area-edit-option").data('tab') == 'tablet_responsive' ) {
 
 			resp_prefix = '@media only screen and (max-width: 1024px) and (min-width: 768px) {';
 			resp_postfix = '}';
-		} else if ( params.context.closest(".dslca-module-edit-option").data('tab') == 'phone_responsive' ) {
+		} else if ( params.context.closest(".dslca-module-edit-option, .dslca-modules-area-edit-option").data('tab') == 'phone_responsive' ) {
 
 			resp_prefix = '@media only screen and (max-width: 767px) {';
 			resp_postfix = '}';
@@ -491,6 +529,7 @@ export const settingsPanelInit = () => {
 
 	onModuleOptionsChange();
 	onSectionOptionsChange();
+	onModulesAreaOptionsChange();
 	onFileUploadOptionsChange();
 };
 
@@ -1139,7 +1178,6 @@ const onSectionOptionsChange = () => {
 			for ( var i = 0; i < dslcRule.length; i++ ) {
 				// dslcTargetEl.css(dslcRule[i], dslcValToApply);
 				if (dslcRule[i].trim() !== "" && dslcValToApply !== undefined && dslcValToApply !== null && dslcValToApply !== "") {
-					console.log(dslcRule[i], dslcValToApply);
       				dslcTargetEl.css(dslcRule[i], dslcValToApply);
                 }
 			}
@@ -1155,11 +1193,130 @@ const onSectionOptionsChange = () => {
 	});
 }
 
+const onModulesAreaOptionsChange = () => {
+	// ROW styling option changes
+	jQuery(document).on('change', '.dslca-modules-area-edit-field', function () {
+		if (window.dslcDebug) console.log('dslc_modules_area_options_change');
+
+		var dslcField, dslcFieldID, dslcEl, dslcModulesArea, dslcVal, dslcValReal, dslcValExt, dslcRule, dslcSetting, dslcTargetEl, dslcImgURL;
+		var dslcModulesAreaOption = jQuery(this);
+		var dslcModulesAreaOptionWrap = dslcModulesAreaOption.closest('.dslca-modules-area-edit-option');
+
+		var cssRulesToApply = [];
+		var cssSelectorToApply = '';
+
+		dslcField = jQuery(this);
+		dslcFieldID = dslcField.data('id');
+		dslcVal = dslcField.val();
+		dslcValReal = dslcVal;
+		dslcValExt = dslcVal + dslcField.data('ext');
+		dslcRule = dslcField.data('css-rule');
+
+		dslcEl = jQuery('.dslca-modules-area-being-edited', LiveComposer.Builder.PreviewAreaDocument); // Currently editing element
+		dslcTargetEl = dslcEl;
+		dslcSetting = jQuery('.dslca-modules-area-settings input[data-id="' + dslcFieldID + '"]', dslcEl);
+
+		dslcEl.addClass('dslca-modules-area-change-made');
+
+		// Hide/Show tabs in the modules area options panel.
+		if (dslcModulesAreaOptionWrap.hasClass('dslca-modules-area-edit-option-select') ||
+			dslcModulesAreaOptionWrap.hasClass('dslca-modules-area-edit-field-select') ||
+			dslcModulesAreaOptionWrap.hasClass('dslca-modules-area-edit-option-checkbox') ||
+			dslcModulesAreaOptionWrap.hasClass('dslca-modules-area-edit-field-checkbox')) {
+			dslc_modules_area_options_hideshow_tabs();
+		}
+
+		// Border handling
+		if (dslcFieldID == 'border-top' ||
+			dslcFieldID == 'border-right' ||
+			dslcFieldID == 'border-bottom' ||
+			dslcFieldID == 'border-left') {
+
+			var dslcBorderStyle = jQuery('.dslca-modules-area-settings input[data-id="border_style"]').val();
+			dslcSetting = jQuery('.dslca-modules-area-settings input[data-id="border"]', dslcEl);
+
+			dslcValReal = '';
+			var dslcChecboxesWrap = dslcField.closest('.dslca-modules-area-edit-option-checkbox-wrapper');
+			dslcChecboxesWrap.find('.dslca-modules-area-edit-field-checkbox').each(function () {
+				if (jQuery(this).is(':checked')) {
+					dslcValReal += jQuery(this).data('id') + ' ';
+				}
+			});
+
+			var borderRule = dslcField.data('id') + '-style';
+			var borderValue = dslcField.is(':checked') ? dslcBorderStyle : 'hidden';
+			cssRulesToApply.push({ rule: borderRule, value: borderValue });
+
+		} else if (dslcField.hasClass('dslca-modules-area-edit-field-checkbox')) {
+			// Checkboxes logic (Show On)
+			var checkboxes = jQuery(this).closest('.dslca-modules-area-edit-option-checkbox-wrapper').find('.dslca-modules-area-edit-field-checkbox');
+			var checkboxesVal = '';
+			checkboxes.each(function () {
+				if (jQuery(this).prop('checked')) checkboxesVal += jQuery(this).data('val') + ' ';
+			});
+			dslcValReal = checkboxesVal;
+
+			if (dslcField.data('id') == 'show_on') {
+				['desktop', 'tablet', 'phone'].forEach(function (device) {
+					if (checkboxesVal.indexOf(device) !== -1) {
+						dslcEl.removeClass('dslc-hide-on-' + device);
+					} else {
+						dslcEl.addClass('dslc-hide-on-' + device);
+					}
+				});
+			}
+		} else if (dslcFieldID == 'columns_spacing') {
+			if (dslcVal == 'nospacing') dslcEl.addClass('dslc-no-columns-spacing');
+			else dslcEl.removeClass('dslc-no-columns-spacing');
+		} else if (dslcFieldID == 'valign') {
+			var newClass = 'dslc-valign-' + dslcValReal;
+			dslcEl.removeClass('dslc-valign-top dslc-valign-middle dslc-valign-bottom').addClass(newClass);
+		} else if (dslcFieldID == 'halign') {
+			var newClass = 'dslc-halign-' + dslcValReal;
+			dslcEl.removeClass('dslc-halign-start dslc-halign-center dslc-halign-end').addClass(newClass);
+		} else {
+			// General CSS rules
+			if (dslcField.data('css-element')) cssSelectorToApply = dslcField.data('css-element');
+			if (dslcRule) {
+				dslcRule = dslcRule.replace(/ /g, '').split(',');
+				var dslcValToApply = (dslcField.data('ext') != null) ? dslcValExt : dslcVal;
+				for (var i = 0; i < dslcRule.length; i++) {
+					if (dslcRule[i].trim() !== "" && dslcValToApply !== undefined && dslcValToApply !== null && dslcValToApply !== "") {
+						cssRulesToApply.push({ rule: dslcRule[i], value: dslcValToApply });
+					}
+				}
+			}
+		}
+
+		// Apply all collected CSS via processInlineStyleTag
+		if (cssRulesToApply.length) {
+			var styleContent = "#" + dslcEl[0].id + (cssSelectorToApply ? " " + cssSelectorToApply : "") + " {";
+			cssRulesToApply.forEach(function (item) {
+				styleContent += item.rule + ": " + item.value + ";";
+			});
+			styleContent += "}";
+
+			LiveComposer.Builder.Helpers.processInlineStyleTag({
+				context: dslcField,
+				rule: cssRulesToApply.map(r => r.rule).join(','),
+				elems: cssSelectorToApply,
+				styleContent: styleContent
+			});
+		}
+
+		// Update hidden input with new value
+		dslcSetting.val(dslcValReal);
+
+		if (!LiveComposer.Builder.Flags.generate_code_after_modules_area_changed) return false;
+	});
+};
+
+
 const onFileUploadOptionsChange = () => {
 	// Uploading files
 	var file_frame;
 
-	jQuery(document).on('click', '.dslca-module-edit-field-image-add-hook, .dslca-modules-section-edit-field-image-add-hook', function(){
+	jQuery(document).on('click', '.dslca-module-edit-field-image-add-hook, .dslca-modules-section-edit-field-image-add-hook, .dslca-modules-area-edit-field-image-add-hook', function(){
 
 		var hook = jQuery(this);
 
@@ -1167,10 +1324,14 @@ const onFileUploadOptionsChange = () => {
 
 			var field = hook.siblings('.dslca-module-edit-field-image');
 			var removeHook = hook.siblings('.dslca-module-edit-field-image-remove-hook');
-		} else {
+		} else if(hook.hasClass( 'dslca-modules-section-edit-field-image-add-hook' )){
 
 			var field = hook.siblings('.dslca-modules-section-edit-field-upload');
 			var removeHook = hook.siblings('.dslca-modules-section-edit-field-image-remove-hook');
+		} else {
+
+			var field = hook.siblings('.dslca-modules-area-edit-field-upload');
+			var removeHook = hook.siblings('.dslca-modules-area-edit-field-image-remove-hook');
 		}
 
 		// Whether or not multiple files are allowed
@@ -1212,9 +1373,13 @@ const onFileUploadOptionsChange = () => {
 			}
 
 			/*
-			Save image URL as data attribute of input in dslca-modules-section-settings set
+			Save image URL as data attribute of input in dslca-modules-section-settings and dslca-modules-section-settings set
 			We need URL in 'dslca-img-url' for live preview
 			 */
+			// if(hook.hasClass( 'dslca-modules-area-edit-field-image-add-hook' ))
+			// {
+				jQuery('.dslca-modules-area-being-edited', LiveComposer.Builder.PreviewAreaDocument).find('.dslca-modules-area-settings input[data-id="dslca-img-url"]').val( attachment.url );
+			// }
 			jQuery('.dslca-modules-section-being-edited', LiveComposer.Builder.PreviewAreaDocument).find('.dslca-modules-section-settings input[data-id="dslca-img-url"]').val( attachment.url );
 			field.trigger('change'); // trigger change only after 'dslca-img-url' is set
 
@@ -1226,7 +1391,7 @@ const onFileUploadOptionsChange = () => {
 		file_frame.open();
 	});
 
-	jQuery(document).on('click', '.dslca-module-edit-field-image-remove-hook, .dslca-modules-section-edit-field-image-remove-hook', function(){
+	jQuery(document).on('click', '.dslca-module-edit-field-image-remove-hook, .dslca-modules-section-edit-field-image-remove-hook, .dslca-modules-area-edit-field-image-remove-hook', function(){
 
 		var hook = jQuery(this);
 
@@ -1234,10 +1399,14 @@ const onFileUploadOptionsChange = () => {
 
 			var field = hook.siblings('.dslca-module-edit-field-image');
 			var addHook = hook.siblings('.dslca-module-edit-field-image-add-hook');
-		} else {
+		} else if(hook.hasClass( 'dslca-modules-section-edit-field-image-remove-hook' )){
 
 			var field = hook.siblings('.dslca-modules-section-edit-field-upload');
 			var addHook = hook.siblings('.dslca-modules-section-edit-field-image-add-hook');
+		} else{
+			
+			var field = hook.siblings('.dslca-modules-area-edit-field-upload');
+			var addHook = hook.siblings('.dslca-modules-area-edit-field-image-add-hook');
 		}
 
 		field.val('').trigger('change'); // .dslca-modules-section-edit-field
@@ -1275,6 +1444,23 @@ function dslc_module_options_section_filter( sectionID ) {
 
 	// Recall module options tab
 	elementOptionsTabs();
+}
+
+/**
+ * MODULES AREA SETTINGS PANEL - Filter Module Options
+ */
+function dslc_modules_area_options_section_filter( sectionID ) {
+
+	if ( window.dslcDebug ) console.log( 'dslc_modules_area_options_section_filter' );
+
+	// Hide all options
+	jQuery('.dslca-modules-area-edit-option').hide();
+
+	// Show options for current section
+	jQuery('.dslca-modules-area-edit-option[data-section="' + sectionID + '"]').show();
+
+	// Recall modules area options tab
+	modulesAreaOptionsTabs();
 }
 
 export const resetResponsiveOptions = () => {
@@ -1352,6 +1538,38 @@ export const resetResponsiveOptions = () => {
 				// PROBLEM do not work with multiply rules ex.: .dslc-text-module-content,.dslc-text-module-content p
 			}
  */
+			control_storage.val('').trigger('change');
+		} )
+	}
+}
+export const resetModulesAreaResponsiveOptions = () => {
+	// Get active tab (Tablet/Phone)
+	const activeTabEl = document.querySelector('.dslca-modules-area-edit-options-tab-hook.dslca-active');
+	
+	if ( ! activeTabEl ) {
+		return;
+	}
+	const currentTab = activeTabEl.dataset.id;
+
+	if ( 'tablet_responsive' === currentTab || 'phone_responsive' === currentTab ) {
+		// Hide/Show options
+		const activeSettings = document.querySelectorAll('.dslca-modules-area-edit-option[data-tab="' + currentTab + '"]');
+
+		activeSettings.forEach( ( element )=> {
+			const field = element.querySelector('.dslca-modules-area-edit-field');
+
+			if ( ! field ) return;
+			const optionId = field.dataset.id;
+			// const optionId =  element.querySelector( '.dslca-module-edit-field' ).dataset.id;
+
+			// Don't want to reset value of the breakpoint enabler.
+			if ( 'css_res_t' === optionId || 'css_res_p' === optionId ) {
+				return;
+			}
+
+			var control = jQuery('.dslca-modules-area-edit-option-' + optionId);
+
+			var control_storage = control.find('.dslca-modules-area-edit-field');
 			control_storage.val('').trigger('change');
 		} )
 	}
@@ -1460,6 +1678,99 @@ export const elementOptionsTabs = ( dslcTab ) => {
 		totalWidth = parseInt(totalWidthOption) + parseInt(totalWidthGroup) + 10;
 
 		jQuery('.dslca-module-edit-options-wrapper').css({
+			'width': totalWidth + 'px',
+		});
+	}
+}
+
+/**
+ * MODULES AREA SETTINGS PANEL - Show modules area options tab
+ */
+export const modulesAreaOptionsTabs = ( dslcTab ) => {
+
+	if ( window.dslcDebug ) console.log( 'modulesAreaOptionsTabs' );
+
+	// Get currently active section
+	var dslcSectionID = jQuery('.dslca-modules-area-options-filter-hook.dslca-active').data('section');
+
+	// If tab not supplied set to first
+	dslcTab = typeof dslcTab !== 'undefined' ? dslcTab : jQuery('.dslca-modules-area-edit-options-tab-hook[data-section="' + dslcSectionID + '"]:first');
+
+	// Get the tab ID
+	var dslcTabID = dslcTab.data('id');
+
+	// Set active class on tab
+	jQuery('.dslca-modules-area-edit-options-tab-hook').removeClass('dslca-active');
+	dslcTab.addClass('dslca-active');
+
+	// Show tabs container
+	jQuery('.dslca-modules-area-edit-options-tabs').show();
+
+	// Hide/Show tabs hooks
+	jQuery('.dslca-modules-area-edit-options-tab-hook').hide();
+	jQuery('.dslca-modules-area-edit-options-tab-hook[data-section="' + dslcSectionID + '"]').show();
+
+	if ( dslcTabID ) {
+
+		// Hide/Show options
+		jQuery('.dslca-modules-area-edit-option').hide();
+		jQuery('.dslca-modules-area-edit-option[data-tab="' + dslcTabID + '"]').show();
+		
+		// Will create another one similar when nedded
+		// Hide/Show Tabs
+		dslc_modules_area_options_hideshow_tabs();
+
+		// If only one tab hide the tabs container
+		if ( jQuery('.dslca-modules-area-edit-options-tab-hook:visible').length <= 1  ) {
+
+			jQuery('.dslca-modules-area-edit-options-tabs').hide();
+		} else {
+
+			jQuery('.dslca-modules-area-edit-options-tabs').show();
+		}
+
+		/**
+		 * If responsive tab, change the width of the dslc-content div
+		 */
+
+		dslc_disable_responsive_view();
+
+		// Tablet
+		if ( dslcTabID == DSLCString.str_res_tablet.toLowerCase() + '_responsive' ) {
+
+			jQuery('body').removeClass('dslc-res-big dslc-res-smaller-monitor dslc-res-phone dslc-res-tablet');
+			jQuery('body').addClass('dslc-res-tablet');
+			jQuery('html').addClass('dslc-responsive-preview');
+		}
+
+		// Phone
+		if ( dslcTabID == DSLCString.str_res_phone.toLowerCase() + '_responsive' ) {
+
+			jQuery('body').removeClass('dslc-res-big dslc-res-smaller-monitor dslc-res-phone dslc-res-tablet');
+			jQuery('body').addClass('dslc-res-phone');
+			jQuery('html').addClass('dslc-responsive-preview');
+		}
+	}
+
+	// Scroll horizontally options panel to the left (not ready)
+	if ( jQuery('body').hasClass('rtl') ) {
+		var totalWidthOption = 0;
+		var totalWidthGroup = 0;
+		var totalWidth = 0;
+
+		jQuery('.dslca-modules-area-edit-options-wrapper > .dslca-modules-area-edit-option:visible').each(function(index) {
+			if ( ! jQuery(this).hasClass('dslca-modules-area-edit-option-hidden') && ! jQuery(this).hasClass('dslca-module-control-group') ) {
+				totalWidthOption += parseInt(jQuery(this).outerWidth(), 10);
+			}
+		});
+
+		jQuery('.dslca-modules-area-edit-options-wrapper > .dslca-module-control-group:visible').each(function(index) {
+			totalWidthGroup += parseInt(jQuery(this).outerWidth(), 10);
+		});
+
+		totalWidth = parseInt(totalWidthOption) + parseInt(totalWidthGroup) + 10;
+
+		jQuery('.dslca-modules-area-edit-options-wrapper').css({
 			'width': totalWidth + 'px',
 		});
 	}
@@ -1881,6 +2192,426 @@ function dslc_module_options_hideshow_tabs() {
 	else
 	{
 		jQuery('.dslca-module-edit-option-slider[data-id="content_word_limit"]').show()
+	}
+	
+}
+
+/**
+ * MODULES AREA SETTINGS PANEL - Hide show tabs based on option choices
+ */
+function dslc_modules_area_options_hideshow_tabs() {
+
+	if ( window.dslcDebug ) console.log( 'dslc_modules_area_options_hideshow_tabs' );
+
+	var dslcSectionID = jQuery('.dslca-modules-area-options-filter-hook.dslca-active').data('section');
+
+	if ( dslcSectionID == 'styling' ) {
+
+		// Vars
+		var dslcContainer = jQuery('.dslca-modules-area-edit'),
+		dslcHeading = true,
+		dslcFilters = true,
+		dslcCarArrows = true,
+		dslcCarCircles = true,
+		dslcPagination = true,
+		dslcElThumb = true,
+		dslcElTitle = true,
+		dslcElExcerpt = true,
+		dslcElMeta = true,
+		dslcElButton = true,
+		dslcElCats = true,
+		dslcElCount = true,
+		dslcElSeparator = true,
+		dslcElTags = true,
+		dslcElSocial = true,
+		dslcElPosition = true,
+		dslcElIcon = true,
+		dslcElContent = true,
+		dslcElPrice = true,
+		dslcElPriceSec = true,
+		dslcElAddCart = true,
+		dslcElDetails = true,
+		dslcElQuote = true,
+		dslcElAuthorName = true,
+		dslcElAuthorPos = true,
+		dslcElImage = true,
+		dslcElLogo = true;
+
+
+		// Is heading selected?
+		if ( ! jQuery('.dslca-modules-area-edit-field[value="main_heading"]').is(':checked') )
+			dslcHeading = false;
+
+		// Are filters selected?
+		if ( ! jQuery('.dslca-modules-area-edit-field[value="filters"]').is(':checked') )
+			dslcFilters = false;
+
+		// Are arrows selected?
+		if ( ! jQuery('.dslca-modules-area-edit-field[value="arrows"]').is(':checked') )
+			dslcCarArrows = false;
+
+		// Are circles selected?
+		if ( ! jQuery('.dslca-modules-area-edit-field[value="circles"]').is(':checked') )
+			dslcCarCircles = false;
+
+		// Is it a carousel?
+		if ( jQuery('.dslca-modules-area-edit-field[data-id="type"]').val() != 'carousel' ) {
+			dslcCarArrows = false;
+			dslcCarCircles = false;
+		}
+
+		// Is pagination enabled?
+		if ( jQuery('.dslca-modules-area-edit-field[data-id="pagination_type"]').val() == 'disabled' ) {
+			dslcPagination = false;
+		}
+
+		// Is thumb enabled?
+		if ( ! jQuery('.dslca-modules-area-edit-field[data-id*="elements"][value="thumbnail"]').is(':checked') ) {
+			dslcElThumb = false;
+		}
+
+		// Is title enabled?
+		if ( jQuery('.dslca-modules-area-edit-field[data-id*="elements"][value="content"]').length && ! jQuery('.dslca-modules-area-edit-field[data-id*="elements"][value="title"]').is(':checked') ) {
+			dslcElTitle = false;
+		}
+
+		// Is excerpt enabled?
+		if ( ! jQuery('.dslca-modules-area-edit-field[data-id*="elements"][value="excerpt"]').is(':checked') ) {
+			dslcElExcerpt = false;
+		}
+
+		// Is meta enabled?
+		if ( ! jQuery('.dslca-modules-area-edit-field[data-id*="elements"][value="meta"]').is(':checked') ) {
+			dslcElMeta = false;
+		}
+
+		// Is button enabled?
+		if ( jQuery('.dslca-modules-area-edit-field[data-id*="elements"][value="button"]').length && ! jQuery('.dslca-modules-area-edit-field[data-id*="elements"][value="button"]').is(':checked') ) {
+			dslcElButton = false;
+		}
+
+		// Are cats enabled?
+		if ( ! jQuery('.dslca-modules-area-edit-field[data-id*="elements"][value="categories"]').is(':checked') ) {
+			dslcElCats = false;
+		}
+
+		// Is separator enabled?
+		if ( ! jQuery('.dslca-modules-area-edit-field[data-id*="elements"][value="separator"]').is(':checked') ) {
+			dslcElSeparator = false;
+		}
+
+		// Is count enabled?
+		if ( ! jQuery('.dslca-modules-area-edit-field[data-id*="elements"][value="count"]').is(':checked') ) {
+			dslcElCount = false;
+		}
+
+		// Are tags enabled?
+		if ( ! jQuery('.dslca-modules-area-edit-field[data-id*="elements"][value="tags"]').is(':checked') ) {
+			dslcElTags = false;
+		}
+
+		// Are social link enabled?
+		if ( ! jQuery('.dslca-modules-area-edit-field[data-id*="elements"][value="social"]').is(':checked') ) {
+			dslcElSocial = false;
+		}
+
+		// Is position enabled?
+		if ( ! jQuery('.dslca-modules-area-edit-field[data-id*="elements"][value="position"]').is(':checked') ) {
+			dslcElPosition = false;
+		}
+
+		// Is icon enabled?
+		if ( jQuery('.dslca-modules-area-edit-field[data-id*="elements"][value="icon"]').length && ! jQuery('.dslca-modules-area-edit-field[data-id*="elements"][value="icon"]').is(':checked') ) {
+			dslcElIcon = false;
+		}
+
+		// Is content enabled?
+		if (  jQuery('.dslca-modules-area-edit-field[data-id*="elements"][value="content"]').length && ! jQuery('.dslca-modules-area-edit-field[data-id*="elements"][value="content"]').is(':checked') ) {
+			dslcElContent = false;
+		}
+
+		// Is price enabled?
+		if ( ! jQuery('.dslca-modules-area-edit-field[data-id*="elements"][value="price"]').is(':checked') ) {
+			dslcElPrice = false;
+		}
+
+		// Is price secondary enabled?
+		if ( ! jQuery('.dslca-modules-area-edit-field[data-id*="elements"][value="price_2"]').is(':checked') ) {
+			dslcElPriceSec = false;
+		}
+
+		// Is add to cart enabled?
+		if ( ! jQuery('.dslca-modules-area-edit-field[data-id*="elements"][value="addtocart"]').is(':checked') ) {
+			dslcElAddCart = false;
+		}
+
+		// Is add to cart enabled?
+		if ( ! jQuery('.dslca-modules-area-edit-field[data-id*="elements"][value="details"]').is(':checked') ) {
+			dslcElDetails = false;
+		}
+
+		// Is quote enabled?
+		if ( ! jQuery('.dslca-modules-area-edit-field[data-id*="elements"][value="quote"]').is(':checked') ) {
+			dslcElQuote = false;
+		}
+
+		// Is author name enabled?
+		if ( ! jQuery('.dslca-modules-area-edit-field[data-id*="elements"][value="author_name"]').is(':checked') ) {
+			dslcElAuthorName = false;
+		}
+
+		// Is author position enabled?
+		if ( ! jQuery('.dslca-modules-area-edit-field[data-id*="elements"][value="author_position"]').is(':checked') ) {
+			dslcElAuthorPos = false;
+		}
+
+		// Is image enabled?
+		if ( ! jQuery('.dslca-modules-area-edit-field[data-id*="elements"][value="image"]').is(':checked') ) {
+			dslcElImage = false;
+		}
+
+		// Is logo enabled?
+		if ( ! jQuery('.dslca-modules-area-edit-field[data-id*="elements"][value="logo"]').is(':checked') ) {
+			dslcElLogo = false;
+		}
+
+
+		// Show/Hide Heading
+		if ( dslcHeading )
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="heading_styling"]').show();
+		else
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="heading_styling"]').hide();
+
+		// Show/Hide Filters
+		if ( dslcFilters )
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="filters_styling"]').show();
+		else
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="filters_styling"]').hide();
+
+		// Show/Hide Carousel Arrows
+		if ( dslcCarArrows )
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="carousel_arrows_styling"]').show();
+		else
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="carousel_arrows_styling"]').hide();
+
+		// Show/Hide Carousel Circles
+		if ( dslcCarCircles )
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="carousel_circles_styling"]').show();
+		else
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="carousel_circles_styling"]').hide();
+
+		// Show/Hide Pagination
+		if ( dslcPagination )
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="pagination_styling"]').show();
+		else
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="pagination_styling"]').hide();
+
+		// Show/Hide Thumb
+		if ( dslcElThumb )
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="thumbnail_styling"]').show();
+		else
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="thumbnail_styling"]').hide();
+
+		// Show/Hide Title
+		if ( dslcElTitle )
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="title_styling"]').show();
+		else
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="title_styling"]').hide();
+
+		// Show/Hide Excerpt
+		if ( dslcElExcerpt )
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="excerpt_styling"]').show();
+		else
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="excerpt_styling"]').hide();
+
+		// Show/Hide Meta
+		if ( dslcElMeta )
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="meta_styling"]').show();
+		else
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="meta_styling"]').hide();
+
+		// Show/Hide Button
+		if ( dslcElButton )
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="button_styling"], .dslca-modules-area-edit-options-tab-hook[data-id="primary_button_styling"],'+
+				' .dslca-modules-area-edit-options-tab-hook[data-id="secondary_button_styling"]').show();
+		else
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="button_styling"], .dslca-modules-area-edit-options-tab-hook[data-id="primary_button_styling"],'+
+				' .dslca-modules-area-edit-options-tab-hook[data-id="secondary_button_styling"]').hide();
+
+		// Show/Hide Cats
+		if ( dslcElCats )
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="categories_styling"]').show();
+		else
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="categories_styling"]').hide();
+
+		// Show/Hide Separator
+		if ( dslcElSeparator )
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="separator_styling"]').show();
+		else
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="separator_styling"]').hide();
+
+		// Show/Hide Count
+		if ( dslcElCount )
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="count_styling"]').show();
+		else
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="count_styling"]').hide();
+
+		// Show/Hide Tags
+		if ( dslcElTags )
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="tags_styling"]').show();
+		else
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="tags_styling"]').hide();
+
+		// Show/Hide Tags
+		if ( dslcElPosition )
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="position_styling"]').show();
+		else
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="position_styling"]').hide();
+
+		// Show/Hide Tags
+		if ( dslcElSocial )
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="social_styling"]').show();
+		else
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="social_styling"]').hide();
+
+		// Show/Hide Icon
+		if ( dslcElIcon )
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="icon_styling"]').show();
+		else
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="icon_styling"]').hide();
+
+		// Show/Hide Content
+		if ( dslcElContent )
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="content_styling"]').show();
+		else
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="content_styling"]').hide();
+
+		// Show/Hide Price
+		if ( dslcElPrice )
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="price_styling"]').show();
+		else
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="price_styling"]').hide();
+
+		// Show/Hide Price Sec
+		if ( dslcElPriceSec )
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="price_secondary_styling"]').show();
+		else
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="price_secondary_styling"]').hide();
+
+		// Show/Hide Add to Cart
+		if ( dslcElAddCart || dslcElDetails )
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="other_styling"]').show();
+		else
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="other_styling"]').hide();
+
+		// Show/Hide Quote
+		if ( dslcElQuote )
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="quote_styling"]').show();
+		else
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="quote_styling"]').hide();
+
+		// Show/Hide Author Name
+		if ( dslcElAuthorName )
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="author_name_styling"]').show();
+		else
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="author_name_styling"]').hide();
+
+		// Show/Hide Author Position
+		if ( dslcElAuthorPos )
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="author_position_styling"]').show();
+		else
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="author_position_styling"]').hide();
+
+		// Show/Hide Image
+		if ( dslcElImage )
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="image_styling"]').show();
+		else
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="image_styling"]').hide();
+
+		// Show/Hide Quote
+		if ( dslcElLogo )
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="logo_styling"]').show();
+		else
+			jQuery('.dslca-modules-area-edit-options-tab-hook[data-id="logo_styling"]').hide();
+
+	}
+
+	/**
+	 * Check 'Enable/Disable Custom CSS' control
+	 */
+
+	if ( jQuery('.dslca-modules-area-options-filter-hook[data-section="styling"]').hasClass('dslca-active') ) {
+
+		var dslcCustomCSS = jQuery('.dslca-modules-area-edit-option[data-id="css_custom"]'),
+		dslcCustomCSSVal = dslcCustomCSS.find('select').val();
+
+		if ( dslcCustomCSSVal == 'enabled' ) {
+
+			jQuery('.dslca-modules-area-edit-option[data-section="styling"]').css({ visibility : 'visible' });
+			jQuery('.dslca-modules-area-edit-option[data-tab]').css( 'visibility', 'visible' );
+			jQuery('.dslca-modules-area-edit-options-tabs').show();
+		} else {
+			jQuery('.dslca-modules-area-edit-option[data-section="styling"]').css({ visibility : 'hidden' });
+			jQuery('.dslca-modules-area-control-group.dslca-modules-area-edit-option').css( 'visibility', 'hidden' );
+			jQuery('.dslca-modules-area-edit-options-tabs').hide();
+			dslcCustomCSS.css({ visibility : 'visible' });
+		}
+
+	} else {
+		jQuery('.dslca-modules-area-edit-options-tabs').show();
+	}
+
+	if ( jQuery('select.dslca-modules-area-edit-field[data-id="css_res_t"]').val() == 'disabled' ) {
+		jQuery('.dslca-modules-area-edit-option[data-id*="css_res_t"]').css( 'visibility', 'hidden' );
+		jQuery('.dslca-modules-area-edit-option[data-tab="tablet_responsive"]').css( 'visibility', 'hidden' );
+	} else {
+		jQuery('.dslca-modules-area-edit-option[data-id*="css_res_t"]').css( 'visibility', 'visible' );
+		jQuery('.dslca-modules-area-edit-option[data-tab="tablet_responsive"]').css( 'visibility', 'visible' );
+	}
+
+	if ( jQuery('select.dslca-modules-area-edit-field[data-id="css_res_p"]').val() == 'disabled' ) {
+		jQuery('.dslca-modules-area-edit-option[data-id*="css_res_p"]').css( 'visibility', 'hidden' );
+		jQuery('.dslca-modules-area-edit-option[data-tab="phone_responsive"]').css( 'visibility', 'hidden' );
+	} else {
+		jQuery('.dslca-modules-area-edit-option[data-id*="css_res_p"]').css( 'visibility', 'visible' );
+		jQuery('.dslca-modules-area-edit-option[data-tab="phone_responsive"]').css( 'visibility', 'visible' );
+	}
+
+	jQuery('.dslca-modules-area-edit-option[data-id="css_res_p"], .dslca-modules-area-edit-option[data-id="css_res_t"]').css( 'visibility', 'visible' );
+
+
+	if ( jQuery('.dslca-modules-area-options-filter-hook').hasClass('dslca-active') ) {
+		var section_tab = jQuery('.dslca-modules-area-options-filter-hook.dslca-active').data('section');
+
+		if ( jQuery('.dslca-modules-area-edit-option[data-section="' + section_tab + '"]').hasClass('dep-show') ) {
+			jQuery('.dslca-modules-area-edit-option.dep-show').show();
+		}
+
+		if ( jQuery('.dslca-modules-area-edit-option[data-section="' + section_tab + '"]').hasClass('dep-hide') ) {
+			jQuery('.dslca-modules-area-edit-option.dep-hide').hide();
+		}
+	}
+
+	if ( jQuery('.dslca-modules-area-edit-options-tab-hook').hasClass('dslca-active') ) {
+		var data_tab = jQuery('.dslca-modules-area-edit-options-tab-hook.dslca-active').data('id');
+
+		if ( jQuery('.dslca-modules-area-edit-option[data-tab="' + data_tab + '"]').hasClass('dependent') ) {
+
+			jQuery('.dslca-modules-area-edit-option.dependent').hide();
+			jQuery('.dslca-modules-area-edit-option[data-tab="' + data_tab + '"].dep-show').show();
+			jQuery('.dslca-modules-area-edit-option[data-tab="' + data_tab + '"].dep-hide').hide();
+		} else {
+
+			jQuery('.dslca-modules-area-edit-option.dependent').hide();
+		}
+	}
+	// Show hide the content limit input
+	if ( jQuery('.dslca-modules-area-edit-field[data-id="enable_post_content"]').val() == 'disabled' ) {
+		jQuery('.dslca-modules-area-edit-option-slider[data-id="content_word_limit"]').hide()
+	}
+	else
+	{
+		jQuery('.dslca-modules-area-edit-option-slider[data-id="content_word_limit"]').show()
 	}
 	
 }
@@ -2350,7 +3081,7 @@ function dslc_module_options_text_align() {
  */
 function dslc_module_options_checkbox() {
 
-	jQuery(document).on( 'click', '.dslca-module-edit-option-checkbox-hook, .dslca-modules-section-edit-option-checkbox-hook', function(){
+	jQuery(document).on( 'click', '.dslca-module-edit-option-checkbox-hook, .dslca-modules-section-edit-option-checkbox-hook, .dslca-modules-area-edit-option-checkbox-hook', function(){
 
 		var checkFake = jQuery(this);
 		var checkReal = checkFake.siblings('input[type="checkbox"]');
@@ -2785,7 +3516,7 @@ function dslc_module_options_numeric( fieldWrapper ) {
 	}); // .each
 }
 
-function dslc_disable_responsive_view () {
+export function dslc_disable_responsive_view () {
 	jQuery('html').removeClass('dslc-responsive-preview');
 	jQuery('body').removeClass('dslc-res-big dslc-res-smaller-monitor dslc-res-phone dslc-res-tablet');
 

@@ -405,9 +405,11 @@ body a:focus {
 			.dslca-module-edit-save,
 			.dslca-pseudo-module-edit-save,
 			.dslca-row-edit-save,
+			.dslca-modules-area-edit-save,
 			.dslca-module-edit-cancel,
 			.dslca-pseudo-module-edit-cancel,
 			.dslca-row-edit-cancel,
+			.dslca-modules-area-edit-cancel,
 			.dslca-wp-editor-save-hook,
 			.dslca-wp-editor-cancel-hook {
 				background: #78ca4f;
@@ -1222,7 +1224,12 @@ body a:focus {
 				.dslca-modules-section-edit-option input[type="email"],
 				.dslca-modules-section-edit-option input[type="number"],
 				.dslca-modules-section-edit-option textarea,
-				.dslca-modules-section-edit-option select {
+				.dslca-modules-section-edit-option select,
+				.dslca-modules-area-edit-option input[type="text"],
+				.dslca-modules-area-edit-option input[type="email"],
+				.dslca-modules-area-edit-option input[type="number"],
+				.dslca-modules-area-edit-option textarea,
+				.dslca-modules-area-edit-option select {
 					background-color: #6c9fed;
 					border: 1px solid #447bce;
 					width: 100%;
@@ -2870,6 +2877,7 @@ body.rtl .dslca-modules-area-placeholder {
 #dslca-code,
 #dslca-content-for-search,
 .dslca-module-code,
+.dslca-modules-area-code,
 .dslca-section-code {
 	display: none !important;
 }
@@ -4743,7 +4751,7 @@ body em {
   opacity: 1 !important;
 }
   /* Popup Container */
-#lc_popup, #lc_popup2 {
+#lc_popup, #lc_popup2, #lc_popup3 {
     position: absolute;
     top: 175px;
     left: 630px;
@@ -4758,7 +4766,7 @@ body em {
 }
 
 /* Header Styling */
-#lc_popupHeader, #lc_popupHeader2 {
+#lc_popupHeader, #lc_popupHeader2, #lc_popupHeader3 {
     padding: 18px 23px;
     background-color: #006add;
     color: white;
@@ -4791,8 +4799,11 @@ body em {
 #lc_popup_minimize.hide,
 #lc_popup_maximize.hide,
 #lc_popupContent2,
+#lc_popupContent3,
 #lc_popup_minimize2.hide,
-#lc_popup_maximize2.hide {
+#lc_popup_maximize2.hide,
+#lc_popup_minimize3.hide,
+#lc_popup_maximize3.hide {
   display: none;
   opacity: 0;
   transition: all .3s ease;
@@ -4803,13 +4814,16 @@ body em {
 #lc_popup_maximize.show,
 #lc_popupContent2.show,
 #lc_popup_minimize2.show,
-#lc_popup_maximize2.show{
+#lc_popup_maximize2.show,
+#lc_popupContent3.show,
+#lc_popup_minimize3.show,
+#lc_popup_maximize3.show{
   display: block;
   opacity: 1;
 }
 
 /* Close Button */
-#lc_closeBtn, #lc_closeBtn2 {
+#lc_closeBtn, #lc_closeBtn2, #lc_closeBtn3 {
     float: right;
     cursor: pointer;
     font-weight: bold;
@@ -4819,7 +4833,7 @@ body em {
     width: 15px;
     font-size: 26px;
 }
-#lc_closeBtn.dslca-module-edit-cancel, #lc_closeBtn2.dslca-row-edit-cancel {
+#lc_closeBtn.dslca-module-edit-cancel, #lc_closeBtn2.dslca-row-edit-cancel, #lc_closeBtn3.dslca-modules-area-edit-cancel {
 	background: none;
 }
 
@@ -4877,7 +4891,8 @@ body em {
 .lc_popupContent .dslca-module-control-group input[type="number"] {
     width: 100%;
 }
-.lc_popupContent .dslca-module-edit-form .dslca-module-edit-options .dslca-module-edit-options-inner .dslca-module-edit-options-wrapper {
+.lc_popupContent .dslca-module-edit-form .dslca-module-edit-options .dslca-module-edit-options-inner .dslca-module-edit-options-wrapper,
+.lc_popupContent .dslca-modules-area-edit-form .dslca-modules-area-edit-options .dslca-modules-area-edit-options-inner .dslca-modules-area-edit-options-wrapper {
 	display: flex;
 	overflow: hidden;
 	width: 100%;
@@ -4896,7 +4911,8 @@ body em {
     width: 100%;
 }
 
-.lc_popupContent .dslca-module-edit-form .dslca-module-edit-options .dslca-module-edit-options-inner {
+.lc_popupContent .dslca-module-edit-form .dslca-module-edit-options .dslca-module-edit-options-inner,
+.lc_popupContent .dslca-modules-area-edit-form .dslca-modules-area-edit-options .dslca-modules-area-edit-options-inner {
     overflow: hidden;
     width: 100%;
     max-height: 50vh;

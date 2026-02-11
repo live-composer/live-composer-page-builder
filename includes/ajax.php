@@ -16,6 +16,7 @@
  * - dslc_ajax_import_modules_section ( Loads front-end output for exported section )
  * - dslc_ajax_dm_module_defaults_code ( Returns the code to alter the defaults for the module options )
  * - dslc_ajax_save_preset ( Save module styling preset )
+ * - dslc_ajax_display_module_area_options ( Display options for module area )
  */
 
 // Prevent direct access to the file.
@@ -66,6 +67,39 @@ function dslc_ajax_add_modules_section( $atts ) {
 		exit;
 	}
 } add_action( 'wp_ajax_dslc-ajax-add-modules-section', 'dslc_ajax_add_modules_section' );
+
+/**
+ * Add/display a new modules Area
+ *
+ * @since 1.0
+ */
+function dslc_ajax_add_modules_area( $atts ) {
+
+	// Allowed to do this?
+	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) && wp_verify_nonce($_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce' )) {
+
+		// The array we'll pass back to the AJAX call.
+		$response = array();
+
+		// The output.
+		$empty_atts = array();
+
+		$output = dslc_modules_area_front( $empty_atts, '' );		
+
+		// Set the output.
+		$response['output'] = $output;
+
+		// Encode response.
+		$response_json = wp_json_encode( $response );
+
+		// Send the response.
+		header( 'Content-Type: application/json' );
+		echo $response_json;
+
+		// Good night.
+		exit;
+	}
+} add_action( 'wp_ajax_dslc-ajax-add-modules-area', 'dslc_ajax_add_modules_area' );
 
 /**
  * Add a new module OR re-render module output via ajax

@@ -247,7 +247,7 @@ function dslc_display_composer() {
 					<div class="resize-handle top-right" data-direction="tr"></div>
 					<div class="resize-handle bottom-left" data-direction="bl"></div>
 					<div class="resize-handle bottom-right" data-direction="br"></div> -->
-<!-- 
+					<!-- 
 					<div class="resize-handle top" data-direction="t"></div>
 					<div class="resize-handle bottom" data-direction="b"></div>
 					<div class="resize-handle left" data-direction="l"></div>
@@ -282,6 +282,42 @@ function dslc_display_composer() {
 
 				</div>
 				<!-- Row Pop Up -->
+				
+				<!-- module area Pop Up -->
+				<div id="lc_popup3" class="lc-pop-build dslca-modules-area dslca-modules-area-edit" style="display: none;">
+					<div class="dslca-container-loader">
+						<div class="dslca-progress-bar"></div>
+					</div>
+					<div id="lc_popupHeader3">
+						<span class="dslca-currently-editing"><strong></strong></span>
+						<span id="lc_popup_minimize3" class="lc_popup_minimize show">-</span>
+						<span id="lc_popup_maximize3" class="lc_popup_maximize hide">+</span>
+						<span id="lc_closeBtn3" class="dslca-modules-area-edit-cancel">&times;</span>
+					</div>
+
+					<div id="lc_popupContent3" class="lc_popupContent show">
+						<div class="dslca-header dslc-clearfix" data-default-section="<?php echo $default_section; ?>">
+							<!-- Module Option filters -->
+							<span class="dslca-modules-area-options-filter-hook dslca-active" data-section="functionality"><span class="dslca-icon dslc-icon-cog"></span> <?php esc_attr_e('Functionality', 'live-composer-page-builder'); ?></span>
+							<span class="dslca-modules-area-options-filter-hook" data-section="styling"><span class="dslca-icon dslc-icon-tint"></span> <?php esc_attr_e('Styling', 'live-composer-page-builder'); ?></span>
+							<span class="dslca-modules-area-options-filter-hook" data-section="responsive"><span class="dslca-icon dslc-icon-mobile-phone"></span> <?php esc_attr_e('Responsive', 'live-composer-page-builder'); ?></span>
+						</div>
+						<form class="dslca-modules-area-edit-form">
+							<div class="dslca-modules-area-edit-options dslc-clearfix">
+								<div class="dslca-modules-area-edit-options-tabs dslc-clearfix">
+									<?php echo dslc_modules_area_render_tabs(); ?>
+								</div>
+								<div class="dslca-modules-area-edit-options-inner">
+									<div class="dslca-modules-area-edit-options-wrapper dslc-clearfix">
+
+										<?php dslc_modules_area_display_options(); ?>
+
+									</div></div></div></form><div class="dslca-modules-area-edit-actions dslca-module-edit-actions">
+							<span class="dslca-modules-area-edit-save"><?php _e('Save', 'live-composer-page-builder'); ?></span>
+							<span class="dslca-modules-area-edit-cancel"><?php _e('Cancel', 'live-composer-page-builder'); ?></span>
+						</div></div>
+				</div>
+				<!-- module area Pop Up -->
 
 
 
@@ -1650,19 +1686,17 @@ function dslc_display_modules($page_id)
 					$bg_video = '
            
             		<div class="dslc-bg-video">
-			<div class="dslc-bg-video-inner">
-	
-		
-        
-        <video autoplay loop muted playsinline id="video-background">
-    <source src="' . $atts['bg_video'] . '" type="video/mp4">
-    	<source type="video/webm" src="' . $atts['bg_video'] . '.webm" />
-</video>
-            	</div>
-			<div class="dslc-bg-video-overlay" style="' . $overlay_style . '"></div>
-		</div>
-       
-        ';
+						<div class="dslc-bg-video-inner">
+				
+							
+							
+							<video autoplay loop muted playsinline id="video-background">
+								<source src="' . $atts['bg_video'] . '" type="video/mp4">
+								<source type="video/webm" src="' . $atts['bg_video'] . '.webm" />
+							</video>
+						</div>
+						<div class="dslc-bg-video-overlay" style="' . $overlay_style . '"></div>
+					</div>';
 					//        
 
 				} else {
@@ -1679,20 +1713,19 @@ function dslc_display_modules($page_id)
                 <div class="bgndVideo player mb_YTPlayer isMuted" data-property="{videoURL:\'' . $atts['bg_video'] . '\',containment:\'.hp-hero\',autoPlay:true,mobileFallbackImage:\'https://demo.flawlessthemes.com/hotelinn-pro2/wp-content/uploads/2021/04/la-pota-4096087_1280.jpg\' ,showControls:false, mute:true, startAt:0, opacity:1}"></div>
             
             	
-            <script src="https://code.jquery.com/jquery-3.6.0.miny.js"></script>
-            
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mb.YTPlayer/3.3.9/jquery.mb.YTPlayer.js" integrity="sha512-QEsEUG6vCJ4YMCLGNXn9zScVK2FYKyMSntIS5s3P8h1c5kz5320OE5nij835WZqfTt3JrfyyoOTm0JhVWoqJPA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-            <script>
-            jQuery(document).ready(function(){
-            jQuery(".bgndVideo").YTPlayer();
-            });
-            </script>
-            <style>
-            .hp-hero {
-            position: initial !important;
-            }
-            </style>
-            	
+				<script src="https://code.jquery.com/jquery-3.6.0.miny.js"></script>
+				
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mb.YTPlayer/3.3.9/jquery.mb.YTPlayer.js" integrity="sha512-QEsEUG6vCJ4YMCLGNXn9zScVK2FYKyMSntIS5s3P8h1c5kz5320OE5nij835WZqfTt3JrfyyoOTm0JhVWoqJPA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+				<script>
+					jQuery(document).ready(function(){
+					jQuery(".bgndVideo").YTPlayer();
+					});
+				</script>
+				<style>
+					.hp-hero {
+						position: initial !important;
+					}
+				</style>
             	';
 				}
 			}
@@ -1851,7 +1884,7 @@ function dslc_display_modules($page_id)
 				$atts['bg_video'] = sanitize_key(esc_attr($atts['bg_video']));
 			}
 			$output .= '
-		<div ' . $section_id_output . ' class="dslc-modules-section ' . $valign_class . $halign_class . $a_container_class . $parallax_class . $section_class . $extra_classes . '" style="' . dslc_row_get_style($atts) . '" data-section-id="' . $atts['section_instance_id'] . '">
+			<div ' . $section_id_output . ' class="dslc-modules-section ' . $valign_class . $halign_class . $a_container_class . $parallax_class . $section_class . $extra_classes . '" style="' . dslc_row_get_style($atts) . '" data-section-id="' . $atts['section_instance_id'] . '">
 				' . $bg_video . '
 				' . $section_divider_top . $section_divider_bottom . '
 				<div class="dslc-modules-section-wrapper dslc-clearfix">'
@@ -1943,6 +1976,31 @@ function dslc_display_modules($page_id)
 			if (! isset($atts['size'])) {
 				$atts['size'] = '12';
 			}
+			// Custom Class.
+			if (! isset($atts['custom_class'])) {
+				$atts['custom_class'] = '';
+			}
+
+			if (! isset($atts['columns_spacing'])) {
+				$atts['columns_spacing'] = 'spacing';
+			}
+			if (! isset($atts['show_on'])) {
+				$atts['show_on'] = "desktop tablet phone";
+			}
+			// Unique section ID.
+			if (! isset($atts['modules_area_instance_id'])) {
+				$atts['modules_area_instance_id'] = dslc_get_new_module_id();
+			}
+
+			// Apply new instance ID if needed.
+			if (isset($atts['give_new_id']) || $atts['modules_area_instance_id'] == '') {
+				$atts['modules_area_instance_id'] = dslc_get_new_module_id();
+			}
+
+			// Custom ID.
+			if (! isset($atts['custom_id'])) {
+				$atts['custom_id'] = '';
+			}
 
 			$module_area_size = $atts['size'];
 
@@ -1965,62 +2023,112 @@ function dslc_display_modules($page_id)
 				$atts['valign'] = '';
 			}
 
-			$output = '<div class="dslc-modules-area dslc-col dslc-' . $atts['size'] . '-col ' . $pos_class . $valign_class . $admin_class . '" data-size="' . $atts['size'] . '" data-valign="' . esc_attr($atts['valign']) . '">';
+			$halign_class = '';
+			if (isset($atts['halign'])) {
+				$halign_class = ' dslc-halign-' . esc_attr($atts['halign']) . ' ';
+			} else {
+				$atts['halign'] = '';
+			}
+			// Columns spacing
+			if ($atts['columns_spacing'] == 'nospacing') {
+				$pos_class .= ' dslc-no-columns-spacing ';
+			}
+			// Custom Class.
+			if ($atts['custom_class'] != '') {
 
+				// Process all class definitions.
+				$custom_class = preg_replace('/,/', ' ', $atts['custom_class']);
+				$custom_class = preg_replace('/\b\.\b/', ' ', $custom_class);
+				$custom_class = preg_replace('/\./', '', $custom_class);
+				$custom_class = preg_replace('/\s{2,}/', ' ', $custom_class);
+				$custom_class = trim($custom_class);
+
+				$pos_class .= ' ' . $custom_class . ' ';
+			}
+			// Show on Class.
+			$show_on = explode(' ', trim($atts['show_on']));
+
+			if (! in_array('desktop', $show_on, true)) {
+				$pos_class .= ' dslc-hide-on-desktop ';
+			}
+
+			if (! in_array('tablet', $show_on, true)) {
+				$pos_class .= ' dslc-hide-on-tablet ';
+			}
+
+			if (! in_array('phone', $show_on, true)) {
+				$pos_class .= ' dslc-hide-on-phone ';
+			}
+
+			// Custom ID.
+			$modules_area_id = false;
+			if ($atts['custom_id'] != '') {
+				$modules_area_id = $atts['custom_id'];
+			}
+
+			// Custom ID - Output
+			$modules_area_id_output =  "";
+			if ($modules_area_id) {
+				$modules_area_id_output .= 'id="' . $modules_area_id . '"';
+			}
+
+
+			$area_custom_style = dslc_modules_area_get_style( $atts );
+
+			$output = '<style type="text/css" id="dslca-modules-area-' . esc_attr( $atts['modules_area_instance_id'] ) . '">' . $area_custom_style . '</style>';
+			$output .= '<div ' . $modules_area_id_output . ' class="dslc-modules-area dslc-col dslc-' . $atts['size'] . '-col ' . $pos_class . $valign_class . $halign_class . $admin_class . '" data-size="' . $atts['size'] . '" data-valign="' . esc_attr($atts['valign']) . '" data-modules-area-id="' . $atts['modules_area_instance_id'] . '" >';
 			if ($dslc_active && ! $is_header_footer && is_user_logged_in() && current_user_can(DS_LIVE_COMPOSER_CAPABILITY)) {
 
 				// Management.
 				$output .= '<div class="dslca-modules-area-manage">
-			<span class="dslca-modules-area-manage-line"></span>
-			<div class="dslca-modules-area-manage-inner">
-				<span class="dslca-manage-action dslca-copy-modules-area-hook" title="Duplicate" >
-					<svg class="feather">
-						<use xlink:href="' . esc_url($ui_icons_url) . '/feather-sprite.svg#copy"/>
-					</svg>
-				</span>
-				<span class="dslca-manage-action dslca-move-modules-area-hook" title="Drag to move" >
-					<svg class="feather">
-						<use xlink:href="' . esc_url($ui_icons_url) . '/feather-sprite.svg#move"/>
-					</svg>
-				</span>
-				<span class="dslca-manage-action dslca-change-width-modules-area-hook" title="Change width" >
-					<svg class="feather">
-						<use xlink:href="' . esc_url($ui_icons_url) . '/feather-sprite.svg#columns"/>
-					</svg>
-					<div class="dslca-change-width-modules-area-options">
-                        <span>' . __('Container Width', 'live-composer-page-builder') . '</span>
-                        <span data-size="1"><small class="lc_content_width_ratio">1/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/first-column.webp" alt="Preview" /></span>
-                        <span data-size="2"><small class="lc_content_width_ratio">2/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/second-column.webp" alt="Preview" /></span>
-                        <span data-size="3"><small class="lc_content_width_ratio">3/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/third-column.webp" alt="Preview" /></span>
-                        <span data-size="4"><small class="lc_content_width_ratio">4/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/fourth-column.webp" alt="Preview" /></span>
-                        <span data-size="5"><small class="lc_content_width_ratio">5/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/fifth-column.webp" alt="Preview" /></span>
-                        <span data-size="6"><small class="lc_content_width_ratio">6/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/sixth-column.webp" alt="Preview" /></span>
-                        <span data-size="7"><small class="lc_content_width_ratio">7/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/seventh-column.webp" alt="Preview" /></span>
-                        <span data-size="8"><small class="lc_content_width_ratio">8/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/eighth-column.webp" alt="Preview" /></span>
-                        <span data-size="9"><small class="lc_content_width_ratio">9/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/ninth-column.webp" alt="Preview" /></span>
-                        <span data-size="10"><small class="lc_content_width_ratio">10/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/tenth-column.webp" alt="Preview" /></span>
-                        <span data-size="11"><small class="lc_content_width_ratio">11/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/eleventh-column.webp" alt="Preview" /></span>
-                        <span data-size="12"><small class="lc_content_width_ratio">12/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/twelfth-column.webp" alt="Preview" /></span>
-                    </div>
-				</span>
-				<span class="dslca-manage-action dslca-change-vertial-align-module-area-hook" title="Change vertical align" >
-					<svg class="feather">
-						<use xlink:href="' . esc_url($ui_icons_url) . '/feather-sprite.svg#git-commit"/>
-					</svg>
-					<div class="dslca-change-vertial-align-module-area-options">
-						<span>' . __('Vertical Align', 'live-composer-page-builder') . '</span>
-						<span data-valign="top" class="dslc-popup-option">⬆️ Top</span>
-						<span data-valign="middle" class="dslc-popup-option">↕️ Middle</span>
-						<span data-valign="bottom" class="dslc-popup-option">⬇️ Bottom</span>
+					<span class="dslca-modules-area-manage-line"></span>
+					<div class="dslca-modules-area-manage-inner">
+						
+						<span class="dslca-manage-action dslca-edit-modules-area-hook" title="' . esc_attr__( 'Edit options', 'live-composer-page-builder' ) . '" data-event="container-edit">
+							<svg class="feather">
+								<use xlink:href="' . esc_url($ui_icons_url) . '/feather-sprite.svg#sliders"/>
+							</svg>
+						</span>
+
+						<span class="dslca-manage-action dslca-copy-modules-area-hook" title="Duplicate" >
+							<svg class="feather">
+								<use xlink:href="' . esc_url($ui_icons_url) . '/feather-sprite.svg#copy"/>
+							</svg>
+						</span>
+						<span class="dslca-manage-action dslca-move-modules-area-hook" title="Drag to move" >
+							<svg class="feather">
+								<use xlink:href="' . esc_url($ui_icons_url) . '/feather-sprite.svg#move"/>
+							</svg>
+						</span>
+						<span class="dslca-manage-action dslca-change-width-modules-area-hook" title="Change width" >
+							<svg class="feather">
+								<use xlink:href="' . esc_url($ui_icons_url) . '/feather-sprite.svg#columns"/>
+							</svg>
+							<div class="dslca-change-width-modules-area-options">
+								<span>' . __('Container Width', 'live-composer-page-builder') . '</span>
+								<span data-size="1"><small class="lc_content_width_ratio">1/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/first-column.webp" alt="Preview" /></span>
+								<span data-size="2"><small class="lc_content_width_ratio">2/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/second-column.webp" alt="Preview" /></span>
+								<span data-size="3"><small class="lc_content_width_ratio">3/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/third-column.webp" alt="Preview" /></span>
+								<span data-size="4"><small class="lc_content_width_ratio">4/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/fourth-column.webp" alt="Preview" /></span>
+								<span data-size="5"><small class="lc_content_width_ratio">5/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/fifth-column.webp" alt="Preview" /></span>
+								<span data-size="6"><small class="lc_content_width_ratio">6/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/sixth-column.webp" alt="Preview" /></span>
+								<span data-size="7"><small class="lc_content_width_ratio">7/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/seventh-column.webp" alt="Preview" /></span>
+								<span data-size="8"><small class="lc_content_width_ratio">8/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/eighth-column.webp" alt="Preview" /></span>
+								<span data-size="9"><small class="lc_content_width_ratio">9/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/ninth-column.webp" alt="Preview" /></span>
+								<span data-size="10"><small class="lc_content_width_ratio">10/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/tenth-column.webp" alt="Preview" /></span>
+								<span data-size="11"><small class="lc_content_width_ratio">11/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/eleventh-column.webp" alt="Preview" /></span>
+								<span data-size="12"><small class="lc_content_width_ratio">12/12</small><img class="previewimg" src="'. DS_LIVE_COMPOSER_URL .'/images/icons/twelfth-column.webp" alt="Preview" /></span>
+							</div>
+						</span>
+						<span class="dslca-manage-action dslca-delete-modules-area-hook" title="Delete" >
+							<svg class="feather">
+								<use xlink:href="' . esc_url($ui_icons_url) . '/feather-sprite.svg#x"/>
+							</svg>
+						</span>
 					</div>
-				</span>
-				<span class="dslca-manage-action dslca-delete-modules-area-hook" title="Delete" >
-					<svg class="feather">
-						<use xlink:href="' . esc_url($ui_icons_url) . '/feather-sprite.svg#x"/>
-					</svg>
-				</span>
-			</div>
-		</div>';
+				</div>
+				<div class="dslca-modules-area-settings">' . dslc_encode_shortcodes(dslc_modules_area_get_options_fields($atts)) . '</div>';
+				$output .= '<textarea class="dslca-modules-area-code">' . json_encode($atts) . '</textarea>';
 			}
 
 			$content_render = '';

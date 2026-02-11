@@ -19,7 +19,7 @@ import {init_sortables} from './modulearea.js'
 
 
 var dslcDebug = false;
-window.dslcDebug = true;
+// window.dslcDebug = true;
 
 // Global Plugin Object
 window.LiveComposer = {
@@ -60,6 +60,7 @@ window.LiveComposer = {
         // Used to prevent multiple code generation when
         // cancelling row edits or applying historical states
         generate_code_after_row_changed: true,
+        generate_code_after_modules_area_changed: true,
         
         // Undo/Redo lock (false = enabled)
         historyLocked: false
@@ -176,6 +177,7 @@ window.LiveComposer = {
 
 			// 3. Re-enable the code generation flag
 			LiveComposer.Builder.Flags.generate_code_after_row_changed = true;
+			LiveComposer.Builder.Flags.generate_code_after_modules_area_changed = true;
 
 			// 4. Trigger the final code generation and UI update
 			window.dslc_generate_code();

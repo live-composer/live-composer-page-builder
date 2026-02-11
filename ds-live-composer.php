@@ -4,7 +4,7 @@
  * Plugin URI: https://www.livecomposerplugin.com
  * Description: Page builder for WordPress with drag and drop header/footer editing.
  * Author: Live Composer Team
- * Version: 2.1.3
+ * Version: 2.1.4
  * Author URI: https://livecomposerplugin.com
  * License: GPL3
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -41,7 +41,7 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) && version_compare( PHP_VERSION, '5.3.0
 	 * Constants
 	 */
 
-	define( 'DS_LIVE_COMPOSER_VER', '2.1.3' );
+	define( 'DS_LIVE_COMPOSER_VER', '2.1.4' );
 
 	define( 'DS_LIVE_COMPOSER_SHORTNAME', __( 'Live Composer', 'live-composer-page-builder' ) );
 	define( 'DS_LIVE_COMPOSER_BASENAME', plugin_basename( __FILE__ ) );
@@ -53,10 +53,12 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) && version_compare( PHP_VERSION, '5.3.0
 	define( 'DSLC_PO_FRAMEWORK_ABS', DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework' );
 	define( 'DSLC_ST_FRAMEWORK_ABS', DS_LIVE_COMPOSER_ABS . '/includes/single-templates-framework' );
 	define( 'DSLC_ROW_SYSTEM_ABS', DS_LIVE_COMPOSER_ABS . '/includes/row-system' );
+	define( 'DSLC_MODULES_AREA_SYSTEM_ABS', DS_LIVE_COMPOSER_ABS . '/includes/modules-area-system' );
 
 
 	$dslc_var_image_option_bckp = array();
 	$dslc_var_row_options = array();
+	$dslc_var_modules_area_options = array();
 
 	/**
 	 * Is live composer currently active?
@@ -120,6 +122,7 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) && version_compare( PHP_VERSION, '5.3.0
 	include DS_LIVE_COMPOSER_ABS . '/includes/display-functions.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/editorinterface.class.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/row-system/init.php';
+	include DS_LIVE_COMPOSER_ABS . '/includes/modules-area-system/init.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/module-controls.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/ajax.php';
 	include DS_LIVE_COMPOSER_ABS . '/includes/shortcodes.php';
