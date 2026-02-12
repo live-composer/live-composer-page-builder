@@ -206,7 +206,7 @@ If you're migrating from another page builder, compatibility for content transfe
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
 
 = 2.1.4 - February 12 2026 =
-Added editing and responsive settings for the Module Area Container.
+* Added editing and responsive settings for the Module Area Container.
 
 = 2.1.3 - February 04 2026 =
 * Added a Section module for rendering custom section designs.
