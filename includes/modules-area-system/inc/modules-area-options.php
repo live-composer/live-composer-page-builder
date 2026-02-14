@@ -214,7 +214,7 @@ function dslc_modules_area_register_options() {
 			'type' => 'slider',
 			'affect_on_change_rule' => 'margin-left',
 			'section' => 'styling',
-			'ext' => '%',
+			'ext' => 'px',
 			'max' => 90,
 		);
 		$dslc_var_modules_area_options['margin_right'] = array(
@@ -224,7 +224,7 @@ function dslc_modules_area_register_options() {
 			'type' => 'slider',
 			'affect_on_change_rule' => 'margin-right',
 			'section' => 'styling',
-			'ext' => '%',
+			'ext' => 'px',
 			'max' => 90,
 		);
 
@@ -290,7 +290,7 @@ function dslc_modules_area_register_options() {
 			'type' => 'slider',
 			'affect_on_change_rule' => 'padding-left',
 			'section' => 'styling',
-			'ext' => '%',
+			'ext' => 'px',
 			'max' => 90,
 		);
 		$dslc_var_modules_area_options['padding_right'] = array(
@@ -300,7 +300,7 @@ function dslc_modules_area_register_options() {
 			'type' => 'slider',
 			'affect_on_change_rule' => 'padding-right',
 			'section' => 'styling',
-			'ext' => '%',
+			'ext' => 'px',
 			'max' => 90,
 		);
 
@@ -461,7 +461,7 @@ function dslc_modules_area_register_options() {
 			'affect_on_change_rule' => 'margin-left',
 			'section' => 'responsive',
 			'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-			'ext' => '%',
+			'ext' => 'px',
 			'max' => 90,
 		);
 		$dslc_var_modules_area_options['css_res_t_margin_right'] = array(
@@ -472,7 +472,7 @@ function dslc_modules_area_register_options() {
 			'affect_on_change_rule' => 'margin-right',
 			'section' => 'responsive',
 			'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-			'ext' => '%',
+			'ext' => 'px',
 			'max' => 90,
 		);
 
@@ -545,7 +545,7 @@ function dslc_modules_area_register_options() {
 			'affect_on_change_rule' => 'padding-left',
 			'section' => 'responsive',
 			'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-			'ext' => '%',
+			'ext' => 'px',
 			'max' => 90,
 		);
 		$dslc_var_modules_area_options['css_res_t_padding_right'] = array(
@@ -556,7 +556,7 @@ function dslc_modules_area_register_options() {
 			'affect_on_change_rule' => 'padding-right',
 			'section' => 'responsive',
 			'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-			'ext' => '%',
+			'ext' => 'px',
 			'max' => 90,
 		);
 
@@ -649,7 +649,7 @@ function dslc_modules_area_register_options() {
 			'affect_on_change_rule' => 'margin-left',
 			'section' => 'responsive',
 			'tab' => __( 'Phone', 'live-composer-page-builder' ),
-			'ext' => '%',
+			'ext' => 'px',
 			'max' => 90,
 		);
 		$dslc_var_modules_area_options['css_res_p_margin_right'] = array(
@@ -660,7 +660,7 @@ function dslc_modules_area_register_options() {
 			'affect_on_change_rule' => 'margin-right',
 			'section' => 'responsive',
 			'tab' => __( 'Phone', 'live-composer-page-builder' ),
-			'ext' => '%',
+			'ext' => 'px',
 			'max' => 90,
 		);
 
@@ -733,7 +733,7 @@ function dslc_modules_area_register_options() {
 			'affect_on_change_rule' => 'padding-left',
 			'section' => 'responsive',
 			'tab' => __( 'Phone', 'live-composer-page-builder' ),
-			'ext' => '%',
+			'ext' => 'px',
 			'max' => 90,
 		);
 		$dslc_var_modules_area_options['css_res_p_padding_right'] = array(
@@ -744,7 +744,7 @@ function dslc_modules_area_register_options() {
 			'affect_on_change_rule' => 'padding-right',
 			'section' => 'responsive',
 			'tab' => __( 'Phone', 'live-composer-page-builder' ),
-			'ext' => '%',
+			'ext' => 'px',
 			'max' => 90,
 		);
 
