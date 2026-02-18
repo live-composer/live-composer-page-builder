@@ -800,7 +800,7 @@ class DSLC_Button extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'Icon', 'live-composer-page-builder' ),
 				'dependent_controls' => array(
-					'enabled' => 'icon_pos, button_icon_id, css_icon_color, css_icon_color_hover, css_icon_margin, css_icon_margin_left, show_icon, button_inline_svg, css_button_icon_size_svg',
+					'enabled' => 'icon_pos, button_icon_id, css_icon_color, css_icon_color_hover, css_icon_margin, css_icon_margin_group, css_icon_margin_unit, css_icon_margin_top, css_icon_margin_bottom, css_icon_margin_left, css_icon_margin_right, show_icon, button_inline_svg, css_button_icon_size_svg',
 				),
 			),
 			array(

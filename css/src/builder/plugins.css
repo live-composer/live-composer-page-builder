@@ -4365,6 +4365,10 @@ body em {
 .dslca-modules-area-edit-option-select[data-id$="padding_unit"],
 .dslca-modules-area-edit-option-select[data-id$="margin_unit"],
 .dslca-module-edit-option-select[data-id$="padding_unit"],
+.dslca-module-edit-option-select[data-id="css_tabs_margin_wrapper_unit"],
+.dslca-module-edit-option-select[data-id="css_excerpt_m_unit"],
+.dslca-module-edit-option-select[data-id="css_res_t_unit"],
+.dslca-module-edit-option-select[data-id="css_res_p_unit"],
 .dslca-module-edit-option-select[data-id$="margin_unit"] {
     width: 100% !important;
 }

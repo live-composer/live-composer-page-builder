@@ -857,7 +857,16 @@ const onModuleOptionsChange = () => {
 					var module = jQuery(".dslca-module-being-edited", LiveComposer.Builder.PreviewAreaDocument);
 
 					var elems = dslcAffectOnChangeEl.split(',');
-					var styleContent = "#" + module[0].id + " " + elems.join(", #" + module[0].id + " ") + " {" + rule + ": " + dslcAffectOnChangeVal + dslcExt + "}";
+					var styleRules = rule + ": " + dslcAffectOnChangeVal + dslcExt + ";";
+
+					if ( rule.indexOf('border-width') !== -1 && dslcAffectOnChangeRule.indexOf('border-style') === -1 ) {
+						var widthVal = parseFloat(dslcAffectOnChangeVal);
+						if ( ! isNaN(widthVal) && widthVal > 0 ) {
+							styleRules += " border-style: solid;";
+						}
+					}
+
+					var styleContent = "#" + module[0].id + " " + elems.join(", #" + module[0].id + " ") + " {" + styleRules + "}";					
 
 					LiveComposer.Builder.Helpers.processInlineStyleTag({
 
@@ -1287,10 +1296,10 @@ const onModulesAreaOptionsChange = () => {
 				}
 			}
 		}
-
+		let modulesAreaSelector = '.dslc-modules-area[data-modules-area-id="' + dslcEl.attr('data-modules-area-id') + '"]';
 		// Apply all collected CSS via processInlineStyleTag
 		if (cssRulesToApply.length) {
-			var styleContent = "#" + dslcEl[0].id + (cssSelectorToApply ? " " + cssSelectorToApply : "") + " {";
+			var styleContent = modulesAreaSelector + (cssSelectorToApply ? " " + cssSelectorToApply : "") + " {";
 			cssRulesToApply.forEach(function (item) {
 				styleContent += item.rule + ": " + item.value + ";";
 			});
