@@ -4001,3 +4001,15 @@ body em {
 		margin-right: 0;
 	}
 }
+
+.dslca-countdown-wrapper{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.dslca-countdown-wrapper .dslc_countdown-inner{
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	line-height: normal;
+}

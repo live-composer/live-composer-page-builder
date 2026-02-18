@@ -4682,3 +4682,14 @@ a.dslca-modules-area-edit-options-tab-hook[data-id="mobile_menu_styling"]:before
     color: #888;
     font-style: italic;
 }
+.dslca-modules-section-edit-field-datetimepicker,
+.dslca-module-edit-field-datetimepicker {
+  display: block !important;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+#ui-datepicker-div {
+    z-index: 99999 !important;
+    background-color: #ffffff;
+}

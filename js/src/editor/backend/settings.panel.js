@@ -74,6 +74,27 @@ jQuery(document).ready(function($){
 		});
 	});
 
+	// Selector for all datetime picker fields in modules/popups
+	var dslca_options_with_datetimepicker = '.dslca-module-edit-field-datetimepicker';
+
+	// Delegate event: focus only when user interacts
+	jQuery(document).on('focus', dslca_options_with_datetimepicker, function() {
+
+		var $this = jQuery(this);
+
+		if ( $this.hasClass('dslca-datetime-initialized') ) return;
+
+		$this.datetimepicker({
+			dateFormat: 'yy-mm-dd',
+			timeFormat: 'HH:mm',
+			showButtonPanel: true,
+			controlType: 'select',
+			oneLine: true 
+		});
+
+		$this.addClass('dslca-datetime-initialized');
+	});
+
 	/**
 	 * Hook - Submit
 	 */

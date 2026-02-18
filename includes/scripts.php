@@ -226,17 +226,35 @@ final class DSLC_Scripts {
 
 			// wp_enqueue_script( 'imagesloaded' ); // Need this for Masonry.
 			// wp_enqueue_script( 'jquery-masonry' );
+
+			// Datetime picker
+			wp_enqueue_script( 'jquery-ui-datepicker' );
+
+			wp_enqueue_script(
+				'jquery-ui-timepicker',
+				'https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.js',
+				array( 'jquery', 'jquery-ui-datepicker' ),
+				'1.6.3',
+				true
+			);
+
+			wp_enqueue_style(
+				'jquery-ui-timepicker-css',
+				'https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css'
+			);
+
+			// Editor scripts dependent on color picker & datetime picker
 			wp_enqueue_script(
 				'dslc-editor-plugins-js',
 				DS_LIVE_COMPOSER_URL . 'js/dist/editor_plugins.min.js',
-				array( 'jquery', 'wp-color-picker' ),
+				array( 'jquery', 'wp-color-picker', 'jquery-ui-timepicker' ),
 				filemtime( DS_LIVE_COMPOSER_ABS . '/js/dist/editor_plugins.min.js' ) // Version: filemtime — Gets file modification time.
 			);
 
 			wp_enqueue_script(
 				'dslc-editor-backend-js',
 				DS_LIVE_COMPOSER_URL . 'js/dist/editor_backend.min.js',
-				array( 'jquery', 'wp-color-picker' ),
+				array( 'jquery', 'wp-color-picker', 'jquery-ui-timepicker' ),
 				filemtime( DS_LIVE_COMPOSER_ABS . '/js/dist/editor_backend.min.js' ) // Version: filemtime — Gets file modification time.
 			);
 

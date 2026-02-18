@@ -450,6 +450,18 @@ export const showSection = ( section ) => {
 	jQuery(section).find('input.dslca-module-edit-field-colorpicker').each( function (item) {
 		jQuery(this).css('background', jQuery(this).val());
 	});
+
+	jQuery(section).find('input.dslca-module-edit-field-datetimepicker').each( function (item) {
+		if ( ! jQuery(this).hasClass('dslca-datetime-initialized') ) {
+
+			jQuery(this).datetimepicker({
+				dateFormat: 'yy-mm-dd',
+				timeFormat: 'HH:mm'
+			});
+
+			jQuery(this).addClass('dslca-datetime-initialized');
+		}
+	});
 }
 
 /**

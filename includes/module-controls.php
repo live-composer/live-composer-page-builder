@@ -210,7 +210,7 @@ class LC_Control {
 				<?php elseif ( 'select' === $module_control['type'] ) :
 
 					$curr_value = $this->get_starting_value();
-				?>
+					?>
 
 					<select class="dslca-module-edit-field" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" <?php echo $affect_on_change_append ?> >
 						<?php foreach ( $module_control['choices'] as $select_option ) : ?>
@@ -237,30 +237,30 @@ class LC_Control {
 
 					<div class="dslca-module-edit-option-checkbox-wrapper">
 
-					<?php foreach ( $module_control['choices'] as $checkbox_option ) :
-    $unique_id = 'device-response-' . sanitize_title( $checkbox_option['value'] );
-?>
-    <div class="dslca-module-edit-option-checkbox-single">
-        <input 
-            type="checkbox"
-            id="<?php echo esc_attr( $unique_id ); ?>"
-            class="dslca-module-edit-field dslca-module-edit-field-checkbox"
-            data-id="<?php echo esc_attr( $module_control['id'] ); ?>"
-            name="<?php echo esc_attr( $module_control['id'] ); ?>"
-            value="<?php echo esc_attr( $checkbox_option['value'] ); ?>"
-            <?php checked( in_array( $checkbox_option['value'], $curr_value ) ); ?>
-            <?php echo $affect_on_change_append; ?>
-        />
-        
-        <label for="<?php echo esc_attr( $unique_id ); ?>" class="dslca-module-edit-option-checkbox-hook">
-            <span 
-                class="dslca-icon <?php echo in_array( $checkbox_option['value'], $curr_value ) ? 'dslc-icon-check' : 'dslc-icon-check-empty'; ?>" 
-                aria-hidden="true">
-            </span>
-			<span><?php echo esc_html( $checkbox_option['label'] ); ?></span>
-        </label>
-    </div>
-<?php endforeach; ?>
+						<?php foreach ( $module_control['choices'] as $checkbox_option ) :
+							$unique_id = 'device-response-' . sanitize_title( $checkbox_option['value'] );
+							?>
+							<div class="dslca-module-edit-option-checkbox-single">
+								<input 
+									type="checkbox"
+									id="<?php echo esc_attr( $unique_id ); ?>"
+									class="dslca-module-edit-field dslca-module-edit-field-checkbox"
+									data-id="<?php echo esc_attr( $module_control['id'] ); ?>"
+									name="<?php echo esc_attr( $module_control['id'] ); ?>"
+									value="<?php echo esc_attr( $checkbox_option['value'] ); ?>"
+									<?php checked( in_array( $checkbox_option['value'], $curr_value ) ); ?>
+									<?php echo $affect_on_change_append; ?>
+								/>
+								
+								<label for="<?php echo esc_attr( $unique_id ); ?>" class="dslca-module-edit-option-checkbox-hook">
+									<span 
+										class="dslca-icon <?php echo in_array( $checkbox_option['value'], $curr_value ) ? 'dslc-icon-check' : 'dslc-icon-check-empty'; ?>" 
+										aria-hidden="true">
+									</span>
+									<span><?php echo esc_html( $checkbox_option['label'] ); ?></span>
+								</label>
+							</div>
+						<?php endforeach; ?>
 
 
 					</div><!-- .dslca-module-edit-option-checkbox-wrapper -->
@@ -285,17 +285,17 @@ class LC_Control {
 
 					$default_value = false;
 
-	if ( isset( $module_control['std'] ) ) {
+					if ( isset( $module_control['std'] ) ) {
 
-		$default_value = $module_control['std'];
-	}
+						$default_value = $module_control['std'];
+					}
 
-					$style = '';
+									$style = '';
 
-	if ( '' !== $this->_curr_value ) {
+					if ( '' !== $this->_curr_value ) {
 
-		$style = ' style="background: ' . $this->_curr_value . '; "';
-	}
+						$style = ' style="background: ' . $this->_curr_value . '; "';
+					}
 					?>
 
 					<input type="text" class="dslca-module-edit-field dslca-module-edit-field-colorpicker" data-alpha="true" <?php echo wp_kses( $style, array(), array() );?> name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo esc_attr( $this->_curr_value ); ?>" data-affect-on-change-el="<?php echo $module_control['affect_on_change_el']; ?>" data-affect-on-change-rule="<?php echo $module_control['affect_on_change_rule']; ?>" <?php if ( $default_value ) : ?> data-val-bckp="<?php echo $default_value; ?>" <?php endif; ?> />
@@ -307,21 +307,21 @@ class LC_Control {
 					$slider_increment = 1;
 					$onlypositive = false;
 
-	if ( isset( $module_control['min'] ) ) {
-		$slider_min = $module_control['min'];
-	}
+					if ( isset( $module_control['min'] ) ) {
+						$slider_min = $module_control['min'];
+					}
 
-	if ( isset( $module_control['max'] ) ) {
-		$slider_max = $module_control['max'];
-	}
+					if ( isset( $module_control['max'] ) ) {
+						$slider_max = $module_control['max'];
+					}
 
-	if ( isset( $module_control['increment'] ) ) {
-		$slider_increment = $module_control['increment'];
-	}
+					if ( isset( $module_control['increment'] ) ) {
+						$slider_increment = $module_control['increment'];
+					}
 
-	if ( isset( $module_control['onlypositive'] ) ) {
-		$onlypositive = $module_control['onlypositive'];
-	}
+					if ( isset( $module_control['onlypositive'] ) ) {
+						$onlypositive = $module_control['onlypositive'];
+					}
 					?>
 
 					<div class="dslca-module-edit-field-numeric-wrap">
@@ -426,8 +426,8 @@ class LC_Control {
 						if ( $show_inner_shadow ) : ?>
 						<div class="dslca-module-edit-option-box-shadow-single">
 							<span class="dslca-module-edit-option-checkbox-hook"><?php esc_html_e( 'Inner', 'live-composer-page-builder' ); ?><span class="dslca-icon <?php if ( $box_shadow_inset_val == 'inset' ) { echo 'dslc-icon-check';
-} else { echo 'dslc-icon-check-empty';
-} ?>"></span></span>
+					} else { echo 'dslc-icon-check-empty';
+					} ?>"></span></span>
 							<input type="checkbox" class="dslca-module-edit-field-checkbox dslca-module-edit-option-box-shadow-inset" <?php if ( $box_shadow_inset_val == 'inset' ) { echo 'checked="checked"';} ?> />
 						</div>
 						<?php endif; ?>
@@ -497,6 +497,16 @@ class LC_Control {
 						$this->output_button_control( $module_control, $this->_curr_value, $this->get_advanced_action() );
 
 						?>
+				<?php elseif ( 'datetime' === $module_control['type'] ) : 
+					$default_value = false;
+
+					if ( isset( $module_control['std'] ) ) {
+
+						$default_value = $module_control['std'];
+					}
+					?>
+
+					<input type="text" class="dslca-module-edit-field dslca-module-edit-field-datetimepicker" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo esc_attr( stripslashes( $this->_curr_value ) ); ?>" data-affect-on-change-el="<?php echo esc_attr( $module_control['affect_on_change_el'] ); ?>" data-affect-on-change-rule="<?php echo esc_attr( $module_control['affect_on_change_rule'] ); ?>" <?php if ( $default_value ) : ?> data-val-bckp="<?php echo esc_attr( $default_value ); ?>" <?php else : ?> data-val-bckp="<?php echo esc_attr( stripslashes( $this->_curr_value ) ); ?>" <?php endif; ?> <?php echo $affect_on_change_append ?> />
 
 				<?php else : ?>
 
