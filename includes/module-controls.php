@@ -574,7 +574,7 @@ class LC_Control {
 		$starting_value = '';
 		$curr_value = $this->get_curr_value();
 
-		if ( '' === $curr_value && isset( $module_control['std'] ) ) {
+		if ( '' === $curr_value && isset( $module_control['std'] ) && 'css_show_on' != $module_control['id'] ) {
 			return $module_control['std'];
 		} else {
 			return $curr_value;

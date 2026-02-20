@@ -493,7 +493,7 @@ export const generateSectionCode = ( theModulesSection ) => {
 
 				// RAW CODE CLEANUP: Clean the module code from keys with empty values.
 				jQuery.each(moduleCodeJSON, function(index, el) {
-					if ( false === el || '' === el ) {
+					if ( (false === el || '' === el) && index != 'css_show_on' ) {
 						delete moduleCodeJSON[index];
 					}
 
@@ -667,12 +667,17 @@ export function updateProgress(percent) {
 
     clearInterval(creepInterval);
 
-    // Show/Display the containers
+    // Show loader and overlay
     for (let i = 0; i < containers.length; i++) {
+        const container = containers[i];
+        const overlay = container.closest('.lc-pop-build')?.querySelector('.popup-overlay');
+
         if (percent > 0 && percent < 100) {
-            containers[i].style.display = 'block';
-            // Use a small timeout for the opacity transition to trigger correctly
-            setTimeout(() => { containers[i].style.opacity = '1'; }, 10);
+            container.style.display = 'block';
+            setTimeout(() => { container.style.opacity = '1'; }, 10);
+
+            // Show overlay if it exists
+            if (overlay) overlay.style.display = 'block';
         }
     }
 
@@ -700,10 +705,16 @@ export function updateProgress(percent) {
 
         setTimeout(() => {
             for (let i = 0; i < containers.length; i++) {
-                containers[i].style.opacity = '0';
+                const container = containers[i];
+                const overlay = container.closest('.lc-pop-build')?.querySelector('.popup-overlay');
+
+                container.style.opacity = '0';
+
+                // Hide overlay if it exists
+                if (overlay) overlay.style.display = 'none';
                 
                 setTimeout(() => {
-                    containers[i].style.display = 'none';
+                    container.style.display = 'none';
                     // Reset for the next call
                     updateWidth(0);
                 }, 400); // Wait for opacity fade

@@ -878,16 +878,7 @@ const onModuleOptionsChange = () => {
 					var module = jQuery(".dslca-module-being-edited", LiveComposer.Builder.PreviewAreaDocument);
 
 					var elems = dslcAffectOnChangeEl.split(',');
-					var styleRules = rule + ": " + dslcAffectOnChangeVal + dslcExt + ";";
-
-					if ( rule.indexOf('border-width') !== -1 && dslcAffectOnChangeRule.indexOf('border-style') === -1 ) {
-						var widthVal = parseFloat(dslcAffectOnChangeVal);
-						if ( ! isNaN(widthVal) && widthVal > 0 ) {
-							styleRules += " border-style: solid;";
-						}
-					}
-
-					var styleContent = "#" + module[0].id + " " + elems.join(", #" + module[0].id + " ") + " {" + styleRules + "}";					
+					var styleContent = "#" + module[0].id + " " + elems.join(", #" + module[0].id + " ") + " {" + rule + ": " + dslcAffectOnChangeVal + dslcExt + "}";			
 
 					LiveComposer.Builder.Helpers.processInlineStyleTag({
 
@@ -974,7 +965,7 @@ const onSectionOptionsChange = () => {
 			dslcFieldID == 'border-bottom' ||
 			dslcFieldID == 'border-left' ) {
 
-			var dslcBorderStyle = jQuery('.dslca-modules-section-settings input[data-id="border_style"]').val();
+			var dslcBorderStyle = jQuery('.dslca-modules-section-settings input[data-id="border_style"]', dslcEl).val();
 			dslcSetting = jQuery('.dslca-modules-section-settings input[data-id="border"]', dslcEl );
 
 			dslcValReal = '';
@@ -1262,7 +1253,7 @@ const onModulesAreaOptionsChange = () => {
 			dslcFieldID == 'border-bottom' ||
 			dslcFieldID == 'border-left') {
 
-			var dslcBorderStyle = jQuery('.dslca-modules-area-settings input[data-id="border_style"]').val();
+			var dslcBorderStyle = jQuery('.dslca-modules-area-settings input[data-id="border_style"]',dslcEl).val();
 			dslcSetting = jQuery('.dslca-modules-area-settings input[data-id="border"]', dslcEl);
 
 			dslcValReal = '';
@@ -3111,7 +3102,10 @@ function dslc_module_options_text_align() {
  */
 function dslc_module_options_checkbox() {
 
-	jQuery(document).on( 'click', '.dslca-module-edit-option-checkbox-hook, .dslca-modules-section-edit-option-checkbox-hook, .dslca-modules-area-edit-option-checkbox-hook', function(){
+	jQuery(document).on( 'click', '.dslca-module-edit-option-checkbox-hook, .dslca-modules-section-edit-option-checkbox-hook, .dslca-modules-area-edit-option-checkbox-hook', function(e){
+
+		e.preventDefault();
+		e.stopPropagation();
 
 		var checkFake = jQuery(this);
 		var checkReal = checkFake.siblings('input[type="checkbox"]');
@@ -3130,8 +3124,8 @@ function dslc_module_options_checkbox() {
                 .removeClass('dslc-icon-check-empty')
                 .addClass('dslc-icon-check');
         }
-
-        checkReal.trigger('change');
+		
+		checkReal.trigger('change').trigger('input');
     });
 }
 

@@ -111,6 +111,7 @@ function dslc_display_composer() {
 				<div class="resize-handle bottom" data-direction="b"></div>
 				<div class="resize-handle left" data-direction="l"></div>
 				<div class="resize-handle right" data-direction="r"></div> -->
+				<div class="popup-overlay"></div>
 				<div class="dslca-container-loader">
 					<div class="dslca-progress-bar"></div>
 				</div>

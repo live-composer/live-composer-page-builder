@@ -4376,20 +4376,26 @@ class DSLC_Module {
 		if ( isset( $options['css_show_on'] ) && $options['css_show_on'] !== false ) {
 
 			$show_on = explode( ' ', trim( $options['css_show_on'] ) );
+			// If $show_on is empty, hide on all devices
+			if ( empty( $show_on ) ) {
+				$class_show_on .= 'dslc-hide-on-desktop dslc-hide-on-tablet dslc-hide-on-phone ';
+			} else {
 
-			if ( ! in_array( 'desktop', $show_on, true ) ) {
-				$class_show_on .= 'dslc-hide-on-desktop ';
+				if ( ! in_array( 'desktop', $show_on, true ) ) {
+					$class_show_on .= 'dslc-hide-on-desktop ';
+				}
+
+				if ( ! in_array( 'tablet', $show_on, true ) ) {
+					$class_show_on .= 'dslc-hide-on-tablet ';
+				}
+
+				if ( ! in_array( 'phone', $show_on, true ) ) {
+					$class_show_on .= 'dslc-hide-on-phone ';
+				}
+
 			}
 
-			if ( ! in_array( 'tablet', $show_on, true ) ) {
-				$class_show_on .= 'dslc-hide-on-tablet ';
-			}
-
-			if ( ! in_array( 'phone', $show_on, true ) ) {
-				$class_show_on .= 'dslc-hide-on-phone ';
-			}
 		}
-
 		/**
 		 * Handle like
 		 */
@@ -4671,7 +4677,8 @@ class DSLC_Module {
 
 					// 🔖 RAW CODE CLEANUP
 					// if ( $user_options[ $id ] === $option['std'] || '' === $user_options[ $id ] ) {
-					if ( false === $uid || '' === $uid ) {
+					
+					if ( (false === $uid || '' === $uid) && $id !='css_show_on' ) {
 						unset( $user_options_no_defaults[ $id ] );
 					}
 

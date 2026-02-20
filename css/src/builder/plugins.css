@@ -4511,7 +4511,8 @@ a.dslca-modules-area-edit-options-tab-hook[data-id="mobile_menu_styling"]:before
     position: absolute;
     top: 54px;
     left: 0;
-    width: 100%;
+    right: 0;
+    width: auto;
     height: 5px;
     background: #b5b6b1;
     z-index: 9999;
@@ -4520,7 +4521,15 @@ a.dslca-modules-area-edit-options-tab-hook[data-id="mobile_menu_styling"]:before
     transition: opacity 0.3s ease;
     display: none;
 }
-
+/* Overlay inside popup */
+.popup-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 1001;
+    display: none;  
+    width: auto;
+}
 .dslca-progress-bar {
     width: 0%;
     height: 100%;
