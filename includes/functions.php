@@ -96,6 +96,7 @@ function dslc_register_modules() {
 	dslc_register_module( 'DSLC_Loops' );
 	dslc_register_module( 'DSLC_Section' );
 	dslc_register_module( 'DSLC_TP_Link' );
+	dslc_register_module( 'DSLC_Countdown' );
 
 	// Hook to register custom modules.
 	do_action( 'dslc_hook_register_modules' );

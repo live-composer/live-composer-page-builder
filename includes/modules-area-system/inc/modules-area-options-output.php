@@ -385,10 +385,10 @@ function dslc_modules_area_generate_css( $module_settings = false, $options_to_p
 
             if ( 'border' === $option_id ) {
                 $checkbox_arr = explode( ' ', trim( $orig_value ) );
-                if ( ! in_array( 'top', $checkbox_arr, true ) ) { $style .= 'border-top-width: 0; '; }
-                if ( ! in_array( 'right', $checkbox_arr, true ) ) { $style .= 'border-right-width: 0; '; }
-                if ( ! in_array( 'bottom', $checkbox_arr, true ) ) { $style .= 'border-bottom-width: 0; '; }
-                if ( ! in_array( 'left', $checkbox_arr, true ) ) { $style .= 'border-left-width: 0; '; }                
+                if ( ! in_array( 'border-top', $checkbox_arr, true ) ) { $style .= 'border-top-style: hidden; '; }
+                if ( ! in_array( 'border-right', $checkbox_arr, true ) ) { $style .= 'border-right-style: hidden; '; }
+                if ( ! in_array( 'border-bottom', $checkbox_arr, true ) ) { $style .= 'border-bottom-style: hidden; '; }
+                if ( ! in_array( 'border-left', $checkbox_arr, true ) ) { $style .= 'border-left-style: hidden; '; }                
             }
 
             if ( $rules ) {

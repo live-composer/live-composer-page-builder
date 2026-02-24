@@ -1293,7 +1293,7 @@ a img.aligncenter { display: block; margin-left: auto; margin-right: auto }
 	}
 
 	.dslca-enabled .dslc-hide-on-desktop {
-		display: block !important;
+		display: flex !important;
 	}
 
 	.dslca-composer-hidden .dslc-hide-on-desktop {
@@ -4000,4 +4000,16 @@ body em {
 		float: none;
 		margin-right: 0;
 	}
+}
+
+.dslca-countdown-wrapper{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.dslca-countdown-wrapper .dslc_countdown-inner{
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	line-height: normal;
 }

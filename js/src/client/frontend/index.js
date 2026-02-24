@@ -917,6 +917,180 @@ window.dslc_sticky_row = () => {
 	}
 }
 
+/**
+ * Countdown Init
+ */
+window.dslc_init_countdown = function(context) {
+    context = context || jQuery(document);
+
+    context.find('.dslca-countdown-wrapper').each(function() {
+        var container = jQuery(this);
+
+        var existingInterval = container.data('dslc-interval-id');
+        if (existingInterval) {
+            window.clearInterval(existingInterval);
+        }
+
+        var settings = {
+            year:    parseInt(container.data('year')),
+            month:   parseInt(container.data('month')),
+            day:     parseInt(container.data('day')),
+            hour:    parseInt(container.data('hour')),
+            minute:  parseInt(container.data('minute')),
+            zeroPad: container.data('zeropad') == '1'
+        };
+
+        var newInterval = dslca_countdown_init(container, settings);
+        container.data('dslc-interval-id', newInterval);
+        container.data('dslc-countdown-initialized', true);
+    });
+};
+
+
+
+/**
+ * Countdown Core
+ */
+function dslca_countdown_init(container, options) {
+
+    try {
+
+        var defaults = {
+            year: 2026,
+            month: 1,
+            day: 1,
+            hours: 0,
+            minutes: 0,
+            seconds: 0,
+            words: {
+                days: 'day',
+                hours: 'hour',
+                minutes: 'minute',
+                seconds: 'second',
+                pluralLetter: 's'
+            },
+            plural: true,
+            inline: false,
+            enableUtc: false,
+            refresh: 1000,
+            zeroPad: false,
+            countUp: false
+        };
+
+        var params = jQuery.extend(true, {}, defaults, options);
+
+        // Clear old interval (important for AJAX refresh)
+        if (container.data('dslca_interval')) {
+            clearInterval(container.data('dslca_interval'));
+        }
+
+        var targetDate = params.enableUtc
+            ? new Date(Date.UTC(params.year, params.month - 1, params.day, params.hours, params.minutes, params.seconds))
+            : new Date(params.year, params.month - 1, params.day, params.hours, params.minutes, params.seconds);
+
+        /*
+         * BUILD MARKUP
+         */
+        if (!params.inline) {
+
+            container.empty();
+
+            var units = ['days','hours','minutes','seconds'];
+
+            jQuery.each(units, function(i, unit){
+
+                var html =
+                    '<div class="dslc_countdown-section dslc_countdown-' + unit + '">' +
+                        '<div class="dslc_countdown-inner">' +
+                            '<span class="dslc_countdown-amount">0</span>' +
+                            '<span class="dslc_countdown-word"></span>' +
+                        '</div>' +
+                    '</div>';
+
+                container.append(html);
+            });
+        }
+
+        /*
+         * UPDATE FUNCTION
+         */
+        function update() {
+
+            var now = new Date().getTime();
+            var diff = Math.floor((targetDate.getTime() - now) / 1000);
+
+            if (diff <= 0 && !params.countUp) {
+                diff = 0;
+                clearInterval(container.data('dslca_interval'));
+            } else if (params.countUp && diff < 0) {
+                diff = Math.abs(diff);
+            }
+
+            var days = Math.floor(diff / 86400);
+            var hours = Math.floor((diff % 86400) / 3600);
+            var minutes = Math.floor((diff % 3600) / 60);
+            var seconds = Math.floor(diff % 60);
+
+            var parts = {
+                days: days,
+                hours: hours,
+                minutes: minutes,
+                seconds: seconds
+            };
+
+            if (params.inline) {
+
+                var text = '';
+
+                jQuery.each(parts, function(unit, val){
+
+                    var word = (params.plural && val !== 1)
+                        ? params.words[unit] + params.words.pluralLetter
+                        : params.words[unit];
+
+                    var amount = params.zeroPad
+                        ? (val < 10 ? '0' + val : val)
+                        : val;
+
+                    text += amount + ' ' + word + ', ';
+                });
+
+                container.text(text.replace(/,\s$/, ''));
+
+            } else {
+
+                jQuery.each(parts, function(unit, val){
+
+                    var word = (params.plural && val !== 1)
+                        ? params.words[unit] + params.words.pluralLetter
+                        : params.words[unit];
+
+                    var amount = params.zeroPad
+                        ? (val < 10 ? '0' + val : val)
+                        : val;
+
+                    container
+                        .find('.dslc_countdown-' + unit + ' .dslc_countdown-amount')
+                        .text(amount);
+
+                    container
+                        .find('.dslc_countdown-' + unit + ' .dslc_countdown-word')
+                        .text(word);
+                });
+            }
+        }
+
+        update();
+
+        var intervalId = setInterval(update, params.refresh);
+        container.data('dslca_interval', intervalId);
+
+    } catch (error) {
+
+        console.error('DSLC Countdown Error:', error);
+
+    }
+}
 jQuery(document).ready(function($){
 
 	// Fix issue - https://github.com/live-composer/live-composer-page-builder/issues/592
@@ -1349,6 +1523,7 @@ jQuery(document).ready(function($){
 	dslc_parallax();
 	dslc_init_lightbox();
 	window.dslc_sticky_row();
+	dslc_init_countdown();
 
 	// No need to wait for jQuery(window).load.
 	// These functions will check if images loaded by itself.

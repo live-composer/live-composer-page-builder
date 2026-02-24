@@ -121,6 +121,7 @@ export const dragAndDropInit = () => {
 					LiveComposer.Builder.PreviewAreaWindow.dslc_carousel();
 					LiveComposer.Builder.PreviewAreaWindow.dslc_tabs();
 					LiveComposer.Builder.PreviewAreaWindow.dslc_init_accordion();
+					LiveComposer.Builder.PreviewAreaWindow.dslc_init_countdown();
 
 					window.dslc_generate_code();
 					// Show publish

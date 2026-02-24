@@ -174,6 +174,7 @@ window.LiveComposer = {
 			LiveComposer.Builder.PreviewAreaWindow.dslc_carousel();
 			LiveComposer.Builder.PreviewAreaWindow.dslc_tabs();
 			LiveComposer.Builder.PreviewAreaWindow.dslc_init_accordion(); 
+            LiveComposer.Builder.PreviewAreaWindow.dslc_init_countdown();
 
 			// 3. Re-enable the code generation flag
 			LiveComposer.Builder.Flags.generate_code_after_row_changed = true;

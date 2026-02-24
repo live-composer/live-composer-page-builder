@@ -211,6 +211,7 @@ document.addEventListener('pasteModuleStyles', function (customEvent) {
 								
 								LiveComposer.Builder.PreviewAreaWindow.dslc_tabs();
 								LiveComposer.Builder.PreviewAreaWindow.dslc_init_accordion();
+								LiveComposer.Builder.PreviewAreaWindow.dslc_init_countdown();
 								
 								jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-module-being-edited');
 								LiveComposer.Builder.History.unlock();
@@ -848,6 +849,8 @@ export const moduleOutputAltered = ( callback ) => {
 
 			LiveComposer.Builder.PreviewAreaWindow.dslc_tabs();
 			LiveComposer.Builder.PreviewAreaWindow.dslc_init_accordion();
+			LiveComposer.Builder.PreviewAreaWindow.dslc_init_countdown();
+			
 
 
 			/**
@@ -931,6 +934,7 @@ window.dslc_module_output_reload = function ( dslcModule, callback ) {
 
 			LiveComposer.Builder.PreviewAreaWindow.dslc_tabs();
 			LiveComposer.Builder.PreviewAreaWindow.dslc_init_accordion();
+			LiveComposer.Builder.PreviewAreaWindow.dslc_init_countdown();
 
 			if ( callback ) {
 

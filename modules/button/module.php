@@ -384,25 +384,25 @@ class DSLC_Button extends DSLC_Module {
 				'section' => 'styling',
 			),
 				array(
-				'id' => 'css_margin_unit',
-				'std' => '',
-				'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
-				'type' => 'select',
-				'refresh_on_change' => false,
-				'choices' => array(
-					array(
-						'label' => 'px',
-						'value' => 'px',
+					'id' => 'css_margin_unit',
+					'std' => '',
+					'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
 					),
-					array(
-						'label' => '%',
-						'value' => '%',
-					),
+					'section' => 'styling',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
 				),
-				'section' => 'styling',
-				'affect_on_change_el' => '',
-				'affect_on_change_rule' => '',
-			),
 				array(
 					'label' => __( 'Top', 'live-composer-page-builder' ),
 					'id' => 'css_margin_top',
@@ -800,7 +800,7 @@ class DSLC_Button extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'Icon', 'live-composer-page-builder' ),
 				'dependent_controls' => array(
-					'enabled' => 'icon_pos, button_icon_id, css_icon_color, css_icon_color_hover, css_icon_margin, css_icon_margin_group, css_icon_margin_unit, css_icon_margin_top, css_icon_margin_bottom, css_icon_margin_left, css_icon_margin_right, show_icon, button_inline_svg, css_button_icon_size_svg',
+					'enabled' => 'icon_pos, button_icon_id, css_icon_color, css_icon_color_hover, css_icon_margin_group, css_icon_margin_unit, css_icon_margin_top, css_icon_margin_bottom, css_icon_margin_left, css_icon_margin_right, show_icon, button_inline_svg, css_button_icon_size_svg',
 				),
 			),
 			array(
