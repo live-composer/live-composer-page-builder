@@ -4,7 +4,7 @@
  * Plugin URI: https://www.livecomposerplugin.com
  * Description: Page builder for WordPress with drag and drop header/footer editing.
  * Author: Live Composer Team
- * Version: 2.1.5
+ * Version: 2.1.6
  * Author URI: https://livecomposerplugin.com
  * License: GPL3
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -41,7 +41,7 @@ if ( ! defined( 'DS_LIVE_COMPOSER_VER' ) && version_compare( PHP_VERSION, '5.3.0
 	 * Constants
 	 */
 
-	define( 'DS_LIVE_COMPOSER_VER', '2.1.5' );
+	define( 'DS_LIVE_COMPOSER_VER', '2.1.6' );
 
 	define( 'DS_LIVE_COMPOSER_SHORTNAME', __( 'Live Composer', 'live-composer-page-builder' ) );
 	define( 'DS_LIVE_COMPOSER_BASENAME', plugin_basename( __FILE__ ) );
