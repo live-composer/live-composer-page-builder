@@ -4698,7 +4698,197 @@ a.dslca-modules-area-edit-options-tab-hook[data-id="mobile_menu_styling"]:before
   position: relative;
   z-index: 1;
 }
+/* Date picker CSS */
+/* 1. Main Container - Modern & White */
 #ui-datepicker-div {
-    z-index: 99999 !important;
-    background-color: #ffffff;
+    z-index: 999999 !important;
+    background: #ffffff !important;
+    border: none !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+    padding: 15px !important;
+    width: 250px !important;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+}
+
+/* Header (Month/Year & Navigation) */
+.ui-datepicker-header {
+    background: transparent !important;
+    border: none !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 10px 5px !important;
+    position: relative !important;
+}
+
+.ui-datepicker-title {
+    order: 2 !important;
+    margin: 0 !important;
+    flex-grow: 1 !important;
+    text-align: center !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    color: #333 !important;
+}
+
+.ui-datepicker-prev, 
+.ui-datepicker-next {
+    position: static !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: fit-content !important;
+    padding: 0 5px;
+    height: 30px !important;
+    cursor: pointer !important;
+    background: #f8f9fa !important;
+    border-radius: 6px !important;
+    transition: background 0.2s ease;
+}
+
+.ui-datepicker-prev {
+    order: 1 !important;
+}
+
+.ui-datepicker-next {
+    order: 3 !important;
+}
+
+.ui-datepicker-prev:hover, 
+.ui-datepicker-next:hover {
+    background: #eeeeff !important;
+}
+
+/* Icon Styling */
+.ui-datepicker-prev span, 
+.ui-datepicker-next span {
+    text-indent: 0 !important;
+    display: inline-block !important;
+    color: #006add !important;
+    font-size: 14px !important;
+    font-weight: bold;
+}
+
+/* Calendar Grid */
+.ui-datepicker-calendar {
+    width: 100% !important;
+    border-collapse: separate !important;
+    border-spacing: 4px !important;
+}
+
+.ui-datepicker-calendar th {
+    font-size: 11px !important;
+    color: #999 !important;
+    text-transform: uppercase;
+    font-weight: 600 !important;
+}
+
+.ui-datepicker-calendar .ui-state-default {
+    display: block !important;
+    text-align: center !important;
+    padding: 6px 0 !important;
+    background: #f8f9fa !important;
+    color: #444 !important;
+    border: none !important;
+    border-radius: 6px !important;
+    text-decoration: none !important;
+    transition: all 0.2s ease;
+}
+
+.ui-datepicker-calendar .ui-state-hover {
+    background: #eeeeff !important;
+    color: #006add !important;
+}
+
+/* The Selected Day */
+.ui-datepicker-calendar .ui-state-active {
+    background: #006add !important;
+    color: #fff !important;
+    box-shadow: 0 4px 10px rgba(93, 95, 239, 0.3) !important;
+}
+
+/* 4. Time Section*/
+.ui-timepicker-div dl {
+    display: flex !important;
+    margin: 5px 0 0 0 !important;
+    padding: 10px !important;
+    border-top: 1px solid #f0f0f0 !important;
+    justify-content: end;
+    align-items: baseline;
+}
+
+.ui-timepicker-div dt.ui_tpicker_time_label {
+    color: #006add !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    padding-right: 10px !important;
+}
+
+/* Target the scrollbar of the select dropdown */
+.ui-timepicker-select::-webkit-scrollbar {
+    width: 8px !important;
+}
+
+.ui-timepicker-select::-webkit-scrollbar-track {
+    background: #f1f1f1 !important;
+    border-radius: 10px !important;
+}
+
+.ui-timepicker-select::-webkit-scrollbar-thumb {
+    background: #006add !important;
+    border-radius: 10px !important;
+    border: 2px solid #f1f1f1 !important;
+}
+
+.ui-timepicker-select::-webkit-scrollbar-thumb:hover {
+    background: #006add !important;
+}
+.ui-timepicker-select {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    
+    background-color: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    padding: 5px 30px 5px 12px !important;
+    font-size: 13px !important;
+    color: #334155 !important;
+    cursor: pointer !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%235d5fef'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 10px center !important;
+    background-size: 12px !important;
+}
+
+.ui-timepicker-select:focus {
+    outline: none !important;
+    border-color: #006add !important;
+    box-shadow: 0 0 0 3px rgba(93, 95, 239, 0.1) !important;
+}
+
+/* 5. Footer Buttons - Clean White */
+.ui-datepicker-buttonpane {
+    border-top: 1px solid #f0f0f0 !important;
+    padding-top: 10px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+}
+
+.ui-datepicker-buttonpane button {
+    background: #ffffff !important;
+    color: #006add !important;
+    border: 1px solid #006add !important;
+    padding: 6px 15px !important;
+    border-radius: 6px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+}
+
+.ui-datepicker-buttonpane button:hover {
+    background: #006add !important;
+    color: #fff !important;
 }
