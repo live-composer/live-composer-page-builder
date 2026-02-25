@@ -935,8 +935,8 @@ window.dslc_init_countdown = function(context) {
             year:    parseInt(container.data('year')),
             month:   parseInt(container.data('month')),
             day:     parseInt(container.data('day')),
-            hour:    parseInt(container.data('hour')),
-            minute:  parseInt(container.data('minute')),
+            hours:    parseInt(container.data('hour')),
+            minutes:  parseInt(container.data('minute')),
             zeroPad: container.data('zeropad') == '1'
         };
 
