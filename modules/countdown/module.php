@@ -1,4 +1,3 @@
-
 <?php
 
 // Prevent direct access to the file.
