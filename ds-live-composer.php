@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Plugin Name: Page Builder: Live Composer
  * Plugin URI: https://www.livecomposerplugin.com
