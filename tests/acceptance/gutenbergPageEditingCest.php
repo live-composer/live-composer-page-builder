@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Codeception test suite.
  */
