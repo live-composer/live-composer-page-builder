@@ -14,12 +14,10 @@ class DSLC_Countdown extends DSLC_Module {
 	public $module_category;
 
 	function __construct() {
-
 		$this->module_id = 'DSLC_Countdown';
 		$this->module_title = __( 'Countdown', 'live-composer-page-builder' );
 		$this->module_icon = 'hourglass-half';
 		$this->module_category = 'General';
-
 	}
 
 	/**
@@ -82,8 +80,14 @@ class DSLC_Countdown extends DSLC_Module {
 				'std'   => 'yes',
 				'type'  => 'select',
 				'choices' => array(
-					array( 'label' => __( 'Yes (e.g. 05)', 'lcx-plugin' ), 'value' => 'yes' ),
-					array( 'label' => __( 'No (e.g. 5)', 'lcx-plugin' ), 'value' => 'no' ),
+					array(
+						'label' => __( 'Yes (e.g. 05)', 'lcx-plugin' ),
+						'value' => 'yes',
+					),
+					array(
+						'label' => __( 'No (e.g. 5)', 'lcx-plugin' ),
+						'value' => 'no',
+					),
 				),
 				'help'  => __( 'Forces the numbers to always show two digits.', 'lcx-plugin' ),
 			),
@@ -1728,18 +1732,16 @@ class DSLC_Countdown extends DSLC_Module {
 				'action' => 'close',
 				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-			)
-
+			),
 		);
 
 		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'animation_options' ) );
 		$dslc_options = array_merge( $dslc_options, $this->presets_options() );
 
 		// Cache calculated array in WP Object Cache.
-		wp_cache_add( 'dslc_options_' . $this->module_id, $dslc_options ,'dslc_modules' );
+		wp_cache_add( 'dslc_options_' . $this->module_id, $dslc_options, 'dslc_modules' );
 
 		return apply_filters( 'dslc_module_options', $dslc_options, $this->module_id );
-
 	}
 
 	/**
@@ -1749,20 +1751,19 @@ class DSLC_Countdown extends DSLC_Module {
 	 * @return void
 	 */
 	function output( $options ) {
-		$wrapper_classes = !empty($options['custom_class']) ? $options['custom_class'] : '';
-		$datetime_value = !empty($options['datetime']) ? $options['datetime'] : '2027-01-01 00:00';
-		
-		$date_parts = date_parse($datetime_value);
-		
+		$wrapper_classes = ! empty( $options['custom_class'] ) ? $options['custom_class'] : '';
+		$datetime_value = ! empty( $options['datetime'] ) ? $options['datetime'] : '2027-01-01 00:00';
+
+		$date_parts = date_parse( $datetime_value );
 		// Normalize ZeroPad to '1' or '0' string for the data-attribute
-		$zero_pad_val = (isset($options['zero_pad']) && $options['zero_pad'] === 'no') ? '0' : '1';
+		$zero_pad_val = ( isset( $options['zero_pad'] ) && $options['zero_pad'] === 'no' ) ? '0' : '1';
 
 		// Fallbacks to ensure no empty attributes
 		$year   = $date_parts['year'] ?: '2027';
-		$month  = str_pad($date_parts['month'] ?: '1', 2, '0', STR_PAD_LEFT);
-		$day    = str_pad($date_parts['day'] ?: '1', 2, '0', STR_PAD_LEFT);
-		$hour   = str_pad($date_parts['hour'] ?: '0', 2, '0', STR_PAD_LEFT);
-		$minute = str_pad($date_parts['minute'] ?: '0', 2, '0', STR_PAD_LEFT);
+		$month  = str_pad( $date_parts['month'] ?: '1', 2, '0', STR_PAD_LEFT );
+		$day    = str_pad( $date_parts['day'] ?: '1', 2, '0', STR_PAD_LEFT );
+		$hour   = str_pad( $date_parts['hour'] ?: '0', 2, '0', STR_PAD_LEFT );
+		$minute = str_pad( $date_parts['minute'] ?: '0', 2, '0', STR_PAD_LEFT );
 
 		ob_start();
 		?>
