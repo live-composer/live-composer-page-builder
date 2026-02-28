@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Archive page template for Live Composer.
  *

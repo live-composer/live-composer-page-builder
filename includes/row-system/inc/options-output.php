@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ROW settings/controls functions.
  *

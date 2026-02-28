@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Initialization functions for the settings panel
  *

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Create editing page in WP Admin with live preview area.
  *

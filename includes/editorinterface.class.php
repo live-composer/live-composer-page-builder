@@ -1,4 +1,5 @@
 <?php
+
 /**
  * LC editor interface class
  */

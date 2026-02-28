@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Not Found custom page template for Live Composer.
  *

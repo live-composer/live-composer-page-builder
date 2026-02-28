@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Table of Contents
  *
@@ -6,6 +7,7 @@
  * dslc_archive_template_init ( Register options )
  * dslc_archive_template_404_fix ( Fixes 404 on pagination caused when regular WP query has no more post )
  */
+
 // Prevent direct access to the file.
 if ( ! defined( 'ABSPATH' ) ) {
 	header( 'HTTP/1.0 403 Forbidden' );

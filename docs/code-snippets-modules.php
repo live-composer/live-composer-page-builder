@@ -1,6 +1,5 @@
 <?php
 
-
 // Margins goroup for desktop
 
 array(

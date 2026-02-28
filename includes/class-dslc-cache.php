@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Simple HTML and CSS caching class. Designed to reduce load on the server
  * in cases when advanced caching plugins not installed.

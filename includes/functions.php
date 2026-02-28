@@ -1,4 +1,5 @@
 <?php
+
 /**
  *	All the core functions
  *

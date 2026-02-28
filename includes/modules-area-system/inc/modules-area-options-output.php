@@ -1,4 +1,5 @@
 <?php
+
 /**
  * MODULES AREA settings/controls functions.
  *

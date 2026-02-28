@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Extending admin interface with custom options
  */

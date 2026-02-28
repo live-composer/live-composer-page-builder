@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CSS generation functions.
  *

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Functions to output controls on the settings panel
  *

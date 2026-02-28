@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Single page template for Live Composer.
  *

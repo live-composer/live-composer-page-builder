@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 404 custom page template for Live Composer.
  *

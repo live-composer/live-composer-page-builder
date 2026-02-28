@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="wrap lc-wrap">
 
 <?php
+
 		/**
 		 * We need help form translators to make Live Composer
 		 * accesible on major World languages
