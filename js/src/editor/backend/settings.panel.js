@@ -1197,7 +1197,7 @@ const onSectionOptionsChange = () => {
 			dslcRule = dslcRule.replace(/ /g,'').split( ',' );
 			var dslcValToApply;
 
-			if ( null != dslcField.data('ext') ) {
+			if ( null != dslcField.data('ext') && dslcVal !== '' ) {
 				dslcValToApply = dslcValExt;
 			} else {
 				dslcValToApply = dslcVal;
@@ -1205,9 +1205,10 @@ const onSectionOptionsChange = () => {
 
 			// Loop through rules (useful when there are multiple rules)
 			for ( var i = 0; i < dslcRule.length; i++ ) {
-				// dslcTargetEl.css(dslcRule[i], dslcValToApply);
-				if (dslcRule[i].trim() !== "" && dslcValToApply !== undefined && dslcValToApply !== null && dslcValToApply !== "") {
-      				dslcTargetEl.css(dslcRule[i], dslcValToApply);
+				var currentRule = dslcRule[i].trim();
+				
+				if ( currentRule !== "" && dslcValToApply !== undefined && dslcValToApply !== null ) {
+					dslcTargetEl.css( currentRule, dslcValToApply );
                 }
 			}
 		}
