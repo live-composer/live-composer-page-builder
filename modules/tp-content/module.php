@@ -8445,8 +8445,31 @@ class DSLC_TP_Content extends DSLC_Module {
 			$post_id = (int) $post->ID;
 		}
 
-			$content_post = get_post_meta( $post_id, 'dslc_original_post_content', true);
-			$content = $content_post ? $content_post : '';
+		if ( get_post_type( $post_id ) === 'page' ) {
+			
+			// 1. Fetch from the Post Content meta key
+			$legacy_data = get_post_meta( $post_id, 'dslc_original_post_content', true );
+			
+			if ( empty( $legacy_data ) ) {
+				$content_post = get_post( $post_id );
+				$raw_db_content = $content_post->post_content;
+				
+				// 2. Fallback logic with loop prevention
+				// Only use DB content if it does NOT contain the builder signature
+				if ( ! empty( $raw_db_content ) && strpos( $raw_db_content, 'dslc-modules-section' ) === false ) {
+					$content = $raw_db_content;
+				} else {
+					$content = ''; // Stop the loop
+				}
+			} else {
+				$content = $legacy_data;
+			}
+
+		} else {
+			// For Posts/CPTs: Use the standard database column
+			$content_post = get_post( $post_id );
+			$content = $content_post->post_content;
+		}
 
 		if ( get_post_type( $post_id ) == 'dslc_templates' || get_post_type( $post_id ) == 'dslc_template_parts') {
 			$content = '<h1>This Is An Example Of A Heading 1</h1>
@@ -8475,14 +8498,13 @@ class DSLC_TP_Content extends DSLC_Module {
 			<?php
 			do_action( 'dslc_content_module_before_content', $post_id, $options );
 
-			if (
-				get_post_type( $post_id ) !== 'dslc_templates'
-				&& get_post_type( $post_id ) !== 'dslc_template_parts'
-				&& get_post_type( $post_id ) !== 'page'
-			) {
-				setup_postdata( get_post( $post_id ) );
-				the_content();
-				wp_reset_postdata();
+			if ( is_singular() && get_post_type( $post_id ) != 'dslc_templates' ) {
+				// Apply filters manually to the captured $content for Pages
+				if ( get_post_type( $post_id ) === 'page' ) {
+					echo apply_filters( 'the_content', $content );
+				} else {
+					the_content();
+				}
 			} else {
 				echo $content;
 			}
