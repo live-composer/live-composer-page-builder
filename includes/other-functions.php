@@ -767,6 +767,17 @@ add_action( 'add_meta_boxes', 'dslc_toggle_page_editors', 9 );
  */
 function dslc_post_content_metabox_html( $post ) {
     $content = get_post_meta( $post->ID, 'dslc_original_post_content', true );
+	if ( empty( $content ) ) {
+		$db_content = $post->post_content;
+
+		/**
+		 * Check: Only populate the editor if the post content is NOT builder-rendered HTML.
+		 */
+		if ( ! empty( $db_content ) && strpos( $db_content, 'dslc-modules-section' ) === false ) {
+			$content = $db_content;
+		}
+	}
+
     wp_nonce_field( 'dslc_post_content_nonce', 'dslc_post_content_nonce_field' );
 
     wp_editor( $content, 'dslc_original_post_content_editor', array(
