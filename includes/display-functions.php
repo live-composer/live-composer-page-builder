@@ -654,12 +654,21 @@ function dslc_display_modules($page_id)
 		 */
 		function dslc_filter_content($content)
 		{
+            // Guard added to handle plugins like WP AutoTerms that call 'the_content' 
+			// inside their own shortcode, triggering an infinite loop or static lock.
+            static $dslc_is_filtering = false;
+            if ( $dslc_is_filtering ) {
+                return $content;
+            }
+            $dslc_is_filtering = true;
+
 			// Uses 50% of the page loading time when not cached or in editing mode.
 			// Get ID of the post in which the content filter fired.
 			$curr_id = get_the_ID();
 
 			// If post pass protected and pass not supplied return original content.
 			if (post_password_required($curr_id)) {
+                $dslc_is_filtering = false;
 				return $content;
 			}
 
@@ -683,7 +692,9 @@ function dslc_display_modules($page_id)
 				// Check if any dynamic content included before caching.
 				$cached_page_html = $cache->get_cache($cache_id);
 				// We need double do_shortcode as our module shortcodes can contain encoded 3-rd party shortcodes.
-				return do_shortcode(do_shortcode($cached_page_html));
+                $final_output = do_shortcode(do_shortcode($cached_page_html));
+                $dslc_is_filtering = false;
+                return $final_output;
 			}
 
 			// Global variables.
@@ -856,7 +867,9 @@ function dslc_display_modules($page_id)
 
 						// Pass the LC header, regular content and LC footer
 						// We need double do_shortcode as our module shortcodes can contain encoded 3-rd party shortcodes.
-						return do_shortcode(do_shortcode($rendered_header_footer));
+                        $final_output = do_shortcode(do_shortcode($rendered_header_footer));
+                        $dslc_is_filtering = false;
+                        return $final_output;
 					}
 				} else {
 
@@ -865,6 +878,7 @@ function dslc_display_modules($page_id)
 
 						// Nothing to render.
 						// Pass back the original wrapped in a div ( in case there's a need to style it )
+                        $dslc_is_filtering = false;
 						return '<div id="dslc-theme-content"><div id="dslc-theme-content-inner">' . $content . '</div></div>';
 					}
 				}
@@ -880,7 +894,7 @@ function dslc_display_modules($page_id)
 				}
 
 				// Before Content.
-				$content_before = '';
+				$content_before = ''; 
 				$dslc_content_before = apply_filters('dslc_content_before', $content_before);
 
 				// After Content.
@@ -889,25 +903,18 @@ function dslc_display_modules($page_id)
 				$rendered_page = $dslc_content_before . $composer_wrapper_before .  do_action('dslc_output_prepend') . $composer_header . '<div id="dslc-main">' . $composer_prepend . $composer_content . '</div>' . $composer_append . $composer_footer . do_action('dslc_output_append') . $composer_wrapper_after . $dslc_content_after;
 
 				if (! dslc_is_editor_active() && ! is_singular('dslc_hf')) {
-					global $wpdb;
-
-			$wpdb->query(
-				$wpdb->prepare(
-					"UPDATE {$wpdb->prefix}posts SET post_content = %s WHERE ID = %d AND post_type = 'page'",
-					$rendered_page,
-					$cache_id
-				)
-			);
-
-			$cache->set_cache( $rendered_page, $cache_id );
+					$cache->set_cache( $rendered_page, $cache_id );
 			
 				}
 
 				// We need double do_shortcode as our module shortcodes can contain encoded 3-rd party shortcodes.
-				return do_shortcode(do_shortcode($rendered_page));
+                $final_output = do_shortcode(do_shortcode($rendered_page));
+                $dslc_is_filtering = false;
+                return $final_output;
 			} else {
 				// If LC should not filter the content (full content posts output in the blog/posts modules ).
 				// Pass back the original wrapped in a div ( in case there's a need to style it )
+                $dslc_is_filtering = false;
 				return '<div id="dslc-theme-content"><div id="dslc-theme-content-inner">' . $content . '</div></div>';
 			} // End if().
 

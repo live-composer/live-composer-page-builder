@@ -732,3 +732,73 @@ function disable_smart_quotes_for_json_fix() {
     add_filter('run_wptexturize', '__return_false');
 }
 add_action('init', 'disable_smart_quotes_for_json_fix');
+
+/**
+ * Conditionally hide the default editor and show the Post Content Meta Box
+ * only for pages using Live Composer.
+ */
+function dslc_toggle_page_editors() {
+    $post_id = isset( $_GET['post'] ) ? $_GET['post'] : ( isset( $_POST['post_ID'] ) ? $_POST['post_ID'] : false );
+    
+    if ( $post_id && get_post_type( $post_id ) === 'page' ) {
+		// Check if Live Composer has been used on this page
+        $dslc_code = get_post_meta( $post_id, 'dslc_code', true );
+        
+        if ( ! empty( $dslc_code ) ) {
+			// 1. Hide the main WordPress editor (the Rank Math mirror)
+            remove_post_type_support( 'page', 'editor' );
+
+            // 2. Register the Post Content Meta Box
+            add_meta_box(
+                'dslc_post_content_box',
+                __( 'Post Content (Visible in tp-content module)', 'live-composer-page-builder' ),
+                'dslc_post_content_metabox_html',
+                'page',
+                'normal', 
+                'high'      
+            );
+        }
+    }
+}
+add_action( 'add_meta_boxes', 'dslc_toggle_page_editors', 9 );
+
+/**
+ * Output the WYSIWYG editor for dslc_original_post_content.
+ */
+function dslc_post_content_metabox_html( $post ) {
+    $content = get_post_meta( $post->ID, 'dslc_original_post_content', true );
+	if ( empty( $content ) ) {
+		$db_content = $post->post_content;
+
+		/**
+		 * Check: Only populate the editor if the post content is NOT builder-rendered HTML.
+		 */
+		if ( ! empty( $db_content ) && strpos( $db_content, 'dslc-modules-section' ) === false ) {
+			$content = $db_content;
+		}
+	}
+
+    wp_nonce_field( 'dslc_post_content_nonce', 'dslc_post_content_nonce_field' );
+
+    wp_editor( $content, 'dslc_original_post_content_editor', array(
+        'textarea_name' => 'dslc_original_post_content',
+        'media_buttons' => true,
+        'tinymce'       => true,
+        'quicktags'     => true
+    ) );
+}
+
+/**
+ * Save the Post Content Meta Box data.
+ */
+function dslc_save_post_content_metabox( $post_id ) {
+    if ( ! isset( $_POST['dslc_post_content_nonce_field'] ) || ! wp_verify_nonce( $_POST['dslc_post_content_nonce_field'], 'dslc_post_content_nonce' ) ) {
+        return;
+    }
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+
+    if ( isset( $_POST['dslc_original_post_content'] ) ) {
+        update_post_meta( $post_id, 'dslc_original_post_content', $_POST['dslc_original_post_content'] );
+    }
+}
+add_action( 'save_post', 'dslc_save_post_content_metabox' );

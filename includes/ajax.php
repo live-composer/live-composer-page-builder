@@ -379,6 +379,22 @@ function dslc_ajax_save_composer( $atts ) {
 		// $serialized_composer_code = json_decode( stripslashes( $composer_code ), true );
 		$serialized_composer_code = trim( stripslashes( $composer_code ) );
 
+		// 1. DATA PRESERVATION & MIGRATION (Pages Only)
+		if ( get_post_type( $post_id ) === 'page' ) {
+			$legacy_meta = get_post_meta( $post_id, 'dslc_original_post_content', true );
+			
+			// If meta is empty, check if we need to migrate current post_content before it is mirrored
+			if ( empty( $legacy_meta ) ) {
+				$current_post = get_post( $post_id );
+				$raw_content = $current_post->post_content;
+
+				// Migration check: Only move to meta if it's NOT already builder HTML
+				if ( ! empty( $raw_content ) && strpos( $raw_content, 'dslc-modules-section' ) === false ) {
+					update_post_meta( $post_id, 'dslc_original_post_content', $raw_content );
+				}
+			}
+		}
+
 		/**
 		 * Function: wp_slash
 		 * By default WordPress deeply strips all the slashes when saves metadata.
@@ -390,6 +406,25 @@ function dslc_ajax_save_composer( $atts ) {
 			$response['status'] = 'success';
 		} else {
 			$response['status'] = 'failed';
+		}
+
+		// 2. RANK MATH SEO SYNC (Pages Only)
+		if ( get_post_type( $post_id ) === 'page' ) {
+			global $dslc_active;
+			$old_state = $dslc_active;
+			$dslc_active = false; // Headless render to get clean HTML
+
+			$seo_content = dslc_render_content( stripslashes( $composer_code ) );
+			
+			$dslc_active = $old_state;
+
+			// Mirror output to database column for Rank Math analysis
+			global $wpdb;
+			$wpdb->update( 
+				$wpdb->posts, 
+				array( 'post_content' => $seo_content ), 
+				array( 'ID' => $post_id ) 
+			);
 		}
 
 		// Encode response.
