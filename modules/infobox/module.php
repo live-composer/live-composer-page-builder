@@ -950,10 +950,15 @@ class DSLC_Info_Box extends DSLC_Module {
 						'label' => __( 'SVG', 'live-composer-page-builder' ),
 						'value' => 'svg',
 					),
+					array(
+						'label' => __( 'Image', 'live-composer-page-builder' ),
+						'value' => 'image',
+					),
 				),
 				'dependent_controls' => array(
 					'font' => 'icon_id',
 					'svg' => 'inline_svg',
+					'image' => 'icon_image, css_icon_image_width'
 				),
 				'help' => __( 'Select type of icon.', 'live-composer-page-builder' ),
 				'section' => 'styling',
@@ -976,6 +981,28 @@ class DSLC_Info_Box extends DSLC_Module {
 				'section' => 'styling',
 				'help' => __( 'Paste your SVG code.', 'live-composer-page-builder' ),
 				'tab' => __( 'Icon', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Icon Image', 'live-composer-page-builder' ),
+				'id' => 'icon_image',
+				'std' => '',
+				'type' => 'image',
+				'section' => 'styling',
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Icon Image Width', 'live-composer-page-builder' ),
+				'id' => 'css_icon_image_width',
+				'std' => '20',
+				'min' => 0,
+				'max' => 500,
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-image-inner img.dslc-icon-image',
+				'affect_on_change_rule' => 'width',
+				'section' => 'styling',
+				'tab' => __( 'Icon', 'live-composer-page-builder' ),
+				'ext' => 'px',
 			),
 			array(
 				'label' => __( 'Color', 'live-composer-page-builder' ),
@@ -3378,10 +3405,15 @@ class DSLC_Info_Box extends DSLC_Module {
 						'label' => __( 'SVG', 'live-composer-page-builder' ),
 						'value' => 'svg',
 					),
+					array(
+						'label' => __( 'Image', 'live-composer-page-builder' ),
+						'value' => 'image',
+					),
 				),
 				'dependent_controls' => array(
 					'font' => 'button_icon_id',
 					'svg' => 'button_inline_svg, css_button_icon_size_svg',
+					'image' => 'button_icon_image, css_button_icon_image_width'
 				),
 				'help' => __( 'Select type of icon.', 'live-composer-page-builder' ),
 				'section' => 'styling',
@@ -3414,6 +3446,28 @@ class DSLC_Info_Box extends DSLC_Module {
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-info-box-button a.dslc-primary svg',
 				'affect_on_change_rule' => 'width, height',
+				'section' => 'styling',
+				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Icon Image', 'live-composer-page-builder' ),
+				'id' => 'button_icon_image',
+				'std' => '',
+				'type' => 'image',
+				'section' => 'styling',
+				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Icon Image Width', 'live-composer-page-builder' ),
+				'id' => 'css_button_icon_image_width',
+				'std' => '20',
+				'min' => 0,
+				'max' => 500,
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-primary img.dslc-button-icon-image',
+				'affect_on_change_rule' => 'width',
 				'section' => 'styling',
 				'tab' => __( 'Primary Button', 'live-composer-page-builder' ),
 				'ext' => 'px',
@@ -3478,7 +3532,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'std' => '5',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-info-box-button a.dslc-primary .dslc-icon, .dslc-info-box-button a.dslc-primary svg',
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-primary .dslc-icon, .dslc-info-box-button a.dslc-primary svg, .dslc-info-box-button a.dslc-primary img',
 				'affect_on_change_rule' => 'margin-top',
 				'section' => 'styling',
 				'ext' => 'px',
@@ -3493,7 +3547,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'std' => '5',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-info-box-button a.dslc-primary .dslc-icon, .dslc-info-box-button a.dslc-primary svg',
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-primary .dslc-icon, .dslc-info-box-button a.dslc-primary svg, .dslc-info-box-button a.dslc-primary img',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'styling',
 				'ext' => 'px',
@@ -3508,7 +3562,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'max' => 2000,
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-info-box-button a.dslc-primary .dslc-icon, .dslc-info-box-button a.dslc-primary svg',
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-primary .dslc-icon, .dslc-info-box-button a.dslc-primary svg, .dslc-info-box-button a.dslc-primary img',
 				'affect_on_change_rule' => 'margin-left',
 				'section' => 'styling',
 				'ext' => 'px',
@@ -3523,7 +3577,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'max' => 2000,
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-info-box-button a.dslc-primary .dslc-icon, .dslc-info-box-button a.dslc-primary svg',
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-primary .dslc-icon, .dslc-info-box-button a.dslc-primary svg, .dslc-info-box-button a.dslc-primary img',
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'styling',
 				'ext' => 'px',
@@ -4140,10 +4194,15 @@ class DSLC_Info_Box extends DSLC_Module {
 						'label' => __( 'SVG', 'live-composer-page-builder' ),
 						'value' => 'svg',
 					),
+					array(
+						'label' => __( 'Image', 'live-composer-page-builder' ),
+						'value' => 'image',
+					),
 				),
 				'dependent_controls' => array(
 					'font' => 'button_2_icon_id',
 					'svg' => 'button_2_inline_svg, css_button_2_icon_size_svg',
+					'image' => 'button_2_icon_image, css_button_2_icon_image_width'
 				),
 				'help' => __( 'Select type of icon.', 'live-composer-page-builder' ),
 				'section' => 'styling',
@@ -4176,6 +4235,28 @@ class DSLC_Info_Box extends DSLC_Module {
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary svg',
 				'affect_on_change_rule' => 'width, height',
+				'section' => 'styling',
+				'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Icon Image', 'live-composer-page-builder' ),
+				'id' => 'button_2_icon_image',
+				'std' => '',
+				'type' => 'image',
+				'section' => 'styling',
+				'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Icon Image Width', 'live-composer-page-builder' ),
+				'id' => 'css_button_2_icon_image_width',
+				'std' => '20',
+				'min' => 0,
+				'max' => 500,
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary img.dslc-button-2-icon-image',
+				'affect_on_change_rule' => 'width',
 				'section' => 'styling',
 				'tab' => __( 'Secondary Button', 'live-composer-page-builder' ),
 				'ext' => 'px',
@@ -4240,7 +4321,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'std' => '5',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary .dslc-icon, .dslc-info-box-button a.dslc-secondary svg',
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary .dslc-icon, .dslc-info-box-button a.dslc-secondary svg, .dslc-info-box-button a.dslc-secondary img',
 				'affect_on_change_rule' => 'margin-top',
 				'section' => 'styling',
 				'ext' => 'px',
@@ -4255,7 +4336,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'std' => '5',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary .dslc-icon, .dslc-info-box-button a.dslc-secondary svg',
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary .dslc-icon, .dslc-info-box-button a.dslc-secondary svg, .dslc-info-box-button a.dslc-secondary img',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'styling',
 				'ext' => 'px',
@@ -4270,7 +4351,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'max' => 2000,
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary .dslc-icon, .dslc-info-box-button a.dslc-secondary svg',
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary .dslc-icon, .dslc-info-box-button a.dslc-secondary svg, .dslc-info-box-button a.dslc-secondary img',
 				'affect_on_change_rule' => 'margin-left',
 				'section' => 'styling',
 				'ext' => 'px',
@@ -4285,7 +4366,7 @@ class DSLC_Info_Box extends DSLC_Module {
 				'max' => 2000,
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary .dslc-icon, .dslc-info-box-button a.dslc-secondary svg',
+				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary .dslc-icon, .dslc-info-box-button a.dslc-secondary svg, .dslc-info-box-button a.dslc-secondary img',
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'styling',
 				'ext' => 'px',
@@ -7523,6 +7604,8 @@ class DSLC_Info_Box extends DSLC_Module {
 								<a href="<?php echo $options['button_link']; ?>" target="<?php echo $options['button_target']; ?>" <?php if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?> class="dslc-primary <?php echo $button_classes; ?>">
 									<?php if ( 'svg' == $options['button_show_icon'] ) : ?>
 										<?php echo stripslashes( $options['button_inline_svg'] ); ?>
+									<?php elseif ( 'image' == $options['button_show_icon'] && ! empty( $options['button_icon_image'] ) ) : ?>
+										<img class="dslc-button-icon-image" src="<?php echo esc_url( $options['button_icon_image'] ); ?>" alt="" />
 									<?php else : ?>
 										<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 									<?php endif; ?>
@@ -7561,6 +7644,8 @@ class DSLC_Info_Box extends DSLC_Module {
 								<div class="dslc-info-box-image-inner">
 									<?php if ( 'svg' == $options['show_icon']) : ?>
 										<?php echo stripslashes( $options['inline_svg'] ); ?>
+									<?php elseif ( 'image' == $options['show_icon'] && ! empty( $options['icon_image'] ) ) : ?>
+										<img class="dslc-icon-image" src="<?php echo esc_url( $options['icon_image'] ); ?>" alt="" />
 									<?php else : ?>
 										<span class="dslc-icon dslc-icon-<?php echo $options['icon_id']; ?>"></span>
 									<?php endif; ?>
@@ -7624,6 +7709,8 @@ class DSLC_Info_Box extends DSLC_Module {
 										<a href="<?php echo $options['button_link']; ?>" <?php if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?> target="<?php echo $options['button_target']; ?>" class="dslc-primary <?php echo $button_classes; ?>">
 											<?php if ( 'svg' == $options['button_show_icon'] ) : ?>
 												<?php echo stripslashes( $options['button_inline_svg'] ); ?>
+											<?php elseif ( 'image' == $options['button_show_icon'] && ! empty( $options['button_icon_image'] ) ) : ?>
+												<img class="dslc-button-icon-image" src="<?php echo esc_url( $options['button_icon_image'] ); ?>" alt="" />
 											<?php else : ?>
 												<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 											<?php endif; ?>
@@ -7640,6 +7727,8 @@ class DSLC_Info_Box extends DSLC_Module {
 										<a href="<?php echo $options['button_2_link']; ?>" <?php if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?> target="<?php echo $options['button_2_target']; ?>" class="dslc-secondary <?php echo $button2_classes; ?>">
 											<?php if ( 'svg' == $options['button_2_show_icon'] ) : ?>
 												<?php echo stripslashes( $options['button_2_inline_svg'] ); ?>
+											<?php elseif ( 'image' == $options['button_2_show_icon'] && ! empty( $options['button_2_icon_image'] ) ) : ?>
+												<img class="dslc-button-2-icon-image" src="<?php echo esc_url( $options['button_2_icon_image'] ); ?>" alt="" />
 											<?php else : ?>
 												<span class="dslc-icon dslc-icon-<?php echo $options['button_2_icon_id']; ?>"></span>
 											<?php endif; ?>

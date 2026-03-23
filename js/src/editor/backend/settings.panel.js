@@ -454,13 +454,10 @@ export const settingsPanelInit = () => {
 								} else {
 									opt_wrap.addClass('dep-show');
 								}								
-								if ( opt_group.length ) {
-									opt_group.addClass('dependent dep-show').removeClass('dep-hide');
-								}
-
+									
 								if ( section_tab == opt_wrap.data('tab') ) {
 									opt_wrap.show();
-									if ( opt_group.length ) opt_group.show()
+									opt_group.show().removeClass('dep-hide').addClass('dep-show');
 								}
 
 							} else {
@@ -471,25 +468,28 @@ export const settingsPanelInit = () => {
 								} else {
 									opt_wrap.addClass('dep-hide');
 								}								
-								if ( opt_group.length ) {
-									opt_group.addClass('dependent dep-hide').removeClass('dep-show');
-								}
 
 								opt_wrap.hide();
-								if ( opt_group.length ) opt_group.hide(); // Hide the label container
+								if (opt_group.length) {
+									var visibleOptionsInGroup = opt_group.find('.dslca-module-edit-option').not('.dep-hide').length;
+									
+									if (visibleOptionsInGroup === 0) {
+										opt_group.hide().removeClass('dep-show').addClass('dep-hide');
+									}
+								}
 							}
 						});
 					});
 				}
 
 				var optionID = $optionWrap.data('id');
-				jQuery(document).off('change dslc-init-deps', '.dslca-module-edit-option *[data-id="' + optionID + '"]');
-				jQuery(document).on('change dslc-init-deps', '.dslca-module-edit-option *[data-id="' + optionID + '"]', handler);
+				jQuery(document).off('change dslc-init-deps', '.dslca-module-edit-option > *[data-id="' + optionID + '"], ' + '.dslca-modules-area-edit-option *[data-id="' + optionID + '"]');
+				jQuery(document).on('change dslc-init-deps', '.dslca-module-edit-option > *[data-id="' + optionID + '"], ' + '.dslca-modules-area-edit-option *[data-id="' + optionID + '"]', handler);
 				window.LiveComposer.Builder.Helpers.depsHandlers.push( handler );
 			}
 		});
 
-		jQuery(".dslca-module-edit-option input, .dslca-module-edit-option select").trigger('dslc-init-deps');
+		jQuery(".dslca-module-edit-option input, .dslca-module-edit-option select, .dslca-modules-area-edit-option input, .dslca-modules-area-edit-option select").trigger('dslc-init-deps');
 	}
 
 	window.LiveComposer.Builder.UI.unloadOptionsDeps = function() {
