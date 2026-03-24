@@ -296,7 +296,7 @@ function dslc_modules_area_register_options() {
 		$dslc_var_modules_area_options['padding_right'] = array(
 			'id' => 'padding_right',
 			'std' => '',
-			'label' => __( 'Padding Rightl', 'live-composer-page-builder' ),
+			'label' => __( 'Right', 'live-composer-page-builder' ),
 			'type' => 'slider',
 			'affect_on_change_rule' => 'padding-right',
 			'section' => 'styling',

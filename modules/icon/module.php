@@ -82,10 +82,15 @@ class DSLC_Icon extends DSLC_Module {
 						'label' => __( 'SVG', 'live-composer-page-builder' ),
 						'value' => 'svg',
 					),
+					array(
+						'label' => __( 'Image', 'live-composer-page-builder' ),
+						'value' => 'image',
+					),
 				),
 				'dependent_controls' => array(
 					'font' => 'icon_id',
 					'svg' => 'inline_svg',
+					'image' => 'icon_image, icon_image_width',
 				),
 				'help' => __( 'Select type of icon.', 'live-composer-page-builder' ),
 			),
@@ -102,6 +107,26 @@ class DSLC_Icon extends DSLC_Module {
 				'type' => 'textarea',
 				'section' => 'functionality',
 				'help' => __( 'Paste your SVG code.', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Icon Image', 'live-composer-page-builder' ),
+				'id' => 'icon_image',
+				'std' => '',
+				'type' => 'image',
+				'section' => 'functionality',
+			),
+			array(
+				'label' => __( 'Icon Image Width', 'live-composer-page-builder' ),
+				'id' => 'icon_image_width',
+				'std' => '30',
+				'min' => 0,
+				'max' => 500,
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-icon-image',
+				'affect_on_change_rule' => 'width',
+				'ext' => 'px',
+				'section' => 'functionality',
 			),
 
 			/**
@@ -780,6 +805,8 @@ class DSLC_Icon extends DSLC_Module {
 			<div class="dslc-micon-module">
 				<?php if ( 'svg' == $options['show_icon'] ) : ?>
 					<?php echo stripslashes( $options['inline_svg'] ); ?>
+				<?php elseif ( 'image' == $options['show_icon'] && ! empty( $options['icon_image'] ) ) : ?>
+						<img class="dslc-icon-image" src="<?php echo esc_url( $options['icon_image']); ?>" alt="" />
 				<?php else : ?>
 					<span class="dslc-icon dslc-icon-<?php echo $options['icon_id']; ?>"></span>	
 				<?php endif; ?>

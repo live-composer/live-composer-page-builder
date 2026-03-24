@@ -3039,10 +3039,15 @@ class DSLC_Projects extends DSLC_Module {
 						'label' => __( 'SVG', 'live-composer-page-builder' ),
 						'value' => 'svg',
 					),
+					array(
+						'label' => __( 'Image', 'live-composer-page-builder' ),
+						'value' => 'image',
+					),
 				),
 				'dependent_controls' => array(
 					'font' => 'button_icon_id',
 					'svg' => 'button_inline_svg, css_button_icon_size_svg',
+					'image' => 'button_icon_image, css_button_icon_image_width'
 				),
 				'help' => __( 'Select type of icon.', 'live-composer-page-builder' ),
 				'section' => 'styling',
@@ -3076,6 +3081,28 @@ class DSLC_Projects extends DSLC_Module {
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-project-read-more a svg',
 				'affect_on_change_rule' => 'width, height',
+				'section' => 'styling',
+				'tab' => __( 'Button', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+			array(
+				'label' => __( 'Icon Image', 'live-composer-page-builder' ),
+				'id' => 'button_icon_image',
+				'std' => '',
+				'type' => 'image',
+				'section' => 'styling',
+				'tab' => __( 'Button', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Icon Image Width', 'live-composer-page-builder' ),
+				'id' => 'css_button_icon_image_width',
+				'std' => '20',
+				'min' => 0,
+				'max' => 500,
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-project-read-more a img.dslc-button-icon-image',
+				'affect_on_change_rule' => 'width',
 				'section' => 'styling',
 				'tab' => __( 'Button', 'live-composer-page-builder' ),
 				'ext' => 'px',
@@ -3129,7 +3156,7 @@ class DSLC_Projects extends DSLC_Module {
 				'std' => '5',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon, .dslc-project-read-more a svg',
+				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon, .dslc-project-read-more a svg, .dslc-project-read-more a img',
 				'affect_on_change_rule' => 'margin-top',
 				'section' => 'styling',
 				'ext' => 'px',
@@ -3144,7 +3171,7 @@ class DSLC_Projects extends DSLC_Module {
 				'std' => '5',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon, .dslc-project-read-more a svg',
+				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon, .dslc-project-read-more a svg, .dslc-project-read-more a img',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'styling',
 				'ext' => 'px',
@@ -3159,7 +3186,7 @@ class DSLC_Projects extends DSLC_Module {
 				'max' => 2000,
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon, .dslc-project-read-more a svg',
+				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon, .dslc-project-read-more a svg, .dslc-project-read-more a img',
 				'affect_on_change_rule' => 'margin-left',
 				'section' => 'styling',
 				'ext' => 'px',
@@ -3174,7 +3201,7 @@ class DSLC_Projects extends DSLC_Module {
 				'max' => 2000,
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon, .dslc-project-read-more a svg',
+				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon, .dslc-project-read-more a svg, .dslc-project-read-more a img',
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'styling',
 				'ext' => 'px',
@@ -4512,7 +4539,7 @@ class DSLC_Projects extends DSLC_Module {
 				'std' => '5',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon, .dslc-project-read-more a svg',
+				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon, .dslc-project-read-more a svg, .dslc-project-read-more a img',
 				'affect_on_change_rule' => 'margin-top',
 				'section' => 'responsive',
 				'ext' => 'px',
@@ -4527,7 +4554,7 @@ class DSLC_Projects extends DSLC_Module {
 				'std' => '5',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon, .dslc-project-read-more a svg',
+				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon, .dslc-project-read-more a svg, .dslc-project-read-more a img',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
@@ -4542,7 +4569,7 @@ class DSLC_Projects extends DSLC_Module {
 				'max' => 2000,
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon, .dslc-project-read-more a svg',
+				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon, .dslc-project-read-more a svg, .dslc-project-read-more a img',
 				'affect_on_change_rule' => 'margin-left',
 				'section' => 'responsive',
 				'ext' => 'px',
@@ -4557,7 +4584,7 @@ class DSLC_Projects extends DSLC_Module {
 				'max' => 2000,
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon, .dslc-project-read-more a svg',
+				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon, .dslc-project-read-more a svg, .dslc-project-read-more a img',
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'responsive',
 				'ext' => 'px',
@@ -5898,7 +5925,7 @@ class DSLC_Projects extends DSLC_Module {
 				'std' => '5',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon, .dslc-project-read-more a svg',
+				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon, .dslc-project-read-more a svg, .dslc-project-read-more a img',
 				'affect_on_change_rule' => 'margin-top',
 				'section' => 'responsive',
 				'ext' => 'px',
@@ -5913,7 +5940,7 @@ class DSLC_Projects extends DSLC_Module {
 				'std' => '5',
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon, .dslc-project-read-more a svg',
+				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon, .dslc-project-read-more a svg, .dslc-project-read-more a img',
 				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
@@ -5928,7 +5955,7 @@ class DSLC_Projects extends DSLC_Module {
 				'max' => 2000,
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon, .dslc-project-read-more a svg',
+				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon, .dslc-project-read-more a svg, .dslc-project-read-more a img',
 				'affect_on_change_rule' => 'margin-left',
 				'section' => 'responsive',
 				'ext' => 'px',
@@ -5943,7 +5970,7 @@ class DSLC_Projects extends DSLC_Module {
 				'max' => 2000,
 				'type' => 'slider',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon, .dslc-project-read-more a svg',
+				'affect_on_change_el' => '.dslc-project-read-more a .dslc-icon, .dslc-project-read-more a svg, .dslc-project-read-more a img',
 				'affect_on_change_rule' => 'margin-right',
 				'section' => 'responsive',
 				'ext' => 'px',
@@ -6528,6 +6555,8 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 									<a href="<?php echo $the_project_url; ?>" target="<?php echo $the_project_url_target; ?>">
 										<?php if ( 'svg' == $options['show_icon'] ) : ?>
 											<?php echo stripslashes( $options['button_inline_svg'] ); ?>
+										<?php elseif ( 'image' == $options['show_icon'] && ! empty( $options['button_icon_image'] ) ) : ?>
+											<img class="dslc-button-icon-image" src="<?php echo esc_url( $options['button_icon_image'] ); ?>" alt="" />
 										<?php else : ?>
 											<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 										<?php endif; ?>
@@ -6645,6 +6674,8 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 					<a href="<?php echo $the_project_url; ?>" target="<?php echo $the_project_url_target; ?>">
 						<?php if ( 'svg' == $options['show_icon'] ) : ?>
 							<?php echo stripslashes( $options['button_inline_svg'] ); ?>
+						<?php elseif ( 'image' == $options['show_icon'] && ! empty( $options['button_icon_image'] ) ) : ?>
+							<img class="dslc-button-icon-image" src="<?php echo esc_url( $options['button_icon_image'] ); ?>" alt="" />
 						<?php else : ?>
 							<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 						<?php endif; ?>

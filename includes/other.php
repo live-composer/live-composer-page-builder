@@ -121,6 +121,7 @@ function dslc_icons_modal() {
 
 		// Output list of icons.
 			echo '<div class="dslca-modal-icons dslca-modal dslc-list-icons" style="display:none;">';
+				echo '<span class="dslca-close-modal-hook" data-modal=".dslc-list-icons" style="position:absolute;top:30px;right:14px;cursor:pointer;font-size:25px;">&times;</span>';
 				echo '<ul class="dslc-icons-grid">';
 		foreach ( $dslc_var_icons as $key => $value ) {
 
