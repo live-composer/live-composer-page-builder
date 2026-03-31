@@ -1193,23 +1193,24 @@ const onSectionOptionsChange = () => {
 
 				dslcTargetEl = jQuery( dslcField.data('css-element'), dslcEl );
 			}
-
-			dslcRule = dslcRule.replace(/ /g,'').split( ',' );
-			var dslcValToApply;
-
-			if ( null != dslcField.data('ext') && dslcVal !== '' ) {
-				dslcValToApply = dslcValExt;
-			} else {
-				dslcValToApply = dslcVal;
-			}
-
-			// Loop through rules (useful when there are multiple rules)
-			for ( var i = 0; i < dslcRule.length; i++ ) {
-				var currentRule = dslcRule[i].trim();
-				
-				if ( currentRule !== "" && dslcValToApply !== undefined && dslcValToApply !== null ) {
-					dslcTargetEl.css( currentRule, dslcValToApply );
-                }
+			if(dslcRule){
+				dslcRule = dslcRule.replace(/ /g,'').split( ',' );
+				var dslcValToApply;
+	
+				if ( null != dslcField.data('ext') && dslcVal !== '' ) {
+					dslcValToApply = dslcValExt;
+				} else {
+					dslcValToApply = dslcVal;
+				}
+	
+				// Loop through rules (useful when there are multiple rules)
+				for ( var i = 0; i < dslcRule.length; i++ ) {
+					var currentRule = dslcRule[i].trim();
+					
+					if ( currentRule !== "" && dslcValToApply !== undefined && dslcValToApply !== null ) {
+						dslcTargetEl.css( currentRule, dslcValToApply );
+					}
+				}
 			}
 		}
 
@@ -1256,6 +1257,25 @@ const onModulesAreaOptionsChange = () => {
 			dslc_modules_area_options_hideshow_tabs();
 		}
 
+		// If image/upload field alter the value ( use from data )
+		if ( dslcField.hasClass('dslca-modules-area-edit-field-upload') ) {
+
+			if ( dslcVal && dslcVal.length ) {
+
+				dslcVal = jQuery( '.dslca-modules-area-settings input[data-id="dslca-img-url"]', dslcEl ).val();
+			}
+		}
+
+		if ( dslcRule == 'background-image' ) {
+
+			dslcVal = 'url("' + dslcVal + '")';
+			LiveComposer.Builder.PreviewAreaWindow.dslc_bg_video();
+		}
+
+		if ( dslcFieldID == 'bg_image_attachment' ) {
+
+			dslcEl.removeClass('dslc-init-parallax');
+		}
 		// Border handling
 		if (dslcFieldID == 'border-top' ||
 			dslcFieldID == 'border-right' ||
@@ -1295,6 +1315,9 @@ const onModulesAreaOptionsChange = () => {
 					}
 				});
 			}
+		} else if ( dslcFieldID == 'bg_image_attachment' && dslcVal == 'parallax' ) {
+			dslcEl.addClass( 'dslc-init-parallax' );
+			LiveComposer.Builder.PreviewAreaWindow.dslc_parallax();
 		} else if (dslcFieldID == 'columns_spacing') {
 			if (dslcVal == 'nospacing') dslcEl.addClass('dslc-no-columns-spacing');
 			else dslcEl.removeClass('dslc-no-columns-spacing');
@@ -1311,7 +1334,7 @@ const onModulesAreaOptionsChange = () => {
 				dslcRule = dslcRule.replace(/ /g, '').split(',');
 				var dslcValToApply = (dslcField.data('ext') != null) ? dslcValExt : dslcVal;
 				for (var i = 0; i < dslcRule.length; i++) {
-					if (dslcRule[i].trim() !== "" && dslcValToApply !== undefined && dslcValToApply !== null && dslcValToApply !== "") {
+					if (dslcRule[i].trim() !== "" && dslcValToApply !== undefined && dslcValToApply !== null) {
 						cssRulesToApply.push({ rule: dslcRule[i], value: dslcValToApply });
 					}
 				}
@@ -2659,7 +2682,10 @@ function dslc_module_options_confirm_changes( callback ) {
 	// If slider module
 	if ( jQuery('.dslca-module-being-edited', window.LiveComposer.Builder.PreviewAreaDocument).hasClass('dslc-module-DSLC_Sliders') ) {
 
-		jQuery('.dslca-module-being-edited', window.LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-module-being-edited');
+		const editingModules = jQuery('.dslca-module-being-edited', window.LiveComposer.Builder.PreviewAreaDocument);
+		const newestTime = Math.max(...editingModules.map((i, el) => jQuery(el).attr('data-edit-start') || 0).get());
+
+   		editingModules.filter((i, el) => jQuery(el).attr('data-edit-start') < newestTime || editingModules.length === 1).removeClass('dslca-module-being-edited').removeAttr('data-edit-start');
 	// If not slider module
 	} else {
 
@@ -2674,7 +2700,10 @@ function dslc_module_options_confirm_changes( callback ) {
 
 			window.dslc_generate_code();
 
-			jQuery('.dslca-module-being-edited', window.LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-module-being-edited');
+			const editingModules = jQuery('.dslca-module-being-edited', window.LiveComposer.Builder.PreviewAreaDocument);
+			const newestTime = Math.max(...editingModules.map((i, el) => jQuery(el).attr('data-edit-start') || 0).get());
+
+			editingModules.filter((i, el) => jQuery(el).attr('data-edit-start') < newestTime || editingModules.length === 1).removeClass('dslca-module-being-edited').removeAttr('data-edit-start');
 
 			// Remove classes so we know saving finished
 			jQuery('body').removeClass('dslca-module-saving-in-progress');
@@ -2732,7 +2761,10 @@ function dslc_module_options_cancel_changes( callback ) {
 	moduleOutputAltered( function(){
 		window.dslc_generate_code();
 
-		jQuery('.dslca-module-being-edited', window.LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-module-being-edited');
+		const editingModules = jQuery('.dslca-module-being-edited', window.LiveComposer.Builder.PreviewAreaDocument);
+		const newestTime = Math.max(...editingModules.map((i, el) => jQuery(el).attr('data-edit-start') || 0).get());
+
+   		editingModules.filter((i, el) => jQuery(el).attr('data-edit-start') < newestTime || editingModules.length === 1).removeClass('dslca-module-being-edited').removeAttr('data-edit-start');
 
 		// Clean up options container
 		jQuery('.dslca-module-edit-options-inner').html('');

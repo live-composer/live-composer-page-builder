@@ -986,6 +986,8 @@ function dslc_display_modules($page_id)
 					if ($update_ids) {
 						$row_atts['give_new_id'] = 'true';
 					}
+					
+					$row_atts = dslc_process_consolidated_row_css_values($row_atts);
 
 					$page_html .= dslc_modules_section_front($row_atts, $element['content'], 2, $is_header_footer);
 				} elseif ('module_area' === $element['element_type']) {
@@ -1816,8 +1818,10 @@ function dslc_display_modules($page_id)
 				$section_class .= ' dslc-sticky-row ';
 				$sticky_style   = '<style type="text/css">';
 				$sticky_style  .= '.dslc-sticky-row[data-section-id="' . $atts['section_instance_id'] . '"].dslc-sticky-section-fixed {';
-				$sticky_style  .= 'padding-top: ' . $atts['sticky_row_padding_vertical'] . 'px !important; ';
-				$sticky_style  .= 'padding-bottom: ' . $atts['sticky_row_padding_vertical'] . 'px !important;';
+				$sticky_style  .= 'padding-top: ' . $atts['sticky_row_padding_top'] . $atts['sticky_row_padding_top_unit'] . ' !important; ';
+				$sticky_style  .= 'padding-bottom: ' . $atts['sticky_row_padding_bottom'] . $atts['sticky_row_padding_bottom_unit'] . ' !important;';
+				$sticky_style  .= 'padding-left: ' . $atts['sticky_row_padding_left'] . $atts['sticky_row_padding_left_unit'] . ' !important; ';
+				$sticky_style  .= 'padding-right: ' . $atts['sticky_row_padding_right'] . $atts['sticky_row_padding_right_unit'] . ' !important; ';
 				$sticky_style  .= '}';
 				$sticky_style  .= '</style>';
 			} else {
@@ -2536,4 +2540,35 @@ function dslc_process_consolidated_css_values( $settings ) {
     }
 
     return $settings;
+}
+function dslc_process_consolidated_row_css_values($row) {
+
+    $mapping = [
+        'margin_top'    => 'margin_v',
+        'margin_bottom' => 'margin_b',
+        'margin_left'   => 'margin_h',
+        'margin_right'  => 'margin_h',
+        'padding_top'    => 'padding',
+        'padding_bottom' => 'padding',
+        'padding_left'   => 'padding_h',
+        'padding_right'  => 'padding_h',
+        'sticky_row_padding_top'    => 'sticky_row_padding_vertical',
+        'sticky_row_padding_bottom' => 'sticky_row_padding_vertical',
+        'sticky_row_padding_left'   => 'sticky_row_padding_horizontal',
+        'sticky_row_padding_right'  => 'sticky_row_padding_horizontal',
+    ];
+
+    foreach ($mapping as $newKey => $oldKey) {
+        if (isset($row[$oldKey])) {
+            $row[$newKey] = $row[$oldKey];
+        }
+    }
+
+    // Remove old keys to prevent reuse
+    $oldKeys = array_unique(array_values($mapping));
+    foreach ($oldKeys as $key) {
+        unset($row[$key]);
+    }
+
+    return $row;
 }

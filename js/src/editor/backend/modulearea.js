@@ -99,7 +99,10 @@ jQuery(document).on('editorFrameLoaded', function(){
 		var dslcModulesAreaOpts, dslcVal;
 	
 		// Set editing class
-		jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-module-being-edited');
+		const editingModules = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument);
+		const newestTime = Math.max(...editingModules.map((i, el) => jQuery(el).attr('data-edit-start') || 0).get());
+		editingModules.filter((i, el) => jQuery(el).attr('data-edit-start') < newestTime || editingModules.length === 1).removeClass('dslca-module-being-edited').removeAttr('data-edit-start');
+
 		jQuery('.dslca-modules-section-being-edited', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-modules-section-being-edited');
 		jQuery('.dslca-modules-area-being-edited', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-modules-area-being-edited').removeClass('dslca-modules-area-change-made');
 		modules_area.addClass('dslca-modules-area-being-edited');
@@ -635,7 +638,10 @@ function dslc_modules_area_copy( area ) {
 		getNewModuleId( dslc_module[0] );
 
 		// Remove "dslca-module-being-edited" class form any element
-		jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-module-being-edited');
+		const editingModules = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument);
+		const newestTime = Math.max(...editingModules.map((i, el) => jQuery(el).attr('data-edit-start') || 0).get());
+
+   		editingModules.filter((i, el) => jQuery(el).attr('data-edit-start') < newestTime || editingModules.length === 1).removeClass('dslca-module-being-edited').removeAttr('data-edit-start');
 
 		// Need to call this function to update last column class for the modules.
 		window.dslc_generate_code();

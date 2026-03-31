@@ -33,6 +33,9 @@ function dslc_row_display_options() {
 	}
 
 	foreach ( $dslc_var_row_options as $row_option ) {
+		if ( substr($row_option['id'], -5) === '_unit' ) {
+			continue;
+		}
 
 		if ( 'group' !== $row_option['type'] ) {
 
@@ -162,10 +165,19 @@ function dslc_row_display_options() {
 						$slider_increment = $row_option['increment'];
 						$ext = $row_option['ext'];
 						$curr_value = $row_option['std'];
-
+						$unit_key = $row_option['id'] . '_unit';
+        				$has_unit_class = isset( $dslc_var_row_options[$unit_key] ) ? 'dslca-has-unit' : '';
 					?>
-					<div class="dslca-module-area-edit-field-numeric-wrap">
+					<div class="dslca-modules-section-edit-field-numeric-wrap <?php echo $has_unit_class; ?>">
 						<input type="number" class="dslca-modules-section-edit-field dslca-modules-section-edit-field-slider-numeric" data-id="<?php echo esc_attr( $row_option['id'] ); ?>" value="<?php echo $curr_value; ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" data-min="<?php echo $slider_min; ?>" data-max="<?php echo $slider_max; ?>" data-ext="<?php echo $ext; ?>" data-increment="<?php echo esc_attr( $row_option['increment'] ); ?>" data-ext="<?php echo esc_attr( $row_option['ext'] ); ?>"/>
+						<?php if ( isset( $dslc_var_row_options[$unit_key] ) ) : 
+							$unit_option = $dslc_var_row_options[$unit_key]; ?>
+							<select class="dslca-modules-section-edit-field dslca-modules-section-edit-field-select" data-id="<?php echo esc_attr( $unit_option['id'] ); ?>">
+								<?php foreach ( $unit_option['choices'] as $choice ) : ?>
+									<option value="<?php echo esc_attr( $choice['value'] ); ?>" <?php selected($unit_option['std'], $choice['value']); ?>><?php echo esc_attr( $choice['label'] ); ?></option>
+								<?php endforeach; ?>
+							</select>
+						<?php endif; ?>
 					</div>
 
 				<?php elseif ( 'border_checkbox' === $row_option['type'] ) : ?>
@@ -326,6 +338,11 @@ function dslc_row_get_style( $atts = false ) {
 				if($row_option['id'] == 'css_module_section_width')
 				{
 					$ext = (isset($atts['css_module_section_width_unit']) && !empty($atts['css_module_section_width_unit'])) ? $atts['css_module_section_width_unit'] : $ext;
+				} else {
+					$unitField = $row_option['id'] . '_unit';
+					if ( $atts && isset($atts[$unitField]) && !empty($atts[$unitField]) ) {
+						$ext = $atts[$unitField];
+					}
 				}
 
 				$value = $value . $ext;
@@ -421,7 +438,13 @@ function dslc_row_get_initial_style() {
 			// The CSS value extension.
 			if ( isset( $row_option['ext'] ) ) {
 
-				$value = $value . $row_option['ext'];
+				$ext = $row_option['ext'];
+				$unit_field = $row_option['id'] . '_unit';
+				if ( isset( $dslc_var_row_options[$unit_field] ) && isset( $dslc_var_row_options[$unit_field]['std'] ) ) {
+					$ext = $dslc_var_row_options[$unit_field]['std'];
+				}
+
+				$value = $value . $ext;
 			}
 
 			// Border.

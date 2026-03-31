@@ -201,7 +201,7 @@ document.addEventListener('pasteModuleStyles', function (customEvent) {
 						DSLCAjax.ajaxurl, currentModuleProperties,
 						function( response ) {
 							if ( response ) {
-								dslcModule.after(response.output).next().addClass('dslca-module-being-edited');
+								dslcModule.after(response.output).next().addClass('dslca-module-being-edited').attr('data-edit-start', Date.now());
 								dslcModule.remove();
 								window.dslc_generate_code();
 								window.dslc_show_publish_button();
@@ -213,7 +213,11 @@ document.addEventListener('pasteModuleStyles', function (customEvent) {
 								LiveComposer.Builder.PreviewAreaWindow.dslc_init_accordion();
 								LiveComposer.Builder.PreviewAreaWindow.dslc_init_countdown();
 								
-								jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-module-being-edited');
+								const editingModules = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument);
+								const newestTime = Math.max(...editingModules.map((i, el) => jQuery(el).attr('data-edit-start') || 0).get());
+
+								editingModules.filter((i, el) => jQuery(el).attr('data-edit-start') < newestTime || editingModules.length === 1).removeClass('dslca-module-being-edited').removeAttr('data-edit-start');
+
 								LiveComposer.Builder.History.unlock();
 								parent.LiveComposer.Builder.Actions.saveState();
 							}
@@ -499,7 +503,7 @@ function moduleDuplicate( module ) {
         '-webkit-animation-duration' : '0',
         opacity : 0,
         top: -50
-    }).addClass('dslca-module-being-edited');
+    }).addClass('dslca-module-being-edited').attr('data-edit-start', Date.now());
 
 	// Generate new ID for the new module and change it in HTML/CSS of the module.
 	getNewModuleId( module_new );
@@ -835,7 +839,7 @@ export const moduleOutputAltered = ( callback ) => {
 								Helpers.
 								insertModule( response.output, dslcModule );
 
-			newModule.addClass('dslca-module-being-edited');
+			newModule.addClass('dslca-module-being-edited').attr('data-edit-start', Date.now());
 
 			response = null;
 			newModule = null;
@@ -923,7 +927,7 @@ window.dslc_module_output_reload = function ( dslcModule, callback ) {
 		DSLCAjax.ajaxurl, dslcSettings,
 		function( response ) {
 
-			dslcModule.after(response.output).next().addClass('dslca-module-being-edited');
+			dslcModule.after(response.output).next().addClass('dslca-module-being-edited').attr('data-edit-start', Date.now());
 			dslcModule.remove();
 			window.dslc_generate_code();
 			LiveComposer.Builder.History.unlock();
@@ -941,7 +945,11 @@ window.dslc_module_output_reload = function ( dslcModule, callback ) {
 				callback( response );
 			}
 
-			jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-module-being-edited');
+			const editingModules = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument);
+			const newestTime = Math.max(...editingModules.map((i, el) => jQuery(el).attr('data-edit-start') || 0).get());
+
+			editingModules.filter((i, el) => jQuery(el).attr('data-edit-start') < newestTime || editingModules.length === 1).removeClass('dslca-module-being-edited').removeAttr('data-edit-start');
+			
 		}
 	);
 }
