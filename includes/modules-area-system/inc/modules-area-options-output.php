@@ -208,6 +208,11 @@ function dslc_modules_area_display_options() {
 
 					<input type="text" class="dslca-modules-area-edit-field dslca-module-edit-field-colorpicker" data-alpha="true" data-id="<?php echo esc_attr( $modules_area_option['id'] ); ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>"  data-affect-on-change-el="<?php echo esc_attr( '.dslca-modules-area-being-edited' ); ?>" data-affect-on-change-rule="<?php echo esc_attr( $css_rule_output ); ?>" />
 
+				<?php elseif ( 'image' === $modules_area_option['type'] ) : ?>
+
+					<span class="dslca-modules-area-edit-field-image-add-hook"><span class="dslca-icon dslc-icon-cloud-upload"></span><?php esc_html_e( 'Upload Image', 'live-composer-page-builder' ); ?></span>
+					<span class="dslca-modules-area-edit-field-image-remove-hook"><span class="dslca-icon dslc-icon-remove"></span><?php esc_html_e( 'Remove Image', 'live-composer-page-builder' ); ?></span>
+					<input type="hidden" class="dslca-modules-area-edit-field dslca-modules-area-edit-field-upload" data-id="<?php echo esc_attr( $modules_area_option['id'] ); ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" />
 				<?php elseif ( 'slider' === $modules_area_option['type'] ) : ?>
 
 					<?php
@@ -385,14 +390,22 @@ function dslc_modules_area_generate_css( $module_settings = false, $options_to_p
 
             if ( 'border' === $option_id ) {
                 $checkbox_arr = explode( ' ', trim( $orig_value ) );
-                if ( ! in_array( 'border-top', $checkbox_arr, true ) ) { $style .= 'border-top-style: hidden; '; }
-                if ( ! in_array( 'border-right', $checkbox_arr, true ) ) { $style .= 'border-right-style: hidden; '; }
-                if ( ! in_array( 'border-bottom', $checkbox_arr, true ) ) { $style .= 'border-bottom-style: hidden; '; }
-                if ( ! in_array( 'border-left', $checkbox_arr, true ) ) { $style .= 'border-left-style: hidden; '; }                
+                if ( ! in_array( 'top', $checkbox_arr, true ) ) { $style .= 'border-top-style: hidden; '; }
+                if ( ! in_array( 'right', $checkbox_arr, true ) ) { $style .= 'border-right-style: hidden; '; }
+                if ( ! in_array( 'bottom', $checkbox_arr, true ) ) { $style .= 'border-bottom-style: hidden; '; }
+                if ( ! in_array( 'left', $checkbox_arr, true ) ) { $style .= 'border-left-style: hidden; '; }                
             }
 
             if ( $rules ) {
-                foreach ( $rules as $rule ) {                                        
+                foreach ( $rules as $rule ) {  
+					if ( 'background-image' === $rule ) {
+						if ( !empty($value) ) {
+							$value = 'url(' . wp_get_attachment_url( $value ) . ')';
+						}
+						else{
+							$value = 'none';
+						}
+					}                                     
 					$style .= $rule . ':' . $value . ';';
                 }
             }
@@ -413,7 +426,6 @@ function dslc_modules_area_generate_css( $module_settings = false, $options_to_p
 function dslc_modules_area_get_initial_style() {
 
 	global $dslc_var_modules_area_options;
-	$instance_id = isset( $atts['modules_area_instance_id'] ) ? $atts['modules_area_instance_id'] : false;
 	$style = '';
 
 	// If empty return.
@@ -477,6 +489,14 @@ function dslc_modules_area_get_initial_style() {
 			if ( $value && $rules ) {
 
 				foreach ( $rules as $rule ) {
+					if ( 'background-image' === $rule ) {
+						if ( !empty($value) ) {
+							$value = 'url(' . wp_get_attachment_url( $value ) . ')';
+						}
+						else{
+							$value = 'none';
+						}
+					}
 
 					$style .= $rule . ':' . $value . ';';
 

@@ -369,7 +369,11 @@ function dslc_row_edit( row ) {
     var dslcModulesSectionOpts, dslcVal;
 
     // Set editing class
-    jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-module-being-edited');
+    const editingModules = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument);
+    const newestTime = Math.max(...editingModules.map((i, el) => jQuery(el).attr('data-edit-start') || 0).get());
+
+    editingModules.filter((i, el) => jQuery(el).attr('data-edit-start') < newestTime || editingModules.length === 1).removeClass('dslca-module-being-edited').removeAttr('data-edit-start');
+
     jQuery('.dslca-modules-section-being-edited', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-modules-section-being-edited').removeClass('dslca-modules-section-change-made');
     row.addClass('dslca-modules-section-being-edited');
 
@@ -414,24 +418,42 @@ function dslc_row_edit( row ) {
                 jQuery(this).parent().siblings('div[data-id="css_module_section_width"]').hide();
             }
         }
-        if (jQuery(this).data('id') == 'css_module_section_width_unit') {
-            let width_unit = jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="css_module_section_width_unit"]', LiveComposer.Builder.PreviewAreaDocument).val();
-            let targetEle = jQuery('.dslca-modules-section-edit-option[data-id="css_module_section_width"] input[data-id="css_module_section_width"]');
-            
-            let html_min = '';
-            let html_max = '';
-            
-            if (width_unit == '%') {
-                html_min = -100;
-                html_max = 100;
-            } else {
-                html_min = targetEle.data('min');
-                html_max = targetEle.data('max');
-            }
-            targetEle.attr('data-ext', width_unit).attr('min', html_min).attr('max', html_max);         
-        }
+        const fieldId = jQuery(this).data('id');
 
-        if ( jQuery(this).data('id') == 'border-top' ) {
+        const spacingFields = [
+            'margin_top', 'margin_bottom', 'margin_left', 'margin_right',
+            'padding_top', 'padding_bottom', 'padding_left', 'padding_right',
+            'sticky_row_padding_top', 'sticky_row_padding_bottom',
+            'sticky_row_padding_left', 'sticky_row_padding_right'
+        ];
+
+        const isSpacingField = spacingFields.includes(fieldId);
+        const isWidthUnitField = fieldId === 'css_module_section_width_unit';
+
+        if (isSpacingField || isWidthUnitField) {
+
+            const section = jQuery('.dslca-modules-section-being-edited', LiveComposer.Builder.PreviewAreaDocument);
+            const valueFieldId = isWidthUnitField ? 'css_module_section_width' : fieldId;
+            const unitFieldId = isWidthUnitField ? fieldId : `${fieldId}_unit`;
+            const selectedUnit = section.find(`.dslca-modules-section-settings input[data-id="${unitFieldId}"]`).val();
+            const sliderInput = jQuery(`.dslca-modules-section-being-edited .dslca-modules-section-edit-option[data-id="${valueFieldId}"] input[data-id="${valueFieldId}"]`);
+            const allowNegative = isWidthUnitField || !fieldId.includes('padding');
+            const isPercent = selectedUnit === '%';
+            const minValue = isPercent ? (allowNegative ? -100 : 0) : sliderInput.data('min');
+            const maxValue = isPercent ? 100 : sliderInput.data('max');
+
+            sliderInput.attr({
+                'data-ext': selectedUnit,
+                'min': minValue,
+                'max': maxValue
+            });
+
+            const storedValue = section.find(`.dslca-modules-section-settings input[data-id="${fieldId}"]`).val();
+
+            if (storedValue !== undefined && storedValue !== null) {
+                jQuery(this).val(storedValue.trim().replace('%(%', '[').replace('%)%', ']'));
+            }
+        }else if ( jQuery(this).data('id') == 'border-top' ) {
 
             if ( jQuery('.dslca-modules-section-being-edited .dslca-modules-section-settings input[data-id="border"]', LiveComposer.Builder.PreviewAreaDocument).val().indexOf('top') >= 0 ) {
                 jQuery(this).prop('checked', true);
@@ -683,7 +705,10 @@ function dslc_row_copy( row ) {
         dragAndDropInit();
 
         // Remove "dslca-module-being-edited" class form any element
-        jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument).removeClass('dslca-module-being-edited');
+        const editingModules = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument);
+		const newestTime = Math.max(...editingModules.map((i, el) => jQuery(el).attr('data-edit-start') || 0).get());
+
+   		editingModules.filter((i, el) => jQuery(el).attr('data-edit-start') < newestTime || editingModules.length === 1).removeClass('dslca-module-being-edited').removeAttr('data-edit-start');
 
         // Show back new created module
         dslc_module.animate({

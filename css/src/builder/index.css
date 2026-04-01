@@ -2011,7 +2011,7 @@ body.section-editing-in-progress .dslc-modules-section:not(.dslca-modules-sectio
 		transition: margin-top 0.3s ease;
 	}
 	.dslc-first-row:hover {
-		margin-top: 30px;
+		margin-top: 30px !important;
 	}
 
 	.dslca-modules-section-manage:hover {
@@ -4324,7 +4324,7 @@ body.page .dslca-module.dslca-origin-single[data-id="DSLC_TP_Staff_Social"] {
 	#page-builder-preview-area.ui-resizable-resizing .ui-resizable-e{
 	   width: 100%;
 	}
-	.dslca-module-area-edit-field-numeric-wrap {
+	.dslca-module-area-edit-field-numeric-wrap, .dslca-modules-section-edit-field-numeric-wrap {
 	   width: 100% !important;
 	}
 

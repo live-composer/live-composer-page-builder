@@ -1744,7 +1744,7 @@ body.key-press-cmd .dslca-cmd.dslca-manage-action {
     transition: margin-top 0.3s ease;
 }
 .dslc-first-row:hover {
-  margin-top: 30px;
+  margin-top: 30px !important;
 }
 .dslca-modules-section-manage:hover {
   z-index: 100000;
@@ -3029,6 +3029,8 @@ span.dslca-manage-action:hover * {
 }
 .dslca-modules-section-edit-field-image-add-hook,
 .dslca-modules-section-edit-field-image-remove-hook,
+.dslca-modules-area-edit-field-image-add-hook,
+.dslca-modules-area-edit-field-image-remove-hook,
 .dslca-module-edit-field-image-add-hook,
 .dslca-module-edit-field-image-remove-hook,
 .dslca-module-edit-field-button-hook {
@@ -3047,6 +3049,8 @@ span.dslca-manage-action:hover * {
 }
 .dslca-modules-section-edit-field-image-add-hook .dslca-icon,
 .dslca-modules-section-edit-field-image-remove-hook .dslca-icon,
+.dslca-modules-area-edit-field-image-add-hook .dslca-icon,
+.dslca-modules-area-edit-field-image-remove-hook .dslca-icon,
 .dslca-module-edit-field-image-add-hook .dslca-icon,
 .dslca-module-edit-field-image-remove-hook .dslca-icon {
   margin-right: 7px;
@@ -3738,8 +3742,12 @@ div#scroller-stopper {
 .dslca-module-edit-option-text-align-hook .dslca-icon,
 .dslca-modules-section-edit-field-image-add-hook:hover,
 .dslca-modules-section-edit-field-image-add-hook .dslca-icon:hover,
+.dslca-modules-area-edit-field-image-add-hook:hover,
+.dslca-modules-area-edit-field-image-add-hook .dslca-icon:hover,
 .dslca-modules-section-edit-field-image-remove-hook:hover,
 .dslca-modules-section-edit-field-image-remove-hook .dslca-icon:hover,
+.dslca-modules-area-edit-field-image-remove-hook:hover,
+.dslca-modules-area-edit-field-image-remove-hook .dslca-icon:hover,
 .dslca-row-edit-save:hover,
 .dslca-row-edit-cancel:hover,
 .dslca-modules-section-edit-option-checkbox-hook .dslca-icon,
@@ -4891,4 +4899,20 @@ a.dslca-modules-area-edit-options-tab-hook[data-id="mobile_menu_styling"]:before
 .ui-datepicker-buttonpane button:hover {
     background: #006add !important;
     color: #fff !important;
+}
+.dslca-modules-section-edit-field-numeric-wrap.dslca-has-unit{
+  display: flex;
+  flex-direction: row;
+}
+.dslca-modules-section-edit-field-numeric-wrap.dslca-has-unit .dslca-modules-section-edit-field-slider-numeric{
+  width: calc(100% - 40px);
+  border-right: none;
+  border-top-right-radius: unset;
+  border-bottom-right-radius: unset;
+}
+.dslca-modules-section-edit-field-numeric-wrap.dslca-has-unit .dslca-modules-section-edit-field-select{
+  width: 40px;
+  margin: 4px 0 5px 0px;
+  border-top-left-radius: unset;
+  border-bottom-left-radius: unset;
 }
