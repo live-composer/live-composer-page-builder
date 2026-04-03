@@ -208,6 +208,7 @@ If you're migrating from another page builder, compatibility for content transfe
 = 2.1.12 - April 08, 2026 =
 * Fixed an issue where special characters in Text and HTML modules prevented editing of pages and templates in the live composer
 * Resolved undefined key error in the sticky row
+* Fixed duplicate module area IDs caused by row duplication, preventing unintended CSS override conflicts.
 
 = 2.1.11 - April 01, 2026 =
 * Introduced individual margin and padding controls for all sides with selectable units (px, %).

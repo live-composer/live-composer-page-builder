@@ -672,17 +672,29 @@ function dslc_modules_area_copy( area ) {
  * @param DOM modules area that needs ID updated (new ID).
  * @return void
  */
-function dslc_modules_area_new_id( modules_area ) {
+export function dslc_modules_area_new_id( modules_area ) {
 
     if ( window.dslcDebug ) console.log( 'dslc_modules_area_new_id' );
 
     var dslc_modules_area_id = LiveComposer.Utils.get_unique_id(); // Generate new modules area ID.
+	var dslc_modules_area_id_original = modules_area.getAttribute( 'id' ); // Original Module ID.
 
     // Update modules area ID in data attribute
     modules_area.setAttribute( 'data-modules-area-id', dslc_modules_area_id );
 
-    // Update modules area ID in raw base64 code (dslc_code) of the modules area
-    LiveComposer.Utils.update_modules_area_property_raw( modules_area, 'modules_area_instance_id', dslc_modules_area_id );
+	/**
+	 * Search/Replace modules area id in the inline CSS
+	 */
+	var inline_css_el = modules_area.getElementsByTagName( 'style' )[0];
+	var inline_css_code = inline_css_el.textContent;
+	
+	// Update id attribute for <style> element with new value
+	inline_css_el.setAttribute( 'id', 'dslca-modules-area-' + dslc_modules_area_id );
+	inline_css_code = inline_css_code.split( dslc_modules_area_id_original ).join( 'data-modules-area-id' + dslc_modules_area_id );
+	inline_css_el.textContent = inline_css_code;
+
+	// Update modules area ID in raw base64 code (dslc_code) of the modules area
+	LiveComposer.Utils.update_modules_area_property_raw( modules_area, 'modules_area_instance_id', dslc_modules_area_id );
 }
 
 /**
