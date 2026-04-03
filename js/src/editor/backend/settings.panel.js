@@ -1276,6 +1276,25 @@ const onModulesAreaOptionsChange = () => {
 
 			dslcEl.removeClass('dslc-init-parallax');
 		}
+		// If image/upload field alter the value ( use from data )
+		if ( dslcField.hasClass('dslca-modules-area-edit-field-upload') ) {
+
+			if ( dslcVal && dslcVal.length ) {
+
+				dslcVal = jQuery( '.dslca-modules-area-settings input[data-id="dslca-img-url"]', dslcEl ).val();
+			}
+		}
+
+		if ( dslcRule == 'background-image' ) {
+
+			dslcVal = 'url("' + dslcVal + '")';
+			LiveComposer.Builder.PreviewAreaWindow.dslc_bg_video();
+		}
+
+		if ( dslcFieldID == 'bg_image_attachment' ) {
+
+			dslcEl.removeClass('dslc-init-parallax');
+		}
 		// Border handling
 		if (dslcFieldID == 'border-top' ||
 			dslcFieldID == 'border-right' ||

@@ -140,6 +140,7 @@ function dslc_projects_module_cpt() {
 			'parent' => __( 'Parent Project', 'live-composer-page-builder' ),
 		),
 		'public' => true,
+		'has_archive' => true,
 		'rewrite' => array(
 			'slug' => dslc_get_option( 'projects_slug', 'dslc_plugin_options_cpt_slugs' ),
 			'with_front' => $with_front,

@@ -4712,7 +4712,7 @@ class DSLC_Module {
 
 			</div><!-- dslca-module-options-front -->
 
-			<textarea class="dslca-module-code"><?php echo json_encode( $user_options_no_defaults ); ?></textarea>
+			<textarea class="dslca-module-code"><?php echo esc_textarea( json_encode( $user_options_no_defaults )); ?></textarea>
 
 			<span class="dslc-sortable-helper-icon dslc-icon-<?php echo esc_attr( $this->module_icon ); ?>" data-title="<?php echo esc_attr( $this->module_title ); ?>" data-icon="<?php echo esc_attr( $this->module_icon ); ?>"></span>
 
