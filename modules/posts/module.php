@@ -46,6 +46,20 @@ class DSLC_Posts extends DSLC_Module {
 			return apply_filters( 'dslc_module_options', $cached_dslc_options, $this->module_id );
 		}
 
+		// Prepare the dependency mapping
+		$dependencies = array();
+		$dependencies['all_posts'] = 'filter_taxonomy_all'; // Mapping for the "All" option
+
+		// Get all public post types to build the rest of the map
+		$post_types = get_post_types( array( 'public' => true ), 'objects' );
+		$post_types_to_ignore = array( 'dslc_templates', 'dslc_template_parts', 'dslc_hf', 'attachment', 'dslc_testimonials' );
+
+		foreach ( $post_types as $pt_id => $pt_obj ) {
+			if ( ! in_array( $pt_id, $post_types_to_ignore ) ) {
+				$dependencies[$pt_id] = 'filter_taxonomy_' . $pt_id;
+			}
+		}
+
 		// Get registered post types.
 		$post_types = get_post_types( array(
 			'public' => true,
@@ -76,6 +90,76 @@ class DSLC_Posts extends DSLC_Module {
 				);
 			}
 		}
+		$post_type_dependencies = array();
+		$taxonomy_options = array();
+		$all_taxonomies = get_taxonomies( array( 'public' => true ), 'objects' );
+		$all_tax_choices = array(
+			array(
+				'label' => __( 'Default', 'live-composer-page-builder' ),
+				'value' => '',
+			)
+		);
+
+		foreach ( $all_taxonomies as $tax_id => $tax ) {
+			$all_tax_choices[] = array(
+				'label' => $tax->labels->name,
+				'value' => $tax_id,
+			);
+		}
+
+		$post_type_dependencies['all_posts'] = 'filter_tax_all_posts';
+		$taxonomy_options[] = array(
+			'label' => __( 'Filter By', 'live-composer-page-builder' ),
+			'id' => 'filter_tax_all_posts',
+			'std' => '',
+			'type' => 'select',
+			'choices' => $all_tax_choices,
+			'section' => 'styling',
+			'tab' => 'Filters',
+		);		
+		foreach ( $post_types as $post_type_id => $post_type ) {			
+			if ( ! in_array( $post_type_id, $post_types_to_ignore ) ) {
+				$post_types_choices[] = array(
+					'label' => $post_type->labels->name,
+					'value' => $post_type_id,
+				);
+				$taxonomies = get_object_taxonomies( $post_type_id, 'objects' );
+				$tax_choices = array(
+					array(
+						'label' => __( 'Default', 'live-composer-page-builder' ),
+						'value' => '', 
+					)
+				);
+				foreach ( $taxonomies as $tax_id => $tax ) {
+					if ( $tax->public ) {
+						$tax_choices[] = array(
+							'label' => $tax->labels->name,
+							'value' => $tax_id,
+						);
+					}
+				}
+				$tax_option_id = 'filter_tax_' . $post_type_id;
+				$post_type_dependencies[$post_type_id] = $tax_option_id;
+				$taxonomy_options[] = array(
+					'label' => __( 'Filter By', 'live-composer-page-builder' ),
+					'id' => $tax_option_id,
+					'std' => '',
+					'type' => 'select',
+					'choices' => $tax_choices,
+					'section' => 'styling',
+					'tab' => 'Filters',
+				);
+			}
+		}
+		$taxonomy_options[] = array(
+			'label' => __( 'Filter Options Limit', 'live-composer-page-builder' ),
+			'id' => 'filter_terms_limit',
+			'std' => '',
+			'type' => 'slider',
+			'help' => __( 'Set the maximum number of filter options to display. Leave empty to show all.', 'live-composer-page-builder' ),
+			'section' => 'styling',
+			'tab' => 'Filters',
+		);
 
 		// Options.
 		$dslc_options = array(
@@ -106,6 +190,7 @@ class DSLC_Posts extends DSLC_Module {
 				'std' => 'post',
 				'type' => 'select',
 				'choices' => $post_types_choices,
+				'dependent_controls' => $post_type_dependencies,
 				'tab' => 'posts query',
 			),
 
@@ -5612,6 +5697,7 @@ class DSLC_Posts extends DSLC_Module {
 
 		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'carousel_options' ) );
 		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'heading_options' ) );
+		$dslc_options = array_merge( $dslc_options, $taxonomy_options );
 		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'filters_options' ) );
 		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'carousel_arrows_options' ) );
 		$dslc_options = array_merge( $dslc_options, $this->shared_options( 'carousel_circles_options' ) );
@@ -5641,6 +5727,21 @@ class DSLC_Posts extends DSLC_Module {
 		// }
 		$dslc_options = apply_filters( 'dslc_module_options_before_output', $options );
 		echo '[dslc_module_posts_output]' . json_encode( $dslc_options ) . '[/dslc_module_posts_output]';
+	}
+	/**
+	 * Intercept the JSON generation to strictly enforce database hygiene.
+	 * Removes inactive 'filter_tax_' keys before they are rendered into the DOM 
+	 * so they are never picked up by codegeneration.js or saved by ajax.php.
+	 */
+	function module_after( $user_options ) {
+		$active_post_type = isset( $user_options['post_type'] ) ? trim( $user_options['post_type'] ) : 'post';
+		$active_tax_key = 'filter_tax_' . $active_post_type;
+		foreach ( $user_options as $key => $value ) {
+			if ( strpos( $key, 'filter_tax_' ) === 0 && $key !== $active_tax_key ) {
+				$user_options[$key] = ''; 
+			}
+		}
+		parent::module_after( $user_options );
 	}
 }
 
@@ -6018,21 +6119,36 @@ function dslc_module_posts_output( $atts, $content = null ) {
 						$dslc_query->the_post();
 						$cats_count++;
 
-						if ( $cats_count == 1 ) {
-							$post_type_taxonomies = get_object_taxonomies( get_post_type(), 'objects' );
-							foreach ( $post_type_taxonomies as $taxonomy ) {
-								if ( $taxonomy->hierarchical == true ) {
-									$taxonomy_name = $taxonomy->name;
+						if ( $cats_count == 1 ) {							
+							$selected_pt = trim( $options['post_type'] );
+							$tax_option_key = 'filter_tax_' . $selected_pt;
+							if ( isset( $options[$tax_option_key] ) && '' !== $options[$tax_option_key] ) {
+								$taxonomy_name = $options[$tax_option_key];
+							} else {								
+								$current_pt = get_post_type();
+								$post_type_taxonomies = get_object_taxonomies( $current_pt, 'objects' );
+								foreach ( $post_type_taxonomies as $taxonomy ) {
+									if ( $taxonomy->hierarchical == true ) {
+										$taxonomy_name = $taxonomy->name;
+									}
 								}
 							}
 						}
 
-						$post_cats = get_the_terms( get_the_ID(), $taxonomy_name );
-						if ( ! empty( $post_cats ) ) {
-							foreach ( $post_cats as $post_cat ) {
-								$cats_array[ $post_cat->slug ] = $post_cat->name;
+						if ( ! empty( $taxonomy_name ) ) {
+							$post_cats = get_the_terms( get_the_ID(), $taxonomy_name );
+							if ( ! empty( $post_cats ) && ! is_wp_error( $post_cats ) ) {
+								foreach ( $post_cats as $post_cat ) {
+									$cats_array[ $post_cat->slug ] = $post_cat->name;
+								}
 							}
 						}
+					}
+				}				
+				if ( isset( $options['filter_terms_limit'] ) && $options['filter_terms_limit'] !== '' ) {
+					$terms_limit = intval( $options['filter_terms_limit'] );
+					if ( $terms_limit > 0 ) {
+						$cats_array = array_slice( $cats_array, 0, $terms_limit, true );
 					}
 				}
 			?>

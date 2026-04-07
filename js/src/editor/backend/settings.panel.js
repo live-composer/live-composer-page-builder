@@ -483,8 +483,13 @@ export const settingsPanelInit = () => {
 				}
 
 				var optionID = $optionWrap.data('id');
-				jQuery(document).off('change dslc-init-deps', '.dslca-module-edit-option > *[data-id="' + optionID + '"], ' + '.dslca-modules-area-edit-option *[data-id="' + optionID + '"]');
-				jQuery(document).on('change dslc-init-deps', '.dslca-module-edit-option > *[data-id="' + optionID + '"], ' + '.dslca-modules-area-edit-option *[data-id="' + optionID + '"]', handler);
+				var depSelector = '.dslca-module-edit-option input[data-id="' + optionID + '"], ' +
+						  '.dslca-module-edit-option select[data-id="' + optionID + '"], ' +
+						  '.dslca-module-edit-option textarea[data-id="' + optionID + '"], ' +
+						  '.dslca-modules-area-edit-option *[data-id="' + optionID + '"]';
+
+				jQuery(document).off('change dslc-init-deps', depSelector);
+				jQuery(document).on('change dslc-init-deps', depSelector, handler);
 				window.LiveComposer.Builder.Helpers.depsHandlers.push( handler );
 			}
 		});

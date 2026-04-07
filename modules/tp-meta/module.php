@@ -46,6 +46,33 @@ class DSLC_TP_Meta extends DSLC_Module {
 			return apply_filters( 'dslc_module_options', $cached_dslc_options, $this->module_id );
 		}
 
+		$all_taxonomies = get_taxonomies( array( 'public' => true ), 'objects' );
+		$cat_tax_choices = array(
+			array(
+				'label' => __( 'Default', 'live-composer-page-builder' ),
+				'value' => '',
+			)
+		);
+		$tag_tax_choices = array(
+			array(
+				'label' => __( 'Default', 'live-composer-page-builder' ),
+				'value' => '', 
+			)
+		);
+		foreach ( $all_taxonomies as $tax_id => $tax ) {
+			if ( $tax->hierarchical ) {
+				$cat_tax_choices[] = array(
+					'label' => $tax->labels->name,
+					'value' => $tax_id,
+				);
+			} else {
+				$tag_tax_choices[] = array(
+					'label' => $tax->labels->name,
+					'value' => $tax_id,
+				);
+			}
+		}
+
 		$dslc_options = array(
 
 			array(
@@ -109,6 +136,44 @@ class DSLC_TP_Meta extends DSLC_Module {
 						'value' => 'comments',
 					),
 				),
+				'dependent_controls' => array(
+					'category' => 'filter_tax_category, filter_terms_limit_category',
+					'tags' => 'filter_tax_tags, filter_terms_limit_tags',
+				),
+				'section' => 'styling',
+			),
+			array(
+				'label' => __( 'Categories: Source', 'live-composer-page-builder' ),
+				'id' => 'filter_tax_category',
+				'std' => '',
+				'type' => 'select',
+				'choices' => $cat_tax_choices,
+				'help' => __( 'Select which category taxonomy to display. By default, all terms are shown.', 'live-composer-page-builder' ),
+				'section' => 'styling',
+			),
+			array(
+				'label' => __( 'Categories: Max Items to Show', 'live-composer-page-builder' ),
+				'id' => 'filter_terms_limit_category',
+				'std' => '',
+				'type' => 'text',
+				'help' => __( 'Set the maximum number of terms to display. Leave empty to show all.', 'live-composer-page-builder' ),
+				'section' => 'styling',
+			),
+			array(
+				'label' => __( 'Tags: Source', 'live-composer-page-builder' ),
+				'id' => 'filter_tax_tags',
+				'std' => '',
+				'type' => 'select',
+				'choices' => $tag_tax_choices,
+				'help' => __( 'Limit the number of terms displayed. Leave empty to show all.', 'live-composer-page-builder' ),
+				'section' => 'styling',
+			),
+			array(
+				'label' => __( 'Tags: Max Items to Show', 'live-composer-page-builder' ),
+				'id' => 'filter_terms_limit_tags',
+				'std' => '',
+				'type' => 'text',
+				'help' => __( 'Set the maximum number of terms to display. Leave empty to show all.', 'live-composer-page-builder' ),
 				'section' => 'styling',
 			),
 			array(
@@ -1099,23 +1164,36 @@ class DSLC_TP_Meta extends DSLC_Module {
 								<li><a href="#"><?php _e( 'Category One', 'live-composer-page-builder' ); ?></a>, <a href="#"><?php _e( 'Category Two', 'live-composer-page-builder' ); ?></a></li>
 							<?php else : ?>
 								<?php
-								foreach ( $post_type_taxonomies as $taxonomy ) {
-									if ( $taxonomy->hierarchical == true && $taxonomy->public ) {
+								$final_cats = array();
+								$current_pt = get_post_type();
+								$selected_cat_tax = isset( $options['filter_tax_category'] ) ? trim( $options['filter_tax_category'] ) : '';
 
-										$cats = get_the_terms( get_the_ID(), $taxonomy->name );
-										$cats_count = 0;
-										if ( $cats ) {
-											echo '<li>';
-											foreach ( $cats as $cat ) {
-												$cats_count++;
-												if ( $cats_count > 1 ) {
-													echo ', ';
-												}
-												echo '<a href="' . get_term_link( $cat, $taxonomy->name ) . '">' . $cat->name . '</a>';
-											}
-											echo '</li>';
+								if ( '' !== $selected_cat_tax && is_object_in_taxonomy( $current_pt, $selected_cat_tax ) ) {
+									$cats = get_the_terms( get_the_ID(), $selected_cat_tax );
+									if ( $cats && ! is_wp_error( $cats ) ) {
+										foreach ( $cats as $cat ) {
+											$final_cats[] = '<a href="' . get_term_link( $cat, $selected_cat_tax ) . '">' . $cat->name . '</a>';
 										}
 									}
+								} else {
+									foreach ( $post_type_taxonomies as $taxonomy ) {
+										if ( $taxonomy->hierarchical == true && $taxonomy->public ) {
+
+											$cats = get_the_terms( get_the_ID(), $taxonomy->name );
+											if ( $cats && ! is_wp_error( $cats ) ) {
+												foreach ( $cats as $cat ) {
+													$final_cats[] = '<a href="' . get_term_link( $cat, $taxonomy->name ) . '">' . $cat->name . '</a>';
+												}
+											}
+										}
+									}
+								}
+								$cat_limit = isset( $options['filter_terms_limit_category'] ) && $options['filter_terms_limit_category'] !== '' ? intval( $options['filter_terms_limit_category'] ): 0;
+								if ( $cat_limit > 0 && count( $final_cats ) > $cat_limit ) {
+									$final_cats = array_slice( $final_cats, 0, $cat_limit );
+								}
+								if ( ! empty( $final_cats ) ) {
+									echo '<li>' . implode( ', ', $final_cats ) . '</li>';
 								}
 								?>
 							<?php endif; ?>
@@ -1126,23 +1204,36 @@ class DSLC_TP_Meta extends DSLC_Module {
 								<li><a href="#"><?php _e( 'One', 'live-composer-page-builder' ); ?></a>, <a href="#"><?php _e( 'Two', 'live-composer-page-builder' ); ?></a>, <a href="#"><?php _e( 'Three', 'live-composer-page-builder' ); ?></a></li>
 							<?php else : ?>
 								<?php
-								foreach ( $post_type_taxonomies as $taxonomy ) {
-									if ( $taxonomy->hierarchical == false && $taxonomy->public ) {
+								$final_tags = array();
+								$current_pt = get_post_type();
+								$selected_tag_tax = isset( $options['filter_tax_tags'] ) ? trim( $options['filter_tax_tags'] ) : '';
 
-										$cats = get_the_terms( get_the_ID(), $taxonomy->name );
-										$tags_count = 0;
-										if ( $cats ) {
-											echo '<li>';
-											foreach ( $cats as $cat ) {
-												$tags_count++;
-												if ( $tags_count > 1 ) {
-													echo ', ';
-												}
-												echo '<a href="' . get_term_link( $cat, $taxonomy->name ) . '">' . $cat->name . '</a>';
-											}
-											echo '</li>';
+								if ( '' !== $selected_tag_tax && is_object_in_taxonomy( $current_pt, $selected_tag_tax ) ) {
+									$tags = get_the_terms( get_the_ID(), $selected_tag_tax );
+									if ( $tags && ! is_wp_error( $tags ) ) {
+										foreach ( $tags as $tag ) {
+											$final_tags[] = '<a href="' . get_term_link( $tag, $selected_tag_tax ) . '">' . $tag->name . '</a>';
 										}
 									}
+								} else {
+									foreach ( $post_type_taxonomies as $taxonomy ) {
+										if ( $taxonomy->hierarchical == false && $taxonomy->public ) {
+
+											$tags = get_the_terms( get_the_ID(), $taxonomy->name );
+											if ( $tags && ! is_wp_error( $tags ) ) {
+												foreach ( $tags as $tag ) {
+													$final_tags[] = '<a href="' . get_term_link( $tag, $taxonomy->name ) . '">' . $tag->name . '</a>';
+												}
+											}
+										}
+									}
+								}
+								$tag_limit = isset( $options['filter_terms_limit_tags'] ) && $options['filter_terms_limit_tags'] !== '' ? intval( $options['filter_terms_limit_tags'] ) : 0;
+								if ( $tag_limit > 0 && count( $final_tags ) > $tag_limit ) {
+									$final_tags = array_slice( $final_tags, 0, $tag_limit );
+								}
+								if ( ! empty( $final_tags ) ) {
+									echo '<li>' . implode( ', ', $final_tags ) . '</li>';
 								}
 								?>
 							<?php endif; ?>

@@ -705,6 +705,35 @@ class DSLC_TP_Content extends DSLC_Module {
 				'tab' => __( 'Content', 'live-composer-page-builder' ),
 			),
 			array(
+				'label' => __( 'Text Transform', 'live-composer-page-builder' ),
+				'id' => 'css_main_text_transform',
+				'std' => 'none',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'None', 'live-composer-page-builder' ),
+						'value' => 'none',
+					),
+					array(
+						'label' => __( 'Capitalize', 'live-composer-page-builder' ),
+						'value' => 'capitalize',
+					),
+					array(
+						'label' => __( 'Uppercase', 'live-composer-page-builder' ),
+						'value' => 'uppercase',
+					),
+					array(
+						'label' => __( 'Lowercase', 'live-composer-page-builder' ),
+						'value' => 'lowercase',
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-tp-content, .dslc-tp-content p',
+				'affect_on_change_rule' => 'text-transform',
+				'section' => 'styling',
+				'tab' => __( 'Content', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Text Shadow', 'live-composer-page-builder' ),
 				'id' => 'css_main_text_shadow',
 				'std' => '',
@@ -1140,6 +1169,35 @@ class DSLC_TP_Content extends DSLC_Module {
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-tp-content h1',
 				'affect_on_change_rule' => 'text-align',
+				'section' => 'styling',
+				'tab' => __( 'H1', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Text Transform', 'live-composer-page-builder' ),
+				'id' => 'css_h1_text_transform',
+				'std' => 'none',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'None', 'live-composer-page-builder' ),
+						'value' => 'none',
+					),
+					array(
+						'label' => __( 'Capitalize', 'live-composer-page-builder' ),
+						'value' => 'capitalize',
+					),
+					array(
+						'label' => __( 'Uppercase', 'live-composer-page-builder' ),
+						'value' => 'uppercase',
+					),
+					array(
+						'label' => __( 'Lowercase', 'live-composer-page-builder' ),
+						'value' => 'lowercase',
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-tp-content h1',
+				'affect_on_change_rule' => 'text-transform',
 				'section' => 'styling',
 				'tab' => __( 'H1', 'live-composer-page-builder' ),
 			),
@@ -1583,6 +1641,35 @@ class DSLC_TP_Content extends DSLC_Module {
 				'tab' => __( 'H2', 'live-composer-page-builder' ),
 			),
 			array(
+				'label' => __( 'Text Transform', 'live-composer-page-builder' ),
+				'id' => 'css_h2_text_transform',
+				'std' => 'none',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'None', 'live-composer-page-builder' ),
+						'value' => 'none',
+					),
+					array(
+						'label' => __( 'Capitalize', 'live-composer-page-builder' ),
+						'value' => 'capitalize',
+					),
+					array(
+						'label' => __( 'Uppercase', 'live-composer-page-builder' ),
+						'value' => 'uppercase',
+					),
+					array(
+						'label' => __( 'Lowercase', 'live-composer-page-builder' ),
+						'value' => 'lowercase',
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-tp-content h2',
+				'affect_on_change_rule' => 'text-transform',
+				'section' => 'styling',
+				'tab' => __( 'H2', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Text Shadow', 'live-composer-page-builder' ),
 				'id' => 'css_h2_text_shadow',
 				'std' => '',
@@ -2018,6 +2105,35 @@ class DSLC_TP_Content extends DSLC_Module {
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-tp-content h3',
 				'affect_on_change_rule' => 'text-align',
+				'section' => 'styling',
+				'tab' => __( 'H3', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Text Transform', 'live-composer-page-builder' ),
+				'id' => 'css_h3_text_transform',
+				'std' => 'none',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'None', 'live-composer-page-builder' ),
+						'value' => 'none',
+					),
+					array(
+						'label' => __( 'Capitalize', 'live-composer-page-builder' ),
+						'value' => 'capitalize',
+					),
+					array(
+						'label' => __( 'Uppercase', 'live-composer-page-builder' ),
+						'value' => 'uppercase',
+					),
+					array(
+						'label' => __( 'Lowercase', 'live-composer-page-builder' ),
+						'value' => 'lowercase',
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-tp-content h3',
+				'affect_on_change_rule' => 'text-transform',
 				'section' => 'styling',
 				'tab' => __( 'H3', 'live-composer-page-builder' ),
 			),
@@ -2461,6 +2577,35 @@ class DSLC_TP_Content extends DSLC_Module {
 				'tab' => __( 'H4', 'live-composer-page-builder' ),
 			),
 			array(
+				'label' => __( 'Text Transform', 'live-composer-page-builder' ),
+				'id' => 'css_h4_text_transform',
+				'std' => 'none',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'None', 'live-composer-page-builder' ),
+						'value' => 'none',
+					),
+					array(
+						'label' => __( 'Capitalize', 'live-composer-page-builder' ),
+						'value' => 'capitalize',
+					),
+					array(
+						'label' => __( 'Uppercase', 'live-composer-page-builder' ),
+						'value' => 'uppercase',
+					),
+					array(
+						'label' => __( 'Lowercase', 'live-composer-page-builder' ),
+						'value' => 'lowercase',
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-tp-content h4',
+				'affect_on_change_rule' => 'text-transform',
+				'section' => 'styling',
+				'tab' => __( 'H4', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Text Shadow', 'live-composer-page-builder' ),
 				'id' => 'css_h4_text_shadow',
 				'std' => '',
@@ -2896,6 +3041,35 @@ class DSLC_TP_Content extends DSLC_Module {
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-tp-content h5',
 				'affect_on_change_rule' => 'text-align',
+				'section' => 'styling',
+				'tab' => __( 'H5', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Text Transform', 'live-composer-page-builder' ),
+				'id' => 'css_h5_text_transform',
+				'std' => 'none',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'None', 'live-composer-page-builder' ),
+						'value' => 'none',
+					),
+					array(
+						'label' => __( 'Capitalize', 'live-composer-page-builder' ),
+						'value' => 'capitalize',
+					),
+					array(
+						'label' => __( 'Uppercase', 'live-composer-page-builder' ),
+						'value' => 'uppercase',
+					),
+					array(
+						'label' => __( 'Lowercase', 'live-composer-page-builder' ),
+						'value' => 'lowercase',
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-tp-content h5',
+				'affect_on_change_rule' => 'text-transform',
 				'section' => 'styling',
 				'tab' => __( 'H5', 'live-composer-page-builder' ),
 			),
@@ -3339,6 +3513,35 @@ class DSLC_TP_Content extends DSLC_Module {
 				'tab' => __( 'H6', 'live-composer-page-builder' ),
 			),
 			array(
+				'label' => __( 'Text Transform', 'live-composer-page-builder' ),
+				'id' => 'css_h6_text_transform',
+				'std' => 'none',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'None', 'live-composer-page-builder' ),
+						'value' => 'none',
+					),
+					array(
+						'label' => __( 'Capitalize', 'live-composer-page-builder' ),
+						'value' => 'capitalize',
+					),
+					array(
+						'label' => __( 'Uppercase', 'live-composer-page-builder' ),
+						'value' => 'uppercase',
+					),
+					array(
+						'label' => __( 'Lowercase', 'live-composer-page-builder' ),
+						'value' => 'lowercase',
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-tp-content h6',
+				'affect_on_change_rule' => 'text-transform',
+				'section' => 'styling',
+				'tab' => __( 'H6', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Text Shadow', 'live-composer-page-builder' ),
 				'id' => 'css_h6_text_shadow',
 				'std' => '',
@@ -3509,6 +3712,35 @@ class DSLC_TP_Content extends DSLC_Module {
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-tp-content li',
 				'affect_on_change_rule' => 'font-family',
+				'section' => 'styling',
+				'tab' => __( 'Lists', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Text Transform', 'live-composer-page-builder' ),
+				'id' => 'css_li_text_transform',
+				'std' => 'none',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'None', 'live-composer-page-builder' ),
+						'value' => 'none',
+					),
+					array(
+						'label' => __( 'Capitalize', 'live-composer-page-builder' ),
+						'value' => 'capitalize',
+					),
+					array(
+						'label' => __( 'Uppercase', 'live-composer-page-builder' ),
+						'value' => 'uppercase',
+					),
+					array(
+						'label' => __( 'Lowercase', 'live-composer-page-builder' ),
+						'value' => 'lowercase',
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-tp-content li',
+				'affect_on_change_rule' => 'text-transform',
 				'section' => 'styling',
 				'tab' => __( 'Lists', 'live-composer-page-builder' ),
 			),
@@ -4618,6 +4850,35 @@ class DSLC_TP_Content extends DSLC_Module {
 				'tab' => __( 'Buttons', 'live-composer-page-builder' ),
 			),
 			array(
+				'label' => __( 'Text Transform', 'live-composer-page-builder' ),
+				'id' => 'css_button_text_transform',
+				'std' => 'none',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'None', 'live-composer-page-builder' ),
+						'value' => 'none',
+					),
+					array(
+						'label' => __( 'Capitalize', 'live-composer-page-builder' ),
+						'value' => 'capitalize',
+					),
+					array(
+						'label' => __( 'Uppercase', 'live-composer-page-builder' ),
+						'value' => 'uppercase',
+					),
+					array(
+						'label' => __( 'Lowercase', 'live-composer-page-builder' ),
+						'value' => 'lowercase',
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => 'input[type=submit], button',
+				'affect_on_change_rule' => 'text-transform',
+				'section' => 'styling',
+				'tab' => __( 'Buttons', 'live-composer-page-builder' ),
+			),
+			array(
 				'label' => __( 'Line Height', 'live-composer-page-builder' ),
 				'id' => 'css_button_line_height',
 				'onlypositive' => true, // Value can't be negative.
@@ -5292,6 +5553,35 @@ class DSLC_TP_Content extends DSLC_Module {
 				'refresh_on_change' => false,
 				'affect_on_change_el' => 'blockquote, .dslc-tp-content blockquote p',
 				'affect_on_change_rule' => 'text-align',
+				'section' => 'styling',
+				'tab' => __( 'Blockquote', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Text Transform', 'live-composer-page-builder' ),
+				'id' => 'css_blockquote_text_transform',
+				'std' => 'none',
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => __( 'None', 'live-composer-page-builder' ),
+						'value' => 'none',
+					),
+					array(
+						'label' => __( 'Capitalize', 'live-composer-page-builder' ),
+						'value' => 'capitalize',
+					),
+					array(
+						'label' => __( 'Uppercase', 'live-composer-page-builder' ),
+						'value' => 'uppercase',
+					),
+					array(
+						'label' => __( 'Lowercase', 'live-composer-page-builder' ),
+						'value' => 'lowercase',
+					),
+				),
+				'refresh_on_change' => false,
+				'affect_on_change_el' => 'blockquote, .dslc-tp-content blockquote p',
+				'affect_on_change_rule' => 'text-transform',
 				'section' => 'styling',
 				'tab' => __( 'Blockquote', 'live-composer-page-builder' ),
 			),
