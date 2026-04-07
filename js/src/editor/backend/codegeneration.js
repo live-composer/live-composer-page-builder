@@ -277,15 +277,21 @@ export const generateSectionCode = ( theModulesSection ) => {
 	}
 
 	// Remove last and first classes from module areas and modules
-	jQuery('.dslc-modules-area.dslc-last-col, .dslc-modules-area.dslc-first-col', this).removeClass('dslc-last-col dslc-first-col');
-	jQuery('.dslc-module-front.dslc-last-col, .dslc-module-front.dslc-first-col', this).removeClass('dslc-last-col dslc-first-col');
+	jQuery('.dslc-modules-area.dslc-last-col, .dslc-modules-area.dslc-first-col', modulesSection).removeClass('dslc-last-col dslc-first-col');
+	jQuery('.dslc-module-front.dslc-last-col, .dslc-module-front.dslc-first-col', modulesSection).removeClass('dslc-last-col dslc-first-col');
 
 	// Vars
 	currPerRowA = 0;
 
 	// Get current JSON.
 	modulesSectionJsonString = modulesSection.find('.dslca-section-code').val();
-	modulesSectionJson = JSON.parse(modulesSectionJsonString);
+
+	try {
+		modulesSectionJson = modulesSectionJsonString ? JSON.parse(modulesSectionJsonString) : {};
+	} catch(e) {
+		console.error("Live Composer: Could not parse Section JSON", e);
+		modulesSectionJson = {};
+	}
 
 	// Generate attributes for the row shortcode
 	modulesSectionAtts = '';
@@ -377,7 +383,12 @@ export const generateSectionCode = ( theModulesSection ) => {
 		// moduleAreaJSON = JSON.parse( moduleAreaJSON );
 		// Get current JSON.
 		modulesAreaJsonString = modulesArea.find('.dslca-modules-area-code').val();
-		moduleAreaJSON = JSON.parse(modulesAreaJsonString);
+		
+		try {
+			moduleAreaJSON = modulesAreaJsonString ? JSON.parse(modulesAreaJsonString) : {};
+		} catch(e) {
+			moduleAreaJSON = {};
+		}
 
 		// moduleAreaJSON['element_type'] = "module_area";
 		moduleAreaJSON['last'] = modulesAreaLastState;
@@ -478,7 +489,7 @@ export const generateSectionCode = ( theModulesSection ) => {
 				// Get module's LC data
 				// moduleCode = dslc_module[0].querySelector('.dslca-module-code').value; – Don't use. Creating bugs!
 				// moduleCode = dslc_module[0].querySelector('.dslca-module-code').innerHTML;
-				moduleCode = dslc_module[0].querySelector('.dslca-module-code').innerText;
+				moduleCode = dslc_module[0].querySelector('.dslca-module-code').value;
 			} catch(err) {
 				console.info( 'No DSLC code found in module: ' + dslc_module[0].getAttribute('id') );
 			}
@@ -487,7 +498,14 @@ export const generateSectionCode = ( theModulesSection ) => {
 				// Add the module shortcode containing the data
 				// composerCode = composerCode + '[dslc_module last="' + moduleLastState + '"]' + moduleCode + '[/dslc_module] ';
 
-				var moduleCodeJSON = JSON.parse(moduleCode);
+				var moduleCodeJSON;
+				try {
+					moduleCodeJSON = JSON.parse(moduleCode);
+				} catch(e) {
+					console.warn("Live Composer: Module JSON parse failed. Skipping module.");
+					return; // Skip corrupted module
+				}
+
 				// Add idicator for the last module in the row.
 				moduleCodeJSON.last = moduleLastState;
 
@@ -497,9 +515,6 @@ export const generateSectionCode = ( theModulesSection ) => {
 						delete moduleCodeJSON[index];
 					}
 
-					if ( 'content' === index ) {
-						moduleCodeJSON[index] = el.replace(/\\'/g, "'");
-					}
 
 					if ( 'give_new_id' === index ) {
 						delete moduleCodeJSON[index];
@@ -508,7 +523,7 @@ export const generateSectionCode = ( theModulesSection ) => {
 
 				// Put optimized code back into the hidden textarea.
 				// dslc_module[0].querySelector('.dslca-module-code').value = JSON.stringify(moduleCodeJSON); - Don't use. Creating bugs!
-				dslc_module[0].querySelector('.dslca-module-code').innerText = JSON.stringify(moduleCodeJSON);
+				dslc_module[0].querySelector('.dslca-module-code').value = JSON.stringify(moduleCodeJSON);
 
 				// Add the module JSON as array item
 				moduleAreaJSON['content'].push( moduleCodeJSON );

@@ -17,7 +17,7 @@
 
 import { Section } from './section.class.js';
 import { dragAndDropInit } from './dragndrop.js';
-import { moduleareasInitJS } from './modulearea.js';
+import { moduleareasInitJS, dslc_modules_area_new_id } from './modulearea.js';
 import { ModuleArea } from './modulearea.class.js';
 import { CModalWindow } from './modalwindow.class.js';
 import { hidePublishButton, showSection } from './uigeneral.js';
@@ -665,6 +665,17 @@ function dslc_row_copy( row ) {
         jQuery(this).data('size', row.find('.dslc-modules-area:eq( ' + dslcIndex + ' )').data('size') );
 
         this.removeAttribute('data-jsinit'); // (2)
+        // Current module
+        var dslc_modules_area = jQuery(this);
+
+        //Generate new ID for the new module and change it in HTML/CSS of the module.
+        dslc_modules_area_new_id( dslc_modules_area[0] );
+
+        // Remove "dslca-module-being-edited" class form any element
+        const editingModulesArea = jQuery('.dslca-modules-area-being-edited', LiveComposer.Builder.PreviewAreaDocument);
+		const newestTime = Math.max(...editingModulesArea.map((i, el) => jQuery(el).attr('data-edit-start') || 0).get());
+
+   		editingModulesArea.filter((i, el) => jQuery(el).attr('data-edit-start') < newestTime || editingModulesArea.length === 1).removeClass('dslca-modules-area-being-edited').removeAttr('data-edit-start');
     });
 
     new Section(dslcModulesSectionCloned);

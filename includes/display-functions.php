@@ -1815,6 +1815,29 @@ function dslc_display_modules($page_id)
 
 			// Sticky Class.
 			if (! empty($atts['sticky_row']) && 'enabled' === trim($atts['sticky_row'])) {
+				
+				if ( ! isset( $atts['sticky_row_padding_top_unit'] ) ) {
+					$atts['sticky_row_padding_top_unit'] = 'px';
+				}
+				if ( ! isset( $atts['sticky_row_padding_bottom'] ) ) {
+					$atts['sticky_row_padding_bottom'] = '0';
+				}
+				if ( ! isset( $atts['sticky_row_padding_bottom_unit'] ) ) {
+					$atts['sticky_row_padding_bottom_unit'] = 'px';
+				}
+				if ( ! isset( $atts['sticky_row_padding_left'] ) ) {
+					$atts['sticky_row_padding_left'] = '0';
+				}
+				if ( ! isset( $atts['sticky_row_padding_left_unit'] ) ) {
+					$atts['sticky_row_padding_left_unit'] = 'px';
+				}
+				if ( ! isset( $atts['sticky_row_padding_right'] ) ) {
+					$atts['sticky_row_padding_right'] = '0';
+				}
+				if ( ! isset( $atts['sticky_row_padding_right_unit'] ) ) {
+					$atts['sticky_row_padding_right_unit'] = 'px';
+				}
+
 				$section_class .= ' dslc-sticky-row ';
 				$sticky_style   = '<style type="text/css">';
 				$sticky_style  .= '.dslc-sticky-row[data-section-id="' . $atts['section_instance_id'] . '"].dslc-sticky-section-fixed {';
@@ -1951,7 +1974,7 @@ function dslc_display_modules($page_id)
 				</div>
 				<div class="dslca-modules-section-settings">' . dslc_encode_shortcodes(dslc_row_get_options_fields($atts)) . '</div>';
 
-				$output .= '<textarea class="dslca-section-code">' . json_encode($atts) . '</textarea>';
+				$output .= '<textarea class="dslca-section-code">' . esc_textarea( json_encode($atts)) . '</textarea>';
 			}
 
 			$output .= '</div>';
@@ -2087,8 +2110,8 @@ function dslc_display_modules($page_id)
 
 			$area_custom_style = dslc_modules_area_get_style( $atts );
 
-			$output = '<style type="text/css" id="dslca-modules-area-' . esc_attr( $atts['modules_area_instance_id'] ) . '">' . $area_custom_style . '</style>';
-			$output .= '<div ' . $modules_area_id_output . ' class="dslc-modules-area dslc-col dslc-' . $atts['size'] . '-col ' . $pos_class . $valign_class . $halign_class . $admin_class . '" data-size="' . $atts['size'] . '" data-valign="' . esc_attr($atts['valign']) . '" data-modules-area-id="' . $atts['modules_area_instance_id'] . '" >';
+			$output = '<div ' . $modules_area_id_output . ' class="dslc-modules-area dslc-col dslc-' . $atts['size'] . '-col ' . $pos_class . $valign_class . $halign_class . $admin_class . '" data-size="' . $atts['size'] . '" data-valign="' . esc_attr($atts['valign']) . '" data-modules-area-id="' . $atts['modules_area_instance_id'] . '" >';
+			$output.= '<style type="text/css" id="dslca-modules-area-' . esc_attr( $atts['modules_area_instance_id'] ) . '">' . $area_custom_style . '</style>';
 			if ($dslc_active && ! $is_header_footer && is_user_logged_in() && current_user_can(DS_LIVE_COMPOSER_CAPABILITY)) {
 
 				// Management.
@@ -2140,7 +2163,7 @@ function dslc_display_modules($page_id)
 					</div>
 				</div>
 				<div class="dslca-modules-area-settings">' . dslc_encode_shortcodes(dslc_modules_area_get_options_fields($atts)) . '</div>';
-				$output .= '<textarea class="dslca-modules-area-code">' . json_encode($atts) . '</textarea>';
+				$output .= '<textarea class="dslca-modules-area-code">' . esc_textarea( json_encode( $atts ) ) . '</textarea>';
 			}
 
 			$content_render = '';
