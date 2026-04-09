@@ -79,17 +79,6 @@ class DSLC_Posts extends DSLC_Module {
 			'dslc_testimonials',
 		);
 
-		// Generate usable array of post types.
-		foreach ( $post_types as $post_type_id => $post_type ) {
-
-			// Do not output system post-types.
-			if ( ! in_array( $post_type_id, $post_types_to_ignore ) ) {
-				$post_types_choices[] = array(
-					'label' => $post_type->labels->name,
-					'value' => $post_type_id,
-				);
-			}
-		}
 		$post_type_dependencies = array();
 		$taxonomy_options = array();
 		$all_taxonomies = get_taxonomies( array( 'public' => true ), 'objects' );

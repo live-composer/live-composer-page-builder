@@ -79,17 +79,6 @@ class DSLC_Loops extends DSLC_Module {
 			'dslc_testimonials',
 		);
 
-		// Generate usable array of post types.
-		foreach ( $post_types as $post_type_id => $post_type ) {
-
-			// Do not output system post-types.
-			if ( ! in_array( $post_type_id, $post_types_to_ignore ) ) {
-				$post_types_choices[] = array(
-					'label' => $post_type->labels->name,
-					'value' => $post_type_id,
-				);
-			}
-		}
 		$post_type_dependencies = array();
 		$taxonomy_options = array();
 		$all_taxonomies = get_taxonomies( array( 'public' => true ), 'objects' );
@@ -5942,6 +5931,13 @@ function dslc_module_loops_output( $atts, $content = null ) {
 
 	$elements = ! empty( $options['elements'] ) ? explode( ' ', trim( $options['elements'] ) ) : array();
 
+	// Carousel Elements
+	$carousel_elements = $options['carousel_elements'];
+	if ( ! empty( $carousel_elements ) ) {
+		$carousel_elements = explode( ' ', trim( $carousel_elements ) );
+	} else {
+		$carousel_elements = array();
+	}
 	$container_class = 'custom-template-container dslc-posts dslc-cpt-posts dslc-clearfix dslc-cpt-posts-type-' . $options['type'] . ' dslc-posts-orientation-' . $options['orientation'] . ' ';
 	if ( $options['type'] == 'masonry' ) { $container_class .= 'dslc-init-masonry '; } 
 	elseif ( $options['type'] == 'grid' ) { $container_class .= 'dslc-init-grid '; }
@@ -5951,12 +5947,55 @@ function dslc_module_loops_output( $atts, $content = null ) {
 	elseif ( $options['type'] == 'carousel' ) { $element_class .= 'dslc-carousel-item '; }
 
 	$show_header = false;
-	$show_heading = in_array( 'main_heading', $elements, true );
-	$show_filters = ( 'all' === $elements || in_array( 'filters', $elements, true ) ) && 'carousel' !== $options['type'];
-	$show_carousel_arrows = 'carousel' === $options['type'] && in_array( 'arrows', (array)$options['carousel_elements'], true );
+	$show_heading = false;
+	$show_filters = false;
+	$show_carousel_arrows = false;
+	$show_view_all_link = false;
 
-	if ( $show_heading || $show_filters || $show_carousel_arrows ) { $show_header = true; }
-	if ( $show_carousel_arrows && ( $options['arrows_position'] == 'aside' ) ) { $container_class .= 'dslc-carousel-arrow-aside '; }
+	if ( in_array( 'main_heading', $elements, true ) ) {
+		$show_heading = true;
+	}
+
+	if ( ( 'all' === $elements || in_array( 'filters', $elements, true ) ) && 'carousel' !== $options['type'] ) {
+		$show_filters = true;
+	}
+
+	if ( 'carousel' === $options['type'] && in_array( 'arrows', $carousel_elements, true ) ) {
+		$show_carousel_arrows = true;
+	}
+
+	if ( $show_heading || $show_filters || $show_carousel_arrows ) {
+		$show_header = true;
+	}
+
+	if ( $show_carousel_arrows && ( $options['arrows_position'] == 'aside' ) ) {
+		$container_class .= 'dslc-carousel-arrow-aside ';
+	}
+
+	/**
+	 * Carousel Items
+	 */
+
+	switch ( $options['columns'] ) {
+		case 12 :
+			$carousel_items = 1;
+			break;
+		case 6 :
+			$carousel_items = 2;
+			break;
+		case 4 :
+			$carousel_items = 3;
+			break;
+		case 3 :
+			$carousel_items = 4;
+			break;
+		case 2 :
+			$carousel_items = 6;
+			break;
+		default:
+			$carousel_items = 6;
+			break;
+	}
 
 	/**
 	 * Heading Output
@@ -6057,7 +6096,18 @@ function dslc_module_loops_output( $atts, $content = null ) {
 
 				if ( $options['type'] == 'carousel' ) : ?>
 					<div class="dslc-loader"></div>
-					<div class="dslc-carousel" data-stop-on-hover="<?php echo $options['carousel_autoplay_hover']; ?>" data-autoplay="<?php echo $options['carousel_autoplay']; ?>" data-columns="4" data-pagination="true" data-slide-speed="600" data-pagination-speed="800"><?php
+					<div class="dslc-carousel"
+						data-stop-on-hover="<?php echo $options['carousel_autoplay_hover']; ?>"
+						data-autoplay="<?php echo $options['carousel_autoplay']; ?>"
+						data-columns="<?php echo $carousel_items; ?>"
+						data-pagination="<?php
+							if ( in_array( 'circles', $carousel_elements ) ) {
+								echo 'true';
+							} else {
+								echo 'false';
+							} ?>"
+						data-slide-speed="<?php echo $options['arrows_slide_speed']; ?>"
+						data-pagination-speed="<?php echo $options['circles_slide_speed']; ?>"><?php
 				endif;
 
 				while ( $dslc_query->have_posts() ) :
