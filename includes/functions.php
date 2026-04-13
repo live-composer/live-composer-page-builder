@@ -1065,13 +1065,26 @@ function dslc_render_template_part_preview( $template_id, $label = 'Edit Templat
     // 1. Isolated Render
     $rendered_code = dslc_render_content( $composer_code, false, true );
 
-    // 2. Class Neutralization
-    $search  = array( 'dslc-modules-section', 'dslc-modules-area', 'dslc-module-front' );
-    $replace = array( 'dslc-section-tp-view', 'dslc-area-tp-view', 'dslc-module-tp-view' );
+    // 2. Class & Attribute Neutralization
+    $search  = array( 'dslc-modules-section', 'dslc-modules-area', 'dslc-module-front', 'contenteditable="true"' );
+    $replace = array( 'dslc-section-tp-view', 'dslc-area-tp-view', 'dslc-module-tp-view', 'contenteditable="false"' );
     $rendered_code = str_replace( $search, $replace, $rendered_code );
 
-    // 3. Metadata Stripping
-    $rendered_code = preg_replace('/<(div|textarea)[^>]*(dslca-module-options-front|dslca-module-code)[^>]*>.*?<\/\1>/s', '', $rendered_code );
+	// 3. Metadata & Editor UI Stripping
+	$patterns = array(
+		// Remove Module & Area Manage Bars (The icons/buttons)
+		'/<div[^>]*dslca-(module|modules-area)-manage[^>]*>.*?<\/div>\s*<\/div>/s',
+		// Remove Settings Blocks (The hidden inputs)
+		'/<div[^>]*dslca-modules-area-settings[^>]*>.*?<\/div>/s',
+		// Remove Sortable Helpers (The icons like dslc-icon-picture)
+		'/<span[^>]*dslc-sortable-helper-icon[^>]*>.*?<\/span>/s',
+		// Remove Metadata & Code Textareas
+		'/<(div|textarea)[^>]*(dslca-module-options-front|dslca-module-code|dslca-modules-area-code)[^>]*>.*?<\/\1>/s',
+		// Remove HTML comments used by LC
+		'//'
+	);
+
+	$rendered_code = preg_replace( $patterns, '', $rendered_code );
 
     ob_start(); 
     

@@ -1,13 +1,21 @@
 const path = require('path');
-const sass = require('sass');  // Dart Sass
-const util = require('util');
+const sass = require('sass');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const sassRender = util.promisify(sass.render);
+async function sassRender(options) {
+  const result = await sass.compileAsync(options.file, {
+    style: 'compressed',
+  });
 
-module.exports = (env = {}) => {
   return {
-    mode: env.production ? 'production' : 'development',
+    css: result.css,
+  };
+}
+
+module.exports = () => {
+  return {
+    mode: 'production', // since you explicitly run build for production
+
     devtool: 'cheap-source-map',
     entry: {
       editor_backend: './js/src/editor/backend/index.js',
@@ -15,22 +23,12 @@ module.exports = (env = {}) => {
       client_backend: './js/src/client/backend/index.js',
       client_frontend: './js/src/client/frontend/index.js',
     },
+
     output: {
       filename: '[name].min.js',
       path: path.resolve(__dirname, './js/dist'),
     },
-    module: {
-      rules: [
-        {
-          test: /\.scss$/,  // or /\.sass$/ or /\.css$/ depending on your files
-          use: [
-            'style-loader',  // inject CSS to DOM
-            'css-loader',    // translate CSS into CommonJS
-            'sass-loader',   // compile Sass to CSS
-          ],
-        },
-      ],
-    },
+
     plugins: [
       new CopyWebpackPlugin({
         patterns: [
@@ -41,8 +39,6 @@ module.exports = (env = {}) => {
             async transform(content, filepath) {
               const result = await sassRender({
                 file: filepath,
-                outputStyle: 'compressed',
-                sourceMapEmbed: !env.production,
               });
               return result.css.toString();
             },
@@ -56,8 +52,6 @@ module.exports = (env = {}) => {
             async transform(content, filepath) {
               const result = await sassRender({
                 file: filepath,
-                outputStyle: 'compressed',
-                sourceMapEmbed: !env.production,
               });
               return result.css.toString();
             },
@@ -70,8 +64,6 @@ module.exports = (env = {}) => {
             async transform(content, filepath) {
               const result = await sassRender({
                 file: filepath,
-                outputStyle: 'compressed',
-                sourceMapEmbed: !env.production,
               });
               return result.css.toString();
             },
@@ -85,8 +77,6 @@ module.exports = (env = {}) => {
             async transform(content, filepath) {
               const result = await sassRender({
                 file: filepath,
-                outputStyle: 'compressed',
-                sourceMapEmbed: !env.production,
               });
               return result.css.toString();
             },
@@ -99,8 +89,6 @@ module.exports = (env = {}) => {
             async transform(content, filepath) {
               const result = await sassRender({
                 file: filepath,
-                outputStyle: 'compressed',
-                sourceMapEmbed: !env.production,
               });
               return result.css.toString();
             },
