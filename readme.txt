@@ -205,10 +205,11 @@ If you're migrating from another page builder, compatibility for content transfe
 * 🦊 [Check out our WooCommerce Page Builder Extension](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
 
-= 2.1.13 - April 15, 2026 =
+= 2.1.13 - April 13, 2026 =
 * Fixed carousel functionality in the Loops module.
 * Fixed template part rendering in the Loops module and improved functionality.
 * Minor bug fixes.
+* Security improvement
 
 = 2.1.12 - April 08, 2026 =
 * Fixed an issue where special characters in Text and HTML modules prevented editing of pages and templates in the live composer
