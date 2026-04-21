@@ -1105,7 +1105,7 @@ class DSLC_TP_Excerpt extends DSLC_Module {
 			if ( $is_template ) {
 				echo $the_excerpt;
 			} else {
-				echo esc_html( $the_excerpt );
+				echo wp_kses_post( $the_excerpt );
 			}
 			?>
 		</div>
