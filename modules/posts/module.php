@@ -5945,15 +5945,17 @@ function dslc_module_posts_output( $atts, $content = null ) {
 	// Do the query.
 	if ( ( is_category() || is_tag() || is_tax() || is_search() || is_date() ) && 'enabled' === $options['query_alter'] ) {
 		global $wp_query;
-		$dslc_query = $wp_query;
+		$altered_vars = $wp_query->query_vars;
 
 		if ( isset( $options['amount'] ) ) {
 			if ( ( 'all_posts' !== $post_type_str ) && is_search() ) {
-				$dslc_query->set( 'post_type', $post_type_str );
+				$altered_vars['post_type'] = $post_type_str;
 			}
-			$dslc_query->set( 'posts_per_page', $options['amount'] );
-			$dslc_query->query( $dslc_query->query_vars );
+			$altered_vars['posts_per_page'] = $options['amount'];
 		}
+
+		$dslc_query = new WP_Query( $altered_vars );
+		
 	} else {
 		$dslc_query = new WP_Query( $args );
 	}

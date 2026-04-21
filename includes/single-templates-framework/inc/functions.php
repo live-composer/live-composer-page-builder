@@ -115,6 +115,9 @@ function dslc_st_init() {
 		'value' => 'page_not_found',
 	);
 
+	// Allow developers to inject new template assignment checkboxes
+	$template_for = apply_filters( 'dslc_template_usage_options', $template_for );
+	
 	$dslc_var_post_options['dslc-templates-opts'] = array(
 		'title' => 'Template Options',
 		'show_on' => 'dslc_templates',
@@ -250,14 +253,28 @@ function dslc_get_archive_template_by_pt( $post_type_slug ) {
 		}
 	}
 
-	// Taxonomy slug
-	if ( ! stristr( $post_type_slug, '_cats' ) ) {
+	// --- BUG FIX: Detect the actual taxonomy if we are on an archive page ---
+	$actual_tax = false;
+	if ( is_tax() || is_category() || is_tag() ) {
+		$queried_obj = get_queried_object();
+		if ( isset( $queried_obj->taxonomy ) ) {
+			$actual_tax = $queried_obj->taxonomy;
+		}
+	}
+
+	// If we are on a real taxonomy (like 'series'), use that. Otherwise, use LC's legacy fallback.
+	if ( $actual_tax ) {
+		$taxonomy_slug = $actual_tax;
+	} elseif ( ! stristr( $post_type_slug, '_cats' ) ) {
 		if ( 'post' == $post_type_slug ) {
 			$taxonomy_slug = 'category';
 		} else {
 			$taxonomy_slug = $post_type_slug . '_cats';
 		}
+	} else {
+		$taxonomy_slug = $post_type_slug;
 	}
+	// ------------------------------------------------------------------------
 
 	$templates_taxonomies = get_option( "lc_templates_taxonomies" );
 

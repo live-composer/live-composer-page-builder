@@ -525,15 +525,7 @@ add_filter( 'dslc_text_block_render', 'dslc_filter_textarea' );
 // Add term page
 function dslc_taxonomy_add_new_meta_field( $taxonomy ) {
 
-	$dslc_template_for = array(
-		'category' => 'post_archive',
-		'dslc_downloads_cats' => 'dslc_downloads_archive',
-		'dslc_galleries_cats' => 'dslc_galleries_archive',
-		'dslc_partners_cats' => 'dslc_partners_archive',
-		'dslc_projects_cats' => 'dslc_projects_archive',
-		'dslc_staff_cats' => 'dslc_staff_archive',
-		//'dslc_testimonials_cats'
-	);
+	$dslc_template_for = dslc_archive_template_taxonomies();
 
 	// Get templates
 	$args = array(
@@ -598,15 +590,7 @@ function dslc_taxonomy_add_new_meta_field( $taxonomy ) {
 // Edit term page
 function dslc_taxonomy_edit_meta_field( $term, $taxonomy ) {
 
-	$dslc_template_for = array(
-		'category' => 'post_archive',
-		'dslc_downloads_cats' => 'dslc_downloads_archive',
-		'dslc_galleries_cats' => 'dslc_galleries_archive',
-		'dslc_partners_cats' => 'dslc_partners_archive',
-		'dslc_projects_cats' => 'dslc_projects_archive',
-		'dslc_staff_cats' => 'dslc_staff_archive',
-		//'dslc_testimonials_cats'
-	);
+	$dslc_template_for = dslc_archive_template_taxonomies();
 
 	// Get templates
 	$args = array(
@@ -701,22 +685,20 @@ function dslc_save_taxonomy_custom_meta( $term_id ) {
 	}
 }
 
-$dslc_category_type_names = array(
-	'category',
-	'dslc_downloads_cats',
-	'dslc_galleries_cats',
-	'dslc_partners_cats',
-	'dslc_projects_cats',
-	'dslc_staff_cats',
-	//'dslc_testimonials_cats'
-);
+function dslc_register_taxonomy_template_fields() {
+	// Dynamically get the registered taxonomies from filter
+	$dslc_template_for = dslc_archive_template_taxonomies();
+	$dslc_category_type_names = array_keys( $dslc_template_for );
 
-foreach ( $dslc_category_type_names as $name ) {
-	add_action( "{$name}_edit_form_fields", 'dslc_taxonomy_edit_meta_field', 10, 2 );
-	add_action( "{$name}_add_form_fields", 'dslc_taxonomy_add_new_meta_field', 10, 2 );
-	add_action( "edited_{$name}", 'dslc_save_taxonomy_custom_meta', 10, 2 );  
-	add_action( "create_{$name}", 'dslc_save_taxonomy_custom_meta', 10, 2 );
- }
+	foreach ( $dslc_category_type_names as $name ) {
+		add_action( "{$name}_edit_form_fields", 'dslc_taxonomy_edit_meta_field', 10, 2 );
+		add_action( "{$name}_add_form_fields", 'dslc_taxonomy_add_new_meta_field', 10, 2 );
+		add_action( "edited_{$name}", 'dslc_save_taxonomy_custom_meta', 10, 2 );  
+		add_action( "create_{$name}", 'dslc_save_taxonomy_custom_meta', 10, 2 );
+	}
+}
+
+add_action( 'init', 'dslc_register_taxonomy_template_fields', 99 );
 
 // Disable smart (curly) quotes so JSON formatting isn't broken
 function disable_smart_quotes_for_json_fix() {
@@ -802,3 +784,15 @@ function dslc_save_post_content_metabox( $post_id ) {
     }
 }
 add_action( 'save_post', 'dslc_save_post_content_metabox' );
+
+
+function dslc_archive_template_taxonomies() {
+	return apply_filters( 'dslc_archive_template_taxonomies', array(
+		'category'            => 'post_archive',
+		'dslc_downloads_cats' => 'dslc_downloads_archive',
+		'dslc_galleries_cats' => 'dslc_galleries_archive',
+		'dslc_partners_cats'  => 'dslc_partners_archive',
+		'dslc_projects_cats'  => 'dslc_projects_archive',
+		'dslc_staff_cats'     => 'dslc_staff_archive',
+	) );
+}
