@@ -2128,7 +2128,7 @@ class DSLC_Button extends DSLC_Module {
 						<?php endif; ?>
 					</a>
 				<?php else : ?>
-					<a href="<?php echo $options['button_url']; ?>" target="<?php echo $options['button_target']; ?>" <?php echo $anchor_append;
+					<a href="<?php echo $dslc_is_admin ? 'javascript:void(0);' : $options['button_url']; ?>" target="<?php echo $options['button_target']; ?>" <?php echo $anchor_append;
 					if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?> class="<?php echo trim( esc_attr( $classes ) ); ?>">
 						<?php if ( $options['button_state'] == 'enabled' && $options['icon_pos'] == 'left' ) : ?>
 							<?php if ( 'svg' == $options['show_icon'] ) : ?>
