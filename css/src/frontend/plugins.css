@@ -788,3 +788,6 @@ img.mfp-img {
 .mfp-close:hover {
   background: transparent;
 }
+.dslc-cta-module {
+  padding: 40px;
+}
