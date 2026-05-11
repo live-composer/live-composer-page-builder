@@ -63,6 +63,7 @@ function dslc_register_modules() {
 	dslc_register_module( 'DSLC_Accordion' );
 	dslc_register_module( 'DSLC_Progress_Bars' );
 	dslc_register_module( 'DSLC_Notification' );
+	dslc_register_module( 'DSLC_CTA_Box' );
 
 	dslc_register_module( 'DSLC_Blog' );
 	dslc_register_module( 'DSLC_Posts' );
