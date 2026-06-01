@@ -4678,12 +4678,8 @@ class DSLC_Module {
 					// 🔖 RAW CODE CLEANUP
 					// if ( $user_options[ $id ] === $option['std'] || '' === $user_options[ $id ] ) {
 					
-					if ( (false === $uid || '' === $uid) && $id != 'css_show_on' ) {
-						if ( isset( $option['std'] ) && '' !== $option['std'] ) {
-							$user_options_no_defaults[ $id ] = $option['std'];
-						} else {
-							unset( $user_options_no_defaults[ $id ] );
-						}
+					if ( (false === $uid || '' === $uid) && $id !='css_show_on' ) {
+						unset( $user_options_no_defaults[ $id ] );
 					}
 
 					// Sanitize Option Values.
