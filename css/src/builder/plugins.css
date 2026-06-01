@@ -4901,19 +4901,22 @@ a.dslca-modules-area-edit-options-tab-hook[data-id="mobile_menu_styling"]:before
     color: #fff !important;
 }
 .dslca-module-edit-field-numeric-wrap.dslca-has-unit,
-.dslca-modules-section-edit-field-numeric-wrap.dslca-has-unit{
+.dslca-modules-section-edit-field-numeric-wrap.dslca-has-unit,
+.dslca-module-area-edit-field-numeric-wrap.dslca-has-unit{
   display: flex;
   flex-direction: row;
 }
 .dslca-module-edit-field-numeric-wrap.dslca-has-unit .dslca-module-edit-field-numeric,
-.dslca-modules-section-edit-field-numeric-wrap.dslca-has-unit .dslca-modules-section-edit-field-slider-numeric{
+.dslca-modules-section-edit-field-numeric-wrap.dslca-has-unit .dslca-modules-section-edit-field-slider-numeric,
+.dslca-module-area-edit-field-numeric-wrap.dslca-has-unit .dslca-modules-area-edit-field-select {
   width: calc(100% - 40px) !important;
   border-right: none !important;
   border-top-right-radius: unset !important;
   border-bottom-right-radius: unset !important;
 }
 .dslca-module-edit-field-numeric-wrap.dslca-has-unit .dslca-module-option-edit-field-select,
-.dslca-modules-section-edit-field-numeric-wrap.dslca-has-unit .dslca-modules-section-edit-field-select{
+.dslca-modules-section-edit-field-numeric-wrap.dslca-has-unit .dslca-modules-section-edit-field-select,
+.dslca-module-area-edit-field-numeric-wrap.dslca-has-unit .dslca-modules-area-edit-field-select {
   width: 40px !important;
   margin: 4px 0 5px 0px !important;
   border-top-left-radius: unset !important;

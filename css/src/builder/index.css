@@ -4475,7 +4475,6 @@ body.dslca-drag-in-progress .lc-scroll-top-area{
 }
 body.dslca-drag-in-progress .lc-scroll-bottom-area,
 body.dslca-new-module-drag-in-progress .lc-scroll-bottom-area{
-
 	position: fixed;
 	bottom: 0px;
 	left: 0px;

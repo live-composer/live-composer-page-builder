@@ -31,6 +31,7 @@ function dslc_modules_area_render_tabs() {
 
 	foreach ( $dslc_var_modules_area_options as $option ) {
 
+
 		$section = isset( $option['section'] )
 			? $option['section']
 			: 'functionality';
@@ -91,6 +92,11 @@ function dslc_modules_area_display_options() {
 	}
 
 	foreach ( $dslc_var_modules_area_options as $modules_area_option ) {
+
+		if ( substr($modules_area_option['id'], -5) === '_unit' ) {
+			continue;
+		}
+		
         // 1. Logic Replication: Default Section
         $section = isset( $modules_area_option['section'] ) ? $modules_area_option['section'] : 'functionality';
 
@@ -225,7 +231,7 @@ function dslc_modules_area_display_options() {
        					$has_unit_class = isset( $dslc_var_modules_area_options[$unit_key] ) ? 'dslca-has-unit' : '';
 
 					?>
-					<div class="dslca-module-area-edit-field-numeric-wrap">
+					<div class="dslca-module-area-edit-field-numeric-wrap <?php echo $has_unit_class; ?>">
 						<input type="number" class="dslca-modules-area-edit-field dslca-modules-area-edit-field-slider-numeric" data-id="<?php echo esc_attr( $modules_area_option['id'] ); ?>" value="<?php echo $curr_value; ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" data-min="<?php echo $slider_min; ?>" data-max="<?php echo $slider_max; ?>" data-ext="<?php echo $ext; ?>" data-increment="<?php echo esc_attr( $modules_area_option['increment'] ); ?>" data-ext="<?php echo esc_attr( $modules_area_option['ext'] ); ?>" />
 						<?php if ( isset( $dslc_var_modules_area_options[$unit_key] ) ) : 
 							$unit_option = $dslc_var_modules_area_options[$unit_key]; ?>
@@ -318,6 +324,8 @@ function dslc_modules_area_get_options_fields( $atts = false ) {
 	if ( $atts ) { // If there is data to fill?
 
 		foreach ( $dslc_var_modules_area_options as $modules_area_option ) {
+			
+			
 
 			if ( 'group' !== $modules_area_option['type'] ) {
 				
