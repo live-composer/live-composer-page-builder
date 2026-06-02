@@ -3006,7 +3006,7 @@ class DSLC_Info_Box extends DSLC_Module {
 			array(
 				'label' => __( 'Border Color', 'live-composer-page-builder' ),
 				'id' => 'css_button_border_color',
-				'std' => '#d8d8d8',
+				'std' => '',
 				'type' => 'color',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-info-box-button a',
@@ -3813,7 +3813,7 @@ class DSLC_Info_Box extends DSLC_Module {
 			array(
 				'label' => __( 'Border Color', 'live-composer-page-builder' ),
 				'id' => 'css_button_2_border_color',
-				'std' => '#d8d8d8',
+				'std' => '',
 				'type' => 'color',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-info-box-button a.dslc-secondary',
