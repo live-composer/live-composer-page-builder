@@ -205,7 +205,7 @@ If you're migrating from another page builder, compatibility for content transfe
 * 🦊 [Check out our WooCommerce Page Builder Extension](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
 
-= 2.1.17 - June 03, 2026 =
+= 2.1.17 - June 04, 2026 =
 * Fix border width update issue in existing modules (Link, Button, Infobox Element Button).
 * Handle image permission exceptions during project module UI rendering.
 
