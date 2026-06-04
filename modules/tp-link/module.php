@@ -266,7 +266,7 @@ class DSLC_TP_Link extends DSLC_Module {
 				array(
 					'label' => __( 'Color', 'live-composer-page-builder' ),
 					'id' => 'css_border_color',
-					'std' => '#000',
+					'std' => '',
 					'type' => 'color',
 					'refresh_on_change' => false,
 					'affect_on_change_el' => '.dslc-button a',
