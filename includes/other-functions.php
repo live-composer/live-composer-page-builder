@@ -84,7 +84,8 @@ if ( ! class_exists( 'DSLC_Aq_Resize' ) ) {
 			}
 
 			// Check if $img_url is local.
-			if ( false === strpos( $url, $upload_url ) ) { return false;
+			if ( false === strpos( $url, $upload_url ) ) { 
+				return $url;
 			}
 
 			// Define path of image.
@@ -92,7 +93,8 @@ if ( ! class_exists( 'DSLC_Aq_Resize' ) ) {
 			$img_path = $upload_dir . $rel_path;
 
 			// Check if img path exists, and is an image indeed.
-			if ( ! file_exists( $img_path ) or ! getimagesize( $img_path ) ) { return false;
+			if ( ! file_exists( $img_path ) or ! getimagesize( $img_path ) ) { 
+				return  $url;
 			}
 
 			// Get image info.

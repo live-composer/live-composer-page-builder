@@ -1013,7 +1013,6 @@ function dslc_display_modules($page_id)
 
 					// set margin and padding properties saparately
 					$element = dslc_process_consolidated_css_values($element);
-					$element = dslc_process_seperate_units_values($element);
 
 					$page_html .= dslc_module_front($module_atts, $element, $is_header_footer);
 				} // End if().
@@ -2562,55 +2561,8 @@ function dslc_process_consolidated_css_values( $settings ) {
             }
         }
     }
-	
+
     return $settings;
-}
-function dslc_process_seperate_units_values( $settings ) {
-
-	$directions = array( 'top', 'bottom', 'left', 'right' );
-
-	$migratable_properties = array(
-		'padding',
-		'margin',
-	);
-
-	foreach ( $settings as $key => $value ) {
-
-		if ( ! str_ends_with( $key, '_unit' ) ) {
-			continue;
-		}
-
-		if ( preg_match( '/_(top|bottom|left|right|width|height)_unit$/', $key ) ) {
-			continue;
-		}
-
-		$is_migratable = false;
-
-		foreach ( $migratable_properties as $property ) {
-
-			if ( str_contains( $key, $property ) ) {
-				$is_migratable = true;
-				break;
-			}
-		}
-
-		if ( ! $is_migratable ) {
-			continue;
-		}
-
-		$base_key = substr( $key, 0, -5 );
-		
-		foreach ( $directions as $direction ) {
-			$new_key = $base_key . '_' . $direction . '_unit';
-			if ( ! isset( $settings[ $new_key ] ) || '' === $settings[ $new_key ] ) {
-				$settings[ $new_key ] = $value;
-			}
-		}
-
-		unset( $settings[ $key ] );
-	}
-
-	return $settings;
 }
 function dslc_process_consolidated_row_css_values($row) {
 

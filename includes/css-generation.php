@@ -601,7 +601,6 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
     // This is the critical step that migrate old vertical and horizontal margin and padding values into new seperate values
     // the main loop below to find them when iterating over $module_structure.
 	$module_settings = dslc_process_consolidated_css_values( $module_settings );
-	$module_settings = dslc_process_seperate_units_values( $module_settings );
 
 	$css_output = '';
 	global $dslc_googlefonts_array;
@@ -974,39 +973,28 @@ function dslc_helper_is_border_radius( $property_name ) {
  */
 function lc_get_dynamic_unit( $dimensional_control_id, $module_settings, $default_unit ) {
 
-    // 1. First try exact side unit (new module support)
-    // css_padding_top -> css_padding_top_unit
-	$exact_unit_key = $dimensional_control_id . '_unit';
-
-    if (
-        isset($module_settings[$exact_unit_key]) &&
-        !empty($module_settings[$exact_unit_key])
-    ) {
-        return $module_settings[$exact_unit_key];
-    }
-
-    // old logic untouched below
+    // Define the dimensional suffixes that need to be stripped.
     $dimensional_suffixes = ['_top', '_right', '_bottom', '_left'];
-    if (
-        strpos($dimensional_control_id, '_padding') === false &&
-        strpos($dimensional_control_id, '_margin') === false
-    ) {
-        return $default_unit;
-    }
+    
+    // Check if the ID contains a dimensional property we manage.
+	if (
+		strpos( $dimensional_control_id, '_padding' ) === false &&
+		strpos( $dimensional_control_id, '_margin' ) === false
+	) {
+		return $default_unit;
+	}
 
-    $normalized_id = str_replace(
-        $dimensional_suffixes,
-        '',
-        $dimensional_control_id
-    );
+    // 1. Normalize the ID (strip direction)
+    // E.g., 'css_header_margin_bottom' becomes 'css_header_margin'
+    $normalized_id = str_replace( $dimensional_suffixes, '', $dimensional_control_id );
 
+    // 2. Predict the Unit Selector ID by appending '_unit'
+    // E.g., 'css_header_margin' becomes 'css_header_margin_unit'
     $unit_selector_id = $normalized_id . '_unit';
 
-    if (
-        isset($module_settings[$unit_selector_id]) &&
-        !empty($module_settings[$unit_selector_id])
-    ) {
-        return $module_settings[$unit_selector_id];
+    // 3. Look up the value in the saved settings
+    if ( isset( $module_settings[ $unit_selector_id ] ) && ! empty( $module_settings[ $unit_selector_id ] ) ) {
+        return $module_settings[ $unit_selector_id ];
     }
     return $default_unit;
 }
