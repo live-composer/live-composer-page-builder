@@ -195,7 +195,7 @@ function dslc_modules_area_display_options() {
 
 				<?php elseif ( 'select' === $modules_area_option['type'] ) : ?>
 
-					<select type="text" class="dslca-modules-area-edit-field dslca-modules-area-edit-field-select" data-id="<?php echo esc_attr( $modules_area_option['id'] ); ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" >
+					<select type="text" class="dslca-modules-area-edit-field dslca-modules-area-edit-field-select" data-id="<?php echo esc_attr( $modules_area_option['id'] ); ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" data-std="<?php echo esc_attr( $modules_area_option['std'] ); ?>" >
 						<?php foreach ( $modules_area_option['choices'] as $choice ) : ?>
 							<option value="<?php echo esc_attr( $choice['value'] ); ?>"><?php echo esc_attr( $choice['label'] ); ?></option>
 						<?php endforeach; ?>
@@ -227,6 +227,8 @@ function dslc_modules_area_display_options() {
 						$slider_increment = $modules_area_option['increment'];
 						$ext = $modules_area_option['ext'];
 						$curr_value = $modules_area_option['std'];
+						$unit_key = $modules_area_option['id'] . '_unit';
+       					$has_unit_class = isset( $dslc_var_modules_area_options[$unit_key] ) ? 'dslca-has-unit' : '';
 
 					?>
 					<div class="dslca-module-area-edit-field-numeric-wrap <?php echo $has_unit_class; ?>">
