@@ -5456,7 +5456,7 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 																In
 																<?php foreach ( $download_tags as $download_tag ) : $download_tags_count++; ?>
 																	<?php if ( $download_tags_count > 1 ) { echo ', '; } ?>
-																	<a href="<?php echo get_term_link( $download_tag->slug, 'dslc_downloads_tags' ); ?>"><?php echo $download_tag->name; ?></a>
+																	<a href="<?php echo esc_url( get_term_link( $download_tag->slug, 'dslc_downloads_tags' ) ); ?>"><?php echo esc_html( $download_tag->name ); ?></a>
 																<?php endforeach; ?>
 															</div><!-- .dslc-download-tags -->
 
@@ -5559,7 +5559,7 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 												In
 												<?php foreach ( $download_tags as $download_tag ) : $download_tags_count++; ?>
 													<?php if ( $download_tags_count > 1 ) { echo ', '; } ?>
-													<a href="<?php echo get_term_link( $download_tag->slug, 'dslc_downloads_tags' ); ?>"><?php echo $download_tag->name; ?></a>
+													<a href="<?php echo esc_url( get_term_link( $download_tag->slug, 'dslc_downloads_tags' ) ); ?>"><?php echo esc_html( $download_tag->name ); ?></a>
 												<?php endforeach; ?>
 											</div><!-- .dslc-download-tags -->
 
