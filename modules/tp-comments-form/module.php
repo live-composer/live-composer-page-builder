@@ -3239,7 +3239,15 @@ class DSLC_TP_Comments_Form extends DSLC_Module {
 function dslc_module_comments_form_output( $atts, $content = null ) {
 
 	// Uncode module options passed as serialized content.
-	$options = unserialize( $content );
+	$unserialize_args = ( version_compare( PHP_VERSION, '7.0.0', '>=' ) )
+		? array( 'allowed_classes' => false )
+		: null;
+
+	$options = @unserialize( $content, $unserialize_args );
+
+	if ( ! is_array( $options ) ) {
+		return '';
+	}
 
 	ob_start();
 

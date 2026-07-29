@@ -6641,15 +6641,23 @@ class DSLC_Blog extends DSLC_Module {
 function dslc_module_blog_output( $atts, $content = null ) {
 
 	// Uncode module options passed as serialized content.
-	$data = @unserialize( $content );
+	$unserialize_args = ( version_compare( PHP_VERSION, '7.0.0', '>=' ) )
+	? array( 'allowed_classes' => false )
+	: null;
+
+	$data = @unserialize( $content, $unserialize_args );
 
 	if ( $data !== false ) {
-		$options = unserialize( $content );
+		$options = $data;
 	} else {
-		$fixed_data = preg_replace_callback( '!s:(\d+):"(.*?)";!', function( $match ) {      
+		$fixed_data = preg_replace_callback( '!s:(\d+):"(.*?)";!', function( $match ) {
 			return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
 		}, $content );
-		$options = unserialize( $fixed_data );
+		$options = @unserialize( $fixed_data, $unserialize_args );
+	}
+
+	if ( ! is_array( $options ) ) {
+		return '';
 	}
 
 	ob_start();
