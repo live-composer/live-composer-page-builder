@@ -68,10 +68,10 @@ function dslc_sc_get_custom_field( $atts, $content ) {
 	if ( ! $id ) {
 		return 'Custom field ID not supplied ( "id" parameter ).';
 	}
-	$id = sanitize_key(esc_attr($args['id']));
+	$id = sanitize_key( $id );
 	$post_id = $args['post_id'];
 	if ($post_id) {
-		$post_id = sanitize_key(esc_attr($args['post_id']));
+		$post_id = absint( $post_id );
 	}
 
 	// If no post ID but in the loop, get current ID
@@ -80,14 +80,28 @@ function dslc_sc_get_custom_field( $atts, $content ) {
 	}
 
 	// If no post ID use $_POST ( this is mostly for the editor usage )
+	if ( ! $post_id && isset( $_POST['dslc_post_id'] ) ) {
+		$post_id = absint( $_POST['dslc_post_id'] );
+	}
+    
+	// Validate post ID
 	if ( ! $post_id ) {
-		$post_id = $_POST['dslc_post_id'];
+		return '';
 	}
 
-	// If the post has the custom field return the value
-	if ( get_post_meta( $post_id, $id, true ) ) {
-		return do_shortcode( get_post_meta( $post_id, $id, true ) );
+	// Verify current user can read the post
+	if ( ! current_user_can( 'read_post', $post_id ) ) {
+		return '';
 	}
+
+	// Get custom field value
+	$custom_field_value = get_post_meta( $post_id, $id, true );
+
+	if ( $custom_field_value ) {
+		return wp_kses_post( do_shortcode( $custom_field_value ) );
+	}
+
+	return '';
 
 } add_shortcode( 'dslc_custom_field', 'dslc_sc_get_custom_field' );
 

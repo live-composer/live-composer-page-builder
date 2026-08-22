@@ -1885,7 +1885,7 @@ function dslc_display_modules($page_id)
 			// Custom ID - Output
 			$section_id_output = '';
 			if ($section_id) {
-				$section_id_output = 'id="' . $section_id . '"';
+				$section_id_output = 'id="' . esc_attr( $section_id ) . '"';
 			}
 
 			$content_render = '';
@@ -2104,7 +2104,7 @@ function dslc_display_modules($page_id)
 			// Custom ID - Output
 			$modules_area_id_output =  "";
 			if ($modules_area_id) {
-				$modules_area_id_output .= 'id="' . $modules_area_id . '"';
+				$modules_area_id_output .= 'id="' . esc_attr( $modules_area_id )  . '"';
 			}
 
 

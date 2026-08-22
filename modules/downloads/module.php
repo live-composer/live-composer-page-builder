@@ -4991,6 +4991,80 @@ function dslc_module_downloads_output( $atts, $content = null ) {
 		return '';
 	}
 
+	$allowed_svg = array(
+		'svg' => array(
+			'xmlns'        => true,
+			'width'        => true,
+			'height'       => true,
+			'viewbox'      => true,
+			'class'        => true,
+			'fill'         => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+			'aria-hidden'  => true,
+			'role'         => true,
+		),
+		'g' => array(
+			'fill'         => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+			'transform'    => true,
+			'class'        => true,
+		),
+		'path' => array(
+			'd'            => true,
+			'fill'         => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+			'transform'    => true,
+			'class'        => true,
+		),
+		'circle' => array(
+			'cx'           => true,
+			'cy'           => true,
+			'r'            => true,
+			'fill'         => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+			'class'        => true,
+		),
+		'rect' => array(
+			'x'            => true,
+			'y'            => true,
+			'width'        => true,
+			'height'       => true,
+			'rx'           => true,
+			'ry'           => true,
+			'fill'         => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+			'class'        => true,
+		),
+		'line' => array(
+			'x1'           => true,
+			'x2'           => true,
+			'y1'           => true,
+			'y2'           => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+			'class'        => true,
+		),
+		'polyline' => array(
+			'points'       => true,
+			'fill'         => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+			'class'        => true,
+		),
+		'polygon' => array(
+			'points'       => true,
+			'fill'         => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+			'class'        => true,
+		),
+	);
+
 	ob_start();
 
 	if ( is_feed() ) {
@@ -5224,13 +5298,13 @@ function dslc_module_downloads_output( $atts, $content = null ) {
 
 					<div class="dslc-post-heading">
 
-						<h2 class="dslca-editable-content" data-id="main_heading_title" data-type="simple" <?php if ( $dslc_is_admin ) { echo 'contenteditable';} ?> ><?php echo stripslashes( $options['main_heading_title'] ); ?></h2>
+						<h2 class="dslca-editable-content" data-id="main_heading_title" data-type="simple" <?php if ( $dslc_is_admin ) { echo 'contenteditable';} ?> ><?php echo esc_html( stripslashes( $options['main_heading_title'] ) ); ?></h2>
 
 						<!-- View all -->
 
 						<?php if ( isset( $options['view_all_link'] ) && $options['view_all_link'] !== '' ) : ?>
 
-							<span class="dslc-module-heading-view-all"><a href="<?php echo $options['view_all_link']; ?>" class="dslca-editable-content" data-id="main_heading_link_title" data-type="simple" <?php if ( $dslc_is_admin ) { echo 'contenteditable';} ?> ><?php echo $options['main_heading_link_title']; ?></a></span>
+							<span class="dslc-module-heading-view-all"><a href="<?php echo esc_url( $options['view_all_link'] ); ?>" class="dslca-editable-content" data-id="main_heading_link_title" data-type="simple" <?php if ( $dslc_is_admin ) { echo 'contenteditable';} ?> ><?php echo $options['main_heading_link_title']; ?></a></span>
 
 						<?php endif; ?>
 
@@ -5507,13 +5581,13 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 														<div class="dslc-download-download">
 															<a target="_blank" class="dslc-download-count-hook" data-post-id="<?php echo get_the_ID(); ?>" href="<?php echo $download_link; ?>" download>
 																<?php if ( 'svg' == $options['show_icon'] ) : ?>
-																	<?php echo stripslashes( $options['button_inline_svg'] ); ?>
+																	<?php echo wp_kses( stripslashes( $options['button_inline_svg'] ?? '' ), $allowed_svg ); ?>
 																<?php elseif ( 'image' == $options['show_icon'] && ! empty( $options['button_icon_image'] ) ) : ?>
 																	<img class="dslc-button-icon-image" src="<?php echo esc_url( $options['button_icon_image'] ); ?>" alt="" />
 																<?php else : ?>
 																	<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
 																<?php endif; ?>
-																<?php echo $options['button_text']; ?>
+																<?php echo esc_html( $options['button_text'] ?? '' ); ?>
 															</a>
 														</div><!-- .dslc-download-download -->
 
@@ -5610,13 +5684,13 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 										<div class="dslc-download-download">
 											<a target="_blank" class="dslc-download-count-hook" data-post-id="<?php echo get_the_ID(); ?>" href="<?php echo $download_link; ?>" download>
 												<?php if ( 'svg' == $options['show_icon'] ) : ?>
-													<?php echo stripslashes( $options['button_inline_svg'] ); ?>
+													<?php echo wp_kses( stripslashes( $options['button_inline_svg'] ?? '' ), $allowed_svg ); ?>
 												<?php elseif ( 'image' == $options['show_icon'] && ! empty( $options['button_icon_image'] ) ) : ?>
 													<img class="dslc-button-icon-image" src="<?php echo esc_url( $options['button_icon_image'] ); ?>" alt="" />
 												<?php else : ?>
 													<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
 												<?php endif; ?>
-												<?php echo $options['button_text']; ?>
+												<?php echo esc_html( $options['button_text'] ?? '' ); ?>
 											</a>
 										</div><!-- .dslc-download-download -->
 
