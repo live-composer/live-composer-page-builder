@@ -5256,13 +5256,13 @@ function dslc_module_testimonials_output( $atts, $content = null ) {
 
 						<div class="dslc-post-heading">
 
-							<h2 class="dslca-editable-content" data-id="main_heading_title" data-type="simple" <?php if ( $dslc_is_admin ) { echo 'contenteditable';} ?> ><?php echo stripslashes( $options['main_heading_title'] ); ?></h2>
+							<h2 class="dslca-editable-content" data-id="main_heading_title" data-type="simple" <?php if ( $dslc_is_admin ) { echo 'contenteditable';} ?> ><?php echo esc_html( stripslashes( $options['main_heading_title'] ) ); ?></h2>
 
 							<!-- View all -->
 
 							<?php if ( isset( $options['view_all_link'] ) && $options['view_all_link'] !== '' ) : ?>
 
-								<span class="dslc-module-heading-view-all"><a href="<?php echo $options['view_all_link']; ?>" class="dslca-editable-content" data-id="main_heading_link_title" data-type="simple" <?php if ( $dslc_is_admin ) { echo 'contenteditable';} ?> ><?php echo $options['main_heading_link_title']; ?></a></span>
+								<span class="dslc-module-heading-view-all"><a href="<?php echo esc_url( $options['view_all_link'] ); ?>" class="dslca-editable-content" data-id="main_heading_link_title" data-type="simple" <?php if ( $dslc_is_admin ) { echo 'contenteditable';} ?> ><?php echo esc_html( $options['main_heading_link_title'] ); ?></a></span>
 
 							<?php endif; ?>
 
@@ -5296,7 +5296,7 @@ function dslc_module_testimonials_output( $atts, $content = null ) {
 			?>
 
 			<div class="dslc-post-filters">
-				<span class="dslc-post-filter dslc-active dslca-editable-content" data-filter-id="show-all" <?php if ( $dslc_is_admin ) { echo 'data-id="main_filter_title_all" data-type="simple" contenteditable '; } ?>><?php echo $options['main_filter_title_all']; ?></span>
+				<span class="dslc-post-filter dslc-active dslca-editable-content" data-filter-id="show-all" <?php if ( $dslc_is_admin ) { echo 'data-id="main_filter_title_all" data-type="simple" contenteditable '; } ?>><?php echo esc_html( $options['main_filter_title_all'] ); ?></span>
 
 				<?php foreach ( $cats_array as $cat_slug => $cat_name ) : ?>
 											<span class="dslc-post-filter dslc-inactive" data-filter-id="<?php echo $cat_slug; ?>"><?php echo $cat_name; ?></span>

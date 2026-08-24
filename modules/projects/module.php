@@ -6283,7 +6283,7 @@ function dslc_module_projects_output( $atts, $content = null ) {
 
 						<?php if ( isset( $options['view_all_link'] ) && $options['view_all_link'] !== '' ) : ?>
 
-							<span class="dslc-module-heading-view-all"><a href="<?php echo $options['view_all_link']; ?>" class="dslca-editable-content" data-id="main_heading_link_title" data-type="simple" <?php if ( $dslc_is_admin ) { echo 'contenteditable';} ?> ><?php echo $options['main_heading_link_title']; ?></a></span>
+							<span class="dslc-module-heading-view-all"><a href="<?php echo esc_url( $options['view_all_link'] ?? '' ); ?>" class="dslca-editable-content" data-id="main_heading_link_title" data-type="simple" <?php if ( $dslc_is_admin ) { echo 'contenteditable';} ?> ><?php echo esc_html( $options['main_heading_link_title'] ?? '' ); ?></a></span>
 
 						<?php endif; ?>
 
@@ -6317,7 +6317,7 @@ function dslc_module_projects_output( $atts, $content = null ) {
 				?>
 
 				<div class="dslc-post-filters">
-					<span class="dslc-post-filter dslc-active dslca-editable-content" data-filter-id="show-all" <?php if ( $dslc_is_admin ) { echo 'data-id="main_filter_title_all" data-type="simple" contenteditable '; } ?>><?php echo $options['main_filter_title_all']; ?></span>
+					<span class="dslc-post-filter dslc-active dslca-editable-content" data-filter-id="show-all" <?php if ( $dslc_is_admin ) { echo 'data-id="main_filter_title_all" data-type="simple" contenteditable '; } ?>><?php echo esc_html( $options['main_filter_title_all'] ?? '' ); ?></span>
 
 					<?php foreach ( $cats_array as $cat_slug => $cat_name ) : ?>
 										<span class="dslc-post-filter dslc-inactive" data-filter-id="<?php echo $cat_slug; ?>"><?php echo $cat_name; ?></span>
@@ -6568,7 +6568,7 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 										<?php else : ?>
 											<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 										<?php endif; ?>
-										<?php echo $options['button_text']; ?>
+										<?php echo esc_html( $options['button_text'] ?? '' ); ?>
 									</a>
 								</div><!-- .dslc-project-read-more -->
 
@@ -6687,7 +6687,7 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 						<?php else : ?>
 							<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>
 						<?php endif; ?>
-						<?php echo $options['button_text']; ?>
+						<?php echo esc_html( $options['button_text'] ?? '' ); ?>
 					</a>
 				</div><!-- .dslc-project-read-more -->
 
