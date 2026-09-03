@@ -29,6 +29,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "chromedriver": "^141.0.1",
     "copy-webpack-plugin": "^14.0.0",
+    "fast-uri": "^3.1.7",
     "jest": "^30.2.0",
     "jest-puppeteer": "^11.0.0",
     "mini-css-extract-plugin": "^2.9.4",
@@ -48,7 +49,6 @@
     "@babel/plugin-transform-modules-systemjs": "^7.29.4",
     "@babel/runtime": "^7.26.10",
     "form-data": "^4.0.6",
-    "axios": "^1.18.0",
-    "fast-uri": "^3.1.5"
+    "axios": "^1.18.0"
   }
 }
