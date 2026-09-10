@@ -1661,6 +1661,7 @@ div.dslca-add-modules-section {
 }
 .dslc-modules-section:hover {
   box-shadow: 0 0 0 2px #ef7c5b inset;
+   z-index: 9999999;
 }
 .dslc-modules-section.dslca-change-width-active {
   z-index: 100;
