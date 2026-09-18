@@ -19,7 +19,7 @@ function dslc_get_options( $section_id = false ) {
 		$options = get_option( $section_id );
 		return $options;
 
-	/* Options from all sections */
+		/* Options from all sections */
 	} else {
 
 		return 'Section ID not supplied';
@@ -33,7 +33,7 @@ function dslc_get_option( $option_id, $section_id ) {
 
 	global $dslc_plugin_options;
 
-	$value = null;
+	$value   = null;
 	$options = get_option( 'dslc_plugin_options' );
 
 	// New way to get options since 1.0.8 (no section required).

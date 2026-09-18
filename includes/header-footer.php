@@ -25,7 +25,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0
  */
-
 function dslc_hf_init() {
 	// Takes 0.02 sec. during a page loading process.
 	if ( ! defined( 'DS_LIVE_COMPOSER_HF' ) || ! DS_LIVE_COMPOSER_HF ) {
@@ -34,41 +33,44 @@ function dslc_hf_init() {
 
 	$capability = 'publish_posts';
 
-	register_post_type( 'dslc_hf', array(
-		'menu_icon' => 'dashicons-image-flip-vertical',
-		'labels' => array(
-			'name'				=> __( 'Headers & Footers', 'live-composer-page-builder' ),
-			'menu_name' 		=> __( 'Headers/Footers', 'live-composer-page-builder' ),
-			'singular_name' 	=> __( 'Add Header/Footer', 'live-composer-page-builder' ),
-			'add_new' 			=> __( 'Add Header/Footer', 'live-composer-page-builder' ),
-			'add_new_item' 	=> __( 'Add Header/Footer', 'live-composer-page-builder' ),
-			'edit' 				=> __( 'Edit', 'live-composer-page-builder' ),
-			'edit_item' 		=> __( 'Edit Header/Footer', 'live-composer-page-builder' ),
-			'new_item' 			=> __( 'New Header/Footer', 'live-composer-page-builder' ),
-			'view' 				=> __( 'View Header/Footer', 'live-composer-page-builder' ),
-			'view_item' 		=> __( 'View Header/Footer', 'live-composer-page-builder' ),
-			'search_items' 	=> __( 'Search Header/Footer', 'live-composer-page-builder' ),
-			'not_found' 		=> __( 'No Header/Footer found', 'live-composer-page-builder' ),
-			'not_found_in_trash' => __( 'No Header/Footer found in Trash', 'live-composer-page-builder' ),
-			'parent' 			=> __( 'Parent Header/Footer', 'live-composer-page-builder' ),
-		),
-		'public' => true,
-		'exclude_from_search' => true,
-		'publicly_queryable' => true,
-		'supports' => array( 'title', 'custom-fields', 'author', 'thumbnail' ),
-		'capabilities' => array(
-			'publish_posts' => $capability,
-			'edit_posts' => $capability,
-			'edit_others_posts' => $capability,
-			'delete_posts' => $capability,
-			'delete_others_posts' => $capability,
-			'read_private_posts' => $capability,
-			'edit_post' => $capability,
-			'delete_post' => $capability,
-			'read_post' => $capability,
-		),
-		'show_in_menu' => 'dslc_plugin_options',
-	) );
+	register_post_type(
+		'dslc_hf',
+		array(
+			'menu_icon'           => 'dashicons-image-flip-vertical',
+			'labels'              => array(
+				'name'               => __( 'Headers & Footers', 'live-composer-page-builder' ),
+				'menu_name'          => __( 'Headers/Footers', 'live-composer-page-builder' ),
+				'singular_name'      => __( 'Add Header/Footer', 'live-composer-page-builder' ),
+				'add_new'            => __( 'Add Header/Footer', 'live-composer-page-builder' ),
+				'add_new_item'       => __( 'Add Header/Footer', 'live-composer-page-builder' ),
+				'edit'               => __( 'Edit', 'live-composer-page-builder' ),
+				'edit_item'          => __( 'Edit Header/Footer', 'live-composer-page-builder' ),
+				'new_item'           => __( 'New Header/Footer', 'live-composer-page-builder' ),
+				'view'               => __( 'View Header/Footer', 'live-composer-page-builder' ),
+				'view_item'          => __( 'View Header/Footer', 'live-composer-page-builder' ),
+				'search_items'       => __( 'Search Header/Footer', 'live-composer-page-builder' ),
+				'not_found'          => __( 'No Header/Footer found', 'live-composer-page-builder' ),
+				'not_found_in_trash' => __( 'No Header/Footer found in Trash', 'live-composer-page-builder' ),
+				'parent'             => __( 'Parent Header/Footer', 'live-composer-page-builder' ),
+			),
+			'public'              => true,
+			'exclude_from_search' => true,
+			'publicly_queryable'  => true,
+			'supports'            => array( 'title', 'custom-fields', 'author', 'thumbnail' ),
+			'capabilities'        => array(
+				'publish_posts'       => $capability,
+				'edit_posts'          => $capability,
+				'edit_others_posts'   => $capability,
+				'delete_posts'        => $capability,
+				'delete_others_posts' => $capability,
+				'read_private_posts'  => $capability,
+				'edit_post'           => $capability,
+				'delete_post'         => $capability,
+				'read_post'           => $capability,
+			),
+			'show_in_menu'        => 'dslc_plugin_options',
+		)
+	);
 
 	/**
 	 * Options
@@ -76,15 +78,15 @@ function dslc_hf_init() {
 
 	global $dslc_var_post_options;
 	$dslc_var_post_options['dslc-hf-opts'] = array(
-		'title' => 'Options',
+		'title'   => 'Options',
 		'show_on' => 'dslc_hf',
 		'options' => array(
 			array(
-				'label' => __( 'For', 'live-composer-page-builder' ),
-				'descr' => __( 'Choose what is this for, header or footer.', 'live-composer-page-builder' ),
-				'std' => 'header',
-				'id' => 'dslc_hf_for',
-				'type' => 'select',
+				'label'   => __( 'For', 'live-composer-page-builder' ),
+				'descr'   => __( 'Choose what is this for, header or footer.', 'live-composer-page-builder' ),
+				'std'     => 'header',
+				'id'      => 'dslc_hf_for',
+				'type'    => 'select',
 				'choices' => array(
 					array(
 						'label' => 'Header',
@@ -97,11 +99,11 @@ function dslc_hf_init() {
 				),
 			),
 			array(
-				'label' => __( 'Type', 'live-composer-page-builder' ),
-				'std' => 'regular',
-				'descr' => __( '<strong>Default</strong> will be used as the default for all the posts and pages. <strong>Regular</strong> is an additional type that you can set to specific posts/pages.', 'live-composer-page-builder' ),
-				'id' => 'dslc_hf_type',
-				'type' => 'radio',
+				'label'   => __( 'Type', 'live-composer-page-builder' ),
+				'std'     => 'regular',
+				'descr'   => __( '<strong>Default</strong> will be used as the default for all the posts and pages. <strong>Regular</strong> is an additional type that you can set to specific posts/pages.', 'live-composer-page-builder' ),
+				'id'      => 'dslc_hf_type',
+				'type'    => 'radio',
 				'choices' => array(
 					array(
 						'label' => 'Regular',
@@ -114,11 +116,11 @@ function dslc_hf_init() {
 				),
 			),
 			array(
-				'label' => __( 'Position', 'live-composer-page-builder' ),
-				'std' => 'relative',
-				'descr' => __( '<strong>Relative</strong> is normal positioning. <strong>Fixed</strong> position will make the header/footer sticky on the top of the browser while the page is scrolled. <strong>Absolute</strong> will make the regular page content go behind the header/footer.', 'live-composer-page-builder' ),
-				'id' => 'dslc_hf_position',
-				'type' => 'radio',
+				'label'   => __( 'Position', 'live-composer-page-builder' ),
+				'std'     => 'relative',
+				'descr'   => __( '<strong>Relative</strong> is normal positioning. <strong>Fixed</strong> position will make the header/footer sticky on the top of the browser while the page is scrolled. <strong>Absolute</strong> will make the regular page content go behind the header/footer.', 'live-composer-page-builder' ),
+				'id'      => 'dslc_hf_position',
+				'type'    => 'radio',
 				'choices' => array(
 					array(
 						'label' => 'Relative',
@@ -135,11 +137,11 @@ function dslc_hf_init() {
 				),
 			),
 			array(
-				'label' => __( '', 'live-composer-page-builder' ),
-				'std' => '',
-				'descr' => __( 'Add extra bottom padding on the top of the page under the header.' ),
-				'id' => 'dslc_extra_padding',
-				'type' => 'checkbox',
+				'label'   => __( '', 'live-composer-page-builder' ),
+				'std'     => '',
+				'descr'   => __( 'Add extra bottom padding on the top of the page under the header.' ),
+				'id'      => 'dslc_extra_padding',
+				'type'    => 'checkbox',
 				'choices' => array(
 					array(
 						'label' => 'Bottom padding',
@@ -149,7 +151,6 @@ function dslc_hf_init() {
 			),
 		),
 	);
-
 } add_action( 'init', 'dslc_hf_init' );
 
 /**
@@ -157,7 +158,6 @@ function dslc_hf_init() {
  *
  * @since 1.0
  */
-
 function dslc_hf_col_title( $defaults ) {
 
 	if ( ! defined( 'DS_LIVE_COMPOSER_HF' ) || ! DS_LIVE_COMPOSER_HF ) {
@@ -166,10 +166,9 @@ function dslc_hf_col_title( $defaults ) {
 
 	unset( $defaults['date'] );
 	unset( $defaults['author'] );
-	$defaults['dslc_hf_col_cpt'] = 'For';
+	$defaults['dslc_hf_col_cpt']     = 'For';
 	$defaults['dslc_hf_col_default'] = 'Type';
 	return $defaults;
-
 } add_filter( 'manage_dslc_hf_posts_columns', 'dslc_hf_col_title', 5 );
 
 /**
@@ -177,7 +176,6 @@ function dslc_hf_col_title( $defaults ) {
  *
  * @since 1.0
  */
-
 function dslc_hf_col_content( $column_name, $post_id ) {
 
 	if ( ! defined( 'DS_LIVE_COMPOSER_HF' ) || ! DS_LIVE_COMPOSER_HF ) {
@@ -193,7 +191,6 @@ function dslc_hf_col_content( $column_name, $post_id ) {
 					echo '<strong>Default</strong>';
 		}
 	}
-
 } add_action( 'manage_dslc_hf_posts_custom_column', 'dslc_hf_col_content', 10, 2 );
 
 /**
@@ -201,7 +198,6 @@ function dslc_hf_col_content( $column_name, $post_id ) {
  *
  * @since 1.0
  */
-
 function dslc_hf_unique_default( $post_id ) {
 
 	if ( ! defined( 'DS_LIVE_COMPOSER_HF' ) || ! DS_LIVE_COMPOSER_HF ) {
@@ -228,24 +224,24 @@ function dslc_hf_unique_default( $post_id ) {
 		return;
 	}
 
-	if ( $_POST['dslc_hf_for'] ) { 
+	if ( $_POST['dslc_hf_for'] ) {
 		$dslc_hf_for = sanitize_text_field( $_POST['dslc_hf_for'] );
 	}
 
 	// Get header/footer that are default
-	$args = array(
-		'post_type' => 'dslc_hf',
-		'post_status' => 'any',
+	$args      = array(
+		'post_type'      => 'dslc_hf',
+		'post_status'    => 'any',
 		'posts_per_page' => -1,
-		'meta_query' => array(
+		'meta_query'     => array(
 			array(
-				'key' => 'dslc_hf_for',
-				'value' => $dslc_hf_for,
+				'key'     => 'dslc_hf_for',
+				'value'   => $dslc_hf_for,
 				'compare' => '=',
 			),
 			array(
-				'key' => 'dslc_hf_type',
-				'value' => 'default',
+				'key'     => 'dslc_hf_type',
+				'value'   => 'default',
 				'compare' => '=',
 			),
 		),
@@ -261,7 +257,6 @@ function dslc_hf_unique_default( $post_id ) {
 
 	// Reset query.
 	wp_reset_query();
-
 } add_action( 'save_post', 'dslc_hf_unique_default' );
 
 /**
@@ -269,7 +264,6 @@ function dslc_hf_unique_default( $post_id ) {
  *
  * @since 1.0
  */
-
 function dslc_hf_options() {
 	// Takes 0.02 sec during a page loading.
 	$dslc_admin_interface_on = apply_filters( 'dslc_admin_interface_on', true );
@@ -278,7 +272,7 @@ function dslc_hf_options() {
 		return;
 	}
 
-	$headers_array = array();
+	$headers_array   = array();
 	$headers_array[] = array(
 		'label' => 'Default',
 		'value' => 'default',
@@ -287,7 +281,7 @@ function dslc_hf_options() {
 		'label' => 'Disabled',
 		'value' => '_disabled_',
 	);
-	$footers_array = array();
+	$footers_array   = array();
 	$footers_array[] = array(
 		'label' => 'Default',
 		'value' => 'default',
@@ -300,11 +294,11 @@ function dslc_hf_options() {
 	global $dslc_var_post_options;
 
 	// Get header/footer.
-	$args = array(
-		'post_type' => 'dslc_hf',
-		'post_status' => 'publish',
+	$args      = array(
+		'post_type'      => 'dslc_hf',
+		'post_status'    => 'publish',
 		'posts_per_page' => -1,
-		'order' => 'DESC',
+		'order'          => 'DESC',
 	);
 	$templates = get_posts( $args );
 
@@ -326,28 +320,27 @@ function dslc_hf_options() {
 		}
 
 		$dslc_var_post_options['dslc-hf-options'] = array(
-			'title' => __( 'Header/Footer', 'live-composer-page-builder' ),
+			'title'   => __( 'Header/Footer', 'live-composer-page-builder' ),
 			'show_on' => array( 'page', 'dslc_templates' ),
 			'context' => 'side',
 			'options' => array(
 				array(
-					'label' => __( 'Header', 'live-composer-page-builder' ),
-					'std' => '',
-					'id' => 'dslc_header',
-					'type' => 'select',
+					'label'   => __( 'Header', 'live-composer-page-builder' ),
+					'std'     => '',
+					'id'      => 'dslc_header',
+					'type'    => 'select',
 					'choices' => $headers_array,
 				),
 				array(
-					'label' => __( 'Footer', 'live-composer-page-builder' ),
-					'std' => '',
-					'id' => 'dslc_footer',
-					'type' => 'select',
+					'label'   => __( 'Footer', 'live-composer-page-builder' ),
+					'std'     => '',
+					'id'      => 'dslc_footer',
+					'type'    => 'select',
 					'choices' => $footers_array,
 				),
 			),
 		);
 	} // End if().
-
 } add_action( 'init', 'dslc_hf_options' );
 
 /**
@@ -364,9 +357,9 @@ function dslc_hf_get_ID( $post_id = false ) {
 	// If current page is actually header/footer post, return false.
 	if ( ! defined( 'DS_LIVE_COMPOSER_HF' ) || ! DS_LIVE_COMPOSER_HF || is_singular( 'dslc_hf' ) ) {
 		return array(
-				'header' => false,
-				'footer' => false,
-			);
+			'header' => false,
+			'footer' => false,
+		);
 	}
 
 	// Global vars.
@@ -420,22 +413,22 @@ function dslc_hf_get_ID( $post_id = false ) {
 
 		// Query for default template
 		$args = array(
-			'post_type' => 'dslc_hf',
-			'post_status' => 'publish',
+			'post_type'      => 'dslc_hf',
+			'post_status'    => 'publish',
 			'posts_per_page' => 1,
-			'meta_query' => array(
+			'meta_query'     => array(
 				array(
-					'key' => 'dslc_hf_for',
-					'value' => 'header',
+					'key'     => 'dslc_hf_for',
+					'value'   => 'header',
 					'compare' => '=',
 				),
 				array(
-					'key' => 'dslc_hf_type',
-					'value' => 'default',
+					'key'     => 'dslc_hf_type',
+					'value'   => 'default',
 					'compare' => '=',
 				),
 			),
-			'order' => 'DESC',
+			'order'          => 'DESC',
 		);
 		$tpls = get_posts( $args );
 
@@ -460,22 +453,22 @@ function dslc_hf_get_ID( $post_id = false ) {
 
 		// Query for default template.
 		$args = array(
-			'post_type' => 'dslc_hf',
-			'post_status' => 'publish',
+			'post_type'      => 'dslc_hf',
+			'post_status'    => 'publish',
 			'posts_per_page' => 1,
-			'meta_query' => array(
+			'meta_query'     => array(
 				array(
-					'key' => 'dslc_hf_for',
-					'value' => 'footer',
+					'key'     => 'dslc_hf_for',
+					'value'   => 'footer',
 					'compare' => '=',
 				),
 				array(
-					'key' => 'dslc_hf_type',
-					'value' => 'default',
+					'key'     => 'dslc_hf_type',
+					'value'   => 'default',
 					'compare' => '=',
 				),
 			),
-			'order' => 'DESC',
+			'order'          => 'DESC',
 		);
 		$tpls = get_posts( $args );
 
@@ -551,12 +544,12 @@ function dslc_hf_get_headerfooter( $post_id = false, $hf_type = 'header' ) {
 	// Compilation time 3.375 sec. before caching / 0.03 sec after caching.
 	// Get header/footer ID associated with the post.
 	$header_footer = dslc_hf_get_ID( $post_id );
-	$hf_id = false;
+	$hf_id         = false;
 
 	// Var defaults.
-	$append = '';
-	$wrapper_start = '';
-	$wrapper_end = '';
+	$append              = '';
+	$wrapper_start       = '';
+	$wrapper_end         = '';
 	$editing_parametters = '';
 
 	if ( $header_footer[ $hf_type ] && is_numeric( $header_footer[ $hf_type ] ) ) {
@@ -600,21 +593,21 @@ function dslc_hf_get_headerfooter( $post_id = false, $hf_type = 'header' ) {
 		$editing_parametters .= ' data-editing-type="' . $hf_type . '"';
 
 		if ( 'header' === $hf_type ) {
-			$editing_parametters .= ' data-editing-label="' . __( 'Edit Header','live-composer-page-builder' ) . '"';
+			$editing_parametters .= ' data-editing-label="' . __( 'Edit Header', 'live-composer-page-builder' ) . '"';
 		} else {
-			$editing_parametters .= ' data-editing-label="' . __( 'Edit Footer','live-composer-page-builder' ) . '"';
+			$editing_parametters .= ' data-editing-label="' . __( 'Edit Footer', 'live-composer-page-builder' ) . '"';
 		}
 
 		// ============================================================
 		if ( 'fixed' === $position ) {
-			$editing_parametters .= ' data-editing-sublabel="' . __( 'To preview FIXED positioning click on [Hide Editor] button.','live-composer-page-builder' ) . '"';
+			$editing_parametters .= ' data-editing-sublabel="' . __( 'To preview FIXED positioning click on [Hide Editor] button.', 'live-composer-page-builder' ) . '"';
 		} elseif ( 'absolute' === $position ) {
-			$editing_parametters .= ' data-editing-sublabel="' . __( 'To preview ABSOLUTE positioning click on [Hide Editor] button.','live-composer-page-builder' ) . '"';
+			$editing_parametters .= ' data-editing-sublabel="' . __( 'To preview ABSOLUTE positioning click on [Hide Editor] button.', 'live-composer-page-builder' ) . '"';
 		}
 	}
 
 	// Initiate simple html rendering cache.
-	$cache = new DSLC_Cache( 'html' );
+	$cache    = new DSLC_Cache( 'html' );
 	$cache_id = $hf_id;
 
 	// Check if we have html for this code cached?
@@ -712,7 +705,7 @@ function dslc_hf_get_footer( $post_id = false ) {
  * @return void
  */
 function dslc_redirect_from_hf_posts() {
-	if ( is_singular( 'dslc_hf' ) && ( ! is_user_logged_in() || ! current_user_can( DS_LIVE_COMPOSER_CAPABILITY )) ) {
+	if ( is_singular( 'dslc_hf' ) && ( ! is_user_logged_in() || ! current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) ) {
 		wp_safe_redirect( get_home_url() );
 		exit;
 	}

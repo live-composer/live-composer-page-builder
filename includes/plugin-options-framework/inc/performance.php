@@ -15,15 +15,15 @@ function dslc_perf_settings_init() {
 	global $dslc_plugin_options;
 
 	$dslc_plugin_options['dslc_plugin_options_performance'] = array(
-		'title' => __( 'Performance', 'live-composer-page-builder' ),
+		'title'   => __( 'Performance', 'live-composer-page-builder' ),
 		'options' => array(
 			'lc_caching_engine' => array(
 
 				'section' => 'dslc_plugin_options_performance',
-				'label' => __( 'Basic HTML/CSS Caching', 'live-composer-page-builder' ),
-				'std' => 'enabled',
-				'type' => 'select',
-				'descr' => __( 'Basic caching engine reduce page loading times. Rendered HTML and CSS get saved in the database.', 'live-composer-page-builder' ),
+				'label'   => __( 'Basic HTML/CSS Caching', 'live-composer-page-builder' ),
+				'std'     => 'enabled',
+				'type'    => 'select',
+				'descr'   => __( 'Basic caching engine reduce page loading times. Rendered HTML and CSS get saved in the database.', 'live-composer-page-builder' ),
 				'choices' => array(
 					array(
 						'label' => 'Enabled',
@@ -35,13 +35,13 @@ function dslc_perf_settings_init() {
 					),
 				),
 			),
-			'lc_gfont_subsets' => array(
+			'lc_gfont_subsets'  => array(
 
 				'section' => 'dslc_plugin_options_performance',
-				'label' => __( 'Font Subsets', 'live-composer-page-builder' ),
-				'std' => array( 'latin', 'latin-ext', 'cyrillic', 'cyrillic-ext' ),
-				'type' => 'checkbox',
-				'descr' => __( 'Which font subsets should be loaded.', 'live-composer-page-builder' ),
+				'label'   => __( 'Font Subsets', 'live-composer-page-builder' ),
+				'std'     => array( 'latin', 'latin-ext', 'cyrillic', 'cyrillic-ext' ),
+				'type'    => 'checkbox',
+				'descr'   => __( 'Which font subsets should be loaded.', 'live-composer-page-builder' ),
 				'choices' => array(
 					array(
 						'label' => 'Latin',
@@ -133,12 +133,12 @@ function dslc_perf_settings_init() {
 					),
 				),
 			),
-			'lc_preset' => array(
+			'lc_preset'         => array(
 
 				'section' => 'dslc_plugin_options_performance',
-				'label' => __( 'Update modules with the same preset', 'live-composer-page-builder' ),
-				'std' => 'enabled',
-				'type' => 'radio',
+				'label'   => __( 'Update modules with the same preset', 'live-composer-page-builder' ),
+				'std'     => 'enabled',
+				'type'    => 'radio',
 				'choices' => array(
 					array(
 						'label' => 'After styling panel closes',
@@ -152,5 +152,4 @@ function dslc_perf_settings_init() {
 			),
 		),
 	);
-
 } add_action( 'dslc_hook_register_options', 'dslc_perf_settings_init' );

@@ -20,7 +20,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0
  */
-
 function dslc_plugin_action_links( $links ) {
 
 	// Woo integration
@@ -41,7 +40,6 @@ function dslc_plugin_action_links( $links ) {
 
 	// Pass it back
 	return $links;
-
 } add_filter( 'plugin_action_links_' . DS_LIVE_COMPOSER_BASENAME, 'dslc_plugin_action_links' );
 
 function dslc_icons() {
@@ -60,9 +58,9 @@ function dslc_icons() {
 
 	$dslc_var_icon_fonts = array(
 		'fontawesome' => array(
-				'font_path' => DS_LIVE_COMPOSER_URL . 'css/font-awesome.css', // File.
-				'version' => DS_LIVE_COMPOSER_VER, // Version stamp to reset browser cache.
-			),
+			'font_path' => DS_LIVE_COMPOSER_URL . 'css/font-awesome.css', // File.
+			'version'   => DS_LIVE_COMPOSER_VER, // Version stamp to reset browser cache.
+		),
 	);
 
 	$dslc_var_icon_fonts = apply_filters( 'dslc_icon_fonts', $dslc_var_icon_fonts );
@@ -71,18 +69,17 @@ function dslc_icons() {
 	 * Usage example from 3-rd party plugin:
 	 *
 	 * function sklc_linecons_alter_icons( $icons ) {
-	 * 	$icons['linecons'] = array( "linecons-banknote", "linecons-bubble", ... );
-	 * 	return $icons;
+	 *  $icons['linecons'] = array( "linecons-banknote", "linecons-bubble", ... );
+	 *  return $icons;
 	 * } add_filter( 'dslc_available_icons', 'sklc_linecons_alter_icons' );
 	 *
 	 * function sklc_linecons_add_files( $icon_fonts ) {
-	 * 	$icon_fonts['linecons'] = array(
-	 * 		'font_path' => plugin_dir_url( __FILE__ ) . 'css/font-linecons.css',
-	 * 	),
-	 * 	return $icon_fonts;
+	 *  $icon_fonts['linecons'] = array(
+	 *      'font_path' => plugin_dir_url( __FILE__ ) . 'css/font-linecons.css',
+	 *  ),
+	 *  return $icon_fonts;
 	 * } add_filter( 'dslc_icon_fonts', 'sklc_linecons_add_files' );
 	 */
-
 } add_action( 'init', 'dslc_icons' );
 
 
@@ -92,7 +89,6 @@ function dslc_icons() {
  *
  * @since 1.8
  */
-
 function dslc_icons_modal() {
 
 	// Make no sense to continue if used not logged in.
@@ -101,13 +97,13 @@ function dslc_icons_modal() {
 	}
 
 	global $dslc_active,
-			 $dslc_var_icons; // Array with icon sets.
+			$dslc_var_icons; // Array with icon sets.
 
-	$screen = get_current_screen();
+	$screen                  = get_current_screen();
 	$screens_with_icon_modal = array(
-			'toplevel_page_livecomposer_editor',
-			'nav-menus', // used by premium mega menu extension.
-		);
+		'toplevel_page_livecomposer_editor',
+		'nav-menus', // used by premium mega menu extension.
+	);
 
 	if ( ! is_object( $screen ) ) {
 		return;
@@ -152,20 +148,19 @@ add_action( 'admin_footer', 'dslc_icons_modal' );
  * to make sure it doesn't break our page builder
  * with unnecessary page caching or minimization
  */
-
 function dslc_w3tc_admin_notice() {
 
 	if ( class_exists( 'W3_Root' ) ) {
 
 		$w3tc_config = w3_instance( 'W3_Config' );
 
-		$screen = get_current_screen();
+		$screen              = get_current_screen();
 		$current_parent_base = $screen->parent_base;
 
-		$notice_id = 'w3tc_wrong_settings';
-		$display_notice = false;
+		$notice_id        = 'w3tc_wrong_settings';
+		$display_notice   = false;
 		$notice_dismissed = dslc_notice_dismissed( $notice_id );
-		$notice_nonce = dslc_generate_notice_nonce( $notice_id );
+		$notice_nonce     = dslc_generate_notice_nonce( $notice_id );
 
 		// Page Cache
 		// Don't cache pages for logged in users
@@ -185,15 +180,18 @@ function dslc_w3tc_admin_notice() {
 
 			<div class="notice dslc-notice notice-error is-dismissible" id="<?php echo $notice_id; ?>" data-nonce="<?php echo $notice_nonce; ?>">
 				<p><?php _e( 'There is a problem in W3 Total Cache plugin settings that <strong>can break your page builder</strong>. Luckily, <a href="' . admin_url( 'admin.php?page=dslc_getting_started' ) . '">it\'s easy to fix it</a>.', 'live-composer-page-builder' ); ?></p>
-			</div><?php
+			</div>
+			<?php
 
-		} elseif ( $display_notice && $current_parent_base == 'dslc_plugin_options' ) { ?>
+		} elseif ( $display_notice && $current_parent_base == 'dslc_plugin_options' ) {
+			?>
 
 				<div class="notice dslc-notice notice-error is-dismissible" id="<?php echo $notice_id; ?>" data-nonce="<?php echo $notice_nonce; ?>">
 					<p><?php _e( 'Wrong <strong>W3 Total Cache plugin</strong> settings can break Live Composer. Please check the next settings:', 'live-composer-page-builder' ); ?></p>
 					<ul style="padding-left: 30px;">
 						<?php if ( ! $pgcache_reject_logged ) { ?>
-							<li type="disc"><?php
+							<li type="disc">
+							<?php
 								echo ' <a href="' . admin_url( 'admin.php?page=w3tc_pgcache' ) . '" target="_blank">';
 								_e( 'WP Admin &#8594; Performance &#8594; Page Cache', 'live-composer-page-builder' );
 								echo ' &#8594; ';
@@ -202,11 +200,12 @@ function dslc_w3tc_admin_notice() {
 								_e( 'Don\'t cache pages for logged in users', 'live-composer-page-builder' );
 								echo '</strong> ';
 								_e( '– should be selected', 'live-composer-page-builder' );
-								?>
+							?>
 							</li>
 						<?php } ?>
 						<?php if ( ! $minify_reject_logged ) { ?>
-							<li type="disc"><?php
+							<li type="disc">
+							<?php
 								echo ' <a href="' . admin_url( 'admin.php?page=w3tc_minify' ) . '" target="_blank">';
 								_e( 'WP Admin &#8594; Performance &#8594; Page Cache', 'live-composer-page-builder' );
 								echo ' &#8594; ';
@@ -215,11 +214,12 @@ function dslc_w3tc_admin_notice() {
 								_e( 'Disable minify for logged in users', 'live-composer-page-builder' );
 								echo '</strong> ';
 								_e( '– should be selected', 'live-composer-page-builder' );
-								?>
+							?>
 							</li>
 						<?php } ?>
 						<?php if ( ! $dbcache_reject_logged ) { ?>
-							<li type="disc"><?php
+							<li type="disc">
+							<?php
 								echo ' <a href="' . admin_url( 'admin.php?page=w3tc_dbcache' ) . '" target="_blank">';
 								_e( 'WP Admin &#8594; Performance &#8594; Page Cache', 'live-composer-page-builder' );
 								echo ' &#8594; ';
@@ -228,14 +228,14 @@ function dslc_w3tc_admin_notice() {
 								_e( 'Don\'t cache queries for logged in users', 'live-composer-page-builder' );
 								echo '</strong> ';
 								_e( '– should be selected', 'live-composer-page-builder' );
-								?>
+							?>
 							</li>
 						<?php } ?>
 					</ul>
 				</div>
-		<?php }// End if().
+			<?php
+		}// End if().
 	}// End if().
-
 }
 add_action( 'admin_notices', 'dslc_w3tc_admin_notice' );
 
@@ -253,41 +253,45 @@ add_action( 'admin_notices', 'dslc_w3tc_admin_notice' );
  */
 function dslc_check_wpsettings_admin_notice() {
 
-	$wp_url = get_option( 'siteurl' );
+	$wp_url      = get_option( 'siteurl' );
 	$wp_site_url = get_option( 'home' );
-	$check_url = strcmp( $wp_url, $wp_site_url );
+	$check_url   = strcmp( $wp_url, $wp_site_url );
 
-	$screen = get_current_screen();
+	$screen              = get_current_screen();
 	$current_parent_base = $screen->parent_base;
 
-	$notice_id = 'wrong_wpsettings_settings';
-	$display_notice = false;
+	$notice_id        = 'wrong_wpsettings_settings';
+	$display_notice   = false;
 	$notice_dismissed = dslc_notice_dismissed( $notice_id );
-	$notice_nonce = dslc_generate_notice_nonce( $notice_id );
+	$notice_nonce     = dslc_generate_notice_nonce( $notice_id );
 
 	if ( ! $notice_dismissed && $check_url ) {
 		$display_notice = true;
 	}
 
-	if ( $display_notice && $current_parent_base != 'dslc_plugin_options' ) {?>
+	if ( $display_notice && $current_parent_base != 'dslc_plugin_options' ) {
+		?>
 
 		<div class="notice dslc-notice notice-error is-dismissible" id="<?php echo $notice_id; ?>" data-nonce="<?php echo $notice_nonce; ?>">
 			<p><?php _e( '<strong>Live Composer:</strong> probably there is a problem with your website settings. <a href="' . admin_url( 'admin.php?page=dslc_plugin_options' ) . '">Click here to find out more.</a>', 'live-composer-page-builder' ); ?></p>
-		</div><?php
+		</div>
+		<?php
 
-	} elseif ( $display_notice && $current_parent_base == 'dslc_plugin_options' ) { ?>
+	} elseif ( $display_notice && $current_parent_base == 'dslc_plugin_options' ) {
+		?>
 
 			<div class="notice dslc-notice notice-error is-dismissible" id="<?php echo $notice_id; ?>" data-nonce="<?php echo $notice_nonce; ?>">
-				<p><?php _e( 'Wrong settings found in <strong><a href="' . admin_url( 'options-general.php' ) . '" target="_blank">WP Admin &#8594; Settings</a></strong>: <strong>Wordpress Address</strong> and <strong>Site Address</strong> should be the same to make front-editing possible with Live Composer.', 'live-composer-page-builder' ); ?></p>
+				<p><?php _e( 'Wrong settings found in <strong><a href="' . admin_url( 'options-general.php' ) . '" target="_blank">WP Admin &#8594; Settings</a></strong>: <strong>WordPress Address</strong> and <strong>Site Address</strong> should be the same to make front-editing possible with Live Composer.', 'live-composer-page-builder' ); ?></p>
 			</div>
-	<?php }
+		<?php
+	}
 }
 add_action( 'admin_notices', 'dslc_check_wpsettings_admin_notice' );
 
 function dslc_module_options_func( $module_options ) {
 
 	$other_options = DSLC_Module::common_options();
-	$options = array_merge( $module_options, $other_options['custom_class'] );
+	$options       = array_merge( $module_options, $other_options['custom_class'] );
 
 	$elements_key = array_search( 'styling', array_column( $options, 'section' ) );
 	array_splice( $options, $elements_key + 1, 0, $other_options['css_custom'] );
@@ -323,81 +327,81 @@ add_action( 'add_meta_boxes', 'dslc_remove_yoast_metabox', 11 );
  */
 function dslc_required_addons_update_notice() {
 
-    $ext_plugin = 'lc-extensions/lc-extensions.php';
-    $woo_plugin = 'lc-woo-integration/lc-woo-integration.php';
+	$ext_plugin = 'lc-extensions/lc-extensions.php';
+	$woo_plugin = 'lc-woo-integration/lc-woo-integration.php';
 
-    if ( ! function_exists( 'get_plugin_data' ) ) {
-        require_once ABSPATH . 'wp-admin/includes/plugin.php';
-    }
+	if ( ! function_exists( 'get_plugin_data' ) ) {
+		require_once ABSPATH . 'wp-admin/includes/plugin.php';
+	}
 
-    $screen = get_current_screen();
-    $current_parent_base = $screen->parent_base;
+	$screen              = get_current_screen();
+	$current_parent_base = $screen->parent_base;
 
-    $notice_id = 'dslc_addons_update_required';
-    $notice_dismissed = dslc_notice_dismissed( $notice_id );
-    $notice_nonce = dslc_generate_notice_nonce( $notice_id );
+	$notice_id        = 'dslc_addons_update_required';
+	$notice_dismissed = dslc_notice_dismissed( $notice_id );
+	$notice_nonce     = dslc_generate_notice_nonce( $notice_id );
 
-    $display_notice = false;
-    $issues = [];
+	$display_notice = false;
+	$issues         = array();
 
-    // Check LC Extensions
-    if ( is_plugin_active( $ext_plugin ) ) {
-        $data = get_plugin_data( WP_PLUGIN_DIR . '/' . $ext_plugin );
-        if ( version_compare( $data['Version'], '2.0.2', '<' ) ) {
-            $display_notice = true;
-            $issues[] = 'Update <strong>LC Extensions</strong> plugin to version 2.0.2 or higher.';
-        }
-    }
+	// Check LC Extensions
+	if ( is_plugin_active( $ext_plugin ) ) {
+		$data = get_plugin_data( WP_PLUGIN_DIR . '/' . $ext_plugin );
+		if ( version_compare( $data['Version'], '2.0.2', '<' ) ) {
+			$display_notice = true;
+			$issues[]       = 'Update <strong>LC Extensions</strong> plugin to version 2.0.2 or higher.';
+		}
+	}
 
-    // Check LC Woo Integration
-    if ( is_plugin_active( $woo_plugin ) ) {
-        $data = get_plugin_data( WP_PLUGIN_DIR . '/' . $woo_plugin );
-        if ( version_compare( $data['Version'], '2.0.2', '<' ) ) {
-            $display_notice = true;
-            $issues[] = 'Update <strong>LC Woo Integration</strong> plugin to version 2.0.2 or higher.';
-        }
-    }
+	// Check LC Woo Integration
+	if ( is_plugin_active( $woo_plugin ) ) {
+		$data = get_plugin_data( WP_PLUGIN_DIR . '/' . $woo_plugin );
+		if ( version_compare( $data['Version'], '2.0.2', '<' ) ) {
+			$display_notice = true;
+			$issues[]       = 'Update <strong>LC Woo Integration</strong> plugin to version 2.0.2 or higher.';
+		}
+	}
 
-    // Stop if dismissed or no issues
-    if ( ! $display_notice || $notice_dismissed ) {
-        return;
-    }
+	// Stop if dismissed or no issues
+	if ( ! $display_notice || $notice_dismissed ) {
+		return;
+	}
 
-    ?>
-    <div class="notice dslc-notice notice-error is-dismissible"
-        id="<?php echo $notice_id; ?>"
-        data-nonce="<?php echo $notice_nonce; ?>">
+	?>
+	<div class="notice dslc-notice notice-error is-dismissible"
+		id="<?php echo $notice_id; ?>"
+		data-nonce="<?php echo $notice_nonce; ?>">
 
-        <?php if ( $current_parent_base !== 'dslc_plugin_options' ) : ?>
+		<?php if ( $current_parent_base !== 'dslc_plugin_options' ) : ?>
 
-            <p>
-                <strong>Live Composer:</strong> Some required add-ons are outdated.
-                <br>To ensure full compatibility, <strong>please update them immediately.</strong>
-            </p>
+			<p>
+				<strong>Live Composer:</strong> Some required add-ons are outdated.
+				<br>To ensure full compatibility, <strong>please update them immediately.</strong>
+			</p>
 
-            <ul style="padding-left: 25px;">
-                <?php foreach ( $issues as $msg ) : ?>
-                    <li type="disc"><?php echo wp_kses_post( $msg ); ?></li>
-                <?php endforeach; ?>
-            </ul>
+			<ul style="padding-left: 25px;">
+				<?php foreach ( $issues as $msg ) : ?>
+					<li type="disc"><?php echo wp_kses_post( $msg ); ?></li>
+				<?php endforeach; ?>
+			</ul>
 
-            <p><a href="<?php echo admin_url( 'plugins.php' ); ?>">Go to Plugins page to update.</a></p>
+			<p><a href="<?php echo admin_url( 'plugins.php' ); ?>">Go to Plugins page to update.</a></p>
 
-        <?php else : ?>
+		<?php else : ?>
 
-            <p>
-                <strong>Live Composer Add-ons:</strong> The following plugins need updates to work correctly:
-            </p>
+			<p>
+				<strong>Live Composer Add-ons:</strong> The following plugins need updates to work correctly:
+			</p>
 
-            <ul style="padding-left: 25px;">
-                <?php foreach ( $issues as $msg ) : ?>
-                    <li type="disc"><?php echo wp_kses_post( $msg ); ?></li>
-                <?php endforeach; ?>
-            </ul>
+			<ul style="padding-left: 25px;">
+				<?php foreach ( $issues as $msg ) : ?>
+					<li type="disc"><?php echo wp_kses_post( $msg ); ?></li>
+				<?php endforeach; ?>
+			</ul>
 
-        <?php endif; ?>
+		<?php endif; ?>
 
-    </div>
-    <?php
+	</div>
+	<?php
 }
 add_action( 'admin_notices', 'dslc_required_addons_update_notice' );

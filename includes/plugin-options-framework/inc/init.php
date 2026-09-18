@@ -29,7 +29,6 @@ function dslc_plugin_options_setup() {
 
 	global $dslc_plugin_options;
 	do_action( 'dslc_hook_register_options' );
-
 } add_action( 'plugins_loaded', 'dslc_plugin_options_setup' );
 
 function dslc_add_lc_settings_page() {
@@ -58,8 +57,7 @@ function dslc_add_lc_settings_page() {
 	// Custom options extension.
 	global $dslc_options_extender;
 	$dslc_options_extender->construct_panels();
-
-} add_action( 'admin_menu', 'dslc_add_lc_settings_page',5 );
+} add_action( 'admin_menu', 'dslc_add_lc_settings_page', 5 );
 
 
 /**
@@ -94,35 +92,52 @@ function dslc_plugin_options_display( $tab = '' ) {
 		?>
 		<a name="dslc-top"></a>
 		<h2 class="nav-tab-wrapper dslc-settigns-tabs" id="dslc-tabs">
-			<!-- <a href="#" data-nav-to="tab-extend" class="nav-tab <?php echo 'tab-extend' === $anchor ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Extend', 'live-composer-page-builder' ) ?></a> -->
-			<a href="#" data-nav-to="tab-settings" class="nav-tab <?php echo 'dslc_settings' === $anchor ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Settings', 'live-composer-page-builder' ) ?></a>
-			<a href="#" data-nav-to="tab-extensions" class="nav-tab <?php echo 'dslc_extensions' === $anchor ? 'nav-tab-active' : ''; ?>"><?php  echo esc_html__( 'Extensions', 'live-composer-page-builder' ) . ' <span class="tag">' . esc_html__( 'New', 'live-composer-page-builder' ) . '</span>'; ?></a>
-			<a href="#" data-nav-to="tab-woo" class="nav-tab <?php echo 'dslc_woo' === $anchor ? 'nav-tab-active' : ''; ?>"><?php  echo esc_html__( 'WooCommerce', 'live-composer-page-builder' ) . ' <span class="tag">' . esc_html__( 'New', 'live-composer-page-builder' ) . '</span>'; ?></a>
-			<!-- <a href="#" data-nav-to="tab-themes" class="nav-tab <?php echo 'dslc_themes' === $anchor ? 'nav-tab-active' : ''; ?>"><?php  echo esc_html__( 'Themes', 'live-composer-page-builder' ) . ' <span class="tag">' . esc_html__( 'Free', 'live-composer-page-builder' ) . '</span>'; ?></a> -->
-			<!-- <a href="#" data-nav-to="tab-designs" class="nav-tab <?php echo 'dslc_designs' === $anchor ? 'nav-tab-active' : ''; ?>"><?php  echo esc_html__( 'Designs', 'live-composer-page-builder' ) . ' <span class="tag">' . esc_html__( 'New', 'live-composer-page-builder' ) . '</span>'; ?></a> -->
-			<a href="#" data-nav-to="tab-docs" class="nav-tab <?php echo 'dslc_docs' === $anchor ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Docs &amp; Support', 'live-composer-page-builder' ) ?></a>
-			<!-- <a href="#" data-nav-to="tab-stylist" class="nav-tab <?php echo 'dslc_stylist' === $anchor ? 'nav-tab-active' : ''; ?>"><?php  echo esc_html__( '+60 Design Controls', 'live-composer-page-builder' ) . ' <span class="tag">' . esc_html__( 'FREE', 'live-composer-page-builder' ) . '</span>'; ?></a> -->
+			<!-- <a href="#" data-nav-to="tab-extend" class="nav-tab <?php echo 'tab-extend' === $anchor ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Extend', 'live-composer-page-builder' ); ?></a> -->
+			<a href="#" data-nav-to="tab-settings" class="nav-tab <?php echo 'dslc_settings' === $anchor ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Settings', 'live-composer-page-builder' ); ?></a>
+			<a href="#" data-nav-to="tab-extensions" class="nav-tab <?php echo 'dslc_extensions' === $anchor ? 'nav-tab-active' : ''; ?>"><?php echo esc_html__( 'Extensions', 'live-composer-page-builder' ) . ' <span class="tag">' . esc_html__( 'New', 'live-composer-page-builder' ) . '</span>'; ?></a>
+			<a href="#" data-nav-to="tab-woo" class="nav-tab <?php echo 'dslc_woo' === $anchor ? 'nav-tab-active' : ''; ?>"><?php echo esc_html__( 'WooCommerce', 'live-composer-page-builder' ) . ' <span class="tag">' . esc_html__( 'New', 'live-composer-page-builder' ) . '</span>'; ?></a>
+			<!-- <a href="#" data-nav-to="tab-themes" class="nav-tab <?php echo 'dslc_themes' === $anchor ? 'nav-tab-active' : ''; ?>"><?php echo esc_html__( 'Themes', 'live-composer-page-builder' ) . ' <span class="tag">' . esc_html__( 'Free', 'live-composer-page-builder' ) . '</span>'; ?></a> -->
+			<!-- <a href="#" data-nav-to="tab-designs" class="nav-tab <?php echo 'dslc_designs' === $anchor ? 'nav-tab-active' : ''; ?>"><?php echo esc_html__( 'Designs', 'live-composer-page-builder' ) . ' <span class="tag">' . esc_html__( 'New', 'live-composer-page-builder' ) . '</span>'; ?></a> -->
+			<a href="#" data-nav-to="tab-docs" class="nav-tab <?php echo 'dslc_docs' === $anchor ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Docs &amp; Support', 'live-composer-page-builder' ); ?></a>
+			<!-- <a href="#" data-nav-to="tab-stylist" class="nav-tab <?php echo 'dslc_stylist' === $anchor ? 'nav-tab-active' : ''; ?>"><?php echo esc_html__( '+60 Design Controls', 'live-composer-page-builder' ) . ' <span class="tag">' . esc_html__( 'FREE', 'live-composer-page-builder' ) . '</span>'; ?></a> -->
 		</h2>
 
 
 		<div id="lc-settings-tabs">
 				<!-- Extensions tab -->
-				<div class="tab" id="tab-for-tab-extensions" <?php if ( ( 'dslc_settings' !== $anchor ) && ( 'dslc_woo' !== $anchor ) ) { echo 'style="display:block"'; } ?>>
+				<div class="tab" id="tab-for-tab-extensions" 
+				<?php
+				if ( ( 'dslc_settings' !== $anchor ) && ( 'dslc_woo' !== $anchor ) ) {
+					echo 'style="display:block"'; }
+				?>
+				>
 					<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-extensions.php'; ?>
 				</div>
 				<!-- Getting Started Tab -->
-<?php /*
+	<?php
+	/*
 				<div class="tab" <?php if ( $anchor != 'dslc_settings' ) echo 'style="display:block"'; ; ?> id="tab-for-tab-extend">
 					<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-extend.php'; ?>
 				</div>
-*/ ?>
+	*/
+	?>
 				<!-- Settings tab -->
-				<div class="tab" <?php if ( 'dslc_settings' === $anchor ) { echo 'style="display:block"'; } ?>  id="tab-for-tab-settings">
+				<div class="tab" 
+				<?php
+				if ( 'dslc_settings' === $anchor ) {
+					echo 'style="display:block"'; }
+				?>
+				id="tab-for-tab-settings">
 					<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-settings.php'; ?>
 				</div>
 
 				<!-- Woo tab -->
-				<div class="tab" id="tab-for-tab-woo" <?php if ( 'dslc_woo' === $anchor ) { echo 'style="display:block"'; } ?>>
+				<div class="tab" id="tab-for-tab-woo" 
+				<?php
+				if ( 'dslc_woo' === $anchor ) {
+					echo 'style="display:block"'; }
+				?>
+				>
 					<?php include DS_LIVE_COMPOSER_ABS . '/includes/plugin-options-framework/tab-woo.php'; ?>
 				</div>
 
@@ -165,7 +180,6 @@ function dslc_plugin_options_display( $tab = '' ) {
 		});
 	</script>
 	<?php
-
 }
 
 /**
@@ -205,7 +219,7 @@ function dslc_plugin_options_init() {
 
 			$option['name'] = 'dslc_plugin_options[' . $option['id'] . ']';
 
-			$value = '';
+			$value   = '';
 			$options = get_option( 'dslc_plugin_options' );
 
 			if ( isset( $options[ $option_id ] ) ) {
@@ -231,7 +245,6 @@ function dslc_plugin_options_init() {
 			$option['value'] = $value;
 
 			add_settings_field(
-
 				$option_id, // Id.
 				$option['label'], // Title.
 				'dslc_option_display_funcitons_router', // Callback.
@@ -241,7 +254,6 @@ function dslc_plugin_options_init() {
 			);
 		}// End foreach().
 	}// End foreach().
-
 } add_action( 'admin_init', 'dslc_plugin_options_init' );
 
 /**
@@ -313,5 +325,4 @@ function dslc_plugin_options_input_sanitize( $input ) {
 	} else {
 		return $input;
 	}
-
 }

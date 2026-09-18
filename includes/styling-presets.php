@@ -18,7 +18,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0
  */
-
 function dslc_presets_load( $settings ) {
 
 	// If preset applied
@@ -34,7 +33,7 @@ function dslc_presets_load( $settings ) {
 			return $settings;
 		}
 
-		$presets = maybe_unserialize( get_option( 'dslc_presets' ) );
+		$presets     = maybe_unserialize( get_option( 'dslc_presets' ) );
 		$preset_data = false;
 
 		// If there are presets.
@@ -65,12 +64,11 @@ function dslc_presets_load( $settings ) {
 				if ( isset( $preset_settings[ $key ] ) ) {
 					$settings[ $key ] = $preset_settings[ $key ];
 					unset( $preset_settings_stripped[ $key ] );
-				}	
+				}
 			}
 
 			// Fill in the blanks.
-			if(is_array($preset_settings_stripped))
-			{
+			if ( is_array( $preset_settings_stripped ) ) {
 				foreach ( $preset_settings_stripped as $key => $value ) {
 					$settings[ $key ] = $value;
 				}
@@ -80,7 +78,6 @@ function dslc_presets_load( $settings ) {
 
 	// Pass the settings back.
 	return $settings;
-
 } add_filter( 'dslc_filter_settings', 'dslc_presets_load' );
 
 /**
@@ -94,7 +91,7 @@ function dslc_save_preset( $preset_name, $preset_code_raw, $module_id ) {
 
 	// Clean up ( step 1 - get data ).
 	$preset_code_raw = dslc_json_decode( $preset_code_raw, $ignore_migration = true );
-	$preset_code = array();
+	$preset_code     = array();
 
 	// The ID of the module to add.
 	$module_id = esc_attr( $module_id );
@@ -105,7 +102,7 @@ function dslc_save_preset( $preset_name, $preset_code_raw, $module_id ) {
 		die();
 	}
 
-	$module = new $module_id();
+	$module         = new $module_id();
 	$module_options = $module->options();
 
 	// Clean up ( step 2 - generate correct preset code ).
@@ -119,7 +116,7 @@ function dslc_save_preset( $preset_name, $preset_code_raw, $module_id ) {
 
 				if ( isset( $preset_code_raw[ $module_option['id'] ] ) ) {
 
-					if (  ! isset( $module_option['ignored_by_preset'] ) && ! $module_option['ignored_by_preset'] ) {
+					if ( ! isset( $module_option['ignored_by_preset'] ) && ! $module_option['ignored_by_preset'] ) {
 						$preset_code[ $module_option['id'] ] = $preset_code_raw[ $module_option['id'] ];
 					}
 				}
@@ -142,9 +139,9 @@ function dslc_save_preset( $preset_name, $preset_code_raw, $module_id ) {
 
 	// Append new preset to presets array.
 	$presets[ $preset_id ] = array(
-		'title' => $preset_name,
-		'id' => $preset_id,
-		'code' => $preset_code,
+		'title'  => $preset_name,
+		'id'     => $preset_id,
+		'code'   => $preset_code,
 		'module' => $module_id,
 	);
 
@@ -177,23 +174,21 @@ function dslc_save_preset( $preset_name, $preset_code_raw, $module_id ) {
  *
  * @since 1.0
  */
-
 function dslc_plugin_opts_presets() {
 
 	global $dslc_plugin_options;
 
 	$dslc_plugin_options['dslc_plugin_options_presets'] = array(
-		'title' => __( 'Styling Presets', 'live-composer-page-builder' ),
+		'title'   => __( 'Styling Presets', 'live-composer-page-builder' ),
 		'options' => array(
 
 			'lc_styling_presets' => array(
-				'name' => 'dslc_plugin_options_presets[lc_styling_presets]',
+				'name'  => 'dslc_plugin_options_presets[lc_styling_presets]',
 				'label' => __( 'Styling Presets', 'live-composer-page-builder' ),
-				'std' => 'both',
-				'type' => 'styling_presets',
+				'std'   => 'both',
+				'type'  => 'styling_presets',
 				'descr' => __( 'Here you can delete styling presets.', 'live-composer-page-builder' ),
 			),
 		),
 	);
-
 } //add_action( 'dslc_hook_register_options', 'dslc_plugin_opts_presets', 45 );

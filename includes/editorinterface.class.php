@@ -70,7 +70,7 @@ class DSLC_EditorInterface {
 		$preview_id        = '';
 
 		// If on a LC template post preview.
-		if ( 'dslc_templates' === get_post_type() || 'dslc_template_parts' === get_post_type()) {
+		if ( 'dslc_templates' === get_post_type() || 'dslc_template_parts' === get_post_type() ) {
 
 			self::the_editor_link( self::get_editor_link_url( get_the_ID() ), $string_edit_tpl );
 
@@ -121,7 +121,7 @@ class DSLC_EditorInterface {
 			 * or propose to create a template if nothing found.
 			 */
 
-			$post_id = $page_data;
+			$post_id   = $page_data;
 			$page_data = get_post_type(); // Needed for new template creation request.
 
 			// Check if it has a template attached to it.
@@ -238,7 +238,9 @@ class DSLC_EditorInterface {
 
 		if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) :
 
-			?><div class="dslca-container dslca-state-off" data-post-id="<?php the_ID(); ?>"></div><?php
+			?>
+			<div class="dslca-container dslca-state-off" data-post-id="<?php the_ID(); ?>"></div>
+			<?php
 		endif;
 	}
 }

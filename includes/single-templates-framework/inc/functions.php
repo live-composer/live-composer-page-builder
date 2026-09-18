@@ -12,57 +12,61 @@ if ( ! defined( 'ABSPATH' ) ) {
 function dslc_st_init() {
 
 	$capability = dslc_get_option( 'lc_min_capability_page', 'dslc_plugin_options_access_control' );
-	if ( ! $capability ) { $capability = 'publish_posts'; }
+	if ( ! $capability ) {
+		$capability = 'publish_posts'; }
 
-	register_post_type( 'dslc_templates', array(
-		'menu_icon' => 'dashicons-admin-page',
-		'labels' => array(
-			'name' => __( 'Templates', 'live-composer-page-builder' ),
-			'menu_name' => __( 'Templates', 'live-composer-page-builder' ),
-			'singular_name' => __( 'Template', 'live-composer-page-builder' ),
-			'add_new' => __( 'Add Template', 'live-composer-page-builder' ),
-			'add_new_item' => __( 'Add Template', 'live-composer-page-builder' ),
-			'edit' => __( 'Edit', 'live-composer-page-builder' ),
-			'edit_item' => __( 'Edit Template', 'live-composer-page-builder' ),
-			'new_item' => __( 'New Template', 'live-composer-page-builder' ),
-			'view' => __( 'View Templates', 'live-composer-page-builder' ),
-			'view_item' => __( 'View Template', 'live-composer-page-builder' ),
-			'search_items' => __( 'Search Templates', 'live-composer-page-builder' ),
-			'not_found' => __( 'No Templates found', 'live-composer-page-builder' ),
-			'not_found_in_trash' => __( 'No Templates found in Trash', 'live-composer-page-builder' ),
-			'parent' => __( 'Parent Template', 'live-composer-page-builder' ),
-		),
-		'public' => true,
-		'exclude_from_search' => true, // 404 page is broken with this parameter.
-		'publicly_queryable' => true,
-		'supports' => array( 'title', 'custom-fields', 'thumbnail' ),
-		'capabilities' => array(
-			'publish_posts' => $capability,
-			'edit_posts' => $capability,
-			'edit_others_posts' => $capability,
-			'delete_posts' => $capability,
-			'delete_others_posts' => $capability,
-			'read_private_posts' => $capability,
-			'edit_post' => $capability,
-			'delete_post' => $capability,
-			'read_post' => $capability,
-		),
-		'show_in_menu' => 'dslc_plugin_options',
-	) );
+	register_post_type(
+		'dslc_templates',
+		array(
+			'menu_icon'           => 'dashicons-admin-page',
+			'labels'              => array(
+				'name'               => __( 'Templates', 'live-composer-page-builder' ),
+				'menu_name'          => __( 'Templates', 'live-composer-page-builder' ),
+				'singular_name'      => __( 'Template', 'live-composer-page-builder' ),
+				'add_new'            => __( 'Add Template', 'live-composer-page-builder' ),
+				'add_new_item'       => __( 'Add Template', 'live-composer-page-builder' ),
+				'edit'               => __( 'Edit', 'live-composer-page-builder' ),
+				'edit_item'          => __( 'Edit Template', 'live-composer-page-builder' ),
+				'new_item'           => __( 'New Template', 'live-composer-page-builder' ),
+				'view'               => __( 'View Templates', 'live-composer-page-builder' ),
+				'view_item'          => __( 'View Template', 'live-composer-page-builder' ),
+				'search_items'       => __( 'Search Templates', 'live-composer-page-builder' ),
+				'not_found'          => __( 'No Templates found', 'live-composer-page-builder' ),
+				'not_found_in_trash' => __( 'No Templates found in Trash', 'live-composer-page-builder' ),
+				'parent'             => __( 'Parent Template', 'live-composer-page-builder' ),
+			),
+			'public'              => true,
+			'exclude_from_search' => true, // 404 page is broken with this parameter.
+			'publicly_queryable'  => true,
+			'supports'            => array( 'title', 'custom-fields', 'thumbnail' ),
+			'capabilities'        => array(
+				'publish_posts'       => $capability,
+				'edit_posts'          => $capability,
+				'edit_others_posts'   => $capability,
+				'delete_posts'        => $capability,
+				'delete_others_posts' => $capability,
+				'read_private_posts'  => $capability,
+				'edit_post'           => $capability,
+				'delete_post'         => $capability,
+				'read_post'           => $capability,
+			),
+			'show_in_menu'        => 'dslc_plugin_options',
+		)
+	);
 
 	global $dslc_var_post_options;
 
 	// Generate the choices.
 	global $dslc_var_templates_pt;
 
-	$pt_choices = array();
+	$pt_choices   = array();
 	$template_for = array();
 
 	$template_for[] = array(
-		'label' => __( 'Single Post Templates:', 'live-composer-page-builder' ),
+		'label'       => __( 'Single Post Templates:', 'live-composer-page-builder' ),
 		'description' => __( 'Design for a single blog post or custom post type entries', 'live-composer-page-builder' ),
-		'value' => 'list-heading',
-		'id' => 'dslca_single_post_templates',
+		'value'       => 'list-heading',
+		'id'          => 'dslca_single_post_templates',
 	);
 
 	foreach ( $dslc_var_templates_pt as $pt_id => $pt_label ) {
@@ -74,10 +78,10 @@ function dslc_st_init() {
 	}
 
 	$template_for[] = array(
-		'label' => __( 'Archive Index Templates:', 'live-composer-page-builder' ),
+		'label'       => __( 'Archive Index Templates:', 'live-composer-page-builder' ),
 		'description' => __( 'Design for posts listings like Category, Tag, Date or Custom Taxonomies', 'live-composer-page-builder' ),
-		'value' => 'list-heading',
-		'id' => 'dslca_archive_index_templates',
+		'value'       => 'list-heading',
+		'id'          => 'dslca_archive_index_templates',
 	);
 
 	foreach ( $dslc_var_templates_pt as $pt_id => $pt_label ) {
@@ -89,10 +93,10 @@ function dslc_st_init() {
 	}
 
 	$template_for[] = array(
-		'label' => __( 'Special Page Templates:', 'live-composer-page-builder' ),
+		'label'       => __( 'Special Page Templates:', 'live-composer-page-builder' ),
 		'description' => __( 'Design a custom "Page Not Found" screen or search results page', 'live-composer-page-builder' ),
-		'value' => 'list-heading',
-		'id' => 'dslca_special_page_templates',
+		'value'       => 'list-heading',
+		'id'          => 'dslca_special_page_templates',
 	);
 
 	$template_for[] = array(
@@ -116,23 +120,23 @@ function dslc_st_init() {
 	);
 
 	$dslc_var_post_options['dslc-templates-opts'] = array(
-		'title' => 'Template Options',
+		'title'   => 'Template Options',
 		'show_on' => 'dslc_templates',
 		'options' => array(
 			array(
-				'label' => __( 'Use this template to output...', 'live-composer-page-builder' ),
+				'label'   => __( 'Use this template to output...', 'live-composer-page-builder' ),
 				// 'descr' => __( '', 'live-composer-page-builder' ),
-				'std' => '',
-				'id' => 'dslc_template_for',
-				'type' => 'checkbox',
+				'std'     => '',
+				'id'      => 'dslc_template_for',
+				'type'    => 'checkbox',
 				'choices' => $template_for,
 			),
 			array(
-				'label' => __( 'Base', 'live-composer-page-builder' ),
-				'descr' => __( 'If set to <strong>theme template</strong> the template will be appeneded to the regular single post template ( ex. If the theme shows thumbnail and title in it\'s template they will still be there ). If set to <strong>plugin template</strong> everything will be stripped and only the content from this template shown.', 'live-composer-page-builder' ),
-				'std' => 'custom',
-				'id' => 'dslc_template_base',
-				'type' => 'select',
+				'label'   => __( 'Base', 'live-composer-page-builder' ),
+				'descr'   => __( 'If set to <strong>theme template</strong> the template will be appeneded to the regular single post template ( ex. If the theme shows thumbnail and title in it\'s template they will still be there ). If set to <strong>plugin template</strong> everything will be stripped and only the content from this template shown.', 'live-composer-page-builder' ),
+				'std'     => 'custom',
+				'id'      => 'dslc_template_base',
+				'type'    => 'select',
 				'choices' => array(
 					array(
 						'label' => 'Plugin Template',
@@ -145,11 +149,11 @@ function dslc_st_init() {
 				),
 			),
 			array(
-				'label' => __( 'Type', 'live-composer-page-builder' ),
-				'std' => 'default',
-				'descr' => __( '<strong>Default</strong> template will be used as the default for all the posts. <br><strong>Optional</strong> template is an additional template that you can set to specific posts.', 'live-composer-page-builder' ),
-				'id' => 'dslc_template_type',
-				'type' => 'radio',
+				'label'   => __( 'Type', 'live-composer-page-builder' ),
+				'std'     => 'default',
+				'descr'   => __( '<strong>Default</strong> template will be used as the default for all the posts. <br><strong>Optional</strong> template is an additional template that you can set to specific posts.', 'live-composer-page-builder' ),
+				'id'      => 'dslc_template_type',
+				'type'    => 'radio',
 				'choices' => array(
 					array(
 						'label' => 'Default',
@@ -163,7 +167,6 @@ function dslc_st_init() {
 			),
 		),
 	);
-
 } add_action( 'init', 'dslc_st_init', 90 );
 
 /**
@@ -196,23 +199,23 @@ function dslc_get_template_by_id( $post_id ) {
 
 		// Query for default template.
 		$args = array(
-			'post_type' => 'dslc_templates',
-			'post_status' => 'publish',
+			'post_type'      => 'dslc_templates',
+			'post_status'    => 'publish',
 			'posts_per_page' => 99, // For performance we set limit to 99.
 			'offset'         => 0, // Posts_per_page doesn't work without offset!
-			'meta_query' => array(
+			'meta_query'     => array(
 				array(
-					'key' => 'dslc_template_for',
-					'value' => get_post_type( $post_id ),
+					'key'     => 'dslc_template_for',
+					'value'   => get_post_type( $post_id ),
 					'compare' => '=',
 				),
 				array(
-					'key' => 'dslc_template_type',
-					'value' => 'default',
+					'key'     => 'dslc_template_type',
+					'value'   => 'default',
 					'compare' => '=',
 				),
 			),
-			'order' => 'DESC',
+			'order'          => 'DESC',
 		);
 		$tpls = get_posts( $args );
 
@@ -223,7 +226,7 @@ function dslc_get_template_by_id( $post_id ) {
 			$template_id = false;
 		}
 
-	// Specific template supplied, return the ID.
+		// Specific template supplied, return the ID.
 	} elseif ( $template ) {
 
 		$template_id = $template;
@@ -259,25 +262,24 @@ function dslc_get_archive_template_by_pt( $post_type_slug ) {
 		}
 	}
 
-	$templates_taxonomies = get_option( "lc_templates_taxonomies" );
+	$templates_taxonomies = get_option( 'lc_templates_taxonomies' );
 
 	if ( ! empty( $templates_taxonomies ) && array_key_exists( $taxonomy_slug, $templates_taxonomies ) ) {
 
 		global $wp_the_query;
 		$curr_id = $wp_the_query->queried_object_id;
 
-		if ( array_key_exists( $curr_id, $templates_taxonomies[$taxonomy_slug] ) ) {
-			$template_id = $templates_taxonomies[$taxonomy_slug][$curr_id];
+		if ( array_key_exists( $curr_id, $templates_taxonomies[ $taxonomy_slug ] ) ) {
+			$template_id = $templates_taxonomies[ $taxonomy_slug ][ $curr_id ];
 
 			if ( 'none' !== $template_id ) {
 				return $template_id;
 			}
 		}
 	}
-	
 
 	// All the archive templates saved in DB with '_archive' suffix.
-	if ( ! stristr( $post_type_slug , '_archive' ) ) {
+	if ( ! stristr( $post_type_slug, '_archive' ) ) {
 		$post_type_slug = $post_type_slug . '_archive';
 	}
 
@@ -304,70 +306,73 @@ function dslc_get_archive_template_by_pt( $post_type_slug ) {
 function dslc_template_parts_init() {
 
 	$capability = dslc_get_option( 'lc_min_capability_page', 'dslc_plugin_options_access_control' );
-	if ( ! $capability ) { $capability = 'publish_posts'; }
+	if ( ! $capability ) {
+		$capability = 'publish_posts'; }
 
-	register_post_type( 'dslc_template_parts', array(
-		'menu_icon' => 'dashicons-admin-page',
-		'labels' => array(
-			'name' => __( 'Template Parts', 'live-composer-page-builder' ),
-			'menu_name' => __( 'Design Sections', 'live-composer-page-builder' ),
-			'singular_name' => __( 'Template Part', 'live-composer-page-builder' ),
-			'add_new' => __( 'Add Template Part', 'live-composer-page-builder' ),
-			'add_new_item' => __( 'Add Template Part', 'live-composer-page-builder' ),
-			'edit' => __( 'Edit', 'live-composer-page-builder' ),
-			'edit_item' => __( 'Edit Template Part', 'live-composer-page-builder' ),
-			'new_item' => __( 'New Template Part', 'live-composer-page-builder' ),
-			'view' => __( 'View Template Parts', 'live-composer-page-builder' ),
-			'view_item' => __( 'View Template Part', 'live-composer-page-builder' ),
-			'search_items' => __( 'Search Template Parts', 'live-composer-page-builder' ),
-			'not_found' => __( 'No Template Parts found', 'live-composer-page-builder' ),
-			'not_found_in_trash' => __( 'No Template Parts found in Trash', 'live-composer-page-builder' ),
-			'parent' => __( 'Parent Template', 'live-composer-page-builder' ),
+	register_post_type(
+		'dslc_template_parts',
+		array(
+			'menu_icon'           => 'dashicons-admin-page',
+			'labels'              => array(
+				'name'               => __( 'Template Parts', 'live-composer-page-builder' ),
+				'menu_name'          => __( 'Design Sections', 'live-composer-page-builder' ),
+				'singular_name'      => __( 'Template Part', 'live-composer-page-builder' ),
+				'add_new'            => __( 'Add Template Part', 'live-composer-page-builder' ),
+				'add_new_item'       => __( 'Add Template Part', 'live-composer-page-builder' ),
+				'edit'               => __( 'Edit', 'live-composer-page-builder' ),
+				'edit_item'          => __( 'Edit Template Part', 'live-composer-page-builder' ),
+				'new_item'           => __( 'New Template Part', 'live-composer-page-builder' ),
+				'view'               => __( 'View Template Parts', 'live-composer-page-builder' ),
+				'view_item'          => __( 'View Template Part', 'live-composer-page-builder' ),
+				'search_items'       => __( 'Search Template Parts', 'live-composer-page-builder' ),
+				'not_found'          => __( 'No Template Parts found', 'live-composer-page-builder' ),
+				'not_found_in_trash' => __( 'No Template Parts found in Trash', 'live-composer-page-builder' ),
+				'parent'             => __( 'Parent Template', 'live-composer-page-builder' ),
+			),
+			'public'              => true,
+			'exclude_from_search' => true, // 404 page is broken with this parameter.
+			'publicly_queryable'  => true,
+			'supports'            => array( 'title', 'custom-fields', 'thumbnail' ),
+			'capabilities'        => array(
+				'publish_posts'       => $capability,
+				'edit_posts'          => $capability,
+				'edit_others_posts'   => $capability,
+				'delete_posts'        => $capability,
+				'delete_others_posts' => $capability,
+				'read_private_posts'  => $capability,
+				'edit_post'           => $capability,
+				'delete_post'         => $capability,
+				'read_post'           => $capability,
+			),
+			'show_in_menu'        => 'dslc_plugin_options',
+		)
+	);
+
+	global $dslc_var_post_options;
+
+	// Define the options for the template type
+	$template_for = array(
+		array(
+			'label' => __( 'Section Template (Static)', 'live-composer-page-builder' ),
+			'value' => 'section',
 		),
-		'public' => true,
-		'exclude_from_search' => true, // 404 page is broken with this parameter.
-		'publicly_queryable' => true,
-		'supports' => array( 'title', 'custom-fields', 'thumbnail' ),
-		'capabilities' => array(
-			'publish_posts' => $capability,
-			'edit_posts' => $capability,
-			'edit_others_posts' => $capability,
-			'delete_posts' => $capability,
-			'delete_others_posts' => $capability,
-			'read_private_posts' => $capability,
-			'edit_post' => $capability,
-			'delete_post' => $capability,
-			'read_post' => $capability,
+		array(
+			'label' => __( 'DSLC Post Loop (Repeated)', 'live-composer-page-builder' ),
+			'value' => 'dslc_post_loop',
 		),
-		'show_in_menu' => 'dslc_plugin_options',
-	) );
+	);
 
-	global $dslc_var_post_options;  
-
-    // Define the options for the template type
-    $template_for = array(
-        array(
-            'label' => __( 'Section Template (Static)', 'live-composer-page-builder' ),
-            'value' => 'section',
-        ),
-        array(
-            'label' => __( 'DSLC Post Loop (Repeated)', 'live-composer-page-builder' ),
-            'value' => 'dslc_post_loop',
-        ),
-    );
-
-    $dslc_var_post_options['dslc-templates-parts-opts'] = array(
-        'title' => 'Template Options',
-        'show_on' => 'dslc_template_parts',
-        'options' => array(
-            array(
-                'label' => __( 'Use this template for', 'live-composer-page-builder' ),
-                'std' => 'section',
-                'id' => 'dslc_template_part_for',
-                'type' => 'radio',
-                'choices' => $template_for,
-            ),
-        ),
-    );
-
+	$dslc_var_post_options['dslc-templates-parts-opts'] = array(
+		'title'   => 'Template Options',
+		'show_on' => 'dslc_template_parts',
+		'options' => array(
+			array(
+				'label'   => __( 'Use this template for', 'live-composer-page-builder' ),
+				'std'     => 'section',
+				'id'      => 'dslc_template_part_for',
+				'type'    => 'radio',
+				'choices' => $template_for,
+			),
+		),
+	);
 } add_action( 'init', 'dslc_template_parts_init', 90 );

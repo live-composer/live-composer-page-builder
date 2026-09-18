@@ -55,7 +55,6 @@ function dslc_editing_screen() {
 	);
 
 	remove_menu_page( 'livecomposer_editor', 'livecomposer_editor' );
-
 } add_action( 'admin_menu', 'dslc_editing_screen' );
 
 
@@ -70,7 +69,7 @@ function dslc_editing_screen() {
 function dslc_editing_screen_content() {
 
 	$screen = get_current_screen();
-	
+
 	if ( ! is_object( $screen ) ) {
 		return;
 	}
@@ -84,7 +83,7 @@ function dslc_editing_screen_content() {
 	// Array with URL variables to be used in add_query_arg
 	// @see https://developer.wordpress.org/reference/functions/add_query_arg/ .
 	$previewurl_keys = array();
-	$preview_output = true;
+	$preview_output  = true;
 
 	// Set id of the page we are editing.
 	if ( isset( $_GET['page_id'] ) && is_numeric( $_GET['page_id'] ) ) {
@@ -106,7 +105,7 @@ function dslc_editing_screen_content() {
 
 	// Output iframe with page being edited.
 	if ( $preview_output ) {
-		
+
 		do_action( 'dslca_editing_screen_preview_before' );
 
 		$frame_url = set_url_scheme( add_query_arg( $previewurl_keys, get_permalink( $previewurl_keys['page_id'] ) ) );
@@ -148,14 +147,14 @@ function dslc_editing_screen_head() {
 	?>
 	<style>
 		#wpcontent, #wpbody, #wpbody-content, #page-builder-frame, #page-builder-preview-area {
-		   height: 100%;
-		   top: 0;
-		   /* top: 42px; */
-		   right: 0;
-		   position: fixed;
-		   width: calc(100% - 240px);
-		   margin: 0;
-		   padding: 0;
+			height: 100%;
+			top: 0;
+			/* top: 42px; */
+			right: 0;
+			position: fixed;
+			width: calc(100% - 240px);
+			margin: 0;
+			padding: 0;
 		}
 
 		.update-nag, .updated,
@@ -174,8 +173,8 @@ function dslc_editing_screen_head() {
 		}
 
 		#page-builder-preview-area {
-		  z-index: 10000;
-		  background: #fff;
+			z-index: 10000;
+			background: #fff;
 		}
 	</style>
 	<?php
@@ -193,7 +192,7 @@ add_action( 'admin_head', 'dslc_editing_screen_head' );
  */
 function dslc_editing_screen_footer() {
 	$screen = get_current_screen();
-	
+
 	if ( ! is_object( $screen ) ) {
 		return;
 	}
@@ -228,7 +227,8 @@ function dslc_preview_area_head() {
 
 	global $dslc_active;
 
-	if ( $dslc_active ) : ?>
+	if ( $dslc_active ) :
+		?>
 	<style>
 		#wpadminbar {
 			display: none !important;
@@ -236,7 +236,8 @@ function dslc_preview_area_head() {
 			visibility: hidden !important;
 		}
 	</style>
-	<?php endif;
+		<?php
+	endif;
 }
 
 add_action( 'wp_head', 'dslc_preview_area_head' );
@@ -249,7 +250,7 @@ add_action( 'wp_head', 'dslc_preview_area_head' );
  */
 function dslc_editing_screen_title( $title ) {
 	$screen = get_current_screen();
-	
+
 	if ( ! is_object( $screen ) ) {
 		return;
 	}

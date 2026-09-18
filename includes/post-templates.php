@@ -19,13 +19,13 @@ function dslc_post_templates_init() {
 	// If you need to change it use 'dslc_post_templates_post_types' filter.
 	global $dslc_var_templates_pt;
 
-	$dslc_var_templates_pt = array();
-	$dslc_var_templates_pt['post'] = 'Blog Posts';
-	$dslc_var_templates_pt['dslc_projects'] = 'Projects';
+	$dslc_var_templates_pt                   = array();
+	$dslc_var_templates_pt['post']           = 'Blog Posts';
+	$dslc_var_templates_pt['dslc_projects']  = 'Projects';
 	$dslc_var_templates_pt['dslc_galleries'] = 'Galleries';
 	$dslc_var_templates_pt['dslc_downloads'] = 'Downloads';
-	$dslc_var_templates_pt['dslc_staff'] = 'Staff';
-	$dslc_var_templates_pt['dslc_partners'] = 'Partners';
+	$dslc_var_templates_pt['dslc_staff']     = 'Staff';
+	$dslc_var_templates_pt['dslc_partners']  = 'Partners';
 
 	// Developers: If you need to change $dslc_var_templates_pt, please
 	// use the filter below.
@@ -46,11 +46,10 @@ function dslc_post_templates_init() {
 	// If you need to change it use 'dslc_enabled_cpt' filter.
 	global $dslc_enabled_cpt;
 
-	$dslc_enabled_cpt = array();
+	$dslc_enabled_cpt         = array();
 	$dslc_enabled_cpt['page'] = 'Regular Pages';
 
 	$dslc_enabled_cpt = apply_filters( 'dslc_enabled_cpt', $dslc_enabled_cpt );
-
 } add_action( 'init', 'dslc_post_templates_init', 20 );
 
 
@@ -104,10 +103,10 @@ function dslc_cpt_use_templates( $post_type ) {
 add_filter( 'dslc_can_edit_in_lc', 'force_lc_edit_for_template_parts', 999, 2 );
 
 function force_lc_edit_for_template_parts( $can_edit, $post_type ) {
-    
-    if ( 'dslc_template_parts' === $post_type ) {
-        return true;
-    }
 
-    return $can_edit;
+	if ( 'dslc_template_parts' === $post_type ) {
+		return true;
+	}
+
+	return $can_edit;
 }

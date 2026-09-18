@@ -9,50 +9,50 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<ul class="nav-subtabs wp-clearfix widget-inside" id="dslc-settings-column">
 		<li class="dslc-submenu-section">
-			<a href="#general"  data-nav-to="<?php echo 'tab-1' ?>" class="nav-subtab <?php echo $anchor == 'tab-1' ? 'nav-tab-active' : ''; ?>">
-				<span class="dashicons dashicons-admin-settings"></span> <?php _e( 'General Options', 'live-composer-page-builder' ) ?>
+			<a href="#general"  data-nav-to="<?php echo 'tab-1'; ?>" class="nav-subtab <?php echo $anchor == 'tab-1' ? 'nav-tab-active' : ''; ?>">
+				<span class="dashicons dashicons-admin-settings"></span> <?php _e( 'General Options', 'live-composer-page-builder' ); ?>
 			</a>
 		</li>
 		<li class="dslc-submenu-section">
-			<a href="#navigation"  data-nav-to="<?php echo 'tab-1' ?>" class="nav-subtab <?php echo $anchor == 'tab-1' ? 'nav-tab-active' : ''; ?>">
-				<span class="dashicons dashicons-menu"></span> <?php _e( 'Navigation Module', 'live-composer-page-builder' ) ?>
+			<a href="#navigation"  data-nav-to="<?php echo 'tab-1'; ?>" class="nav-subtab <?php echo $anchor == 'tab-1' ? 'nav-tab-active' : ''; ?>">
+				<span class="dashicons dashicons-menu"></span> <?php _e( 'Navigation Module', 'live-composer-page-builder' ); ?>
 			</a>
 		</li>
 		<li class="dslc-submenu-section">
-			<a href="#features-control"  data-nav-to="<?php echo 'tab-1' ?>" class="nav-subtab <?php echo $anchor == 'tab-1' ? 'nav-tab-active' : ''; ?>">
-				<span class="dashicons dashicons-forms"></span> <?php _e( 'Features Control', 'live-composer-page-builder' ) ?>
+			<a href="#features-control"  data-nav-to="<?php echo 'tab-1'; ?>" class="nav-subtab <?php echo $anchor == 'tab-1' ? 'nav-tab-active' : ''; ?>">
+				<span class="dashicons dashicons-forms"></span> <?php _e( 'Features Control', 'live-composer-page-builder' ); ?>
 			</a>
 		</li>
 		<li class="dslc-submenu-section">
-			<a href="#cpt-slugs"  data-nav-to="<?php echo 'tab-1' ?>" class="nav-subtab <?php echo $anchor == 'tab-1' ? 'nav-tab-active' : ''; ?>">
-				<span class="dashicons dashicons-index-card"></span> <?php _e( 'Post Types', 'live-composer-page-builder' ) ?>
+			<a href="#cpt-slugs"  data-nav-to="<?php echo 'tab-1'; ?>" class="nav-subtab <?php echo $anchor == 'tab-1' ? 'nav-tab-active' : ''; ?>">
+				<span class="dashicons dashicons-index-card"></span> <?php _e( 'Post Types', 'live-composer-page-builder' ); ?>
 			</a>
 		</li>
 		<li class="dslc-submenu-section">
-			<a href="#widgets"  data-nav-to="<?php echo 'tab-1' ?>" class="nav-subtab <?php echo $anchor == 'tab-1' ? 'nav-tab-active' : ''; ?>">
-				<span class="dashicons dashicons-welcome-widgets-menus"></span> <?php _e( 'Widgets Module', 'live-composer-page-builder' ) ?>
+			<a href="#widgets"  data-nav-to="<?php echo 'tab-1'; ?>" class="nav-subtab <?php echo $anchor == 'tab-1' ? 'nav-tab-active' : ''; ?>">
+				<span class="dashicons dashicons-welcome-widgets-menus"></span> <?php _e( 'Widgets Module', 'live-composer-page-builder' ); ?>
 			</a>
 		</li>
 		<li class="dslc-submenu-section">
-			<a href="#access-control"  data-nav-to="<?php echo 'tab-1' ?>" class="nav-subtab <?php echo $anchor == 'tab-1' ? 'nav-tab-active' : ''; ?>">
-				<span class="dashicons dashicons-admin-network"></span> <?php _e( 'Access Control', 'live-composer-page-builder' ) ?>
+			<a href="#access-control"  data-nav-to="<?php echo 'tab-1'; ?>" class="nav-subtab <?php echo $anchor == 'tab-1' ? 'nav-tab-active' : ''; ?>">
+				<span class="dashicons dashicons-admin-network"></span> <?php _e( 'Access Control', 'live-composer-page-builder' ); ?>
 			</a>
 		</li>
 		<li class="dslc-submenu-section">
-			<a href="#performance"  data-nav-to="<?php echo 'tab-1' ?>" class="nav-subtab <?php echo $anchor == 'tab-1' ? 'nav-tab-active' : ''; ?>">
-				<span class="dashicons dashicons-dashboard"></span> <?php _e( 'Performance', 'live-composer-page-builder' ) ?>
+			<a href="#performance"  data-nav-to="<?php echo 'tab-1'; ?>" class="nav-subtab <?php echo $anchor == 'tab-1' ? 'nav-tab-active' : ''; ?>">
+				<span class="dashicons dashicons-dashboard"></span> <?php _e( 'Performance', 'live-composer-page-builder' ); ?>
 			</a>
 		</li>
 		<li class="dslc-submenu-section">
-			<a href="#other"  data-nav-to="<?php echo 'tab-1' ?>" class="nav-subtab <?php echo $anchor == 'tab-1' ? 'nav-tab-active' : ''; ?>">
-				<span class="dashicons dashicons-admin-tools"></span> <?php _e( 'Other', 'live-composer-page-builder' ) ?>
+			<a href="#other"  data-nav-to="<?php echo 'tab-1'; ?>" class="nav-subtab <?php echo $anchor == 'tab-1' ? 'nav-tab-active' : ''; ?>">
+				<span class="dashicons dashicons-admin-tools"></span> <?php _e( 'Other', 'live-composer-page-builder' ); ?>
 			</a>
 		</li>
 
 		<?php if ( class_exists( 'LC_Extensions_Core' ) && LC_Extensions_Core::is_extension_active( 'preloader' ) ) : ?>
 			<li class="dslc-submenu-section">
-				<a href="#preloader"  data-nav-to="<?php echo 'tab-1' ?>" class="nav-subtab <?php echo $anchor == 'tab-1' ? 'nav-tab-active' : ''; ?>">
-					<span class="dashicons dashicons-image-filter"></span> <?php _e( 'Preloader', 'live-composer-page-builder' ) ?>
+				<a href="#preloader"  data-nav-to="<?php echo 'tab-1'; ?>" class="nav-subtab <?php echo $anchor == 'tab-1' ? 'nav-tab-active' : ''; ?>">
+					<span class="dashicons dashicons-image-filter"></span> <?php _e( 'Preloader', 'live-composer-page-builder' ); ?>
 				</a>
 			</li>
 		<?php endif; ?>
@@ -63,7 +63,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<form method="post" action="options.php" class="dslc-settings-form">
 		<?php echo settings_fields( 'dslc_plugin_options' ); ?>
 
-			<!-- <div class="tab" <?php echo $anchor == 'tab-1' ? 'style="display: block"' : ''?> id="tab-for-tab-1"> -->
+			<!-- <div class="tab" <?php echo $anchor == 'tab-1' ? 'style="display: block"' : ''; ?> id="tab-for-tab-1"> -->
 			<a name="general"></a>
 			<div class="dslc-panel">
 					<?php do_settings_sections( 'dslc_plugin_options' ); ?>

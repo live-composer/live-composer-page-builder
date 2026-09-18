@@ -3,6 +3,14 @@
     "description": "Page Builder for Wordpress",
     "type": "project",
     "license": "GPL v3",
-    "require": {},
-    "require-dev": {}
+    "require-dev": {
+        "squizlabs/php_codesniffer": "3.13.6",
+        "wp-coding-standards/wpcs": "3.4.1",
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.2"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
 }

@@ -59,7 +59,6 @@ function dslc_template_redirects( $template ) {
 	} else {
 		return $template;
 	}
-
 }
 /**
  * Filter 'template_include'.
@@ -132,7 +131,6 @@ function dslc_author_archive_template_redirect( $archive_template ) {
 
 	$archive_template = DS_LIVE_COMPOSER_ABS . '/templates/dslc-archive.php';
 	return $archive_template;
-
 }
 
 /**
@@ -151,7 +149,6 @@ function dslc_search_template_redirect( $search_template ) {
 
 	$search_template = DS_LIVE_COMPOSER_ABS . '/templates/dslc-archive.php';
 	return $search_template;
-
 }
 
 /**
@@ -204,11 +201,12 @@ function dslc_archive_template_404_fix( $query ) {
 	if ( $query->is_author() && $query->is_archive() && $query->is_main_query() ) {
 
 		$template = dslc_get_option( 'author', 'dslc_plugin_options_archives' );
-		if ( ! $template || 'none' === $template ) { /* nothing */ } else { $query->set( 'posts_per_page', 1 ); }
+		if ( ! $template || 'none' === $template ) {
+			/* nothing */ } else {
+			$query->set( 'posts_per_page', 1 ); }
 	}
 
 	return $query;
-
 } add_action( 'pre_get_posts', 'dslc_archive_template_404_fix' );
 
 /**
@@ -254,9 +252,16 @@ function dslc_flush_permalinks_on_404() {
 
 			flush_rewrite_rules( false );
 			set_transient( 'dslc_flush_permalinks', 1, HOUR_IN_SECONDS * 12 );
-			wp_redirect( home_url( add_query_arg( array(
-				'dslc-flush' => 1,
-			), $wp->request ) ) );
+			wp_redirect(
+				home_url(
+					add_query_arg(
+						array(
+							'dslc-flush' => 1,
+						),
+						$wp->request
+					)
+				)
+			);
 			exit;
 
 		} else {

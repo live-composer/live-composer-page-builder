@@ -48,7 +48,6 @@ function dslc_dynamic_css_hook() {
 	} else {
 		add_action( 'wp_footer', 'dslc_custom_css' );
 	}
-
 } add_action( 'wp_loaded', 'dslc_dynamic_css_hook' );
 
 /**
@@ -64,12 +63,12 @@ function dslc_custom_css() {
 	$dslc_custom_css_ignore_check = apply_filters( 'dslc_generate_custom_css', $dslc_custom_css_ignore_check );
 
 	if ( ! is_singular() &&
-		 ! is_archive() &&
-		 ! is_author() &&
-		 ! is_search() &&
-		 ! is_404() &&
-		 ! is_home() &&
-		 ! $dslc_custom_css_ignore_check
+		! is_archive() &&
+		! is_author() &&
+		! is_search() &&
+		! is_404() &&
+		! is_home() &&
+		! $dslc_custom_css_ignore_check
 	) {
 		return;
 	}
@@ -78,7 +77,7 @@ function dslc_custom_css() {
 	global $content_width;
 	global $dslc_post_types;
 
-	$code = '';
+	$code          = '';
 	$template_code = '';
 
 	$lc_width = dslc_get_option( 'lc_max_width', 'dslc_plugin_options' );
@@ -94,7 +93,7 @@ function dslc_custom_css() {
 	// Filter $lc_width ( for devs ).
 	$lc_width = apply_filters( 'dslc_content_width', $lc_width );
 
-	$template_id = false;
+	$template_id    = false;
 	$code_to_render = array();
 
 	global $post;
@@ -133,7 +132,7 @@ function dslc_custom_css() {
 	if ( $template_id ) {
 		$header_footer = dslc_hf_get_ID( $template_id );
 	} elseif ( is_singular( $dslc_post_types ) ) {
-		$template_id = dslc_st_get_template_id( get_the_ID() );
+		$template_id   = dslc_st_get_template_id( get_the_ID() );
 		$header_footer = dslc_hf_get_ID( $template_id );
 	} else {
 		$header_footer = dslc_hf_get_ID( get_the_ID() );
@@ -150,7 +149,7 @@ function dslc_custom_css() {
 
 		if ( $header_code ) {
 			$code_to_render[ $header_footer['header'] ] = $header_code;
-			$header_id = $header_footer['header'];
+			$header_id                                  = $header_footer['header'];
 		}
 	}
 
@@ -160,7 +159,7 @@ function dslc_custom_css() {
 
 		if ( $footer_code ) {
 			$code_to_render[ $header_footer['footer'] ] = $footer_code;
-			$footer_id = $header_footer['footer'];
+			$footer_id                                  = $header_footer['footer'];
 		}
 	}
 
@@ -175,7 +174,7 @@ function dslc_custom_css() {
 
 	// Post/Page content.
 	$post_id = get_the_ID();
-	$code = get_post_meta( $post_id, 'dslc_code', true );
+	$code    = get_post_meta( $post_id, 'dslc_code', true );
 
 	if ( $code ) {
 		$code_to_render[ $post_id ] = $code;
@@ -190,22 +189,26 @@ function dslc_custom_css() {
 		$decoded_code = dslc_json_decode( $raw_dslc_code );
 		if ( is_array( $decoded_code ) ) {
 			foreach ( $decoded_code as $row ) {
-				if ( ! isset( $row['content'] ) || ! is_array( $row['content'] ) ) continue;
+				if ( ! isset( $row['content'] ) || ! is_array( $row['content'] ) ) {
+					continue;
+				}
 				foreach ( $row['content'] as $area ) {
-					if ( ! isset( $area['content'] ) || ! is_array( $area['content'] ) ) continue;
+					if ( ! isset( $area['content'] ) || ! is_array( $area['content'] ) ) {
+						continue;
+					}
 					foreach ( $area['content'] as $module ) {
-						
-						$t_part_id = false;
+
+						$t_part_id     = false;
 						$required_type = 'section';
 
 						// Check for Section Module
 						if ( isset( $module['module_id'] ) && $module['module_id'] === 'DSLC_Section' ) {
-							$t_part_id = isset( $module['template_id'] ) ? $module['template_id'] : false;
+							$t_part_id     = isset( $module['template_id'] ) ? $module['template_id'] : false;
 							$required_type = 'section';
-						} 
+						}
 						// ADDED: Check for Loops Module
 						elseif ( isset( $module['module_id'] ) && $module['module_id'] === 'DSLC_Loops' ) {
-							$t_part_id = isset( $module['template_id'] ) ? $module['template_id'] : false;
+							$t_part_id     = isset( $module['template_id'] ) ? $module['template_id'] : false;
 							$required_type = 'dslc_post_loop';
 						}
 
@@ -238,7 +241,7 @@ function dslc_custom_css() {
 	echo '<style type="text/css">';
 
 	$output_css = false;
-	$post_id = get_the_ID();
+	$post_id    = get_the_ID();
 
 	// Generate CSS for defined code.
 	// Generated code gets added into $dslc_css_style global var.
@@ -250,12 +253,12 @@ function dslc_custom_css() {
 				// OR outputting CSS for the header/footer.
 				if ( ! dslc_is_editor_active()
 					|| intval( $id ) === intval( $header_id )
-					|| intval( $id ) === intval( $footer_id ) 
+					|| intval( $id ) === intval( $footer_id )
 					|| get_post_type( $id ) === 'dslc_template_parts' ) {
 
 					// ! is_singular( 'dslc_hf' )
 					$dslc_css_style .= "\n\n/*  CSS FOR POST ID: " . $id . " */\n";
-					$cache_id = $id;
+					$cache_id        = $id;
 
 					// Initiate simple CSS rendering cache.
 					$cache = new DSLC_Cache( 'css' );
@@ -363,7 +366,7 @@ function dslc_render_css( $code ) {
 		foreach ( $code_modules_only as $module ) {
 			if ( trim( $module ) ) {
 				$module_settings_encoded = preg_replace( "/(?:\[dslc_module[A-Za-z=\"' 0-9\-_]*\])/", '', $module );
-				$css_output .= dslc_module_gen_css( array(), $module_settings_encoded );
+				$css_output             .= dslc_module_gen_css( array(), $module_settings_encoded );
 			}
 		}
 	}
@@ -396,7 +399,6 @@ function dslc_shortcodes_add_suffix_css( $code ) {
 function dslc_modules_section_gen_css( $atts, $content = null ) {
 
 	return do_shortcode( $content );
-
 } add_shortcode( 'dslc_modules_section_gen_css', 'dslc_modules_section_gen_css' );
 
 /**
@@ -405,7 +407,6 @@ function dslc_modules_section_gen_css( $atts, $content = null ) {
 function dslc_modules_area_gen_css( $atts, $content = null ) {
 
 	return do_shortcode( $content );
-
 } add_shortcode( 'dslc_modules_area_gen_css', 'dslc_modules_area_gen_css' );
 
 /**
@@ -453,8 +454,8 @@ function dslc_module_gen_css( $atts, $settings_raw ) {
 			if ( isset( $option_arr['type'] ) && 'image' === $option_arr['type'] ) {
 				if ( isset( $settings[ $option_arr['id'] ] ) && ! empty( $settings[ $option_arr['id'] ] ) && is_numeric( $settings[ $option_arr['id'] ] ) ) {
 					$dslc_var_image_option_bckp[ $option_arr['id'] ] = $settings[ $option_arr['id'] ];
-					$image_info = wp_get_attachment_image_src( $settings[ $option_arr['id'] ], 'full' );
-					$settings[ $option_arr['id'] ] = $image_info[0];
+					$image_info                                      = wp_get_attachment_image_src( $settings[ $option_arr['id'] ], 'full' );
+					$settings[ $option_arr['id'] ]                   = $image_info[0];
 				}
 			}
 
@@ -483,7 +484,6 @@ function dslc_module_gen_css( $atts, $settings_raw ) {
 
 		return $css_output;
 	}// End if().
-
 } add_shortcode( 'dslc_module_gen_css', 'dslc_module_gen_css' );
 
 /**
@@ -502,8 +502,8 @@ function dslc_generate_custom_css( $module_structure, $module_settings, $restart
 	/* Extract responsive settings into separate arrays. */
 
 	$module_structure_resp_desktop = array();
-	$module_structure_resp_tablet = array();
-	$module_structure_resp_phone = array();
+	$module_structure_resp_tablet  = array();
+	$module_structure_resp_phone   = array();
 
 	foreach ( $module_structure as $single_option ) {
 
@@ -594,17 +594,17 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 	}
 
 	// Allow third-party developers to change any module setting before CSS generation.
-	$module_settings = apply_filters( 'dslc_module_settings_before_cssgen', $module_settings );
+	$module_settings  = apply_filters( 'dslc_module_settings_before_cssgen', $module_settings );
 	$module_structure = apply_filters( 'dslc_module_structure_before_cssgen', $module_structure );
 
 	// --- FIX: Execute Consolidated Value Migration HERE ---
-    // This is the critical step that migrate old vertical and horizontal margin and padding values into new seperate values
-    // the main loop below to find them when iterating over $module_structure.
+	// This is the critical step that migrate old vertical and horizontal margin and padding values into new seperate values
+	// the main loop below to find them when iterating over $module_structure.
 	$module_settings = dslc_process_consolidated_css_values( $module_settings );
 
 	$css_output = '';
 	global $dslc_googlefonts_array;
-	$regular_fonts = array( 'Georgia', 'Times', 'Arial', 'Lucida Sans Unicode', 'Tahoma', 'Trebuchet MS', 'Verdana', 'Helvetica' );
+	$regular_fonts   = array( 'Georgia', 'Times', 'Arial', 'Lucida Sans Unicode', 'Tahoma', 'Trebuchet MS', 'Verdana', 'Helvetica' );
 	$organized_array = array();
 
 	global $dslc_css_fonts;
@@ -612,7 +612,7 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 	global $dslc_active;
 
 	$important_append = '';
-	$force_important = dslc_get_option( 'lc_force_important_css', 'dslc_plugin_options' );
+	$force_important  = dslc_get_option( 'lc_force_important_css', 'dslc_plugin_options' );
 	if ( 'enabled' === $force_important ) {
 		$important_append = ' !important';
 	}
@@ -661,11 +661,11 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 				$ext = ' ';
 				if ( isset( $option_arr['ext'] ) ) {
 					$ext = $option_arr['ext'];
-					
-					// If the control is a dimensional slider (margin, padding, width), 
+
+					// If the control is a dimensional slider (margin, padding, width),
 					// resolve the unit dynamically from the saved settings using the helper.
 					$ext = lc_get_dynamic_unit( $option_id, $module_settings, $ext );
-					
+
 					// --- END DYNAMIC UNIT RESOLUTION ---
 
 				}
@@ -684,20 +684,20 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 
 				if ( 'image' === $option_arr['type'] ) {
 					$prepend = 'url("';
-					$append = '")';
+					$append  = '")';
 				}
 
 				// Get element and CSS rule.
-				$affect_rule_raw = $option_arr['affect_on_change_rule'];
+				$affect_rule_raw  = $option_arr['affect_on_change_rule'];
 				$affect_rules_arr = explode( ',', $affect_rule_raw );
 
 				// Affect Element.
-				$affect_el = '';
+				$affect_el      = '';
 				$affect_els_arr = explode( ',', $option_arr['affect_on_change_el'] );
-				$count = 0;
+				$count          = 0;
 
 				foreach ( $affect_els_arr as $affect_el_arr ) {
-					$count++;
+					++$count;
 					if ( $count > 1 ) {
 						$affect_el .= ',';
 					}
@@ -785,12 +785,12 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 			 * #selector { declaration }
 			 *
 			 * #selector {
-			 * 	property: value;
+			 *  property: value;
 			 * }
 			 */
 
-			$css_selector = $el;
-			$css_declaration = $rules;
+			$css_selector       = $el;
+			$css_declaration    = $rules;
 			$css_element_output = array();
 
 			$do_css_output = true; // Flag to skip current css block output.
@@ -810,12 +810,12 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 			// Output: array with css property:value pairs.
 			// Go through each propery to compose css declaration block.
 			$css_declaration_backgrounds = array();
-			$css_declaration_borders = array();
+			$css_declaration_borders     = array();
 
 			foreach ( $css_declaration as $css_property => $css_value ) {
 				// Clean property and value from extra spaces.
 				$css_property = trim( $css_property );
-				$css_value = trim( $css_value );
+				$css_value    = trim( $css_value );
 
 				// Do not output properties with empty value.
 				if ( '' === $css_value || 'url(" ")' === $css_value ) {
@@ -833,7 +833,7 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 				}
 
 				// Do not output max-width = 0 property.
-				if ( 'max-width' === $css_property &&  ( '0px' === $css_value || '0' === $css_value ) ) { // Min-width = 0 is empty.
+				if ( 'max-width' === $css_property && ( '0px' === $css_value || '0' === $css_value ) ) { // Min-width = 0 is empty.
 					unset( $css_declaration[ $css_property ] );
 				}
 
@@ -870,7 +870,7 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 						$css_value .= $font;
 					}
 
-					$css_value = rtrim( $css_value, ',' ); // Remove trailing comma.
+					$css_value                        = rtrim( $css_value, ',' ); // Remove trailing comma.
 					$css_declaration[ $css_property ] = $css_value;
 				}
 			}// End foreach().
@@ -924,7 +924,7 @@ function dslc_generate_module_css( $module_structure, $module_settings, $restart
 			}
 
 			// ---------
-			$css_output_el = ''; // Var for temporary output of current el.
+			$css_output_el  = ''; // Var for temporary output of current el.
 			$css_output_el .= $css_selector . '{';
 
 			foreach ( $css_declaration as $css_property => $css_value ) {
@@ -963,20 +963,20 @@ function dslc_helper_is_border_radius( $property_name ) {
  * Resolves the unit (px, %, em) for a dimensional CSS property
  * by looking up the value of its associated unit selector control.
  *
- * This logic predicts the unit selector ID (e.g., 'css_padding_unit') 
+ * This logic predicts the unit selector ID (e.g., 'css_padding_unit')
  * from the dimensional slider ID (e.g., 'css_padding_top').
  *
  * @param string $dimensional_control_id The ID of the dimensional control (e.g., 'css_padding_top').
- * @param array $module_settings All saved settings for the current module.
+ * @param array  $module_settings All saved settings for the current module.
  * @param string $default_unit The static default unit to use as a fallback (usually 'px').
  * @return string The resolved unit.
  */
 function lc_get_dynamic_unit( $dimensional_control_id, $module_settings, $default_unit ) {
 
-    // Define the dimensional suffixes that need to be stripped.
-    $dimensional_suffixes = ['_top', '_right', '_bottom', '_left'];
-    
-    // Check if the ID contains a dimensional property we manage.
+	// Define the dimensional suffixes that need to be stripped.
+	$dimensional_suffixes = array( '_top', '_right', '_bottom', '_left' );
+
+	// Check if the ID contains a dimensional property we manage.
 	if (
 		strpos( $dimensional_control_id, '_padding' ) === false &&
 		strpos( $dimensional_control_id, '_margin' ) === false
@@ -984,17 +984,17 @@ function lc_get_dynamic_unit( $dimensional_control_id, $module_settings, $defaul
 		return $default_unit;
 	}
 
-    // 1. Normalize the ID (strip direction)
-    // E.g., 'css_header_margin_bottom' becomes 'css_header_margin'
-    $normalized_id = str_replace( $dimensional_suffixes, '', $dimensional_control_id );
+	// 1. Normalize the ID (strip direction)
+	// E.g., 'css_header_margin_bottom' becomes 'css_header_margin'
+	$normalized_id = str_replace( $dimensional_suffixes, '', $dimensional_control_id );
 
-    // 2. Predict the Unit Selector ID by appending '_unit'
-    // E.g., 'css_header_margin' becomes 'css_header_margin_unit'
-    $unit_selector_id = $normalized_id . '_unit';
+	// 2. Predict the Unit Selector ID by appending '_unit'
+	// E.g., 'css_header_margin' becomes 'css_header_margin_unit'
+	$unit_selector_id = $normalized_id . '_unit';
 
-    // 3. Look up the value in the saved settings
-    if ( isset( $module_settings[ $unit_selector_id ] ) && ! empty( $module_settings[ $unit_selector_id ] ) ) {
-        return $module_settings[ $unit_selector_id ];
-    }
-    return $default_unit;
+	// 3. Look up the value in the saved settings
+	if ( isset( $module_settings[ $unit_selector_id ] ) && ! empty( $module_settings[ $unit_selector_id ] ) ) {
+		return $module_settings[ $unit_selector_id ];
+	}
+	return $default_unit;
 }

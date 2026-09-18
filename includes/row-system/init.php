@@ -7,5 +7,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-include DSLC_ROW_SYSTEM_ABS . '/inc/options.php';
-include DSLC_ROW_SYSTEM_ABS . '/inc/options-output.php';
+require DSLC_ROW_SYSTEM_ABS . '/inc/options.php';
+require DSLC_ROW_SYSTEM_ABS . '/inc/options-output.php';

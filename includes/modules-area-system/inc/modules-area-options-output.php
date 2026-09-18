@@ -91,16 +91,16 @@ function dslc_modules_area_display_options() {
 	}
 
 	foreach ( $dslc_var_modules_area_options as $modules_area_option ) {
-        // 1. Logic Replication: Default Section
-        $section = isset( $modules_area_option['section'] ) ? $modules_area_option['section'] : 'functionality';
+		// 1. Logic Replication: Default Section
+		$section = isset( $modules_area_option['section'] ) ? $modules_area_option['section'] : 'functionality';
 
-        // 2. Logic Replication: Default Tab ID
-        $tab_id = '';
-        if ( isset( $modules_area_option['tab'] ) ) {
-            $tab_id = str_replace( ' ', '_', strtolower( $modules_area_option['tab'] ) ) . '_' . $section;
-        } else {
-            $tab_id = 'general_' . $section;
-        }
+		// 2. Logic Replication: Default Tab ID
+		$tab_id = '';
+		if ( isset( $modules_area_option['tab'] ) ) {
+			$tab_id = str_replace( ' ', '_', strtolower( $modules_area_option['tab'] ) ) . '_' . $section;
+		} else {
+			$tab_id = 'general_' . $section;
+		}
 
 		if ( 'group' !== $modules_area_option['type'] ) {
 
@@ -149,7 +149,6 @@ function dslc_modules_area_display_options() {
 			if ( 'color' === $modules_area_option['type'] ) {
 				$option_type_class = 'dslca-modules-area-edit-option-color dslca-color-option';
 			}
-
 		}
 
 		?>
@@ -158,27 +157,32 @@ function dslc_modules_area_display_options() {
 
 			<?php if ( 'open' === $modules_area_option['action'] ) : ?>
 				<div class="dslca-modules-area-control-group dslca-modules-area-edit-option" data-section="<?php echo esc_attr( $section ); ?>" 
-             data-tab="<?php echo esc_attr( $tab_id ); ?>">
-					<?php 
+			data-tab="<?php echo esc_attr( $tab_id ); ?>">
+					<?php
 					$wrapper_class = '';
-					if(strtolower($modules_area_option['label']) == 'margin'){
+					if ( strtolower( $modules_area_option['label'] ) == 'margin' ) {
 						$wrapper_class = 'controls-group-margin';
-					}else if(strtolower($modules_area_option['label']) == 'padding'){
+					} elseif ( strtolower( $modules_area_option['label'] ) == 'padding' ) {
 						$wrapper_class = 'controls-group-padding';
 					}
 					?>
-				<div class="controls-group-inner <?php echo $wrapper_class ?>">
-				<span class="dslca-modules-area-edit-label"><?php echo $modules_area_option['label'] ?></span>
+				<div class="controls-group-inner <?php echo $wrapper_class; ?>">
+				<span class="dslca-modules-area-edit-label"><?php echo $modules_area_option['label']; ?></span>
 			<?php endif; ?>
 
 		<?php else : ?>
 
 		<div class="dslca-modules-area-edit-option <?php echo esc_attr( $option_type_class ) . esc_attr( $extra_class ); ?> dslca-modules-area-edit-option-<?php echo esc_attr( $modules_area_option['id'] ); ?>" data-id="<?php echo esc_attr( $modules_area_option['id'] ); ?>" data-section="<?php echo esc_attr( $section ); ?>" 
-             data-tab="<?php echo esc_attr( $tab_id ); ?>">
+			data-tab="<?php echo esc_attr( $tab_id ); ?>">
 
 				<?php if ( isset( $modules_area_option['help'] ) ) : ?>
 					<div class="dslca-module-edit-field-ttip-content"><?php echo $modules_area_option['help']; ?></div>
-					<span class="dslca-module-edit-label"><?php echo esc_html( $modules_area_option['label'] ); echo dslc_get_modules_area_help(); ?></span>
+					<span class="dslca-module-edit-label">
+					<?php
+					echo esc_html( $modules_area_option['label'] );
+					echo dslc_get_modules_area_help();
+					?>
+					</span>
 				<?php else : ?>
 					<span class="dslca-module-edit-label"><?php echo esc_html( $modules_area_option['label'] ); ?></span>
 				<?php endif; ?>
@@ -195,7 +199,8 @@ function dslc_modules_area_display_options() {
 						<?php endforeach; ?>
 					</select>
 
-				<?php elseif ( 'color' === $modules_area_option['type'] ) : 
+					<?php
+				elseif ( 'color' === $modules_area_option['type'] ) :
 
 					$style = '';
 
@@ -204,7 +209,8 @@ function dslc_modules_area_display_options() {
 						$text_color_value = $curr_value;
 
 						$style = ' style="background: ' . $curr_value . ';"';
-					}?>
+					}
+					?>
 
 					<input type="text" class="dslca-modules-area-edit-field dslca-module-edit-field-colorpicker" data-alpha="true" data-id="<?php echo esc_attr( $modules_area_option['id'] ); ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>"  data-affect-on-change-el="<?php echo esc_attr( '.dslca-modules-area-being-edited' ); ?>" data-affect-on-change-rule="<?php echo esc_attr( $css_rule_output ); ?>" />
 
@@ -216,11 +222,11 @@ function dslc_modules_area_display_options() {
 				<?php elseif ( 'slider' === $modules_area_option['type'] ) : ?>
 
 					<?php
-						$slider_min = $modules_area_option['min'];
-						$slider_max = $modules_area_option['max'];
+						$slider_min       = $modules_area_option['min'];
+						$slider_max       = $modules_area_option['max'];
 						$slider_increment = $modules_area_option['increment'];
-						$ext = $modules_area_option['ext'];
-						$curr_value = $modules_area_option['std'];
+						$ext              = $modules_area_option['ext'];
+						$curr_value       = $modules_area_option['std'];
 
 					?>
 					<div class="dslca-module-area-edit-field-numeric-wrap">
@@ -298,7 +304,7 @@ function dslc_modules_area_get_options_fields( $atts = false ) {
 		foreach ( $dslc_var_modules_area_options as $modules_area_option ) {
 
 			if ( 'group' !== $modules_area_option['type'] ) {
-				
+
 				if ( ! isset( $modules_area_option['std'] ) ) {
 
 					$modules_area_option['std'] = '';
@@ -342,7 +348,6 @@ function dslc_modules_area_get_options_fields( $atts = false ) {
 	}
 
 	return $output;
-
 }
 
 /**
@@ -352,71 +357,76 @@ function dslc_modules_area_get_options_fields( $atts = false ) {
  * @return string      CSS styles for the Modules Area.
  */
 function dslc_modules_area_generate_css( $module_settings = false, $options_to_process = array() ) {
-    
-    global $dslc_var_modules_area_options;
-    $instance_id = isset( $module_settings['modules_area_instance_id'] ) ? $module_settings['modules_area_instance_id'] : false;
-    $style = '';
 
-    if ( empty( $module_settings ) || empty( $options_to_process ) ) {
-        return '';
-    }
+	global $dslc_var_modules_area_options;
+	$instance_id = isset( $module_settings['modules_area_instance_id'] ) ? $module_settings['modules_area_instance_id'] : false;
+	$style       = '';
 
-    foreach ( $options_to_process as $option_definition ) {
-        
-        $option_id = $option_definition['id'];
-        
-        if ( ! isset( $option_definition['affect_on_change_el'] ) || $option_definition['affect_on_change_el'] === '' ) {
+	if ( empty( $module_settings ) || empty( $options_to_process ) ) {
+		return '';
+	}
 
-            $rules = isset( $option_definition['affect_on_change_rule'] ) ? explode( ',', $option_definition['affect_on_change_rule'] ) : false;
+	foreach ( $options_to_process as $option_definition ) {
 
-            $value = isset( $module_settings[ $option_id ] ) ? $module_settings[ $option_id ] : (isset($option_definition['std']) ? $option_definition['std'] : false);
+		$option_id = $option_definition['id'];
 
-            if ( $value === false || $value === '' ) continue;
+		if ( ! isset( $option_definition['affect_on_change_el'] ) || $option_definition['affect_on_change_el'] === '' ) {
 
-            $orig_value = $value;
-            
-            $resolved_ext = isset( $option_definition['ext'] ) ? $option_definition['ext'] : '';
-            
-            if ( strpos($option_id, 'padding') !== false && isset($module_settings['padding_unit']) ) {
-                $resolved_ext = $module_settings['padding_unit'];
-            } elseif ( strpos($option_id, 'margin') !== false && isset($module_settings['margin_unit']) ) {
-                $resolved_ext = $module_settings['margin_unit'];
-            }
-            
-            // Only apply units to numeric values
-            if ( is_numeric($value) ) {
-                $value = $value . $resolved_ext;
-            }
+			$rules = isset( $option_definition['affect_on_change_rule'] ) ? explode( ',', $option_definition['affect_on_change_rule'] ) : false;
 
-            if ( 'border' === $option_id ) {
-                $checkbox_arr = explode( ' ', trim( $orig_value ) );
-                if ( ! in_array( 'top', $checkbox_arr, true ) ) { $style .= 'border-top-style: hidden; '; }
-                if ( ! in_array( 'right', $checkbox_arr, true ) ) { $style .= 'border-right-style: hidden; '; }
-                if ( ! in_array( 'bottom', $checkbox_arr, true ) ) { $style .= 'border-bottom-style: hidden; '; }
-                if ( ! in_array( 'left', $checkbox_arr, true ) ) { $style .= 'border-left-style: hidden; '; }                
-            }
+			$value = isset( $module_settings[ $option_id ] ) ? $module_settings[ $option_id ] : ( isset( $option_definition['std'] ) ? $option_definition['std'] : false );
 
-            if ( $rules ) {
-                foreach ( $rules as $rule ) {  
+			if ( $value === false || $value === '' ) {
+				continue;
+			}
+
+			$orig_value = $value;
+
+			$resolved_ext = isset( $option_definition['ext'] ) ? $option_definition['ext'] : '';
+
+			if ( strpos( $option_id, 'padding' ) !== false && isset( $module_settings['padding_unit'] ) ) {
+				$resolved_ext = $module_settings['padding_unit'];
+			} elseif ( strpos( $option_id, 'margin' ) !== false && isset( $module_settings['margin_unit'] ) ) {
+				$resolved_ext = $module_settings['margin_unit'];
+			}
+
+			// Only apply units to numeric values
+			if ( is_numeric( $value ) ) {
+				$value = $value . $resolved_ext;
+			}
+
+			if ( 'border' === $option_id ) {
+				$checkbox_arr = explode( ' ', trim( $orig_value ) );
+				if ( ! in_array( 'top', $checkbox_arr, true ) ) {
+					$style .= 'border-top-style: hidden; '; }
+				if ( ! in_array( 'right', $checkbox_arr, true ) ) {
+					$style .= 'border-right-style: hidden; '; }
+				if ( ! in_array( 'bottom', $checkbox_arr, true ) ) {
+					$style .= 'border-bottom-style: hidden; '; }
+				if ( ! in_array( 'left', $checkbox_arr, true ) ) {
+					$style .= 'border-left-style: hidden; '; }
+			}
+
+			if ( $rules ) {
+				foreach ( $rules as $rule ) {
 					if ( 'background-image' === $rule ) {
-						if ( !empty($value) ) {
+						if ( ! empty( $value ) ) {
 							$value = 'url(' . wp_get_attachment_url( $value ) . ')';
-						}
-						else{
+						} else {
 							$value = 'none';
 						}
-					}                                     
+					}
 					$style .= $rule . ':' . $value . ';';
-                }
-            }
-        }
-    }
+				}
+			}
+		}
+	}
 
-    if ( $style && $instance_id ) {
-        return '.dslc-modules-area[data-modules-area-id="' . esc_attr( $instance_id ) .'"] {' . $style . '}';
-    }
+	if ( $style && $instance_id ) {
+		return '.dslc-modules-area[data-modules-area-id="' . esc_attr( $instance_id ) . '"] {' . $style . '}';
+	}
 
-    return '';
+	return '';
 }
 /**
  * Get initial ( default ) Modules Area style
@@ -490,10 +500,9 @@ function dslc_modules_area_get_initial_style() {
 
 				foreach ( $rules as $rule ) {
 					if ( 'background-image' === $rule ) {
-						if ( !empty($value) ) {
+						if ( ! empty( $value ) ) {
 							$value = 'url(' . wp_get_attachment_url( $value ) . ')';
-						}
-						else{
+						} else {
 							$value = 'none';
 						}
 					}
@@ -518,7 +527,7 @@ function dslc_get_modules_area_help() {
 	return $output;
 }
 
-function dslc_modules_area_get_style($module_settings = false ) {
+function dslc_modules_area_get_style( $module_settings = false ) {
 
 	global $dslc_css_style;
 	global $dslc_var_modules_area_options;
@@ -527,8 +536,8 @@ function dslc_modules_area_get_style($module_settings = false ) {
 	/* Extract responsive settings into separate arrays. */
 
 	$module_structure_resp_desktop = array();
-	$module_structure_resp_tablet = array();
-	$module_structure_resp_phone = array();
+	$module_structure_resp_tablet  = array();
+	$module_structure_resp_phone   = array();
 
 	foreach ( $dslc_var_modules_area_options as $single_option ) {
 
@@ -574,7 +583,7 @@ function dslc_modules_area_get_style($module_settings = false ) {
 
 	foreach ( $module_structure as $device => $module_structure_resp ) {
 
-		$device_css = dslc_modules_area_generate_css($module_settings, $module_structure_resp );
+		$device_css = dslc_modules_area_generate_css( $module_settings, $module_structure_resp );
 
 		if ( '' !== $device_css ) {
 
