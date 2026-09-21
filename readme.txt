@@ -4,7 +4,7 @@ Tags: page builder, landing page builder, frontend page builder, drag and drop p
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.1.21
+Stable tag: 2.1.22
 License: GPLv3
 
 Page builder for WordPress with drag and drop header/footer editing, responsive settings, and animations. Compatible with Gutenberg block editor.
@@ -205,9 +205,12 @@ If you're migrating from another page builder, compatibility for content transfe
 * 🦊 [Check out our WooCommerce Page Builder Extension](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
 
-= 2.1.21 - September 10, 2026 =
+= 2.1.22 - September 21, 2026 =
 * Fix empty contenteditable field saving br tag.
-* Fix z-index conflict between section and module controls.
+
+= 2.1.21 - September 10, 2026 =
+* Escape output values in Downloads module (heading, button text, view all link, and inline SVG icon) to prevent stored XSS via crafted shortcode data.
+* Add validation to reject Downloads module shortcode content that does not match the expected data structure.
 
 = 2.1.20 - August 24, 2026 =
 * Security and vulnerability fix.

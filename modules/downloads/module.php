@@ -4991,6 +4991,20 @@ function dslc_module_downloads_output( $atts, $content = null ) {
 		return '';
 	}
 
+	$dslc_downloads_string_fields = array(
+	'main_heading_title',
+	'main_heading_link_title',
+	'view_all_link',
+	'button_text',
+	'button_inline_svg',
+	);
+
+	foreach ( $dslc_downloads_string_fields as $dslc_field_key ) {
+		if ( isset( $options[ $dslc_field_key ] ) && is_array( $options[ $dslc_field_key ] ) ) {
+			return '';
+		}
+	}
+
 	$allowed_svg = array(
 		'svg' => array(
 			'xmlns'        => true,
@@ -5304,7 +5318,7 @@ function dslc_module_downloads_output( $atts, $content = null ) {
 
 						<?php if ( isset( $options['view_all_link'] ) && $options['view_all_link'] !== '' ) : ?>
 
-							<span class="dslc-module-heading-view-all"><a href="<?php echo esc_url( $options['view_all_link'] ); ?>" class="dslca-editable-content" data-id="main_heading_link_title" data-type="simple" <?php if ( $dslc_is_admin ) { echo 'contenteditable';} ?> ><?php echo $options['main_heading_link_title']; ?></a></span>
+							<span class="dslc-module-heading-view-all"><a href="<?php echo esc_url( $options['view_all_link'] ); ?>" class="dslca-editable-content" data-id="main_heading_link_title" data-type="simple" <?php if ( $dslc_is_admin ) { echo 'contenteditable';} ?> ><?php echo esc_html( stripslashes( $options['main_heading_link_title'] ?? '' ) ); ?></a></span>
 
 						<?php endif; ?>
 
@@ -5579,13 +5593,13 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 													<?php if ( $post_elements == 'all' || in_array( 'button', $post_elements ) ) : ?>
 
 														<div class="dslc-download-download">
-															<a target="_blank" class="dslc-download-count-hook" data-post-id="<?php echo get_the_ID(); ?>" href="<?php echo $download_link; ?>" download>
+															<a target="_blank" class="dslc-download-count-hook" data-post-id="<?php echo get_the_ID(); ?>" href="<?php echo esc_url($download_link); ?>" download>
 																<?php if ( 'svg' == $options['show_icon'] ) : ?>
 																	<?php echo wp_kses( stripslashes( $options['button_inline_svg'] ?? '' ), $allowed_svg ); ?>
 																<?php elseif ( 'image' == $options['show_icon'] && ! empty( $options['button_icon_image'] ) ) : ?>
 																	<img class="dslc-button-icon-image" src="<?php echo esc_url( $options['button_icon_image'] ); ?>" alt="" />
 																<?php else : ?>
-																	<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
+																	<span class="dslc-icon dslc-icon-<?php echo esc_attr( $options['button_icon_id'] ?? '' ); ?>"></span>	
 																<?php endif; ?>
 																<?php echo esc_html( $options['button_text'] ?? '' ); ?>
 															</a>
@@ -5682,13 +5696,13 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 									<?php if ( ( $post_elements == 'all' || in_array( 'button', $post_elements ) ) && $download_link ) : ?>
 
 										<div class="dslc-download-download">
-											<a target="_blank" class="dslc-download-count-hook" data-post-id="<?php echo get_the_ID(); ?>" href="<?php echo $download_link; ?>" download>
+											<a target="_blank" class="dslc-download-count-hook" data-post-id="<?php echo get_the_ID(); ?>" href="<?php echo esc_url( $download_link ); ?>" download>
 												<?php if ( 'svg' == $options['show_icon'] ) : ?>
 													<?php echo wp_kses( stripslashes( $options['button_inline_svg'] ?? '' ), $allowed_svg ); ?>
 												<?php elseif ( 'image' == $options['show_icon'] && ! empty( $options['button_icon_image'] ) ) : ?>
 													<img class="dslc-button-icon-image" src="<?php echo esc_url( $options['button_icon_image'] ); ?>" alt="" />
 												<?php else : ?>
-													<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
+													<span class="dslc-icon dslc-icon-<?php echo esc_attr( $options['button_icon_id'] ?? '' ); ?>"></span>	
 												<?php endif; ?>
 												<?php echo esc_html( $options['button_text'] ?? '' ); ?>
 											</a>
