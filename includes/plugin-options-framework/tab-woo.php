@@ -7,20 +7,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 <div class="wrap lc-wrap lc-centered-panels lc-wider-panel lc-tab-woo lc-admin-tab-content">
 
-<?php 
+<?php
 // Get list of all plugin (active and inactive).
 $all_plugins = get_plugins();
 
 // ACTIVATE NOTICE: Check if plugin is already installed but not active.
-if ( array_key_exists( 'lc-woo-integration/lc-woo-integration.php', $all_plugins ) && is_plugin_inactive( 'lc-woo-integration/lc-woo-integration.php' ) ) : ?>
+if ( array_key_exists( 'lc-woo-integration/lc-woo-integration.php', $all_plugins ) && is_plugin_inactive( 'lc-woo-integration/lc-woo-integration.php' ) ) :
+	?>
 	<div class="dslc-panel lc-panel-non-active-plugin">
 		<span class="dashicons dashicons-warning" style="color:#D76D50; margin-right:8px;"></span> <?php _e( 'Looks like <strong>WooCommerce Integration for Live Composer</strong> plugin installed, but not active.', 'live-composer-page-builder' ); ?>
-		<a href="#" class="button button-primary lc-activate-plugin" data-plugin="lc-woo-integration" data-action-nonce="<?php echo wp_create_nonce( 'dslc-ajax-activate-plugin-lc-woo-integration' ) ?>">Activate It Now</a>
+		<a href="#" class="button button-primary lc-activate-plugin" data-plugin="lc-woo-integration" data-action-nonce="<?php echo wp_create_nonce( 'dslc-ajax-activate-plugin-lc-woo-integration' ); ?>">Activate It Now</a>
 	</div>
-<?php endif;
+	<?php
+endif;
 
 // AD PANEL: If WooIntegration is inactive.
-if ( is_plugin_inactive( 'lc-woo-integration/lc-woo-integration.php' ) ) : ?>
+if ( is_plugin_inactive( 'lc-woo-integration/lc-woo-integration.php' ) ) :
+	?>
 	<div class="dslc-panel lc-divided-panels lc-panel-woo lc-dark-panel padding-medium"
 		style="background-image:url(<?php echo DS_LIVE_COMPOSER_URL; ?>/images/lc-woo-bg.png)" >
 		<div class="lc-text-center">
@@ -49,12 +52,13 @@ if ( is_plugin_inactive( 'lc-woo-integration/lc-woo-integration.php' ) ) : ?>
 			<p><span class="promo-code">Promo code: <strong>HAPPY-<?php echo $today_day; ?></strong></span></p>
 		</div>
 	</div>
-<?php endif;
+	<?php
+endif;
 
 // LICENSE PANEL: If extension is active.
 if ( is_plugin_active( 'lc-woo-integration/lc-woo-integration.php' ) ) {
-	$license_manager = new LC_License_Manager;
-	$license_status = $license_manager->get_license_status( 'lc-woo-integration' );
+	$license_manager = new LC_License_Manager();
+	$license_status  = $license_manager->get_license_status( 'lc-woo-integration' );
 
 	if ( 'valid' !== $license_status ) {
 		$license_status = 'invalid';
@@ -64,7 +68,7 @@ if ( is_plugin_active( 'lc-woo-integration/lc-woo-integration.php' ) ) {
 		// Top license block (shows when issues or no license set).
 		// echo '<div data-show-if-license="invalid">';
 			echo $license_manager->render_license_block( 'lc-woo-integration' );
-		// echo '</div>';	
+		// echo '</div>';
 
 		// Tab heading (shows only when there is no problem with license).
 		// echo '<div class="lc-tab-heading" data-show-if-license="valid">';

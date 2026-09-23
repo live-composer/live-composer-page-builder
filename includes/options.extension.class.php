@@ -18,7 +18,7 @@ $dslc_extension; // Used in template
 class DSLC_Options_Extender {
 
 	private $extension_options = array();
-	protected $views = array();
+	protected $views           = array();
 
 	/**
 	 * Returns option array
@@ -29,14 +29,16 @@ class DSLC_Options_Extender {
 	 */
 	function get_option_array( $opt_id, $ext_id ) {
 
-		if ( ! isset( $this->extension_options[ $ext_id ] ) ) { return array();
+		if ( ! isset( $this->extension_options[ $ext_id ] ) ) {
+			return array();
 		}
 
 		foreach ( $this->extension_options[ $ext_id ]['sections'] as $section ) {
 
 			foreach ( $section['options'] as $option ) {
 
-				if ( $option['id'] == $opt_id ) { return $option;
+				if ( $option['id'] == $opt_id ) {
+					return $option;
 				}
 			}
 		}
@@ -147,12 +149,13 @@ class DSLC_Options_Extender {
 			'dslc_' . $section['extension_id'] . '_' . $section['id'] // where to show
 		);
 
-		if ( ! is_array( $section['options'] ) ) { return;
+		if ( ! is_array( $section['options'] ) ) {
+			return;
 		}
 
 		foreach ( $section['options'] as $option ) {
 
-			$option['section'] = 'dslc_' . $section['extension_id'] . '_' . $section['id'];
+			$option['section']      = 'dslc_' . $section['extension_id'] . '_' . $section['id'];
 			$option['extension_id'] = $section['extension_id'];
 
 			$this->add_option_field( $option );
@@ -167,9 +170,9 @@ class DSLC_Options_Extender {
 	private function add_option_field( $option ) {
 
 		$option['name'] = 'dslc_custom_options_' . $option['extension_id'] . '[' . $option['id'] . ']';
-		$option_ID = $option['id'];
+		$option_ID      = $option['id'];
 
-		$value = '';
+		$value   = '';
 		$options = get_option( 'dslc_custom_options_' . $option['extension_id'] );
 
 		if ( isset( $options[ $option['id'] ] ) ) {
@@ -181,7 +184,6 @@ class DSLC_Options_Extender {
 		$option['value'] = $value;
 
 		add_settings_field(
-
 			$option['id'], // id
 			$option['label'], // title
 			'dslc_option_display_funcitons_router', // callback
@@ -193,7 +195,7 @@ class DSLC_Options_Extender {
 }
 
 // Create class object.
-$dslc_options_extender = new DSLC_Options_Extender;
+$dslc_options_extender = new DSLC_Options_Extender();
 
 function dslc_get_c_option( $opt_id, $ext_id ) {
 

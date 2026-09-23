@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-if ( ! class_exists( 'LC_License_Manager' ) ):
+if ( ! class_exists( 'LC_License_Manager' ) ) :
 
 	/**
 	 * Core Class
@@ -70,14 +70,14 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 		}
 
 		/**
-		 * Register plugin that needs license and automatic updates. 
+		 * Register plugin that needs license and automatic updates.
 		 */
 		public function register_licensed_plugin( $plugin_data ) {
-			$plugin_slug = false;
-			$item_id = false;
+			$plugin_slug    = false;
+			$item_id        = false;
 			$plugin_version = 0;
-			$plugin_author = '';
-			$plugin_file = '';
+			$plugin_author  = '';
+			$plugin_file    = '';
 
 			if ( isset( $plugin_data['slug'] ) ) {
 				$plugin_slug = $plugin_data['slug'];
@@ -109,9 +109,9 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 				return;
 			}
 
-			self::$licenses[ $plugin_slug ]['version'] = $plugin_version;
-			self::$licenses[ $plugin_slug ]['author'] = $plugin_author;
-			self::$licenses[ $plugin_slug ]['item_id'] = $item_id;
+			self::$licenses[ $plugin_slug ]['version']     = $plugin_version;
+			self::$licenses[ $plugin_slug ]['author']      = $plugin_author;
+			self::$licenses[ $plugin_slug ]['item_id']     = $item_id;
 			self::$licenses[ $plugin_slug ]['plugin_file'] = $plugin_file;
 
 			if ( ! isset( self::$licenses[ $plugin_slug ]['license'] ) ) {
@@ -137,21 +137,23 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 		public function setup_plugin_updater() {
 
 			foreach ( self::$licenses as $slug => $data ) {
-				if ( 	! isset( $data['plugin_file'] ) ||
+				if ( ! isset( $data['plugin_file'] ) ||
 					! isset( $data['version'] ) ||
-					! isset( $data['item_id'] ) || 
-					! isset( $data['author'] ) ) return;
+					! isset( $data['item_id'] ) ||
+					! isset( $data['author'] ) ) {
+					return;
+				}
 
 				// Setup the updater.
 				$edd_updater = new LC_Plugins_Updater(
 					self::$store_url,
 					$data['plugin_file'],
 					array(
-						'version' 	=> $data['version'],
-						'license' 	=> $data['license'],
-						'item_id'   => $data['item_id'], // Product ID.
-						'author' 	=> $data['author'],
-						'url'       => home_url(),
+						'version' => $data['version'],
+						'license' => $data['license'],
+						'item_id' => $data['item_id'], // Product ID.
+						'author'  => $data['author'],
+						'url'     => home_url(),
 					)
 				);
 			}
@@ -166,7 +168,7 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 				return;
 			}
 
-			foreach ( $licenses as $slug => $data) {
+			foreach ( $licenses as $slug => $data ) {
 
 				if ( isset( $data['status'] ) ) {
 					self::$licenses[ $slug ]['status'] = $data['status'];
@@ -248,13 +250,13 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 		 */
 		public function ajax_toggle_license( $atts ) {
 			// Allowed to do this?
-			if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY_SAVE ) ):
+			if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY_SAVE ) ) :
 
 				// The array we'll pass back to the AJAX call.
 				$response = array();
-				$plugin = false;
-				$license = false;
-				$action = false;
+				$plugin   = false;
+				$license  = false;
+				$action   = false;
 
 				if ( isset( $_POST['plugin'] ) ) {
 					$plugin = sanitize_key( $_POST['plugin'] );
@@ -276,7 +278,6 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 						$response = array();
 						$response = $this->toggle_license( $plugin, $license, $action );
 					}
-
 				} else {
 					$response['message'] = 'Error with WP authentification. Try to reload this page.';
 					$response['success'] = false;
@@ -303,13 +304,14 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 
 		public function toggle_license( $plugin = false, $license = false, $action = false ) {
 
-
-			$status = false;
-			$plugin = esc_attr( $plugin );
+			$status  = false;
+			$plugin  = esc_attr( $plugin );
 			$license = esc_attr( $license );
-			$action = esc_attr( $action );
+			$action  = esc_attr( $action );
 
-			if ( ! $plugin || ! $license || ! $action ) return false;
+			if ( ! $plugin || ! $license || ! $action ) {
+				return false;
+			}
 
 			$license = trim( $license );
 
@@ -320,7 +322,7 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 				$item_id = self::$licenses[ $plugin ]['item_id'];
 			} else {
 				$combined_response['message'] = 'Error: missing item_id parameter.';
-				$combined_response['status'] = false;
+				$combined_response['status']  = false;
 			}
 
 			if ( 'activate' === $action ) {
@@ -338,7 +340,14 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 			);
 
 			// Call the custom API.
-			$response = wp_remote_post( self::$store_url, array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
+			$response = wp_remote_post(
+				self::$store_url,
+				array(
+					'timeout'   => 15,
+					'sslverify' => false,
+					'body'      => $api_params,
+				)
+			);
 
 			// Make sure the response came back okay.
 			if ( $response instanceof WP_Error || 200 !== wp_remote_retrieve_response_code( $response ) ) {
@@ -348,7 +357,6 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 				} else {
 					$message = __( 'An error occurred, please try again.' );
 				}
-
 			} else {
 
 				$license_data = json_decode( wp_remote_retrieve_body( $response ) );
@@ -357,42 +365,35 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 
 					switch ( $license_data->error ) {
 
-						case 'expired' :
-
+						case 'expired':
 							$message = sprintf(
 								__( 'Your license key expired on %s.' ),
 								date_i18n( get_option( 'date_format' ), strtotime( $license_data->expires, current_time( 'timestamp' ) ) )
 							);
 							break;
 
-						case 'revoked' :
-
+						case 'revoked':
 							$message = __( 'Your license key has been disabled.' );
 							break;
 
-						case 'missing' :
-
+						case 'missing':
 							$message = __( 'Invalid license.' );
 							break;
 
-						case 'invalid' :
-						case 'site_inactive' :
-
+						case 'invalid':
+						case 'site_inactive':
 							$message = __( 'Your license is not active for this URL.' );
 							break;
 
-						case 'item_name_mismatch' :
-
+						case 'item_name_mismatch':
 							$message = sprintf( __( 'This appears to be an invalid license key for %s.' ), EDD_SAMPLE_ITEM_NAME );
 							break;
 
 						case 'no_activations_left':
-
 							$message = __( 'Your license key has reached its activation limit.' );
 							break;
 
-						default :
-
+						default:
 							$message = __( 'An error occurred, please try again.' );
 							break;
 					}
@@ -404,10 +405,10 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 
 				if ( 'activate_license' === $action ) {
 					$message = __( 'License activated. Expiration date: ' ) . date_i18n( get_option( 'date_format' ), strtotime( $license_data->expires, current_time( 'timestamp' ) ) );
-					$status = true; // True - license activated successfully.
+					$status  = true; // True - license activated successfully.
 				} elseif ( 'deactivate_license' === $action ) {
 					$message = __( 'License deactivated.' );
-					$status = false; // True - license activated successfully.
+					$status  = false; // True - license activated successfully.
 				}
 			}
 
@@ -421,34 +422,34 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 			}
 
 			$combined_response['message'] = $message;
-			$combined_response['status'] = $license_data->license;
+			$combined_response['status']  = $license_data->license;
 			$combined_response['success'] = $license_data->success;
 			return $combined_response;
 		}
 
 		public function set_license_key( $plugin, $license_key ) {
-			$license_key = trim( esc_attr( $license_key ) );
+			$license_key                          = trim( esc_attr( $license_key ) );
 			self::$licenses[ $plugin ]['license'] = $license_key;
 
 			$this->update_license_in_db();
 		}
 
 		public function set_license_status( $plugin, $license_status ) {
-			$license_status = trim( esc_attr( $license_status ) );
+			$license_status                      = trim( esc_attr( $license_status ) );
 			self::$licenses[ $plugin ]['status'] = $license_status;
 
 			$this->update_license_in_db();
 		}
 
 		public function set_license_expires( $plugin, $license_expires ) {
-			$license_expires = trim( esc_attr( $license_expires ) );
+			$license_expires                      = trim( esc_attr( $license_expires ) );
 			self::$licenses[ $plugin ]['expires'] = $license_expires;
 
 			$this->update_license_in_db();
 		}
 
 		/**
-		 * Initiate plugin license verification if user visits 
+		 * Initiate plugin license verification if user visits
 		 * plugin listings or plugin update pages.
 		 * Perform one check per week max.
 		 * Once lincense check per time max.
@@ -463,18 +464,18 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 
 			$plugin_to_check = false;
 
-			foreach ( self::$licenses as $slug => $data) {
+			foreach ( self::$licenses as $slug => $data ) {
 				$check_this_plugin = true;
 
 				// Do not continue if last checked less than 7 days ago.
-				if ( ! empty( $data['updated'] ) && strtotime( $data['updated'] ) > strtotime('-7 days') ) {
+				if ( ! empty( $data['updated'] ) && strtotime( $data['updated'] ) > strtotime( '-7 days' ) ) {
 					$check_this_plugin = false;
 				}
 
 				if ( $check_this_plugin || empty( $data['updated'] ) ) {
 					$plugin_to_check = $slug;
 					break;
-				}	
+				}
 			}
 
 			if ( $plugin_to_check ) {
@@ -490,7 +491,7 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 		 */
 		public function license_check( $plugin = false ) {
 
-			if ( 	! $plugin ||
+			if ( ! $plugin ||
 					! isset( self::$licenses[ $plugin ] ) ||
 					! isset( self::$licenses[ $plugin ]['license'] ) ||
 					! isset( self::$licenses[ $plugin ]['item_id'] ) ) {
@@ -499,10 +500,10 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 
 			// Data to send in our API request.
 			$api_params = array(
-				'edd_action'=> 'check_license',
-				'license' 	=> self::$licenses[ $plugin ]['license'],
-				'item_id'   => self::$licenses[ $plugin ]['item_id'],
-				'url'       => home_url(),
+				'edd_action' => 'check_license',
+				'license'    => self::$licenses[ $plugin ]['license'],
+				'item_id'    => self::$licenses[ $plugin ]['item_id'],
+				'url'        => home_url(),
 			);
 
 			// Call the API.
@@ -551,27 +552,27 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 				return;
 			}
 
-			$license_status = $this->get_license_status( $plugin );
-			$license_key = $this->get_license_key( $plugin );
+			$license_status  = $this->get_license_status( $plugin );
+			$license_key     = $this->get_license_key( $plugin );
 			$license_expires = $this->get_license_expires( $plugin );
 
 			$license_block_variants = array(
 				'invalid' => array(
-					'text_header' => __( 'Please enter your license to&nbsp;activate the&nbsp;plugin', 'live-composer-page-builder' ),
-					'text_body' => __( 'Thanks for buying our plugin, to activate all the&nbsp;features, please enter your license&nbsp;key bellow (<a href="https://livecomposerplugin.com/your-account/license/" target="_blank">get your lincese key here</a>):', 'live-composer-page-builder' ),
-					'text_button' => __( 'Activate', 'live-composer-page-builder' ),
+					'text_header'   => __( 'Please enter your license to&nbsp;activate the&nbsp;plugin', 'live-composer-page-builder' ),
+					'text_body'     => __( 'Thanks for buying our plugin, to activate all the&nbsp;features, please enter your license&nbsp;key bellow (<a href="https://livecomposerplugin.com/your-account/license/" target="_blank">get your lincese key here</a>):', 'live-composer-page-builder' ),
+					'text_button'   => __( 'Activate', 'live-composer-page-builder' ),
 					'button_action' => 'activate',
 				),
-				'valid' => array(
-					'text_header' => __( 'License is active', 'live-composer-page-builder' ),
-					'text_body' => __( 'Thank you for buying our product. <br />Your license is active and valid. <br />It will expire on ', 'live-composer-page-builder' ) . '<strong>' . $license_expires . '</strong>',
-					'text_button' => __( 'Deactivate', 'live-composer-page-builder' ),
+				'valid'   => array(
+					'text_header'   => __( 'License is active', 'live-composer-page-builder' ),
+					'text_body'     => __( 'Thank you for buying our product. <br />Your license is active and valid. <br />It will expire on ', 'live-composer-page-builder' ) . '<strong>' . $license_expires . '</strong>',
+					'text_button'   => __( 'Deactivate', 'live-composer-page-builder' ),
 					'button_action' => 'deactivate',
 				),
 			);
 			// deactivated
 
-			$license_block_variants = apply_filters("dslc_license_block_variants", $license_block_variants);
+			$license_block_variants = apply_filters( 'dslc_license_block_variants', $license_block_variants );
 
 			foreach ( $license_block_variants as $staus => $strings ) : ?>
 				<div class="dslc-panel lc-panel-license lc-divided-panels padding-medium" data-show-if-license="<?php echo $staus; ?>">
@@ -589,7 +590,7 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 							<a 	href="#"
 								class="button button-primary button-hero lc-toggle-license"
 								data-action-type="<?php echo $strings['button_action']; ?>"
-								data-action-nonce="<?php echo wp_create_nonce( 'dslc-ajax-activate-license-for-plugin-' . $plugin ) ?>"
+								data-action-nonce="<?php echo wp_create_nonce( 'dslc-ajax-activate-license-for-plugin-' . $plugin ); ?>"
 							><?php echo esc_html( $strings['text_button'] ); ?></a>
 							<span class="lc-license-status"></span>
 						</p>
@@ -602,7 +603,7 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 						<?php endif; ?>
 					</div>
 				</div>
-			<?php
+				<?php
 			endforeach;
 		}
 
@@ -611,11 +612,11 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 		 */
 		public function activate_installed_plugin( $atts ) {
 			// Allowed to do this?
-			if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY_SAVE ) ):
+			if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY_SAVE ) ) :
 
 				// The array we'll pass back to the AJAX call.
-				$response =  false;
-				$plugin = false;
+				$response = false;
+				$plugin   = false;
 
 				if ( isset( $_POST['plugin'] ) ) {
 					$plugin = sanitize_key( $_POST['plugin'] );
@@ -629,7 +630,6 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 					if ( ! is_wp_error( $result ) ) {
 						$response = true;
 					}
-
 				} else {
 					$response['message'] = 'Error with WP authentification. Try to reload this page.';
 					$response['success'] = false;
@@ -649,4 +649,4 @@ if ( ! class_exists( 'LC_License_Manager' ) ):
 endif; // if ( ! class_exists( 'LC_License_Manager' ) ).
 
 // Start License Manager.
-$lc_license_manager = new LC_License_Manager;
+$lc_license_manager = new LC_License_Manager();

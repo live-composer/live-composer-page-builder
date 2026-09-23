@@ -30,13 +30,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function dslc_sc_notification( $atts, $content ) {
 	// Attributes
-	$args = shortcode_atts(
+	$args  = shortcode_atts(
 		array(
 			'color' => 'default',
 		),
 		$atts
 	);
-	$color = sanitize_key(esc_attr($args['color']));
+	$color = sanitize_key( esc_attr( $args['color'] ) );
 
 	// Return notification HTML
 	return '<div class="dslc-notification dslc-' . $color . '">' . $content . '<span class="dslc-notification-close"><span class="dslc-icon dslc-icon-remove-sign"></span></span></div>';
@@ -57,7 +57,7 @@ function dslc_sc_get_custom_field( $atts, $content ) {
 	// Attributes
 	$args = shortcode_atts(
 		array(
-			'id' => false,
+			'id'      => false,
 			'post_id' => false,
 		),
 		$atts
@@ -68,9 +68,9 @@ function dslc_sc_get_custom_field( $atts, $content ) {
 	if ( ! $id ) {
 		return 'Custom field ID not supplied ( "id" parameter ).';
 	}
-	$id = sanitize_key( $id );
+	$id      = sanitize_key( $id );
 	$post_id = $args['post_id'];
-	if ($post_id) {
+	if ( $post_id ) {
 		$post_id = absint( $post_id );
 	}
 
@@ -83,7 +83,7 @@ function dslc_sc_get_custom_field( $atts, $content ) {
 	if ( ! $post_id && isset( $_POST['dslc_post_id'] ) ) {
 		$post_id = absint( $_POST['dslc_post_id'] );
 	}
-    
+
 	// Validate post ID
 	if ( ! $post_id ) {
 		return '';
@@ -102,7 +102,6 @@ function dslc_sc_get_custom_field( $atts, $content ) {
 	}
 
 	return '';
-
 } add_shortcode( 'dslc_custom_field', 'dslc_sc_get_custom_field' );
 
 /**
@@ -119,7 +118,6 @@ function dslc_sc_site_url( $atts, $content ) {
 
 	// Return site URL
 	return site_url();
-
 } add_shortcode( 'dslc_site_url', 'dslc_sc_site_url' );
 
 /**
@@ -147,10 +145,9 @@ function dslc_sc_icon( $atts, $content ) {
 	if ( ! $id ) {
 		return '';
 	}
-	$id = sanitize_key(esc_attr($args['id']));
+	$id = sanitize_key( esc_attr( $args['id'] ) );
 	// Return Icon HTML
 	return '<span class="dslc-icon dslc-icon-' . $id . ' dslc-icon-sc"></span>';
-
 } add_shortcode( 'dslc_icon', 'dslc_sc_icon' );
 
 /**
@@ -168,26 +165,27 @@ function dslc_sc_user_avatar( $atts, $content ) {
 	// Attributes
 	$args = shortcode_atts(
 		array(
-			'user' => false,
-			'size' => 100,
-			'url' => false,
+			'user'   => false,
+			'size'   => 100,
+			'url'    => false,
 			'target' => '_self',
-		),$atts);
+		),
+		$atts
+	);
 
-	$size = (int)$args['size'];
-	$user = (bool)$args['user'];
-	$url = $args['url'];
+	$size = (int) $args['size'];
+	$user = (bool) $args['user'];
+	$url  = $args['url'];
 
 	// If URL not supplied return avatar HTML without link
 	if ( ! $url ) {
 		return '<span class="dslc-sc-user-avatar">' . get_avatar( get_current_user_id(), $size ) . '</span>';
 		// If URL supplied wrap the avatar HTML in a link
 	} else {
-		$url = sanitize_url(esc_url($args['url']));
-		$target = sanitize_key(esc_attr($args['target']));
+		$url    = sanitize_url( esc_url( $args['url'] ) );
+		$target = sanitize_key( esc_attr( $args['target'] ) );
 		return '<a href="' . $url . '" target="' . $target . '"><span class="dslc-sc-user-avatar">' . get_avatar( get_current_user_id(), $size ) . '</span></a>';
 	}
-
 } add_shortcode( 'dslc_user_avatar', 'dslc_sc_user_avatar' );
 
 /**
@@ -206,17 +204,19 @@ function dslc_sc_category_description( $atts, $content ) {
 	$args = shortcode_atts(
 		array(
 			'id' => false,
-		),$atts);
-	
-     $category_Id =$args['id'];
+		),
+		$atts
+	);
+
+	$category_Id = $args['id'];
 
 	// If category ID not supplied, get current category
 	if ( ! $category_Id ) {
 		$category_Id = get_query_var( 'cat' );
 	}
 
-	$category_Id = sanitize_key(esc_attr($args['id']));
-	
+	$category_Id = sanitize_key( esc_attr( $args['id'] ) );
+
 	// Get category description
 	$category_description = category_description( $category_Id );
 
@@ -227,7 +227,6 @@ function dslc_sc_category_description( $atts, $content ) {
 
 	// Return category description
 	return $category_description;
-
 } add_shortcode( 'dslc_category_description', 'dslc_sc_category_description' );
 
 /**
@@ -256,7 +255,7 @@ add_shortcode( 'dslc_bloghome', 'dslc_bloghome_shortcode' );
 add_shortcode( 'lbmn_bloghome', 'dslc_bloghome_shortcode' );
 function dslc_bloghome_shortcode() {
 	// Code
-	$output =sanitize_url(esc_url(home_url()));
+	$output = sanitize_url( esc_url( home_url() ) );
 
 	return $output;
 }
@@ -328,12 +327,14 @@ function dslc_archive_heading_shortcode() {
 		$output .= sprintf( __( 'Tag Archives: %s', 'live-composer-page-builder' ), '<span>' . single_tag_title( '', false ) . '</span>' );
 
 	elseif ( is_author() ) :
-		/* Queue the first post, that way we know
+		/*
+		Queue the first post, that way we know
 		 * what author we're dealing with (if that is the case).
 		*/
 		the_post();
 		$output .= sprintf( __( 'Author Archives: %s', 'live-composer-page-builder' ), '<span class="vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '" title="' . esc_attr( get_the_author() ) . '" rel="me">' . get_the_author() . '</a></span>' );
-		/* Since we called the_post() above, we need to
+		/*
+		Since we called the_post() above, we need to
 		 * rewind the loop back to the beginning that way
 		 * we can run the loop properly, in full.
 		 */
@@ -408,19 +409,19 @@ function dslc_nextpost_url_shortcode( $atts ) {
 
 	// Attributes
 		$args = shortcode_atts(
-		array(
-			'previous'            => false,
-			// Whether to retrieve previous or next post.
-			'in_same_cat'         => false,
-			// Whether post should be in same category. Whether post should be in same category.
-			'excluded_categories' => '',
+			array(
+				'previous'            => false,
+				// Whether to retrieve previous or next post.
+				'in_same_cat'         => false,
+				// Whether post should be in same category. Whether post should be in same category.
+				'excluded_categories' => '',
 			// Excluded categories IDs.
-		),
-		$atts
-	);
-	$previous = (bool)$args['previous'];
-	$in_same_cat = (bool)$args['in_same_cat'];
-	$excluded_categories = sanitize_key(esc_attr($args['excluded_categories']));
+			),
+			$atts
+		);
+	$previous            = (bool) $args['previous'];
+	$in_same_cat         = (bool) $args['in_same_cat'];
+	$excluded_categories = sanitize_key( esc_attr( $args['excluded_categories'] ) );
 
 	// Code
 	$output = get_permalink( get_adjacent_post( $in_same_cat, $excluded_categories, $previous ) );
@@ -436,19 +437,19 @@ function dslc_prevpost_url_shortcode( $atts ) {
 
 	// Attributes
 		$args = shortcode_atts(
-		array(
-			'previous'            => true,
-			// Whether to retrieve previous or next post.
-			'in_same_cat'         => false,
-			// Whether post should be in same category. Whether post should be in same category.
-			'excluded_categories' => '',
+			array(
+				'previous'            => true,
+				// Whether to retrieve previous or next post.
+				'in_same_cat'         => false,
+				// Whether post should be in same category. Whether post should be in same category.
+				'excluded_categories' => '',
 			// Excluded categories IDs.
-		),
-		$atts
-	);
-	$previous = (bool)$args['previous'];
-	$in_same_cat = (bool)$args['in_same_cat'];
-	$excluded_categories = sanitize_key(esc_attr($args['excluded_categories']));
+			),
+			$atts
+		);
+	$previous            = (bool) $args['previous'];
+	$in_same_cat         = (bool) $args['in_same_cat'];
+	$excluded_categories = sanitize_key( esc_attr( $args['excluded_categories'] ) );
 
 	// Code
 	$output = get_permalink( get_adjacent_post( $in_same_cat, $excluded_categories, $previous ) );
@@ -466,11 +467,13 @@ function dslc_prevpost_url_shortcode( $atts ) {
 add_shortcode( 'dslc_postpagination', 'dslc_postpagination_shortcode' );
 add_shortcode( 'lbmn_postpagination', 'dslc_postpagination_shortcode' );
 function dslc_postpagination_shortcode() {
-	$output = wp_link_pages( array(
-		'before' => '<div class="page-links"><span class="page-links__title">' . __( 'Pages:', 'live-composer-page-builder' ) . '</span><span class="page-numbers">',
-		'after'  => '</span></div>',
-		'echo'   => 0,
-	) );
+	$output = wp_link_pages(
+		array(
+			'before' => '<div class="page-links"><span class="page-links__title">' . __( 'Pages:', 'live-composer-page-builder' ) . '</span><span class="page-numbers">',
+			'after'  => '</span></div>',
+			'echo'   => 0,
+		)
+	);
 
 	if ( ! $output ) {
 		$output = ' ';

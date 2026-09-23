@@ -29,8 +29,8 @@ class LC_Module_Options_Panel {
 		if ( ! in_array( $id, $tabs, true ) ) {
 			// Add new tab to the tabs array.
 			$tabs[ $id ] = array(
-				'title' => $title,
-				'id' => $id,
+				'title'   => $title,
+				'id'      => $id,
 				'section' => $section,
 			);
 		}
@@ -52,7 +52,7 @@ class LC_Module_Options_Panel {
 			// Add special trash icon to clearn all the settings at once
 			// for Responsive tabs.
 			if ( 'phone_responsive' === $tab['id'] ) {
-				$tabs_render .= '<a href="#" class="dslca-clear-responsive-options" title="' . esc_attr( __('Reset responsive options', 'live-composer-page-builder' ) ) . '" ><span class="dslca-icon dslc-icon-trash"></span></a>';
+				$tabs_render .= '<a href="#" class="dslca-clear-responsive-options" title="' . esc_attr( __( 'Reset responsive options', 'live-composer-page-builder' ) ) . '" ><span class="dslca-icon dslc-icon-trash"></span></a>';
 			}
 		}
 		return $tabs_render;
@@ -122,7 +122,7 @@ class LC_Control {
 		$ext = ' ';
 		if ( isset( $module_control['ext'] ) ) {
 			$ext = $module_control['ext'];
-			
+
 			/**
 			 * START GENERALIZED DYNAMIC UNIT LOGIC
 			 * Applies to all controls containing _padding, _margin, _width, or _height.
@@ -131,30 +131,30 @@ class LC_Control {
 
 			$control_id = $module_control['id'];
 			$unit_value = '';
-			
+
 			// Define all directional/dimensional suffixes that must be stripped.
-			$directional_suffixes = ['_top', '_right', '_bottom', '_left', '_width', '_height'];
-			
+			$directional_suffixes = array( '_top', '_right', '_bottom', '_left', '_width', '_height' );
+
 			// Define the core CSS properties that indicate a dynamic unit is required.
-			$dynamic_unit_types = ['_padding', '_margin', '_width']; 
-			
+			$dynamic_unit_types = array( '_padding', '_margin', '_width' );
+
 			$is_dynamic_unit_control = false;
-			foreach ($dynamic_unit_types as $type) {
-				if ($type !== '' && strpos($control_id, $type) !== false) {
+			foreach ( $dynamic_unit_types as $type ) {
+				if ( $type !== '' && strpos( $control_id, $type ) !== false ) {
 					$is_dynamic_unit_control = true;
 					break;
 				}
 			}
 
-			if ($is_dynamic_unit_control) {
+			if ( $is_dynamic_unit_control ) {
 
 				// Step 1: Normalize the ID by removing directional/dimensional suffixes.
 				// Example: 'css_header_margin_bottom' -> 'css_header_margin'
-				$normalized_id = str_replace($directional_suffixes, '', $control_id);
+				$normalized_id = str_replace( $directional_suffixes, '', $control_id );
 
 				// Step 2: Predict the full Unit Selector ID by appending '_unit'.
 				// Example: 'css_header_margin' -> 'css_header_margin_unit'
-				$resolved_unit_id = $normalized_id . '_unit';				
+				$resolved_unit_id = $normalized_id . '_unit';
 
 				// Step 3: Retrieve the unit value from the request using the predicted ID.
 				if ( ! empty( $resolved_unit_id ) ) {
@@ -186,7 +186,12 @@ class LC_Control {
 
 		?>
 
-			<div class="dslca-module-edit-option dslca-module-edit-option-<?php echo esc_attr( $module_control['type'] ) . ' ' . $additional_class; ?> dslca-module-edit-option-<?php echo esc_attr( $module_control['id'] ); ?> <?php if ( ! $this->_visibility ) { echo 'dslca-module-edit-option-hidden'; } ?> <?php echo esc_attr( $this->_control_with_toggle ); ?>"
+			<div class="dslca-module-edit-option dslca-module-edit-option-<?php echo esc_attr( $module_control['type'] ) . ' ' . $additional_class; ?> dslca-module-edit-option-<?php echo esc_attr( $module_control['id'] ); ?>
+			<?php
+			if ( ! $this->_visibility ) {
+				echo 'dslca-module-edit-option-hidden'; }
+			?>
+			<?php echo esc_attr( $this->_control_with_toggle ); ?>"
 				data-id="<?php echo esc_attr( $module_control['id'] ); ?>"
 				<?php echo $dep; /* Base64 code. */ ?>
 				data-refresh-on-change="<?php echo esc_attr( $this->_refresh_on_change ); ?>"
@@ -201,20 +206,26 @@ class LC_Control {
 
 				<?php if ( 'text' === $module_control['type'] ) : ?>
 
-					<input type="text" class="dslca-module-edit-field" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo esc_attr( stripslashes( $this->_curr_value ) ); ?>" data-val-bckp="<?php echo esc_attr( stripslashes( $this->_curr_value ) ); ?>" <?php echo $affect_on_change_append ?> />
+					<input type="text" class="dslca-module-edit-field" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo esc_attr( stripslashes( $this->_curr_value ) ); ?>" data-val-bckp="<?php echo esc_attr( stripslashes( $this->_curr_value ) ); ?>" <?php echo $affect_on_change_append; ?> />
 
 				<?php elseif ( 'textarea' === $module_control['type'] ) : ?>
 
-					<textarea class="dslca-module-edit-field" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" <?php echo $affect_on_change_append ?>><?php echo stripslashes( $this->_curr_value ); ?></textarea>
+					<textarea class="dslca-module-edit-field" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" <?php echo $affect_on_change_append; ?>><?php echo stripslashes( $this->_curr_value ); ?></textarea>
 
-				<?php elseif ( 'select' === $module_control['type'] ) :
+					<?php
+				elseif ( 'select' === $module_control['type'] ) :
 
 					$curr_value = $this->get_starting_value();
 					?>
 
-					<select class="dslca-module-edit-field" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" <?php echo $affect_on_change_append ?> >
+					<select class="dslca-module-edit-field" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" <?php echo $affect_on_change_append; ?> >
 						<?php foreach ( $module_control['choices'] as $select_option ) : ?>
-							<option value="<?php echo $select_option['value']; ?>" <?php if ( $curr_value == $select_option['value'] ) { echo 'selected="selected"';} ?>><?php echo $select_option['label']; ?></option>
+							<option value="<?php echo $select_option['value']; ?>" 
+							<?php
+							if ( $curr_value == $select_option['value'] ) {
+								echo 'selected="selected"';}
+							?>
+							><?php echo $select_option['label']; ?></option>
 						<?php endforeach; ?>
 					</select>
 
@@ -237,7 +248,8 @@ class LC_Control {
 
 					<div class="dslca-module-edit-option-checkbox-wrapper">
 
-						<?php foreach ( $module_control['choices'] as $checkbox_option ) :
+						<?php
+						foreach ( $module_control['choices'] as $checkbox_option ) :
 							$unique_id = 'device-response-' . sanitize_title( $checkbox_option['value'] );
 							?>
 							<div class="dslca-module-edit-option-checkbox-single">
@@ -276,12 +288,18 @@ class LC_Control {
 					<div class="dslca-module-edit-option-radio-wrapper">
 						<?php foreach ( $module_control['choices'] as  $checkbox_option ) : ?>
 							<div class="dslca-module-edit-option-radio-single">
-								<input type="radio" class="dslca-module-edit-field" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" name="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo $checkbox_option['value']; ?>" <?php if ( $curr_value == $checkbox_option['value'] ) { echo 'checked="checked"';} ?> /> <?php echo $checkbox_option['label']; ?><br>
+								<input type="radio" class="dslca-module-edit-field" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" name="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo $checkbox_option['value']; ?>" 
+								<?php
+								if ( $curr_value == $checkbox_option['value'] ) {
+									echo 'checked="checked"';}
+								?>
+								/> <?php echo $checkbox_option['label']; ?><br>
 							</div><!-- .dslca-module-edit-option-radio-single -->
 						<?php endforeach; ?>
 					</div><!-- .dslca-module-edit-option-radio-wrapper -->
 
-				<?php elseif ( 'color' === $module_control['type'] ) :
+					<?php
+				elseif ( 'color' === $module_control['type'] ) :
 
 					$default_value = false;
 
@@ -298,14 +316,19 @@ class LC_Control {
 					}
 					?>
 
-					<input type="text" class="dslca-module-edit-field dslca-module-edit-field-colorpicker" data-alpha="true" <?php echo wp_kses( $style, array(), array() );?> name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo esc_attr( $this->_curr_value ); ?>" data-affect-on-change-el="<?php echo $module_control['affect_on_change_el']; ?>" data-affect-on-change-rule="<?php echo $module_control['affect_on_change_rule']; ?>" <?php if ( $default_value ) : ?> data-val-bckp="<?php echo $default_value; ?>" <?php endif; ?> />
+					<input type="text" class="dslca-module-edit-field dslca-module-edit-field-colorpicker" data-alpha="true" <?php echo wp_kses( $style, array(), array() ); ?> name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo esc_attr( $this->_curr_value ); ?>" data-affect-on-change-el="<?php echo $module_control['affect_on_change_el']; ?>" data-affect-on-change-rule="<?php echo $module_control['affect_on_change_rule']; ?>" 
+					<?php
+					if ( $default_value ) :
+						?>
+						data-val-bckp="<?php echo $default_value; ?>" <?php endif; ?> />
 
-				<?php elseif ( 'slider' === $module_control['type'] ) :
+					<?php
+				elseif ( 'slider' === $module_control['type'] ) :
 
-					$slider_min = 0;
-					$slider_max = 100;
+					$slider_min       = 0;
+					$slider_max       = 100;
 					$slider_increment = 1;
-					$onlypositive = false;
+					$onlypositive     = false;
 
 					if ( isset( $module_control['min'] ) ) {
 						$slider_min = $module_control['min'];
@@ -345,7 +368,7 @@ class LC_Control {
 				<?php elseif ( 'font' === $module_control['type'] ) : ?>
 
 					<div class="dslca-module-edit-field-font-wrapper">
-						<input type="text" class="dslca-module-edit-field dslca-module-edit-field-font" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo esc_attr( $this->_curr_value ); ?>" <?php echo $affect_on_change_append ?> />
+						<input type="text" class="dslca-module-edit-field dslca-module-edit-field-font" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo esc_attr( $this->_curr_value ); ?>" <?php echo $affect_on_change_append; ?> />
 						<span class="dslca-module-edit-field-font-suggest"></span>
 					</div>
 					<span class="dslca-options-iconbutton dslca-module-edit-field-font-prev"><span class="dslca-icon dslc-icon-chevron-left"></span></span>
@@ -354,7 +377,7 @@ class LC_Control {
 				<?php elseif ( 'icon' === $module_control['type'] ) : ?>
 
 					<div class="dslca-module-edit-field-icon-wrapper">
-						<input type="text" class="dslca-module-edit-field dslca-module-edit-field-icon" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo esc_attr( $this->_curr_value ); ?>" <?php echo $affect_on_change_append ?> />
+						<input type="text" class="dslca-module-edit-field dslca-module-edit-field-icon" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo esc_attr( $this->_curr_value ); ?>" <?php echo $affect_on_change_append; ?> />
 						<span class="dslca-module-edit-field-icon-suggest"></span>
 					</div>
 					<span class="dslca-options-iconbutton dslca-open-modal-hook" data-modal=".dslc-list-icons"><span class="dslca-icon dslc-icon-th"></span></span>
@@ -366,46 +389,71 @@ class LC_Control {
 				<?php elseif ( 'text_align' === $module_control['type'] ) : ?>
 
 					<div class="dslca-module-edit-option-text-align-wrapper">
-						<div class="dslca-module-edit-option-text-align-single dslca-module-edit-option-text-align-hook <?php if ( $this->_curr_value == 'inherit' ) { echo 'dslca-active';} ?>" data-val="inherit">
+						<div class="dslca-module-edit-option-text-align-single dslca-module-edit-option-text-align-hook 
+						<?php
+						if ( $this->_curr_value == 'inherit' ) {
+							echo 'dslca-active';}
+						?>
+						" data-val="inherit">
 							<span class="dslca-icon dslc-icon-remove"></span>
 						</div>
-						<div class="dslca-module-edit-option-text-align-single dslca-module-edit-option-text-align-hook <?php if ( $this->_curr_value == 'left' ) { echo 'dslca-active';} ?>" data-val="left">
+						<div class="dslca-module-edit-option-text-align-single dslca-module-edit-option-text-align-hook 
+						<?php
+						if ( $this->_curr_value == 'left' ) {
+							echo 'dslca-active';}
+						?>
+						" data-val="left">
 							<span class="dslca-icon dslc-icon-align-left"></span>
 						</div>
-						<div class="dslca-module-edit-option-text-align-single dslca-module-edit-option-text-align-hook <?php if ( $this->_curr_value == 'center' ) { echo 'dslca-active';} ?>" data-val="center">
+						<div class="dslca-module-edit-option-text-align-single dslca-module-edit-option-text-align-hook 
+						<?php
+						if ( $this->_curr_value == 'center' ) {
+							echo 'dslca-active';}
+						?>
+						" data-val="center">
 							<span class="dslca-icon dslc-icon-align-center"></span>
 						</div>
-						<div class="dslca-module-edit-option-text-align-single dslca-module-edit-option-text-align-hook <?php if ( $this->_curr_value == 'right' ) { echo 'dslca-active';} ?>" data-val="right">
+						<div class="dslca-module-edit-option-text-align-single dslca-module-edit-option-text-align-hook 
+						<?php
+						if ( $this->_curr_value == 'right' ) {
+							echo 'dslca-active';}
+						?>
+						" data-val="right">
 							<span class="dslca-icon dslc-icon-align-right"></span>
 						</div>
-						<div class="dslca-module-edit-option-text-align-single dslca-module-edit-option-text-align-hook <?php if ( $this->_curr_value == 'justify' ) { echo 'dslca-active';} ?>" data-val="justify">
+						<div class="dslca-module-edit-option-text-align-single dslca-module-edit-option-text-align-hook 
+						<?php
+						if ( $this->_curr_value == 'justify' ) {
+							echo 'dslca-active';}
+						?>
+						" data-val="justify">
 							<span class="dslca-icon dslc-icon-align-justify"></span>
 						</div>
 					</div>
 
-					<input type="hidden" class="dslca-module-edit-field dslca-module-edit-field-text-align" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo esc_attr( $this->_curr_value ); ?>" <?php echo $affect_on_change_append ?> />
+					<input type="hidden" class="dslca-module-edit-field dslca-module-edit-field-text-align" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo esc_attr( $this->_curr_value ); ?>" <?php echo $affect_on_change_append; ?> />
 
 				<?php elseif ( 'box_shadow' === $module_control['type'] ) : ?>
 
 					<?php
-					$box_shadow_hor_val = 0;
-					$box_shadow_ver_val = 0;
-					$box_shadow_blur_val = 0;
+					$box_shadow_hor_val    = 0;
+					$box_shadow_ver_val    = 0;
+					$box_shadow_blur_val   = 0;
 					$box_shadow_spread_val = 0;
-					$box_shadow_color_val = 'transparent';
-					$box_shadow_inset_val = 'outset';
-					$box_shadow_val = false;
+					$box_shadow_color_val  = 'transparent';
+					$box_shadow_inset_val  = 'outset';
+					$box_shadow_val        = false;
 
 					if ( '' !== $this->_curr_value ) {
 						$box_shadow_val = explode( ' ', $this->_curr_value );
 					}
 
 					if ( is_array( $box_shadow_val ) ) {
-						$box_shadow_hor_val = str_replace( 'px', '', $box_shadow_val[0] );
-						$box_shadow_ver_val = str_replace( 'px', '', $box_shadow_val[1] );
-						$box_shadow_blur_val = str_replace( 'px', '', $box_shadow_val[2] );
+						$box_shadow_hor_val    = str_replace( 'px', '', $box_shadow_val[0] );
+						$box_shadow_ver_val    = str_replace( 'px', '', $box_shadow_val[1] );
+						$box_shadow_blur_val   = str_replace( 'px', '', $box_shadow_val[2] );
 						$box_shadow_spread_val = str_replace( 'px', '', $box_shadow_val[3] );
-						$box_shadow_color_val = str_replace( 'px', '', $box_shadow_val[4] );
+						$box_shadow_color_val  = str_replace( 'px', '', $box_shadow_val[4] );
 
 						if ( isset( $box_shadow_val[5] ) ) {
 							$box_shadow_inset_val = $box_shadow_val[5];
@@ -423,12 +471,24 @@ class LC_Control {
 							$show_inner_shadow = false;
 						}
 
-						if ( $show_inner_shadow ) : ?>
+						if ( $show_inner_shadow ) :
+							?>
 						<div class="dslca-module-edit-option-box-shadow-single">
-							<span class="dslca-module-edit-option-checkbox-hook"><?php esc_html_e( 'Inner', 'live-composer-page-builder' ); ?><span class="dslca-icon <?php if ( $box_shadow_inset_val == 'inset' ) { echo 'dslc-icon-check';
-					} else { echo 'dslc-icon-check-empty';
-					} ?>"></span></span>
-							<input type="checkbox" class="dslca-module-edit-field-checkbox dslca-module-edit-option-box-shadow-inset" <?php if ( $box_shadow_inset_val == 'inset' ) { echo 'checked="checked"';} ?> />
+							<span class="dslca-module-edit-option-checkbox-hook"><?php esc_html_e( 'Inner', 'live-composer-page-builder' ); ?><span class="dslca-icon 
+							<?php
+							if ( $box_shadow_inset_val == 'inset' ) {
+								echo 'dslc-icon-check';
+							} else {
+								echo 'dslc-icon-check-empty';
+							}
+							?>
+					"></span></span>
+							<input type="checkbox" class="dslca-module-edit-field-checkbox dslca-module-edit-option-box-shadow-inset" 
+							<?php
+							if ( $box_shadow_inset_val == 'inset' ) {
+								echo 'checked="checked"';}
+							?>
+							/>
 						</div>
 						<?php endif; ?>
 						<div class="dslca-module-edit-option-box-shadow-single">
@@ -447,16 +507,16 @@ class LC_Control {
 							<span><?php esc_html_e( 'Color', 'live-composer-page-builder' ); ?></span><input type="text" class="dslca-module-edit-option-box-shadow-color" data-alpha="true" value="<?php echo $box_shadow_color_val; ?>" />
 						</div>
 
-						<input type="hidden" class="dslca-module-edit-field dslca-module-edit-field-box-shadow" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo esc_attr( $this->_curr_value ); ?>" <?php echo $affect_on_change_append ?> />
+						<input type="hidden" class="dslca-module-edit-field dslca-module-edit-field-box-shadow" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo esc_attr( $this->_curr_value ); ?>" <?php echo $affect_on_change_append; ?> />
 
 					</div><!-- .dslca-module-edit-option-box-shadow-wrapper -->
 
 				<?php elseif ( $module_control['type'] == 'text_shadow' ) : ?>
 
 					<?php
-					$text_shadow_hor_val = 0;
-					$text_shadow_ver_val = 0;
-					$text_shadow_blur_val = 0;
+					$text_shadow_hor_val   = 0;
+					$text_shadow_ver_val   = 0;
+					$text_shadow_blur_val  = 0;
 					$text_shadow_color_val = 'transparent';
 
 					$text_shadow_val = false;
@@ -465,9 +525,9 @@ class LC_Control {
 					}
 
 					if ( is_array( $text_shadow_val ) ) {
-						$text_shadow_hor_val = str_replace( 'px', '', $text_shadow_val[0] );
-						$text_shadow_ver_val = str_replace( 'px', '', $text_shadow_val[1] );
-						$text_shadow_blur_val = str_replace( 'px', '', $text_shadow_val[2] );
+						$text_shadow_hor_val   = str_replace( 'px', '', $text_shadow_val[0] );
+						$text_shadow_ver_val   = str_replace( 'px', '', $text_shadow_val[1] );
+						$text_shadow_blur_val  = str_replace( 'px', '', $text_shadow_val[2] );
 						$text_shadow_color_val = str_replace( 'px', '', $text_shadow_val[3] );
 					}
 					?>
@@ -487,7 +547,7 @@ class LC_Control {
 							<span><?php esc_html_e( 'Color', 'live-composer-page-builder' ); ?></span><input class="dslca-module-edit-option-text-shadow-color" data-alpha="true" type="text" value="<?php echo $text_shadow_color_val; ?>" />
 						</div>
 
-						<input type="hidden" class="dslca-module-edit-field dslca-module-edit-field-text-shadow" data-alpha="true" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo esc_attr( $this->_curr_value ); ?>" <?php echo $affect_on_change_append ?> />
+						<input type="hidden" class="dslca-module-edit-field dslca-module-edit-field-text-shadow" data-alpha="true" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo esc_attr( $this->_curr_value ); ?>" <?php echo $affect_on_change_append; ?> />
 
 					</div><!-- .dslca-module-edit-option-text-shadow-wrapper -->
 
@@ -496,8 +556,9 @@ class LC_Control {
 					<?php
 						$this->output_button_control( $module_control, $this->_curr_value, $this->get_advanced_action() );
 
-						?>
-				<?php elseif ( 'datetime' === $module_control['type'] ) : 
+					?>
+					<?php
+				elseif ( 'datetime' === $module_control['type'] ) :
 					$default_value = false;
 
 					if ( isset( $module_control['std'] ) ) {
@@ -506,7 +567,15 @@ class LC_Control {
 					}
 					?>
 
-					<input type="text" class="dslca-module-edit-field dslca-module-edit-field-datetimepicker" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo esc_attr( stripslashes( $this->_curr_value ) ); ?>" data-affect-on-change-el="<?php echo esc_attr( $module_control['affect_on_change_el'] ); ?>" data-affect-on-change-rule="<?php echo esc_attr( $module_control['affect_on_change_rule'] ); ?>" <?php if ( $default_value ) : ?> data-val-bckp="<?php echo esc_attr( $default_value ); ?>" <?php else : ?> data-val-bckp="<?php echo esc_attr( stripslashes( $this->_curr_value ) ); ?>" <?php endif; ?> <?php echo $affect_on_change_append ?> />
+					<input type="text" class="dslca-module-edit-field dslca-module-edit-field-datetimepicker" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo esc_attr( stripslashes( $this->_curr_value ) ); ?>" data-affect-on-change-el="<?php echo esc_attr( $module_control['affect_on_change_el'] ); ?>" data-affect-on-change-rule="<?php echo esc_attr( $module_control['affect_on_change_rule'] ); ?>" 
+					<?php
+					if ( $default_value ) :
+						?>
+						data-val-bckp="<?php echo esc_attr( $default_value ); ?>" 
+						<?php
+else :
+	?>
+						data-val-bckp="<?php echo esc_attr( stripslashes( $this->_curr_value ) ); ?>" <?php endif; ?> <?php echo $affect_on_change_append; ?> />
 
 				<?php else : ?>
 
@@ -516,7 +585,7 @@ class LC_Control {
 
 					<?php else : ?>
 
-						<input type="text" class="dslca-module-edit-field" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo esc_attr( $this->_curr_value ); ?>" data-val-bckp="<?php echo $this->_curr_value; ?>" <?php echo $affect_on_change_append ?> />
+						<input type="text" class="dslca-module-edit-field" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo esc_attr( $this->_curr_value ); ?>" data-val-bckp="<?php echo $this->_curr_value; ?>" <?php echo $affect_on_change_append; ?> />
 
 					<?php endif; ?>
 
@@ -572,7 +641,7 @@ class LC_Control {
 		 * 🔖 RAW CODE CLEANUP
 		 */
 		$starting_value = '';
-		$curr_value = $this->get_curr_value();
+		$curr_value     = $this->get_curr_value();
 
 		if ( '' === $curr_value && isset( $module_control['std'] ) && 'css_show_on' != $module_control['id'] ) {
 			return $module_control['std'];
@@ -584,7 +653,7 @@ class LC_Control {
 	private function get_visibility() {
 
 		$module_control = $this->_module_control;
-		$visibility = true;
+		$visibility     = true;
 
 		if ( isset( $module_control['visibility'] ) ) {
 			$visibility = false;
@@ -599,7 +668,7 @@ class LC_Control {
 
 	private function get_advanced_action() {
 		$module_control = $this->_module_control;
-		$action = '';
+		$action         = '';
 
 		if ( isset( $module_control['advanced_action'] ) ) {
 			$action = $module_control['advanced_action'];
@@ -652,17 +721,17 @@ class LC_Control {
 
 			if ( 'functionality' === $section ) {
 
-				$tab_id = 'general_functionality';
+				$tab_id        = 'general_functionality';
 				$control_title = __( 'General', 'live-composer-page-builder' );
-				$section = 'functionality';
+				$section       = 'functionality';
 
 				$this->options_panel->add_tab( $tab_id, $control_title, $section );
 
 			} else {
 
-				$tab_id = 'general_styling';
+				$tab_id        = 'general_styling';
 				$control_title = __( 'General', 'live-composer-page-builder' );
-				$section = 'styling';
+				$section       = 'styling';
 
 				$this->options_panel->add_tab( $tab_id, $control_title, $section );
 			}
@@ -750,12 +819,12 @@ class LC_Control {
 		);
 
 		$curr_value = $this->_curr_value;
-		$section = $this->get_section();
+		$section    = $this->get_section();
 
 		/**
 		 * Display styling control toggle [On/Off]
 		 */
-		if ( ! in_array( $module_control['id'], $controls_without_toggle, true ) && in_array( $section, $sections_with_toggle, true ) && ! stristr( $module_control['id'], 'css_res_' ) && ! str_ends_with( $module_control['id'], '_unit' )) {
+		if ( ! in_array( $module_control['id'], $controls_without_toggle, true ) && in_array( $section, $sections_with_toggle, true ) && ! stristr( $module_control['id'], 'css_res_' ) && ! str_ends_with( $module_control['id'], '_unit' ) ) {
 			$control_with_toggle = 'dslca-option-with-toggle';
 
 			if ( '' === stripslashes( $curr_value ) ) {
@@ -769,8 +838,8 @@ class LC_Control {
 	private function get_label() {
 
 		$module_control = $this->_module_control;
-		$output = '';
-		$output .= '<label class="dslca-module-edit-label">';
+		$output         = '';
+		$output        .= '<label class="dslca-module-edit-label">';
 
 		if ( isset( $module_control['label'] ) ) {
 			$output .= esc_html( $module_control['label'] );
@@ -799,7 +868,7 @@ class LC_Control {
 
 			$curr_value = $this->get_starting_value();
 
-			if ( 'none' == $curr_value || count($choise) === 1 ) {
+			if ( 'none' == $curr_value || count( $choise ) === 1 ) {
 				$dslc_delete_preset_hide = ' dslc-delete-preset-hide';
 			} else {
 				$dslc_delete_preset_hide = '';
@@ -815,15 +884,25 @@ class LC_Control {
 
 	private function output_image_control( $module_control, $curr_value = '', $affect_on_change_append = '' ) {
 		?>
-		<span class="dslca-module-edit-field-image-add-hook" <?php if ( $this->_curr_value != '' ) { echo 'style="display: none;"';} ?>><span class="dslca-icon dslc-icon-cloud-upload"></span><?php esc_html_e( 'Upload Image', 'live-composer-page-builder' ); ?></span>
-		<span class="dslca-module-edit-field-image-remove-hook" <?php if ( $this->_curr_value == '' ) { echo 'style="display: none;"';} ?>><span class="dslca-icon dslc-icon-remove"></span><?php esc_html_e( 'Remove Image', 'live-composer-page-builder' ); ?></span>
-		<input type="hidden" class="dslca-module-edit-field dslca-module-edit-field-image" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo esc_attr( $this->_curr_value ); ?>" <?php echo $affect_on_change_append ?> />
+		<span class="dslca-module-edit-field-image-add-hook" 
+		<?php
+		if ( $this->_curr_value != '' ) {
+			echo 'style="display: none;"';}
+		?>
+		><span class="dslca-icon dslc-icon-cloud-upload"></span><?php esc_html_e( 'Upload Image', 'live-composer-page-builder' ); ?></span>
+		<span class="dslca-module-edit-field-image-remove-hook" 
+		<?php
+		if ( $this->_curr_value == '' ) {
+			echo 'style="display: none;"';}
+		?>
+		><span class="dslca-icon dslc-icon-remove"></span><?php esc_html_e( 'Remove Image', 'live-composer-page-builder' ); ?></span>
+		<input type="hidden" class="dslca-module-edit-field dslca-module-edit-field-image" name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo esc_attr( $this->_curr_value ); ?>" <?php echo $affect_on_change_append; ?> />
 		<?php
 	}
 
 	private function output_button_control( $module_control, $curr_value = '', $action = '' ) {
 		?>
-		<span class="dslca-module-edit-field-button-hook" <?php echo 'onclick="' . esc_attr( $action ) . '"'; ?>><span class="dslca-icon dslc-icon-ok"></span> <?php echo esc_attr( $module_control['label_alt'] ) ?></span>
+		<span class="dslca-module-edit-field-button-hook" <?php echo 'onclick="' . esc_attr( $action ) . '"'; ?>><span class="dslca-icon dslc-icon-ok"></span> <?php echo esc_attr( $module_control['label_alt'] ); ?></span>
 		<?php
 	}
 

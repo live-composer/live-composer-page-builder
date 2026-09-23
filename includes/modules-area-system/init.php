@@ -7,5 +7,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-include DSLC_MODULES_AREA_SYSTEM_ABS . '/inc/modules-area-options.php';
-include DSLC_MODULES_AREA_SYSTEM_ABS . '/inc/modules-area-options-output.php';
+require DSLC_MODULES_AREA_SYSTEM_ABS . '/inc/modules-area-options.php';
+require DSLC_MODULES_AREA_SYSTEM_ABS . '/inc/modules-area-options-output.php';

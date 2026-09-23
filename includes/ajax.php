@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 function dslc_ajax_add_modules_section( $atts ) {
 
 	// Allowed to do this?
-	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) && wp_verify_nonce($_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce' )) {
+	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce' ) ) {
 
 		// The array we'll pass back to the AJAX call.
 		$response = array();
@@ -40,7 +40,7 @@ function dslc_ajax_add_modules_section( $atts ) {
 		// Allows devs to add classes.
 		$filter_classes = array();
 		$filter_classes = apply_filters( 'dslc_row_class', $filter_classes );
-		$extra_classes = '';
+		$extra_classes  = '';
 		if ( count( $filter_classes ) > 0 ) {
 			foreach ( $filter_classes as $filter_class ) {
 				$extra_classes .= $filter_class . ' ';
@@ -51,7 +51,7 @@ function dslc_ajax_add_modules_section( $atts ) {
 		$empty_atts = array();
 
 		$section_content = dslc_modules_area_front( $empty_atts, '' );
-		$output = dslc_modules_section_front( $empty_atts, $section_content );
+		$output          = dslc_modules_section_front( $empty_atts, $section_content );
 
 		// Set the output.
 		$response['output'] = $output;
@@ -76,7 +76,7 @@ function dslc_ajax_add_modules_section( $atts ) {
 function dslc_ajax_add_modules_area( $atts ) {
 
 	// Allowed to do this?
-	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) && wp_verify_nonce($_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce' )) {
+	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce' ) ) {
 
 		// The array we'll pass back to the AJAX call.
 		$response = array();
@@ -84,7 +84,7 @@ function dslc_ajax_add_modules_area( $atts ) {
 		// The output.
 		$empty_atts = array();
 
-		$output = dslc_modules_area_front( $empty_atts, '' );		
+		$output = dslc_modules_area_front( $empty_atts, '' );
 
 		// Set the output.
 		$response['output'] = $output;
@@ -109,7 +109,7 @@ function dslc_ajax_add_modules_area( $atts ) {
 function dslc_ajax_add_module( $atts ) {
 
 	// Allowed to do this?
-	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) && wp_verify_nonce($_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce' ) ) {
+	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce' ) ) {
 
 		// The array we'll pass back to the AJAX call.
 		$response = array();
@@ -122,25 +122,22 @@ function dslc_ajax_add_module( $atts ) {
 			header( 'HTTP/1.1 400 Bad Request', true, 400 );
 			die();
 		}
-	
-		$fields_to_sanitize = ['content', 'tabs_content', 'accordion_content'];
-		 
-		foreach ($fields_to_sanitize as $field) {
-		
-			if (isset($_POST[$field]) && !empty($_POST[$field]) && !current_user_can('manage_options')) {
-		
-				$_POST[$field] = dslc_sanitize_html($_POST[$field]);
-		
+
+		$fields_to_sanitize = array( 'content', 'tabs_content', 'accordion_content' );
+
+		foreach ( $fields_to_sanitize as $field ) {
+
+			if ( isset( $_POST[ $field ] ) && ! empty( $_POST[ $field ] ) && ! current_user_can( 'manage_options' ) ) {
+
+				$_POST[ $field ] = dslc_sanitize_html( $_POST[ $field ] );
+
 			}
-		
 		}
 
-		
-		if (isset($_POST['tabs_content']) && !empty($_POST['tabs_content']) && !current_user_can( 'manage_options' )) {
-			$_POST['tabs_content'] = dslc_sanitize_html($_POST['tabs_content']);
+		if ( isset( $_POST['tabs_content'] ) && ! empty( $_POST['tabs_content'] ) && ! current_user_can( 'manage_options' ) ) {
+			$_POST['tabs_content'] = dslc_sanitize_html( $_POST['tabs_content'] );
 		}
 
-		
 		$post_id = intval( $_POST['dslc_post_id'] );
 
 		if ( isset( $_POST['dslc_preload_preset'] ) && 'enabled' === $_POST['dslc_preload_preset'] ) {
@@ -207,8 +204,8 @@ function dslc_ajax_add_module( $atts ) {
 				if ( isset( $module_settings[ $all_opt['id'] ] ) && ! empty( $module_settings[ $all_opt['id'] ] ) && is_numeric( $module_settings[ $all_opt['id'] ] ) ) {
 
 					$dslc_var_image_option_bckp[ $all_opt['id'] ] = $module_settings[ $all_opt['id'] ];
-					$image_info = wp_get_attachment_image_src( $module_settings[ $all_opt['id'] ], 'full' );
-					$module_settings[ $all_opt['id'] ] = $image_info[0];
+					$image_info                                   = wp_get_attachment_image_src( $module_settings[ $all_opt['id'] ], 'full' );
+					$module_settings[ $all_opt['id'] ]            = $image_info[0];
 				}
 			}
 		}
@@ -255,7 +252,6 @@ function dslc_ajax_add_module( $atts ) {
 		// Good night.
 		exit;
 	}// End if().
-
 } add_action( 'wp_ajax_dslc-ajax-add-module', 'dslc_ajax_add_module' );
 
 
@@ -267,13 +263,13 @@ function dslc_ajax_add_module( $atts ) {
 function dslc_ajax_display_module_options( $atts ) {
 
 	// Allowed to do this?
-	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) && wp_verify_nonce($_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce' ) ) {
+	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce' ) ) {
 
 		// The array we'll pass back to the AJAX call.
 		$response = array();
 
 		// This will hold the output.
-		$response['output'] = '';
+		$response['output']      = '';
 		$response['output_tabs'] = '';
 
 		// The ID of the module to add.
@@ -315,9 +311,9 @@ function dslc_ajax_display_module_options( $atts ) {
 
 		// Combine output.
 		$response['output_tabs'] .= $module_options_panel->get_tabs_render();
-		$response['output'] .= $output_start;
-		$response['output'] .= $output_fields;
-		$response['output'] .= $output_end;
+		$response['output']      .= $output_start;
+		$response['output']      .= $output_fields;
+		$response['output']      .= $output_end;
 
 		// Decode shortcodes for proper presentation.
 		$response['output'] = dslc_decode_shortcodes( $response['output'] );
@@ -332,7 +328,6 @@ function dslc_ajax_display_module_options( $atts ) {
 		// Auf wiedersehen.
 		exit;
 	}// End if().
-
 } add_action( 'wp_ajax_dslc-ajax-display-module-options', 'dslc_ajax_display_module_options' );
 
 
@@ -344,7 +339,7 @@ function dslc_ajax_display_module_options( $atts ) {
 function dslc_ajax_save_composer( $atts ) {
 
 	// Allowed to do this?
-	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY_SAVE ) && wp_verify_nonce($_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce' ) ) {
+	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY_SAVE ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce' ) ) {
 
 		// The array we'll pass back to the AJAX call.
 		$response = array();
@@ -382,11 +377,11 @@ function dslc_ajax_save_composer( $atts ) {
 		// 1. DATA PRESERVATION & MIGRATION (Pages Only)
 		if ( get_post_type( $post_id ) === 'page' ) {
 			$legacy_meta = get_post_meta( $post_id, 'dslc_original_post_content', true );
-			
+
 			// If meta is empty, check if we need to migrate current post_content before it is mirrored
 			if ( empty( $legacy_meta ) ) {
 				$current_post = get_post( $post_id );
-				$raw_content = $current_post->post_content;
+				$raw_content  = $current_post->post_content;
 
 				// Migration check: Only move to meta if it's NOT already builder HTML
 				if ( ! empty( $raw_content ) && strpos( $raw_content, 'dslc-modules-section' ) === false ) {
@@ -411,19 +406,19 @@ function dslc_ajax_save_composer( $atts ) {
 		// 2. RANK MATH SEO SYNC (Pages Only)
 		if ( get_post_type( $post_id ) === 'page' ) {
 			global $dslc_active;
-			$old_state = $dslc_active;
+			$old_state   = $dslc_active;
 			$dslc_active = false; // Headless render to get clean HTML
 
 			$seo_content = dslc_render_content( stripslashes( $composer_code ) );
-			
+
 			$dslc_active = $old_state;
 
 			// Mirror output to database column for Rank Math analysis
 			global $wpdb;
-			$wpdb->update( 
-				$wpdb->posts, 
-				array( 'post_content' => $seo_content ), 
-				array( 'ID' => $post_id ) 
+			$wpdb->update(
+				$wpdb->posts,
+				array( 'post_content' => $seo_content ),
+				array( 'ID' => $post_id )
 			);
 		}
 
@@ -468,7 +463,7 @@ function dslc_ajax_save_composer( $atts ) {
 function dslc_ajax_save_draft_composer( $atts ) {
 
 	// Allowed to do this?
-	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY_SAVE ) && wp_verify_nonce($_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce' )) {
+	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY_SAVE ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce' ) ) {
 
 		// The array we'll pass back to the AJAX call.
 		$response = array();
@@ -512,7 +507,7 @@ function dslc_ajax_save_draft_composer( $atts ) {
 function dslc_ajax_load_template( $atts ) {
 
 	// Allowed to do this?
-	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) && wp_verify_nonce($_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce' )) {
+	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce' ) ) {
 
 		// The array that holds active templates.
 		$templates = dslc_get_templates();
@@ -525,7 +520,7 @@ function dslc_ajax_load_template( $atts ) {
 
 		// The code of the template to load.
 		$template_code = $templates[ $template_id ]['code'];
-		
+
 		$response['output'] = dslc_render_content( $template_code, true );
 		$response['output'] = do_shortcode( $response['output'] );
 
@@ -551,7 +546,7 @@ function dslc_ajax_load_template( $atts ) {
 function dslc_ajax_import_template( $atts ) {
 
 	// Allowed to do this?
-	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) && wp_verify_nonce($_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce' )) {
+	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce' ) ) {
 
 		// The array we'll pass back to the AJAX call.
 		$response = array();
@@ -559,18 +554,18 @@ function dslc_ajax_import_template( $atts ) {
 		// The code of the template.
 		$template_code = stripslashes( $_POST['dslc_template_code'] );
 
-		if (!dslc_is_json( $template_code ) ) {
+		if ( ! dslc_is_json( $template_code ) ) {
 			return 0;
 			exit;
 		}
 
 		$response['output'] = dslc_render_content( $template_code, true );
-		
+
 		$response['output'] = do_shortcode( $response['output'] ); // Fixed bug with modules of post
 
 		// Encode response.
 		$response_json = wp_json_encode( $response );
-		
+
 		// Send the response.
 		header( 'Content-Type: application/json' );
 		echo $response_json;
@@ -588,7 +583,7 @@ function dslc_ajax_import_template( $atts ) {
 function dslc_ajax_save_template( $atts ) {
 
 	// Allowed to do this?
-	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY_SAVE ) && wp_verify_nonce($_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce' )) {
+	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY_SAVE ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce' ) ) {
 
 		// Response to the AJAX call.
 		$response = array();
@@ -598,14 +593,14 @@ function dslc_ajax_save_template( $atts ) {
 
 		// Get new template data.
 		$template_title = stripslashes( $_POST['dslc_template_title'] );
-		$template_id = strtolower( str_replace( ' ', '-', $template_title ) );
-		$template_code = stripslashes( $_POST['dslc_template_code'] );
+		$template_id    = strtolower( str_replace( ' ', '-', $template_title ) );
+		$template_code  = stripslashes( $_POST['dslc_template_code'] );
 
-		if (!dslc_is_json($template_code) ) {
+		if ( ! dslc_is_json( $template_code ) ) {
 			return 0;
 			exit;
 		}
-		
+
 		// Get current templates.
 		$templates = get_option( 'dslc_templates' );
 
@@ -618,9 +613,9 @@ function dslc_ajax_save_template( $atts ) {
 
 		// Append new template to templates array.
 		$templates[ $template_id ] = array(
-			'title' => $template_title,
-			'id' => $template_id,
-			'code' => $template_code,
+			'title'   => $template_title,
+			'id'      => $template_id,
+			'code'    => $template_code,
 			'section' => 'user',
 		);
 
@@ -650,9 +645,9 @@ function dslc_ajax_save_template( $atts ) {
 function dslc_ajax_delete_template( $atts ) {
 
 	// Allowed to do this?
-	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY_SAVE ) && wp_verify_nonce($_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce' )) {
+	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY_SAVE ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce' ) ) {
 
-		$response = array();
+		$response           = array();
 		$response['status'] = 'success';
 
 		// ID of the template to delete.
@@ -681,7 +676,6 @@ function dslc_ajax_delete_template( $atts ) {
 		exit;
 
 	}
-
 } add_action( 'wp_ajax_dslc-ajax-delete-template', 'dslc_ajax_delete_template' );
 
 /**
@@ -692,13 +686,13 @@ function dslc_ajax_delete_template( $atts ) {
 function dslc_ajax_import_modules_section( $atts ) {
 
 	// Allowed to do this?
-	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) && wp_verify_nonce($_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce' )) {
+	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce' ) ) {
 		// The array we'll pass back to the AJAX call.
 		$response = array();
 
 		// The code of the modules section.
 		$code_to_import = stripslashes( $_POST['dslc_modules_section_code'] );
-		if (!dslc_is_json($code_to_import) ) {
+		if ( ! dslc_is_json( $code_to_import ) ) {
 			return 0;
 			exit;
 		}
@@ -726,7 +720,7 @@ function dslc_ajax_import_modules_section( $atts ) {
  */
 function dslc_ajax_dm_module_defaults_code( $atts ) {
 	// Allowed to do this?
-	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) && wp_verify_nonce($_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce')) {
+	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce' ) ) {
 
 		$code = '';
 
@@ -800,15 +794,15 @@ function dslc_ajax_dm_module_defaults_code( $atts ) {
 function dslc_ajax_save_preset() {
 
 	// Allowed to do this?
-	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) && wp_verify_nonce($_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce' )) {
+	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce' ) ) {
 
 		// The array we'll pass back to the AJAX call.
 		$response = array();
 
 		// Get the preset data.
-		$preset_name = stripslashes( $_POST['dslc_preset_name'] );
+		$preset_name     = stripslashes( $_POST['dslc_preset_name'] );
 		$preset_code_raw = stripslashes( $_POST['dslc_preset_code'] );
-		$module_id = stripslashes( $_POST['dslc_module_id'] );
+		$module_id       = stripslashes( $_POST['dslc_module_id'] );
 
 		if ( ! class_exists( $module_id ) ) {
 
@@ -848,14 +842,14 @@ function dslc_ajax_save_preset() {
 function dslc_ajax_delete_preset() {
 
 	// Allowed to do this?
-	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) && wp_verify_nonce($_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce' )) {
+	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'dslc-ajax-wpnonce' ) ) {
 
 		// The array we'll pass back to the AJAX call.
 		$response = array();
 
 		// Get the preset data.
 		$preset_name = stripslashes( $_POST['dslc_preset_name'] );
-		$module_id = stripslashes( $_POST['dslc_module_id'] );
+		$module_id   = stripslashes( $_POST['dslc_module_id'] );
 
 		if ( ! class_exists( $module_id ) ) {
 
@@ -890,7 +884,8 @@ function dslc_ajax_delete_preset() {
 /**
  * Ajax set hidden ( panel )
  */
-/* function dslc_ajax_hidden_panel() {
+/*
+function dslc_ajax_hidden_panel() {
 
 	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY ) ) {
 
@@ -919,46 +914,45 @@ function dslc_ajax_clear_cache() {
 /**
  * Enable/Disable Premium Extension.
  */
-
 function dslc_ajax_toggle_extension( $atts ) {
 
 	// Allowed to do this?
-	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY_SAVE ) && wp_verify_nonce($_REQUEST['security']['nonce'], 'dslc-optionspanel-ajax' )):
+	if ( is_user_logged_in() && current_user_can( DS_LIVE_COMPOSER_CAPABILITY_SAVE ) && wp_verify_nonce( $_REQUEST['security']['nonce'], 'dslc-optionspanel-ajax' ) ) :
 
-	// The array we'll pass back to the AJAX call.
-	$response = false;
-	$extension_id = false;
+		// The array we'll pass back to the AJAX call.
+		$response     = false;
+		$extension_id = false;
 
-	// The composer code.
-	if ( isset( $_POST['extension'] ) ) {
-		$extension_id = sanitize_key( $_POST['extension'] );
-	}
+		// The composer code.
+		if ( isset( $_POST['extension'] ) ) {
+			$extension_id = sanitize_key( $_POST['extension'] );
+		}
 
-	if ( $extension_id ) {
-		// Send an action with request to toggle extension status.
-		do_action( 'dslc_toggle_extension', $extension_id );
+		if ( $extension_id ) {
+			// Send an action with request to toggle extension status.
+			do_action( 'dslc_toggle_extension', $extension_id );
 
-		// Check if status changed?
-		$extensions = array();
-		$extensions = apply_filters( 'dslc_extensions_meta', $extensions );
+			// Check if status changed?
+			$extensions = array();
+			$extensions = apply_filters( 'dslc_extensions_meta', $extensions );
 
-		foreach ($extensions as $id => $extension) {
-			if ( $id === $extension_id ) {
-				if ( $extension['active'] ) {
-					$response = 'active';
-				} else {
-					$response = 'inactive';
+			foreach ( $extensions as $id => $extension ) {
+				if ( $id === $extension_id ) {
+					if ( $extension['active'] ) {
+						$response = 'active';
+					} else {
+						$response = 'inactive';
+					}
 				}
 			}
 		}
-	}
 
-	// Return response.
-	echo $response;
+		// Return response.
+		echo $response;
 
-	// Au revoir.
-	wp_die();
-	// exit;
+		// Au revoir.
+		wp_die();
+		// exit;
 
 	endif; // End if is_user_logged_in()...
 } add_action( 'wp_ajax_dslc-ajax-toggle-extension', 'dslc_ajax_toggle_extension' );

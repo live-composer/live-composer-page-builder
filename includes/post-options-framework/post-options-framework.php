@@ -31,10 +31,10 @@ function dslc_get_cpt_templates() {
 	global $dslc_var_post_options;
 
 	$args = array(
-		'post_type' => 'dslc_templates',
-		'post_status' => 'publish',
+		'post_type'      => 'dslc_templates',
+		'post_status'    => 'publish',
 		'posts_per_page' => -1,
-		'order' => 'DESC',
+		'order'          => 'DESC',
 	);
 
 	$templates = get_posts( $args );
@@ -73,16 +73,16 @@ function dslc_get_cpt_templates() {
 
 			$mb_id = 'dslc-' . $pt_id . '-tpl-options';
 
-			$dslc_var_post_options[$mb_id] = array(
-				'title' => __( 'LC Template', 'live-composer-page-builder' ),
+			$dslc_var_post_options[ $mb_id ] = array(
+				'title'   => __( 'LC Template', 'live-composer-page-builder' ),
 				'show_on' => $pt_id,
 				'context' => 'side',
 				'options' => array(
 					array(
-						'label' => __( 'Template', 'live-composer-page-builder' ),
-						'std' => '',
-						'id' => 'dslc_post_template',
-						'type' => 'select',
+						'label'   => __( 'Template', 'live-composer-page-builder' ),
+						'std'     => '',
+						'id'      => 'dslc_post_template',
+						'type'    => 'select',
 						'choices' => $templates_array[ $pt_id ],
 					),
 				),
@@ -105,7 +105,6 @@ function dslc_setup_post_options() {
 
 	/* Save post meta on the 'save_post' hook. */
 	add_action( 'save_post', 'dslc_save_post_options', 10, 2 );
-
 }
 add_action( 'load-post-new.php', 'dslc_setup_post_options' );
 add_action( 'load-post.php', 'dslc_setup_post_options' );
@@ -144,11 +143,11 @@ function dslc_add_post_options() {
 						'high'
 					);
 				}
-			// If post options shown on single post type.
+				// If post options shown on single post type.
 			} else {
 
 				// Add meta box to post type.
-				if( !empty( $dslc_post_option['title'] && $dslc_post_option['show_on']  ) ) {
+				if ( ! empty( $dslc_post_option['title'] && $dslc_post_option['show_on'] ) ) {
 					add_meta_box(
 						$dslc_post_option_key,
 						$dslc_post_option['title'],
@@ -158,7 +157,6 @@ function dslc_add_post_options() {
 						'high'
 					);
 				}
-
 			}
 		}
 	}
@@ -174,7 +172,7 @@ function dslc_editorinterface_post_options( $object, $metabox ) {
 	global $dslc_var_post_options;
 
 	$post_options_id = $metabox['id'];
-	$post_options = $dslc_var_post_options[ $post_options_id ]['options'];
+	$post_options    = $dslc_var_post_options[ $post_options_id ]['options'];
 
 	?>
 
@@ -189,17 +187,17 @@ function dslc_editorinterface_post_options( $object, $metabox ) {
 			// New header should be Default if it's the only header
 			if ( 'dslc_hf' === $object->post_type ) {
 
-				$args = array(
+				$args  = array(
 					'post_type'     => 'dslc_hf',
 					'fields'        => 'ids',
 					'post_per_page' => '-1',
-					'meta_query' => array(
+					'meta_query'    => array(
 						array(
-							'key'     => 'dslc_hf_for',
-							'value'   => 'header',
-						)
-					)
-				 );
+							'key'   => 'dslc_hf_for',
+							'value' => 'header',
+						),
+					),
+				);
 				$posts = get_posts( $args );
 
 				if ( empty( $posts ) ) {
@@ -237,9 +235,9 @@ function dslc_editorinterface_post_options( $object, $metabox ) {
 					<div class="dslca-post-option-description">
 						<?php
 						$allowed_html = array(
-							'a' => array(),
-							'br' => array(),
-							'em' => array(),
+							'a'      => array(),
+							'br'     => array(),
+							'em'     => array(),
 							'strong' => array(),
 						);
 						echo wp_kses( $post_option['descr'], $allowed_html );
@@ -262,7 +260,12 @@ function dslc_editorinterface_post_options( $object, $metabox ) {
 
 						<select type="text" name="<?php echo esc_attr( $post_option['id'] ); ?>" id="<?php echo esc_attr( $post_option['id'] ); ?>">
 							<?php foreach ( $post_option['choices'] as $choice ) : ?>
-								<option value="<?php echo $choice['value']; ?>" <?php if ( $curr_value == $choice['value'] ) echo 'selected="selected"'; ?>><?php echo $choice['label']; ?></option>
+								<option value="<?php echo $choice['value']; ?>" 
+								<?php
+								if ( $curr_value == $choice['value'] ) {
+									echo 'selected="selected"';}
+								?>
+								><?php echo $choice['label']; ?></option>
 							<?php endforeach; ?>
 						</select>
 
@@ -306,13 +309,18 @@ function dslc_editorinterface_post_options( $object, $metabox ) {
 							?>
 							<?php foreach ( $post_option['choices'] as $key => $choice ) : ?>
 
-								<?php if ( 'list-heading' !== esc_attr( $choice['value'] ) ): ?>
+								<?php if ( 'list-heading' !== esc_attr( $choice['value'] ) ) : ?>
 
 									<div class="dslca-post-option-field-choice">
-										<input type="checkbox" name="<?php echo esc_attr( $post_option['id'] ); ?>[]" id="<?php echo esc_attr( $post_option['id'] . $key ); ?>" value="<?php echo esc_attr( $choice['value'] ); ?>" <?php if ( in_array(  esc_attr( $choice['value'] ),  $curr_value_array ) ) echo 'checked="checked"'; ?> /> <label for="<?php echo  esc_attr( $post_option['id'] . $key ); ?>"><?php echo  esc_html( $choice['label'] ); ?></label>
+										<input type="checkbox" name="<?php echo esc_attr( $post_option['id'] ); ?>[]" id="<?php echo esc_attr( $post_option['id'] . $key ); ?>" value="<?php echo esc_attr( $choice['value'] ); ?>" 
+										<?php
+										if ( in_array( esc_attr( $choice['value'] ), $curr_value_array ) ) {
+											echo 'checked="checked"';}
+										?>
+										/> <label for="<?php echo esc_attr( $post_option['id'] . $key ); ?>"><?php echo esc_html( $choice['label'] ); ?></label>
 									</div><!-- .dslca-post-option-field-choice -->
 
-								<?php else: ?>
+								<?php else : ?>
 
 									<?php if ( 0 !== $key ) : ?>
 										</div>
@@ -328,14 +336,14 @@ function dslc_editorinterface_post_options( $object, $metabox ) {
 
 										?>
 										<div class="dslca-post-option-field-inner-wrapper" <?php echo $dslca_post_option_id; ?>>
-									<?php endif;?>
+									<?php endif; ?>
 
 										<p>
-										<strong><?php echo  esc_html( $choice['label'] ); ?></strong>
+										<strong><?php echo esc_html( $choice['label'] ); ?></strong>
 										</p>
 										<?php
 										if ( isset( $choice['description'] ) ) {
-											echo  '<p class="control-description">' . esc_html( $choice['description'] ) . '</p>';
+											echo '<p class="control-description">' . esc_html( $choice['description'] ) . '</p>';
 										}
 										?>
 
@@ -349,7 +357,12 @@ function dslc_editorinterface_post_options( $object, $metabox ) {
 
 						<?php foreach ( $post_option['choices'] as $key => $choice ) : ?>
 							<div class="dslca-post-option-field-choice">
-								<input type="radio" name="<?php echo esc_attr( $post_option['id'] ); ?>" id="<?php echo esc_attr( $post_option['id'] . $key ); ?>" value="<?php echo esc_attr( $choice['value'] ); ?>" <?php if ( $choice['value'] === $curr_value ) { echo 'checked="checked"'; } ?> /> 
+								<input type="radio" name="<?php echo esc_attr( $post_option['id'] ); ?>" id="<?php echo esc_attr( $post_option['id'] . $key ); ?>" value="<?php echo esc_attr( $choice['value'] ); ?>" 
+								<?php
+								if ( $choice['value'] === $curr_value ) {
+									echo 'checked="checked"'; }
+								?>
+								/> 
 								<label for="<?php echo esc_attr( $post_option['id'] . $key ); ?>">
 									<?php echo $choice['label']; ?>
 								</label>
@@ -386,7 +399,7 @@ function dslc_editorinterface_post_options( $object, $metabox ) {
 								</div><!-- .dslca-post-option-image -->
 
 							</div><!-- .dslca-post-options-images -->
-						<?php else: ?>
+						<?php else : ?>
 							<div class="dslca-post-options-images dslca-clearfix"></div>
 						<?php endif; ?>
 
@@ -400,9 +413,9 @@ function dslc_editorinterface_post_options( $object, $metabox ) {
 							<div class="dslca-post-options-images dslca-clearfix">
 								<?php
 									$images = explode( ' ', trim( $curr_value ) );
-									foreach ( $images as $image_ID ) {
-										$image = wp_get_attachment_image_src( $image_ID, 'full' );
-										?>
+								foreach ( $images as $image_ID ) {
+									$image = wp_get_attachment_image_src( $image_ID, 'full' );
+									?>
 										<div class="dslca-post-option-image" data-id="<?php echo $image_ID; ?>">
 											<div class="dslca-post-option-image-inner">
 												<img src="<?php echo $image[0]; ?>" />
@@ -410,7 +423,7 @@ function dslc_editorinterface_post_options( $object, $metabox ) {
 											</div>
 										</div>
 										<?php
-									}
+								}
 								?>
 							</div><!-- .dslca-post-options-images -->
 						<?php else : ?>
@@ -436,7 +449,6 @@ function dslc_editorinterface_post_options( $object, $metabox ) {
 	</div><!-- .dslca-post-options -->
 
 	<?php
-
 }
 
 /**
@@ -459,13 +471,13 @@ function dslc_save_post_options( $post_id, $post ) {
 			foreach ( $post_options['options'] as $post_option ) {
 
 				// Get option info.
-				$meta_key = $post_option['id'];
-				$new_option_value = ( isset( $_POST[ $post_option['id'] ] ) ? $_POST[ $post_option['id'] ] : '' );
+				$meta_key          = $post_option['id'];
+				$new_option_value  = ( isset( $_POST[ $post_option['id'] ] ) ? $_POST[ $post_option['id'] ] : '' );
 				$curr_option_value = get_post_meta( $post_id, $meta_key, true );
 
 				// Serialize array. (Deleted as WP serialize arrays on it's own)
 				// if ( is_array( $new_option_value ) ) {
-				// 	$new_option_value = serialize( $new_option_value );
+				// $new_option_value = serialize( $new_option_value );
 				// }
 
 				// Save, Update, Delete option.
@@ -487,7 +499,6 @@ function dslc_save_post_options( $post_id, $post ) {
 			}
 		}
 	}
-
 }
 
 /**
@@ -501,7 +512,7 @@ function dslc_save_post_options( $post_id, $post ) {
 function dslc_post_add_row_action( $actions, $post ) {
 
 	$post_status = $post->post_status;
-	$post_type = $post->post_type;
+	$post_type   = $post->post_type;
 
 	if ( dslc_can_edit_in_lc( $post_type ) && 'trash' !== $post_status ) {
 
@@ -509,7 +520,7 @@ function dslc_post_add_row_action( $actions, $post ) {
 		if ( dslc_cpt_use_templates( $post_type ) ) {
 
 			$template_id = dslc_get_template_by_id( $post->ID );
-			$url = DSLC_EditorInterface::get_editor_link_url( $template_id, $post->ID );
+			$url         = DSLC_EditorInterface::get_editor_link_url( $template_id, $post->ID );
 
 			// If default template for current CPT exists.
 			if ( $template_id ) {
@@ -518,7 +529,7 @@ function dslc_post_add_row_action( $actions, $post ) {
 				$actions = $actions + array( 'edit-in-live-composer' => '<a href="' . admin_url( 'post-new.php?post_type=dslc_templates' ) . '">' . __( 'Create Template', 'live-composer-page-builder' ) . '</a>' );
 			}
 
-		// Each post can be edited in the page builder.
+			// Each post can be edited in the page builder.
 		} else {
 
 			$url = DSLC_EditorInterface::get_editor_link_url( $post->ID );
@@ -571,7 +582,6 @@ function dslc_post_submitbox_add_button() {
 
 		echo '<a class="button button-hero" target="_blank" href="' . $url . '">' . __( 'Open in Live Composer', 'live-composer-page-builder' ) . '</a>';
 	}
-
 } add_action( 'post_submitbox_start', 'dslc_post_submitbox_add_button' );
 
 /**
@@ -588,7 +598,8 @@ function dslc_tab_content( $content ) {
 				<div class="description"><?php _e( 'Page builder stores content in a compressed way <br>(better for speed, security and user experience)', 'live-composer-page-builder' ); ?></div>
 				<p><a class="button button-primary button-hero" target="_blank" href="<?php echo $url; ?>"><?php echo __( 'Open in Live Composer', 'live-composer-page-builder' ); ?></a></p>
 		</div>
-	<?php }
+		<?php
+	}
 
 	return $content;
 }
@@ -602,7 +613,7 @@ add_filter( 'the_editor', 'dslc_tab_content' );
 function dslc_notice( $wrapper ) {
 
 	$custom_fields = get_post_custom( get_the_ID() );
-	$url = DSLC_EditorInterface::get_editor_link_url( get_the_ID() );
+	$url           = DSLC_EditorInterface::get_editor_link_url( get_the_ID() );
 
 	if ( is_admin() && is_array( $custom_fields ) && array_key_exists( 'dslc_code', $custom_fields ) ) {
 		$wrapper .= '</textarea><div class="dslc-notice">This page was created in a page builder. <a target="_blank" href="' . $url . '">' . __( 'Open it in Live Composer', 'live-composer-page-builder' ) . '</a> to make any content or design changes.</div>';

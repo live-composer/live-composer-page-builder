@@ -28,7 +28,7 @@ if ( ! class_exists( 'DSLC_Aq_Resize' ) ) {
 		/**
 		 * The singleton instance
 		 */
-		static private $instance = null;
+		private static $instance = null;
 
 		/**
 		 * No initialization allowed
@@ -43,9 +43,9 @@ if ( ! class_exists( 'DSLC_Aq_Resize' ) ) {
 		/**
 		 * For your custom default usage you may want to initialize an Aq_Resize object by yourself and then have own defaults
 		 */
-		static public function getInstance() {
+		public static function getInstance() {
 			if ( self::$instance == null ) {
-				self::$instance = new self;
+				self::$instance = new self();
 			}
 
 			return self::$instance;
@@ -57,25 +57,27 @@ if ( ! class_exists( 'DSLC_Aq_Resize' ) ) {
 		public function process( $url, $width = null, $height = null, $crop = null, $single = true, $upscale = true ) {
 
 			// Validate inputs.
-			if ( ! $url || ( ! $width && ! $height ) ) { return false;
+			if ( ! $url || ( ! $width && ! $height ) ) {
+				return false;
 			}
 
 			$upscale = true;
 
 			// Caipt'n, ready to hook.
-			if ( true === $upscale ) { add_filter( 'image_resize_dimensions', array( $this, 'aq_upscale' ), 10, 6 );
+			if ( true === $upscale ) {
+				add_filter( 'image_resize_dimensions', array( $this, 'aq_upscale' ), 10, 6 );
 			}
 
 			// Define upload path & dir.
 			$upload_info = wp_upload_dir();
-			$upload_dir = $upload_info['basedir'];
-			$upload_url = $upload_info['baseurl'];
+			$upload_dir  = $upload_info['basedir'];
+			$upload_url  = $upload_info['baseurl'];
 
-			$http_prefix = 'http://';
+			$http_prefix  = 'http://';
 			$https_prefix = 'https://';
 
 			/*
-			 if the $url scheme differs from $upload_url scheme, make them match
+			if the $url scheme differs from $upload_url scheme, make them match
 				if the schemes differe, images don't show up. */
 			if ( ! strncmp( $url, $https_prefix, strlen( $https_prefix ) ) ) { // if url begins with https:// make $upload_url begin with https:// as well
 				$upload_url = str_replace( $http_prefix, $https_prefix, $upload_url );
@@ -84,7 +86,7 @@ if ( ! class_exists( 'DSLC_Aq_Resize' ) ) {
 			}
 
 			// Check if $img_url is local.
-			if ( false === strpos( $url, $upload_url ) ) { 
+			if ( false === strpos( $url, $upload_url ) ) {
 				return $url;
 			}
 
@@ -93,28 +95,28 @@ if ( ! class_exists( 'DSLC_Aq_Resize' ) ) {
 			$img_path = $upload_dir . $rel_path;
 
 			// Check if img path exists, and is an image indeed.
-			if ( ! file_exists( $img_path ) or ! getimagesize( $img_path ) ) { 
-				return  $url;
+			if ( ! file_exists( $img_path ) or ! getimagesize( $img_path ) ) {
+				return $url;
 			}
 
 			// Get image info.
-			$info = pathinfo( $img_path );
-			$ext = $info['extension'];
+			$info                    = pathinfo( $img_path );
+			$ext                     = $info['extension'];
 			list( $orig_w, $orig_h ) = getimagesize( $img_path );
 
 			// Get image size after cropping.
-			$dims = image_resize_dimensions( $orig_w, $orig_h, $width, $height, $crop );
+			$dims  = image_resize_dimensions( $orig_w, $orig_h, $width, $height, $crop );
 			$dst_w = $dims[4];
 			$dst_h = $dims[5];
 
 			// Return the original image only if it exactly fits the needed measures.
 			if ( ! $dims && ( ( ( null === $height && $orig_w == $width ) xor ( null === $width && $orig_h == $height ) ) xor ( $height == $orig_h && $width == $orig_w ) ) ) {
 				$img_url = $url;
-				$dst_w = $orig_w;
-				$dst_h = $orig_h;
+				$dst_w   = $orig_w;
+				$dst_h   = $orig_h;
 			} else {
 				// Use this to check if cropped image already exists, so we can return that instead.
-				$suffix = "{$dst_w}x{$dst_h}";
+				$suffix       = "{$dst_w}x{$dst_h}";
 				$dst_rel_path = str_replace( '.' . $ext, '', $rel_path );
 				$destfilename = "{$upload_dir}{$dst_rel_path}-{$suffix}.{$ext}";
 
@@ -137,7 +139,7 @@ if ( ! class_exists( 'DSLC_Aq_Resize' ) ) {
 
 					if ( ! is_wp_error( $resized_file ) ) {
 						$resized_rel_path = str_replace( $upload_dir, '', $resized_file['path'] );
-						$img_url = $upload_url . $resized_rel_path;
+						$img_url          = $upload_url . $resized_rel_path;
 					} else {
 						return $url;
 					}
@@ -145,7 +147,8 @@ if ( ! class_exists( 'DSLC_Aq_Resize' ) ) {
 			}// End if().
 
 			// Okay, leave the ship.
-			if ( true === $upscale ) { remove_filter( 'image_resize_dimensions', array( $this, 'aq_upscale' ) );
+			if ( true === $upscale ) {
+				remove_filter( 'image_resize_dimensions', array( $this, 'aq_upscale' ) );
 			}
 
 			// Return the output.
@@ -168,13 +171,14 @@ if ( ! class_exists( 'DSLC_Aq_Resize' ) ) {
 		 * Callback to overwrite WP computing of thumbnail measures
 		 */
 		function aq_upscale( $default, $orig_w, $orig_h, $dest_w, $dest_h, $crop ) {
-			if ( ! $crop ) { return null; // Let the wordpress default function handle this.
+			if ( ! $crop ) {
+				return null; // Let the WordPress default function handle this.
 			}
 
 			// Here is the point we allow to use larger image size than the original one.
 			$aspect_ratio = $orig_w / $orig_h;
-			$new_w = intval( $dest_w );
-			$new_h = intval( $dest_h );
+			$new_w        = intval( $dest_w );
+			$new_h        = intval( $dest_h );
 
 			if ( ! $new_w ) {
 				$new_w = intval( $new_h * $aspect_ratio );
@@ -194,7 +198,6 @@ if ( ! class_exists( 'DSLC_Aq_Resize' ) ) {
 
 			return array( 0, 0, (int) $s_x, (int) $s_y, (int) $new_w, (int) $new_h, (int) $crop_w, (int) $crop_h );
 		}
-
 	}
 
 }// End if().
@@ -221,7 +224,7 @@ if ( ! function_exists( 'dslc_aq_resize' ) ) {
 		if ( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'photon' ) ) {
 
 			$args = array(
-			  'resize' => "$width,$height",
+				'resize' => "$width,$height",
 			);
 			if ( $single == true ) {
 				return jetpack_photon_url( $url, $args );
@@ -239,7 +242,6 @@ if ( ! function_exists( 'dslc_aq_resize' ) ) {
 			return $aq_resize->process( $url, $width, $height, $crop, $single, $upscale );
 
 		}
-
 	}
 }// End if().
 
@@ -268,13 +270,13 @@ function dslc_get_social_count( $post_ID = false, $refresh_in = 3600 ) {
 
 		// Defaults
 		$share_info = array(
-			'fb' => 0,
-			'twitter' => 0,
+			'fb'        => 0,
+			'twitter'   => 0,
 			'pinterest' => 0,
 		);
 
 		// Facebook
-		$fb_get = wp_remote_get( 'http://graph.facebook.com/?id=' . $the_url );
+		$fb_get   = wp_remote_get( 'http://graph.facebook.com/?id=' . $the_url );
 		$fb_count = 0;
 		if ( is_array( $fb_get ) ) {
 			$fb_get_body = json_decode( $fb_get['body'] );
@@ -287,7 +289,7 @@ function dslc_get_social_count( $post_ID = false, $refresh_in = 3600 ) {
 		}
 
 		// Twitter
-		$twitter_get = wp_remote_get( 'http://cdn.api.twitter.com/1/urls/count.json?url=' . $the_url );
+		$twitter_get   = wp_remote_get( 'http://cdn.api.twitter.com/1/urls/count.json?url=' . $the_url );
 		$twitter_count = 0;
 		if ( is_array( $twitter_get ) ) {
 			$twitter_get_body = json_decode( $twitter_get['body'] );
@@ -300,7 +302,7 @@ function dslc_get_social_count( $post_ID = false, $refresh_in = 3600 ) {
 		}
 
 		// Pinterest
-		$pinterest_get = wp_remote_get( 'http://api.pinterest.com/v1/urls/count.json?url=' . $the_url );
+		$pinterest_get   = wp_remote_get( 'http://api.pinterest.com/v1/urls/count.json?url=' . $the_url );
 		$pinterest_count = 0;
 		if ( is_array( $pinterest_get ) ) {
 			$pinterest_get_body = json_decode( preg_replace( '/^receiveCount\((.*)\)$/', "\\1", $pinterest_get['body'] ) );
@@ -322,7 +324,6 @@ function dslc_get_social_count( $post_ID = false, $refresh_in = 3600 ) {
 
 	// Pass the data back
 	return $share_info;
-
 }
 
 function dslc_get_default_icon_set() {
@@ -364,7 +365,7 @@ function dslc_icons_current_set( $icon = false ) {
 
 	// Get the first part of the icon ( representing the set ).
 	$icon_parts = explode( '-', $icon );
-	$icon_set = $icon_parts[0];
+	$icon_set   = $icon_parts[0];
 
 	if ( isset( $dslc_var_icons[ $icon_set ] ) ) {
 		// If there is an icon set by that name return it.
@@ -405,7 +406,6 @@ function dslc_get_attachment_alt( $attachment_ID ) {
 
 	// Return ALT
 	return esc_attr( $thumb_alt );
-
 }
 
 /**
@@ -441,7 +441,6 @@ add_action( 'wp_ajax_dslc_dismiss_notice', 'dslc_dismiss_notice' );
  *
  * Call Ajax action to dismiss a particular admin notice
  */
-
 function dslc_adminjs_dismiss_notice() {
 	?>
 	<script type="text/javascript">
@@ -459,7 +458,8 @@ function dslc_adminjs_dismiss_notice() {
 				})
 			})
 	</script>
-<?php }
+	<?php
+}
 add_action( 'admin_footer', 'dslc_adminjs_dismiss_notice' );
 
 /**
@@ -471,9 +471,9 @@ add_action( 'admin_footer', 'dslc_adminjs_dismiss_notice' );
  * @return boolean  true if notice is being dismissed
  */
 function dslc_notice_dismissed( $notice_id ) {
-	$stored_notices = get_option( 'dslc_notices' );
+	$stored_notices   = get_option( 'dslc_notices' );
 	$notice_dismissed = 0;
-	$usr_id = get_current_user_id();
+	$usr_id           = get_current_user_id();
 
 	if ( isset( $stored_notices[ $usr_id ][ $notice_id . '_notice_dismissed' ] ) && $stored_notices[ $usr_id ][ $notice_id . '_notice_dismissed' ] = 1 ) {
 		$notice_dismissed = 1;
@@ -528,23 +528,23 @@ add_filter( 'dslc_text_block_render', 'dslc_filter_textarea' );
 function dslc_taxonomy_add_new_meta_field( $taxonomy ) {
 
 	$dslc_template_for = array(
-		'category' => 'post_archive',
+		'category'            => 'post_archive',
 		'dslc_downloads_cats' => 'dslc_downloads_archive',
 		'dslc_galleries_cats' => 'dslc_galleries_archive',
-		'dslc_partners_cats' => 'dslc_partners_archive',
-		'dslc_projects_cats' => 'dslc_projects_archive',
-		'dslc_staff_cats' => 'dslc_staff_archive',
-		//'dslc_testimonials_cats'
+		'dslc_partners_cats'  => 'dslc_partners_archive',
+		'dslc_projects_cats'  => 'dslc_projects_archive',
+		'dslc_staff_cats'     => 'dslc_staff_archive',
+		// 'dslc_testimonials_cats'
 	);
 
 	// Get templates
 	$args = array(
-		'post_type' => 'dslc_templates',
-		'post_status' => 'any',
+		'post_type'      => 'dslc_templates',
+		'post_status'    => 'any',
 		'posts_per_page' => -1,
-		'meta_key' => 'dslc_template_for',
-		'meta_value' => $dslc_template_for[$taxonomy],
-		'orderby' => 'meta_value'
+		'meta_key'       => 'dslc_template_for',
+		'meta_value'     => $dslc_template_for[ $taxonomy ],
+		'orderby'        => 'meta_value',
 	);
 
 	$templates = get_posts( $args );
@@ -557,11 +557,11 @@ function dslc_taxonomy_add_new_meta_field( $taxonomy ) {
 		}
 
 		$dslc_custom_options = get_option( 'dslc_custom_options_templatesforcpt', '' );
-		$option = 'lc_tpl_for_cpt_' . $taxonomy;
+		$option              = 'lc_tpl_for_cpt_' . $taxonomy;
 
 		if ( ! empty( $dslc_custom_options ) ) {
 			if ( array_key_exists( $option, $dslc_custom_options ) ) {
-				$value = $dslc_custom_options[$option];
+				$value = $dslc_custom_options[ $option ];
 
 				if ( 'unique' == $value || 'disabled' == $value ) {
 					return false;
@@ -586,44 +586,44 @@ function dslc_taxonomy_add_new_meta_field( $taxonomy ) {
 					} else {
 						$title = $template->post_title;
 					}
-					
+
 					?>
-					<option value="<?php echo $template->ID; ?>" <?php //if ( $curr_value == $select_option['value'] ) { echo 'selected="selected"';} ?>><?php echo $title; ?></option>
+					<option value="<?php echo $template->ID; ?>" <?php // if ( $curr_value == $select_option['value'] ) { echo 'selected="selected"';} ?>><?php echo $title; ?></option>
 				<?php endforeach; ?>
 			<?php endif; ?>
 		</select>
 		<p class="description"><?php _e( 'Select your LC template', 'live-composer-page-builder' ); ?></p>
 	</div>
-<?php
+	<?php
 }
 
 // Edit term page
 function dslc_taxonomy_edit_meta_field( $term, $taxonomy ) {
 
 	$dslc_template_for = array(
-		'category' => 'post_archive',
+		'category'            => 'post_archive',
 		'dslc_downloads_cats' => 'dslc_downloads_archive',
 		'dslc_galleries_cats' => 'dslc_galleries_archive',
-		'dslc_partners_cats' => 'dslc_partners_archive',
-		'dslc_projects_cats' => 'dslc_projects_archive',
-		'dslc_staff_cats' => 'dslc_staff_archive',
-		//'dslc_testimonials_cats'
+		'dslc_partners_cats'  => 'dslc_partners_archive',
+		'dslc_projects_cats'  => 'dslc_projects_archive',
+		'dslc_staff_cats'     => 'dslc_staff_archive',
+		// 'dslc_testimonials_cats'
 	);
 
 	// Get templates
 	$args = array(
-		'post_type' => 'dslc_templates',
-		'post_status' => 'any',
+		'post_type'      => 'dslc_templates',
+		'post_status'    => 'any',
 		'posts_per_page' => -1,
-		'meta_key' => 'dslc_template_for',
-		'meta_value' => $dslc_template_for[$taxonomy],
-		'orderby' => 'meta_value'
+		'meta_key'       => 'dslc_template_for',
+		'meta_value'     => $dslc_template_for[ $taxonomy ],
+		'orderby'        => 'meta_value',
 	);
 
 	$templates = get_posts( $args );
- 
+
 	// retrieve the existing value(s) for this meta field. This returns an array
-	$term_meta = get_option( "lc_templates_taxonomies" );
+	$term_meta = get_option( 'lc_templates_taxonomies' );
 
 	if ( class_exists( 'LC_TemplatesForCPT' ) ) {
 		if ( 'category' == $taxonomy ) {
@@ -633,11 +633,11 @@ function dslc_taxonomy_edit_meta_field( $term, $taxonomy ) {
 		}
 
 		$dslc_custom_options = get_option( 'dslc_custom_options_templatesforcpt', '' );
-		$option = 'lc_tpl_for_cpt_' . $taxonomy;
+		$option              = 'lc_tpl_for_cpt_' . $taxonomy;
 
 		if ( ! empty( $dslc_custom_options ) ) {
 			if ( array_key_exists( $option, $dslc_custom_options ) ) {
-				$value = $dslc_custom_options[$option];
+				$value = $dslc_custom_options[ $option ];
 
 				if ( 'unique' == $value || 'disabled' == $value ) {
 					return false;
@@ -645,7 +645,7 @@ function dslc_taxonomy_edit_meta_field( $term, $taxonomy ) {
 			}
 		}
 	}
-	
+
 	?>
 	<tr class="form-field">
 	<th scope="row" valign="top"><label for="lc_templates_taxonomy[<?php echo $taxonomy; ?>]"><?php _e( 'LC Templates', 'live-composer-page-builder' ); ?></label></th>
@@ -665,41 +665,46 @@ function dslc_taxonomy_edit_meta_field( $term, $taxonomy ) {
 						}
 
 						$current_template = $template->ID;
-						$template_id = '';
-						$t_id = $term->term_id;
+						$template_id      = '';
+						$t_id             = $term->term_id;
 
 						if ( ! empty( $term_meta ) && array_key_exists( $taxonomy, $term_meta ) ) {
-							if ( array_key_exists( $t_id, $term_meta[$taxonomy] ) ) {
-								$template_id = $term_meta[$taxonomy][$t_id];
+							if ( array_key_exists( $t_id, $term_meta[ $taxonomy ] ) ) {
+								$template_id = $term_meta[ $taxonomy ][ $t_id ];
 							}
 						}
-						
+
 						?>
-						<option value="<?php echo $template->ID; ?>" <?php if ( $current_template == $template_id ) { echo 'selected="selected"';} ?>><?php echo $title; ?></option>
+						<option value="<?php echo $template->ID; ?>" 
+						<?php
+						if ( $current_template == $template_id ) {
+							echo 'selected="selected"';}
+						?>
+						><?php echo $title; ?></option>
 					<?php endforeach; ?>
 				<?php endif; ?>
 			</select>
 			<p class="description"><?php _e( 'Select your LC template', 'live-composer-page-builder' ); ?></p>
 		</td>
 	</tr>
-<?php
+	<?php
 }
 
 // Save extra taxonomy fields callback function.
 function dslc_save_taxonomy_custom_meta( $term_id ) {
 	if ( isset( $_POST['lc_templates_taxonomy'] ) ) {
-		$t_id = $term_id;
-		$term_meta = get_option( "lc_templates_taxonomies" );
-		$cat_keys = array_keys( $_POST['lc_templates_taxonomy'] );
+		$t_id      = $term_id;
+		$term_meta = get_option( 'lc_templates_taxonomies' );
+		$cat_keys  = array_keys( $_POST['lc_templates_taxonomy'] );
 
 		foreach ( $cat_keys as $key ) {
-			if ( isset ( $_POST['lc_templates_taxonomy'][$key] ) ) {
-				$term_meta[$key][$term_id] = $_POST['lc_templates_taxonomy'][$key];
+			if ( isset( $_POST['lc_templates_taxonomy'][ $key ] ) ) {
+				$term_meta[ $key ][ $term_id ] = $_POST['lc_templates_taxonomy'][ $key ];
 			}
 		}
 
 		// Save the option array.
-		update_option( "lc_templates_taxonomies", $term_meta );
+		update_option( 'lc_templates_taxonomies', $term_meta );
 	}
 }
 
@@ -710,57 +715,57 @@ $dslc_category_type_names = array(
 	'dslc_partners_cats',
 	'dslc_projects_cats',
 	'dslc_staff_cats',
-	//'dslc_testimonials_cats'
+	// 'dslc_testimonials_cats'
 );
 
 foreach ( $dslc_category_type_names as $name ) {
 	add_action( "{$name}_edit_form_fields", 'dslc_taxonomy_edit_meta_field', 10, 2 );
 	add_action( "{$name}_add_form_fields", 'dslc_taxonomy_add_new_meta_field', 10, 2 );
-	add_action( "edited_{$name}", 'dslc_save_taxonomy_custom_meta', 10, 2 );  
+	add_action( "edited_{$name}", 'dslc_save_taxonomy_custom_meta', 10, 2 );
 	add_action( "create_{$name}", 'dslc_save_taxonomy_custom_meta', 10, 2 );
- }
+}
 
 // Disable smart (curly) quotes so JSON formatting isn't broken
 function disable_smart_quotes_for_json_fix() {
-    // Remove automatic texturizing (smart quotes, dashes, etc.)
-    remove_filter('the_content', 'wptexturize');
-    remove_filter('the_title', 'wptexturize');
-    remove_filter('the_excerpt', 'wptexturize');
-    remove_filter('widget_text_content', 'wptexturize');
-    remove_filter('term_description', 'wptexturize');
-    remove_filter('comment_text', 'wptexturize');
+	// Remove automatic texturizing (smart quotes, dashes, etc.)
+	remove_filter( 'the_content', 'wptexturize' );
+	remove_filter( 'the_title', 'wptexturize' );
+	remove_filter( 'the_excerpt', 'wptexturize' );
+	remove_filter( 'widget_text_content', 'wptexturize' );
+	remove_filter( 'term_description', 'wptexturize' );
+	remove_filter( 'comment_text', 'wptexturize' );
 
-    // Make sure texturizing never runs
-    add_filter('run_wptexturize', '__return_false');
+	// Make sure texturizing never runs
+	add_filter( 'run_wptexturize', '__return_false' );
 }
-add_action('init', 'disable_smart_quotes_for_json_fix');
+add_action( 'init', 'disable_smart_quotes_for_json_fix' );
 
 /**
  * Conditionally hide the default editor and show the Post Content Meta Box
  * only for pages using Live Composer.
  */
 function dslc_toggle_page_editors() {
-    $post_id = isset( $_GET['post'] ) ? $_GET['post'] : ( isset( $_POST['post_ID'] ) ? $_POST['post_ID'] : false );
-    
-    if ( $post_id && get_post_type( $post_id ) === 'page' ) {
-		// Check if Live Composer has been used on this page
-        $dslc_code = get_post_meta( $post_id, 'dslc_code', true );
-        
-        if ( ! empty( $dslc_code ) ) {
-			// 1. Hide the main WordPress editor (the Rank Math mirror)
-            remove_post_type_support( 'page', 'editor' );
+	$post_id = isset( $_GET['post'] ) ? $_GET['post'] : ( isset( $_POST['post_ID'] ) ? $_POST['post_ID'] : false );
 
-            // 2. Register the Post Content Meta Box
-            add_meta_box(
-                'dslc_post_content_box',
-                __( 'Post Content (Visible in tp-content module)', 'live-composer-page-builder' ),
-                'dslc_post_content_metabox_html',
-                'page',
-                'normal', 
-                'high'      
-            );
-        }
-    }
+	if ( $post_id && get_post_type( $post_id ) === 'page' ) {
+		// Check if Live Composer has been used on this page
+		$dslc_code = get_post_meta( $post_id, 'dslc_code', true );
+
+		if ( ! empty( $dslc_code ) ) {
+			// 1. Hide the main WordPress editor (the Rank Math mirror)
+			remove_post_type_support( 'page', 'editor' );
+
+			// 2. Register the Post Content Meta Box
+			add_meta_box(
+				'dslc_post_content_box',
+				__( 'Post Content (Visible in tp-content module)', 'live-composer-page-builder' ),
+				'dslc_post_content_metabox_html',
+				'page',
+				'normal',
+				'high'
+			);
+		}
+	}
 }
 add_action( 'add_meta_boxes', 'dslc_toggle_page_editors', 9 );
 
@@ -768,7 +773,7 @@ add_action( 'add_meta_boxes', 'dslc_toggle_page_editors', 9 );
  * Output the WYSIWYG editor for dslc_original_post_content.
  */
 function dslc_post_content_metabox_html( $post ) {
-    $content = get_post_meta( $post->ID, 'dslc_original_post_content', true );
+	$content = get_post_meta( $post->ID, 'dslc_original_post_content', true );
 	if ( empty( $content ) ) {
 		$db_content = $post->post_content;
 
@@ -780,27 +785,33 @@ function dslc_post_content_metabox_html( $post ) {
 		}
 	}
 
-    wp_nonce_field( 'dslc_post_content_nonce', 'dslc_post_content_nonce_field' );
+	wp_nonce_field( 'dslc_post_content_nonce', 'dslc_post_content_nonce_field' );
 
-    wp_editor( $content, 'dslc_original_post_content_editor', array(
-        'textarea_name' => 'dslc_original_post_content',
-        'media_buttons' => true,
-        'tinymce'       => true,
-        'quicktags'     => true
-    ) );
+	wp_editor(
+		$content,
+		'dslc_original_post_content_editor',
+		array(
+			'textarea_name' => 'dslc_original_post_content',
+			'media_buttons' => true,
+			'tinymce'       => true,
+			'quicktags'     => true,
+		)
+	);
 }
 
 /**
  * Save the Post Content Meta Box data.
  */
 function dslc_save_post_content_metabox( $post_id ) {
-    if ( ! isset( $_POST['dslc_post_content_nonce_field'] ) || ! wp_verify_nonce( $_POST['dslc_post_content_nonce_field'], 'dslc_post_content_nonce' ) ) {
-        return;
-    }
-    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+	if ( ! isset( $_POST['dslc_post_content_nonce_field'] ) || ! wp_verify_nonce( $_POST['dslc_post_content_nonce_field'], 'dslc_post_content_nonce' ) ) {
+		return;
+	}
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return;
+	}
 
-    if ( isset( $_POST['dslc_original_post_content'] ) ) {
-        update_post_meta( $post_id, 'dslc_original_post_content', $_POST['dslc_original_post_content'] );
-    }
+	if ( isset( $_POST['dslc_original_post_content'] ) ) {
+		update_post_meta( $post_id, 'dslc_original_post_content', $_POST['dslc_original_post_content'] );
+	}
 }
 add_action( 'save_post', 'dslc_save_post_content_metabox' );

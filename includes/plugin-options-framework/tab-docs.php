@@ -25,9 +25,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			</div>
 			<div class="dslc-panel-column">
-				<h3><a href="https://support.livecomposerplugin.com/hc/985731792/category/37" target="_blank"><span class="dashicons dashicons-admin-generic"></span> <?php _e( "Developer Docs", 'live-composer-page-builder' ); ?></a></h3>
+				<h3><a href="https://support.livecomposerplugin.com/hc/985731792/category/37" target="_blank"><span class="dashicons dashicons-admin-generic"></span> <?php _e( 'Developer Docs', 'live-composer-page-builder' ); ?></a></h3>
 				<p><?php _e( 'If you\'re a developer who is interested in building custom modules for Live Composer give a check at the developer documentation.', 'live-composer-page-builder' ); ?></p>
-				<?php /*
+				<?php
+				/*
 				<ul>
 					<li><a href="//livecomposer.help/article/135-how-to-copy-a-page-section-to-another-page/?utm_source=wp-admin&utm_medium=documentation-block&utm_campaign=doc-listing" traget="_blank"><span class="dashicons dashicons-info"></span> Copy/pasting page sections</a></li>
 					<li><a href="//livecomposer.help/article/127-post-templates/?utm_source=wp-admin&utm_medium=documentation-block&utm_campaign=doc-listing" traget="_blank"><span class="dashicons dashicons-info"></span> Post templates usage</a></li>
@@ -36,7 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				?>
 			</div>
 			<div class="dslc-panel-column dslc-panel-last">
-				<h3><a href="//livecomposerplugin.com/support/support-request/?utm_source=wp-admin&utm_medium=documentation-block&utm_campaign=free-support-header" target="_blank"><span class="dashicons dashicons-format-chat"></span> <?php _e( " Support &amp; Community", 'live-composer-page-builder' ); ?></a></h3>
+				<h3><a href="//livecomposerplugin.com/support/support-request/?utm_source=wp-admin&utm_medium=documentation-block&utm_campaign=free-support-header" target="_blank"><span class="dashicons dashicons-format-chat"></span> <?php _e( ' Support &amp; Community', 'live-composer-page-builder' ); ?></a></h3>
 				<p><?php _e( 'If you run into any bugs or issues do let us know.', 'live-composer-page-builder' ); ?></p>
 				<ul>
 					<li><a class="dslc-panel-icon dslc-panel-github" href="https://github.com/live-composer/live-composer-page-builder/issues" traget="_blank"><?php _e( 'Report a bug (not support!)', 'live-composer-page-builder' ); ?></a></li>	

@@ -6,5 +6,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-include DSLC_ST_FRAMEWORK_ABS . '/inc/filters.php';
-include DSLC_ST_FRAMEWORK_ABS . '/inc/functions.php';
+require DSLC_ST_FRAMEWORK_ABS . '/inc/filters.php';
+require DSLC_ST_FRAMEWORK_ABS . '/inc/functions.php';

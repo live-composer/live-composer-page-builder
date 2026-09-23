@@ -19,7 +19,7 @@ class DSLC_Cache {
 	 * for the whole session. These properties defined based on data
 	 * from the database and are expensite.
 	 */
-	private static $init = false;
+	private static $init    = false;
 	private static $enabled = true; // Cache enabled/disabled.
 	private static $cache;
 	private $type = 'html'; // Cache for code type: html (default), css, font.
@@ -27,18 +27,17 @@ class DSLC_Cache {
 	/**
 	 * Here is the structure of the cache array.
 	 * _transient_lc_cache [
-	 * 	– html
-	 * 	–– post_id
-	 * 	–– post_id
+	 *  – html
+	 *  –– post_id
+	 *  –– post_id
 	 *
-	 * 	– css
-	 * 	–– md5 hashtag – based on html code for the current css code.
-	 * 	–– md5 hashtag
+	 *  – css
+	 *  –– md5 hashtag – based on html code for the current css code.
+	 *  –– md5 hashtag
 	 *
 	 *  – fonts
 	 * ]
 	 */
-
 	function __construct( $cache_type = '' ) {
 		if ( ! self::$init ) {
 			$caching_engine_setting = dslc_get_option(
@@ -60,7 +59,7 @@ class DSLC_Cache {
 
 				// Disable the caching option in the plugin settings.
 				if ( 'enabled' === $caching_engine_setting ) {
-					$dslc_plugin_options = get_option( 'dslc_plugin_options' );
+					$dslc_plugin_options                      = get_option( 'dslc_plugin_options' );
 					$dslc_plugin_options['lc_caching_engine'] = 'disabled';
 					update_option( 'dslc_plugin_options', $dslc_plugin_options );
 				}
@@ -137,7 +136,7 @@ class DSLC_Cache {
 		*/
 
 		/*
-		 Remove previous version of HTML render from page cache.
+		Remove previous version of HTML render from page cache.
 		if ( isset( self::$cache['html'][ $post_id ] ) ) {
 			unset( self::$cache['html'][ $post_id ] );
 		}
@@ -152,10 +151,10 @@ class DSLC_Cache {
 		actual information and template designs to updates properly.
 		*/
 		self::$cache = array(
-				'html' => array(),
-				'css' => array(),
-				'fonts' => array(),
-			);
+			'html'  => array(),
+			'css'   => array(),
+			'fonts' => array(),
+		);
 		$this->update_db();
 	}
 
@@ -183,7 +182,9 @@ class DSLC_Cache {
 	public function set_cache( $code_to_cache = false, $identificator = false, $cache_type = false ) {
 		if ( self::$enabled && $code_to_cache ) {
 
-			if(!is_array(self::$cache)) self::$cache = [];
+			if ( ! is_array( self::$cache ) ) {
+				self::$cache = array();
+			}
 
 			if ( ! $cache_type ) {
 				$cache_type = $this->type;

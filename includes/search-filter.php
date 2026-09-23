@@ -32,7 +32,6 @@ if ( ! function_exists( 'dslc_search_filter_join' ) ) {
 		}
 
 		return $join;
-
 	}
 } add_filter( 'posts_join', 'dslc_search_filter_join' );
 
@@ -56,7 +55,7 @@ if ( ! function_exists( 'dslc_search_filter_request' ) ) {
 		if ( is_search() && false !== $last_occurence_position && ! empty( $wp_query->query_vars['s'] ) ) {
 
 			// Get the usual WP checks like post status
-			$end_pos_where = 5 + $last_occurence_position;
+			$end_pos_where  = 5 + $last_occurence_position;
 			$request_append = substr( $where, $end_pos_where );
 
 			// Get the search term(s)
@@ -80,7 +79,6 @@ if ( ! function_exists( 'dslc_search_filter_request' ) ) {
 
 		// Pass it back to WP
 		return $where;
-
 	}
 }// End if().
 	add_filter( 'posts_where', 'dslc_search_filter_request' );
@@ -102,6 +100,5 @@ if ( ! function_exists( 'dslc_search_filter_distinct' ) ) {
 		}
 
 		return $distinct;
-
 	}
 } add_filter( 'posts_distinct', 'dslc_search_filter_distinct' );
