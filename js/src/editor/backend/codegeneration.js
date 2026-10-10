@@ -654,10 +654,17 @@ export const editableContentCodeGeneration = ( dslcField ) => {
 		return false;
 	}
 
-	const dslcModule = dslcField.closest('.dslc-module-front');
-	const moduleEl = dslcModule[0];
-	const dslcContent = dslcField.html().trim().replace(/<textarea/g, '<lctextarea').replace(/<\/textarea/g, '</lctextarea');
-	const dslcFieldID = dslcField.data('id');
+	const dslcModule = dslcField.closest('.dslc-module-front'); 
+	const moduleEl = dslcModule[0]; 
+	let dslcContent = dslcField.html().trim(); 
+	// Browser auto-inserts a lone <br> when contenteditable is fully emptied. 
+	// Treat that as an empty value so it doesn't get saved as real content. 
+	if ( /^<br\s*\/?>$/i.test( dslcContent ) ) { 
+	   dslcContent = ''; 
+	} 
+
+	dslcContent = dslcContent.replace(/<textarea/g, '<lctextarea').replace(/<\/textarea/g, '</lctextarea'); 
+	const dslcFieldID = dslcField.data('id'); 
 
 	// Update module ID in raw base64 code (dslc_code) of the module
 	LiveComposer.Utils.update_module_property_raw( moduleEl, dslcFieldID, dslcContent );
