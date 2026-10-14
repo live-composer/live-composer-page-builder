@@ -341,10 +341,11 @@ class DSLC_Navigation extends DSLC_Module {
 				'action' => 'open',
 				'section' => 'styling',
 			),
+
 			array(
-				'id' => 'css_margin_unit',
+				'id' => 'css_margin_top_unit',
 				'std' => 'px',
-				'label' => __( 'Unit', 'live-composer-page-builder' ),
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -361,6 +362,7 @@ class DSLC_Navigation extends DSLC_Module {
 				'affect_on_change_el' => '',
 				'affect_on_change_rule' => '',
 			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_margin_top',
@@ -374,6 +376,28 @@ class DSLC_Navigation extends DSLC_Module {
 				'section' => 'styling',
 				'ext' => 'px',
 			),
+
+			array(
+				'id' => 'css_margin_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_margin_bottom',
@@ -387,6 +411,28 @@ class DSLC_Navigation extends DSLC_Module {
 				'section' => 'styling',
 				'ext' => 'px',
 			),
+
+			array(
+				'id' => 'css_margin_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_margin_right',
@@ -400,6 +446,28 @@ class DSLC_Navigation extends DSLC_Module {
 				'section' => 'styling',
 				'ext' => 'px',
 			),
+
+			array(
+				'id' => 'css_margin_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_margin_left',
@@ -413,6 +481,7 @@ class DSLC_Navigation extends DSLC_Module {
 				'section' => 'styling',
 				'ext' => 'px',
 			),
+
 			array(
 				'id' => 'css_margin_group',
 				'type' => 'group',
@@ -458,10 +527,32 @@ class DSLC_Navigation extends DSLC_Module {
 				'action' => 'open',
 				'section' => 'styling',
 			),
+
 			array(
 				'id' => 'css_main_padding_unit',
 				'std' => 'px',
 				'label' => __( 'Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
+			array(
+				'id' => 'css_main_padding_top_unit',
+				'std' => 'px',
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -492,6 +583,27 @@ class DSLC_Navigation extends DSLC_Module {
 				'section' => 'styling',
 				'ext' => 'px',
 			),
+
+			array(
+				'id' => 'css_main_padding_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_main_padding_bottom',
@@ -505,6 +617,27 @@ class DSLC_Navigation extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-bottom',
 				'section' => 'styling',
 				'ext' => 'px',
+			),
+
+			array(
+				'id' => 'css_main_padding_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
 			),
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
@@ -520,6 +653,27 @@ class DSLC_Navigation extends DSLC_Module {
 				'section' => 'styling',
 				'ext' => 'px',
 			),
+
+			array(
+				'id' => 'css_main_padding_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_main_padding_right',
@@ -534,6 +688,7 @@ class DSLC_Navigation extends DSLC_Module {
 				'section' => 'styling',
 				'ext' => 'px',
 			),
+
 			array(
 				'id' => 'css_main_padding_group',
 				'type' => 'group',
@@ -824,103 +979,193 @@ class DSLC_Navigation extends DSLC_Module {
 				'ext' => 'px',
 			),
 			array(
-        'label' => __( 'Item - Padding', 'live-composer-page-builder' ),
-        'id' => 'css_item_padding_group',
-        'type' => 'group',
-        'action' => 'open',
-        'section' => 'styling',
-        'tab' => __( 'Item', 'live-composer-page-builder' ),
-    ),
-    array(
-        'id' => 'css_item_padding_unit',
-        'std' => 'px',
-        'label' => __( 'Unit', 'live-composer-page-builder' ),
-        'type' => 'select',
-        'choices' => array(
-            array(
-                'label' => 'px',
-                'value' => 'px',
-            ),
-            array(
-                'label' => '%',
-                'value' => '%',
-            ),
-        ),
-        'section' => 'styling',
-        'tab' => __( 'Item', 'live-composer-page-builder' ),
-    ),
-    // Padding Top (Derived from Padding Vertical)
-    array(
-        'label' => __( 'Top', 'live-composer-page-builder' ),
-        'id' => 'css_item_padding_top',
-        'onlypositive' => true,
-        'min' => 0,
-        'max' => 2000,
-        'std' => '0',
-        'type' => 'slider',
-        'refresh_on_change' => false,
-        'affect_on_change_el' => '.dslc-navigation .menu > li > a',
-        'affect_on_change_rule' => 'padding-top',
-        'section' => 'styling',
-        'ext' => 'px',
-        'tab' => __( 'Item', 'live-composer-page-builder' ),
-    ),
-    // Padding Bottom (Derived from Padding Vertical)
-    array(
-        'label' => __( 'Bottom', 'live-composer-page-builder' ),
-        'id' => 'css_item_padding_bottom',
-        'onlypositive' => true,
-        'min' => 0,
-        'max' => 2000,
-        'std' => '0',
-        'type' => 'slider',
-        'refresh_on_change' => false,
-        'affect_on_change_el' => '.dslc-navigation .menu > li > a',
-        'affect_on_change_rule' => 'padding-bottom',
-        'section' => 'styling',
-        'ext' => 'px',
-        'tab' => __( 'Item', 'live-composer-page-builder' ),
-    ),
-    // Padding Left (Derived from Padding Horizontal)
-    array(
-        'label' => __( 'Left', 'live-composer-page-builder' ),
-        'id' => 'css_item_padding_left',
-        'onlypositive' => true, // Enforcing min 0 due to 'onlypositive' constraint from source fields
-        'min' => 0,
-        'max' => 2000,
-        'std' => '0',
-        'type' => 'slider',
-        'refresh_on_change' => false,
-        'affect_on_change_el' => '.dslc-navigation .menu > li > a',
-        'affect_on_change_rule' => 'padding-left',
-        'section' => 'styling',
-        'ext' => 'px',
-        'tab' => __( 'Item', 'live-composer-page-builder' ),
-    ),
-    // Padding Right (Derived from Padding Horizontal)
-    array(
-        'label' => __( 'Right', 'live-composer-page-builder' ),
-        'id' => 'css_item_padding_right',
-        'onlypositive' => true, // Enforcing min 0 due to 'onlypositive' constraint from source fields
-        'min' => 0,
-        'max' => 2000,
-        'std' => '0',
-        'type' => 'slider',
-        'refresh_on_change' => false,
-        'affect_on_change_el' => '.dslc-navigation .menu > li > a',
-        'affect_on_change_rule' => 'padding-right',
-        'section' => 'styling',
-        'ext' => 'px',
-        'tab' => __( 'Item', 'live-composer-page-builder' ),
-    ),
-    array(
-        'label' => __( 'Item - Padding', 'live-composer-page-builder' ),
-        'id' => 'css_item_padding_group',
-        'type' => 'group',
-        'action' => 'close',
-        'section' => 'styling',
-        'tab' => __( 'Item', 'live-composer-page-builder' ),
-    ),
+				'label' => __( 'Item - Padding', 'live-composer-page-builder' ),
+				'id' => 'css_item_padding_group',
+				'type' => 'group',
+				'action' => 'open',
+				'section' => 'styling',
+				'tab' => __( 'Item', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'id' => 'css_item_padding_unit',
+				'std' => 'px',
+				'label' => __( 'Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'tab' => __( 'Item', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'id' => 'css_item_padding_top_unit',
+				'std' => 'px',
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Item', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'label' => __( 'Top', 'live-composer-page-builder' ),
+				'id' => 'css_item_padding_top',
+				'onlypositive' => true,
+				'min' => 0,
+				'max' => 2000,
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-navigation .menu > li > a',
+				'affect_on_change_rule' => 'padding-top',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Item', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'id' => 'css_item_padding_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Item', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'label' => __( 'Bottom', 'live-composer-page-builder' ),
+				'id' => 'css_item_padding_bottom',
+				'onlypositive' => true,
+				'min' => 0,
+				'max' => 2000,
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-navigation .menu > li > a',
+				'affect_on_change_rule' => 'padding-bottom',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Item', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'id' => 'css_item_padding_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Item', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'label' => __( 'Left', 'live-composer-page-builder' ),
+				'id' => 'css_item_padding_left',
+				'onlypositive' => true,
+				'min' => 0,
+				'max' => 2000,
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-navigation .menu > li > a',
+				'affect_on_change_rule' => 'padding-left',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Item', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'id' => 'css_item_padding_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Item', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'label' => __( 'Right', 'live-composer-page-builder' ),
+				'id' => 'css_item_padding_right',
+				'onlypositive' => true,
+				'min' => 0,
+				'max' => 2000,
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-navigation .menu > li > a',
+				'affect_on_change_rule' => 'padding-right',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Item', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'label' => __( 'Item - Padding', 'live-composer-page-builder' ),
+				'id' => 'css_item_padding_group',
+				'type' => 'group',
+				'action' => 'close',
+				'section' => 'styling',
+				'tab' => __( 'Item', 'live-composer-page-builder' ),
+			),
 			array(
 				'label' => __( 'Text Transform', 'live-composer-page-builder' ),
 				'id' => 'css_item_text_transform',
@@ -1274,103 +1519,193 @@ class DSLC_Navigation extends DSLC_Module {
 				'tab' => __( 'Subnav', 'live-composer-page-builder' ),
 			),
 			array(
-        'label' => __( 'Padding', 'live-composer-page-builder' ),
-        'id' => 'css_subnav_padding_group',
-        'type' => 'group',
-        'action' => 'open',
-        'section' => 'styling',
-        'tab' => __( 'Subnav', 'live-composer-page-builder' ),
-    ),
-    array(
-        'id' => 'css_subnav_padding_unit',
-        'std' => 'px',
-        'label' => __( 'Unit', 'live-composer-page-builder' ),
-        'type' => 'select',
-        'choices' => array(
-            array(
-                'label' => 'px',
-                'value' => 'px',
-            ),
-            array(
-                'label' => '%',
-                'value' => '%',
-            ),
-        ),
-        'section' => 'styling',
-        'tab' => __( 'Subnav', 'live-composer-page-builder' ),
-    ),
-    // Padding Top (Derived from Padding Vertical)
-    array(
-        'label' => __( 'Top', 'live-composer-page-builder' ),
-        'id' => 'css_subnav_padding_top',
-        'onlypositive' => true,
-        'min' => 0,
-        'max' => 2000,
-        'std' => '10',
-        'type' => 'slider',
-        'refresh_on_change' => false,
-        'affect_on_change_el' => '.dslc-navigation .menu ul',
-        'affect_on_change_rule' => 'padding-top',
-        'section' => 'styling',
-        'ext' => 'px',
-        'tab' => __( 'Subnav', 'live-composer-page-builder' ),
-    ),
-    // Padding Bottom (Derived from Padding Vertical)
-    array(
-        'label' => __( 'Bottom', 'live-composer-page-builder' ),
-        'id' => 'css_subnav_padding_bottom',
-        'onlypositive' => true,
-        'min' => 0,
-        'max' => 2000,
-        'std' => '10',
-        'type' => 'slider',
-        'refresh_on_change' => false,
-        'affect_on_change_el' => '.dslc-navigation .menu ul',
-        'affect_on_change_rule' => 'padding-bottom',
-        'section' => 'styling',
-        'ext' => 'px',
-        'tab' => __( 'Subnav', 'live-composer-page-builder' ),
-    ),
-    // Padding Left (Derived from Padding Horizontal)
-    array(
-        'label' => __( 'Left', 'live-composer-page-builder' ),
-        'id' => 'css_subnav_padding_left',
-        'onlypositive' => true,
-        'min' => 0,
-        'max' => 2000,
-        'std' => '10',
-        'type' => 'slider',
-        'refresh_on_change' => false,
-        'affect_on_change_el' => '.dslc-navigation .menu ul',
-        'affect_on_change_rule' => 'padding-left',
-        'section' => 'styling',
-        'ext' => 'px',
-        'tab' => __( 'Subnav', 'live-composer-page-builder' ),
-    ),
-    // Padding Right (Derived from Padding Horizontal)
-    array(
-        'label' => __( 'Right', 'live-composer-page-builder' ),
-        'id' => 'css_subnav_padding_right',
-        'onlypositive' => true,
-        'min' => 0,
-        'max' => 2000,
-        'std' => '10',
-        'type' => 'slider',
-        'refresh_on_change' => false,
-        'affect_on_change_el' => '.dslc-navigation .menu ul',
-        'affect_on_change_rule' => 'padding-right',
-        'section' => 'styling',
-        'ext' => 'px',
-        'tab' => __( 'Subnav', 'live-composer-page-builder' ),
-    ),
-    array(
-        'label' => __( 'Padding', 'live-composer-page-builder' ),
-        'id' => 'css_subnav_padding_group',
-        'type' => 'group',
-        'action' => 'close',
-        'section' => 'styling',
-        'tab' => __( 'Subnav', 'live-composer-page-builder' ),
-    ),
+				'label' => __( 'Padding', 'live-composer-page-builder' ),
+				'id' => 'css_subnav_padding_group',
+				'type' => 'group',
+				'action' => 'open',
+				'section' => 'styling',
+				'tab' => __( 'Subnav', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'id' => 'css_subnav_padding_unit',
+				'std' => 'px',
+				'label' => __( 'Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'tab' => __( 'Subnav', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'id' => 'css_subnav_padding_top_unit',
+				'std' => 'px',
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Subnav', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'label' => __( 'Top', 'live-composer-page-builder' ),
+				'id' => 'css_subnav_padding_top',
+				'onlypositive' => true,
+				'min' => 0,
+				'max' => 2000,
+				'std' => '10',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-navigation .menu ul',
+				'affect_on_change_rule' => 'padding-top',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Subnav', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'id' => 'css_subnav_padding_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Subnav', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'label' => __( 'Bottom', 'live-composer-page-builder' ),
+				'id' => 'css_subnav_padding_bottom',
+				'onlypositive' => true,
+				'min' => 0,
+				'max' => 2000,
+				'std' => '10',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-navigation .menu ul',
+				'affect_on_change_rule' => 'padding-bottom',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Subnav', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'id' => 'css_subnav_padding_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Subnav', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'label' => __( 'Left', 'live-composer-page-builder' ),
+				'id' => 'css_subnav_padding_left',
+				'onlypositive' => true,
+				'min' => 0,
+				'max' => 2000,
+				'std' => '10',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-navigation .menu ul',
+				'affect_on_change_rule' => 'padding-left',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Subnav', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'id' => 'css_subnav_padding_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Subnav', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'label' => __( 'Right', 'live-composer-page-builder' ),
+				'id' => 'css_subnav_padding_right',
+				'onlypositive' => true,
+				'min' => 0,
+				'max' => 2000,
+				'std' => '10',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-navigation .menu ul',
+				'affect_on_change_rule' => 'padding-right',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Subnav', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'label' => __( 'Padding', 'live-composer-page-builder' ),
+				'id' => 'css_subnav_padding_group',
+				'type' => 'group',
+				'action' => 'close',
+				'section' => 'styling',
+				'tab' => __( 'Subnav', 'live-composer-page-builder' ),
+			),
 			/**
 			 * Styling - Item
 			 */
@@ -1651,103 +1986,165 @@ class DSLC_Navigation extends DSLC_Module {
 				'ext' => 'px',
 			),
 			array(
-        'label' => __( 'Padding', 'live-composer-page-builder' ),
-        'id' => 'css_subnav_item_padding_group',
-        'type' => 'group',
-        'action' => 'open',
-        'section' => 'styling',
-        'tab' => __( 'Subnav item', 'live-composer-page-builder' ),
-    ),
-    array(
-        'id' => 'css_subnav_item_padding_unit',
-        'std' => 'px',
-        'label' => __( 'Unit', 'live-composer-page-builder' ),
-        'type' => 'select',
-        'choices' => array(
-            array(
-                'label' => 'px',
-                'value' => 'px',
-            ),
-            array(
-                'label' => '%',
-                'value' => '%',
-            ),
-        ),
-        'section' => 'styling',
-        'tab' => __( 'Subnav item', 'live-composer-page-builder' ),
-    ),
-    // Padding Top (Derived from Padding Vertical)
-    array(
-        'label' => __( 'Top', 'live-composer-page-builder' ),
-        'id' => 'css_subnav_item_padding_top',
-        'onlypositive' => true,
-        'min' => 0,
-        'max' => 2000,
-        'std' => '17',
-        'type' => 'slider',
-        'refresh_on_change' => false,
-        'affect_on_change_el' => '.dslc-navigation .menu ul li a',
-        'affect_on_change_rule' => 'padding-top',
-        'section' => 'styling',
-        'ext' => 'px',
-        'tab' => __( 'Subnav item', 'live-composer-page-builder' ),
-    ),
-    // Padding Bottom (Derived from Padding Vertical)
-    array(
-        'label' => __( 'Bottom', 'live-composer-page-builder' ),
-        'id' => 'css_subnav_item_padding_bottom',
-        'onlypositive' => true,
-        'min' => 0,
-        'max' => 2000,
-        'std' => '17',
-        'type' => 'slider',
-        'refresh_on_change' => false,
-        'affect_on_change_el' => '.dslc-navigation .menu ul li a',
-        'affect_on_change_rule' => 'padding-bottom',
-        'section' => 'styling',
-        'ext' => 'px',
-        'tab' => __( 'Subnav item', 'live-composer-page-builder' ),
-    ),
-    // Padding Left (Derived from Padding Horizontal)
-    array(
-        'label' => __( 'Left', 'live-composer-page-builder' ),
-        'id' => 'css_subnav_item_padding_left',
-        'onlypositive' => true,
-        'min' => 0,
-        'max' => 2000,
-        'std' => '0',
-        'type' => 'slider',
-        'refresh_on_change' => false,
-        'affect_on_change_el' => '.dslc-navigation .menu ul li a',
-        'affect_on_change_rule' => 'padding-left',
-        'section' => 'styling',
-        'ext' => 'px',
-        'tab' => __( 'Subnav item', 'live-composer-page-builder' ),
-    ),
-    // Padding Right (Derived from Padding Horizontal)
-    array(
-        'label' => __( 'Right', 'live-composer-page-builder' ),
-        'id' => 'css_subnav_item_padding_right',
-        'onlypositive' => true,
-        'min' => 0,
-        'max' => 2000,
-        'std' => '0',
-        'type' => 'slider',
-        'refresh_on_change' => false,
-        'affect_on_change_el' => '.dslc-navigation .menu ul li a',
-        'affect_on_change_rule' => 'padding-right',
-        'section' => 'styling',
-        'ext' => 'px',
-        'tab' => __( 'Subnav item', 'live-composer-page-builder' ),
-    ),
-    array(
-        'label' => __( 'Padding', 'live-composer-page-builder' ),
-        'id' => 'css_subnav_item_padding_group',
-        'type' => 'group',
-        'action' => 'close',
-        'section' => 'styling',
-        'tab' => __( 'Subnav item', 'live-composer-page-builder' ),
-    ),
+				'label' => __( 'Padding', 'live-composer-page-builder' ),
+				'id' => 'css_subnav_item_padding_group',
+				'type' => 'group',
+				'action' => 'open',
+				'section' => 'styling',
+				'tab' => __( 'Subnav item', 'live-composer-page-builder' ),
+			),
+			array(
+				'id' => 'css_subnav_item_padding_top_unit',
+				'std' => 'px',
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Subnav item', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Top', 'live-composer-page-builder' ),
+				'id' => 'css_subnav_item_padding_top',
+				'onlypositive' => true,
+				'min' => 0,
+				'max' => 2000,
+				'std' => '17',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-navigation .menu ul li a',
+				'affect_on_change_rule' => 'padding-top',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Subnav item', 'live-composer-page-builder' ),
+			),
+			array(
+				'id' => 'css_subnav_item_padding_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Subnav item', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Bottom', 'live-composer-page-builder' ),
+				'id' => 'css_subnav_item_padding_bottom',
+				'onlypositive' => true,
+				'min' => 0,
+				'max' => 2000,
+				'std' => '17',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-navigation .menu ul li a',
+				'affect_on_change_rule' => 'padding-bottom',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Subnav item', 'live-composer-page-builder' ),
+			),
+			array(
+				'id' => 'css_subnav_item_padding_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Subnav item', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Left', 'live-composer-page-builder' ),
+				'id' => 'css_subnav_item_padding_left',
+				'onlypositive' => true,
+				'min' => 0,
+				'max' => 2000,
+				'std' => '17',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-navigation .menu ul li a',
+				'affect_on_change_rule' => 'padding-left',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Subnav item', 'live-composer-page-builder' ),
+			),
+			array(
+				'id' => 'css_subnav_item_padding_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Subnav item', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Right', 'live-composer-page-builder' ),
+				'id' => 'css_subnav_item_padding_right',
+				'onlypositive' => true,
+				'min' => 0,
+				'max' => 2000,
+				'std' => '17',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-navigation .menu ul li a',
+				'affect_on_change_rule' => 'padding-right',
+				'section' => 'styling',
+				'ext' => 'px',
+				'tab' => __( 'Subnav item', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Padding', 'live-composer-page-builder' ),
+				'id' => 'css_subnav_item_padding_group',
+				'type' => 'group',
+				'action' => 'close',
+				'section' => 'styling',
+				'tab' => __( 'Subnav item', 'live-composer-page-builder' ),
+			),
 			array(
 				'label' => __( 'Text Transform', 'live-composer-page-builder' ),
 				'id' => 'css_subnav_item_text_transform',
@@ -1830,10 +2227,11 @@ class DSLC_Navigation extends DSLC_Module {
 				'section' => 'responsive',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'id' => 'css_res_t_margin_unit',
+				'id' => 'css_res_t_margin_top_unit',
 				'std' => 'px',
-				'label' => __( 'Unit', 'live-composer-page-builder' ),
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -1851,6 +2249,7 @@ class DSLC_Navigation extends DSLC_Module {
 				'affect_on_change_el' => '',
 				'affect_on_change_rule' => '',
 			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_margin_top',
@@ -1865,6 +2264,29 @@ class DSLC_Navigation extends DSLC_Module {
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
+
+			array(
+				'id' => 'css_res_t_margin_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_margin_bottom',
@@ -1879,6 +2301,29 @@ class DSLC_Navigation extends DSLC_Module {
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
+
+			array(
+				'id' => 'css_res_t_margin_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_margin_left',
@@ -1893,6 +2338,29 @@ class DSLC_Navigation extends DSLC_Module {
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
+
+			array(
+				'id' => 'css_res_t_margin_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_margin_right',
@@ -1907,6 +2375,7 @@ class DSLC_Navigation extends DSLC_Module {
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
+
 			array(
 				'id' => 'css_res_t_margin_group',
 				'type' => 'group',
@@ -1977,10 +2446,11 @@ class DSLC_Navigation extends DSLC_Module {
 				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'id' => 'css__res_p_margin_unit',
+				'id' => 'css_res_p_margin_top_unit',
 				'std' => 'px',
-				'label' => __( 'Unit', 'live-composer-page-builder' ),
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -1998,6 +2468,7 @@ class DSLC_Navigation extends DSLC_Module {
 				'affect_on_change_el' => '',
 				'affect_on_change_rule' => '',
 			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_margin_top',
@@ -2012,6 +2483,29 @@ class DSLC_Navigation extends DSLC_Module {
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
+
+			array(
+				'id' => 'css_res_p_margin_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_margin_bottom',
@@ -2026,6 +2520,29 @@ class DSLC_Navigation extends DSLC_Module {
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
+
+			array(
+				'id' => 'css_res_p_margin_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_margin_left',
@@ -2040,6 +2557,29 @@ class DSLC_Navigation extends DSLC_Module {
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
+
+			array(
+				'id' => 'css_res_p_margin_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_margin_right',
@@ -2054,6 +2594,7 @@ class DSLC_Navigation extends DSLC_Module {
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
+
 			array(
 				'id' => 'css__res_p_margin_group',
 				'type' => 'group',

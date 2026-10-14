@@ -175,10 +175,11 @@ class DSLC_Logo extends DSLC_Module {
 				'action' => 'open',
 				'section' => 'styling',
 			),
+
 			array(
-				'id' => 'css_margin_unit',
+				'id' => 'css_margin_top_unit',
 				'std' => 'px',
-				'label' => __( 'Unit', 'live-composer-page-builder' ),
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -195,6 +196,7 @@ class DSLC_Logo extends DSLC_Module {
 				'affect_on_change_el' => '',
 				'affect_on_change_rule' => '',
 			),
+
 				array(
 					'label' => __( 'Top', 'live-composer-page-builder' ),
 					'id' => 'css_margin_top',
@@ -208,6 +210,28 @@ class DSLC_Logo extends DSLC_Module {
 					'section' => 'styling',
 					'ext' => 'px',
 				),
+
+			array(
+				'id' => 'css_margin_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 				array(
 					'label' => __( 'Right', 'live-composer-page-builder' ),
 					'id' => 'css_margin_right',
@@ -221,6 +245,28 @@ class DSLC_Logo extends DSLC_Module {
 					'section' => 'styling',
 					'ext' => 'px',
 				),
+
+			array(
+				'id' => 'css_margin_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 				array(
 					'label' => __( 'Bottom', 'live-composer-page-builder' ),
 					'id' => 'css_margin_bottom',
@@ -234,6 +280,28 @@ class DSLC_Logo extends DSLC_Module {
 					'section' => 'styling',
 					'ext' => 'px',
 				),
+
+			array(
+				'id' => 'css_margin_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 				array(
 					'label' => __( 'Left', 'live-composer-page-builder' ),
 					'id' => 'css_margin_left',
@@ -247,6 +315,7 @@ class DSLC_Logo extends DSLC_Module {
 					'section' => 'styling',
 					'ext' => 'px',
 				),
+
 			array(
 				'id' => 'css_margin_group',
 				'type' => 'group',
@@ -280,58 +349,151 @@ class DSLC_Logo extends DSLC_Module {
 				'affect_on_change_el' => '',
 				'affect_on_change_rule' => '',
 			),
-				array(
-					'label' => __( 'Top', 'live-composer-page-builder' ),
-					'id' => 'css_padding_top',
-					'std' => '0',
-					'min' => -2000,
-					'max' => 2000,
-					'type' => 'slider',
-					'refresh_on_change' => false,
-					'affect_on_change_el' => '.dslc-logo',
-					'affect_on_change_rule' => 'padding-top',
-					'section' => 'styling',
-					'ext' => 'px',
+
+			array(
+				'id' => 'css_padding_top_unit',
+				'std' => 'px',
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
 				),
-				array(
-					'label' => __( 'Right', 'live-composer-page-builder' ),
-					'id' => 'css_padding_right',
-					'std' => '0',
-					'min' => -2000,
-					'max' => 2000,
-					'type' => 'slider',
-					'refresh_on_change' => false,
-					'affect_on_change_el' => '.dslc-logo',
-					'affect_on_change_rule' => 'padding-right',
-					'section' => 'styling',
-					'ext' => 'px',
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
+			array(
+				'label' => __( 'Top', 'live-composer-page-builder' ),
+				'id' => 'css_padding_top',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '0',
+				'min' => -2000,
+				'max' => 2000,
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-logo',
+				'affect_on_change_rule' => 'padding-top',
+				'section' => 'styling',
+				'ext' => 'px',
+			),
+
+			array(
+				'id' => 'css_padding_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
 				),
-				array(
-					'label' => __( 'Bottom', 'live-composer-page-builder' ),
-					'id' => 'css_padding_bottom',
-					'std' => '0',
-					'min' => -2000,
-					'max' => 2000,
-					'type' => 'slider',
-					'refresh_on_change' => false,
-					'affect_on_change_el' => '.dslc-logo',
-					'affect_on_change_rule' => 'padding-bottom',
-					'section' => 'styling',
-					'ext' => 'px',
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
+			array(
+				'label' => __( 'Right', 'live-composer-page-builder' ),
+				'id' => 'css_padding_right',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '0',
+				'min' => -2000,
+				'max' => 2000,
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-logo',
+				'affect_on_change_rule' => 'padding-right',
+				'section' => 'styling',
+				'ext' => 'px',
+			),
+
+			array(
+				'id' => 'css_padding_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
 				),
-				array(
-					'label' => __( 'Left', 'live-composer-page-builder' ),
-					'id' => 'css_padding_left',
-					'std' => '0',
-					'min' => -2000,
-					'max' => 2000,
-					'type' => 'slider',
-					'refresh_on_change' => false,
-					'affect_on_change_el' => '.dslc-logo',
-					'affect_on_change_rule' => 'padding-left',
-					'section' => 'styling',
-					'ext' => 'px',
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
+			array(
+				'label' => __( 'Bottom', 'live-composer-page-builder' ),
+				'id' => 'css_padding_bottom',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '0',
+				'min' => -2000,
+				'max' => 2000,
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-logo',
+				'affect_on_change_rule' => 'padding-bottom',
+				'section' => 'styling',
+				'ext' => 'px',
+			),
+
+			array(
+				'id' => 'css_padding_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
 				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
+			array(
+				'label' => __( 'Left', 'live-composer-page-builder' ),
+				'id' => 'css_padding_left',
+				'onlypositive' => true, // Value can't be negative.
+				'std' => '0',
+				'min' => -2000,
+				'max' => 2000,
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-logo',
+				'affect_on_change_rule' => 'padding-left',
+				'section' => 'styling',
+				'ext' => 'px',
+			),
+
 			array(
 				'id' => 'css_padding_group',
 				'type' => 'group',
@@ -502,10 +664,11 @@ class DSLC_Logo extends DSLC_Module {
 				'section' => 'responsive',
 				'tab' => __( 'tablet', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'id' => 'css_res_t_margin_unit',
+				'id' => 'css_res_t_margin_top_unit',
 				'std' => 'px',
-				'label' => __( 'Unit', 'live-composer-page-builder' ),
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -523,6 +686,7 @@ class DSLC_Logo extends DSLC_Module {
 				'affect_on_change_el' => '',
 				'affect_on_change_rule' => '',
 			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_margin_top',
@@ -537,6 +701,29 @@ class DSLC_Logo extends DSLC_Module {
 				'tab' => __( 'tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
+
+			array(
+				'id' => 'css_res_t_margin_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_margin_bottom',
@@ -551,6 +738,29 @@ class DSLC_Logo extends DSLC_Module {
 				'tab' => __( 'tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
+
+			array(
+				'id' => 'css_res_t_margin_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_margin_left',
@@ -565,6 +775,29 @@ class DSLC_Logo extends DSLC_Module {
 				'tab' => __( 'tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
+
+			array(
+				'id' => 'css_res_t_margin_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_margin_right',
@@ -579,6 +812,7 @@ class DSLC_Logo extends DSLC_Module {
 				'tab' => __( 'tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
+
 			array(
 				'id' => 'css__res_t_margin_group',
 				'type' => 'group',
@@ -615,9 +849,33 @@ class DSLC_Logo extends DSLC_Module {
 				'affect_on_change_el' => '',
 				'affect_on_change_rule' => '',
 			),
+
+			array(
+				'id' => 'css_res_t_padding_top_unit',
+				'std' => 'px',
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_padding_top',
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'min' => -2000,
 				'max' => 2000,
@@ -629,9 +887,33 @@ class DSLC_Logo extends DSLC_Module {
 				'tab' => __( 'tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
+
+			array(
+				'id' => 'css_res_t_padding_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_padding_bottom',
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'min' => -2000,
 				'max' => 2000,
@@ -643,9 +925,33 @@ class DSLC_Logo extends DSLC_Module {
 				'tab' => __( 'tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
+
+			array(
+				'id' => 'css_res_t_padding_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_padding_left',
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'min' => -2000,
 				'max' => 2000,
@@ -657,9 +963,33 @@ class DSLC_Logo extends DSLC_Module {
 				'tab' => __( 'tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
+
+			array(
+				'id' => 'css_res_t_padding_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'tab' => __( 'tablet', 'live-composer-page-builder' ),
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_padding_right',
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'min' => -2000,
 				'max' => 2000,
@@ -671,6 +1001,7 @@ class DSLC_Logo extends DSLC_Module {
 				'tab' => __( 'tablet', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
+
 			array(
 				'id' => 'css_res_t_padding_group',
 				'type' => 'group',
@@ -740,10 +1071,11 @@ class DSLC_Logo extends DSLC_Module {
 				'section' => 'responsive',
 				'tab' => __( 'phone', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'id' => 'css_res_p_margin_unit',
+				'id' => 'css_res_p_margin_top_unit',
 				'std' => 'px',
-				'label' => __( 'Unit', 'live-composer-page-builder' ),
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -761,6 +1093,7 @@ class DSLC_Logo extends DSLC_Module {
 				'affect_on_change_el' => '',
 				'affect_on_change_rule' => '',
 			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_margin_top',
@@ -775,6 +1108,29 @@ class DSLC_Logo extends DSLC_Module {
 				'tab' => __( 'phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
+
+			array(
+				'id' => 'css_res_p_margin_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_margin_bottom',
@@ -789,6 +1145,29 @@ class DSLC_Logo extends DSLC_Module {
 				'tab' => __( 'phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
+
+			array(
+				'id' => 'css_res_p_margin_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_margin_left',
@@ -803,6 +1182,29 @@ class DSLC_Logo extends DSLC_Module {
 				'tab' => __( 'phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
+
+			array(
+				'id' => 'css_res_p_margin_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_margin_right',
@@ -817,6 +1219,7 @@ class DSLC_Logo extends DSLC_Module {
 				'tab' => __( 'phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
+
 			array(
 				'id' => 'css_res_p_margin_group',
 				'type' => 'group',
@@ -854,9 +1257,33 @@ class DSLC_Logo extends DSLC_Module {
 				'affect_on_change_el' => '',
 				'affect_on_change_rule' => '',
 			),
+
+			array(
+				'id' => 'css_res_p_padding_top_unit',
+				'std' => 'px',
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_padding_top',
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'min' => -2000,
 				'max' => 2000,
@@ -868,9 +1295,33 @@ class DSLC_Logo extends DSLC_Module {
 				'tab' => __( 'phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
+
+			array(
+				'id' => 'css_res_p_padding_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_padding_bottom',
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'min' => -2000,
 				'max' => 2000,
@@ -882,9 +1333,33 @@ class DSLC_Logo extends DSLC_Module {
 				'tab' => __( 'phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
+
+			array(
+				'id' => 'css_res_p_padding_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_padding_left',
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'min' => -2000,
 				'max' => 2000,
@@ -896,9 +1371,33 @@ class DSLC_Logo extends DSLC_Module {
 				'tab' => __( 'phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
+
+			array(
+				'id' => 'css_res_p_padding_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'tab' => __( 'phone', 'live-composer-page-builder' ),
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_padding_right',
+				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'min' => -2000,
 				'max' => 2000,
@@ -910,8 +1409,9 @@ class DSLC_Logo extends DSLC_Module {
 				'tab' => __( 'phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
+
 			array(
-				
+				'label' => __( 'Padding', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_padding_group',
 				'type' => 'group',
 				'action' => 'close',

@@ -182,9 +182,9 @@ class DSLC_Accordion extends DSLC_Module {
 				'section' => 'styling',
 			),
 			array(
-				'id' => 'css_margin_unit',
-				'std' => '',
-				'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
+				'id' => 'css_margin_top_unit',
+				'std' => 'px',
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -215,6 +215,26 @@ class DSLC_Accordion extends DSLC_Module {
 				'max' => 2000,
 			),
 			array(
+				'id' => 'css_margin_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+			array(
 				'label' => __( 'Margin Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_margin_bottom',
 				'std' => '0',
@@ -228,6 +248,26 @@ class DSLC_Accordion extends DSLC_Module {
 				'max' => 2000,
 			),
 			array(
+				'id' => 'css_margin_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+			array(
 				'label' => __( 'Margin Left', 'live-composer-page-builder' ),
 				'id' => 'css_margin_left',
 				'std' => '0',
@@ -239,6 +279,26 @@ class DSLC_Accordion extends DSLC_Module {
 				'ext' => 'px',
 				'min' => -2000,
 				'max' => 2000,
+			),
+			array(
+				'id' => 'css_margin_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
 			),
 			array(
 				'label' => __( 'Margin Right', 'live-composer-page-builder' ),
@@ -281,10 +341,11 @@ class DSLC_Accordion extends DSLC_Module {
 				'action' => 'open',
 				'section' => 'styling',
 			),
+
 			array(
-				'id' => 'css_padding_unit',
-				'std' => '',
-				'label' => __( 'Padding Unit', 'live-composer-page-builder' ),
+				'id' => 'css_padding_top_unit',
+				'std' => 'px',
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -301,10 +362,10 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_el' => '',
 				'affect_on_change_rule' => '',
 			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_padding_top',
-				'onlypositive' => false, // Value can't be negative.
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '0',
@@ -315,10 +376,31 @@ class DSLC_Accordion extends DSLC_Module {
 				'section' => 'styling',
 				'ext' => 'px',
 			),
+
+			array(
+				'id' => 'css_padding_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_padding_bottom',
-				'onlypositive' => false, // Value can't be negative.
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '0',
@@ -329,10 +411,33 @@ class DSLC_Accordion extends DSLC_Module {
 				'section' => 'styling',
 				'ext' => 'px',
 			),
+
+			array(
+				'id' => 'css_padding_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_padding_left',
-				'onlypositive' => true, // Value can't be negative.
+				'min' => -2000,
+				'max' => 2000,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -340,13 +445,34 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-left',
 				'section' => 'styling',
 				'ext' => 'px',
-				'min' => -2000,
-				'max' => 2000,
 			),
+
+			array(
+				'id' => 'css_padding_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_padding_right',
-				'onlypositive' => true, // Value can't be negative.
+				'min' => -2000,
+				'max' => 2000,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -354,9 +480,8 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_rule' => 'padding-right',
 				'section' => 'styling',
 				'ext' => 'px',
-				'min' => -2000,
-				'max' => 2000,
 			),
+
 			array(
 				'id' => 'css_padding_group',
 				'type' => 'group',
@@ -463,198 +588,333 @@ class DSLC_Accordion extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Header', 'live-composer-page-builder' ),
 			),
-			array(
-				'label' => __( 'Margin', 'live-composer-page-builder' ),
-				'id' => 'css_header_margin_group',
-				'type' => 'group',
-				'action' => 'open',
-				'section' => 'styling',
-				'tab' => __( 'Header', 'live-composer-page-builder' ),
-			),
-			array(
-				'id' => 'css_header_margin_unit',
-				'std' => '',
-				'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
-				'type' => 'select',
-				'refresh_on_change' => false,
-				'choices' => array(
-					array(
-						'label' => 'px',
-						'value' => 'px',
-					),
-					array(
-						'label' => '%',
-						'value' => '%',
-					),
+				array(
+					'label' => __( 'Margin', 'live-composer-page-builder' ),
+					'id' => 'css_header_margin_group',
+					'type' => 'group',
+					'action' => 'open',
+					'section' => 'styling',
+					'tab' => __( 'Header', 'live-composer-page-builder' ),
 				),
-				'section' => 'styling',
-				'affect_on_change_el' => '',
-				'affect_on_change_rule' => '',
-				'tab' => __( 'Header', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'Top', 'live-composer-page-builder' ),
-				'id' => 'css_header_margin_top',
-				'onlypositive' => true, // Value can't be negative.
-				'min' => -2000,
-				'max' => 2000,
-				'std' => '',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion-header',
-				'affect_on_change_rule' => 'margin-top',
-				'section' => 'styling',
-				'ext' => 'px',
-				'tab' => __( 'Header', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'Bottom', 'live-composer-page-builder' ),
-				'id' => 'css_header_margin_bottom',
-				'onlypositive' => true, // Value can't be negative.
-				'min' => -2000,
-				'max' => 2000,
-				'std' => '',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion-header',
-				'affect_on_change_rule' => 'margin-bottom',
-				'section' => 'styling',
-				'ext' => 'px',
-				'tab' => __( 'Header', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'Left', 'live-composer-page-builder' ),
-				'id' => 'css_header_margin_left',
-				'onlypositive' => true, // Value can't be negative.
-				'std' => '',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion-header',
-				'affect_on_change_rule' => 'margin-left',
-				'section' => 'styling',
-				'ext' => 'px',
-				'tab' => __( 'Header', 'live-composer-page-builder' ),
-				'min' => -2000,
-				'max' => 2000,
-			),
-			array(
-				'label' => __( 'Right', 'live-composer-page-builder' ),
-				'id' => 'css_header_margin_right',
-				'onlypositive' => true, // Value can't be negative.
-				'std' => '',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion-header',
-				'affect_on_change_rule' => 'margin-right',
-				'section' => 'styling',
-				'ext' => 'px',
-				'tab' => __( 'Header', 'live-composer-page-builder' ),
-				'min' => -2000,
-				'max' => 2000,
-			),
-			array(
-				'id' => 'css_header_margin_group',
-				'type' => 'group',
-				'action' => 'close',
-				'section' => 'styling',
-				'tab' => __( 'Header', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'Padding', 'live-composer-page-builder' ),
-				'id' => 'css_header_padding_group',
-				'type' => 'group',
-				'action' => 'open',
-				'section' => 'styling',
-				'tab' => __( 'Header', 'live-composer-page-builder' ),
-			),
-			array(
-				'id' => 'css_header_padding_unit',
-				'std' => '',
-				'label' => __( 'Padding Unit', 'live-composer-page-builder' ),
-				'type' => 'select',
-				'refresh_on_change' => false,
-				'choices' => array(
-					array(
-						'label' => 'px',
-						'value' => 'px',
+				array(
+					'id' => 'css_header_margin_top_unit',
+					'std' => 'px',
+					'label' => __( 'Top Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
 					),
-					array(
-						'label' => '%',
-						'value' => '%',
-					),
+					'section' => 'styling',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Header', 'live-composer-page-builder' ),
 				),
-				'section' => 'styling',
-				'affect_on_change_el' => '',
-				'affect_on_change_rule' => '',
-				'tab' => __( 'Header', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'Top', 'live-composer-page-builder' ),
-				'id' => 'css_header_padding_top',
-				'onlypositive' => true, // Value can't be negative.
-				'min' => -2000,
-				'max' => 2000,
-				'std' => '0',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion-header',
-				'affect_on_change_rule' => 'padding-top',
-				'section' => 'styling',
-				'ext' => 'px',
-				'tab' => __( 'Header', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'Bottom', 'live-composer-page-builder' ),
-				'id' => 'css_header_padding_bottom',
-				'onlypositive' => true, // Value can't be negative.
-				'min' => -2000,
-				'max' => 2000,
-				'std' => '0',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion-header',
-				'affect_on_change_rule' => 'padding-bottom',
-				'section' => 'styling',
-				'ext' => 'px',
-				'tab' => __( 'Header', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'Left', 'live-composer-page-builder' ),
-				'id' => 'css_header_padding_left',
-				'onlypositive' => true, // Value can't be negative.
-				'std' => '0',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion-header',
-				'affect_on_change_rule' => 'padding-left',
-				'section' => 'styling',
-				'ext' => 'px',
-				'tab' => __( 'Header', 'live-composer-page-builder' ),
-				'min' => -2000,
-				'max' => 2000,
-			),
-			array(
-				'label' => __( 'Right', 'live-composer-page-builder' ),
-				'id' => 'css_header_padding_right',
-				'onlypositive' => true, // Value can't be negative.
-				'std' => '0',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion-header',
-				'affect_on_change_rule' => 'padding-right',
-				'section' => 'styling',
-				'ext' => 'px',
-				'tab' => __( 'Header', 'live-composer-page-builder' ),
-				'min' => -2000,
-				'max' => 2000,
-			),
-			array(
-				'id' => 'css_header_padding_group',
-				'type' => 'group',
-				'action' => 'close',
-				'section' => 'styling',
-				'tab' => __( 'Header', 'live-composer-page-builder' ),
-			),
+				array(
+					'label' => __( 'Top', 'live-composer-page-builder' ),
+					'id' => 'css_header_margin_top',
+					'onlypositive' => true,
+					'min' => -2000,
+					'max' => 2000,
+					'std' => '0',
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-accordion-header',
+					'affect_on_change_rule' => 'margin-top',
+					'section' => 'styling',
+					'ext' => 'px',
+					'tab' => __( 'Header', 'live-composer-page-builder' ),
+				),
+				array(
+					'id' => 'css_header_margin_bottom_unit',
+					'std' => 'px',
+					'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'styling',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Header', 'live-composer-page-builder' ),
+				),
+				array(
+					'label' => __( 'Bottom', 'live-composer-page-builder' ),
+					'id' => 'css_header_margin_bottom',
+					'onlypositive' => true,
+					'min' => -2000,
+					'max' => 2000,
+					'std' => '0',
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-accordion-header',
+					'affect_on_change_rule' => 'margin-bottom',
+					'section' => 'styling',
+					'ext' => 'px',
+					'tab' => __( 'Header', 'live-composer-page-builder' ),
+				),
+				array(
+					'id' => 'css_header_margin_left_unit',
+					'std' => 'px',
+					'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'styling',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Header', 'live-composer-page-builder' ),
+				),
+				array(
+					'label' => __( 'Left', 'live-composer-page-builder' ),
+					'id' => 'css_header_margin_left',
+					'onlypositive' => true,
+					'std' => '0',
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-accordion-header',
+					'affect_on_change_rule' => 'margin-left',
+					'section' => 'styling',
+					'ext' => 'px',
+					'tab' => __( 'Header', 'live-composer-page-builder' ),
+					'min' => -2000,
+					'max' => 2000,
+				),
+				array(
+					'id' => 'css_header_margin_right_unit',
+					'std' => 'px',
+					'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'styling',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Header', 'live-composer-page-builder' ),
+				),
+				array(
+					'label' => __( 'Right', 'live-composer-page-builder' ),
+					'id' => 'css_header_margin_right',
+					'onlypositive' => true,
+					'std' => '0',
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-accordion-header',
+					'affect_on_change_rule' => 'margin-right',
+					'section' => 'styling',
+					'ext' => 'px',
+					'tab' => __( 'Header', 'live-composer-page-builder' ),
+					'min' => -2000,
+					'max' => 2000,
+				),
+				array(
+					'id' => 'css_header_margin_group',
+					'type' => 'group',
+					'action' => 'close',
+					'section' => 'styling',
+					'tab' => __( 'Header', 'live-composer-page-builder' ),
+				),
+				array(
+					'label' => __( 'Padding', 'live-composer-page-builder' ),
+					'id' => 'css_header_padding_group',
+					'type' => 'group',
+					'action' => 'open',
+					'section' => 'styling',
+					'tab' => __( 'Header', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'id' => 'css_header_padding_top_unit',
+					'std' => 'px',
+					'label' => __( 'Top Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'styling',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Header', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'label' => __( 'Top', 'live-composer-page-builder' ),
+					'id' => 'css_header_padding_top',
+					'onlypositive' => true, // Value can't be negative.
+					'min' => -2000,
+					'max' => 2000,
+					'std' => '0',
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-accordion-header',
+					'affect_on_change_rule' => 'padding-top',
+					'section' => 'styling',
+					'ext' => 'px',
+					'tab' => __( 'Header', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'id' => 'css_header_padding_bottom_unit',
+					'std' => 'px',
+					'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'styling',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Header', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'label' => __( 'Bottom', 'live-composer-page-builder' ),
+					'id' => 'css_header_padding_bottom',
+					'onlypositive' => true, // Value can't be negative.
+					'min' => -2000,
+					'max' => 2000,
+					'std' => '0',
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-accordion-header',
+					'affect_on_change_rule' => 'padding-bottom',
+					'section' => 'styling',
+					'ext' => 'px',
+					'tab' => __( 'Header', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'id' => 'css_header_padding_left_unit',
+					'std' => 'px',
+					'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'styling',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Header', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'label' => __( 'Left', 'live-composer-page-builder' ),
+					'id' => 'css_header_padding_left',
+					'onlypositive' => true, // Value can't be negative.
+					'std' => '0',
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-accordion-header',
+					'affect_on_change_rule' => 'padding-left',
+					'section' => 'styling',
+					'ext' => 'px',
+					'tab' => __( 'Header', 'live-composer-page-builder' ),
+					'min' => -2000,
+					'max' => 2000,
+				),
+
+				array(
+					'id' => 'css_header_padding_right_unit',
+					'std' => 'px',
+					'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'styling',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Header', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'label' => __( 'Right', 'live-composer-page-builder' ),
+					'id' => 'css_header_padding_right',
+					'onlypositive' => true, // Value can't be negative.
+					'std' => '0',
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-accordion-header',
+					'affect_on_change_rule' => 'padding-right',
+					'section' => 'styling',
+					'ext' => 'px',
+					'tab' => __( 'Header', 'live-composer-page-builder' ),
+					'min' => -2000,
+					'max' => 2000,
+				),
+
+				array(
+					'id' => 'css_header_padding_group',
+					'type' => 'group',
+					'action' => 'close',
+					'section' => 'styling',
+					'tab' => __( 'Header', 'live-composer-page-builder' ),
+				),
 			array(
 				'label' => __( 'Toggle Icon Color', 'live-composer-page-builder' ),
 				'id' => 'css_header_toggle_icon_color',
@@ -846,10 +1106,11 @@ class DSLC_Accordion extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'Title', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'id' => 'css_title_padding_unit',
-				'std' => '',
-				'label' => __( 'Padding Unit', 'live-composer-page-builder' ),
+				'id' => 'css_title_padding_top_unit',
+				'std' => 'px',
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -867,10 +1128,11 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Title', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_title_padding_top',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '15',
@@ -882,10 +1144,33 @@ class DSLC_Accordion extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Title', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_title_padding_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Title', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_title_padding_bottom',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '15',
@@ -897,10 +1182,33 @@ class DSLC_Accordion extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Title', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_title_padding_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Title', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_title_padding_left',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'std' => '15',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -912,10 +1220,33 @@ class DSLC_Accordion extends DSLC_Module {
 				'min' => -2000,
 				'max' => 2000,
 			),
+
+			array(
+				'id' => 'css_title_padding_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Title', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_title_padding_right',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'std' => '15',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -927,6 +1258,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'min' => -2000,
 				'max' => 2000,
 			),
+
 			array(
 				'id' => 'css_title_padding_group',
 				'type' => 'group',
@@ -1141,10 +1473,11 @@ class DSLC_Accordion extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'Content', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'id' => 'css_content_padding_unit',
-				'std' => '',
-				'label' => __( 'Padding Unit', 'live-composer-page-builder' ),
+				'id' => 'css_content_padding_top_unit',
+				'std' => 'px',
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -1162,10 +1495,11 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Content', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_content_padding_top',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '25',
@@ -1177,10 +1511,33 @@ class DSLC_Accordion extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Content', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_content_padding_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Content', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_content_padding_bottom',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '25',
@@ -1192,10 +1549,33 @@ class DSLC_Accordion extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Content', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_content_padding_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Content', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_content_padding_left',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'std' => '25',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1207,10 +1587,33 @@ class DSLC_Accordion extends DSLC_Module {
 				'min' => -2000,
 				'max' => 2000,
 			),
+
+			array(
+				'id' => 'css_content_padding_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Content', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_content_padding_right',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'std' => '25',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1222,6 +1625,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'min' => -2000,
 				'max' => 2000,
 			),
+
 			array(
 				'id' => 'css_content_padding_group',
 				'type' => 'group',
@@ -1245,228 +1649,373 @@ class DSLC_Accordion extends DSLC_Module {
 			 * Responsive Tablet
 			 */
 
-			array(
-				'label' => __( 'Responsive Styling', 'live-composer-page-builder' ),
-				'id' => 'css_res_t',
-				'std' => 'disabled',
-				'type' => 'select',
-				'choices' => array(
-					array(
-						'label' => __( 'Disabled', 'live-composer-page-builder' ),
-						'value' => 'disabled',
+				array(
+					'label' => __( 'Responsive Styling', 'live-composer-page-builder' ),
+					'id' => 'css_res_t',
+					'std' => 'disabled',
+					'type' => 'select',
+					'choices' => array(
+						array(
+							'label' => __( 'Disabled', 'live-composer-page-builder' ),
+							'value' => 'disabled',
+						),
+						array(
+							'label' => __( 'Enabled', 'live-composer-page-builder' ),
+							'value' => 'enabled',
+						),
 					),
-					array(
-						'label' => __( 'Enabled', 'live-composer-page-builder' ),
-						'value' => 'enabled',
-					),
+					'section' => 'responsive',
+					'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				),
-				'section' => 'responsive',
-				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'Margin', 'live-composer-page-builder' ),
-				'id' => 'css_res_t_margin_group',
-				'type' => 'group',
-				'action' => 'open',
-				'section' => 'responsive',
-				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-			),
-			array(
-				'id' => 'css_res_t_margin_unit',
-				'std' => '',
-				'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
-				'type' => 'select',
-				'refresh_on_change' => false,
-				'choices' => array(
-					array(
-						'label' => 'px',
-						'value' => 'px',
-					),
-					array(
-						'label' => '%',
-						'value' => '%',
-					),
+				array(
+					'label' => __( 'Margin', 'live-composer-page-builder' ),
+					'id' => 'css_res_t_margin_group_open',
+					'type' => 'group',
+					'action' => 'open',
+					'section' => 'responsive',
+					'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				),
-				'section' => 'responsive',
-				'affect_on_change_el' => '',
-				'affect_on_change_rule' => '',
-				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'Top', 'live-composer-page-builder' ),
-				'id' => 'css_res_t_margin_top',
-				'onlypositive' => true, // Value can't be negative.
-				'min' => -2000,
-				'max' => 2000,
-				'std' => '',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion',
-				'affect_on_change_rule' => 'margin-top',
-				'section' => 'responsive',
-				'ext' => 'px',
-				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'Bottom', 'live-composer-page-builder' ),
-				'id' => 'css_res_t_margin_bottom',
-				'onlypositive' => true, // Value can't be negative.
-				'min' => -2000,
-				'max' => 2000,
-				'std' => '',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion',
-				'affect_on_change_rule' => 'margin-bottom',
-				'section' => 'responsive',
-				'ext' => 'px',
-				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'Left', 'live-composer-page-builder' ),
-				'id' => 'css_res_t_margin_left',
-				'onlypositive' => true, // Value can't be negative.
-				'std' => '',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion',
-				'affect_on_change_rule' => 'margin-left',
-				'section' => 'responsive',
-				'ext' => 'px',
-				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-				'min' => -2000,
-				'max' => 2000,
-			),
-			array(
-				'label' => __( 'Right', 'live-composer-page-builder' ),
-				'id' => 'css_res_t_margin_right',
-				'onlypositive' => true, // Value can't be negative.
-				'std' => '',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion',
-				'affect_on_change_rule' => 'margin-right',
-				'section' => 'responsive',
-				'ext' => 'px',
-				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-				'min' => -2000,
-				'max' => 2000,
-			),
-			array(
-				'id' => 'css_res_t_margin_group',
-				'type' => 'group',
-				'action' => 'close',
-				'section' => 'responsive',
-				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'Padding', 'live-composer-page-builder' ),
-				'id' => 'css_res_t_padding_group',
-				'type' => 'group',
-				'action' => 'open',
-				'section' => 'responsive',
-				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-			),
-			array(
-				'id' => 'css_res_t_padding_unit',
-				'std' => '',
-				'label' => __( 'Padding Unit', 'live-composer-page-builder' ),
-				'type' => 'select',
-				'refresh_on_change' => false,
-				'choices' => array(
-					array(
-						'label' => 'px',
-						'value' => 'px',
+
+				array(
+					'id' => 'css_res_t_margin_top_unit',
+					'std' => 'px',
+					'label' => __( 'Top Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
 					),
-					array(
-						'label' => '%',
-						'value' => '%',
-					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				),
-				'section' => 'responsive',
-				'affect_on_change_el' => '',
-				'affect_on_change_rule' => '',
-				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'Top', 'live-composer-page-builder' ),
-				'id' => 'css_res_t_padding_top',
-				'onlypositive' => true, // Value can't be negative.
-				'min' => -2000,
-				'max' => 2000,
-				'std' => '15',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion',
-				'affect_on_change_rule' => 'padding-top',
-				'section' => 'responsive',
-				'ext' => 'px',
-				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'Bottom', 'live-composer-page-builder' ),
-				'id' => 'css_res_t_padding_bottom',
-				'onlypositive' => true, // Value can't be negative.
-				'min' => -2000,
-				'max' => 2000,
-				'std' => '15',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion',
-				'affect_on_change_rule' => 'padding-bottom',
-				'section' => 'responsive',
-				'ext' => 'px',
-				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'Left', 'live-composer-page-builder' ),
-				'id' => 'css_res_t_padding_left',
-				'onlypositive' => true, // Value can't be negative.
-				'std' => '15',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion',
-				'affect_on_change_rule' => 'padding-left',
-				'section' => 'responsive',
-				'ext' => 'px',
-				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-				'min' => -2000,
-				'max' => 2000,
-			),
-			array(
-				'label' => __( 'Right', 'live-composer-page-builder' ),
-				'id' => 'css_res_t_padding_right',
-				'onlypositive' => true, // Value can't be negative.
-				'std' => '15',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion',
-				'affect_on_change_rule' => 'padding-right',
-				'section' => 'responsive',
-				'ext' => 'px',
-				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-				'min' => -2000,
-				'max' => 2000,
-			),
-			array(
-				'id' => 'css_res_t_padding_group',
-				'type' => 'group',
-				'action' => 'close',
-				'section' => 'responsive',
-				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-			),
+
+				array(
+					'label' => __( 'Top', 'live-composer-page-builder' ),
+					'id' => 'css_res_t_margin_top',
+					'onlypositive' => true,
+					'min' => -2000,
+					'max' => 2000,
+					'std' => '',
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-accordion',
+					'affect_on_change_rule' => 'margin-top',
+					'section' => 'responsive',
+					'ext' => 'px',
+					'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'id' => 'css_res_t_margin_bottom_unit',
+					'std' => 'px',
+					'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'label' => __( 'Bottom', 'live-composer-page-builder' ),
+					'id' => 'css_res_t_margin_bottom',
+					'onlypositive' => true,
+					'min' => -2000,
+					'max' => 2000,
+					'std' => '',
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-accordion',
+					'affect_on_change_rule' => 'margin-bottom',
+					'section' => 'responsive',
+					'ext' => 'px',
+					'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'id' => 'css_res_t_margin_left_unit',
+					'std' => 'px',
+					'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'label' => __( 'Left', 'live-composer-page-builder' ),
+					'id' => 'css_res_t_margin_left',
+					'onlypositive' => true,
+					'std' => '',
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-accordion',
+					'affect_on_change_rule' => 'margin-left',
+					'section' => 'responsive',
+					'ext' => 'px',
+					'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+					'min' => -2000,
+					'max' => 2000,
+				),
+
+				array(
+					'id' => 'css_res_t_margin_right_unit',
+					'std' => 'px',
+					'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'label' => __( 'Right', 'live-composer-page-builder' ),
+					'id' => 'css_res_t_margin_right',
+					'onlypositive' => true,
+					'std' => '',
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-accordion',
+					'affect_on_change_rule' => 'margin-right',
+					'section' => 'responsive',
+					'ext' => 'px',
+					'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+					'min' => -2000,
+					'max' => 2000,
+				),
+
+				array(
+					'id' => 'css_res_t_margin_group_close',
+					'type' => 'group',
+					'action' => 'close',
+					'section' => 'responsive',
+					'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				),
+				array(
+					'label' => __( 'Padding', 'live-composer-page-builder' ),
+					'id' => 'css_res_t_padding_group',
+					'type' => 'group',
+					'action' => 'open',
+					'section' => 'responsive',
+					'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'id' => 'css_res_t_padding_top_unit',
+					'std' => 'px',
+					'label' => __( 'Top Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'label' => __( 'Top', 'live-composer-page-builder' ),
+					'id' => 'css_res_t_padding_top',
+					'onlypositive' => true,
+					'min' => -2000,
+					'max' => 2000,
+					'std' => '15',
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-accordion',
+					'affect_on_change_rule' => 'padding-top',
+					'section' => 'responsive',
+					'ext' => 'px',
+					'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'id' => 'css_res_t_padding_bottom_unit',
+					'std' => 'px',
+					'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'label' => __( 'Bottom', 'live-composer-page-builder' ),
+					'id' => 'css_res_t_padding_bottom',
+					'onlypositive' => true,
+					'min' => -2000,
+					'max' => 2000,
+					'std' => '15',
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-accordion',
+					'affect_on_change_rule' => 'padding-bottom',
+					'section' => 'responsive',
+					'ext' => 'px',
+					'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'id' => 'css_res_t_padding_left_unit',
+					'std' => 'px',
+					'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'label' => __( 'Left', 'live-composer-page-builder' ),
+					'id' => 'css_res_t_padding_left',
+					'onlypositive' => true,
+					'std' => '15',
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-accordion',
+					'affect_on_change_rule' => 'padding-left',
+					'section' => 'responsive',
+					'ext' => 'px',
+					'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+					'min' => -2000,
+					'max' => 2000,
+				),
+
+				array(
+					'id' => 'css_res_t_padding_right_unit',
+					'std' => 'px',
+					'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'label' => __( 'Right', 'live-composer-page-builder' ),
+					'id' => 'css_res_t_padding_right',
+					'onlypositive' => true,
+					'std' => '15',
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-accordion',
+					'affect_on_change_rule' => 'padding-right',
+					'section' => 'responsive',
+					'ext' => 'px',
+					'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+					'min' => -2000,
+					'max' => 2000,
+				),
+
+				array(
+					'id' => 'css_res_t_padding_group',
+					'type' => 'group',
+					'action' => 'close',
+					'section' => 'responsive',
+					'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				),
 			array(
 				'label' => __( 'Header - Margin', 'live-composer-page-builder' ),
-				'id' => 'css_res_t_header_margin_group',
+				'id' => 'css_res_t_header_margin_group_open',
 				'type' => 'group',
 				'action' => 'open',
 				'section' => 'responsive',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'id' => 'css_res_t_header_margin_unit',
-				'std' => '',
-				'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_header_margin_top_unit',
+				'std' => 'px',
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -1484,10 +2033,11 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_header_margin_top',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '',
@@ -1499,10 +2049,33 @@ class DSLC_Accordion extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_header_margin_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_header_margin_bottom',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '',
@@ -1514,10 +2087,33 @@ class DSLC_Accordion extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_header_margin_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_header_margin_left',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'std' => '',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1529,10 +2125,33 @@ class DSLC_Accordion extends DSLC_Module {
 				'min' => -2000,
 				'max' => 2000,
 			),
+
+			array(
+				'id' => 'css_res_t_header_margin_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_header_margin_right',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'std' => '',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1544,8 +2163,9 @@ class DSLC_Accordion extends DSLC_Module {
 				'min' => -2000,
 				'max' => 2000,
 			),
+
 			array(
-				'id' => 'css_res_t_header_margin_group',
+				'id' => 'css_res_t_header_margin_group_close',
 				'type' => 'group',
 				'action' => 'close',
 				'section' => 'responsive',
@@ -1559,10 +2179,11 @@ class DSLC_Accordion extends DSLC_Module {
 				'section' => 'responsive',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'id' => 'css_res_t_header_padding_unit',
-				'std' => '',
-				'label' => __( 'Padding Unit', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_header_padding_top_unit',
+				'std' => 'px',
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -1580,10 +2201,11 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_header_padding_top',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '15',
@@ -1595,10 +2217,33 @@ class DSLC_Accordion extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_header_padding_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_header_padding_bottom',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '15',
@@ -1610,10 +2255,33 @@ class DSLC_Accordion extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_header_padding_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_header_padding_left',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'std' => '15',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1625,10 +2293,33 @@ class DSLC_Accordion extends DSLC_Module {
 				'min' => -2000,
 				'max' => 2000,
 			),
+
+			array(
+				'id' => 'css_res_t_header_padding_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_header_padding_right',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'std' => '15',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1640,6 +2331,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'min' => -2000,
 				'max' => 2000,
 			),
+
 			array(
 				'id' => 'css_res_t_header_padding_group',
 				'type' => 'group',
@@ -1684,10 +2376,11 @@ class DSLC_Accordion extends DSLC_Module {
 				'section' => 'responsive',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'id' => 'css_res_t_title_padding_unit',
-				'std' => '',
-				'label' => __( 'Padding Unit', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_title_padding_top_unit',
+				'std' => 'px',
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -1705,10 +2398,11 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_title_padding_top',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '15',
@@ -1720,10 +2414,33 @@ class DSLC_Accordion extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_title_padding_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_title_padding_bottom',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '15',
@@ -1735,10 +2452,33 @@ class DSLC_Accordion extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_title_padding_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_title_padding_left',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'std' => '15',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1750,10 +2490,33 @@ class DSLC_Accordion extends DSLC_Module {
 				'min' => -2000,
 				'max' => 2000,
 			),
+
+			array(
+				'id' => 'css_res_t_title_padding_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_title_padding_right',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'std' => '15',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1765,6 +2528,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'min' => -2000,
 				'max' => 2000,
 			),
+
 			array(
 				'id' => 'css_res_t_title_padding_group',
 				'type' => 'group',
@@ -1810,10 +2574,11 @@ class DSLC_Accordion extends DSLC_Module {
 				'section' => 'responsive',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'id' => 'css_res_t_content_padding_unit',
-				'std' => '',
-				'label' => __( 'Padding Unit', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_content_padding_top_unit',
+				'std' => 'px',
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -1831,10 +2596,11 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_content_padding_top',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '25',
@@ -1846,10 +2612,33 @@ class DSLC_Accordion extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_content_padding_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_content_padding_bottom',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '25',
@@ -1861,10 +2650,33 @@ class DSLC_Accordion extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_content_padding_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_content_padding_left',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'std' => '25',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1876,10 +2688,33 @@ class DSLC_Accordion extends DSLC_Module {
 				'min' => -2000,
 				'max' => 2000,
 			),
+
+			array(
+				'id' => 'css_res_t_content_padding_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_content_padding_right',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'std' => '25',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1891,6 +2726,7 @@ class DSLC_Accordion extends DSLC_Module {
 				'min' => -2000,
 				'max' => 2000,
 			),
+
 			array(
 				'id' => 'css_res_t_content_padding_group',
 				'type' => 'group',
@@ -1921,18 +2757,20 @@ class DSLC_Accordion extends DSLC_Module {
 				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+			
 			array(
 				'label' => __( 'Margin', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_margin_group',
+				'id' => 'css_res_p_margin_group_open',
 				'type' => 'group',
 				'action' => 'open',
 				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'id' => 'css_res_p_margin_unit',
-				'std' => '',
-				'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
+				'id' => 'css_res_p_margin_top_unit',
+				'std' => 'px',
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -1950,10 +2788,11 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_margin_top',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '',
@@ -1965,10 +2804,33 @@ class DSLC_Accordion extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_p_margin_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_margin_bottom',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '',
@@ -1980,10 +2842,33 @@ class DSLC_Accordion extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_p_margin_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_margin_left',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'std' => '',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -1995,10 +2880,33 @@ class DSLC_Accordion extends DSLC_Module {
 				'min' => -2000,
 				'max' => 2000,
 			),
+
+			array(
+				'id' => 'css_res_p_margin_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_margin_right',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'std' => '',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -2010,121 +2918,195 @@ class DSLC_Accordion extends DSLC_Module {
 				'min' => -2000,
 				'max' => 2000,
 			),
+
 			array(
-				'id' => 'css_res_p_margin_group',
+				'id' => 'css_res_p_margin_group_close',
 				'type' => 'group',
 				'action' => 'close',
 				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
-			array(
-				'label' => __( 'Padding', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_padding_group',
-				'type' => 'group',
-				'action' => 'open',
-				'section' => 'responsive',
-				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-			),
-			array(
-				'id' => 'css_res_p_padding_unit',
-				'std' => '',
-				'label' => __( 'Padding Unit', 'live-composer-page-builder' ),
-				'type' => 'select',
-				'refresh_on_change' => false,
-				'choices' => array(
-					array(
-						'label' => 'px',
-						'value' => 'px',
-					),
-					array(
-						'label' => '%',
-						'value' => '%',
-					),
-				),
-				'section' => 'responsive',
-				'affect_on_change_el' => '',
-				'affect_on_change_rule' => '',
-				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'Top', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_padding_top',
-				'onlypositive' => true, // Value can't be negative.
-				'min' => -2000,
-				'max' => 2000,
-				'std' => '0',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion',
-				'affect_on_change_rule' => 'padding-top',
-				'section' => 'responsive',
-				'ext' => 'px',
-				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'Bottom', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_padding_bottom',
-				'onlypositive' => true, // Value can't be negative.
-				'min' => -2000,
-				'max' => 2000,
-				'std' => '0',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion',
-				'affect_on_change_rule' => 'padding-bottom',
-				'section' => 'responsive',
-				'ext' => 'px',
-				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'Left', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_padding_left',
-				'onlypositive' => true, // Value can't be negative.
-				'std' => '0',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion',
-				'affect_on_change_rule' => 'padding-left',
-				'section' => 'responsive',
-				'ext' => 'px',
-				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-				'min' => -2000,
-				'max' => 2000,
-			),
-			array(
-				'label' => __( 'Right', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_padding_right',
-				'onlypositive' => true, // Value can't be negative.
-				'std' => '0',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion',
-				'affect_on_change_rule' => 'padding-right',
-				'section' => 'responsive',
-				'ext' => 'px',
-				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-				'min' => -2000,
-				'max' => 2000,
-			),
-			array(
-				'id' => 'css_res_p_padding_group',
-				'type' => 'group',
-				'action' => 'close',
-				'section' => 'responsive',
-				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-			),
+array(
+	'label' => __( 'Padding', 'live-composer-page-builder' ),
+	'id' => 'css_res_p_padding_group',
+	'type' => 'group',
+	'action' => 'open',
+	'section' => 'responsive',
+	'tab' => __( 'Phone', 'live-composer-page-builder' ),
+),
+
+array(
+	'id' => 'css_res_p_padding_top_unit',
+	'std' => 'px',
+	'label' => __( 'Top Unit', 'live-composer-page-builder' ),
+	'type' => 'select',
+	'refresh_on_change' => false,
+	'choices' => array(
+		array(
+			'label' => 'px',
+			'value' => 'px',
+		),
+		array(
+			'label' => '%',
+			'value' => '%',
+		),
+	),
+	'section' => 'responsive',
+	'affect_on_change_el' => '',
+	'affect_on_change_rule' => '',
+	'tab' => __( 'Phone', 'live-composer-page-builder' ),
+),
+
+array(
+	'label' => __( 'Top', 'live-composer-page-builder' ),
+	'id' => 'css_res_p_padding_top',
+	'onlypositive' => true,
+	'min' => -2000,
+	'max' => 2000,
+	'std' => '0',
+	'type' => 'slider',
+	'refresh_on_change' => false,
+	'affect_on_change_el' => '.dslc-accordion',
+	'affect_on_change_rule' => 'padding-top',
+	'section' => 'responsive',
+	'ext' => 'px',
+	'tab' => __( 'Phone', 'live-composer-page-builder' ),
+),
+
+array(
+	'id' => 'css_res_p_padding_bottom_unit',
+	'std' => 'px',
+	'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+	'type' => 'select',
+	'refresh_on_change' => false,
+	'choices' => array(
+		array(
+			'label' => 'px',
+			'value' => 'px',
+		),
+		array(
+			'label' => '%',
+			'value' => '%',
+		),
+	),
+	'section' => 'responsive',
+	'affect_on_change_el' => '',
+	'affect_on_change_rule' => '',
+	'tab' => __( 'Phone', 'live-composer-page-builder' ),
+),
+
+array(
+	'label' => __( 'Bottom', 'live-composer-page-builder' ),
+	'id' => 'css_res_p_padding_bottom',
+	'onlypositive' => true,
+	'min' => -2000,
+	'max' => 2000,
+	'std' => '0',
+	'type' => 'slider',
+	'refresh_on_change' => false,
+	'affect_on_change_el' => '.dslc-accordion',
+	'affect_on_change_rule' => 'padding-bottom',
+	'section' => 'responsive',
+	'ext' => 'px',
+	'tab' => __( 'Phone', 'live-composer-page-builder' ),
+),
+
+array(
+	'id' => 'css_res_p_padding_left_unit',
+	'std' => 'px',
+	'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+	'type' => 'select',
+	'refresh_on_change' => false,
+	'choices' => array(
+		array(
+			'label' => 'px',
+			'value' => 'px',
+		),
+		array(
+			'label' => '%',
+			'value' => '%',
+		),
+	),
+	'section' => 'responsive',
+	'affect_on_change_el' => '',
+	'affect_on_change_rule' => '',
+	'tab' => __( 'Phone', 'live-composer-page-builder' ),
+),
+
+array(
+	'label' => __( 'Left', 'live-composer-page-builder' ),
+	'id' => 'css_res_p_padding_left',
+	'onlypositive' => true,
+	'std' => '0',
+	'type' => 'slider',
+	'refresh_on_change' => false,
+	'affect_on_change_el' => '.dslc-accordion',
+	'affect_on_change_rule' => 'padding-left',
+	'section' => 'responsive',
+	'ext' => 'px',
+	'tab' => __( 'Phone', 'live-composer-page-builder' ),
+	'min' => -2000,
+	'max' => 2000,
+),
+
+array(
+	'id' => 'css_res_p_padding_right_unit',
+	'std' => 'px',
+	'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+	'type' => 'select',
+	'refresh_on_change' => false,
+	'choices' => array(
+		array(
+			'label' => 'px',
+			'value' => 'px',
+		),
+		array(
+			'label' => '%',
+			'value' => '%',
+		),
+	),
+	'section' => 'responsive',
+	'affect_on_change_el' => '',
+	'affect_on_change_rule' => '',
+	'tab' => __( 'Phone', 'live-composer-page-builder' ),
+),
+
+array(
+	'label' => __( 'Right', 'live-composer-page-builder' ),
+	'id' => 'css_res_p_padding_right',
+	'onlypositive' => true,
+	'std' => '0',
+	'type' => 'slider',
+	'refresh_on_change' => false,
+	'affect_on_change_el' => '.dslc-accordion',
+	'affect_on_change_rule' => 'padding-right',
+	'section' => 'responsive',
+	'ext' => 'px',
+	'tab' => __( 'Phone', 'live-composer-page-builder' ),
+	'min' => -2000,
+	'max' => 2000,
+),
+
+array(
+	'id' => 'css_res_p_padding_group',
+	'type' => 'group',
+	'action' => 'close',
+	'section' => 'responsive',
+	'tab' => __( 'Phone', 'live-composer-page-builder' ),
+),
 			array(
 				'label' => __( 'Header - Margin', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_header_margin_group',
+				'id' => 'css_res_p_header_margin_group_open',
 				'type' => 'group',
 				'action' => 'open',
 				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'id' => 'css_res_p_header_margin_unit',
-				'std' => '',
-				'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
+				'id' => 'css_res_p_header_margin_top_unit',
+				'std' => 'px',
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -2142,10 +3124,11 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_header_margin_top',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '0',
@@ -2157,70 +3140,11 @@ class DSLC_Accordion extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'label' => __( 'Bottom', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_header_margin_bottom',
-				'onlypositive' => true, // Value can't be negative.
-				'min' => -2000,
-				'max' => 2000,
-				'std' => '0',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion-header',
-				'affect_on_change_rule' => 'margin-bottom',
-				'section' => 'responsive',
-				'ext' => 'px',
-				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'Left', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_header_margin_left',
-				'onlypositive' => true, // Value can't be negative.
-				'min' => -2000,
-				'max' => 2000,
-				'std' => '0',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion-header',
-				'affect_on_change_rule' => 'margin-left',
-				'section' => 'responsive',
-				'ext' => 'px',
-				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'Right', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_header_margin_right',
-				'onlypositive' => true, // Value can't be negative.
-				'min' => -2000,
-				'max' => 2000,
-				'std' => '0',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion-header',
-				'affect_on_change_rule' => 'margin-right',
-				'section' => 'responsive',
-				'ext' => 'px',
-				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-			),
-			array(
-				'id' => 'css_res_p_header_margin_group',
-				'type' => 'group',
-				'action' => 'close',
-				'section' => 'responsive',
-				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'Header - Padding', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_header_padding_group',
-				'type' => 'group',
-				'action' => 'open',
-				'section' => 'responsive',
-				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-			),
-			array(
-				'id' => 'css_res_p_header_padding_unit',
-				'std' => '',
-				'label' => __( 'Padding Unit', 'live-composer-page-builder' ),
+				'id' => 'css_res_p_header_margin_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -2238,73 +3162,274 @@ class DSLC_Accordion extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
-			array(
-				'label' => __( 'Top', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_header_padding_top',
-				'onlypositive' => true, // Value can't be negative.
-				'min' => -2000,
-				'max' => 2000,
-				'std' => '15',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion-header',
-				'affect_on_change_rule' => 'padding-top',
-				'section' => 'responsive',
-				'ext' => 'px',
-				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_header_padding_bottom',
-				'onlypositive' => true, // Value can't be negative.
+				'id' => 'css_res_p_header_margin_bottom',
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
-				'std' => '15',
+				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-accordion-header',
-				'affect_on_change_rule' => 'padding-bottom',
+				'affect_on_change_rule' => 'margin-bottom',
 				'section' => 'responsive',
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_p_header_margin_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_header_padding_left',
-				'onlypositive' => true, // Value can't be negative.
-				'std' => '15',
+				'id' => 'css_res_p_header_margin_left',
+				'onlypositive' => true,
+				'min' => -2000,
+				'max' => 2000,
+				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-accordion-header',
-				'affect_on_change_rule' => 'padding-left',
+				'affect_on_change_rule' => 'margin-left',
 				'section' => 'responsive',
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-				'min' => -2000,
-				'max' => 2000,
 			),
+
+			array(
+				'id' => 'css_res_p_header_margin_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_header_padding_right',
-				'onlypositive' => true, // Value can't be negative.
-				'std' => '15',
+				'id' => 'css_res_p_header_margin_right',
+				'onlypositive' => true,
+				'min' => -2000,
+				'max' => 2000,
+				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-accordion-header',
-				'affect_on_change_rule' => 'padding-right',
+				'affect_on_change_rule' => 'margin-right',
 				'section' => 'responsive',
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-				'min' => -2000,
-				'max' => 2000,
 			),
+
 			array(
-				'id' => 'css_res_p_header_padding_group',
+				'id' => 'css_res_p_header_margin_group_close',
 				'type' => 'group',
 				'action' => 'close',
 				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+				array(
+					'label' => __( 'Header - Padding', 'live-composer-page-builder' ),
+					'id' => 'css_res_p_header_padding_group',
+					'type' => 'group',
+					'action' => 'open',
+					'section' => 'responsive',
+					'tab' => __( 'Phone', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'id' => 'css_res_p_header_padding_top_unit',
+					'std' => 'px',
+					'label' => __( 'Top Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Phone', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'label' => __( 'Top', 'live-composer-page-builder' ),
+					'id' => 'css_res_p_header_padding_top',
+					'onlypositive' => true, // Value can't be negative.
+					'min' => -2000,
+					'max' => 2000,
+					'std' => '15',
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-accordion-header',
+					'affect_on_change_rule' => 'padding-top',
+					'section' => 'responsive',
+					'ext' => 'px',
+					'tab' => __( 'Phone', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'id' => 'css_res_p_header_padding_bottom_unit',
+					'std' => 'px',
+					'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Phone', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'label' => __( 'Bottom', 'live-composer-page-builder' ),
+					'id' => 'css_res_p_header_padding_bottom',
+					'onlypositive' => true, // Value can't be negative.
+					'min' => -2000,
+					'max' => 2000,
+					'std' => '15',
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-accordion-header',
+					'affect_on_change_rule' => 'padding-bottom',
+					'section' => 'responsive',
+					'ext' => 'px',
+					'tab' => __( 'Phone', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'id' => 'css_res_p_header_padding_left_unit',
+					'std' => 'px',
+					'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Phone', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'label' => __( 'Left', 'live-composer-page-builder' ),
+					'id' => 'css_res_p_header_padding_left',
+					'onlypositive' => true, // Value can't be negative.
+					'std' => '15',
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-accordion-header',
+					'affect_on_change_rule' => 'padding-left',
+					'section' => 'responsive',
+					'ext' => 'px',
+					'tab' => __( 'Phone', 'live-composer-page-builder' ),
+					'min' => -2000,
+					'max' => 2000,
+				),
+
+				array(
+					'id' => 'css_res_p_header_padding_right_unit',
+					'std' => 'px',
+					'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Phone', 'live-composer-page-builder' ),
+				),
+
+				array(
+					'label' => __( 'Right', 'live-composer-page-builder' ),
+					'id' => 'css_res_p_header_padding_right',
+					'onlypositive' => true, // Value can't be negative.
+					'std' => '15',
+					'type' => 'slider',
+					'refresh_on_change' => false,
+					'affect_on_change_el' => '.dslc-accordion-header',
+					'affect_on_change_rule' => 'padding-right',
+					'section' => 'responsive',
+					'ext' => 'px',
+					'tab' => __( 'Phone', 'live-composer-page-builder' ),
+					'min' => -2000,
+					'max' => 2000,
+				),
+
+				array(
+					'id' => 'css_res_p_header_padding_group',
+					'type' => 'group',
+					'action' => 'close',
+					'section' => 'responsive',
+					'tab' => __( 'Phone', 'live-composer-page-builder' ),
+				),
 			array(
 				'label' => __( 'Title - Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_title_font_size',
@@ -2334,102 +3459,174 @@ class DSLC_Accordion extends DSLC_Module {
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
-			array(
-				'label' => __( 'Title - Padding', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_title_padding_group',
-				'type' => 'group',
-				'action' => 'open',
-				'section' => 'responsive',
-				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-			),
-			array(
-				'id' => 'css_res_p_title_padding_unit',
-				'std' => '',
-				'label' => __( 'Padding Unit', 'live-composer-page-builder' ),
-				'type' => 'select',
-				'refresh_on_change' => false,
-				'choices' => array(
-					array(
-						'label' => 'px',
-						'value' => 'px',
-					),
-					array(
-						'label' => '%',
-						'value' => '%',
-					),
-				),
-				'section' => 'responsive',
-				'affect_on_change_el' => '',
-				'affect_on_change_rule' => '',
-				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'Top', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_title_padding_top',
-				'onlypositive' => true, // Value can't be negative.
-				'min' => -2000,
-				'max' => 2000,
-				'std' => '15',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion-title',
-				'affect_on_change_rule' => 'padding-top',
-				'section' => 'responsive',
-				'ext' => 'px',
-				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'Bottom', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_title_padding_bottom',
-				'onlypositive' => true, // Value can't be negative.
-				'min' => -2000,
-				'max' => 2000,
-				'std' => '15',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion-title',
-				'affect_on_change_rule' => 'padding-bottom',
-				'section' => 'responsive',
-				'ext' => 'px',
-				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'Left', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_title_padding_left',
-				'onlypositive' => true, // Value can't be negative.
-				'std' => '15',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion-title',
-				'affect_on_change_rule' => 'padding-left',
-				'section' => 'responsive',
-				'ext' => 'px',
-				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-				'min' => -2000,
-				'max' => 2000,
-			),
-			array(
-				'label' => __( 'Right', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_title_padding_right',
-				'onlypositive' => true, // Value can't be negative.
-				'std' => '15',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion-title',
-				'affect_on_change_rule' => 'padding-right',
-				'section' => 'responsive',
-				'ext' => 'px',
-				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-				'min' => -2000,
-				'max' => 2000,
-			),
-			array(
-				'id' => 'css_res_p_title_padding_group',
-				'type' => 'group',
-				'action' => 'close',
-				'section' => 'responsive',
-				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-			),
+array(
+	'label' => __( 'Content - Padding', 'live-composer-page-builder' ),
+	'id' => 'css_res_p_content_padding_group',
+	'type' => 'group',
+	'action' => 'open',
+	'section' => 'responsive',
+	'tab' => __( 'Phone', 'live-composer-page-builder' ),
+),
+
+array(
+	'id' => 'css_res_p_content_padding_top_unit',
+	'std' => 'px',
+	'label' => __( 'Top Unit', 'live-composer-page-builder' ),
+	'type' => 'select',
+	'refresh_on_change' => false,
+	'choices' => array(
+		array(
+			'label' => 'px',
+			'value' => 'px',
+		),
+		array(
+			'label' => '%',
+			'value' => '%',
+		),
+	),
+	'section' => 'responsive',
+	'affect_on_change_el' => '',
+	'affect_on_change_rule' => '',
+	'tab' => __( 'Phone', 'live-composer-page-builder' ),
+),
+
+array(
+	'label' => __( 'Top', 'live-composer-page-builder' ),
+	'id' => 'css_res_p_content_padding_top',
+	'onlypositive' => true, // Value can't be negative.
+	'min' => -2000,
+	'max' => 2000,
+	'std' => '25',
+	'type' => 'slider',
+	'refresh_on_change' => false,
+	'affect_on_change_el' => '.dslc-accordion-content',
+	'affect_on_change_rule' => 'padding-top',
+	'section' => 'responsive',
+	'ext' => 'px',
+	'tab' => __( 'Phone', 'live-composer-page-builder' ),
+),
+
+array(
+	'id' => 'css_res_p_content_padding_bottom_unit',
+	'std' => 'px',
+	'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+	'type' => 'select',
+	'refresh_on_change' => false,
+	'choices' => array(
+		array(
+			'label' => 'px',
+			'value' => 'px',
+		),
+		array(
+			'label' => '%',
+			'value' => '%',
+		),
+	),
+	'section' => 'responsive',
+	'affect_on_change_el' => '',
+	'affect_on_change_rule' => '',
+	'tab' => __( 'Phone', 'live-composer-page-builder' ),
+),
+
+array(
+	'label' => __( 'Bottom', 'live-composer-page-builder' ),
+	'id' => 'css_res_p_content_padding_bottom',
+	'onlypositive' => true, // Value can't be negative.
+	'min' => -2000,
+	'max' => 2000,
+	'std' => '25',
+	'type' => 'slider',
+	'refresh_on_change' => false,
+	'affect_on_change_el' => '.dslc-accordion-content',
+	'affect_on_change_rule' => 'padding-bottom',
+	'section' => 'responsive',
+	'ext' => 'px',
+	'tab' => __( 'Phone', 'live-composer-page-builder' ),
+),
+
+array(
+	'id' => 'css_res_p_content_padding_left_unit',
+	'std' => 'px',
+	'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+	'type' => 'select',
+	'refresh_on_change' => false,
+	'choices' => array(
+		array(
+			'label' => 'px',
+			'value' => 'px',
+		),
+		array(
+			'label' => '%',
+			'value' => '%',
+		),
+	),
+	'section' => 'responsive',
+	'affect_on_change_el' => '',
+	'affect_on_change_rule' => '',
+	'tab' => __( 'Phone', 'live-composer-page-builder' ),
+),
+
+array(
+	'label' => __( 'Left', 'live-composer-page-builder' ),
+	'id' => 'css_res_p_content_padding_left',
+	'onlypositive' => true, // Value can't be negative.
+	'std' => '25',
+	'type' => 'slider',
+	'refresh_on_change' => false,
+	'affect_on_change_el' => '.dslc-accordion-content',
+	'affect_on_change_rule' => 'padding-left',
+	'section' => 'responsive',
+	'ext' => 'px',
+	'tab' => __( 'Phone', 'live-composer-page-builder' ),
+	'min' => -2000,
+	'max' => 2000,
+),
+
+array(
+	'id' => 'css_res_p_content_padding_right_unit',
+	'std' => 'px',
+	'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+	'type' => 'select',
+	'refresh_on_change' => false,
+	'choices' => array(
+		array(
+			'label' => 'px',
+			'value' => 'px',
+		),
+		array(
+			'label' => '%',
+			'value' => '%',
+		),
+	),
+	'section' => 'responsive',
+	'affect_on_change_el' => '',
+	'affect_on_change_rule' => '',
+	'tab' => __( 'Phone', 'live-composer-page-builder' ),
+),
+
+array(
+	'label' => __( 'Right', 'live-composer-page-builder' ),
+	'id' => 'css_res_p_content_padding_right',
+	'onlypositive' => true, // Value can't be negative.
+	'std' => '25',
+	'type' => 'slider',
+	'refresh_on_change' => false,
+	'affect_on_change_el' => '.dslc-accordion-content',
+	'affect_on_change_rule' => 'padding-right',
+	'section' => 'responsive',
+	'ext' => 'px',
+	'tab' => __( 'Phone', 'live-composer-page-builder' ),
+	'min' => -2000,
+	'max' => 2000,
+),
+
+array(
+	'id' => 'css_res_p_content_padding_group',
+	'type' => 'group',
+	'action' => 'close',
+	'section' => 'responsive',
+	'tab' => __( 'Phone', 'live-composer-page-builder' ),
+),
 			array(
 				'label' => __( 'Content - Font Size', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_content_font_size',
@@ -2460,102 +3657,174 @@ class DSLC_Accordion extends DSLC_Module {
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				'ext' => 'px',
 			),
-			array(
-				'label' => __( 'Content - Padding', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_content_padding_group',
-				'type' => 'group',
-				'action' => 'open',
-				'section' => 'responsive',
-				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-			),
-			array(
-				'id' => 'css_res_p_content_padding_unit',
-				'std' => '',
-				'label' => __( 'Padding Unit', 'live-composer-page-builder' ),
-				'type' => 'select',
-				'refresh_on_change' => false,
-				'choices' => array(
-					array(
-						'label' => 'px',
-						'value' => 'px',
-					),
-					array(
-						'label' => '%',
-						'value' => '%',
-					),
-				),
-				'section' => 'responsive',
-				'affect_on_change_el' => '',
-				'affect_on_change_rule' => '',
-				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'Top', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_content_padding_top',
-				'onlypositive' => true, // Value can't be negative.
-				'min' => -2000,
-				'max' => 2000,
-				'std' => '25',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion-content',
-				'affect_on_change_rule' => 'padding-top',
-				'section' => 'responsive',
-				'ext' => 'px',
-				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'Bottom', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_content_padding_bottom',
-				'onlypositive' => true, // Value can't be negative.
-				'min' => -2000,
-				'max' => 2000,
-				'std' => '25',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion-content',
-				'affect_on_change_rule' => 'padding-bottom',
-				'section' => 'responsive',
-				'ext' => 'px',
-				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'Left', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_content_padding_left',
-				'onlypositive' => true, // Value can't be negative.
-				'std' => '25',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion-content',
-				'affect_on_change_rule' => 'padding-left',
-				'section' => 'responsive',
-				'ext' => 'px',
-				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-				'min' => -2000,
-				'max' => 2000,
-			),
-			array(
-				'label' => __( 'Right', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_content_padding_right',
-				'onlypositive' => true, // Value can't be negative.
-				'std' => '25',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-accordion-content',
-				'affect_on_change_rule' => 'padding-right',
-				'section' => 'responsive',
-				'ext' => 'px',
-				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-				'min' => -2000,
-				'max' => 2000,
-			),
-			array(
-				'id' => 'css_res_p_content_padding_group',
-				'type' => 'group',
-				'action' => 'close',
-				'section' => 'responsive',
-				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-			),
+array(
+	'label' => __( 'Content - Padding', 'live-composer-page-builder' ),
+	'id' => 'css_res_p_content_padding_group',
+	'type' => 'group',
+	'action' => 'open',
+	'section' => 'responsive',
+	'tab' => __( 'Phone', 'live-composer-page-builder' ),
+),
+
+array(
+	'id' => 'css_res_p_content_padding_top_unit',
+	'std' => 'px',
+	'label' => __( 'Top Unit', 'live-composer-page-builder' ),
+	'type' => 'select',
+	'refresh_on_change' => false,
+	'choices' => array(
+		array(
+			'label' => 'px',
+			'value' => 'px',
+		),
+		array(
+			'label' => '%',
+			'value' => '%',
+		),
+	),
+	'section' => 'responsive',
+	'affect_on_change_el' => '',
+	'affect_on_change_rule' => '',
+	'tab' => __( 'Phone', 'live-composer-page-builder' ),
+),
+
+array(
+	'label' => __( 'Top', 'live-composer-page-builder' ),
+	'id' => 'css_res_p_content_padding_top',
+	'onlypositive' => true,
+	'min' => -2000,
+	'max' => 2000,
+	'std' => '25',
+	'type' => 'slider',
+	'refresh_on_change' => false,
+	'affect_on_change_el' => '.dslc-accordion-content',
+	'affect_on_change_rule' => 'padding-top',
+	'section' => 'responsive',
+	'ext' => 'px',
+	'tab' => __( 'Phone', 'live-composer-page-builder' ),
+),
+
+array(
+	'id' => 'css_res_p_content_padding_bottom_unit',
+	'std' => 'px',
+	'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+	'type' => 'select',
+	'refresh_on_change' => false,
+	'choices' => array(
+		array(
+			'label' => 'px',
+			'value' => 'px',
+		),
+		array(
+			'label' => '%',
+			'value' => '%',
+		),
+	),
+	'section' => 'responsive',
+	'affect_on_change_el' => '',
+	'affect_on_change_rule' => '',
+	'tab' => __( 'Phone', 'live-composer-page-builder' ),
+),
+
+array(
+	'label' => __( 'Bottom', 'live-composer-page-builder' ),
+	'id' => 'css_res_p_content_padding_bottom',
+	'onlypositive' => true,
+	'min' => -2000,
+	'max' => 2000,
+	'std' => '25',
+	'type' => 'slider',
+	'refresh_on_change' => false,
+	'affect_on_change_el' => '.dslc-accordion-content',
+	'affect_on_change_rule' => 'padding-bottom',
+	'section' => 'responsive',
+	'ext' => 'px',
+	'tab' => __( 'Phone', 'live-composer-page-builder' ),
+),
+
+array(
+	'id' => 'css_res_p_content_padding_left_unit',
+	'std' => 'px',
+	'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+	'type' => 'select',
+	'refresh_on_change' => false,
+	'choices' => array(
+		array(
+			'label' => 'px',
+			'value' => 'px',
+		),
+		array(
+			'label' => '%',
+			'value' => '%',
+		),
+	),
+	'section' => 'responsive',
+	'affect_on_change_el' => '',
+	'affect_on_change_rule' => '',
+	'tab' => __( 'Phone', 'live-composer-page-builder' ),
+),
+
+array(
+	'label' => __( 'Left', 'live-composer-page-builder' ),
+	'id' => 'css_res_p_content_padding_left',
+	'onlypositive' => true,
+	'std' => '25',
+	'type' => 'slider',
+	'refresh_on_change' => false,
+	'affect_on_change_el' => '.dslc-accordion-content',
+	'affect_on_change_rule' => 'padding-left',
+	'section' => 'responsive',
+	'ext' => 'px',
+	'tab' => __( 'Phone', 'live-composer-page-builder' ),
+	'min' => -2000,
+	'max' => 2000,
+),
+
+array(
+	'id' => 'css_res_p_content_padding_right_unit',
+	'std' => 'px',
+	'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+	'type' => 'select',
+	'refresh_on_change' => false,
+	'choices' => array(
+		array(
+			'label' => 'px',
+			'value' => 'px',
+		),
+		array(
+			'label' => '%',
+			'value' => '%',
+		),
+	),
+	'section' => 'responsive',
+	'affect_on_change_el' => '',
+	'affect_on_change_rule' => '',
+	'tab' => __( 'Phone', 'live-composer-page-builder' ),
+),
+
+array(
+	'label' => __( 'Right', 'live-composer-page-builder' ),
+	'id' => 'css_res_p_content_padding_right',
+	'onlypositive' => true,
+	'std' => '25',
+	'type' => 'slider',
+	'refresh_on_change' => false,
+	'affect_on_change_el' => '.dslc-accordion-content',
+	'affect_on_change_rule' => 'padding-right',
+	'section' => 'responsive',
+	'ext' => 'px',
+	'tab' => __( 'Phone', 'live-composer-page-builder' ),
+	'min' => -2000,
+	'max' => 2000,
+),
+
+array(
+	'id' => 'css_res_p_content_padding_group',
+	'type' => 'group',
+	'action' => 'close',
+	'section' => 'responsive',
+	'tab' => __( 'Phone', 'live-composer-page-builder' ),
+),
 
 		);
 

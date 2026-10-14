@@ -310,10 +310,11 @@ class DSLC_Testimonials extends DSLC_Module {
 				'action' => 'open',
 				'section' => 'styling',
 			),
+
 			array(
-				'id' => 'css_margin_unit',
+				'id' => 'css_margin_top_unit',
 				'std' => 'px',
-				'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -330,6 +331,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_el' => '',
 				'affect_on_change_rule' => '',
 			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_margin_top',
@@ -344,6 +346,28 @@ class DSLC_Testimonials extends DSLC_Module {
 				'section' => 'styling',
 				'ext' => 'px',
 			),
+
+			array(
+				'id' => 'css_margin_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_margin_bottom',
@@ -358,6 +382,28 @@ class DSLC_Testimonials extends DSLC_Module {
 				'section' => 'styling',
 				'ext' => 'px',
 			),
+
+			array(
+				'id' => 'css_margin_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_margin_left',
@@ -372,6 +418,28 @@ class DSLC_Testimonials extends DSLC_Module {
 				'section' => 'styling',
 				'ext' => 'px',
 			),
+
+			array(
+				'id' => 'css_margin_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_margin_right',
@@ -386,6 +454,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'section' => 'styling',
 				'ext' => 'px',
 			),
+
 			array(
 				'id' => 'css_margin_group',
 				'type' => 'group',
@@ -721,6 +790,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Main', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_main_padding_top_unit',
+				'std' => 'px',
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Main', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_main_padding_top',
@@ -736,6 +828,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Main', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_main_padding_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Main', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_main_padding_bottom',
@@ -751,6 +866,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Main', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_main_padding_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Main', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_main_padding_left',
@@ -766,6 +904,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Main', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_main_padding_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Main', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_main_padding_right',
@@ -781,8 +942,8 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Main', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'label' => __( 'Padding', 'live-composer-page-builder' ),
 				'id' => 'css_main_padding_group',
 				'type' => 'group',
 				'action' => 'close',
@@ -943,91 +1104,185 @@ class DSLC_Testimonials extends DSLC_Module {
 				'max' => 2000,
 				'ext' => 'px',
 			 ),
-			 array(
+			array(
 				'label' => __( 'Padding', 'live-composer-page-builder' ),
 				'id' => 'css_logo_padding_group',
 				'type' => 'group',
 				'action' => 'open',
 				'section' => 'styling',
 				'tab' => __( 'Logo', 'live-composer-page-builder' ),
-			 ),
-			 array(
-					'id' => 'css_logo_padding_unit',
-					'std' => 'px',
-					'label' => __( 'Padding Unit', 'live-composer-page-builder' ),
-					'type' => 'select',
-					'refresh_on_change' => false,
-					'choices' => array(
-						array(
-							'label' => 'px',
-							'value' => 'px',
-						),
-						array(
-							'label' => '%',
-							'value' => '%',
-						),
+			),
+
+			array(
+				'id' => 'css_logo_padding_unit',
+				'std' => 'px',
+				'label' => __( 'Padding Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
 					),
-					'section' => 'styling',
-					'affect_on_change_el' => '',
-					'affect_on_change_rule' => '',
-					'tab' => __( 'Logo', 'live-composer-page-builder' ),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
 				),
-				array(
-					'label' => __( 'Top', 'live-composer-page-builder' ),
-					'id' => 'css_logo_padding_top',
-					'std' => '0',
-					'min' => -2000,
-					'max' => 2000,
-					'type' => 'slider',
-					'refresh_on_change' => false,
-					'affect_on_change_el' => '.dslc-testimonial-logo',
-					'affect_on_change_rule' => 'padding-top',
-					'section' => 'styling',
-					'tab' => __( 'Logo', 'live-composer-page-builder' ),
-					'ext' => 'px',
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Logo', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'id' => 'css_logo_padding_top_unit',
+				'std' => 'px',
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
 				),
-				array(
-					'label' => __( 'Right', 'live-composer-page-builder' ),
-					'id' => 'css_logo_padding_right',
-					'std' => '0',
-					'min' => -2000,
-					'max' => 2000,
-					'type' => 'slider',
-					'refresh_on_change' => false,
-					'affect_on_change_el' => '.dslc-testimonial-logo',
-					'affect_on_change_rule' => 'padding-right',
-					'section' => 'styling',
-					'tab' => __( 'Logo', 'live-composer-page-builder' ),
-					'ext' => 'px',
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Logo', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'label' => __( 'Top', 'live-composer-page-builder' ),
+				'id' => 'css_logo_padding_top',
+				'std' => '0',
+				'min' => -2000,
+				'max' => 2000,
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-testimonial-logo',
+				'affect_on_change_rule' => 'padding-top',
+				'section' => 'styling',
+				'tab' => __( 'Logo', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+
+			array(
+				'id' => 'css_logo_padding_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
 				),
-				array(
-					'label' => __( 'Bottom', 'live-composer-page-builder' ),
-					'id' => 'css_logo_padding_bottom',
-					'std' => '0',
-					'min' => -2000,
-					'max' => 2000,
-					'type' => 'slider',
-					'refresh_on_change' => false,
-					'affect_on_change_el' => '.dslc-testimonial-logo',
-					'affect_on_change_rule' => 'padding-bottom',
-					'section' => 'styling',
-					'tab' => __( 'Logo', 'live-composer-page-builder' ),
-					'ext' => 'px',
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Logo', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'label' => __( 'Right', 'live-composer-page-builder' ),
+				'id' => 'css_logo_padding_right',
+				'std' => '0',
+				'min' => -2000,
+				'max' => 2000,
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-testimonial-logo',
+				'affect_on_change_rule' => 'padding-right',
+				'section' => 'styling',
+				'tab' => __( 'Logo', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+
+			array(
+				'id' => 'css_logo_padding_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
 				),
-				array(
-					'label' => __( 'Left', 'live-composer-page-builder' ),
-					'id' => 'css_logo_padding_left',
-					'std' => '0',
-					'min' => -2000,
-					'max' => 2000,
-					'type' => 'slider',
-					'refresh_on_change' => false,
-					'affect_on_change_el' => '.dslc-testimonial-logo',
-					'affect_on_change_rule' => 'padding-left',
-					'section' => 'styling',
-					'tab' => __( 'Logo', 'live-composer-page-builder' ),
-					'ext' => 'px',
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Logo', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'label' => __( 'Bottom', 'live-composer-page-builder' ),
+				'id' => 'css_logo_padding_bottom',
+				'std' => '0',
+				'min' => -2000,
+				'max' => 2000,
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-testimonial-logo',
+				'affect_on_change_rule' => 'padding-bottom',
+				'section' => 'styling',
+				'tab' => __( 'Logo', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+
+			array(
+				'id' => 'css_logo_padding_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
 				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Logo', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'label' => __( 'Left', 'live-composer-page-builder' ),
+				'id' => 'css_logo_padding_left',
+				'std' => '0',
+				'min' => -2000,
+				'max' => 2000,
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-testimonial-logo',
+				'affect_on_change_rule' => 'padding-left',
+				'section' => 'styling',
+				'tab' => __( 'Logo', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+
 			array(
 				'id' => 'css_logo_padding_group',
 				'type' => 'group',
@@ -1043,10 +1298,11 @@ class DSLC_Testimonials extends DSLC_Module {
 					'section' => 'styling',
 					'tab' => __( 'Logo', 'live-composer-page-builder' ),
 				),
+
 				array(
-					'id' => 'css_logo_margin_unit',
+					'id' => 'css_logo_margin_top_unit',
 					'std' => 'px',
-					'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
+					'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 					'type' => 'select',
 					'refresh_on_change' => false,
 					'choices' => array(
@@ -1064,6 +1320,7 @@ class DSLC_Testimonials extends DSLC_Module {
 					'affect_on_change_rule' => '',
 					'tab' => __( 'Logo', 'live-composer-page-builder' ),
 				),
+
 				array(
 					'label' => __( 'Top', 'live-composer-page-builder' ),
 					'id' => 'css_logo_margin_top',
@@ -1078,6 +1335,29 @@ class DSLC_Testimonials extends DSLC_Module {
 					'tab' => __( 'Logo', 'live-composer-page-builder' ),
 					'ext' => 'px',
 				),
+
+				array(
+					'id' => 'css_logo_margin_right_unit',
+					'std' => 'px',
+					'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'styling',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Logo', 'live-composer-page-builder' ),
+				),
+
 				array(
 					'label' => __( 'Right', 'live-composer-page-builder' ),
 					'id' => 'css_logo_margin_right',
@@ -1092,6 +1372,29 @@ class DSLC_Testimonials extends DSLC_Module {
 					'tab' => __( 'Logo', 'live-composer-page-builder' ),
 					'ext' => 'px',
 				),
+
+				array(
+					'id' => 'css_logo_margin_bottom_unit',
+					'std' => 'px',
+					'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'styling',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Logo', 'live-composer-page-builder' ),
+				),
+
 				array(
 					'label' => __( 'Bottom', 'live-composer-page-builder' ),
 					'id' => 'css_logo_margin_bottom',
@@ -1106,6 +1409,29 @@ class DSLC_Testimonials extends DSLC_Module {
 					'tab' => __( 'Logo', 'live-composer-page-builder' ),
 					'ext' => 'px',
 				),
+
+				array(
+					'id' => 'css_logo_margin_left_unit',
+					'std' => 'px',
+					'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'styling',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Logo', 'live-composer-page-builder' ),
+				),
+
 				array(
 					'label' => __( 'Left', 'live-composer-page-builder' ),
 					'id' => 'css_logo_margin_left',
@@ -1120,6 +1446,7 @@ class DSLC_Testimonials extends DSLC_Module {
 					'tab' => __( 'Logo', 'live-composer-page-builder' ),
 					'ext' => 'px',
 				),
+
 			array(
 				'id' => 'css_logo_margin_group',
 				'type' => 'group',
@@ -1281,10 +1608,11 @@ class DSLC_Testimonials extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'Icon', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'id' => 'css_icon_margin_unit',
+				'id' => 'css_icon_margin_top_unit',
 				'std' => 'px',
-				'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -1302,6 +1630,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Icon', 'live-composer-page-builder' ),
 			),
+
 				array(
 					'label' => __( 'Top', 'live-composer-page-builder' ),
 					'id' => 'css_icon_margin_top',
@@ -1316,6 +1645,29 @@ class DSLC_Testimonials extends DSLC_Module {
 					'ext' => 'px',
 					'tab' => __( 'Icon', 'live-composer-page-builder' ),
 				),
+
+				array(
+					'id' => 'css_icon_margin_right_unit',
+					'std' => 'px',
+					'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'styling',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Icon', 'live-composer-page-builder' ),
+				),
+
 				array(
 					'label' => __( 'Right', 'live-composer-page-builder' ),
 					'id' => 'css_icon_margin_right',
@@ -1330,6 +1682,29 @@ class DSLC_Testimonials extends DSLC_Module {
 					'ext' => 'px',
 					'tab' => __( 'Icon', 'live-composer-page-builder' ),
 				),
+
+				array(
+					'id' => 'css_icon_margin_bottom_unit',
+					'std' => 'px',
+					'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'styling',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Icon', 'live-composer-page-builder' ),
+				),
+
 				array(
 					'label' => __( 'Bottom', 'live-composer-page-builder' ),
 					'id' => 'css_icon_margin_bottom',
@@ -1344,6 +1719,29 @@ class DSLC_Testimonials extends DSLC_Module {
 					'ext' => 'px',
 					'tab' => __( 'Icon', 'live-composer-page-builder' ),
 				),
+
+				array(
+					'id' => 'css_icon_margin_left_unit',
+					'std' => 'px',
+					'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'styling',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Icon', 'live-composer-page-builder' ),
+				),
+
 				array(
 					'label' => __( 'Left', 'live-composer-page-builder' ),
 					'id' => 'css_icon_margin_left',
@@ -1358,6 +1756,7 @@ class DSLC_Testimonials extends DSLC_Module {
 					'ext' => 'px',
 					'tab' => __( 'Icon', 'live-composer-page-builder' ),
 				),
+
 			array(
 				'id' => 'css_icon_margin_group',
 				'type' => 'group',
@@ -1556,10 +1955,11 @@ class DSLC_Testimonials extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'Quote', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'id' => 'css_quote_margin_unit',
+				'id' => 'css_quote_margin_top_unit',
 				'std' => 'px',
-				'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -1577,6 +1977,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Quote', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_quote_margin_top',
@@ -1592,6 +1993,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Quote', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_quote_margin_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Quote', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_quote_margin_bottom',
@@ -1607,6 +2031,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Quote', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_quote_margin_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Quote', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_quote_margin_left',
@@ -1622,6 +2069,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Quote', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_quote_margin_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Quote', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_quote_margin_right',
@@ -1637,6 +2107,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Quote', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'id' => 'css_quote_margin_group',
 				'type' => 'group',
@@ -1652,6 +2123,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'Quote', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'id' => 'css_quote_padding_unit',
 				'std' => 'px',
@@ -1673,6 +2145,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Quote', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_quote_padding_top_unit',
+				'std' => 'px',
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Quote', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_quote_padding_top',
@@ -1688,6 +2183,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Quote', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_quote_padding_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Quote', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_quote_padding_bottom',
@@ -1703,10 +2221,32 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Quote', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_quote_padding_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Quote', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_quote_padding_left',
-				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'min' => -2000,
 				'max' => 2000,
@@ -1718,10 +2258,32 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Quote', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_quote_padding_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Quote', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_quote_padding_right',
-				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'min' => -2000,
 				'max' => 2000,
@@ -1733,8 +2295,8 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Quote', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'label' => __( 'Padding', 'live-composer-page-builder' ),
 				'id' => 'css_quote_padding_group',
 				'type' => 'group',
 				'action' => 'close',
@@ -1799,10 +2361,11 @@ class DSLC_Testimonials extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'Author', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'id' => 'css_author_margin_unit',
+				'id' => 'css_author_margin_top_unit',
 				'std' => 'px',
-				'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -1820,6 +2383,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Author', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_author_margin_top',
@@ -1835,6 +2399,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Author', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_author_margin_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Author', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_author_margin_bottom',
@@ -1850,6 +2437,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Author', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_author_margin_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Author', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_author_margin_left',
@@ -1865,6 +2475,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'min' => -2000,
 				'max' => 2000,
 			),
+
+			array(
+				'id' => 'css_author_margin_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Author', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_author_margin_right',
@@ -1880,6 +2513,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'min' => -2000,
 				'max' => 2000,
 			),
+
 			array(
 				'id' => 'css_author_margin_group',
 				'type' => 'group',
@@ -2010,10 +2644,11 @@ class DSLC_Testimonials extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'Avatar', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'id' => 'css_avatar_margin_unit',
+				'id' => 'css_avatar_margin_top_unit',
 				'std' => 'px',
-				'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -2031,6 +2666,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Avatar', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_avatar_margin_top',
@@ -2046,6 +2682,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Avatar', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_avatar_margin_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Avatar', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_avatar_margin_bottom',
@@ -2061,6 +2720,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Avatar', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_avatar_margin_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Avatar', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_avatar_margin_left',
@@ -2076,6 +2758,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Avatar', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_avatar_margin_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Avatar', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_avatar_margin_right',
@@ -2091,6 +2796,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Avatar', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'id' => 'css_avatar_margin_group',
 				'type' => 'group',
@@ -2106,6 +2812,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'Avatar', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'id' => 'css_avatar_padding_unit',
 				'std' => 'px',
@@ -2127,6 +2834,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Avatar', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_avatar_padding_top_unit',
+				'std' => 'px',
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Avatar', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_avatar_padding_top',
@@ -2142,6 +2872,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Avatar', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_avatar_padding_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Avatar', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_avatar_padding_bottom',
@@ -2157,6 +2910,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Avatar', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_avatar_padding_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Avatar', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_avatar_padding_left',
@@ -2172,6 +2948,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Avatar', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_avatar_padding_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Avatar', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_avatar_padding_right',
@@ -2187,8 +2986,8 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Avatar', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'label' => __( 'Padding', 'live-composer-page-builder' ),
 				'id' => 'css_avatar_padding_group',
 				'type' => 'group',
 				'action' => 'close',
@@ -2349,10 +3148,11 @@ class DSLC_Testimonials extends DSLC_Module {
 				'section' => 'styling',
 				'tab' => __( 'Name', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'id' => 'css_name_margin_unit',
+				'id' => 'css_name_margin_top_unit',
 				'std' => 'px',
-				'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -2370,6 +3170,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Name', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_name_margin_top',
@@ -2385,6 +3186,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Name', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_name_margin_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Name', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_name_margin_bottom',
@@ -2400,6 +3224,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Name', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_name_margin_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Name', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_name_margin_left',
@@ -2415,6 +3262,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Name', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_name_margin_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'styling',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Name', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_name_margin_right',
@@ -2430,6 +3300,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Name', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'id' => 'css_name_margin_group',
 				'type' => 'group',
@@ -2607,10 +3478,11 @@ class DSLC_Testimonials extends DSLC_Module {
 				'section' => 'responsive',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'id' => 'css_res_t_margin_unit',
+				'id' => 'css_res_t_margin_top_unit',
 				'std' => 'px',
-				'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -2628,6 +3500,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_margin_top',
@@ -2643,6 +3516,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_margin_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_margin_bottom',
@@ -2658,6 +3554,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_margin_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_margin_left',
@@ -2673,6 +3592,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_margin_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_margin_right',
@@ -2688,6 +3630,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'id' => 'css_res_t_margin_group',
 				'type' => 'group',
@@ -2733,6 +3676,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'section' => 'responsive',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'id' => 'css_res_t_main_padding_unit',
 				'std' => 'px',
@@ -2754,6 +3698,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_main_padding_top_unit',
+				'std' => 'px',
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_main_padding_top',
@@ -2769,6 +3736,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_main_padding_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_main_padding_bottom',
@@ -2784,6 +3774,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_main_padding_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_main_padding_left',
@@ -2799,6 +3812,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_main_padding_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_main_padding_right',
@@ -2814,8 +3850,8 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'label' => __( 'Padding', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_main_padding_group',
 				'type' => 'group',
 				'action' => 'close',
@@ -2844,6 +3880,7 @@ class DSLC_Testimonials extends DSLC_Module {
 			   'section' => 'responsive',
 			   'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'id' => 'css_res_t_logo_padding_unit',
 				'std' => 'px',
@@ -2865,81 +3902,11 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
-			   array(
-				   'label' => __( 'Top', 'live-composer-page-builder' ),
-				   'id' => 'css_res_t_logo_padding_top',
-				   'std' => '0',
-					'min' => -2000,
-					'max' => 2000,
-				   'type' => 'slider',
-				   'refresh_on_change' => false,
-				   'affect_on_change_el' => '.dslc-testimonial-logo',
-				   'affect_on_change_rule' => 'padding-top',
-				   'section' => 'responsive',
-				   'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-				   'ext' => 'px',
-			   ),
-			   array(
-				   'label' => __( 'Right', 'live-composer-page-builder' ),
-				   'id' => 'css_res_t_logo_padding_right',
-				   'std' => '0',
-					'min' => -2000,
-					'max' => 2000,
-				   'type' => 'slider',
-				   'refresh_on_change' => false,
-				   'affect_on_change_el' => '.dslc-testimonial-logo',
-				   'affect_on_change_rule' => 'padding-right',
-				   'section' => 'responsive',
-				   'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-				   'ext' => 'px',
-			   ),
-			   array(
-				   'label' => __( 'Bottom', 'live-composer-page-builder' ),
-				   'id' => 'css_res_t_logo_padding_bottom',
-				   'std' => '0',
-					'min' => -2000,
-					'max' => 2000,
-				   'type' => 'slider',
-				   'refresh_on_change' => false,
-				   'affect_on_change_el' => '.dslc-testimonial-logo',
-				   'affect_on_change_rule' => 'padding-bottom',
-				   'section' => 'responsive',
-				   'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-				   'ext' => 'px',
-			   ),
-			   array(
-				   'label' => __( 'Left', 'live-composer-page-builder' ),
-				   'id' => 'css_res_t_logo_padding_left',
-				   'std' => '0',
-					'min' => -2000,
-					'max' => 2000,
-				   'type' => 'slider',
-				   'refresh_on_change' => false,
-				   'affect_on_change_el' => '.dslc-testimonial-logo',
-				   'affect_on_change_rule' => 'padding-left',
-				   'section' => 'responsive',
-				   'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-				   'ext' => 'px',
-			   ),
+
 			array(
-			   'id' => 'css_res_t_logo_padding_group',
-			   'type' => 'group',
-			   'action' => 'close',
-			   'section' => 'responsive',
-			   'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-			),
-			array(
-			   'label' => __( 'Logo - Margin', 'live-composer-page-builder' ),
-			   'id' => 'css_res_t_logo_margin_group',
-			   'type' => 'group',
-			   'action' => 'open',
-			   'section' => 'responsive',
-			   'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-			),
-			array(
-				'id' => 'css_res_t_logo_margin_unit',
+				'id' => 'css_res_t_logo_padding_top_unit',
 				'std' => 'px',
-				'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -2957,12 +3924,177 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'label' => __( 'Top', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_logo_padding_top',
+				'std' => '0',
+				'min' => -2000,
+				'max' => 2000,
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-testimonial-logo',
+				'affect_on_change_rule' => 'padding-top',
+				'section' => 'responsive',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+
+			array(
+				'id' => 'css_res_t_logo_padding_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'label' => __( 'Right', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_logo_padding_right',
+				'std' => '0',
+				'min' => -2000,
+				'max' => 2000,
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-testimonial-logo',
+				'affect_on_change_rule' => 'padding-right',
+				'section' => 'responsive',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+
+			array(
+				'id' => 'css_res_t_logo_padding_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'label' => __( 'Bottom', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_logo_padding_bottom',
+				'std' => '0',
+				'min' => -2000,
+				'max' => 2000,
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-testimonial-logo',
+				'affect_on_change_rule' => 'padding-bottom',
+				'section' => 'responsive',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+
+			array(
+				'id' => 'css_res_t_logo_padding_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'label' => __( 'Left', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_logo_padding_left',
+				'std' => '0',
+				'min' => -2000,
+				'max' => 2000,
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-testimonial-logo',
+				'affect_on_change_rule' => 'padding-left',
+				'section' => 'responsive',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				'ext' => 'px',
+			),
+
+			array(
+			   'id' => 'css_res_t_logo_padding_group',
+			   'type' => 'group',
+			   'action' => 'close',
+			   'section' => 'responsive',
+			   'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+			array(
+			   'label' => __( 'Logo - Margin', 'live-composer-page-builder' ),
+			   'id' => 'css_res_t_logo_margin_group',
+			   'type' => 'group',
+			   'action' => 'open',
+			   'section' => 'responsive',
+			   'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'id' => 'css_res_t_logo_margin_top_unit',
+				'std' => 'px',
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			   array(
 				   'label' => __( 'Top', 'live-composer-page-builder' ),
 				   'id' => 'css_res_t_logo_margin_top',
 				   'std' => '0',
-					'min' => -2000,
-					'max' => 2000,
+				   'min' => -2000,
+				   'max' => 2000,
 				   'type' => 'slider',
 				   'refresh_on_change' => false,
 				   'affect_on_change_el' => '.dslc-testimonial-logo',
@@ -2971,12 +4103,35 @@ class DSLC_Testimonials extends DSLC_Module {
 				   'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				   'ext' => 'px',
 			   ),
+
+			array(
+				'id' => 'css_res_t_logo_margin_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			   array(
 				   'label' => __( 'Right', 'live-composer-page-builder' ),
 				   'id' => 'css_res_t_logo_margin_right',
 				   'std' => '0',
-					'min' => -2000,
-					'max' => 2000,
+				   'min' => -2000,
+				   'max' => 2000,
 				   'type' => 'slider',
 				   'refresh_on_change' => false,
 				   'affect_on_change_el' => '.dslc-testimonial-logo',
@@ -2985,12 +4140,35 @@ class DSLC_Testimonials extends DSLC_Module {
 				   'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				   'ext' => 'px',
 			   ),
+
+			array(
+				'id' => 'css_res_t_logo_margin_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			   array(
 				   'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				   'id' => 'css_res_t_logo_margin_bottom',
 				   'std' => '0',
-					'min' => -2000,
-					'max' => 2000,
+				   'min' => -2000,
+				   'max' => 2000,
 				   'type' => 'slider',
 				   'refresh_on_change' => false,
 				   'affect_on_change_el' => '.dslc-testimonial-logo',
@@ -2999,12 +4177,35 @@ class DSLC_Testimonials extends DSLC_Module {
 				   'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				   'ext' => 'px',
 			   ),
+
+			array(
+				'id' => 'css_res_t_logo_margin_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			   array(
 				   'label' => __( 'Left', 'live-composer-page-builder' ),
 				   'id' => 'css_res_t_logo_margin_left',
 				   'std' => '0',
-					'min' => -2000,
-					'max' => 2000,
+				   'min' => -2000,
+				   'max' => 2000,
 				   'type' => 'slider',
 				   'refresh_on_change' => false,
 				   'affect_on_change_el' => '.dslc-testimonial-logo',
@@ -3013,6 +4214,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				   'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				   'ext' => 'px',
 			   ),
+
 			array(
 			   'id' => 'css_res_t_logo_margin_group',
 			   'type' => 'group',
@@ -3042,10 +4244,11 @@ class DSLC_Testimonials extends DSLC_Module {
 				'section' => 'responsive',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'id' => 'css_res_t_icon_margin_unit',
+				'id' => 'css_res_t_icon_margin_top_unit',
 				'std' => 'px',
-				'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -3063,6 +4266,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
 				array(
 					'label' => __( 'Top', 'live-composer-page-builder' ),
 					'id' => 'css_res_t_icon_margin_top',
@@ -3077,6 +4281,29 @@ class DSLC_Testimonials extends DSLC_Module {
 					'ext' => 'px',
 					'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				),
+
+				array(
+					'id' => 'css_res_t_icon_margin_right_unit',
+					'std' => 'px',
+					'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				),
+
 				array(
 					'label' => __( 'Right', 'live-composer-page-builder' ),
 					'id' => 'css_res_t_icon_margin_right',
@@ -3091,6 +4318,29 @@ class DSLC_Testimonials extends DSLC_Module {
 					'ext' => 'px',
 					'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				),
+
+				array(
+					'id' => 'css_res_t_icon_margin_bottom_unit',
+					'std' => 'px',
+					'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				),
+
 				array(
 					'label' => __( 'Bottom', 'live-composer-page-builder' ),
 					'id' => 'css_res_t_icon_margin_bottom',
@@ -3105,6 +4355,29 @@ class DSLC_Testimonials extends DSLC_Module {
 					'ext' => 'px',
 					'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				),
+
+				array(
+					'id' => 'css_res_t_icon_margin_left_unit',
+					'std' => 'px',
+					'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+				),
+
 				array(
 					'label' => __( 'Left', 'live-composer-page-builder' ),
 					'id' => 'css_res_t_icon_margin_left',
@@ -3119,6 +4392,7 @@ class DSLC_Testimonials extends DSLC_Module {
 					'ext' => 'px',
 					'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 				),
+
 			array(
 				'id' => 'css_res_t_icon_margin_group',
 				'type' => 'group',
@@ -3164,10 +4438,11 @@ class DSLC_Testimonials extends DSLC_Module {
 				'section' => 'responsive',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'id' => 'css_res_t_quote_margin_unit',
+				'id' => 'css_res_t_quote_margin_top_unit',
 				'std' => 'px',
-				'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -3185,10 +4460,11 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_quote_margin_top',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '18',
@@ -3200,10 +4476,33 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_quote_margin_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_quote_margin_bottom',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '18',
@@ -3215,10 +4514,33 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_quote_margin_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_quote_margin_left',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'std' => '18',
 				'min' => -2000,
 				'max' => 2000,
@@ -3230,10 +4552,33 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_quote_margin_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_quote_margin_right',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'std' => '18',
 				'min' => -2000,
 				'max' => 2000,
@@ -3245,6 +4590,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'id' => 'css_res_t_quote_margin_group',
 				'type' => 'group',
@@ -3260,6 +4606,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'section' => 'responsive',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'id' => 'css_res_t_quote_padding_unit',
 				'std' => 'px',
@@ -3281,6 +4628,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_quote_padding_top_unit',
+				'std' => 'px',
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_quote_padding_top',
@@ -3296,6 +4666,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_quote_padding_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_quote_padding_bottom',
@@ -3311,56 +4704,11 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'label' => __( 'Left', 'live-composer-page-builder' ),
-				'id' => 'css_res_t_quote_padding_left',
-				'onlypositive' => true, // Value can't be negative.
-				'std' => '0',
-				'min' => -2000,
-				'max' => 2000,
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-testimonial-quote',
-				'affect_on_change_rule' => 'padding-left',
-				'section' => 'responsive',
-				'ext' => 'px',
-				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'Right', 'live-composer-page-builder' ),
-				'id' => 'css_res_t_quote_padding_right',
-				'onlypositive' => true, // Value can't be negative.
-				'std' => '0',
-				'min' => -2000,
-				'max' => 2000,
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-testimonial-quote',
-				'affect_on_change_rule' => 'padding-right',
-				'section' => 'responsive',
-				'ext' => 'px',
-				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'Padding', 'live-composer-page-builder' ),
-				'id' => 'css_res_t_quote_padding_group',
-				'type' => 'group',
-				'action' => 'close',
-				'section' => 'responsive',
-				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-			),
-			array(
-				'label' => __( 'Author - Margin', 'live-composer-page-builder' ),
-				'id' => 'css_res_t_author_margin_group',
-				'type' => 'group',
-				'action' => 'open',
-				'section' => 'responsive',
-				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
-			),
-			array(
-				'id' => 'css_res_t_author_margin_unit',
+				'id' => 'css_res_t_quote_padding_left_unit',
 				'std' => 'px',
-				'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -3378,10 +4726,101 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'label' => __( 'Left', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_quote_padding_left',
+				'std' => '0',
+				'min' => -2000,
+				'max' => 2000,
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-testimonial-quote',
+				'affect_on_change_rule' => 'padding-left',
+				'section' => 'responsive',
+				'ext' => 'px',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'id' => 'css_res_t_quote_padding_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'label' => __( 'Right', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_quote_padding_right',
+				'std' => '0',
+				'min' => -2000,
+				'max' => 2000,
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-testimonial-quote',
+				'affect_on_change_rule' => 'padding-right',
+				'section' => 'responsive',
+				'ext' => 'px',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'id' => 'css_res_t_quote_padding_group',
+				'type' => 'group',
+				'action' => 'close',
+				'section' => 'responsive',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+			array(
+				'label' => __( 'Author - Margin', 'live-composer-page-builder' ),
+				'id' => 'css_res_t_author_margin_group',
+				'type' => 'group',
+				'action' => 'open',
+				'section' => 'responsive',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'id' => 'css_res_t_author_margin_top_unit',
+				'std' => 'px',
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_author_margin_top',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '0',
@@ -3393,10 +4832,33 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_author_margin_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_author_margin_bottom',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '0',
@@ -3408,10 +4870,33 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_author_margin_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_author_margin_left',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'std' => '0',
 				'min' => -2000,
 				'max' => 2000,
@@ -3423,10 +4908,33 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_author_margin_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_author_margin_right',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -3438,6 +4946,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'min' => -2000,
 				'max' => 2000,
 			),
+
 			array(
 				'id' => 'css_res_t_author_margin_group',
 				'type' => 'group',
@@ -3453,10 +4962,11 @@ class DSLC_Testimonials extends DSLC_Module {
 				'section' => 'responsive',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'id' => 'css_res_t_avatar_margin_unit',
+				'id' => 'css_res_t_avatar_margin_top_unit',
 				'std' => 'px',
-				'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -3474,10 +4984,11 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_avatar_margin_top',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '20',
@@ -3489,10 +5000,33 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_avatar_margin_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_avatar_margin_bottom',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '20',
@@ -3504,10 +5038,33 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_avatar_margin_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_avatar_margin_left',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'std' => '20',
 				'min' => -2000,
 				'max' => 2000,
@@ -3519,10 +5076,33 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_avatar_margin_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_avatar_margin_right',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'std' => '20',
 				'min' => -2000,
 				'max' => 2000,
@@ -3534,6 +5114,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'id' => 'css_res_t_avatar_margin_group',
 				'type' => 'group',
@@ -3549,6 +5130,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'section' => 'responsive',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'id' => 'css_res_t_avatar_padding_unit',
 				'std' => 'px',
@@ -3570,13 +5152,36 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_avatar_padding_top_unit',
+				'std' => 'px',
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_avatar_padding_top',
 				'onlypositive' => true, // Value can't be negative.
+				'std' => '0',
 				'min' => -2000,
 				'max' => 2000,
-				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-testimonial-author-avatar',
@@ -3585,13 +5190,36 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_avatar_padding_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_avatar_padding_bottom',
 				'onlypositive' => true, // Value can't be negative.
+				'std' => '0',
 				'min' => -2000,
 				'max' => 2000,
-				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
 				'affect_on_change_el' => '.dslc-testimonial-author-avatar',
@@ -3600,10 +5228,32 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_avatar_padding_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_avatar_padding_left',
-				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'min' => -2000,
 				'max' => 2000,
@@ -3615,10 +5265,32 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_avatar_padding_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_avatar_padding_right',
-				'onlypositive' => true, // Value can't be negative.
 				'std' => '0',
 				'min' => -2000,
 				'max' => 2000,
@@ -3630,8 +5302,8 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'label' => __( 'Padding', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_avatar_padding_group',
 				'type' => 'group',
 				'action' => 'close',
@@ -3675,10 +5347,11 @@ class DSLC_Testimonials extends DSLC_Module {
 				'section' => 'responsive',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'id' => 'css_res_t_name_margin_unit',
+				'id' => 'css_res_t_name_margin_top_unit',
 				'std' => 'px',
-				'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -3696,10 +5369,11 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_name_margin_top',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '10',
@@ -3711,10 +5385,33 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_name_margin_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_name_margin_bottom',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '8',
@@ -3726,10 +5423,33 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_name_margin_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_name_margin_left',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'std' => '10',
 				'min' => -2000,
 				'max' => 2000,
@@ -3741,10 +5461,33 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_t_name_margin_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_res_t_name_margin_right',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'std' => '10',
 				'min' => -2000,
 				'max' => 2000,
@@ -3756,6 +5499,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Tablet', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'id' => 'css_res_t_name_margin_group',
 				'type' => 'group',
@@ -3809,10 +5553,11 @@ class DSLC_Testimonials extends DSLC_Module {
 				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'id' => 'css_res_p_margin_unit',
+				'id' => 'css_res_p_margin_top_unit',
 				'std' => 'px',
-				'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -3830,10 +5575,11 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_margin_top',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '0',
@@ -3845,10 +5591,33 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_p_margin_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_margin_bottom',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '0',
@@ -3860,10 +5629,33 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_p_margin_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_margin_left',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'std' => '0',
 				'min' => -2000,
 				'max' => 2000,
@@ -3875,10 +5667,33 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_p_margin_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_margin_right',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'std' => '0',
 				'min' => -2000,
 				'max' => 2000,
@@ -3890,6 +5705,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'id' => 'css_res_p_margin_group',
 				'type' => 'group',
@@ -3958,6 +5774,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_p_main_padding_top_unit',
+				'std' => 'px',
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_main_padding_top',
@@ -3973,6 +5812,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_p_main_padding_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_main_padding_bottom',
@@ -3988,6 +5850,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_p_main_padding_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_main_padding_left',
@@ -4003,6 +5888,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_p_main_padding_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_main_padding_right',
@@ -4018,6 +5926,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'label' => __( 'Padding', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_main_padding_group',
@@ -4069,6 +5978,29 @@ class DSLC_Testimonials extends DSLC_Module {
 					'affect_on_change_rule' => '',
 					'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				),
+
+				array(
+					'id' => 'css_res_p_logo_padding_top_unit',
+					'std' => 'px',
+					'label' => __( 'Top Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Phone', 'live-composer-page-builder' ),
+				),
+
 			   array(
 				   'label' => __( 'Top', 'live-composer-page-builder' ),
 				   'id' => 'css_res_p_logo_padding_top',
@@ -4083,6 +6015,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				   'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				   'ext' => 'px',
 			   ),
+
+				array(
+					'id' => 'css_res_p_logo_padding_right_unit',
+					'std' => 'px',
+					'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Phone', 'live-composer-page-builder' ),
+				),
+
 			   array(
 				   'label' => __( 'Right', 'live-composer-page-builder' ),
 				   'id' => 'css_res_p_logo_padding_right',
@@ -4097,6 +6052,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				   'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				   'ext' => 'px',
 			   ),
+
+				array(
+					'id' => 'css_res_p_logo_padding_bottom_unit',
+					'std' => 'px',
+					'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Phone', 'live-composer-page-builder' ),
+				),
+
 			   array(
 				   'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				   'id' => 'css_res_p_logo_padding_bottom',
@@ -4111,6 +6089,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				   'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				   'ext' => 'px',
 			   ),
+
+				array(
+					'id' => 'css_res_p_logo_padding_left_unit',
+					'std' => 'px',
+					'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __( 'Phone', 'live-composer-page-builder' ),
+				),
+
 			   array(
 				   'label' => __( 'Left', 'live-composer-page-builder' ),
 				   'id' => 'css_res_p_logo_padding_left',
@@ -4125,6 +6126,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				   'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				   'ext' => 'px',
 			   ),
+
 			array(
 			   'id' => 'css_res_p_logo_padding_group',
 			   'type' => 'group',
@@ -4140,10 +6142,11 @@ class DSLC_Testimonials extends DSLC_Module {
 			   'section' => 'responsive',
 			   'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'id' => 'css_res_p_logo_margin_unit',
+				'id' => 'css_res_p_logo_margin_top_unit',
 				'std' => 'px',
-				'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -4161,12 +6164,13 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
 			   array(
 				   'label' => __( 'Top', 'live-composer-page-builder' ),
 				   'id' => 'css_res_p_logo_margin_top',
 				   'std' => '0',
-					'min' => -2000,
-					'max' => 2000,
+				   'min' => -2000,
+				   'max' => 2000,
 				   'type' => 'slider',
 				   'refresh_on_change' => false,
 				   'affect_on_change_el' => '.dslc-testimonial-logo',
@@ -4175,12 +6179,35 @@ class DSLC_Testimonials extends DSLC_Module {
 				   'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				   'ext' => 'px',
 			   ),
+
+			array(
+				'id' => 'css_res_p_logo_margin_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 			   array(
 				   'label' => __( 'Right', 'live-composer-page-builder' ),
 				   'id' => 'css_res_p_logo_margin_right',
 				   'std' => '0',
-					'min' => -2000,
-					'max' => 2000,
+				   'min' => -2000,
+				   'max' => 2000,
 				   'type' => 'slider',
 				   'refresh_on_change' => false,
 				   'affect_on_change_el' => '.dslc-testimonial-logo',
@@ -4189,12 +6216,35 @@ class DSLC_Testimonials extends DSLC_Module {
 				   'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				   'ext' => 'px',
 			   ),
+
+			array(
+				'id' => 'css_res_p_logo_margin_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 			   array(
 				   'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				   'id' => 'css_res_p_logo_margin_bottom',
 				   'std' => '0',
-					'min' => -2000,
-					'max' => 2000,
+				   'min' => -2000,
+				   'max' => 2000,
 				   'type' => 'slider',
 				   'refresh_on_change' => false,
 				   'affect_on_change_el' => '.dslc-testimonial-logo',
@@ -4203,12 +6253,35 @@ class DSLC_Testimonials extends DSLC_Module {
 				   'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				   'ext' => 'px',
 			   ),
+
+			array(
+				'id' => 'css_res_p_logo_margin_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 			   array(
 				   'label' => __( 'Left', 'live-composer-page-builder' ),
 				   'id' => 'css_res_p_logo_margin_left',
 				   'std' => '0',
-					'min' => -2000,
-					'max' => 2000,
+				   'min' => -2000,
+				   'max' => 2000,
 				   'type' => 'slider',
 				   'refresh_on_change' => false,
 				   'affect_on_change_el' => '.dslc-testimonial-logo',
@@ -4217,6 +6290,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				   'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				   'ext' => 'px',
 			   ),
+
 			array(
 			   'id' => 'css_res_p_logo_margin_group',
 			   'type' => 'group',
@@ -4246,10 +6320,11 @@ class DSLC_Testimonials extends DSLC_Module {
 				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'id' => 'css_res_p_icon_margin_unit',
+				'id' => 'css_res_p_icon_margin_top_unit',
 				'std' => 'px',
-				'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -4267,6 +6342,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
 				array(
 					'label' => __( 'Top', 'live-composer-page-builder' ),
 					'id' => 'css_res_p_icon_margin_top',
@@ -4281,6 +6357,29 @@ class DSLC_Testimonials extends DSLC_Module {
 					'ext' => 'px',
 					'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				),
+
+			array(
+				'id' => 'css_res_p_icon_margin_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 				array(
 					'label' => __( 'Right', 'live-composer-page-builder' ),
 					'id' => 'css_res_p_icon_margin_right',
@@ -4295,6 +6394,29 @@ class DSLC_Testimonials extends DSLC_Module {
 					'ext' => 'px',
 					'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				),
+
+			array(
+				'id' => 'css_res_p_icon_margin_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 				array(
 					'label' => __( 'Bottom', 'live-composer-page-builder' ),
 					'id' => 'css_res_p_icon_margin_bottom',
@@ -4309,6 +6431,29 @@ class DSLC_Testimonials extends DSLC_Module {
 					'ext' => 'px',
 					'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				),
+
+			array(
+				'id' => 'css_res_p_icon_margin_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 				array(
 					'label' => __( 'Left', 'live-composer-page-builder' ),
 					'id' => 'css_res_p_icon_margin_left',
@@ -4323,6 +6468,7 @@ class DSLC_Testimonials extends DSLC_Module {
 					'ext' => 'px',
 					'tab' => __( 'Phone', 'live-composer-page-builder' ),
 				),
+
 			array(
 				'id' => 'css_res_p_icon_margin_group',
 				'type' => 'group',
@@ -4368,10 +6514,11 @@ class DSLC_Testimonials extends DSLC_Module {
 				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'id' => 'css_res_p_quote_margin_unit',
+				'id' => 'css_res_p_quote_margin_top_unit',
 				'std' => 'px',
-				'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -4389,10 +6536,11 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_quote_margin_top',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '18',
@@ -4404,40 +6552,33 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'label' => __( 'Bottom', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_quote_margin_bottom',
-				'onlypositive' => true, // Value can't be negative.
-				'min' => -2000,
-				'max' => 2000,
-				'std' => '18',
-				'type' => 'slider',
+				'id' => 'css_res_p_quote_margin_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-testimonial-quote',
-				'affect_on_change_rule' => 'margin-bottom',
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
 				'section' => 'responsive',
-				'ext' => 'px',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
-			array(
-				'label' => __( 'Left', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_quote_margin_left',
-				'onlypositive' => true, // Value can't be negative.
-				'std' => '18',
-				'min' => -2000,
-				'max' => 2000,
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-testimonial-quote',
-				'affect_on_change_rule' => 'margin-left',
-				'section' => 'responsive',
-				'ext' => 'px',
-				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_quote_margin_right',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'std' => '18',
 				'min' => -2000,
 				'max' => 2000,
@@ -4449,6 +6590,83 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_p_quote_margin_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'label' => __( 'Bottom', 'live-composer-page-builder' ),
+				'id' => 'css_res_p_quote_margin_bottom',
+				'onlypositive' => true,
+				'min' => -2000,
+				'max' => 2000,
+				'std' => '18',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-testimonial-quote',
+				'affect_on_change_rule' => 'margin-bottom',
+				'section' => 'responsive',
+				'ext' => 'px',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'id' => 'css_res_p_quote_margin_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'label' => __( 'Left', 'live-composer-page-builder' ),
+				'id' => 'css_res_p_quote_margin_left',
+				'onlypositive' => true,
+				'std' => '18',
+				'min' => -2000,
+				'max' => 2000,
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-testimonial-quote',
+				'affect_on_change_rule' => 'margin-left',
+				'section' => 'responsive',
+				'ext' => 'px',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'id' => 'css_res_p_quote_margin_group',
 				'type' => 'group',
@@ -4485,6 +6703,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_p_quote_padding_top_unit',
+				'std' => 'px',
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_quote_padding_top',
@@ -4500,6 +6741,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_p_quote_padding_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_quote_padding_bottom',
@@ -4515,6 +6779,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_p_quote_padding_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_quote_padding_left',
@@ -4530,6 +6817,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_p_quote_padding_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_quote_padding_right',
@@ -4545,6 +6855,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'label' => __( 'Padding', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_quote_padding_group',
@@ -4561,10 +6872,11 @@ class DSLC_Testimonials extends DSLC_Module {
 				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'id' => 'css_res_p_author_margin_unit',
+				'id' => 'css_res_p_author_margin_top_unit',
 				'std' => 'px',
-				'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -4582,10 +6894,11 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_author_margin_top',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '0',
@@ -4597,40 +6910,33 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'label' => __( 'Bottom', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_author_margin_bottom',
-				'onlypositive' => true, // Value can't be negative.
-				'min' => -2000,
-				'max' => 2000,
-				'std' => '0',
-				'type' => 'slider',
+				'id' => 'css_res_p_author_margin_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
 				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-testimonial-author',
-				'affect_on_change_rule' => 'margin-bottom',
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
 				'section' => 'responsive',
-				'ext' => 'px',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
-			array(
-				'label' => __( 'Left', 'live-composer-page-builder' ),
-				'id' => 'css_res_p_author_margin_left',
-				'onlypositive' => true, // Value can't be negative.
-				'std' => '0',
-				'type' => 'slider',
-				'refresh_on_change' => false,
-				'affect_on_change_el' => '.dslc-testimonial-author',
-				'affect_on_change_rule' => 'margin-left',
-				'section' => 'responsive',
-				'ext' => 'px',
-				'tab' => __( 'Phone', 'live-composer-page-builder' ),
-				'min' => -2000,
-				'max' => 2000,
-			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_author_margin_right',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'std' => '0',
 				'type' => 'slider',
 				'refresh_on_change' => false,
@@ -4642,6 +6948,83 @@ class DSLC_Testimonials extends DSLC_Module {
 				'min' => -2000,
 				'max' => 2000,
 			),
+
+			array(
+				'id' => 'css_res_p_author_margin_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'label' => __( 'Bottom', 'live-composer-page-builder' ),
+				'id' => 'css_res_p_author_margin_bottom',
+				'onlypositive' => true,
+				'min' => -2000,
+				'max' => 2000,
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-testimonial-author',
+				'affect_on_change_rule' => 'margin-bottom',
+				'section' => 'responsive',
+				'ext' => 'px',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'id' => 'css_res_p_author_margin_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
+			array(
+				'label' => __( 'Left', 'live-composer-page-builder' ),
+				'id' => 'css_res_p_author_margin_left',
+				'onlypositive' => true,
+				'std' => '0',
+				'type' => 'slider',
+				'refresh_on_change' => false,
+				'affect_on_change_el' => '.dslc-testimonial-author',
+				'affect_on_change_rule' => 'margin-left',
+				'section' => 'responsive',
+				'ext' => 'px',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+				'min' => -2000,
+				'max' => 2000,
+			),
+
 			array(
 				'id' => 'css_res_p_author_margin_group',
 				'type' => 'group',
@@ -4657,10 +7040,11 @@ class DSLC_Testimonials extends DSLC_Module {
 				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'id' => 'css_res_p_avatar_margin_unit',
+				'id' => 'css_res_p_avatar_margin_top_unit',
 				'std' => 'px',
-				'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -4678,10 +7062,11 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_avatar_margin_top',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '20',
@@ -4693,10 +7078,33 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_p_avatar_margin_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_avatar_margin_bottom',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '20',
@@ -4708,10 +7116,33 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_p_avatar_margin_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_avatar_margin_left',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'std' => '20',
 				'min' => -2000,
 				'max' => 2000,
@@ -4723,10 +7154,33 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_p_avatar_margin_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_avatar_margin_right',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'std' => '20',
 				'min' => -2000,
 				'max' => 2000,
@@ -4738,6 +7192,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'id' => 'css_res_p_avatar_margin_group',
 				'type' => 'group',
@@ -4774,6 +7229,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_p_avatar_padding_top_unit',
+				'std' => 'px',
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_avatar_padding_top',
@@ -4789,6 +7267,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_p_avatar_padding_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_avatar_padding_bottom',
@@ -4804,6 +7305,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_p_avatar_padding_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_avatar_padding_left',
@@ -4819,6 +7343,29 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_p_avatar_padding_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_avatar_padding_right',
@@ -4834,6 +7381,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'label' => __( 'Padding', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_avatar_padding_group',
@@ -4879,10 +7427,11 @@ class DSLC_Testimonials extends DSLC_Module {
 				'section' => 'responsive',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
 			array(
-				'id' => 'css_res_p_name_margin_unit',
+				'id' => 'css_res_p_name_margin_top_unit',
 				'std' => 'px',
-				'label' => __( 'Margin Unit', 'live-composer-page-builder' ),
+				'label' => __( 'Top Unit', 'live-composer-page-builder' ),
 				'type' => 'select',
 				'refresh_on_change' => false,
 				'choices' => array(
@@ -4900,10 +7449,11 @@ class DSLC_Testimonials extends DSLC_Module {
 				'affect_on_change_rule' => '',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'label' => __( 'Top', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_name_margin_top',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '10',
@@ -4915,10 +7465,33 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_p_name_margin_bottom_unit',
+				'std' => 'px',
+				'label' => __( 'Bottom Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Bottom', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_name_margin_bottom',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'min' => -2000,
 				'max' => 2000,
 				'std' => '8',
@@ -4930,10 +7503,33 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_p_name_margin_left_unit',
+				'std' => 'px',
+				'label' => __( 'Left Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Left', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_name_margin_left',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'std' => '10',
 				'min' => -2000,
 				'max' => 2000,
@@ -4945,10 +7541,33 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
+			array(
+				'id' => 'css_res_p_name_margin_right_unit',
+				'std' => 'px',
+				'label' => __( 'Right Unit', 'live-composer-page-builder' ),
+				'type' => 'select',
+				'refresh_on_change' => false,
+				'choices' => array(
+					array(
+						'label' => 'px',
+						'value' => 'px',
+					),
+					array(
+						'label' => '%',
+						'value' => '%',
+					),
+				),
+				'section' => 'responsive',
+				'affect_on_change_el' => '',
+				'affect_on_change_rule' => '',
+				'tab' => __( 'Phone', 'live-composer-page-builder' ),
+			),
+
 			array(
 				'label' => __( 'Right', 'live-composer-page-builder' ),
 				'id' => 'css_res_p_name_margin_right',
-				'onlypositive' => true, // Value can't be negative.
+				'onlypositive' => true,
 				'std' => '10',
 				'min' => -2000,
 				'max' => 2000,
@@ -4960,6 +7579,7 @@ class DSLC_Testimonials extends DSLC_Module {
 				'ext' => 'px',
 				'tab' => __( 'Phone', 'live-composer-page-builder' ),
 			),
+
 			array(
 				'id' => 'css_res_p_name_margin_group',
 				'type' => 'group',

@@ -4013,3 +4013,10 @@ body em {
 	gap: 2px;
 	line-height: normal;
 }
+.dslc-cta-module {
+	position: relative;
+	flex-grow: 1;
+}
+.dslc-cta-btn {
+	display: inline-block;
+}

@@ -64,6 +64,7 @@ class LC_Control {
 
 	private $options_panel; // Object of Class LC_Module_Options_Panel.
 	private $_module_control = array();
+	private $_all_controls = array();
 
 	private $_option_id;
 	private $_curr_value;
@@ -80,8 +81,9 @@ class LC_Control {
 		$this->options_panel = $options_panel_obj;
 	}
 
-	public function set_control_options( $module_control ) {
+	public function set_control_options( $module_control, $all_controls = array() ) {
 		$this->_module_control = $module_control;
+		$this->_all_controls = $all_controls;
 
 		$this->_option_id           = $module_control['id'];
 		$this->_section             = $this->get_section();
@@ -118,49 +120,46 @@ class LC_Control {
 	public function output_control() {
 
 		$module_control = $this->_module_control;
+		if ( substr($module_control['id'], -5) === '_unit' ) {
+			return;
+		}
 
 		$ext = ' ';
 		if ( isset( $module_control['ext'] ) ) {
 			$ext = $module_control['ext'];
-			
-			/**
-			 * START GENERALIZED DYNAMIC UNIT LOGIC
-			 * Applies to all controls containing _padding, _margin, _width, or _height.
-			 * Assumes Unit Selector IDs are prefixed with 'css_' (e.g., css_padding_unit).
-			 */
 
 			$control_id = $module_control['id'];
 			$unit_value = '';
-			
-			// Define all directional/dimensional suffixes that must be stripped.
-			$directional_suffixes = ['_top', '_right', '_bottom', '_left', '_width', '_height'];
-			
-			// Define the core CSS properties that indicate a dynamic unit is required.
-			$dynamic_unit_types = ['_padding', '_margin', '_width']; 
-			
+			$dynamic_unit_types = array(
+				'_padding',
+				'_margin',
+			);
+
 			$is_dynamic_unit_control = false;
-			foreach ($dynamic_unit_types as $type) {
-				if ($type !== '' && strpos($control_id, $type) !== false) {
+
+			foreach ( $dynamic_unit_types as $type ) {
+				if ( false !== strpos( $control_id, $type ) ) {
 					$is_dynamic_unit_control = true;
 					break;
 				}
 			}
 
-			if ($is_dynamic_unit_control) {
+			if ( $is_dynamic_unit_control ) {
+				$dedicated_unit_id = $control_id . '_unit';
+				$unit_value = $this->get_any_control_value( $dedicated_unit_id );
+				if ( empty( $unit_value ) ) {
 
-				// Step 1: Normalize the ID by removing directional/dimensional suffixes.
-				// Example: 'css_header_margin_bottom' -> 'css_header_margin'
-				$normalized_id = str_replace($directional_suffixes, '', $control_id);
+					$shared_unit_id = preg_replace(
+						'/_(top|right|bottom|left)$/',
+						'',
+						$control_id
+					);
 
-				// Step 2: Predict the full Unit Selector ID by appending '_unit'.
-				// Example: 'css_header_margin' -> 'css_header_margin_unit'
-				$resolved_unit_id = $normalized_id . '_unit';				
+					$shared_unit_id .= '_unit';
 
-				// Step 3: Retrieve the unit value from the request using the predicted ID.
-				if ( ! empty( $resolved_unit_id ) ) {
-					$unit_value = $this->get_any_control_value( $resolved_unit_id );
+					$unit_value = $this->get_any_control_value( $shared_unit_id );
 				}
-				// Step 4: Assign the found value to $ext if it's not empty.
+
 				if ( ! empty( $unit_value ) ) {
 					$ext = $unit_value;
 				}
@@ -300,12 +299,24 @@ class LC_Control {
 
 					<input type="text" class="dslca-module-edit-field dslca-module-edit-field-colorpicker" data-alpha="true" <?php echo wp_kses( $style, array(), array() );?> name="<?php echo esc_attr( $module_control['id'] ); ?>" data-id="<?php echo esc_attr( $module_control['id'] ); ?>" value="<?php echo esc_attr( $this->_curr_value ); ?>" data-affect-on-change-el="<?php echo $module_control['affect_on_change_el']; ?>" data-affect-on-change-rule="<?php echo $module_control['affect_on_change_rule']; ?>" <?php if ( $default_value ) : ?> data-val-bckp="<?php echo $default_value; ?>" <?php endif; ?> />
 
-				<?php elseif ( 'slider' === $module_control['type'] ) :
+				<?php elseif ( 'slider' === $module_control['type'] ) :		
 
 					$slider_min = 0;
 					$slider_max = 100;
 					$slider_increment = 1;
 					$onlypositive = false;
+					$unit_key = $module_control['id'] . '_unit';
+					$unit_control_options = $this->get_control_options($unit_key);
+					$unit_control_value = $this->get_any_control_value($unit_key);
+					if (empty($unit_control_value) && $unit_control_options && isset($unit_control_options['std'])) {
+						$unit_control_value = $unit_control_options['std'];
+					}
+					$ext = $unit_control_value ? $unit_control_value : $module_control['ext'];
+
+					if ( empty($unit_control_value) && $unit_control_options && isset($unit_control_options['std']) ) {
+						$unit_control_value = $unit_control_options['std'];
+					}
+					$has_unit_class = $unit_control_value ? 'dslca-has-unit' : '';
 
 					if ( isset( $module_control['min'] ) ) {
 						$slider_min = $module_control['min'];
@@ -324,7 +335,7 @@ class LC_Control {
 					}
 					?>
 
-					<div class="dslca-module-edit-field-numeric-wrap">
+					<div class="dslca-module-edit-field-numeric-wrap <?php echo $has_unit_class; ?>">
 						<input type="number" 
 							class="dslca-module-edit-field dslca-module-edit-field-numeric"
 							name="<?php echo esc_attr( $module_control['id'] ); ?>"
@@ -338,10 +349,22 @@ class LC_Control {
 							data-ext="<?php echo esc_attr( $ext ); ?>" <?php echo $affect_on_change_append; ?> 
 							min="<?php echo ( $ext == '%' ? '0' : esc_attr( $slider_min ) ); ?>" 
 							max="<?php echo ( $ext == '%' ? '100' : esc_attr( $slider_max ) ); ?>" />
-						<span class="dslca-module-edit-field-numeric-ext"><?php echo esc_attr( $ext ); ?></span>
+							<?php if (  $unit_control_options && !empty($unit_control_options)) : ?>
+								<select class="dslca-module-edit-field dslca-module-option-edit-field-select"
+										name="<?php echo esc_attr($unit_control_options['id']); ?>"
+										data-id="<?php echo esc_attr($unit_control_options['id']); ?>">
+
+								<?php foreach ($unit_control_options['choices'] as $choice) : ?>
+									<option value="<?php echo esc_attr($choice['value']); ?>"
+										<?php selected($unit_control_value, $choice['value']); ?>>
+										<?php echo esc_html($choice['label']); ?>
+									</option>
+								<?php endforeach; ?>
+
+								</select>
+							<?php endif; ?>
 
 					</div>
-
 				<?php elseif ( 'font' === $module_control['type'] ) : ?>
 
 					<div class="dslca-module-edit-field-font-wrapper">
@@ -826,7 +849,25 @@ class LC_Control {
 		<span class="dslca-module-edit-field-button-hook" <?php echo 'onclick="' . esc_attr( $action ) . '"'; ?>><span class="dslca-icon dslc-icon-ok"></span> <?php echo esc_attr( $module_control['label_alt'] ) ?></span>
 		<?php
 	}
+	
+	private function get_control_options( $control_id ) {
 
+		if ( empty( $this->_all_controls ) ) {
+			return false;
+		}
+
+		foreach ( $this->_all_controls as $control ) {
+
+			if (
+				isset( $control['id'] ) &&
+				$control['id'] === $control_id
+			) {
+				return $control;
+			}
+		}
+
+		return false;
+	}
 	// private function get_ ( $module_control ) {
 	// }
 }

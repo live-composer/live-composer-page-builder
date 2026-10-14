@@ -221,6 +221,27 @@
 					'affect_on_change_el' => '',
 					'affect_on_change_rule' => '',
 				),
+
+				array(
+					'id' => 'css_margin_top_unit',
+					'std' => 'px',
+					'label' => __('Top Unit', 'live-composer-page-builder'),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'styling',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+				),
 				array(
 					'label' => __('Top', 'live-composer-page-builder'),
 					'id' => 'css_margin_top',
@@ -234,6 +255,27 @@
 					'affect_on_change_rule' => 'margin-top',
 					'section' => 'styling',
 					'ext' => 'px',
+				),
+
+				array(
+					'id' => 'css_margin_bottom_unit',
+					'std' => 'px',
+					'label' => __('Bottom Unit', 'live-composer-page-builder'),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'styling',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
 				),
 				array(
 					'label' => __('Bottom', 'live-composer-page-builder'),
@@ -249,6 +291,27 @@
 					'section' => 'styling',
 					'ext' => 'px',
 				),
+
+				array(
+					'id' => 'css_margin_left_unit',
+					'std' => 'px',
+					'label' => __('Left Unit', 'live-composer-page-builder'),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'styling',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+				),
 				array(
 					'label' => __('Left', 'live-composer-page-builder'),
 					'id' => 'css_margin_left',
@@ -262,6 +325,27 @@
 					'affect_on_change_rule' => 'margin-left',
 					'section' => 'styling',
 					'ext' => 'px',
+				),
+
+				array(
+					'id' => 'css_margin_right_unit',
+					'std' => 'px',
+					'label' => __('Right Unit', 'live-composer-page-builder'),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'styling',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
 				),
 				array(
 					'label' => __('Right', 'live-composer-page-builder'),
@@ -310,6 +394,27 @@
 					'affect_on_change_el' => '',
 					'affect_on_change_rule' => '',
 				),
+
+				array(
+					'id' => 'css_wrapper_padding_top_unit',
+					'std' => 'px',
+					'label' => __('Top Unit', 'live-composer-page-builder'),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'styling',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+				),
 				array(
 					'label' => __('Top', 'live-composer-page-builder'),
 					'id' => 'css_wrapper_padding_top',
@@ -323,6 +428,27 @@
 					'affect_on_change_rule' => 'padding-top',
 					'section' => 'styling',
 					'ext' => 'px',
+				),
+
+				array(
+					'id' => 'css_wrapper_padding_bottom_unit',
+					'std' => 'px',
+					'label' => __('Bottom Unit', 'live-composer-page-builder'),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'styling',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
 				),
 				array(
 					'label' => __('Bottom', 'live-composer-page-builder'),
@@ -338,6 +464,27 @@
 					'section' => 'styling',
 					'ext' => 'px',
 				),
+
+				array(
+					'id' => 'css_wrapper_padding_left_unit',
+					'std' => 'px',
+					'label' => __('Left Unit', 'live-composer-page-builder'),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'styling',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+				),
 				array(
 					'label' => __('Left', 'live-composer-page-builder'),
 					'id' => 'css_wrapper_padding_left',
@@ -351,6 +498,27 @@
 					'affect_on_change_rule' => 'padding-left',
 					'section' => 'styling',
 					'ext' => 'px',
+				),
+
+				array(
+					'id' => 'css_wrapper_padding_right_unit',
+					'std' => 'px',
+					'label' => __('Right Unit', 'live-composer-page-builder'),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'styling',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
 				),
 				array(
 					'label' => __('Right', 'live-composer-page-builder'),
@@ -366,6 +534,7 @@
 					'section' => 'styling',
 					'ext' => 'px',
 				),
+
 				array(
 					'id' => 'css_wrapper_padding_group',
 					'type' => 'group',
@@ -424,6 +593,28 @@
 					'affect_on_change_rule' => '',
 					'tab' => __('Tablet', 'live-composer-page-builder'),
 				),
+
+				array(
+					'id' => 'css_res_t_margin_top_unit',
+					'std' => 'px',
+					'label' => __('Top Unit', 'live-composer-page-builder'),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __('Tablet', 'live-composer-page-builder'),
+				),
 				array(
 					'label' => __('Top', 'live-composer-page-builder'),
 					'id' => 'css_res_t_margin_top',
@@ -437,6 +628,28 @@
 					'affect_on_change_rule' => 'margin-top',
 					'section' => 'responsive',
 					'ext' => 'px',
+					'tab' => __('Tablet', 'live-composer-page-builder'),
+				),
+
+				array(
+					'id' => 'css_res_t_margin_bottom_unit',
+					'std' => 'px',
+					'label' => __('Bottom Unit', 'live-composer-page-builder'),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
 					'tab' => __('Tablet', 'live-composer-page-builder'),
 				),
 				array(
@@ -454,6 +667,28 @@
 					'ext' => 'px',
 					'tab' => __('Tablet', 'live-composer-page-builder'),
 				),
+
+				array(
+					'id' => 'css_res_t_margin_left_unit',
+					'std' => 'px',
+					'label' => __('Left Unit', 'live-composer-page-builder'),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __('Tablet', 'live-composer-page-builder'),
+				),
 				array(
 					'label' => __('Left', 'live-composer-page-builder'),
 					'id' => 'css_res_t_margin_left',
@@ -467,6 +702,28 @@
 					'affect_on_change_rule' => 'margin-left',
 					'section' => 'responsive',
 					'ext' => 'px',
+					'tab' => __('Tablet', 'live-composer-page-builder'),
+				),
+
+				array(
+					'id' => 'css_res_t_margin_right_unit',
+					'std' => 'px',
+					'label' => __('Right Unit', 'live-composer-page-builder'),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
 					'tab' => __('Tablet', 'live-composer-page-builder'),
 				),
 				array(
@@ -520,6 +777,28 @@
 					'affect_on_change_rule' => '',
 					'tab' => __('Tablet', 'live-composer-page-builder'),
 				),
+
+				array(
+					'id' => 'css_res_t_wrapper_padding_top_unit',
+					'std' => 'px',
+					'label' => __('Top Unit', 'live-composer-page-builder'),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __('Tablet', 'live-composer-page-builder'),
+				),
 				array(
 					'label' => __('Top', 'live-composer-page-builder'),
 					'id' => 'css_res_t_wrapper_padding_top',
@@ -533,6 +812,28 @@
 					'affect_on_change_rule' => 'padding-top',
 					'section' => 'responsive',
 					'ext' => 'px',
+					'tab' => __('Tablet', 'live-composer-page-builder'),
+				),
+
+				array(
+					'id' => 'css_res_t_wrapper_padding_bottom_unit',
+					'std' => 'px',
+					'label' => __('Bottom Unit', 'live-composer-page-builder'),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
 					'tab' => __('Tablet', 'live-composer-page-builder'),
 				),
 				array(
@@ -550,6 +851,28 @@
 					'ext' => 'px',
 					'tab' => __('Tablet', 'live-composer-page-builder'),
 				),
+
+				array(
+					'id' => 'css_res_t_wrapper_padding_left_unit',
+					'std' => 'px',
+					'label' => __('Left Unit', 'live-composer-page-builder'),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __('Tablet', 'live-composer-page-builder'),
+				),
 				array(
 					'label' => __('Left', 'live-composer-page-builder'),
 					'id' => 'css_res_t_wrapper_padding_left',
@@ -563,6 +886,28 @@
 					'affect_on_change_rule' => 'padding-left',
 					'section' => 'responsive',
 					'ext' => 'px',
+					'tab' => __('Tablet', 'live-composer-page-builder'),
+				),
+
+				array(
+					'id' => 'css_res_t_wrapper_padding_right_unit',
+					'std' => 'px',
+					'label' => __('Right Unit', 'live-composer-page-builder'),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
 					'tab' => __('Tablet', 'live-composer-page-builder'),
 				),
 				array(
@@ -580,6 +925,7 @@
 					'ext' => 'px',
 					'tab' => __('Tablet', 'live-composer-page-builder'),
 				),
+
 				array(
 					'id' => 'css_res_t_wrapper_padding_group',
 					'type' => 'group',
@@ -639,6 +985,28 @@
 					'affect_on_change_rule' => '',
 					'tab' => __('Phone', 'live-composer-page-builder'),
 				),
+
+				array(
+					'id' => 'css_res_p_margin_top_unit',
+					'std' => 'px',
+					'label' => __('Top Unit', 'live-composer-page-builder'),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __('Phone', 'live-composer-page-builder'),
+				),
 				array(
 					'label' => __('Top', 'live-composer-page-builder'),
 					'id' => 'css_res_p_margin_top',
@@ -652,6 +1020,28 @@
 					'affect_on_change_rule' => 'margin-top',
 					'section' => 'responsive',
 					'ext' => 'px',
+					'tab' => __('Phone', 'live-composer-page-builder'),
+				),
+
+				array(
+					'id' => 'css_res_p_margin_bottom_unit',
+					'std' => 'px',
+					'label' => __('Bottom Unit', 'live-composer-page-builder'),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
 					'tab' => __('Phone', 'live-composer-page-builder'),
 				),
 				array(
@@ -669,6 +1059,28 @@
 					'ext' => 'px',
 					'tab' => __('Phone', 'live-composer-page-builder'),
 				),
+
+				array(
+					'id' => 'css_res_p_margin_left_unit',
+					'std' => 'px',
+					'label' => __('Left Unit', 'live-composer-page-builder'),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __('Phone', 'live-composer-page-builder'),
+				),
 				array(
 					'label' => __('Left', 'live-composer-page-builder'),
 					'id' => 'css_res_p_margin_left',
@@ -682,6 +1094,28 @@
 					'affect_on_change_rule' => 'margin-left',
 					'section' => 'responsive',
 					'ext' => 'px',
+					'tab' => __('Phone', 'live-composer-page-builder'),
+				),
+
+				array(
+					'id' => 'css_res_p_margin_right_unit',
+					'std' => 'px',
+					'label' => __('Right Unit', 'live-composer-page-builder'),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
 					'tab' => __('Phone', 'live-composer-page-builder'),
 				),
 				array(
@@ -735,6 +1169,28 @@
 					'affect_on_change_rule' => '',
 					'tab' => __('Phone', 'live-composer-page-builder'),
 				),
+
+				array(
+					'id' => 'css_res_p_wrapper_padding_top_unit',
+					'std' => 'px',
+					'label' => __('Top Unit', 'live-composer-page-builder'),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __('Phone', 'live-composer-page-builder'),
+				),
 				array(
 					'label' => __('Top', 'live-composer-page-builder'),
 					'id' => 'css_res_p_wrapper_padding_top',
@@ -748,6 +1204,28 @@
 					'affect_on_change_rule' => 'padding-top',
 					'section' => 'responsive',
 					'ext' => 'px',
+					'tab' => __('Phone', 'live-composer-page-builder'),
+				),
+
+				array(
+					'id' => 'css_res_p_wrapper_padding_bottom_unit',
+					'std' => 'px',
+					'label' => __('Bottom Unit', 'live-composer-page-builder'),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
 					'tab' => __('Phone', 'live-composer-page-builder'),
 				),
 				array(
@@ -765,6 +1243,28 @@
 					'ext' => 'px',
 					'tab' => __('Phone', 'live-composer-page-builder'),
 				),
+
+				array(
+					'id' => 'css_res_p_wrapper_padding_left_unit',
+					'std' => 'px',
+					'label' => __('Left Unit', 'live-composer-page-builder'),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
+					'tab' => __('Phone', 'live-composer-page-builder'),
+				),
 				array(
 					'label' => __('Left', 'live-composer-page-builder'),
 					'id' => 'css_res_p_wrapper_padding_left',
@@ -778,6 +1278,28 @@
 					'affect_on_change_rule' => 'padding-left',
 					'section' => 'responsive',
 					'ext' => 'px',
+					'tab' => __('Phone', 'live-composer-page-builder'),
+				),
+
+				array(
+					'id' => 'css_res_p_wrapper_padding_right_unit',
+					'std' => 'px',
+					'label' => __('Right Unit', 'live-composer-page-builder'),
+					'type' => 'select',
+					'refresh_on_change' => false,
+					'choices' => array(
+						array(
+							'label' => 'px',
+							'value' => 'px',
+						),
+						array(
+							'label' => '%',
+							'value' => '%',
+						),
+					),
+					'section' => 'responsive',
+					'affect_on_change_el' => '',
+					'affect_on_change_rule' => '',
 					'tab' => __('Phone', 'live-composer-page-builder'),
 				),
 				array(
@@ -795,6 +1317,7 @@
 					'ext' => 'px',
 					'tab' => __('Phone', 'live-composer-page-builder'),
 				),
+
 				array(
 					'id' => 'css_res_p_wrapper_padding_group',
 					'type' => 'group',

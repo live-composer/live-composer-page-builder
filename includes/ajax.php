@@ -300,7 +300,7 @@ function dslc_ajax_display_module_options( $atts ) {
 		// generate the control HTML and append to output.
 		foreach ( $module_controls as $module_control ) {
 			$module_option_control = new LC_Control( $module_options_panel );
-			$module_option_control->set_control_options( $module_control );
+			$module_option_control->set_control_options( $module_control, $module_controls );
 			$module_option_control->output_option_control();
 		}
 

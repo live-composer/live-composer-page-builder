@@ -31,6 +31,7 @@ function dslc_modules_area_render_tabs() {
 
 	foreach ( $dslc_var_modules_area_options as $option ) {
 
+
 		$section = isset( $option['section'] )
 			? $option['section']
 			: 'functionality';
@@ -91,6 +92,11 @@ function dslc_modules_area_display_options() {
 	}
 
 	foreach ( $dslc_var_modules_area_options as $modules_area_option ) {
+
+		if ( substr($modules_area_option['id'], -5) === '_unit' ) {
+			continue;
+		}
+		
         // 1. Logic Replication: Default Section
         $section = isset( $modules_area_option['section'] ) ? $modules_area_option['section'] : 'functionality';
 
@@ -189,7 +195,7 @@ function dslc_modules_area_display_options() {
 
 				<?php elseif ( 'select' === $modules_area_option['type'] ) : ?>
 
-					<select type="text" class="dslca-modules-area-edit-field dslca-modules-area-edit-field-select" data-id="<?php echo esc_attr( $modules_area_option['id'] ); ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" >
+					<select type="text" class="dslca-modules-area-edit-field dslca-modules-area-edit-field-select" data-id="<?php echo esc_attr( $modules_area_option['id'] ); ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" data-std="<?php echo esc_attr( $modules_area_option['std'] ); ?>" >
 						<?php foreach ( $modules_area_option['choices'] as $choice ) : ?>
 							<option value="<?php echo esc_attr( $choice['value'] ); ?>"><?php echo esc_attr( $choice['label'] ); ?></option>
 						<?php endforeach; ?>
@@ -221,10 +227,32 @@ function dslc_modules_area_display_options() {
 						$slider_increment = $modules_area_option['increment'];
 						$ext = $modules_area_option['ext'];
 						$curr_value = $modules_area_option['std'];
+						$unit_key = $modules_area_option['id'] . '_unit';
+       					$has_unit_class = isset( $dslc_var_modules_area_options[$unit_key] ) ? 'dslca-has-unit' : '';
 
 					?>
-					<div class="dslca-module-area-edit-field-numeric-wrap">
-						<input type="number" class="dslca-modules-area-edit-field dslca-modules-area-edit-field-slider-numeric" data-id="<?php echo esc_attr( $modules_area_option['id'] ); ?>" value="<?php echo $curr_value; ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" data-min="<?php echo $slider_min; ?>" data-max="<?php echo $slider_max; ?>" data-ext="<?php echo $ext; ?>" data-increment="<?php echo esc_attr( $modules_area_option['increment'] ); ?>" data-ext="<?php echo esc_attr( $modules_area_option['ext'] ); ?>"/>
+					<div class="dslca-module-area-edit-field-numeric-wrap <?php echo $has_unit_class; ?>">
+						<input type="number" class="dslca-modules-area-edit-field dslca-modules-area-edit-field-slider-numeric" data-id="<?php echo esc_attr( $modules_area_option['id'] ); ?>" value="<?php echo $curr_value; ?>" data-css-element="<?php echo esc_attr( $css_element_output ); ?>" data-css-rule="<?php echo esc_attr( $css_rule_output ); ?>" data-min="<?php echo $slider_min; ?>" data-max="<?php echo $slider_max; ?>" data-ext="<?php echo $ext; ?>" data-increment="<?php echo esc_attr( $modules_area_option['increment'] ); ?>" data-ext="<?php echo esc_attr( $modules_area_option['ext'] ); ?>" />
+						<?php if ( isset( $dslc_var_modules_area_options[$unit_key] ) ) : 
+							$unit_option = $dslc_var_modules_area_options[$unit_key]; ?>
+							<select class="dslca-modules-area-edit-field dslca-modules-area-edit-field-select"
+								data-id="<?php echo esc_attr( $unit_option['id'] ); ?>">
+
+							<?php
+							$current_unit = isset($curr_options[$unit_option['id']])
+								? $curr_options[$unit_option['id']]
+								: $unit_option['std'];
+
+							foreach ( $unit_option['choices'] as $choice ) :
+							?>
+								<option value="<?php echo esc_attr($choice['value']); ?>"
+									<?php selected($current_unit, $choice['value']); ?>>
+									<?php echo esc_html($choice['label']); ?>
+								</option>
+							<?php endforeach; ?>
+
+							</select>
+						<?php endif; ?>
 					</div>
 
 				<?php elseif ( 'border_checkbox' === $modules_area_option['type'] ) : ?>
@@ -296,6 +324,8 @@ function dslc_modules_area_get_options_fields( $atts = false ) {
 	if ( $atts ) { // If there is data to fill?
 
 		foreach ( $dslc_var_modules_area_options as $modules_area_option ) {
+			
+			
 
 			if ( 'group' !== $modules_area_option['type'] ) {
 				
@@ -377,11 +407,17 @@ function dslc_modules_area_generate_css( $module_settings = false, $options_to_p
             
             $resolved_ext = isset( $option_definition['ext'] ) ? $option_definition['ext'] : '';
             
-            if ( strpos($option_id, 'padding') !== false && isset($module_settings['padding_unit']) ) {
-                $resolved_ext = $module_settings['padding_unit'];
-            } elseif ( strpos($option_id, 'margin') !== false && isset($module_settings['margin_unit']) ) {
-                $resolved_ext = $module_settings['margin_unit'];
-            }
+			$per_side_unit_key = $option_id . '_unit'; // e.g. margin_top + _unit = margin_top_unit
+			if ( isset( $module_settings[ $per_side_unit_key ] ) && $module_settings[ $per_side_unit_key ] !== '' ) {
+				$resolved_ext = $module_settings[ $per_side_unit_key ];
+			} elseif ( strpos( $option_id, 'padding' ) !== false && isset( $module_settings['padding_unit'] ) ) {
+				$resolved_ext = $module_settings['padding_unit']; // fallback
+			} elseif ( strpos( $option_id, 'margin' ) !== false && isset( $module_settings['margin_unit'] ) ) {
+				$resolved_ext = $module_settings['margin_unit']; // fallback
+			}
+			if ( $option_id === 'border_width' ) {
+				$resolved_ext = 'px';
+			}
             
             // Only apply units to numeric values
             if ( is_numeric($value) ) {
