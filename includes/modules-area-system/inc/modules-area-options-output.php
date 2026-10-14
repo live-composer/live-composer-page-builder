@@ -407,11 +407,17 @@ function dslc_modules_area_generate_css( $module_settings = false, $options_to_p
             
             $resolved_ext = isset( $option_definition['ext'] ) ? $option_definition['ext'] : '';
             
-            if ( strpos($option_id, 'padding') !== false && isset($module_settings['padding_unit']) ) {
-                $resolved_ext = $module_settings['padding_unit'];
-            } elseif ( strpos($option_id, 'margin') !== false && isset($module_settings['margin_unit']) ) {
-                $resolved_ext = $module_settings['margin_unit'];
-            }
+			$per_side_unit_key = $option_id . '_unit'; // e.g. margin_top + _unit = margin_top_unit
+			if ( isset( $module_settings[ $per_side_unit_key ] ) && $module_settings[ $per_side_unit_key ] !== '' ) {
+				$resolved_ext = $module_settings[ $per_side_unit_key ];
+			} elseif ( strpos( $option_id, 'padding' ) !== false && isset( $module_settings['padding_unit'] ) ) {
+				$resolved_ext = $module_settings['padding_unit']; // fallback
+			} elseif ( strpos( $option_id, 'margin' ) !== false && isset( $module_settings['margin_unit'] ) ) {
+				$resolved_ext = $module_settings['margin_unit']; // fallback
+			}
+			if ( $option_id === 'border_width' ) {
+				$resolved_ext = 'px';
+			}
             
             // Only apply units to numeric values
             if ( is_numeric($value) ) {

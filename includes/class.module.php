@@ -5752,7 +5752,7 @@ class DSLC_Module {
 					
 					if ( (false === $uid || '' === $uid) && $id != 'css_show_on' ) {
 						if ( isset( $option['std'] ) && '' !== $option['std'] ) {
-							$user_options_no_defaults[ $id ] = $option['std'];
+							unset( $user_options_no_defaults[ $id ] );
 						} else {
 							unset( $user_options_no_defaults[ $id ] );
 						}

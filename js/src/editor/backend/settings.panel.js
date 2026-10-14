@@ -909,12 +909,14 @@ const onModuleOptionsChange = () => {
 
 			var dslcOptionToApply = '';
 
-			// Do we work with CSS control or module property?
 			if ( dslcOptionID.indexOf('css_') !== -1 ) {
-				// Apply CSS property.
-				dslcOptionToApply = dslcAffectOnChangeValOrig;
+				if ( dslcOptionID.includes('_unit') || 
+					!dslcAffectOnChangeValOrig ) {
+					dslcOptionToApply = dslcOption.val(); 
+				} else {
+					dslcOptionToApply = dslcAffectOnChangeValOrig;
+				}
 			} else {
-				// Apply module property.
 				dslcOptionToApply = dslcOption.val();
 			}
 
@@ -938,6 +940,8 @@ const onSectionOptionsChange = () => {
 	jQuery(document).on( 'change', '.dslca-modules-section-edit-field', function() {
 		var dslcField, dslcFieldID, dslcEl, dslcModulesSection, dslcVal, dslcValReal, dslcValExt, dslcRule, dslcSetting, dslcTargetEl, dslcImgURL;
 
+		if ( window.dslcDebug ) console.log( 'on change event for .dslca-modules-section-edit-field' );
+
 		dslcField = jQuery(this);
 		dslcFieldID = dslcField.data('id');
 		dslcVal = dslcField.val();
@@ -950,6 +954,25 @@ const onSectionOptionsChange = () => {
 		dslcSetting = jQuery('.dslca-modules-section-settings input[data-id="' + dslcFieldID + '"]', dslcEl );
 
 		dslcEl.addClass('dslca-modules-section-change-made');
+
+		if ( dslcFieldID.indexOf('_unit') !== -1 ) {
+			var valueFieldID = dslcFieldID.replace('_unit', '');
+			var valueField = dslcField
+				.closest('.lc_popupContent')
+				.find('[data-id="' + valueFieldID + '"]');
+
+			var currentValue = valueField.val();
+			var newUnit = dslcVal;
+			var cssRule = valueField.data('css-rule');
+
+			if ( currentValue !== '' && currentValue !== undefined && cssRule ) {
+				var newCSSValue = currentValue + newUnit;
+				dslcTargetEl.css( cssRule, newCSSValue );
+			}
+
+			dslcSetting.val(dslcVal);
+			return false;
+		}
 
 		// If image/upload field alter the value ( use from data )
 		if ( dslcField.hasClass('dslca-modules-section-edit-field-upload') ) {
@@ -1202,11 +1225,26 @@ const onSectionOptionsChange = () => {
 				dslcRule = dslcRule.replace(/ /g,'').split( ',' );
 				var dslcValToApply;
 	
-				if ( null != dslcField.data('ext') && dslcVal !== '' ) {
-					dslcValToApply = dslcValExt;
-				} else {
-					dslcValToApply = dslcVal;
+				// if ( null != dslcField.data('ext') && dslcVal !== '' ) {
+				// 	dslcValToApply = dslcValExt;
+				// } else {
+				// 	dslcValToApply = dslcVal;
+				// }
+				var dslcValToApply = (dslcField.data('ext') != null) ? dslcValExt : dslcVal;
+				var perSideUnit = dslcField
+					.closest('.lc_popupContent')
+					.find('select[data-id="' + dslcFieldID + '_unit"]')
+					.val();
+
+				// Fallback — iframe se
+				if ( perSideUnit === undefined || perSideUnit === '' ) {
+					perSideUnit = jQuery('input[data-id="' + dslcFieldID + '_unit"]', LiveComposer.Builder.PreviewAreaDocument).val();
 				}
+
+				var resolvedUnit = (perSideUnit !== undefined && perSideUnit !== '')
+					? perSideUnit
+					: (dslcField.data('ext') || 'px');
+				var dslcValToApply = (resolvedUnit != null && dslcVal !== '') ? (dslcVal + resolvedUnit) : dslcVal;
 	
 				// Loop through rules (useful when there are multiple rules)
 				for ( var i = 0; i < dslcRule.length; i++ ) {
@@ -1251,8 +1289,36 @@ const onModulesAreaOptionsChange = () => {
 		dslcEl = jQuery('.dslca-modules-area-being-edited', LiveComposer.Builder.PreviewAreaDocument); // Currently editing element
 		dslcTargetEl = dslcEl;
 		dslcSetting = jQuery('.dslca-modules-area-settings input[data-id="' + dslcFieldID + '"]', dslcEl);
-
 		dslcEl.addClass('dslca-modules-area-change-made');
+
+		if ( dslcFieldID.indexOf('_unit') !== -1 ) {
+			var valueFieldID = dslcFieldID.replace('_unit', '');
+			var valueField = dslcField
+				.closest('.lc_popupContent')
+				.find('[data-id="' + valueFieldID + '"]');
+
+			var currentValue = valueField.val();
+			var newUnit = dslcVal;
+			var cssRule = valueField.data('css-rule');
+
+			if ( currentValue !== '' && currentValue !== undefined && cssRule ) {
+				var newCSSValue = currentValue + newUnit;
+				var modulesAreaSelector = '.dslc-modules-area[data-modules-area-id="' + dslcEl.attr('data-modules-area-id') + '"]';
+				var styleContent = modulesAreaSelector + ' { ' + cssRule + ': ' + newCSSValue + '; }';
+
+				LiveComposer.Builder.Helpers.processInlineStyleTag({
+					context: dslcField,
+					rule: cssRule,
+					elems: '',
+					styleContent: styleContent
+				});
+			}
+
+			dslcSetting.val(dslcVal);
+			return false;
+		}
+
+		
 
 		// Hide/Show tabs in the modules area options panel.
 		if (dslcModulesAreaOptionWrap.hasClass('dslca-modules-area-edit-option-select') ||
@@ -1357,6 +1423,23 @@ const onModulesAreaOptionsChange = () => {
 			if (dslcRule) {
 				dslcRule = dslcRule.replace(/ /g, '').split(',');
 				var dslcValToApply = (dslcField.data('ext') != null) ? dslcValExt : dslcVal;
+				
+				var perSideUnit = dslcField
+					.closest('.lc_popupContent')
+					.find('select[data-id="' + dslcFieldID + '_unit"]')
+					.val();
+
+				// Fallback — iframe se
+				if ( perSideUnit === undefined || perSideUnit === '' ) {
+					perSideUnit = jQuery('input[data-id="' + dslcFieldID + '_unit"]', LiveComposer.Builder.PreviewAreaDocument).val();
+				}
+
+				var resolvedUnit = (perSideUnit !== undefined && perSideUnit !== '')
+					? perSideUnit
+					: (dslcField.data('ext') || 'px');
+				var dslcValToApply = (resolvedUnit != null && dslcVal !== '') ? (dslcVal + resolvedUnit) : dslcVal;
+
+
 				for (var i = 0; i < dslcRule.length; i++) {
 					if (dslcRule[i].trim() !== "" && dslcValToApply !== undefined && dslcValToApply !== null) {
 						cssRulesToApply.push({ rule: dslcRule[i], value: dslcValToApply });
@@ -1364,7 +1447,7 @@ const onModulesAreaOptionsChange = () => {
 				}
 			}
 		}
-		let modulesAreaSelector = '.dslc-modules-area[data-modules-area-id="' + dslcEl.attr('data-modules-area-id') + '"]';
+		var modulesAreaSelector = '.dslc-modules-area[data-modules-area-id="' + dslcEl.attr('data-modules-area-id') + '"]';
 		// Apply all collected CSS via processInlineStyleTag
 		if (cssRulesToApply.length) {
 			var styleContent = modulesAreaSelector + (cssSelectorToApply ? " " + cssSelectorToApply : "") + " {";

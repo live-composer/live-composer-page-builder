@@ -532,94 +532,92 @@ export const fixContenteditable = () => {
  */
 function dslc_toogle_control ( control_id ) {
 
-	if ( control_id === undefined) control_id = false;
-	if ( !control_id ) return;
+    if ( control_id === undefined) control_id = false;
+    if ( !control_id ) return;
 
-	var control         = jQuery('.dslca-module-edit-option-' + control_id );
-	var control_storage = control.find('.dslca-module-edit-field');
+    var control = jQuery('.dslca-module-edit-option-' + control_id );
+    
+    var control_storage = control.find('input.dslca-module-edit-field');
+    
+    var unit_select     = control.find('select[name="' + control_id + '_unit"]');
 
-	// Get the element we are editing
-	var module = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument);
+    var module    = jQuery('.dslca-module-being-edited', LiveComposer.Builder.PreviewAreaDocument);
+    var module_id = module[0].id;
 
-	// Get the element id
-	var module_id = module[0].id;
+    var responsive_prefix = '';
 
-	var responsive_prefix = '';
+    if ( 'tablet_responsive' === control.data('tab') ) {
+        responsive_prefix = 'body.dslc-res-tablet ';
+    } else if ( 'phone_responsive' === control.data('tab') ) {
+        responsive_prefix = 'body.dslc-res-phone ';
+    }
 
-	if ( 'tablet_responsive' === control.data('tab') ) {
-		responsive_prefix = 'body.dslc-res-tablet ';
-	} else if ( 'phone_responsive' === control.data('tab') ) {
-		responsive_prefix = 'body.dslc-res-phone ';
-	}
+    var affect_on_change_el = control_storage.data('affect-on-change-el');
+    if ( affect_on_change_el === undefined) return;
 
-	var affect_on_change_el = control_storage.data('affect-on-change-el');
+    var affect_on_change_elmts = affect_on_change_el.split( ',' );
+    affect_on_change_el = '';
 
-	if ( affect_on_change_el === undefined) return;
+    for ( var i = 0; i < affect_on_change_elmts.length; i++ ) {
+        if ( i > 0 ) affect_on_change_el += ', ';
+        affect_on_change_el += responsive_prefix + '#' + module_id + ' ' + affect_on_change_elmts[i];
+    }
 
-	var affect_on_change_elmts = affect_on_change_el.split( ',' );
+    var affect_on_change_rule  = control_storage.data('affect-on-change-rule').replace(/ /g,'');
+    var affect_on_change_rules = affect_on_change_rule.split( ',' );
 
-	affect_on_change_el = '';
+    var control_value;
+    var control_data_ext = control_storage.data('ext');
 
-	// Loop through elements (useful when there are multiple elements)
-	for ( var i = 0; i < affect_on_change_elmts.length; i++ ) {
+    control.toggleClass('dslca-option-off');
+	
 
-		if ( i > 0 ) {
+    if ( control.hasClass('dslca-option-off')) {
+        // === DISABLE ===
 
-			affect_on_change_el += ', ';
-		}
+        control_value = dslc_get_control_value(control_id);
+        control_storage.data( 'val-bckp', control_value );
 
-		affect_on_change_el += responsive_prefix + '#' + module_id + ' ' + affect_on_change_elmts[i];
-	}
+        if ( unit_select.length ) {
+            var current_unit = unit_select.val();
+            console.log('Backing up unit:', current_unit); // debug
+            unit_select.data( 'unit-bckp', current_unit );
+        }
 
-	var affect_on_change_rule  = control_storage.data('affect-on-change-rule').replace(/ /g,'');
-	var affect_on_change_rules = affect_on_change_rule.split( ',' );
+        for ( var i = 0; i < affect_on_change_rules.length; i++ ) {
+            jQuery( affect_on_change_el, LiveComposer.Builder.PreviewAreaDocument ).css( affect_on_change_rules[i] , '' );
+            disable_css_rule ( affect_on_change_el, affect_on_change_rules[i], module_id);
+        }
 
-	var control_value;
-	var control_data_ext = control_storage.data('ext');
+        control_storage.val('').trigger('change');
 
-	control.toggleClass('dslca-option-off');
+    } else {
+        // === ENABLE ===
 
-	if ( control.hasClass('dslca-option-off')) {
-		// Disable
+        control_storage.val( control_storage.data('val-bckp') ).trigger('change');
 
-		control_value = dslc_get_control_value(control_id);
-		// Temporary backup the current value as data attribute
-		control_storage.data( 'val-bckp', control_value );
-		// control_value = dslc_combine_value_and_extension( control_value, control_data_ext);
+        if ( unit_select.length ) {
+            var backed_up_unit = unit_select.data('unit-bckp');
+            console.log('Restoring unit:', backed_up_unit); // debug
+            if ( backed_up_unit ) {
+                unit_select.val( backed_up_unit ).trigger('change');
+            }
+        }
 
-		// Loop through rules (useful when there are multiple rules)
-		for ( var i = 0; i < affect_on_change_rules.length; i++ ) {
+        control_value = dslc_get_control_value(control_id);
+        control_value = dslc_combine_value_and_extension( control_value, control_data_ext || '');
 
-			// remove css rule in element inline style
-			jQuery( affect_on_change_el, LiveComposer.Builder.PreviewAreaDocument ).css( affect_on_change_rules[i] , '' );
-			// remove css rule in css block
-			disable_css_rule ( affect_on_change_el, affect_on_change_rules[i], module_id);
-			// PROBLEM do not work with multiply rules ex.: .dslc-text-module-content,.dslc-text-module-content p
-		}
+        for ( var i = 0; i < affect_on_change_rules.length; i++ ) {
+            var styleContent = affect_on_change_el + "{" + affect_on_change_rules[i] + ": " + control_value + "}";
 
-		control_storage.val('').trigger('change');
-	} else {
-		// Enable
-
-		// Restore value of the data backup attribute
-		control_storage.val( control_storage.data('val-bckp') ).trigger('change');
-		control_value = dslc_get_control_value(control_id);
-		control_value = dslc_combine_value_and_extension( control_value, control_data_ext || '');
-
-		// Loop through rules (useful when there are multiple rules)
-		for ( var i = 0; i < affect_on_change_rules.length; i++ ) {
-
-			var styleContent = affect_on_change_el + "{" + affect_on_change_rules[i] + ": " + control_value + "}";
-
-			LiveComposer.Builder.Helpers.processInlineStyleTag({
-
-				context: control,
-				rule: affect_on_change_rules[i],
-				elems: affect_on_change_el.replace(new RegExp('#' + module_id, 'gi'), '').trim(),
-				styleContent: styleContent
-			});
-		}
-	}
+            LiveComposer.Builder.Helpers.processInlineStyleTag({
+                context: control,
+                rule: affect_on_change_rules[i],
+                elems: affect_on_change_el.replace(new RegExp('#' + module_id, 'gi'), '').trim(),
+                styleContent: styleContent
+            });
+        }
+    }
 }
 
 jQuery(document).ready(function($){
