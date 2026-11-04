@@ -142,7 +142,7 @@ function dslc_projects_module_cpt() {
 		'public' => true,
 		'has_archive' => true,
 		'rewrite' => array(
-			'slug' => dslc_get_option( 'projects_slug', 'dslc_plugin_options_cpt_slugs' ),
+			'slug' => dslc_get_slug_option( 'projects_slug', 'project-view' ),
 			'with_front' => $with_front,
 		),
 		'supports' => array( 'title', 'custom-fields', 'excerpt', 'editor', 'author', 'thumbnail', 'comments' ),
@@ -187,7 +187,7 @@ function dslc_projects_module_cpt() {
 		'hierarchical' => true,
 		'public' => true,
 		'rewrite' => array(
-			'slug' => dslc_get_option( 'projects_cats_slug', 'dslc_plugin_options_cpt_slugs' ),
+			'slug' => dslc_get_slug_option( 'projects_cats_slug', 'dslc_projects_cats' ),
 			'with_front' => $with_front,
 		),
 		'capabilities' => array(

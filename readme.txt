@@ -4,7 +4,7 @@ Tags: page builder, landing page builder, frontend page builder, drag and drop p
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.1.22
+Stable tag: 2.1.23
 License: GPLv3
 
 Page builder for WordPress with drag and drop header/footer editing, responsive settings, and animations. Compatible with Gutenberg block editor.
@@ -204,6 +204,11 @@ If you're migrating from another page builder, compatibility for content transfe
 = FOR OUR PRO USERS: =
 * 🦊 [Check out our WooCommerce Page Builder Extension](https://livecomposerplugin.com/downloads/woocommerce-page-builder/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=woo-integration)
 * 👀 [We keep updating and improving our extensions pack](https://livecomposerplugin.com/downloads/extensions/?utm_source=wp-admin&utm_medium=changelog&utm_campaign=add-ons) ACF + CPT + MegaMenu + 9 more add-ons.
+
+= 2.1.23 - November 04, 2026 =
+* Sanitize custom post type and taxonomy slug settings (Live Composer > Settings > Post Types) for Downloads, Galleries, Partners, Projects, Staff and Testimonials, both on save and when read, removing quotes and other unsafe characters, to prevent stored XSS via crafted slugs.
+* Escape permalinks on output in the Partners, Projects, Galleries, Downloads, Blog and Posts modules, including the Blog share link.
+* Validate and escape the pagination type and pagination text options in the shared pagination helper, covering all post listing modules, to prevent stored XSS via crafted module data.
 
 = 2.1.22 - September 21, 2026 =
 * Escape output values in Downloads module (heading, button text, view all link, and inline SVG icon) to prevent stored XSS via crafted shortcode data.

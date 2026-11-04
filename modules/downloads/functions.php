@@ -57,7 +57,7 @@ function dslc_downloads_module_init() {
 		),
 		'public' => true,
 		'rewrite' => array(
-			'slug' => dslc_get_option( 'downloads_slug', 'dslc_plugin_options_cpt_slugs' ),
+			'slug' => dslc_get_slug_option( 'downloads_slug', 'download-view' ),
 			'with_front' => $with_front,
 		),
 		'supports' => array( 'title', 'custom-fields', 'excerpt', 'editor', 'author', 'thumbnail', 'comments' ),
@@ -102,7 +102,7 @@ function dslc_downloads_module_init() {
 		'hierarchical' => true,
 		'public' => true,
 		'rewrite' => array(
-			'slug' => dslc_get_option( 'downloads_cats_slug', 'dslc_plugin_options_cpt_slugs' ),
+			'slug' => dslc_get_slug_option( 'downloads_cats_slug', 'dslc_downloads_cat' ),
 			'with_front' => $with_front,
 		),
 		'capabilities' => array(
@@ -141,7 +141,7 @@ function dslc_downloads_module_init() {
 		'hierarchical' => false,
 		'public' => true,
 		'rewrite' => array(
-			'slug' => dslc_get_option( 'downloads_tags_slug', 'dslc_plugin_options_cpt_slugs' ),
+			'slug' => dslc_get_slug_option( 'downloads_tags_slug', 'dslc_downloads_tag' ),
 			'with_front' => $with_front,
 		),
 		'capabilities' => array(

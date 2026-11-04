@@ -6463,9 +6463,9 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 					?>
 
 					<?php if ( $manual_resize ) : ?>
-						<a href="<?php echo $anchor_href; ?>" class="<?php echo $anchor_class; ?>" target="<?php echo $the_project_url_target; ?>"><img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" title="<?php echo $thumb_title; ?>" /></a>
+						<a href="<?php echo esc_url( $anchor_href ); ?>" class="<?php echo $anchor_class; ?>" target="<?php echo $the_project_url_target; ?>"><img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true ); echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" title="<?php echo $thumb_title; ?>" /></a>
 					<?php else : ?>
-						<a href="<?php echo $anchor_href; ?>" class="<?php echo $anchor_class; ?>" target="<?php echo $the_project_url_target; ?>"><?php the_post_thumbnail( 'full', array( 'title' => get_the_title( get_post_thumbnail_id() ) ) ); ?></a>
+						<a href="<?php echo esc_url( $anchor_href ); ?>" class="<?php echo $anchor_class; ?>" target="<?php echo $the_project_url_target; ?>"><?php the_post_thumbnail( 'full', array( 'title' => get_the_title( get_post_thumbnail_id() ) ) ); ?></a>
 					<?php endif; ?>
 				</div><!-- .dslc-project-thumb-inner -->
 
@@ -6478,7 +6478,7 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 							<?php if ( $post_elements == 'all' || in_array( 'title', $post_elements ) ) : ?>
 
 								<div class="dslc-project-title">
-									<h2><a href="<?php echo $the_project_url; ?>" target="<?php echo $the_project_url_target; ?>"><?php the_title(); ?></a></h2>
+									<h2><a href="<?php echo esc_url( $the_project_url ); ?>" target="<?php echo $the_project_url_target; ?>"><?php the_title(); ?></a></h2>
 								</div><!-- .dslc-project-title -->
 
 							<?php endif; ?>
@@ -6560,7 +6560,7 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 							<?php if ( $post_elements == 'all' || in_array( 'button', $post_elements ) ) : ?>
 
 								<div class="dslc-project-read-more">
-									<a href="<?php echo $the_project_url; ?>" target="<?php echo $the_project_url_target; ?>">
+									<a href="<?php echo esc_url( $the_project_url ); ?>" target="<?php echo $the_project_url_target; ?>">
 										<?php if ( 'svg' == $options['show_icon'] ) : ?>
 											<?php echo stripslashes( $options['button_inline_svg'] ); ?>
 										<?php elseif ( 'image' == $options['show_icon'] && ! empty( $options['button_icon_image'] ) ) : ?>
@@ -6576,7 +6576,7 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 
 						</div>
 
-						<a href="<?php echo $the_project_url; ?>" class="dslc-post-main-inner-link-cover"></a>
+						<a href="<?php echo esc_url( $the_project_url ); ?>" class="dslc-post-main-inner-link-cover"></a>
 
 					</div><!-- .dslc-project-main -->
 
@@ -6597,7 +6597,7 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 			<?php if ( $post_elements == 'all' || in_array( 'title', $post_elements ) ) : ?>
 
 				<div class="dslc-project-title">
-					<h2><a href="<?php echo $the_project_url; ?>" target="<?php echo $the_project_url_target; ?>"><?php the_title(); ?></a></h2>
+					<h2><a href="<?php echo esc_url( $the_project_url ); ?>" target="<?php echo $the_project_url_target; ?>"><?php the_title(); ?></a></h2>
 				</div><!-- .dslc-project-title -->
 
 			<?php endif; ?>
@@ -6679,7 +6679,7 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 			<?php if ( $post_elements == 'all' || in_array( 'button', $post_elements ) ) : ?>
 
 				<div class="dslc-project-read-more">
-					<a href="<?php echo $the_project_url; ?>" target="<?php echo $the_project_url_target; ?>">
+					<a href="<?php echo esc_url( $the_project_url ); ?>" target="<?php echo $the_project_url_target; ?>">
 						<?php if ( 'svg' == $options['show_icon'] ) : ?>
 							<?php echo stripslashes( $options['button_inline_svg'] ); ?>
 						<?php elseif ( 'image' == $options['show_icon'] && ! empty( $options['button_icon_image'] ) ) : ?>

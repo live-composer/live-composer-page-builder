@@ -70,7 +70,7 @@ function dslc_partners_module_cpt() {
 		),
 		'public' => true,
 		'rewrite' => array(
-			'slug' => dslc_get_option( 'partners_slug', 'dslc_plugin_options_cpt_slugs' ),
+			'slug' => dslc_get_slug_option( 'partners_slug', 'partner-view' ),
 			'with_front' => $with_front,
 		),
 		'supports' => array( 'title', 'custom-fields', 'excerpt', 'editor', 'author', 'thumbnail', 'comments' ),
@@ -115,7 +115,7 @@ function dslc_partners_module_cpt() {
 		'hierarchical' => true,
 		'public' => true,
 		'rewrite' => array(
-			'slug' => dslc_get_option( 'partners_cats_slug', 'dslc_plugin_options_cpt_slugs' ),
+			'slug' => dslc_get_slug_option( 'partners_cats_slug', 'dslc_partners_cats' ),
 			'with_front' => $with_front,
 		),
 	);

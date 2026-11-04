@@ -6053,14 +6053,14 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 											?>
 
 											<?php if ( $manual_resize ) : ?>
-												<a href="<?php echo $the_permalink; ?>" class="<?php echo $thumb_anchor_class; ?>"><img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true );
+												<a href="<?php echo esc_url( $the_permalink ); ?>" class="<?php echo $thumb_anchor_class; ?>"><img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true );
 												echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" title="<?php echo $thumb_title; ?>" /></a>
 											<?php else : ?>
-												<a href="<?php echo $the_permalink; ?>" class="<?php echo $thumb_anchor_class; ?>"><?php the_post_thumbnail( 'full', array( 'title' => get_the_title( get_post_thumbnail_id() ) ) ); ?></a>
+												<a href="<?php echo esc_url( $the_permalink ); ?>" class="<?php echo $thumb_anchor_class; ?>"><?php the_post_thumbnail( 'full', array( 'title' => get_the_title( get_post_thumbnail_id() ) ) ); ?></a>
 											<?php endif; ?>
 
 											<?php if ( $post_elements == 'all' || in_array( 'count', $post_elements ) ) : ?>
-												<a href="<?php echo $the_permalink; ?>" class="<?php echo $thumb_anchor_class; ?> dslc-gallery-images-count dslc-init-square dslc-init-<?php echo $options['count_pos']; ?>">
+												<a href="<?php echo esc_url( $the_permalink ); ?>" class="<?php echo $thumb_anchor_class; ?> dslc-gallery-images-count dslc-init-square dslc-init-<?php echo $options['count_pos']; ?>">
 													<span class="dslc-gallery-images-count-main dslc-gallery-images-count-bg dslc-init-target">
 														<span class="dslc-gallery-images-count-num"><?php echo $gallery_images_count; ?></span>
 														<span class="dslc-gallery-images-count-txt"><?php echo $options['count_text']; ?></span>
@@ -6079,7 +6079,7 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 													<?php if ( $post_elements == 'all' || in_array( 'title', $post_elements ) ) : ?>
 
 														<div class="dslc-gallery-title">
-															<h2><a href="<?php echo $the_permalink; ?>" class="<?php echo $title_anchor_class; ?>"><?php the_title(); ?></a></h2>
+															<h2><a href="<?php echo esc_url( $the_permalink ); ?>" class="<?php echo $title_anchor_class; ?>"><?php the_title(); ?></a></h2>
 														</div><!-- .dslc-gallery-title -->
 
 													<?php endif; ?>
@@ -6167,7 +6167,7 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 									<?php if ( $post_elements == 'all' || in_array( 'title', $post_elements ) ) : ?>
 
 										<div class="dslc-gallery-title">
-											<h2><a href="<?php echo $the_permalink; ?>" class="<?php echo $title_anchor_class; ?>"><?php the_title(); ?></a></h2>
+											<h2><a href="<?php echo esc_url( $the_permalink ); ?>" class="<?php echo $title_anchor_class; ?>"><?php the_title(); ?></a></h2>
 										</div><!-- .dslc-gallery-title -->
 
 									<?php endif; ?>

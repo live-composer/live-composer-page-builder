@@ -77,7 +77,7 @@ function dslc_testimonials_module_cpt() {
 		'publicly_queryable'  => false,
 		'public' => true,
 		'rewrite' => array(
-			'slug' => dslc_get_option( 'testimonials_slug', 'dslc_plugin_options_cpt_slugs' ),
+			'slug' => dslc_get_slug_option( 'testimonials_slug', 'testimonial-view' ),
 			'with_front' => $with_front,
 		),
 		'supports' => array( 'title', 'custom-fields', 'excerpt', 'editor', 'author', 'thumbnail' ),
@@ -122,7 +122,7 @@ function dslc_testimonials_module_cpt() {
 		'hierarchical' => true,
 		'public' => true,
 		'rewrite' => array(
-			'slug' => dslc_get_option( 'testimonials_cats_slug', 'dslc_plugin_options_cpt_slugs' ),
+			'slug' => dslc_get_slug_option( 'testimonials_cats_slug', 'dslc_testimonials_cats' ),
 			'with_front' => $with_front,
 		),
 		'capabilities' => array(

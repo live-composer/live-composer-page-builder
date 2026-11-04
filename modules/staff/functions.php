@@ -106,7 +106,7 @@ function dslc_staff_module_cpt() {
 		),
 		'public' => true,
 		'rewrite' => array(
-			'slug' => dslc_get_option( 'staff_slug', 'dslc_plugin_options_cpt_slugs' ),
+			'slug' => dslc_get_slug_option( 'staff_slug', 'staff-view' ),
 			'with_front' => $with_front,
 		),
 		'supports' => array( 'title', 'custom-fields', 'excerpt', 'editor', 'author', 'thumbnail', 'comments' ),
@@ -151,7 +151,7 @@ function dslc_staff_module_cpt() {
 		'hierarchical' => true,
 		'public' => true,
 		'rewrite' => array(
-			'slug' => dslc_get_option( 'staff_cats_slug', 'dslc_plugin_options_cpt_slugs' ),
+			'slug' => dslc_get_slug_option( 'staff_cats_slug', 'dslc_staff_cats' ),
 			'with_front' => $with_front,
 		),
 	);

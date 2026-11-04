@@ -6278,10 +6278,10 @@ function dslc_module_posts_output( $atts, $content = null ) {
 										?>
 
 										<?php if ( $manual_resize ) : ?>
-											<a href="<?php echo $anchor_href; ?>" class="<?php echo $anchor_class; ?>"><img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true );
+											<a href="<?php echo esc_url( $anchor_href ); ?>" class="<?php echo $anchor_class; ?>"><img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true );
 											echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" title="<?php echo $thumb_title; ?>" /></a>
 										<?php else : ?>
-											<a href="<?php echo $anchor_href; ?>" class="<?php echo $anchor_class; ?>"><?php the_post_thumbnail( 'full', array( 'title' => get_the_title( get_post_thumbnail_id() ) ) ); ?></a>
+											<a href="<?php echo esc_url( $anchor_href ); ?>" class="<?php echo $anchor_class; ?>"><?php the_post_thumbnail( 'full', array( 'title' => get_the_title( get_post_thumbnail_id() ) ) ); ?></a>
 										<?php endif; ?>
 									</div><!-- .dslc-cpt-post-thumb-inner -->
 
