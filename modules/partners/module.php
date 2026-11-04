@@ -3175,7 +3175,7 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 
 										<?php if ( $manual_resize ) : ?>
 											<?php if ( $link_to_single ) : ?>
-												<a href="<?php echo $anchor_href; ?>" class="<?php echo $anchor_class; ?>" target="<?php echo $anchor_target; ?>"><img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true );
+												<a href="<?php echo esc_url( $anchor_href ); ?>" class="<?php echo $anchor_class; ?>" target="<?php echo $anchor_target; ?>"><img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true );
 												echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" title="<?php echo $thumb_title; ?>" /></a>
 											<?php else : ?>
 												<img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true );
@@ -3183,7 +3183,7 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 											<?php endif; ?>
 										<?php else : ?>
 											<?php if ( $link_to_single ) : ?>
-												<a href="<?php echo $anchor_href; ?>" class="<?php echo $anchor_class; ?>" target="<?php echo $anchor_target; ?>"><?php the_post_thumbnail( 'full', array( 'title' => get_the_title( get_post_thumbnail_id() ) ) ); ?></a>
+												<a href="<?php echo esc_url( $anchor_href ); ?>" class="<?php echo $anchor_class; ?>" target="<?php echo $anchor_target; ?>"><?php the_post_thumbnail( 'full', array( 'title' => get_the_title( get_post_thumbnail_id() ) ) ); ?></a>
 											<?php else : ?>
 												<?php the_post_thumbnail( 'full', array( 'title' => get_the_title( get_post_thumbnail_id() ) ) ); ?>
 											<?php endif; ?>
@@ -3199,7 +3199,7 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 
 														<div class="dslc-partner-title">
 															<?php if ( $link_to_single ) : ?>
-																<h2><a href="<?php echo $the_partner_url; ?>" target="<?php echo $anchor_target; ?>"><?php the_title(); ?></a></h2>
+																<h2><a href="<?php echo esc_url( $the_partner_url ); ?>" target="<?php echo $anchor_target; ?>"><?php the_title(); ?></a></h2>
 															<?php else : ?>
 																<h2><?php the_title(); ?></h2>
 															<?php endif; ?>
@@ -3240,7 +3240,7 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 												</div><!-- .dslc-partner-main -->
 
 												<?php if ( $link_to_single ) : ?>
-													<a href="<?php echo $the_partner_url; ?>" target="<?php echo $anchor_target; ?>" class="dslc-post-main-inner-link-cover"></a>
+													<a href="<?php echo esc_url( $the_partner_url ); ?>" target="<?php echo $anchor_target; ?>" class="dslc-post-main-inner-link-cover"></a>
 												<?php endif; ?>
 
 											</div><!-- .dslc-partner-main -->
@@ -3263,7 +3263,7 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 
 										<div class="dslc-partner-title">
 											<?php if ( $link_to_single ) : ?>
-												<h2><a href="<?php echo $the_partner_url; ?>" target="<?php echo $anchor_target; ?>"><?php the_title(); ?></a></h2>
+												<h2><a href="<?php echo esc_url( $the_partner_url ); ?>" target="<?php echo $anchor_target; ?>"><?php the_title(); ?></a></h2>
 											<?php else : ?>
 												<h2><?php the_title(); ?></h2>
 											<?php endif; ?>

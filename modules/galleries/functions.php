@@ -78,7 +78,7 @@ function dslc_galleries_module_cpt() {
 		),
 		'public' => true,
 		'rewrite' => array(
-			'slug' => dslc_get_option( 'galleries_slug', 'dslc_plugin_options_cpt_slugs' ),
+			'slug' => dslc_get_slug_option( 'galleries_slug', 'gallery-view' ),
 			'with_front' => $with_front,
 		),
 		'supports' => array( 'title', 'custom-fields', 'excerpt', 'editor', 'author', 'thumbnail', 'comments' ),
@@ -123,7 +123,7 @@ function dslc_galleries_module_cpt() {
 		'hierarchical' => true,
 		'public' => true,
 		'rewrite' => array(
-			'slug' => dslc_get_option( 'galleries_cats_slug', 'dslc_plugin_options_cpt_slugs' ),
+			'slug' => dslc_get_slug_option( 'galleries_cats_slug', 'dslc_galleries_cats' ),
 			'with_front' => $with_front,
 		),
 	);

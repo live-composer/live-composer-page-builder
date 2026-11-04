@@ -283,10 +283,36 @@ function dslc_plugin_options_display_options( $section ) {
 }
 
 /**
- * Sanitize each setting field on submit
- *
- * @param array $input Contains all the settings as single array, with fields as array keys.
+ * Sanitize a CPT/taxonomy rewrite slug.
+ * Keeps case and "/" for nested slugs. Removes quotes, brackets and other special characters.
  */
+function dslc_sanitize_slug_value( $value ) {
+	$value = trim( (string) $value, " \t\n\r\0\x0B/" );
+	$parts = array();
+
+	foreach ( explode( '/', $value ) as $part ) {
+		$part = preg_replace( '/\s+/u', '-', trim( $part ) );
+		$part = (string) preg_replace( '/[^\p{L}\p{N}_-]+/u', '', (string) $part ); // only letters, numbers, _ and -
+		if ( '' !== $part ) {
+			$parts[] = $part;
+		}
+	}
+
+	return implode( '/', $parts );
+}
+
+/**
+ * Is this option key a slug setting? (projects_slug, partners_cats_slug, ...)
+ */
+function dslc_is_slug_option_key( $key ) {
+	return is_string( $key ) && '_slug' === substr( $key, -5 );
+}
+
+function dslc_get_slug_option( $option_id, $default ) {
+	$slug = dslc_sanitize_slug_value( dslc_get_option( $option_id, 'dslc_plugin_options_cpt_slugs' ) );
+	return '' !== $slug ? $slug : $default;
+}
+
 function dslc_plugin_options_input_sanitize( $input ) {
 
 	$new_input = array();
@@ -296,13 +322,17 @@ function dslc_plugin_options_input_sanitize( $input ) {
 
 			if ( ! is_array( $option_value ) ) {
 
-				$new_input[ $key ] = sanitize_text_field( $option_value );
+				$new_input[ $key ] = dslc_is_slug_option_key( $key )
+					? dslc_sanitize_slug_value( $option_value )
+					: sanitize_text_field( $option_value );
 
 			} else {
 
 				foreach ( $option_value as $inner_key => $inner_option_value ) {
 
-					$new_input[ $key ][ $inner_key ] = sanitize_text_field( $inner_option_value );
+					$new_input[ $key ][ $inner_key ] = dslc_is_slug_option_key( $inner_key )
+						? dslc_sanitize_slug_value( $inner_option_value )
+						: sanitize_text_field( $inner_option_value );
 
 				}
 			}

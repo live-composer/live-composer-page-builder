@@ -2339,6 +2339,17 @@ function dslc_display_modules($page_id)
 			} else {
 				$type = $atts['type'];
 			}
+
+			$allowed_types = array( 'numbered', 'prevnext', 'loadmore' );
+
+			if ( ! in_array( $type, $allowed_types, true ) ) {
+				$type = 'numbered';
+			}
+
+			$pagination_text = isset( $atts['pagination_text'] )
+			? $atts['pagination_text']
+			: '';
+			
 			$range = 2;
 
 			$showitems = ($range * 2) + 1;
@@ -2358,7 +2369,7 @@ function dslc_display_modules($page_id)
 			if (1 != $pages) {
 
 	?>
-		<div class="dslc-pagination dslc-pagination-type-<?php echo $type; ?>">
+		<div class="dslc-pagination dslc-pagination-type-<?php echo esc_attr( $type ); ?>">
 			<ul class="dslc-clearfix">
 				<?php
 
@@ -2395,9 +2406,9 @@ function dslc_display_modules($page_id)
 
 				if ($type == 'loadmore') {
 					if ($paged < $pages) {
-						echo "<li class='dslc-pagination-load-more dslc-active'><a href='" . get_pagenum_link($paged + 1) . "'><span class='dslc-icon dslc-icon-refresh'></span>" . $atts['pagination_text'] . '</a></li>';
+						echo "<li class='dslc-pagination-load-more dslc-active'><a href='" . get_pagenum_link($paged + 1) . "'><span class='dslc-icon dslc-icon-refresh'></span>" . esc_html( $pagination_text ) . '</a></li>';
 					} else {
-						echo "<li class='dslc-pagination-load-more dslc-inactive'><a href='#'><span class='dslc-icon dslc-icon-refresh'></span>" . $atts['pagination_text'] . '</a></li>';
+						echo "<li class='dslc-pagination-load-more dslc-inactive'><a href='#'><span class='dslc-icon dslc-icon-refresh'></span>" . esc_html( $pagination_text ) . '</a></li>';
 					}
 				}
 
