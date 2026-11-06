@@ -2097,60 +2097,134 @@ class DSLC_Button extends DSLC_Module {
 			$classes = $classes . ' ' . $effect_class;
 		}
 
+	$allowed_svg = array(
+		'svg' => array(
+			'xmlns'        => true,
+			'width'        => true,
+			'height'       => true,
+			'viewbox'      => true,
+			'class'        => true,
+			'fill'         => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+			'aria-hidden'  => true,
+			'role'         => true,
+		),
+		'g' => array(
+			'fill'         => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+			'transform'    => true,
+			'class'        => true,
+		),
+		'path' => array(
+			'd'            => true,
+			'fill'         => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+			'transform'    => true,
+			'class'        => true,
+		),
+		'circle' => array(
+			'cx'           => true,
+			'cy'           => true,
+			'r'            => true,
+			'fill'         => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+			'class'        => true,
+		),
+		'rect' => array(
+			'x'            => true,
+			'y'            => true,
+			'width'        => true,
+			'height'       => true,
+			'rx'           => true,
+			'ry'           => true,
+			'fill'         => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+			'class'        => true,
+		),
+		'line' => array(
+			'x1'           => true,
+			'x2'           => true,
+			'y1'           => true,
+			'y2'           => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+			'class'        => true,
+		),
+		'polyline' => array(
+			'points'       => true,
+			'fill'         => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+			'class'        => true,
+		),
+		'polygon' => array(
+			'points'       => true,
+			'fill'         => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+			'class'        => true,
+		),
+	);
+
 			?>
 
 			<div class="dslc-button">
 				<?php if ( $options['button_target'] == 'lightbox' ) : ?>
-					<a href="<?php echo $options['button_url']; ?>" <?php echo $anchor_append;
+					<a href="<?php echo esc_url( $options['button_url'] ); ?>" <?php echo $anchor_append;
 					if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?> class="dslc-lightbox-image <?php echo trim( esc_attr( $classes ) ); ?>">
 						<?php if ( $options['button_state'] == 'enabled' && $options['icon_pos'] == 'left' ) : ?>
 							<?php if ( 'svg' == $options['show_icon'] ) : ?>
-								<?php echo stripslashes( $options['button_inline_svg'] ); ?>
+								<?php echo wp_kses( stripslashes( $options['button_inline_svg'] ?? '' ), $allowed_svg ); ?>
 							<?php elseif ( 'image' == $options['show_icon'] && ! empty( $options['button_icon_image'] ) ) : ?>
 								<img class="dslc-button-icon-image" src="<?php echo esc_url( $options['button_icon_image'] ); ?>" alt="" />
 							<?php else : ?>
-								<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
+								<span class="dslc-icon dslc-icon-<?php echo esc_attr( $options['button_icon_id'] ); ?>"></span>	
 							<?php endif; ?>
 						<?php endif; ?>
 						<?php if ( $dslc_is_admin ) : ?>
-							<span class="dslca-editable-content" data-id="button_text"  data-type="simple" contenteditable="true"><?php echo stripslashes( $options['button_text'] ); ?></span>
+							<span class="dslca-editable-content" data-id="button_text"  data-type="simple" contenteditable="true"><?php echo esc_html( stripslashes( $options['button_text'] ) ); ?></span>
 						<?php else : ?>
-							<span><?php echo stripslashes( $options['button_text'] ); ?></span>
+							<span><?php echo esc_html( stripslashes( $options['button_text'] ) ); ?></span>
 						<?php endif; ?>
 						<?php if ( $options['button_state'] == 'enabled' && $options['icon_pos'] == 'right' ) : ?>
 							<?php if ( 'svg' == $options['show_icon'] ) : ?>
-								<?php echo stripslashes( $options['button_inline_svg'] ); ?>
+								<?php echo wp_kses( stripslashes( $options['button_inline_svg'] ?? '' ), $allowed_svg ); ?>
 							<?php elseif ( 'image' == $options['show_icon'] && ! empty( $options['button_icon_image'] ) ) : ?>
 								<img class="dslc-button-icon-image" src="<?php echo esc_url( $options['button_icon_image'] ); ?>" alt="" />
 							<?php else : ?>
-								<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
+								<span class="dslc-icon dslc-icon-<?php echo esc_attr( $options['button_icon_id'] ); ?>"></span>	
 							<?php endif; ?>
 						<?php endif; ?>
 					</a>
 				<?php else : ?>
-					<a href="<?php echo $dslc_is_admin ? 'javascript:void(0);' : $options['button_url']; ?>" target="<?php echo $options['button_target']; ?>" <?php echo $anchor_append;
+					<a href="<?php echo $dslc_is_admin ? 'javascript:void(0);' : esc_url( $options['button_url'] ); ?>" target="<?php echo esc_attr( $options['button_target'] ); ?>" <?php echo $anchor_append;
 					if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?> class="<?php echo trim( esc_attr( $classes ) ); ?>">
 						<?php if ( $options['button_state'] == 'enabled' && $options['icon_pos'] == 'left' ) : ?>
 							<?php if ( 'svg' == $options['show_icon'] ) : ?>
-								<?php echo stripslashes( $options['button_inline_svg'] ); ?>
+								<?php echo wp_kses( stripslashes( $options['button_inline_svg'] ?? '' ), $allowed_svg ); ?>
 							<?php elseif ( 'image' == $options['show_icon'] && ! empty( $options['button_icon_image'] ) ) : ?>
 								<img class="dslc-button-icon-image" src="<?php echo esc_url( $options['button_icon_image'] ); ?>" alt="" />
 							<?php else : ?>
-								<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
+								<span class="dslc-icon dslc-icon-<?php echo esc_attr( $options['button_icon_id'] ); ?>"></span>	
 							<?php endif; ?>
 						<?php endif; ?>
 						<?php if ( $dslc_is_admin ) : ?>
-							<span class="dslca-editable-content" data-id="button_text"  data-type="simple" contenteditable="true"><?php echo stripslashes( $options['button_text'] ); ?></span>
+							<span class="dslca-editable-content" data-id="button_text"  data-type="simple" contenteditable="true"><?php echo esc_html( stripslashes( $options['button_text'] ) ); ?></span>
 						<?php else : ?>
-							<span><?php echo stripslashes( $options['button_text'] ); ?></span>
+							<span><?php echo esc_html( stripslashes( $options['button_text'] ) ); ?></span>
 						<?php endif; ?>
 						<?php if ( $options['button_state'] == 'enabled' && $options['icon_pos'] == 'right' ) : ?>
 							<?php if ( 'svg' == $options['show_icon'] ) : ?>
-								<?php echo stripslashes( $options['button_inline_svg'] ); ?>
+								<?php echo wp_kses( stripslashes( $options['button_inline_svg'] ?? '' ), $allowed_svg ); ?>
 							<?php elseif ( 'image' == $options['show_icon'] && ! empty( $options['button_icon_image'] ) ) : ?>
 								<img class="dslc-button-icon-image" src="<?php echo esc_url( $options['button_icon_image'] ); ?>" alt="" />
 							<?php else : ?>
-								<span class="dslc-icon dslc-icon-<?php echo $options['button_icon_id']; ?>"></span>	
+								<span class="dslc-icon dslc-icon-<?php echo esc_attr( $options['button_icon_id'] ); ?>"></span>	
 							<?php endif; ?>
 						<?php endif; ?>
 					</a>
@@ -2161,8 +2235,8 @@ class DSLC_Button extends DSLC_Module {
 			<?php if ( $dslc_is_admin ) :
 				/* We output this button code for clean html export only */ ?>
 				<div style="display: none;"<?php if ( $dslc_is_admin ) { echo ' data-exportable-content';} ?>>
-					<a href="<?php echo $options['button_url']; ?>" target="<?php echo $options['button_target']; ?>" <?php if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?>>
-							<?php echo stripslashes( $options['button_text'] ); ?>
+					<a href="<?php echo esc_url( $options['button_url'] ); ?>" target="<?php echo esc_attr( $options['button_target'] ); ?>" <?php if ( $options['link_nofollow'] ) { echo 'rel="nofollow"';} ?>>
+							<?php echo esc_html( stripslashes( $options['button_text'] ) ); ?>
 					</a>
 				</div><!-- .dslc-button -->
 			<?php endif; ?>

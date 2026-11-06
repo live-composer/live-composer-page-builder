@@ -800,15 +800,89 @@ class DSLC_Icon extends DSLC_Module {
 
 		/* Module output stars here */
 
+	$allowed_svg = array(
+		'svg' => array(
+			'xmlns'        => true,
+			'width'        => true,
+			'height'       => true,
+			'viewbox'      => true,
+			'class'        => true,
+			'fill'         => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+			'aria-hidden'  => true,
+			'role'         => true,
+		),
+		'g' => array(
+			'fill'         => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+			'transform'    => true,
+			'class'        => true,
+		),
+		'path' => array(
+			'd'            => true,
+			'fill'         => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+			'transform'    => true,
+			'class'        => true,
+		),
+		'circle' => array(
+			'cx'           => true,
+			'cy'           => true,
+			'r'            => true,
+			'fill'         => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+			'class'        => true,
+		),
+		'rect' => array(
+			'x'            => true,
+			'y'            => true,
+			'width'        => true,
+			'height'       => true,
+			'rx'           => true,
+			'ry'           => true,
+			'fill'         => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+			'class'        => true,
+		),
+		'line' => array(
+			'x1'           => true,
+			'x2'           => true,
+			'y1'           => true,
+			'y2'           => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+			'class'        => true,
+		),
+		'polyline' => array(
+			'points'       => true,
+			'fill'         => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+			'class'        => true,
+		),
+		'polygon' => array(
+			'points'       => true,
+			'fill'         => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+			'class'        => true,
+		),
+	);
+
 		?>
 			
 			<div class="dslc-micon-module">
 				<?php if ( 'svg' == $options['show_icon'] ) : ?>
-					<?php echo stripslashes( $options['inline_svg'] ); ?>
+					<?php echo wp_kses( stripslashes( $options['inline_svg'] ?? '' ), $allowed_svg ); ?>
 				<?php elseif ( 'image' == $options['show_icon'] && ! empty( $options['icon_image'] ) ) : ?>
 						<img class="dslc-icon-image" src="<?php echo esc_url( $options['icon_image']); ?>" alt="" />
 				<?php else : ?>
-					<span class="dslc-icon dslc-icon-<?php echo $options['icon_id']; ?>"></span>	
+					<span class="dslc-icon dslc-icon-<?php echo esc_attr( $options['icon_id'] ); ?>"></span>	
 				<?php endif; ?>
 			</div><!-- .dslc-micon-module -->
 

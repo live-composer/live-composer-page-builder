@@ -2110,7 +2110,7 @@ function dslc_display_modules($page_id)
 
 			$area_custom_style = dslc_modules_area_get_style( $atts );
 
-			$output = '<div ' . $modules_area_id_output . ' class="dslc-modules-area dslc-col dslc-' . $atts['size'] . '-col ' . $pos_class . $valign_class . $halign_class . $admin_class . '" data-size="' . $atts['size'] . '" data-valign="' . esc_attr($atts['valign']) . '" data-modules-area-id="' . $atts['modules_area_instance_id'] . '" >';
+			$output = '<div ' . $modules_area_id_output . ' class="dslc-modules-area dslc-col dslc-' . absint( $atts['size'] ) . '-col ' . esc_attr( $pos_class ) . $valign_class . $halign_class . $admin_class . '" data-size="' . absint( $atts['size'] ) . '" data-valign="' . esc_attr($atts['valign']) . '" data-modules-area-id="' . esc_attr( $atts['modules_area_instance_id'] ) . '" >';
 			$output.= '<style type="text/css" id="dslca-modules-area-' . esc_attr( $atts['modules_area_instance_id'] ) . '">' . $area_custom_style . '</style>';
 			if ($dslc_active && ! $is_header_footer && is_user_logged_in() && current_user_can(DS_LIVE_COMPOSER_CAPABILITY)) {
 

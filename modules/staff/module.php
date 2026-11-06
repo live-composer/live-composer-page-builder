@@ -4556,13 +4556,13 @@ function dslc_module_staff_output( $atts, $content = null ) {
 
 					<div class="dslc-post-heading">
 
-						<h2 class="dslca-editable-content" data-id="main_heading_title" data-type="simple" <?php if ( $dslc_is_admin ) { echo 'contenteditable';} ?> ><?php echo stripslashes( $options['main_heading_title'] ); ?></h2>
+						<h2 class="dslca-editable-content" data-id="main_heading_title" data-type="simple" <?php if ( $dslc_is_admin ) { echo 'contenteditable';} ?> ><?php echo esc_html( stripslashes( $options['main_heading_title'] ) ); ?></h2>
 
 						<!-- View all -->
 
 						<?php if ( isset( $options['view_all_link'] ) && $options['view_all_link'] !== '' ) : ?>
 
-							<span class="dslc-module-heading-view-all"><a href="<?php echo $options['view_all_link']; ?>" class="dslca-editable-content" data-id="main_heading_link_title" data-type="simple" <?php if ( $dslc_is_admin ) { echo 'contenteditable';} ?> ><?php echo $options['main_heading_link_title']; ?></a></span>
+							<span class="dslc-module-heading-view-all"><a href="<?php echo esc_url( $options['view_all_link'] ); ?>" class="dslca-editable-content" data-id="main_heading_link_title" data-type="simple" <?php if ( $dslc_is_admin ) { echo 'contenteditable';} ?> ><?php echo esc_html( $options['main_heading_link_title'] ); ?></a></span>
 
 						<?php endif; ?>
 
@@ -4596,10 +4596,10 @@ function dslc_module_staff_output( $atts, $content = null ) {
 				?>
 
 				<div class="dslc-post-filters">
-					<span class="dslc-post-filter dslc-active dslca-editable-content" data-filter-id="show-all" <?php if ( $dslc_is_admin ) { echo 'data-id="main_filter_title_all" data-type="simple" contenteditable '; } ?>><?php echo $options['main_filter_title_all']; ?></span>
+					<span class="dslc-post-filter dslc-active dslca-editable-content" data-filter-id="show-all" <?php if ( $dslc_is_admin ) { echo 'data-id="main_filter_title_all" data-type="simple" contenteditable '; } ?>><?php echo esc_html( $options['main_filter_title_all'] ); ?></span>
 
 					<?php foreach ( $cats_array as $cat_slug => $cat_name ) : ?>
-										<span class="dslc-post-filter dslc-inactive" data-filter-id="<?php echo $cat_slug; ?>"><?php echo $cat_name; ?></span>
+										<span class="dslc-post-filter dslc-inactive" data-filter-id="<?php echo esc_attr( $cat_slug ); ?>"><?php echo esc_html( $cat_name ); ?></span>
 									<?php endforeach; ?>
 
 				</div><!-- .dslc-post-filters -->
@@ -4632,7 +4632,7 @@ function dslc_module_staff_output( $atts, $content = null ) {
 
 	if ( $dslc_query->have_posts() ) :
 
-		?><div class="<?php echo $container_class; ?>">
+		?><div class="<?php echo esc_attr( $container_class ); ?>">
 			
 			<?php if ( $show_carousel_arrows && ( $options['arrows_position'] == 'aside' ) ) : ?>
 				<a href="#" class="dslc-carousel-nav-prev position-aside"><span class="dslc-icon-chevron-left"></span></a>
@@ -4642,9 +4642,9 @@ function dslc_module_staff_output( $atts, $content = null ) {
 
 if ( $options['type'] == 'carousel' ) :
 
-	?><div class="dslc-loader"></div><div class="dslc-carousel" data-stop-on-hover="<?php echo $options['carousel_autoplay_hover']; ?>" data-autoplay="<?php echo $options['carousel_autoplay']; ?>" data-columns="<?php echo $carousel_items; ?>" data-pagination="<?php if ( in_array( 'circles', $carousel_elements ) ) { echo 'true';
+	?><div class="dslc-loader"></div><div class="dslc-carousel" data-stop-on-hover="<?php echo esc_attr( $options['carousel_autoplay_hover'] ); ?>" data-autoplay="<?php echo esc_attr( $options['carousel_autoplay'] ); ?>" data-columns="<?php echo absint( $carousel_items ); ?>" data-pagination="<?php if ( in_array( 'circles', $carousel_elements ) ) { echo 'true';
 	} else { echo 'false';
-	} ?>" data-slide-speed="<?php echo $options['arrows_slide_speed']; ?>" data-pagination-speed="<?php echo $options['circles_slide_speed']; ?>"><?php
+	} ?>" data-slide-speed="<?php echo esc_attr( $options['arrows_slide_speed'] ); ?>" data-pagination-speed="<?php echo esc_attr( $options['circles_slide_speed'] ); ?>"><?php
 
 			endif;
 
@@ -4683,7 +4683,7 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 
 	?>
 
-	<div class="<?php echo $element_class . $columns_class . $extra_class; ?>" data-cats="<?php echo $post_cats_data; ?>">
+	<div class="<?php echo esc_attr( $element_class . $columns_class . $extra_class ); ?>" data-cats="<?php echo esc_attr( $post_cats_data ); ?>">
 
 	<?php if ( $post_elements == 'all' || in_array( 'thumbnail', $post_elements ) ) : ?>
 
@@ -4727,10 +4727,10 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 											<?php if ( $manual_resize ) : ?>
 												<?php if ( $link_to_single ) : ?>
 													<a href="<?php the_permalink(); ?>"><img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true );
-													echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" title="<?php echo $thumb_title; ?>" /></a>
+													echo esc_url( $res_img ); ?>" alt="<?php echo esc_attr( $thumb_alt ); ?>" title="<?php echo esc_attr( $thumb_title ); ?>" /></a>
 												<?php else : ?>
 													<img src="<?php $res_img = dslc_aq_resize( $thumb_url, $resize_width, $resize_height, true );
-													echo $res_img; ?>" alt="<?php echo $thumb_alt; ?>" title="<?php echo $thumb_title; ?>" />
+													echo esc_url( $res_img ); ?>" alt="<?php echo esc_attr( $thumb_alt ); ?>" title="<?php echo esc_attr( $thumb_title ); ?>" />
 												<?php endif; ?>
 											<?php else : ?>
 												<?php if ( $link_to_single ) : ?>
@@ -4743,7 +4743,7 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 
 										<?php if ( ( $options['main_location'] == 'inside' || $options['main_location'] == 'inside_visible' ) && ( $post_elements == 'all' || in_array( 'title', $post_elements ) || in_array( 'position', $post_elements ) || in_array( 'excerpt', $post_elements ) ) ) : ?>
 
-											<div class="dslc-staff-member-main dslc-init-<?php echo $options['main_position']; ?> <?php if ( $options['main_location'] == 'inside_visible' ) { echo 'dslc-staff-member-main-visible';} ?> dslc-on-hover-anim-target dslc-anim-<?php echo $options['css_anim_hover']; ?>" data-dslc-anim="<?php echo $options['css_anim_hover'] ?>" data-dslc-anim-speed="<?php echo $options['css_anim_speed']; ?>">
+											<div class="dslc-staff-member-main dslc-init-<?php echo esc_attr( $options['main_position'] ); ?> <?php if ( $options['main_location'] == 'inside_visible' ) { echo 'dslc-staff-member-main-visible';} ?> dslc-on-hover-anim-target dslc-anim-<?php echo esc_attr( $options['css_anim_hover'] ); ?>" data-dslc-anim="<?php echo esc_attr( $options['css_anim_hover'] ) ?>" data-dslc-anim-speed="<?php echo esc_attr( $options['css_anim_speed'] ); ?>">
 
 												<div class="dslc-staff-member-main-inner dslc-init-target">
 
@@ -4762,7 +4762,7 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 													<?php if ( $post_elements == 'all' || in_array( 'position', $post_elements ) ) : ?>
 
 														<div class="dslc-staff-member-position">
-															<?php echo $position; ?>
+															<?php echo esc_html( $position ); ?>
 														</div><!-- .dslc-staff-member-position -->
 
 													<?php endif; ?>
@@ -4820,27 +4820,27 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 									<div class="dslc-staff-member-social">
 
 										<?php if ( $social_twitter ) : ?>
-											<a target="<?php echo $options['social_link_target']; ?>" href="<?php echo $social_twitter; ?>"><span class="dslc-icon dslc-icon-twitter"></span></a>
+											<a target="<?php echo esc_attr( $options['social_link_target'] ); ?>" href="<?php echo esc_url( $social_twitter ); ?>"><span class="dslc-icon dslc-icon-twitter"></span></a>
 										<?php endif; ?>
 
 										<?php if ( $social_instagram ) : ?>
-											<a target="<?php echo $options['social_link_target']; ?>" href="<?php echo $social_instagram; ?>"><span class="dslc-icon dslc-icon-instagram"></span></a>
+											<a target="<?php echo esc_attr( $options['social_link_target'] ); ?>" href="<?php echo esc_url( $social_instagram ); ?>"><span class="dslc-icon dslc-icon-instagram"></span></a>
 										<?php endif; ?>
 
 										<?php if ( $social_facebook ) : ?>
-											<a target="<?php echo $options['social_link_target']; ?>" href="<?php echo $social_facebook; ?>"><span class="dslc-icon dslc-icon-facebook"></span></a>
+											<a target="<?php echo esc_attr( $options['social_link_target'] ); ?>" href="<?php echo esc_url( $social_facebook ); ?>"><span class="dslc-icon dslc-icon-facebook"></span></a>
 										<?php endif; ?>
 
 										<?php if ( $social_googleplus ) : ?>
-											<a target="<?php echo $options['social_link_target']; ?>" href="<?php echo $social_googleplus; ?>"><span class="dslc-icon dslc-icon-google-plus"></span></a>
+											<a target="<?php echo esc_attr( $options['social_link_target'] ); ?>" href="<?php echo esc_url( $social_googleplus ); ?>"><span class="dslc-icon dslc-icon-google-plus"></span></a>
 										<?php endif; ?>
 
 										<?php if ( $social_linkedin ) : ?>
-											<a target="<?php echo $options['social_link_target']; ?>" href="<?php echo $social_linkedin; ?>"><span class="dslc-icon dslc-icon-linkedin"></span></a>
+											<a target="<?php echo esc_attr( $options['social_link_target'] ); ?>" href="<?php echo esc_url( $social_linkedin ); ?>"><span class="dslc-icon dslc-icon-linkedin"></span></a>
 										<?php endif; ?>
 
 										<?php if ( $social_email ) : ?>
-											<a target="<?php echo $options['social_link_target']; ?>" href="<?php echo $social_email; ?>"><span class="dslc-icon dslc-icon-envelope"></span></a>
+											<a target="<?php echo esc_attr( $options['social_link_target'] ); ?>" href="<?php echo esc_url( is_email( $social_email ) ? 'mailto:' . $social_email : $social_email ); ?>"><span class="dslc-icon dslc-icon-envelope"></span></a>
 										<?php endif; ?>
 
 									</div><!-- .dslc-staff-member-social -->
@@ -4870,7 +4870,7 @@ while ( $dslc_query->have_posts() ) : $dslc_query->the_post();
 									<?php if ( $post_elements == 'all' || in_array( 'position', $post_elements ) ) : ?>
 
 										<div class="dslc-staff-member-position">
-											<?php echo $position; ?>
+											<?php echo esc_html( $position ); ?>
 										</div><!-- .dslc-staff-member-position -->
 
 									<?php endif; ?>
