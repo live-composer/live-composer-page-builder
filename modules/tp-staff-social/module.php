@@ -721,22 +721,22 @@ class DSLC_TP_Staff_Social extends DSLC_Module {
 							$social_email = get_post_meta( get_the_ID(), 'dslc_staff_social_email', true );
 						?>
 						<?php if ( $social_twitter ) : ?>
-							<li><a target="_blank" href="<?php echo $social_twitter; ?>"><span class="dslc-icon dslc-icon-twitter"></span></a></li>
+							<li><a target="_blank" href="<?php echo esc_url( $social_twitter ); ?>"><span class="dslc-icon dslc-icon-twitter"></span></a></li>
 						<?php endif; ?>
 						<?php if ( $social_instagram ) : ?>
-							<li><a target="_blank" href="<?php echo $social_instagram; ?>"><span class="dslc-icon dslc-icon-instagram"></span></a></li>
+							<li><a target="_blank" href="<?php echo esc_url( $social_instagram ); ?>"><span class="dslc-icon dslc-icon-instagram"></span></a></li>
 						<?php endif; ?>
 						<?php if ( $social_facebook ) : ?>
-							<li><a target="_blank" href="<?php echo $social_facebook; ?>"><span class="dslc-icon dslc-icon-facebook"></span></a></li>
+							<li><a target="_blank" href="<?php echo esc_url( $social_facebook ); ?>"><span class="dslc-icon dslc-icon-facebook"></span></a></li>
 						<?php endif; ?>
 						<?php if ( $social_googleplus ) : ?>
-							<li><a target="_blank" href="<?php echo $social_googleplus; ?>"><span class="dslc-icon dslc-icon-google-plus"></span></a></li>
+							<li><a target="_blank" href="<?php echo esc_url( $social_googleplus ); ?>"><span class="dslc-icon dslc-icon-google-plus"></span></a></li>
 						<?php endif; ?>
 						<?php if ( $social_linkedin ) : ?>
-							<li><a target="_blank" href="<?php echo $social_linkedin; ?>"><span class="dslc-icon dslc-icon-linkedin"></span></a></li>
+							<li><a target="_blank" href="<?php echo esc_url( $social_linkedin ); ?>"><span class="dslc-icon dslc-icon-linkedin"></span></a></li>
 						<?php endif; ?>
 						<?php if ( $social_email ) : ?>
-							<li><a target="_blank" href="<?php echo $social_email; ?>"><span class="dslc-icon dslc-icon-envelope"></span></a></li>
+							<li><a target="_blank" href="<?php echo esc_url( is_email( $social_email ) ? 'mailto:' . $social_email : $social_email ); ?>"><span class="dslc-icon dslc-icon-envelope"></span></a></li>
 						<?php endif; ?>
 					<?php endif; ?>
 				</ul><!-- .dslc-staff-social -->

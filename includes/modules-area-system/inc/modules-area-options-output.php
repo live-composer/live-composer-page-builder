@@ -307,12 +307,12 @@ function dslc_modules_area_get_options_fields( $atts = false ) {
 				// Don't move this line! 'dslca-img-url' should go before 'bg_image'.
 				if ( isset( $atts[ $modules_area_option['id'] ] ) && 'bg_image' === $modules_area_option['id'] ) {
 
-					$output .= '<input type="text" data-id="dslca-img-url" value="' . wp_get_attachment_url( $atts[ $modules_area_option['id'] ] ) . '" data-def="' . wp_get_attachment_url( $atts[ $modules_area_option['id'] ] ) . '">';
+					$output .= '<input type="text" data-id="dslca-img-url" value="' . esc_attr( wp_get_attachment_url( $atts[ $modules_area_option['id'] ] ) ) . '" data-def="' . esc_attr( wp_get_attachment_url( $atts[ $modules_area_option['id'] ] ) ) . '">';
 				}
 
 				if ( isset( $atts[ $modules_area_option['id'] ] ) ) {
 
-					$output .= '<input type="text" data-id="' . $modules_area_option['id'] . '" value="' . $atts[ $modules_area_option['id'] ] . '" data-def="' . $atts[ $modules_area_option['id'] ] . '">';
+					$output .= '<input type="text" data-id="' . $modules_area_option['id'] . '" value="' . esc_attr( $atts[ $modules_area_option['id'] ] ) . '" data-def="' . esc_attr( $atts[ $modules_area_option['id'] ] ) . '">';
 				} else {
 
 					$output .= '<input type="text" data-id="' . $modules_area_option['id'] . '" value="' . $modules_area_option['std'] . '" data-def="' . $modules_area_option['std'] . '">';
@@ -406,7 +406,7 @@ function dslc_modules_area_generate_css( $module_settings = false, $options_to_p
 							$value = 'none';
 						}
 					}                                     
-					$style .= $rule . ':' . $value . ';';
+					$style .= $rule . ':' . str_replace( array( '<', '>', '{', '}', ';' ), '', $value ) . ';';
                 }
             }
         }
